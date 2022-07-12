@@ -34,12 +34,15 @@ import android.view.ViewGroup;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SettingsMainSwitchPreference;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /** Settings page for color inversion. */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePreferenceFragment {
 
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
@@ -173,4 +176,7 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
         }
         mToggleServiceSwitchPreference.setChecked(checked);
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.accessibility_color_inversion_settings);
 }

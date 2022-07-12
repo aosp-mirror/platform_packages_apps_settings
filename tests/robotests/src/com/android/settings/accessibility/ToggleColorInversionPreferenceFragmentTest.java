@@ -27,6 +27,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
@@ -41,7 +42,9 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
+import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 
@@ -55,6 +58,8 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
+
+import java.util.List;
 
 /** Tests for {@link ToggleColorInversionPreferenceFragment} */
 @RunWith(RobolectricTestRunner.class)
@@ -157,6 +162,34 @@ public class ToggleColorInversionPreferenceFragmentTest {
                 Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, OFF) == ON;
         assertThat(isEnabled).isFalse();
         assertThat(getLatestPopupWindow()).isNull();
+    }
+
+    @Test
+    public void getMetricsCategory_returnsCorrectCategory() {
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(
+                SettingsEnums.ACCESSIBILITY_COLOR_INVERSION_SETTINGS);
+    }
+
+    @Test
+    public void getPreferenceScreenResId_returnsCorrectXml() {
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
+                R.xml.accessibility_color_inversion_settings);
+    }
+
+    @Test
+    public void getHelpResource_returnsCorrectHelpResource() {
+        assertThat(mFragment.getHelpResource()).isEqualTo(R.string.help_url_color_inversion);
+    }
+
+    @Test
+    public void getNonIndexableKeys_existInXmlLayout() {
+        final List<String> niks = ToggleColorInversionPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
+                .getNonIndexableKeys(mContext);
+        final List<String> keys =
+                XmlTestUtils.getKeysFromPreferenceXml(mContext,
+                        R.xml.accessibility_color_inversion_settings);
+
+        assertThat(keys).containsAtLeastElementsIn(niks);
     }
 
     private static PopupWindow getLatestPopupWindow() {

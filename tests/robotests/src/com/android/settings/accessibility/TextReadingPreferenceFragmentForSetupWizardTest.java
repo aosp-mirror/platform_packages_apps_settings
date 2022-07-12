@@ -18,10 +18,13 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.TextReadingPreferenceFragment.RESET_KEY;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -32,27 +35,29 @@ import com.android.settingslib.widget.LayoutPreference;
 import com.google.android.setupdesign.GlifPreferenceLayout;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
-/**
- * Tests for {@link TextReadingPreferenceFragmentForSetupWizard}.
- */
+/** Tests for {@link TextReadingPreferenceFragmentForSetupWizard}. */
 @RunWith(RobolectricTestRunner.class)
 public class TextReadingPreferenceFragmentForSetupWizardTest {
 
-    private final Context mContext = spy(ApplicationProvider.getApplicationContext());
+    @Rule
+    public final MockitoRule mMockito = MockitoJUnit.rule();
     @Mock
     private GlifPreferenceLayout mGlifLayoutView;
+    @Spy
+    private final Context mContext = ApplicationProvider.getApplicationContext();
     private TextReadingPreferenceFragmentForSetupWizard mFragment;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
         mFragment = spy(new TextReadingPreferenceFragmentForSetupWizard());
         final LayoutPreference resetPreference =
                 new LayoutPreference(mContext, R.layout.accessibility_text_reading_reset_button);
@@ -69,5 +74,16 @@ public class TextReadingPreferenceFragmentForSetupWizardTest {
         mFragment.onViewCreated(mGlifLayoutView, null);
 
         verify(mGlifLayoutView).setHeaderText(title);
+    }
+
+    @Test
+    public void getMetricsCategory_returnsCorrectCategory() {
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(
+                SettingsEnums.SUW_ACCESSIBILITY_TEXT_READING_OPTIONS);
+    }
+
+    @Test
+    public void getHelpResource_shouldNotHaveHelpResource() {
+        assertThat(mFragment.getHelpResource()).isEqualTo(0);
     }
 }
