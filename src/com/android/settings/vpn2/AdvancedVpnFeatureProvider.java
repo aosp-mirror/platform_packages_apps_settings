@@ -42,4 +42,9 @@ public interface AdvancedVpnFeatureProvider {
      * Returns the title of vpn preference group.
      */
     String getVpnPreferenceGroupTitle(Context context);
+
+    /**
+     * Returns {@code true} advanced vpn is removable.
+     */
+    boolean isAdvancedVpnRemovable();
 }
