@@ -26,6 +26,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.provider.Settings;
@@ -38,33 +39,37 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import com.android.settings.accessibility.TextReadingResetController.ResetStateListener;
+import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowToast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-/**
- * Tests for {@link TextReadingPreferenceFragment}.
- */
+/** Tests for {@link TextReadingPreferenceFragment}. */
 @RunWith(RobolectricTestRunner.class)
 public class TextReadingPreferenceFragmentTest {
-    private TextReadingPreferenceFragment mFragment;
-    private Context mContext = ApplicationProvider.getApplicationContext();
+
+    @Rule
+    public final MockitoRule mMockito = MockitoJUnit.rule();
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceManager mPreferenceManager;
+    private Context mContext = ApplicationProvider.getApplicationContext();
+    private TextReadingPreferenceFragment mFragment;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mContext.setTheme(R.style.Theme_AppCompat);
 
         mFragment = spy(new TextReadingPreferenceFragment());
@@ -118,5 +123,33 @@ public class TextReadingPreferenceFragmentTest {
 
         assertThat(ShadowToast.getTextOfLatestToast())
                 .isEqualTo(mContext.getString(R.string.accessibility_text_reading_reset_message));
+    }
+
+    @Test
+    public void getMetricsCategory_returnsCorrectCategory() {
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(
+                SettingsEnums.ACCESSIBILITY_TEXT_READING_OPTIONS);
+    }
+
+    @Test
+    public void getPreferenceScreenResId_returnsCorrectXml() {
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
+                R.xml.accessibility_text_reading_options);
+    }
+
+    @Test
+    public void getLogTag_returnsCorrectTag() {
+        assertThat(mFragment.getLogTag()).isEqualTo("TextReadingPreferenceFragment");
+    }
+
+    @Test
+    public void getNonIndexableKeys_existInXmlLayout() {
+        final List<String> niks = TextReadingPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
+                .getNonIndexableKeys(mContext);
+        final List<String> keys =
+                XmlTestUtils.getKeysFromPreferenceXml(mContext,
+                        R.xml.accessibility_text_reading_options);
+
+        assertThat(keys).containsAtLeastElementsIn(niks);
     }
 }

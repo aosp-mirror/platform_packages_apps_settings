@@ -70,6 +70,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+/** Tests for {@link ToggleScreenMagnificationPreferenceFragment}. */
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowSettingsPreferenceFragment.class})
 public class ToggleScreenMagnificationPreferenceFragmentTest {
@@ -387,6 +388,16 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
         verify(dialogDelegate).onCreateDialog(1);
         verify(dialogDelegate).getDialogMetricsCategory(1);
+    }
+
+    @Test
+    public void getMetricsCategory_shouldNotHaveMetricsCategory() {
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(0);
+    }
+
+    @Test
+    public void getHelpResource_returnsCorrectHelpResource() {
+        assertThat(mFragment.getHelpResource()).isEqualTo(R.string.help_url_magnification);
     }
 
     private void putStringIntoSettings(String key, String componentName) {
