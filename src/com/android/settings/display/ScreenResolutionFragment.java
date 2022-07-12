@@ -26,6 +26,7 @@ import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.hardware.display.DisplayManager;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.Display;
 
@@ -56,6 +57,7 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
     private Resources mResources;
     private static final int FHD_INDEX = 0;
     private static final int QHD_INDEX = 1;
+    private static final String RESOLUTION_METRIC_SETTING_KEY = "user_selected_resolution";
     private Display mDefaultDisplay;
     private String[] mScreenResolutionOptions;
     private Set<Point> mResolutions;
@@ -157,6 +159,17 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
     @VisibleForTesting
     public void setDisplayMode(final int width) {
         mDisplayObserver.startObserve();
+
+        /** For store settings globally. */
+        /** TODO(b/238061217): Moving to an atom with the same string */
+        Settings.System.putString(
+                getContext().getContentResolver(),
+                RESOLUTION_METRIC_SETTING_KEY,
+                getPreferMode(width).getPhysicalWidth()
+                        + "x"
+                        + getPreferMode(width).getPhysicalHeight());
+
+        /** Apply the resolution change. */
         mDefaultDisplay.setUserPreferredDisplayMode(getPreferMode(width));
     }
 
@@ -186,7 +199,7 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
     protected boolean setDefaultKey(final String key) {
         int width = getWidthForResoluitonKey(key);
         if (width < 0) {
-          return false;
+            return false;
         }
 
         setDisplayMode(width);
@@ -200,9 +213,8 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
         String selectedKey = selected.getKey();
         int selectedWidth = getWidthForResoluitonKey(selectedKey);
         if (!mDisplayObserver.setPendingResolutionChange(selectedWidth)) {
-          return;
+            return;
         }
-
         super.onRadioButtonClicked(selected);
     }
 
@@ -318,7 +330,7 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
             }
 
             if (!isDensityChanged() || !isResolutionChangeApplied()) {
-              return;
+                return;
             }
 
             restoreDensity();
@@ -353,10 +365,10 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
             int currentWidth = getCurrentWidth();
 
             if (selectedWidth == currentWidth) {
-              return false;
+                return false;
             }
             if (mPreviousWidth.get() != -1 && !isResolutionChangeApplied()) {
-              return false;
+                return false;
             }
 
             mPreviousWidth.set(currentWidth);
@@ -366,7 +378,7 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
 
         private boolean isResolutionChangeApplied() {
             if (mPreviousWidth.get() == getCurrentWidth()) {
-              return false;
+                return false;
             }
 
             return true;
