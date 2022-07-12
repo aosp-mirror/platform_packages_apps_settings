@@ -26,6 +26,7 @@ import static com.android.settings.slices.CustomSliceRegistry.VOLUME_CALL_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_MEDIA_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_RINGER_URI;
 
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -49,7 +50,6 @@ import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.media.MediaOutputConstants;
 
 import java.util.ArrayList;
-import java.util.IllegalFormatException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
@@ -64,6 +64,7 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
 
     private PanelContentCallback mCallback;
     private LocalBluetoothProfileManager mProfileManager;
+    private int mControlSliceWidth;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -80,6 +81,14 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
 
     private VolumePanel(Context context) {
         mContext = context.getApplicationContext();
+        if (context instanceof Activity) {
+            int panelWidth =
+                    ((Activity) context).getWindowManager().getCurrentWindowMetrics().getBounds()
+                            .width();
+            // The control slice width = panel width - two left and right horizontal paddings
+            mControlSliceWidth = panelWidth - context.getResources().getDimensionPixelSize(
+                    R.dimen.panel_slice_Horizontal_padding) * 2;
+        }
 
         final FutureTask<LocalBluetoothManager> localBtManagerFutureTask = new FutureTask<>(
                 // Avoid StrictMode ThreadPolicy violation
@@ -102,8 +111,7 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
     public void onResume() {
         final IntentFilter filter = new IntentFilter();
         filter.addAction(MediaOutputConstants.ACTION_CLOSE_PANEL);
-        mContext.registerReceiver(mReceiver, filter,
-                Context.RECEIVER_EXPORTED_UNAUDITED);
+        mContext.registerReceiver(mReceiver, filter, Context.RECEIVER_EXPORTED_UNAUDITED);
     }
 
     /** Invoked when the panel is paused. */
@@ -159,13 +167,11 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
         Uri controlUri = null;
         final BluetoothDevice bluetoothDevice = findActiveDevice();
         if (bluetoothDevice != null) {
-            final int width = mContext.getResources().getDimensionPixelSize(
-                    R.dimen.settings_panel_width);
             final String uri = BluetoothUtils.getControlUriMetaData(bluetoothDevice);
             if (!TextUtils.isEmpty(uri)) {
                 try {
-                    controlUri = Uri.parse(String.format(uri, width));
-                } catch (IllegalFormatException | NullPointerException exception) {
+                    controlUri = Uri.parse(uri + mControlSliceWidth);
+                } catch (NullPointerException exception) {
                     Log.d(TAG, "unable to parse uri");
                     controlUri = null;
                 }
