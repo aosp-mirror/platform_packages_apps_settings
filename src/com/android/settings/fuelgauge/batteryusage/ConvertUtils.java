@@ -21,6 +21,7 @@ import android.content.Context;
 import android.os.BatteryUsageStats;
 import android.os.LocaleList;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.ArraySet;
@@ -28,6 +29,8 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.Utils;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.lang.annotation.Retention;
@@ -265,17 +268,55 @@ public final class ConvertUtils {
             }
         }
         insert24HoursData(BatteryChartView.SELECTED_INDEX_ALL, resultMap);
+        resolveMultiUsersData(context, resultMap);
         if (purgeLowPercentageAndFakeData) {
             purgeLowPercentageAndFakeData(context, resultMap);
         }
         return resultMap;
     }
 
+    @VisibleForTesting
+    static void resolveMultiUsersData(
+            final Context context,
+            final Map<Integer, List<BatteryDiffEntry>> indexedUsageMap) {
+        final int currentUserId = context.getUserId();
+        final UserHandle userHandle =
+                Utils.getManagedProfile(context.getSystemService(UserManager.class));
+        final int workProfileUserId =
+                userHandle != null ? userHandle.getIdentifier() : Integer.MIN_VALUE;
+        // Loops for all BatteryDiffEntry in the different slots.
+        for (List<BatteryDiffEntry> entryList : indexedUsageMap.values()) {
+            double consumePowerFromOtherUsers = 0f;
+            double consumePercentageFromOtherUsers = 0f;
+            final Iterator<BatteryDiffEntry> iterator = entryList.iterator();
+            while (iterator.hasNext()) {
+                final BatteryDiffEntry entry = iterator.next();
+                final BatteryHistEntry batteryHistEntry = entry.mBatteryHistEntry;
+                if (batteryHistEntry.mConsumerType != CONSUMER_TYPE_UID_BATTERY) {
+                    continue;
+                }
+                // Whether the BatteryHistEntry represents the current user data?
+                if (batteryHistEntry.mUserId == currentUserId
+                        || batteryHistEntry.mUserId == workProfileUserId) {
+                    continue;
+                }
+                // Removes and aggregates non-current users data from the list.
+                iterator.remove();
+                consumePowerFromOtherUsers += entry.mConsumePower;
+                consumePercentageFromOtherUsers += entry.getPercentOfTotal();
+            }
+            if (consumePercentageFromOtherUsers != 0) {
+                entryList.add(createOtherUsersEntry(context, consumePowerFromOtherUsers,
+                        consumePercentageFromOtherUsers));
+            }
+        }
+    }
+
     private static void insert24HoursData(
             final int desiredIndex,
             final Map<Integer, List<BatteryDiffEntry>> indexedUsageMap) {
         final Map<String, BatteryDiffEntry> resultMap = new HashMap<>();
-        double totalConsumePower = 0.0;
+        double totalConsumePower = 0f;
         // Loops for all BatteryDiffEntry and aggregate them together.
         for (List<BatteryDiffEntry> entryList : indexedUsageMap.values()) {
             for (BatteryDiffEntry entry : entryList) {
@@ -360,5 +401,23 @@ public final class ConvertUtils {
                 context.getResources().getConfiguration().getLocales();
         return locales != null && !locales.isEmpty() ? locales.get(0)
                 : Locale.getDefault();
+    }
+
+    private static BatteryDiffEntry createOtherUsersEntry(
+            Context context, double consumePower, double consumePercentage) {
+        final ContentValues values = new ContentValues();
+        values.put(BatteryHistEntry.KEY_UID, BatteryUtils.UID_OTHER_USERS);
+        values.put(BatteryHistEntry.KEY_USER_ID, BatteryUtils.UID_OTHER_USERS);
+        values.put(BatteryHistEntry.KEY_CONSUMER_TYPE, CONSUMER_TYPE_UID_BATTERY);
+        // We will show the percentage for the "other users" item only, the aggregated
+        // running time information is useless for users to identify individual apps.
+        final BatteryDiffEntry batteryDiffEntry = new BatteryDiffEntry(
+                context,
+                /*foregroundUsageTimeInMs=*/ 0,
+                /*backgroundUsageTimeInMs=*/ 0,
+                consumePower,
+                new BatteryHistEntry(values));
+        batteryDiffEntry.setTotalConsumePower(100 * consumePower / consumePercentage);
+        return batteryDiffEntry;
     }
 }

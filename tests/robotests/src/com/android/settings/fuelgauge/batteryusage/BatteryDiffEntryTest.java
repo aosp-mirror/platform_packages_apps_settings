@@ -138,7 +138,7 @@ public final class BatteryDiffEntryTest {
         // Generates fake testing data.
         final ContentValues values = getContentValuesWithType(
                 ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
-        values.put("drainType",
+        values.put(BatteryHistEntry.KEY_DRAIN_TYPE,
                 Integer.valueOf(BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY));
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
 
@@ -164,7 +164,7 @@ public final class BatteryDiffEntryTest {
         // Generates fake testing data.
         final ContentValues values = getContentValuesWithType(
                 ConvertUtils.CONSUMER_TYPE_USER_BATTERY);
-        values.put("userId", Integer.valueOf(1001));
+        values.put(BatteryHistEntry.KEY_USER_ID, Integer.valueOf(1001));
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
 
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
@@ -189,8 +189,8 @@ public final class BatteryDiffEntryTest {
         final String fakePackageName = "com.fake.google.com";
         final ContentValues values = getContentValuesWithType(
                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
-        values.put("uid", /*invalid uid*/ 10001);
-        values.put("packageName", fakePackageName);
+        values.put(BatteryHistEntry.KEY_UID, /*invalid uid*/ 10001);
+        values.put(BatteryHistEntry.KEY_PACKAGE_NAME, fakePackageName);
         doReturn(mMockAppInfo).when(mMockPackageManager)
                 .getApplicationInfo(fakePackageName, 0);
         doReturn(expectedAppLabel).when(mMockPackageManager)
@@ -233,7 +233,7 @@ public final class BatteryDiffEntryTest {
         final String expectedAppLabel = "fake app label";
         final ContentValues values = getContentValuesWithType(
                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
-        values.put("appLabel", expectedAppLabel);
+        values.put(BatteryHistEntry.KEY_APP_LABEL, expectedAppLabel);
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
 
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
@@ -391,8 +391,8 @@ public final class BatteryDiffEntryTest {
         final String fakePackageName = "com.fake.google.com";
         final ContentValues values = getContentValuesWithType(
                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
-        values.put("uid", /*invalid uid*/ 10001);
-        values.put("packageName", fakePackageName);
+        values.put(BatteryHistEntry.KEY_UID, /*invalid uid*/ 10001);
+        values.put(BatteryHistEntry.KEY_PACKAGE_NAME, fakePackageName);
         final BatteryDiffEntry entry =
                 createBatteryDiffEntry(10, new BatteryHistEntry(values));
 
@@ -424,7 +424,7 @@ public final class BatteryDiffEntryTest {
         final String expectedPackageName = "com.fake.google.com";
         final ContentValues values = getContentValuesWithType(
                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
-        values.put("packageName", expectedPackageName);
+        values.put(BatteryHistEntry.KEY_PACKAGE_NAME, expectedPackageName);
         final BatteryDiffEntry entry =
                 createBatteryDiffEntry(10, new BatteryHistEntry(values));
 
@@ -437,7 +437,7 @@ public final class BatteryDiffEntryTest {
         final ContentValues values = getContentValuesWithType(
                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
         values.put(
-                "packageName",
+                BatteryHistEntry.KEY_PACKAGE_NAME,
                 expectedPackageName + ":privileged_process0");
         final BatteryDiffEntry entry =
                 createBatteryDiffEntry(10, new BatteryHistEntry(values));
@@ -445,11 +445,24 @@ public final class BatteryDiffEntryTest {
         assertThat(entry.getPackageName()).isEqualTo(expectedPackageName);
     }
 
+    @Test
+    public void getAppLabel_withOtherUsersUid_returnExpectedLabel() {
+        final ContentValues values = getContentValuesWithType(
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
+        values.put(BatteryHistEntry.KEY_UID, BatteryUtils.UID_OTHER_USERS);
+
+        final BatteryDiffEntry batteryDiffEntry = createBatteryDiffEntry(
+                /*consumePower=*/ 0, new BatteryHistEntry(values));
+
+        assertThat(batteryDiffEntry.getAppLabel())
+                .isEqualTo(mContext.getString(R.string.battery_usage_other_users));
+    }
+
     private BatteryDiffEntry createBatteryDiffEntry(
             int consumerType, long uid, boolean isHidden) {
         final ContentValues values = getContentValuesWithType(consumerType);
-        values.put("isHidden", isHidden);
-        values.put("uid", uid);
+        values.put(BatteryHistEntry.KEY_IS_HIDDEN, isHidden);
+        values.put(BatteryHistEntry.KEY_UID, uid);
         return new BatteryDiffEntry(
                 mContext,
                 /*foregroundUsageTimeInMs=*/ 0,
@@ -472,15 +485,15 @@ public final class BatteryDiffEntryTest {
 
     private static ContentValues getContentValuesWithType(int consumerType) {
         final ContentValues values = new ContentValues();
-        values.put("consumerType", Integer.valueOf(consumerType));
+        values.put(BatteryHistEntry.KEY_CONSUMER_TYPE, Integer.valueOf(consumerType));
         return values;
     }
 
     private BatteryDiffEntry createBatteryDiffEntry(Drawable drawable) throws Exception {
         final ContentValues values = getContentValuesWithType(
                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
-        values.put("uid", 1001);
-        values.put("packageName", "com.a.b.c");
+        values.put(BatteryHistEntry.KEY_UID, 1001);
+        values.put(BatteryHistEntry.KEY_PACKAGE_NAME, "com.a.b.c");
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
         doReturn(drawable).when(mMockPackageManager).getDefaultActivityIcon();
         doReturn(null).when(mMockPackageManager).getApplicationInfo("com.a.b.c", 0);
