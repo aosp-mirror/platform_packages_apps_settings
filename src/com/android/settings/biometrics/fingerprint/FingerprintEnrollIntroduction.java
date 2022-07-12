@@ -61,6 +61,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     @Nullable private FooterButton mSecondaryFooterButton;
 
     private DevicePolicyManager mDevicePolicyManager;
+    private boolean mCanAssumeUdfps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,10 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         }
 
         super.onCreate(savedInstanceState);
+        final FingerprintManager fingerprintManager = getSystemService(FingerprintManager.class);
+        final List<FingerprintSensorPropertiesInternal> props =
+                fingerprintManager.getSensorPropertiesInternal();
+        mCanAssumeUdfps = props != null && props.size() == 1 && props.get(0).isAnyUdfpsType();
 
         mDevicePolicyManager = getSystemService(DevicePolicyManager.class);
 
@@ -79,11 +84,13 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         final ImageView iconDeviceLocked = findViewById(R.id.icon_device_locked);
         final ImageView iconTrashCan = findViewById(R.id.icon_trash_can);
         final ImageView iconInfo = findViewById(R.id.icon_info);
+        final ImageView iconShield = findViewById(R.id.icon_shield);
         final ImageView iconLink = findViewById(R.id.icon_link);
         iconFingerprint.getDrawable().setColorFilter(getIconColorFilter());
         iconDeviceLocked.getDrawable().setColorFilter(getIconColorFilter());
         iconTrashCan.getDrawable().setColorFilter(getIconColorFilter());
         iconInfo.getDrawable().setColorFilter(getIconColorFilter());
+        iconShield.getDrawable().setColorFilter(getIconColorFilter());
         iconLink.getDrawable().setColorFilter(getIconColorFilter());
 
         final TextView footerMessage2 = findViewById(R.id.footer_message_2);
@@ -96,6 +103,14 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         footerMessage4.setText(getFooterMessage4());
         footerMessage5.setText(getFooterMessage5());
         footerMessage6.setText(getFooterMessage6());
+
+        if (mCanAssumeUdfps) {
+            footerMessage6.setVisibility(View.VISIBLE);
+            iconShield.setVisibility(View.VISIBLE);
+        } else {
+            footerMessage6.setVisibility(View.GONE);
+            iconShield.setVisibility(View.GONE);
+        }
 
         final TextView footerTitle1 = findViewById(R.id.footer_title_1);
         final TextView footerTitle2 = findViewById(R.id.footer_title_2);
