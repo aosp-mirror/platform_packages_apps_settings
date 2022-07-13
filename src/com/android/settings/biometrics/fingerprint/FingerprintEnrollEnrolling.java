@@ -115,6 +115,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     private FingerprintManager mFingerprintManager;
     private boolean mCanAssumeUdfps;
+    private boolean mCanAssumeSidefps;
     @Nullable private ProgressBar mProgressBar;
     private ObjectAnimator mProgressAnim;
     private TextView mDescriptionText;
@@ -156,7 +157,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         mFingerprintManager = getSystemService(FingerprintManager.class);
         final List<FingerprintSensorPropertiesInternal> props =
                 mFingerprintManager.getSensorPropertiesInternal();
-        mCanAssumeUdfps = props.size() == 1 && props.get(0).isAnyUdfpsType();
+        mCanAssumeUdfps = props != null && props.size() == 1 && props.get(0).isAnyUdfpsType();
+        mCanAssumeSidefps = props != null && props.size() == 1 && props.get(0).isAnySidefpsType();
 
         mAccessibilityManager = getSystemService(AccessibilityManager.class);
         mIsAccessibilityEnabled = mAccessibilityManager.isEnabled();
@@ -567,7 +569,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     }
 
     private void showError(CharSequence error) {
-        if (mCanAssumeUdfps) {
+        if (mCanAssumeUdfps || mCanAssumeSidefps) {
             setHeaderText(error);
             // Show nothing for subtitle when getting an error message.
             setDescriptionText("");
