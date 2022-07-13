@@ -28,7 +28,6 @@ import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HearingAidProfile;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -59,12 +58,9 @@ public class HearingAidUtilsTest {
     public void setUp() {
         final FragmentActivity mActivity = Robolectric.setupActivity(FragmentActivity.class);
         mFragmentManager = mActivity.getSupportFragmentManager();
-    }
-
-    @After
-    public void tearDown() {
         ShadowAlertDialogCompat.reset();
     }
+
     @Test
     public void launchHearingAidPairingDialog_deviceNotConnectedHearingAid_noDialog() {
         when(mCachedBluetoothDevice.isConnectedHearingAidDevice()).thenReturn(false);
