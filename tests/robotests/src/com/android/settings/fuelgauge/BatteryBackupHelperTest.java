@@ -70,6 +70,7 @@ import org.robolectric.annotation.Resetter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(RobolectricTestRunner.class)
@@ -343,9 +344,17 @@ public final class BatteryBackupHelperTest {
 
     private void verifyBackupData(String expectedResult) throws Exception {
         final byte[] expectedBytes = expectedResult.getBytes();
+        final ArgumentCaptor<byte[]> captor = ArgumentCaptor.forClass(byte[].class);
+        final Set<String> expectedResultSet =
+                Set.of(expectedResult.split(BatteryBackupHelper.DELIMITER));
+
         verify(mBackupDataOutput).writeEntityHeader(
                 BatteryBackupHelper.KEY_OPTIMIZATION_LIST, expectedBytes.length);
-        verify(mBackupDataOutput).writeEntityData(expectedBytes, expectedBytes.length);
+        verify(mBackupDataOutput).writeEntityData(captor.capture(), eq(expectedBytes.length));
+        final String actualResult = new String(captor.getValue());
+        final Set<String> actualResultSet =
+                Set.of(actualResult.split(BatteryBackupHelper.DELIMITER));
+        assertThat(actualResultSet).isEqualTo(expectedResultSet);
     }
 
     private void createTestingData(

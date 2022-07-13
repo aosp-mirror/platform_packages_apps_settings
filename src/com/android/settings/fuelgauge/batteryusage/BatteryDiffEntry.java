@@ -113,6 +113,9 @@ public class BatteryDiffEntry {
 
     /** Gets the app label name for this entry. */
     public String getAppLabel() {
+        if (isOtherUsers()) {
+            return mContext.getString(R.string.battery_usage_other_users);
+        }
         loadLabelAndIcon();
         // Returns default applicationn label if we cannot find it.
         return mAppLabel == null || mAppLabel.length() == 0
@@ -122,6 +125,9 @@ public class BatteryDiffEntry {
 
     /** Gets the app icon {@link Drawable} for this entry. */
     public Drawable getAppIcon() {
+        if (isOtherUsers()) {
+            return mContext.getDrawable(R.drawable.ic_power_system);
+        }
         loadLabelAndIcon();
         return mAppIcon != null && mAppIcon.getConstantState() != null
                 ? mAppIcon.getConstantState().newDrawable()
@@ -156,6 +162,9 @@ public class BatteryDiffEntry {
 
     /** Whether the current BatteryDiffEntry is system component or not. */
     public boolean isSystemEntry() {
+        if (isOtherUsers()) {
+            return true;
+        }
         switch (mBatteryHistEntry.mConsumerType) {
             case ConvertUtils.CONSUMER_TYPE_USER_BATTERY:
             case ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY:
@@ -173,6 +182,11 @@ public class BatteryDiffEntry {
                 return combineSystemComponents && isSystemUid(uid);
         }
         return false;
+    }
+
+    private boolean isOtherUsers() {
+        return mBatteryHistEntry.mConsumerType == ConvertUtils.CONSUMER_TYPE_UID_BATTERY
+                && mBatteryHistEntry.mUid == BatteryUtils.UID_OTHER_USERS;
     }
 
     void loadLabelAndIcon() {
