@@ -24,7 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -197,7 +197,7 @@ public class SeekBarPreferenceTest {
     public void onProgressChanged_noSeekBarChangeListener_noAction() {
         mSeekBarPreference.onProgressChanged(mSeekBar, PROGRESS, true);
 
-        verifyZeroInteractions(mMockOnSeekBarChangeListener);
+        verifyNoInteractions(mMockOnSeekBarChangeListener);
     }
 
     @Test
@@ -213,7 +213,7 @@ public class SeekBarPreferenceTest {
     public void onStartTrackingTouch_noSeekBarChangeListener_noAction() {
         mSeekBarPreference.onStartTrackingTouch(mSeekBar);
 
-        verifyZeroInteractions(mMockOnSeekBarChangeListener);
+        verifyNoInteractions(mMockOnSeekBarChangeListener);
     }
 
     @Test
@@ -229,7 +229,7 @@ public class SeekBarPreferenceTest {
     public void onStopTrackingTouch_noSeekBarChangeListener_noAction() {
         mSeekBarPreference.onStopTrackingTouch(mSeekBar);
 
-        verifyZeroInteractions(mMockOnSeekBarChangeListener);
+        verifyNoInteractions(mMockOnSeekBarChangeListener);
     }
 
     public static class TestFragment extends PreferenceFragmentCompat {
