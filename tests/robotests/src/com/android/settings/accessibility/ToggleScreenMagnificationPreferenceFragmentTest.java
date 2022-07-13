@@ -480,6 +480,11 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         }
 
         @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            // do nothing
+        }
+
+        @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             // do nothing
         }

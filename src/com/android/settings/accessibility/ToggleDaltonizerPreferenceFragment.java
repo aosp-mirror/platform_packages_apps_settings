@@ -51,6 +51,7 @@ import java.util.List;
 public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceFragment
         implements DaltonizerRadioButtonPreferenceController.OnChangeListener {
 
+    private static final String TAG = "ToggleDaltonizerPreferenceFragment";
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED;
     private static final String KEY_PREVIEW = "daltonizer_preview";
     @VisibleForTesting
@@ -70,29 +71,24 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
             final String[] daltonizerKeys = resources.getStringArray(
                     R.array.daltonizer_mode_keys);
 
-            for (int i = 0; i < daltonizerKeys.length; i++) {
+            for (String daltonizerKey : daltonizerKeys) {
                 sControllers.add(new DaltonizerRadioButtonPreferenceController(
-                        context, lifecycle, daltonizerKeys[i]));
+                        context, lifecycle, daltonizerKey));
             }
         }
         return sControllers;
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        final View rootView = getActivity().getWindow().peekDecorView();
-        if (rootView != null) {
-            rootView.setAccessibilityPaneTitle(getString(
-                    R.string.accessibility_display_daltonizer_preference_title));
-        }
-    }
 
     @Override
-    public void onCheckedChanged(Preference preference) {
-        for (AbstractPreferenceController controller : sControllers) {
-            controller.updateState(preference);
-        }
+    protected void registerKeysToObserverCallback(
+            AccessibilitySettingsContentObserver contentObserver) {
+        super.registerKeysToObserverCallback(contentObserver);
+
+        final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
+        enableServiceFeatureKeys.add(ENABLED);
+        contentObserver.registerKeysToObserverCallback(enableServiceFeatureKeys,
+                key -> updateSwitchBarToggleSwitch());
     }
 
     @Override
@@ -108,14 +104,20 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     }
 
     @Override
-    protected void registerKeysToObserverCallback(
-            AccessibilitySettingsContentObserver contentObserver) {
-        super.registerKeysToObserverCallback(contentObserver);
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        final View rootView = getActivity().getWindow().peekDecorView();
+        if (rootView != null) {
+            rootView.setAccessibilityPaneTitle(getString(
+                    R.string.accessibility_display_daltonizer_preference_title));
+        }
+    }
 
-        final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
-        enableServiceFeatureKeys.add(ENABLED);
-        contentObserver.registerKeysToObserverCallback(enableServiceFeatureKeys,
-                key -> updateSwitchBarToggleSwitch());
+    @Override
+    public void onCheckedChanged(Preference preference) {
+        for (AbstractPreferenceController controller : sControllers) {
+            controller.updateState(preference);
+        }
     }
 
     private void updateFooterPreference() {
@@ -177,6 +179,11 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.accessibility_daltonizer_settings;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override
