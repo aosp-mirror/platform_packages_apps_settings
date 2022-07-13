@@ -27,6 +27,7 @@ import android.os.BatteryUsageStats;
 import android.os.LocaleList;
 import android.os.UserHandle;
 
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 
@@ -39,6 +40,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -371,6 +373,71 @@ public final class ConvertUtilsTest {
         assertThat(ConvertUtils.getLocale(mContext)).isEqualTo(Locale.getDefault());
     }
 
+    @Test
+    public void resolveMultiUsersData_replaceOtherUsersItemWithExpectedEntry() {
+        final int currentUserId = mContext.getUserId();
+        final Map<Integer, List<BatteryDiffEntry>> entryMap = new HashMap<>();
+        // Without other users time slot.
+        entryMap.put(0, Arrays.asList(
+                createBatteryDiffEntry(
+                        currentUserId,
+                        ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
+                        /*consumePercentage=*/ 50)));
+        // With other users time slot.
+        final List<BatteryDiffEntry> withOtherUsersList = new ArrayList<>();
+        entryMap.put(1, withOtherUsersList);
+        withOtherUsersList.add(
+                createBatteryDiffEntry(
+                        currentUserId + 1,
+                        ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY,
+                        /*consumePercentage=*/ 20));
+        withOtherUsersList.add(
+                createBatteryDiffEntry(
+                        currentUserId + 2,
+                        ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
+                        /*consumePercentage=*/ 30));
+        withOtherUsersList.add(
+                createBatteryDiffEntry(
+                        currentUserId + 3,
+                        ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
+                        /*consumePercentage=*/ 40));
+
+        ConvertUtils.resolveMultiUsersData(mContext, entryMap);
+
+        assertThat(entryMap.get(0).get(0).getPercentOfTotal()).isEqualTo(50);
+        // Asserts with other users items.
+        final List<BatteryDiffEntry> entryList = entryMap.get(1);
+        assertThat(entryList).hasSize(2);
+        assertBatteryDiffEntry(
+                entryList.get(0),
+                currentUserId + 1,
+                /*uid=*/ 0,
+                ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY,
+                /*consumePercentage=*/ 20);
+        assertBatteryDiffEntry(
+                entryList.get(1),
+                BatteryUtils.UID_OTHER_USERS,
+                BatteryUtils.UID_OTHER_USERS,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
+                /*consumePercentage=*/ 70);
+    }
+
+    private BatteryDiffEntry createBatteryDiffEntry(
+            long userId, int counsumerType, double consumePercentage) {
+        final ContentValues values = new ContentValues();
+        values.put(BatteryHistEntry.KEY_USER_ID, userId);
+        values.put(BatteryHistEntry.KEY_CONSUMER_TYPE, counsumerType);
+        final BatteryDiffEntry batteryDiffEntry =
+                new BatteryDiffEntry(
+                        mContext,
+                        /*foregroundUsageTimeInMs=*/ 0,
+                        /*backgroundUsageTimeInMs=*/ 0,
+                        /*consumePower=*/ consumePercentage,
+                        new BatteryHistEntry(values));
+        batteryDiffEntry.setTotalConsumePower(100f);
+        return batteryDiffEntry;
+    }
+
     private static BatteryHistEntry createBatteryHistEntry(
             String packageName, String appLabel, double consumePower,
             long uid, long foregroundUsageTimeInMs, long backgroundUsageTimeInMs) {
@@ -387,6 +454,15 @@ public final class ConvertUtilsTest {
         values.put(BatteryHistEntry.KEY_BACKGROUND_USAGE_TIME,
                 Long.valueOf(backgroundUsageTimeInMs));
         return new BatteryHistEntry(values);
+    }
+
+    private static void assertBatteryDiffEntry(
+            BatteryDiffEntry entry, long userId, long uid, int counsumerType,
+            double consumePercentage) {
+        assertThat(entry.mBatteryHistEntry.mUid).isEqualTo(uid);
+        assertThat(entry.mBatteryHistEntry.mUserId).isEqualTo(userId);
+        assertThat(entry.mBatteryHistEntry.mConsumerType).isEqualTo(counsumerType);
+        assertThat(entry.getPercentOfTotal()).isEqualTo(consumePercentage);
     }
 
     private static void assertBatteryDiffEntry(
