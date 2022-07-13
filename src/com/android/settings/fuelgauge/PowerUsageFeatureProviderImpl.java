@@ -166,6 +166,12 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public Map<Long, Map<String, BatteryHistEntry>> getBatteryHistorySinceLastFullCharge(
+            Context context) {
+        return null;
+    }
+
+    @Override
     public Uri getBatteryHistoryUri() {
         return null;
     }
