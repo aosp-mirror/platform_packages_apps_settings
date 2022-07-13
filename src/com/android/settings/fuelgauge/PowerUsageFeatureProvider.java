@@ -150,6 +150,11 @@ public interface PowerUsageFeatureProvider {
     Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context);
 
     /**
+     * Returns battery history data since last full charge with corresponding timestamp key.
+     */
+    Map<Long, Map<String, BatteryHistEntry>> getBatteryHistorySinceLastFullCharge(Context context);
+
+    /**
      * Returns {@link Uri} to monitor battery history data is update.
      */
     Uri getBatteryHistoryUri();
