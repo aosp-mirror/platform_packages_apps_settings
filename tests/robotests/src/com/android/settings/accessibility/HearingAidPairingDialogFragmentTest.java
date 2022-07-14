@@ -22,6 +22,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
+import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -101,5 +102,11 @@ public class HearingAidPairingDialogFragmentTest {
         dialog.getButton(DialogInterface.BUTTON_NEGATIVE).performClick();
 
         assertThat(dialog.isShowing()).isFalse();
+    }
+
+    @Test
+    public void getMetricsCategory_returnsCorrectCategory() {
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(
+                SettingsEnums.DIALOG_ACCESSIBILITY_HEARING_AID_PAIR_ANOTHER);
     }
 }

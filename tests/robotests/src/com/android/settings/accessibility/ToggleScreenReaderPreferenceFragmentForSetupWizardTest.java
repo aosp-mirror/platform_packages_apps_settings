@@ -23,6 +23,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -47,9 +48,7 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
-/**
- * Tests for {@link ToggleScreenReaderPreferenceFragmentForSetupWizard}.
- */
+/** Tests for {@link ToggleScreenReaderPreferenceFragmentForSetupWizard}. */
 @RunWith(RobolectricTestRunner.class)
 public class ToggleScreenReaderPreferenceFragmentForSetupWizardTest {
 
@@ -81,6 +80,12 @@ public class ToggleScreenReaderPreferenceFragmentForSetupWizardTest {
                 mContext.getString(R.string.talkback_summary));
         verify(mGlifLayoutView).setDividerInsets(Integer.MAX_VALUE, 0);
         assertThat(mFragment.mTopIntroPreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void getMetricsCategory_returnsCorrectCategory() {
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(
+                SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SCREEN_READER);
     }
 
     private static class TestToggleScreenReaderPreferenceFragmentForSetupWizard

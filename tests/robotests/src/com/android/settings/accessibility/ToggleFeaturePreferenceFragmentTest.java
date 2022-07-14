@@ -16,7 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_SAVED_QS_TOOLTIP_RESHOW;
 import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_SAVED_USER_SHORTCUT_TYPE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -41,7 +40,6 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.PopupWindow;
 
-import androidx.annotation.XmlRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
@@ -115,15 +113,15 @@ public class ToggleFeaturePreferenceFragmentTest {
         final PreferenceScreen screen = spy(new PreferenceScreen(mContext, null));
         when(screen.getPreferenceManager()).thenReturn(mPreferenceManager);
         doReturn(screen).when(mFragment).getPreferenceScreen();
+        mContext.setTheme(R.style.Theme_AppCompat);
     }
 
     @Test
-    public void createFragment_shouldOnlyAddPreferencesOnce() {
+    public void setupFragment_getExpectedPreferenceScreenResId() {
         FragmentController.setupFragment(mFragment, FragmentActivity.class,
-                /* containerViewId= */ 0, /* bundle= */ null);
+                /* containerViewId= */ 0, Bundle.EMPTY);
 
-        // execute exactly once
-        verify(mFragment).addPreferencesFromResource(R.xml.placeholder_prefs);
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(R.xml.placeholder_prefs);
     }
 
     @Test
@@ -186,7 +184,6 @@ public class ToggleFeaturePreferenceFragmentTest {
 
     @Test
     public void dialogCheckboxClicked_hardwareType_skipTimeoutRestriction() {
-        mContext.setTheme(R.style.Theme_AppCompat);
         final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
                 null);
         mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
@@ -208,7 +205,6 @@ public class ToggleFeaturePreferenceFragmentTest {
 
     @Test
     public void setupEditShortcutDialog_shortcutPreferenceOff_checkboxIsEmptyValue() {
-        mContext.setTheme(R.style.Theme_AppCompat);
         final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
                 mContext, DialogType.EDIT_SHORTCUT_GENERIC, PLACEHOLDER_DIALOG_TITLE,
                 this::callEmptyOnClicked);
@@ -226,7 +222,6 @@ public class ToggleFeaturePreferenceFragmentTest {
 
     @Test
     public void setupEditShortcutDialog_shortcutPreferenceOn_checkboxIsSavedValue() {
-        mContext.setTheme(R.style.Theme_AppCompat);
         final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
                 mContext, DialogType.EDIT_SHORTCUT_GENERIC, PLACEHOLDER_DIALOG_TITLE,
                 this::callEmptyOnClicked);
@@ -248,7 +243,6 @@ public class ToggleFeaturePreferenceFragmentTest {
     @Test
     @Config(shadows = ShadowFragment.class)
     public void restoreValueFromSavedInstanceState_assignShortcutTypeToVariable() {
-        mContext.setTheme(R.style.Theme_AppCompat);
         final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
                 mContext, DialogType.EDIT_SHORTCUT_GENERIC, PLACEHOLDER_DIALOG_TITLE,
                 this::callEmptyOnClicked);
@@ -273,9 +267,8 @@ public class ToggleFeaturePreferenceFragmentTest {
     @Test
     @Config(shadows = ShadowFragment.class)
     public void onPreferenceToggledOnDisabledService_notShowTooltipView() {
-        mContext.setTheme(R.style.Theme_AppCompat);
-
-        mFragment.onPreferenceToggled(mFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ false);
+        mFragment.onPreferenceToggled(
+                ToggleFeaturePreferenceFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ false);
 
         assertThat(getLatestPopupWindow()).isNull();
     }
@@ -283,9 +276,8 @@ public class ToggleFeaturePreferenceFragmentTest {
     @Test
     @Config(shadows = ShadowFragment.class)
     public void onPreferenceToggledOnEnabledService_showTooltipView() {
-        mContext.setTheme(R.style.Theme_AppCompat);
-
-        mFragment.onPreferenceToggled(mFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ true);
+        mFragment.onPreferenceToggled(
+                ToggleFeaturePreferenceFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ true);
 
         assertThat(getLatestPopupWindow().isShowing()).isTrue();
     }
@@ -293,30 +285,14 @@ public class ToggleFeaturePreferenceFragmentTest {
     @Test
     @Config(shadows = ShadowFragment.class)
     public void onPreferenceToggledOnEnabledService_tooltipViewShown_notShowTooltipView() {
-        mContext.setTheme(R.style.Theme_AppCompat);
-        mFragment.onPreferenceToggled(mFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ true);
+        mFragment.onPreferenceToggled(
+                ToggleFeaturePreferenceFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ true);
         getLatestPopupWindow().dismiss();
 
-        mFragment.onPreferenceToggled(mFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ true);
+        mFragment.onPreferenceToggled(
+                ToggleFeaturePreferenceFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ true);
 
         assertThat(getLatestPopupWindow().isShowing()).isFalse();
-    }
-
-    @Test
-    @Config(shadows = ShadowFragment.class)
-    public void restoreValueFromSavedInstanceState_showTooltipView() {
-        mContext.setTheme(R.style.Theme_AppCompat);
-        mFragment.onPreferenceToggled(mFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ true);
-        assertThat(getLatestPopupWindow().isShowing()).isTrue();
-
-        final Bundle savedInstanceState = new Bundle();
-        savedInstanceState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, /* value= */ true);
-        mFragment.onCreate(savedInstanceState);
-        mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
-        mFragment.onViewCreated(mFragment.getView(), savedInstanceState);
-        mFragment.onAttach(mContext);
-
-        assertThat(getLatestPopupWindow().isShowing()).isTrue();
     }
 
     @Test
@@ -395,6 +371,21 @@ public class ToggleFeaturePreferenceFragmentTest {
         }
 
         @Override
+        protected String getLogTag() {
+            return null;
+        }
+
+        @Override
+        protected void onProcessArguments(Bundle arguments) {
+            // do nothing
+        }
+
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            // do nothing
+        }
+
+        @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             return mock(View.class);
@@ -407,11 +398,6 @@ public class ToggleFeaturePreferenceFragmentTest {
 
         @Override
         public void onDestroyView() {
-            // do nothing
-        }
-
-        @Override
-        public void addPreferencesFromResource(@XmlRes int preferencesResId) {
             // do nothing
         }
 

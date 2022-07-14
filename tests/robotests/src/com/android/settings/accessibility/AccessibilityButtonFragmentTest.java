@@ -24,6 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -68,6 +69,17 @@ public class AccessibilityButtonFragmentTest {
         mFragment = spy(new TestAccessibilityButtonFragment(mContext));
         when(mFragment.getResources()).thenReturn(mResources);
         when(mFragment.getActivity()).thenReturn(Robolectric.setupActivity(FragmentActivity.class));
+    }
+
+    @Test
+    public void getMetricsCategory_returnsCorrectCategory() {
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(
+                SettingsEnums.ACCESSIBILITY_BUTTON_SETTINGS);
+    }
+
+    @Test
+    public void getLogTag_returnsCorrectTag() {
+        assertThat(mFragment.getLogTag()).isEqualTo("AccessibilityButtonFragment");
     }
 
     @Test

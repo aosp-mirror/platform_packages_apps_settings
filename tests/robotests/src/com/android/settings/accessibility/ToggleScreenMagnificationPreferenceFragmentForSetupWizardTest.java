@@ -23,6 +23,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.preference.Preference;
@@ -49,9 +50,7 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-/**
- * Tests for {@link ToggleScreenMagnificationPreferenceFragmentForSetupWizard}.
- */
+/** Tests for {@link ToggleScreenMagnificationPreferenceFragmentForSetupWizard}. */
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowSettingsPreferenceFragment.class})
 public class ToggleScreenMagnificationPreferenceFragmentForSetupWizardTest {
@@ -87,6 +86,17 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizardTest {
         assertThat(mFragment.mTopIntroPreference.isVisible()).isFalse();
         assertThat(mFragment.mSettingsPreference.isVisible()).isFalse();
         assertThat(mFragment.mFollowingTypingSwitchPreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void getMetricsCategory_returnsCorrectCategory() {
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(
+                SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION);
+    }
+
+    @Test
+    public void getHelpResource_shouldNotHaveHelpResource() {
+        assertThat(mFragment.getHelpResource()).isEqualTo(0);
     }
 
     private static class TestToggleScreenMagnificationPreferenceFragmentForSetupWizard

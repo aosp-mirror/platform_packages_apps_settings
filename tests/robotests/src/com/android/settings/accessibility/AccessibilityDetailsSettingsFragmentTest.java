@@ -28,6 +28,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -60,6 +61,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Tests for {@link AccessibilityDetailsSettingsFragment}. */
 @Config(shadows = ShadowFragment.class)
 @RunWith(RobolectricTestRunner.class)
 public class AccessibilityDetailsSettingsFragmentTest {
@@ -167,6 +169,12 @@ public class AccessibilityDetailsSettingsFragmentTest {
 
         assertStartActivityWithExpectedFragment(mActivity,
                 AccessibilityButtonFragment.class.getName());
+    }
+
+    @Test
+    public void getMetricsCategory_returnsCorrectCategory() {
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(
+                SettingsEnums.ACCESSIBILITY_DETAILS_SETTINGS);
     }
 
     private AccessibilityServiceInfo getMockAccessibilityServiceInfo() {
