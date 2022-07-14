@@ -239,8 +239,8 @@ public class EnabledNetworkModePreferenceController extends
         void setPreferenceEntries() {
             mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
             final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(mSubId);
-            final boolean display2gOptions = carrierConfig
-                    .getBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL);
+            final boolean display2gOptions = carrierConfig != null
+                    && carrierConfig.getBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL);
             clearAllEntries();
             UiOptions.Builder uiOptions = UiOptions.newBuilder();
             uiOptions.setType(getEnabledNetworkType());
