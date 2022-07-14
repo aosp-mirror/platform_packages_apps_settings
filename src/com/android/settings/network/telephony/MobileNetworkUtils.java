@@ -213,7 +213,7 @@ public class MobileNetworkUtils {
             return false;
         }
         PersistableBundle bundle = carrierConfigCache.getConfigForSubId(subId);
-        return bundle.getBoolean(
+        return bundle == null ? false : bundle.getBoolean(
                 CarrierConfigManager.KEY_USE_RCS_PRESENCE_BOOL, false /*default*/)
                 || bundle.getBoolean(CarrierConfigManager.Ims.KEY_RCS_BULK_CAPABILITY_EXCHANGE_BOOL,
                 false /*default*/);
