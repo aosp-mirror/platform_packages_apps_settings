@@ -18,11 +18,13 @@ package com.android.settings.biometrics.fingerprint;
 
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_TIMEOUT;
+import static com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling.KEY_STATE_CANCELED;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.hardware.biometrics.BiometricConstants;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
@@ -68,7 +70,11 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
-                                    getActivity().recreate();
+                                    Activity activity = getActivity();
+                                    Intent intent = activity.getIntent();
+                                    intent.putExtra(KEY_STATE_CANCELED, false);
+                                    activity.startActivity(intent);
+                                    activity.finish();
                                 }
                             })
                     .setNegativeButton(
