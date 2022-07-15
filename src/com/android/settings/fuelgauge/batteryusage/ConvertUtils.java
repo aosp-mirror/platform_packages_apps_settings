@@ -276,7 +276,7 @@ public final class ConvertUtils {
                 diffEntry.setTotalConsumePower(totalConsumePower);
             }
         }
-        insert24HoursData(BatteryChartView.SELECTED_INDEX_ALL, resultMap);
+        insert24HoursData(BatteryChartViewModel.SELECTED_INDEX_ALL, resultMap);
         resolveMultiUsersData(context, resultMap);
         if (purgeLowPercentageAndFakeData) {
             purgeLowPercentageAndFakeData(context, resultMap);
