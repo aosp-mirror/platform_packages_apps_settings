@@ -93,6 +93,8 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     public static final String EXTRA_PARENTAL_CONSENT_STATUS = "consent_status";
 
     private static final String SAVED_STATE_CONFIRMING_CREDENTIALS = "confirming_credentials";
+    private static final String SAVED_STATE_FINGERPRINT_ONLY_ENROLLING =
+            "fingerprint_only_enrolling";
     private static final String SAVED_STATE_ENROLL_ACTION_LOGGED = "enroll_action_logged";
     private static final String SAVED_STATE_PARENTAL_OPTIONS = "enroll_preferences";
     private static final String SAVED_STATE_GK_PW_HANDLE = "gk_pw_handle";
@@ -101,6 +103,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
 
     private int mUserId = UserHandle.myUserId();
     private boolean mConfirmingCredentials;
+    private boolean mFingerprintOnlyEnrolling;
     private boolean mIsEnrollActionLogged;
     private boolean mHasFeatureFace = false;
     private boolean mHasFeatureFingerprint = false;
@@ -129,6 +132,8 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         if (savedInstanceState != null) {
             mConfirmingCredentials = savedInstanceState.getBoolean(
                     SAVED_STATE_CONFIRMING_CREDENTIALS, false);
+            mFingerprintOnlyEnrolling = savedInstanceState.getBoolean(
+                    SAVED_STATE_FINGERPRINT_ONLY_ENROLLING, false);
             mIsEnrollActionLogged = savedInstanceState.getBoolean(
                     SAVED_STATE_ENROLL_ACTION_LOGGED, false);
             mParentalOptions = savedInstanceState.getBundle(SAVED_STATE_PARENTAL_OPTIONS);
@@ -302,7 +307,11 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 setOrConfirmCredentialsNow();
             }
         } else if (canUseFingerprint) {
-            launchFingerprintOnlyEnroll();
+            if (mGkPwHandle != null) {
+                launchFingerprintOnlyEnroll();
+            } else {
+                setOrConfirmCredentialsNow();
+            }
         } else if (canUseFace) {
             launchFaceOnlyEnroll();
         } else { // no modalities available
@@ -320,6 +329,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(SAVED_STATE_CONFIRMING_CREDENTIALS, mConfirmingCredentials);
+        outState.putBoolean(SAVED_STATE_FINGERPRINT_ONLY_ENROLLING, mFingerprintOnlyEnrolling);
         outState.putBoolean(SAVED_STATE_ENROLL_ACTION_LOGGED, mIsEnrollActionLogged);
         if (mParentalOptions != null) {
             outState.putBundle(SAVED_STATE_PARENTAL_OPTIONS, mParentalOptions);
@@ -432,11 +442,14 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                     mConfirmingCredentials = false;
                     final boolean isOk =
                             isSuccessfulConfirmOrChooseCredential(requestCode, resultCode);
-                    // single modality enrollment requests confirmation directly
+                    // single face enrollment requests confirmation directly
                     // via BiometricEnrollBase#onCreate and should never get here
                     if (isOk && mHasFeatureFace && mHasFeatureFingerprint) {
                         updateGatekeeperPasswordHandle(data);
                         launchFaceAndFingerprintEnroll();
+                    } else if (isOk && mHasFeatureFingerprint) {
+                        updateGatekeeperPasswordHandle(data);
+                        launchFingerprintOnlyEnroll();
                     } else {
                         Log.d(TAG, "Unknown result for set/choose lock: " + resultCode);
                         setResult(resultCode);
@@ -444,6 +457,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                     }
                     break;
                 case REQUEST_SINGLE_ENROLL:
+                    mFingerprintOnlyEnrolling = false;
                     finishOrLaunchHandToParent(resultCode);
                     break;
                 default:
@@ -572,15 +586,18 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     }
 
     private void launchFingerprintOnlyEnroll() {
-        final Intent intent;
-        // ChooseLockGeneric can request to start fingerprint enroll bypassing the intro screen.
-        if (getIntent().getBooleanExtra(EXTRA_SKIP_INTRO, false)
-                && this instanceof InternalActivity) {
-            intent = BiometricUtils.getFingerprintFindSensorIntent(this, getIntent());
-        } else {
-            intent = BiometricUtils.getFingerprintIntroIntent(this, getIntent());
+        if (!mFingerprintOnlyEnrolling) {
+            mFingerprintOnlyEnrolling = true;
+            final Intent intent;
+            // ChooseLockGeneric can request to start fingerprint enroll bypassing the intro screen.
+            if (getIntent().getBooleanExtra(EXTRA_SKIP_INTRO, false)
+                    && this instanceof InternalActivity) {
+                intent = BiometricUtils.getFingerprintFindSensorIntent(this, getIntent());
+            } else {
+                intent = BiometricUtils.getFingerprintIntroIntent(this, getIntent());
+            }
+            launchSingleSensorEnrollActivity(intent, REQUEST_SINGLE_ENROLL);
         }
-        launchSingleSensorEnrollActivity(intent, REQUEST_SINGLE_ENROLL);
     }
 
     private void launchFaceOnlyEnroll() {
