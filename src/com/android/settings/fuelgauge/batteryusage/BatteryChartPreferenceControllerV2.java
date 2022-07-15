@@ -588,9 +588,13 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
         if (mBatteryChartView == null || mBatteryHistoryKeys == null) {
             return;
         }
-        final long latestTimestamp =
-                mBatteryHistoryKeys[mBatteryHistoryKeys.length - 1];
-        mBatteryChartView.setLatestTimestamp(latestTimestamp);
+        final boolean is24HourFormat = DateFormat.is24HourFormat(mContext);
+        final String[] labels = new String[mBatteryHistoryKeys.length];
+        for (int i = 0; i < mBatteryHistoryKeys.length; i++) {
+            labels[i] = ConvertUtils.utcToLocalTimeHour(mContext, mBatteryHistoryKeys[i],
+                    is24HourFormat);
+        }
+        mBatteryChartView.setAxisLabels(labels);
     }
 
     private void addFooterPreferenceIfNeeded(boolean containAppItems) {
