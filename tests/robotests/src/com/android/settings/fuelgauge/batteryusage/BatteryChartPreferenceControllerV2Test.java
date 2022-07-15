@@ -516,7 +516,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void refreshCategoryTitle_setLast24HrIntoBothTitleTextView() {
+    public void refreshCategoryTitle_setLastFullChargeIntoBothTitleTextView() {
         mBatteryChartPreferenceController = createController();
         mBatteryChartPreferenceController.mAppListPrefGroup =
                 spy(new PreferenceCategory(mContext));
