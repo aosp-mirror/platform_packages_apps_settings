@@ -16,12 +16,7 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
-import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
-
 import android.content.Context;
-import android.provider.Settings;
-import android.view.accessibility.CaptioningManager;
 import android.widget.Switch;
 
 import androidx.preference.PreferenceScreen;
@@ -35,11 +30,11 @@ import com.android.settingslib.widget.OnMainSwitchChangeListener;
 public class CaptionTogglePreferenceController extends TogglePreferenceController
         implements OnMainSwitchChangeListener {
 
-    private final CaptioningManager mCaptioningManager;
+    private final CaptionHelper mCaptionHelper;
 
     public CaptionTogglePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mCaptioningManager = context.getSystemService(CaptioningManager.class);
+        mCaptionHelper = new CaptionHelper(context);
     }
 
     @Override
@@ -49,13 +44,12 @@ public class CaptionTogglePreferenceController extends TogglePreferenceControlle
 
     @Override
     public boolean isChecked() {
-        return mCaptioningManager.isEnabled();
+        return mCaptionHelper.isEnabled();
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, isChecked ? ON : OFF);
+        mCaptionHelper.setEnabled(isChecked);
         return true;
     }
 
