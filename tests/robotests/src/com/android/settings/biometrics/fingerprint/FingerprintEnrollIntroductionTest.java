@@ -173,4 +173,24 @@ public class FingerprintEnrollIntroductionTest {
 
         assertThat(result).isEqualTo(R.string.fingerprint_intro_error_max);
     }
+
+    @Test
+    public void intro_CheckCanEnrollDuringPortal() {
+        setupFingerprintEnrollIntroWith(
+                new Intent().putExtra(WizardManagerHelper.EXTRA_IS_PORTAL_SETUP, true));
+        setFingerprintManagerToHave(2 /* numEnrollments */);
+        int result = mFingerprintEnrollIntroduction.checkMaxEnrolled();
+
+        assertThat(result).isEqualTo(0);
+    }
+
+    @Test
+    public void intro_CheckMaxEnrolledDuringPortal() {
+        setupFingerprintEnrollIntroWith(
+                new Intent().putExtra(WizardManagerHelper.EXTRA_IS_PORTAL_SETUP, true));
+        setFingerprintManagerToHave(6 /* numEnrollments */);
+        int result = mFingerprintEnrollIntroduction.checkMaxEnrolled();
+
+        assertThat(result).isEqualTo(R.string.fingerprint_intro_error_max);
+    }
 }
