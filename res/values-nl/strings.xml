@@ -478,7 +478,7 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Til je vinger op zodra je een trilling voelt"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Ga naar een plek met zachter licht en probeer het opnieuw"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Je hebt het maximale aantal pogingen bereikt"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Gebruik je vingerafdruk om je tablet te ontgrendelen of te bevestigen dat jij het bent als je inlogt bij apps"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Gebruik je vingerafdruk om je tablet te ontgrendelen of te bevestigen dat jij het bent als je bijvoorbeeld inlogt bij apps"</string>
     <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Gebruik je vingerafdruk om je apparaat te ontgrendelen of te bevestigen dat jij het bent als je inlogt bij apps"</string>
     <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Gebruik je vingerafdruk om je telefoon te ontgrendelen of te bevestigen dat jij het bent als je inlogt bij apps"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Ontgrendelen via gezichtsherkenning en vingerafdruk"</string>
@@ -1582,7 +1582,7 @@
     <string name="memory_dcim_usage" msgid="3568913845973164352">"Foto\'s, video\'s"</string>
     <string name="memory_music_usage" msgid="8100634000114206429">"Audio (muziek, ringtones, podcasts, enzovoort)"</string>
     <string name="memory_media_misc_usage" msgid="7066851245178533269">"Andere bestanden"</string>
-    <string name="memory_media_cache_usage" msgid="780808666853685824">"Gegevens in het cachegeheugen"</string>
+    <string name="memory_media_cache_usage" msgid="780808666853685824">"Gecachete gegevens"</string>
     <string name="sd_eject" product="nosdcard" msgid="6136102589751843304">"Gedeelde opslag ontkoppelen"</string>
     <string name="sd_eject" product="default" msgid="8062832622096296251">"SD-kaart ontkoppelen"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="6859940774161708871">"Interne USB-opslag ontkoppelen"</string>
@@ -2936,6 +2936,8 @@
     <string name="battery_not_usage" msgid="1472275761547230196">"Geen gebruik sinds laatste volledige lading"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Geen gebruik in de afgelopen 24 u"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
+    <!-- no translation found for battery_usage_other_users (9002643295562500693) -->
+    <skip />
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Schatting van resterende batterijduur is gebaseerd op je apparaatgebruik"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Geschatte resterende tijd"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Tot volledige lading"</string>
@@ -3025,6 +3027,9 @@
     <string name="voice_interactor_preference_summary" msgid="3942881638813452880">"Volledige hotword- en interactieservice"</string>
     <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"Eenvoudige spraak-naar-tekst"</string>
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"Deze spraakinvoerservice kan doorlopend de spraakinvoer volgen en namens jou spraakgestuurde apps bedienen. De service wordt geleverd door de <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Wil je het gebruik van deze service aanzetten?"</string>
+    <string name="on_device_recognition_settings" msgid="6503160369314598069">"Instellingen voor herkenning op het apparaat"</string>
+    <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"Herkenning op het apparaat"</string>
+    <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"Spraakherkenning op het apparaat"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"Voorkeursengine"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"Engine-instellingen"</string>
     <string name="tts_sliders_title" msgid="6901146958648426181">"Spreeksnelheid en toonhoogte"</string>
@@ -5109,8 +5114,8 @@
     <string name="financed_privacy_notifications" msgid="5932303271274089968">"Meldingen en sms-berichten bekijken"</string>
     <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Toegang krijgen tot apps die zijn toegestaan door de kredietverstrekker"</string>
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Nadat je het volledige bedrag hebt betaald:"</string>
-    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Alle beperkingen voor het apparaat worden ingetrokken"</string>
-    <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Je kunt de app van de kredietverstrekker verwijderen"</string>
+    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"worden alle beperkingen voor het apparaat ingetrokken."</string>
+    <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"kun je de app van de kredietverstrekker verwijderen."</string>
     <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
       <item quantity="other">Camera-apps</item>
       <item quantity="one">Camera-app</item>
