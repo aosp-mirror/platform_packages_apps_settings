@@ -76,6 +76,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     private static final String TAG = "FingerprintEnrollEnrolling";
     static final String TAG_SIDECAR = "sidecar";
+    static final String KEY_STATE_CANCELED = "is_canceled";
 
     private static final int PROGRESS_BAR_MAX = 10000;
 
@@ -130,6 +131,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private boolean mRestoring;
     private Vibrator mVibrator;
     private boolean mIsSetupWizard;
+    private boolean mIsCanceled;
     private AccessibilityManager mAccessibilityManager;
     private boolean mIsAccessibilityEnabled;
     private LottieAnimationView mIllustrationLottie;
@@ -154,6 +156,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (savedInstanceState != null) {
+            restoreSavedState(savedInstanceState);
+        }
         mFingerprintManager = getSystemService(FingerprintManager.class);
         final List<FingerprintSensorPropertiesInternal> props =
                 mFingerprintManager.getSensorPropertiesInternal();
@@ -240,7 +245,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                 return true;
             });
         }
-        mRestoring = savedInstanceState != null;
     }
 
     @Override
@@ -255,9 +259,20 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         if (mCanAssumeUdfps) {
             // Continue enrollment if restoring (e.g. configuration changed). Otherwise, wait
             // for the entry animation to complete before starting.
-            return mRestoring;
+            return mRestoring && !mIsCanceled;
         }
         return true;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(KEY_STATE_CANCELED, mIsCanceled);
+    }
+
+    private void restoreSavedState(Bundle savedInstanceState) {
+        mRestoring = true;
+        mIsCanceled = savedInstanceState.getBoolean(KEY_STATE_CANCELED, false);
     }
 
     @Override
@@ -500,7 +515,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     @Override
     public void onEnrollmentError(int errMsgId, CharSequence errString) {
         FingerprintErrorDialog.showErrorDialog(this, errMsgId);
+        mIsCanceled = true;
+        cancelEnrollment();
         stopIconAnimation();
+        stopListenOrientationEvent();
         if (!mCanAssumeUdfps) {
             mErrorText.removeCallbacks(mTouchAgainRunnable);
         }

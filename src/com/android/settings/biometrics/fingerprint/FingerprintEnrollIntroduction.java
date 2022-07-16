@@ -241,6 +241,8 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         final boolean isSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         final boolean isDeferredSetupWizard =
                 WizardManagerHelper.isDeferredSetupWizard(getIntent());
+        final boolean isPortalSetupWizard =
+                WizardManagerHelper.isPortalSetupWizard(getIntent());
         if (mFingerprintManager != null) {
             final List<FingerprintSensorPropertiesInternal> props =
                     mFingerprintManager.getSensorPropertiesInternal();
@@ -252,7 +254,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                     getApplicationContext()
                             .getResources()
                             .getInteger(R.integer.suw_max_fingerprints_enrollable);
-            if (isSetupWizard && !isDeferredSetupWizard) {
+            if (isSetupWizard && !isDeferredSetupWizard && !isPortalSetupWizard) {
                 if (numEnrolledFingerprints >= maxFingerprintsEnrollableIfSUW) {
                     return R.string.fingerprint_intro_error_max;
                 } else {
