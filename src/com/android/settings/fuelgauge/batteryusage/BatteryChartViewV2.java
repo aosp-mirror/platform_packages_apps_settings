@@ -56,7 +56,6 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
     private static final List<String> ACCESSIBILITY_SERVICE_NAMES =
             Arrays.asList("SwitchAccessService", "TalkBackService", "JustSpeakService");
 
-    private static final int DEFAULT_TRAPEZOID_COUNT = 12;
     private static final int DEFAULT_AXIS_LABEL_COUNT = 4;
     private static final int AXIS_LABEL_GAPS_COUNT = DEFAULT_AXIS_LABEL_COUNT - 1;
     private static final int DIVIDER_COLOR = Color.parseColor("#CDCCC5");
@@ -74,7 +73,6 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
 
     private int mDividerWidth;
     private int mDividerHeight;
-    private int mTrapezoidCount;
     private float mTrapezoidVOffset;
     private float mTrapezoidHOffset;
     private boolean mIsSlotsClickabled;
@@ -127,36 +125,28 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
         // Registers the click event listener.
         setOnClickListener(this);
         setSelectedIndex(SELECTED_INDEX_ALL);
-        setTrapezoidCount(DEFAULT_TRAPEZOID_COUNT);
         setClickable(false);
-    }
-
-    /** Sets the total trapezoid count for drawing. */
-    public void setTrapezoidCount(int trapezoidCount) {
-        Log.i(TAG, "trapezoidCount:" + trapezoidCount);
-        mTrapezoidCount = trapezoidCount;
-        mTrapezoidSlots = new TrapezoidSlot[trapezoidCount];
-        // Allocates the trapezoid slot array.
-        for (int index = 0; index < trapezoidCount; index++) {
-            mTrapezoidSlots[index] = new TrapezoidSlot();
-        }
-        invalidate();
     }
 
     /** Sets all levels value to draw the trapezoid shape */
     public void setLevels(int[] levels) {
         Log.d(TAG, "setLevels() " + (levels == null ? "null" : levels.length));
-        if (levels == null) {
+        // At least 2 levels to draw a trapezoid.
+        if (levels == null || levels.length < 2) {
             mLevels = null;
+            invalidate();
             return;
         }
-        // We should provide trapezoid count + 1 data to draw all trapezoids.
-        mLevels = levels.length == mTrapezoidCount + 1 ? levels : null;
+        mLevels = levels;
+
+        // Initialize trapezoid slots.
+        mTrapezoidSlots = new TrapezoidSlot[mLevels.length - 1];
+        for (int index = 0; index < mTrapezoidSlots.length; index++) {
+            mTrapezoidSlots[index] = new TrapezoidSlot();
+        }
+
         setClickable(false);
         invalidate();
-        if (mLevels == null) {
-            return;
-        }
         // Sets the chart is clickable if there is at least one valid item in it.
         for (int index = 0; index < mLevels.length - 1; index++) {
             if (mLevels[index] != 0 && mLevels[index + 1] != 0) {
@@ -249,7 +239,12 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
+        // Before mLevels initialized, the count of trapezoids is unknown. Only draws the
+        // horizontal percentages and dividers.
         drawHorizontalDividers(canvas);
+        if (mLevels == null) {
+            return;
+        }
         drawVerticalDividers(canvas);
         drawTrapezoids(canvas);
     }
@@ -440,9 +435,9 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
 
     private void drawVerticalDividers(Canvas canvas) {
         final int width = getWidth() - mIndent.right;
-        final int dividerCount = mTrapezoidCount + 1;
+        final int dividerCount = mTrapezoidSlots.length + 1;
         final float dividerSpace = dividerCount * mDividerWidth;
-        final float unitWidth = (width - dividerSpace) / (float) mTrapezoidCount;
+        final float unitWidth = (width - dividerSpace) / (float) mTrapezoidSlots.length;
         final float bottomY = getHeight() - mIndent.bottom;
         final float startY = bottomY - mDividerHeight;
         final float trapezoidSlotOffset = mTrapezoidHOffset + mDividerWidth * .5f;
@@ -518,7 +513,7 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
         // Draws all trapezoid shapes into the canvas.
         final Path trapezoidPath = new Path();
         Path trapezoidCurvePath = null;
-        for (int index = 0; index < mTrapezoidCount; index++) {
+        for (int index = 0; index < mTrapezoidSlots.length; index++) {
             // Not draws the trapezoid for corner or not initialization cases.
             if (!isValidToDraw(index)) {
                 if (mTrapezoidCurvePaint != null && trapezoidCurvePath != null) {
