@@ -66,7 +66,7 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         }
 
         boolean isFilterMatched = false;
-        if (isDeviceConnected(cachedDevice)) {
+        if (isDeviceConnected(cachedDevice) && isDeviceInCachedDevicesList(cachedDevice)) {
             if (DBG) {
                 Log.d(TAG, "isFilterMatched() current audio profile : " + currentAudioProfile);
             }
@@ -74,6 +74,8 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
             // It would show in Available Devices group.
             if (cachedDevice.isConnectedHearingAidDevice()
                     || cachedDevice.isConnectedLeAudioDevice()) {
+                Log.d(TAG, "isFilterMatched() device : " +
+                        cachedDevice.getName() + ", the profile is connected.");
                 return true;
             }
             // According to the current audio profile type,
