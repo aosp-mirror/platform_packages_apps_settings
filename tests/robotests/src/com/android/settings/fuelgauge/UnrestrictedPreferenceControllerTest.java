@@ -70,13 +70,26 @@ public class UnrestrictedPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_isSystemOrDefaultApp_prefChecked() {
+    public void testUpdateState_isSystemOrDefaultAppAndUnrestrictedStates_prefChecked() {
+        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
+                BatteryOptimizeUtils.MODE_UNRESTRICTED);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isChecked()).isTrue();
+    }
+
+    @Test
+    public void testUpdateState_isSystemOrDefaultApp_prefUnchecked() {
         when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
         when(mockBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isChecked()).isTrue();
+        assertThat(mPreference.isChecked()).isFalse();
+        assertThat(mPreference.isEnabled()).isFalse();
     }
 
     @Test

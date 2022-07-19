@@ -51,16 +51,16 @@ public class RestrictedPreferenceController extends AbstractPreferenceController
             preference.setEnabled(true);
         }
 
-        if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
-            Log.d(TAG, "is system or default app, disable pref");
-            ((SelectorWithWidgetPreference) preference).setChecked(false);
-            preference.setEnabled(false);
-        } else if (mBatteryOptimizeUtils.getAppOptimizationMode()
+        if (mBatteryOptimizeUtils.getAppOptimizationMode()
                 == BatteryOptimizeUtils.MODE_RESTRICTED) {
             Log.d(TAG, "is restricted states");
             ((SelectorWithWidgetPreference) preference).setChecked(true);
         } else {
             ((SelectorWithWidgetPreference) preference).setChecked(false);
+            if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
+                Log.d(TAG, "is system or default app, disable pref");
+                preference.setEnabled(false);
+            }
         }
     }
 
