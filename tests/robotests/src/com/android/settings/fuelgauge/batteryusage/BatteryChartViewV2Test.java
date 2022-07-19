@@ -42,6 +42,7 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 @RunWith(RobolectricTestRunner.class)
@@ -100,13 +101,15 @@ public final class BatteryChartViewV2Test {
 
     @Test
     public void onClick_invokesCallback() {
-        mBatteryChartView.setLevels(new int[] {90, 80, 70, 60});
+        final int originalSelectedIndex = 2;
+        mBatteryChartView.setViewModel(
+                new BatteryChartViewModel(List.of(90, 80, 70, 60), List.of("", "", "", ""),
+                        originalSelectedIndex));
         for (int i = 0; i < mBatteryChartView.mTrapezoidSlots.length; i++) {
             mBatteryChartView.mTrapezoidSlots[i] = new BatteryChartViewV2.TrapezoidSlot();
             mBatteryChartView.mTrapezoidSlots[i].mLeft = i;
             mBatteryChartView.mTrapezoidSlots[i].mRight = i + 0.5f;
         }
-        mBatteryChartView.mSelectedIndex = 2;
         final int[] selectedIndex = new int[1];
         mBatteryChartView.setOnSelectListener(
                 trapezoidIndex -> {
@@ -123,7 +126,7 @@ public final class BatteryChartViewV2Test {
         mBatteryChartView.mTouchUpEventX = 2;
         selectedIndex[0] = Integer.MIN_VALUE;
         mBatteryChartView.onClick(mMockView);
-        assertThat(selectedIndex[0]).isEqualTo(BatteryChartViewV2.SELECTED_INDEX_ALL);
+        assertThat(selectedIndex[0]).isEqualTo(BatteryChartViewModel.SELECTED_INDEX_ALL);
     }
 
     @Test
@@ -178,11 +181,14 @@ public final class BatteryChartViewV2Test {
 
     @Test
     public void clickable_restoreFromNonClickableState() {
-        final int[] levels = new int[13];
-        for (int index = 0; index < levels.length; index++) {
-            levels[index] = index + 1;
+        final List<Integer> levels = new ArrayList<Integer>();
+        final List<String> texts = new ArrayList<String>();
+        for (int index = 0; index < 13; index++) {
+            levels.add(index + 1);
+            texts.add("");
         }
-        mBatteryChartView.setLevels(levels);
+        mBatteryChartView.setViewModel(new BatteryChartViewModel(
+                levels, texts, BatteryChartViewModel.SELECTED_INDEX_ALL));
         mBatteryChartView.setClickableForce(true);
         when(mPowerUsageFeatureProvider.isChartGraphSlotsEnabled(mContext))
                 .thenReturn(true);
