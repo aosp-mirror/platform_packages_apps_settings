@@ -95,6 +95,8 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     private static final String SAVED_STATE_CONFIRMING_CREDENTIALS = "confirming_credentials";
     private static final String SAVED_STATE_FINGERPRINT_ONLY_ENROLLING =
             "fingerprint_only_enrolling";
+    private static final String SAVED_STATE_PASS_THROUGH_EXTRAS_FROM_CHOSEN_LOCK_IN_SUW =
+            "pass_through_extras_from_chosen_lock_in_suw";
     private static final String SAVED_STATE_ENROLL_ACTION_LOGGED = "enroll_action_logged";
     private static final String SAVED_STATE_PARENTAL_OPTIONS = "enroll_preferences";
     private static final String SAVED_STATE_GK_PW_HANDLE = "gk_pw_handle";
@@ -104,6 +106,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     private int mUserId = UserHandle.myUserId();
     private boolean mConfirmingCredentials;
     private boolean mFingerprintOnlyEnrolling;
+    private Bundle mPassThroughExtrasFromChosenLockInSuw = null;
     private boolean mIsEnrollActionLogged;
     private boolean mHasFeatureFace = false;
     private boolean mHasFeatureFingerprint = false;
@@ -134,6 +137,8 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                     SAVED_STATE_CONFIRMING_CREDENTIALS, false);
             mFingerprintOnlyEnrolling = savedInstanceState.getBoolean(
                     SAVED_STATE_FINGERPRINT_ONLY_ENROLLING, false);
+            mPassThroughExtrasFromChosenLockInSuw = savedInstanceState.getBundle(
+                    SAVED_STATE_PASS_THROUGH_EXTRAS_FROM_CHOSEN_LOCK_IN_SUW);
             mIsEnrollActionLogged = savedInstanceState.getBoolean(
                     SAVED_STATE_ENROLL_ACTION_LOGGED, false);
             mParentalOptions = savedInstanceState.getBundle(SAVED_STATE_PARENTAL_OPTIONS);
@@ -330,6 +335,8 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         super.onSaveInstanceState(outState);
         outState.putBoolean(SAVED_STATE_CONFIRMING_CREDENTIALS, mConfirmingCredentials);
         outState.putBoolean(SAVED_STATE_FINGERPRINT_ONLY_ENROLLING, mFingerprintOnlyEnrolling);
+        outState.putBundle(SAVED_STATE_PASS_THROUGH_EXTRAS_FROM_CHOSEN_LOCK_IN_SUW,
+                mPassThroughExtrasFromChosenLockInSuw);
         outState.putBoolean(SAVED_STATE_ENROLL_ACTION_LOGGED, mIsEnrollActionLogged);
         if (mParentalOptions != null) {
             outState.putBundle(SAVED_STATE_PARENTAL_OPTIONS, mParentalOptions);
@@ -342,6 +349,12 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (isSuccessfulChooseCredential(requestCode, resultCode)
+                && data != null && data.getExtras() != null && data.getExtras().size() > 0
+                && WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            mPassThroughExtrasFromChosenLockInSuw = data.getExtras();
+        }
 
         Log.d(TAG,
                 "onActivityResult(requestCode=" + requestCode + ", resultCode=" + resultCode + ")");
@@ -416,7 +429,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                     }
                 } else {
                     Log.d(TAG, "Unknown or cancelled parental consent");
-                    setResult(RESULT_CANCELED);
+                    setResult(RESULT_CANCELED, newResultIntent());
                     finish();
                 }
                 break;
@@ -452,7 +465,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                         launchFingerprintOnlyEnroll();
                     } else {
                         Log.d(TAG, "Unknown result for set/choose lock: " + resultCode);
-                        setResult(resultCode);
+                        setResult(resultCode, newResultIntent());
                         finish();
                     }
                     break;
@@ -480,25 +493,37 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 finish();
             }
         } else {
-            setResult(resultCode);
+            setResult(resultCode, newResultIntent());
             finish();
         }
     }
 
+    @NonNull
     private Intent newResultIntent() {
         final Intent intent = new Intent();
-        final Bundle consentStatus = mParentalOptions.deepCopy();
-        intent.putExtra(EXTRA_PARENTAL_CONSENT_STATUS, consentStatus);
-        Log.v(TAG, "Result consent status: " + consentStatus);
+        if (mParentalOptionsRequired && mParentalOptions != null) {
+            final Bundle consentStatus = mParentalOptions.deepCopy();
+            intent.putExtra(EXTRA_PARENTAL_CONSENT_STATUS, consentStatus);
+            Log.v(TAG, "Result consent status: " + consentStatus);
+        }
+        if (mPassThroughExtrasFromChosenLockInSuw != null) {
+            intent.putExtras(mPassThroughExtrasFromChosenLockInSuw);
+        }
         return intent;
     }
 
     private static boolean isSuccessfulConfirmOrChooseCredential(int requestCode, int resultCode) {
-        final boolean okChoose = requestCode == REQUEST_CHOOSE_LOCK
+        return isSuccessfulChooseCredential(requestCode, resultCode)
+                || isSuccessfulConfirmCredential(requestCode, resultCode);
+    }
+
+    private static boolean isSuccessfulChooseCredential(int requestCode, int resultCode) {
+        return requestCode == REQUEST_CHOOSE_LOCK
                 && resultCode == ChooseLockPattern.RESULT_FINISHED;
-        final boolean okConfirm = requestCode == REQUEST_CONFIRM_LOCK
-                && resultCode == RESULT_OK;
-        return okChoose || okConfirm;
+    }
+
+    private static boolean isSuccessfulConfirmCredential(int requestCode, int resultCode) {
+        return requestCode == REQUEST_CONFIRM_LOCK && resultCode == RESULT_OK;
     }
 
     @Override
