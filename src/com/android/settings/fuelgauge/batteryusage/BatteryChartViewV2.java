@@ -20,6 +20,7 @@ import static com.android.settings.Utils.formatPercentage;
 import static java.lang.Math.round;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.annotation.NonNull;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -29,8 +30,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.os.Handler;
-import android.text.format.DateFormat;
-import android.text.format.DateUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
@@ -46,7 +45,6 @@ import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
 
-import java.time.Clock;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -59,8 +57,8 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
             Arrays.asList("SwitchAccessService", "TalkBackService", "JustSpeakService");
 
     private static final int DEFAULT_TRAPEZOID_COUNT = 12;
-    private static final int DEFAULT_TIMESTAMP_COUNT = 4;
-    private static final int TIMESTAMP_GAPS_COUNT = DEFAULT_TIMESTAMP_COUNT - 1;
+    private static final int DEFAULT_AXIS_LABEL_COUNT = 4;
+    private static final int AXIS_LABEL_GAPS_COUNT = DEFAULT_AXIS_LABEL_COUNT - 1;
     private static final int DIVIDER_COLOR = Color.parseColor("#CDCCC5");
     private static final long UPDATE_STATE_DELAYED_TIME = 500L;
 
@@ -87,7 +85,7 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
     @VisibleForTesting
     int mSelectedIndex = SELECTED_INDEX_INVALID;
     @VisibleForTesting
-    String[] mTimestamps;
+    String[] mAxisLabels;
 
     // Colors for drawing the trapezoid shape and dividers.
     private int mTrapezoidColor;
@@ -98,8 +96,8 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
     private final Rect mIndent = new Rect();
     private final Rect[] mPercentageBounds =
             new Rect[]{new Rect(), new Rect(), new Rect()};
-    // For drawing the timestamp information.
-    private final Rect[] mTimestampsBounds =
+    // For drawing the axis label information.
+    private final Rect[] mAxisLabelsBounds =
             new Rect[]{new Rect(), new Rect(), new Rect(), new Rect()};
 
     @VisibleForTesting
@@ -131,7 +129,6 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
         setSelectedIndex(SELECTED_INDEX_ALL);
         setTrapezoidCount(DEFAULT_TRAPEZOID_COUNT);
         setClickable(false);
-        setLatestTimestamp(0);
     }
 
     /** Sets the total trapezoid count for drawing. */
@@ -199,24 +196,22 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
         requestLayout();
     }
 
-    /** Sets the latest timestamp for drawing into x-axis information. */
-    public void setLatestTimestamp(long latestTimestamp) {
-        if (latestTimestamp == 0) {
-            latestTimestamp = Clock.systemUTC().millis();
+    /**
+     * Sets the X-axis labels list for each level. This class will choose some labels among the
+     * input list to show.
+     *
+     * @param labels The length of this parameter should be the same as the length of
+     *               {@code levels}.
+     */
+    public void setAxisLabels(@NonNull String[] labels) {
+        if (mAxisLabels == null) {
+            mAxisLabels = new String[DEFAULT_AXIS_LABEL_COUNT];
         }
-        if (mTimestamps == null) {
-            mTimestamps = new String[DEFAULT_TIMESTAMP_COUNT];
-        }
-        final long timeSlotOffset =
-                DateUtils.HOUR_IN_MILLIS * (/*total 24 hours*/ 24 / TIMESTAMP_GAPS_COUNT);
-        final boolean is24HourFormat = DateFormat.is24HourFormat(getContext());
-        for (int index = 0; index < DEFAULT_TIMESTAMP_COUNT; index++) {
-            mTimestamps[index] =
-                    ConvertUtils.utcToLocalTimeHour(
-                            getContext(),
-                            latestTimestamp - (TIMESTAMP_GAPS_COUNT - index)
-                                    * timeSlotOffset,
-                            is24HourFormat);
+        // Current logic is always showing {@code AXIS_LABEL_GAPS_COUNT} labels.
+        // TODO: Support different count of labels for different levels sizes.
+        final int step = (labels.length - 1) / AXIS_LABEL_GAPS_COUNT;
+        for (int index = 0; index < DEFAULT_AXIS_LABEL_COUNT; index++) {
+            mAxisLabels[index] = labels[index * step];
         }
         requestLayout();
     }
@@ -235,13 +230,13 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
             mIndent.top = mPercentageBounds[0].height();
             mIndent.right = mPercentageBounds[0].width() + mTextPadding;
 
-            if (mTimestamps != null) {
+            if (mAxisLabels != null) {
                 int maxHeight = 0;
-                for (int index = 0; index < DEFAULT_TIMESTAMP_COUNT; index++) {
+                for (int index = 0; index < DEFAULT_AXIS_LABEL_COUNT; index++) {
                     mTextPaint.getTextBounds(
-                            mTimestamps[index], 0, mTimestamps[index].length(),
-                            mTimestampsBounds[index]);
-                    maxHeight = Math.max(maxHeight, mTimestampsBounds[index].height());
+                            mAxisLabels[index], 0, mAxisLabels[index].length(),
+                            mAxisLabelsBounds[index]);
+                    maxHeight = Math.max(maxHeight, mAxisLabelsBounds[index].height());
                 }
                 mIndent.bottom = maxHeight + round(mTextPadding * 1.5f);
             }
@@ -463,47 +458,50 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
             }
             startX = nextX;
         }
-        // Draws the timestamp slot information.
-        if (mTimestamps != null) {
-            final float[] xOffsets = new float[DEFAULT_TIMESTAMP_COUNT];
+        // Draws the axis label slot information.
+        if (mAxisLabels != null) {
+            final float[] xOffsets = new float[DEFAULT_AXIS_LABEL_COUNT];
             final float baselineX = mDividerWidth * .5f;
             final float offsetX = mDividerWidth + unitWidth;
-            final int slotBarOffset = (/*total 12 bars*/ 12) / TIMESTAMP_GAPS_COUNT;
-            for (int index = 0; index < DEFAULT_TIMESTAMP_COUNT; index++) {
+            // TODO: Support different count of labels for different levels sizes.
+            final int slotBarOffset = (/*total 12 bars*/ 12) / AXIS_LABEL_GAPS_COUNT;
+            for (int index = 0; index < DEFAULT_AXIS_LABEL_COUNT; index++) {
                 xOffsets[index] = baselineX + index * offsetX * slotBarOffset;
             }
-            drawTimestamp(canvas, xOffsets);
+            drawAxisLabel(canvas, xOffsets);
         }
     }
 
-    private void drawTimestamp(Canvas canvas, float[] xOffsets) {
-        // Draws the 1st timestamp info.
+    private void drawAxisLabel(Canvas canvas, float[] xOffsets) {
+        // Draws the 1st axis label info.
         canvas.drawText(
-                mTimestamps[0],
-                xOffsets[0] - mTimestampsBounds[0].left,
-                getTimestampY(0), mTextPaint);
-        final int latestIndex = DEFAULT_TIMESTAMP_COUNT - 1;
-        // Draws the last timestamp info.
+                mAxisLabels[0], xOffsets[0] - mAxisLabelsBounds[0].left, getAxisLabelY(0),
+                mTextPaint);
+        final int latestIndex = DEFAULT_AXIS_LABEL_COUNT - 1;
+        // Draws the last axis label info.
         canvas.drawText(
-                mTimestamps[latestIndex],
-                xOffsets[latestIndex] - mTimestampsBounds[latestIndex].width()
-                        - mTimestampsBounds[latestIndex].left,
-                getTimestampY(latestIndex), mTextPaint);
-        // Draws the rest of timestamp info since it is located in the center.
-        for (int index = 1; index <= DEFAULT_TIMESTAMP_COUNT - 2; index++) {
+                mAxisLabels[latestIndex],
+                xOffsets[latestIndex]
+                        - mAxisLabelsBounds[latestIndex].width()
+                        - mAxisLabelsBounds[latestIndex].left,
+                getAxisLabelY(latestIndex),
+                mTextPaint);
+        // Draws the rest of axis label info since it is located in the center.
+        for (int index = 1; index <= DEFAULT_AXIS_LABEL_COUNT - 2; index++) {
             canvas.drawText(
-                    mTimestamps[index],
+                    mAxisLabels[index],
                     xOffsets[index]
-                            - (mTimestampsBounds[index].width() - mTimestampsBounds[index].left)
+                            - (mAxisLabelsBounds[index].width() - mAxisLabelsBounds[index].left)
                             * .5f,
-                    getTimestampY(index), mTextPaint);
-
+                    getAxisLabelY(index),
+                    mTextPaint);
         }
     }
 
-    private int getTimestampY(int index) {
-        return getHeight() - mTimestampsBounds[index].height()
-                + (mTimestampsBounds[index].height() + mTimestampsBounds[index].top)
+    private int getAxisLabelY(int index) {
+        return getHeight()
+                - mAxisLabelsBounds[index].height()
+                + (mAxisLabelsBounds[index].height() + mAxisLabelsBounds[index].top)
                 + round(mTextPadding * 1.5f);
     }
 

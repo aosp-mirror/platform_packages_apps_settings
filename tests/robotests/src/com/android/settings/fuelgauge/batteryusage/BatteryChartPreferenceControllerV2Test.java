@@ -19,7 +19,6 @@ package com.android.settings.fuelgauge.batteryusage;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.anyLong;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -58,6 +57,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 @RunWith(RobolectricTestRunner.class)
 public final class BatteryChartPreferenceControllerV2Test {
@@ -94,6 +94,7 @@ public final class BatteryChartPreferenceControllerV2Test {
         MockitoAnnotations.initMocks(this);
         Locale.setDefault(new Locale("en_US"));
         org.robolectric.shadows.ShadowSettings.set24HourTimeFormat(false);
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
         mContext = spy(RuntimeEnvironment.application);
@@ -588,7 +589,7 @@ public final class BatteryChartPreferenceControllerV2Test {
         mBatteryChartPreferenceController.setTimestampLabel();
 
         verify(mBatteryChartPreferenceController.mBatteryChartView, never())
-                .setLatestTimestamp(anyLong());
+                .setAxisLabels(any());
     }
 
     @Test
@@ -601,7 +602,7 @@ public final class BatteryChartPreferenceControllerV2Test {
         mBatteryChartPreferenceController.setTimestampLabel();
 
         verify(mBatteryChartPreferenceController.mBatteryChartView)
-                .setLatestTimestamp(1619247636826L);
+                .setAxisLabels(new String[] {"4 pm", "12 am", "7 am"});
     }
 
     @Test
@@ -614,7 +615,7 @@ public final class BatteryChartPreferenceControllerV2Test {
         mBatteryChartPreferenceController.setTimestampLabel();
 
         verify(mBatteryChartPreferenceController.mBatteryChartView)
-                .setLatestTimestamp(anyLong());
+                .setAxisLabels(new String[] {"12 am"});
     }
 
     @Test
@@ -684,6 +685,7 @@ public final class BatteryChartPreferenceControllerV2Test {
 
     private void setUpBatteryHistoryKeys() {
         mBatteryChartPreferenceController.mBatteryHistoryKeys =
+                // "2021-04-23 16:53:06 UTC", "1970-01-01 00:00:00 UTC", "2021-04-23 07:00:36 UTC"
                 new long[]{1619196786769L, 0L, 1619247636826L};
         ConvertUtils.utcToLocalTimeHour(
                 mContext, /*timestamp=*/ 0, /*is24HourFormat=*/ false);
