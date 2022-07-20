@@ -183,7 +183,6 @@ public final class BatteryChartViewV2Test {
         for (int index = 0; index < levels.length; index++) {
             levels[index] = index + 1;
         }
-        mBatteryChartView.setTrapezoidCount(12);
         mBatteryChartView.setLevels(levels);
         mBatteryChartView.setClickableForce(true);
         when(mPowerUsageFeatureProvider.isChartGraphSlotsEnabled(mContext))
