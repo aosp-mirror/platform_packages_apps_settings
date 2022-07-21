@@ -347,6 +347,7 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
                 trapezoidIndex, mBatteryIndexedMap.size(), isForce));
 
         mTrapezoidIndex = trapezoidIndex;
+        mBatteryChartView.setSelectedIndex(mTrapezoidIndex);
         mHandler.post(() -> {
             final long start = System.currentTimeMillis();
             removeAndCacheAllPrefs();

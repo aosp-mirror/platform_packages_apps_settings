@@ -110,9 +110,11 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
 
     @VisibleForTesting
     Paint mTrapezoidCurvePaint = null;
-    private TrapezoidSlot[] mTrapezoidSlots;
+    @VisibleForTesting
+    TrapezoidSlot[] mTrapezoidSlots;
     // Records the location to calculate selected index.
-    private float mTouchUpEventX = Float.MIN_VALUE;
+    @VisibleForTesting
+    float mTouchUpEventX = Float.MIN_VALUE;
     private BatteryChartViewV2.OnSelectListener mOnSelectListener;
 
     public BatteryChartViewV2(Context context) {
@@ -161,10 +163,6 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
         if (mSelectedIndex != index) {
             mSelectedIndex = index;
             invalidate();
-            // Callbacks to the listener if we have.
-            if (mOnSelectListener != null) {
-                mOnSelectListener.onSelect(mSelectedIndex);
-            }
         }
     }
 
@@ -301,11 +299,9 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
                 || !isValidToDraw(trapezoidIndex)) {
             return;
         }
-        // Selects all if users click the same trapezoid item two times.
-        if (trapezoidIndex == mSelectedIndex) {
-            setSelectedIndex(SELECTED_INDEX_ALL);
-        } else {
-            setSelectedIndex(trapezoidIndex);
+        if (mOnSelectListener != null) {
+            mOnSelectListener.onSelect(
+                    trapezoidIndex == mSelectedIndex ? SELECTED_INDEX_ALL : trapezoidIndex);
         }
         view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK);
     }
@@ -614,7 +610,8 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
     }
 
     // A container class for each trapezoid left and right location.
-    private static final class TrapezoidSlot {
+    @VisibleForTesting
+    static final class TrapezoidSlot {
         public float mLeft;
         public float mRight;
 
