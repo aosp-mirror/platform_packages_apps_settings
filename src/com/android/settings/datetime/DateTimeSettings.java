@@ -19,6 +19,7 @@ package com.android.settings.datetime;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
+import android.app.timedetector.TimeDetectorHelper;
 import android.content.Context;
 import android.content.Intent;
 
@@ -104,7 +105,7 @@ public class DateTimeSettings extends DashboardFragment implements
         switch (id) {
             case DatePreferenceController.DIALOG_DATEPICKER:
                 return use(DatePreferenceController.class)
-                        .buildDatePicker(getActivity());
+                        .buildDatePicker(getActivity(), TimeDetectorHelper.INSTANCE);
             case TimePreferenceController.DIALOG_TIMEPICKER:
                 return use(TimePreferenceController.class)
                         .buildTimePicker(getActivity());
