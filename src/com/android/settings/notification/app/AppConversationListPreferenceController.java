@@ -49,7 +49,12 @@ public class AppConversationListPreferenceController extends NotificationPrefere
     protected PreferenceCategory mPreference;
 
     public AppConversationListPreferenceController(Context context, NotificationBackend backend) {
-        super(context, backend);
+        this(context, backend, KEY);
+    }
+
+    public AppConversationListPreferenceController(Context context, NotificationBackend backend,
+            String key) {
+        super(context, backend, key);
     }
 
     @Override
@@ -58,21 +63,24 @@ public class AppConversationListPreferenceController extends NotificationPrefere
     }
 
     @Override
-    public boolean isAvailable() {
+    public int getAvailabilityStatus() {
         if (mAppRow == null) {
-            return false;
+            return CONDITIONALLY_UNAVAILABLE;
         }
         if (mAppRow.banned) {
-            return false;
+            return CONDITIONALLY_UNAVAILABLE;
         }
         if (mChannel != null) {
             if (mBackend.onlyHasDefaultChannel(mAppRow.pkg, mAppRow.uid)
                     || NotificationChannel.DEFAULT_CHANNEL_ID.equals(mChannel.getId())) {
-                return false;
+                return CONDITIONALLY_UNAVAILABLE;
             }
         }
-        return mBackend.hasSentValidMsg(mAppRow.pkg, mAppRow.uid) || mBackend.isInInvalidMsgState(
-                mAppRow.pkg, mAppRow.uid);
+        if (mBackend.hasSentValidMsg(mAppRow.pkg, mAppRow.uid) || mBackend.isInInvalidMsgState(
+                mAppRow.pkg, mAppRow.uid)) {
+            return AVAILABLE;
+        }
+        return CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

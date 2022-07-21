@@ -31,7 +31,7 @@ public class InvalidConversationInfoPreferenceController extends NotificationPre
 
     public InvalidConversationInfoPreferenceController(Context context,
             NotificationBackend backend) {
-        super(context, backend);
+        super(context, backend, KEY);
     }
 
     @Override
@@ -40,17 +40,19 @@ public class InvalidConversationInfoPreferenceController extends NotificationPre
     }
 
     @Override
-    public boolean isAvailable() {
+    public int getAvailabilityStatus() {
         if (mAppRow == null) {
-            return false;
+            return CONDITIONALLY_UNAVAILABLE;
         }
         if (mAppRow.banned) {
-            return false;
+            return CONDITIONALLY_UNAVAILABLE;
         }
         if (mPreferenceFilter != null && !isIncludedInFilter()) {
-            return false;
+            return CONDITIONALLY_UNAVAILABLE;
         }
-        return mBackend.isInInvalidMsgState(mAppRow.pkg, mAppRow.uid);
+        return mBackend.isInInvalidMsgState(mAppRow.pkg, mAppRow.uid)
+                ? AVAILABLE
+                : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
