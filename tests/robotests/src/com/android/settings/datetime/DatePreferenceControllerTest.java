@@ -18,15 +18,19 @@ package com.android.settings.datetime;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.DatePickerDialog;
 import android.app.time.Capabilities;
 import android.app.time.TimeCapabilities;
 import android.app.time.TimeCapabilitiesAndConfig;
 import android.app.time.TimeConfiguration;
 import android.app.time.TimeManager;
 import android.app.timedetector.TimeDetector;
+import android.app.timedetector.TimeDetectorHelper;
 import android.content.Context;
 import android.os.UserHandle;
 
@@ -40,17 +44,20 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 @RunWith(RobolectricTestRunner.class)
 public class DatePreferenceControllerTest {
 
     @Mock
     private Context mContext;
     @Mock
-    private TimeDetector mTimeDetector;
+    private DatePreferenceController.DatePreferenceHost mHost;
     @Mock
     private TimeManager mTimeManager;
     @Mock
-    private DatePreferenceController.DatePreferenceHost mHost;
+    private TimeDetector mTimeDetector;
 
     private RestrictedPreference mPreference;
     private DatePreferenceController mController;
@@ -112,6 +119,26 @@ public class DatePreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
         // Should show date picker
         verify(mHost).showDatePicker();
+    }
+
+    @Test
+    public void testBuildDatePicker() {
+        TimeDetectorHelper timeDetectorHelper = mock(TimeDetectorHelper.class);
+        when(timeDetectorHelper.getManualDateSelectionYearMin()).thenReturn(2015);
+        when(timeDetectorHelper.getManualDateSelectionYearMax()).thenReturn(2020);
+
+        Context context = RuntimeEnvironment.application;
+        DatePickerDialog dialog = mController.buildDatePicker(context, timeDetectorHelper);
+
+        GregorianCalendar calendar = new GregorianCalendar();
+
+        long minDate = dialog.getDatePicker().getMinDate();
+        calendar.setTimeInMillis(minDate);
+        assertEquals(2015, calendar.get(Calendar.YEAR));
+
+        long maxDate = dialog.getDatePicker().getMaxDate();
+        calendar.setTimeInMillis(maxDate);
+        assertEquals(2020, calendar.get(Calendar.YEAR));
     }
 
     private static TimeCapabilitiesAndConfig createCapabilitiesAndConfig(
