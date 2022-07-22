@@ -203,6 +203,10 @@ public class FaceSettings extends DashboardFragment {
         if (savedInstanceState != null) {
             mToken = savedInstanceState.getByteArray(KEY_TOKEN);
         }
+
+        final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
+        mEnrollButton.setVisible(!hasEnrolled);
+        mRemoveButton.setVisible(hasEnrolled);
     }
 
     @Override
@@ -229,10 +233,6 @@ public class FaceSettings extends DashboardFragment {
             mAttentionController.setToken(mToken);
             mEnrollController.setToken(mToken);
         }
-
-        final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
-        mEnrollButton.setVisible(!hasEnrolled);
-        mRemoveButton.setVisible(hasEnrolled);
 
         if (!mFaceFeatureProvider.isAttentionSupported(getContext())) {
             removePreference(FaceSettingsAttentionPreferenceController.KEY);
@@ -261,6 +261,10 @@ public class FaceSettings extends DashboardFragment {
                     mEnrollController.setToken(mToken);
                     mConfirmingPassword = false;
                 });
+
+                final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
+                mEnrollButton.setVisible(!hasEnrolled);
+                mRemoveButton.setVisible(hasEnrolled);
             }
         } else if (requestCode == ENROLL_REQUEST) {
             if (resultCode == RESULT_TIMEOUT) {
