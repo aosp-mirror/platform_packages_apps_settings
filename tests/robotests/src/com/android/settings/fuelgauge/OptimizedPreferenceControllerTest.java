@@ -61,6 +61,18 @@ public class OptimizedPreferenceControllerTest {
     }
 
     @Test
+    public void testUpdateState_isSystemOrDefaultAppAndOptimizeStates_prefChecked() {
+        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
+                BatteryOptimizeUtils.MODE_OPTIMIZED);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isChecked()).isTrue();
+    }
+
+    @Test
     public void testUpdateState_isSystemOrDefaultApp_prefUnchecked() {
         when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
         when(mockBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
