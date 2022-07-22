@@ -1947,6 +1947,8 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Ezarri PIN bat"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Ezarri laneko PIN bat"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Ezarri eredu bat"</string>
+    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
+    <skip />
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Ezarri laneko eredu bat"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Hatz-marka erabiltzeko, ezarri pasahitza"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Hatz-marka erabiltzeko, ezarri eredu bat"</string>
@@ -2886,7 +2888,7 @@
     <string name="battery_desc_flashlight" msgid="6694895513133361404">"Linternak erabilitako bateria"</string>
     <string name="battery_desc_camera" msgid="6152712271731518018">"Kamerak erabilitako bateria"</string>
     <string name="battery_desc_display" msgid="7175017688954602685">"Pantailak eta hondoko argiak erabilitako bateria"</string>
-    <string name="battery_sugg_display" msgid="3102137296547788111">"Murriztu pantailaren distira edota pantailaren denbora-muga"</string>
+    <string name="battery_sugg_display" msgid="3102137296547788111">"Murriztu pantailaren distira eta/edo pantailaren denbora-muga"</string>
     <string name="battery_desc_wifi" msgid="5276669172548928768">"Wi-Fiak erabilitako energia"</string>
     <string name="battery_sugg_wifi" msgid="359757575108350109">"Desaktibatu Wi‑Fi konexioa erabiltzen ari ez denean edo erabilgarri ez dagoenean."</string>
     <string name="battery_desc_bluetooth" msgid="2237947137783306282">"Bluetooth bidezko konexioak erabilitako bateria"</string>
@@ -2936,8 +2938,7 @@
     <string name="battery_not_usage" msgid="1472275761547230196">"Erabilerarik ez bateria guztiz kargatu zenetik"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Erabilerarik ez azken 24 orduetan"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
-    <!-- no translation found for battery_usage_other_users (9002643295562500693) -->
-    <skip />
+    <string name="battery_usage_other_users" msgid="9002643295562500693">"Beste erabiltzaileak"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Gailuaren erabileran oinarritzen da gelditzen den bateriaren aurreikuspena"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Geratzen den denbora, gutxi gorabehera"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"guztiz kargatu arte"</string>
@@ -4009,7 +4010,7 @@
     <string name="notification_silence_title" msgid="4085829874452944989">"Isila"</string>
     <string name="notification_alert_title" msgid="1632401211722199217">"Lehenetsia"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Baimendu etenaldiak"</string>
-    <string name="allow_interruption_summary" msgid="9044131663518112543">"Utzi aplikazioari soinuak edo dardara egiten, edota pantailan jakinarazpenak erakusten"</string>
+    <string name="allow_interruption_summary" msgid="9044131663518112543">"Utzi aplikazioari soinuak edo dardara egiten, eta/edo pantailan jakinarazpenak erakusten"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Lehentasunezkoa"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Burbuila gisa agertzen da elkarrizketen atalaren goialdean, eta profileko argazkia bistaratzen du pantaila blokeatuta dagoenean"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> aplikazioak ez ditu onartzen elkarrizketetarako eginbide gehienak. Ezin dituzu ezarri elkarrizketak lehentasunezko gisa, eta ez dira agertuko burbuila gainerakor gisa elkarrizketen atalaren goialdean."</string>
@@ -4021,14 +4022,8 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"\"<xliff:g id="APP_NAME">%1$s</xliff:g>\" aplikazioaren jakinarazpen guztiak"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g> aplikazioaren jakinarazpen guztiak"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Jakinarazpen egokituak"</string>
-    <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other"><xliff:g id="NUMBER_1">%,d</xliff:g> jakinarazpen inguru eguneko</item>
-      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> jakinarazpen inguru eguneko</item>
-    </plurals>
-    <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other"><xliff:g id="NUMBER_1">%,d</xliff:g> jakinarazpen inguru asteko</item>
-      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> jakinarazpen inguru asteko</item>
-    </plurals>
+    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
+    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
     <string name="notifications_sent_never" msgid="9081278709126812062">"Inoiz ez"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Gailu eta aplikazioen jakinarazpenak"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Kontrolatu jakinarazpenak irakur ditzaketen aplikazioak eta gailuak"</string>
