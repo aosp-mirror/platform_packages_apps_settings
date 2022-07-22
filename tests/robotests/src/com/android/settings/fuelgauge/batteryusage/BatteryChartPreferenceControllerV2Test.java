@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -32,6 +33,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.text.format.DateUtils;
+import android.view.View;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -64,8 +66,6 @@ import java.util.TimeZone;
 public final class BatteryChartPreferenceControllerV2Test {
     private static final String PREF_KEY = "pref_key";
     private static final String PREF_SUMMARY = "fake preference summary";
-    private static final int DESIRED_HISTORY_SIZE =
-            BatteryChartPreferenceControllerV2.DESIRED_HISTORY_SIZE;
 
     @Mock
     private InstrumentedPreferenceFragment mFragment;
@@ -78,7 +78,9 @@ public final class BatteryChartPreferenceControllerV2Test {
     @Mock
     private BatteryHistEntry mBatteryHistEntry;
     @Mock
-    private BatteryChartViewV2 mBatteryChartView;
+    private BatteryChartViewV2 mDailyChartView;
+    @Mock
+    private BatteryChartViewV2 mHourlyChartView;
     @Mock
     private PowerGaugePreference mPowerGaugePreference;
     @Mock
@@ -111,7 +113,8 @@ public final class BatteryChartPreferenceControllerV2Test {
         mBatteryChartPreferenceController = createController();
         mBatteryChartPreferenceController.mPrefContext = mContext;
         mBatteryChartPreferenceController.mAppListPrefGroup = mAppListGroup;
-        mBatteryChartPreferenceController.mBatteryChartView = mBatteryChartView;
+        mBatteryChartPreferenceController.mDailyChartView = mDailyChartView;
+        mBatteryChartPreferenceController.mHourlyChartView = mHourlyChartView;
         mBatteryDiffEntry = new BatteryDiffEntry(
                 mContext,
                 /*foregroundUsageTimeInMs=*/ 1,
@@ -123,12 +126,10 @@ public final class BatteryChartPreferenceControllerV2Test {
         BatteryDiffEntry.sResourceCache.put(
                 "fakeBatteryDiffEntryKey",
                 new BatteryEntry.NameAndIcon("fakeName", /*icon=*/ null, /*iconId=*/ 1));
-        mBatteryChartPreferenceController.setBatteryHistoryMap(
-                createBatteryHistoryMap());
     }
 
     @Test
-    public void testOnDestroy_activityIsChanging_clearBatteryEntryCache() {
+    public void onDestroy_activityIsChanging_clearBatteryEntryCache() {
         doReturn(true).when(mSettingsActivity).isChangingConfigurations();
         // Ensures the testing environment is correct.
         assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
@@ -138,7 +139,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testOnDestroy_activityIsNotChanging_notClearBatteryEntryCache() {
+    public void onDestroy_activityIsNotChanging_notClearBatteryEntryCache() {
         doReturn(false).when(mSettingsActivity).isChangingConfigurations();
         // Ensures the testing environment is correct.
         assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
@@ -148,7 +149,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testOnDestroy_clearPreferenceCache() {
+    public void onDestroy_clearPreferenceCache() {
         // Ensures the testing environment is correct.
         mBatteryChartPreferenceController.mPreferenceCache.put(
                 PREF_KEY, mPowerGaugePreference);
@@ -160,81 +161,113 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testOnDestroy_removeAllPreferenceFromPreferenceGroup() {
+    public void onDestroy_removeAllPreferenceFromPreferenceGroup() {
         mBatteryChartPreferenceController.onDestroy();
         verify(mAppListGroup).removeAll();
     }
 
     @Test
-    public void testSetBatteryHistoryMap_createExpectedKeysAndLevels() {
-        mBatteryChartPreferenceController.setBatteryHistoryMap(
-                createBatteryHistoryMap());
+    public void setBatteryChartViewModel_6Hours() {
+        // TODO: Removes the following line after loading mBatteryIndexedMap is supported.
+        mBatteryChartPreferenceController.mBatteryIndexedMap = new HashMap<>();
 
-        // Verifies the created battery keys array.
-        for (int index = 0; index < DESIRED_HISTORY_SIZE; index++) {
-            assertThat(mBatteryChartPreferenceController.mBatteryHistoryKeys[index])
-                    // These values is are calculated by hand from createBatteryHistoryMap().
-                    .isEqualTo(generateTimestamp(index));
-        }
-        // Verifies the created battery levels array.
-        for (int index = 0; index < 13; index++) {
-            assertThat(mBatteryChartPreferenceController.mViewModel.levels().get(index))
-                    // These values is are calculated by hand from createBatteryHistoryMap().
-                    .isEqualTo(100 - index * 2);
-        }
-        assertThat(mBatteryChartPreferenceController.mBatteryIndexedMap).hasSize(13);
+        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
+
+        verify(mDailyChartView).setVisibility(View.GONE);
+        verify(mHourlyChartView).setVisibility(View.VISIBLE);
+        verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
+                List.of(100, 97, 95),
+                List.of("8 am", "10 am", "12 pm"),
+                BatteryChartViewModel.SELECTED_INDEX_ALL));
     }
 
     @Test
-    public void testSetBatteryHistoryMap_largeSize_createExpectedKeysAndLevels() {
-        mBatteryChartPreferenceController.setBatteryHistoryMap(
-                createBatteryHistoryMap());
+    public void setBatteryChartViewModel_60Hours() {
+        // TODO: Removes the following line after loading mBatteryIndexedMap is supported.
+        mBatteryChartPreferenceController.mBatteryIndexedMap = new HashMap<>();
 
-        // Verifies the created battery keys array.
-        for (int index = 0; index < DESIRED_HISTORY_SIZE; index++) {
-            assertThat(mBatteryChartPreferenceController.mBatteryHistoryKeys[index])
-                    // These values is are calculated by hand from createBatteryHistoryMap().
-                    .isEqualTo(generateTimestamp(index));
-        }
-        // Verifies the created battery levels array.
-        for (int index = 0; index < 13; index++) {
-            assertThat(mBatteryChartPreferenceController.mViewModel.levels().get(index))
-                    // These values is are calculated by hand from createBatteryHistoryMap().
-                    .isEqualTo(100 - index * 2);
-        }
-        assertThat(mBatteryChartPreferenceController.mBatteryIndexedMap).hasSize(13);
+        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(60));
+
+        verify(mDailyChartView).setVisibility(View.VISIBLE);
+        verify(mHourlyChartView).setVisibility(View.GONE);
+        verify(mDailyChartView).setViewModel(new BatteryChartViewModel(
+                List.of(100, 83, 59, 41),
+                List.of("SAT", "SUN", "MON", "MON"),
+                BatteryChartViewModel.SELECTED_INDEX_ALL));
+
+        reset(mDailyChartView);
+        reset(mHourlyChartView);
+        mBatteryChartPreferenceController.mDailyChartIndex = 0;
+        mBatteryChartPreferenceController.refreshUi();
+        verify(mDailyChartView).setVisibility(View.VISIBLE);
+        verify(mHourlyChartView).setVisibility(View.VISIBLE);
+        verify(mDailyChartView).setViewModel(new BatteryChartViewModel(
+                List.of(100, 83, 59, 41),
+                List.of("SAT", "SUN", "MON", "MON"),
+                0));
+        verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
+                List.of(100, 97, 95, 93, 91, 89, 87, 85, 83),
+                List.of("8 am", "10 am", "12 pm", "2 pm", "4 pm", "6 pm", "8 pm", "10 pm",
+                        "12 am"),
+                BatteryChartViewModel.SELECTED_INDEX_ALL));
+
+        reset(mDailyChartView);
+        reset(mHourlyChartView);
+        mBatteryChartPreferenceController.mDailyChartIndex = 1;
+        mBatteryChartPreferenceController.mHourlyChartIndex = 6;
+        mBatteryChartPreferenceController.refreshUi();
+        verify(mDailyChartView).setVisibility(View.VISIBLE);
+        verify(mHourlyChartView).setVisibility(View.VISIBLE);
+        verify(mDailyChartView).setViewModel(new BatteryChartViewModel(
+                List.of(100, 83, 59, 41),
+                List.of("SAT", "SUN", "MON", "MON"),
+                1));
+        verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
+                List.of(83, 81, 79, 77, 75, 73, 71, 69, 67, 65, 63, 61, 59),
+                List.of("12 am", "2 am", "4 am", "6 am", "8 am", "10 am", "12 pm", "2 pm",
+                        "4 pm", "6 pm", "8 pm", "10 pm", "12 am"),
+                6));
+
+        reset(mDailyChartView);
+        reset(mHourlyChartView);
+        mBatteryChartPreferenceController.mDailyChartIndex = 2;
+        mBatteryChartPreferenceController.mHourlyChartIndex =
+                BatteryChartViewModel.SELECTED_INDEX_ALL;
+        mBatteryChartPreferenceController.refreshUi();
+        verify(mDailyChartView).setVisibility(View.VISIBLE);
+        verify(mHourlyChartView).setVisibility(View.VISIBLE);
+        verify(mDailyChartView).setViewModel(new BatteryChartViewModel(
+                List.of(100, 83, 59, 41),
+                List.of("SAT", "SUN", "MON", "MON"),
+                2));
+        verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
+                List.of(59, 57, 55, 53, 51, 49, 47, 45, 43, 41),
+                List.of("12 am", "2 am", "4 am", "6 am", "8 am", "10 am", "12 pm", "2 pm",
+                        "4 pm", "6 pm"),
+                BatteryChartViewModel.SELECTED_INDEX_ALL));
     }
 
     @Test
-    public void testSetBatteryChartViewModel() {
-        verify(mBatteryChartPreferenceController.mBatteryChartView)
-                .setViewModel(new BatteryChartViewModel(
-                        List.of(100, 98, 96, 94, 92, 90, 88, 86, 84, 82, 80, 78, 76),
-                        List.of("7 am", "9 am", "11 am", "1 pm", "3 pm", "5 pm", "7 pm",
-                                "9 pm", "11 pm", "1 am", "3 am", "5 am", "7 am"),
-                        BatteryChartViewModel.SELECTED_INDEX_ALL));
-    }
-
-    @Test
-    public void testRefreshUi_refresh() {
-        assertThat(mBatteryChartPreferenceController.refreshUi()).isTrue();
-    }
-
-    @Test
-    public void testRefreshUi_batteryIndexedMapIsNull_ignoreRefresh() {
+    public void refreshUi_batteryIndexedMapIsNull_ignoreRefresh() {
         mBatteryChartPreferenceController.setBatteryHistoryMap(null);
         assertThat(mBatteryChartPreferenceController.refreshUi()).isFalse();
     }
 
     @Test
-    public void testRefreshUi_batteryChartViewIsNull_ignoreRefresh() {
-        mBatteryChartPreferenceController.mBatteryChartView = null;
+    public void refreshUi_dailyChartViewIsNull_ignoreRefresh() {
+        mBatteryChartPreferenceController.mDailyChartView = null;
         assertThat(mBatteryChartPreferenceController.refreshUi()).isFalse();
     }
 
     @Test
-    public void testRemoveAndCacheAllPrefs_emptyContent_ignoreRemoveAll() {
-        mBatteryChartPreferenceController.mTrapezoidIndex = 1;
+    public void refreshUi_hourlyChartViewIsNull_ignoreRefresh() {
+        mBatteryChartPreferenceController.mHourlyChartView = null;
+        assertThat(mBatteryChartPreferenceController.refreshUi()).isFalse();
+    }
+
+    @Test
+    public void removeAndCacheAllPrefs_emptyContent_ignoreRemoveAll() {
+        mBatteryChartPreferenceController.mHourlyChartIndex = 1;
         doReturn(0).when(mAppListGroup).getPreferenceCount();
 
         mBatteryChartPreferenceController.refreshUi();
@@ -242,30 +275,14 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testRemoveAndCacheAllPrefs_buildCacheAndRemoveAllPreference() {
-        mBatteryChartPreferenceController.mTrapezoidIndex = 1;
-        doReturn(1).when(mAppListGroup).getPreferenceCount();
-        doReturn(mPowerGaugePreference).when(mAppListGroup).getPreference(0);
-        doReturn(PREF_KEY).when(mPowerGaugePreference).getKey();
-        // Ensures the testing data is correct.
-        assertThat(mBatteryChartPreferenceController.mPreferenceCache).isEmpty();
-
-        mBatteryChartPreferenceController.refreshUi();
-
-        assertThat(mBatteryChartPreferenceController.mPreferenceCache.get(PREF_KEY))
-                .isEqualTo(mPowerGaugePreference);
-        verify(mAppListGroup).removeAll();
-    }
-
-    @Test
-    public void testAddPreferenceToScreen_emptyContent_ignoreAddPreference() {
+    public void addPreferenceToScreen_emptyContent_ignoreAddPreference() {
         mBatteryChartPreferenceController.addPreferenceToScreen(
                 new ArrayList<BatteryDiffEntry>());
         verify(mAppListGroup, never()).addPreference(any());
     }
 
     @Test
-    public void testAddPreferenceToScreen_addPreferenceIntoScreen() {
+    public void addPreferenceToScreen_addPreferenceIntoScreen() {
         final String appLabel = "fake app label";
         doReturn(1).when(mAppListGroup).getPreferenceCount();
         doReturn(mDrawable).when(mBatteryDiffEntry).getAppIcon();
@@ -294,7 +311,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testAddPreferenceToScreen_alreadyInScreen_notAddPreferenceAgain() {
+    public void addPreferenceToScreen_alreadyInScreen_notAddPreferenceAgain() {
         final String appLabel = "fake app label";
         doReturn(1).when(mAppListGroup).getPreferenceCount();
         doReturn(mDrawable).when(mBatteryDiffEntry).getAppIcon();
@@ -309,7 +326,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testHandlePreferenceTreeiClick_notPowerGaugePreference_returnFalse() {
+    public void handlePreferenceTreeiClick_notPowerGaugePreference_returnFalse() {
         assertThat(mBatteryChartPreferenceController.handlePreferenceTreeClick(mAppListGroup))
                 .isFalse();
 
@@ -320,7 +337,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testHandlePreferenceTreeClick_forAppEntry_returnTrue() {
+    public void handlePreferenceTreeClick_forAppEntry_returnTrue() {
         doReturn(false).when(mBatteryHistEntry).isAppEntry();
         doReturn(mBatteryDiffEntry).when(mPowerGaugePreference).getBatteryDiffEntry();
 
@@ -336,7 +353,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testHandlePreferenceTreeClick_forSystemEntry_returnTrue() {
+    public void handlePreferenceTreeClick_forSystemEntry_returnTrue() {
         mBatteryChartPreferenceController.mBatteryUtils = mBatteryUtils;
         doReturn(true).when(mBatteryHistEntry).isAppEntry();
         doReturn(mBatteryDiffEntry).when(mPowerGaugePreference).getBatteryDiffEntry();
@@ -353,7 +370,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testSetPreferenceSummary_setNullContentIfTotalUsageTimeIsZero() {
+    public void setPreferenceSummary_setNullContentIfTotalUsageTimeIsZero() {
         final PowerGaugePreference pref = new PowerGaugePreference(mContext);
         pref.setSummary(PREF_SUMMARY);
 
@@ -365,7 +382,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testSetPreferenceSummary_setBackgroundUsageTimeOnly() {
+    public void setPreferenceSummary_setBackgroundUsageTimeOnly() {
         final PowerGaugePreference pref = new PowerGaugePreference(mContext);
         pref.setSummary(PREF_SUMMARY);
 
@@ -377,7 +394,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testSetPreferenceSummary_setTotalUsageTimeLessThanAMinute() {
+    public void setPreferenceSummary_setTotalUsageTimeLessThanAMinute() {
         final PowerGaugePreference pref = new PowerGaugePreference(mContext);
         pref.setSummary(PREF_SUMMARY);
 
@@ -389,7 +406,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testSetPreferenceSummary_setTotalTimeIfBackgroundTimeLessThanAMinute() {
+    public void setPreferenceSummary_setTotalTimeIfBackgroundTimeLessThanAMinute() {
         final PowerGaugePreference pref = new PowerGaugePreference(mContext);
         pref.setSummary(PREF_SUMMARY);
 
@@ -402,7 +419,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testSetPreferenceSummary_setTotalAndBackgroundUsageTime() {
+    public void setPreferenceSummary_setTotalAndBackgroundUsageTime() {
         final PowerGaugePreference pref = new PowerGaugePreference(mContext);
         pref.setSummary(PREF_SUMMARY);
 
@@ -414,7 +431,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testSetPreferenceSummary_notAllowShownPackage_setSummayAsNull() {
+    public void setPreferenceSummary_notAllowShownPackage_setSummayAsNull() {
         final PowerGaugePreference pref = new PowerGaugePreference(mContext);
         pref.setSummary(PREF_SUMMARY);
         final BatteryDiffEntry batteryDiffEntry =
@@ -429,7 +446,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testValidateUsageTime_returnTrueIfBatteryDiffEntryIsValid() {
+    public void validateUsageTime_returnTrueIfBatteryDiffEntryIsValid() {
         assertThat(BatteryChartPreferenceControllerV2.validateUsageTime(
                 createBatteryDiffEntry(
                         /*foregroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS,
@@ -438,7 +455,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testValidateUsageTime_foregroundTimeExceedThreshold_returnFalse() {
+    public void validateUsageTime_foregroundTimeExceedThreshold_returnFalse() {
         assertThat(BatteryChartPreferenceControllerV2.validateUsageTime(
                 createBatteryDiffEntry(
                         /*foregroundUsageTimeInMs=*/ DateUtils.HOUR_IN_MILLIS * 3,
@@ -447,7 +464,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testValidateUsageTime_backgroundTimeExceedThreshold_returnFalse() {
+    public void validateUsageTime_backgroundTimeExceedThreshold_returnFalse() {
         assertThat(BatteryChartPreferenceControllerV2.validateUsageTime(
                 createBatteryDiffEntry(
                         /*foregroundUsageTimeInMs=*/ 0,
@@ -456,7 +473,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testOnExpand_expandedIsTrue_addSystemEntriesToPreferenceGroup() {
+    public void onExpand_expandedIsTrue_addSystemEntriesToPreferenceGroup() {
         doReturn(1).when(mAppListGroup).getPreferenceCount();
         mBatteryChartPreferenceController.mSystemEntries.add(mBatteryDiffEntry);
         doReturn("label").when(mBatteryDiffEntry).getAppLabel();
@@ -477,7 +494,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testOnExpand_expandedIsFalse_removeSystemEntriesFromPreferenceGroup() {
+    public void onExpand_expandedIsFalse_removeSystemEntriesFromPreferenceGroup() {
         doReturn(PREF_KEY).when(mBatteryHistEntry).getKey();
         doReturn(mPowerGaugePreference).when(mAppListGroup).findPreference(PREF_KEY);
         mBatteryChartPreferenceController.mSystemEntries.add(mBatteryDiffEntry);
@@ -497,56 +514,14 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testOnSelect_selectSpecificTimeSlot_logMetric() {
-        mBatteryChartPreferenceController.onSelect(1 /*slot index*/);
-
-        verify(mMetricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_TIME_SLOT);
-    }
-
-    @Test
-    public void testOnSelect_selectAll_logMetric() {
-        mBatteryChartPreferenceController.onSelect(
-                BatteryChartViewModel.SELECTED_INDEX_ALL /*slot index*/);
-
-        verify(mMetricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SHOW_ALL);
-    }
-
-    @Test
-    public void testRefreshCategoryTitle_setHourIntoBothTitleTextView() {
-        mBatteryChartPreferenceController = createController();
-        setUpBatteryHistoryKeys();
-        mBatteryChartPreferenceController.mAppListPrefGroup =
-                spy(new PreferenceCategory(mContext));
-        mBatteryChartPreferenceController.mExpandDividerPreference =
-                spy(new ExpandDividerPreference(mContext));
-        // Simulates select the first slot.
-        mBatteryChartPreferenceController.mTrapezoidIndex = 0;
-
-        mBatteryChartPreferenceController.refreshCategoryTitle();
-
-        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        // Verifies the title in the preference group.
-        verify(mBatteryChartPreferenceController.mAppListPrefGroup)
-                .setTitle(captor.capture());
-        assertThat(captor.getValue()).isNotEqualTo("App usage for past 24 hr");
-        // Verifies the title in the expandable divider.
-        captor = ArgumentCaptor.forClass(String.class);
-        verify(mBatteryChartPreferenceController.mExpandDividerPreference)
-                .setTitle(captor.capture());
-        assertThat(captor.getValue()).isNotEqualTo("System usage for past 24 hr");
-    }
-
-    @Test
-    public void testRefreshCategoryTitle_setLast24HrIntoBothTitleTextView() {
+    public void refreshCategoryTitle_setLast24HrIntoBothTitleTextView() {
         mBatteryChartPreferenceController = createController();
         mBatteryChartPreferenceController.mAppListPrefGroup =
                 spy(new PreferenceCategory(mContext));
         mBatteryChartPreferenceController.mExpandDividerPreference =
                 spy(new ExpandDividerPreference(mContext));
         // Simulates select all condition.
-        mBatteryChartPreferenceController.mTrapezoidIndex =
+        mBatteryChartPreferenceController.mHourlyChartIndex =
                 BatteryChartViewModel.SELECTED_INDEX_ALL;
 
         mBatteryChartPreferenceController.refreshCategoryTitle();
@@ -566,28 +541,27 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testOnSaveInstanceState_restoreSelectedIndexAndExpandState() {
+    public void onSaveInstanceState_restoreSelectedIndexAndExpandState() {
         final int expectedIndex = 1;
         final boolean isExpanded = true;
         final Bundle bundle = new Bundle();
-        mBatteryChartPreferenceController.mTrapezoidIndex = expectedIndex;
+        mBatteryChartPreferenceController.mHourlyChartIndex = expectedIndex;
         mBatteryChartPreferenceController.mIsExpanded = isExpanded;
         mBatteryChartPreferenceController.onSaveInstanceState(bundle);
         // Replaces the original controller with other values.
-        mBatteryChartPreferenceController.mTrapezoidIndex = -1;
+        mBatteryChartPreferenceController.mHourlyChartIndex = -1;
         mBatteryChartPreferenceController.mIsExpanded = false;
 
         mBatteryChartPreferenceController.onCreate(bundle);
-        mBatteryChartPreferenceController.setBatteryHistoryMap(
-                createBatteryHistoryMap());
+        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(25));
 
-        assertThat(mBatteryChartPreferenceController.mTrapezoidIndex)
+        assertThat(mBatteryChartPreferenceController.mHourlyChartIndex)
                 .isEqualTo(expectedIndex);
         assertThat(mBatteryChartPreferenceController.mIsExpanded).isTrue();
     }
 
     @Test
-    public void testIsValidToShowSummary_returnExpectedResult() {
+    public void isValidToShowSummary_returnExpectedResult() {
         assertThat(mBatteryChartPreferenceController
                 .isValidToShowSummary("com.google.android.apps.scone"))
                 .isTrue();
@@ -599,7 +573,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void testIsValidToShowEntry_returnExpectedResult() {
+    public void isValidToShowEntry_returnExpectedResult() {
         assertThat(mBatteryChartPreferenceController
                 .isValidToShowEntry("com.google.android.apps.scone"))
                 .isTrue();
@@ -615,9 +589,10 @@ public final class BatteryChartPreferenceControllerV2Test {
         return 1619247600000L + index * DateUtils.HOUR_IN_MILLIS;
     }
 
-    private static Map<Long, Map<String, BatteryHistEntry>> createBatteryHistoryMap() {
+    private static Map<Long, Map<String, BatteryHistEntry>> createBatteryHistoryMap(
+            int numOfHours) {
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
-        for (int index = 0; index < DESIRED_HISTORY_SIZE; index++) {
+        for (int index = 0; index < numOfHours; index++) {
             final ContentValues values = new ContentValues();
             values.put("batteryLevel", Integer.valueOf(100 - index));
             final BatteryHistEntry entry = new BatteryHistEntry(values);
@@ -633,14 +608,6 @@ public final class BatteryChartPreferenceControllerV2Test {
         return new BatteryDiffEntry(
                 mContext, foregroundUsageTimeInMs, backgroundUsageTimeInMs,
                 /*consumePower=*/ 0, mBatteryHistEntry);
-    }
-
-    private void setUpBatteryHistoryKeys() {
-        mBatteryChartPreferenceController.mBatteryHistoryKeys =
-                // "2021-04-23 16:53:06 UTC", "1970-01-01 00:00:00 UTC", "2021-04-23 07:00:36 UTC"
-                new long[]{1619196786769L, 0L, 1619247636826L};
-        ConvertUtils.utcToLocalTimeHour(
-                mContext, /*timestamp=*/ 0, /*is24HourFormat=*/ false);
     }
 
     private BatteryChartPreferenceControllerV2 createController() {
