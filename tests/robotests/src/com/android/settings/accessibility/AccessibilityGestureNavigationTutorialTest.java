@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityGestureNavigationTutorial.createAccessibilityTutorialDialog;
 import static com.android.settings.accessibility.AccessibilityGestureNavigationTutorial.createShortcutTutorialPages;
+import static com.android.settings.accessibility.AccessibilityGestureNavigationTutorial.showGestureNavigationTutorialDialog;
 import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -55,10 +56,10 @@ public final class AccessibilityGestureNavigationTutorialTest {
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
-
     @Mock
-    private DialogInterface.OnClickListener mMockOnClickListener;
-
+    private DialogInterface.OnClickListener mOnClickListener;
+    @Mock
+    private DialogInterface.OnDismissListener mOnDismissListener;
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private int mShortcutTypes;
 
@@ -126,12 +127,12 @@ public final class AccessibilityGestureNavigationTutorialTest {
     public void performClickOnPositiveButton_turnOnSoftwareShortcut_callOnClickListener() {
         mShortcutTypes |= UserShortcutType.SOFTWARE;
         final AlertDialog alertDialog =
-                createAccessibilityTutorialDialog(mContext, mShortcutTypes, mMockOnClickListener);
+                createAccessibilityTutorialDialog(mContext, mShortcutTypes, mOnClickListener);
         alertDialog.show();
 
         alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
 
-        verify(mMockOnClickListener).onClick(alertDialog, DialogInterface.BUTTON_POSITIVE);
+        verify(mOnClickListener).onClick(alertDialog, DialogInterface.BUTTON_POSITIVE);
     }
 
     @Test
@@ -139,7 +140,7 @@ public final class AccessibilityGestureNavigationTutorialTest {
         mShortcutTypes |= UserShortcutType.SOFTWARE;
         Activity activity = Robolectric.buildActivity(Activity.class).create().get();
         final AlertDialog alertDialog =
-                createAccessibilityTutorialDialog(activity, mShortcutTypes, mMockOnClickListener);
+                createAccessibilityTutorialDialog(activity, mShortcutTypes, mOnClickListener);
         alertDialog.show();
 
         alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).performClick();
@@ -150,5 +151,16 @@ public final class AccessibilityGestureNavigationTutorialTest {
                 .isEqualTo(AccessibilityButtonFragment.class.getName());
         assertThat(intent.getIntExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY, -1))
                 .isEqualTo(SettingsEnums.SWITCH_SHORTCUT_DIALOG_ACCESSIBILITY_BUTTON_SETTINGS);
+    }
+
+    @Test
+    public void performClickOnPositiveButton_turnOnGestureShortcut_callOnDismissListener() {
+        final AlertDialog alertDialog =
+                showGestureNavigationTutorialDialog(mContext, mOnDismissListener);
+
+        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
+
+        assertThat(alertDialog.isShowing()).isFalse();
+        verify(mOnDismissListener).onDismiss(alertDialog);
     }
 }
