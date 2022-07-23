@@ -353,7 +353,7 @@
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_message_accessibility" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"시작"</string>
-    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"접근성 얼굴 인식 잠금 해제가 사용 중지되면 음성 안내 지원 사용 시 일부 설정 단계가 제대로 작동하지 않을 수 있습니다."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"접근성 얼굴 인식 잠금 해제가 사용 중지되면 TalkBack 사용 시 일부 설정 단계가 제대로 작동하지 않을 수 있습니다."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"뒤로"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"설정 계속"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"접근성 설정 사용"</string>
@@ -1949,6 +1949,8 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"PIN 설정"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"직장 PIN 설정"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"패턴 설정"</string>
+    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
+    <skip />
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"직장 패턴 설정"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"비밀번호 설정 후 지문 사용"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"지문 사용을 위한 패턴 설정"</string>
@@ -2314,7 +2316,7 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"다운로드한 앱"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"실험"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"기능 플래그"</string>
-    <string name="talkback_title" msgid="8756080454514251327">"음성 안내 지원"</string>
+    <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"주로 시각 장애가 있는 사용자를 위한 스크린 리더"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"화면에서 항목을 탭하여 읽는 소리 듣기"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"자막 환경설정"</string>
@@ -2938,8 +2940,7 @@
     <string name="battery_not_usage" msgid="1472275761547230196">"마지막으로 완전히 충전한 이후 사용 안 함"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"지난 24시간 동안 사용 안 함"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
-    <!-- no translation found for battery_usage_other_users (9002643295562500693) -->
-    <skip />
+    <string name="battery_usage_other_users" msgid="9002643295562500693">"다른 사용자"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"예상 잔여 배터리 소모 시간은 기기 사용량을 기반으로 표시됩니다."</string>
     <string name="estimated_time_left" msgid="948717045180211777">"남은 예상 시간"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"충전 완료까지 남은 시간"</string>
@@ -3942,7 +3943,7 @@
     <string name="notification_pulse_title" msgid="8013178454646671529">"표시등 깜박임"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"개인 정보 보호"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"잠금 화면 건너뛰기"</string>
-    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"잠금 해제 후 최근 사용한 화면으로 바로 이동"</string>
+    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"잠금 해제 후 최근 사용한 화면으로 바로 이동합니다."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"잠금 화면, 잠금화면, 건너뛰기, 우회"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"직장 프로필이 잠긴 경우"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"잠금 화면에 표시할 알림"</string>
@@ -4023,14 +4024,8 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"모든 ‘<xliff:g id="APP_NAME">%1$s</xliff:g>’ 알림"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"모든 <xliff:g id="APP_NAME">%1$s</xliff:g> 알림"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"적응형 알림"</string>
-    <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">하루에 약 <xliff:g id="NUMBER_1">%,d</xliff:g>개</item>
-      <item quantity="one">하루에 약 <xliff:g id="NUMBER_0">%d</xliff:g>개</item>
-    </plurals>
-    <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">1주일에 약 <xliff:g id="NUMBER_1">%,d</xliff:g>개</item>
-      <item quantity="one">1주일에 약 <xliff:g id="NUMBER_0">%d</xliff:g>개</item>
-    </plurals>
+    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
+    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
     <string name="notifications_sent_never" msgid="9081278709126812062">"전송하지 않음"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"기기 및 앱 알림"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"알림을 읽을 수 있는 앱과 기기 제어"</string>
