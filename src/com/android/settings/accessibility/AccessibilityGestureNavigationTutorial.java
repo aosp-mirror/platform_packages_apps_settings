@@ -24,7 +24,6 @@ import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutT
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -43,7 +42,6 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 
 import androidx.annotation.AnimRes;
-import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
@@ -51,7 +49,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
 import androidx.core.util.Preconditions;
 import androidx.core.widget.TextViewCompat;
 import androidx.viewpager.widget.PagerAdapter;
@@ -110,17 +107,6 @@ public final class AccessibilityGestureNavigationTutorial {
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
-    }
-
-    static AlertDialog showAccessibilityButtonTutorialDialog(Context context) {
-        final AlertDialog alertDialog = createDialog(context,
-                DialogType.LAUNCH_SERVICE_BY_ACCESSIBILITY_BUTTON);
-
-        if (!AccessibilityUtil.isGestureNavigateEnabled(context)) {
-            updateMessageWithIcon(context, alertDialog);
-        }
-
-        return alertDialog;
     }
 
     static AlertDialog showAccessibilityGestureTutorialDialog(Context context) {
@@ -216,50 +202,6 @@ public final class AccessibilityGestureNavigationTutorial {
         alertDialog.show();
 
         return alertDialog;
-    }
-
-    private static void updateMessageWithIcon(Context context, AlertDialog alertDialog) {
-        final TextView gestureTutorialMessage = alertDialog.findViewById(
-                R.id.button_tutorial_message);
-
-        // Get the textView line height to update [icon] size. Must be called after show()
-        final int lineHeight = gestureTutorialMessage.getLineHeight();
-        gestureTutorialMessage.setText(getMessageStringWithIcon(context, lineHeight));
-    }
-
-    private static SpannableString getMessageStringWithIcon(Context context, int lineHeight) {
-        final String messageString = context
-                .getString(R.string.accessibility_tutorial_dialog_message_button);
-        final SpannableString spannableMessage = SpannableString.valueOf(messageString);
-
-        // Icon
-        final int indexIconStart = messageString.indexOf("%s");
-        final int indexIconEnd = indexIconStart + 2;
-        final Drawable icon = context.getDrawable(R.drawable.ic_accessibility_new);
-        final ImageSpan imageSpan = new ImageSpan(icon);
-        imageSpan.setContentDescription("");
-        icon.setBounds(0, 0, lineHeight, lineHeight);
-        spannableMessage.setSpan(
-                imageSpan, indexIconStart, indexIconEnd,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        return spannableMessage;
-    }
-
-    /** Returns the color associated with the specified attribute in the context's theme. */
-    @ColorInt
-    private static int getThemeAttrColor(final Context context, final int attributeColor) {
-        final int colorResId = getAttrResourceId(context, attributeColor);
-        return ContextCompat.getColor(context, colorResId);
-    }
-
-    /** Returns the identifier of the resolved resource assigned to the given attribute. */
-    private static int getAttrResourceId(final Context context, final int attributeColor) {
-        final int[] attrs = {attributeColor};
-        final TypedArray typedArray = context.obtainStyledAttributes(attrs);
-        final int colorResId = typedArray.getResourceId(0, 0);
-        typedArray.recycle();
-        return colorResId;
     }
 
     private static class TutorialPagerAdapter extends PagerAdapter {

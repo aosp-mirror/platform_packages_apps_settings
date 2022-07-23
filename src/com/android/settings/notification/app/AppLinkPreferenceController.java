@@ -32,7 +32,7 @@ public class AppLinkPreferenceController extends NotificationPreferenceControlle
     private static final String KEY_APP_LINK = "app_link";
 
     public AppLinkPreferenceController(Context context) {
-        super(context, null);
+        super(context, null, KEY_APP_LINK);
     }
 
     @Override
@@ -41,11 +41,11 @@ public class AppLinkPreferenceController extends NotificationPreferenceControlle
     }
 
     @Override
-    public boolean isAvailable() {
-        if (!super.isAvailable()) {
-            return false;
+    public int getAvailabilityStatus() {
+        if (super.getAvailabilityStatus() == CONDITIONALLY_UNAVAILABLE) {
+            return CONDITIONALLY_UNAVAILABLE;
         }
-        return mAppRow.settingsIntent != null;
+        return mAppRow.settingsIntent != null ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
