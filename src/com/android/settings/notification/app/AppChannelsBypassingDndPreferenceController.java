@@ -64,7 +64,7 @@ public class AppChannelsBypassingDndPreferenceController extends NotificationPre
     public AppChannelsBypassingDndPreferenceController(
             Context context,
             NotificationBackend backend) {
-        super(context, backend);
+        super(context, backend, KEY);
     }
 
     @Override
@@ -110,8 +110,8 @@ public class AppChannelsBypassingDndPreferenceController extends NotificationPre
     }
 
     @Override
-    public boolean isAvailable() {
-        return mAppRow != null;
+    public int getAvailabilityStatus() {
+        return mAppRow != null ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
