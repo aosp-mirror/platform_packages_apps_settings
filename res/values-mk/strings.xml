@@ -416,7 +416,7 @@
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"За да го отклучите телефонот, очите мора да ви бидат отворени"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Секогаш барај потврда"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"При користење „Отклучување со лик“ во апликации, секогаш барај потврда"</string>
-    <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Избриши го моделот на лице"</string>
+    <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Избриши го моделот на лик"</string>
     <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Поставете „Отклучување со лик“"</string>
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Користете го вашето лице за да го отклучувате телефонот или за проверка во апликации, како на пр., кога се најавувате или одобрувате купување.\n\nИмајте предвид:\nможе да имате поставено само еден лик. За да додадете друг лик, избришете го моменталниот.\n\nПоглед кон телефонот може да го отклучи и кога немате таква намера.\n\nНекој друг може да го отклучи вашиот телефон ако го подигне до вашиот лик.\n\nТелефонот може да го отклучи некој што многу наликува на вас, на пример, идентичен близнак."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Користете го вашето лице за да го отклучувате телефонот или за проверка во апликации, како на пр., кога се најавувате или одобрувате купување.\n\nИмајте предвид:\nможе да имате поставено само еден лик. За да додадете друг лик, избришете го моменталниот.\n\nПоглед кон телефонот може да го отклучи и кога немате таква намера.\n\nНекој друг може да го отклучи вашиот телефон ако го подигне до вашиот лик, дури и ако очите ви се затворени.\n\nТелефонот може да го отклучи некој што многу наликува на вас, на пример, идентичен близнак."</string>
@@ -1949,6 +1949,8 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Поставете PIN"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Поставете PIN за работен профил"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Поставете шема"</string>
+    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
+    <skip />
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Поставете шема за работен профил"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"За отпечаток, поставете лозинка"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"За отпечаток, поставете шема"</string>
@@ -1978,7 +1980,7 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Ја заборавивте лозинката?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Ја заборавивте шемата?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Го заборавивте PIN-кодот?"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Користете ја шемата на уредот за да продолжите"</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Внесете ја шемата на уредот за да продолжите"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Внесете го PIN-кодот на уредот за да продолжите"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Внесете ја лозинката на уредот за да продолжите"</string>
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"Користете ја шемата на работниот профил за да продолжите"</string>
@@ -2938,8 +2940,7 @@
     <string name="battery_not_usage" msgid="1472275761547230196">"Не е користена од последното целосно полнење"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Не е користена во минатите 24 часа"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
-    <!-- no translation found for battery_usage_other_users (9002643295562500693) -->
-    <skip />
+    <string name="battery_usage_other_users" msgid="9002643295562500693">"Други корисници"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Проценката за преостанатата батерија се базира врз користењето на уредот"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Проценето преостанато време"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"До целосно полнење"</string>
@@ -4023,14 +4024,8 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"Сите известувања од „<xliff:g id="APP_NAME">%1$s</xliff:g>“"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Сите известувања од <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Адаптивни известувања"</string>
-    <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="one">околу <xliff:g id="NUMBER_1">%,d</xliff:g> известување дневно</item>
-      <item quantity="other">околу <xliff:g id="NUMBER_1">%,d</xliff:g> известувања дневно</item>
-    </plurals>
-    <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="one">околу <xliff:g id="NUMBER_1">%,d</xliff:g> известување неделно</item>
-      <item quantity="other">околу <xliff:g id="NUMBER_1">%,d</xliff:g> известувања неделно</item>
-    </plurals>
+    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
+    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
     <string name="notifications_sent_never" msgid="9081278709126812062">"Никогаш"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Известувања во уреди и апликации"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Контролирајте кои апликации и уреди може да ги читаат известувањата"</string>
