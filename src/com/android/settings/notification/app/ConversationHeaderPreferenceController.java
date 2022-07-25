@@ -45,7 +45,7 @@ public class ConversationHeaderPreferenceController extends NotificationPreferen
     private boolean mStarted = false;
 
     public ConversationHeaderPreferenceController(Context context, DashboardFragment fragment) {
-        super(context, null, PREF_KEY_APP_HEADER);
+        super(context, null);
         mFragment = fragment;
     }
 
@@ -55,8 +55,8 @@ public class ConversationHeaderPreferenceController extends NotificationPreferen
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return mAppRow != null ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+    public boolean isAvailable() {
+        return mAppRow != null;
     }
 
     @Override
