@@ -41,7 +41,6 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Slog;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -130,52 +129,15 @@ abstract public class NotificationSettings extends DashboardFragment {
             }
         }
 
-        mUserId = UserHandle.getUserId(mUid);
         mPkgInfo = findPackageInfo(mPkg, mUid);
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (mIntent == null && mArgs == null) {
-            toastAndFinish("no intent");
-            return;
-        }
-
-        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null) {
-            toastAndFinish("Missing package or uid or packageinfo");
-            return;
-        }
-
-        startListeningToPackageRemove();
-    }
-
-    @Override
-    public void onDestroy() {
-        stopListeningToPackageRemove();
-        super.onDestroy();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null) {
-            toastAndFinish("Missing package or uid or packageinfo");
-            return;
-        }
-        mPkgInfo = findPackageInfo(mPkg, mUid);
         if (mPkgInfo != null) {
+            mUserId = UserHandle.getUserId(mUid);
             mSuspendedAppsAdmin = RestrictedLockUtilsInternal.checkIfApplicationIsSuspended(
                     mContext, mPkg, mUserId);
 
-            loadAppRow();
-            if (mAppRow == null) {
-                toastAndFinish("Can't load package");
-                return;
-            }
             loadChannel();
-            loadConversation();
+            loadAppRow();
             loadChannelGroup();
             loadPreferencesFilter();
             collectConfigActivities();
@@ -193,6 +155,55 @@ abstract public class NotificationSettings extends DashboardFragment {
                         mSuspendedAppsAdmin, mPreferenceFilter);
             }
         }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (mIntent == null && mArgs == null) {
+            Log.w(TAG, "No intent");
+            toastAndFinish();
+            return;
+        }
+
+        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null) {
+            Log.w(TAG, "Missing package or uid or packageinfo");
+            toastAndFinish();
+            return;
+        }
+
+        startListeningToPackageRemove();
+    }
+
+    @Override
+    public void onDestroy() {
+        stopListeningToPackageRemove();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null || mAppRow == null) {
+            Log.w(TAG, "Missing package or uid or packageinfo");
+            finish();
+            return;
+        }
+        // Reload app, channel, etc onResume in case they've changed. A little wasteful if we've
+        // just done onAttach but better than making every preference controller reload all
+        // the data
+        loadAppRow();
+        if (mAppRow == null) {
+            Log.w(TAG, "Can't load package");
+            finish();
+            return;
+        }
+        loadChannel();
+        loadConversation();
+        loadChannelGroup();
+        loadPreferencesFilter();
+        collectConfigActivities();
     }
 
     protected void animatePanel() {
@@ -296,8 +307,7 @@ abstract public class NotificationSettings extends DashboardFragment {
         }
     }
 
-    protected void toastAndFinish(String msg) {
-        Log.w(TAG, msg);
+    protected void toastAndFinish() {
         Toast.makeText(mContext, R.string.app_not_found_dlg_text, Toast.LENGTH_SHORT).show();
         getActivity().finish();
     }
