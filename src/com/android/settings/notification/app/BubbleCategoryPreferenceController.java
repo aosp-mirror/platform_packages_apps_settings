@@ -32,15 +32,15 @@ public class BubbleCategoryPreferenceController extends NotificationPreferenceCo
     static final int ON = 1;
 
     public BubbleCategoryPreferenceController(Context context) {
-        super(context, null, KEY);
+        super(context, null);
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        if (super.getAvailabilityStatus() == CONDITIONALLY_UNAVAILABLE) {
-            return CONDITIONALLY_UNAVAILABLE;
+    public boolean isAvailable() {
+        if (!super.isAvailable()) {
+            return false;
         }
-        return areBubblesEnabled() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return areBubblesEnabled();
     }
 
     @Override
