@@ -342,13 +342,13 @@
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"फ़ेस अनलॉक की सुविधा सेट अप करने के लिए टैप करें"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"फ़ेस अनलॉक"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"वर्क प्रोफ़ाइल के लिए फ़ेस अनलॉक"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"फ़ेस अनलॉक की सुविधा सेट अप करने का तरीका"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"फ़ेस अनलॉक की सुविधा सेटअप करने का तरीका"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"फे़स अनलॉक की सुविधा सेट अप करें"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"चेहरे का इस्तेमाल कर पुष्टि करें"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_message_accessibility" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"शुरू करें"</string>
-    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"अगर सुलभता सुविधा में फ़ेस अनलॉक की सुविधा बंद है, तो हो सकता है कि सेटअप के कुछ चरण, टॉकबैक के साथ ठीक से काम न करें."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"अगर सुलभता सुविधा में फ़ेस अनलॉक की सुविधा बंद है, तो हो सकता है कि सेटअप के कुछ चरण, TalkBack के साथ ठीक से काम न करें."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"वापस जाएं"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"सेट अप जारी रखें"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"सुलभता सेटअप का इस्तेमाल करें"</string>
@@ -1943,6 +1943,8 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"पिन सेट करें"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"वर्क प्रोफ़ाइल का पिन सेट करें"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"पैटर्न सेट करें"</string>
+    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
+    <skip />
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"वर्क प्रोफाइल का पैटर्न सेट करें"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"फ़िंगरप्रिंट का इस्तेमाल करने के लिए, पासवर्ड सेट करें"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"फ़िंगरप्रिंट का इस्तेमाल करने के लिए, पैटर्न सेट करें"</string>
@@ -2306,7 +2308,7 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"डाउनलोड किए गए ऐप्लिकेशन"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"प्रयोग के लिए"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"सुविधाएं दिखाने वाले फ़्लैग"</string>
-    <string name="talkback_title" msgid="8756080454514251327">"टॉकबैक"</string>
+    <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"स्क्रीन रीडर खास तौर पर दृष्टिहीन और कमज़ोर नज़र वाले लोगों के लिए है"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"अपनी स्क्रीन पर दिए गए आइटम तेज़ आवाज़ में सुनने के लिए उन पर टैप करें"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"कैप्शन की सेटिंग"</string>
@@ -2924,8 +2926,7 @@
     <string name="battery_not_usage" msgid="1472275761547230196">"पिछली बार पूरी चार्ज होने के बाद, बैटरी का इस्तेमाल नहीं हुआ"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"पिछले 24 घंटे में, बैटरी का इस्तेमाल नहीं हुआ"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
-    <!-- no translation found for battery_usage_other_users (9002643295562500693) -->
-    <skip />
+    <string name="battery_usage_other_users" msgid="9002643295562500693">"अन्य उपयोगकर्ता"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"डिवाइस के इस्तेमाल के हिसाब से अनुमान लगाया गया है कि फ़ोन की बैटरी और कितनी देर चलेगी"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"अनुमानित बचा हुआ समय"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"पूरी तरह चार्ज होने तक"</string>
@@ -4006,14 +4007,8 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"\"<xliff:g id="APP_NAME">%1$s</xliff:g>\" की सभी सूचनाएं"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g> की सभी सूचनाएं"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"ज़रूरत के हिसाब से सूचनाएं"</string>
-    <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="one">रोज़~<xliff:g id="NUMBER_1">%,d</xliff:g> सूचना</item>
-      <item quantity="other">रोज़ ~<xliff:g id="NUMBER_1">%,d</xliff:g> सूचनाएं</item>
-    </plurals>
-    <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="one">हर हफ़्ते ~<xliff:g id="NUMBER_1">%,d</xliff:g> सूचना</item>
-      <item quantity="other">हर हफ़्ते ~<xliff:g id="NUMBER_1">%,d</xliff:g> सूचनाएं</item>
-    </plurals>
+    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
+    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
     <string name="notifications_sent_never" msgid="9081278709126812062">"कभी नहीं"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"डिवाइस और ऐप्लिकेशन की सूचनाएं"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"यह कंट्रोल करें कि कौनसे ऐप्लिकेशन और डिवाइस आपको मिलने वाली सूचनाएं पढ़ सकते हैं"</string>

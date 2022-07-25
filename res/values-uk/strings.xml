@@ -418,7 +418,7 @@
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Завжди просити підтвердження"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Просити підтвердження під час використання фейсконтролю в додатках"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Видалити модель обличчя"</string>
-    <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Налаштування фейсконтролю"</string>
+    <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Налаштувати фейсконтроль"</string>
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"За допомогою фейсконтролю ви можете розблоковувати телефон або проходити автентифікацію в додатках, наприклад щоб увійти в обліковий запис або схвалити покупку.\n\nЗверніть увагу:\nза раз можна налаштувати фейсконтроль лише для одного обличчя. Щоб додати інше обличчя, видаліть поточне.\n\nПоглянувши на телефон, ви можете випадково розблокувати його в недоречний момент.\n\nБудь-хто може розблокувати телефон, якщо піднесе його до вашого обличчя.\n\nТелефон може розблокувати людина, схожа на вас, зокрема ваш близнюк."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"За допомогою фейсконтролю ви можете розблоковувати телефон або проходити автентифікацію в додатках, наприклад щоб увійти в обліковий запис або схвалити покупку.\n\nЗверніть увагу:\nза раз можна налаштувати фейсконтроль лише для одного обличчя. Щоб додати інше обличчя, видаліть поточне.\n\nПоглянувши на телефон, ви можете випадково розблокувати його в недоречний момент.\n\nБудь-хто може розблокувати телефон, якщо піднесе його до вашого обличчя, навіть коли у вас заплющені очі.\n\nТелефон може розблокувати людина, схожа на вас, зокрема ваш близнюк."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Видалити модель обличчя?"</string>
@@ -432,10 +432,10 @@
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Додати відбиток пальця"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5451094461919440992">"блокування екрана"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
-      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> відбиток пальця додано</item>
-      <item quantity="few"><xliff:g id="COUNT">%1$d</xliff:g> відбитки пальців додано</item>
-      <item quantity="many"><xliff:g id="COUNT">%1$d</xliff:g> відбитків пальців додано</item>
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> відбитка пальця додано</item>
+      <item quantity="one">Додано <xliff:g id="COUNT">%1$d</xliff:g> відбиток пальця</item>
+      <item quantity="few">Додано <xliff:g id="COUNT">%1$d</xliff:g> відбитки пальців</item>
+      <item quantity="many">Додано <xliff:g id="COUNT">%1$d</xliff:g> відбитків пальців</item>
+      <item quantity="other">Додано <xliff:g id="COUNT">%1$d</xliff:g> відбитка пальця</item>
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Налаштуйте \"Відбиток пальця\""</string>
@@ -1987,6 +1987,8 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Створіть PIN-код"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Створіть PIN-код для робочого профілю"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Створіть ключ"</string>
+    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
+    <skip />
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Створіть ключ для робочого профілю"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Щоб користуватися відбитком пальця, налаштуйте пароль"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Щоб користуватися відбитком пальця, налаштуйте ключ"</string>
@@ -3000,8 +3002,7 @@
     <string name="battery_not_usage" msgid="1472275761547230196">"Відсутнє споживання з часу останнього повного заряджання"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Відсутнє споживання за останні 24 години"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
-    <!-- no translation found for battery_usage_other_users (9002643295562500693) -->
-    <skip />
+    <string name="battery_usage_other_users" msgid="9002643295562500693">"Інші користувачі"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Залишок заряду акумулятора визначається на основі використання пристрою"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Залишилося приблизно"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"До повного заряду"</string>
@@ -4094,18 +4095,8 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"<xliff:g id="APP_NAME">%1$s</xliff:g>: усі сповіщення"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Усі сповіщення з додатка <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Адаптивні сповіщення"</string>
-    <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="one">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на день</item>
-      <item quantity="few">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на день</item>
-      <item quantity="many">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщень на день</item>
-      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на день</item>
-    </plurals>
-    <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="one">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на тиждень</item>
-      <item quantity="few">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на тиждень</item>
-      <item quantity="many">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщень на тиждень</item>
-      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на тиждень</item>
-    </plurals>
+    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
+    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
     <string name="notifications_sent_never" msgid="9081278709126812062">"Ніколи"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Сповіщення додатків і пристроїв"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Укажіть, які додатки та пристрої можуть переглядати сповіщення"</string>
