@@ -31,7 +31,7 @@ public class InvalidConversationPreferenceController extends NotificationPrefere
     private static final String KEY = "invalid_conversation_switch";
 
     public InvalidConversationPreferenceController(Context context, NotificationBackend backend) {
-        super(context, backend, KEY);
+        super(context, backend);
     }
 
     @Override
@@ -40,19 +40,17 @@ public class InvalidConversationPreferenceController extends NotificationPrefere
     }
 
     @Override
-    public int getAvailabilityStatus() {
+    public boolean isAvailable() {
         if (mAppRow == null) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return false;
         }
         if (mAppRow.banned) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return false;
         }
         if (mPreferenceFilter != null && !isIncludedInFilter()) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return false;
         }
-        return mBackend.isInInvalidMsgState(mAppRow.pkg, mAppRow.uid)
-                ? AVAILABLE
-                : CONDITIONALLY_UNAVAILABLE;
+        return mBackend.isInInvalidMsgState(mAppRow.pkg, mAppRow.uid);
     }
 
     @Override
