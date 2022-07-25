@@ -37,7 +37,7 @@ public class ConversationDemotePreferenceController extends NotificationPreferen
     public ConversationDemotePreferenceController(Context context,
             SettingsPreferenceFragment hostFragment,
             NotificationBackend backend) {
-        super(context, backend, KEY);
+        super(context, backend);
         mHostFragment = hostFragment;
     }
 
@@ -47,17 +47,14 @@ public class ConversationDemotePreferenceController extends NotificationPreferen
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        if (super.getAvailabilityStatus() == CONDITIONALLY_UNAVAILABLE) {
-            return CONDITIONALLY_UNAVAILABLE;
+    public boolean isAvailable() {
+        if (!super.isAvailable()) {
+            return false;
         }
         if (mAppRow == null || mChannel == null) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return false;
         }
-        if (!TextUtils.isEmpty(mChannel.getConversationId()) && !mChannel.isDemoted()) {
-            return AVAILABLE;
-        }
-        return CONDITIONALLY_UNAVAILABLE;
+        return !TextUtils.isEmpty(mChannel.getConversationId()) && !mChannel.isDemoted();
     }
 
     @Override
