@@ -51,7 +51,7 @@ public class AppBubbleListPreferenceController extends AppConversationListPrefer
     private static final String KEY = "bubble_conversations";
 
     public AppBubbleListPreferenceController(Context context, NotificationBackend backend) {
-        super(context, backend);
+        super(context, backend, KEY);
     }
 
     @Override
@@ -80,25 +80,25 @@ public class AppBubbleListPreferenceController extends AppConversationListPrefer
     }
 
     @Override
-    public boolean isAvailable() {
+    public int getAvailabilityStatus() {
         // copy rather than inherit super's isAvailable because apps can link to this page
         // as part of onboarding, before they send a valid conversation notification
         if (mAppRow == null) {
-            return false;
+            return CONDITIONALLY_UNAVAILABLE;
         }
         if (mAppRow.banned) {
-            return false;
+            return CONDITIONALLY_UNAVAILABLE;
         }
         if (mChannel != null) {
             if (mBackend.onlyHasDefaultChannel(mAppRow.pkg, mAppRow.uid)
                     || NotificationChannel.DEFAULT_CHANNEL_ID.equals(mChannel.getId())) {
-                return false;
+                return CONDITIONALLY_UNAVAILABLE;
             }
         }
         if (mAppRow.bubblePreference == BUBBLE_PREFERENCE_NONE) {
-            return false;
+            return CONDITIONALLY_UNAVAILABLE;
         }
-        return true;
+        return AVAILABLE;
     }
 
     @VisibleForTesting

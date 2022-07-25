@@ -23,19 +23,28 @@
         android:key="gesture_power_menu_video"
         settings:searchable="false"
         settings:lottie_imageAssetsFolder="power_menu"
-        settings:lottie_rawRes="@raw/lottie_power_menu"/>
+        settings:lottie_rawRes="@raw/lottie_long_press_power_for_power_menu"
+        settings:controller="com.android.settings.gestures.LongPressPowerIllustrationPreferenceController"/>
 
-    <SwitchPreference
-        android:key="gesture_power_menu_long_press_for_assist"
-        android:title="@string/power_menu_long_press_for_assist"
-        android:summary="@string/power_menu_long_press_for_assist_summary"
-        settings:controller="com.android.settings.gestures.LongPressPowerButtonPreferenceController"
-    />
+    <PreferenceCategory
+        android:key="gesture_power_menu_long_press_category"
+        android:title="@string/power_menu_long_press_category_title">
+        <com.android.settingslib.widget.SelectorWithWidgetPreference
+            android:key="gesture_power_menu_long_press_for_power_menu"
+            android:title="@string/power_menu_long_press_for_power_menu_title"
+            settings:controller="com.android.settings.gestures.LongPressPowerForPowerMenuPreferenceController"/>
+
+        <com.android.settingslib.widget.SelectorWithWidgetPreference
+            android:key="gesture_power_menu_long_press_for_assistant"
+            android:title="@string/power_menu_long_press_for_assistant_title"
+            settings:controller="com.android.settings.gestures.LongPressPowerForAssistantPreferenceController"/>
+    </PreferenceCategory>
 
     <com.android.settings.widget.LabeledSeekBarPreference
         android:key="gesture_power_menu_long_press_for_assist_sensitivity"
         android:title="@string/power_menu_long_press_for_assist_sensitivity_title"
         android:summary="@string/power_menu_long_press_for_assist_sensitivity_summary"
+        settings:allowDividerAbove="true"
         settings:textStart="@string/power_menu_long_press_for_assist_sensitivity_low_label"
         settings:textEnd="@string/power_menu_long_press_for_assist_sensitivity_high_label"
         settings:controller="com.android.settings.gestures.LongPressPowerSensitivityPreferenceController"
@@ -45,5 +54,6 @@
         android:key="power_menu_power_volume_up_hint"
         android:title="@string/power_menu_power_volume_up_hint"
         android:selectable="false"
-        settings:searchable="false"/>
+        settings:searchable="false"
+        settings:controller="com.android.settings.gestures.LongPressPowerFooterPreferenceController"/>
 </PreferenceScreen>

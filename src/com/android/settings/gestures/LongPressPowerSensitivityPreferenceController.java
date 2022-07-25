@@ -17,36 +17,27 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
-import android.database.ContentObserver;
-import android.os.Handler;
+import android.net.Uri;
 import android.provider.Settings;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.widget.LabeledSeekBarPreference;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnStart;
-import com.android.settingslib.core.lifecycle.events.OnStop;
 
 /** Handles changes to the long press power button sensitivity slider. */
-public class LongPressPowerSensitivityPreferenceController extends
-        SliderPreferenceController implements
-        LifecycleObserver, OnStart, OnStop {
-
-    private final ContentObserver mPowerButtonObserver = new ContentObserver(Handler.getMain()) {
-        @Override
-        public void onChange(boolean selfChange) {
-            if (mPreference != null) {
-                updateState(mPreference);
-            }
-        }
-    };
+public class LongPressPowerSensitivityPreferenceController extends SliderPreferenceController
+        implements PowerMenuSettingsUtils.SettingsStateCallback, LifecycleObserver {
 
     @Nullable
     private final int[] mSensitivityValues;
+
+    private final PowerMenuSettingsUtils mUtils;
 
     @Nullable
     private LabeledSeekBarPreference mPreference;
@@ -55,18 +46,19 @@ public class LongPressPowerSensitivityPreferenceController extends
         super(context, preferenceKey);
         mSensitivityValues = context.getResources().getIntArray(
                 com.android.internal.R.array.config_longPressOnPowerDurationSettings);
+        mUtils = new PowerMenuSettingsUtils(context);
     }
 
-    @Override
+    /** @OnLifecycleEvent(Lifecycle.Event.ON_START) */
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {
-        mContext.getContentResolver().registerContentObserver(
-                Settings.Global.getUriFor(PowerMenuSettingsUtils.POWER_BUTTON_LONG_PRESS_SETTING),
-                false, mPowerButtonObserver);
+        mUtils.registerObserver(this);
     }
 
-    @Override
+    /** @OnLifecycleEvent(Lifecycle.Event.ON_STOP) */
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     public void onStop() {
-        mContext.getContentResolver().unregisterContentObserver(mPowerButtonObserver);
+        mUtils.unregisterObserver();
     }
 
     @Override
@@ -86,21 +78,19 @@ public class LongPressPowerSensitivityPreferenceController extends
     public void updateState(Preference preference) {
         super.updateState(preference);
         final LabeledSeekBarPreference pref = (LabeledSeekBarPreference) preference;
-        pref.setEnabled(
-                isAvailable() && PowerMenuSettingsUtils.isLongPressPowerForAssistEnabled(mContext));
+        pref.setVisible(
+                PowerMenuSettingsUtils.isLongPressPowerForAssistantEnabled(mContext)
+                        && getAvailabilityStatus() == AVAILABLE);
         pref.setProgress(getSliderPosition());
     }
 
     @Override
     public int getAvailabilityStatus() {
-        if (mSensitivityValues == null || mSensitivityValues.length < 2) {
+        if (mSensitivityValues == null
+                || mSensitivityValues.length < 2
+                || !PowerMenuSettingsUtils.isLongPressPowerSettingAvailable(mContext)) {
             return UNSUPPORTED_ON_DEVICE;
         }
-
-        if (!PowerMenuSettingsUtils.isLongPressPowerForAssistEnabled(mContext)) {
-            return DISABLED_DEPENDENT_SETTING;
-        }
-
         return AVAILABLE;
     }
 
@@ -118,6 +108,13 @@ public class LongPressPowerSensitivityPreferenceController extends
         return Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.POWER_BUTTON_LONG_PRESS_DURATION_MS,
                 mSensitivityValues[position]);
+    }
+
+    @Override
+    public void onChange(Uri uri) {
+        if (mPreference != null) {
+            updateState(mPreference);
+        }
     }
 
     @Override
