@@ -31,7 +31,7 @@ public class DndPreferenceController extends NotificationPreferenceController
     private static final String KEY_BYPASS_DND = "bypass_dnd";
 
     public DndPreferenceController(Context context, NotificationBackend backend) {
-        super(context, backend);
+        super(context, backend, KEY_BYPASS_DND);
     }
 
     @Override
@@ -40,11 +40,11 @@ public class DndPreferenceController extends NotificationPreferenceController
     }
 
     @Override
-    public boolean isAvailable() {
-        if (!super.isAvailable() || mChannel == null) {
-            return false;
+    public int getAvailabilityStatus() {
+        if (super.getAvailabilityStatus() == CONDITIONALLY_UNAVAILABLE || mChannel == null) {
+            return CONDITIONALLY_UNAVAILABLE;
         }
-        return true;
+        return AVAILABLE;
     }
 
     @Override

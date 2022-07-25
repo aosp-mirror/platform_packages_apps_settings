@@ -29,7 +29,7 @@ public class DescriptionPreferenceController extends NotificationPreferenceContr
     private static final String KEY_DESC = "desc";
 
     public DescriptionPreferenceController(Context context) {
-        super(context, null);
+        super(context, null, KEY_DESC);
     }
 
     @Override
@@ -38,20 +38,20 @@ public class DescriptionPreferenceController extends NotificationPreferenceContr
     }
 
     @Override
-    public boolean isAvailable() {
-        if (!super.isAvailable()) {
-            return false;
+    public int getAvailabilityStatus() {
+        if (super.getAvailabilityStatus() == CONDITIONALLY_UNAVAILABLE) {
+            return CONDITIONALLY_UNAVAILABLE;
         }
         if (mChannel == null && !hasValidGroup()) {
-            return false;
+            return CONDITIONALLY_UNAVAILABLE;
         }
         if (mChannel != null && !TextUtils.isEmpty(mChannel.getDescription())) {
-            return true;
+            return AVAILABLE;
         }
         if (hasValidGroup() && !TextUtils.isEmpty(mChannelGroup.getDescription())) {
-            return true;
+            return AVAILABLE;
         }
-        return false;
+        return CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
