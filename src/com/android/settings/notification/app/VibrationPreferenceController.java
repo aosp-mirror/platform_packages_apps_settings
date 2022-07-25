@@ -34,7 +34,7 @@ public class VibrationPreferenceController extends NotificationPreferenceControl
     private final Vibrator mVibrator;
 
     public VibrationPreferenceController(Context context, NotificationBackend backend) {
-        super(context, backend, KEY_VIBRATE);
+        super(context, backend);
         mVibrator = context.getSystemService(Vibrator.class);
     }
 
@@ -44,15 +44,14 @@ public class VibrationPreferenceController extends NotificationPreferenceControl
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        if (super.getAvailabilityStatus() == CONDITIONALLY_UNAVAILABLE || mChannel == null) {
-            return CONDITIONALLY_UNAVAILABLE;
-        }
-        if (checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT) && !isDefaultChannel()
-                && mVibrator != null && mVibrator.hasVibrator()) {
-            return AVAILABLE;
-        }
-        return CONDITIONALLY_UNAVAILABLE;
+    public boolean isAvailable() {
+        if (!super.isAvailable() || mChannel == null) {
+            return false;
+       }
+        return checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT)
+                && !isDefaultChannel()
+                && mVibrator != null
+                && mVibrator.hasVibrator();
     }
 
     @Override
