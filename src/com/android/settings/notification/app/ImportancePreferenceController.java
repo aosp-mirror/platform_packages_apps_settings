@@ -38,7 +38,7 @@ public class ImportancePreferenceController extends NotificationPreferenceContro
     public ImportancePreferenceController(Context context,
             NotificationSettings.DependentFieldListener dependentFieldListener,
             NotificationBackend backend) {
-        super(context, backend, KEY_IMPORTANCE);
+        super(context, backend);
         mDependentFieldListener = dependentFieldListener;
     }
 
@@ -48,14 +48,14 @@ public class ImportancePreferenceController extends NotificationPreferenceContro
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        if (super.getAvailabilityStatus() == CONDITIONALLY_UNAVAILABLE) {
-            return CONDITIONALLY_UNAVAILABLE;
+    public boolean isAvailable() {
+        if (!super.isAvailable()) {
+            return false;
         }
         if (mChannel == null) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return false;
         }
-        return !isDefaultChannel() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return !isDefaultChannel();
     }
 
     @Override
