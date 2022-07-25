@@ -12671,7 +12671,7 @@
     <!-- Summary for prevent ringing setting -->
     <string name="prevent_ringing_option_mute_summary">Mute</string>
     <!-- Summary for prevent ringing setting when the option itself is unavailable. [CHAR LIMIT=NONE] -->
-    <string name="prevent_ringing_option_unavailable_lpp_summary">To enable, first change \"Press and hold power button\" to the power menu.</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary">To enable, first change \"Press &amp; hold power button\" to the power menu.</string>
 
     <!-- Title for detail page of wifi network [CHAR LIMIT=30] -->
     <string name="pref_title_network_details">Network details</string>
@@ -13430,29 +13430,28 @@
     <!-- Cards and passes name lower case [CHAR LIMIT=40] -->
     <string name="cards_passes_lower">cards &amp; passes</string>
 
-    <!-- Power menu setting name [CHAR LIMIT=NONE] -->
-    <string name="power_menu_setting_name">Press and hold power button</string>
+    <!-- Power menu setting name [CHAR LIMIT=60] -->
+    <string name="power_menu_setting_name">Press &amp; hold power button</string>
 
-    <!-- Power menu setting summary to describe press and hold power button for Assistant is enabled. [CHAR LIMIT=NONE] -->
-    <string name="power_menu_summary_long_press_for_assist_enabled">Press and hold for the Assistant</string>
-    <!-- Power menu setting summary to describe press and hold power button for Assistant is disabled and power menu will appear. [CHAR LIMIT=NONE] -->
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu">Press and hold for the power menu</string>
-    <!-- Power menu setting summary to describe press and hold power button for Assistant is disabled and nothing will happen. [CHAR LIMIT=NONE] -->
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action">Press and hold disabled</string>
+    <!-- Power menu setting section title for selecting the press and hold power button behavior. [CHAR LIMIT=60] -->
+    <string name="power_menu_long_press_category_title">Press &amp; hold power button to access</string>
+    <!-- Power menu setting option to make press and hold power button to open Power Menu. [CHAR LIMIT=60] -->
+    <string name="power_menu_long_press_for_power_menu_title">Power menu</string>
+    <!-- Power menu setting option to make press and hold power button to open Assistant. [CHAR LIMIT=60] -->
+    <string name="power_menu_long_press_for_assistant_title">Digital assistant</string>
+
+    <!-- Power menu setting summary to describe press and hold power button will open Assistant. [CHAR LIMIT=NONE] -->
+    <string name="power_menu_summary_long_press_for_assistant">Access digital assistant</string>
+    <!-- Power menu setting summary to describe press and hold power button will open Power Menu. [CHAR LIMIT=NONE] -->
+    <string name="power_menu_summary_long_press_for_power_menu">Access power menu</string>
 
     <!-- Power menu setting privacy no secure screen lock set [CHAR_LIMIT=NONE] -->
     <string name="lockscreen_privacy_not_secure">To use, first set a screen lock</string>
 
-    <!-- Power menu setting use long press power to invoke assistant. [CHAR LIMIT=NONE] -->
-    <string name="power_menu_long_press_for_assist">Hold for Assistant</string>
-
-    <!-- Power menu setting use log press power to invoke assistant summary. [CHAR LIMIT=NONE] -->
-    <string name="power_menu_long_press_for_assist_summary">Trigger the Assistant by holding the power button</string>
-
-    <!-- Power menu explanation to press power and volume up to show power and emergency menu. [CHAR LIMIT=NONE] -->
-    <string name="power_menu_power_volume_up_hint">Power &amp; Emergency Menu:\nPress Power and Volume up at the same time.</string>
+    <!-- Power menu explanation to press power and volume up to show power menu. [CHAR LIMIT=NONE] -->
+    <string name="power_menu_power_volume_up_hint">Power menu:\nPress the power button and the volume up button at the same time</string>
     <!-- Power menu explanation where to find prevent ringing option. [CHAR LIMIT=NONE] -->
-    <string name="power_menu_power_prevent_ringing_hint">Prevent ringing:\nShortcut available in the volume menu.</string>
+    <string name="power_menu_power_prevent_ringing_hint">Prevent ringing:\nPress a volume button for the shortcut</string>
 
     <!-- Power menu title of the seekbar setting controlling duration of how long the power button must be held to invoke assistant. [CHAR LIMIT=NONE]-->
     <string name="power_menu_long_press_for_assist_sensitivity_title">Press &amp; hold duration</string>
