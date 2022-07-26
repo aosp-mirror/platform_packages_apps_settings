@@ -43,7 +43,8 @@
 
     <PreferenceCategory
         android:key="custom"
-        android:title="@string/captioning_custom_options_title">
+        android:title="@string/captioning_custom_options_title"
+        settings:controller="com.android.settings.accessibility.CaptionCustomController">
 
         <ListPreference
             android:entries="@array/captioning_typeface_selector_titles"
