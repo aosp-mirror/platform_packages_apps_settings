@@ -33,7 +33,7 @@ public class LightsPreferenceController extends NotificationPreferenceController
     private static final String KEY_LIGHTS = "lights";
 
     public LightsPreferenceController(Context context, NotificationBackend backend) {
-        super(context, backend, KEY_LIGHTS);
+        super(context, backend);
     }
 
     @Override
@@ -42,18 +42,16 @@ public class LightsPreferenceController extends NotificationPreferenceController
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        if (super.getAvailabilityStatus() == CONDITIONALLY_UNAVAILABLE) {
-            return CONDITIONALLY_UNAVAILABLE;
+    public boolean isAvailable() {
+        if (!super.isAvailable()) {
+            return false;
         }
         if (mChannel == null) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return false;
         }
-        if (checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT) && canPulseLight()
-                && !isDefaultChannel()) {
-            return AVAILABLE;
-        }
-        return CONDITIONALLY_UNAVAILABLE;
+        return checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT)
+                && canPulseLight()
+                && !isDefaultChannel();
     }
 
     @Override
