@@ -531,7 +531,8 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
             intent.putExtra(Intent.EXTRA_USER_HANDLE, UserHandle.getUserId(mAppEntry.info.uid));
             Log.d(TAG, "Sending broadcast to query restart status for "
                     + mAppEntry.info.packageName);
-            mActivity.sendOrderedBroadcastAsUser(intent, UserHandle.CURRENT, null,
+            mActivity.sendOrderedBroadcastAsUser(intent, UserHandle.CURRENT,
+                    android.Manifest.permission.HANDLE_QUERY_PACKAGE_RESTART,
                     mCheckKillProcessesReceiver, null, Activity.RESULT_CANCELED, null, null);
         }
     }

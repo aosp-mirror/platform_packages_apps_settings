@@ -24,10 +24,12 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 import android.view.View;
 import android.view.accessibility.CaptioningManager;
+import android.view.accessibility.CaptioningManager.CaptionStyle;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -60,12 +62,14 @@ public class CaptionHelperTest {
     private View mPreviewWindow;
     @Spy
     private final Context mContext = ApplicationProvider.getApplicationContext();
+    private ContentResolver mContentResolver;
     private CaptionHelper mCaptionHelper;
 
     @Before
     public void setUp() {
         when(mContext.getSystemService(CaptioningManager.class)).thenReturn(mCaptioningManager);
         mCaptionHelper = new CaptionHelper(mContext);
+        mContentResolver = mContext.getContentResolver();
     }
 
     @Test
@@ -128,5 +132,54 @@ public class CaptionHelperTest {
         final boolean isCaptionEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, OFF) == ON;
         assertThat(isCaptionEnabled).isFalse();
+    }
+
+    @Test
+    public void setBackgroundColor_shouldReturnSpecificColor() {
+        mCaptionHelper.setBackgroundColor(0xFFFF0000);
+
+        final int backgroundColor = mCaptionHelper.getBackgroundColor();
+        assertThat(backgroundColor).isEqualTo(0xFFFF0000);
+    }
+
+    @Test
+    public void setForegroundColor_shouldReturnSpecificColor() {
+        mCaptionHelper.setForegroundColor(0xFFFF0000);
+
+        final int foregroundColor = mCaptionHelper.getForegroundColor();
+        assertThat(foregroundColor).isEqualTo(0xFFFF0000);
+    }
+
+    @Test
+    public void setWindowColor_shouldReturnSpecificColor() {
+        mCaptionHelper.setWindowColor(0xFFFF0000);
+
+        final int windowColor = mCaptionHelper.getWindowColor();
+        assertThat(windowColor).isEqualTo(0xFFFF0000);
+    }
+
+    @Test
+    public void setEdgeColor_shouldReturnSpecificColor() {
+        mCaptionHelper.setEdgeColor(0xFFFF0000);
+
+        final int edgeColor = mCaptionHelper.getEdgeColor();
+        assertThat(edgeColor).isEqualTo(0xFFFF0000);
+    }
+
+    @Test
+    public void setEdgeType_shouldReturnSpecificType() {
+        mCaptionHelper.setEdgeType(CaptionStyle.EDGE_TYPE_OUTLINE);
+
+        final int edgeType = mCaptionHelper.getEdgeType();
+        assertThat(edgeType).isEqualTo(CaptionStyle.EDGE_TYPE_OUTLINE);
+    }
+
+    @Test
+    public void setRawUserStyle_shouldReturnSpecificStyle() {
+        mCaptionHelper.setRawUserStyle(CaptionStyle.PRESET_CUSTOM);
+
+        final int style = Settings.Secure.getInt(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_CAPTIONING_PRESET, 0);
+        assertThat(style).isEqualTo(CaptionStyle.PRESET_CUSTOM);
     }
 }

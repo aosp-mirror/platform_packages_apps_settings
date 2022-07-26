@@ -16,58 +16,66 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
-import android.util.Log;
-
-import com.google.common.collect.ImmutableList;
+import androidx.annotation.NonNull;
+import androidx.core.util.Preconditions;
 
 import java.util.List;
 
 /** Wraps the battery timestamp and level data used for battery usage chart. */
 public final class BatteryLevelData {
-
     /** A container for the battery timestamp and level data. */
     public static final class PeriodBatteryLevelData {
-        private static final String TAG = "PeriodBatteryLevelData";
+        // The length of mTimestamps and mLevels must be the same. mLevels[index] might be null when
+        // there is no level data for the corresponding timestamp.
+        private final List<Long> mTimestamps;
+        private final List<Integer> mLevels;
 
-        private final ImmutableList<Long> mTimestamps;
-        private final ImmutableList<Integer> mLevels;
-
-        public PeriodBatteryLevelData(List<Long> timestamps, List<Integer> levels) {
-            if (timestamps.size() != levels.size()) {
-                Log.e(TAG, "Different sizes of timestamps and levels. Timestamp: "
-                        + timestamps.size() + ", Level: " + levels.size());
-                mTimestamps = ImmutableList.of();
-                mLevels = ImmutableList.of();
-                return;
-            }
-            mTimestamps = ImmutableList.copyOf(timestamps);
-            mLevels = ImmutableList.copyOf(levels);
+        public PeriodBatteryLevelData(
+                @NonNull List<Long> timestamps, @NonNull List<Integer> levels) {
+            Preconditions.checkArgument(timestamps.size() == levels.size(),
+                    /* errorMessage= */ "Timestamp: " + timestamps.size() + ", Level: "
+                            + levels.size());
+            mTimestamps = timestamps;
+            mLevels = levels;
         }
 
-        public ImmutableList<Long> getTimestamps() {
+        public List<Long> getTimestamps() {
             return mTimestamps;
         }
 
-        public ImmutableList<Integer> getLevels() {
+        public List<Integer> getLevels() {
             return mLevels;
         }
     }
 
+    /**
+     * There could be 2 cases for the daily battery levels:
+     * 1) length is 2: The usage data is within 1 day. Only contains start and end data, such as
+     *    data of 2022-01-01 06:00 and 2022-01-01 16:00.
+     * 2) length > 2: The usage data is more than 1 days. The data should be the start, end and 0am
+     *    data of every day between the start and end, such as data of 2022-01-01 06:00,
+     *    2022-01-02 00:00, 2022-01-03 00:00 and 2022-01-03 08:00.
+     */
     private final PeriodBatteryLevelData mDailyBatteryLevels;
-    private final ImmutableList<PeriodBatteryLevelData> mHourlyBatteryLevelsPerDay;
+    // The size of hourly data must be the size of daily data - 1.
+    private final List<PeriodBatteryLevelData> mHourlyBatteryLevelsPerDay;
 
     public BatteryLevelData(
-            PeriodBatteryLevelData dailyBatteryLevels,
-            List<PeriodBatteryLevelData> hourlyBatteryLevelsPerDay) {
+            @NonNull PeriodBatteryLevelData dailyBatteryLevels,
+            @NonNull List<PeriodBatteryLevelData> hourlyBatteryLevelsPerDay) {
+        final long dailySize = dailyBatteryLevels.getTimestamps().size();
+        final long hourlySize = hourlyBatteryLevelsPerDay.size();
+        Preconditions.checkArgument(hourlySize == dailySize - 1,
+                /* errorMessage= */ "DailySize: " + dailySize + ", HourlySize: " + hourlySize);
         mDailyBatteryLevels = dailyBatteryLevels;
-        mHourlyBatteryLevelsPerDay = ImmutableList.copyOf(hourlyBatteryLevelsPerDay);
+        mHourlyBatteryLevelsPerDay = hourlyBatteryLevelsPerDay;
     }
 
     public PeriodBatteryLevelData getDailyBatteryLevels() {
         return mDailyBatteryLevels;
     }
 
-    public ImmutableList<PeriodBatteryLevelData> getHourlyBatteryLevelsPerDay() {
+    public List<PeriodBatteryLevelData> getHourlyBatteryLevelsPerDay() {
         return mHourlyBatteryLevelsPerDay;
     }
 }

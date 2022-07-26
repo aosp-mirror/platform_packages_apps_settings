@@ -51,16 +51,6 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     private boolean[] mDeleteDialogChecked;
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Bundle bundle = getArguments();
-        if (bundle != null && bundle.containsKey(DELETE)) {
-            mBackend.removeZenRule(bundle.getString(DELETE));
-            bundle.remove(DELETE);
-        }
-    }
-
-    @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         ZenServiceListing serviceListing = new ZenServiceListing(getContext(), CONFIG);
         serviceListing.reloadApprovedServices();

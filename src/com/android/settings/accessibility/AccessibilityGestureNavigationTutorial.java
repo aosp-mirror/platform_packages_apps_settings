@@ -95,18 +95,20 @@ public final class AccessibilityGestureNavigationTutorial {
      * Displays a dialog that guides users to use accessibility features with accessibility
      * gestures under system gesture navigation mode.
      */
-    public static void showGestureNavigationTutorialDialog(Context context,
+    public static AlertDialog showGestureNavigationTutorialDialog(Context context,
             DialogInterface.OnDismissListener onDismissListener) {
         final AlertDialog alertDialog = new AlertDialog.Builder(context)
                 .setView(createTutorialDialogContentView(context,
                         DialogType.GESTURE_NAVIGATION_SETTINGS))
-                .setNegativeButton(R.string.accessibility_tutorial_dialog_button, mOnClickListener)
+                .setPositiveButton(R.string.accessibility_tutorial_dialog_button, mOnClickListener)
                 .setOnDismissListener(onDismissListener)
                 .create();
 
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
+
+        return alertDialog;
     }
 
     static AlertDialog showAccessibilityGestureTutorialDialog(Context context) {
@@ -128,10 +130,10 @@ public final class AccessibilityGestureNavigationTutorial {
                         .launch();
 
         final AlertDialog alertDialog = new AlertDialog.Builder(context)
-                .setNegativeButton(R.string.accessibility_tutorial_dialog_link_button,
-                        linkButtonListener)
                 .setPositiveButton(R.string.accessibility_tutorial_dialog_button,
                         actionButtonListener)
+                .setNegativeButton(R.string.accessibility_tutorial_dialog_link_button,
+                        linkButtonListener)
                 .create();
 
         final TutorialPageChangeListener.OnPageSelectedCallback callback =
@@ -194,7 +196,7 @@ public final class AccessibilityGestureNavigationTutorial {
     private static AlertDialog createDialog(Context context, int dialogType) {
         final AlertDialog alertDialog = new AlertDialog.Builder(context)
                 .setView(createTutorialDialogContentView(context, dialogType))
-                .setNegativeButton(R.string.accessibility_tutorial_dialog_button, mOnClickListener)
+                .setPositiveButton(R.string.accessibility_tutorial_dialog_button, mOnClickListener)
                 .create();
 
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
