@@ -266,8 +266,9 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
         Log.d(TAG, "setBatteryHistoryMap() " + (batteryHistoryMap == null ? "null"
                 : ("size=" + batteryHistoryMap.size())));
+        // TODO: implement the callback function.
         final BatteryLevelData batteryLevelData =
-                DataProcessor.getBatteryLevelData(mContext, batteryHistoryMap);
+                DataProcessor.getBatteryLevelData(mContext, mHandler, batteryHistoryMap, null);
         Log.d(TAG, "getBatteryLevelData: " + batteryLevelData);
         if (batteryLevelData == null) {
             mDailyViewModel = null;

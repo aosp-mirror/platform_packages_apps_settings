@@ -18,21 +18,36 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.utcToLocalTime;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.UserHandle;
+import android.os.UserManager;
+import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.util.ArraySet;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.Utils;
+import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * A utility class to process data loaded from database and make the data easy to use for battery
@@ -43,9 +58,26 @@ public final class DataProcessor {
     private static final String TAG = "DataProcessor";
     private static final int MIN_DAILY_DATA_SIZE = 2;
     private static final int MIN_TIMESTAMP_DATA_SIZE = 2;
+    // Maximum total time value for each hourly slot cumulative data at most 2 hours.
+    private static final float TOTAL_HOURLY_TIME_THRESHOLD = DateUtils.HOUR_IN_MILLIS * 2;
+    private static final Map<String, BatteryHistEntry> EMPTY_BATTERY_MAP = new HashMap<>();
+    private static final BatteryHistEntry EMPTY_BATTERY_HIST_ENTRY =
+            new BatteryHistEntry(new ContentValues());
+
+    @VisibleForTesting
+    static final double PERCENTAGE_OF_TOTAL_THRESHOLD = 1f;
+    @VisibleForTesting
+    static final int SELECTED_INDEX_ALL = BatteryChartViewModel.SELECTED_INDEX_ALL;
 
     /** A fake package name to represent no BatteryEntry data. */
     public static final String FAKE_PACKAGE_NAME = "fake_package";
+
+    /** A callback listener when battery usage loading async task is executed. */
+    public interface UsageMapAsyncResponse {
+        /** The callback function when batteryUsageMap is loaded. */
+        void onBatteryUsageMapLoaded(
+                Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageMap);
+    }
 
     private DataProcessor() {
     }
@@ -58,11 +90,14 @@ public final class DataProcessor {
     @Nullable
     public static BatteryLevelData getBatteryLevelData(
             Context context,
-            @Nullable final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
+            @Nullable Handler handler,
+            @Nullable final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap,
+            final UsageMapAsyncResponse asyncResponseDelegate) {
         if (batteryHistoryMap == null || batteryHistoryMap.isEmpty()) {
             Log.d(TAG, "getBatteryLevelData() returns null");
             return null;
         }
+        handler = handler != null ? handler : new Handler(Looper.getMainLooper());
         // Process raw history map data into hourly timestamps.
         final Map<Long, Map<String, BatteryHistEntry>> processedBatteryHistoryMap =
                 getHistoryMapWithExpectedTimestamps(context, batteryHistoryMap);
@@ -70,9 +105,31 @@ public final class DataProcessor {
         final BatteryLevelData batteryLevelData =
                 getLevelDataThroughProcessedHistoryMap(context, processedBatteryHistoryMap);
 
-        //TODO: Add the async task to compute diff usage data and load labels and icons.
+        // Start the async task to compute diff usage data and load labels and icons.
+        if (batteryLevelData != null) {
+            new ComputeUsageMapAndLoadItemsTask(
+                    context,
+                    handler,
+                    asyncResponseDelegate,
+                    batteryLevelData.getHourlyBatteryLevelsPerDay(),
+                    processedBatteryHistoryMap).execute();
+        }
 
         return batteryLevelData;
+    }
+
+    /**
+     * @return Returns whether the target is in the CharSequence array.
+     */
+    public static boolean contains(String target, CharSequence[] packageNames) {
+        if (target != null && packageNames != null) {
+            for (CharSequence packageName : packageNames) {
+                if (TextUtils.equals(target, packageName)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -187,7 +244,7 @@ public final class DataProcessor {
     @VisibleForTesting
     static boolean isFromFullCharge(@Nullable final Map<String, BatteryHistEntry> entryList) {
         if (entryList == null) {
-            Log.d(TAG, "entryList is nul in isFromFullCharge()");
+            Log.d(TAG, "entryList is null in isFromFullCharge()");
             return false;
         }
         final List<String> entryKeys = new ArrayList<>(entryList.keySet());
@@ -205,14 +262,14 @@ public final class DataProcessor {
     static long[] findNearestTimestamp(final List<Long> timestamps, final long target) {
         final long[] results = new long[] {Long.MIN_VALUE, Long.MAX_VALUE};
         // Searches the nearest lower and upper timestamp value.
-        for (long timestamp : timestamps) {
+        timestamps.forEach(timestamp -> {
             if (timestamp <= target && timestamp > results[0]) {
                 results[0] = timestamp;
             }
             if (timestamp >= target && timestamp < results[1]) {
                 results[1] = timestamp;
             }
-        }
+        });
         // Uses zero value to represent invalid searching result.
         results[0] = results[0] == Long.MIN_VALUE ? 0 : results[0];
         results[1] = results[1] == Long.MAX_VALUE ? 0 : results[1];
@@ -224,7 +281,7 @@ public final class DataProcessor {
      * timezone.
      */
     @VisibleForTesting
-     static long getTimestampOfNextDay(long timestamp) {
+    static long getTimestampOfNextDay(long timestamp) {
         final Calendar nextDayCalendar = Calendar.getInstance();
         nextDayCalendar.setTimeInMillis(timestamp);
         nextDayCalendar.add(Calendar.DAY_OF_YEAR, 1);
@@ -232,6 +289,40 @@ public final class DataProcessor {
         nextDayCalendar.set(Calendar.MINUTE, 0);
         nextDayCalendar.set(Calendar.SECOND, 0);
         return nextDayCalendar.getTimeInMillis();
+    }
+
+    /**
+     * @return Returns the indexed battery usage data for each corresponding time slot.
+     *
+     * There could be 2 cases of the returned value:
+     * 1) null: empty or invalid data.
+     * 2) non-null: must be a 2d map and composed by 3 parts:
+     *    1 - [SELECTED_INDEX_ALL][SELECTED_INDEX_ALL]
+     *    2 - [0][SELECTED_INDEX_ALL] ~ [maxDailyIndex][SELECTED_INDEX_ALL]
+     *    3 - [0][0] ~ [maxDailyIndex][maxHourlyIndex]
+     */
+    @VisibleForTesting
+    @Nullable
+    static Map<Integer, Map<Integer, BatteryDiffData>> getBatteryUsageMap(
+            final Context context,
+            final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
+            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
+        if (batteryHistoryMap.isEmpty()) {
+            return null;
+        }
+        final Map<Integer, Map<Integer, BatteryDiffData>> resultMap = new HashMap<>();
+        // Insert diff data from [0][0] to [maxDailyIndex][maxHourlyIndex].
+        insertHourlyUsageDiffData(
+                context, hourlyBatteryLevelsPerDay, batteryHistoryMap, resultMap);
+        // Insert diff data from [0][SELECTED_INDEX_ALL] to [maxDailyIndex][SELECTED_INDEX_ALL].
+        insertDailyUsageDiffData(hourlyBatteryLevelsPerDay, resultMap);
+        // Insert diff data [SELECTED_INDEX_ALL][SELECTED_INDEX_ALL].
+        insertAllUsageDiffData(resultMap);
+        purgeLowPercentageAndFakeData(context, resultMap);
+        if (!isUsageMapValid(resultMap, hourlyBatteryLevelsPerDay)) {
+            return null;
+        }
+        return resultMap;
     }
 
     /**
@@ -458,11 +549,454 @@ public final class DataProcessor {
         return Math.round(batteryLevelCounter / entryMap.size());
     }
 
-    private static void log(Context context, String content, long timestamp,
-            BatteryHistEntry entry) {
+    private static void insertHourlyUsageDiffData(
+            Context context,
+            final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
+            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap,
+            final Map<Integer, Map<Integer, BatteryDiffData>> resultMap) {
+        final int currentUserId = context.getUserId();
+        final UserHandle userHandle =
+                Utils.getManagedProfile(context.getSystemService(UserManager.class));
+        final int workProfileUserId =
+                userHandle != null ? userHandle.getIdentifier() : Integer.MIN_VALUE;
+        // Each time slot usage diff data =
+        //     Math.abs(timestamp[i+2] data - timestamp[i+1] data) +
+        //     Math.abs(timestamp[i+1] data - timestamp[i] data);
+        // since we want to aggregate every two hours data into a single time slot.
+        for (int dailyIndex = 0; dailyIndex < hourlyBatteryLevelsPerDay.size(); dailyIndex++) {
+            final Map<Integer, BatteryDiffData> dailyDiffMap = new HashMap<>();
+            resultMap.put(dailyIndex, dailyDiffMap);
+            if (hourlyBatteryLevelsPerDay.get(dailyIndex) == null) {
+                continue;
+            }
+            final List<Long> timestamps = hourlyBatteryLevelsPerDay.get(dailyIndex).getTimestamps();
+            for (int hourlyIndex = 0; hourlyIndex < timestamps.size() - 1; hourlyIndex++) {
+                final BatteryDiffData hourlyBatteryDiffData =
+                        insertHourlyUsageDiffDataPerSlot(
+                                context,
+                                currentUserId,
+                                workProfileUserId,
+                                hourlyIndex,
+                                timestamps,
+                                batteryHistoryMap);
+                dailyDiffMap.put(hourlyIndex, hourlyBatteryDiffData);
+            }
+        }
+    }
+
+    private static void insertDailyUsageDiffData(
+            final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
+            final Map<Integer, Map<Integer, BatteryDiffData>> resultMap) {
+        for (int index = 0; index < hourlyBatteryLevelsPerDay.size(); index++) {
+            Map<Integer, BatteryDiffData> dailyUsageMap = resultMap.get(index);
+            if (dailyUsageMap == null) {
+                dailyUsageMap = new HashMap<>();
+                resultMap.put(index, dailyUsageMap);
+            }
+            dailyUsageMap.put(
+                    SELECTED_INDEX_ALL,
+                    getAccumulatedUsageDiffData(dailyUsageMap.values()));
+        }
+    }
+
+    private static void insertAllUsageDiffData(
+            final Map<Integer, Map<Integer, BatteryDiffData>> resultMap) {
+        final List<BatteryDiffData> diffDataList = new ArrayList<>();
+        resultMap.keySet().forEach(
+                key -> diffDataList.add(resultMap.get(key).get(SELECTED_INDEX_ALL)));
+        final Map<Integer, BatteryDiffData> allUsageMap = new HashMap<>();
+        allUsageMap.put(SELECTED_INDEX_ALL, getAccumulatedUsageDiffData(diffDataList));
+        resultMap.put(SELECTED_INDEX_ALL, allUsageMap);
+    }
+
+    @Nullable
+    private static BatteryDiffData insertHourlyUsageDiffDataPerSlot(
+            Context context,
+            final int currentUserId,
+            final int workProfileUserId,
+            final int currentIndex,
+            final List<Long> timestamps,
+            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
+        final List<BatteryDiffEntry> appEntries = new ArrayList<>();
+        final List<BatteryDiffEntry> systemEntries = new ArrayList<>();
+
+        final Long currentTimestamp = timestamps.get(currentIndex);
+        final Long nextTimestamp = currentTimestamp + DateUtils.HOUR_IN_MILLIS;
+        final Long nextTwoTimestamp = nextTimestamp + DateUtils.HOUR_IN_MILLIS;
+        // Fetches BatteryHistEntry data from corresponding time slot.
+        final Map<String, BatteryHistEntry> currentBatteryHistMap =
+                batteryHistoryMap.getOrDefault(currentTimestamp, EMPTY_BATTERY_MAP);
+        final Map<String, BatteryHistEntry> nextBatteryHistMap =
+                batteryHistoryMap.getOrDefault(nextTimestamp, EMPTY_BATTERY_MAP);
+        final Map<String, BatteryHistEntry> nextTwoBatteryHistMap =
+                batteryHistoryMap.getOrDefault(nextTwoTimestamp, EMPTY_BATTERY_MAP);
+        // We should not get the empty list since we have at least one fake data to record
+        // the battery level and status in each time slot, the empty list is used to
+        // represent there is no enough data to apply interpolation arithmetic.
+        if (currentBatteryHistMap.isEmpty()
+                || nextBatteryHistMap.isEmpty()
+                || nextTwoBatteryHistMap.isEmpty()) {
+            return null;
+        }
+
+        // Collects all keys in these three time slot records as all populations.
+        final Set<String> allBatteryHistEntryKeys = new ArraySet<>();
+        allBatteryHistEntryKeys.addAll(currentBatteryHistMap.keySet());
+        allBatteryHistEntryKeys.addAll(nextBatteryHistMap.keySet());
+        allBatteryHistEntryKeys.addAll(nextTwoBatteryHistMap.keySet());
+
+        double totalConsumePower = 0.0;
+        double consumePowerFromOtherUsers = 0f;
+        // Calculates all packages diff usage data in a specific time slot.
+        for (String key : allBatteryHistEntryKeys) {
+            final BatteryHistEntry currentEntry =
+                    currentBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
+            final BatteryHistEntry nextEntry =
+                    nextBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
+            final BatteryHistEntry nextTwoEntry =
+                    nextTwoBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
+            // Cumulative values is a specific time slot for a specific app.
+            long foregroundUsageTimeInMs =
+                    getDiffValue(
+                            currentEntry.mForegroundUsageTimeInMs,
+                            nextEntry.mForegroundUsageTimeInMs,
+                            nextTwoEntry.mForegroundUsageTimeInMs);
+            long backgroundUsageTimeInMs =
+                    getDiffValue(
+                            currentEntry.mBackgroundUsageTimeInMs,
+                            nextEntry.mBackgroundUsageTimeInMs,
+                            nextTwoEntry.mBackgroundUsageTimeInMs);
+            double consumePower =
+                    getDiffValue(
+                            currentEntry.mConsumePower,
+                            nextEntry.mConsumePower,
+                            nextTwoEntry.mConsumePower);
+            // Excludes entry since we don't have enough data to calculate.
+            if (foregroundUsageTimeInMs == 0
+                    && backgroundUsageTimeInMs == 0
+                    && consumePower == 0) {
+                continue;
+            }
+            final BatteryHistEntry selectedBatteryEntry =
+                    selectBatteryHistEntry(currentEntry, nextEntry, nextTwoEntry);
+            if (selectedBatteryEntry == null) {
+                continue;
+            }
+            // Forces refine the cumulative value since it may introduce deviation error since we
+            // will apply the interpolation arithmetic.
+            final float totalUsageTimeInMs =
+                    foregroundUsageTimeInMs + backgroundUsageTimeInMs;
+            if (totalUsageTimeInMs > TOTAL_HOURLY_TIME_THRESHOLD) {
+                final float ratio = TOTAL_HOURLY_TIME_THRESHOLD / totalUsageTimeInMs;
+                if (DEBUG) {
+                    Log.w(TAG, String.format("abnormal usage time %d|%d for:\n%s",
+                            Duration.ofMillis(foregroundUsageTimeInMs).getSeconds(),
+                            Duration.ofMillis(backgroundUsageTimeInMs).getSeconds(),
+                            currentEntry));
+                }
+                foregroundUsageTimeInMs =
+                        Math.round(foregroundUsageTimeInMs * ratio);
+                backgroundUsageTimeInMs =
+                        Math.round(backgroundUsageTimeInMs * ratio);
+                consumePower = consumePower * ratio;
+            }
+            totalConsumePower += consumePower;
+
+            final boolean isFromOtherUsers = isConsumedFromOtherUsers(
+                    currentUserId, workProfileUserId, selectedBatteryEntry);
+            if (isFromOtherUsers) {
+                consumePowerFromOtherUsers += consumePower;
+            } else {
+                final BatteryDiffEntry currentBatteryDiffEntry = new BatteryDiffEntry(
+                        context,
+                        foregroundUsageTimeInMs,
+                        backgroundUsageTimeInMs,
+                        consumePower,
+                        selectedBatteryEntry);
+                if (currentBatteryDiffEntry.isSystemEntry()) {
+                    systemEntries.add(currentBatteryDiffEntry);
+                } else {
+                    appEntries.add(currentBatteryDiffEntry);
+                }
+            }
+        }
+        if (consumePowerFromOtherUsers != 0) {
+            systemEntries.add(createOtherUsersEntry(context, consumePowerFromOtherUsers));
+        }
+
+        // If there is no data, return null instead of empty item.
+        if (appEntries.isEmpty() && systemEntries.isEmpty()) {
+            return null;
+        }
+
+        final BatteryDiffData resultDiffData =
+                new BatteryDiffData(appEntries, systemEntries, totalConsumePower);
+        return resultDiffData;
+    }
+
+    private static boolean isConsumedFromOtherUsers(
+            final int currentUserId,
+            final int workProfileUserId,
+            final BatteryHistEntry batteryHistEntry) {
+        return batteryHistEntry.mConsumerType == ConvertUtils.CONSUMER_TYPE_UID_BATTERY
+                && batteryHistEntry.mUserId != currentUserId
+                && batteryHistEntry.mUserId != workProfileUserId;
+    }
+
+    @Nullable
+    private static BatteryDiffData getAccumulatedUsageDiffData(
+            final Collection<BatteryDiffData> diffEntryListData) {
+        double totalConsumePower = 0f;
+        final Map<String, BatteryDiffEntry> diffEntryMap = new HashMap<>();
+        final List<BatteryDiffEntry> appEntries = new ArrayList<>();
+        final List<BatteryDiffEntry> systemEntries = new ArrayList<>();
+
+        for (BatteryDiffData diffEntryList : diffEntryListData) {
+            if (diffEntryList == null) {
+                continue;
+            }
+            for (BatteryDiffEntry entry : diffEntryList.getAppDiffEntryList()) {
+                computeUsageDiffDataPerEntry(entry, diffEntryMap);
+                totalConsumePower += entry.mConsumePower;
+            }
+            for (BatteryDiffEntry entry : diffEntryList.getSystemDiffEntryList()) {
+                computeUsageDiffDataPerEntry(entry, diffEntryMap);
+                totalConsumePower += entry.mConsumePower;
+            }
+        }
+
+        final Collection<BatteryDiffEntry> diffEntryList = diffEntryMap.values();
+        for (BatteryDiffEntry entry : diffEntryList) {
+            // Sets total daily consume power data into all BatteryDiffEntry.
+            entry.setTotalConsumePower(totalConsumePower);
+            if (entry.isSystemEntry()) {
+                systemEntries.add(entry);
+            } else {
+                appEntries.add(entry);
+            }
+        }
+
+        return diffEntryList.isEmpty() ? null : new BatteryDiffData(appEntries, systemEntries);
+    }
+
+    private static void computeUsageDiffDataPerEntry(
+            final BatteryDiffEntry entry,
+            final Map<String, BatteryDiffEntry> diffEntryMap) {
+        final String key = entry.mBatteryHistEntry.getKey();
+        final BatteryDiffEntry oldBatteryDiffEntry = diffEntryMap.get(key);
+        // Creates new BatteryDiffEntry if we don't have it.
+        if (oldBatteryDiffEntry == null) {
+            diffEntryMap.put(key, entry.clone());
+        } else {
+            // Sums up some field data into the existing one.
+            oldBatteryDiffEntry.mForegroundUsageTimeInMs +=
+                    entry.mForegroundUsageTimeInMs;
+            oldBatteryDiffEntry.mBackgroundUsageTimeInMs +=
+                    entry.mBackgroundUsageTimeInMs;
+            oldBatteryDiffEntry.mConsumePower += entry.mConsumePower;
+        }
+    }
+
+    // Removes low percentage data and fake usage data, which will be zero value.
+    private static void purgeLowPercentageAndFakeData(
+            final Context context,
+            final Map<Integer, Map<Integer, BatteryDiffData>> resultMap) {
+        final Set<CharSequence> backgroundUsageTimeHideList =
+                FeatureFactory.getFactory(context)
+                        .getPowerUsageFeatureProvider(context)
+                        .getHideBackgroundUsageTimeSet(context);
+        final CharSequence[] notAllowShowEntryPackages =
+                FeatureFactory.getFactory(context)
+                        .getPowerUsageFeatureProvider(context)
+                        .getHideApplicationEntries(context);
+        resultMap.keySet().forEach(dailyKey -> {
+            final Map<Integer, BatteryDiffData> dailyUsageMap = resultMap.get(dailyKey);
+            dailyUsageMap.values().forEach(diffEntryLists -> {
+                if (diffEntryLists == null) {
+                    return;
+                }
+                purgeLowPercentageAndFakeData(
+                        diffEntryLists.getAppDiffEntryList(), backgroundUsageTimeHideList,
+                        notAllowShowEntryPackages);
+                purgeLowPercentageAndFakeData(
+                        diffEntryLists.getSystemDiffEntryList(), backgroundUsageTimeHideList,
+                        notAllowShowEntryPackages);
+            });
+        });
+    }
+
+    private static void purgeLowPercentageAndFakeData(
+            final List<BatteryDiffEntry> entries,
+            final Set<CharSequence> backgroundUsageTimeHideList,
+            final CharSequence[] notAllowShowEntryPackages) {
+        final Iterator<BatteryDiffEntry> iterator = entries.iterator();
+        while (iterator.hasNext()) {
+            final BatteryDiffEntry entry = iterator.next();
+            final String packageName = entry.getPackageName();
+            if (entry.getPercentOfTotal() < PERCENTAGE_OF_TOTAL_THRESHOLD
+                    || FAKE_PACKAGE_NAME.equals(packageName)
+                    || contains(packageName, notAllowShowEntryPackages)) {
+                iterator.remove();
+            }
+            if (packageName != null
+                    && !backgroundUsageTimeHideList.isEmpty()
+                    && contains(packageName, backgroundUsageTimeHideList)) {
+                entry.mBackgroundUsageTimeInMs = 0;
+            }
+        }
+    }
+
+    private static boolean isUsageMapValid(
+            final Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageMap,
+            final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay) {
+        if (batteryUsageMap.get(SELECTED_INDEX_ALL) == null
+                || batteryUsageMap.get(SELECTED_INDEX_ALL).get(SELECTED_INDEX_ALL) == null) {
+            Log.e(TAG, "no [SELECTED_INDEX_ALL][SELECTED_INDEX_ALL] in batteryUsageMap");
+            return false;
+        }
+        for (int dailyIndex = 0; dailyIndex < hourlyBatteryLevelsPerDay.size(); dailyIndex++) {
+            if (batteryUsageMap.get(dailyIndex) == null
+                    || !batteryUsageMap.get(dailyIndex).containsKey(SELECTED_INDEX_ALL)) {
+                Log.e(TAG, "no [" + dailyIndex + "][SELECTED_INDEX_ALL] in batteryUsageMap, "
+                        + "daily size is: " + hourlyBatteryLevelsPerDay.size());
+                return false;
+            }
+            if (hourlyBatteryLevelsPerDay.get(dailyIndex) == null) {
+                continue;
+            }
+            final List<Long> timestamps = hourlyBatteryLevelsPerDay.get(dailyIndex).getTimestamps();
+            // Length of hourly usage map should be the length of hourly level data - 1.
+            for (int hourlyIndex = 0; hourlyIndex < timestamps.size() - 1; hourlyIndex++) {
+                if (!batteryUsageMap.get(dailyIndex).containsKey(hourlyIndex)) {
+                    Log.e(TAG, "no [" + dailyIndex + "][" + hourlyIndex + "] in batteryUsageMap, "
+                            + "hourly size is: " + (timestamps.size() - 1));
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private static boolean contains(String target, Set<CharSequence> packageNames) {
+        if (target != null && packageNames != null) {
+            for (CharSequence packageName : packageNames) {
+                if (TextUtils.equals(target, packageName)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static long getDiffValue(long v1, long v2, long v3) {
+        return (v2 > v1 ? v2 - v1 : 0) + (v3 > v2 ? v3 - v2 : 0);
+    }
+
+    private static double getDiffValue(double v1, double v2, double v3) {
+        return (v2 > v1 ? v2 - v1 : 0) + (v3 > v2 ? v3 - v2 : 0);
+    }
+
+    @Nullable
+    private static BatteryHistEntry selectBatteryHistEntry(
+            final BatteryHistEntry... batteryHistEntries) {
+        for (BatteryHistEntry entry : batteryHistEntries) {
+            if (entry != null && entry != EMPTY_BATTERY_HIST_ENTRY) {
+                return entry;
+            }
+        }
+        return null;
+    }
+
+    private static BatteryDiffEntry createOtherUsersEntry(
+            Context context, final double consumePower) {
+        final ContentValues values = new ContentValues();
+        values.put(BatteryHistEntry.KEY_UID, BatteryUtils.UID_OTHER_USERS);
+        values.put(BatteryHistEntry.KEY_USER_ID, BatteryUtils.UID_OTHER_USERS);
+        values.put(BatteryHistEntry.KEY_CONSUMER_TYPE, ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
+        // We will show the percentage for the "other users" item only, the aggregated
+        // running time information is useless for users to identify individual apps.
+        final BatteryDiffEntry batteryDiffEntry = new BatteryDiffEntry(
+                context,
+                /*foregroundUsageTimeInMs=*/ 0,
+                /*backgroundUsageTimeInMs=*/ 0,
+                consumePower,
+                new BatteryHistEntry(values));
+        return batteryDiffEntry;
+    }
+
+    private static void log(Context context, final String content, final long timestamp,
+            final BatteryHistEntry entry) {
         if (DEBUG) {
             Log.d(TAG, String.format(entry != null ? "%s %s:\n%s" : "%s %s:%s",
                     utcToLocalTime(context, timestamp), content, entry));
+        }
+    }
+
+    // Compute diff map and loads all items (icon and label) in the background.
+    private static final class ComputeUsageMapAndLoadItemsTask
+            extends AsyncTask<Void, Void, Map<Integer, Map<Integer, BatteryDiffData>>> {
+
+        private Context mApplicationContext;
+        private Handler mHandler;
+        private UsageMapAsyncResponse mAsyncResponseDelegate;
+        private List<BatteryLevelData.PeriodBatteryLevelData> mHourlyBatteryLevelsPerDay;
+        private Map<Long, Map<String, BatteryHistEntry>> mBatteryHistoryMap;
+
+        private ComputeUsageMapAndLoadItemsTask(
+                Context context,
+                Handler handler,
+                final UsageMapAsyncResponse asyncResponseDelegate,
+                final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
+                final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
+            mApplicationContext = context.getApplicationContext();
+            mHandler = handler;
+            mAsyncResponseDelegate = asyncResponseDelegate;
+            mHourlyBatteryLevelsPerDay = hourlyBatteryLevelsPerDay;
+            mBatteryHistoryMap = batteryHistoryMap;
+        }
+
+        @Override
+        protected Map<Integer, Map<Integer, BatteryDiffData>> doInBackground(Void... voids) {
+            if (mApplicationContext == null
+                    || mHandler == null
+                    || mAsyncResponseDelegate == null
+                    || mBatteryHistoryMap == null
+                    || mHourlyBatteryLevelsPerDay == null) {
+                Log.e(TAG, "invalid input for ComputeUsageMapAndLoadItemsTask()");
+                return null;
+            }
+            final long startTime = System.currentTimeMillis();
+            final Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageMap =
+                    getBatteryUsageMap(
+                            mApplicationContext, mHourlyBatteryLevelsPerDay, mBatteryHistoryMap);
+            if (batteryUsageMap != null) {
+                // Pre-loads each BatteryDiffEntry relative icon and label for all slots.
+                final BatteryDiffData batteryUsageMapForAll =
+                        batteryUsageMap.get(SELECTED_INDEX_ALL).get(SELECTED_INDEX_ALL);
+                if (batteryUsageMapForAll != null) {
+                    batteryUsageMapForAll.getAppDiffEntryList().forEach(
+                            entry -> entry.loadLabelAndIcon());
+                    batteryUsageMapForAll.getSystemDiffEntryList().forEach(
+                            entry -> entry.loadLabelAndIcon());
+                }
+            }
+            Log.d(TAG, String.format("execute ComputeUsageMapAndLoadItemsTask in %d/ms",
+                    (System.currentTimeMillis() - startTime)));
+            return batteryUsageMap;
+        }
+
+        @Override
+        protected void onPostExecute(
+                final Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageMap) {
+            mApplicationContext = null;
+            mHourlyBatteryLevelsPerDay = null;
+            mBatteryHistoryMap = null;
+            // Post results back to main thread to refresh UI.
+            if (mHandler != null && mAsyncResponseDelegate != null) {
+                mHandler.post(() -> {
+                    mAsyncResponseDelegate.onBatteryUsageMapLoaded(batteryUsageMap);
+                });
+            }
         }
     }
 }
