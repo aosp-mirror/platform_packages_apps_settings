@@ -26,14 +26,20 @@ import android.app.Application;
 import android.content.res.Resources;
 import android.provider.Settings;
 
+import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
+
+import com.android.settings.widget.LabeledSeekBarPreference;
+import com.android.settingslib.testutils.shadow.ShadowInteractionJankMonitor;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowInteractionJankMonitor.class})
 public class LongPressPowerSensitivityPreferenceControllerTest {
 
     private static final String KEY_LONG_PRESS_SENSITIVITY =
@@ -43,7 +49,9 @@ public class LongPressPowerSensitivityPreferenceControllerTest {
 
     private Application mContext;
     private Resources mResources;
+    private LabeledSeekBarPreference mPreference;
     private LongPressPowerSensitivityPreferenceController mController;
+    private PreferenceScreen mScreen;
 
     @Before
     public void setUp() {
@@ -52,11 +60,22 @@ public class LongPressPowerSensitivityPreferenceControllerTest {
         when(mContext.getResources()).thenReturn(mResources);
 
         when(mResources.getIntArray(
-                com.android.internal.R.array.config_longPressOnPowerDurationSettings))
+                        com.android.internal.R.array.config_longPressOnPowerDurationSettings))
                 .thenReturn(SENSITIVITY_VALUES);
+        when(mResources.getBoolean(
+                        com.android.internal.R.bool
+                                .config_longPressOnPowerForAssistantSettingAvailable))
+                .thenReturn(true);
+        when(mResources.getInteger(com.android.internal.R.integer.config_longPressOnPowerBehavior))
+                .thenReturn(5); // Default to Assistant
 
+        mPreference = new LabeledSeekBarPreference(mContext, null);
         mController = new LongPressPowerSensitivityPreferenceController(mContext,
                 KEY_LONG_PRESS_SENSITIVITY);
+
+        mScreen = mock(PreferenceScreen.class);
+        when(mScreen.findPreference(KEY_LONG_PRESS_SENSITIVITY)).thenReturn(mPreference);
+        mController.displayPreference(mScreen);
     }
 
     @Test
@@ -98,46 +117,64 @@ public class LongPressPowerSensitivityPreferenceControllerTest {
     }
 
     @Test
-    public void longPressForAssistEnabled_isAvailable() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.POWER_BUTTON_LONG_PRESS,
-                PowerMenuSettingsUtils.LONG_PRESS_POWER_ASSISTANT_VALUE);
+    public void longPressForAssistant_isVisible() {
+        PowerMenuSettingsUtils.setLongPressPowerForAssistant(mContext);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                LongPressPowerSensitivityPreferenceController.AVAILABLE);
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isVisible()).isTrue();
     }
 
     @Test
-    public void longPressForAssistDisabled_isNotAvailableDueToDependentSetting() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.POWER_BUTTON_LONG_PRESS,
-                PowerMenuSettingsUtils.LONG_PRESS_POWER_NO_ACTION);
+    public void longPressForPowerMenu_isHidden() {
+        PowerMenuSettingsUtils.setLongPressPowerForPowerMenu(mContext);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                LongPressPowerSensitivityPreferenceController.DISABLED_DEPENDENT_SETTING);
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
-    public void sensitivityValuesAreNull_notAvailable() {
+    public void longPressPowerSettingNotAvailable_notAvailable_isHidden() {
+        when(mResources.getBoolean(
+                        com.android.internal.R.bool
+                                .config_longPressOnPowerForAssistantSettingAvailable))
+                .thenReturn(false);
+
+        mController.updateState(mPreference);
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(LongPressPowerSensitivityPreferenceController.UNSUPPORTED_ON_DEVICE);
+        assertThat(mPreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void sensitivityValuesAreNull_notAvailable_isHidden() {
         when(mResources.getIntArray(
                 com.android.internal.R.array.config_longPressOnPowerDurationSettings))
                 .thenReturn(null);
         mController = new LongPressPowerSensitivityPreferenceController(mContext,
                 KEY_LONG_PRESS_SENSITIVITY);
+        mController.displayPreference(mScreen);
+        mController.updateState(mPreference);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 LongPressPowerSensitivityPreferenceController.UNSUPPORTED_ON_DEVICE);
+        assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
-    public void sensitivityValuesArrayTooShort_notAvailable() {
+    public void sensitivityValuesArrayTooShort_notAvailable_isHidden() {
         when(mResources.getIntArray(
                 com.android.internal.R.array.config_longPressOnPowerDurationSettings))
                 .thenReturn(new int[]{200});
         mController = new LongPressPowerSensitivityPreferenceController(mContext,
                 KEY_LONG_PRESS_SENSITIVITY);
+        mController.displayPreference(mScreen);
+        mController.updateState(mPreference);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 LongPressPowerSensitivityPreferenceController.UNSUPPORTED_ON_DEVICE);
+        assertThat(mPreference.isVisible()).isFalse();
     }
 }
