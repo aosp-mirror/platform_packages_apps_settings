@@ -279,15 +279,17 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
                 batteryLevelData.getDailyBatteryLevels().getLevels(),
                 generateTimestampDayOfWeekTexts(
                         mContext, batteryLevelData.getDailyBatteryLevels().getTimestamps()),
-                mDailyChartIndex);
+                mDailyChartIndex,
+                BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS);
         mHourlyViewModels = new ArrayList<>();
-        for (BatteryLevelData.PeriodBatteryLevelData perDayData :
+        for (BatteryLevelData.PeriodBatteryLevelData hourlyBatteryLevelsPerDay :
                 batteryLevelData.getHourlyBatteryLevelsPerDay()) {
             mHourlyViewModels.add(new BatteryChartViewModel(
-                    perDayData.getLevels(),
+                    hourlyBatteryLevelsPerDay.getLevels(),
                     generateTimestampHourTexts(
-                            mContext, perDayData.getTimestamps()),
-                    mHourlyChartIndex));
+                            mContext, hourlyBatteryLevelsPerDay.getTimestamps()),
+                    mHourlyChartIndex,
+                    BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
         }
         refreshUi();
         // TODO: Loads item icon and label and build mBatteryIndexedMap.

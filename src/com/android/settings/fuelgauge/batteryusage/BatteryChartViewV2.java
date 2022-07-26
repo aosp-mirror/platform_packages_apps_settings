@@ -441,11 +441,19 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
             for (int index = 0; index < DEFAULT_AXIS_LABEL_COUNT; index++) {
                 xOffsets[index] = baselineX + index * offsetX * slotBarOffset;
             }
-            drawAxisLabel(canvas, xOffsets);
+            switch (mViewModel.axisLabelPosition()) {
+                case CENTER_OF_TRAPEZOIDS:
+                    drawAxisLabelsCenterOfTrapezoids(canvas, xOffsets, unitWidth);
+                    break;
+                case BETWEEN_TRAPEZOIDS:
+                default:
+                    drawAxisLabelsBetweenTrapezoids(canvas, xOffsets);
+                    break;
+            }
         }
     }
 
-    private void drawAxisLabel(Canvas canvas, float[] xOffsets) {
+    private void drawAxisLabelsBetweenTrapezoids(Canvas canvas, float[] xOffsets) {
         // Draws the 1st axis label info.
         canvas.drawText(
                 mAxisLabels[0], xOffsets[0] - mAxisLabelsBounds[0].left, getAxisLabelY(0),
@@ -466,6 +474,18 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
                     xOffsets[index]
                             - (mAxisLabelsBounds[index].width() - mAxisLabelsBounds[index].left)
                             * .5f,
+                    getAxisLabelY(index),
+                    mTextPaint);
+        }
+    }
+
+    private void drawAxisLabelsCenterOfTrapezoids(
+            Canvas canvas, float[] xOffsets, float unitWidth) {
+        for (int index = 0; index < DEFAULT_AXIS_LABEL_COUNT - 1; index++) {
+            canvas.drawText(
+                    mAxisLabels[index],
+                    xOffsets[index] + (unitWidth - (mAxisLabelsBounds[index].width()
+                            - mAxisLabelsBounds[index].left)) * .5f,
                     getAxisLabelY(index),
                     mTextPaint);
         }

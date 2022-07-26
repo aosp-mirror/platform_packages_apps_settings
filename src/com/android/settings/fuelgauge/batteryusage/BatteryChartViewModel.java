@@ -33,23 +33,31 @@ class BatteryChartViewModel {
     // We need at least 2 levels to draw a trapezoid.
     private static final int MIN_LEVELS_DATA_SIZE = 2;
 
+    enum AxisLabelPosition {
+        BETWEEN_TRAPEZOIDS,
+        CENTER_OF_TRAPEZOIDS,
+    }
+
     private final List<Integer> mLevels;
     private final List<String> mTexts;
+    private final AxisLabelPosition mAxisLabelPosition;
     private int mSelectedIndex;
 
     BatteryChartViewModel(
-            @NonNull List<Integer> levels, @NonNull List<String> texts, int selectedIndex) {
+            @NonNull List<Integer> levels, @NonNull List<String> texts, int selectedIndex,
+            @NonNull AxisLabelPosition axisLabelPosition) {
         Preconditions.checkArgument(
                 levels.size() == texts.size()
                         && levels.size() >= MIN_LEVELS_DATA_SIZE
                         && selectedIndex >= SELECTED_INDEX_ALL
                         && selectedIndex < levels.size(),
-                String.format(Locale.getDefault(), "Invalid BatteryChartViewModel"
+                String.format(Locale.ENGLISH, "Invalid BatteryChartViewModel"
                                 + "  levels.size: %d\ntexts.size: %d\nselectedIndex: %d.",
                         levels.size(), texts.size(), selectedIndex));
         mLevels = levels;
         mTexts = texts;
         mSelectedIndex = selectedIndex;
+        mAxisLabelPosition = axisLabelPosition;
     }
 
     public int size() {
@@ -72,9 +80,13 @@ class BatteryChartViewModel {
         mSelectedIndex = index;
     }
 
+    public AxisLabelPosition axisLabelPosition() {
+        return mAxisLabelPosition;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(mLevels, mTexts, mSelectedIndex);
+        return Objects.hash(mLevels, mTexts, mSelectedIndex, mAxisLabelPosition);
     }
 
     @Override
@@ -87,12 +99,15 @@ class BatteryChartViewModel {
         final BatteryChartViewModel batteryChartViewModel = (BatteryChartViewModel) other;
         return Objects.equals(mLevels, batteryChartViewModel.mLevels)
                 && Objects.equals(mTexts, batteryChartViewModel.mTexts)
-                && mSelectedIndex == batteryChartViewModel.mSelectedIndex;
+                && mSelectedIndex == batteryChartViewModel.mSelectedIndex
+                && mAxisLabelPosition == batteryChartViewModel.mAxisLabelPosition;
     }
 
     @Override
     public String toString() {
-        return String.format(Locale.getDefault(), "levels: %s\ntexts: %s\nselectedIndex: %d",
-                Objects.toString(mLevels), Objects.toString(mTexts), mSelectedIndex);
+        return String.format(Locale.ENGLISH,
+                "levels: %s\ntexts: %s\nselectedIndex: %d, axisLabelPosition: %s",
+                Objects.toString(mLevels), Objects.toString(mTexts), mSelectedIndex,
+                mAxisLabelPosition);
     }
 }
