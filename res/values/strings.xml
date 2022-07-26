@@ -78,16 +78,6 @@
     <!-- Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radioInfo_unknown">Unknown</string>
 
-    <!-- Used for diagnostic info screens, precise translation isn't needed. Unmounts the SD card from the phone, meaning it will become available for an attached computer  [CHAR LIMIT=25] -->
-    <string name="sdcard_unmount" product="nosdcard">Unmount USB storage</string>
-    <!-- Used for diagnostic info screens, precise translation isn't needed. Unmounts the SD card from the phone, meaning it will become available for an attached computer  -->
-    <string name="sdcard_unmount" product="default">Unmount SD card</string>
-
-    <!-- Used for diagnostic info screens, precise translation isn't needed. Formats the SD card in the phone, meaning it will be erased and reformatted [CHAR LIMIT=25] -->
-    <string name="sdcard_format" product="nosdcard">Erase USB storage</string>
-    <!-- Used for diagnostic info screens, precise translation isn't needed. Formats the SD card in the phone, meaning it will be erased and reformatted -->
-    <string name="sdcard_format" product="default">Erase SD card</string>
-
     <!-- Content description for preview pager. [CHAR LIMIT=NONE] -->
     <string name="preview_pager_content_description">Preview</string>
     <!-- Content description for dot pager indicator for preview pager. [CHAR LIMIT=NONE] -->
@@ -103,11 +93,6 @@
 
     <!-- Disclaimer for camera based rotate [CHAR_LIMIT=NONE] -->
     <string name="smart_rotate_text_headline">Face Detection uses the front-facing camera to improve auto-rotate accuracy. Images are never stored or sent to Google.</string>
-
-    <!-- Title for a notification shown. [CHAR LIMIT=25] -->
-    <string name="sdcard_setting" product="nosdcard">USB storage</string>
-    <!-- Title for a notification shown. -->
-    <string name="sdcard_setting" product="default">SD card</string>
 
     <!-- Used as setting title (for checkbox) on second screen after selecting Bluetooth settings -->
     <string name="bluetooth">Bluetooth</string>
@@ -362,40 +347,6 @@
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="ping_test_label">Run Ping Test</string>
 
-    <!-- Instructions after the user changes the mass storage settings -->
-    <string name="sdcard_changes_instructions">Changes take effect when USB cable is reconnected.</string>
-    <!-- Enable USB mass storage mode checkbox title -->
-    <string name="sdcard_settings_screen_mass_storage_text">Enable USB mass storage</string>
-    <!-- The label for total bytes on SD card -->
-    <string name="sdcard_settings_total_bytes_label">Total bytes:</string>
-    <!-- Message when there is no SD card present [CHAR LIMIT=30] -->
-    <string name="sdcard_settings_not_present_status" product="nosdcard">USB storage not mounted.</string>
-    <!-- Message when there is no SD card present -->
-    <string name="sdcard_settings_not_present_status" product="default">No SD card.</string>
-    <!-- Th label for the available (free) sapce on the SD card -->
-    <string name="sdcard_settings_available_bytes_label">Available bytes:</string>
-    <!-- Message when the SD card is being used by the computer as mass storage [CHAR LIMIT=30] -->
-    <string name="sdcard_settings_mass_storage_status" product="nosdcard">USB storage is being used as a mass storage device.</string>
-    <!-- Message when the SD card is being used by the computer as mass storage -->
-    <string name="sdcard_settings_mass_storage_status" product="default">SD card is being used as a mass storage device.</string>
-    <!-- Message when it is safe to remove the SD card [CHAR LIMIT=30] -->
-    <string name="sdcard_settings_unmounted_status" product="nosdcard">It\u2019s now safe to remove the USB storage.</string>
-    <!-- Message when it is safe to remove the SD card -->
-    <string name="sdcard_settings_unmounted_status" product="default">It\u2019s now safe to remove the SD card.</string>
-    <!-- Error message when the SD card was removed without properly unmounting [CHAR LIMIT=30] -->
-    <string name="sdcard_settings_bad_removal_status" product="nosdcard">USB storage was removed while still in use!</string>
-    <!-- Error message when the SD card was removed without properly unmounting -->
-    <string name="sdcard_settings_bad_removal_status" product="default">SD card was removed while still in use!</string>
-    <!-- Label for used bytes on the SD card -->
-    <string name="sdcard_settings_used_bytes_label">Used bytes:</string>
-    <!-- Message when it is scanning the SD card for new files [CHAR LIMIT=30]  -->
-    <string name="sdcard_settings_scanning_status" product="nosdcard">Scanning USB storage for media\u2026</string>
-    <!-- Message when it is scanning the SD card for new files -->
-    <string name="sdcard_settings_scanning_status" product="default">Scanning SD card for media\u2026</string>
-    <!-- Message when the SD card is mounted as read only [CHAR LIMIT=30] -->
-    <string name="sdcard_settings_read_only_status" product="nosdcard">USB storage mounted read-only.</string>
-    <!-- Message when the SD card is mounted as read only -->
-    <string name="sdcard_settings_read_only_status" product="default">SD card mounted read-only.</string>
     <!-- Used in setup wizard Wi-Fi screen.  The button label for going to the next screen without submitting. [CHAR LIMIT=20] -->
     <string name="skip_label">Skip</string>
     <!-- Used in setup wizard Wi-Fi screen. The button label for going to the next screen and submitting. [CHAR LIMIT=20] -->
@@ -495,16 +446,6 @@
 
     <!-- The title of the dialog to pick an activity.  This is shown when there are multiple activities that can do a particular action.  For example, suppose you click on the "Share" menu item in the Browser.  Since you can share the webpage URL via many communication methods, this dialog would come up with choices like "Email", "IM", etc.  This is a generic message, and the previous example is a single possible scenario (so please don't assume it's for the browser or anything :) ). -->
     <string name="activity_picker_label">Choose activity</string>
-    <!-- Do not translate. -->
-    <string name="debug_intent_sender_label">Debug intent sender</string>
-    <!-- The title of the activity to adjust display settings -->
-    <string name="display_label">Screen</string>
-    <!-- The title of the activity to adjust SD card settings [CHAR LIMIT=25] -->
-    <string name="sd_card_settings_label" product="nosdcard">USB storage</string>
-    <!-- The title of the activity to adjust SD card settings-->
-    <string name="sd_card_settings_label" product="default">SD card</string>
-    <!-- The title of the activity to adjust proxy settings -->
-    <string name="proxy_settings_label">Proxy settings</string>
 
     <!-- Button label for generic cancel action [CHAR LIMIT=20] -->
     <string name="cancel">Cancel</string>
@@ -3411,24 +3352,12 @@
     <string name="device_info_not_available">Not available</string>
     <!-- About phone screen, phone status screen title -->
     <string name="device_status_activity_title">Status</string>
-    <!-- About phone screen, title of the item to go into the Phone status screen -->
-    <string name="device_status">Status</string>
-    <!-- About tablet screen, summary of the item that takes you to tablet status screen -->
-    <string name="device_status_summary" product="tablet">Status of the battery, network, and other information</string>
-    <!-- About phone screen, summary of the item to go into the phone status screen -->
-    <string name="device_status_summary" product="default">Phone number, signal, etc.</string>
     <!-- Main settings screen item's title to go into the storage settings screen [CHAR LIMIT=25] -->
     <string name="storage_settings" >Storage</string>
     <!-- Settings title that shows user how much storage and cache space an App is taking [CHAR LIMIT=50] -->
     <string name="storage_settings_for_app" >Storage &amp; cache</string>
-    <!-- Main settings screen item's title to go into the storage & USB settings screen [CHAR LIMIT=25] -->
-    <string name="storage_usb_settings" >Storage</string>
     <!-- Storage settings screen title -->
     <string name="storage_settings_title">Storage settings</string>
-    <!-- [CHAR LIMIT=100] Main settings screen item's summary for the SD card and storage settings -->
-    <string name="storage_settings_summary" product="nosdcard">Unmount USB storage, view available storage</string>
-    <!-- [CHAR LIMIT=100] Main settings screen item's summary for the SD card and storage settings -->
-    <string name="storage_settings_summary" product="default">Unmount SD card, view available storage</string>
     <!-- About phone screen, title for IMEI for multi-sim devices -->
     <string name="imei_multi_sim">IMEI (sim slot %1$d)</string>
     <!-- About phone screen, summary of the MAC address [CHAR LIMIT=80] -->
@@ -3499,102 +3428,8 @@
     <string name="status_serial_number">Serial number</string>
     <!-- About phone, status item title.  How long the device has been running since its last reboot. -->
     <string name="status_up_time">Up time</string>
-    <!-- About phone, status item title.  How much time the device has had its main CPU awake. -->
-    <string name="status_awake_time">Awake time</string>
-    <!-- SD card & phone storage settings screen heading. This is displayed above items that pertain to the phone's internal storage  -->
-    <string name="internal_memory">Internal storage</string>
-    <!-- SD card & phone storage settings screen heading. This is displayed above items that pertain to the SD card [CHAR LIMIT=30] -->
-    <string name="sd_memory" product="nosdcard">USB storage</string>
-    <!-- SD card & phone storage settings screen heading. This is displayed above items that pertain to the SD card -->
-    <string name="sd_memory" product="default">SD card</string>
-    <!-- SD card & phone storage settings title. The amount of free space for some storage partition.  For example, this is listed under both the "Internal phone storage" section and the "SD card" section. -->
-    <string name="memory_available">Available</string>
-    <!-- SD card & phone storage settings title. The amount of free space for some storage partition when the volume is read-only. [CHAR LIMIT=64] -->
-    <string name="memory_available_read_only">Available (read-only)</string>
-    <!-- SD card & phone storage settings screen heading.  The total amount of storage space for some storage partition.  For example, this is listed under both the "Internal phone storage" section and the "SD card" section -->
-    <string name="memory_size">Total space</string>
     <!-- SD card & phone storage settings summary. Displayed when the total memory usage is being calculated. Will be replaced with a number like "12.3 GB" when finished calucating. [CHAR LIMIT=30] -->
     <string name="memory_calculating_size">Calculating\u2026</string>
-    <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of applications installed. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
-    <string name="memory_apps_usage">Apps &amp; app data</string>
-    <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of media on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
-    <string name="memory_media_usage">Media</string>
-    <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of /sdcard/Download on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
-    <string name="memory_downloads_usage">Downloads</string>
-    <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of all pictures, videos in /sdcard/DCIM, /sdcard/Pictures folders on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
-    <string name="memory_dcim_usage">Pictures, videos</string>
-    <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of audio files in /sdcard on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
-    <string name="memory_music_usage">Audio (music, ringtones, podcasts, etc.)</string>
-    <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of misc files on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
-    <string name="memory_media_misc_usage">Other files</string>
-    <!-- Storage item representing all cached data on device. [CHAR LIMIT=48] -->
-    <string name="memory_media_cache_usage">Cached data</string>
-    <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   [CHAR LIMIT=25] -->
-    <string name="sd_eject" product="nosdcard">Unmount shared storage</string>
-    <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   -->
-    <string name="sd_eject" product="default">Unmount SD card</string>
-    <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   [CHAR LIMIT=30] -->
-    <string name="sd_eject_summary" product="nosdcard">Unmount the internal USB storage</string>
-    <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   -->
-    <string name="sd_eject_summary" product="default">Unmount the SD card so you can safely remove it</string>
-    <!-- SD card & phone storage settings item title for toggling PTP mode on and off.  When PTP mode is on the device will appear on the USB bus as a PTP camera device instead of an MTP music player.   -->
-
-    <!-- SD card & phone storage settings item summary that is displayed when no SD card is inserted.  This version of the string can probably never come up on current hardware. [CHAR LIMIT=25] -->
-    <string name="sd_insert_summary" product="nosdcard">Insert USB storage for mounting</string>
-    <!-- SD card & phone storage settings item summary that is displayed when no SD card is inserted -->
-    <string name="sd_insert_summary" product="default">Insert an SD card for mounting</string>
-
-    <!-- Storage setting item that will mount USB storage if it unmounted. A user should never see this. [CHAR LIMIT=25] -->
-    <string name="sd_mount" product="nosdcard">Mount USB storage</string>
-    <!-- SD card & phone storage settings item title that will result in the phone mounting the SD card. -->
-    <string name="sd_mount" product="default">Mount SD card</string>
-
-    <!-- Subtext for Mount USB storage in Storage settings. User should never see this since we use automount. -->
-    <string name="sd_mount_summary" product="nosdcard"></string>
-    <!-- Subtext for Mount SD Card in Storage settings. User should never see this since we use automount. -->
-    <string name="sd_mount_summary" product="default"></string>
-    <!-- SD card & phone storage settings item title that will result in the phone formatting the USB storage.   [CHAR LIMIT=25] -->
-    <string name="sd_format" product="nosdcard">Erase USB storage</string>
-    <!-- SD card & phone storage settings item title that will result in the phone formatting the SD card.   [CHAR LIMIT=25] -->
-    <string name="sd_format" product="default">Erase SD card</string>
-    <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.   [CHAR LIMIT=80] -->
-    <string name="sd_format_summary" product="nosdcard">Erases all data on the internal USB storage, such as music and photos</string>
-    <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.   [CHAR LIMIT=80] -->
-    <string name="sd_format_summary" product="default">Erases all data on the SD card, such as music and photos</string>
-    <!-- SD card status when it is mounted as read only. Will be appended to size, starts with an unbreakable space -->
-
-    <!-- SD card & phone storage settings item summary that will result in the phone connected to PC and MTP/PTP enabled.   [CHAR LIMIT=80] -->
-    <string name="mtp_ptp_mode_summary">MTP or PTP function is active</string>
-
-    <!-- SD card eject confirmation dialog title   [CHAR LIMIT=25] -->
-    <string name="dlg_confirm_unmount_title" product="nosdcard">Unmount USB storage?</string>
-    <!-- SD card eject confirmation dialog title   -->
-    <string name="dlg_confirm_unmount_title" product="default">Unmount SD card?</string>
-    <!-- SD card eject confirmation dialog  [CHAR LIMIT=NONE] -->
-    <string name="dlg_confirm_unmount_text" product="nosdcard">If you unmount the USB storage, some apps you are using will stop and may be unavailable until you remount the USB storage.</string>
-    <!-- SD card eject confirmation dialog  -->
-    <string name="dlg_confirm_unmount_text" product="default">If you unmount the SD card, some apps you are using will stop and may be unavailable until you remount the SD card.</string>
-    <!-- SD card eject error dialog title   [CHAR LIMIT=30] -->
-    <string name="dlg_error_unmount_title" product="nosdcard"></string>
-    <!-- SD card eject error dialog title   -->
-    <string name="dlg_error_unmount_title" product="default"></string>
-    <!-- SD card eject error dialog text   [CHAR LIMIT=NONE] -->
-    <string name="dlg_error_unmount_text" product="nosdcard">Couldn\u2019t unmount USB storage. Try again later.</string>
-    <!-- SD card eject error dialog text   -->
-    <string name="dlg_error_unmount_text" product="default">Couldn\u2019t unmount SD card. Try again later.</string>
-    <!-- SD card unmount informative text   [CHAR LIMIT=NONE] -->
-    <string name="unmount_inform_text" product="nosdcard">USB storage will be unmounted.</string>
-    <!-- SD card unmount informative text   [CHAR LIMIT=NONE] -->
-    <string name="unmount_inform_text" product="default">SD card will be unmounted.</string>
-    <!-- SD card eject progress title   -->
-    <string name="sd_ejecting_title">Unmounting</string>
-    <!-- SD card eject progress text   -->
-    <string name="sd_ejecting_summary">Unmount in progress</string>
-
-    <!-- Settings item title when storage is running low [CHAR LIMIT=32] -->
-    <string name="storage_low_title">Storage space is running out</string>
-    <!-- Settings item summary when storage is running low [CHAR LIMIT=NONE] -->
-    <string name="storage_low_summary">Some system functions, such as syncing, may not work correctly. Try to free space by deleting or unpinning items, such as apps or media content.</string>
 
     <!-- Storage setting.  Menu option for renaming a storage device [CHAR LIMIT=30]-->
     <string name="storage_menu_rename">Rename</string>
@@ -3620,37 +3455,13 @@
     <string name="storage_menu_free">Free up space</string>
     <!-- Storage setting. Menu option for accessing the storage manager settings. [CHAR LIMIT=30] -->
     <string name="storage_menu_manage">Manage storage</string>
-    <!-- Storage setting. Keywords for Free up space. [CHAR LIMIT=NONE] -->
-    <string name="keywords_storage_menu_free">clean, storage</string>
     <!-- Storage setting. Title for storage free up option. [CHAR LIMIT=30] -->
     <string name="storage_free_up_space_title">Free up space</string>
     <!-- Storage setting. Summary for storage free up option. [CHAR LIMIT=NONE] -->
     <string name="storage_free_up_space_summary">Go to Files app to manage and free up space</string>
 
-    <!-- Storage setting.  Title for USB transfer settings [CHAR LIMIT=30]-->
-    <string name="storage_title_usb">USB computer connection</string>
-    <!-- Storage setting.  USB connection category [CHAR LIMIT=30]-->
-    <string name="usb_connection_category">Connect as</string>
-    <!-- Storage setting.  Title for MTP checkbox [CHAR LIMIT=30]-->
-    <string name="usb_mtp_title">Media device (MTP)</string>
-    <!-- Storage setting.  Summary for MTP checkbox [CHAR LIMIT=NONE]-->
-    <string name="usb_mtp_summary">Lets you transfer media files on Windows, or using Android File Transfer on Mac (see www.android.com/filetransfer)</string>
-    <!-- Storage setting.  Title for PTP checkbox [CHAR LIMIT=30]-->
-    <string name="usb_ptp_title">Camera (PTP)</string>
-    <!-- Storage setting.  Summary for PTP checkbox [CHAR LIMIT=NONE]-->
-    <string name="usb_ptp_summary">Lets you transfer photos using camera software, and transfer any files on computers that don\u2019t support MTP</string>
-    <!-- Storage setting.  Title for MIDI checkbox [CHAR LIMIT=30]-->
-    <string name="usb_midi_title">MIDI</string>
-    <!-- Storage setting.  Summary for MIDI checkbox [CHAR LIMIT=NONE]-->
-    <string name="usb_midi_summary">Lets MIDI enabled applications work over USB with MIDI software on your computer.</string>
-
     <!-- Section header above list of other users storage [CHAR LIMIT=32] -->
     <string name="storage_other_users">Other users</string>
-
-    <!-- Section header above list of internal storage devices [CHAR LIMIT=30]-->
-    <string name="storage_internal_title">Device storage</string>
-    <!-- Section header above list of external storage devices [CHAR LIMIT=30]-->
-    <string name="storage_external_title">Portable storage</string>
 
     <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
     <string name="storage_size_large"><xliff:g id="number" example="128">^1</xliff:g><small><small> <xliff:g id="unit" example="KB">^2</xliff:g></small></small></string>
@@ -3665,17 +3476,8 @@
     <!-- Toast informing that storage unmount operation failed. [CHAR LIMIT=64]-->
     <string name="storage_unmount_failure">Couldn\u2019t safely eject <xliff:g id="name" example="SD card">%1$s</xliff:g></string>
 
-    <!-- Toast informing that storage format operation was successful. [CHAR LIMIT=64]-->
-    <string name="storage_format_success"><xliff:g id="name" example="SD card">%1$s</xliff:g> is formatted</string>
-    <!-- Toast informing that storage format operation failed. [CHAR LIMIT=64]-->
-    <string name="storage_format_failure">Couldn\u2019t format <xliff:g id="name" example="SD card">%1$s</xliff:g></string>
-
     <!-- Title of dialog prompting user to rename a storage volume [CHAR LIMIT=32]-->
     <string name="storage_rename_title">Rename storage</string>
-
-    <!-- Dialog body informing user about an unmounted storage device. [CHAR LIMIT=NONE]-->
-    <string name="storage_dialog_unmounted">This <xliff:g id="name" example="SD card">^1</xliff:g> is safely ejected, but still available.
-\n\nTo use this <xliff:g id="name" example="SD card">^1</xliff:g>, you have to mount it first.</string>
 
     <!-- Dialog body informing user about an unmountable storage device. [CHAR LIMIT=NONE]-->
     <string name="storage_dialog_unmountable">This <xliff:g id="name" example="SD card">^1</xliff:g> is corrupted.
@@ -3712,75 +3514,13 @@
   <!-- Message to notify guest users as to why they can't set up the storage device [CHAR LIMIT=50]-->
   <string name="storage_wizard_guest">Guest mode users cannot format SD cards</string>
 
-  <!-- Title of wizard step prompting user to setup a storage device [CHAR LIMIT=32] -->
-    <string name="storage_wizard_init_title">Set up your <xliff:g id="name" example="SD card">^1</xliff:g></string>
-    <!-- Title of wizard choice to use storage device as external storage [CHAR LIMIT=64] -->
-    <string name="storage_wizard_init_external_title">Format SD card for portable storage</string>
-    <!-- Summary of wizard choice to use storage device as external storage [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_init_external_summary">Save photos, videos, music, and more and access them from other devices</string>
-    <!-- Title of wizard choice to use storage device as internal storage [CHAR LIMIT=64] -->
-    <string name="storage_wizard_init_internal_title">Format SD card for internal storage</string>
-    <!-- Summary of wizard choice to use storage device as internal storage [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_init_internal_summary">Save apps \u0026 media to use on this phone only</string>
-
-    <!-- Title of wizard step prompting user to format a storage device [CHAR LIMIT=32] -->
-    <string name="storage_wizard_format_confirm_title">Format as internal storage</string>
-    <!-- Body of wizard step prompting user to format a storage device [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_format_confirm_body">This requires the <xliff:g id="name" example="SD card">^1</xliff:g> to be formatted to make it secure.
-\n\nAfter formatting, this <xliff:g id="name" example="SD card">^1</xliff:g> will only work in this device.
-\n\n<b>Formatting erases all data currently stored on the <xliff:g id="name" example="SD card">^1</xliff:g>.</b> To avoid losing the data, consider backing it up.
-    </string>
-
-    <!-- Title of wizard step prompting user to format a storage device [CHAR LIMIT=32] -->
-    <string name="storage_wizard_format_confirm_public_title">Format as portable storage</string>
-    <!-- Body of wizard step prompting user to format a storage device [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_format_confirm_public_body">This requires the <xliff:g id="name" example="SD card">^1</xliff:g> to be formatted.
-\n\n<b>Formatting erases all data currently stored on the <xliff:g id="name" example="SD card">^1</xliff:g>.</b> To avoid losing the data, consider backing it up.
-    </string>
-
-    <!-- Next button text of wizard step prompting user to format a storage device [CHAR LIMIT=32] -->
-    <string name="storage_wizard_format_confirm_next">Erase &amp; format</string>
-
     <!-- In-progress title. This string lets the user know the SD card is being formatted. The user won't be able to proceed with setup until this step is finished. The placeholder is for the name of the device (e.g. brand name of the SD card). [CHAR LIMIT=32] -->
     <string name="storage_wizard_format_progress_title">Formatting <xliff:g id="name" example="SD card">^1</xliff:g>\u2026</string>
     <!-- Subtext for a full-screen title. This string lets the user know that the SD card can't be removed during this process. The user won't be able to proceed with setup until this step is finished. The placeholder is for the specific device (e.g. SD card, USB drive, etc.). [CHAR LIMIT=NONE] -->
     <string name="storage_wizard_format_progress_body">Don\u2019t remove the <xliff:g id="name" example="SD card">^1</xliff:g> while it\u2019s being formatted.</string>
 
-    <!-- Title of wizard step prompting user to migrate data to new storage [CHAR LIMIT=32] -->
-    <string name="storage_wizard_migrate_title">Move data to new storage</string>
-    <!-- Body of wizard step prompting user to migrate data to new storage [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_migrate_body">You can move your photos, files, and some apps to this new <xliff:g id="name" example="SD card">^1</xliff:g>.
-\n\nThe move takes about <xliff:g id="time" example="1 hour">^2</xliff:g> and will free <xliff:g id="size" example="1.2 GB">^3</xliff:g> on internal storage. Some apps won\u2019t work while it\u2019s underway.
-    </string>
-
-    <!-- Title of wizard choice to migrate data right now [CHAR LIMIT=64] -->
-    <string name="storage_wizard_migrate_now">Move now</string>
-    <!-- Title of wizard choice to migrate data at later time [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_migrate_later">Move later</string>
-
-    <!-- Title of wizard step prompting user to start data migration [CHAR LIMIT=32] -->
-    <string name="storage_wizard_migrate_confirm_title">Move data now</string>
-    <!-- Body of wizard step providing details about data migration [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_migrate_confirm_body"><b>The move takes about <xliff:g id="time" example="1 hour">^1</xliff:g>. It will free <xliff:g id="size" example="1.2 GB">^2</xliff:g> on <xliff:g id="name" example="Internal storage">^3</xliff:g>.</b></string>
-    <!-- Title of wizard button prompting user to start data migration [CHAR LIMIT=32] -->
-    <string name="storage_wizard_migrate_confirm_next">Move</string>
-
-    <!-- Title of wizard step showing migration progress [CHAR LIMIT=32] -->
-    <string name="storage_wizard_migrate_progress_title">Moving data\u2026</string>
-
-    <!-- Body of wizard step providing details about data migration [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_migrate_details">During the move:
-\n\u2022 Don\u2019t remove the <xliff:g id="name" example="SD card">^1</xliff:g>.
-\n\u2022 Some apps won\u2019t work correctly.
-\n\u2022 Keep the device charged.
-    </string>
-
     <!-- Title of a full-screen message. This string lets the user know that their storage device is ready to use. They can tap a button at the bottom of the screen to complete the setup process. The placeholder is for the specific device (e.g. SD card, USB drive, etc.). [CHAR LIMIT=32] -->
     <string name="storage_wizard_ready_title"><xliff:g id="name" example="SD card">^1</xliff:g> formatted</string>
-    <!-- Body of wizard step indicating that external storage is ready [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_ready_external_body">You can start using your <xliff:g id="name" example="SD card">^1</xliff:g></string>
-    <!-- Body of wizard step indicating that internal storage is ready [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_ready_internal_body">You can start using your <xliff:g id="name" example="SD card">^1</xliff:g></string>
 
     <!-- Title of wizard step prompting user to move an app [CHAR LIMIT=32] -->
     <string name="storage_wizard_move_confirm_title">Move <xliff:g id="app" example="Calculator">^1</xliff:g></string>
@@ -3798,14 +3538,6 @@
     <string name="storage_wizard_move_progress_body">Don\u2019t remove the <xliff:g id="name" example="SD card">^1</xliff:g> during the move.
 \n\nThe <xliff:g id="app" example="Calculator">^2</xliff:g> app on this device won\u2019t be available until the move is complete.
     </string>
-    <!-- Title of wizard button offering to cancel move [CHAR LIMIT=32] -->
-    <string name="storage_wizard_move_progress_cancel">Cancel move</string>
-
-    <!-- Title of wizard step prompting user to start data migration [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_slow_body">This <xliff:g id="name" example="SD card">^1</xliff:g> appears to be slow.
-\n\nYou can continue, but apps moved to this location may stutter and data transfers may take a long time.
-\n\nConsider using a faster <xliff:g id="name" example="SD card">^1</xliff:g> for better performance.
-</string>
 
     <!-- This is the title of a full-screen message. After this question, the user will get to choose how they want to use the storage device that they have in their phone. The placeholder is for the specific device (e.g. SD card, USB drive, etc.). [CHAR LIMIT=32] -->
     <string name="storage_wizard_init_v2_title">How will you use this <xliff:g id="name" example="SD card">^1</xliff:g>?</string>
@@ -4729,10 +4461,6 @@
     <string name="external_code_size_label">USB storage app</string>
     <!-- Manage applications, individual application info screen, label under Storage heading.  The amount of sapce taken up by the app's data (for example, downloaded emails or something like that) -->
     <string name="data_size_label">User data</string>
-    <!--  Manage applications, individual application info screen, label under Storage heading.  The amount of space taken up by the app's data on USB storage [CHARSIZE=40] -->
-    <string name="external_data_size_label" product="nosdcard">USB storage data</string>
-    <!--  Manage applications, individual application info screen, label under Storage heading.  The amount of space taken up by the app's data on the SD card [CHARSIZE=40] -->
-    <string name="external_data_size_label" product="default">SD card</string>
     <!-- Manage applications, individual application info screen, button label under Storage heading. Button to remove the application from the system. -->
     <string name="uninstall_text">Uninstall</string>
     <!-- Manage applications, individual application info screen, menu item to uninstall an application for all users. -->
@@ -4804,12 +4532,6 @@
     <!-- Text for filter option in ManageApps screen to display list of running
     packages only. -->
     <string name="filter_apps_running">Running</string>
-    <!-- Text for filter option in ManageApps screen to display list of
-    packages installed on sdcard. [CHAR LIMIT=30] -->
-    <string name="filter_apps_onsdcard" product="nosdcard">USB storage</string>
-    <!-- Text for filter option in ManageApps screen to display list of
-    packages installed on sdcard. -->
-    <string name="filter_apps_onsdcard" product="default">On SD card</string>
     <!-- [CHAR LIMIT=30] Manage applications, text telling using an application is not installed for the current user. The key part is that it's not installed. -->
     <string name="not_installed">Not installed for this user</string>
     <!-- [CHAR LIMIT=30] App details, text telling an application is installed. -->
@@ -4830,8 +4552,6 @@
     <string name="dlg_cancel">Cancel</string>
     <!-- Manage applications, individual application screen, confirmation dialog button. Displays when user selects to "Clear data". Goes through with the clearing of the data. [CHAR LIMIT=25] -->
     <string name="dlg_delete">Delete</string>
-    <!-- Manage applications, individual application dialog box title. Shown when the user somehow got into a state where it wants to manage some app that isn't found. -->
-    <string name="app_not_found_dlg_title"></string>
     <!-- Manage applications, individual application dialog box message. Shown when the user somehow got into a state where it wants to manage some app that isn't found. -->
     <string name="app_not_found_dlg_text"> The app wasn\u2019t found in the list of installed apps.</string>
     <!-- Manage applications, text for dialog if clear data fails-->
@@ -4846,14 +4566,6 @@
     <string name="version_text">version <xliff:g id="version_num">%1$s</xliff:g></string>
     <!-- Manage applications, text for Move button -->
     <string name="move_app">Move</string>
-    <!-- Manage applications, text for Move button to move app to internal storage -->
-    <string name="move_app_to_internal" product="tablet">Move to tablet</string>
-    <!-- Manage applications, text for Move button to move app to internal storage -->
-    <string name="move_app_to_internal" product="default">Move to phone</string>
-    <!-- Manage applications, text for Move button  to move app to sdcard [CHAR LIMIT=25] -->
-    <string name="move_app_to_sdcard" product="nosdcard">Move to USB storage</string>
-    <!-- Manage applications, text for Move button  to move app to sdcard -->
-    <string name="move_app_to_sdcard" product="default">Move to SD card</string>
 
     <!-- Text of pop up message if the request for a "migrate primary storage" operation
          (see storage_menu_migrate) is denied as another is already in progress. [CHAR LIMIT=75] -->
@@ -10919,9 +10631,6 @@
 
     <!-- Summary of storage usage [CHAR LIMIT=NONE] -->
     <string name="storage_summary"><xliff:g id="percentage" example="54%">%1$s</xliff:g> used - <xliff:g id="free_space" example="32GB">%2$s</xliff:g> free</string>
-
-    <!-- Summary of storage usage when there is SD card [CHAR LIMIT=NONE] -->
-    <string name="storage_summary_with_sdcard">Internal storage: <xliff:g id="percentage" example="54%">%1$s</xliff:g> used - <xliff:g id="free_space" example="32GB">%2$s</xliff:g> free</string>
 
     <!-- Summary of display with screen sleep timeout [CHAR LIMIT=NONE] -->
     <string name="display_summary">Sleep after <xliff:g id="timeout_description" example="10 minutes">%1$s</xliff:g> of inactivity</string>
