@@ -55,6 +55,7 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
@@ -173,11 +174,11 @@ public final class BatteryChartPreferenceControllerV2Test {
         for (int index = 0; index < DESIRED_HISTORY_SIZE; index++) {
             assertThat(mBatteryChartPreferenceController.mBatteryHistoryKeys[index])
                     // These values is are calculated by hand from createBatteryHistoryMap().
-                    .isEqualTo(index + 1);
+                    .isEqualTo(generateTimestamp(index));
         }
         // Verifies the created battery levels array.
         for (int index = 0; index < 13; index++) {
-            assertThat(mBatteryChartPreferenceController.mBatteryHistoryLevels[index])
+            assertThat(mBatteryChartPreferenceController.mViewModel.levels().get(index))
                     // These values is are calculated by hand from createBatteryHistoryMap().
                     .isEqualTo(100 - index * 2);
         }
@@ -193,11 +194,11 @@ public final class BatteryChartPreferenceControllerV2Test {
         for (int index = 0; index < DESIRED_HISTORY_SIZE; index++) {
             assertThat(mBatteryChartPreferenceController.mBatteryHistoryKeys[index])
                     // These values is are calculated by hand from createBatteryHistoryMap().
-                    .isEqualTo(index + 1);
+                    .isEqualTo(generateTimestamp(index));
         }
         // Verifies the created battery levels array.
         for (int index = 0; index < 13; index++) {
-            assertThat(mBatteryChartPreferenceController.mBatteryHistoryLevels[index])
+            assertThat(mBatteryChartPreferenceController.mViewModel.levels().get(index))
                     // These values is are calculated by hand from createBatteryHistoryMap().
                     .isEqualTo(100 - index * 2);
         }
@@ -205,67 +206,51 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
+    public void testSetBatteryChartViewModel() {
+        verify(mBatteryChartPreferenceController.mBatteryChartView)
+                .setViewModel(new BatteryChartViewModel(
+                        List.of(100, 98, 96, 94, 92, 90, 88, 86, 84, 82, 80, 78, 76),
+                        List.of("7 am", "9 am", "11 am", "1 pm", "3 pm", "5 pm", "7 pm",
+                                "9 pm", "11 pm", "1 am", "3 am", "5 am", "7 am"),
+                        BatteryChartViewModel.SELECTED_INDEX_ALL));
+    }
+
+    @Test
+    public void testRefreshUi_refresh() {
+        assertThat(mBatteryChartPreferenceController.refreshUi()).isTrue();
+    }
+
+    @Test
     public void testRefreshUi_batteryIndexedMapIsNull_ignoreRefresh() {
         mBatteryChartPreferenceController.setBatteryHistoryMap(null);
-        assertThat(mBatteryChartPreferenceController.refreshUi(
-                /*trapezoidIndex=*/ 1, /*isForce=*/ false)).isFalse();
+        assertThat(mBatteryChartPreferenceController.refreshUi()).isFalse();
     }
 
     @Test
     public void testRefreshUi_batteryChartViewIsNull_ignoreRefresh() {
         mBatteryChartPreferenceController.mBatteryChartView = null;
-        assertThat(mBatteryChartPreferenceController.refreshUi(
-                /*trapezoidIndex=*/ 1, /*isForce=*/ false)).isFalse();
-    }
-
-    @Test
-    public void testRefreshUi_trapezoidIndexIsNotChanged_ignoreRefresh() {
-        final int trapezoidIndex = 1;
-        mBatteryChartPreferenceController.mTrapezoidIndex = trapezoidIndex;
-        assertThat(mBatteryChartPreferenceController.refreshUi(
-                trapezoidIndex, /*isForce=*/ false)).isFalse();
-    }
-
-    @Test
-    public void testRefreshUi_forceUpdate_refreshUi() {
-        final int trapezoidIndex = 1;
-        mBatteryChartPreferenceController.mTrapezoidIndex = trapezoidIndex;
-        assertThat(mBatteryChartPreferenceController.refreshUi(
-                trapezoidIndex, /*isForce=*/ true)).isTrue();
-    }
-
-    @Test
-    public void testForceRefreshUi_updateTrapezoidIndexIntoSelectAll() {
-        mBatteryChartPreferenceController.mTrapezoidIndex =
-                BatteryChartViewV2.SELECTED_INDEX_INVALID;
-        mBatteryChartPreferenceController.setBatteryHistoryMap(
-                createBatteryHistoryMap());
-
-        assertThat(mBatteryChartPreferenceController.mTrapezoidIndex)
-                .isEqualTo(BatteryChartViewV2.SELECTED_INDEX_ALL);
+        assertThat(mBatteryChartPreferenceController.refreshUi()).isFalse();
     }
 
     @Test
     public void testRemoveAndCacheAllPrefs_emptyContent_ignoreRemoveAll() {
-        final int trapezoidIndex = 1;
+        mBatteryChartPreferenceController.mTrapezoidIndex = 1;
         doReturn(0).when(mAppListGroup).getPreferenceCount();
 
-        mBatteryChartPreferenceController.refreshUi(
-                trapezoidIndex, /*isForce=*/ true);
+        mBatteryChartPreferenceController.refreshUi();
         verify(mAppListGroup, never()).removeAll();
     }
 
     @Test
     public void testRemoveAndCacheAllPrefs_buildCacheAndRemoveAllPreference() {
-        final int trapezoidIndex = 1;
+        mBatteryChartPreferenceController.mTrapezoidIndex = 1;
         doReturn(1).when(mAppListGroup).getPreferenceCount();
         doReturn(mPowerGaugePreference).when(mAppListGroup).getPreference(0);
         doReturn(PREF_KEY).when(mPowerGaugePreference).getKey();
         // Ensures the testing data is correct.
         assertThat(mBatteryChartPreferenceController.mPreferenceCache).isEmpty();
 
-        mBatteryChartPreferenceController.refreshUi(
-                trapezoidIndex, /*isForce=*/ true);
+        mBatteryChartPreferenceController.refreshUi();
 
         assertThat(mBatteryChartPreferenceController.mPreferenceCache.get(PREF_KEY))
                 .isEqualTo(mPowerGaugePreference);
@@ -522,7 +507,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     @Test
     public void testOnSelect_selectAll_logMetric() {
         mBatteryChartPreferenceController.onSelect(
-                BatteryChartViewV2.SELECTED_INDEX_ALL /*slot index*/);
+                BatteryChartViewModel.SELECTED_INDEX_ALL /*slot index*/);
 
         verify(mMetricsFeatureProvider)
                 .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SHOW_ALL);
@@ -562,7 +547,7 @@ public final class BatteryChartPreferenceControllerV2Test {
                 spy(new ExpandDividerPreference(mContext));
         // Simulates select all condition.
         mBatteryChartPreferenceController.mTrapezoidIndex =
-                BatteryChartViewV2.SELECTED_INDEX_ALL;
+                BatteryChartViewModel.SELECTED_INDEX_ALL;
 
         mBatteryChartPreferenceController.refreshCategoryTitle();
 
@@ -578,44 +563,6 @@ public final class BatteryChartPreferenceControllerV2Test {
                 .setTitle(captor.capture());
         assertThat(captor.getValue())
                 .isEqualTo("System usage for past 24 hr");
-    }
-
-    @Test
-    public void testSetTimestampLabel_nullBatteryHistoryKeys_ignore() {
-        mBatteryChartPreferenceController = createController();
-        mBatteryChartPreferenceController.mBatteryHistoryKeys = null;
-        mBatteryChartPreferenceController.mBatteryChartView =
-                spy(new BatteryChartViewV2(mContext));
-        mBatteryChartPreferenceController.setTimestampLabel();
-
-        verify(mBatteryChartPreferenceController.mBatteryChartView, never())
-                .setAxisLabels(any());
-    }
-
-    @Test
-    public void testSetTimestampLabel_setExpectedTimestampData() {
-        mBatteryChartPreferenceController = createController();
-        mBatteryChartPreferenceController.mBatteryChartView =
-                spy(new BatteryChartViewV2(mContext));
-        setUpBatteryHistoryKeys();
-
-        mBatteryChartPreferenceController.setTimestampLabel();
-
-        verify(mBatteryChartPreferenceController.mBatteryChartView)
-                .setAxisLabels(new String[] {"4 pm", "12 am", "7 am"});
-    }
-
-    @Test
-    public void testSetTimestampLabel_withoutValidTimestamp_setExpectedTimestampData() {
-        mBatteryChartPreferenceController = createController();
-        mBatteryChartPreferenceController.mBatteryChartView =
-                spy(new BatteryChartViewV2(mContext));
-        mBatteryChartPreferenceController.mBatteryHistoryKeys = new long[]{0L};
-
-        mBatteryChartPreferenceController.setTimestampLabel();
-
-        verify(mBatteryChartPreferenceController.mBatteryChartView)
-                .setAxisLabels(new String[] {"12 am"});
     }
 
     @Test
@@ -663,6 +610,11 @@ public final class BatteryChartPreferenceControllerV2Test {
                 .isFalse();
     }
 
+    private static Long generateTimestamp(int index) {
+        // "2021-04-23 07:00:00 UTC" + index hours
+        return 1619247600000L + index * DateUtils.HOUR_IN_MILLIS;
+    }
+
     private static Map<Long, Map<String, BatteryHistEntry>> createBatteryHistoryMap() {
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
         for (int index = 0; index < DESIRED_HISTORY_SIZE; index++) {
@@ -671,7 +623,7 @@ public final class BatteryChartPreferenceControllerV2Test {
             final BatteryHistEntry entry = new BatteryHistEntry(values);
             final Map<String, BatteryHistEntry> entryMap = new HashMap<>();
             entryMap.put("fake_entry_key" + index, entry);
-            batteryHistoryMap.put(Long.valueOf(index + 1), entryMap);
+            batteryHistoryMap.put(generateTimestamp(index), entryMap);
         }
         return batteryHistoryMap;
     }
