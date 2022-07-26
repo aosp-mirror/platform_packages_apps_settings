@@ -28,7 +28,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.util.Slog;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,19 +39,16 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
-import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ChannelListPreferenceController extends NotificationPreferenceController
-        implements BasePreferenceController.UiBlocker {
+public class ChannelListPreferenceController extends NotificationPreferenceController {
 
     private static final String KEY = "channels";
     private static final String KEY_GENERAL_CATEGORY = "categories";
@@ -63,7 +59,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
     private PreferenceCategory mPreference;
 
     public ChannelListPreferenceController(Context context, NotificationBackend backend) {
-        super(context, backend, KEY);
+        super(context, backend);
     }
 
     @Override
@@ -72,20 +68,20 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
     }
 
     @Override
-    public int getAvailabilityStatus() {
+    public boolean isAvailable() {
         if (mAppRow == null) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return false;
         }
         if (mAppRow.banned) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return false;
         }
         if (mChannel != null) {
             if (mBackend.onlyHasDefaultChannel(mAppRow.pkg, mAppRow.uid)
                     || NotificationChannel.DEFAULT_CHANNEL_ID.equals(mChannel.getId())) {
-                return CONDITIONALLY_UNAVAILABLE;
+                return false;
             }
         }
-        return AVAILABLE;
+        return true;
     }
 
     @Override
@@ -95,17 +91,24 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
 
     @Override
     public void updateState(Preference preference) {
-            mPreference = (PreferenceCategory) preference;
-            // Load channel settings
-            ThreadUtils.postOnBackgroundThread(() -> {
+        mPreference = (PreferenceCategory) preference;
+        // Load channel settings
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... unused) {
                 mChannelGroupList = mBackend.getGroups(mAppRow.pkg, mAppRow.uid).getList();
                 Collections.sort(mChannelGroupList, CHANNEL_GROUP_COMPARATOR);
-                ThreadUtils.getUiThreadHandler().getLooper().prepare();
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void unused) {
+                if (mContext == null) {
+                    return;
+                }
                 updateFullList(mPreference, mChannelGroupList);
-                ThreadUtils.postOnMainThread(() -> {
-                    showPreferences();
-                });
-            });
+            }
+        }.execute();
     }
 
     /**
@@ -138,12 +141,6 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
             }
         } else {
             updateGroupList(groupPrefsList, channelGroups);
-        }
-    }
-
-    private void showPreferences() {
-        if (mUiBlockListener != null) {
-           mUiBlockListener.onBlockerWorkFinished(this);
         }
     }
 
