@@ -151,13 +151,10 @@ public class BluetoothPermissionActivity extends AlertActivity implements
     public void onBackPressed() {
         /*we need an answer so ignore back button presses during auth */
         if(DEBUG) Log.i(TAG, "Back button pressed! ignoring");
-        return;
     }
 
     // TODO(edjee): createConnectionDialogView, createPhonebookDialogView and createMapDialogView
     // are similar. Refactor them into one method.
-    // Also, the string resources bluetooth_remember_choice and bluetooth_pb_remember_choice should
-    // be removed.
     private View createConnectionDialogView() {
         String mRemoteName = Utils.createRemoteName(this, mDevice);
         mView = getLayoutInflater().inflate(R.layout.bluetooth_access, null);
