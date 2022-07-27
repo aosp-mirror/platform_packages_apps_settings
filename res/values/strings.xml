@@ -115,27 +115,10 @@
     <string name="bluetooth_not_visible_to_other_devices">Not visible to other Bluetooth devices</string>
     <!-- Bluetooth settings screen, summary text when not discoverable with paired devices [CHAR LIMIT=50] -->
     <string name="bluetooth_only_visible_to_paired_devices">Only visible to paired devices</string>
-    <!-- Bluetooth settings screen, option name to pick discoverability timeout duration (a list dialog comes up) -->
-    <string name="bluetooth_visibility_timeout">Visibility timeout</string>
-    <!-- Bluetooth settings screen, check box label whether or not to allow
-        bluetooth voice dialing when lock screen is up-->
-    <string name="bluetooth_lock_voice_dialing">Lock voice dialing</string>
-    <!-- Bluetooth settings screen, lock voice dialing checkbox summary text -->
-    <string name="bluetooth_lock_voice_dialing_summary">
-      Prevent use of the bluetooth dialer when the screen is locked
-    </string>
     <!-- Bluetooth settings screen, heading above the list of nearby bluetooth devices. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_devices">Bluetooth devices</string>
     <!-- Bluetooth settings screen, title for the current bluetooth name setting -->
     <string name="bluetooth_device_name">Device name</string>
-    <!-- Bluetooth settings screen, image description for device details button. This opens the screen to rename, unpair, etc. a single device. -->
-    <string name="bluetooth_device_details">Device settings</string>
-    <!-- Bluetooth settings screen, image description for profile of a device details button. -->
-    <string name="bluetooth_profile_details">Profile settings</string>
-    <!-- Bluetooth settings screen, summary text when there isn't a name set (for the name setting) -->
-    <string name="bluetooth_name_not_set">No name set, using account name</string>
-    <!-- Bluetooth settings screen, menu item to scan for nearby bluetooth devices -->
-    <string name="bluetooth_scan_for_devices">Scan for devices</string>
     <!-- Bluetooth settings screen, menu item to change this device's Bluetooth name. [CHAR LIMIT=30] -->
     <string name="bluetooth_rename_device">Rename this device</string>
     <!-- Bluetooth settings screen, confirmation button for rename device dialog. [CHAR LIMIT=20] -->
@@ -148,10 +131,6 @@
     <string name="bluetooth_disconnect_all_profiles" product="tablet">Your tablet will disconnect from "<xliff:g id="device_name">%1$s</xliff:g>."</string>
     <!-- Bluetooth settings.  Message for disconnecting from all profiles of a bluetooth device. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_disconnect_all_profiles" product="device">Your device will disconnect from "<xliff:g id="device_name">%1$s</xliff:g>."</string>
-    <!-- dialog ok button for disconnect dialog [CHAR LIMIT=20] -->
-    <string name="bluetooth_disconnect_dialog_ok">Disconnect</string>
-    <!-- Bluetooth Settings. text displayed when user has restriction DISALLOW_CONFIG_BLUETOOTH [CHAR LIMIT=NONE]-->
-    <string name="bluetooth_empty_list_user_restricted">You don\u2019t have permission to change Bluetooth settings.</string>
     <!-- Title for bluetooth pairing item [CHAR LIMIT=60] -->
     <string name="bluetooth_pairing_pref_title">Pair new device</string>
     <!-- Keywords for bluetooth pairing item [CHAR LIMIT=30] -->
@@ -170,19 +149,12 @@
 
     <!-- Title for related tools section. This section will list related tools below. [CHAR LIMIT=15] -->
     <string name="bluetooth_screen_related">Related</string>
-    <!-- Bluetooth Visibility message.  This message informs the user that their device is now visible to other bluetooth devices.  [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_is_visible_message"><xliff:g id="device_name">%1$s</xliff:g> is visible to nearby devices while Bluetooth settings is open.</string>
     <!-- Bluetooth mac address message.  This message shows the bluetooth mac address for this device.  [CHAR LIMIT=120] -->
     <string name="bluetooth_footer_mac_message" product="default">Phone\'s Bluetooth address: <xliff:g id="bluetooth_mac_address">%1$s</xliff:g></string>
     <!-- Bluetooth mac address message.  This message shows the bluetooth mac address for this device.  [CHAR LIMIT=120] -->
     <string name="bluetooth_footer_mac_message" product="tablet">Tablet\'s Bluetooth address: <xliff:g id="bluetooth_mac_address">%1$s</xliff:g></string>
     <!-- Bluetooth mac address message.  This message shows the bluetooth mac address for this device.  [CHAR LIMIT=120] -->
     <string name="bluetooth_footer_mac_message" product="device">Device\'s Bluetooth address: <xliff:g id="bluetooth_mac_address">%1$s</xliff:g></string>
-
-    <!-- Bluetooth Visibility disconnect question.  Asks the user if they wish to disconnect a paired bluetooth device.  [CHAR LIMIT=50] -->
-    <string name="bluetooth_is_disconnect_question">Disconnect <xliff:g id="device_name">%1$s</xliff:g>?</string>
-    <!-- Bluetooth broadcasting settings, option to enable/disable broadcasting -->
-    <string name="bluetooth_broadcasting">Broadcasting</string>
 
     <!--Bluetooth settings screen, summary text for Bluetooth device with no name -->
     <string name="bluetooth_device">Unnamed Bluetooth device</string>
@@ -196,8 +168,6 @@
     <string name="bluetooth_notif_title">Pairing request</string>
     <!-- Notification message when a Bluetooth device wants to pair with us -->
     <string name="bluetooth_notif_message">Tap to pair with <xliff:g id="device_name">%1$s</xliff:g>.</string>
-    <!-- Item in bluetooth settings screen, used to show the list of received files [CHAR LIMIT=30] -->
-    <string name="bluetooth_show_received_files">Received files</string>
 
     <!-- Title for contextual Bluetooth devices card when Bluetooth is off [CHAR LIMIT=NONE]-->
     <string name="bluetooth_devices_card_off_title">Bluetooth is off</string>
@@ -266,36 +236,11 @@
     <!-- Activity label of BluetoothPermissionActivity [CHAR LIMIT=none]-->
     <string name="bluetooth_connection_permission_request">"Bluetooth connection request"</string>
 
-    <!-- Notification message when a remote Bluetooth device wants to connect to a Bluetooth profile [CHAR LIMIT=none]-->
-    <string name="bluetooth_connection_notif_message">"Tap to connect to \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022."</string>
-
-    <!-- Bluetooth connection permission Alert Activity text [CHAR LIMIT=none]-->
-    <string name="bluetooth_connection_dialog_text">"Do you want to connect to \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022?"</string>
-
     <!-- Activity label of BluetoothPbPermissionActivity, also used as Strings in the permission dialog [CHAR LIMIT=none] -->
     <string name="bluetooth_phonebook_request">"Phone book access request"</string>
 
-    <!-- Bluetooth phone book permission Alert Activity text [CHAR LIMIT=none] -->
-    <string name="bluetooth_pb_acceptance_dialog_text">
-        <xliff:g id="device_name">%1$s</xliff:g> wants to access your contacts and call history. Give access to <xliff:g id="device_name">%2$s</xliff:g>?
-    </string>
-
-    <!-- Bluetooth phone book permission Alert Activity checkbox text [CHAR LIMIT=none] -->
-    <string name="bluetooth_remember_choice">Don\u2019t ask again</string>
-    <!--FIXME SHOULD BE REMOVED AND ALL LANG VERSIONS FIXED TO ABOVE NAME -->
-    <string name="bluetooth_pb_remember_choice">Don\u2019t ask again</string>
-
     <!-- Activity label of BluetoothMessagePermissionActivity, also used as Strings in the permission dialog [CHAR LIMIT=none] -->
     <string name="bluetooth_map_request">"Message access request"</string>
-
-    <!-- Bluetooth message permission Alert Activity text [CHAR LIMIT=none] -->
-    <string name="bluetooth_map_acceptance_dialog_text">%1$s wants to access your messages. Give access to %2$s?</string>
-
-    <!-- Activity label of BluetoothMessagePermissionActivity for SIM access profile. Also used as Strings in the permission dialog [CHAR LIMIT=none] -->
-    <string name="bluetooth_sap_request">"SIM access request"</string>
-
-    <!-- Bluetooth SIM access permission Alert Activity text [CHAR LIMIT=none] -->
-    <string name="bluetooth_sap_acceptance_dialog_text"><xliff:g id="device_name">%1$s</xliff:g> wants to access your SIM card. Granting access to the SIM card will disable data connectivity on your device for the duration of the connection. Give access to <xliff:g id="device_name">%2$s?</xliff:g></string>
 
     <!-- Description for bluetooth device name summary [CHAR LIMIT=none] -->
     <string name="bluetooth_device_name_summary">Visible as \u201C<xliff:g id="device_name">^1</xliff:g>\u201D to other devices</string>
@@ -306,12 +251,6 @@
     <string name="bluetooth_paired_device_title">Your devices</string>
     <!-- Title for pairing bluetooth device page [CHAR LIMIT=none] -->
     <string name="bluetooth_pairing_page_title">Pair new device</string>
-    <!-- Summary for bluetooth item in connection detail page. (tablet)-->
-    <string name="bluetooth_pref_summary" product="tablet">Allow your tablet to communicate with nearby Bluetooth devices</string>
-    <!-- Summary for bluetooth item in connection detail page. (device)-->
-    <string name="bluetooth_pref_summary" product="device">Allow your device to communicate with nearby Bluetooth devices</string>
-    <!-- Summary for bluetooth item in connection detail page. (phone)-->
-    <string name="bluetooth_pref_summary" product="default">Allow your phone to communicate with nearby Bluetooth devices</string>
 
     <!-- UI debug setting: Disable Bluetooth A2DP hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_a2dp_hw_offload">Disable Bluetooth A2DP hardware offload</string>

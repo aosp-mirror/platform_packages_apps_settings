@@ -20,7 +20,6 @@ import static com.android.settings.Utils.formatPercentage;
 import static java.lang.Math.round;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
-import android.annotation.NonNull;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -38,6 +37,7 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.widget.AppCompatImageView;
 
@@ -61,15 +61,13 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
     private static final int DIVIDER_COLOR = Color.parseColor("#CDCCC5");
     private static final long UPDATE_STATE_DELAYED_TIME = 500L;
 
-    /** Selects all trapezoid shapes. */
-    public static final int SELECTED_INDEX_ALL = -1;
-    public static final int SELECTED_INDEX_INVALID = -2;
-
     /** A callback listener for selected group index is updated. */
     public interface OnSelectListener {
         /** The callback function for selected group index is updated. */
         void onSelect(int trapezoidIndex);
     }
+
+    private BatteryChartViewModel mViewModel;
 
     private int mDividerWidth;
     private int mDividerHeight;
@@ -79,9 +77,7 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
     private String[] mPercentages = getPercentages();
 
     @VisibleForTesting
-    int mHoveredIndex = SELECTED_INDEX_INVALID;
-    @VisibleForTesting
-    int mSelectedIndex = SELECTED_INDEX_INVALID;
+    int mHoveredIndex = BatteryChartViewModel.SELECTED_INDEX_INVALID;
     @VisibleForTesting
     String[] mAxisLabels;
 
@@ -103,7 +99,6 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
     @VisibleForTesting
     final Runnable mUpdateClickableStateRun = () -> updateClickableState();
 
-    private int[] mLevels;
     private Paint mTextPaint;
     private Paint mDividerPaint;
     private Paint mTrapezoidPaint;
@@ -126,44 +121,26 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
         initializeColors(context);
         // Registers the click event listener.
         setOnClickListener(this);
-        setSelectedIndex(SELECTED_INDEX_ALL);
         setClickable(false);
+        requestLayout();
     }
 
-    /** Sets all levels value to draw the trapezoid shape */
-    public void setLevels(int[] levels) {
-        Log.d(TAG, "setLevels() " + (levels == null ? "null" : levels.length));
-        // At least 2 levels to draw a trapezoid.
-        if (levels == null || levels.length < 2) {
-            mLevels = null;
+    /** Sets the data model of this view. */
+    public void setViewModel(BatteryChartViewModel viewModel) {
+        if (viewModel == null) {
+            mViewModel = null;
             invalidate();
             return;
         }
-        mLevels = levels;
 
-        // Initialize trapezoid slots.
-        mTrapezoidSlots = new TrapezoidSlot[mLevels.length - 1];
-        for (int index = 0; index < mTrapezoidSlots.length; index++) {
-            mTrapezoidSlots[index] = new TrapezoidSlot();
-        }
+        Log.d(TAG, String.format("setViewModel(): size: %d, selectedIndex: %d.",
+                viewModel.size(), viewModel.selectedIndex()));
+        mViewModel = viewModel;
 
-        setClickable(false);
-        invalidate();
-        // Sets the chart is clickable if there is at least one valid item in it.
-        for (int index = 0; index < mLevels.length - 1; index++) {
-            if (mLevels[index] != 0 && mLevels[index + 1] != 0) {
-                setClickable(true);
-                break;
-            }
-        }
-    }
-
-    /** Sets the selected group index to draw highlight effect. */
-    public void setSelectedIndex(int index) {
-        if (mSelectedIndex != index) {
-            mSelectedIndex = index;
-            invalidate();
-        }
+        initializeTrapezoidSlots(viewModel.size() - 1);
+        initializeAxisLabels(viewModel.texts());
+        setClickable(hasNonZeroTrapezoid(viewModel.levels()));
+        requestLayout();
     }
 
     /** Sets the callback to monitor the selected group index. */
@@ -181,26 +158,6 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
             mTextPaint = null;
         }
         setVisibility(View.VISIBLE);
-        requestLayout();
-    }
-
-    /**
-     * Sets the X-axis labels list for each level. This class will choose some labels among the
-     * input list to show.
-     *
-     * @param labels The length of this parameter should be the same as the length of
-     *               {@code levels}.
-     */
-    public void setAxisLabels(@NonNull String[] labels) {
-        if (mAxisLabels == null) {
-            mAxisLabels = new String[DEFAULT_AXIS_LABEL_COUNT];
-        }
-        // Current logic is always showing {@code AXIS_LABEL_GAPS_COUNT} labels.
-        // TODO: Support different count of labels for different levels sizes.
-        final int step = (labels.length - 1) / AXIS_LABEL_GAPS_COUNT;
-        for (int index = 0; index < DEFAULT_AXIS_LABEL_COUNT; index++) {
-            mAxisLabels[index] = labels[index * step];
-        }
         requestLayout();
     }
 
@@ -240,7 +197,7 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
         // Before mLevels initialized, the count of trapezoids is unknown. Only draws the
         // horizontal percentages and dividers.
         drawHorizontalDividers(canvas);
-        if (mLevels == null) {
+        if (mViewModel == null) {
             return;
         }
         drawVerticalDividers(canvas);
@@ -282,7 +239,7 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
     public void onHoverChanged(boolean hovered) {
         super.onHoverChanged(hovered);
         if (!hovered) {
-            mHoveredIndex = SELECTED_INDEX_INVALID; // reset
+            mHoveredIndex = BatteryChartViewModel.SELECTED_INDEX_INVALID; // reset
             invalidate();
         }
     }
@@ -295,13 +252,15 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
         }
         final int trapezoidIndex = getTrapezoidIndex(mTouchUpEventX);
         // Ignores the click event if the level is zero.
-        if (trapezoidIndex == SELECTED_INDEX_INVALID
+        if (trapezoidIndex == BatteryChartViewModel.SELECTED_INDEX_INVALID
                 || !isValidToDraw(trapezoidIndex)) {
             return;
         }
         if (mOnSelectListener != null) {
+            // Selects all if users click the same trapezoid item two times.
             mOnSelectListener.onSelect(
-                    trapezoidIndex == mSelectedIndex ? SELECTED_INDEX_ALL : trapezoidIndex);
+                    trapezoidIndex == mViewModel.selectedIndex()
+                            ? BatteryChartViewModel.SELECTED_INDEX_ALL : trapezoidIndex);
         }
         view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK);
     }
@@ -350,8 +309,8 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
             mTrapezoidCurvePaint.setStrokeWidth(mDividerWidth * 2);
         } else if (mIsSlotsClickabled) {
             mTrapezoidCurvePaint = null;
-            // Sets levels again to force update the click state.
-            setLevels(mLevels);
+            // Sets view model again to force update the click state.
+            setViewModel(mViewModel);
         }
         invalidate();
     }
@@ -364,6 +323,28 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
     @VisibleForTesting
     void setClickableForce(boolean clickable) {
         super.setClickable(clickable);
+    }
+
+    private void initializeTrapezoidSlots(int count) {
+        mTrapezoidSlots = new TrapezoidSlot[count];
+        for (int index = 0; index < mTrapezoidSlots.length; index++) {
+            mTrapezoidSlots[index] = new TrapezoidSlot();
+        }
+    }
+
+    /**
+     * Initializes the displayed X-axis labels list selected from the model all texts list.
+     */
+    private void initializeAxisLabels(@NonNull List<String> allTexts) {
+        if (mAxisLabels == null) {
+            mAxisLabels = new String[DEFAULT_AXIS_LABEL_COUNT];
+        }
+        // Current logic is always showing {@code AXIS_LABEL_GAPS_COUNT} labels.
+        // TODO: Support different count of labels for different levels sizes.
+        final int step = (allTexts.size() - 1) / AXIS_LABEL_GAPS_COUNT;
+        for (int index = 0; index < DEFAULT_AXIS_LABEL_COUNT; index++) {
+            mAxisLabels[index] = allTexts.get(index * step);
+        }
     }
 
     private void initializeColors(Context context) {
@@ -498,7 +479,7 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
 
     private void drawTrapezoids(Canvas canvas) {
         // Ignores invalid trapezoid data.
-        if (mLevels == null) {
+        if (mViewModel == null) {
             return;
         }
         final float trapezoidBottom =
@@ -519,17 +500,17 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
                 continue;
             }
             // Configures the trapezoid paint color.
-            final int trapezoidColor =
-                    !mIsSlotsClickabled
-                            ? mTrapezoidColor
-                            : mSelectedIndex == index || mSelectedIndex == SELECTED_INDEX_ALL
-                                    ? mTrapezoidSolidColor : mTrapezoidColor;
+            final int trapezoidColor = mIsSlotsClickabled && (mViewModel.selectedIndex() == index
+                    || mViewModel.selectedIndex() == BatteryChartViewModel.SELECTED_INDEX_ALL)
+                    ? mTrapezoidSolidColor : mTrapezoidColor;
             final boolean isHoverState =
                     mIsSlotsClickabled && mHoveredIndex == index && isValidToDraw(mHoveredIndex);
             mTrapezoidPaint.setColor(isHoverState ? mTrapezoidHoverColor : trapezoidColor);
 
-            final float leftTop = round(trapezoidBottom - mLevels[index] * unitHeight);
-            final float rightTop = round(trapezoidBottom - mLevels[index + 1] * unitHeight);
+            final float leftTop = round(
+                    trapezoidBottom - mViewModel.levels().get(index) * unitHeight);
+            final float rightTop = round(
+                    trapezoidBottom - mViewModel.levels().get(index + 1) * unitHeight);
             trapezoidPath.reset();
             trapezoidPath.moveTo(mTrapezoidSlots[index].mLeft, trapezoidBottom);
             trapezoidPath.lineTo(mTrapezoidSlots[index].mLeft, leftTop);
@@ -568,15 +549,25 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
                 return index;
             }
         }
-        return SELECTED_INDEX_INVALID;
+        return BatteryChartViewModel.SELECTED_INDEX_INVALID;
     }
 
     private boolean isValidToDraw(int trapezoidIndex) {
-        return mLevels != null
+        return mViewModel != null
                 && trapezoidIndex >= 0
-                && trapezoidIndex < mLevels.length - 1
-                && mLevels[trapezoidIndex] != 0
-                && mLevels[trapezoidIndex + 1] != 0;
+                && trapezoidIndex < mViewModel.size() - 1
+                && mViewModel.levels().get(trapezoidIndex) != 0
+                && mViewModel.levels().get(trapezoidIndex + 1) != 0;
+    }
+
+    private static boolean hasNonZeroTrapezoid(List<Integer> levels) {
+        // Sets the chart is clickable if there is at least one valid item in it.
+        for (int index = 0; index < levels.size() - 1; index++) {
+            if (levels.get(index) != 0 && levels.get(index + 1) != 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static String[] getPercentages() {

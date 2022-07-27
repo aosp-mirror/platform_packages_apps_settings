@@ -369,14 +369,6 @@ public class BluetoothPairingDialogTest {
     }
 
     @Test
-    public void pairingStringIsFormattedCorrectly() {
-        final String device = "test_device";
-        final Context context = RuntimeEnvironment.application;
-        assertThat(context.getString(R.string.bluetooth_pb_acceptance_dialog_text, device, device))
-                .contains(device);
-    }
-
-    @Test
     public void pairingDialogDismissedOnPositiveClick() {
         // set the dialog variant to confirmation/consent
         when(controller.getDialogType()).thenReturn(BluetoothPairingController.CONFIRMATION_DIALOG);
