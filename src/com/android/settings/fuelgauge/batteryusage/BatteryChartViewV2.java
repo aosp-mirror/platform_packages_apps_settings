@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batteryusage;
 import static com.android.settings.Utils.formatPercentage;
 
 import static java.lang.Math.round;
+import static java.util.Objects.requireNonNull;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
@@ -139,7 +140,7 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
 
         initializeTrapezoidSlots(viewModel.size() - 1);
         initializeAxisLabels(viewModel.texts());
-        setClickable(hasNonZeroTrapezoid(viewModel.levels()));
+        setClickable(hasAnyValidTrapezoid(viewModel));
         requestLayout();
     }
 
@@ -253,7 +254,7 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
         final int trapezoidIndex = getTrapezoidIndex(mTouchUpEventX);
         // Ignores the click event if the level is zero.
         if (trapezoidIndex == BatteryChartViewModel.SELECTED_INDEX_INVALID
-                || !isValidToDraw(trapezoidIndex)) {
+                || !isValidToDraw(mViewModel, trapezoidIndex)) {
             return;
         }
         if (mOnSelectListener != null) {
@@ -492,7 +493,7 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
         Path trapezoidCurvePath = null;
         for (int index = 0; index < mTrapezoidSlots.length; index++) {
             // Not draws the trapezoid for corner or not initialization cases.
-            if (!isValidToDraw(index)) {
+            if (!isValidToDraw(mViewModel, index)) {
                 if (mTrapezoidCurvePaint != null && trapezoidCurvePath != null) {
                     canvas.drawPath(trapezoidCurvePath, mTrapezoidCurvePaint);
                     trapezoidCurvePath = null;
@@ -504,13 +505,14 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
                     || mViewModel.selectedIndex() == BatteryChartViewModel.SELECTED_INDEX_ALL)
                     ? mTrapezoidSolidColor : mTrapezoidColor;
             final boolean isHoverState =
-                    mIsSlotsClickabled && mHoveredIndex == index && isValidToDraw(mHoveredIndex);
+                    mIsSlotsClickabled && mHoveredIndex == index
+                            && isValidToDraw(mViewModel, mHoveredIndex);
             mTrapezoidPaint.setColor(isHoverState ? mTrapezoidHoverColor : trapezoidColor);
 
             final float leftTop = round(
-                    trapezoidBottom - mViewModel.levels().get(index) * unitHeight);
-            final float rightTop = round(
-                    trapezoidBottom - mViewModel.levels().get(index + 1) * unitHeight);
+                    trapezoidBottom - requireNonNull(mViewModel.levels().get(index)) * unitHeight);
+            final float rightTop = round(trapezoidBottom
+                    - requireNonNull(mViewModel.levels().get(index + 1)) * unitHeight);
             trapezoidPath.reset();
             trapezoidPath.moveTo(mTrapezoidSlots[index].mLeft, trapezoidBottom);
             trapezoidPath.lineTo(mTrapezoidSlots[index].mLeft, leftTop);
@@ -552,18 +554,23 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
         return BatteryChartViewModel.SELECTED_INDEX_INVALID;
     }
 
-    private boolean isValidToDraw(int trapezoidIndex) {
-        return mViewModel != null
-                && trapezoidIndex >= 0
-                && trapezoidIndex < mViewModel.size() - 1
-                && mViewModel.levels().get(trapezoidIndex) != 0
-                && mViewModel.levels().get(trapezoidIndex + 1) != 0;
+    private static boolean isTrapezoidValid(
+            @NonNull BatteryChartViewModel viewModel, int trapezoidIndex) {
+        return viewModel.levels().get(trapezoidIndex) != null
+                && viewModel.levels().get(trapezoidIndex + 1) != null;
     }
 
-    private static boolean hasNonZeroTrapezoid(List<Integer> levels) {
+    private static boolean isValidToDraw(BatteryChartViewModel viewModel, int trapezoidIndex) {
+        return viewModel != null
+                && trapezoidIndex >= 0
+                && trapezoidIndex < viewModel.size() - 1
+                && isTrapezoidValid(viewModel, trapezoidIndex);
+    }
+
+    private static boolean hasAnyValidTrapezoid(@NonNull BatteryChartViewModel viewModel) {
         // Sets the chart is clickable if there is at least one valid item in it.
-        for (int index = 0; index < levels.size() - 1; index++) {
-            if (levels.get(index) != 0 && levels.get(index + 1) != 0) {
+        for (int trapezoidIndex = 0; trapezoidIndex < viewModel.size() - 1; trapezoidIndex++) {
+            if (isTrapezoidValid(viewModel, trapezoidIndex)) {
                 return true;
             }
         }
