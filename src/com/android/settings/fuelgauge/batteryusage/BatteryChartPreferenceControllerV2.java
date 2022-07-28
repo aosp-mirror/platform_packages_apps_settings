@@ -79,7 +79,7 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
     private static int sUiMode = Configuration.UI_MODE_NIGHT_UNDEFINED;
 
     @VisibleForTesting
-    Map<Integer, List<BatteryDiffEntry>> mBatteryIndexedMap;
+    Map<Integer, Map<Integer, BatteryDiffData>> mBatteryUsageMap;
 
     @VisibleForTesting
     Context mPrefContext;
@@ -112,7 +112,6 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
     private final String mPreferenceKey;
     private final SettingsActivity mActivity;
     private final InstrumentedPreferenceFragment mFragment;
-    private final CharSequence[] mNotAllowShowEntryPackages;
     private final CharSequence[] mNotAllowShowSummaryPackages;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
@@ -120,8 +119,6 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
     // Preference cache to avoid create new instance each time.
     @VisibleForTesting
     final Map<String, Preference> mPreferenceCache = new HashMap<>();
-    @VisibleForTesting
-    final List<BatteryDiffEntry> mSystemEntries = new ArrayList<>();
 
     public BatteryChartPreferenceControllerV2(
             Context context, String preferenceKey,
@@ -134,10 +131,6 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
         mIs24HourFormat = DateFormat.is24HourFormat(context);
         mMetricsFeatureProvider =
                 FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
-        mNotAllowShowEntryPackages =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
-                        .getHideApplicationEntries(context);
         mNotAllowShowSummaryPackages =
                 FeatureFactory.getFactory(context)
                         .getPowerUsageFeatureProvider(context)
@@ -266,9 +259,12 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
         Log.d(TAG, "setBatteryHistoryMap() " + (batteryHistoryMap == null ? "null"
                 : ("size=" + batteryHistoryMap.size())));
-        // TODO: implement the callback function.
         final BatteryLevelData batteryLevelData =
-                DataProcessor.getBatteryLevelData(mContext, mHandler, batteryHistoryMap, null);
+                DataProcessor.getBatteryLevelData(mContext, mHandler, batteryHistoryMap,
+                        batteryUsageMap -> {
+                            mBatteryUsageMap = batteryUsageMap;
+                            refreshUi();
+                        });
         Log.d(TAG, "getBatteryLevelData: " + batteryLevelData);
         if (batteryLevelData == null) {
             mDailyViewModel = null;
@@ -293,7 +289,6 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
                     BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
         }
         refreshUi();
-        // TODO: Loads item icon and label and build mBatteryIndexedMap.
     }
 
     void setBatteryChartView(@NonNull final BatteryChartViewV2 dailyChartView,
@@ -335,7 +330,7 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
 
     @VisibleForTesting
     boolean refreshUi() {
-        if (mBatteryIndexedMap == null || mDailyChartView == null || mHourlyChartView == null) {
+        if (mBatteryUsageMap == null || mDailyChartView == null || mHourlyChartView == null) {
             return false;
         }
 
@@ -378,45 +373,22 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
     }
 
     private void addAllPreferences() {
-        // TODO: Get the right diff entry according to daily and hourly chart selection.
-        final int index = mDailyChartIndex;
-        final List<BatteryDiffEntry> entries =
-                mBatteryIndexedMap.get(Integer.valueOf(index));
-        addFooterPreferenceIfNeeded(entries != null && !entries.isEmpty());
-        if (entries == null) {
-            Log.w(TAG, "cannot find BatteryDiffEntry for:" + index);
+        final BatteryDiffData batteryDiffData =
+                mBatteryUsageMap.get(mDailyChartIndex).get(mHourlyChartIndex);
+        addFooterPreferenceIfNeeded(batteryDiffData != null
+                && (!batteryDiffData.getAppDiffEntryList().isEmpty()
+                || !batteryDiffData.getSystemDiffEntryList().isEmpty()));
+        if (batteryDiffData == null) {
+            Log.w(TAG, "cannot find BatteryDiffEntry for daily_index: " + mDailyChartIndex
+                    + " hourly_index: " + mHourlyChartIndex);
             return;
         }
-        // Separates data into two groups and sort them individually.
-        final List<BatteryDiffEntry> appEntries = new ArrayList<>();
-        mSystemEntries.clear();
-        entries.forEach(entry -> {
-            final String packageName = entry.getPackageName();
-            if (!isValidToShowEntry(packageName)) {
-                Log.w(TAG, "ignore showing item:" + packageName);
-                return;
-            }
-            if (entry.isSystemEntry()) {
-                mSystemEntries.add(entry);
-            } else {
-                appEntries.add(entry);
-            }
-            // Validates the usage time if users click a specific slot.
-            if (index >= 0) {
-                validateUsageTime(entry);
-            }
-        });
-        Collections.sort(appEntries, BatteryDiffEntry.COMPARATOR);
-        Collections.sort(mSystemEntries, BatteryDiffEntry.COMPARATOR);
-        Log.d(TAG, String.format("addAllPreferences() app=%d system=%d",
-                appEntries.size(), mSystemEntries.size()));
-
         // Adds app entries to the list if it is not empty.
-        if (!appEntries.isEmpty()) {
-            addPreferenceToScreen(appEntries);
+        if (!batteryDiffData.getAppDiffEntryList().isEmpty()) {
+            addPreferenceToScreen(batteryDiffData.getAppDiffEntryList());
         }
         // Adds the expabable divider if we have system entries data.
-        if (!mSystemEntries.isEmpty()) {
+        if (!batteryDiffData.getSystemDiffEntryList().isEmpty()) {
             if (mExpandDividerPreference == null) {
                 mExpandDividerPreference = new ExpandDividerPreference(mPrefContext);
                 mExpandDividerPreference.setOnExpandListener(this);
@@ -490,11 +462,13 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
     }
 
     private void refreshExpandUi() {
+        final List<BatteryDiffEntry> systemEntries = mBatteryUsageMap.get(mDailyChartIndex).get(
+                mHourlyChartIndex).getSystemDiffEntryList();
         if (mIsExpanded) {
-            addPreferenceToScreen(mSystemEntries);
+            addPreferenceToScreen(systemEntries);
         } else {
             // Removes and recycles all system entries to hide all of them.
-            for (BatteryDiffEntry entry : mSystemEntries) {
+            for (BatteryDiffEntry entry : systemEntries) {
                 final String prefKey = entry.mBatteryHistEntry.getKey();
                 final Preference pref = mAppListPrefGroup.findPreference(prefKey);
                 if (pref != null) {
@@ -592,11 +566,6 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
         return !contains(packageName, mNotAllowShowSummaryPackages);
     }
 
-    @VisibleForTesting
-    boolean isValidToShowEntry(String packageName) {
-        return !contains(packageName, mNotAllowShowEntryPackages);
-    }
-
     private void addFooterPreferenceIfNeeded(boolean containAppItems) {
         if (mIsFooterPrefAdded || mFooterPreference == null) {
             return;
@@ -641,20 +610,6 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
             }
         }
         return false;
-    }
-
-    @VisibleForTesting
-    static boolean validateUsageTime(BatteryDiffEntry entry) {
-        final long foregroundUsageTimeInMs = entry.mForegroundUsageTimeInMs;
-        final long backgroundUsageTimeInMs = entry.mBackgroundUsageTimeInMs;
-        final long totalUsageTimeInMs = foregroundUsageTimeInMs + backgroundUsageTimeInMs;
-        if (foregroundUsageTimeInMs > VALID_USAGE_TIME_DURATION
-                || backgroundUsageTimeInMs > VALID_USAGE_TIME_DURATION
-                || totalUsageTimeInMs > VALID_USAGE_TIME_DURATION) {
-            Log.e(TAG, "validateUsageTime() fail for\n" + entry);
-            return false;
-        }
-        return true;
     }
 
     // TODO: Change this method to fromLastFullCharged.
