@@ -242,6 +242,16 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     }
 
     @Override
+    protected void onStop() {
+        if (!isChangingConfigurations() && shouldFinishWhenBackgrounded()
+                && !BiometricUtils.isAnyMultiBiometricFlow(this)) {
+            setResult(RESULT_TIMEOUT);
+            finish();
+        }
+        super.onStop();
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(KEY_CONFIRMING_CREDENTIALS, mConfirmingCredentials);
