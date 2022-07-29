@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony;
 
 import android.annotation.IntDef;
+import android.content.Context;
 import android.telephony.AccessNetworkConstants.AccessNetworkType;
 import android.telephony.CellInfo;
 import android.telephony.NetworkScan;
@@ -30,6 +31,8 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.telephony.CellNetworkScanResult;
+
+import com.android.settings.R;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -129,6 +132,7 @@ public class NetworkScanHelper {
     private final TelephonyScanManager.NetworkScanCallback mInternalNetworkScanCallback;
     private final Executor mExecutor;
 
+    private int mMaxSearchTimeSec = MAX_SEARCH_TIME_SEC;
     private NetworkScan mNetworkScanRequester;
 
     /** Callbacks for sync network scan */
@@ -139,6 +143,13 @@ public class NetworkScanHelper {
         mNetworkScanCallback = callback;
         mInternalNetworkScanCallback = new NetworkScanCallbackImpl();
         mExecutor = executor;
+    }
+
+    public NetworkScanHelper(Context context, TelephonyManager tm, NetworkScanCallback callback,
+            Executor executor) {
+        this(tm, callback, executor);
+        mMaxSearchTimeSec = context.getResources().getInteger(
+                R.integer.config_network_scan_helper_max_search_time_sec);
     }
 
     @VisibleForTesting
@@ -183,7 +194,7 @@ public class NetworkScanHelper {
                 radioAccessSpecifiers.toArray(
                         new RadioAccessSpecifier[radioAccessSpecifiers.size()]),
                 SEARCH_PERIODICITY_SEC,
-                MAX_SEARCH_TIME_SEC,
+                mMaxSearchTimeSec,
                 INCREMENTAL_RESULTS,
                 INCREMENTAL_RESULTS_PERIODICITY_SEC,
                 null /* List of PLMN ids (MCC-MNC) */);
