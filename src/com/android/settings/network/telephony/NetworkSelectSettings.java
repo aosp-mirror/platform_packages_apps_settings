@@ -112,7 +112,7 @@ public class NetworkSelectSettings extends DashboardFragment {
         mTelephonyManager = getContext().getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
         mNetworkScanHelper = new NetworkScanHelper(
-                mTelephonyManager, mCallback, mNetworkScanExecutor);
+                getContext(), mTelephonyManager, mCallback, mNetworkScanExecutor);
         PersistableBundle bundle = ((CarrierConfigManager) getContext().getSystemService(
                 Context.CARRIER_CONFIG_SERVICE)).getConfigForSubId(mSubId);
         if (bundle != null) {
