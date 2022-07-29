@@ -635,9 +635,11 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         if (apps != null) {
             for (AppOpsManager.PackageOps pkg : apps) {
                 int userId = UserHandle.getUserId(pkg.getUid());
-                if (!profileIds.contains(userId)
-                        || isAdvancedVpn(featureProvider, pkg.getPackageName(), context)) {
+                if (!profileIds.contains(userId)) {
                     // Skip packages for users outside of our profile group.
+                    continue;
+                }
+                if (isAdvancedVpn(featureProvider, pkg.getPackageName(), context)) {
                     continue;
                 }
                 // Look for a MODE_ALLOWED permission to activate VPN.
