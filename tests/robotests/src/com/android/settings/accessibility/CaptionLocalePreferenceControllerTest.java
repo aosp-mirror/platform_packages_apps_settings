@@ -64,21 +64,21 @@ public class CaptionLocalePreferenceControllerTest {
     }
 
     @Test
-    public void getSummary_byDefault_shouldReturnDefault() {
+    public void displayPreference_byDefault_shouldReturnDefault() {
         mController.displayPreference(mScreen);
 
-        assertThat(mController.getSummary().toString()).isEqualTo(
+        assertThat(mPreference.getEntry().toString()).isEqualTo(
                 mContext.getResources().getString(R.string.locale_default));
     }
 
     @Test
-    public void getSummary_byArabicLocale_shouldReturnArabic() {
+    public void displayPreference_byArabicLocale_shouldReturnArabic() {
         Settings.Secure.putString(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_CAPTIONING_LOCALE, "af_ZA");
 
         mController.displayPreference(mScreen);
 
-        assertThat(mController.getSummary().toString()).isEqualTo("Afrikaans");
+        assertThat(mPreference.getEntry().toString()).isEqualTo("Afrikaans");
     }
 
     @Test
@@ -87,6 +87,6 @@ public class CaptionLocalePreferenceControllerTest {
 
         mController.onPreferenceChange(mPreference, "af_ZA");
 
-        assertThat(mPreference.getSummary().toString()).isEqualTo("Afrikaans");
+        assertThat(mPreference.getEntry().toString()).isEqualTo("Afrikaans");
     }
 }

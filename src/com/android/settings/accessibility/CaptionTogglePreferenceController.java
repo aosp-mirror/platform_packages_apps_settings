@@ -57,9 +57,9 @@ public class CaptionTogglePreferenceController extends TogglePreferenceControlle
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        SettingsMainSwitchPreference pref = screen.findPreference(getPreferenceKey());
-        pref.addOnSwitchChangeListener(this);
-        pref.setChecked(isChecked());
+        SettingsMainSwitchPreference preference = screen.findPreference(getPreferenceKey());
+        preference.addOnSwitchChangeListener(this);
+        preference.setChecked(isChecked());
     }
 
     @Override

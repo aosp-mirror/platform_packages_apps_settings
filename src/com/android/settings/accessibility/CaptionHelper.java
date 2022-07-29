@@ -188,17 +188,27 @@ public class CaptionHelper {
     }
 
     /**
-     * Sets the caption raw user style.
+     * Sets the captioning raw user style.
      *
-     * @param type The caption raw user style
+     * @param type The captioning raw user style
      */
     public void setRawUserStyle(int type) {
         Settings.Secure.putInt(mContentResolver,
                 Settings.Secure.ACCESSIBILITY_CAPTIONING_PRESET, type);
     }
 
-    /** Returns the caption raw user style.*/
+    /** Returns the captioning raw preset number.*/
     public int getRawUserStyle() {
         return mCaptioningManager.getRawUserStyle();
+    }
+
+    /** Returns the captioning visual properties.*/
+    public CaptionStyle getUserStyle() {
+        return mCaptioningManager.getUserStyle();
+    }
+
+    /** Returns the captioning locale language.*/
+    public Locale getLocale() {
+        return mCaptioningManager.getLocale();
     }
 }
