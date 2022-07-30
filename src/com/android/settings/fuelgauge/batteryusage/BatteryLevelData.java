@@ -20,6 +20,8 @@ import androidx.annotation.NonNull;
 import androidx.core.util.Preconditions;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 /** Wraps the battery timestamp and level data used for battery usage chart. */
 public final class BatteryLevelData {
@@ -45,6 +47,12 @@ public final class BatteryLevelData {
 
         public List<Integer> getLevels() {
             return mLevels;
+        }
+
+        @Override
+        public String toString() {
+            return String.format(Locale.ENGLISH, "timestamps: %s; levels: %s",
+                    Objects.toString(mTimestamps), Objects.toString(mLevels));
         }
     }
 
@@ -78,4 +86,13 @@ public final class BatteryLevelData {
     public List<PeriodBatteryLevelData> getHourlyBatteryLevelsPerDay() {
         return mHourlyBatteryLevelsPerDay;
     }
+
+    @Override
+    public String toString() {
+        return String.format(Locale.ENGLISH,
+                "dailyBatteryLevels: %s; hourlyBatteryLevelsPerDay: %s",
+                Objects.toString(mDailyBatteryLevels),
+                Objects.toString(mHourlyBatteryLevelsPerDay));
+    }
 }
+
