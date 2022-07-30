@@ -30,7 +30,6 @@ public class CaptionLocalePreferenceController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
     private final CaptioningManager mCaptioningManager;
-    private LocalePreference mPreference;
 
     public CaptionLocalePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -45,22 +44,17 @@ public class CaptionLocalePreferenceController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(getPreferenceKey());
+        final LocalePreference localePreference = screen.findPreference(getPreferenceKey());
         final String rawLocale = mCaptioningManager.getRawLocale();
-        mPreference.setValue(rawLocale == null ? "" : rawLocale);
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        return mPreference.getEntry();
+        localePreference.setValue(rawLocale == null ? "" : rawLocale);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        final LocalePreference localePreference = (LocalePreference) preference;
         Settings.Secure.putString(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_CAPTIONING_LOCALE, (String) newValue);
-        mPreference.setValue((String) newValue);
-        mPreference.setSummary(mPreference.getEntry());
+        localePreference.setValue((String) newValue);
         return true;
     }
 }

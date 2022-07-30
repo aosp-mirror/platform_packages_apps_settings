@@ -42,7 +42,6 @@ public class CaptionCustomController extends BasePreferenceController
     private Preference mCustom;
     private final CaptionHelper mCaptionHelper;
     private final ContentResolver mContentResolver;
-    private final Handler mHandler = new Handler(Looper.getMainLooper());
     @VisibleForTesting
     AccessibilitySettingsContentObserver mSettingsContentObserver;
     @VisibleForTesting
@@ -54,7 +53,8 @@ public class CaptionCustomController extends BasePreferenceController
         super(context, preferenceKey);
         mCaptionHelper = new CaptionHelper(context);
         mContentResolver = context.getContentResolver();
-        mSettingsContentObserver = new AccessibilitySettingsContentObserver(mHandler);
+        mSettingsContentObserver = new AccessibilitySettingsContentObserver(
+                new Handler(Looper.getMainLooper()));
         mSettingsContentObserver.registerKeysToObserverCallback(CAPTIONING_FEATURE_KEYS,
                 key -> refreshShowingCustom());
     }

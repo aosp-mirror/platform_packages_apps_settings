@@ -32,7 +32,6 @@ public class CaptionTypefaceController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
     private final CaptionHelper mCaptionHelper;
-    private ListPreference mPreference;
 
     public CaptionTypefaceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -47,20 +46,20 @@ public class CaptionTypefaceController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(getPreferenceKey());
-
+        final ListPreference listPreference = screen.findPreference(getPreferenceKey());
         final ContentResolver cr = mContext.getContentResolver();
         final CaptionStyle attrs = CaptionStyle.getCustomStyle(cr);
         final String rawTypeface = attrs.mRawTypeface;
-        mPreference.setValue(rawTypeface == null ? "" : rawTypeface);
+        listPreference.setValue(rawTypeface == null ? "" : rawTypeface);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        final ListPreference listPreference = (ListPreference) preference;
         final ContentResolver cr = mContext.getContentResolver();
         Settings.Secure.putString(
                 cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_TYPEFACE, (String) newValue);
-        mPreference.setValue((String) newValue);
+        listPreference.setValue((String) newValue);
         mCaptionHelper.setEnabled(true);
         return false;
     }

@@ -33,7 +33,6 @@ public class CaptionFontSizeController extends BasePreferenceController
 
     private final CaptioningManager mCaptioningManager;
     private final CaptionHelper mCaptionHelper;
-    private ListPreference mPreference;
 
     public CaptionFontSizeController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -49,19 +48,19 @@ public class CaptionFontSizeController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(getPreferenceKey());
-
+        final ListPreference listPreference = screen.findPreference(getPreferenceKey());
         final float fontSize = mCaptioningManager.getFontScale();
-        mPreference.setValue(Float.toString(fontSize));
+        listPreference.setValue(Float.toString(fontSize));
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        final ListPreference listPreference = (ListPreference) preference;
         final ContentResolver cr = mContext.getContentResolver();
         Settings.Secure.putFloat(
                 cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_FONT_SCALE,
                 Float.parseFloat((String) newValue));
-        mPreference.setValue((String) newValue);
+        listPreference.setValue((String) newValue);
         mCaptionHelper.setEnabled(true);
         return false;
     }

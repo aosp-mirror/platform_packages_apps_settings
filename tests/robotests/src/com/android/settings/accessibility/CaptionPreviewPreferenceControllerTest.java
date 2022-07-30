@@ -84,7 +84,7 @@ public class CaptionPreviewPreferenceControllerTest {
     }
 
     @Test
-    public void onPause_unregisterContentObserver() {
+    public void onStop_unregisterContentObserver() {
         mController.onStop();
 
         verify(mContentResolver).unregisterContentObserver(mController.mSettingsContentObserver);
