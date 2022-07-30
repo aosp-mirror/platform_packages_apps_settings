@@ -4914,12 +4914,6 @@
     <!-- Languages Settings --> <skip />
     <!-- Title of Language, input & gestures setting on main settings screen. -->
     <string name="language_input_gesture_title">Languages, input &amp; gestures</string>
-    <!-- Summary of Language, input & gestures setting on main settings screen when both gesture setting and assistant feature is on. -->
-    <string name="language_input_gesture_summary_on_with_assist"></string>
-    <!-- Summary of Language, input & gestures setting on main settings screen when both gesture setting and non-assistant feature is on. -->
-    <string name="language_input_gesture_summary_on_non_assist"></string>
-    <!-- Summary of Language, input & gestures setting on main settings screen when gesture setting is off. -->
-    <string name="language_input_gesture_summary_off"></string>
 
     <!-- Title of setting on main settings screen.  This item will take the user to the screen to tweak settings realted to locale and text -->
     <string name="language_settings">Languages&#160;&amp; input</string>
@@ -6093,42 +6087,6 @@
     <string name="power_usage_enhanced_debug" translatable="false"><xliff:g id="time">%1$s</xliff:g> left (New ML est)</string>
     <!-- Temp string used to debug old battery estimates [DO NOT TRANSLATE] -->
     <string name="power_usage_old_debug" translatable="false"><xliff:g id="time">%1$s</xliff:g> left (Old est)</string>
-    <!-- Description for the screen usage item [CHAR_LIMIT=120] -->
-    <string name="screen_usage_summary">Amount of time screen has been on since full charge</string>
-    <!-- Label for list of different types using battery in power use UI [CHAR_LIMIT=60] -->
-    <string name="device_usage_list_summary">Device usage since full charge</string>
-    <!-- Battery usage since unplugged -->
-    <string name="battery_since_unplugged">Battery use since unplugged</string>
-    <!-- Battery usage since user reset the stats -->
-    <string name="battery_since_reset">Battery use since reset</string>
-    <!-- Battery usage on battery duration -->
-    <string name="battery_stats_on_battery"><xliff:g id="time">%1$s</xliff:g> on battery</string>
-    <!-- Battery usage duration -->
-    <string name="battery_stats_duration"><xliff:g id="time">%1$s</xliff:g> since unplugged</string>
-    <!-- [CHAR LIMIT=25] Label for battery stats charging state graph -->
-    <string name="battery_stats_charging_label">Charging</string>
-    <!-- [CHAR LIMIT=25] Label for battery stats screen on state graph -->
-    <string name="battery_stats_screen_on_label">Screen on</string>
-    <!-- [CHAR LIMIT=25] Label for battery stats gps on state graph -->
-    <string name="battery_stats_gps_on_label">GPS on</string>
-    <!-- [CHAR LIMIT=25] Label for battery stats camera on state graph -->
-    <string name="battery_stats_camera_on_label">Camera on</string>
-    <!-- [CHAR LIMIT=25] Label for battery stats flashlight on state graph -->
-    <string name="battery_stats_flashlight_on_label">Flashlight on</string>
-    <!-- [CHAR LIMIT=25] Label for battery stats wifi running state graph -->
-    <string name="battery_stats_wifi_running_label">Wi\u2011Fi</string>
-    <!-- [CHAR LIMIT=25] Label for battery stats wake lock state graph -->
-    <string name="battery_stats_wake_lock_label">Awake</string>
-    <!-- [CHAR LIMIT=25] Label for battery stats phone signal strength graph -->
-    <string name="battery_stats_phone_signal_label">Mobile network signal</string>
-    <!-- Battery usage during last unplugged period -->
-    <string name="battery_stats_last_duration">@string/menu_stats_last_unplugged</string>
-    <!-- CPU awake time title -->
-    <string name="awake">Device awake time</string>
-    <!-- Wifi on time -->
-    <string name="wifi_on_time">Wi\u2011Fi on time</string>
-    <!-- Bluetooth on time -->
-    <string name="bluetooth_on_time">Wi\u2011Fi on time</string>
 
     <!-- Activity title for advanced battery usage page [CHAR LIMIT=25] -->
     <string name="advanced_battery_title">Battery usage</string>
@@ -6280,8 +6238,6 @@
     <!-- Summary for battery manager when it is on. [CHAR LIMIT=NONE] -->
     <string name="battery_manager_summary_unsupported">Detecting when apps drain battery</string>
 
-    <!-- Summary for battery manager when it is off -->
-    <string name="battery_manager_off">Off</string>
     <!-- Summary for battery manager, showing app restricted -->
     <plurals name="battery_manager_app_restricted">
         <item quantity="one">%1$d app restricted</item>
@@ -6297,48 +6253,6 @@
     <string name="battery_missing_link_message"></string>
     <!-- Accessibility description for battery missing link. [CHAR LIMIT=NONE] -->
     <string name="battery_missing_link_a11y_message">Tap to learn more about this error</string>
-
-    <!-- Title for force stop dialog [CHAR LIMIT=30] -->
-    <string name="dialog_stop_title">Stop app?</string>
-    <!-- Message body for force stop dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_stop_message" product="default">Your phone can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> is keeping your phone awake.\n\nTo try to fix this issue, you can stop the app.\n\nIf this keeps happening, you may need to uninstall the app to improve battery performance.</string>
-    <!-- Message body for force stop dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_stop_message" product="tablet">Your tablet can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> is keeping your tablet awake.\n\nTo try to fix this issue, you can stop the app.\n\nIf this keeps happening, you may need to uninstall the app to improve battery performance.</string>
-    <!-- Message body for force stop dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_stop_message" product="device">Your device can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> is keeping your device awake.\n\nTo try to fix this issue, you can stop the app.\n\nIf this keeps happening, you may need to uninstall the app to improve battery performance.</string>
-
-    <!-- Message body for force stop dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_stop_message_wakeup_alarm" product="default">Your phone can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps waking up your phone.\n\nTo try to fix this issue, you can stop <xliff:g id="app">%1$s</xliff:g>.\n\nIf this keeps happening, you may need to uninstall the app to improve battery performance.</string>
-    <!-- Message body for force stop dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_stop_message_wakeup_alarm" product="tablet">Your tablet can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps waking up your tablet.\n\nTo try to fix this issue, you can stop <xliff:g id="app">%1$s</xliff:g>.\n\nIf this keeps happening, you may need to uninstall the app to improve battery performance.</string>
-    <!-- Message body for force stop dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_stop_message_wakeup_alarm" product="device">Your device can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps waking up your device.\n\nTo try to fix this issue, you can stop <xliff:g id="app">%1$s</xliff:g>.\n\nIf this keeps happening, you may need to uninstall the app to improve battery performance.</string>
-
-    <!-- Text for OK button in force stop dialog [CHAR LIMIT=30] -->
-    <string name="dialog_stop_ok">Stop app</string>
-
-    <!-- Title for background usage dialog [CHAR LIMIT=70] -->
-    <string name="dialog_background_check_title">Turn off background usage &amp; stop app?</string>
-    <!-- Message body for background usage dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_background_check_message" product="default">Your phone can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps waking up your phone.\n\nTo try to fix this issue, you can stop <xliff:g id="app">%1$s</xliff:g> and prevent it from running in the background.</string>
-    <!-- Message body for background usage dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_background_check_message" product="tablet">Your tablet can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps waking up your tablet.\n\nTo try to fix this issue, you can stop <xliff:g id="app">%1$s</xliff:g> and prevent it from running in the background.</string>
-    <!-- Message body for background usage dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_background_check_message" product="device">Your device can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps waking up your device.\n\nTo try to fix this issue, you can stop <xliff:g id="app">%1$s</xliff:g> and prevent it from running in the background.</string>
-    <!-- Text for OK button in background usage dialog [CHAR LIMIT=30] -->
-    <string name="dialog_background_check_ok">Turn off</string>
-
-    <!-- Title for location dialog [CHAR LIMIT=60] -->
-    <string name="dialog_location_title">Turn off location?</string>
-    <!-- Message body for location dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_location_message" product="default">Your phone can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps requesting your location when you\'re not using the app.\n\nTo fix this issue, you can turn off location for this app.</string>
-    <!-- Message body for location dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_location_message" product="tablet">Your tablet can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps requesting your location when you\'re not using the app.\n\nTo fix this issue, you can turn off location for this app.</string>
-    <!-- Message body for location dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_location_message" product="device">Your device can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps requesting your location when you\'re not using the app.\n\nTo fix this issue, you can turn off location for this app.</string>
-
-    <!-- Text for OK button in location dialog [CHAR LIMIT=30] -->
-    <string name="dialog_location_ok">Turn off</string>
 
     <!-- Label for power consumed by the screen -->
     <string name="power_screen">Screen</string>
@@ -6358,126 +6272,6 @@
     <string name="power_idle" product="tablet">Tablet idle</string>
     <!-- Label for power consumed when Idle -->
     <string name="power_idle" product="default">Phone idle</string>
-    <!-- Label for power that we aren't able to account for -->
-    <string name="power_unaccounted">Miscellaneous</string>
-    <!-- Label for power that we computed too much for -->
-    <string name="power_overcounted">Over-counted</string>
-
-    <!-- Label for CPU usage time -->
-    <string name="usage_type_cpu">CPU total</string>
-    <!-- Label for CPU usage in foreground -->
-    <string name="usage_type_cpu_foreground">CPU foreground</string>
-    <!-- [CHAR LIMIT=25] Label for keeping device from sleeping -->
-    <string name="usage_type_wake_lock">Keep awake</string>
-    <!-- Label for GPS usage time -->
-    <string name="usage_type_gps">GPS</string>
-    <!-- [CHAR LIMIT=25] Label for WIFI usage time -->
-    <string name="usage_type_wifi_running">Wi\u2011Fi running</string>
-    <!-- Label for Phone usage time -->
-    <string name="usage_type_phone" product="tablet">Tablet</string>
-    <!-- Label for Phone usage time -->
-    <string name="usage_type_phone" product="default">Phone</string>
-    <!-- Label for mobile network data sent [CHAR LIMIT=32] -->
-    <string name="usage_type_data_send">Mobile packets sent</string>
-    <!-- Label for mobile network data received [CHAR LIMIT=32] -->
-    <string name="usage_type_data_recv">Mobile packets received</string>
-    <!-- Label for mobile network radio active time [CHAR LIMIT=32] -->
-    <string name="usage_type_radio_active">Mobile radio active</string>
-    <!-- Label for Wi-Fi network data sent [CHAR LIMIT=32] -->
-    <string name="usage_type_data_wifi_send">Wi\u2011Fi packets sent</string>
-    <!-- Label for Wi-Fi network data received [CHAR LIMIT=32] -->
-    <string name="usage_type_data_wifi_recv">Wi\u2011Fi packets received</string>
-    <!-- Label for Audio usage time -->
-    <string name="usage_type_audio">Audio</string>
-    <!-- Label for Video usage time -->
-    <string name="usage_type_video">Video</string>
-    <!-- Label for Camera usage time -->
-    <string name="usage_type_camera">Camera</string>
-    <!-- Label for Flashlight usage time -->
-    <string name="usage_type_flashlight">Flashlight</string>
-    <!-- Label for time that a feature has been on -->
-    <string name="usage_type_on_time">Time on</string>
-    <!-- Label for time that there was no cell coverage -->
-    <string name="usage_type_no_coverage">Time without a signal</string>
-    <!-- Label for the total power capacity of the device's battery -->
-    <string name="usage_type_total_battery_capacity">Total battery capacity</string>
-    <!-- [CHAR_LIMIT=NONE] Label for amount of power use that was computed -->
-    <string name="usage_type_computed_power">Computed power use</string>
-    <!-- [CHAR_LIMIT=NONE] Label for amount of power use that was actually observed (though
-         the change in battery level) -->
-    <string name="usage_type_actual_power">Observed power use</string>
-    <!-- Label for force stop action -->
-    <string name="battery_action_stop">Force stop</string>
-    <!-- Label for app details action -->
-    <string name="battery_action_app_details">App info</string>
-    <!-- Label for app settings action -->
-    <string name="battery_action_app_settings">App settings</string>
-    <!-- Label for display settings -->
-    <string name="battery_action_display">Screen settings</string>
-    <!-- Label for wifi settings -->
-    <string name="battery_action_wifi">Wi\u2011Fi settings</string>
-    <!-- Label for bluetooth settings -->
-    <string name="battery_action_bluetooth">Bluetooth settings</string>
-
-    <!-- Description for voice call detail -->
-    <string name="battery_desc_voice">Battery used by voice calls</string>
-
-    <!-- Description for standby detail -->
-    <string name="battery_desc_standby" product="tablet">Battery used when tablet is idle</string>
-    <!-- Description for standby detail -->
-    <string name="battery_desc_standby" product="default">Battery used when phone is idle</string>
-
-    <!-- Description for cell radio detail -->
-    <string name="battery_desc_radio">Battery used by cell radio</string>
-    <!-- Suggestion to switch to airplane mode to save power -->
-    <string name="battery_sugg_radio">Switch to airplane mode to save power in areas with no cell coverage</string>
-
-    <!-- [CHAR_LIMIT=NONE] Description for power consumed by the flashlight -->
-    <string name="battery_desc_flashlight">Battery used by the flashlight</string>
-
-    <!-- [CHAR_LIMIT=NONE] Description for power consumed by the camera -->
-    <string name="battery_desc_camera">Battery used by the camera</string>
-
-    <!-- Description for power consumed by display -->
-    <string name="battery_desc_display">Battery used by the display and backlight</string>
-    <!-- Suggestion for reducing display power -->
-    <string name="battery_sugg_display">Reduce the screen brightness and/or screen timeout</string>
-
-    <!-- Description for wifi connectivity -->
-    <string name="battery_desc_wifi">Battery used by Wi\u2011Fi</string>
-    <!-- Suggestion for wifi connectivity power drain -->
-    <string name="battery_sugg_wifi">Turn off Wi\u2011Fi when not using it or when it isn\u2019t available</string>
-
-    <!-- Description for bluetooth power consumption detail -->
-    <string name="battery_desc_bluetooth">Battery used by Bluetooth</string>
-    <!-- Suggestion for bluetooth -->
-    <string name="battery_sugg_bluetooth_basic">Turn off Bluetooth when you aren\u2019t using it</string>
-    <!-- Suggestion for bluetooth headset -->
-    <string name="battery_sugg_bluetooth_headset">Try connecting to a different Bluetooth device</string>
-
-    <!-- [CHAR LIMIT=50] Description for power consumed by applications -->
-    <string name="battery_desc_apps">Battery used by app</string>
-    <!-- Suggestion for exploring application info to stop or uninstall -->
-    <string name="battery_sugg_apps_info">Stop or uninstall the app</string>
-    <!-- [CHAR LIMIT=100] Suggestion for getting apps to consume less power due to GPS-->
-    <string name="battery_sugg_apps_gps">Select battery-saving mode</string>
-    <!-- Suggestion for getting apps to consume less power -->
-    <string name="battery_sugg_apps_settings">The app may offer settings to reduce battery use</string>
-
-    <!-- [CHAR LIMIT=50] Description for power consumed by users -->
-    <string name="battery_desc_users">Battery used by user</string>
-
-    <!-- [CHAR LIMIT=50] Description for unaccounted power use -->
-    <string name="battery_desc_unaccounted">Miscellaneous power use</string>
-    <!-- [CHAR LIMIT=NONE] Description for unaccounted power use -->
-    <string name="battery_msg_unaccounted">Battery use is an approximation of power
-        use and does not include every source of battery drain.  Miscellaneous is the difference
-        between the computed approximate power use and the actual drain observed on the
-        battery.</string>
-    <!-- [CHAR LIMIT=50] Description for over-counted power use -->
-    <string name="battery_desc_overcounted">Over-counted power use</string>
-    <!-- Representation of a mAh value. [CHAR LIMIT=NONE] -->
-    <string name="mah"><xliff:g id="number" example="30">%d</xliff:g> mAh</string>
 
     <!-- Description for battery usage time for an app, i.e. Used for 30min. Note: ^1 should be used in all translations [CHAR LIMIT=60] -->
     <string name="battery_used_for">Used for <xliff:g id="time">^1</xliff:g></string>
@@ -6562,15 +6356,6 @@
 
     <!-- Description for estimated time. [CHAR LIMIT=80]-->
     <string name="estimated_time_description">Estimate may change based on usage</string>
-
-    <!-- Menu label for viewing battery usage since unplugged -->
-    <string name="menu_stats_unplugged"><xliff:g id="unplugged">%1$s</xliff:g> since unplugged</string>
-    <!-- Menu label for viewing battery usage since unplugged -->
-    <string name="menu_stats_last_unplugged">While last unplugged for <xliff:g id="unplugged">%1$s</xliff:g></string>
-    <!-- Menu label for viewing battery usage total -->
-    <string name="menu_stats_total">Usage totals</string>
-    <!-- Menu label for refreshing with latest usage numbers -->
-    <string name="menu_stats_refresh">Refresh</string>
 
     <!-- Label for mediaserver process in battery usage [CHAR_LIMIT=NONE] -->
     <string name="process_mediaserver_label">Mediaserver</string>
@@ -7136,12 +6921,6 @@
     <!-- the following are for Settings Storage screen -->
     <!-- Menu item/button 'delete' -->
     <string name="delete">Delete</string>
-    <!-- Misc files [CHAR LIMIT=25] -->
-    <string name="misc_files">Misc files</string>
-    <!-- number of misc files selected [CHAR LIMIT=40] -->
-    <string name="misc_files_selected_count">selected <xliff:g id="number" example="3">%1$d</xliff:g> out of <xliff:g id="total" example="15">%2$d</xliff:g></string>
-    <!-- number of bytes represented by the selected misc files [CHAR LIMIT=40] -->
-    <string name="misc_files_selected_count_bytes"><xliff:g id="number" example="3.25MB">%1$s</xliff:g> out of <xliff:g id="total" example="15.25MB">%2$s</xliff:g></string>
     <!--  action to select all [CHAR LIMIT=30] -->
     <string name="select_all">Select all</string>
 
@@ -7149,44 +6928,6 @@
     <string name="data_usage_summary_title">Data usage</string>
     <!-- Activity title Mobile data & WI-FI summary. [CHAR LIMIT=40] -->
     <string name="data_usage_app_summary_title">Mobile data &amp; Wi\u2011Fi</string>
-    <!-- Message about carrier data accounting.  [CHAR LIMIT=100] -->
-    <string name="data_usage_accounting">Carrier data accounting may differ from your device.</string>
-    <!-- Title for app usage. [CHAR LIMIT=40] -->
-    <string name="data_usage_app">App usage</string>
-    <!-- Title for app usage. [CHAR LIMIT=40] -->
-    <string name="data_usage_app_info_label">APP INFO</string>
-    <!-- Title for cellular data usage. [CHAR LIMIT=40] -->
-    <string name="data_usage_cellular_data">Mobile data</string>
-    <!-- Title for setting data limit. [CHAR LIMIT=40] -->
-    <string name="data_usage_data_limit">Set data limit</string>
-    <!-- Title for option to pick visible time range from a list available usage periods. [CHAR LIMIT=25] -->
-    <string name="data_usage_cycle">Data usage cycle</string>
-    <!-- Title for application data usage separator in data usage list. [CHAR LIMIT=25] -->
-    <string name="data_usage_app_items_header_text">App usage</string>
-    <!-- Title for menu option to enable mobile data when roaming. [CHAR LIMIT=26] -->
-    <string name="data_usage_menu_roaming">Data roaming</string>
-    <!-- Title for menu option to restrict background data usage. [CHAR LIMIT=26] -->
-    <string name="data_usage_menu_restrict_background">Restrict background data</string>
-    <!-- Title for menu option to allow background data usage. [CHAR LIMIT=26] -->
-    <string name="data_usage_menu_allow_background">Allow background data</string>
-    <!-- Title for menu option to show 4G mobile data usage separate from other mobile data usage. [CHAR LIMIT=26] -->
-    <string name="data_usage_menu_split_4g">Separate 4G usage</string>
-    <!-- Title for menu option to show Wi-Fi data usage. [CHAR LIMIT=26] -->
-    <string name="data_usage_menu_show_wifi">Show Wi\u2011Fi</string>
-    <!-- Title for menu option to hide Wi-Fi data usage. [CHAR LIMIT=26] -->
-    <string name="data_usage_menu_hide_wifi">Hide Wi\u2011Fi</string>
-    <!-- Title for menu option to show Ethernet data usage. [CHAR LIMIT=26] -->
-    <string name="data_usage_menu_show_ethernet">Show Ethernet usage</string>
-    <!-- Title for menu option to hide Ethernet data usage. [CHAR LIMIT=26] -->
-    <string name="data_usage_menu_hide_ethernet">Hide Ethernet usage</string>
-    <!-- Title for menu option to configure metered networks. [CHAR LIMIT=26] -->
-    <string name="data_usage_menu_metered">Network restrictions</string>
-    <!-- Title for menu option to enable global auto-sync of account data -->
-    <string name="data_usage_menu_auto_sync">Auto-sync data</string>
-    <!-- Title for menu option to show details for all SIM cards. [CHAR LIMIT=26] -->
-    <string name="data_usage_menu_sim_cards">SIM cards</string>
-    <!-- Summary String for Cellular data enable toggle. [CHAR LIMIT=33] -->
-    <string name="data_usage_cellular_data_summary">Paused at limit</string>
 
     <!--  Title for menu option to enable global auto-sync of personal account data [CHAR LIMIT=30] -->
     <string name="account_settings_menu_auto_sync">Auto-sync data</string>
@@ -8259,8 +8000,6 @@
     <string name="keywords_wifi_data_usage">data usage</string>
     <!-- Search keyword for "Time format" settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_time_format">Use 24-hour format</string>
-    <!-- Search keyword for "Files" settings under Settings > Storage. [CHAR_LIMIT=NONE]-->
-    <string name="keywords_storage_files">Download</string>
     <!-- Search keyword for "Default Apps" settings [CHAR_LIMIT=NONE]-->
     <string name="keywords_app_default">Open with</string>
     <!-- Search keyword for "App info" settings [CHAR_LIMIT=NONE]-->
@@ -12201,17 +11940,8 @@
     <!-- Storage Settings dropdown option of default internal storage [CHAR LIMIT=30] -->
     <string name="storage_default_internal_storage">This device</string>
 
-    <!-- Preference label for the Photos & Videos storage section. [CHAR LIMIT=50] -->
-    <string name="storage_photos_videos">Photos &amp; videos</string>
-
-    <!-- Preference label for the Music & Audio storage section. [CHAR LIMIT=50] -->
-    <string name="storage_music_audio">Music &amp; audio</string>
-
     <!-- Preference label for the Games storage section. [CHAR LIMIT=50] -->
     <string name="storage_games">Games</string>
-
-    <!-- Preference label for the Other apps storage section. [CHAR LIMIT=50] -->
-    <string name="storage_other_apps">Other apps</string>
 
     <!-- Preference label for the Files storage section. [CHAR LIMIT=50] -->
     <string name="storage_files">Files</string>
@@ -12248,13 +11978,6 @@
 
     <!-- Dialog confirm button to empty all trash files. [CHAR LIMIT=50] -->
     <string name="storage_trash_dialog_confirm">Empty trash</string>
-
-    <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
-    <string name="storage_size_large_alternate"><xliff:g id="number" example="128">^1</xliff:g><small> <font size="20"><xliff:g id="unit" example="KB">^2</xliff:g></font></small></string>
-    <!-- Summary of a single storage volume total space. [CHAR LIMIT=48]-->
-    <string name="storage_volume_total">Used of <xliff:g id="total" example="32GB">%1$s</xliff:g></string>
-    <!-- Follows the percent of storage used by a storage volume. Exposed inside of a donut graph. [CHAR LIMIT=7]-->
-    <string name="storage_percent_full">used</string>
 
     <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
     <string name="storage_usage_summary"><xliff:g id="number" example="128">%1$s</xliff:g> <xliff:g id="unit" example="KB">%2$s</xliff:g> used</string>
@@ -12359,28 +12082,11 @@
     <!-- Switch summary to show operator name in the status bar [CHAR LIMIT=NONE] -->
     <string name="show_operator_name_summary">Display network name in status bar</string>
 
-    <!-- Indicates if the automatic storage manager is enabled or not. [CHAR_LIMIT=40] -->
-    <string name="storage_manager_indicator">Storage Manager: <xliff:g id="status" example="on">^1</xliff:g></string>
-
-    <!-- Off status for the automatic storage manager. [CHAR_LIMIT=10] -->
-    <string name="storage_manager_indicator_off">Off</string>
-
-    <!-- On status for the automatic storage manager. [CHAR_LIMIT=10] -->
-    <string name="storage_manager_indicator_on">On</string>
-
     <!-- Added as the value of a header field indicating this is an instant app (as opposed to installed normally) -->
     <string name="install_type_instant">Instant app</string>
 
     <!-- Warning for when the automatic storage manager is turned off. [CHAR LIMIT=NONE] -->
     <string name="automatic_storage_manager_deactivation_warning">Turn off the storage manager?</string>
-
-    <!-- Preference label for the Movies & TV apps section [CHAR LIMIT=50] -->
-    <string name="storage_movies_tv">Movie &amp; TV apps</string>
-
-    <!-- Carrier Provisioning Info [CHAR LIMIT=NONE] -->
-    <string name="carrier_provisioning">Carrier Provisioning Info</string>
-    <!-- Trigger Carrier Provisioning [CHAR LIMIT=NONE] -->
-    <string name="trigger_carrier_provisioning">Trigger Carrier Provisioning</string>
 
     <!-- Help URI, USB Audio [DO NOT TRANSLATE] -->
     <string name="help_url_audio_accessory_not_supported" translatable="false"></string>
@@ -12548,50 +12254,14 @@
     <!-- Summary for media output default settings. (this device) [CHAR LIMIT=30] -->
     <string name="media_output_default_summary">This device</string>
 
-    <!-- Summary for media output settings. (phone) -->
-    <string name="media_output_summary" product="default">Phone</string>
-
-    <!-- Summary for media output settings. (tablet) -->
-    <string name="media_output_summary" product="tablet">Tablet</string>
-
-    <!-- Summary for media output settings. (device) -->
-    <string name="media_output_summary" product="device">Device</string>
-
     <!-- Summary for media output settings when device is in ongoing call state. -->
     <string name="media_out_summary_ongoing_call_state">Unavailable during calls</string>
-
-    <!-- Summary for media output settings when the media stream is being captured by something else. -->
-    <string name="media_output_summary_unavailable">Unavailable</string>
-
-    <!-- Title for the media output group dialog with media related devices [CHAR LIMIT=50] -->
-    <string name="media_output_group_panel_title">Add outputs</string>
-
-    <!-- Title for the media output slice with group devices [CHAR LIMIT=50] -->
-    <string name="media_output_group">Group</string>
-
-    <!-- Summary for media output group with only one device which is active [CHAR LIMIT=NONE] -->
-    <string name="media_output_group_panel_single_device_summary">1 device selected</string>
-
-    <!-- Summary for media output group with the active device count [CHAR LIMIT=NONE] -->
-    <string name="media_output_group_panel_multiple_devices_summary"><xliff:g id="count" example="2">%1$d</xliff:g> devices selected</string>
-
-    <!-- Summary for media output switching output [CHAR LIMIT=50] -->
-    <string name="media_output_switching">Switching\u2026</string>
 
     <!-- Title for HFP(hands free profile) output switch button in settings. -->
     <string name="take_call_on_title">Take call on</string>
 
     <!-- Toast that appears when users tap an APN for which parameters cannot be viewed. [CHAR LIMIT=NONE] -->
     <string name="cannot_change_apn_toast">This APN cannot be changed.</string>
-
-    <!--  Title for battery Suggestion. (tablet) [CHAR LIMIT=46] -->
-    <string name="battery_suggestion_title" product="tablet" >Improve tablet\'s battery life</string>
-    <!--  Title for battery Suggestion. (device) [CHAR LIMIT=46] -->
-    <string name="battery_suggestion_title" product="device" >Improve device\'s battery life</string>
-    <!--  Title for battery Suggestion. (phone) [CHAR LIMIT=46] -->
-    <string name="battery_suggestion_title" product="default" >Improve phone\'s battery life</string>
-    <!--  Summary for battery Suggestion. [CHAR LIMIT=55] -->
-    <string name="battery_suggestion_summary"></string>
 
     <!-- Title for prevent ringing gesture screen [CHAR LIMIT=60]-->
     <string name="gesture_prevent_ringing_screen_title">Prevent ringing</string>
@@ -13265,8 +12935,6 @@
     <!-- Message for forget passpoint dialog [CHAR LIMIT=none] -->
     <string name="forget_passpoint_dialog_message">You may lose access to any remaining time or data. Check with your provider before removing.</string>
 
-    <!-- Keywords for Content Capture feature [CHAR_LIMIT=none] -->
-    <string name="keywords_content_capture">content capture, app content</string>
     <!-- Title of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=none]-->
     <string name="content_capture">App content</string>
     <!-- Description of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=NONE]-->
@@ -13359,15 +13027,6 @@
 
     <!-- Developer settings: text for the bug report handler selection toast shown if an invalid bug report handler was chosen. [CHAR LIMIT=NONE] -->
     <string name="select_invalid_bug_report_handler_toast_text">This choice is no longer valid. Try again.</string>
-
-    <!-- Device controls name lower case [CHAR LIMIT=40] -->
-    <string name="quick_controls_lower">device controls</string>
-
-    <!-- Cards and passes name sentence case [CHAR LIMIT=40] -->
-    <string name="cards_passes_sentence">Cards &amp; passes</string>
-
-    <!-- Cards and passes name lower case [CHAR LIMIT=40] -->
-    <string name="cards_passes_lower">cards &amp; passes</string>
 
     <!-- Power menu setting name [CHAR LIMIT=60] -->
     <string name="power_menu_setting_name">Press &amp; hold power button</string>
@@ -13506,9 +13165,6 @@
     <string name="calls_and_sms_category">Wi\u2011Fi calling</string>
     <!-- Provider Model: Summary for calling preference -->
     <string name="calls_sms_wfc_summary">Make and receive calls over Wi\u2011Fi</string>
-    <!-- Provider Model: Label for footnote on calling preference -->
-    <string name="calls_sms_footnote">With Wi\u2011Fi calling, calls are made and received over non\u2011carrier Wi\u2011Fi networks.
-        <annotation id="url">Learn more</annotation></string>
     <!-- Provider Model: Calls preference title -->
     <string name="calls_preference_title">Calls</string>
     <!-- Provider Model: SMS preference title -->
