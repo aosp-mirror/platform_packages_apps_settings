@@ -178,7 +178,8 @@ public final class BatteryChartPreferenceControllerV2Test {
         verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
                 List.of(100, 97, 95),
                 List.of("8 am", "10 am", "12 pm"),
-                BatteryChartViewModel.SELECTED_INDEX_ALL));
+                BatteryChartViewModel.SELECTED_INDEX_ALL,
+                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
     }
 
     @Test
@@ -193,7 +194,8 @@ public final class BatteryChartPreferenceControllerV2Test {
         verify(mDailyChartView).setViewModel(new BatteryChartViewModel(
                 List.of(100, 83, 59, 41),
                 List.of("SAT", "SUN", "MON", "MON"),
-                BatteryChartViewModel.SELECTED_INDEX_ALL));
+                BatteryChartViewModel.SELECTED_INDEX_ALL,
+                BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS));
 
         reset(mDailyChartView);
         reset(mHourlyChartView);
@@ -204,12 +206,14 @@ public final class BatteryChartPreferenceControllerV2Test {
         verify(mDailyChartView).setViewModel(new BatteryChartViewModel(
                 List.of(100, 83, 59, 41),
                 List.of("SAT", "SUN", "MON", "MON"),
-                0));
+                0,
+                BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS));
         verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
                 List.of(100, 97, 95, 93, 91, 89, 87, 85, 83),
                 List.of("8 am", "10 am", "12 pm", "2 pm", "4 pm", "6 pm", "8 pm", "10 pm",
                         "12 am"),
-                BatteryChartViewModel.SELECTED_INDEX_ALL));
+                BatteryChartViewModel.SELECTED_INDEX_ALL,
+                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
 
         reset(mDailyChartView);
         reset(mHourlyChartView);
@@ -221,12 +225,14 @@ public final class BatteryChartPreferenceControllerV2Test {
         verify(mDailyChartView).setViewModel(new BatteryChartViewModel(
                 List.of(100, 83, 59, 41),
                 List.of("SAT", "SUN", "MON", "MON"),
-                1));
+                1,
+                BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS));
         verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
                 List.of(83, 81, 79, 77, 75, 73, 71, 69, 67, 65, 63, 61, 59),
                 List.of("12 am", "2 am", "4 am", "6 am", "8 am", "10 am", "12 pm", "2 pm",
                         "4 pm", "6 pm", "8 pm", "10 pm", "12 am"),
-                6));
+                6,
+                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
 
         reset(mDailyChartView);
         reset(mHourlyChartView);
@@ -239,12 +245,14 @@ public final class BatteryChartPreferenceControllerV2Test {
         verify(mDailyChartView).setViewModel(new BatteryChartViewModel(
                 List.of(100, 83, 59, 41),
                 List.of("SAT", "SUN", "MON", "MON"),
-                2));
+                2,
+                BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS));
         verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
                 List.of(59, 57, 55, 53, 51, 49, 47, 45, 43, 41),
                 List.of("12 am", "2 am", "4 am", "6 am", "8 am", "10 am", "12 pm", "2 pm",
                         "4 pm", "6 pm"),
-                BatteryChartViewModel.SELECTED_INDEX_ALL));
+                BatteryChartViewModel.SELECTED_INDEX_ALL,
+                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
     }
 
     @Test
