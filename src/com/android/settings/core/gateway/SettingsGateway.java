@@ -28,7 +28,7 @@ import com.android.settings.TrustedCredentialsSettings;
 import com.android.settings.accessibility.AccessibilityDetailsSettingsFragment;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
-import com.android.settings.accessibility.CaptionPropertiesFragment;
+import com.android.settings.accessibility.CaptioningPropertiesFragment;
 import com.android.settings.accessibility.TextReadingPreferenceFragmentForSetupWizard;
 import com.android.settings.accessibility.ToggleColorInversionPreferenceFragment;
 import com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment;
@@ -230,7 +230,7 @@ public class SettingsGateway {
             AccessibilitySettings.class.getName(),
             AccessibilitySettingsForSetupWizard.class.getName(),
             TextReadingPreferenceFragmentForSetupWizard.class.getName(),
-            CaptionPropertiesFragment.class.getName(),
+            CaptioningPropertiesFragment.class.getName(),
             ToggleDaltonizerPreferenceFragment.class.getName(),
             ToggleColorInversionPreferenceFragment.class.getName(),
             ToggleReduceBrightColorsPreferenceFragment.class.getName(),
