@@ -16,10 +16,14 @@
 package com.android.settings.location;
 
 import android.content.Context;
+import android.os.UserManager;
 import android.provider.Settings;
+
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.RestrictedPreference;
 
 /**
  * Preference controller for Bluetooth scanning in Location Services.
@@ -29,6 +33,13 @@ public class LocationServicesBluetoothScanningPreferenceController extends
 
     public LocationServicesBluetoothScanningPreferenceController(Context context, String key) {
         super(context, key);
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        ((RestrictedPreference) preference).checkRestrictionAndSetDisabled(
+                UserManager.DISALLOW_CONFIG_LOCATION);
+        refreshSummary(preference);
     }
 
     @Override
