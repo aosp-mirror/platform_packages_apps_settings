@@ -104,7 +104,8 @@ public final class BatteryChartViewV2Test {
         final int originalSelectedIndex = 2;
         mBatteryChartView.setViewModel(
                 new BatteryChartViewModel(List.of(90, 80, 70, 60), List.of("", "", "", ""),
-                        originalSelectedIndex));
+                        originalSelectedIndex,
+                        BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
         for (int i = 0; i < mBatteryChartView.mTrapezoidSlots.length; i++) {
             mBatteryChartView.mTrapezoidSlots[i] = new BatteryChartViewV2.TrapezoidSlot();
             mBatteryChartView.mTrapezoidSlots[i].mLeft = i;
@@ -136,6 +137,7 @@ public final class BatteryChartViewV2Test {
                 .thenReturn(false);
 
         mBatteryChartView.onAttachedToWindow();
+
         assertThat(mBatteryChartView.isClickable()).isFalse();
         assertThat(mBatteryChartView.mTrapezoidCurvePaint).isNotNull();
     }
@@ -148,6 +150,7 @@ public final class BatteryChartViewV2Test {
         doReturn(false).when(mMockAccessibilityManager).isEnabled();
 
         mBatteryChartView.onAttachedToWindow();
+
         assertThat(mBatteryChartView.isClickable()).isTrue();
         assertThat(mBatteryChartView.mTrapezoidCurvePaint).isNull();
     }
@@ -163,6 +166,7 @@ public final class BatteryChartViewV2Test {
                 .getEnabledAccessibilityServiceList(anyInt());
 
         mBatteryChartView.onAttachedToWindow();
+
         assertThat(mBatteryChartView.isClickable()).isTrue();
         assertThat(mBatteryChartView.mTrapezoidCurvePaint).isNull();
     }
@@ -175,6 +179,7 @@ public final class BatteryChartViewV2Test {
         doReturn(true).when(mMockAccessibilityManager).isEnabled();
 
         mBatteryChartView.onAttachedToWindow();
+
         assertThat(mBatteryChartView.isClickable()).isFalse();
         assertThat(mBatteryChartView.mTrapezoidCurvePaint).isNotNull();
     }
@@ -188,7 +193,8 @@ public final class BatteryChartViewV2Test {
             texts.add("");
         }
         mBatteryChartView.setViewModel(new BatteryChartViewModel(
-                levels, texts, BatteryChartViewModel.SELECTED_INDEX_ALL));
+                levels, texts, BatteryChartViewModel.SELECTED_INDEX_ALL,
+                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
         mBatteryChartView.setClickableForce(true);
         when(mPowerUsageFeatureProvider.isChartGraphSlotsEnabled(mContext))
                 .thenReturn(true);

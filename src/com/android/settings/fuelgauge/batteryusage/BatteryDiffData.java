@@ -16,7 +16,9 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
-import java.util.ArrayList;
+import androidx.annotation.NonNull;
+
+import java.util.Collections;
 import java.util.List;
 
 /** Wraps the battery usage diff data for each entry used for battery usage app list. */
@@ -24,10 +26,24 @@ public class BatteryDiffData {
     private final List<BatteryDiffEntry> mAppEntries;
     private final List<BatteryDiffEntry> mSystemEntries;
 
+    /** Constructor for the diff entries which already have totalConsumePower value. */
     public BatteryDiffData(
-            List<BatteryDiffEntry> appDiffEntries, List<BatteryDiffEntry> systemDiffEntries) {
-        mAppEntries = appDiffEntries == null ? new ArrayList<>() : appDiffEntries;
-        mSystemEntries = systemDiffEntries == null ? new ArrayList<>() : systemDiffEntries;
+            @NonNull List<BatteryDiffEntry> appDiffEntries,
+            @NonNull List<BatteryDiffEntry> systemDiffEntries) {
+        mAppEntries = appDiffEntries;
+        mSystemEntries = systemDiffEntries;
+        sortEntries();
+    }
+
+    /** Constructor for the diff entries which have not set totalConsumePower value. */
+    public BatteryDiffData(
+            @NonNull List<BatteryDiffEntry> appDiffEntries,
+            @NonNull List<BatteryDiffEntry> systemDiffEntries,
+            final double totalConsumePower) {
+        mAppEntries = appDiffEntries;
+        mSystemEntries = systemDiffEntries;
+        setTotalConsumePowerForAllEntries(totalConsumePower);
+        sortEntries();
     }
 
     public List<BatteryDiffEntry> getAppDiffEntryList() {
@@ -38,9 +54,15 @@ public class BatteryDiffData {
         return mSystemEntries;
     }
 
-    /** Sets total consume power for each entry. */
-    public void setTotalConsumePowerForAllEntries(double totalConsumePower) {
+    // Sets total consume power for each entry.
+    private void setTotalConsumePowerForAllEntries(final double totalConsumePower) {
         mAppEntries.forEach(diffEntry -> diffEntry.setTotalConsumePower(totalConsumePower));
         mSystemEntries.forEach(diffEntry -> diffEntry.setTotalConsumePower(totalConsumePower));
+    }
+
+    // Sorts entries based on consumed percentage.
+    private void sortEntries() {
+        Collections.sort(mAppEntries, BatteryDiffEntry.COMPARATOR);
+        Collections.sort(mSystemEntries, BatteryDiffEntry.COMPARATOR);
     }
 }

@@ -47,8 +47,11 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 /** A widget component to draw chart graph. */
 public class BatteryChartViewV2 extends AppCompatImageView implements View.OnClickListener,
@@ -57,10 +60,10 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
     private static final List<String> ACCESSIBILITY_SERVICE_NAMES =
             Arrays.asList("SwitchAccessService", "TalkBackService", "JustSpeakService");
 
-    private static final int DEFAULT_AXIS_LABEL_COUNT = 4;
-    private static final int AXIS_LABEL_GAPS_COUNT = DEFAULT_AXIS_LABEL_COUNT - 1;
     private static final int DIVIDER_COLOR = Color.parseColor("#CDCCC5");
     private static final long UPDATE_STATE_DELAYED_TIME = 500L;
+    private static final Map<Integer, Integer[]> MODEL_SIZE_TO_LABEL_INDEXES_MAP =
+            buildModelSizeToLabelIndexesMap();
 
     /** A callback listener for selected group index is updated. */
     public interface OnSelectListener {
@@ -76,11 +79,10 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
     private float mTrapezoidHOffset;
     private boolean mIsSlotsClickabled;
     private String[] mPercentages = getPercentages();
+    private Integer[] mLabelsIndexes;
 
     @VisibleForTesting
     int mHoveredIndex = BatteryChartViewModel.SELECTED_INDEX_INVALID;
-    @VisibleForTesting
-    String[] mAxisLabels;
 
     // Colors for drawing the trapezoid shape and dividers.
     private int mTrapezoidColor;
@@ -92,8 +94,7 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
     private final Rect[] mPercentageBounds =
             new Rect[]{new Rect(), new Rect(), new Rect()};
     // For drawing the axis label information.
-    private final Rect[] mAxisLabelsBounds =
-            new Rect[]{new Rect(), new Rect(), new Rect(), new Rect()};
+    private final Rect[] mAxisLabelsBounds = initializeAxisLabelsBounds();
 
     @VisibleForTesting
     Handler mHandler = new Handler();
@@ -137,9 +138,8 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
         Log.d(TAG, String.format("setViewModel(): size: %d, selectedIndex: %d.",
                 viewModel.size(), viewModel.selectedIndex()));
         mViewModel = viewModel;
-
+        mLabelsIndexes = MODEL_SIZE_TO_LABEL_INDEXES_MAP.get(mViewModel.size());
         initializeTrapezoidSlots(viewModel.size() - 1);
-        initializeAxisLabels(viewModel.texts());
         setClickable(hasAnyValidTrapezoid(viewModel));
         requestLayout();
     }
@@ -176,12 +176,11 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
             mIndent.top = mPercentageBounds[0].height();
             mIndent.right = mPercentageBounds[0].width() + mTextPadding;
 
-            if (mAxisLabels != null) {
+            if (mViewModel != null) {
                 int maxHeight = 0;
-                for (int index = 0; index < DEFAULT_AXIS_LABEL_COUNT; index++) {
-                    mTextPaint.getTextBounds(
-                            mAxisLabels[index], 0, mAxisLabels[index].length(),
-                            mAxisLabelsBounds[index]);
+                for (int index = 0; index < mLabelsIndexes.length; index++) {
+                    final String text = getAxisLabelText(index);
+                    mTextPaint.getTextBounds(text, 0, text.length(), mAxisLabelsBounds[index]);
                     maxHeight = Math.max(maxHeight, mAxisLabelsBounds[index].height());
                 }
                 mIndent.bottom = maxHeight + round(mTextPadding * 1.5f);
@@ -333,21 +332,6 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
         }
     }
 
-    /**
-     * Initializes the displayed X-axis labels list selected from the model all texts list.
-     */
-    private void initializeAxisLabels(@NonNull List<String> allTexts) {
-        if (mAxisLabels == null) {
-            mAxisLabels = new String[DEFAULT_AXIS_LABEL_COUNT];
-        }
-        // Current logic is always showing {@code AXIS_LABEL_GAPS_COUNT} labels.
-        // TODO: Support different count of labels for different levels sizes.
-        final int step = (allTexts.size() - 1) / AXIS_LABEL_GAPS_COUNT;
-        for (int index = 0; index < DEFAULT_AXIS_LABEL_COUNT; index++) {
-            mAxisLabels[index] = allTexts.get(index * step);
-        }
-    }
-
     private void initializeColors(Context context) {
         setBackgroundColor(Color.TRANSPARENT);
         mTrapezoidSolidColor = Utils.getColorAccentDefaultColor(context);
@@ -432,40 +416,58 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
             startX = nextX;
         }
         // Draws the axis label slot information.
-        if (mAxisLabels != null) {
-            final float[] xOffsets = new float[DEFAULT_AXIS_LABEL_COUNT];
+        if (mViewModel != null) {
+            final float[] xOffsets = new float[mLabelsIndexes.length];
             final float baselineX = mDividerWidth * .5f;
             final float offsetX = mDividerWidth + unitWidth;
-            // TODO: Support different count of labels for different levels sizes.
-            final int slotBarOffset = (/*total 12 bars*/ 12) / AXIS_LABEL_GAPS_COUNT;
-            for (int index = 0; index < DEFAULT_AXIS_LABEL_COUNT; index++) {
-                xOffsets[index] = baselineX + index * offsetX * slotBarOffset;
+            for (int index = 0; index < mLabelsIndexes.length; index++) {
+                xOffsets[index] = baselineX + mLabelsIndexes[index] * offsetX;
             }
-            drawAxisLabel(canvas, xOffsets);
+            switch (mViewModel.axisLabelPosition()) {
+                case CENTER_OF_TRAPEZOIDS:
+                    drawAxisLabelsCenterOfTrapezoids(canvas, xOffsets, unitWidth);
+                    break;
+                case BETWEEN_TRAPEZOIDS:
+                default:
+                    drawAxisLabelsBetweenTrapezoids(canvas, xOffsets);
+                    break;
+            }
         }
     }
 
-    private void drawAxisLabel(Canvas canvas, float[] xOffsets) {
+    private void drawAxisLabelsBetweenTrapezoids(Canvas canvas, float[] xOffsets) {
         // Draws the 1st axis label info.
         canvas.drawText(
-                mAxisLabels[0], xOffsets[0] - mAxisLabelsBounds[0].left, getAxisLabelY(0),
+                getAxisLabelText(0), xOffsets[0] - mAxisLabelsBounds[0].left, getAxisLabelY(0),
                 mTextPaint);
-        final int latestIndex = DEFAULT_AXIS_LABEL_COUNT - 1;
+        final int latestIndex = mLabelsIndexes.length - 1;
         // Draws the last axis label info.
         canvas.drawText(
-                mAxisLabels[latestIndex],
+                getAxisLabelText(latestIndex),
                 xOffsets[latestIndex]
                         - mAxisLabelsBounds[latestIndex].width()
                         - mAxisLabelsBounds[latestIndex].left,
                 getAxisLabelY(latestIndex),
                 mTextPaint);
         // Draws the rest of axis label info since it is located in the center.
-        for (int index = 1; index <= DEFAULT_AXIS_LABEL_COUNT - 2; index++) {
+        for (int index = 1; index <= mLabelsIndexes.length - 2; index++) {
             canvas.drawText(
-                    mAxisLabels[index],
+                    getAxisLabelText(index),
                     xOffsets[index]
                             - (mAxisLabelsBounds[index].width() - mAxisLabelsBounds[index].left)
                             * .5f,
+                    getAxisLabelY(index),
+                    mTextPaint);
+        }
+    }
+
+    private void drawAxisLabelsCenterOfTrapezoids(
+            Canvas canvas, float[] xOffsets, float unitWidth) {
+        for (int index = 0; index < mLabelsIndexes.length - 1; index++) {
+            canvas.drawText(
+                    getAxisLabelText(index),
+                    xOffsets[index] + (unitWidth - (mAxisLabelsBounds[index].width()
+                            - mAxisLabelsBounds[index].left)) * .5f,
                     getAxisLabelY(index),
                     mTextPaint);
         }
@@ -554,6 +556,10 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
         return BatteryChartViewModel.SELECTED_INDEX_INVALID;
     }
 
+    private String getAxisLabelText(int labelIndex) {
+        return mViewModel.texts().get(mLabelsIndexes[labelIndex]);
+    }
+
     private static boolean isTrapezoidValid(
             @NonNull BatteryChartViewModel viewModel, int trapezoidIndex) {
         return viewModel.levels().get(trapezoidIndex) != null
@@ -605,6 +611,33 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
             }
         }
         return false;
+    }
+
+    private static Map<Integer, Integer[]> buildModelSizeToLabelIndexesMap() {
+        final Map<Integer, Integer[]> result = new HashMap<>();
+        result.put(2, new Integer[]{0, 1});
+        result.put(3, new Integer[]{0, 1, 2});
+        result.put(4, new Integer[]{0, 1, 2, 3});
+        result.put(5, new Integer[]{0, 1, 2, 3, 4});
+        result.put(6, new Integer[]{0, 1, 2, 3, 4, 5});
+        result.put(7, new Integer[]{0, 1, 2, 3, 4, 5, 6});
+        result.put(8, new Integer[]{0, 1, 2, 3, 4, 5, 6, 7});
+        result.put(9, new Integer[]{0, 2, 4, 6, 8});
+        result.put(10, new Integer[]{0, 3, 6, 9});
+        result.put(11, new Integer[]{0, 5, 10});
+        result.put(12, new Integer[]{0, 4, 7, 11});
+        result.put(13, new Integer[]{0, 4, 8, 12});
+        return result;
+    }
+
+    private static Rect[] initializeAxisLabelsBounds() {
+        final int maxLabelsLength = MODEL_SIZE_TO_LABEL_INDEXES_MAP.values().stream().max(
+                Comparator.comparingInt(indexes -> indexes.length)).get().length;
+        final Rect[] bounds = new Rect[maxLabelsLength];
+        for (int i = 0; i < maxLabelsLength; i++) {
+            bounds[i] = new Rect();
+        }
+        return bounds;
     }
 
     // A container class for each trapezoid left and right location.

@@ -19,10 +19,15 @@ package com.android.settings.fuelgauge.batteryusage;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.text.format.DateUtils;
+
+import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,6 +40,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
@@ -45,18 +51,30 @@ public class DataProcessorTest {
 
     private Context mContext;
 
+    private FakeFeatureFactory mFeatureFactory;
+    private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         TimeZone.setDefault(TimeZone.getTimeZone("GMT+8"));
 
         mContext = spy(RuntimeEnvironment.application);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        mPowerUsageFeatureProvider = mFeatureFactory.powerUsageFeatureProvider;
     }
 
     @Test
     public void getBatteryLevelData_emptyHistoryMap_returnNull() {
-        assertThat(DataProcessor.getBatteryLevelData(mContext, null)).isNull();
-        assertThat(DataProcessor.getBatteryLevelData(mContext, new HashMap<>())).isNull();
+        assertThat(DataProcessor.getBatteryLevelData(
+                mContext,
+                /*handler=*/ null,
+                /*batteryHistoryMap=*/ null,
+                /*asyncResponseDelegate=*/ null))
+                .isNull();
+        assertThat(DataProcessor.getBatteryLevelData(
+                mContext, /*handler=*/ null, new HashMap<>(), /*asyncResponseDelegate=*/ null))
+                .isNull();
     }
 
     @Test
@@ -67,7 +85,9 @@ public class DataProcessorTest {
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
                 createHistoryMap(timestamps, levels);
 
-        assertThat(DataProcessor.getBatteryLevelData(mContext, batteryHistoryMap)).isNull();
+        assertThat(DataProcessor.getBatteryLevelData(
+                mContext, /*handler=*/ null, batteryHistoryMap, /*asyncResponseDelegate=*/ null))
+                .isNull();
     }
 
     @Test
@@ -79,7 +99,11 @@ public class DataProcessorTest {
                 createHistoryMap(timestamps, levels);
 
         final BatteryLevelData resultData =
-                DataProcessor.getBatteryLevelData(mContext, batteryHistoryMap);
+                DataProcessor.getBatteryLevelData(
+                        mContext,
+                        /*handler=*/ null,
+                        batteryHistoryMap,
+                        /*asyncResponseDelegate=*/ null);
 
         final List<Long> expectedDailyTimestamps = List.of(timestamps[0], timestamps[2]);
         final List<Integer> expectedDailyLevels = List.of(levels[0], levels[2]);
@@ -377,6 +401,450 @@ public class DataProcessorTest {
                 .isEqualTo(1640966400000L);
     }
 
+    @Test
+    public void getBatteryUsageMap_emptyHistoryMap_returnNull() {
+        final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
+                new ArrayList<>();
+        hourlyBatteryLevelsPerDay.add(
+                new BatteryLevelData.PeriodBatteryLevelData(new ArrayList<>(), new ArrayList<>()));
+
+        assertThat(DataProcessor.getBatteryUsageMap(
+                mContext, hourlyBatteryLevelsPerDay, new HashMap<>())).isNull();
+    }
+
+    @Test
+    public void getBatteryUsageMap_emptyHourlyData_returnNull() {
+        final long[] timestamps = {1000000L, 2000000L};
+        final int[] levels = {100, 99};
+        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
+                createHistoryMap(timestamps, levels);
+
+        assertThat(DataProcessor.getBatteryUsageMap(
+                mContext, new ArrayList<>(), batteryHistoryMap)).isNull();
+    }
+
+    @Test
+    public void getBatteryUsageMap_returnsExpectedResult() {
+        final long[] batteryHistoryKeys = new long[]{
+                1641045600000L, // 2022-01-01 22:00:00
+                1641049200000L, // 2022-01-01 23:00:00
+                1641052800000L, // 2022-01-02 00:00:00
+                1641056400000L, // 2022-01-02 01:00:00
+                1641060000000L, // 2022-01-02 02:00:00
+        };
+        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
+        final int currentUserId = mContext.getUserId();
+        final BatteryHistEntry fakeEntry = createBatteryHistEntry(
+                ConvertUtils.FAKE_PACKAGE_NAME, "fake_label", /*consumePower=*/ 0, /*uid=*/ 0L,
+                currentUserId, ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
+                /*foregroundUsageTimeInMs=*/ 0L, /*backgroundUsageTimeInMs=*/ 0L);
+        // Adds the index = 0 data.
+        Map<String, BatteryHistEntry> entryMap = new HashMap<>();
+        BatteryHistEntry entry = createBatteryHistEntry(
+                "package1", "label1", /*consumePower=*/ 5.0, /*uid=*/ 1L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 10L,
+                /*backgroundUsageTimeInMs=*/ 20L);
+        entryMap.put(entry.getKey(), entry);
+        entryMap.put(fakeEntry.getKey(), fakeEntry);
+        batteryHistoryMap.put(batteryHistoryKeys[0], entryMap);
+        // Adds the index = 1 data.
+        entryMap = new HashMap<>();
+        entryMap.put(fakeEntry.getKey(), fakeEntry);
+        batteryHistoryMap.put(batteryHistoryKeys[1], entryMap);
+        // Adds the index = 2 data.
+        entryMap = new HashMap<>();
+        entry = createBatteryHistEntry(
+                "package2", "label2", /*consumePower=*/ 20.0, /*uid=*/ 2L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 15L,
+                25L);
+        entryMap.put(entry.getKey(), entry);
+        entryMap.put(fakeEntry.getKey(), fakeEntry);
+        batteryHistoryMap.put(batteryHistoryKeys[2], entryMap);
+        // Adds the index = 3 data.
+        entryMap = new HashMap<>();
+        entry = createBatteryHistEntry(
+                "package2", "label2", /*consumePower=*/ 40.0, /*uid=*/ 2L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 25L,
+                /*backgroundUsageTimeInMs=*/ 35L);
+        entryMap.put(entry.getKey(), entry);
+        entry = createBatteryHistEntry(
+                "package2", "label2", /*consumePower=*/ 10.0, /*uid=*/ 3L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY, /*foregroundUsageTimeInMs=*/ 40L,
+                /*backgroundUsageTimeInMs=*/ 50L);
+        entryMap.put(entry.getKey(), entry);
+        entry = createBatteryHistEntry(
+                "package3", "label3", /*consumePower=*/ 15.0, /*uid=*/ 4L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 5L,
+                /*backgroundUsageTimeInMs=*/ 5L);
+        entryMap.put(entry.getKey(), entry);
+        entryMap.put(fakeEntry.getKey(), fakeEntry);
+        batteryHistoryMap.put(batteryHistoryKeys[3], entryMap);
+        // Adds the index = 4 data.
+        entryMap = new HashMap<>();
+        entry = createBatteryHistEntry(
+                "package2", "label2", /*consumePower=*/ 40.0, /*uid=*/ 2L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 30L,
+                /*backgroundUsageTimeInMs=*/ 40L);
+        entryMap.put(entry.getKey(), entry);
+        entry = createBatteryHistEntry(
+                "package2", "label2", /*consumePower=*/ 20.0, /*uid=*/ 3L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY, /*foregroundUsageTimeInMs=*/ 50L,
+                /*backgroundUsageTimeInMs=*/ 60L);
+        entryMap.put(entry.getKey(), entry);
+        entry = createBatteryHistEntry(
+                "package3", "label3", /*consumePower=*/ 40.0, /*uid=*/ 4L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 5L,
+                /*backgroundUsageTimeInMs=*/ 5L);
+        entryMap.put(entry.getKey(), entry);
+        entryMap.put(fakeEntry.getKey(), fakeEntry);
+        batteryHistoryMap.put(batteryHistoryKeys[4], entryMap);
+        final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
+                new ArrayList<>();
+        // Adds the day 1 data.
+        List<Long> timestamps =
+                List.of(batteryHistoryKeys[0], batteryHistoryKeys[2]);
+        final List<Integer> levels = List.of(100, 100);
+        hourlyBatteryLevelsPerDay.add(
+                new BatteryLevelData.PeriodBatteryLevelData(timestamps, levels));
+        // Adds the day 2 data.
+        timestamps = List.of(batteryHistoryKeys[2], batteryHistoryKeys[4]);
+        hourlyBatteryLevelsPerDay.add(
+                new BatteryLevelData.PeriodBatteryLevelData(timestamps, levels));
+
+        final Map<Integer, Map<Integer, BatteryDiffData>> resultMap =
+                DataProcessor.getBatteryUsageMap(
+                        mContext, hourlyBatteryLevelsPerDay, batteryHistoryMap);
+
+        BatteryDiffData resultDiffData =
+                resultMap
+                        .get(DataProcessor.SELECTED_INDEX_ALL)
+                        .get(DataProcessor.SELECTED_INDEX_ALL);
+        assertBatteryDiffEntry(
+                resultDiffData.getAppDiffEntryList().get(0), currentUserId, /*uid=*/ 2L,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 40.0,
+                /*foregroundUsageTimeInMs=*/ 30, /*backgroundUsageTimeInMs=*/ 40);
+        assertBatteryDiffEntry(
+                resultDiffData.getAppDiffEntryList().get(1), currentUserId, /*uid=*/ 4L,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 40.0,
+                /*foregroundUsageTimeInMs=*/ 5, /*backgroundUsageTimeInMs=*/ 5);
+        assertBatteryDiffEntry(
+                resultDiffData.getSystemDiffEntryList().get(0), currentUserId, /*uid=*/ 3L,
+                ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY, /*consumePercentage=*/ 20.0,
+                /*foregroundUsageTimeInMs=*/ 50, /*backgroundUsageTimeInMs=*/ 60);
+        resultDiffData = resultMap.get(0).get(DataProcessor.SELECTED_INDEX_ALL);
+        assertBatteryDiffEntry(
+                resultDiffData.getAppDiffEntryList().get(0), currentUserId, /*uid=*/ 2L,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 100.0,
+                /*foregroundUsageTimeInMs=*/ 15, /*backgroundUsageTimeInMs=*/ 25);
+        resultDiffData = resultMap.get(1).get(DataProcessor.SELECTED_INDEX_ALL);
+        assertBatteryDiffEntry(
+                resultDiffData.getAppDiffEntryList().get(0), currentUserId, /*uid=*/ 4L,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 50.0,
+                /*foregroundUsageTimeInMs=*/ 5, /*backgroundUsageTimeInMs=*/ 5);
+        assertBatteryDiffEntry(
+                resultDiffData.getAppDiffEntryList().get(1), currentUserId, /*uid=*/ 2L,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 25.0,
+                /*foregroundUsageTimeInMs=*/ 15, /*backgroundUsageTimeInMs=*/ 15);
+        assertBatteryDiffEntry(
+                resultDiffData.getSystemDiffEntryList().get(0), currentUserId, /*uid=*/ 3L,
+                ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY, /*consumePercentage=*/ 25.0,
+                /*foregroundUsageTimeInMs=*/ 50, /*backgroundUsageTimeInMs=*/ 60);
+    }
+
+    @Test
+    public void getBatteryUsageMap_multipleUsers_returnsExpectedResult() {
+        final long[] batteryHistoryKeys = new long[]{
+                1641052800000L, // 2022-01-02 00:00:00
+                1641056400000L, // 2022-01-02 01:00:00
+                1641060000000L  // 2022-01-02 02:00:00
+        };
+        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
+        final int currentUserId = mContext.getUserId();
+        // Adds the index = 0 data.
+        Map<String, BatteryHistEntry> entryMap = new HashMap<>();
+        BatteryHistEntry entry = createBatteryHistEntry(
+                "package1", "label1", /*consumePower=*/ 5.0, /*uid=*/ 1L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 10L,
+                /*backgroundUsageTimeInMs=*/ 20L);
+        entryMap.put(entry.getKey(), entry);
+        entry = createBatteryHistEntry(
+                "package1", "label1", /*consumePower=*/ 10.0, /*uid=*/ 2L, currentUserId + 1,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 10L,
+                /*backgroundUsageTimeInMs=*/ 20L);
+        entryMap.put(entry.getKey(), entry);
+        entry = createBatteryHistEntry(
+                "package2", "label2", /*consumePower=*/ 5.0, /*uid=*/ 3L, currentUserId + 2,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 20L,
+                /*backgroundUsageTimeInMs=*/ 30L);
+        entryMap.put(entry.getKey(), entry);
+        batteryHistoryMap.put(batteryHistoryKeys[0], entryMap);
+        // Adds the index = 1 data.
+        entryMap = new HashMap<>();
+        entry = createBatteryHistEntry(
+                "package1", "label1", /*consumePower=*/ 15.0, /*uid=*/ 1L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 20L,
+                /*backgroundUsageTimeInMs=*/ 30L);
+        entryMap.put(entry.getKey(), entry);
+        entry = createBatteryHistEntry(
+                "package1", "label1", /*consumePower=*/ 30.0, /*uid=*/ 2L, currentUserId + 1,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 10L,
+                /*backgroundUsageTimeInMs=*/ 20L);
+        entryMap.put(entry.getKey(), entry);
+        entry = createBatteryHistEntry(
+                "package2", "label2", /*consumePower=*/ 15.0, /*uid=*/ 3L, currentUserId + 2,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 30L,
+                /*backgroundUsageTimeInMs=*/ 30L);
+        entryMap.put(entry.getKey(), entry);
+        batteryHistoryMap.put(batteryHistoryKeys[1], entryMap);
+        // Adds the index = 2 data.
+        entryMap = new HashMap<>();
+        entry = createBatteryHistEntry(
+                "package1", "label1", /*consumePower=*/ 25.0, /*uid=*/ 1L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 20L,
+                /*backgroundUsageTimeInMs=*/ 30L);
+        entryMap.put(entry.getKey(), entry);
+        entry = createBatteryHistEntry(
+                "package1", "label1", /*consumePower=*/ 50.0, /*uid=*/ 2L, currentUserId + 1,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 20L,
+                /*backgroundUsageTimeInMs=*/ 20L);
+        entryMap.put(entry.getKey(), entry);
+        entry = createBatteryHistEntry(
+                "package2", "label2", /*consumePower=*/ 25.0, /*uid=*/ 3L, currentUserId + 2,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 30L,
+                /*backgroundUsageTimeInMs=*/ 30L);
+        entryMap.put(entry.getKey(), entry);
+        batteryHistoryMap.put(batteryHistoryKeys[2], entryMap);
+        final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
+                new ArrayList<>();
+        List<Long> timestamps = List.of(batteryHistoryKeys[0], batteryHistoryKeys[2]);
+        final List<Integer> levels = List.of(100, 100);
+        hourlyBatteryLevelsPerDay.add(
+                new BatteryLevelData.PeriodBatteryLevelData(timestamps, levels));
+
+        final Map<Integer, Map<Integer, BatteryDiffData>> resultMap =
+                DataProcessor.getBatteryUsageMap(
+                        mContext, hourlyBatteryLevelsPerDay, batteryHistoryMap);
+
+        final BatteryDiffData resultDiffData =
+                resultMap
+                        .get(DataProcessor.SELECTED_INDEX_ALL)
+                        .get(DataProcessor.SELECTED_INDEX_ALL);
+        assertBatteryDiffEntry(
+                resultDiffData.getAppDiffEntryList().get(0), currentUserId, /*uid=*/ 1L,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 25.0,
+                /*foregroundUsageTimeInMs=*/ 10, /*backgroundUsageTimeInMs=*/ 10);
+        assertBatteryDiffEntry(
+                resultDiffData.getSystemDiffEntryList().get(0), BatteryUtils.UID_OTHER_USERS,
+                /*uid=*/ BatteryUtils.UID_OTHER_USERS, ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
+                /*consumePercentage=*/ 75.0, /*foregroundUsageTimeInMs=*/ 0,
+                /*backgroundUsageTimeInMs=*/ 0);
+        assertThat(resultMap.get(0).get(0)).isNotNull();
+        assertThat(resultMap.get(0).get(DataProcessor.SELECTED_INDEX_ALL)).isNotNull();
+    }
+
+    @Test
+    public void getBatteryUsageMap_usageTimeExceed_returnsExpectedResult() {
+        final long[] batteryHistoryKeys = new long[]{
+                1641052800000L, // 2022-01-02 00:00:00
+                1641056400000L, // 2022-01-02 01:00:00
+                1641060000000L  // 2022-01-02 02:00:00
+        };
+        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
+        final int currentUserId = mContext.getUserId();
+        // Adds the index = 0 data.
+        Map<String, BatteryHistEntry> entryMap = new HashMap<>();
+        BatteryHistEntry entry = createBatteryHistEntry(
+                "package1", "label1", /*consumePower=*/ 0, /*uid=*/ 1L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 0L,
+                /*backgroundUsageTimeInMs=*/ 0L);
+        entryMap.put(entry.getKey(), entry);
+        batteryHistoryMap.put(batteryHistoryKeys[0], entryMap);
+        // Adds the index = 1 data.
+        entryMap = new HashMap<>();
+        entry = createBatteryHistEntry(
+                "package1", "label1", /*consumePower=*/ 0, /*uid=*/ 1L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 0L,
+                /*backgroundUsageTimeInMs=*/ 0L);
+        entryMap.put(entry.getKey(), entry);
+        batteryHistoryMap.put(batteryHistoryKeys[1], entryMap);
+        // Adds the index = 2 data.
+        entryMap = new HashMap<>();
+        entry = createBatteryHistEntry(
+                "package1", "label1", /*consumePower=*/ 500.0, /*uid=*/ 1L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 3600000L,
+                /*backgroundUsageTimeInMs=*/ 7200000L);
+        entryMap.put(entry.getKey(), entry);
+        batteryHistoryMap.put(batteryHistoryKeys[2], entryMap);
+        final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
+                new ArrayList<>();
+        List<Long> timestamps = List.of(batteryHistoryKeys[0], batteryHistoryKeys[2]);
+        final List<Integer> levels = List.of(100, 100);
+        hourlyBatteryLevelsPerDay.add(
+                new BatteryLevelData.PeriodBatteryLevelData(timestamps, levels));
+
+        final Map<Integer, Map<Integer, BatteryDiffData>> resultMap =
+                DataProcessor.getBatteryUsageMap(
+                        mContext, hourlyBatteryLevelsPerDay, batteryHistoryMap);
+
+        final BatteryDiffData resultDiffData =
+                resultMap
+                        .get(DataProcessor.SELECTED_INDEX_ALL)
+                        .get(DataProcessor.SELECTED_INDEX_ALL);
+        // Verifies the clipped usage time.
+        final float ratio = (float) (7200) / (float) (3600 + 7200);
+        final BatteryDiffEntry resultEntry = resultDiffData.getAppDiffEntryList().get(0);
+        assertThat(resultEntry.mForegroundUsageTimeInMs)
+                .isEqualTo(Math.round(entry.mForegroundUsageTimeInMs * ratio));
+        assertThat(resultEntry.mBackgroundUsageTimeInMs)
+                .isEqualTo(Math.round(entry.mBackgroundUsageTimeInMs * ratio));
+        assertThat(resultEntry.mConsumePower)
+                .isEqualTo(entry.mConsumePower * ratio);
+        assertThat(resultMap.get(0).get(0)).isNotNull();
+        assertThat(resultMap.get(0).get(DataProcessor.SELECTED_INDEX_ALL)).isNotNull();
+    }
+
+    @Test
+    public void getBatteryUsageMap_hideApplicationEntries_returnsExpectedResult() {
+        final long[] batteryHistoryKeys = new long[]{
+                1641052800000L, // 2022-01-02 00:00:00
+                1641056400000L, // 2022-01-02 01:00:00
+                1641060000000L  // 2022-01-02 02:00:00
+        };
+        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
+        final int currentUserId = mContext.getUserId();
+        // Adds the index = 0 data.
+        Map<String, BatteryHistEntry> entryMap = new HashMap<>();
+        BatteryHistEntry entry = createBatteryHistEntry(
+                "package1", "label1", /*consumePower=*/ 0, /*uid=*/ 1L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 0L,
+                /*backgroundUsageTimeInMs=*/ 0L);
+        entryMap.put(entry.getKey(), entry);
+        entry = createBatteryHistEntry(
+                "package2", "label2", /*consumePower=*/ 0, /*uid=*/ 2L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 0L,
+                /*backgroundUsageTimeInMs=*/ 0L);
+        entryMap.put(entry.getKey(), entry);
+        batteryHistoryMap.put(batteryHistoryKeys[0], entryMap);
+        // Adds the index = 1 data.
+        entryMap = new HashMap<>();
+        entry = createBatteryHistEntry(
+                "package1", "label1", /*consumePower=*/ 0, /*uid=*/ 1L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 0L,
+                /*backgroundUsageTimeInMs=*/ 0L);
+        entryMap.put(entry.getKey(), entry);
+        entry = createBatteryHistEntry(
+                "package2", "label2", /*consumePower=*/ 0, /*uid=*/ 2L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 0L,
+                /*backgroundUsageTimeInMs=*/ 0L);
+        entryMap.put(entry.getKey(), entry);
+        batteryHistoryMap.put(batteryHistoryKeys[1], entryMap);
+        // Adds the index = 2 data.
+        entryMap = new HashMap<>();
+        entry = createBatteryHistEntry(
+                "package1", "label1", /*consumePower=*/ 10.0, /*uid=*/ 1L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 10L,
+                /*backgroundUsageTimeInMs=*/ 20L);
+        entryMap.put(entry.getKey(), entry);
+        entry = createBatteryHistEntry(
+                "package2", "label2", /*consumePower=*/ 10.0, /*uid=*/ 2L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 10L,
+                /*backgroundUsageTimeInMs=*/ 20L);
+        entryMap.put(entry.getKey(), entry);
+        batteryHistoryMap.put(batteryHistoryKeys[2], entryMap);
+        final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
+                new ArrayList<>();
+        List<Long> timestamps = List.of(batteryHistoryKeys[0], batteryHistoryKeys[2]);
+        final List<Integer> levels = List.of(100, 100);
+        hourlyBatteryLevelsPerDay.add(
+                new BatteryLevelData.PeriodBatteryLevelData(timestamps, levels));
+        when(mPowerUsageFeatureProvider.getHideApplicationEntries(mContext))
+                .thenReturn(new CharSequence[]{"package1"});
+
+        final Map<Integer, Map<Integer, BatteryDiffData>> resultMap =
+                DataProcessor.getBatteryUsageMap(
+                        mContext, hourlyBatteryLevelsPerDay, batteryHistoryMap);
+
+        final BatteryDiffData resultDiffData =
+                resultMap
+                        .get(DataProcessor.SELECTED_INDEX_ALL)
+                        .get(DataProcessor.SELECTED_INDEX_ALL);
+        assertBatteryDiffEntry(
+                resultDiffData.getAppDiffEntryList().get(0), currentUserId, /*uid=*/ 2L,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 50.0,
+                /*foregroundUsageTimeInMs=*/ 10, /*backgroundUsageTimeInMs=*/ 20);
+    }
+
+    @Test
+    public void getBatteryUsageMap_hideBackgroundUsageTime_returnsExpectedResult() {
+        final long[] batteryHistoryKeys = new long[]{
+                1641052800000L, // 2022-01-02 00:00:00
+                1641056400000L, // 2022-01-02 01:00:00
+                1641060000000L  // 2022-01-02 02:00:00
+        };
+        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
+        final int currentUserId = mContext.getUserId();
+        // Adds the index = 0 data.
+        Map<String, BatteryHistEntry> entryMap = new HashMap<>();
+        BatteryHistEntry entry = createBatteryHistEntry(
+                "package1", "label1", /*consumePower=*/ 0, /*uid=*/ 1L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 0L,
+                /*backgroundUsageTimeInMs=*/ 0L);
+        entryMap.put(entry.getKey(), entry);
+        entry = createBatteryHistEntry(
+                "package2", "label2", /*consumePower=*/ 0, /*uid=*/ 2L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 0L,
+                /*backgroundUsageTimeInMs=*/ 0L);
+        entryMap.put(entry.getKey(), entry);
+        batteryHistoryMap.put(batteryHistoryKeys[0], entryMap);
+        // Adds the index = 1 data.
+        entryMap = new HashMap<>();
+        entry = createBatteryHistEntry(
+                "package1", "label1", /*consumePower=*/ 0, /*uid=*/ 1L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 0L,
+                /*backgroundUsageTimeInMs=*/ 0L);
+        entryMap.put(entry.getKey(), entry);
+        entry = createBatteryHistEntry(
+                "package2", "label2", /*consumePower=*/ 0, /*uid=*/ 2L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 0L,
+                /*backgroundUsageTimeInMs=*/ 0L);
+        entryMap.put(entry.getKey(), entry);
+        batteryHistoryMap.put(batteryHistoryKeys[1], entryMap);
+        // Adds the index = 2 data.
+        entryMap = new HashMap<>();
+        entry = createBatteryHistEntry(
+                "package1", "label1", /*consumePower=*/ 10.0, /*uid=*/ 1L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 10L,
+                /*backgroundUsageTimeInMs=*/ 20L);
+        entryMap.put(entry.getKey(), entry);
+        entry = createBatteryHistEntry(
+                "package2", "label2", /*consumePower=*/ 10.0, /*uid=*/ 2L, currentUserId,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*foregroundUsageTimeInMs=*/ 10L,
+                /*backgroundUsageTimeInMs=*/ 20L);
+        entryMap.put(entry.getKey(), entry);
+        batteryHistoryMap.put(batteryHistoryKeys[2], entryMap);
+        final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
+                new ArrayList<>();
+        List<Long> timestamps = List.of(batteryHistoryKeys[0], batteryHistoryKeys[2]);
+        final List<Integer> levels = List.of(100, 100);
+        hourlyBatteryLevelsPerDay.add(
+                new BatteryLevelData.PeriodBatteryLevelData(timestamps, levels));
+        when(mPowerUsageFeatureProvider.getHideBackgroundUsageTimeSet(mContext))
+                .thenReturn(new HashSet(Arrays.asList((CharSequence) "package2")));
+
+        final Map<Integer, Map<Integer, BatteryDiffData>> resultMap =
+                DataProcessor.getBatteryUsageMap(
+                        mContext, hourlyBatteryLevelsPerDay, batteryHistoryMap);
+
+        final BatteryDiffData resultDiffData =
+                resultMap
+                        .get(DataProcessor.SELECTED_INDEX_ALL)
+                        .get(DataProcessor.SELECTED_INDEX_ALL);
+        BatteryDiffEntry resultEntry = resultDiffData.getAppDiffEntryList().get(0);
+        assertThat(resultEntry.mBackgroundUsageTimeInMs).isEqualTo(20);
+        resultEntry = resultDiffData.getAppDiffEntryList().get(1);
+        assertThat(resultEntry.mBackgroundUsageTimeInMs).isEqualTo(0);
+    }
+
     private static Map<Long, Map<String, BatteryHistEntry>> createHistoryMap(
             final long[] timestamps, final int[] levels) {
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
@@ -389,6 +857,23 @@ public class DataProcessorTest {
             batteryHistoryMap.put(timestamps[index], entryMap);
         }
         return batteryHistoryMap;
+    }
+
+    private static BatteryHistEntry createBatteryHistEntry(
+            final String packageName, final String appLabel, final double consumePower,
+            final long uid, final long userId, final int consumerType,
+            final long foregroundUsageTimeInMs, final long backgroundUsageTimeInMs) {
+        // Only insert required fields.
+        final ContentValues values = new ContentValues();
+        values.put(BatteryHistEntry.KEY_PACKAGE_NAME, packageName);
+        values.put(BatteryHistEntry.KEY_APP_LABEL, appLabel);
+        values.put(BatteryHistEntry.KEY_UID, uid);
+        values.put(BatteryHistEntry.KEY_USER_ID, userId);
+        values.put(BatteryHistEntry.KEY_CONSUMER_TYPE, consumerType);
+        values.put(BatteryHistEntry.KEY_CONSUME_POWER, consumePower);
+        values.put(BatteryHistEntry.KEY_FOREGROUND_USAGE_TIME, foregroundUsageTimeInMs);
+        values.put(BatteryHistEntry.KEY_BACKGROUND_USAGE_TIME, backgroundUsageTimeInMs);
+        return new BatteryHistEntry(values);
     }
 
     private static void verifyExpectedBatteryLevelData(
@@ -451,4 +936,15 @@ public class DataProcessorTest {
                 .isEqualTo(expectedEnd.getTimeInMillis());
     }
 
+    private static void assertBatteryDiffEntry(
+            final BatteryDiffEntry entry, final long userId, final long uid,
+            final int consumerType, final double consumePercentage,
+            final long foregroundUsageTimeInMs, final long backgroundUsageTimeInMs) {
+        assertThat(entry.mBatteryHistEntry.mUserId).isEqualTo(userId);
+        assertThat(entry.mBatteryHistEntry.mUid).isEqualTo(uid);
+        assertThat(entry.mBatteryHistEntry.mConsumerType).isEqualTo(consumerType);
+        assertThat(entry.getPercentOfTotal()).isEqualTo(consumePercentage);
+        assertThat(entry.mForegroundUsageTimeInMs).isEqualTo(foregroundUsageTimeInMs);
+        assertThat(entry.mBackgroundUsageTimeInMs).isEqualTo(backgroundUsageTimeInMs);
+    }
 }

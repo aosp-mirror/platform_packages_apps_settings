@@ -21,7 +21,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.view.View;
-import android.view.accessibility.CaptioningManager;
+import android.view.accessibility.CaptioningManager.CaptionStyle;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
@@ -57,16 +57,11 @@ public class CaptionPreviewPreferenceController extends BasePreferenceController
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     @VisibleForTesting
     AccessibilitySettingsContentObserver mSettingsContentObserver;
-    private CaptioningManager mCaptioningManager;
     private CaptionHelper mCaptionHelper;
     private LayoutPreference mPreference;
-    private SubtitleView mPreviewText;
-    private View mPreviewWindow;
-    private View mPreviewViewport;
 
     public CaptionPreviewPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mCaptioningManager = context.getSystemService(CaptioningManager.class);
         mCaptionHelper = new CaptionHelper(context);
         mSettingsContentObserver = new AccessibilitySettingsContentObserver(mHandler);
         mSettingsContentObserver.registerKeysToObserverCallback(CAPTIONING_FEATURE_KEYS,
@@ -92,16 +87,14 @@ public class CaptionPreviewPreferenceController extends BasePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        mPreviewText = mPreference.findViewById(R.id.preview_text);
-        mPreviewWindow = mPreference.findViewById(R.id.preview_window);
-        mPreviewViewport = mPreference.findViewById(R.id.preview_viewport);
-        mPreviewViewport.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+        final View previewViewport = mPreference.findViewById(R.id.preview_viewport);
+        previewViewport.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View v, int left, int top, int right,
                     int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
                 if ((oldRight - oldLeft) != (right - left)) {
                     // Remove the listener once the callback is triggered.
-                    mPreviewViewport.removeOnLayoutChangeListener(this);
+                    previewViewport.removeOnLayoutChangeListener(this);
                     mHandler.post(() -> refreshPreviewText());
                 }
             }
@@ -109,26 +102,28 @@ public class CaptionPreviewPreferenceController extends BasePreferenceController
     }
 
     private void refreshPreviewText() {
-        if (mPreviewText != null) {
-            final int styleId = mCaptioningManager.getRawUserStyle();
-            mCaptionHelper.applyCaptionProperties(mPreviewText, mPreviewViewport, styleId);
+        final SubtitleView previewText = mPreference.findViewById(R.id.preview_text);
+        if (previewText != null) {
+            final View previewViewport = mPreference.findViewById(R.id.preview_viewport);
+            final int styleId = mCaptionHelper.getRawUserStyle();
+            mCaptionHelper.applyCaptionProperties(previewText, previewViewport, styleId);
 
-            final Locale locale = mCaptioningManager.getLocale();
+            final Locale locale = mCaptionHelper.getLocale();
             if (locale != null) {
                 final CharSequence localizedText = AccessibilityUtils.getTextForLocale(
                         mContext, locale, R.string.captioning_preview_text);
-                mPreviewText.setText(localizedText);
+                previewText.setText(localizedText);
             } else {
-                mPreviewText.setText(R.string.captioning_preview_text);
+                previewText.setText(R.string.captioning_preview_text);
             }
 
-            final CaptioningManager.CaptionStyle style = mCaptioningManager.getUserStyle();
+            final View previewWindow = mPreference.findViewById(R.id.preview_window);
+            final CaptionStyle style = mCaptionHelper.getUserStyle();
             if (style.hasWindowColor()) {
-                mPreviewWindow.setBackgroundColor(style.windowColor);
+                previewWindow.setBackgroundColor(style.windowColor);
             } else {
-                final CaptioningManager.CaptionStyle defStyle =
-                        CaptioningManager.CaptionStyle.DEFAULT;
-                mPreviewWindow.setBackgroundColor(defStyle.windowColor);
+                final CaptionStyle defStyle = CaptionStyle.DEFAULT;
+                previewWindow.setBackgroundColor(defStyle.windowColor);
             }
         }
     }
