@@ -143,7 +143,6 @@
                   android:label="@string/settings_label_launcher"
                   android:theme="@style/Theme.Settings.Home"
                   android:taskAffinity="com.android.settings.root"
-                  android:launchMode="singleTask"
                   android:exported="true"
                   android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize">
             <intent-filter android:priority="1">
@@ -187,7 +186,6 @@
         <activity-alias android:name="Settings"
                 android:label="@string/settings_label_launcher"
                 android:taskAffinity="com.android.settings.root"
-                android:launchMode="singleTask"
                 android:exported="true"
                 android:targetActivity=".homepage.SettingsHomepageActivity">
             <intent-filter>
