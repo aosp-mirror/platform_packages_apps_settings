@@ -23,13 +23,13 @@
             android:layout="@layout/preference_category_no_label"
             settings:controller="com.android.settings.location.LocationInjectedServicesPreferenceController"/>
 
-        <Preference
+        <com.android.settingslib.RestrictedPreference
             android:fragment="com.android.settings.location.WifiScanningFragment"
             android:key="location_services_wifi_scanning"
             android:title="@string/location_scanning_wifi_always_scanning_title"
             settings:controller="com.android.settings.location.LocationServicesWifiScanningPreferenceController"/>
 
-        <Preference
+        <com.android.settingslib.RestrictedPreference
             android:fragment="com.android.settings.location.BluetoothScanningFragment"
             android:key="location_services_bluetooth_scanning"
             android:title="@string/location_scanning_bluetooth_always_scanning_title"
