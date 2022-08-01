@@ -14,12 +14,17 @@
 package com.android.settings.location;
 
 import android.content.Context;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 public class BluetoothScanningPreferenceController extends AbstractPreferenceController
@@ -46,6 +51,12 @@ public class BluetoothScanningPreferenceController extends AbstractPreferenceCon
         ((SwitchPreference) preference).setChecked(
                 Settings.Global.getInt(mContext.getContentResolver(),
                         Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 0) == 1);
+        final RestrictedLockUtils.EnforcedAdmin admin =
+            RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                mContext, UserManager.DISALLOW_CONFIG_LOCATION, UserHandle.myUserId());
+        if (admin != null) {
+          ((RestrictedSwitchPreference) preference).setDisabledByAdmin(admin);
+        }
     }
 
     @Override
