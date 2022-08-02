@@ -95,9 +95,9 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppStateAlarmsAndRemindersBridge;
+import com.android.settings.applications.AppStateAppBatteryUsageBridge;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateBaseBridge;
-import com.android.settings.applications.AppStateBatteryOptimizationBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateLocaleBridge;
 import com.android.settings.applications.AppStateManageExternalStorageBridge;
@@ -333,7 +333,7 @@ public class ManageApplications extends InstrumentedFragment
             }
         } else if (className.equals(AppLocaleDetails.class.getName())) {
             mListType = LIST_TYPE_APPS_LOCALE;
-        } else if (className.equals(Settings.AppBatteryOptimizationActivity.class.getName())) {
+        } else if (className.equals(Settings.AppBatteryUsageActivity.class.getName())) {
             mListType = LIST_TYPE_BATTERY_OPTIMIZATION;
         } else {
             mListType = LIST_TYPE_MAIN;
@@ -954,7 +954,7 @@ public class ManageApplications extends InstrumentedFragment
             screenTitle = R.string.app_notifications_title;
         } else if (className.equals(AppLocaleDetails.class.getName())) {
             screenTitle = R.string.app_locales_picker_menu_title;
-        } else if (className.equals(Settings.AppBatteryOptimizationActivity.class.getName())) {
+        } else if (className.equals(Settings.AppBatteryUsageActivity.class.getName())) {
             screenTitle = R.string.app_battery_optimization_title;
         } else {
             if (screenTitle == -1) {
@@ -1149,7 +1149,7 @@ public class ManageApplications extends InstrumentedFragment
             } else if (mManageApplications.mListType == LIST_TYPE_APPS_LOCALE) {
                 mExtraInfoBridge = new AppStateLocaleBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_BATTERY_OPTIMIZATION) {
-                mExtraInfoBridge = new AppStateBatteryOptimizationBridge(mContext, mState, this);
+                mExtraInfoBridge = new AppStateAppBatteryUsageBridge(mContext, mState, this);
             } else {
                 mExtraInfoBridge = null;
             }
@@ -1195,7 +1195,7 @@ public class ManageApplications extends InstrumentedFragment
                     rebuild(R.id.sort_order_alpha, true);
                 }
             } else if (mManageApplications.mListType == LIST_TYPE_BATTERY_OPTIMIZATION) {
-                logBatteryOptimization(filterType);
+                logAppBatteryUsage(filterType);
             } else {
                 rebuild();
             }
@@ -1332,7 +1332,7 @@ public class ManageApplications extends InstrumentedFragment
             });
         }
 
-        private void logBatteryOptimization(int filterType) {
+        private void logAppBatteryUsage(int filterType) {
             switch(filterType) {
                 case FILTER_APPS_BATTERY_UNRESTRICTED:
                     logAction(SettingsEnums.ACTION_BATTERY_OPTIMIZED_APPS_FILTER_UNRESTRICTED);
