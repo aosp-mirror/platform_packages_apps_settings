@@ -92,7 +92,7 @@ public class CaptionHelperTest {
         final float fontScale = 1.0f;
         when(mCaptioningManager.getFontScale()).thenReturn(fontScale);
         final float textSize = mContext.getResources().getDimension(
-                R.dimen.caption_preview_text_size) * fontScale;
+                R.dimen.captioning_preview_text_size) * fontScale;
 
         mCaptionHelper.applyCaptionProperties(mSubtitleView, /* PreviewWindow= */ null,
                 /* styleId= */ 0);

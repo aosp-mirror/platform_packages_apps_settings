@@ -93,7 +93,7 @@ public class CaptionHelper {
             previewText.setTextSize(virtualHeight * LINE_HEIGHT_RATIO * fontScale);
         } else {
             final float textSize = mContext.getResources().getDimension(
-                    R.dimen.caption_preview_text_size);
+                    R.dimen.captioning_preview_text_size);
             previewText.setTextSize(textSize * fontScale);
         }
 
