@@ -36,6 +36,7 @@ import com.android.settings.R;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
+import android.view.WindowManager;
 
 public class StorageWizardFormatProgress extends StorageWizardBase {
     private static final String TAG = "StorageWizardFormatProgress";
@@ -54,6 +55,16 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
             return;
         }
         setContentView(R.layout.storage_wizard_progress);
+
+        // hide the navigation bar for this activity only. So that user can not press back button accidentally.
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        decorView.setSystemUiVisibility(uiOptions);
+
+        //disable touch in activity so user can not make the hidden navigation bar visible.
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                     WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
         setKeepScreenOn(true);
 
         mFormatPrivate = getIntent().getBooleanExtra(EXTRA_FORMAT_PRIVATE, false);
