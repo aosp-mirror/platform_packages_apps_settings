@@ -31,6 +31,8 @@ import android.widget.Toast;
 
 import com.android.settings.R;
 
+import android.view.WindowManager;
+
 public class StorageWizardMigrateProgress extends StorageWizardBase {
     private static final String TAG = "StorageWizardMigrateProgress";
 
@@ -46,7 +48,16 @@ public class StorageWizardMigrateProgress extends StorageWizardBase {
             return;
         }
         setContentView(R.layout.storage_wizard_progress);
+        
+        // hide the navigation bar for this activity only. So that user can not press back button accidentally.
+        View decorView = getWindow().getDecorView();    
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        decorView.setSystemUiVisibility(uiOptions);
 
+        //disable touch in activity so user can not make the hidden navigation bar visible.
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                     WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);         
+      
         mMoveId = getIntent().getIntExtra(EXTRA_MOVE_ID, -1);
 
         setIcon(R.drawable.ic_swap_horiz);
