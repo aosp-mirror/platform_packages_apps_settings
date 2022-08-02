@@ -47,6 +47,7 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -64,10 +65,12 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.GlifLayout;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Activity which handles the actual enrolling for fingerprint.
@@ -168,13 +171,37 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         mAccessibilityManager = getSystemService(AccessibilityManager.class);
         mIsAccessibilityEnabled = mAccessibilityManager.isEnabled();
 
+        final boolean isLayoutRtl = (TextUtils.getLayoutDirectionFromLocale(
+                Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL);
         listenOrientationEvent();
 
         if (mCanAssumeUdfps) {
-            if (BiometricUtils.isReverseLandscape(getApplicationContext())) {
-                setContentView(R.layout.udfps_enroll_enrolling_land);
-            } else {
-                setContentView(R.layout.udfps_enroll_enrolling);
+            switch(getApplicationContext().getDisplay().getRotation()) {
+                case Surface.ROTATION_90:
+                    final GlifLayout layout = (GlifLayout) getLayoutInflater().inflate(
+                            R.layout.udfps_enroll_enrolling, null, false);
+                    final LinearLayout layoutContainer = layout.findViewById(
+                            R.id.layout_container);
+                    final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.MATCH_PARENT);
+
+                    lp.setMarginEnd((int) getResources().getDimension(
+                            R.dimen.rotation_90_enroll_margin_end));
+                    layoutContainer.setPaddingRelative((int) getResources().getDimension(
+                            R.dimen.rotation_90_enroll_padding_start), 0, isLayoutRtl
+                            ? 0 : (int) getResources().getDimension(
+                                    R.dimen.rotation_90_enroll_padding_end), 0);
+                    layoutContainer.setLayoutParams(lp);
+                    setContentView(layout, lp);
+                    break;
+
+                case Surface.ROTATION_0:
+                case Surface.ROTATION_180:
+                case Surface.ROTATION_270:
+                default:
+                    setContentView(R.layout.udfps_enroll_enrolling);
+                    break;
             }
             setDescriptionText(R.string.security_settings_udfps_enroll_start_message);
         } else {

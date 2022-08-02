@@ -33,11 +33,15 @@
         <!-- Both texts are kept as separate text views so it doesn't jump around in portrait.
             See layouts/fingerprint_enroll_enrolling_base.xml. -->
         <LinearLayout
+            android:id="@+id/layout_container"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:layout_marginStart="?attr/sudMarginStart"
+            android:layout_marginEnd="@dimen/enroll_margin_end"
             android:layout_marginBottom="@dimen/sud_content_frame_padding_bottom"
+            android:paddingStart="@dimen/enroll_padding_start"
+            android:paddingEnd="@dimen/enroll_padding_end"
             android:clipChildren="false"
             android:clipToPadding="false"
             android:orientation="vertical">
