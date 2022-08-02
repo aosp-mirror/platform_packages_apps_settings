@@ -218,7 +218,7 @@ public final class DataProcessor {
      *
      * The valid result should be composed of 3 parts:
      * 1) start timestamp
-     * 2) every 0am timestamp (default timezone) between the start and end
+     * 2) every 00:00 timestamp (default timezone) between the start and end
      * 3) end timestamp
      * Otherwise, returns an empty list.
      */
@@ -277,18 +277,27 @@ public final class DataProcessor {
     }
 
     /**
-     * @return Returns the timestamp for 0am 1 day after the given timestamp based on local
+     * @return Returns the timestamp for 00:00 1 day after the given timestamp based on local
      * timezone.
      */
     @VisibleForTesting
     static long getTimestampOfNextDay(long timestamp) {
-        final Calendar nextDayCalendar = Calendar.getInstance();
-        nextDayCalendar.setTimeInMillis(timestamp);
-        nextDayCalendar.add(Calendar.DAY_OF_YEAR, 1);
-        nextDayCalendar.set(Calendar.HOUR_OF_DAY, 0);
-        nextDayCalendar.set(Calendar.MINUTE, 0);
-        nextDayCalendar.set(Calendar.SECOND, 0);
-        return nextDayCalendar.getTimeInMillis();
+        return getTimestampWithDayDiff(timestamp, /*dayDiff=*/ 1);
+    }
+
+    /**
+     *  Returns whether currentSlot will be used in daily chart.
+     */
+    @VisibleForTesting
+    static boolean isForDailyChart(final boolean isStartOrEnd, final long currentSlot) {
+        // The start and end timestamps will always be used in daily chart.
+        if (isStartOrEnd) {
+            return true;
+        }
+
+        // The timestamps for 00:00 will be used in daily chart.
+        final long startOfTheDay = getTimestampWithDayDiff(currentSlot, /*dayDiff=*/ 0);
+        return currentSlot == startOfTheDay;
     }
 
     /**
@@ -350,10 +359,13 @@ public final class DataProcessor {
             startIndex = 1;
             resultMap.put(expectedStartTimestamp, batteryHistoryMap.get(rawStartTimestamp));
         }
-        for (int index = startIndex; index < expectedTimestampSlots.size(); index++) {
+        final int expectedTimestampSlotsSize = expectedTimestampSlots.size();
+        for (int index = startIndex; index < expectedTimestampSlotsSize; index++) {
             final long currentSlot = expectedTimestampSlots.get(index);
+            final boolean isStartOrEnd = index == 0 || index == expectedTimestampSlotsSize - 1;
             interpolateHistoryForSlot(
-                    context, currentSlot, rawTimestampList, batteryHistoryMap, resultMap);
+                    context, currentSlot, rawTimestampList, batteryHistoryMap, resultMap,
+                    isStartOrEnd);
         }
     }
 
@@ -362,7 +374,8 @@ public final class DataProcessor {
             final long currentSlot,
             final List<Long> rawTimestampList,
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap,
-            final Map<Long, Map<String, BatteryHistEntry>> resultMap) {
+            final Map<Long, Map<String, BatteryHistEntry>> resultMap,
+            final boolean isStartOrEnd) {
         final long[] nearestTimestamps = findNearestTimestamp(rawTimestampList, currentSlot);
         final long lowerTimestamp = nearestTimestamps[0];
         final long upperTimestamp = nearestTimestamps[1];
@@ -385,7 +398,8 @@ public final class DataProcessor {
             return;
         }
         interpolateHistoryForSlot(context,
-                currentSlot, lowerTimestamp, upperTimestamp, batteryHistoryMap, resultMap);
+                currentSlot, lowerTimestamp, upperTimestamp, batteryHistoryMap, resultMap,
+                isStartOrEnd);
     }
 
     private static void interpolateHistoryForSlot(
@@ -394,7 +408,8 @@ public final class DataProcessor {
             final long lowerTimestamp,
             final long upperTimestamp,
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap,
-            final Map<Long, Map<String, BatteryHistEntry>> resultMap) {
+            final Map<Long, Map<String, BatteryHistEntry>> resultMap,
+            final boolean isStartOrEnd) {
         final Map<String, BatteryHistEntry> lowerEntryDataMap =
                 batteryHistoryMap.get(lowerTimestamp);
         final Map<String, BatteryHistEntry> upperEntryDataMap =
@@ -405,7 +420,10 @@ public final class DataProcessor {
         final long upperEntryDataBootTimestamp =
                 upperEntryDataFirstEntry.mTimestamp - upperEntryDataFirstEntry.mBootTimestamp;
         // Lower data is captured before upper data corresponding device is booting.
-        if (lowerTimestamp < upperEntryDataBootTimestamp) {
+        // Skips the booting-specific logics and always does interpolation for daily chart level
+        // data.
+        if (lowerTimestamp < upperEntryDataBootTimestamp
+                && !isForDailyChart(isStartOrEnd, currentSlot)) {
             // Provides an opportunity to force align the slot directly.
             if ((upperTimestamp - currentSlot) < 10 * DateUtils.MINUTE_IN_MILLIS) {
                 log(context, "force align into the nearest slot", currentSlot, null);
@@ -875,6 +893,16 @@ public final class DataProcessor {
             }
         }
         return true;
+    }
+
+    private static long getTimestampWithDayDiff(final long timestamp, final int dayDiff) {
+        final Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timestamp);
+        calendar.add(Calendar.DAY_OF_YEAR, dayDiff);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        return calendar.getTimeInMillis();
     }
 
     private static boolean contains(String target, Set<CharSequence> packageNames) {
