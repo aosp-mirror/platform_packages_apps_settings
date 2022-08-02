@@ -181,16 +181,6 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
         getWindow().setStatusBarColor(getBackgroundColor());
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (!isChangingConfigurations() && shouldFinishWhenBackgrounded()
-                && !BiometricUtils.isAnyMultiBiometricFlow(this)) {
-            setResult(RESULT_TIMEOUT);
-            finish();
-        }
-    }
-
     protected boolean shouldFinishWhenBackgrounded() {
         return !WizardManagerHelper.isAnySetupWizard(getIntent());
     }
