@@ -27,6 +27,7 @@ import android.content.Context;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.accessibility.CaptioningManager;
+import android.view.accessibility.CaptioningManager.CaptionStyle;
 
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
@@ -100,6 +101,29 @@ public class CaptioningWindowColorControllerTest {
         mPreference.setValue(0xFFFF0000);
 
         assertThat(mPreference.getSummary().toString()).isEqualTo("Red");
+    }
+
+    @Test
+    public void setNoneColorValue_shouldNotHaveColor() {
+        final CaptionHelper captionHelper = new CaptionHelper(mContext);
+        captionHelper.setWindowColor(0xFFFF0000);
+        mController.displayPreference(mScreen);
+
+        mPreference.setValue(0x00FFFFFF);
+
+        assertThat(CaptionStyle.hasColor(captionHelper.getWindowColor())).isFalse();
+    }
+
+    @Test
+    public void setRedValueFromNoneValue_halfOpacityRedColor_shouldReturnExpectedColor() {
+        final CaptionHelper captionHelper = new CaptionHelper(mContext);
+        captionHelper.setWindowColor(0x80FF0000);
+        mController.displayPreference(mScreen);
+        mPreference.setValue(0x00FFFFFF);
+
+        mPreference.setValue(0xFFFF0000);
+
+        assertThat(captionHelper.getWindowColor()).isEqualTo(0x80FF0000);
     }
 
     @Test

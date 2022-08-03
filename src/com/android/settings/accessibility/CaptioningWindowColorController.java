@@ -19,6 +19,7 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.view.accessibility.CaptioningManager.CaptionStyle;
 
 import androidx.preference.PreferenceScreen;
 
@@ -31,6 +32,7 @@ public class CaptioningWindowColorController extends BasePreferenceController
         implements OnValueChangedListener {
 
     private final CaptionHelper mCaptionHelper;
+    private int mCachedNonDefaultOpacity = CaptionStyle.COLOR_UNSPECIFIED;
 
     public CaptioningWindowColorController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -67,10 +69,26 @@ public class CaptioningWindowColorController extends BasePreferenceController
 
     @Override
     public void onValueChanged(ListDialogPreference preference, int value) {
-        final int windowColor = mCaptionHelper.getWindowColor();
-        final int opacity = CaptionUtils.parseOpacity(windowColor);
+        final boolean isNonDefaultColor = CaptionStyle.hasColor(value);
+        final int opacity = getNonDefaultOpacity(isNonDefaultColor);
         final int merged = CaptionUtils.mergeColorOpacity(value, opacity);
         mCaptionHelper.setWindowColor(merged);
         mCaptionHelper.setEnabled(true);
+    }
+
+    private int getNonDefaultOpacity(boolean isNonDefaultColor) {
+        final int windowColor = mCaptionHelper.getWindowColor();
+        final int opacity = CaptionUtils.parseOpacity(windowColor);
+        if (isNonDefaultColor) {
+            final int lastOpacity = mCachedNonDefaultOpacity != CaptionStyle.COLOR_UNSPECIFIED
+                    ? mCachedNonDefaultOpacity : opacity;
+            // Reset cached opacity to use current color opacity to merge color.
+            mCachedNonDefaultOpacity = CaptionStyle.COLOR_UNSPECIFIED;
+            return lastOpacity;
+        }
+        // When default captioning color was selected, the opacity become 100% and make opacity
+        // preference disable. Cache the latest opacity to show the correct opacity later.
+        mCachedNonDefaultOpacity = opacity;
+        return opacity;
     }
 }
