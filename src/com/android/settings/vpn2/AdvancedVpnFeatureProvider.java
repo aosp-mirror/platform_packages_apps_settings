@@ -47,4 +47,9 @@ public interface AdvancedVpnFeatureProvider {
      * Returns {@code true} advanced vpn is removable.
      */
     boolean isAdvancedVpnRemovable();
+
+    /**
+     * Returns {@code true} if the disconnect dialog is enabled when advanced vpn is connected.
+     */
+    boolean isDisconnectDialogEnabled();
 }

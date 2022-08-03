@@ -48,7 +48,6 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -297,7 +296,6 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
         private SortedMap<String, Credential> getCredentialsForUid(KeyStore keyStore, int uid) {
             try {
                 final SortedMap<String, Credential> aliasMap = new TreeMap<>();
-                boolean isSystem = UserHandle.getAppId(uid) == Process.SYSTEM_UID;
                 Enumeration<String> aliases = keyStore.aliases();
                 while (aliases.hasMoreElements()) {
                     String alias = aliases.nextElement();
@@ -314,19 +312,6 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
                         if (key instanceof SecretKey) {
                             // We don't display any symmetric key entries.
                             continue;
-                        }
-                        if (isSystem) {
-                            // Do not show work profile keys in user credentials
-                            if (alias.startsWith(LockPatternUtils.PROFILE_KEY_NAME_ENCRYPT) ||
-                                    alias.startsWith(LockPatternUtils.PROFILE_KEY_NAME_DECRYPT)) {
-                                continue;
-                            }
-                            // Do not show synthetic password keys in user credential
-                            // We should never reach this point because the synthetic password key
-                            // is symmetric.
-                            if (alias.startsWith(LockPatternUtils.SYNTHETIC_PASSWORD_KEY_PREFIX)) {
-                                continue;
-                            }
                         }
                         // At this point we have determined that we have an asymmetric key.
                         // so we have at least a USER_KEY and USER_CERTIFICATE.
