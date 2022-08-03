@@ -41,15 +41,16 @@ import com.android.settings.applications.appinfo.ButtonActionDialogFragment;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry;
 import com.android.settings.fuelgauge.batteryusage.BatteryEntry;
 import com.android.settings.fuelgauge.batteryusage.BatteryHistEntry;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
@@ -209,8 +210,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         return UserHandle.getUserId(batteryEntry.getUid());
     }
 
-    public static void startBatteryDetailPage(Activity caller,
-            InstrumentedPreferenceFragment fragment, String packageName) {
+    /**
+     * Start packageName's battery detail page.
+     */
+    public static void startBatteryDetailPage(
+            Activity caller, Instrumentable instrumentable, String packageName) {
         final Bundle args = new Bundle(3);
         final PackageManager packageManager = caller.getPackageManager();
         args.putString(EXTRA_PACKAGE_NAME, packageName);
@@ -225,7 +229,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                 .setDestination(AdvancedPowerUsageDetail.class.getName())
                 .setTitleRes(R.string.battery_details_title)
                 .setArguments(args)
-                .setSourceMetricsCategory(fragment.getMetricsCategory())
+                .setSourceMetricsCategory(instrumentable.getMetricsCategory())
                 .launch();
     }
 
