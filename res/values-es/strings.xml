@@ -44,7 +44,7 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Suspendido"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Desconocido"</string>
     <string name="sdcard_unmount" product="nosdcard" msgid="1816306320988638382">"Desconectar USB"</string>
-    <string name="sdcard_unmount" product="default" msgid="8078570285871053815">"Desconectar tarjeta SD"</string>
+    <string name="sdcard_unmount" product="default" msgid="8078570285871053815">"Desmontar tarjeta SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="3248760426252305366">"Borrar almacenamiento USB"</string>
     <string name="sdcard_format" product="default" msgid="3676635435136326182">"Borrar tarjeta SD"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Vista previa"</string>
@@ -1521,7 +1521,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Almacenamiento y caché"</string>
     <string name="storage_usb_settings" msgid="7058142934214211583">"Almacenamiento"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Ajustes de almacenamiento"</string>
-    <string name="storage_settings_summary" product="nosdcard" msgid="3858049818577638926">"Desconectar almacenamiento USB, ver almacenamiento disponible"</string>
+    <string name="storage_settings_summary" product="nosdcard" msgid="3858049818577638926">"Desmontar almacenamiento USB, ver almacenamiento disponible"</string>
     <string name="storage_settings_summary" product="default" msgid="267557695753980969">"Desconectar tarjeta SD, ver almacenamiento disponible."</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (ranura SIM %1$d)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Para verla, selecciona una red guardada"</string>
@@ -1572,9 +1572,9 @@
     <string name="memory_music_usage" msgid="8100634000114206429">"Audio (música, tonos, etc.)"</string>
     <string name="memory_media_misc_usage" msgid="7066851245178533269">"Otros archivos"</string>
     <string name="memory_media_cache_usage" msgid="780808666853685824">"Datos almacenados en caché"</string>
-    <string name="sd_eject" product="nosdcard" msgid="6136102589751843304">"Desconectar almacenamiento compartido"</string>
-    <string name="sd_eject" product="default" msgid="8062832622096296251">"Desconectar tarjeta SD"</string>
-    <string name="sd_eject_summary" product="nosdcard" msgid="6859940774161708871">"Desconectar almacenamiento USB interno"</string>
+    <string name="sd_eject" product="nosdcard" msgid="6136102589751843304">"Desmontar almacenamiento compartido"</string>
+    <string name="sd_eject" product="default" msgid="8062832622096296251">"Desmontar tarjeta SD"</string>
+    <string name="sd_eject_summary" product="nosdcard" msgid="6859940774161708871">"Desmontar almacenamiento USB interno"</string>
     <string name="sd_eject_summary" product="default" msgid="5151243312587186226">"Desconectar la tarjeta SD para extraerla de forma segura"</string>
     <string name="sd_insert_summary" product="nosdcard" msgid="9164545135649775664">"Inserta USB para activar almacenamiento"</string>
     <string name="sd_insert_summary" product="default" msgid="5949168259622002192">"Insertar una tarjeta SD para el montaje"</string>
@@ -1587,14 +1587,14 @@
     <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"Borrar todos los datos del almacenamiento USB del teléfono, como la música y las fotos"</string>
     <string name="sd_format_summary" product="default" msgid="60583152211068164">"Borrar todos los datos de la tarjeta SD, como la música y las fotos"</string>
     <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"La función MTP o PTP está activa."</string>
-    <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"¿Desconectar almacenamiento USB?"</string>
-    <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"¿Desconectar tarjeta SD?"</string>
-    <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="1212025106709645023">"Si desconectas el almacenamiento USB, se detendrán algunas aplicaciones que estás usando y no estarán disponibles hasta que vuelvas a activarlo."</string>
-    <string name="dlg_confirm_unmount_text" product="default" msgid="3887768438615563697">"Si desconectas la tarjeta SD, se detendrán algunas aplicaciones en ejecución y no estarán disponibles hasta que la vuelvas a activar."</string>
+    <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"¿Desmontar almacenamiento USB?"</string>
+    <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"¿Desmontar tarjeta SD?"</string>
+    <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="1212025106709645023">"Si desmontas el almacenamiento USB, se detendrán algunas aplicaciones que estás usando y no estarán disponibles hasta que vuelvas a activarlo."</string>
+    <string name="dlg_confirm_unmount_text" product="default" msgid="3887768438615563697">"Si desmontas la tarjeta SD, se detendrán algunas aplicaciones en ejecución y no estarán disponibles hasta que la vuelvas a activar."</string>
     <string name="dlg_error_unmount_title" product="nosdcard" msgid="2205587942165199845"></string>
     <string name="dlg_error_unmount_title" product="default" msgid="2205587942165199845"></string>
-    <string name="dlg_error_unmount_text" product="nosdcard" msgid="7876201891724279436">"No se ha podido desconectar el almacenamiento USB. Inténtalo de nuevo más tarde."</string>
-    <string name="dlg_error_unmount_text" product="default" msgid="2185659901137961711">"No se ha podido desconectar la tarjeta SD. Inténtalo de nuevo más tarde."</string>
+    <string name="dlg_error_unmount_text" product="nosdcard" msgid="7876201891724279436">"No se ha podido desmontar el almacenamiento USB. Inténtalo de nuevo más tarde."</string>
+    <string name="dlg_error_unmount_text" product="default" msgid="2185659901137961711">"No se ha podido desmontar la tarjeta SD. Inténtalo de nuevo más tarde."</string>
     <string name="unmount_inform_text" product="nosdcard" msgid="5932607205977999175">"Se desactivará el almacenamiento USB."</string>
     <string name="unmount_inform_text" product="default" msgid="716578785262713312">"Se desactivará la tarjeta SD."</string>
     <string name="sd_ejecting_title" msgid="1641122369013595273">"Desactivando"</string>
@@ -3916,7 +3916,7 @@
     <string name="notification_pulse_title" msgid="8013178454646671529">"Luz parpadeante"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"Privacidad"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Saltar pantalla de bloqueo"</string>
-    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Después de desbloquear, ir a la última pantalla usada"</string>
+    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Después de desbloquear, ir a la última pantalla usada."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Pantalla de bloqueo, pantalla bloqueo, saltar, evitar"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Con el perfil de trabajo bloqueado"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificaciones en pantalla de bloqueo"</string>
