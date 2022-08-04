@@ -402,6 +402,17 @@ public class DataProcessorTest {
     }
 
     @Test
+    public void isForDailyChart_returnExpectedResult() {
+        assertThat(DataProcessor.isForDailyChart(/*isStartOrEnd=*/ true, 0L)).isTrue();
+        // 2022-01-01 00:00:00
+        assertThat(DataProcessor.isForDailyChart(/*isStartOrEnd=*/ false, 1640966400000L))
+                .isTrue();
+        // 2022-01-01 01:00:05
+        assertThat(DataProcessor.isForDailyChart(/*isStartOrEnd=*/ false, 1640970005000L))
+                .isFalse();
+    }
+
+    @Test
     public void getBatteryUsageMap_emptyHistoryMap_returnNull() {
         final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
                 new ArrayList<>();

@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge.batteryusage;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
@@ -168,13 +169,10 @@ public final class BatteryChartPreferenceControllerV2Test {
 
     @Test
     public void setBatteryChartViewModel_6Hours() {
-        // TODO: Removes the following line after loading mBatteryIndexedMap is supported.
-        mBatteryChartPreferenceController.mBatteryIndexedMap = new HashMap<>();
-
         mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
 
-        verify(mDailyChartView).setVisibility(View.GONE);
-        verify(mHourlyChartView).setVisibility(View.VISIBLE);
+        verify(mDailyChartView, atLeastOnce()).setVisibility(View.GONE);
+        verify(mHourlyChartView, atLeastOnce()).setVisibility(View.VISIBLE);
         verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
                 List.of(100, 97, 95),
                 List.of("8 am", "10 am", "12 pm"),
@@ -184,13 +182,10 @@ public final class BatteryChartPreferenceControllerV2Test {
 
     @Test
     public void setBatteryChartViewModel_60Hours() {
-        // TODO: Removes the following line after loading mBatteryIndexedMap is supported.
-        mBatteryChartPreferenceController.mBatteryIndexedMap = new HashMap<>();
-
         mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(60));
 
-        verify(mDailyChartView).setVisibility(View.VISIBLE);
-        verify(mHourlyChartView).setVisibility(View.GONE);
+        verify(mDailyChartView, atLeastOnce()).setVisibility(View.VISIBLE);
+        verify(mHourlyChartView, atLeastOnce()).setVisibility(View.GONE);
         verify(mDailyChartView).setViewModel(new BatteryChartViewModel(
                 List.of(100, 83, 59, 41),
                 List.of("SAT", "SUN", "MON", "MON"),
@@ -256,6 +251,12 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
+    public void refreshUi_normalCase_returnTrue() {
+        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
+        assertThat(mBatteryChartPreferenceController.refreshUi()).isTrue();
+    }
+
+    @Test
     public void refreshUi_batteryIndexedMapIsNull_ignoreRefresh() {
         mBatteryChartPreferenceController.setBatteryHistoryMap(null);
         assertThat(mBatteryChartPreferenceController.refreshUi()).isFalse();
@@ -275,11 +276,31 @@ public final class BatteryChartPreferenceControllerV2Test {
 
     @Test
     public void removeAndCacheAllPrefs_emptyContent_ignoreRemoveAll() {
-        mBatteryChartPreferenceController.mHourlyChartIndex = 1;
+        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
+        mBatteryChartPreferenceController.mBatteryUsageMap = createBatteryUsageMap();
         doReturn(0).when(mAppListGroup).getPreferenceCount();
 
         mBatteryChartPreferenceController.refreshUi();
         verify(mAppListGroup, never()).removeAll();
+    }
+
+    @Test
+    public void removeAndCacheAllPrefs_buildCacheAndRemoveAllPreference() {
+        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
+        mBatteryChartPreferenceController.mBatteryUsageMap = createBatteryUsageMap();
+        doReturn(1).when(mAppListGroup).getPreferenceCount();
+        doReturn(mPowerGaugePreference).when(mAppListGroup).getPreference(0);
+        doReturn(PREF_KEY).when(mBatteryHistEntry).getKey();
+        doReturn(PREF_KEY).when(mPowerGaugePreference).getKey();
+        doReturn(mPowerGaugePreference).when(mAppListGroup).findPreference(PREF_KEY);
+        // Ensures the testing data is correct.
+        assertThat(mBatteryChartPreferenceController.mPreferenceCache).isEmpty();
+
+        mBatteryChartPreferenceController.refreshUi();
+
+        assertThat(mBatteryChartPreferenceController.mPreferenceCache.get(PREF_KEY))
+                .isEqualTo(mPowerGaugePreference);
+        verify(mAppListGroup).removeAll();
     }
 
     @Test
@@ -454,36 +475,9 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void validateUsageTime_returnTrueIfBatteryDiffEntryIsValid() {
-        assertThat(BatteryChartPreferenceControllerV2.validateUsageTime(
-                createBatteryDiffEntry(
-                        /*foregroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS,
-                        /*backgroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS)))
-                .isTrue();
-    }
-
-    @Test
-    public void validateUsageTime_foregroundTimeExceedThreshold_returnFalse() {
-        assertThat(BatteryChartPreferenceControllerV2.validateUsageTime(
-                createBatteryDiffEntry(
-                        /*foregroundUsageTimeInMs=*/ DateUtils.HOUR_IN_MILLIS * 3,
-                        /*backgroundUsageTimeInMs=*/ 0)))
-                .isFalse();
-    }
-
-    @Test
-    public void validateUsageTime_backgroundTimeExceedThreshold_returnFalse() {
-        assertThat(BatteryChartPreferenceControllerV2.validateUsageTime(
-                createBatteryDiffEntry(
-                        /*foregroundUsageTimeInMs=*/ 0,
-                        /*backgroundUsageTimeInMs=*/ DateUtils.HOUR_IN_MILLIS * 3)))
-                .isFalse();
-    }
-
-    @Test
     public void onExpand_expandedIsTrue_addSystemEntriesToPreferenceGroup() {
         doReturn(1).when(mAppListGroup).getPreferenceCount();
-        mBatteryChartPreferenceController.mSystemEntries.add(mBatteryDiffEntry);
+        mBatteryChartPreferenceController.mBatteryUsageMap = createBatteryUsageMap();
         doReturn("label").when(mBatteryDiffEntry).getAppLabel();
         doReturn(mDrawable).when(mBatteryDiffEntry).getAppIcon();
         doReturn(PREF_KEY).when(mBatteryHistEntry).getKey();
@@ -505,7 +499,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     public void onExpand_expandedIsFalse_removeSystemEntriesFromPreferenceGroup() {
         doReturn(PREF_KEY).when(mBatteryHistEntry).getKey();
         doReturn(mPowerGaugePreference).when(mAppListGroup).findPreference(PREF_KEY);
-        mBatteryChartPreferenceController.mSystemEntries.add(mBatteryDiffEntry);
+        mBatteryChartPreferenceController.mBatteryUsageMap = createBatteryUsageMap();
         // Verifies the cache is empty first.
         assertThat(mBatteryChartPreferenceController.mPreferenceCache).isEmpty();
 
@@ -580,18 +574,6 @@ public final class BatteryChartPreferenceControllerV2Test {
                 .isFalse();
     }
 
-    @Test
-    public void isValidToShowEntry_returnExpectedResult() {
-        assertThat(mBatteryChartPreferenceController
-                .isValidToShowEntry("com.google.android.apps.scone"))
-                .isTrue();
-
-        // Verifies the items which are defined in the array list.
-        assertThat(mBatteryChartPreferenceController
-                .isValidToShowEntry("com.android.gms.persistent"))
-                .isFalse();
-    }
-
     private static Long generateTimestamp(int index) {
         // "2021-04-23 07:00:00 UTC" + index hours
         return 1619247600000L + index * DateUtils.HOUR_IN_MILLIS;
@@ -603,12 +585,29 @@ public final class BatteryChartPreferenceControllerV2Test {
         for (int index = 0; index < numOfHours; index++) {
             final ContentValues values = new ContentValues();
             values.put("batteryLevel", Integer.valueOf(100 - index));
+            values.put("consumePower", Integer.valueOf(100 - index));
             final BatteryHistEntry entry = new BatteryHistEntry(values);
             final Map<String, BatteryHistEntry> entryMap = new HashMap<>();
             entryMap.put("fake_entry_key" + index, entry);
             batteryHistoryMap.put(generateTimestamp(index), entryMap);
         }
         return batteryHistoryMap;
+    }
+
+    private Map<Integer, Map<Integer, BatteryDiffData>> createBatteryUsageMap() {
+        final int selectedAll = BatteryChartViewModel.SELECTED_INDEX_ALL;
+        return Map.of(
+                selectedAll, Map.of(
+                        selectedAll, new BatteryDiffData(
+                                Arrays.asList(mBatteryDiffEntry),
+                                Arrays.asList(mBatteryDiffEntry))),
+                0, Map.of(
+                        selectedAll, new BatteryDiffData(
+                                Arrays.asList(mBatteryDiffEntry),
+                                Arrays.asList(mBatteryDiffEntry)),
+                        0, new BatteryDiffData(
+                                Arrays.asList(mBatteryDiffEntry),
+                                Arrays.asList(mBatteryDiffEntry))));
     }
 
     private BatteryDiffEntry createBatteryDiffEntry(
