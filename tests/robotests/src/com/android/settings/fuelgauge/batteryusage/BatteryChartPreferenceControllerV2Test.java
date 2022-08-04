@@ -533,13 +533,13 @@ public final class BatteryChartPreferenceControllerV2Test {
         verify(mBatteryChartPreferenceController.mAppListPrefGroup)
                 .setTitle(captor.capture());
         assertThat(captor.getValue())
-                .isEqualTo("App usage for past 24 hr");
+                .isEqualTo("App usage since last full charge");
         // Verifies the title in the expandable divider.
         captor = ArgumentCaptor.forClass(String.class);
         verify(mBatteryChartPreferenceController.mExpandDividerPreference)
                 .setTitle(captor.capture());
         assertThat(captor.getValue())
-                .isEqualTo("System usage for past 24 hr");
+                .isEqualTo("System usage since last full charge");
     }
 
     @Test
