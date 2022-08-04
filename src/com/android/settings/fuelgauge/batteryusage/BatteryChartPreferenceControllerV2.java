@@ -200,8 +200,7 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
         mPrefContext = screen.getContext();
         mAppListPrefGroup = screen.findPreference(mPreferenceKey);
         mAppListPrefGroup.setOrderingAsAdded(false);
-        mAppListPrefGroup.setTitle(
-                mPrefContext.getString(R.string.battery_app_usage_for_past_24));
+        mAppListPrefGroup.setTitle(mPrefContext.getString(R.string.battery_app_usage));
         mFooterPreference = screen.findPreference(KEY_FOOTER_PREF);
         // Removes footer first until usage data is loaded to avoid flashing.
         if (mFooterPreference != null) {
@@ -498,8 +497,8 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
         // Null means we show all information without a specific time slot.
         if (slotInformation == null) {
             return isApp
-                    ? mPrefContext.getString(R.string.battery_app_usage_for_past_24)
-                    : mPrefContext.getString(R.string.battery_system_usage_for_past_24);
+                    ? mPrefContext.getString(R.string.battery_app_usage)
+                    : mPrefContext.getString(R.string.battery_system_usage);
         } else {
             return isApp
                     ? mPrefContext.getString(R.string.battery_app_usage_for, slotInformation)
