@@ -1947,8 +1947,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Define un PIN"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Define un PIN para o traballo"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Define un padrón"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Se queres gozar de seguranza adicional, define un padrón para desbloquear o dispositivo"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Define un padrón para o traballo"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Impresión dixital: contrasinal"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Define un padrón para a impresión dixital"</string>
@@ -4022,8 +4021,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"Todas as notificacións de \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Todas as notificacións de <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Notificacións intelixentes"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="other">Arredor de <xliff:g id="NUMBER_1">%,d</xliff:g> notificacións ao día</item>
+      <item quantity="one">Arredor de <xliff:g id="NUMBER_0">%d</xliff:g> notificación ao día</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="other">Arredor de <xliff:g id="NUMBER_1">%,d</xliff:g> notificacións á semana</item>
+      <item quantity="one">Arredor de <xliff:g id="NUMBER_0">%d</xliff:g> notificación á semana</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Nunca"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Notificacións de aplicacións e dispositivos"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Controla cales das túas aplicacións e dispositivos poden ler as notificacións"</string>
@@ -5044,7 +5049,7 @@
     <string name="enterprise_privacy_device_access_category" msgid="140157499478630004">"O teu acceso a este dispositivo"</string>
     <string name="enterprise_privacy_enterprise_data" msgid="3963070078195245028">"Datos asociados coa túa conta do traballo, como o correo electrónico e o calendario"</string>
     <string name="enterprise_privacy_installed_packages" msgid="6707006112254572820">"Lista das aplicacións do teu dispositivo"</string>
-    <string name="enterprise_privacy_usage_stats" msgid="6328506963853465534">"Cantidade de tempo investido e datos consumidos en cada aplicación"</string>
+    <string name="enterprise_privacy_usage_stats" msgid="6328506963853465534">"Tempo de uso e datos consumidos para cada aplicación"</string>
     <string name="enterprise_privacy_network_logs" msgid="3081744541193695887">"Rexistro do tráfico de rede máis recente"</string>
     <string name="enterprise_privacy_bug_reports" msgid="2635897583413134123">"Informe de erros máis recente"</string>
     <string name="enterprise_privacy_security_logs" msgid="8494681624247959075">"Rexistro de seguranza máis recente"</string>
@@ -5264,7 +5269,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Non facer nada"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibrar"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Silenciar"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"Para activar a opción, no menú de acendido, primeiro cambia Manter premido botón de acendido."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"Para activar a opción, no menú de acendido, primeiro cambia Manter premido botón de acendido."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Detalles da rede"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"As aplicacións do teu teléfono poden consultar o nome do teu dispositivo. Tamén poden velo outros usuarios cando te conectes a dispositivos Bluetooth ou a redes wifi, así como cando configures zonas wifi."</string>
     <string name="devices_title" msgid="649715719278562515">"Dispositivos"</string>
@@ -5551,15 +5556,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"control de dispositivos"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Tarxetas e pases"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"tarxetas e pases"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"Manter premido botón de acendido"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Accede ao Asistente cando se mantén premido o botón"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Mostra o menú de acendido cando se mantén premido o botón"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"A función de manter premido o botón está desactivada"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Manter premido botón de acendido"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Mantén premido o botón de acendido para acceder ao menú"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Menú de acendido"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Asistente dixital"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Acceder ao asistente dixital"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Acceder ao menú de acendido"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Para usar esta función, tes que configurar un bloqueo de pantalla"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Manter premido para activar o Asistente"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Activa o Asistente ao manter premido o botón de acendido"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Menú de acendido e emerxencia:\nPreme as teclas de acendido e de subir volume ao mesmo tempo."</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Evitar que soe:\nAtallo dispoñible no menú de volume."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Menú de acendido:\nPreme o botón de acendido e o botón de subida de volume ao mesmo tempo"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Evita que soe:\nPreme un botón de volume para usar o atallo"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Duración da presión no botón"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Para axustar a sensibilidade, escolle durante canto tempo debe manterse premido o botón de acendido"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Curta"</string>

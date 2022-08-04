@@ -1947,8 +1947,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"PIN सेट गर्नुहोस्"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"कार्य प्रोफाइलको PIN सेट गर्नुहोस्"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"प्याटर्न सेट गर्नुहोस्"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"यो डिभाइस थप सुरक्षित बनाउनका लागि यसलाई अनलक गर्ने प्याटर्न सेट गर्नुहोस्"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"कार्य प्रोफाइलको प्याटर्न सेट गर्नुहोस्"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"फिंगरप्रिन्ट प्रयोग गर्न पासवर्ड सेट गर्नुहोस्"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"फिंगरप्रिन्ट प्रयोग गर्न प्याटर्न सेट गर्नुहोस्"</string>
@@ -4022,8 +4021,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"\"<xliff:g id="APP_NAME">%1$s</xliff:g>\" का सबै सूचनाहरू"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g> सम्बन्धी सबै सूचनाहरू"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"अनुकूल पार्न मिल्ने सूचनाहरू"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="other">हरेक दिन लगभग <xliff:g id="NUMBER_1">%,d</xliff:g> वटा सूचना</item>
+      <item quantity="one">हरेक दिन लगभग <xliff:g id="NUMBER_0">%d</xliff:g> सूचना</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="other">हरेक हप्ता लगभग <xliff:g id="NUMBER_1">%,d</xliff:g> वटा सूचना</item>
+      <item quantity="one">हरेक हप्ता लगभग <xliff:g id="NUMBER_0">%d</xliff:g> सूचना</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"कहिल्यै होइन"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"डिभाइस तथा एपसम्बन्धी सूचनाहरू"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"कुन कुन एप र डिभाइसहरूले सूचना पढ्न पाउँछन् भन्ने कुरा नियन्त्रण गर्नुहोस्"</string>
@@ -5264,7 +5269,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"केही पनि नगर्नुहोस्"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"भाइब्रेट गरियोस्"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"म्युट गर्नुहोस्"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"तपाईंले पावर मेनुमा गएर \"पावर बटन थिचिराख्नुहोस्\" परिवर्तन गरेपछि मात्र यो सेटिङ अन गर्न मिल्छ।"</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"तपाईंले पावर मेनुमा गएर \"पावर बटन थिचिराख्नुहोस्\" परिवर्तन गरेपछि मात्र यो सेटिङ अन गर्न मिल्छ।"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"नेटवर्कको विवरण"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"तपाईंको फोनमा रहेका एपको प्रयोग गरी तपाईंको डिभाइसको नाम हेर्न सकिन्छ। तपाईंले ब्लुटुथ चल्ने डिभाइसमा कनेक्ट गर्दा, कुनै Wi-Fi नेटवर्कमा कनेक्ट गर्दा वा कुनै Wi-Fi हटस्पट सेटअप गर्दा अरू मान्छेहरू पनि यसलाई देख्न सक्छन्।"</string>
     <string name="devices_title" msgid="649715719278562515">"यन्त्रहरू"</string>
@@ -5551,15 +5556,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"डिभाइस नियन्त्रण गर्ने विजेटहरू"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"कार्ड तथा पासहरू"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"कार्ड तथा पासहरू"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"पावर बटन थिचिराख्नुहोस्"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"सहायता पाउन पावर बटन थिचिराख्नुहोस्"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"पावर मेनु प्रयोग गर्न पावर बटन थिचिराख्नुहोस्"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"पावर बटन थिचिराखेर सहायता लिने सुविधा अफ गरिएको छ"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"पावर बटन थिचिराख्नुहोस्"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"पावर मेनु प्रयोग गर्न पावर बटन थिचिराख्नुहोस्"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"पावर मेनु"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"डिजिटल सहायक"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"डिजिटल सहायक प्रयोग गर्नुहोस्"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"पावर मेनु प्रयोग गर्नुहोस्"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"यो सुविधा प्रयोग गर्न सर्वप्रथम स्क्रिन लक हाल्नुहोस्"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"पावर बटन थिच्दा सहायक अन गरियोस्"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"पावर बटन थिच्दा सहायक खुलोस्"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"पावर र आपत्‌कालीन मेनु:\nपावर र भोल्युम बढाउने बटन एकै पटक थिच्नुहोस्।"</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"डिभाइसको घण्टी म्युट गरियोस्:\nसर्टकट भोल्युम मेनुमा छ।"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"पावर मेनु:\nपावर बटन र भोल्युम बढाउने बटन एकै चोटि थिच्नुहोस्"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"घण्टी बज्न नदिनुहोस्:\nसर्टकट प्रयोग गर्न भोल्युम बटन थिच्नुहोस्"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"थिचिराख्ने अवधि"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"कति समयसम्म पावर बटन थिचिराख्ने भन्ने कुरा छनौट गरेर संवेदनशीलता मिलाउनुहोस्"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"छोटो"</string>

@@ -1947,8 +1947,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"PIN අංකයක් සකසන්න"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"කාර්යාල PIN එකක් සකසන්න"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"රටාවක් සකසන්න"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"එක් කළ ආරක්ෂාව සඳහා, උපාංගය අගුලු හැරීමට රටාවක් සකසන්න"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"කාර්යාල රටාවක් සකසන්න"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"ඇඟිලි සලකුණ භාවිත කිරීමට, මුරපදයක් සකසන්න"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"ඇඟිලි සලකුණ භාවිත කිරීමට, රටාවක් සකසන්න"</string>
@@ -4022,8 +4021,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"සියලු \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" දැනුම් දීම්"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"සියලු <xliff:g id="APP_NAME">%1$s</xliff:g> දැනුම් දීම්"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"අනුවර්තී දැනුම්දීම්"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="one">දිනකට දැනුම්දීම් <xliff:g id="NUMBER_1">%,d</xliff:g>ක් පමණ</item>
+      <item quantity="other">දිනකට දැනුම්දීම් <xliff:g id="NUMBER_1">%,d</xliff:g>ක් පමණ</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="one">සතියකට දැනුම්දීම් <xliff:g id="NUMBER_1">%,d</xliff:g>ක් පමණ</item>
+      <item quantity="other">සතියකට දැනුම්දීම් <xliff:g id="NUMBER_1">%,d</xliff:g>ක් පමණ</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"කිසි විටක නැත"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"උපාංගය සහ යෙදුම් දැනුම්දීම්"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"දැනුම්දීම් කියවිය හැකි යෙදුම් සහ උපාංග පාලනය කරන්න"</string>
@@ -5264,7 +5269,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"කිසිවක් නොකරන්න"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"කම්පනය"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"නිහඬ කරන්න"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"සබල කිරීමට, පළමුව බල මෙනුවට \"බල බොත්තම ඔබා අල්ලාගෙන සිටින්න\" යන්න වෙනස් කරන්න."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"සබල කිරීම සඳහා, පළමුව බල මෙනුවට \"බල බොත්තම ඔබා සිටින්න\" යන්න වෙනස් කරන්න."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"ජාල විස්තර"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"ඔබගේ උපාංගයේ නම ඔබගේ දුරකථනයේ යෙදුම්වලට දෘශ්‍යමානය. ඔබ බ්ලූටූත්වලට සම්බන්ධ වූ විට හෝ Wi-Fi හොට්ස්පොට් එකක් පිහිටු වූ විට වෙනත් පුද්ගලයන්ද එය දැකිය හැකිය."</string>
     <string name="devices_title" msgid="649715719278562515">"උපාංග"</string>
@@ -5551,15 +5556,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"උපාංග පාලන"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"කාඩ්පත් &amp; ප්‍රවේශපත්"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"කාඩ්පත් &amp; ප්‍රවේශපත්"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"බල බොත්තම ඔබා අල්ලාගෙන සිටින්න"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"සහායක සඳහා ඔබා අල්ලාගෙන සිටින්න"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"බල මෙනුව සඳහා ඔබා අල්ලාගෙන සිටින්න"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"අබලයි ඔබා අල්ලාගෙන සිටින්න"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"බල බොත්තම ඔබා සිටින්න"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"ප්‍රවේශ වීමට බල බොත්තම ඔබා සිටින්න"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"බල මෙනුව"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"ඩිජිටල් සහායක"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"ඩිජිටල් සහායක වෙත ප්‍රවේශ වන්න"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"බල මෙනුවට ප්‍රවේශ වන්න"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"භාවිත කිරීමට, පළමුව තීර අගුල සකසන්න"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"සහායක සඳහා රඳවා ගන්න"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"බල බොත්තම තද කර ගෙන සිටීමෙන් සහායක ප්‍රේරණය කරන්න"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"බලය සහ හදිසි අවස්ථා මෙනුව:\nඑකම අවස්ථාවේදී බලය සහ හඬ ඉහළට බොත්තම ඔබන්න."</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"නාද වීම වළක්වන්න:\nකෙටි මග හඬ පරිමා මෙනුවෙහි තිබේ."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"බල මෙනුව:\nබල බොත්තම සහ හඬ පරිමාව වැඩි කිරීමේ බොත්තම එකවර ඔබන්න"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"නාද වීම වළක්වන්න:\nකෙටිමඟ සඳහා ශබ්ද බොත්තමක් ඔබන්න"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"ඔබා අල්ලාගෙන සිටින කාල සීමාව"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"බල බොත්තම කොපමණ වේලාවක් ඔබා අල්ලාගෙන සිටින්නේද යන්න තෝරා සංවේදීතාව සීරුමාරු කරන්න"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"කෙටි"</string>
