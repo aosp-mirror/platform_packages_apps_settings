@@ -40,7 +40,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
-import com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceController;
+import com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceControllerV2;
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry;
 import com.android.settings.fuelgauge.batteryusage.BatteryEntry;
 import com.android.settings.fuelgauge.batteryusage.BatteryUsageStatsLoader;
@@ -179,7 +179,7 @@ public class AppBatteryPreferenceController extends BasePreferenceController
                     return null;
                 }
                 final BatteryDiffEntry entry =
-                        BatteryChartPreferenceController.getBatteryLast24HrUsageData(
+                        BatteryChartPreferenceControllerV2.getAppBatteryUsageData(
                                 mContext, mPackageName, mUserId);
                 Log.d(TAG, "loadBatteryDiffEntries():\n" + entry);
                 return entry;
