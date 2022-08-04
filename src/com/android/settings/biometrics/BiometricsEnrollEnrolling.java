@@ -62,11 +62,7 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
 
     @Override
     protected void onStop() {
-        if (!isChangingConfigurations() && shouldFinishWhenBackgrounded()
-                && !BiometricUtils.isAnyMultiBiometricFlow(this)) {
-            setResult(RESULT_TIMEOUT);
-            finish();
-        }
+        super.onStop();
 
         if (mSidecar != null) {
             mSidecar.setListener(null);
@@ -84,7 +80,6 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
             }
             finish();
         }
-        super.onStop();
     }
 
     @Override
