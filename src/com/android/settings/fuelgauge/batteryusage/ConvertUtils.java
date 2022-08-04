@@ -150,10 +150,12 @@ public final class ConvertUtils {
     }
 
     /** Converts UTC timestamp to local time day of week data. */
-    public static String utcToLocalTimeDayOfWeek(final Context context, final long timestamp) {
+    public static String utcToLocalTimeDayOfWeek(
+            final Context context, final long timestamp, final boolean isAbbreviation) {
         final Locale locale = getLocale(context);
-        final String pattern = DateFormat.getBestDateTimePattern(locale, "E");
-        return DateFormat.format(pattern, timestamp).toString().toUpperCase(locale);
+        final String pattern = DateFormat.getBestDateTimePattern(locale,
+                isAbbreviation ? "E" : "EEEE");
+        return DateFormat.format(pattern, timestamp).toString();
     }
 
     /** Gets indexed battery usage data for each corresponding time slot. */
