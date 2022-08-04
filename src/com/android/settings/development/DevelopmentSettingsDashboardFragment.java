@@ -301,10 +301,19 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 final BluetoothLeAudioHwOffloadPreferenceController leAudioController =
                         getDevelopmentOptionsController(
                                 BluetoothLeAudioHwOffloadPreferenceController.class);
+                final NfcSnoopLogPreferenceController nfcSnoopLogController =
+                        getDevelopmentOptionsController(
+                                NfcSnoopLogPreferenceController.class);
+                final NfcVerboseVendorLogPreferenceController nfcVerboseLogController =
+                        getDevelopmentOptionsController(
+                                NfcVerboseVendorLogPreferenceController.class);
                 // If hardware offload isn't default value, we must reboot after disable
                 // developer options. Show a dialog for the user to confirm.
                 if ((a2dpController == null || a2dpController.isDefaultValue())
-                        && (leAudioController == null || leAudioController.isDefaultValue())) {
+                        && (leAudioController == null || leAudioController.isDefaultValue())
+                        && (nfcSnoopLogController == null || nfcSnoopLogController.isDefaultValue())
+                        && (nfcVerboseLogController == null
+                        || nfcVerboseLogController.isDefaultValue())) {
                     disableDeveloperOptions();
                 } else {
                     DisableDevSettingsDialogFragment.show(this /* host */);
