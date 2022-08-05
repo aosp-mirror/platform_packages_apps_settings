@@ -49,16 +49,6 @@ public class BiometricHandoffActivity extends BiometricEnrollBase {
         mFooterBarMixin.setPrimaryButton(getPrimaryFooterButton());
     }
 
-    @Override
-    protected void onStop() {
-        if (!isChangingConfigurations() && shouldFinishWhenBackgrounded()
-                && !BiometricUtils.isAnyMultiBiometricFlow(this)) {
-            setResult(RESULT_TIMEOUT);
-            finish();
-        }
-        super.onStop();
-    }
-
     @NonNull
     protected FooterButton getPrimaryFooterButton() {
         if (mPrimaryFooterButton == null) {

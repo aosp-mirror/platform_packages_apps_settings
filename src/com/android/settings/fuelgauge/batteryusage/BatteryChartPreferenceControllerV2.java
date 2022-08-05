@@ -106,6 +106,10 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
     private boolean mIsFooterPrefAdded = false;
     private PreferenceScreen mPreferenceScreen;
     private FooterPreference mFooterPreference;
+    // Daily view model only saves abbreviated day of week texts (e.g. MON). This field saves the
+    // full day of week texts (e.g. Monday), which is used in category title and battery detail
+    // page.
+    private List<String> mDailyTimestampFullTexts;
     private BatteryChartViewModel mDailyViewModel;
     private List<BatteryChartViewModel> mHourlyViewModels;
 
@@ -200,8 +204,7 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
         mPrefContext = screen.getContext();
         mAppListPrefGroup = screen.findPreference(mPreferenceKey);
         mAppListPrefGroup.setOrderingAsAdded(false);
-        mAppListPrefGroup.setTitle(
-                mPrefContext.getString(R.string.battery_app_usage_for_past_24));
+        mAppListPrefGroup.setTitle(mPrefContext.getString(R.string.battery_app_usage));
         mFooterPreference = screen.findPreference(KEY_FOOTER_PREF);
         // Removes footer first until usage data is loaded to avoid flashing.
         if (mFooterPreference != null) {
@@ -267,15 +270,20 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
                         });
         Log.d(TAG, "getBatteryLevelData: " + batteryLevelData);
         if (batteryLevelData == null) {
+            mDailyTimestampFullTexts = null;
             mDailyViewModel = null;
             mHourlyViewModels = null;
             addFooterPreferenceIfNeeded(false);
             return;
         }
+        mDailyTimestampFullTexts = generateTimestampDayOfWeekTexts(
+                mContext, batteryLevelData.getDailyBatteryLevels().getTimestamps(),
+                /* isAbbreviation= */ false);
         mDailyViewModel = new BatteryChartViewModel(
                 batteryLevelData.getDailyBatteryLevels().getLevels(),
                 generateTimestampDayOfWeekTexts(
-                        mContext, batteryLevelData.getDailyBatteryLevels().getTimestamps()),
+                        mContext, batteryLevelData.getDailyBatteryLevels().getTimestamps(),
+                        /* isAbbreviation= */ true),
                 mDailyChartIndex,
                 BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS);
         mHourlyViewModels = new ArrayList<>();
@@ -498,8 +506,8 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
         // Null means we show all information without a specific time slot.
         if (slotInformation == null) {
             return isApp
-                    ? mPrefContext.getString(R.string.battery_app_usage_for_past_24)
-                    : mPrefContext.getString(R.string.battery_system_usage_for_past_24);
+                    ? mPrefContext.getString(R.string.battery_app_usage)
+                    : mPrefContext.getString(R.string.battery_system_usage);
         } else {
             return isApp
                     ? mPrefContext.getString(R.string.battery_app_usage_for, slotInformation)
@@ -507,9 +515,33 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
         }
     }
 
-    private String getSlotInformation() {
-        // TODO: Generate the right slot information from daily and hourly chart selection.
-        return null;
+    @VisibleForTesting
+    String getSlotInformation() {
+        if (mDailyTimestampFullTexts == null || mDailyViewModel == null
+                || mHourlyViewModels == null) {
+            // No data
+            return null;
+        }
+        if (isAllSelected()) {
+            return null;
+        }
+
+        final String selectedDayText = mDailyTimestampFullTexts.get(mDailyChartIndex);
+        if (mHourlyChartIndex == BatteryChartViewModel.SELECTED_INDEX_ALL) {
+            return selectedDayText;
+        }
+
+        final String fromHourText = mHourlyViewModels.get(mDailyChartIndex).texts().get(
+                mHourlyChartIndex);
+        final String toHourText = mHourlyViewModels.get(mDailyChartIndex).texts().get(
+                mHourlyChartIndex + 1);
+        final String selectedHourText =
+                String.format("%s%s%s", fromHourText, mIs24HourFormat ? "-" : " - ", toHourText);
+        if (isBatteryLevelDataInOneDay()) {
+            return selectedHourText;
+        }
+
+        return String.format("%s %s", selectedDayText, selectedHourText);
     }
 
     @VisibleForTesting
@@ -579,14 +611,20 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
     }
 
     private boolean isBatteryLevelDataInOneDay() {
-        return mHourlyViewModels.size() == 1;
+        return mHourlyViewModels != null && mHourlyViewModels.size() == 1;
     }
 
-    private static List<String> generateTimestampDayOfWeekTexts(
-            @NonNull final Context context, @NonNull final List<Long> timestamps) {
+    private boolean isAllSelected() {
+        return (isBatteryLevelDataInOneDay()
+                || mDailyChartIndex == BatteryChartViewModel.SELECTED_INDEX_ALL)
+                && mHourlyChartIndex == BatteryChartViewModel.SELECTED_INDEX_ALL;
+    }
+
+    private static List<String> generateTimestampDayOfWeekTexts(@NonNull final Context context,
+            @NonNull final List<Long> timestamps, final boolean isAbbreviation) {
         final ArrayList<String> texts = new ArrayList<>();
         for (Long timestamp : timestamps) {
-            texts.add(ConvertUtils.utcToLocalTimeDayOfWeek(context, timestamp));
+            texts.add(ConvertUtils.utcToLocalTimeDayOfWeek(context, timestamp, isAbbreviation));
         }
         return texts;
     }

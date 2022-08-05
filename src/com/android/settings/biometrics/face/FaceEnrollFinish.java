@@ -22,7 +22,6 @@ import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
-import com.android.settings.biometrics.BiometricUtils;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
@@ -47,16 +46,6 @@ public class FaceEnrollFinish extends BiometricEnrollBase {
                         .setTheme(R.style.SudGlifButton_Primary)
                         .build()
         );
-    }
-
-    @Override
-    protected void onStop() {
-        if (!isChangingConfigurations() && shouldFinishWhenBackgrounded()
-                && !BiometricUtils.isAnyMultiBiometricFlow(this)) {
-            setResult(RESULT_TIMEOUT);
-            finish();
-        }
-        super.onStop();
     }
 
     @Override

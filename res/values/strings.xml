@@ -869,17 +869,10 @@
     <!-- Note: Update FingerprintEnrollParentalConsent.CONSENT_STRING_RESOURCES when any _consent_ strings are added or removed. -->
     <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_preference_title">Fingerprint</string>
-    <!-- Fingerprint enrollment and settings --><skip />
     <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
     <string name="security_settings_work_fingerprint_preference_title">Fingerprint for work</string>
-    <!-- Fingerprint managment category title - configuration options for managing enrolled fingerprints [CHAR LIMIT=22] -->
-    <string name="fingerprint_manage_category_title">Manage fingerprints</string>
-    <!-- Fingerprint category title - configuration options for managing fingerprint enrollment [CHAR LIMIT=22] -->
-    <string name="fingerprint_usage_category_title">Use fingerprint for</string>
     <!-- Preference to add another fingerprint -->
     <string name="fingerprint_add_title">Add fingerprint</string>
-    <!-- switch for allowing fingerprint to be used for keyguard -->
-    <string name="fingerprint_enable_keyguard_toggle_title">screen lock</string>
     <!-- Message showing the current number of fingerprints set up. Shown for a menu item that launches fingerprint settings or enrollment. -->
     <plurals name="security_settings_fingerprint_preference_summary">
         <item quantity="one">Fingerprint added</item>
@@ -907,12 +900,6 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1">You and your child are in control</string>
     <!-- Introduction title shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2">Keep in mind</string>
-    <!-- Introduction detail message shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_enroll_introduction_footer_message_1">The data recorded by Fingerprint is stored securely and never leaves your phone. You can delete your data anytime in Settings.</string>
-    <!-- Introduction detail message shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_enroll_introduction_footer_message_2">Your fingerprint may be less secure than a strong pattern or PIN.</string>
-    <!-- Introduction detail message shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_enroll_introduction_footer_message_3" product="default">Your phone will occasionally use your recent fingerprint images to create improved fingerprint models.</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog, when fingerprint unlock is disabled by device admin [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled">Use your fingerprint to unlock your phone or approve purchases.\n\nNote: You can\u2019t use your fingerprint to unlock this device. For more information, contact your organization\u2019s admin.</string>
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
@@ -927,12 +914,6 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text">Fingerprint setup only takes a minute or two. If you skip this, you can add your fingerprint later in settings.</string>
     <!-- Title of dialog shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
 
-    <!-- Introduction detail message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup">When you see this icon, use your fingerprint for authentication, like when you sign in to apps or approve a purchase</string>
-    <!-- Introduction subtitle message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1">Keep in mind</string>
-    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1">Using your fingerprint to unlock your phone may be less secure than a strong pattern or PIN</string>
     <!-- Introduction subtitle message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2">How it works</string>
     <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
@@ -961,21 +942,6 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6">For best results, use a screen protector that\u2019s Made for Google certified. With other screen protectors, your child\u2019s fingerprint may not work.</string>
     <!-- Introduction detail message shown in fingerprint enrollment introduction to learn more about fingerprint [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more"></string>
-
-    <!-- Acquire message received during fingerprint enrollment to inform the user to change the position of their finger. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting">Change the position of your finger slightly each time</string>
-    <!-- Acquire message received during fingerprint enrollment to inform the user to cover the fingerprint sensor. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected">Cover the icon with the center of your fingerprint</string>
-    <!-- Acquire message received during fingerprint enrollment to inform the user this fingerprint has already been added. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_enroll_acquire_already_enrolled">This fingerprint has already been added</string>
-    <!-- Acquire message received during fingerprint enrollment to inform the user to clean the screen near the fingerprint sensor. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_enroll_acquire_clean_sensor">Clean your screen near the sensor and try again</string>
-    <!-- Acquire message received during fingerprint enrollment to inform the user to lift their finger. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast">Lift your finger after you feel a vibration</string>
-    <!-- Acquire message received during fingerprint enrollment to inform the user to try better lighting. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright">Move somewhere with gentler lighting and try again</string>
-    <!-- Acquire message received during fingerprint enrollment to inform the user they've reached the maximum number of enrollments. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_enroll_error_max_attempts">You\u2019ve reached the maximum number of attempts</string>
 
     <!-- Message text only shown in fingerprint security settings home screen. (tablet) [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet">Use your fingerprint to unlock your tablet or verify it\u2019s you, like when you sign in to apps</string>
@@ -1223,8 +1189,6 @@
     <string name="fingerprint_enroll_button_add">Add another</string>
     <!-- Button text shown at the end of enrollment that allows the user to move to the next step -->
     <string name="fingerprint_enroll_button_next">Next</string>
-    <!-- Text shown in fingerprint settings explaining what the fingerprint can be used for. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_fingerprint_enroll_disclaimer">In addition to unlocking your phone, you can also use your fingerprint to authorize purchases and app access. <annotation id="url">Learn more</annotation></string>
     <!-- Text shown in fingerprint settings explaining what the fingerprint can be used for in the case unlocking is disabled [CHAR LIMIT=NONE] -->
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1">The screen lock option is disabled. To learn more, contact your organization\u2019s admin.</string>
     <!-- Text shown in fingerprint settings explaining what the fingerprint can be used for in the case unlocking is disabled [CHAR LIMIT=NONE] -->
@@ -5938,6 +5902,19 @@
     <!-- List of synonyms used in the settings search bar to find the “Voice Access”. [CHAR LIMIT=NONE] -->
     <string name="keywords_voice_access"></string>
 
+    <!-- Fast Pair settings -->
+    <skip />
+
+    <!-- Title in main settings screen for Fast Pair settings [CHAR LIMIT=15] -->
+    <string name="fast_pair_settings">Fast Pair</string>
+
+    <!-- Fast Pair setting summary in settings screen [CHAR LIMIT=50] -->
+    <string name="fast_pair_settings_summary">Nearby detection of Fast Pair bluetooth devices.</string>
+    <!-- Title for Fast Pair main switch preferences. [CHAR LIMIT=50] -->
+    <string name="fast_pair_main_switch_title">Scan for nearby devices</string>
+    <!-- Title for Fast Pair saved devices preferences. [CHAR LIMIT=50] -->
+    <string name="fast_pair_saved_devices_title">Saved devices</string>
+    <!-- Printing settings -->
     <skip />
 
     <!-- Title in main settings screen for printing settings [CHAR LIMIT=15] -->
@@ -6438,8 +6415,12 @@
 
     <!-- [CHAR_LIMIT=NONE] Battery usage main screen chart graph hint -->
     <string name="battery_usage_chart_graph_hint">Battery level for past 24 hr</string>
+    <!-- [CHAR_LIMIT=NONE] Battery app usage section header since last full charge -->
+    <string name="battery_app_usage">App usage since last full charge</string>
     <!-- [CHAR_LIMIT=NONE] Battery app usage section header for past 24 hour -->
     <string name="battery_app_usage_for_past_24">App usage for past 24 hr</string>
+    <!-- [CHAR_LIMIT=NONE] Battery system usage section header since last full charge -->
+    <string name="battery_system_usage">System usage since last full charge</string>
     <!-- [CHAR_LIMIT=NONE] Battery system usage section header for past 24 hour -->
     <string name="battery_system_usage_for_past_24">System usage for past 24 hr</string>
     <!-- [CHAR_LIMIT=NONE] Battery system usage section header -->
@@ -8123,6 +8104,9 @@
 
     <!-- List of synonyms for the Bluetooth setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_bluetooth_settings">connected, device, headphones, headset, speaker, wireless, pair, earbuds, music, media </string>
+
+    <!-- List of synonyms for the Fast Pair setting, used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_fast_pair">pair, earbuds, bluetooth</string>
 
     <!-- List of synonyms for the Wallpaper picker setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_wallpaper">background, theme, grid, customize, personalize</string>
