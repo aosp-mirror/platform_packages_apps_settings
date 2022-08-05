@@ -77,35 +77,27 @@ public class StorageWizardInit extends StorageWizardBase {
     }
 
     @Override
-    public void onBackPressed() {
-        if (mPortable) {
-            super.onBackPressed();
-        } else {
-            mFlipper.showPrevious();
-            setBackButtonText(R.string.wizard_back_adoptable);
-            setHeaderText(R.string.storage_wizard_init_v2_external_title,
-                getDiskShortDescription());
-            setNextButtonText(R.string.storage_wizard_init_v2_external_action);
-            mPortable = true;
-        }
-    }
-
-    @Override
     public void onNavigateBack(View v) {
-        if (mPortable == false) {
-            return;
-        }
         if (!mIsPermittedToAdopt) {
             // TODO: Show a message about why this is disabled for guest and
             // that only an admin user can adopt an sd card.
 
             v.setEnabled(false);
+        } else if (mPortable == false) {
+            mFlipper.showNext();
+            setHeaderText(R.string.storage_wizard_init_v2_external_title,
+                getDiskShortDescription());
+            setNextButtonText(R.string.storage_wizard_init_v2_external_action);
+            setBackButtonText(R.string.wizard_back_adoptable);
+            setBackButtonVisibility(View.VISIBLE);
+            mPortable = true;
         } else {
             mFlipper.showNext();
             setHeaderText(R.string.storage_wizard_init_v2_internal_title,
                 getDiskShortDescription());
             setNextButtonText(R.string.storage_wizard_init_v2_internal_action);
-            setBackButtonVisibility(View.INVISIBLE);
+            setBackButtonText(R.string.wizard_back_adoptable);
+            setBackButtonVisibility(View.VISIBLE);
             mPortable = false;
         }
     }

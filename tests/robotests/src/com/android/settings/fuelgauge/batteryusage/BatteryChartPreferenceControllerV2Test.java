@@ -188,7 +188,7 @@ public final class BatteryChartPreferenceControllerV2Test {
         verify(mHourlyChartView, atLeastOnce()).setVisibility(View.GONE);
         verify(mDailyChartView).setViewModel(new BatteryChartViewModel(
                 List.of(100, 83, 59, 41),
-                List.of("SAT", "SUN", "MON", "MON"),
+                List.of("Sat", "Sun", "Mon", "Mon"),
                 BatteryChartViewModel.SELECTED_INDEX_ALL,
                 BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS));
 
@@ -200,7 +200,7 @@ public final class BatteryChartPreferenceControllerV2Test {
         verify(mHourlyChartView).setVisibility(View.VISIBLE);
         verify(mDailyChartView).setViewModel(new BatteryChartViewModel(
                 List.of(100, 83, 59, 41),
-                List.of("SAT", "SUN", "MON", "MON"),
+                List.of("Sat", "Sun", "Mon", "Mon"),
                 0,
                 BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS));
         verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
@@ -219,7 +219,7 @@ public final class BatteryChartPreferenceControllerV2Test {
         verify(mHourlyChartView).setVisibility(View.VISIBLE);
         verify(mDailyChartView).setViewModel(new BatteryChartViewModel(
                 List.of(100, 83, 59, 41),
-                List.of("SAT", "SUN", "MON", "MON"),
+                List.of("Sat", "Sun", "Mon", "Mon"),
                 1,
                 BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS));
         verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
@@ -239,7 +239,7 @@ public final class BatteryChartPreferenceControllerV2Test {
         verify(mHourlyChartView).setVisibility(View.VISIBLE);
         verify(mDailyChartView).setViewModel(new BatteryChartViewModel(
                 List.of(100, 83, 59, 41),
-                List.of("SAT", "SUN", "MON", "MON"),
+                List.of("Sat", "Sun", "Mon", "Mon"),
                 2,
                 BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS));
         verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
@@ -355,7 +355,7 @@ public final class BatteryChartPreferenceControllerV2Test {
     }
 
     @Test
-    public void handlePreferenceTreeiClick_notPowerGaugePreference_returnFalse() {
+    public void handlePreferenceTreeClick_notPowerGaugePreference_returnFalse() {
         assertThat(mBatteryChartPreferenceController.handlePreferenceTreeClick(mAppListGroup))
                 .isFalse();
 
@@ -523,6 +523,8 @@ public final class BatteryChartPreferenceControllerV2Test {
         mBatteryChartPreferenceController.mExpandDividerPreference =
                 spy(new ExpandDividerPreference(mContext));
         // Simulates select all condition.
+        mBatteryChartPreferenceController.mDailyChartIndex =
+                BatteryChartViewModel.SELECTED_INDEX_ALL;
         mBatteryChartPreferenceController.mHourlyChartIndex =
                 BatteryChartViewModel.SELECTED_INDEX_ALL;
 
@@ -533,32 +535,88 @@ public final class BatteryChartPreferenceControllerV2Test {
         verify(mBatteryChartPreferenceController.mAppListPrefGroup)
                 .setTitle(captor.capture());
         assertThat(captor.getValue())
-                .isEqualTo("App usage for past 24 hr");
+                .isEqualTo("App usage since last full charge");
         // Verifies the title in the expandable divider.
         captor = ArgumentCaptor.forClass(String.class);
         verify(mBatteryChartPreferenceController.mExpandDividerPreference)
                 .setTitle(captor.capture());
         assertThat(captor.getValue())
-                .isEqualTo("System usage for past 24 hr");
+                .isEqualTo("System usage since last full charge");
+    }
+
+    @Test
+    public void selectedSlotText_selectAllDaysAllHours_returnNull() {
+        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(60));
+        mBatteryChartPreferenceController.mDailyChartIndex =
+                BatteryChartViewModel.SELECTED_INDEX_ALL;
+        mBatteryChartPreferenceController.mHourlyChartIndex =
+                BatteryChartViewModel.SELECTED_INDEX_ALL;
+
+        assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(null);
+    }
+
+    @Test
+    public void selectedSlotText_onlyOneDayDataSelectAllHours_returnNull() {
+        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
+        mBatteryChartPreferenceController.mDailyChartIndex = 0;
+        mBatteryChartPreferenceController.mHourlyChartIndex =
+                BatteryChartViewModel.SELECTED_INDEX_ALL;
+
+        assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(null);
+    }
+
+    @Test
+    public void selectedSlotText_selectADayAllHours_onlyDayText() {
+        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(60));
+        mBatteryChartPreferenceController.mDailyChartIndex = 1;
+        mBatteryChartPreferenceController.mHourlyChartIndex =
+                BatteryChartViewModel.SELECTED_INDEX_ALL;
+
+        assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo("Sunday");
+    }
+
+    @Test
+    public void selectedSlotText_onlyOneDayDataSelectAnHour_onlyHourText() {
+        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
+        mBatteryChartPreferenceController.mDailyChartIndex = 0;
+        mBatteryChartPreferenceController.mHourlyChartIndex = 1;
+
+        assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(
+                "10 am - 12 pm");
+    }
+
+    @Test
+    public void selectedSlotText_SelectADayAnHour_dayAndHourText() {
+        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(60));
+        mBatteryChartPreferenceController.mDailyChartIndex = 1;
+        mBatteryChartPreferenceController.mHourlyChartIndex = 8;
+
+        assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(
+                "Sunday 4 pm - 6 pm");
     }
 
     @Test
     public void onSaveInstanceState_restoreSelectedIndexAndExpandState() {
-        final int expectedIndex = 1;
+        final int expectedDailyIndex = 1;
+        final int expectedHourlyIndex = 2;
         final boolean isExpanded = true;
         final Bundle bundle = new Bundle();
-        mBatteryChartPreferenceController.mHourlyChartIndex = expectedIndex;
+        mBatteryChartPreferenceController.mDailyChartIndex = expectedDailyIndex;
+        mBatteryChartPreferenceController.mHourlyChartIndex = expectedHourlyIndex;
         mBatteryChartPreferenceController.mIsExpanded = isExpanded;
         mBatteryChartPreferenceController.onSaveInstanceState(bundle);
         // Replaces the original controller with other values.
+        mBatteryChartPreferenceController.mDailyChartIndex = -1;
         mBatteryChartPreferenceController.mHourlyChartIndex = -1;
         mBatteryChartPreferenceController.mIsExpanded = false;
 
         mBatteryChartPreferenceController.onCreate(bundle);
         mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(25));
 
+        assertThat(mBatteryChartPreferenceController.mDailyChartIndex)
+                .isEqualTo(expectedDailyIndex);
         assertThat(mBatteryChartPreferenceController.mHourlyChartIndex)
-                .isEqualTo(expectedIndex);
+                .isEqualTo(expectedHourlyIndex);
         assertThat(mBatteryChartPreferenceController.mIsExpanded).isTrue();
     }
 
