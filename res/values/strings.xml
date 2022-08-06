@@ -3195,8 +3195,8 @@
     <string name="sim_reenter_new">Re\u2011type new PIN</string>
     <!-- SIM card lock settings screen, SIM PIN dialog message instruction  [CHAR LIMIT=40] -->
     <string name="sim_change_pin">SIM PIN</string>
-    <!-- SIM card lock settings screen, SIM PIN dialog message when wrong PIN is entered  [CHAR LIMIT=40] -->
-    <string name="sim_bad_pin">Incorrect PIN</string>
+    <!-- SIM card lock settings screen, SIM PIN dialog message when invalid PIN is entered  [CHAR LIMIT=40] -->
+    <string name="sim_invalid_pin_hint">Type a PIN that is 4 to 8 numbers</string>
     <!-- SIM card lock settings screen, SIM PIN dialog message when PINs don't match  [CHAR LIMIT=40] -->
     <string name="sim_pins_dont_match">PINs don\u2019t match</string>
     <!-- SIM card lock settings screen, toast after not entering correct SIM PIN  [CHAR LIMIT=40] -->
@@ -6413,6 +6413,8 @@
     <!-- [CHAR_LIMIT=NONE] Battery percentage: Description for preference -->
     <string name="battery_percentage_description">Show battery percentage in status bar</string>
 
+    <!-- [CHAR_LIMIT=NONE] Battery usage main screen chart graph hint since last full charge -->
+    <string name="battery_usage_chart_graph_hint_last_full_charge">Battery level since last full charge</string>
     <!-- [CHAR_LIMIT=NONE] Battery usage main screen chart graph hint -->
     <string name="battery_usage_chart_graph_hint">Battery level for past 24 hr</string>
     <!-- [CHAR_LIMIT=NONE] Battery app usage section header since last full charge -->
