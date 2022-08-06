@@ -171,16 +171,6 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     }
 
     @Override
-    protected void onStop() {
-        if (!isChangingConfigurations() && shouldFinishWhenBackgrounded()
-                && !BiometricUtils.isAnyMultiBiometricFlow(this)) {
-            setResult(RESULT_TIMEOUT);
-            finish();
-        }
-        super.onStop();
-    }
-
-    @Override
     protected boolean shouldFinishWhenBackgrounded() {
         return super.shouldFinishWhenBackgrounded() && !mNextClicked;
     }

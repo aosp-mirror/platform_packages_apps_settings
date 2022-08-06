@@ -40,6 +40,8 @@ public class BluetoothCodecDialogPreferenceController extends
     private static final String KEY = "bluetooth_audio_codec_settings";
     private static final String TAG = "BtCodecCtr";
 
+    private static final int SOURCE_CODEC_TYPE_OPUS = 6; // TODO remove in U
+
     private final Callback mCallback;
 
     public BluetoothCodecDialogPreferenceController(Context context, Lifecycle lifecycle,
@@ -118,6 +120,14 @@ public class BluetoothCodecDialogPreferenceController extends
                 codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC;
                 codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
                 break;
+            case 6:
+                codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_LC3;
+                codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
+                break;
+            case 7:
+                codecTypeValue = SOURCE_CODEC_TYPE_OPUS; // TODO update in U
+                codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
+                break;
             default:
                 break;
         }
@@ -179,6 +189,9 @@ public class BluetoothCodecDialogPreferenceController extends
                 break;
             case BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC:
                 index = 5;
+                break;
+            case SOURCE_CODEC_TYPE_OPUS: // TODO update in U
+                index = 7;
                 break;
             default:
                 Log.e(TAG, "Unsupported config:" + config);

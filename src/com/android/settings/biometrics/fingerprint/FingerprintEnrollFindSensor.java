@@ -249,15 +249,10 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
 
     @Override
     protected void onStop() {
+        super.onStop();
         if (mAnimation != null) {
             mAnimation.pauseAnimation();
         }
-        if (!isChangingConfigurations() && shouldFinishWhenBackgrounded()
-                && !BiometricUtils.isAnyMultiBiometricFlow(this)) {
-            setResult(RESULT_TIMEOUT);
-            finish();
-        }
-        super.onStop();
     }
 
     @Override

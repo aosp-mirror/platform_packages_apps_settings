@@ -109,16 +109,6 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     }
 
     @Override
-    protected void onStop() {
-        if (!isChangingConfigurations() && shouldFinishWhenBackgrounded()
-                && !BiometricUtils.isAnyMultiBiometricFlow(this)) {
-            setResult(RESULT_TIMEOUT);
-            finish();
-        }
-        super.onStop();
-    }
-
-    @Override
     protected void onNextButtonClick(View view) {
         updateFingerprintSuggestionEnableState();
         setResult(RESULT_FINISHED);
