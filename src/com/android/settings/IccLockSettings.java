@@ -476,7 +476,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
         mPin = preference.getText();
         if (!reasonablePin(mPin)) {
             // inject error message and display dialog again
-            mError = mRes.getString(R.string.sim_bad_pin);
+            mError = mRes.getString(R.string.sim_invalid_pin_hint);
             showPinDialog();
             return;
         }
