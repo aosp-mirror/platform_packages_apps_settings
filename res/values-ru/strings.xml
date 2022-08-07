@@ -1918,10 +1918,10 @@
     <string name="location_app_level_permissions" msgid="907206607664629759">"Доступ приложений к геоданным"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Доступ к геоданным отключен"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
-      <item quantity="one"> Приложения с доступом к данным о местоположении: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> из <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
-      <item quantity="few"> Приложения с доступом к данным о местоположении: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> из <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
-      <item quantity="many"> Приложения с доступом к данным о местоположении: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> из <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
-      <item quantity="other"> Приложения с доступом к данным о местоположении: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> из <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
+      <item quantity="one"> Доступ к геоданным есть у <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> приложения из <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
+      <item quantity="few"> Доступ к геоданным есть у <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> приложений из <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
+      <item quantity="many"> Доступ к геоданным есть у <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> приложений из <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
+      <item quantity="other"> Доступ к геоданным есть у <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> приложения из <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
     </plurals>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"Доступ за последнее время"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"Показать все"</string>
@@ -1991,8 +1991,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Задайте PIN-код"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Задайте PIN-код для рабочего профиля"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Задайте графический ключ"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Чтобы обеспечить дополнительную безопасность, задайте графический ключ для разблокировки этого устройства"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Задайте граф. ключ для рабочего профиля"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Задайте пароль"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Задайте графический ключ"</string>
@@ -4110,8 +4109,18 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"<xliff:g id="APP_NAME">%1$s</xliff:g>: все уведомления"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Показывать все уведомления приложения \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Адаптивные уведомления"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="one">Примерно <xliff:g id="NUMBER_1">%,d</xliff:g> уведомление в день</item>
+      <item quantity="few">Примерно <xliff:g id="NUMBER_1">%,d</xliff:g> уведомления в день</item>
+      <item quantity="many">Примерно <xliff:g id="NUMBER_1">%,d</xliff:g> уведомлений в день</item>
+      <item quantity="other">Примерно <xliff:g id="NUMBER_1">%,d</xliff:g> уведомления в день</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="one">Примерно <xliff:g id="NUMBER_1">%,d</xliff:g> уведомление в неделю</item>
+      <item quantity="few">Примерно <xliff:g id="NUMBER_1">%,d</xliff:g> уведомления в неделю</item>
+      <item quantity="many">Примерно <xliff:g id="NUMBER_1">%,d</xliff:g> уведомлений в неделю</item>
+      <item quantity="other">Примерно <xliff:g id="NUMBER_1">%,d</xliff:g> уведомления в неделю</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Никогда"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Уведомления на устройствах и в приложениях"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Выбрать приложения и устройства, у которых есть доступ к уведомлениям"</string>
@@ -5428,7 +5437,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Не менять настройки"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Вибрация"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Отключение звука"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"Чтобы включить эту функцию, сначала измените параметр \"Долгое нажатие кнопки питания\" в ее меню."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"Чтобы включить эту функцию, сначала установите для параметра \"Долгое нажатие кнопки питания\" значение \"Меню кнопки питания\"."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Сведения о сети"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"У приложений на телефоне есть доступ к названию устройства. Его могут видеть другие пользователи, когда вы подключаетесь к устройствам по Bluetooth или настраиваете точку доступа Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Устройства"</string>
@@ -5721,15 +5730,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"виджеты управления устройством"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Карты, билеты и пропуска"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"Карты, билеты и пропуска"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"Долгое нажатие кнопки питания"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"После долгого нажатия запускается Ассистент"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"После долгого нажатия открывается меню кнопки питания"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Долгое нажатие отключено"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Долгое нажатие кнопки питания"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Выберите, что открывается при долгом нажатии кнопки питания"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Меню кнопки питания"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Цифровой помощник"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Открытие цифрового помощника"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Открытие меню кнопки питания"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Сначала необходимо настроить блокировку экрана"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Запускать Ассистента долгим нажатием"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Нажмите и удерживайте кнопку питания для запуска Ассистента"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Меню кнопки питания и экстренных вызовов:\nЧтобы его открыть, одновременно нажмите кнопки питания и увеличения громкости."</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Отключение звука звонка:\nБыстрый запуск функции доступен в меню регулировки громкости."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Меню кнопки питания\nОдновременно нажмите кнопку питания и кнопку увеличения громкости."</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Отключение звука звонка\nНажмите кнопку регулировки громкости, чтобы применить сочетание клавиш."</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Длительность нажатия и удержания"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Настройте чувствительность, выбрав длительность нажатия и удержания кнопки питания."</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Быстро"</string>

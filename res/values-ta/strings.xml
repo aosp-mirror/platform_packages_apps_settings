@@ -1947,8 +1947,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"பின்னை அமையுங்கள்"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"பணிக்கான பின்னை அமையுங்கள்"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"பேட்டர்னை அமையுங்கள்"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"கூடுதல் பாதுகாப்பிற்கு, சாதனத்தை அன்லாக் செய்வதற்கான பேட்டர்னை அமைக்கவும்"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"பணிக்கான பேட்டர்னை அமையுங்கள்"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"கடவுச்சொல்லை அமைக்கவும்"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"வடிவத்தை அமைக்கவும்"</string>
@@ -4022,8 +4021,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"அனைத்து \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" அறிவிப்புகளும்"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"அனைத்து <xliff:g id="APP_NAME">%1$s</xliff:g> அறிவிப்புகளும்"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"சூழலுக்கேற்ற அறிவிப்புகள்"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="other">ஒரு நாளுக்குச் சுமார் <xliff:g id="NUMBER_1">%,d</xliff:g> அறிவிப்புகள்</item>
+      <item quantity="one">ஒரு நாளுக்குச் சுமார் <xliff:g id="NUMBER_0">%d</xliff:g> அறிவிப்பு</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="other">ஒரு வாரத்திற்குச் சுமார் <xliff:g id="NUMBER_1">%,d</xliff:g> அறிவிப்புகள்</item>
+      <item quantity="one">ஒரு வாரத்திற்குச் சுமார் <xliff:g id="NUMBER_0">%d</xliff:g> அறிவிப்பு</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"ஒருபோதும் அனுப்பியதில்லை"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"சாதனம் &amp; ஆப்ஸ் அறிவிப்புகள்"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"எந்தெந்த ஆப்ஸும் சாதனங்களும் அறிவிப்புகளைப் படிக்கலாம் என்பதைக் கட்டுப்படுத்தலாம்"</string>
@@ -5264,7 +5269,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"எதுவும் செய்ய வேண்டாம்"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"அதிர்வு"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"ஒலியடக்கு"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"இயக்க, \"பவர் பட்டனை அழுத்திப் பிடித்திருக்கவும்\" என்பதைப் பவர் மெனுவில் மாற்றுங்கள்."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"இயக்க, \"பவர் பட்டனை அழுத்திப் பிடித்திருக்கவும்\" என்பதைப் பவர் மெனுவில் மாற்றுங்கள்."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"நெட்வொர்க் விவரங்கள்"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"உங்கள் மொபைலில் உள்ள ஆப்ஸால் உங்கள் சாதனத்தின் பெயரைப் பார்க்க முடியும். புளூடூத் சாதனங்கள், வைஃபை நெட்வொர்க் ஆகியவற்றுடன் இணைக்கும்போதோ வைஃபை ஹாட்ஸ்பாட்டை அமைக்கும்போதோ அப்பெயர் பிறருக்கும் காட்டப்படக்கூடும்."</string>
     <string name="devices_title" msgid="649715719278562515">"சாதனங்கள்"</string>
@@ -5551,15 +5556,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"சாதனக் கட்டுப்பாடுகள்"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"கார்டுகளும் பாஸ்களும்"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"கார்டுகளும் பாஸ்களும்"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"பவர் பட்டனை அழுத்திப் பிடித்தல்"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Assistantடை இயக்க அழுத்திப் பிடித்திருக்கவும்"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"பவர் மெனு தோன்றுவதற்கு அழுத்திப் பிடித்திருக்கவும்"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Assistantடை முடக்க அழுத்திப் பிடித்திருக்கவும்"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"பவர் பட்டனை அழுத்திப் பிடித்திருக்கவும்"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"அணுக, பவர் பட்டனை அழுத்திப் பிடியுங்கள்"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"பவர் மெனு"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"டிஜிட்டல் அசிஸ்டண்ட்"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"டிஜிட்டல் அசிஸ்டண்ட்டை அணுகுங்கள்"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"பவர் மெனுவை அணுகுங்கள்"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"பயன்படுத்த முதலில் திரைப்பூட்டை அமைக்கவும்"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Assistantடிற்காக அழுத்திப் பிடித்தல்"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"பவர் பட்டனை அழுத்திப் பிடித்து Assistantடைத் தொடங்கலாம்"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"பவர் மற்றும் அவசரகால மெனு:\nபவர் பட்டனையும் ஒலியளவை அதிகரிக்கும் பட்டனையும் ஒன்றாக அழுத்தவும்."</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"ஒலிப்பதைத் தடுத்தல்:\nஇதற்கான ஷார்ட்கட் ஒலியளவு மெனுவில் உள்ளது."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"பவர் மெனு:\nபவர் பட்டனையும் ஒலியளவை அதிகரிக்கும் பட்டனையும் ஒன்றாக அழுத்தவும்"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"ஒலிப்பதைத் தடுத்தல்:\nஷார்ட்கட்டிற்கு ஒலியளவு பட்டனை அழுத்தவும்"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"அழுத்திப் பிடிப்பதற்கான கால அளவு"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"எவ்வளவு நேரம் பவர் பட்டனை அழுத்திப் பிடிக்க வேண்டும் என்பதைத் தேர்ந்தெடுப்பதன் மூலம் உணர்திறனைச் சரிசெய்யலாம்"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"குறைந்தபட்சம்"</string>

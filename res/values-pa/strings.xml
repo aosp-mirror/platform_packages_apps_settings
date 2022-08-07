@@ -1166,7 +1166,7 @@
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6 ਪਤੇ"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"ਰੱਖਿਅਤ ਕੀਤੇ ਨੈੱਟਵਰਕ"</string>
-    <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"ਗਾਹਕੀਆਂ"</string>
+    <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"ਹੋਰ ਨੈੱਟਵਰਕ"</string>
     <string name="wifi_advanced_settings_label" msgid="5880605751602184383">"IP ਸੈਟਿੰਗਾਂ"</string>
     <string name="wifi_advanced_not_available" msgid="8701003884367299092">"ਵਾਈ-ਫਾਈ ਉੱਨਤ ਸੈਟਿੰਗਾਂ ਇਸ ਵਰਤੋਂਕਾਰ ਲਈ ਉਪਲਬਧ ਨਹੀਂ ਹਨ"</string>
@@ -1947,8 +1947,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"ਪਿੰਨ ਸੈੱਟ ਕਰੋ"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"ਕੰਮ ਸੰਬੰਧੀ ਪਿੰਨ ਸੈੱਟ ਕਰੋ"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"ਪੈਟਰਨ ਸੈੱਟ ਕਰੋ"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"ਵਾਧੂ ਸੁਰੱਖਿਆ ਲਈ, ਡੀਵਾਈਸ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਵਾਸਤੇ ਪੈਟਰਨ ਸੈੱਟ ਕਰੋ"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"ਕੰਮ ਸੰਬੰਧੀ ਪੈਟਰਨ ਸੈੱਟ ਕਰੋ"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"ਫਿੰਗਰਪ੍ਰਿੰਟ ਵਰਤਣ ਲਈ ਪਾਸਵਰਡ ਸੈੱਟ ਕਰੋ"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"ਫਿੰਗਰਪ੍ਰਿੰਟ ਵਰਤਣ ਲਈ ਪੈਟਰਨ ਸੈੱਟ ਕਰੋ"</string>
@@ -4022,8 +4021,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"ਸਾਰੀਆਂ \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" ਸੂਚਨਾਵਾਂ"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"ਸਾਰੀਆਂ <xliff:g id="APP_NAME">%1$s</xliff:g> ਸੂਚਨਾਵਾਂ"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"ਅਡੈਪਟਿਵ ਸੂਚਨਾਵਾਂ"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="one">ਪ੍ਰਤੀ ਦਿਨ ਲਗਭਗ <xliff:g id="NUMBER_1">%,d</xliff:g> ਸੂਚਨਾ</item>
+      <item quantity="other">ਪ੍ਰਤੀ ਦਿਨ ਲਗਭਗ <xliff:g id="NUMBER_1">%,d</xliff:g> ਸੂਚਨਾਵਾਂ</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="one">ਪ੍ਰਤੀ ਹਫ਼ਤੇ ਲਗਭਗ <xliff:g id="NUMBER_1">%,d</xliff:g> ਸੂਚਨਾ</item>
+      <item quantity="other">ਪ੍ਰਤੀ ਹਫ਼ਤੇ ਲਗਭਗ <xliff:g id="NUMBER_1">%,d</xliff:g> ਸੂਚਨਾਵਾਂ</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"ਕਦੇ ਵੀ ਨਹੀਂ"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"ਡੀਵਾਈਸ ਅਤੇ ਐਪ ਸੂਚਨਾਵਾਂ"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"ਕੰਟਰੋਲ ਕਰੋ ਕਿ ਕਿਹੜੀਆਂ ਐਪਾਂ ਅਤੇ ਡੀਵਾਈਸਾਂ ਵੱਲੋਂ ਸੂਚਨਾਵਾਂ ਪੜ੍ਹੀਆਂ ਜਾ ਸਕਦੀਆਂ ਹਨ"</string>
@@ -5264,7 +5269,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"ਕੁਝ ਨਾ ਕਰੋ"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"ਥਰਥਰਾਹਟ ਕਰੋ"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"ਮਿਊਟ ਕਰੋ"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"ਚਾਲੂ ਕਰਨ ਲਈ, ਪਹਿਲਾਂ ਪਾਵਰ ਮੀਨੂ ਲਈ \"ਪਾਵਰ ਬਟਨ ਨੂੰ ਦਬਾਈ ਰੱਖੋ\" ਵਿਕਲਪ ਨੂੰ ਬਦਲੋ।"</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"ਚਾਲੂ ਕਰਨ ਲਈ, ਪਹਿਲਾਂ ਪਾਵਰ ਮੀਨੂ ਲਈ \"ਪਾਵਰ ਬਟਨ ਨੂੰ ਦਬਾਈ ਰੱਖੋ\" ਵਿਕਲਪ ਨੂੰ ਬਦਲੋ।"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"ਨੈੱਟਵਰਕ ਵੇਰਵੇ"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"ਤੁਹਾਡੇ ਡੀਵਾਈਸ ਦਾ ਨਾਮ ਤੁਹਾਡੇ ਫ਼ੋਨ \'ਤੇ ਐਪਾਂ ਨੂੰ ਦਿਖਾਈ ਦਿੰਦਾ ਹੈ। ਇਸਨੂੰ ਤੁਹਾਡੇ ਬਲੂਟੁੱਥ ਡੀਵਾਈਸ ਨਾਲ ਕਨੈਕਟ ਕਰਨ, ਵਾਈ-ਫਾਈ ਨੈੱਟਵਰਕ ਨਾਲ ਕਨੈਕਟ ਕਰਨ ਜਾਂ ਵਾਈ-ਫਾਈ ਹੌਟਸਪੌਟ ਸੈੱਟਅੱਪ ਕਰਨ \'ਤੇ ਹੋਰ ਲੋਕਾਂ ਵੱਲੋਂ ਵੀ ਦੇਖਿਆ ਜਾ ਸਕਦਾ ਹੈ।"</string>
     <string name="devices_title" msgid="649715719278562515">"ਡੀਵਾਈਸਾਂ"</string>
@@ -5551,15 +5556,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"ਡੀਵਾਈਸ ਕੰਟਰੋਲ"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"ਕਾਰਡ ਅਤੇ ਪਾਸ"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"ਕਾਰਡ ਅਤੇ ਪਾਸ"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"ਪਾਵਰ ਬਟਨ ਨੂੰ ਦਬਾਈ ਰੱਖੋ"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Assistant ਲਈ ਦਬਾਈ ਰੱਖੋ"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"ਪਾਵਰ ਮੀਨੂ ਲਈ ਦਬਾਈ ਰੱਖੋ"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"ਦਬਾਈ ਰੱਖਣ ਦੀ ਸੁਵਿਧਾ ਬੰਦ ਹੈ"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"ਪਾਵਰ ਬਟਨ ਨੂੰ ਦਬਾ ਕੇ ਰੱਖੋ"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"ਪਹੁੰਚ ਲਈ ਪਾਵਰ ਬਟਨ ਨੂੰ ਦਬਾ ਕੇ ਰੱਖੋ"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"ਪਾਵਰ ਮੀਨੂ"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"ਡਿਜੀਟਲ ਸਹਾਇਕ"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"ਡਿਜੀਟਲ ਸਹਾਇਕ ਤੱਕ ਪਹੁੰਚ ਕਰੋ"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"ਪਾਵਰ ਮੀਨੂ ਤੱਕ ਪਹੁੰਚ ਕਰੋ"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"ਵਰਤਣ ਲਈ, ਪਹਿਲਾਂ ਸਕ੍ਰੀਨ ਲਾਕ ਸੈੱਟ ਕਰੋ"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Assistant ਲਈ ਪਾਵਰ ਬਟਨ ਨੂੰ ਕੁਝ ਸਮਾਂ ਦਬਾਈ ਰੱਖੋ"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"ਪਾਵਰ ਬਟਨ ਨੂੰ ਕੁਝ ਸਮਾਂ ਦਬਾਈ ਰੱਖ ਕੇ Assistant ਨੂੰ ਟ੍ਰਿਗਰ ਕਰੋ"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"ਪਾਵਰ ਅਤੇ ਐਮਰਜੈਂਸੀ ਮੀਨੂ:\nਪਾਵਰ ਬਟਨ ਅਤੇ \'ਅਵਾਜ਼ ਵਧਾਓ\' ਬਟਨ ਨੂੰ ਇੱਕੋ ਸਮੇਂ ਦਬਾਓ।"</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"ਘੰਟੀ ਵੱਜਣ ਤੋਂ ਰੋਕੋ:\nਸ਼ਾਰਟਕੱਟ ਅਵਾਜ਼ ਮੀਨੂ ਵਿੱਚ ਉਪਲਬਧ ਹੈ।"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"ਪਾਵਰ ਮੀਨੂ:\nਪਾਵਰ ਬਟਨ ਅਤੇ \'ਅਵਾਜ਼ ਵਧਾਓ\' ਬਟਨ ਨੂੰ ਇੱਕੋ ਸਮੇਂ ਦਬਾ ਕੇ ਰੱਖੋ"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"ਘੰਟੀ ਵੱਜਣ ਤੋਂ ਰੋਕੋ:\nਸ਼ਾਰਟਕੱਟ ਲਈ ਅਵਾਜ਼ ਬਟਨ ਦਬਾਓ"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"ਦਬਾਈ ਰੱਖਣ ਦੀ ਮਿਆਦ"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"ਪਾਵਰ ਬਟਨ ਨੂੰ ਦਬਾਈ ਰੱਖਣ ਦੀ ਮਿਆਦ ਦੀ ਚੋਣ ਕਰਕੇ ਸੰਵੇਦਨਸ਼ੀਲਤਾ ਨੂੰ ਵਿਵਸਥਿਤ ਕਰੋ"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"ਛੋਟਾ"</string>

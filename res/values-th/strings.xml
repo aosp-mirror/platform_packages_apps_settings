@@ -1947,8 +1947,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"ตั้ง PIN"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"ตั้ง PIN โปรไฟล์งาน"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"ตั้งรูปแบบ"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"ตั้งค่ารูปแบบสำหรับปลดล็อกอุปกรณ์เพื่อให้ปลอดภัยยิ่งขึ้น"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"ตั้งรูปแบบโปรไฟล์งาน"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"ตั้งรหัสผ่านเพื่อใช้ลายนิ้วมือ"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"ตั้งรูปแบบเพื่อใช้ลายนิ้วมือ"</string>
@@ -4022,8 +4021,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"การแจ้งเตือนทั้งหมดของ \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"การแจ้งเตือนทั้งหมดของ <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"การแจ้งเตือนแบบปรับอัตโนมัติ"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="other">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_1">%,d</xliff:g> ครั้งต่อวัน</item>
+      <item quantity="one">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_0">%d</xliff:g> ครั้งต่อวัน</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="other">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_1">%,d</xliff:g> ครั้งต่อสัปดาห์</item>
+      <item quantity="one">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_0">%d</xliff:g> ครั้งต่อสัปดาห์</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"ไม่เลย"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"การแจ้งเตือนของอุปกรณ์และแอป"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"ควบคุมว่าจะให้แอปและอุปกรณ์ใดบ้างอ่านการแจ้งเตือนได้"</string>
@@ -5264,7 +5269,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"ไม่ต้องทำอะไร"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"สั่น"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"ปิดเสียง"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"หากต้องการเปิดใช้งาน ก่อนอื่นให้เปลี่ยน \"กดปุ่มเปิด/ปิดค้างไว้\" เป็นเมนูเปิด/ปิด"</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"หากต้องการเปิดใช้ ก่อนอื่นให้เปลี่ยน \"กดปุ่มเปิด/ปิดค้างไว้\" เป็นเมนูเปิด/ปิด"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"รายละเอียดเครือข่าย"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"แอปในโทรศัพท์จะเห็นชื่อของอุปกรณ์ และคนอื่นก็อาจเห็นเช่นกันหากคุณเชื่อมต่อกับอุปกรณ์บลูทูธหรือเครือข่าย Wi-Fi หรือตั้งค่าฮอตสปอต Wi-Fi"</string>
     <string name="devices_title" msgid="649715719278562515">"อุปกรณ์"</string>
@@ -5551,15 +5556,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"ระบบควบคุมอุปกรณ์"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"บัตรและบัตรผ่าน"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"บัตรและบัตรผ่าน"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"กดปุ่มเปิด/ปิดค้างไว้"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"กดค้างเพื่อเปิดใช้ Assistant"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"กดค้างเพื่อแสดงเมนูเปิด/ปิด"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"การกดค้างปิดใช้อยู่"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"กดปุ่มเปิด/ปิดค้างไว้"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"กดปุ่มเปิด/ปิดค้างไว้เพื่อเข้าถึง"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"เมนูเปิด/ปิด"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"ผู้ช่วยดิจิทัล"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"เข้าถึงผู้ช่วยดิจิทัล"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"เข้าถึงเมนูเปิด/ปิด"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"หากต้องการใช้ ให้ตั้งค่าการล็อกหน้าจอก่อน"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"กดค้างไว้เพื่อเปิดใช้งาน Assistant"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"เรียกให้ Assistant ทำงานโดยกดปุ่มเปิด/ปิดค้างไว้"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"เมนูเปิด/ปิดและกรณีฉุกเฉิน\nกดปุ่มเปิด/ปิดและปุ่มเพิ่มระดับเสียงพร้อมกัน"</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"ป้องกันการส่งเสียง\nมีทางลัดให้ใช้ในเมนูระดับเสียง"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"เมนูเปิด/ปิด\nกดปุ่มเปิด/ปิดและปุ่มเพิ่มระดับเสียงพร้อมกัน"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"ป้องกันการส่งเสียง\nกดปุ่มปรับระดับเสียงเพื่อใช้ทางลัด"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"ระยะเวลาการกดค้าง"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"ปรับความไวโดยเลือกระยะเวลาการกดปุ่มเปิด/ปิดค้างไว้"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"ไม่นาน"</string>

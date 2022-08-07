@@ -1947,8 +1947,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"এটা পিন ছেট কৰক"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"কৰ্মস্থানৰ বাবে এটা পিন ছেট কৰক"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"এটা আৰ্হি ছেট কৰক"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"অতিৰিক্ত সুৰক্ষাৰ বাবে, ডিভাইচটো আনলক কৰিবলৈ এটা আৰ্হি ছেট কৰক"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"কৰ্মস্থানৰ বাবে এটা আৰ্হি ছেট কৰক"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"ফিংগাৰপ্ৰিণ্ট ব্যৱহাৰ কৰিবলৈ পাছৱৰ্ড ছেট কৰক"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"ফিংগাৰপ্ৰিণ্ট ব্যৱহাৰ কৰিবলৈ আৰ্হি দিয়ক"</string>
@@ -2055,7 +2054,7 @@
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"আপোনাৰ ডিভাইচ আৰু ব্যক্তিগত ডেটা অজ্ঞাত এপৰ আক্ৰমণৰ বলি হোৱাৰ সম্ভাৱনা অধিক। এই উৎসৰ পৰা এপ্ ইনষ্টল কৰি, আপুনি সেইবিলাক ব্যৱহাৰ কৰাৰ ফলত আপোনাৰ ডিভাইচৰ হ\'ব পৰা ক্ষতি বা ডেটা হানিৰ বাবে আপুনিয়েই দায়বব্ধ হ\'ব বুলি সন্মতি দিছে।"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"উচ্চখাপৰ ছেটিং"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"ছেটিঙৰ অধিক বিকল্প সক্ষম কৰক"</string>
-    <string name="application_info_label" msgid="1015706497694165866">"এপ-সম্পৰ্কীয় তথ্য"</string>
+    <string name="application_info_label" msgid="1015706497694165866">"এপ্ সম্পৰ্কীয় তথ্য"</string>
     <string name="storage_label" msgid="2522307545547515733">"ষ্ট’ৰেজ"</string>
     <string name="auto_launch_label" msgid="4069860409309364872">"ডিফ’ল্ট অনুযায়ী খোলক"</string>
     <string name="auto_launch_label_generic" msgid="5033137408273064599">"ডিফ’ল্টসমূহ"</string>
@@ -2875,7 +2874,7 @@
     <string name="usage_type_computed_power" msgid="5191902025833668752">"গণনা কৰা পাৱাৰৰ ব্যৱহাৰ"</string>
     <string name="usage_type_actual_power" msgid="1221358930299037926">"নিৰীক্ষণ কৰা পাৱাৰৰ ব্যৱহাৰ"</string>
     <string name="battery_action_stop" msgid="6998228610098034316">"বলেৰে বন্ধ কৰক"</string>
-    <string name="battery_action_app_details" msgid="7201369216798227707">"এপ-সম্পৰ্কীয় তথ্য"</string>
+    <string name="battery_action_app_details" msgid="7201369216798227707">"এপ্ সম্পৰ্কীয় তথ্য"</string>
     <string name="battery_action_app_settings" msgid="2437124469335488464">"এপ্ ছেটিং"</string>
     <string name="battery_action_display" msgid="6515712081248863749">"স্ক্ৰীন ছেটিং"</string>
     <string name="battery_action_wifi" msgid="1829212604573932607">"ৱাই-ফাই ছেটিং"</string>
@@ -4022,8 +4021,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"\"<xliff:g id="APP_NAME">%1$s</xliff:g>\"ৰ আটাইবোৰ জাননী"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g>ৰ আটাইবোৰ জাননী"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"অভিযোজিত জাননী"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="one">প্ৰতি দিনে প্ৰায় <xliff:g id="NUMBER_1">%,d</xliff:g> টা জাননী</item>
+      <item quantity="other">প্ৰতি দিনে প্ৰায় <xliff:g id="NUMBER_1">%,d</xliff:g> টা জাননী</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="one">প্ৰতি সপ্তাহে প্ৰায় <xliff:g id="NUMBER_1">%,d</xliff:g> টা জাননী</item>
+      <item quantity="other">প্ৰতি সপ্তাহে প্ৰায় <xliff:g id="NUMBER_1">%,d</xliff:g> টা জাননী</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"কেতিয়াও পঠোৱা নহয়"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"ডিভাইচ আৰু এপৰ জাননী"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"কোনসমূহ এপ আৰু ডিভাইচে জাননী পঢ়িব পাৰে সেইয়া নিয়ন্ত্ৰণ কৰক"</string>
@@ -5264,7 +5269,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"একো নকৰিব"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"কম্পন"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"মিউট"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"সক্ষম কৰিবলৈ, প্ৰথমতে \"পাৱাৰ বুটামটো টিপি ধৰি ৰাখক\"টো পাৱাৰ মেনুলৈ সলনি কৰক।"</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"সক্ষম কৰিবলৈ, প্ৰথমতে \"পাৱাৰ বুটামটো টিপি ধৰি ৰাখক\"টো পাৱাৰ মেনুলৈ সলনি কৰক।"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"নেটৱৰ্কৰ সবিশেষ"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"আপোনাৰ ডিভাইচটোৰ নাম আপোনাৰ ফ’নটোত থকা এপ্‌সমূহৰ বাবে দৃশ্যমান। আপুনি ব্লুটুথ ডিভাইচৰ সৈতে সংযোগ কৰোঁতে, ৱাই-ফাই নেটৱৰ্কৰ সৈতে সংযোগ কৰোঁতে অথবা ৱাই-ফাই হটস্পট ছেট আপ কৰোঁতেও এইটো অন্য লোকে দেখা পাব পাৰে।"</string>
     <string name="devices_title" msgid="649715719278562515">"ডিভাইচসমূহ"</string>
@@ -5551,15 +5556,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"ডিভাইচৰ নিয়ন্ত্ৰণসমূহ"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"কাৰ্ড আৰু পাছসমূহ"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"কাৰ্ড আৰু পাছসমূহ"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"পাৱাৰ বুটামটো টিপি ধৰি ৰাখক"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Assistantৰ বাবে টিপি ধৰি ৰাখক"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"পাৱাৰ মেনুখনৰ বাবে টিপি ধৰি ৰাখক"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Assistant আৰম্ভ কৰিবলৈ পাৱাৰ বুটামটো টিপি ধৰি ৰখাৰ সুবিধাটো অক্ষম কৰা হৈছে"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"পাৱাৰ বুটামটো টিপি ধৰি ৰাখক"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"এক্সেছ কৰিবলৈ পাৱাৰ বুটামটো টিপি ধৰি ৰাখক"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"পাৱাৰ মেনু"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"ডিজিটেল সহায়ক"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"ডিজিটেল সহায়ক এক্সেছ কৰক"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"পাৱাৰ মেনু এক্সেছ কৰক"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"ব্যৱহাৰ কৰিবলৈ প্ৰথমে এটা স্ক্ৰীন লক ছেট কৰক"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Assistantৰ বাবে টিপি ধৰি ৰাখক"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"পাৱাৰ বুটাম টিপি ধৰি ৰাখি Assistant সক্ৰিয় কৰক"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"পাৱাৰ আৰু জৰুৰীকালীন মেনু:\nপাৱাৰ আৰু ভলিউম বঢ়োৱা বুটাম একেলগে টিপক।"</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"ৰিং কৰাত বাধা দিয়ক:\nভলিউমৰ মেনুখনত শ্বৰ্টকাট উপলব্ধ।"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"পাৱাৰ মেনু:\nপাৱাৰ বুটামটো আৰু ভলিউম বঢ়োৱা বুটামটো একেলেগে টিপক"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"ৰিং কৰাত বাধা দিয়ক:\nশ্বৰ্টকাটটোৰ বাবে ভলিউমৰ এটা বুটাম টিপক"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"টিপি ধৰি ৰখাৰ সময় অৱধি"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"পাৱাৰ বুটামটো কিমান সময়লৈ টিপি ধৰি ৰাখিব লাগে সেয়া বাছনি কৰি সংবেদনশীলতা মিলাওক"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"চুটি"</string>

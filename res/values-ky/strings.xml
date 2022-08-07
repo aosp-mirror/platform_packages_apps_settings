@@ -647,7 +647,7 @@
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="4870877800737248926">"Түзмөктү коргоо функциялары жандырылганда, башкалар бул планшетти сиздин уруксатыңызсыз пайдалана албай калышат. Колдонгуңуз келген экран кулпусун тандаңыз."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Түзмөктү коргоо функциялары жандырылганда, башкалар бул түзмөктү сиздин уруксатыңызсыз пайдалана албай калышат. Колдонгуңуз келген экран кулпусун тандаңыз."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Түзмөктү коргоо функциялары жандырылганда, башкалар бул телефонду сиздин уруксатыңызсыз пайдалана албай калышат. Колдонгуңуз келген экран кулпусун тандаңыз."</string>
-    <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Экранды кулпулоонун көмөкчү ыкмасын тандаңыз"</string>
+    <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Экранды кулпулоонун кошумча ыкмасын тандаңыз"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Эгер экран кулпусун унутуп койсоңуз, IT администраторуңуз аны алып сала албайт."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Жумуш колдонмолору үчүн өзүнчө кулпу коюңуз"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Эгер кулпуну унутуп койсоңуз, аны IT администраторуңуз ачып берет"</string>
@@ -1947,8 +1947,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"PIN кодду коюңуз"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Жумуш профилинин PIN кодун коюңуз"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Графикалык ачкычты коюңуз"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Коопсуздукту жакшыртуу максатында түзмөктүн кулпусун ачуу үчүн графикалык ачкыч коюңуз"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Жумуш профилинин графикалык ачкычын коюңуз"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Сырсөздү коюңуз"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Графикалык ачкычты коюңуз"</string>
@@ -4022,8 +4021,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"\"<xliff:g id="APP_NAME">%1$s</xliff:g>\" колдонмосундагы бардык билдирмелер"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g> колдонмосунун бардык билдирмелери"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Ыңгайлаштырылуучу билдирмелер"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="other">Күнүнө болжолдуу <xliff:g id="NUMBER_1">%,d</xliff:g> билдирме</item>
+      <item quantity="one">Күнүнө болжолдуу <xliff:g id="NUMBER_0">%d</xliff:g> билдирме</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="other">Аптасына болжолдуу <xliff:g id="NUMBER_1">%,d</xliff:g> билдирме</item>
+      <item quantity="one">Аптасына болжолдуу <xliff:g id="NUMBER_0">%d</xliff:g> билдирме</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Эч качан"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Түзмөктөгү жана колдонмодогу билдирмелер"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Билдирмелерди кайсы колдонмолор көрө аларын белгилеңиз"</string>
@@ -5264,7 +5269,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Эч нерсе кылынбасын"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Дирилдөө"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Үнсүз"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"Иштетүү үчүн алгач кубат баскычынын менюсунан \"кубат баскычын коё бербей басып туруу\" опциясын өзгөртүңүз."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"Иштетүү үчүн алгач кубат баскычынын менюсунан \"кубат баскычын коё бербей басып туруу\" опциясын өзгөртүңүз."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Тармактын чоо-жайы"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Түзмөгүңүздүн аталышы телефонуңуздагы колдонмолорго көрүнүп турат. Bluetooth түзмөктөрүнө, Wi‑Fi тармагына туташканыңызда же Wi‑Fi байланыш түйүнүн жөндөгөнүңүздө, аны башка адамдар да көрүшү мүмкүн."</string>
     <string name="devices_title" msgid="649715719278562515">"Түзмөктөр"</string>
@@ -5551,15 +5556,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"түзмөктү башкаруу элементтери"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Карталар жана билеттер"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"карталар жана билеттер"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"Кубат баскычын коё бербей басып туруу"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Жардамчыга кайрылуу үчүн коё бербей басып туруңуз"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Кубат баскычынын менюсун ачуу үчүн коё бербей басып туруңуз"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Коё бербей басып туруу өчүрүлдү"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Кубат баскычын коё бербей басуу"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Мүмкүнчүлүк алуу үчүн кубат баскычын коё бербей басып туруу"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Кубат баскычынын менюсу"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Санариптик жардамчы"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Санариптик жардамчыга мүмкүнчүлүк алуу"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Кубат баскычынын менюсуна мүмкүнчүлүк алуу"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Алгач экранды кулпулоо ыкмасын тандаңыз"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Баскычты көпкө басып, Жардамчыны иштетүү"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Кубат баскычын көпкө басып, Жардамчыны иштетесиз"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Кубат баскычы жана Шашылыш билдирүү менюсу:\nКубат менен Үндү катуулатуу баскычтарын чогуу басыңыз."</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Шыңгыратуунун алдын алуу:\nЫкчам баскыч үндү катуулатуу менюсунда жеткиликтүү."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Кубат баскычынын менюсу:\nТелефонуңузду өчүрүү үчүн Кубат менен Үндү катуулатуу баскычтарын чогуу басыңыз"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Шыңгырдын үнүн өчүрүү:\nЫкчам баскычты колдонуу үчүн үндү катуулатуу/акырындатуу баскычын басыңыз"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Коё бербей басып туруунун узактыгы"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Сезгичтигин тууралоо үчүн кубат баскычын канчага чейин коё бербей басып туруу керектигин тандаңыз"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Кыска"</string>

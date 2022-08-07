@@ -1947,8 +1947,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Սահմանեք PIN կոդ"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Սահմանեք աշխատանքային պրոֆիլի PIN կոդ"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Սահմանեք նախշ"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Լրացուցիչ պաշտպանության նպատակով ավելացրեք նախշ սարքի ապակողպման համար"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Սահմանեք աշխատանքային պրոֆիլի նախշ"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Մատնահետքն օգտագործելու համար գաղտնաբառ մտածեք"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Մատնահետքն օգտագործելու համար ստեղծեք նախշ"</string>
@@ -4022,8 +4021,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"«<xliff:g id="APP_NAME">%1$s</xliff:g>» պիտակով բոլոր ծանուցումները"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g> հավելվածի բոլոր ծանուցումները"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Հարմարվող ծանուցումներ"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="one">Օրական մոտավորապես <xliff:g id="NUMBER_1">%d</xliff:g> ծանուցում</item>
+      <item quantity="other">Օրական մոտավորապես <xliff:g id="NUMBER_1">%d</xliff:g> ծանուցում</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="one">Շաբաթական մոտավորապես <xliff:g id="NUMBER_1">%d</xliff:g> ծանուցում</item>
+      <item quantity="other">Շաբաթական մոտավորապես <xliff:g id="NUMBER_1">%d</xliff:g> ծանուցում</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Երբեք"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Սարքերի և հավելվածների ծանուցումներ"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Ընտրել հավելվածներն ու սարքերը, որոնք կարող են կարդալ ծանուցումները"</string>
@@ -4224,7 +4229,7 @@
     <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{Ոչ մի կոնտակտ}=1{1 կոնտակտ}one{# կոնտակտ}other{# կոնտակտ}}"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Բոլորը"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Կոնտակտներ"</string>
-    <string name="zen_mode_from_starred" msgid="8616516644241652287">"Աստղանշված կոնտակտներ"</string>
+    <string name="zen_mode_from_starred" msgid="8616516644241652287">"Աստղանշված կոնտակտները"</string>
     <string name="zen_mode_from_some" msgid="3708450042225044524">"Որոշ մարդիկ կամ զրույցներ"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"Աստղանշված կոնտակտներից և կրկնվող զանգեր"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"Կոնտակտներից և կրկնվող զանգեր"</string>
@@ -5264,7 +5269,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Ոչինչ չանել"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Թրթռոց"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Անձայն"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"Միացնելու համար նախ նշեք, որ «Սնուցման կոճակի սեղմում և պահում» գործողությունը բացի սնուցման կոճակի ընտրացանկը։"</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"Միացնելու համար նախ նշեք, որ «Սեղմել և պահել սնուցման կոճակը» գործողության դեպքում սնուցման կոճակի ընտրացանկը բացվի։"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Ցանցի տվյալներ"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Ձեր սարքի անունը տեսանելի է հեռախոսում տեղադրված հավելվածներին։ Այն կարող են տեսնել օգտատերերը, երբ միանում եք Bluetooth սարքերի, Wi-Fi ցանցի, կամ կարգավորում եք Wi-Fi թեժ կետ։"</string>
     <string name="devices_title" msgid="649715719278562515">"Սարքեր"</string>
@@ -5551,15 +5556,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"սարքերի կառավարման տարրեր"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Քարտեր և տոմսեր"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"քարտեր և տոմսեր"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"Սնուցման կոճակի սեղմում և պահում"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Սեղմել և պահելուց հետո միանում է Օգնականը"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Սեղմել և պահելուց հետո բացվում է սնուցման կոճակի ընտրացանկը"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Սեղմում և պահումն անջատված է"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Սեղմած պահել սնուցման կոճակը"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Ընտրեք, թե ինչ բացվի՝ սնուցման կոճակը սեղմած պահելու դեպքում"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Սնուցման կոճակի ընտրացանկ"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Թվային օգնական"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Բացել թվային օգնականը"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Բացել սնուցման կոճակի ընտրացանկը"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Օգտագործելու համար նախ սահմանեք էկրանի կողպման եղանակը"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Սեղմած պահել՝ Օգնականը միացնելու համար"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Ակտիվացրեք Օգնականը՝ երկար սեղմած պահելով սնուցման կոճակը"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Սնուցման կոճակի և արտակարգ իրավիճակների տեղեկությունների ընտրացանկ\nՄիաժամանակ սեղմեք սնուցման և ձայնի բարձրացման կոճակները։"</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Զանգի ձայնի անջատում\nԴյուրանցումը հասանելի է ձայնի ուժգնության ընտրացանկում։"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Սնուցման կոճակի ընտրացանկ։\nՍեղմած պահեք սնուցման և ձայնի բարձրացման կոճակները"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Զանգի ձայնի անջատում։\nՍեղմեք ձայնի ուժգնության կոճակը՝ դյուրանցումը կիրառելու համար"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Սեղմելու և պահելու տևողությունը"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Կարգավորեք զգայունությունը՝ նշելով, թե որքան երկար է անհրաժեշտ սեղմել և պահել սնուցման կոճակը։"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Կարճ"</string>
