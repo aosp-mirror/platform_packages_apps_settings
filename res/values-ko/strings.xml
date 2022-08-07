@@ -1949,8 +1949,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"PIN 설정"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"직장 PIN 설정"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"패턴 설정"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"보안 강화를 위해 기기 잠금 해제에 사용할 패턴 설정"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"직장 패턴 설정"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"비밀번호 설정 후 지문 사용"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"지문 사용을 위한 패턴 설정"</string>
@@ -4024,8 +4023,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"모든 ‘<xliff:g id="APP_NAME">%1$s</xliff:g>’ 알림"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"모든 <xliff:g id="APP_NAME">%1$s</xliff:g> 알림"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"적응형 알림"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="other">알림 약 <xliff:g id="NUMBER_1">%,d</xliff:g>개/일</item>
+      <item quantity="one">알림 약 <xliff:g id="NUMBER_0">%d</xliff:g>개/일</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="other">알림 약 <xliff:g id="NUMBER_1">%,d</xliff:g>개/주</item>
+      <item quantity="one">알림 약 <xliff:g id="NUMBER_0">%d</xliff:g>개/주</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"전송하지 않음"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"기기 및 앱 알림"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"알림을 읽을 수 있는 앱과 기기 제어"</string>
@@ -5266,7 +5271,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"동작 없음"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"진동"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"음소거"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"사용 설정하려면 먼저 \'전원 버튼 길게 누르기\'를 전원 메뉴로 변경하세요."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"사용 설정하려면 먼저 \'전원 버튼 길게 누르기\'를 전원 메뉴로 변경하세요."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"네트워크 세부정보"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"기기 이름이 휴대전화에 있는 앱에 표시됩니다. 기기 이름은 블루투스 기기 및 Wi-Fi 네트워크에 연결하거나 Wi-Fi 핫스팟을 설정할 때 다른 사용자에게도 표시될 수 있습니다."</string>
     <string name="devices_title" msgid="649715719278562515">"기기"</string>
@@ -5553,15 +5558,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"기기 제어"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"카드 및 패스"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"카드 및 패스"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"전원 버튼을 길게 누르기"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"길게 눌러서 어시스턴트 열기"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"전원 메뉴 길게 누르기"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"길게 누르기 사용 중지됨"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"전원 버튼을 길게 누름"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"전원 버튼을 길게 눌러 액세스"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"전원 메뉴"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"디지털 어시스턴트"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"디지털 어시스턴트 액세스"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"전원 메뉴 액세스"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"이 기능을 사용하려면 화면 잠금을 설정하세요."</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"길게 눌러 어시스턴트 실행"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"전원 버튼을 길게 눌러 어시스턴트 실행"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"전원 및 비상 메뉴:\n전원 버튼과 볼륨 업 버튼을 동시에 누릅니다."</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"벨 울림 방지:\n볼륨 메뉴에서 바로가기를 사용할 수 있습니다."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"전원 메뉴:\n전원 버튼과 볼륨 업 버튼을 동시에 누름"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"벨 울림 방지:\n볼륨 버튼을 눌러서 단축키 사용"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"길게 누르기 시간"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"전원 버튼을 얼마나 길게 누를지 선택하여 민감도 조정"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"짧게"</string>

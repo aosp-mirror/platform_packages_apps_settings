@@ -1777,7 +1777,7 @@
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Bạn muốn đặt lại tất cả tùy chọn cài đặt mạng và xóa các SIM đã tải xuống? Bạn không thể hủy hành động này sau khi đã thực hiện."</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Đặt lại chế độ cài đặt"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Đặt lại?"</string>
-    <string name="network_reset_not_available" msgid="1966334631394607829">"Đặt lại mạng không khả dụng cho người dùng này"</string>
+    <string name="network_reset_not_available" msgid="1966334631394607829">"Người dùng này không được phép đặt lại mạng"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Cài đặt mạng đã được đặt lại"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Không thể xóa SIM"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"Không thể xóa SIM đã tải xuống do lỗi.\n\nHãy khởi động lại thiết bị của bạn rồi thử lại."</string>
@@ -1949,8 +1949,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Đặt mã PIN"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Đặt mã PIN cho hồ sơ công việc"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Đặt hình mở khóa"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Để tăng cường bảo mật, hãy đặt hình mở khóa để mở khóa thiết bị"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Đặt hình mở khóa cho hồ sơ công việc"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Đặt mật khẩu để dùng vân tay"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Đặt hình mở khóa để dùng vân tay"</string>
@@ -2558,7 +2557,7 @@
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Phân biệt màu đỏ kém, mù màu đỏ"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Mù màu lam vàng"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Siêu tối"</string>
-    <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Làm cho màn hình trở nên siêu tối"</string>
+    <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Đặt màn hình ở chế độ siêu tối"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Phím tắt siêu tối"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Giới thiệu về tính năng siêu tối"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Giảm bớt độ sáng của màn hình xuống dưới độ sáng tối thiểu của điện thoại"</string>
@@ -4024,8 +4023,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"Tất cả các thông báo của ứng dụng \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Tất cả thông báo của <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Thông báo thích ứng"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="other">Khoảng <xliff:g id="NUMBER_1">%,d</xliff:g> thông báo mỗi ngày</item>
+      <item quantity="one">Khoảng <xliff:g id="NUMBER_0">%d</xliff:g> thông báo mỗi ngày</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="other">Khoảng <xliff:g id="NUMBER_1">%,d</xliff:g> thông báo mỗi tuần</item>
+      <item quantity="one">Khoảng <xliff:g id="NUMBER_0">%d</xliff:g> thông báo mỗi tuần</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Không bao giờ"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Thông báo của thiết bị và ứng dụng"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Kiểm soát những ứng dụng và thiết bị nào có thể đọc thông báo"</string>
@@ -5266,7 +5271,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Không làm gì"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Rung"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Tắt tiếng"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"Để bật, trước tiên, hãy thay đổi tùy chọn \"Nhấn và giữ nút nguồn\" thành trình đơn nguồn."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"Để bật, trước tiên, hãy thay đổi tuỳ chọn \"Nhấn và giữ nút nguồn\" thành trình đơn nguồn."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Chi tiết mạng"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Tên thiết bị của bạn sẽ hiển thị với các ứng dụng trên điện thoại. Những người khác cũng có thể thấy tên thiết bị này khi bạn kết nối với thiết bị Bluetooth, mạng Wi-Fi hoặc thiết lập một điểm phát sóng Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Thiết bị"</string>
@@ -5553,15 +5558,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"tùy chọn điều khiển thiết bị"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Thẻ và vé"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"thẻ và vé"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"Nhấn và giữ nút nguồn"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Nhấn và giữ để bật Trợ lý"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Nhấn và giữ để mở trình đơn nguồn"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Nhấn và giữ để tắt"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Nhấn và giữ nút nguồn"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Nhấn và giữ nút nguồn để truy cập"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Trình đơn nguồn"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Trợ lý kỹ thuật số"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Truy cập trợ lý kỹ thuật số"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Truy cập trình đơn nguồn"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Để sử dụng, trước tiên, hãy đặt phương thức khóa màn hình"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Giữ để mở Trợ lý"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Giữ nút nguồn để kích hoạt Trợ lý"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Trình đơn nguồn và Trình đơn khẩn cấp:\nNhấn đồng thời Nút nguồn và Nút tăng âm lượng."</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Ngăn đổ chuông:\nPhím tắt có sẵn trong trình đơn âm lượng."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Trình đơn nguồn:\nNhấn đồng thời nút nguồn và nút tăng âm lượng"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Ngăn đổ chuông:\n Nhấn nút âm lượng để truy cập lối tắt"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Khoảng thời gian nhấn và giữ"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Điều chỉnh độ nhạy bằng cách chọn khoảng thời gian nhấn và giữ nút nguồn"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Ngắn"</string>

@@ -4021,8 +4021,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"\"<xliff:g id="APP_NAME">%1$s</xliff:g>\" အကြောင်းကြားချက်အားလုံး"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g> အကြောင်းကြားချက် အားလုံး"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"အလိုက်သင့် အကြောင်းကြားချက်များ"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="other">တစ်ရက်လျှင် အကြောင်းကြားချက် <xliff:g id="NUMBER_1">%,d</xliff:g> ခုခန့်</item>
+      <item quantity="one">တစ်ရက်လျှင် အကြောင်းကြားချက် <xliff:g id="NUMBER_0">%d</xliff:g> ခုခန့်</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="other">တစ်ပတ်လျှင် အကြောင်းကြားချက် <xliff:g id="NUMBER_1">%,d</xliff:g> ခုခန့်</item>
+      <item quantity="one">တစ်ပတ်လျှင် အကြောင်းကြားချက် <xliff:g id="NUMBER_0">%d</xliff:g> ခုခန့်</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"ဘယ်တော့မှ"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"စက်နှင့်အက်ပ် အကြောင်းကြားချက်များ"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"မည်သည့်အက်ပ်နှင့် စက်များက အကြောင်းကြားချက်များ ဖတ်နိုင်သည်ကို ထိန်းချုပ်နိုင်သည်"</string>
@@ -5263,7 +5269,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"ပြောင်းလဲမှု မလုပ်ပါနှင့်"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"တုန်ခါသည်"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"အသံတိတ်သည်"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"ဖွင့်ရန်အတွက် ဦးစွာ \"ဖွင့်ပိတ်ခလုတ် နှိပ်ထားခြင်း\" ကို ပါဝါမီနူးသို့ ပြောင်းပါ။"</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"ဖွင့်ရန် \"ဖွင့်ပိတ်ခလုတ်ကို နှိပ်ထားခြင်း\" ကို ပါဝါမီနူးသို့ အရင်ပြောင်းပါ။"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"ကွန်ရက် အသေးစိတ်များ"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"သင့်စက်ပစ္စည်းအမည်ကို သင့်ဖုန်းပေါ်ရှိ အက်ပ်များက မြင်ရပါသည်။ သင် ဘလူးတုသ်သုံးစက်များသို့ ချိတ်ဆက်သည့်အခါ၊ Wi-Fi ကွန်ရက်သို့ ချိတ်ဆက်သည့်အခါ သို့မဟုတ် Wi-Fi ဟော့စပေါ့ ထုတ်လွှင့်သည့်အခါ တို့တွင်လည်း ၎င်းကို အခြားသူများက မြင်နိုင်ပါသည်။"</string>
     <string name="devices_title" msgid="649715719278562515">"စက်များ"</string>
@@ -5550,15 +5556,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"စက်ထိန်းစနစ်"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"ကတ်နှင့်လက်မှတ်များ"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"ကတ်များနှင့် ဖြတ်သန်းခွင့်များ"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"ဖွင့်ပိတ်ခလုတ် နှိပ်ထားခြင်း"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Assistant အတွက် နှိပ်ထားနိုင်သည်"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"နှိပ်ထားလျှင် ပါဝါမီနူးပေါ်လာသည်"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"နှိပ်ထားခြင်းကို ပိတ်ထားသည်"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"ဖွင့်ပိတ်ခလုတ်ကို နှိပ်ထားခြင်း"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"အသုံးပြုရန် ဖွင့်ပိတ်ခလုတ်ကို နှိပ်ထားခြင်း"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"ပါဝါမီနူး"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"ဒစ်ဂျစ်တယ် Assistant"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"ဒစ်ဂျစ်တယ် Assistant သုံးရန်"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"ပါဝါမီနူး သုံးရန်"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"အသုံးပြုရန် ဖန်သားပြင် လော့ခ်ကို ဦးစွာသတ်မှတ်ပါ"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Assistant ဖွင့်ရန် ဖိထားပါ"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"ဖွင့်ပိတ်ခလုတ်ကို ဖိထားခြင်းဖြင့် Assistant ကိုဖွင့်ပါ"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"ပါဝါနှင့် အရေးပေါ် မီနူး-\nဖွင့်ပိတ်ခလုတ်နှင့် အသံချဲ့ခလုတ်ကို တစ်ပြိုင်တည်းနှိပ်ပါ။"</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"အသံမြည်ခြင်းကို ပိတ်ရန်-\nအသံထိန်း မီနူးတွင် ဖြတ်လမ်းလင့်ခ် ရနိုင်သည်။"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"ပါဝါမီနူး-\nဖွင့်ပိတ်ခလုတ်နှင့် အသံချဲ့ခလုတ်ကို တစ်ပြိုင်တည်း နှိပ်ပါ"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"အသံမမြည်စေရန်-\nဖြတ်လမ်းလင့်ခ်အနေဖြင့် အသံထိန်း ခလုတ်တစ်ခုကို နှိပ်ပါ"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"နှိပ်ထားရမည့်အချိန်"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"ဖွင့်ပိတ်ခလုတ်နှိပ်ထားရမည့် ကြာချိန်ကိုရွေးပြီး အာရုံခံနိုင်စွမ်းကို ချိန်ညှိပါ"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"အတို"</string>

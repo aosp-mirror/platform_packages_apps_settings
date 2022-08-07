@@ -1947,8 +1947,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"PIN-kód beállítása"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Munkahelyi PIN-kód beállítása"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Minta beállítása"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"A nagyobb biztonság érdekében állítson be mintát az eszköz feloldásához"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Munkahelyi minta beállítása"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Jelszó az ujjlenyomathoz"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Minta az ujjlenyomathoz"</string>
@@ -4022,8 +4021,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"A(z) „<xliff:g id="APP_NAME">%1$s</xliff:g>” összes értesítése"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Az összes <xliff:g id="APP_NAME">%1$s</xliff:g>-értesítés"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Alkalmazkodó értesítések"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="other">Nagyjából <xliff:g id="NUMBER_1">%,d</xliff:g> értesítés naponta</item>
+      <item quantity="one">Nagyjából <xliff:g id="NUMBER_0">%d</xliff:g> értesítés naponta</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="other">Nagyjából <xliff:g id="NUMBER_1">%,d</xliff:g> értesítés hetente</item>
+      <item quantity="one">Nagyjából <xliff:g id="NUMBER_0">%d</xliff:g> értesítés hetente</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Soha"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Eszköz- és alkalmazásértesítések"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Vezérelheti, hogy mely alkalmazások és eszközök olvashatják az értesítéseket"</string>
@@ -5264,7 +5269,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Ne tegyen semmit"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Rezgés"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Néma"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"A bekapcsoláshoz előbb módosítsa a bekapcsológombhoz tartozó menüben a „Bekapcsológomb lenyomva tartása” beállítást."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"Az aktiválásához előbb módosítsa a bekapcsológombhoz tartozó menüben a „Bekapcsológomb lenyomva tartása” beállítást."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Hálózati információk"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Eszköze neve látható a telefonján lévő alkalmazások számára. Mások is láthatják, ha csatlakoztatja telefonját más Bluetooth-eszközökhöz, Wi-Fi-hálózathoz, vagy ha Wi-Fi-hotspotot állít be."</string>
     <string name="devices_title" msgid="649715719278562515">"Eszközök"</string>
@@ -5551,15 +5556,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"eszközvezérlők"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kártyák és utalványok"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kártyák és utalványok"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"Bekapcsológomb lenyomva tartása"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Tartsa lenyomva a Segéd megnyitásához"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Tartsa lenyomva a bekapcsológombhoz tartozó menü megnyitásához"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Lenyomva tartás kikapcsolva"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Tartsa lenyomva a bekapcsológombot"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"A hozzáféréshez tartsa lenyomva a bekapcsológombot"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Bekapcsológombhoz tartozó menü"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Digitális asszisztens"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Hozzáférés a digitális asszisztenshez"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Hozzáférés a bekapcsológombhoz tartozó menühöz"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"A használathoz előbb állítson be egy képernyőzárat"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Lenyomva tartás a Segéd aktiválásához"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"A bekapcsológombot lenyomva tartva aktiválhatja a Segédet"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Bekapcsológombhoz és vészhelyzethez tartozó menü:\nNyomja le egyszerre a bekapcsológombot és a hangerő növelése gombot."</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Csörgés megakadályozása:\nA gyorsparancs a hangerő menüben áll rendelkezésre."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Bekapcsológombhoz tartozó menü:\nNyomja le egyszerre a bekapcsológombot és a hangerő növelése gombot."</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Csörgés kikapcsolása:\nNyomja meg a hangerőszabályzó gombot a billentyűparancsért."</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Nyomva tartás időtartama"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Az érzékenység módosításához válassza ki, hogy mennyi ideig kelljen nyomva tartani a bekapcsológombot"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Rövid"</string>
