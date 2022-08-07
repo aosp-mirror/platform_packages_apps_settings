@@ -521,7 +521,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Berør sensoren"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Legg fingeren på sensoren, og løft den når du kjenner en vibrasjon"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Hold fingeravtrykket flatt på sensoren til du føler en vibrering"</string>
-    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Hold på finger-avtrykkssensoren"</string>
+    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Hold på finger-​avtrykkssensoren"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Løft fingeren og berør igjen"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"En gang til"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Følg fingeravtrykkikonet"</string>
@@ -534,9 +534,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Dette bidrar til å registrere mer av fingeravtrykket"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registrerer fingeravtrykket: <xliff:g id="PERCENTAGE">%d</xliff:g> prosent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingeravtrykket er lagt til"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Opplåsing med fingeravtrykk forbedres jo mer du bruker det til å låse opp nettbrettet eller bekrefte identiteten din i apper"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Opplåsing med fingeravtrykk forbedres jo mer du bruker det til å låse opp enheten eller bekrefte identiteten din i apper"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Opplåsing med fingeravtrykk forbedres jo mer du bruker det til å låse opp telefonen eller bekrefte identiteten din i apper"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Opplåsing med fingeravtrykk fungerer bedre jo mer du bruker det til å låse opp enheten og bekrefte identiteten din i apper"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Opplåsing med fingeravtrykk fungerer bedre jo mer du bruker det til å låse opp enheten og bekrefte identiteten din i apper"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Opplåsing med fingeravtrykk fungerer bedre jo mer du bruker det til å låse opp enheten og bekrefte identiteten din i apper"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Gjør det senere"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Løft fingeren og trykk igjen"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Plasser siden av fingeravtrykket på sensoren og hold. Bytt deretter til den andre siden."</string>
@@ -1947,8 +1947,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Angi en PIN-kode"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Angi en jobb-PIN-kode"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Angi et mønster"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"For å øke sikkerheten, angi et mønster for å låse opp enheten"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Angi et jobbmønster"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Angi passord for å bruke fingeravtrykk"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Angi mønster for å bruke fingeravtrykk"</string>
@@ -4022,8 +4021,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"«<xliff:g id="APP_NAME">%1$s</xliff:g>»: alle varsler"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g>: alle varsler"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Varsler som kan tilpasses"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="other">Omtrent <xliff:g id="NUMBER_1">%,d</xliff:g> varsler per dag</item>
+      <item quantity="one">Omtrent <xliff:g id="NUMBER_0">%d</xliff:g> varsel per dag</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="other">Omtrent <xliff:g id="NUMBER_1">%,d</xliff:g> varsler per uke</item>
+      <item quantity="one">Omtrent <xliff:g id="NUMBER_0">%d</xliff:g> varsel per uke</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Aldri"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Enhets- og appvarsler"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Kontrollér hvilke apper og enheter som kan lese varsler"</string>
@@ -5264,7 +5269,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Ikke gjør noe"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibrer"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Ignorer"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"For å slå på, endre først «Trykk og hold på av/på-knappen» til av/på-menyen."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"For å slå på dette, endre først «Trykk og hold på av/på-knappen» til av/på-menyen."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Nettverksdetaljer"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Enhetsnavnet ditt er synlig for apper på telefonen. Det kan også ses av andre personer når du kobler til Bluetooth-enheter, kobler til et Wi-Fi-nettverk eller konfigurerer en wifi-sone."</string>
     <string name="devices_title" msgid="649715719278562515">"Enheter"</string>
@@ -5551,15 +5556,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"enhetsstyring"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kort og billetter"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kort og billetter"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"Trykk og hold av/på-knappen"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Trykk og hold for assistenten"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Trykk og hold for av/på-menyen"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Trykk og hold er slått av"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Trykk og hold på av/på-knappen"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Trykk og hold på av/på-knappen for å åpne"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Av/på-meny"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Digital assistent"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Åpne den digitale assistenten"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Åpne av/på-menyen"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Du må angi en skjermlås for å bruke denne funksjonen"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Hold for å starte assistenten"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Start assistenten ved å holde inne av/på-knappen"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Av/på- og nødmeny:\nTrykk inn av/på og volum opp samtidig."</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Forhindre ringing:\nEn snarvei er tilgjengelig i volummenyen."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Av/på-meny:\nTrykk på av/på-knappen og volum opp-knappen samtidig"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Forhindre ringing:\nTrykk på en volumknapp for å bruke snarveien"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Varighet for trykk og hold"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Juster følsomheten ved å velge hvor lenge av/på-knappen skal holdes inne"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Kort"</string>

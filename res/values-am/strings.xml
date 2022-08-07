@@ -534,9 +534,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"ይህ ተጨማሪ የጣት አሻራዎን ክፍል እንዲይዝ ያግዛል"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"የጣት አሻራ <xliff:g id="PERCENTAGE">%d</xliff:g> መቶኛን በመመዝገብ ላይ"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"የጣት አሻራ ታክሏል"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"በጣት አሻራ መክፈቻን ጡባዊዎን ለመክፈት ወይም በመተግበሪያዎች ውስጥ እርስዎ መሆንዎን ለማረጋገጥ ይበልጥ በተጠቀሙበት ቁጥር ይሻሽላል"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"በጣት አሻራ መክፈቻን መሣሪያዎን ለመክፈት ወይም በመተግበሪያዎች ውስጥ እርስዎ መሆንዎን ለማረጋገጥ ይበልጥ በተጠቀሙበት ቁጥር ይሻሽላል"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"በጣት አሻራ መክፈቻን ስልክዎን ለመክፈት ወይም በመተግበሪያዎች ውስጥ እርስዎ መሆንዎን ለማረጋገጥ ይበልጥ በተጠቀሙበት ቁጥር ይሻሽላል"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"በጣት አሻራ መክፈቻን ጡባዊዎን ለመክፈት ወይም በመተግበሪያዎች ውስጥ እርስዎ መሆንዎን ለማረጋገጥ ይበልጥ በተጠቀሙበት ቁጥር ይሻሻላል"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"በጣት አሻራ መክፈቻን መሣሪያዎን ለመክፈት ወይም በመተግበሪያዎች ውስጥ እርስዎ መሆንዎን ለማረጋገጥ ይበልጥ በተጠቀሙበት ቁጥር ይሻሻላል"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"በጣት አሻራ መክፈቻን ስልክዎን ለመክፈት ወይም በመተግበሪያዎች ውስጥ እርስዎ መሆንዎን ለማረጋገጥ ይበልጥ በተጠቀሙበት ቁጥር ይሻሻላል"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"በኋላ ላይ ያድርጉት"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"ያንሱ፣ በመቀጠል መልሰው ይንኩ"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"የጣት አሻራዎን ጎን በዳሳሹ ላይ አስቀምጠው ይያዙት፣ ከዚያ ወደ ሌላኛው ጎን ይቀይሩ"</string>
@@ -1947,8 +1947,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"ፒን ያቀናብሩ"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"የሥራ ፒን ያቀናብሩ"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"ስርዓተ-ጥለት ያቀናብሩ"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"ለተጨማሪ ደህንነት ሲባል መሣሪያውን ለመክፈት ስርዓተ ጥለት ያቀናብሩ"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"የሥራ ስርዓተ-ጥለት ያቀናብሩ"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"የጣት አሻራን ለመጠቀም የይለፍ ቃል ያቀናብሩ"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"የጣት አሻራን ለመጠቀም፣ ሥርዓተ ጥለትን ያቀናብሩ"</string>
@@ -4022,8 +4021,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"ሁሉም «<xliff:g id="APP_NAME">%1$s</xliff:g>» ማሳወቂያዎች"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"ሁሉም የ<xliff:g id="APP_NAME">%1$s</xliff:g> ማሳወቂያዎች"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"እንደሁኔታው ተስማሚ ማሳወቂያዎች"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="one">በቀን ወደ <xliff:g id="NUMBER_1">%,d</xliff:g> ያህል ማሳወቂያ</item>
+      <item quantity="other">በቀን ወደ <xliff:g id="NUMBER_1">%,d</xliff:g> ያህል ማሳወቂያዎች</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="one">በሳምንት ወደ <xliff:g id="NUMBER_1">%,d</xliff:g> ያህል ማሳወቂያ</item>
+      <item quantity="other">በሳምንት ወደ <xliff:g id="NUMBER_1">%,d</xliff:g> ያህል ማሳወቂያዎች</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"በጭራሽ"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"መሣሪያ እና የመተግበሪያ ማሳወቂያዎች"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"የትኛዎቹ መተግበሪያዎች እና መሣሪያዎች ማሳወቂያዎችን ማንበብ እንደሚችሉ ይቆጣጠሩ"</string>
@@ -5264,7 +5269,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"ምንም አታድርግ"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"ንዘር"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"ድምጸ-ከል አድርግ"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"ለማንቃት መጀመሪያ በኃይል ምናሌው ላይ «የኃይል ቁልፍን ተጭነው ይያዙ»ን ይቀይሩ።"</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"ለማንቃት መጀመሪያ «የማብሪያ/ማጥፊያ ቁልፉን ተጭነው ይያዙ»ን ወደ የኃይል ምናሌው ይለውጡ።"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"የአውታረ መረብ ዝርዝሮች"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"የመሣሪያዎ ስም በእርስዎ ስልክ ላይ ላሉ መተግበሪያዎች ይታያል። እንዲሁም ከብሉቱዝ መሣሪያዎች ጋር ሲገናኙ፣ ከWi-Fi አውታረ መረብ ሲገናኙ ወይም የWi-Fi መገናኛ ነጥብን ሲያቀናብሩ በሌሎች ሰዎች የሚታይ ሊሆን ይችላል።"</string>
     <string name="devices_title" msgid="649715719278562515">"መሣሪያዎች"</string>
@@ -5551,15 +5556,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"የመሣሪያ መቆጣጠሪያዎች"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"ካርዶች እና ማለፊያዎች"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"ካርዶች እና ማለፊያዎች"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"የኃይል አዝራሩን ተጭነው ይያዙ"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"ለረዳቱ ተጭነው ይያዙ"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"ለኃይል ምናሌው ተጭነው ይያዙ"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"ተጭነው መያዝ ተሰናክሏል"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"የማብሪያ/ማጥፊያ ቁልፍን ተጭነው ይያዙ"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"ለመድረስ የማብሪያ/ማጥፊያ ቁልፉን ተጭነው ይያዙ"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"የኃይል ምናሌ"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"ዲጂታል ረዳት"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"ዲጂታል ረዳት ላይ ይድረሱ"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"የኃይል ምናሌ ላይ ይድረሱ"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"ለመጠቀም መጀመሪያ የማያ ገጽ መቆለፊያን ያቀናብሩ"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"ለረዳት ይያዙ"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"የኃይል አዝራሩን በመያዝ ረዳቱን ያስነሱ"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"የኃይል እና ድንገተኛ አደጋ ምናሌ፦\nበተመሳሳይ ጊዜ ኃይልን እና ድምፅ ጨምርን ይጫኑ።"</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"መደወልን ይከላከሉ፦\nበድምጽ ምናሌው ውስጥ አቋራጭ ይገኛል።"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"የኃይል ምናሌ፦\nየማብሪያ/ማጥፊያ ቁልፉን እና የድምፅ አዝራሩን በአንድ ላይ ይጫኑ"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"የጥሪ ጩኸትን ይከላከሉ፦\nአቋራጩን ለማግኘት አንድ የድምፅ አዝራር ይጫኑ"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"የመጫን እና የመያዝ የቆይታ ጊዜ"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"የማብሪያ/ማጥፊያ አዝራሩን ለምን ያህል ጊዜ ተጭኖ እንደሚያዝ በመምረጥ ትብነትን ያስተካክሉ"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"አጭር"</string>

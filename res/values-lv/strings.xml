@@ -1969,8 +1969,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"PIN iestatīšana"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Darba PIN iestatīšana"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Kombinācijas iestatīšana"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Papildu drošībai iestatiet kombināciju šīs ierīces atbloķēšanai"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Darba kombinācijas iestatīšana"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Parole pirksta nosp. lietošanai"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Kombinācijas iestatīšana"</string>
@@ -4066,8 +4065,16 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"Visi lietotnes <xliff:g id="APP_NAME">%1$s</xliff:g> paziņojumi"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Visi lietotnes <xliff:g id="APP_NAME">%1$s</xliff:g> paziņojumi"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Adaptīvie paziņojumi"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="zero">Aptuveni <xliff:g id="NUMBER_1">%,d</xliff:g> paziņojumu dienā</item>
+      <item quantity="one">Aptuveni <xliff:g id="NUMBER_1">%,d</xliff:g> paziņojums dienā</item>
+      <item quantity="other">Aptuveni <xliff:g id="NUMBER_1">%,d</xliff:g> paziņojumi dienā</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="zero">Aptuveni <xliff:g id="NUMBER_1">%,d</xliff:g> paziņojumu nedēļā</item>
+      <item quantity="one">Aptuveni <xliff:g id="NUMBER_1">%,d</xliff:g> paziņojums nedēļā</item>
+      <item quantity="other">Aptuveni <xliff:g id="NUMBER_1">%,d</xliff:g> paziņojumi nedēļā</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Nekad"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Ierīču un lietotņu paziņojumi"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Pārvaldiet, kuras lietotnes un ierīces var lasīt paziņojumus."</string>
@@ -5346,7 +5353,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Neveikt nekādas darbības"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibrēt"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Izslēgt skaņu"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"Lai iespējotu, vispirms nomainiet iestatījumā “Barošanas pogas nospiešana un turēšana” piešķirto darbību uz barošanas izvēlnes atvēršanu."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"Lai iespējotu, vispirms nomainiet iestatījumu “Nospiest un turēt barošanas pogu” uz barošanas izvēlni."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Dati par tīklu"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Jūsu ierīces nosaukums ir redzams tālrunī instalētajām lietotnēm. Tas var būt redzams arī citām personām, ja izveidosiet savienojumu ar Bluetooth ierīcēm, Wi-Fi tīklu vai iestatīsiet Wi-Fi tīklāju."</string>
     <string name="devices_title" msgid="649715719278562515">"Ierīces"</string>
@@ -5636,15 +5643,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"ierīču vadīklas"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kartes un caurlaides"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kartes un caurlaides"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"Barošanas pogas nospiešana un turēšana"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Nospiežot un turot tiek aktivizēts Asistents"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Nospiežot un turot tiek atvērta barošanas izvēlne"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Nospiešana un turēšana ir atspējota"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Nospiediet un turiet barošanas pogu"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Lai piekļūtu, nospiediet un turiet barošanas pogu"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Barošanas izvēlne"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Digitālais asistents"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Piekļūt digitālajam asistentam"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Piekļūt barošanas izvēlnei"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Lai to izmantotu, vispirms ir jāiestata ekrāna bloķēšana."</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Turēt, lai palaistu Asistentu"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Aktivizējiet Asistentu, turot barošanas pogu."</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Barošanas un ārkārtas izvēlne:\nvienlaikus nospiediet barošanas un skaļuma palielināšanas pogu."</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Zvana signāla novēršana:\nsaīsne ir pieejama skaļuma izvēlnē."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Barošanas izvēlne:\nvienlaikus nospiediet barošanas pogu un skaļuma palielināšanas pogu"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Zvana signāla novēršana:\nlai izmantotu īsinājumtaustiņu, nospiediet skaļuma pogu"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Nospiešanas un turēšanas ilgums"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Pielāgojiet jutīgumu, izvēloties, cik ilgi nospiest un turēt barošanas pogu."</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Īsi"</string>
