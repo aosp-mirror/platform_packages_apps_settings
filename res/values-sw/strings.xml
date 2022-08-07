@@ -1947,8 +1947,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Weka PIN"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Weka PIN ya wasifu wa kazini"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Weka mchoro"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Ili kuimarisha usalama, weka mchoro wa kufungua kifaa"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Weka mchoro wa wasifu wa kazini"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Weka nenosiri ili utumie alama ya kidole"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Weka mchoro ili utumie alama ya kidole"</string>
@@ -4022,8 +4021,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"Arifa zote za \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Arifa zote za <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Arifa Zinazojirekebisha"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="other">Kuhusu arifa <xliff:g id="NUMBER_1">%,d</xliff:g> kwa siku</item>
+      <item quantity="one">Kuhusu arifa <xliff:g id="NUMBER_0">%d</xliff:g> kwa siku</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="other">Kuhusu arifa <xliff:g id="NUMBER_1">%,d</xliff:g> kwa wiki</item>
+      <item quantity="one">Kuhusu arifa <xliff:g id="NUMBER_0">%d</xliff:g> kwa wiki</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Kamwe"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Arifa za programu na vifaa"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Dhibiti programu na vifaa vinavyoweza kusoma arifa"</string>
@@ -5265,7 +5270,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Isifanye chochote"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Tetema"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Zima sauti"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"Ili uwashe, kwanza badilisha \"Kitufe cha kuwasha/kuzima cha kubonyeza na kushikilia\" kiwe menyu ya kuzima/kuwasha."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"Ili uwashe, kwanza badilisha \"Kitufe cha kuwasha/kuzima cha kubonyeza na kushikilia\" kiwe menyu ya kuzima/kuwasha."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Maelezo ya mtandao"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Jina la kifaa chako litaonekana kwa programu zilizo kwenye simu yako. Pia, watu wengine wanaweza kuliona unapounganisha kwenye vifaa vya Bluetooth, unapounganisha kwenye mtandao wa Wi-Fi au kuweka mipangilio ya mtandao pepe wa Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Vifaa"</string>
@@ -5552,15 +5557,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"vidhibiti vya vifaa"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kadi na pasi"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kadi na pasi"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"Bonyeza na ushikilie kitufe cha kuwasha/kuzima"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Bonyeza na ushikilie kitufe ili upate programu ya Mratibu"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Bonyeza na ushikilie ili upate menyu ya kuwasha/kuzima"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Kitufe cha kubonyeza na kushikilia kimezimwa"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Bonyeza na ushikilie kitufe cha kuwasha/kuzima"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Bonyeza na ushikilie kitufe cha kuwasha au kuzima ili ufikie"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Menyu ya kuzima au kuwasha"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Mratibu dijitali"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Fikia mratibu dijitali"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Fikia menyu ya kuzima/kuwasha"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Ili utumie, weka mbinu ya kufunga skrini kwanza"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Shikilia ili ufungue programu ya Mratibu"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Anzisha programu ya Mratibu kwa kushikilia kitufe cha kuwasha/kuzima"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Menyu ya Dharura na ya Kuzima/Kuwasha:\nBonyeza Kuongeza Sauti na Kuzima/Kuwasha kwa wakati mmoja."</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Zuia mlio:\nNjia ya mkato inapatikana katika menyu ya sauti."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Menyu ya kuzima/kuwasha:\nBonyeza kitufe cha kuwasha/kuzima na kitufe cha kuongeza sauti kwa wakati mmoja"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Zuia mlio: \n Bonyeza kitufe cha sauti ili utumie njia ya mkato"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Muda wa kubonyeza na kushikilia"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Rekebisha kiwango cha hisi kwa kuchagua muda wa kubonyeza na kushikilia kitufe cha kuwasha/kuzima"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Mfupi"</string>

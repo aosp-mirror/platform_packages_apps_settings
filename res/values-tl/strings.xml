@@ -1947,8 +1947,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Magtakda ng PIN"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Magtakda ng PIN sa trabaho"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Magtakda ng pattern"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Para sa karagdagang seguridad, magtakda ng pattern para sa pag-unlock ng device"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Magtakda ng pattern sa trabaho"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Para magamit ang fingerprint, i-set ang pw"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Para magamit ang fingerprint, i-set ang pattern"</string>
@@ -4022,8 +4021,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"Lahat ng notification ng \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Lahat ng notification ng <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Mga Adaptive na Notification"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="one">Humigit-kumulang <xliff:g id="NUMBER_1">%,d</xliff:g> notification kada araw</item>
+      <item quantity="other">Humigit-kumulang <xliff:g id="NUMBER_1">%,d</xliff:g> na notification kada araw</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="one">Humigit-kumulang <xliff:g id="NUMBER_1">%,d</xliff:g> notification kada linggo</item>
+      <item quantity="other">Humigit-kumulang <xliff:g id="NUMBER_1">%,d</xliff:g> na notification kada linggo</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Huwag Kailanman"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Mga notification sa device at app"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Kontrolin kung aling mga app at device ang makakapagbasa ng mga notification"</string>
@@ -5264,7 +5269,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Walang gawin"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"I-vibrate"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"I-mute"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"Para i-enable, palitan muna ang \"Pindutin nang matagal ang power button\" sa power menu."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"Para i-enable, palitan muna ang \"Pindutin nang matagal ang power button\" sa power menu."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Mga detalye ng network"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Nakikita ng mga app sa iyong telepono ang pangalan ng device mo. Puwede rin itong makita ng ibang tao kapag ikaw ay kumonekta sa mga Bluetooth device, kumonekta sa Wi-Fi network, o nag-set up ng Wi-Fi hotspot."</string>
     <string name="devices_title" msgid="649715719278562515">"Mga Device"</string>
@@ -5551,15 +5556,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"mga kontrol ng device"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Mga card at pass"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"mga card at pass"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"Pindutin nang matagal ang power button"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Pindutin nang matagal para sa Assistant"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Pindutin nang matagal para sa power menu"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Naka-disable ang pagpindot nang matagal"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Pindutin nang matagal ang power button"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Pindutin nang matagal ang power button para i-access"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Power menu"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Digital na assistant"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"I-access ang digital na assistant"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"I-access ang power menu"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Para magamit, magtakda muna ng lock ng screen"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Pindutin nang Matagal para sa Assistant"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"I-trigger ang Assistant sa pamamagitan ng pagpindot nang matagal sa power button"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Menu ng Power at Emergency:\nPindutin nang magkasabay ang Power at Pataas na volume."</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Pigilan ang pag-ring:\nNasa menu ng volume ang shortcut."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Power menu:\nMagkasabay na pindutin ang power button at button na pataas na volume"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Pigilan ang pag-ring:\nPumindot ng button ng volume para sa shortcut"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Tagal ng pagpindot"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Isaayos ang pagkasensitibo sa pamamagitan ng pagpili kung gaano katagal pipindutin ang power button"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Mabilis"</string>

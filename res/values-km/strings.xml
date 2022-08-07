@@ -1947,8 +1947,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"កំណត់កូដ PIN"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"កំណត់​កូដ PIN ការងារ"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"កំណត់លំនាំ"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"ដើម្បីទទួលបាន​សុវត្ថិភាពបន្ថែម សូមកំណត់​លំនាំ ដើម្បីដោះសោ​ឧបករណ៍"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"កំណត់​លំនាំ​ការងារ"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"ដើម្បី​ប្រើប្រាស់​ស្នាម​ម្រាមដៃ សូម​កំណត់​ពាក្យសម្ងាត់"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"ដើម្បី​ប្រើស្នាម​ម្រាមដៃ សូម​កំណត់​លំនាំ"</string>
@@ -4022,8 +4021,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"ការជូនដំណឹង​ទាំងអស់ពី \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"ការជូនដំណឹង​ទាំងអស់ពី​<xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"ការជូនដំណឹង​ដែល​មានភាព​បត់បែន"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="other">ការជូនដំណឹងប្រហែលជា <xliff:g id="NUMBER_1">%,d</xliff:g> ក្នុងមួយថ្ងៃ</item>
+      <item quantity="one">ការជូនដំណឹងប្រហែលជា <xliff:g id="NUMBER_0">%d</xliff:g> ក្នុងមួយថ្ងៃ</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="other">ការជូនដំណឹងប្រហែលជា <xliff:g id="NUMBER_1">%,d</xliff:g> ក្នុងមួយសប្ដាហ៍</item>
+      <item quantity="one">ការជូនដំណឹងប្រហែលជា <xliff:g id="NUMBER_0">%d</xliff:g> ក្នុងមួយសប្ដាហ៍</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"កុំឱ្យសោះ"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"ការជូនដំណឹង​ឧបករណ៍ និងកម្មវិធី"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"គ្រប់គ្រងកម្មវិធី និងឧបករណ៍​ដែលអាចអានការជូនដំណឹង"</string>
@@ -5264,7 +5269,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"មិន​ធ្វើ​អ្វី​សោះ"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"ញ័រ"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"បិទសំឡេង"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"ដើម្បី​បើក សូមធ្វើការ​ផ្លាស់ប្ដូរ \"ចុចប៊ូតុង​ថាមពល​ឱ្យជាប់\" ចំពោះ​ម៉ឺនុយថាមពល​ជាមុនសិន។"</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"ដើម្បី​បើក សូមធ្វើការ​ផ្លាស់ប្ដូរ \"ចុចប៊ូតុង​ថាមពល​ឱ្យជាប់\" ចំពោះ​ម៉ឺនុយថាមពល​ជាមុនសិន។"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"ព័ត៌មាន​បណ្ដាញ"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"ឈ្មោះ​ឧបករណ៍​របស់អ្នក​អាច​ឱ្យ​កម្មវិធី​នៅលើ​ទូរសព្ទ​របស់អ្នក​មើលឃើញ។ វាក៏​អាចឱ្យ​អ្នកដទៃ​មើលឃើញ​ផងដែរ នៅពេលអ្នក​ភ្ជាប់​ជាមួយឧបករណ៍​ប៊្លូធូស បណ្ដាញ Wi-Fi ឬរៀបចំ ហតស្ប៉ត Wi-Fi។"</string>
     <string name="devices_title" msgid="649715719278562515">"ឧបករណ៍"</string>
@@ -5551,15 +5556,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"ផ្ទាំងគ្រប់គ្រង​ឧបករណ៍"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"កាត និង​សំបុត្រ"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"បណ្ណឥណទាន និង​សំបុត្រធ្វើដំណើរ"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"ចុចប៊ូតុង​ថាមពលឱ្យជាប់"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"ចុចឱ្យជាប់​សម្រាប់ជំនួយការ"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"ចុចឱ្យជាប់សម្រាប់​ម៉ឺនុយថាមពល"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"បានបិទការចុចឱ្យជាប់"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"ចុចប៊ូតុងថាមពលឱ្យជាប់"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"ចុចប៊ូតុងថាមពលឱ្យជាប់ ដើម្បីចូលប្រើ"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"ម៉ឺនុយ​ថាមពល"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"ជំនួយការ​ឌីជីថល"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"ចូលប្រើជំនួយការឌីជីថល"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"ចូលប្រើម៉ឺនុយ​ថាមពល"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"ដើម្បីប្រើ សូមកំណត់​ការចាក់សោអេក្រង់​ជាមុនសិន"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"ចុចឱ្យជាប់ ដើម្បីប្រើជំនួយការ"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"បើកដំណើរការ​ជំនួយការ​ដោយចុច​ប៊ូតុងថាមពលឱ្យជាប់"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"ម៉ឺនុយថាមពល និងពេលមានអាសន្ន៖\nចុចប៊ូតុងថាមពល និងដំឡើងកម្រិត​សំឡេងក្នុងពេលតែមួយ។"</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"ទប់ស្កាត់ការរោទ៍៖\nអាចប្រើផ្លូវកាត់បាន​នៅក្នុងម៉ឺនុយ​កម្រិតសំឡេង។"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"ម៉ឺនុយ​ថាមពល៖\nចុច​ប៊ូតុង​ថាមពល និង​ប៊ូតុង​ដំឡើង​កម្រិត​សំឡេង​ដំណាលគ្នា"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"ទប់ស្កាត់ការរោទ៍៖\nចុចប៊ូតុង​កម្រិត​សំឡេងសម្រាប់ផ្លូវកាត់"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"រយៈពេល​ចុចឱ្យជាប់"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"កែតម្រូវកម្រិតរំញោចដោយជ្រើសរើស​រយៈពេលដែលត្រូវ​ចុចប៊ូតុងថាមពលឱ្យជាប់"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"ខ្លី"</string>
