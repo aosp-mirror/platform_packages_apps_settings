@@ -1991,8 +1991,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Створіть PIN-код"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Створіть PIN-код для робочого профілю"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Створіть ключ"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Для додаткового захисту встановіть ключ, щоб розблоковувати пристрій"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Створіть ключ для робочого профілю"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Щоб користуватися відбитком пальця, налаштуйте пароль"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Щоб користуватися відбитком пальця, налаштуйте ключ"</string>
@@ -3791,7 +3790,7 @@
     <string name="keywords_media_vibration" msgid="723896490102792327">"вібровідгук, вібрація, чутливість, мультимедіа"</string>
     <string name="keywords_vibration" msgid="670455132028025952">"вібровідгук, вібрувати, вібрація"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"режим енергозбереження, закріплений, постійний, економія заряду, акумулятор"</string>
-    <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"послідовність дій, розклад, режим енергозбереження, економія заряду, акумулятор, автоматично, відсоток"</string>
+    <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"програма, розклад, режим енергозбереження, економія заряду, акумулятор, автоматично, відсоток"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, виклики з розширеними можливостями, виклики в режимі 4G"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, дзвінки з розширеними можливостями, дзвінки 5g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"додати мову, додавання мови"</string>
@@ -4110,8 +4109,18 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"<xliff:g id="APP_NAME">%1$s</xliff:g>: усі сповіщення"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Усі сповіщення з додатка <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Адаптивні сповіщення"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="one">Близько <xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на день</item>
+      <item quantity="few">Близько <xliff:g id="NUMBER_1">%,d</xliff:g> сповіщень на день</item>
+      <item quantity="many">Близько <xliff:g id="NUMBER_1">%,d</xliff:g> сповіщень на день</item>
+      <item quantity="other">Близько <xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на день</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="one">Близько <xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на тиждень</item>
+      <item quantity="few">Близько <xliff:g id="NUMBER_1">%,d</xliff:g> сповіщень на тиждень</item>
+      <item quantity="many">Близько <xliff:g id="NUMBER_1">%,d</xliff:g> сповіщень на тиждень</item>
+      <item quantity="other">Близько <xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на тиждень</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Ніколи"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Сповіщення додатків і пристроїв"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Укажіть, які додатки та пристрої можуть переглядати сповіщення"</string>
@@ -5428,7 +5437,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Нічого не робити"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Вібрація"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Вимкнути звук"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"Щоб увімкнути, спершу вкажіть, щоб дія \"Утримувати кнопку живлення\" відкривала меню кнопки живлення."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"Щоб увімкнути цю функцію, спершу змініть налаштування \"Утримувати кнопку живлення\" так, щоб при цьому відкривалось меню кнопки живлення."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Дані мережі"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Назва пристрою відображається в додатках на телефоні. Її також можуть бачити інші люди, коли ви підключаєтеся до пристроїв Bluetooth або налаштовуєте точку доступу Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Пристрої"</string>
@@ -5721,15 +5730,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"керування пристроями"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Картки та квитки"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"картки та квитки"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"Утримувати кнопку живлення"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Утримуйте кнопку живлення, щоб активувати Асистента"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Утримуйте кнопку живлення, щоб відкрити відповідне меню"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Функція втримання кнопки живлення вимкнена"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Утримувати кнопку живлення"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Утримувати кнопку живлення, щоб відкрити"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"меню кнопки живлення"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"цифровий помічник"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Відкрити цифровий помічник"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Відкрити меню кнопки живлення"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Щоб користуватися, налаштуйте блокування екрана"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Утримувати, щоб активувати Асистента"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Асистент активується, коли ви утримуєте кнопку живлення"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Меню кнопки живлення й екстрених викликів:\nНатисніть одночасно кнопки живлення й збільшення гучності."</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Вимкнути звук дзвінка:\nШвидкий запуск функції доступний у меню налаштування гучності."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Меню кнопки живлення:\nодночасно натисніть кнопки живлення та збільшення гучності"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Вимкнути звук дзвінка:\nдля швидкого запуску функції натисніть кнопку гучності"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Тривалість утримання"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Скоригуйте чутливість, указавши, скільки часу потрібно втримувати кнопку живлення"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Коротко"</string>

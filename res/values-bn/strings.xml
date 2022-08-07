@@ -1947,8 +1947,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"একটি পিন সেট করুন"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"একটি অফিস প্রোফাইল পিন সেট করুন"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"একটি প্যাটার্ন সেট করুন"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"অতিরিক্ত সুরক্ষার জন্য, ডিভাইসটি আনলক করতে একটি প্যাটার্ন সেট করুন"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"একটি অফিস প্রোফাইল প্যাটার্ন সেট করুন"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"আঙ্গুলের ছাপ ব্যবহার করার জন্য পাসওয়ার্ড সেট করুন"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"আঙ্গুলের ছাপ ব্যবহার করার জন্য প্যাটার্ন সেট করুন"</string>
@@ -4022,8 +4021,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"সমস্ত \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" বিজ্ঞপ্তি"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"সমস্ত <xliff:g id="APP_NAME">%1$s</xliff:g> সংক্রান্ত বিজ্ঞপ্তি"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"অ্যাডাপটিভ বিজ্ঞপ্তি"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="one">প্রতিদিন প্রায় <xliff:g id="NUMBER_1">%,d</xliff:g>টি বিজ্ঞপ্তি</item>
+      <item quantity="other">প্রতিদিন প্রায় <xliff:g id="NUMBER_1">%,d</xliff:g>টি বিজ্ঞপ্তি</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="one">প্রতি সপ্তাহে প্রায় <xliff:g id="NUMBER_1">%,d</xliff:g>টি বিজ্ঞপ্তি</item>
+      <item quantity="other">প্রতি সপ্তাহে প্রায় <xliff:g id="NUMBER_1">%,d</xliff:g>টি বিজ্ঞপ্তি</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"কখনও না"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"ডিভাইস এবং অ্যাপ বিজ্ঞপ্তি"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"কোন অ্যাপ ও ডিভাইস বিজ্ঞপ্তি পড়তে পারবে তা নিয়ন্ত্রণ করুন"</string>
@@ -5264,7 +5269,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"যেমন আছে থাক"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"কম্পন"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"মিউট"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"চালু করতে, আগে পাওয়ার মেনু থেকে \"পাওয়ার বোতাম প্রেস করে ধরে রাখুন\" বিকল্পটি পরিবর্তন করুন।"</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"চালু করতে, আগে পাওয়ার মেনুতে \"পাওয়ার বোতাম প্রেস করে ধরে রাখুন\" বিকল্পটি পরিবর্তন করুন।"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"নেটওয়ার্কের বিবরণ"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"আপনার ফোনের অ্যাপে আপনার ডিভাইসের নাম দেখা যাবে। আপনি ব্লুটুথ ডিভাইসে বা ওয়াই-ফাই নেটওয়ার্কে কানেক্ট করলে অথবা ওয়াই-ফাই হটস্পট সেট আপ করলে এটি অন্যরাও হয়ত দেখতে পাবেন।"</string>
     <string name="devices_title" msgid="649715719278562515">"ডিভাইস"</string>
@@ -5551,15 +5556,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"ডিভাইস কন্ট্রোল"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"কার্ড এবং পাস"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"কার্ড এবং পাস"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"\'পাওয়ার বোতাম\' প্রেস করে ধরে থাকুন"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Assistant ব্যবহার করতে প্রেস করে ধরে থাকুন"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"\'পাওয়ার\' মেনু প্রেস করে ধরে থাকুন"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"\'প্রেস করে ধরে থাকা\' জেসচারটি বন্ধ করা আছে"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"পাওয়ার বোতাম প্রেস করে ধরে রাখুন"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"অ্যাক্সেসের জন্য পাওয়ার বোতাম প্রেস করে ধরে রাখুন"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"পাওয়ার মেনু"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"ডিজিটাল অ্যাসিস্ট্যান্ট"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"ডিজিটাল অ্যাসিস্ট্যান্ট অ্যাক্সেস করুন"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"পাওয়ার মেনু অ্যাক্সেস করুন"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"ব্যবহার করার জন্য প্রথমে একটি স্ক্রিন লক সেট করুন"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Assistant চালু করার জন্য পাওয়ার বোতাম প্রেস করে ধরে রাখুন"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"পাওয়ার বোতাম প্রেস করে ধরে রেখে Assistant চালু করুন"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"পাওয়ার ও ইমারজেন্সি মেনু:\nএকসাথে \'পাওয়ার\' এবং \'ভলিউম বাড়ানোর বোতাম\' প্রেস করুন।"</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"রিং হওয়া বন্ধ করতে:\n\'ভলিউম\' মেনুতে শর্টকাট রয়েছে।"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"পাওয়ার মেনু:\nএকই সাথে পাওয়ার বোতাম ও ভলিউম বাড়ানোর বোতাম প্রেস করুন"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"রিং হওয়া প্রতিরোধ করুন:\nশর্টকার্ট ব্যবহার করার জন্য ভলিউমের বোতাম প্রেস করুন"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"বোতাম টিপে রাখার সময়"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"পাওয়ার বোতাম কতক্ষণ টিপে ধরে থাকবেন সেটি বেছে নিয়ে সেন্সিটিভিটি অ্যাডজাস্ট করুন"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"কম সময়ের জন্য"</string>

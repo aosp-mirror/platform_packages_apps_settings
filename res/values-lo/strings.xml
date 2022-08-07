@@ -533,7 +533,7 @@
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"ວາງທາງຂ້າງຂອງລາຍນິ້ວມືທ່ານໃສ່ເຊັນເຊີແລ້ວກົດຄ້າງໄວ້, ຈາກນັ້ນສະຫຼັບໄປອີກຂ້າງ"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"ນີ້ຈະຊ່ວຍບັນທຶກລາຍນິ້ວມືຂອງທ່ານໄດ້ຫຼາຍຂຶ້ນ"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"ກຳລັງລົງທະບຽນລາຍນິ້ວມື <xliff:g id="PERCENTAGE">%d</xliff:g> ເປີເຊັນ"</string>
-    <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"ເພີ່ມລາຍນີ້ວມືແລ້ວ"</string>
+    <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"ເພີ່ມລາຍນິ້ວມືແລ້ວ"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"ການປົດລັອກດ້ວຍລາຍນິ້ວມືຈະປັບປຸງຫຼາຍຂຶ້ນເມື່ອທ່ານໃຊ້ມັນເພື່ອປົດລັອກແທັບເລັດຂອງທ່ານ ຫຼື ຢັ້ງຢືນວ່າແມ່ນທ່ານໃນແອັບຕ່າງໆ"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"ການປົດລັອກດ້ວຍລາຍນິ້ວມືຈະປັບປຸງຫຼາຍຂຶ້ນເມື່ອທ່ານໃຊ້ມັນເພື່ອປົດລັອກອຸປະກອນຂອງທ່ານ ຫຼື ຢັ້ງຢືນວ່າແມ່ນທ່ານໃນແອັບຕ່າງໆ"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"ການປົດລັອກດ້ວຍລາຍນິ້ວມືຈະປັບປຸງຫຼາຍຂຶ້ນເມື່ອທ່ານໃຊ້ມັນເພື່ອປົດລັອກໂທລະສັບຂອງທ່ານ ຫຼື ຢັ້ງຢືນວ່າແມ່ນທ່ານໃນແອັບຕ່າງໆ"</string>
@@ -1947,8 +1947,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"ຕັ້ງ PIN"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"ຕັ້ງ PIN ບ່ອນເຮັດວຽກ"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"ຕັ້ງຮູບແບບ"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"ເພື່ອຄວາມປອດໄພເພີ່ມເຕີມ, ໃຫ້ຕັ້ງຮູບແບບເພື່ອປົດລັອກອຸປະກອນ"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"ຕັ້ງຮູບແບບບ່ອນເຮັດວຽກ"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"ເພື່ອໃຊ້ລາຍນິ້ວມື, ໃຫ້ຕັ້ງລະຫັດຜ່ານກ່ອນ"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"ເພື່ອໃຊ້ລາຍນິ້ວມື, ໃຫ້ຕັ້ງຮູບແບບປົດລັອກກ່ອນ"</string>
@@ -4022,8 +4021,14 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"ການແຈ້ງເຕືອນ \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" ທັງໝົດ"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"ການແຈ້ງເຕືອນ <xliff:g id="APP_NAME">%1$s</xliff:g> ທັງໝົດ"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"ການແຈ້ງເຕືອນແບບປັບປ່ຽນໄດ້ເອງ"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="other">ປະມານ <xliff:g id="NUMBER_1">%,d</xliff:g> ການແຈ້ງເຕືອນຕໍ່ມື້</item>
+      <item quantity="one">ປະມານ <xliff:g id="NUMBER_0">%d</xliff:g> ການແຈ້ງເຕືອນຕໍ່ມື້</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="other">ປະມານ <xliff:g id="NUMBER_1">%,d</xliff:g> ການແຈ້ງເຕືອນຕໍ່ອາທິດ</item>
+      <item quantity="one">ປະມານ <xliff:g id="NUMBER_0">%d</xliff:g> ການແຈ້ງເຕືອນຕໍ່ອາທິດ</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"ບໍ່ສົ່ງ"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"ການແຈ້ງເຕືອນອຸປະກອນ ແລະ ແອັບ"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"ຄວບຄຸມວ່າແອັບ ແລະ ອຸປະກອນໃດສາມາດອ່ານການແຈ້ງເຕືອນໄດ້"</string>
@@ -5264,7 +5269,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"ບໍ່ເຮັດຫຍັງ"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"ສັ່ນເຕືອນ"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"ປິດສຽງ"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"ເພື່ອເປີດການນຳໃຊ້, ທຳອິດໃຫ້ປ່ຽນ \"ກົດປຸ່ມເປີດປິດຄ້າງໄວ້\" ເປັນເມນູເປີດປິດ."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"ເພື່ອເປີດການນຳໃຊ້, ທຳອິດໃຫ້ປ່ຽນ \"ກົດປຸ່ມເປີດປິດຄ້າງໄວ້\" ເປັນເມນູເປີດປິດ."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"ລາຍລະອຽດເຄືອຂ່າຍ"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"ຊື່ອຸປະກອນຂອງທ່ານຈະສະແດງໃຫ້ແອັບຕ່າງໆຢູ່ໂທລະສັບເຫັນ. ມັນອາດຖືກສະແດງໃຫ້ຄົນອື່ນເຫັນໃນເວລາທີ່ທ່ານເຊື່ອມຕໍ່ຫາອຸປະກອນ Bluetooth, ເຊື່ອມຕໍ່ຫາເຄືອຂ່າຍ Wi-Fi ຫຼື ຕັ້ງຄ່າຮັອດສະປອດ Wi-Fi ນຳ."</string>
     <string name="devices_title" msgid="649715719278562515">"ອຸປະກອນ"</string>
@@ -5551,15 +5556,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"ການຄວບຄຸມອຸປະກອນ"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"ບັດ ແລະ ປີ້ຕ່າງໆ"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"ບັດ ແລະ ປີ້ຕ່າງໆ"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"ກົດປຸ່ມເປີດປິດຄ້າງໄວ້"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"ກົດຄ້າງໄວ້ເພື່ອໃຊ້ຜູ້ຊ່ວຍ"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"ກົດຄ້າງໄວ້ເພື່ອເຂົ້າເມນູເປີດປິດ"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"ປິດການນຳໃຊ້ການກົດຄ້າງໄວ້ແລ້ວ"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"ກົດປຸ່ມເປີດປິດຄ້າງໄວ້"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"ກົດປຸ່ມເປີດປິດຄ້າງໄວ້ເພື່ອເຂົ້າເຖິງ"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"ເມນູເປີດປິດ"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"ຜູ້ຊ່ວຍດິຈິຕອນ"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"ເຂົ້າເຖິງຜູ້ຊ່ວຍດິຈິຕອນ"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"ເຂົ້າເຖິງເມນູເປີດປິດ"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"ເພື່ອໃຊ້, ໃຫ້ຕັ້ງການລັອກໜ້າຈໍກ່ອນ"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"ກົດຄ້າງໄວ້ເພື່ອເອີ້ນຜູ້ຊ່ວຍ"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"ເອີ້ນຜູ້ຊ່ວຍໂດຍການກົດປຸ່ມເປີດປິດຄ້າງໄວ້"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"ເມນູເປີດປິດ ແລະ ເມນູສຸກເສີນ:\nກົດປຸ່ມເປີດປິດ ແລະ ປຸ່ມເພີ່ມສຽງຂຶ້ນພ້ອມກັນ."</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"ປ້ອງກັນບໍ່ໃຫ້ເຕືອນດ້ວຍສຽງ:\nມີທາງລັດໃນເມນູລະດັບສຽງ."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"ເມນູເປີດປິດ:\nກົດປຸ່ມເປີດປິດ ແລະ ປຸ່ມເພີ່ມສຽງຂຶ້ນໃນເວລາດຽວກັນ"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"ຢຸດການເຕືອນດ້ວຍສຽງ:\nກົດປຸ່ມລະດັບສຽງສໍາລັບທາງລັດ"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"ໄລຍະເວລາກົດຄ້າງໄວ້"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"ປັບຄວາມລະອຽດອ່ອນໂດຍການເລືອກໄລຍະເວລາໃນການກົດປຸ່ມເປີດປິດຄ້າງໄວ້"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"ບໍ່ດົນ"</string>

@@ -1971,8 +1971,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Setați un cod PIN"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Setați un cod PIN de serviciu"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Setați un model"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_description (6808109256008481046) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Pentru mai multă siguranță, setați un model pentru deblocarea dispozitivului"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Setați un model de serviciu"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Pentru a utiliza amprenta, setați parola"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Pentru a utiliza amprenta, setați modelul"</string>
@@ -4068,8 +4067,16 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"Toate notificările din „<xliff:g id="APP_NAME">%1$s</xliff:g>”"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Toate notificările din <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Notificări adaptive"</string>
-    <!-- no translation found for notifications_sent_daily (1319135950258375284) -->
-    <!-- no translation found for notifications_sent_weekly (7604454969366376305) -->
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="few">Aproximativ <xliff:g id="NUMBER_1">%,d</xliff:g> notificări pe zi</item>
+      <item quantity="other">Aproximativ <xliff:g id="NUMBER_1">%,d</xliff:g> de notificări pe zi</item>
+      <item quantity="one">Aproximativ <xliff:g id="NUMBER_0">%d</xliff:g> notificare pe zi</item>
+    </plurals>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="few">Aproximativ <xliff:g id="NUMBER_1">%,d</xliff:g> notificări pe săptămână</item>
+      <item quantity="other">Aproximativ <xliff:g id="NUMBER_1">%,d</xliff:g> de notificări pe săptămână</item>
+      <item quantity="one">Aproximativ <xliff:g id="NUMBER_0">%d</xliff:g> notificare pe săptămână</item>
+    </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Niciodată"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Notificări pe dispozitive și în aplicații"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Gestionați aplicațiile și dispozitivele care pot citi notificări"</string>
@@ -5348,7 +5355,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Nicio acțiune"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibrație"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Dezactivați sunetul"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"Pentru activare, mai întâi modificați opțiunea Apăsați lung butonul de pornire din meniul de pornire."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"Pentru activare, mai întâi modifică opțiunea Apasă lung butonul de pornire din meniul de pornire."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Detalii despre rețea"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Numele dispozitivului este vizibil pentru aplicațiile de pe telefon. Poate fi văzut și de alte persoane când vă conectați la dispozitivele Bluetooth sau la o rețea Wi-Fi sau când configurați un hotspot Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Dispozitive"</string>
@@ -5638,15 +5645,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"comenzile dispozitivelor"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Carduri și permise"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"carduri și permise"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"Apăsați lung pe butonul de pornire"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Apăsați lung pentru Asistent"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Apăsați lung pentru meniul de pornire"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Apăsarea lungă este dezactivată"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Apasă lung pe butonul de pornire"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Apasă lung butonul de pornire pentru a accesa"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Meniul de pornire"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Asistent digital"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Accesează asistentul digital"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Accesează meniul de pornire"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Pentru utilizare, setați mai întâi un ecran de blocare"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Apăsați lung pentru Asistent"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Declanșați Asistentul apăsând lung butonul de pornire"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Meniul Pornire și urgențe:\napăsați simultan pe butonul de pornire și pe cel de creștere a volumului"</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Împiedicați sunatul:\ncomandă rapidă disponibilă în meniul de volum"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Meniul de pornire:\napasă simultan pe butonul de pornire și pe cel de creștere a volumului"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Împiedică sunatul:\napasă pe un buton de volum pentru comanda rapidă"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Durata cât țineți apăsat"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Ajustați sensibilitatea alegând cât să țineți apăsat butonul de pornire"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Scurtă"</string>
