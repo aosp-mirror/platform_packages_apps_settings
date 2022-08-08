@@ -28,6 +28,7 @@ import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -361,11 +362,14 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
         if (mDailyChartIndex == BatteryChartViewModel.SELECTED_INDEX_ALL) {
             // Multiple days are selected, hide the hourly chart view.
             mHourlyChartView.setVisibility(View.GONE);
+            updateMarginBetweenCharts(false);
         } else {
             mHourlyChartView.setVisibility(View.VISIBLE);
             final BatteryChartViewModel hourlyViewModel = mHourlyViewModels.get(mDailyChartIndex);
             hourlyViewModel.setSelectedIndex(mHourlyChartIndex);
             mHourlyChartView.setViewModel(hourlyViewModel);
+
+            updateMarginBetweenCharts(true);
         }
 
         mHandler.post(() -> {
@@ -377,6 +381,14 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
                     (System.currentTimeMillis() - start)));
         });
         return true;
+    }
+
+    private void updateMarginBetweenCharts(boolean addMargin) {
+        final LinearLayout.LayoutParams layoutParams =
+                (LinearLayout.LayoutParams) mDailyChartView.getLayoutParams();
+        layoutParams.bottomMargin = addMargin ? Math.round(
+                mContext.getResources().getDimension(R.dimen.chartview_two_charts_margin)) : 0;
+        mDailyChartView.setLayoutParams(layoutParams);
     }
 
     private void addAllPreferences() {
