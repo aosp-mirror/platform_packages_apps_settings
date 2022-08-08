@@ -19,7 +19,6 @@ package com.android.settings.gestures;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.hardware.display.AmbientDisplayConfiguration;
-import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -27,11 +26,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.Arrays;
-import java.util.List;
 
 @SearchIndexable
 public class TapScreenGestureSettings extends DashboardFragment {
@@ -43,8 +38,8 @@ public class TapScreenGestureSettings extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        SuggestionFeatureProvider suggestionFeatureProvider = FeatureFactory.getFactory(context)
-                .getSuggestionFeatureProvider(context);
+        SuggestionFeatureProvider suggestionFeatureProvider =
+                FeatureFactory.getFactory(context).getSuggestionFeatureProvider();
         SharedPreferences prefs = suggestionFeatureProvider.getSharedPrefs(context);
         prefs.edit().putBoolean(PREF_KEY_SUGGESTION_COMPLETE, true).apply();
 

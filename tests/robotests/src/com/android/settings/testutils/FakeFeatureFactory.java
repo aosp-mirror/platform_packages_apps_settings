@@ -142,7 +142,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     }
 
     @Override
-    public SuggestionFeatureProvider getSuggestionFeatureProvider(Context context) {
+    public SuggestionFeatureProvider getSuggestionFeatureProvider() {
         return suggestionsFeatureProvider;
     }
 
