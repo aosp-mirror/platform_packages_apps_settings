@@ -102,7 +102,10 @@ public abstract class FeatureFactory {
 
     public abstract AssistGestureFeatureProvider getAssistGestureFeatureProvider();
 
-    public abstract SuggestionFeatureProvider getSuggestionFeatureProvider(Context context);
+    /**
+     * Gets implementation for the Suggestion Feature provider.
+     */
+    public abstract SuggestionFeatureProvider getSuggestionFeatureProvider();
 
     public abstract SupportFeatureProvider getSupportFeatureProvider(Context context);
 

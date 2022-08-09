@@ -35,6 +35,7 @@ import android.os.Bundle;
 import android.os.LocaleList;
 import android.text.format.DateUtils;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -86,6 +87,8 @@ public final class BatteryChartPreferenceControllerV2Test {
     private PowerGaugePreference mPowerGaugePreference;
     @Mock
     private BatteryUtils mBatteryUtils;
+    @Mock
+    private LinearLayout.LayoutParams mLayoutParams;
 
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
@@ -111,6 +114,7 @@ public final class BatteryChartPreferenceControllerV2Test {
         doReturn(new String[]{"com.android.gms.persistent"})
                 .when(mFeatureFactory.powerUsageFeatureProvider)
                 .getHideApplicationEntries(mContext);
+        doReturn(mLayoutParams).when(mDailyChartView).getLayoutParams();
         mBatteryChartPreferenceController = createController();
         mBatteryChartPreferenceController.mPrefContext = mContext;
         mBatteryChartPreferenceController.mAppListPrefGroup = mAppListGroup;
@@ -194,6 +198,7 @@ public final class BatteryChartPreferenceControllerV2Test {
 
         reset(mDailyChartView);
         reset(mHourlyChartView);
+        doReturn(mLayoutParams).when(mDailyChartView).getLayoutParams();
         mBatteryChartPreferenceController.mDailyChartIndex = 0;
         mBatteryChartPreferenceController.refreshUi();
         verify(mDailyChartView).setVisibility(View.VISIBLE);
@@ -212,6 +217,7 @@ public final class BatteryChartPreferenceControllerV2Test {
 
         reset(mDailyChartView);
         reset(mHourlyChartView);
+        doReturn(mLayoutParams).when(mDailyChartView).getLayoutParams();
         mBatteryChartPreferenceController.mDailyChartIndex = 1;
         mBatteryChartPreferenceController.mHourlyChartIndex = 6;
         mBatteryChartPreferenceController.refreshUi();
@@ -231,6 +237,7 @@ public final class BatteryChartPreferenceControllerV2Test {
 
         reset(mDailyChartView);
         reset(mHourlyChartView);
+        doReturn(mLayoutParams).when(mDailyChartView).getLayoutParams();
         mBatteryChartPreferenceController.mDailyChartIndex = 2;
         mBatteryChartPreferenceController.mHourlyChartIndex =
                 BatteryChartViewModel.SELECTED_INDEX_ALL;
