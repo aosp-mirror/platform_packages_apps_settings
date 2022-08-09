@@ -41,22 +41,18 @@ class BatteryChartViewModel {
     private final List<Integer> mLevels;
     private final List<String> mTexts;
     private final AxisLabelPosition mAxisLabelPosition;
-    private int mSelectedIndex;
+    private int mSelectedIndex = SELECTED_INDEX_ALL;
 
     BatteryChartViewModel(
-            @NonNull List<Integer> levels, @NonNull List<String> texts, int selectedIndex,
+            @NonNull List<Integer> levels, @NonNull List<String> texts,
             @NonNull AxisLabelPosition axisLabelPosition) {
         Preconditions.checkArgument(
-                levels.size() == texts.size()
-                        && levels.size() >= MIN_LEVELS_DATA_SIZE
-                        && selectedIndex >= SELECTED_INDEX_ALL
-                        && selectedIndex < levels.size(),
-                String.format(Locale.ENGLISH, "Invalid BatteryChartViewModel"
-                                + "  levels.size: %d\ntexts.size: %d\nselectedIndex: %d.",
-                        levels.size(), texts.size(), selectedIndex));
+                levels.size() == texts.size() && levels.size() >= MIN_LEVELS_DATA_SIZE,
+                String.format(Locale.ENGLISH,
+                        "Invalid BatteryChartViewModel levels.size: %d, texts.size: %d.",
+                        levels.size(), texts.size()));
         mLevels = levels;
         mTexts = texts;
-        mSelectedIndex = selectedIndex;
         mAxisLabelPosition = axisLabelPosition;
     }
 
@@ -72,16 +68,16 @@ class BatteryChartViewModel {
         return mTexts;
     }
 
+    public AxisLabelPosition axisLabelPosition() {
+        return mAxisLabelPosition;
+    }
+
     public int selectedIndex() {
         return mSelectedIndex;
     }
 
     public void setSelectedIndex(int index) {
         mSelectedIndex = index;
-    }
-
-    public AxisLabelPosition axisLabelPosition() {
-        return mAxisLabelPosition;
     }
 
     @Override
@@ -99,15 +95,15 @@ class BatteryChartViewModel {
         final BatteryChartViewModel batteryChartViewModel = (BatteryChartViewModel) other;
         return Objects.equals(mLevels, batteryChartViewModel.mLevels)
                 && Objects.equals(mTexts, batteryChartViewModel.mTexts)
-                && mSelectedIndex == batteryChartViewModel.mSelectedIndex
-                && mAxisLabelPosition == batteryChartViewModel.mAxisLabelPosition;
+                && mAxisLabelPosition == batteryChartViewModel.mAxisLabelPosition
+                && mSelectedIndex == batteryChartViewModel.mSelectedIndex;
     }
 
     @Override
     public String toString() {
         return String.format(Locale.ENGLISH,
-                "levels: %s\ntexts: %s\nselectedIndex: %d, axisLabelPosition: %s",
-                Objects.toString(mLevels), Objects.toString(mTexts), mSelectedIndex,
-                mAxisLabelPosition);
+                "levels: %s,\ntexts: %s,\naxisLabelPosition: %s, selectedIndex: %d",
+                Objects.toString(mLevels), Objects.toString(mTexts), mAxisLabelPosition,
+                mSelectedIndex);
     }
 }

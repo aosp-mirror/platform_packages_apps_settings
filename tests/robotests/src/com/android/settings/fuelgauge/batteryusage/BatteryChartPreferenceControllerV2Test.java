@@ -180,21 +180,21 @@ public final class BatteryChartPreferenceControllerV2Test {
         verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
                 List.of(100, 97, 95),
                 List.of("8 am", "10 am", "12 pm"),
-                BatteryChartViewModel.SELECTED_INDEX_ALL,
                 BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
     }
 
     @Test
     public void setBatteryChartViewModel_60Hours() {
+        BatteryChartViewModel expectedDailyViewModel = new BatteryChartViewModel(
+                List.of(100, 83, 59, 41),
+                List.of("Sat", "Sun", "Mon", "Mon"),
+                BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS);
+
         mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(60));
 
         verify(mDailyChartView, atLeastOnce()).setVisibility(View.VISIBLE);
         verify(mHourlyChartView, atLeastOnce()).setVisibility(View.GONE);
-        verify(mDailyChartView).setViewModel(new BatteryChartViewModel(
-                List.of(100, 83, 59, 41),
-                List.of("Sat", "Sun", "Mon", "Mon"),
-                BatteryChartViewModel.SELECTED_INDEX_ALL,
-                BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS));
+        verify(mDailyChartView).setViewModel(expectedDailyViewModel);
 
         reset(mDailyChartView);
         reset(mHourlyChartView);
@@ -203,16 +203,13 @@ public final class BatteryChartPreferenceControllerV2Test {
         mBatteryChartPreferenceController.refreshUi();
         verify(mDailyChartView).setVisibility(View.VISIBLE);
         verify(mHourlyChartView).setVisibility(View.VISIBLE);
-        verify(mDailyChartView).setViewModel(new BatteryChartViewModel(
-                List.of(100, 83, 59, 41),
-                List.of("Sat", "Sun", "Mon", "Mon"),
-                0,
-                BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS));
+
+        expectedDailyViewModel.setSelectedIndex(0);
+        verify(mDailyChartView).setViewModel(expectedDailyViewModel);
         verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
                 List.of(100, 97, 95, 93, 91, 89, 87, 85, 83),
                 List.of("8 am", "10 am", "12 pm", "2 pm", "4 pm", "6 pm", "8 pm", "10 pm",
                         "12 am"),
-                BatteryChartViewModel.SELECTED_INDEX_ALL,
                 BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
 
         reset(mDailyChartView);
@@ -223,17 +220,15 @@ public final class BatteryChartPreferenceControllerV2Test {
         mBatteryChartPreferenceController.refreshUi();
         verify(mDailyChartView).setVisibility(View.VISIBLE);
         verify(mHourlyChartView).setVisibility(View.VISIBLE);
-        verify(mDailyChartView).setViewModel(new BatteryChartViewModel(
-                List.of(100, 83, 59, 41),
-                List.of("Sat", "Sun", "Mon", "Mon"),
-                1,
-                BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS));
-        verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
+        expectedDailyViewModel.setSelectedIndex(1);
+        verify(mDailyChartView).setViewModel(expectedDailyViewModel);
+        BatteryChartViewModel expectedHourlyViewModel = new BatteryChartViewModel(
                 List.of(83, 81, 79, 77, 75, 73, 71, 69, 67, 65, 63, 61, 59),
                 List.of("12 am", "2 am", "4 am", "6 am", "8 am", "10 am", "12 pm", "2 pm",
                         "4 pm", "6 pm", "8 pm", "10 pm", "12 am"),
-                6,
-                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
+                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS);
+        expectedHourlyViewModel.setSelectedIndex(6);
+        verify(mHourlyChartView).setViewModel(expectedHourlyViewModel);
 
         reset(mDailyChartView);
         reset(mHourlyChartView);
@@ -244,16 +239,12 @@ public final class BatteryChartPreferenceControllerV2Test {
         mBatteryChartPreferenceController.refreshUi();
         verify(mDailyChartView).setVisibility(View.VISIBLE);
         verify(mHourlyChartView).setVisibility(View.VISIBLE);
-        verify(mDailyChartView).setViewModel(new BatteryChartViewModel(
-                List.of(100, 83, 59, 41),
-                List.of("Sat", "Sun", "Mon", "Mon"),
-                2,
-                BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS));
+        expectedDailyViewModel.setSelectedIndex(2);
+        verify(mDailyChartView).setViewModel(expectedDailyViewModel);
         verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
                 List.of(59, 57, 55, 53, 51, 49, 47, 45, 43, 41),
                 List.of("12 am", "2 am", "4 am", "6 am", "8 am", "10 am", "12 pm", "2 pm",
                         "4 pm", "6 pm"),
-                BatteryChartViewModel.SELECTED_INDEX_ALL,
                 BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
     }
 

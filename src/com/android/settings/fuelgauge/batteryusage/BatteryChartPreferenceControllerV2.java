@@ -284,7 +284,6 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
                 generateTimestampDayOfWeekTexts(
                         mContext, batteryLevelData.getDailyBatteryLevels().getTimestamps(),
                         /* isAbbreviation= */ true),
-                mDailyChartIndex,
                 BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS);
         mHourlyViewModels = new ArrayList<>();
         for (BatteryLevelData.PeriodBatteryLevelData hourlyBatteryLevelsPerDay :
@@ -293,7 +292,6 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
                     hourlyBatteryLevelsPerDay.getLevels(),
                     generateTimestampHourTexts(
                             mContext, hourlyBatteryLevelsPerDay.getTimestamps()),
-                    mHourlyChartIndex,
                     BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
         }
         refreshUi();
