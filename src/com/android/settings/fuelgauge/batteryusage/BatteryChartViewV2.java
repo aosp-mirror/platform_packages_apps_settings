@@ -158,7 +158,6 @@ public class BatteryChartViewV2 extends AppCompatImageView implements View.OnCli
         } else {
             mTextPaint = null;
         }
-        setVisibility(View.VISIBLE);
         requestLayout();
     }
 
