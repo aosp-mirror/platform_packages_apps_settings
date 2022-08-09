@@ -137,10 +137,12 @@ public final class DataProcessor {
         // Wrap and processed history map into easy-to-use format for UI rendering.
         final BatteryLevelData batteryLevelData =
                 getLevelDataThroughProcessedHistoryMap(context, processedBatteryHistoryMap);
-        return getBatteryUsageMap(
-                context,
-                batteryLevelData.getHourlyBatteryLevelsPerDay(),
-                processedBatteryHistoryMap);
+        return batteryLevelData == null
+                ? null
+                : getBatteryUsageMap(
+                        context,
+                        batteryLevelData.getHourlyBatteryLevelsPerDay(),
+                        processedBatteryHistoryMap);
     }
 
     /**
