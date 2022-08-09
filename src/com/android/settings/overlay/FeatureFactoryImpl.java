@@ -225,10 +225,9 @@ public class FeatureFactoryImpl extends FeatureFactory {
     }
 
     @Override
-    public SuggestionFeatureProvider getSuggestionFeatureProvider(Context context) {
+    public SuggestionFeatureProvider getSuggestionFeatureProvider() {
         if (mSuggestionFeatureProvider == null) {
-            mSuggestionFeatureProvider = new SuggestionFeatureProviderImpl(
-                    context.getApplicationContext());
+            mSuggestionFeatureProvider = new SuggestionFeatureProviderImpl();
         }
         return mSuggestionFeatureProvider;
     }

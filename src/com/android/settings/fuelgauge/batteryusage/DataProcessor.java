@@ -58,6 +58,7 @@ public final class DataProcessor {
     private static final String TAG = "DataProcessor";
     private static final int MIN_DAILY_DATA_SIZE = 2;
     private static final int MIN_TIMESTAMP_DATA_SIZE = 2;
+    private static final int MAX_DIFF_SECONDS_OF_UPPER_TIMESTAMP = 5;
     // Maximum total time value for each hourly slot cumulative data at most 2 hours.
     private static final float TOTAL_HOURLY_TIME_THRESHOLD = DateUtils.HOUR_IN_MILLIS * 2;
     private static final Map<String, BatteryHistEntry> EMPTY_BATTERY_MAP = new HashMap<>();
@@ -116,6 +117,30 @@ public final class DataProcessor {
         }
 
         return batteryLevelData;
+    }
+
+    /**
+     * @return Returns battery usage data of different entries.
+     * Returns null if the input is invalid or there is no enough data.
+     */
+    @Nullable
+    public static Map<Integer, Map<Integer, BatteryDiffData>> getBatteryUsageData(
+            Context context,
+            @Nullable final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
+        if (batteryHistoryMap == null || batteryHistoryMap.isEmpty()) {
+            Log.d(TAG, "getBatteryLevelData() returns null");
+            return null;
+        }
+        // Process raw history map data into hourly timestamps.
+        final Map<Long, Map<String, BatteryHistEntry>> processedBatteryHistoryMap =
+                getHistoryMapWithExpectedTimestamps(context, batteryHistoryMap);
+        // Wrap and processed history map into easy-to-use format for UI rendering.
+        final BatteryLevelData batteryLevelData =
+                getLevelDataThroughProcessedHistoryMap(context, processedBatteryHistoryMap);
+        return getBatteryUsageMap(
+                context,
+                batteryLevelData.getHourlyBatteryLevelsPerDay(),
+                processedBatteryHistoryMap);
     }
 
     /**
@@ -386,7 +411,8 @@ public final class DataProcessor {
             return;
         }
         // Case 2: upper timestamp is closed to the current timestamp.
-        if ((upperTimestamp - currentSlot) < 5 * DateUtils.SECOND_IN_MILLIS) {
+        if ((upperTimestamp - currentSlot)
+                < MAX_DIFF_SECONDS_OF_UPPER_TIMESTAMP * DateUtils.SECOND_IN_MILLIS) {
             log(context, "force align into the nearest slot", currentSlot, null);
             resultMap.put(currentSlot, batteryHistoryMap.get(upperTimestamp));
             return;

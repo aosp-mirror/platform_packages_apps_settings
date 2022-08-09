@@ -28,6 +28,7 @@ import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -54,7 +55,6 @@ import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -362,11 +362,14 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
         if (mDailyChartIndex == BatteryChartViewModel.SELECTED_INDEX_ALL) {
             // Multiple days are selected, hide the hourly chart view.
             mHourlyChartView.setVisibility(View.GONE);
+            updateMarginBetweenCharts(false);
         } else {
             mHourlyChartView.setVisibility(View.VISIBLE);
             final BatteryChartViewModel hourlyViewModel = mHourlyViewModels.get(mDailyChartIndex);
             hourlyViewModel.setSelectedIndex(mHourlyChartIndex);
             mHourlyChartView.setViewModel(hourlyViewModel);
+
+            updateMarginBetweenCharts(true);
         }
 
         mHandler.post(() -> {
@@ -378,6 +381,14 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
                     (System.currentTimeMillis() - start)));
         });
         return true;
+    }
+
+    private void updateMarginBetweenCharts(boolean addMargin) {
+        final LinearLayout.LayoutParams layoutParams =
+                (LinearLayout.LayoutParams) mDailyChartView.getLayoutParams();
+        layoutParams.bottomMargin = addMargin ? Math.round(
+                mContext.getResources().getDimension(R.dimen.chartview_two_charts_margin)) : 0;
+        mDailyChartView.setLayoutParams(layoutParams);
     }
 
     private void addAllPreferences() {
@@ -595,7 +606,7 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
 
     @VisibleForTesting
     boolean isValidToShowSummary(String packageName) {
-        return !contains(packageName, mNotAllowShowSummaryPackages);
+        return !DataProcessor.contains(packageName, mNotAllowShowSummaryPackages);
     }
 
     private void addFooterPreferenceIfNeeded(boolean containAppItems) {
@@ -639,59 +650,36 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
         return texts;
     }
 
-    private static boolean contains(String target, CharSequence[] packageNames) {
-        if (target != null && packageNames != null) {
-            for (CharSequence packageName : packageNames) {
-                if (TextUtils.equals(target, packageName)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    // TODO: Change this method to fromLastFullCharged.
-
     /** Used for {@link AppBatteryPreferenceController}. */
-    public static List<BatteryDiffEntry> getBatteryLast24HrUsageData(Context context) {
+    public static List<BatteryDiffEntry> getAppBatteryUsageData(Context context) {
         final long start = System.currentTimeMillis();
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
                 FeatureFactory.getFactory(context)
                         .getPowerUsageFeatureProvider(context)
-                        .getBatteryHistory(context);
+                        .getBatteryHistorySinceLastFullCharge(context);
         if (batteryHistoryMap == null || batteryHistoryMap.isEmpty()) {
             return null;
         }
-        Log.d(TAG, String.format("getBatteryLast24HrData() size=%d time=%d/ms",
+        Log.d(TAG, String.format("getBatterySinceLastFullChargeUsageData() size=%d time=%d/ms",
                 batteryHistoryMap.size(), (System.currentTimeMillis() - start)));
 
-        final List<Long> batteryHistoryKeyList =
-                new ArrayList<>(batteryHistoryMap.keySet());
-        Collections.sort(batteryHistoryKeyList);
-        final long[] batteryHistoryKeys = new long[TWENTY_FOUR_HOURS_TIME_SLOT_SIZE + 1];
-        for (int index = 0; index < batteryHistoryKeys.length; index++) {
-            batteryHistoryKeys[index] = batteryHistoryKeyList.get(index);
-        }
-
-        final Map<Integer, List<BatteryDiffEntry>> batteryIndexedMap =
-                ConvertUtils.getIndexedUsageMap(
-                        context,
-                        /*timeSlotSize=*/ TWENTY_FOUR_HOURS_TIME_SLOT_SIZE,
-                        batteryHistoryKeys,
-                        batteryHistoryMap,
-                        /*purgeLowPercentageAndFakeData=*/ true);
-        return batteryIndexedMap.get(BatteryChartViewModel.SELECTED_INDEX_ALL);
+        final Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageData =
+                DataProcessor.getBatteryUsageData(context, batteryHistoryMap);
+        return batteryUsageData == null
+                ? null
+                : batteryUsageData
+                        .get(BatteryChartViewModel.SELECTED_INDEX_ALL)
+                        .get(BatteryChartViewModel.SELECTED_INDEX_ALL)
+                        .getAppDiffEntryList();
     }
 
-    // TODO: Change this method to fromLastFullCharged.
-
     /** Used for {@link AppBatteryPreferenceController}. */
-    public static BatteryDiffEntry getBatteryLast24HrUsageData(
+    public static BatteryDiffEntry getAppBatteryUsageData(
             Context context, String packageName, int userId) {
         if (packageName == null) {
             return null;
         }
-        final List<BatteryDiffEntry> entries = getBatteryLast24HrUsageData(context);
+        final List<BatteryDiffEntry> entries = getAppBatteryUsageData(context);
         if (entries == null) {
             return null;
         }
