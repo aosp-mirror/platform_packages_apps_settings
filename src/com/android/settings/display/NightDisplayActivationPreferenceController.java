@@ -90,11 +90,6 @@ public class NightDisplayActivationPreferenceController extends
         }
     }
 
-    @Override
-    public final void updateState(Preference preference) {
-        updateStateInternal();
-    }
-
     /** FOR SLICES */
 
     @Override
@@ -112,14 +107,4 @@ public class NightDisplayActivationPreferenceController extends
         return mTimeFormatter.getAutoModeSummary(mContext, mColorDisplayManager);
     }
 
-    private void updateStateInternal() {
-        final boolean isActivated = mColorDisplayManager.isNightDisplayActivated();
-        final int autoMode = mColorDisplayManager.getNightDisplayAutoMode();
-
-        if (autoMode == ColorDisplayManager.AUTO_MODE_CUSTOM_TIME) {
-            mTimeFormatter.getFormattedTimeString(isActivated
-                    ? mColorDisplayManager.getNightDisplayCustomStartTime()
-                    : mColorDisplayManager.getNightDisplayCustomEndTime());
-        }
-    }
 }
