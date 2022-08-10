@@ -102,10 +102,11 @@ public final class BatteryChartViewV2Test {
     @Test
     public void onClick_invokesCallback() {
         final int originalSelectedIndex = 2;
-        mBatteryChartView.setViewModel(
-                new BatteryChartViewModel(List.of(90, 80, 70, 60), List.of("", "", "", ""),
-                        originalSelectedIndex,
-                        BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
+        BatteryChartViewModel batteryChartViewModel = new BatteryChartViewModel(
+                List.of(90, 80, 70, 60), List.of("", "", "", ""),
+                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS);
+        batteryChartViewModel.setSelectedIndex(originalSelectedIndex);
+        mBatteryChartView.setViewModel(batteryChartViewModel);
         for (int i = 0; i < mBatteryChartView.mTrapezoidSlots.length; i++) {
             mBatteryChartView.mTrapezoidSlots[i] = new BatteryChartViewV2.TrapezoidSlot();
             mBatteryChartView.mTrapezoidSlots[i].mLeft = i;
@@ -192,8 +193,7 @@ public final class BatteryChartViewV2Test {
             levels.add(index + 1);
             texts.add("");
         }
-        mBatteryChartView.setViewModel(new BatteryChartViewModel(
-                levels, texts, BatteryChartViewModel.SELECTED_INDEX_ALL,
+        mBatteryChartView.setViewModel(new BatteryChartViewModel(levels, texts,
                 BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
         mBatteryChartView.setClickableForce(true);
         when(mPowerUsageFeatureProvider.isChartGraphSlotsEnabled(mContext))

@@ -32,7 +32,6 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
-import com.android.settings.password.ChooseLockSettingsHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
@@ -114,9 +113,6 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
         setResult(RESULT_FINISHED);
         if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
             postEnroll();
-        } else if (mFromSettingsSummary) {
-            // Only launch fingerprint settings if enrollment was triggered through settings summary
-            launchFingerprintSettings();
         }
         finish();
     }
@@ -148,19 +144,13 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
         }
     }
 
-    private void launchFingerprintSettings() {
-        final Intent intent = new Intent(ACTION_FINGERPRINT_SETTINGS);
-        intent.setPackage(Utils.SETTINGS_PACKAGE_NAME);
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
-        intent.putExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, mChallenge);
-        startActivity(intent);
-        overridePendingTransition(R.anim.sud_slide_back_in, R.anim.sud_slide_back_out);
-    }
-
     private void onAddAnotherButtonClick(View view) {
         startActivityForResult(getFingerprintEnrollingIntent(), BiometricUtils.REQUEST_ADD_ANOTHER);
+    }
+
+    @Override
+    protected boolean shouldFinishWhenBackgrounded() {
+        return !isFinishing() && super.shouldFinishWhenBackgrounded();
     }
 
     @Override
