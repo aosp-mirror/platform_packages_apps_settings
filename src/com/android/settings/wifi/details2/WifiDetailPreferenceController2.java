@@ -713,21 +713,28 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
                 .getSystemService(SubscriptionManager.class).getActiveSubscriptionInfoList();
         final int defaultDataSubscriptionId = SubscriptionManager.getDefaultDataSubscriptionId();
         if (activeSubscriptionInfos != null) {
+            CharSequence firstCarrierIdMatchedDisplayName = null;
             for (SubscriptionInfo subscriptionInfo : activeSubscriptionInfos) {
                 final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
                         subscriptionInfo, mContext);
-                if (config.carrierId == subscriptionInfo.getCarrierId()) {
-                    mEapSimSubscriptionPref.setSummary(displayName);
-                    return;
+                if (firstCarrierIdMatchedDisplayName == null
+                        && config.carrierId == subscriptionInfo.getCarrierId()) {
+                    firstCarrierIdMatchedDisplayName = displayName;
                 }
 
-                // When it's UNKNOWN_CARRIER_ID, devices connects it with the SIM subscription of
-                // defaultDataSubscriptionId.
-                if (config.carrierId == TelephonyManager.UNKNOWN_CARRIER_ID
-                        && defaultDataSubscriptionId == subscriptionInfo.getSubscriptionId()) {
+                // When it's UNKNOWN_CARRIER_ID or matched with configured CarrierId,
+                // devices connects it with the SIM subscription of defaultDataSubscriptionId.
+                if (defaultDataSubscriptionId == subscriptionInfo.getSubscriptionId()
+                        && (config.carrierId == subscriptionInfo.getCarrierId()
+                                || config.carrierId == TelephonyManager.UNKNOWN_CARRIER_ID)) {
                     mEapSimSubscriptionPref.setSummary(displayName);
                     return;
                 }
+            }
+
+            if (firstCarrierIdMatchedDisplayName != null) {
+                mEapSimSubscriptionPref.setSummary(firstCarrierIdMatchedDisplayName);
+                return;
             }
         }
 
