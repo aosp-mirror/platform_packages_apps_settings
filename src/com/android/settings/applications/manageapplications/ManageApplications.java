@@ -959,7 +959,7 @@ public class ManageApplications extends InstrumentedFragment
         } else if (className.equals(AppLocaleDetails.class.getName())) {
             screenTitle = R.string.app_locales_picker_menu_title;
         } else if (className.equals(Settings.AppBatteryUsageActivity.class.getName())) {
-            screenTitle = R.string.app_battery_optimization_title;
+            screenTitle = R.string.app_battery_usage_title;
         } else {
             if (screenTitle == -1) {
                 screenTitle = R.string.all_apps;
@@ -1673,6 +1673,9 @@ public class ManageApplications extends InstrumentedFragment
                     break;
                 case LIST_TYPE_APPS_LOCALE:
                     holder.setSummary(AppLocaleDetails.getSummary(mContext, entry));
+                    break;
+                case LIST_TYPE_BATTERY_OPTIMIZATION:
+                    holder.setSummary(R.string.app_battery_usage_summary);
                     break;
                 default:
                     holder.updateSizeText(entry, mManageApplications.mInvalidSizeStr, mWhichSize);
