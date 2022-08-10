@@ -56,7 +56,7 @@ public class BubblePreferenceController extends NotificationPreferenceController
     public BubblePreferenceController(Context context, @Nullable FragmentManager fragmentManager,
             NotificationBackend backend, boolean isAppPage,
             @Nullable NotificationSettings.DependentFieldListener listener) {
-        super(context, backend);
+        super(context, backend, KEY);
         mFragmentManager = fragmentManager;
         mIsAppPage = isAppPage;
         mListener = listener;
@@ -68,21 +68,24 @@ public class BubblePreferenceController extends NotificationPreferenceController
     }
 
     @Override
-    public boolean isAvailable() {
-        if (!super.isAvailable()) {
-            return false;
+    public int getAvailabilityStatus() {
+        if (super.getAvailabilityStatus() == CONDITIONALLY_UNAVAILABLE) {
+            return CONDITIONALLY_UNAVAILABLE;
         }
         if (!mIsAppPage && !isEnabled()) {
-            return false;
+            return CONDITIONALLY_UNAVAILABLE;
         }
         if (mChannel != null) {
             if (isDefaultChannel()) {
-                return true;
+                return AVAILABLE;
             } else {
-                return mAppRow != null &&  mAppRow.bubblePreference != BUBBLE_PREFERENCE_NONE;
+                if (mAppRow != null &&  mAppRow.bubblePreference != BUBBLE_PREFERENCE_NONE) {
+                    return AVAILABLE;
+                }
+                return CONDITIONALLY_UNAVAILABLE;
             }
         }
-        return true;
+        return AVAILABLE;
     }
 
     @Override
