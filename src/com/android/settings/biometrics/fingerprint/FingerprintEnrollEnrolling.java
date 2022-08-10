@@ -339,8 +339,23 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     @Override
     protected void onStop() {
-        super.onStop();
+        if (!isChangingConfigurations()) {
+            if (!WizardManagerHelper.isAnySetupWizard(getIntent())
+                    && !BiometricUtils.isAnyMultiBiometricFlow(this)
+                    && !mFromSettingsSummary) {
+                setResult(RESULT_TIMEOUT);
+            }
+            finish();
+        }
         stopIconAnimation();
+
+        super.onStop();
+    }
+
+    @Override
+    protected boolean shouldFinishWhenBackgrounded() {
+        // Prevent super.onStop() from finishing, since we handle this in our onStop().
+        return false;
     }
 
     @Override

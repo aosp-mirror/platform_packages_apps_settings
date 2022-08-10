@@ -165,4 +165,76 @@ public class FingerprintEnrollFindSensorTest {
             null);
         assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(Activity.RESULT_CANCELED);
     }
+
+    @Test
+    public void onActivityResult_EnrollRequestResultFinishShallBeSentBack() {
+        final int defaultActivityResult = Shadows.shadowOf(mActivity).getResultCode();
+
+        // Start enrolling
+        EnrollmentCallback enrollmentCallback = verifyAndCaptureEnrollmentCallback();
+        enrollmentCallback.onEnrollmentProgress(123);
+        enrollmentCallback.onEnrollmentError(FingerprintManager.FINGERPRINT_ERROR_CANCELED, "test");
+
+        // onStop shall not change default activity result
+        mActivity.onStop();
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(defaultActivityResult);
+
+        // onActivityResult from Enrolling activity shall be sent back
+        final int testResult = BiometricEnrollBase.RESULT_FINISHED;
+        mActivity.onActivityResult(BiometricEnrollBase.ENROLL_REQUEST, testResult, null);
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(testResult);
+        assertThat(mActivity.isFinishing()).isEqualTo(true);
+
+        // onStop shall not change last activity result
+        mActivity.onStop();
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(testResult);
+    }
+
+    @Test
+    public void onActivityResult_EnrollRequestResultSkipShallBeSentBack() {
+        final int defaultActivityResult = Shadows.shadowOf(mActivity).getResultCode();
+
+        // Start enrolling
+        EnrollmentCallback enrollmentCallback = verifyAndCaptureEnrollmentCallback();
+        enrollmentCallback.onEnrollmentProgress(123);
+        enrollmentCallback.onEnrollmentError(FingerprintManager.FINGERPRINT_ERROR_CANCELED, "test");
+
+        // onStop shall not change default activity result
+        mActivity.onStop();
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(defaultActivityResult);
+
+        // onActivityResult from Enrolling activity shall be sent back
+        final int testResult = BiometricEnrollBase.RESULT_SKIP;
+        mActivity.onActivityResult(BiometricEnrollBase.ENROLL_REQUEST, testResult, null);
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(testResult);
+        assertThat(mActivity.isFinishing()).isEqualTo(true);
+
+        // onStop shall not change last activity result
+        mActivity.onStop();
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(testResult);
+    }
+
+    @Test
+    public void onActivityResult_EnrollRequestResultTimeoutShallBeSentBack() {
+        final int defaultActivityResult = Shadows.shadowOf(mActivity).getResultCode();
+
+        // Start enrolling
+        EnrollmentCallback enrollmentCallback = verifyAndCaptureEnrollmentCallback();
+        enrollmentCallback.onEnrollmentProgress(123);
+        enrollmentCallback.onEnrollmentError(FingerprintManager.FINGERPRINT_ERROR_CANCELED, "test");
+
+        // onStop shall not change default activity result
+        mActivity.onStop();
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(defaultActivityResult);
+
+        // onActivityResult from Enrolling activity shall be sent back
+        final int testResult = BiometricEnrollBase.RESULT_TIMEOUT;
+        mActivity.onActivityResult(BiometricEnrollBase.ENROLL_REQUEST, testResult, null);
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(testResult);
+        assertThat(mActivity.isFinishing()).isEqualTo(true);
+
+        // onStop shall not change last activity result
+        mActivity.onStop();
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(testResult);
+    }
 }

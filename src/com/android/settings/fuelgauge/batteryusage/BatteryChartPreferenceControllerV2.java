@@ -273,7 +273,7 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
             mDailyTimestampFullTexts = null;
             mDailyViewModel = null;
             mHourlyViewModels = null;
-            addFooterPreferenceIfNeeded(false);
+            refreshUi();
             return;
         }
         mDailyTimestampFullTexts = generateTimestampDayOfWeekTexts(
@@ -284,7 +284,6 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
                 generateTimestampDayOfWeekTexts(
                         mContext, batteryLevelData.getDailyBatteryLevels().getTimestamps(),
                         /* isAbbreviation= */ true),
-                mDailyChartIndex,
                 BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS);
         mHourlyViewModels = new ArrayList<>();
         for (BatteryLevelData.PeriodBatteryLevelData hourlyBatteryLevelsPerDay :
@@ -293,7 +292,6 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
                     hourlyBatteryLevelsPerDay.getLevels(),
                     generateTimestampHourTexts(
                             mContext, hourlyBatteryLevelsPerDay.getTimestamps()),
-                    mHourlyChartIndex,
                     BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
         }
         refreshUi();
@@ -338,14 +336,20 @@ public class BatteryChartPreferenceControllerV2 extends AbstractPreferenceContro
 
     @VisibleForTesting
     boolean refreshUi() {
-        if (mBatteryUsageMap == null || mDailyChartView == null || mHourlyChartView == null) {
+        if (mDailyChartView == null || mHourlyChartView == null) {
+            // Chart views are not initialized.
             return false;
         }
-
         if (mDailyViewModel == null || mHourlyViewModels == null) {
             // Fail to get battery level data, show an empty hourly chart view.
             mDailyChartView.setVisibility(View.GONE);
+            mHourlyChartView.setVisibility(View.VISIBLE);
             mHourlyChartView.setViewModel(null);
+            addFooterPreferenceIfNeeded(false);
+            return false;
+        }
+        if (mBatteryUsageMap == null) {
+            // Battery usage data is not ready, wait for data ready to refresh UI.
             return false;
         }
 
