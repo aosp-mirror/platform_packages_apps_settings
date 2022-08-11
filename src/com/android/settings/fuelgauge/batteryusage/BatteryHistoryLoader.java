@@ -43,6 +43,6 @@ public class BatteryHistoryLoader
     public Map<Long, Map<String, BatteryHistEntry>> loadInBackground() {
         final PowerUsageFeatureProvider powerUsageFeatureProvider =
                 FeatureFactory.getFactory(mContext).getPowerUsageFeatureProvider(mContext);
-        return powerUsageFeatureProvider.getBatteryHistory(mContext);
+        return powerUsageFeatureProvider.getBatteryHistorySinceLastFullCharge(mContext);
     }
 }

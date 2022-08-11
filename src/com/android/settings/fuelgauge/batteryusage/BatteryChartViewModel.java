@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-/** The view model of {@code BatteryChartViewV2} */
+/** The view model of {@code BatteryChartView} */
 class BatteryChartViewModel {
     private static final String TAG = "BatteryChartViewModel";
 
