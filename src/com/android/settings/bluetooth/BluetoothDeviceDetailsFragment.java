@@ -268,6 +268,8 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                     lifecycle));
             controllers.add(new BluetoothDetailsRelatedToolsController(context, this, mCachedDevice,
                     lifecycle));
+            controllers.add(new BluetoothDetailsPairOtherController(context, this, mCachedDevice,
+                    lifecycle));
         }
         return controllers;
     }
