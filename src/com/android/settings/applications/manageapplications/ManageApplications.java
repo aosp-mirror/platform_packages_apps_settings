@@ -46,6 +46,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -431,7 +432,7 @@ public class ManageApplications extends InstrumentedFragment
         mResetAppsHelper.onRestoreInstanceState(savedInstanceState);
 
         mAppBarLayout = getActivity().findViewById(R.id.app_bar);
-        disableToolBarScrollableBehavior();
+        autoSetCollapsingToolbarLayoutScrolling();
 
         return mRootView;
     }
@@ -893,7 +894,7 @@ public class ManageApplications extends InstrumentedFragment
         }
     }
 
-    private void disableToolBarScrollableBehavior() {
+    private void autoSetCollapsingToolbarLayoutScrolling() {
         final CoordinatorLayout.LayoutParams params =
                 (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
         final AppBarLayout.Behavior behavior = new AppBarLayout.Behavior();
@@ -901,7 +902,8 @@ public class ManageApplications extends InstrumentedFragment
                 new AppBarLayout.Behavior.DragCallback() {
                     @Override
                     public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
-                        return false;
+                        return appBarLayout.getResources().getConfiguration().orientation
+                                == Configuration.ORIENTATION_LANDSCAPE;
                     }
                 });
         params.setBehavior(behavior);
