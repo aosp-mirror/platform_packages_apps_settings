@@ -2749,7 +2749,7 @@
                   android:excludeFromRecents="true"
                   android:permission="android.permission.BLUETOOTH_CONNECT"
                   android:exported="true"
-                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert">
+                  android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight">
             <intent-filter android:priority="1">
                 <action android:name="android.bluetooth.device.action.CONNECTION_ACCESS_REQUEST" />
                 <action android:name="android.bluetooth.device.action.CONNECTION_ACCESS_CANCEL" />
