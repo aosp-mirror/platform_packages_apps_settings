@@ -33,6 +33,7 @@ class LocaleDragCell extends RelativeLayout {
     private CheckBox mCheckbox;
     private TextView mMiniLabel;
     private TextView mLocalized;
+    private TextView mCurrentDefault;
     private ImageView mDragHandle;
 
     public LocaleDragCell(Context context, AttributeSet attrs) {
@@ -44,6 +45,7 @@ class LocaleDragCell extends RelativeLayout {
         super.onFinishInflate();
         mLabel = (TextView) findViewById(R.id.label);
         mLocalized = (TextView) findViewById(R.id.l10nWarn);
+        mCurrentDefault = (TextView) findViewById(R.id.default_locale);
         mMiniLabel = (TextView) findViewById(R.id.miniLabel);
         mCheckbox = (CheckBox) findViewById(R.id.checkbox);
         mDragHandle = (ImageView) findViewById(R.id.dragHandle);
@@ -97,6 +99,14 @@ class LocaleDragCell extends RelativeLayout {
 
     public void setLocalized(boolean localized) {
         mLocalized.setVisibility(localized ? GONE : VISIBLE);
+        invalidate();
+    }
+
+    /**
+     * Indicate current locale is system default.
+     */
+    public void setCurrentDefault(boolean isCurrentDefault) {
+        mCurrentDefault.setVisibility(isCurrentDefault ? VISIBLE : GONE);
         invalidate();
     }
 
