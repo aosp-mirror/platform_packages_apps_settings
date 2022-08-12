@@ -27,6 +27,7 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
+import static android.view.WindowManager.LayoutParams.FLAG_SECURE;
 
 import static com.android.internal.widget.LockPatternUtils.PASSWORD_TYPE_KEY;
 import static com.android.settings.password.ChooseLockGeneric.CONFIRM_CREDENTIALS;
@@ -156,6 +157,21 @@ public class ChooseLockPasswordTest {
                 (LockscreenCredential) intent.getParcelableExtra(
                         ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL))
                 .isNotNull();
+    }
+
+    @Test
+    public void activity_shouldHaveSecureFlag() {
+        PasswordPolicy policy = new PasswordPolicy();
+        policy.quality = PASSWORD_QUALITY_ALPHABETIC;
+        policy.length = 10;
+
+        Intent intent = createIntentForPasswordValidation(
+                /* minMetrics */ policy.getMinMetrics(),
+                /* minComplexity= */ PASSWORD_COMPLEXITY_NONE,
+                /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC);
+        ChooseLockPassword activity = buildChooseLockPasswordActivity(intent);
+        final int flags = activity.getWindow().getAttributes().flags;
+        assertThat(flags & FLAG_SECURE).isEqualTo(FLAG_SECURE);
     }
 
     @Test
