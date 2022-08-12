@@ -70,6 +70,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Your device will disconnect from <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Pair new device"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Pair right ear"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Pair left ear"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Pair your other ear"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Your left hearing aid is connected.\n\nTo pair the right one, make sure that it’s turned on and ready to pair."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Your right hearing aid is connected.\n\nTo pair the left one, make sure that it’s turned on and ready to pair."</string>
@@ -1443,8 +1445,7 @@
     <string name="sim_enter_new" msgid="9010947802784561582">"New SIM PIN"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Re‑type new PIN"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"SIM PIN"</string>
-    <!-- no translation found for sim_invalid_pin_hint (3376397829969578877) -->
-    <skip />
+    <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"Type a PIN that is 4 to 8 numbers"</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"PINs don\'t match"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Can\'t change PIN.\nPossibly incorrect PIN."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"SIM PIN changed successfully"</string>
@@ -2831,14 +2832,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"at <xliff:g id="PERCENT">%1$s</xliff:g> battery"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Battery percentage"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Show battery percentage in status bar"</string>
-    <!-- no translation found for battery_usage_chart_graph_hint_last_full_charge (6570336408060566877) -->
-    <skip />
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Battery level since last full charge"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Battery level for the past 24 hours"</string>
-    <!-- no translation found for battery_app_usage (8976453608783133770) -->
-    <skip />
+    <string name="battery_app_usage" msgid="8976453608783133770">"App usage since last full charge"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"App usage for the past 24 hours"</string>
-    <!-- no translation found for battery_system_usage (1395943945140097585) -->
-    <skip />
+    <string name="battery_system_usage" msgid="1395943945140097585">"System usage since last full charge"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"System usage for past 24 hours"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"System usage for <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"App usage for <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -4673,16 +4671,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Turn on now"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Turn off now"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Not using battery optimisation"</string>
-    <!-- no translation found for app_battery_optimization_title (389653121998016466) -->
-    <skip />
-    <!-- no translation found for app_battery_optimization_summary (7864783556193427398) -->
-    <skip />
-    <!-- no translation found for filter_battery_unrestricted_title (821027369424198223) -->
-    <skip />
-    <!-- no translation found for filter_battery_optimized_title (8236647176487754796) -->
-    <skip />
-    <!-- no translation found for filter_battery_restricted_title (5886859505802563232) -->
-    <skip />
+    <string name="app_battery_optimization_title" msgid="389653121998016466">"Manage battery usage"</string>
+    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Set battery usage for apps"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Unrestricted"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimised"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Restricted"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"If device is locked, prevent typing replies or other text in notifications"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Default spell checker"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Choose spell checker"</string>

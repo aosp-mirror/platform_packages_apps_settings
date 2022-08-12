@@ -70,6 +70,10 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Votre appareil se déconnectera de <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Associer un autre appareil"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
+    <skip />
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Associer l\'autre oreille"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Votre prothèse auditive gauche est connectée.\n\nPour associer celle de droite, assurez-vous qu\'elle est activée et prête à être associée."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Votre prothèse auditive droite est connectée.\n\nPour associer celle de gauche, assurez-vous qu\'elle est activée et prête à être associée."</string>
@@ -590,7 +594,7 @@
     <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="1040265358906410746"></string>
     <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Verrouillage de l\'écran"</string>
-    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Choisir un verrouillage d\'écran"</string>
+    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Choisissez un verrouillage d\'écran"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Choisissez nouv. verr. écran"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Choisir verrouillage pour applis pro"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Choisir nouveau verrouillage prof."</string>
@@ -1443,8 +1447,7 @@
     <string name="sim_enter_new" msgid="9010947802784561582">"Nouveau NIP de la carte SIM"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Confirmez le nouveau NIP"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"NIP de la carte SIM"</string>
-    <!-- no translation found for sim_invalid_pin_hint (3376397829969578877) -->
-    <skip />
+    <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"Entrez un NIP de quatre à huit chiffres"</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"Les NIP ne correspondent pas"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Impossible de modifier le NIP.\nLe NIP est peut-être incorrect."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"Le NIP de la carte SIM a été modifié."</string>
@@ -1570,13 +1573,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Renommer"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Monter"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Éjecter"</string>
-    <!-- no translation found for storage_menu_format (8903698999905354146) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_button (7623565190643699626) -->
-    <skip />
+    <string name="storage_menu_format" msgid="8903698999905354146">"Formater la carte SD en tant que mémoire externe"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Formater la carte"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formater comme mémoire externe"</string>
-    <!-- no translation found for storage_menu_format_option (4886059624052908432) -->
-    <skip />
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Formater"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Transférer les données"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Supprimer"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Configurer"</string>
@@ -1606,24 +1606,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Renommer le stockage"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"La mémoire de stockage « <xliff:g id="NAME_0">^1</xliff:g> » a été éjectée en toute sécurité, mais elle se trouve toujours dans la fente pour carte mémoire de l\'appareil.\n\n Pour utiliser la mémoire « <xliff:g id="NAME_1">^1</xliff:g> », vous devez d\'abord la monter."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"La mémoire de stockage « <xliff:g id="NAME_0">^1</xliff:g> » est corrompue. \n\nPour utiliser la mémoire « <xliff:g id="NAME_1">^1</xliff:g> », vous devez d\'abord la configurer."</string>
-    <!-- no translation found for storage_internal_format_details (2399034372813686846) -->
-    <skip />
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Vous pouvez formater cette carte SD pour y stocker des photos, des vidéos, de la musique et plus encore. Vous pouvez aussi y accéder à partir d\'autres appareils. \n\n"<b>"Toutes les données de cette carte SD seront supprimées."</b>" \n\n"<b>"Avant le formatage"</b>" \n\n"<b>"Sauvegardez les photos et les autres contenus multimédias"</b>" \nDéplacez vos fichiers multimédias vers un autre espace de stockage sur cet appareil, ou transférez-les sur un ordinateur au moyen d\'un câble USB. \n\n"<b>"Sauvegardez vos applications"</b>" \nToutes les applications stockées sur cette <xliff:g id="NAME">^1</xliff:g> seront désinstallées, et leurs données seront supprimées. Pour conserver ces applications, déplacez-les vers un autre espace de stockage sur cet appareil."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Lorsque vous éjectez la mémoire de stockage « <xliff:g id="NAME_0">^1</xliff:g> », les applications qui y sont enregistrées cessent de fonctionner, et les fichiers qu\'elle contient ne sont plus accessibles jusqu\'à ce que vous la réinsériez de nouveau."</b>\n\n"La mémoire de stockage « <xliff:g id="NAME_1">^1</xliff:g> » a été configurée pour ne fonctionner que sur cet appareil. Vous ne pouvez pas l\'utiliser sur d\'autres appareils."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Pour utiliser les applications, les photos ou les données que la mémoire de stockage « <xliff:g id="NAME">^1</xliff:g> » contient, insérez de nouveau celle-ci. \n\nVous pouvez également la supprimer de la liste des mémoires de stockage si elle n\'est pas disponible. \n\nSi vous la supprimez, toutes les données qu\'elle contient seront définitivement effacées. \n\nVous pouvez réinstaller les applications plus tard, mais les données correspondantes enregistrées sur cette mémoire seront perdues."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Oublier « <xliff:g id="NAME">^1</xliff:g> »?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Toutes les applications, photos et données enregistrées sur la mémoire de stockage « <xliff:g id="NAME">^1</xliff:g> » seront perdues définitivement."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Le répertoire Système comprend des fichiers utilisés pour faire fonctionner Android version <xliff:g id="VERSION">%s</xliff:g>"</string>
-    <!-- no translation found for storage_wizard_guest (5813419895687733649) -->
-    <skip />
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"En mode Invité, on ne peut formater de cartes SD"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Configurer votre « <xliff:g id="NAME">^1</xliff:g> »"</string>
-    <!-- no translation found for storage_wizard_init_external_title (5304499882951772292) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_summary (5842588772292324473) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_title (8799676990387869411) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_summary (8224648610422581704) -->
-    <skip />
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Formater la carte SD en tant que mémoire de stockage externe"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Sauvegardez vos photos, vos vidéos, votre musique et plus encore, et accédez-y à partir d\'autres appareils"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Formater la carte SD en tant que mémoire de stockage interne"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Sauvegardez vos applications et vos contenus multimédias pour les utiliser uniquement sur ce téléphone"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Formater comme mémoire interne"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Cette option nécessite de formater la mémoire de stockage « <xliff:g id="NAME_0">^1</xliff:g> » pour qu\'elle soit sécurisée. \n\nAprès le formatage, « <xliff:g id="NAME_1">^1</xliff:g> » ne fonctionnera que sur cet appareil. \n\n"<b>"Le formatage entraîne la suppression de toutes les données enregistrées sur « <xliff:g id="NAME_2">^1</xliff:g> »."</b>" Pour ne pas de perdre vos données, nous vous conseillons de les sauvegarder."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Formater comme mémoire externe"</string>
@@ -1640,12 +1634,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Déplacer"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Déplacement des données..."</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Pendant le déplacement des données : \n• Ne retirez pas la mémoire de stockage « <xliff:g id="NAME">^1</xliff:g> ». \n• Certaines applications ne fonctionneront pas correctement. \n• Assurez-vous que l\'appareil reste chargé."</string>
-    <!-- no translation found for storage_wizard_ready_title (3631022511474086605) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_external_body (4264787122605706421) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_internal_body (2416472979690681273) -->
-    <skip />
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> formatée"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Vous pouvez commencer à utiliser votre <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Vous pouvez commencer à utiliser votre <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Déplacer <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Le déplacement de l\'application « <xliff:g id="APP">^1</xliff:g> » et des données correspondantes vers « <xliff:g id="NAME_0">^2</xliff:g> » ne prend que quelques minutes. Vous ne pourrez pas utiliser l\'application tant que l\'opération n\'est pas terminée. \n\nNe retirez pas la mémoire de stockage « <xliff:g id="NAME_1">^2</xliff:g> » pendant le déplacement."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Pour déplacer des données, vous devez déverrouiller l\'utilisateur <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1654,30 +1645,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Annuler le déplacement"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Ce <xliff:g id="NAME_0">^1</xliff:g> ne semble pas rapide. \n\nVous pouvez continuer, mais les applications déplacées vers cet endroit risquent de se bloquer et les transferts de données pourront prendre du temps.\n\nVeuillez utiliser un <xliff:g id="NAME_1">^1</xliff:g> plus rapide pour obtenir de meilleures performances."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Comment utiliserez-vous ce périphérique <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (1236154481658009267) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (3771689638403679317) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formater la carte SD en tant que mémoire interne"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Stockez vos applications et vos contenus multimédias pour les utiliser uniquement sur cette tablette. &lt;a href=https://support.google.com/android/answer/12153449&gt;En savoir plus sur la configuration d\'une carte SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formater"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formater la carte SD en tant que mémoire interne"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Stockez vos applications et vos contenus multimédias pour les utiliser uniquement sur ce téléphone. &lt;a href=https://support.google.com/android/answer/12153449&gt;En savoir plus sur la configuration d\'une carte SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formater"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"ou"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_title (2786416384217054112) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_summary (3867896101011977386) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_action (6140058734875839081) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formater la carte SD en tant que mémoire externe"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Stockez vos photos, vos vidéos, votre musique et plus encore, et accédez-y à partir d\'autres appareils. &lt;a href=https://support.google.com/android/answer/12153449&gt;En savoir plus sur la configuration d\'une carte SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formater"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Configurer plus tard"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Formater le périphérique <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Le périphérique <xliff:g id="NAME_0">^1</xliff:g> doit être formaté pour stocker des applications et des fichiers. \n\nLe formatage effacera le contenu existant du périphérique <xliff:g id="NAME_1">^2</xliff:g>. Pour éviter de perdre votre contenu, sauvegardez-le sur un autre périphérique <xliff:g id="NAME_2">^3</xliff:g> ou un autre appareil."</string>
-    <!-- no translation found for storage_wizard_format_confirm_v2_body_external (5810296966099830035) -->
-    <skip />
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Vous devez formater cette <xliff:g id="NAME_0">^1</xliff:g> pour pouvoir y stocker des photos, des vidéos, de la musique, et plus encore. \n\nLe formatage supprimera le contenu existant de la <xliff:g id="NAME_1">^2</xliff:g>. Pour éviter de perdre votre contenu, sauvegardez-le sur une autre <xliff:g id="NAME_2">^3</xliff:g> ou un autre appareil."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formater <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Déplacer le contenu vers <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Vous pouvez déplacer vos fichiers et certaines applications sur le périphérique <xliff:g id="NAME">^1</xliff:g>. \n\nCe déplacement libérerait <xliff:g id="SIZE">^2</xliff:g> du stockage de votre tablette et prendrait environ <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1694,12 +1675,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Vous pouvez toujours utiliser le périphérique <xliff:g id="NAME_0">^1</xliff:g>, mais il peut être lent. \n\nLes applications stockées sur le périphérique <xliff:g id="NAME_1">^2</xliff:g> peuvent ne pas fonctionner correctement et les transferts de contenu peuvent prendre beaucoup de temps. \n\nEssayez d\'utiliser un autre périphérique <xliff:g id="NAME_2">^3</xliff:g>, ou utilisez plutôt le périphérique <xliff:g id="NAME_3">^4</xliff:g> comme mémoire de stockage externe."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Recommencer"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Continuer"</string>
-    <!-- no translation found for storage_wizard_ready_v2_external_body (7688457485389886923) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_body (3520269956641115883) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (1163588718127651062) -->
-    <skip />
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Vous pouvez commencer à utiliser votre <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Vous pouvez commencer à utiliser votre <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Vous pouvez commencer à utiliser votre <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"État de la batterie"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Niveau de la pile"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Noms des points d\'accès"</string>
@@ -1942,7 +1920,7 @@
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Entrer votre mot de passe professionnel"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Confirmer votre schéma"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Entrer votre schéma prof."</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Entrer de nouveau votre NIP"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Entrez de nouveau votre NIP"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Confirmer votre NIP professionnel"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Entrer votre NIP professionnel"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Les mots de passe ne correspondent pas"</string>
@@ -1957,7 +1935,7 @@
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Code pour le déverrouillage facial"</string>
     <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Définir mot passe pour utiliser visage ou empreinte digitale"</string>
     <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Définir un schéma pour utiliser visage ou empreinte digitale"</string>
-    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Définir un NIP pour utiliser visage ou empreinte digitale"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Définissez un NIP de secours"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Mot de passe oublié?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Schéma oublié?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"NIP oublié?"</string>
@@ -2489,19 +2467,13 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"En savoir plus sur la correction des couleurs"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"À propos de l\'inversion des couleurs"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"En savoir plus sur l\'inversion des couleurs"</string>
-    <!-- no translation found for accessibility_captioning_primary_switch_title (3663677340286206100) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_primary_switch_summary (2544094070306830218) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_title (3128792092290011408) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_summary (4620682807315588019) -->
-    <skip />
+    <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Afficher les sous-titres"</string>
+    <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Pour l\'application prise en charge seulement"</string>
+    <string name="captioning_appearance_title" msgid="3128792092290011408">"Taille et style des sous-titres"</string>
+    <string name="captioning_appearance_summary" msgid="4620682807315588019">"Taille du texte : <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Autres options"</string>
-    <!-- no translation found for accessibility_captioning_preference_intro (8995427146374031134) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_preference_summary (8335768472978374255) -->
-    <skip />
+    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"Personnalisez la taille et le style des sous-titres pour les rendre plus faciles à lire"</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"Ces préférences de sous-titres ne sont pas prises en charge par toutes les applications multimédias"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"bouton d\'accessibilité"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Balayer l\'écran du bas vers le haut avec deux doigts"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Maintenir enfoncées les touches de volume"</string>
@@ -2862,14 +2834,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"à <xliff:g id="PERCENT">%1$s</xliff:g> d\'autonomie restante"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Pourcentage de charge de la pile"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Afficher le pourcentage de charge de la pile dans la barre d\'état"</string>
-    <!-- no translation found for battery_usage_chart_graph_hint_last_full_charge (6570336408060566877) -->
-    <skip />
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Niveau de la pile depuis la dernière recharge complète"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Niveau de la pile, dernières 24 h"</string>
-    <!-- no translation found for battery_app_usage (8976453608783133770) -->
-    <skip />
+    <string name="battery_app_usage" msgid="8976453608783133770">"Utilisation des applications depuis la dernière charge complète"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Utilisation par application, dernières 24 h"</string>
-    <!-- no translation found for battery_system_usage (1395943945140097585) -->
-    <skip />
+    <string name="battery_system_usage" msgid="1395943945140097585">"Utilisation du système depuis la dernière recharge complète"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Utilisation par le système, dernières 24 h"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Utilisation par le système : <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Utilisation par l\'application : <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -3411,10 +3380,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Autoriser les applications à utiliser vos données de localisation"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Précédent"</string>
     <string name="wizard_next" msgid="3884832431439072471">"SUIVANT"</string>
-    <!-- no translation found for wizard_back_portable (5315939180781404882) -->
-    <skip />
-    <!-- no translation found for wizard_back_adoptable (1447814356855134183) -->
-    <skip />
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Passer à l\'espace externe"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Formater autrement"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Terminer"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"Cartes SIM"</string>
@@ -3827,7 +3794,7 @@
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Notifications sensibles du profil professionnel"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Afficher le contenu sensible du profil professionnel lorsque l\'écran est verrouillé"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Afficher tout le contenu des notifications"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Afficher contenu sensible seulement si déverrouillé"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"N\'afficher le contenu sensible que si déverrouillé"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"N\'afficher aucune notification"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Que souhaitez-vous afficher sur l\'écran de verrouillage?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Écran de verrouillage"</string>
@@ -4706,16 +4673,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Activer maintenant"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Désactiver maintenant"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"L\'optimisation de la pile n\'est pas utilisée"</string>
-    <!-- no translation found for app_battery_optimization_title (389653121998016466) -->
-    <skip />
-    <!-- no translation found for app_battery_optimization_summary (7864783556193427398) -->
-    <skip />
-    <!-- no translation found for filter_battery_unrestricted_title (821027369424198223) -->
-    <skip />
-    <!-- no translation found for filter_battery_optimized_title (8236647176487754796) -->
-    <skip />
-    <!-- no translation found for filter_battery_restricted_title (5886859505802563232) -->
-    <skip />
+    <string name="app_battery_optimization_title" msgid="389653121998016466">"Gérer l\'utilisation de la pile"</string>
+    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Régler l\'utilisation de la pile pour les applis"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Aucune restriction"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimisée"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Limitée"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Si l\'appareil est verrouillé, empêcher l\'entrée de réponses ou de texte dans les notifications"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Correcteur par défaut"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Sélectionner correcteur ortho"</string>
