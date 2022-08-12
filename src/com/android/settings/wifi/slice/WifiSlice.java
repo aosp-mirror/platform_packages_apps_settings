@@ -109,7 +109,7 @@ public class WifiSlice implements CustomSliceable {
 
         // If external calling package doesn't have Wi-Fi permission.
         final boolean isPermissionGranted =
-                Utils.isSettingsIntelligence(mContext) || isPermissionGranted(mContext);
+                isCallerExemptUid(mContext) || isPermissionGranted(mContext);
         ListBuilder listBuilder = getListBuilder(isWifiEnabled, null /* wifiSliceItem */,
                 isPermissionGranted);
         // If the caller doesn't have the permission granted, just return a slice without a toggle.
@@ -154,6 +154,21 @@ public class WifiSlice implements CustomSliceable {
         final UserManager userManager = context.getSystemService(UserManager.class);
         if (userManager == null) return false;
         return userManager.isGuestUser();
+    }
+
+    private boolean isCallerExemptUid(Context context) {
+        final String[] allowedUidNames = context.getResources().getStringArray(
+                R.array.config_exempt_wifi_permission_uid_name);
+        final String uidName =
+                context.getPackageManager().getNameForUid(Binder.getCallingUid());
+        Log.d(TAG, "calling uid name : " + uidName);
+
+        for (String allowedUidName : allowedUidNames) {
+            if (TextUtils.equals(uidName, allowedUidName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static boolean isPermissionGranted(Context settingsContext) {
