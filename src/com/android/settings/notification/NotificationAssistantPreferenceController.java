@@ -43,6 +43,7 @@ public class NotificationAssistantPreferenceController extends TogglePreferenceC
     public NotificationAssistantPreferenceController(Context context) {
         super(context, KEY_NAS);
         mUserManager = UserManager.get(context);
+        mNotificationBackend = new NotificationBackend();
     }
 
     @Override
@@ -99,5 +100,10 @@ public class NotificationAssistantPreferenceController extends TogglePreferenceC
     @VisibleForTesting
     void setBackend(NotificationBackend backend) {
         mNotificationBackend = backend;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return (mFragment != null && mFragment instanceof ConfigureNotificationSettings);
     }
 }
