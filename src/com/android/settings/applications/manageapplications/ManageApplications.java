@@ -46,6 +46,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -133,6 +134,8 @@ import com.android.settings.notification.app.AppNotificationSettings;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settings.wifi.AppStateChangeWifiStateBridge;
 import com.android.settings.wifi.ChangeWifiStateDetails;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.applications.AppIconCacheManager;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
@@ -431,7 +434,7 @@ public class ManageApplications extends InstrumentedFragment
         mResetAppsHelper.onRestoreInstanceState(savedInstanceState);
 
         mAppBarLayout = getActivity().findViewById(R.id.app_bar);
-        disableToolBarScrollableBehavior();
+        autoSetCollapsingToolbarLayoutScrolling();
 
         return mRootView;
     }
@@ -798,7 +801,18 @@ public class ManageApplications extends InstrumentedFragment
             mShowSystem = !mShowSystem;
             mApplications.rebuild();
         } else if (i == R.id.reset_app_preferences) {
-            mResetAppsHelper.buildResetDialog();
+            final boolean appsControlDisallowedBySystem =
+                    RestrictedLockUtilsInternal.hasBaseUserRestriction(getActivity(),
+                            UserManager.DISALLOW_APPS_CONTROL, UserHandle.myUserId());
+            final RestrictedLockUtils.EnforcedAdmin appsControlDisallowedAdmin =
+                    RestrictedLockUtilsInternal.checkIfRestrictionEnforced(getActivity(),
+                            UserManager.DISALLOW_APPS_CONTROL, UserHandle.myUserId());
+            if (appsControlDisallowedAdmin != null && !appsControlDisallowedBySystem) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
+                        getActivity(), appsControlDisallowedAdmin);
+            } else {
+                mResetAppsHelper.buildResetDialog();
+            }
             return true;
         } else if (i == R.id.advanced) {
             if (mListType == LIST_TYPE_NOTIFICATION) {
@@ -893,7 +907,7 @@ public class ManageApplications extends InstrumentedFragment
         }
     }
 
-    private void disableToolBarScrollableBehavior() {
+    private void autoSetCollapsingToolbarLayoutScrolling() {
         final CoordinatorLayout.LayoutParams params =
                 (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
         final AppBarLayout.Behavior behavior = new AppBarLayout.Behavior();
@@ -901,7 +915,8 @@ public class ManageApplications extends InstrumentedFragment
                 new AppBarLayout.Behavior.DragCallback() {
                     @Override
                     public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
-                        return false;
+                        return appBarLayout.getResources().getConfiguration().orientation
+                                == Configuration.ORIENTATION_LANDSCAPE;
                     }
                 });
         params.setBehavior(behavior);
