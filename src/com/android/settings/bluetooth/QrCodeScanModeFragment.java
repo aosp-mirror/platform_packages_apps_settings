@@ -36,15 +36,14 @@ import android.view.ViewOutlineProvider;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settingslib.R;
 import com.android.settingslib.bluetooth.BluetoothBroadcastUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils;
-import com.android.settingslib.core.lifecycle.ObservableFragment;
 import com.android.settingslib.qrcode.QrCamera;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 
 public class QrCodeScanModeFragment extends InstrumentedFragment implements
         TextureView.SurfaceTextureListener,
@@ -232,8 +231,7 @@ public class QrCodeScanModeFragment extends InstrumentedFragment implements
     }
 
     private void updateSummary() {
-        mSummary.setText(getString(R.string.bt_le_audio_scan_qr_code_scanner,
-                null /* broadcast_name*/));;
+        mSummary.setText(getString(R.string.bt_le_audio_scan_qr_code_scanner));
     }
 
     @Override
