@@ -74,6 +74,10 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"سيتم قطع الاتصال بجهاز <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"إقران جهاز جديد"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"بلوتوث"</string>
+    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
+    <skip />
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"إقران السماعة الأخرى"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"تم توصيل سماعة الأذن الطبية اليسرى.\n\nلإقران سماعة الأذن الطبية اليمنى، تأكَّد أنّها مشغَّلة وجاهزة للإقران."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"تم توصيل سماعة الأذن الطبية اليمنى.\n\nلإقران سماعة الأذن الطبية اليسرى، تأكَّد أنّها مشغَّلة وجاهزة للإقران."</string>
@@ -1654,13 +1658,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"إعادة تسمية"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"تثبيت"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"إخراج"</string>
-    <!-- no translation found for storage_menu_format (8903698999905354146) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_button (7623565190643699626) -->
-    <skip />
+    <string name="storage_menu_format" msgid="8903698999905354146">"‏تهيئة بطاقة SD كوحدة تخزين محمولة"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"تهيئة البطاقة"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"إعداد كوحدة تخزين محمولة"</string>
-    <!-- no translation found for storage_menu_format_option (4886059624052908432) -->
-    <skip />
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"تهيئة"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"نقل البيانات"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"حذف"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"إعداد"</string>
@@ -1690,24 +1691,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"إعادة تسمية وحدة التخزين"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"تم إنهاء تثبيت <xliff:g id="NAME_0">^1</xliff:g> هذه بشكل آمن، ولكنها لا تزال موجودة.\n\nلاستخدام <xliff:g id="NAME_1">^1</xliff:g> هذه، عليك تثبيتها أولاً."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"بطاقة <xliff:g id="NAME_0">^1</xliff:g> هذه تالفة. \n\nلاستخدام بطاقة <xliff:g id="NAME_1">^1</xliff:g> هذه، عليك إعدادها أولاً."</string>
-    <!-- no translation found for storage_internal_format_details (2399034372813686846) -->
-    <skip />
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"‏يمكنك تهيئة بطاقة SD هذه لتخزين الصور والفيديوهات والموسيقى وغير ذلك مع إمكانية الوصول إليها من أجهزة أخرى. \n\n"<b>"سيتم محو كل البيانات على بطاقة SD هذه."</b>" \n\n"<b>"قبل إجراء التهيئة"</b>" \n\n"<b>"احتفِظ بنسخة احتياطية من الصور والوسائط الأخرى"</b>" \nانقل ملفات الوسائط إلى وحدة تخزين بديلة على هذا الجهاز أو انقلها إلى جهاز كمبيوتر باستخدام كابل USB. \n\n"<b>"الاحتفاظ بنسخة احتياطية من التطبيقات"</b>" \nسيتم إلغاء تثبيت كل التطبيقات المخزنة على \"<xliff:g id="NAME">^1</xliff:g>\" وسيتم محو بياناتها. للاحتفاظ بهذه التطبيقات، انقلها إلى وحدة تخزين بديلة على هذا الجهاز."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"عند إخراج <xliff:g id="NAME_0">^1</xliff:g> هذه، فإن التطبيقات المخزنة عليها ستتوقف عن العمل ولن تكون ملفات الوسائط المخزنة عليها متاحة حتى يتم إعادة إدخالها."</b>" \n\nلقد تم إعداد <xliff:g id="NAME_1">^1</xliff:g> للعمل على هذا الجهاز فقط. ولن تعمل على أي أجهزة أخرى."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"لاستخدام التطبيقات أو الصور أو البيانات التي يحتوي عليها <xliff:g id="NAME">^1</xliff:g> يمكنك إعادة إدخاله. \n\nبدلاً من ذلك، يمكنك اختيار حذف وحدة التخزين هذه إذا لم يكن الجهاز متاحًا. \n\nوإذا اخترت الحذف، فستفقد جميع البيانات التي يحتوي عليها الجهاز للأبد. \n\nويمكنك إعادة تثبيت التطبيقات لاحقًا، إلا أنه سيتم فقد بياناتها المخزنة على هذا الجهاز."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"هل تريد حذف <xliff:g id="NAME">^1</xliff:g>؟"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"سيتم فقد كل التطبيقات والصور والبيانات المخزنة على <xliff:g id="NAME">^1</xliff:g> هذه للأبد."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"‏يتضمّن النظام الملفات المستخدمة لتشغيل إصدار Android <xliff:g id="VERSION">%s</xliff:g>."</string>
-    <!-- no translation found for storage_wizard_guest (5813419895687733649) -->
-    <skip />
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"‏يتعذّر على مستخدمي وضع الضيف تهيئة بطاقات SD."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"إعداد <xliff:g id="NAME">^1</xliff:g>"</string>
-    <!-- no translation found for storage_wizard_init_external_title (5304499882951772292) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_summary (5842588772292324473) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_title (8799676990387869411) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_summary (8224648610422581704) -->
-    <skip />
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"‏تهيئة بطاقة SD كوحدة تخزين محمولة"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"يمكنك حفظ الصور والفيديوهات والموسيقى وغير ذلك مع إمكانية الوصول إليها من أجهزة أخرى."</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"‏تهيئة بطاقة SD كوحدة تخزين داخلية"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"يمكنك حفظ التطبيقات والوسائط حتى تتمكن من استخدامها على هذا الهاتف فقط."</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"التنسيق كوحدة تخزين داخلية"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"يتطلب هذا أن يتم تنسيق <xliff:g id="NAME_0">^1</xliff:g> لجعلها آمنة. \n\nبعد التنسيق، لن تعمل <xliff:g id="NAME_1">^1</xliff:g> هذه إلا على هذا الجهاز. \n\n"<b>"يؤدي التنسيق إلى محو جميع البيانات المخزنة حاليًا على <xliff:g id="NAME_2">^1</xliff:g>."</b>" ولتجنب فقد البيانات، يمكنك نسخها احتياطيًا."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"التهيئة كوحدة تخزين محمولة"</string>
@@ -1724,12 +1719,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"نقل"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"جارٍ نقل البيانات…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"أثناء عملية النقل: \n• لا تزِل <xliff:g id="NAME">^1</xliff:g>. \n• قد لا تعمل بعض التطبيقات بشكل صحيح. \n• احرص على شحن الجهاز."</string>
-    <!-- no translation found for storage_wizard_ready_title (3631022511474086605) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_external_body (4264787122605706421) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_internal_body (2416472979690681273) -->
-    <skip />
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"تم تهيئة \"<xliff:g id="NAME">^1</xliff:g>\""</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"يمكنك بدء استخدام \"<xliff:g id="NAME">^1</xliff:g>\"."</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"يمكنك بدء استخدام \"<xliff:g id="NAME">^1</xliff:g>\"."</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"نقل <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"لن يستغرق نقل <xliff:g id="APP">^1</xliff:g> والبيانات التابعة له إلى <xliff:g id="NAME_0">^2</xliff:g> سوى بضع دقائق. ولن تتمكن من استخدام التطبيق حتى الانتهاء من عملية النقل. \n\nلا تزِل <xliff:g id="NAME_1">^2</xliff:g> أثناء عملية النقل."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"لنقل البيانات، يجب فتح قفل المستخدم <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1738,30 +1730,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"إلغاء عملية النقل"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"تبدو <xliff:g id="NAME_0">^1</xliff:g> بطيئًة، \n\nيمكنك المتابعة إلا أنه قد تتعثر التطبيقات التي تم نقلها إلى هذا الموقع وربما تستغرق عمليات نقل البيانات وقتًا طويلاً. \n\nيمكنك استخدام <xliff:g id="NAME_1">^1</xliff:g> أسرع للحصول على أداء أفضل."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"كيف ستستخدم <xliff:g id="NAME">^1</xliff:g>؟"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (1236154481658009267) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (3771689638403679317) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"‏تهيئة بطاقة SD كوحدة تخزين داخلية"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"‏يمكنك تخزين التطبيقات والوسائط لاستخدامها على هذا الجهاز اللوحي فقط. &lt;a href=https://support.google.com/android/answer/12153449&gt;تعرُّف على المزيد حول ضبط إعدادات بطاقة SD‏&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"تهيئة"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"‏تهيئة بطاقة SD كوحدة تخزين داخلية"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"‏يمكنك تخزين التطبيقات والوسائط لاستخدامها على هذا الهاتف فقط. &lt;a href=https://support.google.com/android/answer/12153449&gt;تعرُّف على المزيد حول ضبط إعدادات بطاقة SD‏&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"تهيئة"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"أو"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_title (2786416384217054112) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_summary (3867896101011977386) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_action (6140058734875839081) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"‏تهيئة بطاقة SD كوحدة تخزين محمولة"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"‏يمكنك تخزين الصور والفيديوهات والموسيقى وغير ذلك مع إمكانية الوصول إليها من أجهزة أخرى. &lt;a href=https://support.google.com/android/answer/12153449&gt;تعرُّف على المزيد حول ضبط إعدادات بطاقة SD‏&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"تهيئة"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"الإعداد لاحقًا"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"هل تريد تنسيق <xliff:g id="NAME">^1</xliff:g>؟"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"يجب تنسيق <xliff:g id="NAME_0">^1</xliff:g> لتخزين التطبيقات والملفات والوسائط. \n\nسيؤدي التنسيق إلى محو المحتوى الحالي على <xliff:g id="NAME_1">^2</xliff:g>. ولتجنّب فقد المحتوى، يمكنك نسخه احتياطيًا إلى <xliff:g id="NAME_2">^3</xliff:g> أو جهاز آخر."</string>
-    <!-- no translation found for storage_wizard_format_confirm_v2_body_external (5810296966099830035) -->
-    <skip />
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"يجب تهيئة \"<xliff:g id="NAME_0">^1</xliff:g>\" حتى تتمكن من تخزين الصور والفيديوهات والموسيقى وغير ذلك. \n\nستؤدي عملية التهيئة إلى محو المحتوى في \"<xliff:g id="NAME_1">^2</xliff:g>\". لتجنّب فقدان المحتوى، يمكنك نسخه احتياطيًا إلى \"<xliff:g id="NAME_2">^3</xliff:g>\" أو جهاز."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"تنسيق <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"هل تريد نقل المحتوى إلى <xliff:g id="NAME">^1</xliff:g>؟"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"يمكنك نقل الملفات والوسائط وتطبيقات معيّنة إلى <xliff:g id="NAME">^1</xliff:g>. \n\nإخلاء مساحة قدرها <xliff:g id="SIZE">^2</xliff:g> من مساحة التخزين بالجهاز اللوحي وتستغرق في الغالب <xliff:g id="DURATION">^3</xliff:g> تقريبًا."</string>
@@ -1778,12 +1760,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"لا يزال بإمكانك استخدام <xliff:g id="NAME_0">^1</xliff:g> هذه، ولكنها قد تكون بطيئة. \n\nقد لا تعمل التطبيقات المخزّنة على <xliff:g id="NAME_1">^2</xliff:g> هذه بشكل صحيح، وقد تستغرق عمليات نقل المحتوى وقتًا طويلاً. \n\nجرّب استخدام <xliff:g id="NAME_2">^3</xliff:g> أسرع، أو استخدم <xliff:g id="NAME_3">^4</xliff:g> هذه كوحدة تخزين محمولة بدلاً من ذلك."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"البدء من جديد"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"متابعة"</string>
-    <!-- no translation found for storage_wizard_ready_v2_external_body (7688457485389886923) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_body (3520269956641115883) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (1163588718127651062) -->
-    <skip />
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"بإمكانك بدء استخدام \"<xliff:g id="NAME">^1</xliff:g>\""</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"بإمكانك بدء استخدام \"<xliff:g id="NAME">^1</xliff:g>\""</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"بإمكانك بدء استخدام \"<xliff:g id="NAME">^1</xliff:g>\""</string>
     <string name="battery_status_title" msgid="4661768220545945771">"حالة البطارية"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"مستوى البطارية"</string>
     <string name="apn_settings" msgid="4295467389400441299">"أسماء نقاط الوصول"</string>
@@ -2585,19 +2564,13 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"تعرّف على مزيد من المعلومات حول تصحيح الألوان"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"لمحة عن قلب الألوان"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"تعرّف على مزيد من المعلومات حول قلب الألوان"</string>
-    <!-- no translation found for accessibility_captioning_primary_switch_title (3663677340286206100) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_primary_switch_summary (2544094070306830218) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_title (3128792092290011408) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_summary (4620682807315588019) -->
-    <skip />
+    <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"عرض الشرح"</string>
+    <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"للتطبيقات المتوافقة فقط"</string>
+    <string name="captioning_appearance_title" msgid="3128792092290011408">"حجم نصوص الشرح ونمطها"</string>
+    <string name="captioning_appearance_summary" msgid="4620682807315588019">"حجم النص <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"خيارات أكثر"</string>
-    <!-- no translation found for accessibility_captioning_preference_intro (8995427146374031134) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_preference_summary (8335768472978374255) -->
-    <skip />
+    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"تخصيص حجم الشرح ونمطه لتسهيل قراءته"</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"هذه الإعدادات المفضّلة للشرح غير متوافقة مع بعض تطبيقات الموسيقى."</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"زر تسهيل الاستخدام"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"التمرير سريعًا بإصبعين إلى أعلى الشاشة من أسفلها"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"الضغط مع الاستمرار على مفتاحَي التحكّم بمستوى الصوت"</string>
@@ -3579,10 +3552,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"السماح للتطبيقات باستخدام المعلومات حول موقعك"</string>
     <string name="wizard_back" msgid="8257697435061870191">"رجوع"</string>
     <string name="wizard_next" msgid="3884832431439072471">"التالي"</string>
-    <!-- no translation found for wizard_back_portable (5315939180781404882) -->
-    <skip />
-    <!-- no translation found for wizard_back_adoptable (1447814356855134183) -->
-    <skip />
+    <string name="wizard_back_portable" msgid="5315939180781404882">"تبديل لوحدة تخزين محمولة"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"التهيئة بطريقة أخرى"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"إنهاء"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"‏بطاقات SIM"</string>

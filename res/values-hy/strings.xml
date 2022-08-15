@@ -70,6 +70,10 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Ձեր սարքը կանջատվի <xliff:g id="DEVICE_NAME">%1$s</xliff:g> սարքից:"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Նոր սարքի զուգակցում"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
+    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
+    <skip />
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Զուգակցեք մյուս ականջը"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Ձեր ձախ լսողական սարքը զուգակցված է։\n\nԱջը զուգակցելու համար համոզվեք, որ այն միացված է և պատրաստ զուգակցման։"</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Ձեր աջ լսողական սարքը զուգակցված է։\n\nՁախը զուգակցելու համար համոզվեք, որ այն միացված է և պատրաստ զուգակցման։"</string>
@@ -1570,13 +1574,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Վերանվանել"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Միացնել"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Անջատել"</string>
-    <!-- no translation found for storage_menu_format (8903698999905354146) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_button (7623565190643699626) -->
-    <skip />
+    <string name="storage_menu_format" msgid="8903698999905354146">"Ֆորմատավորել SD քարտը որպես դյուրակիր հիշողություն"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Ֆորմատավորել քարտը"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Ձևաչափել որպես դյուրակիր"</string>
-    <!-- no translation found for storage_menu_format_option (4886059624052908432) -->
-    <skip />
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Ֆորմատավորել"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Տեղափոխել տվյալները"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Հեռացնել"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Կարգավորել"</string>
@@ -1606,24 +1607,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Պահեստի վերանվանում"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Այս <xliff:g id="NAME_0">^1</xliff:g> անջատվել է, սակայն դեռ հասանելի է: \n\nԱյս <xliff:g id="NAME_1">^1</xliff:g> օգտագործելու համար դուք պետք է նախ միացնեք այն:"</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Այս <xliff:g id="NAME_0">^1</xliff:g> վնասված է: \n\nԱյս <xliff:g id="NAME_1">^1</xliff:g> օգտագործելու համար անհրաժեշտ է նախ կարգավորել այն:"</string>
-    <!-- no translation found for storage_internal_format_details (2399034372813686846) -->
-    <skip />
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Դուք կարող եք ֆորմատավորել այս SD քարտը՝ լուսանկարներ, տեսանյութեր, երգեր և այլ բովանդակություն պահելու և դրանք այլ սարքերում օգտագործելու համար։ \n\n"<b>"SD քարտի բոլոր տվյալները կջնջվեն։"</b>" \n\n"<b>"Նախքան ֆորմատավորումը"</b>" \n\n"<b>"պահուստավորեք լուսանկարները և մյուս մեդիա ֆայլերը"</b>" \nՄեդիաֆայլերը տեղափոխեք այս սարքում մեկ այլ տարածք կամ այլ համակարգիչ՝ USB մալուխի միջոցով։ \n\n"<b>"Պահուստավորեք հավելվածները"</b>" \nԲոլոր հավելվածները, որոնք պահված են այս <xliff:g id="NAME">^1</xliff:g>ում, և դրանց տվյալները կջնջվեն։ Խորհուրդ ենք տալիս տեղափոխել դրանք։"</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Եթե հանեք այս <xliff:g id="NAME_0">^1</xliff:g>-ը, նրա վրա պահեստավորված հավելվածներն այլևս չեն աշխատի, իսկ մեդիա ֆայլերը հասանելի չեն լինի մինչև նորից չզետեղեք այն:"</b>" \n\nԱյս <xliff:g id="NAME_1">^1</xliff:g>-ը ձևաչափված է միայն այս սարքի վրա աշխատելու համար: Այն չի աշխատի այլ սարքերի վրա:"</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Այս <xliff:g id="NAME">^1</xliff:g>-ում առկա հավելվածները, լուսանկարները կամ տվյալները օգտագործելու համար հանեք և նորից զետեղեք այն: \n\nԻնչպես նաև, կարող եք հեռացնել այս պահոցը, եթե սարքն անհասանելի է: \n\nԵթե նախընտրեք հեռացնել այն, սարքի վրայի բոլոր տվյալները մշտապես կկորչեն: \n\nԿարող եք հետագայում նորից տեղադրել հավելվածները, բայց այս սարքի վրա պահեստավորված նրանց տվյալները կկորչեն:"</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Մոռանա՞լ <xliff:g id="NAME">^1</xliff:g> սարքը:"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Այս <xliff:g id="NAME">^1</xliff:g> սարքում պահվող բոլոր հավելվածները, լուսանկարները և տվյալները ընդմիշտ ջնջվելու են:"</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Համակարգը ներառում է ֆայլեր, որոնք անհրաժեշտ են Android-ի <xliff:g id="VERSION">%s</xliff:g> տարբերակի աշխատանքի համար"</string>
-    <!-- no translation found for storage_wizard_guest (5813419895687733649) -->
-    <skip />
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Հյուրի ռեժիմում հնարավոր չէ ֆորմատավորել SD քարտը"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Կարգավորեք ձեր <xliff:g id="NAME">^1</xliff:g>"</string>
-    <!-- no translation found for storage_wizard_init_external_title (5304499882951772292) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_summary (5842588772292324473) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_title (8799676990387869411) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_summary (8224648610422581704) -->
-    <skip />
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Ֆորմատավորել SD քարտը որպես դյուրակիր հիշողություն"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Պահել լուսանկարներ, տեսանյութեր, երգեր և այլ բովանդակություն՝ այլ սարքերում օգտագործելու համար"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Ֆորմատավորել SD քարտը որպես ներքին հիշողություն"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Պահել հավելվածներ և մեդիաֆայլեր՝ միայն այս սարքում օգտագործելու համար"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Ձևաչափել որպես ներքին հիշողություն"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"<xliff:g id="NAME_0">^1</xliff:g>-ի անվտանգությունը ապահովելու համար այն պետք է ձևաչափել: \n\nԴրանից հետո այս <xliff:g id="NAME_1">^1</xliff:g>-ը կաշխատի միայն այս սարքի վրա: \n\n"<b>"Ձևաչափումից հետո <xliff:g id="NAME_2">^1</xliff:g>-ի վրա պահեստավորված բոլոր տվյալները կջնջվեն:"</b>" Տվյալները չկորցնելու համար չմոռանաք նախ պահուստավորել դրանք:"</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Ձևաչափել որպես կրիչ"</string>
@@ -1640,12 +1635,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Տեղափոխել"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Տվյալների տեղափոխում…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Տեղափոխման ընթացքում. \n• Չհեռացնեք <xliff:g id="NAME">^1</xliff:g>-ը: \n• Որոշ հավելվածների աշխատանքի մեջ խնդիրներ կառաջանան: \n• Լիցքավորված պահեք սարքը:"</string>
-    <!-- no translation found for storage_wizard_ready_title (3631022511474086605) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_external_body (4264787122605706421) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_internal_body (2416472979690681273) -->
-    <skip />
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g>ը ֆորմատավորվեց"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Այժմ դուք կարող եք օգտագործել <xliff:g id="NAME">^1</xliff:g>ը"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Այժմ դուք կարող եք օգտագործել <xliff:g id="NAME">^1</xliff:g>ը"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Տեղափոխել <xliff:g id="APP">^1</xliff:g> հավելվածը"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"<xliff:g id="APP">^1</xliff:g> հավելվածի և նրա տվյալների տեղափոխումը <xliff:g id="NAME_0">^2</xliff:g> ընդամենը մի քանի վայրկյան կտևի: Դուք չեք կարողանա օգտագործել հավելվածը մինչև տեղափոխումը չավարտվի: \n\nՏեղափոխման ընթացքում չհեռացնեք <xliff:g id="NAME_1">^2</xliff:g>-ը:"</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Տվյալները տեղափոխելու համար արգելահանեք <xliff:g id="APP">^1</xliff:g> օգտատիրոջը:"</string>
@@ -1654,30 +1646,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Չեղարկել տեղափոխումը"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Կարծես թե, այս <xliff:g id="NAME_0">^1</xliff:g>-ը դանդաղ է: \n\nԿարող եք շարունակել, բայց այստեղ տեղափոխված հավելվածների աշխատանքը կարող է դանդաղել, իսկ տվյալների փոխանցումը՝ երկար տևել: \n\nԱռաջարկում ենք օգտագործել ավելի արագ <xliff:g id="NAME_1">^1</xliff:g>:"</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Ինչպե՞ս եք օգտագործելու <xliff:g id="NAME">^1</xliff:g> հիշասարքը"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (1236154481658009267) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (3771689638403679317) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Ֆորմատավորել SD քարտը որպես ներքին հիշողություն"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Պահել հավելվածներ և մեդիաֆայլեր՝ միայն այս պլանշետում օգտագործելու համար։ &lt;a href=https://support.google.com/android/answer/12153449&gt;Իմանալ ավելին SD քարտերի կարգավորման մասին&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Ֆորմատավորել"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Ֆորմատավորել SD քարտը որպես ներքին հիշողություն"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Պահել հավելվածներ և մեդիաֆայլեր՝ միայն այս հեռախոսում օգտագործելու համար։ &lt;a href=https://support.google.com/android/answer/12153449&gt;Իմանալ ավելին SD քարտերի կարգավորման մասին&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Ֆորմատավորել"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Կամ"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_title (2786416384217054112) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_summary (3867896101011977386) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_action (6140058734875839081) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Ֆորմատավորել SD քարտը որպես դյուրակիր հիշողություն"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Պահել լուսանկարներ, տեսանյութեր, երգեր և այլ բովանդակություն՝ այլ սարքերում օգտագործելու համար։ &lt;a href=https://support.google.com/android/answer/12153449&gt;Իմանալ ավելին SD քարտերի կարգավորման մասին&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Ֆորմատավորել"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Կարգավորել ավելի ուշ"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Ֆորմատավորե՞լ <xliff:g id="NAME">^1</xliff:g> հիշասարքը"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"<xliff:g id="NAME_0">^1</xliff:g> հիշասարքում ֆայլեր, լուսանկարներ ու հավելվածներ պահելու համար անհրաժեշտ է ֆորմատավորել այն։ \n\n<xliff:g id="NAME_1">^2</xliff:g> հիշասարքից բոլոր ֆայլերը կջնջվեն։ Տվյալների կորստից խուսափելու համար պատճենեք դրանք այլ <xliff:g id="NAME_2">^3</xliff:g> հիշասարքում կամ կրիչում։"</string>
-    <!-- no translation found for storage_wizard_format_confirm_v2_body_external (5810296966099830035) -->
-    <skip />
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Լուսանկարներ, տեսանյութեր, երգեր և այլ բովանդակություն պահելու համար անհրաժեշտ է ֆորմատավորել «<xliff:g id="NAME_0">^1</xliff:g>» սարքը։ \n\nՖորմատավորման արդյունքում <xliff:g id="NAME_1">^2</xliff:g>ի ամբողջ բովանդակությունը կջնջվի։ Տվյալների կորստից խուսափելու համար պատճենեք դրանք այլ <xliff:g id="NAME_2">^3</xliff:g>ում կամ սարքում։"</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g>. ֆորմատավորել"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Տեղափոխե՞լ <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Դուք կարող եք ֆայլեր, լուսանկարներ և որոշ հավելվածներ տեղափոխել <xliff:g id="NAME">^1</xliff:g>։ \n\nՏեղափոխումը կարող է <xliff:g id="DURATION">^3</xliff:g> տևել։ Արդյունքում <xliff:g id="SIZE">^2</xliff:g> տարածք կազատվի։"</string>
@@ -1694,12 +1676,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Դուք կարող եք օգտագործել <xliff:g id="NAME_0">^1</xliff:g> հիշասարքը, բայց այն դանդաղ է աշխատում։ \n\n<xliff:g id="NAME_1">^2</xliff:g> հիշասարքում պահված հավելվածները կարող են խափանումներով աշխատել, և բովանդակության փոխանցումը կարող է երկար տևել։ \n\nՓորձեք օգտագործել ավելի արագ <xliff:g id="NAME_2">^3</xliff:g> կամ օգտագործեք <xliff:g id="NAME_3">^4</xliff:g> հիշասարքը որպես շարժական կրիչ։"</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Սկսել նորից"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Շարունակել"</string>
-    <!-- no translation found for storage_wizard_ready_v2_external_body (7688457485389886923) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_body (3520269956641115883) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (1163588718127651062) -->
-    <skip />
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Այժմ դուք կարող եք օգտագործել <xliff:g id="NAME">^1</xliff:g>ը"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Այժմ դուք կարող եք օգտագործել <xliff:g id="NAME">^1</xliff:g>ը"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Այժմ դուք կարող եք օգտագործել <xliff:g id="NAME">^1</xliff:g>ը"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Մարտկոցի կարգավիճակը"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Մարտկոցի մակարդակը"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN-ներ"</string>
@@ -2489,19 +2468,13 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Իմացեք ավելին գունաշտկման մասին"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Գունաշրջում"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Իմացեք ավելին գունաշրջման մասին"</string>
-    <!-- no translation found for accessibility_captioning_primary_switch_title (3663677340286206100) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_primary_switch_summary (2544094070306830218) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_title (3128792092290011408) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_summary (4620682807315588019) -->
-    <skip />
+    <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Ենթագրերի ցուցադրում"</string>
+    <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Միայն աջակցվող հավելվածի համար"</string>
+    <string name="captioning_appearance_title" msgid="3128792092290011408">"Ենթագրերի չափն ու ոճը"</string>
+    <string name="captioning_appearance_summary" msgid="4620682807315588019">"Տեքստի չափը՝ <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Այլ ընտրանքներ"</string>
-    <!-- no translation found for accessibility_captioning_preference_intro (8995427146374031134) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_preference_summary (8335768472978374255) -->
-    <skip />
+    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"Կարգավորեք ենթագրերի չափը և ոճը՝ դրանք ավելի ընթեռնելի դարձնելու համար"</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"Ենթագրերի այս կարգավորումները ոչ բոլոր մուլտիմեդիա հավելվածների կողմից են աջակցվում"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"«Հատուկ գործառույթներ» կոճակ"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"2 մատը սահեցրեք ներքևից վերև"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Սեղմած պահել ձայնի ուժգնության ստեղները"</string>
@@ -3411,10 +3384,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Թույլատրել հավելվածին օգտագործել ձեր տեղադրության տեղեկությունները"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Հետ"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Հաջորդը"</string>
-    <!-- no translation found for wizard_back_portable (5315939180781404882) -->
-    <skip />
-    <!-- no translation found for wizard_back_adoptable (1447814356855134183) -->
-    <skip />
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Անցնել դյուրակիր սարքի"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Ֆորմատավորել այլ եղանակով"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Ավարտել"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM քարտեր"</string>

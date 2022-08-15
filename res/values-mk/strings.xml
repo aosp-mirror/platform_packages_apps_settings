@@ -70,6 +70,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Уредот ќе ја прекине врската со <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Спарете нов уред"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Спари го десното уво"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Спари го левото уво"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Спари го другото уво"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Левото слушно помагало е поврзано.\n\nЗа да го спарите десното, проверете дали е вклучено и подготвено за спарување."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Десното слушно помагало е поврзано.\n\nЗа да го спарите левото, проверете дали е вклучено и подготвено за спарување."</string>
@@ -1445,8 +1447,7 @@
     <string name="sim_enter_new" msgid="9010947802784561582">"Нов PIN на SIM картичка"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Повторно внеси нов PIN"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"PIN на SIM картичка"</string>
-    <!-- no translation found for sim_invalid_pin_hint (3376397829969578877) -->
-    <skip />
+    <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"Внесете PIN што содржи од 4 до 8 бројки"</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"PIN-кодовите не се совпаѓаат"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Не може да го промените PIN-от.\nМожно е PIN-от да е погрешен."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"PIN на SIM картичката е успешно променет"</string>
@@ -2833,14 +2834,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"при <xliff:g id="PERCENT">%1$s</xliff:g> батерија"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Процент на батеријата"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Прикажувај процент на батеријата во статусната лента"</string>
-    <!-- no translation found for battery_usage_chart_graph_hint_last_full_charge (6570336408060566877) -->
-    <skip />
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Ниво на батеријата од последното целосно полнење"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Ниво на батеријата во минатите 24 часа"</string>
-    <!-- no translation found for battery_app_usage (8976453608783133770) -->
-    <skip />
+    <string name="battery_app_usage" msgid="8976453608783133770">"Користење на апликацијата од последното целосно полнење"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Користење од апликациите во минатите 24 часа"</string>
-    <!-- no translation found for battery_system_usage (1395943945140097585) -->
-    <skip />
+    <string name="battery_system_usage" msgid="1395943945140097585">"Користење на системот од последното целосно полнење"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Користење на системот во минатите 24 часа"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Користење на системот за <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Користење на апликацијата за <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -4675,16 +4673,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Вклучи сега"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Исклучи сега"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Не се користи оптимизација на батеријата"</string>
-    <!-- no translation found for app_battery_optimization_title (389653121998016466) -->
-    <skip />
-    <!-- no translation found for app_battery_optimization_summary (7864783556193427398) -->
-    <skip />
-    <!-- no translation found for filter_battery_unrestricted_title (821027369424198223) -->
-    <skip />
-    <!-- no translation found for filter_battery_optimized_title (8236647176487754796) -->
-    <skip />
-    <!-- no translation found for filter_battery_restricted_title (5886859505802563232) -->
-    <skip />
+    <string name="app_battery_optimization_title" msgid="389653121998016466">"Управувајте со користењето на батеријата"</string>
+    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Поставете користење на батеријата за апликации"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Неограничено"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Оптимизирано"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Ограничено"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Ако уредот е заклучен, спречете внесување одговори или друг текст во известувања"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Стандард. проверка на правопис"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Избери проверка на правопис"</string>

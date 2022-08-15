@@ -70,6 +70,10 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"ارتباط دستگاهتان با <xliff:g id="DEVICE_NAME">%1$s</xliff:g> قطع می‌شود."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"مرتبط‌سازی دستگاه جدید"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"بلوتوث"</string>
+    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
+    <skip />
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"مرتبط کردن گوش دیگر"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"سمعک سمت چپ متصل شد.\n\nبرای مرتبط کردن سمعک سمت راست، مطمئن شوید روشن و آماده مرتبط‌سازی باشد."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"سمعک سمت راست متصل شد.\n\nبرای مرتبط کردن سمعک سمت چپ، مطمئن شوید روشن و آماده مرتبط‌سازی باشد."</string>
@@ -1443,8 +1447,7 @@
     <string name="sim_enter_new" msgid="9010947802784561582">"پین سیم کارت جدید"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"پین جدید را دوباره تایپ کنید"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"پین سیم کارت"</string>
-    <!-- no translation found for sim_invalid_pin_hint (3376397829969578877) -->
-    <skip />
+    <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"یک پین ۴ تا ۸ رقمی تایپ کنید"</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"پین‌ها با یکدیگر مطابقت ندارند"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"نمی‌توانید پین را تغییر دهید.\nممکن است پین اشتباه باشد."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"پین سیم کارت با موفقیت تغییر کرد"</string>
@@ -1570,13 +1573,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"تغییر نام"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"قرار دادن"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"خارج کردن"</string>
-    <!-- no translation found for storage_menu_format (8903698999905354146) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_button (7623565190643699626) -->
-    <skip />
+    <string name="storage_menu_format" msgid="8903698999905354146">"‏قالب‌بندی کارت SD به‌عنوان فضای ذخیره‌سازی قابل‌حمل"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"قالب‌بندی کارت"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"قالب‌بندی به‌عنوان قابل حمل"</string>
-    <!-- no translation found for storage_menu_format_option (4886059624052908432) -->
-    <skip />
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"قالب‌بندی"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"انتقال اطلاعات"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"فراموش کردن"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"راه‌اندازی"</string>
@@ -1606,24 +1606,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"تغییرنام فضای ذخیره‌سازی"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"این <xliff:g id="NAME_0">^1</xliff:g> به‌صورت ایمن بیرون رانده شد، اما هنوز موجود است. \n\nبرای استفاده از این <xliff:g id="NAME_1">^1</xliff:g>، باید ابتدا آن را بنشانید."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"این <xliff:g id="NAME_0">^1</xliff:g> خراب شده است. \n\nبرای استفاده از این <xliff:g id="NAME_1">^1</xliff:g>، باید ابتدا آن را راه‌اندازی کنید."</string>
-    <!-- no translation found for storage_internal_format_details (2399034372813686846) -->
-    <skip />
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"‏می‌توانید این کارت SD را برای ذخیره کردن عکس، ویدیو، موسیقی، و غیره قالب‌بندی کنید و در دستگاه‌های دیگر به آن‌ها دسترسی داشته باشید. \n\n"<b>"همه داده‌های موجود در این کارت SD پاک خواهد شد."</b>" \n\n"<b>"قبل‌از قالب‌بندی"</b>" \n\n"<b>"از عکس‌ها و رسانه‌های دیگر پشتیبان‌گیری کنید"</b>" \nرسانه‌هایتان را به فضای ذخیره‌سازی دیگری در این دستگاه منتقل کنید، یا آن‌ها را بااستفاده از سیم USB به رایانه منتقل کنید. \n\n"<b>"از برنامه‌ها پشتیبان‌گیری کنید"</b>" \nهمه برنامه‌های ذخیره‌شده در این <xliff:g id="NAME">^1</xliff:g> حذف نصب خواهد شد و داده‌هایشان پاک خواهد شد. برای حفظ این برنامه‌ها، آن‌ها را به فضای ذخیره‌سازی دیگری در این دستگاه منتقل کنید."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"وقتی این <xliff:g id="NAME_0">^1</xliff:g> را جدا می‌کنید، برنامه‌های ذخیره شده در آن دیگر کار نمی‌کنند و فایل‌های رسانه ذخیره شده در آن تا وقتی دوباره جاگذاری نشود، در دسترس نخواهند بود."</b>" \n\nاین <xliff:g id="NAME_1">^1</xliff:g> فقط برای کار در این دستگاه قالب‌بندی شده است و در دستگاه‌های دیگر کار نمی‌کند."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"برای استفاده از برنامه‌ها، عکس‌ها یا اطلاعاتی که در این <xliff:g id="NAME">^1</xliff:g> وجود دارد، آن را دوباره جاگذاری کنید.\n\nیا می‌توانید، اگر دستگاه ذخیره‌سازی در دسترس نیست، فراموش کردن آن را انتخاب کنید.\n\nاگر فراموش کردن را انتخاب کنید، همه داده‌هایی که در این دستگاه وجود دارد، برای همیشه از دست می‌رود.\n\nمی‌توانید بعداً برنامه‌ها را دوباره نصب کنید، اما داده‌های ذخیره شده آن‌ها در این دستگاه از بین می‌رود."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g> فراموش شود؟"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"همه برنامه‌ها، عکس‌ها و داده‌های ذخیره شده در این <xliff:g id="NAME">^1</xliff:g> برای همیشه از بین می‌روند."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"‏سیستم حاوی فایل‌هایی است که برای اجرای Android نسخه <xliff:g id="VERSION">%s</xliff:g> استفاده می‌شود"</string>
-    <!-- no translation found for storage_wizard_guest (5813419895687733649) -->
-    <skip />
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"‏کاربران مهمان نمی‌توانند کارت SD را قالب‌بندی کنند."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"<xliff:g id="NAME">^1</xliff:g> خود را راه‌اندازی کنید"</string>
-    <!-- no translation found for storage_wizard_init_external_title (5304499882951772292) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_summary (5842588772292324473) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_title (8799676990387869411) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_summary (8224648610422581704) -->
-    <skip />
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"‏قالب‌بندی کارت SD به‌عنوان فضای ذخیره‌سازی قابل‌حمل"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"عکس، ویدیو، موسیقی و غیره را ذخیره کنید و از دستگاه‌های دیگر به آن‌ها دسترسی داشته باشید"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"‏قالب‌بندی کارت SD به‌عنوان حافظه داخلی"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"ذخیره کردن برنامه‌ها و رسانه‌ها فقط برای استفاده در این دستگاه"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"قالب‌بندی به عنوان حافظه داخلی"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"انجام قالب‌بندی <xliff:g id="NAME_0">^1</xliff:g> برای ایمن کردن آن لازم است. \n\nبعد از قالب‌بندی، این <xliff:g id="NAME_1">^1</xliff:g> فقط در این دستگاه کار می‌کند. \n\n"<b>"قالب‌بندی همه داده‌هایی را که درحال‌حاضر در <xliff:g id="NAME_2">^1</xliff:g> ذخیره شده است، پاک می‌کند."</b>"برای از دست ندادن داده، حتماً از آن‌ها پشتیبان‌گیری کنید."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"قالب‌بندی به‌عنوان فضای قابل حمل"</string>
@@ -1640,12 +1634,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"انتقال"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"در حال انتقال اطلاعات..."</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"در طول انتقال: \n• ‏<xliff:g id="NAME">^1</xliff:g> را جدا نکنید. \n• ‏بعضی از برنامه‌ها درست کار نمی‌کنند. \n• ‏دستگاه را شارژ نگه دارید."</string>
-    <!-- no translation found for storage_wizard_ready_title (3631022511474086605) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_external_body (4264787122605706421) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_internal_body (2416472979690681273) -->
-    <skip />
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> قالب‌بندی شد"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"می‌توانید شروع به استفاده از <xliff:g id="NAME">^1</xliff:g> کنید"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"می‌توانید شروع به استفاده از <xliff:g id="NAME">^1</xliff:g> کنید"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"انتقال <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"انتقال <xliff:g id="APP">^1</xliff:g> و اطلاعات آن به <xliff:g id="NAME_0">^2</xliff:g> فقط چند لحظه طول می‌کشد. تا وقتی انتقال تکمیل نشود، نمی‌توانید از برنامه استفاده کنید. \n\nدر طول انتقال، <xliff:g id="NAME_1">^2</xliff:g> را جدا نکنید."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"برای انتقال داده‌هایی که برای باز کردن قفل کاربر <xliff:g id="APP">^1</xliff:g> نیاز دارید."</string>
@@ -1654,30 +1645,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"لغو انتقال"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"این <xliff:g id="NAME_0">^1</xliff:g> به نظر آهسته می‌آید. \n\nمی‌توانید ادامه دهید، اما ممکن است برنامه‌های منتقل شده به این مکان کند شوند و انتقال اطلاعات مدت زیادی طول بکشد. \n\nبرای عملکرد بهتر، استفاده از یک <xliff:g id="NAME_1">^1</xliff:g> سریع‌تر را در نظر بگیرید."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"چگونه از <xliff:g id="NAME">^1</xliff:g> استفاده خواهید کرد؟"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (1236154481658009267) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (3771689638403679317) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"‏قالب‌بندی کارت SD به‌عنوان حافظه داخلی"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"‏برنامه‌ها و رسانه‌ها را فقط برای استفاده در این رایانه لوحی ذخیره کنید. &lt;a href=https://support.google.com/android/answer/12153449&gt;درباره راه‌اندازی کارت SD بیشتر بدانید&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"قالب‌بندی"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"‏قالب‌بندی کارت SD به‌عنوان حافظه داخلی"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"‏برنامه‌ها و رسانه‌ها را فقط برای استفاده در این دستگاه ذخیره کنید. &lt;a href=https://support.google.com/android/answer/12153449&gt;درباره راه‌اندازی کارت SD بیشتر بدانید&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"قالب‌بندی"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"یا"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_title (2786416384217054112) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_summary (3867896101011977386) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_action (6140058734875839081) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"‏قالب‌بندی کارت SD به‌عنوان فضای ذخیره‌سازی قابل‌حمل"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"‏عکس، ویدیو، موسیقی و غیره را ذخیره کنید و از دستگاه‌های دیگر به آن‌ها دسترسی داشته باشید. &lt;a href=https://support.google.com/android/answer/12153449&gt;درباره راه‌اندازی کارت SD بیشتر بدانید&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"قالب‌بندی"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"بعداً تنظیم شود"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"این <xliff:g id="NAME">^1</xliff:g> قالب‌بندی شود؟"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"برای ذخیره برنامه‌ها، فایل‌ها و رسانه، لازم است این <xliff:g id="NAME_0">^1</xliff:g> قالب‌بندی شود. \n\nقالب‌بندی همه محتوای موجود در <xliff:g id="NAME_1">^2</xliff:g> را پاک می‌کند. برای جلوگیری از از دست رفتن محتوا، در <xliff:g id="NAME_2">^3</xliff:g> یا دستگاهی دیگر از آن پشتیبان‌گیری کنید."</string>
-    <!-- no translation found for storage_wizard_format_confirm_v2_body_external (5810296966099830035) -->
-    <skip />
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"این <xliff:g id="NAME_0">^1</xliff:g> برای ذخیره کردن عکس، ویدیو، موسیقی، و غیره باید قالب‌بندی شود. \n\nدرصورت قالب‌بندی، محتوای موجود در این <xliff:g id="NAME_1">^2</xliff:g> پاک خواهد شد. برای جلوگیری از ازدست دادن محتوا، آن را در <xliff:g id="NAME_2">^3</xliff:g> یا دستگاه دیگری پشتیبان‌گیری کنید."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"قالب <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"محتوا به <xliff:g id="NAME">^1</xliff:g> منتقل شود؟"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"می‌توانید فایل‌ها، رسانه و برنامه‌هایی خاص را به این <xliff:g id="NAME">^1</xliff:g> انتقال دهید. \n\nاین انتقال <xliff:g id="SIZE">^2</xliff:g> از فضای ذخیره‌سازی رایانه لوحی‌تان را آزاد می‌کند و باید تقریباً <xliff:g id="DURATION">^3</xliff:g> طول بکشد."</string>
@@ -1694,12 +1675,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"همچنان می‌توانید از این <xliff:g id="NAME_0">^1</xliff:g> استفاده کنید اما ممکن است کند باشد. \n\nبرنامه‌های ذخیره‌شده در این <xliff:g id="NAME_1">^2</xliff:g> ممکن است به‌درستی کار نکنند و انتقال محتوا ممکن است مدت زیادی طول بکشد. \n\nدرعوض، برای فضای ذخیره‌سازی قابل‌حمل از <xliff:g id="NAME_2">^3</xliff:g> سریع‌تری یا از <xliff:g id="NAME_3">^4</xliff:g> استفاده کنید."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"شروع مجدد"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"ادامه"</string>
-    <!-- no translation found for storage_wizard_ready_v2_external_body (7688457485389886923) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_body (3520269956641115883) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (1163588718127651062) -->
-    <skip />
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"می‌توانید شروع به استفاده از <xliff:g id="NAME">^1</xliff:g> کنید"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"می‌توانید شروع به استفاده از <xliff:g id="NAME">^1</xliff:g> کنید"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"می‌توانید شروع به استفاده از <xliff:g id="NAME">^1</xliff:g> کنید"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"وضعیت باتری"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"مقدار شارژ باتری"</string>
     <string name="apn_settings" msgid="4295467389400441299">"نام‌های نقاط دستیابی"</string>
@@ -2489,19 +2467,13 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"درباره تصحیح رنگ بیشتر بدانید"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"درباره وارونگی رنگ"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"درباره وارونگی رنگ بیشتر بدانید"</string>
-    <!-- no translation found for accessibility_captioning_primary_switch_title (3663677340286206100) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_primary_switch_summary (2544094070306830218) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_title (3128792092290011408) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_summary (4620682807315588019) -->
-    <skip />
+    <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"نشان دادن زیرنویس ناشنوایان"</string>
+    <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"فقط برای برنامه پشتیبانی‌شده"</string>
+    <string name="captioning_appearance_title" msgid="3128792092290011408">"اندازه و سبک زیرنویس"</string>
+    <string name="captioning_appearance_summary" msgid="4620682807315588019">"اندازه نوشتار <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"گزینه‌های دیگر"</string>
-    <!-- no translation found for accessibility_captioning_preference_intro (8995427146374031134) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_preference_summary (8335768472978374255) -->
-    <skip />
+    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"اندازه و سبک زیرنویس ناشنوایان را سفارشی کنید تا خواندن نوشتار آسان‌تر شود"</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"همه برنامه‌های رسانه از این اولویت‌های زیرنویس ناشنوایان پشتیبانی نمی‌کنند"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"دکمه دسترس‌پذیری"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"با ۲ انگشت تند به‌بالا بکشید"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"کلیدهای میزان صدا را نگه‌دارید"</string>
@@ -2862,14 +2834,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"در <xliff:g id="PERCENT">%1$s</xliff:g> باتری"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"درصد شارژ باتری"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"نمایش درصد شارژ باتری در نوار وضعیت"</string>
-    <!-- no translation found for battery_usage_chart_graph_hint_last_full_charge (6570336408060566877) -->
-    <skip />
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"سطح باتری از آخرین شارژ کامل"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"میزان شارژ باتری در ۲۴ ساعت گذشته"</string>
-    <!-- no translation found for battery_app_usage (8976453608783133770) -->
-    <skip />
+    <string name="battery_app_usage" msgid="8976453608783133770">"مصرف برنامه از آخرین شارژ کامل"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"استفاده از برنامه در ۲۴ ساعت گذشته"</string>
-    <!-- no translation found for battery_system_usage (1395943945140097585) -->
-    <skip />
+    <string name="battery_system_usage" msgid="1395943945140097585">"استفاده سیستم از آخرین شارژ کامل"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"استفاده از سیستم در ۲۴ ساعت گذشته"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"استفاده از سیستم برای <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"استفاده از برنامه برای <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -3411,10 +3380,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"اجازه به برنامه‌ها برای استفاده از اطلاعات موقعیت مکانی شما"</string>
     <string name="wizard_back" msgid="8257697435061870191">"برگشت"</string>
     <string name="wizard_next" msgid="3884832431439072471">"بعدی"</string>
-    <!-- no translation found for wizard_back_portable (5315939180781404882) -->
-    <skip />
-    <!-- no translation found for wizard_back_adoptable (1447814356855134183) -->
-    <skip />
+    <string name="wizard_back_portable" msgid="5315939180781404882">"تغییر به قابل‌حمل"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"قالب‌بندی با روشی دیگر"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"پایان"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"سیم‌کارت‌ها"</string>
@@ -4706,16 +4673,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"اکنون روشن شود"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"اکنون خاموش شود"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"از بهینه‌سازی باتری استفاده نشود"</string>
-    <!-- no translation found for app_battery_optimization_title (389653121998016466) -->
-    <skip />
-    <!-- no translation found for app_battery_optimization_summary (7864783556193427398) -->
-    <skip />
-    <!-- no translation found for filter_battery_unrestricted_title (821027369424198223) -->
-    <skip />
-    <!-- no translation found for filter_battery_optimized_title (8236647176487754796) -->
-    <skip />
-    <!-- no translation found for filter_battery_restricted_title (5886859505802563232) -->
-    <skip />
+    <string name="app_battery_optimization_title" msgid="389653121998016466">"مدیریت مصرف باتری"</string>
+    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"تنظیم مصرف باتری برای برنامه‌ها"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"نامحدود"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"بهینه‌سازی‌شده"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"محدود"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"درصورت قفل بودن دستگاه، از تایپ پاسخ یا نوشتارهای دیگر در اعلان‌ها جلوگیری شود"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"غلط‌یاب املای پیش‌فرض"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"انتخاب غلط‌یاب املا"</string>
@@ -4818,9 +4780,9 @@
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"باز کردن سریع دوربین"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"برای باز کردن سریع دوربین، دکمه روشن/خاموش را دو بار فشار دهید. در همه صفحه‌ها کار می‌کند."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"باز کردن سریع دوربین"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"خودگرفت با چرخاندن دوربین"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"خویش‌گرفت با چرخاندن دوربین"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
-    <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"سریع‌تر گرفتن خودگرفت"</string>
+    <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"سریع‌تر گرفتن خویش‌گرفت"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"پیمایش سیستمی"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"پیمایش ۲ دکمه‌ای"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"برای جابه‌جایی بین برنامه‌ها، دکمه صفحه اصلی را تند به‌بالا بکشید. برای دیدن همه برنامه‌ها، دوباره تند به‌بالا بکشید. برای برگشت، روی دکمه برگشت ضربه بزنید."</string>

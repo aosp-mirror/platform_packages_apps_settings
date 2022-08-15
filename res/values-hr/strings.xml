@@ -71,6 +71,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Vaš će uređaj prekinuti vezu s uređajem <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Uparite novi uređaj"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Upari desno uho"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Upari lijevo uho"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Uparite drugo uho"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Lijevo slušno pomagalo je povezano.\n\nDa biste uparili desno, provjerite je li uključeno i spremno za uparivanje."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Desno slušno pomagalo je povezano.\n\nDa biste uparili lijevo, provjerite je li uključeno i spremno za uparivanje."</string>
@@ -1593,13 +1595,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Preimenuj"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Učitaj"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Izbaci"</string>
-    <!-- no translation found for storage_menu_format (8903698999905354146) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_button (7623565190643699626) -->
-    <skip />
+    <string name="storage_menu_format" msgid="8903698999905354146">"Formatiranje SD kartice za prijenosnu pohranu"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Formatiraj karticu"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatiraj kao prijenosnu"</string>
-    <!-- no translation found for storage_menu_format_option (4886059624052908432) -->
-    <skip />
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Formatiraj"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Premjesti podatke"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Zaboravi"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Postavi"</string>
@@ -1629,24 +1628,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Promjena naziva pohrane"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Medij za pohranu <xliff:g id="NAME_0">^1</xliff:g> izbačen je na siguran način, ali je još uvijek dostupan. \n\nZa upotrebu medija za pohranu <xliff:g id="NAME_1">^1</xliff:g> prvo ga morate učitati."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Medij za pohranu <xliff:g id="NAME_0">^1</xliff:g> oštećen je. \n\nZa upotrebu medija <xliff:g id="NAME_1">^1</xliff:g> prvo ga trebate postaviti."</string>
-    <!-- no translation found for storage_internal_format_details (2399034372813686846) -->
-    <skip />
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Tu SD karticu možete formatirati kako biste pohranili fotografije, videozapise, glazbu i druge sadržaje te im pristupili na drugim uređajima. \n\n"<b>"Svi će se podaci na toj SD kartici izbrisati."</b>" \n\n"<b>"Prije formatiranja"</b>" \n\n"<b>"Izradite sigurnosnu kopiju fotografija i drugih medija"</b>" \nPremjestite medijske datoteke u neku drugu pohranu na ovom uređaju ili na računalo pomoću USB kabela. \n\n"<b>"Sigurnosno kopiranje aplikacija"</b>" \nSve će se aplikacije pohranjene na uređaju <xliff:g id="NAME">^1</xliff:g> deinstalirati i njihovi će se podaci izbrisati. Da biste zadržali aplikacije, premjestite ih u neku drugu pohranu na ovom uređaju."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Kada izbacite uređaj <xliff:g id="NAME_0">^1</xliff:g>, aplikacije koje su pohranjene na njemu prestat će funkcionirati, a medijske datoteke pohranjene na njemu neće biti dostupne dok ga ponovo ne umetnete."</b>" \n\nUređaj <xliff:g id="NAME_1">^1</xliff:g> formatiran je tako da funkcionira samo na ovom uređaju. Neće funkcionirati na drugim uređajima."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Da biste pristupili aplikacijama, fotografijama ili podacima koje sadrži uređaj <xliff:g id="NAME">^1</xliff:g>, umetnite ga ponovo. \n\nMožete i zaboraviti tu pohranu ako uređaj nije dostupan. \n\nAko se odlučite za opciju zaborava, svi podaci koje uređaj sadrži zauvijek će se izgubiti. \n\nKasnije možete ponovo instalirati aplikacije, ali će njihovi podaci pohranjeni na tom uređaju biti izgubljeni."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Zaboraviti medij za pohranu <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Sve aplikacije, fotografije i podaci pohranjeni na SD kartici <xliff:g id="NAME">^1</xliff:g> trajno će se izbrisati."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Sustav obuhvaća datoteke koje se upotrebljavaju za pokretanje Androida verzije <xliff:g id="VERSION">%s</xliff:g>"</string>
-    <!-- no translation found for storage_wizard_guest (5813419895687733649) -->
-    <skip />
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Koris. u nač. rada za goste ne mogu form. SD kart."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Postavite uređaj <xliff:g id="NAME">^1</xliff:g>"</string>
-    <!-- no translation found for storage_wizard_init_external_title (5304499882951772292) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_summary (5842588772292324473) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_title (8799676990387869411) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_summary (8224648610422581704) -->
-    <skip />
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Formatiranje SD kartice za prijenosnu pohranu"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Spremite fotografije, videozapise, glazbu i druge sadržaje i pristupite im s drugih uređaja"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Formatiranje SD kartice za internu pohranu"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Spremite aplikacije i medije za uporabu samo na ovom telefonu"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Formatiraj kao internu pohranu"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Potrebno je formatirati uređaj <xliff:g id="NAME_0">^1</xliff:g> radi zaštite. \n\nNakon formatiranja <xliff:g id="NAME_1">^1</xliff:g> funkcionirat će samo na ovom uređaju. \n\n"<b>"Formatiranjem se brišu svi podaci koji su trenutačno pohranjeni na <xliff:g id="NAME_2">^1</xliff:g>."</b>" Da ne biste izgubili podatke, napravite sigurnosnu kopiju."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Formatiraj kao prijenosnu pohranu"</string>
@@ -1663,12 +1656,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Premjesti"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Premještanje podataka…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Tijekom premještanja: \n• Ne uklanjajte uređaj <xliff:g id="NAME">^1</xliff:g>. \n• Neke aplikacije neće funkcionirati pravilno. \n• Ne isključujte uređaj s napajanja."</string>
-    <!-- no translation found for storage_wizard_ready_title (3631022511474086605) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_external_body (4264787122605706421) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_internal_body (2416472979690681273) -->
-    <skip />
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"Formatiran medij <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Možete početi upotrebljavati medij <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Možete početi upotrebljavati medij <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Premjestite aplikaciju <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Premještanje aplikacije <xliff:g id="APP">^1</xliff:g> i njezinih podataka na uređaj <xliff:g id="NAME_0">^2</xliff:g> trajat će samo nekoliko trenutaka. Nećete moći upotrebljavati tu aplikaciju dok premještanje ne završi. \n\nNe uklanjajte uređaj <xliff:g id="NAME_1">^2</xliff:g> tijekom premještanja."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Da biste premjestili podatke, morate otključati korisnika <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1677,30 +1667,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Otkaži premještanje"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Čini se da <xliff:g id="NAME_0">^1</xliff:g> radi sporo. \n\nMožete nastaviti, no aplikacije premještene na tu lokaciju mogu zastajkivati, a prijenosi podataka mogu trajati dugo. \n\nBrža <xliff:g id="NAME_1">^1</xliff:g> mogla bi poboljšati rad."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Za što će se upotrebljavati <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (1236154481658009267) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (3771689638403679317) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formatiranje SD kartice za internu pohranu"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Pohranite aplikacije i medije za uporabu samo na ovom tabletu. &lt;a href=https://support.google.com/android/answer/12153449&gt;Saznajte više o postavljanju SD kartice&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formatiraj"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formatiranje SD kartice za internu pohranu"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Pohranite aplikacije i medije za uporabu samo na ovom telefonu. &lt;a href=https://support.google.com/android/answer/12153449&gt;Saznajte više o postavljanju SD kartice&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formatiraj"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Ili"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_title (2786416384217054112) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_summary (3867896101011977386) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_action (6140058734875839081) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formatiranje SD kartice za prijenosnu pohranu"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Pohranite fotografije, videozapise, glazbu i druge sadržaje i pristupite im s drugih uređaja. &lt;a href=https://support.google.com/android/answer/12153449&gt;Saznajte više o postavljanju SD kartice&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formatiraj"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Postavi kasnije"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Formatirati medij <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"<xliff:g id="NAME_0">^1</xliff:g> mora se formatirati radi spremanja aplikacija, datoteka i medija. \n\nFormatiranjem će se izbrisati sav postojeći sadržaj na mediju <xliff:g id="NAME_1">^2</xliff:g>. Sigurnosno kopirajte sadržaj na drugi medij <xliff:g id="NAME_2">^3</xliff:g> ili uređaj kako ga ne biste izgubili."</string>
-    <!-- no translation found for storage_wizard_format_confirm_v2_body_external (5810296966099830035) -->
-    <skip />
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Medij <xliff:g id="NAME_0">^1</xliff:g> mora se formatirati kako bi se na njemu mogle pohraniti fotografije, videozapisi, glazba i drugi sadržaji. \n\nFormatiranjem će se izbrisati postojeći sadržaj na mediju <xliff:g id="NAME_1">^2</xliff:g>. Sigurnosno kopirajte sadržaj na drugi medij <xliff:g id="NAME_2">^3</xliff:g> ili uređaj kako ga ne biste izgubili."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formatiraj medij <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Premjestiti sadržaj na medij <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Na vanjsku pohranu <xliff:g id="NAME">^1</xliff:g> možete premjestiti datoteke, medije i određene aplikacije. \n\nPremještanjem će se osloboditi <xliff:g id="SIZE">^2</xliff:g> pohrane na tabletu, a trajat će oko <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1717,12 +1697,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Medij <xliff:g id="NAME_0">^1</xliff:g> možete i dalje upotrebljavati, ali će možda biti spor. \n\nAplikacije pohranjene na mediju <xliff:g id="NAME_1">^2</xliff:g> možda neće pravilno funkcionirati, a prijenos sadržaja može trajati dugo. \n\nPokušajte upotrijebiti brži medij <xliff:g id="NAME_2">^3</xliff:g> ili upotrebljavajte ovaj medij <xliff:g id="NAME_3">^4</xliff:g> za prijenosnu pohranu."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Počni ispočetka"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Nastavi"</string>
-    <!-- no translation found for storage_wizard_ready_v2_external_body (7688457485389886923) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_body (3520269956641115883) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (1163588718127651062) -->
-    <skip />
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Možete početi upotrebljavati medij <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Možete početi upotrebljavati medij <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Možete početi upotrebljavati medij <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Status baterije"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Razina baterije"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN-ovi"</string>
@@ -2515,19 +2492,13 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Saznajte više o korekciji boja"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"O inverziji boja"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Saznajte više o inverziji boja"</string>
-    <!-- no translation found for accessibility_captioning_primary_switch_title (3663677340286206100) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_primary_switch_summary (2544094070306830218) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_title (3128792092290011408) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_summary (4620682807315588019) -->
-    <skip />
+    <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Prikaži titlove"</string>
+    <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Samo za podržanu aplikaciju"</string>
+    <string name="captioning_appearance_title" msgid="3128792092290011408">"Veličina i stil titlova"</string>
+    <string name="captioning_appearance_summary" msgid="4620682807315588019">"<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g> veličina teksta"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Više opcija"</string>
-    <!-- no translation found for accessibility_captioning_preference_intro (8995427146374031134) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_preference_summary (8335768472978374255) -->
-    <skip />
+    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"Prilagodite veličinu i stil titlova kako biste ih lakše čitali."</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"Te postavke titlova nisu podržane u svim aplikacijama za medijske sadržaje"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"gumb za Pristupačnost"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"prijeđite dvama prstima prema gore"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Držite tipke za glasnoću"</string>
@@ -3455,10 +3426,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Dopusti aplikacijama da upotrebljavaju podatke o lokaciji"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Natrag"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Dalje"</string>
-    <!-- no translation found for wizard_back_portable (5315939180781404882) -->
-    <skip />
-    <!-- no translation found for wizard_back_adoptable (1447814356855134183) -->
-    <skip />
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Prebaci na prijenosno"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Formatiraj na drugi način"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Završi"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM kartice"</string>

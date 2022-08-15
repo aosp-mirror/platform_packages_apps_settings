@@ -70,6 +70,10 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"ອຸປະກອນຂອງທ່ານຈະຕັດການເຊື່ອມຕໍ່ຈາກ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"ຈັບຄູ່ອຸປະກອນໃໝ່"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
+    <skip />
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"ຈັບຄູ່ຫູອີກຂ້າງຂອງທ່ານ"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"ເຊື່ອມຕໍ່ເຄື່ອງຊ່ວຍຟັງຊ້າຍຂອງທ່ານແລ້ວ.\n\nເພື່ອເຊື່ອມຕໍ່ອັນຂວາ, ໃຫ້ກວດສອບວ່າມັນເປີດໃຊ້ ແລະ ພ້ອມຈັບຄູ່ແລ້ວ."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"ເຊື່ອມຕໍ່ເຄື່ອງຊ່ວຍຟັງຂວາຂອງທ່ານແລ້ວ.\n\nເພື່ອເຊື່ອມຕໍ່ອັນຊ້າຍ, ໃຫ້ກວດສອບວ່າມັນເປີດໃຊ້ ແລະ ພ້ອມຈັບຄູ່ແລ້ວ."</string>
@@ -1570,13 +1574,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"ປ່ຽນຊື່"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"ຕໍ່​ໃສ່"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"ເອົາ​ອອກ"</string>
-    <!-- no translation found for storage_menu_format (8903698999905354146) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_button (7623565190643699626) -->
-    <skip />
+    <string name="storage_menu_format" msgid="8903698999905354146">"ຟໍແມັດ SD card ເພື່ອເປັນບ່ອນຈັດເກັບຂໍ້ມູນແບບພົກແບບ"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"ຟໍແມັດ card"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"ຟໍແມັດເປັນແບບພົກພາ"</string>
-    <!-- no translation found for storage_menu_format_option (4886059624052908432) -->
-    <skip />
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"ຟໍແມັດ"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"ຍ້າຍ​ຂໍ້​ມູນ​ອອກ"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"ລືມ"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"ຕິດ​ຕັ້ງ"</string>
@@ -1606,24 +1607,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"ປ່ຽນ​ຊື່​ບ່ອນ​ຈັດ​ເກັບຂໍ້​ມູນ"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"<xliff:g id="NAME_0">^1</xliff:g> ນີ້ຖຶກຕັດເຊື່ອມຕໍ່ຢ່າງປອດໄພແລ້ວ, ແຕ່ຍັງພ້ອມໃຊ້ງານຢູ່. \n\nເພື່ອໃຊ້ <xliff:g id="NAME_1">^1</xliff:g> ນີ້, ທ່ານຈຳເປັນຕ້ອງເຊື່ອມຕໍ່ມັນກ່ອນ."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g> ນີ້ເສຍຫາຍ. \n\nເພື່ອໃຊ້ <xliff:g id="NAME_1">^1</xliff:g> ນີ້, ທ່ານຈຳເປັນຕ້ອງຕັ້ງມັນກ່ອນ."</string>
-    <!-- no translation found for storage_internal_format_details (2399034372813686846) -->
-    <skip />
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"ທ່ານສາມາດຟໍແມັດ SD card ນີ້ເພື່ອຈັດເກັບຮູບພາບ, ວິດີໂອ, ເພງ ແລະ ອື່ນໆອີກ ພ້ອມທັງເຂົ້າເຖິງພວກມັນໄດ້ຈາກອຸປະກອນອື່ນໆໄດ້. \n\n"<b>"ຂໍ້ມູນທັງໝົດຢູ່ໃນ SD card ນີ້ຈະຖືກລຶບອອກ."</b>" \n\n"<b>"ກ່ອນຟໍແມັດ"</b>" \n\n"<b>"ສຳຮອງຂໍ້ມູນຮູບພາບ ແລະ ມີເດຍອື່ນໆ"</b>" \nຍ້າຍໄຟລ໌ມີເດຍຂອງທ່ານໄປໃສ່ບ່ອນຈັດເກັບຂໍ້ມູນສຳຮອງຢູ່ອຸປະກອນນີ້ ຫຼື ໂອນຂໍ້ມູນພວກມັນໄປໃສ່ຄອມພິວເຕີໂດຍໃຊ້ສາຍ USB. \n\n"<b>"ສຳຮອງຂໍ້ມູນແອັບ"</b>" \nແອັບທັງໝົດທີ່ຈັດເກັບຢູ່ <xliff:g id="NAME">^1</xliff:g> ນີ້ຈະຖືກຖອນການຕິດຕັ້ງ ແລະ ຂໍ້ມູນຂອງພວກມັນຈະຖືກລຶບອອກ. ເພື່ອເກັບແອັບເຫຼົ່ານີ້ໄວ້, ກະລຸນາຍ້າຍພວກມັນໄປໃສ່ບ່ອນຈັດເກັບຂໍ້ມູນສຳຮອງຢູ່ອຸປະກອນນີ້."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"ເມື່ອ​ທ່ານ​ເອົາ <xliff:g id="NAME_0">^1</xliff:g>, ນີ້​ອອກ, ແອັບ​ທີ່​ເກັບ​ໄວ້​ຢູ່​ໃນ​ຕົວ​ມັນ​ນັ້ນ​ຈະ​ຢຸດ​ເຮັດ​ວຽກ, ແລະ​ໄຟ​ລ໌​ມີ​ເດຍ​ທີ່​ເກັບ​ໄວ້​ຢູ່​ໃນ​ມັນ​ນັ້ນ​ຈະ​ບໍ່​ມີ​ໃຫ້​ຈົນ​ກ່​ວາ​ທີ່​ຈະ​ໃສ່​ມັນ​ເຂົ້າ​ໃໝ່."</b>" \n\n<xliff:g id="NAME_1">^1</xliff:g> ນີ້​ຖືກ​ຟໍ​ແມັດ​ໄປ ເພື່ອ​ໃຫ້​ເຮັດ​ວຽກ​ຢູ່​ໃນ​ອຸ​​ປະ​ກອນ​ນີ້​ເທົ່າ​ນັ້ນ. ມັນ​ບໍ່​ເຮັດ​ວຽກ​ຢູ່​ໃນ​ອັນ​ອື່ນ."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"ເພື່ອ​ໃຊ້​ແອັບ, ຮູບ, ຫຼື​ຂໍ້​ມູນທີ່ <xliff:g id="NAME">^1</xliff:g> ນີ້​ມີ, ແຊກ​ມັນ​ເຂົ້າ​ໄປ​ອີກ. \n\nທາງ​ເລືອກ​ໜຶ່ງ, ທ່ານ​ສາ​ມາດ​ເລືອກ​ທີ່​ຈະ​ລືມ​ບ່ອນ​ຈັດ​ເກັບ​ຂໍ້​ມູນ​ນີ້ ຖ້າ​ບໍ່​ມີ​ອຸ​ປະ​ກອນ​ໃຫ້. \n\nຖ້າ​ທ່ານ​ເລືອກ​ທີ່​ຈະ​ລືມ, ທຸກ​ຂໍ້​ມູນ​ທີ່​ມີ​ຢູ່​ໃນ​ອຸ​ປະ​ກອນ​ຈະ​ເສຍ​ໄປ​ຖາ​ວອນ. \n\nທ່ານ​ສາ​ມາດ​ຕິດ​ຕັ້ງ​ແອັບ​ໄດ້​ພາຍ​ຫຼັງ, ແຕ່​ຂໍ້​ມູນ​ທີ່​ເກັບ​ໄວ້​ຢູ່​ໃນ​ອຸ​ປະ​ກອນ​ຈະ​ເສຍ​ໄປ."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"ລືມ <xliff:g id="NAME">^1</xliff:g> ບໍ?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"ແອັບ, ຮູບຖ່າຍ ແລະຂໍ້ມູນທັງໝົດທີ່ເກັບໄວ້ເທິງ <xliff:g id="NAME">^1</xliff:g> ອຸປະກອນນີ້ຈະເສຍໄປຕະຫຼອດການ."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"ລະບົບຮວມໄຟລ໌ທີ່ໃຊ້ເພື່ອຣັນ Android ເວີຊັນ <xliff:g id="VERSION">%s</xliff:g>"</string>
-    <!-- no translation found for storage_wizard_guest (5813419895687733649) -->
-    <skip />
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"ຜູ້ໃຊ້ໂໝດແຂກບໍ່ສາມາດຟໍແມັດ SD card ໄດ້"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"ຕັ້ງ <xliff:g id="NAME">^1</xliff:g> ຂອງ​ທ່ານ"</string>
-    <!-- no translation found for storage_wizard_init_external_title (5304499882951772292) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_summary (5842588772292324473) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_title (8799676990387869411) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_summary (8224648610422581704) -->
-    <skip />
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"ຟໍແມັດ SD card ເພື່ອເປັນບ່ອນຈັດເກັບຂໍ້ມູນແບບພົກແບບ"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"ບັນທຶກຮູບພາບ, ວິດີໂອ, ເພງ ແລະ ອື່ນໆອີກ ພ້ອມທັງເຂົ້າເຖິງພວກມັນໄດ້ຈາກອຸປະກອນອື່ນໆ"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"ຟໍແມັດ SD card ເພື່ອເປັນບ່ອນຈັດເກັບຂໍ້ມູນພາຍໃນ"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"ບັນທຶກແອັບ ແລະ ມີເດຍທີ່ຈະໃຊ້ຢູ່ໂທລະສັບນີ້ເທົ່ານັ້ນ"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"ຟໍ​ແມັດ​ເປັນ​ບ່ອນ​ຈັດ​ເກັບຂໍ້​ມູນ​ພາຍ​ໃນເຄື່ອງ"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"ອັນ​ນີ້​ຕ້ອງ​ການ​ໃຫ້​ຟໍ​ແມັດ <xliff:g id="NAME_0">^1</xliff:g> ເພື່ອ​ເຮັດ​ໃຫ້​ມັນ​ປອດ​ໄພ. \n\nຫຼັງ​ຈາກ​ການ​ຟໍ​ແມັດ, <xliff:g id="NAME_1">^1</xliff:g> ນີ້​ຈະ​ເຮັດ​ວຽກ​ຢູ່​ແຕ່​ໃນ​ອຸ​ປະ​ກອນ​ນີ້​ເທົ່າ​ນັ້ນ. \n\n"<b>"ການ​ຟໍ​ແມັດ​ລຶບ​ທຸກ​ຂໍ້​ມູນ​ທີ່​ປະ​ຈຸ​ບັນ​ໄດ້​ເກັບ​ໄວ້​ຢູ່​ໃນ <xliff:g id="NAME_2">^1</xliff:g>."</b>" ເພື່ອ​ຫຼີກ​ເວັ້ນ​ການ​ເສຍ​ຂໍ້​ມູນ, ໃຫ້ພິ​ຈາ​ລະ​ນາ​ສຳ​ຮອງ​ມັນ​ໄວ້."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"ຟໍ​ແມັດ​ເປັນ​ບ່ອນ​ຈັດ​ເກັບ​ຂໍ້​ມູນ​ເຄື່ອນ​ທີ່​ໄດ້"</string>
@@ -1640,12 +1635,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"ຍ້າຍ"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"ກຳ​ລັງ​ຍ້າຍ​ຂໍ້​ມູນ…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"ໃນ​ລະ​ຫວ່າງ​ການ​ຍ້າຍ: \n• ຢ່າ​ເອົາ <xliff:g id="NAME">^1</xliff:g> ອອກ. \n• ບາງ​ແອັບ​ຈະ​ບໍ່​ເຮັດ​ວຽກ​ໄດ້​ຢ່າງ​ຖືກ​ຕ້ອງ. \n• ໃຫ້​ສາກ​ອຸ​ປະ​ກອນ​ໄວ້."</string>
-    <!-- no translation found for storage_wizard_ready_title (3631022511474086605) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_external_body (4264787122605706421) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_internal_body (2416472979690681273) -->
-    <skip />
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"ຟໍແມັດ <xliff:g id="NAME">^1</xliff:g> ແລ້ວ"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"ທ່ານສາມາດເລີ່ມໃຊ້ <xliff:g id="NAME">^1</xliff:g> ຂອງທ່ານໄດ້ແລ້ວ"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"ທ່ານສາມາດເລີ່ມໃຊ້ <xliff:g id="NAME">^1</xliff:g> ຂອງທ່ານໄດ້ແລ້ວ"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"ຍ້າຍ <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"ການ​ຍ້າຍ <xliff:g id="APP">^1</xliff:g> ແລະ​ຂໍ້​ມູນ​ຂອງ​ມັນ​ໃສ່ <xliff:g id="NAME_0">^2</xliff:g> ຈະ​ໃຊ້​ເວ​ລາ​ພຽງ​ບຶ​ດດຽວ. ທ່ານ​ຈະ​ບໍ່​ສາ​ມາດ​ໃຊ້​ແອັບ​ໄດ້​ຈົນ​ກ່​ວາ​ຈະ​ຍ້າຍ​ສຳ​ເລັດ. \n\nຢ່າ​ຍ້າຍ <xliff:g id="NAME_1">^2</xliff:g> ໃນ​ລະ​ຫວ່າງ​ການ​ຍ້າຍ."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"ເພື່ອຍ້າຍຂໍ້ມູນ, ທ່ານຈະຕ້ອງປົດລັອກຜູ້ໃຊ້ <xliff:g id="APP">^1</xliff:g> ກ່ອນ."</string>
@@ -1654,30 +1646,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"ຍົກ​ເລີກ​ການ​ຍ້າຍ"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"ປະ​ກົດ​ວ່າ <xliff:g id="NAME_0">^1</xliff:g> ນີ​ຊັກ​ຊ້າ​. \n\nທ່ານ​ສາ​ມາດ​ສືບ​ຕໍ່​ໄດ້, ແຕ່​ແອັບ​ທີ່​ຖືກ​ຍ້າຍ​ໄປ​ຫາ​ທີ່​ຕັ້ງ​ນີ້​ແລ້ວ​ອາດ​ຈະ​ເປັນ​ກະ​ຕຸ​ກະ​ຕັກ ແລະ​ການ​ໂອນ​ຂໍ້​ມູ​ນ​ອາດ​ຈະ​ໃຊ້​ເວ​ລາ​ດົນ. \n\nພິ​ຈາ​ລະ​ນາ​ໃຊ້ <xliff:g id="NAME_1">^1</xliff:g> ທີ່​ໄວ​ກ່​ວາ ເພື່ອ​ໃຫ້​ມີ​ການ​ປະ​ຕິ​ບັດ​ໄດ້​ໄວ​ກ່​ວາ."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"ທ່ານຈະໃຊ້ <xliff:g id="NAME">^1</xliff:g> ນີ້ແນວໃດ?"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (1236154481658009267) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (3771689638403679317) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"ຟໍແມັດ SD card ເພື່ອເປັນບ່ອນຈັດເກັບຂໍ້ມູນພາຍໃນ"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"ຈັດເກັບແອັບ ແລະ ມີເດຍທີ່ຈະໃຊ້ຢູ່ແທັບເລັດນີ້ເທົ່ານັ້ນ. &lt;a href=https://support.google.com/android/answer/12153449&gt;ສຶກສາເພີ່ມເຕີມກ່ຽວກັບການຕັ້ງຄ່າ SD card&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"ຟໍແມັດ"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"ຟໍແມັດ SD card ເພື່ອເປັນບ່ອນຈັດເກັບຂໍ້ມູນພາຍໃນ"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"ຈັດເກັບແອັບ ແລະ ມີເດຍທີ່ຈະໃຊ້ຢູ່ໂທລະສັບນີ້ເທົ່ານັ້ນ. &lt;a href=https://support.google.com/android/answer/12153449&gt;ສຶກສາເພີ່ມເຕີມກ່ຽວກັບການຕັ້ງຄ່າ SD card&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"ຟໍແມັດ"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"ຫຼື"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_title (2786416384217054112) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_summary (3867896101011977386) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_action (6140058734875839081) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"ຟໍແມັດ SD card ເພື່ອເປັນບ່ອນຈັດເກັບຂໍ້ມູນແບບພົກແບບ"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"ຈັດເກັບຮູບພາບ, ວິດີໂອ, ເພງ ແລະ ອື່ນໆອີກ ພ້ອມທັງເຂົ້າເຖິງພວກມັນໄດ້ຈາກອຸປະກອນອື່ນໆ. &lt;a href=https://support.google.com/android/answer/12153449&gt;ສຶກສາເພີ່ມເຕີມກ່ຽວກັບການຕັ້ງຄ່າ SD card&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"ຟໍແມັດ"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"ຕັ້ງຄ່າໃນພາຍຫຼັງ"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"ຟໍແມັດ <xliff:g id="NAME">^1</xliff:g> ນີ້ບໍ?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"<xliff:g id="NAME_0">^1</xliff:g> ນີ້ຕ້ອງຟໍແມັດກ່ອນຈຶ່ງຈະໃຊ້ຈັດເກັບແອັບ, ໄຟລ໌ ແລະ ມີເດຍໄດ້. \n\nການຟໍແມັດຈະເປັນການລຶບເນື້ອຫາທີ່ມີຢູ່ກ່ອນແລ້ວໃນ <xliff:g id="NAME_1">^2</xliff:g> ອອກ. ເພື່ອຫຼີກເວັ້ນການສູນເສຍຂໍ້ມູນ, ໃຫ້ສຳຮອງມັນໄປໄວ້ <xliff:g id="NAME_2">^3</xliff:g> ຫຼື ອຸປະກອນອື່ນກ່ອນ."</string>
-    <!-- no translation found for storage_wizard_format_confirm_v2_body_external (5810296966099830035) -->
-    <skip />
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"<xliff:g id="NAME_0">^1</xliff:g> ນີ້ຈຳເປັນຕ້ອງໄດ້ຟໍແມັດເພື່ອຈັດເກັບຮູບພາບ, ວິດີໂອ, ເພງ ແລະ ອື່ນໆອີກ. \n\nການຟໍແມັດຈະລຶບເນື້ອຫາທີ່ມີຢູ່ໃນ <xliff:g id="NAME_1">^2</xliff:g> ອອກ. ເພື່ອຫຼີກເວັ້ນການສູນເສຍຂໍ້ມູນ, ໃຫ້ສຳຮອງມັນໄປໄວ້ <xliff:g id="NAME_2">^3</xliff:g> ຫຼື ອຸປະກອນອື່ນ."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"ຟໍແມັດ <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"ຍ້າຍເນື້ອຫາໄປ <xliff:g id="NAME">^1</xliff:g> ບໍ?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"ທ່ານສາມາດຍ້າຍໄຟລ໌, ມີເດຍ ແລະ ແອັບບາງຢ່າງໄປໃສ່ <xliff:g id="NAME">^1</xliff:g> ນີ້ໄດ້. \n\nການຍ້າຍນີ້ຈະເປັນການເພີ່ມບ່ອນຫວ່າງ <xliff:g id="SIZE">^2</xliff:g> ໃຫ້ແທັບເລັດທ່ານ ແລະ ຈະໃຊ້ເວລາປະມານ <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1694,12 +1676,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"ທ່ານຍັງຄົງສາມາດໃຊ້ <xliff:g id="NAME_0">^1</xliff:g> ນີ້ໄດ້ຢູ່, ແຕ່ມັນອາດຈະຊ້າ. \n\nແອັບທີ່ຈັດເກັບຢູ່ <xliff:g id="NAME_1">^2</xliff:g> ນີ້ອາດເຮັດວຽກໄດ້ບໍ່ປົກກະຕິ ແລະ ການຍ້າຍເນື້ອຫາອາດໃຊ້ເວລາດົນ. \n\nໃຫ້ລອງໃຊ້ <xliff:g id="NAME_2">^3</xliff:g> ທີ່ໄວຂຶ້ນ ຫຼື ໃຊ້ <xliff:g id="NAME_3">^4</xliff:g> ສຳລັບບ່ອນຈັດເກັບຂໍ້ມູນແບບພົກພາແທນ."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"ເລີ່ມຕົ້ນໃຫມ່"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"ສືບຕໍ່"</string>
-    <!-- no translation found for storage_wizard_ready_v2_external_body (7688457485389886923) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_body (3520269956641115883) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (1163588718127651062) -->
-    <skip />
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"ທ່ານສາມາດເລີ່ມໃຊ້ <xliff:g id="NAME">^1</xliff:g> ຂອງທ່ານໄດ້ແລ້ວ"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"ທ່ານສາມາດເລີ່ມໃຊ້ <xliff:g id="NAME">^1</xliff:g> ຂອງທ່ານໄດ້ແລ້ວ"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"ທ່ານສາມາດເລີ່ມໃຊ້ <xliff:g id="NAME">^1</xliff:g> ຂອງທ່ານໄດ້ແລ້ວ"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"ສະຖານະແບັດເຕີຣີ"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"ລະດັບແບັດເຕີຣີ"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
@@ -2489,19 +2468,13 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"ສຶກສາເພີ່ມເຕີມກ່ຽວກັບການແກ້ໄຂສີ"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"ກ່ຽວກັບການປີ້ນສີ"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"ສຶກສາເພີ່ມເຕີມກ່ຽວກັບການປີ້ນສີ"</string>
-    <!-- no translation found for accessibility_captioning_primary_switch_title (3663677340286206100) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_primary_switch_summary (2544094070306830218) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_title (3128792092290011408) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_summary (4620682807315588019) -->
-    <skip />
+    <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"ສະແດງຄຳບັນຍາຍ"</string>
+    <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"ສຳລັບແອັບທີ່ຮອງຮັບເທົ່ານັ້ນ"</string>
+    <string name="captioning_appearance_title" msgid="3128792092290011408">"ຂະໜາດ ແລະ ຮູບແບບຄຳບັນຍາຍ"</string>
+    <string name="captioning_appearance_summary" msgid="4620682807315588019">"ຂະໜາດຕົວອັກສອນ <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"ຕົວເລືອກເພີ່ມເຕີມ"</string>
-    <!-- no translation found for accessibility_captioning_preference_intro (8995427146374031134) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_preference_summary (8335768472978374255) -->
-    <skip />
+    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"ປັບແຕ່ງຂະໜາດ ແລະ ຮູບແບບຄຳບັນຍາຍເພື່ອເຮັດໃຫ້ພວກມັນອ່ານໄດ້ງ່າຍຂຶ້ນ"</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"ແອັບມີເດຍບາງແອັບບໍ່ຮອງຮັບການຕັ້ງຄ່າຄຳບັນຍາຍເຫຼົ່ານີ້"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"ປຸ່ມການຊ່ວຍເຂົ້າເຖິງ"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"ປັດສອງນິ້ວຂຶ້ນຈາກລຸ່ມສຸດ"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"ກົດປຸ່ມລະດັບສຽງຄ້າງໄວ້"</string>
@@ -3411,10 +3384,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"ໃຫ້ແອັບຯສາມາດໃຊ້ຂໍ້ມູນສະຖານທີ່ຂອງທ່ານໄດ້"</string>
     <string name="wizard_back" msgid="8257697435061870191">"ກັບຄືນ"</string>
     <string name="wizard_next" msgid="3884832431439072471">"ຕໍ່ໄປ"</string>
-    <!-- no translation found for wizard_back_portable (5315939180781404882) -->
-    <skip />
-    <!-- no translation found for wizard_back_adoptable (1447814356855134183) -->
-    <skip />
+    <string name="wizard_back_portable" msgid="5315939180781404882">"ສະຫຼັບໄປໃຊ້ແບບພົກພາ"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"ຟໍແມັດດ້ວຍວິທີອື່ນ"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"ແລ້ວໆ"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM ກາດ"</string>
