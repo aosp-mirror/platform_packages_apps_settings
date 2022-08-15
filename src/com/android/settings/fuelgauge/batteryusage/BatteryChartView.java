@@ -462,53 +462,60 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         return result;
     }
 
-    /**
-     * Pairly draws axis labels from left and right side to middle. If the pair of labels have
-     * any overlap, skips that pair of labels.
-     */
     private void drawAxisLabels(Canvas canvas, final Rect[] displayAreas, final float baselineY) {
-        int forwardCheckLine = Integer.MIN_VALUE;
-        int backwardCheckLine = Integer.MAX_VALUE;
-        Rect middleDisplayArea = null;
-        for (int forwardIndex = 0, backwordIndex = displayAreas.length - 1;
-                forwardIndex <= backwordIndex; forwardIndex++, backwordIndex--) {
-            final Rect forwardDisplayArea = displayAreas[forwardIndex];
-            final Rect backwardDisplayArea = displayAreas[backwordIndex];
-            if (forwardDisplayArea.left < forwardCheckLine
-                    || backwardDisplayArea.right > backwardCheckLine) {
-                // Overlapped at left or right, skip the pair of labels
-                continue;
-            }
-            if (middleDisplayArea != null && (
-                    forwardDisplayArea.right + mTextPadding > middleDisplayArea.left
-                            || backwardDisplayArea.left - mTextPadding < middleDisplayArea.right)) {
-                // Overlapped with the middle label.
-                continue;
-            }
-            if (forwardIndex != backwordIndex
-                    && forwardDisplayArea.right + mTextPadding > backwardDisplayArea.left) {
-                // Overlapped in the middle, skip the pair of labels
-                continue;
-            }
+        final int lastIndex = displayAreas.length - 1;
+        // Suppose first and last labels are always able to draw.
+        drawAxisLabelText(canvas, 0, displayAreas[0], baselineY);
+        drawAxisLabelText(canvas, lastIndex, displayAreas[lastIndex], baselineY);
+        drawAxisLabelsBetweenStartIndexAndEndIndex(canvas, displayAreas, 0, lastIndex, baselineY);
+    }
 
-            drawAxisLabelText(canvas, forwardIndex, forwardDisplayArea, baselineY);
-            drawAxisLabelText(canvas, backwordIndex, backwardDisplayArea, baselineY);
-
-            forwardCheckLine = forwardDisplayArea.right + mTextPadding;
-            backwardCheckLine = backwardDisplayArea.left - mTextPadding;
-
-            // If the number of labels is odd, draw the middle label first
-            if (forwardIndex == 0 && backwordIndex % 2 == 0) {
-                final int middleIndex = backwordIndex / 2;
-                middleDisplayArea = displayAreas[middleIndex];
-                if (middleDisplayArea.left < forwardCheckLine
-                        || middleDisplayArea.right > backwardCheckLine) {
-                    // Overlapped at left or right, skip the pair of labels
-                    continue;
-                }
-                drawAxisLabelText(canvas, middleIndex, middleDisplayArea, baselineY);
-            }
+    /**
+     * Recursively draws axis labels between the start index and the end index. If the inner number
+     * can be exactly divided into 2 parts, check and draw the middle index label and then
+     * recursively draw the 2 parts. Otherwise, divide into 3 parts. Check and draw the middle two
+     * labels and then recursively draw the 3 parts. If there are any overlaps, skip drawing and go
+     * back to the uplevel of the recursion.
+     */
+    private void drawAxisLabelsBetweenStartIndexAndEndIndex(Canvas canvas,
+            final Rect[] displayAreas, final int startIndex, final int endIndex,
+            final float baselineY) {
+        if (endIndex - startIndex <= 1) {
+            return;
         }
+        if ((endIndex - startIndex) % 2 == 0) {
+            int middleIndex = (startIndex + endIndex) / 2;
+            if (hasOverlap(displayAreas, startIndex, middleIndex)
+                    || hasOverlap(displayAreas, middleIndex, endIndex)) {
+                return;
+            }
+            drawAxisLabelText(canvas, middleIndex, displayAreas[middleIndex], baselineY);
+            drawAxisLabelsBetweenStartIndexAndEndIndex(
+                    canvas, displayAreas, startIndex, middleIndex, baselineY);
+            drawAxisLabelsBetweenStartIndexAndEndIndex(
+                    canvas, displayAreas, middleIndex, endIndex, baselineY);
+        } else {
+            int middleIndex1 = startIndex + round((endIndex - startIndex) / 3f);
+            int middleIndex2 = startIndex + round((endIndex - startIndex) * 2 / 3f);
+            if (hasOverlap(displayAreas, startIndex, middleIndex1)
+                    || hasOverlap(displayAreas, middleIndex1, middleIndex2)
+                    || hasOverlap(displayAreas, middleIndex2, endIndex)) {
+                return;
+            }
+            drawAxisLabelText(canvas, middleIndex1, displayAreas[middleIndex1], baselineY);
+            drawAxisLabelText(canvas, middleIndex2, displayAreas[middleIndex2], baselineY);
+            drawAxisLabelsBetweenStartIndexAndEndIndex(
+                    canvas, displayAreas, startIndex, middleIndex1, baselineY);
+            drawAxisLabelsBetweenStartIndexAndEndIndex(
+                    canvas, displayAreas, middleIndex1, middleIndex2, baselineY);
+            drawAxisLabelsBetweenStartIndexAndEndIndex(
+                    canvas, displayAreas, middleIndex2, endIndex, baselineY);
+        }
+    }
+
+    private boolean hasOverlap(
+            final Rect[] displayAreas, final int leftIndex, final int rightIndex) {
+        return displayAreas[leftIndex].right + mTextPadding * 2f > displayAreas[rightIndex].left;
     }
 
     private void drawAxisLabelText(
