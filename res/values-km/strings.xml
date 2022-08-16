@@ -70,6 +70,10 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"ឧបករណ៍របស់អ្នក​នឹង​ផ្តាច់ចេញពី <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ។"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"ផ្គូផ្គង​ឧបករណ៍ថ្មី"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"ប៊្លូធូស"</string>
+    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
+    <skip />
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"ផ្គូផ្គងឧបករណ៍ជំនួយការស្ដាប់ម្ខាងទៀតរបស់អ្នក"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"ឧបករណ៍ជំនួយការស្ដាប់ខាងឆ្វេងរបស់អ្នកត្រូវបានភ្ជាប់។\n\nដើម្បីផ្គូផ្គងឧបករណ៍ជំនួយការស្ដាប់ខាងស្ដាំ សូមប្រាកដថាបានបើកវា ហើយត្រៀមរួចរាល់ក្នុងការផ្គូផ្គង។"</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"ឧបករណ៍ជំនួយការស្ដាប់ខាងស្ដាំរបស់អ្នកត្រូវបានភ្ជាប់។\n\nដើម្បីផ្គូផ្គងឧបករណ៍ជំនួយការស្ដាប់ខាងឆ្វេង សូមប្រាកដថាបានបើកវា ហើយត្រៀមរួចរាល់ក្នុងការផ្គូផ្គង។"</string>
@@ -1570,13 +1574,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"ប្ដូរឈ្មោះ"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"ភ្ជាប់"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"ដកចេញ"</string>
-    <!-- no translation found for storage_menu_format (8903698999905354146) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_button (7623565190643699626) -->
-    <skip />
+    <string name="storage_menu_format" msgid="8903698999905354146">"ឈូស​កាត SD សម្រាប់​ប្រើ​ជា​ទំហំ​ផ្ទុក​ចល័ត"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"ឈូស​កាត"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"សម្អាតឧបករណ៍ផ្ទុកចល័ត"</string>
-    <!-- no translation found for storage_menu_format_option (4886059624052908432) -->
-    <skip />
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"ឈូស"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"ប្តូរទីតាំងទិន្នន័យ"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"បំភ្លេច"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"រៀបចំ"</string>
@@ -1606,24 +1607,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"ប្តូរឈ្មោះឧបករណ៍ផ្ទុក"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"បានដក <xliff:g id="NAME_0">^1</xliff:g> ចេញដោយសុវត្ថិភាព ប៉ុន្តែវានៅតែបង្ហាញថាមាន។ \n\nដើម្បីប្រើ <xliff:g id="NAME_1">^1</xliff:g> អ្នកត្រូវភ្ជាប់វាជាមុនសិន។"</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g> នេះខូចហើយ។ \n\nដើម្បីប្រើ <xliff:g id="NAME_1">^1</xliff:g> នេះអ្នកត្រូវដំឡើងវាជាមុនសិន។"</string>
-    <!-- no translation found for storage_internal_format_details (2399034372813686846) -->
-    <skip />
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"អ្នក​អាច​ឈូស​កាត SD នេះ ដើម្បី​រក្សា​ទុក​រូបថត វីដេអូ តន្ត្រី និង​អ្វីៗ​ជាច្រើន​ទៀត ព្រមទាំង​ចូល​ប្រើប្រាស់​អ្វី​ទាំង​នេះ​នៅ​លើ​ឧបករណ៍​ផ្សេង​ទៀត​បាន។ \n\n"<b>"ទិន្នន័យ​ទាំងអស់​នៅ​លើ​កាត SD នឹង​ត្រូវ​បាន​លុប។"</b>" \n\n"<b>"មុន​ពេល​ឈូស"</b>" \n\n"<b>"បម្រុង​ទុក​រូបថត និង​មេឌៀ​ផ្សេង​ទៀត"</b>" \nផ្លាស់ទី​ឯកសារ​មេឌៀ​របស់​អ្នក​ទៅ​ទំហំ​ផ្ទុក​ផ្សេង​ទៀត​នៅ​លើ​ឧបករណ៍​នេះ ឬ​ផ្ទេរ​ឯកសារ​ទាំង​នេះ​ទៅ​កុំព្យូទ័រ​ដោយ​ប្រើប្រាស់​ខ្សែ USB។ \n\n"<b>"បម្រុង​ទុក​កម្មវិធី"</b>" \nកម្មវិធី​ទាំងអស់​ដែល​បាន​រក្សា​ទុក​នៅ​លើ​<xliff:g id="NAME">^1</xliff:g> នេះ​នឹង​ត្រូវ​បាន​លុប ហើយ​ទិន្នន័យ​កម្មវិធី​ទាំង​នេះ​ក៏​នឹង​ត្រូវ​បាន​លុប​ដែរ។ ដើម្បី​រក្សា​កម្មវិធី​ទាំង​នេះ សូម​ផ្លាស់ទី​ពួកវា​ទៅ​ទំហំ​ផ្ទុក​ផ្សេង​ទៀត​នៅ​លើ​ឧបករណ៍​នេះ។"</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"នៅពេលដែលអ្នកដក <xliff:g id="NAME_0">^1</xliff:g> នេះចេញ កម្មវិធីដែលបានផ្ទុកនៅក្នុងនោះនឹងឈប់ដំណើរការ ហើយឯកសារមេឌៀដែលបានផ្ទុកនៅលើនោះនឹងមានទេ រហូតទាល់តែអ្នកដោតចូលវិញ។"</b>\n\n"ការសម្អាត <xliff:g id="NAME_1">^1</xliff:g> នេះត្រូវបានកំណត់ឲ្យដំណើរការនៅលើឧបករណ៍នេះតែប៉ុណ្ណោះ។ វានឹងមិនដំណើរការនៅលើឧបករណ៍ដ៏ទៃទៀតឡើយ។"</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"ដើម្បីប្រើកម្មវិធី រូបភាព ឬទិន្នន័យដែល <xliff:g id="NAME">^1</xliff:g> ផ្ទុក សូមបញ្ចូលវាម្តងទៀត។ \n\nជាជម្រើស អ្នកអាចជ្រើសរើសដើម្បីបំភ្លេចឧបករណ៍ផ្ទុកនេះ ប្រសិនបើឧបករណ៍នេះមិនមានទេ។ \n\nប្រសិនបើអ្នកជ្រើសរើសបំភ្លេច រាល់ទិន្នន័យទាំងអស់ដែលឧបករណ៍នេះផ្ទុកនឹងបាត់បង់រហូត។ \n\nអ្នកអាចដំឡើងកម្មវិធីនេះបាននៅពេលក្រោយ ប៉ុន្តែទិន្នន័យរបស់វាដែលអ្នកផ្ទុកនៅលើឧបករណ៍នេះនឹងបាត់បង់រហូត។"</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"បំភ្លេច <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"រាល់កម្មវិធី រូបភាព និងទិន្នន័យទាំងអស់នៅលើ <xliff:g id="NAME">^1</xliff:g> នឹងត្រូវបាត់បង់ជារៀងរហូត។"</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"ប្រព័ន្ធរាប់បញ្ចូលឯកសារដែលបាន​ប្រើ​ដើម្បី​ដំណើរការ​កំណែ Android <xliff:g id="VERSION">%s</xliff:g>"</string>
-    <!-- no translation found for storage_wizard_guest (5813419895687733649) -->
-    <skip />
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"អ្នក​ប្រើប្រាស់មុខងារភ្ញៀវមិនអាចឈូសកាត SD បានទេ"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"ដំឡើង <xliff:g id="NAME">^1</xliff:g> របស់អ្នក"</string>
-    <!-- no translation found for storage_wizard_init_external_title (5304499882951772292) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_summary (5842588772292324473) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_title (8799676990387869411) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_summary (8224648610422581704) -->
-    <skip />
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"ឈូស​កាត SD សម្រាប់​ប្រើ​ជា​ទំហំ​ផ្ទុក​ចល័ត"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"រក្សា​ទុក​រូបថត វីដេអូ តន្ត្រី និង​អ្វីៗ​ជាច្រើន​ទៀត ព្រមទាំង​ចូល​ប្រើប្រាស់​អ្វី​ទាំង​នេះ​ពី​ឧបករណ៍​ផ្សេង​ទៀត"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"ឈូស​កាត SD សម្រាប់​ប្រើ​ជា​ទំហំ​​ផ្ទុក​ខាង​ក្នុង"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"រក្សា​ទុក​កម្មវិធី និង​មេឌៀ ដើម្បី​ប្រើប្រាស់​នៅ​លើ​ទូរសព្ទ​នេះ​តែ​ប៉ុណ្ណោះ"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"សម្អាតឧបករណ៍ផ្ទុកខាងក្នុង"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"វាតម្រូវឲ្យសម្អាត <xliff:g id="NAME_0">^1</xliff:g> ដើម្បីធ្វើឲ្យមានសុវត្ថិភាព។ \n\nបន្ទាប់ពីសម្អាត <xliff:g id="NAME_1">^1</xliff:g> នេះនឹងដំណើរការនៅលើឧបករណ៍នេះតែប៉ុណ្ណោះ។ \n\n"<b>"ការសម្អាតនឹងលុបទិន្នន័យទាំងអស់ដែលបានផ្ទុកនៅលើ <xliff:g id="NAME_2">^1</xliff:g> ពេលបច្ចុប្បន្ន។"</b>" ដើម្បីជៀងវាងបាត់បង់ទិន្នន័យ សូមពិចារណាធ្វើការបម្រុងទុក។"</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"សម្អាតឧបករណ៍ផ្ទុកចល័ត"</string>
@@ -1640,12 +1635,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"ផ្លាស់ទី"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"កំពុងផ្លាស់ទីទិន្នន័យ…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"អំឡុងពេលធ្វើការផ្លាស់ទី \n• កុំដកចេញ <xliff:g id="NAME">^1</xliff:g>។ \n• កម្មវិធីមួយចំនួននឹងដំណើរការមិនត្រឹមត្រូវទេ។ \n• បន្តសាកថ្មឧបករណ៍"</string>
-    <!-- no translation found for storage_wizard_ready_title (3631022511474086605) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_external_body (4264787122605706421) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_internal_body (2416472979690681273) -->
-    <skip />
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"បានឈូស​<xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"អ្នក​អាច​ចាប់ផ្ដើម​ប្រើប្រាស់​<xliff:g id="NAME">^1</xliff:g> របស់​អ្នក​បាន​ហើយ"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"អ្នក​អាច​ចាប់ផ្ដើម​ប្រើប្រាស់​<xliff:g id="NAME">^1</xliff:g> របស់​អ្នក​បាន​ហើយ"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"ផ្លាស់ទី <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"ការផ្លាស់ទី <xliff:g id="APP">^1</xliff:g> និងទិន្នន័យរបស់វាទៅ <xliff:g id="NAME_0">^2</xliff:g> នឹងចំណាយតែបន្តិចប៉ុណ្ណោះ។ អ្នកនឹងមិនអាចប្រើកម្មវិធីនេះទេ រហូតដល់ការផ្លាស់ទីនេះបញ្ចប់។ \n\nកុំដក <xliff:g id="NAME_1">^2</xliff:g> ចេញអំឡុងពេលធ្វើការផ្លាស់ទី។"</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"ដើម្បី​ផ្លាស់ទី​ទិន្នន័យ អ្នកត្រូវ​ដោះសោអ្នកប្រើប្រាស់ <xliff:g id="APP">^1</xliff:g> ។"</string>
@@ -1654,30 +1646,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"បោះបង់ការផ្លាស់ទី"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"<xliff:g id="NAME_0">^1</xliff:g> នេះទំនងជាយឺត។ \n\nអ្នកអាចបន្ត ប៉ុន្តែកម្មវិធីដែលបានផ្លាស់ទីមកទីតាំងនេះអាចនឹងរអាក់រអួរ ហើយការផ្ទេរទិន្នន័យអាចនឹងចំណាយពេលយូរ។ \n\nសូមពិចារណាប្រើប្រាស់ <xliff:g id="NAME_1">^1</xliff:g> ដែលលឿនជាងមុនដើម្បីដំណើរការល្អជាងមុន។"</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"តើ​អ្នក​នឹង​ប្រើ <xliff:g id="NAME">^1</xliff:g> នេះ​ដោយ​របៀប​ណា?"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (1236154481658009267) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (3771689638403679317) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"ឈូស​កាត SD សម្រាប់​ប្រើ​ជា​ទំហំ​​ផ្ទុក​ខាង​ក្នុង"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"រក្សា​ទុក​កម្មវិធី និង​មេឌៀ ដើម្បី​ប្រើប្រាស់​នៅ​លើ​ថេប្លេត​នេះ​តែ​ប៉ុណ្ណោះ។ &lt;a href=https://support.google.com/android/answer/12153449&gt;ស្វែង​យល់​បន្ថែម​អំពី​ការរៀបចំ​កាត SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"ឈូស"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"ឈូស​កាត SD សម្រាប់​ប្រើ​ជា​ទំហំ​​ផ្ទុក​ខាង​ក្នុង"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"រក្សា​ទុក​កម្មវិធី និង​មេឌៀ ដើម្បី​ប្រើប្រាស់​នៅ​លើ​ទូរសព្ទ​នេះ​តែ​ប៉ុណ្ណោះ។ &lt;a href=https://support.google.com/android/answer/12153449&gt;ស្វែង​យល់​បន្ថែម​អំពី​ការរៀបចំ​កាត SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"ឈូស"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"ឬ"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_title (2786416384217054112) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_summary (3867896101011977386) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_action (6140058734875839081) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"ឈូស​កាត SD សម្រាប់​ប្រើ​ជា​ទំហំ​ផ្ទុក​ចល័ត"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"រក្សា​ទុក​រូបថត វីដេអូ តន្ត្រី និង​អ្វីៗ​ជាច្រើន​ទៀត ព្រមទាំង​ចូល​ប្រើប្រាស់​អ្វី​ទាំង​នេះ​ពី​ឧបករណ៍​ផ្សេង​ទៀត។ &lt;a href=https://support.google.com/android/answer/12153449&gt;ស្វែង​យល់​បន្ថែម​អំពី​ការរៀបចំ​កាត SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"ឈូស"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"រៀបចំ​នៅពេល​ក្រោយ"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"សម្អាត <xliff:g id="NAME">^1</xliff:g> នេះ​ដែរទេ?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"<xliff:g id="NAME_0">^1</xliff:g> នេះ​ត្រូវ​ការ​សម្អាត​ ដើម្បី​ផ្ទុក​កម្មវិធី ឯកសារ និង​មេឌៀ។ \n\nការ​សម្អាត​នឹង​លុប​ខ្លឹម​សារ​ដែល​មាន​ស្រាប់​នៅលើ <xliff:g id="NAME_1">^2</xliff:g> ។ ដើម្បី​ជៀសវាង​ការ​បាត់បង់​ខ្លឹមសារ សូម​បម្រុង​វា​ទុក​ទៅ​ក្នុង <xliff:g id="NAME_2">^3</xliff:g> ឬ​ឧបករណ៍​ផ្សេង​ទៀត។"</string>
-    <!-- no translation found for storage_wizard_format_confirm_v2_body_external (5810296966099830035) -->
-    <skip />
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"ត្រូវការ​ឈូស​<xliff:g id="NAME_0">^1</xliff:g> នេះ ដើម្បី​រក្សា​ទុក​រូបថត វីដេអូ តន្ត្រី និង​អ្វីៗ​ជាច្រើន​ទៀត។ \n\nការឈូស​នឹង​លុប​ខ្លឹមសារ​ដែល​មាន​ស្រាប់​នៅ​លើ​<xliff:g id="NAME_1">^2</xliff:g>។ ដើម្បី​ជៀសវាង​កុំ​ឱ្យ​បាត់បង់​ខ្លឹមសារ សូម​បម្រុង​ទុក​ខ្លឹមសារ​ទៅ​ឧបករណ៍ ឬ<xliff:g id="NAME_2">^3</xliff:g> ផ្សេង។"</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"សម្អាត <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"ផ្លាស់ទី​ខ្លឹមសារ​ទៅ <xliff:g id="NAME">^1</xliff:g> មែនទេ?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"អ្នក​អាច​ផ្លាស់ទី​ឯកសារ មេឌៀ និង​កម្មវិធី​ជាក់លាក់​ទៅ <xliff:g id="NAME">^1</xliff:g> នេះបាន។ \n\nការ​ផ្លាស់​ទី​នេះ​នឹង​បង្កើន​​ទំហំផ្ទុក​នៃ​ថេប្លេត​របស់អ្នកបាន <xliff:g id="SIZE">^2</xliff:g> និង​អាច​ចំណាយ​ពេល​ប្រមាណ <xliff:g id="DURATION">^3</xliff:g> ។"</string>
@@ -1694,12 +1676,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"អ្នកនៅ​តែ​អាច​ប្រើ <xliff:g id="NAME_0">^1</xliff:g> នេះ​បាន​ដដែល ប៉ុន្តែ​វា​អាច​នឹង​ដំណើរ​ការយឺត។ \n\nកម្មវិធី​ដែល​បាន​ផ្ទុក​នៅលើ <xliff:g id="NAME_1">^2</xliff:g> នេះអាច​នឹង​ដំណើការ​មិន​ប្រក្រតី ហើយ​ការ​ផ្ទេរ​ខ្លឹមសារ​អាច​នឹង​ចំណាយ​ពេលយូរ។ \n\nសាកល្បង​ប្រើ​ <xliff:g id="NAME_2">^3</xliff:g> ដែល​លឿន​ជាងមុន ឬប្រើ <xliff:g id="NAME_3">^4</xliff:g> នេះសម្រាប់​ទំហំផ្ទុក​ចល័ត​ជំនួស​វិញ។"</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"ចាប់ផ្ដើមសាជាថ្មី"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"បន្ត"</string>
-    <!-- no translation found for storage_wizard_ready_v2_external_body (7688457485389886923) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_body (3520269956641115883) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (1163588718127651062) -->
-    <skip />
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"អ្នក​អាច​ចាប់ផ្ដើម​ប្រើប្រាស់​<xliff:g id="NAME">^1</xliff:g> របស់​អ្នក​បាន​ហើយ"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"អ្នក​អាច​ចាប់ផ្ដើម​ប្រើប្រាស់​<xliff:g id="NAME">^1</xliff:g> របស់​អ្នក​បាន​ហើយ"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"អ្នក​អាច​ចាប់ផ្ដើម​ប្រើប្រាស់​<xliff:g id="NAME">^1</xliff:g> របស់​អ្នក​បាន​ហើយ"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"ស្ថានភាព​ថ្ម"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"កម្រិត​ថ្ម"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
@@ -2489,19 +2468,13 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"ស្វែងយល់បន្ថែមអំពី​ការកែតម្រូវពណ៌"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"អំពីការបញ្ច្រាសពណ៌"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"ស្វែងយល់បន្ថែមអំពីការបញ្ច្រាសពណ៌"</string>
-    <!-- no translation found for accessibility_captioning_primary_switch_title (3663677340286206100) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_primary_switch_summary (2544094070306830218) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_title (3128792092290011408) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_summary (4620682807315588019) -->
-    <skip />
+    <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"បង្ហាញ​អក្សររត់"</string>
+    <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"សម្រាប់​កម្មវិធី​ដែលអាច​ប្រើបាន​តែប៉ុណ្ណោះ"</string>
+    <string name="captioning_appearance_title" msgid="3128792092290011408">"រចនាប័ទ្ម និង​ទំហំ​អក្សររត់"</string>
+    <string name="captioning_appearance_summary" msgid="4620682807315588019">"ទំហំ​អក្សរ​<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"ជម្រើស​ច្រើនទៀត"</string>
-    <!-- no translation found for accessibility_captioning_preference_intro (8995427146374031134) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_preference_summary (8335768472978374255) -->
-    <skip />
+    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"ប្ដូររចនាប័ទ្ម និងទំហំអក្សររត់តាមបំណង ដើម្បីធ្វើឱ្យកាន់តែងាយស្រួលអាន"</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"ចំណូលចិត្តអក្សររត់ទាំងនេះមិនអាចប្រើនៅក្នុងកម្មវិធី​មេឌៀទាំងអស់ទេ"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"ប៊ូតុង​ភាពងាយស្រួល"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"អូសម្រាមដៃ 2 ពីក្រោម​ឡើងលើ"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"សង្កត់គ្រាប់ចុច​កម្រិតសំឡេង​ឱ្យជាប់"</string>
@@ -3411,10 +3384,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"ឲ្យ​កម្មវិធី​ប្រើ​ព័ត៌មាន​ទីតាំង​របស់​អ្នក"</string>
     <string name="wizard_back" msgid="8257697435061870191">"ថយក្រោយ"</string>
     <string name="wizard_next" msgid="3884832431439072471">"បន្ទាប់​"</string>
-    <!-- no translation found for wizard_back_portable (5315939180781404882) -->
-    <skip />
-    <!-- no translation found for wizard_back_adoptable (1447814356855134183) -->
-    <skip />
+    <string name="wizard_back_portable" msgid="5315939180781404882">"ប្ដូរ​ទៅ​ទំហំផ្ទុក​ចល័ត"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"ឈូស​តាម​វិធី​ផ្សេង"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"បញ្ចប់"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"ស៊ី​ម​កាត"</string>

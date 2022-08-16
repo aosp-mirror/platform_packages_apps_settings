@@ -529,7 +529,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         final float trapezoidBottom =
                 getHeight() - mIndent.bottom - mDividerHeight - mDividerWidth
                         - mTrapezoidVOffset;
-        final float availableSpace = trapezoidBottom - mDividerWidth * .5f - mIndent.top;
+        final float availableSpace =
+                trapezoidBottom - mDividerWidth * .5f - mIndent.top - mTrapezoidVOffset;
         final float unitHeight = availableSpace / 100f;
         // Draws all trapezoid shapes into the canvas.
         final Path trapezoidPath = new Path();

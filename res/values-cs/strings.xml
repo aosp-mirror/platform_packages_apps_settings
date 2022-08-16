@@ -72,6 +72,10 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Zařízení se odpojí od zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Spárovat nové zařízení"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
+    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
+    <skip />
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Spárovat druhé ucho"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Levé naslouchátko je připojené.\n\nPokud chcete spárovat pravé, ujistěte se, zda je zapnuté a připravené k párování."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Pravé naslouchátko je připojené.\n\nPokud chcete spárovat levé, ujistěte se, zda je zapnuté a připravené k párování."</string>
@@ -499,7 +503,7 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Otisk byl přidán"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Odemknutí otiskem prstu se zdokonaluje, čím častěji ho používáte k odemčení tabletu nebo ověření identity v aplikacích"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Odemknutí otiskem prstu se zdokonaluje, čím častěji ho používáte k odemčení zařízení nebo ověření identity v aplikacích"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Odemknutí otiskem prstu se zdokonaluje, čím častěji ho používáte k odemčení telefonu nebo ověření identity v aplikacích"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Čím častěji budete odemknutí otiskem prstu používat k odemčení telefonu nebo ověření identity v aplikacích, tím víc se bude zlepšovat"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Později"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Zvedněte prst a dotkněte se znovu"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Umístěte boční stranu prstu na snímač a podržte ho, poté ho „překulte“ na druhou stranu"</string>
@@ -1612,13 +1616,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Přejmenovat"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Připojit"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Odpojit"</string>
-    <!-- no translation found for storage_menu_format (8903698999905354146) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_button (7623565190643699626) -->
-    <skip />
+    <string name="storage_menu_format" msgid="8903698999905354146">"Formátovat SD kartu jako přenosné úložiště"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Formátovat kartu"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formátovat jako přenosné"</string>
-    <!-- no translation found for storage_menu_format_option (4886059624052908432) -->
-    <skip />
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Formátovat"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Migrovat data"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Zapomenout"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Nastavit"</string>
@@ -1648,24 +1649,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Přejmenovat úložiště"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Toto úložiště <xliff:g id="NAME_0">^1</xliff:g> bylo bezpečně odpojeno, ale je stále k dispozici. \n\nChcete-li toto úložiště <xliff:g id="NAME_1">^1</xliff:g> použít, musíte jej nejdříve připojit."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Toto úložiště <xliff:g id="NAME_0">^1</xliff:g> je poškozeno. \n\nChcete-li toto úložiště <xliff:g id="NAME_1">^1</xliff:g> použít, musíte jej nejdříve nastavit."</string>
-    <!-- no translation found for storage_internal_format_details (2399034372813686846) -->
-    <skip />
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Tuto SD kartu můžete naformátovat k ukládání fotek, videí, hudby a dalšího obsahu, abyste je mohli otevírat i v jiných zařízeních. \n\n"<b>"Všechna data na této SD kartě budou vymazána."</b>" \n\n"<b>"Před formátováním"</b>" \n\n"<b>"Zálohujte fotky a další média"</b>" \nMediální soubory přesuňte do jiného úložiště v zařízení nebo je pomocí kabelu USB přeneste do počítače. \n\n"<b>"Zálohujte aplikace"</b>" \nVšechny aplikace uložené v tomto úložišti <xliff:g id="NAME">^1</xliff:g> budou odinstalovány a jejich data budou vymazána. Chcete-li tyto aplikace zachovat, přesuňte je do jiného úložiště v zařízení."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Když toto úložiště <xliff:g id="NAME_0">^1</xliff:g> odpojíte, aplikace, kterou jsou v něm uloženy, přestanou fungovat a mediální soubory nebudou dostupné, dokud jej opět nevložíte."</b>\n\n"Toto úložiště <xliff:g id="NAME_1">^1</xliff:g> je naformátováno tak, aby fungovalo pouze v tomto zařízení. V jiných zařízeních fungovat nebude."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Chcete-li použít aplikace, fotky nebo data, která jsou v úložišti <xliff:g id="NAME">^1</xliff:g>, vložte jej znovu.\n\nPokud toto zařízení není k dispozici, můžete alternativně zvolit, že má být zapomenuto.\n\nPokud se rozhodnete zařízení zapomenout, veškerá data v zařízení budou navždy ztracena.\n\nAplikace můžete znovu nainstalovat později. Jejich data uložená v tomto zařízení však budou ztracena."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Zapomenout úložiště <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Všechny aplikace, fotky a data uložená v tomto úložišti <xliff:g id="NAME">^1</xliff:g> budou navždy ztracena."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Systém obsahuje soubory používané ke spuštění systému Android verze <xliff:g id="VERSION">%s</xliff:g>."</string>
-    <!-- no translation found for storage_wizard_guest (5813419895687733649) -->
-    <skip />
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Uživatelé v režimu hosta SD karty formátovat nemohou"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Nastavte úložiště <xliff:g id="NAME">^1</xliff:g>"</string>
-    <!-- no translation found for storage_wizard_init_external_title (5304499882951772292) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_summary (5842588772292324473) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_title (8799676990387869411) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_summary (8224648610422581704) -->
-    <skip />
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Formátovat SD kartu jako přenosné úložiště"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Ukládání fotek, videí, hudby a dalšího obsahu a možnost otevírání v jiných zařízeních"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Formátovat SD kartu jako interní úložiště"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Ukládání aplikací a médií k použití jen s tímto telefonem"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Formátovat jako interní úložiště"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Proto je nutné úložiště <xliff:g id="NAME_0">^1</xliff:g> zabezpečit pomocí formátování. \n\nPo naformátování bude úložiště <xliff:g id="NAME_1">^1</xliff:g> fungovat pouze v tomto zařízení. \n\n"<b>"Formátováním vymažete veškerá data, která jsou v tomto úložišti <xliff:g id="NAME_2">^1</xliff:g> uložena."</b>" Chcete-li ztrátě dat předejít, doporučujeme je zálohovat."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Formátovat jako přenosné úložiště"</string>
@@ -1682,12 +1677,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Přesunout"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Probíhá přesun dat…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Během přesunu: \n• Neodpojujte <xliff:g id="NAME">^1</xliff:g>. \n• Některé aplikace nebudou fungovat správně. \n• Udržujte zařízení nabité."</string>
-    <!-- no translation found for storage_wizard_ready_title (3631022511474086605) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_external_body (4264787122605706421) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_internal_body (2416472979690681273) -->
-    <skip />
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"Úložiště <xliff:g id="NAME">^1</xliff:g> bylo naformátováno"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Můžete začít používat úložiště <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Můžete začít používat úložiště <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Přesuňte aplikaci <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Přesunutí aplikace <xliff:g id="APP">^1</xliff:g> a jejích dat do úložiště <xliff:g id="NAME_0">^2</xliff:g> bude trvat jen chvíli. Aplikaci bude možné používat až po dokončení přesunu. \n\nÚložiště <xliff:g id="NAME_1">^2</xliff:g> během přesunu neodpojujte."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Chcete-li přesunout data, je třeba odemknout uživatele <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1696,30 +1688,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Zrušit přesun"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Toto zařízení <xliff:g id="NAME_0">^1</xliff:g> je pravděpodobně pomalé. \n\nMůžete pokračovat, ale aplikace přesunuté do tohoto umístění budou mít prodlevy a přenosy dat mohou trvat delší dobu. \n\nZkuste použít rychlejší zařízení <xliff:g id="NAME_1">^1</xliff:g>, které zajistí vyšší výkon."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Jak chcete toto médium <xliff:g id="NAME">^1</xliff:g> používat?"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (1236154481658009267) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (3771689638403679317) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formátovat SD kartu jako interní úložiště"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Ukládejte aplikace a média k použití jen s tímto tabletem. &lt;a href=https://support.google.com/android/answer/12153449&gt;Další informace o nastavení SD karty&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formátovat"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formátovat SD kartu jako interní úložiště"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Ukládejte aplikace a média k použití jen s tímto telefonem. &lt;a href=https://support.google.com/android/answer/12153449&gt;Další informace o nastavení SD karty&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formátovat"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"nebo"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_title (2786416384217054112) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_summary (3867896101011977386) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_action (6140058734875839081) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formátovat SD kartu jako přenosné úložiště"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Ukládejte fotky, videa, hudbu a další obsah a otvírejte je v jiných zařízeních. &lt;a href=https://support.google.com/android/answer/12153449&gt;Další informace o nastavení SD karty&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formátovat"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Nastavit později"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Naformátovat médium <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Chcete-li na médium <xliff:g id="NAME_0">^1</xliff:g> ukládat aplikace, soubory a další obsah, je třeba ho naformátovat. \n\nFormátováním z média <xliff:g id="NAME_1">^2</xliff:g> odstraníte všechen stávající obsah. Nechcete-li o obsah přijít, zálohujte si ho do jiného média <xliff:g id="NAME_2">^3</xliff:g> nebo do zařízení."</string>
-    <!-- no translation found for storage_wizard_format_confirm_v2_body_external (5810296966099830035) -->
-    <skip />
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Pokud do tohoto úložiště <xliff:g id="NAME_0">^1</xliff:g> chcete ukládat fotky, videa, hudbu a další obsah, je nutné ho naformátovat. \n\nFormátováním z úložiště <xliff:g id="NAME_1">^2</xliff:g> vymažete stávající obsah. Pokud o obsah nechcete přijít, zálohujte si ho do jiného úložiště <xliff:g id="NAME_2">^3</xliff:g> nebo do zařízení."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formátovat médium <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Přesunout obsah na médium <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Na toto médium <xliff:g id="NAME">^1</xliff:g> můžete přesunout soubory, některé aplikace a další obsah. \n\nPřesunem uvolníte <xliff:g id="SIZE">^2</xliff:g> úložiště tabletu a potrvá to asi <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1736,12 +1718,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Toto médium <xliff:g id="NAME_0">^1</xliff:g> můžete nadále používat, ale může být pomalé. \n\nAplikace uložené na médiu <xliff:g id="NAME_1">^2</xliff:g> nemusí fungovat správně a přenosy obsahu mohou trvat dlouho. \n\nZkuste použít rychlejší médium <xliff:g id="NAME_2">^3</xliff:g> nebo toto médium <xliff:g id="NAME_3">^4</xliff:g> použijte jako přenosné úložiště."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Začít znovu"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Pokračovat"</string>
-    <!-- no translation found for storage_wizard_ready_v2_external_body (7688457485389886923) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_body (3520269956641115883) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (1163588718127651062) -->
-    <skip />
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Můžete začít používat úložiště <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Můžete začít používat úložiště <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Můžete začít používat úložiště <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Stav baterie"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Nabití baterie"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Přístupové body"</string>
@@ -2537,19 +2516,13 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Další informace o korekci barev"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Převrácení barev"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Další informace o převrácení barev"</string>
-    <!-- no translation found for accessibility_captioning_primary_switch_title (3663677340286206100) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_primary_switch_summary (2544094070306830218) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_title (3128792092290011408) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_summary (4620682807315588019) -->
-    <skip />
+    <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Zobrazovat titulky"</string>
+    <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Jen pro podporovanou aplikaci"</string>
+    <string name="captioning_appearance_title" msgid="3128792092290011408">"Velikost a styl titulků"</string>
+    <string name="captioning_appearance_summary" msgid="4620682807315588019">"<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g> velikost textu"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Další možnosti"</string>
-    <!-- no translation found for accessibility_captioning_preference_intro (8995427146374031134) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_preference_summary (8335768472978374255) -->
-    <skip />
+    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"Upravte velikost a styl titulků, abyste je mohli snadno číst"</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"Tyto předvolby titulků podporují jen některé mediální aplikace"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Tlačítko přístupnosti"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Přejetí dvěma prsty zdola nahoru"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Podržení tlačítek hlasitosti"</string>
@@ -3495,10 +3468,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Povolit aplikaci používat informace o vaší poloze"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Zpět"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Další"</string>
-    <!-- no translation found for wizard_back_portable (5315939180781404882) -->
-    <skip />
-    <!-- no translation found for wizard_back_adoptable (1447814356855134183) -->
-    <skip />
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Přepnout na přenosné"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Formátovat jinak"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Dokončit"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM karty"</string>

@@ -70,6 +70,10 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Cihazınız <xliff:g id="DEVICE_NAME">%1$s</xliff:g> cihazından ayrılacaq."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Cihaz əlavə edin"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
+    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
+    <skip />
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Digər qulaqlığı birləşdirin"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Sol eşitmə cihazınız qoşulub.\n\nSağı qoşmaq üçün onun aktiv və birləşdirməyə hazır olduğuna əmin olun."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Sağ eşitmə cihazınız qoşulub.\n\nSolu qoşmaq üçün onun aktiv və birləşdirməyə hazır olduğuna əmin olun."</string>
@@ -1443,8 +1447,7 @@
     <string name="sim_enter_new" msgid="9010947802784561582">"Yeni SIM PIN"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"PIN-i yenidən yazın"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"SIM PIN"</string>
-    <!-- no translation found for sim_invalid_pin_hint (3376397829969578877) -->
-    <skip />
+    <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"4-8 rəqəmli PIN daxil edin"</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"PIN-lər eyni deyil"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"PIN dəyişdirilə bilməz.\nBəlkə də PIN yanlışdır."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"SIM PIN uğurla dəyişdirildi"</string>
@@ -1570,13 +1573,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Adını dəyişdirin"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Taxın"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Çıxarın"</string>
-    <!-- no translation found for storage_menu_format (8903698999905354146) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_button (7623565190643699626) -->
-    <skip />
+    <string name="storage_menu_format" msgid="8903698999905354146">"Portativ yaddaş üçün SD kartı formatlayın"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Kartı formatlayın"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Daşınan yaddaş kimi format edin"</string>
-    <!-- no translation found for storage_menu_format_option (4886059624052908432) -->
-    <skip />
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Formatlayın"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Datanı köçürün"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Unudun"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Quraşdırın"</string>
@@ -1606,24 +1606,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Yaddaşın adını dəyişin"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Bu <xliff:g id="NAME_0">^1</xliff:g> güvənli çıxarıldı. \n\nBu <xliff:g id="NAME_1">^1</xliff:g> istifadə etmək üçün əvvəlcə onu taxmalısınız."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Bu <xliff:g id="NAME_0">^1</xliff:g> zədələnib. \n\nBu <xliff:g id="NAME_1">^1</xliff:g> istifadəsi üçün əvvəlcə onu quraşdırmalısınız."</string>
-    <!-- no translation found for storage_internal_format_details (2399034372813686846) -->
-    <skip />
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Fotoları, videoları, musiqiləri və daha çoxunu saxlamaq və onlara digər cihazlarda daxil olmaq üçün bu SD kartı formatlaya bilərsiniz. \n\n"<b>"Bu SD kartdakı bütün məlumatlar silinəcək."</b>" \n\n"<b>"Formatlamazdan əvvəl"</b>" \n\n"<b>"Fotoları &amp; digər medianı yedəkləyin"</b>" \nMedia fayllarınızı bu cihazdakı alternativ yaddaşa köçürün və ya USB kabeldən istifadə edərək kompüterə köçürün. \n\n"<b>"Tətbiqləri yedəkləyin"</b>" \nBu <xliff:g id="NAME">^1</xliff:g> cihazında saxlanılan bütün tətbiqlər silinəcək və oradakı məlumatlar silinəcək. Bu tətbiqləri saxlamaq üçün onları bu cihazda alternativ yaddaşa köçürün."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"<xliff:g id="NAME_0">^1</xliff:g>çıxarılandan sonra, onda saxlanan tətbiqlər işləməyi dayandıracaq və cihaz geri salınana qədər üzərindəki media fayllar əlçatmaz olacaq."</b>\n\n"<xliff:g id="NAME_1">^1</xliff:g> yalnız bu cihazda işləmək üçün formatlanıb. Digər cihazlarda işləməyəcək."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"<xliff:g id="NAME">^1</xliff:g> yaddaşında olan tətbiq, foto və ya datanı istifadə etmək üçün, onu yenidən daxil edin. \n\nHəmçinin, əgər cihaz əlçatan deyilsə, bu yaddaşı unutmağı da seçə bilərsiniz. \n\nUnutmağı seçsəniz, cihazda olan bütün data həmişəlik silinəcək. \n\nTətbiqi sonra yenidən quraşdıra bilərsiniz, amma bu cihazda saxlanılan data itiriləcək."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g> unudulsun?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"<xliff:g id="NAME">^1</xliff:g> daxilində saxlanılan bütün tətbiq, foto və data həmişəlik silinəcək."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Sistem Android <xliff:g id="VERSION">%s</xliff:g> versiyasını istifadə etmək üçün lazım olan fayllardan ibarətdir"</string>
-    <!-- no translation found for storage_wizard_guest (5813419895687733649) -->
-    <skip />
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Qonaq rejimi istifadəçiləri SD kartları formatlaya bilməz"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"<xliff:g id="NAME">^1</xliff:g> cihazını quraşdırın"</string>
-    <!-- no translation found for storage_wizard_init_external_title (5304499882951772292) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_summary (5842588772292324473) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_title (8799676990387869411) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_summary (8224648610422581704) -->
-    <skip />
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Portativ yaddaş üçün SD kartı formatlayın"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Fotoları, videoları, musiqiləri və daha çoxunu yadda saxlayın və onlara digər cihazlardan daxil olun"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Daxili yaddaş üçün SD kartı formatlayın"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Yalnız bu telefonda istifadə ediləcək tətbiqləri &amp; medianı yadda saxlayın"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Daxili yaddaş ehtiyatı olaraq format edin"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Güvənli olması üçün <xliff:g id="NAME_0">^1</xliff:g> cihazının format edilməsi tələb olunur. \n\nFormat ediləndən sonra <xliff:g id="NAME_1">^1</xliff:g> yalnız bu cihazda işləyəcək. \n\n"<b>"Formatlama <xliff:g id="NAME_2">^1</xliff:g> üzərində saxlanmış bütün datanı siləcək.."</b>" Datanı itirməmək üçün yedəkləməyə cəhd edin."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Daşınan yaddaş ehtiyatı kimi format edin"</string>
@@ -1640,12 +1634,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Daşıyın"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Data daşınır…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Daşınma zamanı: \n• <xliff:g id="NAME">^1</xliff:g> silməyin. \n• Bəzi tətbiqlər işləməyəcək. \n• Cihazın akkumulyatorunu dolu saxlayın."</string>
-    <!-- no translation found for storage_wizard_ready_title (3631022511474086605) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_external_body (4264787122605706421) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_internal_body (2416472979690681273) -->
-    <skip />
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> formatlandı"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"<xliff:g id="NAME">^1</xliff:g> cihazının istifadəsinə başlaya bilərsiniz"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"<xliff:g id="NAME">^1</xliff:g> cihazının istifadəsinə başlaya bilərsiniz"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"<xliff:g id="APP">^1</xliff:g> daşıyın"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"<xliff:g id="APP">^1</xliff:g> və onun datasının <xliff:g id="NAME_0">^2</xliff:g> üzərinə daşınması bir neçə dəqiqə vaxt alacaq. Daşınma tamamlanmamış tətbiqləri işlədə bilməyəcəksiniz. \n\nDaşınma müddəti ərzində <xliff:g id="NAME_1">^2</xliff:g> çıxarılmamalıdır."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Datanı köçürmək üçün <xliff:g id="APP">^1</xliff:g> tətbiqini kiliddən çıxarın."</string>
@@ -1654,30 +1645,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Daşınmanı ləğv edin"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Bu <xliff:g id="NAME_0">^1</xliff:g> sürəti zəifdir. \n\nDavam edə bilərsiniz, amma bu məkana köçürülən tətbiqlər zəifləyə bilər və data transferi çox vaxt çəkə bilər. \n\nDaha yaxşı performans üçün sürətli <xliff:g id="NAME_1">^1</xliff:g> istifadə edin."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"<xliff:g id="NAME">^1</xliff:g> necə istifadə olunmalıdır?"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (1236154481658009267) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (3771689638403679317) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Daxili yaddaş üçün SD kartı formatlayın"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Yalnız bu planşetdə istifadə ediləcək tətbiqləri &amp; medianı yadda saxlayın. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD kartın ayarlanması haqqında ətraflı məlumat əldə edin&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formatlayın"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Daxili yaddaş üçün SD kartı formatlayın"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Yalnız bu telefonda istifadə ediləcək tətbiqləri &amp; medianı yadda saxlayın. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD kartın ayarlanması haqqında ətraflı məlumat əldə edin&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formatlayın"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Və ya"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_title (2786416384217054112) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_summary (3867896101011977386) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_action (6140058734875839081) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Portativ yaddaş üçün SD kartı formatlayın"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Fotoları, videoları, musiqiləri və daha çoxunu saxlayın və onlara digər cihazlardan daxil olun. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD kartın ayarlanması haqqında ətraflı məlumat əldə edin&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formatlayın"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Sonra quraşdırın"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"<xliff:g id="NAME">^1</xliff:g> format edilsin?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"<xliff:g id="NAME_0">^1</xliff:g> tətbiq, fayl və medianı saxlamaq üçün format edilməlidir. \n\nFormatlama mövcud <xliff:g id="NAME_1">^2</xliff:g> kontentini siləcək. Kontenti itirməmək üçün onu digər <xliff:g id="NAME_2">^3</xliff:g> və ya cihazda yedəkləyin."</string>
-    <!-- no translation found for storage_wizard_format_confirm_v2_body_external (5810296966099830035) -->
-    <skip />
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Bu <xliff:g id="NAME_0">^1</xliff:g> fotolar, videolar, musiqi və s. saxlamaq üçün formatlanmalıdır. \n\nFormatlandıqda <xliff:g id="NAME_1">^2</xliff:g> cihazındakı mövcud məzmun silinəcək. Məzmunu itirməmək üçün onu digər <xliff:g id="NAME_2">^3</xliff:g> və ya cihazda yedəkləyin."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g> formatlansın"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Kontent <xliff:g id="NAME">^1</xliff:g> ünvanına köçürülsün?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Fayl, media və müəyyən tətbiqlər bu <xliff:g id="NAME">^1</xliff:g> ünvanına köçürə bilərsiniz. \n\nBu film planşet yaddaşında <xliff:g id="SIZE">^2</xliff:g> yer boşaldacaq və <xliff:g id="DURATION">^3</xliff:g> çəkəcək."</string>
@@ -1694,12 +1675,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Hələ də <xliff:g id="NAME_0">^1</xliff:g> istifadə edə bilərsiniz, lakin o yavaş işləyir. \n\n<xliff:g id="NAME_1">^2</xliff:g> ünvanında quraşdırılan tətbiqlər düzgün işləməyə bilər və kontentin köçürülməsi çox çəkə bilər. \n\nDdaşınabilən yaddaş üçün daha sürətli <xliff:g id="NAME_2">^3</xliff:g> və ya bunun əvəzinə <xliff:g id="NAME_3">^4</xliff:g> istifadə edin."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Yenidən başlayın"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Davam edin"</string>
-    <!-- no translation found for storage_wizard_ready_v2_external_body (7688457485389886923) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_body (3520269956641115883) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (1163588718127651062) -->
-    <skip />
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"<xliff:g id="NAME">^1</xliff:g> cihazının istifadəsinə başlaya bilərsiniz"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"<xliff:g id="NAME">^1</xliff:g> cihazının istifadəsinə başlaya bilərsiniz"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"<xliff:g id="NAME">^1</xliff:g> cihazının istifadəsinə başlaya bilərsiniz"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Batareya statusu"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Enerji səviyyəsi"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN-lər"</string>
@@ -2489,19 +2467,13 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Rəng korreksiyası haqqında ətraflı öyrənin"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Rəng inversiyası haqqında"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Rəng inversiyası haqqında ətraflı öyrənin"</string>
-    <!-- no translation found for accessibility_captioning_primary_switch_title (3663677340286206100) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_primary_switch_summary (2544094070306830218) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_title (3128792092290011408) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_summary (4620682807315588019) -->
-    <skip />
+    <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Altyazılar göstərilsin"</string>
+    <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Yalnız dəstəklənən tətbiq üçün"</string>
+    <string name="captioning_appearance_title" msgid="3128792092290011408">"Altyazı ölçü və üslubu"</string>
+    <string name="captioning_appearance_summary" msgid="4620682807315588019">"<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g> mətn ölçüsü"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Digər seçimlər"</string>
-    <!-- no translation found for accessibility_captioning_preference_intro (8995427146374031134) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_preference_summary (8335768472978374255) -->
-    <skip />
+    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"Oxumağı asanlaşdırmaq üçün altyazının ölçüsünü və üslubunu fərdiləşdirin"</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"Bu altyazı tərcihləri bütün media tətbiqləri tərəfindən dəstəklənmir"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Xüsusi imkanlar düyməsi"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"2 barmaqla aşağıdan yuxarıya sürüşdürün"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Səs düymələrinə basıb saxlayın"</string>
@@ -2862,14 +2834,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"<xliff:g id="PERCENT">%1$s</xliff:g> batareya"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Enerji faizi"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Enerji faizi status panelində görünsün"</string>
-    <!-- no translation found for battery_usage_chart_graph_hint_last_full_charge (6570336408060566877) -->
-    <skip />
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Son tam şarjdan sonra batareya səviyyəsi"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Son 24 saata dair enerji səviyyəsi"</string>
-    <!-- no translation found for battery_app_usage (8976453608783133770) -->
-    <skip />
+    <string name="battery_app_usage" msgid="8976453608783133770">"Sonuncu tam doldurulmadan sonrakı tətbiq istifadəsi"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Son 24 saat üçün tətbiq istifadəsi"</string>
-    <!-- no translation found for battery_system_usage (1395943945140097585) -->
-    <skip />
+    <string name="battery_system_usage" msgid="1395943945140097585">"Son tam şarjdan sonra sistem istifadəsi"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Son 24 saat üçün sistem istifadəsi"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"<xliff:g id="SLOT">%s</xliff:g> üçün sistem istifadəsi"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"<xliff:g id="SLOT">%s</xliff:g> üçün tətbiq istifadəsi"</string>
@@ -3411,10 +3380,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Tətbiqlərə yeriniz haqqında məlumatı istifadə etməyə icazə verin"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Geri"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Növbəti"</string>
-    <!-- no translation found for wizard_back_portable (5315939180781404882) -->
-    <skip />
-    <!-- no translation found for wizard_back_adoptable (1447814356855134183) -->
-    <skip />
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Portativ cihaza keçin"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Başqa yolla formatlayın"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Bitir"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM kartlar"</string>
@@ -4706,16 +4673,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"İndi aktiv edin"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"İndi deaktiv edin"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Enerjiyə qənaət edilmir"</string>
-    <!-- no translation found for app_battery_optimization_title (389653121998016466) -->
-    <skip />
-    <!-- no translation found for app_battery_optimization_summary (7864783556193427398) -->
-    <skip />
-    <!-- no translation found for filter_battery_unrestricted_title (821027369424198223) -->
-    <skip />
-    <!-- no translation found for filter_battery_optimized_title (8236647176487754796) -->
-    <skip />
-    <!-- no translation found for filter_battery_restricted_title (5886859505802563232) -->
-    <skip />
+    <string name="app_battery_optimization_title" msgid="389653121998016466">"Enerji sərfiyyatının idarəedilməsi"</string>
+    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Tətbiqlər üçün batareya istifadəsini ayarlayın"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Məhdudiyyətsiz"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimal"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Məhdudlaşdırılıb"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Cihaz kilidlidirsə, bildirişlərdə cavab və ya digər mətnlərin yazılmasının qarşısını alın."</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Defolt orfoqrafik yoxlama"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Orfoqrafik yoxlama seçin"</string>

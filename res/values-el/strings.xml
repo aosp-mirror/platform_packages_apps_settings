@@ -70,6 +70,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Η συσκευή σας θα αποσυνδεθεί από τη συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Σύζευξη νέας συσκευής"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Σύζευξη δεξιού"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Σύζευξη αριστερού"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Σύζευξη του άλλου αυτιού"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Το αριστερό βοήθημα ακοής συνδέθηκε.\n\nΓια τη σύζευξη του δεξιού βοηθήματος ακοής, βεβαιωθείτε ότι είναι ενεργοποιημένο και έτοιμο για σύζευξη."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Το δεξί βοήθημα ακοής συνδέθηκε.\n\nΓια τη σύζευξη του αριστερού βοηθήματος ακοής, βεβαιωθείτε ότι είναι ενεργοποιημένο και έτοιμο για σύζευξη."</string>
@@ -1443,8 +1445,7 @@
     <string name="sim_enter_new" msgid="9010947802784561582">"Νέο PIN κάρτας SIM"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Πληκτρολογήστε ξανά το νέο PIN"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"Αριθμός PIN κάρτας SIM"</string>
-    <!-- no translation found for sim_invalid_pin_hint (3376397829969578877) -->
-    <skip />
+    <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"Πληκτρολογήστε ένα PIN με 4-8 αριθμούς"</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"Οι αριθμοί PIN δεν ταιριάζουν"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Δεν αλλάζει το PIN.\nΊσως να είναι λάθος."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"Το PIN της κάρτας SIM άλλαξε"</string>
@@ -1570,13 +1571,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Μετονομασία"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Προσάρτηση"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Εξαγωγή"</string>
-    <!-- no translation found for storage_menu_format (8903698999905354146) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_button (7623565190643699626) -->
-    <skip />
+    <string name="storage_menu_format" msgid="8903698999905354146">"Μορφοποίηση κάρτας SD ως φορητό αποθηκευτικό χώρο"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Μορφοποίηση κάρτας"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Διαμόρφωση ως φορητής"</string>
-    <!-- no translation found for storage_menu_format_option (4886059624052908432) -->
-    <skip />
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Μορφοποίηση"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Μετεγκατάσταση δεδομένων"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Διαγραφή"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Ρύθμιση"</string>
@@ -1606,24 +1604,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Μετονομασία αποθηκευτικού χώρου"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Η κατάργηση της κάρτας <xliff:g id="NAME_0">^1</xliff:g> έγινε με ασφάλεια, αλλά εξακολουθεί να είναι διαθέσιμη. \n\nΓια να χρησιμοποιήσετε την κάρτα <xliff:g id="NAME_1">^1</xliff:g>, θα πρέπει πρώτα να την προσαρτήσετε."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Η κάρτα <xliff:g id="NAME_0">^1</xliff:g> είναι κατεστραμμένη. \n\nΓια να χρησιμοποιήσετε την κάρτα <xliff:g id="NAME_1">^1</xliff:g>, θα πρέπει πρώτα να τη διαμορφώσετε."</string>
-    <!-- no translation found for storage_internal_format_details (2399034372813686846) -->
-    <skip />
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Μπορείτε να μορφοποιήσετε αυτήν την κάρτα SD για να αποθηκεύετε φωτογραφίες, βίντεο μουσική και άλλο περιεχόμενο και να αποκτάτε πρόσβαση σε αυτό από άλλες συσκευές. \n\n"<b>"Όλα τα δεδομένα σε αυτήν την κάρτα SD θα διαγραφούν."</b>" \n\n"<b>"Πριν από τη μορφοποίηση"</b>" \n\n"<b>"Δημιουργήστε αντίγραφα ασφαλείας φωτογραφιών και άλλων μέσων"</b>" \nΜεταφέρετε τα αρχεία μέσων σε άλλες μονάδες αποθηκευτικού χώρου σε αυτήν τη συσκευή ή μεταφέρετέ τα σε έναν υπολογιστή με ένα καλώδιο USB. \n\n"<b>"Δημιουργήστε αντίγραφα ασφαλείας για τις εφαρμογές"</b>" \nΌλες οι εφαρμογές που έχουν αποθηκευτεί στη μονάδα αποθηκευτικού χώρου <xliff:g id="NAME">^1</xliff:g> θα απεγκατασταθούν και τα δεδομένα τους θα διαγραφούν. Για να κρατήσετε αυτές τις εφαρμογές, μετακινήστε τες σε μια άλλη μονάδα αποθηκευτικού χώρου σε αυτήν τη συσκευή."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Όταν αφαιρέσετε αυτό το μέσο αποθήκευσης <xliff:g id="NAME_0">^1</xliff:g>, οι εφαρμογές που είναι αποθηκευμένες σε αυτό θα σταματήσουν να λειτουργούν και τα αρχεία μέσων που είναι αποθηκευμένα σε αυτό δεν θα είναι διαθέσιμα πριν από την εκ νέου εισαγωγή τους."</b>\n\n"Αυτό το μέσο αποθήκευσης <xliff:g id="NAME_1">^1</xliff:g> έχει μορφοποιηθεί έτσι ώστε να λειτουργεί μόνο σε αυτήν τη συσκευή. Δεν θα λειτουργεί σε άλλες συσκευές."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Για να χρησιμοποιήσετε τις εφαρμογές, τις φωτογραφίες ή τα δεδομένα, που περιέχει το αποθηκευτικό μέσο <xliff:g id="NAME">^1</xliff:g>, επανατοποθετήστε το. \n\nΕναλλακτικά, μπορείτε να επιλέξετε να γίνει κατάργηση απομνημόνευσης αυτού του αποθηκευτικού μέσου, εάν η συσκευή δεν είναι διαθέσιμη. \n\nΕάν επιλέξετε να γίνει κατάργηση απομνημόνευσης, όλα τα δεδομένα που περιέχει η συσκευή θα χαθούν οριστικά. \n\nΜπορείτε να επανεγκαταστήσετε τις εφαρμογές αργότερα, αλλά τα δεδομένα τους που είναι αποθηκευμένα σε αυτήν τη συσκευή θα χαθούν."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Διαγραφή από μνήμη της κάρτας <xliff:g id="NAME">^1</xliff:g>;"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Όλες οι εφαρμογές, οι φωτογραφίες και τα δεδομένα που είναι αποθηκευμένα στην κάρτα <xliff:g id="NAME">^1</xliff:g> θα χαθούν για πάντα."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Στο Σύστημα περιλαμβάνονται αρχεία τα οποία χρησιμοποιούνται για την εκτέλεση της έκδοσης Android <xliff:g id="VERSION">%s</xliff:g>"</string>
-    <!-- no translation found for storage_wizard_guest (5813419895687733649) -->
-    <skip />
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Δεν επιτρ. η μορφοπ. καρτών SD σε λειτ. επισκέπτη"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Ρυθμίστε τη μέσο αποθήκευσης <xliff:g id="NAME">^1</xliff:g>"</string>
-    <!-- no translation found for storage_wizard_init_external_title (5304499882951772292) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_summary (5842588772292324473) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_title (8799676990387869411) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_summary (8224648610422581704) -->
-    <skip />
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Μορφοποίηση κάρτας SD ως φορητό αποθηκευτικό χώρο"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Αποθηκεύστε φωτογραφίες, βίντεο, μουσική και άλλο περιεχόμενο και αποκτήστε πρόσβαση σε αυτό από άλλες συσκευές"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Μορφοποίηση κάρτας SD για χρήση ως εσωτερ. αποθ. χώρο"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Αποθηκεύστε εφαρμογές και μέσα για χρήση μόνο σε αυτό το τηλέφωνο"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Μορφοπ. ως εσωτ.αποθ.χώρου"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Αυτό απαιτεί τη μορφοποίηση του μέσου αποθήκευσης <xliff:g id="NAME_0">^1</xliff:g> προκειμένου να είναι ασφαλές. \n\nΜετά τη μορφοποίηση, αυτό το μέσο αποθήκευσης <xliff:g id="NAME_1">^1</xliff:g> θα λειτουργεί μόνο σε αυτήν τη συσκευή. \n\n"<b>"Η μορφοποίηση διαγράφει όλα τα δεδομένα που είναι αποθηκευμένα αυτήν τη στιγμή στο μέσο αποθήκευσης <xliff:g id="NAME_2">^1</xliff:g>."</b>" Για να αποφύγετε την απώλεια των δεδομένων σας, εξετάστε το ενδεχόμενο να δημιουργήσετε αντίγραφα ασφαλείας γι΄αυτά."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Μορ/ση ως φορητ. αποθ. χώρου"</string>
@@ -1640,12 +1632,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Μετακίνηση"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Μετακίνηση δεδομένων…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Κατά τη διάρκεια της μετακίνησης: \n• Μην αφαιρέσετε το μέσο αποθήκευσης <xliff:g id="NAME">^1</xliff:g>. \n• Ορισμένες εφαρμογές δεν θα λειτουργούν σωστά. \n• Διατηρείτε φορτισμένη τη συσκευή."</string>
-    <!-- no translation found for storage_wizard_ready_title (3631022511474086605) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_external_body (4264787122605706421) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_internal_body (2416472979690681273) -->
-    <skip />
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"Έγινε μορφοποίηση του <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Μπορείτε να ξεκινήσετε τη χρήση της μονάδας αποθηκευτικού χώρου <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Μπορείτε να ξεκινήσετε τη χρήση της μονάδας αποθηκευτικού χώρου <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Μετακίνηση <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Η μετακίνηση της εφαρμογής <xliff:g id="APP">^1</xliff:g> και των δεδομένων της στο μέσο αποθήκευσης <xliff:g id="NAME_0">^2</xliff:g> θα διαρκέσει μόνο μερικά λεπτά. Δεν θα έχετε τη δυνατότητα να χρησιμοποιήσετε την εφαρμογή μέχρι να ολοκληρωθεί η μετακίνηση. \n\nΜην αφαιρέσετε το μέσο αποθήκευσης <xliff:g id="NAME_1">^2</xliff:g> κατά τη διάρκεια της μετακίνησης."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Για τη μετακίνηση δεδομένων, απαιτείται ξεκλείδωμα του χρήστη <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1654,30 +1643,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Ακύρωση μετακίνησης"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Το στοιχείο <xliff:g id="NAME_0">^1</xliff:g> παρουσιάζει καθυστέρηση. \n\nΜπορείτε να συνεχίσετε, αλλά οι εφαρμογές που έχουν μετακινηθεί σε αυτήν την τοποθεσία ενδέχεται να παρουσιάσουν δυσκολίες στη λειτουργία και οι μεταφορές δεδομένων ενδέχεται να καθυστερήσουν. \n\nΜπορείτε να χρησιμοποιήσετε ένα ταχύτερο <xliff:g id="NAME_1">^1</xliff:g> για καλύτερες επιδόσεις."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Πώς θα χρησιμοποιήσετε το <xliff:g id="NAME">^1</xliff:g>;"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (1236154481658009267) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (3771689638403679317) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Μορφοπ. κάρτας SD για χρήση ως εσωτερ. αποθ. χώρο"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Αποθήκευση εφαρμογών και μέσων για χρήση μόνο σε αυτό το tablet. &lt;a href=https://support.google.com/android/answer/12153449&gt;Μάθετε περισσότερα σχετικά με τη ρύθμιση μιας κάρτας SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Μορφοποίηση"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Μορφοπ. κάρτας SD για χρήση ως εσωτερ. αποθ. χώρο"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Αποθήκευση εφαρμογών και μέσων για χρήση μόνο σε αυτό το τηλέφωνο. &lt;a href=https://support.google.com/android/answer/12153449&gt;Μάθετε περισσότερα σχετικά με τη ρύθμιση μιας κάρτας SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Μορφοποίηση"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Ή"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_title (2786416384217054112) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_summary (3867896101011977386) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_action (6140058734875839081) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Μορφοποίηση κάρτας SD ως φορητό αποθηκευτικό χώρο"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Αποθηκεύστε φωτογραφίες, βίντεο, μουσική και άλλο περιεχόμενο και αποκτήστε πρόσβαση σε αυτό από άλλες συσκευές. &lt;a href=https://support.google.com/android/answer/12153449&gt;Μάθετε περισσότερα σχετικά με τη ρύθμιση μιας κάρτας SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Μορφοποίηση"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Ρύθμιση αργότερα"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Μορφοποίηση του <xliff:g id="NAME">^1</xliff:g>;"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Η συσκευή <xliff:g id="NAME_0">^1</xliff:g> απαιτεί μορφοποίηση για να αποθηκεύσει εφαρμογές, αρχεία και μέσα. \n\nΗ μορφοποίηση θα διαγράψει το υπάρχον περιεχόμενο στο <xliff:g id="NAME_1">^2</xliff:g>. Για να μην χάσετε το περιεχόμενό σας, δημιουργήστε ένα αντίγραφο ασφαλείας σε ένα άλλο <xliff:g id="NAME_2">^3</xliff:g> ή σε άλλη συσκευή."</string>
-    <!-- no translation found for storage_wizard_format_confirm_v2_body_external (5810296966099830035) -->
-    <skip />
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Η μονάδα αποθηκευτικού χώρου <xliff:g id="NAME_0">^1</xliff:g> πρέπει να μορφοποιηθεί για την αποθήκευση φωτογραφιών, βίντεο, μουσικής και άλλου περιεχομένου. \n\nΗ μορφοποίηση θα διαγράψει το υπάρχον περιεχόμενο στη μονάδα αποθηκευτικού χώρου <xliff:g id="NAME_1">^2</xliff:g>. Για να αποφύγετε την απώλεια περιεχομένου, δημιουργήστε αντίγραφα ασφαλείας σε μια άλλη μονάδα αποθηκευτικού χώρου <xliff:g id="NAME_2">^3</xliff:g> ή σε άλλη συσκευή."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Μορφοποίηση <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Μετακίνηση περιεχομένου στο <xliff:g id="NAME">^1</xliff:g>;"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Μπορείτε να μετακινήσετε αρχεία, μέσα και ορισμένες εφαρμογές στο <xliff:g id="NAME">^1</xliff:g>\n\nΜε αυτήν την ενέργεια, θα απελευθερωθούν <xliff:g id="SIZE">^2</xliff:g> αποθηκευτικού χώρου στο tablet σας. Η διαδικασία θα διαρκέσει περίπου <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1694,12 +1673,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Μπορείτε και πάλι να χρησιμοποιήσετε το <xliff:g id="NAME_0">^1</xliff:g>, αλλά μπορεί να είναι αργό. \n\nΟι εφαρμογές που έχουν αποθηκευτεί στο <xliff:g id="NAME_1">^2</xliff:g> μπορεί να μην λειτουργούν σωστά και οι μεταφορές περιεχομένου να απαιτούν πολύ χρόνο. \n\nΔοκιμάστε να χρησιμοποιήσετε ένα ταχύτερο <xliff:g id="NAME_2">^3</xliff:g> ή, εναλλακτικά, χρησιμοποιήστε το <xliff:g id="NAME_3">^4</xliff:g> για φορητό αποθηκευτικό χώρο."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Έναρξη από την αρχή"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Συνέχεια"</string>
-    <!-- no translation found for storage_wizard_ready_v2_external_body (7688457485389886923) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_body (3520269956641115883) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (1163588718127651062) -->
-    <skip />
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Μπορείτε να ξεκινήσετε τη χρήση της μονάδας αποθηκευτικού χώρου <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Μπορείτε να ξεκινήσετε τη χρήση της μονάδας αποθηκευτικού χώρου <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Μπορείτε να ξεκινήσετε τη χρήση της μονάδας αποθηκευτικού χώρου <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Κατάσταση μπαταρίας"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Επίπεδο μπαταρίας"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
@@ -2489,19 +2465,13 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Μάθετε περισσότερα σχετικά με τη διόρθωση χρωμάτων"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Σχετικά με την αντιστροφή χρωμάτων"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Μάθετε περισσότερα σχετικά με την αντιστροφή χρωμάτων"</string>
-    <!-- no translation found for accessibility_captioning_primary_switch_title (3663677340286206100) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_primary_switch_summary (2544094070306830218) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_title (3128792092290011408) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_summary (4620682807315588019) -->
-    <skip />
+    <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Εμφάνιση υποτίτλων"</string>
+    <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Μόνο για την υποστηριζόμενη εφαρμογή."</string>
+    <string name="captioning_appearance_title" msgid="3128792092290011408">"Μέγεθος και στιλ υποτίτλων"</string>
+    <string name="captioning_appearance_summary" msgid="4620682807315588019">"<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g> μέγεθος κειμένου"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Περισσότερες επιλογές"</string>
-    <!-- no translation found for accessibility_captioning_preference_intro (8995427146374031134) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_preference_summary (8335768472978374255) -->
-    <skip />
+    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"Προσαρμόστε το μέγεθος και το στιλ των υποτίτλων για να είναι πιο εύκολη η ανάγνωσή τους."</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"Αυτές οι προτιμήσεις υποτίτλων δεν υποστηρίζονται από όλες τις εφαρμογές μέσων."</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Κουμπί προσβασιμότητας"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Ολίσθηση προς τα επάνω με 2 δάχτυλα από το κάτω μέρος"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Παρατεταμένο πάτημα πλήκτρων έντασης"</string>
@@ -2862,14 +2832,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"στο <xliff:g id="PERCENT">%1$s</xliff:g> της μπαταρίας"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Ποσοστό μπαταρίας"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Εμφάνιση ποσοστού μπαταρίας στη γραμμή κατάστασης"</string>
-    <!-- no translation found for battery_usage_chart_graph_hint_last_full_charge (6570336408060566877) -->
-    <skip />
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Επίπεδο μπαταρίας από την τελευταία πλήρη φόρτιση"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Επίπεδο μπαταρίας για τις τελευταίες 24 ω."</string>
-    <!-- no translation found for battery_app_usage (8976453608783133770) -->
-    <skip />
+    <string name="battery_app_usage" msgid="8976453608783133770">"Χρήση εφαρμογών από την τελευταία πλήρη φόρτιση"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Χρήση εφαρμογής για τις τελευταίες 24 ω."</string>
-    <!-- no translation found for battery_system_usage (1395943945140097585) -->
-    <skip />
+    <string name="battery_system_usage" msgid="1395943945140097585">"Χρήση συστήματος από την τελευταία πλήρη φόρτιση"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Χρήση συστήματος για τις τελευταίες 24 ω."</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Χρήση συστήματος για <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Χρήση εφαρμογής για <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -3411,10 +3378,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Να επιτρέπεται στις εφαρμογές η χρήση των στοιχείων τοποθεσίας σας"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Πίσω"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Επόμενο"</string>
-    <!-- no translation found for wizard_back_portable (5315939180781404882) -->
-    <skip />
-    <!-- no translation found for wizard_back_adoptable (1447814356855134183) -->
-    <skip />
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Εναλλαγή σε φορητό"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Μορφοποίηση άλλου είδους"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Τέλος"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"Κάρτες SIM"</string>
@@ -4706,16 +4671,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Ενεργοποίηση τώρα"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Απενεργοποίηση τώρα"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Δεν χρησιμοποιείται η βελτιστοποίηση μπαταρίας"</string>
-    <!-- no translation found for app_battery_optimization_title (389653121998016466) -->
-    <skip />
-    <!-- no translation found for app_battery_optimization_summary (7864783556193427398) -->
-    <skip />
-    <!-- no translation found for filter_battery_unrestricted_title (821027369424198223) -->
-    <skip />
-    <!-- no translation found for filter_battery_optimized_title (8236647176487754796) -->
-    <skip />
-    <!-- no translation found for filter_battery_restricted_title (5886859505802563232) -->
-    <skip />
+    <string name="app_battery_optimization_title" msgid="389653121998016466">"Διαχείριση χρήσης μπαταρίας"</string>
+    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Ορισμός χρήσης μπαταρίας για εφαρμογές"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Απεριόριστη"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Βελτιστοποιημένη"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Περιορισμένη"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Αν η συσκευή είναι κλειδωμένη, να αποτρέπεται η πληκτρολόγηση απαντήσεων ή άλλου κειμένου στις ειδοποιήσεις"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Προεπιλ. ορθογραφικός έλεγχος"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Επιλογή ορθογραφικού ελέγχου"</string>

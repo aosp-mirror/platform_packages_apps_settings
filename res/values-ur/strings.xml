@@ -70,6 +70,10 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"آپ کا آلہ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> سے غیر منسلک ہو جائے گا۔"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"نئے آلہ کا جوڑا بنائیں"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"بلوٹوتھ"</string>
+    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
+    <skip />
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"اپنے دوسرے کان کا جوڑا بنائیں"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"آپ کے بائیں کان کا سماعتی آلہ منسلک ہے۔\n\nدائیں کان کا جوڑا بنانے کے لیے، اس بات کو یقینی بنائیں کہ یہ آن ہے اور جوڑا بنانے کے لیے تیار ہے۔"</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"آپ کے دائیں کان کا سماعتی آلہ منسلک ہے۔\n\nبائیں کان کا جوڑا بنانے کے لیے، اس بات کو یقینی بنائیں کہ یہ آن ہے اور جوڑا بنانے کے لیے تیار ہے۔"</string>
@@ -1443,8 +1447,7 @@
     <string name="sim_enter_new" msgid="9010947802784561582">"‏نیا SIM PIN"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"‏نیا PIN دوبارہ ٹائپ کریں"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"SIM PIN"</string>
-    <!-- no translation found for sim_invalid_pin_hint (3376397829969578877) -->
-    <skip />
+    <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"‏4 تا 8 نمبرز والا PIN ٹائپ کریں"</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"‏PINs مماثل نہیں ہیں"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"‏PIN تبدیل نہیں کر سکتے ہیں۔\nممکنہ طور پر غلط PIN۔"</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"‏SIM PIN کامیابی کے ساتھ تبدیل ہو گیا"</string>
@@ -2831,14 +2834,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"<xliff:g id="PERCENT">%1$s</xliff:g> بیٹری پر"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"بیٹری فیصد"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"اسٹیٹس بار میں بیٹری فیصد دکھائیں"</string>
-    <!-- no translation found for battery_usage_chart_graph_hint_last_full_charge (6570336408060566877) -->
-    <skip />
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"پچھلی بار مکمل چارج کرنے کے بعد سے بیٹری لیول"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"گزشتہ 24 گھنٹے میں بیٹری لیول"</string>
-    <!-- no translation found for battery_app_usage (8976453608783133770) -->
-    <skip />
+    <string name="battery_app_usage" msgid="8976453608783133770">"پچھلی بار مکمل چارج کرنے کے بعد سے ایپ کا استعمال"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"گزشتہ 24 گھنٹے میں ایپ کا استعمال"</string>
-    <!-- no translation found for battery_system_usage (1395943945140097585) -->
-    <skip />
+    <string name="battery_system_usage" msgid="1395943945140097585">"پچھلی بار مکمل چارج کرنے کے بعد سے سسٹم کا استعمال"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"گزشتہ 24 گھنٹے میں سسٹم کا استعمال"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"‫<xliff:g id="SLOT">%s</xliff:g> کے لیے سسٹم کا استعمال"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"‫<xliff:g id="SLOT">%s</xliff:g> کے لیے ایپ کا استعمال"</string>
@@ -4673,16 +4673,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"ابھی آن کریں"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"ابھی آف کریں"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"بیٹری کی کارکردگی بہتر بنانے کا استعمال نہیں ہو رہا"</string>
-    <!-- no translation found for app_battery_optimization_title (389653121998016466) -->
-    <skip />
-    <!-- no translation found for app_battery_optimization_summary (7864783556193427398) -->
-    <skip />
-    <!-- no translation found for filter_battery_unrestricted_title (821027369424198223) -->
-    <skip />
-    <!-- no translation found for filter_battery_optimized_title (8236647176487754796) -->
-    <skip />
-    <!-- no translation found for filter_battery_restricted_title (5886859505802563232) -->
-    <skip />
+    <string name="app_battery_optimization_title" msgid="389653121998016466">"بیٹری کے استعمال کا نظم کریں"</string>
+    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"ایپس کے لیے بیٹری کا استعمال سیٹ کریں"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"‏پابندی کے بغیرx"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"بہتر کردہ"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"ممنوع"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"اگر آلہ مقفل ہو تو اطلاعات میں جوابات یا دیگر متن ٹائپ کرنا ممنوع کریں"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"ڈیفالٹ سپیل چیکر"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"سپیل چیکر چنیں"</string>

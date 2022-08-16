@@ -72,6 +72,10 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Ваш пристрій буде від’єднано від пристрою <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Підключити новий пристрій"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
+    <skip />
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Підключити другий"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Ваш лівий слуховий апарат підключено.\n\nЩоб підключити правий слуховий апарат, переконайтеся, що він увімкнений і готовий до підключення."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Ваш правий слуховий апарат підключено.\n\nЩоб підключити лівий слуховий апарат, переконайтеся, що він увімкнений і готовий до підключення."</string>
@@ -1612,13 +1616,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Перейменувати"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Підключити"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Вийняти"</string>
-    <!-- no translation found for storage_menu_format (8903698999905354146) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_button (7623565190643699626) -->
-    <skip />
+    <string name="storage_menu_format" msgid="8903698999905354146">"Форматувати карту SD для портативного сховища"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Форматувати карту"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Форматувати: пристрій пам’яті"</string>
-    <!-- no translation found for storage_menu_format_option (4886059624052908432) -->
-    <skip />
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Форматувати"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Перемістити дані"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Забути"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Налаштувати"</string>
@@ -1648,24 +1649,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Перейменувати пам’ять"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Носій (<xliff:g id="NAME_0">^1</xliff:g>) безпечно відключено, але він ще в гнізді. \n\n<xliff:g id="NAME_1">^1</xliff:g> працюватиме після підключення."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g> не підключається. \n\n<xliff:g id="NAME_1">^1</xliff:g> працюватиме після налаштування."</string>
-    <!-- no translation found for storage_internal_format_details (2399034372813686846) -->
-    <skip />
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Ви можете відформатувати цю карту SD, щоб зберігати на ній фотографії, відео, музику тощо й відкривати їх на інших пристроях. \n\n"<b>"Усі дані з карти SD буде видалено."</b>" \n\n"<b>"Перед форматуванням"</b>" \n\n"<b>"Створіть резервні копії фотографій та інших медіафайлів"</b>" \nПеремістіть медіафайли в альтернативне сховище на пристрої або перенесіть їх на комп’ютер за допомогою USB-кабелю. \n\n"<b>"Створіть резервні копії додатків"</b>" \nУсі додатки, які ви зберегли на цьому пристрої пам’яті (<xliff:g id="NAME">^1</xliff:g>), а також усі їх дані буде видалено. Щоб зберегти ці додатки, перемістіть їх в альтернативне сховище на цьому пристрої."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Коли ви виймете носій <xliff:g id="NAME_0">^1</xliff:g>, додатки, які на ньому зберігаються, перестануть працювати, а медіафайли будуть недоступні, поки ви не вставите носій знову."</b>" \n\nНосій <xliff:g id="NAME_1">^1</xliff:g> відформатовано для роботи лише на цьому пристрої. Він не працюватиме на інших пристроях."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Щоб отримати доступ до додатків, фотографій і даних на носії <xliff:g id="NAME">^1</xliff:g>, вийміть його та вставте знову. \n\nВи можете вибрати опцію \"Забути\", якщо носій недоступний. \n\nТоді всі дані з носія буде втрачено назавжди. \n\nВи зможете знову встановити додатки, але не відновите їх дані, які зберігалися на носії."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Забути носій (<xliff:g id="NAME">^1</xliff:g>)?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Усі додатки, фотографії та дані, які містить <xliff:g id="NAME">^1</xliff:g>, буде втрачено назавжди."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"У розділі \"Система\" містяться файли, потрібні для роботи Android <xliff:g id="VERSION">%s</xliff:g>"</string>
-    <!-- no translation found for storage_wizard_guest (5813419895687733649) -->
-    <skip />
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"У режимі гостя не дозволено форматувати карти SD"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Налаштуйте пристрій пам’яті <xliff:g id="NAME">^1</xliff:g>"</string>
-    <!-- no translation found for storage_wizard_init_external_title (5304499882951772292) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_summary (5842588772292324473) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_title (8799676990387869411) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_summary (8224648610422581704) -->
-    <skip />
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Форматуйте карту SD, щоб використовувати як портативне сховище"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Зберігайте фотографії, відео, музику тощо й відкривайте їх на інших пристроях"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Форматуйте карту SD, щоб використовувати як внутрішнє сховище"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Збережіть додатки й медіафайли, щоб використовувати їх лише на цьому телефоні"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Відформатувати як вн. пам’ять"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Щоб захистити дані, потрібно відформатувати карту \"<xliff:g id="NAME_0">^1</xliff:g>\". \n\nПісля форматування \"<xliff:g id="NAME_1">^1</xliff:g>\" працюватиме лише на цьому пристрої. \n\n"<b>"Під час форматування буде стерто всі дані, які зберігаються на карті \"<xliff:g id="NAME_2">^1</xliff:g>\"."</b>" Щоб не втратити дані, створіть резервну копію."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Форматувати як пристрій пам’яті"</string>
@@ -1682,12 +1677,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Перемістити"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Переміщення даних…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Під час переміщення:\n• не виймайте карту \"<xliff:g id="NAME">^1</xliff:g>\" \n• деякі додатки не працюватимуть належним чином \n• переконайтеся, що пристрій заряджено"</string>
-    <!-- no translation found for storage_wizard_ready_title (3631022511474086605) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_external_body (4264787122605706421) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_internal_body (2416472979690681273) -->
-    <skip />
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g>: відформатовано"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"<xliff:g id="NAME">^1</xliff:g>: готово до використання"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"<xliff:g id="NAME">^1</xliff:g>: готово до використання"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Перемістити додаток <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Переміщення додатка <xliff:g id="APP">^1</xliff:g> та його даних на пристрій <xliff:g id="NAME_0">^2</xliff:g> займе лише кілька хвилин. Ви не зможете користуватися додатком, поки не завершиться переміщення. \n\nНе видаляйте <xliff:g id="NAME_1">^2</xliff:g> під час переміщення"</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Щоб перемістити дані, потрібно розблокувати користувача <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1696,30 +1688,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Скасувати переміщення"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"<xliff:g id="NAME_0">^1</xliff:g> працює повільно. \n\nВи можете продовжити, але в переміщених додатках виникатимуть збої, а перенесення даних займе багато часу. \n\n<xliff:g id="NAME_1">^1</xliff:g> з більшою швидкістю покращить продуктивність."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Як буде використовуватися <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (1236154481658009267) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (3771689638403679317) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Форматуйте карту SD для внутрішнього сховища"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Зберігайте додатки й медіафайли, щоб використовувати їх лише на цьому планшеті. &lt;a href=https://support.google.com/android/answer/12153449&gt;Докладніше про налаштування карти SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Форматувати"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Форматуйте карту SD для внутрішнього сховища"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Зберігайте додатки й медіафайли, щоб використовувати їх лише на цьому телефоні. &lt;a href=https://support.google.com/android/answer/12153449&gt;Докладніше про налаштування карти SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Форматувати"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Або"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_title (2786416384217054112) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_summary (3867896101011977386) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_action (6140058734875839081) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Форматуйте карту SD для портативного сховища"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Зберігайте фотографії, відео, музику тощо й відкривайте їх на інших пристроях. &lt;a href=https://support.google.com/android/answer/12153449&gt;Докладніше про налаштування карти SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Форматувати"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Налаштувати пізніше"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Форматувати пристрій пам’яті (<xliff:g id="NAME">^1</xliff:g>)?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"<xliff:g id="NAME_0">^1</xliff:g> потребує форматування, щоб можна було зберігати додатки, файли й медіа-вміст. \n\nПід час форматування <xliff:g id="NAME_1">^2</xliff:g> очиститься від наявних файлів. Щоб не втратити вміст, потрібні <xliff:g id="NAME_2">^3</xliff:g> або пристрій, де можна зберегти резервну копію."</string>
-    <!-- no translation found for storage_wizard_format_confirm_v2_body_external (5810296966099830035) -->
-    <skip />
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Цей пристрій пам’яті (<xliff:g id="NAME_0">^1</xliff:g>) слід відформатувати, щоб зберігати на ньому фотографії, відео, музику тощо. \n\nПід час форматування з пристрою пам’яті (<xliff:g id="NAME_1">^2</xliff:g>) буде видалено всі наявні файли. Щоб не втратити контент, знадобиться <xliff:g id="NAME_2">^3</xliff:g> або інший пристрій, де можна зберегти резервну копію."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Форматувати (<xliff:g id="NAME">^1</xliff:g>)"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Перенести на пристрій пам’яті: <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"<xliff:g id="NAME">^1</xliff:g> може зберігати файли, медіа-вміст і певні додатки. \n\nПеренесення звільнить до <xliff:g id="SIZE">^2</xliff:g> пам’яті планшета й займе близько <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1736,12 +1718,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"<xliff:g id="NAME_0">^1</xliff:g> може використовуватися, але швидкість буде низькою. \n\nДодатки, які зберігає <xliff:g id="NAME_1">^2</xliff:g>, можуть працювати неправильно, а перенесення вмісту триватиме довго. \n\nНатомість <xliff:g id="NAME_2">^3</xliff:g> працює швидше, а <xliff:g id="NAME_3">^4</xliff:g> може бути портативним пристроєм пам’яті."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Почати знову"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Продовжити"</string>
-    <!-- no translation found for storage_wizard_ready_v2_external_body (7688457485389886923) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_body (3520269956641115883) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (1163588718127651062) -->
-    <skip />
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"<xliff:g id="NAME">^1</xliff:g>: готово до використання"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"<xliff:g id="NAME">^1</xliff:g>: готово до використання"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"<xliff:g id="NAME">^1</xliff:g>: готово до використання"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Стан акумулятора"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Рівень заряду акумулятора"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Точки доступу"</string>
@@ -2537,19 +2516,13 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Докладніше про корекцію кольору"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Про інверсію кольорів"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Докладніше про інверсію кольорів"</string>
-    <!-- no translation found for accessibility_captioning_primary_switch_title (3663677340286206100) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_primary_switch_summary (2544094070306830218) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_title (3128792092290011408) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_summary (4620682807315588019) -->
-    <skip />
+    <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Показувати субтитри"</string>
+    <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Лише для підтримуваних додатків"</string>
+    <string name="captioning_appearance_title" msgid="3128792092290011408">"Розмір і стиль субтитрів"</string>
+    <string name="captioning_appearance_summary" msgid="4620682807315588019">"Розмір шрифту: <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Інші параметри"</string>
-    <!-- no translation found for accessibility_captioning_preference_intro (8995427146374031134) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_preference_summary (8335768472978374255) -->
-    <skip />
+    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"Налаштуйте розмір і стиль субтитрів, щоб полегшити читання"</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"Ці налаштування субтитрів підтримують не всі мультимедійні додатки"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Кнопка спеціальних можливостей"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Провести двома пальцями вгору від нижнього краю екрана"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Утримувати клавіші гучності"</string>
@@ -3495,10 +3468,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Дозволити програмам використовувати дані про місцезнаходження"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Назад"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Далі"</string>
-    <!-- no translation found for wizard_back_portable (5315939180781404882) -->
-    <skip />
-    <!-- no translation found for wizard_back_adoptable (1447814356855134183) -->
-    <skip />
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Як портативне сховище"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Форматувати по-іншому"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Завершити"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM-карти"</string>
