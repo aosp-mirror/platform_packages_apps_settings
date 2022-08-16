@@ -47,7 +47,7 @@ class AccessibilitySetupWizardUtils {
         layout.setIcon(icon);
         layout.setDividerInsets(Integer.MAX_VALUE, 0);
 
-        if (ThemeHelper.shouldApplyExtendedPartnerConfig(context)) {
+        if (ThemeHelper.shouldApplyMaterialYouStyle(context)) {
             final LinearLayout headerLayout = layout.findManagedViewById(R.id.sud_layout_header);
             if (headerLayout != null) {
                 headerLayout.setPadding(0, layout.getPaddingTop(), 0,

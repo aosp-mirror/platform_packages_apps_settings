@@ -16,6 +16,7 @@
 
 package com.android.settings.display;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.DISABLED_BY_IT_ADMIN_TITLE;
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
 import static com.android.settings.display.ScreenTimeoutSettings.FALLBACK_SCREEN_TIMEOUT_VALUE;
@@ -60,7 +61,10 @@ public class ScreenTimeoutPreferenceController extends BasePreferenceController 
         final RestrictedLockUtils.EnforcedAdmin admin = getPreferenceDisablingAdmin(maxTimeout);
         if (admin != null) {
             preference.setEnabled(false);
-            preference.setSummary(mContext.getText(R.string.disabled_by_policy_title));
+            preference.setSummary(mContext.getSystemService(DevicePolicyManager.class)
+                    .getResources()
+                    .getString(DISABLED_BY_IT_ADMIN_TITLE,
+                            () -> mContext.getString(R.string.disabled_by_policy_title)));
             ((RestrictedPreference) preference).setDisabledByAdmin(admin);
         } else {
             preference.setSummary(getTimeoutSummary(maxTimeout));

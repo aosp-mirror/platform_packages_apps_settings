@@ -140,8 +140,8 @@ public final class BatteryDiffEntryTest {
         // Verifies the app label in the cache.
         final BatteryEntry.NameAndIcon nameAndIcon =
             BatteryDiffEntry.sResourceCache.get(entry.getKey());
-        assertThat(nameAndIcon.name).isEqualTo(expectedName);
-        assertThat(nameAndIcon.iconId).isEqualTo(R.drawable.ic_settings_aod);
+        assertThat(nameAndIcon.mName).isEqualTo(expectedName);
+        assertThat(nameAndIcon.mIconId).isEqualTo(R.drawable.ic_settings_aod);
         // Verifies the restrictable flag in the cache.
         assertThat(entry.mValidForRestriction).isTrue();
         assertThat(BatteryDiffEntry.sValidForRestriction.get(entry.getKey())).isTrue();
@@ -166,8 +166,8 @@ public final class BatteryDiffEntryTest {
         // Verifies the app label in the cache.
         final BatteryEntry.NameAndIcon nameAndIcon =
             BatteryDiffEntry.sResourceCache.get(entry.getKey());
-        assertThat(nameAndIcon.name).isEqualTo(expectedName);
-        assertThat(nameAndIcon.iconId).isEqualTo(0);
+        assertThat(nameAndIcon.mName).isEqualTo(expectedName);
+        assertThat(nameAndIcon.mIconId).isEqualTo(0);
         // Verifies the restrictable flag in the cache.
         assertThat(entry.mValidForRestriction).isTrue();
         assertThat(BatteryDiffEntry.sValidForRestriction.get(entry.getKey())).isTrue();
@@ -195,7 +195,7 @@ public final class BatteryDiffEntryTest {
         // Verifies the app label in the cache.
         final BatteryEntry.NameAndIcon nameAndIcon =
             BatteryDiffEntry.sResourceCache.get(entry.getKey());
-        assertThat(nameAndIcon.name).isEqualTo(expectedAppLabel);
+        assertThat(nameAndIcon.mName).isEqualTo(expectedAppLabel);
         // Verifies the restrictable flag in the cache.
         assertThat(entry.mValidForRestriction).isFalse();
         assertThat(BatteryDiffEntry.sValidForRestriction.get(entry.getKey())).isFalse();
@@ -215,7 +215,7 @@ public final class BatteryDiffEntryTest {
         // Verifies the app label in the cache.
         final BatteryEntry.NameAndIcon nameAndIcon =
             BatteryDiffEntry.sResourceCache.get(entry.getKey());
-        assertThat(nameAndIcon.name).isEqualTo(expectedAppLabel);
+        assertThat(nameAndIcon.mName).isEqualTo(expectedAppLabel);
     }
 
     @Test
@@ -274,7 +274,7 @@ public final class BatteryDiffEntryTest {
         // Verifies the app label in the cache.
         final BatteryEntry.NameAndIcon nameAndIcon =
             BatteryDiffEntry.sResourceCache.get(entry.getKey());
-        assertThat(nameAndIcon.icon).isEqualTo(mockDrawable);
+        assertThat(nameAndIcon.mIcon).isEqualTo(mockDrawable);
     }
 
     @Test
@@ -309,7 +309,7 @@ public final class BatteryDiffEntryTest {
         // Verifies the cache is updated into the new drawable.
         final BatteryEntry.NameAndIcon nameAndIcon =
             BatteryDiffEntry.sResourceCache.get(entry2.getKey());
-        assertThat(nameAndIcon.icon).isEqualTo(mockDrawable2);
+        assertThat(nameAndIcon.mIcon).isEqualTo(mockDrawable2);
     }
 
     @Test
@@ -349,11 +349,29 @@ public final class BatteryDiffEntryTest {
     }
 
     @Test
-    public void testIsSystemEntry_uidBatteryWithSystemProcess_returnTrue() {
+    public void testIsSystemEntry_uidBatteryWithSystemProcess_returnFalse() {
         final BatteryDiffEntry entry =
             createBatteryDiffEntry(
                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                 /*uid=*/ 1230, /*isHidden=*/ false);
+        assertThat(entry.isSystemEntry()).isFalse();
+    }
+
+    @Test
+    public void testIsSystemEntry_uidBatteryWithTetheringProcess_returnTrue() {
+        final BatteryDiffEntry entry =
+            createBatteryDiffEntry(
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
+                /*uid=*/ BatteryUtils.UID_TETHERING, /*isHidden=*/ false);
+        assertThat(entry.isSystemEntry()).isTrue();
+    }
+
+    @Test
+    public void testIsSystemEntry_uidBatteryWithRemovedAppsProcess_returnTrue() {
+        final BatteryDiffEntry entry =
+            createBatteryDiffEntry(
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
+                /*uid=*/ BatteryUtils.UID_REMOVED_APPS, /*isHidden=*/ false);
         assertThat(entry.isSystemEntry()).isTrue();
     }
 

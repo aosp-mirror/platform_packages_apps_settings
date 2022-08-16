@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
 import android.content.Context;
 import android.os.Vibrator;
 import android.provider.Settings;
@@ -23,55 +25,28 @@ import android.provider.Settings;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
+/** Controller for "Vibration & haptics" settings page. */
 public class VibrationPreferenceController extends BasePreferenceController {
 
-    private final Vibrator mVibrator;
+    private final boolean mHasVibrator;
 
-    public VibrationPreferenceController(Context context, String preferenceKey) {
-        super(context, preferenceKey);
-        mVibrator = mContext.getSystemService(Vibrator.class);
+    public VibrationPreferenceController(Context context, String key) {
+        super(context, key);
+        mHasVibrator = context.getSystemService(Vibrator.class).hasVibrator();
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mHasVibrator ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
     public CharSequence getSummary() {
-        int ringIntensity = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.RING_VIBRATION_INTENSITY,
-                mVibrator.getDefaultRingVibrationIntensity());
-        if (Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.VIBRATE_WHEN_RINGING, 0) == 0
-                && !AccessibilitySettings.isRampingRingerEnabled(mContext)) {
-            ringIntensity = Vibrator.VIBRATION_INTENSITY_OFF;
-        }
-        final CharSequence ringIntensityString =
-                VibrationIntensityPreferenceController.getIntensityString(mContext, ringIntensity);
-
-        final int notificationIntensity = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
-                mVibrator.getDefaultNotificationVibrationIntensity());
-        final CharSequence notificationIntensityString =
-                VibrationIntensityPreferenceController.getIntensityString(mContext,
-                        notificationIntensity);
-
-        int touchIntensity = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.HAPTIC_FEEDBACK_INTENSITY,
-                mVibrator.getDefaultHapticFeedbackIntensity());
-        if (Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.HAPTIC_FEEDBACK_ENABLED, 0) == 0) {
-            touchIntensity = Vibrator.VIBRATION_INTENSITY_OFF;
-        }
-        final CharSequence touchIntensityString =
-                VibrationIntensityPreferenceController.getIntensityString(mContext, touchIntensity);
-
-        if (ringIntensity == touchIntensity && ringIntensity == notificationIntensity) {
-            return ringIntensityString;
-        } else {
-            return mContext.getString(R.string.accessibility_vibration_summary, ringIntensityString,
-                    notificationIntensityString, touchIntensityString);
-        }
+        final boolean isVibrateOn = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.VIBRATE_ON, ON) == ON;
+        return mContext.getText(
+                isVibrateOn
+                        ? R.string.accessibility_vibration_settings_state_on
+                        : R.string.accessibility_vibration_settings_state_off);
     }
 }

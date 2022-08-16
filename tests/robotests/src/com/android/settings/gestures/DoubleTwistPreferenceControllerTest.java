@@ -19,10 +19,12 @@ package com.android.settings.gestures;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -61,6 +63,8 @@ public class DoubleTwistPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        doReturn(mock(DevicePolicyManager.class)).when(mContext)
+                .getSystemService(Context.DEVICE_POLICY_SERVICE);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mock(UserManager.class));
         mController = new DoubleTwistPreferenceController(mContext, KEY_DOUBLE_TWIST);
     }

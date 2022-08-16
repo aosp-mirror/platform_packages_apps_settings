@@ -73,7 +73,7 @@ public class BubbleSummaryPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         mContext = RuntimeEnvironment.application;
-        when(mBackend.hasSentValidMsg(anyString(), anyInt())).thenReturn(true);
+        when(mBackend.hasSentValidBubble(anyString(), anyInt())).thenReturn(true);
         mAppRow = new NotificationBackend.AppRow();
         mAppRow.pkg = "pkg";
         mAppRow.uid = 0;
@@ -103,10 +103,10 @@ public class BubbleSummaryPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_NOTIFICATION_BUBBLESisOn_neverSentMsg_shouldReturnFalse() {
+    public void isAvailable_NOTIFICATION_BUBBLESisOn_neverSentBubble_shouldReturnFalse() {
         Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         mController.onResume(mAppRow, null, null, null, null, null, null);
-        when(mBackend.hasSentValidMsg(anyString(), anyInt())).thenReturn(false);
+        when(mBackend.hasSentValidBubble(anyString(), anyInt())).thenReturn(false);
 
         assertFalse(mController.isAvailable());
     }

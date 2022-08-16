@@ -16,8 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
-import static com.android.settings.accessibility.AccessibilityDialogUtils.CustomButton;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
@@ -27,12 +25,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -45,6 +44,7 @@ import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -52,7 +52,6 @@ import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringJoiner;
 
 /** Controller that shows the magnification area mode summary and the preference click behavior. */
 public class MagnificationModePreferenceController extends BasePreferenceController implements
@@ -63,17 +62,18 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
     @VisibleForTesting
     static final int DIALOG_MAGNIFICATION_MODE = DIALOG_ID_BASE + 1;
     @VisibleForTesting
-    static final int DIALOG_MAGNIFICATION_SWITCH_SHORTCUT = DIALOG_ID_BASE + 2;
+    static final int DIALOG_MAGNIFICATION_TRIPLE_TAP_WARNING = DIALOG_ID_BASE + 2;
     @VisibleForTesting
     static final String EXTRA_MODE = "mode";
 
     private static final String TAG = "MagnificationModePreferenceController";
-    private static final char COMPONENT_NAME_SEPARATOR = ':';
 
     private DialogHelper mDialogHelper;
     // The magnification mode in the dialog.
-    private int mMode = MagnificationMode.NONE;
+    @MagnificationMode
+    private int mModeCache = MagnificationMode.NONE;
     private Preference mModePreference;
+    private ShortcutPreference mLinkPreference;
 
     @VisibleForTesting
     ListView mMagnificationModesListView;
@@ -113,7 +113,7 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
-            mMode = savedInstanceState.getInt(EXTRA_MODE, MagnificationMode.NONE);
+            mModeCache = savedInstanceState.getInt(EXTRA_MODE, MagnificationMode.NONE);
         }
     }
 
@@ -121,8 +121,10 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mModePreference = screen.findPreference(getPreferenceKey());
+        mLinkPreference = screen.findPreference(
+                ToggleFeaturePreferenceFragment.KEY_SHORTCUT_PREFERENCE);
         mModePreference.setOnPreferenceClickListener(preference -> {
-            mMode = MagnificationCapabilities.getCapabilities(mContext);
+            mModeCache = MagnificationCapabilities.getCapabilities(mContext);
             mDialogHelper.showDialog(DIALOG_MAGNIFICATION_MODE);
             return true;
         });
@@ -130,7 +132,7 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putInt(EXTRA_MODE, mMode);
+        outState.putInt(EXTRA_MODE, mModeCache);
     }
 
     /**
@@ -147,8 +149,8 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
             case DIALOG_MAGNIFICATION_MODE:
                 return createMagnificationModeDialog();
 
-            case DIALOG_MAGNIFICATION_SWITCH_SHORTCUT:
-                return createMagnificationShortCutConfirmDialog();
+            case DIALOG_MAGNIFICATION_TRIPLE_TAP_WARNING:
+                return createMagnificationTripleTapWarningDialog();
         }
         return null;
     }
@@ -158,8 +160,8 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
         switch (dialogId) {
             case DIALOG_MAGNIFICATION_MODE:
                 return SettingsEnums.DIALOG_MAGNIFICATION_CAPABILITY;
-            case DIALOG_MAGNIFICATION_SWITCH_SHORTCUT:
-                return SettingsEnums.DIALOG_MAGNIFICATION_SWITCH_SHORTCUT;
+            case DIALOG_MAGNIFICATION_TRIPLE_TAP_WARNING:
+                return SettingsEnums.DIALOG_MAGNIFICATION_TRIPLE_TAP_WARNING;
             default:
                 return 0;
         }
@@ -178,29 +180,40 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
         mMagnificationModesListView.setItemChecked(computeSelectionIndex(), true);
         final CharSequence title = mContext.getString(
                 R.string.accessibility_magnification_mode_dialog_title);
+        final CharSequence positiveBtnText = mContext.getString(R.string.save);
+        final CharSequence negativeBtnText = mContext.getString(R.string.cancel);
 
         return AccessibilityDialogUtils.createCustomDialog(mContext, title,
-                mMagnificationModesListView, this::onMagnificationModeDialogPositiveButtonClicked);
+                mMagnificationModesListView,
+                positiveBtnText, this::onMagnificationModeDialogPositiveButtonClicked,
+                negativeBtnText, /* negativeListener= */ null);
     }
 
-    private void onMagnificationModeDialogPositiveButtonClicked(DialogInterface dialogInterface,
+    @VisibleForTesting
+    void onMagnificationModeDialogPositiveButtonClicked(DialogInterface dialogInterface,
             int which) {
         final int selectedIndex = mMagnificationModesListView.getCheckedItemPosition();
-        if (selectedIndex != AdapterView.INVALID_POSITION) {
-            final MagnificationModeInfo modeInfo =
-                    (MagnificationModeInfo) mMagnificationModesListView.getItemAtPosition(
-                            selectedIndex);
-            setMode(modeInfo.mMagnificationMode);
-        } else {
+        if (selectedIndex == AdapterView.INVALID_POSITION) {
             Log.w(TAG, "invalid index");
+            return;
+        }
+
+        mModeCache = ((MagnificationModeInfo) mMagnificationModesListView.getItemAtPosition(
+                        selectedIndex)).mMagnificationMode;
+
+        // Do not save mode until user clicks positive button in triple tap warning dialog.
+        if (isTripleTapEnabled(mContext) && mModeCache != MagnificationMode.FULLSCREEN) {
+            mDialogHelper.showDialog(DIALOG_MAGNIFICATION_TRIPLE_TAP_WARNING);
+        } else { // Save mode (capabilities) value, don't need to show dialog to confirm.
+            updateCapabilitiesAndSummary(mModeCache);
         }
     }
 
-    private void setMode(int mode) {
-        mMode = mode;
-        MagnificationCapabilities.setCapabilities(mContext, mMode);
+    private void updateCapabilitiesAndSummary(@MagnificationMode int mode) {
+        mModeCache = mode;
+        MagnificationCapabilities.setCapabilities(mContext, mModeCache);
         mModePreference.setSummary(
-                MagnificationCapabilities.getSummary(mContext, mMode));
+                MagnificationCapabilities.getSummary(mContext, mModeCache));
     }
 
     private void onMagnificationModeSelected(AdapterView<?> parent, View view, int position,
@@ -208,19 +221,16 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
         final MagnificationModeInfo modeInfo =
                 (MagnificationModeInfo) mMagnificationModesListView.getItemAtPosition(
                         position);
-        if (modeInfo.mMagnificationMode == mMode) {
+        if (modeInfo.mMagnificationMode == mModeCache) {
             return;
         }
-        mMode = modeInfo.mMagnificationMode;
-        if (isTripleTapEnabled(mContext) && mMode != MagnificationMode.FULLSCREEN) {
-            mDialogHelper.showDialog(DIALOG_MAGNIFICATION_SWITCH_SHORTCUT);
-        }
+        mModeCache = modeInfo.mMagnificationMode;
     }
 
     private int computeSelectionIndex() {
         final int modesSize = mModeInfos.size();
         for (int i = 0; i < modesSize; i++) {
-            if (mModeInfos.get(i).mMagnificationMode == mMode) {
+            if (mModeInfos.get(i).mMagnificationMode == mModeCache) {
                 return i + mMagnificationModesListView.getHeaderViewsCount();
             }
         }
@@ -234,41 +244,57 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, OFF) == ON;
     }
 
-    private Dialog createMagnificationShortCutConfirmDialog() {
-        return AccessibilityDialogUtils.createMagnificationSwitchShortcutDialog(mContext,
-                this::onSwitchShortcutDialogButtonClicked);
+    private Dialog createMagnificationTripleTapWarningDialog() {
+        final View contentView = LayoutInflater.from(mContext).inflate(
+                R.layout.magnification_triple_tap_warning_dialog, /* root= */ null);
+        final CharSequence title = mContext.getString(
+                R.string.accessibility_magnification_triple_tap_warning_title);
+        final CharSequence positiveBtnText = mContext.getString(
+                R.string.accessibility_magnification_triple_tap_warning_positive_button);
+        final CharSequence negativeBtnText = mContext.getString(
+                R.string.accessibility_magnification_triple_tap_warning_negative_button);
+
+        final Dialog dialog = AccessibilityDialogUtils.createCustomDialog(mContext, title,
+                contentView,
+                positiveBtnText, this::onMagnificationTripleTapWarningDialogPositiveButtonClicked,
+                negativeBtnText, this::onMagnificationTripleTapWarningDialogNegativeButtonClicked);
+
+        updateLinkInTripleTapWarningDialog(dialog, contentView);
+
+        return dialog;
+    }
+
+    private void updateLinkInTripleTapWarningDialog(Dialog dialog, View contentView) {
+        final TextView messageView = contentView.findViewById(R.id.message);
+        // TODO(b/225682559): Need to remove performClick() after refactoring accessibility dialog.
+        final View.OnClickListener linkListener = view -> {
+            updateCapabilitiesAndSummary(mModeCache);
+            mLinkPreference.performClick();
+            dialog.dismiss();
+        };
+        final AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan.LinkInfo(
+                AnnotationSpan.LinkInfo.DEFAULT_ANNOTATION, linkListener);
+        final CharSequence textWithLink = AnnotationSpan.linkify(mContext.getText(
+                R.string.accessibility_magnification_triple_tap_warning_message), linkInfo);
+
+        if (messageView != null) {
+            messageView.setText(textWithLink);
+            messageView.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+        dialog.setContentView(contentView);
     }
 
     @VisibleForTesting
-    void onSwitchShortcutDialogButtonClicked(@CustomButton int which) {
-        optOutMagnificationFromTripleTap();
-        //TODO(b/147990389): Merge this function into AccessibilityUtils after the format of
-        // magnification target is changed to ComponentName.
-        optInMagnificationToAccessibilityButton();
+    void onMagnificationTripleTapWarningDialogNegativeButtonClicked(
+            DialogInterface dialogInterface, int which) {
+        mModeCache = MagnificationCapabilities.getCapabilities(mContext);
+        mDialogHelper.showDialog(DIALOG_MAGNIFICATION_MODE);
     }
 
-    private void optOutMagnificationFromTripleTap() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, OFF);
-    }
-
-    private void optInMagnificationToAccessibilityButton() {
-        final String targetKey = Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
-        final String targetString = Settings.Secure.getString(mContext.getContentResolver(),
-                targetKey);
-        if (targetString != null && targetString.contains(MAGNIFICATION_CONTROLLER_NAME)) {
-            return;
-        }
-
-        final StringJoiner joiner = new StringJoiner(String.valueOf(COMPONENT_NAME_SEPARATOR));
-
-        if (!TextUtils.isEmpty(targetString)) {
-            joiner.add(targetString);
-        }
-        joiner.add(MAGNIFICATION_CONTROLLER_NAME);
-
-        Settings.Secure.putString(mContext.getContentResolver(), targetKey,
-                joiner.toString());
+    @VisibleForTesting
+    void onMagnificationTripleTapWarningDialogPositiveButtonClicked(
+            DialogInterface dialogInterface, int which) {
+        updateCapabilitiesAndSummary(mModeCache);
     }
 
     // TODO(b/186731461): Remove it when this controller is used in DashBoardFragment only.
@@ -276,7 +302,6 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
     public void onResume() {
         updateState(mModePreference);
     }
-
 
     /**
      * An interface to help the delegate to show the dialog. It will be injected to the delegate.

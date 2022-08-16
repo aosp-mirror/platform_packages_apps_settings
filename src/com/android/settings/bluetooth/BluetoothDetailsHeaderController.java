@@ -75,10 +75,8 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
         if (TextUtils.isEmpty(summaryText)) {
             // If first summary is unavailable, not to show second summary.
             mHeaderController.setSecondSummary((CharSequence)null);
-        } else {
-            // If both the hearing aids are connected, two device status should be shown.
-            mHeaderController.setSecondSummary(mDeviceManager.getSubDeviceSummary(mCachedDevice));
         }
+
         mHeaderController.setLabel(mCachedDevice.getName());
         mHeaderController.setIcon(pair.first);
         mHeaderController.setIconContentDescription(pair.second);

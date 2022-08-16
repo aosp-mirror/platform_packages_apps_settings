@@ -18,27 +18,31 @@ package com.android.settings.homepage.contextualcards.conditional;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import com.android.settings.homepage.contextualcards.ContextualCard;
-import com.android.settings.testutils.shadow.ShadowWifiManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowWifiManager.class})
 public class HotspotConditionControllerTest {
 
     private static final String WIFI_AP_SSID = "Test Hotspot";
 
+    @Mock
+    private WifiManager mWifiManager;
     @Mock
     private ConditionManager mConditionManager;
 
@@ -47,7 +51,10 @@ public class HotspotConditionControllerTest {
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        MockitoAnnotations.initMocks(this);
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+
         mController = new HotspotConditionController(mContext, mConditionManager);
     }
 
@@ -70,6 +77,6 @@ public class HotspotConditionControllerTest {
     private void setupSoftApConfiguration() {
         final SoftApConfiguration wifiApConfig = new SoftApConfiguration.Builder()
                 .setSsid(WIFI_AP_SSID).build();
-        mContext.getSystemService(WifiManager.class).setSoftApConfiguration(wifiApConfig);
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(wifiApConfig);
     }
 }
