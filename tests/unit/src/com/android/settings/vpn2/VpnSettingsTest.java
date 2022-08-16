@@ -20,12 +20,14 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Looper;
 import android.os.UserHandle;
@@ -69,6 +71,8 @@ public class VpnSettingsTest {
 
     @Mock
     private AppOpsManager mAppOpsManager;
+    @Mock
+    private PackageManager mPackageManager;
 
     private VpnSettings mVpnSettings;
     private Context mContext;
@@ -107,6 +111,7 @@ public class VpnSettingsTest {
                 .thenReturn(ADVANCED_VPN_GROUP_PACKAGE_NAME);
         when(mFakeFeatureFactory.mAdvancedVpnFeatureProvider.isAdvancedVpnSupported(any()))
                 .thenReturn(true);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
         doReturn(mContext).when(mContext).createContextAsUser(any(), anyInt());
         doReturn(mContext).when(mContext).createPackageContextAsUser(any(), anyInt(), any());
         doReturn(mPreferenceManager).when(mVpnGroup).getPreferenceManager();
@@ -154,14 +159,10 @@ public class VpnSettingsTest {
     }
 
     @Test
-    public void getVpnApps_isAdvancedVpn_returnsOne() {
-        int uid = 1111;
-        List<AppOpsManager.OpEntry> opEntries = new ArrayList<>();
-        List<AppOpsManager.PackageOps> apps = new ArrayList<>();
-        AppOpsManager.PackageOps packageOps =
-                new AppOpsManager.PackageOps(ADVANCED_VPN_GROUP_PACKAGE_NAME, uid, opEntries);
-        apps.add(packageOps);
-        when(mAppOpsManager.getPackagesForOps((int[]) any())).thenReturn(apps);
+    public void getVpnApps_isAdvancedVpn_returnsOne() throws Exception {
+        ApplicationInfo info = new ApplicationInfo();
+        info.uid = 1111;
+        when(mPackageManager.getApplicationInfo(anyString(), anyInt())).thenReturn(info);
 
         assertThat(VpnSettings.getVpnApps(mContext, /* includeProfiles= */ false,
                 mFakeFeatureFactory.getAdvancedVpnFeatureProvider(),
@@ -177,6 +178,8 @@ public class VpnSettingsTest {
                 new AppOpsManager.PackageOps(FAKE_PACKAGE_NAME, uid, opEntries);
         apps.add(packageOps);
         when(mAppOpsManager.getPackagesForOps((int[]) any())).thenReturn(apps);
+        when(mFakeFeatureFactory.mAdvancedVpnFeatureProvider.isAdvancedVpnSupported(any()))
+                .thenReturn(false);
 
         assertThat(VpnSettings.getVpnApps(mContext, /* includeProfiles= */ false,
                 mFakeFeatureFactory.getAdvancedVpnFeatureProvider(),
