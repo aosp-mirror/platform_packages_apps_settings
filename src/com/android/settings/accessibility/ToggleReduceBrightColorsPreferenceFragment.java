@@ -16,13 +16,17 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.AccessibilityShortcutController.REDUCE_BRIGHT_COLORS_COMPONENT_NAME;
+import static com.android.internal.accessibility.AccessibilityShortcutController.REDUCE_BRIGHT_COLORS_TILE_SERVICE_COMPONENT_NAME;
+import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logAccessibilityServiceEnabled;
+
 import android.app.settings.SettingsEnums;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +35,8 @@ import android.view.ViewGroup;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.widget.SettingsMainSwitchPreference;
@@ -50,8 +54,6 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
     private static final String KEY_INTENSITY = "rbc_intensity";
     private static final String KEY_PERSIST = "rbc_persist";
 
-    private final Handler mHandler = new Handler();
-    private SettingsContentObserver mSettingsContentObserver;
     private ReduceBrightColorsIntensityPreferenceController mRbcIntensityPreferenceController;
     private ReduceBrightColorsPersistencePreferenceController mRbcPersistencePreferenceController;
     private ColorDisplayManager mColorDisplayManager;
@@ -64,23 +66,16 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
                 .authority(getPrefContext().getPackageName())
                 .appendPath(String.valueOf(R.raw.extra_dim_banner))
                 .build();
-        mComponentName = AccessibilityShortcutController.REDUCE_BRIGHT_COLORS_COMPONENT_NAME;
+        mComponentName = REDUCE_BRIGHT_COLORS_COMPONENT_NAME;
         mPackageName = getText(R.string.reduce_bright_colors_preference_title);
         mHtmlDescription = getText(R.string.reduce_bright_colors_preference_subtitle);
-        final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
-        enableServiceFeatureKeys.add(REDUCE_BRIGHT_COLORS_ACTIVATED_KEY);
+        mTopIntroTitle = getText(R.string.reduce_bright_colors_preference_intro_text);
         mRbcIntensityPreferenceController =
                 new ReduceBrightColorsIntensityPreferenceController(getContext(), KEY_INTENSITY);
         mRbcPersistencePreferenceController =
                 new ReduceBrightColorsPersistencePreferenceController(getContext(), KEY_PERSIST);
         mRbcIntensityPreferenceController.displayPreference(getPreferenceScreen());
         mRbcPersistencePreferenceController.displayPreference(getPreferenceScreen());
-        mSettingsContentObserver = new SettingsContentObserver(mHandler, enableServiceFeatureKeys) {
-            @Override
-            public void onChange(boolean selfChange, Uri uri) {
-                updateSwitchBarToggleSwitch();
-            }
-        };
         mColorDisplayManager = getContext().getSystemService(ColorDisplayManager.class);
         final View view = super.onCreateView(inflater, container, savedInstanceState);
         // Parent sets the title when creating the view, so set it after calling super
@@ -88,6 +83,17 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
         updateGeneralCategoryOrder();
         updateFooterPreference();
         return view;
+    }
+
+    @Override
+    protected void registerKeysToObserverCallback(
+            AccessibilitySettingsContentObserver contentObserver) {
+        super.registerKeysToObserverCallback(contentObserver);
+
+        final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
+        enableServiceFeatureKeys.add(REDUCE_BRIGHT_COLORS_ACTIVATED_KEY);
+        contentObserver.registerKeysToObserverCallback(enableServiceFeatureKeys,
+                key -> updateSwitchBarToggleSwitch());
     }
 
     private void updateGeneralCategoryOrder() {
@@ -117,12 +123,10 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
     public void onResume() {
         super.onResume();
         updateSwitchBarToggleSwitch();
-        mSettingsContentObserver.register(getContentResolver());
     }
 
     @Override
     public void onPause() {
-        mSettingsContentObserver.unregister(getContentResolver());
         super.onPause();
     }
 
@@ -144,7 +148,10 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        AccessibilityStatsLogUtils.logAccessibilityServiceEnabled(mComponentName, enabled);
+        if (enabled) {
+            showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
+        }
+        logAccessibilityServiceEnabled(mComponentName, enabled);
         mColorDisplayManager.setReduceBrightColorsActivated(enabled);
     }
 
@@ -161,14 +168,26 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
     }
 
     @Override
-    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
-        shortcutPreference.setTitle(R.string.reduce_bright_colors_shortcut_title);
+    protected CharSequence getShortcutTitle() {
+        return getText(R.string.reduce_bright_colors_shortcut_title);
     }
 
     @Override
     int getUserShortcutTypes() {
         return AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
                 mComponentName);
+    }
+
+    @Override
+    ComponentName getTileComponentName() {
+        return REDUCE_BRIGHT_COLORS_TILE_SERVICE_COMPONENT_NAME;
+    }
+
+    @Override
+    CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+        return getText(type == QuickSettingsTooltipType.GUIDE_TO_EDIT
+                 ? R.string.accessibility_reduce_bright_colors_qs_tooltip_content
+                 : R.string.accessibility_reduce_bright_colors_auto_added_qs_tooltip_content);
     }
 
     @Override

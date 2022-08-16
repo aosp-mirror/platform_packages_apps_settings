@@ -80,7 +80,7 @@ public class BlockPreferenceController extends NotificationPreferenceController
             }
             bar.setDisabledByAdmin(mAdmin);
 
-            if (mChannel != null && !isChannelBlockable()) {
+            if (mChannel != null && (!isChannelBlockable() || !isChannelConfigurable(mChannel))) {
                 bar.setSwitchBarEnabled(false);
             }
 
@@ -88,8 +88,7 @@ public class BlockPreferenceController extends NotificationPreferenceController
                 bar.setSwitchBarEnabled(false);
             }
 
-            if (mChannel == null && mAppRow.systemApp
-                    && (!mAppRow.banned || mAppRow.lockedImportance)) {
+            if (mChannel == null && !isAppBlockable()) {
                 bar.setSwitchBarEnabled(false);
             }
 

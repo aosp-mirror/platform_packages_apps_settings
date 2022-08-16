@@ -85,7 +85,6 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.style.TtsSpan;
 import android.util.ArraySet;
-import android.util.FeatureFlagUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -419,7 +418,7 @@ public final class Utils extends com.android.settingslib.Utils {
     public static UserHandle getManagedProfile(UserManager userManager) {
         final List<UserHandle> userProfiles = userManager.getUserProfiles();
         for (UserHandle profile : userProfiles) {
-            if (profile.getIdentifier() == userManager.getUserHandle()) {
+            if (profile.getIdentifier() == userManager.getProcessUserId()) {
                 continue;
             }
             final UserInfo userInfo = userManager.getUserInfo(profile.getIdentifier());
@@ -1220,7 +1219,7 @@ public final class Utils extends com.android.settingslib.Utils {
      */
     @ColorInt
     public static int getHomepageIconColor(Context context) {
-        return getColorAttrDefaultColor(context, android.R.attr.textColorSecondary);
+        return getColorAttrDefaultColor(context, android.R.attr.textColorPrimary);
     }
 
     /**
@@ -1228,6 +1227,6 @@ public final class Utils extends com.android.settingslib.Utils {
      */
     @ColorInt
     public static int getHomepageIconColorHighlight(Context context) {
-        return getColorAttrDefaultColor(context, android.R.attr.textColorSecondaryInverse);
+        return context.getColor(R.color.accent_select_primary_text);
     }
 }

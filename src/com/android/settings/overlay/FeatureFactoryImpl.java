@@ -33,10 +33,6 @@ import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProviderImpl;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
-import com.android.settings.applications.GameSettingsFeatureProvider;
-import com.android.settings.applications.GameSettingsFeatureProviderImpl;
-import com.android.settings.applications.appinfo.ExtraAppInfoFeatureProvider;
-import com.android.settings.applications.appinfo.ExtraAppInfoFeatureProviderImpl;
 import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.aware.AwareFeatureProviderImpl;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
@@ -107,9 +103,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private AwareFeatureProvider mAwareFeatureProvider;
     private FaceFeatureProvider mFaceFeatureProvider;
     private WifiTrackerLibProvider mWifiTrackerLibProvider;
-    private ExtraAppInfoFeatureProvider mExtraAppInfoFeatureProvider;
     private SecuritySettingsFeatureProvider mSecuritySettingsFeatureProvider;
-    private GameSettingsFeatureProvider mGameSettingsFeatureProvider;
     private AccessibilitySearchFeatureProvider mAccessibilitySearchFeatureProvider;
     private AccessibilityMetricsFeatureProvider mAccessibilityMetricsFeatureProvider;
 
@@ -286,10 +280,9 @@ public class FeatureFactoryImpl extends FeatureFactory {
     }
 
     @Override
-    public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
+    public BluetoothFeatureProvider getBluetoothFeatureProvider() {
         if (mBluetoothFeatureProvider == null) {
-            mBluetoothFeatureProvider = new BluetoothFeatureProviderImpl(
-                    context.getApplicationContext());
+            mBluetoothFeatureProvider = new BluetoothFeatureProviderImpl(getAppContext());
         }
         return mBluetoothFeatureProvider;
     }
@@ -319,27 +312,11 @@ public class FeatureFactoryImpl extends FeatureFactory {
     }
 
     @Override
-    public ExtraAppInfoFeatureProvider getExtraAppInfoFeatureProvider() {
-        if (mExtraAppInfoFeatureProvider == null) {
-            mExtraAppInfoFeatureProvider = new ExtraAppInfoFeatureProviderImpl();
-        }
-        return mExtraAppInfoFeatureProvider;
-    }
-
-    @Override
     public SecuritySettingsFeatureProvider getSecuritySettingsFeatureProvider() {
         if (mSecuritySettingsFeatureProvider == null) {
             mSecuritySettingsFeatureProvider = new SecuritySettingsFeatureProviderImpl();
         }
         return mSecuritySettingsFeatureProvider;
-    }
-
-    @Override
-    public GameSettingsFeatureProvider getGameSettingsFeatureProvider() {
-        if (mGameSettingsFeatureProvider == null) {
-            mGameSettingsFeatureProvider = new GameSettingsFeatureProviderImpl();
-        }
-        return mGameSettingsFeatureProvider;
     }
 
     @Override

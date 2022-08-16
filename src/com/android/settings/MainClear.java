@@ -16,6 +16,9 @@
 
 package com.android.settings;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.PERSONAL_CATEGORY_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_CATEGORY_HEADER;
+
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.accounts.Account;
@@ -23,6 +26,7 @@ import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -490,9 +494,20 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
 
             if (profilesSize > 1) {
                 View titleView = Utils.inflateCategoryHeader(inflater, contents);
+                titleView.setPadding(0 /* left */, titleView.getPaddingTop(),
+                        0 /* right */, titleView.getPaddingBottom());
                 final TextView titleText = (TextView) titleView.findViewById(android.R.id.title);
-                titleText.setText(userInfo.isManagedProfile() ? R.string.category_work
-                        : R.string.category_personal);
+
+                DevicePolicyManager devicePolicyManager =
+                        context.getSystemService(DevicePolicyManager.class);
+
+                if (userInfo.isManagedProfile()) {
+                    titleText.setText(devicePolicyManager.getResources().getString(
+                            WORK_CATEGORY_HEADER, () -> getString(R.string.category_work)));
+                } else {
+                    titleText.setText(devicePolicyManager.getResources().getString(
+                            PERSONAL_CATEGORY_HEADER, () -> getString(R.string.category_personal)));
+                }
                 contents.addView(titleView);
             }
 

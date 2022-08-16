@@ -17,46 +17,55 @@
 package com.android.settings.notification;
 
 import android.content.Context;
+import android.media.AudioDeviceAttributes;
+import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
 import android.media.Spatializer;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
- * The controller of the Spatial audio setting in the SoundSettings.
+ * The controller of the Spatial audio setting for speaker in the SoundSettings.
  */
 public class SpatialAudioPreferenceController extends TogglePreferenceController {
 
-    private static final String KEY_SPATIAL_AUDIO = "spatial_audio";
-
     private final Spatializer mSpatializer;
+    @VisibleForTesting
+    final AudioDeviceAttributes mSpeaker = new AudioDeviceAttributes(
+            AudioDeviceAttributes.ROLE_OUTPUT, AudioDeviceInfo.TYPE_BUILTIN_SPEAKER, ""
+    );
 
-    public SpatialAudioPreferenceController(Context context) {
-        super(context, KEY_SPATIAL_AUDIO);
+    public SpatialAudioPreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
         AudioManager audioManager = context.getSystemService(AudioManager.class);
         mSpatializer = audioManager.getSpatializer();
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return mSpatializer.getImmersiveAudioLevel() == Spatializer.SPATIALIZER_IMMERSIVE_LEVEL_NONE
-                ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
+        return mSpatializer.isAvailableForDevice(mSpeaker) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
     public boolean isChecked() {
-        return mSpatializer.isEnabled();
+        return mSpatializer.getCompatibleAudioDevices().contains(mSpeaker);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mSpatializer.setEnabled(isChecked);
+        if (isChecked) {
+            mSpatializer.addCompatibleAudioDevice(mSpeaker);
+        } else {
+            mSpatializer.removeCompatibleAudioDevice(mSpeaker);
+        }
         return isChecked == isChecked();
     }
 
     @Override
     public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_notifications;
+        return R.string.menu_key_sound;
     }
 }

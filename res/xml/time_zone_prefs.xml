@@ -20,6 +20,7 @@
     android:title="@string/date_time_set_timezone">
 
     <PreferenceCategory
+        android:layout="@layout/preference_category_no_label"
         android:key="time_zone_region_preference_category">
         <com.android.settingslib.RestrictedPreference
             android:key="region"
@@ -35,6 +36,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:layout="@layout/preference_category_no_label"
         android:key="time_zone_fixed_offset_preference_category">
         <com.android.settingslib.RestrictedPreference
             android:key="fixed_offset"

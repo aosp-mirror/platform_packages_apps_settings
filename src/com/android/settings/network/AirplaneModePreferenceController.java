@@ -17,6 +17,7 @@ package com.android.settings.network;
 
 import static android.provider.SettingsSlicesContract.KEY_AIRPLANE_MODE;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -54,7 +55,6 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath(SettingsSlicesContract.KEY_AIRPLANE_MODE)
             .build();
-    private static final String EXIT_ECM_RESULT = "exit_ecm_result";
 
     private Fragment mFragment;
     private AirplaneModeEnabler mAirplaneModeEnabler;
@@ -147,7 +147,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_EXIT_ECM) {
-            final boolean isChoiceYes = data.getBooleanExtra(EXIT_ECM_RESULT, false);
+            final boolean isChoiceYes = (resultCode == Activity.RESULT_OK);
             // Set Airplane mode based on the return value and checkbox state
             mAirplaneModeEnabler.setAirplaneModeInECM(isChoiceYes,
                     mAirplaneModePreference.isChecked());

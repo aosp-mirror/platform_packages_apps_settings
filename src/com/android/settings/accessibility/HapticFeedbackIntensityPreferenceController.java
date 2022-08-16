@@ -16,30 +16,72 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
 import android.content.Context;
+import android.os.VibrationAttributes;
+import android.os.Vibrator;
 import android.provider.Settings;
 
-import androidx.annotation.VisibleForTesting;
-
+/** Preference controller for haptic feedback intensity */
 public class HapticFeedbackIntensityPreferenceController
         extends VibrationIntensityPreferenceController {
 
-    @VisibleForTesting
-    static final String PREF_KEY = "touch_vibration_preference_screen";
+    /** General configuration for haptic feedback intensity settings. */
+    public static final class HapticFeedbackVibrationPreferenceConfig
+            extends VibrationPreferenceConfig {
 
-    public HapticFeedbackIntensityPreferenceController(Context context) {
-        super(context, PREF_KEY, Settings.System.HAPTIC_FEEDBACK_INTENSITY,
-                Settings.System.HAPTIC_FEEDBACK_ENABLED);
+        public HapticFeedbackVibrationPreferenceConfig(Context context) {
+            super(context, Settings.System.HAPTIC_FEEDBACK_INTENSITY,
+                    VibrationAttributes.USAGE_TOUCH);
+        }
+
+        @Override
+        public int readIntensity() {
+            final int hapticFeedbackEnabled = Settings.System.getInt(mContentResolver,
+                    Settings.System.HAPTIC_FEEDBACK_ENABLED, ON);
+
+            if (hapticFeedbackEnabled == OFF) {
+                // HAPTIC_FEEDBACK_ENABLED is deprecated but should still be applied if the user has
+                // turned it off already.
+                return Vibrator.VIBRATION_INTENSITY_OFF;
+            }
+
+            return super.readIntensity();
+        }
+
+        @Override
+        public boolean updateIntensity(int intensity) {
+            final boolean success = super.updateIntensity(intensity);
+            final boolean isIntensityOff = intensity == Vibrator.VIBRATION_INTENSITY_OFF;
+
+            Settings.System.putInt(mContentResolver, Settings.System.HAPTIC_FEEDBACK_ENABLED,
+                    isIntensityOff ? OFF : ON);
+            // HAPTIC_FEEDBACK_ENABLED is deprecated but should still reflect the intensity setting.
+
+            // HARDWARE_HAPTIC_FEEDBACK_INTENSITY is dependent on this setting, but should not be
+            // disabled by it.
+            Settings.System.putInt(mContentResolver,
+                    Settings.System.HARDWARE_HAPTIC_FEEDBACK_INTENSITY,
+                    isIntensityOff ? getDefaultIntensity() : intensity);
+
+            return success;
+        }
+    }
+
+    public HapticFeedbackIntensityPreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey, new HapticFeedbackVibrationPreferenceConfig(context));
+    }
+
+    protected HapticFeedbackIntensityPreferenceController(Context context, String preferenceKey,
+            int supportedIntensityLevels) {
+        super(context, preferenceKey, new HapticFeedbackVibrationPreferenceConfig(context),
+                supportedIntensityLevels);
     }
 
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
     }
-
-    @Override
-    protected int getDefaultIntensity() {
-        return mVibrator.getDefaultHapticFeedbackIntensity();
-    }
-
 }

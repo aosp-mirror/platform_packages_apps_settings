@@ -17,116 +17,124 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
-import android.database.ContentObserver;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.Vibrator;
-import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SliderPreferenceController;
+import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
-public abstract class VibrationIntensityPreferenceController extends BasePreferenceController
+/**
+ * Abstract preference controller for a vibration intensity setting, that displays multiple
+ * intensity levels to the user as a slider.
+ */
+public abstract class VibrationIntensityPreferenceController extends SliderPreferenceController
         implements LifecycleObserver, OnStart, OnStop {
 
-    protected final Vibrator mVibrator;
-    private final SettingObserver mSettingsContentObserver;
-    private final String mSettingKey;
-    private final String mEnabledKey;
-    private final boolean mSupportRampingRinger;
+    protected final VibrationPreferenceConfig mPreferenceConfig;
+    private final VibrationPreferenceConfig.SettingObserver mSettingsContentObserver;
+    private final int mMaxIntensity;
 
-    private Preference mPreference;
-
-    public VibrationIntensityPreferenceController(Context context, String prefkey,
-            String settingKey, String enabledKey, boolean supportRampingRinger) {
-        super(context, prefkey);
-        mVibrator = mContext.getSystemService(Vibrator.class);
-        mSettingKey = settingKey;
-        mEnabledKey = enabledKey;
-        mSupportRampingRinger= supportRampingRinger;
-        mSettingsContentObserver = new SettingObserver(settingKey) {
-            @Override
-            public void onChange(boolean selfChange, Uri uri) {
-                updateState(mPreference);
-            }
-        };
+    protected VibrationIntensityPreferenceController(Context context, String prefkey,
+            VibrationPreferenceConfig preferenceConfig) {
+        this(context, prefkey, preferenceConfig,
+                context.getResources().getInteger(
+                        R.integer.config_vibration_supported_intensity_levels));
     }
 
-    public VibrationIntensityPreferenceController(Context context, String prefkey,
-            String settingKey, String enabledKey) {
-        this(context, prefkey, settingKey, enabledKey, /* supportRampingRinger= */ false);
+    protected VibrationIntensityPreferenceController(Context context, String prefkey,
+            VibrationPreferenceConfig preferenceConfig, int supportedIntensityLevels) {
+        super(context, prefkey);
+        mPreferenceConfig = preferenceConfig;
+        mSettingsContentObserver = new VibrationPreferenceConfig.SettingObserver(
+                preferenceConfig);
+        mMaxIntensity = Math.min(Vibrator.VIBRATION_INTENSITY_HIGH, supportedIntensityLevels);
     }
 
     @Override
     public void onStart() {
-        mContext.getContentResolver().registerContentObserver(
-                mSettingsContentObserver.uri,
-                false /* notifyForDescendants */,
-                mSettingsContentObserver);
+        mSettingsContentObserver.register(mContext);
     }
 
     @Override
     public void onStop() {
-        mContext.getContentResolver().unregisterContentObserver(mSettingsContentObserver);
+        mSettingsContentObserver.unregister(mContext);
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(getPreferenceKey());
+        final SeekBarPreference preference = screen.findPreference(getPreferenceKey());
+        mSettingsContentObserver.onDisplayPreference(this, preference);
+        preference.setEnabled(mPreferenceConfig.isPreferenceEnabled());
+        preference.setSummaryProvider(unused -> mPreferenceConfig.getSummary());
+        preference.setMin(getMin());
+        preference.setMax(getMax());
+        // Haptics previews played by the Settings app don't bypass user settings to be played.
+        // The sliders continuously updates the intensity value so the previews can apply them.
+        preference.setContinuousUpdates(true);
     }
 
     @Override
-    public CharSequence getSummary() {
-        final int intensity = Settings.System.getInt(mContext.getContentResolver(),
-                mSettingKey, getDefaultIntensity());
-        final boolean enabled = (Settings.System.getInt(mContext.getContentResolver(),
-                mEnabledKey, 1) == 1) ||
-                (mSupportRampingRinger && AccessibilitySettings.isRampingRingerEnabled(mContext));
-        return getIntensityString(mContext, enabled ? intensity : Vibrator.VIBRATION_INTENSITY_OFF);
-    }
-
-    public static CharSequence getIntensityString(Context context, int intensity) {
-        final boolean supportsMultipleIntensities = context.getResources().getBoolean(
-                R.bool.config_vibration_supports_multiple_intensities);
-        if (supportsMultipleIntensities) {
-            switch (intensity) {
-                case Vibrator.VIBRATION_INTENSITY_OFF:
-                    return context.getString(R.string.accessibility_vibration_intensity_off);
-                case Vibrator.VIBRATION_INTENSITY_LOW:
-                    return context.getString(R.string.accessibility_vibration_intensity_low);
-                case Vibrator.VIBRATION_INTENSITY_MEDIUM:
-                    return context.getString(R.string.accessibility_vibration_intensity_medium);
-                case Vibrator.VIBRATION_INTENSITY_HIGH:
-                    return context.getString(R.string.accessibility_vibration_intensity_high);
-                default:
-                    return "";
-            }
-        } else {
-            if (intensity == Vibrator.VIBRATION_INTENSITY_OFF) {
-                return context.getString(R.string.switch_off_text);
-            } else {
-                return context.getString(R.string.switch_on_text);
-            }
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (preference != null) {
+            preference.setEnabled(mPreferenceConfig.isPreferenceEnabled());
         }
     }
 
-    protected abstract int getDefaultIntensity();
+    @Override
+    public int getMin() {
+        return Vibrator.VIBRATION_INTENSITY_OFF;
+    }
 
-    private static class SettingObserver extends ContentObserver {
+    @Override
+    public int getMax() {
+        return mMaxIntensity;
+    }
 
-        public final Uri uri;
-
-        public SettingObserver(String settingKey) {
-            super(new Handler(Looper.getMainLooper()));
-            uri = Settings.System.getUriFor(settingKey);
+    @Override
+    public int getSliderPosition() {
+        if (!mPreferenceConfig.isPreferenceEnabled()) {
+            return getMin();
         }
+        final int position = mPreferenceConfig.readIntensity();
+        return Math.min(position, getMax());
+    }
+
+    @Override
+    public boolean setSliderPosition(int position) {
+        if (!mPreferenceConfig.isPreferenceEnabled()) {
+            // Ignore slider updates when the preference is disabled.
+            return false;
+        }
+        final int intensity = calculateVibrationIntensity(position);
+        final boolean success = mPreferenceConfig.updateIntensity(intensity);
+
+        if (success && (position != Vibrator.VIBRATION_INTENSITY_OFF)) {
+            mPreferenceConfig.playVibrationPreview();
+        }
+
+        return success;
+    }
+
+    private int calculateVibrationIntensity(int position) {
+        int maxPosition = getMax();
+        if (position >= maxPosition) {
+            if (maxPosition == 1) {
+                // If there is only one intensity available besides OFF, then use the device default
+                // intensity to ensure no scaling will ever happen in the platform.
+                return mPreferenceConfig.getDefaultIntensity();
+            }
+            // If the settings granularity is lower than the platform's then map the max position to
+            // the highest vibration intensity, skipping intermediate values in the scale.
+            return Vibrator.VIBRATION_INTENSITY_HIGH;
+        }
+        return position;
     }
 }

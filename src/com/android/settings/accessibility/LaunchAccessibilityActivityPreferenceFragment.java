@@ -41,6 +41,7 @@ import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.util.ArrayList;
@@ -51,6 +52,7 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
     private static final String TAG = "LaunchA11yActivity";
     private static final String EMPTY_STRING = "";
     protected static final String KEY_LAUNCH_PREFERENCE = "launch_preference";
+    private ComponentName mTileComponentName;
 
     @Override
     public int getMetricsCategory() {
@@ -106,12 +108,42 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
                 AccessibilitySettings.EXTRA_SETTINGS_TITLE);
         mSettingsIntent = TextUtils.isEmpty(settingsTitle) ? null : getSettingsIntent(arguments);
         mSettingsTitle = (mSettingsIntent == null) ? null : settingsTitle;
+
+        // Tile service.
+        if (arguments.containsKey(AccessibilitySettings.EXTRA_TILE_SERVICE_COMPONENT_NAME)) {
+            final String tileServiceComponentName = arguments.getString(
+                    AccessibilitySettings.EXTRA_TILE_SERVICE_COMPONENT_NAME);
+            mTileComponentName = ComponentName.unflattenFromString(tileServiceComponentName);
+        }
     }
 
     @Override
     int getUserShortcutTypes() {
         return AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
                 mComponentName);
+    }
+
+    @Override
+    ComponentName getTileComponentName() {
+        return mTileComponentName;
+    }
+
+    @Override
+    CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+        final ComponentName componentName = getTileComponentName();
+        if (componentName == null) {
+            return null;
+        }
+
+        final CharSequence tileName = loadTileLabel(getPrefContext(), componentName);
+        if (tileName == null) {
+            return null;
+        }
+
+        final int titleResId = type == QuickSettingsTooltipType.GUIDE_TO_EDIT
+                ? R.string.accessibility_service_qs_tooltip_content
+                : R.string.accessibility_service_auto_added_qs_tooltip_content;
+        return getString(titleResId, tileName);
     }
 
     @Override

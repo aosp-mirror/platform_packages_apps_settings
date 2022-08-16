@@ -22,10 +22,12 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
@@ -70,6 +72,8 @@ public class ThemePreferenceControllerTest {
     public void setUp() throws NameNotFoundException {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest();
+        doReturn(mock(DevicePolicyManager.class)).when(mContext)
+                .getSystemService(Context.DEVICE_POLICY_SERVICE);
         when(mPackageManager.getApplicationInfo(any(), anyInt())).thenReturn(mApplicationInfo);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mContext.getString(R.string.default_theme))

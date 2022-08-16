@@ -33,6 +33,11 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class BluetoothFeatureProviderImplTest {
     private static final String SETTINGS_URI = "content://test.provider/settings_uri";
+    private static final String CONTROL_METADATA =
+            "<HEARABLE_CONTROL_SLICE_WITH_WIDTH>" + SETTINGS_URI
+                    + "</HEARABLE_CONTROL_SLICE_WITH_WIDTH>";
+    private static final int METADATA_FAST_PAIR_CUSTOMIZED_FIELDS = 25;
+
     private BluetoothFeatureProvider mBluetoothFeatureProvider;
 
     @Mock
@@ -53,5 +58,14 @@ public class BluetoothFeatureProviderImplTest {
                 SETTINGS_URI.getBytes());
         final Uri uri = mBluetoothFeatureProvider.getBluetoothDeviceSettingsUri(mBluetoothDevice);
         assertThat(uri.toString()).isEqualTo(SETTINGS_URI);
+    }
+
+    @Test
+    public void getBluetoothDeviceControlUri_returnsCorrectUri() {
+        when(mBluetoothDevice.getMetadata(METADATA_FAST_PAIR_CUSTOMIZED_FIELDS)).thenReturn(
+                CONTROL_METADATA.getBytes());
+        assertThat(
+                mBluetoothFeatureProvider.getBluetoothDeviceControlUri(mBluetoothDevice)).isEqualTo(
+                SETTINGS_URI);
     }
 }

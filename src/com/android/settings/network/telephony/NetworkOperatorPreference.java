@@ -36,6 +36,7 @@ import android.telephony.CellInfoWcdma;
 import android.telephony.CellSignalStrength;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.internal.telephony.OperatorInfo;
@@ -89,7 +90,8 @@ public class NetworkOperatorPreference extends Preference {
         updateCell(cellinfo, CellInfoUtil.getCellIdentity(cellinfo));
     }
 
-    private void updateCell(CellInfo cellinfo, CellIdentity cellId) {
+    @VisibleForTesting
+    protected void updateCell(CellInfo cellinfo, CellIdentity cellId) {
         mCellInfo = cellinfo;
         mCellId = cellId;
         refresh();

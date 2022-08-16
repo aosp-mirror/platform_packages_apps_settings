@@ -110,6 +110,18 @@
         <item>@string/dark_ui_auto_mode_auto</item>
     </string-array>
 
+    <!-- Dark theme scheduling preferences  [CHAR LIMIT=NONE] -->
+    <string-array name="dark_ui_scheduler_with_bedtime_preference_titles">
+        <!-- 0: None -->
+        <item>@string/dark_ui_auto_mode_never</item>
+        <!-- 1: Custom -->
+        <item>@string/dark_ui_auto_mode_custom</item>
+        <!-- 2: Auto -->
+        <item>@string/dark_ui_auto_mode_auto</item>
+        <!-- 3: Bedtime -->
+        <item>@string/dark_ui_auto_mode_custom_bedtime</item>
+    </string-array>
+
     <!-- Security settings.  The delay after screen is turned off until device locks.
          These are shown in a list dialog. -->
     <string-array name="lock_after_timeout_entries">
@@ -804,18 +816,9 @@
     <string-array name="captioning_font_size_selector_titles">
         <item>Very small</item>
         <item>Small</item>
-        <item>Default</item>
+        <item>Medium</item>
         <item>Large</item>
         <item>Very large</item>
-    </string-array>
-
-    <!-- Summary for Captions settings, explaining important settings under it. [CHAR LIMIT=NONE] -->
-    <string-array name="captioning_font_size_selector_summaries">
-        <item>Very small text size</item>
-        <item>Small text size</item>
-        <item>Default text size</item>
-        <item>Large text size</item>
-        <item>Very large text size</item>
     </string-array>
 
     <!-- Values for captioning font size preference. -->
@@ -1217,14 +1220,12 @@
         <item>@string/screensaver_settings_summary_sleep</item>
         <item>@string/screensaver_settings_summary_dock</item>
         <item>@string/screensaver_settings_summary_either_long</item>
-        <item>@string/screensaver_settings_summary_never</item>
     </string-array>
 
     <string-array name="when_to_start_screensaver_values" translatable="false">
         <item>while_charging_only</item>
         <item>while_docked_only</item>
         <item>either_charging_or_docked</item>
-        <item>never</item>
     </string-array>
 
     <string-array name="zen_mode_contacts_messages_entries" translatable="false">
@@ -1595,5 +1596,58 @@
         <item>1</item>
         <item>2</item>
         <item>4</item>
+    </string-array>
+
+    <!-- All the preference when the open app supports TapPay -->
+    <string-array name="nfc_payment_favor">
+        <item>Always</item>
+        <item>Except when another payment app is open</item>
+    </string-array>
+    <!-- All the values of the preference when the open app supports TapPay -->
+    <string-array name="nfc_payment_favor_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- Setting entries for timing out to user 0 when docked. -->
+    <string-array name="switch_to_user_zero_when_docked_timeout_entries">
+        <item>Never</item>
+        <item>After 1 minute</item>
+        <item>After 5 minutes</item>
+    </string-array>
+
+    <!-- Setting values for timing out to user 0 when docked. [DO NOT TRANSLATE] -->
+    <string-array name="switch_to_user_zero_when_docked_timeout_values" translatable="false">
+        <!-- Never -->
+        <item>0</item>
+        <!-- 1 minute -->
+        <item>60000</item>
+        <!-- 5 minutes -->
+        <item>300000</item>
+    </string-array>
+
+    <!-- Developer settings: ingress rate limit entries. [DO NOT TRANSLATE] -->
+    <string-array name="ingress_rate_limit_entries">
+        <item>@string/ingress_rate_limit_no_limit_entry</item>
+        <item>128kbps</item>
+        <item>256kbps</item>
+        <item>1Mbps</item>
+        <item>5Mbps</item>
+        <item>15Mbps</item>
+    </string-array>
+
+    <!-- Developer settings: ingress rate limit values. [DO NOT TRANSLATE] -->
+    <string-array name="ingress_rate_limit_values">
+        <item>-1</item> <!-- -1 codes for disabled -->
+        <item>16000</item> <!-- 128kbps == 16000B/s -->
+        <item>32000</item> <!-- 256kbps == 32000B/s -->
+        <item>125000</item> <!-- 1Mbps == 125000B/s -->
+        <item>625000</item> <!-- 5Mbps == 625000/s -->
+        <item>1875000</item> <!-- 15Mbps == 1875000/s -->
+    </string-array>
+
+    <!-- An allowlist which packages won't show summary in battery usage screen.
+         [CHAR LIMIT=NONE] -->
+    <string-array name="allowlist_hide_summary_in_battery_usage" translatable="false">
     </string-array>
 </resources>

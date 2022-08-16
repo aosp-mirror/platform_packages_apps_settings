@@ -27,6 +27,7 @@ import android.util.Log;
 import androidx.annotation.XmlRes;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.jank.InteractionJankMonitor;
@@ -34,6 +35,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.survey.SurveyMixin;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.core.instrumentation.SettingsJankMonitor;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 
@@ -44,7 +46,6 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
         implements Instrumentable {
 
     private static final String TAG = "InstrumentedPrefFrag";
-
 
     protected MetricsFeatureProvider mMetricsFeatureProvider;
 
@@ -63,6 +64,19 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
         getSettingsLifecycle().addObserver(mVisibilityLoggerMixin);
         getSettingsLifecycle().addObserver(new SurveyMixin(this, getClass().getSimpleName()));
         super.onAttach(context);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Override the OnPreferenceTreeClickListener in super.onStart() to inject jank detection.
+        getPreferenceManager().setOnPreferenceTreeClickListener((preference) -> {
+            if (preference instanceof SwitchPreference) {
+                SettingsJankMonitor.detectSwitchPreferenceClickJank(
+                        getListView(), (SwitchPreference) preference);
+            }
+            return onPreferenceTreeClick(preference);
+        });
     }
 
     @Override
