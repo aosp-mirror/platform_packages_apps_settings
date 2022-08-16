@@ -62,13 +62,14 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
             finish();
             return;
         }
-        int uid = getIntent().getIntExtra(AppInfoBase.ARG_PACKAGE_UID, -1);
-        if (uid == -1) {
-            Log.w(TAG, "Unexpected user id");
-            finish();
+        mContextAsUser = this;
+        if (getIntent().hasExtra(AppInfoBase.ARG_PACKAGE_UID)) {
+            int userId = getIntent().getIntExtra(AppInfoBase.ARG_PACKAGE_UID, -1);
+            if (userId != -1) {
+                UserHandle userHandle = UserHandle.getUserHandleForUid(userId);
+                mContextAsUser = createContextAsUser(userHandle, 0);
+            }
         }
-        UserHandle userHandle = UserHandle.getUserHandleForUid(uid);
-        mContextAsUser = createContextAsUser(userHandle, 0);
 
         setTitle(R.string.app_locale_picker_title);
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -79,7 +80,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
                 false /* translate only */,
                 mPackageName,
                 this);
-        mAppLocaleDetails = AppLocaleDetails.newInstance(mPackageName);
+        mAppLocaleDetails = AppLocaleDetails.newInstance(mPackageName, mContextAsUser.getUserId());
         mAppLocaleDetailContainer = launchAppLocaleDetailsPage();
         // Launch Locale picker part.
         launchLocalePickerPage();

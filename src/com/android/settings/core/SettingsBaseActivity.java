@@ -15,6 +15,8 @@
  */
 package com.android.settings.core;
 
+import static android.text.Layout.HYPHENATION_FREQUENCY_NORMAL_FAST;
+
 import android.annotation.LayoutRes;
 import android.app.ActivityManager;
 import android.content.ComponentName;
@@ -106,6 +108,7 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             mAppBarLayout = findViewById(R.id.app_bar);
             if (mCollapsingToolbarLayout != null) {
                 mCollapsingToolbarLayout.setLineSpacingMultiplier(TOOLBAR_LINE_SPACING_MULTIPLIER);
+                mCollapsingToolbarLayout.setHyphenationFrequency(HYPHENATION_FREQUENCY_NORMAL_FAST);
             }
             disableCollapsingToolbarLayoutScrollingBehavior();
         } else {

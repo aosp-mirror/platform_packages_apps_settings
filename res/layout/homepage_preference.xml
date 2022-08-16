@@ -62,6 +62,7 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceListItem"
+            android:hyphenationFrequency="normalFast"
             android:ellipsize="marquee"/>
 
         <TextView
@@ -75,6 +76,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="?android:attr/textColorSecondary"
             android:maxLines="4"
+            android:hyphenationFrequency="normalFast"
             style="@style/PreferenceSummaryTextStyle"/>
     </RelativeLayout>
 </LinearLayout>

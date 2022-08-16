@@ -227,8 +227,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Системные настройки по умолчанию"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Для этого приложения не поддерживается выбор языка в настройках."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Выбранный язык может быть недоступен в приложении. Некоторые приложения могут не поддерживать этот параметр."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Здесь показаны только приложения, которые поддерживают выбор языка."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Удалить выбранные языки?</item>
       <item quantity="few">Удалить выбранные языки?</item>
@@ -440,7 +439,7 @@
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Разблокировка по отпечатку"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Сканер отпечатков пальцев"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Используйте отпечаток пальца, чтобы разблокировать планшет или подтверждать свою личность, например для входа в приложения или одобрения покупок."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Используйте отпечаток пальца, чтобы разблокировать устройство или подтверждать свою личность, например для входа в приложения или одобрения покупок."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Используйте отпечаток пальца, чтобы снимать блокировку устройства или подтверждать свою личность, например для входа в приложения и одобрения покупок."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Используйте отпечаток пальца, чтобы разблокировать телефон или подтверждать свою личность, например для входа в приложения или одобрения покупок."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Разрешите ребенку использовать отпечаток пальца, чтобы разблокировать телефон и подтверждать личность, например для входа в приложения, одобрения покупок и не только."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Вы сами управляете данными"</string>
@@ -530,9 +529,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Так отпечаток пальца будет более точным"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Процент выполнения задачи по добавлению отпечатка пальца: <xliff:g id="PERCENTAGE">%d</xliff:g>."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Отпечаток добавлен"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Теперь вы можете использовать отпечаток пальца, чтобы разблокировать планшет или подтверждать свою личность для входа в приложения и других действий."</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Теперь вы можете использовать отпечаток пальца, чтобы разблокировать устройство или подтверждать свою личность для входа в приложения и других действий."</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Теперь вы можете использовать отпечаток пальца, чтобы разблокировать телефон или подтверждать свою личность для входа в приложения и других действий."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Чем чаще вы будете пользоваться разблокировкой по отпечатку пальца на планшете, тем лучше она будет работать."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Чем чаще вы будете пользоваться разблокировкой по отпечатку пальца на устройстве, тем лучше она будет работать."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Чем чаще вы будете пользоваться разблокировкой по отпечатку пальца на телефоне, тем лучше она будет работать."</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Не сейчас"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Поднимите палец и снова приложите его к сканеру"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Наклоните палец вбок, приложите к датчику и удерживайте. Затем наклоните палец в противоположную сторону и повторите действия."</string>
@@ -604,10 +603,8 @@
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Блокировка рабочего профиля, шифрование и прочее"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Шифрование, учетные данные и прочее"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"безопасность, дополнительные настройки безопасности, дополнительные настройки, расширенные настройки безопасности"</string>
-    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
-    <skip />
-    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
-    <skip />
+    <string name="privacy_advanced_settings" msgid="8828215456566937719">"Дополнительные настройки конфиденциальности"</string>
+    <string name="privacy_advanced_settings_summary" msgid="2927281894237561935">"Автозаполнение, отслеживание действий и прочее"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Максимальное количество отпечатков пальца, которые можно добавить: <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Вы уже добавили максимальное количество отпечатков"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Больше нельзя добавить отпечатки пальцев"</string>
@@ -760,7 +757,7 @@
       <item quantity="many">Пароль должен состоять не менее чем из <xliff:g id="COUNT_1">%d</xliff:g> символов.</item>
       <item quantity="other">Пароль должен состоять не менее чем из <xliff:g id="COUNT_1">%d</xliff:g> символа.</item>
     </plurals>
-    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Если пароль состоит целиком из чисел, его длина должна быть не менее 1 символа.}one{Если пароль состоит целиком из чисел, его длина должна быть не менее # символа.}few{Если пароль состоит целиком из чисел, его длина должна быть не менее # символов.}many{Если пароль состоит целиком из чисел, его длина должна быть не менее # символов.}other{Если пароль состоит целиком из чисел, его длина должна быть не менее # символа.}}"</string>
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Если пароль состоит целиком из цифр, его длина должна быть не менее 1 символа.}one{Если пароль состоит целиком из цифр, его длина должна быть не менее # символа.}few{Если пароль состоит целиком из цифр, его длина должна быть не менее # символов.}many{Если пароль состоит целиком из цифр, его длина должна быть не менее # символов.}other{Если пароль состоит целиком из цифр, его длина должна быть не менее # символа.}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="one">PIN-код должен состоять не менее чем из <xliff:g id="COUNT_1">%d</xliff:g> цифры.</item>
       <item quantity="few">PIN-код должен состоять не менее чем из <xliff:g id="COUNT_1">%d</xliff:g> цифр.</item>
@@ -1475,7 +1472,7 @@
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Главный экран, заблокированный экран"</string>
     <string name="wallpaper_settings_summary_default" msgid="7569803705735001813">"По умолчанию"</string>
     <string name="wallpaper_settings_summary_custom" msgid="3174561317688848729">"Пользовательские"</string>
-    <string name="wallpaper_suggestion_title" msgid="3812842717939877330">"Сменить обои"</string>
+    <string name="wallpaper_suggestion_title" msgid="3812842717939877330">"Обои"</string>
     <string name="wallpaper_suggestion_summary" msgid="9077061486716754784">"Выберите обои для экрана"</string>
     <string name="wallpaper_settings_fragment_title" msgid="8445963841717633149">"Установка обоев"</string>
     <string name="style_suggestion_title" msgid="1213747484782364775">"Настройка телефона"</string>
@@ -1910,10 +1907,10 @@
     <string name="location_app_level_permissions" msgid="907206607664629759">"Доступ приложений к геоданным"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Доступ к геоданным отключен"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
-      <item quantity="one"> Приложения с доступом к данным о местоположении: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> из <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
-      <item quantity="few"> Приложения с доступом к данным о местоположении: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> из <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
-      <item quantity="many"> Приложения с доступом к данным о местоположении: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> из <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
-      <item quantity="other"> Приложения с доступом к данным о местоположении: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> из <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
+      <item quantity="one"> Доступ к геоданным есть у <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> приложения из <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
+      <item quantity="few"> Доступ к геоданным есть у <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> приложений из <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
+      <item quantity="many"> Доступ к геоданным есть у <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> приложений из <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
+      <item quantity="other"> Доступ к геоданным есть у <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> приложения из <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
     </plurals>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"Доступ за последнее время"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"Показать все"</string>
@@ -2388,7 +2385,7 @@
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Увеличение с помощью кнопки и по тройному нажатию"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"О функции \"<xliff:g id="SERVICE">%1$s</xliff:g>\""</string>
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Масштаб экрана и текст"</string>
-    <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Настройки отображения текста"</string>
+    <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Отображение текста"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Тема: Дизайн воздушного шара"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"От: Борис"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Доброе утро!\n\nКак дела с дизайном? Он будет готов до того, как мы начнем разработку новых шаров?"</string>
@@ -3542,10 +3539,8 @@
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Изменить PIN-код"</string>
     <string name="help_label" msgid="2896538416436125883">"Справка/отзыв"</string>
     <string name="support_summary" product="default" msgid="6137136608018134563">"Справочные статьи, поддержка по телефону и в чате"</string>
-    <!-- no translation found for support_summary (6681247727996378252) -->
-    <skip />
-    <!-- no translation found for support_summary (1690554254039752541) -->
-    <skip />
+    <string name="support_summary" product="tablet" msgid="6681247727996378252">"Справочные статьи, помощь на планшете и в чате"</string>
+    <string name="support_summary" product="device" msgid="1690554254039752541">"Справочные статьи, помощь на устройстве и в чате"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Аккаунт для контента"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Документ с фото"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Серьезные угрозы"</string>
@@ -3818,10 +3813,12 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Автоматически добавлять субтитры"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Встроенный динамик"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Проводные наушники"</string>
-    <string name="spatial_audio_text" msgid="3273982964342449273">"Пространственное звучание создает эффект погружения. Поддерживается не для всего медиаконтента."</string>
+    <string name="spatial_audio_text" msgid="8201387855375146000">"Звук из поддерживаемых источников становится более выразительным"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Отключено"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Включено/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Включено/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> и <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
+    <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Функцию пространственного звучания можно также включить для устройств Bluetooth."</string>
+    <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Настройки подключенных устройств"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Нет настроенных расписаний}=1{Настроено 1 расписание}one{Настроено # расписание}few{Настроено # расписания}many{Настроено # расписаний}other{Настроено # расписания}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Не беспокоить"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Получать уведомления только от важных людей и приложений."</string>
@@ -3942,8 +3939,7 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Управление уведомлениями отдельных приложений"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Общие"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Рабочие уведомления"</string>
-    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
-    <skip />
+    <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"Рабочий профиль"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"Адаптивные уведомления"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Приоритет адаптивных уведомлений"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Автоматически назначать беззвучный режим для уведомлений с низким приоритетом"</string>
@@ -4805,7 +4801,7 @@
     <string name="users_summary" msgid="8473589474976307510">"Вы вошли как <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="5513009140568552693">"По умолчанию: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="backup_disabled" msgid="4503062265560959320">"Резервное копирование отключено"</string>
-    <string name="android_version_summary" msgid="7818952662015042768">"Обновлено до Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
+    <string name="android_version_summary" msgid="7818952662015042768">"Система обновлена до Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"Доступно обновление"</string>
     <string name="disabled_by_policy_title" msgid="3635622338687810583">"Заблокировано вашим администратором"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"Невозможно изменить громкость"</string>
@@ -5009,7 +5005,7 @@
     <string name="special_access_more" msgid="132919514147475846">"Ещё"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Сброс счетчиков ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"Готово"</string>
-    <string name="notification_suggestion_title" msgid="6309263655965785411">"Выберите параметры для информации на заблоки­­рованном экране"</string>
+    <string name="notification_suggestion_title" msgid="6309263655965785411">"Настройка экрана блокировки"</string>
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Скрыть или показать содержание уведомлений"</string>
     <string name="page_tab_title_summary" msgid="7188875610123234454">"Все"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Помощь и советы"</string>
@@ -5026,8 +5022,6 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Временно отключено из-за режима энергосбережения"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Выкл. энергосбережение"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Временно включена из-за режима энергосбережения"</string>
-    <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Приложения, которые поддерживают эту функцию, также переключатся на тёмную тему."</string>
-    <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"ОК"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"Тёмная тема"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Продлить время работы от батареи"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Элементы в быстрых настройках"</string>
@@ -5239,25 +5233,25 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Приложению \"<xliff:g id="APP_NAME">%s</xliff:g>\" разрешен доступ к настройкам."</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"В целях безопасности доступ к этой функции пока ограничен."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Информация о купленном в кредит устройстве"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"Кредитор может изменять настройки устройства и устанавливать на него ПО.\n\nЕсли вы пропустите платеж, ваше устройство будет заблокировано.\n\nЗа дополнительной информацией обращайтесь к кредитору."</string>
+    <string name="financed_privacy_intro" msgid="5458393846604867947">"Ваша кредитная организация может изменять настройки устройства и устанавливать на него ПО.\n\nЕсли вы пропустите платеж, ваше устройство будет заблокировано.\n\nЗа дополнительной информацией обращайтесь в кредитную организацию."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Если устройство приобретено в кредит, вы не можете:"</string>
-    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Устанавливать сторонние приложения (не из Google Play)."</string>
-    <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Переводить устройство в безопасный режим."</string>
-    <string name="financed_privacy_multi_users" msgid="1727194928477613081">"Добавлять несколько пользователей на устройство."</string>
-    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"Изменять время, дату и часовой пояс на устройстве."</string>
-    <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Использовать режим разработчика."</string>
-    <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Ваш кредитор может:"</string>
-    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Получать доступ к IMEI-коду устройства."</string>
+    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Устанавливать сторонние приложения (не из Google Play)"</string>
+    <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Переводить устройство в безопасный режим"</string>
+    <string name="financed_privacy_multi_users" msgid="1727194928477613081">"Добавлять несколько пользователей на устройство"</string>
+    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"Изменять время, дату и часовой пояс на устройстве"</string>
+    <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Использовать режим разработчика"</string>
+    <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Ваша кредитная организация может:"</string>
+    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Получать доступ к IMEI-коду устройства"</string>
     <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"Сбрасывать настройки вашего устройства."</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Если устройство заблокировано, вы можете только:"</string>
-    <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Совершать экстренные вызовы."</string>
-    <string name="financed_privacy_system_info" msgid="4158031444108708927">"Просматривать системную информацию, такую как дата, время, статус сети и заряд батареи."</string>
-    <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"Включать и выключать устройство."</string>
-    <string name="financed_privacy_notifications" msgid="5932303271274089968">"Просматривать уведомления и SMS."</string>
-    <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Использовать приложения, разрешенные кредитором."</string>
-    <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Когда кредит будет погашен, вы сможете:"</string>
-    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Все ограничения на использование устройства сняты."</string>
-    <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Вы можете удалить приложение, установленное кредитором."</string>
+    <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Совершать экстренные вызовы"</string>
+    <string name="financed_privacy_system_info" msgid="4158031444108708927">"Просматривать системную информацию, такую как дата, время, статус сети и заряд батареи"</string>
+    <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"Включать и выключать устройство"</string>
+    <string name="financed_privacy_notifications" msgid="5932303271274089968">"Просматривать уведомления и SMS"</string>
+    <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Использовать приложения, разрешенные кредитной организацией"</string>
+    <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Когда кредит будет погашен:"</string>
+    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Все ограничения на использование устройства будут сняты"</string>
+    <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Вы сможете удалить приложение кредитной организации"</string>
     <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
       <item quantity="one">Камеры</item>
       <item quantity="few">Камеры</item>
@@ -5791,7 +5785,7 @@
     <string name="networks_available" msgid="3299512933684383474">"Доступные сети"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Чтобы переключиться между сетями, отключите кабель Ethernet"</string>
     <string name="wifi_is_off" msgid="8308136482502734453">"Wi-Fi отключен"</string>
-    <string name="tap_a_network_to_connect" msgid="8044777400224037875">"Выберите сеть, чтобы подключиться"</string>
+    <string name="tap_a_network_to_connect" msgid="8044777400224037875">"Чтобы подключиться к сети, нажмите на ее название"</string>
     <string name="carrier_wifi_offload_title" msgid="7263365988016247722">"Подключения к сети W+"</string>
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Разрешить Google Fi использовать сети W+ для улучшения скорости и покрытия"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Сеть W+"</string>
@@ -5804,10 +5798,8 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"Звонки"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"Мобильный интернет"</string>
-    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
-    <skip />
-    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Чтобы улучшать работу устройства (например, для более точного определения вашего местоположения), приложения и сервисы могут искать беспроводные сети в любое время, даже если вы отключили Wi‑Fi. Запретить это можно в настройках поиска сетей Wi-Fi."</string>
+    <string name="wifi_scan_change" msgid="8438320311511852918">"Изменить настройки"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Подключено"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Нет подключения"</string>
@@ -5950,7 +5942,7 @@
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Перезагрузить сейчас"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Перезагрузить позже"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Пространственное звучание"</string>
-    <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Звук с совместимых медиаустройств становится более выразительным."</string>
+    <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Звук из поддерживаемых источников становится более выразительным"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Отслеживание движений головы"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Звук меняется, когда вы двигаете головой, и становится более естественным."</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Ограничение скорости скачивания"</string>
@@ -5969,8 +5961,6 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Введите пароль"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Не удалось подключиться. Повторите попытку."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Пароль указан неверно."</string>
-    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
-    <skip />
-    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
-    <skip />
+    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Чтобы прослушать аудио, поместите QR-код в центр."</string>
+    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Недопустимый формат QR-кода."</string>
 </resources>

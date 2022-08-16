@@ -29,7 +29,6 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -59,8 +58,6 @@ public class OpenNetworkSelectPagePreferenceControllerTest {
     private ServiceState mServiceState;
     @Mock
     private SubscriptionInfo mSubscriptionInfo;
-    @Mock
-    private Lifecycle mLifecycle;
 
     private PersistableBundle mCarrierConfig;
     private OpenNetworkSelectPagePreferenceController mController;
@@ -99,7 +96,7 @@ public class OpenNetworkSelectPagePreferenceControllerTest {
                 super.updateState(mPreference);
             }
         };
-        mController.init(mLifecycle, SUB_ID);
+        mController.init(SUB_ID);
     }
 
     @Test

@@ -274,8 +274,12 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         String result = mSubsPrefCtrlInjector.getNetworkType(
                 mContext, mConfig, mTelephonyDisplayInfo, subId, isCarrierNetworkActive);
         if (mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext) || isCarrierNetworkActive) {
-            result = mContext.getString(R.string.preference_summary_default_combination,
-                    mContext.getString(R.string.mobile_data_connection_active), result);
+            if (result.isEmpty()) {
+                result = mContext.getString(R.string.mobile_data_connection_active);
+            } else {
+                result = mContext.getString(R.string.preference_summary_default_combination,
+                        mContext.getString(R.string.mobile_data_connection_active), result);
+            }
         } else if (!isDataInService) {
             result = mContext.getString(R.string.mobile_data_no_connection);
         }

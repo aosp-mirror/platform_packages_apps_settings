@@ -112,7 +112,7 @@ public class SeekBarPreferenceTest {
 
     @Test
     @Config(qualifiers = "mcc999")
-    public void isSelectable_selectableInXml_returnTrue() {
+    public void isSelectable_selectableInXml_returnFalse() {
         final PreferenceFragmentCompat fragment = FragmentController.of(new TestFragment(),
                 new Bundle())
                 .create()
@@ -122,7 +122,7 @@ public class SeekBarPreferenceTest {
 
         final SeekBarPreference seekBarPreference = fragment.findPreference("seek_bar");
 
-        assertThat(seekBarPreference.isSelectable()).isTrue();
+        assertThat(seekBarPreference.isSelectable()).isFalse();
     }
 
     @Test
