@@ -70,6 +70,10 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Teie seade katkestab ühenduse seadmega <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Uue seadme sidumine"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
+    <skip />
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Teise kõrva sidumine"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Teie vasakpoolne kuuldeaparaat on ühendatud.\n\nParempoolse sidumiseks veenduge, et see oleks sisse lülitatud ja sidumiseks valmis."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Teie parempoolne kuuldeaparaat on ühendatud.\n\nVasakpoolse sidumiseks veenduge, et see oleks sisse lülitatud ja sidumiseks valmis."</string>
@@ -1445,8 +1449,7 @@
     <string name="sim_enter_new" msgid="9010947802784561582">"SIM-kaardi uus PIN-kood"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Sisestage uus PIN-kood uuesti"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"SIM-kaardi PIN-kood"</string>
-    <!-- no translation found for sim_invalid_pin_hint (3376397829969578877) -->
-    <skip />
+    <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"Sisestage 4–8-numbriline PIN-kood"</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"PIN-koodid ei kattu"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"PIN-koodi ei saa muuta.\nPIN-kood võib vale olla."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"SIM-i PIN-koodi muutmine õnnestus"</string>
@@ -1572,13 +1575,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Ümbernimetamine"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Ühendamine"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Eemaldamine"</string>
-    <!-- no translation found for storage_menu_format (8903698999905354146) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_button (7623565190643699626) -->
-    <skip />
+    <string name="storage_menu_format" msgid="8903698999905354146">"SD-kaardi teisald. salvestusruumiks vormindamine"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Vorminda kaart"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Vormindamine kaasaskantavana"</string>
-    <!-- no translation found for storage_menu_format_option (4886059624052908432) -->
-    <skip />
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Vorminda"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Andmete üleviimine"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Unustamine"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Seadistus"</string>
@@ -1608,24 +1608,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Salvestusruumi ümbernimetamine"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Üksus <xliff:g id="NAME_0">^1</xliff:g> väljutati turvaliselt, kuid see on endiselt saadaval. \n\nÜksuse <xliff:g id="NAME_1">^1</xliff:g> kasutamiseks peate selle esmalt ühendama."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Üksus <xliff:g id="NAME_0">^1</xliff:g> on rikutud. \n\nÜksuse <xliff:g id="NAME_1">^1</xliff:g> kasutamiseks peate selle esmalt seadistama."</string>
-    <!-- no translation found for storage_internal_format_details (2399034372813686846) -->
-    <skip />
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Võite selle SD-kaardi vormindada, et salvestada fotosid, videoid, muusikat ja muud ning nendele teistes seadmetes juurde pääseda. \n\n"<b>"Kõik sellel SD-kaardil olevad andmed kustutatakse."</b>" \n\n"<b>"Enne vormindamist"</b>" \n\n"<b>"Varundage fotod ja muu meedia"</b>" \nTeisaldage oma meediafailid selle seadme muule salvestusruumile või kandke need USB-kaabli abil üle arvutisse. \n\n"<b>"Varundage rakendused"</b>" \n Kõik sellele meediumile (<xliff:g id="NAME">^1</xliff:g>) salvestatud rakendused desinstallitakse ja nende andmed kustutatakse. Rakenduste alleshoidmiseks teisaldage need selle seadme muule salvestusruumile."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Kui üksuse <xliff:g id="NAME_0">^1</xliff:g> eemaldate, lõpetavad sellesse salvestatud rakendused töö ja selles olevad meediafailid pole saadaval, kuni selle uuesti sisestate."</b>\n\n"Üksus <xliff:g id="NAME_1">^1</xliff:g> on vormindatud ainult selles seadmes töötamiseks. See ei tööta teistes seadmetes."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Seadmes <xliff:g id="NAME">^1</xliff:g> olevate rakenduste, fotode või andmete kasutamiseks sisestage see uuesti. \n\nKui seade pole saadaval, võite selle salvestusruumi ka unustada. \n\nKui otsustate selle unustada, kaotate kõik seadmes olevad andmed jäädavalt. \n\nSaate rakendused hiljem uuesti installida, kuid nende sellesse seadmesse salvestatud andmed lähevad kaotsi."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Kas unustada <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Kõik üksusele <xliff:g id="NAME">^1</xliff:g> salvestatud rakendused, fotod ja andmed kaovad jäädavalt."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Jaotis Süsteem hõlmab Androidi versiooni <xliff:g id="VERSION">%s</xliff:g> käitamiseks vajalikke faile"</string>
-    <!-- no translation found for storage_wizard_guest (5813419895687733649) -->
-    <skip />
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Külalisrež. kasutajad ei saa SD-kaarte vormindada"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Seadista üksus <xliff:g id="NAME">^1</xliff:g>"</string>
-    <!-- no translation found for storage_wizard_init_external_title (5304499882951772292) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_summary (5842588772292324473) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_title (8799676990387869411) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_summary (8224648610422581704) -->
-    <skip />
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Vorminda SD-kaart teisaldatavaks salvestusruumiks"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Salvestage fotosid, videoid, muusikat ja muud ning pääsege nendele muudes seadmetes juurde"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Vorminda SD-kaart sisemiseks salvestusruumiks"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Salvestage rakendusi ja meediat vaid selles telefonis kasutamiseks"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Vorminda sisem. salvestusruumina"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Üksuse <xliff:g id="NAME_0">^1</xliff:g> turvaliseks muutmiseks tuleb see vormindada. \n\nPärast vormindamist töötab üksus <xliff:g id="NAME_1">^1</xliff:g> ainult selles seadmes. \n\n"<b>"Vormindamisel kustutatakse kõik praegu üksusesse <xliff:g id="NAME_2">^1</xliff:g> salvestatud andmed."</b>" Andmete kaotamise vältimiseks kaaluge nende varundamist."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Vorm. kaasask. salvestusruumina"</string>
@@ -1642,12 +1636,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Teisalda"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Andmete teisaldamine …"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Teisaldamise ajal: \n• ärge eemaldage üksust <xliff:g id="NAME">^1</xliff:g>; \n• ei tööta mõned rakendused korralikult; \n• hoidke seadet laetuna."</string>
-    <!-- no translation found for storage_wizard_ready_title (3631022511474086605) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_external_body (4264787122605706421) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_internal_body (2416472979690681273) -->
-    <skip />
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> on vormindatud"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"<xliff:g id="NAME">^1</xliff:g> on kasutamiseks valmis"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"<xliff:g id="NAME">^1</xliff:g> on kasutamiseks valmis"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Teisalda rakendus <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Rakenduse <xliff:g id="APP">^1</xliff:g> ja selle andmete teisaldamine üksusesse <xliff:g id="NAME_0">^2</xliff:g> võtab vaid mõne hetke. Te ei saa rakendust kasutada enne, kui teisaldamine on lõpetatud. \n\nTeisaldamise ajal ärge eemaldage üksust <xliff:g id="NAME_1">^2</xliff:g>."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Andmete teisaldamiseks peate avama kasutaja <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1656,30 +1647,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Tühista teisaldamine"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Üksus <xliff:g id="NAME_0">^1</xliff:g> näib olevat aeglane. \n\nSaate jätkata, kuid sellesse asukohta teisaldatud rakendused võivad töötada katkendlikult ja andmete ülekandmine võib võtta kaua aega. \n\nParema toimivuse saavutamiseks kaaluge kiirema üksuse <xliff:g id="NAME_1">^1</xliff:g> kasutamist."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Kuidas seadet <xliff:g id="NAME">^1</xliff:g> kasutate?"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (1236154481658009267) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (3771689638403679317) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"SD-kaardi sisemiseks salvestusruumiks vormindamine"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Salvestage rakendusi ja meediat vaid selles tahvelarvutis kasutamiseks. &lt;a href=https://support.google.com/android/answer/12153449&gt;Lisateave SD-kaardi seadistamise kohta&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Vorminda"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"SD-kaardi sisemiseks salvestusruumiks vormindamine"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Salvestage rakendusi ja meediat vaid selles telefonis kasutamiseks. &lt;a href=https://support.google.com/android/answer/12153449&gt;Lisateave SD-kaardi seadistamise kohta&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Vorminda"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Või"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_title (2786416384217054112) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_summary (3867896101011977386) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_action (6140058734875839081) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"SD-kaardi teisald. salvestusruumiks vormindamine"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Salvestage fotosid, videoid, muusikat ja muud ning pääsege nendele teistes seadmetes juurde. &lt;a href=https://support.google.com/android/answer/12153449&gt;Lisateave SD-kaardi seadistamise kohta&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Vorminda"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Seadista hiljem"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Kas vormindada seade <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Seade <xliff:g id="NAME_0">^1</xliff:g> tuleb vormindada, et rakendusi, faile ja meediat salvestada. \n\nVormindamisel kustutatakse kogu seadmes <xliff:g id="NAME_1">^2</xliff:g> olev sisu. Sisu kaotsimineku vältimiseks varundage see teise salvestusseadmesse <xliff:g id="NAME_2">^3</xliff:g> või mõnda muusse seadmesse."</string>
-    <!-- no translation found for storage_wizard_format_confirm_v2_body_external (5810296966099830035) -->
-    <skip />
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"<xliff:g id="NAME_0">^1</xliff:g> tuleb fotode, videote, muusika ja muu salvestamiseks vormindada. \n\nVormindamisega kustutatakse meediumil <xliff:g id="NAME_1">^2</xliff:g> olemasolev sisu. Sisu kaotsimineku vältimiseks varundage see teisele meediumile (näiteks <xliff:g id="NAME_2">^3</xliff:g>) või mõnda muusse seadmesse."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Vorminda seade <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Kas teisaldada sisu seadmesse <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Failid, meedia ja teatud rakendused saab teisaldada seadmesse <xliff:g id="NAME">^1</xliff:g>. \n\nSellega vabastatakse <xliff:g id="SIZE">^2</xliff:g> teie tahvelarvuti salvestusruumist ja see võib võtta umbes <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1696,12 +1677,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Võite seadet <xliff:g id="NAME_0">^1</xliff:g> siiski kasutada, kuid see võib olla aeglane. \n\nSeadmesse <xliff:g id="NAME_1">^2</xliff:g> salvestatud rakendused ei pruugi õigesti töötada ja sisu teisaldamine võib kaua aega võtta. \n\nKasutage kiiremat seadet <xliff:g id="NAME_2">^3</xliff:g> või selle asemel seda seadet <xliff:g id="NAME_3">^4</xliff:g> kaasaskantava salvestusruumina."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Alusta uuesti"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Jätka"</string>
-    <!-- no translation found for storage_wizard_ready_v2_external_body (7688457485389886923) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_body (3520269956641115883) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (1163588718127651062) -->
-    <skip />
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"<xliff:g id="NAME">^1</xliff:g> on kasutamiseks valmis"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"<xliff:g id="NAME">^1</xliff:g> on kasutamiseks valmis"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"<xliff:g id="NAME">^1</xliff:g> on kasutamiseks valmis"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Aku olek"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Aku tase"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Pääsupunktid (APN-id)"</string>
@@ -2491,19 +2469,13 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Lisateave värviparanduse kohta"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Värvide ümberpööramise teave"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Lisateave värvide ümberpööramise kohta"</string>
-    <!-- no translation found for accessibility_captioning_primary_switch_title (3663677340286206100) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_primary_switch_summary (2544094070306830218) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_title (3128792092290011408) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_summary (4620682807315588019) -->
-    <skip />
+    <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Subtiitrite kuvamine"</string>
+    <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Ainult toetatud rakendustes"</string>
+    <string name="captioning_appearance_title" msgid="3128792092290011408">"Subtiitrite suurus ja stiil"</string>
+    <string name="captioning_appearance_summary" msgid="4620682807315588019">"<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g> teksti suurus"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Rohkem valikuid"</string>
-    <!-- no translation found for accessibility_captioning_preference_intro (8995427146374031134) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_preference_summary (8335768472978374255) -->
-    <skip />
+    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"Kohandage subtiitrite suurust ja stiili, et neid oleks lihtsam lugeda"</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"Kõik meediarakendused ei toeta neid subtiitrite eelistusi"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Juurdepääsetavuse nupp"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Kahe sõrmega alt üles pühkimine"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Helitugevuse klahvide allhoidmine"</string>
@@ -2864,14 +2836,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"aku taseme <xliff:g id="PERCENT">%1$s</xliff:g> juures"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Aku laetuse protsent"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Olekuribal kuvatakse aku laetuse protsent"</string>
-    <!-- no translation found for battery_usage_chart_graph_hint_last_full_charge (6570336408060566877) -->
-    <skip />
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Akutase pärast viimast täislaadimist"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Akutase viimase 24 h jooksul"</string>
-    <!-- no translation found for battery_app_usage (8976453608783133770) -->
-    <skip />
+    <string name="battery_app_usage" msgid="8976453608783133770">"Rakenduse kasutus pärast viimast täislaadimist"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Rakenduste kasutus viimase 24 h jooksul"</string>
-    <!-- no translation found for battery_system_usage (1395943945140097585) -->
-    <skip />
+    <string name="battery_system_usage" msgid="1395943945140097585">"Süsteemi kasutus pärast viimast täislaadimist"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Süsteemi kasutus viimase 24 h jooksul"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Süsteemi kasutus: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Rakenduse kasutus: <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -3413,10 +3382,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Rakendustel asukohateabe kasutamise lubamine"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Tagasi"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Järgmine"</string>
-    <!-- no translation found for wizard_back_portable (5315939180781404882) -->
-    <skip />
-    <!-- no translation found for wizard_back_adoptable (1447814356855134183) -->
-    <skip />
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Vaheta teisaldatavale"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Muul viisil vormindamine"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Lõpeta"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM-kaardid"</string>
@@ -4708,16 +4675,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Lülita kohe sisse"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Lülita kohe välja"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Aku optimeerimist ei kasutata"</string>
-    <!-- no translation found for app_battery_optimization_title (389653121998016466) -->
-    <skip />
-    <!-- no translation found for app_battery_optimization_summary (7864783556193427398) -->
-    <skip />
-    <!-- no translation found for filter_battery_unrestricted_title (821027369424198223) -->
-    <skip />
-    <!-- no translation found for filter_battery_optimized_title (8236647176487754796) -->
-    <skip />
-    <!-- no translation found for filter_battery_restricted_title (5886859505802563232) -->
-    <skip />
+    <string name="app_battery_optimization_title" msgid="389653121998016466">"Akukasutuse haldamine"</string>
+    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Rakenduste jaoks akukasutuse määramine"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Piiranguteta"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimeeritud"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Piiratud"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Kui seade on lukus, keela märguannetes vastuste või muu teksti sisestamine"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Vaikeõigekirjakontroll"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Õigekirjakontrolli valimine"</string>

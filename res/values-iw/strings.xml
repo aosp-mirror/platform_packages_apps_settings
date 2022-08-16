@@ -72,6 +72,10 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"המכשיר שלך יתנתק מהמכשיר <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"התאמה של מכשיר חדש"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
+    <skip />
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"התאמה באוזן השנייה"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"מכשיר השמיעה באוזן שמאל מחובר.\n\nכדי להתאים את מכשיר השמיעה באוזן ימין, צריך לוודא שהוא פועל ומוכן להתאמה."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"מכשיר השמיעה באוזן ימין מחובר.\n\nכדי להתאים את מכשיר השמיעה באוזן שמאל, צריך לוודא שהוא פועל ומוכן להתאמה."</string>
@@ -1485,8 +1489,7 @@
     <string name="sim_enter_new" msgid="9010947802784561582">"‏קוד גישה חדש ל-SIM"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"יש להקליד שוב את קוד הגישה החדש"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"‏קוד הגישה ל-SIM"</string>
-    <!-- no translation found for sim_invalid_pin_hint (3376397829969578877) -->
-    <skip />
+    <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"יש להקליד קוד אימות שאורכו 4 עד 8 ספרות"</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"קודי האימות לא תואמים"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"לא ניתן לשנות את קוד הגישה‏.\nכנראה שקוד הגישה שגוי."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"‏קוד הגישה של ה-SIM השתנה בהצלחה"</string>
@@ -2909,14 +2912,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"סוללה ברמת טעינה של <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"אחוז הטעינה של הסוללה"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"הצגת אחוז הטעינה של הסוללה בשורת הסטטוס"</string>
-    <!-- no translation found for battery_usage_chart_graph_hint_last_full_charge (6570336408060566877) -->
-    <skip />
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"רמת הסוללה מאז הטעינה המלאה האחרונה"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"רמת הטעינה של הסוללה ב-24 השעות האחרונות"</string>
-    <!-- no translation found for battery_app_usage (8976453608783133770) -->
-    <skip />
+    <string name="battery_app_usage" msgid="8976453608783133770">"צריכת הסוללה של האפליקציות מאז הטעינה המלאה האחרונה"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"צריכת הסוללה של האפליקציות ב-24 השעות האחרונות"</string>
-    <!-- no translation found for battery_system_usage (1395943945140097585) -->
-    <skip />
+    <string name="battery_system_usage" msgid="1395943945140097585">"צריכת הסוללה של המערכת מאז הטעינה המלאה האחרונה"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"צריכת הסוללה של המערכת ב-24 השעות האחרונות"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"צריכת הסוללה על ידי המערכת בשעות <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"צריכת הסוללה על ידי האפליקציה בשעות <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -4819,16 +4819,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"הפעלה עכשיו"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"כיבוי עכשיו"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"לא נעשה שימוש באופטימיזציה של סוללה"</string>
-    <!-- no translation found for app_battery_optimization_title (389653121998016466) -->
-    <skip />
-    <!-- no translation found for app_battery_optimization_summary (7864783556193427398) -->
-    <skip />
-    <!-- no translation found for filter_battery_unrestricted_title (821027369424198223) -->
-    <skip />
-    <!-- no translation found for filter_battery_optimized_title (8236647176487754796) -->
-    <skip />
-    <!-- no translation found for filter_battery_restricted_title (5886859505802563232) -->
-    <skip />
+    <string name="app_battery_optimization_title" msgid="389653121998016466">"ניהול השימוש בסוללה"</string>
+    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"הגדרת השימוש בסוללה לאפליקציות"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"ללא הגבלה"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"אופטימיזציה"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"עם הגבלה"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"כשהמכשיר נעול לא תתאפשר הקלדת תגובות או טקסט אחר בהתראות"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"ברירת מחדל לבדיקת איות"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"בחירת בודק איות"</string>

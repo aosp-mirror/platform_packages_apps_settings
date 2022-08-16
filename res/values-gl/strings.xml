@@ -70,6 +70,10 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"O dispositivo desconectarase de: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Vincular novo dispositivo"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
+    <skip />
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Vincula o outro audiófono"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"O audiófono esquerdo está conectado.\n\nPara vincular o dereito, asegúrate de que estea acendido e listo para vincularse."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"O audiófono dereito está conectado.\n\nPara vincular o esquerdo, asegúrate de que estea acendido e listo para vincularse."</string>
@@ -1443,8 +1447,7 @@
     <string name="sim_enter_new" msgid="9010947802784561582">"Novo PIN da SIM"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Volve escribir o novo PIN"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"PIN da SIM"</string>
-    <!-- no translation found for sim_invalid_pin_hint (3376397829969578877) -->
-    <skip />
+    <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"Escribe un PIN de entre 4 e 8 números"</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"Os PIN non coinciden"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Non se pode cambiar o PIN.\nÉ posible que o PIN non sexa correcto."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"PIN da SIM cambiado correctamente"</string>
@@ -2862,14 +2865,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"coa batería ao <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Porcentaxe de batería"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Mostra a porcentaxe de batería na barra de estado"</string>
-    <!-- no translation found for battery_usage_chart_graph_hint_last_full_charge (6570336408060566877) -->
-    <skip />
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Nivel de batería desde a última carga completa"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Nivel da batería durante as últimas 24 horas"</string>
-    <!-- no translation found for battery_app_usage (8976453608783133770) -->
-    <skip />
+    <string name="battery_app_usage" msgid="8976453608783133770">"Uso da batería por parte das aplicacións desde a última carga completa"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Uso das aplicacións durante as últimas 24 horas"</string>
-    <!-- no translation found for battery_system_usage (1395943945140097585) -->
-    <skip />
+    <string name="battery_system_usage" msgid="1395943945140097585">"Uso da batería por parte do sistema desde a última carga completa"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Uso do sistema durante as últimas 24 horas"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Uso do sistema durante <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Uso das aplicacións durante <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -4706,16 +4706,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Activar agora"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Desactivar agora"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Sen usar optimización da batería"</string>
-    <!-- no translation found for app_battery_optimization_title (389653121998016466) -->
-    <skip />
-    <!-- no translation found for app_battery_optimization_summary (7864783556193427398) -->
-    <skip />
-    <!-- no translation found for filter_battery_unrestricted_title (821027369424198223) -->
-    <skip />
-    <!-- no translation found for filter_battery_optimized_title (8236647176487754796) -->
-    <skip />
-    <!-- no translation found for filter_battery_restricted_title (5886859505802563232) -->
-    <skip />
+    <string name="app_battery_optimization_title" msgid="389653121998016466">"Xestionar uso da batería"</string>
+    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Define o uso da batería para as aplicacións"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Sen restricións"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimizada"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Restrinxida"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Se o dispositivo está bloqueado, impide escribir respostas ou outro texto nas notificacións"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Corrector predeterminado"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Escoller corrector ortográfico"</string>

@@ -70,6 +70,10 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"તમારું ઉપકરણ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>થી ડિસ્કનેક્ટ થઈ જશે."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"નવા ડિવાઇસ જોડો"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"બ્લૂટૂથ"</string>
+    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
+    <skip />
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"તમારા બીજા કાનનું જોડો"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"સાંભળવામાં મદદ આપતું તમારા ડાબા કાનનું યંત્ર કનેક્ટેડ છે.\n\nજમણા કાનના યંત્રનું જોડાણ કરવા માટે ખાતરી કરો કે તે ચાલુ કરેલું અને જોડાણ કરવા માટે તૈયાર હોય."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"સાંભળવામાં મદદ આપતું તમારા જમણા કાનનું યંત્ર કનેક્ટેડ છે.\n\nડાબા કાનના યંત્રનું જોડાણ કરવા માટે ખાતરી કરો કે તે ચાલુ કરેલું અને જોડાણ કરવા માટે તૈયાર હોય."</string>
@@ -1443,8 +1447,7 @@
     <string name="sim_enter_new" msgid="9010947802784561582">"નવો સિમ પિન"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"નવો પિન ફરીથી લખો"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"સિમ પિન"</string>
-    <!-- no translation found for sim_invalid_pin_hint (3376397829969578877) -->
-    <skip />
+    <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"4થી 8 અંકનો કોઈ પિન ટાઇપ કરો"</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"પિન મેળ ખાતા નથી"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"પિન બદલી શકાતો નથી.\nસંભવિત રૂપે ખોટો પિન છે."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"સિમ પિનને સફળતાપૂર્વક બદલ્યો"</string>
@@ -1570,13 +1573,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"નામ બદલો"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"માઉન્ટ કરો"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"બહાર કાઢો"</string>
-    <!-- no translation found for storage_menu_format (8903698999905354146) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_button (7623565190643699626) -->
-    <skip />
+    <string name="storage_menu_format" msgid="8903698999905354146">"પોર્ટેબલ સ્ટોરેજ માટે SD કાર્ડને ફૉર્મેટ કરો"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"કાર્ડને ફૉર્મેટ કરો"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"પોર્ટેબલ તરીકે ફોર્મેટ કરો"</string>
-    <!-- no translation found for storage_menu_format_option (4886059624052908432) -->
-    <skip />
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"ફૉર્મેટ કરો"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"ડેટાને ટ્રાન્સફર કરો"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"ભૂલી જાઓ"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"સેટ કરો"</string>
@@ -1606,24 +1606,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"સંગ્રહનું નામ બદલો"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"આ <xliff:g id="NAME_0">^1</xliff:g> સુરક્ષિતપણે બહાર કાઢવામાં આવ્યું છે, પરંતુ હજી પણ ઉપલબ્ધ છે. \n\nઆ <xliff:g id="NAME_1">^1</xliff:g> નો ઉપયોગ કરવા માટે, પહેલા તમારે તેને માઉન્ટ કરવું પડશે."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"આ <xliff:g id="NAME_0">^1</xliff:g> દૂષિત છે. \n\nઆ <xliff:g id="NAME_1">^1</xliff:g> નો ઉપયોગ કરવા માટે, પહેલા તમારે તેને સેટ કરવું પડશે."</string>
-    <!-- no translation found for storage_internal_format_details (2399034372813686846) -->
-    <skip />
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"તમે ફોટા, વીડિયો, મ્યુઝિક અને બીજું ઘણું સ્ટોર કરવા માટે આ SD કાર્ડને ફૉર્મેટ કરી શકો છો અને તેમને અન્ય ડિવાઇસ પર ઍક્સેસ કરી શકો છો. \n\n"<b>"આ SD કાર્ડ પરનો બધો ડેટા કાઢી નાખવામાં આવશે."</b>" \n\n"<b>"ફૉર્મેટિંગ કરતાં પહેલાં"</b>" \n\n"<b>"ફોટા અને અન્ય મીડિયાનું બૅકઅપ લો"</b>" \nતમારી મીડિયા ફાઇલોને આ ડિવાઇસ પરના વૈકલ્પિક સ્ટોરેજમાં ખસેડો અથવા USB કેબલનો ઉપયોગ કરીને તેમને કોઈ કમ્પ્યુટરમાં ટ્રાન્સફર કરો. \n\n"<b>"ઍપનું બૅકઅપ લો"</b>" \nઆ <xliff:g id="NAME">^1</xliff:g> પર સ્ટોર કરવામાં આવેલી તમામ ઍપ અનઇન્સ્ટૉલ થઈ જશે અને તેમનો ડેટા કાઢી નાખવામાં આવશે. આ ઍપ રાખવા માટે, તેમને આ ડિવાઇસ પરના વૈકલ્પિક સ્ટોરેજમાં ખસેડો."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"જ્યારે તમે આ <xliff:g id="NAME_0">^1</xliff:g> ને બહાર કાઢો છો, ત્યારે તેના પર સંગ્રહિત ઍપ્લિકેશનો કાર્ય કરવાનું બંધ કરશે અને તેના પર સંગ્રહિત મીડિયા ફાઇલો તે ફરીથી શામેલ કરવામાં આવે ત્યાં સુધી ઉપલબ્ધ રહેશે નહીં."</b>\n\n"આ <xliff:g id="NAME_1">^1</xliff:g> ને તે આ ઉપકરણ પર જ કાર્ય કરે તે માટે ફોર્મેટ કર્યું છે. તે કોઈપણ અન્ય પર કાર્ય કરશે નહીં."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"આ <xliff:g id="NAME">^1</xliff:g> ધરાવે છે, તે ઍપ, ફોટા અથવા ડેટાનો ઉપયોગ કરવા માટે, તેને ફરીથી શામેલ કરો. \n\nવૈકલ્પિક રૂપે, જો તમે ડિવાઇસ ઉપલબ્ધ ન હોય તો આ સ્ટોરેજને ભૂલી જવાનું પસંદ કરી શકો છો. \n\nજો તમે ભૂલી જવાનું પસંદ કરો છો, તો ડિવાઇસમાં શામેલ તમામ ડેટા કાયમ માટે ગુમ થઈ જશે. \n\nતમે પછીથી ઍપને ફરીથી ઇન્સ્ટોલ કરી શકો છો, પરંતુ આ ડિવાઇસ પર સ્ટોર કરેલો તેમનો ડેટા ગુમ થઈ જશે."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g> ભૂલી ગયાં?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"આ <xliff:g id="NAME">^1</xliff:g> પર સંગ્રહિત તમામ ઍપ્લિકેશનો, ફોટો અને ડેટા કાયમ માટે જતો રહેશે."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"સિસ્ટમમાં એવી ફાઇલો છે કે જેનો ઉપયોગ Android વર્ઝન <xliff:g id="VERSION">%s</xliff:g> ચલાવવા માટે કરવામાં આવે છે"</string>
-    <!-- no translation found for storage_wizard_guest (5813419895687733649) -->
-    <skip />
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"અતિથિ મોડના વપરાશકર્તાઓ SD કાર્ડ ફૉર્મેટ ન કરી શકે"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"તમારું <xliff:g id="NAME">^1</xliff:g> સેટ કરો"</string>
-    <!-- no translation found for storage_wizard_init_external_title (5304499882951772292) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_summary (5842588772292324473) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_title (8799676990387869411) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_summary (8224648610422581704) -->
-    <skip />
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"પોર્ટેબલ સ્ટોરેજ માટે SD કાર્ડને ફૉર્મેટ કરો"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"ફોટા, વીડિયો, મ્યુઝિક અને બીજું ઘણું સાચવો અને અન્ય ડિવાઇસમાંથી તેમને ઍક્સેસ કરો"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"આંતરિક સ્ટોરેજ માટે SD કાર્ડને ફૉર્મેટ કરો"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"માત્ર આ ફોન પર ઉપયોગ કરવા માટે ઍપ અને મીડિયાને સાચવો"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"આંતરિક સ્ટોરેજ તરીકે ફોર્મેટ કરો"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"તેને સુરક્ષિત કરવા આના માટે <xliff:g id="NAME_0">^1</xliff:g> ને ફોર્મેટ કરવું જરૂરી છે. \n\nફોર્મેટ કર્યા પછી, આ <xliff:g id="NAME_1">^1</xliff:g> આ ઉપકરણ પર જ કાર્ય કરશે. \n\n"<b>"ફોર્મેટ કરવું <xliff:g id="NAME_2">^1</xliff:g> પર હાલમાં સંગ્રહિત તમામ ડેટાને કાઢી નાખે છે."</b>" ડેટાને ગુમાવવાનું ટાળવા માટે, તેનું બેક અપ લેવાનું વિચારો."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"પોર્ટેબલ સંગ્રહ તરીકે ફોર્મેટ કરો"</string>
@@ -1640,12 +1634,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"ખસેડો"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"ડેટાને ખસેડી રહ્યું છે…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"ખસેડવા દરમિયાન: \n• <xliff:g id="NAME">^1</xliff:g> ને દૂર કરશો નહીં. \n• કેટલીક ઍપ્લિકેશનો ઠીકથી કામ કરશે નહીં. \n• ઉપકરણને ચાર્જ થયેલ રાખો."</string>
-    <!-- no translation found for storage_wizard_ready_title (3631022511474086605) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_external_body (4264787122605706421) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_internal_body (2416472979690681273) -->
-    <skip />
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> ફોર્મેટ કર્યું"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"તમે તમારા <xliff:g id="NAME">^1</xliff:g>નો ઉપયોગ કરવાનું શરૂ કરી શકો છો"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"તમે તમારા <xliff:g id="NAME">^1</xliff:g>નો ઉપયોગ કરવાનું શરૂ કરી શકો છો"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"<xliff:g id="APP">^1</xliff:g> ને ખસેડો"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"<xliff:g id="APP">^1</xliff:g> ને તેના ડેટાને <xliff:g id="NAME_0">^2</xliff:g> પર ખસેડવામાં થોડો જ સમય લાગશે. જ્યાં સુધી ખસેડવાનું પૂર્ણ ન થાય ત્યાં સુધી તમે એપ્લિકેશનનો ઉપયોગ કરી શકશો નહીં. \n\nખસેડવા દરમિયાન <xliff:g id="NAME_1">^2</xliff:g> ને દૂર કરશો નહીં."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"ડેટા ખસેડવા માટે તમારે વપરાશકર્તા <xliff:g id="APP">^1</xliff:g> અનલૉક કરવાની જરૂર છે."</string>
@@ -1654,30 +1645,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"ખસેડવાનું રદ કરો"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"આ <xliff:g id="NAME_0">^1</xliff:g> ધીમું હોય તેવું જણાય છે. \n\nતમે ચાલુ રાખી શકો છો, પરંતુ આ સ્થાને ખસેડવામાં આવેલી ઍપ્લિકેશનોમાં અટકાઈ શકે અને ડેટા ટ્રાંસ્ફરમાં વધુ સમય લાગી શકે છે. \n\nબહેતર કાર્યપ્રદર્શન માટે વધુ ઝડપી <xliff:g id="NAME_1">^1</xliff:g> ને ઉપયોગમાં લેવાનું વિચારો."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"તમે આ <xliff:g id="NAME">^1</xliff:g>નો કેવી રીતે ઉપયોગ કરશો?"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (1236154481658009267) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (3771689638403679317) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"આંતરિક સ્ટોરેજ માટે SD કાર્ડને ફૉર્મેટ કરો"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"માત્ર આ ટૅબ્લેટ પર ઉપયોગ કરવા માટે ઍપ અને મીડિયા સ્ટોર કરો. &lt;a href=https://support.google.com/android/answer/12153449&gt;Learn more about setting up an SD card&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"ફૉર્મેટ કરો"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"આંતરિક સ્ટોરેજ માટે SD કાર્ડને ફૉર્મેટ કરો"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"માત્ર આ ફોન પર ઉપયોગ કરવા માટે ઍપ અને મીડિયા સ્ટોર કરો. &lt;a href=https://support.google.com/android/answer/12153449&gt;Learn more about setting up an SD card&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"ફૉર્મેટ કરો"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"અથવા"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_title (2786416384217054112) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_summary (3867896101011977386) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_action (6140058734875839081) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"પોર્ટેબલ સ્ટોરેજ માટે SD કાર્ડને ફૉર્મેટ કરો"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"ફોટા, વીડિયો, મ્યુઝિક અને બીજું ઘણું સ્ટોર કરો અને તેમને અન્ય ડિવાઇસમાંથી ઍક્સેસ કરો. &lt;a href=https://support.google.com/android/answer/12153449&gt;Learn more about setting up an SD card&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"ફૉર્મેટ કરો"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"થોડા સમય પછી સેટ કરો"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"આ <xliff:g id="NAME">^1</xliff:g>ને ફૉર્મેટ કરીએ?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"ઍપ, ફાઇલો અને મીડિયાને સ્ટોર કરવા માટે આ <xliff:g id="NAME_0">^1</xliff:g>ને ફૉર્મેટ કરવું જરૂરી છે. \n\nફૉર્મેટ કરવાથી <xliff:g id="NAME_1">^2</xliff:g> પરનું હાલનું કન્ટેન્ટ કાઢી નખાશે. કન્ટેન્ટ ગુમાવવાનું ટાળવા માટે તેનો અન્ય <xliff:g id="NAME_2">^3</xliff:g> અથવા ડિવાઇસ પર બૅકઅપ લો."</string>
-    <!-- no translation found for storage_wizard_format_confirm_v2_body_external (5810296966099830035) -->
-    <skip />
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"ફોટા, વીડિયો, મ્યુઝિક અને બીજું ઘણું સ્ટોર કરવા માટે, આ <xliff:g id="NAME_0">^1</xliff:g>ને ફૉર્મેટ કરવાની જરૂર છે. \n\nફૉર્મેટ કરવાથી <xliff:g id="NAME_1">^2</xliff:g> પરનું હાલનું કન્ટેન્ટ કાઢી નાખવામાં આવશે. કન્ટેન્ટ ગુમાવવાનું ટાળવા માટે, તેનો અન્ય <xliff:g id="NAME_2">^3</xliff:g> અથવા ડિવાઇસ પર બૅકઅપ લો."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g>ને ફૉર્મેટ કરો"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"કન્ટેન્ટને <xliff:g id="NAME">^1</xliff:g>માં ખસેડીએ?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"તમે આ <xliff:g id="NAME">^1</xliff:g> પર ફાઇલો, મીડિયા અને અમુક ઍપ ખસેડી શકો છો. \n\nઆ પગલું તમારા ટૅબ્લેટના સ્ટોરેજમાંથી <xliff:g id="SIZE">^2</xliff:g> ખાલી કરશે અને <xliff:g id="DURATION">^3</xliff:g> જેટલો સમય લઈ શકે છે."</string>
@@ -1694,12 +1675,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"તમે હજુ પણ આ <xliff:g id="NAME_0">^1</xliff:g>નો ઉપયોગ કરી શકો છો, પરંતુ તે ધીમુું હોઈ શકે છે. \n\nઆ <xliff:g id="NAME_1">^2</xliff:g>માં સ્ટોર કરેલ ઍપ કદાચ યોગ્ય રીતે કામ ન કરે અને કન્ટેન્ટ ટ્રાન્સફર થવામાં લાંબો સમય લાગી શકે છે. \n\nવધુ ઝડપી <xliff:g id="NAME_2">^3</xliff:g>ને ઉપયોગમાં લેવાનો પ્રયાસ કરો અથવા પોર્ટેબલ સ્ટોરેજને બદલે આ <xliff:g id="NAME_3">^4</xliff:g>નો ઉપયોગ કરો."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"શરૂ કરો"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"આગળ વધો"</string>
-    <!-- no translation found for storage_wizard_ready_v2_external_body (7688457485389886923) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_body (3520269956641115883) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (1163588718127651062) -->
-    <skip />
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"તમે તમારા <xliff:g id="NAME">^1</xliff:g>નો ઉપયોગ કરવાનું શરૂ કરી શકો છો"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"તમે તમારા <xliff:g id="NAME">^1</xliff:g>નો ઉપયોગ કરવાનું શરૂ કરી શકો છો"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"તમે તમારા <xliff:g id="NAME">^1</xliff:g>નો ઉપયોગ કરવાનું શરૂ કરી શકો છો"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"બૅટરી સ્થિતિ"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"બૅટરી સ્તર"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
@@ -2489,19 +2467,13 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"રંગ સુધારણાની સુવિધા વિશે વધુ જાણો"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"વિપરીત રંગમાં બદલવાની સુવિધા વિશે"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"વિપરીત રંગમાં બદલવાની સુવિધા વિશે વધુ જાણો"</string>
-    <!-- no translation found for accessibility_captioning_primary_switch_title (3663677340286206100) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_primary_switch_summary (2544094070306830218) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_title (3128792092290011408) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_summary (4620682807315588019) -->
-    <skip />
+    <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"કૅપ્શન બતાવો"</string>
+    <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"માત્ર સપોર્ટ કરતી ઍપ માટે"</string>
+    <string name="captioning_appearance_title" msgid="3128792092290011408">"કૅપ્શનનું કદ અને શૈલી"</string>
+    <string name="captioning_appearance_summary" msgid="4620682807315588019">"<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g> ટેક્સ્ટનું કદ"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"વધુ વિકલ્પો"</string>
-    <!-- no translation found for accessibility_captioning_preference_intro (8995427146374031134) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_preference_summary (8335768472978374255) -->
-    <skip />
+    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"વાંચવામાં સરળતા થાય એ માટે કૅપ્શનનું કદ અને શૈલી કસ્ટમાઇઝ કરો"</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"કૅપ્શનની આ પસંદગીઓને બધી મીડિયા ઍપ દ્વારા સપોર્ટ આપવામાં આવતો નથી"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"ઍક્સેસિબિલિટી બટન"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"નીચેથી 2 આંગળી વડે ઉપર સ્વાઇપ કરો"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"વૉલ્યૂમ કીને દબાવી રાખો"</string>
@@ -2862,14 +2834,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"<xliff:g id="PERCENT">%1$s</xliff:g> બૅટરી પર"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"બૅટરીના ટકા"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"બૅટરીના ટકા સ્ટેટસ બારમાં બતાવો"</string>
-    <!-- no translation found for battery_usage_chart_graph_hint_last_full_charge (6570336408060566877) -->
-    <skip />
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"છેલ્લા પૂર્ણ ચાર્જ કર્યા પછી બૅટરીનું લેવલ"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"છેલ્લા 24 કલાકમાં બૅટરીનું લેવલ"</string>
-    <!-- no translation found for battery_app_usage (8976453608783133770) -->
-    <skip />
+    <string name="battery_app_usage" msgid="8976453608783133770">"છેલ્લા પૂર્ણ ચાર્જ કર્યા પછી ઍપ દ્વારા કરાયેલો વપરાશ"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"છેલ્લા 24 કલાક માટે ઍપનો વપરાશ"</string>
-    <!-- no translation found for battery_system_usage (1395943945140097585) -->
-    <skip />
+    <string name="battery_system_usage" msgid="1395943945140097585">"છેલ્લા પૂર્ણ ચાર્જ કર્યા પછી સિસ્ટમ દ્વારા કરાયેલો વપરાશ"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"છેલ્લા 24 કલાકમાં સિસ્ટમનો વપરાશ"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"<xliff:g id="SLOT">%s</xliff:g> માટે સિસ્ટમનો વપરાશ"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"<xliff:g id="SLOT">%s</xliff:g> માટે ઍપનો વપરાશ"</string>
@@ -3411,10 +3380,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"એપ્લિકેશન્સને તમારી સ્થાન માહિતીનો ઉપયોગ કરવા દો"</string>
     <string name="wizard_back" msgid="8257697435061870191">"પાછળ"</string>
     <string name="wizard_next" msgid="3884832431439072471">"આગલું"</string>
-    <!-- no translation found for wizard_back_portable (5315939180781404882) -->
-    <skip />
-    <!-- no translation found for wizard_back_adoptable (1447814356855134183) -->
-    <skip />
+    <string name="wizard_back_portable" msgid="5315939180781404882">"પોર્ટેબલ પર સ્વિચ કરો"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"કોઈ અન્ય રીતે ફૉર્મેટ કરો"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"સમાપ્ત"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"સિમ કાર્ડ"</string>
@@ -4706,16 +4673,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"હમણાં ચાલુ કરો"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"હમણાં બંધ કરો"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"બૅટરી ઓપ્ટિમાઇઝેશનનો ઉપયોગ કરી રહ્યાં નથી"</string>
-    <!-- no translation found for app_battery_optimization_title (389653121998016466) -->
-    <skip />
-    <!-- no translation found for app_battery_optimization_summary (7864783556193427398) -->
-    <skip />
-    <!-- no translation found for filter_battery_unrestricted_title (821027369424198223) -->
-    <skip />
-    <!-- no translation found for filter_battery_optimized_title (8236647176487754796) -->
-    <skip />
-    <!-- no translation found for filter_battery_restricted_title (5886859505802563232) -->
-    <skip />
+    <string name="app_battery_optimization_title" msgid="389653121998016466">"બૅટરીનો વપરાશ મેનેજ કરો"</string>
+    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"ઍપ માટે બૅટરીનો વપરાશ સેટ કરો"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"અમર્યાદિત"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"ઑપ્ટિમાઇઝ કરેલી બૅટરી"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"મર્યાદિત"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"જો ઉપકરણ લૉક કરેલ છે, તો સૂચનાઓમાં જવાબો અથવા અન્ય ટેક્સ્ટને લખવાનું ટાળો"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"ડિફૉલ્ટ જોડણી તપાસનાર"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"જોડણી તપાસનારને પસંદ કરો"</string>

@@ -70,6 +70,10 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Thiết bị của bạn sẽ ngắt kết nối khỏi <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Ghép nối thiết bị mới"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
+    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
+    <skip />
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Ghép nối tai khác"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Bạn đã kết nối máy trợ thính cho tai bên trái.\n\nĐể ghép nối máy trợ thính cho tai bên phải, hãy đảm bảo đã bật máy và máy ở trạng thái sẵn sàng ghép nối."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Bạn đã kết nối máy trợ thính cho tai bên phải.\n\nĐể ghép nối máy trợ thính cho tai bên trái, đảm bảo đã bật máy và máy ở trạng thái sẵn sàng ghép nối."</string>
@@ -493,7 +497,7 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Đã thêm vân tay"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Tính năng mở khóa bằng vân tay cải thiện hơn khi bạn sử dụng để mở khóa thiết bị hoặc xác minh nhận dạng trong các ứng dụng"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Tính năng mở khóa bằng vân tay cải thiện hơn khi bạn sử dụng để mở khóa thiết bị hoặc xác minh nhận dạng trong các ứng dụng"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Tính năng mở khóa bằng vân tay cải thiện hơn khi bạn sử dụng để mở khóa thiết bị hoặc xác minh nhận dạng trong các ứng dụng"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Tính năng mở khóa bằng vân tay cải thiện hơn khi bạn sử dụng để mở khóa thiết bị hoặc xác minh danh tính của bạn trong các ứng dụng"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Thực hiện sau"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Nhấc ngón tay lên rồi chạm lại"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Đặt vân tay ở phần bên của ngón tay lên cảm biến rồi giữ, sau đó chuyển sang phần bên kia"</string>
@@ -1445,8 +1449,7 @@
     <string name="sim_enter_new" msgid="9010947802784561582">"Mã PIN mới của SIM"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Nhập lại mã PIN mới"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"Mã PIN của SIM"</string>
-    <!-- no translation found for sim_invalid_pin_hint (3376397829969578877) -->
-    <skip />
+    <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"Nhập mã PIN gồm 4 đến 8 chữ số"</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"Các mã PIN không khớp"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Không thể thay đổi mã PIN.\nCó thể mã PIN không đúng."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"Mã PIN của SIM đã được thay đổi thành công"</string>
@@ -1572,13 +1575,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Đổi tên"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Gắn"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Ngắt kết nối"</string>
-    <!-- no translation found for storage_menu_format (8903698999905354146) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_button (7623565190643699626) -->
-    <skip />
+    <string name="storage_menu_format" msgid="8903698999905354146">"Định dạng thẻ SD cho bộ nhớ di động"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Định dạng thẻ"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Định dạng làm bộ nhớ di động"</string>
-    <!-- no translation found for storage_menu_format_option (4886059624052908432) -->
-    <skip />
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Định dạng"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Di chuyển dữ liệu"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Xóa"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Thiết lập"</string>
@@ -1608,24 +1608,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Đổi tên bộ nhớ"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"<xliff:g id="NAME_0">^1</xliff:g> này được đẩy ra một cách an toàn nhưng vẫn có sẵn. \n\nĐể sử dụng <xliff:g id="NAME_1">^1</xliff:g> này, trước tiên bạn phải lắp vào."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g> này bị lỗi. \n\nĐể sử dụng <xliff:g id="NAME_1">^1</xliff:g> này, trước tiên bạn phải tiến hành thiết lập."</string>
-    <!-- no translation found for storage_internal_format_details (2399034372813686846) -->
-    <skip />
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Bạn có thể định dạng thẻ SD này để lưu trữ ảnh, video, nhạc và nhiều nội dung khác, đồng thời truy cập chúng trên các thiết bị khác. \n\n"<b>"Tất cả dữ liệu trên thẻ SD này sẽ bị xóa."</b>" \n\n"<b>"Trước khi định dạng"</b>" \n\n"<b>"Sao lưu ảnh và các nội dung nghe nhìn khác"</b>" \nDi chuyển các tệp chứa nội dung nghe nhìn của bạn sang bộ nhớ thay thế trên thiết bị này, hoặc chuyển chúng sang máy tính bằng cáp USB. \n\n"<b>"Sao lưu ứng dụng"</b>" \nTất cả các ứng dụng lưu trữ trên <xliff:g id="NAME">^1</xliff:g> này sẽ bị gỡ cài đặt và xóa dữ liệu. Để giữ lại các ứng dụng, hãy chuyển chúng sang bộ nhớ thay thế trên thiết bị này."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Khi bạn tháo <xliff:g id="NAME_0">^1</xliff:g> này, các ứng dụng được lưu trữ trên đó sẽ ngừng hoạt động, đồng thời các tệp phương tiện được lưu trữ trên đó sẽ không khả dụng cho tới khi lắp lại."</b>" \n\n<xliff:g id="NAME_1">^1</xliff:g> này được định dạng để chỉ hoạt động trên thiết bị này. Nó sẽ không hoạt động trên bất kỳ thiết bị nào khác."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Để sử dụng ứng dụng, ảnh hoặc dữ liệu có trong <xliff:g id="NAME">^1</xliff:g> này, hãy cắm lại thiết bị đó. \n\nNgoài ra, bạn có thể chọn bỏ qua lưu trữ này nếu thiết bị không khả dụng. \n\nNếu bạn chọn bỏ qua, tất cả dữ liệu có trong thiết bị sẽ bị mất vĩnh viễn. \n\nBạn có thể cài đặt lại ứng dụng sau nhưng dữ liệu của ứng dụng được lưu trữ trên thiết bị này sẽ bị mất."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Xóa <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Tất cả ứng dụng, ảnh và dữ liệu được lưu trữ trên <xliff:g id="NAME">^1</xliff:g> này sẽ bị mất vĩnh viễn."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Hệ thống bao gồm các tệp dùng để chạy phiên bản Android <xliff:g id="VERSION">%s</xliff:g>"</string>
-    <!-- no translation found for storage_wizard_guest (5813419895687733649) -->
-    <skip />
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Người dùng ở chế độ khách không thể định dạng thẻ SD"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Thiết lập <xliff:g id="NAME">^1</xliff:g> của bạn"</string>
-    <!-- no translation found for storage_wizard_init_external_title (5304499882951772292) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_summary (5842588772292324473) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_title (8799676990387869411) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_summary (8224648610422581704) -->
-    <skip />
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Định dạng thẻ SD cho bộ nhớ di động"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Lưu ảnh, video, nhạc và nhiều nội dung khác, đồng thời truy cập chúng từ các thiết bị khác"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Định dạng thẻ SD cho bộ nhớ trong"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Lưu ứng dụng và nội dung nghe nhìn để chỉ sử dụng trên điện thoại này"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Định dạng làm bộ nhớ trong"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Việc này yêu cầu phải định dạng <xliff:g id="NAME_0">^1</xliff:g> để đảm bảo an toàn. \n\nSau khi định dạng, <xliff:g id="NAME_1">^1</xliff:g> này sẽ chỉ hoạt động trong thiết bị này. \n\n"<b>"Định dạng sẽ xóa tất cả dữ liệu hiện được lưu trữ trên <xliff:g id="NAME_2">^1</xliff:g>."</b>" Để tránh mất dữ liệu, bạn nên sao lưu."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Định dạng làm bộ nhớ di động"</string>
@@ -1642,12 +1636,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Di chuyển"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Đang di chuyển dữ liệu..."</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Trong khi di chuyển: \n• Không tháo <xliff:g id="NAME">^1</xliff:g>. \n• Một số ứng dụng sẽ không hoạt động chính xác. \n• Luôn sạc thiết bị."</string>
-    <!-- no translation found for storage_wizard_ready_title (3631022511474086605) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_external_body (4264787122605706421) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_internal_body (2416472979690681273) -->
-    <skip />
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"Đã định dạng <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Bạn có thể bắt đầu sử dụng <xliff:g id="NAME">^1</xliff:g> của mình"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Bạn có thể bắt đầu sử dụng <xliff:g id="NAME">^1</xliff:g> của mình"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Di chuyển <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Di chuyển <xliff:g id="APP">^1</xliff:g> và dữ liệu ứng dụng sang <xliff:g id="NAME_0">^2</xliff:g> sẽ chỉ mất vài phút. Bạn sẽ không thể sử dụng ứng dụng cho tới khi hoàn tất di chuyển. \n\nKhông tháo <xliff:g id="NAME_1">^2</xliff:g> trong khi di chuyển."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Để di chuyển dữ liệu, bạn cần mở khóa người dùng <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1656,30 +1647,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Hủy di chuyển"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"<xliff:g id="NAME_0">^1</xliff:g> này có vẻ chậm. \n\nBạn có thể tiếp tục nhưng ứng dụng đã di chuyển tới vị trí này có thể bị gián đoạn và quá trình truyền dữ liệu có thể mất nhiều thời gian. \n\nHãy xem xét sử dụng <xliff:g id="NAME_1">^1</xliff:g> nhanh hơn để đạt được hiệu suất tốt hơn."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Bạn sẽ sử dụng <xliff:g id="NAME">^1</xliff:g> này như thế nào?"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (1236154481658009267) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (3771689638403679317) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Định dạng thẻ SD cho bộ nhớ trong"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Lưu trữ ứng dụng và nội dung nghe nhìn để chỉ sử dụng trên máy tính bảng này &lt;a href=https://support.google.com/android/answer/12153449&gt;Learn more about setting up an SD card&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Định dạng"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Định dạng thẻ SD cho bộ nhớ trong"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Lưu trữ ứng dụng và nội dung nghe nhìn để chỉ sử dụng trên điện thoại này &lt;a href=https://support.google.com/android/answer/12153449&gt;Learn more about setting up an SD card&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Định dạng"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Hoặc"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_title (2786416384217054112) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_summary (3867896101011977386) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_action (6140058734875839081) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Định dạng thẻ SD cho bộ nhớ di động"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Lưu trữ ảnh, video, nhạc và nhiều nội dung khác, đồng thời truy cập chúng từ các thiết bị khác &lt;a href=https://support.google.com/android/answer/12153449&gt;Learn more about setting up an SD card&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Định dạng"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Thiết lập sau"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Định dạng <xliff:g id="NAME">^1</xliff:g> này?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Cần phải định dạng <xliff:g id="NAME_0">^1</xliff:g> này để lưu trữ ứng dụng, tệp và phương tiện. \n\nViệc định dạng sẽ xóa nội dung hiện có trên <xliff:g id="NAME_1">^2</xliff:g>. Để tránh mất nội dung, hãy sao lưu nội dung này vào <xliff:g id="NAME_2">^3</xliff:g> hoặc thiết bị khác."</string>
-    <!-- no translation found for storage_wizard_format_confirm_v2_body_external (5810296966099830035) -->
-    <skip />
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"<xliff:g id="NAME_0">^1</xliff:g> này cần được định dạng để lưu trữ ảnh, video, nhạc và các nội dung nghe nhìn khác. \n\nĐịnh dạng sẽ xóa nội dung hiện có trên <xliff:g id="NAME_1">^2</xliff:g>. Để tránh mất nội dung, hãy sao lưu nội dung này vào <xliff:g id="NAME_2">^3</xliff:g> hoặc thiết bị khác."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Định dạng <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Di chuyển nội dung sang <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Bạn có thể di chuyển tệp, phương tiện và một số ứng dụng sang <xliff:g id="NAME">^1</xliff:g> này. \n\nViệc di chuyển này sẽ giải phóng <xliff:g id="SIZE">^2</xliff:g> bộ nhớ máy tính bảng và mất khoảng <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1696,12 +1677,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Bạn vẫn có thể sử dụng <xliff:g id="NAME_0">^1</xliff:g> này nhưng tốc độ có thể chậm. \n\nCác ứng dụng được lưu trữ trên <xliff:g id="NAME_1">^2</xliff:g> này có thể hoạt động không bình thường và quá trình chuyển nội dung có thể mất nhiều thời gian. \n\nHãy thử dùng một <xliff:g id="NAME_2">^3</xliff:g> nhanh hơn hoặc dùng <xliff:g id="NAME_3">^4</xliff:g> này làm bộ nhớ di động."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Bắt đầu lại"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Tiếp tục"</string>
-    <!-- no translation found for storage_wizard_ready_v2_external_body (7688457485389886923) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_body (3520269956641115883) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (1163588718127651062) -->
-    <skip />
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Bạn có thể bắt đầu sử dụng <xliff:g id="NAME">^1</xliff:g> của mình"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Bạn có thể bắt đầu sử dụng <xliff:g id="NAME">^1</xliff:g> của mình"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Bạn có thể bắt đầu sử dụng <xliff:g id="NAME">^1</xliff:g> của mình"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Tình trạng pin"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Mức pin"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
@@ -2491,19 +2469,13 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Tìm hiểu thêm về tính năng chỉnh màu"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Giới thiệu về tính năng đảo màu"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Tìm hiểu thêm về tính năng đảo màu"</string>
-    <!-- no translation found for accessibility_captioning_primary_switch_title (3663677340286206100) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_primary_switch_summary (2544094070306830218) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_title (3128792092290011408) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_summary (4620682807315588019) -->
-    <skip />
+    <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Hiện phụ đề"</string>
+    <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Chỉ dành cho ứng dụng được hỗ trợ"</string>
+    <string name="captioning_appearance_title" msgid="3128792092290011408">"Cỡ chữ và kiểu phụ đề"</string>
+    <string name="captioning_appearance_summary" msgid="4620682807315588019">"Kích thước văn bản <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Tùy chọn khác"</string>
-    <!-- no translation found for accessibility_captioning_preference_intro (8995427146374031134) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_preference_summary (8335768472978374255) -->
-    <skip />
+    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"Tùy chỉnh kích cỡ và kiểu chữ cho phụ đề để dễ đọc hơn"</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"Không phải ứng dụng đa phương tiện nào cũng hỗ trợ các tùy chọn phụ đề này"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Nút hỗ trợ tiếp cận"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"dùng 2 ngón tay vuốt từ dưới lên"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Giữ phím âm lượng"</string>
@@ -2864,14 +2836,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"ở mức <xliff:g id="PERCENT">%1$s</xliff:g> pin"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Phần trăm pin"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Hiện số phần trăm pin trên thanh trạng thái"</string>
-    <!-- no translation found for battery_usage_chart_graph_hint_last_full_charge (6570336408060566877) -->
-    <skip />
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Mức pin kể từ lần sạc đầy gần đây nhất"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Mức pin trong 24 giờ qua"</string>
-    <!-- no translation found for battery_app_usage (8976453608783133770) -->
-    <skip />
+    <string name="battery_app_usage" msgid="8976453608783133770">"Mức sử dụng ứng dụng kể từ lần sạc đầy gần đây nhất"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Mức sử dụng pin của ứng dụng trong 24 giờ qua"</string>
-    <!-- no translation found for battery_system_usage (1395943945140097585) -->
-    <skip />
+    <string name="battery_system_usage" msgid="1395943945140097585">"Mức sử dụng hệ thống kể từ lần sạc đầy gần đây nhất"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Mức sử dụng pin của hệ thống trong 24 giờ qua"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Mức sử dụng pin của hệ thống từ <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Mức sử dụng pin của ứng dụng từ <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -3413,10 +3382,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Cho phép ứng dụng sử dụng thông tin vị trí của bạn"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Quay lại"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Tiếp theo"</string>
-    <!-- no translation found for wizard_back_portable (5315939180781404882) -->
-    <skip />
-    <!-- no translation found for wizard_back_adoptable (1447814356855134183) -->
-    <skip />
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Chuyển sang định dạng di động"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Định dạng theo cách khác"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Hoàn tất"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"Thẻ SIM"</string>
@@ -4708,16 +4675,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Bật ngay"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Tắt ngay bây giờ"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Hiện không sử dụng tối ưu hóa pin"</string>
-    <!-- no translation found for app_battery_optimization_title (389653121998016466) -->
-    <skip />
-    <!-- no translation found for app_battery_optimization_summary (7864783556193427398) -->
-    <skip />
-    <!-- no translation found for filter_battery_unrestricted_title (821027369424198223) -->
-    <skip />
-    <!-- no translation found for filter_battery_optimized_title (8236647176487754796) -->
-    <skip />
-    <!-- no translation found for filter_battery_restricted_title (5886859505802563232) -->
-    <skip />
+    <string name="app_battery_optimization_title" msgid="389653121998016466">"Quản lý mức sử dụng pin"</string>
+    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Đặt mức sử dụng pin cho các ứng dụng"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Không hạn chế"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Tối ưu hóa"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Bị hạn chế"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Nếu thiết bị bị khóa, ngăn nhập câu trả lời hoặc văn bản khác trong thông báo"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Trình kiểm tra chính tả mặc định"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Chọn trình kiểm tra chính tả"</string>

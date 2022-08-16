@@ -70,6 +70,10 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"このデバイスと <xliff:g id="DEVICE_NAME">%1$s</xliff:g> との接続を解除します。"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"新しいデバイスとペア設定"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
+    <skip />
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"もう一方の耳をペア設定"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"左の補聴器を接続しました。\n\n右の補聴器をペア設定するには、電源が入り、ペア設定できる状態になっていることをご確認ください。"</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"右の補聴器を接続しました。\n\n左耳をペア設定するには、電源が入り、ペア設定できる状態になっていることをご確認ください。"</string>
@@ -489,9 +493,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"これで指紋を正しく登録できるようになります。"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"指紋の登録中: <xliff:g id="PERCENTAGE">%d</xliff:g> パーセント"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"指紋の登録完了"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"指紋認証は、タブレットのロック解除やアプリの本人確認に使用する回数が増えるにつれて、精度が向上します"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"指紋認証は、デバイスのロック解除やアプリの本人確認に使用する回数が増えるにつれて、精度が向上します"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"指紋認証は、スマートフォンのロック解除やアプリの本人確認に使用する回数が増えるにつれて、精度が向上します"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"指紋認証は、タブレットのロック解除やアプリの本人確認に使用する回数が増えれば増えるほど精度が向上します"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"指紋認証は、デバイスのロック解除やアプリの本人確認に使用する回数が増えれば増えるほど精度が向上します"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"指紋認証は、スマートフォンのロック解除やアプリの本人確認に使用する回数が増えれば増えるほど精度が向上します"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"後で行う"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"指を離して、もう一度タッチ"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"指紋をセンサーに当てて長押しし、指を離してから別の部分を当ててください"</string>
@@ -1443,8 +1447,7 @@
     <string name="sim_enter_new" msgid="9010947802784561582">"新しいSIM PIN"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"新しいPINを再入力"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"SIM PIN"</string>
-    <!-- no translation found for sim_invalid_pin_hint (3376397829969578877) -->
-    <skip />
+    <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"PIN は 4～8 桁の数字で入力してください"</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"PIN が一致しません"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"PINを変更できません。\nPINが正しくない可能性があります。"</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"SIM PINが変更されました"</string>
@@ -1570,13 +1573,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"名前を変更"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"マウント"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"取り出し"</string>
-    <!-- no translation found for storage_menu_format (8903698999905354146) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_button (7623565190643699626) -->
-    <skip />
+    <string name="storage_menu_format" msgid="8903698999905354146">"外部ストレージとして SD カードをフォーマットする"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"カードをフォーマット"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"外部ストレージとしてフォーマット"</string>
-    <!-- no translation found for storage_menu_format_option (4886059624052908432) -->
-    <skip />
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"フォーマット"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"データを移行"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"削除"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"セットアップ"</string>
@@ -1606,24 +1606,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"ストレージの名前の変更"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"この<xliff:g id="NAME_0">^1</xliff:g>は安全に取り外されましたが、引き続き使用できます。\n\nこの<xliff:g id="NAME_1">^1</xliff:g>を使用するには、まずマウントする必要があります。"</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"この<xliff:g id="NAME_0">^1</xliff:g>は破損しています。\n\nこの<xliff:g id="NAME_1">^1</xliff:g>を使用するには、まずセットアップする必要があります。"</string>
-    <!-- no translation found for storage_internal_format_details (2399034372813686846) -->
-    <skip />
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"写真、動画、音楽などを保存して他のデバイスで利用できるよう、この SD カードをフォーマットできます。\n\n"<b>"この SD カード上のデータはすべて消去されます。"</b>" \n\n"<b>"フォーマットの前に"</b>" \n\n"<b>"写真などのメディアをバックアップする"</b>" \nファイルをこのデバイスの別のストレージに移動するか、USB ケーブルを使用してパソコンに転送してください。\n\n"<b>"アプリをバックアップする"</b>" \nこの <xliff:g id="NAME">^1</xliff:g>に保存されているアプリはすべてアンインストールされ、アプリのデータは消去されます。これらのアプリを保持するには、このデバイスの別のストレージに移動してください。"</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"この<xliff:g id="NAME_0">^1</xliff:g>を取り外すと、もう一度挿入するまでは保存されているアプリやメディアファイルを使用できなくなります。"</b>" \n\nこの<xliff:g id="NAME_1">^1</xliff:g>はこのデバイス用にフォーマットされており、他のデバイスでは使用できません。"</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"この<xliff:g id="NAME">^1</xliff:g>に保存されているアプリ、写真、データを使用するには、挿入し直してください。\n\nまたは、このストレージデバイスが使用できない場合は、削除することもできます。\n\n削除した場合、このデバイスに保存されているすべてのデータは完全に失われます。\n\nアプリは後で再インストールできますが、このデバイスに保存されているアプリのデータは失われます。"</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g>を削除しますか？"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"この<xliff:g id="NAME">^1</xliff:g>に保存されているすべてのアプリ、写真、データが完全に失われます。"</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"システムには、Android バージョン <xliff:g id="VERSION">%s</xliff:g> の実行に使用されるファイルが含まれています"</string>
-    <!-- no translation found for storage_wizard_guest (5813419895687733649) -->
-    <skip />
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"ゲストモードでは SD カードをフォーマットできません"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"<xliff:g id="NAME">^1</xliff:g>のセットアップ"</string>
-    <!-- no translation found for storage_wizard_init_external_title (5304499882951772292) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_summary (5842588772292324473) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_title (8799676990387869411) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_summary (8224648610422581704) -->
-    <skip />
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"外部ストレージとして SD カードをフォーマット"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"写真、動画、音楽などを保存して、他のデバイスからアクセスすることができます"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"内部ストレージとして SD カードをフォーマット"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"このスマートフォンでのみ使用するアプリとメディアを保存します"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"内部ストレージとしてフォーマット"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"セキュリティを確保するには、<xliff:g id="NAME_0">^1</xliff:g>をフォーマットする必要があります。\n\nフォーマットした後、この<xliff:g id="NAME_1">^1</xliff:g>はこのデバイスでのみ使用できるようになります。\n\n"<b>"フォーマットを行うと<xliff:g id="NAME_2">^1</xliff:g>に保存されているすべてのデータが消去されます。"</b>"データの喪失を防ぐため、バックアップを取ることを検討してください。"</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"外部ストレージとしてフォーマット"</string>
@@ -1640,12 +1634,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"移動"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"データを移動中…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"移動中の注意事項:\n•<xliff:g id="NAME">^1</xliff:g>を取り外さないでください。\n•一部のアプリは正常に機能しません。\n•デバイスを電源につないだままにしてください。"</string>
-    <!-- no translation found for storage_wizard_ready_title (3631022511474086605) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_external_body (4264787122605706421) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_internal_body (2416472979690681273) -->
-    <skip />
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g>のフォーマット完了"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"<xliff:g id="NAME">^1</xliff:g>を使えるようになりました"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"<xliff:g id="NAME">^1</xliff:g>を使えるようになりました"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"<xliff:g id="APP">^1</xliff:g>を移動"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"<xliff:g id="APP">^1</xliff:g>とそのデータは数秒で<xliff:g id="NAME_0">^2</xliff:g>に移動できます。移動が完了するまでこのアプリは使用できません。\n\n移動中に<xliff:g id="NAME_1">^2</xliff:g>を取り外さないでください。"</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"データを移行するには、ユーザー（<xliff:g id="APP">^1</xliff:g>）のロック解除が必要です。"</string>
@@ -1654,30 +1645,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"移動をキャンセル"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"この<xliff:g id="NAME_0">^1</xliff:g>は速度が遅いようです。\n\n続行することはできますが、この場所に移動したアプリはスムーズに動作しないおそれがあります。また、データの転送に時間がかかる可能性があります。\n\n快適にご利用いただくには、高速の<xliff:g id="NAME_1">^1</xliff:g>を使用することをご検討ください。"</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"この <xliff:g id="NAME">^1</xliff:g>の使用目的"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (1236154481658009267) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (3771689638403679317) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"内部ストレージとして SD カードをフォーマット"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"このタブレットでのみ使用するアプリとメディアを保存します。&lt;a href=https://support.google.com/android/answer/12153449&gt;SD カードのセットアップの詳細&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"フォーマット"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"内部ストレージとして SD カードをフォーマット"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"このスマートフォンでのみ使用するアプリとメディアを保存します。&lt;a href=https://support.google.com/android/answer/12153449&gt;SD カードのセットアップの詳細&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"フォーマット"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"または"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_title (2786416384217054112) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_summary (3867896101011977386) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_action (6140058734875839081) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"外部ストレージとして SD カードをフォーマット"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"写真、動画、音楽などを保存して、他のデバイスからアクセスすることができます。&lt;a href=https://support.google.com/android/answer/12153449&gt;SD カードのセットアップの詳細&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"フォーマット"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"後でセットアップ"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"この <xliff:g id="NAME">^1</xliff:g>のフォーマット"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"アプリ、ファイル、メディアを保存するには、この <xliff:g id="NAME_0">^1</xliff:g>をフォーマットする必要があります。\n\nフォーマットを行うと <xliff:g id="NAME_1">^2</xliff:g>の既存のコンテンツは消去されます。コンテンツの喪失を防ぐため、別の <xliff:g id="NAME_2">^3</xliff:g>またはデバイスにバックアップしてください。"</string>
-    <!-- no translation found for storage_wizard_format_confirm_v2_body_external (5810296966099830035) -->
-    <skip />
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"写真、動画、音楽などを保存するには、この <xliff:g id="NAME_0">^1</xliff:g>をフォーマットする必要があります。\n\nフォーマットすると、<xliff:g id="NAME_1">^2</xliff:g>上の既存のコンテンツは消去されます。コンテンツを失うことがないよう、別の <xliff:g id="NAME_2">^3</xliff:g>またはデバイスにバックアップしてください。"</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g>をフォーマット"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"<xliff:g id="NAME">^1</xliff:g>へコンテンツを移動しますか？"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"ファイル、メディア、一部のアプリをこの <xliff:g id="NAME">^1</xliff:g>に移動できます。\n\nこの移動により、タブレットの空き容量が <xliff:g id="SIZE">^2</xliff:g> 増えます。この処理にはおよそ <xliff:g id="DURATION">^3</xliff:g>かかります。"</string>
@@ -1694,12 +1675,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"この <xliff:g id="NAME_0">^1</xliff:g>は引き続き使用できますが、パフォーマンスが低下する可能性があります。\n\nこの <xliff:g id="NAME_1">^2</xliff:g>に保存されているアプリが正しく動作しなかったり、コンテンツの転送に時間がかかったりすることがあります。\n\nより高速の <xliff:g id="NAME_2">^3</xliff:g>を使用するか、この <xliff:g id="NAME_3">^4</xliff:g>を外部ストレージとしてご使用ください。"</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"最初からやり直す"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"続行"</string>
-    <!-- no translation found for storage_wizard_ready_v2_external_body (7688457485389886923) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_body (3520269956641115883) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (1163588718127651062) -->
-    <skip />
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"<xliff:g id="NAME">^1</xliff:g>を使えるようになりました"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"<xliff:g id="NAME">^1</xliff:g>を使えるようになりました"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"<xliff:g id="NAME">^1</xliff:g>を使えるようになりました"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"電池の状態:"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"バッテリー残量"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
@@ -2489,19 +2467,13 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"色補正の詳細"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"色反転について"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"色反転の詳細"</string>
-    <!-- no translation found for accessibility_captioning_primary_switch_title (3663677340286206100) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_primary_switch_summary (2544094070306830218) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_title (3128792092290011408) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_summary (4620682807315588019) -->
-    <skip />
+    <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"字幕の表示"</string>
+    <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"対応アプリでのみ利用可能です"</string>
+    <string name="captioning_appearance_title" msgid="3128792092290011408">"字幕のサイズとスタイル"</string>
+    <string name="captioning_appearance_summary" msgid="4620682807315588019">"文字サイズ: <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"その他のオプション"</string>
-    <!-- no translation found for accessibility_captioning_preference_intro (8995427146374031134) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_preference_summary (8335768472978374255) -->
-    <skip />
+    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"読みやすくなるよう字幕のサイズとスタイルをカスタマイズできます"</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"メディアアプリによっては、これらの字幕設定に対応していない場合があります"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"ユーザー補助機能ボタン"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"画面の下から上に 2 本の指でスワイプ"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"音量ボタンを長押し"</string>
@@ -2862,14 +2834,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"バッテリー残量が <xliff:g id="PERCENT">%1$s</xliff:g> になったとき"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"バッテリー残量"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"ステータスバーにバッテリー残量を％で表示"</string>
-    <!-- no translation found for battery_usage_chart_graph_hint_last_full_charge (6570336408060566877) -->
-    <skip />
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"前回のフル充電以降のバッテリー残量"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"過去 24 時間のバッテリー使用量"</string>
-    <!-- no translation found for battery_app_usage (8976453608783133770) -->
-    <skip />
+    <string name="battery_app_usage" msgid="8976453608783133770">"前回のフル充電からのアプリの使用状況"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"過去 24 時間のアプリのバッテリー使用量"</string>
-    <!-- no translation found for battery_system_usage (1395943945140097585) -->
-    <skip />
+    <string name="battery_system_usage" msgid="1395943945140097585">"前回のフル充電以降のシステムの使用状況"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"過去 24 時間のシステムのバッテリー使用量"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"<xliff:g id="SLOT">%s</xliff:g>のシステムのバッテリー使用量"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"<xliff:g id="SLOT">%s</xliff:g>のアプリのバッテリー使用量"</string>
@@ -3411,10 +3380,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"アプリに位置情報の使用を許可する"</string>
     <string name="wizard_back" msgid="8257697435061870191">"戻る"</string>
     <string name="wizard_next" msgid="3884832431439072471">"次へ"</string>
-    <!-- no translation found for wizard_back_portable (5315939180781404882) -->
-    <skip />
-    <!-- no translation found for wizard_back_adoptable (1447814356855134183) -->
-    <skip />
+    <string name="wizard_back_portable" msgid="5315939180781404882">"外部に切り替え"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"別の方法でフォーマット"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"終了"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM カード"</string>
@@ -4706,16 +4673,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"今すぐ ON にする"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"今すぐ OFF にする"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"電池の最適化を使用しない"</string>
-    <!-- no translation found for app_battery_optimization_title (389653121998016466) -->
-    <skip />
-    <!-- no translation found for app_battery_optimization_summary (7864783556193427398) -->
-    <skip />
-    <!-- no translation found for filter_battery_unrestricted_title (821027369424198223) -->
-    <skip />
-    <!-- no translation found for filter_battery_optimized_title (8236647176487754796) -->
-    <skip />
-    <!-- no translation found for filter_battery_restricted_title (5886859505802563232) -->
-    <skip />
+    <string name="app_battery_optimization_title" msgid="389653121998016466">"バッテリー使用量の管理"</string>
+    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"アプリのバッテリー使用量の設定"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"制限なし"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"最適化"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"制限あり"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"デバイスがロックされている場合に、通知で返信などのテキストを入力できないようにする"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"デフォルトのスペル チェッカー"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"スペル チェッカーの選択"</string>

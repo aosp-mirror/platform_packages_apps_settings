@@ -70,6 +70,10 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Връзката между устройството ви и „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“ ще бъде прекратена."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Сдвояване на ново устройство"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
+    <skip />
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Сдвояване на другото ухо"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Слуховият апарат за лявото ухо е свързан.\n\nЗа да сдвоите този за дясното, уверете се, че е включен и в готовност за сдвояване."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Слуховият апарат за дясното ухо е свързан.\n\nЗа да сдвоите този за лявото, уверете се, че е включен и в готовност за сдвояване."</string>
@@ -1445,8 +1449,7 @@
     <string name="sim_enter_new" msgid="9010947802784561582">"Нов PIN за SIM карта"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Въведете пак новия ПИН код"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"ПИН код за SIM карта"</string>
-    <!-- no translation found for sim_invalid_pin_hint (3376397829969578877) -->
-    <skip />
+    <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"Въведете ПИН с дължина от 4 до 8 цифри"</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"ПИН кодовете не са идентични"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"ПИН кодът не може да се промени.\nВъзможен неправилен ПИН."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"Успешна промяна на PIN за SIM карта"</string>
@@ -1572,13 +1575,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Преименуване"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Свързване"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Изваждане"</string>
-    <!-- no translation found for storage_menu_format (8903698999905354146) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_button (7623565190643699626) -->
-    <skip />
+    <string name="storage_menu_format" msgid="8903698999905354146">"Форматиране на SD картата като преносимо хранилище"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Форматиране на картата"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Форматиране като преносимо"</string>
-    <!-- no translation found for storage_menu_format_option (4886059624052908432) -->
-    <skip />
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Форматиране"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Прехвърляне на данните"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Забравяне"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Настройване"</string>
@@ -1608,24 +1608,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Преименуване на хранилището"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Това хранилище (<xliff:g id="NAME_0">^1</xliff:g>) е извадено безопасно, но все още е налице. \n\nЗа да използвате хранилището (<xliff:g id="NAME_1">^1</xliff:g>), трябва първо да го свържете."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Това хранилище (<xliff:g id="NAME_0">^1</xliff:g>) е повредено. \n\nЗа да използвате хранилището (<xliff:g id="NAME_1">^1</xliff:g>), трябва първо да го настроите."</string>
-    <!-- no translation found for storage_internal_format_details (2399034372813686846) -->
-    <skip />
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Можете да форматирате тази SD карта, за да съхранява снимки, видеоклипове, музика и др., и да осъществявате достъп до тях от други устройства. \n\n"<b>"Всички данни на тази SD карта ще бъдат изтрити."</b>" \n\n"<b>"Преди форматирането"</b>" \n\n"<b>"Създаване на резервно копие на снимките и другото мултимедийно съдържание"</b>" \nПреместете мултимедийните си файлове в друго хранилище на това устройство или ги прехвърлете на компютър посредством USB кабел. \n\n"<b>"Създаване на резервно копие на приложенията"</b>" \nВсички съхранявани в това хранилище (<xliff:g id="NAME">^1</xliff:g>) приложения ще бъдат деинсталирани, а данните им – изтрити. За да запазите тези приложения, ги преместете в друго хранилище на устройството."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Когато извадите това хранилище (<xliff:g id="NAME_0">^1</xliff:g>), съхраняваните там приложения ще спрат да работят, а съответните мултимедийни файлове няма да са налице, докато не го поставите отново."</b>" \n\nХранилището (<xliff:g id="NAME_1">^1</xliff:g>) е форматирано да работи само на това устройство и няма да функционира другаде."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"За да използвате приложенията, снимките или данните в това хранилище (<xliff:g id="NAME">^1</xliff:g>), го поставете отново. \n\nДруга възможност е да забравите това устройство, ако не е налице. \n\nВ случай че забравите хранилището, всички данни в него ще бъдат заличени завинаги. \n\nПо-късно можете да инсталирате отново приложенията, но съхраняваните им на това устройство данни ще бъдат заличени."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g>: Да се забрави ли?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Всички приложения, снимки и данни, съхранявани в това хранилище (<xliff:g id="NAME">^1</xliff:g>), ще бъдат заличени завинаги."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Системата включва файлове, използвани за изпълняването на версия <xliff:g id="VERSION">%s</xliff:g> на Android"</string>
-    <!-- no translation found for storage_wizard_guest (5813419895687733649) -->
-    <skip />
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Не можете да форматирате SD карти в режим на гост"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Настройте хранилището (<xliff:g id="NAME">^1</xliff:g>)"</string>
-    <!-- no translation found for storage_wizard_init_external_title (5304499882951772292) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_summary (5842588772292324473) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_title (8799676990387869411) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_summary (8224648610422581704) -->
-    <skip />
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Форматиране на SD картата като преносимо хранилище"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Запазване на снимки, видеоклипове, музика и др. и осъществяване на достъп до тях от други устройства"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Форматиране на SD картата като вътрешно хранилище"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Запазване на приложения и мултимедия за ползване само на този телефон"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Форматиране като вътр. хранилище"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Необходимо е да форматирате хранилището (<xliff:g id="NAME_0">^1</xliff:g>), за да го защитите. \n\nСлед като форматирате хранилището (<xliff:g id="NAME_1">^1</xliff:g>), то ще работи само на това устройство. \n\n"<b>"При форматирането се изтриват всички данни, които понастоящем се съхраняват в това хранилище (<xliff:g id="NAME_2">^1</xliff:g>)."</b>" За да не ги загубите, е добре да създадете резервно копие."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Формат. като преносимо хранилище"</string>
@@ -1642,12 +1636,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Преместване"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Данните се преместват…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"По време на преместването: \n• Не премахвайте хранилището (<xliff:g id="NAME">^1</xliff:g>). \n• Някои приложения няма да работят правилно. \n• Устройството трябва да е заредено."</string>
-    <!-- no translation found for storage_wizard_ready_title (3631022511474086605) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_external_body (4264787122605706421) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_internal_body (2416472979690681273) -->
-    <skip />
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"Хранилището (<xliff:g id="NAME">^1</xliff:g>) бе форматирано"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Можете да започнете да използвате хранилището си (<xliff:g id="NAME">^1</xliff:g>)"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Можете да започнете да използвате хранилището си (<xliff:g id="NAME">^1</xliff:g>)"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Преместете <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Преместването на приложението <xliff:g id="APP">^1</xliff:g> и данните му към хранилището (<xliff:g id="NAME_0">^2</xliff:g>) няма да отнеме дълго време. Няма да можете да използвате приложението, докато процесът не завърши. \n\nНе премахвайте хранилището (<xliff:g id="NAME_1">^2</xliff:g>) по време на преместването."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"За да преместите данните, трябва да отключите потребителя <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1656,30 +1647,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Анулиране на преместването"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Изглежда, че паметта (<xliff:g id="NAME_0">^1</xliff:g>) е бавна. \n\nАко продължите, преместените там приложения може да не работят гладко, а прехвърлянето на данни – да отнема дълго време. \n\nЗа по-добра ефективност ползвайте по-бърза памет (<xliff:g id="NAME_1">^1</xliff:g>)."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Как ще ползвате хранилището (<xliff:g id="NAME">^1</xliff:g>)?"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (1236154481658009267) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_title (5201609602833104654) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (3771689638403679317) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_internal_action (274533758831212652) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Форматиране на SD картата като вътрешно хранилище"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Съхранявайте приложения и мултимедия за ползване само на този таблет. &lt;a href=https://support.google.com/android/answer/12153449&gt;Научете повече за настройването на SD карта&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Форматиране"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Форматиране на SD картата като вътрешно хранилище"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Съхранявайте приложения и мултимедия за ползване само на този телефон. &lt;a href=https://support.google.com/android/answer/12153449&gt;Научете повече за настройването на SD карта&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Форматиране"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Или"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_title (2786416384217054112) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_summary (3867896101011977386) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_v2_external_action (6140058734875839081) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Форматиране на SD картата като преносимо хранилище"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Съхранявайте снимки, видеоклипове, музика и др. и осъществявайте достъп до тях от други устройства. &lt;a href=https://support.google.com/android/answer/12153449&gt;Научете повече за настройването на SD карта&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Форматиране"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Настройване по-късно"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Да се форматира ли хранилището (<xliff:g id="NAME">^1</xliff:g>)?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Това хранилище (<xliff:g id="NAME_0">^1</xliff:g>) трябва да се форматира, за да съхранява приложения, файлове и мултимедия. \n\nФорматирането ще изтрие съществуващото съдържание в хранилището (<xliff:g id="NAME_1">^2</xliff:g>). За да избегнете загубата на съдържание, създайте резервно копие в друго хранилище (<xliff:g id="NAME_2">^3</xliff:g>) или устройство."</string>
-    <!-- no translation found for storage_wizard_format_confirm_v2_body_external (5810296966099830035) -->
-    <skip />
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Това хранилище (<xliff:g id="NAME_0">^1</xliff:g>) трябва да бъде форматирано, за да съхранява снимки, видеоклипове, музика и др. \n\nФорматирането ще изтрие съществуващото съдържание в хранилището (<xliff:g id="NAME_1">^2</xliff:g>). За да избегнете загубата на съдържание, създайте резервно копие в друго хранилище (<xliff:g id="NAME_2">^3</xliff:g>) или устройство."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Форматиране на <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Да се премести ли съдърж. в/ъв <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Можете да преместите файлове, мултимедия и определени приложения в хранилището (<xliff:g id="NAME">^1</xliff:g>). \n\nТака ще освободите <xliff:g id="SIZE">^2</xliff:g> от хранилището на таблета си. Преместването ще отнеме около <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1696,12 +1677,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Пак можете да използвате това хранилище (<xliff:g id="NAME_0">^1</xliff:g>), но то може да е бавно. \n\nСъхранените в хранилището (<xliff:g id="NAME_1">^2</xliff:g>) приложения може да не работят правилно, а прехвърлянето на съдържание може да отнеме дълго време. \n\nОпитайте да използвате по-бързо хранилище (<xliff:g id="NAME_2">^3</xliff:g>) или ползвайте това хранилище (<xliff:g id="NAME_3">^4</xliff:g>) като преносимо."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Стартиране отначало"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Напред"</string>
-    <!-- no translation found for storage_wizard_ready_v2_external_body (7688457485389886923) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_body (3520269956641115883) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (1163588718127651062) -->
-    <skip />
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Можете да започнете да използвате хранилището си (<xliff:g id="NAME">^1</xliff:g>)"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Можете да започнете да използвате хранилището си (<xliff:g id="NAME">^1</xliff:g>)"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Можете да започнете да използвате хранилището си (<xliff:g id="NAME">^1</xliff:g>)"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Състояние на батерията"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Ниво на батерията"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
@@ -2491,19 +2469,13 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Научете повече за корекцията на цветовете"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Инф. за инвертирането на цветовете"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Научете повече за инвертирането на цветовете"</string>
-    <!-- no translation found for accessibility_captioning_primary_switch_title (3663677340286206100) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_primary_switch_summary (2544094070306830218) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_title (3128792092290011408) -->
-    <skip />
-    <!-- no translation found for captioning_appearance_summary (4620682807315588019) -->
-    <skip />
+    <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Показване на надписите"</string>
+    <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Само за поддържаното приложение"</string>
+    <string name="captioning_appearance_title" msgid="3128792092290011408">"Размер и стил на надписите"</string>
+    <string name="captioning_appearance_summary" msgid="4620682807315588019">"Размер на текста: <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Още опции"</string>
-    <!-- no translation found for accessibility_captioning_preference_intro (8995427146374031134) -->
-    <skip />
-    <!-- no translation found for accessibility_captioning_preference_summary (8335768472978374255) -->
-    <skip />
+    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"Персонализирайте размера и стила на надписите за по-лесно четене"</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"Тези предпочитания за надписите не се поддържат от всички медийни приложения"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Бутон за достъпност"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Прекарване на 2 пръста нагоре от долната част"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Задържане на бутоните за силата на звука"</string>
@@ -2864,14 +2836,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"при <xliff:g id="PERCENT">%1$s</xliff:g> батерия"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Процент на батерията"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Показване на процента на батерията в лентата на състоянието"</string>
-    <!-- no translation found for battery_usage_chart_graph_hint_last_full_charge (6570336408060566877) -->
-    <skip />
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Ниво на батерията от последното пълно зареждане"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Ниво на батерията за последните 24 ч"</string>
-    <!-- no translation found for battery_app_usage (8976453608783133770) -->
-    <skip />
+    <string name="battery_app_usage" msgid="8976453608783133770">"Използване на приложенията от последното пълно зареждане"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Използване от приложенията за последните 24 ч"</string>
-    <!-- no translation found for battery_system_usage (1395943945140097585) -->
-    <skip />
+    <string name="battery_system_usage" msgid="1395943945140097585">"Използване на системата от последното пълно зареждане"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Използване от системата за последните 24 ч"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Използване от системата за <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Използване от приложенията за <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -3413,10 +3382,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Разрешаване на приложенията да използват информация за местоположението ви"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Назад"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Напред"</string>
-    <!-- no translation found for wizard_back_portable (5315939180781404882) -->
-    <skip />
-    <!-- no translation found for wizard_back_adoptable (1447814356855134183) -->
-    <skip />
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Превкл.: Преносимо хран."</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Форматиране по друг начин"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Край"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM карти"</string>
@@ -4708,16 +4675,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Включване сега"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Изключване сега"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Оптимизирането на батерията не се използва"</string>
-    <!-- no translation found for app_battery_optimization_title (389653121998016466) -->
-    <skip />
-    <!-- no translation found for app_battery_optimization_summary (7864783556193427398) -->
-    <skip />
-    <!-- no translation found for filter_battery_unrestricted_title (821027369424198223) -->
-    <skip />
-    <!-- no translation found for filter_battery_optimized_title (8236647176487754796) -->
-    <skip />
-    <!-- no translation found for filter_battery_restricted_title (5886859505802563232) -->
-    <skip />
+    <string name="app_battery_optimization_title" msgid="389653121998016466">"Управление на използването на батерията"</string>
+    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Задаване на използв. на батерията за приложенията"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Неограничено"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Оптимизирано"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Ограничено"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Предотвратяване на въвеждането на отговори или друг текст в известията, когато устройството е заключено"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Стандартна проверка на правописа"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Избор на проверка на правописа"</string>
