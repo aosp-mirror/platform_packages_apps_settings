@@ -51,9 +51,9 @@ public class RecentLocationAccessSeeAllPreferenceController
     public RecentLocationAccessSeeAllPreferenceController(Context context, String key) {
         super(context, key);
         mShowSystem = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY,
-            SystemUiDeviceConfigFlags.PROPERTY_LOCATION_INDICATORS_SMALL_ENABLED, false)
+            SystemUiDeviceConfigFlags.PROPERTY_LOCATION_INDICATORS_SMALL_ENABLED, true)
             ? Settings.Secure.getInt(mContext.getContentResolver(),
-            Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 0) == 1
+            Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 1) == 1
             : false;
 
         mRecentLocationAccesses = RecentAppOpsAccess.createForLocation(context);

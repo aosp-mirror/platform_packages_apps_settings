@@ -48,7 +48,7 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
     RecentAppOpsAccess mRecentLocationApps;
     private PreferenceCategory mCategoryRecentLocationRequests;
     private int mType = ProfileSelectFragment.ProfileType.ALL;
-    private boolean mShowSystem = false;
+    private boolean mShowSystem = true;
     private boolean mSystemSettingChanged = false;
 
     private static class PackageEntryClickedListener implements
@@ -85,9 +85,9 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
         super(context, key);
         mRecentLocationApps = recentLocationApps;
         mShowSystem = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY,
-                SystemUiDeviceConfigFlags.PROPERTY_LOCATION_INDICATORS_SMALL_ENABLED, false)
+                SystemUiDeviceConfigFlags.PROPERTY_LOCATION_INDICATORS_SMALL_ENABLED, true)
                 ? Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 0) == 1
+                Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 1) == 1
                 : false;
     }
 

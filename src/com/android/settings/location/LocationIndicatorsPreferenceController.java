@@ -34,7 +34,7 @@ public class LocationIndicatorsPreferenceController extends TogglePreferenceCont
     @Override
     public boolean isChecked() {
         return DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY,
-                Utils.PROPERTY_LOCATION_INDICATORS_ENABLED, false);
+                Utils.PROPERTY_LOCATION_INDICATORS_ENABLED, true);
     }
 
     @Override

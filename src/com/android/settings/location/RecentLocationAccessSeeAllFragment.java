@@ -40,7 +40,7 @@ public class RecentLocationAccessSeeAllFragment extends DashboardFragment {
     private static final int MENU_SHOW_SYSTEM = Menu.FIRST + 1;
     private static final int MENU_HIDE_SYSTEM = Menu.FIRST + 2;
 
-    private boolean mShowSystem = false;
+    private boolean mShowSystem = true;
     private MenuItem mShowSystemMenu;
     private MenuItem mHideSystemMenu;
     private RecentLocationAccessSeeAllPreferenceController mController;
@@ -61,9 +61,9 @@ public class RecentLocationAccessSeeAllFragment extends DashboardFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mShowSystem = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY,
-            SystemUiDeviceConfigFlags.PROPERTY_LOCATION_INDICATORS_SMALL_ENABLED, false)
+            SystemUiDeviceConfigFlags.PROPERTY_LOCATION_INDICATORS_SMALL_ENABLED, true)
             ? Settings.Secure.getInt(getContentResolver(),
-            Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 0) == 1
+            Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 1) == 1
             : false;
     }
 

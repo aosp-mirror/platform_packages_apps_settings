@@ -87,9 +87,9 @@ public class RecentLocationRequestPreferenceController extends LocationBasePrefe
         final List<RecentLocationApps.Request> recentLocationRequests = new ArrayList<>();
         final UserManager userManager = UserManager.get(mContext);
         final boolean showSystem = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY,
-                SystemUiDeviceConfigFlags.PROPERTY_LOCATION_INDICATORS_SMALL_ENABLED, false)
+                SystemUiDeviceConfigFlags.PROPERTY_LOCATION_INDICATORS_SMALL_ENABLED, true)
                 ? Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 0) == 1
+                Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 1) == 1
                 : false;
 
         for (RecentLocationApps.Request request : mRecentLocationApps.getAppListSorted(
