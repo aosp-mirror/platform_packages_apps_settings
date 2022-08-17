@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright (C) 2016 The Android Open Source Project
+  Copyright (C) 2022 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -18,28 +18,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/language_settings">
-    <PreferenceCategory
-        android:key="languages_category"
-        android:title="@string/locale_picker_category_title">
-        <Preference
-            android:key="phone_language"
-            android:title="@string/phone_language"
-            android:fragment="com.android.settings.localepicker.LocaleListEditor"
-            settings:controller="com.android.settings.language.PhoneLanguagePreferenceController" />
-
-        <Preference
-            android:key="apps_language"
-            android:title="@string/app_locales_picker_menu_title"
-            android:summary="@string/app_locale_picker_summary"
-            android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-            settings:controller="com.android.settings.applications.appinfo.ManageAppLocalePreferenceController">
-            <extra
-                android:name="classname"
-                android:value="com.android.settings.applications.appinfo.AppLocaleDetails" />
-        </Preference>
-    </PreferenceCategory>
-
+    android:title="@string/keyboard_settings">
     <PreferenceCategory
         android:key="keyboards_category"
         android:title="@string/keyboard_and_input_methods_category">
@@ -63,13 +42,6 @@
             android:key="voice_input_settings"
             android:title="@string/voice_input_settings_title"
             android:fragment="com.android.settings.language.DefaultVoiceInputPicker" />
-
-        <Preference
-            android:key="on_device_recognition_settings"
-            android:title="@string/on_device_recognition_settings_title"
-            android:summary="@string/on_device_recognition_settings_summary"
-            settings:controller=
-                "com.android.settings.language.OnDeviceRecognitionPreferenceController" />
 
         <Preference
             android:key="tts_settings_summary"
@@ -133,5 +105,4 @@
             settings:forWork="true"
             settings:controller="com.android.settings.inputmethod.SpellCheckerForWorkPreferenceController" />
     </com.android.settings.widget.WorkOnlyCategory>
-
 </PreferenceScreen>
