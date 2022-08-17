@@ -424,17 +424,6 @@ public class DataProcessorTest {
     }
 
     @Test
-    public void getBatteryUsageMap_emptyHourlyData_returnNull() {
-        final long[] timestamps = {1000000L, 2000000L};
-        final int[] levels = {100, 99};
-        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
-                createHistoryMap(timestamps, levels);
-
-        assertThat(DataProcessor.getBatteryUsageMap(
-                mContext, new ArrayList<>(), batteryHistoryMap)).isNull();
-    }
-
-    @Test
     public void getBatteryUsageMap_returnsExpectedResult() {
         final long[] batteryHistoryKeys = new long[]{
                 1641045600000L, // 2022-01-01 22:00:00
