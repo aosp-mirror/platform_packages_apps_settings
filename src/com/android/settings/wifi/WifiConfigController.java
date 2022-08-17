@@ -746,7 +746,7 @@ public class WifiConfigController implements TextWatcher,
                 if (config.enterpriseConfig.getCaCertificateAliases() != null
                         && config.enterpriseConfig.getCaPath() != null) {
                     Log.e(TAG, "ca_cert ("
-                            + config.enterpriseConfig.getCaCertificateAliases()
+                            + Arrays.toString(config.enterpriseConfig.getCaCertificateAliases())
                             + ") and ca_path ("
                             + config.enterpriseConfig.getCaPath()
                             + ") should not both be non-null");
