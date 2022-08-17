@@ -46,4 +46,9 @@ public class AdvancedVpnFeatureProviderImpl implements AdvancedVpnFeatureProvide
     public boolean isAdvancedVpnRemovable() {
         return true;
     }
+
+    @Override
+    public boolean isDisconnectDialogEnabled() {
+        return true;
+    }
 }
