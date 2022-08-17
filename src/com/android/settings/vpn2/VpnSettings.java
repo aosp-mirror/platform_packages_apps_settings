@@ -366,7 +366,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
     public void setShownPreferences(final Collection<Preference> updates) {
         retainAllPreference(updates);
 
-        final PreferenceGroup vpnGroup = getPreferenceScreen();
+        final PreferenceGroup vpnGroup = mPreferenceScreen;
         updatePreferenceGroup(vpnGroup, updates);
 
         // Show all new preferences on the screen
@@ -448,14 +448,16 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         } else if (preference instanceof AppPreference) {
             AppPreference pref = (AppPreference) preference;
             boolean connected = (pref.getState() == AppPreference.STATE_CONNECTED);
+            String vpnPackageName = pref.getPackageName();
 
-            if (!connected) {
+            if ((!connected) || (isAdvancedVpn(mFeatureProvider, vpnPackageName, getContext())
+                    && !mFeatureProvider.isDisconnectDialogEnabled())) {
                 try {
                     UserHandle user = UserHandle.of(pref.getUserId());
-                    Context userContext = getActivity().createPackageContextAsUser(
-                            getActivity().getPackageName(), 0 /* flags */, user);
+                    Context userContext = getContext().createPackageContextAsUser(
+                            getContext().getPackageName(), 0 /* flags */, user);
                     PackageManager pm = userContext.getPackageManager();
-                    Intent appIntent = pm.getLaunchIntentForPackage(pref.getPackageName());
+                    Intent appIntent = pm.getLaunchIntentForPackage(vpnPackageName);
                     if (appIntent != null) {
                         userContext.startActivityAsUser(appIntent, user);
                         return true;
