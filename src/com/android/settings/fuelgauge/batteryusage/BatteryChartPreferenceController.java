@@ -343,6 +343,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             mDailyChartView.setVisibility(View.GONE);
             mHourlyChartView.setVisibility(View.VISIBLE);
             mHourlyChartView.setViewModel(null);
+            removeAndCacheAllPrefs();
             addFooterPreferenceIfNeeded(false);
             return false;
         }

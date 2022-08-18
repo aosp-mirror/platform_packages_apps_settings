@@ -136,11 +136,26 @@ public final class AccessibilityGestureNavigationTutorial {
                         linkButtonListener)
                 .create();
 
-        final TutorialPageChangeListener.OnPageSelectedCallback callback =
-                type -> alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(
-                        type == UserShortcutType.SOFTWARE ? VISIBLE : GONE);
+        final List<TutorialPage> tutorialPages =
+                createShortcutTutorialPages(context, shortcutTypes);
+        Preconditions.checkArgument(!tutorialPages.isEmpty(),
+                /* errorMessage= */ "Unexpected tutorial pages size");
 
-        alertDialog.setView(createShortcutNavigationContentView(context, shortcutTypes, callback));
+        final TutorialPageChangeListener.OnPageSelectedCallback callback = index -> {
+            final int pageType = tutorialPages.get(index).getType();
+            alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(
+                    pageType == UserShortcutType.SOFTWARE ? VISIBLE : GONE);
+        };
+
+        alertDialog.setView(createShortcutNavigationContentView(context, tutorialPages, callback));
+
+        // Showing first page won't invoke onPageSelectedCallback. Need to check the first tutorial
+        // page type manually to set correct visibility of the link button.
+        alertDialog.setOnShowListener(dialog -> {
+            final int firstPageType = tutorialPages.get(0).getType();
+            alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(
+                    firstPageType == UserShortcutType.SOFTWARE ? VISIBLE : GONE);
+        });
 
         return alertDialog;
     }
@@ -274,16 +289,13 @@ public final class AccessibilityGestureNavigationTutorial {
         return inflater.inflate(R.layout.accessibility_lottie_animation_view, /* root= */ null);
     }
 
-    private static View createShortcutNavigationContentView(Context context, int shortcutTypes,
+    private static View createShortcutNavigationContentView(Context context,
+            List<TutorialPage> tutorialPages,
             TutorialPageChangeListener.OnPageSelectedCallback onPageSelectedCallback) {
 
         final LayoutInflater inflater = context.getSystemService(LayoutInflater.class);
         final View contentView = inflater.inflate(
                 R.layout.accessibility_shortcut_tutorial_dialog, /* root= */ null);
-        final List<TutorialPage> tutorialPages =
-                createShortcutTutorialPages(context, shortcutTypes);
-        Preconditions.checkArgument(!tutorialPages.isEmpty(),
-                /* errorMessage= */ "Unexpected tutorial pages size");
 
         final LinearLayout indicatorContainer = contentView.findViewById(R.id.indicator_container);
         indicatorContainer.setVisibility(tutorialPages.size() > 1 ? VISIBLE : GONE);
@@ -575,7 +587,7 @@ public final class AccessibilityGestureNavigationTutorial {
                             currentPageNumber, mTutorialPages.size()));
 
             if (mOnPageSelectedCallback != null) {
-                mOnPageSelectedCallback.onPageSelected(mTutorialPages.get(position).getType());
+                mOnPageSelectedCallback.onPageSelected(position);
             }
         }
 
@@ -588,7 +600,7 @@ public final class AccessibilityGestureNavigationTutorial {
         private interface OnPageSelectedCallback {
 
             /** The callback method after tutorial page is selected. */
-            void onPageSelected(int type);
+            void onPageSelected(int index);
         }
     }
 }

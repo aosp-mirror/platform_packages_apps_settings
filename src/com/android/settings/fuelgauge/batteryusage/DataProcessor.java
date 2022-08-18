@@ -896,7 +896,7 @@ public final class DataProcessor {
             final Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageMap,
             final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay) {
         if (batteryUsageMap.get(SELECTED_INDEX_ALL) == null
-                || batteryUsageMap.get(SELECTED_INDEX_ALL).get(SELECTED_INDEX_ALL) == null) {
+                || !batteryUsageMap.get(SELECTED_INDEX_ALL).containsKey(SELECTED_INDEX_ALL)) {
             Log.e(TAG, "no [SELECTED_INDEX_ALL][SELECTED_INDEX_ALL] in batteryUsageMap");
             return false;
         }
