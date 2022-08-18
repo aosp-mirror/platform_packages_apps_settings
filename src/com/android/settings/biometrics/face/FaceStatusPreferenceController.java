@@ -38,6 +38,7 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
     public static final String KEY_FACE_SETTINGS = "face_settings";
 
     protected final FaceManager mFaceManager;
+
     @VisibleForTesting
     RestrictedPreference mPreference;
     private PreferenceScreen mPreferenceScreen;
@@ -110,5 +111,9 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
     @Override
     protected String getSettingsClassName() {
         return mFaceStatusUtils.getSettingsClassName();
+    }
+
+    public void setPreferenceScreen(PreferenceScreen preferenceScreen) {
+        mPreferenceScreen = preferenceScreen;
     }
 }

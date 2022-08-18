@@ -40,6 +40,10 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.provider.SearchIndexableResource;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -51,6 +55,7 @@ import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
@@ -62,13 +67,15 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @RunWith(AndroidJUnit4.class)
 public class SecuritySettingsTest {
-
     private Context mContext;
     private SecuritySettingsFeatureProvider mSecuritySettingsFeatureProvider;
     private SecuritySettings mSecuritySettings;
+    private Preference mPreference;
+    private RestrictedPreference mPreferenceFace;
+    private RestrictedPreference mPreferenceFingerprint;
+    private RestrictedPreference mPreferenceCombined;
 
     @Mock
     private TrustAgentManager mTrustAgentManager;
@@ -78,6 +85,8 @@ public class SecuritySettingsTest {
     private FingerprintManager mFingerprintManager;
     @Mock
     private PackageManager mPackageManager;
+
+    private PreferenceScreen mScreen;
 
     @Before
     @UiThreadTest
@@ -96,10 +105,30 @@ public class SecuritySettingsTest {
         FakeFeatureFactory mFeatureFactory = FakeFeatureFactory.setupForTest();
         SecurityFeatureProvider mSecurityFeatureProvider =
                 mFeatureFactory.getSecurityFeatureProvider();
-
         when(mSecurityFeatureProvider.getTrustAgentManager()).thenReturn(mTrustAgentManager);
         mSecuritySettingsFeatureProvider = mFeatureFactory.getSecuritySettingsFeatureProvider();
         mSecuritySettings = new SecuritySettings();
+
+        PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        mScreen = preferenceManager.createPreferenceScreen(mContext);
+        mPreference = new Preference(mContext);
+        mPreference.setKey(SecuritySettings.SECURITY_CATEGORY);
+
+        mPreferenceFace = new RestrictedPreference(mContext);
+        mPreferenceFingerprint = new RestrictedPreference(mContext);
+        mPreferenceCombined = new RestrictedPreference(mContext);
+
+        mPreferenceFace.setKey(FaceStatusPreferenceController
+                .KEY_FACE_SETTINGS);
+        mPreferenceFingerprint.setKey(FingerprintStatusPreferenceController
+                .KEY_FINGERPRINT_SETTINGS);
+        mPreferenceCombined.setKey(CombinedBiometricStatusPreferenceController
+                .KEY_BIOMETRIC_SETTINGS);
+
+        mScreen.addPreference(mPreference);
+        mScreen.addPreference(mPreferenceFace);
+        mScreen.addPreference(mPreferenceFingerprint);
+        mScreen.addPreference(mPreferenceCombined);
     }
 
     @Test
@@ -167,6 +196,150 @@ public class SecuritySettingsTest {
         assertThat(isCombinedPrefAvailable(controllers)).isTrue();
     }
 
+    @Test
+    @UiThreadTest
+    public void preferenceLifecycle_faceShowsThenCombined() {
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
+        final List<AbstractPreferenceController> controllers =
+                mSecuritySettings.createPreferenceControllers(mContext);
+
+        FaceStatusPreferenceController mFaceStatusPreferenceController =
+                getFaceStatusPreferenceController(controllers);
+
+        FingerprintStatusPreferenceController mFingerprintStatusPreferenceController =
+                getFingerprintStatusPreferenceController(controllers);
+
+        CombinedBiometricStatusPreferenceController mCombinedStatusPreferenceController =
+                getCombinedBiometricStatusPreferenceController(controllers);
+
+        mFaceStatusPreferenceController.setPreferenceScreen(mScreen);
+        mFingerprintStatusPreferenceController.setPreferenceScreen(mScreen);
+        mCombinedStatusPreferenceController.setPreferenceScreen(mScreen);
+
+        mSecuritySettings.getSettingsLifecycle().handleLifecycleEvent(Lifecycle.Event.ON_RESUME);
+
+        assertThat(mPreferenceFace.isVisible()).isTrue();
+        assertThat(mPreferenceFingerprint.isVisible()).isFalse();
+        assertThat(mPreferenceCombined.isVisible()).isFalse();
+
+        mSecuritySettings.getSettingsLifecycle().handleLifecycleEvent(Lifecycle.Event.ON_PAUSE);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        mSecuritySettings.getSettingsLifecycle().handleLifecycleEvent(Lifecycle.Event.ON_RESUME);
+
+        assertThat(mPreferenceFace.isVisible()).isFalse();
+        assertThat(mPreferenceFingerprint.isVisible()).isFalse();
+        assertThat(mPreferenceCombined.isVisible()).isTrue();
+    }
+
+    @Test
+    @UiThreadTest
+    public void preferenceLifecycle_fingerprintShowsThenCombined() {
+        when(mFaceManager.isHardwareDetected()).thenReturn(false);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        final List<AbstractPreferenceController> controllers =
+                mSecuritySettings.createPreferenceControllers(mContext);
+
+        FaceStatusPreferenceController mFaceStatusPreferenceController =
+                getFaceStatusPreferenceController(controllers);
+
+        FingerprintStatusPreferenceController mFingerprintStatusPreferenceController =
+                getFingerprintStatusPreferenceController(controllers);
+
+        CombinedBiometricStatusPreferenceController mCombinedStatusPreferenceController =
+                getCombinedBiometricStatusPreferenceController(controllers);
+
+        mFaceStatusPreferenceController.setPreferenceScreen(mScreen);
+        mFingerprintStatusPreferenceController.setPreferenceScreen(mScreen);
+        mCombinedStatusPreferenceController.setPreferenceScreen(mScreen);
+
+        mSecuritySettings.getSettingsLifecycle().handleLifecycleEvent(Lifecycle.Event.ON_RESUME);
+
+        assertThat(mPreferenceFace.isVisible()).isFalse();
+        assertThat(mPreferenceFingerprint.isVisible()).isTrue();
+        assertThat(mPreferenceCombined.isVisible()).isFalse();
+
+        mSecuritySettings.getSettingsLifecycle().handleLifecycleEvent(Lifecycle.Event.ON_PAUSE);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+        mSecuritySettings.getSettingsLifecycle().handleLifecycleEvent(Lifecycle.Event.ON_RESUME);
+
+        assertThat(mPreferenceFace.isVisible()).isFalse();
+        assertThat(mPreferenceFingerprint.isVisible()).isFalse();
+        assertThat(mPreferenceCombined.isVisible()).isTrue();
+    }
+
+    @Test
+    @UiThreadTest
+    public void preferenceLifecycle_combinedShowsThenFace() {
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        final List<AbstractPreferenceController> controllers =
+                mSecuritySettings.createPreferenceControllers(mContext);
+
+        FaceStatusPreferenceController mFaceStatusPreferenceController =
+                getFaceStatusPreferenceController(controllers);
+
+        FingerprintStatusPreferenceController mFingerprintStatusPreferenceController =
+                getFingerprintStatusPreferenceController(controllers);
+
+        CombinedBiometricStatusPreferenceController mCombinedStatusPreferenceController =
+                getCombinedBiometricStatusPreferenceController(controllers);
+
+        mFaceStatusPreferenceController.setPreferenceScreen(mScreen);
+        mFingerprintStatusPreferenceController.setPreferenceScreen(mScreen);
+        mCombinedStatusPreferenceController.setPreferenceScreen(mScreen);
+
+        mSecuritySettings.getSettingsLifecycle().handleLifecycleEvent(Lifecycle.Event.ON_RESUME);
+
+        assertThat(mPreferenceFace.isVisible()).isFalse();
+        assertThat(mPreferenceFingerprint.isVisible()).isFalse();
+        assertThat(mPreferenceCombined.isVisible()).isTrue();
+
+        mSecuritySettings.getSettingsLifecycle().handleLifecycleEvent(Lifecycle.Event.ON_PAUSE);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
+        mSecuritySettings.getSettingsLifecycle().handleLifecycleEvent(Lifecycle.Event.ON_RESUME);
+
+        assertThat(mPreferenceFace.isVisible()).isTrue();
+        assertThat(mPreferenceFingerprint.isVisible()).isFalse();
+        assertThat(mPreferenceCombined.isVisible()).isFalse();
+    }
+
+    @Test
+    @UiThreadTest
+    public void preferenceLifecycle_combinedShowsThenFingerprint() {
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        final List<AbstractPreferenceController> controllers =
+                mSecuritySettings.createPreferenceControllers(mContext);
+
+        FaceStatusPreferenceController mFaceStatusPreferenceController =
+                getFaceStatusPreferenceController(controllers);
+
+        FingerprintStatusPreferenceController mFingerprintStatusPreferenceController =
+                getFingerprintStatusPreferenceController(controllers);
+
+        CombinedBiometricStatusPreferenceController mCombinedStatusPreferenceController =
+                getCombinedBiometricStatusPreferenceController(controllers);
+
+        mFaceStatusPreferenceController.setPreferenceScreen(mScreen);
+        mFingerprintStatusPreferenceController.setPreferenceScreen(mScreen);
+        mCombinedStatusPreferenceController.setPreferenceScreen(mScreen);
+
+        mSecuritySettings.getSettingsLifecycle().handleLifecycleEvent(Lifecycle.Event.ON_RESUME);
+
+        assertThat(mPreferenceFace.isVisible()).isFalse();
+        assertThat(mPreferenceFingerprint.isVisible()).isFalse();
+        assertThat(mPreferenceCombined.isVisible()).isTrue();
+
+        mSecuritySettings.getSettingsLifecycle().handleLifecycleEvent(Lifecycle.Event.ON_PAUSE);
+        when(mFaceManager.isHardwareDetected()).thenReturn(false);
+        mSecuritySettings.getSettingsLifecycle().handleLifecycleEvent(Lifecycle.Event.ON_RESUME);
+
+        assertThat(mPreferenceFace.isVisible()).isFalse();
+        assertThat(mPreferenceFingerprint.isVisible()).isTrue();
+        assertThat(mPreferenceCombined.isVisible()).isFalse();
+    }
+
     private List<String> getAllXmlKeys(BaseSearchIndexProvider indexProvider) throws Exception {
         final List<SearchIndexableResource> resources = indexProvider.getXmlResourcesToIndex(
                 mContext, true /* not used*/);
@@ -206,5 +379,36 @@ public class SecuritySettingsTest {
         return controllers.stream().filter(
                 controller -> controller instanceof CombinedBiometricStatusPreferenceController
                         && controller.isAvailable()).count() == 1;
+    }
+
+    FaceStatusPreferenceController getFaceStatusPreferenceController(
+            List<AbstractPreferenceController> controllers) {
+        for (AbstractPreferenceController abstractPreferenceController: controllers) {
+            if (abstractPreferenceController instanceof FaceStatusPreferenceController) {
+                return (FaceStatusPreferenceController) abstractPreferenceController;
+            }
+        }
+        return null;
+    }
+
+    FingerprintStatusPreferenceController getFingerprintStatusPreferenceController(
+            List<AbstractPreferenceController> controllers) {
+        for (AbstractPreferenceController abstractPreferenceController: controllers) {
+            if (abstractPreferenceController instanceof FingerprintStatusPreferenceController) {
+                return (FingerprintStatusPreferenceController) abstractPreferenceController;
+            }
+        }
+        return null;
+    }
+
+    CombinedBiometricStatusPreferenceController getCombinedBiometricStatusPreferenceController(
+            List<AbstractPreferenceController> controllers) {
+        for (AbstractPreferenceController abstractPreferenceController: controllers) {
+            if (abstractPreferenceController
+                    instanceof CombinedBiometricStatusPreferenceController) {
+                return (CombinedBiometricStatusPreferenceController) abstractPreferenceController;
+            }
+        }
+        return null;
     }
 }
