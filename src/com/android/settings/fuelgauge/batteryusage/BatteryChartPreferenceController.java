@@ -267,6 +267,11 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                             refreshUi();
                         });
         Log.d(TAG, "getBatteryLevelData: " + batteryLevelData);
+        mMetricsFeatureProvider.action(
+                mPrefContext,
+                SettingsEnums.ACTION_BATTERY_HISTORY_LOADED,
+                getTotalHours(batteryLevelData));
+
         if (batteryLevelData == null) {
             mDailyTimestampFullTexts = null;
             mDailyViewModel = null;
@@ -313,7 +318,12 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             mDailyChartIndex = trapezoidIndex;
             mHourlyChartIndex = BatteryChartViewModel.SELECTED_INDEX_ALL;
             refreshUi();
-            // TODO: Change to log daily data.
+            mMetricsFeatureProvider.action(
+                    mPrefContext,
+                    trapezoidIndex == BatteryChartViewModel.SELECTED_INDEX_ALL
+                            ? SettingsEnums.ACTION_BATTERY_USAGE_DAILY_SHOW_ALL
+                            : SettingsEnums.ACTION_BATTERY_USAGE_DAILY_TIME_SLOT,
+                    mDailyChartIndex);
         });
         mHourlyChartView = hourlyChartView;
         mHourlyChartView.setOnSelectListener(trapezoidIndex -> {
@@ -327,7 +337,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                     mPrefContext,
                     trapezoidIndex == BatteryChartViewModel.SELECTED_INDEX_ALL
                             ? SettingsEnums.ACTION_BATTERY_USAGE_SHOW_ALL
-                            : SettingsEnums.ACTION_BATTERY_USAGE_TIME_SLOT);
+                            : SettingsEnums.ACTION_BATTERY_USAGE_TIME_SLOT,
+                    mHourlyChartIndex);
         });
         refreshUi();
     }
@@ -621,6 +632,16 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         return (isBatteryLevelDataInOneDay()
                 || mDailyChartIndex == BatteryChartViewModel.SELECTED_INDEX_ALL)
                 && mHourlyChartIndex == BatteryChartViewModel.SELECTED_INDEX_ALL;
+    }
+
+    @VisibleForTesting
+    static int getTotalHours(final BatteryLevelData batteryLevelData) {
+        if (batteryLevelData == null) {
+            return 0;
+        }
+        List<Long> dailyTimestamps = batteryLevelData.getDailyBatteryLevels().getTimestamps();
+        return (int) ((dailyTimestamps.get(dailyTimestamps.size() - 1) - dailyTimestamps.get(0))
+                / DateUtils.HOUR_IN_MILLIS);
     }
 
     private static List<String> generateTimestampDayOfWeekTexts(@NonNull final Context context,
