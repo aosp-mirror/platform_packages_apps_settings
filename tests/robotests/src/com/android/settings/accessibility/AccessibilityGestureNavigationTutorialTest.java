@@ -31,6 +31,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.test.core.app.ApplicationProvider;
@@ -110,6 +111,44 @@ public final class AccessibilityGestureNavigationTutorialTest {
                 mShortcutTypes)).hasSize(/* expectedSize= */ 2);
         assertThat(alertDialog).isNotNull();
     }
+
+    @Test
+    public void createTutorialPages_turnOnSoftwareShortcut_linkButtonVisible() {
+        mShortcutTypes |= UserShortcutType.SOFTWARE;
+
+        final AlertDialog alertDialog =
+                createAccessibilityTutorialDialog(mContext, mShortcutTypes);
+        alertDialog.show();
+
+        assertThat(alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).getVisibility())
+                .isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void createTutorialPages_turnOnSoftwareAndHardwareShortcut_linkButtonVisible() {
+        mShortcutTypes |= UserShortcutType.SOFTWARE;
+        mShortcutTypes |= UserShortcutType.HARDWARE;
+
+        final AlertDialog alertDialog =
+                createAccessibilityTutorialDialog(mContext, mShortcutTypes);
+        alertDialog.show();
+
+        assertThat(alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).getVisibility())
+                .isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void createTutorialPages_turnOnHardwareShortcut_linkButtonGone() {
+        mShortcutTypes |= UserShortcutType.HARDWARE;
+
+        final AlertDialog alertDialog =
+                createAccessibilityTutorialDialog(mContext, mShortcutTypes);
+        alertDialog.show();
+
+        assertThat(alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).getVisibility())
+                .isEqualTo(View.GONE);
+    }
+
 
     @Test
     public void performClickOnPositiveButton_turnOnSoftwareShortcut_dismiss() {
