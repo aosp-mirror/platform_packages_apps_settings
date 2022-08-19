@@ -67,7 +67,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final FingerprintManager fingerprintManager = getSystemService(FingerprintManager.class);
+        final FingerprintManager fingerprintManager = Utils.getFingerprintManagerOrNull(this);
         final List<FingerprintSensorPropertiesInternal> props =
                 fingerprintManager.getSensorPropertiesInternal();
         mCanAssumeUdfps = props != null && props.size() == 1 && props.get(0).isAnyUdfpsType();
@@ -138,8 +138,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         // This is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
         if (mToken == null && BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
-            final FingerprintManager fpm = getSystemService(FingerprintManager.class);
-            fpm.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
+            fingerprintManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
                 mChallenge = challenge;
                 mSensorId = sensorId;
                 mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
@@ -278,6 +277,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     }
 
     private void onStartButtonClick(View view) {
+        mNextClicked = true;
         startActivityForResult(getFingerprintEnrollingIntent(), ENROLL_REQUEST);
     }
 
