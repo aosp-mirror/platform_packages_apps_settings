@@ -259,10 +259,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
     @VisibleForTesting
     void initPreference() {
         mBatteryUsagePreference = findPreference(KEY_BATTERY_USAGE);
-        mBatteryUsagePreference.setSummary(
-                mPowerFeatureProvider.isChartGraphEnabled(getContext())
-                        ? getString(R.string.advanced_battery_preference_summary_with_hours)
-                        : getString(R.string.advanced_battery_preference_summary));
+        mBatteryUsagePreference.setSummary(getString(R.string.advanced_battery_preference_summary));
 
         mHelpPreference = findPreference(KEY_BATTERY_ERROR);
         mHelpPreference.setVisible(false);

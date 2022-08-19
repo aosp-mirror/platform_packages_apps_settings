@@ -179,7 +179,7 @@ public class AppBatteryPreferenceController extends BasePreferenceController
                     return null;
                 }
                 final BatteryDiffEntry entry =
-                        BatteryChartPreferenceController.getBatteryLast24HrUsageData(
+                        BatteryChartPreferenceController.getAppBatteryUsageData(
                                 mContext, mPackageName, mUserId);
                 Log.d(TAG, "loadBatteryDiffEntries():\n" + entry);
                 return entry;
@@ -200,10 +200,10 @@ public class AppBatteryPreferenceController extends BasePreferenceController
                 mBatteryPercent = Utils.formatPercentage(
                         mBatteryDiffEntry.getPercentOfTotal(), /* round */ true);
                 mPreference.setSummary(mContext.getString(
-                        R.string.battery_summary_24hr, mBatteryPercent));
+                        R.string.battery_summary, mBatteryPercent));
             } else {
                 mPreference.setSummary(
-                        mContext.getString(R.string.no_battery_summary_24hr));
+                        mContext.getString(R.string.no_battery_summary));
             }
         }
 
