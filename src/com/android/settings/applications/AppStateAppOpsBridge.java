@@ -246,7 +246,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
             }
         } catch (RemoteException e) {
             Log.w(TAG, "PackageManager is dead. Can't get list of packages granted "
-                    + mPermissions, e);
+                    + Arrays.toString(mPermissions), e);
             return;
         }
     }
