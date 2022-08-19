@@ -20,7 +20,7 @@ import androidx.annotation.IntDef;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppStateAlarmsAndRemindersBridge;
-import com.android.settings.applications.AppStateBatteryOptimizationBridge;
+import com.android.settings.applications.AppStateAppBatteryUsageBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateLocaleBridge;
 import com.android.settings.applications.AppStateManageExternalStorageBridge;
@@ -225,21 +225,21 @@ public class AppFilterRegistry {
         // Unrestricted
         mFilters[FILTER_APPS_BATTERY_UNRESTRICTED] =
                 new AppFilterItem(
-                        AppStateBatteryOptimizationBridge.FILTER_BATTERY_UNRESTRICTED_APPS,
+                        AppStateAppBatteryUsageBridge.FILTER_BATTERY_UNRESTRICTED_APPS,
                         FILTER_APPS_BATTERY_UNRESTRICTED,
                         R.string.filter_battery_unrestricted_title);
 
         // Optimized
         mFilters[FILTER_APPS_BATTERY_OPTIMIZED] =
                 new AppFilterItem(
-                        AppStateBatteryOptimizationBridge.FILTER_BATTERY_OPTIMIZED_APPS,
+                        AppStateAppBatteryUsageBridge.FILTER_BATTERY_OPTIMIZED_APPS,
                         FILTER_APPS_BATTERY_OPTIMIZED,
                         R.string.filter_battery_optimized_title);
 
         // Unrestricted
         mFilters[FILTER_APPS_BATTERY_RESTRICTED] =
                 new AppFilterItem(
-                        AppStateBatteryOptimizationBridge.FILTER_BATTERY_RESTRICTED_APPS,
+                        AppStateAppBatteryUsageBridge.FILTER_BATTERY_RESTRICTED_APPS,
                         FILTER_APPS_BATTERY_RESTRICTED,
                         R.string.filter_battery_restricted_title);
     }
