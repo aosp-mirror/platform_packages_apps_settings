@@ -26,6 +26,7 @@ import android.os.BatteryManager;
 import android.os.BatteryUsageStats;
 import android.os.LocaleList;
 import android.os.UserHandle;
+import android.text.format.DateUtils;
 
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
@@ -39,8 +40,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -173,7 +174,8 @@ public final class ConvertUtilsTest {
     public void getIndexedUsageMap_returnsExpectedResult() {
         // Creates the fake testing data.
         final int timeSlotSize = 2;
-        final long[] batteryHistoryKeys = new long[]{101L, 102L, 103L, 104L, 105L};
+        final long[] batteryHistoryKeys = new long[]{generateTimestamp(0), generateTimestamp(1),
+                generateTimestamp(2), generateTimestamp(3), generateTimestamp(4)};
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
                 new HashMap<>();
         final BatteryHistEntry fakeEntry = createBatteryHistEntry(
@@ -270,11 +272,11 @@ public final class ConvertUtilsTest {
         for (int index = 0; index < remainingSize; index++) {
             batteryHistoryMap.put(105L + index + 1, new HashMap<>());
         }
-        when(mPowerUsageFeatureProvider.getBatteryHistory(mContext))
+        when(mPowerUsageFeatureProvider.getBatteryHistorySinceLastFullCharge(mContext))
                 .thenReturn(batteryHistoryMap);
 
         final List<BatteryDiffEntry> batteryDiffEntryList =
-                BatteryChartPreferenceController.getBatteryLast24HrUsageData(mContext);
+                BatteryChartPreferenceController.getAppBatteryUsageData(mContext);
 
         assertThat(batteryDiffEntryList).isNotEmpty();
         final BatteryDiffEntry resultEntry = batteryDiffEntryList.get(0);
@@ -471,5 +473,10 @@ public final class ConvertUtilsTest {
         assertThat((int) entry.getPercentOfTotal()).isEqualTo(percentOfTotal);
         assertThat(entry.mForegroundUsageTimeInMs).isEqualTo(foregroundUsageTimeInMs);
         assertThat(entry.mBackgroundUsageTimeInMs).isEqualTo(backgroundUsageTimeInMs);
+    }
+
+    private static Long generateTimestamp(int index) {
+        // "2021-04-23 07:00:00 UTC" + index hours
+        return 1619247600000L + index * DateUtils.HOUR_IN_MILLIS;
     }
 }
