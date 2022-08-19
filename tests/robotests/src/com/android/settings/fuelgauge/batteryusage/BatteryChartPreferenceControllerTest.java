@@ -630,6 +630,18 @@ public final class BatteryChartPreferenceControllerTest {
                 .isFalse();
     }
 
+    @Test
+    public void getTotalHours_getExpectedResult() {
+        Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = createBatteryHistoryMap(60);
+        BatteryLevelData batteryLevelData = DataProcessor.getBatteryLevelData(mContext, null,
+                batteryHistoryMap, null);
+
+        final int totalHour = BatteryChartPreferenceController.getTotalHours(batteryLevelData);
+
+        // Only calculate the even hours.
+        assertThat(totalHour).isEqualTo(58);
+    }
+
     private static Long generateTimestamp(int index) {
         // "2021-04-23 07:00:00 UTC" + index hours
         return 1619247600000L + index * DateUtils.HOUR_IN_MILLIS;
