@@ -309,11 +309,7 @@ public class AppStorageSettings extends AppInfoWithHeader
                     .setButton1Enabled(false);
             mCanClearData = false;
         } else {
-            if (appHasSpaceManagementUI) {
-                mButtonsPref.setButton1Text(R.string.manage_space_text);
-            } else {
-                mButtonsPref.setButton1Text(R.string.clear_user_data_text);
-            }
+            mButtonsPref.setButton1Text(R.string.clear_user_data_text);
             mButtonsPref.setButton1Icon(R.drawable.ic_settings_delete)
                     .setButton1OnClickListener(v -> handleClearDataClick());
         }
