@@ -161,6 +161,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public boolean isExtraDefend() {
+        return false;
+    }
+
+    @Override
     public Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context) {
         return null;
     }
