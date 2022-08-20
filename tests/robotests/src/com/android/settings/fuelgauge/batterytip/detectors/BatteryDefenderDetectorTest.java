@@ -41,7 +41,8 @@ public class BatteryDefenderDetectorTest {
 
         mBatteryInfo.discharging = false;
 
-        mBatteryDefenderDetector = new BatteryDefenderDetector(mBatteryInfo);
+        mBatteryDefenderDetector = new BatteryDefenderDetector(
+            mBatteryInfo, /* extraDefend= */ false);
     }
 
     @Test
