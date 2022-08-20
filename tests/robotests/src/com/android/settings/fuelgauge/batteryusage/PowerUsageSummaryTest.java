@@ -139,17 +139,7 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void initPreference_chartGraphEnabled_hasCorrectSummary() {
-        mFragment.initPreference();
-
-        verify(mBatteryUsagePreference).setSummary("View usage for past 24 hours");
-    }
-
-    @Test
-    public void initPreference_chartGraphDisabled_hasCorrectSummary() {
-        when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mRealContext))
-                .thenReturn(false);
-
+    public void initPreference_hasCorrectSummary() {
         mFragment.initPreference();
 
         verify(mBatteryUsagePreference).setSummary("View usage from last full charge");
