@@ -140,13 +140,22 @@ public final class ConvertUtils {
 
     /** Converts UTC timestamp to local time hour data. */
     public static String utcToLocalTimeHour(
-            Context context, long timestamp, boolean is24HourFormat) {
+            final Context context, final long timestamp, final boolean is24HourFormat) {
         final Locale locale = getLocale(context);
         // e.g. for 12-hour format: 9 pm
         // e.g. for 24-hour format: 09:00
         final String skeleton = is24HourFormat ? "HHm" : "ha";
         final String pattern = DateFormat.getBestDateTimePattern(locale, skeleton);
         return DateFormat.format(pattern, timestamp).toString().toLowerCase(locale);
+    }
+
+    /** Converts UTC timestamp to local time day of week data. */
+    public static String utcToLocalTimeDayOfWeek(
+            final Context context, final long timestamp, final boolean isAbbreviation) {
+        final Locale locale = getLocale(context);
+        final String pattern = DateFormat.getBestDateTimePattern(locale,
+                isAbbreviation ? "E" : "EEEE");
+        return DateFormat.format(pattern, timestamp).toString();
     }
 
     /** Gets indexed battery usage data for each corresponding time slot. */
@@ -267,7 +276,7 @@ public final class ConvertUtils {
                 diffEntry.setTotalConsumePower(totalConsumePower);
             }
         }
-        insert24HoursData(BatteryChartView.SELECTED_INDEX_ALL, resultMap);
+        insert24HoursData(BatteryChartViewModel.SELECTED_INDEX_ALL, resultMap);
         resolveMultiUsersData(context, resultMap);
         if (purgeLowPercentageAndFakeData) {
             purgeLowPercentageAndFakeData(context, resultMap);
