@@ -37,7 +37,7 @@
         android:layout_height="170dp"
         android:layout_marginBottom="16dp"
         android:visibility="gone"
-        android:contentDescription="@string/battery_usage_chart"
+        android:contentDescription="@string/daily_battery_usage_chart"
         android:textAppearance="?android:attr/textAppearanceSmall"
         settings:textColor="?android:attr/textColorSecondary" />
 
@@ -47,7 +47,7 @@
         android:layout_height="170dp"
         android:layout_marginBottom="16dp"
         android:visibility="visible"
-        android:contentDescription="@string/battery_usage_chart"
+        android:contentDescription="@string/hourly_battery_usage_chart"
         android:textAppearance="?android:attr/textAppearanceSmall"
         settings:textColor="?android:attr/textColorSecondary" />
     <!-- Use non-scalable text size from text_size_small_material -->

@@ -31,6 +31,7 @@ import com.android.settings.fuelgauge.batterytip.detectors.SmartBatteryDetector;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.fuelgauge.EstimateKt;
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
@@ -66,13 +67,16 @@ public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
         final BatteryTipPolicy policy = new BatteryTipPolicy(getContext());
         final BatteryInfo batteryInfo = mBatteryUtils.getBatteryInfo(TAG);
         final Context context = getContext();
+        final boolean extraDefend = FeatureFactory.getFactory(context)
+                .getPowerUsageFeatureProvider(context)
+                .isExtraDefend();
 
         tips.add(new LowBatteryDetector(context, policy, batteryInfo).detect());
         tips.add(new HighUsageDetector(context, policy, mBatteryUsageStats, batteryInfo).detect());
         tips.add(new SmartBatteryDetector(
                 context, policy, batteryInfo, context.getContentResolver()).detect());
         tips.add(new EarlyWarningDetector(policy, context).detect());
-        tips.add(new BatteryDefenderDetector(batteryInfo).detect());
+        tips.add(new BatteryDefenderDetector(batteryInfo, extraDefend).detect());
         Collections.sort(tips);
         return tips;
     }

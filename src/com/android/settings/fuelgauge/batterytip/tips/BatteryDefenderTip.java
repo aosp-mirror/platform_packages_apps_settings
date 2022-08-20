@@ -18,18 +18,36 @@ package com.android.settings.fuelgauge.batterytip.tips;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.BatteryManager;
 import android.os.Parcel;
+import android.util.Log;
+
+import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.CardPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
+import java.text.NumberFormat;
 
 /**
  * Tip to show current battery is overheated
  */
 public class BatteryDefenderTip extends BatteryTip {
 
+    private static final String TAG = "BatteryDefenderTip";
+    private boolean mExtraDefend = false;
+
     public BatteryDefenderTip(@StateType int state) {
+        this(state, false);
+    }
+
+    public BatteryDefenderTip(@StateType int state, boolean extraDefend) {
         super(TipType.BATTERY_DEFENDER, state, true /* showDialog */);
+        mExtraDefend = extraDefend;
     }
 
     private BatteryDefenderTip(Parcel in) {
@@ -43,6 +61,14 @@ public class BatteryDefenderTip extends BatteryTip {
 
     @Override
     public CharSequence getSummary(Context context) {
+        if (mExtraDefend) {
+            final int extraValue = context.getResources()
+                    .getInteger(R.integer.config_battery_extra_tip_value);
+            final String extraPercentage = NumberFormat.getPercentInstance()
+                    .format(extraValue * 0.01f);
+            return context.getString(
+                    R.string.battery_tip_limited_temporarily_extra_summary, extraPercentage);
+        }
         return context.getString(R.string.battery_tip_limited_temporarily_summary);
     }
 
@@ -60,6 +86,55 @@ public class BatteryDefenderTip extends BatteryTip {
     public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
         metricsFeatureProvider.action(context, SettingsEnums.ACTION_BATTERY_DEFENDER_TIP,
                 mState);
+    }
+
+    @Override
+    public void updatePreference(Preference preference) {
+        super.updatePreference(preference);
+        final Context context = preference.getContext();
+
+        CardPreference cardPreference = castToCardPreferenceSafely(preference);
+        if (cardPreference == null) {
+            Log.e(TAG, "cast Preference to CardPreference failed");
+            return;
+        }
+
+        cardPreference.setPrimaryButtonText(
+                context.getString(R.string.battery_tip_charge_to_full_button));
+        cardPreference.setPrimaryButtonClickListener(
+                unused -> {
+                    resumeCharging(context);
+                    preference.setVisible(false);
+                });
+        cardPreference.setPrimaryButtonVisible(isPluggedIn(context));
+
+        cardPreference.setSecondaryButtonText(context.getString(R.string.see_more));
+        cardPreference.setSecondaryButtonClickListener(unused -> cardPreference.performClick());
+        cardPreference.setSecondaryButtonVisible(true);
+    }
+
+    private CardPreference castToCardPreferenceSafely(Preference preference) {
+        return preference instanceof CardPreference ? (CardPreference) preference : null;
+    }
+
+    private void resumeCharging(Context context) {
+        final Intent intent =
+                FeatureFactory.getFactory(context)
+                        .getPowerUsageFeatureProvider(context)
+                        .getResumeChargeIntent();
+        if (intent != null) {
+            context.sendBroadcast(intent);
+        }
+
+        Log.i(TAG, "send resume charging broadcast intent=" + intent);
+    }
+
+    private boolean isPluggedIn(Context context) {
+        final Intent batteryIntent =
+                context.registerReceiver(
+                        /* receiver= */ null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        return batteryIntent != null
+                && batteryIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) != 0;
     }
 
     public static final Creator CREATOR = new Creator() {
