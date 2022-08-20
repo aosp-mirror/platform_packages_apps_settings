@@ -539,16 +539,13 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             return null;
         }
         if (totalTimeMs == 0) {
-            final int batteryWithoutUsageTime = consumedPower > 0
-                    ? R.string.battery_usage_without_time : R.string.battery_not_usage_24hr;
-            usageTimeSummary = getText(isChartGraphEnabled
-                    ? batteryWithoutUsageTime : R.string.battery_not_usage);
+            usageTimeSummary = getText(
+                    isChartGraphEnabled && consumedPower > 0 ? R.string.battery_usage_without_time
+                            : R.string.battery_not_usage);
         } else if (slotTime == null) {
-            // Shows summary text with past 24 hr or full charge if slot time is null.
-            usageTimeSummary = isChartGraphEnabled
-                    ? getAppPast24HrActiveSummary(foregroundTimeMs, backgroundTimeMs, totalTimeMs)
-                    : getAppFullChargeActiveSummary(
-                            foregroundTimeMs, backgroundTimeMs, totalTimeMs);
+            // Shows summary text with last full charge if slot time is null.
+            usageTimeSummary = getAppFullChargeActiveSummary(
+                    foregroundTimeMs, backgroundTimeMs, totalTimeMs);
         } else {
             // Shows summary text with slot time.
             usageTimeSummary = getAppActiveSummaryWithSlotTime(
