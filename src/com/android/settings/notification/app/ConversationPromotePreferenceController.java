@@ -37,7 +37,7 @@ public class ConversationPromotePreferenceController extends NotificationPrefere
     public ConversationPromotePreferenceController(Context context,
             SettingsPreferenceFragment hostFragment,
             NotificationBackend backend) {
-        super(context, backend);
+        super(context, backend, KEY);
         mHostFragment = hostFragment;
     }
 
@@ -47,14 +47,17 @@ public class ConversationPromotePreferenceController extends NotificationPrefere
     }
 
     @Override
-    public boolean isAvailable() {
-        if (!super.isAvailable()) {
-            return false;
+    public int getAvailabilityStatus() {
+        if (super.getAvailabilityStatus() == CONDITIONALLY_UNAVAILABLE) {
+            return CONDITIONALLY_UNAVAILABLE;
         }
         if (mAppRow == null || mChannel == null) {
-            return false;
+            return CONDITIONALLY_UNAVAILABLE;
         }
-        return !TextUtils.isEmpty(mChannel.getConversationId()) && mChannel.isDemoted();
+        if (!TextUtils.isEmpty(mChannel.getConversationId()) && mChannel.isDemoted()) {
+            return AVAILABLE;
+        }
+        return CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
