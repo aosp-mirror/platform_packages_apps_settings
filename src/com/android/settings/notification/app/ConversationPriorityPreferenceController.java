@@ -34,7 +34,7 @@ public class ConversationPriorityPreferenceController extends NotificationPrefer
 
     public ConversationPriorityPreferenceController(Context context,
             NotificationBackend backend, NotificationSettings.DependentFieldListener listener) {
-        super(context, backend);
+        super(context, backend, KEY);
         mDependentFieldListener = listener;
     }
 
@@ -44,14 +44,14 @@ public class ConversationPriorityPreferenceController extends NotificationPrefer
     }
 
     @Override
-    public boolean isAvailable() {
-        if (!super.isAvailable()) {
-            return false;
+    public int getAvailabilityStatus() {
+        if (super.getAvailabilityStatus() == CONDITIONALLY_UNAVAILABLE) {
+            return CONDITIONALLY_UNAVAILABLE;
         }
         if (mAppRow == null || mChannel == null) {
-            return false;
+            return CONDITIONALLY_UNAVAILABLE;
         }
-        return true;
+        return AVAILABLE;
     }
 
     @Override
