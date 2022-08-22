@@ -85,6 +85,8 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Jy het nie toestemming om Bluetooth-instellings te verander nie."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Bind nuwe toestel saam"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Bind regteroor saam"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Bind linkeroor saam"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Bind jou ander oor saam"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Jou linkergehoortoestel is gekoppel.\n\nMaak seker dat jou regtergehoortoestel aangeskakel en gereed is om saam te bind wanneer jy dit wil saambind."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Jou regtergehoortoestel is gekoppel.\n\nMaak seker dat jou linkergehoortoestel aangeskakel en gereed is om saam te bind wanneer jy dit wil saambind."</string>
@@ -2554,7 +2556,7 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Groen swak, deuteranomalie"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Rooi swak, protanomalie"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalie"</string>
-    <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Ekstra donker"</string>
+    <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Ekstra flou"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Maak skerm ekstra donker"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Ekstra Donker-kortpad"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Meer oor ekstra donker"</string>
@@ -2759,8 +2761,12 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Sommige kenmerke kan beperk word"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Hoër battery gebruik"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Sien programme met die hoogste gebruik"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Laaiproses word tydelik beperk"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Om jou battery te spaar. Kom meer te wete."</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Hervat laaiproses"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"In sekere omstandighede, soos hoë temperature en lang laaitydperke, kan die laaiproses tot <xliff:g id="PERCENT">%1$s</xliff:g> beperk word om die battery gesond te hou.\n\nWanneer dié omstandighede eindig, sal jou foon outomaties normaalweg laai."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"In sekere omstandighede, soos hoë temperature en lang laaitydperke, kan die laaiproses tot <xliff:g id="PERCENT">%1$s</xliff:g> beperk word om die battery gesond te hou.\n\nWanneer daardie omstandighede eindig, sal jou tablet outomaties normaalweg laai."</string>
@@ -2796,6 +2802,8 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Hierdie program sal batterykrag op die agtergrond kan gebruik. Jou battery sal dalk gouer as verwag afloop."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Verwyder"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Kanselleer"</string>
+    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
+    <skip />
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Jou programme gebruik \'n gewone hoeveelheid batterykrag. As programme te veel batterykrag gebruik, sal jou foon handelinge voorstel wat jy kan uitvoer.\n\nJy kan altyd Batterybespaarder aanskakel as jou battery begin pap raak."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Jou programme gebruik \'n gewone hoeveelheid batterykrag. As programme te veel batterykrag gebruik, sal jou tablet handelinge voorstel wat jy kan uitvoer.\n\nJy kan altyd Batterybespaarder aanskakel as jou battery begin pap raak."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Jou programme gebruik \'n gewone hoeveelheid batterykrag. As programme te veel batterykrag gebruik, sal jou toestel handelinge voorstel wat jy kan uitvoer.\n\nJy kan altyd Batterybespaarder aanskakel as jou battery begin pap raak."</string>
@@ -2973,8 +2981,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"met battery <xliff:g id="PERCENT">%1$s</xliff:g> vol"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Batterypersentasie"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Wys batterypersentasie op statusbalk"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Batteryvlak sedert battery laas volgelaai is"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Batteryvlak vir die afgelope 24 u."</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"Programgebruik sedert battery laas volgelaai is"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Programgebruik vir die afgelope 24 u."</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"Stelselgebruik sedert battery laas volgelaai is"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Stelselgebruik vir die afgelope 24 u."</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Stelselgebruik vir <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Programgebruik vir <xliff:g id="SLOT">%s</xliff:g>"</string>

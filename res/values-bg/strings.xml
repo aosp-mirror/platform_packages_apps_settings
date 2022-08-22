@@ -85,6 +85,8 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Нямате разрешение да променяте настройките за Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Сдвояване на ново устройство"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Дясно ухо: Сдвояване"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Ляво ухо: Сдвояване"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Сдвояване на другото ухо"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Слуховият апарат за лявото ухо е свързан.\n\nЗа да сдвоите този за дясното, уверете се, че е включен и в готовност за сдвояване."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Слуховият апарат за дясното ухо е свързан.\n\nЗа да сдвоите този за лявото, уверете се, че е включен и в готовност за сдвояване."</string>
@@ -2761,8 +2763,12 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Някои функции може да са ограничени"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"По-голямо използване на батерията"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Вижте приложенията с най-голямо използване"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Зареждането временно е ограничено"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"За запазване на батерията ви. Научете повече."</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Възобновяване на зареждането"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"При определени условия, като например висока температура и дълъг период на зареждане, зареждането може да бъде ограничено до <xliff:g id="PERCENT">%1$s</xliff:g> с цел запазване на състоянието на батерията.\n\nКогато съответните условия вече не са налице, телефонът ви автоматично ще започне да се зарежда нормално."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"При определени условия, като например висока температура и дълъг период на зареждане, зареждането може да бъде ограничено до <xliff:g id="PERCENT">%1$s</xliff:g> с цел запазване на състоянието на батерията.\n\nКогато съответните условия вече не са налице, таблетът ви автоматично ще започне да се зарежда нормално."</string>
@@ -2798,6 +2804,8 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Това приложение ще може да използва батерията на заден план. Тя може да се изтощи по-рано от очакваното."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Премахване"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Отказ"</string>
+    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
+    <skip />
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Приложенията ви използват обичайното количество енергия от батерията. Ако те изразходват твърде много от нея, телефонът ви ще предложи действия, които можете да предприемете.\n\nВинаги можете да включите режима за запазване на батерията, ако тя е напът да се изтощи."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Приложенията ви използват обичайното количество енергия от батерията. Ако те изразходват твърде много от нея, таблетът ви ще предложи действия, които можете да предприемете.\n\nВинаги можете да включите режима за запазване на батерията, ако тя е напът да се изтощи."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Приложенията ви използват обичайното количество енергия от батерията. Ако те изразходват твърде много от нея, устройството ви ще предложи действия, които можете да предприемете.\n\nВинаги можете да включите режима за запазване на батерията, ако тя е напът да се изтощи."</string>
@@ -2975,8 +2983,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"при <xliff:g id="PERCENT">%1$s</xliff:g> батерия"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Процент на батерията"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Показване на процента на батерията в лентата на състоянието"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Ниво на батерията от последното пълно зареждане"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Ниво на батерията за последните 24 ч"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"Използване на приложенията от последното пълно зареждане"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Използване от приложенията за последните 24 ч"</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"Използване на системата от последното пълно зареждане"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Използване от системата за последните 24 ч"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Използване от системата за <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Използване от приложенията за <xliff:g id="SLOT">%s</xliff:g>"</string>
