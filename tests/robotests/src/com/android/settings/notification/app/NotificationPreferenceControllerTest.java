@@ -426,7 +426,7 @@ public class NotificationPreferenceControllerTest {
     private final class TestPreferenceController extends NotificationPreferenceController {
 
         private TestPreferenceController(Context context, NotificationBackend backend) {
-            super(context, backend);
+            super(context, backend, "key");
         }
 
         @Override

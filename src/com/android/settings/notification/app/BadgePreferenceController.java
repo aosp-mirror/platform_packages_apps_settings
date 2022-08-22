@@ -38,7 +38,7 @@ public class BadgePreferenceController extends NotificationPreferenceController
 
     public BadgePreferenceController(Context context,
             NotificationBackend backend) {
-        super(context, backend);
+        super(context, backend, KEY_BADGE);
     }
 
     @Override
@@ -47,25 +47,29 @@ public class BadgePreferenceController extends NotificationPreferenceController
     }
 
     @Override
-    public boolean isAvailable() {
-        if (!super.isAvailable()) {
-            return false;
+    public int getAvailabilityStatus() {
+        if (super.getAvailabilityStatus() == CONDITIONALLY_UNAVAILABLE) {
+            return CONDITIONALLY_UNAVAILABLE;
         }
         if (mAppRow == null && mChannel == null) {
-            return false;
+            return CONDITIONALLY_UNAVAILABLE;
         }
         if (Settings.Secure.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BADGING, SYSTEM_WIDE_ON) == SYSTEM_WIDE_OFF) {
-            return false;
+            return CONDITIONALLY_UNAVAILABLE;
         }
         if (mChannel != null) {
             if (isDefaultChannel()) {
-                return true;
+                return AVAILABLE;
             } else {
-                return mAppRow == null ? false : mAppRow.showBadge;
+                return mAppRow == null
+                        ? CONDITIONALLY_UNAVAILABLE
+                        : mAppRow.showBadge
+                                ? AVAILABLE
+                                : CONDITIONALLY_UNAVAILABLE;
             }
         }
-        return true;
+        return AVAILABLE;
     }
 
     @Override

@@ -84,15 +84,23 @@ public class StorageWizardFormatConfirm extends InstrumentedDialogFragment {
         builder.setTitle(TextUtils.expandTemplate(
                 getText(R.string.storage_wizard_format_confirm_v2_title),
                 disk.getShortDescription()));
-        builder.setMessage(TextUtils.expandTemplate(
-                getText(R.string.storage_wizard_format_confirm_v2_body),
+        if (formatPrivate) {
+            builder.setMessage(TextUtils.expandTemplate(
+                    getText(R.string.storage_wizard_format_confirm_v2_body),
+                    disk.getDescription(),
+                    disk.getShortDescription(),
+                    disk.getShortDescription()));
+        } else {
+            builder.setMessage(TextUtils.expandTemplate(
+                getText(R.string.storage_wizard_format_confirm_v2_body_external),
                 disk.getDescription(),
                 disk.getShortDescription(),
                 disk.getShortDescription()));
+        }
 
         builder.setNegativeButton(android.R.string.cancel, null);
         builder.setPositiveButton(
-                TextUtils.expandTemplate(getText(R.string.storage_wizard_format_confirm_v2_action),
+                TextUtils.expandTemplate(getText(R.string.storage_menu_format_option),
                         disk.getShortDescription()),
                 (dialog, which) -> {
                     final Intent intent = new Intent(context, StorageWizardFormatProgress.class);
