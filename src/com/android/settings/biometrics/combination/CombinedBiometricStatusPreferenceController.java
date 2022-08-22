@@ -40,6 +40,7 @@ public class CombinedBiometricStatusPreferenceController extends
     @VisibleForTesting
     RestrictedPreference mPreference;
     protected final CombinedBiometricStatusUtils mCombinedBiometricStatusUtils;
+    private PreferenceScreen mPreferenceScreen;
 
     public CombinedBiometricStatusPreferenceController(Context context) {
         this(context, KEY_BIOMETRIC_SETTINGS, null /* lifecycle */);
@@ -66,11 +67,15 @@ public class CombinedBiometricStatusPreferenceController extends
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void onResume() {
         updateStateInternal();
+        if (mPreferenceScreen != null) {
+            displayPreference(mPreferenceScreen);
+        }
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        mPreferenceScreen = screen;
         mPreference = screen.findPreference(mPreferenceKey);
     }
 

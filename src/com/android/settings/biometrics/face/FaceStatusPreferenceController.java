@@ -40,6 +40,7 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
     protected final FaceManager mFaceManager;
     @VisibleForTesting
     RestrictedPreference mPreference;
+    private PreferenceScreen mPreferenceScreen;
     private final FaceStatusUtils mFaceStatusUtils;
 
     public FaceStatusPreferenceController(Context context) {
@@ -67,11 +68,15 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void onResume() {
         updateStateInternal();
+        if (mPreferenceScreen != null) {
+            displayPreference(mPreferenceScreen);
+        }
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        mPreferenceScreen = screen;
         mPreference = screen.findPreference(mPreferenceKey);
     }
 
