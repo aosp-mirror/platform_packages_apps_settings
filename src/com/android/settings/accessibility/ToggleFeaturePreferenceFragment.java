@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
@@ -232,13 +233,18 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final SettingsActivity activity = (SettingsActivity) getActivity();
-        final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
+        final SettingsActivity settingsActivity = (SettingsActivity) getActivity();
+        final SettingsMainSwitchBar switchBar = settingsActivity.getSwitchBar();
         switchBar.hide();
 
         // Reshow tooltip when activity recreate, such as rotate device.
         if (mNeedsQSTooltipReshow) {
-            getView().post(this::showQuickSettingsTooltipIfNeeded);
+            view.post(() -> {
+                final Activity activity = getActivity();
+                if (activity != null && !activity.isFinishing()) {
+                    showQuickSettingsTooltipIfNeeded();
+                }
+            });
         }
 
         writeDefaultShortcutTargetServiceToSettingsIfNeeded(getPrefContext());
@@ -275,8 +281,9 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         if (value != NOT_SET) {
             outState.putInt(KEY_SAVED_USER_SHORTCUT_TYPE, value);
         }
-        if (mTooltipWindow != null) {
-            outState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, mTooltipWindow.isShowing());
+        final boolean isTooltipWindowShowing = mTooltipWindow != null && mTooltipWindow.isShowing();
+        if (mNeedsQSTooltipReshow || isTooltipWindowShowing) {
+            outState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, /* value= */ true);
             outState.putInt(KEY_SAVED_QS_TOOLTIP_TYPE, mNeedsQSTooltipType);
         }
         super.onSaveInstanceState(outState);

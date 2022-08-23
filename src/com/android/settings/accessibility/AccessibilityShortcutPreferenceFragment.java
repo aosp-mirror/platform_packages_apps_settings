@@ -20,6 +20,7 @@ import static com.android.settings.accessibility.AccessibilityDialogUtils.Dialog
 import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_GENERAL_CATEGORY;
 import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_SAVED_QS_TOOLTIP_TYPE;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
@@ -150,7 +151,12 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
 
         // Reshow tooltip when activity recreate, such as rotate device.
         if (mNeedsQSTooltipReshow) {
-            getView().post(this::showQuickSettingsTooltipIfNeeded);
+            view.post(() -> {
+                final Activity activity = getActivity();
+                if (activity != null && !activity.isFinishing()) {
+                    showQuickSettingsTooltipIfNeeded();
+                }
+            });
         }
     }
 
@@ -180,8 +186,9 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
         if (value != NOT_SET) {
             outState.putInt(KEY_SAVED_USER_SHORTCUT_TYPE, value);
         }
-        if (mTooltipWindow != null) {
-            outState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, mTooltipWindow.isShowing());
+        final boolean isTooltipWindowShowing = mTooltipWindow != null && mTooltipWindow.isShowing();
+        if (mNeedsQSTooltipReshow || isTooltipWindowShowing) {
+            outState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, /* value= */ true);
             outState.putInt(KEY_SAVED_QS_TOOLTIP_TYPE, mNeedsQSTooltipType);
         }
         super.onSaveInstanceState(outState);
