@@ -42,6 +42,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.clearInvocations;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -74,12 +75,15 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
+import java.util.concurrent.Executor;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowAlertDialogCompat.class)
 public class SimSelectNotificationTest {
     @Mock
     private Context mContext;
+    @Mock
+    private Executor mExecutor;
     @Mock
     private NotificationManager mNotificationManager;
     @Mock
@@ -94,6 +98,8 @@ public class SimSelectNotificationTest {
     private SubscriptionInfo mSubInfo;
     @Mock
     private DisplayMetrics mDisplayMetrics;
+    @Mock
+    private SimDialogActivity mActivity;
 
     private final String mFakeDisplayName = "fake_display_name";
     private final CharSequence mFakeNotificationChannelTitle = "fake_notification_channel_title";
@@ -236,27 +242,18 @@ public class SimSelectNotificationTest {
 
     @Test
     public void onReceivePrimarySubListChange_WithDismissExtra_shouldDismiss() {
+        doReturn(mExecutor).when(mActivity).getMainExecutor();
+        SimDialogProhibitService.supportDismiss(mActivity);
+
         Intent intent = new Intent(TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED);
         intent.putExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
-                EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA);
+                EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DISMISS);
 
         mSimSelectNotification.onReceive(mContext, intent);
         clearInvocations(mContext);
 
         // Dismiss.
-        intent.putExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
-                EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DISMISS);
-        mSimSelectNotification.onReceive(mContext, intent);
-        ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mContext).startActivity(intentCaptor.capture());
-        Intent capturedIntent = intentCaptor.getValue();
-        assertThat(capturedIntent).isNotNull();
-        assertThat(capturedIntent.getComponent().getClassName()).isEqualTo(
-                SimDialogActivity.class.getName());
-        assertThat(capturedIntent.getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK)
-                .isNotEqualTo(0);
-        assertThat(capturedIntent.getIntExtra(SimDialogActivity.DIALOG_TYPE_KEY, INVALID_PICK))
-                .isEqualTo(PICK_DISMISS);
+        verify(mExecutor).execute(any());
     }
     @Test
     public void onReceivePrimarySubListChange_DualCdmaWarning_notificationShouldSend() {

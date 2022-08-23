@@ -47,8 +47,8 @@
     <string name="sdcard_unmount" product="default" msgid="8078570285871053815">"SD картасын шығару"</string>
     <string name="sdcard_format" product="nosdcard" msgid="3248760426252305366">"USB жадын өшіру"</string>
     <string name="sdcard_format" product="default" msgid="3676635435136326182">"SD картасын өшіру"</string>
-    <string name="preview_pager_content_description" msgid="3762247188224576303">"Алдын ала қарау"</string>
-    <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"<xliff:g id="NUM_PAGES">%2$d</xliff:g> ішінен <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> алдын ала қарау"</string>
+    <string name="preview_pager_content_description" msgid="3762247188224576303">"Алдын ала көру"</string>
+    <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"<xliff:g id="NUM_PAGES">%2$d</xliff:g> ішінен <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> алдын ала көру"</string>
     <string name="font_size_summary" msgid="1296835853522566260">"Экрандағы мәтінді кішірейтеді немесе үлкейтеді."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Кішірек ету"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Үлкенірек ету"</string>
@@ -85,6 +85,8 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Сізде Bluetooth параметрлерін өзгерту рұқсаты жоқ."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Жаңа құрылғымен жұптастыру"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Оң құлақты жұптау"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Сол құлақты жұптау"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Екінші құлақты жұптау"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Сол жақ есту аппараты жалғанды.\n\nОң жағын жұптау үшін оның қосылып, жұптауға дайын екеніне көз жеткізіңіз."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Оң жақ есту аппараты жалғанды.\n\nСол жағын жұптау үшін оның қосылып, жұптауға дайын екеніне көз жеткізіңіз."</string>
@@ -2759,8 +2761,12 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Кейбір функциялар шектелуі мүмкін"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Жоғары батарея шығыны"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Батарея зарядын ең көп шығындайтын қолданбаларды көріңіз."</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Зарядтау уақытша шектелген"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Батарея зарядын сақтау үшін. Толығырақ ақпарат."</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Зарядтауды жалғастыру"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Жоғары температура немесе зарядталу уақыты ұзақ болатын кездердегі сияқты жағдайларда батареяның жұмыс істеу қабілетін сақтау мақсатында зарядтау <xliff:g id="PERCENT">%1$s</xliff:g>-ға шектелуі мүмкін.\n\nБұл жағдайлар аяқталғанда, телефоныңыз автоматты түрде қалыпты күйде зарядтайды."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Жоғары температура немесе зарядталу уақыты ұзақ болатын кездердегі сияқты жағдайларда батареяның жұмыс істеу қабілетін сақтау мақсатында зарядтау <xliff:g id="PERCENT">%1$s</xliff:g>-ға шектелуі мүмкін.\n\nБұл жағдайлар аяқталғанда, телефоныңыз автоматты түрде қалыпты күйде зарядтайды."</string>
@@ -2796,6 +2802,8 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Бұл қолданба батареяны фондық режимде пайдаланады. Батареяның заряды тез азаюы мүмкін."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Алу"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Бас тарту"</string>
+    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
+    <skip />
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Қолданбалар батарея зарядын қалыпты тұтынуда. Көп тұтынатын болса, телефонда орындауға болатын әрекеттер ұсынылады.\n\nБатарея заряды аз болса, Батареяны үнемдеу режимін қосуыңызға болады."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Қолданбалар батарея зарядын қалыпты тұтынуда. Көп тұтынатын болса, планшетте орындауға болатын әрекеттер ұсынылады.\n\nБатарея заряды аз болса, Батареяны үнемдеу режимін қосуыңызға болады."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Қолданбалар батарея зарядын қалыпты тұтынуда. Көп тұтынатын болса, құрылғыда орындауға болатын әрекеттер ұсынылады.\n\nБатарея заряды аз болса, Батареяны үнемдеу режимін қосуыңызға болады."</string>
@@ -2973,8 +2981,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"батарея заряды <xliff:g id="PERCENT">%1$s</xliff:g> болғанда"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Батарея деңгейінің пайыздық шамасы"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Күй жолағында батарея деңгейінің пайыздық шамасын көрсету"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Соңғы толық зарядталғаннан кейінгі батарея деңгейі"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Соңғы 24 сағаттағы заряд деңгейі"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"Соңғы толық зарядталғаннан кейінгі қолданбаның пайдаланылуы"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Қолданбаның соңғы 24 сағатта батарея зарядын пайдалануы"</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"Соңғы толық зарядталғаннан кейінгі жүйенің пайдаланылуы"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Жүйенің соңғы 24 сағатта батарея зарядын пайдалануы"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Жүйенің <xliff:g id="SLOT">%s</xliff:g> пайдалануы"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Қолданбаның <xliff:g id="SLOT">%s</xliff:g> пайдалануы"</string>
@@ -5725,7 +5736,7 @@
     <string name="mic_toggle_description" msgid="484139688645092237">"Қолданбалар мен қызметтер үшін таңдалады. Бұл параметр өшірілсе де, құтқару қызметінің нөміріне қоңырау шалғанда, микрофон деректері жіберілуі мүмкін."</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"Алдыңғы"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Келесі"</string>
-    <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Түсті алдын ала қарау"</string>
+    <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Түсті алдын ала көру"</string>
     <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"SIM картасын пайдалануға рұқсат сұрау"</string>
     <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Құрылғы SIM картаңызды пайдалануға рұқсат сұрайды. Толық мәлімет алу үшін түртіңіз."</string>
     <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"SIM картасын пайдалануға рұқсат берілсін бе?"</string>
@@ -5779,7 +5790,7 @@
     <item msgid="588427840913221601">"Процесс күйі"</item>
   </string-array>
     <string name="tare_dialog_confirm_button_title" msgid="9179397559760203348">"Растау"</string>
-    <string name="dream_preview_button_title" msgid="6637456541851795952">"Алдын ала қарау"</string>
+    <string name="dream_preview_button_title" msgid="6637456541851795952">"Алдын ала көру"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Скринсейвер таңдау"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Қосымша ақпаратты көрсету"</string>
     <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"Уақыт, күн, ауа райы, ауаның сапасы және Cast мәліметтері скринсейверде көрсетіледі."</string>

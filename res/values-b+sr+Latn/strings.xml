@@ -86,6 +86,8 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Nemate dozvolu za promenu podešavanja Bluetooth-a."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Upari novi uređaj"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Upari desno uvo"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Upari levo uvo"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Uparite drugo uvo"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Levi slušni aparat je povezan.\n\nDa biste uparili desni, uverite se da je uključen i spreman za uparivanje."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Desni slušni aparat je povezan.\n\nDa biste uparili levi, uverite se da je uključen i spreman za uparivanje."</string>
@@ -621,7 +623,7 @@
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"Uklonite „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Želite li da izbrišete ovaj otisak prsta?"</string>
     <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Ovim se brišu slike i model otiska prsta u vezi sa otiskom <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> koji su sačuvani na uređaju"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Nećete moći da koristite otisak prsta da biste otključavali telefon ili verifikovali identitet u aplikacijama."</string>
+    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Nećete moći da koristite otisak prsta da biste otključavali telefon ni verifikovali identitet u aplikacijama."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Nećete moći da koristite otisak prsta za otključavanje poslovnog profila, ovlašćivanje kupovina ili prijavljivanje u poslovne aplikacije."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Da, ukloni"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Šifrovanje"</string>
@@ -1441,7 +1443,7 @@
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Raspored"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Ništa"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Uključuje se od sumraka do svitanja"</string>
-    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Uključuje se u željeno vreme"</string>
+    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Uključuje se u prilagođeno vreme"</string>
     <string name="dark_ui_auto_mode_custom_bedtime" msgid="8465023741946439266">"Uključuje se kada je vreme za spavanje"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Status"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Nikada se ne uključuje automatski"</string>
@@ -2790,8 +2792,12 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Neke funkcije mogu da budu ograničene"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Najveća potrošnja baterije"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Pogledajte aplikacije sa najvećom potrošnjom baterije"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Punjenje je privremeno ograničeno"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Da bi se sačuvala baterija. Saznajte više."</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Nastavi sa punjenjem"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"U određenim uslovima, na primer, visoke temperature i dugi periodi punjenja, punjenje može da bude ograničeno na <xliff:g id="PERCENT">%1$s</xliff:g> radi boljeg stanja baterije.\n\nKada ti uslovi prestanu, telefon će automatski početi normalno da se puni."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"U određenim uslovima, na primer, visoke temperature i dugi periodi punjenja, punjenje može da bude ograničeno na <xliff:g id="PERCENT">%1$s</xliff:g> radi boljeg stanja baterije.\n\nKada ti uslovi prestanu, tablet će automatski početi normalno da se puni."</string>
@@ -2832,6 +2838,8 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Ova aplikacija će moći da koristi bateriju u pozadini. Baterija može da se isprazni ranije nego što je očekivano."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Ukloni"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Otkaži"</string>
+    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
+    <skip />
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Aplikacije koriste uobičajenu količinu baterije. Ako aplikacije koriste previše baterije, telefon će vam predložiti radnje koje možete da preduzmete.\n\nUvek možete da uključite Uštedu baterije ako vam je baterija pri kraju."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Aplikacije koriste uobičajenu količinu baterije. Ako aplikacije koriste previše baterije, tablet će vam predložiti radnje koje možete da preduzmete.\n\nUvek možete da uključite Uštedu baterije ako vam je baterija pri kraju."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Aplikacije koriste uobičajenu količinu baterije. Ako aplikacije koriste previše baterije, uređaj će vam predložiti radnje koje možete da preduzmete.\n\nUvek možete da uključite Uštedu baterije ako vam je baterija pri kraju."</string>
@@ -3011,8 +3019,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"na <xliff:g id="PERCENT">%1$s</xliff:g> baterije"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Procenat napunjenosti baterije"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Prikazuje procenat napunjenosti baterije na statusnoj traci"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Nivo napunjenosti baterije od poslednjeg potpunog punjenja"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Nivo napunjenosti baterije u poslednja 24 sata"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"Korišćenje aplikacija od poslednjeg potpunog punjenja"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Potrošnja od strane aplikacija u poslednja 24 sata"</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"Korišćenje sistema od poslednjeg potpunog punjenja"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Potrošnja od strane sistema u poslednja 24 sata"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Potrošnja od strane sistema za: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Potrošnja od strane aplikacija za: <xliff:g id="SLOT">%s</xliff:g>"</string>

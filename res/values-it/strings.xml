@@ -85,6 +85,8 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Non sei autorizzato a modificare le impostazioni Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Accoppia nuovo dispositivo"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Accoppia orecchio dx"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Accoppia orecchio sx"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Accoppia l\'altro orecchio"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Il tuo apparecchio acustico sinistro è connesso.\n\nPer accoppiare quello destro, assicurati che sia acceso e pronto per l\'accoppiamento."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Il tuo apparecchio acustico destro è connesso.\n\nPer accoppiare quello sinistro, assicurati che sia acceso e pronto per l\'accoppiamento."</string>
@@ -2463,7 +2465,7 @@
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Scopri di più su Clic automatico (tempo di interazione)"</string>
     <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"Puoi impostare un mouse collegato affinché faccia clic automaticamente quando il puntatore rimane fermo per un determinato periodo di tempo"</string>
     <string name="accessibility_autoclick_description" msgid="6695732131412361101">"La funzionalità Clic automatico può essere utile in caso di difficoltà a fare clic con il mouse"</string>
-    <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"Funzionalità Clic automatico non attiva"</string>
+    <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"Clic automatico non attivo"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Breve"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0,2 secondi"</string>
     <string name="accessibility_autoclick_medium_title" msgid="3134175117576834320">"Medio"</string>
@@ -2759,8 +2761,12 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Alcune funzioni potrebbero essere limitate"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Maggiore utilizzo della batteria"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Scopri le app con il massimo utilizzo"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Ricarica momentaneamente limitata"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Per preservare la batteria. Scopri di più."</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Riprendi la ricarica"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"In alcune condizioni, ad esempio in caso di temperature elevate e lunghi periodi di ricarica, è possibile che la ricarica venga momentaneamente interrotta al raggiungimento di una percentuale pari a <xliff:g id="PERCENT">%1$s</xliff:g> per preservare meglio l\'integrità della batteria.\n\nQuando queste condizioni non sono più presenti, viene ripristinata automaticamente la normale ricarica del telefono."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"In alcune condizioni, ad esempio in caso di temperature elevate e lunghi periodi di ricarica, è possibile che la ricarica venga momentaneamente interrotta al raggiungimento di una percentuale pari a <xliff:g id="PERCENT">%1$s</xliff:g> per preservare meglio l\'integrità della batteria.\n\nQuando queste condizioni non sono più presenti, viene ripristinata automaticamente la normale ricarica del tablet."</string>
@@ -2796,6 +2802,8 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Questa app potrà usare la batteria in background. La batteria potrebbe esaurirsi prima del previsto."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Rimuovi"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Annulla"</string>
+    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
+    <skip />
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Le tue app stanno utilizzando un livello di batteria normale. Se le app consumano troppa batteria, il dispositivo ti suggerirà come rimediare.\n\nSe la batteria è in esaurimento, puoi attivare il risparmio energetico in qualsiasi momento."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Le tue app stanno utilizzando un livello di batteria normale. Se le app consumano troppa batteria, il dispositivo ti suggerirà come rimediare.\n\nSe la batteria è in esaurimento, puoi attivare il risparmio energetico in qualsiasi momento."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Le tue app stanno utilizzando un livello di batteria normale. Se le app consumano troppa batteria, il dispositivo ti suggerirà come rimediare.\n\nSe la batteria è in esaurimento, puoi attivare il risparmio energetico in qualsiasi momento."</string>
@@ -2961,7 +2969,7 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Imposta una pianificazione"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Prolunga la durata della batteria"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Disattiva quando la batteria è carica"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"Il risparmio energetico si disattiva quando il livello di carica del telefono è superiore a <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"Il risparmio energetico si disattiva quando il livello di carica del telefono è superiore a: <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"L\'opzione Risparmio energetico viene disattivata quando il livello di carica del tablet è superiore a <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="device" msgid="4128841327359445726">"L\'opzione Risparmio energetico viene disattivata quando il livello di carica del dispositivo è superiore a <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
@@ -2973,8 +2981,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"al seguente livello di carica: <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Percentuale batteria"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Mostra la percentuale di carica della batteria nella barra di stato"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Livello della batteria dall\'ultima ricarica completa"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Livello della batteria nelle ultime 24 ore"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"Utilizzo delle app dall\'ultima ricarica completa"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Utilizzo da parte delle app nelle ultime 24 ore"</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"Utilizzo del sistema dall\'ultima ricarica completa"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Utilizzo da parte del sistema nelle ultime 24 ore"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Utilizzo da parte del sistema nell\'intervallo di tempo <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Utilizzo da parte delle app nell\'intervallo di tempo <xliff:g id="SLOT">%s</xliff:g>"</string>
