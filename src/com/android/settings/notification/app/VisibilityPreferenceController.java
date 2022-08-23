@@ -48,7 +48,7 @@ public class VisibilityPreferenceController extends NotificationPreferenceContro
 
     public VisibilityPreferenceController(Context context, LockPatternUtils utils,
             NotificationBackend backend) {
-        super(context, backend);
+        super(context, backend, KEY_VISIBILITY_OVERRIDE);
         mLockPatternUtils = utils;
     }
 
@@ -58,14 +58,18 @@ public class VisibilityPreferenceController extends NotificationPreferenceContro
     }
 
     @Override
-    public boolean isAvailable() {
-        if (!super.isAvailable()) {
-            return false;
+    public int getAvailabilityStatus() {
+        if (super.getAvailabilityStatus() == CONDITIONALLY_UNAVAILABLE) {
+            return CONDITIONALLY_UNAVAILABLE;
         }
         if (mChannel == null || mAppRow.banned) {
-            return false;
+            return CONDITIONALLY_UNAVAILABLE;
         }
-        return checkCanBeVisible(NotificationManager.IMPORTANCE_LOW) && isLockScreenSecure();
+        if (checkCanBeVisible(NotificationManager.IMPORTANCE_LOW) && isLockScreenSecure()) {
+            return AVAILABLE;
+        }
+
+        return CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

@@ -42,28 +42,31 @@ public class BubbleSummaryPreferenceController extends NotificationPreferenceCon
     static final int ON = 1;
 
     public BubbleSummaryPreferenceController(Context context, NotificationBackend backend) {
-        super(context, backend);
+        super(context, backend, KEY);
     }
 
     @Override
-    public boolean isAvailable() {
-        if (!super.isAvailable()) {
-            return false;
+    public int getAvailabilityStatus() {
+        if (super.getAvailabilityStatus() == CONDITIONALLY_UNAVAILABLE) {
+            return CONDITIONALLY_UNAVAILABLE;
         }
         if (mAppRow == null) {
-            return false;
+            return CONDITIONALLY_UNAVAILABLE;
         }
         if (mChannel != null) {
             if (!isGloballyEnabled()) {
-                return false;
+                return CONDITIONALLY_UNAVAILABLE;
             }
             if (isDefaultChannel()) {
-                return true;
+                return AVAILABLE;
             } else {
-                return mAppRow != null;
+                return mAppRow != null ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
             }
         }
-        return isGloballyEnabled() && mBackend.hasSentValidBubble(mAppRow.pkg, mAppRow.uid);
+        if (isGloballyEnabled() && mBackend.hasSentValidBubble(mAppRow.pkg, mAppRow.uid)) {
+            return AVAILABLE;
+        }
+        return CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
