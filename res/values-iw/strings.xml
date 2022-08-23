@@ -74,7 +74,7 @@
     <string name="bluetooth_devices" msgid="1063177983261608277">"‏מכשירי Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"שם המכשיר"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"הגדרות המכשיר"</string>
-    <string name="bluetooth_profile_details" msgid="1269419918127093325">"הגדרות פרופיל"</string>
+    <string name="bluetooth_profile_details" msgid="1269419918127093325">"הגדרות הפרופיל"</string>
     <string name="bluetooth_name_not_set" msgid="4654357917928126208">"לא הוגדר שם, משתמש בשם החשבון"</string>
     <string name="bluetooth_scan_for_devices" msgid="8143654526358934069">"חיפוש מכשירים"</string>
     <string name="bluetooth_rename_device" msgid="4219655243836021443">"שינוי שם המכשיר"</string>
@@ -87,6 +87,8 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"‏אין לך הרשאה לשנות את הגדרות ה-Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"התאמה של מכשיר חדש"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"התאמה באוזן ימין"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"התאמה באוזן שמאל"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"התאמה באוזן השנייה"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"מכשיר השמיעה באוזן שמאל מחובר.\n\nכדי להתאים את מכשיר השמיעה באוזן ימין, צריך לוודא שהוא פועל ומוכן להתאמה."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"מכשיר השמיעה באוזן ימין מחובר.\n\nכדי להתאים את מכשיר השמיעה באוזן שמאל, צריך לוודא שהוא פועל ומוכן להתאמה."</string>
@@ -1366,7 +1368,7 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"פועל"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"פועל – מבוסס על זיהוי פנים"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"זיהוי פנים"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"התאמה אוטומטית של כיוון המסך כשמזיזים את הטלפון ממאוזן למאונך ולהיפך"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"שינוי אוטומטי של כיוון המסך כשהופכים את הטלפון ממצב של תצוגה לאורך למצב של תצוגה לרוחב"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"מידע נוסף על הסיבוב האוטומטי"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"בעת הזזת הטלפון ממצב \'לאורך\' למצב \'לרוחב\' ולהיפך"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"רזולוציית המסך"</string>
@@ -2823,8 +2825,12 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"ייתכן שחלק מהתכונות מוגבלות"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"שימוש מוגבר בסוללה"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"האפליקציות המובילות במידת השימוש בסוללה"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"הטעינה מוגבלת זמנית"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"כדי לשמור על תקינות הסוללה. מידע נוסף."</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"המשך הטעינה"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"בתנאים מסוימים, למשל בטמפרטורה גבוהה או כשטעינה נמשכת הרבה זמן, יכול להיות שהיא תוגבל ל-<xliff:g id="PERCENT">%1$s</xliff:g> כדי לשמור על תקינות הסוללה.\n\nכשהתנאים ישתנו בחזרה, הטלפון יחזור להיטען כרגיל באופן אוטומטי."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"במצבים מסוימים, כמו טמפרטורה גבוהה וטעינה במשך הרבה זמן, יכול להיות שתהיה הגבלה של <xliff:g id="PERCENT">%1$s</xliff:g> על הטעינה כדי לשמור על תקינות הסוללה.\n\nכשמצבים כאלה מסתיימים, טעינת הטאבלט תחזור למצב הרגיל באופן אוטומטי."</string>
@@ -2870,6 +2876,8 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"האפליקציה הזו תוכל להשתמש בסוללה ברקע. ייתכן שהסוללה תתרוקן מוקדם מהצפוי."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"הסרה"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"ביטול"</string>
+    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
+    <skip />
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"האפליקציות משתמשות בכמות רגילה של צריכת סוללה. אם אפליקציות יצרכו יותר מדי מהסוללה, הטלפון יציע פעולות שאפשר לנקוט.\n\nניתן תמיד להפעיל את תכונת החיסכון בסוללה אם הסוללה עומדת להתרוקן."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"האפליקציות משתמשות בכמות רגילה של צריכת סוללה. אם אפליקציות יצרכו יותר מדי מהסוללה, הטאבלט יציע פעולות שאפשר לנקוט.\n\nניתן תמיד להפעיל את תכונת החיסכון בסוללה אם הסוללה עומדת להתרוקן."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"האפליקציות משתמשות בכמות רגילה של צריכת סוללה. אם אפליקציות יצרכו יותר מדי מהסוללה, המכשיר יציע פעולות שאפשר לנקוט.\n\nניתן תמיד להפעיל את תכונת החיסכון בסוללה אם הסוללה עומדת להתרוקן."</string>
@@ -3051,8 +3059,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"סוללה ברמת טעינה של <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"אחוז הטעינה של הסוללה"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"הצגת אחוז הטעינה של הסוללה בשורת הסטטוס"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"רמת הסוללה מאז הטעינה המלאה האחרונה"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"רמת הטעינה של הסוללה ב-24 השעות האחרונות"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"צריכת הסוללה של האפליקציות מאז הטעינה המלאה האחרונה"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"צריכת הסוללה של האפליקציות ב-24 השעות האחרונות"</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"צריכת הסוללה של המערכת מאז הטעינה המלאה האחרונה"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"צריכת הסוללה של המערכת ב-24 השעות האחרונות"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"צריכת הסוללה על ידי המערכת בשעות <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"צריכת הסוללה על ידי האפליקציה בשעות <xliff:g id="SLOT">%s</xliff:g>"</string>

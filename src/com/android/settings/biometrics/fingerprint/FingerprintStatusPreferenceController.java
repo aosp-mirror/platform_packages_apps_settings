@@ -41,6 +41,7 @@ public class FingerprintStatusPreferenceController extends BiometricStatusPrefer
     @VisibleForTesting
     RestrictedPreference mPreference;
     private final FingerprintStatusUtils mFingerprintStatusUtils;
+    private PreferenceScreen mPreferenceScreen;
 
     public FingerprintStatusPreferenceController(Context context) {
         this(context, KEY_FINGERPRINT_SETTINGS);
@@ -68,11 +69,15 @@ public class FingerprintStatusPreferenceController extends BiometricStatusPrefer
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void onResume() {
         updateStateInternal();
+        if (mPreferenceScreen != null) {
+            displayPreference(mPreferenceScreen);
+        }
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        mPreferenceScreen = screen;
         mPreference = screen.findPreference(mPreferenceKey);
     }
 

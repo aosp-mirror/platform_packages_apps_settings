@@ -85,6 +85,8 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"你沒有變更藍牙設定的權限。"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"配對新裝置"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"藍牙"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"配對右耳的裝置"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"配對左耳的裝置"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"配對另一耳的裝置"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"左耳助聽器連線成功。\n\n如要配對右耳，請確認該耳助聽器已開啟並可開始配對。"</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"右耳助聽器連線成功。\n\n如要配對左耳，請確認該耳助聽器已開啟並可開始配對。"</string>
@@ -618,7 +620,7 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"要移除所有指紋嗎？"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"移除「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"要刪除這個指紋嗎？"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"這麼做會刪除與裝置上儲存的「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」相關聯的指紋圖像和模型"</string>
+    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"系統會一併刪除裝置上與「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」連結的指紋圖像和模型"</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"你將無法使用指紋解鎖手機或在應用程式中驗證身分。"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"你將無法使用指紋解鎖工作資料夾、授權購買交易，或是登入工作應用程式。"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"是，移除"</string>
@@ -2385,7 +2387,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"如要使用無障礙功能，請用 2 指從螢幕底部向上滑動。\n\n如要切換不同的功能，請用 2 指向上滑動並按住。"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"如要使用無障礙功能，請用 3 指從螢幕底部向上滑動。\n\n如要切換不同的功能，請用 3 指向上滑動並按住。"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"我知道了"</string>
-    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"「<xliff:g id="SERVICE">%1$s</xliff:g>」快速鍵"</string>
+    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"「<xliff:g id="SERVICE">%1$s</xliff:g>」捷徑"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"無障礙工具按鈕"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"無障礙手勢"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"使用 2 指向上滑動"</string>
@@ -2761,8 +2763,12 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"部分功能可能受到限制"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"電池用量較高的應用程式"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看電池用量最高的應用程式"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"已暫時限制充電"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"這是為了延長電池壽命。瞭解詳情。"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"繼續充電"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"在高溫和長時間充電等特定情況下，手機可能會將充電量限制在 <xliff:g id="PERCENT">%1$s</xliff:g> 以延長電池壽命。\n\n當上述情況解除後，手機就會自動正常充電。"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"在高溫和長時間充電等特定情況下，平板電腦可能會將充電量限制在 <xliff:g id="PERCENT">%1$s</xliff:g> 以延長電池壽命。\n\n當上述情況解除後，平板電腦就會自動正常充電。"</string>
@@ -2798,6 +2804,8 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"這個應用程式將會在背景耗用電量。你的電池電力可能會比預期更快耗盡。"</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"移除"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"取消"</string>
+    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
+    <skip />
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"你的應用程式目前耗用的電力正常。如果應用程式耗用過多電力，你的手機會為你提供操作建議。\n\n如果電池電量偏低，你隨時可以開啟省電模式。"</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"你的應用程式目前耗用的電力正常。如果應用程式耗用過多電力，你的平板電腦會為你提供操作建議。\n\n如果電池電量偏低，你隨時可以開啟省電模式。"</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"你的應用程式目前耗用的電力正常。如果應用程式耗用過多電力，裝置會提供相關操作建議。\n\n如果電池電量偏低，你隨時可以開啟省電模式。"</string>
@@ -2975,8 +2983,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"電量為 <xliff:g id="PERCENT">%1$s</xliff:g> 時"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"電量百分比"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"在狀態列中顯示電量百分比"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"上次充飽電後的電池電量變化"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"過去 24 小時的電池電量變化"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"上次充飽電後的應用程式用量"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"應用程式在過去 24 小時的電池用量"</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"上次充飽電後的系統用量"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"系統在過去 24 小時的電池用量"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"<xliff:g id="SLOT">%s</xliff:g>的系統電池用量"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"<xliff:g id="SLOT">%s</xliff:g>的應用程式電池用量"</string>
@@ -3752,7 +3763,7 @@
     <string name="live_caption_title" msgid="8617086825712756983">"即時字幕"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"自動產生媒體字幕"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"手機喇叭"</string>
-    <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"有線耳罩式耳機"</string>
+    <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"有線耳機"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"相容媒體裝置可提供更有臨場感的聲音體驗"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"已關閉"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"已開啟/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
@@ -4198,7 +4209,7 @@
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"「零打擾」模式的行為"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"使用預設設定"</string>
     <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"為這項排程建立自訂設定"</string>
-    <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"用於「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」"</string>
+    <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」排程"</string>
     <string name="summary_divider_text" msgid="8836285171484563986">"、 "</string>
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="6022314482293187463">"<xliff:g id="START">%1$s</xliff:g>到<xliff:g id="END">%2$s</xliff:g>"</string>
@@ -4216,7 +4227,7 @@
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"通話"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"例外的通話"</string>
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"為了確保你在接到允許的來電時會聽到音效，請確認裝置已設為響鈴"</string>
-    <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"系統會在「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」啟用時封鎖來電。你可以調整設定，讓好友、家人或其他聯絡人能聯絡你。"</string>
+    <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"系統會在「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」排程啟用時封鎖來電。你可以調整設定，讓好友、家人或其他聯絡人能聯絡你。"</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"已加星號的聯絡人"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{無}=1{{contact_1}}=2{{contact_1}和{contact_2}}=3{{contact_1}、{contact_2}和{contact_3}}other{{contact_1}、{contact_2}和另外 # 人}}"</string>
     <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(無顯示名稱)"</string>
@@ -5145,7 +5156,7 @@
     <string name="storage_videos" msgid="6117698226447251033">"影片"</string>
     <string name="storage_audio" msgid="5994664984472140386">"音訊"</string>
     <string name="storage_apps" msgid="3564291603258795216">"應用程式"</string>
-    <string name="storage_documents_and_other" msgid="3293689243732236480">"文件及其他內容"</string>
+    <string name="storage_documents_and_other" msgid="3293689243732236480">"文件和其他檔案"</string>
     <string name="storage_system" msgid="8472410119822911844">"系統"</string>
     <string name="storage_trash" msgid="2807138998886084856">"垃圾桶"</string>
     <string name="storage_trash_dialog_title" msgid="2296169576049935200">"要清空垃圾桶嗎？"</string>
