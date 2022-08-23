@@ -98,9 +98,9 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppStateAlarmsAndRemindersBridge;
+import com.android.settings.applications.AppStateAppBatteryUsageBridge;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateBaseBridge;
-import com.android.settings.applications.AppStateAppBatteryUsageBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateLocaleBridge;
 import com.android.settings.applications.AppStateManageExternalStorageBridge;
@@ -321,7 +321,7 @@ public class ManageApplications extends InstrumentedFragment
             mListType = LIST_TYPE_ALARMS_AND_REMINDERS;
         } else if (className.equals(Settings.NotificationAppListActivity.class.getName())
                 || className.equals(
-                        Settings.NotificationReviewPermissionsActivity.class.getName())) {
+                Settings.NotificationReviewPermissionsActivity.class.getName())) {
             mListType = LIST_TYPE_NOTIFICATION;
             mUsageStatsManager = IUsageStatsManager.Stub.asInterface(
                     ServiceManager.getService(Context.USAGE_STATS_SERVICE));
@@ -924,8 +924,9 @@ public class ManageApplications extends InstrumentedFragment
 
     /**
      * Returns a resource ID of title based on what type of app list is
+     *
      * @param intent the intent of the activity that might include a specified title
-     * @param args the args that includes a class name of app list
+     * @param args   the args that includes a class name of app list
      */
     public static int getTitleResId(@NonNull Intent intent, Bundle args) {
         int screenTitle = intent.getIntExtra(
@@ -948,13 +949,13 @@ public class ManageApplications extends InstrumentedFragment
             screenTitle = R.string.change_wifi_state_title;
         } else if (className.equals(Settings.ManageExternalStorageActivity.class.getName())) {
             screenTitle = R.string.manage_external_storage_title;
-        }  else if (className.equals(Settings.MediaManagementAppsActivity.class.getName())) {
+        } else if (className.equals(Settings.MediaManagementAppsActivity.class.getName())) {
             screenTitle = R.string.media_management_apps_title;
         } else if (className.equals(Settings.AlarmsAndRemindersActivity.class.getName())) {
             screenTitle = R.string.alarms_and_reminders_title;
         } else if (className.equals(Settings.NotificationAppListActivity.class.getName())
                 || className.equals(
-                        Settings.NotificationReviewPermissionsActivity.class.getName())) {
+                Settings.NotificationReviewPermissionsActivity.class.getName())) {
             screenTitle = R.string.app_notifications_title;
         } else if (className.equals(AppLocaleDetails.class.getName())) {
             screenTitle = R.string.app_locales_picker_menu_title;
@@ -1198,11 +1199,11 @@ public class ManageApplications extends InstrumentedFragment
                 } else {
                     rebuild(R.id.sort_order_alpha, true);
                 }
+                return;
             } else if (mManageApplications.mListType == LIST_TYPE_BATTERY_OPTIMIZATION) {
                 logAppBatteryUsage(filterType);
-            } else {
-                rebuild();
             }
+            rebuild();
         }
 
         public void resume(int sort) {
@@ -1337,7 +1338,7 @@ public class ManageApplications extends InstrumentedFragment
         }
 
         private void logAppBatteryUsage(int filterType) {
-            switch(filterType) {
+            switch (filterType) {
                 case FILTER_APPS_BATTERY_UNRESTRICTED:
                     logAction(SettingsEnums.ACTION_BATTERY_OPTIMIZED_APPS_FILTER_UNRESTRICTED);
                     break;
@@ -1562,6 +1563,7 @@ public class ManageApplications extends InstrumentedFragment
 
         /**
          * Check item in the list shall enable or disable.
+         *
          * @param position The item position in the list
          */
         public boolean isEnabled(int position) {
@@ -1726,7 +1728,7 @@ public class ManageApplications extends InstrumentedFragment
             public OnScrollListener(ApplicationsAdapter adapter) {
                 mAdapter = adapter;
                 mInputMethodManager = mAdapter.mContext.getSystemService(
-                                InputMethodManager.class);
+                        InputMethodManager.class);
             }
 
             @Override
