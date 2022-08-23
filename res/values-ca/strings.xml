@@ -430,7 +430,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Configura l\'empremta digital"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Permet desbloqueig amb empremta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Utilitzar l\'empremta digital"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Utilitza l\'empremta digital per desbloquejar la tauleta o verificar la teva identitat, com ara quan inicies la sessió en aplicacions o aproves una compra."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Utilitza l\'empremta digital per desbloquejar la tauleta o verificar que ets tu, com ara quan inicies la sessió en aplicacions o aproves una compra."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Utilitza l\'empremta digital per desbloquejar el dispositiu o verificar la teva identitat, com ara quan inicies la sessió en aplicacions o aproves una compra."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Utilitza l\'empremta digital per desbloquejar el telèfon o verificar la teva identitat, com ara quan inicies la sessió en aplicacions o aproves una compra."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Permet que el teu fill utilitzi l\'empremta digital per desbloquejar el telèfon o verificar la seva identitat. Ho podrà fer quan iniciï la sessió en aplicacions, aprovi una compra, etc."</string>
@@ -468,7 +468,7 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Aixeca el dit quan notis una vibració"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Ves a un lloc menys il·luminat i torna-ho a provar"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Has arribat al nombre màxim d\'intents"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Utilitza l\'empremta digital per desbloquejar la tauleta o verificar la teva identitat, com quan inicies la sessió en aplicacions"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Utilitza l\'empremta digital per desbloquejar la tauleta o verificar que ets tu, com quan inicies la sessió en aplicacions"</string>
     <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Utilitza l\'empremta digital per desbloquejar el dispositiu o verificar la teva identitat, com quan inicies la sessió en aplicacions"</string>
     <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Utilitza l\'empremta digital per desbloquejar el telèfon o verificar la teva identitat, com quan inicies la sessió en aplicacions"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Desbloqueig facial i amb empremta digital"</string>
@@ -521,12 +521,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Això ajuda a capturar millor l\'empremta digital"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registre de l\'empremta digital <xliff:g id="PERCENTAGE">%d</xliff:g> per cent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"S\'ha afegit l\'empremta digital"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"La funció Desbloqueig amb empremta digital millora com més la utilitzes per desbloquejar la tauleta o verificar que ets tu en aplicacions"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"La funció Desbloqueig amb empremta digital millora com més la utilitzes per desbloquejar el dispositiu o verificar la teva identitat en aplicacions"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"La funció Desbloqueig amb empremta digital millora com més la utilitzes per desbloquejar el telèfon o verificar la teva identitat en aplicacions"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Fes-ho més tard"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Aixeca el dit i toca de nou"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Col·loca un costat del dit al sensor i espera; a continuació, canvia a l\'altre costat"</string>
@@ -3368,7 +3365,7 @@
       <item quantity="one">Confia en el certificat o suprimeix-lo</item>
     </plurals>
     <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName} ha instal·lat una autoritat de certificació al teu dispositiu, que pot permetre-li supervisar l\'activitat a la xarxa del dispositiu, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nPer obtenir més informació sobre aquest certificat, contacta amb el teu administrador.}other{{orgName} ha instal·lat unes autoritats de certificació al teu dispositiu, que pot permetre-li supervisar l\'activitat a la xarxa del dispositiu, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nPer obtenir més informació sobre aquests certificats, contacta amb el teu administrador.}}"</string>
-    <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} ha instal·lat una autoritat de certificació per al teu perfil de treball, que pot permetre-li supervisar l\'activitat a la xarxa del perfil de treball, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nPer obtenir més informació sobre aquest certificat, contacta amb el teu administrador.}other{{orgName} ha instal·lat unes autoritats de certificació per al teu perfil de treball, de manera que podrà supervisar l\'activitat a la xarxa del perfil de treball, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nPer obtenir més informació sobre aquests certificats, contacta amb el teu administrador.}}"</string>
+    <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} ha instal·lat una autoritat de certificació per al teu perfil de treball, que pot permetre-li supervisar l\'activitat a la xarxa del perfil de treball, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nPer obtenir més informació sobre aquest certificat, contacta amb el teu administrador.}other{{orgName} ha instal·lat unes autoritats de certificació per al teu perfil de treball, que pot permetre-li supervisar l\'activitat a la xarxa del perfil de treball, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nPer obtenir més informació sobre aquests certificats, contacta amb el teu administrador.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Un tercer pot supervisar la teva activitat de xarxa, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nHi ha una credencial de confiança instal·lada al teu dispositiu que ho fa possible."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
       <item quantity="other">Comprova els certificats</item>
@@ -3642,7 +3639,7 @@
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"desafiament per accedir a contingut de feina, feina, perfil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"perfil de treball, perfil gestionat, unificar, unificació, feina, perfil"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"gestos"</string>
-    <string name="keywords_wallet" msgid="3757421969956996972">"cartera"</string>
+    <string name="keywords_wallet" msgid="3757421969956996972">"Wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"paga, toca, pagaments"</string>
     <string name="keywords_backup" msgid="707735920706667685">"còpia de seguretat, crear una còpia de seguretat"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"gest"</string>
@@ -5148,7 +5145,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> contrasenya</item>
     </plurals>
     <string name="autofill_keywords" msgid="8598763328489346438">"automàtic, emplenament, emplenament automàtic, contrasenya"</string>
-    <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Assegura\'t que confies en aquesta aplicació&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Emplenament automàtic de Google&gt;%1$s&lt;/xliff:g&gt; utilitza el contingut que es mostra a la pantalla per determinar què es pot emplenar automàticament."</string>
+    <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Assegura\'t que confies en aquesta aplicació&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Emplenament automàtic amb Google&gt;%1$s&lt;/xliff:g&gt; utilitza el contingut que es mostra a la pantalla per determinar què es pot emplenar automàticament."</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Emplenament automàtic"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Nivell de registre"</string>
     <string name="autofill_max_partitions" msgid="7342195529574406366">"Màxim de sol·licituds per sessió"</string>

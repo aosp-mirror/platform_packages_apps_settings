@@ -52,8 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"स्क्रिनमा भएको पाठ अझै सानो वा ठुलो बनाउनुहोस्।"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"अझ सानो बनाउनुहोस्"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"अझ ठुलो बनाउनुहोस्"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"स्वतः रोटेट हुने सुविधा प्रयोग गर्नुहोस्"</string>
-    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"स्वतः रोटेट गर्ने सुविधाको सटीकता सुधार गर्न अनुहार पत्ता लगाउने सुविधाले अगाडिको क्यामेरा प्रयोग गर्छ। फोटोहरू कहिल्यै पनि भण्डारण गरिँदैनन् वा Google मा पठाइँदैनन्।"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"अटो-रोटेट प्रयोग गर्नुहोस्"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"अटो-रोटेटको सटीकता सुधार गर्न अनुहार पत्ता लगाउने सुविधाले अगाडिको क्यामेरा प्रयोग गर्छ। फोटोहरू कहिल्यै पनि भण्डारण गरिँदैनन् वा Google मा पठाइँदैनन्।"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"नमूना पाठ"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"दि वन्डरफुल विजार्ड अफ ओज"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"अध्याय ११: दि वन्डरफुल एमरल्ड सिटी अफ ओज"</string>
@@ -106,7 +106,7 @@
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"प्राप्त गरिएका फाइलहरू"</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"ब्लुटुथ निष्क्रिय छ"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"यसलाई सक्रिय गर्न ट्याप गर्नुहोस्"</string>
-    <string name="device_picker" msgid="2427027896389445414">"ब्लुटुथ उपकरण छान्नुहोस्"</string>
+    <string name="device_picker" msgid="2427027896389445414">"ब्लुटुथ डिभाइस छान्नुहोस्"</string>
     <string name="bluetooth_ask_enablement" msgid="1529030199895339199">"<xliff:g id="APP_NAME">%1$s</xliff:g> ब्लुटुथ सक्रिय गर्न चाहन्छ"</string>
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"<xliff:g id="APP_NAME">%1$s</xliff:g> ब्लुटुथ निष्क्रिय पार्न चाहन्छ"</string>
     <string name="bluetooth_ask_enablement_no_name" msgid="5091401961637405417">"एउटा एप ब्लुटुथ सक्रिय गर्न चाहन्छ"</string>
@@ -521,12 +521,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"यसले तपाईंको फिंगरप्रिन्टको अझ धेरै भाग सेभ गर्न मद्दत गर्छ"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"फिंगरप्रिन्ट दर्ता गर्ने कार्य <xliff:g id="PERCENTAGE">%d</xliff:g> पूरा भयो"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"फिंगरप्रिन्ट हालियो"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"तपाईं आफ्नो ट्याब्लेट अनलक गर्न वा एपहरूमा आफ्नो पहिचान पुष्टि गर्न जति धेरै फिंगरप्रिन्ट अनलक प्रयोग गर्नुहुन्छ त्यति नै त्यसको गुणस्तर सुधार हुँदै जान्छ"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"तपाईं आफ्नो डिभाइस अनलक गर्न वा एपहरूमा आफ्नो पहिचान पुष्टि गर्न जति धेरै फिंगरप्रिन्ट अनलक प्रयोग गर्नुहुन्छ त्यति नै त्यसको गुणस्तर सुधार हुँदै जान्छ"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"तपाईं आफ्नो फोन अनलक गर्न वा एपहरूमा आफ्नो पहिचान पुष्टि गर्न जति धेरै फिंगरप्रिन्ट अनलक प्रयोग गर्नुहुन्छ त्यति नै त्यसको गुणस्तर सुधार हुँदै जान्छ"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"यो काम पछि गर्नुहोस्‌"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"औँला उठाएर फेरि छुनुहोस्"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"आफ्नो कुनै औँलाको एकतिरको भाग सेन्सरमा राखिरहनुहोस् अनि उक्त औँलाको अर्को भाग पनि सेन्सरमा राखिरहनुहोस्"</string>
@@ -606,7 +603,7 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"सबै फिंगरप्रिन्टहरू हटाउने हो?"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"\'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' हटाउनुहोस्‌"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"तपाईं यो फिंगरप्रिन्ट मेट्न चाहनुहुन्छ?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"यो फिंगरप्रिन्ट मेटाइयो भने तपाईंको डिभाइसमा भण्डार गरिएका \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' सँग सम्बन्धित फिंगरप्रिन्टका फोटो र मोडेल मेटाइन्छन्"</string>
+    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"यो फिंगरप्रिन्ट मेटाइयो भने तपाईंको डिभाइसमा भण्डारण गरिएका \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' सँग सम्बन्धित फिंगरप्रिन्टका फोटो र मोडेल मेटाइन्छन्"</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"तपाईं आफ्नो फोन अनलक गर्न वा एपमा आफ्नो पहिचान पुष्टि गर्न आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नु हुने छैन।"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"तपाईं आफ्नो कार्य प्रोफाइल अनलक गर्न, खरिद गर्ने अनुमति दिन, वा कामसम्बन्धी एपमा साइन इन गर्न आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नु हुने छैन।"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"हो, हटाउनुहोस्"</string>
@@ -1314,8 +1311,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"अन छ"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"अन छ - अनुहारमा आधारित"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"अनुहार पत्ता लगाउने सुविधा"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"तपाईंले आफ्नो फोन पोर्ट्रेट र ल्यान्डस्केपबिच अदलबदल गर्दा स्क्रिनको ओरियन्टेसन स्वतः मिलाइयोस्"</string>
-    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"स्वतः रोटेट हुने सुविधाका बारेमा थप जान्नुहोस्"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"फोन पोर्ट्रेट र ल्यान्डस्केपबिच अदलबदल गर्दा स्क्रिनको ओरियन्टेसन स्वतः मिलाइयोस्"</string>
+    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"अटोरोटेटका बारेमा थप जान्नुहोस्"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"तपाईंले आफ्नो फोन पोर्ट्रेट र ल्यान्डस्केपबिच अदलबदल गर्दा"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"स्क्रिन रिजोल्युसन"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"उच्च रिजोल्युसन"</string>
@@ -1653,7 +1650,7 @@
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"आन्तरिक भण्डारणको रुपमा ढाँचा गर्नुहोस्"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"यो सुरक्षित बनाउन यसलाई <xliff:g id="NAME_0">^1</xliff:g> ढाँचा बनाउन आवश्यकता छ। \n\nढाँचामा मिलाएपछि, यो डिभाइसमा यसले <xliff:g id="NAME_1">^1</xliff:g> मात्र काम गर्ने छ। \n\n"<b>" ढाँचा मिलाउँदा <xliff:g id="NAME_2">^1</xliff:g> मा हालैका भण्डारित सबै डेटा मेटिन्छ।"</b>" डेटा गुमाउनुपर्ने बाट जोगिन, यसको ब्याकअप राख्ने बारे विचार गर्नुहोस्।"</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"पोर्टेबल भण्डारणका रूपमा फर्म्याट गर्नुहोस्"</string>
-    <string name="storage_wizard_format_confirm_public_body" msgid="6219883780307218266">"यसको लागि <xliff:g id="NAME_0">^1</xliff:g> फर्म्याट गर्न आवश्यक छ।\n\n"<b>"फर्म्याट गर्दा <xliff:g id="NAME_1">^1</xliff:g> भण्डार गरिएका सबै डेटा नष्ट हुनेछ।"</b>"डेटा जोगाउन ब्याकअप गर्ने बारे बिचार गर्नुहोस्।"</string>
+    <string name="storage_wizard_format_confirm_public_body" msgid="6219883780307218266">"यसको लागि <xliff:g id="NAME_0">^1</xliff:g> फर्म्याट गर्न आवश्यक छ।\n\n"<b>"फर्म्याट गर्दा <xliff:g id="NAME_1">^1</xliff:g> भण्डारण गरिएका सबै डेटा नष्ट हुनेछ।"</b>"डेटा जोगाउन ब्याकअप गर्ने बारे बिचार गर्नुहोस्।"</string>
     <string name="storage_wizard_format_confirm_next" msgid="4412063054982084056">"ढाँचा मेटाउनुहोस्"</string>
     <string name="storage_wizard_format_progress_title" msgid="9170393018855949774">"<xliff:g id="NAME">^1</xliff:g> ढाँचा मिलाइदै ..."</string>
     <string name="storage_wizard_format_progress_body" msgid="1044024044955390417">"<xliff:g id="NAME">^1</xliff:g> फर्म्याट भइरहेको बेला यसलाई नहटाउनुहोस्।"</string>
@@ -3375,8 +3372,8 @@
       <item quantity="one">प्रमाणपत्रलाई जाँच गर्नुहोस्</item>
     </plurals>
     <string name="user_settings_title" msgid="6550866465409807877">"बहु प्रयोगकर्ताहरू"</string>
-    <string name="user_settings_footer_text" product="device" msgid="7523914344521302179">"नयाँ प्रयोगकर्ताहरू थपेर आफ्नो यन्त्र सेयर गर्नुहोस्। प्रत्येक प्रयोगकर्तासँग आफू अनुकूल गृह स्क्रिन, खाता, एप, सेटिङ र थप कुराहरूका लागि तपाईंको डिभाइसमा व्यक्तिगत स्थान हुन्छ।"</string>
-    <string name="user_settings_footer_text" product="tablet" msgid="3730074318510244552">"नयाँ प्रयोगकर्ताहरू थपेर आफ्नो ट्याब्लेट सेयर गर्नुहोस्। प्रत्येक प्रयोगकर्तासँग आफू अनुकूल गृह स्क्रिन, खाता, एप, सेटिङ र थप कुराहरूका लागि तपाईंको ट्याब्लेटमा व्यक्तिगत स्थान हुन्छ।"</string>
+    <string name="user_settings_footer_text" product="device" msgid="7523914344521302179">"नयाँ प्रयोगकर्ताहरू थपेर आफ्नो यन्त्र सेयर गर्नुहोस्। प्रत्येक प्रयोगकर्तासँग आफू अनुकूल होम स्क्रिन, खाता, एप, सेटिङ र थप कुराहरूका लागि तपाईंको डिभाइसमा व्यक्तिगत स्थान हुन्छ।"</string>
+    <string name="user_settings_footer_text" product="tablet" msgid="3730074318510244552">"नयाँ प्रयोगकर्ताहरू थपेर आफ्नो ट्याब्लेट सेयर गर्नुहोस्। प्रत्येक प्रयोगकर्तासँग आफू अनुकूल होम स्क्रिन, खाता, एप, सेटिङ र थप कुराहरूका लागि तपाईंको ट्याब्लेटमा व्यक्तिगत स्थान हुन्छ।"</string>
     <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"नयाँ प्रयोगकर्ताहरू थपेर आफ्नो फोन सेयर गर्नुहोस्। तपाईंको फोनमा प्रत्येक प्रयोगकर्ताका लागि कस्टम होम स्क्रिन, खाता, एप, सेटिङ र थप कुराहरूका लागि व्यक्तिगत स्थान उपलब्ध हुन्छ।"</string>
     <string name="user_list_title" msgid="1387379079186123404">"प्रयोगकर्ता र प्रोफाइलहरू"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"प्रयोगकर्ता वा प्रोफाइल थप गर्नुहोस्"</string>

@@ -47,8 +47,8 @@
     <string name="sdcard_unmount" product="default" msgid="8078570285871053815">"SD картасын шығару"</string>
     <string name="sdcard_format" product="nosdcard" msgid="3248760426252305366">"USB жадын өшіру"</string>
     <string name="sdcard_format" product="default" msgid="3676635435136326182">"SD картасын өшіру"</string>
-    <string name="preview_pager_content_description" msgid="3762247188224576303">"Алдын ала қарау"</string>
-    <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"<xliff:g id="NUM_PAGES">%2$d</xliff:g> ішінен <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> алдын ала қарау"</string>
+    <string name="preview_pager_content_description" msgid="3762247188224576303">"Алдын ала көру"</string>
+    <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"<xliff:g id="NUM_PAGES">%2$d</xliff:g> ішінен <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> алдын ала көру"</string>
     <string name="font_size_summary" msgid="1296835853522566260">"Экрандағы мәтінді кішірейтеді немесе үлкейтеді."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Кішірек ету"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Үлкенірек ету"</string>
@@ -521,12 +521,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Осы арқылы саусағыңыздың көп бөлігін қамтуға болады."</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Саусақ ізі тіркелуде: <xliff:g id="PERCENTAGE">%d</xliff:g> пайыз."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Саусақ ізі енгізілді"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Саусақ ізімен ашу функциясын планшеттің құлпын ашу немесе қолданбаларда өзіңізді растау үшін жиі пайдалансаңыз, ол соғұрлым жақсы жұмыс істейтін болады."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Саусақ ізімен ашу функциясын құрылғының құлпын ашу немесе қолданбаларда өзіңізді растау үшін жиі пайдалансаңыз, ол соғұрлым жақсы жұмыс істейтін болады."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Саусақ ізімен ашу функциясын телефонның құлпын ашу немесе қолданбаларда өзіңізді растау үшін жиі пайдалансаңыз, ол соғұрлым жақсы жұмыс істейтін болады."</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Кейінірек"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Саусағыңызды алып, қайта түртіңіз."</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Саусақ ізінің бір жағын датчикке қойыңыз, сосын екінші жағына ауысыңыз."</string>
@@ -3642,7 +3639,7 @@
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"жұмыс профилін қорғау, жұмыс, профиль"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"жұмыс профилі, басқарылатын профиль, бірыңғайлау, жұмыс, профиль"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"қимылдар"</string>
-    <string name="keywords_wallet" msgid="3757421969956996972">"әмиян"</string>
+    <string name="keywords_wallet" msgid="3757421969956996972">"Wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"төлеу, түрту, төлемдер"</string>
     <string name="keywords_backup" msgid="707735920706667685">"сақтық көшірме, сақтық көшірме жасау"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"қимыл"</string>
@@ -4054,7 +4051,7 @@
     <string name="vr_listeners_title" msgid="4960357292472540964">"Көмекші VR қызметтері"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Орнатылған қолданбалар көмекші VR қызметі ретінде қосылуға рұқсат сұраған жоқ."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Көмекші VR қызметтеріне <xliff:g id="SERVICE">%1$s</xliff:g> пайдалануға рұқсат беру керек пе?"</string>
-    <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> қолданбаларды виртуалды шындық режимінде пайдаланып жатқанда іске қосыла алады."</string>
+    <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> қолданбаларды виртуалдық шындық режимінде пайдаланып жатқанда іске қосыла алады."</string>
     <string name="display_vr_pref_title" msgid="4850474436291113569">"Құрылғы VR режимінде болғанда"</string>
     <string name="display_vr_pref_low_persistence" msgid="7039841277157739871">"Бұлдырлықты азайту (ұсынылады)"</string>
     <string name="display_vr_pref_off" msgid="4008841566387432721">"Жыпылықтауды азайту"</string>
@@ -4610,7 +4607,7 @@
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Қолданбаға мультимедианы басқаруға рұқсат ету"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Рұқсат берілсе, бұл қолданба осы құрылғыдағы басқа қолданбалар жасаған медиафайлдарды сізден сұрамай өзгерте немесе жоя алады. Файлдар мен медиафайлдарды пайдалану үшін қолданбаның рұқсаты болуы керек."</string>
     <string name="keywords_media_management_apps" msgid="7499959607583088690">"Мультимедиа, Файл, Басқару, Басқарушы, Өзгерту, Редактор, Қолданба, Бағдарлама"</string>
-    <string name="keywords_vr_listener" msgid="902737490270081131">"виртуалды шындық тыңдаушысының стерео көмекші қызметі"</string>
+    <string name="keywords_vr_listener" msgid="902737490270081131">"виртуалдық шындық тыңдаушысының стерео көмекші қызметі"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"Басқа қолданбалардың үстінен көрсету"</string>
     <string name="system_alert_window_summary" msgid="1435856750594492891">"<xliff:g id="COUNT_1">%2$d</xliff:g> қолданбаның <xliff:g id="COUNT_0">%1$d</xliff:g>-на(не) басқа қолданбалардың үстінен шығуға рұқсат берілген"</string>
     <string name="filter_overlay_apps" msgid="2483998217116789206">"Рұқсаты бар қолданбалар"</string>
@@ -5704,7 +5701,7 @@
     <string name="mic_toggle_description" msgid="484139688645092237">"Қолданбалар мен қызметтер үшін таңдалады. Бұл параметр өшірілсе де, құтқару қызметінің нөміріне қоңырау шалғанда, микрофон деректері жіберілуі мүмкін."</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"Алдыңғы"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Келесі"</string>
-    <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Түсті алдын ала қарау"</string>
+    <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Түсті алдын ала көру"</string>
     <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"SIM картасын пайдалануға рұқсат сұрау"</string>
     <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Құрылғы SIM картаңызды пайдалануға рұқсат сұрайды. Толық мәлімет алу үшін түртіңіз."</string>
     <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"SIM картасын пайдалануға рұқсат берілсін бе?"</string>
@@ -5758,7 +5755,7 @@
     <item msgid="588427840913221601">"Процесс күйі"</item>
   </string-array>
     <string name="tare_dialog_confirm_button_title" msgid="9179397559760203348">"Растау"</string>
-    <string name="dream_preview_button_title" msgid="6637456541851795952">"Алдын ала қарау"</string>
+    <string name="dream_preview_button_title" msgid="6637456541851795952">"Алдын ала көру"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Скринсейвер таңдау"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Қосымша ақпаратты көрсету"</string>
     <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"Уақыт, күн, ауа райы, ауаның сапасы және Cast мәліметтері скринсейверде көрсетіледі."</string>
