@@ -87,6 +87,8 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Ви не маєте дозволу змінювати налаштування Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Підключити новий пристрій"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Підключити правий"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Підключити лівий"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Підключити другий"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Ваш лівий слуховий апарат підключено.\n\nЩоб підключити правий слуховий апарат, переконайтеся, що він увімкнений і готовий до підключення."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Ваш правий слуховий апарат підключено.\n\nЩоб підключити лівий слуховий апарат, переконайтеся, що він увімкнений і готовий до підключення."</string>
@@ -1667,7 +1669,7 @@
     <string name="storage_menu_manage" msgid="7465522758801346408">"Керувати сховищем"</string>
     <string name="keywords_storage_menu_free" msgid="2275406357317597106">"очистити, пам\'ять"</string>
     <string name="storage_free_up_space_title" msgid="281047807372131975">"Звільнити місце"</string>
-    <string name="storage_free_up_space_summary" msgid="6650027929735481350">"Щоб упорядкувати файли та звільнити місце, перейдіть у додаток Файли"</string>
+    <string name="storage_free_up_space_summary" msgid="6650027929735481350">"Щоб упорядкувати файли та звільнити місце, перейдіть у додаток Files"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB-з’єднання комп’ютера"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"Під’єднати як"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"Пристрій зберігання даних (MTP)"</string>
@@ -2506,7 +2508,7 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Швидкий запуск інверсії кольорів"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Інверсія кольорів перетворює світлі кольори на темні та навпаки."</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Зверніть увагу&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Інверсія також змінить кольори зображень і мультимедійного контенту&lt;/li&gt; &lt;li&gt; Інверсія кольорів вплине на всі додатки&lt;/li&gt; &lt;li&gt; Якщо потрібно зробити фон інтерфейсу не таким яскравим, натомість увімкніть Темну тему&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Автоматичне натискання (час взаємодії)"</string>
+    <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Автонатискання (час взаємодії)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Про авт. натискання (час взаємодії)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Докладніше про автоматичне натискання (час взаємодії)"</string>
     <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"Можна налаштувати автоматичне натискання підключеної миші, коли курсор не рухається впродовж певного часу"</string>
@@ -2821,8 +2823,12 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Деякі функції можуть не працювати"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Збільшене використання заряду"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Переглянути додатки, що найбільше використовують заряд"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Заряджання тимчасово обмежено"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Це запобігає старінню акумулятора. Докладніше."</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Відновити заряджання"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"За певних умов, таких як висока температура й довготривале заряджання, система може встановлювати для рівня заряду обмеження <xliff:g id="PERCENT">%1$s</xliff:g>, щоб подовжити термін служби акумулятора.\n\nКоли умови нормалізуються, телефон заряджатиметься, як зазвичай."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"За певних умов, таких як висока температура й довготривале заряджання, система може встановлювати для рівня заряду обмеження <xliff:g id="PERCENT">%1$s</xliff:g>, щоб подовжити термін служби акумулятора.\n\nКоли умови нормалізуються, планшет заряджатиметься, як зазвичай."</string>
@@ -2868,6 +2874,8 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Цей додаток зможе споживати заряд акумулятора у фоновому режимі. Акумулятор може розрядитися швидше."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Видалити"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Скасувати"</string>
+    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
+    <skip />
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Додатки використовують звичайний обсяг заряду акумулятора. Якщо вони споживатимуть забагато енергії, телефон запропонує відповідні дії.\n\nВи завжди можете ввімкнути режим економії заряду акумулятора."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Додатки використовують звичайний обсяг заряду акумулятора. Якщо вони споживатимуть забагато енергії, планшет запропонує відповідні дії.\n\nВи завжди можете ввімкнути режим економії заряду акумулятора."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Додатки використовують звичайний обсяг заряду акумулятора. Якщо вони споживатимуть забагато енергії, пристрій запропонує відповідні дії.\n\nВи завжди можете ввімкнути режим економії заряду акумулятора."</string>
@@ -3049,8 +3057,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"коли рівень заряду акумулятора – <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Заряд акумулятора у відсотках"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Показувати відсоток заряду в рядку стану"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Рівень заряду акумулятора після останнього повного заряджання"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Заряд акумулятора за останні 24 години"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"Використання додатками після останнього повного заряджання"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Споживання додатками за останні 24 години"</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"Використання системою після останнього повного заряджання"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Споживання системою за останні 24 години"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Споживання на роботу системи (<xliff:g id="SLOT">%s</xliff:g>)"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Споживання на роботу додатків (<xliff:g id="SLOT">%s</xliff:g>)"</string>
@@ -4317,7 +4328,7 @@
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"Хто може турбувати"</string>
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Щоб не пропустити виклик від дозволеного абонента, переконайтеся, що телефон не перебуває в беззвучному режимі"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Вхідні виклики блокуються, коли активовано розклад \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Ви можете змінити налаштування, щоб потрібні люди могли зв’язатися з вами."</string>
-    <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Позначені контакти"</string>
+    <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Контакти із зірочками"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Немає}=1{{contact_1}}=2{{contact_1} і {contact_2}}=3{{contact_1}, {contact_2} і {contact_3}}one{{contact_1}, {contact_2} і ще #}few{{contact_1}, {contact_2} і ще #}many{{contact_1}, {contact_2} і ще #}other{{contact_1}, {contact_2} і ще #}}"</string>
     <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(Без імені)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Повідомлення"</string>

@@ -85,6 +85,8 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Wala kang pahintulot na palitan ang mga setting ng Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Magpares ng bagong device"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Ipares ang kanan"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Ipares ang kaliwa"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Ipares ang kabila"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Nakakonekta ang iyong kaliwang hearing aid.\n\nPara ipares ang kanan, tiyaking naka-on ito at handang ipares."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Nakakonekta ang iyong kanang hearing aid.\n\nPara ipares ang kaliwa, tiyaking naka-on ito at handang ipares."</string>
@@ -872,7 +874,7 @@
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"Advanced"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Advanced na Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Kapag naka-on ang Bluetooth, maaaring makipag-ugnayan ang device mo sa ibang kalapit na Bluetooth device."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Kapag naka-on ang Bluetooth, puwedeng makipag-ugnayan ang iyong device sa iba pang malapit na Bluetooth device.\n\nPara mapaganda ang karanasan sa device, puwede pa ring mag-scan ang mga app at serbisyo ng mga malapit na device anumang oras, kahit na naka-off ang Bluetooth. Magagamit ito, halimbawa, para pahusayin ang mga feature at serbisyong batay sa lokasyon. Mababago mo ito sa "<annotation id="link">"mga setting ng pag-scan ng Bluetooth"</annotation>"."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Kapag naka-on ang Bluetooth, puwedeng makipag-ugnayan ang iyong device sa iba pang malapit na Bluetooth device.\n\nPara mapaganda ang experience sa device, puwede pa ring mag-scan ang mga app at serbisyo ng mga malapit na device anumang oras, kahit na naka-off ang Bluetooth. Magagamit ito, halimbawa, para pahusayin ang mga feature at serbisyong batay sa lokasyon. Mababago mo ito sa "<annotation id="link">"mga setting ng pag-scan ng Bluetooth"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"Upang pahusayin ang katumpakan ng lokasyon, maaari pa ring mag-detect ng mga Bluetooth device ang mga app at serbisyo ng system. Maaari mo itong baguhin sa <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>mga setting ng pag-scan<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Hindi makakonekta. Subukang muli."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Mga detalye ng device"</string>
@@ -1392,8 +1394,8 @@
     <string name="night_display_text" msgid="4789324042428095383">"Dahil sa Night Light, nagiging kulay amber ang iyong screen. Mas pinapadali nitong matingnan ang iyong screen o makapagbasa sa dim light, at maaaring makatulong sa iyong mas mabilis na makatulog."</string>
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"Iskedyul"</string>
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"Wala"</string>
-    <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"Ino-on sa custom na oras"</string>
-    <string name="night_display_auto_mode_twilight" msgid="4291855156158833997">"Ino-on mula sunset hanggang sunrise"</string>
+    <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"On sa custom na oras"</string>
+    <string name="night_display_auto_mode_twilight" msgid="4291855156158833997">"On mula sunset hanggang sunrise"</string>
     <string name="night_display_start_time_title" msgid="2611541851596977786">"Oras ng pagsisimula"</string>
     <string name="night_display_end_time_title" msgid="5243112480391192111">"Oras ng pagtatapos"</string>
     <string name="night_display_status_title" msgid="9006282950657941820">"Status"</string>
@@ -1420,8 +1422,8 @@
     <string name="dark_ui_title" msgid="3373976268671557416">"Dark Mode"</string>
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Iskedyul"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Wala"</string>
-    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Ino-on sunset hanggang sunrise"</string>
-    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Ino-on sa custom na oras"</string>
+    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"On mula sunset hanggang sunrise"</string>
+    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"On sa custom na oras"</string>
     <string name="dark_ui_auto_mode_custom_bedtime" msgid="8465023741946439266">"Nag-o-on sa oras ng pagtulog"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Status"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Hindi awtomatikong mag-o-on kailanman"</string>
@@ -2759,8 +2761,12 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Maaaring limitado ang ilang feature"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Mas malakas na paggamit ng baterya"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Tingnan ang mga app na pinakamalakas gumamit"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Pansamantalang limitado ang pag-charge"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Para tumagal ang iyong baterya. Matuto pa."</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Ituloy ang pag-charge"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Sa ilang partikular na kundisyon, tulad ng maiinit na temperatura at matatagal na pag-charge, posibleng malimitahan ang pag-charge sa <xliff:g id="PERCENT">%1$s</xliff:g> para makatulong na patagalin ang baterya.\n\nKapag wala na ang mga kundisyong iyon, awtomatikong magcha-charge nang normal ang iyong telepono."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Sa ilang partikular na kundisyon, tulad ng maiinit na temperatura at matatagal na pag-charge, posibleng malimitahan ang pag-charge sa <xliff:g id="PERCENT">%1$s</xliff:g> para makatulong na patagalin ang baterya.\n\nKapag wala na ang mga kundisyong iyon, awtomatikong magcha-charge nang normal ang iyong tablet."</string>
@@ -2796,6 +2802,8 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Makakagamit ang app na ito ng baterya sa background. Maaaring maubos ang iyong baterya nang mas maaga kaysa sa inaasahan."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Alisin"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Kanselahin"</string>
+    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
+    <skip />
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Karaniwan lang ang paggamit ng baterya ng iyong mga app. Kung masyadong malakas gumamit ng baterya ang mga app, magmumungkahi ang iyong telepono ng mga aksyong puwede mong gawin.\n\nPuwede mong i-on ang Pantipid ng Baterya anumang oras kung paubos na ang baterya mo."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Karaniwan lang ang paggamit ng baterya ng iyong mga app. Kung masyadong malakas gumamit ng baterya ang mga app, magmumungkahi ang iyong tablet ng mga aksyong puwede mong gawin.\n\nPuwede mong i-on ang Pantipid ng Baterya anumang oras kung paubos na ang baterya mo."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Karaniwan lang ang paggamit ng baterya ng iyong mga app. Kung masyadong malakas gumamit ng baterya ang mga app, magmumungkahi ang iyong device ng mga aksyong puwede mong gawin.\n\nPuwede mong i-on ang Pantipid ng Baterya anumang oras kung paubos na ang baterya mo."</string>
@@ -2973,8 +2981,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"sa <xliff:g id="PERCENT">%1$s</xliff:g> baterya"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Porsyento ng baterya"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Ipakita ang porsyento ng baterya sa status bar"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Antas ng baterya mula noong huling napuno ang baterya"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Level ng baterya sa huling 24 na oras"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"Paggamit ng app mula noong huling napuno ang baterya"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Paggamit ng app sa huling 24 na oras"</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"Paggamit ng system mula noong huling napuno ang baterya"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Paggamit ng system sa huling 24 na oras"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Paggamit ng system sa <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Paggamit ng app sa <xliff:g id="SLOT">%s</xliff:g>"</string>

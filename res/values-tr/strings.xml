@@ -85,6 +85,8 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Bluetooth ayarlarını değiştirmek için izniniz yok."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Yeni cihaz eşle"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Sağ kulağı eşle"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Sol kulağı eşle"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Diğer kulağınızı eşleyin"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Soldaki işitme cihazınız bağlandı.\n\nSağdakini eşlemek için cihazın açık ve eşlenmeye hazır olduğundan emin olun."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Sağdaki işitme cihazınız bağlandı.\n\nSoldakini eşlemek için cihazın açık ve eşlenmeye hazır olduğundan emin olun."</string>
@@ -872,7 +874,7 @@
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"Gelişmiş"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Gelişmiş Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Bluetooth açık olduğunda, cihazınız yakındaki Bluetooth cihazlarla iletişim kurabilir."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Bluetooth açıkken cihazınız yakındaki diğer Bluetooth cihazlarla iletişim kurabilir.\n\nUygulamalar ve hizmetler cihaz deneyimini iyileştirmek için yakındaki cihazları Bluetooth kapalıyken bile her zaman tarayabilir. Bu özellik, örneğin, konuma dayalı özellikleri ve hizmetleri iyileştirmek için kullanılabilir. Bunu istediğiniz zaman "<annotation id="link">"Bluetooth tarama ayarlarından"</annotation>" değiştirebilirsiniz."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Bluetooth açıkken cihazınız yakındaki diğer Bluetooth cihazlarla iletişim kurabilir.\n\nUygulamalar ve hizmetler, cihaz deneyimini iyileştirmek için Bluetooth kapalıyken bile yakında cihaz olup olmadığını belirlemek her zaman için tarama yapabilir. Bu özellik, örneğin, konuma dayalı özellikleri ve hizmetleri iyileştirmek için kullanılabilir. Bunu istediğiniz zaman "<annotation id="link">"Bluetooth tarama ayarlarından"</annotation>" değiştirebilirsiniz."</string>
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"Sistem uygulamaları ve hizmetleri, konum doğruluğunu iyileştirmek için Bluetooth cihazları yine de algılayabilir. Bu ayarı, <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>tarama ayarlarından<xliff:g id="LINK_END_1">LINK_END</xliff:g> değiştirebilirsiniz."</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Bağlanılamadı. Tekrar deneyin."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Cihaz ayrıntıları"</string>
@@ -2552,8 +2554,8 @@
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Mavi-sarı"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Gri tonlama"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Yeşil zayıf, yeşil renk körlüğü"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Kırmızı zayıf, kırmızı renk körlüğü"</string>
-    <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Mavi renk körlüğü"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Kırmızı zayıf, protanomali"</string>
+    <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomali"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Ekstra loş"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Ekranı ekstra loş yap"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Ekstra loş kısayolu"</string>
@@ -2759,8 +2761,12 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Bazı özellikler sınırlı olabilir"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Yüksek pil kullanımı"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"En fazla pil kullanan uygulamaları göster"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Şarj etme geçici olarak sınırlı"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Pilinizi korumak için. Daha fazla bilgi edinin."</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Şarja devam et"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Yüksek sıcaklıklar ve uzun şarj etme süreleri gibi belirli durumlarda pil sağlığını korumak için şarj etme işlemi <xliff:g id="PERCENT">%1$s</xliff:g> ile sınırlanabilir.\n\nBu gibi durumlar sona erdiğinde telefonunuz otomatik olarak normal şarj etmeye başlar."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Yüksek sıcaklıklar ve uzun şarj etme süreleri gibi belirli durumlarda pil sağlığını korumak için şarj etme işlemi <xliff:g id="PERCENT">%1$s</xliff:g> ile sınırlanabilir.\n\nBu gibi durumlar sona erdiğinde tabletiniz otomatik olarak normal şarj etmeye başlar."</string>
@@ -2796,6 +2802,8 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Bu uygulama arka planda pil gücünü kullanabilecek. Piliniz beklenenden daha erken bitebilir."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Kaldır"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"İptal"</string>
+    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
+    <skip />
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Uygulamalarınız normal miktarda pil kullanıyor. Uygulamalar çok fazla pil kullanırsa telefonunuz size bazı önerilerde bulunacaktır.\n\nPiliniz azaldığında her zaman Pil Tasarrufu\'nu açabilirsiniz."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Uygulamalarınız normal miktarda pil kullanıyor. Uygulamalar çok fazla pil kullanırsa tabletiniz size bazı önerilerde bulunacaktır.\n\nPiliniz azaldığında her zaman Pil Tasarrufu\'nu açabilirsiniz."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Uygulamalarınız normal miktarda pil kullanıyor. Uygulamalar çok fazla pil kullanırsa cihazınız size bazı önerilerde bulunacaktır.\n\nPiliniz azaldığında her zaman Pil Tasarrufu\'nu açabilirsiniz."</string>
@@ -2973,8 +2981,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"<xliff:g id="PERCENT">%1$s</xliff:g> pil gücü"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Pil yüzdesi"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Durum çubuğunda pil yüzdesini göster"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Son tam şarjdan bu yana pil seviyesi"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Son 24 saatteki pil seviyesi"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"Son tam şarjdan bu yana uygulama kullanımı"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Son 24 saatteki uygulama kullanımı"</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"Son tam şarjdan bu yana sistem kullanımı"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Son 24 saatteki sistem kullanımı"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"<xliff:g id="SLOT">%s</xliff:g> için sistem kullanımı"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"<xliff:g id="SLOT">%s</xliff:g> için uygulama kullanımı"</string>
