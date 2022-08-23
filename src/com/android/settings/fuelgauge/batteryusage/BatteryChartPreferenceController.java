@@ -65,6 +65,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private static final String TAG = "BatteryChartPreferenceController";
     private static final String KEY_FOOTER_PREF = "battery_graph_footer";
     private static final String PACKAGE_NAME_NONE = "none";
+    private static final int ENABLED_ICON_ALPHA = 255;
+    private static final int DISABLED_ICON_ALPHA = 255 / 3;
 
     private static final long VALID_USAGE_TIME_DURATION = DateUtils.HOUR_IN_MILLIS * 2;
     private static final long VALID_DIFF_DURATION = DateUtils.MINUTE_IN_MILLIS * 3;
@@ -463,6 +465,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             if (!isAdded) {
                 mAppListPrefGroup.addPreference(pref);
             }
+            appIcon.setAlpha(pref.isEnabled() ? ENABLED_ICON_ALPHA : DISABLED_ICON_ALPHA);
             prefIndex++;
         }
     }
