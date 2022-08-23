@@ -314,7 +314,6 @@ public class EnabledNetworkModePreferenceController extends
                             .addFormat(UiOptions.PresentFormat.add2gEntry);
                     break;
                 case PREFERRED_NETWORK_MODE_CHOICES_WORLD_MODE:
-                    lteOnlyUnsupported = true;
                     uiOptions = uiOptions
                             .setChoices(R.array.preferred_network_mode_values_world_mode)
                             .addFormat(UiOptions.PresentFormat.addGlobalEntry)
