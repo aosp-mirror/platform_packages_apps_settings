@@ -85,6 +85,8 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"আপোনাৰ ব্লুটুথ ছেটিং সলনি কৰাৰ অনুমতি নাই৷"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"নতুন ডিভাইচ পেয়াৰ কৰক"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"ব্লুটুথ"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"সোঁ কাণখন পেয়াৰ কৰক"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"বাওঁ কাণখন পেয়াৰ কৰক"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"নিজৰ অন্য কাণখন পেয়াৰ কৰক"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"আপোনাৰ বাওঁফালৰ শ্ৰৱণ যন্ত্ৰটো সংযোগ কৰা হৈছে।\n\nসোঁফালৰটো পেয়াৰ কৰিবলৈ, এইটো অন কৰি থোৱাটো আৰু পেয়াৰ কৰিবলৈ সাজু হৈ থকাটো নিশ্চিত কৰক।"</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"আপোনাৰ সোঁফালৰ শ্ৰৱণ যন্ত্ৰটো সংযোগ কৰা হৈছে।\n\nবাওঁফালৰটো পেয়াৰ কৰিবলৈ, এইটো অন কৰি থোৱাটো আৰু পেয়াৰ কৰিবলৈ সাজু হৈ থকাটো নিশ্চিত কৰক।"</string>
@@ -2759,8 +2761,12 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"কিছুমান সুবিধাবোৰ সীমিতভাৱে ব্যৱহাৰযোগ্য় হ\'ব পাৰে"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"বেটাৰীৰ ব্যৱহাৰ বাঢ়িছে"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"আটাইতকৈ বেছিকৈ ব্যৱহাৰ কৰা এপ্‌সমূহ চাওক"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"চাৰ্জ কৰাটো সাময়িকভাৱে সীমিত কৰা হৈছে"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"আপোনাৰ বেটাৰী সংৰক্ষণ কৰিবলৈ। অধিক জানক।"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"চাৰ্জ কৰা পুনৰ আৰম্ভ কৰক"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"উচ্চ তাপমাত্ৰা আৰু দীঘলীয়া সময় ধৰি চাৰ্জ কৰাৰ দৰে কিছুমান পৰিস্থিতিত, বেটাৰীৰ অৱস্থা ভালে ৰখাত সহায় কৰিবলৈ চাৰ্জিং <xliff:g id="PERCENT">%1$s</xliff:g>লৈ সীমিত কৰা হ’ব পাৰে।\n\nতেনে পৰিস্থিতিৰ পৰিৱৰ্তন হ’লে আপোনাৰ ফ’নটো স্বয়ংক্ৰিয়ভাৱে স্বাভাৱিকভাৱে চাৰ্জ হ’ব।"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"উচ্চ তাপমাত্ৰা আৰু দীঘলীয়া সময় ধৰি চাৰ্জ কৰাৰ দৰে কিছুমান পৰিস্থিতিত, বেটাৰীৰ অৱস্থা ভালে ৰখাত সহায় কৰিবলৈ চাৰ্জিং <xliff:g id="PERCENT">%1$s</xliff:g>লৈ সীমিত কৰা হ’ব পাৰে।\n\nতেনে পৰিস্থিতিৰ পৰিৱৰ্তন হ’লে আপোনাৰ টেবলেটটো স্বয়ংক্ৰিয়ভাৱে স্বাভাৱিকভাৱে চাৰ্জ হ’ব।"</string>
@@ -2796,6 +2802,8 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"এই এপে নেপথ্য়ত বেটাৰী ব্যৱহাৰ কৰিব পাৰে। আপোনাৰ বেটাৰীৰ চাৰ্জ আশা কৰাতকৈ আগতেই শেষ হ\'ব পাৰে।"</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"আঁতৰাওক"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"বাতিল কৰক"</string>
+    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
+    <skip />
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"আপোনাৰ এপ্‌সমূহে বৰ্তমান সাধাৰণ পৰিমাণৰ বেটাৰী ব্যৱহাৰ কৰি আছে। যদিহে এপ্‌‌সমূহে অত্যধিক বেটাৰী ব্যৱহাৰ কৰে, তেন্তে আপোনাৰ ফ\'নটোৱে আপুনি ল\'ব পৰা কাৰ্যপন্থাৰ বিষয়ে আপোনাক পৰামৰ্শ দিব।\n\nবেটাৰী কমি গ\'লে আপুনি সদায় বেটাৰী সঞ্চয়কাৰী অন কৰিব পাৰে।"</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"আপোনাৰ এপ্‌সমূহে বৰ্তমান সাধাৰণ পৰিমাণৰ বেটাৰী ব্যৱহাৰ কৰি আছে। যদিহে এপ্‌সমূহে অত্যাধিক বেটাৰী ব্যৱহাৰ কৰে, তেন্তে আপোনাৰ টেবলেটটোৱে আপুনি ল’ব পৰা কাৰ্যপন্থাৰ বিষয়ে আপোনাক পৰামৰ্শ দিব।\n\nবেটাৰী কমি গ’লে আপুনি সদায় বেটাৰী সঞ্চয়কাৰী অন কৰিব পাৰে।"</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"আপোনাৰ এপ্‌সমূহে বৰ্তমান সাধাৰণ পৰিমাণৰ বেটাৰী ব্যৱহাৰ কৰি আছে। যদিহে এপ্‌সমূহে অত্যাধিক বেটাৰী ব্যৱহাৰ কৰে, তেন্তে আপোনাৰ ডিভাইচটোৱে আপুনি ল’ব পৰা কাৰ্যপন্থাৰ বিষয়ে আপোনাক পৰামৰ্শ দিব।\n\nবেটাৰী কমি গ’লে আপুনি সদায় বেটাৰী সঞ্চয়কাৰী অন কৰিব পাৰে।"</string>
@@ -2973,8 +2981,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"<xliff:g id="PERCENT">%1$s</xliff:g> বেটাৰী"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"বেটাৰীত থকা চাৰ্জৰ শতাংশ"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"স্থিতি বাৰত বেটাৰীৰ চাৰ্জৰ শতকৰা হাৰ দেখুৱাওক"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"অন্তিমবাৰ সম্পূৰ্ণৰূপে চাৰ্জ হোৱাৰ পাছত বেটাৰীৰ স্তৰ"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"যোৱা ২৪ ঘণ্টাৰ বেটাৰীৰ স্তৰ"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"অন্তিমবাৰ সম্পূৰ্ণৰূপে চাৰ্জ হোৱাৰ পাছত বেটাৰীৰ ব্যৱহাৰ"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"যোৱা ২৪ ঘণ্টাত হোৱা এপৰ ব্যৱহাৰ"</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"অন্তিমবাৰ সম্পূৰ্ণৰূপে চাৰ্জ হোৱাৰ পাছত ছিষ্টেমৰ ব্যৱহাৰ"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"যোৱা ২৪ ঘণ্টাত হোৱা ছিষ্টেমৰ ব্যৱহাৰ"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"<xliff:g id="SLOT">%s</xliff:g>ৰ বাবে ছিষ্টেমৰ ব্যৱহাৰ"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"<xliff:g id="SLOT">%s</xliff:g>ৰ বাবে এপৰ ব্যৱহাৰ"</string>

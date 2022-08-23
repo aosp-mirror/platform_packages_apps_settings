@@ -85,6 +85,8 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Bluetooth設定を変更する権限がありません。"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"新しいデバイスとペア設定"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"右耳をペア設定"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"左耳をペア設定"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"もう一方の耳をペア設定"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"左の補聴器を接続しました。\n\n右の補聴器をペア設定するには、電源が入り、ペア設定できる状態になっていることをご確認ください。"</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"右の補聴器を接続しました。\n\n左耳をペア設定するには、電源が入り、ペア設定できる状態になっていることをご確認ください。"</string>
@@ -1779,8 +1781,8 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"ネットワーク設定をリセットしました"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"SIM を消去できません"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"エラーのためダウンロード型 SIM を消去できません。\n\nデバイスを再起動してもう一度お試しください。"</string>
-    <string name="main_clear_title" msgid="277664302144837723">"全データを消去（出荷時リセット）"</string>
-    <string name="main_clear_short_title" msgid="4752094765533020696">"全データを消去（出荷時リセット）"</string>
+    <string name="main_clear_title" msgid="277664302144837723">"すべてのデータを消去（初期設定にリセット）"</string>
+    <string name="main_clear_short_title" msgid="4752094765533020696">"すべてのデータを消去（初期設定にリセット）"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"この操作を行うと、以下のデータを含め、タブレットの"<b>"内部ストレージ"</b>"の全データが消去されます。\n\n"<li>"Google アカウント"</li>\n<li>"システムやアプリのデータと設定"</li>\n<li>"ダウンロードしたアプリ"</li></string>
     <string name="main_clear_desc" product="default" msgid="6984348811887162647">"この操作を行うと、以下のデータを含め、スマートフォンの"<b>"内部ストレージ"</b>"の全データが消去されます。\n\n"<li>"Google アカウント"</li>\n<li>"システムやアプリのデータと設定"</li>\n<li>"ダウンロードしたアプリ"</li></string>
     <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"以下のアカウントにログインしています:\n"</string>
@@ -1799,7 +1801,7 @@
     <string name="main_clear_final_desc" msgid="5800877928569039580">"個人情報とダウンロードしたアプリがすべて削除されます。この操作を取り消すことはできません。"</string>
     <string name="main_clear_final_desc_esim" msgid="440406836793824969">"ダウンロードしたアプリや SIM を含め、個人情報がすべて削除されます。この操作を取り消すことはできません。"</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"すべてのデータを消去しますか？"</string>
-    <string name="main_clear_not_available" msgid="3433795327146684827">"このユーザーは出荷時設定へのリセットを許可されていません"</string>
+    <string name="main_clear_not_available" msgid="3433795327146684827">"このユーザーには初期設定へのリセットが許可されていません"</string>
     <string name="main_clear_progress_title" msgid="7239741132015617719">"消去しています"</string>
     <string name="main_clear_progress_text" msgid="4636695115176327972">"お待ちください…"</string>
     <string name="call_settings_title" msgid="2531072044177194164">"通話設定"</string>
@@ -2713,7 +2715,7 @@
     <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"このアプリでは、バッテリーの使用を「<xliff:g id="STATE">%1$s</xliff:g>」以外に設定できません。"</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"制限なし"</string>
     <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"最適化"</string>
-    <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"詳しくは、バッテリー使用量オプションについての説明をご覧ください"</string>
+    <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"詳しくは、バッテリー使用状況のオプションに関する説明をご確認ください"</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"最後にフル充電してからの使用時間"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"フル充電以降のバッテリー使用量"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"フル充電以降の画面がオンの時間"</string>
@@ -2759,8 +2761,12 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"一部の機能が制限される可能性があります"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"バッテリー使用量が多くなっています"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"使用量の多いアプリを確認"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"充電は一時的に制限されています"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"バッテリーを長持ちさせるためのヒントをご確認ください。"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"充電を再開"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"気温が高い、充電時間が長いなど、条件によって、バッテリーの状態を保つために充電が <xliff:g id="PERCENT">%1$s</xliff:g> に制限されることがあります。\n\nこれらの条件が解消されると、スマートフォンは自動的に通常どおり充電されます。"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"気温が高い、充電時間が長いなど、条件によって、バッテリーの状態を保つために充電が <xliff:g id="PERCENT">%1$s</xliff:g> に制限されることがあります。\n\nこれらの条件が解消されると、タブレットは自動的に通常どおり充電されます。"</string>
@@ -2796,6 +2802,8 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"このアプリがバックグラウンドで電池を使用できるようになるため、電池を予想より早く消費する可能性があります。"</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"解除"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"キャンセル"</string>
+    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
+    <skip />
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"アプリのバッテリー使用量は正常です。アプリがバッテリーを使いすぎる場合は、おすすめの対処方法をスマートフォンがお知らせします。\n\nバッテリーの残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"アプリのバッテリー使用量は正常です。アプリがバッテリーを使いすぎる場合は、対処可能なおすすめの方法がタブレットに表示されます。\n\nバッテリーの残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"アプリのバッテリー使用量は正常です。アプリがバッテリーを使いすぎる場合は、対処可能なおすすめの方法がデバイスに表示されます。\n\nバッテリーの残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
@@ -2915,7 +2923,7 @@
     <string name="battery_detail_background" msgid="3333915023706228000">"バックグラウンド時"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"バッテリー使用量"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"フル充電以降の電池の使用状況"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"バッテリー使用量の管理"</string>
+    <string name="battery_detail_manage_title" msgid="7910805419446927887">"バッテリー使用状況の管理"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"合計: <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> バックグラウンドでの使用: \n（前回のフル充電以降）"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"合計: <xliff:g id="TIME_0">^1</xliff:g> • バックグラウンドでの使用: <xliff:g id="TIME_1">^2</xliff:g>\n（過去 24 時間）"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"合計: <xliff:g id="TIME_0">^1</xliff:g> • バックグラウンド: <xliff:g id="TIME_1">^2</xliff:g>\n（<xliff:g id="TIME_PERIOD">^3</xliff:g>）"</string>
@@ -2973,8 +2981,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"バッテリー残量が <xliff:g id="PERCENT">%1$s</xliff:g> になったとき"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"バッテリー残量"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"ステータスバーにバッテリー残量を％で表示"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"前回のフル充電以降のバッテリー残量"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"過去 24 時間のバッテリー使用量"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"前回のフル充電からのアプリの使用状況"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"過去 24 時間のアプリのバッテリー使用量"</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"前回のフル充電以降のシステムの使用状況"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"過去 24 時間のシステムのバッテリー使用量"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"<xliff:g id="SLOT">%s</xliff:g>のシステムのバッテリー使用量"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"<xliff:g id="SLOT">%s</xliff:g>のアプリのバッテリー使用量"</string>
@@ -5106,7 +5117,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"開発者向けオプションを使用する"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"クレジット プロバイダが行える操作:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"IMEI 番号にアクセスする"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"デバイスを出荷時の設定にリセットする"</string>
+    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"デバイスを初期設定にリセットする"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"デバイスがロックされた場合に行えるのは、以下の操作のみです。"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"緊急通報を発信する"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"日付、時刻、ネットワークの状態、バッテリー残量などのシステム情報を見る"</string>
