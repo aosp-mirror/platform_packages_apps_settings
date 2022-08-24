@@ -32,7 +32,7 @@ public class AddToHomeScreenPreferenceController extends NotificationPreferenceC
     private static final String KEY = "add_to_home";
 
     public AddToHomeScreenPreferenceController(Context context, NotificationBackend backend) {
-        super(context, backend, KEY);
+        super(context, backend);
     }
 
     @Override
@@ -41,11 +41,11 @@ public class AddToHomeScreenPreferenceController extends NotificationPreferenceC
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        if (super.getAvailabilityStatus() == CONDITIONALLY_UNAVAILABLE) {
-            return CONDITIONALLY_UNAVAILABLE;
+    public boolean isAvailable() {
+        if (!super.isAvailable()) {
+            return false;
         }
-        return mConversationInfo != null ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return mConversationInfo != null;
     }
 
     @Override
