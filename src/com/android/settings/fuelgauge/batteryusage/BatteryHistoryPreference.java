@@ -106,12 +106,11 @@ public class BatteryHistoryPreference extends Preference {
             return;
         }
         if (mIsChartGraphEnabled) {
+            final TextView companionTextView = (TextView) view.findViewById(R.id.companion_text);
             mDailyChartView = (BatteryChartView) view.findViewById(R.id.daily_battery_chart);
-            mDailyChartView.setCompanionTextView(
-                    (TextView) view.findViewById(R.id.companion_text));
+            mDailyChartView.setCompanionTextView(companionTextView);
             mHourlyChartView = (BatteryChartView) view.findViewById(R.id.hourly_battery_chart);
-            mHourlyChartView.setCompanionTextView(
-                    (TextView) view.findViewById(R.id.companion_text));
+            mHourlyChartView.setCompanionTextView(companionTextView);
             if (mChartPreferenceController != null) {
                 mChartPreferenceController.setBatteryChartView(mDailyChartView, mHourlyChartView);
             }

@@ -16,11 +16,15 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_REAR;
+import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_OPTICAL;
+
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
 import static org.robolectric.RuntimeEnvironment.application;
@@ -28,9 +32,14 @@ import static org.robolectric.RuntimeEnvironment.application;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.hardware.biometrics.ComponentInfoInternal;
+import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintManager.EnrollmentCallback;
+import android.hardware.fingerprint.FingerprintSensorProperties;
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.CancellationSignal;
+import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
@@ -40,6 +49,8 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
 import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.After;
 import org.junit.Before;
@@ -51,16 +62,23 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowActivity.IntentForResult;
+
+import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUtils.class)
 public class FingerprintEnrollFindSensorTest {
 
+    private static final int DEFAULT_ACTIVITY_RESULT = Activity.RESULT_CANCELED;
+
     @Mock
     private FingerprintManager mFingerprintManager;
+
+    private ActivityController<FingerprintEnrollFindSensor> mActivityController;
 
     private FingerprintEnrollFindSensor mActivity;
 
@@ -70,12 +88,40 @@ public class FingerprintEnrollFindSensorTest {
         ShadowUtils.setFingerprintManager(mFingerprintManager);
         FakeFeatureFactory.setupForTest();
 
-        mActivity = Robolectric.buildActivity(
+        mActivityController = Robolectric.buildActivity(
                 FingerprintEnrollFindSensor.class,
                 new Intent()
                         // Set the challenge token so the confirm screen will not be shown
-                        .putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]))
-                .setup().get();
+                        .putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0])
+        );
+        mActivity = mActivityController.get();
+    }
+
+    private void setupActivity_onRearDevice() {
+        final ArrayList<FingerprintSensorPropertiesInternal> props = new ArrayList<>();
+        props.add(newFingerprintSensorPropertiesInternal(TYPE_REAR));
+        doReturn(props).when(mFingerprintManager).getSensorPropertiesInternal();
+
+        mActivityController.setup();
+    }
+
+    private void setupActivity_onUdfpsDevice() {
+        final ArrayList<FingerprintSensorPropertiesInternal> props = new ArrayList<>();
+        props.add(newFingerprintSensorPropertiesInternal(TYPE_UDFPS_OPTICAL));
+        doReturn(props).when(mFingerprintManager).getSensorPropertiesInternal();
+
+        mActivityController.setup();
+    }
+
+    private FingerprintSensorPropertiesInternal newFingerprintSensorPropertiesInternal(
+            @FingerprintSensorProperties.SensorType int sensorType) {
+        return new FingerprintSensorPropertiesInternal(
+                0 /* sensorId */,
+                SensorProperties.STRENGTH_STRONG,
+                1 /* maxEnrollmentsPerUser */,
+                new ArrayList<ComponentInfoInternal>(),
+                sensorType,
+                true /* resetLockoutRequiresHardwareAuthToken */);
     }
 
     @After
@@ -83,13 +129,7 @@ public class FingerprintEnrollFindSensorTest {
         ShadowUtils.reset();
     }
 
-    @Test
-    public void enrollFingerprint_shouldProceed() {
-        EnrollmentCallback enrollmentCallback = verifyAndCaptureEnrollmentCallback();
-
-        enrollmentCallback.onEnrollmentProgress(123);
-        enrollmentCallback.onEnrollmentError(FingerprintManager.FINGERPRINT_ERROR_CANCELED, "test");
-
+    private void verifyStartEnrollingActivity() {
         ShadowActivity shadowActivity = Shadows.shadowOf(mActivity);
         IntentForResult startedActivity =
                 shadowActivity.getNextStartedActivityForResult();
@@ -100,6 +140,7 @@ public class FingerprintEnrollFindSensorTest {
 
     @Test
     public void enrollFingerprintTwice_shouldStartOneEnrolling() {
+        setupActivity_onRearDevice();
         EnrollmentCallback enrollmentCallback = verifyAndCaptureEnrollmentCallback();
 
         enrollmentCallback.onEnrollmentProgress(123);
@@ -123,6 +164,8 @@ public class FingerprintEnrollFindSensorTest {
     @Config(qualifiers = "mcc999")
     @Test
     public void layoutWithoutAnimation_shouldNotCrash() {
+        setupActivity_onRearDevice();
+
         EnrollmentCallback enrollmentCallback = verifyAndCaptureEnrollmentCallback();
         enrollmentCallback.onEnrollmentProgress(123);
         enrollmentCallback.onEnrollmentError(FingerprintManager.FINGERPRINT_ERROR_CANCELED, "test");
@@ -137,6 +180,8 @@ public class FingerprintEnrollFindSensorTest {
 
     @Test
     public void clickSkip_shouldReturnResultSkip() {
+        setupActivity_onRearDevice();
+
         PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
         layout.getMixin(FooterBarMixin.class).getSecondaryButtonView().performClick();
 
@@ -160,6 +205,8 @@ public class FingerprintEnrollFindSensorTest {
 
     @Test
     public void onActivityResult_withNullIntentShouldNotCrash() {
+        setupActivity_onRearDevice();
+
         // this should not crash
         mActivity.onActivityResult(BiometricEnrollBase.CONFIRM_REQUEST, Activity.RESULT_OK,
             null);
@@ -167,74 +214,159 @@ public class FingerprintEnrollFindSensorTest {
     }
 
     @Test
-    public void onActivityResult_EnrollRequestResultFinishShallBeSentBack() {
-        final int defaultActivityResult = Shadows.shadowOf(mActivity).getResultCode();
-
-        // Start enrolling
-        EnrollmentCallback enrollmentCallback = verifyAndCaptureEnrollmentCallback();
-        enrollmentCallback.onEnrollmentProgress(123);
-        enrollmentCallback.onEnrollmentError(FingerprintManager.FINGERPRINT_ERROR_CANCELED, "test");
+    public void enrollingFinishResultShallSentBack_onRearDevice() {
+        setupActivity_onRearDevice();
+        triggerEnrollProgressAndError_onRearDevice();
+        verifyStartEnrollingActivity();
 
         // onStop shall not change default activity result
-        mActivity.onStop();
-        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(defaultActivityResult);
+        mActivityController.pause().stop();
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(DEFAULT_ACTIVITY_RESULT);
 
-        // onActivityResult from Enrolling activity shall be sent back
-        final int testResult = BiometricEnrollBase.RESULT_FINISHED;
-        mActivity.onActivityResult(BiometricEnrollBase.ENROLL_REQUEST, testResult, null);
-        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(testResult);
-        assertThat(mActivity.isFinishing()).isEqualTo(true);
-
-        // onStop shall not change last activity result
-        mActivity.onStop();
-        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(testResult);
+        gotEnrollingResult_verifyResultSentBack(BiometricEnrollBase.RESULT_FINISHED);
     }
 
     @Test
-    public void onActivityResult_EnrollRequestResultSkipShallBeSentBack() {
-        final int defaultActivityResult = Shadows.shadowOf(mActivity).getResultCode();
-
-        // Start enrolling
-        EnrollmentCallback enrollmentCallback = verifyAndCaptureEnrollmentCallback();
-        enrollmentCallback.onEnrollmentProgress(123);
-        enrollmentCallback.onEnrollmentError(FingerprintManager.FINGERPRINT_ERROR_CANCELED, "test");
+    public void enrollingSkipResultShallSentBack_onRearDevice() {
+        setupActivity_onRearDevice();
+        triggerEnrollProgressAndError_onRearDevice();
+        verifyStartEnrollingActivity();
 
         // onStop shall not change default activity result
-        mActivity.onStop();
-        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(defaultActivityResult);
+        mActivityController.pause().stop();
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(DEFAULT_ACTIVITY_RESULT);
 
-        // onActivityResult from Enrolling activity shall be sent back
-        final int testResult = BiometricEnrollBase.RESULT_SKIP;
-        mActivity.onActivityResult(BiometricEnrollBase.ENROLL_REQUEST, testResult, null);
-        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(testResult);
-        assertThat(mActivity.isFinishing()).isEqualTo(true);
-
-        // onStop shall not change last activity result
-        mActivity.onStop();
-        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(testResult);
+        gotEnrollingResult_verifyResultSentBack(BiometricEnrollBase.RESULT_SKIP);
     }
 
     @Test
-    public void onActivityResult_EnrollRequestResultTimeoutShallBeSentBack() {
-        final int defaultActivityResult = Shadows.shadowOf(mActivity).getResultCode();
+    public void enrollingTimeoutResultShallSentBack_onRearDevice() {
+        setupActivity_onRearDevice();
+        triggerEnrollProgressAndError_onRearDevice();
+        verifyStartEnrollingActivity();
 
-        // Start enrolling
+        // onStop shall not change default activity result
+        mActivityController.pause().stop();
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(DEFAULT_ACTIVITY_RESULT);
+
+        gotEnrollingResult_verifyResultSentBack(BiometricEnrollBase.RESULT_TIMEOUT);
+    }
+
+    @Test
+    public void enrollingFinishResultShallSentBack_onUdfpsDevice_triggeredByLottieClick() {
+        setupActivity_onUdfpsDevice();
+        clickLottieView_onUdfpsDevice();
+        verifyStartEnrollingActivity();
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(DEFAULT_ACTIVITY_RESULT);
+
+        // onStop shall not change default activity result
+        mActivityController.pause().stop();
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(DEFAULT_ACTIVITY_RESULT);
+
+        gotEnrollingResult_verifyResultSentBack(BiometricEnrollBase.RESULT_FINISHED);
+    }
+
+    @Test
+    public void enrollingSkipResultShallSentBack_onUdfpsDevice_triggeredByLottieClick() {
+        setupActivity_onUdfpsDevice();
+        clickLottieView_onUdfpsDevice();
+        verifyStartEnrollingActivity();
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(DEFAULT_ACTIVITY_RESULT);
+
+        // onStop shall not change default activity result
+        mActivityController.pause().stop();
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(DEFAULT_ACTIVITY_RESULT);
+
+        gotEnrollingResult_verifyResultSentBack(BiometricEnrollBase.RESULT_SKIP);
+    }
+
+    @Test
+    public void enrollingTimeoutResultShallSentBack_onUdfpsDevice_triggeredByLottieClick() {
+        setupActivity_onUdfpsDevice();
+        clickLottieView_onUdfpsDevice();
+        verifyStartEnrollingActivity();
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(DEFAULT_ACTIVITY_RESULT);
+
+        // onStop shall not change default activity result
+        mActivityController.pause().stop();
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(DEFAULT_ACTIVITY_RESULT);
+
+        gotEnrollingResult_verifyResultSentBack(BiometricEnrollBase.RESULT_TIMEOUT);
+    }
+
+    @Test
+    public void enrollingFinishResultShallSentBack_onUdfpsDevice_triggeredByPrimaryButtonClick() {
+        setupActivity_onUdfpsDevice();
+        clickPrimaryButton_onUdfpsDevice();
+        verifyStartEnrollingActivity();
+
+        // onStop shall not change default activity result
+        mActivityController.pause().stop();
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(DEFAULT_ACTIVITY_RESULT);
+
+        gotEnrollingResult_verifyResultSentBack(BiometricEnrollBase.RESULT_FINISHED);
+    }
+
+    @Test
+    public void enrollingSkipResultShallSentBack_onUdfpsDevice_triggeredByPrimaryButtonClick() {
+        setupActivity_onUdfpsDevice();
+        clickPrimaryButton_onUdfpsDevice();
+        verifyStartEnrollingActivity();
+
+        // onStop shall not change default activity result
+        mActivityController.pause().stop();
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(DEFAULT_ACTIVITY_RESULT);
+
+        gotEnrollingResult_verifyResultSentBack(BiometricEnrollBase.RESULT_SKIP);
+    }
+
+    @Test
+    public void enrollingTimeoutResultShallSentBack_onUdfpsDevice_triggeredByPrimaryButtonClick() {
+        setupActivity_onUdfpsDevice();
+        clickPrimaryButton_onUdfpsDevice();
+        verifyStartEnrollingActivity();
+
+        // onStop shall not change default activity result
+        mActivityController.pause().stop();
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(DEFAULT_ACTIVITY_RESULT);
+
+        gotEnrollingResult_verifyResultSentBack(BiometricEnrollBase.RESULT_TIMEOUT);
+    }
+
+    private void triggerEnrollProgressAndError_onRearDevice() {
         EnrollmentCallback enrollmentCallback = verifyAndCaptureEnrollmentCallback();
         enrollmentCallback.onEnrollmentProgress(123);
         enrollmentCallback.onEnrollmentError(FingerprintManager.FINGERPRINT_ERROR_CANCELED, "test");
+    }
 
-        // onStop shall not change default activity result
-        mActivity.onStop();
-        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(defaultActivityResult);
+    private void clickPrimaryButton_onUdfpsDevice() {
+        final FooterBarMixin footerBarMixin =
+                ((GlifLayout) mActivity.findViewById(R.id.setup_wizard_layout))
+                        .getMixin(FooterBarMixin.class);
+        final FooterButton primaryButton = footerBarMixin.getPrimaryButton();
+        assertThat(primaryButton).isNotNull();
+        assertThat(primaryButton.getVisibility()).isEqualTo(View.VISIBLE);
+        primaryButton.onClick(null);
+    }
 
+    private void clickLottieView_onUdfpsDevice() {
+        final View lottieView = mActivity.findViewById(R.id.illustration_lottie);
+        assertThat(lottieView).isNotNull();
+        lottieView.performClick();
+    }
+
+    private void gotEnrollingResult_verifyResultSentBack(int testActivityResult) {
         // onActivityResult from Enrolling activity shall be sent back
-        final int testResult = BiometricEnrollBase.RESULT_TIMEOUT;
-        mActivity.onActivityResult(BiometricEnrollBase.ENROLL_REQUEST, testResult, null);
-        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(testResult);
+        mActivityController.start().resume().visible();
+        Shadows.shadowOf(mActivity).receiveResult(
+                new Intent(mActivity, FingerprintEnrollEnrolling.class),
+                testActivityResult,
+                null);
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(testActivityResult);
         assertThat(mActivity.isFinishing()).isEqualTo(true);
 
         // onStop shall not change last activity result
-        mActivity.onStop();
-        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(testResult);
+        mActivityController.pause().stop();
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(testActivityResult);
     }
 }

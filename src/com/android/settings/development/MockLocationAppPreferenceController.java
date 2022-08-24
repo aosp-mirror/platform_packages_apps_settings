@@ -165,7 +165,7 @@ public class MockLocationAppPreferenceController extends DeveloperOptionsPrefere
         if (packageOps != null) {
             for (AppOpsManager.PackageOps packageOp : packageOps) {
                 if (packageOp.getOps().get(0).getMode() == AppOpsManager.MODE_ALLOWED) {
-                    return packageOps.get(0).getPackageName();
+                    return packageOp.getPackageName();
                 }
             }
         }
