@@ -74,12 +74,12 @@ public class BluetoothBroadcastDialog extends InstrumentedDialogFragment {
 
         TextView title = layout.findViewById(com.android.settingslib.R.id.dialog_title);
         TextView subTitle = layout.findViewById(com.android.settingslib.R.id.dialog_subtitle);
-        title.setText(mContext.getString(R.string.bluetooth_broadcast_dialog_title));
-        subTitle.setText(
-                mContext.getString(R.string.bluetooth_broadcast_dialog_broadcast_message));
 
         Button broadcastBtn = layout.findViewById(com.android.settingslib.R.id.positive_btn);
         if (isBroadcastSupported() && mIsMediaStreaming) {
+            title.setText(mContext.getString(R.string.bluetooth_broadcast_dialog_title));
+            subTitle.setText(
+                    mContext.getString(R.string.bluetooth_broadcast_dialog_broadcast_message));
             broadcastBtn.setVisibility(View.VISIBLE);
             if (TextUtils.isEmpty(mCurrentAppLabel)) {
                 broadcastBtn.setText(mContext.getString(R.string.bluetooth_broadcast_dialog_title));
@@ -92,6 +92,9 @@ public class BluetoothBroadcastDialog extends InstrumentedDialogFragment {
                 launchMediaOutputBroadcastDialog();
             });
         } else {
+            title.setText(mContext.getString(R.string.bluetooth_find_broadcast));
+            subTitle.setText(
+                    mContext.getString(R.string.bluetooth_broadcast_dialog_find_message));
             broadcastBtn.setVisibility(View.GONE);
         }
 
