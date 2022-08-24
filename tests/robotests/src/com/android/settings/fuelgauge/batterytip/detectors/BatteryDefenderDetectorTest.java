@@ -18,6 +18,8 @@ package com.android.settings.fuelgauge.batterytip.detectors;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 
@@ -42,7 +44,7 @@ public class BatteryDefenderDetectorTest {
         mBatteryInfo.discharging = false;
 
         mBatteryDefenderDetector = new BatteryDefenderDetector(
-            mBatteryInfo, /* extraDefend= */ false);
+            mBatteryInfo, ApplicationProvider.getApplicationContext());
     }
 
     @Test
