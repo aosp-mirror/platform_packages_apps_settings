@@ -307,7 +307,7 @@ public class BatteryEntryTest {
                 R.drawable.ic_settings_aod);
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_BLUETOOTH,
                 R.string.power_bluetooth,
-                com.android.internal.R.drawable.ic_settings_bluetooth);
+                R.drawable.ic_settings_bluetooth);
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_CAMERA,
                 R.string.power_camera,
                 R.drawable.ic_settings_camera);
@@ -325,7 +325,7 @@ public class BatteryEntryTest {
                 R.drawable.ic_settings_display);
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_WIFI,
                 R.string.power_wifi,
-                R.drawable.ic_settings_wireless);
+                R.drawable.ic_settings_wireless_no_theme);
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_IDLE,
                 R.string.power_idle,
                 R.drawable.ic_settings_phone_idle);
