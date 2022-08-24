@@ -574,7 +574,7 @@ public class BatteryEntry {
                 break;
             case BatteryConsumer.POWER_COMPONENT_BLUETOOTH:
                 name = context.getResources().getString(R.string.power_bluetooth);
-                iconId = com.android.internal.R.drawable.ic_settings_bluetooth;
+                iconId = R.drawable.ic_settings_bluetooth;
                 break;
             case BatteryConsumer.POWER_COMPONENT_CAMERA:
                 name = context.getResources().getString(R.string.power_camera);
@@ -598,7 +598,7 @@ public class BatteryEntry {
                 break;
             case BatteryConsumer.POWER_COMPONENT_WIFI:
                 name = context.getResources().getString(R.string.power_wifi);
-                iconId = R.drawable.ic_settings_wireless;
+                iconId = R.drawable.ic_settings_wireless_no_theme;
                 break;
             case BatteryConsumer.POWER_COMPONENT_IDLE:
             case BatteryConsumer.POWER_COMPONENT_MEMORY:
