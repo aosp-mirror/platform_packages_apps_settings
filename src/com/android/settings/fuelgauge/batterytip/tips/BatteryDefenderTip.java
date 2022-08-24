@@ -108,7 +108,7 @@ public class BatteryDefenderTip extends BatteryTip {
                 });
         cardPreference.setPrimaryButtonVisible(isPluggedIn(context));
 
-        cardPreference.setSecondaryButtonText(context.getString(R.string.see_more));
+        cardPreference.setSecondaryButtonText(context.getString(R.string.learn_more));
         cardPreference.setSecondaryButtonClickListener(unused -> cardPreference.performClick());
         cardPreference.setSecondaryButtonVisible(true);
     }

@@ -125,7 +125,7 @@ public class BatteryDefenderTipTest {
 
     @Test
     public void updatePreference_shouldSetSecondaryButtonText() {
-        String expected = mContext.getString(R.string.see_more);
+        String expected = mContext.getString(R.string.learn_more);
 
         mBatteryDefenderTip.updatePreference(mCardPreference);
 
