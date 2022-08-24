@@ -30,7 +30,7 @@ public class NotificationsOffPreferenceController extends NotificationPreference
     private static final String KEY_BLOCKED_DESC = "block_desc";
 
     public NotificationsOffPreferenceController(Context context) {
-        super(context, null, KEY_BLOCKED_DESC);
+        super(context, null);
     }
 
     @Override
@@ -39,20 +39,16 @@ public class NotificationsOffPreferenceController extends NotificationPreference
     }
 
     @Override
-    public int getAvailabilityStatus() {
+    public boolean isAvailable() {
         if (mAppRow == null) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return false;
         }
         if (mPreferenceFilter != null && !isIncludedInFilter()) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return false;
         }
         // Available only when other controllers are unavailable - this UI replaces the UI that
         // would give more detailed notification controls.
-        if (super.getAvailabilityStatus() == AVAILABLE) {
-            return CONDITIONALLY_UNAVAILABLE;
-        } else {
-            return AVAILABLE;
-        }
+        return !super.isAvailable();
     }
 
     @Override
