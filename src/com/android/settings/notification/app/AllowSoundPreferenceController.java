@@ -40,7 +40,7 @@ public class AllowSoundPreferenceController extends NotificationPreferenceContro
     public AllowSoundPreferenceController(Context context,
             NotificationSettings.DependentFieldListener dependentFieldListener,
             NotificationBackend backend) {
-        super(context, backend, KEY_IMPORTANCE);
+        super(context, backend);
         mDependentFieldListener = dependentFieldListener;
     }
 
@@ -50,14 +50,11 @@ public class AllowSoundPreferenceController extends NotificationPreferenceContro
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        if (super.getAvailabilityStatus() == CONDITIONALLY_UNAVAILABLE) {
-            return CONDITIONALLY_UNAVAILABLE;
+    public boolean isAvailable() {
+        if (!super.isAvailable()) {
+            return false;
         }
-        if (mChannel != null && NotificationChannel.DEFAULT_CHANNEL_ID.equals(mChannel.getId())) {
-            return AVAILABLE;
-        }
-        return CONDITIONALLY_UNAVAILABLE;
+        return mChannel != null && NotificationChannel.DEFAULT_CHANNEL_ID.equals(mChannel.getId());
 
     }
 

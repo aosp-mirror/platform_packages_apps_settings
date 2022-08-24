@@ -17,24 +17,26 @@
 package com.android.settings.notification.app;
 
 import static android.app.NotificationManager.IMPORTANCE_NONE;
+import static android.os.UserHandle.USER_SYSTEM;
 
 import android.annotation.Nullable;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ShortcutInfo;
 import android.graphics.drawable.Drawable;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.util.Log;
-import android.util.Slog;
 
 import androidx.preference.Preference;
 
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.Comparator;
 import java.util.List;
@@ -44,7 +46,7 @@ import java.util.Objects;
  * Parent class for preferences appearing on notification setting pages at the app,
  * notification channel group, or notification channel level.
  */
-public abstract class NotificationPreferenceController extends BasePreferenceController {
+public abstract class NotificationPreferenceController extends AbstractPreferenceController {
     private static final String TAG = "ChannelPrefContr";
     @Nullable
     protected NotificationChannel mChannel;
@@ -69,11 +71,8 @@ public abstract class NotificationPreferenceController extends BasePreferenceCon
     boolean overrideCanBlockValue;
     boolean overrideCanConfigureValue;
 
-    boolean mLoadedChannelState;
-
-    public NotificationPreferenceController(Context context, NotificationBackend backend,
-            String key) {
-        super(context, key);
+    public NotificationPreferenceController(Context context, NotificationBackend backend) {
+        super(context);
         mContext = context;
         mNm = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mBackend = backend;
@@ -82,30 +81,28 @@ public abstract class NotificationPreferenceController extends BasePreferenceCon
     }
 
     /**
-     * Returns available if field's parent object is not blocked.
+     * Returns true if field's parent object is not blocked.
      */
     @Override
-    public int getAvailabilityStatus() {
+    public boolean isAvailable() {
         if (mAppRow == null) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return false;
         }
         if (mAppRow.banned) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return false;
         }
         if (mChannelGroup != null) {
             if (mChannelGroup.isBlocked()) {
-                return CONDITIONALLY_UNAVAILABLE;
+                return false;
             }
         }
         if (mChannel != null) {
             if (mPreferenceFilter != null && !isIncludedInFilter()) {
-                return CONDITIONALLY_UNAVAILABLE;
+                return false;
             }
-            if(mChannel.getImportance() == IMPORTANCE_NONE) {
-                return CONDITIONALLY_UNAVAILABLE;
-            }
+            return mChannel.getImportance() != IMPORTANCE_NONE;
         }
-        return AVAILABLE;
+        return true;
     }
 
     protected void onResume(NotificationBackend.AppRow appRow,
