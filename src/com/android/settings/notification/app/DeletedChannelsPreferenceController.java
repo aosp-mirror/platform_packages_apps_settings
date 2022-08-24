@@ -30,7 +30,7 @@ public class DeletedChannelsPreferenceController extends NotificationPreferenceC
     private static final String  KEY_DELETED = "deleted";
 
     public DeletedChannelsPreferenceController(Context context, NotificationBackend backend) {
-        super(context, backend, KEY_DELETED);
+        super(context, backend);
     }
 
     @Override
@@ -39,19 +39,16 @@ public class DeletedChannelsPreferenceController extends NotificationPreferenceC
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        if (super.getAvailabilityStatus() == CONDITIONALLY_UNAVAILABLE) {
-            return CONDITIONALLY_UNAVAILABLE;
+    public boolean isAvailable() {
+        if (!super.isAvailable()) {
+            return false;
         }
         // only visible on app screen
         if (mChannel != null || hasValidGroup()) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return false;
         }
 
-        if (mBackend.getDeletedChannelCount(mAppRow.pkg, mAppRow.uid) > 0) {
-            return AVAILABLE;
-        }
-        return CONDITIONALLY_UNAVAILABLE;
+        return mBackend.getDeletedChannelCount(mAppRow.pkg, mAppRow.uid) > 0;
     }
 
     @Override

@@ -37,7 +37,7 @@ public class MinImportancePreferenceController extends NotificationPreferenceCon
     public MinImportancePreferenceController(Context context,
             NotificationSettings.DependentFieldListener dependentFieldListener,
             NotificationBackend backend) {
-        super(context, backend, KEY_IMPORTANCE);
+        super(context, backend);
         mDependentFieldListener = dependentFieldListener;
     }
 
@@ -47,17 +47,17 @@ public class MinImportancePreferenceController extends NotificationPreferenceCon
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        if (super.getAvailabilityStatus() == CONDITIONALLY_UNAVAILABLE) {
-            return CONDITIONALLY_UNAVAILABLE;
+    public boolean isAvailable() {
+        if (!super.isAvailable()) {
+            return false;
         }
         if (mChannel == null) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return false;
         }
         if (isDefaultChannel()) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return false;
         }
-        return mChannel.getImportance() <= IMPORTANCE_LOW ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return mChannel.getImportance() <= IMPORTANCE_LOW;
     }
 
     @Override
