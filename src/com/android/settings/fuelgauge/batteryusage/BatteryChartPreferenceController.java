@@ -65,7 +65,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private static final String TAG = "BatteryChartPreferenceController";
     private static final String KEY_FOOTER_PREF = "battery_graph_footer";
     private static final String PACKAGE_NAME_NONE = "none";
+    private static final int ENABLED_ICON_ALPHA = 255;
+    private static final int DISABLED_ICON_ALPHA = 255 / 3;
 
+    private static final long FADE_ANIMATION_DURATION = 350L;
     private static final long VALID_USAGE_TIME_DURATION = DateUtils.HOUR_IN_MILLIS * 2;
     private static final long VALID_DIFF_DURATION = DateUtils.MINUTE_IN_MILLIS * 3;
 
@@ -102,6 +105,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
     private boolean mIs24HourFormat;
     private boolean mIsFooterPrefAdded = false;
+    private View mBatteryChartViewGroup;
     private PreferenceScreen mPreferenceScreen;
     private FooterPreference mFooterPreference;
     // Daily view model only saves abbreviated day of week texts (e.g. MON). This field saves the
@@ -202,7 +206,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         mPrefContext = screen.getContext();
         mAppListPrefGroup = screen.findPreference(mPreferenceKey);
         mAppListPrefGroup.setOrderingAsAdded(false);
-        mAppListPrefGroup.setTitle(mPrefContext.getString(R.string.battery_app_usage));
+        mAppListPrefGroup.setTitle("");
         mFooterPreference = screen.findPreference(KEY_FOOTER_PREF);
         // Removes footer first until usage data is loaded to avoid flashing.
         if (mFooterPreference != null) {
@@ -260,6 +264,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
         Log.d(TAG, "setBatteryHistoryMap() " + (batteryHistoryMap == null ? "null"
                 : ("size=" + batteryHistoryMap.size())));
+        // Ensure the battery chart group is visible for users.
+        animateBatteryChartViewGroup();
         final BatteryLevelData batteryLevelData =
                 DataProcessor.getBatteryLevelData(mContext, mHandler, batteryHistoryMap,
                         batteryUsageMap -> {
@@ -302,8 +308,13 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
     void setBatteryChartView(@NonNull final BatteryChartView dailyChartView,
             @NonNull final BatteryChartView hourlyChartView) {
+        final View parentView = (View) dailyChartView.getParent();
+        if (parentView != null && parentView.getId() == R.id.battery_chart_group) {
+            mBatteryChartViewGroup = (View) dailyChartView.getParent();
+        }
         if (mDailyChartView != dailyChartView || mHourlyChartView != hourlyChartView) {
             mHandler.post(() -> setBatteryChartViewInner(dailyChartView, hourlyChartView));
+            animateBatteryChartViewGroup();
         }
     }
 
@@ -463,6 +474,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             if (!isAdded) {
                 mAppListPrefGroup.addPreference(pref);
             }
+            appIcon.setAlpha(pref.isEnabled() ? ENABLED_ICON_ALPHA : DISABLED_ICON_ALPHA);
             prefIndex++;
         }
     }
@@ -610,6 +622,13 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     @VisibleForTesting
     boolean isValidToShowSummary(String packageName) {
         return !DataProcessor.contains(packageName, mNotAllowShowSummaryPackages);
+    }
+
+    private void animateBatteryChartViewGroup() {
+        if (mBatteryChartViewGroup != null && mBatteryChartViewGroup.getAlpha() == 0) {
+            mBatteryChartViewGroup.animate().alpha(1f).setDuration(FADE_ANIMATION_DURATION)
+                    .start();
+        }
     }
 
     private void addFooterPreferenceIfNeeded(boolean containAppItems) {

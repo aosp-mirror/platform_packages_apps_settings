@@ -364,10 +364,16 @@ public class FingerprintSettings extends SubSettings {
                         mHasFirstEnrolled);
             }
 
-            // Need to authenticate a session token if none
-            if (mToken == null && mLaunchedConfirm == false) {
-                mLaunchedConfirm = true;
-                launchChooseOrConfirmLock();
+            // (mLaunchedConfirm or mIsEnrolling) means that we are waiting an activity result.
+            if (!mLaunchedConfirm && !mIsEnrolling) {
+                // Need to authenticate a session token if none
+                if (mToken == null) {
+                    mLaunchedConfirm = true;
+                    launchChooseOrConfirmLock();
+                } else if (!mHasFirstEnrolled) {
+                    mIsEnrolling = true;
+                    addFirstFingerprint();
+                }
             }
             updateFooterColumns(activity);
         }
@@ -674,8 +680,7 @@ public class FingerprintSettings extends SubSettings {
                                     updateAddPreference();
                                     if (!mHasFirstEnrolled && !mIsEnrolling) {
                                         mIsEnrolling = true;
-                                        addFirstFingerprint(
-                                                BiometricUtils.getGatekeeperPasswordHandle(data));
+                                        addFirstFingerprint();
                                     }
                         });
                     } else {
@@ -695,7 +700,7 @@ public class FingerprintSettings extends SubSettings {
                 }
             } else if (requestCode == AUTO_ADD_FIRST_FINGERPRINT_REQUEST) {
                 mIsEnrolling = false;
-                mHasFirstEnrolled = false;
+                mHasFirstEnrolled = true;
                 if (resultCode != RESULT_FINISHED) {
                     Log.d(TAG, "Add first fingerprint fail, result:" + resultCode);
                     finish();
@@ -771,7 +776,7 @@ public class FingerprintSettings extends SubSettings {
             }
         }
 
-        private void addFirstFingerprint(@Nullable Long gkPwHandle) {
+        private void addFirstFingerprint() {
             Intent intent = new Intent();
             intent.setClassName(SETTINGS_PACKAGE_NAME,
                     FingerprintEnrollIntroductionInternal.class.getName());
@@ -782,9 +787,6 @@ public class FingerprintSettings extends SubSettings {
 
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
             intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
-            if (gkPwHandle != null) {
-                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, (long) gkPwHandle);
-            }
             startActivityForResult(intent, AUTO_ADD_FIRST_FINGERPRINT_REQUEST);
         }
 
