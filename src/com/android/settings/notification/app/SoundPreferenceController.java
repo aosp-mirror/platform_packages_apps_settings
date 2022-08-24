@@ -47,7 +47,7 @@ public class SoundPreferenceController extends NotificationPreferenceController
     public SoundPreferenceController(Context context, SettingsPreferenceFragment hostFragment,
             NotificationSettings.DependentFieldListener dependentFieldListener,
             NotificationBackend backend) {
-        super(context, backend, KEY_SOUND);
+        super(context, backend);
         mFragment = hostFragment;
         mListener = dependentFieldListener;
     }
@@ -58,17 +58,14 @@ public class SoundPreferenceController extends NotificationPreferenceController
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        if (super.getAvailabilityStatus() == CONDITIONALLY_UNAVAILABLE) {
-            return CONDITIONALLY_UNAVAILABLE;
+    public boolean isAvailable() {
+        if (!super.isAvailable()) {
+            return false;
         }
         if (mChannel == null) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return false;
         }
-        if (checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT) && !isDefaultChannel()) {
-            return AVAILABLE;
-        }
-        return CONDITIONALLY_UNAVAILABLE;
+        return checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT) && !isDefaultChannel();
     }
 
     @Override
