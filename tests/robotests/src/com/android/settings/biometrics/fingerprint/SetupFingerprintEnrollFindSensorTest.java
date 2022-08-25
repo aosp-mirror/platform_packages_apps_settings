@@ -22,7 +22,6 @@ import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
-import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -66,6 +65,23 @@ public class SetupFingerprintEnrollFindSensorTest {
 
     @Test
     public void fingerprintEnroll_showsAlert_whenClickingSkip() {
+        final AlertDialog alertDialog = setupAlertDialog();
+        final ShadowAlertDialogCompat shadowAlertDialog = ShadowAlertDialogCompat.shadowOf(
+                alertDialog);
+        final int titleRes = R.string.setup_fingerprint_enroll_skip_title;
+
+        assertThat(application.getString(titleRes)).isEqualTo(shadowAlertDialog.getTitle());
+    }
+
+    @Test
+    public void fingerprintEnroll_showsAlert_setSudTheme() {
+        final AlertDialog alertDialog = setupAlertDialog();
+
+        assertThat(alertDialog.getContext().getThemeResId()).isEqualTo(
+                R.style.GlifV2ThemeAlertDialog);
+    }
+
+    private AlertDialog setupAlertDialog() {
         final Intent intent = new Intent()
                 // Set the challenge token so the confirm screen will not be shown
                 .putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
@@ -80,9 +96,6 @@ public class SetupFingerprintEnrollFindSensorTest {
         final AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(alertDialog).isNotNull();
 
-        final ShadowAlertDialogCompat shadowAlertDialog = ShadowAlertDialogCompat.shadowOf(
-                alertDialog);
-        final int titleRes = R.string.setup_fingerprint_enroll_skip_title;
-        assertThat(application.getString(titleRes)).isEqualTo(shadowAlertDialog.getTitle());
+        return alertDialog;
     }
 }
