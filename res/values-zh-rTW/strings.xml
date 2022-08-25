@@ -1619,9 +1619,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"重新命名"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"掛載"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"退出"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"格式化"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"將 SD 卡格式化為可攜式儲存空間"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"格式化記憶卡"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"進行格式化，設為可攜式儲存空間"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"進行格式化，設為內部儲存空間"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"格式化"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"遷移資料"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"清除"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"設定"</string>
@@ -1651,17 +1652,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"重新命名儲存空間"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"此「<xliff:g id="NAME_0">^1</xliff:g>」已安全退出，但是仍可使用。\n\n如要使用此「<xliff:g id="NAME_1">^1</xliff:g>」，你必須先進行掛接。"</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"此「<xliff:g id="NAME_0">^1</xliff:g>」已毀損。\n\n如要使用此「<xliff:g id="NAME_1">^1</xliff:g>」，你必須先進行設定。"</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"經過格式化後，你即可在其他裝置中使用此「<xliff:g id="NAME_0">^1</xliff:g>」。\n\n此「<xliff:g id="NAME_1">^1</xliff:g>」中的所有資料都將清除，建議你先備份資料。\n\n"<b>"備份相片和其他媒體"</b>" \n將你的媒體檔案移到這台裝置上的替代儲存空間，或使用 USB 傳輸線將資料傳輸到電腦。\n\n"<b>"備份應用程式"</b>" \n儲存在此「<xliff:g id="NAME_6">^1</xliff:g>」的所有應用程式都將解除安裝，相關資料也會一併刪除。如要保留，請將這些應用程式移到這台裝置上的替代儲存空間。"</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"你可以將這張 SD 卡格式化來儲存相片、影片、音樂及其他檔案，然後在其他裝置上存取這些內容。\n\n"<b>"這張 SD 卡上的資料會全部遭到清除。"</b>" \n\n"<b>"格式化作業事前準備"</b>" \n\n"<b>"備份相片和其他媒體"</b>" \n將媒體檔案移到這部裝置的其他儲存空間，或者使用 USB 傳輸線將這些檔案轉移到電腦。\n\n"<b>"備份應用程式"</b>" \n系統會將儲存在此「<xliff:g id="NAME">^1</xliff:g>」上的所有應用程式解除安裝，同時一併清除相關資料。如要保留這些應用程式，請將應用程式移到這部裝置的其他儲存空間。"</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"當你退出這個 <xliff:g id="NAME_0">^1</xliff:g>時，儲存在其中的應用程式將停止運作，而儲存在其中的媒體檔案也無法繼續提供使用，直到重新插入裝置為止。"</b>\n\n"這個 <xliff:g id="NAME_1">^1</xliff:g>的設定格式僅適用於這台裝置，無法搭配其他裝置使用。"</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"如要使用這個 <xliff:g id="NAME">^1</xliff:g>中的應用程式、相片或資料，請重新插入。\n\n如果裝置無法使用，你也可以清除這個儲存空間。\n\n假使你選擇清除，裝置中的所有資料將遭到永久刪除，無法復原。\n\n雖然你稍後可以重新安裝應用程式，但這個裝置中儲存的資料會全數遺失。"</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"要清除「<xliff:g id="NAME">^1</xliff:g>」嗎？"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"儲存在此「<xliff:g id="NAME">^1</xliff:g>」的所有應用程式、相片和資料將遭到永久刪除。"</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"「系統」中包含用來執行 Android <xliff:g id="VERSION">%s</xliff:g> 版的檔案"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"使用訪客模式的使用者無法格式化 SD 卡"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"設定你的「<xliff:g id="NAME">^1</xliff:g>」"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"使用可攜式儲存空間"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"可用於在裝置之間移動相片和其他媒體。"</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"做為內部儲存空間使用"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"僅可用於儲存這台裝置上的任何項目，包括應用程式和相片。使用前必須先經過格式化，以免與其他裝置通用。"</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"將 SD 卡格式化為可攜式儲存空間"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"儲存相片、影片、音樂及其他檔案，然後在其他裝置上存取這些內容"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"將 SD 卡格式化為內部儲存空間"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"儲存僅供這部手機使用的應用程式和媒體"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"格式化為內部儲存空間"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"「<xliff:g id="NAME_0">^1</xliff:g>」必須經過格式化，確保安全無虞。\n\n格式化後，此「<xliff:g id="NAME_1">^1</xliff:g>」僅能在這台裝置運作。\n\n"<b>"格式化作業會清除目前儲存在「<xliff:g id="NAME_2">^1</xliff:g>」的所有資料。"</b>"為避免資料遺失，建議你先進行備份。"</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"進行格式化，設為可攜式儲存空間"</string>
@@ -1678,9 +1680,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"移動"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"移動資料…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"執行移動作業時：\n• 請勿移除「<xliff:g id="NAME">^1</xliff:g>」。\n• 部分應用程式可能無法正常運作。\n• 讓裝置持續充電。"</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"你的 <xliff:g id="NAME">^1</xliff:g>已準備就緒"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"你的「<xliff:g id="NAME">^1</xliff:g>」已就緒，可用於儲存相片和其他媒體。"</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"新的「<xliff:g id="NAME">^1</xliff:g>」運作中。\n\n如要將相片、檔案和應用程式資料移動到這台裝置上，請前往 [設定] &gt; [儲存空間]。"</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> 格式化完成"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"你可以開始使用 <xliff:g id="NAME">^1</xliff:g> 了"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"你可以開始使用 <xliff:g id="NAME">^1</xliff:g> 了"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"移動「<xliff:g id="APP">^1</xliff:g>」"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"將「<xliff:g id="APP">^1</xliff:g>」和相關資料移動到「<xliff:g id="NAME_0">^2</xliff:g>」只需要幾分鐘。移動作業完成後，你才可以使用該應用程式。\n\n請勿在執行移動作業時移除「<xliff:g id="NAME_1">^2</xliff:g>」。"</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"你必須將使用者「<xliff:g id="APP">^1</xliff:g>」解鎖，才能移動資料。"</string>
@@ -1689,19 +1691,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"取消移動"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"這個 <xliff:g id="NAME_0">^1</xliff:g>的速度緩慢。\n\n你可以繼續使用，但應用程式移動到這個位置後可能無法流暢執行，資料移轉作業也會耗費大量時間。\n\n建議你改用速度更快的 <xliff:g id="NAME_1">^1</xliff:g>來提升效能。"</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"你要如何使用這個 <xliff:g id="NAME">^1</xliff:g>？"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"做為額外的平板電腦儲存空間"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"僅限這台平板電腦的應用程式、檔案和媒體"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"平板電腦儲存空間"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"做為額外的手機儲存空間"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"僅限這支手機的應用程式、檔案和媒體"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"手機儲存空間"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"將 SD 卡格式化為內部儲存空間"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"儲存僅供這部平板電腦使用的應用程式和媒體。&lt;a href=https://support.google.com/android/answer/12153449&gt;進一步瞭解如何設定 SD 卡&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"格式化"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"將 SD 卡格式化為內部儲存空間"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"儲存僅供這部手機使用的應用程式和媒體。&lt;a href=https://support.google.com/android/answer/12153449&gt;進一步瞭解如何設定 SD 卡&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"格式化"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"或"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"做為可攜式儲存空間"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"可用於在裝置間轉移檔案和媒體"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"可攜式儲存空間"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"將 SD 卡格式化為可攜式儲存空間"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"儲存相片、影片、音樂及其他檔案，然後在其他裝置上存取這些內容。&lt;a href=https://support.google.com/android/answer/12153449&gt;進一步瞭解如何設定 SD 卡&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"格式化"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"稍後設定"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"要將這個 <xliff:g id="NAME">^1</xliff:g>格式化嗎？"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"這個 <xliff:g id="NAME_0">^1</xliff:g>必須經過格式化才能儲存應用程式、檔案和媒體。\n\n格式化會清除 <xliff:g id="NAME_1">^2</xliff:g>上的現有內容。為避免內容遺失，請將其中的內容備份到其他 <xliff:g id="NAME_2">^3</xliff:g>或裝置上。"</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"這個 <xliff:g id="NAME_0">^1</xliff:g> 必須經過格式化才能儲存相片、影片、音樂及其他檔案。\n\n格式化作業將清除 <xliff:g id="NAME_1">^2</xliff:g> 上的現有內容。為避免內容遺失，請將其中的內容備份到其他 <xliff:g id="NAME_2">^3</xliff:g> 或裝置上。"</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"將 <xliff:g id="NAME">^1</xliff:g>格式化"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"要將內容移至 <xliff:g id="NAME">^1</xliff:g>嗎？"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"你可以將檔案、媒體和特定應用程式移至這個 <xliff:g id="NAME">^1</xliff:g>。\n\n這項移動作業大約需要 <xliff:g id="DURATION">^3</xliff:g>，完成後將可釋出 <xliff:g id="SIZE">^2</xliff:g> 的平板電腦儲存空間。"</string>
@@ -1718,9 +1721,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"你還是可以使用這個 <xliff:g id="NAME_0">^1</xliff:g>，但速度可能會很慢。\n\n這個 <xliff:g id="NAME_1">^2</xliff:g>所儲存的應用程式可能無法正常運作，且內容轉移作業會耗費大量時間。\n\n建議你使用速度較快的 <xliff:g id="NAME_2">^3</xliff:g>或改用這個 <xliff:g id="NAME_3">^4</xliff:g>做為可攜式儲存空間。"</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"重新開始"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"繼續"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"你可以將內容移至 <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"如要將內容移至 <xliff:g id="NAME">^1</xliff:g>，請依序前往 [設定] &gt; [儲存空間]"<b></b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"你的內容已移至 <xliff:g id="NAME_0">^1</xliff:g>。\n\n如要管理這個 <xliff:g id="NAME_1">^2</xliff:g>，請依序前往 [設定] &gt; [儲存空間]"<b></b>"。"</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"你可以開始使用 <xliff:g id="NAME">^1</xliff:g> 了"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"你可以開始使用 <xliff:g id="NAME">^1</xliff:g> 了"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"你可以開始使用 <xliff:g id="NAME">^1</xliff:g> 了"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"電池狀態"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"電池電量"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
@@ -2763,10 +2766,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"部分功能可能受到限制"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"電池用量較高的應用程式"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看電池用量最高的應用程式"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"暫停充電"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"保護電池並延長電池壽命\n輕觸即可瞭解詳情"</string>
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
     <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"繼續充電"</string>
@@ -2804,8 +2805,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"這個應用程式將會在背景耗用電量。你的電池電力可能會比預期更快耗盡。"</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"移除"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"取消"</string>
-    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
-    <skip />
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"將電池充飽"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"你的應用程式目前耗用的電力正常。如果應用程式耗用過多電力，你的手機會為你提供操作建議。\n\n如果電池電量偏低，你隨時可以開啟省電模式。"</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"你的應用程式目前耗用的電力正常。如果應用程式耗用過多電力，你的平板電腦會為你提供操作建議。\n\n如果電池電量偏低，你隨時可以開啟省電模式。"</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"你的應用程式目前耗用的電力正常。如果應用程式耗用過多電力，裝置會提供相關操作建議。\n\n如果電池電量偏低，你隨時可以開啟省電模式。"</string>
@@ -2998,6 +2998,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"電池用量資料為概略值，而且手機在充電時不會估算電池用量"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"手機使用幾小時後，才會顯示電池用量資料"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"電池用量圖表"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"每日電池用量圖表"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"每小時電池用量圖表"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"處理程序統計資料"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"執行中處理程序的相關完善統計資料"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"記憶體用量"</string>
@@ -3553,6 +3555,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"允許應用程式使用你的位置資訊"</string>
     <string name="wizard_back" msgid="8257697435061870191">"返回"</string>
     <string name="wizard_next" msgid="3884832431439072471">"下一步"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"切換為可攜式"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"以其他方式格式化"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"完成"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM 卡"</string>
@@ -5613,6 +5617,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"媒體"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"固定媒體播放器"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"讓快速設定中的媒體播放器保持開啟狀態，以便快速恢復播放"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"顯示媒體推薦內容"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"根據你的活動"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"隱藏播放器"</string>

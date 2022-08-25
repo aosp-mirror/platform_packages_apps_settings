@@ -1659,9 +1659,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Переименовать"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Подключить"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Извлечь"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Форматировать"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Форматировать SD-карту как съемный накопитель"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Форматировать карту"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Портативный носитель"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Внутренняя память"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Форматировать"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Перенести данные"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Забыть устройство"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Настроить"</string>
@@ -1691,17 +1692,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Переименование хранилища"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Устройство \"<xliff:g id="NAME_0">^1</xliff:g>\" отключено, но к нему все ещё есть доступ. \n\nЧтобы использовать устройство \"<xliff:g id="NAME_1">^1</xliff:g>\", снова подключите его."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g> не работает. \n\nЧтобы использовать устройство \"<xliff:g id="NAME_1">^1</xliff:g>\", сначала настройте его."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"После форматирования вы сможете использовать карту \"<xliff:g id="NAME_0">^1</xliff:g>\" на других устройствах.\n\nВсе данные на карте \"<xliff:g id="NAME_1">^1</xliff:g>\" будут удалены, поэтому мы рекомендуем создать их резервную копию.\n\n"<b>"Скопируйте фотографии и другие файлы."</b>\n"Переместите их в память устройства или на компьютер, подключив к нему устройство при помощи USB-кабеля.\n\n"<b>"Скопируйте приложения."</b>\n"Все приложения и их данные, хранящиеся на карте \"<xliff:g id="NAME_6">^1</xliff:g>\", будут удалены. Рекомендуем перенести их в память устройства."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Вы можете отформатировать эту SD-карту, чтобы хранить фото, видео, музыку и файлы, а также использовать их на других устройствах. \n\n"<b>"Все данные на этой SD-карте будут удалены."</b>" \n\n"<b>"Перед форматированием"</b>" \n\n"<b>"Создайте резервную копию фотографий и файлов"</b>" \nПереместите медиафайлы в другое хранилище или на компьютер, подключив к нему устройство при помощи USB-кабеля. \n\n"<b>"Создайте резервную копию приложений"</b>" \nВсе приложения и их данные, хранящиеся на устройстве \"<xliff:g id="NAME">^1</xliff:g>\", будут удалены. Рекомендуем перенести их."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Если вы извлечете карту \"<xliff:g id="NAME_0">^1</xliff:g>\", хранящиеся на ней приложения и файлы станут недоступны до тех пор, пока вы снова не вставите карту в устройство."</b>\n\n"Карта \"<xliff:g id="NAME_1">^1</xliff:g>\" не будет работать на других устройствах, поскольку она отформатирована только под ваше."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Вставьте карту \"<xliff:g id="NAME">^1</xliff:g>\", чтобы получить доступ к приложениям, фотографиям и другим данным.\n\nЕсли это невозможно, нажмите \"Забыть устройство\".\n\nПосле этого все данные, хранившиеся на карте, будут утеряны.\n\nВы сможете скачать приложения снова, однако их данные восстановить не удастся."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Удалить устройство \"<xliff:g id="NAME">^1</xliff:g>\"?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Вы потеряете доступ к данным, хранящимся на устройстве \"<xliff:g id="NAME">^1</xliff:g>\"."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"К разделу \"Система\" относятся файлы, используемые Android <xliff:g id="VERSION">%s</xliff:g>."</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"В гостевом режиме нельзя форматировать SD-карты."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Настройте карту \"<xliff:g id="NAME">^1</xliff:g>\""</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Портативный носитель"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Для переноса фотографий и других файлов между устройствами."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Внутренняя память"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"Для хранения данных (приложений, фотографий и других файлов) только на этом устройстве. Необходимо отформатировать карту, чтобы ее нельзя было использовать на других устройствах."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Форматирование SD-карты как съемного накопителя"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Хранить фото, видео, музыку и файлы для использования на других устройствах."</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Форматирование SD-карты как внутренней памяти"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Хранить приложения и медиафайлы для использования только на этом телефоне."</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Внутренняя память"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Чтобы защитить ваши данные, карту \"<xliff:g id="NAME_0">^1</xliff:g>\" нужно отформатировать.\n\nКарта \"<xliff:g id="NAME_1">^1</xliff:g>\" будет работать только на этом устройстве.\n\n"<b>"Все данные, сохраненные на карте \"<xliff:g id="NAME_2">^1</xliff:g>\", будут удалены."</b>" Чтобы избежать их потери, создайте их резервную копию."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Форматировать как съемный накопитель"</string>
@@ -1718,9 +1720,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Перенести"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Перенос данных…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Во время переноса:\n• Не извлекайте устройство \"<xliff:g id="NAME">^1</xliff:g>\".\n• Учтите, что некоторые приложения будут работать неправильно.\n• Не допускайте разрядки аккумулятора."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"Устройство \"<xliff:g id="NAME">^1</xliff:g>\" готово к работе"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"Теперь на устройстве \"<xliff:g id="NAME">^1</xliff:g>\" можно сохранять фотографии и другие файлы."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"Ваша карта \"<xliff:g id="NAME">^1</xliff:g>\" готова к работе.\n\nЧтобы перенести на нее фотографии, данные приложений и другие файлы, нажмите \"Настройки &gt; Память\"."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"Устройство \"<xliff:g id="NAME">^1</xliff:g>\" отформатировано"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Теперь вы можете использовать устройство \"<xliff:g id="NAME">^1</xliff:g>\"."</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Теперь вы можете использовать устройство \"<xliff:g id="NAME">^1</xliff:g>\"."</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Перенесите приложение \"<xliff:g id="APP">^1</xliff:g>\""</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Перенос приложения \"<xliff:g id="APP">^1</xliff:g>\" и его данных на карту \"<xliff:g id="NAME_0">^2</xliff:g>\" займет несколько секунд.\n\nУчтите, что пользоваться приложением и извлекать карту \"<xliff:g id="NAME_1">^2</xliff:g>\" во время переноса нельзя."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Чтобы перенести данные, разблокируйте пользователя <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1729,19 +1731,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Отменить перенос"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"<xliff:g id="NAME_0">^1</xliff:g> работает медленно. \n\nВ перемещенных приложениях могут происходить сбои, а обмен данными может занимать много времени. \n\nИспользуйте более быстрое устройство (<xliff:g id="NAME_1">^1</xliff:g>)."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Как будет использоваться <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Дополнительная память планшета"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"Только для приложений и файлов на этом планшете."</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Память планшета"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Дополнительная память телефона"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"Только для приложений и файлов на этом телефоне."</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Память телефона"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Форматирование SD-карты как внутренней памяти"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Хранить приложения и медиафайлы для использования только на этом планшете. Подробнее &lt;a href=https://support.google.com/android/answer/12153449&gt;о том, как настроить SD-карту&lt;/a&gt;…"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Форматировать"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Форматирование SD-карты как внутренней памяти"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Хранить приложения и медиафайлы для использования только на этом телефоне. Подробнее &lt;a href=https://support.google.com/android/answer/12153449&gt;о том, как настроить SD-карту&lt;/a&gt;…"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Форматировать"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Или"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Съемный накопитель"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"Для переноса файлов между устройствами."</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Съемный накопитель"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Форматирование SD-карты как съемного накопителя"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Хранить фото, видео, музыку и файлы для использования на других устройствах. Подробнее &lt;a href=https://support.google.com/android/answer/12153449&gt;о том, как настроить SD-карту&lt;/a&gt;…"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Форматировать"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Настроить позже"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Отформатировать устройство \"<xliff:g id="NAME">^1</xliff:g>\"?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Чтобы хранить приложения и файлы, в том числе мультимедиа, на устройстве \"<xliff:g id="NAME_0">^1</xliff:g>\", его необходимо отформатировать.\n\nПри этом весь контент с устройства \"<xliff:g id="NAME_1">^2</xliff:g>\" будет удален. Скопируйте данные на ещё одно устройство \"<xliff:g id="NAME_2">^3</xliff:g>\" или на другой накопитель, чтобы не потерять их."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Чтобы хранить фото, видео, музыку и файлы на устройстве \"<xliff:g id="NAME_0">^1</xliff:g>\", его необходимо отформатировать. \n\nПри этом все данные с устройства (<xliff:g id="NAME_1">^2</xliff:g>) будут удалены. Скопируйте их на другое устройство. Это может быть как <xliff:g id="NAME_2">^3</xliff:g>, так и что-то ещё."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g>: форматировать"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Перенести на устройство \"<xliff:g id="NAME">^1</xliff:g>\"?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Вы можете перенести файлы, в том числе мультимедиа, и некоторые приложения на устройство \"<xliff:g id="NAME">^1</xliff:g>\".\n\nЭто займет около <xliff:g id="DURATION">^3</xliff:g>. Вы освободите <xliff:g id="SIZE">^2</xliff:g> внутренней памяти планшета."</string>
@@ -1758,9 +1761,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Вы можете использовать устройство \"<xliff:g id="NAME_0">^1</xliff:g>\", но оно работает медленно.\n\nПриложения, сохраненные на устройстве \"<xliff:g id="NAME_1">^2</xliff:g>\", могут работать со сбоями, а перенос контента может занимать много времени.\n\nРекомендуем использовать более быстрое устройство \"<xliff:g id="NAME_2">^3</xliff:g>\" или настроить устройство \"<xliff:g id="NAME_3">^4</xliff:g>\" как съемный накопитель."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Начать заново"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Продолжить"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Вы можете переместить контент на устройство \"<xliff:g id="NAME">^1</xliff:g>\"."</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Чтобы перенести контент на устройство \"<xliff:g id="NAME">^1</xliff:g>\", откройте "<b>"Настройки &gt; Хранилище"</b>"."</string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Контент перенесен на устройство \"<xliff:g id="NAME_0">^1</xliff:g>\".\n\nДля управления устройством \"<xliff:g id="NAME_1">^2</xliff:g>\" откройте "<b>"Настройки &gt; Хранилище"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Теперь вы можете использовать устройство \"<xliff:g id="NAME">^1</xliff:g>\""</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Теперь вы можете использовать устройство \"<xliff:g id="NAME">^1</xliff:g>\""</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Теперь вы можете использовать устройство \"<xliff:g id="NAME">^1</xliff:g>\""</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Состояние батареи"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Уровень заряда батареи"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Точки доступа"</string>
@@ -3072,6 +3075,10 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Данные указаны приблизительно. Расход во время зарядки не учитывается."</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Данные о расходе заряда станут доступны через несколько часов использования телефона."</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Диаграмма расхода заряда батареи"</string>
+    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
+    <skip />
+    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статистика процессов"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Статистика запущенных процессов"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Использование памяти"</string>
@@ -3635,6 +3642,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Разрешить приложениям использовать данные о вашем местоположении"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Назад"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Далее"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Форматировать по-другому"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Форматировать по-другому"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Готово"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM-карты"</string>
@@ -5163,7 +5172,7 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Нажмите, чтобы проверить устройство"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Чтобы увидеть время, уведомления и другую информацию, коснитесь экрана"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Экстренные вызовы"</string>
-    <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Использовать функцию \"Экстренный вызов\""</string>
+    <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Использовать функцию \"Экстренные вызовы\""</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Под управлением приложения \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"Быстро нажмите кнопку питания не менее пяти раз для выполнения перечисленных ниже действий"</string>
     <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"Звуковой сигнал с обратным отсчетом"</string>
@@ -5785,6 +5794,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Медиа"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Закрепить медиапроигрыватель"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Медиапроигрыватель остается открытым в Быстрых настройках, чтобы вы могли легко продолжить воспроизведение"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Показывать рекомендации медиаконтента"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"С учетом ваших действий"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Скрывать проигрыватель"</string>
