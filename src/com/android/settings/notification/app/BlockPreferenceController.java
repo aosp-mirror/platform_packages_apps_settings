@@ -42,7 +42,7 @@ public class BlockPreferenceController extends NotificationPreferenceController
     public BlockPreferenceController(Context context,
             NotificationSettings.DependentFieldListener dependentFieldListener,
             NotificationBackend backend) {
-        super(context, backend, KEY_BLOCK);
+        super(context, backend);
         mDependentFieldListener = dependentFieldListener;
     }
 
@@ -52,14 +52,14 @@ public class BlockPreferenceController extends NotificationPreferenceController
     }
 
     @Override
-    public int getAvailabilityStatus() {
+    public boolean isAvailable() {
         if (mAppRow == null) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return false;
         }
         if (mPreferenceFilter != null && !isIncludedInFilter()) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return false;
         }
-        return AVAILABLE;
+        return true;
     }
 
     @Override
