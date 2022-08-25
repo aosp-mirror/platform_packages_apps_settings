@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import com.android.settings.SettingsActivity;
@@ -32,6 +33,8 @@ import com.android.settings.SettingsApplication;
 import com.android.settings.SubSettings;
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
+import com.android.settings.core.FeatureFlags;
+import com.android.settings.homepage.DeepLinkHomepageActivityInternal;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.overlay.FeatureFactory;
 
@@ -97,20 +100,27 @@ public class SearchResultTrampoline extends Activity {
         if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)) {
             startActivity(intent);
         } else if (isSettingsIntelligence(callingActivity)) {
-            // Register SplitPairRule for SubSettings, set clearTop false to prevent unexpected back
-            // navigation behavior.
-            ActivityEmbeddingRulesController.registerSubSettingsPairRule(this,
-                    false /* clearTop */);
+            if (FeatureFlagUtils.isEnabled(this, FeatureFlags.SETTINGS_SEARCH_ALWAYS_EXPAND)) {
+                startActivity(SettingsActivity.getTrampolineIntent(intent, highlightMenuKey)
+                        .setClass(this, DeepLinkHomepageActivityInternal.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
+            } else {
+                // Register SplitPairRule for SubSettings, set clearTop false to prevent unexpected
+                // back navigation behavior.
+                ActivityEmbeddingRulesController.registerSubSettingsPairRule(this,
+                        false /* clearTop */);
 
-            intent.setFlags(intent.getFlags() & ~Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+                intent.setFlags(intent.getFlags() & ~Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
 
-            // Pass menu key to homepage
-            final SettingsHomepageActivity homeActivity =
-                    ((SettingsApplication) getApplicationContext()).getHomeActivity();
-            if (homeActivity != null) {
-                homeActivity.getMainFragment().setHighlightMenuKey(highlightMenuKey,
-                        /* scrollNeeded= */ true);
+                // Pass menu key to homepage
+                final SettingsHomepageActivity homeActivity =
+                        ((SettingsApplication) getApplicationContext()).getHomeActivity();
+                if (homeActivity != null) {
+                    homeActivity.getMainFragment().setHighlightMenuKey(highlightMenuKey,
+                            /* scrollNeeded= */ true);
+                }
             }
         } else {
             // Two-pane case

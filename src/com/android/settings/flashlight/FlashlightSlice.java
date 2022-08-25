@@ -39,7 +39,6 @@ import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.slices.CustomSliceRegistry;
@@ -138,7 +137,6 @@ public class FlashlightSlice implements CustomSliceable {
         return null;
     }
 
-    @VisibleForTesting
     static boolean isFlashlightAvailable(Context context) {
         int defaultAvailability = 0;
         try {

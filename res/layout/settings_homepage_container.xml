@@ -19,7 +19,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/settings_homepage_container"
-    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -34,6 +33,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <include
+                android:id="@+id/suggestion_container_two_pane"
+                layout="@layout/suggestion_container_two_pane"
+                android:visibility="gone"/>
 
             <FrameLayout
                 android:id="@+id/contextual_cards_content"
@@ -62,7 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <include
                 android:id="@+id/homepage_app_bar_regular_phone_view"

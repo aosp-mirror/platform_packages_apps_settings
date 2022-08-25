@@ -26,6 +26,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.testutils.shadow.ShadowDeviceStateRotationLockSettingsManager;
 import com.android.settings.testutils.shadow.ShadowRotationPolicy;
 
 import org.junit.Before;
@@ -50,7 +51,10 @@ public class LockScreenRotationPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowRotationPolicy.class})
+    @Config(shadows = {
+            ShadowRotationPolicy.class,
+            ShadowDeviceStateRotationLockSettingsManager.class
+    })
     public void getAvailabilityStatus_supportedRotation_shouldReturnAvailable() {
         ShadowRotationPolicy.setRotationSupported(true /* supported */);
 
@@ -59,8 +63,23 @@ public class LockScreenRotationPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowRotationPolicy.class})
-    public void getAvailabilityStatus_unsupportedRotation_shouldReturnUnsupportedOnDevice() {
+    @Config(shadows = {
+            ShadowRotationPolicy.class,
+            ShadowDeviceStateRotationLockSettingsManager.class
+    })
+    public void getAvailabilityStatus_deviceStateRotationEnabled_returnsUnsupported() {
+        ShadowRotationPolicy.setRotationSupported(true /* supported */);
+        ShadowDeviceStateRotationLockSettingsManager.setDeviceStateRotationLockEnabled(true);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    @Config(shadows = {
+            ShadowRotationPolicy.class,
+            ShadowDeviceStateRotationLockSettingsManager.class
+    })    public void getAvailabilityStatus_unsupportedRotation_shouldReturnUnsupportedOnDevice() {
         ShadowRotationPolicy.setRotationSupported(false /* supported */);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(

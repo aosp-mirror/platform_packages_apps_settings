@@ -24,11 +24,7 @@ import android.os.UserManager;
 import android.text.format.DateUtils;
 import android.util.ArrayMap;
 import android.util.Log;
-import android.util.Slog;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -127,8 +123,7 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
     private void addBlockStatus(AppEntry entry, NotificationsSentState stats) {
         if (stats != null) {
             stats.blocked = mBackend.getNotificationsBanned(entry.info.packageName, entry.info.uid);
-            stats.systemApp = mBackend.isSystemApp(mContext, entry.info);
-            stats.blockable = !stats.systemApp || (stats.systemApp && stats.blocked);
+            stats.blockable = mBackend.enableSwitch(mContext, entry.info);
         }
     }
 
@@ -229,11 +224,13 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
             return null;
         }
         return (buttonView, isChecked) -> {
-            mBackend.setNotificationsEnabledForPackage(
-                    entry.info.packageName, entry.info.uid, isChecked);
             NotificationsSentState stats = getNotificationsSentState(entry);
             if (stats != null) {
-                stats.blocked = !isChecked;
+                if (stats.blocked == isChecked) {
+                    mBackend.setNotificationsEnabledForPackage(
+                            entry.info.packageName, entry.info.uid, isChecked);
+                    stats.blocked = !isChecked;
+                }
             }
         };
     }
@@ -329,7 +326,6 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
         if (stats == null) {
             return false;
         }
-
         return !stats.blocked;
     }
 
@@ -344,6 +340,5 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
         public int sentCount = 0;
         public boolean blockable;
         public boolean blocked;
-        public boolean systemApp;
     }
 }

@@ -33,16 +33,10 @@ import java.util.List;
 
 public class SimLockPreferenceController extends BasePreferenceController {
 
-    private static final String KEY_SIM_LOCK = "sim_lock_settings";
-
     private final CarrierConfigManager mCarrierConfigManager;
     private final UserManager mUserManager;
     private final SubscriptionManager mSubscriptionManager;
     private TelephonyManager mTelephonyManager;
-
-    public SimLockPreferenceController(Context context) {
-        this(context, KEY_SIM_LOCK);
-    }
 
     public SimLockPreferenceController(Context context, String key) {
         super(context, key);

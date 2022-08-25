@@ -46,7 +46,7 @@ public class ScreenPinningPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new ScreenPinningPreferenceController(mContext);
+        mController = new ScreenPinningPreferenceController(mContext, "key");
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
     }
@@ -88,11 +88,6 @@ public class ScreenPinningPreferenceControllerTest {
 
         assertThat(mPreference.getSummary())
                 .isEqualTo(mContext.getString(R.string.switch_on_text));
-    }
-
-    @Test
-    public void getPreferenceKey_byDefault_returnsDefaultValue() {
-        assertThat(mController.getPreferenceKey()).isEqualTo("screen_pinning_settings");
     }
 
     @Test

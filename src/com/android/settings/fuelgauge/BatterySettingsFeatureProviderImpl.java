@@ -16,22 +16,14 @@
 
 package com.android.settings.fuelgauge;
 
-import android.content.ComponentName;
 import android.content.Context;
 
-/**
- * Feature provider implementation for battery settings usage.
- */
+/** Feature provider implementation for battery settings usage. */
 public class BatterySettingsFeatureProviderImpl implements BatterySettingsFeatureProvider {
 
     protected Context mContext;
 
     public BatterySettingsFeatureProviderImpl(Context context) {
         mContext = context.getApplicationContext();
-    }
-
-    @Override
-    public ComponentName getReplacingActivity(ComponentName originalActivity) {
-        return originalActivity;
     }
 }

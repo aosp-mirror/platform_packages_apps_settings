@@ -16,7 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.AccessibilityDialogUtils.CustomButton;
 import static com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
 import static com.android.settings.accessibility.MagnificationModePreferenceController.MagnificationModeInfo;
 import static com.android.settings.accessibility.MagnificationPreferenceFragment.ON;
@@ -28,17 +27,24 @@ import static org.mockito.Mockito.verify;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.SpannableString;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
+import com.android.settings.utils.AnnotationSpan;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -48,7 +54,6 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 /** Tests for {@link MagnificationModePreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
@@ -68,7 +73,8 @@ public class MagnificationModePreferenceControllerTest {
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        mContext = ApplicationProvider.getApplicationContext();
+        mContext.setTheme(R.style.Theme_AppCompat);
         final PreferenceManager preferenceManager = new PreferenceManager(mContext);
         mScreen = preferenceManager.createPreferenceScreen(mContext);
         mModePreference = new Preference(mContext);
@@ -83,8 +89,8 @@ public class MagnificationModePreferenceControllerTest {
     public void clickPreference_settingsModeIsDefault_checkedModeInDialogIsDefault() {
         mModePreference.getOnPreferenceClickListener().onPreferenceClick(mModePreference);
 
-        assertThat(getCheckedModeFromDialog()).isEqualTo(
-                MAGNIFICATION_MODE_DEFAULT);
+        assertThat(getCheckedModeFromDialog()).isEqualTo(MAGNIFICATION_MODE_DEFAULT);
+
     }
 
     @Test
@@ -109,52 +115,103 @@ public class MagnificationModePreferenceControllerTest {
     }
 
     @Test
-    public void chooseWindowMode_tripleTapEnabled_showSwitchShortcutDialog() {
+    public void chooseFullscreenMode_tripleTapEnabled_notShowTripleTapWarningDialog() {
+        enableTripleTap();
+        mModePreference.getOnPreferenceClickListener().onPreferenceClick(mModePreference);
+
+        performItemClickWith(MagnificationMode.FULLSCREEN);
+        mController.onMagnificationModeDialogPositiveButtonClicked(mDialogHelper.getDialog(),
+                DialogInterface.BUTTON_POSITIVE);
+
+        verify(mDialogHelper, never()).showDialog(
+                MagnificationModePreferenceController.DIALOG_MAGNIFICATION_TRIPLE_TAP_WARNING);
+    }
+
+    @Test
+    public void chooseWindowMode_tripleTapEnabled_showTripleTapWarningDialog() {
         enableTripleTap();
         mModePreference.getOnPreferenceClickListener().onPreferenceClick(mModePreference);
 
         performItemClickWith(MagnificationMode.WINDOW);
+        mController.onMagnificationModeDialogPositiveButtonClicked(mDialogHelper.getDialog(),
+                DialogInterface.BUTTON_POSITIVE);
 
         verify(mDialogHelper).showDialog(
-                MagnificationModePreferenceController.DIALOG_MAGNIFICATION_SWITCH_SHORTCUT);
+                MagnificationModePreferenceController.DIALOG_MAGNIFICATION_TRIPLE_TAP_WARNING);
     }
 
     @Test
-    public void chooseModeAll_modeAllInSettingsAndTripleTapEnabled_notShowShortcutDialog() {
+    public void chooseAllMode_tripleTapEnabled_showTripleTapWarningDialog() {
         enableTripleTap();
         mModePreference.getOnPreferenceClickListener().onPreferenceClick(mModePreference);
 
         performItemClickWith(MagnificationMode.ALL);
+        mController.onMagnificationModeDialogPositiveButtonClicked(mDialogHelper.getDialog(),
+                DialogInterface.BUTTON_POSITIVE);
 
-        verify(mDialogHelper, never()).showDialog(
-                MagnificationModePreferenceController.DIALOG_MAGNIFICATION_SWITCH_SHORTCUT);
+        verify(mDialogHelper).showDialog(
+                MagnificationModePreferenceController.DIALOG_MAGNIFICATION_TRIPLE_TAP_WARNING);
     }
 
     @Test
-    public void onSwitchShortcutDialogPositiveButtonClicked_TripleTapEnabled_TripleTapDisabled() {
+    public void onTripleTapWarningDialogNegativeButtonClicked_showModeDialog() {
+        mDialogHelper.showDialog(
+                MagnificationModePreferenceController.DIALOG_MAGNIFICATION_TRIPLE_TAP_WARNING);
+
+        mController.onMagnificationTripleTapWarningDialogNegativeButtonClicked(
+                mDialogHelper.getDialog(), DialogInterface.BUTTON_NEGATIVE);
+
+        verify(mDialogHelper).showDialog(
+                MagnificationModePreferenceController.DIALOG_MAGNIFICATION_MODE);
+    }
+
+    @Test
+    public void onTripleTapWarningDialogPositiveButtonClicked_chooseAllMode_returnAllSummary() {
         enableTripleTap();
+        mModePreference.getOnPreferenceClickListener().onPreferenceClick(mModePreference);
+        performItemClickWith(MagnificationMode.ALL);
+        mController.onMagnificationModeDialogPositiveButtonClicked(mDialogHelper.getDialog(),
+                DialogInterface.BUTTON_POSITIVE);
 
-        mController.onSwitchShortcutDialogButtonClicked(CustomButton.POSITIVE);
+        mController.onMagnificationTripleTapWarningDialogPositiveButtonClicked(
+                mDialogHelper.getDialog(), DialogInterface.BUTTON_POSITIVE);
 
-        assertThat(MagnificationModePreferenceController.isTripleTapEnabled(mContext)).isFalse();
+        final String allSummary = mContext.getString(
+                R.string.accessibility_magnification_area_settings_all_summary);
+        assertThat(TextUtils.equals(mController.getSummary(), allSummary)).isTrue();
+    }
+
+    @Test
+    public void checkSpansInTripleTapWarningDialog_existAnnotationSpan() {
+        mDialogHelper.showDialog(
+                MagnificationModePreferenceController.DIALOG_MAGNIFICATION_TRIPLE_TAP_WARNING);
+        final View contentView = mDialogHelper.getDialog().findViewById(android.R.id.content);
+        final TextView messageView = contentView.findViewById(R.id.message);
+        final CharSequence textInTripleTapWarningDialog = messageView.getText();
+
+        final AnnotationSpan[] annotationSpans =
+                ((SpannableString) textInTripleTapWarningDialog).getSpans(/*queryStart= */ 0,
+                        textInTripleTapWarningDialog.length(), AnnotationSpan.class);
+
+        assertThat(annotationSpans[0]).isNotNull();
     }
 
     @Test
     public void getSummary_saveWindowScreen_shouldReturnWindowScreenSummary() {
         MagnificationCapabilities.setCapabilities(mContext, MagnificationMode.WINDOW);
 
-        assertThat(mController.getSummary())
-                .isEqualTo(mContext.getString(
-                        R.string.accessibility_magnification_area_settings_window_screen_summary));
+        final String windowSummary = mContext.getString(
+                R.string.accessibility_magnification_area_settings_window_screen_summary);
+        assertThat(TextUtils.equals(mController.getSummary(), windowSummary)).isTrue();
     }
 
     @Test
     public void getSummary_saveAll_shouldReturnAllSummary() {
         MagnificationCapabilities.setCapabilities(mContext, MagnificationMode.ALL);
 
-        assertThat(mController.getSummary())
-                .isEqualTo(mContext.getString(
-                        R.string.accessibility_magnification_area_settings_all_summary));
+        final String allSummary = mContext.getString(
+                R.string.accessibility_magnification_area_settings_all_summary);
+        assertThat(TextUtils.equals(mController.getSummary(), allSummary)).isTrue();
     }
 
     private int getCheckedModeFromDialog() {
@@ -208,10 +265,11 @@ public class MagnificationModePreferenceControllerTest {
     private static class TestDialogHelper implements DialogCreatable,
             MagnificationModePreferenceController.DialogHelper {
         private DialogCreatable mDialogDelegate;
+        private Dialog mDialog;
 
         @Override
         public void showDialog(int dialogId) {
-            onCreateDialog(dialogId);
+            mDialog = onCreateDialog(dialogId);
         }
 
         @Override
@@ -227,6 +285,10 @@ public class MagnificationModePreferenceControllerTest {
         @Override
         public int getDialogMetricsCategory(int dialogId) {
             return mDialogDelegate.getDialogMetricsCategory(dialogId);
+        }
+
+        public Dialog getDialog() {
+            return mDialog;
         }
     }
 }

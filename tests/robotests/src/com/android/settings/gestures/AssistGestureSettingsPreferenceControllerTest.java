@@ -18,8 +18,11 @@ package com.android.settings.gestures;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -48,6 +51,8 @@ public class AssistGestureSettingsPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        doReturn(mock(DevicePolicyManager.class)).when(mContext)
+                .getSystemService(Context.DEVICE_POLICY_SERVICE);
         mFactory = FakeFeatureFactory.setupForTest();
         mController = new AssistGestureSettingsPreferenceController(mContext, KEY_ASSIST);
         mController.setAssistOnly(false);

@@ -69,6 +69,7 @@ import com.android.settingslib.net.UidDetailProvider;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Panel showing data usage history across various networks, including options
@@ -111,7 +112,11 @@ public class DataUsageList extends DataUsageBaseFragment
 
     private ChartDataUsagePreference mChart;
     private List<NetworkCycleChartData> mCycleData;
+    // Caches the cycles for startAppDataUsage usage, which need be cleared when resumed.
     private ArrayList<Long> mCycles;
+    // Spinner will keep the selected cycle even after paused, this only keeps the displayed cycle,
+    // which need be cleared when resumed.
+    private CycleAdapter.CycleItem mLastDisplayedCycle;
     private UidDetailProvider mUidDetailProvider;
     private CycleAdapter mCycleAdapter;
     private Preference mUsageAmount;
@@ -199,13 +204,15 @@ public class DataUsageList extends DataUsageBaseFragment
 
         mLoadingViewController = new LoadingViewController(
                 getView().findViewById(R.id.loading_container), getListView());
-        mLoadingViewController.showLoadingViewDelayed();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        mLoadingViewController.showLoadingViewDelayed();
         mDataStateListener.start(mSubId);
+        mCycles = null;
+        mLastDisplayedCycle = null;
 
         // kick off loader for network history
         // TODO: consider chaining two loaders together instead of reloading
@@ -319,9 +326,46 @@ public class DataUsageList extends DataUsageBaseFragment
         }
 
         // generate cycle list based on policy and available history
-        if (mCycleAdapter.updateCycleList(mCycleData)) {
-            updateDetailData();
+        mCycleAdapter.updateCycleList(mCycleData);
+        updateSelectedCycle();
+    }
+
+    /**
+     * Updates the chart and detail data when initial loaded or selected cycle changed.
+     */
+    private void updateSelectedCycle() {
+        // Avoid from updating UI after #onStop.
+        if (!getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+            return;
         }
+
+        // Avoid from updating UI when async query still on-going.
+        // This could happen when a request from #onMobileDataEnabledChange.
+        if (mCycleData == null) {
+            return;
+        }
+
+        final int position = mCycleSpinner.getSelectedItemPosition();
+        if (mCycleAdapter.getCount() == 0 || position < 0) {
+            return;
+        }
+        final CycleAdapter.CycleItem cycle = mCycleAdapter.getItem(position);
+        if (Objects.equals(cycle, mLastDisplayedCycle)) {
+            // Avoid duplicate update to avoid page flash.
+            return;
+        }
+        mLastDisplayedCycle = cycle;
+
+        if (LOGD) {
+            Log.d(TAG, "showing cycle " + cycle + ", [start=" + cycle.start + ", end="
+                    + cycle.end + "]");
+        }
+
+        // update chart to show selected cycle, and update detail data
+        // to match updated sweep bounds.
+        mChart.setNetworkCycleData(mCycleData.get(position));
+
+        updateDetailData();
     }
 
     /**
@@ -369,7 +413,7 @@ public class DataUsageList extends DataUsageBaseFragment
             final int collapseKey;
             final int category;
             final int userId = UserHandle.getUserId(uid);
-            if (UserHandle.isApp(uid)) {
+            if (UserHandle.isApp(uid) || Process.isSdkSandboxUid(uid)) {
                 if (profiles.contains(new UserHandle(userId))) {
                     if (userId != currentUserId) {
                         // Add to a managed user item.
@@ -377,8 +421,12 @@ public class DataUsageList extends DataUsageBaseFragment
                         largest = accumulate(managedKey, knownItems, bucket,
                             AppItem.CATEGORY_USER, items, largest);
                     }
-                    // Add to app item.
-                    collapseKey = uid;
+                    // Map SDK sandbox back to its corresponding app
+                    if (Process.isSdkSandboxUid(uid)) {
+                        collapseKey = Process.getAppUidForSdkSandboxUid(uid);
+                    } else {
+                        collapseKey = uid;
+                    }
                     category = AppItem.CATEGORY_APP;
                 } else {
                     // If it is a removed user add it to the removed users' key
@@ -416,6 +464,7 @@ public class DataUsageList extends DataUsageBaseFragment
             if (item == null) {
                 item = new AppItem(uid);
                 item.total = -1;
+                item.addUid(uid);
                 items.add(item);
                 knownItems.put(item.key, item);
             }
@@ -490,33 +539,10 @@ public class DataUsageList extends DataUsageBaseFragment
         return Math.max(largest, item.total);
     }
 
-    private OnItemSelectedListener mCycleListener = new OnItemSelectedListener() {
+    private final OnItemSelectedListener mCycleListener = new OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            final CycleAdapter.CycleItem cycle = (CycleAdapter.CycleItem)
-                    mCycleSpinner.getSelectedItem();
-
-            if (LOGD) {
-                Log.d(TAG, "showing cycle " + cycle + ", start=" + cycle.start + ", end="
-                        + cycle.end + "]");
-            }
-
-            // Avoid from updating UI after #onStop.
-            if (!getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
-                return;
-            }
-
-            // Avoid from updating UI when async query still on-going.
-            // This could happen when a request from #onMobileDataEnabledChange.
-            if (mCycleData == null) {
-                return;
-            }
-
-            // update chart to show selected cycle, and update detail data
-            // to match updated sweep bounds.
-            mChart.setNetworkCycleData(mCycleData.get(position));
-
-            updateDetailData();
+            updateSelectedCycle();
         }
 
         @Override

@@ -35,7 +35,7 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.widget.CandidateInfo;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 /**
  * A generic app picker fragment that shows a list of app as radio button group.
@@ -53,7 +53,7 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
     }
 
     @Override
-    public void onRadioButtonClicked(RadioButtonPreference selected) {
+    public void onRadioButtonClicked(SelectorWithWidgetPreference selected) {
         final String selectedKey = selected.getKey();
         final CharSequence confirmationMessage = getConfirmationMessage(getCandidate(selectedKey));
         final FragmentActivity activity = getActivity();
@@ -78,7 +78,7 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
     }
 
     @Override
-    public void bindPreferenceExtra(RadioButtonPreference pref,
+    public void bindPreferenceExtra(SelectorWithWidgetPreference pref,
             String key, CandidateInfo info, String defaultKey, String systemDefaultKey) {
         if (!(info instanceof DefaultAppInfo)) {
             return;

@@ -16,7 +16,11 @@
 
 package com.android.settings.applications.specialaccess;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.CONNECTED_WORK_AND_PERSONAL_APPS_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.MANAGE_DEVICE_ADMIN_APPS;
+
 import android.app.settings.SettingsEnums;
+import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -31,6 +35,15 @@ public class SpecialAccessSettings extends DashboardFragment {
     @Override
     protected String getLogTag() {
         return TAG;
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        replaceEnterpriseStringTitle("interact_across_profiles",
+                CONNECTED_WORK_AND_PERSONAL_APPS_TITLE, R.string.interact_across_profiles_title);
+        replaceEnterpriseStringTitle("device_administrators",
+                MANAGE_DEVICE_ADMIN_APPS, R.string.manage_device_admin);
     }
 
     @Override

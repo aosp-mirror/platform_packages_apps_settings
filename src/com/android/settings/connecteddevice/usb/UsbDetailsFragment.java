@@ -50,7 +50,7 @@ public class UsbDetailsFragment extends DashboardFragment {
     UsbConnectionBroadcastReceiver mUsbReceiver;
 
     private UsbConnectionBroadcastReceiver.UsbConnectionListener mUsbConnectionListener =
-            (connected, functions, powerRole, dataRole) -> {
+            (connected, functions, powerRole, dataRole, isUsbFigured) -> {
                 for (UsbDetailsController controller : mControllers) {
                     controller.refresh(connected, functions, powerRole, dataRole);
                 }
