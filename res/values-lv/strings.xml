@@ -71,10 +71,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Jūsu ierīce tiks atvienota no ierīces <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Savienošana pārī ar jaunu ierīci"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Savienot pārī labo"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Savienot pārī kreiso"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Savienojiet otru aparātu"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Jūsu kreisās auss dzirdes aparāts ir pievienots.\n\nLai savienotu pārī labās auss dzirdes aparātu, pārbaudiet, vai tas ir ieslēgts un gatavs savienošanai pārī."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Jūsu labās auss dzirdes aparāts ir pievienots.\n\nLai savienotu pārī kreisās auss dzirdes aparātu, pārbaudiet, vai tas ir ieslēgts un gatavs savienošanai pārī."</string>
@@ -1467,8 +1465,7 @@
     <string name="sim_enter_new" msgid="9010947802784561582">"Jauns SIM PIN"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Atkārtoti ievadiet jauno PIN."</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"SIM kartes PIN kods"</string>
-    <!-- no translation found for sim_invalid_pin_hint (3376397829969578877) -->
-    <skip />
+    <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"Ievadiet PIN (no 4 līdz 8 cipariem)."</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"PIN kodi ir atšķirīgi"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Nevar mainīt PIN kodu.\nIespējams, ka PIN kods nav pareizs."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"SIM PIN ir veiksmīgi nomainīts"</string>
@@ -2088,7 +2085,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Vai atiest. liet. pref.?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Šādi tiks atiestatītas visas preferences, kas saistītas ar:\n\n"<li>"atspējotām lietotnēm;"</li>\n<li>"atspējotu lietotņu paziņojumiem;"</li>\n<li>"noklusējuma lietojumprogrammām konkrētu darbību veikšanai;"</li>\n<li>"lietotņu fona datu ierobežojumiem;"</li>\n<li>"visiem atļauju ierobežojumiem;"</li>\n<li>"akumulatora lietojuma iestatījumiem."</li>\n\n"Jūs nezaudēsiet lietotņu datus."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Atiestatīt lietotnes"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"Vietas pārvaldība"</string>
     <string name="filter" msgid="9039576690686251462">"Filtrs"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Izvēlēties filtra opcijas"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Visas lietotnes"</string>
@@ -2712,7 +2708,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Akumulatora lietojums"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Skatīt lietojumu pēdējo 24 stundu laikā"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Skatīt lietojumu kopš pēdējās pilnās uzlādes"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Akumulatora lietojums"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Akumulatora lietojums lietotnēm"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Izmantot detaļas"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Noregulēt strāvas patēriņu"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Iekļautās pakotnes"</string>
@@ -2731,8 +2727,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Dažu funkciju darbība var tikt ierobežota."</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Lielāks akumulatora lietojums"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Skatiet lietotnes, kas patērē visvairāk akumulatora enerģijas"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Uzlāde īslaicīgi ierobežota"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Akumulatora enerģijas taupīšana. Uzziniet vairāk."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Uzlāde ir pārtraukta"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Tiek aizsargāts akumulators, lai paildzinātu tā darbmūžu.\nPieskarieties, lai uzzinātu vairāk."</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Atsākt uzlādi"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Noteiktos apstākļos, piemēram, augstā temperatūrā un ilgos uzlādes periodos, uzlādes līmenis var tikt ierobežots līdz <xliff:g id="PERCENT">%1$s</xliff:g>, lai palīdzētu uzturēt akumulatoru darba kārtībā.\n\nKad šie apstākļi vairs nepastāv, jūsu tālrunis tiek automātiski uzlādēts kā parasti."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Noteiktos apstākļos, piemēram, augstā temperatūrā un ilgos uzlādes periodos, uzlādes līmenis var tikt ierobežots līdz <xliff:g id="PERCENT">%1$s</xliff:g>, lai palīdzētu uzturēt akumulatoru darba kārtībā.\n\nKad šie apstākļi vairs nepastāv, jūsu planšetdators tiek automātiski uzlādēts kā parasti."</string>
@@ -2773,6 +2771,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Šī lietotne varēs izmantot akumulatora enerģiju fonā. Tādējādi akumulators var izlādēties ātrāk nekā parasti."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Noņemt"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Atcelt"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Pilnībā uzlādēt"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Jūsu lietotnes patērē normālu akumulatora enerģijas apjomu. Ja lietotnes patērē pārāk daudz akumulatora enerģijas, jūsu tālrunī tiks parādītas ieteicamās darbības.\n\nJa akumulatora uzlādes līmenis ir zems, varat jebkurā laikā ieslēgt akumulatora enerģijas taupīšanas režīmu."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Jūsu lietotnes patērē normālu akumulatora enerģijas apjomu. Ja lietotnes patērē pārāk daudz akumulatora enerģijas, jūsu planšetdatorā tiks parādītas ieteicamās darbības.\n\nJa akumulatora uzlādes līmenis ir zems, varat jebkurā laikā ieslēgt akumulatora enerģijas taupīšanas režīmu."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Jūsu lietotnes patērē normālu akumulatora enerģijas apjomu. Ja lietotnes patērē pārāk daudz akumulatora enerģijas, jūsu ierīcē tiks parādītas ieteicamās darbības.\n\nJa akumulatora uzlādes līmenis ir zems, varat jebkurā laikā ieslēgt akumulatora enerģijas taupīšanas režīmu."</string>
@@ -2819,7 +2818,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Darbības ilgums pēc pilnas uzlādes"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Akumulatora lietojuma dati ir aptuveni un var mainīties atkarībā no lietojuma."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Akumulatora lietojums"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Akumulatora lietojuma pārvaldīšana"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Kopā: <xliff:g id="TIME_0">^1</xliff:g> • Lietojums fonā: <xliff:g id="TIME_1">^2</xliff:g>\n(kopš pēdējās pilnās uzlādes)"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Kopā: <xliff:g id="TIME_0">^1</xliff:g> • Lietojums fonā: <xliff:g id="TIME_1">^2</xliff:g>\n(pēdējo 24 h laikā)"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Kopā: <xliff:g id="TIME_0">^1</xliff:g> • Lietojums fonā: <xliff:g id="TIME_1">^2</xliff:g>\n(šajā periodā: <xliff:g id="TIME_PERIOD">^3</xliff:g>)"</string>
@@ -2873,14 +2871,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"ar akumulatora uzlādes līmeni <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Akumulatora uzlādes līmenis procentos"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Statusa joslā rādīt akumulatora uzlādes līmeni procentos"</string>
-    <!-- no translation found for battery_usage_chart_graph_hint_last_full_charge (6570336408060566877) -->
-    <skip />
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Akumulatora uzlādes līmenis kopš pēdējās pilnās uzlādes"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Akumulatora līmenis pēdējo 24 h laikā"</string>
-    <!-- no translation found for battery_app_usage (8976453608783133770) -->
-    <skip />
+    <string name="battery_app_usage" msgid="8976453608783133770">"Lietotnes lietojums kopš pēdējās pilnās uzlādes"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Lietotnes izmantojums pēdējo 24 h laikā"</string>
-    <!-- no translation found for battery_system_usage (1395943945140097585) -->
-    <skip />
+    <string name="battery_system_usage" msgid="1395943945140097585">"Sistēmas lietojums kopš pēdējās pilnās uzlādes"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Sistēmas lietojums pēdējo 24 h laikā"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Sistēmas izmantojums: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Lietotnes izmantojums: <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -2891,6 +2886,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Akumulatora lietojuma dati ir aptuveni, un tālruņa uzlādes laikā lietojums netiek mērīts"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Akumulatora lietojuma dati būs pieejami, kad būsiet lietojis tālruni dažas stundas."</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Akumulatora lietojuma diagramma"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Diagramma ar datiem par akumulatora lietojumu dienā"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Diagramma ar datiem par akumulatora lietojumu stundā"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Procesu statistika"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistika par darbības procesiem"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Atmiņas lietojums"</string>
@@ -4749,16 +4746,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Ieslēgt tūlīt"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Izslēgt tūlīt"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Akumulatora optimizācija netiek izmantota"</string>
-    <!-- no translation found for app_battery_optimization_title (389653121998016466) -->
-    <skip />
-    <!-- no translation found for app_battery_optimization_summary (7864783556193427398) -->
-    <skip />
-    <!-- no translation found for filter_battery_unrestricted_title (821027369424198223) -->
-    <skip />
-    <!-- no translation found for filter_battery_optimized_title (8236647176487754796) -->
-    <skip />
-    <!-- no translation found for filter_battery_restricted_title (5886859505802563232) -->
-    <skip />
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Akumulatora lietojums lietotnēm"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Iestatiet akumulatora lietojumu lietotnēm."</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Neierobežots"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimizēts"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Ierobežots"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Ja ierīce ir bloķēta, neļaut paziņojumos rakstīt atbildes vai citu tekstu"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Nokl. pareizrakstības pārbaude"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Pareizrakst. pārb. atlasīšana"</string>
@@ -5507,6 +5499,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"Multivide"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Piespraust multivides atskaņotāju"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Multivides atskaņotājs paliek atvērts sadaļā Ātrie iestatījumi, lai varētu ātri atsākt atskaņošanu"</string>
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Rādīt multividi bloķēšanas ekrānā"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"Multivides atskaņotājs paliek atvērts bloķēšanas ekrānā, lai varētu ātri atsākt atskaņošanu"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Rādīt multivides satura ieteikumus"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Ieteikumu pamatā ir jūsu darbības"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Paslēpt atskaņotāju"</string>

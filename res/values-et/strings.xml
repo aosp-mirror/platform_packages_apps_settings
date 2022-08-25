@@ -70,10 +70,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Teie seade katkestab ühenduse seadmega <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Uue seadme sidumine"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Seo parempoolne"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Seo vasakpoolne"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Teise kõrva sidumine"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Teie vasakpoolne kuuldeaparaat on ühendatud.\n\nParempoolse sidumiseks veenduge, et see oleks sisse lülitatud ja sidumiseks valmis."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Teie parempoolne kuuldeaparaat on ühendatud.\n\nVasakpoolse sidumiseks veenduge, et see oleks sisse lülitatud ja sidumiseks valmis."</string>
@@ -2065,7 +2063,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Lähtestada rakenduste eelistused?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"See lähtestab kõik järgmised eelistused.\n\n"<li>"Keelatud rakendused"</li>\n<li>"Keelatud rakenduste märguanded"</li>\n<li>"Toimingute vaikerakendused"</li>\n<li>"Rakenduste taustaandmete piirangud"</li>\n<li>"Igasugused lubade piirangud"</li>\n<li>"Akukasutuse seaded"</li>\n\n"Rakenduste andmed säilivad."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Lähtesta rakendused"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"Halda ruumi"</string>
     <string name="filter" msgid="9039576690686251462">"Filter"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Filtrivalikute valimine"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Kõik rakendused"</string>
@@ -2682,7 +2679,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Akukasutus"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Kasutus viimase 24 tunni jooksul"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Kasutus viimasest täislaadimisest"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Akukasutus"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Rakenduse akukasutus"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Kasuta detaile"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Reguleerige energiakasutust"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Kaasnevad paketid"</string>
@@ -2701,8 +2698,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Mõned funktsioonid võivad olla piiratud"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Suur akukasutus"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Vaadake suurima akukasutusega rakendusi"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Laadimine on ajutiselt piiratud"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Aku säästmiseks. Vaadake lisateavet."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Laadimine on peatatud"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Akut kaitstakse, et aku tööiga pikendada\nPuudutage lisateabe saamiseks"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Jätka laadimist"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Teatud tingimustel, nt kõrge temperatuuriga ja pikal laadimisperioodil, võib laadimine olla piiratud tasemeni <xliff:g id="PERCENT">%1$s</xliff:g>, et säilitada aku seisukord.\n\nNende tingimuste lõppedes hakkab telefon automaatselt jälle tavapäraselt laadima."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Teatud tingimustel, nt kõrge temperatuuriga ja pikal laadimisperioodil, võib laadimine olla piiratud tasemeni <xliff:g id="PERCENT">%1$s</xliff:g>, et säilitada aku seisukord.\n\nNende tingimuste lõppedes hakkab tahvelarvuti automaatselt jälle tavapäraselt laadima."</string>
@@ -2738,6 +2737,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"See rakendus saab taustal akut kasutada. Aku võib oodatust varem tühjaks saada."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Eemalda"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Tühista"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Laadi täissaamiseni"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Teie rakendused kasutavad akut tavapärases ulatuses. Kui rakendused kasutavad liiga palju akut, soovitab telefon teile selle vastu sobilikke meetmeid.\n\nKui aku hakkab tühjaks saama, võite alati akusäästja sisse lülitada."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Teie rakendused kasutavad akut tavapärases ulatuses. Kui rakendused kasutavad liiga palju akut, soovitab tahvelarvuti teile selle vastu sobilikke meetmeid.\n\nKui aku hakkab tühjaks saama, võite alati akusäästja sisse lülitada."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Teie rakendused kasutavad akut tavapärases ulatuses. Kui rakendused kasutavad liiga palju akut, soovitab seade teile selle vastu sobilikke meetmeid.\n\nKui aku hakkab tühjaks saama, võite alati akusäästja sisse lülitada."</string>
@@ -2782,7 +2782,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Täislaaditud seade kestab umbes"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Aku kasutuse andmed on ligikaudsed ja võivad sõltuvalt kasutusest muutuda."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Akukasutus"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Akukasutuse haldamine"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Kokku <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> taustal\nalates viimasest täislaadimisest"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Kokku <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> taustal\nviimase 24 tunni jooksul"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Kokku <xliff:g id="TIME_0">^1</xliff:g> • Ajavahemikus <xliff:g id="TIME_PERIOD">^3</xliff:g>\ntaustal <xliff:g id="TIME_1">^2</xliff:g>"</string>
@@ -2851,6 +2850,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Akukasutuse andmed on ligikaudsed ja kasutamist ei mõõdeta telefoni laadimise ajal"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Aku kasutuse andmed on näha siis, kui olete telefoni mõni tund kasutanud"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Akukasutuse diagramm"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Aku päevapõhise kasutuse diagramm"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Aku tunnipõhise kasutuse diagramm"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Protsessi statistika"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Tehnilised üksikasjad protsesside käitamise kohta"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Mälu kasutamine"</string>
@@ -3287,7 +3288,7 @@
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"Laienda rakenduste seadeid"</string>
     <string name="user_choose_copy_apps_to_another_user" msgid="5914037067347012870">"Valige rakendused, mis installida"</string>
     <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"Installige saadaolevad rakendused"</string>
-    <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Kontaktivabad maksed"</string>
+    <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Viipemaksed"</string>
     <string name="nfc_default_payment_settings_title" msgid="2150504446774382261">"Vaikemakserakendus"</string>
     <string name="nfc_default_payment_footer" msgid="978535088340021360">"Kui soovite makserakendusega makset teha, hoidke seadme tagakülge makseterminali vastas"</string>
     <string name="nfc_more_details" msgid="1700713533074275233">"Lisateave"</string>
@@ -4675,8 +4676,8 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Lülita kohe sisse"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Lülita kohe välja"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Aku optimeerimist ei kasutata"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"Akukasutuse haldamine"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Rakenduste jaoks akukasutuse määramine"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Rakenduse akukasutus"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Rakenduste jaoks akukasutuse määramine"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Piiranguteta"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimeeritud"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Piiratud"</string>
@@ -5369,7 +5370,7 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Töö"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Süsteemi vaikeseade"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"See valik ei kehti enam. Proovige uuesti."</string>
-    <string name="power_menu_setting_name" msgid="2394440932633137229">"Vajutage pikalt toitenuppu"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Pikalt toitenupu vajutamine"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Juurdepääsemiseks vajutage pikalt toitenuppu"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Toitemenüü"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Digitaalne assistent"</string>
@@ -5379,7 +5380,7 @@
     <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Toitemenüü:\nvajutage korraga toitenuppu ja helitugevuse suurendamise nuppu"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Helisemise vältimine:\notsetee kasutamiseks vajutage helitugevuse nuppu"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Allhoidmise kestus"</string>
-    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Kohandage ühenduvust, valides, kui pikalt toitenuppu all hoida"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Tundlikkuse reguleerimiseks valige kui pikalt toitenuppu all hoida"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Lühike"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Pikk"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Kuva rahakott"</string>
@@ -5413,6 +5414,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Meedia"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Meediapleieri kinnitamine"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Kiirelt taasesituse jätkamiseks jääb meediapleier kiirseadetes avatuks"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Kuva meediasoovitusi"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Teie tegevuse põhjal"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Peida pleier"</string>

@@ -70,10 +70,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Idivayisi yakho izonqamuka kusuka ku-<xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Bhangqa idivayisi entsha"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"i-bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Bhangqa indlebe engakwesokudla"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Bhangqa indlebe engakwesokunxele"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Bhangqa enye indlebe yakho"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Umshini wakho wendlebe ongakwesokunxele uxhunyiwe.\n\nUkuze ubhangqe ongakwesokudla, qiniseka ukuthi uvuliwe futhi ukulungele ukubhangqa."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Umshini wakho wendlebe ongakwesokudla uxhunyiwe.\n\nUkuze ubhangqe ongakwesokunxele, qiniseka ukuthi uvuliwe futhi ukulungele ukubhangqa."</string>
@@ -2064,7 +2062,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Setha kabusha izintandokazi zohlelo lokusebenza?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Lokhu kuzosetha kabusha konke okuncanyelwayo kwe-:\n\n"<li>"Ama-app akhutshaziwe"</li>\n<li>"Izaziso zez-app ezikhutshaziwe"</li>\n<li>"Ama-app okuzenzakalelayo wezenzo"</li>\n<li>"Imikhawulo yedatha yangemuva yama-app"</li>\n<li>"Noma yimiphi imikhawulo yemvume"</li>\n<li>"Isethingi yokusetshenziswa kwebhethri"</li>\n\n"Ngeke uze ulahlekelwe yinoma iyiphi idatha ye-app."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Setha kabusha izinhlelo zokusebenza"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"Lawula isikhala"</string>
     <string name="filter" msgid="9039576690686251462">"Hlunga"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Khetha okukhethwa kukho kokuhlunga"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Zonke izinhlelo zokusebenza"</string>
@@ -2681,7 +2678,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Ukusetshenziswa kwebhethri"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Buka ukusetshenziswa kwamahora angama-24 edlule"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Buka ukusetshenziswa kusuka ekushajeni okugcwele kokugcina"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Ukusetshenziswa kwebhethri"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Ukusetshenziswa kwebhethri yi-app"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Sebenzisa imininingwane"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Lungisa amandla okusebenza"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Amaphakheji ahlanganisiwe"</string>
@@ -2700,8 +2697,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Ezinye izici zingakhawulelwa"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Ukusetshenziswa kakhulu kwebhethri"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Bona ama-app asetshenziswa kakhulu"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Ukushaja kukhawulelwe okwesikhashana"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Ukonga ibhethri yakho. Funda kabanzi"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Ukushaja kumisiwe okwesikhashana"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Ivikela ibhethri ukuze kunwetshwe isikhathi sebhethri\nThepha ukuze ufunde kabanzi"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Qalisa kabusha ukukhokhisa"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Ezimweni ezithile, njengamazinga okushisa aphezulu nezikhathi ezinde zokushaja, ukushaja kungakhawulelwa ku-<xliff:g id="PERCENT">%1$s</xliff:g> ukusiza ukonga impilo yebhethri.\n\nLapho lezo zimo ziphela, ifoni yakho izokhokhiswa ngokuzenzakalelayo ngokujwayelekile."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Ezimweni ezithile, njengamazinga okushisa aphezulu nezikhathi ezinde zokushaja, ukushaja kungakhawulelwa ku-<xliff:g id="PERCENT">%1$s</xliff:g> ukusiza ukonga impilo yebhethri.\n\nLapho lezo zimo ziphela, ithebhulethi yakho izokhokhiswa ngokuzenzakalelayo ngokujwayelekile."</string>
@@ -2737,6 +2736,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Lolu hlelo lokusebenza luzokwazi ukusebenzisa ibhethri ngemuva. Ibhethri lakho lingaphela ngokushesha kunokulindelekile."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Susa"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Khansela"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Shaja ugcwalise"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Izinhlelo zakho zokusebenza zisebenzisa inani elivamile lebhethri. Uma izinhlelo zokusebenza zisebenzisa ibhethri eliningi, ifoni yakho izophakamisa izenzo ongazenza.\n\nUngahlala uvula isilondolozi sebhethri uma uphelelwa ibethri."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Izinhlelo zakho zokusebenza zisebenzisa inani elivamile lebhethri. Uma izinhlelo zokusebenza zisebenzisa ibhethri eliningi, idivayisi yakho izophakamisa izenzo ongazenza.\n\nUngahlala uvula isilondolozi sebhethri uma uphelelwa ibethri."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Izinhlelo zakho zokusebenza zisebenzisa inani elivamile lebhethri. Uma izinhlelo zokusebenza zisebenzisa ibhethri eliningi, idivayisi yakho izophakamisa izenzo ongazenza.\n\nUngahlala uvula isilondolozi sebhethri uma uphelelwa ibethri."</string>
@@ -2781,7 +2781,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Ukushaja okugcwele kuhlala cishe okungu-"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Idatha yokusetshenziswa kwebhethri iyalinganiselwa futhi ingashintsha kusukela ekusetshenzisweni."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Ukusetshenziswa kwebhethri"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Phatha ukusetshenziswa kwebhethri"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"ingqikithi <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> indawo engemuva\nkusukela ekushajweni kokugcina okugcwele"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"ingqikithi <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> indawo engemuva\nkumahora angama-24 adlule"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"isamba <xliff:g id="TIME_0">^1</xliff:g> • ingemuva <xliff:g id="TIME_1">^2</xliff:g>\nngo-<xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
@@ -2850,6 +2849,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Idatha yokusetshenziswa kwebhethri iyalinganiselwa futhi ayilingani nokusetshenziswa kwefoni lapho ishaja"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Ukusetshenziswa kwebhethri kuzotholakala ngemva kokusebenzisa ifoni yakho amahora ambalwa"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Ishadi lokusetshenziswa kwebhethri"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Ishadi lokusetshenziswa kwebhethri kwansuku zonke"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Ishadi lokusetshenziswa kwebhethri ngehora"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Izibalo zenqubo"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Izibalo ze-Geeky mayelana nezinqubo zokuqalisa"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Ukusetshenziswa kwememori"</string>
@@ -4674,8 +4675,8 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Vula manje"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Vala manje"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Ukungasebenzisi ukuthuthukiswa kwebhethri"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"Phatha ukusetshenziswa kwebhethri"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Setha ukusetshenziswa kwebhethri kuma-app"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Ukusetshenziswa kwebhethri yi-app"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Setha ukusetshenziswa kwebhethri kuma-app"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Akunamkhawulo"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Kulungisiwe"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Kuvinjelwe"</string>
@@ -5412,6 +5413,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Imidiya"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Phina i-media player"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Ukuze uqalise kabusha ngokushesha ukudlala, i-media player ihlala ivuliwe Kumasethingi asheshayo"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Bonisa izincomo zemidiya"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Ngokususelwe kumsebenzi wakho"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Fihla umdlali"</string>

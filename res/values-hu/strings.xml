@@ -70,10 +70,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Eszközét leválasztja a következő eszközről: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Új eszköz párosítása"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Jobb fül párosítása"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Bal fül párosítása"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Párosítsa a másik fület"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Sikerült a bal oldali hallókészülék csatlakoztatása.\n\nA jobb oldali párosításához győződjön meg arról, hogy be van kapcsolva, és készen áll a párosításra."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Sikerült a jobb oldali hallókészülék csatlakoztatása.\n\nA bal oldali párosításához győződjön meg arról, hogy be van kapcsolva, és készen áll a párosításra."</string>
@@ -2063,7 +2061,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Visszaállítja a beállításokat?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Ez visszaállítja a következőkre vonatkozó összes beállítást:\n\n"<li>"Letiltott alkalmazások"</li>\n<li>"Letiltott alkalmazásértesítések"</li>\n<li>"Alapértelmezett alkalmazások adott műveletekhez"</li>\n<li>"Alkalmazások háttéradat-korlátozása"</li>\n<li>"Minden engedélykorlátozás"</li>\n<li>"Akkumulátorhasználati beállítások"</li>\n\n"Az alkalmazásadatok nem vesznek el."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Visszaállítás"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"Tárhely kezelése"</string>
     <string name="filter" msgid="9039576690686251462">"Szűrő"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Válasszon szűrési lehetőségeket"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Az összes alkalmazás"</string>
@@ -2680,7 +2677,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Akkumulátorhasználat"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Használat az elmúlt 24 óra során"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Használat az utolsó teljes feltöltés óta"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Akkuhasználat"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Alkalmazás akkumulátorhasználata"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Használat részletei"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Az energiafelhasználás beállítása"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Mellékelt csomagok"</string>
@@ -2699,8 +2696,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Egyes funkciók korlátozva lehetnek"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Magasabb akkuhasználat"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Az akkumulátort leginkább használó alkalmazások megtekintése"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Töltés ideiglenesen korlátozva"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Az akkumulátor üzemidejének növelése érdekében. További információ."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"A töltés szünetel"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Az akkumulátor védelme az akkumulátor élettartamának növeléséhez\nKoppintson a további információkért"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Töltés folytatása"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Bizonyos körülmények között (pl. magas hőmérséklet és hosszú töltési idő esetén) a rendszer maximum <xliff:g id="PERCENT">%1$s</xliff:g>-os töltöttséget engedélyez az akkumulátor élettartamának megőrzése érdekében.\n\nAmint ezek a korlátozó körülmények megszűnnek, a telefon újra normál módban töltődik."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Bizonyos körülmények között (pl. magas hőmérséklet és hosszú töltési idő esetén) a rendszer maximum <xliff:g id="PERCENT">%1$s</xliff:g>-os töltöttséget engedélyez az akkumulátor élettartamának megőrzése érdekében.\n\nAmint ezek a korlátozó körülmények megszűnnek, a tablet újra normál módban töltődik."</string>
@@ -2736,6 +2735,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Ez az alkalmazás a háttérben is használhatja az akkumulátort. Emiatt az akkumulátor a vártnál gyorsabban lemerülhet."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Eltávolítás"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Mégse"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Teljes feltöltés"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Alkalmazásai akkumulátorhasználata nem tér el az átlagostól. Ha az alkalmazások túlzottan igénybe veszik az akkumulátort, telefonja javaslatot ad a lehetséges intézkedésekre.\n\nAz Akkumulátorkímélő módot bármikor bekapcsolhatja, ha az akkumulátor kezd nagyon lemerülni."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Alkalmazásai akkumulátorhasználata nem tér el az átlagostól. Ha az alkalmazások túlzottan igénybe veszik az akkumulátort, táblagépe javaslatot ad a lehetséges intézkedésekre.\n\nAz Akkumulátorkímélő módot bármikor bekapcsolhatja, ha az akkumulátor kezd nagyon lemerülni."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Alkalmazásai akkumulátorhasználata nem tér el az átlagostól. Ha az alkalmazások túlzottan igénybe veszik az akkumulátort, eszköze javaslatot ad a lehetséges intézkedésekre.\n\nAz Akkumulátorkímélő módot bármikor bekapcsolhatja, ha az akkumulátor kezd nagyon lemerülni."</string>
@@ -2780,7 +2780,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"A legmagasabb töltöttségi szinttel körülbelül ennyit bír:"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Az akkumulátorhasználati adatok hozzávetőlegesek, és az eszköz használatától függően módosulhatnak."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Akkuhasználat"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Akkuhasználat kezelése"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Összesen: <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> a háttérben\naz utolsó teljes feltöltés óta"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Összesen: <xliff:g id="TIME_0">^1</xliff:g> • Háttérben az\nelmúlt 24 óra során: <xliff:g id="TIME_1">^2</xliff:g>"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Összesen <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> a háttérben\na következő időintervallumban: <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
@@ -2849,6 +2848,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Az akkumulátorhasználati adatok hozzávetőlegesek; a telefon töltése közben nem mérik a használatot"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Az akkumulátorhasználati adatok a telefon néhány órás használata után állnak majd rendelkezésre."</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Akkumulátorhasználatot szemléltető diagram"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Napi akkumulátorhasználatot szemléltető diagram"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Óránkénti akkumulátorhasználatot szemléltető diagram"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Folyamatstatisztikák"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"A futó folyamatok statisztikái"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Memóriahasználat"</string>
@@ -4673,8 +4674,8 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Bekapcsolás most"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Kikapcsolás most"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Nem használ akkumulátoroptimalizálást"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"Akkuhasználat kezelése"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Akkumulátorhasználat beállítása az alkalmazásokhoz"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Alkalmazás akkumulátorhasználata"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Akkumulátorhasználat beállítása az alkalmazásokhoz"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Korlátlan"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimalizált"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Korlátozott"</string>
@@ -5411,6 +5412,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Média"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Médialejátszó kitűzése"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"A lejátszás gyors folytatásának érdekében a médialejátszó megnyitva marad a Gyorsbeállításokban."</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Javasolt médiatartalmak megjelenítése"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Az Ön tevékenységei alapján."</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Lejátszó elrejtése"</string>

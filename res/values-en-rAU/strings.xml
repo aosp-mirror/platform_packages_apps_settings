@@ -2061,7 +2061,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Reset app preferences?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"This will reset all preferences for:\n\n"<li>"Disabled apps"</li>\n<li>"Disabled app notifications"</li>\n<li>"Default applications for actions"</li>\n<li>"Background data restrictions for apps"</li>\n<li>"Any permission restrictions"</li>\n<li>"Battery usage settings"</li>\n\n"You will not lose any app data."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Reset apps"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"Manage space"</string>
     <string name="filter" msgid="9039576690686251462">"Filter"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Choose filter options"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"All apps"</string>
@@ -2416,9 +2415,9 @@
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Keep in mind&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Colours will change in media and images&lt;/li&gt; &lt;li&gt; Colour inversion works on all apps&lt;/li&gt; &lt;li&gt; To display a dark background, Dark theme can be used instead&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Autoclick (dwell timing)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"About auto-click (dwell timing)"</string>
-    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Learn more about auto-click (dwell timing)"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Learn more about autoclick (dwell timing)"</string>
     <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"You can set a connected mouse to click automatically when the cursor stops moving for a certain amount of time"</string>
-    <string name="accessibility_autoclick_description" msgid="6695732131412361101">"Auto-click can be helpful if clicking the mouse is difficult"</string>
+    <string name="accessibility_autoclick_description" msgid="6695732131412361101">"Autoclick can be helpful if clicking the mouse is difficult"</string>
     <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"Auto-click off"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Short"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0.2 seconds"</string>
@@ -2678,7 +2677,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Battery usage"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"View usage for past 24 hours"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"View usage from last full charge"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Battery usage"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"App battery usage"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Use details"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Adjust power use"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Included packages"</string>
@@ -2697,8 +2696,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Some features may be limited"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Higher battery usage"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"See apps with highest usage"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Charging temporarily limited"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"To preserve your battery. Learn more."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Charging is paused"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Protecting battery to extend battery lifespan\nTap to learn more"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Resume charging"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"In certain conditions, like high temperatures and long charging periods, charging may be limited to <xliff:g id="PERCENT">%1$s</xliff:g> to help preserve battery health.\n\nWhen those conditions end, your phone will automatically charge normally."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"In certain conditions, like high temperatures and long charging periods, charging may be limited to <xliff:g id="PERCENT">%1$s</xliff:g> to help preserve battery health.\n\nWhen those conditions end, your tablet will automatically charge normally."</string>
@@ -2734,6 +2735,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"This app will be able to use battery in the background. Your battery may run out sooner than expected."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Remove"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Cancel"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Charge to full"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Your apps are using a normal amount of battery. If apps use too much battery, your phone will suggest actions to take.\n\nYou can always turn on Battery Saver if you’re running low on battery."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Your apps are using a normal amount of battery. If apps use too much battery, your tablet will suggest actions that you can take.\n\nYou can always turn on Battery Saver if you’re running low on battery."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Your apps are using a normal amount of battery. If apps use too much battery, your device will suggest actions that you can take.\n\nYou can always turn on Battery Saver if you’re running low on battery."</string>
@@ -2778,7 +2780,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Full charge lasts about"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Battery usage data is approximate and can change based on usage."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Battery usage"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Manage battery usage"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> total • <xliff:g id="TIME_1">^2</xliff:g> background\nfrom last full charge"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> total • <xliff:g id="TIME_1">^2</xliff:g> background\nfor past 24 hours"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"<xliff:g id="TIME_0">^1</xliff:g> total • <xliff:g id="TIME_1">^2</xliff:g> background\nfor <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
@@ -2847,6 +2848,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Battery usage data is approximate and doesn\'t measure usage when phone is charging"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Battery usage data will be available after you use your phone for a few hours"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Battery usage chart"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Daily battery usage chart"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Hourly battery usage chart"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Process Stats"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Geeky stats about running processes"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Memory use"</string>
@@ -4671,8 +4674,8 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Turn on now"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Turn off now"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Not using battery optimisation"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"Manage battery usage"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Set battery usage for apps"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"App battery usage"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Set battery usage for apps"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Unrestricted"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimised"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Restricted"</string>
@@ -4978,7 +4981,7 @@
     <string name="storage_videos" msgid="6117698226447251033">"Videos"</string>
     <string name="storage_audio" msgid="5994664984472140386">"Audio"</string>
     <string name="storage_apps" msgid="3564291603258795216">"Apps"</string>
-    <string name="storage_documents_and_other" msgid="3293689243732236480">"Documents &amp; other"</string>
+    <string name="storage_documents_and_other" msgid="3293689243732236480">"Documents and other"</string>
     <string name="storage_system" msgid="8472410119822911844">"System"</string>
     <string name="storage_trash" msgid="2807138998886084856">"Bin"</string>
     <string name="storage_trash_dialog_title" msgid="2296169576049935200">"Empty bin?"</string>
@@ -5409,6 +5412,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Pin media player"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"To quickly resume playback, media player stays open in Quick Settings"</string>
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Show media on lock screen"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"To quickly resume playback, media player stays open on lock screen"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Show media recommendations"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Based on your activity"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Hide player"</string>

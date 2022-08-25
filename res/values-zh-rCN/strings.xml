@@ -70,10 +70,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"您的设备将断开与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>的连接。"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"与新设备配对"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"蓝牙"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"为右耳进行配对"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"为左耳进行配对"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"为另一个耳朵进行配对"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"您的助听器左耳已连接。\n\n如需为右耳进行配对，请确保设备已开启，并且已准备好进行配对。"</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"您的助听器右耳已连接。\n\n如需为左耳进行配对，请确保设备已开启，并且已准备好进行配对。"</string>
@@ -121,7 +119,7 @@
     <string name="bluetooth_off_footer" msgid="76578735660216295">"开启蓝牙即可连接到其他设备。"</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"您的设备"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"与新设备配对"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"停用蓝牙 A2DP 硬件卸载"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"停用蓝牙 A2DP 硬件分流"</string>
     <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"停用蓝牙 LE 音频硬件分流功能"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"要重启设备吗？"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"您需要重启设备才能让这项设置更改生效。"</string>
@@ -201,7 +199,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"系统默认设置"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"您无法从“设置”中选择此应用的语言。"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"语言可能与应用中可用的语言不同。部分应用可能不支持此设置。"</string>
-    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"此处仅显示支持选择语言的应用。"</string>
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"此处只显示了支持用户选择语言的应用。"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">要移除所选语言吗？</item>
       <item quantity="one">要移除所选语言吗？</item>
@@ -574,7 +572,7 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"要移除所有指纹吗？"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"移除“<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"要删除此指纹吗？"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"如果您确认删除，您设备上存储的与“<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”关联的指纹图片和模型将被删除"</string>
+    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"确认删除后，设备上存储的与“<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”关联的指纹图片和模型将被删除"</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"您将无法使用指纹来解锁手机或在应用中验证自己的身份。"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"您将无法使用指纹来解锁自己的工作资料、对购买交易进行授权或登录工作应用。"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"是，移除"</string>
@@ -1376,7 +1374,7 @@
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"开启，直到日出"</string>
     <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"关闭，直到日落"</string>
     <string name="dark_ui_title" msgid="3373976268671557416">"深色模式"</string>
-    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"排定时间"</string>
+    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"设定时间"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"无"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"在日落到日出期间开启"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"在设定的时间开启"</string>
@@ -1584,7 +1582,7 @@
     <string name="storage_menu_manage" msgid="7465522758801346408">"管理存储空间"</string>
     <string name="keywords_storage_menu_free" msgid="2275406357317597106">"清理, 存储空间"</string>
     <string name="storage_free_up_space_title" msgid="281047807372131975">"释放空间"</string>
-    <string name="storage_free_up_space_summary" msgid="6650027929735481350">"转到谷歌文件极客应用管理和释放空间"</string>
+    <string name="storage_free_up_space_summary" msgid="6650027929735481350">"前往谷歌文件极客应用管理和释放空间"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB计算机连接"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"连接方式"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"媒体设备(MTP)"</string>
@@ -2063,7 +2061,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"要重置应用偏好设置吗？"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"此操作将会重置以下所有偏好设置：\n\n"<li>"已停用的应用"</li>\n<li>"已停用的应用通知"</li>\n<li>"执行操作的默认应用"</li>\n<li>"应用的后台流量限制"</li>\n<li>"任何权限限制"</li>\n<li>"电池用量设置"</li>\n\n"您将不会丢失任何应用数据。"</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"重置应用"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"管理空间"</string>
     <string name="filter" msgid="9039576690686251462">"过滤"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"选择过滤选项"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"所有应用"</string>
@@ -2680,7 +2677,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"电池用量"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"查看过去 24 小时的使用情况"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"查看自上次充满电后的使用情况"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"电池用量"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"应用的电池用量"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"详细使用情况"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"省电提示"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"包含的软件包"</string>
@@ -2699,8 +2696,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"部分功能可能会受到限制"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"耗电量较高"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看耗电量较高的应用"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"充电暂时受限"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"旨在延长电池使用寿命。了解详情。"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"充电已暂停"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"为延长电池续航时间，目前正在保护电池\n点按即可了解详情"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"继续充电"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"在某些情况下（例如高温和长时间充电时），手机可能会限制充电量，充电到 <xliff:g id="PERCENT">%1$s</xliff:g> 时便暂停充电。这样有助于使电池保持良好状态。\n\n这类情况结束时，手机会自动恢复正常充电。"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"在某些情况下（例如高温和长时间充电时），平板电脑可能会限制充电量，充电到 <xliff:g id="PERCENT">%1$s</xliff:g> 时便暂停充电。这样有助于使电池保持良好状态。\n\n这类情况结束时，平板电脑会自动恢复正常充电。"</string>
@@ -2736,6 +2735,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"此应用将能够在后台消耗电量。这可能会导致电量耗尽速度比预期更快。"</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"移除"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"取消"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"充满电"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"您的应用目前耗电量正常。如果应用耗电量过高，您的手机会提供操作建议。\n\n如果电池电量不足，您可以随时开启省电模式。"</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"您的应用目前耗电量正常。如果应用耗电量过高，您的平板电脑会为您提供操作建议。\n\n如果电池电量不足，您可以随时开启省电模式。"</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"您的应用目前耗电量正常。如果应用耗电量过高，您的设备会为您提供操作建议。\n\n如果电池电量不足，您可以随时开启省电模式。"</string>
@@ -2780,7 +2780,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"电池充满电后的大致使用时长"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"电池用量数据为大致值，可能会因使用情形而变化。"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"电池用量"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"管理电池用量"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"共 <xliff:g id="TIME_0">^1</xliff:g> • 自电池上次充满电后，在后台使用了 <xliff:g id="TIME_1">^2</xliff:g>\n"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"共 <xliff:g id="TIME_0">^1</xliff:g> • 过去 24 小时内在后台使用了 <xliff:g id="TIME_1">^2</xliff:g>\n"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"共 <xliff:g id="TIME_0">^1</xliff:g> • 后台使用了 <xliff:g id="TIME_1">^2</xliff:g>\n（<xliff:g id="TIME_PERIOD">^3</xliff:g>）"</string>
@@ -2849,6 +2848,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"电池用量数据为大致值，并且手机在充电时不会估算电池用量"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"您使用手机几小时后，手机才会显示电池用量数据"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"电池用量图表"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"每日电池用量图表"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"每小时电池用量图表"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"进程统计信息"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"运行中进程的相关技术统计信息"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"内存用量"</string>
@@ -3591,7 +3592,7 @@
     <string name="live_caption_title" msgid="8617086825712756983">"实时字幕"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"自动生成媒体字幕"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"手机扬声器"</string>
-    <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"有线头戴式耳机"</string>
+    <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"有线耳机"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"播放兼容的媒体内容时，音频更具沉浸感"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"关闭"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"开启/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
@@ -4673,8 +4674,8 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"立即开启"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"立即关闭"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"未使用电池优化设置"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"管理电池用量"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"设置应用的电池用量"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"应用的电池用量"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"设置应用的电池用量"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"无限制"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"优化"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"受限"</string>
@@ -4980,7 +4981,7 @@
     <string name="storage_videos" msgid="6117698226447251033">"视频"</string>
     <string name="storage_audio" msgid="5994664984472140386">"音频"</string>
     <string name="storage_apps" msgid="3564291603258795216">"应用"</string>
-    <string name="storage_documents_and_other" msgid="3293689243732236480">"文档和其他"</string>
+    <string name="storage_documents_and_other" msgid="3293689243732236480">"文档和其他文件"</string>
     <string name="storage_system" msgid="8472410119822911844">"系统"</string>
     <string name="storage_trash" msgid="2807138998886084856">"回收站"</string>
     <string name="storage_trash_dialog_title" msgid="2296169576049935200">"要清空回收站吗？"</string>
@@ -5013,7 +5014,7 @@
     <string name="location_category" msgid="3496759112306219062">"位置"</string>
     <string name="location_indicator_settings_title" msgid="6655916258720093451">"状态栏位置指示器"</string>
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"对所有位置均显示，包括通过网络和连接方式获取的位置信息"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"强制启用 GNSS 测量结果全面跟踪"</string>
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"强制启用完整 GNSS 测量数据"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"在停用工作周期的情况下跟踪所有 GNSS 星座和频率"</string>
     <string name="input_method_category" msgid="2252659253631639005">"输入法"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"触控笔手写功能"</string>
@@ -5411,6 +5412,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"媒体"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"固定媒体播放器"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"为了方便您快速恢复播放，媒体播放器会在“快捷设置”中保持打开状态"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"显示媒体推荐内容"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"根据您的活动"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"隐藏播放器"</string>

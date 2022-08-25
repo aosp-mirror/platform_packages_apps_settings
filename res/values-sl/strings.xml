@@ -72,10 +72,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Povezava vaše naprave z napravo <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bo prekinjena."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Seznanitev nove naprave"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Seznani desno uho"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Seznani levo uho"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Seznanite drugo uho"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Povezava z levim slušnim aparatom je vzpostavljena.\n\nČe želite seznaniti desnega, se prepričajte, da je vklopljen in pripravljen za seznanjanje."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Povezava z desnim slušnim aparatom je vzpostavljena.\n\nČe želite seznaniti levega, se prepričajte, da je vklopljen in pripravljen za seznanjanje."</string>
@@ -584,7 +582,7 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Želite odstraniti vse prstne odtise?"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"Odstrani »<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>«"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Ali želite izbrisati ta prstni odtis?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"S tem boste izbrisali v napravi shranjene slike in model prstnega odtisa, povezane z odtisom »<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>«."</string>
+    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"S tem boste izbrisali v napravi shranjene slike in model prstnega odtisa, povezan z odtisom »<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>«."</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Za odklepanje telefona ali potrditev identitete v aplikacijah ne boste mogli uporabljati prstnega odtisa."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Za odklepanje delovnega profila, odobritev nakupov ali prijavo v delovne aplikacije ne boste mogli uporabljati prstnega odtisa."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Da, odstrani"</string>
@@ -2113,7 +2111,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Želite ponastaviti nastavitve aplikacij?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"S tem bodo ponastavljene vse nastavitve za:\n\n"<li>"onemogočene aplikacije,"</li>\n<li>"onemogočena obvestila aplikacij,"</li>\n<li>"privzete aplikacije za dejanja,"</li>\n<li>"omejitev prenosa podatkov v ozadju za aplikacije,"</li>\n<li>"omejitve dovoljenj,"</li>\n<li>"porabo energije baterije."</li>\n\n"Podatkov iz aplikacij ne boste izgubili."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Ponastavi aplikacije"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"Upravljaj prostor"</string>
     <string name="filter" msgid="9039576690686251462">"Filtriraj"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Izberite možnosti filtriranja"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Vse aplikacije"</string>
@@ -2496,7 +2493,7 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibriranje pri zvonjenju"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibriranje pri obvestilih"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Odziv na dotik"</string>
-    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Uporabi storitev <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Uporabi funkcijo <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Odpiranje aplikacije <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_auto_added_qs_tooltip_content" msgid="2941824314912928072">"Funkcija <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> je dodana v hitre nastavitve. Kadar koli jo lahko vklopite ali izklopite tako, da povlečete navzdol."</string>
     <string name="accessibility_service_qs_tooltip_content" msgid="6002493441414967868">"Funkcijo <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> lahko v hitre nastavitve dodate tudi z vrha zaslona."</string>
@@ -2732,7 +2729,7 @@
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Neomejena poraba energije baterije med izvajanjem v ozadju. Poraba energije baterije bo morda višja."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimizirano na podlagi vaše porabe. Priporočeno za večino aplikacij."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Omejena poraba energije baterije med izvajanjem v ozadju. Aplikacija morda ne bo delovala po pričakovanjih. Obvestila bodo morda zakasnjena."</string>
-    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Če spremenite način, na katerega aplikacija porablja energijo baterije, lahko vplivate na zmogljivost baterije."</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Če spremenite način, na katerega aplikacija porablja energijo baterije, lahko vplivate na delovanje aplikacije."</string>
     <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Ta aplikacija potrebuje <xliff:g id="STATE">%1$s</xliff:g> porabo energije baterije."</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"neomejeno"</string>
     <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"optimizirano"</string>
@@ -2744,7 +2741,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Poraba energije baterije"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Ogled porabe za zadnjih 24 ur"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Ogled porabe od zadnje polne napolnjenosti"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Poraba baterije"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Poraba energije baterije za aplikacijo"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Podrobnosti uporabe"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Prilagodi porabo energije"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Vključeni paketi"</string>
@@ -2763,8 +2760,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Nekatere funkcije bodo morda omejene"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Višja poraba energije baterije"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Ogled aplikacij z najvišjo porabo energije"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Začasno omejeno polnjenje"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Za ohranjanje baterije. Več o tem"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Polnjenje je začasno zaustavljeno"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Zaščita baterije za podaljšanje življenjske dobe baterije\nDotaknite se, če želite izvedeti več."</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Nadaljuj polnjenje"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"V nekaterih pogojih, na primer pri visokih temperaturah ali daljšem polnjenju, bo polnjenje morda omejeno na <xliff:g id="PERCENT">%1$s</xliff:g> za ohranjanje ustreznega stanja baterije.\n\nKo teh pogojev ni več, polnjenje baterije telefona samodejno zopet poteka kot običajno."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"V nekaterih pogojih, na primer pri visokih temperaturah ali daljšem polnjenju, bo polnjenje morda omejeno na <xliff:g id="PERCENT">%1$s</xliff:g> za ohranjanje ustreznega stanja baterije.\n\nKo teh pogojev ni več, polnjenje baterije tabličnega računalnika samodejno zopet poteka kot običajno."</string>
@@ -2810,6 +2809,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Ta aplikacija bo lahko porabljala energijo baterije za izvajanje v ozadju. Baterija se bo morda izpraznila prej, kot bi pričakovali."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Odstrani"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Prekliči"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Napolni do konca"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Aplikacije porabljajo običajno količino energije baterije. V primeru prekomerne porabe energije vam bo telefon predlagal ustrezne ukrepe.\n\nČe bateriji zmanjkuje energije, lahko vedno vklopite varčevanje z energijo baterije."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Aplikacije porabljajo običajno količino energije baterije. V primeru prekomerne porabe energije vam bo tablični računalnik predlagal ustrezne ukrepe.\n\nČe bateriji zmanjkuje energije, lahko vedno vklopite varčevanje z energijo baterije."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Aplikacije porabljajo običajno količino energije baterije. V primeru prekomerne porabe energije vam bo naprava predlagala ustrezne ukrepe.\n\nČe bateriji zmanjkuje energije, lahko vedno vklopite varčevanje z energijo baterije."</string>
@@ -2858,7 +2858,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Polno napolnjena naprava deluje približno"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Podatki o porabi energije baterije so približni in se lahko spremenijo glede na uporabo naprave."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Poraba baterije"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Upravljanje porabe baterije"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Skupaj: <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> v ozadju\nod zadnje polne napolnjenosti"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Skupaj: <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> v ozadju\nv zadnjih 24 urah"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Skupaj: <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> v ozadju\nv časovnem obdobju <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
@@ -2927,6 +2926,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Podatki o porabi energije baterije so približni in ne merijo porabe, ko se telefon polni."</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Podatki o porabi energije baterije bodo na voljo po nekajurni uporabi telefona."</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Grafikon porabe energije baterije"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Grafikon porabe energije baterije po dnevih"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Grafikon porabe energije baterije po urah"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistični podatki o procesih"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistični podatki o procesih, ki se izvajajo"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Poraba pomnilnika"</string>
@@ -3837,7 +3838,7 @@
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Oblački"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Vse nastavitve oblačkov"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Prikaži ta pogovor v oblačku"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Prikaži plavajočo ikono čez aplikacije."</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Prikaži plavajočo ikono čez aplikacije"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Aplikacija <xliff:g id="APP_NAME">%1$s</xliff:g> lahko nekatera obvestila prikaže kot oblačke"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"Želite vklopiti oblačke za napravo?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Če vklopite oblačke za to aplikacijo, bodo vklopljeni tudi za napravo.\n\nTo vpliva na druge aplikacije ali pogovore, v katerih je prikaz v oblačkih že omogočen."</string>
@@ -4819,8 +4820,8 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Vklopi zdaj"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Izklopi zdaj"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Ne uporablja optimizacije baterije"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"Upravljanje porabe baterije"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Nastavitev porabe baterije za aplikacije"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Poraba energije baterije za aplikacijo"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Nastavitev porabe energije baterije za aplikacije"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Neomejeno"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimizirano"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Omejeno"</string>
@@ -5587,6 +5588,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Predstavnost"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Pripni predvajalnik predstavnosti"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Predvajalnik predstavnosti ostane odprt v hitrih nastavitvah, da je omogočeno hitro nadaljevanje predvajanja."</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Prikaži priporočila glede predstavnosti"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Priporočila temeljijo glede na vašo dejavnost."</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Skrij predvajalnik"</string>

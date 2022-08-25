@@ -72,10 +72,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"המכשיר שלך יתנתק מהמכשיר <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"התאמה של מכשיר חדש"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"התאמה באוזן ימין"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"התאמה באוזן שמאל"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"התאמה באוזן השנייה"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"מכשיר השמיעה באוזן שמאל מחובר.\n\nכדי להתאים את מכשיר השמיעה באוזן ימין, צריך לוודא שהוא פועל ומוכן להתאמה."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"מכשיר השמיעה באוזן ימין מחובר.\n\nכדי להתאים את מכשיר השמיעה באוזן שמאל, צריך לוודא שהוא פועל ומוכן להתאמה."</string>
@@ -1324,7 +1322,7 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"פועל"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"פועל – מבוסס על זיהוי פנים"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"זיהוי פנים"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"התאמה אוטומטית של כיוון המסך כשמזיזים את הטלפון ממאוזן למאונך ולהיפך"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"שינוי אוטומטי של כיוון המסך כשהופכים את הטלפון ממצב של תצוגה לאורך למצב של תצוגה לרוחב"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"מידע נוסף על הסיבוב האוטומטי"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"בעת הזזת הטלפון ממצב \'לאורך\' למצב \'לרוחב\' ולהיפך"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"רזולוציית המסך"</string>
@@ -2113,7 +2111,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"לאפס את העדפות האפליקציות?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"הפעולה תאפס את כל ההעדפות עבור:\n\n"<li>"אפליקציות מושבתות"</li>\n<li>"השבתת התראות של אפליקציות"</li>\n<li>"אפליקציות שהן ברירת המחדל לביצוע פעולות"</li>\n<li>"הגבלות של נתוני רקע לאפליקציות"</li>\n<li>"הגבלת הרשאות"</li>\n<li>"הגדרות שימוש בסוללה"</li>\n\n"נתוני האפליקציות לא יאבדו."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"איפוס אפליקציות"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"ניהול נפח האחסון"</string>
     <string name="filter" msgid="9039576690686251462">"סינון"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"בחירת אפשרויות סינון"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"כל האפליקציות"</string>
@@ -2744,7 +2741,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"שימוש בסוללה"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"נתוני השימוש ב-24 השעות האחרונות"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"השימוש מאז הטעינה המלאה האחרונה"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"שימוש בסוללה"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"שימוש בסוללה לאפליקציה"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"פרטי שימוש"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"התאמת צריכת סוללה"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"חבילות כלולות"</string>
@@ -2763,8 +2760,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"ייתכן שחלק מהתכונות מוגבלות"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"שימוש מוגבר בסוללה"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"האפליקציות המובילות במידת השימוש בסוללה"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"הטעינה מוגבלת זמנית"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"כדי לשמור על תקינות הסוללה. מידע נוסף."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"הטעינה הושהתה"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"כדאי להגן על הסוללה כדי להאריך את חיי הסוללה\nאפשר להקיש כדי לקרוא מידע נוסף"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"המשך הטעינה"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"בתנאים מסוימים, למשל בטמפרטורה גבוהה או כשטעינה נמשכת הרבה זמן, יכול להיות שהיא תוגבל ל-<xliff:g id="PERCENT">%1$s</xliff:g> כדי לשמור על תקינות הסוללה.\n\nכשהתנאים ישתנו בחזרה, הטלפון יחזור להיטען כרגיל באופן אוטומטי."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"במצבים מסוימים, כמו טמפרטורה גבוהה וטעינה במשך הרבה זמן, יכול להיות שתהיה הגבלה של <xliff:g id="PERCENT">%1$s</xliff:g> על הטעינה כדי לשמור על תקינות הסוללה.\n\nכשמצבים כאלה מסתיימים, טעינת הטאבלט תחזור למצב הרגיל באופן אוטומטי."</string>
@@ -2810,6 +2809,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"האפליקציה הזו תוכל להשתמש בסוללה ברקע. ייתכן שהסוללה תתרוקן מוקדם מהצפוי."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"הסרה"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"ביטול"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"טעינה מלאה"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"האפליקציות משתמשות בכמות רגילה של צריכת סוללה. אם אפליקציות יצרכו יותר מדי מהסוללה, הטלפון יציע פעולות שאפשר לנקוט.\n\nניתן תמיד להפעיל את תכונת החיסכון בסוללה אם הסוללה עומדת להתרוקן."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"האפליקציות משתמשות בכמות רגילה של צריכת סוללה. אם אפליקציות יצרכו יותר מדי מהסוללה, הטאבלט יציע פעולות שאפשר לנקוט.\n\nניתן תמיד להפעיל את תכונת החיסכון בסוללה אם הסוללה עומדת להתרוקן."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"האפליקציות משתמשות בכמות רגילה של צריכת סוללה. אם אפליקציות יצרכו יותר מדי מהסוללה, המכשיר יציע פעולות שאפשר לנקוט.\n\nניתן תמיד להפעיל את תכונת החיסכון בסוללה אם הסוללה עומדת להתרוקן."</string>
@@ -2858,7 +2858,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"טעינה מלאה מספיקה בערך ל"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"נתוני השימוש בסוללה משוערים ועשויים להשתנות בהתאם לשימוש בפועל."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"שימוש בסוללה"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"ניהול השימוש בסוללה"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> בסה\"כ • <xliff:g id="TIME_1">^2</xliff:g> ברקע\nמאז הטעינה המלאה האחרונה"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> בסה\"כ • <xliff:g id="TIME_1">^2</xliff:g> ברקע\nבמהלך 24 השעות האחרונות"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"<xliff:g id="TIME_0">^1</xliff:g> בסה\"כ • <xliff:g id="TIME_1">^2</xliff:g> ברקע\nבשעות <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
@@ -2927,6 +2926,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"נתוני השימוש בסוללה משוערים ולא כוללים מדדים של השימוש בסוללה כשהטלפון בטעינה"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"נתוני השימוש בסוללה יהיו זמינים לאחר שייעשה שימוש בטלפון שלך במשך מספר שעות"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"תרשים של השימוש בסוללה"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"תרשים של השימוש היומי בסוללה"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"תרשים של השימוש השעתי בסוללה"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"סטטיסטיקה של תהליך"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"סטטיסטיקה של מומחי מחשבים על התהליכים הפועלים"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"זיכרון בשימוש"</string>
@@ -3937,7 +3938,7 @@
     <string name="notification_importance_default_title" msgid="8875198696330289686">"גבוהה"</string>
     <string name="notification_importance_high_title" msgid="394129291760607808">"הופעה במסך"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"חסימה"</string>
-    <string name="notification_silence_title" msgid="4085829874452944989">"שקט"</string>
+    <string name="notification_silence_title" msgid="4085829874452944989">"שקטה"</string>
     <string name="notification_alert_title" msgid="1632401211722199217">"ברירת מחדל"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"סוגי הפרעות שאפשר להפעיל"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"האפליקציה יכולה להפעיל צלילים ורטט ו/או להציג התראות קופצות במסך"</string>
@@ -4819,8 +4820,8 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"הפעלה עכשיו"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"כיבוי עכשיו"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"לא נעשה שימוש באופטימיזציה של סוללה"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"ניהול השימוש בסוללה"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"הגדרת השימוש בסוללה לאפליקציות"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"שימוש בסוללה לאפליקציה"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"הגדרת השימוש בסוללה לאפליקציות"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"ללא הגבלה"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"אופטימיזציה"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"עם הגבלה"</string>
@@ -5587,6 +5588,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"מדיה"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"הצמדה של נגן המדיה"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"לצורך המשך מהיר של ההפעלה, נגן המדיה נשאר פתוח בהגדרות המהירות"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"הצגת המלצות על מדיה"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"על סמך הפעילות שלך"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"הסתרת הנגן"</string>
