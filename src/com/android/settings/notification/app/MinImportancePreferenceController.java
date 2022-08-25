@@ -68,7 +68,7 @@ public class MinImportancePreferenceController extends NotificationPreferenceCon
     @Override
     public void updateState(Preference preference) {
         if (mAppRow != null && mChannel != null) {
-            preference.setEnabled(mAdmin == null && !mChannel.isImportanceLockedByOEM());
+            preference.setEnabled(mAdmin == null && isChannelConfigurable(mChannel));
 
             RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
             pref.setChecked(mChannel.getImportance() == IMPORTANCE_MIN);

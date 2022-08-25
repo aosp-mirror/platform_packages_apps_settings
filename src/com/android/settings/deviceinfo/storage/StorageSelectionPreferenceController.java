@@ -26,8 +26,8 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.widget.SettingsSpinnerAdapter;
 import com.android.settingslib.widget.SettingsSpinnerPreference;
-import com.android.settingslib.widget.settingsspinner.SettingsSpinnerAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -54,6 +54,7 @@ import com.android.settings.network.ims.MockWifiCallingQueryImsState;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.widget.SettingsMainSwitchBar;
+import com.android.settings.widget.SettingsMainSwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -71,6 +72,7 @@ import org.robolectric.util.ReflectionHelpers;
 public class WifiCallingSettingsForSubTest {
     private static final int SUB_ID = 2;
 
+    private static final String SWITCH_BAR = "wifi_calling_switch_bar";
     private static final String BUTTON_WFC_MODE = "wifi_calling_mode";
     private static final String BUTTON_WFC_ROAMING_MODE = "wifi_calling_roaming_mode";
     private static final String PREFERENCE_NO_OPTIONS_DESC = "no_options_description";
@@ -99,6 +101,8 @@ public class WifiCallingSettingsForSubTest {
     @Mock
     private View mView;
     @Mock
+    private SettingsMainSwitchPreference mSwitchBarPreference;
+    @Mock
     private LinkifyDescriptionPreference mDescriptionView;
     @Mock
     private ListWithEntrySummaryPreference mButtonWfcMode;
@@ -115,6 +119,7 @@ public class WifiCallingSettingsForSubTest {
         doReturn(mContext.getTheme()).when(mActivity).getTheme();
 
         mFragment = spy(new TestFragment());
+        mFragment.setSwitchBar(mSwitchBarPreference);
         doReturn(mActivity).when(mFragment).getActivity();
         doReturn(mContext).when(mFragment).getContext();
         doReturn(mock(Intent.class)).when(mActivity).getIntent();
@@ -124,10 +129,6 @@ public class WifiCallingSettingsForSubTest {
         final Bundle bundle = new Bundle();
         when(mFragment.getArguments()).thenReturn(bundle);
         doNothing().when(mFragment).addPreferencesFromResource(anyInt());
-        doReturn(mock(ListWithEntrySummaryPreference.class)).when(mFragment).findPreference(any());
-        doReturn(mButtonWfcMode).when(mFragment).findPreference(BUTTON_WFC_MODE);
-        doReturn(mButtonWfcRoamingMode).when(mFragment).findPreference(BUTTON_WFC_ROAMING_MODE);
-        doReturn(mDescriptionView).when(mFragment).findPreference(PREFERENCE_NO_OPTIONS_DESC);
         doNothing().when(mFragment).finish();
         doReturn(mView).when(mFragment).getView();
 
@@ -343,6 +344,29 @@ public class WifiCallingSettingsForSubTest {
     }
 
     protected class TestFragment extends WifiCallingSettingsForSub {
+        private SettingsMainSwitchPreference mSwitchPref;
+
+        protected void setSwitchBar(SettingsMainSwitchPreference switchPref) {
+            mSwitchPref = switchPref;
+        }
+
+        @Override
+        public <T extends Preference> T findPreference(CharSequence key) {
+            if (SWITCH_BAR.equals(key)) {
+                return (T) mSwitchPref;
+            }
+            if (BUTTON_WFC_MODE.equals(key)) {
+                return (T) mButtonWfcMode;
+            }
+            if (BUTTON_WFC_ROAMING_MODE.equals(key)) {
+                return (T) mButtonWfcRoamingMode;
+            }
+            if (PREFERENCE_NO_OPTIONS_DESC.equals(key)) {
+                return (T) mDescriptionView;
+            }
+            return (T) mock(ListWithEntrySummaryPreference.class);
+        }
+
         @Override
         protected Object getSystemService(final String name) {
             switch (name) {

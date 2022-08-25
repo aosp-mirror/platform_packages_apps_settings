@@ -21,18 +21,13 @@
     android:title="@string/vision_settings_title">
 
     <Preference
-        android:key="font_size_preference"
-        android:icon="@drawable/ic_font_size"
-        android:summary="@string/short_summary_font_size"
-        android:title="@string/title_font_size"
-        settings:controller="com.android.settings.accessibility.FontSizePreferenceController" />
-
-    <com.android.settings.display.ScreenZoomPreference
-        android:key="force_density_preference"
-        android:icon="@drawable/ic_screen_zoom"
-        android:summary="@string/screen_zoom_short_summary"
-        android:title="@string/screen_zoom_title"
-        settings:controller="com.android.settings.accessibility.ScreenSizePreferenceController" />
+        android:fragment="com.android.settings.accessibility.TextReadingPreferenceFragmentForSetupWizard"
+        android:icon="@drawable/ic_adaptive_font_download"
+        android:key="text_reading_options"
+        android:persistent="false"
+        android:title="@string/accessibility_text_reading_options_title"
+        settings:keywords="text_reading_options"
+        settings:controller="com.android.settings.accessibility.TextReadingFragmentForSuwController"/>
 
     <Preference
         android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragmentForSetupWizard"

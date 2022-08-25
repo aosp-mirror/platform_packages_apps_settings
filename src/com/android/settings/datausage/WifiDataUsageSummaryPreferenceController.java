@@ -26,23 +26,19 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.net.DataUsageController;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
  * The controller displays a data usage chart for the specified Wi-Fi network.
  */
 public class WifiDataUsageSummaryPreferenceController extends DataUsageSummaryPreferenceController {
-    final String mNetworkId;
+    final Set<String> mAllNetworkKeys;
 
-    public WifiDataUsageSummaryPreferenceController(Activity activity,
-            Lifecycle lifecycle, PreferenceFragmentCompat fragment, CharSequence networkId) {
+    public WifiDataUsageSummaryPreferenceController(Activity activity, Lifecycle lifecycle,
+            PreferenceFragmentCompat fragment, Set<String> allNetworkKeys) {
         super(activity, lifecycle, fragment, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-
-        if (networkId == null) {
-            mNetworkId = null;
-        } else {
-            mNetworkId = String.valueOf(networkId);
-        }
+        mAllNetworkKeys = new HashSet<>(allNetworkKeys);
     }
 
     @Override
@@ -52,10 +48,11 @@ public class WifiDataUsageSummaryPreferenceController extends DataUsageSummaryPr
         }
 
         final DataUsageSummaryPreference mPreference = (DataUsageSummaryPreference) preference;
-        // TODO(b/126299427): Currently gets data usage of whole Wi-Fi networks, but should get
-        //  specified one.
         final NetworkTemplate template = new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI)
-                .setWifiNetworkKeys(Set.of(mNetworkId)).build();
+                .setWifiNetworkKeys(mAllNetworkKeys).build();
+        if (mDataUsageController == null) {
+            updateConfiguration(mContext, mSubId, getSubscriptionInfo(mSubId));
+        }
         final DataUsageController.DataUsageInfo info = mDataUsageController.getDataUsageInfo(
                 template);
         mDataInfoController.updateDataLimit(info, mPolicyEditor.getPolicy(template));

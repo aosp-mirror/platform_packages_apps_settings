@@ -39,13 +39,13 @@ public class AddAppNetworksActivityTest {
     @Mock
     private IActivityManager mIActivityManager;
 
-    private AddAppNetworksActivity mActivity;
+    private FakeAddAppNetworksActivity mActivity;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mActivity = Robolectric.buildActivity(AddAppNetworksActivity.class).create().get();
+        mActivity = Robolectric.buildActivity(FakeAddAppNetworksActivity.class).create().get();
         mActivity.mActivityManager = mIActivityManager;
     }
 
@@ -77,11 +77,27 @@ public class AddAppNetworksActivityTest {
         assertThat(mActivity.showAddNetworksFragment()).isTrue();
     }
 
+    @Test
+    public void showAddNetworksFragment_isAddWifiConfigNotAllow_returnFalse() {
+        mActivity.mIsAddWifiConfigAllow = false;
+
+        assertThat(mActivity.showAddNetworksFragment()).isFalse();
+    }
+
     private void fakeCallingPackage(@Nullable String packageName) {
         try {
             when(mIActivityManager.getLaunchedFromPackage(any())).thenReturn(packageName);
         } catch (RemoteException e) {
             // Do nothing.
+        }
+    }
+
+    private static class FakeAddAppNetworksActivity extends AddAppNetworksActivity {
+        boolean mIsAddWifiConfigAllow = true;
+
+        @Override
+        boolean isAddWifiConfigAllow() {
+            return mIsAddWifiConfigAllow;
         }
     }
 }

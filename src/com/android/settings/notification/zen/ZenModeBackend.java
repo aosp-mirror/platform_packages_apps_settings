@@ -287,6 +287,20 @@ public class ZenModeBackend {
         }
     }
 
+    protected static int getContactSettingFromZenPolicySetting(int setting) {
+        switch (setting) {
+            case ZenPolicy.PEOPLE_TYPE_ANYONE:
+                return NotificationManager.Policy.PRIORITY_SENDERS_ANY;
+            case  ZenPolicy.PEOPLE_TYPE_CONTACTS:
+                return NotificationManager.Policy.PRIORITY_SENDERS_CONTACTS;
+            case ZenPolicy.PEOPLE_TYPE_STARRED:
+                return NotificationManager.Policy.PRIORITY_SENDERS_STARRED;
+            case ZenPolicy.PEOPLE_TYPE_NONE:
+            default:
+                return SOURCE_NONE;
+        }
+    }
+
     protected int getAlarmsTotalSilencePeopleSummary(int category) {
         if (category == NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES) {
             return R.string.zen_mode_none_messages;

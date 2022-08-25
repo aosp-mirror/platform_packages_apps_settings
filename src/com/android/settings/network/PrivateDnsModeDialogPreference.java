@@ -97,23 +97,19 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
 
     public PrivateDnsModeDialogPreference(Context context) {
         super(context);
-        initialize();
     }
 
     public PrivateDnsModeDialogPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initialize();
     }
 
     public PrivateDnsModeDialogPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initialize();
     }
 
     public PrivateDnsModeDialogPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        initialize();
     }
 
     private final AnnotationSpan.LinkInfo mUrlLinkInfo = new AnnotationSpan.LinkInfo(
@@ -131,12 +127,6 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
         }
     });
 
-    private void initialize() {
-        // Add the "Restricted" icon resource so that if the preference is disabled by the
-        // admin, an information button will be shown.
-        setWidgetLayoutResource(R.layout.restricted_icon);
-    }
-
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
@@ -145,13 +135,6 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
             // it could act as a click target. The preference itself will have been disabled
             // by the controller.
             holder.itemView.setEnabled(true);
-        }
-
-        final View restrictedIcon = holder.findViewById(R.id.restricted_icon);
-        if (restrictedIcon != null) {
-            // Show the "Restricted" icon if, and only if, the preference was disabled by
-            // the admin.
-            restrictedIcon.setVisibility(isDisabledByAdmin() ? View.VISIBLE : View.GONE);
         }
     }
 

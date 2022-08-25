@@ -32,8 +32,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settingslib.core.lifecycle.Lifecycle;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,8 +46,6 @@ public class DisabledSubscriptionControllerTest {
 
     @Mock
     private SubscriptionManager mSubscriptionManager;
-    @Mock
-    private Lifecycle mLifecycle;
 
     private PreferenceScreen mScreen;
     private PreferenceManager mPreferenceManager;
@@ -72,7 +68,7 @@ public class DisabledSubscriptionControllerTest {
         mScreen.addPreference(mCategory);
 
         mController = new DisabledSubscriptionController(mContext, KEY);
-        mController.init(mLifecycle, SUB_ID);
+        mController.init(SUB_ID);
     }
 
     @Test

@@ -19,8 +19,9 @@ package com.android.settings.notification.app;
 import android.app.people.IPeopleManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
 import android.os.ServiceManager;
-import android.util.Log;
+import android.service.notification.ConversationChannelWrapper;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -32,12 +33,16 @@ import java.util.List;
 
 public class ConversationListSettings extends DashboardFragment {
     private static final String TAG = "ConvoListSettings";
-    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     NotificationBackend mBackend = new NotificationBackend();
     IPeopleManager mPs;
 
     protected List<AbstractPreferenceController> mControllers = new ArrayList<>();
+    private NoConversationsPreferenceController mNoConversationsController;
+    private PriorityConversationsPreferenceController mPriorityConversationsController;
+    private AllConversationsPreferenceController mAllConversationsController;
+    private RecentConversationsPreferenceController mRecentConversationsController;
+    private boolean mUpdatedInOnCreate = false;
 
     public ConversationListSettings() {
         mPs = IPeopleManager.Stub.asInterface(
@@ -62,10 +67,43 @@ public class ConversationListSettings extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mControllers = new ArrayList<>();
-        mControllers.add(new NoConversationsPreferenceController(context, mBackend, mPs));
-        mControllers.add(new PriorityConversationsPreferenceController(context, mBackend));
-        mControllers.add(new AllConversationsPreferenceController(context, mBackend));
-        mControllers.add(new RecentConversationsPreferenceController(context, mBackend, mPs));
+        mNoConversationsController = new NoConversationsPreferenceController(context);
+        mControllers.add(mNoConversationsController);
+        mPriorityConversationsController =
+                new PriorityConversationsPreferenceController(context, mBackend);
+        mControllers.add(mPriorityConversationsController);
+        mAllConversationsController = new AllConversationsPreferenceController(context, mBackend);
+        mControllers.add(mAllConversationsController);
+        mRecentConversationsController =
+                new RecentConversationsPreferenceController(context, mBackend, mPs);
+        mControllers.add(mRecentConversationsController);
         return new ArrayList<>(mControllers);
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        update();
+        mUpdatedInOnCreate = true;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (mUpdatedInOnCreate) {
+            mUpdatedInOnCreate = false;
+        } else {
+            update();
+        }
+    }
+
+    private void update() {
+        List<ConversationChannelWrapper> conversationList =
+                mBackend.getConversations(false).getList();
+        boolean hasContent = mPriorityConversationsController.updateList(conversationList)
+                | mAllConversationsController.updateList(conversationList)
+                | mRecentConversationsController.updateList();
+        mNoConversationsController.setAvailable(!hasContent);
+        mNoConversationsController.displayPreference(getPreferenceScreen());
     }
 }

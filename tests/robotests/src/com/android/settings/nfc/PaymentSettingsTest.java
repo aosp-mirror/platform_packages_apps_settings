@@ -53,7 +53,7 @@ import java.util.List;
 @Config(shadows = {PaymentSettingsTest.ShadowPaymentBackend.class, ShadowNfcAdapter.class})
 public class PaymentSettingsTest {
 
-    static final String PAYMENT_KEY = "nfc_payment";
+    static final String PAYMENT_KEY = "nfc_payment_app";
     static final String FOREGROUND_KEY = "nfc_foreground";
 
     private Context mContext;

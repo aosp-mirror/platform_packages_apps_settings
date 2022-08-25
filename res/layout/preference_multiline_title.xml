@@ -38,6 +38,7 @@
             android:textColor="?android:attr/textColorPrimary"
             android:textAlignment="center"
             android:ellipsize="marquee"
+            android:hyphenationFrequency="normalFast"
             android:fadingEdge="horizontal" />
 
         <TextView
@@ -50,6 +51,7 @@
             android:textAlignment="viewStart"
             android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
             android:textColor="?android:attr/textColorSecondary"
+            android:hyphenationFrequency="normalFast"
             android:maxLines="10" />
 
     </RelativeLayout>

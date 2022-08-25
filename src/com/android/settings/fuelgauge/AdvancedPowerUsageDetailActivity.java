@@ -68,6 +68,7 @@ public class AdvancedPowerUsageDetailActivity extends AppCompatActivity {
                     .setTitleRes(R.string.battery_details_title)
                     .setArguments(args)
                     .setSourceMetricsCategory(SettingsEnums.APPLICATIONS_INSTALLED_APP_DETAILS)
+                    .addFlags(intent.getFlags())
                     .launch();
         }
 

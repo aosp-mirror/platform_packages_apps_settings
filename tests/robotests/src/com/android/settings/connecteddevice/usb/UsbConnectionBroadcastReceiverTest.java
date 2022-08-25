@@ -65,11 +65,12 @@ public class UsbConnectionBroadcastReceiverTest {
         final Intent intent = new Intent();
         intent.setAction(UsbManager.ACTION_USB_STATE);
         intent.putExtra(UsbManager.USB_CONNECTED, true);
+        intent.putExtra(UsbManager.USB_CONFIGURED, true);
 
         mReceiver.onReceive(mContext, intent);
 
         verify(mListener).onUsbConnectionChanged(true /* connected */, UsbManager.FUNCTION_NONE,
-                POWER_ROLE_NONE, DATA_ROLE_NONE);
+                POWER_ROLE_NONE, DATA_ROLE_NONE, /* isUsbConfigured= */ true);
     }
 
     @Test
@@ -77,11 +78,12 @@ public class UsbConnectionBroadcastReceiverTest {
         final Intent intent = new Intent();
         intent.setAction(UsbManager.ACTION_USB_STATE);
         intent.putExtra(UsbManager.USB_CONNECTED, false);
+        intent.putExtra(UsbManager.USB_CONFIGURED, true);
 
         mReceiver.onReceive(mContext, intent);
 
         verify(mListener).onUsbConnectionChanged(false /* connected */, UsbManager.FUNCTION_NONE,
-                POWER_ROLE_NONE, DATA_ROLE_NONE);
+                POWER_ROLE_NONE, DATA_ROLE_NONE, /* isUsbConfigured= */ true);
     }
 
     @Test
@@ -91,11 +93,12 @@ public class UsbConnectionBroadcastReceiverTest {
         intent.putExtra(UsbManager.USB_CONNECTED, true);
         intent.putExtra(UsbManager.USB_FUNCTION_MTP, true);
         intent.putExtra(UsbManager.USB_DATA_UNLOCKED, true);
+        intent.putExtra(UsbManager.USB_CONFIGURED, true);
 
         mReceiver.onReceive(mContext, intent);
 
         verify(mListener).onUsbConnectionChanged(true /* connected */, UsbManager.FUNCTION_MTP,
-                POWER_ROLE_NONE, DATA_ROLE_NONE);
+                POWER_ROLE_NONE, DATA_ROLE_NONE, /* isUsbConfigured= */ true);
     }
 
     @Test
@@ -105,26 +108,41 @@ public class UsbConnectionBroadcastReceiverTest {
         intent.putExtra(UsbManager.USB_CONNECTED, true);
         intent.putExtra(UsbManager.USB_FUNCTION_NCM, true);
         intent.putExtra(UsbManager.USB_DATA_UNLOCKED, true);
+        intent.putExtra(UsbManager.USB_CONFIGURED, true);
 
         mReceiver.onReceive(mContext, intent);
 
         verify(mListener).onUsbConnectionChanged(/* connected */ true, UsbManager.FUNCTION_NCM,
-                POWER_ROLE_NONE, DATA_ROLE_NONE);
+                POWER_ROLE_NONE, DATA_ROLE_NONE, /* isUsbConfigured= */ true);
     }
 
     @Test
-    public void onReceive_usbPortStatus_invokeCallback() {
+    public void onReceive_usbPortStatus_invokesCallback() {
         final Intent intent = new Intent();
         intent.setAction(UsbManager.ACTION_USB_PORT_CHANGED);
         final UsbPortStatus status = new UsbPortStatus(0, POWER_ROLE_SINK,
                 DATA_ROLE_DEVICE, 0, CONTAMINANT_PROTECTION_NONE,
                 CONTAMINANT_DETECTION_NOT_SUPPORTED);
         intent.putExtra(UsbManager.EXTRA_PORT_STATUS, status);
+        intent.putExtra(UsbManager.USB_CONFIGURED, true);
 
         mReceiver.onReceive(mContext, intent);
 
         verify(mListener).onUsbConnectionChanged(false /* connected */, UsbManager.FUNCTION_NONE,
-                POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+                POWER_ROLE_SINK, DATA_ROLE_DEVICE, /* isUsbConfigured= */ true);
+    }
+
+    @Test
+    public void onReceive_usbConfiguredIsFalse_invokesCallback() {
+        final Intent intent = new Intent();
+        intent.setAction(UsbManager.ACTION_USB_STATE);
+        intent.putExtra(UsbManager.USB_CONNECTED, true);
+        intent.putExtra(UsbManager.USB_CONFIGURED, false);
+
+        mReceiver.onReceive(mContext, intent);
+
+        verify(mListener).onUsbConnectionChanged(true /* connected */, UsbManager.FUNCTION_NONE,
+                POWER_ROLE_NONE, DATA_ROLE_NONE, /* isUsbConfigured= */ false);
     }
 
     @Test

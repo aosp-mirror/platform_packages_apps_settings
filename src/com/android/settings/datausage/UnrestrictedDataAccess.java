@@ -25,6 +25,7 @@ import android.view.View;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.applications.AppIconCacheManager;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
 import com.android.settingslib.search.SearchIndexable;
@@ -110,6 +111,12 @@ public class UnrestrictedDataAccess extends DashboardFragment {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.unrestricted_data_access_settings;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        AppIconCacheManager.getInstance().release();
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

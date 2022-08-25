@@ -38,10 +38,8 @@ import com.android.settingslib.widget.LayoutPreference;
 public class ZenAutomaticRuleHeaderPreferenceController extends AbstractZenModePreferenceController
         implements PreferenceControllerMixin {
 
-    private final String KEY = PREF_KEY_APP_HEADER;
     private final PreferenceFragmentCompat mFragment;
     private AutomaticZenRule mRule;
-    private String mId;
     private EntityHeaderController mController;
 
     public ZenAutomaticRuleHeaderPreferenceController(Context context,
@@ -52,7 +50,11 @@ public class ZenAutomaticRuleHeaderPreferenceController extends AbstractZenModeP
 
     @Override
     public String getPreferenceKey() {
-        return KEY;
+        return PREF_KEY_APP_HEADER;
+    }
+
+    void setRule(AutomaticZenRule rule) {
+        mRule = rule;
     }
 
     @Override
@@ -95,10 +97,5 @@ public class ZenAutomaticRuleHeaderPreferenceController extends AbstractZenModeP
         }
 
         return null;
-    }
-
-    protected void onResume(AutomaticZenRule rule, String id) {
-        mRule = rule;
-        mId = id;
     }
 }

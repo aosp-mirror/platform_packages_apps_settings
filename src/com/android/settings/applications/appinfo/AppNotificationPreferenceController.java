@@ -22,11 +22,13 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.notification.app.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settings.notification.app.AppNotificationSettings;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 
 public class AppNotificationPreferenceController extends AppInfoPreferenceControllerBase {
@@ -47,6 +49,12 @@ public class AppNotificationPreferenceController extends AppInfoPreferenceContro
                 && parent.getActivity().getIntent() != null) {
             mChannelId = parent.getActivity().getIntent().getStringExtra(EXTRA_FRAGMENT_ARG_KEY);
         }
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference.setEnabled(AppUtils.isAppInstalled(mAppEntry));
     }
 
     @Override

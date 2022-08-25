@@ -18,53 +18,67 @@ package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.os.PersistableBundle;
 import android.provider.Settings;
+import android.telephony.CarrierConfigManager;
 
 import androidx.preference.SwitchPreference;
-
-import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class ShowOperatorNamePreferenceControllerTest {
 
     private static final String KEY_SHOW_OPERATOR_NAME = "show_operator_name";
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     @Mock
     private SwitchPreference mPreference;
+    @Mock
+    private CarrierConfigManager mConfigManager;
 
     private ShowOperatorNamePreferenceController mController;
+    @Mock
+    private PersistableBundle mConfig;
+    private Context mContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
 
+        when(mConfigManager.getConfigForSubId(anyInt())).thenReturn(mConfig);
+        when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(mConfigManager);
+
+        doReturn(mock(DevicePolicyManager.class)).when(mContext)
+                .getSystemService(Context.DEVICE_POLICY_SERVICE);
         mController = new ShowOperatorNamePreferenceController(mContext);
     }
 
     @Test
     public void testIsAvailable_configIsTrue_ReturnTrue() {
-        when(mContext.getResources()
-            .getBoolean(R.bool.config_showOperatorNameInStatusBar)).thenReturn(true);
+        when(mConfig.getBoolean(CarrierConfigManager
+                .KEY_SHOW_OPERATOR_NAME_IN_STATUSBAR_BOOL, false)).thenReturn(true);
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void testIsAvailable_configIsFalse_ReturnFalse() {
-        when(mContext.getResources()
-            .getBoolean(R.bool.config_showOperatorNameInStatusBar)).thenReturn(false);
+        when(mConfig.getBoolean(CarrierConfigManager
+                .KEY_SHOW_OPERATOR_NAME_IN_STATUSBAR_BOOL, false)).thenReturn(false);
         assertThat(mController.isAvailable()).isFalse();
     }
 

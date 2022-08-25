@@ -22,11 +22,7 @@ import android.content.Context;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A page that configures the Location Services settings including Wi-Fi scanning, Bluetooth
@@ -52,34 +48,15 @@ public class LocationServices extends DashboardFragment {
     }
 
     @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context);
-    }
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
         use(LocationInjectedServicesPreferenceController.class).init(this);
     }
 
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new WifiScanningPreferenceController(context));
-        controllers.add(new BluetoothScanningPreferenceController(context));
-        return controllers;
-    }
-
     /**
      * For Search.
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.location_services) {
-
-                @Override
-                public List<AbstractPreferenceController> createPreferenceControllers(Context
-                        context) {
-                    return buildPreferenceControllers(context);
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.location_services);
 }

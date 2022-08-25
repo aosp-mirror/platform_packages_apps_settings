@@ -387,34 +387,52 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
-    public void showBatteryPredictionIfNecessary_estimateReadyIsAvailable_showView() {
-        mController.showBatteryPredictionIfNecessary(1, 14218009,
-                mLayoutPreference.findViewById(R.id.layout_left));
-        mController.showBatteryPredictionIfNecessary(1, 14218009,
-                mLayoutPreference.findViewById(R.id.layout_middle));
-        mController.showBatteryPredictionIfNecessary(1, 14218009,
-                mLayoutPreference.findViewById(R.id.layout_right));
+    public void estimateReadyIsBothAvailable_showsView() {
+        mController.mIsLeftDeviceEstimateReady = true;
+        mController.mIsRightDeviceEstimateReady = true;
+
+        mController.showBothDevicesBatteryPredictionIfNecessary();
 
         assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_left),
-                View.VISIBLE);
-        assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_middle),
                 View.VISIBLE);
         assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_right),
                 View.VISIBLE);
     }
 
     @Test
-    public void showBatteryPredictionIfNecessary_estimateReadyIsNotAvailable_notShowView() {
-        mController.showBatteryPredictionIfNecessary(0, 14218009,
-                mLayoutPreference.findViewById(R.id.layout_left));
-        mController.showBatteryPredictionIfNecessary(0, 14218009,
-                mLayoutPreference.findViewById(R.id.layout_middle));
-        mController.showBatteryPredictionIfNecessary(0, 14218009,
-                mLayoutPreference.findViewById(R.id.layout_right));
+    public void leftDeviceEstimateIsReadyRightDeviceIsNotReady_notShowView() {
+        mController.mIsLeftDeviceEstimateReady = true;
+        mController.mIsRightDeviceEstimateReady = false;
+
+        mController.showBothDevicesBatteryPredictionIfNecessary();
 
         assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_left),
                 View.GONE);
-        assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_middle),
+        assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_right),
+                View.GONE);
+    }
+
+    @Test
+    public void leftDeviceEstimateIsNotReadyRightDeviceIsReady_notShowView() {
+        mController.mIsLeftDeviceEstimateReady = false;
+        mController.mIsRightDeviceEstimateReady = true;
+
+        mController.showBothDevicesBatteryPredictionIfNecessary();
+
+        assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_left),
+                View.GONE);
+        assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_right),
+                View.GONE);
+    }
+
+    @Test
+    public void bothDevicesEstimateIsNotReady_notShowView() {
+        mController.mIsLeftDeviceEstimateReady = false;
+        mController.mIsRightDeviceEstimateReady = false;
+
+        mController.showBothDevicesBatteryPredictionIfNecessary();
+
+        assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_left),
                 View.GONE);
         assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_right),
                 View.GONE);

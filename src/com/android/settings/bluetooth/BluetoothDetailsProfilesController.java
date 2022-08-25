@@ -488,7 +488,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     @Override
     protected void refresh() {
         for (LocalBluetoothProfile profile : getProfiles()) {
-            if (!profile.isProfileReady()) {
+            if (profile == null || !profile.isProfileReady()) {
                 continue;
             }
             SwitchPreference pref = mProfilesContainer.findPreference(

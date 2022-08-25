@@ -16,12 +16,16 @@
 
 package com.android.settings;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.DEVICE_OWNER_INSTALLED_CERTIFICATE_AUTHORITY_WARNING;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_INSTALLED_CERTIFICATE_AUTHORITY_WARNING;
+
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
+import android.icu.text.MessageFormat;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -29,6 +33,10 @@ import android.provider.Settings;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settingslib.RestrictedLockUtils;
+
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * Activity that shows a dialog explaining that a CA cert is allowing someone to monitor network
@@ -71,12 +79,30 @@ public class MonitoringCertInfoActivity extends Activity implements OnClickListe
         builder.setOnDismissListener(this);
 
         if (dpm.getProfileOwnerAsUser(mUserId) != null) {
-            builder.setMessage(getResources().getQuantityString(R.plurals.ssl_ca_cert_info_message,
-                    numberOfCertificates, dpm.getProfileOwnerNameAsUser(mUserId)));
+            MessageFormat msgFormat = new MessageFormat(
+                    dpm.getResources().getString(
+                            WORK_PROFILE_INSTALLED_CERTIFICATE_AUTHORITY_WARNING,
+                            () -> getString(R.string.ssl_ca_cert_info_message)),
+                    Locale.getDefault());
+
+            Map<String, Object> arguments = new HashMap<>();
+            arguments.put("numberOfCertificates", numberOfCertificates);
+            arguments.put("orgName", dpm.getProfileOwnerNameAsUser(mUserId));
+
+            builder.setMessage(msgFormat.format(arguments));
         } else if (dpm.getDeviceOwnerComponentOnCallingUser() != null) {
-            builder.setMessage(getResources().getQuantityString(
-                    R.plurals.ssl_ca_cert_info_message_device_owner, numberOfCertificates,
-                    dpm.getDeviceOwnerNameOnAnyUser()));
+            MessageFormat msgFormat = new MessageFormat(
+                    dpm.getResources()
+                            .getString(DEVICE_OWNER_INSTALLED_CERTIFICATE_AUTHORITY_WARNING,
+                                    () -> getResources().getString(
+                                            R.string.ssl_ca_cert_info_message_device_owner)),
+                    Locale.getDefault());
+
+            Map<String, Object> arguments = new HashMap<>();
+            arguments.put("numberOfCertificates", numberOfCertificates);
+            arguments.put("orgName", dpm.getDeviceOwnerNameOnAnyUser());
+
+            builder.setMessage(msgFormat.format(arguments));
         } else  {
             // Consumer case.  Show scary warning.
             builder.setIcon(android.R.drawable.stat_notify_error);
