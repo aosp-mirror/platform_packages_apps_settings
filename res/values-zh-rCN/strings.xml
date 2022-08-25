@@ -142,7 +142,7 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3506962706611366830">"允许您的平板电脑与附近的蓝牙设备进行通信"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"允许您的设备与附近的蓝牙设备进行通信"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"允许您的手机与附近的蓝牙设备进行通信"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"停用蓝牙 A2DP 硬件卸载"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"停用蓝牙 A2DP 硬件分流"</string>
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="8610420176339657720">"要重启设备吗？"</string>
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8333029144800835996">"您需要重启设备才能让这项设置更改生效。"</string>
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="3488695418187553566">"重启"</string>
@@ -562,7 +562,7 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"要移除所有指纹吗？"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"移除“<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"要删除此指纹吗？"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"如果您确认删除，您设备上存储的与“<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”关联的指纹图片和模型将被删除"</string>
+    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"确认删除后，设备上存储的与“<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”关联的指纹图片和模型将被删除"</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"您将无法使用指纹来解锁手机或在应用中验证自己的身份。"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"您将无法使用指纹来解锁自己的工作资料、对购买交易进行授权或登录工作应用。"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"是，移除"</string>
@@ -1387,7 +1387,7 @@
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"开启，直到日出"</string>
     <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"关闭，直到日落"</string>
     <string name="dark_ui_title" msgid="3373976268671557416">"深色模式"</string>
-    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"排定时间"</string>
+    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"设定时间"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"无"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"在日落到日出期间开启"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"在设定的时间开启"</string>
@@ -1591,7 +1591,7 @@
     <string name="storage_menu_manage" msgid="7465522758801346408">"管理存储空间"</string>
     <string name="keywords_storage_menu_free" msgid="2275406357317597106">"清理, 存储空间"</string>
     <string name="storage_free_up_space_title" msgid="281047807372131975">"释放空间"</string>
-    <string name="storage_free_up_space_summary" msgid="6650027929735481350">"转到谷歌文件极客应用管理和释放空间"</string>
+    <string name="storage_free_up_space_summary" msgid="6650027929735481350">"前往谷歌文件极客应用管理和释放空间"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB计算机连接"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"连接方式"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"媒体设备(MTP)"</string>
@@ -4989,7 +4989,7 @@
     <string name="storage_videos" msgid="6117698226447251033">"视频"</string>
     <string name="storage_audio" msgid="5994664984472140386">"音频"</string>
     <string name="storage_apps" msgid="3564291603258795216">"应用"</string>
-    <string name="storage_documents_and_other" msgid="3293689243732236480">"文档和其他"</string>
+    <string name="storage_documents_and_other" msgid="3293689243732236480">"文档和其他文件"</string>
     <string name="storage_system" msgid="8472410119822911844">"系统"</string>
     <string name="storage_trash" msgid="2807138998886084856">"回收站"</string>
     <string name="storage_trash_dialog_title" msgid="2296169576049935200">"要清空回收站吗？"</string>
@@ -5025,7 +5025,7 @@
     <string name="location_category" msgid="3496759112306219062">"位置"</string>
     <string name="location_indicator_settings_title" msgid="6655916258720093451">"状态栏位置指示器"</string>
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"对所有位置均显示，包括通过网络和连接方式获取的位置信息"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"强制启用 GNSS 测量结果全面跟踪"</string>
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"强制启用完整 GNSS 测量数据"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"在停用工作周期的情况下跟踪所有 GNSS 星座和频率"</string>
     <string name="device_theme" msgid="5027604586494772471">"设备主题背景"</string>
     <string name="default_theme" msgid="4815428567082263639">"默认"</string>
