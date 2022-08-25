@@ -165,7 +165,7 @@ public class SmartAutoRotatePreferenceController extends TogglePreferenceControl
 
     @Override
     public CharSequence getSummary() {
-        int activeStringId = R.string.auto_rotate_option_off;
+        int activeStringId = R.string.off;
         if (!RotationPolicy.isRotationLocked(mContext)) {
             final int cameraRotate = Settings.Secure.getIntForUser(
                     mContext.getContentResolver(),
@@ -176,7 +176,7 @@ public class SmartAutoRotatePreferenceController extends TogglePreferenceControl
                     && !isCameraLocked()
                     && !isPowerSaveMode()
                     ? R.string.auto_rotate_option_face_based
-                    : R.string.auto_rotate_option_on;
+                    : R.string.on;
         }
         return mContext.getString(activeStringId);
     }

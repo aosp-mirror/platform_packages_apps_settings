@@ -144,7 +144,7 @@ public class PrintSettingsPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getString(R.string.print_settings_summary_no_service));
+                .isEqualTo(mContext.getString(R.string.off));
     }
 
     @Test

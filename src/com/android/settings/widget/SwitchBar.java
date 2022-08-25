@@ -38,7 +38,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
@@ -135,7 +134,7 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         lp.setMarginEnd(switchBarMarginEnd);
         setBackgroundColor(mBackgroundColor);
 
-        setSwitchBarText(R.string.switch_on_text, R.string.switch_off_text);
+        setSwitchBarText(R.string.on, R.string.off);
 
         addOnSwitchChangeListener(
                 (switchView, isChecked) -> setTextViewLabelAndBackground(isChecked));

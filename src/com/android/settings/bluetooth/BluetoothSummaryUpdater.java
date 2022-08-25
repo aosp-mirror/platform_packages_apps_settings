@@ -74,7 +74,7 @@ public final class BluetoothSummaryUpdater extends SummaryUpdater implements Blu
     @Override
     public String getSummary() {
         if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
-            return mContext.getString(R.string.bluetooth_disabled);
+            return mContext.getString(R.string.off);
         }
         switch (mBluetoothAdapter.getConnectionState()) {
             case BluetoothAdapter.STATE_CONNECTED:
@@ -95,7 +95,7 @@ public final class BluetoothSummaryUpdater extends SummaryUpdater implements Blu
         final Set<BluetoothDevice> devices = mBluetoothAdapter.getBondedDevices();
         if (devices == null) {
             Log.e(TAG, "getConnectedDeviceSummary, bonded devices are null");
-            return mContext.getString(R.string.bluetooth_disabled);
+            return mContext.getString(R.string.off);
         } else if (devices.isEmpty()) {
             Log.e(TAG, "getConnectedDeviceSummary, no bonded devices");
             return mContext.getString(R.string.disconnected);
