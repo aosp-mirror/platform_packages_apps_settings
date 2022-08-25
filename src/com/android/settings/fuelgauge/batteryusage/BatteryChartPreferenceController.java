@@ -697,12 +697,13 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
         final Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageData =
                 DataProcessor.getBatteryUsageData(context, batteryHistoryMap);
-        return batteryUsageData == null
-                ? null
-                : batteryUsageData
-                        .get(BatteryChartViewModel.SELECTED_INDEX_ALL)
-                        .get(BatteryChartViewModel.SELECTED_INDEX_ALL)
-                        .getAppDiffEntryList();
+        if (batteryUsageData == null) {
+            return null;
+        }
+        BatteryDiffData allBatteryDiffData = batteryUsageData.get(
+                BatteryChartViewModel.SELECTED_INDEX_ALL).get(
+                BatteryChartViewModel.SELECTED_INDEX_ALL);
+        return allBatteryDiffData == null ? null : allBatteryDiffData.getAppDiffEntryList();
     }
 
     /** Used for {@link AppBatteryPreferenceController}. */
