@@ -43,7 +43,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-
 class LocaleDragAndDropAdapter
         extends RecyclerView.Adapter<LocaleDragAndDropAdapter.CustomViewHolder> {
 
@@ -154,8 +153,10 @@ class LocaleDragAndDropAdapter
         final LocaleDragCell dragCell = holder.getLocaleDragCell();
         final String label = feedItem.getFullNameNative();
         final String description = feedItem.getFullNameInUiLanguage();
+
         dragCell.setLabelAndDescription(label, description);
         dragCell.setLocalized(feedItem.isTranslated());
+        dragCell.setCurrentDefault(feedItem.getLocale().equals(Locale.getDefault()));
         dragCell.setMiniLabel(mNumberFormatter.format(i + 1));
         dragCell.setShowCheckbox(mRemoveMode);
         dragCell.setShowMiniLabel(!mRemoveMode);
