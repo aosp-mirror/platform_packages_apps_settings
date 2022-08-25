@@ -36,6 +36,7 @@ import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
+import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.app.LocalePicker;
@@ -46,6 +47,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
+import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +66,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment {
     private static final int REQUEST_LOCALE_PICKER = 0;
 
     private static final String INDEX_KEY_ADD_LANGUAGE = "add_language";
+    private static final String KEY_LANGUAGES_PICKER = "languages_picker";
 
     private LocaleDragAndDropAdapter mAdapter;
     private Menu mMenu;
@@ -71,6 +74,9 @@ public class LocaleListEditor extends RestrictedSettingsFragment {
     private boolean mRemoveMode;
     private boolean mShowingRemoveDialog;
     private boolean mIsUiRestricted;
+
+    private LayoutPreference mLocalePickerPreference;
+    private LocaleHelperPreferenceController mLocaleHelperPreferenceController;
 
     public LocaleListEditor() {
         super(DISALLOW_CONFIG_LOCALE);
@@ -86,6 +92,14 @@ public class LocaleListEditor extends RestrictedSettingsFragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
+        addPreferencesFromResource(R.xml.languages);
+        final Activity activity = getActivity();
+        activity.setTitle(R.string.language_picker_title);
+        mLocaleHelperPreferenceController = new LocaleHelperPreferenceController(activity);
+        final PreferenceScreen screen = getPreferenceScreen();
+        mLocalePickerPreference = screen.findPreference(KEY_LANGUAGES_PICKER);
+        mLocaleHelperPreferenceController.displayPreference(screen);
+
         LocaleStore.fillCache(this.getContext());
         final List<LocaleStore.LocaleInfo> feedsList = getUserLocaleList();
         mAdapter = new LocaleDragAndDropAdapter(this.getContext(), feedsList);
@@ -93,11 +107,8 @@ public class LocaleListEditor extends RestrictedSettingsFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstState) {
-        final View result = super.onCreateView(inflater, container, savedInstState);
-        final View myLayout = inflater.inflate(R.layout.locale_order_list, (ViewGroup) result);
-
-        configureDragAndDrop(myLayout);
-        return result;
+        configureDragAndDrop(mLocalePickerPreference);
+        return super.onCreateView(inflater, container, savedInstState);
     }
 
     @Override
@@ -287,8 +298,8 @@ public class LocaleListEditor extends RestrictedSettingsFragment {
         return result;
     }
 
-    private void configureDragAndDrop(View view) {
-        final RecyclerView list = view.findViewById(R.id.dragList);
+    private void configureDragAndDrop(LayoutPreference layout) {
+        final RecyclerView list = layout.findViewById(R.id.dragList);
         final LocaleLinearLayoutManager llm = new LocaleLinearLayoutManager(getContext(), mAdapter);
         llm.setAutoMeasureEnabled(true);
         list.setLayoutManager(llm);
@@ -297,7 +308,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment {
         mAdapter.setRecyclerView(list);
         list.setAdapter(mAdapter);
 
-        mAddLanguage = view.findViewById(R.id.add_language);
+        mAddLanguage = layout.findViewById(R.id.add_language);
         mAddLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
