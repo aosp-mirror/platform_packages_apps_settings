@@ -21,7 +21,9 @@ import android.content.ClipData;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -78,6 +80,7 @@ public class EditUserPhotoController {
     private static final int REQUEST_CODE_TAKE_PHOTO   = 1002;
     private static final int REQUEST_CODE_CROP_PHOTO   = 1003;
 
+    private static final String PRE_CROP_PICTURE_FILE_NAME = "PreCropEditUserPhoto.jpg";
     private static final String CROP_PICTURE_FILE_NAME = "CropEditUserPhoto.jpg";
     private static final String TAKE_PICTURE_FILE_NAME = "TakeEditUserPhoto2.jpg";
     private static final String NEW_USER_PHOTO_FILE_NAME = "NewUserPhoto.png";
@@ -88,6 +91,7 @@ public class EditUserPhotoController {
     private final Fragment mFragment;
     private final ImageView mImageView;
 
+    private final Uri mPreCropPictureUri;
     private final Uri mCropPictureUri;
     private final Uri mTakePictureUri;
 
@@ -99,6 +103,8 @@ public class EditUserPhotoController {
         mContext = view.getContext();
         mFragment = fragment;
         mImageView = view;
+
+        mPreCropPictureUri = createTempImageUri(mContext, PRE_CROP_PICTURE_FILE_NAME, !waiting);
         mCropPictureUri = createTempImageUri(mContext, CROP_PICTURE_FILE_NAME, !waiting);
         mTakePictureUri = createTempImageUri(mContext, TAKE_PICTURE_FILE_NAME, !waiting);
         mPhotoSize = getPhotoSize(mContext);
@@ -133,7 +139,7 @@ public class EditUserPhotoController {
             case REQUEST_CODE_TAKE_PHOTO:
             case REQUEST_CODE_CHOOSE_PHOTO:
                 if (mTakePictureUri.equals(pictureUri)) {
-                    cropPhoto();
+                    cropPhoto(pictureUri);
                 } else {
                     copyAndCropPhoto(pictureUri);
                 }
@@ -229,7 +235,7 @@ public class EditUserPhotoController {
             protected Void doInBackground(Void... params) {
                 final ContentResolver cr = mContext.getContentResolver();
                 try (InputStream in = cr.openInputStream(pictureUri);
-                        OutputStream out = cr.openOutputStream(mTakePictureUri)) {
+                        OutputStream out = cr.openOutputStream(mPreCropPictureUri)) {
                     Streams.copy(in, out);
                 } catch (IOException e) {
                     Log.w(TAG, "Failed to copy photo", e);
@@ -240,27 +246,38 @@ public class EditUserPhotoController {
             @Override
             protected void onPostExecute(Void result) {
                 if (!mFragment.isAdded()) return;
-                cropPhoto();
+                cropPhoto(mPreCropPictureUri);
             }
         }.execute();
     }
 
-    private void cropPhoto() {
+    private void cropPhoto(final Uri pictureUri) {
         // TODO: Use a public intent, when there is one.
         Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(mTakePictureUri, "image/*");
+        intent.setDataAndType(pictureUri, "image/*");
         appendOutputExtra(intent, mCropPictureUri);
         appendCropExtras(intent);
-        if (intent.resolveActivity(mContext.getPackageManager()) != null) {
-            try {
-                StrictMode.disableDeathOnFileUriExposure();
-                mFragment.startActivityForResult(intent, REQUEST_CODE_CROP_PHOTO);
-            } finally {
-                StrictMode.enableDeathOnFileUriExposure();
+        try {
+            StrictMode.disableDeathOnFileUriExposure();
+            if (startSystemActivityForResult(intent, REQUEST_CODE_CROP_PHOTO)) {
+                return;
             }
-        } else {
-            onPhotoCropped(mTakePictureUri, false);
+        } finally {
+            StrictMode.enableDeathOnFileUriExposure();
         }
+        onPhotoCropped(mTakePictureUri, false);
+    }
+
+    private boolean startSystemActivityForResult(Intent intent, int code) {
+        List<ResolveInfo> resolveInfos = mContext.getPackageManager()
+                .queryIntentActivities(intent, PackageManager.MATCH_SYSTEM_ONLY);
+        if (resolveInfos.isEmpty()) {
+            Log.w(TAG, "No system package activity could be found for code " + code);
+            return false;
+        }
+        intent.setPackage(resolveInfos.get(0).activityInfo.packageName);
+        mFragment.startActivityForResult(intent, code);
+        return true;
     }
 
     private void appendOutputExtra(Intent intent, Uri pictureUri) {
