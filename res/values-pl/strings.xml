@@ -159,7 +159,7 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Aby zmienić to ustawienie, musisz ponownie uruchomić urządzenie."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Uruchom ponownie"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Anuluj"</string>
-    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Włącz funkcję audio Bluetooth LE"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Włącz funkcję audio Bluetooth LE"</string>
     <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Włącza funkcję audio Bluetooth LE, jeśli urządzenie obsługuje sprzętowe funkcje LE."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Nośniki danych"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Urządzenia telefoniczne"</string>
@@ -1661,9 +1661,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Zmień nazwę"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Podłącz"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Odłącz"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Formatuj"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Sformatuj kartę SD jako pamięć przenośną"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Sformatuj kartę"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Sformatuj jako pamięć przen."</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Sformatuj jako pamięć wewn."</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Sformatuj"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Przenieś dane"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Zapomnij"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Skonfiguruj"</string>
@@ -1693,17 +1694,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Zmień nazwę pamięci"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Nośnik <xliff:g id="NAME_0">^1</xliff:g> został bezpiecznie odłączony, ale nadal jest dostępny. \n\nAby użyć nośnika <xliff:g id="NAME_1">^1</xliff:g>, musisz go najpierw podłączyć."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Nośnik <xliff:g id="NAME_0">^1</xliff:g> jest uszkodzony. \n\nAby użyć nośnika <xliff:g id="NAME_1">^1</xliff:g>, musisz go najpierw skonfigurować."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"Po sformatowaniu możesz używać tego nośnika (<xliff:g id="NAME_0">^1</xliff:g>) na innych urządzeniach. \n\nWszystkie dane, które zawiera <xliff:g id="NAME_1">^1</xliff:g>, zostaną wykasowane. Pamiętaj o wykonaniu kopii zapasowej. \n\n"<b>"Zrób kopię zapasową zdjęć i innych multimediów"</b>" \nPrzenieś pliki multimedialne w inne miejsce na tym urządzeniu lub prześlij je na komputer, używając kabla USB. \n\n"<b>"Zrób kopię zapasową aplikacji"</b>" \nWszystkie aplikacje, które zawiera <xliff:g id="NAME_6">^1</xliff:g>, zostaną odinstalowane, a ich dane zostaną wykasowane. Aby zachować te aplikacje, przenieś je w inne miejsce na urządzeniu."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Możesz sformatować tę kartę SD tak, aby przechowywać na niej zdjęcia, filmy, muzykę oraz inne treści i korzystać z nich na różnych urządzeniach. \n\n"<b>"Wszystkie dane na tej karcie SD zostaną wykasowane."</b>" \n\n"<b>"Przed formatowaniem"</b>" \n\n"<b>"Utwórz kopię zapasową zdjęć i innych multimediów"</b>" \nPrzenieś pliki multimediów do innych miejsc na dane na tym urządzeniu lub na komputer, korzystając z kabla USB. \n\n"<b>"Utwórz kopię zapasową wszystkich aplikacji"</b>" \nWszystkie aplikacje znajdujące się na tym nośniku <xliff:g id="NAME">^1</xliff:g> zostaną odinstalowane, a ich dane – usunięte. Aby zachować aplikacje, przenieś je w inne miejsce na tym urządzeniu."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Jeśli odłączysz ten nośnik (<xliff:g id="NAME_0">^1</xliff:g>), zapisane na nim aplikacje przestaną działać, a przechowywane pliki multimedialne będą niedostępne do momentu ponownego włożenia tego nośnika."</b>\n\n"Ten nośnik (<xliff:g id="NAME_1">^1</xliff:g>) został sformatowany w taki sposób, że będzie działać tylko na tym urządzeniu. Nie będzie działać na żadnych innych urządzeniach."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Aby korzystać z aplikacji, zdjęć lub danych zawartych na urządzeniu <xliff:g id="NAME">^1</xliff:g>, włóż je ponownie. \n\nMożesz też zapomnieć to urządzenie, jeśli nie jest już dostępne. \n\nJeśli to zrobisz, wszystkie dane na nim zawarte zostaną trwale utracone. \n\nMożesz ponownie zainstalować aplikacje później, ale dane przechowywane na urządzeniu zostaną utracone."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Zapomnieć nośnik <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Wszystkie aplikacje, zdjęcia i dane zapisane na nośniku <xliff:g id="NAME">^1</xliff:g> zostaną na zawsze utracone."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"System uwzględnia pliki używane do uruchomienia Androida w wersji <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Nie można formatować kart SD w trybie gościa"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Skonfiguruj: <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Użyj jako pamięci przenośnej"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Do przenoszenia zdjęć i innych multimediów z jednego urządzenia na drugie."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Użyj jako pamięci wewnętrznej"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"Do zapisywania dowolnych danych (w tym aplikacji i zdjęć) tylko na tym urządzeniu. Wymaga sformatowania, które uniemożliwi korzystanie z tego nośnika na innych urządzeniach."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Sformatuj kartę SD jako pamięć przenośną"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Zapisuj zdjęcia, filmy, muzykę oraz inne treści i korzystaj z nich na różnych urządzeniach"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Sformatuj kartę SD jako pamięć wewnętrzną"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Zapisuj aplikacje i multimedia tylko do użytku na tym telefonie"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Sformatuj jako pamięć wewnętrzną"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Aby nośnik <xliff:g id="NAME_0">^1</xliff:g> był bezpieczny, musi zostać sformatowany. \n\nPo sformatowaniu <xliff:g id="NAME_1">^1</xliff:g> będzie działać tylko na tym urządzeniu. \n\n"<b>"Sformatowanie spowoduje wykasowanie wszystkich danych, które zawiera <xliff:g id="NAME_2">^1</xliff:g>."</b>" Aby uniknąć utraty danych, utwórz ich kopię zapasową."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Sformatuj jako pamięć przenośną"</string>
@@ -1720,9 +1722,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Przenieś"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Przenoszę dane…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"W trakcie przenoszenia: \n• Nie wyjmuj nośnika (<xliff:g id="NAME">^1</xliff:g>). \n• Niektóre aplikacje nie będą działać prawidłowo. \n• Urządzenie nie może rozładować się."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"Nośnik <xliff:g id="NAME">^1</xliff:g> jest gotowy do użycia"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"Nośnik „<xliff:g id="NAME">^1</xliff:g>” jest gotowy do przechowywania zdjęć i innych multimediów."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"Twój nowy nośnik (<xliff:g id="NAME">^1</xliff:g>) już działa. \n\nAby przenieść zdjęcia, pliki i dane aplikacji na to urządzenie, kliknij Ustawienia &gt; Pamięć."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"Nośnik <xliff:g id="NAME">^1</xliff:g> sformatowany"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Możesz zacząć używać nośnika <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Możesz zacząć używać nośnika <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Przenieś aplikację <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Przeniesienie aplikacji <xliff:g id="APP">^1</xliff:g> i jej danych na ten nośnik (<xliff:g id="NAME_0">^2</xliff:g>) potrwa tylko chwilę. Do jego zakończenia nie będzie można korzystać z aplikacji. \n\nNie wyjmuj nośnika (<xliff:g id="NAME_1">^2</xliff:g>) w trakcie przenoszenia danych."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Aby przenieść dane, musisz odblokować użytkownika <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1731,19 +1733,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Anuluj przenoszenie"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Wygląda na to, że nośnik <xliff:g id="NAME_0">^1</xliff:g> jest powolny. \n\nNadal możesz z niego korzystać, ale przeniesione aplikacje mogą się zacinać, a przesyłanie danych może długo trwać. \n\nWydajność może poprawić inny nośnik <xliff:g id="NAME_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Jak będziesz używać nośnika <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Użyj, by powiększyć pamięć tabletu"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"Tylko na aplikacje, pliki i multimedia na tym tablecie"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Pamięć w tablecie"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Użyj, by powiększyć pamięć telefonu"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"Tylko na aplikacje, pliki i multimedia na tym telefonie"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Pamięć telefonu"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Sformatuj kartę SD jako pamięć wewnętrzną"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Przechowuj aplikacje i multimedia tylko do użytku na tym tablecie. &lt;a href=https://support.google.com/android/answer/12153449&gt;Więcej informacji o konfigurowaniu kart SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Sformatuj"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Sformatuj kartę SD jako pamięć wewnętrzną"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Przechowuj aplikacje i multimedia tylko do użytku na tym telefonie. &lt;a href=https://support.google.com/android/answer/12153449&gt;Więcej informacji o konfigurowaniu kart SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Sformatuj"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"lub"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Użyj jako pamięci przenośnej"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"Do przenoszenia plików i multimediów między urządzeniami"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Pamięć przenośna"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Sformatuj kartę SD jako pamięć przenośną"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Przechowuj zdjęcia, filmy, muzykę oraz inne treści i korzystaj z nich na różnych urządzeniach. &lt;a href=https://support.google.com/android/answer/12153449&gt;Więcej informacji o konfigurowaniu kart SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Sformatuj"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Skonfiguruj później"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Sformatować: <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Ten nośnik <xliff:g id="NAME_0">^1</xliff:g> trzeba sformatować, by można było zapisywać na nim aplikacje, pliki i multimedia. \n\nFormatowanie usunie dotychczasową zawartość nośnika <xliff:g id="NAME_1">^2</xliff:g>. Aby nie utracić danych, utwórz ich kopię zapasową na innym nośniku <xliff:g id="NAME_2">^3</xliff:g> lub urządzeniu."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Musisz sformatować ten nośnik <xliff:g id="NAME_0">^1</xliff:g>, aby przechowywać na nim zdjęcia, filmy, muzykę i inne treści. \n\nFormatowanie spowoduje wykasowanie dotychczasowej zawartości nośnika <xliff:g id="NAME_1">^2</xliff:g>. Aby uniknąć utraty danych, utwórz ich kopię zapasową na innym nośniku <xliff:g id="NAME_2">^3</xliff:g> lub urządzeniu."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formatuj: <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Przenieść dane na: <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Możesz przenieść pliki, multimedia i niektóre aplikacje na ten nośnik <xliff:g id="NAME">^1</xliff:g>. \n\nTa czynność potrwa około <xliff:g id="DURATION">^3</xliff:g> i zwolni do <xliff:g id="SIZE">^2</xliff:g> pamięci tabletu."</string>
@@ -1760,9 +1763,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Nadal możesz używać tego nośnika <xliff:g id="NAME_0">^1</xliff:g>, ale może on działać powoli. \n\nAplikacje zapisane na tym nośniku <xliff:g id="NAME_1">^2</xliff:g> mogą nie działać prawidłowo, a przenoszenie danych może trwać długo. \n\nSpróbuj użyć szybszego nośnika <xliff:g id="NAME_2">^3</xliff:g> lub użyć tego nośnika <xliff:g id="NAME_3">^4</xliff:g> jako pamięci przenośnej."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Jeszcze raz"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Dalej"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Możesz przenieść dane na nośnik <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Aby przenieść dane na nośnik <xliff:g id="NAME">^1</xliff:g>, wybierz "<b>"Ustawienia &gt; Pamięć"</b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Dane zostały przeniesione na nośnik <xliff:g id="NAME_0">^1</xliff:g>. \n\nAby zarządzać nośnikiem <xliff:g id="NAME_1">^2</xliff:g>, wybierz "<b>"Ustawienia &gt; Pamięć"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Możesz zacząć używać nośnika <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Możesz zacząć używać nośnika <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Możesz zacząć używać nośnika <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Stan baterii"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Poziom naładowania baterii"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Nazwy APN"</string>
@@ -2772,7 +2775,7 @@
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Bez ograniczeń"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Z optymalizacją"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Z ograniczeniami"</string>
-    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Zezwalaj na wykorzystanie baterii w tle bez ograniczeń. Może to powodować większe wykorzystanie baterii."</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Zezwalaj na wykorzystanie baterii w tle bez ograniczeń. Może to powodować większe zużycie baterii."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optymalizuj na podstawie wykorzystania. Zalecane w przypadku większości aplikacji."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Ograniczaj wykorzystanie baterii podczas działania w tle. Aplikacja może nie działać zgodnie z oczekiwaniami. Powiadomienia mogą być opóźnione."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Zmiana sposobu wykorzystania baterii przez aplikację może obniżyć wydajność."</string>
@@ -3074,6 +3077,10 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Dane o wykorzystaniu baterii są przybliżone i nie są mierzone podczas ładowania telefonu"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Dane o wykorzystaniu baterii będą dostępne po kilku godzinach używania telefonu"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Wykres zużycia baterii"</string>
+    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
+    <skip />
+    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statystyki procesów"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Rozbudowane statystyki uruchomionych procesów"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Użycie pamięci"</string>
@@ -3637,6 +3644,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Zezwalaj aplikacji na korzystanie z informacji o lokalizacji"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Wróć"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Dalej"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Przełącz na przenośną"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Sformatuj inaczej"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Zakończ"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"Karty SIM"</string>
@@ -4572,7 +4581,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> nieużywanej aplikacji</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> nieużywana aplikacja</item>
     </plurals>
-    <string name="unused_apps_category" msgid="8954930958175500851">"Nieużywane ustawienia aplikacji"</string>
+    <string name="unused_apps_category" msgid="8954930958175500851">"Ustawienia nieużywanych aplikacji"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"Wstrzymaj aktywność w aplikacji, jeśli jest nieużywana"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Usuń uprawnienia i pliki tymczasowe oraz zatrzymaj powiadomienia"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Wszystkie aplikacje"</string>
@@ -5787,6 +5796,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Multimedia"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Przypnij odtwarzacz"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Aby można było szybko wznowić odtwarzanie, odtwarzacz pozostaje otwarty w Szybkich ustawieniach"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Pokazuj rekomendacje multimediów"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Na podstawie Twojej aktywności"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Ukryj odtwarzacz"</string>

@@ -1619,9 +1619,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Qayta nomlash"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Ulash"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Chiqarib olish"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Formatlash"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"SD kartani ixcham xotira shaklida formatlash"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Kartani formatlash"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatlash: tashqi xotira"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Formatlash: ichki xotira"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Formatlash"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Ko‘chirib o‘tkazish"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Olib tashlash"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Sozlash"</string>
@@ -1651,17 +1652,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Xotira qur-masini qayta nomlash"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Bu SD karta (<xliff:g id="NAME_0">^1</xliff:g>) xavfsiz chiqarib olindi, lekin hali undan foydalansa bo‘ladi. \n\nBu SD kartadan (<xliff:g id="NAME_1">^1</xliff:g>) foydalanish uchun avval uni tizimga ulang."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Bu SD karta (<xliff:g id="NAME_0">^1</xliff:g>) shikastlangan. \n\nBu SD kartadan (<xliff:g id="NAME_1">^1</xliff:g>) foydalanish uchun avval uni sozlash lozim."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"Formatlagandan so‘ng, “<xliff:g id="NAME_0">^1</xliff:g>” xotira kartasini boshqa qurilmalarda foydalanishingiz mumkin. \n\n“<xliff:g id="NAME_1">^1</xliff:g>” kartasidagi barcha ma’lumotlar o‘chirib tashlanadi, shuning uchun uning zaxira nusxasini olib qo‘yishni tavsiya etamiz. \n\n"<b>"Rasm va boshqa fayllarning nusxasini saqlab oling."</b>" \nMedia fayllaringizni ushbu qurilmadagi muqobil xotiraga ko‘chiring yoki USB kabeldan foydalanib ularni kompyuterga o‘tkazing. \n\n"<b>"Ilovalarning zaxira nusxasini saqlab oling."</b>" \n“<xliff:g id="NAME_6">^1</xliff:g>” kartasida joylashgan barcha ilovalar va ularning ma’lumotlari o‘chirib tashlanadi. Ularni xotira qurilmasiga ko‘chirib o‘tkazishni tavsiya etamiz."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Rasm, video, musiqa va boshqa fayllarni saqlash va ularni boshqa qurilmalardan ochish uchun bu SD kartani formatlash mumkin. \n\n"<b>"SD kartadagi barcha maʼlumotlar oʻchib ketadi."</b>" \n\n"<b>"Formatlashdan avval"</b>" \n\n"<b>"Rasm va boshqa media fayllarni zaxiralang"</b>" \nMedia fayllarni shu qurilmadagi muqobil xotiraga koʻchiring yoki USB kabel orqali kompyuterga nusxalang. \n\n"<b>"Ilovalarni zaxiralash"</b>" \nUshbu <xliff:g id="NAME">^1</xliff:g> qurilmasidagi barcha ilovalar va ularning maʼlumotlari oʻchib ketadi. Ilovalarni saqlab qolish uchun ularni shu qurilmadagi muqobil xotiraga koʻchiring."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Agar “<xliff:g id="NAME_0">^1</xliff:g>” xotira kartasini chiqarib olsangiz, unda joylashgan ilovalar ishlashdan to‘xtaydi va undagi media fayllar uni qayta kiritmaguningizcha ishlamaydi."</b>" \n\n“<xliff:g id="NAME_1">^1</xliff:g>” kartasi faqat ushbu qurilmada ishlaydigan qilib formatlangan. U boshqa hech qanday qurilma bilan ishlamaydi."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"“<xliff:g id="NAME">^1</xliff:g>” xotirasida joylashgan ilova, rasm va ma’lumotlardan foydalanish uchun uni qayta kiriting.\n\nShuningdek, agar bu qurilmadan foydalanib bo‘lmasa, uni tizim xotirasidan o‘chirib tashlasangiz mumkin.\n\nAgar o‘chirib tashlashni tanlasangiz, qurilmadagi barcha ma’lumotlar butunlay o‘chib ketadi. \n\nIlovalarni keyinroq qayta o‘rnatishingiz mumkin, ammo ularning ushbu qurilmada joylashgan ma’lumotlari yo‘qoladi."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g> qurilmasi olib tashlansinmi?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Bu SD-kartadagi (<xliff:g id="NAME">^1</xliff:g>) barcha ilovalar, rasm va ma’lumotlar butunlay o‘chib ketadi."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Tizim rukniga Android <xliff:g id="VERSION">%s</xliff:g> uchun zarur fayllar kiradi"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Mehmon rejimidagi foydalanuvchilar SD kartalarni formatlay olmaydi"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"<xliff:g id="NAME">^1</xliff:g> kartasini sozlang"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Ko‘chma xotira sifatida foydalanish"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Rasm va boshqa fayllarni qurilmalar o‘rtasida ko‘chirib o‘tkazish uchun."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Ichki xotira sifatida foydalanish"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"Ma’lumotlarni (rasm, ilova va boshqalar) faqat ushbu qurilmada saqlash uchun. Uni boshqa qurilmalar bilan ishlamaydigan qilish uchun formatlash lozim."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"SD kartani ixcham xotira shaklida formatlash"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Rasm, video, musiqa va boshqa fayllarni saqlash va ularni boshqa qurilmalarda ochish"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"SD kartani ichki xotira shaklida formatlash"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Ilova va media fayllar faqat shu qurilmada saqlansin"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Ichki xotira sifatida formatlash"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Ma’lumotlaringizni himoyalash uchun “<xliff:g id="NAME_0">^1</xliff:g>” xotira kartasini formatlash lozim. \n\nFormatlagandan so‘ng, “<xliff:g id="NAME_1">^1</xliff:g>” kartasi faqat mazkur qurilmada ishlaydi. \n\n"<b>"“<xliff:g id="NAME_2">^1</xliff:g>” kartasidagi barcha ma’lumotlar o‘chirib tashlanadi."</b>" Ma’lumotlar yo‘qolishining oldini olish uchun ularning zaxira nusxasini saqlab oling."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Qurilmani formatlash"</string>
@@ -1678,9 +1680,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Ko‘chirib o‘tkazish"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Ma’lumotlar ko‘chirilmoqda…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Ko‘chirish davomida: \n• <xliff:g id="NAME">^1</xliff:g> kartasini chiqara ko‘rmang. \n• Ba’zi ilovalar to‘g‘ri ishlamasligi mumkin. \n• Qurilmangiz quvvati tugab qolmasligi kerak."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"<xliff:g id="NAME">^1</xliff:g> qurilmasi ishga tayyor"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"Endi “<xliff:g id="NAME">^1</xliff:g>” kartasiga rasm va boshqa fayllarni saqlash mumkin."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"Yangi “<xliff:g id="NAME">^1</xliff:g>” kartasi ishlashga tayyor. \n\nUnga rasm, ilova ma’lumotlari va boshqa fayllarni ko‘chirib o‘tkazish uchun Sozlamalar &gt; Xotira bo‘limiga o‘ting."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> formatlandi"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"<xliff:g id="NAME">^1</xliff:g> omboringizdan foydalanishni boshlang"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"<xliff:g id="NAME">^1</xliff:g> omboringizdan foydalanishni boshlang"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"<xliff:g id="APP">^1</xliff:g> ilovasini ko‘chirib o‘tkazing"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"<xliff:g id="APP">^1</xliff:g> va uning ma’lumotlarini “<xliff:g id="NAME_0">^2</xliff:g>” kartasiga ko‘chirib o‘tkazish biroz vaqt oladi. Ko‘chirish tugamaguncha ilovadan foydalana olmaysiz. \n\nKo‘chirish davomida “<xliff:g id="NAME_1">^2</xliff:g>” kartasini chiqara ko‘rmang."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Ma’lumotlarni ko‘chirish uchun <xliff:g id="APP">^1</xliff:g> foydalanuvchisini oching."</string>
@@ -1689,19 +1691,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Ko‘chirishni bekor qilish"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"“<xliff:g id="NAME_0">^1</xliff:g>” qurilmasi sekin ishlayotganga o‘xshaydi. \n\nAgar davom etsangiz, ko‘chirib o‘tkazilgan ilovalar ishlamasligi va ma’lumotlarni o‘tkazish uzoq vaqt olishi mumkin. \n\nYuqori unumdorlikka erishish uchun tezkor qurilmadan (<xliff:g id="NAME_1">^1</xliff:g>) foydalaning."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"<xliff:g id="NAME">^1</xliff:g> qanday ishlatilsin?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Planshetning qo‘shimcha xotirasi"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"Bu planshetdagi faqat ilova va fayllar uchun"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Planshet xotirasi"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Telefonning qo‘shimcha xotirasi"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"Bu telefondagi faqat ilova va fayllar uchun"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Telefon xotirasi"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"SD kartani ichki xotira shaklida formatlash"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Ilova va media fayllar faqat shu planshetda saqlansin. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD kartani sozlash haqida batafsil&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formatlash"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"SD kartani ichki xotira shaklida formatlash"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Ilova va media fayllar faqat shu telefonda saqlansin. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD kartani sozlash haqida batafsil&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formatlash"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Yoki"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Tashqi xotira"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"Qurilmalar orasida fayllarni ko‘chirish uchun"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Tashqi xotira"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"SD kartani ixcham xotira shaklida formatlash"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Rasm, video, musiqa va boshqa fayllarni saqlash va ularni boshqa qurilmalarda ochish &lt;a href=https://support.google.com/android/answer/12153449&gt;SD kartani sozlash haqida batafsil&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formatlash"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Keyinroq sozlash"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Bu <xliff:g id="NAME">^1</xliff:g> formatlansinmi?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"<xliff:g id="NAME_0">^1</xliff:g> qurilmasiga ilova, media va fayllarni saqlash uchun uni formatlash lozim.\n\nBunda <xliff:g id="NAME_1">^2</xliff:g> ichidagi barcha kontent o‘chib ketadi. Ularni yo‘qotmaslik uchun boshqa <xliff:g id="NAME_2">^3</xliff:g> qurilmasiga yoki boshqa xotiraga saqlang."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Rasm, video, musiqa va boshqa fayllar saqlanishi uchun ushbu <xliff:g id="NAME_0">^1</xliff:g> formatlanishi kerak. \n\nFormatlash jarayonida <xliff:g id="NAME_1">^2</xliff:g> ichidagi mavjud kontent oʻchib ketadi. Kerakli kontent saqlanib qolishi uchun ularni boshqa <xliff:g id="NAME_2">^3</xliff:g> yoki qurilmaga zaxiralang."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g>: formatlash"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"<xliff:g id="NAME">^1</xliff:g> qurilmasiga ko‘chirilsinmi?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Bu <xliff:g id="NAME">^1</xliff:g> qurilmasiga fayllar, media va muayyan ilovalarni ko‘chirishingiz mumkin.\n\nBu taxminan <xliff:g id="DURATION">^3</xliff:g> vaqt oladi. Planshetning ichki xotirasida <xliff:g id="SIZE">^2</xliff:g> joy bo‘shatiladi."</string>
@@ -1718,9 +1721,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"<xliff:g id="NAME_0">^1</xliff:g> qurilmasidan foydalanishingiz mumkin, lekin u sekin ishlamoqda.\n\n<xliff:g id="NAME_1">^2</xliff:g> qurilmasida saqlangan ilova xato ishlashi hamda kontentni ko‘chirish ko‘p vaqt olishi mumkin.\n\nTezkor <xliff:g id="NAME_2">^3</xliff:g> ishlatish tavsiya etiladi yoki <xliff:g id="NAME_3">^4</xliff:g> qurilmasini tashqi xotira sifatida sozlang."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Boshidan boshlash"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Keyingisi"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Kontentni <xliff:g id="NAME">^1</xliff:g> qurilmasiga ko‘chirish mumkin"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Kontentni <xliff:g id="NAME">^1</xliff:g> qurilmasiga ko‘chirish uchun "<b>"Sozlamalar &gt; Xotira"</b>" sahifasiga kiring"</string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Kontent <xliff:g id="NAME_0">^1</xliff:g> qurilmasiga ko‘chirildi.\n\nMazkur <xliff:g id="NAME_1">^2</xliff:g> qurilmasini boshqarish uchun "<b>"Sozlamalar &gt; Xotira"</b>" sahifasini oching."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"<xliff:g id="NAME">^1</xliff:g> omboringizdan foydalanishni boshlang"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"<xliff:g id="NAME">^1</xliff:g> omboringizdan foydalanishni boshlang"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"<xliff:g id="NAME">^1</xliff:g> omboringizdan foydalanishni boshlang"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Batareya holati"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Batareya quvvati darajasi"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
@@ -2763,10 +2766,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Ayrim funksiyalar cheklanishi mumkin"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Batareya ortiqcha sarflanmoqda"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Batareyani koʻp sarflayotgan ilovalar"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Quvvatlash pauza qilindi"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Batareyaning ishlash muddatini uzaytirish uchun batareyani himoya qilish\nBatafsil axborot uchun bosing"</string>
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
     <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Davom ettirish"</string>
@@ -2804,8 +2805,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Bu ilova fonda batareya quvvatini ishlata oladi. Batareya quvvati kutilgandan tezroq tugashi mumkin."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Ha"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Bekor qilish"</string>
-    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
-    <skip />
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Toʻliq quvvatlash"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Ilovalaringiz batareya quvvatini odatdagidek sarflamoqda. Agar ilovalar batareya quvvatini ortiqcha sarflasa, telefoningiz nimalar qilishingiz kerakligini tavsiya qiladi.\n\nAgar batareya quvvati kamaysa, doim Quvvat tejash rejimini yoqishingiz mumkin."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Ilovalaringiz batareya quvvatini odatdagidek sarflamoqda. Agar ilovalar batareya quvvatini ortiqcha sarflasa, planshetingiz nimalar qilishingiz kerakligini tavsiya qiladi.\n\nAgar batareya quvvati kamaysa, doim Quvvat tejash rejimini yoqishingiz mumkin."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Ilovalaringiz batareya quvvatini odatdagidek sarflamoqda. Agar ilovalar batareya quvvatini ortiqcha sarflasa, qurilmangiz nimalar qilishingiz kerakligini tavsiya qiladi.\n\nAgar batareya quvvati kamaysa, doim Quvvat tejash rejimini yoqishingiz mumkin."</string>
@@ -2998,6 +2998,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Batareyaning qolgan vaqti taxminiy va telefon quvvat olayotganda foydalanish statistikasi hisoblanmaydi"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Batareya sarfi haqidagi axborot telefon bir necha soat ishlatilganidan keyin chiqadi"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Batareya sarfi diagrammasi"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Kunlik batareya sarfi sarhisobi"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Soatlik batareya sarfi sarhisobi"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Jarayonlar statistikasi"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Ish jarayonlari haqidagi g‘alati statistikalar"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Band xotira"</string>
@@ -3553,6 +3555,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Ilovalarga joylashuvingiz ma‘lumotidan foydalanishga ruxsat berish"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Orqaga"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Keyingisi"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Ixchamlashtirish"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Boshqa usulda formatlash"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Yakunlash"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM kartalar"</string>
@@ -5613,6 +5617,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Media pleyerni mahkamlash"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Ijroga tez qaytish, media pleyer Tezkor sozlamalarda chiqadi"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Media tavsiyalarni chiqarish"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Faoliyatingiz asosida"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Pleyerni berkitish"</string>

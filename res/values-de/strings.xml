@@ -1620,9 +1620,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Umbenennen"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Bereitstellen"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Auswerfen"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Formatieren"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"SD-Karte als mobilen Speicher formatieren"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Karte formatieren"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Als mobil formatieren"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Als intern formatieren"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Formatieren"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Daten migrieren"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Entfernen"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Einrichten"</string>
@@ -1652,17 +1653,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Speicher umbenennen"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"<xliff:g id="NAME_0">^1</xliff:g> ist sicher ausgeworfen, aber weiter verfügbar. \n\n<xliff:g id="NAME_1">^1</xliff:g> muss zur Verwendung zuerst bereitgestellt werden."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g> ist beschädigt. \n\n<xliff:g id="NAME_1">^1</xliff:g> muss zur Verwendung zuerst eingerichtet werden."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"Nachdem die Formatierung abgeschlossen wurde, kannst du die <xliff:g id="NAME_0">^1</xliff:g> in anderen Geräten verwenden. \n\nAlle Daten auf der <xliff:g id="NAME_1">^1</xliff:g> werden gelöscht. Sichere deine Daten daher vor der Formatierung. \n\n"<b>"Sichere Fotos und andere Medien."</b>" \nVerschiebe deine Mediendateien auf ein anderes Speichermedium auf diesem Gerät oder kopiere sie über ein USB-Kabel auf einen Computer. \n\n"<b>"Sichere deine Apps."</b>" \nAlle Apps auf der <xliff:g id="NAME_6">^1</xliff:g> werden deinstalliert und ihre Daten werden gelöscht. Wenn du diese Apps beibehalten möchtest, verschiebe sie auf ein anderes Speichermedium auf diesem Gerät."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Du kannst diese SD-Karte formatieren, um Fotos, Videos, Musik und mehr darauf zu speichern und auf anderen Geräten auf diese Inhalte zuzugreifen. \n\n"<b>"Dabei werden alle Daten auf dieser SD-Karte gelöscht."</b>" \n\n"<b>"Vor dem Formatieren"</b>" \n\n"<b>"Sichere deine Fotos und anderen Medien"</b>" \nVerschiebe deine Mediendateien auf diesem Gerät in einen alternativen Speicher oder übertrage sie mit einem USB-Kabel auf einen Computer. \n\n"<b>"Sichere deine Apps"</b>" \nAlle auf dieser <xliff:g id="NAME">^1</xliff:g> gespeicherten Apps werden deinstalliert und deren Daten werden gelöscht. Wenn du sie behalten möchtest, verschiebe sie in einen alternativen Speicher auf diesem Gerät."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Wenn du die <xliff:g id="NAME_0">^1</xliff:g> aus dem Gerät entfernst, funktionieren die auf dem Speichermedium vorhandenen Apps nicht mehr. Die gespeicherten Mediendateien können erst wieder auf dem Gerät aufgerufen werden, wenn du das Speichermedium einlegst."</b>" \n\nDie <xliff:g id="NAME_1">^1</xliff:g> ist nur für dieses Gerät formatiert und kann nicht mit anderen Geräten verwendet werden."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Zur Verwendung der Apps, Fotos oder Daten auf dieser <xliff:g id="NAME">^1</xliff:g> lege diese wieder ein. \n\nFalls das Speichermedium nicht verfügbar ist, kannst du es auch entfernen. \n\nWenn du es entfernst, gehen alle darauf befindlichen Daten endgültig verloren. \n\nDu kannst die Apps später erneut installieren, die Daten auf diesem Speichermedium gehen jedoch verloren."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g> entfernen?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Alle auf <xliff:g id="NAME">^1</xliff:g> gespeicherten Apps, Fotos und Daten gehen endgültig verloren."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"System enthält Dateien, die für die Ausführung von Android <xliff:g id="VERSION">%s</xliff:g> benötigt werden"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Nutzer im Gastmodus können SD-Karten nicht formatieren"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"<xliff:g id="NAME">^1</xliff:g> einrichten"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Als tragbaren Speicher verwenden"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Zum Übertragen von Fotos und anderen Medien zwischen Geräten"</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Als internen Speicher verwenden"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"Zum Speichern deiner Daten wie Apps und Fotos nur auf diesem Gerät. Eine Formatierung ist erforderlich. Dadurch kann das Speichermedium nicht mit anderen Geräten verwendet werden."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"SD-Karte als mobilen Speicher formatieren"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Du kannst Fotos, Videos, Musik und mehr speichern und von anderen Geräten darauf zugreifen"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"SD-Karte als internen Speicher formatieren"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Du kannst Apps und Medien speichern, die nur auf diesem Telefon verwendet werden sollen"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Als internen Speicher formatieren"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Um die Sicherheit zu gewährleisten, muss die <xliff:g id="NAME_0">^1</xliff:g> zuerst formatiert werden. \n\nDanach ist die <xliff:g id="NAME_1">^1</xliff:g> ausschließlich für dieses Gerät formatiert und funktioniert nicht mit anderen Geräten. \n\n"<b>"Durch die Formatierung werden alle derzeit auf der <xliff:g id="NAME_2">^1</xliff:g> gespeicherten Daten gelöscht."</b>" Um den Verlust von Daten zu verhindern, sichere sie vor der Formatierung."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Als tragbaren Speicher formatieren"</string>
@@ -1679,9 +1681,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Verschieben"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Daten werden verschoben…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Beachte beim Verschieben deiner Daten Folgendes: \n• Entferne nicht den Datenspeicher (<xliff:g id="NAME">^1</xliff:g>). \n• Einige Apps funktionieren eventuell nicht. \n• Achte darauf, dass das Gerät dabei immer geladen wird."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"<xliff:g id="NAME">^1</xliff:g> kann nun verwendet werden"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"Du kannst deine <xliff:g id="NAME">^1</xliff:g> nun zum Speichern von Fotos und anderen Medien einsetzen."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"Deine neue <xliff:g id="NAME">^1</xliff:g> steht nun für dich bereit. \n\nWenn du Fotos, Dateien und App-Daten auf dieses Gerät verschieben möchtest, gehe zu \"Einstellungen\" &gt; \"Speicher\"."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> wurde formatiert"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Deine <xliff:g id="NAME">^1</xliff:g> ist jetzt einsatzbereit"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Deine <xliff:g id="NAME">^1</xliff:g> ist jetzt einsatzbereit"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"<xliff:g id="APP">^1</xliff:g> verschieben"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Das Verschieben von <xliff:g id="APP">^1</xliff:g> und der entsprechenden Daten auf die <xliff:g id="NAME_0">^2</xliff:g> dauert nur einen Moment. Du kannst die App erst wieder verwenden, nachdem sie vollständig verschoben wurde. \n\nEntferne die <xliff:g id="NAME_1">^2</xliff:g> während des Vorgangs nicht."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Um Daten zu verschieben, muss erst <xliff:g id="APP">^1</xliff:g> entsperrt werden."</string>
@@ -1690,19 +1692,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Verschieben abbrechen"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Die <xliff:g id="NAME_0">^1</xliff:g> ist offenbar langsam. \n\nDu kannst fortfahren, aber hierher verschobene Apps bleiben eventuell hängen und Datenübertragungen können lange dauern. \n\nFür eine bessere Leistung solltest du eine schnellere <xliff:g id="NAME_1">^1</xliff:g> nutzen."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Wie möchtest du das Gerät (<xliff:g id="NAME">^1</xliff:g>) nutzen?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Zur Speichererweiterung verwenden"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"Nur für Apps, Dateien und Medien auf diesem Tablet"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Tabletspeicher"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Zur Speichererweiterung verwenden"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"Nur für Apps, Dateien und Medien auf diesem Smartphone"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Smartphone-Speicher"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"SD-Karte als internen Speicher formatieren"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Apps &amp; Medien, die nur auf diesem Tablet verwendet werden sollen speichern. &lt;a href=https://support.google.com/android/answer/12153449&gt;Weitere Informationen zum Einrichten von SD-Karten&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formatieren"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"SD-Karte als internen Speicher formatieren"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Du kannst Apps und Medien speichern, die nur auf diesem Telefon verwendet werden sollen. &lt;a href=https://support.google.com/android/answer/12153449&gt;Weitere Informationen zum Einrichten von SD-Karten&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formatieren"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"oder"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Als mobilen Speicher verwenden"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"Zum Übertragen von Dateien und Medien zwischen Geräten"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Mobiler Speicher"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"SD-Karte als mobilen Speicher formatieren"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Du kannst Fotos, Videos, Musik und mehr speichern und von anderen Geräten darauf zugreifen. &lt;a href=https://support.google.com/android/answer/12153449&gt;Weitere Informationen zum Einrichten von SD-Karten&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formatieren"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Später einrichten"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"<xliff:g id="NAME">^1</xliff:g> formatieren?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"<xliff:g id="NAME_0">^1</xliff:g> muss formatiert werden, damit du darauf Apps, Dateien und Medien speichern kannst. \n\nDurch das Formatieren werden alle vorhandenen Inhalte auf dem Speichergerät (<xliff:g id="NAME_1">^2</xliff:g>) gelöscht. Inhalte, die du behalten möchtest, solltest du daher auf einem anderen Speichergerät (<xliff:g id="NAME_2">^3</xliff:g> oder anderes Gerät) sichern."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Diese <xliff:g id="NAME_0">^1</xliff:g> muss formatiert werden, um Fotos, Videos, Musik und mehr darauf speichern zu können. \n\nBeim Formatieren werden vorhandene Inhalte auf der <xliff:g id="NAME_1">^2</xliff:g> gelöscht. Wenn du vermeiden möchtest, dass Inhalte verloren gehen, sichere sie auf einer anderen <xliff:g id="NAME_2">^3</xliff:g> oder Gerät."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g> formatieren"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Inhalte auf <xliff:g id="NAME">^1</xliff:g> verschieben?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Du kannst Dateien, Medien und bestimmte Apps auf dieses Speichergerät (<xliff:g id="NAME">^1</xliff:g>) verschieben. \n\nDabei werden <xliff:g id="SIZE">^2</xliff:g> des Tabletspeichers freigegeben. Der Vorgang dauert ungefähr <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1719,9 +1722,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Du kannst <xliff:g id="NAME_0">^1</xliff:g> weiterhin verwenden, aber die Arbeitsgeschwindigkeit ist möglicherweise beeinträchtigt. \n\nDie auf dem Speichergerät (<xliff:g id="NAME_1">^2</xliff:g>) gespeicherten Apps funktionieren möglicherweise nicht korrekt und das Übertragen von Inhalten kann sehr lange dauern. \n\nVersuche, ein schnelleres Speichergerät (<xliff:g id="NAME_2">^3</xliff:g>) zu verwenden oder verwende stattdessen das Speichergerät (<xliff:g id="NAME_3">^4</xliff:g>) als mobilen Speicher."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Neu starten"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Weiter"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Verschieben von Inhalten auf Speichergerät (<xliff:g id="NAME">^1</xliff:g>) möglich"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Um Inhalte auf das Speichergerät (<xliff:g id="NAME">^1</xliff:g>) zu verschieben, gehe zu "<b>"Einstellungen &gt; Speicher"</b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Deine Inhalte wurden auf das Speichergerät (<xliff:g id="NAME_0">^1</xliff:g>) verschoben. \n\nUm das Speichergerät (<xliff:g id="NAME_1">^2</xliff:g>) zu verwalten, gehe zu "<b>"Einstellungen &gt; Speicher"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Deine <xliff:g id="NAME">^1</xliff:g> ist jetzt einsatzbereit"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Deine <xliff:g id="NAME">^1</xliff:g> ist jetzt einsatzbereit"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Deine <xliff:g id="NAME">^1</xliff:g> ist jetzt einsatzbereit"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Akkustatus"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Akkustand"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
@@ -2999,6 +3002,10 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Die Daten zum Akkuverbrauch sind eine Schätzung. Der Verbrauch wird nicht gemessen, während das Smartphone geladen wird."</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Daten zur Akkunutzung sind verfügbar, nachdem du dein Smartphone einige Stunden genutzt hast"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Diagramm zur Akkunutzung"</string>
+    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
+    <skip />
+    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Prozessstatistiken"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistiken zu laufenden Prozessen"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Arbeitsspeichernutzung"</string>
@@ -3554,6 +3561,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Apps die Verwendung deiner Standortinformationen gestatten"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Zurück"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Weiter"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Für mobil formatieren"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Anders formatieren"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Fertig"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM-Karten"</string>
@@ -5614,6 +5623,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Medien"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Mediaplayer fixieren"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Damit die Wiedergabe schnell fortgesetzt werden kann, bleibt der Mediaplayer in den Schnelleinstellungen geöffnet"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Medienempfehlungen anzeigen"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Basierend auf deinen Aktivitäten"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Player ausblenden"</string>
