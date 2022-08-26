@@ -279,7 +279,7 @@ public class UserSettings extends SettingsPreferenceFragment
         final SettingsActivity activity = (SettingsActivity) getActivity();
         final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
         switchBar.setTitle(getContext().getString(R.string.multiple_users_main_switch_title));
-        if (mUserCaps.mIsAdmin) {
+        if (isCurrentUserAdmin()) {
             switchBar.show();
         } else {
             switchBar.hide();
@@ -358,7 +358,7 @@ public class UserSettings extends SettingsPreferenceFragment
         mMePreference = new UserPreference(getPrefContext(), null /* attrs */, myUserId);
         mMePreference.setKey(KEY_USER_ME);
         mMePreference.setOnPreferenceClickListener(this);
-        if (mUserCaps.mIsAdmin) {
+        if (isCurrentUserAdmin()) {
             mMePreference.setSummary(R.string.user_admin);
         }
 
@@ -449,10 +449,7 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         int pos = 0;
-        // TODO(b/191509236): The menu item does not need to be accessible for guest users,
-        //  regardless of mGuestUserAutoCreated
-        if (!mUserCaps.mIsAdmin && canSwitchUserNow() && !(isCurrentUserGuest()
-                && mGuestUserAutoCreated)) {
+        if (!isCurrentUserAdmin() && canSwitchUserNow() && !isCurrentUserGuest()) {
             String nickname = mUserManager.getUserName();
             MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, pos++,
                     getResources().getString(R.string.user_remove_user_menu, nickname));
@@ -1211,12 +1208,12 @@ public class UserSettings extends SettingsPreferenceFragment
         // don't show the guest user icon, instead we show two preferences for guest user to
         // exit and reset itself. Hence we don't add mMePreference, i.e. guest user to the
         // list of users visible in the UI.
-        if (!mUserCaps.mIsGuest) {
+        if (!isCurrentUserGuest()) {
             userPreferences.add(mMePreference);
         }
 
         boolean canOpenUserDetails =
-                mUserCaps.mIsAdmin || (canSwitchUserNow() && !mUserCaps.mDisallowSwitchUser);
+                isCurrentUserAdmin() || (canSwitchUserNow() && !mUserCaps.mDisallowSwitchUser);
         for (UserInfo user : users) {
             if (user.isGuest()) {
                 // Guest user is added to guest category via updateGuestCategory
@@ -1341,6 +1338,10 @@ public class UserSettings extends SettingsPreferenceFragment
         return mUserCaps.mIsGuest;
     }
 
+    private boolean isCurrentUserAdmin() {
+        return mUserCaps.mIsAdmin;
+    }
+
     private boolean canSwitchUserNow() {
         return mUserManager.getUserSwitchability() == UserManager.SWITCHABILITY_STATUS_OK;
     }
@@ -1388,7 +1389,7 @@ public class UserSettings extends SettingsPreferenceFragment
         UserPreference pref = null;
         boolean isGuestAlreadyCreated = false;
         boolean canOpenUserDetails =
-                mUserCaps.mIsAdmin || (canSwitchUserNow() && !mUserCaps.mDisallowSwitchUser);
+                isCurrentUserAdmin() || (canSwitchUserNow() && !mUserCaps.mDisallowSwitchUser);
 
         mGuestUserCategory.removeAll();
         mGuestUserCategory.setVisible(false);
@@ -1436,7 +1437,7 @@ public class UserSettings extends SettingsPreferenceFragment
             // "reset guest on exit" preference is shown hence also make guest category visible
             mGuestUserCategory.setVisible(true);
         }
-        if (mUserCaps.mIsGuest) {
+        if (isCurrentUserGuest()) {
             // guest category is not visible for guest user.
             mGuestUserCategory.setVisible(false);
         }
