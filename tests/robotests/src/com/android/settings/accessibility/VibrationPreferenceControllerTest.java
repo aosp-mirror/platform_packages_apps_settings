@@ -92,7 +92,7 @@ public class VibrationPreferenceControllerTest {
         controller.updateState(mPreference);
 
         assertThat(mPreference.getSummary().toString()).isEqualTo(
-                mContext.getString(R.string.accessibility_vibration_settings_state_on));
+                mContext.getString(R.string.on));
     }
 
     @Test
@@ -103,7 +103,7 @@ public class VibrationPreferenceControllerTest {
         controller.updateState(mPreference);
 
         assertThat(mPreference.getSummary().toString()).isEqualTo(
-                mContext.getString(R.string.accessibility_vibration_settings_state_on));
+                mContext.getString(R.string.on));
     }
 
     @Test
@@ -114,7 +114,7 @@ public class VibrationPreferenceControllerTest {
         controller.updateState(mPreference);
 
         assertThat(mPreference.getSummary().toString()).isEqualTo(
-                mContext.getString(R.string.accessibility_vibration_settings_state_off));
+                mContext.getString(R.string.off));
     }
 
     private VibrationPreferenceController createPreferenceController() {

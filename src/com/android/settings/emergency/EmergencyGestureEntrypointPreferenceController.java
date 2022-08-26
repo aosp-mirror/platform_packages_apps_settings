@@ -95,8 +95,7 @@ public class EmergencyGestureEntrypointPreferenceController extends BasePreferen
     public CharSequence getSummary() {
         return mContext.getText(
                 mEmergencyNumberUtils.getEmergencyGestureEnabled()
-                        ? R.string.gesture_setting_on
-                        : R.string.gesture_setting_off);
+                        ? R.string.on : R.string.off);
     }
 
     /**

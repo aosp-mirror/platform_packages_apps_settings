@@ -47,8 +47,7 @@ public class LocationServicesWifiScanningPreferenceController extends BasePrefer
     @Override
     public CharSequence getSummary() {
         final boolean wifiScanOn = mWifiManager.isScanAlwaysAvailable();
-        int resId =
-                wifiScanOn ? R.string.scanning_status_text_on : R.string.scanning_status_text_off;
+        final int resId = wifiScanOn ? R.string.on : R.string.off;
         return mContext.getString(resId);
     }
 

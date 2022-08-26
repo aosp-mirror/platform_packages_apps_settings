@@ -39,7 +39,7 @@ public class AutoclickPreferenceController extends BasePreferenceController {
         final boolean enabled = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, 0) == 1;
         if (!enabled) {
-            return mContext.getResources().getText(R.string.accessibility_feature_state_off);
+            return mContext.getResources().getText(R.string.off);
         }
         final int delay = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,

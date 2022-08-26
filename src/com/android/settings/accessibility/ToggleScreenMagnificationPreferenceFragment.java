@@ -337,7 +337,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     @Override
     protected CharSequence getShortcutTypeSummary(Context context) {
         if (!mShortcutPreference.isChecked()) {
-            return context.getText(R.string.switch_off_text);
+            return context.getText(R.string.off);
         }
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(context,
@@ -658,6 +658,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final int uerShortcutType = getUserShortcutTypeFromSettings(context);
         return (uerShortcutType != AccessibilityUtil.UserShortcutType.EMPTY)
                 ? context.getText(R.string.accessibility_summary_shortcut_enabled)
-                : context.getText(R.string.accessibility_summary_shortcut_disabled);
+                : context.getText(R.string.off);
     }
 }

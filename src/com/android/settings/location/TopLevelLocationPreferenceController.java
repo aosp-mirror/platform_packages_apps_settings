@@ -57,7 +57,7 @@ public class TopLevelLocationPreferenceController extends BasePreferenceControll
             }
             return sSummary;
         } else {
-            return mContext.getString(R.string.location_settings_summary_location_off);
+            return mContext.getString(R.string.off);
         }
     }
 
