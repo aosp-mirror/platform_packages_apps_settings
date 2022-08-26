@@ -81,7 +81,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         implements OnMainSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
         AdbClearKeysDialogHost, LogPersistDialogHost,
         BluetoothRebootDialog.OnRebootDialogListener,
-        AbstractBluetoothPreferenceController.Callback {
+        AbstractBluetoothPreferenceController.Callback,
+        NfcRebootDialog.OnNfcRebootDialogConfirmedListener {
 
     private static final String TAG = "DevSettingsDashboard";
 
@@ -299,10 +300,19 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 final BluetoothLeAudioHwOffloadPreferenceController leAudioController =
                         getDevelopmentOptionsController(
                                 BluetoothLeAudioHwOffloadPreferenceController.class);
+                final NfcSnoopLogPreferenceController nfcSnoopLogController =
+                        getDevelopmentOptionsController(
+                                NfcSnoopLogPreferenceController.class);
+                final NfcVerboseVendorLogPreferenceController nfcVerboseLogController =
+                        getDevelopmentOptionsController(
+                                NfcVerboseVendorLogPreferenceController.class);
                 // If hardware offload isn't default value, we must reboot after disable
                 // developer options. Show a dialog for the user to confirm.
                 if ((a2dpController == null || a2dpController.isDefaultValue())
-                        && (leAudioController == null || leAudioController.isDefaultValue())) {
+                        && (leAudioController == null || leAudioController.isDefaultValue())
+                        && (nfcSnoopLogController == null || nfcSnoopLogController.isDefaultValue())
+                        && (nfcVerboseLogController == null
+                        || nfcVerboseLogController.isDefaultValue())) {
                     disableDeveloperOptions();
                 } else {
                     DisableDevSettingsDialogFragment.show(this /* host */);
@@ -393,6 +403,28 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 getDevelopmentOptionsController(
                     BluetoothLeAudioPreferenceController.class);
         leAudioFeatureController.onRebootDialogCanceled();
+    }
+
+    @Override
+    public void onNfcRebootDialogConfirmed() {
+        final NfcSnoopLogPreferenceController controller =
+                getDevelopmentOptionsController(NfcSnoopLogPreferenceController.class);
+        controller.onNfcRebootDialogConfirmed();
+
+        final NfcVerboseVendorLogPreferenceController vendorLogController =
+                getDevelopmentOptionsController(NfcVerboseVendorLogPreferenceController.class);
+        vendorLogController.onNfcRebootDialogConfirmed();
+    }
+
+    @Override
+    public void onNfcRebootDialogCanceled() {
+        final NfcSnoopLogPreferenceController controller =
+                getDevelopmentOptionsController(NfcSnoopLogPreferenceController.class);
+        controller.onNfcRebootDialogCanceled();
+
+        final NfcVerboseVendorLogPreferenceController vendorLogController =
+                getDevelopmentOptionsController(NfcVerboseVendorLogPreferenceController.class);
+        vendorLogController.onNfcRebootDialogCanceled();
     }
 
     @Override
@@ -555,6 +587,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothLeAudioHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothMaxConnectedAudioDevicesPreferenceController(context));
         controllers.add(new NfcStackDebugLogPreferenceController(context));
+        controllers.add(new NfcSnoopLogPreferenceController(context, fragment));
+        controllers.add(new NfcVerboseVendorLogPreferenceController(context, fragment));
         controllers.add(new ShowTapsPreferenceController(context));
         controllers.add(new PointerLocationPreferenceController(context));
         controllers.add(new ShowSurfaceUpdatesPreferenceController(context));
