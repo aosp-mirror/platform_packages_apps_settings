@@ -129,7 +129,7 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Aby zmienić to ustawienie, musisz ponownie uruchomić urządzenie."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Uruchom ponownie"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Anuluj"</string>
-    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Włącz funkcję audio Bluetooth LE"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Włącz funkcję audio Bluetooth LE"</string>
     <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Włącza funkcję audio Bluetooth LE, jeśli urządzenie obsługuje sprzętowe funkcje LE."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Nośniki danych"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Urządzenia telefoniczne"</string>
@@ -582,7 +582,7 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Usunąć wszystkie odciski palców?"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"Usuń „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Czy chcesz usunąć ten odcisk palca?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Ta czynność usuwa zapisane na urządzeniu obrazy i modele odcisku palca powiązane z: „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”"</string>
+    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Ta czynność usuwa zapisane na urządzeniu obrazy i modele odcisku palca powiązane z „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”"</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Nie będzie można używać odcisku palca do odblokowywania telefonu i potwierdzania tożsamości w aplikacjach."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Nie będzie można używać odcisku palca do odblokowywania profilu służbowego, zatwierdzania zakupów czy logowania się w aplikacjach służbowych."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Tak, usuń"</string>
@@ -1487,8 +1487,7 @@
     <string name="sim_enter_new" msgid="9010947802784561582">"Nowy kod PIN do karty SIM"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Ponownie wpisz nowy PIN"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"Kod PIN do karty SIM"</string>
-    <!-- no translation found for sim_invalid_pin_hint (3376397829969578877) -->
-    <skip />
+    <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"Wpisz kod PIN o długości od 4 do 8 cyfr"</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"Kody PIN nie są takie same"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Nie można zmienić kodu PIN.\nWpisany kod PIN może być błędny."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"Kod PIN do karty SIM został pomyślnie zmieniony"</string>
@@ -2112,7 +2111,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Zresetować ustawienia aplikacji?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"To działanie zresetuje wszystkie ustawienia dotyczące:\n\n"<li>"wyłączonych aplikacji,"</li>\n<li>"wyłączonych powiadomień aplikacji,"</li>\n<li>"domyślnych aplikacji dla wybranych czynności,"</li>\n<li>"ograniczeń użycia danych w tle dla aplikacji,"</li>\n<li>"wszelkich ograniczeń dostępu,"</li>\n<li>"ustawień wykorzystania baterii."</li>\n\n"Nie utracisz żadnych danych aplikacji."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Resetuj aplikacje"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"Zarządzaj miejscem"</string>
     <string name="filter" msgid="9039576690686251462">"Filtr"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Wybierz opcje filtra"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Wszystkie aplikacje"</string>
@@ -2345,7 +2343,7 @@
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"Powiększanie ekranu trzykrotnym kliknięciem opóźnia pisanie i inne działania.\n\nPrzycisk ułatwień dostępu pływa na ekranie przed innymi aplikacjami. Kliknij go, aby powiększyć."</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"Zmień na przycisk ułatwień dostępu"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"Używaj trzykrotnego kliknięcia"</string>
-    <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"Może to spowolnić klawiaturę"</string>
+    <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"To może spowolnić klawiaturę"</string>
     <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"Gdy używasz trzykrotnego kliknięcia do powiększenia fragmentu ekranu, możesz zauważyć problemy dotyczące klawiatury.\n\nAby ich uniknąć, możesz zmienić skrót powiększania z trzykrotnego kliknięcia na inny.\n"<annotation id="link">"Zmień ustawienie"</annotation></string>
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Kontynuuj mimo to"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Anuluj"</string>
@@ -2465,7 +2463,7 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Skrót do odwrócenia kolorów"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Odwrócenie kolorów zamienia jasne obszary na ciemne. Z kolei ciemne obszary zamienia na jasne."</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Pamiętaj&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Zmienią się kolory w multimediach i na obrazach&lt;/li&gt; &lt;li&gt; Odwrócenie kolorów działa we wszystkich aplikacjach&lt;/li&gt; &lt;li&gt; Ciemne tło można też wyświetlać w ciemnym motywie&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Automatyczne kliknięcie (czas oczekiwania)"</string>
+    <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Automatyczne kliknięcie (czas kontaktu)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"O automatycznym kliknięciu (czas kontaktu)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Więcej informacji o automatycznym kliknięciu (czas kontaktu)"</string>
     <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"Możesz skonfigurować automatyczne kliknięcie podłączoną myszą, gdy kursor nie przesuwa się od pewnego czasu"</string>
@@ -2728,7 +2726,7 @@
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Bez ograniczeń"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Z optymalizacją"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Z ograniczeniami"</string>
-    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Zezwalaj na wykorzystanie baterii w tle bez ograniczeń. Może to powodować większe wykorzystanie baterii."</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Zezwalaj na wykorzystanie baterii w tle bez ograniczeń. Może to powodować większe zużycie baterii."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optymalizuj na podstawie wykorzystania. Zalecane w przypadku większości aplikacji."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Ograniczaj wykorzystanie baterii podczas działania w tle. Aplikacja może nie działać zgodnie z oczekiwaniami. Powiadomienia mogą być opóźnione."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Zmiana sposobu wykorzystania baterii przez aplikację może obniżyć wydajność."</string>
@@ -2743,7 +2741,8 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Wykorzystanie baterii"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Wyświetl użycie z 24 godzin"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Zobacz zużycie od ostatniego pełnego naładowania"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Wykorzystanie baterii"</string>
+    <!-- no translation found for battery_details_title (3289680399291090588) -->
+    <skip />
     <string name="details_subtitle" msgid="2550872569652785527">"Szczegóły użycia"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Dostosuj wykorzystanie energii"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Dołączone pakiety"</string>
@@ -2762,8 +2761,12 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Niektóre funkcje mogą być ograniczone"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Wyższe wykorzystanie baterii"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Zobacz aplikacje, które najbardziej wykorzystują baterię"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Ładowanie tymczasowo ograniczone"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Aby wydłużyć żywotność baterii. Więcej informacji."</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Wznów ładowanie"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"W niektórych warunkach (np. przy długotrwałym ładowaniu i wysokiej temperaturze) ładowanie może być ograniczone do <xliff:g id="PERCENT">%1$s</xliff:g>, ponieważ pomaga to utrzymać baterię w dobrym stanie.\n\nGdy te warunki się zmienią, telefon automatycznie przejdzie do normalnego ładowania."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"W niektórych warunkach (np. przy długotrwałym ładowaniu i wysokiej temperaturze) ładowanie może być ograniczone do <xliff:g id="PERCENT">%1$s</xliff:g>, ponieważ pomaga to utrzymać baterię w dobrym stanie.\n\nGdy te warunki się zmienią, telefon automatycznie przejdzie do normalnego ładowania."</string>
@@ -2809,6 +2812,8 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Ta aplikacja może wykorzystywać baterię, działając w tle. Może to powodować szybsze wyczerpywanie baterii."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Usuń"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Anuluj"</string>
+    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
+    <skip />
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Aplikacje zużywają normalną ilość energii. Jeśli będą zużywały jej za dużo, telefon zasugeruje działania, które będzie można podjąć.\n\nZawsze możesz włączyć Oszczędzanie baterii, gdy spadnie poziom jej naładowania."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Aplikacje zużywają normalną ilość energii. Jeśli będą zużywały jej za dużo, tablet zasugeruje działania, które będzie można podjąć.\n\nZawsze możesz włączyć Oszczędzanie baterii, gdy spadnie poziom jej naładowania."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Aplikacje zużywają normalną ilość energii. Jeśli będą zużywały jej za dużo, urządzenie zasugeruje działania, które będzie można podjąć.\n\nZawsze możesz włączyć Oszczędzanie baterii, gdy spadnie poziom jej naładowania."</string>
@@ -2857,7 +2862,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Pełne naładowanie wystarczy na około"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Dane o wykorzystaniu baterii są przybliżone i mogą się zmienić w zależności od sposobu używania."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Wykorzystanie baterii"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Zarządzaj wykorzystaniem baterii"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Łącznie <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> w tle\nod ostatniego pełnego naładowania"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Łącznie <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> w tle w ciągu\nostatnich 24 godzin"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Łącznie <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> w tle\nw okresie <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
@@ -2911,14 +2915,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"przy <xliff:g id="PERCENT">%1$s</xliff:g> baterii"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Procent naładowania baterii"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Pokazuj procentowy poziom naładowania baterii na pasku stanu"</string>
-    <!-- no translation found for battery_usage_chart_graph_hint_last_full_charge (6570336408060566877) -->
-    <skip />
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Poziom baterii od ostatniego pełnego naładowania"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Poziom naładowania baterii w ciągu ostatnich 24 godzin"</string>
-    <!-- no translation found for battery_app_usage (8976453608783133770) -->
-    <skip />
+    <string name="battery_app_usage" msgid="8976453608783133770">"Wykorzystanie przez aplikacje od ostatniego naładowania"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Wykorzystanie przez aplikacje w ciągu ostatnich 24 godzin"</string>
-    <!-- no translation found for battery_system_usage (1395943945140097585) -->
-    <skip />
+    <string name="battery_system_usage" msgid="1395943945140097585">"Wykorzystanie systemu od ostatniego pełnego naładowania"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Wykorzystanie przez system w ciągu ostatnich 24 godzin"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Wykorzystanie przez system w godz. <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Wykorzystanie przez aplikacje w godz. <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -2929,6 +2930,10 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Dane o wykorzystaniu baterii są przybliżone i nie są mierzone podczas ładowania telefonu"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Dane o wykorzystaniu baterii będą dostępne po kilku godzinach używania telefonu"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Wykres zużycia baterii"</string>
+    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
+    <skip />
+    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statystyki procesów"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Rozbudowane statystyki uruchomionych procesów"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Użycie pamięci"</string>
@@ -3682,7 +3687,7 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Automatycznie wyświetlaj napisy do multimediów"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Głośnik telefonu"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Słuchawki przewodowe"</string>
-    <string name="spatial_audio_text" msgid="8201387855375146000">"Dźwięk ze zgodnych multimediów ma jeszcze lepszą jakość"</string>
+    <string name="spatial_audio_text" msgid="8201387855375146000">"Dźwięk z kompatybilnych multimediów ma jeszcze lepszą jakość"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Wyłączono"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Włączony / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Włączony / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> i <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
@@ -3731,7 +3736,7 @@
     <string name="zen_mode_block_effect_light" msgid="1997222991427784993">"Nie włączaj migania diody"</string>
     <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"Nie wyświetlaj powiadomień na ekranie"</string>
     <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"Ukrywaj ikony na pasku stanu u góry ekranu"</string>
-    <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Ukrywaj plakietki z powiadomieniem na ikonach aplikacji"</string>
+    <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Ukrywaj kropki powiadomień na ikonach aplikacji"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"Nie wybudzaj w przypadku powiadomień"</string>
     <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"Ukrywaj w obszarze powiadomień"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"Nigdy"</string>
@@ -3832,7 +3837,7 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Zezwalaj na odkładanie powiadomień"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Ukryj ikony z subtelnych powiadomień"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Ikony z subtelnych powiadomień nie są pokazywane na pasku stanu"</string>
-    <string name="notification_badging_title" msgid="5469616894819568917">"Plakietka z powiadomieniem na ikonie aplikacji"</string>
+    <string name="notification_badging_title" msgid="5469616894819568917">"Kropka powiadomienia na ikonie aplikacji"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"Pokaż pasek ostatnich rozmów"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Dymki"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Niektóre powiadomienia i inne treści mogą pojawiać się jako dymki na ekranie. Aby otworzyć dymek, kliknij go. Aby zamknąć, przeciągnij go w dół ekranu."</string>
@@ -4088,8 +4093,8 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Nigdy nie pokazuj tych powiadomień"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Pokazuj powiadomienia"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Nigdy nie pokazuj powiadomień w obszarze powiadomień ani na urządzeniach peryferyjnych"</string>
-    <string name="notification_badge_title" msgid="6854537463548411313">"Zezwalaj na plakietkę z powiadomieniem"</string>
-    <string name="notification_channel_badge_title" msgid="6505542437385640049">"Pokazuj plakietkę z powiadomieniem"</string>
+    <string name="notification_badge_title" msgid="6854537463548411313">"Zezwalaj na kropkę powiadomienia"</string>
+    <string name="notification_channel_badge_title" msgid="6505542437385640049">"Pokazuj kropkę powiadomienia"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"Ignoruj Nie przeszkadzać"</string>
     <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"Zezwól na działanie tych powiadomień, gdy tryb Nie przeszkadzać jest włączony"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"Ekran blokady"</string>
@@ -4402,7 +4407,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> nieużywanej aplikacji</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> nieużywana aplikacja</item>
     </plurals>
-    <string name="unused_apps_category" msgid="8954930958175500851">"Nieużywane ustawienia aplikacji"</string>
+    <string name="unused_apps_category" msgid="8954930958175500851">"Ustawienia nieużywanych aplikacji"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"Wstrzymaj aktywność w aplikacji, jeśli jest nieużywana"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Usuń uprawnienia i pliki tymczasowe oraz zatrzymaj powiadomienia"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Wszystkie aplikacje"</string>
@@ -4821,16 +4826,13 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Włącz teraz"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Wyłącz teraz"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Nie optymalizuje wykorzystania baterii"</string>
-    <!-- no translation found for app_battery_optimization_title (389653121998016466) -->
+    <!-- no translation found for app_battery_usage_title (346558380609793334) -->
     <skip />
-    <!-- no translation found for app_battery_optimization_summary (7864783556193427398) -->
+    <!-- no translation found for app_battery_usage_summary (6349965904306339539) -->
     <skip />
-    <!-- no translation found for filter_battery_unrestricted_title (821027369424198223) -->
-    <skip />
-    <!-- no translation found for filter_battery_optimized_title (8236647176487754796) -->
-    <skip />
-    <!-- no translation found for filter_battery_restricted_title (5886859505802563232) -->
-    <skip />
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Bez ograniczeń"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Z optymalizacją"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Z ograniczonym dostępem"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Uniemożliwiaj wpisywanie tekstu w obszarze powiadomień, gdy urządzenie jest zablokowane"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Domyślne sprawdzanie pisowni"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Wybierz sprawdzanie pisowni"</string>
@@ -5155,7 +5157,7 @@
     <string name="storage_videos" msgid="6117698226447251033">"Filmy"</string>
     <string name="storage_audio" msgid="5994664984472140386">"Dźwięk"</string>
     <string name="storage_apps" msgid="3564291603258795216">"Aplikacje"</string>
-    <string name="storage_documents_and_other" msgid="3293689243732236480">"Dokumenty i inne dane"</string>
+    <string name="storage_documents_and_other" msgid="3293689243732236480">"Dokumenty i inne pliki"</string>
     <string name="storage_system" msgid="8472410119822911844">"System"</string>
     <string name="storage_trash" msgid="2807138998886084856">"Kosz"</string>
     <string name="storage_trash_dialog_title" msgid="2296169576049935200">"Opróżnić kosz?"</string>
@@ -5594,6 +5596,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Multimedia"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Przypnij odtwarzacz"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Aby można było szybko wznowić odtwarzanie, odtwarzacz pozostaje otwarty w Szybkich ustawieniach"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Pokazuj rekomendacje multimediów"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Na podstawie Twojej aktywności"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Ukryj odtwarzacz"</string>

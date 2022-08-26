@@ -70,10 +70,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"您的裝置將會與 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 解除連結。"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"配對新裝置"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"藍牙"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"配對右耳"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"配對左耳"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"配對另一耳的裝置"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"左耳助聽器已連接。\n\n如要配對右耳，請確認該耳助聽器已開啟並可開始配對。"</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"右耳助聽器已連接。\n\n如要配對左耳，請確認該耳助聽器已開啟並可開始配對。"</string>
@@ -2066,7 +2064,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"重設應用程式偏好設定？"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"此操作會重設以下所有偏好設定：\n\n"<li>"已停用的應用程式"</li>\n<li>"已停用的應用程式通知"</li>\n<li>"執行操作的預設應用程式"</li>\n<li>"應用程式的背景資料限制"</li>\n<li>"任何權限限制"</li>\n<li>"電池用量設定"</li>\n\n"您不會失去任何應用程式資料。"</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"重設應用程式"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"管理空間"</string>
     <string name="filter" msgid="9039576690686251462">"篩選"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"選擇篩選選項"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"所有應用程式"</string>
@@ -2683,7 +2680,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"電池電量"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"查看過去 24 小時的使用情況"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"查看上次充滿電後的使用情況"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"電池用量"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"應用程式電池用量"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"詳細使用狀況"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"調整電力使用"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"已包含套件"</string>
@@ -2702,8 +2699,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"部分功能可能受到限制"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"查看用電量較高的應用程式"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看用電量最高的應用程式"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"充電暫時受限"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"延長電池壽命。瞭解詳情。"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"已暫停充電"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"保護電池以延長電池壽命\n輕按即可瞭解詳情"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"繼續充電"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"在特定情況下 (例如高溫和長時間充電)，充電可能會限於 <xliff:g id="PERCENT">%1$s</xliff:g> 以延長電池壽命。\n\n當這些情況結束時，手機將會自動正常充電。"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"在特定情況下 (例如高溫和長時間充電)，充電可能會限於 <xliff:g id="PERCENT">%1$s</xliff:g> 以延長電池壽命。\n\n當這些情況結束時，平板電腦將會自動正常充電。"</string>
@@ -2739,6 +2738,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"此應用程式會在背景使用電量。您的電池電量可能會比預期更快耗盡。"</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"移除"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"取消"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"讓裝置完全充電"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"您的應用程式目前的耗電量正常。如果應用程式耗電過多，手機會建議您執行一些操作。\n\n如果電量不足，您隨時都可以開啟「省電模式」。"</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"您的應用程式目前的耗電量正常。如果應用程式耗電過多，平板電腦將會為您提供操作建議。\n\n如果電量較低，您可以隨時開啟省電模式。"</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"您的應用程式目前的耗電量正常。如果應用程式耗電過多，裝置將會為您提供操作建議。\n\n如果電量較低，您可以隨時開啟省電模式。"</string>
@@ -2783,7 +2783,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"電池在充滿電後的預計使用時間"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"電池用量資料為概略值，且會根據使用情況有所變化。"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"電池用量"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"管理電池用量"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"總共使用 <xliff:g id="TIME_0">^1</xliff:g> • 背景使用 <xliff:g id="TIME_1">^2</xliff:g>\n(從上次充滿電後)"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"總共使用 <xliff:g id="TIME_0">^1</xliff:g> • 背景使用 <xliff:g id="TIME_1">^2</xliff:g>\n(過去 24 小時)"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"總共使用 <xliff:g id="TIME_0">^1</xliff:g> • 背景使用 <xliff:g id="TIME_1">^2</xliff:g>\n(<xliff:g id="TIME_PERIOD">^3</xliff:g>)"</string>
@@ -2852,6 +2851,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"電池用量資料為概略值，且手機在充電時不會估算電池用量"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"手機使用數小時後，才會顯示電池用量資料"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"電池用量圖表"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"每日電池用量圖表"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"每小時電池用量圖表"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"程序統計資料"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"執行中程序的技術統計資料"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"記憶體用量"</string>
@@ -4676,8 +4677,8 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"立即開啟"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"立即關閉"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"未啟用電池優化功能"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"管理電池用量"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"為應用程式設定電池用量"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"應用程式電池用量"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"為應用程式設定電池用量"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"無限制"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"優化"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"受限制"</string>
@@ -5414,6 +5415,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"媒體"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"固定媒體播放器"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"如要快速恢復播放，請讓「快速設定」中的媒體播放器保持開啟"</string>
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"在螢幕鎖定畫面上顯示媒體"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"媒體播放器會在螢幕鎖定畫面上保持開啟狀態，以便快速繼續播放"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"顯示媒體建議"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"根據您的活動"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"隱藏播放器"</string>

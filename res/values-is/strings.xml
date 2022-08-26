@@ -572,7 +572,7 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Fjarlægja öll fingraför?"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"Fjarlægja „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Viltu eyða þessu fingrafari?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Þetta eyðir fingrafaramyndum og -líkani sem tengist „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ og er vistað í tækinu"</string>
+    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Þetta eyðir fingrafaramyndum og -líkani sem tengjast „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ og eru vistuð í tækinu"</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Þú munt ekki geta notað fingrafarið þitt til að opna símann eða staðfesta hver þú ert í forritum."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Þú munt ekki geta notað fingrafarið þitt til að taka vinnusniðið úr lás, heimila kaup eða skrá þig inn í vinnuforrit."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Já, fjarlægja"</string>
@@ -2061,7 +2061,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Endurstilla stillingar forrita?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Þetta endurstillir allar stillingar fyrir:\n\n"<li>"Óvirk forrit"</li>\n<li>"Óvirkar tilkynningar forrita"</li>\n<li>"Sjálfgefin forrit aðgerða"</li>\n<li>"Gagnatakmarkanir forrita í bakgrunni"</li>\n<li>"Takmarkanir á heimildum"</li>\n<li>"Stillingar rafhlöðunotkunar"</li>\n\n"Þú glatar engum forritsgögnum."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Endurstilla forrit"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"Stjórna plássi"</string>
     <string name="filter" msgid="9039576690686251462">"Sía"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Veldu síuvalkosti"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Öll forrit"</string>
@@ -2678,7 +2677,8 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Rafhlöðunotkun"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Skoða notkun síðasta sólarhringinn"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Skoða notkun frá síðustu fullu hleðslu"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Rafhlöðunotkun"</string>
+    <!-- no translation found for battery_details_title (3289680399291090588) -->
+    <skip />
     <string name="details_subtitle" msgid="2550872569652785527">"Notkunarupplýsingar"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Stilla orkunotkun"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Innifaldir pakkar"</string>
@@ -2697,8 +2697,12 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Einhverjir eiginleikar verða hugsanlega takmarkaðir"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Hærri rafhlöðunotkun"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Sjá hvaða forrit nota mest af rafhlöðu"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Hleðsla takmörkuð tímabundið"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Til að spara rafhlöðuna. Nánar."</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Halda hleðslu áfram"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Við tilteknar aðstæður, eins og hátt hitastig og langan hleðslutíma, kann hleðsla að takmarkast við <xliff:g id="PERCENT">%1$s</xliff:g> til að vernda rafhlöðuna.\n\nÞegar þessar aðstæður líða hjá heldur síminn sjálfkrafa áfram að hlaðast eðlilega."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Við tilteknar aðstæður, eins og hátt hitastig og langan hleðslutíma, kann hleðsla að takmarkast við <xliff:g id="PERCENT">%1$s</xliff:g> til að vernda rafhlöðuna.\n\nÞegar þessar aðstæður líða hjá heldur spjaldtölvan sjálfkrafa áfram að hlaðast eðlilega."</string>
@@ -2734,6 +2738,8 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Þetta forrit getur notað rafhlöðuna í bakgrunni. Rafhlaðan gæti tæmst hraðar en venjulega."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Fjarlægja"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Hætta við"</string>
+    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
+    <skip />
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Rafhlöðunotkun forritanna þinna er eðlileg. Ef rafhlöðunotkun forrita er of mikil leggur síminn til aðgerðir sem þú getur gripið til.\n\nÞú getur alltaf kveikt á rafhlöðusparnaði ef lítil hleðsla er eftir á rafhlöðunni."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Rafhlöðunotkun forritanna þinna er eðlileg. Ef rafhlöðunotkun forrita er of mikil leggur spjaldtölvan til aðgerðir sem þú getur gripið til.\n\nÞú getur alltaf kveikt á rafhlöðusparnaði ef lítil hleðsla er eftir á rafhlöðunni."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Rafhlöðunotkun forritanna þinna er eðlileg. Ef rafhlöðunotkun forrita er of mikil leggur tækið til aðgerðir sem þú getur gripið til.\n\nÞú getur alltaf kveikt á rafhlöðusparnaði ef lítil hleðsla er eftir á rafhlöðunni."</string>
@@ -2778,7 +2784,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Full hleðsla endist í u.þ.b."</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Upplýsingar um rafhlöðunotkun eru áætlaðar og geta breyst eftir notkun."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Rafhlöðunotkun"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Stjórna rafhlöðunotkun"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> alls • <xliff:g id="TIME_1">^2</xliff:g> í bakgrunni\nfrá síðustu fullu hleðslu"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> alls • <xliff:g id="TIME_1">^2</xliff:g> í bakgrunni\nsíðasta sólarhringinn"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"<xliff:g id="TIME_0">^1</xliff:g> alls • <xliff:g id="TIME_1">^2</xliff:g> í bakgrunni\ní <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
@@ -2847,6 +2852,10 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Upplýsingar um rafhlöðunotkun eru áætlaðar og mæla ekki notkun á meðan síminn er í hleðslu"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Gögn rafhlöðunotkunar verða tiltæk þegar þú hefur notað símann í nokkrar klukkustundir"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Myndrit yfir rafhlöðunotkun"</string>
+    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
+    <skip />
+    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Tölfræði vinnsluferla"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Nördaleg tölfræði um opin vinnsluferli"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Minnisnotkun"</string>
@@ -4671,8 +4680,10 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Kveikja núna"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Slökkva núna"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Notar ekki rafhlöðusparnað"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"Stjórna rafhlöðunotkun"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Stilla rafhlöðunotkun fyrir forrit"</string>
+    <!-- no translation found for app_battery_usage_title (346558380609793334) -->
+    <skip />
+    <!-- no translation found for app_battery_usage_summary (6349965904306339539) -->
+    <skip />
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Ótakmarkað"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Fínstillt"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Takmarkað"</string>
@@ -5409,6 +5420,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Margmiðlunarefni"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Festa efnisspilara"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Efnisspilarinn helst opinn í flýtistillingum svo hægt sé að ræsa spilun aftur í skyndi"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Sýna tillögur að efni"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Byggt á virkni þinni"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Fela spilara"</string>

@@ -70,10 +70,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Cihazınız <xliff:g id="DEVICE_NAME">%1$s</xliff:g> cihazından ayrılacaq."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Cihaz əlavə edin"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Sağ qulaqlığı birləşdirin"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Sol qulaqlığı birləşdirin"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Digər qulaqlığı birləşdirin"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Sol eşitmə cihazınız qoşulub.\n\nSağı qoşmaq üçün onun aktiv və birləşdirməyə hazır olduğuna əmin olun."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Sağ eşitmə cihazınız qoşulub.\n\nSolu qoşmaq üçün onun aktiv və birləşdirməyə hazır olduğuna əmin olun."</string>
@@ -2063,7 +2061,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Tətbiq tərcihləri sıfırlansın?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Bu, aşağıdakılar üçün bütün tərcihləri sıfırlayacaq:\n\n"<li>" Deaktiv edilmiş tətbiqlər"</li>\n<li>"Deaktiv edilmiş tətbiq bildirişləri"</li>\n<li>"Əməliyyatlar üçün defolt tətbiqlər"</li>\n<li>"Tətbiqlər üçün arxa fon məlumatlarının məhdudlaşdırılması"</li>\n<li>"İstənilən icazə məhdudiyyətləri"</li>\n<li>"Batareya istifadəsi ayarları"</li>\n\n"Hər hansı tətbiq məlumatınız silinməyəcək."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Tətbiqləri sıfırla"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"Boşluğu idarə edin"</string>
     <string name="filter" msgid="9039576690686251462">"Filter"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Filtr variantları seçin"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Bütün tətbiqlər"</string>
@@ -2680,7 +2677,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Enerji istifadəsi"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Son 24 saat ərzində istifadəyə baxın"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Son tam şarjdan sonra istifadəyə baxın"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Enerji istifadəsi"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Tətbiq batareyasının istifadəsi"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Ətraflı istifadə"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Enerji istifadəsini idarə edin"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Daxil edilmiş paketlər"</string>
@@ -2699,8 +2696,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Bəzi funksiyalar məhddudlaşdırıla bilər"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Batareya istifadəsi yüksəkdir"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Ən çox istifadə edilən tətbiqlərə baxın"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Şarj müvəqqəti məhdudlaşdırılıb"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Enerjiyə qənaət etmək üçün. Ətraflı məlumat."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Şarj durdurulub"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Batareyanın ömrünü uzatmaq üçün batareya qorunur\nƏtraflı məlumat üçün toxunun"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Şarja davam edin"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Yüksək temperatur və uzun şarj müddəti kimi müəyyən hallarda, batareyanı qorumaq üçün şarj <xliff:g id="PERCENT">%1$s</xliff:g> ilə məhdudlaşdırıla bilər.\n\nBu hallar bitdikdə telefonunuz avtomatik olaraq normal şarj ediləcək."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Yüksək temperatur və uzun şarj müddəti kimi müəyyən hallarda, batareyanı qorumaq üçün şarj <xliff:g id="PERCENT">%1$s</xliff:g> ilə məhdudlaşdırıla bilər.\n\nBu hallar bitdikdə planşetiniz avtomatik olaraq normal şarj ediləcək."</string>
@@ -2736,6 +2735,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Bu tətbiq fon rejimində batareya enerjisi işlətdiyi üçün enerji tez qurtara bilər."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Silin"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Ləğv edin"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Tam şarj edin"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Tətbiqlər enerjini qaydası üzrə sərf edir. Enerji sərfiyyatı artanda sizə təkliflər ediləcək.\n\nEnerji qurtarırsa, enerjiyə qənaət rejiminə keçin."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Tətbiqlər enerjini qaydası üzrə sərf edir. Enerji sərfiyyatı artanda sizə təkliflər ediləcək.\n\nEnerji qurtarırsa, enerjiyə qənaət rejiminə keçin."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Tətbiqlər enerjini qaydası üzrə sərf edir. Enerji sərfiyyatı artanda sizə təkliflər ediləcək.\n\nEnerji qurtarırsa, enerjiyə qənaət rejiminə keçin."</string>
@@ -2780,7 +2780,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Tam doldurulmuş batareya təxminən bu qədər davam edir"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Enerji istifadəsi haqqında məlumat təxminidir və istifadə intensivliyinə əsasən dəyişir."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Enerji istifadəsi"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Enerji sərfiyyatının idarəedilməsi"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Cəmi <xliff:g id="TIME_0">^1</xliff:g> • Sonuncu tam şarjdan etibarən\n<xliff:g id="TIME_1">^2</xliff:g> arxa fon"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Cəmi <xliff:g id="TIME_0">^1</xliff:g> • son 24 saat ərzində\n<xliff:g id="TIME_1">^2</xliff:g> arxa fon"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Cəmi <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_PERIOD">^3</xliff:g> ərzində\n<xliff:g id="TIME_1">^2</xliff:g> arxa fon"</string>
@@ -2849,6 +2848,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Enerji istifadəsi haqqında məlumat təxminidir və telefon şarj edilərkən istifadəni ölçmür"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Bir neçə saat telefonunuzdan istifadə etdikdən sonra batareya istifadəsi datası əlçatan olacaq"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Enerji istifadəsi diaqramı"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Gündəlik batareyadan istifadə qrafiki"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Saatlıq batareyadan istifadə qrafiki"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Proses Statistikası"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"İşləmə prosesləri haqqında çağırış statistikası"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Yaddaş istifadəsi"</string>
@@ -4673,8 +4674,8 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"İndi aktiv edin"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"İndi deaktiv edin"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Enerjiyə qənaət edilmir"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"Enerji sərfiyyatının idarəedilməsi"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Tətbiqlər üçün batareya istifadəsini ayarlayın"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Tətbiq batareyasının istifadəsi"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Tətbiqlər üçün batareya istifadəsini ayarlayın"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Məhdudiyyətsiz"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimal"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Məhdudlaşdırılıb"</string>
@@ -5411,6 +5412,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Mediapleyer bərkidilsin"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Oxutmanı cəld davam etdirmək üçün media pleyer Sürətli Ayarlarda açıq qalır"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Media tövsiyələri göstərilsin"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Fəaliyyətinizə əsaslanır"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Oyunçunu gizlədin"</string>

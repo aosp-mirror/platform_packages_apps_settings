@@ -70,10 +70,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"このデバイスと <xliff:g id="DEVICE_NAME">%1$s</xliff:g> との接続を解除します。"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"新しいデバイスとペア設定"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"右耳をペア設定"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"左耳をペア設定"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"もう一方の耳をペア設定"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"左の補聴器を接続しました。\n\n右の補聴器をペア設定するには、電源が入り、ペア設定できる状態になっていることをご確認ください。"</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"右の補聴器を接続しました。\n\n左耳をペア設定するには、電源が入り、ペア設定できる状態になっていることをご確認ください。"</string>
@@ -1740,8 +1738,8 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"ネットワーク設定をリセットしました"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"SIM を消去できません"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"エラーのためダウンロード型 SIM を消去できません。\n\nデバイスを再起動してもう一度お試しください。"</string>
-    <string name="main_clear_title" msgid="277664302144837723">"全データを消去（出荷時リセット）"</string>
-    <string name="main_clear_short_title" msgid="4752094765533020696">"全データを消去（出荷時リセット）"</string>
+    <string name="main_clear_title" msgid="277664302144837723">"すべてのデータを消去（初期設定にリセット）"</string>
+    <string name="main_clear_short_title" msgid="4752094765533020696">"すべてのデータを消去（初期設定にリセット）"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"この操作を行うと、以下のデータを含め、タブレットの"<b>"内部ストレージ"</b>"の全データが消去されます。\n\n"<li>"Google アカウント"</li>\n<li>"システムやアプリのデータと設定"</li>\n<li>"ダウンロードしたアプリ"</li></string>
     <string name="main_clear_desc" product="default" msgid="6984348811887162647">"この操作を行うと、以下のデータを含め、スマートフォンの"<b>"内部ストレージ"</b>"の全データが消去されます。\n\n"<li>"Google アカウント"</li>\n<li>"システムやアプリのデータと設定"</li>\n<li>"ダウンロードしたアプリ"</li></string>
     <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"以下のアカウントにログインしています:\n"</string>
@@ -1760,7 +1758,7 @@
     <string name="main_clear_final_desc" msgid="5800877928569039580">"個人情報とダウンロードしたアプリがすべて削除されます。この操作を取り消すことはできません。"</string>
     <string name="main_clear_final_desc_esim" msgid="440406836793824969">"ダウンロードしたアプリや SIM を含め、個人情報がすべて削除されます。この操作を取り消すことはできません。"</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"すべてのデータを消去しますか？"</string>
-    <string name="main_clear_not_available" msgid="3433795327146684827">"このユーザーは出荷時設定へのリセットを許可されていません"</string>
+    <string name="main_clear_not_available" msgid="3433795327146684827">"このユーザーには初期設定へのリセットが許可されていません"</string>
     <string name="main_clear_progress_title" msgid="7239741132015617719">"消去しています"</string>
     <string name="main_clear_progress_text" msgid="4636695115176327972">"お待ちください…"</string>
     <string name="call_settings_title" msgid="2531072044177194164">"通話設定"</string>
@@ -2063,7 +2061,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"アプリの設定をリセットしますか？"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"この操作により、次の設定がすべてリセットされます。\n\n"<li>"無効化されているアプリ"</li>\n<li>"無効化されているアプリの通知"</li>\n<li>"特定の操作で使用するデフォルトのアプリ"</li>\n<li>"アプリのバックグラウンド データの制限"</li>\n<li>"権限のすべての制限"</li>\n<li>"バッテリー使用量の設定"</li>\n\n"アプリのデータが失われることはありません。"</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"アプリをリセット"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"容量を管理"</string>
     <string name="filter" msgid="9039576690686251462">"フィルタ"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"フィルタオプションの選択"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"すべてのアプリ"</string>
@@ -2672,7 +2669,7 @@
     <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"このアプリでは、バッテリーの使用を「<xliff:g id="STATE">%1$s</xliff:g>」以外に設定できません。"</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"制限なし"</string>
     <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"最適化"</string>
-    <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"詳しくは、バッテリー使用量オプションについての説明をご覧ください"</string>
+    <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"詳しくは、バッテリー使用状況のオプションに関する説明をご確認ください"</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"最後にフル充電してからの使用時間"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"フル充電以降のバッテリー使用量"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"バッテリー使用量"</string>
@@ -2680,7 +2677,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"バッテリー使用量"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"過去 24 時間の使用状況を確認できます"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"前回のフル充電からの使用状況を表示する"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"バッテリーの使用状況"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"アプリのバッテリー使用量"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"使用状況の詳細"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"消費電力の調整"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"含まれているパッケージ"</string>
@@ -2699,8 +2696,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"一部の機能が制限される可能性があります"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"バッテリー使用量が多くなっています"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"使用量の多いアプリを確認"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"充電は一時的に制限されています"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"バッテリーを長持ちさせるためのヒントをご確認ください。"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"充電は一時停止中"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"バッテリーを保護して寿命を延ばします\nタップして詳細をご確認ください"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"充電を再開"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"気温が高い、充電時間が長いなど、条件によって、バッテリーの状態を保つために充電が <xliff:g id="PERCENT">%1$s</xliff:g> に制限されることがあります。\n\nこれらの条件が解消されると、スマートフォンは自動的に通常どおり充電されます。"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"気温が高い、充電時間が長いなど、条件によって、バッテリーの状態を保つために充電が <xliff:g id="PERCENT">%1$s</xliff:g> に制限されることがあります。\n\nこれらの条件が解消されると、タブレットは自動的に通常どおり充電されます。"</string>
@@ -2736,6 +2735,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"このアプリがバックグラウンドで電池を使用できるようになるため、電池を予想より早く消費する可能性があります。"</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"解除"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"キャンセル"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"フル充電"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"アプリのバッテリー使用量は正常です。アプリがバッテリーを使いすぎる場合は、おすすめの対処方法をスマートフォンがお知らせします。\n\nバッテリーの残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"アプリのバッテリー使用量は正常です。アプリがバッテリーを使いすぎる場合は、対処可能なおすすめの方法がタブレットに表示されます。\n\nバッテリーの残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"アプリのバッテリー使用量は正常です。アプリがバッテリーを使いすぎる場合は、対処可能なおすすめの方法がデバイスに表示されます。\n\nバッテリーの残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
@@ -2780,7 +2780,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"フル充電での推定待ち受け可能時間"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"バッテリー使用量データは概算値であり、使用状況によって変化する可能性があります。"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"バッテリー使用量"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"バッテリー使用量の管理"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"合計: <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> バックグラウンドでの使用: \n（前回のフル充電以降）"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"合計: <xliff:g id="TIME_0">^1</xliff:g> • バックグラウンドでの使用: <xliff:g id="TIME_1">^2</xliff:g>\n（過去 24 時間）"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"合計: <xliff:g id="TIME_0">^1</xliff:g> • バックグラウンド: <xliff:g id="TIME_1">^2</xliff:g>\n（<xliff:g id="TIME_PERIOD">^3</xliff:g>）"</string>
@@ -2849,6 +2848,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"バッテリー使用量のデータは概算値です。スマートフォンの充電中の使用量は測定されません"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"バッテリー使用量のデータは、スマートフォンを数時間使用すると表示されます"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"バッテリー使用量グラフ"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"バッテリー使用量グラフ（日）"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"バッテリー使用量グラフ（時間）"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"プロセスの統計情報"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"プロセスの実行に関する独自の統計情報"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"メモリ使用"</string>
@@ -3982,7 +3983,7 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"今後はこの通知を表示しない"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"通知の表示"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"シェードにも周辺デバイスにも通知を表示しない"</string>
-    <string name="notification_badge_title" msgid="6854537463548411313">"通知ドットの許可"</string>
+    <string name="notification_badge_title" msgid="6854537463548411313">"通知ドットを許可"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"通知ドットの表示"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"サイレント モードの例外"</string>
     <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"サイレント モードが ON の場合もこの通知を引き続き表示します"</string>
@@ -4276,7 +4277,7 @@
       <item quantity="other">使用されていないアプリ: <xliff:g id="COUNT_1">%d</xliff:g> 個</item>
       <item quantity="one">使用されていないアプリ: <xliff:g id="COUNT_0">%d</xliff:g> 個</item>
     </plurals>
-    <string name="unused_apps_category" msgid="8954930958175500851">"使用されていないアプリの設定"</string>
+    <string name="unused_apps_category" msgid="8954930958175500851">"使用していないアプリの設定"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"使用していないアプリを一時停止する"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"権限と一時ファイルを削除し、通知を停止します"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"すべてのアプリ"</string>
@@ -4673,8 +4674,8 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"今すぐ ON にする"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"今すぐ OFF にする"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"電池の最適化を使用しない"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"バッテリー使用量の管理"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"アプリのバッテリー使用量の設定"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"アプリのバッテリー使用量"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"アプリのバッテリー使用量の設定"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"制限なし"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"最適化"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"制限あり"</string>
@@ -4946,7 +4947,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"開発者向けオプションを使用する"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"クレジット プロバイダが行える操作:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"IMEI 番号にアクセスする"</string>
-    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"問題が発生した場合にデバイスを出荷時の設定にリセットする"</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"問題が発生した場合にデバイスを初期設定にリセットする"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"デバイスがロックされた場合に行えるのは、以下の操作のみです。"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"緊急通報を発信する"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"日付、時刻、ネットワークの状態、バッテリー残量などのシステム情報を見る"</string>
@@ -5076,7 +5077,7 @@
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"通話中は利用できません"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"通話するデバイス"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"この APN は変更できません。"</string>
-    <string name="gesture_prevent_ringing_screen_title" msgid="8293094715267769349">"着信音のミュート"</string>
+    <string name="gesture_prevent_ringing_screen_title" msgid="8293094715267769349">"着信音をミュート"</string>
     <string name="gesture_prevent_ringing_title" msgid="5978577898997523581">"電源ボタンと音量大ボタンを同時に押す"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="4529077822282099235">"着信音ミュート用のショートカット"</string>
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"バイブレーション"</string>
@@ -5084,7 +5085,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"何もしない"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"バイブレーション"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"ミュート"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"有効にするには、まず [電源ボタンを長押しする] を電源ボタン メニューに変更します。"</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"有効にするには、まず [電源ボタンを長押し] を電源ボタン メニューに変更します。"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"ネットワークの詳細"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"デバイス名がスマートフォンのアプリに表示されます。また、Bluetooth デバイスや Wi-Fi ネットワークに接続したり Wi-Fi アクセス ポイントを設定したりすると、他のユーザーもデバイス名を確認できるようになります。"</string>
     <string name="devices_title" msgid="649715719278562515">"デバイス"</string>
@@ -5367,7 +5368,7 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"仕事用"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"システムのデフォルト"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"この選択は無効になりました。もう一度お試しください。"</string>
-    <string name="power_menu_setting_name" msgid="2394440932633137229">"電源ボタンを長押しする"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"電源ボタンを長押し"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"電源ボタンを長押ししてアクセスする"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"電源ボタン メニュー"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"デジタル アシスタント"</string>
@@ -5411,6 +5412,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"メディア"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"メディア プレーヤーを固定する"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"再生をすばやく再開できるよう、[クイック設定] にメディア プレーヤーを開いたままにします"</string>
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"ロック画面にメディアを表示する"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"再生をすばやく再開できるよう、ロック画面にメディア プレーヤーを開いたままにします"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"おすすめのメディアを表示"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"アクティビティに基づいて表示します"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"プレーヤーを非表示"</string>

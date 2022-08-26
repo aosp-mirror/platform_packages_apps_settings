@@ -72,10 +72,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Zařízení se odpojí od zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Spárovat nové zařízení"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Spárovat pravé ucho"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Spárovat levé ucho"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Spárovat druhé ucho"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Levé naslouchátko je připojené.\n\nPokud chcete spárovat pravé, ujistěte se, zda je zapnuté a připravené k párování."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Pravé naslouchátko je připojené.\n\nPokud chcete spárovat levé, ujistěte se, zda je zapnuté a připravené k párování."</string>
@@ -135,7 +133,7 @@
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Volání na zařízení"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Ostatní zařízení"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Uložená zařízení"</string>
-    <string name="connected_device_add_device_summary" msgid="8671009879957120802">"Zapne se Bluetooth za účelem spárování"</string>
+    <string name="connected_device_add_device_summary" msgid="8671009879957120802">"Za účelem spárování se zapne Bluetooth"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"Předvolby připojení"</string>
     <string name="connected_device_previously_connected_title" msgid="605808252622814415">"Dříve připojená zařízení"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Dříve připojeno"</string>
@@ -306,7 +304,7 @@
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Načítání…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikace s oprávněním k přístupu k zařízením v okolí mohou zjišťovat relativní polohu připojených zařízení."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Přístup aplikací a služeb k poloze je vypnutý. Poloha zařízení může být přesto odesílána záchranářům, když vytočíte číslo tísňového volání nebo na něj pošlete SMS."</string>
-    <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"Přečtěte si další informace o nastavení oblastí."</string>
+    <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"Přečtěte si další informace o nastavení polohy."</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Účty"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Zabezpečení"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Šifrování a pověření"</string>
@@ -582,7 +580,7 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Odstranit všechny otisky prstů?"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"Odstranit <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Chcete tento otisk prstu smazat?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Touto akcí vymažete snímky a model otisků prstů propojené s „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“, které jsou uloženy ve vašem zařízení"</string>
+    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Touto akcí vymažete snímky a model otisku prstu propojené s „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“, které jsou uloženy ve vašem zařízení"</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Pomocí otisku prstu už nebude možné odemykat telefon ani ověřovat vaši identitu v aplikacích."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Otisk prstu už nebude možné používat k odemknutí pracovního profilu, autorizaci nákupů ani přihlašování do pracovních aplikací."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ano, odstranit"</string>
@@ -1487,8 +1485,7 @@
     <string name="sim_enter_new" msgid="9010947802784561582">"Nový PIN SIM karty"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Potvrďte nový kód PIN"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"Kód PIN SIM karty"</string>
-    <!-- no translation found for sim_invalid_pin_hint (3376397829969578877) -->
-    <skip />
+    <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"Zadejte kód PIN o délce 4–8 číslic"</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"Kódy PIN nejsou shodné"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Kód PIN nelze změnit.\nMožná jste zadali nesprávný kód PIN."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"PIN SIM karty byl úspěšně změněn."</string>
@@ -2112,7 +2109,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Obnovit nastavení aplikací?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Tímto resetujete všechny následující předvolby:\n\n"<li>"deaktivované aplikace,"</li>\n<li>"zakázaná oznámení aplikací,"</li>\n<li>"výchozí aplikace pro různé akce,"</li>\n<li>"omezení datových přenosů na pozadí pro aplikace,"</li>\n<li>"veškerá omezení oprávnění,"</li>\n<li>"nastavení využití baterie."</li>\n\n"Nepřijdete o žádná data aplikací."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Obnovit aplikace"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"Spravovat místo"</string>
     <string name="filter" msgid="9039576690686251462">"Filtrovat"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Vyberte možnosti filtru"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Všechny aplikace"</string>
@@ -2743,7 +2739,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Využití baterie"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Využití za posledních 24 hodin"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Využití od posledního plného nabití"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Využití baterie"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Využití baterie aplikací"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Podrobnosti využívání"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Upravit spotřebu energie"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Zahrnuté balíčky"</string>
@@ -2762,8 +2758,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Některé funkce mohou být omezeny"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Největší využití baterie"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Zobrazte aplikace s největším využitím baterie"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Nabíjení je dočasně omezeno"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Za účelem úspory baterie. Další informace"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Nabíjení je pozastaveno"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Ochrana baterie k prodloužení její životnosti\nKlepnutím zobrazíte další informace"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Obnovit nabíjení"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Za určitých podmínek, jako je vysoká teplota a dlouhá doba mezi nabitími, může být nabíjení omezeno na <xliff:g id="PERCENT">%1$s</xliff:g> za účelem udržení výdrže baterie.\n\nKdyž tyto podmínky pominou, telefon se automaticky začne nabíjet normálně."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Za určitých podmínek, jako je vysoká teplota a dlouhá doba mezi nabitími, může být nabíjení omezeno na <xliff:g id="PERCENT">%1$s</xliff:g> za účelem udržení výdrže baterie.\n\nKdyž tyto podmínky pominou, tablet se automaticky začne nabíjet normálně."</string>
@@ -2809,6 +2807,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Aplikace začne využívat baterii na pozadí. Baterie se možná vybije dřív, než se očekávalo."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Odstranit"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Zrušit"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Úplně nabít"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Vaše aplikace mají běžnou spotřebu baterie. Pokud dojde k velkému zvýšení spotřeby, telefon vám doporučí možné akce.\n\nPokud vám dochází baterie, můžete podle potřeby zapnout spořič baterie."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Vaše aplikace mají běžnou spotřebu baterie. Pokud dojde k velkému zvýšení spotřeby, tablet vám doporučí možné akce.\n\nPokud vám dochází baterie, můžete podle potřeby zapnout spořič baterie."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Vaše aplikace mají běžnou spotřebu baterie. Pokud dojde k velkému zvýšení spotřeby, zařízení vám doporučí možné akce.\n\nPokud vám dochází baterie, můžete podle potřeby zapnout spořič baterie."</string>
@@ -2857,7 +2856,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Přibližná výdrž na plné nabití"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Údaje o využití baterie jsou přibližné a mohou se změnit podle způsobu používání."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Využití baterie"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Správa využití baterie"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Celkem <xliff:g id="TIME_0">^1</xliff:g> • Od posledního nabití\npoužíváno na pozadí <xliff:g id="TIME_1">^2</xliff:g>"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Celkem <xliff:g id="TIME_0">^1</xliff:g> • Za uplynulých 24 hodin\npoužíváno na pozadí <xliff:g id="TIME_1">^2</xliff:g>"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Celkem <xliff:g id="TIME_0">^1</xliff:g> • V období <xliff:g id="TIME_PERIOD">^3</xliff:g>\npoužíváno na pozadí <xliff:g id="TIME_1">^2</xliff:g>"</string>
@@ -2911,14 +2909,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"při <xliff:g id="PERCENT">%1$s</xliff:g> baterie"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Procento baterie"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Zobrazovat procento baterie na stavovém řádku"</string>
-    <!-- no translation found for battery_usage_chart_graph_hint_last_full_charge (6570336408060566877) -->
-    <skip />
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Stav baterie od posledního úplného nabití"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Úroveň baterie za posledních 24 hodin"</string>
-    <!-- no translation found for battery_app_usage (8976453608783133770) -->
-    <skip />
+    <string name="battery_app_usage" msgid="8976453608783133770">"Využití ze strany aplikací od posledního úplného nabití"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Využití baterie aplikacemi za posledních 24 hodin"</string>
-    <!-- no translation found for battery_system_usage (1395943945140097585) -->
-    <skip />
+    <string name="battery_system_usage" msgid="1395943945140097585">"Využití ze strany systému od posledního úplného nabití"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Využití baterie systémem za posledních 24 hodin"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Využití baterie systémem: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Využití baterie aplikací: <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -2929,6 +2924,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Údaje o využití baterie jsou přibližné a během nabíjení telefonu se využití neměří."</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Údaje o využití baterie budou k dispozici, až budete telefon používat několik hodin."</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Graf využití baterie"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Graf denního využití baterie"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Graf hodinového využití baterie"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistiky procesů"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Podrobné statistiky běžících procesů"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Využití paměti"</string>
@@ -4821,16 +4818,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Zapnout"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Vypnout"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Nepoužívá optimalizaci baterie"</string>
-    <!-- no translation found for app_battery_optimization_title (389653121998016466) -->
-    <skip />
-    <!-- no translation found for app_battery_optimization_summary (7864783556193427398) -->
-    <skip />
-    <!-- no translation found for filter_battery_unrestricted_title (821027369424198223) -->
-    <skip />
-    <!-- no translation found for filter_battery_optimized_title (8236647176487754796) -->
-    <skip />
-    <!-- no translation found for filter_battery_restricted_title (5886859505802563232) -->
-    <skip />
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Využití baterie aplikací"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Nastavení využití baterie pro aplikace"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Neomezeno"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimalizováno"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Omezeno"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Pokud je zařízení zamknuté, zakázat psaní odpovědí a jiných textů do oznámení"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Výchozí kontrola pravopisu"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Výběr kontroly pravopisu"</string>
@@ -5594,6 +5586,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Média"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Připnout přehrávač médií"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Přehrávač médií zůstane otevřený v Rychlém nastavení, aby bylo možné rychle obnovit přehrávání"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Zobrazovat doporučení médií"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Na základě vaší aktivity"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Skrýt přehrávač"</string>

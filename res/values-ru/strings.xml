@@ -72,10 +72,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Будет прервано соединение с устройством \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Добавить устройство"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Подключить прав. ухо"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Подключить левое ухо"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Подключить другое ухо"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Левый слуховой аппарат подключен.\n\nУбедитесь, что правый аппарат работает и готов к подключению."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Правый слуховой аппарат подключен.\n\nУбедитесь, что левый аппарат работает и готов к подключению."</string>
@@ -1487,8 +1485,7 @@
     <string name="sim_enter_new" msgid="9010947802784561582">"Новый PIN SIM-карты"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Введите новый PIN-код ещё раз"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"PIN-код SIM-карты"</string>
-    <!-- no translation found for sim_invalid_pin_hint (3376397829969578877) -->
-    <skip />
+    <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"Введите PIN-код из 4–8 цифр."</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"PIN-коды не совпадают"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Не удается изменить PIN.\nВозможно, код введен неверно."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"PIN-код SIM-карты успешно изменен"</string>
@@ -2112,7 +2109,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Сбросить настройки?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Будут сброшены следующие настройки:\n\n"<li>"отключенные приложения;"</li>\n<li>"отключенные уведомления приложений;"</li>\n<li>"приложения по умолчанию;"</li>\n<li>"ограничения на передачу данных приложениями в фоновом режиме;"</li>\n<li>"все ограничения разрешений;"</li>\n<li>"настройки расхода заряда батареи."</li>\n\n"Данные приложений удалены не будут."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Сбросить"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"Управление местом"</string>
     <string name="filter" msgid="9039576690686251462">"Фильтр"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Выберите параметры фильтра"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Все"</string>
@@ -2372,7 +2368,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Изменение масштаба тремя нажатиями"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Чтобы увеличить масштаб, нажмите кнопку"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Быстрое увеличение масштаба."</string>
-    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Чтобы увеличить масштаб:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Выполните действие быстрого запуска для перехода в режим увеличения.&lt;br/&gt; {1,number,integer}. Коснитесь экрана.&lt;br/&gt; {2,number,integer}. При желании перетащите область увеличения двумя пальцами.&lt;br/&gt; {3,number,integer}. Чтобы скорректировать масштаб, сведите два пальца вместе.&lt;br/&gt; {4,number,integer}. Чтобы выйти из режима увеличения, выполните действие быстрого запуска.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Чтобы временно увеличить масштаб:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Убедитесь, что выбран режим увеличения \"Весь экран\".&lt;br/&gt; {1,number,integer}. Выполните действие быстрого запуска для перехода в режим увеличения.&lt;br/&gt; {2,number,integer}. Коснитесь любой области экрана и удерживайте палец.&lt;br/&gt; {3,number,integer}. Если нужно, перетащите область увеличения.&lt;br/&gt; {4,number,integer}. Чтобы вернуть исходный масштаб, уберите палец с экрана."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Чтобы увеличить масштаб:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Выполните действие быстрого запуска для перехода в режим увеличения.&lt;br/&gt; {1,number,integer}. Коснитесь экрана.&lt;br/&gt; {2,number,integer}. Если нужно, перетащите область увеличения двумя пальцами.&lt;br/&gt; {3,number,integer}. Чтобы скорректировать масштаб, сведите два пальца вместе.&lt;br/&gt; {4,number,integer}. Чтобы выйти из режима увеличения, выполните действие быстрого запуска.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Чтобы временно увеличить масштаб:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Убедитесь, что выбран режим увеличения \"Весь экран\".&lt;br/&gt; {1,number,integer}. Выполните действие быстрого запуска для перехода в режим увеличения.&lt;br/&gt; {2,number,integer}. Коснитесь любой области экрана и удерживайте палец.&lt;br/&gt; {3,number,integer}. Если нужно, перетащите область увеличения.&lt;br/&gt; {4,number,integer}. Чтобы вернуть исходный масштаб, уберите палец с экрана."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Благодаря функции увеличения вы сможете приближать изображение на экране.\n\n"<b>"Если вы хотите увеличить изображение"</b>", включите функцию и нажмите на экран в любом месте.\n"<ul><li>"Для прокрутки проведите двумя пальцами."</li>\n<li>"Чтобы изменить масштаб, сведите два пальца вместе или разведите их."</li></ul>\n\n<b>"Если нужно временно увеличить масштаб"</b>", включите функцию увеличения, коснитесь экрана и удерживайте.\n"<ul><li>"Для обзора проведите по экрану."</li>\n<li>"Чтобы уменьшить масштаб, отпустите палец."</li></ul>\n\n"Эти жесты не работают на клавиатуре и панели навигации."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Страница <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> из <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Используйте кнопку специальных возможностей"</string>
@@ -2563,7 +2559,7 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Дейтераномалия (нарушено восприятие зеленого)"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Протаномалия (нарушено восприятие красного)"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Тританомалия"</string>
-    <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Дополнительное уменьшение яркости"</string>
+    <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Доп. уменьшение яркости"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Дополнительно уменьшить яркость экрана"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Быстрый запуск дополнительного уменьшения яркости"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"О дополнительном уменьшении яркости"</string>
@@ -2743,7 +2739,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Расход заряда батареи"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Расход заряда за последние 24 часа"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Расход заряда с момента полной зарядки"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Расход заряда"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Расход заряда батареи для приложений"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Расход батареи"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Режим энергопотребления"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Пакеты"</string>
@@ -2762,8 +2758,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Функциональность некоторых сервисов может быть ограничена"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Повышенный расход заряда батареи"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Посмотрите, какие приложения расходуют больше всего заряда."</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Зарядка временно ограничена"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Это сделано для защиты вашей батареи. Подробнее…"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Зарядка приостановлена"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Это поможет продлить срок службы батареи.\nНажмите, чтобы узнать больше."</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Продолжить зарядку"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"В определенных условиях, например при высокой температуре окружающей среды и продолжительной зарядке, система может установить ограничение <xliff:g id="PERCENT">%1$s</xliff:g> для уровня заряда, чтобы продлить срок службы батареи.\n\nКогда условия нормализуются, телефон будет заряжаться как обычно."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"В определенных условиях, например при высокой температуре окружающей среды и продолжительной зарядке, система может установить ограничение <xliff:g id="PERCENT">%1$s</xliff:g> для уровня заряда, чтобы продлить срок службы батареи.\n\nКогда условия нормализуются, планшет будет заряжаться как обычно."</string>
@@ -2809,6 +2807,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Это приложение сможет потреблять энергию в фоновом режиме. Расход заряда батареи будет выше ожидаемого."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Удалить"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Отмена"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Зарядить полностью"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Ваши приложения расходуют заряд батареи нормально. При повышенном расходе вы получите рекомендации о том, что можно предпринять.\n\nЕсли заряд батареи будет на исходе, вы можете включить режим энергосбережения."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Ваши приложения расходуют заряд батареи нормально. При повышенном расходе вы получите рекомендации о том, что можно предпринять.\n\nЕсли заряд батареи будет на исходе, вы можете включить режим энергосбережения."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Ваши приложения расходуют заряд батареи нормально. При повышенном расходе вы получите рекомендации о том, что можно предпринять.\n\nЕсли заряд батареи будет на исходе, вы можете включить режим энергосбережения."</string>
@@ -2857,7 +2856,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Время работы при полном заряде батареи"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Расход заряда батареи указан приблизительно и может меняться в зависимости от интенсивности использования."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Расход заряда"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Управление расходом заряда"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Всего <xliff:g id="TIME_0">^1</xliff:g> • В фоновом режиме <xliff:g id="TIME_1">^2</xliff:g>\nс момента последней полной зарядки"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Всего <xliff:g id="TIME_0">^1</xliff:g> • В фоновом режиме <xliff:g id="TIME_1">^2</xliff:g>\nза последние 24 часа"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Всего <xliff:g id="TIME_0">^1</xliff:g> • В фоновом режиме <xliff:g id="TIME_1">^2</xliff:g>\nв период <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
@@ -2911,14 +2909,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"при <xliff:g id="PERCENT">%1$s</xliff:g> заряда"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Уровень заряда батареи"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Показывать уровень заряда батареи в строке состояния"</string>
-    <!-- no translation found for battery_usage_chart_graph_hint_last_full_charge (6570336408060566877) -->
-    <skip />
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Уровень заряда батареи с момента последней полной зарядки"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Уровень заряда батареи за последние 24 часа"</string>
-    <!-- no translation found for battery_app_usage (8976453608783133770) -->
-    <skip />
+    <string name="battery_app_usage" msgid="8976453608783133770">"Использование приложений с момента последней полной зарядки"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Расход приложениями за 24 часа"</string>
-    <!-- no translation found for battery_system_usage (1395943945140097585) -->
-    <skip />
+    <string name="battery_system_usage" msgid="1395943945140097585">"Использование системы с момента последней полной зарядки"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Расход системой за 24 часа"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Использование системой в период <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Использование приложениями в период <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -2929,6 +2924,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Данные указаны приблизительно. Расход во время зарядки не учитывается."</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Данные о расходе заряда станут доступны через несколько часов использования телефона."</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Диаграмма расхода заряда батареи"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Диаграмма расхода заряда батареи по дням"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Диаграмма расхода заряда батареи по часам"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статистика процессов"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Статистика запущенных процессов"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Использование памяти"</string>
@@ -4821,16 +4818,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Включить"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Отключить сейчас"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Режим экономии заряда отключен"</string>
-    <!-- no translation found for app_battery_optimization_title (389653121998016466) -->
-    <skip />
-    <!-- no translation found for app_battery_optimization_summary (7864783556193427398) -->
-    <skip />
-    <!-- no translation found for filter_battery_unrestricted_title (821027369424198223) -->
-    <skip />
-    <!-- no translation found for filter_battery_optimized_title (8236647176487754796) -->
-    <skip />
-    <!-- no translation found for filter_battery_restricted_title (5886859505802563232) -->
-    <skip />
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Расход заряда батареи для приложений"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Настройка расхода заряда батареи для приложений"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Без ограничений"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Оптимально"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Ограничено"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Запретить набор текста в уведомлениях, если устройство заблокировано"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Средство проверки по умолчанию"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Проверка правописания"</string>
@@ -5002,7 +4994,7 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Нажмите, чтобы проверить устройство"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Чтобы увидеть время, уведомления и другую информацию, коснитесь экрана"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Экстренные вызовы"</string>
-    <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Использовать функцию \"Экстренный вызов\""</string>
+    <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Использовать функцию \"Экстренные вызовы\""</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"Быстро нажмите кнопку питания не менее пяти раз для выполнения перечисленных ниже действий"</string>
     <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"Звуковой сигнал с обратным отсчетом"</string>
     <string name="emergency_gesture_sound_setting_summary" msgid="6573377104470235173">"Включить громкий звуковой сигнал перед экстренным вызовом"</string>
@@ -5594,6 +5586,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Медиа"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Закрепить медиапроигрыватель"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Медиапроигрыватель остается открытым в Быстрых настройках, чтобы вы могли легко продолжить воспроизведение"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Показывать рекомендации медиаконтента"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"С учетом ваших действий"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Скрывать проигрыватель"</string>

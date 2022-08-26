@@ -70,10 +70,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Връзката между устройството ви и „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“ ще бъде прекратена."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Сдвояване на ново устройство"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Дясно ухо: Сдвояване"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Ляво ухо: Сдвояване"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Сдвояване на другото ухо"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Слуховият апарат за лявото ухо е свързан.\n\nЗа да сдвоите този за дясното, уверете се, че е включен и в готовност за сдвояване."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Слуховият апарат за дясното ухо е свързан.\n\nЗа да сдвоите този за лявото, уверете се, че е включен и в готовност за сдвояване."</string>
@@ -2065,7 +2063,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Нулиране на предпочитанията?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Това действие ще нулира всички предпочитания за:\n\n"<li>"деактивираните приложения;"</li>\n<li>"известията за деактивирани приложения;"</li>\n<li>"стандартните приложения за действия;"</li>\n<li>"ограниченията за данни на заден план за приложенията;"</li>\n<li>"ограниченията за всички разрешения;"</li>\n<li>"настройките за използване на батерията."</li>\n\n"Няма да загубите данни от приложенията."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Нулиране на приложенията"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"Управление на място"</string>
     <string name="filter" msgid="9039576690686251462">"Филтриране"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Избор на филтриращи опции"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Всички приложения"</string>
@@ -2682,7 +2679,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Използване на батерията"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Преглед на употребата за последните 24 ч"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Употреба от последното пълно зареждане"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Използване на батерията"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Използване на батерията от приложението"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Подробности"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Настройване на захранването"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Включени пакети"</string>
@@ -2701,8 +2698,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Някои функции може да са ограничени"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"По-голямо използване на батерията"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Вижте приложенията с най-голямо използване"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Зареждането временно е ограничено"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"За запазване на батерията ви. Научете повече."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Зареждането е на пауза"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Батерията се защитава с цел удължаване на живота ѝ\nДокоснете, за да научите повече"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Възобновяване на зареждането"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"При определени условия, като например висока температура и дълъг период на зареждане, зареждането може да бъде ограничено до <xliff:g id="PERCENT">%1$s</xliff:g> с цел запазване на състоянието на батерията.\n\nКогато съответните условия вече не са налице, телефонът ви автоматично ще започне да се зарежда нормално."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"При определени условия, като например висока температура и дълъг период на зареждане, зареждането може да бъде ограничено до <xliff:g id="PERCENT">%1$s</xliff:g> с цел запазване на състоянието на батерията.\n\nКогато съответните условия вече не са налице, таблетът ви автоматично ще започне да се зарежда нормално."</string>
@@ -2738,6 +2737,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Това приложение ще може да използва батерията на заден план. Тя може да се изтощи по-рано от очакваното."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Премахване"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Отказ"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Пълно зареждане"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Приложенията ви използват обичайното количество енергия от батерията. Ако те изразходват твърде много от нея, телефонът ви ще предложи действия, които можете да предприемете.\n\nВинаги можете да включите режима за запазване на батерията, ако тя е напът да се изтощи."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Приложенията ви използват обичайното количество енергия от батерията. Ако те изразходват твърде много от нея, таблетът ви ще предложи действия, които можете да предприемете.\n\nВинаги можете да включите режима за запазване на батерията, ако тя е напът да се изтощи."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Приложенията ви използват обичайното количество енергия от батерията. Ако те изразходват твърде много от нея, устройството ви ще предложи действия, които можете да предприемете.\n\nВинаги можете да включите режима за запазване на батерията, ако тя е напът да се изтощи."</string>
@@ -2782,7 +2782,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"След пълно зареждане батерията издържа около"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Данните за батерията са приблизителни и могат да се променят въз основа на използването."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Използване на батерията"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Управление на използването на батерията"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Общо <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> на заден план\nслед последното пълно зареждане"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Общо <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> на заден план\nза последните 24 ч"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Общо <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> на заден план\nза периода <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
@@ -2851,6 +2850,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Данните за използването на батерията са приблизителни и не се отчитат, докато телефонът се зарежда"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Данните за използването на батерията ще са налице, след като ползвате телефона си няколко часа"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Диаграма за използването на батерията"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Диаграма на ежедневното използване на батерията"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Диаграма на почасовото използване на батерията"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статистически данни за процесите"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Подробни статистически данни за изпълняващите се процеси"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Използвана памет"</string>
@@ -4675,8 +4676,8 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Включване сега"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Изключване сега"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Оптимизирането на батерията не се използва"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"Управление на използването на батерията"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Задаване на използв. на батерията за приложенията"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Използване на батерията от приложението"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Задаване на използв. на батерията за приложенията"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Неограничено"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Оптимизирано"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Ограничено"</string>
@@ -5413,6 +5414,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Мултимедия"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Фиксиране на медийния плейър"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"С цел бързо възобновяване на възпроизвеждането медийният плейър остава отворен в бързите настройки"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Показване на препоръки за мултимедия"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Въз основа на активността ви"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Скриване на плейъра"</string>

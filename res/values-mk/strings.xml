@@ -1282,7 +1282,7 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Вклучено"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Вклучено - според лице"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Откривање лица"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Автоматски приспособувајте ја ориентацијата на екранот помеѓу портрет и пејзаж кога го движите телефонот"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Автоматски ја приспособува ориентацијата на екранот помеѓу портрет и пејзаж кога го движите телефонот"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Дознајте повеќе за „Автоматско ротирање“"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Менувајте помеѓу портрет и пејзаж кога го движите телефонот"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Резолуција на екран"</string>
@@ -2063,7 +2063,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Да се ресетираат поставките за апликациите?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Со ова ќе се ресетираат сите поставки за:\n\n"<li>"оневозможените апликации"</li>\n<li>"оневозможените известувања за апликации"</li>\n<li>"стандардните апликации за дејства"</li>\n<li>"ограничувањата за податоци од заднина за апликациите"</li>\n<li>"сите ограничувања за дозволите"</li>\n<li>"поставките за користење на батеријата"</li>\n\n"Нема да изгубите никакви податоци во апликациите."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Ресетирај апликации"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"Управувај со простор"</string>
     <string name="filter" msgid="9039576690686251462">"Филтер"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Избери опции на филтер"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Сите апликации"</string>
@@ -2680,7 +2679,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Користење на батеријата"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Прикажи користење во минатите 24 часа"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Прикажи користење од последното целосно полнење"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Користење на батеријата"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Користење на батеријата за апликации"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Користи детали"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Приспособи употреба на струја"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Вклучени пакети"</string>
@@ -2699,8 +2698,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Некои функции може да бидат ограничени"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Поголемо користење на батеријата"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Прегледајте ги апликациите со најголемо користење"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Полнењето е привремено ограничено"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"За да се заштеди батеријата. Дознајте повеќе."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Полнењето е паузирано"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Се заштитува батеријата за да се продолжи животниот век на батеријата\nДопрете за да дознаете повеќе"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Продолжи со полнење"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"При одредени услови, како високи температури и долги периоди на полнење, полнењето може да се ограничи на <xliff:g id="PERCENT">%1$s</xliff:g> за да се зачува состојбата на батеријата.\n\nКога таквите услови ќе завршат, вашиот телефон автоматски ќе се полни нормално."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"При одредени услови, како високи температури и долги периоди на полнење, полнењето може да се ограничи на <xliff:g id="PERCENT">%1$s</xliff:g> за да се зачува состојбата на батеријата.\n\nКога таквите услови ќе завршат, вашиот таблет автоматски ќе се полни нормално."</string>
@@ -2736,6 +2737,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Апликацијава ќе може да ја користи батеријата во заднина. Батеријата може да се потроши порано од очекуваното."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Да"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Откажи"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Наполни до полна"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Вашите апликации користат нормално количество батерија. Ако апликациите трошат многу батерија, телефонот ќе ви каже што може да преземете.\n\nСекогаш може да вклучите „Штедач на батерија“ ако батеријата ви е при крај."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Вашите апликации користат нормално количество батерија. Ако апликациите трошат многу батерија, таблетот ќе ви каже што може да преземете.\n\nСекогаш може да вклучите „Штедач на батерија“ ако батеријата ви е при крај."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Вашите апликации користат нормално количество батерија. Ако апликациите трошат многу батерија, уредот ќе ви каже што може да преземете.\n\nСекогаш може да вклучите „Штедач на батерија“ ако батеријата ви е при крај."</string>
@@ -2780,7 +2782,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Целосното полнење трае околу"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Податоците за користењето на батеријата се приближни и може да се менуваат зависно од користењето."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Користење на батеријата"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Управување со користењето на батеријата"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Вкупно: <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> во заднина\nод последното целосно полнење"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Вкупно <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> во заднина\nво минатите 24 часа"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Вкупно <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> во заднина\nво периодот <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
@@ -2849,6 +2850,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Податоците за користењето на батеријата се приближни и не го мерат користењето кога телефонот се полни"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Податоците за користењето на батеријата ќе бидат достапни откако ќе го користите телефонот неколку часа"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Графикон за користење на батеријата"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Графикон за користење на батеријата по денови"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Графикон за користење на батеријата по часови"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статистика на процес"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Паметна статистика за процеси кои се извршуваат"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Употреба на меморија"</string>
@@ -3285,7 +3288,7 @@
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"Прошири поставки за апликација"</string>
     <string name="user_choose_copy_apps_to_another_user" msgid="5914037067347012870">"Изберете апликации што ќе се инсталираат"</string>
     <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"Инсталирајте достапни апликации"</string>
-    <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Плаќања без контакт"</string>
+    <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Бесконтактно плаќање"</string>
     <string name="nfc_default_payment_settings_title" msgid="2150504446774382261">"Стандардна апликација за плаќање"</string>
     <string name="nfc_default_payment_footer" msgid="978535088340021360">"За да платите со апликација за плаќање, држете ја задната страна на уредот на платежен терминал"</string>
     <string name="nfc_more_details" msgid="1700713533074275233">"Дознајте повеќе"</string>
@@ -4673,8 +4676,8 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Вклучи сега"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Исклучи сега"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Не се користи оптимизација на батеријата"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"Управувајте со користењето на батеријата"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Поставете користење на батеријата за апликации"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Користење на батеријата за апликации"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Поставете користење на батеријата за апликации"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Неограничено"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Оптимизирано"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Ограничено"</string>
@@ -4745,7 +4748,7 @@
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Батеријата трае подолго"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Програмерски плочки за брзи поставки"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Оневозможи го времето за авторизација преку ADB"</string>
-    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Овозможи автоматско отповикување на авторизацијата преку ADB за системите што не се поврзале повторно во стандардниот рок (7 дена) или во рокот конфигуриран од корисникот (најмалку 1 ден)."</string>
+    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Оневозможи автоматско отповикување на авторизацијата преку ADB за системите што не се поврзале повторно во стандардниот рок (7 дена) или во рокот конфигуриран од корисникот (најмалку 1 ден)."</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Трага од Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Сензорите се исклучени"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Поставки за работен профил"</string>
@@ -4840,7 +4843,7 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Допрете за да го проверите таблетот"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Допрете за да го проверите уредот"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"За да ги проверите времето, известувањата и другите информации, допрете го екранот."</string>
-    <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Итна помош"</string>
+    <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"SOS за итни случаи"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Користи „Итна помош“"</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"Брзо притиснете го копчето за вклучување 5 или повеќе пати за да започнат дејствата наведени подолу"</string>
     <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"Пушти аларм за одбројување"</string>
@@ -5017,7 +5020,7 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Следете ги сите констелации и фреквенции со GNSS без работен циклус"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Метод за внесување"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"Ракописно пишување со пенкало"</string>
-    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Кога е овозможено, тековниот метод за внесување добива MotionEvent за пенкало ако е фокусиран „Уредник“."</string>
+    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Кога е овозможено, тековниот метод за внесување добива MotionEvent од пенкалото ако е фокусиран уредувач на текст."</string>
     <string name="device_theme" msgid="5027604586494772471">"Тема на уредот"</string>
     <string name="default_theme" msgid="4815428567082263639">"Стандардно"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Име на мрежата"</string>
@@ -5368,7 +5371,7 @@
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Стандардно за системот"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Изборов веќе не е важечки. Обидете се повторно."</string>
     <string name="power_menu_setting_name" msgid="2394440932633137229">"Притиснете го и задржете го копчето за вклучување"</string>
-    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Притиснете го и задржете го копчето за вклучување за пристап"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Притиснете и задржете го копчето за вклучување за пристап до"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Мени на копчето за вклучување"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Дигитален помошник"</string>
     <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Пристап до дигиталниот помошник"</string>
@@ -5411,6 +5414,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"Аудиовизуелни содржини"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Закачете го плеерот"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"За брзо продолжување на репродукцијата, плеерот останува отворен во „Брзи поставки“"</string>
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Прикажувај аудиовизуелни содржини на заклучен екран"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"За брзо продолжување на репродукцијата, плеерот останува отворен на заклучен екран"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Прикажувај препораки за аудиовизуелни содржини"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Според вашата активност"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Сокриј го плеерот"</string>

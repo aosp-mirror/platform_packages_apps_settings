@@ -72,10 +72,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Įrenginys bus atjungtas nuo „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Susieti naują įrenginį"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Susieti dešinę ausį"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Susieti kairę ausį"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Susiekite kitą ausį"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Kairysis klausos aparatas prijungtas.\n\nNorėdami susieti dešinįjį, įsitikinkite, kad jis įjungtas ir paruoštas susieti."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Dešinysis klausos aparatas prijungtas.\n\nNorėdami susieti kairįjį, įsitikinkite, kad jis įjungtas ir paruoštas susieti."</string>
@@ -2111,7 +2109,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Iš naujo nust. nuostat.?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Bus iš naujo nustatytos visos nurodytų elementų nuostatos:\n\n"<li>"išjungtos programos;"</li>\n<li>"išjungti programų pranešimai;"</li>\n<li>"numatytosios veiksmų programos;"</li>\n<li>"programų foninių duomenų apribojimai;"</li>\n<li>"visi leidimų apribojimai;"</li>\n<li>"akumuliatoriaus energijos vartojimo nustatymai."</li>\n\n"Neprarasite jokių programų duomenų."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Iš naujo nustat. program."</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"Valdyti vietą"</string>
     <string name="filter" msgid="9039576690686251462">"Filtruoti"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Pasirinkti filtro parinktis"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Visos programos"</string>
@@ -2742,7 +2739,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Akumuliatoriaus energijos vartojimas"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Naudojimo per pastar. 24 val. peržiūra"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Naud. nuo pask. visiško įkr. peržiūra"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Akumuliatoriaus energijos vartojimas"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Programos akumuliatoriaus energijos vartojimas"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Išsami naudojimo informacija"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Reguliuoti maitinimo naudojimą"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Įtraukti paketai"</string>
@@ -2761,8 +2758,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Kai kurios funkcijos gali būti apribotos"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Vartojama daugiau akumuliatoriaus energijos"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Žr. daugiausia energijos vartojančias programas"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Įkrovimas laikinai apribotas"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Tausojama akumuliatoriaus energija. Sužinokite daugiau."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Įkrovimas pristabdytas"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Apsaugomas akumuliatorius, siekiant pailginti akumuliatoriaus veikimo laiką\nPalieskite, kad sužinotumėte daugiau"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Tęsti įkrovimą"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Esant tam tikroms sąlygoms, pvz., aukštai temperatūrai ar ilgai kraunant, įkrovimas gali būti apribotas iki <xliff:g id="PERCENT">%1$s</xliff:g>, siekiant apsaugoti akumuliatorių.\n\nKai šių sąlygų nebebus, telefonas bus automatiškai įprastai įkraunamas."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Esant tam tikroms sąlygoms, pvz., aukštai temperatūrai ar ilgai kraunant, įkrovimas gali būti apribotas iki <xliff:g id="PERCENT">%1$s</xliff:g>, siekiant apsaugoti akumuliatorių.\n\nKai šių sąlygų nebebus, planšetinis kompiuteris bus automatiškai įprastai įkraunamas."</string>
@@ -2808,6 +2807,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Ši programa galės naudoti akumuliatoriaus energiją fone. Akumuliatoriaus energija gali išsekti greičiau nei tikėjotės."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Pašalinti"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Atšaukti"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Įkrauti iki visiško įkrovimo"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Programos naudoja įprastą akumuliatoriaus energijos kiekį. Jei programos naudos per daug akumuliatoriaus energijos, telefonas pasiūlys veiksmų, kurių galima imtis.\n\nJei senka akumuliatoriaus energija, visada galite įjungti Akumuliatoriaus tausojimo priemonę."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Programos naudoja įprastą akumuliatoriaus energijos kiekį. Jei programos naudos per daug akumuliatoriaus energijos, planšetinis kompiuteris pasiūlys veiksmų, kurių galima imtis.\n\nJei senka akumuliatoriaus energija, visada galite įjungti Akumuliatoriaus tausojimo priemonę."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Programos naudoja įprastą akumuliatoriaus energijos kiekį. Jei programos naudos per daug akumuliatoriaus energijos, įrenginys pasiūlys veiksmų, kurių galima imtis.\n\n Jei senka akumuliatoriaus energija, visada galite įjungti Akumuliatoriaus tausojimo priemonę."</string>
@@ -2856,7 +2856,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Visiškai įkrauti trunka apie"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Akumuliatoriaus energijos vartojimo duomenys yra apytiksliai ir gali pasikeisti atsižvelgiant į naudojimą."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Akumuliatoriaus energijos vartojimas"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Tvarkyti akumuliatoriaus naudojimą"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Iš viso <xliff:g id="TIME_0">^1</xliff:g> • Naudota fone <xliff:g id="TIME_1">^2</xliff:g>\nnuo pastarojo visiško įkrovimo"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Iš viso <xliff:g id="TIME_0">^1</xliff:g> • Naudota fone <xliff:g id="TIME_1">^2</xliff:g>\nper pastarąsias 24 val."</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Iš viso <xliff:g id="TIME_0">^1</xliff:g> • Naudota fone <xliff:g id="TIME_1">^2</xliff:g>\nper<xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
@@ -2925,6 +2924,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Akumuliatoriaus energijos vartojimo duomenys yra apytiksliai ir neįtraukiamas energijos vartojimas, kai telefonas įkraunamas"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Akumuliatoriaus energijos vartojimo duomenys bus pasiekiami telefoną panaudojus kelias valandas"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Akumuliatoriaus energijos vartojimo diagrama"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Akumuliatoriaus energijos vartojimo kas dieną diagrama"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Akumuliatoriaus energijos vartojimo kas valandą diagrama"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Procesų statistika"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Entuziastų pateikta statistika apie vykstančius procesus"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Naudojama atmintis"</string>
@@ -4817,8 +4818,8 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Įjungti dabar"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Išjungti dabar"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Akumuliatoriaus optimizavimas nenaudojamas"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"Akumuliatoriaus energijos vartojimo valdymas"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Nustatyti programų akumuliatoriaus energijos vartojimą"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Programos akumuliatoriaus energijos vartojimas"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Nustatyti programų akumuliatoriaus energijos vartojimą"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Neapribota"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimizuota"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Apribota"</string>
@@ -5585,6 +5586,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Medija"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Medijos leistuvės prisegimas"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Kad būtų galima sparčiai atnaujinti atkūrimą, medijos leistuvė lieka atidaryta „Sparčiųjų nustatymų“ skiltyje"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Medijos rekomendacijų rodymas"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Pagrįsta jūsų veikla"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Slėpti leistuvę"</string>

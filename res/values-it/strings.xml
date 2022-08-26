@@ -70,10 +70,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Il dispositivo verrà scollegato da <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Accoppia nuovo dispositivo"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Accoppia orecchio dx"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Accoppia orecchio sx"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Accoppia l\'altro orecchio"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Il tuo apparecchio acustico sinistro è connesso.\n\nPer accoppiare quello destro, assicurati che sia acceso e pronto per l\'accoppiamento."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Il tuo apparecchio acustico destro è connesso.\n\nPer accoppiare quello sinistro, assicurati che sia acceso e pronto per l\'accoppiamento."</string>
@@ -582,7 +580,7 @@
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Cripta tablet"</string>
     <string name="encrypt_title" product="default" msgid="7337365190988321100">"Cripta telefono"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Crittografia attiva"</string>
-    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Imposta il blocco schermo"</string>
+    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Imposta un blocco schermo"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Per maggiore sicurezza, imposta un PIN, una sequenza o una password per questo dispositivo."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Imposta un blocco schermo"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Proteggi il tuo telefono"</string>
@@ -2063,7 +2061,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Reimpostare preferenze app?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Verranno reimpostate tutte le preferenze relative a:\n\n"<li>"App disattivate"</li>\n<li>"Notifiche di app disattivate"</li>\n<li>"Applicazioni predefinite per le azioni"</li>\n<li>"Limitazioni di dati in background per le app"</li>\n<li>"Eventuali limitazioni delle autorizzazioni"</li>\n<li>"Impostazioni di utilizzo della batteria"</li>\n\n"Non perderai i dati delle app."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Reimposta app"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"Gestisci spazio"</string>
     <string name="filter" msgid="9039576690686251462">"Filtra"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Scegli opzioni di filtro"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Tutte le app"</string>
@@ -2421,7 +2418,7 @@
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Scopri di più su Clic automatico (tempo di interazione)"</string>
     <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"Puoi impostare un mouse collegato affinché faccia clic automaticamente quando il puntatore rimane fermo per un determinato periodo di tempo"</string>
     <string name="accessibility_autoclick_description" msgid="6695732131412361101">"La funzionalità Clic automatico può essere utile in caso di difficoltà a fare clic con il mouse"</string>
-    <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"Funzionalità Clic automatico non attiva"</string>
+    <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"Clic automatico non attivo"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Breve"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0,2 secondi"</string>
     <string name="accessibility_autoclick_medium_title" msgid="3134175117576834320">"Medio"</string>
@@ -2680,7 +2677,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Utilizzo batteria"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Visualizza utilizzo delle ultime 24 ore"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Utilizzo dall\'ultima ricarica completa"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Utilizzo batteria"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Utilizzo della batteria per l\'app"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Dettagli di utilizzo"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Regola consumo alimentazione"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Pacchetti inclusi"</string>
@@ -2699,8 +2696,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Alcune funzioni potrebbero essere limitate"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Maggiore utilizzo della batteria"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Scopri le app con il massimo utilizzo"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Ricarica momentaneamente limitata"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Per preservare la batteria. Scopri di più."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Ricarica in pausa"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"È attiva la protezione della batteria per estenderne la durata\nTocca per scoprire di più"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Riprendi la ricarica"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"In alcune condizioni, ad esempio in caso di temperature elevate e lunghi periodi di ricarica, è possibile che la ricarica venga momentaneamente interrotta al raggiungimento di una percentuale pari a <xliff:g id="PERCENT">%1$s</xliff:g> per preservare meglio l\'integrità della batteria.\n\nQuando queste condizioni non sono più presenti, viene ripristinata automaticamente la normale ricarica del telefono."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"In alcune condizioni, ad esempio in caso di temperature elevate e lunghi periodi di ricarica, è possibile che la ricarica venga momentaneamente interrotta al raggiungimento di una percentuale pari a <xliff:g id="PERCENT">%1$s</xliff:g> per preservare meglio l\'integrità della batteria.\n\nQuando queste condizioni non sono più presenti, viene ripristinata automaticamente la normale ricarica del tablet."</string>
@@ -2736,6 +2735,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Questa app potrà usare la batteria in background. La batteria potrebbe esaurirsi prima del previsto."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Rimuovi"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Annulla"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Ricarica completa"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Le tue app stanno utilizzando un livello di batteria normale. Se le app consumano troppa batteria, il dispositivo ti suggerirà come rimediare.\n\nSe la batteria è in esaurimento, puoi attivare il risparmio energetico in qualsiasi momento."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Le tue app stanno utilizzando un livello di batteria normale. Se le app consumano troppa batteria, il dispositivo ti suggerirà come rimediare.\n\nSe la batteria è in esaurimento, puoi attivare il risparmio energetico in qualsiasi momento."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Le tue app stanno utilizzando un livello di batteria normale. Se le app consumano troppa batteria, il dispositivo ti suggerirà come rimediare.\n\nSe la batteria è in esaurimento, puoi attivare il risparmio energetico in qualsiasi momento."</string>
@@ -2780,7 +2780,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Durata approssimativa della carica completa"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"I dati sull\'utilizzo della batteria sono approssimativi e possono variare in base all\'utilizzo."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Utilizzo batteria"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Gestisci utilizzo batteria"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Totale: <xliff:g id="TIME_0">^1</xliff:g> • In background: <xliff:g id="TIME_1">^2</xliff:g>\ndall\'ultima ricarica completa"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Totale: <xliff:g id="TIME_0">^1</xliff:g> • In background: <xliff:g id="TIME_1">^2</xliff:g>\nnelle ultime 24 ore"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Totale: <xliff:g id="TIME_0">^1</xliff:g> • In background: <xliff:g id="TIME_1">^2</xliff:g>\nnell\'intervallo di tempo <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
@@ -2822,7 +2821,7 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Imposta una pianificazione"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Prolunga la durata della batteria"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Disattiva quando la batteria è carica"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"Il risparmio energetico si disattiva quando il livello di carica del telefono è superiore a <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"Il risparmio energetico si disattiva quando il livello di carica del telefono è superiore a: <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"L\'opzione Risparmio energetico viene disattivata quando il livello di carica del tablet è superiore a <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="device" msgid="4128841327359445726">"L\'opzione Risparmio energetico viene disattivata quando il livello di carica del dispositivo è superiore a <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
@@ -2849,6 +2848,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"I dati sull\'utilizzo della batteria sono approssimativi e l\'utilizzo non viene misurato quando il telefono è in carica"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"I dati sull\'utilizzo della batteria saranno disponibili dopo che avrai usato il telefono per qualche ora"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Grafico sull\'utilizzo della batteria"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Grafico sull\'utilizzo della batteria giornaliero"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Grafico sull\'utilizzo della batteria orario"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistiche sui processi"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistiche tecniche sui processi in esecuzione"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Memoria usata"</string>
@@ -3266,8 +3267,8 @@
     <string name="guest_category_title" msgid="5562663588315329152">"Ospite (tu)"</string>
     <string name="user_category_title" msgid="4368580529662699083">"Utenti"</string>
     <string name="other_user_category_title" msgid="7089976887307643217">"Altri utenti"</string>
-    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Elimina attività Ospite"</string>
-    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Elimina tutti i dati e le app Ospite quando esci dalla modalità Ospite"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Elimina attività ospite"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Elimina tutti i dati e le app dell\'ospite quando esci dalla modalità Ospite"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Vuoi eliminare l\'attività Ospite?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Le app e i dati di questa sessione Ospite verranno eliminati subito e ogni volta che uscirai dalla modalità Ospite verrà eliminata tutta l\'attività Ospite"</string>
     <string name="enable_guest_calling" msgid="8300355036005240911">"Consenti all\'ospite di usare il telefono"</string>
@@ -3777,7 +3778,7 @@
     <string name="gentle_notifications_display_summary_shade_lock" msgid="3936088046873705625">"Verranno visualizzate nell\'area a discesa e nella schermata di blocco"</string>
     <string name="gentle_notifications_display_summary_shade_status" msgid="3363137853729359907">"Verranno visualizzate nell\'area a discesa e nella barra di stato"</string>
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="2068738866725616212">"Verranno visualizzate nell\'area a discesa, nella barra di stato e nella schermata di blocco"</string>
-    <string name="silent_notifications_status_bar" msgid="6113307620588767516">"Nascondi le notifiche silenziose nella barra di stato"</string>
+    <string name="silent_notifications_status_bar" msgid="6113307620588767516">"Nascondi notifiche silenziose nella barra di stato"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"Luce lampeggiante"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"Privacy"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Ignora schermata di blocco"</string>
@@ -4673,8 +4674,8 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Attiva ora"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Disattiva ora"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Ottimizzazione della batteria non in uso"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"Gestisci l\'utilizzo della batteria"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Imposta l\'utilizzo della batteria per le app"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Utilizzo della batteria per le app"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Imposta l\'utilizzo della batteria per le app"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Senza limitazioni"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Ottimizzata"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Con limitazioni"</string>
@@ -4780,7 +4781,7 @@
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Apri rapidamente la fotocamera"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Per aprire velocemente la fotocamera, premi due volte il tasto di accensione da qualsiasi schermata."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"Apri rapidamente la fotocamera"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Cambia fotocamera per modalità selfie"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Cambia fotocamera per selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"Scatta selfie più rapidamente"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"Navigazione del sistema"</string>
@@ -5016,7 +5017,7 @@
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Forza esecuzione completa delle misurazioni GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Monitora tutte le costellazioni e le frequenze GNSS senza ciclo di lavoro utile"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Metodo di immissione"</string>
-    <string name="stylus_handwriting" msgid="2154591374132794563">"Scrittura a mano libera stilo"</string>
+    <string name="stylus_handwriting" msgid="2154591374132794563">"Scrittura a mano libera con stilo"</string>
     <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Quando è attivato, il metodo di immissione corrente riceve MotionEvent stilo se un editor ha impostato lo stato attivo"</string>
     <string name="device_theme" msgid="5027604586494772471">"Tema del dispositivo"</string>
     <string name="default_theme" msgid="4815428567082263639">"Valore predefinito"</string>
@@ -5411,6 +5412,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Contenuti multimediali"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Blocca media player sullo schermo"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Per riprendere velocemente la riproduzione, il media player rimane aperto nelle Impostazioni rapide"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Mostra consigli relativi a contenuti multimediali"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"In base alle tue attività"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Nascondi player"</string>
@@ -5493,7 +5498,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Usa Blocco app su schermo"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Usa Opzioni sviluppatore"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Usa servizio di stampa"</string>
-    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Consenti più utenti"</string>
+    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Consenti utenti multipli"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Usa debug wireless"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Usa Preferenze del driver di grafica"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Usa risparmio energetico"</string>
