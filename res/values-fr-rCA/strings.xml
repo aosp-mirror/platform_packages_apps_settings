@@ -142,7 +142,7 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3506962706611366830">"Permettre à votre tablette de communiquer avec les appareils Bluetooth à proximité"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Permettre à votre appareil de communiquer avec les appareils Bluetooth à proximité"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Permettre à votre téléphone de communiquer avec les appareils Bluetooth à proximité"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Désactiver déchargement Bluetooth A2DP"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Désactiver la décharge matérielle de Bluetooth A2DP"</string>
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="8610420176339657720">"Redémarrer l\'appareil?"</string>
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8333029144800835996">"Vous devez redémarrer votre appareil pour modifier ce param."</string>
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="3488695418187553566">"Redémarrer"</string>
@@ -822,8 +822,8 @@
     <string name="bluetooth_pin_values_hint" msgid="2753202519050044670">"Habituellement 0000 ou 1234"</string>
     <string name="bluetooth_pin_values_hint_16_digits" msgid="5603928271430883558">"Le numéro doit comporter 16 chiffres"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Vous devrez peut-être également saisir ce NIP sur l\'autre appareil."</string>
-    <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Vous devrez peut-être également saisir ce mot de passe sur l\'autre appareil."</string>
-    <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"Pour associer votre appareil à :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Assurez-vous que le mot de passe &lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt; s\'affiche."</string>
+    <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Vous devrez peut-être également saisir cette clé d\'accès sur l\'autre appareil."</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"Pour associer votre appareil à :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Assurez-vous que la clé d\'accès &lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt; s\'affiche."</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"De :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Associer à cet appareil?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"Pour l\'association à :<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Saisissez <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, puis appuyez sur « Retour » ou sur « Entrée »."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Autoriser l\'accès à vos contacts et à l\'historique des appels"</string>
@@ -2031,7 +2031,7 @@
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Activer d\'autres paramètres"</string>
     <string name="application_info_label" msgid="1015706497694165866">"Détails de l\'application"</string>
     <string name="storage_label" msgid="2522307545547515733">"Stockage"</string>
-    <string name="auto_launch_label" msgid="4069860409309364872">"Ouvert par défaut"</string>
+    <string name="auto_launch_label" msgid="4069860409309364872">"Ouvrir par défaut"</string>
     <string name="auto_launch_label_generic" msgid="5033137408273064599">"Valeurs par défaut"</string>
     <string name="screen_compatibility_label" msgid="7549658546078613431">"Compatibilité de l\'écran"</string>
     <string name="permissions_label" msgid="1708927634370314404">"Autorisations"</string>
@@ -2450,7 +2450,7 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"Rouge-vert"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"Rouge-vert"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Bleu-jaune"</string>
-    <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Réduction supplémentaire de la luminosité"</string>
+    <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Très sombre"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Activer la réduction suppl. de la luminosité"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Assombrissez l\'écran de votre téléphone au-delà de sa luminosité minimale"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Assombrissez l\'écran de votre tablette au-delà de sa luminosité minimale"</string>
@@ -2617,7 +2617,7 @@
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimiser en fonction de votre usage. Ce réglage est recommandé pour la plupart des applications."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Restreindre l\'utilisation de la pile lors du fonctionnement en arrière-plan. L\'application pourrait ne pas fonctionner comme prévu. Les notifications pourraient être retardées."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"La modification de la manière dont une application utilise la pile peut avoir une incidence sur ses performances."</string>
-    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Cette application nécessite une utilisation de la pile sans <xliff:g id="STATE">%1$s</xliff:g>."</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Cette application nécessite une utilisation <xliff:g id="STATE">%1$s</xliff:g> de la pile."</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"aucune restriction"</string>
     <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"optimisée"</string>
     <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"En savoir plus à propos des options d\'utilisation de la pile"</string>
@@ -3940,8 +3940,8 @@
     <string name="notif_listener_excluded_app_summary" msgid="2914567678047195396">"Modifier les paramètres pour chaque application qui envoie des notifications"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Applications affichées sur l\'appareil"</string>
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Cette application ne prend pas en charge les paramètres améliorés"</string>
-    <string name="vr_listeners_title" msgid="4960357292472540964">"Services d\'assistance de réalité virtuelle"</string>
-    <string name="no_vr_listeners" msgid="8442646085375949755">"Aucune demande d\'exécution en tant que services de soutien de réalité virtuelle n\'a été envoyée pour les applications installées."</string>
+    <string name="vr_listeners_title" msgid="4960357292472540964">"Services d\'assistance pour la réalité virtuelle"</string>
+    <string name="no_vr_listeners" msgid="8442646085375949755">"Aucune demande d\'exécution en tant que services d\'assistance pour la réalité virtuelle n\'a été envoyée pour les applications installées."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Autoriser <xliff:g id="SERVICE">%1$s</xliff:g> à accéder au service de réalité virtuelle?"</string>
     <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"L\'écouteur « <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> » pourra être exécuté lorsque vous utiliserez des applications en mode Réalité virtuelle."</string>
     <string name="display_vr_pref_title" msgid="4850474436291113569">"Lorsque l\'appareil est en mode RV"</string>
@@ -4010,7 +4010,7 @@
     <string name="notification_content_block_title" msgid="6689085826061361351">"Afficher les notifications"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Ne jamais afficher les notifications dans l\'ombre ou sur des appareils périphériques"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Autoriser la pastille de notification"</string>
-    <string name="notification_channel_badge_title" msgid="6505542437385640049">"Afficher le point de notification"</string>
+    <string name="notification_channel_badge_title" msgid="6505542437385640049">"Afficher la pastille de notification"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"Ignorer le mode Ne pas déranger"</string>
     <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"Activer ces notifications même lorsque le mode Ne pas déranger est activé"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"Écran de verrouillage"</string>
@@ -4229,7 +4229,7 @@
     <string name="imei_information_title" msgid="8703564992893669514">"Information concernant le code IIEM"</string>
     <string name="imei_information_summary" msgid="4763358372990258786">"Information concernant le code IIEM"</string>
     <string name="slot_number" msgid="2663789411468530397">"(Fente <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="892824422067985734">"Ouvert par défaut"</string>
+    <string name="launch_by_default" msgid="892824422067985734">"Ouvrir par défaut"</string>
     <string name="app_launch_domain_links_title" msgid="6702041169676128550">"Ouverture des liens"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"Ouvrir les liens compatibles"</string>
     <string name="app_launch_top_intro_message" msgid="137370923637482459">"Permettre aux liens Web de s\'ouvrir dans cette application"</string>
@@ -4770,7 +4770,7 @@
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"Essayer le thème sombre"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Contribue à prolonger l\'autonomie de la pile"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Paramètres rapides, tuiles de développeur"</string>
-    <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Désactiver le délai d\'expiration autorisation adb"</string>
+    <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Désactiver le délai d\'expiration des autorisations adb"</string>
     <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Désactiver le retrait automatique des autorisations adb pour des systèmes qui ne se sont pas connectés ou qui n\'ont pas été configurés par l\'utilisateur dans le délai d\'expiration par défaut (respectivement, sept jours et un jour minimum)."</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Traçage Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Capteurs désactivés"</string>
@@ -4817,9 +4817,9 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Sécurité et urgence"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Appel d\'urgence, données médicales, alertes"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navigation par gestes"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Pour accéder à l\'écran d\'accueil, balayez du bas de l\'écran vers le haut. Pour changer d\'applications, balayez l\'écran du bas vers le haut, maintenez le doigt sur l\'écran, puis relâchez-le. Pour revenir en arrière, balayez un doigt de l\'extrémité gauche ou droite de l\'écran dans la direction opposée."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Pour accéder à l\'écran d\'accueil, balayez l\'écran du bas de vers le haut. Pour changer d\'application, balayez l\'écran du bas vers le haut, maintenez le doigt sur l\'écran, puis relâchez-le. Pour revenir en arrière, balayez l\'écran de gauche à droite ou de droite à gauche."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigation à trois boutons"</string>
-    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Revenez en arrière, retournez à l\'écran d\'accueil ou changez d\'applications à l\'aide des boutons dans le bas de votre écran."</string>
+    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Revenez en arrière, retournez à l\'écran d\'accueil ou changez d\'application à l\'aide des boutons dans le bas de votre écran."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navigation système, navigation à deux boutons, navigation à trois boutons, navigation par gestes, balayer"</string>
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"Cette fonctionnalité n\'est pas prise en charge par votre application d\'accueil par défaut, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Changer d\'application d\'accueil par défaut"</string>
