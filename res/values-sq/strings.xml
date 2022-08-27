@@ -1617,9 +1617,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Riemërto"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Monto"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Nxirr"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Formato"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Formato kartën SD si hapësirë ruajtëse të lëvizshme"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Formato kartën"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formato si të lëvizshme"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Formato si të brendshme"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Formato"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Migro të dhënat"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Harroje"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Konfiguro"</string>
@@ -1649,17 +1650,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Riemërto hapësirën ruajtëse"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Kjo <xliff:g id="NAME_0">^1</xliff:g> është nxjerrë në mënyrë të sigurt, por është akoma e disponueshme. \n\nPër të përdorur këtë <xliff:g id="NAME_1">^1</xliff:g>, duhet ta montosh në fillim."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Kjo <xliff:g id="NAME_0">^1</xliff:g> është e dëmtuar. \n\nPër të përdorur këtë <xliff:g id="NAME_1">^1</xliff:g>, duhet ta konfigurosh në fillim."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"Pas formatimit, kartën <xliff:g id="NAME_0">^1</xliff:g> mund ta përdorësh në pajisje të tjera. \n\nTë gjitha të dhënat në <xliff:g id="NAME_1">^1</xliff:g> do të fshihen. Rekomandohet që të kryesh rezervimin në fillim. \n\n"<b>"Rezervo fotografitë dhe artikujt e tjerë \"media\""</b>" \nZhvendosi skedarët \"media\" në hapësira alternative ruajtjeje në këtë pajisje ose transferoji ato në një kompjuter duke përdorur një kabllo USB-je. \n\n"<b>"Rezervo aplikacionet"</b>" \nTë gjitha aplikacionet e ruajtura në <xliff:g id="NAME_6">^1</xliff:g> do të çinstalohen dhe të dhënat e tyre do të fshihen. Për t\'i ruajtur këto aplikacione, zhvendosi në hapësira alternative ruajtjeje në këtë pajisje."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Mund ta formatosh këtë kartë SD për të ruajtur fotografitë, videot, muzikën etj. dhe për të pasur qasje në to në pajisje të tjera. \n\n"<b>"Të gjitha të dhënat në këtë kartë SD do të spastrohen."</b>" \n\n"<b>"Para formatimit"</b>" \n\n"<b>"Rezervo fotografitë dhe mediat e tjera"</b>" \nZhvendosi skedarët e tu të medias në një hapësirë ruajtëse alternative në këtë pajisje ose transferoji te një kompjuter duke përdorur një kabllo USB. \n\n"<b>"Rezervo aplikacionet"</b>" \nTë gjitha aplikacionet e ruajtura në këtë <xliff:g id="NAME">^1</xliff:g> do të çinstalohen dhe të dhënat e tyre do të spastrohen. Për t\'i mbajtur këto aplikacione, zhvendosi ato te një hapësirë ruajtëse alternative në këtë pajisje."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Kur ta nxjerrësh këtë <xliff:g id="NAME_0">^1</xliff:g>, aplikacionet e ruajtura në të do të ndalojnë së funksionuari ndërsa skedarët \"media\" nuk do të jenë të përdorshëm derisa ta fusësh atë sërish."</b>" \n\n<xliff:g id="NAME_1">^1</xliff:g> është formatuar për të funksionuar vetëm me këtë pajisje dhe nuk do të funksionojë me pajisje të tjera."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Për të përdorur aplikacionet, fotografitë ose të dhënat që përmban <xliff:g id="NAME">^1</xliff:g>, rifute atë. \n\nSi alternativë, mund të zgjedhësh ta harrosh këtë magazinë nëse pajisja nuk mund të përdoret. \n\nNëse zgjedh që ta harrosh, të gjitha të dhënat që përmban pajisja do të humbasin përgjithmonë. \n\nAplikacionet mund t\'i instalosh sërish më vonë, por të dhënat e ruajtura në këtë pajisje do të humbasin."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Harroje <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Të gjitha aplikacionet, fotografitë dhe të dhënat e ruajtura në këtë <xliff:g id="NAME">^1</xliff:g> do të humbasin përgjithmonë."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Sistemi përfshin skedarët që përdoren për ekzekutimin e versionit <xliff:g id="VERSION">%s</xliff:g> të Android"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Përdoruesit në modalitetin \"vizitor\" nuk mund t\'i formatojnë kartat SD"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Konfiguro <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Përdore si hapësirë portative ruajtjeje"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Për të zhvendosur fotografi dhe artikuj të tjerë \"media\" mes pajisjeve."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Përdore si hapësirë të brendshme ruajtjeje"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"Për të ruajtur diçka vetëm në këtë pajisje, duke përfshirë aplikacionet dhe fotografitë. Kërkon formatim që e parandalon atë të funksionojë me pajisje të tjera."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Formato kartën SD si hapësirë ruajtëse të lëvizshme"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Ruaj fotografitë, videot, muzikën etj. dhe qasu tek ato nga pajisjet e tjera"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Formato kartën SD si hapësirë ruajtëse të brendshme"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Ruaj aplikacionet dhe mediat për t\'i përdorur vetëm në këtë telefon"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Formato si hapësirë të brendshme ruajtjeje"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Kjo kërkon që <xliff:g id="NAME_0">^1</xliff:g> të formatohet për ta bërë të sigurt atë. \n\nPas formatimit, <xliff:g id="NAME_1">^1</xliff:g> do të funksionojë vetëm në këtë pajisje. \n\n"<b>"Formatimi fshin të gjitha të dhënat që ruhen aktualisht në <xliff:g id="NAME_2">^1</xliff:g>."</b>" Për të shmangur humbjen e të dhënave, rekomandohet rezervimi i tyre."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Formatoje si hapësirë ruajtëse të lëvizshme"</string>
@@ -1676,9 +1678,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Zhvendos"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Po zhvendos të dhënat..."</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Gjatë zhvendosjes: \n• <xliff:g id="NAME">^1</xliff:g> nuk duhet të hiqet. \n• Disa apl. nuk do të funksionojnë si duhet. \n• Mbaje pajisjen të karikuar."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"<xliff:g id="NAME">^1</xliff:g> është gati për përdorim"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"<xliff:g id="NAME">^1</xliff:g> është gati për t\'u përdorur me fotografitë dhe skedarët e tjerë."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"<xliff:g id="NAME">^1</xliff:g> po funksionon. \n\nPër të zhvendosur fotografitë, skedarët dhe të dhënat e aplikacioneve te kjo pajisje, shko te Cilësimet &gt; Hapësira ruajtëse."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> u formatua"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Mund të fillosh të përdorësh <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Mund të fillosh të përdorësh <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Zhvendos <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Zhvendosja e aplikacionit <xliff:g id="APP">^1</xliff:g> dhe të dhënave të tij te <xliff:g id="NAME_0">^2</xliff:g> do të zgjasë vetëm pak çaste. Nuk do të jesh në gjendje ta përdorësh aplikacionin derisa zhvendosja të përfundojë. \n\n<xliff:g id="NAME_1">^2</xliff:g> nuk duhet të hiqet gjatë zhvendosjes."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Për të hequr të dhënat të nevojitet të shkyçësh përdoruesin <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1687,19 +1689,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Anulo zhvendosjen"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Kjo <xliff:g id="NAME_0">^1</xliff:g> duket se është e ngadaltë. \n\nMund të vazhdosh, por aplikacionet e zhvendosura në këtë vend mund të pengohen dhe transferimi i të dhënave mund të kërkojë shumë kohë. \n\nKi parasysh të përdorësh një <xliff:g id="NAME_1">^1</xliff:g> më të shpejtë për një cilësi më të mirë të funksionimit."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Si do ta përdorësh këtë <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Përdore si hapësirë ruajtëse shtesë të tabletit"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"Për aplikacionet, skedarët dhe median vetëm në këtë tablet"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Hapësira ruajtëse e tabletit"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Përdore si hapësirë ruajtëse shtesë të telefonit"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"Për aplikacionet, skedarët dhe median vetëm në këtë telefon"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Hapësira ruajtëse e telefonit"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formato kartën SD si hapësirë ruajtëse të brendshme"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Ruaj aplikacionet dhe mediat për t\'i përdorur vetëm në këtë tablet. &lt;a href=https://support.google.com/android/answer/12153449&gt;Mëso më shumë për konfigurimin e një karte SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formato"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formato kartën SD si hapësirë ruajtëse të brendshme"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Ruaj aplikacionet dhe mediat për t\'i përdorur vetëm në këtë telefon. &lt;a href=https://support.google.com/android/answer/12153449&gt;Mëso më shumë për konfigurimin e një karte SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formato"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Ose"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Përdore si hapësirë të lëvizshme"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"Për transferimin e skedarëve dhe medias mes pajisjeve"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Hapësira ruajtëse e lëvizshme"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formato kartën SD si hapësirë ruajtëse të lëvizshme"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Ruaj fotografitë, videot, muzikën etj. dhe qasu tek ato nga pajisje të tjera. &lt;a href=https://support.google.com/android/answer/12153449&gt;Mëso më shumë për konfigurimin e një karte SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formato"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Konfiguro më vonë"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Të formatohet kjo <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Kjo <xliff:g id="NAME_0">^1</xliff:g> duhet të formatohet për të ruajtur aplikacione, skedarë dhe media. \n\nFormatimi do të spastrojë përmbajtjen ekzistuese në <xliff:g id="NAME_1">^2</xliff:g>. Për të shmangur humbjen e përmbajtjes, krijo një kopje rezervë në një <xliff:g id="NAME_2">^3</xliff:g> ose në një pajisje tjetër."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Kjo <xliff:g id="NAME_0">^1</xliff:g> duhet të formatohet për të ruajtur fotografitë, videot, muzikën etj. \n\nFormatimi do të spastrojë përmbajtjet ekzistuese në <xliff:g id="NAME_1">^2</xliff:g>. Për të shmangur humbjen e përmbajtjeve, rezervoje në një tjetër <xliff:g id="NAME_2">^3</xliff:g> ose një pajisje tjetër."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formato <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Të zhvendoset përmbajtja te <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Mund të zhvendosësh skedarët, median dhe aplikacione të caktuara në këtë <xliff:g id="NAME">^1</xliff:g>. \n\nKjo zhvendosje do të lirojë deri në <xliff:g id="SIZE">^2</xliff:g> nga hapësira ruajtëse e tabletit dhe duhet të zgjasë rreth <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1716,9 +1719,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Mund ta përdorësh përsëri këtë <xliff:g id="NAME_0">^1</xliff:g>, por mund të jetë e ngadaltë. \n\nAplikacionet e ruajtura në këtë <xliff:g id="NAME_1">^2</xliff:g> mund të mos funksionojnë si duhet dhe transferimet e përmbajtjeve mund të kërkojnë shumë kohë. \n\nProvo të përdorësh një <xliff:g id="NAME_2">^3</xliff:g> më të shpejtë ose përdor më mirë këtë <xliff:g id="NAME_3">^4</xliff:g> për hapësirë ruajtëse të lëvizshme."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Fillo nga e para"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Vazhdo"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Mund ta zhvendosësh përmbajtjen te <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Për të zhvendosur përmbajtjen te <xliff:g id="NAME">^1</xliff:g>, shko te "<b>"Cilësimet &gt; Hapësira ruajtëse"</b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Përmbajtja jote u zhvendos te <xliff:g id="NAME_0">^1</xliff:g>. \n\nPër të menaxhuar këtë <xliff:g id="NAME_1">^2</xliff:g>, shko te "<b>"Cilësimet &gt; Hapësira ruajtëse"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Mund të fillosh të përdorësh <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Mund të fillosh të përdorësh <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Mund të fillosh të përdorësh <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Statusi i baterisë"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Niveli i baterisë"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN-të"</string>
@@ -2996,6 +2999,10 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Të dhënat e përdorimit të baterisë janë të përafërta dhe nuk masin përdorimin gjatë karikimit të telefonit"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Të dhënat e përdorimit të baterisë do të ofrohen pasi të përdorësh telefonin për disa orë"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Grafiku i përdorimit të baterisë"</string>
+    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
+    <skip />
+    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistikat e procesit"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistikat teknike për proceset në ekzekutim"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Përdorimi i memories"</string>
@@ -3551,6 +3558,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Lejo aplikacionet të përdorin informacionin e vendndodhjes tënde"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Prapa"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Para"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Kalo te hapësira ruajtëse e lëvizshme"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Formatoje në një mënyrë tjetër"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Përfundo"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"Kartat SIM"</string>
@@ -5611,6 +5620,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Gozhdo luajtësin e medias"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Për të rifilluar shpejt luajtjen, luajtësi i medias qëndron i hapur te \"Cilësimet e shpejta\""</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Shfaq rekomandimet për mediat"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Bazuar në aktivitetin tënd"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Fshih luajtësin"</string>

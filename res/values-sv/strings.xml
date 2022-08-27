@@ -1617,9 +1617,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Byt namn"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Montera"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Mata ut"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Formatera"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Formatera SD-kortet för bärbart lagringsutrymme"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Formatera kortet"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatera som bärbar lagring"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Formatera som internminne"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Formatera"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Migrera data"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Glöm"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Konfigurera"</string>
@@ -1649,17 +1650,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Byt namn på lagringsutrymmet"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"<xliff:g id="NAME_0">^1</xliff:g> har matats ut på ett säkert sätt men är fortfarande tillgängligt. \n\nOm du vill använda <xliff:g id="NAME_1">^1</xliff:g> måste du montera den först."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g> är korrupt. \n\nOm du vill använda <xliff:g id="NAME_1">^1</xliff:g> måste du konfigurera den först."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"Efter formateringen kan du använda ditt <xliff:g id="NAME_0">^1</xliff:g> på andra enheter. \n\nAll data på detta <xliff:g id="NAME_1">^1</xliff:g> raderas, så tänk på att säkerhetskopiera först. \n\n"<b>"Säkerhetskopiera foton och annan media"</b>" \nFlytta mediefilerna till ett annat lagringsutrymme på enheten, eller överför dem till en dator via USB-kabel. \n\n"<b>"Säkerhetskopiera appar"</b>" \nAlla appar som har lagrats på ditt <xliff:g id="NAME_6">^1</xliff:g> avinstalleras och deras data raderas. Om du vill behålla apparna flyttar du dem till ett annat lagringsutrymme på enheten."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Du kan formatera det här SD-kortet för att lagra foton, videor, musik och mer, samt få åtkomst till dem från andra enheter. \n\n"<b>"All data på det här SD-kortet rensas."</b>" \n\n"<b>"Innan du formaterar"</b>" \n\n"<b>"Säkerhetskopiera foton och annan media"</b>" \nFlytta dina mediefiler till en alternativ lagringsplats på den här enheten, eller för över dem till en dator via en USB-kabel. \n\n"<b>"Säkerhetskopiera appar"</b>" \nAlla appar som lagras på denna <xliff:g id="NAME">^1</xliff:g> avinstalleras och appdatan rensas. Om du vill behålla de här apparna flyttar du dem till en alternativ lagringsplats på den här enheten."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"När du matar ut ditt <xliff:g id="NAME_0">^1</xliff:g> slutar appar som har lagrats på det att fungera, och mediefiler som har lagrats blir inte tillgängliga förrän det har kopplats in igen."</b>" \n\nDitt <xliff:g id="NAME_1">^1</xliff:g> är formaterat för att endast fungera på den här enheten. Det fungerar inte på andra enheter."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Om du vill använda de appar, foton eller data som <xliff:g id="NAME">^1</xliff:g> innehåller infogar du enheten på nytt. \n\nOm enheten inte är tillgänglig kan du i stället välja att glömma bort lagringsenheten. \n\nOm du väljer att glömma den raderas all data som enheten innehåller, vilket inte kan ångras. \n\nDu kan installera apparna på nytt senare, men den data du lagrade på enheten finns inte kvar."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Vill du glömma <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Alla appar, alla foton och all data som har lagrats på <xliff:g id="NAME">^1</xliff:g> raderas permanent."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Systemet innehåller filer som används för att köra Android-versionen <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Användare i gästläget kan inte formatera SD-kort"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Konfigurera ditt <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Använd som bärbar lagringsenhet"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Flytta foton och annan media mellan enheter."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Använd som internminne"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"Lagra vad du vill, endast på den här enheten (inklusive appar och foton). Formatering som hindrar att det fungerar på andra enheter krävs."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Formatera SD-kortet för bärbart lagringsutrymme"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Spara foton, videor, musik och mer, och få åtkomst till dem från andra enheter"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Formatera SD-kortet för internt lagringsutrymme"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Spara appar och media för att endast använda på den här telefonen"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Formatera som internminne"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Detta kräver att ditt <xliff:g id="NAME_0">^1</xliff:g> formateras så att det blir säkert. \n\nEfter formateringen fungerar ditt <xliff:g id="NAME_1">^1</xliff:g> endast på den här enheten. \n\n"<b>"Formateringen raderar all data som har lagrats på ditt <xliff:g id="NAME_2">^1</xliff:g>."</b>" Säkerhetskopiera data om du vill undvika att förlora den."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Formatera som bärbar lagring"</string>
@@ -1676,9 +1678,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Flytta"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Flyttar data ..."</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Under flytten: \n• Ta inte bort ditt <xliff:g id="NAME">^1</xliff:g>. \n• Vissa appar fungerar inte som de ska. \n• Håll enheten laddad."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"<xliff:g id="NAME">^1</xliff:g> är klar att användas"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"Ditt <xliff:g id="NAME">^1</xliff:g> är klart att använda med foton och annan media."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"Ditt nya <xliff:g id="NAME">^1</xliff:g> fungerar. \n\nOm du vill flytta foton, filer och appdata till enheten öppnar du Inställningar &gt; Lagring."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> har formaterats"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Du kan börja använda <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Du kan börja använda <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Flytta <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Det tar bara några minuter att flytta <xliff:g id="APP">^1</xliff:g> och dess data till <xliff:g id="NAME_0">^2</xliff:g>. Du kan inte använda appen förrän flytten är klar. \n\nTa inte bort ditt <xliff:g id="NAME_1">^2</xliff:g> under flytten."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Du måste låsa upp användaren <xliff:g id="APP">^1</xliff:g> om du vill flytta data."</string>
@@ -1687,19 +1689,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Avbryt flytten"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"<xliff:g id="NAME_0">^1</xliff:g> verkar långsamt. \n\nDu kan fortsätta, men appar som har flyttats till den här platsen kan vara ryckiga och dataöverföring kan ta lång tid. \n\nÖverväg att använda ett snabbare <xliff:g id="NAME_1">^1</xliff:g> för bättre prestanda."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Hur ska du använda <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Använd för mer surfplattelagring"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"För appar, filer och media enbart på den här surfplattan"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Surfplattans lagringsutrymme"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Använd för mer mobillagring"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"För appar, filer och media enbart på den här mobilen"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Mobilens lagringsutrymme"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formatera SD-kortet för internt lagringsutrymme"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Lagra appar och media för att endast använda på den här surfplattan. &lt;a href=https://support.google.com/android/answer/12153449&gt;Läs mer om att konfigurera ett SD-kort&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formatera"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formatera SD-kortet för internt lagringsutrymme"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Lagra appar och media för att endast använda på den här telefonen. &lt;a href=https://support.google.com/android/answer/12153449&gt;Läs mer om att konfigurera ett SD-kort&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formatera"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Eller"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Använd för bärbar lagring"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"För överföring av filer och media mellan enheter"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Bärbar lagringsenhet"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formatera SD-kortet för bärbart lagringsutrymme"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Lagra foton, videor, musik och mer, och få åtkomst till dem från andra enheter. &lt;a href=https://support.google.com/android/answer/12153449&gt;Läs mer om att konfigurera ett SD-kort&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formatera"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Konfigurera senare"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Vill du formatera <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Detta <xliff:g id="NAME_0">^1</xliff:g> måste formateras för att lagra appar, filer och media. \n\nFormateringen raderar allt innehåll på <xliff:g id="NAME_1">^2</xliff:g>. Säkerhetskopiera allt innehåll du inte vill förlora till ett annat <xliff:g id="NAME_2">^3</xliff:g> eller en enhet."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Denna <xliff:g id="NAME_0">^1</xliff:g> måste formateras för att det ska gå att lagra foton, videor, musik och mer på den. \n\nOm du formaterar rensas befintligt innehåll på <xliff:g id="NAME_1">^2</xliff:g>. Om du vill undvika att förlora innehåll säkerhetskopierar du det till en annan <xliff:g id="NAME_2">^3</xliff:g> eller en annan enhet."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formatera <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Vill du flytta innehåll till <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Du kan flytta filer, media och vissa appar till <xliff:g id="NAME">^1</xliff:g>. \n\nDetta frigör <xliff:g id="SIZE">^2</xliff:g> av surfplattans lagringsutrymme och det tar ungefär <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1716,9 +1719,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Du kan fortfarande använda <xliff:g id="NAME_0">^1</xliff:g>, men det kan gå långsamt. \n\nAppar som sparas på <xliff:g id="NAME_1">^2</xliff:g> kanske inte fungerar korrekt och innehållsöverföringar kan ta lång tid. \n\nTesta att använda en snabbare version av <xliff:g id="NAME_2">^3</xliff:g>, eller använd <xliff:g id="NAME_3">^4</xliff:g> för bärbar lagring i stället."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Börja om"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Fortsätt"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Du kan flytta innehåll till <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Flytta innehåll till <xliff:g id="NAME">^1</xliff:g> i "<b>"Inställningar &gt; Lagring"</b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Innehållet flyttades till <xliff:g id="NAME_0">^1</xliff:g>. \n\nOm du vill hantera <xliff:g id="NAME_1">^2</xliff:g> öppnar du "<b>"Inställningar &gt; Lagring"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Du kan börja använda <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Du kan börja använda <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Du kan börja använda <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Batteristatus"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Batterinivå"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN:er"</string>
@@ -2996,6 +2999,10 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Informationen om batteriförbrukning är en uppskattning och speglar inte användningen när telefonen laddas"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Information om batteriförbrukning blir tillgänglig när du har använt telefonen några timmar"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Diagram över batteriförbrukning"</string>
+    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
+    <skip />
+    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Processtatistik"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Nördig statistik om processer som körs"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Minnesanvändning"</string>
@@ -3081,7 +3088,7 @@
     <string name="usage_access_title" msgid="1580006124578134850">"Appar med åtkomst"</string>
     <string name="ca_certificate" msgid="3076484307693855611">"CA-certifikat"</string>
     <string name="user_certificate" msgid="6897024598058566466">"VPN- och appanvändarcertifikat"</string>
-    <string name="wifi_certificate" msgid="8461905432409380387">"Wi‑Fi-certifikat"</string>
+    <string name="wifi_certificate" msgid="8461905432409380387">"Wifi-certifikat"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Din data kommer inte att vara privat"</string>
     <string name="ca_certificate_warning_description" msgid="8409850109551028774">"CA-certifikat används av webbplatser, appar och VPN-nätverk i krypteringssyfte. Installera endast CA-certifikat från organisationer du litar på. \n\nOm du installerar ett CA-certifikat kan certifikatsägaren få åtkomst till din data, (t.ex. lösenord eller kreditkortsuppgifter) från webbplatser du besöker eller appar du använder – även om din data är krypterad."</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Installera inte"</string>
@@ -3551,6 +3558,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Tillåt att appar använder din platsinformation"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Föregående"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Nästa"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Byt till bärbart"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Formatera på annat sätt"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Slutför"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM-kort"</string>
@@ -5611,6 +5620,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Fäst mediespelare"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Mediespelaren förblir öppen i snabbinställningarna så att du snabbt kan återuppta uppspelningen"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Visa medierekommendationer"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Baserat på din aktivitet"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Dölj spelare"</string>

@@ -1617,9 +1617,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"名前を変更"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"マウント"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"取り出し"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"フォーマット"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"外部ストレージとして SD カードをフォーマットする"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"カードをフォーマット"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"外部ストレージとしてフォーマット"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"内部ストレージとしてフォーマット"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"フォーマット"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"データを移行"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"削除"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"セットアップ"</string>
@@ -1649,17 +1650,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"ストレージの名前の変更"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"この<xliff:g id="NAME_0">^1</xliff:g>は安全に取り外されましたが、引き続き使用できます。\n\nこの<xliff:g id="NAME_1">^1</xliff:g>を使用するには、まずマウントする必要があります。"</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"この<xliff:g id="NAME_0">^1</xliff:g>は破損しています。\n\nこの<xliff:g id="NAME_1">^1</xliff:g>を使用するには、まずセットアップする必要があります。"</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"フォーマット後は、この<xliff:g id="NAME_0">^1</xliff:g>を他のデバイスで使用できます。\n\nこの<xliff:g id="NAME_1">^1</xliff:g>のすべてのデータが消去されます。フォーマットの前にバックアップを取ることを検討してください。\n\n"<b>"写真などのメディアのバックアップ"</b>\n"メディアファイルをこのデバイス上の別のストレージに移動するか、USBケーブルを使用してパソコンに転送します。\n\n"<b>"アプリのバックアップ"</b>\n"この<xliff:g id="NAME_6">^1</xliff:g>に保存されているすべてのアプリがアンインストールされ関連するデータが消去されます。アプリを引き続き使用する場合は、このデバイス上の別のストレージに移動してください。"</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"写真、動画、音楽などを保存して他のデバイスで利用できるよう、この SD カードをフォーマットできます。\n\n"<b>"この SD カード上のデータはすべて消去されます。"</b>" \n\n"<b>"フォーマットの前に"</b>" \n\n"<b>"写真などのメディアをバックアップする"</b>" \nファイルをこのデバイスの別のストレージに移動するか、USB ケーブルを使用してパソコンに転送してください。\n\n"<b>"アプリをバックアップする"</b>" \nこの <xliff:g id="NAME">^1</xliff:g>に保存されているアプリはすべてアンインストールされ、アプリのデータは消去されます。これらのアプリを保持するには、このデバイスの別のストレージに移動してください。"</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"この<xliff:g id="NAME_0">^1</xliff:g>を取り外すと、もう一度挿入するまでは保存されているアプリやメディアファイルを使用できなくなります。"</b>" \n\nこの<xliff:g id="NAME_1">^1</xliff:g>はこのデバイス用にフォーマットされており、他のデバイスでは使用できません。"</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"この<xliff:g id="NAME">^1</xliff:g>に保存されているアプリ、写真、データを使用するには、挿入し直してください。\n\nまたは、このストレージデバイスが使用できない場合は、削除することもできます。\n\n削除した場合、このデバイスに保存されているすべてのデータは完全に失われます。\n\nアプリは後で再インストールできますが、このデバイスに保存されているアプリのデータは失われます。"</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g>を削除しますか？"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"この<xliff:g id="NAME">^1</xliff:g>に保存されているすべてのアプリ、写真、データが完全に失われます。"</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"システムには、Android バージョン <xliff:g id="VERSION">%s</xliff:g> の実行に使用されるファイルが含まれています"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"ゲストモードでは SD カードをフォーマットできません"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"<xliff:g id="NAME">^1</xliff:g>のセットアップ"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"外部ストレージとして使用"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"写真などのメディアをデバイス間で移動するために使用します。"</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"内部ストレージとして使用"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"アプリや写真などすべてのデータをこのデバイスのみに保存するために使用します。他のデバイスで使用できないようにするためにフォーマットが必要です。"</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"外部ストレージとして SD カードをフォーマット"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"写真、動画、音楽などを保存して、他のデバイスからアクセスすることができます"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"内部ストレージとして SD カードをフォーマット"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"このスマートフォンでのみ使用するアプリとメディアを保存します"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"内部ストレージとしてフォーマット"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"セキュリティを確保するには、<xliff:g id="NAME_0">^1</xliff:g>をフォーマットする必要があります。\n\nフォーマットした後、この<xliff:g id="NAME_1">^1</xliff:g>はこのデバイスでのみ使用できるようになります。\n\n"<b>"フォーマットを行うと<xliff:g id="NAME_2">^1</xliff:g>に保存されているすべてのデータが消去されます。"</b>"データの喪失を防ぐため、バックアップを取ることを検討してください。"</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"外部ストレージとしてフォーマット"</string>
@@ -1676,9 +1678,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"移動"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"データを移動中…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"移動中の注意事項:\n•<xliff:g id="NAME">^1</xliff:g>を取り外さないでください。\n•一部のアプリは正常に機能しません。\n•デバイスを電源につないだままにしてください。"</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"<xliff:g id="NAME">^1</xliff:g>を使用できるようになりました"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"<xliff:g id="NAME">^1</xliff:g>を写真などのメディアの保存に使用する準備が整いました。"</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"新しい<xliff:g id="NAME">^1</xliff:g>は正常に動作しています。\n\n写真、ファイル、アプリなどのデータをこのデバイスに移動するには[設定]&gt;[ストレージ]に移動してください。"</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g>のフォーマット完了"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"<xliff:g id="NAME">^1</xliff:g>を使えるようになりました"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"<xliff:g id="NAME">^1</xliff:g>を使えるようになりました"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"<xliff:g id="APP">^1</xliff:g>を移動"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"<xliff:g id="APP">^1</xliff:g>とそのデータは数秒で<xliff:g id="NAME_0">^2</xliff:g>に移動できます。移動が完了するまでこのアプリは使用できません。\n\n移動中に<xliff:g id="NAME_1">^2</xliff:g>を取り外さないでください。"</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"データを移行するには、ユーザー（<xliff:g id="APP">^1</xliff:g>）のロック解除が必要です。"</string>
@@ -1687,19 +1689,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"移動をキャンセル"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"この<xliff:g id="NAME_0">^1</xliff:g>は速度が遅いようです。\n\n続行することはできますが、この場所に移動したアプリはスムーズに動作しないおそれがあります。また、データの転送に時間がかかる可能性があります。\n\n快適にご利用いただくには、高速の<xliff:g id="NAME_1">^1</xliff:g>を使用することをご検討ください。"</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"この <xliff:g id="NAME">^1</xliff:g>の使用目的"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"追加のタブレット ストレージとして使用"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"このタブレットのアプリ、ファイル、メディアのみ"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"タブレットのストレージ"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"追加のスマートフォン ストレージとして使用"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"このスマートフォンのアプリ、ファイル、メディアのみ"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"スマートフォンのストレージ"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"内部ストレージとして SD カードをフォーマット"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"このタブレットでのみ使用するアプリとメディアを保存します。&lt;a href=https://support.google.com/android/answer/12153449&gt;SD カードのセットアップの詳細&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"フォーマット"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"内部ストレージとして SD カードをフォーマット"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"このスマートフォンでのみ使用するアプリとメディアを保存します。&lt;a href=https://support.google.com/android/answer/12153449&gt;SD カードのセットアップの詳細&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"フォーマット"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"または"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"外部ストレージとして使用"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"デバイス間でファイルやメディアを移動するため"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"外部ストレージ"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"外部ストレージとして SD カードをフォーマット"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"写真、動画、音楽などを保存して、他のデバイスからアクセスすることができます。&lt;a href=https://support.google.com/android/answer/12153449&gt;SD カードのセットアップの詳細&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"フォーマット"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"後でセットアップ"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"この <xliff:g id="NAME">^1</xliff:g>のフォーマット"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"アプリ、ファイル、メディアを保存するには、この <xliff:g id="NAME_0">^1</xliff:g>をフォーマットする必要があります。\n\nフォーマットを行うと <xliff:g id="NAME_1">^2</xliff:g>の既存のコンテンツは消去されます。コンテンツの喪失を防ぐため、別の <xliff:g id="NAME_2">^3</xliff:g>またはデバイスにバックアップしてください。"</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"写真、動画、音楽などを保存するには、この <xliff:g id="NAME_0">^1</xliff:g>をフォーマットする必要があります。\n\nフォーマットすると、<xliff:g id="NAME_1">^2</xliff:g>上の既存のコンテンツは消去されます。コンテンツを失うことがないよう、別の <xliff:g id="NAME_2">^3</xliff:g>またはデバイスにバックアップしてください。"</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g>をフォーマット"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"<xliff:g id="NAME">^1</xliff:g>へコンテンツを移動しますか？"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"ファイル、メディア、一部のアプリをこの <xliff:g id="NAME">^1</xliff:g>に移動できます。\n\nこの移動により、タブレットの空き容量が <xliff:g id="SIZE">^2</xliff:g> 増えます。この処理にはおよそ <xliff:g id="DURATION">^3</xliff:g>かかります。"</string>
@@ -1716,9 +1719,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"この <xliff:g id="NAME_0">^1</xliff:g>は引き続き使用できますが、パフォーマンスが低下する可能性があります。\n\nこの <xliff:g id="NAME_1">^2</xliff:g>に保存されているアプリが正しく動作しなかったり、コンテンツの転送に時間がかかったりすることがあります。\n\nより高速の <xliff:g id="NAME_2">^3</xliff:g>を使用するか、この <xliff:g id="NAME_3">^4</xliff:g>を外部ストレージとしてご使用ください。"</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"最初からやり直す"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"続行"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"コンテンツを <xliff:g id="NAME">^1</xliff:g>に移動できます"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"<xliff:g id="NAME">^1</xliff:g>にコンテンツを移動するには、["<b>"設定とストレージ"</b>"] にアクセスしてください"</string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"コンテンツを <xliff:g id="NAME_0">^1</xliff:g>に移動しました。\n\nこの <xliff:g id="NAME_1">^2</xliff:g>を管理するには、["<b>"設定とストレージ"</b>"] にアクセスしてください。"</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"<xliff:g id="NAME">^1</xliff:g>を使えるようになりました"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"<xliff:g id="NAME">^1</xliff:g>を使えるようになりました"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"<xliff:g id="NAME">^1</xliff:g>を使えるようになりました"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"電池の状態:"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"バッテリー残量"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
@@ -2761,10 +2764,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"一部の機能が制限される可能性があります"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"バッテリー使用量が多くなっています"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"使用量の多いアプリを確認"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"充電は一時停止中"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"バッテリーを保護して寿命を延ばします\nタップして詳細をご確認ください"</string>
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
     <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"充電を再開"</string>
@@ -2802,8 +2803,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"このアプリがバックグラウンドで電池を使用できるようになるため、電池を予想より早く消費する可能性があります。"</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"解除"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"キャンセル"</string>
-    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
-    <skip />
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"フル充電"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"アプリのバッテリー使用量は正常です。アプリがバッテリーを使いすぎる場合は、おすすめの対処方法をスマートフォンがお知らせします。\n\nバッテリーの残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"アプリのバッテリー使用量は正常です。アプリがバッテリーを使いすぎる場合は、対処可能なおすすめの方法がタブレットに表示されます。\n\nバッテリーの残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"アプリのバッテリー使用量は正常です。アプリがバッテリーを使いすぎる場合は、対処可能なおすすめの方法がデバイスに表示されます。\n\nバッテリーの残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
@@ -2996,6 +2996,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"バッテリー使用量のデータは概算値です。スマートフォンの充電中の使用量は測定されません"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"バッテリー使用量のデータは、スマートフォンを数時間使用すると表示されます"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"バッテリー使用量グラフ"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"バッテリー使用量グラフ（日）"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"バッテリー使用量グラフ（時間）"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"プロセスの統計情報"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"プロセスの実行に関する独自の統計情報"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"メモリ使用"</string>
@@ -3551,6 +3553,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"アプリに位置情報の使用を許可する"</string>
     <string name="wizard_back" msgid="8257697435061870191">"戻る"</string>
     <string name="wizard_next" msgid="3884832431439072471">"次へ"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"外部に切り替え"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"別の方法でフォーマット"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"終了"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM カード"</string>
@@ -4152,7 +4156,7 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"今後はこの通知を表示しない"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"通知の表示"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"シェードにも周辺デバイスにも通知を表示しない"</string>
-    <string name="notification_badge_title" msgid="6854537463548411313">"通知ドットの許可"</string>
+    <string name="notification_badge_title" msgid="6854537463548411313">"通知ドットを許可"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"通知ドットの表示"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"サイレント モードの例外"</string>
     <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"サイレント モードが ON の場合もこの通知を引き続き表示します"</string>
@@ -4448,7 +4452,7 @@
       <item quantity="other">使用されていないアプリ: <xliff:g id="COUNT_1">%d</xliff:g> 個</item>
       <item quantity="one">使用されていないアプリ: <xliff:g id="COUNT_0">%d</xliff:g> 個</item>
     </plurals>
-    <string name="unused_apps_category" msgid="8954930958175500851">"使用されていないアプリの設定"</string>
+    <string name="unused_apps_category" msgid="8954930958175500851">"使用していないアプリの設定"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"使用していないアプリを一時停止する"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"権限と一時ファイルを削除し、通知を停止します"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"すべてのアプリ"</string>
@@ -5272,7 +5276,7 @@
     <string name="battery_suggestion_title" product="device" msgid="2280773774080720377">"デバイスの電池寿命の改善"</string>
     <string name="battery_suggestion_title" product="default" msgid="4811554469047272537">"スマートフォンの電池寿命の改善"</string>
     <string name="battery_suggestion_summary" msgid="8186720080540016197"></string>
-    <string name="gesture_prevent_ringing_screen_title" msgid="8293094715267769349">"着信音のミュート"</string>
+    <string name="gesture_prevent_ringing_screen_title" msgid="8293094715267769349">"着信音をミュート"</string>
     <string name="gesture_prevent_ringing_title" msgid="5978577898997523581">"電源ボタンと音量大ボタンを同時に押す"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="4529077822282099235">"着信音ミュート用のショートカット"</string>
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"バイブレーション"</string>
@@ -5280,7 +5284,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"何もしない"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"バイブレーション"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"ミュート"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"有効にするには、まず [電源ボタンを長押しする] を電源ボタン メニューに変更します。"</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"有効にするには、まず [電源ボタンを長押し] を電源ボタン メニューに変更します。"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"ネットワークの詳細"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"デバイス名がスマートフォンのアプリに表示されます。また、Bluetooth デバイスや Wi-Fi ネットワークに接続したり Wi-Fi アクセス ポイントを設定したりすると、他のユーザーもデバイス名を確認できるようになります。"</string>
     <string name="devices_title" msgid="649715719278562515">"デバイス"</string>
@@ -5567,7 +5571,7 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"デバイス コントロール"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"カードとパス"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"カードとパス"</string>
-    <string name="power_menu_setting_name" msgid="2394440932633137229">"電源ボタンを長押しする"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"電源ボタンを長押し"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"電源ボタンを長押ししてアクセスする"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"電源ボタン メニュー"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"デジタル アシスタント"</string>
@@ -5611,6 +5615,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"メディア"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"メディア プレーヤーを固定する"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"再生をすばやく再開できるよう、[クイック設定] にメディア プレーヤーを開いたままにします"</string>
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"ロック画面にメディアを表示する"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"再生をすばやく再開できるよう、ロック画面にメディア プレーヤーを開いたままにします"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"おすすめのメディアを表示"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"アクティビティに基づいて表示します"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"プレーヤーを非表示"</string>

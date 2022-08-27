@@ -1638,9 +1638,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Preimenuj"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Priključi"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Izbaci"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Formatiraj"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Formatiraj SD karticu za prenosivu memoriju"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Formatiraj karticu"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatiraj kao prenosnu"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Formatiraj kao internu"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Formatiraj"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Prenesi podatke"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Zaboravi"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Podesi"</string>
@@ -1670,17 +1671,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Preimenujte memoriju"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Uređaj <xliff:g id="NAME_0">^1</xliff:g> je bezbedno izbačen, ali je još uvek dostupan. \n\nDa biste koristili uređaj <xliff:g id="NAME_1">^1</xliff:g>, prvo treba da ga priključite."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Uređaj <xliff:g id="NAME_0">^1</xliff:g> je oštećen. \n\nDa biste koristili uređaj <xliff:g id="NAME_1">^1</xliff:g>, prvo treba da ga podesite."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"Posle formatiranja uređaj <xliff:g id="NAME_0">^1</xliff:g> možete da koristite sa drugim uređajima. \n\nSvi podaci na ovom uređaju <xliff:g id="NAME_1">^1</xliff:g> biće obrisani. Razmislite o tome da prvo napravite rezervnu kopiju podataka. \n\n"<b>"Napravite rezervnu kopiju slika i drugih medija"</b>" \nPremestite medijske datoteke u alternativnu memoriju na ovom uređaju ili ih prenesite na računar pomoću USB kabla. \n\n"<b>"Napravite rezervnu kopiju aplikacija"</b>" \nSve aplikacije sačuvane na ovom uređaju <xliff:g id="NAME_6">^1</xliff:g> biće deinstalirane i njihovi podaci biće izbrisani. Da biste zadržali ove aplikacije, premestite ih u alternativnu memoriju na ovom uređaju."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Ovu SD karticu možete da formatirate za čuvanje slika, video snimaka, muzike i drugog sadržaja i da mu pristupate na drugim uređajima. \n\n"<b>"Svi podaci na ovoj SD kartici biće obrisani."</b>" \n\n"<b>"Pre formatiranja"</b>" \n\n"<b>"Napravite rezervne kopije slika i drugih medija"</b>" \nPremestite fajlove medija u alternativni memorijski prostor na ovom uređaju ili ih prebacite na računar pomoću USB kabla. \n\n"<b>"Napravite rezervne kopije aplikacija"</b>" \nSve aplikacije koje se čuvaju na uređaju <xliff:g id="NAME">^1</xliff:g> biće deinstalirane, a njihovi podaci obrisani. Da biste zadržali te aplikacije, premestite ih u alternativni memorijski prostor na ovom uređaju."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Kada izbacite ovaj uređaj <xliff:g id="NAME_0">^1</xliff:g>, aplikacije koje su na njemu sačuvane će prestati da funkcionišu i medijske datoteke koje su na njemu sačuvane neće biti dostupne dok ga ponovo ne umetnete."</b>" \n\nUređaj <xliff:g id="NAME_1">^1</xliff:g> se formatira da bi funkcionisao samo na ovom uređaju. Neće funkcionisati na drugim uređajima."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Da biste koristili aplikacije, slike ili podatke na ovom uređaju (<xliff:g id="NAME">^1</xliff:g>), umetnite ga ponovo. \n\nDruga mogućnost je da izaberete da zaboravite taj memorijski uređaj ako nije dostupan. \n\nAko odlučite da zaboravite, svi podaci na tom uređaju biće zauvek izgubljeni. \n\nAplikacije možete da kasnije ponovo instalirate, ali će podaci uskladišteni na uređaju biti izgubljeni."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Želite da zaboravite uređaj <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Sve aplikacije, slike i podaci sačuvani na uređaju <xliff:g id="NAME">^1</xliff:g> biće zauvek izbrisani."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Sistem obuhvata datoteke koje se koriste za pokretanje verzije Android <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Korisnici u režimu gosta ne mogu da formatiraju SD"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Podesite uređaj <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Koristi kao prenosivu memoriju"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Za prenos slika i drugih medija sa jednog uređaja na drugi."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Koristi kao internu memoriju"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"Za čuvanje podataka samo na ovom uređaju, uključujući aplikacije i slike. Potrebno je formatiranje koje sprečava da memorijski uređaj funkcioniše sa drugim uređajima."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Formatirajte SD karticu za prenosivu memoriju"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Čuvajte slike, video, muziku i drugo i pristupajte im sa drugih uređaja"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Formatirajte SD karticu za internu memoriju"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Sačuvajte aplikacije i medije za korišćenje samo na ovom telefonu"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Formatir. kao internu memoriju"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Za ovo je potrebno da se uređaj <xliff:g id="NAME_0">^1</xliff:g> formatira da bi bio bezbedan. \n\nPosle formatiranja <xliff:g id="NAME_1">^1</xliff:g> će funkcionisati samo na ovom uređaju. \n\n"<b>"Formatiranjem se brišu svi podaci koji su trenutno sačuvani na uređaju <xliff:g id="NAME_2">^1</xliff:g>."</b>" Da ne biste izgubili podatke, razmislite o tome da napravite rezervnu kopiju podataka."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Formatiranje prenosne memorije"</string>
@@ -1697,9 +1699,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Prenesi"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Podaci se prenose…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Tokom prenosa: \n• Ne uklanjajte uređaj <xliff:g id="NAME">^1</xliff:g>. \n• Neke aplikacije neće pravilno funkcionisati. \n• Uređaj treba da bude napunjen."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"<xliff:g id="NAME">^1</xliff:g> je spreman/na za upotrebu"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"Uređaj <xliff:g id="NAME">^1</xliff:g> je spreman da se koristi za slike i druge medije."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"Novi uređaj <xliff:g id="NAME">^1</xliff:g> funkcioniše. \n\nDa biste preneli slike, datoteke i podatke aplikacija na ovaj uređaj, idite u Podešavanja &gt; Memorija."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> je formatiran/a"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Možete da počnete da koristite <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Možete da počnete da koristite <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Prenesite aplikaciju <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Prenos aplikacije <xliff:g id="APP">^1</xliff:g> i njenih podataka na uređaj <xliff:g id="NAME_0">^2</xliff:g> trajaće nekoliko trenutaka. Aplikaciju nećete moći da koristite dok se prenos ne završi \n\nNe uklanjajte memorijski uređaj <xliff:g id="NAME_1">^2</xliff:g> tokom prenosa."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Da biste premestili podatke, treba da otključate korisnika <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1708,19 +1710,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Otkaži prenos"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Izgleda da <xliff:g id="NAME_0">^1</xliff:g> sporo funkcioniše. \n\nMožete da nastavite, ali aplikacije koje premestite na tu lokaciju će se možda prekidati i transferi podataka mogu dugo da traju. \n\nRazmislite o korišćenju bržeg uređaja <xliff:g id="NAME_1">^1</xliff:g> za bolji učinak."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Kako ćete koristiti uređaj <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Koristite kao dodatnu memoriju"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"Za aplikacije, datoteke i medije samo na ovom tabletu"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Memorijski prostor tableta"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Koristite kao dodatnu memoriju"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"Za aplikacije, datoteke i medije samo na ovom telefonu"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Memorijski prostor telefona"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formatirajte SD karticu za internu memoriju"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Sačuvajte aplikacije i medije za korišćenje samo na ovom tabletu. &lt;a href=https://support.google.com/android/answer/12153449&gt;Saznajte više o podešavanju SD kartice&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formatiraj"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formatirajte SD karticu za internu memoriju"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Sačuvajte aplikacije i medije za korišćenje samo na ovom telefonu. &lt;a href=https://support.google.com/android/answer/12153449&gt;Saznajte više o podešavanju SD kartice&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formatiraj"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Ili"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Koristite kao prenosivu memoriju"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"Za prenos datoteka i medija sa jednog uređaja na drugi"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Prenosiva memorija"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formatirajte SD karticu za prenosivu memoriju"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Čuvajte slike, video, muziku i drugo i pristupajte im sa drugih uređaja. &lt;a href=https://support.google.com/android/answer/12153449&gt;Saznajte više o podešavanju SD kartice&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formatiraj"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Podesiću kasnije"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Želite da formatirate uređaj <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"<xliff:g id="NAME_0">^1</xliff:g> zahteva formatiranje da biste mogli da čuvate aplikacije, datoteke i medije. \n\nFormatiranje briše podatke koje <xliff:g id="NAME_1">^2</xliff:g> sadrži. Da ne biste izgubili sadržaj, napravite njegovu rezervnu kopiju pomoću uređaja <xliff:g id="NAME_2">^3</xliff:g> ili nekog drugog."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Treba da formatirate <xliff:g id="NAME_0">^1</xliff:g> da biste tu mogli da čuvate slike, video snimke, muziku i drugo. \n\nFormatiranjem ćete obrisati postojeći sadržaj na: <xliff:g id="NAME_1">^2</xliff:g>. Da ne biste izgubili sadržaj, napravite rezervnu kopiju pomoću uređaja <xliff:g id="NAME_2">^3</xliff:g> ili nekog drugog."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formatiraj: <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Želite da pomerite sadržaj na: <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Možete da premestite datoteke, medije i neke aplikacije na uređaj <xliff:g id="NAME">^1</xliff:g>. \n\nOvo premeštanje će osloboditi <xliff:g id="SIZE">^2</xliff:g> memorijskog prostora tableta i trebalo bi da traje oko <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1737,9 +1740,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"I dalje možete da koristite uređaj <xliff:g id="NAME_0">^1</xliff:g>, ali će možda sporo raditi. \n\nAplikacije koje se nalaze na uređaju <xliff:g id="NAME_1">^2</xliff:g> možda neće ispravno raditi, a prenosi sadržaja će možda dugo trajati. \n\nProbajte da koristite brži uređaj <xliff:g id="NAME_2">^3</xliff:g> ili koristite uređaj <xliff:g id="NAME_3">^4</xliff:g> kao prenosivi memorijski prostor."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Počni ponovo"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Nastavi"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Možete da premestite sadržaj na <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Da biste premestili sadržaj na <xliff:g id="NAME">^1</xliff:g>, izaberite "<b>"Podešavanja &gt; Memorijski prostor"</b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Sadržaj je premešten na <xliff:g id="NAME_0">^1</xliff:g>. \n\nDa biste upravljali uređajem <xliff:g id="NAME_1">^2</xliff:g>, izaberite "<b>"Podešavanja &gt; Memorijski prostor"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Možete da počnete da koristite <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Možete da počnete da koristite <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Možete da počnete da koristite <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Status baterije"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Nivo baterije"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Nazivi pristupnih tačaka"</string>
@@ -2792,10 +2795,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Neke funkcije mogu da budu ograničene"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Najveća potrošnja baterije"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Pogledajte aplikacije sa najvećom potrošnjom baterije"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Punjenje je zaustavljeno"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Baterija se štiti da bi joj se produžio vek trajanja\nDodirnite da biste saznali više"</string>
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
     <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Nastavi sa punjenjem"</string>
@@ -2838,8 +2839,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Ova aplikacija će moći da koristi bateriju u pozadini. Baterija može da se isprazni ranije nego što je očekivano."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Ukloni"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Otkaži"</string>
-    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
-    <skip />
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Puni do kraja"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Aplikacije koriste uobičajenu količinu baterije. Ako aplikacije koriste previše baterije, telefon će vam predložiti radnje koje možete da preduzmete.\n\nUvek možete da uključite Uštedu baterije ako vam je baterija pri kraju."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Aplikacije koriste uobičajenu količinu baterije. Ako aplikacije koriste previše baterije, tablet će vam predložiti radnje koje možete da preduzmete.\n\nUvek možete da uključite Uštedu baterije ako vam je baterija pri kraju."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Aplikacije koriste uobičajenu količinu baterije. Ako aplikacije koriste previše baterije, uređaj će vam predložiti radnje koje možete da preduzmete.\n\nUvek možete da uključite Uštedu baterije ako vam je baterija pri kraju."</string>
@@ -3034,6 +3034,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Podaci o potrošnji baterije su približni i ne mere potrošnju kada se telefon puni"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Podaci o potrošnji baterije će biti dostupni pošto budete koristili telefon nekoliko sati"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Grafikon potrošnje baterije"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Grafikon dnevne potrošnje baterije"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Grafikon potrošnje baterije po satima"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistika procesa"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Štreberska statistika o aktivnim procesima"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Iskorišćenost memorije"</string>
@@ -3593,6 +3595,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Dozvolite da aplikacije koriste informacije o lokaciji"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Nazad"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Dalje"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Pređi na prenosiv uređaj"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Formatiraj na drugi način"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Završi"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM kartice"</string>
@@ -4077,14 +4081,14 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Sva obaveštenja aplikacije <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Prilagodljiva obaveštenja"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
-      <item quantity="one">Otprilike <xliff:g id="NUMBER_1">%,d</xliff:g> obaveštenje dnevno</item>
-      <item quantity="few">Otprilike <xliff:g id="NUMBER_1">%,d</xliff:g> obaveštenja dnevno</item>
-      <item quantity="other">Otprilike <xliff:g id="NUMBER_1">%,d</xliff:g> obaveštenja dnevno</item>
+      <item quantity="one">Oko <xliff:g id="NUMBER_1">%,d</xliff:g> obaveštenje dnevno</item>
+      <item quantity="few">Oko <xliff:g id="NUMBER_1">%,d</xliff:g> obaveštenja dnevno</item>
+      <item quantity="other">Oko <xliff:g id="NUMBER_1">%,d</xliff:g> obaveštenja dnevno</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
-      <item quantity="one">Otprilike <xliff:g id="NUMBER_1">%,d</xliff:g> obaveštenje nedeljno</item>
-      <item quantity="few">Otprilike <xliff:g id="NUMBER_1">%,d</xliff:g> obaveštenja nedeljno</item>
-      <item quantity="other">Otprilike <xliff:g id="NUMBER_1">%,d</xliff:g> obaveštenja nedeljno</item>
+      <item quantity="one">Oko <xliff:g id="NUMBER_1">%,d</xliff:g> obaveštenje nedeljno</item>
+      <item quantity="few">Oko <xliff:g id="NUMBER_1">%,d</xliff:g> obaveštenja nedeljno</item>
+      <item quantity="other">Oko <xliff:g id="NUMBER_1">%,d</xliff:g> obaveštenja nedeljno</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Nikad"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Obaveštenja na uređajima i u aplikacijama"</string>
@@ -5698,6 +5702,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"Mediji"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Zakači medija plejer"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Da biste brzo nastavili reprodukciju, medija plejer ostaje otvoren u Brzim podešavanjima"</string>
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Prikazuj medijski sadržaj na zaključanom ekranu"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"Da biste brzo nastavili reprodukciju, medija plejer ostaje otvoren na zaključanom ekranu"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Prikazuj preporuke za medije"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Na osnovu aktivnosti"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Sakrij plejer"</string>

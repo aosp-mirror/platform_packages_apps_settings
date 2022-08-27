@@ -149,7 +149,7 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3506962706611366830">"Baimendu tabletari inguruko Bluetooth bidezko gailuekin komunikatzea"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Eman gailuari inguruko Bluetooth bidezko gailuekin komunikatzeko baimena"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Baimendu telefonoari inguruko Bluetooth bidezko gailuekin komunikatzea"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Desgaitu Bluetooth A2DP-ren hardwarearen deskarga"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Desgaitu Bluetooth A2DPren hardwarearen deskarga"</string>
     <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Desgaitu Bluetooth LE audio darabilten hardwareen deskarga"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Gailua berrabiarazi nahi duzu?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Ezarpen hau aldatzeko, gailua berrabiarazi behar duzu."</string>
@@ -1617,9 +1617,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Aldatu izena"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Instalatu"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Atera"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Formateatu"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Formateatu SD txartela biltegiratze-gailu eramangarri gisa"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Formateatu txartela"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formateatu eramangarri gisa"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Formateatu barneko gisa"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Formateatu"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Migratu datuak"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Ahaztu"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Konfiguratu"</string>
@@ -1649,17 +1650,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Aldatu memoriaren izena"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Segurtasunez kanporatu da <xliff:g id="NAME_0">^1</xliff:g>, baina oraindik erabilgarri dago.\n\n<xliff:g id="NAME_1">^1</xliff:g> erabiltzeko, lehenik eta behin, instalatu egin behar duzu."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g> hondatuta dago. \n\n<xliff:g id="NAME_1">^1</xliff:g> erabiltzeko, lehenik eta behin, konfiguratu egin behar duzu."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"Formateatu ondoren, beste gailu batzuetan erabili ahal izango duzu <xliff:g id="NAME_0">^1</xliff:g>. \n\n<xliff:g id="NAME_1">^1</xliff:g> memoriako datu guztiak ezabatu egingo dira; beraz, aurretik babeskopia bat egitea gomendatzen dizugu. \n\n"<b>"Egin argazkien eta bestelako multimedia-fitxategien babeskopia"</b>\n"Eraman multimedia-fitxategiak gailu honetako beste memoria batzuetara, edo transferitu ordenagailu batera USB kable baten bidez. \n\n"<b>"Egin aplikazioen babeskopia"</b>\n"<xliff:g id="NAME_6">^1</xliff:g> memorian gordeta dauden aplikazio guztiak desinstalatu egingo dira eta horien datuak ezabatu egingo dira. Aplikazioak gordetzeko, eraman gailu honetako beste memoria batera."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"SD txartela formatea dezakezu argazkiak, bideoak, musika eta abar gordetzeko, eta eduki hori beste gailu batzuetatik atzitzeko. \n\n"<b>"SD txartel honetako datu guztiak ezabatu egingo dira."</b>" \n\n"<b>"Formateatu aurretik"</b>" \n\n"<b>"Egin argazkien eta bestelako multimedia-edukien babeskopiak"</b>" \nEraman multimedia-fitxategiak gailu honetako beste memoria batzuetara, edo transferitu ordenagailu batera USB kable baten bidez. \n\n"<b>"Egin aplikazioen babeskopia"</b>" \n<xliff:g id="NAME">^1</xliff:g> txartelean gordeta dauden aplikazio guztiak desinstalatu egingo dira eta horien datuak ezabatu egingo dira. Aplikazioak gordetzeko, eraman gailu honetako beste memoria batera."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"<xliff:g id="NAME_0">^1</xliff:g> memoria ateratzen duzunean, han gordetako aplikazioek funtzionatzeari utziko diote eta gordetako multimedia-fitxategiak ez dira erabilgarri egongo memoria berriro sartzen duzun arte."</b>\n\n"<xliff:g id="NAME_1">^1</xliff:g> memoria gailu honetan soilik funtzionatzeko formateatuta dago, eta ez du beste inon funtzionatuko."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"<xliff:g id="NAME">^1</xliff:g> gailuak dituen aplikazioak, argazkiak edo datuak erabiltzeko, sar ezazu berriro. \n\nBestela, memoria ahaztea aukera dezakezu, gailua erabilgarri ez badago. \n\nAhazteko aukerarekin, gailuak dituen datu guztiak betiko galduko dira. \n\nGeroago instala ditzakezu berriro aplikazioak, baina gailu honetan haiek dituzten datuak galdu egingo dira."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g> ahaztu nahi duzu?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Betiko galduko dira <xliff:g id="NAME">^1</xliff:g> memoria-unitatean gordetako aplikazio, argazki eta datu guztiak."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Android-en <xliff:g id="VERSION">%s</xliff:g> bertsioa exekutatzeko erabiltzen diren fitxategiak daude sisteman"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Gonbidatu moduan ezin dira formateatu SD txartelak"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Konfiguratu <xliff:g id="NAME">^1</xliff:g> memoria"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Erabili biltegiratze-gailu eramangarri gisa"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Argazkiak eta bestelako multimedia-fitxategiak gailu batetik bestera eramateko."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Erabili barneko memoria gisa"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"Edozein gauza gailu honetan soilik gordetzeko, aplikazioak eta argazkiak barne. Erabilera hau emateko, beste gailu batzuetan funtzionatzea galarazten duen formateatze bat egin behar da memorian."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Formateatu SD txartela biltegiratze-gailu eramangarri gisa"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Gorde argazkiak, bideoak, musika eta abar, eta atzitu edukia beste gailu batzuetatik"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Formateatu SD txartela barneko memoria gisa"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Gorde aplikazioak eta multimedia-edukia gailu honetan bakarrik"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Formateatu barneko memoria gisa"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"<xliff:g id="NAME_0">^1</xliff:g> formateatu egin behar da segurua izan dadin. \n\nFormateatu ostean, <xliff:g id="NAME_1">^1</xliff:g> memoriak gailu honetan bakarrik funtzionatuko du. \n\n"<b>"Formateatzean, une horretan <xliff:g id="NAME_2">^1</xliff:g> memorian gordetako datu guztiak ezabatzen dira."</b>" Daturik ez galtzeko, babeskopia bat egitea gomendatzen dizugu."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Formateatu memoria eramangarri gisa"</string>
@@ -1676,9 +1678,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Mugitu"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Datuak mugitzen…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Transferentzia egiten den bitartean: \n• Ez kendu <xliff:g id="NAME">^1</xliff:g> memoria. \n• Aplikazio batzuek ez dute ongi funtzionatuko. \n• Gailuak kargatuta egon behar du."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"Prest duzu <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"<xliff:g id="NAME">^1</xliff:g> argazkiekin eta bestelako multimedia-fitxategiekin erabiltzeko behar bezala konfiguratu da."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"<xliff:g id="NAME">^1</xliff:g> memoria berria abian da. \n\nArgazkiak, fitxategiak eta aplikazioaren datuak gailu honetara ekartzeko, zoaz Ezarpenak &gt; Memoria atalera."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"Formateatu da <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"<xliff:g id="NAME">^1</xliff:g> erabiltzen has zaitezke"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"<xliff:g id="NAME">^1</xliff:g> erabiltzen has zaitezke"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Mugitu <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"<xliff:g id="APP">^1</xliff:g> aplikazioa eta bere datuak <xliff:g id="NAME_0">^2</xliff:g> memoriara eramateak denboratxo bat behar du. Ezin izango duzu aplikazioa erabili transferentzia osatzen den arte. \n\n Ez kendu <xliff:g id="NAME_1">^2</xliff:g> transferentzia egiten den bitartean."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Datuak mugitzeko, <xliff:g id="APP">^1</xliff:g> erabiltzailea desblokeatu behar duzu."</string>
@@ -1687,19 +1689,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Utzi transferentzia"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"<xliff:g id="NAME_0">^1</xliff:g> hau motel dabilela dirudi. \n\nAurrera egin dezakezu, baina kokapen honetara eramandako aplikazioak eten egin daitezke eta datuak transferitzeko denbora gehiago behar izan daiteke. \n\n<xliff:g id="NAME_1">^1</xliff:g> bizkorragoa erabil dezakezu errendimendu hobea lortzeko."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Nola erabili nahi duzu <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Tabletaren memoria gehigarri gisa"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"Tabletako fitxategi eta multimedia-edukirako soilik"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Tabletaren memoria"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Telefonoaren memoria gehigarri gisa"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"Telefonoko aplikazio, fitxategi eta multimedia-edukirako soilik"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Telefonoaren memoria"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formateatu SD txartela barneko memoria gisa"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Gorde aplikazioak eta multimedia-edukia tableta honetan bakarrik. &lt;a href=https://support.google.com/android/answer/12153449&gt;Lortu SD txartel bat konfiguratzeari buruzko informazio gehiago&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formateatu"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formateatu SD txartela barneko memoria gisa"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Gorde aplikazioak eta multimedia-edukia gailu honetan bakarrik. &lt;a href=https://support.google.com/android/answer/12153449&gt;Lortu SD txartel bat konfiguratzeari buruzko informazio gehiago&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formateatu"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Edo"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Biltegiratze-gailu eramangarri gisa"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"Gailuen artean fitxategiak eta multimedia-edukia transferitzeko"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Biltegiratze-gailu eramangarria"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formateatu SD txartela biltegiratze-gailu eramangarri gisa"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Gorde argazkiak, bideoak, musika eta abar, eta atzitu edukia beste gailu batzuetatik. &lt;a href=https://support.google.com/android/answer/12153449&gt;Lortu SD txartel bat konfiguratzeari buruzko informazio gehiago&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formateatu"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Konfiguratu geroago"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"<xliff:g id="NAME">^1</xliff:g> formateatu nahi al duzu?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"<xliff:g id="NAME_0">^1</xliff:g> formateatu egin behar da aplikazioak, fitxategiak eta multimedia-edukia memorian gordetzeko. \n\nFormateatuz gero, <xliff:g id="NAME_1">^2</xliff:g>k lehendik duen edukia ezabatuko da. Edukirik ez galtzeko, egin babeskopia beste gailu batean edo erabili hauetako beste bat: <xliff:g id="NAME_2">^3</xliff:g>."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"<xliff:g id="NAME_0">^1</xliff:g> formateatu egin behar da argazkiak, bideoak, musika eta abar gordetzeko. \n\nFormateatuz gero, <xliff:g id="NAME_1">^2</xliff:g> txartelean lehendik gordetako edukia ezabatuko da. Edukirik ez galtzeko, egin babeskopia beste gailu batean edo erabili hauetako beste bat: <xliff:g id="NAME_2">^3</xliff:g>."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formateatu <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"<xliff:g id="NAME">^1</xliff:g> erabili edukia mugitzeko?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Erabili <xliff:g id="NAME">^1</xliff:g> fitxategiak, multimedia-edukia eta aplikazio jakin batzuk bertara eramateko. \n\nHorrela, <xliff:g id="SIZE">^2</xliff:g> utziko dira libre tabletan (<xliff:g id="DURATION">^3</xliff:g> beharko dira)."</string>
@@ -1716,9 +1719,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"<xliff:g id="NAME_0">^1</xliff:g> gailua erabiltzen jarrai dezakezu, baina baliteke mantso joatea. \n\nBaliteke <xliff:g id="NAME_1">^2</xliff:g>k gordeta dituen aplikazioek behar bezala ez funtzionatzea eta eduki-transferentziek asko irautea. \n\nSaiatu bizkorragoa den <xliff:g id="NAME_2">^3</xliff:g> erabiltzen, edo horren ordez, erabili <xliff:g id="NAME_3">^4</xliff:g> biltegiratze-gailu eramangarri gisa."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Hasi berriro"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Egin aurrera"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"<xliff:g id="NAME">^1</xliff:g> gailura eraman dezakezu edukia"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Edukia <xliff:g id="NAME">^1</xliff:g> gailura eramateko, joan "<b>"Ezarpenak &gt; Memoria"</b>" atalera"</string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Eraman da edukia <xliff:g id="NAME_0">^1</xliff:g> gailura. \n\n<xliff:g id="NAME_1">^2</xliff:g> kudeatzeko, joan "<b>"Ezarpenak &gt; Memoria"</b>" atalera."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"<xliff:g id="NAME">^1</xliff:g> erabiltzen has zaitezke"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"<xliff:g id="NAME">^1</xliff:g> erabiltzen has zaitezke"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"<xliff:g id="NAME">^1</xliff:g> erabiltzen has zaitezke"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Bateriaren egoera"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Bateria-maila"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNak"</string>
@@ -2056,7 +2059,7 @@
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Baliteke gailuak eta datu pertsonalek aplikazio ezezagunen erasoak jasatea. Iturburu honetako aplikazioak instalatzen badituzu, onartu egingo duzu haiek erabiltzeagatik gailuari agian gertatuko zaizkion kalteen edo datu-galeren erantzulea zeu izango zarela."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Ezarpen aurreratuak"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Gaitu ezarpenen aukera gehiago"</string>
-    <string name="application_info_label" msgid="1015706497694165866">"Aplikazioen informazioa"</string>
+    <string name="application_info_label" msgid="1015706497694165866">"Aplikazioaren informazioa"</string>
     <string name="storage_label" msgid="2522307545547515733">"Memoria"</string>
     <string name="auto_launch_label" msgid="4069860409309364872">"Ireki modu lehenetsian"</string>
     <string name="auto_launch_label_generic" msgid="5033137408273064599">"Balio lehenetsiak"</string>
@@ -2705,10 +2708,10 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Atzeko planoko jarduerak mugatu nahi dituzu?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Aplikazio baten atzeko planoko jarduerak mugatzen badituzu, baliteke aplikazioak behar bezala ez funtzionatzea"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Aplikazio hau bateria optimizatzeko konfiguratuta ez dagoenez, ezin duzu mugatu.\n\nMugatzeko, aktibatu bateriaren optimizazioa."</string>
-    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Murriztapenik gabe"</string>
+    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Mugagabea"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Optimizatua"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Mugatua"</string>
-    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Eman bateria murriztapenik gabe erabiltzeko baimena atzeko planoan. Baliteke bateria gehiago erabiltzea."</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Eman bateria mugarik gabe erabiltzeko baimena atzeko planoan. Baliteke bateria gehiago erabiltzea."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimizatu erabileran oinarrituta. Aplikazio gehienetarako gomendatua."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Murriztu bateria-erabilera atzeko planoan. Baliteke aplikazioak behar bezala ez funtzionatzea. Agian jakinarazpenak atzeratu egingo dira."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Aplikazio baten bateria erabiltzeko modua aldatzeak haren errendimenduan eragina izan dezake."</string>
@@ -2761,10 +2764,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Baliteke eginbide batzuk mugatuta egotea"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Bateria-erabilera handiena"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Ikusi bateria gehien erabiltzen duten aplikazioak"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Kargatze-prozesua etenda dago"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Bateria babestea gehiago iraun dezan\nSakatu hau informazio gehiago lortzeko"</string>
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
     <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Berrekin kargatzeari"</string>
@@ -2802,8 +2803,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Atzeko planoan exekutatu arren, baliteke aplikazio honek bateria erabiltzea. Horregatik, baliteke espero baino lehenago agortzea bateria."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Kendu"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Utzi"</string>
-    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
-    <skip />
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Kargatu guztiz"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Aplikazioak ohiko bateria kantitatea erabiltzen ari dira. Aplikazioek bateria gehiegi erabiltzen badute, gauzatu ahal dituzun ekintzak iradokitzen ditu telefonoak.\n\nBateria gutxi baduzu, bateria-aurreztailea aktibatzeko aukera duzu."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Aplikazioak ohiko bateria kantitatea erabiltzen ari dira. Aplikazioek bateria gehiegi erabiltzen badute, gauzatu ahal dituzun ekintzak iradokitzen ditu tabletak.\n\nBateria gutxi baduzu, bateria-aurreztailea aktibatzeko aukera duzu."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Aplikazioak ohiko bateria kantitatea erabiltzen ari dira. Aplikazioek bateria gehiegi erabiltzen badute, gauzatu ahal dituzun ekintzak iradokitzen ditu gailuak.\n\nBateria gutxi baduzu, bateria-aurreztailea aktibatzeko aukera duzu."</string>
@@ -2996,6 +2996,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Bateria-erabileraren datuak gutxi gorabeherakoak dira eta ez dute neurtzen erabilerarik telefonoa kargatzen ari denean"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Telefonoa ordu batzuez erabili ondoren egongo dira erabilgarri bateriaren erabilera-datuak"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Bateria-erabileraren diagrama"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Eguneroko bateria-erabileraren diagrama"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Ordueroko bateria-erabileraren diagrama"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Prozesu-estatistikak"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Exekutatzen ari diren prozesuei buruzko estatistika zehatzak"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Memoriaren erabilera"</string>
@@ -3551,6 +3553,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Utzi kokapen-informazioa erabiltzen aplikazioei"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Atzera"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Hurrengoa"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Aldatu modu eramangarrira"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Formateatu beste modu batera"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Amaitu"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM txartelak"</string>
@@ -4077,8 +4081,8 @@
     <string name="notif_type_alerting_summary" msgid="4681068287836313604">"Tonua jo edo dar-dar egin dezake, ezarpenen arabera"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"Isilak"</string>
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"Soinurik edo dardararik egiten ez duten jakinarazpenak"</string>
-    <string name="notification_listener_allowed" msgid="5536962633536318551">"Baimenduta"</string>
-    <string name="notification_listener_not_allowed" msgid="3352962779597846538">"Baimendu gabe"</string>
+    <string name="notification_listener_allowed" msgid="5536962633536318551">"Baimendutakoak"</string>
+    <string name="notification_listener_not_allowed" msgid="3352962779597846538">"Baimendu gabekoak"</string>
     <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"Ikusi aplikazio guztiak"</string>
     <string name="notif_listener_excluded_app_summary" msgid="2914567678047195396">"Aldatu jakinarazpenak bidaltzen dituen aplikazio bakoitzaren ezarpenak"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Gailuan agertzen diren aplikazioak"</string>
@@ -5194,7 +5198,7 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Egin GNSS konstelazio eta maiztasun guztien jarraipena, eginbeharren ziklorik gabe"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Idazketa-metodoa"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"Arkatz bidezko idazketa"</string>
-    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Gaituta dagoenean, une honetako idazketa-metodoak arkatzaren mugimendu-gertaera jasotzen du, editore bat fokuratuta badago."</string>
+    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Gaituta dagoenean, une honetako idazketa-metodoak arkatzaren mugimendu-gertaera jasotzen du, editore bat fokuratuta badago"</string>
     <string name="device_theme" msgid="5027604586494772471">"Gailuaren gaia"</string>
     <string name="default_theme" msgid="4815428567082263639">"Lehenetsia"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Sarearen izena"</string>
@@ -5568,15 +5572,15 @@
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Txartelak eta bonuak"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"txartelak eta bonuak"</string>
     <string name="power_menu_setting_name" msgid="2394440932633137229">"Eduki sakatuta etengailua"</string>
-    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Eduki sakatuta etengailua hau atzitzeko"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Eduki sakatuta etengailua hau atzitzeko:"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Itzaltzeko menua"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Laguntzaile digitala"</string>
     <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Atzitu laguntzaile digitala"</string>
     <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Atzitu itzaltzeko menua"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Erabili ahal izateko, konfiguratu pantailaren blokeoa"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Itzaltzeko menua:\nsakatu aldi berean etengailua eta bolumena igotzeko botoia"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Itzaltzeko menua:\nSakatu aldi berean etengailua eta bolumena igotzeko botoia"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Ez jo tonurik:\nsakatu bolumen-botoia lasterbidea erabiltzeko"</string>
-    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Zenbat denboraz edukiko duzu sakatuta etengailua?"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Sakatuta edukitzeko keinuaren iraupena"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Sentikortasuna doitzeko, aukeratu zenbat denboraz edukiko duzun sakatuta etengailua"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Laburra"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Luzea"</string>
@@ -5611,6 +5615,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Multimedia-edukia"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Ainguratu multimedia-erreproduzigailua"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Erreprodukzioari bizkor berrekin ahal izateko, multimedia-erreproduzigailua irekita gelditzen da Ezarpen bizkorrak menuan"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Erakutsi multimedia-edukiaren inguruko gomendioak"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Zure jardueretan oinarrituta"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Ezkutatu erreproduzigailua"</string>
@@ -5692,9 +5700,9 @@
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Erabili tonua ez jotzeko aukera"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Erabili wifi-gunea"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Erabili aplikazioak ainguratzeko aukera"</string>
-    <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Garatzaileentzako aukerak erabili."</string>
+    <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Erabili garatzaileentzako aukerak"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Erabili inprimatzeko zerbitzua"</string>
-    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Eman erabiltzaile anitz egoteko baimena"</string>
+    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Baimendu erabiltzaile bat baino gehiago"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Erabili hari gabeko arazketa"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Erabili grafikoen kontrolatzailearen hobespenak"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Erabili bateria-aurreztailea"</string>

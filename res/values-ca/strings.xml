@@ -1617,9 +1617,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Canvia el nom"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Activa"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Expulsa"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Formata"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Formata la targeta SD com a emmagatzematge portàtil"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Formata la targeta"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formata com a portàtil"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Formata com a intern"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Formata"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Migra les dades"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Oblida"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Configura"</string>
@@ -1649,17 +1650,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Canvia nom emmagatzematge"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"<xliff:g id="NAME_0">^1</xliff:g> s\'ha expulsat de manera segura, però encara està disponible. \n\nPer fer servir <xliff:g id="NAME_1">^1</xliff:g>, primer l\'has d\'activar."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g> s\'ha malmès. \n\nPer fer servir <xliff:g id="NAME_1">^1</xliff:g>, primer l\'has de configurar."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"Un cop l\'hagis formatat, podràs fer servir <xliff:g id="NAME_0">^1</xliff:g> en altres dispositius. \n\nTotes les dades que hi hagi a <xliff:g id="NAME_1">^1</xliff:g> s\'esborraran. Et recomanem que en facis una còpia de seguretat primer.\n\n"<b>"Fer una còpia de seguretat de les fotos i d\'altres fitxers multimèdia"</b>\n"Desplaça els fitxers multimèdia a un emmagatzematge alternatiu del dispositiu o transfereix-los a un ordinador mitjançant un cable USB. \n\n"<b>"Fer una còpia de seguretat de les aplicacions"</b>" \nTotes les aplicacions que hi hagi a <xliff:g id="NAME_6">^1</xliff:g> es desinstal·laran i se n\'esborraran les dades. Per conservar aquestes aplicacions, desplaça-les a un emmagatzematge alternatiu del dispositiu."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Pots formatar aquesta targeta SD per desar fotos, vídeos, música i més, i accedir-hi des d\'altres dispositius. \n\n"<b>"Totes les dades d\'aquesta targeta SD se suprimiran."</b>" \n\n"<b>"Abans de formatar"</b>" \n\n"<b>"Crea una còpia de seguretat de les fotos i altres continguts multimèdia"</b>" \nMou els teus fitxers multimèdia a un emmagatzematge alternatiu en aquest dispositiu o transfereix-los a un ordinador amb un cable USB. \n\n"<b>"Crea una còpia de seguretat de les aplicacions"</b>" \nTotes les aplicacions instal·lades a <xliff:g id="NAME">^1</xliff:g> es desistal·laran i se\'n suprimiran totes les dades. Per conservar aquestes aplicacions, mou-les a un emmagatzematge alternatiu en aquest dispositiu."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Si expulses <xliff:g id="NAME_0">^1</xliff:g>, les aplicacions que hi hagi instal·lades deixaran de funcionar i els fitxers multimèdia que contingui deixaran d\'estar disponibles fins que no es torni a inserir."</b>" \n\n<xliff:g id="NAME_1">^1</xliff:g> està formatat per funcionar només en aquest dispositiu. No funcionarà en altres dispositius."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Torna a inserir el dispositiu d\'emmagatzematge <xliff:g id="NAME">^1</xliff:g> per fer servir les aplicacions, les fotos o les dades que conté. \n\nTambé pots decidir que s\'oblidi el dispositiu d\'emmagatzematge si no està disponible. \n\nSi tries aquesta darrera opció, es perdran permanentment totes les dades emmagatzemades al dispositiu. \n\nPodràs tornar a instal·lar les aplicacions més endavant, però no podràs recuperar les dades que tenies emmagatzemades al dispositiu."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Vols que s\'oblidi <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Les aplicacions, les fotos i les dades que s\'hagin desat a <xliff:g id="NAME">^1</xliff:g> es perdran per sempre."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"El sistema inclou fitxers que s\'utilitzen per executar la versió d\'Android <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"No es poden formatar targetes SD en mode de convidat"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Configurar <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Utilitza com a emmagatzematge portàtil"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Per desplaçar fotos i altres fitxers multimèdia entre dispositius."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Utilitza com a emmagatzematge intern"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"Per emmagatzemar dades només en aquest dispositiu, com ara aplicacions i fotos. Cal formatar-lo perquè no es pugui fer servir en altres dispositius."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Formata la targeta SD com a emmagatzematge portàtil"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Desa fotos, vídeos, música i més, i accedeix-hi des d\'altres dispositius"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Formata la targeta SD com a emmagatzematge intern"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Desa aplicacions i contingut multimèdia per fer-los servir només en aquest telèfon"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Formatar com emmagatzem. intern"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Has de formatar <xliff:g id="NAME_0">^1</xliff:g> per seguretat. \n\nUn cop s\'hagi formatat, <xliff:g id="NAME_1">^1</xliff:g> només funcionarà en aquest dispositiu. \n\n"<b>"En formatar <xliff:g id="NAME_2">^1</xliff:g>, se n\'esborraran totes dels dades."</b>" Et recomanem que en facis una còpia de seguretat de les dades per no perdre-les."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Formata com a emmagatz. portàtil"</string>
@@ -1676,9 +1678,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Desplaça"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"S\'estan desplaçant les dades…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Durant la migració: \n• No extreguis el teu <xliff:g id="NAME">^1</xliff:g>. \n• Algunes aplicacions no funcionaran correctament. \n• Mantén el dispositiu carregat."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"Ja pots utilitzar el suport (<xliff:g id="NAME">^1</xliff:g>)"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"S\'ha configurat <xliff:g id="NAME">^1</xliff:g> per poder treballar-hi amb fotos i altres fitxers multimèdia."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"<xliff:g id="NAME">^1</xliff:g> ja funciona. \n\nSi vols desplaçar fotos, fitxers o dades d\'aplicacions a aquest dispositiu, ves a Configuració &gt; Emmagatzematge."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"S\'ha formatat la <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Pots començar a utilitzar la teva <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Pots començar a utilitzar la teva <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Desplaçar <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Només caldran uns quants minuts per migrar <xliff:g id="APP">^1</xliff:g> i les dades associades a <xliff:g id="NAME_0">^2</xliff:g>. No podràs fer servir l\'aplicació fins que hagi finalitzat el procés. \n\nNo extreguis el teu <xliff:g id="NAME_1">^2</xliff:g> durant la migració."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Per moure dades, has de desbloquejar l\'usuari <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1687,19 +1689,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Cancel·la el desplaçament"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Sembla que <xliff:g id="NAME_0">^1</xliff:g> és lent. \n\nPots continuar, però les aplicacions que es desplacin a aquesta ubicació poden patir interrupcions i les transferències de dades poden tardar molt temps. \n\nPensa en la possibilitat de fer servir un <xliff:g id="NAME_1">^1</xliff:g> més ràpid per obtenir un rendiment millor."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Com utilitzaràs aquest suport (<xliff:g id="NAME">^1</xliff:g>)?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Emmag. addicional de la tauleta"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"Per a apps, fitxers i multimèdia només d\'aquesta tauleta"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Emmagatzematge de la tauleta"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Emmag. addicional del telèfon"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"Per a apps, fitxers i multimèdia només d\'aquest telèfon"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Emmagatzematge del telèfon"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formata la targeta SD com a emmagatzematge intern"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Emmagatzema aplicacions i contingut multimèdia per fer-los servir només en aquesta tauleta. &lt;a href=https://support.google.com/android/answer/12153449&gt;Més informació sobre com pots configurar una targeta SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formata"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formata la targeta SD com a emmagatzematge intern"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Emmagatzema aplicacions i contingut multimèdia per fer-los servir només en aquest telèfon. &lt;a href=https://support.google.com/android/answer/12153449&gt;Més informació sobre com pots configurar una targeta SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formata"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"O"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Utilitza com a emmag. portàtil"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"Per transferir fitxers i contingut multimèdia entre dispositius"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Emmagatzematge portàtil"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formata la targeta SD com a emmagatzematge portàtil"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Emmagatzema fotos, vídeos, música i més, i accedeix-hi des d\'altres dispositius. &lt;a href=https://support.google.com/android/answer/12153449&gt;Més informació sobre com pots configurar una targeta SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formata"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Configura més tard"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Vols formatar aquest suport (<xliff:g id="NAME">^1</xliff:g>)?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Cal formatar aquest suport extern (<xliff:g id="NAME_0">^1</xliff:g>) per poder-hi emmagatzemar aplicacions, fitxers i contingut multimèdia. \n\nEn formatar-lo (<xliff:g id="NAME_1">^2</xliff:g>), se n\'esborrarà el contingut actual. Per tal d\'evitar que es perdi contingut, fes-ne còpies de seguretat en un altre dispositiu o <xliff:g id="NAME_2">^3</xliff:g>."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Cal formatar aquesta <xliff:g id="NAME_0">^1</xliff:g> per emmagatzemar-hi fotos, vídeos, música i més. \n\nEn formatar-la, s\'esborrarà el contingut existent a <xliff:g id="NAME_1">^2</xliff:g>. Per tal d\'evitar que es perdi contingut, fes-ne una còpia de seguretat en una altra <xliff:g id="NAME_2">^3</xliff:g> o en un altre dispositiu."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formata (<xliff:g id="NAME">^1</xliff:g>)"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Vols transferir el contingut (<xliff:g id="NAME">^1</xliff:g>)?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Pots transferir fitxers, contingut multimèdia i algunes aplicacions a aquest suport extern (<xliff:g id="NAME">^1</xliff:g>). \n\nEn fer-ho, s\'alliberarà espai d\'emmagatzematge de la tauleta (<xliff:g id="SIZE">^2</xliff:g>). Aquest procés trigarà <xliff:g id="DURATION">^3</xliff:g> aproximadament."</string>
@@ -1716,9 +1719,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Pots continuar fent servir aquest suport extern (<xliff:g id="NAME_0">^1</xliff:g>), tot i que pot trigar una mica. \n\nÉs possible que les aplicacions emmagatzemades en aquest suport extern (<xliff:g id="NAME_1">^2</xliff:g>) no funcionin correctament i que les transferències de contingut triguin molt de temps. \n\nProva un altre suport (<xliff:g id="NAME_2">^3</xliff:g>) més ràpid o fes servir aquest (<xliff:g id="NAME_3">^4</xliff:g>) com a emmagatzematge portàtil."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Torna a començar"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Continua"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Pots transferir el contingut al suport extern (<xliff:g id="NAME">^1</xliff:g>)"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Per transferir contingut al suport extern (<xliff:g id="NAME">^1</xliff:g>), ves a "<b>"Configuració i emmagatzematge"</b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"El contingut s\'ha transferit al suport extern (<xliff:g id="NAME_0">^1</xliff:g>). \n\nPer gestionar-lo (<xliff:g id="NAME_1">^2</xliff:g>), ves a "<b>"Configuració i emmagatzematge"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Pots començar a utilitzar la teva <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Pots començar a utilitzar la teva <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Pots començar a utilitzar la teva <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Estat de la bateria"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Nivell de la bateria"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
@@ -2996,6 +2999,10 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Les dades d\'ús de la bateria són aproximades i no es mesuren mentre el telèfon s\'està carregant."</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Les dades d\'ús de la bateria estaran disponibles quan hagis fet servir el telèfon durant unes hores."</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Gràfic de l\'ús de la bateria"</string>
+    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
+    <skip />
+    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Estadístiques sobre processos"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Estadístiques sobre els processos en execució"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Ús de la memòria"</string>
@@ -3551,6 +3558,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Permet que les aplicacions utilitzin la informació de la teva ubicació"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Enrere"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Següent"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Canvia a portàtil"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Formata d\'una altra manera"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Finalitza"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"Targetes SIM"</string>
@@ -5611,6 +5620,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Multimèdia"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Fixa el reproductor multimèdia"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Per reprendre la reproducció ràpidament, el reproductor multimèdia continua obert a la configuració ràpida"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Mostra les recomanacions multimèdia"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"A partir de la teva activitat"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Amaga el reproductor"</string>
