@@ -1619,9 +1619,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"이름 바꾸기"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"마운트"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"꺼내기"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"포맷"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"SD 카드를 휴대용 저장소로 포맷"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"카드 포맷"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"휴대용 저장소로 포맷"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"내부 저장소로 포맷"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"포맷"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"데이터 이전"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"삭제"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"설정"</string>
@@ -1651,17 +1652,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"저장소 이름 바꾸기"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"<xliff:g id="NAME_0">^1</xliff:g>이(가) 안전하게 제거되었지만 여전히 사용할 수 있습니다. \n\n<xliff:g id="NAME_1">^1</xliff:g>을(를) 사용하려면 먼저 마운트해야 합니다."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g>이(가) 손상되었습니다. \n\n<xliff:g id="NAME_1">^1</xliff:g>을(를) 사용하려면 먼저 설정해야 합니다."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"포맷한 다음 <xliff:g id="NAME_0">^1</xliff:g>을(를) 다른 기기에서 사용할 수 있습니다. \n\n<xliff:g id="NAME_1">^1</xliff:g>에 있는 모든 데이터는 삭제됩니다. 먼저 백업하는 것이 좋습니다. \n\n"<b>"사진 및 기타 미디어 백업"</b>" \n미디어 파일을 이 기기에 있는 대체 저장소로 이동하거나 USB 케이블을 사용하여 컴퓨터로 전송합니다. \n\n"<b>"앱 백업"</b>" \n이 <xliff:g id="NAME_6">^1</xliff:g>에 저장된 모든 앱이 제거되고 데이터가 삭제됩니다. 앱을 계속 사용하려면 이 기기에 있는 대체 저장소로 이동합니다."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"SD 카드를 포맷하고 사진, 동영상, 음악 등을 저장하여 다른 기기에서 액세스할 수 있습니다. \n\n"<b>"SD 카드의 모든 데이터가 삭제됩니다."</b>" \n\n"<b>"포맷하기 전"</b>" \n\n"<b>"사진 및 기타 미디어 백업"</b>" \n미디어 파일을 기기에 연결된 대체 저장소로 이동하거나 USB 케이블을 사용하여 컴퓨터로 전송하세요. \n\n"<b>"앱 백업"</b>" \n이 <xliff:g id="NAME">^1</xliff:g>에 저장된 모든 앱이 제거되며 앱 데이터도 삭제됩니다. 이러한 앱을 계속 사용하려면 기기에 연결된 대체 저장소로 이동하세요."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"<xliff:g id="NAME_0">^1</xliff:g>을(를) 제거하면 저장된 앱의 작동이 중단되며, 다시 삽입할 때까지 저장된 미디어 파일을 사용할 수 없습니다."</b>\n\n"<xliff:g id="NAME_1">^1</xliff:g>은(는) 이 기기에서만 작동하도록 형식이 지정되었으며 다른 기기에서는 작동하지 않습니다."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"<xliff:g id="NAME">^1</xliff:g>에 포함된 앱, 사진, 데이터를 사용하려면 다시 삽입하세요. \n\n또는 기기를 사용할 수 없는 경우 저장소를 저장하지 않을 수도 있습니다. \n\n저장하지 않으려는 경우 기기에 포함된 모든 데이터가 완전히 삭제됩니다. \n\n나중에 앱을 다시 설치할 수 있으나 기기에 저장된 데이터는 모두 사라집니다."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g>을(를) 삭제하시겠습니까?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"<xliff:g id="NAME">^1</xliff:g>에 저장된 앱, 사진, 데이터가 모두 완전히 삭제됩니다."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"시스템에는 Android 버전 <xliff:g id="VERSION">%s</xliff:g> 실행에 사용되는 파일이 포함되어 있습니다."</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"게스트 모드 사용자는 SD 카드를 포맷할 수 없습니다."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"<xliff:g id="NAME">^1</xliff:g> 설정"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"휴대용 저장소로 사용"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"사진과 기타 미디어를 기기 간에 이동하는 데 사용합니다."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"내부 저장소로 사용"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"앱이나 사진 등을 이 기기에만 저장할 용도로 사용합니다. 다른 기기에서 작동하지 않도록 포맷해야 합니다."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"SD 카드를 휴대용 저장소로 포맷"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"사진, 동영상, 음악 등을 저장하여 다른 기기에서 액세스하세요."</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"SD 카드를 내부 저장소로 포맷"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"이 휴대전화에서만 사용할 앱과 미디어를 저장하세요."</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"내부 저장소로 포맷"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"보안을 유지하려면 <xliff:g id="NAME_0">^1</xliff:g>을(를) 포맷해야 합니다. \n\n포맷 후 <xliff:g id="NAME_1">^1</xliff:g>은(는) 이 기기에서만 작동합니다. \n\n"<b>"포맷하면 현재 <xliff:g id="NAME_2">^1</xliff:g>에 저장되어 있는 모든 데이터가 삭제됩니다."</b>" 데이터가 손실되지 않도록 하려면 백업하는 것이 좋습니다."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"휴대용 저장소로 포맷"</string>
@@ -1678,9 +1680,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"이동"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"데이터 이동 중…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"이동 중 주의사항: \n• <xliff:g id="NAME">^1</xliff:g>을(를) 삭제하지 마세요. \n• 일부 앱이 제대로 작동하지 않을 수 있습니다. \n• 기기를 충전된 상태로 유지하세요."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"<xliff:g id="NAME">^1</xliff:g>을(를) 사용할 수 있음"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"<xliff:g id="NAME">^1</xliff:g>에서 사진 및 기타 미디어를 사용할 준비가 되었습니다."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"새로운 <xliff:g id="NAME">^1</xliff:g>이(가) 작동 중입니다. \n\n사진, 파일, 앱 데이터를 이 기기로 이동하려면 \'설정 &gt; 저장소\'로 이동합니다."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> 포맷됨"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"이제 <xliff:g id="NAME">^1</xliff:g>을(를) 사용할 수 있습니다."</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"이제 <xliff:g id="NAME">^1</xliff:g>을(를) 사용할 수 있습니다."</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"<xliff:g id="APP">^1</xliff:g> 이동"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"<xliff:g id="APP">^1</xliff:g> 및 데이터를 <xliff:g id="NAME_0">^2</xliff:g>(으)로 이동하는 데 소요되는 시간은 몇 분밖에 되지 않습니다. 이동을 완료할 때까지 앱을 사용할 수 없습니다. \n\n이동 중에 <xliff:g id="NAME_1">^2</xliff:g>을(를) 삭제하지 마세요."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"데이터를 이동하려면 사용자 <xliff:g id="APP">^1</xliff:g>을(를) 잠금 해제해야 합니다."</string>
@@ -1689,19 +1691,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"이동 취소"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"<xliff:g id="NAME_0">^1</xliff:g>이(가) 느린 것 같습니다. \n\n계속 진행할 수 있으나 이 위치로 이동된 앱이 자주 멈추면서 데이터 전송이 오래 걸릴 수 있습니다. \n\n성능을 향상시키려면 더 빠른 <xliff:g id="NAME_1">^1</xliff:g> 사용을 고려해 보세요."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"이 <xliff:g id="NAME">^1</xliff:g>을(를) 어떻게 사용하시겠습니까?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"추가 태블릿 저장소로 사용"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"이 태블릿의 앱, 파일, 미디어에만 사용"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"태블릿 저장소"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"추가 휴대전화 저장소로 사용"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"이 휴대전화의 앱, 파일, 미디어에만 사용"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"휴대전화 저장소"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"SD 카드를 내부 저장소로 포맷"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"이 태블릿에서만 사용할 앱과 미디어를 저장하세요. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD 카드 설정 자세히 알아보기&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"포맷"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"SD 카드를 내부 저장소로 포맷"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"이 휴대전화에서만 사용할 앱과 미디어를 저장하세요. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD 카드 설정 자세히 알아보기&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"포맷"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"또는"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"휴대용 저장소로 사용"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"기기 간에 파일 및 미디어를 이동하는 데 사용"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"휴대용 저장소"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"SD 카드를 휴대용 저장소로 포맷"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"사진, 동영상, 음악 등을 저장하여 다른 기기에서 액세스하세요. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD 카드 설정 자세히 알아보기&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"포맷"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"나중에 설정"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"<xliff:g id="NAME">^1</xliff:g>을(를) 포맷하시겠습니까?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"앱, 파일, 미디어를 저장하려면 <xliff:g id="NAME_0">^1</xliff:g>을(를) 포맷해야 합니다. \n\n포맷하면 <xliff:g id="NAME_1">^2</xliff:g>에 저장된 기존 콘텐츠가 삭제됩니다. 콘텐츠가 삭제되지 않게 하려면 다른 <xliff:g id="NAME_2">^3</xliff:g> 또는 기기에 백업하세요."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"<xliff:g id="NAME_0">^1</xliff:g>에 사진, 동영상, 음악 등을 저장하려면 포맷해야 합니다. \n\n포맷하면 <xliff:g id="NAME_1">^2</xliff:g>에 저장된 기존 콘텐츠가 삭제됩니다. 콘텐츠가 삭제되지 않도록 다른 <xliff:g id="NAME_2">^3</xliff:g> 또는 기기에 백업하세요."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g> 포맷"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"콘텐츠를 <xliff:g id="NAME">^1</xliff:g>(으)로 이동하시겠습니까?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"파일, 미디어, 일부 앱을 <xliff:g id="NAME">^1</xliff:g>에 옮길 수 있습니다. \n\n이를 통해 태블릿 저장용량 <xliff:g id="SIZE">^2</xliff:g>가 확보되며, <xliff:g id="DURATION">^3</xliff:g> 정도 소요됩니다."</string>
@@ -1718,9 +1721,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"<xliff:g id="NAME_0">^1</xliff:g>을(를) 계속 사용할 수 있지만 속도가 느릴 수도 있습니다. \n\n<xliff:g id="NAME_1">^2</xliff:g>에 저장된 앱이 제대로 작동하지 않을 수 있으며, 콘텐츠 전송이 느릴 수 있습니다. \n\n더 빠른 <xliff:g id="NAME_2">^3</xliff:g>을(를) 사용하거나 <xliff:g id="NAME_3">^4</xliff:g>을(를) 휴대용 저장소로 사용하세요."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"다시 시작"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"계속"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"<xliff:g id="NAME">^1</xliff:g>으(로) 콘텐츠를 이동할 수 있음"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"<xliff:g id="NAME">^1</xliff:g>(으)로 콘텐츠를 이동하려면 "<b>"설정 &gt; 저장용량"</b>"으로 이동하세요."</string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"콘텐츠를 <xliff:g id="NAME_0">^1</xliff:g>으(로) 이동했습니다. \n\n<xliff:g id="NAME_1">^2</xliff:g>을(를) 관리하려면 "<b>"설정 &gt; 저장용량"</b>"으로 이동하세요."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"이제 <xliff:g id="NAME">^1</xliff:g>을(를) 사용할 수 있습니다"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"이제 <xliff:g id="NAME">^1</xliff:g>을(를) 사용할 수 있습니다"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"이제 <xliff:g id="NAME">^1</xliff:g>을(를) 사용할 수 있습니다"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"배터리 상태"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"배터리 수준"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
@@ -2998,6 +3001,10 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"배터리 사용량 데이터는 대략적인 수치이며 휴대전화가 충전 중일 때는 사용량이 측정되지 않습니다."</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"배터리 사용 데이터는 휴대전화를 몇 시간 사용한 후에 확인할 수 있습니다."</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"배터리 사용량 차트"</string>
+    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
+    <skip />
+    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"프로세스 통계"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"프로세스 실행에 관한 통계"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"메모리 사용량"</string>
@@ -3553,6 +3560,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"앱에서 위치 정보를 사용하도록 허용"</string>
     <string name="wizard_back" msgid="8257697435061870191">"뒤로"</string>
     <string name="wizard_next" msgid="3884832431439072471">"다음"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"휴대용으로 전환"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"다른 방법으로 포맷"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"완료"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM 카드"</string>
@@ -4917,7 +4926,7 @@
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"배터리 수명 연장에 도움이 됩니다."</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"빠른 설정 개발자 타일"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"adb 승인 시간 제한 사용 중지"</string>
-    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"기본값(7일) 또는 사용자가 설정(최소 1일)한 기간 내에 다시 연결되지 않은 시스템의 adb 승인 자동 취소를 사용 중지합니다."</string>
+    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"기본값(7일) 또는 사용자가 설정한 기간(최소 1일) 내에 다시 연결되지 않은 시스템의 adb 승인 자동 취소를 사용 중지합니다."</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope 추적"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"센서 사용 안함"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"직장 프로필 설정"</string>
@@ -4952,7 +4961,7 @@
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"빠르게 카메라 열기"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"카메라를 빨리 열려면 전원 버튼을 두 번 누릅니다. 어느 화면에서나 작동합니다."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"빠르게 카메라 열기"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"셀카용 카메라로 전환"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"비틀어서 셀카용 카메라로 전환"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"셀카 더 빨리 찍기"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"시스템 탐색"</string>
@@ -5613,6 +5622,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"미디어"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"미디어 플레이어 고정"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"재생을 빠르게 재개할 수 있도록 빠른 설정에서 미디어 플레이어를 계속 열어 둡니다."</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"미디어 추천 표시"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"활동을 바탕으로 추천을 받습니다."</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"플레이어를 숨깁니다."</string>

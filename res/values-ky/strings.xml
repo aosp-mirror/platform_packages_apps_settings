@@ -225,7 +225,7 @@
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Колдонмонун тили"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Сунушталган тилдер"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Бардык тилдер"</string>
-    <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Тутумдун тили"</string>
+    <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Системанын тили"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Системанын демейки параметрлери"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Бул колдонмонун тилин Жөндөөлөрдөн тандоого болбойт."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Тил колдонмодо жеткиликтүү тилдерден айырмаланышы мүмкүн. Бул жөндөө айрым колдонмолор тарабынан колдоого алынбайт болушу мүмкүн."</string>
@@ -1617,9 +1617,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Аталышын өзгөртүү"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Кошуу"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Чыгаруу"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Форматтоо"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"SD картаны ташыма сактагыч үчүн форматтоо"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Картаны форматтоо"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Ташылма катары форматтоо"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Ички сактагыч катары форматтоо"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Форматтоо"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Дайындарды ооштуруу"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Унутулсун"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Жөндөө"</string>
@@ -1649,17 +1650,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Сактагыч аталышын өзгөртүү"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Бул <xliff:g id="NAME_0">^1</xliff:g> өчүрүлгөн, бирок дале түзмөктө сайылып турат. \n\nБул <xliff:g id="NAME_1">^1</xliff:g> кайра колдонуу үчүн адегенде аны туташтырышыңыз керек."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Бул <xliff:g id="NAME_0">^1</xliff:g> бузулуп калган. \n\nБул <xliff:g id="NAME_1">^1</xliff:g> түзмөктү колдонуу үчүн адегенде аны жөндөп алыңыз."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"Форматталгандан кийин, бул <xliff:g id="NAME_0">^1</xliff:g> башка түзмөктөрдө колдонула берет. \n\nБул <xliff:g id="NAME_1">^1</xliff:g> ичиндеги дайындардын бардыгы тазаланат. Адегенде камдык көчүрмөсүн сактоону ойлонуштуруңуз. \n\n"<b>"Сүрөттөрдүн жана башка медиалардын камдык көчүрмөсүн сактаңыз"</b>" \nМедиа файлдарыңызды ушул түзмөктөгү кошумча сактагычка жылдырыңыз же аларды USB кабель менен компьютерге өткөрүңүз. \n\n"<b>"Колдонмолордун камдык көчүрмөсүн сактаңыз"</b>" \nУшул <xliff:g id="NAME_6">^1</xliff:g> ичинде сакталган колдонмолордун баары чыгарылып салынат жана аларга байланыштуу нерселер тазаланат. Бул колдонмолорду калтыруу үчүн, аларды ушул түзмөктөгү кошумча сактагычка жылдырыңыз."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Сүрөттөрдү, видеолорду, ырларды жана башкаларды сактоо жана башка түзмөктөрдө колдонуу үчүн бул SD картаны форматтай аласыз. \n\n"<b>"Бул SD картадагы бардык маалымат тазаланат."</b>" \n\n"<b>"Форматтоодон мурда"</b>" \n\n"<b>"Сүрөттөрдүн жана башка медиа файлдардын камдык көчүрмөлөрүн сактаңыз"</b>" \nМедиа файлдарды ушул түзмөктөгү кошумча сактагычка жылдырып же аларды USB кабелинин жардамы менен компьютерге өткөрүп алыңыз. \n\n"<b>"Колдонмолордун камдык көчүрмөлөрүн сактаңыз"</b>" \nУшул <xliff:g id="NAME">^1</xliff:g> сакталган бардык колдонмолор чыгарылып салынып, алардагы маалымат өчүрүлөт. Бул колдонмолорду сактап калуу үчүн аларды ушул түзмөктөгү кошумча сактагычка жылдырыңыз."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Бул <xliff:g id="NAME_0">^1</xliff:g> карта түзмөктөн чыгарылганда, ал кайра кыстарылмайынча, анда сакталган колдонмолор менен медиа файлдар иштебей калат."</b>\n\n"Бул <xliff:g id="NAME_1">^1</xliff:g> карта ушул түзмөктө гана иштегидей болуп форматталып, башка эч бир түзмөктө иштебейт."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Колдонмолорду, сүрөттөрдү жана башка маалыматтарды колдонуу үчүн <xliff:g id="NAME">^1</xliff:g> картасын кайра кыстарыңыз. \n\nБолбосо, \"Сактагыч унутулсун\" деген вариантты тандаңыз. \n\nСактагыч унутулгандан кийин, картада сакталган бардык дайындар биротоло жок болот. \n\nКолдонмону кийин кайра орнотсоңуз болот, бирок түзмөктөгү жоголгон дайындар кайра калыбына келбейт."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g> унутулсунбу?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Бул <xliff:g id="NAME">^1</xliff:g> ичинде сакталган бардык колдонмолор, сүрөттөр жана башка нерселер биротоло жоголот."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Тутумда Android <xliff:g id="VERSION">%s</xliff:g> версиясында иштеген файлдар бар"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Конок режиминде SD карталарды форматтоого болбойт"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"<xliff:g id="NAME">^1</xliff:g> түзмөгүңүздү орнотуңуз"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Ташыма эстутум катары колдонуу"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Сүрөттөрдү жана башка медианы түзмөктөргө жылдыруу үчүн."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Ички эстутум катары колдонуу"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"Ушул түзмөктөгү гана нерселерди, анын ичинде колдонмолор менен сүрөттөрдү сактоо үчүн. Анын башка түзмөктөр менен иштешинен коргогудай кылып форматтоо керектелет."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"SD картаны ташыма сактагыч үчүн форматтоо"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Сүрөттөрдү, видеолорду, ырларды жана башкаларды сактап, аларды башка түзмөктөрдө колдонуңуз"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"SD картаны ички сактагыч үчүн форматтоо"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Колдонмолорду жана медиа файлдарды сактап, ушул түзмөктө гана колдонуңуз"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Ички эстутум катары форматтоо"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Бул, <xliff:g id="NAME_0">^1</xliff:g> коопсуз болуусу үчүн, анын форматталышын талап кылат. \n\nФорматтагандан кийин, бул <xliff:g id="NAME_1">^1</xliff:g> ушул түзмөктө гана иштейт. \n\n"<b>"Форматтоо учурда <xliff:g id="NAME_2">^1</xliff:g> ичинде сакталган бардык маалыматтарды тазалайт."</b>" Дайындарды жоготуунун алдын алуу үчүн, алардын камдык көчүрмөсүн сактоону ойлонуштуруңуз."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Ташылма сактагыч катары форматтоо"</string>
@@ -1676,9 +1678,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Жылдыруу"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Дайындар жылдырылууда…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Жылдыруу учурунда: \n• <xliff:g id="NAME">^1</xliff:g> түзмөгүн чыгарбаңыз. \n• Айрым колдонмолор туура иштебей калат. \n• Түзмөктү кубаттап туруңуз."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"<xliff:g id="NAME">^1</xliff:g> түзмөгүңүз колдонууга даяр"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"Сиздин <xliff:g id="NAME">^1</xliff:g> сүрөттөр жана башка медиа менен колдонууга дапдаяр."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"Сиздин жаңы <xliff:g id="NAME">^1</xliff:g> иштеп жатат. \n\nСүрөттөр, файлдар жана колдонмо дайындарын бул түзмөккө жылдыруу үчүн Жөндөөлөр &gt; Сактагычка өтүңүз."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> форматталды"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"<xliff:g id="NAME">^1</xliff:g> колдоно берсеңиз болот"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"<xliff:g id="NAME">^1</xliff:g> колдоно берсеңиз болот"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"<xliff:g id="APP">^1</xliff:g> колдонмосун жылдыруу"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"<xliff:g id="APP">^1</xliff:g> жана анын дайындарын <xliff:g id="NAME_0">^2</xliff:g> ичине жылдыруу бир нече көз ирмемге гана созулат. Жылдыруу аяктамайынча колдонмону пайдалана албай каласыз. \n\nЖылдыруу учурунда <xliff:g id="NAME_1">^2</xliff:g> түзмөгүн чыгарбаңыз."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Дайындарды жылдыруу үчүн <xliff:g id="APP">^1</xliff:g> бөгөттөн чыгарылышы керек."</string>
@@ -1687,19 +1689,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Жылдырууну жокко чыгаруу"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Бул түзмөк <xliff:g id="NAME_0">^1</xliff:g> жай иштеп жатат окшойт. \n\nИштей берсеңиз болот, бирок бул жерге жылдырылган колдонмолор бузулууга дуушар болуп, маалыматтарды өткөрүүгө көп убакыт кетиши мүмкүн.\n\nЖакшыраак иштөө үчүн бул түзмөктү <xliff:g id="NAME_1">^1</xliff:g> байкап көрүңүз."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Бул <xliff:g id="NAME">^1</xliff:g> кандайча колдонулат?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Кошумча планшеттин сактагычы үчүн колдонуу"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"Бул планшеттеги колдонмолор, файлдар жана медиа үчүн гана"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Планшеттин сактагычы"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Кошумча телефондун сактагычы үчүн колдонуу"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"Бул телефондогу колдонмолор, файлдар жана медиа үчүн гана"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Телефондун сактагычы"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"SD картаны ички сактагыч үчүн форматтоо"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Колдонмолорду жана медиа файлдарды сактап, ушул планшетте гана колдонуңуз. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD картаны тууралоо жөнүндө кеңири маалымат алыңыз&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Форматтоо"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"SD картаны ички сактагыч үчүн форматтоо"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Колдонмолорду жана медиа файлдарды сактап, ушул түзмөктө гана колдонуңуз. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD картаны тууралоо жөнүндө кеңири маалымат алыңыз&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Форматтоо"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Же"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Ташыма сактагыч үчүн колдонуу"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"Файлдарды жана медианы түзмөктөр ортосунда өткөрүү үчүн"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Ташыма сактагыч"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"SD картаны ташыма сактагыч үчүн форматтоо"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Сүрөттөрдү, видеолорду, ырларды жана башкаларды сактап, аларды башка түзмөктөрдө колдонуңуз. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD картаны тууралоо жөнүндө кеңири маалымат алыңыз&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Форматтоо"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Кийин жөндөө"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Бул <xliff:g id="NAME">^1</xliff:g> түзмөгү форматталсынбы?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Бул <xliff:g id="NAME_0">^1</xliff:g> сактагычында колдонмолорду, файлдарды жана медианы сактоо үчүн ал форматталышы керек. \n\nФорматтоо учурда <xliff:g id="NAME_1">^2</xliff:g> түзмөгүндө сакталган мазмунду тазалайт. Мазмунду жоготпош үчүн анын камдык көчүрмөсүн <xliff:g id="NAME_2">^3</xliff:g> түзмөгүнө же башка түзмөккө сактап коюңуз."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Сүрөттөрдү, видеолорду, ырларды жана башкаларды сактоо үчүн бул <xliff:g id="NAME_0">^1</xliff:g> форматталышы керек. \n\nФорматтоо менен <xliff:g id="NAME_1">^2</xliff:g> сакталган нерселер өчүрүлөт. Аларды жоготпош үчүн анын камдык көчүрмөсүн <xliff:g id="NAME_2">^3</xliff:g> түзмөгүнө же башка түзмөккө сактап коюңуз."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g> форматталсын"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Мазмун <xliff:g id="NAME">^1</xliff:g> сактагычына жылдырылсынбы?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Файлдарды, медианы жана айрым колдонмолорду бул <xliff:g id="NAME">^1</xliff:g> сактагычына жылдыра аласыз. \n\nБул жылдыруу планшетиңиздин сактагычында <xliff:g id="SIZE">^2</xliff:g> өлчөмүндөгү орун бошотуп, болжол менен <xliff:g id="DURATION">^3</xliff:g> созулат."</string>
@@ -1716,9 +1719,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Азыр деле <xliff:g id="NAME_0">^1</xliff:g> сактагычын колдонсоңуз болот, бирок ал жай иштейт. \n\nБул <xliff:g id="NAME_1">^2</xliff:g> түзмөгүндө сакталган колдонмолор талаптагыдай иштебей, мазмунду өткөрүү көбүрөөк убакытка созулушу мүмкүн. \n\nТезирээк иштеген <xliff:g id="NAME_2">^3</xliff:g> түзмөгүн колдонуп көрүңүз же ташыма сактагыч катары бул <xliff:g id="NAME_3">^4</xliff:g> түзмөгүн колдонуңуз."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Кайра баштоо"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Улантуу"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Мазмунду <xliff:g id="NAME">^1</xliff:g> түзмөгүнө жылдырсаңыз болот"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Мазмунду <xliff:g id="NAME">^1</xliff:g> сактагычына жылдыруу үчүн "<b>"Жөндөөлөр &gt; Сактагыч"</b>" бөлүмүнө өтүңүз"</string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Мазмунуңуз <xliff:g id="NAME_0">^1</xliff:g> сактагычына жылдырылды. \n\nАны башкаруу үчүн <xliff:g id="NAME_1">^2</xliff:g>, "<b>"Жөндөөлөр &gt; Сактагыч"</b>" бөлүмүнө өтүңүз."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"<xliff:g id="NAME">^1</xliff:g> колдоно берсеңиз болот"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"<xliff:g id="NAME">^1</xliff:g> колдоно берсеңиз болот"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"<xliff:g id="NAME">^1</xliff:g> колдоно берсеңиз болот"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Батареянын абалы"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Батарея деңгээли"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN\'дер"</string>
@@ -2102,9 +2105,9 @@
     <string name="show_background_processes" msgid="5682856012453562151">"Кештелген процсстрд көрст"</string>
     <string name="default_emergency_app" msgid="1929974800666613803">"Өзгөчө кырдаал колдонмосу"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"Колдонмонун жөндөөлөрүн кайра коюу"</string>
-    <string name="reset_app_preferences_title" msgid="8935136792316050759">"Колдонмону кайра баштан жөндөйсүзбү?"</string>
-    <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Ушуну менен төмөнкүлөрдүн бардык параметрлери баштапкы абалга келтирилет:\n\n"<li>"Өчүрүлгөн колдонмолор"</li>\n<li>"Өчүрүлгөн колдонмолордун билдирмелери"</li>\n<li>"Демейки колдонмолордун аракеттери"</li>\n<li>"Колдонмолордун фондук режиминдеги чектөөлөрү"</li>\n<li>"Уруксаттардын бардык чектөөлөрү"</li>\n<li>"Батареянын колдонулушунун жөндөөлөрү"</li>\n\n"Колдонмолордун дайындары өчпөйт."</string>
-    <string name="reset_app_preferences_button" msgid="2591318711372850058">"Баштапкы абалга келтирүү"</string>
+    <string name="reset_app_preferences_title" msgid="8935136792316050759">"Колдонмону кайра коесузбу?"</string>
+    <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Ушуну менен төмөнкү параметрлер баштапкы абалга келет:\n\n"<li>"Өчүрүлгөн колдонмолор"</li>\n<li>"Өчүрүлгөн колдонмолордун билдирмелери"</li>\n<li>"Демейки колдонмолордун аракеттери"</li>\n<li>"Колдонмолордун фондук режиминдеги чектөөлөрү"</li>\n<li>"Уруксаттардын бардык чектөөлөрү"</li>\n<li>"Батареяны керектөө  параметрлери"</li>\n\n"Колдонмолордогу нерселер өчпөйт."</string>
+    <string name="reset_app_preferences_button" msgid="2591318711372850058">"Кайра коюу"</string>
     <string name="manage_space_text" msgid="9013414693633572277">"Орун бошотуу"</string>
     <string name="filter" msgid="9039576690686251462">"Чыпка"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Электөө опцияларын тандаңыз"</string>
@@ -2708,7 +2711,7 @@
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Чектелбейт"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Оптималдаштырылган"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Чектелген"</string>
-    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Колдонмо фондук режимде иштеп жатканда батареянын керектелиши чектелбейт. Батарея тез отуруп калышы мүмкүн."</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Колдонмо фондук режимде иштеп жатканда батарея үнөмдөлбөйт. Батарея тез отуруп калышы мүмкүн."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Батареянын кубаты анын колдонулушуна жараша оптималдаштырылат. Көптөгөн колдонмолорго сунушталат."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Фондук режимде батареянын керектелиши чектелет. Колдонмо талаптагыдай иштебей, билдирмелер кечигип көрүнүшү мүмкүн."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Батареяны керектөө ыкмасын өзгөртсөңүз, колдонмонун майнаптуулугуна таасири тийиши мүмкүн."</string>
@@ -2761,10 +2764,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Айрым кызматтардын функциялары чектелиши мүмкүн"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Батареянын көбүрөөк колдонулушу"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Эң көп иштетилген колдонмолорду көрүү"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Кубаттоо тындырылды"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Кубат үнөмдөлсө, батарея көбүрөөк убакытка жетет\nТолук маалымат алуу үчүн таптап коюңуз"</string>
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
     <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Кубаттоону улантуу"</string>
@@ -2802,8 +2803,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Бул колдонмо батареяны фондо керектей берет. Батареяңыз күтүлгөндөн эртерээк отуруп калышы мүмкүн."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Өчүрүү"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Жок"</string>
-    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
-    <skip />
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Толук кубаттоо"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Колдонмолоруңуз батареяны орточо деңгээлде керектеп жатышат. Эгер өтө көп керектеп жиберишсе, телефонуңуз ал боюнча чара көрүүнү сунуштайт.\n\nАл эми таптакыр калбай баратса, Батареяны үнөмдөгүчтү күйгүзүп койсоңуз болот."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Колдонмолоруңуз батареяны орточо деңгээлде керектеп жатышат. Эгер өтө көп керектеп жиберишсе, планшетиңиз ал боюнча чара көрүүнү сунуштайт.\n\nАл эми таптакыр калбай баратса, Батареяны үнөмдөгүчтү күйгүзүп койсоңуз болот."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Колдонмолоруңуз батареяны орточо деңгээлде керектеп жатышат. Эгер өтө көп керектеп жиберишсе, түзмөгүңүз ал боюнча чара көрүүнү сунуштайт.\n\nАл эми таптакыр калбай баратса, Батареяны үнөмдөгүчтү күйгүзүп койсоңуз болот."</string>
@@ -2985,7 +2985,7 @@
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Батареянын кубатынын акыркы 24 сааттагы деңгээли"</string>
     <string name="battery_app_usage" msgid="8976453608783133770">"Акыркы жолу толук кубатталгандан бери колдонмолордун пайдаланылышы"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Колдонмонун акыркы 24 саатта иштетилиши"</string>
-    <string name="battery_system_usage" msgid="1395943945140097585">"Акыркы жолу толук кубатталгандан бери тутумдун колдонулушу"</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"Акыркы жолу толук кубатталгандан бери системанын колдонулушу"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Системанын акыркы 24 саатта колдонулушу"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Системанын колдонулушу: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Колдонмонун иштетилиши: <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -2996,6 +2996,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Батареянын колдонулушу тууралуу маалымат болжол менен көрүнүп, телефон кубатталып жатканда өлчөнбөйт"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Телефонуңузду бир нече саат колдонгондон кийин батареянын керектелиши тууралуу маалымат жеткиликтүү болот"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Батареянын колдонулушунун диаграммасы"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Батареяны күнүмдүк колдонуу диаграммасы"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Батареяны сааттык колдонуу диаграммасы"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Процесстин статистикасы"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Иштеп жаткан процесстердин өзгөчө статистикасы"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Эс системанын пайдаланылышы"</string>
@@ -3551,6 +3553,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Колдонмолорго сиздин жайгашуу маалыматтарыңызды колдонууга уруксат берүү"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Артка"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Кийинки"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Ташымага которулуу"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Башка жол менен форматтоо"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Аяктоо"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM карталар"</string>
@@ -4905,7 +4909,7 @@
     <string name="bluetooth_disabled" msgid="835838280837359514">"Өчүк"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"<xliff:g id="ID_1">%1$s</xliff:g> менен туташты"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Бир нече түзмөккө туташты"</string>
-    <string name="demo_mode" msgid="6566167465451386728">"Тутум интерфейсинин демо режими"</string>
+    <string name="demo_mode" msgid="6566167465451386728">"Системанын интерфейсинин демо режими"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Караңгы тема"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"Батареяны үнөмдөөчү режимде убактылуу өчүрүлдү"</string>
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Батареяны үнөмдөөчү режимде убактылуу өчүрүлдү"</string>
@@ -5611,6 +5615,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Медиа"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Медиа ойноткучту кадап коюу"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Угуп жаткан нерсени оңой улантып кетүү үчүн медиа ойноткуч Ыкчам жөндөөлөрдө ачылып турат"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Медиа сунуштарын көрсөтүү"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Аракеттериңиздин негизинде"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Ойноткучту жашыруу"</string>

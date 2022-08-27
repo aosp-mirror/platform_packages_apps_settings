@@ -149,7 +149,7 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3506962706611366830">"允许您的平板电脑与附近的蓝牙设备进行通信"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"允许您的设备与附近的蓝牙设备进行通信"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"允许您的手机与附近的蓝牙设备进行通信"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"停用蓝牙 A2DP 硬件卸载"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"停用蓝牙 A2DP 硬件分流"</string>
     <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"停用蓝牙 LE 音频硬件分流功能"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"要重启设备吗？"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"您需要重启设备才能让这项设置更改生效。"</string>
@@ -229,7 +229,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"系统默认设置"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"您无法从“设置”中选择此应用的语言。"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"语言可能与应用中可用的语言不同。部分应用可能不支持此设置。"</string>
-    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"此处仅显示支持选择语言的应用。"</string>
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"此处只显示了支持用户选择语言的应用。"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">要移除所选语言吗？</item>
       <item quantity="one">要移除所选语言吗？</item>
@@ -1617,9 +1617,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"重命名"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"装载"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"弹出"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"格式化"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"将 SD 卡格式化为便携式存储设备"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"将卡片格式化"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"格式化为便携式存储设备"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"格式化为内部存储设备"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"格式化"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"迁移数据"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"取消保存"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"设置"</string>
@@ -1649,17 +1650,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"重命名存储设备"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"此<xliff:g id="NAME_0">^1</xliff:g>已安全弹出，但仍在卡槽内。\n\n要使用此<xliff:g id="NAME_1">^1</xliff:g>，您必须先对其进行装载。"</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"此<xliff:g id="NAME_0">^1</xliff:g>已损坏。\n\n要使用此<xliff:g id="NAME_1">^1</xliff:g>，您必须先对其进行设置。"</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"格式化之后，您就可以在其他设备上使用此<xliff:g id="NAME_0">^1</xliff:g>了。\n\n此<xliff:g id="NAME_1">^1</xliff:g>上的所有数据都将被清空，建议您先将数据备份。\n\n"<b>"备份照片和其他媒体文件"</b>\n"将您的媒体文件移动到此设备上的备用存储设备，或使用 USB 线传输到计算机上。\n\n"<b>"备份应用"</b>\n"存储在此<xliff:g id="NAME_6">^1</xliff:g>上的所有应用都将被卸载，且这些应用的数据也将一并被清空。要保留这些应用，请将它们移到此设备上的备用存储设备。"</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"您可以将此 SD 卡格式化，以存储照片、视频和音乐等内容，并在其他设备上访问它们。\n\n"<b>"此 SD 卡上的所有数据都将被清除。"</b>" \n\n"<b>"格式化前注意事项"</b>" \n\n"<b>"备份照片和其他媒体内容"</b>" \n请将您的媒体文件移至此设备上的其他存储空间，或使用 USB 线将它们转移至电脑。\n\n"<b>"备份应用"</b>" \n系统将卸载所有存储在此<xliff:g id="NAME">^1</xliff:g>上的应用并清除其数据。如需保留这些应用，请将它们移到此设备上的其他存储空间。"</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"当您弹出此<xliff:g id="NAME_0">^1</xliff:g>后，存储在其中的应用将会停止运行，而且存储在其中的媒体文件也将无法使用，除非您重新插入设备。"</b>\n\n"此<xliff:g id="NAME_1">^1</xliff:g>已经过格式化，只能在这台设备上使用，因此在任何其他设备上均将无法使用。"</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"要使用此<xliff:g id="NAME">^1</xliff:g>中包含的应用、照片或数据，请将其重新插入。\n\n另外，如果该存储设备无法使用，您可以选择取消保存此设备。\n\n如果您选择取消保存，那么该设备中包含的所有数据均将永久丢失。\n\n尽管您以后可以重新安装这些应用，但存储在此设备上的这些应用数据将会丢失。"</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"要取消保存<xliff:g id="NAME">^1</xliff:g>吗？"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"此<xliff:g id="NAME">^1</xliff:g>上存储的所有应用、照片和数据将会永久丢失。"</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"“系统”中包含用于运行 Android <xliff:g id="VERSION">%s</xliff:g> 的文件"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"访客模式用户无法对 SD 卡进行格式化操作"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"设置您的<xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"用作便携式存储设备"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"用于在设备之间移动照片和其他媒体文件。"</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"用作内部存储设备"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"仅用于存储这台设备上的内容，包括应用和照片。为了防止此存储设备在其他设备上使用，您需要先对其进行格式化。"</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"将 SD 卡格式化为便携式存储设备"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"保存照片、视频和音乐等内容，然后从其他设备访问它们"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"将 SD 卡格式化为内部存储设备"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"保存仅供此手机使用的应用和媒体"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"格式化为内部存储设备"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"<xliff:g id="NAME_0">^1</xliff:g>必须进行格式化，以确保安全。\n\n格式化之后，此<xliff:g id="NAME_1">^1</xliff:g>将只能在这台设备上使用。\n\n"<b>"格式化操作会清空当前存储在<xliff:g id="NAME_2">^1</xliff:g>上的所有数据。"</b>"为避免丢失数据，建议您先将数据备份。"</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"格式化为便携式存储设备"</string>
@@ -1676,9 +1678,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"移动"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"正在移动数据…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"在移动数据的过程中：\n• 请勿移除相应的<xliff:g id="NAME">^1</xliff:g>。\n• 某些应用将无法正常运行。\n• 需确保设备电量充足。"</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"您的<xliff:g id="NAME">^1</xliff:g>已经可以使用了"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"您的<xliff:g id="NAME">^1</xliff:g>已设置完毕，可用于存储照片和其他媒体文件了。"</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"新的<xliff:g id="NAME">^1</xliff:g>可以使用了。\n\n要将照片、文件和应用数据移动到此设备，请转到“设置”&gt;“存储”。"</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"已将<xliff:g id="NAME">^1</xliff:g>格式化"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"您可以开始使用<xliff:g id="NAME">^1</xliff:g>了"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"您可以开始使用<xliff:g id="NAME">^1</xliff:g>了"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"移动<xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"将<xliff:g id="APP">^1</xliff:g>及其相关数据移动到<xliff:g id="NAME_0">^2</xliff:g>仅需几分钟时间。在移动操作完成前，您将无法使用该应用。\n\n请勿在移动过程中移除该<xliff:g id="NAME_1">^2</xliff:g>。"</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"您必须解锁用户“<xliff:g id="APP">^1</xliff:g>”，才能移动数据。"</string>
@@ -1687,19 +1689,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"取消移动"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"此<xliff:g id="NAME_0">^1</xliff:g>似乎运行缓慢。\n\n您可以继续使用，但应用移动到此处后可能无法流畅运行，而且数据传输可能会花费很长时间。\n\n建议您使用运行速度更快的<xliff:g id="NAME_1">^1</xliff:g>来提升性能。"</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"您要如何使用此<xliff:g id="NAME">^1</xliff:g>？"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"用作额外的平板电脑存储空间"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"仅限此平板电脑上的应用、文件和媒体"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"平板电脑存储空间"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"用作额外的手机存储空间"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"仅限此手机上的应用、文件和媒体"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"手机存储空间"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"将 SD 卡格式化为内部存储设备"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"存储仅供此平板电脑使用的应用和媒体。&lt;a href=https://support.google.com/android/answer/12153449&gt;详细了解如何设置 SD 卡&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"格式化"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"将 SD 卡格式化为内部存储设备"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"存储仅供此手机使用的应用和媒体。&lt;a href=https://support.google.com/android/answer/12153449&gt;详细了解如何设置 SD 卡&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"格式化"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"或"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"用作便携式存储设备"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"可用于在设备之间转移文件和媒体"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"便携式存储设备"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"将 SD 卡格式化为便携式存储设备"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"存储照片、视频和音乐等内容，然后从其他设备访问它们。&lt;a href=https://support.google.com/android/answer/12153449&gt;详细了解如何设置 SD 卡&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"格式化"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"稍后设置"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"要将此<xliff:g id="NAME">^1</xliff:g>格式化吗？"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"此<xliff:g id="NAME_0">^1</xliff:g>需要进行格式化才能存储应用、文件和媒体。\n\n格式化操作将会清空<xliff:g id="NAME_1">^2</xliff:g>上的现有内容。为避免内容丢失，请将内容备份到另一个<xliff:g id="NAME_2">^3</xliff:g>或设备中。"</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"此<xliff:g id="NAME_0">^1</xliff:g>需要进行格式化才能存储照片、视频和音乐等内容。\n\n格式化操作将会清空<xliff:g id="NAME_1">^2</xliff:g>上的现有内容。为避免内容丢失，请将内容备份到另一个<xliff:g id="NAME_2">^3</xliff:g>或设备中。"</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"将<xliff:g id="NAME">^1</xliff:g>格式化"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"要将内容移至<xliff:g id="NAME">^1</xliff:g>吗？"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"您可以将文件、媒体和特定应用移至此<xliff:g id="NAME">^1</xliff:g>。\n\n这项移动操作将释放 <xliff:g id="SIZE">^2</xliff:g> 的平板电脑存储空间，大约需要 <xliff:g id="DURATION">^3</xliff:g>的时间完成。"</string>
@@ -1716,9 +1719,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"您仍可使用此<xliff:g id="NAME_0">^1</xliff:g>，但它的运行速度可能会很慢。\n\n此<xliff:g id="NAME_1">^2</xliff:g>上存储的应用可能无法正常运行，而且内容转移操作可能会花费很长时间。\n\n建议您使用运行速度更快的<xliff:g id="NAME_2">^3</xliff:g>，或者使用此<xliff:g id="NAME_3">^4</xliff:g>作为便携式存储设备。"</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"重新开始"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"继续"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"您可以将内容移至<xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"要将内容移至<xliff:g id="NAME">^1</xliff:g>，请依次转到"<b>"“设置”&gt;“存储”"</b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"您的内容已移至<xliff:g id="NAME_0">^1</xliff:g>。\n\n要管理此<xliff:g id="NAME_1">^2</xliff:g>，请依次转到"<b>"“设置”&gt;“存储”"</b>"。"</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"您可以开始使用<xliff:g id="NAME">^1</xliff:g>了"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"您可以开始使用<xliff:g id="NAME">^1</xliff:g>了"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"您可以开始使用<xliff:g id="NAME">^1</xliff:g>了"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"电池状态"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"电池电量"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
@@ -2996,6 +2999,10 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"电池用量数据为大致值，并且手机在充电时不会估算电池用量"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"您使用手机几小时后，手机才会显示电池用量数据"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"电池用量图表"</string>
+    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
+    <skip />
+    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"进程统计信息"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"运行中进程的相关技术统计信息"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"内存用量"</string>
@@ -3551,6 +3558,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"允许应用使用您的位置信息"</string>
     <string name="wizard_back" msgid="8257697435061870191">"返回"</string>
     <string name="wizard_next" msgid="3884832431439072471">"下一步"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"切换为便携式存储设备"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"以其他方式格式化"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"完成"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM 卡"</string>
@@ -5190,7 +5199,7 @@
     <string name="location_category" msgid="3496759112306219062">"位置"</string>
     <string name="location_indicator_settings_title" msgid="6655916258720093451">"状态栏位置指示器"</string>
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"对所有位置均显示，包括通过网络和连接方式获取的位置信息"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"强制启用 GNSS 测量结果全面跟踪"</string>
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"强制启用完整 GNSS 测量数据"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"在停用工作周期的情况下跟踪所有 GNSS 星座和频率"</string>
     <string name="input_method_category" msgid="2252659253631639005">"输入法"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"触控笔手写功能"</string>
@@ -5611,6 +5620,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"媒体"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"固定媒体播放器"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"为了方便您快速恢复播放，媒体播放器会在“快捷设置”中保持打开状态"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"显示媒体推荐内容"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"根据您的活动"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"隐藏播放器"</string>

@@ -1617,9 +1617,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Cambiar nombre"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Montar"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Expulsar"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Formatear"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Formatear tarjeta SD como almacenamiento portátil"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Formatear tarjeta"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatear como portátil"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Formatear como interno"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Formatear"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Migrar datos"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Olvidar"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Configurar"</string>
@@ -1649,17 +1650,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Cambiar nombre de almacenamiento"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Este dispositivo de almacenamiento (<xliff:g id="NAME_0">^1</xliff:g>) se ha extraído de forma segura, pero sigue estando disponible. \n\nPara utilizar el dispositivo (<xliff:g id="NAME_1">^1</xliff:g>), debes montarlo."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Este dispositivo de almacenamiento (<xliff:g id="NAME_0">^1</xliff:g>) está dañado. \n\nPara utilizar el dispositivo (<xliff:g id="NAME_1">^1</xliff:g>), debes configurarlo."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"Después de formatear la unidad, puedes utilizar tu <xliff:g id="NAME_0">^1</xliff:g> en otros dispositivos. \n\nTe recomendamos que hagas una copia de seguridad de los datos de tu <xliff:g id="NAME_1">^1</xliff:g>, ya que se borrarán cuando se formatee. \n\n"<b>"Copia de seguridad de fotos y de otro contenido multimedia"</b>" \nMueve tus archivos multimedia a otro espacio de almacenamiento del dispositivo o transfiérelos a un ordenador con un cable USB. \n\n"<b>"Copia de seguridad de aplicaciones"</b>" \nSe desinstalarán todas las aplicaciones almacenadas en tu <xliff:g id="NAME_6">^1</xliff:g> y se borrarán sus datos. Para conservarlas, muévelas a otro espacio de almacenamiento del dispositivo."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Puedes formatear esta tarjeta SD para almacenar fotos, vídeos, música y más, y acceder a ellos en otros dispositivos. \n\n"<b>"Se borrarán todos los datos de esta tarjeta SD."</b>" \n\n"<b>"Antes de formatear"</b>" \n\n"<b>"Crea una copia de seguridad de las fotos y otro contenido multimedia"</b>" \nMueve tus archivos multimedia a un almacenamiento alternativo en este dispositivo, o transfiérelos a un ordenador con un cable USB. \n\n"<b>"Crea una copia de seguridad de las aplicaciones"</b>" \nSe desinstalarán todas las aplicaciones almacenadas en esta <xliff:g id="NAME">^1</xliff:g> y se borrarán todos sus datos. Para guardar las aplicaciones y sus datos, muévelas a un almacenamiento alternativo de este dispositivo."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Al extraer tu <xliff:g id="NAME_0">^1</xliff:g>, las aplicaciones almacenadas en esta unidad dejarán de funcionar y los archivos multimedia guardados en ella no estarán disponibles hasta que se vuelva a insertar."</b>" \n\nTu <xliff:g id="NAME_1">^1</xliff:g> se ha formateado para que solo funcione en este dispositivo."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Para utilizar las aplicaciones, fotos o datos incluidos en tu <xliff:g id="NAME">^1</xliff:g>, vuelve a insertarla. \n\nTambién puedes olvidar el almacenamiento si el dispositivo no está disponible. \n\nSi lo haces, los datos del dispositivo se perderán para siempre. \n\nPuedes volver a instalar las aplicaciones más tarde, pero se perderán sus datos almacenados en este dispositivo."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"¿Borrar <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Las aplicaciones, las fotos y los datos almacenados en este dispositivo de almacenamiento (<xliff:g id="NAME">^1</xliff:g>) se perderán de forma permanente."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"\"Sistema\" incluye los archivos necesarios para que Android <xliff:g id="VERSION">%s</xliff:g> funcione."</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"No puede formatear tarjetas SD como invitado"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Configurar tu <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Utilizar como almacenamiento portátil"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Para mover fotos y otro contenido multimedia de un dispositivo a otro."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Utilizar como almacenamiento interno"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"Para almacenar cualquier contenido (como aplicaciones y fotos) únicamente en este dispositivo. Se debe formatear la unidad para que no se pueda utilizar con otros dispositivos."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Formatear tarjeta SD como almacenamiento portátil"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Guarda fotos, vídeos, música y más, y accede a ellos desde otros dispositivos"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Formatear tarjeta SD como almacenamiento interno"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Guarda aplicaciones y contenido multimedia para usarlos únicamente en este teléfono"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Formatear como almacen. interno"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Debes formatear tu <xliff:g id="NAME_0">^1</xliff:g> por seguridad. \n\nUna vez que se formatee, tu <xliff:g id="NAME_1">^1</xliff:g> solo funcionará en este dispositivo. \n\n"<b>"Al formatear tu <xliff:g id="NAME_2">^1</xliff:g>, se borrarán todos los datos que tenga almacenados."</b>" Te recomendamos que hagas una copia de seguridad de los datos para no perderlos."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Formatear como almacen. portátil"</string>
@@ -1676,9 +1678,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Mover"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Moviendo datos…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Durante la migración: \n• No extraigas tu <xliff:g id="NAME">^1</xliff:g>. \n• Algunas aplicaciones no funcionarán correctamente. \n• Mantén cargado el dispositivo."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"Ya puedes usar tu <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"Tu <xliff:g id="NAME">^1</xliff:g> se ha configurado para que se utilice con fotos y con otro contenido multimedia."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"Tu nueva <xliff:g id="NAME">^1</xliff:g> está lista. \n\nPara mover fotos, archivos y datos de aplicaciones a este dispositivo, accede a Ajustes &gt; Almacenamiento."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"Se ha formateado <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Ya puedes empezar a usar tu <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Ya puedes empezar a usar tu <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Mover <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"La migración de <xliff:g id="APP">^1</xliff:g> y de sus datos a tu <xliff:g id="NAME_0">^2</xliff:g> solo durará un momento. No podrás utilizar la aplicación hasta que finalice el proceso. \n\nNo extraigas tu <xliff:g id="NAME_1">^2</xliff:g> durante la migración."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Debes desbloquear el usuario <xliff:g id="APP">^1</xliff:g> para transferir datos."</string>
@@ -1687,19 +1689,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Cancelar migración"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Esta <xliff:g id="NAME_0">^1</xliff:g> no parece ser muy rápida. \n\nPuedes seguir, pero puede que las aplicaciones movidas a esta ubicación no funcionen de forma fluida y las transferencias de datos tarden bastante. \n\nConsidera usar una <xliff:g id="NAME_1">^1</xliff:g> para mejorar el rendimiento."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"¿Cómo quieres utilizar tu <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Usar como alm. extra de tablet"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"Solo para apps, archivos y contenido multimedia de este tablet"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Almacenamiento del tablet"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Usar como alm. extra de teléfono"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"Solo para apps, archivos y contenido multimedia de este teléfono"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Almacenamiento del teléfono"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formatear tarjeta SD como almacenamiento interno"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Almacena aplicaciones y contenido multimedia para usarlos únicamente en este tablet. &lt;a href=https://support.google.com/android/answer/12153449&gt;Consulta más información sobre configurar una tarjeta SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formatear"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formatear tarjeta SD como almacenamiento interno"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Almacena aplicaciones y contenido multimedia para usarlos únicamente en este teléfono. &lt;a href=https://support.google.com/android/answer/12153449&gt;Consulta más información sobre configurar una tarjeta SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formatear"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"O"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Usar como almac. portátil"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"Para mover archivos y contenido multimedia entre dispositivos"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Almacenamiento portátil"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formatear tarjeta SD como almacenamiento portátil"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Almacena fotos, vídeos, música y más, y accede a ellos desde otros dispositivos. &lt;a href=https://support.google.com/android/answer/12153449&gt;Consulta más información sobre configurar una tarjeta SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formatear"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Configurar más tarde"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"¿Quieres formatear tu <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Si quieres almacenar aplicaciones, archivos y contenido multimedia en tu <xliff:g id="NAME_0">^1</xliff:g>, es necesario formatearla. \n\nDe esa forma, se borra todo el contenido de <xliff:g id="NAME_1">^2</xliff:g>. Para no perder el contenido, crea una copia de seguridad en otro dispositivo o <xliff:g id="NAME_2">^3</xliff:g>."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Hay que formatear esta <xliff:g id="NAME_0">^1</xliff:g> para almacenar fotos, vídeos, música y más. \n\nEl formateado borrará todo el contenido de la <xliff:g id="NAME_1">^2</xliff:g>. Para no perderlo, crea una copia de seguridad en otro dispositivo o <xliff:g id="NAME_2">^3</xliff:g>."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formatear <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"¿Quieres mover contenido a tu <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Puedes mover archivos, contenido multimedia y determinadas aplicaciones a tu <xliff:g id="NAME">^1</xliff:g>. \n\nAl hacerlo, se liberarán <xliff:g id="SIZE">^2</xliff:g> del almacenamiento de tu teléfono. El proceso tardará <xliff:g id="DURATION">^3</xliff:g>, aproximadamente."</string>
@@ -1716,9 +1719,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Puedes seguir usando tu <xliff:g id="NAME_0">^1</xliff:g>, pero puede que el proceso sea lento. \n\nEs posible que las aplicaciones que estén almacenadas en tu <xliff:g id="NAME_1">^2</xliff:g> no funcionen adecuadamente y que las transferencias de contenido tarden bastante. \n\nPrueba a utilizar una <xliff:g id="NAME_2">^3</xliff:g> más rápida o utiliza esta <xliff:g id="NAME_3">^4</xliff:g> como almacenamiento portátil."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Volver a empezar"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Continuar"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Puedes mover contenido a <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Para mover contenido a <xliff:g id="NAME">^1</xliff:g>, accede a "<b>"Ajustes &gt; Almacenamiento"</b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Tu contenido se ha movido a <xliff:g id="NAME_0">^1</xliff:g>. \n\nPara gestionar tu <xliff:g id="NAME_1">^2</xliff:g>, accede a "<b>"Ajustes &gt; Almacenamiento"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Ya puedes empezar a usar tu <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Ya puedes empezar a usar tu <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Ya puedes empezar a usar tu <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Estado de la batería"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Nivel de batería"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
@@ -2102,7 +2105,7 @@
     <string name="show_background_processes" msgid="5682856012453562151">"Procesos en caché"</string>
     <string name="default_emergency_app" msgid="1929974800666613803">"Aplicación Emergencia"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"Recuperar ajustes de aplicaciones"</string>
-    <string name="reset_app_preferences_title" msgid="8935136792316050759">"¿Recuperar preferencias de las aplicaciones?"</string>
+    <string name="reset_app_preferences_title" msgid="8935136792316050759">"¿Restablecer preferencias de las aplicaciones?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Se recuperarán todas las preferencias de:\n\n"<li>"Aplicaciones inhabilitadas"</li>\n<li>"Notificaciones de aplicaciones inhabilitadas"</li>\n<li>"Aplicaciones predeterminadas para acciones"</li>\n<li>"Restricciones de datos en segundo plano de aplicaciones"</li>\n<li>"Restricciones de permisos"</li>\n<li>"Ajustes del uso de batería"</li>\n\n"No se perderán los datos de las aplicaciones."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Recuperar aplicaciones"</string>
     <string name="manage_space_text" msgid="9013414693633572277">"Gestionar espacio"</string>
@@ -2996,6 +2999,10 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Los datos de uso de la batería son aproximados y no miden el uso que se hace cuando el teléfono se está cargando"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Los datos de uso de batería estarán disponibles después de haber usado el teléfono unas horas"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Gráfico del uso de batería"</string>
+    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
+    <skip />
+    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Estadísticas de procesos"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Estadísticas técnicas sobre procesos en ejecución"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Uso de memoria"</string>
@@ -3551,6 +3558,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Permitir a las aplicaciones utilizar tu ubicación"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Volver"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Siguiente"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Cambiar a portátil"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Formatear de otra forma"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Finalizar"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"Tarjetas SIM"</string>
@@ -3957,10 +3966,10 @@
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificaciones en pantalla de bloqueo"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostrar conversaciones predeterminadas y silenciosas"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostrar conversaciones predeterminadas y silenciosas"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Ocultar conversaciones y notificaciones silenciosas"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Oculta conversaciones y notificaciones silenciosas"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"No mostrar ninguna notificación"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Notificaciones sensibles"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Mostrar contenido sensible en la pantalla de bloqueo"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Muestra contenido sensible en la pantalla de bloqueo"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Notificaciones sensibles del perfil de trabajo"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Mostrar contenido sensible del perfil de trabajo en la pantalla de bloqueo"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Mostrar todo el contenido de las notificaciones"</string>
@@ -4028,7 +4037,7 @@
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Sin sonido ni vibración"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Sin sonido ni vibración, y se muestra más abajo en la sección de conversaciones"</string>
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"Puede sonar o vibrar según los ajustes del teléfono"</string>
-    <string name="notification_channel_summary_high" msgid="3411637309360617621">"Cuando el dispositivo esté desbloqueado, muestra las notificaciones en la parte superior de la pantalla"</string>
+    <string name="notification_channel_summary_high" msgid="3411637309360617621">"Cuando el dispositivo esté desbloqueado, muestra las notificaciones como un banner en la parte superior de la pantalla"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Todas las notificaciones de \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Todas las notificaciones de <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Notificaciones adaptativas"</string>
@@ -4084,7 +4093,7 @@
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Aplicaciones que se muestran en el dispositivo"</string>
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Esta aplicación no admite la configuración avanzada"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servicios de ayuda de RV"</string>
-    <string name="no_vr_listeners" msgid="8442646085375949755">"Ninguna aplicación instalada ha solicitado ejecutarse como servicios de ayuda de RV."</string>
+    <string name="no_vr_listeners" msgid="8442646085375949755">"Ninguna aplicación instalada ha solicitado ejecutarse como servicio de ayuda de RV."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"¿Permitir que el servicio de RV acceda a <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> podrá ejecutarse cuando utilices aplicaciones en el modo de realidad virtual."</string>
     <string name="display_vr_pref_title" msgid="4850474436291113569">"Cuando el dispositivo está en RV"</string>
@@ -5568,7 +5577,7 @@
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Tarjetas y pases"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"tarjetas y pases"</string>
     <string name="power_menu_setting_name" msgid="2394440932633137229">"Mantener pulsado el botón de encendido"</string>
-    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Mantener pulsado el botón de encendido para acceder"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Mantener pulsado el botón de encendido para acceder a"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Menú de encendido"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Asistente digital"</string>
     <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Acceder al asistente digital"</string>
@@ -5611,6 +5620,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Multimedia"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Fijar reproductor multimedia"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Para seguir rápidamente por donde lo habías dejado, el reproductor multimedia se queda abierto en los ajustes rápidos"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Mostrar recomendaciones de contenido multimedia"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Según tu actividad"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Ocultar reproductor"</string>

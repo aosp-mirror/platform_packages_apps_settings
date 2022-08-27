@@ -1617,9 +1617,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Endurnefna"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Tengja"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Aftengja"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Forsníða"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Sníða SD-kort fyrir færanlega geymslu"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Sníða kort"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Forsníða sem færanlega geymslu"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Forsníða sem innri geymslu"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Sníða"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Flytja gögn"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Gleyma"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Setja upp"</string>
@@ -1649,17 +1650,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Endurnefna geymslu"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"<xliff:g id="NAME_0">^1</xliff:g> hefur verið aftengt en er enn tiltækt. \n\nTil að nota <xliff:g id="NAME_1">^1</xliff:g> þarftu að tengja það fyrst."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g> er skemmt. \n\nTil að nota <xliff:g id="NAME_1">^1</xliff:g> þarftu að setja það upp fyrst."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"Þegar búið er að forsníða þetta <xliff:g id="NAME_0">^1</xliff:g> geturðu notað það í öðrum tækjum. \n\nÖllum gögnum á þessu <xliff:g id="NAME_1">^1</xliff:g> verður eytt. Þú ættir að afrita gögnin af því fyrst. \n\n"<b>"Taktu afrit af myndum og öðru efni"</b>" \nFærðu skrárnar þínar yfir í aðra geymslu í þessu tæki eða flyttu þær yfir í tölvu með því að nota USB-snúru. \n\n"<b>"Taktu afrit af forritum"</b>" \nÖll forrit sem vistuð eru á þessu <xliff:g id="NAME_6">^1</xliff:g> verða fjarlægð og gögnum þeirra eytt. Til að halda þessum forritum skaltu færa þau yfir í aðra geymslu í þessu tæki."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Þú getur sniðið SD-kortið til að geyma myndir, myndskeið og tónlist og opnað svo efnið í öðrum tækjum. \n\n"<b>"Öllum gögnum á SD-kortinu verður eytt."</b>" \n\n"<b>"Áður en þú sníður"</b>" \n\n"<b>"skaltu taka öryggisafrit af myndum og öðru efni"</b>" \nFærðu efnisskrárnar þínar í annað geymslurými í tækinu eða notaðu USB-snúru til að flytja þær yfir í tölvu. \n\n"<b></b>"Taktu öryggisafrit af forritum\nÖll forrit sem eru geymd á þessu <xliff:g id="NAME">^1</xliff:g> verða fjarlægð og gögnum þeirra eytt. Til að halda forritunum skaltu færa þau í annað geymslurými í tækinu."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Þegar þú tekur þetta <xliff:g id="NAME_0">^1</xliff:g> úr hætta forrit sem eru vistuð á því að virka og skrár á því verða ekki aðgengilegar fyrr en það er sett aftur í."</b>" \n\nÞetta <xliff:g id="NAME_1">^1</xliff:g> er forsniðið þannig að það virkar aðeins í þessu tæki. Það virkar ekki í neinu öðru tæki."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Til að nota forrit, myndir eða gögn á <xliff:g id="NAME">^1</xliff:g> skaltu setja það aftur í. \n\nAð öðrum kosti geturðu valið að gleyma þessari geymslu ef tækið er ekki tiltækt. \n\nEf þú velur að gleyma henni glatast öll gögn á tækinu að eilífu. \n\nÞú getur sett forritin upp aftur síðar en gögnin sem vistuð eru á þessu tæki glatast."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Gleyma <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Öll forrit, myndir og gögn sem vistuð eru á <xliff:g id="NAME">^1</xliff:g> glatast að eilífu."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Kerfi inniheldur skrár sem notaðar eru til að keyra Android útgáfu <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Ekki er hægt að sníða SD-kort í gestastillingu"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Setja upp <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Nota sem færanlega geymslu"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Til að færa myndir og aðrar skrár milli tækja."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Nota sem innbyggða geymslu"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"Aðeins til geymslu í þessu tæki, s.s. á forritum og myndum. Þarf að forsníða til að ekki sé hægt að nota það í öðrum tækjum."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Sníða SD-kort fyrir færanlega geymslu"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Vista myndir, myndskeið, tónlist og fleira og opna efnið í öðrum tækjum"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Sníða SD-kort fyrir innbyggða geymslu"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Vista forrit og efni til að nota eingöngu í þessum síma"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Forsníða sem innri geymslu"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Þetta krefst þess að <xliff:g id="NAME_0">^1</xliff:g> sé forsniðið til að gera það öruggt. \n\nÞegar búið er að forsníða <xliff:g id="NAME_1">^1</xliff:g> virkar það bara í þessu tæki. \n\n"<b>"Þetta eyðir öllum gögnum sem vistuð eru á <xliff:g id="NAME_2">^1</xliff:g>."</b>" Til að forðast að þessi gögn glatist þarftu að taka öryggisafrit af þeim."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Sníða sem færanlega geymslu"</string>
@@ -1676,9 +1678,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Færa"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Færir gögn…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Meðan á flutningi stendur: \n• Ekki fjarlægja <xliff:g id="NAME">^1</xliff:g>. \n• Sum forrit munu ekki starfa rétt. \n• Hafðu tækið í hleðslu."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"<xliff:g id="NAME">^1</xliff:g> er tilbúið til notkunar"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"<xliff:g id="NAME">^1</xliff:g> er nú tilbúið til notkunar með myndunum þínum og öðrum skrám."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"<xliff:g id="NAME">^1</xliff:g> er tilbúið. \n\nTil að færa myndir, skrár og forritsgögn yfir í þetta tæki skaltu fara í Stillingar &gt; Geymsla."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> var sniðið"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Þú getur byrjað að nota <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Þú getur byrjað að nota <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Færa <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Það tekur bara smástund að færa <xliff:g id="APP">^1</xliff:g> og meðfylgjandi gögn yfir á <xliff:g id="NAME_0">^2</xliff:g>. Þú getur ekki notað forritið fyrr en að flutningi loknum. \n\nEkki fjarlægja <xliff:g id="NAME_1">^2</xliff:g> meðan á flutningi stendur."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Til að færa gögn þarftu að taka notandann <xliff:g id="APP">^1</xliff:g> úr lás."</string>
@@ -1687,19 +1689,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Hætta við flutning"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"<xliff:g id="NAME_0">^1</xliff:g> virðist vera hægvirkt. \n\nÞú getur haldið áfram en forrit sem færð eru á þennan stað kunna að hökta og gagnaflutningur gæti tekið langan tíma. \n\nÍhugaðu að nota <xliff:g id="NAME_1">^1</xliff:g> sem virkar hraðar til að bæta afköstin."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Hvernig viltu að nota þetta <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Nota sem aukageymslu spjaldtölvu"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"Aðeins fyrir forrit, skrár og efni í þessari spjaldtölvu"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Geymslurými spjaldtölvu"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Nota sem aukageymslu fyrir síma"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"Aðeins fyrir forrit, skrár og efni í þessum síma"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Geymslurými símans"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Sníða SD-kort fyrir innbyggða geymslu"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Geyma forrit og efni til að nota eingöngu í þessari spjaldtölvu. &lt;a href=https://support.google.com/android/answer/12153449&gt;Kynntu þér uppsetningu SD-korts&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Sníða"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Sníða SD-kort fyrir innbyggða geymslu"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Geyma forrit og efni til að nota eingöngu í þessum síma. &lt;a href=https://support.google.com/android/answer/12153449&gt;Kynntu þér uppsetningu SD-korts&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Sníða"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Eða"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Nota sem færanlega geymslu"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"Til að flytja skrár og efni á milli tækja"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Færanleg geymsla"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Sníða SD-kort fyrir færanlega geymslu"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Geyma myndir, myndskeið, tónlist og fleira og opna efnið í öðrum tækjum &lt;a href=https://support.google.com/android/answer/12153449&gt;Kynntu þér uppsetningu SD-korts&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Sníða"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Setja upp síðar"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Forsníða þetta <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Forsníða verður þetta <xliff:g id="NAME_0">^1</xliff:g> til að geyma forrit, skrár og efni. \n\nVið forsníðingu verður öllu núverandi efni eytt af <xliff:g id="NAME_1">^2</xliff:g>. Vistaðu öryggisafrit af efninu í öðru tæki eða <xliff:g id="NAME_2">^3</xliff:g> til að glata því ekki."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Þú þarft að sníða þetta <xliff:g id="NAME_0">^1</xliff:g> svo það geti geymt myndir, myndskeið, tónlist og fleira. \n\nSnið eyðir fyrirliggjandi efni á <xliff:g id="NAME_1">^2</xliff:g>. Til að glata ekki efni skaltu taka öryggisafrit af því á annað <xliff:g id="NAME_2">^3</xliff:g> eða tæki."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Forsníða <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Flytja efni yfir í <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Þú getur flutt skrár, efni og tiltekin forrit yfir á þetta <xliff:g id="NAME">^1</xliff:g>. \n\nÞessi flutningur losar um <xliff:g id="SIZE">^2</xliff:g> í geymslurými spjaldtölvunnar og ætti að taka um <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1716,9 +1719,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Þú getur notað þetta <xliff:g id="NAME_0">^1</xliff:g> áfram, en það er hugsanlega hægvirkt. \n\nForrit sem eru geymd á þessu <xliff:g id="NAME_1">^2</xliff:g> virka hugsanlega ekki á réttan hátt og flutningur á efni gæti tekið langan tíma. \n\nPrófaðu að nota hraðara <xliff:g id="NAME_2">^3</xliff:g> eða notaðu í staðinn þetta <xliff:g id="NAME_3">^4</xliff:g> sem færanlega geymslu."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Byrja upp á nýtt"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Halda áfram"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Þú getur fært efni yfir á <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Til að flytja efni yfir á <xliff:g id="NAME">^1</xliff:g> ferðu í "<b>"Stillingar &gt; Geymsla"</b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Efnið þitt var flutt yfir á <xliff:g id="NAME_0">^1</xliff:g>. \n\nTil að stjórna þessu <xliff:g id="NAME_1">^2</xliff:g> ferðu í "<b>"Stillingar &gt; Geymsla"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Þú getur byrjað að nota <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Þú getur byrjað að nota <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Þú getur byrjað að nota <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Staða rafhlöðu"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Staða rafhlöðu"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Aðgangsstaðir"</string>
@@ -2996,6 +2999,10 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Upplýsingar um rafhlöðunotkun eru áætlaðar og mæla ekki notkun á meðan síminn er í hleðslu"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Gögn rafhlöðunotkunar verða tiltæk þegar þú hefur notað símann í nokkrar klukkustundir"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Myndrit yfir rafhlöðunotkun"</string>
+    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
+    <skip />
+    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Tölfræði vinnsluferla"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Nördaleg tölfræði um opin vinnsluferli"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Minnisnotkun"</string>
@@ -3551,6 +3558,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Leyfa forritum að nota staðsetninguna þína"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Til baka"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Áfram"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Skipta yfir í færanlegt"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Sníða á annan hátt"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Ljúka"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM-kort"</string>
@@ -5611,6 +5620,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Margmiðlunarefni"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Festa efnisspilara"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Efnisspilarinn helst opinn í flýtistillingum svo hægt sé að ræsa spilun aftur í skyndi"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Sýna tillögur að efni"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Byggt á virkni þinni"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Fela spilara"</string>
