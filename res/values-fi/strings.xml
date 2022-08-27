@@ -1617,9 +1617,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Nimeä uudelleen"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Ota käyttöön"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Poista"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Alusta"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Alusta SD-kortti siirrettäväksi tallennustilaksi"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Alusta kortti"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Alusta kannettavana"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Alusta sisäisenä"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Alusta"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Siirrä tiedot"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Unohda"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Asenna"</string>
@@ -1649,17 +1650,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Nimeä tallennustila uudelleen"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"<xliff:g id="NAME_0">^1</xliff:g> on poistettu turvallisesti, mutta edelleen laitteen kortinlukijassa.\n\n<xliff:g id="NAME_1">^1</xliff:g> täytyy ottaa ensin käyttöön, jotta tiedot ovat saatavilla."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Tämä <xliff:g id="NAME_0">^1</xliff:g> on vioittunut. \n\n<xliff:g id="NAME_1">^1</xliff:g> täytyy asentaa ensin, jotta sitä voi käyttää."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"Alustuksen jälkeen tämä <xliff:g id="NAME_0">^1</xliff:g> on käytettävissä muissa laitteissa. \n\nKaikki kohteen <xliff:g id="NAME_1">^1</xliff:g> tiedot poistetaan. Suosittelemme, että varmuuskopioit tiedot ensin. \n\n"<b>"Valokuvien ja muiden mediatiedostojen varmuuskopiointi"</b>" \nSiirrä mediatiedostosi toiseen tässä laitteessa olevaan tallennustilaan, tai siirrä ne tietokoneelle USB-johdon avulla. \n\n"<b>"Sovellusten varmuuskopiointi"</b>" \nKaikki kohteeseen <xliff:g id="NAME_6">^1</xliff:g> tallennetut sovellukset poistetaan ja niiden tiedot tyhjennetään. Jos haluat säilyttää nämä sovellukset, siirrä ne toiseen tämän laitteen tallennustilaan."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Voit alustaa SD-kortin kuvien, videoiden, musiikin ja muun tallentamiseen sekä käyttää niitä muilla laitteilla. \n\n"<b>"Kaikki tämän SD-kortin data poistetaan."</b>" \n\n"<b>"Ennen alustusta"</b>" \n\n"<b>"Varmuuskopioi kuvat ja muu media"</b>" \nSiirrä tiedostot toiseen tallennustilaan tällä laitteella tai siirrä ne tietokoneelle USB-kaapelilla. \n\n"<b>"Varmuuskopioi sovellukset"</b>" \nKaikki tälle laitteelle (<xliff:g id="NAME">^1</xliff:g>) tallennettujen sovellusten asennukset poistetaan ja niiden data poistetaan. Jos haluat säilyttää sovellukset, siirrä ne toiseen tallennustilaan laitteella."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Kun tämä <xliff:g id="NAME_0">^1</xliff:g> poistetaan, siihen tallennetut sovellukset lakkaavat toimimasta eivätkä mediatiedostot ole käytettävissä ennen kuin se liitetään uudelleen."</b>" \n\n<xliff:g id="NAME_1">^1</xliff:g> on alustettu niin, että se toimii vain tämän laitteen kanssa."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Jos haluat käyttää tallennuslaitteen <xliff:g id="NAME">^1</xliff:g> sisältämiä sovelluksia, kuvia tai tietoja, liitä se uudelleen. \n\nVoit myös halutessasi unohtaa tämän tallennuslaitteen, jos se ei ole käytettävissä. \n\nJos päätät unohtaa laitteen, menetät kaikki sen sisältämät tiedot lopullisesti. \n\nVoit asentaa sovellukset uudelleen myöhemmin, mutta niiden laitteelle tallentamat tiedot menetetään."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Unohdetaanko <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Kaikki kohteen (<xliff:g id="NAME">^1</xliff:g>) sovellukset, kuvat ja tiedot poistetaan pysyvästi."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Järjestelmä sisältää tiedostoja, joita tarvitaan Android-version <xliff:g id="VERSION">%s</xliff:g> toimintaan."</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Vierastilan käyttäjät eivät voi alustaa SD-korttia"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Määritä <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Käytä kannettavana tallennustilana"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Kuvien ja muiden mediatiedostojen siirtämiseen laitteiden välillä"</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Käytä sisäisenä tallennustilana"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"Jos haluat tallentaa kaiken, mukaan lukien sovellukset ja kuvat, vain tälle laitteelle. Vaatii alustuksen, joka estää sen toimimisen muissa laitteissa."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Alusta SD-kortti siirrettäväksi tallennustilaksi"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Tallenna esimerkiksi musiikkia ja videoita ja käytä niitä muilla laitteilla"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Alusta SD-kortti sisäiseksi tallennustilaksi"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Tallenna sovelluksia ja mediaa vain tämän puhelimen käyttöön"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Alusta sisäisenä tallennustilana"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Jotta <xliff:g id="NAME_0">^1</xliff:g> olisi turvallinen, se on alustettava. \n\nAlustamisen jälkeen <xliff:g id="NAME_1">^1</xliff:g> toimii vain tässä laitteessa. \n\n"<b>"Alustaminen tarkoittaa, että <xliff:g id="NAME_2">^1</xliff:g> tyhjennetään kaikista tiedoista."</b>" Suosittelemme varmuuskopiointia, jotta et menetä tärkeitä tietoja."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Alusta kannettavana tallennustilana"</string>
@@ -1676,9 +1678,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Siirrä"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Siirretään tietoja…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Siirron aikana: \n• Jätä <xliff:g id="NAME">^1</xliff:g> paikoilleen. \n• Kaikki sovellukset eivät toimi oikein. \n• Pidä laite ladattuna."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"<xliff:g id="NAME">^1</xliff:g> on valmiina käyttöön"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"<xliff:g id="NAME">^1</xliff:g> on valmis kuvien ja muiden mediatiedostojen tallennukseen."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"Uusi <xliff:g id="NAME">^1</xliff:g> toimii oikein. \n\nJos haluat siirtää kuvia, tiedostoja ja sovellustietoja tähän laitteeseen, siirry kohtaan Asetukset &gt; Tallennustila."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> alustettu"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"<xliff:g id="NAME">^1</xliff:g> on nyt käytettävissä ulkoisena tallennustilana"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"<xliff:g id="NAME">^1</xliff:g> on nyt käytettävissä sisäisenä tallennustilana"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Siirrä <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Sovelluksen <xliff:g id="APP">^1</xliff:g> ja sen tietojen siirtäminen kohteeseen <xliff:g id="NAME_0">^2</xliff:g> vie vain hetken. Et voi käyttää sovellusta, ennen kuin siirto on valmis. \n\nJätä <xliff:g id="NAME_1">^2</xliff:g> paikalleen siirron ajaksi."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Avaa käyttäjän <xliff:g id="APP">^1</xliff:g> lukitus siirtääksesi tietoja."</string>
@@ -1687,19 +1689,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Peru siirto"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"<xliff:g id="NAME_0">^1</xliff:g>  vaikuttaa hitaalta.\n\nVoit jatkaa, mutta tähän sijaintiin siirrettävät sovellukset voivat toimia heikosti ja tiedonsiirto voi kestää kauan.\n\nNopeampi <xliff:g id="NAME_1">^1</xliff:g> voi toimia tehokkaammin."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Miten <xliff:g id="NAME">^1</xliff:g> otetaan käyttöön?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Tabletin lisätallennustila"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"Vain tämän tabletin sovelluksille, tiedostoille ja medialle"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Tabletin tallennustila"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Puhelimen lisätallennustila"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"Vain tämän puhelimen sovelluksille, tiedostoille ja medialle"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Puhelimen tallennustila"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Alusta SD-kortti sisäiseksi tallennustilaksi"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Tallenna sovelluksia ja mediaa vain tämän tabletin käyttöön. &lt;a href=https://support.google.com/android/answer/12153449&gt;Lue lisää SD-kortin käyttöönotosta&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Alusta"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Alusta SD-kortti sisäiseksi tallennustilaksi"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Tallenna sovelluksia ja mediaa vain tämän puhelimen käyttöön. &lt;a href=https://support.google.com/android/answer/12153449&gt;Lue lisää SD-kortin käyttöönotosta&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Alusta"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"tai"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Kannettava tallennustila"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"Tiedostojen ja median siirtämiseen laitteiden välillä"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Kannettava tallennustila"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Alusta SD-kortti siirrettäväksi tallennustilaksi"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Tallenna esimerkiksi musiikkia ja videoita ja käytä niitä muilla laitteilla. &lt;a href=https://support.google.com/android/answer/12153449&gt;Lue lisää SD-kortin käyttöönotosta&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Alusta"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Määritä myöhemmin"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Alustetaanko tämä <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"<xliff:g id="NAME_0">^1</xliff:g> on alustettava, jotta sille voidaan tallentaa sovelluksia, tiedostoja tai mediaa. \n\nAlustaminen poistaa laitteen <xliff:g id="NAME_1">^2</xliff:g> nykyisen sisällön. Jos et halua menettää sisältöä, etsi toinen <xliff:g id="NAME_2">^3</xliff:g> tai muu laite ja varmuuskopioi sisältö."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Kortti (<xliff:g id="NAME_0">^1</xliff:g>) täytyy alustaa, jotta sille voi tallentaa esimerkiksi kuvia ja videoita. \n\nAlustaminen poistaa nykyisen sisällön kortilta (<xliff:g id="NAME_1">^2</xliff:g>). Jos et halua menettää sisältöä, etsi toinen <xliff:g id="NAME_2">^3</xliff:g> tai muu laite ja varmuuskopioi sisältö."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Alusta <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Siirretäänkö sisältöä: <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Voit siirtää tiedostoja, mediaa ja tiettyjä sovelluksia laitteeseen <xliff:g id="NAME">^1</xliff:g>. \n\nTämä vapauttaa <xliff:g id="SIZE">^2</xliff:g> tabletin tallennustilaa ja kestää noin <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1716,9 +1719,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"<xliff:g id="NAME_0">^1</xliff:g> on edelleen käytettävissä, mutta voi toimia hitaasti. \n\nLaitteessa <xliff:g id="NAME_1">^2</xliff:g> olevat sovellukset eivät välttämättä toimi oikein ja sisällön siirtäminen voi kestää pitkään. \n\nKokeile ottaa käyttöön nopeampi <xliff:g id="NAME_2">^3</xliff:g> tai käytä laitetta <xliff:g id="NAME_3">^4</xliff:g> siirrettävänä tallennustilana."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Aloita alusta"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Jatka"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Voit siirtää sisältöä paikkaan <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Jos haluat siirtää sisältöä laitteeseen <xliff:g id="NAME">^1</xliff:g>, valitse "<b>"Asetukset &gt; Tallennustila"</b>"."</string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"<xliff:g id="NAME_0">^1</xliff:g> vastaanotti sisällön. \n\nJos haluat hallita laitetta <xliff:g id="NAME_1">^2</xliff:g>, valitse "<b>"Asetukset &gt; Tallennustila"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"<xliff:g id="NAME">^1</xliff:g> on nyt käytettävissä"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"<xliff:g id="NAME">^1</xliff:g> on nyt käytettävissä"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"<xliff:g id="NAME">^1</xliff:g> on nyt käytettävissä"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Akun tila"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Akun taso"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN:t"</string>
@@ -2996,6 +2999,10 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Akun käyttödata on arvio, eikä käyttöä mitata puhelimen latautuessa"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Akun käyttödata on nähtävissä, kun olet käyttänyt puhelinta muutaman tunnin"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Kaavio akun käytöstä"</string>
+    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
+    <skip />
+    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Käsittelytiedot"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Käsittelyn tarkat tiedot"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Muistin käyttö"</string>
@@ -3551,6 +3558,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Anna sovellusten käyttää sijaintitietojasi"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Takaisin"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Seuraava"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Vaihda siirrettävään"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Alusta toisella tavalla"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Valmis"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM-kortit"</string>
@@ -5611,6 +5620,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Kiinnitä mediasoitin"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Mediasoitin pysyy auki pika-asetuksissa, jotta toistoa voi jatkaa nopeasti"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Näytä mediasuositukset"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Perustuu toimintaasi"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Piilota soitin"</string>

@@ -1661,9 +1661,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Preimenovanje"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Vpenjanje"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Izvrzi"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Formatiraj"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Formatiraj kartico SD kot prenosno shrambo"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Formatiraj kartico"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatiraj kot prenosno shram."</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Formatiraj kot notranjo shram."</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Formatiraj"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Preseli podatke"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Pozabi"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Nastavi"</string>
@@ -1693,17 +1694,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Preimenovanje shrambe"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Naprava za shranjevanje <xliff:g id="NAME_0">^1</xliff:g> je varno izvržena, vendar je še vedno na voljo. \n\nČe želite uporabljati napravo za shranjevanje <xliff:g id="NAME_1">^1</xliff:g>, jo morate najprej vpeti."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Naprava za shranjevanje <xliff:g id="NAME_0">^1</xliff:g> je poškodovana. \n\nČe želite uporabljati napravo za shranjevanje <xliff:g id="NAME_1">^1</xliff:g>, jo morate najprej nastaviti."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"Po formatiranju lahko uporabljate to shrambo (<xliff:g id="NAME_0">^1</xliff:g>) v drugih napravah. \n\nVsi podatki v tej shrambi (<xliff:g id="NAME_1">^1</xliff:g>) bodo izbrisani. Priporočamo, da podatke prej varnostno kopirate. \n\n"<b>"Varnostno kopiranje fotografij in druge predstavnosti"</b>" \nPremaknite predstavnostne datoteke v drugo shrambo v tej napravi ali jih s kablom USB prenesite v računalnik. \n\n"<b>"Varnostno kopiranje aplikacij"</b>" \nVse aplikacije, shranjene v tej shrambi (<xliff:g id="NAME_6">^1</xliff:g>), bodo odstranjene in podatki aplikacij izbrisani. Če želite ohraniti te aplikacije, jih premaknite v drugo shrambo v tej napravi."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"To kartico SD lahko formatirate, da boste lahko nanjo shranjevali fotografije, videoposnetke, glasbo in drugo vsebino ter do nje dostopali v drugih napravah. \n\n"<b>"Vsi podatki na tej kartici SD bodo izbrisani."</b>" \n\n"<b>"Pred formatiranjem"</b>" \n\n"<b>"Varnostno kopirajte fotografije in drugo predstavnost."</b>" \nPredstavnostne datoteke premaknite v drugo shrambo v tej napravi ali pa jih prek kabla USB prenesite v računalnik. \n\n"<b>"Varnostno kopirajte aplikacije."</b>" \nVse aplikacije, shranjene v tej shrambi <xliff:g id="NAME">^1</xliff:g>, bodo odmeščene, njihovi podatki pa bodo izbrisani. Če želite obdržati te aplikacije, jih premaknite v drugo shrambo v tej napravi."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Ko izvržete to shrambo (<xliff:g id="NAME_0">^1</xliff:g>), bodo aplikacije, shranjene na njej, prenehale delovati, predstavnostne datoteke, shranjene na njej, pa ne bodo na voljo, dokler je ne vstavite znova."</b>\n\n"Shramba <xliff:g id="NAME_1">^1</xliff:g> je formatirana tako, da deluje samo v tej napravi. V drugih ne bo delovala."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Če želite uporabljati aplikacije, fotografije ali podatke v shrambi <xliff:g id="NAME">^1</xliff:g>, jo znova vstavite. \n\nČe naprava ni na voljo, lahko izberete, da je ta shramba pozabljena. \n\nČe izberete, da je pozabljena, bodo vsi podatki, ki jih vsebuje naprava, za vedno izgubljeni. \n\nAplikacije lahko pozneje znova namestite, toda podatki, shranjeni v napravi, bodo izgubljeni."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Opustitev naprave za shr. <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Vse aplikacije, fotografije in podatki, shranjeni v napravi za shranjevanje <xliff:g id="NAME">^1</xliff:g>, bodo za vedno izgubljeni."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Sistem vključuje datoteke, ki se uporabljajo za izvajanje Androida različice <xliff:g id="VERSION">%s</xliff:g>."</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Uporabniki načina za goste ne morejo formatirati kartic SD."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Nastavitev imena za: <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Uporaba kot prenosna shramba"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Za premikanje fotografij in druge predstavnosti med napravami."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Uporaba kot notranja shramba"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"Za shranjevanje česar koli samo v tej napravi, vključno z aplikacijami in fotografijami. Zahteva formatiranje, ki onemogoča delovanje z drugimi napravami."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Formatiranje kartice SD kot prenosne shrambe"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Shranite fotografije, videoposnetke, glasbo in drugo vsebino ter dostopajte do nje iz drugih naprav."</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Formatiranje kartice SD kot notranjega pomnilnika"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Shranite aplikacije in predstavnost za uporabo samo v tem telefonu."</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Format. kot notranja shramba"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Če želite, da bo shramba <xliff:g id="NAME_0">^1</xliff:g> varna, jo morate formatirati. \n\nPo formatiranju bo ta shramba (<xliff:g id="NAME_1">^1</xliff:g>) delovala samo v tej napravi. \n\n"<b>"S formatiranjem se izbrišejo vsi podatki, ki so trenutno shranjeni v shrambi (<xliff:g id="NAME_2">^1</xliff:g>)."</b>" Če se želite izogniti izgubi podatkov, priporočamo, da jih varnostno kopirate."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Formatiranje kot prenosno shrambo"</string>
@@ -1720,9 +1722,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Premik"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Premikanje podatkov …"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Med premikanjem: \n• Ne odstranite shrambe (<xliff:g id="NAME">^1</xliff:g>). \n• Nekatere aplikacije ne bodo delovale pravilno. \n• Naprava naj bo napolnjena."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"Nosilec <xliff:g id="NAME">^1</xliff:g> je pripravljen za uporabo"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"Shramba <xliff:g id="NAME">^1</xliff:g> je pripravljena za uporabo s fotografijami in drugo predstavnostjo."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"Nova shramba <xliff:g id="NAME">^1</xliff:g> deluje. \n\nČe želite premikati fotografije, datoteke in podatke aplikacij vanjo, odprite »Nastavitve« &gt; »Shramba«."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"Shramba <xliff:g id="NAME">^1</xliff:g> je bila formatirana"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Shrambo <xliff:g id="NAME">^1</xliff:g> lahko začnete uporabljati."</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Shrambo <xliff:g id="NAME">^1</xliff:g> lahko začnete uporabljati."</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Premik aplikacije <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Premik aplikacije <xliff:g id="APP">^1</xliff:g> in njenih podatkov v shrambo <xliff:g id="NAME_0">^2</xliff:g> bo trajal samo nekaj trenutkov. Dokler premik ne bo dokončan, aplikacije ne bo mogoče uporabljati. \n\nShrambe <xliff:g id="NAME_1">^2</xliff:g> med premikanjem ne odstranite."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Če želite premakniti podatke, morate odkleniti uporabnika <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1731,19 +1733,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Preklic premika"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Ta shramba <xliff:g id="NAME_0">^1</xliff:g> je videti počasna. \n\nLahko nadaljujete, vendar se bodo aplikacije, premaknjene na to lokacijo, morda zatikale, prenos podatkov pa bo dolgotrajen. \n\nRazmislite o uporabi hitrejše shrambe <xliff:g id="NAME_1">^1</xliff:g>, če želite boljše delovanje."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Kako želite uporabljati nosilec <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Uporabi kot dodatno shrambo v tabličnem računalniku"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"Samo za aplikacije, datoteke in predstavnost v tej tablici"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Shramba tabličnega računalnika"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Uporabi kot dodatno shrambo v telefonu"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"Samo za aplikacije, datoteke in predstavnost v tem telefonu"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Pomnilnik telefona"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formatiranje kartice SD kot notranjega pomnilnika"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Shranite aplikacije in predstavnost za uporabo samo v tem tabličnem računalniku. &lt;a href=https://support.google.com/android/answer/12153449&gt;Preberite več o nastavljanju kartice SD.&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formatiraj"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formatiranje kartice SD kot notranjega pomnilnika"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Shranite aplikacije in predstavnost za uporabo samo v tem telefonu. &lt;a href=https://support.google.com/android/answer/12153449&gt;Preberite več o nastavljanju kartice SD.&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formatiraj"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"ali"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Uporabi kot prenosno shrambo"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"Za prenašanje datotek in predstavnosti med napravami"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Prenosna shramba"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formatiranje kartice SD kot prenosne shrambe"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Shranite fotografije, videoposnetke, glasbo in drugo vsebino ter dostopajte do nje iz drugih naprav. &lt;a href=https://support.google.com/android/answer/12153449&gt;Preberite več o nastavljanju kartice SD.&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formatiraj"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Nastavi pozneje"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Želite formatirati ta nosilec: <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Če želite shranjevati aplikacije, datoteke in predstavnost, morate nosilec <xliff:g id="NAME_0">^1</xliff:g> formatirati. \n\nS formatiranjem boste izbrisali obstoječo vsebino v nosilcu <xliff:g id="NAME_1">^2</xliff:g>. Da bi se izognili izgubi vsebine, jo varnostno kopirajte v drug nosilec <xliff:g id="NAME_2">^3</xliff:g> ali napravo."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"To shrambo <xliff:g id="NAME_0">^1</xliff:g> je treba formatirati, da boste lahko vanjo shranjevali fotografije, videoposnetke, glasbo in drugo vsebino. \n\nS formatiranjem boste izbrisali obstoječo vsebino v shrambi <xliff:g id="NAME_1">^2</xliff:g>. Da bi se izognili izgubi vsebine, jo varnostno kopirajte v drugo shrambo <xliff:g id="NAME_2">^3</xliff:g> ali napravo."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formatiraj <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Želite premakniti vsebino v nos. <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"V nosilec <xliff:g id="NAME">^1</xliff:g> lahko premaknete datoteke, predstavnost in določene aplikacije. \n\nS tem premikom boste v shrambi tabličnega računalnika sprostili do <xliff:g id="SIZE">^2</xliff:g>. Premikanje bo trajalo približno <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1760,9 +1763,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Nosilec <xliff:g id="NAME_0">^1</xliff:g> lahko še vedno uporabljate, vendar bo morda počasen. \n\nAplikacije, shranjene v nosilcu <xliff:g id="NAME_1">^2</xliff:g>, morda ne bodo pravilno delovale, prenos vsebine pa bo morda dolgotrajen. \n\nPoskusite uporabiti hitrejši nosilec <xliff:g id="NAME_2">^3</xliff:g> ali pa nosilec <xliff:g id="NAME_3">^4</xliff:g> uporabite kot prenosno shrambo."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Začni znova"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Naprej"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Vsebino lahko premaknete v nosilec <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Če želite vsebino premakniti v nosilec <xliff:g id="NAME">^1</xliff:g>, pojdite na "<b>"Nastavitve &gt; Shramba"</b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Vsebina je bila premaknjena v nosilec <xliff:g id="NAME_0">^1</xliff:g>. \n\nČe želite upravljati nosilec <xliff:g id="NAME_1">^2</xliff:g>, pojdite v "<b>"Nastavitve &gt; Shramba"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Shrambo <xliff:g id="NAME">^1</xliff:g> lahko začnete uporabljati"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Shrambo <xliff:g id="NAME">^1</xliff:g> lahko začnete uporabljati"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Shrambo <xliff:g id="NAME">^1</xliff:g> lahko začnete uporabljati"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Stanje baterije"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Raven napolnjenosti baterije"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN-ji"</string>
@@ -3074,6 +3077,10 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Podatki o porabi energije baterije so približni in ne merijo porabe, ko se telefon polni."</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Podatki o porabi energije baterije bodo na voljo po nekajurni uporabi telefona."</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Grafikon porabe energije baterije"</string>
+    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
+    <skip />
+    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistični podatki o procesih"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistični podatki o procesih, ki se izvajajo"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Poraba pomnilnika"</string>
@@ -3637,6 +3644,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Aplikacije lahko uporabljajo podatke o vaši lokaciji"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Nazaj"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Naprej"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Preklopi na prenosno"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Formatiraj na drug način"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Dokončaj"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"Kartici SIM"</string>
@@ -5787,6 +5796,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Predstavnost"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Pripni predvajalnik predstavnosti"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Predvajalnik predstavnosti ostane odprt v hitrih nastavitvah, da je omogočeno hitro nadaljevanje predvajanja."</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Prikaži priporočila glede predstavnosti"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Priporočila temeljijo glede na vašo dejavnost."</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Skrij predvajalnik"</string>

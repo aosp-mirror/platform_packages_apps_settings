@@ -1619,9 +1619,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Преименуване"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Свързване"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Изваждане"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Форматиране"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Форматиране на SD картата като преносимо хранилище"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Форматиране на картата"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Форматиране като преносимо"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Форматиране като вътрешно"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Форматиране"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Прехвърляне на данните"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Забравяне"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Настройване"</string>
@@ -1651,17 +1652,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Преименуване на хранилището"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Това хранилище (<xliff:g id="NAME_0">^1</xliff:g>) е извадено безопасно, но все още е налице. \n\nЗа да използвате хранилището (<xliff:g id="NAME_1">^1</xliff:g>), трябва първо да го свържете."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Това хранилище (<xliff:g id="NAME_0">^1</xliff:g>) е повредено. \n\nЗа да използвате хранилището (<xliff:g id="NAME_1">^1</xliff:g>), трябва първо да го настроите."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"След форматирането можете да използвате хранилището (<xliff:g id="NAME_0">^1</xliff:g>) на други устройства. \n\nВсички данни в това хранилище (<xliff:g id="NAME_1">^1</xliff:g>) ще бъдат изтрити. Добре е първо да създадете резервно копие. \n\n"<b>"Създаване на резервно копие на снимки и друга мултимедия"</b>" \nПреместете мултимедийните си файлове в друго хранилище на това устройство или ги прехвърлете на компютър посредством USB кабел. \n\n"<b>"Създаване на резервно копие на приложения"</b>" \nВсички съхранявани в това хранилище (<xliff:g id="NAME_6">^1</xliff:g>) приложения ще бъдат деинсталирани, а данните им – изтрити. За да запазите тези приложения, ги преместете в друго хранилище на устройството."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Можете да форматирате тази SD карта, за да съхранява снимки, видеоклипове, музика и др., и да осъществявате достъп до тях от други устройства. \n\n"<b>"Всички данни на тази SD карта ще бъдат изтрити."</b>" \n\n"<b>"Преди форматирането"</b>" \n\n"<b>"Създаване на резервно копие на снимките и другото мултимедийно съдържание"</b>" \nПреместете мултимедийните си файлове в друго хранилище на това устройство или ги прехвърлете на компютър посредством USB кабел. \n\n"<b>"Създаване на резервно копие на приложенията"</b>" \nВсички съхранявани в това хранилище (<xliff:g id="NAME">^1</xliff:g>) приложения ще бъдат деинсталирани, а данните им – изтрити. За да запазите тези приложения, ги преместете в друго хранилище на устройството."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Когато извадите това хранилище (<xliff:g id="NAME_0">^1</xliff:g>), съхраняваните там приложения ще спрат да работят, а съответните мултимедийни файлове няма да са налице, докато не го поставите отново."</b>" \n\nХранилището (<xliff:g id="NAME_1">^1</xliff:g>) е форматирано да работи само на това устройство и няма да функционира другаде."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"За да използвате приложенията, снимките или данните в това хранилище (<xliff:g id="NAME">^1</xliff:g>), го поставете отново. \n\nДруга възможност е да забравите това устройство, ако не е налице. \n\nВ случай че забравите хранилището, всички данни в него ще бъдат заличени завинаги. \n\nПо-късно можете да инсталирате отново приложенията, но съхраняваните им на това устройство данни ще бъдат заличени."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g>: Да се забрави ли?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Всички приложения, снимки и данни, съхранявани в това хранилище (<xliff:g id="NAME">^1</xliff:g>), ще бъдат заличени завинаги."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Системата включва файлове, използвани за изпълняването на версия <xliff:g id="VERSION">%s</xliff:g> на Android"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Не можете да форматирате SD карти в режим на гост"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Настройте хранилището (<xliff:g id="NAME">^1</xliff:g>)"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Използване като преносимо хранилище"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"За преместване на снимки и друга мултимедия между устройствата."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Използване като вътрешно хранилище"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"За съхраняване на каквото и да е само на това устройство, включително приложения и снимки. Хранилището трябва да се форматира, за да не може да работи на други устройства."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Форматиране на SD картата като преносимо хранилище"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Запазване на снимки, видеоклипове, музика и др. и осъществяване на достъп до тях от други устройства"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Форматиране на SD картата като вътрешно хранилище"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Запазване на приложения и мултимедия за ползване само на този телефон"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Форматиране като вътр. хранилище"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Необходимо е да форматирате хранилището (<xliff:g id="NAME_0">^1</xliff:g>), за да го защитите. \n\nСлед като форматирате хранилището (<xliff:g id="NAME_1">^1</xliff:g>), то ще работи само на това устройство. \n\n"<b>"При форматирането се изтриват всички данни, които понастоящем се съхраняват в това хранилище (<xliff:g id="NAME_2">^1</xliff:g>)."</b>" За да не ги загубите, е добре да създадете резервно копие."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Формат. като преносимо хранилище"</string>
@@ -1678,9 +1680,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Преместване"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Данните се преместват…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"По време на преместването: \n• Не премахвайте хранилището (<xliff:g id="NAME">^1</xliff:g>). \n• Някои приложения няма да работят правилно. \n• Устройството трябва да е заредено."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"Хранил. ви (<xliff:g id="NAME">^1</xliff:g>) е готово за ползв."</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"Хранилището (<xliff:g id="NAME">^1</xliff:g>) е готово за използване за снимки и друга мултимедия."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"Новото хранилище (<xliff:g id="NAME">^1</xliff:g>) работи. \n\nЗа да преместите снимки, файлове и данни на приложения към това устройство, отворете „Настройки“ &gt; „Хранилище“."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"Хранилището (<xliff:g id="NAME">^1</xliff:g>) бе форматирано"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Можете да започнете да използвате хранилището си (<xliff:g id="NAME">^1</xliff:g>)"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Можете да започнете да използвате хранилището си (<xliff:g id="NAME">^1</xliff:g>)"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Преместете <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Преместването на приложението <xliff:g id="APP">^1</xliff:g> и данните му към хранилището (<xliff:g id="NAME_0">^2</xliff:g>) няма да отнеме дълго време. Няма да можете да използвате приложението, докато процесът не завърши. \n\nНе премахвайте хранилището (<xliff:g id="NAME_1">^2</xliff:g>) по време на преместването."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"За да преместите данните, трябва да отключите потребителя <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1689,19 +1691,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Анулиране на преместването"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Изглежда, че паметта (<xliff:g id="NAME_0">^1</xliff:g>) е бавна. \n\nАко продължите, преместените там приложения може да не работят гладко, а прехвърлянето на данни – да отнема дълго време. \n\nЗа по-добра ефективност ползвайте по-бърза памет (<xliff:g id="NAME_1">^1</xliff:g>)."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Как ще ползвате хранилището (<xliff:g id="NAME">^1</xliff:g>)?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Ползв. за допълн. хранил. на таблета"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"За приложенията, файловете и мултимедията само на този таблет"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Хранилище на таблета"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Ползв. за допълн. хранил. на телефона"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"За приложенията, файловете и мултимедията само на този телефон"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Хранилище на телефона"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Форматиране на SD картата като вътрешно хранилище"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Съхранявайте приложения и мултимедия за ползване само на този таблет. &lt;a href=https://support.google.com/android/answer/12153449&gt;Научете повече за настройването на SD карта&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Форматиране"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Форматиране на SD картата като вътрешно хранилище"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Съхранявайте приложения и мултимедия за ползване само на този телефон. &lt;a href=https://support.google.com/android/answer/12153449&gt;Научете повече за настройването на SD карта&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Форматиране"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Или"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Използв. за преносимо хранилище"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"За прехвърляне на файлове и мултимедия между устройствата"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Преносимо хранилище"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Форматиране на SD картата като преносимо хранилище"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Съхранявайте снимки, видеоклипове, музика и др. и осъществявайте достъп до тях от други устройства. &lt;a href=https://support.google.com/android/answer/12153449&gt;Научете повече за настройването на SD карта&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Форматиране"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Настройване по-късно"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Да се форматира ли хранилището (<xliff:g id="NAME">^1</xliff:g>)?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Това хранилище (<xliff:g id="NAME_0">^1</xliff:g>) трябва да се форматира, за да съхранява приложения, файлове и мултимедия. \n\nФорматирането ще изтрие съществуващото съдържание в хранилището (<xliff:g id="NAME_1">^2</xliff:g>). За да избегнете загубата на съдържание, създайте резервно копие в друго хранилище (<xliff:g id="NAME_2">^3</xliff:g>) или устройство."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Това хранилище (<xliff:g id="NAME_0">^1</xliff:g>) трябва да бъде форматирано, за да съхранява снимки, видеоклипове, музика и др. \n\nФорматирането ще изтрие съществуващото съдържание в хранилището (<xliff:g id="NAME_1">^2</xliff:g>). За да избегнете загубата на съдържание, създайте резервно копие в друго хранилище (<xliff:g id="NAME_2">^3</xliff:g>) или устройство."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Форматиране на <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Да се премести ли съдърж. в/ъв <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Можете да преместите файлове, мултимедия и определени приложения в хранилището (<xliff:g id="NAME">^1</xliff:g>). \n\nТака ще освободите <xliff:g id="SIZE">^2</xliff:g> от хранилището на таблета си. Преместването ще отнеме около <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1718,9 +1721,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Пак можете да използвате това хранилище (<xliff:g id="NAME_0">^1</xliff:g>), но то може да е бавно. \n\nСъхранените в хранилището (<xliff:g id="NAME_1">^2</xliff:g>) приложения може да не работят правилно, а прехвърлянето на съдържание може да отнеме дълго време. \n\nОпитайте да използвате по-бързо хранилище (<xliff:g id="NAME_2">^3</xliff:g>) или ползвайте това хранилище (<xliff:g id="NAME_3">^4</xliff:g>) като преносимо."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Стартиране отначало"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Напред"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Можете да преместите съдържание в хранилището (<xliff:g id="NAME">^1</xliff:g>)"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"За да преместите съдържание в хранилището (<xliff:g id="NAME">^1</xliff:g>), отворете "<b>"Настройки &gt; Хранилище"</b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Съдържанието бе преместено в хранилището (<xliff:g id="NAME_0">^1</xliff:g>). \n\nЗа да управлявате <xliff:g id="NAME_1">^2</xliff:g>, отворете "<b>"Настройки &gt; Хранилище"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Можете да започнете да използвате хранилището си (<xliff:g id="NAME">^1</xliff:g>)"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Можете да започнете да използвате хранилището си (<xliff:g id="NAME">^1</xliff:g>)"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Можете да започнете да използвате хранилището си (<xliff:g id="NAME">^1</xliff:g>)"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Състояние на батерията"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Ниво на батерията"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
@@ -2998,6 +3001,10 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Данните за използването на батерията са приблизителни и не се отчитат, докато телефонът се зарежда"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Данните за използването на батерията ще са налице, след като ползвате телефона си няколко часа"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Диаграма за използването на батерията"</string>
+    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
+    <skip />
+    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статистически данни за процесите"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Подробни статистически данни за изпълняващите се процеси"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Използвана памет"</string>
@@ -3553,6 +3560,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Разрешаване на приложенията да използват информация за местоположението ви"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Назад"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Напред"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Превкл.: Преносимо хран."</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Форматиране по друг начин"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Край"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM карти"</string>
@@ -5613,6 +5622,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Мултимедия"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Фиксиране на медийния плейър"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"С цел бързо възобновяване на възпроизвеждането медийният плейър остава отворен в бързите настройки"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Показване на препоръки за мултимедия"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Въз основа на активността ви"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Скриване на плейъра"</string>

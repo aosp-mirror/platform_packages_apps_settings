@@ -626,8 +626,8 @@
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Tablet versleutelen"</string>
     <string name="encrypt_title" product="default" msgid="7337365190988321100">"Telefoon versleutelen"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Versleuteld"</string>
-    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Stel een schermvergrendeling in"</string>
-    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Stel een pincode, patroon of wachtwoord in voor dit apparaat voor extra beveiliging."</string>
+    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Schermvergrendeling instellen"</string>
+    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Stel een pincode, patroon of wachtwoord in voor dit apparaat voor extra beveiliging"</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Schermvergrendeling instellen"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Beveilig je telefoon"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Schermvergrendeling instellen om tablet te beschermen"</string>
@@ -1617,9 +1617,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Naam wijzigen"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Koppelen"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Uitwerpen"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Formatteren"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"SD-kaart formatteren voor draagbare opslag"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Kaart formatteren"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatteren als draagbaar"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Formatteren als intern"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Formatteren"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Gegevens overzetten"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Vergeten"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Instellen"</string>
@@ -1649,17 +1650,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Naam van opslag wijzigen"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Deze <xliff:g id="NAME_0">^1</xliff:g> is veilig uitgeworpen, maar is nog steeds beschikbaar. \n\nAls je de <xliff:g id="NAME_1">^1</xliff:g> wilt gebruiken, moet je deze eerst koppelen."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Deze <xliff:g id="NAME_0">^1</xliff:g> is beschadigd. \n\nAls je de <xliff:g id="NAME_1">^1</xliff:g> wilt gebruiken, moet je deze eerst instellen."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"Na het formatteren kun je deze <xliff:g id="NAME_0">^1</xliff:g> gebruiken in andere apparaten. \n\nAlle gegevens op deze <xliff:g id="NAME_1">^1</xliff:g> worden gewist. Misschien wil je daarom eerst een back-up maken. \n\n"<b>"Maak back-ups van foto\'s en andere media"</b>" \nVerplaats je mediabestanden naar alternatieve opslagruimte op dit apparaat of zet ze over naar een computer via een USB-kabel. \n\n"<b>"Maak back-ups van apps"</b>" \nAlle apps die zijn opgeslagen op deze <xliff:g id="NAME_6">^1</xliff:g>, worden verwijderd en de bijbehorende gegevens worden gewist. Als je deze apps wilt behouden, verplaats je ze naar alternatieve opslagruimte op dit apparaat."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Je kunt deze SD-kaart formatteren om onder meer foto\'s, video\'s en muziek op te slaan en te openen op andere apparaten. \n\n"<b>"Alle gegevens op deze SD-kaart worden gewist."</b>" \n\n"<b>"Voordat je formatteert"</b>" \n\n"<b>"Maak een back-up van foto\'s en andere media"</b>" \nVerplaats je mediabestanden naar alternatieve opslag op dit apparaat of zet ze over naar een computer via een USB-kabel. \n\n"<b>"Maak een back-up van apps"</b>" \nAlle apps die op deze <xliff:g id="NAME">^1</xliff:g> zijn opgeslagen, worden verwijderd en de bijbehorende gegevens worden gewist. Als je deze apps wilt behouden, verplaats je ze naar alternatieve opslag op dit apparaat."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Wanneer je deze <xliff:g id="NAME_0">^1</xliff:g> uitwerpt, werken apps die erop zijn opgeslagen niet meer. Mediabestanden die hierop zijn opgeslagen, zijn pas weer beschikbaar als het opslagapparaat weer wordt geplaatst."</b>" \n\nDe <xliff:g id="NAME_1">^1</xliff:g> is geformatteerd voor gebruik in dit apparaat en werkt niet in andere apparaten."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Als je de apps, foto\'s of gegevens op deze <xliff:g id="NAME">^1</xliff:g> wilt gebruiken, plaats je deze opnieuw. \n\nJe kunt er ook voor kiezen dit opslagapparaat te vergeten als het apparaat niet beschikbaar is. \n\nAls je ervoor kiest het apparaat te vergeten, gaat alle gegevens op het apparaat definitief verloren. \n\nJe kunt de apps later opnieuw installeren, maar de op het apparaat opgeslagen app-gegevens gaan verloren."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g> vergeten?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Alle apps, foto\'s en gegevens die zijn opgeslagen op deze <xliff:g id="NAME">^1</xliff:g>, gaan definitief verloren."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Systeem bevat bestanden die worden gebruikt voor Android-versie <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Gebruikers van de gastmodus kunnen geen SD-kaarten formatteren"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Je <xliff:g id="NAME">^1</xliff:g> instellen"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Gebruiken als draagbare opslag"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Voor het verplaatsen van foto\'s en andere media tussen apparaten."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Gebruiken als interne opslag"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"Voor het opslaan van dingen op alleen dit apparaat (waaronder apps en foto\'s). Hiervoor moet het apparaat worden geformatteerd, zodat het niet meer werkt met andere apparaten."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"SD-kaart formatteren voor draagbare opslag"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Foto\'s, video\'s, muziek en meer opslaan en openen vanaf andere apparaten"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"SD-kaart formatteren voor interne opslag"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Apps en media opslaan om alleen op deze telefoon te gebruiken"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Formatteren als interne opslag"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"De <xliff:g id="NAME_0">^1</xliff:g> moet worden geformatteerd om deze te beveiligen. \n\nNa het formatteren werkt deze <xliff:g id="NAME_1">^1</xliff:g> alleen in dit apparaat. \n\n"<b>"Wanneer je formatteert, worden alle gegevens gewist die momenteel op de <xliff:g id="NAME_2">^1</xliff:g> zijn opgeslagen."</b>" Als je wilt voorkomen dat je gegevens kwijtraakt, kun je eerst een back-up maken."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Formatteren als draagbare opslag"</string>
@@ -1676,9 +1678,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Verplaatsen"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Gegevens verplaatsen…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Tijdens het verplaatsen: \n• Verwijder de <xliff:g id="NAME">^1</xliff:g> niet. \n• Sommige apps werken niet correct. \n• Zorg dat het apparaat voldoende opgeladen blijft."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"Je <xliff:g id="NAME">^1</xliff:g> is klaar voor gebruik"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"Je <xliff:g id="NAME">^1</xliff:g> kan nu worden gebruikt voor foto\'s en andere media."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"Je nieuwe <xliff:g id="NAME">^1</xliff:g> werkt nu. \n\nAls je foto\'s, bestanden en app-gegevens naar dit apparaat wilt verplaatsen, ga je naar \'Instellingen\' &gt; \'Opslagruimte\'."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> is geformatteerd"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Je kunt je <xliff:g id="NAME">^1</xliff:g> gebruiken"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Je kunt je <xliff:g id="NAME">^1</xliff:g> gebruiken"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"<xliff:g id="APP">^1</xliff:g> verplaatsen"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Je kunt <xliff:g id="APP">^1</xliff:g> en de bijbehorende gegevens snel overzetten naar de <xliff:g id="NAME_0">^2</xliff:g>. Je kunt de app pas weer gebruiken nadat deze volledig is overgezet. \n\nVerwijder de <xliff:g id="NAME_1">^2</xliff:g> niet tijdens het overzetten."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Je moet gebruiker <xliff:g id="APP">^1</xliff:g> ontgrendelen om gegevens te verplaatsen."</string>
@@ -1687,19 +1689,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Verplaatsen annuleren"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Het lijkt erop dat deze <xliff:g id="NAME_0">^1</xliff:g> langzaam is. \n\nJe kunt doorgaan, maar apps die naar deze locatie worden verplaatst, kunnen vastlopen en de gegevensoverdracht kan lang duren. \n\nJe kunt overwegen een snellere <xliff:g id="NAME_1">^1</xliff:g> te gebruiken voor betere prestaties."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Hoe ga je deze <xliff:g id="NAME">^1</xliff:g> gebruiken?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Gebruiken voor tabletopslag"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"Alleen voor apps, bestanden en media op deze tablet"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Opslag op tablet"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Gebruiken voor telefoonopslag"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"Alleen voor apps, bestanden en media op deze telefoon"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Telefoonopslag"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"SD-kaart formatteren voor interne opslag"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Sla apps en media op om alleen op deze tablet te gebruiken. &lt;a href=https://support.google.com/android/answer/12153449&gt;Meer informatie over hoe je een SD-kaart instelt&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formatteren"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"SD-kaart formatteren voor interne opslag"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Sla apps en media op om alleen op deze telefoon te gebruiken. &lt;a href=https://support.google.com/android/answer/12153449&gt;Meer informatie over hoe je een SD-kaart instelt&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formatteren"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Of"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Gebruiken als draagbare opslag"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"Voor de overdracht van bestanden en media tussen apparaten"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Draagbare opslag"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"SD-kaart formatteren voor draagbare opslag"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Sla onder meer foto\'s, video\'s en muziek op en open ze vanaf andere apparaten. &lt;a href=https://support.google.com/android/answer/12153449&gt;Meer informatie over hoe je een SD-kaart instelt&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formatteren"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Later instellen"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Deze <xliff:g id="NAME">^1</xliff:g> formatteren?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Deze <xliff:g id="NAME_0">^1</xliff:g> moet worden geformatteerd om apps, bestanden en media op te slaan. \n\nTijdens het formatteren worden alle gegevens op de <xliff:g id="NAME_1">^2</xliff:g> gewist. Maak een back-up op een andere <xliff:g id="NAME_2">^3</xliff:g> of een ander apparaat om te voorkomen dat je de gegevens kwijtraakt."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Deze <xliff:g id="NAME_0">^1</xliff:g> moet worden geformatteerd om onder meer foto\'s, video\'s en muziek op te slaan. \n\nTijdens het formatteren wordt bestaande content op de <xliff:g id="NAME_1">^2</xliff:g> gewist. Maak een back-up op een andere <xliff:g id="NAME_2">^3</xliff:g> of een ander apparaat om te voorkomen dat je de content kwijtraakt."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g> formatteren"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Content naar <xliff:g id="NAME">^1</xliff:g> verplaatsen?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Je kunt bestanden, media en bepaalde apps naar deze <xliff:g id="NAME">^1</xliff:g> verplaatsen. \n\nHiermee maak je <xliff:g id="SIZE">^2</xliff:g> van je tabletopslag vrij. Het overzetten duurt ongeveer <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1716,9 +1719,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Je kunt deze <xliff:g id="NAME_0">^1</xliff:g> nog steeds gebruiken, maar bewerkingen kunnen lang duren. \n\nApps die zijn opgeslagen op deze <xliff:g id="NAME_1">^2</xliff:g> werken mogelijk niet correct en het kan lang duren voordat content is overgezet. \n\nProbeer het met een snellere <xliff:g id="NAME_2">^3</xliff:g> of gebruik deze <xliff:g id="NAME_3">^4</xliff:g> voor draagbare opslag."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Opnieuw beginnen"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Doorgaan"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Je kunt content verplaatsen naar <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Als je content wilt verplaatsen naar <xliff:g id="NAME">^1</xliff:g>, ga je naar "<b>"Instellingen &gt; Opslag"</b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Je content is verplaatst naar <xliff:g id="NAME_0">^1</xliff:g>. \n\nAls je deze <xliff:g id="NAME_1">^2</xliff:g> wilt beheren, ga je naar "<b>"Instellingen &gt; Opslag"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Je kunt je <xliff:g id="NAME">^1</xliff:g> gebruiken"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Je kunt je <xliff:g id="NAME">^1</xliff:g> gebruiken"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Je kunt je <xliff:g id="NAME">^1</xliff:g> gebruiken"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Batterijstatus"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Accuniveau"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN\'s"</string>
@@ -2996,6 +2999,10 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Gegevens over batterijgebruik zijn bij benadering en meten het gebruik niet als de telefoon wordt opgeladen."</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Gegevens over batterijgebruik zijn beschikbaar nadat je je telefoon een aantal uur hebt gebruikt."</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Diagram voor batterijgebruik"</string>
+    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
+    <skip />
+    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Processtatistieken"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistieken voor nerds over actieve processen"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Geheugengebruik"</string>
@@ -3551,6 +3558,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Apps je locatiegegevens laten gebruiken"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Terug"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Volgende"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Schakelen naar draagbaar"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Op een andere manier formatteren"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Voltooien"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"Simkaarten"</string>
@@ -5611,6 +5620,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Mediaspeler vastzetten"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"De mediaspeler blijft open staan in Snelle instellingen, zodat je snel kunt verdergaan met afspelen"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Media-aanbevelingen laten zien"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Op basis van je activiteit"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Speler verbergen"</string>
