@@ -70,10 +70,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Enheten kopplas bort från <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Parkoppla en ny enhet"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Parkoppla höger"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Parkoppla vänster"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Parkoppla andra örat"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Vänster hörapparat har anslutits.\n\nOm du vill parkoppla den högra kontrollerar du att den är på och i parkopplingsläge."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Höger hörapparat har anslutits.\n\nOm du vill parkoppla den vänstra kontrollerar du att den är på och i parkopplingsläge."</string>
@@ -2063,7 +2061,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Vill du återställa?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Detta återställer alla inställningar för följande:\n\n"<li>"inaktiverade appar"</li>\n<li>"inaktiverade appaviseringar"</li>\n<li>"standardappar för åtgärder"</li>\n<li>"begränsningar i bakgrundsdata för appar"</li>\n<li>"begränsningar för alla behörigheter"</li>\n<li>"inställningar för batteriförbrukning."</li>\n\n"Ingen appdata försvinner."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Återställ appar"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"Hantera utrymme"</string>
     <string name="filter" msgid="9039576690686251462">"Filtrera"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Välj filteralternativ"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Alla appar"</string>
@@ -2519,7 +2516,7 @@
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Gör skärmen mer dimmad än telefonens lägsta ljusstyrka"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Gör skärmen mer dimmad än surfplattans lägsta ljusstyrka"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Dämpa skärmens ljusstyrka ytterligare så att det blir behagligare för ögonen att läsa"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"Extradimmat kan vara användbart när &lt;ol&gt; &lt;li&gt; telefonens lägsta ljusstyrka fortfarande är för ljus&lt;/li&gt; &lt;li&gt; du använder telefonen i mörker, t.ex. på natten eller i ett mörkt rum innan du ska sova.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"Extradimmat kan vara användbart när &lt;ol&gt; &lt;li&gt;&amp;nbsp;telefonens lägsta ljusstyrka fortfarande är för ljus&lt;/li&gt; &lt;li&gt;&amp;nbsp;du använder telefonen i mörker, t.ex. på natten eller i ett mörkt rum innan du ska sova.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5158211121482010799">"Extradimmat kan vara användbart när &lt;ol&gt; &lt;li&gt; surfplattans lägsta ljusstyrka fortfarande är för ljus&lt;/li&gt; &lt;li&gt; du använder surfplattan i mörker, t.ex. på natten eller i ett mörkt rum innan du ska sova.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensitet"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Svagare"</string>
@@ -2680,7 +2677,8 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Batteriförbrukning"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Se användning de senaste 24 timmarna"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Se användning sedan senaste fulladdning"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Batteriförbrukning"</string>
+    <!-- no translation found for battery_details_title (3289680399291090588) -->
+    <skip />
     <string name="details_subtitle" msgid="2550872569652785527">"Information om användning"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Justera strömförbrukningen"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Inkluderade paket"</string>
@@ -2699,8 +2697,12 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Vissa funktioner kan begränsas"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Högre batteriförbrukning"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Se appar med högst batteriförbrukning"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Laddning har begränsats tillfälligt"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Detta bevarar batteriets livslängd. Läs mer."</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Återuppta laddning"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Under vissa omständigheter, till exempel vid höga temperaturer och långa laddningsperioder, kan laddningen begränsas till <xliff:g id="PERCENT">%1$s</xliff:g> för att bevara batteriets livslängd.\n\nTelefonen återgår automatiskt till normal laddning när det är möjligt."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Under vissa omständigheter, till exempel vid höga temperaturer och långa laddningsperioder, kan laddningen begränsas till <xliff:g id="PERCENT">%1$s</xliff:g> för att bevara batteriets livslängd.\n\nSurfplattan återgår automatiskt till normal laddning när det är möjligt."</string>
@@ -2736,6 +2738,8 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Den här appen kan dra batteri i bakgrunden. Batteriet kan ta slut snabbare än beräknat."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Ta bort"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Avbryt"</string>
+    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
+    <skip />
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Batteriförbrukningen för apparna är normal. Om apparnas batteriförbrukning är för hög visas förslag på telefonen om åtgärder du kan vidta.\n\nOm batteriet börjar ta slut kan du aktivera batterisparläget."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Batteriförbrukningen för apparna är normal. Om apparnas batteriförbrukning är för hög visas förslag på surfplattan om åtgärder du kan vidta.\n\nOm batteriet börjar ta slut kan du aktivera batterisparläget."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Batteriförbrukningen för apparna är normal. Om apparnas batteriförbrukning är för hög visas förslag på enheten om åtgärder du kan vidta.\n\nOm batteriet börjar ta slut kan du aktivera batterisparläget."</string>
@@ -2780,7 +2784,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Fulladdat batteri räcker i ungefär"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Informationen om batteriförbrukning är en uppskattning och kan ändras utifrån användningen."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Batteriförbrukning"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Hantera batterianvändning"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> sammanlagt • <xliff:g id="TIME_1">^2</xliff:g> i bakgrunden\nsedan batteriet senast var fulladdat"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> sammanlagt • <xliff:g id="TIME_1">^2</xliff:g> i bakgrunden\nunder de senaste 24 timmarna"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"<xliff:g id="TIME_0">^1</xliff:g> totalt • <xliff:g id="TIME_1">^2</xliff:g> bakgrundsanvändning\nunder perioden <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
@@ -2849,6 +2852,10 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Informationen om batteriförbrukning är en uppskattning och speglar inte användningen när telefonen laddas"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Information om batteriförbrukning blir tillgänglig när du har använt telefonen några timmar"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Diagram över batteriförbrukning"</string>
+    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
+    <skip />
+    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Processtatistik"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Nördig statistik om processer som körs"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Minnesanvändning"</string>
@@ -2934,7 +2941,7 @@
     <string name="usage_access_title" msgid="1580006124578134850">"Appar med åtkomst"</string>
     <string name="ca_certificate" msgid="3076484307693855611">"CA-certifikat"</string>
     <string name="user_certificate" msgid="6897024598058566466">"VPN- och appanvändarcertifikat"</string>
-    <string name="wifi_certificate" msgid="8461905432409380387">"Wi‑Fi-certifikat"</string>
+    <string name="wifi_certificate" msgid="8461905432409380387">"Wifi-certifikat"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Din data kommer inte att vara privat"</string>
     <string name="ca_certificate_warning_description" msgid="8409850109551028774">"CA-certifikat används av webbplatser, appar och VPN-nätverk i krypteringssyfte. Installera endast CA-certifikat från organisationer du litar på. \n\nOm du installerar ett CA-certifikat kan certifikatsägaren få åtkomst till din data, (t.ex. lösenord eller kreditkortsuppgifter) från webbplatser du besöker eller appar du använder – även om din data är krypterad."</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Installera inte"</string>
@@ -4598,7 +4605,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"Användning av mobildata"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Appars dataanvändning"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Dataanvändning via wifi"</string>
-    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Dataanvändning via nätverk som inte tillhör operatörer"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Dataanvändning för andra nätverk"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Användning av ethernetdata"</string>
     <string name="wifi" msgid="2932584495223243842">"Wifi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
@@ -4673,8 +4680,10 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Aktivera nu"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Inaktivera nu"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Batterioptimering används inte"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"Hantera batterianvändning"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Ange batterianvändning för appar"</string>
+    <!-- no translation found for app_battery_usage_title (346558380609793334) -->
+    <skip />
+    <!-- no translation found for app_battery_usage_summary (6349965904306339539) -->
+    <skip />
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Obegränsad"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimerad"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Begränsad"</string>
@@ -5411,6 +5420,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Fäst mediespelare"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Mediespelaren förblir öppen i snabbinställningarna så att du snabbt kan återuppta uppspelningen"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Visa medierekommendationer"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Baserat på din aktivitet"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Dölj spelare"</string>

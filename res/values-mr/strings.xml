@@ -70,10 +70,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"तुमचे डिव्हाइस <xliff:g id="DEVICE_NAME">%1$s</xliff:g>वरून डिस्कनेक्ट होईल."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"नवीन डिव्हाइससोबत पेअर करा"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"ब्लूटूथ"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"उजवा कान पेअर करा"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"डावा कान पेअर करा"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"तुमचा दुसरा कान पेअर करा"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"तुमचे डावे श्रवणयंत्र कनेक्ट केलेले आहे.\n\nउजवे पेअर करण्‍यासाठी, ते सुरू केलेले आणि पेअर करण्याकरिता तयार असल्याची खात्री करा."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"तुमचे उजवे श्रवणयंत्र कनेक्ट केलेले आहे.\n\nडावे पेअर करण्‍यासाठी, ते सुरू केलेले आणि पेअर करण्याकरिता तयार असल्याची खात्री करा."</string>
@@ -2063,7 +2061,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"अ‍ॅप प्राधान्ये रीसेट करायची?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"हे यासाठी सर्व प्राधान्ये रीसेट करेल:\n\n"<li>"बंद केलेली अ‍ॅप्स"</li>\n<li>"बंद केलेल्या अ‍ॅप्स सूचना"</li>\n<li>"वेगवेगळ्या कृतींसाठी डीफॉल्ट अ‍ॅप्लिकेशन"</li>\n<li>"अ‍ॅप्ससाठी बॅकग्राउंड डेटा निर्बंध"</li>\n<li>"परवानगीशी संबंधित कोणतेही निर्बंध"</li>\n<li>"बॅटरीच्या वापराची सेटिंग्ज"</li>\n\n"तुम्ही कोणताही अ‍ॅप डेटा गमावणार नाही."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"अ‍ॅप्स रीसेट करा"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"जागा व्यवस्थापित करा"</string>
     <string name="filter" msgid="9039576690686251462">"फिल्टर"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"फिल्टर पर्याय निवडा"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"सर्व अ‍ॅप्स"</string>
@@ -2680,7 +2677,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"बॅटरी वापर"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"मागील २४ तासांमधील वापर पहा"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"पूर्ण चार्ज झाल्यानंतरचा बॅटरी वापर पहा"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"बॅटरी वापर"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"अ‍ॅप बॅटरी वापर"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"तपशील वापरा"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"पॉवर वापर समायोजित करा"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"समाविष्ट पॅकेज"</string>
@@ -2699,8 +2696,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"काही वैशिष्ट्ये मर्यादित असू शकतात"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"उच्च बॅटरी वापर"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"सर्वात जास्त वापरली जाणारी ॲप्स पहा"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"चार्जिंग तात्पुरते मर्यादित आहे"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"तुमची बॅटरी वाचवण्यासाठी. अधिक जाणून घ्या."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"चार्ज करणे थांबवले आहे"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"बॅटरीचे आयुष्य वाढवण्यासाठी बॅटरीचे संरक्षण करत आहे\nअधिक जाणून घेण्यासाठी टॅप करा"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"चार्जिंग पुन्हा सुरू करा"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"उच्च तापमान आणि दीर्घ कालावधीसाठी चार्जिंग करणे यांसारख्या काही परिस्थितींमध्ये, बॅटरीची क्षमता कायम ठेवण्यात मदत व्हावी यासाठी चार्जिंग हे <xliff:g id="PERCENT">%1$s</xliff:g> पर्यंत मर्यादित केले जाऊ शकते.\n\nअशा परिस्थितींमधून बाहेर पडल्यावर, तुमचा फोन नेहमीप्रमाणे आपोआप चार्ज होईल."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"उच्च तापमान आणि दीर्घ कालावधीसाठी चार्जिंग करणे यांसारख्या काही परिस्थितींमध्ये, बॅटरीची क्षमता कायम ठेवण्यात मदत व्हावी यासाठी चार्जिंग हे <xliff:g id="PERCENT">%1$s</xliff:g> पर्यंत मर्यादित केले जाऊ शकते.\n\nअशा परिस्थितींमधून बाहेर पडल्यावर, तुमचा टॅबलेट नेहमीप्रमाणे आपोआप चार्ज होईल."</string>
@@ -2736,6 +2735,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"या ॲपला बॅकग्राउंडमध्ये बॅटरी वापरता येईल. तुमची बॅटरी अपेक्षेपेक्षा लवकर संपू शकते."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"काढा"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"रद्द करा"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"पूर्ण चार्ज करा"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"तुमची अ‍ॅप्स योग्य प्रमाणात बॅटरी वापरत आहेत. तुमची अ‍ॅप्स जास्त बॅटरी वापरत असल्यास तुमचा फोन तुम्ही करू शकता अशा कृत्या सुचवेल.\n\nबॅटरी संपत आली असल्यास तुम्ही कायम बॅटरी सेव्हर सुरू करू शकता."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"तुमची अ‍ॅप्स योग्य प्रमाणात बॅटरी वापरत आहेत. तुमची अ‍ॅप्स जास्त बॅटरी वापरत असल्यास तुमचा टॅब्लेट तुम्ही करू शकता अशा कृत्या सुचवेल.\n\nबॅटरी संपत आली असल्यास तुम्ही कायम बॅटरी सेव्हर सुरू करू शकता."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"तुमची अ‍ॅप्स योग्य प्रमाणात बॅटरी वापरत आहेत. तुमची अ‍ॅप्स जास्त बॅटरी वापरत असल्यास तुमचे डिव्हाइस तुम्ही करू शकता अशा क्रिया सुचवेल. \n\nबॅटरी संपत आली असल्यास तुम्ही कायम बॅटरी सेव्हर सुरू करू शकता."</string>
@@ -2780,7 +2780,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"पूर्ण चार्ज सुमारे इतका वेळ टिकते"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"बॅटरी वापर डेटा अंदाजे आहे आणि वापराच्या आधारे बदलू शकतो."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"बॅटरी वापर"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"बॅटरी वापर व्यवस्थापित करा"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"एकूण <xliff:g id="TIME_0">^1</xliff:g> • शेवटची पूर्ण चार्ज केल्यानंतर\nबॅटरीचा बॅकग्राउंडमध्ये <xliff:g id="TIME_1">^2</xliff:g> वापर केला गेला"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"एकूण <xliff:g id="TIME_0">^1</xliff:g> • मागील २४ तासांमध्ये\nबॅटरीचा बॅकग्राउंडमध्ये <xliff:g id="TIME_1">^2</xliff:g> वापर केला गेला"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"एकूण <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_PERIOD">^3</xliff:g> या कालावधीमध्ये\nबॅटरीचा बॅकग्राउंडमध्ये <xliff:g id="TIME_1">^2</xliff:g> वेळ वापर केला गेला"</string>
@@ -2849,6 +2848,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"बॅटरीच्या वापराचा डेटा अंदाजे आहे आणि तो फोन चार्ज होत असताना बॅटरीचा वापर मोजत नाही"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"तुम्ही तुमचा फोन वापरल्यानंतर काही तासांनी बॅटरी वापर डेटा उपलब्ध होईल"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"बॅटरी वापर चार्ट"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"दैनिक बॅटरी वापर चार्ट"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"तासानुसार बॅटरी वापर चार्ट"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"प्रक्रिया आकडेवारी"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"चालत असलेल्या प्रक्रियांबद्दल गीकी आकडेवारी"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"मेमरी वापर"</string>
@@ -4673,8 +4674,8 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"आता सुरू करा"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"आता बंद करा"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"बॅटरी ऑप्टिमायझेशन वापरत नाही"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"बॅटरी वापर व्यवस्थापित करा"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"अ‍ॅप्ससाठी बॅटरी वापर सेट करा"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"अ‍ॅप बॅटरी वापर"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"अ‍ॅप्ससाठी बॅटरी वापर सेट करा"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"प्रतिबंधित केलेली नाही"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"ऑप्टिमाइझ केली"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"प्रतिबंधित केली"</string>
@@ -4981,7 +4982,7 @@
     <string name="storage_audio" msgid="5994664984472140386">"ऑडिओ"</string>
     <string name="storage_apps" msgid="3564291603258795216">"ॲप्स"</string>
     <string name="storage_documents_and_other" msgid="3293689243732236480">"दस्तऐवज आणि इतर"</string>
-    <string name="storage_system" msgid="8472410119822911844">"सिस्टम"</string>
+    <string name="storage_system" msgid="8472410119822911844">"सिस्टीम"</string>
     <string name="storage_trash" msgid="2807138998886084856">"ट्रॅश"</string>
     <string name="storage_trash_dialog_title" msgid="2296169576049935200">"ट्रॅश रिकामा करायचा?"</string>
     <string name="storage_trash_dialog_ask_message" msgid="8982602137242358798">"ट्रॅशमध्ये <xliff:g id="TOTAL">%1$s</xliff:g> फाइल आहेत. सर्व आयटम कायमचे हटवले जातील आणि तुम्हाला ते रिस्टोअर करता येणार नाहीत."</string>
@@ -5411,6 +5412,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"मीडिया"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"मीडिया प्लेअर पिन करा"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"प्लेबॅक करणे पुन्‍हा झटपट सुरू करण्यासाठी, क्विक सेटिंग्जमध्ये मीडिया प्लेअर उघडा राहतो"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"मीडियासंबंधित शिफारशी दाखवा"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"तुमच्या अ‍ॅक्टिव्हिटीवर आधारित"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"प्‍लेअर लपवा"</string>

@@ -70,10 +70,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Tu dispositivo se desconectará de <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Emparejar nuevo dispositivo"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Emparejar derecho"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Emparejar izquierdo"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Empareja el otro audífono"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Tu audífono izquierdo está conectado.\n\nPara emparejar el derecho, asegúrate de que está encendido y listo para emparejarse."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Tu audífono derecho está conectado.\n\nPara emparejar el izquierdo, asegúrate de que está encendido y listo para emparejarse."</string>
@@ -300,7 +298,7 @@
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Cargando…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Las aplicaciones que tengan permiso para detectar dispositivos cercanos pueden determinar la posición relativa de los dispositivos conectados."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Las aplicaciones y los servicios no pueden acceder a la ubicación. Aun así, quizá se envíe la ubicación del dispositivo a los servicios de emergencia cuando llames o envíes mensajes a números de emergencia."</string>
-    <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"Consulta más información sobre los ajustes de ubicación."</string>
+    <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"Más información sobre los ajustes de ubicación"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Cuentas"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Seguridad"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Cifrado y credenciales"</string>
@@ -574,7 +572,7 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"¿Quitar todas las huellas?"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"Quitar \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"¿Quieres eliminar esta huella digital?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Se eliminarán las imágenes y el modelo de huella digital asociados a \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que están almacenados en tu dispositivo"</string>
+    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Se eliminarán las imágenes y el modelo de huella digital asociados a \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que están almacenados en tu dispositivo."</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"No podrás usar tu huella digital para desbloquear el teléfono ni para verificar que eres tú en aplicaciones."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"No podrás usar tu huella digital para desbloquear un perfil de trabajo, autorizar compras o iniciar sesión en aplicaciones de trabajo."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Sí, quitar"</string>
@@ -1230,7 +1228,7 @@
     <string name="sound_settings" msgid="7622986039384531304">"Sonido y vibración"</string>
     <string name="all_volume_title" msgid="6196367642878437513">"Volumen"</string>
     <string name="musicfx_title" msgid="5458574743312283473">"Efectos de música"</string>
-    <string name="ring_volume_title" msgid="4869034595079914541">"Volumen del tono y de las notificaciones"</string>
+    <string name="ring_volume_title" msgid="4869034595079914541">"Volumen de tonos y notificaciones"</string>
     <string name="vibrate_in_silent_title" msgid="5076579100685867363">"Vibrar en modo Silencio"</string>
     <string name="notification_sound_title" msgid="8747567935870133157">"Sonido de notificación predeterminado"</string>
     <string name="incoming_call_volume_title" msgid="8445408274513654261">"Tono"</string>
@@ -2060,10 +2058,9 @@
     <string name="show_background_processes" msgid="5682856012453562151">"Procesos en caché"</string>
     <string name="default_emergency_app" msgid="1929974800666613803">"Aplicación Emergencia"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"Recuperar ajustes de aplicaciones"</string>
-    <string name="reset_app_preferences_title" msgid="8935136792316050759">"¿Recuperar preferencias de las aplicaciones?"</string>
+    <string name="reset_app_preferences_title" msgid="8935136792316050759">"¿Restablecer preferencias de las aplicaciones?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Se recuperarán todas las preferencias de:\n\n"<li>"Aplicaciones inhabilitadas"</li>\n<li>"Notificaciones de aplicaciones inhabilitadas"</li>\n<li>"Aplicaciones predeterminadas para acciones"</li>\n<li>"Restricciones de datos en segundo plano de aplicaciones"</li>\n<li>"Restricciones de permisos"</li>\n<li>"Ajustes del uso de batería"</li>\n\n"No se perderán los datos de las aplicaciones."</string>
-    <string name="reset_app_preferences_button" msgid="2591318711372850058">"Recuperar aplicaciones"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"Gestionar espacio"</string>
+    <string name="reset_app_preferences_button" msgid="2591318711372850058">"Restablecer aplicaciones"</string>
     <string name="filter" msgid="9039576690686251462">"Filtrar"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Seleccionar opciones de filtrado"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Todas las aplicaciones"</string>
@@ -2340,7 +2337,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Para usar una función de accesibilidad, desliza hacia arriba con dos dedos desde la parte inferior de la pantalla.\n\nPara pasar de una función a otra, desliza hacia arriba con dos dedos y mantén pulsada la pantalla."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Para usar una función de accesibilidad, desliza hacia arriba con tres dedos desde la parte inferior de la pantalla.\n\nPara pasar de una función a otra, desliza hacia arriba con tres dedos y mantén pulsada la pantalla."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Entendido"</string>
-    <string name="accessibility_tutorial_dialog_link_button" msgid="1624189347106713695">"Ajustes del botón Accesibilidad"</string>
+    <string name="accessibility_tutorial_dialog_link_button" msgid="1624189347106713695">"Ajustes del botón de accesibilidad"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Acceso directo a <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Botón de accesibilidad"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gesto de accesibilidad"</string>
@@ -2416,7 +2413,7 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Acceso directo a Invertir colores"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Invertir colores hace que las pantallas claras se vuelvan oscuras y que las pantallas oscuras se vuelvan claras."</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Ten en cuenta lo siguiente:&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Los colores cambiarán en el contenido multimedia y las imágenes.&lt;/li&gt; &lt;li&gt; Invertir colores funciona en todas las aplicaciones.&lt;/li&gt; &lt;li&gt; Si lo que quieres es que se muestre un fondo oscuro, prueba mejor a usar el tema oscuro.&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automático (tiempo de permanencia)"</string>
+    <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automático (tiempo permanencia)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Clic automático (permanencia)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Más información sobre el clic automático (tiempo de permanencia)"</string>
     <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"Puedes configurar un ratón conectado para que haga clic automáticamente cuando el cursor deje de moverse durante un intervalo de tiempo determinado"</string>
@@ -2680,7 +2677,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Uso de batería"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Consulta el uso durante las últimas 24 horas"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Consulta el uso desde la última carga de la batería"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Uso de batería"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Uso de batería de la aplicación"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Detalles de uso"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Cómo reducir el uso de la batería"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Paquetes incluidos"</string>
@@ -2699,8 +2696,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Es posible que algunas funciones estén limitadas"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Mayor uso de batería"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Consulta las aplicaciones que consumen más batería"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Carga limitada temporalmente"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Para conservar la salud de la batería. Más información"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Carga en pausa"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Protegiendo la batería para aumentar su duración\nToca para obtener más información"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Seguir cargando"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"En determinadas circunstancias (por ejemplo, cuando la temperatura es alta o va a estar mucho tiempo  conectado al cargador), el teléfono puede limitar la carga hasta el <xliff:g id="PERCENT">%1$s</xliff:g> para mantener la salud de la batería.\n\nUna vez que dejen de darse estas circunstancias, el teléfono se cargará de nuevo con normalidad."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"En determinadas circunstancias (por ejemplo, cuando la temperatura es alta o va a estar mucho tiempo  conectado al cargador), el tablet puede limitar la carga hasta el <xliff:g id="PERCENT">%1$s</xliff:g> para mantener la salud de la batería.\n\nUna vez que dejen de darse estas circunstancias, el tablet se cargará de nuevo con normalidad."</string>
@@ -2736,6 +2735,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Esta aplicación podrá usar la batería en segundo plano. Es posible que la batería se agote antes de lo esperado."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Quitar"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Cancelar"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Cargar por completo"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Tus aplicaciones usan una cantidad normal de batería. Si consumieran demasiada, el teléfono te recomendaría medidas para evitarlo.\n\nSi te queda poca carga, también puedes activar Ahorro de batería."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Tus aplicaciones usan una cantidad normal de batería. Si consumieran demasiada, el tablet te recomendaría medidas para evitarlo.\n\nSi te queda poca carga, también puedes activar Ahorro de batería."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Tus aplicaciones usan una cantidad normal de batería. Si consumieran demasiada, el dispositivo te recomendaría medidas para evitarlo.\n\nSi te queda poca carga, también puedes activar Ahorro de batería."</string>
@@ -2780,7 +2780,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Duración aproximada de una carga completa"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Los datos de uso de la batería son aproximados y pueden variar en función del uso."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Uso de batería"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Gestionar uso de la batería"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> en total • <xliff:g id="TIME_1">^2</xliff:g> en segundo plano\ndesde la última carga completa"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> en total • <xliff:g id="TIME_1">^2</xliff:g> en segundo plano\ndurante las últimas 24 horas"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"<xliff:g id="TIME_0">^1</xliff:g> en total • <xliff:g id="TIME_1">^2</xliff:g> en segundo plano\ndurante <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
@@ -2849,6 +2848,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Los datos de uso de la batería son aproximados y no miden el uso que se hace cuando el teléfono se está cargando"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Los datos de uso de batería estarán disponibles después de haber usado el teléfono unas horas"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Gráfico del uso de batería"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Gráfico de uso de batería diario"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Gráfico de uso de batería por horas"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Estadísticas de procesos"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Estadísticas técnicas sobre procesos en ejecución"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Uso de memoria"</string>
@@ -2915,7 +2916,7 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Activado"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Desactivado"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Almacenamiento de credenciales"</string>
-    <string name="credentials_install" msgid="3933218407598415827">"Instalar certificados"</string>
+    <string name="credentials_install" msgid="3933218407598415827">"Instalar un certificado"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Instala certificados desde el almacenamiento"</string>
     <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"Instala certificados desde la tarjeta SD"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Borrar credenciales"</string>
@@ -3285,7 +3286,7 @@
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"Ampliar ajustes de aplicación"</string>
     <string name="user_choose_copy_apps_to_another_user" msgid="5914037067347012870">"Selecciona las apps que quieres instalar"</string>
     <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"Instalar aplicaciones disponibles"</string>
-    <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Pagos contactless"</string>
+    <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Pagos sin contacto"</string>
     <string name="nfc_default_payment_settings_title" msgid="2150504446774382261">"Aplicación para pagos predeterminada"</string>
     <string name="nfc_default_payment_footer" msgid="978535088340021360">"Para pagar con una aplicación para pagos, acerca la parte posterior del dispositivo a un terminal"</string>
     <string name="nfc_more_details" msgid="1700713533074275233">"Más información"</string>
@@ -3787,10 +3788,10 @@
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificaciones en pantalla de bloqueo"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostrar conversaciones predeterminadas y silenciosas"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostrar conversaciones predeterminadas y silenciosas"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Ocultar conversaciones y notificaciones silenciosas"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Oculta conversaciones y notificaciones silenciosas"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"No mostrar ninguna notificación"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Notificaciones sensibles"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Mostrar contenido sensible en la pantalla de bloqueo"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Muestra contenido sensible en la pantalla de bloqueo"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Notificaciones sensibles del perfil de trabajo"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Mostrar contenido sensible del perfil de trabajo en la pantalla de bloqueo"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Mostrar todo el contenido de las notificaciones"</string>
@@ -3858,7 +3859,7 @@
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Sin sonido ni vibración"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Sin sonido ni vibración, y se muestra más abajo en la sección de conversaciones"</string>
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"Puede sonar o vibrar según los ajustes del teléfono"</string>
-    <string name="notification_channel_summary_high" msgid="3411637309360617621">"Cuando el dispositivo esté desbloqueado, muestra las notificaciones en la parte superior de la pantalla"</string>
+    <string name="notification_channel_summary_high" msgid="3411637309360617621">"Cuando el dispositivo esté desbloqueado, muestra las notificaciones como un banner en la parte superior de la pantalla"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Todas las notificaciones de \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Todas las notificaciones de <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Notificaciones adaptativas"</string>
@@ -3914,7 +3915,7 @@
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Aplicaciones que se muestran en el dispositivo"</string>
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Esta aplicación no admite la configuración avanzada"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servicios de ayuda de RV"</string>
-    <string name="no_vr_listeners" msgid="8442646085375949755">"Ninguna aplicación instalada ha solicitado ejecutarse como servicios de ayuda de RV."</string>
+    <string name="no_vr_listeners" msgid="8442646085375949755">"Ninguna aplicación instalada ha solicitado ejecutarse como servicio de ayuda de RV."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"¿Permitir que el servicio de RV acceda a <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> podrá ejecutarse cuando utilices aplicaciones en el modo de realidad virtual."</string>
     <string name="display_vr_pref_title" msgid="4850474436291113569">"Cuando el dispositivo está en RV"</string>
@@ -4673,8 +4674,8 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Activar ahora"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Desactivar ahora"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"No se está utilizando la optimización de la batería"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"Gestionar el uso de batería"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Configurar el uso de batería de las aplicaciones"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Uso de batería de las aplicaciones"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Configurar el uso de batería de las aplicaciones"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Sin restricciones"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimizado"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Restringido"</string>
@@ -5368,7 +5369,7 @@
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Predeterminado del sistema"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Esta opción ya no es válida. Vuelve a intentarlo."</string>
     <string name="power_menu_setting_name" msgid="2394440932633137229">"Mantener pulsado el botón de encendido"</string>
-    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Mantener pulsado el botón de encendido para acceder"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Mantener pulsado el botón de encendido para acceder a"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Menú de encendido"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Asistente digital"</string>
     <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Acceder al asistente digital"</string>
@@ -5411,6 +5412,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Multimedia"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Fijar reproductor multimedia"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Para seguir rápidamente por donde lo habías dejado, el reproductor multimedia se queda abierto en los ajustes rápidos"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Mostrar recomendaciones de contenido multimedia"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Según tu actividad"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Ocultar reproductor"</string>

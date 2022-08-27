@@ -369,10 +369,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             addFooterPreferenceIfNeeded(false);
             return false;
         }
-        if (mBatteryUsageMap == null) {
-            // Battery usage data is not ready, wait for data ready to refresh UI.
-            return false;
-        }
 
         if (isBatteryLevelDataInOneDay()) {
             // Only 1 day data, hide the daily chart view.
@@ -394,6 +390,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             mHourlyChartView.setViewModel(hourlyViewModel);
         }
 
+        if (mBatteryUsageMap == null) {
+            // Battery usage data is not ready, wait for data ready to refresh UI.
+            return false;
+        }
         mHandler.post(() -> {
             final long start = System.currentTimeMillis();
             removeAndCacheAllPrefs();

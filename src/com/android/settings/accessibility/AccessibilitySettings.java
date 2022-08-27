@@ -251,8 +251,8 @@ public class AccessibilitySettings extends DashboardFragment {
                     : context.getText(R.string.accessibility_summary_shortcut_disabled);
         } else {
             serviceState = serviceEnabled
-                    ? context.getText(R.string.accessibility_summary_state_enabled)
-                    : context.getText(R.string.accessibility_summary_state_disabled);
+                    ? context.getText(R.string.on)
+                    : context.getText(R.string.off);
         }
 
         final CharSequence serviceSummary = info.loadSummary(context.getPackageManager());

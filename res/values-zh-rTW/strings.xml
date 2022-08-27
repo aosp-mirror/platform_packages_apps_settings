@@ -70,10 +70,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"你的裝置將與「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」中斷連線。"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"配對新裝置"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"藍牙"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"配對右耳的裝置"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"配對左耳的裝置"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"配對另一耳的裝置"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"左耳助聽器連線成功。\n\n如要配對右耳，請確認該耳助聽器已開啟並可開始配對。"</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"右耳助聽器連線成功。\n\n如要配對左耳，請確認該耳助聽器已開啟並可開始配對。"</string>
@@ -576,7 +574,7 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"要移除所有指紋嗎？"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"移除「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"要刪除這個指紋嗎？"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"這麼做會刪除與裝置上儲存的「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」相關聯的指紋圖像和模型"</string>
+    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"系統會一併刪除裝置上與「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」連結的指紋圖像和模型"</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"你將無法使用指紋解鎖手機或在應用程式中驗證身分。"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"你將無法使用指紋解鎖工作資料夾、授權購買交易，或是登入工作應用程式。"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"是，移除"</string>
@@ -899,7 +897,7 @@
     <string name="wifi_ask_disable" msgid="1663208096020309639">"「<xliff:g id="REQUESTER">%s</xliff:g>」要求關閉 Wi-Fi"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"驗證可偵錯應用程式的位元碼"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"允許 ART 驗證可偵錯應用程式的位元碼"</string>
-    <string name="show_refresh_rate" msgid="5742688821872354973">"顯示重新整理頻率"</string>
+    <string name="show_refresh_rate" msgid="5742688821872354973">"顯示刷新率"</string>
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"顯示目前的螢幕重新整理頻率"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="3622326550467939809">"允許平板電腦與 NFC 裝置接觸時交換資料"</string>
@@ -2065,7 +2063,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"重設應用程式偏好設定？"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"這麼做會重設下列項目的所有偏好設定：\n\n"<li>"已停用的應用程式"</li>\n<li>"已停用的應用程式通知"</li>\n<li>"執行動作的預設應用程式"</li>\n<li>"應用程式背景資料限制"</li>\n<li>"任何權限限制"</li>\n<li>"電池用量設定"</li>\n\n"你不會遺失任何應用程式資料。"</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"重設應用程式"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"管理空間"</string>
     <string name="filter" msgid="9039576690686251462">"篩選"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"選擇篩選器選項"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"所有應用程式"</string>
@@ -2343,7 +2340,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"如要使用無障礙功能，請用 3 指從螢幕底部向上滑動。\n\n如要切換不同的功能，請用 3 指向上滑動並按住。"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"我知道了"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="1624189347106713695">"無障礙工具按鈕設定"</string>
-    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"「<xliff:g id="SERVICE">%1$s</xliff:g>」快速鍵"</string>
+    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"「<xliff:g id="SERVICE">%1$s</xliff:g>」捷徑"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"無障礙工具按鈕"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"無障礙手勢"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"使用 2 指向上滑動"</string>
@@ -2682,7 +2679,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"電池用量"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"查看過去 24 小時的使用情形"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"查看最近一次充飽電後的使用情形"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"電池用量"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"應用程式電池用量"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"使用狀況詳細資訊"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"調整電力使用"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"已包含封裝檔案"</string>
@@ -2701,8 +2698,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"部分功能可能受到限制"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"電池用量較高的應用程式"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看電池用量最高的應用程式"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"已暫時限制充電"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"這是為了延長電池壽命。瞭解詳情。"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"暫停充電"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"保護電池並延長電池壽命\n輕觸即可瞭解詳情"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"繼續充電"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"在高溫和長時間充電等特定情況下，手機可能會將充電量限制在 <xliff:g id="PERCENT">%1$s</xliff:g> 以延長電池壽命。\n\n當上述情況解除後，手機就會自動正常充電。"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"在高溫和長時間充電等特定情況下，平板電腦可能會將充電量限制在 <xliff:g id="PERCENT">%1$s</xliff:g> 以延長電池壽命。\n\n當上述情況解除後，平板電腦就會自動正常充電。"</string>
@@ -2738,6 +2737,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"這個應用程式將會在背景耗用電量。你的電池電力可能會比預期更快耗盡。"</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"移除"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"取消"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"將電池充飽"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"你的應用程式目前耗用的電力正常。如果應用程式耗用過多電力，你的手機會為你提供操作建議。\n\n如果電池電量偏低，你隨時可以開啟省電模式。"</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"你的應用程式目前耗用的電力正常。如果應用程式耗用過多電力，你的平板電腦會為你提供操作建議。\n\n如果電池電量偏低，你隨時可以開啟省電模式。"</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"你的應用程式目前耗用的電力正常。如果應用程式耗用過多電力，裝置會提供相關操作建議。\n\n如果電池電量偏低，你隨時可以開啟省電模式。"</string>
@@ -2782,7 +2782,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"電池在充飽後的預估使用時間"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"電池用量資料為概略值，而且可能會隨使用情形而有變化。"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"電池用量"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"管理電池用量"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"總共使用 <xliff:g id="TIME_0">^1</xliff:g> • 背景使用 <xliff:g id="TIME_1">^2</xliff:g>\n(從上次充飽電後)"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"總共使用 <xliff:g id="TIME_0">^1</xliff:g> • 背景使用 <xliff:g id="TIME_1">^2</xliff:g>\n(過去 24 小時)"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"總共使用 <xliff:g id="TIME_0">^1</xliff:g> • 背景使用 <xliff:g id="TIME_1">^2</xliff:g>\n(<xliff:g id="TIME_PERIOD">^3</xliff:g>)"</string>
@@ -2851,6 +2850,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"電池用量資料為概略值，而且手機在充電時不會估算電池用量"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"手機使用幾小時後，才會顯示電池用量資料"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"電池用量圖表"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"每日電池用量圖表"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"每小時電池用量圖表"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"處理程序統計資料"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"執行中處理程序的相關完善統計資料"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"記憶體用量"</string>
@@ -3593,7 +3594,7 @@
     <string name="live_caption_title" msgid="8617086825712756983">"即時字幕"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"自動產生媒體字幕"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"手機喇叭"</string>
-    <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"有線耳罩式耳機"</string>
+    <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"有線耳機"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"相容媒體裝置可提供更有臨場感的聲音體驗"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"已關閉"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"已開啟/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
@@ -4039,7 +4040,7 @@
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"「零打擾」模式的行為"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"使用預設設定"</string>
     <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"為這項排程建立自訂設定"</string>
-    <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"用於「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」"</string>
+    <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」排程"</string>
     <string name="summary_divider_text" msgid="8836285171484563986">"、 "</string>
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="6022314482293187463">"<xliff:g id="START">%1$s</xliff:g>到<xliff:g id="END">%2$s</xliff:g>"</string>
@@ -4057,7 +4058,7 @@
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"通話"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"例外的通話"</string>
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"為了確保你在接到允許的來電時會聽到音效，請確認裝置已設為響鈴"</string>
-    <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"系統會在「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」啟用時封鎖來電。你可以調整設定，讓好友、家人或其他聯絡人能聯絡你。"</string>
+    <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"系統會在「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」排程啟用時封鎖來電。你可以調整設定，讓好友、家人或其他聯絡人能聯絡你。"</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"已加星號的聯絡人"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{無}=1{{contact_1}}=2{{contact_1}和{contact_2}}=3{{contact_1}、{contact_2}和{contact_3}}other{{contact_1}、{contact_2}和另外 # 人}}"</string>
     <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(無顯示名稱)"</string>
@@ -4675,8 +4676,8 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"立即開啟"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"立即關閉"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"未使用電池效能最佳化功能"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"管理電池用量"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"設定應用程式電池用量"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"應用程式電池用量"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"設定應用程式電池用量"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"無限制"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"最佳化"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"受限制"</string>
@@ -4982,7 +4983,7 @@
     <string name="storage_videos" msgid="6117698226447251033">"影片"</string>
     <string name="storage_audio" msgid="5994664984472140386">"音訊"</string>
     <string name="storage_apps" msgid="3564291603258795216">"應用程式"</string>
-    <string name="storage_documents_and_other" msgid="3293689243732236480">"文件及其他內容"</string>
+    <string name="storage_documents_and_other" msgid="3293689243732236480">"文件和其他檔案"</string>
     <string name="storage_system" msgid="8472410119822911844">"系統"</string>
     <string name="storage_trash" msgid="2807138998886084856">"垃圾桶"</string>
     <string name="storage_trash_dialog_title" msgid="2296169576049935200">"要清空垃圾桶嗎？"</string>
@@ -5384,8 +5385,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"長"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"顯示電子錢包"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"允許從螢幕鎖定畫面使用數位錢包"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"顯示 QR 圖碼掃描器"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"允許從螢幕鎖定畫面使用 QR 圖碼掃描器"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"顯示 QR code 掃描器"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"允許從螢幕鎖定畫面使用 QR code 掃描器"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"顯示裝置控制"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"在螢幕鎖定畫面上顯示外部裝置的控制選項"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"透過未解鎖的裝置控制"</string>
@@ -5413,6 +5414,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"媒體"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"固定媒體播放器"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"讓快速設定中的媒體播放器保持開啟狀態，以便快速恢復播放"</string>
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"在螢幕鎖定畫面上顯示媒體"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"媒體播放器會在螢幕鎖定畫面上保持開啟狀態，以便快速繼續播放"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"顯示媒體推薦內容"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"根據你的活動"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"隱藏播放器"</string>
