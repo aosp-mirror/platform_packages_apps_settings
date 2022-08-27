@@ -70,10 +70,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Seu dispositivo se desconectará de <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Parear novo dispositivo"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Parear lado direito"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Parear lado esquerdo"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Pareie o outro lado"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Seu aparelho auditivo esquerdo está conectado.\n\nPara parear o direito, confira se ele está ligado e pronto para parear."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Seu aparelho auditivo direito está conectado.\n\nPara parear o esquerdo, confira se ele está ligado e pronto para parear."</string>
@@ -2065,7 +2063,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Redefinir apps?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Isso vai redefinir todas as preferências para:\n\n"<li>"apps desativados;"</li>\n<li>"notificações de apps desativados;"</li>\n<li>"apps padrão para ações;"</li>\n<li>"restrições de dados em segundo plano para apps;"</li>\n<li>"qualquer restrição de permissão;"</li>\n<li>"configurações de uso da bateria."</li>\n\n"Você não vai perder nenhum dado do app."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Redefinir apps"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"Gerenciar espaço"</string>
     <string name="filter" msgid="9039576690686251462">"Filtro"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Selecione as opções de filtro"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Todos os apps"</string>
@@ -2682,7 +2679,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Uso da bateria"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Ver o uso nas últimas 24 horas"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Ver o uso desde a última carga completa"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Uso da bateria"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Uso da bateria pelo app"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Detalhes de uso"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Ajustar uso de energia"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Pacotes incluídos"</string>
@@ -2701,8 +2698,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Alguns recursos podem ser limitados"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Maior uso da bateria"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Ver apps com maior uso"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Carregamento temporariamente limitado"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Para economia de bateria. Saiba mais."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"O carregamento está pausado"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Protegendo a bateria para prolongar a vida útil dela\nToque para saber mais"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Retomar o carregamento"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Em determinadas condições, como temperaturas altas ou longos períodos de carregamento, a carga pode ser limitada a <xliff:g id="PERCENT">%1$s</xliff:g> para preservar a integridade da bateria.\n\nQuando sair de uma condição assim, o smartphone voltará a ser carregado normalmente."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Em determinadas condições, como temperaturas altas ou longos períodos de carregamento, a carga pode ser limitada a <xliff:g id="PERCENT">%1$s</xliff:g> para preservar a integridade da bateria.\n\nQuando sair de uma condição assim, o tablet voltará a ser carregado normalmente."</string>
@@ -2738,6 +2737,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Esse app poderá usar a bateria em segundo plano. É possível que sua bateria acabe antes do esperado."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Remover"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Cancelar"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Carregar totalmente"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Seus apps estão consumindo uma quantidade normal de bateria. Se o consumo for excessivo, algumas ações serão sugeridas no smartphone.\n\nSe a bateria estiver acabando, você poderá ativar o recurso Economia de bateria."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Seus apps estão consumindo uma quantidade normal de bateria. Se o consumo for excessivo, algumas ações serão sugeridas no tablet.\n\nSe a bateria estiver acabando, você poderá ativar o recurso Economia de bateria."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Seus apps estão consumindo uma quantidade normal de bateria. Se o consumo for excessivo, algumas ações serão sugeridas no dispositivo.\n\nSe a bateria estiver acabando, você poderá ativar o recurso Economia de bateria."</string>
@@ -2782,7 +2782,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"A carga completa dura cerca de"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Os dados de uso da bateria são aproximados e podem mudar conforme o uso."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Uso da bateria"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Gerenciar uso da bateria"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Total: <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> em segundo plano\ndesde a última carga completa"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Total: <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> em segundo plano\nnas últimas 24h"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Total: <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> em segundo plano\nno período entre <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
@@ -2851,6 +2850,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Os dados de uso da bateria são aproximados e não medem o uso durante o carregamento do smartphone."</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Os dados de uso da bateria ficam disponíveis após algumas horas de uso do smartphone."</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Gráfico de uso da bateria"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Gráfico de uso diário da bateria"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Gráfico de uso da bateria por hora"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Estatísticas de processo"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Estatísticas detalhadas sobre os processos em execução"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Uso da memória"</string>
@@ -3859,7 +3860,7 @@
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Na aba suspensa, recolher notificações para uma única linha"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Som e vibração desativados"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"O som e a vibração estão desativados, e o balão aparece na parte inferior da seção de conversa"</string>
-    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Podem vibrar ou tocar com base nas configurações do smartphone"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Pode vibrar ou tocar com base nas configurações do smartphone"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Quando o dispositivo está desbloqueado, mostra notificações em um banner no topo da tela"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Todas as notificações de <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Todas as notificações do app <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4675,8 +4676,8 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Ativar agora"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Desativar agora"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Otimização de bateria desativada"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"Gerenciar uso da bateria"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"Definir o uso da bateria para apps"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Uso da bateria pelo app"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Definir o uso da bateria para apps"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Sem restrições"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Otimizada"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Restrita"</string>
@@ -5413,6 +5414,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"Mídia"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Fixar player de mídia"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Para retomar a reprodução rapidamente, o player de mídia fica aberto nas Configurações rápidas"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Mostrar recomendações de mídia"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Com base na sua atividade"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Ocultar player"</string>

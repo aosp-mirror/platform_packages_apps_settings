@@ -70,10 +70,8 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"თქვენი მოწყობილობა გაწყვეტს კავშირს <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-თან."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"ახალი მოწყობილობის დაწყვილება"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_right_ear_button (3979894494803078852) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_left_ear_button (1019938875726073791) -->
-    <skip />
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"დააწყვილეთ მარჯვენა დინამიკი"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"მარცხენა დინამიკის დაკავშირება"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"დააწყვილეთ სხვა დინამიკი"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"თქვენი სმენის მარცხენა მოწყობილობა დაკავშირებულია.\n\nმარჯვენის დასაწყვილებლად უნდა ჩართოთ და დასაწყვილებლად მზად უნდა იყოს ის."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"თქვენი სმენის მარჯვენა მოწყობილობა დაკავშირებულია.\n\nმარცხენის დასაწყვილებლად ის უნდა ჩართოთ და დასაწყვილებლად მზად უნდა იყოს ის."</string>
@@ -2063,7 +2061,6 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"დაბრუნდეს აპის პარამეტრები?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"ამგვარად გადაყენდება პარამეტრები შემდეგი კომპონენტებისთვის:\n\n"<li>"გათიშული აპები"</li>\n<li>"აპების გათიშული შეტყობინებები"</li>\n<li>"ქმედებებისთვის ნაგულისხმევი აპები"</li>\n<li>"ფონური მონაცემების შეზღუდვები აპებისთვის"</li>\n<li>"ნებისმიერი ნებართვის შეზღუდვა"</li>\n<li>"ბატარეის გამოყენების პარამეტრები"</li>\n\n"აპების მონაცემები არ დაიკარგება."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"აპების საწყისი მდგომარეობის აღდგენა"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"სივრცის მართვა"</string>
     <string name="filter" msgid="9039576690686251462">"გაფილტვრა"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"ფილტრის ვარიანტების არჩევა"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"ყველა აპი"</string>
@@ -2680,7 +2677,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"ბატარეის მოხმარება"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"ბოლო 24 საათის მანძილზე მოხმარების ნახვა"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"ბოლო სრული დატენვიდან მოხმარების ნახვა"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"ბატარეის მოხმარება"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"აპლიკაციის ბატარეის გამოყენება"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"გამოყენების დეტალები"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"ენერგიის მოხმარების მორგება"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"შესული პაკეტები"</string>
@@ -2699,8 +2696,10 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"ზოგიერთი ფუნქცია შეიძლება შეზღუდული იყოს"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"ბატარეის მოხმარება"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"ყველაზე დიდი მოხმარების აპების ნახვა"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"დატენვა დროებით შეზღუდულია"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"თქვენი ბატარეის დასაზოგად. შეიტყვეთ მეტი."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"დატენვა შეჩერებულია"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"ბატარეის დაცვა ბატარეის სიცოცხლის გახანგრძლივების მიზნით\nშეეხეთ მეტის გასაგებად"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"დატენვის გაგრძელება"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"გარკვეულ პირობებში, მაგალითად, მაღალი ტემპერატურის ან ხანგრძლივი დატენვის დროს, დატენვა, შესაძლოა, შეიზღუდოს <xliff:g id="PERCENT">%1$s</xliff:g>-მდე ბატარეის გამართულობის შესანარჩუნებლად.\n\nამ პირობების დასრულებისთანავე თქვენი ტელეფონი ავტომატურად ჩვეულ რეჟიმში დაიტენება."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"გარკვეულ პირობებში, მაგალითად, მაღალი ტემპერატურის ან ხანგრძლივი დატენვის დროს, დატენვა, შესაძლოა, შეიზღუდოს <xliff:g id="PERCENT">%1$s</xliff:g>-მდე ბატარეის გამართულობის შესანარჩუნებლად.\n\nამ პირობების დასრულებისთანავე თქვენი ტაბლეტი ავტომატურად ჩვეულ რეჟიმში დაიტენება."</string>
@@ -2736,6 +2735,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"ეს აპი შეძლებს თქვენი ბატარეის ფონურ რეჟიმში მოხმარებას. ამან შესაძლოა ბატარეა სწრაფად ამოწუროს."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"წაშლა"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"გაუქმება"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"სრულად დატენვა"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"თქვენი აპები ბატარეის ნორმალური მოხმარებით ხასიათდება. თუ აპები ბატარეას ზედმეტად მოიხმარს, თქვენი ტელეფონი შემოგთავაზებთ პოტენციურ ქმედებებს ამის აღსაკვეთად.\n\nამასთანავე, თქვენ ყოველთვის შეგიძლიათ ჩართოთ ბატარეის დამზოგი, თუ ბატარეა გეწურებათ."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"თქვენი აპები ბატარეის ნორმალური მოხმარებით ხასიათდება. თუ აპები ბატარეას ზედმეტად მოიხმარს, თქვენი ტაბლეტი შემოგთავაზებთ პოტენციურ ქმედებებს ამის აღსაკვეთად.\n\nამასთანავე, თქვენ ყოველთვის შეგიძლიათ ჩართოთ ბატარეის დამზოგი, თუ ბატარეა გეწურებათ."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"თქვენი აპები ბატარეის ნორმალური მოხმარებით ხასიათდება. თუ აპები ბატარეას ზედმეტად მოიხმარს, თქვენი მოწყობილობა შემოგთავაზებთ პოტენციურ ქმედებებს ამის აღსაკვეთად.\n\nამასთანავე, თქვენ ყოველთვის შეგიძლიათ ჩართოთ ბატარეის დამზოგი, თუ ბატარეა გეწურებათ."</string>
@@ -2780,7 +2780,6 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"სრული დატენვიდან მუშაობის ხანგრძლივობაა"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"ბატარეის მუშაობის მონაცემები მიახლოებითია და შეიძლება შეიცვალოს მოხმარების მიხედვით."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"ბატარეის მოხმარება"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"ბატარეის მოხმარების მართვა"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> სულ • <xliff:g id="TIME_1">^2</xliff:g> ფონურად\nბოლო სრული დატენვიდან"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"სულ <xliff:g id="TIME_0">^1</xliff:g> • ფონურად <xliff:g id="TIME_1">^2</xliff:g>\nბოლო 24 საათის განმავლობაში"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"სულ <xliff:g id="TIME_0">^1</xliff:g> • ფონურად<xliff:g id="TIME_1">^2</xliff:g>\n<xliff:g id="TIME_PERIOD">^3</xliff:g> პერიოდის განმავლობაში"</string>
@@ -2849,6 +2848,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"ბატარეის მოხმარების მონაცემები მიახლოებითია და არ ზომავს მოხმარებას დამუხტვისას"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"ბატარეის მოხმარების მონაცემები ხელმისაწვდომი გახდება მას შემდეგ, რაც ტელეფონს რამდენიმე საათით გამოიყენებთ"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"ბატარეის მოხმარების დიაგრამა"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"ბატარეის ყოველდღიური გამოყენების სქემა"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"ბატარეის სააᲗობრივი გამოყენების სქემა"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"პროცესის სტატისტიკა"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"მიმდინარე პროცესების შემაჯამებელი სტატისტიკა"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"გამოყენებული მეხსიერება"</string>
@@ -4673,8 +4674,8 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"ახლავე ჩართვა"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"ახლავე გამორთვა"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"არ იყენებს ბატარეის ოპტიმიზაციას"</string>
-    <string name="app_battery_optimization_title" msgid="389653121998016466">"ბატარეის მოხმარების მართვა"</string>
-    <string name="app_battery_optimization_summary" msgid="7864783556193427398">"დააყენეთ ბატარეის მოხმარება აპებისთვის"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"აპლიკაციის ბატარეის გამოყენება"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"დააყენეთ ბატარეის მოხმარება აპებისთვის"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"შეუზღუდავი"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"ოპტიმიზებული"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"შეზღუდული"</string>
@@ -5371,8 +5372,8 @@
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"წვდომისათვის ხანგრძლივად დააჭირეთ ჩართვის ღილაკს"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"ჩართვის მენიუ"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"ციფრული ასისტენტი"</string>
-    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"მიწვდით ციფრულ ასისტენტს"</string>
-    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"მიწვდით ჩართვის მენიუს"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"ციფრულ ასისტენტზე წვდომა"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"ჩართვის მენიუზე წვდომა"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"გამოსაყენებლად, ჯერ დააყენეთ ეკრანის ბლოკი"</string>
     <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"ჩართვის მენიუ:\nერთდროულად დააჭირეთ ჩართვის და ხმის აწევის ღილაკებს"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"თავიდან აიცილეთ რეკვა:\nდააჭირეთ ხმის ღილაკს მალსახმობისთვის"</string>
@@ -5411,6 +5412,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"მედია"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"მედია დამკვრელის ჩამაგრება"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"დაკვრის სწრაფად გასაგრძელებლად მედია დამკვრელი გახსნილი დარჩება სწრაფ პარამეტრებში"</string>
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"მედიის ჩაკეტილ ეკრანზე ჩვენება"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"დაკვრის სწრაფად გასაგრძელებლად მედია დამკვრელი გახსნილი იქნება ჩაკეტილ ეკრანზე"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"მედიარეკომენდაციების ჩვენება"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"თქვენი აქტივობის საფუძველზე"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"დამკვრელის დამალვა"</string>

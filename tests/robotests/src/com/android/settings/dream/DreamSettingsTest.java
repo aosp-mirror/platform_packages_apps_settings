@@ -29,10 +29,10 @@ import com.android.settingslib.dream.DreamBackend.WhenToDream;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.Arrays;
 import java.util.List;
-import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class DreamSettingsTest {
@@ -96,7 +96,7 @@ public class DreamSettingsTest {
         when(mockBackend.isEnabled()).thenReturn(false);
 
         assertThat(DreamSettings.getSummaryTextFromBackend(mockBackend, mockContext))
-                .isEqualTo(mockContext.getString(R.string.screensaver_settings_summary_off));
+                .isEqualTo(mockContext.getString(R.string.off));
     }
 
     @Test

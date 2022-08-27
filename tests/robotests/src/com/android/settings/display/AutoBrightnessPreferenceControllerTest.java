@@ -109,7 +109,7 @@ public class AutoBrightnessPreferenceControllerTest {
         mController.setChecked(true);
 
         assertThat(mController.getSummary())
-                .isEqualTo(mContext.getText(R.string.auto_brightness_summary_on));
+                .isEqualTo(mContext.getText(R.string.on));
     }
 
     @Test
@@ -117,7 +117,7 @@ public class AutoBrightnessPreferenceControllerTest {
         mController.setChecked(false);
 
         assertThat(mController.getSummary())
-                .isEqualTo(mContext.getText(R.string.auto_brightness_summary_off));
+                .isEqualTo(mContext.getText(R.string.off));
     }
 
     @Test

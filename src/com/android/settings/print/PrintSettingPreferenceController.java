@@ -116,7 +116,7 @@ public class PrintSettingPreferenceController extends BasePreferenceController i
             final List<PrintServiceInfo> services =
                     mPrintManager.getPrintServices(PrintManager.ENABLED_SERVICES);
             if (services == null || services.isEmpty()) {
-                return mContext.getText(R.string.print_settings_summary_no_service);
+                return mContext.getText(R.string.off);
             } else {
                 final int count = services.size();
                 return mContext.getResources().getQuantityString(

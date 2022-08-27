@@ -44,8 +44,7 @@ public class LocationForWorkPreferenceController extends LocationBasePreferenceC
             final boolean switchState = mPreference.isChecked();
             mUserManager.setUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, !switchState,
                     Utils.getManagedProfile(mUserManager));
-            mPreference.setSummary(switchState ?
-                    R.string.switch_on_text : R.string.switch_off_text);
+            mPreference.setSummary(switchState ? R.string.on : R.string.off);
             return true;
         }
         return false;
@@ -81,11 +80,11 @@ public class LocationForWorkPreferenceController extends LocationBasePreferenceC
                     mLocationEnabler.isManagedProfileRestrictedByBase();
             if (isRestrictedByBase || !enabled) {
                 mPreference.setChecked(false);
-                summaryResId = enabled ? R.string.switch_off_text
+                summaryResId = enabled ? R.string.off
                         : R.string.location_app_permission_summary_location_off;
             } else {
                 mPreference.setChecked(true);
-                summaryResId = R.string.switch_on_text;
+                summaryResId = R.string.on;
             }
             mPreference.setSummary(summaryResId);
         }

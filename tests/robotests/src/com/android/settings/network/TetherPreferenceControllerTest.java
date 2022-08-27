@@ -139,7 +139,7 @@ public class TetherPreferenceControllerTest {
         when(mTetheringManager.getTetherableWifiRegexs()).thenReturn(new String[]{"456"});
 
         mController.updateSummary();
-        verify(mPreference).setSummary(R.string.switch_off_text);
+        verify(mPreference).setSummary(R.string.off);
     }
 
     @Test
@@ -169,7 +169,7 @@ public class TetherPreferenceControllerTest {
             ReflectionHelpers.getField(mController, "mAirplaneModeObserver");
         observer.onChange(true, Settings.Global.getUriFor(Settings.Global.AIRPLANE_MODE_ON));
 
-        verify(mPreference).setSummary(R.string.switch_off_text);
+        verify(mPreference).setSummary(R.string.off);
     }
 
     @Test

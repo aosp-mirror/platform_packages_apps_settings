@@ -137,7 +137,7 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
     @VisibleForTesting
     static CharSequence getSummaryTextFromBackend(DreamBackend backend, Context context) {
         if (!backend.isEnabled()) {
-            return context.getString(R.string.screensaver_settings_summary_off);
+            return context.getString(R.string.off);
         } else {
             return backend.getActiveDreamName();
         }

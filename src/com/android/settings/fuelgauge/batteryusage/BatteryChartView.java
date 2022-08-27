@@ -515,7 +515,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
 
     private boolean hasOverlap(
             final Rect[] displayAreas, final int leftIndex, final int rightIndex) {
-        return displayAreas[leftIndex].right + mTextPadding * 2f > displayAreas[rightIndex].left;
+        return displayAreas[leftIndex].right + mTextPadding * 2.3f > displayAreas[rightIndex].left;
     }
 
     private void drawAxisLabelText(
@@ -595,13 +595,14 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
 
     // Searches the corresponding trapezoid index from x location.
     private int getTrapezoidIndex(float x) {
-        if (mTrapezoidSlots != null) {
-            for (int index = 0; index < mTrapezoidSlots.length; index++) {
-                final TrapezoidSlot slot = mTrapezoidSlots[index];
-                if (x >= slot.mLeft - mTrapezoidHOffset
-                        && x <= slot.mRight + mTrapezoidHOffset) {
-                    return index;
-                }
+        if (mTrapezoidSlots == null) {
+            return BatteryChartViewModel.SELECTED_INDEX_INVALID;
+        }
+        for (int index = 0; index < mTrapezoidSlots.length; index++) {
+            final TrapezoidSlot slot = mTrapezoidSlots[index];
+            if (x >= slot.mLeft - mTrapezoidHOffset
+                    && x <= slot.mRight + mTrapezoidHOffset) {
+                return index;
             }
         }
         return BatteryChartViewModel.SELECTED_INDEX_INVALID;

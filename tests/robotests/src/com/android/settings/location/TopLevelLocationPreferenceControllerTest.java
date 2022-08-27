@@ -52,7 +52,7 @@ public class TopLevelLocationPreferenceControllerTest {
     public void getSummary_whenLocationIsOff_shouldReturnStringForOff() {
         mLocationManager.setLocationEnabledForUser(false, android.os.Process.myUserHandle());
         assertThat(mController.getSummary()).isEqualTo(
-                mContext.getString(R.string.location_settings_summary_location_off));
+                mContext.getString(R.string.off));
     }
 
     @Test
