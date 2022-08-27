@@ -1617,9 +1617,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Rename"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Mount"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Eject"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Format"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Format SD card for portable storage"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Format card"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Format as portable"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Format as internal"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Format"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Migrate data"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Forget"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Set-up"</string>
@@ -1649,17 +1650,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Rename storage"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"This <xliff:g id="NAME_0">^1</xliff:g> is safely ejected, but still available. \n\nTo use this <xliff:g id="NAME_1">^1</xliff:g>, you have to mount it first."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"This <xliff:g id="NAME_0">^1</xliff:g> is corrupted. \n\nTo use this <xliff:g id="NAME_1">^1</xliff:g>, you have to set it up first."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"After formatting, you can use this <xliff:g id="NAME_0">^1</xliff:g> in other devices. \n\nAll data on this <xliff:g id="NAME_1">^1</xliff:g> will be erased. Consider backing up first. \n\n"<b>"Back up photos &amp; other media"</b>" \nMove your media files to alternative storage on this device, or transfer them to a computer using a USB cable. \n\n"<b>"Back up apps"</b>" \nAll apps stored on this <xliff:g id="NAME_6">^1</xliff:g> will be uninstalled and their data will be erased. To keep these apps, move them to alternative storage on this device."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"You can format this SD card to store photos, videos, music and more and access them on other devices. \n\n"<b>"All data on this SD card will be erased."</b>" \n\n"<b>"Before formatting"</b>" \n\n"<b>"Back up photos &amp; other media"</b>" \nMove your media files to alternative storage on this device or transfer them to a computer using a USB cable. \n\n"<b>"Back up apps"</b>" \nAll apps stored on this <xliff:g id="NAME">^1</xliff:g> will be uninstalled and their data will be erased. To keep these apps, move them to alternative storage on this device."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"When you eject this <xliff:g id="NAME_0">^1</xliff:g>, apps stored on it will stop working, and media files stored on it will not be available until it is reinserted."</b>" \n\nThis <xliff:g id="NAME_1">^1</xliff:g> is formatted to work on this device only. It won’t work on any others."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"To use the apps, photos or data this <xliff:g id="NAME">^1</xliff:g> contains, reinsert it. \n\nAlternatively, you can choose to forget this storage if the device isn’t available. \n\nIf you choose to forget, all the data the device contains will be lost forever. \n\nYou can reinstall the apps later, but their data stored on this device will be lost."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Forget <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"All the apps, photos and data stored on this <xliff:g id="NAME">^1</xliff:g> will be lost forever."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"System includes files used to run Android version <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Guest mode users cannot format SD cards"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Set up your <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Use as portable storage"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"For moving photos and other media between devices."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Use as internal storage"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"For storing anything on this device only, including apps and photos. Requires formatting that prevents it from working with other devices."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Format SD card for portable storage"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Save photos, videos, music and more and access them from other devices"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Format SD card for internal storage"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Save apps &amp; media to use on this phone only"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Format as internal storage"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"This requires the <xliff:g id="NAME_0">^1</xliff:g> to be formatted to make it secure. \n\nAfter formatting, this <xliff:g id="NAME_1">^1</xliff:g> will only work in this device. \n\n"<b>"Formatting erases all data currently stored on the <xliff:g id="NAME_2">^1</xliff:g>."</b>" To avoid losing the data, consider backing it up."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Format as portable storage"</string>
@@ -1676,9 +1678,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Move"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Moving data…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"During the move: \n• Don\'t remove the <xliff:g id="NAME">^1</xliff:g>. \n• Some apps won\'t work correctly. \n• Keep the device charged."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"Your <xliff:g id="NAME">^1</xliff:g> is ready to use"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"Your <xliff:g id="NAME">^1</xliff:g> is ready to use with photos and other media."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"Your new <xliff:g id="NAME">^1</xliff:g> is working. \n\nTo move photos, files and app data to this device, go to Settings &gt; Storage."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> formatted"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"You can start using your <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"You can start using your <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Move <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Moving <xliff:g id="APP">^1</xliff:g> and its data to <xliff:g id="NAME_0">^2</xliff:g> will take only a few moments. You won\'t be able to use the app until the move is complete. \n\nDon\'t remove the <xliff:g id="NAME_1">^2</xliff:g> during the move."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"To move data you need to unlock user <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1687,19 +1689,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Cancel move"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"This <xliff:g id="NAME_0">^1</xliff:g> appears to be slow. \n\nYou can continue, but apps moved to this location may stutter and data transfers may take a long time. \n\nConsider using a faster <xliff:g id="NAME_1">^1</xliff:g> for better performance."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"How will you use this <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Use for extra tablet storage"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"For apps, files and media on this tablet only"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Tablet storage"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Use for extra phone storage"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"For apps, files and media on this phone only"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Phone storage"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Format SD card for internal storage"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Store apps &amp; media to use on this tablet only. &lt;a href=https://support.google.com/android/answer/12153449&gt;Learn more about setting up an SD card&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Format"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Format SD card for internal storage"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Store apps &amp; media to use on this phone only. &lt;a href=https://support.google.com/android/answer/12153449&gt;Learn more about setting up an SD card&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Format"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Or"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Use for portable storage"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"For transferring files and media between devices"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Portable storage"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Format SD card for portable storage"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Store photos, videos, music and more and access them from other devices. &lt;a href=https://support.google.com/android/answer/12153449&gt;Learn more about setting up an SD card&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Format"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Set up later"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Format this <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"This <xliff:g id="NAME_0">^1</xliff:g> needs to be formatted to store apps, files and media. \n\nFormatting will erase existing content on the <xliff:g id="NAME_1">^2</xliff:g>. To avoid losing content, back it up to another <xliff:g id="NAME_2">^3</xliff:g> or device."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"This <xliff:g id="NAME_0">^1</xliff:g> needs to be formatted to store photos, videos, music and more. \n\nFormatting will erase existing content on the <xliff:g id="NAME_1">^2</xliff:g>. To avoid losing content, back it up to another <xliff:g id="NAME_2">^3</xliff:g> or device."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Format <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Move content to <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"You can move files, media and certain apps to this <xliff:g id="NAME">^1</xliff:g>. \n\nThis move will free up <xliff:g id="SIZE">^2</xliff:g> of your tablet’s storage and should take around <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1716,9 +1719,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"You can still use this <xliff:g id="NAME_0">^1</xliff:g>, but it may be slow. \n\nApps stored on this <xliff:g id="NAME_1">^2</xliff:g> may not work properly, and content transfers could take a long time. \n\nTry using a faster <xliff:g id="NAME_2">^3</xliff:g>, or use this <xliff:g id="NAME_3">^4</xliff:g> for portable storage instead."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Start again"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Continue"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"You can move content to <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"To move content to <xliff:g id="NAME">^1</xliff:g>, go to "<b>"Settings &gt; Storage"</b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Your content was moved to <xliff:g id="NAME_0">^1</xliff:g>. \n\nTo manage this <xliff:g id="NAME_1">^2</xliff:g>, go to "<b>"Settings &gt; Storage"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"You can start using your <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"You can start using your <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"You can start using your <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Battery status"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Battery level"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
@@ -2761,10 +2764,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Some features may be limited"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Higher battery usage"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"See apps with highest usage"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Charging is paused"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Protecting battery to extend battery lifespan\nTap to learn more"</string>
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
     <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Resume charging"</string>
@@ -2802,8 +2803,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"This app will be able to use battery in the background. Your battery may run out sooner than expected."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Remove"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Cancel"</string>
-    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
-    <skip />
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Charge to full"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Your apps are using a normal amount of battery. If apps use too much battery, your phone will suggest actions you can take.\n\nYou can always turn on Battery Saver if you\'re running low on battery."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Your apps are using a normal amount of battery. If apps use too much battery, your tablet will suggest actions that you can take.\n\nYou can always turn on Battery Saver if you’re running low on battery."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Your apps are using a normal amount of battery. If apps use too much battery, your device will suggest actions that you can take.\n\nYou can always turn on Battery Saver if you’re running low on battery."</string>
@@ -2996,6 +2996,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Battery usage data is approximate and doesn\'t measure usage when phone is charging"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Battery usage data will be available after you use your phone for a few hours"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Battery usage chart"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Daily battery usage chart"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Hourly battery usage chart"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Process Stats"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Geeky stats about running processes"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Memory use"</string>
@@ -3551,6 +3553,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Let apps use your location information"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Back"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Next"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Switch to portable"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Format another way"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Finish"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM cards"</string>
@@ -5611,6 +5615,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Pin media player"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"To quickly resume playback, media player stays open in Quick Settings"</string>
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Show media on lock screen"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"To quickly resume playback, media player stays open on lock screen"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Show media recommendations"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Based on your activity"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Hide player"</string>

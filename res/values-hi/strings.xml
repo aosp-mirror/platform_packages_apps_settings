@@ -150,12 +150,12 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"अपने डिवाइस को आस-पास के ब्लूटूथ डिवाइस से संपर्क करने की मंज़ूरी दें"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"अपने फ़ोन को आस-पास के ब्लूटूथ डिवाइस से संपर्क करने की मंज़ूरी दें"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"ब्लूटूथ A2DP हार्डवेयर ऑफ़लोड को बंद करें"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"ब्लूटूथ लो एनर्जी (LE) ऑडियो हार्डवेयर ऑफ़लोड को बंद करें"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"ब्लूटूथ स्मार्ट ऑडियो हार्डवेयर ऑफ़लोड को बंद करें"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"क्या आपको डिवाइस रीस्टार्ट करना है?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"इस सेटिंग को बदलने के लिए, आपको अपना डिवाइस रीस्टार्ट करना होगा."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"रीस्टार्ट करें"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"अभी नहीं"</string>
-    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"ब्लूटूथ लो एनर्जी (LE) ऑडियो चालू करें"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"ब्लूटूथ स्मार्ट ऑडियो चालू करें"</string>
     <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"अगर डिवाइस लो एनर्जी (LE) ऑडियो हार्डवेयर क्षमताओं के साथ काम करता है, तो ब्लूटूथ लो एनर्जी (LE) ऑडियो की सुविधा चालू होती है."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"मीडिया डिवाइस"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"कॉल की सुविधा वाले डिवाइस"</string>
@@ -1617,9 +1617,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"नाम बदलें"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"माउंट करें"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"निकालें"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"फ़ॉर्मेट करें"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"पोर्टेबल स्टोरेज के लिए, एसडी कार्ड फ़ॉर्मैट करें"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"कार्ड को फ़ॉर्मैट करें"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"पोर्टेबल के रूप में फ़ॉर्मेट करें"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"आंतरिक के रूप में फ़ॉर्मेट करें"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"फ़ॉर्मैट करें"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"डेटा माइग्रेट करें"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"हटाएं"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"सेट करें"</string>
@@ -1649,17 +1650,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"मेमोरी का नाम बदलें"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"इस <xliff:g id="NAME_0">^1</xliff:g> को सुरक्षित रूप से निकाल लिया गया है, लेकिन वह अब भी उपलब्‍ध है. \n\nइस <xliff:g id="NAME_1">^1</xliff:g> का उपयोग करने के लिए, आपको पहले उसे माउंट करना होगा."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"यह <xliff:g id="NAME_0">^1</xliff:g> दूषित है. \n\nइस <xliff:g id="NAME_1">^1</xliff:g> का उपयोग करने के लिए, आपको पहले उसे सेट करना होगा."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"फ़ॉर्मेट करने के बाद, आप इस <xliff:g id="NAME_0">^1</xliff:g> का उपयोग अन्य डिवाइस में कर सकते हैं. \n\nइस <xliff:g id="NAME_1">^1</xliff:g> में मौजूद संपूर्ण डेटा मिटा दिया जाएगा. सबसे पहले बैकअप लेने पर विचार करें. \n\n"<b>"फ़ोटो और अन्य मीडिया का बैकअप लें"</b>" \nअपनी मीडिया फ़ाइलों को इस डिवाइस की वैकल्पिक मेमोरी में ले जाएं या USB केबल का उपयोग करके उन्हें किसी कंप्यूटर में ट्रांसफर करें. \n\n"<b>"ऐप्लिकेशन का बैकअप लें"</b>" \nइस <xliff:g id="NAME_6">^1</xliff:g> में संग्रहित सभी ऐप्लिकेशन को अनइंस्टॉल कर दिया जाएगा और उनका डेटा मिटा दिया जाएगा. इन ऐप्लिकेशन को बनाए रखने के लिए, उन्हें इस डिवाइस की वैकल्पिक मेमोरी में ले जाएं."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"एसडी कार्ड में फ़ोटो, वीडियो, संगीत वगैरह सेव करने के लिए इसे फ़ॉर्मैट करें. साथ ही, उन्हें दूसरे डिवाइसों पर ऐक्सेस करें. \n\n"<b>"इस एसडी कार्ड में मौजूद सारा डेटा मिटा दिया जाएगा."</b>" \n\n"<b>"फ़ॉर्मैट करने से पहले,"</b>" \n\n"<b>"फ़ोटो और अन्य मीडिया का बैक अप लें"</b>" \nअपनी मीडिया फ़ाइलों को इस डिवाइस में मौजूद वैकल्पिक स्टोरेज में ले जाएं या यूएसबी केबल का इस्तेमाल करके किसी कंप्यूटर में ट्रांसफ़र करें. \n\n"<b>"ऐप्लिकेशन का बैक अप लें"</b>" \nइस <xliff:g id="NAME">^1</xliff:g> में सेव सभी ऐप्लिकेशन को अनइंस्टॉल कर दिया जाएगा और उनका डेटा मिटा दिया जाएगा. इन ऐप्लिकेशन को रखने के लिए, उन्हें इस डिवाइस के वैकल्पिक स्टोरेज में ले जाएं."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"जब आप इस <xliff:g id="NAME_0">^1</xliff:g> को निकालते हैं, तो इस पर संग्रहित ऐप्‍स काम करना बंद कर देंगे और इस पर संग्रहित मीडिया फ़ाइलें इसे फिर से लगाए जाने तक उपलब्‍ध नहीं होंगी."</b>" \n\nइस <xliff:g id="NAME_1">^1</xliff:g> को केवल इसी डिवाइस पर काम करने के लिए प्रारूपित किया गया है. यह किसी भी अन्‍य पर काम नहीं करेगा."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"इस <xliff:g id="NAME">^1</xliff:g> में मौजूद ऐप्‍स, फ़ोटो या डेटा का उपयोग करने के लिए, उसे फिर से लगाएं. \n\nवैकल्‍पिक रूप से, अगर डिवाइस उपलब्‍ध नहीं हो तो आप इस मेमोरी को भूल जाना चुन सकते हैं. \n\nअगर आप भूल जाना चुनते हैं, तो डिवाइस में मौजूद सभी डेटा हमेशा के लिए खो जाएगा. \n\nआप बाद में ऐप्‍स फिर से इंस्‍टॉल कर सकते हैं, लेकिन इस डिवाइस पर संग्रहित किया गया उनका डेटा खो जाएगा."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g> को भूल जाएं?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"इस <xliff:g id="NAME">^1</xliff:g> पर संग्रहित सभी ऐप्‍स, फ़ोटो और डेटा हमेशा के लिए खो जाएंगे."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"सिस्टम में ऐसी फ़ाइलें शामिल हैं जिनका इस्तेमाल Android वर्शन <xliff:g id="VERSION">%s</xliff:g> को चलाने के लिए किया जाता है"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"मेहमान मोड के लोग एसडी कार्ड फ़ॉर्मैट नहीं कर सकते"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"अपना <xliff:g id="NAME">^1</xliff:g> सेट करें"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"पोर्टेबल मेमोरी के रूप में उपयोग करें"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"फ़ोटो और अन्य मीडिया को डिवाइसों के बीच ले जाने के लिए."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"आंतरिक मेमोरी के रूप में उपयोग करें"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"ऐप्लिकेशन और फ़ोटो सहित किसी भी चीज़ को केवल इसी डिवाइस में संग्रहित करने के लिए. ऐसी फ़ॉर्मेटिंग आवश्यक है जो उसे अन्य डिवाइस के साथ काम करने से रोकती है."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"पोर्टेबल स्टोरेज के लिए, एसडी कार्ड फ़ॉर्मैट करें"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"फ़ोटो, वीडियो, संगीत वगैरह सेव करें और उन्हें दूसरे डिवाइसों से ऐक्सेस करें"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"डिवाइस के स्टोरेज के लिए, एसडी कार्ड फ़ॉर्मैट करें"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"ऐप्लिकेशन और मीडिया को सिर्फ़ इस फ़ोन पर इस्तेमाल करने के लिए सेव करें"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"आंतरिक मेमोरी जैसे फ़ॉर्मेट करें"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"इसके लिए <xliff:g id="NAME_0">^1</xliff:g> को सुरक्षित करने के लिए उसे फ़ॉर्मेट करना आवश्यक है. \n\nफ़ॉर्मेट करने के बाद, यह <xliff:g id="NAME_1">^1</xliff:g> केवल इसी डिवाइस में काम करेगा. \n\n"<b>"फ़ॉर्मेट करने से <xliff:g id="NAME_2">^1</xliff:g> में वर्तमान में संग्रहित संपू्र्ण डेटा मिट जाता है."</b>" डेटा खो जाने से बचाने के लिए, उसका बैकअप लेने पर विचार करें."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"पोर्टेबल संग्रह जैसा प्रारूपित करें"</string>
@@ -1676,9 +1678,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"ले जाएं"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"डेटा ले जाया जा रहा है…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"ले जाने के दौरान: \n• <xliff:g id="NAME">^1</xliff:g> को ना निकालें. \n• कुछ ऐप्लिकेशन सही ढंग से काम नहीं करेंगे. \n• डिवाइस को चार्ज करके रखें."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"आपका <xliff:g id="NAME">^1</xliff:g> इस्तेमाल के लिए तैयार है"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"आपका <xliff:g id="NAME">^1</xliff:g>, फ़ोटो और अन्य मीडिया के उपयोग के लिए पूरी तरह तैयार है."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"आपका नया <xliff:g id="NAME">^1</xliff:g> काम कर रहा है. \n\nफ़ोटो, फ़ाइलों और ऐप डेटा को इस डिवाइस में ले जाने के लिए, सेटिंग &gt; मेमोरी पर जाएं."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> को फ़ॉर्मैट किया गया"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"<xliff:g id="NAME">^1</xliff:g> का इस्तेमाल शुरू किया जा सकता है"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"<xliff:g id="NAME">^1</xliff:g> का इस्तेमाल शुरू किया जा सकता है"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"<xliff:g id="APP">^1</xliff:g> को ले जाएं"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"<xliff:g id="APP">^1</xliff:g> और उसके डेटा को <xliff:g id="NAME_0">^2</xliff:g> में ले जाने में कुछ ही समय लगेगा. ले जाने का काम पूरा होने तक आप ऐप्लिकेशन का उपयोग नहीं कर पाएंगे. \n\nले जाने के दौरान <xliff:g id="NAME_1">^2</xliff:g> को ना निकालें."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"उपयोगकर्ता <xliff:g id="APP">^1</xliff:g> को अनलॉक करके ही डेटा लाया या ले जाया जा सकता है."</string>
@@ -1687,19 +1689,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"ले जाना रोकें"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"यह <xliff:g id="NAME_0">^1</xliff:g> ज़्यादा वक्त ले रहा है. \n\nआप जारी रख सकते हैं, लेकिन इस जगह पर लाए गए ऐप अटक सकते हैं और डेटा ट्रांसफर में ज़्यादा समय लग सकता है. \n\nबेहतर परफ़ॉर्मेंस के लिए आप और तेज़ <xliff:g id="NAME_1">^1</xliff:g> का इस्तेमाल कर सकते हैं."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"आप इस <xliff:g id="NAME">^1</xliff:g> को कैसे इस्तेमाल करेंगे?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"टैबलेट में ज़्यादा स्टोरेज के लिए इस्तेमाल करें"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"सिर्फ़ इस टैबलेट पर मौजूद ऐप्लिकेशन, फ़ाइल और मीडिया के लिए"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"टैबलेट की मेमोरी"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"फ़ोन में ज़्यादा स्टोरेज के लिए इस्तेमाल करें"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"सिर्फ़ इस फ़ोन पर मौजूद ऐप्लिकेशन, फ़ाइल और मीडिया के लिए"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"फ़ोन की मेमोरी"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"डिवाइस के स्टोरेज के लिए, एसडी कार्ड फ़ॉर्मैट करें"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"ऐप्लिकेशन और मीडिया को सिर्फ़ इस टैबलेट पर इस्तेमाल करने के लिए सेव करें. &lt;a href=https://support.google.com/android/answer/12153449&gt;एसडी कार्ड को सेट अप करने के बारे में ज़्यादा जानें&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"फ़ॉर्मैट करें"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"डिवाइस के स्टोरेज के लिए, एसडी कार्ड फ़ॉर्मैट करें"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"ऐप्लिकेशन और मीडिया को सिर्फ़ इस फ़ोन पर इस्तेमाल करने के लिए सेव करें. &lt;a href=https://support.google.com/android/answer/12153449&gt;एसडी कार्ड को सेट अप करने के बारे में ज़्यादा जानें&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"फ़ॉर्मैट करें"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"या"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"पोर्टेबल मेमोरी के तौर पर इस्तेमाल करें"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"एक डिवाइस से दूसरे डिवाइस में फ़ाइल और मीडिया भेजने के लिए"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"पोर्टेबल मेमोरी"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"पोर्टेबल स्टोरेज के लिए, एसडी कार्ड फ़ॉर्मैट करें"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"फ़ोटो, वीडियो, संगीत वगैरह सेव करें और उन्हें दूसरे डिवाइसों से ऐक्सेस करें. &lt;a href=https://support.google.com/android/answer/12153449&gt;एसडी कार्ड को सेट अप करने के बारे में ज़्यादा जानें&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"फ़ॉर्मैट करें"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"बाद में सेटअप करें"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"इस <xliff:g id="NAME">^1</xliff:g> को फ़ॉर्मैट करें?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"ऐप्लिकेशन, फ़ाइल और मीडिया सेव करने के लिए इस <xliff:g id="NAME_0">^1</xliff:g> को फ़ॉर्मैट करना ज़रूरी है. \n\nफ़ॉर्मैट करने पर <xliff:g id="NAME_1">^2</xliff:g> पर मौजूद सारी सामग्री हमेशा के लिए मिट जाएगी. सामग्री बचाने के लिए, इसका दूसरे <xliff:g id="NAME_2">^3</xliff:g> या डिवाइस पर बैकअप लें."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"फ़ोटो, वीडियो, संगीत वगैरह को सेव करने के लिए, इस <xliff:g id="NAME_0">^1</xliff:g> को फ़ॉर्मैट करने की ज़रूरत है. \n\nफ़ॉर्मैट करने से <xliff:g id="NAME_1">^2</xliff:g> पर मौजूद कॉन्टेंट हमेशा के लिए मिट जाएगा. कॉन्टेंट को अपने पास सेव रखने के लिए, किसी दूसरे <xliff:g id="NAME_2">^3</xliff:g> या डिवाइस पर उसका बैक अप लें."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g> फ़ॉर्मैट करें"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"सामग्री को <xliff:g id="NAME">^1</xliff:g> में ले जाएं?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"आप फ़ाइल, मीडिया और कुछ चुनिंदा ऐप्लिकेशन इस <xliff:g id="NAME">^1</xliff:g> में ले जा सकते हैं. \n\nइससे आपके टैबलेट की मेमोरी में <xliff:g id="SIZE">^2</xliff:g> जगह खाली हो जाएगी. इसमें करीब <xliff:g id="DURATION">^3</xliff:g> का समय लग सकता है."</string>
@@ -1716,9 +1719,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"आप इस <xliff:g id="NAME_0">^1</xliff:g> को इस्तेमाल करना जारी रख सकते हैं, पर हो सकता है कि यह ठीक से काम न करे. \n\nयह भी हो सकता है कि इस <xliff:g id="NAME_1">^2</xliff:g> पर सेव किए गए ऐप्लिकेशन ठीक से काम न करें और सामग्री ट्रांसफ़र करने में ज़्यादा समय लगे. \n\nबेहतर काम करने वाला <xliff:g id="NAME_2">^3</xliff:g> आज़माएं या इसके बजाय पोर्टेबल मेमोरी के तौर पर इस <xliff:g id="NAME_3">^4</xliff:g> का इस्तेमाल करें."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"फिर से शुरू करें"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"जारी रखें"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"आप सामग्री को <xliff:g id="NAME">^1</xliff:g> में ले जा सकते हैं"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"<xliff:g id="NAME">^1</xliff:g> में सामग्री ले जाने के लिए, "<b>"सेटिंग &gt; मेमोरी"</b>" में जाएं"</string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"आपकी सामग्री <xliff:g id="NAME_0">^1</xliff:g> में ले जाई जा चुकी है. \n\nइस <xliff:g id="NAME_1">^2</xliff:g> को प्रबंधित करने के लिए, "<b>"सेटिंग &gt; मेमोरी में जाएं"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"<xliff:g id="NAME">^1</xliff:g> का इस्तेमाल शुरू किया जा सकता है"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"<xliff:g id="NAME">^1</xliff:g> का इस्तेमाल शुरू किया जा सकता है"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"<xliff:g id="NAME">^1</xliff:g> का इस्तेमाल शुरू किया जा सकता है"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"बैटरी स्‍थिति"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"बैटरी स्‍तर"</string>
     <string name="apn_settings" msgid="4295467389400441299">"ऐक्सेस पॉइंट नाम"</string>
@@ -2052,7 +2055,7 @@
     <string name="forgot_password_title" msgid="3967873480875239885">"अपने आईटी एडमिन से संपर्क करें"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"आप अपने पिन, पैटर्न या पासवर्ड को रीसेट करने के लिए आईटी एडमिन की मदद ले सकते हैं"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"आपके टैबलेट और व्यक्तिगत डेटा पर अनजान ऐप्लिकेशन की ओर से हमला किए जाने का जोखिम ज़्यादा है. इस स्रोत से आने वाले ऐप्लिकेशन इंस्टॉल करके, आप सहमति देते हैं कि उनके उपयोग के कारण आपके टैबलेट को होने वाले किसी भी नुकसान या डेटा की हानि के लिए आप ही ज़िम्मेदार हैं."</string>
-    <string name="install_all_warning" product="default" msgid="652516435709047343">"आपके फ़ोन और निजी डेटा पर, अनजान ऐप्लिकेशन के हमला किए जाने का जोखिम ज़्यादा होता है. इस सोर्स से ऐप्लिकेशन इंस्टॉल करके, आप सहमति देते हैं कि इनके इस्तेमाल की वजह से आपके फ़ोन या डेटा को होने वाले किसी भी नुकसान के लिए आप खुद ज़िम्मेदार हैं."</string>
+    <string name="install_all_warning" product="default" msgid="652516435709047343">"आपके फ़ोन और निजी डेटा पर, अनजान ऐप्लिकेशन के हमला किए जाने का जोखिम ज़्यादा होता है. इस सोर्स से ऐप्लिकेशन इंस्टॉल करने का मतलब, आप इस बात से सहमत हैं कि इनके इस्तेमाल की वजह से आपके फ़ोन या डेटा को होने वाले किसी भी नुकसान के लिए आप खुद ज़िम्मेदार हैं."</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"आपके डिवाइस और निजी डेटा पर अनजान ऐप्लिकेशन के ज़रिए हमला किए जाने का खतरा ज़्यादा होता है. इस स्रोत से ऐप्लिकेशन इंस्टॉल करके, आप मंज़ूरी देते हैं कि उनके इस्तेमाल की वजह से आपके डिवाइस को होने वाले किसी भी नुकसान या डेटा मिट जाने पर आप ही ज़िम्मेदार होंगे."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"बेहतर सेटिंग"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"और सेटिंग विकल्‍प चालू करें"</string>
@@ -2102,7 +2105,7 @@
     <string name="show_background_processes" msgid="5682856012453562151">"कैश की गई प्रक्रियाएं दिखाएं"</string>
     <string name="default_emergency_app" msgid="1929974800666613803">"आपातकालीन ऐप"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"ऐप्लिकेशन से जुड़ी पसंद रीसेट करें"</string>
-    <string name="reset_app_preferences_title" msgid="8935136792316050759">"ऐप्लिकेशन से जुड़ी पसंद को रीसेट करना चाहते हैं?"</string>
+    <string name="reset_app_preferences_title" msgid="8935136792316050759">"ऐप्लिकेशन से जुड़ी सेटिंग रीसेट करनी है?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"ऐसा करने पर, इन सभी से जुड़ी सेटिंग रीसेट हो जाएंगी:\n\n"<li>"बंद किए गए ऐप्लिकेशन"</li>\n<li>"ऐप्लिकेशन की बंद गई सूचनाएं"</li>\n<li>"कार्रवाइयों के लिए डिफ़ॉल्ट ऐप्लिकेशन"</li>\n<li>"ऐप्लिकेशन के लिए बैकग्राउंड डेटा की पाबंदियां"</li>\n<li>"किसी भी अनुमति से जुड़ी पाबंदियां"</li>\n<li>"बैटरी खर्च होने से जुड़ी सेटिंग"</li>\n\n"ऐप्लिकेशन का कोई डेटा गायब नहीं होगा."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"ऐप्लिकेशन  रीसेट करें"</string>
     <string name="manage_space_text" msgid="9013414693633572277">"जगह मैनेज करें"</string>
@@ -2249,7 +2252,7 @@
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"कीबोर्ड लेआउट"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"निजी शब्दकोश"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"काम से जुड़ा निजी शब्दकोश"</string>
-    <string name="user_dict_settings_summary" msgid="4939694372338975081">"Gboard में स्पेलिंग जांचने वाली सुविधा होती है. इसी तरह की सुविधा वाले ऐप्लिकेशन में इस्तेमाल करने के लिए शब्द जोड़ें"</string>
+    <string name="user_dict_settings_summary" msgid="4939694372338975081">"ऐप्लिकेशन में इस्तेमाल करने के लिए Gboard के स्पेल चेकर में शब्द जोड़ें"</string>
     <string name="user_dict_settings_add_menu_title" msgid="8046882347281382968">"जोड़ें"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="3485845465134083084">"शब्‍दकोश में जोड़ें"</string>
     <string name="user_dict_settings_add_screen_title" msgid="1866408024073475379">"वाक्यांश"</string>
@@ -2761,10 +2764,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"हो सकता है कि कुछ सुविधाओं का पूरा इस्तेमाल न किया जा सके"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"सबसे ज़्यादा बैटरी खर्च"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"सबसे ज़्यादा बैटरी खर्च करने वाले ऐप्लिकेशन देखें"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"चार्जिंग को रोका गया है"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"बैटरी लाइफ़ को बढ़ाने के लिए, बैटरी बचाई जा रही है\nज़्यादा जानने के लिए टैप करें"</string>
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
     <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"चार्जिंग फिर से शुरू करें"</string>
@@ -2802,8 +2803,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"यह ऐप्लिकेशन, बैकग्राउंड में बैटरी का इस्तेमाल कर पाएगा. ऐसा हो सकता है कि आपके डिवाइस की बैटरी समय से पहले ही खत्म हो जाए."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"ऐप्लिकेशन से रोक हटाएं"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"अभी नहीं"</string>
-    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
-    <skip />
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"पूरा चार्ज करें"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"आपके ऐप्लिकेशन सामान्य रूप से बैटरी इस्तेमाल कर रहे हैं. अगर ऐप्लिकेशन ज़्यादा बैटरी खर्च करने लगें, तो फ़ोन बैटरी बचाने के लिए सुझाव देगा.\n\nअगर फ़ोन की बैटरी खत्म होने वाली हो, तो आप बैटरी सेवर चालू कर सकते हैं."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"आपके ऐप्लिकेशन सामान्य रूप से बैटरी इस्तेमाल कर रहे हैं. अगर ऐप्लिकेशन ज़्यादा बैटरी खर्च करने लगें, तो टैबलेट बैटरी बचाने के लिए सुझाव देगा.\n\nअगर टैबलेट की बैटरी खत्म होने वाली हो, तो आप बैटरी सेवर चालू कर सकते हैं."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"आपके ऐप्लिकेशन सामान्य रूप से बैटरी का इस्तेमाल कर रहे हैं. अगर ऐप्लिकेशन ज़्यादा बैटरी खर्च करने लगें, तो डिवाइस बैटरी बचाने के लिए सुझाव देगा.\n\nअगर डिवाइस की बैटरी खत्म होने वाली हो, तो आप बैटरी सेवर चालू कर सकते हैं."</string>
@@ -2996,6 +2996,8 @@
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"बैटरी खर्च से जुड़ा डेटा अनुमानित होता है. फ़ोन के चार्ज होने के दौरान, इसका अनुमान नहीं लगाया जाता"</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"कुछ घंटों तक फ़ोन इस्तेमाल करने के बाद, बैटरी खर्च से जुड़ा डेटा उपलब्ध हो जाएगा"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"बैटरी खर्च दिखाने वाला चार्ट"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"हर दिन का बैटरी खर्च दिखाने वाला चार्ट"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"हर घंटे का बैटरी खर्च दिखाने वाला चार्ट"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"प्रोसेस के आंकड़े"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"चल रही प्रक्रिया के बारे में आकंड़े"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"मेमोरी उपयोग"</string>
@@ -3378,7 +3380,7 @@
     <string name="user_credential_title" msgid="4686178602575567298">"क्रेडेंशियल की पूरी जानकारी"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"क्रेडेंशियल निकाला गया: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
     <string name="user_credential_none_installed" msgid="918620912366836994">"उपयोगकर्ता का कोई क्रेडेंशियल इंस्टॉल नहीं किया गया"</string>
-    <string name="spellcheckers_settings_title" msgid="2799021700580591443">"स्पेलिंग जांचने वाली सुविधा"</string>
+    <string name="spellcheckers_settings_title" msgid="2799021700580591443">"स्पेल चेकर"</string>
     <string name="spellcheckers_settings_for_work_title" msgid="6471603934176062893">"काम के लिए स्पेलिंग जांचने वाली सुविधा"</string>
     <string name="current_backup_pw_prompt" msgid="4962276598546381140">"अपना वर्तमान पूरा बैकअप पासवर्ड यहां लिखें"</string>
     <string name="new_backup_pw_prompt" msgid="4884439230209419503">"पूरे बैक अप के लिए यहां नया पासवर्ड लिखें"</string>
@@ -3551,6 +3553,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"ऐप को आपकी जगह की जानकारी का इस्तेमाल करने दें"</string>
     <string name="wizard_back" msgid="8257697435061870191">"वापस जाएं"</string>
     <string name="wizard_next" msgid="3884832431439072471">"आगे बढ़ें"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"पोर्टेबल पर स्विच करें"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"अलग तरह से फ़ॉर्मैट करें"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"खत्म करें"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"सिम कार्ड"</string>
@@ -4153,7 +4157,7 @@
     <string name="notification_content_block_title" msgid="6689085826061361351">"सूचनाएं दिखाएं"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"सूचना कभी भी शेड में या पेरिफ़ेरल डिवाइस पर ना दिखाएं"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"सूचनाएं बताने वाले डॉट की अनुमति दें"</string>
-    <string name="notification_channel_badge_title" msgid="6505542437385640049">"सूचनाएं बताने वाला डॉट दिखाएं"</string>
+    <string name="notification_channel_badge_title" msgid="6505542437385640049">"सूचनाएं दिखाने वाला डॉट दिखाएं"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"\'परेशान न करें\' मोड को बायपास करें"</string>
     <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"\'परेशान न करें\' मोड चालू होने पर भी ये सूचनाएं दिखाना जारी रखें"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"लॉक स्क्रीन"</string>
@@ -4375,7 +4379,7 @@
     <string name="imei_information_title" msgid="8703564992893669514">"IMEI की जानकारी"</string>
     <string name="imei_information_summary" msgid="4763358372990258786">"IMEI से जुड़ी जानकारी"</string>
     <string name="slot_number" msgid="2663789411468530397">"(स्लॉट<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="892824422067985734">"डिफ़ॉल्ट रूप से खोलें"</string>
+    <string name="launch_by_default" msgid="892824422067985734">"\'डिफ़ॉल्ट रूप से खोलें\' सुविधा"</string>
     <string name="app_launch_domain_links_title" msgid="6702041169676128550">"खुलने वाले लिंक"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"काम करने वाले लिंक खोलें"</string>
     <string name="app_launch_top_intro_message" msgid="137370923637482459">"इस ऐप्लिकेशन में वेब लिंक खोलने की अनुमति दें"</string>
@@ -4950,7 +4954,7 @@
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"तुरंत कैमरा खोलें"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"तुरंत कैमरा खोलने के लिए, पावर बटन दो बार दबाएं. ऐसा किसी भी स्क्रीन से किया जा सकता है."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"झटपट कैमरा खोलें"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"सेल्फ़ी के लिए कैमरा पलटें"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"सेल्फ़ी के लिए कैमरा स्विच करें"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"और तेज़ी से खुद से स्वयं की फ़ोटो लें"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"सिस्टम नेविगेशन"</string>
@@ -5191,7 +5195,7 @@
     <string name="location_indicator_settings_title" msgid="6655916258720093451">"स्टेटस बार पर जगह की जानकारी दिखाने वाला संकेत"</string>
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"सभी जगह की जानकारी दिखाएं. इसके लिए, नेटवर्क और कनेक्टिविटी का भी इस्तेमाल करें"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"जीएनएसएस माप को हर हाल में लागू करें"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"बिना ड्यूटी-साइक्लिंग के जीएनएसएस के सभी तारामंडल (कॉन्स्टलेशन) और फ़्रीक्वेंसी ट्रैक करें"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"बिना ड्यूटी-साइक्लिंग के जीएनएसएस के सभी कॉन्स्टलेशन और फ़्रीक्वेंसी ट्रैक करें"</string>
     <string name="input_method_category" msgid="2252659253631639005">"इनपुट का तरीका"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"स्टाइलस हैंडराइटिंग"</string>
     <string name="stylus_handwriting_summary" msgid="6333425895172696950">"इस सेटिंग के चालू होने और एडिटर के फ़ोकस रहने पर, इनपुट के मौजूदा तरीके को स्टाइलस का MotionEvent मिलता है."</string>
@@ -5576,8 +5580,8 @@
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"इस्तेमाल करने के लिए, सबसे पहले स्क्रीन लॉक सेट करें"</string>
     <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"पावर मेन्यू खोलना:\nइसके लिए, पावर बटन और आवाज़ तेज़ करने वाले बटन को एक साथ दबाएं"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"घंटी बजने से रोकना:\nइसके लिए शॉर्टकट के तौर पर, आवाज़ कम या ज़्यादा करने वाले बटन को दबाएं"</string>
-    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"बटन को दबाकर रखने का समय"</string>
-    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"पावर बटन को दबाकर रखने का समय चुनकर, संवेदनशीलता में बदलाव करें"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"बटन को दबाए रखने की अवधि"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"पावर बटन कितनी देर तक दबाए रखना है यह चुनकर, संवेदनशीलता में बदलाव करें"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"कम समय के लिए"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"ज़्यादा समय के लिए"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"वॉलेट दिखाएं"</string>
@@ -5611,6 +5615,10 @@
     <string name="media_controls_title" msgid="403271085636252597">"मीडिया"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"मीडिया प्लेयर को पिन करें"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"मीडिया प्लेयर \'फटाफट सेटिंग\' में खुला रहता है, ताकि आप मीडिया को तुरंत वहीं से शुरू कर सकें जहां आपने इसे छोड़ा था"</string>
+    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
+    <skip />
+    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
+    <skip />
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"मीडिया से जुड़े सुझाव दिखाएं"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"आपकी गतिविधि के हिसाब से"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"मीडिया प्लेयर को छिपाएं"</string>
