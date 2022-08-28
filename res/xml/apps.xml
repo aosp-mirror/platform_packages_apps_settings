@@ -62,6 +62,14 @@
         <intent android:action="android.settings.MANAGE_DEFAULT_APPS_SETTINGS"/>
     </Preference>
 
+    <Preference
+        android:key="game_settings"
+        android:title="@string/game_space_title"
+        android:summary="@string/game_space_summary"
+        android:order="-995"
+        settings:controller="com.android.settings.applications.GameSpaceController">
+    </Preference>
+
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"
         android:order="10"/>
