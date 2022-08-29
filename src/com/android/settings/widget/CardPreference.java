@@ -140,6 +140,15 @@ public class CardPreference extends Preference {
         updateButtonGroupsVisibility();
     }
 
+    /**
+     * Sets the text of content description on secondary button.
+     *
+     * @param text text for the content description
+     */
+    public void setSecondaryButtonContentDescription(String text) {
+        mSecondaryButton.ifPresent(button -> button.setContentDescription(text));
+    }
+
     private void updateButtonGroupsVisibility() {
         int visibility =
                 (mPrimaryButtonVisible || mSecondaryButtonVisible) ? View.VISIBLE : View.GONE;
