@@ -108,10 +108,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private View mBatteryChartViewGroup;
     private PreferenceScreen mPreferenceScreen;
     private FooterPreference mFooterPreference;
-    // Daily view model only saves abbreviated day of week texts (e.g. MON). This field saves the
-    // full day of week texts (e.g. Monday), which is used in category title and battery detail
-    // page.
-    private List<String> mDailyTimestampFullTexts;
     private BatteryChartViewModel mDailyViewModel;
     private List<BatteryChartViewModel> mHourlyViewModels;
 
@@ -121,6 +117,13 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private final CharSequence[] mNotAllowShowSummaryPackages;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
+
+    @VisibleForTesting
+    final DailyChartLabelTextGenerator mDailyChartLabelTextGenerator =
+            new DailyChartLabelTextGenerator();
+    @VisibleForTesting
+    final HourlyChartLabelTextGenerator mHourlyChartLabelTextGenerator =
+            new HourlyChartLabelTextGenerator();
 
     // Preference cache to avoid create new instance each time.
     @VisibleForTesting
@@ -279,29 +282,24 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 getTotalHours(batteryLevelData));
 
         if (batteryLevelData == null) {
-            mDailyTimestampFullTexts = null;
             mDailyViewModel = null;
             mHourlyViewModels = null;
             refreshUi();
             return;
         }
-        mDailyTimestampFullTexts = generateTimestampDayOfWeekTexts(
-                mContext, batteryLevelData.getDailyBatteryLevels().getTimestamps(),
-                /* isAbbreviation= */ false);
         mDailyViewModel = new BatteryChartViewModel(
                 batteryLevelData.getDailyBatteryLevels().getLevels(),
-                generateTimestampDayOfWeekTexts(
-                        mContext, batteryLevelData.getDailyBatteryLevels().getTimestamps(),
-                        /* isAbbreviation= */ true),
-                BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS);
+                batteryLevelData.getDailyBatteryLevels().getTimestamps(),
+                BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS,
+                mDailyChartLabelTextGenerator);
         mHourlyViewModels = new ArrayList<>();
         for (BatteryLevelData.PeriodBatteryLevelData hourlyBatteryLevelsPerDay :
                 batteryLevelData.getHourlyBatteryLevelsPerDay()) {
             mHourlyViewModels.add(new BatteryChartViewModel(
                     hourlyBatteryLevelsPerDay.getLevels(),
-                    generateTimestampHourTexts(
-                            mContext, hourlyBatteryLevelsPerDay.getTimestamps()),
-                    BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
+                    hourlyBatteryLevelsPerDay.getTimestamps(),
+                    BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS,
+                    mHourlyChartLabelTextGenerator));
         }
         refreshUi();
     }
@@ -543,8 +541,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
     @VisibleForTesting
     String getSlotInformation() {
-        if (mDailyTimestampFullTexts == null || mDailyViewModel == null
-                || mHourlyViewModels == null) {
+        if (mDailyViewModel == null || mHourlyViewModels == null) {
             // No data
             return null;
         }
@@ -552,17 +549,13 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             return null;
         }
 
-        final String selectedDayText = mDailyTimestampFullTexts.get(mDailyChartIndex);
+        final String selectedDayText = mDailyViewModel.getFullText(mDailyChartIndex);
         if (mHourlyChartIndex == BatteryChartViewModel.SELECTED_INDEX_ALL) {
             return selectedDayText;
         }
 
-        final String fromHourText = mHourlyViewModels.get(mDailyChartIndex).texts().get(
+        final String selectedHourText = mHourlyViewModels.get(mDailyChartIndex).getFullText(
                 mHourlyChartIndex);
-        final String toHourText = mHourlyViewModels.get(mDailyChartIndex).texts().get(
-                mHourlyChartIndex + 1);
-        final String selectedHourText =
-                String.format("%s%s%s", fromHourText, mIs24HourFormat ? "-" : " - ", toHourText);
         if (isBatteryLevelDataInOneDay()) {
             return selectedHourText;
         }
@@ -663,25 +656,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 / DateUtils.HOUR_IN_MILLIS);
     }
 
-    private static List<String> generateTimestampDayOfWeekTexts(@NonNull final Context context,
-            @NonNull final List<Long> timestamps, final boolean isAbbreviation) {
-        final ArrayList<String> texts = new ArrayList<>();
-        for (Long timestamp : timestamps) {
-            texts.add(ConvertUtils.utcToLocalTimeDayOfWeek(context, timestamp, isAbbreviation));
-        }
-        return texts;
-    }
-
-    private static List<String> generateTimestampHourTexts(
-            @NonNull final Context context, @NonNull final List<Long> timestamps) {
-        final boolean is24HourFormat = DateFormat.is24HourFormat(context);
-        final ArrayList<String> texts = new ArrayList<>();
-        for (Long timestamp : timestamps) {
-            texts.add(ConvertUtils.utcToLocalTimeHour(context, timestamp, is24HourFormat));
-        }
-        return texts;
-    }
-
     /** Used for {@link AppBatteryPreferenceController}. */
     public static List<BatteryDiffEntry> getAppBatteryUsageData(Context context) {
         final long start = System.currentTimeMillis();
@@ -726,5 +700,37 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             }
         }
         return null;
+    }
+
+    private final class DailyChartLabelTextGenerator implements
+            BatteryChartViewModel.LabelTextGenerator {
+        @Override
+        public String generateText(List<Long> timestamps, int index) {
+            return ConvertUtils.utcToLocalTimeDayOfWeek(mContext,
+                    timestamps.get(index), /* isAbbreviation= */ true);
+        }
+
+        @Override
+        public String generateFullText(List<Long> timestamps, int index) {
+            return ConvertUtils.utcToLocalTimeDayOfWeek(mContext,
+                    timestamps.get(index), /* isAbbreviation= */ false);
+        }
+    }
+
+    private final class HourlyChartLabelTextGenerator implements
+            BatteryChartViewModel.LabelTextGenerator {
+        @Override
+        public String generateText(List<Long> timestamps, int index) {
+            return ConvertUtils.utcToLocalTimeHour(mContext, timestamps.get(index),
+                    mIs24HourFormat);
+        }
+
+        @Override
+        public String generateFullText(List<Long> timestamps, int index) {
+            return index == timestamps.size() - 1
+                    ? generateText(timestamps, index)
+                    : String.format("%s%s%s", generateText(timestamps, index),
+                            mIs24HourFormat ? "-" : " - ", generateText(timestamps, index + 1));
+        }
     }
 }

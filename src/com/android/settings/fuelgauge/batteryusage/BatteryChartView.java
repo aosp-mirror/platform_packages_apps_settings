@@ -158,7 +158,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             if (mViewModel != null) {
                 int maxTop = 0;
                 for (int index = 0; index < mViewModel.size(); index++) {
-                    final String text = mViewModel.texts().get(index);
+                    final String text = mViewModel.getText(index);
                     mTextPaint.getTextBounds(text, 0, text.length(), mAxisLabelsBounds.get(index));
                     maxTop = Math.max(maxTop, -mAxisLabelsBounds.get(index).top);
                 }
@@ -490,7 +490,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             Canvas canvas, final int index, final Rect displayArea, final float baselineY) {
         mTextPaint.setTextAlign(Paint.Align.CENTER);
         canvas.drawText(
-                mViewModel.texts().get(index),
+                mViewModel.getText(index),
                 displayArea.centerX(),
                 baselineY,
                 mTextPaint);
@@ -524,9 +524,9 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             mTrapezoidPaint.setColor(isHoverState ? mTrapezoidHoverColor : trapezoidColor);
 
             final float leftTop = round(
-                    trapezoidBottom - requireNonNull(mViewModel.levels().get(index)) * unitHeight);
+                    trapezoidBottom - requireNonNull(mViewModel.getLevel(index)) * unitHeight);
             final float rightTop = round(trapezoidBottom
-                    - requireNonNull(mViewModel.levels().get(index + 1)) * unitHeight);
+                    - requireNonNull(mViewModel.getLevel(index + 1)) * unitHeight);
             trapezoidPath.reset();
             trapezoidPath.moveTo(mTrapezoidSlots[index].mLeft, trapezoidBottom);
             trapezoidPath.lineTo(mTrapezoidSlots[index].mLeft, leftTop);
@@ -564,8 +564,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
 
     private static boolean isTrapezoidValid(
             @NonNull BatteryChartViewModel viewModel, int trapezoidIndex) {
-        return viewModel.levels().get(trapezoidIndex) != null
-                && viewModel.levels().get(trapezoidIndex + 1) != null;
+        return viewModel.getLevel(trapezoidIndex) != null
+                && viewModel.getLevel(trapezoidIndex + 1) != null;
     }
 
     private static boolean isTrapezoidIndexValid(
@@ -617,8 +617,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
                     new AccessibilityNodeInfo(BatteryChartView.this, index);
             onInitializeAccessibilityNodeInfo(childInfo);
             childInfo.setClickable(isValidToDraw(mViewModel, index));
-            childInfo.setText(mViewModel.texts().get(index));
-            childInfo.setContentDescription(mViewModel.texts().get(index));
+            childInfo.setText(mViewModel.getFullText(index));
+            childInfo.setContentDescription(mViewModel.getFullText(index));
 
             final Rect bounds = new Rect();
             getBoundsOnScreen(bounds, true);

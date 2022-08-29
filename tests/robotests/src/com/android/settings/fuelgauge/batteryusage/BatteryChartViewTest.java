@@ -63,8 +63,8 @@ public final class BatteryChartViewTest {
     public void onClick_invokesCallback() {
         final int originalSelectedIndex = 2;
         BatteryChartViewModel batteryChartViewModel = new BatteryChartViewModel(
-                List.of(90, 80, 70, 60), List.of("", "", "", ""),
-                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS);
+                List.of(90, 80, 70, 60), List.of(0L, 0L, 0L, 0L),
+                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS, null);
         batteryChartViewModel.setSelectedIndex(originalSelectedIndex);
         mBatteryChartView.setViewModel(batteryChartViewModel);
         for (int i = 0; i < mBatteryChartView.mTrapezoidSlots.length; i++) {
