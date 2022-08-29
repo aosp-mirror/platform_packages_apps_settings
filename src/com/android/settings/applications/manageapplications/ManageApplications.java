@@ -60,6 +60,7 @@ import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
 import android.text.TextUtils;
 import android.util.ArraySet;
+import android.util.FeatureFlagUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -131,6 +132,8 @@ import com.android.settings.localepicker.AppLocalePickerActivity;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.app.AppNotificationSettings;
+import com.android.settings.spa.SpaActivity;
+import com.android.settings.spa.app.InstallUnknownAppsListProvider;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settings.wifi.AppStateChangeWifiStateBridge;
 import com.android.settings.wifi.ChangeWifiStateDetails;
@@ -270,20 +273,36 @@ public class ManageApplications extends InstrumentedFragment
     private AppBarLayout mAppBarLayout;
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (!FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_ENABLE_SPA)) {
+            return;
+        }
+        Activity activity = getActivity();
+        final String className = getClassName(activity.getIntent(), getArguments());
+        if (className.equals(ManageExternalSourcesActivity.class.getName())) {
+            SpaActivity.startSpaActivity(
+                    context, InstallUnknownAppsListProvider.INSTANCE.getRoute());
+            activity.finish();
+        }
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
         final Activity activity = getActivity();
+        if (activity.isFinishing()) {
+            return;
+        }
+        setHasOptionsMenu(true);
         mUserManager = activity.getSystemService(UserManager.class);
         mApplicationsState = ApplicationsState.getInstance(activity.getApplication());
 
         Intent intent = activity.getIntent();
         Bundle args = getArguments();
         final int screenTitle = getTitleResId(intent, args);
-        String className = args != null ? args.getString(EXTRA_CLASSNAME) : null;
-        if (className == null) {
-            className = intent.getComponent().getClassName();
-        }
+        final String className = getClassName(intent, args);
         if (className.equals(StorageUseActivity.class.getName())) {
             if (args != null && args.containsKey(EXTRA_VOLUME_UUID)) {
                 mVolumeUuid = args.getString(EXTRA_VOLUME_UUID);
@@ -399,6 +418,9 @@ public class ManageApplications extends InstrumentedFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        if (getActivity().isFinishing()) {
+            return null;
+        }
         if (mListType == LIST_TYPE_OVERLAY && !Utils.isSystemAlertWindowEnabled(getContext())) {
             mRootView = inflater.inflate(R.layout.manage_applications_apps_unsupported, null);
             setHasOptionsMenu(false);
@@ -568,7 +590,9 @@ public class ManageApplications extends InstrumentedFragment
         if (mApplications != null) {
             mApplications.pause();
         }
-        mResetAppsHelper.stop();
+        if (mResetAppsHelper != null) {
+            mResetAppsHelper.stop();
+        }
     }
 
     @Override
@@ -931,10 +955,7 @@ public class ManageApplications extends InstrumentedFragment
     public static int getTitleResId(@NonNull Intent intent, Bundle args) {
         int screenTitle = intent.getIntExtra(
                 SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.all_apps);
-        String className = args != null ? args.getString(EXTRA_CLASSNAME) : null;
-        if (className == null) {
-            className = intent.getComponent().getClassName();
-        }
+        String className = getClassName(intent, args);
         if (className.equals(Settings.UsageAccessSettingsActivity.class.getName())) {
             screenTitle = R.string.usage_access;
         } else if (className.equals(Settings.HighPowerApplicationsActivity.class.getName())) {
@@ -967,6 +988,14 @@ public class ManageApplications extends InstrumentedFragment
             }
         }
         return screenTitle;
+    }
+
+    private static String getClassName(@NonNull Intent intent, Bundle args) {
+        String className = args != null ? args.getString(EXTRA_CLASSNAME) : null;
+        if (className == null) {
+            className = intent.getComponent().getClassName();
+        }
+        return className;
     }
 
     static class FilterSpinnerAdapter extends SettingsSpinnerAdapter<CharSequence> {
