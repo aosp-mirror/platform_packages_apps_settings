@@ -50,6 +50,8 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     static final String FINGERPRINT_SUGGESTION_ACTIVITY =
             "com.android.settings.SetupFingerprintSuggestionActivity";
 
+    private boolean mIsAddAnotherOrFinish;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,8 +110,22 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Reset it to false every time activity back to fg because this flag is stateless between
+        // different life cycle.
+        mIsAddAnotherOrFinish = false;
+    }
+
+    @Override
     protected void onNextButtonClick(View view) {
         updateFingerprintSuggestionEnableState();
+        finishAndToNext();
+    }
+
+    private void finishAndToNext() {
+        mIsAddAnotherOrFinish = true;
         setResult(RESULT_FINISHED);
         if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
             postEnroll();
@@ -145,20 +161,21 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     }
 
     private void onAddAnotherButtonClick(View view) {
+        mIsAddAnotherOrFinish = true;
         startActivityForResult(getFingerprintEnrollingIntent(), BiometricUtils.REQUEST_ADD_ANOTHER);
     }
 
     @Override
     protected boolean shouldFinishWhenBackgrounded() {
-        return !isFinishing() && super.shouldFinishWhenBackgrounded();
+        return !mIsAddAnotherOrFinish && super.shouldFinishWhenBackgrounded();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         updateFingerprintSuggestionEnableState();
         if (requestCode == BiometricUtils.REQUEST_ADD_ANOTHER && resultCode != RESULT_CANCELED) {
-            setResult(resultCode, data);
-            finish();
+            // If user cancel during "Add another", just use similar flow on "Next" button
+            finishAndToNext();
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
