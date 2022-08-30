@@ -49,8 +49,8 @@ import java.util.List;
 public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         BiometricEnrollSidecar.Listener {
 
-
     private static final String TAG = "FingerprintEnrollFindSensor";
+    private static final String SAVED_STATE_IS_NEXT_CLICKED = "is_next_clicked";
 
     @Nullable
     private FingerprintFindSensorAnimation mAnimation;
@@ -67,7 +67,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final FingerprintManager fingerprintManager = getSystemService(FingerprintManager.class);
+        final FingerprintManager fingerprintManager = Utils.getFingerprintManagerOrNull(this);
         final List<FingerprintSensorPropertiesInternal> props =
                 fingerprintManager.getSensorPropertiesInternal();
         mCanAssumeUdfps = props != null && props.size() == 1 && props.get(0).isAnyUdfpsType();
@@ -134,12 +134,14 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
             setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
             setDescriptionText(R.string.security_settings_fingerprint_enroll_find_sensor_message);
         }
+        if (savedInstanceState != null) {
+            mNextClicked = savedInstanceState.getBoolean(SAVED_STATE_IS_NEXT_CLICKED, mNextClicked);
+        }
 
         // This is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
         if (mToken == null && BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
-            final FingerprintManager fpm = getSystemService(FingerprintManager.class);
-            fpm.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
+            fingerprintManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
                 mChallenge = challenge;
                 mSensorId = sensorId;
                 mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
@@ -149,11 +151,19 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                 // it passed in.
                 getIntent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
 
-                startLookingForFingerprint();
+                // Do not start looking for fingerprint if this activity is re-created because it is
+                // waiting for activity result from enrolling activity.
+                if (!mNextClicked) {
+                    startLookingForFingerprint();
+                }
             });
         } else if (mToken != null) {
-            // HAT passed in from somewhere else, such as FingerprintEnrollIntroduction
-            startLookingForFingerprint();
+            // Do not start looking for fingerprint if this activity is re-created because it is
+            // waiting for activity result from enrolling activity.
+            if (!mNextClicked) {
+                // HAT passed in from somewhere else, such as FingerprintEnrollIntroduction
+                startLookingForFingerprint();
+            }
         } else {
             // There's something wrong with the enrollment flow, this should never happen.
             throw new IllegalStateException("HAT and GkPwHandle both missing...");
@@ -174,6 +184,12 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                 mAnimation = (FingerprintFindSensorAnimation) animationView;
             }
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(SAVED_STATE_IS_NEXT_CLICKED, mNextClicked);
     }
 
     @Override
@@ -240,7 +256,6 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     @Override
     public void onEnrollmentError(int errMsgId, CharSequence errString) {
         if (mNextClicked && errMsgId == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
-            mNextClicked = false;
             proceedToEnrolling(false /* cancelEnrollment */);
         } else {
             FingerprintErrorDialog.showErrorDialog(this, errMsgId);
@@ -270,6 +285,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     }
 
     private void onStartButtonClick(View view) {
+        mNextClicked = true;
         startActivityForResult(getFingerprintEnrollingIntent(), ENROLL_REQUEST);
     }
 
@@ -289,6 +305,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                     return;
                 }
             }
+            mSidecar.setListener(null);
             getSupportFragmentManager().beginTransaction().remove(mSidecar).
                     commitAllowingStateLoss();
             mSidecar = null;
@@ -341,6 +358,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                         finish();
                     } else {
                         // We came back from enrolling but it wasn't completed, start again.
+                        mNextClicked = false;
                         startLookingForFingerprint();
                     }
                     break;
