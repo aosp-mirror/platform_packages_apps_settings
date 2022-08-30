@@ -49,8 +49,8 @@ import java.util.List;
 public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         BiometricEnrollSidecar.Listener {
 
-
     private static final String TAG = "FingerprintEnrollFindSensor";
+    private static final String SAVED_STATE_IS_NEXT_CLICKED = "is_next_clicked";
 
     @Nullable
     private FingerprintFindSensorAnimation mAnimation;
@@ -174,6 +174,15 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                 mAnimation = (FingerprintFindSensorAnimation) animationView;
             }
         }
+        if (savedInstanceState != null) {
+            mNextClicked = savedInstanceState.getBoolean(SAVED_STATE_IS_NEXT_CLICKED, mNextClicked);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(SAVED_STATE_IS_NEXT_CLICKED, mNextClicked);
     }
 
     @Override
@@ -240,7 +249,6 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     @Override
     public void onEnrollmentError(int errMsgId, CharSequence errString) {
         if (mNextClicked && errMsgId == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
-            mNextClicked = false;
             proceedToEnrolling(false /* cancelEnrollment */);
         } else {
             FingerprintErrorDialog.showErrorDialog(this, errMsgId);
@@ -341,6 +349,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                         finish();
                     } else {
                         // We came back from enrolling but it wasn't completed, start again.
+                        mNextClicked = false;
                         startLookingForFingerprint();
                     }
                     break;
