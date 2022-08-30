@@ -265,6 +265,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         mBluetoothAdapter.enable();
         mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
         when(mCachedDeviceManager.findDevice(mBluetoothDevice)).thenReturn(mCachedBluetoothDevice);
+        when(mCachedBluetoothDevice.getAddress()).thenReturn(TEST_DEVICE_ADDRESS);
         when(mCachedBluetoothDevice.getName()).thenReturn(TEST_DEVICE_NAME);
     }
 
