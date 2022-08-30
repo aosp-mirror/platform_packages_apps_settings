@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import static android.hardware.biometrics.BiometricFingerprintConstants.FINGERPRINT_ERROR_USER_CANCELED;
+
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.annotation.IntDef;
@@ -51,6 +53,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.IdRes;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -80,6 +83,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private static final String TAG = "FingerprintEnrollEnrolling";
     static final String TAG_SIDECAR = "sidecar";
     static final String KEY_STATE_CANCELED = "is_canceled";
+    static final String KEY_STATE_PREVIOUS_ROTATION = "previous_rotation";
 
     private static final int PROGRESS_BAR_MAX = 10000;
 
@@ -134,6 +138,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private boolean mRestoring;
     private Vibrator mVibrator;
     private boolean mIsSetupWizard;
+    private boolean mIsOrientationChanged;
     private boolean mIsCanceled;
     private AccessibilityManager mAccessibilityManager;
     private boolean mIsAccessibilityEnabled;
@@ -153,6 +158,23 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         final int currentDensity = displayDensity.getValues()[currentDensityIndex];
         final int defaultDensity = displayDensity.getDefaultDensity();
         return defaultDensity == currentDensity;
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        if (hasFocus) {
+            return;
+        }
+
+        // By UX design, we should ensure seamless enrollment CUJ even though user rotate device.
+        // Do NOT cancel enrollment progress after rotating, adding mIsOrientationChanged
+        // to judge if the focus changed was triggered by rotation, current WMS has triple callbacks
+        // (true > false > true), we need to reset mIsOrientationChanged when !hasFocus callback.
+        if (!mIsOrientationChanged) {
+            onCancelEnrollment(FINGERPRINT_ERROR_USER_CANCELED);
+        } else {
+            mIsOrientationChanged = false;
+        }
     }
 
     @Override
@@ -295,11 +317,15 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(KEY_STATE_CANCELED, mIsCanceled);
+        outState.putInt(KEY_STATE_PREVIOUS_ROTATION, mPreviousRotation);
     }
 
     private void restoreSavedState(Bundle savedInstanceState) {
         mRestoring = true;
         mIsCanceled = savedInstanceState.getBoolean(KEY_STATE_CANCELED, false);
+        mPreviousRotation = savedInstanceState.getInt(KEY_STATE_PREVIOUS_ROTATION,
+                getDisplay().getRotation());
+        mIsOrientationChanged = mPreviousRotation != getDisplay().getRotation();
     }
 
     @Override
@@ -337,10 +363,38 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         }
     }
 
+    @VisibleForTesting
+    void onCancelEnrollment(@IdRes int errorMsgId) {
+        FingerprintErrorDialog.showErrorDialog(this, errorMsgId);
+        mIsCanceled = true;
+        mIsOrientationChanged = false;
+        cancelEnrollment();
+        stopIconAnimation();
+        stopListenOrientationEvent();
+        if (!mCanAssumeUdfps) {
+            mErrorText.removeCallbacks(mTouchAgainRunnable);
+        }
+    }
+
     @Override
     protected void onStop() {
-        super.onStop();
+        if (!isChangingConfigurations()) {
+            if (!WizardManagerHelper.isAnySetupWizard(getIntent())
+                    && !BiometricUtils.isAnyMultiBiometricFlow(this)
+                    && !mFromSettingsSummary) {
+                setResult(RESULT_TIMEOUT);
+            }
+            finish();
+        }
         stopIconAnimation();
+
+        super.onStop();
+    }
+
+    @Override
+    protected boolean shouldFinishWhenBackgrounded() {
+        // Prevent super.onStop() from finishing, since we handle this in our onStop().
+        return false;
     }
 
     @Override
@@ -541,14 +595,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     @Override
     public void onEnrollmentError(int errMsgId, CharSequence errString) {
-        FingerprintErrorDialog.showErrorDialog(this, errMsgId);
-        mIsCanceled = true;
-        cancelEnrollment();
-        stopIconAnimation();
-        stopListenOrientationEvent();
-        if (!mCanAssumeUdfps) {
-            mErrorText.removeCallbacks(mTouchAgainRunnable);
-        }
+        onCancelEnrollment(errMsgId);
     }
 
     @Override

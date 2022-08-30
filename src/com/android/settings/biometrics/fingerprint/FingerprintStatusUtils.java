@@ -78,8 +78,7 @@ public class FingerprintStatusUtils {
      * Returns the class name of the Settings page corresponding to fingerprint settings.
      */
     public String getSettingsClassName() {
-        return hasEnrolled() ? FingerprintSettings.class.getName()
-                : FingerprintEnrollIntroductionInternal.class.getName();
+        return FingerprintSettings.class.getName();
     }
 
     /**

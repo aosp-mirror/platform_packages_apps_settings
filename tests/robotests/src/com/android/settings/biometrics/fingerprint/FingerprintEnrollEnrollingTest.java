@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import static com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling.KEY_STATE_PREVIOUS_ROTATION;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -28,14 +30,18 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.Context;
 import android.hardware.biometrics.ComponentInfoInternal;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintManager.EnrollmentCallback;
 import android.hardware.fingerprint.FingerprintSensorProperties;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
+import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Vibrator;
+import android.view.Display;
+import android.view.Surface;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -49,6 +55,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 
 import java.util.ArrayList;
@@ -61,7 +68,10 @@ public class FingerprintEnrollEnrollingTest {
 
     @Mock private Vibrator mVibrator;
 
+    @Mock private Display mMockDisplay;
+
     private FingerprintEnrollEnrolling mActivity;
+    private Context mContext;
 
     @Before
     public void setUp() {
@@ -100,6 +110,26 @@ public class FingerprintEnrollEnrollingTest {
         verify(mVibrator, never()).vibrate(anyInt(), anyString(), any(), anyString(), any());
     }
 
+    @Test
+    public void fingerprintUdfpsOverlayEnrollment_gainFocus_shouldNotCancel() {
+        initializeActivityFor(FingerprintSensorProperties.TYPE_UDFPS_OPTICAL);
+
+        mActivity.onEnrollmentProgressChange(1, 1);
+        mActivity.onWindowFocusChanged(true);
+
+        verify(mActivity, never()).onCancelEnrollment(anyInt());
+    }
+
+    @Test
+    public void fingerprintUdfpsOverlayEnrollment_loseFocus_shouldCancel() {
+        initializeActivityFor(FingerprintSensorProperties.TYPE_UDFPS_OPTICAL);
+
+        mActivity.onEnrollmentProgressChange(1, 1);
+        mActivity.onWindowFocusChanged(false);
+
+        verify(mActivity, never()).onCancelEnrollment(anyInt());
+    }
+
     private void initializeActivityFor(int sensorType) {
         final List<ComponentInfoInternal> componentInfo = new ArrayList<>();
         final FingerprintSensorPropertiesInternal prop =
@@ -111,15 +141,21 @@ public class FingerprintEnrollEnrollingTest {
                         sensorType,
                         true /* resetLockoutRequiresHardwareAuthToken */);
         final ArrayList<FingerprintSensorPropertiesInternal> props = new ArrayList<>();
+        final Bundle savedInstanceState = new Bundle();
+        savedInstanceState.putInt(KEY_STATE_PREVIOUS_ROTATION, Surface.ROTATION_90);
         props.add(prop);
-        when(mFingerprintManager.getSensorPropertiesInternal()).thenReturn(props);
-
+        mContext = spy(RuntimeEnvironment.application);
         mActivity = spy(FingerprintEnrollEnrolling.class);
+
+        when(mFingerprintManager.getSensorPropertiesInternal()).thenReturn(props);
+        when(mContext.getDisplay()).thenReturn(mMockDisplay);
+        when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_0);
+
         doReturn(true).when(mActivity).shouldShowLottie();
         doReturn(mFingerprintManager).when(mActivity).getSystemService(FingerprintManager.class);
         doReturn(mVibrator).when(mActivity).getSystemService(Vibrator.class);
 
-        ActivityController.of(mActivity).create();
+        ActivityController.of(mActivity).create(savedInstanceState);
     }
 
     private EnrollmentCallback verifyAndCaptureEnrollmentCallback() {
