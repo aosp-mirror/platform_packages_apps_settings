@@ -515,7 +515,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
 
     private boolean hasOverlap(
             final Rect[] displayAreas, final int leftIndex, final int rightIndex) {
-        return displayAreas[leftIndex].right + mTextPadding * 2f > displayAreas[rightIndex].left;
+        return displayAreas[leftIndex].right + mTextPadding * 2.3f > displayAreas[rightIndex].left;
     }
 
     private void drawAxisLabelText(

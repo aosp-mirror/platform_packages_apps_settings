@@ -26,6 +26,8 @@ import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -103,6 +105,11 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         footerMessage4.setText(getFooterMessage4());
         footerMessage5.setText(getFooterMessage5());
         footerMessage6.setText(getFooterMessage6());
+
+        final TextView footerLink = findViewById(R.id.footer_learn_more);
+        footerLink.setMovementMethod(LinkMovementMethod.getInstance());
+        footerLink.setText(Html.fromHtml(getString(getFooterLearnMore()),
+                Html.FROM_HTML_MODE_LEGACY));
 
         if (mCanAssumeUdfps) {
             footerMessage6.setVisibility(View.VISIBLE);
@@ -185,6 +192,11 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     @StringRes
     protected int getFooterMessage6() {
         return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_6;
+    }
+
+    @StringRes
+    protected int getFooterLearnMore() {
+        return R.string.security_settings_fingerprint_v2_enroll_introduction_message_learn_more;
     }
 
     @Override

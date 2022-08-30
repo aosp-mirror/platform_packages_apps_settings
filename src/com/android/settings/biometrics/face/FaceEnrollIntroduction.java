@@ -26,6 +26,8 @@ import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -120,7 +122,9 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         infoMessageLooking.setText(getInfoMessageLooking());
         inControlTitle.setText(getInControlTitle());
         howMessage.setText(getHowMessage());
-        inControlMessage.setText(getInControlMessage());
+        inControlMessage.setText(Html.fromHtml(getString(getInControlMessage()),
+                Html.FROM_HTML_MODE_LEGACY));
+        inControlMessage.setMovementMethod(LinkMovementMethod.getInstance());
         lessSecure.setText(getLessSecureMessage());
 
         // Set up and show the "less secure" info section if necessary.
