@@ -51,6 +51,7 @@ android_library {
     defaults: [
         "SettingsLibDefaults",
         "SettingsLib-search-defaults",
+        "SpaPrivilegedLib-defaults",
     ],
 
     srcs: ["src/**/*.java", "src/**/*.kt"],
@@ -63,6 +64,7 @@ android_library {
         "androidx.core_core",
         "androidx.appcompat_appcompat",
         "androidx.cardview_cardview",
+        "androidx.compose.runtime_runtime-livedata",
         "androidx.preference_preference",
         "androidx.recyclerview_recyclerview",
         "androidx.window_window",
@@ -103,7 +105,10 @@ platform_compat_config {
 
 android_app {
     name: "Settings",
-    defaults: ["platform_app_defaults"],
+    defaults: [
+        "platform_app_defaults",
+        "SpaPrivilegedLib-defaults",
+    ],
     platform_apis: true,
     certificate: "platform",
     system_ext_specific: true,
