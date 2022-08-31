@@ -35,7 +35,7 @@ import com.android.settingslib.RestrictedPreference;
  */
 public class CombinedBiometricStatusPreferenceController extends
         BiometricStatusPreferenceController implements LifecycleObserver {
-    private static final String KEY_BIOMETRIC_SETTINGS = "biometric_settings";
+    public static final String KEY_BIOMETRIC_SETTINGS = "biometric_settings";
 
     @VisibleForTesting
     RestrictedPreference mPreference;
@@ -121,5 +121,9 @@ public class CombinedBiometricStatusPreferenceController extends
     @Override
     protected String getSettingsClassName() {
         return mCombinedBiometricStatusUtils.getSettingsClassName();
+    }
+
+    public void setPreferenceScreen(PreferenceScreen preferenceScreen) {
+        mPreferenceScreen = preferenceScreen;
     }
 }
