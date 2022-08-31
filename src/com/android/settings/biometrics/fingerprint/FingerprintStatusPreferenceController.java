@@ -35,7 +35,7 @@ import com.android.settingslib.RestrictedPreference;
 public class FingerprintStatusPreferenceController extends BiometricStatusPreferenceController
         implements LifecycleObserver {
 
-    private static final String KEY_FINGERPRINT_SETTINGS = "fingerprint_settings";
+    public static final String KEY_FINGERPRINT_SETTINGS = "fingerprint_settings";
 
     protected final FingerprintManager mFingerprintManager;
     @VisibleForTesting
@@ -111,5 +111,9 @@ public class FingerprintStatusPreferenceController extends BiometricStatusPrefer
         if (mPreference != null) {
             mPreference.setDisabledByAdmin(enforcedAdmin);
         }
+    }
+
+    public void setPreferenceScreen(PreferenceScreen preferenceScreen) {
+        mPreferenceScreen = preferenceScreen;
     }
 }
