@@ -4902,6 +4902,10 @@
 
     <!-- Title of setting on main settings screen.  This item will take the user to the screen to tweak settings realted to locale and text -->
     <string name="language_settings">Languages&#160;&amp; input</string>
+    <!-- Title of setting on main settings screen.  This item will take the user to the screen to tweak settings related to languages -->
+    <string name="languages_settings">Languages</string>
+    <!-- Title of setting on main settings screen.  This item will take the user to the screen to tweak settings related to keyboards -->
+    <string name="keyboard_settings">Keyboard</string>
     <!-- Text displayed when user has restriction DISALLOW_CONFIG_LOCALE [CHAR LIMIT=NONE]-->
     <string name="language_empty_list_user_restricted">You don\u2019t have permission to change the device language.</string>
     <!-- Title of Languages & input settings screen -->
@@ -4910,6 +4914,8 @@
     <string name="input_assistance">Tools</string>
     <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to keyboard (enable/disable each keyboard, settings for each keyboard). -->
     <string name="keyboard_settings_category">Keyboard &amp; input methods</string>
+    <!-- On Languages settings screen, setting option name. title of the setting to take the user to a screen to select the locale. -->
+    <string name="system_language">System Languages</string>
     <!-- On Text & language settings screen, setting option name. title of the setting to take the user to a screen to select the locale. -->
     <string name="phone_language">Languages</string>
     <!-- On Text & language settings screen, setting option name. summary of the setting to take the user to a screen to select the locale. -->
@@ -5077,6 +5083,10 @@
     <string name="input_methods_and_subtype_enabler_title">Choose active input methods</string>
     <!-- Summary for on-screen keyboard settings -->
     <string name="onscreen_keyboard_settings_summary">Onscreen keyboard settings</string>
+    <!-- Summary for default keyboard settings -->
+    <string name="keyboard_settings_summary">On-screen keyboard, Speech, Tools</string>
+    <!-- Summary for keyboard settings attaching physical_keyboard  -->
+    <string name="keyboard_settings_with_physical_keyboard_summary">On-screen keyboard, Physical keyboard, Speech, Tools</string>
     <!-- Title for built-in keyboard settings -->
     <string name="builtin_keyboard_settings_title">Physical keyboard</string>
     <!-- Summary for built-in keyboard settings -->
@@ -7974,8 +7984,10 @@
     <!-- Title for setting tile leading to setting UI which allows user set default app to
     handle actions such as open web page, making phone calls, default SMS apps [CHAR  LIMIT=40]-->
     <string name="app_default_dashboard_title">Default apps</string>
-    <!-- Summary text for system preference tile, showing important setting items under system setting [CHAR LIMIT=NONE]-->
+    <!-- Summary text for system preference title, showing important setting items under system setting [CHAR LIMIT=NONE]-->
     <string name="system_dashboard_summary">Languages, gestures, time, backup</string>
+    <!-- Summary text for language preference title, showing important setting items under language setting [CHAR LIMIT=NONE]-->
+    <string name="languages_setting_summary">System languages, app languages</string>
 
     <!-- Search strings -->
     <!-- Text to describe the search results fragment title [CHAR LIMIT=16] -->
@@ -13707,5 +13719,12 @@
     <string name="bt_le_audio_scan_qr_code_scanner">To start listening, center the QR code below</string>
     <!-- [CHAR LIMIT=NONE] Hint for QR code process failure -->
     <string name="bt_le_audio_qr_code_is_not_valid_format">QR code isn\u0027t a valid format</string>
+
+    <!-- Accessibility Software Cursor -->
+
+    <!-- [CHAR LIMIT=NONE] Title for Accessibility Software Cursor setting for trigger hints. -->
+    <string name="software_cursor_trigger_hints_enabled_title" translatable="false">Gesture detection area hints</string>
+    <!-- [CHAR LIMIT=NONE] Title for Accessibility Software Cursor setting for keyboard shift. -->
+    <string name="software_cursor_trigger_keyboard_shift_enabled_title" translatable="false">Shift gesture detection region above keyboard</string>
 
 </resources>

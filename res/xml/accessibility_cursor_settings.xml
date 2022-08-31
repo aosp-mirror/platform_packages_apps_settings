@@ -22,4 +22,14 @@
         android:key="screen_software_cursor_preference_switch"
         android:title="@string/accessibility_screen_software_cursor_title"
         settings:controller="com.android.settings.accessibility.SoftwareCursorTogglePreferenceController"/>
+
+    <SwitchPreference
+       android:key="cursor_trigger_hints_enabled"
+       android:title="@string/software_cursor_trigger_hints_enabled_title"
+       settings:controller="com.android.settings.accessibility.SoftwareCursorTriggerHintsPreferenceController"/>
+    <SwitchPreference
+       android:key="cursor_trigger_keyboard_shift_enabled"
+       android:title="@string/software_cursor_trigger_keyboard_shift_enabled_title"
+       settings:controller="com.android.settings.accessibility.SoftwareCursorKeyboardShiftPreferenceController"/>
+
 </PreferenceScreen>
