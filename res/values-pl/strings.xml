@@ -220,13 +220,15 @@
     <string name="skip_label" msgid="6380034601349015895">"Pomiń"</string>
     <string name="next_label" msgid="1248293387735652187">"Dalej"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Języki"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"Porządek preferowanych języków"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"Język systemu"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Usuń"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Dodaj język"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Język"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Preferowany język"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Języki aplikacji"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Języki aplikacji"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Ustaw języki dla poszczególnych aplikacji"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"Język aplikacji"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"Język aplikacji"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Sugerowane języki"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Wszystkie języki"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Język systemu"</string>
@@ -234,6 +236,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Wybór języka tej aplikacji nie jest dostępny w Ustawieniach."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Język może się różnić od języków dostępnych w aplikacji. NIektóre aplikacje mogą nie obsługiwać tego ustawienia."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Wyświetlają się tutaj tylko aplikacje, które działają w wybranym języku."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"System, aplikacje i strony internetowe używają pierwszego obsługiwanego języka z listy preferowanych języków."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Aby wybrać języki poszczególnych aplikacji, otwórz ustawienia języków aplikacji."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Więcej informacji o językach"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="few">Usunąć wybrane języki?</item>
       <item quantity="many">Usunąć wybrane języki?</item>
@@ -243,7 +248,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Tekst będzie wyświetlany w innym języku."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Nie można usunąć wszystkich języków"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Zachowaj co najmniej jeden preferowany język"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"Może nie być dostępny w niektórych aplikacjach"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"Niedostępny jako język systemu"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Przesuń w górę"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Przesuń w dół"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Przenieś na górę"</string>
@@ -546,9 +551,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Dzięki temu zeskanujesz większą część odcisku palca"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Rejestruję odcisk palca – <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Odcisk palca dodany"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Odblokowywanie odciskiem palca działa coraz lepiej, gdy używasz tej funkcji do odblokowywania tabletu i potwierdzania swojej tożsamości w aplikacjach"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Odblokowywanie odciskiem palca działa coraz lepiej, gdy używasz tej funkcji do odblokowywania urządzenia i potwierdzania swojej tożsamości w aplikacjach"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Odblokowywanie odciskiem palca działa coraz lepiej, gdy używasz tej funkcji do odblokowywania telefonu i potwierdzania swojej tożsamości w aplikacjach"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Możesz teraz używać odcisku palca do odblokowywania tabletu oraz weryfikacji tożsamości, na przykład podczas logowania się w aplikacjach"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Możesz teraz używać odcisku palca do odblokowywania urządzenia oraz weryfikacji tożsamości, na przykład podczas logowania się w aplikacjach"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Możesz teraz używać odcisku palca do odblokowywania telefonu oraz weryfikacji tożsamości, na przykład podczas logowania się w aplikacjach"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Później"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Podnieś i przyłóż ponownie"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Umieść na czytniku palec bokiem i przytrzymaj, a następnie obróć na drugi bok"</string>
@@ -2828,10 +2833,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Niektóre funkcje mogą być ograniczone"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Wyższe wykorzystanie baterii"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Zobacz aplikacje, które najbardziej wykorzystują baterię"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Ładowanie zostało wstrzymane"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Oszczędzam baterię, aby przedłużyć jej żywotność\nKliknij, aby dowiedzieć się więcej"</string>
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
     <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Wznów ładowanie"</string>
@@ -2879,8 +2882,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Ta aplikacja może wykorzystywać baterię, działając w tle. Może to powodować szybsze wyczerpywanie baterii."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Usuń"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Anuluj"</string>
-    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
-    <skip />
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Ładuj do pełna"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Aplikacje zużywają normalną ilość energii. Jeśli będą zużywały jej za dużo, telefon zasugeruje działania, które będzie można podjąć.\n\nZawsze możesz włączyć Oszczędzanie baterii, gdy spadnie poziom jej naładowania."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Aplikacje zużywają normalną ilość energii. Jeśli będą zużywały jej za dużo, tablet zasugeruje działania, które będzie można podjąć.\n\nZawsze możesz włączyć Oszczędzanie baterii, gdy spadnie poziom jej naładowania."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Aplikacje zużywają normalną ilość energii. Jeśli będą zużywały jej za dużo, urządzenie zasugeruje działania, które będzie można podjąć.\n\nZawsze możesz włączyć Oszczędzanie baterii, gdy spadnie poziom jej naładowania."</string>
@@ -3074,13 +3076,19 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"W tle: niecała minuta"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Łącznie: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"W tle: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Dane o wykorzystaniu baterii są przybliżone i nie są mierzone podczas ładowania telefonu"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Dane o wykorzystaniu baterii będą dostępne po kilku godzinach używania telefonu"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Dane o wykorzystaniu baterii są przybliżone i nie są mierzone podczas ładowania telefonu"</string>
+    <!-- no translation found for battery_usage_screen_footer (3729564192877964259) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
+    <skip />
+    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"Dane o wykorzystaniu baterii będą dostępne po kilku godzinach używania telefonu"</string>
+    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Wykres zużycia baterii"</string>
-    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
-    <skip />
-    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
-    <skip />
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Wykres dziennego wykorzystania baterii"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Wykres godzinowego wykorzystania baterii"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statystyki procesów"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Rozbudowane statystyki uruchomionych procesów"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Użycie pamięci"</string>
@@ -3908,7 +3916,7 @@
     <string name="zen_mode_block_effect_light" msgid="1997222991427784993">"Nie włączaj migania diody"</string>
     <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"Nie wyświetlaj powiadomień na ekranie"</string>
     <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"Ukrywaj ikony na pasku stanu u góry ekranu"</string>
-    <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Ukrywaj plakietki z powiadomieniem na ikonach aplikacji"</string>
+    <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Ukrywaj kropki powiadomień na ikonach aplikacji"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"Nie wybudzaj w przypadku powiadomień"</string>
     <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"Ukrywaj w obszarze powiadomień"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"Nigdy"</string>
@@ -4009,7 +4017,7 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Zezwalaj na odkładanie powiadomień"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Ukryj ikony z subtelnych powiadomień"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Ikony z subtelnych powiadomień nie są pokazywane na pasku stanu"</string>
-    <string name="notification_badging_title" msgid="5469616894819568917">"Plakietka z powiadomieniem na ikonie aplikacji"</string>
+    <string name="notification_badging_title" msgid="5469616894819568917">"Kropka powiadomienia na ikonie aplikacji"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"Pokaż pasek ostatnich rozmów"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Dymki"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Niektóre powiadomienia i inne treści mogą pojawiać się jako dymki na ekranie. Aby otworzyć dymek, kliknij go. Aby zamknąć, przeciągnij go w dół ekranu."</string>
@@ -4265,8 +4273,8 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Nigdy nie pokazuj tych powiadomień"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Pokazuj powiadomienia"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Nigdy nie pokazuj powiadomień w obszarze powiadomień ani na urządzeniach peryferyjnych"</string>
-    <string name="notification_badge_title" msgid="6854537463548411313">"Zezwalaj na plakietkę z powiadomieniem"</string>
-    <string name="notification_channel_badge_title" msgid="6505542437385640049">"Pokazuj plakietkę z powiadomieniem"</string>
+    <string name="notification_badge_title" msgid="6854537463548411313">"Zezwalaj na kropkę powiadomienia"</string>
+    <string name="notification_channel_badge_title" msgid="6505542437385640049">"Pokazuj kropkę powiadomienia"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"Ignoruj Nie przeszkadzać"</string>
     <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"Zezwól na działanie tych powiadomień, gdy tryb Nie przeszkadzać jest włączony"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"Ekran blokady"</string>
@@ -5796,10 +5804,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"Multimedia"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Przypnij odtwarzacz"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Aby można było szybko wznowić odtwarzanie, odtwarzacz pozostaje otwarty w Szybkich ustawieniach"</string>
-    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
-    <skip />
-    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
-    <skip />
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Pokazuj multimedia na ekranie blokady"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"Aby można było szybko wznowić odtwarzanie, odtwarzacz pozostaje otwarty na ekranie blokady"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Pokazuj rekomendacje multimediów"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Na podstawie Twojej aktywności"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Ukryj odtwarzacz"</string>

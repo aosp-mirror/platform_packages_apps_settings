@@ -218,13 +218,15 @@
     <string name="skip_label" msgid="6380034601349015895">"דילוג"</string>
     <string name="next_label" msgid="1248293387735652187">"הבא"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"שפות"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"סדר השפות המועדפות"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"שפת המערכת"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"הסרה"</string>
     <string name="add_a_language" msgid="2126220398077503271">"הוספת שפה"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"שפה"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"השפה המועדפת"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"שפות של אפליקציות"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"שפות של אפליקציות"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"הגדרת השפה של כל אפליקציה"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"שפת האפליקציה"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"שפת האפליקציה"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"השפות המוצעות"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"כל השפות"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"שפת המערכת"</string>
@@ -232,6 +234,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"בחירות השפה לאפליקציה הזו לא זמינה בהגדרות."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"השפה עשויה להיות שונה מהשפות הזמינות באפליקציה. יכול להיות שחלק מהאפליקציות לא תומכות בהגדרה הזו."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"מוצגות כאן רק אפליקציות התומכות בבחירת שפה."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"המערכת, האפליקציות והאתרים שלך משתמשים בשפה הנתמכת הראשונה מתוך השפות שציינת כמועדפות."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"כדי לבחור שפה עבור כל אפליקציה, יש לעבור אל ההגדרות של שפת האפליקציה."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"מידע נוסף על שפות"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="two">להסיר את השפות שנבחרו?</item>
       <item quantity="many">להסיר את השפות שנבחרו?</item>
@@ -241,7 +246,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"הטקסט יוצג בשפה אחרת."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"לא ניתן להסיר את כל השפות"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"אני רוצה לשמור לפחות שפה מועדפת אחת"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"ייתכן שהשפה לא תהיה זמינה בחלק מהיישומים"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"השפה לא זמינה כשפת מערכת"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"הזזה למעלה"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"הזזה למטה"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"העברה לראש הרשימה"</string>
@@ -546,9 +551,9 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"טביעת האצבע שלך נקלטה"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"ביטול הנעילה בטביעת אצבע משתפר ככל שמשתמשים בו יותר כדי לבטל את הנעילה של הטאבלט או לאמת את הזהות שלך באפליקציות"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"ביטול הנעילה בטביעת אצבע משתפר ככל שמשתמשים בו יותר כדי לבטל את הנעילה של המכשיר או לאמת את הזהות שלך באפליקציות"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"ביטול הנעילה בטביעת אצבע משתפר ככל שמשתמשים בו יותר כדי לבטל את הנעילה של הטלפון או לאמת את הזהות שלך באפליקציות"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"עכשיו אפשר להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטאבלט או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"עכשיו אפשר להשתמש בטביעת האצבע כדי לבטל את נעילת המכשיר או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"עכשיו אפשר להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטלפון או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"לא עכשיו"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"מרימים ונוגעים בחיישן שוב"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"מניחים צד אחד של האצבע על החיישן ומחזיקים. אחר כך עוברים לצד השני"</string>
@@ -3071,8 +3076,16 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"ברקע: פחות מדקה"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"סה\"כ: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"ברקע: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"נתוני השימוש בסוללה משוערים ולא כוללים מדדים של השימוש בסוללה כשהטלפון בטעינה"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"נתוני השימוש בסוללה יהיו זמינים לאחר שייעשה שימוש בטלפון שלך במשך מספר שעות"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"נתוני השימוש בסוללה משוערים ולא כוללים מדדים של השימוש בסוללה כשהטלפון בטעינה"</string>
+    <!-- no translation found for battery_usage_screen_footer (3729564192877964259) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
+    <skip />
+    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"נתוני השימוש בסוללה יהיו זמינים לאחר שייעשה שימוש בטלפון שלך במשך מספר שעות"</string>
+    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"תרשים של השימוש בסוללה"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"תרשים של השימוש היומי בסוללה"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"תרשים של השימוש השעתי בסוללה"</string>
@@ -5791,10 +5804,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"מדיה"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"הצמדה של נגן המדיה"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"לצורך המשך מהיר של ההפעלה, נגן המדיה נשאר פתוח בהגדרות המהירות"</string>
-    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
-    <skip />
-    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
-    <skip />
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"הצגת מדיה במסך הנעילה"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"כדי שתהיה לך אפשרות להמשיך במהירות את ההפעלה, נגן המדיה נשאר פתוח במסך הנעילה"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"הצגת המלצות על מדיה"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"על סמך הפעילות שלך"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"הסתרת הנגן"</string>
