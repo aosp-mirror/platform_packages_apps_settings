@@ -142,11 +142,11 @@ public final class ConvertUtils {
     public static String utcToLocalTimeHour(
             final Context context, final long timestamp, final boolean is24HourFormat) {
         final Locale locale = getLocale(context);
-        // e.g. for 12-hour format: 9 pm
+        // e.g. for 12-hour format: 9 PM
         // e.g. for 24-hour format: 09:00
         final String skeleton = is24HourFormat ? "HHm" : "ha";
         final String pattern = DateFormat.getBestDateTimePattern(locale, skeleton);
-        return DateFormat.format(pattern, timestamp).toString().toLowerCase(locale);
+        return DateFormat.format(pattern, timestamp).toString();
     }
 
     /** Converts UTC timestamp to local time day of week data. */
