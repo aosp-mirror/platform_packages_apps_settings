@@ -216,13 +216,15 @@
     <string name="skip_label" msgid="6380034601349015895">"略過"</string>
     <string name="next_label" msgid="1248293387735652187">"下一步"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"語言"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"偏好語言順序"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"系統語言"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"移除"</string>
     <string name="add_a_language" msgid="2126220398077503271">"加入語言"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"語言"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"偏好語言"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"應用程式語言"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"應用程式語言"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"為每個應用程式設定語言"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"應用程式語言"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"應用程式語言"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"建議的語言"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"所有語言"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"系統語言"</string>
@@ -230,6 +232,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"「設定」中不提供此應用程式的語言選擇。"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"可用的語言可能與應用程式支援的語言不同，部分應用程式可能不支援此設定。"</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"這裡只會顯示支援語言選擇的應用程式。"</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"你的系統、應用程式和網站會使用偏好語言中第一個支援的語言。"</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"如要為各應用程式選取語言，請前往應用程式語言設定。"</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"進一步瞭解語言"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">要移除選取的語言嗎？</item>
       <item quantity="one">要移除選取的語言嗎？</item>
@@ -237,7 +242,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"文字將以其他語言顯示。"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"無法移除所有語言"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"請至少保留一種偏好語言"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"部分應用程式可能不支援"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"無法設為系統語言"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"向上移"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"向下移"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"移至頂端"</string>
@@ -538,9 +543,9 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"已加入指紋"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"當您越常使用指紋解鎖功能來解鎖平板電腦或在應用程式中驗證身分，準確度就會越高"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"當您越常使用指紋解鎖功能來解鎖裝置或在應用程式中驗證身分，準確度就會越高"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"您越常使用「指紋解鎖」來解鎖手機或在應用程式中驗證身分，其準確度就會越高"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"現在可使用指紋解鎖平板電腦或驗證身分，例如用來登入應用程式"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"現在可使用指紋解鎖裝置或驗證身分，例如用來登入應用程式"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"現在可使用指紋解鎖手機或驗證身分，例如用來登入應用程式"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"稍後再做"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"移開手指，然後再次輕觸感應器"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"將指紋的一側放上感應器並按住，然後再換另一側"</string>
@@ -1882,7 +1887,7 @@
     <string name="location_title" msgid="5819154746934945021">"我的位置"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"工作設定檔的位置"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"應用程式位置權限"</string>
-    <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"位置功能已關閉"</string>
+    <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"位置設定已關閉"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
       <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> 個應用程式 (共 <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> 個) 可存取位置資訊</item>
       <item quantity="one"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g> 個應用程式 (共 <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> 個) 可存取位置資訊</item>
@@ -2996,8 +3001,16 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"背景：不足 1 分鐘"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"總計：<xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"背景：<xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"電池用量資料為概略值，且手機在充電時不會估算電池用量"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"手機使用數小時後，才會顯示電池用量資料"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"電池用量資料為概略值，且手機在充電時不會估算電池用量"</string>
+    <!-- no translation found for battery_usage_screen_footer (3729564192877964259) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
+    <skip />
+    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"手機使用數小時後，才會顯示電池用量資料"</string>
+    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"電池用量圖表"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"每日電池用量圖表"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"每小時電池用量圖表"</string>
@@ -5618,10 +5631,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"媒體"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"固定媒體播放器"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"如要快速恢復播放，請讓「快速設定」中的媒體播放器保持開啟"</string>
-    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
-    <skip />
-    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
-    <skip />
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"在上鎖畫面上顯示媒體"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"如要快速恢復播放，請讓媒體播放器在上鎖畫面保持開啟"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"顯示媒體建議"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"根據您的活動"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"隱藏播放器"</string>

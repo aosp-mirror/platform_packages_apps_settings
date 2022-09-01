@@ -217,13 +217,15 @@
     <string name="skip_label" msgid="6380034601349015895">"Прескочи"</string>
     <string name="next_label" msgid="1248293387735652187">"Даље"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Језици"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"Редослед жељених језика"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"Језик система"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Уклони"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Додајте језик"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Језик"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Жељени језик"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Језици у апликацији"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Језици апликација"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Подесите језик за сваку апликацију"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"Језик апликације"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"Језик апликације"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Предложени језици"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Сви језици"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Језик система"</string>
@@ -231,6 +233,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Избор језика за ову апликацију није доступан из Подешавања."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Језик може да се разликује од језика доступних у апликацији. Неке апликације можда не подржавају ово подешавање."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Овде се приказују само апликације које подржавају избор језика."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Систем, апликације и веб-сајтови користе први подржани језик из жељених језика."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Да бисте изабрали језик за сваку апликацију, идите у подешавања језика апликације."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Сазнајте више о језицима"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Желите ли да уклоните изабране језике?</item>
       <item quantity="few">Желите ли да уклоните изабране језике?</item>
@@ -239,7 +244,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Текст ће бити приказан на неком другом језику."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Није могуће уклонити све језике"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Задржите бар један жељени језик"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"Можда није доступно у неким апликацијама"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"Није доступно као језик система"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Премести нагоре"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Премести надоле"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Премести на врх"</string>
@@ -540,9 +545,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Тако ћете снимити већи део отиска прста"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Регистровање отиска прста је на <xliff:g id="PERCENTAGE">%d</xliff:g> посто"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Отисак прста је додат"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Откључавање отиском прста побољшава се што га више користите за откључавање таблета или потврду идентитета у апликацијама"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Откључавање отиском прста побољшава се што га више користите за откључавање уређаја или потврду идентитета у апликацијама"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Откључавање отиском прста побољшава се што га више користите за откључавање телефона или потврду идентитета у апликацијама"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Сада можете да користите отисак прста за откључавање таблета или потврду идентитета, на пример, кад се пријављујете у апликације"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Сада можете да користите отисак прста за откључавање уређаја или потврду идентитета, на пример, кад се пријављујете у апликације"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Сада можете да користите отисак прста за откључавање телефона или потврду идентитета, на пример, кад се пријављујете у апликације"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Урадићу то касније"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Подигните, па опет додирните"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Ставите једну страну прста на сензор и задржите, па ставите другу страну"</string>
@@ -1638,7 +1643,7 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Преименуј"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Прикључи"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Избаци"</string>
-    <string name="storage_menu_format" msgid="8903698999905354146">"Форматирај SD картицу за преносиву меморију"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Форматирајте SD картицу за преносиву меморију"</string>
     <string name="storage_menu_format_button" msgid="7623565190643699626">"Форматирај картицу"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Форматирај као преносну"</string>
     <string name="storage_menu_format_option" msgid="4886059624052908432">"Форматирај"</string>
@@ -1699,7 +1704,7 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Пренеси"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Подаци се преносе…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Током преноса: \n• Не уклањајте уређај <xliff:g id="NAME">^1</xliff:g>. \n• Неке апликације неће правилно функционисати. \n• Уређај треба да буде напуњен."</string>
-    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> је форматиран/а"</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> је форматирана"</string>
     <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Можете да почнете да користите <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Можете да почнете да користите <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Пренесите апликацију <xliff:g id="APP">^1</xliff:g>"</string>
@@ -1740,9 +1745,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"И даље можете да користите уређај <xliff:g id="NAME_0">^1</xliff:g>, али ће можда споро радити. \n\nАпликације које се налазе на уређају <xliff:g id="NAME_1">^2</xliff:g> можда неће исправно радити, а преноси садржаја ће можда дуго трајати. \n\nПробајте да користите бржи уређај <xliff:g id="NAME_2">^3</xliff:g> или користите уређај <xliff:g id="NAME_3">^4</xliff:g> као преносиви меморијски простор."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Почни поново"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Настави"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Можете да почнете да користите <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Можете да почнете да користите <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Можете да почнете да користите <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Можете да почнете да користите: <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Можете да почнете да користите: <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Можете да почнете да користите: <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Статус батерије"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Ниво батерије"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Називи приступних тачака"</string>
@@ -3031,8 +3036,16 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Позадина: мање од минут"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Укупно: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Позадина: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Подаци о потрошњи батерије су приближни и не мере потрошњу када се телефон пуни"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Подаци о потрошњи батерије ће бити доступни пошто будете користили телефон неколико сати"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Подаци о потрошњи батерије су приближни и не мере потрошњу када се телефон пуни"</string>
+    <!-- no translation found for battery_usage_screen_footer (3729564192877964259) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
+    <skip />
+    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"Подаци о потрошњи батерије ће бити доступни пошто будете користили телефон неколико сати"</string>
+    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Графикон потрошње батерије"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Графикон дневне потрошње батерије"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Графикон потрошње батерије по сатима"</string>

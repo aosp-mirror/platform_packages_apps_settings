@@ -216,13 +216,15 @@
     <string name="skip_label" msgid="6380034601349015895">"スキップ"</string>
     <string name="next_label" msgid="1248293387735652187">"次へ"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"言語"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"使用言語の詳細"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"システムの言語"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"削除"</string>
     <string name="add_a_language" msgid="2126220398077503271">"言語を追加"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"言語"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"使用する言語"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"アプリの言語"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"アプリの言語"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"アプリごとに言語を設定します"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"アプリの言語"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"アプリの言語"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"言語の候補"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"すべての言語"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"システムの言語"</string>
@@ -230,6 +232,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"このアプリの言語は [設定] から選択できません。"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"アプリで利用できない言語の可能性があります。一部のアプリはこの設定に対応していない可能性があります。"</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"言語の選択に対応しているアプリのみが表示されます。"</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"使用言語でサポートされている最初の言語がシステム、アプリ、ウェブサイトで使用されます。"</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"アプリごとに言語を選択するには、アプリの言語設定に移動してください。"</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"言語の詳細"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">選択した言語を削除しますか？</item>
       <item quantity="one">選択した言語を削除しますか？</item>
@@ -237,7 +242,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"テキストは別の言語で表示されるようになります。"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"すべての言語を削除することはできません"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"優先する言語を設定しておく必要があります"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"いくつかのアプリでは利用できないことがあります"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"システムの言語として使用できません"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"上に移動します"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"下に移動します"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"一番上に移動します"</string>
@@ -536,9 +541,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"これで指紋を正しく登録できるようになります。"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"指紋の登録中: <xliff:g id="PERCENTAGE">%d</xliff:g> パーセント"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"指紋の登録完了"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"指紋認証は、タブレットのロック解除やアプリの本人確認に使用する回数が増えれば増えるほど精度が向上します"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"指紋認証は、デバイスのロック解除やアプリの本人確認に使用する回数が増えれば増えるほど精度が向上します"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"指紋認証は、スマートフォンのロック解除やアプリの本人確認に使用する回数が増えれば増えるほど精度が向上します"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"指紋を使って、タブレットのロック解除や本人確認（アプリへのログインなど）を行えるようになりました"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"指紋を使って、デバイスのロック解除や本人確認（アプリへのログインなど）を行えるようになりました"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"指紋を使って、スマートフォンのロック解除や本人確認（アプリへのログインなど）を行えるようになりました"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"後で行う"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"指を離して、もう一度タッチ"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"指紋をセンサーに当てて長押しし、指を離してから別の部分を当ててください"</string>
@@ -2993,8 +2998,16 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"バックグラウンド: 1 分未満"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"合計: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"バックグラウンド: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"バッテリー使用量のデータは概算値です。スマートフォンの充電中の使用量は測定されません"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"バッテリー使用量のデータは、スマートフォンを数時間使用すると表示されます"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"バッテリー使用量のデータは概算値です。スマートフォンの充電中の使用量は測定されません"</string>
+    <!-- no translation found for battery_usage_screen_footer (3729564192877964259) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
+    <skip />
+    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"バッテリー使用量のデータは、スマートフォンを数時間使用すると表示されます"</string>
+    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"バッテリー使用量グラフ"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"バッテリー使用量グラフ（日）"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"バッテリー使用量グラフ（時間）"</string>
