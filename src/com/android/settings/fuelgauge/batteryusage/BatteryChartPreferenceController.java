@@ -28,6 +28,7 @@ import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -106,6 +107,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private boolean mIs24HourFormat;
     private boolean mIsFooterPrefAdded = false;
     private View mBatteryChartViewGroup;
+    private View mCategoryTitleView;
     private PreferenceScreen mPreferenceScreen;
     private FooterPreference mFooterPreference;
     private BatteryChartViewModel mDailyViewModel;
@@ -327,6 +329,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             mDailyChartIndex = trapezoidIndex;
             mHourlyChartIndex = BatteryChartViewModel.SELECTED_INDEX_ALL;
             refreshUi();
+            requestAccessibilityFocusForCategoryTitle(mDailyChartView);
             mMetricsFeatureProvider.action(
                     mPrefContext,
                     trapezoidIndex == BatteryChartViewModel.SELECTED_INDEX_ALL
@@ -342,6 +345,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             Log.d(TAG, "onHourlyChartSelect:" + trapezoidIndex);
             mHourlyChartIndex = trapezoidIndex;
             refreshUi();
+            requestAccessibilityFocusForCategoryTitle(mHourlyChartView);
             mMetricsFeatureProvider.action(
                     mPrefContext,
                     trapezoidIndex == BatteryChartViewModel.SELECTED_INDEX_ALL
@@ -522,6 +526,18 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         if (mExpandDividerPreference != null) {
             mExpandDividerPreference.setTitle(
                     getSlotInformation(/*isApp=*/ false, slotInformation));
+        }
+    }
+
+    private void requestAccessibilityFocusForCategoryTitle(View view) {
+        if (!AccessibilityManager.getInstance(mContext).isEnabled()) {
+            return;
+        }
+        if (mCategoryTitleView == null) {
+            mCategoryTitleView = view.getRootView().findViewById(com.android.internal.R.id.title);
+        }
+        if (mCategoryTitleView != null) {
+            mCategoryTitleView.requestAccessibilityFocus();
         }
     }
 
