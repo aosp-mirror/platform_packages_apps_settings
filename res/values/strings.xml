@@ -1149,15 +1149,23 @@
     <string name="cancel_lock_screen_dialog_button_label">Cancel</string>
     <!-- Introduction title shown in fingerprint enrollment dialog to locate the sensor [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_find_sensor_title">Touch the sensor</string>
-    <!-- Introduction title shown in fingerprint enrollment dialog to locate the sensor [CHAR LIMIT=60] -->
+    <!-- Introduction title shown in SFPS enrollment dialog to locate the sensor [CHAR LIMIT=60] -->
+    <string name="security_settings_sfps_enroll_find_sensor_title">Touch the power button without pressing it</string>
+    <!-- Introduction title shown in UDFPS enrollment dialog to locate the sensor [CHAR LIMIT=60] -->
     <string name="security_settings_udfps_enroll_find_sensor_title">How to set up your fingerprint</string>
     <!-- Message shown in fingerprint enrollment dialog to locate the sensor -->
     <string name="security_settings_fingerprint_enroll_find_sensor_message">It\u2019s on the back of your phone. Use your index finger.</string>
-    <!-- Message shown in fingerprint enrollment dialog to locate the sensor [CHAR LIMIT=NONE]-->
+    <!-- Message shown in SFPS enrollment dialog to locate the sensor (tablet) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the tablet.\n\nPressing the power button turns off the screen.</string>
+    <!-- Message shown in SFPS enrollment dialog to locate the sensor (device) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the device.\n\nPressing the power button turns off the screen.</string>
+    <!-- Message shown in SFPS enrollment dialog to locate the sensor (default) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the phone.\n\nPressing the power button turns off the screen.</string>
+    <!-- Message shown in UDFPS enrollment dialog to locate the sensor [CHAR LIMIT=NONE]-->
     <string name="security_settings_udfps_enroll_find_sensor_message">The fingerprint sensor is on your screen. You\u2019ll capture your fingerprint on the next screen.</string>
     <!-- Button for starting fingerprint enrollment. [CHAR LIMIT=10]-->
     <string name="security_settings_udfps_enroll_find_sensor_start_button">Start</string>
-    <!-- Message announced to a11y users during fingerprint enrollment to help them locate the sensor. [CHAR LIMIT=NONE] -->
+    <!-- Message announced to a11y users during UDFPS enrollment to help them locate the sensor. [CHAR LIMIT=NONE] -->
     <string name="security_settings_udfps_enroll_a11y">Move your finger across the screen to find the sensor. Touch &amp; hold the fingerprint sensor.</string>
     <!-- Content description of graphic that shows where the fingerprint of the device is [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description">Illustration with device and fingerprint sensor location</string>
@@ -1173,8 +1181,10 @@
     <string name="security_settings_fingerprint_enroll_start_title">Touch the sensor</string>
     <!-- Message shown in fingerprint enrollment dialog to begin enrollment [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_start_message">Put your finger on the sensor and lift after you feel a vibration</string>
-    <!-- Message shown in fingerprint enrollment dialog to begin enrollment [CHAR LIMIT=NONE] -->
+    <!-- Message shown in UDFPS enrollment dialog to begin enrollment [CHAR LIMIT=NONE] -->
     <string name="security_settings_udfps_enroll_start_message">Keep your fingerprint flat on the sensor until you feel a vibration</string>
+    <!-- Message shown in SFPS enrollment dialog to begin enrollment [CHAR LIMIT=NONE] -->
+    <string name="security_settings_sfps_enroll_start_message">Without pressing the button, keep your fingerprint on the sensor until you feel a vibration.\n\nMove your finger slightly each time. This helps capture more of your fingerprint.</string>
     <!-- Title shown in fingerprint enrollment [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_udfps_title">Touch &amp; hold the fingerprint sensor</string>
     <!-- Title shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=40] -->
@@ -1193,14 +1203,28 @@
     <string name="security_settings_udfps_enroll_left_edge_title">Place the left edge of your finger</string>
     <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
     <string name="security_settings_udfps_enroll_right_edge_title">Place the right edge of your finger</string>
+    <!-- Title shown during SFPS enrollment that instructs the user to enroll the center of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_sfps_enroll_finger_center_title">Place the center part of your finger on the sensor</string>
+    <!-- Title shown during SFPS enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_sfps_enroll_fingertip_title">Place the tip of your finger on the sensor</string>
+    <!-- Title shown during SFPS enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_sfps_enroll_left_edge_title">Place the left edge of your finger on the sensor</string>
+    <!-- Title shown during SFPS enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_sfps_enroll_right_edge_title">Finally, place the right edge of your finger on the sensor</string>
     <!-- Message shown during fingerprint enrollment that instructs the user to enroll the edges of their finger [CHAR LIMIT=160] -->
     <string name="security_settings_udfps_enroll_edge_message">Place the side of your fingerprint on the sensor and hold, then switch to the other side</string>
     <!-- Message shown in fingerprint enrollment asking users to repeat touching the fingerprint sensor. [CHAR LIMIT=160] -->
     <string name="security_settings_udfps_enroll_repeat_a11y_message">This helps capture more of your fingerprint</string>
-    <!-- Message read to a11y users when enrollment progress is made. The number is from 0 to 100. [CHAR LIMIT=NONE]-->
+    <!-- Message read to a11y users when SFPS enrollment progress is made. The number is from 0 to 100. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_sfps_enroll_progress_a11y_message">Enrolling fingerprint <xliff:g id="percentage" example="10">%d</xliff:g> percent</string>
+    <!-- a11y label on finger animation indicating SFPS enrollment progress. The number is from 0 to 100. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_sfps_animation_a11y_label">Enrolled <xliff:g id="percentage" example="10">%d</xliff:g> percent</string>
+    <!-- Message read to a11y users when UDFPS enrollment progress is made. The number is from 0 to 100. [CHAR LIMIT=NONE]-->
     <string name="security_settings_udfps_enroll_progress_a11y_message">Enrolling fingerprint <xliff:g id="percentage" example="10">%d</xliff:g> percent</string>
     <!-- Title shown in fingerprint enrollment dialog once enrollment is completed [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_finish_title">Fingerprint added</string>
+    <!-- Message shown in SFPS enrollment dialog once enrollment is completed [CHAR LIMIT=NONE] -->
+    <string name="security_settings_sfps_enroll_finish">Now you can use your fingerprint to unlock your tablet or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
     <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (tablet) [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet">Now you can use your fingerprint to unlock your tablet or verify it\u2019s you, like when you sign in to apps</string>
     <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (device) [CHAR LIMIT=NONE] -->
@@ -6809,11 +6833,7 @@
     <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer content -->
     <string name="battery_usage_screen_footer" product="device">Battery usage data is approximate and doesn\'t measure usage when device is charging</string>
     <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer for empty content -->
-    <string name="battery_usage_screen_footer_empty" product="default">Battery usage data will be available after you use your phone for a few hours</string>
-    <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer for empty content -->
-    <string name="battery_usage_screen_footer_empty" product="tablet">Battery usage data will be available after you use your tablet for a few hours</string>
-    <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer for empty content -->
-    <string name="battery_usage_screen_footer_empty" product="device">Battery usage data will be available after you use your device for a few hours</string>
+    <string name="battery_usage_screen_footer_empty">Battery usage data will be available in a few hours once fully charged</string>
     <!-- [CHAR_LIMIT=NONE] Accessibility content description for battery chart view. -->
     <string name="battery_usage_chart">Battery usage chart</string>
     <!-- [CHAR_LIMIT=NONE] Accessibility content description for daily battery chart view. -->
