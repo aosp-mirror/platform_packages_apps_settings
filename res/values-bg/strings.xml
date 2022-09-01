@@ -216,13 +216,15 @@
     <string name="skip_label" msgid="6380034601349015895">"Пропускане"</string>
     <string name="next_label" msgid="1248293387735652187">"Напред"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Езици"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"Ред на предпочитаните езици"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"Системен език"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Премахване"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Добавяне на език"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Език"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Предпочитан език"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Езици за приложенията"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Езици за приложенията"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Задаване на език за всяко приложение"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"Език на приложението"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"Език за приложенията"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Предложени езици"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Всички езици"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Системен език"</string>
@@ -230,6 +232,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Избирането на език за това приложение не е налице от настройките."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Езикът може да се различава от езиците, налични в приложението. Възможно е някои приложения да не поддържат тази настройка."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Тук са показани само приложенията, които поддържат избиране на език."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Системата, приложенията и уебсайтовете използват първия поддържан език от тези, които предпочитате."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"За да изберете език за всяко отделно приложение, отворете съответните настройки."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Научете повече за езиците"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Да се премахнат ли избраните езици?</item>
       <item quantity="one">Да се премахне ли избраният език?</item>
@@ -237,7 +242,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Текстът ще се показва на друг език."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Не могат да се премахнат всички езици"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Запазете поне един предпочитан език"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"Може да не е налице в някои приложения"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"Не е налице като системен език"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Преместване нагоре"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Преместване надолу"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Преместване най-горе"</string>
@@ -538,9 +543,9 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Отпечатъкът е добавен"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Колкото повече използвате отпечатъка си, за да отключвате таблета си или да потвърждавате самоличността си в приложения, толкова повече се подобрява функцията „Отключване с отпечатък“"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Колкото повече използвате отпечатъка си, за да отключвате устройството си или да потвърждавате самоличността си в приложения, толкова повече се подобрява функцията „Отключване с отпечатък“"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Колкото повече използвате отпечатъка си, за да отключвате телефона си или да потвърждавате самоличността си в приложения, толкова повече се подобрява функцията „Отключване с отпечатък“"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Вече можете да използвате отпечатъка си, за да отключвате таблета или да потвърждавате самоличността си, например при влизане в приложения"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Вече можете да използвате отпечатъка си, за да отключвате устройството или да потвърждавате самоличността си, например при влизане в приложения"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Вече можете да използвате отпечатъка си, за да отключвате телефона или да потвърждавате самоличността си, например при влизане в приложения"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"По-късно"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Вдигнете пръст и докоснете отново"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Поставете едната страна на пръста си върху сензора и задръжте, след това поставете другата"</string>
@@ -2766,10 +2771,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Някои функции може да са ограничени"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"По-голямо използване на батерията"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Вижте приложенията с най-голямо използване"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Зареждането е на пауза"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Батерията се защитава с цел удължаване на живота ѝ\nДокоснете, за да научите повече"</string>
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
     <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Възобновяване на зареждането"</string>
@@ -2807,8 +2810,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Това приложение ще може да използва батерията на заден план. Тя може да се изтощи по-рано от очакваното."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Премахване"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Отказ"</string>
-    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
-    <skip />
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Пълно зареждане"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Приложенията ви използват обичайното количество енергия от батерията. Ако те изразходват твърде много от нея, телефонът ви ще предложи действия, които можете да предприемете.\n\nВинаги можете да включите режима за запазване на батерията, ако тя е напът да се изтощи."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Приложенията ви използват обичайното количество енергия от батерията. Ако те изразходват твърде много от нея, таблетът ви ще предложи действия, които можете да предприемете.\n\nВинаги можете да включите режима за запазване на батерията, ако тя е напът да се изтощи."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Приложенията ви използват обичайното количество енергия от батерията. Ако те изразходват твърде много от нея, устройството ви ще предложи действия, които можете да предприемете.\n\nВинаги можете да включите режима за запазване на батерията, ако тя е напът да се изтощи."</string>
@@ -2998,13 +3000,19 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"На заден план: По-малко от една минута"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Общо: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"На заден план: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Данните за използването на батерията са приблизителни и не се отчитат, докато телефонът се зарежда"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Данните за използването на батерията ще са налице, след като ползвате телефона си няколко часа"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Данните за използването на батерията са приблизителни и не се отчитат, докато телефонът се зарежда"</string>
+    <!-- no translation found for battery_usage_screen_footer (3729564192877964259) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
+    <skip />
+    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"Данните за използването на батерията ще са налице, след като ползвате телефона си няколко часа"</string>
+    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Диаграма за използването на батерията"</string>
-    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
-    <skip />
-    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
-    <skip />
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Диаграма на ежедневното използване на батерията"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Диаграма на почасовото използване на батерията"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статистически данни за процесите"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Подробни статистически данни за изпълняващите се процеси"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Използвана памет"</string>
@@ -5622,10 +5630,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"Мултимедия"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Фиксиране на медийния плейър"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"С цел бързо възобновяване на възпроизвеждането медийният плейър остава отворен в бързите настройки"</string>
-    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
-    <skip />
-    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
-    <skip />
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Показване на медийния плейър на заключения екран"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"С цел бързо възобновяване на възпроизвеждането медийният плейър остава отворен на заключения екран"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Показване на препоръки за мултимедия"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Въз основа на активността ви"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Скриване на плейъра"</string>
