@@ -58,7 +58,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     private FingerprintEnrollSidecar mSidecar;
     private boolean mNextClicked;
     private boolean mCanAssumeUdfps;
-    private boolean mCanAssumeSidefps;
+    private boolean mCanAssumeSfps;
 
     private OrientationEventListener mOrientationEventListener;
     private int mPreviousRotation = 0;
@@ -71,7 +71,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         final List<FingerprintSensorPropertiesInternal> props =
                 fingerprintManager.getSensorPropertiesInternal();
         mCanAssumeUdfps = props != null && props.size() == 1 && props.get(0).isAnyUdfpsType();
-        mCanAssumeSidefps = props != null && props.size() == 1 && props.get(0).isAnySidefpsType();
+        mCanAssumeSfps = props != null && props.size() == 1 && props.get(0).isAnySidefpsType();
         setContentView(getContentView());
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
@@ -102,10 +102,9 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
             if (am.isEnabled()) {
                 lottieAnimationView.setAnimation(R.raw.udfps_edu_a11y_lottie);
             }
-
-        } else if (mCanAssumeSidefps) {
-            setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
-            setDescriptionText(R.string.security_settings_fingerprint_enroll_find_sensor_message);
+        } else if (mCanAssumeSfps) {
+            setHeaderText(R.string.security_settings_sfps_enroll_find_sensor_title);
+            setDescriptionText(R.string.security_settings_sfps_enroll_find_sensor_message);
             final LottieAnimationView lottieAnimationView = findViewById(R.id.illustration_lottie);
             final LottieAnimationView lottieAnimationViewPortrait =
                     findViewById(R.id.illustration_lottie_portrait);
@@ -201,7 +200,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     protected int getContentView() {
         if (mCanAssumeUdfps) {
             return R.layout.udfps_enroll_find_sensor_layout;
-        } else if (mCanAssumeSidefps) {
+        } else if (mCanAssumeSfps) {
             return R.layout.sfps_enroll_find_sensor_layout;
         }
         return R.layout.fingerprint_enroll_find_sensor;
@@ -374,7 +373,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     }
 
     private void listenOrientationEvent() {
-        if (!mCanAssumeSidefps) {
+        if (!mCanAssumeSfps) {
             // Do nothing if the device doesn't support SideFPS.
             return;
         }
@@ -393,7 +392,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     }
 
     private void stopListenOrientationEvent() {
-        if (!mCanAssumeSidefps) {
+        if (!mCanAssumeSfps) {
             // Do nothing if the device doesn't support SideFPS.
             return;
         }
