@@ -64,8 +64,7 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
 
     @Override
     public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        getPreferenceManager().setPreferenceComparisonCallback(null);
+        // Initialize the parameters since displayTile() will be called in super.onCreate().
         Bundle args = getArguments();
         final Activity activity = getActivity();
         mUserHandle = Utils.getSecureTargetUser(activity.getActivityToken(),
@@ -82,6 +81,9 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
                 mAccountType = args.getString(KEY_ACCOUNT_TYPE);
             }
         }
+
+        super.onCreate(icicle);
+        getPreferenceManager().setPreferenceComparisonCallback(null);
         mAccountSynController.init(mAccount, mUserHandle);
         mRemoveAccountController.init(mAccount, mUserHandle);
     }
