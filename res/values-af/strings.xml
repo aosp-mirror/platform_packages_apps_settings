@@ -216,13 +216,15 @@
     <string name="skip_label" msgid="6380034601349015895">"Slaan oor"</string>
     <string name="next_label" msgid="1248293387735652187">"Volgende"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Tale"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"Voorkeurtaalvolgorde"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"Stelseltaal"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Verwyder"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Voeg \'n taal by"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Taal"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Voorkeurtaal"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Programtale"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Programtale"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Stel die taal vir elke program"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"Programtaal"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"Programtaal"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Voorgestelde tale"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Alle tale"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Stelseltaal"</string>
@@ -230,6 +232,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Taalkeuse vir hierdie program is nie in Instellings beskikbaar nie."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Taal kan verskil van tale wat in die program beskikbaar is. Sommige programme steun dalk nie hierdie instelling nie."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Net programme wat taalkeuses ondersteun, word hier gewys."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Jou stelsel, programme en webwerwe gebruik die eerste gesteunde taal uit jou voorkeurtale."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Gaan na programtaalinstellings vir elke program om ’n taal te kies."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Kom meer te wete oor tale"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Verwyder gekose tale?</item>
       <item quantity="one">Verwyder gekose taal?</item>
@@ -237,7 +242,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Teks sal in \'n ander taal gewys word."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Kan nie alle tale verwyder nie"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Hou minstens een voorkeurtaal"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"Sal dalk in sommige programme nie beskikbaar wees nie"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"Nie beskikbaar as stelseltaal nie"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Skuif op"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Skuif af"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Skuif na bo"</string>
@@ -342,9 +347,9 @@
     <string name="security_passwords_title" msgid="4154420930973818581">"Privaatheid"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Nie beskikbaar nie"</string>
     <string name="security_status_title" msgid="6958004275337618656">"Sekuriteitstatus"</string>
-    <string name="security_dashboard_summary" msgid="7571035662779425918">"Skermslot, Kry My Toestel, programsekuriteit"</string>
+    <string name="security_dashboard_summary" msgid="7571035662779425918">"Skermslot, Kry My Toestel, appsekuriteit"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Sekuriteit en privaatheid"</string>
-    <string name="safety_center_summary" msgid="3554867379951053869">"Programsekuriteit, toestelslot, toestemmings"</string>
+    <string name="safety_center_summary" msgid="3554867379951053869">"Appsekuriteit, toestelslot, toestemmings"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Gesig is bygevoeg"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Tik om gesig op te stel"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Gesigslot"</string>
@@ -536,9 +541,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Dit help om meer van jou vingerafdruk vas te vang"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Skryf tans vingerafdruk in <xliff:g id="PERCENTAGE">%d</xliff:g> persent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Vingerafdruk bygevoeg"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Vingerafdrukslot verbeter hoe meer jy dit gebruik om jou tablet te ontsluit of om in programme te verifieer dat dit jy is"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Vingerafdrukslot verbeter hoe meer jy dit gebruik om jou toestel te ontsluit of in programme te verifieer dat dit jy is"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Vingerafdrukslot verbeter hoe meer jy dit gebruik om jou foon te ontsluit of om in programme te verifieer dat dit jy is"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Jy kan nou jou vingerafdruk gebruik om jou tablet te ontsluit of te verifieer dat dit jy is, soos wanneer jy by programme aanmeld"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Jy kan nou jou vingerafdruk gebruik om jou toestel te ontsluit of te verifieer dat dit jy is, soos wanneer jy by programme aanmeld"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Jy kan nou jou vingerafdruk gebruik om jou foon te ontsluit of te verifieer dat dit jy is, soos wanneer jy by programme aanmeld"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Doen dit later"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Lig en raak dan weer"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Plaas die kant van jou vingerafdruk op die sensor en hou; ruil dan om na die ander kant"</string>
@@ -601,9 +606,9 @@
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Vingerafdrukregistrasie het nie gewerk nie. Probeer weer of gebruik \'n ander vinger."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Voeg nog een by"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Volgende"</string>
-    <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Jy kan jou vingerafdruk nie net gebruik om jou foon te ontsluit nie, maar ook om aankope en programtoegang te magtig. "<annotation id="url">"Kom meer te wete"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Jy kan jou vingerafdruk nie net gebruik om jou foon te ontsluit nie, maar ook om aankope en apptoegang te magtig. "<annotation id="url">"Kom meer te wete"</annotation></string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Die skermslotopsie is gedeaktiveer. Kontak jou organisasie se admin om meer te wete te kom."</string>
-    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Jy kan steeds jou vingerafdruk gebruik om aankope en programtoegang te magtig."</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Jy kan steeds jou vingerafdruk gebruik om aankope en apptoegang te magtig."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Lig vinger op en raak sensor dan weer"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Kan nie vingerafdruksensor gebruik nie. Besoek \'n verskaffer wat herstelwerk doen"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Meer sekuriteitinstellings"</string>
@@ -2993,8 +2998,16 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Agtergrond: minder as \'n min."</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Totaal: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Agtergrond: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Battery se gebruikdata is benaderd en meet nie gebruik terwyl die foon laai nie"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Batterygebruiksdata sal beskikbaar wees nadat jy jou foon \'n paar uur lank gebruik het"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Battery se gebruikdata is benaderd en meet nie gebruik terwyl die foon laai nie"</string>
+    <!-- no translation found for battery_usage_screen_footer (3729564192877964259) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
+    <skip />
+    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"Batterygebruiksdata sal beskikbaar wees nadat jy jou foon \'n paar uur lank gebruik het"</string>
+    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Batterygebruikgrafiek"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Grafiek van daaglikse batterygebruik"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Grafiek van uurlikse batterygebruik"</string>
@@ -4444,7 +4457,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Geen toestemmings is verleen nie"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Geen toestemmings is versoek nie"</string>
-    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Beheer programtoegang tot jou data"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Beheer apptoegang tot jou data"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"Privaatheidkontroleskerm"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Wys watter programme onlangs toestemmings gebruik het"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Ongebruikte programme"</string>
@@ -4890,7 +4903,7 @@
     <string name="display_cutout_emulation_keywords" msgid="4506580703807358127">"skermuitsnede, uitkeep"</string>
     <string name="overlay_option_device_default" msgid="7986355499809313848">"Toestelverstek"</string>
     <string name="overlay_toast_failed_to_apply" msgid="4839587811338164960">"Kon nie oorlegger toepas nie"</string>
-    <string name="special_access" msgid="1767980727423395147">"Spesiale programtoegang"</string>
+    <string name="special_access" msgid="1767980727423395147">"Spesiale apptoegang"</string>
     <plurals name="special_access_summary" formatted="false" msgid="4995506406763570815">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> programme kan onbeperkte data gebruik</item>
       <item quantity="one">1 program kan onbeperkte data gebruik</item>
@@ -5615,10 +5628,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Speld mediaspeler vas"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Mediaspeler bly oop in Kitsinstellings om terugspeel vinnig te hervat"</string>
-    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
-    <skip />
-    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
-    <skip />
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Wys media op sluitskerm"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"Mediaspeler bly oop op sluitskerm om terugspeel vinnig te hervat"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Wys media-aanbevelings"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Gegrond op jou aktiwiteit"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Versteek speler"</string>

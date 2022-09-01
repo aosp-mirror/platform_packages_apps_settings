@@ -216,13 +216,15 @@
     <string name="skip_label" msgid="6380034601349015895">"გამოტოვება"</string>
     <string name="next_label" msgid="1248293387735652187">"შემდეგი"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"ენები"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"ენების უპირატესი თანამიმდევრობა"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"სისტემის ენა"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"ამოშლა"</string>
     <string name="add_a_language" msgid="2126220398077503271">"ენის დამატება"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"ენა"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"უპირატესი ენა"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"აპის ენები"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"აპის ენები"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"დააყენეთ ენა თითოეული აპისთვის"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"აპის ენა"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"აპის ენა"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"შემოთავაზებული ენები"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"ყველა ენა"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"სისტემის ენა"</string>
@@ -230,6 +232,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"ამ აპისთვის ენის არჩევა პარამეტრებიდან მიუწვდომელია."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"ენა, შესაძლოა, განსხვავდებოდეს აპში ხელმისაწვდომი ენებისგან. ზოგიერთ აპს, შესაძლოა, არ ჰქონდეს ამ პარამეტრის მხარდაჭერა."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"აქ ნაჩვენებია მხოლოდ ის აპები, რომლებსაც ენის არჩევის მხარდაჭერა აქვს."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"თქვენი სისტემა, აპები და ვებსაიტები იყენებენ პირველ მხარდაჭერილ ენას თქვენი უპირატესი ენებიდან."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"თითოეული აპისთვის ენის ასარჩევად, გადადით აპის ენების პარამეტრებში."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"შეიტყვეთ მეტი ენების შესახებ"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">გსურთ არჩეული ენების ამოშლა?</item>
       <item quantity="one">გსურთ არჩეული ენის ამოშლა?</item>
@@ -237,7 +242,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"ტექსტი სხვა ენაზე იქნება ნაჩვენები."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"ყველა ენის ამოშლა ვერ მოხერხდება"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"შეინარჩუნეთ მინიმუმ ერთი სასურველი ენა"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"შეიძლება მიუწვდომელი იყოს ზოგიერთ აპში"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"მიუწვდომელია როგორც სისტემის ენა"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"ზემოთ გადატანა"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"ქვემოთ გადატანა"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"თავში გადატანა"</string>
@@ -536,9 +541,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"ეს ხელს შეუწყობს სრულყოფილი თითის ანაბეჭდის შექმნას"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"მიმდინარეობს თითის ანაბეჭდის რეგისტრაცია, <xliff:g id="PERCENTAGE">%d</xliff:g> პროცენტი"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"თითის ანაბეჭდი დამატებულია"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"ანაბეჭდით განბლოკვა მით უფრო უმჯობესდება, რაც უფრო მეტად გამოიყენებთ მას თქვენი ტაბლეტის განსაბლოკად ან აპებში თქვენი ვინაობის დადასტურებისთვის"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"ანაბეჭდით განბლოკვა მით უფრო უმჯობესდება, რაც უფრო მეტად გამოიყენებთ მას თქვენი მოწყობილობის განსაბლოკად ან აპებში თქვენი ვინაობის დადასტურებისთვის"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"ანაბეჭდით განბლოკვა მით უფრო უმჯობესდება, რაც უფრო მეტად გამოიყენებთ მას თქვენი ტელეფონის განსაბლოკად ან აპებში თქვენი ვინაობის დადასტურებისთვის"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"ახლა უკვე შეგიძლიათ თითის ანაბეჭდით ტაბლეტის განბლოკვა ან ვინაობის დადასტურება, როცა აპებში შედიხართ"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"ახლა უკვე შეგიძლიათ თითის ანაბეჭდით მოწყობილობის განბლოკვა ან ვინაობის დადასტურება, როცა აპებში შედიხართ"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"ახლა უკვე შეგიძლიათ თითის ანაბეჭდით ტელეფონის განბლოკვა ან ვინაობის დადასტურება, როცა აპებში შედიხართ"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"მოგვიანებით გაკეთება"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"აიღეთ თითი, შემდეგ კი ხელახლა შეეხეთ"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"დაადეთ თითის ცალი მხარე სენსორს და გააჩერეთ ცოტა ხნით, შემდეგ კი დაადეთ მეორე მხარე"</string>
@@ -2993,8 +2998,16 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"ფონი: წუთზე ნაკლები"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"სულ: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"ფონი: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"ბატარეის მოხმარების მონაცემები მიახლოებითია და არ ზომავს მოხმარებას დამუხტვისას"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"ბატარეის მოხმარების მონაცემები ხელმისაწვდომი გახდება მას შემდეგ, რაც ტელეფონს რამდენიმე საათით გამოიყენებთ"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"ბატარეის მოხმარების მონაცემები მიახლოებითია და არ ზომავს მოხმარებას დამუხტვისას"</string>
+    <!-- no translation found for battery_usage_screen_footer (3729564192877964259) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
+    <skip />
+    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"ბატარეის მოხმარების მონაცემები ხელმისაწვდომი გახდება მას შემდეგ, რაც ტელეფონს რამდენიმე საათით გამოიყენებთ"</string>
+    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"ბატარეის მოხმარების დიაგრამა"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"ბატარეის ყოველდღიური გამოყენების სქემა"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"ბატარეის სააᲗობრივი გამოყენების სქემა"</string>

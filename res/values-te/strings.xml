@@ -216,13 +216,15 @@
     <string name="skip_label" msgid="6380034601349015895">"స్కిప్ చేయండి"</string>
     <string name="next_label" msgid="1248293387735652187">"తర్వాత"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"భాషలు"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"ప్రాధాన్య భాషా క్రమం"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"సిస్టమ్ భాష"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"తీసివేయండి"</string>
     <string name="add_a_language" msgid="2126220398077503271">"భాషను జోడించు"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"భాష"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"ప్రాధాన్యతనిచ్చే భాష"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"యాప్ భాషలు"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"యాప్ భాషలు"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"ప్రతి యాప్‌కు భాషను సెట్ చేయండి"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"యాప్ భాష"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"యాప్ భాష"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"సూచించిన భాషలు"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"అన్ని భాషలు"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"సిస్టమ్ భాష"</string>
@@ -230,6 +232,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"ఈ యాప్ కోసం భాష ఎంపిక సెట్టింగ్‌లలో అందుబాటులో లేదు."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"యాప్‌లో అందుబాటులో ఉన్న భాషలకు భాష భిన్నంగా ఉండవచ్చు. కొన్ని యాప్‌లు ఈ సెట్టింగ్‌కు సపోర్ట్ చేయకపోవచ్చు."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"భాష ఎంపికను సపోర్ట్ చేసే యాప్‌లు మాత్రమే ఇక్కడ చూపబడతాయి."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"మీ సిస్టమ్, యాప్‌లు, వెబ్‌సైట్‌లు మీరు ప్రాధాన్యతను ఇచ్చే భాషల నుండి మొదట సపోర్ట్ ఉన్న భాషను ఉపయోగిస్తాయి."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"ప్రతి యాప్ కోసం భాషను ఎంచుకోవడానికి, యాప్ భాష సెట్టింగ్‌లకు వెళ్లండి."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"భాషల గురించి మరింత తెలుసుకోండి"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">ఎంచుకున్న భాషలను తీసివేయాలా?</item>
       <item quantity="one">ఎంచుకున్న భాషను తీసివేయాలా?</item>
@@ -237,7 +242,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"వచనం మరొక భాషలో ప్రదర్శించబడుతుంది."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"అన్ని భాషలను తీసివేయలేరు"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"కనీసం ఒక ప్రాధాన్య భాషను ఉంచండి"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"కొన్ని యాప్‌లలో అందుబాటులో ఉండకపోవచ్చు"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"సిస్టమ్ భాషగా అందుబాటులో లేదు"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"పైకి తరలించు"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"క్రిందికి తరలించు"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"ఎగువకు తరలించు"</string>
@@ -536,9 +541,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"మీ వేలిముద్రను స్పష్టంగా క్యాప్చర్ చేయడానికి ఇది సహాయపడుతుంది"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"వేలిముద్ర <xliff:g id="PERCENTAGE">%d</xliff:g> శాతం ఎన్‌రోల్ అవుతోంది"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"వేలిముద్ర జోడించబడింది"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"వేలిముద్ర అన్‌లాక్ మీ టాబ్లెట్‌ను అన్‌లాక్ చేయడానికి లేదా యాప్‌లలో ఇది మీరేనని వెరిఫై చేయడానికి ఎంత ఎక్కువగా ఉపయోగిస్తే అంత మెరుగుపడుతుంది"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"వేలిముద్ర అన్‌లాక్ మీ పరికరాన్ని అన్‌లాక్ చేయడానికి లేదా యాప్‌లలో ఇది మీరేనని వెరిఫై చేయడానికి ఎంత ఎక్కువగా ఉపయోగిస్తే అంత మెరుగుపడుతుంది"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"వేలిముద్ర అన్‌లాక్ మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి లేదా యాప్‌లలో ఇది మీరేనని వెరిఫై చేయడానికి ఎంత ఎక్కువగా ఉపయోగిస్తే అంత మెరుగుపడుతుంది"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"ఇప్పుడు మీరు మీ టాబ్లెట్‌ను అన్‌లాక్ చేయడానికి లేదా మీరు యాప్‌లకు సైన్ ఇన్ చేసినప్పుడు ఇది మీరేనని వెరిఫై చేయడానికి మీ వేలిముద్రను ఉపయోగించవచ్చు"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"ఇప్పుడు మీరు మీ పరికరాన్ని అన్‌లాక్ చేయడానికి లేదా మీరు యాప్‌లకు సైన్ ఇన్ చేసినప్పుడు ఇది మీరేనని వెరిఫై చేయడానికి మీ వేలిముద్రను ఉపయోగించవచ్చు"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"ఇప్పుడు మీరు మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి లేదా మీరు యాప్‌లకు సైన్ ఇన్ చేసినప్పుడు ఇది మీరేనని వెరిఫై చేయడానికి మీ వేలిముద్రను ఉపయోగించవచ్చు"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"తర్వాత చేస్తాను"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"పైకి ఎత్తి, మళ్లీ తాకండి"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"సెన్సార్‌పై మీ వేలిముద్రలో కొంత భాగాన్ని ఒక వైపునకు నొక్కి ఉంచి, ఆపై మరొక వైపునకు మార్చండి"</string>
@@ -2993,8 +2998,16 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"బ్యాక్‌గ్రౌండ్ సమయం: ఒక నిమిషం కన్నా తక్కువ"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"మొత్తం ఉపయోగం: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"బ్యాక్‌గ్రౌండ్ సమయం: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"బ్యాటరీ వినియోగ డేటా ఒక అంచనా మాత్రమే. ఖచ్చితం కాదు. ఫోన్ ఛార్జింగ్ అవుతున్నపుడు ఇది వినియోగాన్ని లెక్కించదు"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"మీరు మీ ఫోన్‌ను కొన్ని గంటలు ఉపయోగించిన తర్వాత బ్యాటరీ వినియోగ డేటా అందుబాటులో ఉంటుంది"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"బ్యాటరీ వినియోగ డేటా ఒక అంచనా మాత్రమే. ఖచ్చితం కాదు. ఫోన్ ఛార్జింగ్ అవుతున్నపుడు ఇది వినియోగాన్ని లెక్కించదు"</string>
+    <!-- no translation found for battery_usage_screen_footer (3729564192877964259) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
+    <skip />
+    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"మీరు మీ ఫోన్‌ను కొన్ని గంటలు ఉపయోగించిన తర్వాత బ్యాటరీ వినియోగ డేటా అందుబాటులో ఉంటుంది"</string>
+    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"బ్యాటరీ వినియోగం చార్ట్"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"రోజువారీ బ్యాటరీ వినియోగ చార్ట్"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"గంటలవారీ బ్యాటరీ వినియోగ చార్ట్"</string>
@@ -5615,10 +5628,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"మీడియా"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"మీడియా ప్లేయర్‌ను పిన్ చేయండి"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"ప్లేబ్యాక్‌ను త్వరగా కొనసాగించడానికి, క్విక్ సెట్టింగ్‌లలో మీడియా ప్లేయర్‌ను తెరిచి ఉంచండి"</string>
-    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
-    <skip />
-    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
-    <skip />
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"లాక్ స్క్రీన్‌లో మీడియాను చూపండి"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"ప్లేబ్యాక్‌ను త్వరగా కొనసాగించడానికి, లాక్ స్క్రీన్‌లో మీడియా ప్లేయర్‌ను తెరిచి ఉంచండి"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"మీడియా సిఫార్సులను చూపించు"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"మీ యాక్టివిటీ ఆధారంగా"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"ప్లేయర్‌ను దాచు"</string>

@@ -217,13 +217,15 @@
     <string name="skip_label" msgid="6380034601349015895">"Preskoči"</string>
     <string name="next_label" msgid="1248293387735652187">"Dalje"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Jezici"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"Redosled željenih jezika"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"Jezik sistema"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Ukloni"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Dodajte jezik"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Jezik"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Željeni jezik"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Jezici u aplikaciji"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Jezici aplikacija"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Podesite jezik za svaku aplikaciju"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"Jezik aplikacije"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"Jezik aplikacije"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Predloženi jezici"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Svi jezici"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Jezik sistema"</string>
@@ -231,6 +233,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Izbor jezika za ovu aplikaciju nije dostupan iz Podešavanja."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Jezik može da se razlikuje od jezika dostupnih u aplikaciji. Neke aplikacije možda ne podržavaju ovo podešavanje."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Ovde se prikazuju samo aplikacije koje podržavaju izbor jezika."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Sistem, aplikacije i veb-sajtovi koriste prvi podržani jezik iz željenih jezika."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Da biste izabrali jezik za svaku aplikaciju, idite u podešavanja jezika aplikacije."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Saznajte više o jezicima"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Želite li da uklonite izabrane jezike?</item>
       <item quantity="few">Želite li da uklonite izabrane jezike?</item>
@@ -239,7 +244,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Tekst će biti prikazan na nekom drugom jeziku."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Nije moguće ukloniti sve jezike"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Zadržite bar jedan željeni jezik"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"Možda nije dostupno u nekim aplikacijama"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"Nije dostupno kao jezik sistema"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Premesti nagore"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Premesti nadole"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Premesti na vrh"</string>
@@ -540,9 +545,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Tako ćete snimiti veći deo otiska prsta"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registrovanje otiska prsta je na <xliff:g id="PERCENTAGE">%d</xliff:g> posto"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Otisak prsta je dodat"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Otključavanje otiskom prsta poboljšava se što ga više koristite za otključavanje tableta ili potvrdu identiteta u aplikacijama"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Otključavanje otiskom prsta poboljšava se što ga više koristite za otključavanje uređaja ili potvrdu identiteta u aplikacijama"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Otključavanje otiskom prsta poboljšava se što ga više koristite za otključavanje telefona ili potvrdu identiteta u aplikacijama"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Sada možete da koristite otisak prsta za otključavanje tableta ili potvrdu identiteta, na primer, kad se prijavljujete u aplikacije"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Sada možete da koristite otisak prsta za otključavanje uređaja ili potvrdu identiteta, na primer, kad se prijavljujete u aplikacije"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Sada možete da koristite otisak prsta za otključavanje telefona ili potvrdu identiteta, na primer, kad se prijavljujete u aplikacije"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Uradiću to kasnije"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Podignite, pa opet dodirnite"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Stavite jednu stranu prsta na senzor i zadržite, pa stavite drugu stranu"</string>
@@ -1638,7 +1643,7 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Preimenuj"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Priključi"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Izbaci"</string>
-    <string name="storage_menu_format" msgid="8903698999905354146">"Formatiraj SD karticu za prenosivu memoriju"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Formatirajte SD karticu za prenosivu memoriju"</string>
     <string name="storage_menu_format_button" msgid="7623565190643699626">"Formatiraj karticu"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatiraj kao prenosnu"</string>
     <string name="storage_menu_format_option" msgid="4886059624052908432">"Formatiraj"</string>
@@ -1699,7 +1704,7 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Prenesi"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Podaci se prenose…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Tokom prenosa: \n• Ne uklanjajte uređaj <xliff:g id="NAME">^1</xliff:g>. \n• Neke aplikacije neće pravilno funkcionisati. \n• Uređaj treba da bude napunjen."</string>
-    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> je formatiran/a"</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> je formatirana"</string>
     <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Možete da počnete da koristite <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Možete da počnete da koristite <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Prenesite aplikaciju <xliff:g id="APP">^1</xliff:g>"</string>
@@ -1740,9 +1745,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"I dalje možete da koristite uređaj <xliff:g id="NAME_0">^1</xliff:g>, ali će možda sporo raditi. \n\nAplikacije koje se nalaze na uređaju <xliff:g id="NAME_1">^2</xliff:g> možda neće ispravno raditi, a prenosi sadržaja će možda dugo trajati. \n\nProbajte da koristite brži uređaj <xliff:g id="NAME_2">^3</xliff:g> ili koristite uređaj <xliff:g id="NAME_3">^4</xliff:g> kao prenosivi memorijski prostor."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Počni ponovo"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Nastavi"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Možete da počnete da koristite <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Možete da počnete da koristite <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Možete da počnete da koristite <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Možete da počnete da koristite: <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Možete da počnete da koristite: <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Možete da počnete da koristite: <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Status baterije"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Nivo baterije"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Nazivi pristupnih tačaka"</string>
@@ -3031,8 +3036,16 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Pozadina: manje od minut"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Ukupno: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Pozadina: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Podaci o potrošnji baterije su približni i ne mere potrošnju kada se telefon puni"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Podaci o potrošnji baterije će biti dostupni pošto budete koristili telefon nekoliko sati"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Podaci o potrošnji baterije su približni i ne mere potrošnju kada se telefon puni"</string>
+    <!-- no translation found for battery_usage_screen_footer (3729564192877964259) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
+    <skip />
+    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"Podaci o potrošnji baterije će biti dostupni pošto budete koristili telefon nekoliko sati"</string>
+    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Grafikon potrošnje baterije"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Grafikon dnevne potrošnje baterije"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Grafikon potrošnje baterije po satima"</string>

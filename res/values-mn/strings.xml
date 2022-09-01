@@ -216,13 +216,15 @@
     <string name="skip_label" msgid="6380034601349015895">"Алгасах"</string>
     <string name="next_label" msgid="1248293387735652187">"Дараагийн"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Хэл"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"Сонгосон хэлний дараалал"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"Системийн хэл"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Хасах"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Хэл нэмэх"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Хэл"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Сонгосон хэл"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Аппын хэл"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Аппын хэлнүүд"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Апп тус бүрд хэл тохируулна уу"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"Аппын хэл"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"Аппын хэл"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Санал болгосон хэл"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Бүх хэл"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Системийн хэл"</string>
@@ -230,6 +232,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Энэ аппын хэлийг Тохиргоо хэсгээс сонгох боломжгүй байна."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Хэл нь аппад боломжтой хэлээс шалтгаалан харилцан адилгүй байж болно. Зарим апп энэ тохиргоог дэмждэггүй байж магадгүй."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Зөвхөн хэлний сонголтыг дэмждэг аппуудыг энд харуулав."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Таны систем, аппууд болон вебсайтууд таны сонгосон хэлээс эхний дэмжигдсэн хэлийг ашигладаг."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Апп тус бүрд хэл сонгохын тулд аппын хэлний тохиргоо руу очно уу."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Хэлнүүдийн талаар нэмэлт мэдээлэл авах"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Сонгосон хэлийг хасах уу?</item>
       <item quantity="one">Сонгосон хэлийг хасах уу?</item>
@@ -237,7 +242,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Текстийг өөр хэлээр харуулах болно."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Бүх хэлийг устгах боломжгүй"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Хамгийн багадаа нэг хэл үлдээнэ үү"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"Зарим апп-д боломжгүй байж болзошгүй"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"Системийн хэлээр боломжгүй"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Дээш зөөх"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Доош зөөх"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Хамгийн дээр оруулах"</string>
@@ -536,9 +541,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Энэ нь таны хурууны хээний илүү их зургийг авахад тусална"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Хурууны хээ бүртгүүлэх явц <xliff:g id="PERCENTAGE">%d</xliff:g> хувь"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Хурууны хээ нэмсэн"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Хурууны хээгээр түгжээ тайлах онцлог нь таныг таблетынхаа түгжээг тайлах эсвэл аппуудад өөрийгөө мөн болохыг баталгаажуулахад үүнийг ашиглах тусам сайжирна"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Хурууны хээгээр түгжээ тайлах онцлог нь таныг төхөөрөмжийнхөө түгжээг тайлах эсвэл аппуудад өөрийгөө мөн болохыг баталгаажуулахад үүнийг ашиглах тусам сайжирна"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Хурууны хээгээр түгжээ тайлах онцлог нь таныг утасныхаа түгжээг тайлах эсвэл аппуудад өөрийгөө мөн болохыг баталгаажуулахад үүнийг ашиглах тусам сайжирна"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Одоо та хурууны хээгээ таблетынхаа түгжээг тайлах эсвэл аппуудад нэвтрэх зэргээр өөрийгөө мөн болохыг баталгаажуулахын тулд ашиглах боломжтой"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Одоо та хурууны хээгээ төхөөрөмжийнхөө түгжээг тайлах эсвэл аппуудад нэвтрэх зэргээр өөрийгөө мөн болохыг баталгаажуулахын тулд ашиглах боломжтой"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Одоо та хурууны хээгээ утасныхаа түгжээг тайлах эсвэл аппуудад нэвтрэх зэргээр өөрийгөө мөн болохыг баталгаажуулахын тулд ашиглах боломжтой"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Дараа хийх"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Хөндийрүүлээд, дахин хүрнэ үү"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Хурууныхаа хээний хажуу талыг мэдрэгч дээр удаан байрлуулж, дараа нь нөгөө тал руу сэлгэнэ үү"</string>
@@ -1617,7 +1622,7 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Нэр өөрчлөх"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Залгах"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Салгах"</string>
-    <string name="storage_menu_format" msgid="8903698999905354146">"Зөөврийн хадгалах сан авах бол SD картыг форматал"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Зөөврийн хадгалах сан авах бол SD картыг форматлах"</string>
     <string name="storage_menu_format_button" msgid="7623565190643699626">"Картыг форматлах"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Зөөврийн хэлбэрээр хэлбэршүүлэх"</string>
     <string name="storage_menu_format_option" msgid="4886059624052908432">"Форматлах"</string>
@@ -1658,7 +1663,7 @@
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Систем Андройдын <xliff:g id="VERSION">%s</xliff:g> хувилбарыг ажиллуулахад ашигладаг файлуудыг агуулдаг"</string>
     <string name="storage_wizard_guest" msgid="5813419895687733649">"Зочны горимын хэрэглэгчид SD картыг форматлах боломжгүй"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"<xliff:g id="NAME">^1</xliff:g>-аа тохируул"</string>
-    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Зөөврийн хадгалах сан авах бол SD картыг форматал"</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Зөөврийн хадгалах сан авах бол SD картыг форматлах"</string>
     <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Зураг, видео, хөгжим болон бусад зүйлийг хадгалж, тэдгээрт бусад төхөөрөмжөөс хандана уу"</string>
     <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"SD картыг дотоод сан болгож форматална уу"</string>
     <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Зөвхөн энэ утсан дээр ашиглах аппууд &amp; медиаг хадгална уу"</string>
@@ -1696,7 +1701,7 @@
     <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Зөвхөн энэ утсан дээр ашиглах аппууд &amp; медиаг хадгална уу &lt;a href=https://support.google.com/android/answer/12153449&gt;SD карт тохируулах талаар нэмэлт мэдээлэл авах&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Форматлах"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Эсвэл"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Зөөврийн хадгалах сан авах бол SD картыг форматал"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Зөөврийн хадгалах сан авах бол SD картыг форматлах"</string>
     <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Зураг, видео, хөгжим болон бусад зүйлийг хадгалж, тэдгээрт бусад төхөөрөмжөөс хандана уу &lt;a href=https://support.google.com/android/answer/12153449&gt;SD карт тохируулах талаар нэмэлт мэдээлэл авах&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Форматлах"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Дараа тохируулах"</string>
@@ -2993,8 +2998,16 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Дэвсгэр: нэг минутаас доош"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Нийт: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Дэвсгэр: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Батарей ашиглалтын өгөгдлийг барагцаалдаг бөгөөд утсыг цэнэглэж байх үед ашиглалтыг хэмждэггүй"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Таныг утсаа цөөн хэдэн цаг ашигласны дараа батарей ашиглалтын өгөгдөл боломжтой болно"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Батарей ашиглалтын өгөгдлийг барагцаалдаг бөгөөд утсыг цэнэглэж байх үед ашиглалтыг хэмждэггүй"</string>
+    <!-- no translation found for battery_usage_screen_footer (3729564192877964259) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
+    <skip />
+    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"Таныг утсаа цөөн хэдэн цаг ашигласны дараа батарей ашиглалтын өгөгдөл боломжтой болно"</string>
+    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Батарей ашиглалтын график"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Батарей ашиглалтын өдөр тутмын график"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Батарей ашиглалтын цаг тутмын график"</string>
@@ -5615,10 +5628,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"Медиа"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Медиа тоглуулагчийг бэхлэх"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Дахин тоглуулахыг шуурхай үргэлжлүүлэхийн тулд медиа тоглуулагч Шуурхай тохиргоонд нээлттэй хэвээр байдаг"</string>
-    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
-    <skip />
-    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
-    <skip />
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Түгжигдсэн дэлгэц дээр медиа харуулах"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"Дахин тоглуулахаар шуурхай үргэлжлүүлэхийн тулд медиа тоглуулагч түгжигдсэн дэлгэц дээр нээлттэй хэвээр байна"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Медиагийн зөвлөмжийг харуулах"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Таны үйл ажиллагаанд тулгуурласан"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Тоглуулагчийг нуух"</string>

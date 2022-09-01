@@ -216,13 +216,15 @@
     <string name="skip_label" msgid="6380034601349015895">"Παραβλέψη"</string>
     <string name="next_label" msgid="1248293387735652187">"Επόμενο"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Γλώσσες"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"Σειρά προτιμώμενων γλωσσών"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"Γλώσσα συστήματος"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Κατάργηση"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Προσθήκη γλώσσας"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Γλώσσα"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Προτιμώμενη γλώσσα"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Γλώσσες εφαρμογής"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Γλώσσες εφαρμογής"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Ορίστε τη γλώσσα για κάθε εφαρμογή"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"Γλώσσα εφαρμογής"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"Γλώσσα εφαρμογής"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Προτεινόμενες γλώσσες"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Όλες οι γλώσσες"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Γλώσσα συστήματος"</string>
@@ -230,6 +232,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Η δυνατότητα επιλογής γλώσσας για αυτήν την εφαρμογή δεν είναι διαθέσιμη από τις Ρυθμίσεις."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Η γλώσσα μπορεί να διαφέρει από τις γλώσσες που είναι διαθέσιμες στην εφαρμογή. Ορισμένες εφαρμογές μπορεί να μην υποστηρίζουν αυτήν τη ρύθμιση."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Εδώ εμφανίζονται μόνο εφαρμογές που υποστηρίζουν την επιλογή γλώσσας."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Το σύστημα, οι εφαρμογές και οι ιστότοποι χρησιμοποιούν την πρώτη υποστηριζόμενη γλώσσα από τις προτιμώμενες γλώσσες σας."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Για να επιλέξετε μια γλώσσα για κάθε εφαρμογή, μεταβείτε στις ρυθμίσεις γλώσσας εφαρμογών."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Μάθετε περισσότερα για τις γλώσσες"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Να αφαιρεθούν οι επιλεγμένες γλώσσες;</item>
       <item quantity="one">Να αφαιρεθεί η επιλεγμένη γλώσσα;</item>
@@ -237,7 +242,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Το κείμενο θα προβληθεί σε άλλη γλώσσα."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Δεν είναι δυνατή η κατάργηση όλων των γλωσσών"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Θα πρέπει να διατηρήσετε τουλάχιστον μία προτιμώμενη γλώσσα"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"Ενδέχεται να μην είναι διαθέσιμο σε ορισμένες εφαρμογές"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"Δεν είναι διαθέσιμη ως γλώσσα συστήματος"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Μετακίνηση επάνω"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Μετακίνηση κάτω"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Μετακίνηση επάνω"</string>
@@ -536,9 +541,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Με αυτόν τον τρόπο γίνεται καλύτερη λήψη του δακτυλικού σας αποτυπώματος"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Εγγραφή δακτυλικού αποτυπώματος <xliff:g id="PERCENTAGE">%d</xliff:g> τοις εκατό"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Προστέθηκε δακτυλ. αποτύπωμα"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Το Ξεκλείδωμα με δακτυλικό αποτύπωμα βελτιώνεται όσο περισσότερο το χρησιμοποιείτε για να ξεκλειδώνετε το tablet σας ή να επαληθεύετε την ταυτότητά σας σε εφαρμογές"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Το Ξεκλείδωμα με δακτυλικό αποτύπωμα βελτιώνεται όσο περισσότερο το χρησιμοποιείτε για να ξεκλειδώνετε τη συσκευή σας ή να επαληθεύετε την ταυτότητά σας σε εφαρμογές"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Το Ξεκλείδωμα με δακτυλικό αποτύπωμα βελτιώνεται όσο περισσότερο το χρησιμοποιείτε για να ξεκλειδώνετε το τηλέφωνό σας ή να επαληθεύετε την ταυτότητά σας σε εφαρμογές"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Μπορείτε πλέον να χρησιμοποιείτε το δακτυλικό σας αποτύπωμα για να ξεκλειδώνετε το tablet σας ή για να επαληθεύετε την ταυτότητά σας, για παράδειγμα, όταν συνδέεστε σε εφαρμογές."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Μπορείτε πλέον να χρησιμοποιείτε το δακτυλικό σας αποτύπωμα για να ξεκλειδώνετε τη συσκευή σας ή να επαληθεύετε την ταυτότητά σας, για παράδειγμα, όταν συνδέεστε σε εφαρμογές"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Μπορείτε πλέον να χρησιμοποιείτε το δακτυλικό σας αποτύπωμα για να ξεκλειδώνετε το τηλέφωνό σας ή για να επαληθεύετε την ταυτότητά σας, για παράδειγμα, όταν συνδέεστε σε εφαρμογές"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Αργότερα"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Ανασηκώστε και αγγίξτε ξανά"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Τοποθετήστε τη μία πλευρά του δακτυλικού σας αποτυπώματος στον αισθητήρα και αγγίξτε παρατεταμένα, μετά τοποθετήστε την άλλη πλευρά."</string>
@@ -1678,7 +1683,7 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Μετακίνηση"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Μετακίνηση δεδομένων…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Κατά τη διάρκεια της μετακίνησης: \n• Μην αφαιρέσετε το μέσο αποθήκευσης <xliff:g id="NAME">^1</xliff:g>. \n• Ορισμένες εφαρμογές δεν θα λειτουργούν σωστά. \n• Διατηρείτε φορτισμένη τη συσκευή."</string>
-    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"Έγινε μορφοποίηση του <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"Μορφοποίηση ολοκληρώθηκε: <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Μπορείτε να ξεκινήσετε τη χρήση της μονάδας αποθηκευτικού χώρου <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Μπορείτε να ξεκινήσετε τη χρήση της μονάδας αποθηκευτικού χώρου <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Μετακίνηση <xliff:g id="APP">^1</xliff:g>"</string>
@@ -1696,11 +1701,11 @@
     <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Αποθήκευση εφαρμογών και μέσων για χρήση μόνο σε αυτό το τηλέφωνο. &lt;a href=https://support.google.com/android/answer/12153449&gt;Μάθετε περισσότερα σχετικά με τη ρύθμιση μιας κάρτας SD&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Μορφοποίηση"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Ή"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Μορφοποίηση κάρτας SD ως φορητό αποθηκευτικό χώρο"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Μορφοπ. κάρτας SD ως φορητό αποθ. χώρο"</string>
     <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Αποθηκεύστε φωτογραφίες, βίντεο, μουσική και άλλο περιεχόμενο και αποκτήστε πρόσβαση σε αυτό από άλλες συσκευές. &lt;a href=https://support.google.com/android/answer/12153449&gt;Μάθετε περισσότερα σχετικά με τη ρύθμιση μιας κάρτας SD&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Μορφοποίηση"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Ρύθμιση αργότερα"</string>
-    <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Μορφοποίηση του <xliff:g id="NAME">^1</xliff:g>;"</string>
+    <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Να γίνει μορφοποίηση του <xliff:g id="NAME">^1</xliff:g>;"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Η συσκευή <xliff:g id="NAME_0">^1</xliff:g> απαιτεί μορφοποίηση για να αποθηκεύσει εφαρμογές, αρχεία και μέσα. \n\nΗ μορφοποίηση θα διαγράψει το υπάρχον περιεχόμενο στο <xliff:g id="NAME_1">^2</xliff:g>. Για να μην χάσετε το περιεχόμενό σας, δημιουργήστε ένα αντίγραφο ασφαλείας σε ένα άλλο <xliff:g id="NAME_2">^3</xliff:g> ή σε άλλη συσκευή."</string>
     <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Η μονάδα αποθηκευτικού χώρου <xliff:g id="NAME_0">^1</xliff:g> πρέπει να μορφοποιηθεί για την αποθήκευση φωτογραφιών, βίντεο, μουσικής και άλλου περιεχομένου. \n\nΗ μορφοποίηση θα διαγράψει το υπάρχον περιεχόμενο στη μονάδα αποθηκευτικού χώρου <xliff:g id="NAME_1">^2</xliff:g>. Για να αποφύγετε την απώλεια περιεχομένου, δημιουργήστε αντίγραφα ασφαλείας σε μια άλλη μονάδα αποθηκευτικού χώρου <xliff:g id="NAME_2">^3</xliff:g> ή σε άλλη συσκευή."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Μορφοποίηση <xliff:g id="NAME">^1</xliff:g>"</string>
@@ -2993,8 +2998,16 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Παρασκήνιο: λιγότερο από ένα λεπτό"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Σύνολο: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Παρασκήνιο: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Τα δεδομένα χρήσης μπαταρίας υπολογίζονται κατά προσέγγιση και όχι κατά τη φόρτιση του τηλεφώνου"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Τα δεδομένα χρήσης μπαταρίας θα είναι διαθέσιμα, αφού έχετε χρησιμοποιήσει το τηλέφωνό σας μερικές ώρες."</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Τα δεδομένα χρήσης μπαταρίας υπολογίζονται κατά προσέγγιση και όχι κατά τη φόρτιση του τηλεφώνου"</string>
+    <!-- no translation found for battery_usage_screen_footer (3729564192877964259) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
+    <skip />
+    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"Τα δεδομένα χρήσης μπαταρίας θα είναι διαθέσιμα, αφού έχετε χρησιμοποιήσει το τηλέφωνό σας μερικές ώρες."</string>
+    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Γράφημα χρήσης μπαταρίας"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Γράφημα ημερήσιας χρήσης μπαταρίας"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Γράφημα ωριαίας χρήσης μπαταρίας"</string>
@@ -5615,10 +5628,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"Μέσα"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Καρφίτσωμα προγράμματος αναπαραγωγής μέσων"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Για γρήγορη συνέχιση της αναπαραγωγής, το πρόγραμμα αναπαραγωγής μέσων παραμένει ανοικτό στις Γρήγορες ρυθμίσεις"</string>
-    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
-    <skip />
-    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
-    <skip />
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Εμφάνιση μέσων στην οθόνη κλειδώματος"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"Για να συνεχιστεί γρήγορα η αναπαραγωγή, το πρόγραμμα αναπαραγωγής μέσων παραμένει ανοικτό στην οθόνη κλειδώματος."</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Εμφάνιση προτάσεων μέσων"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Με βάση τη δραστηριότητά σας"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Απόκρυψη προγράμματος αναπαραγωγής"</string>

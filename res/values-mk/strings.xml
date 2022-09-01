@@ -216,13 +216,15 @@
     <string name="skip_label" msgid="6380034601349015895">"Прескокни"</string>
     <string name="next_label" msgid="1248293387735652187">"Следно"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Јазици"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"Редослед на претпочитани јазици"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"Јазик на системот"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Отстрани"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Додајте јазик"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Јазик"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Претпочитан јазик"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Јазици за апликации"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Јазици на апликациите"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Поставете го јазикот за секоја апликација"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"Јазик на апликациjата"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"Јазик на апликациjата"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Предложени јазици"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Сите јазици"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Јазик на системот"</string>
@@ -230,6 +232,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Не може да се бира јазик за апликацијава од „Поставките“."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Јазикот може да се разликува од јазиците достапни во апликацијата. Некои апликации може да не ја поддржуваат оваа поставка."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Само апликациите што поддржуваат бирање јазик се прикажани овде."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Системот, апликациите и веб-сајтовите го користат првиот поддржан јазик од вашите претпочитани јазици."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"За да изберете јазик за секоја апликација, одете во поставките за јазик на апликацијата."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Дознајте повеќе за јазиците"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Да се отстранат избраните јазици?</item>
       <item quantity="other">Да се отстранат избраните јазици?</item>
@@ -237,7 +242,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Текстот ќе се прикажува на друг јазик."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Не може да се отстранат сите јазици"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Задржете барем еден претпочитан јазик"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"Може да не е достапно во некои апликации"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"Не е достапен за јазик на системот"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Премести нагоре"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Премести надолу"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Премести најгоре"</string>
@@ -538,9 +543,9 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Отпечатокот е додаден"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Колку повеќе го користите за отклучување на таблетот или потврдување дека сте вие во апликациите, толку повеќе се подобрува „Отклучувањето со отпечаток на прст“"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Колку повеќе го користите за отклучување на уредот или потврдување дека сте вие во апликациите, толку повеќе се подобрува „Отклучувањето со отпечаток на прст“"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Колку повеќе го користите за отклучување на телефонот или потврдување дека сте вие во апликациите, толку повеќе се подобрува „Отклучувањето со отпечаток на прст“"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Сега може да го користите отпечатокот за да го отклучите телефонот или да потврдите дека сте вие, како кога се најавувате на апликации"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Сега може да го користите отпечатокот за да го отклучите телефонот или да потврдите дека сте вие, како кога се најавувате на апликации"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Сега може да го користите отпечатокот за да го отклучите телефонот или да потврдите дека сте вие, како кога се најавувате на апликации"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Направи подоцна"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Подигнете и допрете повторно"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Поставете го отпечатокот странично на сензорот и задржете, а потоа направете исто со другата страна"</string>
@@ -2766,10 +2771,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Некои функции може да бидат ограничени"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Поголемо користење на батеријата"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Прегледајте ги апликациите со најголемо користење"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Полнењето е паузирано"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Се заштитува батеријата за да се продолжи животниот век на батеријата\nДопрете за да дознаете повеќе"</string>
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
     <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Продолжи со полнење"</string>
@@ -2807,8 +2810,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Апликацијава ќе може да ја користи батеријата во заднина. Батеријата може да се потроши порано од очекуваното."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Да"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Откажи"</string>
-    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
-    <skip />
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Наполни до полна"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Вашите апликации користат нормално количество батерија. Ако апликациите трошат многу батерија, телефонот ќе ви каже што може да преземете.\n\nСекогаш може да вклучите „Штедач на батерија“ ако батеријата ви е при крај."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Вашите апликации користат нормално количество батерија. Ако апликациите трошат многу батерија, таблетот ќе ви каже што може да преземете.\n\nСекогаш може да вклучите „Штедач на батерија“ ако батеријата ви е при крај."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Вашите апликации користат нормално количество батерија. Ако апликациите трошат многу батерија, уредот ќе ви каже што може да преземете.\n\nСекогаш може да вклучите „Штедач на батерија“ ако батеријата ви е при крај."</string>
@@ -2998,13 +3000,19 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Заднина: помалку од една минута"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Вкупно: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Заднина: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Податоците за користењето на батеријата се приближни и не го мерат користењето кога телефонот се полни"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Податоците за користењето на батеријата ќе бидат достапни откако ќе го користите телефонот неколку часа"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Податоците за користењето на батеријата се приближни и не го мерат користењето кога телефонот се полни"</string>
+    <!-- no translation found for battery_usage_screen_footer (3729564192877964259) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
+    <skip />
+    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"Податоците за користењето на батеријата ќе бидат достапни откако ќе го користите телефонот неколку часа"</string>
+    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Графикон за користење на батеријата"</string>
-    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
-    <skip />
-    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
-    <skip />
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Графикон за користење на батеријата по денови"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Графикон за користење на батеријата по часови"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статистика на процес"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Паметна статистика за процеси кои се извршуваат"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Употреба на меморија"</string>
@@ -5622,10 +5630,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"Аудиовизуелни содржини"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Закачете го плеерот"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"За брзо продолжување на репродукцијата, плеерот останува отворен во „Брзи поставки“"</string>
-    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
-    <skip />
-    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
-    <skip />
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Прикажувај аудиовизуелни содржини на заклучен екран"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"За брзо продолжување на репродукцијата, плеерот останува отворен на заклучен екран"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Прикажувај препораки за аудиовизуелни содржини"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Според вашата активност"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Сокриј го плеерот"</string>

@@ -216,13 +216,15 @@
     <string name="skip_label" msgid="6380034601349015895">"છોડો"</string>
     <string name="next_label" msgid="1248293387735652187">"આગલું"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"ભાષાઓ"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"પસંદ કરેલી ભાષાનો ક્રમ"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"સિસ્ટમની ભાષા"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"કાઢી નાખો"</string>
     <string name="add_a_language" msgid="2126220398077503271">"ભાષા ઉમેરો"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"ભાષા"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"પસંદગીની ભાષા"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"ઍપની ભાષાઓ"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"ઍપની ભાષાઓ"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"દરેક ઍપ માટે કોઈ ભાષા સેટ કરો"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"ઍપની ભાષા"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"ઍપની ભાષા"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"સૂચવેલી ભાષાઓ"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"બધી ભાષાઓ"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"સિસ્ટમની ભાષા"</string>
@@ -230,6 +232,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"આ ઍપ માટે સેટિંગમાંથી ભાષા પસંદ કરી શકાતી નથી."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"આ ભાષા ઍપમાં ઉપલબ્ધ ભાષાઓથી અલગ હોઈ શકે છે. કેટલીક ઍપ આ સેટિંગને સપોર્ટ ન કરે એવું બની શકે છે."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"માત્ર ભાષાની પસંદગીને સપોર્ટ કરતી ઍપ જ અહીં બતાવવામાં આવી છે."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"તમારી સિસ્ટમ, ઍપ અને વેબસાઇટ, તમારી પસંદગીની ભાષાઓમાંની પહેલી સપોર્ટેડ ભાષાનો ઉપયોગ કરે છે."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"દરેક ઍપ માટે ભાષા પસંદ કરવા, ઍપની ભાષાના સેટિંગ પર જાઓ."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"ભાષાઓ વિશે વધુ જાણો"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">પસંદ કરેલ ભાષાઓને કાઢી નાખીએ?</item>
       <item quantity="other">પસંદ કરેલ ભાષાઓને કાઢી નાખીએ?</item>
@@ -237,7 +242,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"ટેક્સ્ટ બીજી ભાષામાં પ્રદર્શિત કરવામાં આવશે."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"બધી ભાષાઓ દૂર કરી શકતાં નથી"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"ઓછામાં ઓછી એક પસંદીદા ભાષા રાખો"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"કેટલીક ઍપ્લિકેશનોમાં કદાચ ઉપલબ્ધ ન હોય"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"સિસ્ટમની ભાષા તરીકે ઉપલબ્ધ નથી"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"ઉપર ખસેડો"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"નીચે ખસેડો"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"ઉપર ખસેડો"</string>
@@ -536,9 +541,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"આમ કરવાથી, તમારી ફિંગરપ્રિન્ટને બહેતર રીતે કૅપ્ચર કરવામાં સહાય મળે છે"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"ફિંગરપ્રિન્ટની નોંધણી કરવાની પ્રક્રિયા <xliff:g id="PERCENTAGE">%d</xliff:g> ટકા પૂર્ણ થઈ છે"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"ફિંગરપ્રિન્ટ ઉમેરી"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"તમે તમારું ટૅબ્લેટ અનલૉક કરવા અથવા ઍપમાં તમે જ છો તે ચકાસવા માટે ફિંગરપ્રિન્ટ અનલૉક કરવાની સુવિધાનો જેટલો વધુ ઉપયોગ કરો, એટલી જ તે સુવિધા બહેતર બને છે"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"તમે તમારું ડિવાઇસ અનલૉક કરવા અથવા ઍપમાં તમે જ છો તે ચકાસવા માટે ફિંગરપ્રિન્ટ અનલૉક કરવાની સુવિધાનો જેટલો વધુ ઉપયોગ કરો, એટલી જ તે સુવિધા બહેતર બને છે"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"તમે તમારો ફોન અનલૉક કરવા અથવા ઍપમાં તમે જ છો તે ચકાસવા માટે ફિંગરપ્રિન્ટ અનલૉક કરવાની સુવિધાનો જેટલો વધુ ઉપયોગ કરો, એટલી જ તે સુવિધા બહેતર બને છે"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"હવે તમે તમારું ટૅબ્લેટ અનલૉક કરવા અથવા સાઇન ઇન કરનાર તમે જ છો તેની ચકાસણી કરવા માટે તમારી ફિંગરપ્રિન્ટનો ઉપયોગ કરી શકો છો, જેમ કે જ્યારે તમે ઍપમાં સાઇન ઇન કરો ત્યારે"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"હવે તમે તમારું ડિવાઇસ અનલૉક કરવા અથવા સાઇન ઇન કરનાર તમે જ છો તેની ચકાસણી કરવા માટે તમારી ફિંગરપ્રિન્ટનો ઉપયોગ કરી શકો છો, જેમ કે જ્યારે તમે ઍપમાં સાઇન ઇન કરો ત્યારે"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"હવે તમે તમારો ફોન અનલૉક કરવા અથવા સાઇન ઇન કરનાર તમે જ છો તેની ચકાસણી કરવા માટે તમારી ફિંગરપ્રિન્ટનો ઉપયોગ કરી શકો છો, જેમ કે જ્યારે તમે ઍપમાં સાઇન ઇન કરો ત્યારે"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"આને થોડા સમય પછી કરો"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"ઉપાડો, પછી ફરી ટચ કરો"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"તમારી આંગળીને સેન્સર પર મૂકો અને દબાવી રાખો, પછી આંગળીના બીજા ભાગોને સેન્સર પર મૂકો"</string>
@@ -1693,11 +1698,11 @@
     <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"માત્ર આ ટૅબ્લેટ પર ઉપયોગ કરવા માટે ઍપ અને મીડિયા સ્ટોર કરો. &lt;a href=https://support.google.com/android/answer/12153449&gt;Learn more about setting up an SD card&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"ફૉર્મેટ કરો"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"આંતરિક સ્ટોરેજ માટે SD કાર્ડને ફૉર્મેટ કરો"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"માત્ર આ ફોન પર ઉપયોગ કરવા માટે ઍપ અને મીડિયા સ્ટોર કરો. &lt;a href=https://support.google.com/android/answer/12153449&gt;Learn more about setting up an SD card&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"માત્ર આ ફોન પર ઉપયોગ કરવા માટે ઍપ અને મીડિયા સ્ટોર કરો. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD કાર્ડ સેટઅપ કરવા વિશે વધુ જાણો&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"ફૉર્મેટ કરો"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"અથવા"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"પોર્ટેબલ સ્ટોરેજ માટે SD કાર્ડને ફૉર્મેટ કરો"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"ફોટા, વીડિયો, મ્યુઝિક અને બીજું ઘણું સ્ટોર કરો અને તેમને અન્ય ડિવાઇસમાંથી ઍક્સેસ કરો. &lt;a href=https://support.google.com/android/answer/12153449&gt;Learn more about setting up an SD card&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"ફોટા, વીડિયો, મ્યુઝિક અને બીજું ઘણું સ્ટોર કરો અને તેમને અન્ય ડિવાઇસમાંથી ઍક્સેસ કરો. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD કાર્ડ સેટઅપ કરવા વિશે વધુ જાણો&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"ફૉર્મેટ કરો"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"થોડા સમય પછી સેટ કરો"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"આ <xliff:g id="NAME">^1</xliff:g>ને ફૉર્મેટ કરીએ?"</string>
@@ -2764,10 +2769,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"અમુક સુવિધાઓ મર્યાદિત હોઈ શકે છે"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"બૅટરીનો સૌથી વધુ વપરાશ"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"સૌથી વધુ વપરાતી હોય એવી ઍપ જુઓ"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"ચાર્જિંગ થોભાવવામાં આવ્યું છે"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"બૅટરીની આવરદા વધારવા માટે, બૅટરીની સુરક્ષા કરી રહ્યાં છીએ\nવધુ જાણવા માટે ટૅપ કરો"</string>
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
     <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"ચાર્જ કરવાનું ફરી શરૂ કરો"</string>
@@ -2805,8 +2808,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"આ ઍપ બૅકગ્રાઉન્ડમાં બૅટરીનો વપરાશ કરી શકશે. તમારા ડિવાઇસની બૅટરી અપેક્ષા કરતાં વહેલા સમાપ્ત થઈ શકે છે."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"કાઢી નાખો"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"રદ કરો"</string>
-    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
-    <skip />
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"પૂરી ચાર્જ કરો"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"તમારી બધી ઍપ બૅટરીનો વપરાશ સામાન્ય પ્રમાણમાં કરી રહી છે. જો તે બૅટરીનો ઘણો વધુ વપરાશ કરવા માંડશે, તો તમારો ફોન તમે શું ઍક્શન લઈ શકો તે સૂચવશે.\n\nજો તમારી પાસે બૅટરીમાં ચાર્જ ઓછો રહ્યો હોય, તો તમે કોઈપણ સમયે બૅટરી સેવર ચાલુ કરી શકો છો."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"તમારી બધી ઍપ બૅટરીનો વપરાશ સામાન્ય પ્રમાણમાં કરી રહી છે. જો તે બૅટરીનો ઘણો વધુ વપરાશ કરવા માંડશે, તો તમારું ટૅબ્લેટ તમે શું ઍક્શન લઈ શકો તે સૂચવશે.\n\nજો તમારી પાસે બૅટરીમાં ચાર્જ ઓછો રહ્યો હોય, તો તમે કોઈપણ સમયે બૅટરી સેવર ચાલુ કરી શકો છો."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"તમારી બધી ઍપ બૅટરીનો વપરાશ સામાન્ય પ્રમાણમાં કરી રહી છે. જો તે બૅટરીનો ઘણો વધુ વપરાશ કરવા માંડશે, તો તમારું ઉપકરણ તમે શું ઍક્શન લઈ શકો તે સૂચવશે.\n\nજો તમારી પાસે બૅટરીમાં ચાર્જ ઓછો રહ્યો હોય, તો તમે કોઈપણ સમયે બૅટરી સેવર ચાલુ કરી શકો છો."</string>
@@ -2996,13 +2998,19 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"બૅકગ્રાઉન્ડ: એક મિનિટ કરતાં ઓછો સમય"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"કુલ: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"બૅકગ્રાઉન્ડ: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"બૅટરીના વપરાશનો ડેટા અંદાજિત છે અને જ્યારે ફોન ચાર્જ થઈ રહ્યો હોય, ત્યારે તેના વપરાશની ગણતરી કરવામાં આવતી નથી"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"તમે તમારા ફોનનો થોડા કલાક માટે ઉપયોગ કરશો પછી બૅટરીના વપરાશનો ડેટા ઉપલબ્ધ થશે"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"બૅટરીના વપરાશનો ડેટા અંદાજિત છે અને જ્યારે ફોન ચાર્જ થઈ રહ્યો હોય, ત્યારે તેના વપરાશની ગણતરી કરવામાં આવતી નથી"</string>
+    <!-- no translation found for battery_usage_screen_footer (3729564192877964259) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
+    <skip />
+    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"તમે તમારા ફોનનો થોડા કલાક માટે ઉપયોગ કરશો પછી બૅટરીના વપરાશનો ડેટા ઉપલબ્ધ થશે"</string>
+    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"બૅટરીના વપરાશનો ચાર્ટ"</string>
-    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
-    <skip />
-    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
-    <skip />
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"બૅટરીના દૈનિક વપરાશનો ચાર્ટ"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"બૅટરીના કલાક દીઠ વપરાશનો ચાર્ટ"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"પ્રક્રિયા આંકડા"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"ચાલુ પ્રક્રિયાઓ વિશેનાં અવ્યવસ્થિત આંકડાઓ"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"મેમરીનો ઉપયોગ"</string>
@@ -5620,10 +5628,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"મીડિયા"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"મીડિયા પ્લેયર પિન કરો"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"પ્લેબૅક ઝડપથી ફરી શરૂ કરી શકવા માટે, મીડિયા પ્લેયર ઝડપી સેટિંગમાં ખુલ્લું રહે છે"</string>
-    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
-    <skip />
-    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
-    <skip />
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"લૉક સ્ક્રીન પર મીડિયા બતાવો"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"પ્લેબૅક ઝડપથી ફરી શરૂ કરવા માટે, મીડિયા પ્લેયર લૉક સ્ક્રીન પર ખુલ્લું રહે છે"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"મીડિયાના સુઝાવો બતાવો"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"તમારી પ્રવૃત્તિ પર આધારિત"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"પ્લેયર છુપાવો"</string>
