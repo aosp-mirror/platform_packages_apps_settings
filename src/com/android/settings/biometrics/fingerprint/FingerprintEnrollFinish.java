@@ -49,15 +49,29 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     @VisibleForTesting
     static final String FINGERPRINT_SUGGESTION_ACTIVITY =
             "com.android.settings.SetupFingerprintSuggestionActivity";
+    private FingerprintManager mFingerprintManager;
+    private boolean mCanAssumeSfps;
 
     private boolean mIsAddAnotherOrFinish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fingerprint_enroll_finish);
+        mFingerprintManager = getSystemService(FingerprintManager.class);
+        final List<FingerprintSensorPropertiesInternal> props =
+                mFingerprintManager.getSensorPropertiesInternal();
+        mCanAssumeSfps = props != null && props.size() == 1 && props.get(0).isAnySidefpsType();
+        if (mCanAssumeSfps) {
+            setContentView(R.layout.sfps_enroll_finish);
+        } else {
+            setContentView(R.layout.fingerprint_enroll_finish);
+        }
         setHeaderText(R.string.security_settings_fingerprint_enroll_finish_title);
-        setDescriptionText(R.string.security_settings_fingerprint_enroll_finish_v2_message);
+        if (mCanAssumeSfps) {
+            setDescriptionText(R.string.security_settings_sfps_enroll_finish);
+        } else {
+            setDescriptionText(R.string.security_settings_fingerprint_enroll_finish_v2_message);
+        }
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(

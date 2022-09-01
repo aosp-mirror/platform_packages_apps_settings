@@ -216,13 +216,15 @@
     <string name="skip_label" msgid="6380034601349015895">"Pular"</string>
     <string name="next_label" msgid="1248293387735652187">"Avançar"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Idiomas"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"Ordem dos idiomas preferenciais"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"Idioma do sistema"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Remover"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Adicionar um idioma"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Idioma"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Idioma preferido"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Idiomas do app"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Idiomas do app"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Definir o idioma de cada app"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"Idioma do app"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"Idioma do app"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Idiomas sugeridos"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Todos os idiomas"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Idioma do sistema"</string>
@@ -230,6 +232,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"A seleção de idioma para este app não está disponível nas configurações."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"O idioma pode ser diferente dos disponíveis no app. Alguns apps podem não ter suporte a essa configuração."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Apenas apps que têm suporte à seleção de idioma são mostrados aqui."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"O sistema, os apps e os sites usam o primeiro idioma com suporte na sua lista de idiomas preferenciais."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Para selecionar um idioma para cada app, acesse as configurações de idioma deles."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Saiba mais sobre os idiomas"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Remover o idioma selecionado?</item>
       <item quantity="other">Remover idiomas selecionados?</item>
@@ -237,7 +242,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"O texto será exibido em outro idioma."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Não é possível remover todos os idiomas"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Mantenha pelo menos um idioma preferencial"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"Pode não estar disponível em alguns apps"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"Não disponível como idioma do sistema"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Mover para cima"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Mover para o fim"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Mover para o início"</string>
@@ -538,9 +543,9 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Impressão digital adicionada"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"O Desbloqueio por impressão digital melhora sempre que é usado para desbloquear o tablet ou confirmar sua identidade em apps"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"O Desbloqueio por impressão digital melhora sempre que é usado para desbloquear o dispositivo ou confirmar sua identidade em apps"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"O Desbloqueio por impressão digital melhora sempre que é usado para desbloquear o smartphone ou confirmar sua identidade em apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Agora, você pode usar a impressão digital para desbloquear o tablet ou confirmar sua identidade, como ao fazer login em apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Agora, você pode usar a impressão digital para desbloquear o dispositivo ou confirmar sua identidade, como ao fazer login em apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Agora, você pode usar a impressão digital para desbloquear o smartphone ou confirmar sua identidade, como ao fazer login em apps"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Fazer isso depois"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Tire o dedo e toque novamente"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Coloque a lateral da sua impressão digital no sensor e mantenha o dedo parado por alguns instantes. Depois, mude para o outro lado"</string>
@@ -1619,7 +1624,7 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Renomear"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Montar"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Ejetar"</string>
-    <string name="storage_menu_format" msgid="8903698999905354146">"Formatar o cartão SD para armazenamento portátil"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Formatar o cartão SD"</string>
     <string name="storage_menu_format_button" msgid="7623565190643699626">"Formatar o cartão"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatar como portátil"</string>
     <string name="storage_menu_format_option" msgid="4886059624052908432">"Formatar"</string>
@@ -1703,7 +1708,7 @@
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formatar"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Configurar mais tarde"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Formatar este <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Este <xliff:g id="NAME_0">^1</xliff:g> precisa ser formatado para armazenar apps, arquivos e mídia. \n\nA formatação limpará todo o conteúdo já existente no <xliff:g id="NAME_1">^2</xliff:g>. Faça backup do seu conteúdo em outro <xliff:g id="NAME_2">^3</xliff:g> ou dispositivo para evitar que ele seja perdido."</string>
+    <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Este <xliff:g id="NAME_0">^1</xliff:g> precisa ser formatado para armazenar apps, arquivos e mídia. \n\nA formatação limpará todo o conteúdo do <xliff:g id="NAME_1">^2</xliff:g>. Faça backup em outro <xliff:g id="NAME_2">^3</xliff:g> ou dispositivo para evitar que o conteúdo seja perdido."</string>
     <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Este <xliff:g id="NAME_0">^1</xliff:g> precisa ser formatado para armazenar fotos, vídeos, músicas e muito mais. \n\nA formatação vai apagar o conteúdo do <xliff:g id="NAME_1">^2</xliff:g>. Para evitar a perda de conteúdo, faça backup em outro <xliff:g id="NAME_2">^3</xliff:g> ou dispositivo."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formatar <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Mover conteúdo para o <xliff:g id="NAME">^1</xliff:g>?"</string>
@@ -2995,8 +3000,16 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Segundo plano: menos de um minuto"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Total: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Segundo plano: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Os dados de uso da bateria são aproximados e não medem o uso durante o carregamento do smartphone."</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Os dados de uso da bateria ficam disponíveis após algumas horas de uso do smartphone."</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Os dados de uso da bateria são aproximados e não medem o uso durante o carregamento do smartphone."</string>
+    <!-- no translation found for battery_usage_screen_footer (3729564192877964259) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
+    <skip />
+    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"Os dados de uso da bateria ficam disponíveis após algumas horas de uso do smartphone."</string>
+    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Gráfico de uso da bateria"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Gráfico de uso diário da bateria"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Gráfico de uso da bateria por hora"</string>
@@ -5617,10 +5630,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"Mídia"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Fixar player de mídia"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Para retomar a reprodução rapidamente, o player de mídia fica aberto nas Configurações rápidas"</string>
-    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
-    <skip />
-    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
-    <skip />
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Mostrar mídia na tela de bloqueio"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"Para retomar a reprodução rapidamente, o player de mídia fica aberto na tela de bloqueio"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Mostrar recomendações de mídia"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Com base na sua atividade"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Ocultar player"</string>

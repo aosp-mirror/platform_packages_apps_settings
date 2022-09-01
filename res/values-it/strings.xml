@@ -216,13 +216,15 @@
     <string name="skip_label" msgid="6380034601349015895">"Salta"</string>
     <string name="next_label" msgid="1248293387735652187">"Avanti"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Lingue"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"Ordine delle lingue preferite"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"Lingua di sistema"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Rimuovi"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Aggiungi una lingua"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Lingua"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Lingua preferita"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Lingue delle app"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Lingue delle app"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Imposta la lingua di ogni app"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"Lingua dell\'app"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"Lingua dell\'app"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Lingue suggerite"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Tutte le lingue"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Lingua di sistema"</string>
@@ -230,6 +232,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La selezione della lingua per questa app non è disponibile nelle Impostazioni."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"La lingua potrebbe essere diversa dalle lingue disponibili nell\'app. Alcune app potrebbero non supportare questa impostazione."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Qui vengono mostrate soltanto le app che supportano la selezione della lingua."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Per il sistema, le app e i siti web viene usata la prima lingua supportata delle tue lingue preferite."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Per selezionare una lingua per ogni app, vai alle impostazioni della lingua delle app."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Scopri di più sulle lingue"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Rimuovere le lingue selezionate?</item>
       <item quantity="one">Rimuovere la lingua selezionata?</item>
@@ -237,7 +242,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Il testo verrà mostrato in un\'altra lingua."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Impossibile rimuovere tutte le lingue"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Mantieni almeno una lingua preferita"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"Potrebbe non essere disponibile in alcune app"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"Non disponibile come lingua di sistema"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Sposta su"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Sposta giù"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Sposta all\'inizio"</string>
@@ -536,9 +541,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"In questo modo è più facile acquisire più parti dell\'impronta"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registrazione dell\'impronta al <xliff:g id="PERCENTAGE">%d</xliff:g> percento"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Impronta aggiunta"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Lo sblocco con l\'impronta migliora ogni volta che lo usi per sbloccare il tuo tablet o verificare la tua identità nelle app"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Lo sblocco con l\'impronta migliora ogni volta che lo usi per sbloccare il tuo dispositivo o verificare la tua identità nelle app"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Lo sblocco con l\'impronta migliora ogni volta che lo usi per sbloccare il tuo telefono o verificare la tua identità nelle app"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Ora puoi usare l\'impronta per sbloccare il tablet o verificare la tua identità, ad esempio quando accedi alle app"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Ora puoi usare l\'impronta per sbloccare il dispositivo o verificare la tua identità, ad esempio quando accedi alle app"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Ora puoi usare l\'impronta per sbloccare il telefono o verificare la tua identità, ad esempio quando accedi alle app"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Più tardi"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Solleva, quindi tocca di nuovo"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Appoggia un lato del dito sul sensore e tieni premuto, quindi cambia lato"</string>
@@ -1659,7 +1664,7 @@
     <string name="storage_wizard_guest" msgid="5813419895687733649">"Utenti Ospite non possono formattare le schede SD"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Configura la tua <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Formatta la scheda SD per la memoria portatile"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Archivia foto, video, musica e altro e accedivi da altri dispositivi"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Archivia foto, video, musica e altro e accedi a questi contenuti da altri dispositivi"</string>
     <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Formatta la scheda SD per la memoria interna"</string>
     <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Salva le app e i contenuti multimediali da usare solo su questo telefono"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Formatta memoria interna"</string>
@@ -1697,12 +1702,12 @@
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formatta"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Oppure"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formatta la scheda SD per la memoria portatile"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Archivia foto, video, musica e altro e accedivi da altri dispositivi. &lt;a href=https://support.google.com/android/answer/12153449&gt;Scopri di più sulla configurazione di una scheda SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Archivia foto, video, musica e altro e accedi a questi contenuti da altri dispositivi. &lt;a href=https://support.google.com/android/answer/12153449&gt;Scopri di più sulla configurazione di una scheda SD&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formatta"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Configura più tardi"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Vuoi formattare il dispositivo <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"È necessario formattare il dispositivo <xliff:g id="NAME_0">^1</xliff:g> per poter memorizzare app, file e contenuti multimediali. \n\nLa formattazione cancellerà i contenuti presenti su <xliff:g id="NAME_1">^2</xliff:g>. Per evitare di perdere i contenuti, effettua il backup su un altro dispositivo <xliff:g id="NAME_2">^3</xliff:g> o su un dispositivo differente."</string>
-    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Questa <xliff:g id="NAME_0">^1</xliff:g> deve essere formattata per poter archiviare foto, video, musica e altro. \n\nLa formattazione resetterà i contenuti esistenti sulla <xliff:g id="NAME_1">^2</xliff:g>. Per evitare di perdere i contenuti, esegui il backup su un\'altra <xliff:g id="NAME_2">^3</xliff:g> o su un altro dispositivo."</string>
+    <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"È necessario formattare il dispositivo <xliff:g id="NAME_0">^1</xliff:g> per poter memorizzare app, file e contenuti multimediali. \n\nLa formattazione cancellerà i contenuti presenti sul dispositivo <xliff:g id="NAME_1">^2</xliff:g>. Per evitare di perdere i contenuti, effettua il backup su un altro dispositivo <xliff:g id="NAME_2">^3</xliff:g> o di altro tipo."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"È necessario formattare il dispositivo <xliff:g id="NAME_0">^1</xliff:g> per poter archiviare foto, video, musica e altro. \n\nLa formattazione resetterà i contenuti esistenti sul dispositivo <xliff:g id="NAME_1">^2</xliff:g>. Per evitare di perdere i contenuti, esegui il backup su un altro dispositivo <xliff:g id="NAME_2">^3</xliff:g> o di altro tipo."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formatta <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Spostare i contenuti su <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Puoi spostare file, contenuti multimediali e alcune app sul dispositivo <xliff:g id="NAME">^1</xliff:g>. \n\nCon questo spostamento, che dovrebbe richiedere circa <xliff:g id="DURATION">^3</xliff:g>, verranno liberati <xliff:g id="SIZE">^2</xliff:g> di spazio di archiviazione del tablet."</string>
@@ -2764,10 +2769,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Alcune funzioni potrebbero essere limitate"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Maggiore utilizzo della batteria"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Scopri le app con il massimo utilizzo"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Ricarica in pausa"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"È attiva la protezione della batteria per estenderne la durata\nTocca per scoprire di più"</string>
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
     <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Riprendi la ricarica"</string>
@@ -2805,8 +2808,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Questa app potrà usare la batteria in background. La batteria potrebbe esaurirsi prima del previsto."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Rimuovi"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Annulla"</string>
-    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
-    <skip />
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Ricarica completa"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Le tue app stanno utilizzando un livello di batteria normale. Se le app consumano troppa batteria, il dispositivo ti suggerirà come rimediare.\n\nSe la batteria è in esaurimento, puoi attivare il risparmio energetico in qualsiasi momento."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Le tue app stanno utilizzando un livello di batteria normale. Se le app consumano troppa batteria, il dispositivo ti suggerirà come rimediare.\n\nSe la batteria è in esaurimento, puoi attivare il risparmio energetico in qualsiasi momento."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Le tue app stanno utilizzando un livello di batteria normale. Se le app consumano troppa batteria, il dispositivo ti suggerirà come rimediare.\n\nSe la batteria è in esaurimento, puoi attivare il risparmio energetico in qualsiasi momento."</string>
@@ -2996,13 +2998,19 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Background: meno di un minuto"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Totale: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"In background: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"I dati sull\'utilizzo della batteria sono approssimativi e l\'utilizzo non viene misurato quando il telefono è in carica"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"I dati sull\'utilizzo della batteria saranno disponibili dopo che avrai usato il telefono per qualche ora"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"I dati sull\'utilizzo della batteria sono approssimativi e l\'utilizzo non viene misurato quando il telefono è in carica"</string>
+    <!-- no translation found for battery_usage_screen_footer (3729564192877964259) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
+    <skip />
+    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"I dati sull\'utilizzo della batteria saranno disponibili dopo che avrai usato il telefono per qualche ora"</string>
+    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Grafico sull\'utilizzo della batteria"</string>
-    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
-    <skip />
-    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
-    <skip />
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Grafico sull\'utilizzo della batteria giornaliero"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Grafico sull\'utilizzo della batteria orario"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistiche sui processi"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistiche tecniche sui processi in esecuzione"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Memoria usata"</string>
@@ -3443,8 +3451,8 @@
     <string name="guest_category_title" msgid="5562663588315329152">"Ospite (tu)"</string>
     <string name="user_category_title" msgid="4368580529662699083">"Utenti"</string>
     <string name="other_user_category_title" msgid="7089976887307643217">"Altri utenti"</string>
-    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Elimina attività Ospite"</string>
-    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Elimina tutti i dati e le app Ospite quando esci dalla modalità Ospite"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Elimina attività ospite"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Elimina tutti i dati e le app dell\'ospite quando esci dalla modalità Ospite"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Vuoi eliminare l\'attività Ospite?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Le app e i dati di questa sessione Ospite verranno eliminati subito e ogni volta che uscirai dalla modalità Ospite verrà eliminata tutta l\'attività Ospite"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Attiva chiamate"</string>
@@ -3956,7 +3964,7 @@
     <string name="gentle_notifications_display_summary_shade_lock" msgid="3936088046873705625">"Verranno visualizzate nell\'area a discesa e nella schermata di blocco"</string>
     <string name="gentle_notifications_display_summary_shade_status" msgid="3363137853729359907">"Verranno visualizzate nell\'area a discesa e nella barra di stato"</string>
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="2068738866725616212">"Verranno visualizzate nell\'area a discesa, nella barra di stato e nella schermata di blocco"</string>
-    <string name="silent_notifications_status_bar" msgid="6113307620588767516">"Nascondi le notifiche silenziose nella barra di stato"</string>
+    <string name="silent_notifications_status_bar" msgid="6113307620588767516">"Nascondi notifiche silenziose nella barra di stato"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"Luce lampeggiante"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"Privacy"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Ignora schermata di blocco"</string>
@@ -4959,7 +4967,7 @@
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Apri rapidamente la fotocamera"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Per aprire velocemente la fotocamera, premi due volte il tasto di accensione da qualsiasi schermata."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"Apri rapidamente la fotocamera"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Cambia fotocamera per modalità selfie"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Cambia fotocamera per selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"Scatta selfie più rapidamente"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"Navigazione del sistema"</string>
@@ -5202,7 +5210,7 @@
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Forza esecuzione completa delle misurazioni GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Monitora tutte le costellazioni e le frequenze GNSS senza ciclo di lavoro utile"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Metodo di immissione"</string>
-    <string name="stylus_handwriting" msgid="2154591374132794563">"Scrittura a mano libera stilo"</string>
+    <string name="stylus_handwriting" msgid="2154591374132794563">"Scrittura a mano libera con stilo"</string>
     <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Quando è attivato, il metodo di immissione corrente riceve MotionEvent stilo se un editor ha impostato lo stato attivo"</string>
     <string name="device_theme" msgid="5027604586494772471">"Tema del dispositivo"</string>
     <string name="default_theme" msgid="4815428567082263639">"Valore predefinito"</string>
@@ -5620,10 +5628,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"Contenuti multimediali"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Blocca media player sullo schermo"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Per riprendere velocemente la riproduzione, il media player rimane aperto nelle Impostazioni rapide"</string>
-    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
-    <skip />
-    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
-    <skip />
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Mostra contenuti multimediali nella schermata di blocco"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"Per riprendere velocemente la riproduzione, il media player rimane aperto nella schermata di blocco"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Mostra consigli relativi a contenuti multimediali"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"In base alle tue attività"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Nascondi player"</string>
@@ -5707,7 +5713,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Usa Blocco app su schermo"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Usa Opzioni sviluppatore"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Usa servizio di stampa"</string>
-    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Consenti più utenti"</string>
+    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Consenti utenti multipli"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Usa debug wireless"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Usa Preferenze del driver di grafica"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Usa risparmio energetico"</string>

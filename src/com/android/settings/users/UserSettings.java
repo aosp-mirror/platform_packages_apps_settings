@@ -1431,6 +1431,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_GUEST)
                 && WizardManagerHelper.isDeviceProvisioned(context)
                 && mUserCaps.mUserSwitcherEnabled) {
+            Drawable icon = context.getDrawable(R.drawable.ic_account_circle);
+            mAddGuest.setIcon(centerAndTint(icon));
             isVisible = true;
             mAddGuest.setVisible(true);
             mAddGuest.setSelectable(true);
@@ -1450,11 +1452,15 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void updateAddUser(Context context) {
         updateAddUserCommon(context, mAddUser, mUserCaps.mCanAddRestrictedProfile);
+        Drawable icon = context.getDrawable(R.drawable.ic_account_circle_filled);
+        mAddUser.setIcon(centerAndTint(icon));
     }
 
     private void updateAddSupervisedUser(Context context) {
         if (!TextUtils.isEmpty(mConfigSupervisedUserCreationPackage)) {
             updateAddUserCommon(context, mAddSupervisedUser, false);
+            Drawable icon = context.getDrawable(R.drawable.ic_add_supervised_user);
+            mAddSupervisedUser.setIcon(centerAndTint(icon));
         } else {
             mAddSupervisedUser.setVisible(false);
         }
@@ -1495,7 +1501,10 @@ public class UserSettings extends SettingsPreferenceFragment
         LayerDrawable ld = new LayerDrawable(new Drawable[] {bg, icon});
         int size = getContext().getResources().getDimensionPixelSize(
                 R.dimen.multiple_users_avatar_size);
+        int bgSize = getContext().getResources().getDimensionPixelSize(
+                R.dimen.multiple_users_user_icon_size);
         ld.setLayerSize(1, size, size);
+        ld.setLayerSize(0, bgSize, bgSize);
         ld.setLayerGravity(1, Gravity.CENTER);
 
         return ld;

@@ -216,13 +216,15 @@
     <string name="skip_label" msgid="6380034601349015895">"ข้าม"</string>
     <string name="next_label" msgid="1248293387735652187">"ถัดไป"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"ภาษา"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"ลำดับภาษาที่ต้องการ"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"ภาษาของระบบ"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"นำออก"</string>
     <string name="add_a_language" msgid="2126220398077503271">"เพิ่มภาษา"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"ภาษา"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"ภาษาที่ต้องการ"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"ภาษาของแอป"</string>
-    <string name="app_locale_picker_summary" msgid="6742557329924446252">"ตั้งค่าภาษาสำหรับแต่ละแอป"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"ภาษาของแอป"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"ภาษาของแอป"</string>
+    <string name="app_locale_picker_summary" msgid="6742557329924446252">"ตั้งค่าภาษาในแต่ละแอป"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"ภาษาของแอป"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"ภาษาที่แนะนำ"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"ทุกภาษา"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"ภาษาของระบบ"</string>
@@ -230,6 +232,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"การเลือกภาษาสำหรับแอปนี้ไม่พร้อมให้ใช้งานจากการตั้งค่า"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"ภาษาอาจแตกต่างจากที่ให้บริการในแอป บางแอปอาจไม่รองรับการตั้งค่านี้"</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"ส่วนนี้แสดงเฉพาะแอปที่รองรับการเลือกภาษา"</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"ระบบ แอป และเว็บไซต์จะใช้ภาษาแรกที่รองรับจากภาษาที่คุณต้องการ"</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"หากต้องการเลือกภาษาของแต่ละแอป ให้ไปที่การตั้งค่าภาษาของแอป"</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"ดูข้อมูลเพิ่มเติมเกี่ยวกับภาษา"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">นำภาษาที่เลือกออกไหม</item>
       <item quantity="one">นำภาษาที่เลือกออกไหม</item>
@@ -237,7 +242,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"ข้อความจะแสดงเป็นภาษาอื่น"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"ไม่สามารถนำทุกภาษาออกได้"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"เก็บภาษาที่ต้องการไว้อย่างน้อย 1 ภาษา"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"อาจไม่พร้อมใช้งานในบางแอป"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"ไม่พร้อมใช้งานเป็นภาษาของระบบ"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"เลื่อนขึ้น"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"เลื่อนลง"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"เลื่อนไปบนสุด"</string>
@@ -536,9 +541,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"การทำเช่นนี้จะช่วยให้บันทึกลายนิ้วมือของคุณได้มากขึ้น"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"กำลังลงทะเบียนลายนิ้วมือ <xliff:g id="PERCENTAGE">%d</xliff:g> เปอร์เซ็นต์"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"เพิ่มลายนิ้วมือแล้ว"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"ฟีเจอร์ปลดล็อกด้วยลายนิ้วมือจะยิ่งทำงานได้ดีขึ้น เมื่อคุณใช้ปลดล็อกแท็บเล็ตหรือยืนยันตัวตนในแอปมากยิ่งขึ้น"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"ฟีเจอร์ปลดล็อกด้วยลายนิ้วมือจะยิ่งทำงานได้ดีขึ้น เมื่อคุณใช้ปลดล็อกอุปกรณ์หรือยืนยันตัวตนในแอปมากยิ่งขึ้น"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"ฟีเจอร์ปลดล็อกด้วยลายนิ้วมือจะทำงานได้ดียิ่งขึ้นเมื่อใช้ปลดล็อกโทรศัพท์หรือยืนยันตัวตนในแอปบ่อยๆ"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"ตอนนี้คุณสามารถใช้ลายนิ้วมือเพื่อปลดล็อกแท็บเล็ตหรือยืนยันว่าเป็นคุณ เช่น เมื่อลงชื่อเข้าใช้แอป"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"ตอนนี้คุณสามารถใช้ลายนิ้วมือเพื่อปลดล็อกอุปกรณ์หรือยืนยันว่าเป็นคุณ เช่น เมื่อลงชื่อเข้าใช้แอป"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"ตอนนี้คุณสามารถใช้ลายนิ้วมือเพื่อปลดล็อกโทรศัพท์หรือยืนยันว่าเป็นคุณ เช่น เมื่อลงชื่อเข้าใช้แอป"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"ข้ามไปก่อน"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"ยกนิ้วขึ้นแล้วแตะอีกครั้ง"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"วางด้านข้างของนิ้วค้างไว้บนเซ็นเซอร์ จากนั้นเปลี่ยนข้าง"</string>
@@ -2993,8 +2998,16 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"การทำงานในเบื้องหลัง: ไม่ถึง 1 นาที"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"รวม: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"การทำงานในเบื้องหลัง: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"ข้อมูลการใช้งานแบตเตอรี่เป็นการระบุโดยประมาณ และไม่วัดปริมาณการใช้งานเมื่อโทรศัพท์ชาร์จอยู่"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"ข้อมูลการใช้งานแบตเตอรี่จะแสดงหลังจากที่คุณใช้โทรศัพท์ไป 2-3 ชั่วโมง"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"ข้อมูลการใช้งานแบตเตอรี่เป็นการระบุโดยประมาณ และไม่วัดปริมาณการใช้งานเมื่อโทรศัพท์ชาร์จอยู่"</string>
+    <!-- no translation found for battery_usage_screen_footer (3729564192877964259) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
+    <skip />
+    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"ข้อมูลการใช้งานแบตเตอรี่จะแสดงหลังจากที่คุณใช้โทรศัพท์ไป 2-3 ชั่วโมง"</string>
+    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"แผนภูมิการใช้งานแบตเตอรี่"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"แผนภูมิการใช้งานแบตเตอรี่รายวัน"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"แผนภูมิการใช้งานแบตเตอรี่รายชั่วโมง"</string>
@@ -5615,10 +5628,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"สื่อ"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"ปักหมุดโปรแกรมเล่นสื่อ"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"โปรแกรมเล่นสื่อจะยังเปิดอยู่ในการตั้งค่าด่วนเพื่อกลับมาเล่นต่อได้โดยเร็ว"</string>
-    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
-    <skip />
-    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
-    <skip />
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"แสดงสื่อในหน้าจอล็อก"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"โปรแกรมเล่นสื่อจะยังเปิดอยู่ในหน้าจอล็อกเพื่อกลับมาเล่นต่อได้โดยเร็ว"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"แสดงคำแนะนำสื่อ"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"อิงตามกิจกรรมของคุณ"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"ซ่อนโปรแกรมเล่น"</string>

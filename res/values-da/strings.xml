@@ -216,13 +216,15 @@
     <string name="skip_label" msgid="6380034601349015895">"Spring over"</string>
     <string name="next_label" msgid="1248293387735652187">"Næste"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Sprog"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"Rækkefølgen af foretrukne sprog"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"Systemsprog"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Fjern"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Tilføj et sprog"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Sprog"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Foretrukket sprog"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Appsprog"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Appsprog"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Angiv sprog for hver app"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"Appsprog"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"Appsprog"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Foreslåede sprog"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Alle sprog"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Systemsprog"</string>
@@ -230,6 +232,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Sprogvalg for denne app er ikke tilgængeligt i Indstillinger."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Sproget kan adskille sig fra sprogene i appen. Nogle apps understøtter muligvis ikke denne indstilling."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Her vises kun apps, der understøtter sprogvalg."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Dit system, dine apps og dine websites anvender det første understøttede sprog fra dine foretrukne sprog."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Hvis du vil vælge et sprog for hver app, skal du gå til den pågældende apps sprogindstillinger."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Få flere oplysninger om sprog"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Vil du fjerne det valgte sprog?</item>
       <item quantity="other">Vil du fjerne de valgte sprog?</item>
@@ -237,7 +242,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Al tekst vises på et andet sprog."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Du kan ikke fjerne alle sprog."</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Behold mindst ét foretrukket sprog"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"Det er muligvis ikke tilgængeligt i alle apps"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"Ikke tilgængeligt som systemsprog"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Flyt op"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Flyt ned"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Flyt til toppen"</string>
@@ -536,9 +541,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"På den måde registreres en større del af dit fingeraftryk"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Scanning af fingeraftryk: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingeraftryk tilføjet"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Oplåsning med fingeraftryk forbedres, jo oftere du bruger funktionen til at låse din tablet op eller bekræfte din identitet i apps"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Oplåsning med fingeraftryk forbedres, jo oftere du bruger funktionen til at låse din enhed op eller bekræfte din identitet i apps"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Oplåsning med fingeraftryk forbedres, jo oftere du bruger funktionen til at låse din telefon op eller bekræfte din identitet i apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Nu kan du bruge dit fingeraftryk til at låse din tablet op eller bekræfte din identitet, f.eks. når du logger ind i apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Nu kan du bruge dit fingeraftryk til at låse din enhed op eller bekræfte din identitet, f.eks. når du logger ind i apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Nu kan du bruge dit fingeraftryk til at låse din telefon op eller bekræfte din identitet, f.eks. når du logger ind i apps"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Gør det senere"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Løft, og tryk igen"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Placer siden af din finger på sensoren, og hold den nede. Skift derefter til den anden side."</string>
@@ -1697,12 +1702,12 @@
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formatér"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Eller"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formatér SD-kort til flytbar lagerplads"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Gem billeder, videoer, musik m.m., og få adgang til dem fra på enheder. &lt;a href=https://support.google.com/android/answer/12153449&gt;Få flere oplysninger om, hvordan du konfigurerer et SD-kort&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Gem billeder, videoer, musik m.m., og få adgang til dem fra andre enheder. &lt;a href=https://support.google.com/android/answer/12153449&gt;Få flere oplysninger om, hvordan du konfigurerer et SD-kort&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formatér"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Konfigurer senere"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Vil du formatere dette <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Dette <xliff:g id="NAME_0">^1</xliff:g> skal formateres, før du kan gemme apps, filer og medier. \n\nFormateringen sletter eksisterende indhold på <xliff:g id="NAME_1">^2</xliff:g>. Sikkerhedskopiér til et andet <xliff:g id="NAME_2">^3</xliff:g> eller en anden enhed, så du undgår at miste indhold."</string>
-    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Dette <xliff:g id="NAME_0">^1</xliff:g> skal formateres, før du kan gemme billeder, videoer, musik m.m. på det. \n\nNår du formaterer, ryddes alt eksisterende indhold på <xliff:g id="NAME_1">^2</xliff:g>. Du kan undgå at miste indhold ved at sikkerhedskopiere det til et andet <xliff:g id="NAME_2">^3</xliff:g> eller en anden enhed."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Dette <xliff:g id="NAME_0">^1</xliff:g> skal formateres, før du kan gemme billeder, videoer, musik m.m. på det. \n\nNår du formaterer, ryddes alt eksisterende indhold på dette <xliff:g id="NAME_1">^2</xliff:g>. Du kan undgå at miste indhold ved at sikkerhedskopiere det til et andet <xliff:g id="NAME_2">^3</xliff:g> eller en anden enhed."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formatér <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Vil du flytte indholdet til <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Du kan flytte filer, medier og visse apps til dette <xliff:g id="NAME">^1</xliff:g>. \n\nFlytningen frigør <xliff:g id="SIZE">^2</xliff:g> lagerplads på din tablet og bør tage ca. <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -2764,10 +2769,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Nogle funktioner kan være begrænsede"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Højere batteriforbrug"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Se apps med højest forbrug"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Opladningen er sat på pause"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Beskytter batteriet for at forlænge dets levetid\nTryk for at få flere oplysninger"</string>
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
     <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Genoptag opladning"</string>
@@ -2805,8 +2808,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Denne app vil kunne bruge batteri i baggrunden. Enheden løber muligvis tør for batteri hurtigere end forventet."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Fjern"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Annuller"</string>
-    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
-    <skip />
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Oplad helt"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Dine apps har et normalt batteriforbrug. Hvis apps bruger for meget batteri, foreslår din telefon, hvad du kan gøre.\n\nDu kan altid aktivere batterisparefunktionen, hvis telefonen er ved at løbe tør for batteri."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Dine apps har et normalt batteriforbrug. Hvis apps bruger for meget batteri, foreslår din tablet, hvad du kan gøre.\n\nDu kan altid aktivere batterisparefunktionen, hvis din tablet er ved at løbe tør for batteri."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Dine apps har et normalt batteriforbrug. Hvis apps bruger for meget batteri, foreslår din enhed, hvad du kan gøre.\n\nDu kan altid aktivere batterisparefunktionen, hvis enheden er ved at løbe tør for batteri."</string>
@@ -2996,13 +2998,19 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Baggrund: Under et minut"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"I alt: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Baggrund: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Data om batteriforbrug er omtrentlige, og måler ikke forbrug, når telefonen oplades"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Data om batteriforbrug bliver tilgængelige, når du har brugt din telefon i et par timer."</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Data om batteriforbrug er omtrentlige, og måler ikke forbrug, når telefonen oplades"</string>
+    <!-- no translation found for battery_usage_screen_footer (3729564192877964259) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
+    <skip />
+    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"Data om batteriforbrug bliver tilgængelige, når du har brugt din telefon i et par timer."</string>
+    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Diagram over batteriforbrug"</string>
-    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
-    <skip />
-    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
-    <skip />
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Diagram med batteriforbrug pr. dag"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Diagram med batteriforbrug pr. time"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Processtatistikker"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Nørdede statistikker om kørende processer"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"hukommelse brugt"</string>
@@ -3119,7 +3127,7 @@
     <string name="personal_data_section_title" msgid="6368610168625722682">"Personlige oplysninger"</string>
     <string name="backup_data_title" msgid="507663517227498525">"Sikkerhedskopiér data"</string>
     <string name="backup_data_summary" msgid="8054551085241427531">"Sikkerhedskopiér appdata, Wi-Fi-adgangskoder og andre indstillinger på Googles servere"</string>
-    <string name="backup_configure_account_title" msgid="8574055186903658842">"Backupkonto"</string>
+    <string name="backup_configure_account_title" msgid="8574055186903658842">"Konto til backup"</string>
     <string name="backup_data_management_title" msgid="6596830198441939702">"Administrer konto til backup"</string>
     <string name="include_app_data_title" msgid="2969603876620594523">"Inkluder appdata"</string>
     <string name="auto_restore_title" msgid="4124345897936637561">"Automatisk gendannelse"</string>
@@ -5620,10 +5628,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"Medier"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Fastgør medieafspiller"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Medieafspilleren forbliver åben i Kvikmenu, så du hurtigt kan genoptage afspilningen"</string>
-    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
-    <skip />
-    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
-    <skip />
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Vis medier på låseskærmen"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"Medieafspilleren forbliver åben på låseskærmen, så du hurtigt kan genoptage afspilningen"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Vis medieforslag"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Baseret på din aktivitet"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Skjul afspiller"</string>
