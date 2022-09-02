@@ -413,7 +413,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         }
         // Draws the axis label slot information.
         if (mViewModel != null) {
-            final float baselineY = getHeight() - mTextPadding * 1.5f;
+            final float baselineY = getHeight() - mTextPadding;
             Rect[] axisLabelDisplayAreas;
             switch (mViewModel.axisLabelPosition()) {
                 case CENTER_OF_TRAPEZOIDS:

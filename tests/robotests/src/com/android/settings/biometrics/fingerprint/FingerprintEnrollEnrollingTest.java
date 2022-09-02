@@ -16,7 +16,11 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_POWER_BUTTON;
+
 import static com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling.KEY_STATE_PREVIOUS_ROTATION;
+import static com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling.SFPS_STAGE_NO_ANIMATION;
+import static com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling.SFPS_STAGE_RIGHT_EDGE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -27,10 +31,12 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.hardware.biometrics.ComponentInfoInternal;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.FingerprintManager;
@@ -46,6 +52,9 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.widget.RingProgressBar;
+
+import com.airbnb.lottie.LottieAnimationView;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -57,6 +66,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +78,13 @@ public class FingerprintEnrollEnrollingTest {
 
     @Mock private Vibrator mVibrator;
 
+    @Mock private LottieAnimationView mIllustrationLottie;
+
+    @Mock private FingerprintEnrollSidecar mSidecar;
+
     @Mock private Display mMockDisplay;
+
+    private final int[] mSfpsStageThresholds = new int[]{0, 9, 13, 19, 25};
 
     private FingerprintEnrollEnrolling mActivity;
     private Context mContext;
@@ -130,6 +146,82 @@ public class FingerprintEnrollEnrollingTest {
         verify(mActivity, never()).onCancelEnrollment(anyInt());
     }
 
+    @Test
+    public void fingerprintSfpsEnroll_PlaysAllAnimationsAssetsCorrectly() {
+        initializeActivityFor(TYPE_POWER_BUTTON);
+
+        int totalEnrollSteps = 25;
+        int initStageSteps = -1, initStageRemaining = 0;
+
+        when(mSidecar.getEnrollmentSteps()).thenReturn(initStageSteps);
+        when(mSidecar.getEnrollmentRemaining()).thenReturn(initStageRemaining);
+
+        mActivity.onEnrollmentProgressChange(initStageSteps, initStageRemaining);
+
+        when(mSidecar.getEnrollmentSteps()).thenReturn(totalEnrollSteps);
+
+        for (int remaining = totalEnrollSteps; remaining > 0; remaining--) {
+            when(mSidecar.getEnrollmentRemaining()).thenReturn(remaining);
+            mActivity.onEnrollmentProgressChange(totalEnrollSteps, remaining);
+        }
+
+        List<Integer> expectedLottieAssetOrder = List.of(
+                R.raw.sfps_lottie_no_animation,
+                R.raw.sfps_lottie_pad_center,
+                R.raw.sfps_lottie_tip,
+                R.raw.sfps_lottie_left_edge,
+                R.raw.sfps_lottie_right_edge
+        );
+
+        ArgumentCaptor<Integer> lottieAssetCaptor = ArgumentCaptor.forClass(Integer.class);
+        verify(mIllustrationLottie, times(5)).setAnimation(lottieAssetCaptor.capture());
+        List<Integer> observedLottieAssetOrder = lottieAssetCaptor.getAllValues();
+        assertThat(observedLottieAssetOrder).isEqualTo(expectedLottieAssetOrder);
+    }
+
+    // SFPS_STAGE_CENTER is first stage with progress bar colors, starts at steps=25, remaining=25
+    private void configureSfpsStageColorTest() {
+        when(mSidecar.getEnrollmentSteps()).thenReturn(25);
+        when(mSidecar.getEnrollmentRemaining()).thenReturn(25);
+        mActivity.onEnrollmentProgressChange(25, 25);
+    }
+
+    @Test
+    public void fingerprintSfpsEnroll_usesCorrectProgressBarFillColor() {
+        initializeActivityFor(TYPE_POWER_BUTTON);
+
+        configureSfpsStageColorTest();
+
+        int progress_bar_fill_color = mActivity.getApplicationContext().getColor(
+                R.color.sfps_enrollment_progress_bar_fill_color
+        );
+
+        RingProgressBar mProgressBar = mActivity.findViewById(R.id.fingerprint_progress_bar);
+        assertThat(mProgressBar.getProgressTintList()).isEqualTo(
+                ColorStateList.valueOf(progress_bar_fill_color)
+        );
+    }
+
+    @Test
+    public void fingerprintSfpsEnroll_usesCorrectProgressBarHelpColor() {
+        initializeActivityFor(TYPE_POWER_BUTTON);
+
+        configureSfpsStageColorTest();
+
+        int progress_bar_error_color = mActivity.getApplicationContext().getColor(
+                R.color.sfps_enrollment_progress_bar_error_color
+        );
+        mActivity.onEnrollmentHelp(
+                FingerprintManager.FINGERPRINT_ERROR_UNABLE_TO_PROCESS,
+                "test enrollment help"
+        );
+
+        RingProgressBar mProgressBar = mActivity.findViewById(R.id.fingerprint_progress_bar);
+        assertThat(mProgressBar.getProgressTintList()).isEqualTo(
+                ColorStateList.valueOf(progress_bar_error_color)
+        );
+    }
+
     private void initializeActivityFor(int sensorType) {
         final List<ComponentInfoInternal> componentInfo = new ArrayList<>();
         final FingerprintSensorPropertiesInternal prop =
@@ -144,6 +236,7 @@ public class FingerprintEnrollEnrollingTest {
         final Bundle savedInstanceState = new Bundle();
         savedInstanceState.putInt(KEY_STATE_PREVIOUS_ROTATION, Surface.ROTATION_90);
         props.add(prop);
+        when(mFingerprintManager.getSensorPropertiesInternal()).thenReturn(props);
         mContext = spy(RuntimeEnvironment.application);
         mActivity = spy(FingerprintEnrollEnrolling.class);
 
@@ -154,6 +247,16 @@ public class FingerprintEnrollEnrollingTest {
         doReturn(true).when(mActivity).shouldShowLottie();
         doReturn(mFingerprintManager).when(mActivity).getSystemService(FingerprintManager.class);
         doReturn(mVibrator).when(mActivity).getSystemService(Vibrator.class);
+        doReturn(mIllustrationLottie).when(mActivity).findViewById(R.id.illustration_lottie);
+        ReflectionHelpers.setField(mActivity, "mSidecar", mSidecar);
+
+        if (sensorType == TYPE_POWER_BUTTON) {
+            // SFPS_STAGE_NO_ANIMATION = 0, ... , SFPS_STAGE_RIGHT_EDGE = 4
+            for (int stage = SFPS_STAGE_NO_ANIMATION; stage <= SFPS_STAGE_RIGHT_EDGE; stage++) {
+                doReturn(mSfpsStageThresholds[stage]).when(mActivity).getStageThresholdSteps(stage);
+            }
+            doReturn(true).when(mSidecar).isEnrolling();
+        }
 
         ActivityController.of(mActivity).create(savedInstanceState);
     }
