@@ -22,23 +22,22 @@ import android.os.ServiceManager;
 import android.view.IWindowManager;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.AnimationScalePreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public class AnimatorDurationScalePreferenceController extends DeveloperOptionsPreferenceController
-        implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
-        PreferenceControllerMixin {
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String ANIMATOR_DURATION_SCALE_KEY = "animator_duration_scale";
 
     @VisibleForTesting
     static final int ANIMATOR_DURATION_SCALE_SELECTOR = 2;
     @VisibleForTesting
-    static final float DEFAULT_VALUE = 0.8f;
+    static final float DEFAULT_VALUE = 1;
 
     private final IWindowManager mWindowManager;
     private final String[] mListValues;
@@ -89,17 +88,19 @@ public class AnimatorDurationScalePreferenceController extends DeveloperOptionsP
     private void updateAnimationScaleValue() {
         try {
             final float scale = mWindowManager.getAnimationScale(ANIMATOR_DURATION_SCALE_SELECTOR);
-            final AnimationScalePreference durationPreference = (AnimationScalePreference) mPreference;
-            durationPreference.setOnPreferenceClickListener(this);
-            durationPreference.setScale(scale);
+            int index = 0; // default
+            for (int i = 0; i < mListValues.length; i++) {
+                float val = Float.parseFloat(mListValues[i]);
+                if (scale <= val) {
+                    index = i;
+                    break;
+                }
+            }
+            final ListPreference listPreference = (ListPreference) mPreference;
+            listPreference.setValue(mListValues[index]);
+            listPreference.setSummary(mListSummaries[index]);
         } catch (RemoteException e) {
             // intentional no-op
         }
-    }
-
-    @Override
-    public boolean onPreferenceClick(Preference preference) {
-        ((AnimationScalePreference) preference).click();
-        return false;
     }
 }
