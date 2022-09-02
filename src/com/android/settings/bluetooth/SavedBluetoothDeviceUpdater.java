@@ -15,6 +15,7 @@
  */
 package com.android.settings.bluetooth;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
@@ -105,7 +106,8 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
                     + cachedDevice.isConnected());
         }
         return device.getBondState() == BluetoothDevice.BOND_BONDED
-                && (mDisplayConnected || !device.isConnected());
+                && (mDisplayConnected || (!device.isConnected() && isDeviceInCachedDevicesList(
+                cachedDevice)));
     }
 
     @Override
@@ -116,6 +118,8 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         if (device.isConnected()) {
             return device.setActive();
         }
+        mMetricsFeatureProvider.action(mPrefContext,
+                SettingsEnums.ACTION_SETTINGS_BLUETOOTH_CONNECT);
         device.connect();
         return true;
     }

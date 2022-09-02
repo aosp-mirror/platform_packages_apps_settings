@@ -31,6 +31,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.net.EthernetManager;
+import android.net.IpConfiguration;
 import android.net.TetheringManager;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
@@ -40,6 +42,7 @@ import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -53,6 +56,7 @@ import java.lang.annotation.Retention;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -81,6 +85,16 @@ public class TetherEnabler implements SwitchWidgetController.OnSwitchChangeListe
     private static final String TAG = "TetherEnabler";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
+    private final class EthernetListener implements EthernetManager.InterfaceStateListener {
+        public void onInterfaceStateChanged(@NonNull String iface, int state, int role,
+                @NonNull IpConfiguration configuration) {
+            if (state == EthernetManager.STATE_LINK_UP) {
+                mAvailableInterfaces.put(iface, configuration);
+            } else {
+                mAvailableInterfaces.remove(iface, configuration);
+            }
+        }
+    }
 
     @Retention(SOURCE)
     @IntDef(
@@ -108,7 +122,6 @@ public class TetherEnabler implements SwitchWidgetController.OnSwitchChangeListe
     private final ConnectivityManager mConnectivityManager;
     private final TetheringManager mTetheringManager;
     private final UserManager mUserManager;
-    private final String mEthernetRegex;
     private final DataSaverBackend mDataSaverBackend;
     private boolean mDataSaverEnabled;
     @VisibleForTesting
@@ -121,6 +134,10 @@ public class TetherEnabler implements SwitchWidgetController.OnSwitchChangeListe
     private final AtomicReference<BluetoothPan> mBluetoothPan;
     private boolean mBluetoothEnableForTether;
     private final BluetoothAdapter mBluetoothAdapter;
+    private final EthernetManager mEthernetManager;
+    private final EthernetManager.InterfaceStateListener mEthernetListener = new EthernetListener();
+    private final ConcurrentHashMap<String, IpConfiguration> mAvailableInterfaces =
+            new ConcurrentHashMap<>();
 
     public TetherEnabler(Context context, SwitchWidgetController switchWidgetController,
             AtomicReference<BluetoothPan> bluetoothPan) {
@@ -134,11 +151,10 @@ public class TetherEnabler implements SwitchWidgetController.OnSwitchChangeListe
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mBluetoothPan = bluetoothPan;
-        mEthernetRegex =
-                context.getString(com.android.internal.R.string.config_ethernet_iface_regex);
         mDataSaverEnabled = mDataSaverBackend.isDataSaverEnabled();
         mListeners = new ArrayList<>();
         mMainThreadHandler = new Handler(Looper.getMainLooper());
+        mEthernetManager = context.getSystemService(EthernetManager.class);
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
@@ -163,6 +179,10 @@ public class TetherEnabler implements SwitchWidgetController.OnSwitchChangeListe
 
         mOnStartTetheringCallback = new OnStartTetheringCallback(this);
         updateState(null/*tethered*/);
+        if (mEthernetManager != null) {
+            mEthernetManager.addInterfaceStateListener(r -> mMainThreadHandler.post(r),
+                    mEthernetListener);
+        }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
@@ -173,6 +193,9 @@ public class TetherEnabler implements SwitchWidgetController.OnSwitchChangeListe
         mContext.unregisterReceiver(mTetherChangeReceiver);
         mTetheringManager.unregisterTetheringEventCallback(mTetheringEventCallback);
         mTetheringEventCallback = null;
+        if (mEthernetManager != null) {
+            mEthernetManager.removeInterfaceStateListener(mEthernetListener);
+        }
     }
 
     public void addListener(OnTetherStateUpdateListener listener) {
@@ -246,7 +269,7 @@ public class TetherEnabler implements SwitchWidgetController.OnSwitchChangeListe
                     tetherState |= TETHERING_USB_ON;
                 }
             }
-            if (s.matches(mEthernetRegex)) {
+            if (mAvailableInterfaces.containsKey(s)) {
                 tetherState |= TETHERING_ETHERNET_ON;
             }
         }

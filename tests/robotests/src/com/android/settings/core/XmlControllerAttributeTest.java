@@ -17,6 +17,7 @@ import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexableData;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -60,6 +61,7 @@ public class XmlControllerAttributeTest {
     }
 
     @Test
+    @Ignore
     public void testAllIndexableXML_onlyValidBasePreferenceControllersAdded() throws Exception {
         Set<Integer> xmlSet = getIndexableXml();
         xmlSet.addAll(mAllowlistXml);

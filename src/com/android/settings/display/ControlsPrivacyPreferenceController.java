@@ -30,6 +30,9 @@ import com.android.settings.overlay.FeatureFactory;
 
 /**
  * Preference for showing/hiding sensitive device controls content while the device is locked.
+ *
+ * Note that ControlsTrivialPrivacyPreferenceController depends on the preferenceKey
+ * of this controller.
  */
 public class ControlsPrivacyPreferenceController extends TogglePreferenceController {
 

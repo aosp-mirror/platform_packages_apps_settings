@@ -22,7 +22,6 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settingslib.R;
-import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.wifitrackerlib.WifiEntry;
 
 /**

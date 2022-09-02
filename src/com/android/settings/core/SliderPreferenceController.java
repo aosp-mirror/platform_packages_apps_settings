@@ -17,6 +17,7 @@ package com.android.settings.core;
 import android.content.Context;
 
 import androidx.preference.Preference;
+import androidx.slice.builders.SliceAction;
 
 import com.android.settings.slices.SliceData;
 
@@ -69,5 +70,12 @@ public abstract class SliderPreferenceController extends BasePreferenceControlle
     @Override
     public int getSliceType() {
         return SliceData.SliceType.SLIDER;
+    }
+
+    /**
+     * @return the SliceAction for the end item of the slice.
+     */
+    public SliceAction getSliceEndItem(Context context) {
+        return null;
     }
 }

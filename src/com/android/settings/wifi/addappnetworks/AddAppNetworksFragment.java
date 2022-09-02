@@ -414,6 +414,9 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
     }
 
     private void updateSingleNetworkSignalIcon(int level) {
+        if (level == WifiEntry.WIFI_LEVEL_UNREACHABLE) {
+            return;
+        }
         // TODO: Check level of the network to show signal icon.
         final Drawable wifiIcon = mActivity.getDrawable(
                 Utils.getWifiIconResource(level)).mutate();

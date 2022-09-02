@@ -46,6 +46,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -92,6 +93,7 @@ public class SliceContextualCardControllerTest {
     }
 
     @Test
+    @Ignore
     public void onDismissed_cardShouldBeMarkedAsDismissedWithTimestamp() {
         final Uri providerUri = CardContentProvider.REFRESH_CARD_URI;
         mResolver.insert(providerUri, generateOneRow());
@@ -114,6 +116,7 @@ public class SliceContextualCardControllerTest {
     }
 
     @Test
+    @Ignore
     public void onDismissed_feedbackDisabled_shouldNotShowFeedbackDialog() {
         mResolver.insert(CardContentProvider.REFRESH_CARD_URI, generateOneRow());
         final ContextualCardsFragment fragment =
@@ -127,6 +130,7 @@ public class SliceContextualCardControllerTest {
     }
 
     @Test
+    @Ignore
     public void onDismissed_feedbackEnabled_shouldShowFeedbackDialog() {
         mResolver.insert(CardContentProvider.REFRESH_CARD_URI, generateOneRow());
         final ContextualCardsFragment fragment =

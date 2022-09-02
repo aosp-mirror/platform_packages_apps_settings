@@ -129,7 +129,7 @@ public class ContextualCardsFragment extends InstrumentedFragment implements
 
     private void registerKeyEventReceiver() {
         getActivity().registerReceiver(mKeyEventReceiver,
-                new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+                new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS), Context.RECEIVER_EXPORTED);
     }
 
     private void unregisterKeyEventReceiver() {

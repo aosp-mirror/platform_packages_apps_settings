@@ -18,7 +18,7 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -26,6 +26,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.os.Process;
 import android.os.UserManager;
 import android.text.format.DateUtils;
 
@@ -101,8 +102,17 @@ public class BatteryAppListPreferenceControllerTest {
     }
 
     @Test
-    public void testSetUsageSummary_timeLessThanOneMinute_DoNotSetSummary() {
+    public void testSetUsageSummary_timeLessThanOneMinute_doNotSetSummary() {
         when(mBatteryEntry.getTimeInForegroundMs()).thenReturn(59 * DateUtils.SECOND_IN_MILLIS);
+
+        mPreferenceController.setUsageSummary(mPreference, mBatteryEntry);
+        assertThat(mPreference.getSummary()).isNull();
+    }
+
+    @Test
+    public void testSetUsageSummary_systemProcessUid_doNotSetSummary() {
+        when(mBatteryEntry.getTimeInForegroundMs()).thenReturn(DateUtils.MINUTE_IN_MILLIS);
+        when(mBatteryEntry.getUid()).thenReturn(Process.SYSTEM_UID);
 
         mPreferenceController.setUsageSummary(mPreference, mBatteryEntry);
         assertThat(mPreference.getSummary()).isNull();

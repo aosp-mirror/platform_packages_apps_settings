@@ -29,7 +29,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.verify.domain.DomainVerificationManager;
 import android.content.pm.verify.domain.DomainVerificationUserState;
-import android.util.IconDrawableFactory;
 
 import com.android.settings.R;
 import com.android.settingslib.applications.ApplicationsState;
@@ -49,18 +48,14 @@ public class DomainAppPreferenceControllerTest {
 
     private ApplicationsState.AppEntry mAppEntry;
     private Context mContext;
-    private IconDrawableFactory mIconDrawableFactory;
 
     @Mock
     private DomainVerificationManager mDomainVerificationManager;
-    @Mock
-    private DomainVerificationUserState mDomainVerificationUserState;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
         mAppEntry = new ApplicationsState.AppEntry(
                 mContext, createApplicationInfo(mContext.getPackageName()), 0);
         when(mContext.getSystemService(DomainVerificationManager.class)).thenReturn(
@@ -75,8 +70,7 @@ public class DomainAppPreferenceControllerTest {
         doReturn(domainVerificationUserState).when(
                 mDomainVerificationManager).getDomainVerificationUserState(anyString());
         doReturn(true).when(domainVerificationUserState).isLinkHandlingAllowed();
-        final DomainAppPreference pref = new DomainAppPreference(
-                mContext, mIconDrawableFactory, mAppEntry);
+        final DomainAppPreference pref = new DomainAppPreference(mContext, mAppEntry);
 
         assertThat(pref.getLayoutResource()).isEqualTo(R.layout.preference_app);
     }

@@ -16,12 +16,13 @@
 
 package com.android.settings.network;
 
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothAdapter;
@@ -67,7 +68,9 @@ public class TetherPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = spy(TetherPreferenceController.class);
+        doReturn(null).when(mContext)
+                .getSystemService(Context.DEVICE_POLICY_SERVICE);
+        mController = spy(new TetherPreferenceController(mContext, /* lifecycle= */ null));
         ReflectionHelpers.setField(mController, "mContext", mContext);
         ReflectionHelpers.setField(mController, "mTetheringManager", mTetheringManager);
         ReflectionHelpers.setField(mController, "mBluetoothAdapter", mBluetoothAdapter);
@@ -158,7 +161,7 @@ public class TetherPreferenceControllerTest {
 
         mController.onResume();
 
-        verifyZeroInteractions(mPreference);
+        verifyNoInteractions(mPreference);
 
         Settings.Global.putInt(context.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
 

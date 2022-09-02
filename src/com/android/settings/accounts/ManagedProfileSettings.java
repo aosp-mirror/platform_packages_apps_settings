@@ -16,6 +16,13 @@
 
 package com.android.settings.accounts;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.CROSS_PROFILE_CALENDAR_SUMMARY;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.CROSS_PROFILE_CALENDAR_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.MANAGED_PROFILE_SETTINGS_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONTACT_SEARCH_SUMMARY;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONTACT_SEARCH_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_SETTING;
+
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -78,6 +85,19 @@ public class ManagedProfileSettings extends DashboardFragment {
         super.onCreate(icicle);
         mManagedProfileBroadcastReceiver = new ManagedProfileBroadcastReceiver();
         mManagedProfileBroadcastReceiver.register(getActivity());
+        replaceEnterprisePreferenceScreenTitle(
+                MANAGED_PROFILE_SETTINGS_TITLE, R.string.managed_profile_settings_title);
+        replaceEnterpriseStringTitle("work_mode",
+                WORK_PROFILE_SETTING, R.string.work_mode_label);
+        replaceEnterpriseStringTitle("contacts_search",
+                WORK_PROFILE_CONTACT_SEARCH_TITLE, R.string.managed_profile_contact_search_title);
+        replaceEnterpriseStringSummary("contacts_search",
+                WORK_PROFILE_CONTACT_SEARCH_SUMMARY,
+                R.string.managed_profile_contact_search_summary);
+        replaceEnterpriseStringTitle("cross_profile_calendar",
+                CROSS_PROFILE_CALENDAR_TITLE, R.string.cross_profile_calendar_title);
+        replaceEnterpriseStringSummary("cross_profile_calendar",
+                CROSS_PROFILE_CALENDAR_SUMMARY, R.string.cross_profile_calendar_summary);
     }
 
     @Override

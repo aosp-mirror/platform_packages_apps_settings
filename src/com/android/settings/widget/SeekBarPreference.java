@@ -18,6 +18,8 @@ package com.android.settings.widget;
 
 import static android.view.HapticFeedbackConstants.CLOCK_TICK;
 
+import static com.android.internal.jank.InteractionJankMonitor.CUJ_SETTINGS_SLIDER;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Parcel;
@@ -33,6 +35,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.PreferenceViewHolder;
 
+import com.android.internal.jank.InteractionJankMonitor;
 import com.android.settingslib.RestrictedPreference;
 
 /**
@@ -45,6 +48,7 @@ public class SeekBarPreference extends RestrictedPreference
     public static final int HAPTIC_FEEDBACK_MODE_ON_TICKS = 1;
     public static final int HAPTIC_FEEDBACK_MODE_ON_ENDS = 2;
 
+    private final InteractionJankMonitor mJankMonitor = InteractionJankMonitor.getInstance();
     private int mProgress;
     private int mMax;
     private int mMin;
@@ -78,12 +82,7 @@ public class SeekBarPreference extends RestrictedPreference
                 com.android.internal.R.layout.preference_widget_seekbar);
         a.recycle();
 
-        a = context.obtainStyledAttributes(
-                attrs, com.android.internal.R.styleable.Preference, defStyleAttr, defStyleRes);
-        final boolean isSelectable = a.getBoolean(
-                com.android.settings.R.styleable.Preference_android_selectable, false);
-        setSelectable(isSelectable);
-        a.recycle();
+        setSelectable(false);
 
         setLayoutResource(layoutResId);
     }
@@ -168,11 +167,6 @@ public class SeekBarPreference extends RestrictedPreference
                 }
             }
         });
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        return null;
     }
 
     @Override
@@ -312,6 +306,9 @@ public class SeekBarPreference extends RestrictedPreference
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
         mTrackingTouch = true;
+        mJankMonitor.begin(InteractionJankMonitor.Configuration.Builder
+                .withView(CUJ_SETTINGS_SLIDER, seekBar)
+                .setTag(getKey()));
     }
 
     @Override
@@ -320,6 +317,7 @@ public class SeekBarPreference extends RestrictedPreference
         if (seekBar.getProgress() != mProgress) {
             syncProgress(seekBar);
         }
+        mJankMonitor.end(CUJ_SETTINGS_SLIDER);
     }
 
     /**

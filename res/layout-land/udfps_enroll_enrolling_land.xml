@@ -61,10 +61,10 @@
                         style="@style/SudGlifIcon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="?attr/sudGlifHeaderGravity"
+                        android:scaleType="fitStart"
                         android:layout_marginStart="0dp"
                         android:layout_marginEnd="0dp"
-                        android:src="@drawable/ic_fingerprint_header" />
+                        android:src="@drawable/ic_lock" />
 
                     <TextView
                         android:id="@+id/suc_layout_title"

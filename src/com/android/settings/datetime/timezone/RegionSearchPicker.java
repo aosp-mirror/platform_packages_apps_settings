@@ -16,6 +16,8 @@
 
 package com.android.settings.datetime.timezone;
 
+import static com.android.settingslib.datetime.ZoneGetter.capitalizeForStandaloneDisplay;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
@@ -116,7 +118,8 @@ public class RegionSearchPicker extends BaseTimeZonePicker {
         final LocaleDisplayNames localeDisplayNames = LocaleDisplayNames.getInstance(getLocale());
         long i = 0;
         for (String regionId : regionIds) {
-            String name = localeDisplayNames.regionDisplayName(regionId);
+            String name = capitalizeForStandaloneDisplay(
+                    mLocale, localeDisplayNames.regionDisplayName(regionId));
             items.add(new RegionItem(i++, regionId, name));
         }
         return new ArrayList<>(items);

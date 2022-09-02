@@ -24,6 +24,8 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.UserHandle;
+import android.os.UserManager;
 
 import androidx.preference.PreferenceScreen;
 
@@ -46,6 +48,7 @@ import java.util.ArrayList;
 @Config(shadows = ShadowNfcAdapter.class)
 public class NfcPaymentPreferenceControllerTest {
 
+    private static final String USER_TEST = "user_test";
     private static final String PREF_KEY = PaymentSettingsTest.PAYMENT_KEY;
 
     @Mock
@@ -54,6 +57,12 @@ public class NfcPaymentPreferenceControllerTest {
     private PreferenceScreen mScreen;
     @Mock
     private PackageManager mManager;
+    @Mock
+    private UserManager mUserManager;
+    @Mock
+    private UserHandle mUserHandle;
+    @Mock
+    private Context mContextAsUser;
 
     private Context mContext;
     private NfcPaymentPreference mPreference;
@@ -67,6 +76,9 @@ public class NfcPaymentPreferenceControllerTest {
         mController = new NfcPaymentPreferenceController(mContext, PREF_KEY);
         mPreference = spy(new NfcPaymentPreference(mContext, null));
         when(mScreen.findPreference(PREF_KEY)).thenReturn(mPreference);
+        when(mContext.createContextAsUser(UserHandle.CURRENT, 0)).thenReturn(mContextAsUser);
+        when(mContextAsUser.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mUserManager.getUserName()).thenReturn(USER_TEST);
     }
 
     @Test
@@ -145,10 +157,12 @@ public class NfcPaymentPreferenceControllerTest {
 
         final PaymentAppInfo appInfo = new PaymentAppInfo();
         appInfo.label = "test label";
+        appInfo.userHandle = UserHandle.CURRENT;
         when(mPaymentBackend.getDefaultApp()).thenReturn(appInfo);
 
         mController.onPaymentAppsChanged();
 
-        assertThat(mPreference.getSummary()).isEqualTo(appInfo.label);
+        assertThat(mPreference.getSummary())
+                .isEqualTo(appInfo.label + " (" + USER_TEST + ")");
     }
 }

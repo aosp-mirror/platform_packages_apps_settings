@@ -18,6 +18,15 @@ package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import android.content.Context;
+import android.net.wifi.p2p.WifiP2pManager;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
@@ -25,7 +34,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowRecoverySystem;
-import com.android.settings.testutils.shadow.ShadowWifiP2pManager;
 
 import org.junit.After;
 import org.junit.Before;
@@ -39,27 +47,31 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowRecoverySystem.class,
-        ShadowWifiP2pManager.class, ShadowBluetoothAdapter.class
-})
+@Config(shadows = {ShadowRecoverySystem.class, ShadowBluetoothAdapter.class})
 public class ResetNetworkConfirmTest {
 
     private FragmentActivity mActivity;
+
+    @Mock
+    private WifiP2pManager mWifiP2pManager;
     @Mock
     private ResetNetworkConfirm mResetNetworkConfirm;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        when(mWifiP2pManager.initialize(any(Context.class), any(Looper.class), any()))
+                .thenReturn(mock(WifiP2pManager.Channel.class));
+
         mResetNetworkConfirm = new ResetNetworkConfirm();
-        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        mActivity = spy(Robolectric.setupActivity(FragmentActivity.class));
+        when(mActivity.getSystemService(Context.WIFI_P2P_SERVICE)).thenReturn(mWifiP2pManager);
         mResetNetworkConfirm.mActivity = mActivity;
     }
 
     @After
     public void tearDown() {
         ShadowRecoverySystem.reset();
-        ShadowWifiP2pManager.reset();
     }
 
     @Test
@@ -91,7 +103,7 @@ public class ResetNetworkConfirmTest {
     public void testResetNetworkData_resetP2p() {
         mResetNetworkConfirm.p2pFactoryReset(mActivity);
 
-        assertThat(ShadowWifiP2pManager.getFactoryResetCount()).isEqualTo(1);
+        verify(mWifiP2pManager).factoryReset(any(WifiP2pManager.Channel.class), any());
     }
 
     @Test

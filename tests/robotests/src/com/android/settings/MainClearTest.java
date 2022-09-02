@@ -55,7 +55,6 @@ import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -209,7 +208,6 @@ public class MainClearTest {
     }
 
     @Test
-    @Ignore
     public void testShowWipeEuicc_euiccEnabled_unprovisioned() {
         prepareEuiccState(
                 true /* isEuiccEnabled */,
@@ -228,7 +226,6 @@ public class MainClearTest {
     }
 
     @Test
-    @Ignore
     public void testShowWipeEuicc_developerMode_unprovisioned() {
         prepareEuiccState(
                 true /* isEuiccEnabled */,

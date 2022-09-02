@@ -21,13 +21,11 @@
     android:layout_height="wrap_content"
     android:background="@android:color/transparent">
 
-    <com.android.settingslib.widget.settingsspinner.SettingsSpinner
+    <Spinner
         android:id="@+id/filter_spinner"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
         android:theme="@style/Widget.PopupWindow.Settings"/>
 
     <ImageView
@@ -35,8 +33,8 @@
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:layout_marginTop="12dp"
-        android:layout_toEndOf="@id/filter_spinner"
+        android:layout_centerHorizontal="true"
+        android:layout_toRightOf="@+id/filter_spinner"
         android:contentDescription="@string/configure"
         android:scaleType="center"
         android:src="@drawable/ic_apps_filter_settings_24dp"

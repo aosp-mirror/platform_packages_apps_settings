@@ -18,7 +18,6 @@ package com.android.settings.display.darkmode;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.os.PowerManager;
 import android.widget.Switch;
 
 import androidx.preference.Preference;
@@ -41,13 +40,11 @@ public class DarkModeActivationPreferenceController extends BasePreferenceContro
 
     private final UiModeManager mUiModeManager;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-    private PowerManager mPowerManager;
     private TimeFormatter mFormat;
     private MainSwitchPreference mPreference;
 
     public DarkModeActivationPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mPowerManager = context.getSystemService(PowerManager.class);
         mUiModeManager = context.getSystemService(UiModeManager.class);
         mFormat = new TimeFormatter(context);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
@@ -76,6 +73,13 @@ public class DarkModeActivationPreferenceController extends BasePreferenceContro
                     ? R.string.dark_ui_summary_on_auto_mode_auto
                     : R.string.dark_ui_summary_off_auto_mode_auto);
         } else if (mode == UiModeManager.MODE_NIGHT_CUSTOM) {
+            if (mUiModeManager.getNightModeCustomType()
+                    == UiModeManager.MODE_NIGHT_CUSTOM_TYPE_BEDTIME) {
+                return mContext.getString(isActivated
+                        ? R.string.dark_ui_summary_on_auto_mode_custom_bedtime
+                        : R.string.dark_ui_summary_off_auto_mode_custom_bedtime);
+            }
+
             final LocalTime time = isActivated
                     ? mUiModeManager.getCustomNightModeEnd()
                     : mUiModeManager.getCustomNightModeStart();

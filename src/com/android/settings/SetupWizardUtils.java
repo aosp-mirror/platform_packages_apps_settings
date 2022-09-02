@@ -48,6 +48,9 @@ public class SetupWizardUtils {
             if (WizardManagerHelper.isAnySetupWizard(intent)) {
                 if (ThemeHelper.isSetupWizardDayNightEnabled(context)) {
                     switch (theme) {
+                        case ThemeHelper.THEME_GLIF_V4_LIGHT:
+                        case ThemeHelper.THEME_GLIF_V4:
+                            return R.style.GlifV4Theme_DayNight;
                         case ThemeHelper.THEME_GLIF_V3_LIGHT:
                         case ThemeHelper.THEME_GLIF_V3:
                             return R.style.GlifV3Theme_DayNight;
@@ -60,6 +63,10 @@ public class SetupWizardUtils {
                     }
                 } else {
                     switch (theme) {
+                        case ThemeHelper.THEME_GLIF_V4_LIGHT:
+                            return R.style.GlifV4Theme_Light;
+                        case ThemeHelper.THEME_GLIF_V4:
+                            return R.style.GlifV4Theme;
                         case ThemeHelper.THEME_GLIF_V3_LIGHT:
                             return R.style.GlifV3Theme_Light;
                         case ThemeHelper.THEME_GLIF_V3:
@@ -76,6 +83,9 @@ public class SetupWizardUtils {
                 }
             } else {
                 switch (theme) {
+                    case ThemeHelper.THEME_GLIF_V4_LIGHT:
+                    case ThemeHelper.THEME_GLIF_V4:
+                        return R.style.GlifV4Theme;
                     case ThemeHelper.THEME_GLIF_V3_LIGHT:
                     case ThemeHelper.THEME_GLIF_V3:
                         return R.style.GlifV3Theme;
