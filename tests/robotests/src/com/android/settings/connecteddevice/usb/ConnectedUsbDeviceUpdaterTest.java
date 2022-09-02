@@ -97,7 +97,8 @@ public class ConnectedUsbDeviceUpdaterTest {
     public void initUsbPreference_usbConnected_preferenceAdded() {
         mDeviceUpdater.initUsbPreference(mContext);
         mDeviceUpdater.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
-                UsbManager.FUNCTION_NONE, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+                UsbManager.FUNCTION_NONE, POWER_ROLE_SINK, DATA_ROLE_DEVICE,
+                /* isUsbConfigured= */ true);
 
         verify(mDevicePreferenceCallback).onDeviceAdded(mDeviceUpdater.mUsbPreference);
     }
@@ -106,7 +107,8 @@ public class ConnectedUsbDeviceUpdaterTest {
     public void initUsbPreference_usbDisconnected_preferenceRemoved() {
         mDeviceUpdater.initUsbPreference(mContext);
         mDeviceUpdater.mUsbConnectionListener.onUsbConnectionChanged(false /* connected */,
-                UsbManager.FUNCTION_NONE, POWER_ROLE_NONE, DATA_ROLE_NONE);
+                UsbManager.FUNCTION_NONE, POWER_ROLE_NONE, DATA_ROLE_NONE,
+                /* isUsbConfigured= */ true);
 
         verify(mDevicePreferenceCallback).onDeviceRemoved(mDeviceUpdater.mUsbPreference);
     }

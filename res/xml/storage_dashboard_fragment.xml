@@ -31,7 +31,7 @@
         android:selectable="false"
         settings:searchable="false"
         settings:controller="com.android.settings.deviceinfo.storage.StorageUsageProgressBarPreferenceController"/>
-    <com.android.settings.widget.PrimarySwitchPreference
+    <com.android.settingslib.PrimarySwitchPreference
         android:fragment="com.android.settings.deletionhelper.AutomaticStorageManagerSettings"
         android:key="toggle_asm"
         android:title="@string/automatic_storage_manager_preference_title"
@@ -43,7 +43,7 @@
         android:order="4"
         android:title="@string/storage_free_up_space_title"
         android:summary="@string/storage_free_up_space_summary"
-        android:icon="@drawable/ic_files_go_round"/>
+        settings:controller="com.android.settings.deviceinfo.storage.ManageStoragePreferenceController"/>
     <!-- Preference order 100~200 are 'ONLY' for storage category preferences below. -->
     <Preference
         android:key="pref_public_storage"

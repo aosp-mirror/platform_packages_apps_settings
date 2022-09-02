@@ -56,6 +56,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     private static final String TAG = "BiometricEnrollIntroduction";
 
     private static final String KEY_CONFIRMING_CREDENTIALS = "confirming_credentials";
+    private static final String KEY_SCROLLED_TO_BOTTOM = "scrolled";
 
     private UserManager mUserManager;
     private boolean mHasPassword;
@@ -64,6 +65,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     protected boolean mConfirmingCredentials;
     protected boolean mNextClicked;
     private boolean mParentalConsentRequired;
+    private boolean mHasScrolledToBottom = false;
 
     @Nullable private PorterDuffColorFilter mIconColorFilter;
 
@@ -88,9 +90,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     protected abstract int getHeaderResDefault();
 
     /**
-     * @return the description resource for if the biometric has been disabled by a device admin
+     * @return the description for if the biometric has been disabled by a device admin
      */
-    protected abstract int getDescriptionResDisabledByAdmin();
+    protected abstract String getDescriptionDisabledByAdmin();
 
     /**
      * @return the cancel button
@@ -152,6 +154,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
 
         if (savedInstanceState != null) {
             mConfirmingCredentials = savedInstanceState.getBoolean(KEY_CONFIRMING_CREDENTIALS);
+            mHasScrolledToBottom = savedInstanceState.getBoolean(KEY_SCROLLED_TO_BOTTOM);
         }
 
         Intent intent = getIntent();
@@ -196,14 +199,14 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         mFooterBarMixin = layout.getMixin(FooterBarMixin.class);
         mFooterBarMixin.setPrimaryButton(getPrimaryFooterButton());
         mFooterBarMixin.setSecondaryButton(getSecondaryFooterButton(), true /* usePrimaryStyle */);
-        mFooterBarMixin.getSecondaryButton().setVisibility(View.INVISIBLE);
+        mFooterBarMixin.getSecondaryButton().setVisibility(
+                mHasScrolledToBottom ? View.VISIBLE : View.INVISIBLE);
 
         final RequireScrollMixin requireScrollMixin = layout.getMixin(RequireScrollMixin.class);
         requireScrollMixin.requireScrollWithButton(this, getPrimaryFooterButton(),
                 getMoreButtonTextRes(), this::onNextButtonClick);
         requireScrollMixin.setOnRequireScrollStateChangedListener(
                 scrollNeeded -> {
-
                     boolean enrollmentCompleted = checkMaxEnrolled() != 0;
                     if (!enrollmentCompleted) {
                         // Update text of primary button from "More" to "Agree".
@@ -216,6 +219,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                     // Show secondary button once scroll is completed.
                     if (!scrollNeeded) {
                         getSecondaryFooterButton().setVisibility(View.VISIBLE);
+                        mHasScrolledToBottom = true;
                     }
                 });
     }
@@ -241,6 +245,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(KEY_CONFIRMING_CREDENTIALS, mConfirmingCredentials);
+        outState.putBoolean(KEY_SCROLLED_TO_BOTTOM, mHasScrolledToBottom);
     }
 
     @Override
@@ -414,7 +419,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         super.initViews();
 
         if (mBiometricUnlockDisabledByAdmin && !mParentalConsentRequired) {
-            setDescriptionText(getDescriptionResDisabledByAdmin());
+            setDescriptionText(getDescriptionDisabledByAdmin());
         }
     }
 

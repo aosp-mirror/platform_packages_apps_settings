@@ -47,6 +47,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
+import com.android.settings.development.autofill.AutofillCategoryController;
 import com.android.settings.development.autofill.AutofillLoggingLevelPreferenceController;
 import com.android.settings.development.autofill.AutofillResetOptionsPreferenceController;
 import com.android.settings.development.bluetooth.AbstractBluetoothDialogPreferenceController;
@@ -79,7 +80,7 @@ import java.util.List;
 public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment
         implements OnMainSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
         AdbClearKeysDialogHost, LogPersistDialogHost,
-        BluetoothHwOffloadRebootDialog.OnHwOffloadDialogListener,
+        BluetoothRebootDialog.OnRebootDialogListener,
         AbstractBluetoothPreferenceController.Callback {
 
     private static final String TAG = "DevSettingsDashboard";
@@ -213,6 +214,11 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         } else {
             disableDeveloperOptions();
         }
+    }
+
+    @Override
+    protected boolean shouldSkipForInitialSUW() {
+        return true;
     }
 
     /**
@@ -356,27 +362,37 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     @Override
-    public void onHwOffloadDialogConfirmed() {
+    public void onRebootDialogConfirmed() {
         final BluetoothA2dpHwOffloadPreferenceController a2dpController =
                 getDevelopmentOptionsController(BluetoothA2dpHwOffloadPreferenceController.class);
-        a2dpController.onHwOffloadDialogConfirmed();
+        a2dpController.onRebootDialogConfirmed();
 
         final BluetoothLeAudioHwOffloadPreferenceController leAudioController =
                 getDevelopmentOptionsController(
                     BluetoothLeAudioHwOffloadPreferenceController.class);
-        leAudioController.onHwOffloadDialogConfirmed();
+        leAudioController.onRebootDialogConfirmed();
+
+        final BluetoothLeAudioPreferenceController leAudioFeatureController =
+                getDevelopmentOptionsController(
+                    BluetoothLeAudioPreferenceController.class);
+        leAudioFeatureController.onRebootDialogConfirmed();
     }
 
     @Override
-    public void onHwOffloadDialogCanceled() {
+    public void onRebootDialogCanceled() {
         final BluetoothA2dpHwOffloadPreferenceController a2dpController =
                 getDevelopmentOptionsController(BluetoothA2dpHwOffloadPreferenceController.class);
-        a2dpController.onHwOffloadDialogCanceled();
+        a2dpController.onRebootDialogCanceled();
 
         final BluetoothLeAudioHwOffloadPreferenceController leAudioController =
                 getDevelopmentOptionsController(
                     BluetoothLeAudioHwOffloadPreferenceController.class);
-        leAudioController.onHwOffloadDialogCanceled();
+        leAudioController.onRebootDialogCanceled();
+
+        final BluetoothLeAudioPreferenceController leAudioFeatureController =
+                getDevelopmentOptionsController(
+                    BluetoothLeAudioPreferenceController.class);
+        leAudioFeatureController.onRebootDialogCanceled();
     }
 
     @Override
@@ -493,6 +509,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BugReportPreferenceController(context));
         controllers.add(new BugReportHandlerPreferenceController(context));
         controllers.add(new SystemServerHeapDumpPreferenceController(context));
+        controllers.add(new RebootWithMtePreferenceController(context, fragment));
         controllers.add(new LocalBackupPasswordPreferenceController(context));
         controllers.add(new StayAwakePreferenceController(context, lifecycle));
         controllers.add(new HdcpCheckingPreferenceController(context));
@@ -526,13 +543,14 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new WifiDisplayCertificationPreferenceController(context));
         controllers.add(new WifiVerboseLoggingPreferenceController(context));
         controllers.add(new WifiScanThrottlingPreferenceController(context));
-        controllers.add(new WifiEnhancedMacRandomizationPreferenceController(context));
+        controllers.add(new WifiNonPersistentMacRandomizationPreferenceController(context));
         controllers.add(new MobileDataAlwaysOnPreferenceController(context));
         controllers.add(new TetheringHardwareAccelPreferenceController(context));
         controllers.add(new BluetoothDeviceNoNamePreferenceController(context));
         controllers.add(new BluetoothAbsoluteVolumePreferenceController(context));
         controllers.add(new BluetoothAvrcpVersionPreferenceController(context));
         controllers.add(new BluetoothMapVersionPreferenceController(context));
+        controllers.add(new BluetoothLeAudioPreferenceController(context, fragment));
         controllers.add(new BluetoothA2dpHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothLeAudioHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothMaxConnectedAudioDevicesPreferenceController(context));
@@ -568,8 +586,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new NotificationChannelWarningsPreferenceController(context));
         controllers.add(new AllowAppsOnExternalPreferenceController(context));
         controllers.add(new ResizableActivityPreferenceController(context));
-        controllers.add(new FreeformWindowsPreferenceController(context));
-        controllers.add(new DesktopModePreferenceController(context));
+        controllers.add(new FreeformWindowsPreferenceController(context, fragment));
+        controllers.add(new DesktopModePreferenceController(context, fragment));
         controllers.add(new NonResizableMultiWindowPreferenceController(context));
         controllers.add(new ShortcutManagerThrottlingPreferenceController(context));
         controllers.add(new EnableGnssRawMeasFullTrackingPreferenceController(context));
@@ -581,6 +599,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new DefaultLaunchPreferenceController(context, "density"));
         controllers.add(new DefaultLaunchPreferenceController(context, "background_check"));
         controllers.add(new DefaultLaunchPreferenceController(context, "inactive_apps"));
+        controllers.add(new AutofillCategoryController(context, lifecycle));
         controllers.add(new AutofillLoggingLevelPreferenceController(context, lifecycle));
         controllers.add(new AutofillResetOptionsPreferenceController(context));
         controllers.add(new BluetoothCodecDialogPreferenceController(context, lifecycle,
@@ -597,6 +616,9 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 bluetoothA2dpConfigStore, fragment));
         controllers.add(new SharedDataPreferenceController(context));
         controllers.add(new OverlaySettingsPreferenceController(context));
+        controllers.add(new StylusHandwritingPreferenceController(context));
+        controllers.add(new IngressRateLimitPreferenceController((context)));
+        controllers.add(new BackAnimationPreferenceController(context, fragment));
 
         return controllers;
     }

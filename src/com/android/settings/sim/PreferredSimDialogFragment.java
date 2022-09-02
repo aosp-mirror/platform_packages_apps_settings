@@ -84,10 +84,16 @@ public class PreferredSimDialogFragment extends SimDialogFragment implements
     private void updateDialog(AlertDialog dialog) {
         Log.d(TAG, "Dialog updated, dismiss status: " + mWasDismissed);
 
-        final SubscriptionInfo info = getPreferredSubscription();
         if (mWasDismissed) {
             return;
         }
+
+        if (dialog == null) {
+            Log.d(TAG, "Dialog is null.");
+            dismiss();
+        }
+
+        final SubscriptionInfo info = getPreferredSubscription();
         if (info == null) {
             dismiss();
             return;

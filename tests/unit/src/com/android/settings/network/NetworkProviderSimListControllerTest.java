@@ -46,6 +46,7 @@ import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -230,6 +231,7 @@ public class NetworkProviderSimListControllerTest {
         assertTrue(TextUtils.equals(mController.getSummary(SUB_ID_1, DISPLAY_NAME_1), summary));
     }
 
+    @Ignore
     @Test
     @UiThreadTest
     public void getAvailablePhysicalSubscription_withTwoPhysicalSims_returnTwo() {

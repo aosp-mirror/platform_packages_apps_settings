@@ -17,6 +17,13 @@
 
 package com.android.settings.password;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PASSWORD_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PATTERN_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PIN_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PASSWORD;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PATTERN;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PIN;
+
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
 import android.app.Activity;
@@ -107,6 +114,10 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 mWaitingForBiometricCallback = false;
                 if (errorCode == BiometricPrompt.BIOMETRIC_ERROR_USER_CANCELED
                         || errorCode == BiometricPrompt.BIOMETRIC_ERROR_CANCELED) {
+                    finish();
+                } else if (mUserManager.getUserInfo(mUserId) == null) {
+                    // This can happen when profile gets wiped due to too many failed auth attempts.
+                    Log.i(TAG, "Finishing, user no longer valid: " + mUserId);
                     finish();
                 } else {
                     // All other errors go to some version of CC
@@ -255,19 +266,36 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
 
     private String getTitleFromCredentialType(@LockPatternUtils.CredentialType int credentialType,
             boolean isEffectiveUserManagedProfile) {
+        int overrideStringId;
+        int defaultStringId;
         switch (credentialType) {
             case LockPatternUtils.CREDENTIAL_TYPE_PIN:
-                return isEffectiveUserManagedProfile
-                        ? getString(R.string.lockpassword_confirm_your_work_pin_header)
-                        : getString(R.string.lockpassword_confirm_your_pin_header);
+
+                if (isEffectiveUserManagedProfile) {
+                    return mDevicePolicyManager.getResources().getString(
+                            CONFIRM_WORK_PROFILE_PIN_HEADER,
+                            () -> getString(R.string.lockpassword_confirm_your_work_pin_header));
+                }
+
+                return getString(R.string.lockpassword_confirm_your_pin_header);
             case LockPatternUtils.CREDENTIAL_TYPE_PATTERN:
-                return isEffectiveUserManagedProfile
-                        ? getString(R.string.lockpassword_confirm_your_work_pattern_header)
-                        : getString(R.string.lockpassword_confirm_your_pattern_header);
+                if (isEffectiveUserManagedProfile) {
+                    return mDevicePolicyManager.getResources().getString(
+                            CONFIRM_WORK_PROFILE_PATTERN_HEADER,
+                            () -> getString(
+                                    R.string.lockpassword_confirm_your_work_pattern_header));
+                }
+
+                return getString(R.string.lockpassword_confirm_your_pattern_header);
             case LockPatternUtils.CREDENTIAL_TYPE_PASSWORD:
-                return isEffectiveUserManagedProfile
-                        ? getString(R.string.lockpassword_confirm_your_work_password_header)
-                        : getString(R.string.lockpassword_confirm_your_password_header);
+                if (isEffectiveUserManagedProfile) {
+                    return mDevicePolicyManager.getResources().getString(
+                            CONFIRM_WORK_PROFILE_PASSWORD_HEADER,
+                            () -> getString(
+                                    R.string.lockpassword_confirm_your_work_password_header));
+                }
+
+                return getString(R.string.lockpassword_confirm_your_password_header);
         }
         return null;
     }
@@ -276,17 +304,31 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             boolean isEffectiveUserManagedProfile) {
         switch (credentialType) {
             case LockPatternUtils.CREDENTIAL_TYPE_PIN:
-                return isEffectiveUserManagedProfile
-                        ? getString(R.string.lockpassword_confirm_your_pin_generic_profile)
-                        : getString(R.string.lockpassword_confirm_your_pin_generic);
+                if (isEffectiveUserManagedProfile) {
+                    return mDevicePolicyManager.getResources().getString(WORK_PROFILE_CONFIRM_PIN,
+                            () -> getString(
+                                    R.string.lockpassword_confirm_your_pin_generic_profile));
+                }
+
+                return getString(R.string.lockpassword_confirm_your_pin_generic);
             case LockPatternUtils.CREDENTIAL_TYPE_PATTERN:
-                return isEffectiveUserManagedProfile
-                        ? getString(R.string.lockpassword_confirm_your_pattern_generic_profile)
-                        : getString(R.string.lockpassword_confirm_your_pattern_generic);
+                if (isEffectiveUserManagedProfile) {
+                    return mDevicePolicyManager.getResources().getString(
+                            WORK_PROFILE_CONFIRM_PATTERN,
+                            () -> getString(
+                                    R.string.lockpassword_confirm_your_pattern_generic_profile));
+                }
+
+                return getString(R.string.lockpassword_confirm_your_pattern_generic);
             case LockPatternUtils.CREDENTIAL_TYPE_PASSWORD:
-                return isEffectiveUserManagedProfile
-                        ? getString(R.string.lockpassword_confirm_your_password_generic_profile)
-                        : getString(R.string.lockpassword_confirm_your_password_generic);
+                if (isEffectiveUserManagedProfile) {
+                    return mDevicePolicyManager.getResources().getString(
+                            WORK_PROFILE_CONFIRM_PASSWORD,
+                            () -> getString(
+                                    R.string.lockpassword_confirm_your_password_generic_profile));
+                }
+
+                return getString(R.string.lockpassword_confirm_your_password_generic);
         }
         return null;
     }

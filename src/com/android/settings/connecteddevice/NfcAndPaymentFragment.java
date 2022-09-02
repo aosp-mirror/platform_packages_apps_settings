@@ -17,6 +17,12 @@
 package com.android.settings.connecteddevice;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
+import android.os.UserHandle;
+import android.os.UserManager;
+
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -54,5 +60,16 @@ public class NfcAndPaymentFragment extends DashboardFragment {
      * For Search.
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.nfc_and_payment_settings);
+            new BaseSearchIndexProvider(R.xml.nfc_and_payment_settings) {
+            @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    final UserManager userManager = context.getSystemService(UserManager.class);
+                    final UserInfo myUserInfo = userManager.getUserInfo(UserHandle.myUserId());
+                    if (myUserInfo.isGuest()) {
+                        return false;
+                    }
+                    final PackageManager pm = context.getPackageManager();
+                    return pm.hasSystemFeature(PackageManager.FEATURE_NFC);
+                }
+            };
 }

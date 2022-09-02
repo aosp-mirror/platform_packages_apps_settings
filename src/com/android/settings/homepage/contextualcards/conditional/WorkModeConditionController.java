@@ -16,6 +16,9 @@
 
 package com.android.settings.homepage.contextualcards.conditional;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_OFF_CONDITION_TITLE;
+
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -46,6 +49,7 @@ public class WorkModeConditionController implements ConditionalCardController {
 
     private final Context mAppContext;
     private final UserManager mUm;
+    private final DevicePolicyManager mDpm;
     private final ConditionManager mConditionManager;
     private final Receiver mReceiver;
 
@@ -54,6 +58,7 @@ public class WorkModeConditionController implements ConditionalCardController {
     public WorkModeConditionController(Context appContext, ConditionManager manager) {
         mAppContext = appContext;
         mUm = mAppContext.getSystemService(UserManager.class);
+        mDpm = mAppContext.getSystemService(DevicePolicyManager.class);
         mConditionManager = manager;
         mReceiver = new Receiver();
     }
@@ -84,13 +89,15 @@ public class WorkModeConditionController implements ConditionalCardController {
 
     @Override
     public ContextualCard buildContextualCard() {
+        String conditionWorkTitle = mDpm.getResources().getString(WORK_PROFILE_OFF_CONDITION_TITLE,
+                () -> mAppContext.getString(R.string.condition_work_title));
         return new ConditionalContextualCard.Builder()
                 .setConditionId(ID)
                 .setMetricsConstant(SettingsEnums.SETTINGS_CONDITION_WORK_MODE)
                 .setActionText(mAppContext.getText(R.string.condition_turn_on))
                 .setName(mAppContext.getPackageName() + "/"
-                        + mAppContext.getText(R.string.condition_work_title))
-                .setTitleText(mAppContext.getText(R.string.condition_work_title).toString())
+                        + conditionWorkTitle)
+                .setTitleText(conditionWorkTitle)
                 .setSummaryText(mAppContext.getText(R.string.condition_work_summary).toString())
                 .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_signal_workmode_enable))
                 .setViewType(ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH)

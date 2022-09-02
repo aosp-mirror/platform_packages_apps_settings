@@ -57,20 +57,6 @@ public class EncryptionStatusPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_admin_true() {
-        mShadowUserManager.setIsAdminUser(true);
-
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void isAvailable_notAdmin_false() {
-        mShadowUserManager.setIsAdminUser(false);
-
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
     @Config(qualifiers = "mcc999")
     public void isAvailable_notVisible_false() {
         assertThat(mController.isAvailable()).isFalse();
@@ -82,7 +68,6 @@ public class EncryptionStatusPreferenceControllerTest {
         mController = new EncryptionStatusPreferenceController(mContext,
                 PREF_KEY_ENCRYPTION_SECURITY_PAGE);
 
-        mShadowUserManager.setIsAdminUser(true);
         assertThat(mController.isAvailable()).isTrue();
     }
 

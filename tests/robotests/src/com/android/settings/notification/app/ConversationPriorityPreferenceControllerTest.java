@@ -146,9 +146,9 @@ public class ConversationPriorityPreferenceControllerTest {
 
     @Test
     public void testUpdateState_notConfigurable() {
+        mController.setOverrideCanConfigure(false);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.isImportanceLockedByOEM()).thenReturn(true);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null, null, null, null);
 
@@ -159,26 +159,10 @@ public class ConversationPriorityPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_systemButConfigurable() {
+    public void testUpdateState_Configurable() {
+        mController.setOverrideCanConfigure(true);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.systemApp = true;
         NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.isImportanceLockedByOEM()).thenReturn(false);
-        when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null, null, null, null);
-
-        Preference pref = new ConversationPriorityPreference(mContext, null);
-        mController.updateState(pref);
-
-        assertTrue(pref.isEnabled());
-    }
-
-    @Test
-    public void testUpdateState_defaultApp() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.systemApp = true;
-        NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.isImportanceLockedByCriticalDeviceFunction()).thenReturn(true);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null, null, null, null);
 

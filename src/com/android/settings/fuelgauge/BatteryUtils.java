@@ -65,6 +65,10 @@ import java.util.List;
 public class BatteryUtils {
     public static final int UID_NULL = -1;
     public static final int SDK_NULL = -1;
+    /** Special UID value for data usage by removed apps. */
+    public static final int UID_REMOVED_APPS = -4;
+    /** Special UID value for data usage by tethering. */
+    public static final int UID_TETHERING = -5;
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({StatusType.SCREEN_USAGE,
@@ -188,7 +192,10 @@ public class BatteryUtils {
      */
     boolean shouldHideUidBatteryConsumerUnconditionally(UidBatteryConsumer consumer,
             String[] packages) {
-        return consumer.getUid() < 0 || isHiddenSystemModule(packages);
+        final int uid = consumer.getUid();
+        return uid == UID_TETHERING
+                ? false
+                : uid < 0 || isHiddenSystemModule(packages);
     }
 
     /**
@@ -375,9 +382,7 @@ public class BatteryUtils {
         } catch (RuntimeException e) {
             Log.e(TAG, "getBatteryInfo() error from getBatteryUsageStats()", e);
             // Use default BatteryUsageStats.
-            batteryUsageStats =
-                    new BatteryUsageStats.Builder(new String[0], /* includePowerModels */ false)
-                            .build();
+            batteryUsageStats = new BatteryUsageStats.Builder(new String[0]).build();
         }
 
         final long startTime = System.currentTimeMillis();
@@ -405,6 +410,11 @@ public class BatteryUtils {
                 batteryUsageStats, estimate, elapsedRealtimeUs, false /* shortString */);
         BatteryUtils.logRuntime(tag, "BatteryInfoLoader.loadInBackground", startTime);
 
+        try {
+            batteryUsageStats.close();
+        } catch (Exception e) {
+            Log.e(TAG, "BatteryUsageStats.close() failed", e);
+        }
         return batteryInfo;
     }
 

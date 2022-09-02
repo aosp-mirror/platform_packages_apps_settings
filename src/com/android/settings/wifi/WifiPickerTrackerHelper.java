@@ -35,6 +35,7 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.wifitrackerlib.MergedCarrierEntry;
 import com.android.wifitrackerlib.WifiEntry;
@@ -64,7 +65,7 @@ public class WifiPickerTrackerHelper implements LifecycleObserver {
     protected HandlerThread mWorkerThread;
 
     protected final WifiManager mWifiManager;
-    protected final CarrierConfigManager mCarrierConfigManager;
+    protected final CarrierConfigCache mCarrierConfigCache;
 
     public WifiPickerTrackerHelper(@NonNull Lifecycle lifecycle, @NonNull Context context,
             @Nullable WifiPickerTracker.WifiPickerTrackerCallback listener) {
@@ -88,7 +89,7 @@ public class WifiPickerTrackerHelper implements LifecycleObserver {
                 listener);
 
         mWifiManager = context.getSystemService(WifiManager.class);
-        mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
+        mCarrierConfigCache = CarrierConfigCache.getInstance(context);
     }
 
     /** @OnLifecycleEvent(ON_DESTROY) */
@@ -104,7 +105,7 @@ public class WifiPickerTrackerHelper implements LifecycleObserver {
 
     /** Return the enabled/disabled state of the carrier network provision */
     public boolean isCarrierNetworkProvisionEnabled(int subId) {
-        final PersistableBundle config = mCarrierConfigManager.getConfigForSubId(subId);
+        final PersistableBundle config = mCarrierConfigCache.getConfigForSubId(subId);
         if (config == null) {
             Log.e(TAG, "Could not get carrier config, subId:" + subId);
             return false;
@@ -116,16 +117,25 @@ public class WifiPickerTrackerHelper implements LifecycleObserver {
     }
 
     /** Return the enabled/disabled state of the carrier network */
-    public boolean isCarrierNetworkEnabled(int subId) {
-        return mWifiManager.isCarrierNetworkOffloadEnabled(subId, true /* merged */);
+    public boolean isCarrierNetworkEnabled() {
+        final MergedCarrierEntry mergedCarrierEntry = mWifiPickerTracker.getMergedCarrierEntry();
+        if (mergedCarrierEntry == null) {
+            Log.e(TAG, "Failed to get MergedCarrierEntry to query enabled status");
+            return false;
+        }
+        final boolean isCarrierNetworkEnabled = mergedCarrierEntry.isEnabled();
+        Log.i(TAG, "isCarrierNetworkEnabled:" + isCarrierNetworkEnabled);
+        return isCarrierNetworkEnabled;
     }
 
     /** Enables/disables the carrier network */
     public void setCarrierNetworkEnabled(boolean enabled) {
         final MergedCarrierEntry mergedCarrierEntry = mWifiPickerTracker.getMergedCarrierEntry();
         if (mergedCarrierEntry == null) {
+            Log.e(TAG, "Unable to get MergedCarrierEntry to set enabled status");
             return;
         }
+        Log.i(TAG, "setCarrierNetworkEnabled:" + enabled);
         mergedCarrierEntry.setEnabled(enabled);
     }
 
@@ -152,6 +162,17 @@ public class WifiPickerTrackerHelper implements LifecycleObserver {
             return null;
         }
         return mergedCarrierEntry.getSsid();
+    }
+
+    /** Return the carrier network level */
+    public int getCarrierNetworkLevel() {
+        final MergedCarrierEntry mergedCarrierEntry = mWifiPickerTracker.getMergedCarrierEntry();
+        if (mergedCarrierEntry == null) return WifiEntry.WIFI_LEVEL_MIN;
+
+        int level = mergedCarrierEntry.getLevel();
+        // To avoid icons not found with WIFI_LEVEL_UNREACHABLE(-1), use WIFI_LEVEL_MIN(0) instead.
+        if (level < WifiEntry.WIFI_LEVEL_MIN) level = WifiEntry.WIFI_LEVEL_MIN;
+        return level;
     }
 
     @VisibleForTesting

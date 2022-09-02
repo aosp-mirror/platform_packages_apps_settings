@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.preference.PreferenceViewHolder;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 
@@ -30,7 +31,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 /** Tests for {@link ShortcutPreference} */
 @RunWith(RobolectricTestRunner.class)
@@ -58,7 +58,7 @@ public class ShortcutPreferenceTest {
 
     @Before
     public void setUp() {
-        final Context context = RuntimeEnvironment.application;
+        final Context context = ApplicationProvider.getApplicationContext();
         mShortcutPreference = new ShortcutPreference(context, null);
 
         final LayoutInflater inflater = LayoutInflater.from(context);
@@ -94,5 +94,14 @@ public class ShortcutPreferenceTest {
         mShortcutPreference.setChecked(true);
 
         assertThat(mShortcutPreference.isChecked()).isEqualTo(true);
+    }
+
+    @Test
+    public void performClickOnPreference_settingsClicked() {
+        mShortcutPreference.onBindViewHolder(mPreferenceViewHolder);
+        mShortcutPreference.setOnClickCallback(mListener);
+        mShortcutPreference.performClick();
+
+        assertThat(mResult).isEqualTo(SETTINGS_CLICKED);
     }
 }

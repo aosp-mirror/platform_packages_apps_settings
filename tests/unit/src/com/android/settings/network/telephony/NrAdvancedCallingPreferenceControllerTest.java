@@ -34,6 +34,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.network.CarrierConfigCache;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
@@ -53,7 +54,7 @@ public class NrAdvancedCallingPreferenceControllerTest {
     @Mock
     private SubscriptionManager mSubscriptionManager;
     @Mock
-    private CarrierConfigManager mCarrierConfigManager;
+    private CarrierConfigCache mCarrierConfigCache;
 
     private NrAdvancedCallingPreferenceController mController;
     private SwitchPreference mPreference;
@@ -67,8 +68,7 @@ public class NrAdvancedCallingPreferenceControllerTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
-        when(mContext.getSystemService(CarrierConfigManager.class))
-                .thenReturn(mCarrierConfigManager);
+        CarrierConfigCache.setTestInstance(mContext, mCarrierConfigCache);
 
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
@@ -79,7 +79,7 @@ public class NrAdvancedCallingPreferenceControllerTest {
         doReturn(TelephonyManager.ENABLE_VONR_REQUEST_NOT_SUPPORTED).when(
                 mTelephonyManager).setVoNrEnabled(anyBoolean());
         mCarrierConfig = new PersistableBundle();
-        doReturn(mCarrierConfig).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
+        doReturn(mCarrierConfig).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_VONR_ENABLED_BOOL, false);
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_VONR_SETTING_VISIBILITY_BOOL, true);
         mCarrierConfig.putIntArray(CarrierConfigManager.KEY_CARRIER_NR_AVAILABILITIES_INT_ARRAY,

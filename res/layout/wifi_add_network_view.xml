@@ -15,36 +15,17 @@
      limitations under the License.
 -->
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clipToPadding="true"
-    android:clipChildren="true">
-        <ScrollView
+    android:fitsSystemWindows="true">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollIndicators="top|bottom">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                        <include
-                            android:id="@+id/wifi_dialog_frame"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_above="@id/add_network_button_bar"
-                            app:layout_constraintTop_toTopOf="parent"
-                            layout="@layout/wifi_dialog"/>
+            android:orientation="vertical">
+                <include layout="@layout/wifi_network_config"/>
 
-                        <include
-                            android:id="@+id/add_network_button_bar"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@id/wifi_dialog_frame"
-                            layout="@*android:layout/alert_dialog_button_bar_material"/>
-                </LinearLayout>
-        </ScrollView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <include layout="@*android:layout/alert_dialog_button_bar_material"/>
+        </LinearLayout>
+</androidx.core.widget.NestedScrollView>

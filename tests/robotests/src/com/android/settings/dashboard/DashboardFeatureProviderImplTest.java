@@ -40,7 +40,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -268,7 +268,7 @@ public class DashboardFeatureProviderImplTest {
         mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
                 null /* keys */, tile, "123", Preference.DEFAULT_ORDER);
 
-        verifyZeroInteractions(tile);
+        verifyNoInteractions(tile);
     }
 
     @Test
@@ -308,8 +308,12 @@ public class DashboardFeatureProviderImplTest {
                 mActivity, mFragment, mForceRoundedIcon, preference, tile, null /* key */,
                 Preference.DEFAULT_ORDER);
 
-        assertThat(preference.getSummary()).isEqualTo(ShadowTileUtils.MOCK_SUMMARY);
         assertThat(observers.get(0).getUri().toString()).isEqualTo(uriString);
+        assertThat(preference.getSummary()).isNotEqualTo(ShadowTileUtils.MOCK_TEXT);
+
+        observers.get(0).updateUi();
+
+        assertThat(preference.getSummary()).isEqualTo(ShadowTileUtils.MOCK_TEXT);
     }
 
     @Test
@@ -324,8 +328,12 @@ public class DashboardFeatureProviderImplTest {
                 mActivity, mFragment, mForceRoundedIcon, preference, tile, null /* key */,
                 Preference.DEFAULT_ORDER);
 
-        assertThat(preference.getTitle()).isEqualTo(ShadowTileUtils.MOCK_SUMMARY);
         assertThat(observers.get(0).getUri().toString()).isEqualTo(uriString);
+        assertThat(preference.getTitle()).isNotEqualTo(ShadowTileUtils.MOCK_TEXT);
+
+        observers.get(0).updateUi();
+
+        assertThat(preference.getTitle()).isEqualTo(ShadowTileUtils.MOCK_TEXT);
     }
 
     @Test
@@ -379,6 +387,7 @@ public class DashboardFeatureProviderImplTest {
         final List<DynamicDataObserver> observers = mImpl.bindPreferenceToTileAndGetObservers(
                 mActivity, mFragment, mForceRoundedIcon, preference, tile, null /* key */,
                 Preference.DEFAULT_ORDER);
+        observers.get(0).updateUi();
 
         ShadowTileUtils.setProviderChecked(false);
         observers.get(0).onDataChanged();

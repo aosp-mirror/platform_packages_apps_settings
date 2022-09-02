@@ -36,7 +36,7 @@ public class FingerprintErrorDialog extends BiometricErrorDialog {
         }
 
         final FragmentManager fragmentManager = host.getSupportFragmentManager();
-        if (fragmentManager.isDestroyed()) {
+        if (fragmentManager.isDestroyed() || fragmentManager.isStateSaved()) {
             return;
         }
 

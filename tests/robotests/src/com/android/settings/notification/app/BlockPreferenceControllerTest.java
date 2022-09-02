@@ -17,7 +17,6 @@
 package com.android.settings.notification.app;
 
 import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
-import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
@@ -49,6 +48,7 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.widget.SettingsMainSwitchPreference;
+import com.android.settingslib.testutils.shadow.ShadowInteractionJankMonitor;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,11 +57,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowInteractionJankMonitor.class})
 public class BlockPreferenceControllerTest {
 
     private Context mContext;
@@ -200,68 +202,40 @@ public class BlockPreferenceControllerTest {
     }
 
     @Test
-    public void testIsEnabled_lockedApp() {
+    public void testIsEnabled_cannotBlockAppOrGroupOrChannel() {
+        mController.setOverrideCanBlock(false);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.lockedImportance = true;
-        appRow.systemApp = true;
         mController.onResume(appRow, null, null, null, null, null, null);
         mController.updateState(mPreference);
         assertFalse(mPreference.getSwitchBar().isEnabled());
     }
 
     @Test
-    public void testIsEnabled_GroupNotBlockable() {
+    public void testIsEnabled_importanceLocked_app() {
+        mController.setOverrideCanConfigure(false);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.systemApp = true;
-        mController.onResume(appRow, null, mock(NotificationChannelGroup.class), null, null, null,
-                null);
-        mController.updateState(mPreference);
-        assertFalse(mPreference.getSwitchBar().isEnabled());
-    }
-
-    @Test
-    public void testIsEnabled_systemAppNotBlockable() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.systemApp = true;
         mController.onResume(appRow, null, null, null, null, null, null);
         mController.updateState(mPreference);
         assertFalse(mPreference.getSwitchBar().isEnabled());
     }
 
     @Test
-    public void testIsEnabled_systemAppBlockable() {
+    public void testIsEnabled_importanceLocked_group() {
+        mController.setOverrideCanConfigure(false);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.systemApp = true;
-        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
-        channel.setBlockable(true);
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(
+                appRow, null, new NotificationChannelGroup("a", "a"), null, null, null, null);
         mController.updateState(mPreference);
-        assertTrue(mPreference.getSwitchBar().isEnabled());
-    }
-
-    @Test
-    public void testIsEnabled_lockedChannel() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.isImportanceLockedByOEM()).thenReturn(true);
-        when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null, null, null, null);
-
-        mController.updateState(mPreference);
-
         assertFalse(mPreference.getSwitchBar().isEnabled());
     }
 
     @Test
-    public void testIsEnabled_defaultAppChannel() {
+    public void testIsEnabled_importanceLocked_channel() {
+        mController.setOverrideCanConfigure(false);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.isImportanceLockedByCriticalDeviceFunction()).thenReturn(true);
-        when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null, null, null, null);
-
+        mController.onResume(appRow, new NotificationChannel("a", "a", IMPORTANCE_LOW), null, null,
+                null, null, null);
         mController.updateState(mPreference);
-
         assertFalse(mPreference.getSwitchBar().isEnabled());
     }
 

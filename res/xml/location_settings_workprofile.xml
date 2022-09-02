@@ -50,7 +50,7 @@
         android:title="@string/location_app_level_permissions"
         settings:controller="com.android.settings.location.AppLocationPermissionPreferenceController">
         <intent android:action="android.intent.action.MANAGE_PERMISSION_APPS">
-            <extra android:name="android.intent.extra.PERMISSION_NAME"
+            <extra android:name="android.intent.extra.PERMISSION_GROUP_NAME"
                    android:value="android.permission-group.LOCATION"/>
         </intent>
     </Preference>

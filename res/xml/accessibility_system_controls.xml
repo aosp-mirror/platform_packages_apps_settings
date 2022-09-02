@@ -42,9 +42,22 @@
         android:title="@string/accessibility_power_button_ends_call_prerefence_title"
         settings:controller="com.android.settings.accessibility.PowerButtonEndsCallPreferenceController"/>
 
+    <!-- Standard auto-rotation preference that will be shown when device state based auto-rotation
+         settings are NOT available. -->
     <SwitchPreference
         android:key="toggle_lock_screen_rotation_preference"
         android:persistent="false"
         android:title="@string/accelerometer_title"
         settings:controller="com.android.settings.accessibility.LockScreenRotationPreferenceController"/>
+
+    <!-- Auto-rotation preference that will be shown when device state based auto-rotation settings
+         are available. -->
+    <Preference
+        android:key="device_state_auto_rotate_accessibility"
+        android:persistent="false"
+        android:title="@string/accelerometer_title"
+        android:fragment="com.android.settings.display.DeviceStateAutoRotateDetailsFragment"
+        settings:keywords="@string/keywords_auto_rotate"
+        settings:controller="com.android.settings.display.DeviceStateAutoRotateOverviewController"/>
+
 </PreferenceScreen>

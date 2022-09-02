@@ -289,4 +289,14 @@ public class BiometricUtils {
         }
         return false;
     }
+
+    /**
+     * Returns {@code true} if the screen is going into a landscape mode and the angle is equal to
+     * 90.
+     * @param context Context that we use to get the display this context is associated with
+     * @return True if the angle of the rotation is equal to 90.
+     */
+    public static boolean isLandscape(@NonNull Context context) {
+        return context.getDisplay().getRotation() == Surface.ROTATION_90;
+    }
 }

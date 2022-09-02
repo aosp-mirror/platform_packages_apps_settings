@@ -66,7 +66,7 @@ public class BluetoothLeAudioHwOffloadPreferenceControllerTest {
         SystemProperties.set(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(false));
         mController.mChanged = true;
 
-        mController.onHwOffloadDialogConfirmed();
+        mController.onRebootDialogConfirmed();
         final boolean mode = SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, false);
         assertThat(mode).isTrue();
     }
@@ -76,7 +76,7 @@ public class BluetoothLeAudioHwOffloadPreferenceControllerTest {
         SystemProperties.set(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(true));
         mController.mChanged = true;
 
-        mController.onHwOffloadDialogConfirmed();
+        mController.onRebootDialogConfirmed();
         final boolean mode2 = SystemProperties.getBoolean(
                 LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, true);
         assertThat(mode2).isFalse();
@@ -87,7 +87,7 @@ public class BluetoothLeAudioHwOffloadPreferenceControllerTest {
         SystemProperties.set(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(false));
         mController.mChanged = true;
 
-        mController.onHwOffloadDialogCanceled();
+        mController.onRebootDialogCanceled();
         final boolean mode = SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, false);
         assertThat(mode).isFalse();
     }

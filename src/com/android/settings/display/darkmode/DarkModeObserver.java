@@ -25,6 +25,7 @@ import android.os.Looper;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.util.Log;
+
 import com.android.internal.annotations.VisibleForTesting;
 
 /**
@@ -64,12 +65,16 @@ public class DarkModeObserver {
         callback.run();
         mCallback = callback;
         final Uri uri = Settings.Secure.getUriFor(Settings.Secure.UI_NIGHT_MODE);
+        final Uri customType =
+                Settings.Secure.getUriFor(Settings.Secure.UI_NIGHT_MODE_CUSTOM_TYPE);
         final Uri customStart =
                 Settings.Secure.getUriFor(Settings.Secure.DARK_THEME_CUSTOM_START_TIME);
         final Uri customEnd =
                 Settings.Secure.getUriFor(Settings.Secure.DARK_THEME_CUSTOM_END_TIME);
         mContext.getContentResolver()
                 .registerContentObserver(uri, false, mContentObserver);
+        mContext.getContentResolver()
+                .registerContentObserver(customType, false, mContentObserver);
         mContext.getContentResolver()
                 .registerContentObserver(customStart, false, mContentObserver);
         mContext.getContentResolver()

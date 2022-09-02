@@ -23,7 +23,6 @@ import android.app.people.IPeopleManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.ShortcutInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
@@ -31,9 +30,10 @@ import android.provider.Settings;
 import android.util.Slog;
 import android.widget.Button;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
@@ -46,17 +46,20 @@ import java.text.Collator;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class RecentConversationsPreferenceController extends AbstractPreferenceController {
 
     private static final String TAG = "RecentConversationsPC";
     private static final String KEY = "recent_conversations";
-    private List<ConversationChannel> mConversations;
+    private static final String CLEAR_ALL_KEY_SUFFIX = "_clear_all";
     private final IPeopleManager mPs;
     private final NotificationBackend mBackend;
+    private PreferenceGroup mPreferenceGroup;
 
-    public RecentConversationsPreferenceController(Context context, NotificationBackend backend,
-            IPeopleManager ps) {
+    public RecentConversationsPreferenceController(
+            Context context, NotificationBackend backend, IPeopleManager ps) {
         super(context);
         mBackend = backend;
         mPs = ps;
@@ -72,9 +75,11 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
         return true;
     }
 
+    //TODO(b/233325816): Use ButtonPreference instead.
     LayoutPreference getClearAll(PreferenceGroup parent) {
         LayoutPreference pref = new LayoutPreference(
                 mContext, R.layout.conversations_clear_recents);
+        pref.setKey(getPreferenceKey() + CLEAR_ALL_KEY_SUFFIX);
         pref.setOrder(1);
         Button button = pref.findViewById(R.id.conversation_settings_clear_recents);
         button.setOnClickListener(v -> {
@@ -101,63 +106,69 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
     }
 
     @Override
-    public void updateState(Preference preference) {
-        PreferenceCategory pref = (PreferenceCategory) preference;
-        // Load conversations
-        try {
-            mConversations = mPs.getRecentConversations().getList();
-        } catch (RemoteException e) {
-            Slog.w(TAG, "Could get recents", e);
-        }
-        Collections.sort(mConversations, mConversationComparator);
-
-        populateList(mConversations, pref);
-
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreferenceGroup = screen.findPreference(getPreferenceKey());
     }
 
-    protected void populateList(List<ConversationChannel> conversations,
-            PreferenceGroup containerGroup) {
-        containerGroup.removeAll();
+    /**
+     * Updates the conversation list.
+     *
+     * @return true if this controller has content to display.
+     */
+    boolean updateList() {
+        // Load conversations
+        List<ConversationChannel> conversations = Collections.emptyList();
+        try {
+            conversations = mPs.getRecentConversations().getList();
+        } catch (RemoteException e) {
+            Slog.w(TAG, "Could not get recent conversations", e);
+        }
+
+        return populateList(conversations);
+    }
+
+    @VisibleForTesting
+    boolean populateList(List<ConversationChannel> conversations) {
+        mPreferenceGroup.removeAll();
         boolean hasClearable = false;
         if (conversations != null) {
-            hasClearable = populateConversations(conversations, containerGroup);
+            hasClearable = populateConversations(conversations);
         }
 
-        if (containerGroup.getPreferenceCount() == 0) {
-            containerGroup.setVisible(false);
-        } else {
-            containerGroup.setVisible(true);
-            if (hasClearable) {
-                Preference clearAll = getClearAll(containerGroup);
-                if (clearAll != null) {
-                    containerGroup.addPreference(clearAll);
-                }
+        boolean hashContent = mPreferenceGroup.getPreferenceCount() != 0;
+        mPreferenceGroup.setVisible(hashContent);
+        if (hashContent && hasClearable) {
+            Preference clearAll = getClearAll(mPreferenceGroup);
+            if (clearAll != null) {
+                mPreferenceGroup.addPreference(clearAll);
             }
         }
+        return hashContent;
     }
 
-    protected boolean populateConversations(List<ConversationChannel> conversations,
-            PreferenceGroup containerGroup) {
-        int order = 100;
-        boolean hasClearable = false;
-        for (ConversationChannel conversation : conversations) {
-            if (conversation.getNotificationChannel().getImportance() == IMPORTANCE_NONE
-                    || (conversation.getNotificationChannelGroup() != null
-                    && conversation.getNotificationChannelGroup().isBlocked())) {
-                continue;
-            }
-            RecentConversationPreference pref =
-                    createConversationPref(containerGroup, conversation, order++);
-            containerGroup.addPreference(pref);
-            if (pref.hasClearListener()) {
-                hasClearable = true;
-            }
-        }
-        return hasClearable;
+    protected boolean populateConversations(List<ConversationChannel> conversations) {
+        AtomicInteger order = new AtomicInteger(100);
+        AtomicBoolean hasClearable = new AtomicBoolean(false);
+        conversations.stream()
+                .filter(conversation ->
+                        conversation.getNotificationChannel().getImportance() != IMPORTANCE_NONE
+                                && (conversation.getNotificationChannelGroup() == null
+                                || !conversation.getNotificationChannelGroup().isBlocked()))
+                .sorted(mConversationComparator)
+                .map(this::createConversationPref)
+                .forEachOrdered(pref -> {
+                    pref.setOrder(order.getAndIncrement());
+                    mPreferenceGroup.addPreference(pref);
+                    if (pref.hasClearListener()) {
+                        hasClearable.set(true);
+                    }
+                });
+        return hasClearable.get();
     }
 
-    protected RecentConversationPreference createConversationPref(PreferenceGroup parent,
-            final ConversationChannel conversation, int order) {
+    protected RecentConversationPreference createConversationPref(
+            final ConversationChannel conversation) {
         final String pkg = conversation.getShortcutInfo().getPackage();
         final int uid = conversation.getUid();
         final String conversationId = conversation.getShortcutInfo().getId();
@@ -169,13 +180,12 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
                     mPs.removeRecentConversation(pkg, UserHandle.getUserId(uid), conversationId);
                     pref.getClearView().announceForAccessibility(
                             mContext.getString(R.string.recent_convo_removed));
-                    parent.removePreference(pref);
+                    mPreferenceGroup.removePreference(pref);
                 } catch (RemoteException e) {
                     Slog.w(TAG, "Could not clear recent", e);
                 }
             });
         }
-        pref.setOrder(order);
 
         pref.setTitle(getTitle(conversation));
         pref.setSummary(getSummary(conversation));
@@ -228,9 +238,11 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
                 .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_CONVERSATION_LIST_SETTINGS);
     }
 
-    protected Comparator<ConversationChannel> mConversationComparator =
+    @VisibleForTesting
+    Comparator<ConversationChannel> mConversationComparator =
             new Comparator<ConversationChannel>() {
                 private final Collator sCollator = Collator.getInstance();
+
                 @Override
                 public int compare(ConversationChannel o1, ConversationChannel o2) {
                     int labelComparison = 0;

@@ -17,15 +17,16 @@ package com.android.settings.wifi.details2;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.nullable;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -52,7 +53,6 @@ import android.net.NetworkInfo;
 import android.net.NetworkRequest;
 import android.net.RouteInfo;
 import android.net.Uri;
-import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiInfo;
@@ -85,7 +85,6 @@ import com.android.settingslib.widget.LayoutPreference;
 import com.android.wifitrackerlib.NetworkDetailsTracker;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
-import com.android.wifitrackerlib.WifiEntry.ConnectedInfo;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -94,7 +93,6 @@ import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InOrder;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -943,22 +941,22 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    public void onConnectedNetwork_getKnownNetworkType_visibleWifiTypePref() {
+    public void onConnectedNetwork_getStandardString_visibleWifiTypePref() {
         setUpForConnectedNetwork();
         setUpSpyController();
-        setWifiType(ScanResult.WIFI_STANDARD_11AX);
+        when(mMockWifiEntry.getStandardString()).thenReturn("Standard");
 
         displayAndResume();
 
-        verify(mMockTypePref).setSummary(R.string.wifi_type_11AX);
+        verify(mMockTypePref).setSummary("Standard");
         verify(mMockTypePref).setVisible(true);
     }
 
     @Test
-    public void onConnectedNetwork_getUnKnownNetworkType_invisibleWifiTypePref() {
+    public void onConnectedNetwork_getEmptyStandardString_invisibleWifiTypePref() {
         setUpForConnectedNetwork();
         setUpSpyController();
-        setWifiType(ScanResult.WIFI_STANDARD_UNKNOWN);
+        when(mMockWifiEntry.getStandardString()).thenReturn("");
 
         displayAndResume();
 
@@ -972,12 +970,6 @@ public class WifiDetailPreferenceController2Test {
         displayAndResume();
 
         verify(mMockTypePref).setVisible(false);
-    }
-
-    private void setWifiType(int type) {
-        ConnectedInfo connectedInfo = new ConnectedInfo();
-        connectedInfo.wifiStandard = type;
-        when(mMockWifiEntry.getConnectedInfo()).thenReturn(connectedInfo);
     }
 
     @Test
@@ -1261,7 +1253,7 @@ public class WifiDetailPreferenceController2Test {
         mMockWifiConfig.creatorUid = doUid;
         ComponentName doComponent = new ComponentName(doPackage, "some.Class");
         try {
-            when(mMockPackageManager.getPackageUidAsUser(Matchers.anyString(), Matchers.anyInt()))
+            when(mMockPackageManager.getPackageUidAsUser(anyString(), anyInt()))
                     .thenReturn(doUid);
         } catch (PackageManager.NameNotFoundException e) {
             //do nothing

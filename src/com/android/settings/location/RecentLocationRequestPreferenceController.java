@@ -17,12 +17,15 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.DeviceConfig;
+import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 import com.android.settings.R;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.core.SubSettingLauncher;
@@ -83,8 +86,14 @@ public class RecentLocationRequestPreferenceController extends LocationBasePrefe
         final Context prefContext = mCategoryRecentLocationRequests.getContext();
         final List<RecentLocationApps.Request> recentLocationRequests = new ArrayList<>();
         final UserManager userManager = UserManager.get(mContext);
+        final boolean showSystem = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY,
+                SystemUiDeviceConfigFlags.PROPERTY_LOCATION_INDICATORS_SMALL_ENABLED, false)
+                ? Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 0) == 1
+                : false;
+
         for (RecentLocationApps.Request request : mRecentLocationApps.getAppListSorted(
-                false /* systemApps */)) {
+                showSystem)) {
             if (isRequestMatchesProfileType(userManager, request, mType)) {
                 recentLocationRequests.add(request);
                 if (recentLocationRequests.size() == MAX_APPS) {

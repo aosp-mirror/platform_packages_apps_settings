@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2022 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/entity_header"
+    style="@style/EntityHeader"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/entity_header_title"
+        style="@style/TextAppearance.EntityHeaderTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="false"
+        android:ellipsize="marquee"
+        android:textDirection="locale"/>
+
+    <TextView
+        android:id="@+id/entity_header_summary"
+        style="@style/TextAppearance.EntityHeaderSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/bluetooth_find_broadcast_header_top_margin"
+        android:singleLine="false"
+        android:ellipsize="marquee"
+        android:textDirection="locale"/>
+
+    <Button
+        android:id="@+id/button_find_broadcast"
+        android:layout_width="@dimen/bluetooth_find_broadcast_button_one_size"
+        android:layout_height="wrap_content"
+        android:text="@string/bluetooth_find_broadcast"
+        android:clickable="true"
+        style="@style/BroadcastActionButton" />
+
+    <LinearLayout
+        android:id="@+id/button_broadcast_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/button_leave_broadcast"
+                android:layout_width="@dimen/bluetooth_find_broadcast_button_two_size"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/bluetooth_find_broadcast_button_leave"
+                android:clickable="true"
+                style="@style/BroadcastActionButton" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/bluetooth_find_broadcast_button_start_margin">
+            <Button
+                android:id="@+id/button_scan_qr_code"
+                android:layout_width="@dimen/bluetooth_find_broadcast_button_two_size"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/bluetooth_find_broadcast_button_scan"
+                android:clickable="true"
+                style="@style/BroadcastActionButton" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.widget.ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="@dimen/bluetooth_find_broadcast_progress_width"
+        android:layout_height="@dimen/bluetooth_find_broadcast_progress_height"
+        android:layout_marginTop="@dimen/bluetooth_find_broadcast_progress_margin_top"
+        android:progressDrawable="@drawable/color_bar_progress"/>
+</LinearLayout>

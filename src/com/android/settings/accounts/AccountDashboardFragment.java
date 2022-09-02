@@ -84,6 +84,11 @@ public class AccountDashboardFragment extends DashboardFragment {
         return controllers;
     }
 
+    @Override
+    protected boolean shouldSkipForInitialSUW() {
+        return true;
+    }
+
     static void buildAutofillPreferenceControllers(
             Context context, List<AbstractPreferenceController> controllers) {
         controllers.add(new DefaultAutofillPreferenceController(context));

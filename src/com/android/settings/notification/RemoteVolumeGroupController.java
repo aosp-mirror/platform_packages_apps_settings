@@ -119,6 +119,7 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
                 if (seekBarPreference.getProgress() != info.getVolume()) {
                     seekBarPreference.setProgress(info.getVolume());
                 }
+                seekBarPreference.setEnabled(mLocalMediaManager.shouldEnableVolumeSeekBar(info));
             } else {
                 // Add slider
                 seekBarPreference = new RemoteVolumeSeekBarPreference(mContext);

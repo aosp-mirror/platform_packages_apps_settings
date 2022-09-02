@@ -39,7 +39,7 @@ public class BiometricFaceProfileStatusPreferenceController extends
     @Override
     protected boolean isUserSupported() {
         return mProfileChallengeUserId != UserHandle.USER_NULL
-                && mLockPatternUtils.isSeparateProfileChallengeAllowed(mProfileChallengeUserId);
+                && mUm.isManagedProfile(mProfileChallengeUserId);
     }
 
     @Override

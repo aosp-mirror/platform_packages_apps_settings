@@ -26,7 +26,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 /**
  * The controller to handle one-handed mode pull screen into reach preference.
@@ -46,8 +46,8 @@ public class OneHandedActionPullDownPrefController extends BasePreferenceControl
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        if (preference instanceof RadioButtonPreference) {
-            ((RadioButtonPreference) preference).setChecked(
+        if (preference instanceof SelectorWithWidgetPreference) {
+            ((SelectorWithWidgetPreference) preference).setChecked(
                     !OneHandedSettingsUtils.isSwipeDownNotificationEnabled(mContext));
         }
     }
@@ -65,8 +65,8 @@ public class OneHandedActionPullDownPrefController extends BasePreferenceControl
             return false;
         }
         OneHandedSettingsUtils.setSwipeDownNotificationEnabled(mContext, false);
-        if (preference instanceof RadioButtonPreference) {
-            ((RadioButtonPreference) preference).setChecked(true);
+        if (preference instanceof SelectorWithWidgetPreference) {
+            ((SelectorWithWidgetPreference) preference).setChecked(true);
         }
         return true;
     }
