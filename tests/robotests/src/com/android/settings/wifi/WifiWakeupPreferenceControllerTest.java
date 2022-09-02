@@ -95,6 +95,18 @@ public class WifiWakeupPreferenceControllerTest {
     }
 
     @Test
+    public void setChecked_mFragmentIsNullLocationEnable_wifiWakeupEnable() {
+        mController.setFragment(null);
+        when(mLocationManager.isLocationEnabled()).thenReturn(true);
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(true);
+        when(mWifiManager.isAutoWakeupEnabled()).thenReturn(false);
+
+        mController.setChecked(true);
+
+        verify(mWifiManager).setAutoWakeupEnabled(true);
+    }
+
+    @Test
     public void setChecked_scanEnableLocationEnable_wifiWakeupEnable() {
         when(mWifiManager.isAutoWakeupEnabled()).thenReturn(false);
         when(mWifiManager.isScanAlwaysAvailable()).thenReturn(true);
