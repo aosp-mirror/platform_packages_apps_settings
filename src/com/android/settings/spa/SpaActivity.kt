@@ -16,6 +16,19 @@
 
 package com.android.settings.spa
 
+import android.content.Context
+import android.content.Intent
 import com.android.settingslib.spa.framework.BrowseActivity
 
-class SpaActivity : BrowseActivity(settingsPageProviders)
+class SpaActivity : BrowseActivity(settingsPageProviders) {
+    companion object {
+        @JvmStatic
+        fun startSpaActivity(context: Context, startDestination: String) {
+            val intent = Intent(context, SpaActivity::class.java).apply {
+                putExtra(KEY_DESTINATION, startDestination)
+            }
+            context.startActivity(intent)
+        }
+    }
+}
+
