@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.spa.app.InstallUnknownAppsListProvider
+import com.android.settings.spa.notification.NotificationMainPageProvider
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.widget.scaffold.HomeScaffold
 
@@ -37,5 +38,6 @@ object HomePageProvider : SettingsPageProvider {
 private fun HomePage() {
     HomeScaffold(title = stringResource(R.string.settings_label)) {
         InstallUnknownAppsListProvider.EntryItem()
+        NotificationMainPageProvider.EntryItem()
     }
 }

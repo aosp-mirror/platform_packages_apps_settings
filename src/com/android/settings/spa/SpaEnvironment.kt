@@ -18,6 +18,8 @@ package com.android.settings.spa
 
 import com.android.settings.spa.app.InstallUnknownAppsListProvider
 import com.android.settings.spa.home.HomePageProvider
+import com.android.settings.spa.notification.AppListNotificationsPageProvider
+import com.android.settings.spa.notification.NotificationMainPageProvider
 import com.android.settingslib.spa.framework.common.SettingsPageProviderRepository
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListTemplate
 
@@ -28,6 +30,8 @@ private val togglePermissionAppListTemplate = TogglePermissionAppListTemplate(
 val settingsPageProviders = SettingsPageProviderRepository(
     allPagesList = listOf(
         HomePageProvider,
+        NotificationMainPageProvider,
+        AppListNotificationsPageProvider,
     ) + togglePermissionAppListTemplate.createPageProviders(),
     rootPages = listOf(HomePageProvider.name),
 )
