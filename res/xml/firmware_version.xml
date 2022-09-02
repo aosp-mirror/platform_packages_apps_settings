@@ -30,7 +30,11 @@
         settings:searchable="false"
         settings:controller="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDetailPreferenceController"/>-->
 
-    <!-- tequila version -->
+    <PreferenceScreen
+        android:layout="@layout/axiomos_logo_layout"
+        android:key="axiomos_logo"
+        android:selectable="false"/>
+    <!-- axiomos version -->
     <Preference
         android:key="axiom_version"
         android:title="@string/axiom_version"
