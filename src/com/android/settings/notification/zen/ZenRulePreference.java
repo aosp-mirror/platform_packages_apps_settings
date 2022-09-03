@@ -91,7 +91,9 @@ public class ZenRulePreference extends PrimarySwitchPreference {
 
     @Override
     public void onClick() {
-        mContext.startActivity(mIntent);
+        if (mIntent != null) {
+            mContext.startActivity(mIntent);
+        }
     }
 
     @Override
