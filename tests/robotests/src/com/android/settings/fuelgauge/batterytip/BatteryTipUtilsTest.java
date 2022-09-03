@@ -23,7 +23,6 @@ import static org.mockito.Mockito.when;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
-import com.android.settings.fuelgauge.batterytip.actions.BatteryDefenderAction;
 import com.android.settings.fuelgauge.batterytip.actions.OpenBatterySaverAction;
 import com.android.settings.fuelgauge.batterytip.actions.OpenRestrictAppFragmentAction;
 import com.android.settings.fuelgauge.batterytip.actions.RestrictAppAction;
@@ -105,10 +104,10 @@ public class BatteryTipUtilsTest {
 
     @Test
     public void
-            testGetActionForBatteryTip_typeBatteryDefenderStateNew_returnActionBatteryDefender() {
+            testGetActionForBatteryTip_typeBatteryDefenderStateNew_returnNullAction() {
         when(mBatteryDefenderTip.getState()).thenReturn(BatteryTip.StateType.NEW);
 
         assertThat(BatteryTipUtils.getActionForBatteryTip(mBatteryDefenderTip, mSettingsActivity,
-                mFragment)).isInstanceOf(BatteryDefenderAction.class);
+                mFragment)).isNull();
     }
 }

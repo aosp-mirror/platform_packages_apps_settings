@@ -29,7 +29,6 @@ import androidx.annotation.NonNull;
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
-import com.android.settings.fuelgauge.batterytip.actions.BatteryDefenderAction;
 import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
 import com.android.settings.fuelgauge.batterytip.actions.OpenBatterySaverAction;
 import com.android.settings.fuelgauge.batterytip.actions.OpenRestrictAppFragmentAction;
@@ -107,8 +106,6 @@ public class BatteryTipUtils {
                 }
             case BatteryTip.TipType.REMOVE_APP_RESTRICTION:
                 return new UnrestrictAppAction(settingsActivity, (UnrestrictAppTip) batteryTip);
-            case BatteryTip.TipType.BATTERY_DEFENDER:
-                return new BatteryDefenderAction(settingsActivity);
             default:
                 return null;
         }
