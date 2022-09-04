@@ -44,9 +44,9 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Суспендирани"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Непознато"</string>
     <string name="sdcard_unmount" product="nosdcard" msgid="1816306320988638382">"Одмонтирај USB меморија"</string>
-    <string name="sdcard_unmount" product="default" msgid="8078570285871053815">"Одмонтирај СД картичка"</string>
+    <string name="sdcard_unmount" product="default" msgid="8078570285871053815">"Одмонтирај SD-картичка"</string>
     <string name="sdcard_format" product="nosdcard" msgid="3248760426252305366">"Избриши USB меморија"</string>
-    <string name="sdcard_format" product="default" msgid="3676635435136326182">"Избриши СД картичка"</string>
+    <string name="sdcard_format" product="default" msgid="3676635435136326182">"Избриши SD-картичка"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Преглед"</string>
     <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"Преглед, страница <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> од <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1296835853522566260">"Намалете го или зголемете го текстот на екранот."</string>
@@ -200,19 +200,19 @@
     <string name="sdcard_settings_screen_mass_storage_text" msgid="129059989000252994">"Овозможи масовна меморија на USB"</string>
     <string name="sdcard_settings_total_bytes_label" msgid="5298511430610207103">"Вкупно бајти:"</string>
     <string name="sdcard_settings_not_present_status" product="nosdcard" msgid="6189761476582690998">"USB меморијата не е монтирана."</string>
-    <string name="sdcard_settings_not_present_status" product="default" msgid="6601962586941623203">"Нема СД картичка."</string>
+    <string name="sdcard_settings_not_present_status" product="default" msgid="6601962586941623203">"Нема SD-картичка."</string>
     <string name="sdcard_settings_available_bytes_label" msgid="7721283102767669004">"Расположливи бајти:"</string>
     <string name="sdcard_settings_mass_storage_status" product="nosdcard" msgid="4878190674458263222">"USB како уред за масов. мемор."</string>
-    <string name="sdcard_settings_mass_storage_status" product="default" msgid="8850227049504860012">"СД картичката се користи како уред за масовно меморирање."</string>
+    <string name="sdcard_settings_mass_storage_status" product="default" msgid="8850227049504860012">"SD-картичката се користи како уред за масовно меморирање."</string>
     <string name="sdcard_settings_unmounted_status" product="nosdcard" msgid="1053258530368541571">"Сега е безбедно да ја отстраните USB меморијата."</string>
-    <string name="sdcard_settings_unmounted_status" product="default" msgid="5813940671700138561">"Сега е безбедно да се отстрани СД картичката."</string>
+    <string name="sdcard_settings_unmounted_status" product="default" msgid="5813940671700138561">"Сега е безбедно да се отстрани SD-картичката."</string>
     <string name="sdcard_settings_bad_removal_status" product="nosdcard" msgid="209564009449909311">"USB. отстр. додека во употр.!"</string>
     <string name="sdcard_settings_bad_removal_status" product="default" msgid="6817342973919819392">"SD картичката беше отстранета додека уште беше во употреба!"</string>
     <string name="sdcard_settings_used_bytes_label" msgid="5646588579332741943">"Искористени бајти:"</string>
     <string name="sdcard_settings_scanning_status" product="nosdcard" msgid="8037280964384235345">"Скен. USB мемор. за медиуми..."</string>
-    <string name="sdcard_settings_scanning_status" product="default" msgid="3297316465982471437">"Скенирање СД картичка за медиуми..."</string>
+    <string name="sdcard_settings_scanning_status" product="default" msgid="3297316465982471437">"Скенирање SD-картичка за медиуми..."</string>
     <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3444648373391629840">"USB монтирано само за читање."</string>
-    <string name="sdcard_settings_read_only_status" product="default" msgid="4338796260718910164">"СД картичката е монтирана само за читање."</string>
+    <string name="sdcard_settings_read_only_status" product="default" msgid="4338796260718910164">"SD-картичката е монтирана само за читање."</string>
     <string name="skip_label" msgid="6380034601349015895">"Прескокни"</string>
     <string name="next_label" msgid="1248293387735652187">"Следно"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Јазици"</string>
@@ -358,13 +358,17 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Поставете „Отклучување со лик“"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Користење на лицето за проверка"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Започни"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"Ако функцијата за пристапност „Отклучување со лик“ е исклучена, некои чекори за поставување можеби нема да работат правилно со TalkBack."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Назад"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Продолжи"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Поставување на пристапноста"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Откажи"</string>
@@ -374,7 +378,11 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Отклучување со лице"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Дозволете отклучување со лик"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Користење на лицето за проверка"</string>
-    <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Користете го ликот за отклучување на телефонот, за одобрување купувања или за најавување на апликации."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"Користете го ликот за отклучување на телефонот, за одобрување купувања или за најавување на апликации."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_message (6144528803097608850) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_message (8600301257170347509) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Дозволете му на вашето дете да го користи своето лице за да го отклучи својот телефон"</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Дозволете му на вашето дете да го користи своето лице за да го отклучи својот таблет"</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Дозволете му на вашето дете да го користи своето лице за да го отклучи својот уред"</string>
@@ -386,19 +394,39 @@
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"Центрирајте го лицето во кругот"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Прескокни"</string>
     <string name="face_add_max" msgid="4578405795494514876">"Може да додадете до <xliff:g id="COUNT">%d</xliff:g> лица"</string>
@@ -448,7 +476,11 @@
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Користете го отпечатокот за да го отклучите таблетот или да потврдите дека сте вие, како кога се најавувате на апликации или одобрувате купување."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Користете го отпечатокот за да го отклучите уредот или да потврдите дека сте вие, како кога се најавувате на апликации или одобрувате купување."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Користете го отпечатокот за да го отклучите телефонот или да потврдите дека сте вие, како кога се најавувате на апликации или одобрувате купување."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Дозволете му на вашето дете да го користи отпечатокот за да го отклучи својот телефон или да потврди дека е тоа. Ова се случува кога се најавува во апликации, одобрува купување и друго."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"Дозволете му на вашето дете да го користи отпечатокот за да го отклучи својот телефон или да потврди дека е тоа. Ова се случува кога се најавува во апликации, одобрува купување и друго."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_consent_message (9019236661560266282) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_consent_message (1131446458892188764) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Контролата е во ваши раце"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Вие и вашето дете сте во контрола"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Имајте предвид"</string>
@@ -463,18 +495,42 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Поставувањето отпечаток трае само една или две минути. Ако го прескокнете ова, може да го додадете вашиот отпечаток подоцна во поставките."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Кога ќе ја видите иконава, употребете го отпечатокот за проверка, како кога се најавувате на апликации или одобрувате купување"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Имајте предвид"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Користењето на вашиот отпечаток за отклучување на телефонот може да биде помалку безбеден од силна шема или PIN"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"Користењето на вашиот отпечаток за отклучување на телефонот може да биде помалку безбеден од силна шема или PIN"</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_1 (3024180694355527323) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_1 (150132643609189029) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Како функционира"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"„Отклучувањето со отпечаток на прст“ создава единствен модел од вашиот отпечаток за да потврди дека сте вие. За да го создадете моделов на отпечаток при поставувањето, ќе направите слики од отпечатокот од различни положби."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"„Отклучувањето со отпечаток на прст“ создава единствен модел од отпечатокот на вашето дете за да потврди дека е тоа. За да го создаде моделот на отпечаток за време на поставувањето, детето ќе направи неколку слики од отпечатокот од различни положби."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"При користење на Pixel Imprint, моделот на отпечатокот се ажурира со слики. Сликите што се користат за создавање на моделот на вашиот отпечаток никогаш не се складираат, а самиот модел се складира безбедно во телефонот и никогаш не го напушта. Целата обработка се одвива безбедно во телефонот."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"При користење на Pixel Imprint, моделот на отпечатокот се ажурира со слики. Сликите што се користат за создавање на моделот на отпечатокот на детето никогаш не се складираат, а самиот модел се складира безбедно во телефонот и никогаш не го напушта. Целата обработка се одвива безбедно во телефонот."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Сега може да ги избришете сликите и моделот на отпечатокот или да го исклучите „Отклучување со отпечаток на прст“ во кое било време во „Поставки“. Сликите и моделот на отпечатокот се складирани во телефонот додека не ги избришете."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Вие и вашето дете може да ги избришете сликите или моделот на отпечатокот или да го исклучите „Отклучувањето со отпечаток на прст“ во секое време во „Поставки“. Сликите и моделите на отпечатокот се складираат во телефонот додека не се избришат."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"При користење на Pixel Imprint, моделот на отпечатокот се ажурира со слики. Сликите што се користат за создавање на моделот на вашиот отпечаток никогаш не се складираат, а самиот модел се складира безбедно во телефонот и никогаш не го напушта. Целата обработка се одвива безбедно во телефонот."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (7537431055496985904) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (1392098506793837697) -->
+    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"При користење на Pixel Imprint, моделот на отпечатокот се ажурира со слики. Сликите што се користат за создавање на моделот на отпечатокот на детето никогаш не се складираат, а самиот модел се складира безбедно во телефонот и никогаш не го напушта. Целата обработка се одвива безбедно во телефонот."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3 (530891604602839577) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3 (1735767057693277593) -->
+    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"Сега може да ги избришете сликите и моделот на отпечатокот или да го исклучите „Отклучување со отпечаток на прст“ во кое било време во „Поставки“. Сликите и моделот на отпечатокот се складирани во телефонот додека не ги избришете."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (1577753788807120092) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (5092396314447369758) -->
+    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"Вие и вашето дете може да ги избришете сликите или моделот на отпечатокот или да го исклучите „Отклучувањето со отпечаток на прст“ во секое време во „Поставки“. Сликите и моделите на отпечатокот се складираат во телефонот додека не се избришат."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4 (8752022694697150943) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4 (7234973062059196893) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Телефонот може да се отклучи кога немате таква намера, како на пример, ако некој го допре до вашиот прст."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Таблетот може да се отклучи кога немате таква намера, како на пример, ако некој го допре до вашиот прст."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Уредот може да се отклучи кога немате таква намера, како на пример, ако некој го допре до вашиот прст."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Телефонот на вашето дете може да се отклучи кога детето нема намера за тоа, на пример, ако некој го постави телефонот под неговиот прст."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"Телефонот на вашето дете може да се отклучи кога детето нема намера за тоа, на пример, ако некој го постави телефонот под неговиот прст."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5 (6956407873271178462) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5 (885555477843366483) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"За најдобри резултати, користете заштитник на екранот што е сертифициран со „Создадено за Google“. Со другите заштитници на екрани, отпечатоците може да не функционираат."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"За најдобри резултати, користете заштитник на екранот што е сертифициран со „Создадено за Google“. Со другите заштитници на екрани, отпечатоците на вашето дете може да не функционираат."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
@@ -515,8 +571,16 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"Прескокни"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Откажи"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Допрете го сензорот"</string>
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_title (8327884364635804363) -->
+    <skip />
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Како да го поставите вашиот отпечаток"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Се наоѓа на задната страна на телефонот. Користете го показалецот."</string>
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (3861487880213212565) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (700314363994033893) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (5857063580604638331) -->
+    <skip />
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Сензорот за отпечатоци се наоѓа на вашиот екран. Отпечатокот ќе го снимите на следниот екран."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Започнете"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Движете го прстот низ екранот за да го најдете сензорот. Допрете и задржете ја иконата за отпечаток"</string>
@@ -528,6 +592,8 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Допрете го сензорот"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Ставете го прстот на сензорот и подигнете го откако ќе почувствувате вибрации"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Задржете го отпечатокот рамно на сензорот додека не почувствувате вибрации"</string>
+    <!-- no translation found for security_settings_sfps_enroll_start_message (9054672627477685212) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Допрете и задржете го сензорот за отпечатоци"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Подигнете и допрете повторно"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Уште еднаш"</string>
@@ -537,12 +603,26 @@
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Поставете го врвот на прстот на сензорот"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Поставете го левиот раб од прстот"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Поставете го десниот раб од прстот"</string>
+    <!-- no translation found for security_settings_sfps_enroll_finger_center_title (1320688855767675739) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_fingertip_title (2737520837684516446) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_left_edge_title (9022963735924413343) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_right_edge_title (823106857743394392) -->
+    <skip />
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Поставете го отпечатокот странично на сензорот и задржете, а потоа направете исто со другата страна"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Ова помага за да се сними повеќе од отпечатокот"</string>
+    <!-- no translation found for security_settings_sfps_enroll_progress_a11y_message (6450772721691523736) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_animation_a11y_label (8808819903730940446) -->
+    <skip />
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Отпечатокот е додаден"</string>
+    <!-- no translation found for security_settings_sfps_enroll_finish (3948249010300560451) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Сега може да го користите отпечатокот за да го отклучите телефонот или да потврдите дека сте вие, како кога се најавувате на апликации"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Сега може да го користите отпечатокот за да го отклучите телефонот или да потврдите дека сте вие, како кога се најавувате на апликации"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Сега може да го користите отпечатокот за да го отклучите телефонот или да потврдите дека сте вие, како кога се најавувате на апликации"</string>
@@ -623,7 +703,8 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Додадовте максимален број на отпечатоци"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Не може да се додадат повеќе отпечатоци"</string>
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Да се отстранат сите отпечатоци?"</string>
-    <string name="fingerprint_delete_title" msgid="1469865327307917858">"Отстранете го „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“"</string>
+    <!-- no translation found for fingerprint_delete_title (5412123164503407098) -->
+    <skip />
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Дали сакате да го избришете отпечатоков?"</string>
     <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Ова ги брише сликите од отпечатоците и моделите поврзани со „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ што се складирани на уредот"</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Нема да може да го користите отпечатокот за да го отклучувате телефонот или да потврдувате дека сте вие во апликациите."</string>
@@ -1542,7 +1623,7 @@
     <string name="storage_usb_settings" msgid="7058142934214211583">"Капацитет"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Подесување на меморија"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3858049818577638926">"Одмонтирај USB меморија, погледни расположлива меморија"</string>
-    <string name="storage_settings_summary" product="default" msgid="267557695753980969">"Одмонтирај СД картичка, прикажи расположлива меморија"</string>
+    <string name="storage_settings_summary" product="default" msgid="267557695753980969">"Одмонтирај SD-картичка, прикажи расположлива меморија"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (отвор за SIM %1$d)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"За преглед, изберете зачувана мрежа"</string>
     <string name="status_number" product="tablet" msgid="3597945414666253183">"MDN"</string>
@@ -1593,30 +1674,30 @@
     <string name="memory_media_misc_usage" msgid="7066851245178533269">"Други датотеки"</string>
     <string name="memory_media_cache_usage" msgid="780808666853685824">"Кеширани податоци"</string>
     <string name="sd_eject" product="nosdcard" msgid="6136102589751843304">"Одмонт. споделена мемор."</string>
-    <string name="sd_eject" product="default" msgid="8062832622096296251">"Одмонтирај СД картичка"</string>
+    <string name="sd_eject" product="default" msgid="8062832622096296251">"Одмонтирај SD-картичка"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="6859940774161708871">"Одмонтирај внатр. USB меморија"</string>
-    <string name="sd_eject_summary" product="default" msgid="5151243312587186226">"Одмонтирај СД картичка за да може безбедно да се отстрани"</string>
+    <string name="sd_eject_summary" product="default" msgid="5151243312587186226">"Одмонтирај SD-картичка за да може безбедно да се отстрани"</string>
     <string name="sd_insert_summary" product="nosdcard" msgid="9164545135649775664">"Вметни USB за монтирање"</string>
-    <string name="sd_insert_summary" product="default" msgid="5949168259622002192">"Вметни СД картичка за монтирање"</string>
+    <string name="sd_insert_summary" product="default" msgid="5949168259622002192">"Вметни SD-картичка за монтирање"</string>
     <string name="sd_mount" product="nosdcard" msgid="8305985249945415150">"Монтирај USB меморија"</string>
-    <string name="sd_mount" product="default" msgid="5279813999455776169">"Монтирај СД картичка"</string>
+    <string name="sd_mount" product="default" msgid="5279813999455776169">"Монтирај SD-картичка"</string>
     <string name="sd_mount_summary" product="nosdcard" msgid="2190410240845521205"></string>
     <string name="sd_mount_summary" product="default" msgid="2190410240845521205"></string>
     <string name="sd_format" product="nosdcard" msgid="8657427883364711513">"Избриши USB меморија"</string>
-    <string name="sd_format" product="default" msgid="9085302892248732329">"Избриши СД картичка"</string>
+    <string name="sd_format" product="default" msgid="9085302892248732329">"Избриши SD-картичка"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"Ги брише податоците во внатрешната USB меморија, како што се музика и фотографии"</string>
-    <string name="sd_format_summary" product="default" msgid="60583152211068164">"Ги брише сите податоци на СД картичката, како што се музика или фотографии"</string>
+    <string name="sd_format_summary" product="default" msgid="60583152211068164">"Ги брише сите податоци на SD-картичката, како што се музика или фотографии"</string>
     <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"Функцијата MTP или PTP е активна"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"Одмонтирај USB меморија?"</string>
-    <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"Одмонтирај СД картичка?"</string>
+    <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"Одмонтирај SD-картичка?"</string>
     <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="1212025106709645023">"Ако ја одмонтирате USB меморијата, некои апликации што ги користите ќе запрат и може да се недостапни додека повторно не ја монтирате USB меморијата."</string>
-    <string name="dlg_confirm_unmount_text" product="default" msgid="3887768438615563697">"Ако ја одмонтирате СД картичката, некои од апликациите што ги користите ќе запрат и може да се недостапни, додека повторно не ја монтирате СД картичката."</string>
+    <string name="dlg_confirm_unmount_text" product="default" msgid="3887768438615563697">"Ако ја одмонтирате SD-картичката, некои од апликациите што ги користите ќе запрат и може да се недостапни, додека повторно не ја монтирате SD-картичката."</string>
     <string name="dlg_error_unmount_title" product="nosdcard" msgid="2205587942165199845"></string>
     <string name="dlg_error_unmount_title" product="default" msgid="2205587942165199845"></string>
     <string name="dlg_error_unmount_text" product="nosdcard" msgid="7876201891724279436">"Не може да се одмонтира USB меморијата. Обидете се повторно подоцна."</string>
-    <string name="dlg_error_unmount_text" product="default" msgid="2185659901137961711">"СД картичката не може да се одмонтира. Обидете се повторно подоцна."</string>
+    <string name="dlg_error_unmount_text" product="default" msgid="2185659901137961711">"SD-картичката не може да се одмонтира. Обидете се повторно подоцна."</string>
     <string name="unmount_inform_text" product="nosdcard" msgid="5932607205977999175">"USB меморијата ќе се одмонтира."</string>
-    <string name="unmount_inform_text" product="default" msgid="716578785262713312">"СД картичката ќе се одмонтира."</string>
+    <string name="unmount_inform_text" product="default" msgid="716578785262713312">"SD-картичката ќе се одмонтира."</string>
     <string name="sd_ejecting_title" msgid="1641122369013595273">"Одмонтирање"</string>
     <string name="sd_ejecting_summary" msgid="861928572729341132">"Одмонтирање во тек"</string>
     <string name="storage_low_title" msgid="8002650511493419567">"Капацитетот е речиси полн"</string>
@@ -1801,11 +1882,11 @@
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM-картичките"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Со ова нема да се откаже вашиот пакет за мобилни услуги."</string>
     <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"За да исчистите музика, слики и други податоци на корисникот, "<b>"меморијата"</b>" треба да се избрише."</string>
-    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"За да исчистите музика, слики и други податоци на корисникот, "<b>"СД картичката"</b>" треба да се избрише."</string>
+    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"За да исчистите музика, слики и други податоци на корисникот, "<b>"SD-картичката"</b>" треба да се избрише."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"Избриши USB меморија"</string>
-    <string name="erase_external_storage" product="default" msgid="2610056855012660451">"Избриши СД картичка"</string>
+    <string name="erase_external_storage" product="default" msgid="2610056855012660451">"Избриши SD-картичка"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"Избриши ги сите податоци во внатрешната USB меморија, како што се музика или фотографии"</string>
-    <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"Избриши ги сите податоци на СД картичката, како што се музика или фотографии"</string>
+    <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"Избриши ги сите податоци на SD-картичката, како што се музика или фотографии"</string>
     <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"Избриши ги сите податоци"</string>
     <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"Избриши ги сите податоци"</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"Сите ваши лични информации и преземени апликации ќе се избришат. Ова дејство не може да се врати."</string>
@@ -2087,7 +2168,7 @@
     <string name="external_code_size_label" msgid="7375146402660973743">"Апликација за USB меморија"</string>
     <string name="data_size_label" msgid="7814478940141255234">"Кориснички податоци"</string>
     <string name="external_data_size_label" product="nosdcard" msgid="1054860423004751290">"Податоци на USB меморија"</string>
-    <string name="external_data_size_label" product="default" msgid="3370825186202856353">"СД картичка"</string>
+    <string name="external_data_size_label" product="default" msgid="3370825186202856353">"SD-картичка"</string>
     <string name="uninstall_text" msgid="315764653029060126">"Деинсталирај"</string>
     <string name="uninstall_all_users_text" msgid="5924715251087176474">"Деинсталирај за сите корисници"</string>
     <string name="install_text" msgid="4558333621516996473">"Инсталирај"</string>
@@ -2123,7 +2204,7 @@
     <string name="filter_apps_third_party" msgid="9049447784849114843">"Преземени"</string>
     <string name="filter_apps_running" msgid="535465683273284141">"Активни"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="5140211657134608469">"USB меморија"</string>
-    <string name="filter_apps_onsdcard" product="default" msgid="1774499644768369891">"На СД картичка"</string>
+    <string name="filter_apps_onsdcard" product="default" msgid="1774499644768369891">"На SD-картичка"</string>
     <string name="not_installed" msgid="5074606858798519449">"Не е инсталирано за корисникот"</string>
     <string name="installed" msgid="2837449358488825884">"Инсталирана"</string>
     <string name="no_applications" msgid="985069304755391640">"Нема апликации."</string>
@@ -2146,7 +2227,7 @@
     <string name="move_app_to_internal" product="tablet" msgid="5799782476959541144">"Премести во таблет"</string>
     <string name="move_app_to_internal" product="default" msgid="7395498801589544372">"Премести во телефон"</string>
     <string name="move_app_to_sdcard" product="nosdcard" msgid="1145367822171576972">"Премести во USB меморија"</string>
-    <string name="move_app_to_sdcard" product="default" msgid="7161667212614143767">"Премести на СД картичка"</string>
+    <string name="move_app_to_sdcard" product="default" msgid="7161667212614143767">"Премести на SD-картичка"</string>
     <string name="another_migration_already_in_progress" msgid="6550546307856052261">"Друга миграција е веќе во тек."</string>
     <string name="insufficient_storage" msgid="8115088042669030558">"Нема доволно меморија."</string>
     <string name="does_not_exist" msgid="6499163879348776120">"Апликацијата не постои."</string>
@@ -2772,8 +2853,11 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Поголемо користење на батеријата"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Прегледајте ги апликациите со најголемо користење"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Полнењето е паузирано"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Се заштитува батеријата за да се продолжи животниот век на батеријата\nДопрете за да дознаете повеќе"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_summary (5254922316684499816) -->
+    <skip />
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_sec_button_content_description (5648444926736883551) -->
     <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Продолжи со полнење"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"При одредени услови, како високи температури и долги периоди на полнење, полнењето може да се ограничи на <xliff:g id="PERCENT">%1$s</xliff:g> за да се зачува состојбата на батеријата.\n\nКога таквите услови ќе завршат, вашиот телефон автоматски ќе се полни нормално."</string>
@@ -3005,10 +3089,7 @@
     <skip />
     <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
     <skip />
-    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"Податоците за користењето на батеријата ќе бидат достапни откако ќе го користите телефонот неколку часа"</string>
-    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
-    <skip />
-    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <!-- no translation found for battery_usage_screen_footer_empty (3301144846133808193) -->
     <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Графикон за користење на батеријата"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Графикон за користење на батеријата по денови"</string>
@@ -3081,7 +3162,7 @@
     <string name="credentials_title" msgid="7535942196886123656">"Складирање акредитиви"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Инсталирајте сертификат"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Инсталирајте сертификати од мемориски уред"</string>
-    <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"Инсталирај сертификати од СД картичка"</string>
+    <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"Инсталирај сертификати од SD-картичка"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Бришење акредитиви"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"Отстрани ги сите сертификати"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"Доверливи акредитиви"</string>
