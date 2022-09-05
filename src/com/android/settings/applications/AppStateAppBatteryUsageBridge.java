@@ -31,10 +31,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * Class for bridging the Battery optimization information to ApplicationState.
+ * Class for bridging the app battery usage information to ApplicationState.
  */
-public class AppStateBatteryOptimizationBridge extends AppStateBaseBridge {
-    private static final String TAG = AppStateBatteryOptimizationBridge.class.getSimpleName();
+public class AppStateAppBatteryUsageBridge extends AppStateBaseBridge {
+    private static final String TAG = AppStateAppBatteryUsageBridge.class.getSimpleName();
     static final boolean DEBUG = Build.IS_DEBUGGABLE;
 
     private final Context mContext;
@@ -58,7 +58,7 @@ public class AppStateBatteryOptimizationBridge extends AppStateBaseBridge {
     @interface OptimizationMode {
     }
 
-    public AppStateBatteryOptimizationBridge(
+    public AppStateAppBatteryUsageBridge(
             Context context, ApplicationsState appState, Callback callback) {
         super(appState, callback);
         mContext = context;
@@ -68,7 +68,7 @@ public class AppStateBatteryOptimizationBridge extends AppStateBaseBridge {
 
     @Override
     protected void updateExtraInfo(AppEntry app, String pkg, int uid) {
-        app.extraInfo = getAppBatteryOptimizationState(pkg, uid);
+        app.extraInfo = getAppBatteryUsageState(pkg, uid);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class AppStateBatteryOptimizationBridge extends AppStateBaseBridge {
         }
     }
 
-    protected Object getAppBatteryOptimizationState(String pkg, int uid) {
+    protected Object getAppBatteryUsageState(String pkg, int uid) {
         // Restricted = AppOpsManager.MODE_IGNORED + !allowListed
         // Unrestricted = AppOpsManager.MODE_ALLOWED + allowListed
         // Optimized = AppOpsManager.MODE_ALLOWED + !allowListed
@@ -107,17 +107,17 @@ public class AppStateBatteryOptimizationBridge extends AppStateBaseBridge {
         if (DEBUG) {
             Log.d(TAG, "Pkg: " + pkg + ", mode: " + modeName);
         }
-        return new BatteryOptimizationDetails(mode);
+        return new AppBatteryUsageDetails(mode);
     }
 
     @OptimizationMode
-    private static int getBatteryOptimizationDetailsMode(AppEntry entry) {
+    private static int getAppBatteryUsageDetailsMode(AppEntry entry) {
         if (entry == null || entry.extraInfo == null) {
             return MODE_UNKNOWN;
         }
 
-        return entry.extraInfo instanceof BatteryOptimizationDetails
-                ? ((BatteryOptimizationDetails) entry.extraInfo).mMode
+        return entry.extraInfo instanceof AppBatteryUsageDetails
+                ? ((AppBatteryUsageDetails) entry.extraInfo).mMode
                 : MODE_UNKNOWN;
     }
 
@@ -132,7 +132,7 @@ public class AppStateBatteryOptimizationBridge extends AppStateBaseBridge {
 
                 @Override
                 public boolean filterApp(AppEntry info) {
-                    return getBatteryOptimizationDetailsMode(info) == MODE_UNRESTRICTED;
+                    return getAppBatteryUsageDetailsMode(info) == MODE_UNRESTRICTED;
                 }
             };
 
@@ -147,7 +147,7 @@ public class AppStateBatteryOptimizationBridge extends AppStateBaseBridge {
 
                 @Override
                 public boolean filterApp(AppEntry info) {
-                    return getBatteryOptimizationDetailsMode(info) == MODE_OPTIMIZED;
+                    return getAppBatteryUsageDetailsMode(info) == MODE_OPTIMIZED;
                 }
             };
 
@@ -162,18 +162,18 @@ public class AppStateBatteryOptimizationBridge extends AppStateBaseBridge {
 
                 @Override
                 public boolean filterApp(AppEntry info) {
-                    return getBatteryOptimizationDetailsMode(info) == MODE_RESTRICTED;
+                    return getAppBatteryUsageDetailsMode(info) == MODE_RESTRICTED;
                 }
             };
 
     /**
-     * Extra details for battery optimization app data.
+     * Extra details for app battery usage data.
      */
-    static final class BatteryOptimizationDetails {
+    static final class AppBatteryUsageDetails {
         @OptimizationMode
         int mMode;
 
-        BatteryOptimizationDetails(@OptimizationMode int mode) {
+        AppBatteryUsageDetails(@OptimizationMode int mode) {
             mMode = mode;
         }
     }
