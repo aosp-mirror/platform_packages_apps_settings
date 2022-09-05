@@ -216,7 +216,7 @@
     <string name="skip_label" msgid="6380034601349015895">"略過"</string>
     <string name="next_label" msgid="1248293387735652187">"下一步"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"語言"</string>
-    <string name="language_picker_category_title" msgid="1792199453060454565">"偏好語言順序"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"偏好語言次序"</string>
     <string name="desc_current_default_language" msgid="1901157141663662859">"系統語言"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"移除"</string>
     <string name="add_a_language" msgid="2126220398077503271">"加入語言"</string>
@@ -232,7 +232,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"「設定」中不提供此應用程式的語言選擇。"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"可用的語言可能與應用程式支援的語言不同，部分應用程式可能不支援此設定。"</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"這裡只會顯示支援語言選擇的應用程式。"</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"你的系統、應用程式和網站會使用偏好語言中第一個支援的語言。"</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"您的系統、應用程式和網站會使用偏好語言中第一個支援的語言。"</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"如要為各應用程式選取語言，請前往應用程式語言設定。"</string>
     <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"進一步瞭解語言"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
@@ -242,7 +242,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"文字將以其他語言顯示。"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"無法移除所有語言"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"請至少保留一種偏好語言"</string>
-    <string name="locale_not_translated" msgid="3071618135527110152">"無法設為系統語言"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"無法設定為系統語言"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"向上移"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"向下移"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"移至頂端"</string>
@@ -358,13 +358,17 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"設定「面孔解鎖」"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"使用面孔驗證"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"開始"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"如果關閉「面孔解鎖」無障礙功能，可能無法透過 TalkBack 順利完成部分設定步驟。"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"返回"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"繼續設定"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"使用無障礙功能設定"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"取消"</string>
@@ -374,7 +378,11 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"使用面孔解鎖"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"允許使用「面孔解鎖」"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"使用面孔驗證"</string>
-    <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"使用面孔解鎖手機、授權購物或登入應用程式。"</string>
+    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"使用面孔解鎖手機、授權購物或登入應用程式。"</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_message (6144528803097608850) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_message (8600301257170347509) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"允許子女使用面孔解鎖手機"</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"允許子女使用面孔解鎖平板電腦"</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"允許子女使用面孔解鎖裝置"</string>
@@ -386,19 +394,39 @@
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"將您的面孔置於圓圈中心"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"略過"</string>
     <string name="face_add_max" msgid="4578405795494514876">"您可以加入最多 <xliff:g id="COUNT">%d</xliff:g> 張面孔"</string>
@@ -448,7 +476,11 @@
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"使用指紋解鎖平板電腦或驗證身分，例如用來登入應用程式或核准購買交易"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"使用指紋解鎖裝置或驗證身分，例如用來登入應用程式或核准購買交易"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"使用指紋解鎖手機或驗證身分，例如用來登入應用程式或核准購買交易"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"允許子女使用指紋解鎖手機或驗證身分，例如登入應用程式、核准購買交易等。"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"允許子女使用指紋解鎖手機或驗證身分，例如登入應用程式、核准購買交易等。"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_consent_message (9019236661560266282) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_consent_message (1131446458892188764) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"一切由您掌控"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"一切由您和子女做主"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"注意事項"</string>
@@ -463,18 +495,42 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"指紋設定程序只需一至兩分鐘。如略過此步驟，您可於稍後在設定中加入指紋。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"看到此圖示時，請使用指紋驗證身分，以便執行特定操作，例如登入應用程式或核准購買交易"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"注意事項"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"相對於複雜的上鎖圖案或 PIN，指紋解鎖的安全性較低"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"相對於複雜的上鎖圖案或 PIN，指紋解鎖的安全性較低"</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_1 (3024180694355527323) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_1 (150132643609189029) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"運作方式"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"「指紋解鎖」功能會為您建立獨一無二的指紋模型，以便系統驗證您的身分。在設定期間，您必須拍攝指紋的各個部位，才能建立這個指紋模型。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"「指紋解鎖」功能會為您的子女建立獨一無二的指紋模型，以便系統驗證其身分。在設定期間，他們必須拍攝指紋的各個部位，才能建立這個指紋模型。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"使用 Pixel Imprint 時，系統會使用圖片來更新您的指紋模型。系統不會儲存您用來建立指紋模型的圖片，只會將指紋模型安全地存放在手機上，但絕不會傳送到手機以外的地方。整個處理過程都會安全地在手機上進行。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"使用 Pixel Imprint 時，系統會使用圖片來更新其指紋模型。系統不會儲存子女用來建立指紋模型的圖片，只會將指紋模型安全地存放在手機上，但絕不會傳送到手機以外的地方。整個處理過程都會安全地在手機上進行。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"您隨時可以前往「設定」刪除指紋圖像和模型，或停用指紋解鎖功能。指紋圖像和模型會儲存在手機上，直到您刪除為止。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"您和子女可隨時前往「設定」刪除指紋圖片和模型或停用「指紋解鎖」功能。指紋圖片和模型會儲存在手機上，直至其刪除為止。"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"使用 Pixel Imprint 時，系統會使用圖片來更新您的指紋模型。系統不會儲存您用來建立指紋模型的圖片，只會將指紋模型安全地存放在手機上，但絕不會傳送到手機以外的地方。整個處理過程都會安全地在手機上進行。"</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (7537431055496985904) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (1392098506793837697) -->
+    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"使用 Pixel Imprint 時，系統會使用圖片來更新其指紋模型。系統不會儲存子女用來建立指紋模型的圖片，只會將指紋模型安全地存放在手機上，但絕不會傳送到手機以外的地方。整個處理過程都會安全地在手機上進行。"</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3 (530891604602839577) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3 (1735767057693277593) -->
+    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"您隨時可以前往「設定」刪除指紋圖像和模型，或停用指紋解鎖功能。指紋圖像和模型會儲存在手機上，直到您刪除為止。"</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (1577753788807120092) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (5092396314447369758) -->
+    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"您和子女可隨時前往「設定」刪除指紋圖片和模型或停用「指紋解鎖」功能。指紋圖片和模型會儲存在手機上，直至其刪除為止。"</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4 (8752022694697150943) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4 (7234973062059196893) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"您的手機有可能會意外解鎖，例如有人讓您的手指觸碰到手機。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"您的平板電腦有可能會意外解鎖，例如有人讓您的手指觸碰到平板電腦。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"您的裝置有可能會意外解鎖，例如有人讓您的手指觸碰到裝置。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"您子女的手機有可能會意外解鎖，例如有人讓其手指觸碰到手機。"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"您子女的手機有可能會意外解鎖，例如有人讓其手指觸碰到手機。"</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5 (6956407873271178462) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5 (885555477843366483) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"為獲得最佳效果，請使用已通過 Made for Google 認證的螢幕保護貼。如果使用其他螢幕保護貼，系統可能無法辨識您的指紋。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"為獲得最佳效果，請使用已通過 Made for Google 認證的螢幕保護貼。如果使用其他螢幕保護貼，系統可能無法辨識子女的指紋。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
@@ -515,8 +571,16 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"略過"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"取消"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"輕觸感應器"</string>
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_title (8327884364635804363) -->
+    <skip />
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"如何設定指紋"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"指紋感應器在手機背面。請使用食指輕觸感應器。"</string>
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (3861487880213212565) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (700314363994033893) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (5857063580604638331) -->
+    <skip />
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"指紋感應器位於螢幕上。請在下一個畫面擷取指紋。"</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"開始"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"請在螢幕上移動手指，找出感應器的所在位置。按住指紋感應器。"</string>
@@ -528,6 +592,8 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"輕觸感應器"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"請將手指放在感應器上，並在感到震動時移開"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"請將手指平放在感應器上，直至感到震動為止"</string>
+    <!-- no translation found for security_settings_sfps_enroll_start_message (9054672627477685212) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"按住指紋感應器"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"移開手指，然後再次輕觸"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"再試一次"</string>
@@ -537,12 +603,26 @@
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"將指尖放在感應器上"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"將手指左側邊緣放到感應器上"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"將手指右側邊緣放到感應器上"</string>
+    <!-- no translation found for security_settings_sfps_enroll_finger_center_title (1320688855767675739) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_fingertip_title (2737520837684516446) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_left_edge_title (9022963735924413343) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_right_edge_title (823106857743394392) -->
+    <skip />
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"將指紋一側放在感應器上並按住，然後轉換另一側"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"此操作可擷取您更完整的指紋"</string>
+    <!-- no translation found for security_settings_sfps_enroll_progress_a11y_message (6450772721691523736) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_animation_a11y_label (8808819903730940446) -->
+    <skip />
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"已加入指紋"</string>
+    <!-- no translation found for security_settings_sfps_enroll_finish (3948249010300560451) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"現在可使用指紋解鎖平板電腦或驗證身分，例如用來登入應用程式"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"現在可使用指紋解鎖裝置或驗證身分，例如用來登入應用程式"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"現在可使用指紋解鎖手機或驗證身分，例如用來登入應用程式"</string>
@@ -623,7 +703,8 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"您加入指紋的數目已達上限"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"無法加入更多指紋"</string>
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"確定移除所有指紋？"</string>
-    <string name="fingerprint_delete_title" msgid="1469865327307917858">"移除「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」"</string>
+    <!-- no translation found for fingerprint_delete_title (5412123164503407098) -->
+    <skip />
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"要刪除這個指紋嗎？"</string>
     <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"此操作會刪除與裝置上儲存的「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」相關聯的指紋圖像和模型"</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"您將無法使用指紋解鎖或在應用程式中驗證您的身分。"</string>
@@ -1657,7 +1738,7 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"重新命名儲存裝置"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"已安全卸載此 <xliff:g id="NAME_0">^1</xliff:g>，但仍可使用。\n\n如要使用此 <xliff:g id="NAME_1">^1</xliff:g>，您必須先將它連接。"</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"此 <xliff:g id="NAME_0">^1</xliff:g> 已受損。\n\n如要使用此 <xliff:g id="NAME_1">^1</xliff:g>，您必須先完成設定。"</string>
-    <string name="storage_internal_format_details" msgid="2399034372813686846">"您可以將此 SD 卡格式化來儲存相片、影片、音樂及其他檔案，然後在其他裝置上存取。\n\n"<b>"系統會清除此 SD 卡 上的所有資料。"</b>" \n\n"<b>"格式化事前準備"</b>" \n\n"<b>"備份相片和其他媒體"</b>" \n將您的媒體檔案移至此裝罝的其他儲存空間，或使用 USB 連接線將這些檔案轉移至電腦。\n\n"<b>"備份應用程式"</b>" \n系統會將儲存在此 <xliff:g id="NAME">^1</xliff:g>的所有應用程式解除安裝，同時清除相關資料。如要保留這些應用程式，請將應用程式移至此裝置的其他儲存空間。"</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"您可以將此 SD 卡格式化來儲存相片、影片、音樂及其他檔案，然後在其他裝置上存取。\n\n"<b>"系統會清除此 SD 卡上的所有資料。"</b>" \n\n"<b>"格式化事前準備"</b>" \n\n"<b>"備份相片和其他媒體"</b>" \n將您的媒體檔案移至此裝罝的其他儲存空間，或使用 USB 連接線將這些檔案轉移至電腦。\n\n"<b>"備份應用程式"</b>" \n系統會將儲存在此 <xliff:g id="NAME">^1</xliff:g>的所有應用程式解除安裝，同時清除相關資料。如要保留這些應用程式，請將應用程式移至此裝置的其他儲存空間。"</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"當你移除此<xliff:g id="NAME_0">^1</xliff:g>時，已儲存的應用程式將停止運作，而媒體檔案在再次插入裝置前將不能播放。"</b>" \n\n此<xliff:g id="NAME_1">^1</xliff:g>經格式化後只能用於這部裝置。其他裝置將不能存取。"</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"如需使用儲存在<xliff:g id="NAME">^1</xliff:g>內的應用程式、相片或資料，請重新插入。\n\n如果無法使用裝置，可選擇忘記此儲存空間。\n\n如果您選擇忘記儲存空間，裝置上的所有資料將被永久刪除。\n\n您可以稍後重新安裝應用程式，但儲存在此裝置的相關資料將被刪除。"</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"要忘記 <xliff:g id="NAME">^1</xliff:g> 嗎？"</string>
@@ -1705,11 +1786,11 @@
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"格式化"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"或"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"將 SD 卡格式化為外置儲存空間"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"儲存相片、影片、音樂及其他檔案，然後在其他裝置上存取。&lt;a href=https://support.google.com/android/answer/12153449&gt;進一步瞭解如何設定 SD 卡&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"儲存相片、影片、音樂及其他檔案，以便在其他裝置上存取。&lt;a href=https://support.google.com/android/answer/12153449&gt;進一步瞭解如何設定 SD 卡&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"格式化"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"稍後設定"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"要將此 <xliff:g id="NAME">^1</xliff:g>格式化嗎？"</string>
-    <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"此 <xliff:g id="NAME_0">^1</xliff:g>必須經過格式化才能儲存應用程式、檔案和媒體。\n\n格式化會清除 <xliff:g id="NAME_1">^2</xliff:g>上的現有內容。為免內容遺失，請將其中的內容備份至其他 <xliff:g id="NAME_2">^3</xliff:g>或裝置上。"</string>
+    <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"此 <xliff:g id="NAME_0">^1</xliff:g>必須經過格式化才能儲存應用程式、檔案和媒體。\n\n格式化會清除 <xliff:g id="NAME_1">^2</xliff:g>上的現有內容。為免內容遺失，請將內容備份至其他 <xliff:g id="NAME_2">^3</xliff:g>或裝置。"</string>
     <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"此 <xliff:g id="NAME_0">^1</xliff:g>必須經過格式化才能儲存相片、影片、音樂及其他檔案。\n\n格式化會清除 <xliff:g id="NAME_1">^2</xliff:g>上的現有內容。為免內容遺失，請將其中的內容備份至其他 <xliff:g id="NAME_2">^3</xliff:g>或裝置上。"</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"將 <xliff:g id="NAME">^1</xliff:g>格式化"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"要將內容移至 <xliff:g id="NAME">^1</xliff:g>嗎？"</string>
@@ -2773,8 +2854,11 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"查看用電量較高的應用程式"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看用電量最高的應用程式"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"已暫停充電"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"保護電池以延長電池壽命\n輕按即可瞭解詳情"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_summary (5254922316684499816) -->
+    <skip />
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_sec_button_content_description (5648444926736883551) -->
     <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"繼續充電"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"在特定情況下 (例如高溫和長時間充電)，充電可能會限於 <xliff:g id="PERCENT">%1$s</xliff:g> 以延長電池壽命。\n\n當這些情況結束時，手機將會自動正常充電。"</string>
@@ -3006,10 +3090,7 @@
     <skip />
     <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
     <skip />
-    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"手機使用數小時後，才會顯示電池用量資料"</string>
-    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
-    <skip />
-    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <!-- no translation found for battery_usage_screen_footer_empty (3301144846133808193) -->
     <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"電池用量圖表"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"每日電池用量圖表"</string>

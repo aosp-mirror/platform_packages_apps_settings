@@ -216,19 +216,15 @@
     <string name="skip_label" msgid="6380034601349015895">"건너뛰기"</string>
     <string name="next_label" msgid="1248293387735652187">"다음"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"언어"</string>
-    <!-- no translation found for language_picker_category_title (1792199453060454565) -->
-    <skip />
-    <!-- no translation found for desc_current_default_language (1901157141663662859) -->
-    <skip />
+    <string name="language_picker_category_title" msgid="1792199453060454565">"선호 언어 순서"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"시스템 언어"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"삭제"</string>
     <string name="add_a_language" msgid="2126220398077503271">"언어 추가"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"언어"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"기본 언어"</string>
-    <!-- no translation found for app_locales_picker_menu_title (7617427959223831373) -->
-    <skip />
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"앱 언어"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"각 앱의 언어 설정"</string>
-    <!-- no translation found for app_locale_picker_title (2431448962911301366) -->
-    <skip />
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"앱 언어"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"추천 언어"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"모든 언어"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"시스템 언어"</string>
@@ -236,12 +232,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"설정에서 이 앱의 언어를 선택할 수 없습니다."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"언어가 앱에서 사용 가능한 언어와 다를 수 있습니다. 일부 앱에서는 이 설정을 지원하지 않을 수도 있습니다."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"언어 선택을 지원하는 앱만 여기에 표시됩니다."</string>
-    <!-- no translation found for desc_introduction_of_language_picker (1038423471887102449) -->
-    <skip />
-    <!-- no translation found for desc_notice_of_language_picker (3449290526457925447) -->
-    <skip />
-    <!-- no translation found for desc_locale_helper_footer_general (6967183342596405116) -->
-    <skip />
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"시스템, 앱, 웹사이트는 선호하는 언어 중 최우선 지원 언어를 사용합니다."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"앱별로 언어를 선택하려면 앱 언어 설정으로 이동하세요."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"언어 자세히 알아보기"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">선택한 언어를 삭제하시겠습니까?</item>
       <item quantity="one">선택한 언어를 삭제하시겠습니까?</item>
@@ -249,8 +242,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"텍스트가 다른 언어로 표시됩니다."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"모든 언어를 삭제할 수는 없습니다."</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"기본 언어를 하나 이상 유지해야 합니다."</string>
-    <!-- no translation found for locale_not_translated (3071618135527110152) -->
-    <skip />
+    <string name="locale_not_translated" msgid="3071618135527110152">"시스템 언어로 사용할 수 없음"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"위로 이동"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"아래로 이동"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"맨 위로 이동"</string>
@@ -366,13 +358,17 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"얼굴 인식 잠금 해제 설정"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"얼굴로 인증"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"시작"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"접근성 얼굴 인식 잠금 해제가 사용 중지되면 TalkBack 사용 시 일부 설정 단계가 제대로 작동하지 않을 수 있습니다."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"뒤로"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"설정 계속"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"접근성 설정 사용"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"취소"</string>
@@ -382,7 +378,11 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"얼굴로 잠금 해제"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"얼굴 인식 잠금 해제 허용"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"얼굴로 인증"</string>
-    <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"얼굴로 휴대전화를 잠금 해제하거나 구매를 승인하거나 앱에 로그인하세요."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"얼굴로 휴대전화를 잠금 해제하거나 구매를 승인하거나 앱에 로그인하세요."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_message (6144528803097608850) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_message (8600301257170347509) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"자녀가 얼굴 인식을 사용하여 휴대전화를 잠금 해제할 수 있도록 허용합니다."</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"자녀가 얼굴 인식을 사용하여 태블릿을 잠금 해제할 수 있도록 허용합니다."</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"자녀가 얼굴 인식을 사용하여 기기를 잠금 해제할 수 있도록 허용합니다."</string>
@@ -394,19 +394,39 @@
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"얼굴을 동그라미 중앙에 맞춰주세요"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"건너뛰기"</string>
     <string name="face_add_max" msgid="4578405795494514876">"얼굴을 <xliff:g id="COUNT">%d</xliff:g>개까지 추가할 수 있습니다."</string>
@@ -456,7 +476,11 @@
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"지문을 사용하여 태블릿을 잠금 해제하거나 앱 로그인 또는 구매 승인 등을 위해 본인을 인증하세요."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"기기를 잠금 해제하거나 앱 로그인 또는 구매 승인 등을 위해 본인을 인증할 때 지문을 사용하세요."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"지문을 사용하여 휴대전화를 잠금 해제하거나 앱 로그인 또는 구매 승인 등을 위해 본인을 인증하세요."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"자녀가 지문을 사용해 휴대전화를 잠금 해제하거나 본인을 인증할 수 있도록 허용합니다. 본인 인증은 앱에 로그인하거나 구매를 승인하는 등의 경우에 이뤄집니다."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"자녀가 지문을 사용해 휴대전화를 잠금 해제하거나 본인을 인증할 수 있도록 허용합니다. 본인 인증은 앱에 로그인하거나 구매를 승인하는 등의 경우에 이뤄집니다."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_consent_message (9019236661560266282) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_consent_message (1131446458892188764) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"한 곳에서 편리하게 계정 관리"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"부모와 자녀가 함께 설정"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"주의사항"</string>
@@ -471,18 +495,42 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"지문 설정에는 1~2분 정도밖에 걸리지 않습니다. 이 과정을 건너뛰면 나중에 설정에서 지문을 추가할 수 있습니다."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"이 아이콘이 표시되면 앱 로그인 또는 구매 승인과 같이 사용자 인증이 필요할 때 지문을 사용하세요"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"주의사항"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"지문을 통한 휴대전화 잠금 해제는 강력한 패턴 또는 PIN보다 보안이 취약할 수 있습니다."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"지문을 통한 휴대전화 잠금 해제는 강력한 패턴 또는 PIN보다 보안이 취약할 수 있습니다."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_1 (3024180694355527323) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_1 (150132643609189029) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"작동 방식"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"지문 잠금 해제를 사용하면 본인 인증을 위한 고유한 지문 모델이 생성됩니다. 설정 중 지문 모델을 만들기 위해 다양한 위치에서 지문 이미지를 촬영합니다."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"지문 잠금 해제를 사용하면 자녀의 본인 인증을 위한 고유한 지문 모델이 생성됩니다. 설정 중 지문 모델을 만들기 위해 다양한 위치에서 자녀의 지문 이미지를 촬영합니다."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"Pixel Imprint를 사용하면 지문 모델을 업데이트하는 데 이미지가 활용됩니다. 지문 모델을 만드는 데 사용된 이미지는 저장되지 않으나 지문 모델은 휴대전화에 안전하게 저장되며 기기 외부로 전송되지 않습니다. 모든 처리는 휴대전화 내에서 안전하게 이뤄집니다."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"자녀가 Pixel Imprint를 사용하면 자녀의 지문 모델을 업데이트하는 데 이미지가 활용됩니다. 자녀의 지문 모델을 만드는 데 사용된 이미지는 저장되지 않으나 지문 모델은 휴대전화에 안전하게 저장되며 기기 외부로 전송되지 않습니다. 모든 처리는 휴대전화 내에서 안전하게 이뤄집니다."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"언제든지 설정에서 지문 이미지와 모델을 삭제하거나 지문 잠금 해제를 사용 중지할 수 있습니다. 지문 이미지와 모델은 삭제하기 전까지 휴대전화에 저장됩니다."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"부모와 자녀가 언제든지 설정에서 자녀의 지문 이미지와 모델을 삭제하거나 지문 잠금 해제를 사용 중지할 수 있습니다. 지문 이미지와 모델은 삭제하기 전까지 휴대전화에 저장됩니다."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"Pixel Imprint를 사용하면 지문 모델을 업데이트하는 데 이미지가 활용됩니다. 지문 모델을 만드는 데 사용된 이미지는 저장되지 않으나 지문 모델은 휴대전화에 안전하게 저장되며 기기 외부로 전송되지 않습니다. 모든 처리는 휴대전화 내에서 안전하게 이뤄집니다."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (7537431055496985904) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (1392098506793837697) -->
+    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"자녀가 Pixel Imprint를 사용하면 자녀의 지문 모델을 업데이트하는 데 이미지가 활용됩니다. 자녀의 지문 모델을 만드는 데 사용된 이미지는 저장되지 않으나 지문 모델은 휴대전화에 안전하게 저장되며 기기 외부로 전송되지 않습니다. 모든 처리는 휴대전화 내에서 안전하게 이뤄집니다."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3 (530891604602839577) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3 (1735767057693277593) -->
+    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"언제든지 설정에서 지문 이미지와 모델을 삭제하거나 지문 잠금 해제를 사용 중지할 수 있습니다. 지문 이미지와 모델은 삭제하기 전까지 휴대전화에 저장됩니다."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (1577753788807120092) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (5092396314447369758) -->
+    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"부모와 자녀가 언제든지 설정에서 자녀의 지문 이미지와 모델을 삭제하거나 지문 잠금 해제를 사용 중지할 수 있습니다. 지문 이미지와 모델은 삭제하기 전까지 휴대전화에 저장됩니다."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4 (8752022694697150943) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4 (7234973062059196893) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"다른 사람이 내 손가락에 휴대전화를 가져다 대는 등 내가 의도하지 않은 상황에서 휴대전화 잠금을 해제할 수 있습니다."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"다른 사람이 내 손가락에 태블릿을 가져다 대는 등 내가 의도하지 않은 상황에서 태블릿 잠금이 해제될 수 있습니다."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"다른 사람이 내 손가락에 기기를 가져다 대는 등 내가 의도하지 않은 상황에서 기기 잠금이 해제될 수도 있습니다."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"다른 사람이 자녀의 손가락에 휴대전화를 가져다 대는 등 자녀가 의도하지 않은 상황에서 자녀의 휴대전화 잠금을 해제할 수 있습니다."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"다른 사람이 자녀의 손가락에 휴대전화를 가져다 대는 등 자녀가 의도하지 않은 상황에서 자녀의 휴대전화 잠금을 해제할 수 있습니다."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5 (6956407873271178462) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5 (885555477843366483) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"최상의 결과를 얻으려면 Made For Google 인증 화면 보호재를 사용하세요. 다른 화면 보호재를 사용할 경우 지문이 인식되지 않을 수 있습니다."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"최상의 결과를 얻으려면 Made For Google 인증 화면 보호재를 사용하세요. 다른 화면 보호재를 사용할 경우 자녀의 지문이 인식되지 않을 수 있습니다."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
@@ -523,8 +571,16 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"건너뛰기"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"취소"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"센서 터치"</string>
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_title (8327884364635804363) -->
+    <skip />
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"지문 인식 설정 방법"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"휴대전화 뒷면에 있습니다. 검지를 사용하세요."</string>
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (3861487880213212565) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (700314363994033893) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (5857063580604638331) -->
+    <skip />
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"지문 센서는 화면에 있습니다. 다음 화면에서 지문을 등록하세요."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"시작"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"센서를 찾으려면 화면에서 손가락을 움직이세요. 지문 센서를 길게 터치하세요."</string>
@@ -536,6 +592,8 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"센서 터치"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"센서에 손가락을 올리고 진동이 느껴지면 떼세요."</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"지문이 센서에 완전히 닿도록 손가락을 대고 진동이 느껴질 때까지 기다리세요."</string>
+    <!-- no translation found for security_settings_sfps_enroll_start_message (9054672627477685212) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"지문 센서를 길게 터치하세요"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"손가락을 뗀 후 다시 터치하세요"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"한 번 더 하세요"</string>
@@ -545,12 +603,26 @@
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"센서에 손가락 끝부분을 올리세요"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"손가락의 왼쪽 가장자리를 올리세요"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"손가락의 오른쪽 가장자리를 올리세요"</string>
+    <!-- no translation found for security_settings_sfps_enroll_finger_center_title (1320688855767675739) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_fingertip_title (2737520837684516446) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_left_edge_title (9022963735924413343) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_right_edge_title (823106857743394392) -->
+    <skip />
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"센서에 손가락 한쪽을 올리고 잠시 기다린 후에 다른 쪽을 올리세요"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"이렇게 하면 지문을 더 많이 캡처할 수 있습니다"</string>
+    <!-- no translation found for security_settings_sfps_enroll_progress_a11y_message (6450772721691523736) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_animation_a11y_label (8808819903730940446) -->
+    <skip />
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"지문 추가됨"</string>
+    <!-- no translation found for security_settings_sfps_enroll_finish (3948249010300560451) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"이제 지문을 사용하여 태블릿을 잠금 해제하거나 앱 로그인 등을 위해 본인을 인증할 수 있습니다."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"이제 지문을 사용하여 기기를 잠금 해제하거나 앱 로그인 등을 위해 본인을 인증할 수 있습니다."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"이제 지문을 사용하여 휴대전화를 잠금 해제하거나 앱 로그인 등을 위해 본인을 인증할 수 있습니다."</string>
@@ -631,7 +703,8 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"최대 개수의 지문을 추가했습니다."</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"지문을 추가할 수 없습니다."</string>
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"모든 지문을 삭제할까요?"</string>
-    <string name="fingerprint_delete_title" msgid="1469865327307917858">"\'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' 삭제"</string>
+    <!-- no translation found for fingerprint_delete_title (5412123164503407098) -->
+    <skip />
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"이 지문을 삭제하시겠습니까?"</string>
     <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"기기에 저장된 \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' 지문과 관련된 지문 이미지와 모델이 삭제됩니다."</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"지문을 사용하여 휴대전화를 잠금 해제하거나 앱에서 본인을 인증할 수 없게 됩니다."</string>
@@ -1716,7 +1789,7 @@
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"포맷"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"나중에 설정"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"<xliff:g id="NAME">^1</xliff:g>을(를) 포맷하시겠습니까?"</string>
-    <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"앱, 파일, 미디어를 저장하려면 <xliff:g id="NAME_0">^1</xliff:g>을(를) 포맷해야 합니다. \n\n포맷하면 <xliff:g id="NAME_1">^2</xliff:g>에 저장된 기존 콘텐츠가 삭제됩니다. 콘텐츠가 삭제되지 않게 하려면 다른 <xliff:g id="NAME_2">^3</xliff:g> 또는 기기에 백업하세요."</string>
+    <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"앱, 파일, 미디어를 저장하려면 <xliff:g id="NAME_0">^1</xliff:g>을(를) 포맷해야 합니다. \n\n포맷하면 <xliff:g id="NAME_1">^2</xliff:g>에 저장된 기존 콘텐츠가 삭제됩니다. 콘텐츠가 삭제되지 않도록 다른 <xliff:g id="NAME_2">^3</xliff:g> 또는 기기에 백업하세요."</string>
     <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"<xliff:g id="NAME_0">^1</xliff:g>에 사진, 동영상, 음악 등을 저장하려면 포맷해야 합니다. \n\n포맷하면 <xliff:g id="NAME_1">^2</xliff:g>에 저장된 기존 콘텐츠가 삭제됩니다. 콘텐츠가 삭제되지 않도록 다른 <xliff:g id="NAME_2">^3</xliff:g> 또는 기기에 백업하세요."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g> 포맷"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"콘텐츠를 <xliff:g id="NAME">^1</xliff:g>(으)로 이동하시겠습니까?"</string>
@@ -2780,8 +2853,11 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"배터리 사용량이 증가함"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"배터리 사용량이 가장 높은 앱을 확인하세요"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"충전 일시중지됨"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"배터리를 보호하여 배터리 수명을 늘립니다.\n탭하여 자세히 알아보기"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_summary (5254922316684499816) -->
+    <skip />
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_sec_button_content_description (5648444926736883551) -->
     <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"충전 재개"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"온도가 높거나 충전 시간이 긴 경우 등 특정한 상황에서는 배터리 보호를 위해 <xliff:g id="PERCENT">%1$s</xliff:g>까지만 충전될 수 있습니다.\n\n상태가 개선되면 휴대전화가 다시 자동으로 정상 충전됩니다."</string>
@@ -3013,10 +3089,7 @@
     <skip />
     <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
     <skip />
-    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"배터리 사용 데이터는 휴대전화를 몇 시간 사용한 후에 확인할 수 있습니다."</string>
-    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
-    <skip />
-    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <!-- no translation found for battery_usage_screen_footer_empty (3301144846133808193) -->
     <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"배터리 사용량 차트"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"일일 배터리 사용량 차트"</string>
