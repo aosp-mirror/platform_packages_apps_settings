@@ -218,19 +218,15 @@
     <string name="skip_label" msgid="6380034601349015895">"Пропустити"</string>
     <string name="next_label" msgid="1248293387735652187">"Далі"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Мови"</string>
-    <!-- no translation found for language_picker_category_title (1792199453060454565) -->
-    <skip />
-    <!-- no translation found for desc_current_default_language (1901157141663662859) -->
-    <skip />
+    <string name="language_picker_category_title" msgid="1792199453060454565">"Порядок вибраних мов"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"Мова системи"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Видалити"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Додати мову"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Мова"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Бажана мова"</string>
-    <!-- no translation found for app_locales_picker_menu_title (7617427959223831373) -->
-    <skip />
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Мови додатків"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Виберіть мову для кожного додатка"</string>
-    <!-- no translation found for app_locale_picker_title (2431448962911301366) -->
-    <skip />
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"Мова додатка"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Пропоновані мови"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Усі мови"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Мова системи"</string>
@@ -238,12 +234,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Вибір мови для цього додатка в налаштуваннях неможливий"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Мова може відрізнятися від мов, доступних у додатку. Деякі додатки можуть не підтримувати це налаштування."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Тут відображаються лише додатки, які підтримують вибір мови."</string>
-    <!-- no translation found for desc_introduction_of_language_picker (1038423471887102449) -->
-    <skip />
-    <!-- no translation found for desc_notice_of_language_picker (3449290526457925447) -->
-    <skip />
-    <!-- no translation found for desc_locale_helper_footer_general (6967183342596405116) -->
-    <skip />
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Система, додатки й веб-сайти використовують першу підтримувану мову з вибраних вами."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Щоб вибрати мову для кожного додатка, перейдіть у налаштування мов додатків."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Докладніше про мови"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Видалити вибрані мови?</item>
       <item quantity="few">Видалити вибрані мови?</item>
@@ -253,8 +246,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Текст відображатиметься іншою мовою"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Не можна видалити всі мови"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Залишіть принаймні одну вибрану мову"</string>
-    <!-- no translation found for locale_not_translated (3071618135527110152) -->
-    <skip />
+    <string name="locale_not_translated" msgid="3071618135527110152">"Недоступно як мова системи"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Перемістити вгору"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Перемістити вниз"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"На початок"</string>
@@ -372,13 +364,17 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Налаштування фейсконтролю"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Використовуйте обличчя для автентифікації"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Почати"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"Якщо спеціальні можливості фейсконтролю вимкнено, деякі налаштування можуть працювати з TalkBack неналежним чином."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Назад"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Продовжити налаштування"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Показати параметри доступності"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Скасувати"</string>
@@ -388,7 +384,11 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Розблоковуйте обличчям"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Дозвольте фейсконтроль"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Використовуйте обличчя для автентифікації"</string>
-    <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Розблоковуйте телефон, робіть покупки та входьте в додатки за допомогою фейсконтролю."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"Розблоковуйте телефон, робіть покупки та входьте в додатки за допомогою фейсконтролю."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_message (6144528803097608850) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_message (8600301257170347509) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Дозвольте дитині розблоковувати телефон за допомогою фейсконтролю"</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Дозвольте дитині розблоковувати планшет за допомогою фейсконтролю"</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Дозвольте дитині розблоковувати пристрій за допомогою фейсконтролю"</string>
@@ -400,19 +400,39 @@
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"Розташуйте обличчя в колі"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Пропустити"</string>
     <string name="face_add_max" msgid="4578405795494514876">"Можна додати максимум стільки облич: <xliff:g id="COUNT">%d</xliff:g>"</string>
@@ -464,7 +484,11 @@
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"За допомогою відбитка пальця можна розблоковувати планшет або підтверджувати свою особу, наприклад, щоб входити в додатки або схвалювати покупки."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"За допомогою відбитка пальця можна розблоковувати пристрій або підтверджувати свою особу (наприклад, щоб входити в додатки або схвалювати покупки)."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"За допомогою відбитка пальця можна розблоковувати телефон або підтверджувати свою особу, наприклад, щоб входити в додатки або схвалювати покупки."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Дозвольте дитині розблоковувати телефон або підтверджувати особу за допомогою відбитка пальця. Тоді вона зможе входити в додатки, схвалювати покупки тощо."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"Дозвольте дитині розблоковувати телефон або підтверджувати особу за допомогою відбитка пальця. Тоді вона зможе входити в додатки, схвалювати покупки тощо."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_consent_message (9019236661560266282) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_consent_message (1131446458892188764) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Своїми налаштуваннями керуєте лише ви"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Ви та дитина керуєте налаштуваннями"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Важливо"</string>
@@ -479,18 +503,42 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Налаштування відбитка пальця триває кілька хвилин. Якщо ви пропустите цей крок, відбиток пальця можна додати пізніше в налаштуваннях."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Цей значок свідчить про те, що ви можете пройти автентифікацію за відбитком пальця, наприклад, щоб увійти в обліковий запис у додатку або схвалити покупку"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Важливо"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Використання відбитка пальця для розблокування телефона може поступатися за надійністю ключу або PIN-коду"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"Використання відбитка пальця для розблокування телефона може поступатися за надійністю ключу або PIN-коду"</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_1 (3024180694355527323) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_1 (150132643609189029) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Як це працює"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Функція розблокування відбитком пальця створює унікальну модель вашого відбитка, щоб підтверджувати вашу особу. Для цього збережіть зображення свого відбитка пальця в різних положеннях."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Функція розблокування відбитком пальця створює унікальну модель відбитка вашої дитини, щоб підтверджувати її особу. Для цього дитині потрібно зберегти зображення свого відбитка пальця в різних положеннях."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"Коли ви користуєтеся Pixel Imprint, ваша модель відбитка пальця оновлюється на основі отриманих зображень. Ці зображення ніколи не зберігаються, а сама модель залишається на телефоні та нікуди не передається. Усі процедури обробки безпечно відбуваються на телефоні."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Коли дитина користується Pixel Imprint, отримані зображення використовуються для оновлення моделі відбитка пальця. Ці зображення ніколи не залишаються на телефоні, але сама модель надійно зберігається та нікуди не передається. Усі процедури обробки безпечно відбуваються на телефоні."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Ви будь-коли можете видалити зображення й модель свого відбитка пальця або вимкнути цю функцію розблокування в налаштуваннях. Зображення й модель відбитка пальця зберігаються на телефоні, поки ви їх не видалите."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Ви та дитина будь-коли можете видалити зображення й модель відбитка пальця або вимкнути цю функцію в налаштуваннях. Зображення й моделі відбитків пальців зберігаються на телефоні, доки ви їх не видалите."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"Коли ви користуєтеся Pixel Imprint, ваша модель відбитка пальця оновлюється на основі отриманих зображень. Ці зображення ніколи не зберігаються, а сама модель залишається на телефоні та нікуди не передається. Усі процедури обробки безпечно відбуваються на телефоні."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (7537431055496985904) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (1392098506793837697) -->
+    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"Коли дитина користується Pixel Imprint, отримані зображення використовуються для оновлення моделі відбитка пальця. Ці зображення ніколи не залишаються на телефоні, але сама модель надійно зберігається та нікуди не передається. Усі процедури обробки безпечно відбуваються на телефоні."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3 (530891604602839577) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3 (1735767057693277593) -->
+    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"Ви будь-коли можете видалити зображення й модель свого відбитка пальця або вимкнути цю функцію розблокування в налаштуваннях. Зображення й модель відбитка пальця зберігаються на телефоні, поки ви їх не видалите."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (1577753788807120092) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (5092396314447369758) -->
+    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"Ви та дитина будь-коли можете видалити зображення й модель відбитка пальця або вимкнути цю функцію в налаштуваннях. Зображення й моделі відбитків пальців зберігаються на телефоні, доки ви їх не видалите."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4 (8752022694697150943) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4 (7234973062059196893) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Ваш телефон можна розблокувати навіть тоді, коли ви цього не плануєте. Наприклад, якщо хтось піднесе його до вашого пальця."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Ваш планшет можна розблокувати навіть без вашої волі (наприклад, якщо хтось піднесе його до вашого пальця)."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Ваш пристрій можна розблокувати навіть без вашої волі (наприклад, якщо хтось піднесе його до вашого пальця)."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Телефон дитини можна розблокувати випадково, наприклад якщо хтось прикладе пристрій до її пальця."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"Телефон дитини можна розблокувати випадково, наприклад якщо хтось прикладе пристрій до її пальця."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5 (6956407873271178462) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5 (885555477843366483) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Рекомендуємо використовувати захисну плівку чи скло, що мають позначку \"Створено для Google\". Якщо вони не матимуть такої позначки, відбиток пальця може не розпізнаватися."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Рекомендуємо використовувати захисну плівку чи скло, що мають позначку \"Створено для Google\". Якщо вони не матимуть такої позначки, відбиток пальця дитини може не розпізнаватися."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
@@ -531,8 +579,16 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"Пропустити"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Скасувати"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Торкніться сканера"</string>
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_title (8327884364635804363) -->
+    <skip />
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Як зняти відбиток пальця"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Сканер розташовано на задній панелі телефона. Прикладіть вказівний палець."</string>
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (3861487880213212565) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (700314363994033893) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (5857063580604638331) -->
+    <skip />
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Сканер відбитків пальців розташовано на екрані. На наступному екрані ви зможете зняти свій відбиток пальця."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Почати"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Щоб знайти сканер відбитків пальців, проведіть пальцем по екрану. Натисніть і втримуйте його."</string>
@@ -544,6 +600,8 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Торкніться сканера"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Покладіть палець на датчик і заберіть його, коли відчуєте вібрацію"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Утримуйте палець на сенсорі рівно, доки не відчуєте вібрацію"</string>
+    <!-- no translation found for security_settings_sfps_enroll_start_message (9054672627477685212) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Натисніть і втримуйте сканер відбитків пальців"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Підніміть і знову торкніться"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Повторіть"</string>
@@ -553,10 +611,24 @@
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Прикладіть кінчик пальця до датчика"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Прикладіть лівий край пальця"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Прикладіть правий край пальця"</string>
+    <!-- no translation found for security_settings_sfps_enroll_finger_center_title (1320688855767675739) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_fingertip_title (2737520837684516446) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_left_edge_title (9022963735924413343) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_right_edge_title (823106857743394392) -->
+    <skip />
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Прикладіть до датчика і трохи потримайте одну сторону кінчика пальця, а потім зробіть те саме з іншою стороною"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Це допоможе записати відбиток більшої площі пальця"</string>
+    <!-- no translation found for security_settings_sfps_enroll_progress_a11y_message (6450772721691523736) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_animation_a11y_label (8808819903730940446) -->
+    <skip />
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Реєстрацію відбитка пальця завершено на стільки відсотків: <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Відбиток додано"</string>
+    <!-- no translation found for security_settings_sfps_enroll_finish (3948249010300560451) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Тепер за допомогою відбитка пальця можна розблоковувати планшет або підтверджувати свою особу (наприклад, щоб входити в додатки)"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Тепер за допомогою відбитка пальця можна розблоковувати пристрій або підтверджувати свою особу (наприклад, щоб входити в додатки)"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Тепер за допомогою відбитка пальця можна розблоковувати телефон або підтверджувати свою особу (наприклад, щоб входити в додатки)"</string>
@@ -637,7 +709,8 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Ви додали максимальну кількість відбитків пальців"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Більше не можна додати відбитки пальців"</string>
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Видалити всі відбитки пальців?"</string>
-    <string name="fingerprint_delete_title" msgid="1469865327307917858">"Видалити \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
+    <!-- no translation found for fingerprint_delete_title (5412123164503407098) -->
+    <skip />
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Видалити цей відбиток пальця?"</string>
     <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Буде видалено зображення й модель відбитка пальця \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\", що зберігаються на вашому пристрої"</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Ви не зможете розблоковувати телефон або підтверджувати особу в додатках за допомогою відбитка пальця."</string>
@@ -1672,11 +1745,11 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Перейменувати"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Підключити"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Вийняти"</string>
-    <string name="storage_menu_format" msgid="8903698999905354146">"Форматувати карту SD для портативного сховища"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Форматувати карту SD як портативне сховище"</string>
     <string name="storage_menu_format_button" msgid="7623565190643699626">"Форматувати карту"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Форматувати: пристрій пам’яті"</string>
     <string name="storage_menu_format_option" msgid="4886059624052908432">"Форматувати"</string>
-    <string name="storage_menu_migrate" msgid="2196088149560070193">"Перемістити дані"</string>
+    <string name="storage_menu_migrate" msgid="2196088149560070193">"Перенести дані"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Забути"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Налаштувати"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Звільнити місце"</string>
@@ -1751,13 +1824,13 @@
     <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Зберігайте додатки й медіафайли, щоб використовувати їх лише на цьому телефоні. &lt;a href=https://support.google.com/android/answer/12153449&gt;Докладніше про налаштування карти SD&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Форматувати"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Або"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Форматуйте карту SD для портативного сховища"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Форматуйте карту SD як портативне сховище"</string>
     <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Зберігайте фотографії, відео, музику тощо й відкривайте їх на інших пристроях. &lt;a href=https://support.google.com/android/answer/12153449&gt;Докладніше про налаштування карти SD&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Форматувати"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Налаштувати пізніше"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Форматувати пристрій пам’яті (<xliff:g id="NAME">^1</xliff:g>)?"</string>
-    <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"<xliff:g id="NAME_0">^1</xliff:g> потребує форматування, щоб можна було зберігати додатки, файли й медіа-вміст. \n\nПід час форматування <xliff:g id="NAME_1">^2</xliff:g> очиститься від наявних файлів. Щоб не втратити вміст, потрібні <xliff:g id="NAME_2">^3</xliff:g> або пристрій, де можна зберегти резервну копію."</string>
-    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Цей пристрій пам’яті (<xliff:g id="NAME_0">^1</xliff:g>) слід відформатувати, щоб зберігати на ньому фотографії, відео, музику тощо. \n\nПід час форматування з пристрою пам’яті (<xliff:g id="NAME_1">^2</xliff:g>) буде видалено всі наявні файли. Щоб не втратити контент, знадобиться <xliff:g id="NAME_2">^3</xliff:g> або інший пристрій, де можна зберегти резервну копію."</string>
+    <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Пристрій пам’яті <xliff:g id="NAME_0">^1</xliff:g> потрібно відформатувати, щоб зберігати на ньому фотографії, відео, музику тощо. \n\nПід час форматування з пристрою пам’яті <xliff:g id="NAME_1">^2</xliff:g> буде видалено всі наявні файли. Щоб не втратити їх, скопіюйте їх на інший накопичувач або пристрій <xliff:g id="NAME_2">^3</xliff:g>."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Пристрій пам’яті <xliff:g id="NAME_0">^1</xliff:g> потрібно відформатувати, щоб зберігати на ньому фотографії, відео, музику тощо. \n\nПід час форматування з пристрою пам’яті <xliff:g id="NAME_1">^2</xliff:g> буде видалено всі наявні файли. Щоб не втратити їх, скопіюйте їх на інший накопичувач або пристрій <xliff:g id="NAME_2">^3</xliff:g>."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Форматувати (<xliff:g id="NAME">^1</xliff:g>)"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Перенести на пристрій пам’яті: <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"<xliff:g id="NAME">^1</xliff:g> може зберігати файли, медіа-вміст і певні додатки. \n\nПеренесення звільнить до <xliff:g id="SIZE">^2</xliff:g> пам’яті планшета й займе близько <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -2840,8 +2913,11 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Збільшене використання заряду"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Переглянути додатки, що найбільше використовують заряд"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Заряджання призупинено"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"Увімкнено захист акумулятора, щоб подовжити його час роботи\nТоркніться, щоб дізнатися більше"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_summary (5254922316684499816) -->
+    <skip />
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_sec_button_content_description (5648444926736883551) -->
     <skip />
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Відновити заряджання"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"За певних умов, таких як висока температура й довготривале заряджання, система може встановлювати для рівня заряду обмеження <xliff:g id="PERCENT">%1$s</xliff:g>, щоб подовжити термін служби акумулятора.\n\nКоли умови нормалізуються, телефон заряджатиметься, як зазвичай."</string>
@@ -3087,10 +3163,7 @@
     <skip />
     <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
     <skip />
-    <string name="battery_usage_screen_footer_empty" product="default" msgid="115806339713068930">"Дані про використання заряду будуть доступні після кількох годин користування телефоном"</string>
-    <!-- no translation found for battery_usage_screen_footer_empty (846951714694270507) -->
-    <skip />
-    <!-- no translation found for battery_usage_screen_footer_empty (6290839602700243003) -->
+    <!-- no translation found for battery_usage_screen_footer_empty (3301144846133808193) -->
     <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Діаграма використання заряду"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Діаграма використання заряду акумулятора за день"</string>

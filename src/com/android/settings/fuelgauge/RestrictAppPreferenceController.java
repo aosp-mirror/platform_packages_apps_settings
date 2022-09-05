@@ -46,12 +46,15 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
     private AppOpsManager mAppOpsManager;
     private InstrumentedPreferenceFragment mPreferenceFragment;
     private UserManager mUserManager;
+    private boolean mEnableAppBatteryUsagePage;
 
     public RestrictAppPreferenceController(Context context) {
         super(context, KEY_RESTRICT_APP);
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         mUserManager = context.getSystemService(UserManager.class);
         mAppInfos = BatteryTipUtils.getRestrictedAppsList(mAppOpsManager, mUserManager);
+        mEnableAppBatteryUsagePage =
+                mContext.getResources().getBoolean(R.bool.config_app_battery_usage_list_enabled);
     }
 
     public RestrictAppPreferenceController(InstrumentedPreferenceFragment preferenceFragment) {
@@ -61,7 +64,8 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return mAppInfos.size() > 0 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return mAppInfos.size() > 0 && !mEnableAppBatteryUsagePage ? AVAILABLE
+                : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
