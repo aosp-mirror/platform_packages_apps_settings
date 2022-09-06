@@ -16,7 +16,10 @@
 
 package com.android.settings.spa
 
-import com.android.settings.spa.app.InstallUnknownAppsListProvider
+import com.android.settings.spa.app.AppsMainPageProvider
+import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
+import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
+import com.android.settings.spa.app.specialaccess.SpecialAppAccessPageProvider
 import com.android.settings.spa.home.HomePageProvider
 import com.android.settingslib.spa.framework.common.SettingsEntryRepository
 import com.android.settingslib.spa.framework.common.SettingsPage
@@ -29,11 +32,16 @@ object SpaEnvironment {
     val settingsPageProviders: SettingsPageProviderRepository by
     lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
         val togglePermissionAppListTemplate = TogglePermissionAppListTemplate(
-            allProviders = listOf(InstallUnknownAppsListProvider),
+            allProviders = listOf(
+                InstallUnknownAppsListProvider,
+                PictureInPictureListProvider,
+            ),
         )
         SettingsPageProviderRepository(
             allPageProviders = listOf(
                 HomePageProvider,
+                AppsMainPageProvider,
+                SpecialAppAccessPageProvider,
                 NotificationMainPageProvider,
                 AppListNotificationsPageProvider,
             ) + togglePermissionAppListTemplate.createPageProviders(),
