@@ -17,9 +17,12 @@
 package com.android.settings.spa.home
 
 import android.os.Bundle
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
+import com.android.settings.spa.SpaEnvironment
 import com.android.settings.spa.app.InstallUnknownAppsListProvider
 import com.android.settings.spa.notification.NotificationMainPageProvider
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
@@ -39,5 +42,16 @@ private fun HomePage() {
     HomeScaffold(title = stringResource(R.string.settings_label)) {
         InstallUnknownAppsListProvider.EntryItem()
         NotificationMainPageProvider.EntryItem()
+
+        /**
+         * A test button to generate hierarchy.
+         * TODO: remove it once the content provider is ready.
+         */
+        Button(onClick = {
+            SpaEnvironment.settingsEntryRepository.printAllPages()
+            SpaEnvironment.settingsEntryRepository.printAllEntries()
+        }) {
+            Text(text = "Generate Entry")
+        }
     }
 }
