@@ -438,6 +438,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             return;
         }
 
+        targetIntent.setData(intent.getParcelableExtra(
+                SettingsHomepageActivity.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_DATA));
         final ComponentName targetComponentName = targetIntent.resolveActivity(getPackageManager());
         if (targetComponentName == null) {
             Log.e(TAG, "No valid target for the deep link intent: " + targetIntent);
@@ -456,9 +458,6 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         targetIntent.putExtra(EXTRA_IS_FROM_SETTINGS_HOMEPAGE, true);
         targetIntent.putExtra(SettingsActivity.EXTRA_IS_FROM_SLICE, false);
-
-        targetIntent.setData(intent.getParcelableExtra(
-                SettingsHomepageActivity.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_DATA));
 
         // Set 2-pane pair rule for the deep link page.
         ActivityEmbeddingRulesController.registerTwoPanePairRule(this,
