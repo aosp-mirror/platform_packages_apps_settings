@@ -30,24 +30,24 @@ public class BackupSettingsPreferenceController extends AbstractPreferenceContro
         implements PreferenceControllerMixin {
     private static final String BACKUP_SETTINGS = "backup_settings";
     private static final  String MANUFACTURER_SETTINGS = "manufacturer_backup";
-    private Intent mBackupSettingsIntent;
-    private CharSequence mBackupSettingsTitle;
-    private String mBackupSettingsSummary;
+    private final BackupSettingsHelper settingsHelper;
     private Intent mManufacturerIntent;
     private String mManufacturerLabel;
 
     public BackupSettingsPreferenceController(Context context) {
         super(context);
-        BackupSettingsHelper settingsHelper = new BackupSettingsHelper(context);
-        mBackupSettingsIntent = settingsHelper.getIntentForBackupSettings();
-        mBackupSettingsTitle = settingsHelper.getLabelForBackupSettings();
-        mBackupSettingsSummary = settingsHelper.getSummaryForBackupSettings();
+        settingsHelper = new BackupSettingsHelper(context);
         mManufacturerIntent = settingsHelper.getIntentProvidedByManufacturer();
         mManufacturerLabel = settingsHelper.getLabelProvidedByManufacturer();
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
+        // we don't get these in the constructor, so we can get updates for them later
+        Intent mBackupSettingsIntent = settingsHelper.getIntentForBackupSettings();
+        CharSequence mBackupSettingsTitle = settingsHelper.getLabelForBackupSettings();
+        String mBackupSettingsSummary = settingsHelper.getSummaryForBackupSettings();
+
         Preference backupSettings = screen.findPreference(BACKUP_SETTINGS);
         Preference manufacturerSettings = screen.findPreference(MANUFACTURER_SETTINGS);
         backupSettings.setIntent(mBackupSettingsIntent);

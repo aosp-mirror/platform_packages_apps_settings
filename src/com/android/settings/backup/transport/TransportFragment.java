@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2020 The Calyx Institute
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,40 +14,21 @@
  * limitations under the License
  */
 
-package com.android.settings.backup;
+package com.android.settings.backup.transport;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.Bundle;
-
 import com.android.settings.R;
+import com.android.settings.backup.transport.TransportPreferenceController.OnTransportChangedListener;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Fragment showing the items to launch different backup settings screens.
- */
-@SearchIndexable
-public class BackupSettingsFragment extends DashboardFragment {
-    private static final String TAG = "BackupSettings";
+public class TransportFragment extends DashboardFragment implements OnTransportChangedListener {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // update information when we navigate back from TransportActivity
-        displayResourceTilesToScreen(getPreferenceScreen());
-    }
+    private static final String TAG = "TransportFragment";
 
     /**
      * Get the tag string for logging.
@@ -62,7 +43,7 @@ public class BackupSettingsFragment extends DashboardFragment {
      */
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.backup_settings;
+        return R.xml.backup_transport_settings;
     }
 
     /**
@@ -71,17 +52,18 @@ public class BackupSettingsFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new BackupSettingsPreferenceController(context));
+        controllers.add(new TransportPreferenceController(context, this));
         return controllers;
     }
-
-    // The intention is to index {@link UserBackupSettingsActivity} instead of the fragments,
-    // therefore leaving this index provider empty.
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider();
 
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.BACKUP_SETTINGS;
     }
+
+    @Override
+    public void onTransportChanged(String transportName) {
+        requireActivity().finish();
+    }
+
 }
