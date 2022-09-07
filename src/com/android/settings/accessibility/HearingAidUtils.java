@@ -53,7 +53,7 @@ public final class HearingAidUtils {
             Log.w(TAG, "Can not launch hearing aid pairing dialog for invalid side");
             return;
         }
-        HearingAidPairingDialogFragment.newInstance(device).show(fragmentManager,
+        HearingAidPairingDialogFragment.newInstance(device.getAddress()).show(fragmentManager,
                 HearingAidPairingDialogFragment.TAG);
     }
 }

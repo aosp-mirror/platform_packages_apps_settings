@@ -109,11 +109,11 @@ public class WifiWakeupPreferenceController extends TogglePreferenceController i
     @Override
     public boolean setChecked(boolean isChecked) {
         if (isChecked) {
-            if (mFragment == null) {
-                throw new IllegalStateException("No fragment to start activity");
-            }
-
             if (!getLocationEnabled()) {
+                if (mFragment == null) {
+                    throw new IllegalStateException("No fragment to start activity");
+                }
+
                 final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 mFragment.startActivityForResult(intent, WIFI_WAKEUP_REQUEST_CODE);
                 return false;
