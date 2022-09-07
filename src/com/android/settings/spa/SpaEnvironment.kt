@@ -18,16 +18,34 @@ package com.android.settings.spa
 
 import com.android.settings.spa.app.InstallUnknownAppsListProvider
 import com.android.settings.spa.home.HomePageProvider
+import com.android.settingslib.spa.framework.common.SettingsEntryRepository
+import com.android.settingslib.spa.framework.common.SettingsPage
+import com.android.settings.spa.notification.AppListNotificationsPageProvider
+import com.android.settings.spa.notification.NotificationMainPageProvider
 import com.android.settingslib.spa.framework.common.SettingsPageProviderRepository
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListTemplate
 
-private val togglePermissionAppListTemplate = TogglePermissionAppListTemplate(
-    allProviders = listOf(InstallUnknownAppsListProvider),
-)
+object SpaEnvironment {
+    val settingsPageProviders: SettingsPageProviderRepository by
+    lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+        val togglePermissionAppListTemplate = TogglePermissionAppListTemplate(
+            allProviders = listOf(InstallUnknownAppsListProvider),
+        )
+        SettingsPageProviderRepository(
+            allPageProviders = listOf(
+                HomePageProvider,
+                NotificationMainPageProvider,
+                AppListNotificationsPageProvider,
+            ) + togglePermissionAppListTemplate.createPageProviders(),
+            rootPages = listOf(
+                SettingsPage(HomePageProvider.name),
+            ),
+        )
+    }
+    val settingsEntryRepository: SettingsEntryRepository by
+    lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+        SettingsEntryRepository(settingsPageProviders)
+    }
 
-val settingsPageProviders = SettingsPageProviderRepository(
-    allPagesList = listOf(
-        HomePageProvider,
-    ) + togglePermissionAppListTemplate.createPageProviders(),
-    rootPages = listOf(HomePageProvider.name),
-)
+    // TODO: add other environment setup here.
+}

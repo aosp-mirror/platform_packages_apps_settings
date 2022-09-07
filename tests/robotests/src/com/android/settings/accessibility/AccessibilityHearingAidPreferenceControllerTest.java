@@ -28,7 +28,6 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHearingAid;
-import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
@@ -74,7 +73,6 @@ public class AccessibilityHearingAidPreferenceControllerTest {
 
     private BluetoothAdapter mBluetoothAdapter;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
-    private BluetoothManager mBluetoothManager;
     private BluetoothDevice mBluetoothDevice;
     private Activity mContext;
     private Preference mHearingAidPreference;
@@ -101,8 +99,8 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mShadowApplication = ShadowApplication.getInstance();
         mContext = spy(Robolectric.setupActivity(Activity.class));
-        setupBluetoothEnvironment();
-        setupHearingAidEnvironment();
+        setupEnvironment();
+
         mHearingAidPreference = new Preference(mContext);
         mHearingAidPreference.setKey(HEARING_AID_PREFERENCE);
         mPreferenceController = new AccessibilityHearingAidPreferenceController(mContext,
@@ -247,25 +245,39 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         assertThat(dialog.isShowing()).isTrue();
     }
 
-    private void setupBluetoothEnvironment() {
+    @Test
+    public void onServiceConnected_updateSummary() {
+        mPreferenceController.onStart();
+        when(mCachedBluetoothDevice.isConnectedHearingAidDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.getDeviceMode()).thenReturn(
+                HearingAidProfile.DeviceMode.MODE_BINAURAL);
+        when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
+                HearingAidProfile.DeviceSide.SIDE_LEFT);
+        when(mHearingAidProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
+
+        mPreferenceController.onServiceConnected();
+
+        assertThat(mHearingAidPreference.getSummary().toString()).isEqualTo(
+                "TEST_HEARING_AID_BT_DEVICE_NAME, left only");
+    }
+
+    private void setupEnvironment() {
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
         mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
-        mBluetoothManager = mContext.getSystemService(BluetoothManager.class);
-        mBluetoothAdapter = mBluetoothManager.getAdapter();
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mShadowBluetoothAdapter = Shadow.extract(mBluetoothAdapter);
+        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
+        mBluetoothDevice = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS);
+        mBluetoothAdapter.enable();
+
+        doReturn(mEventManager).when(mLocalBluetoothManager).getEventManager();
         when(mLocalBluetoothManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
         when(mLocalBluetoothManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
         when(mLocalBluetoothProfileManager.getHearingAidProfile()).thenReturn(mHearingAidProfile);
-        doReturn(mEventManager).when(mLocalBluetoothManager).getEventManager();
-    }
-
-    private void setupHearingAidEnvironment() {
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        mShadowBluetoothAdapter = Shadow.extract(mBluetoothAdapter);
-        mBluetoothDevice = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS);
-        mBluetoothAdapter.enable();
-        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
         when(mCachedDeviceManager.findDevice(mBluetoothDevice)).thenReturn(mCachedBluetoothDevice);
+        when(mCachedBluetoothDevice.getAddress()).thenReturn(TEST_DEVICE_ADDRESS);
         when(mCachedBluetoothDevice.getName()).thenReturn(TEST_DEVICE_NAME);
+        when(mHearingAidProfile.isProfileReady()).thenReturn(true);
     }
 
     private void sendIntent(Intent intent) {

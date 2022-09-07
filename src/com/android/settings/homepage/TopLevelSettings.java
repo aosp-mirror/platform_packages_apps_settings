@@ -44,6 +44,7 @@ import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.support.SupportPreferenceController;
 import com.android.settings.widget.HomepagePreference;
@@ -165,6 +166,8 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     public void onStart() {
         if (mFirstStarted) {
             mFirstStarted = false;
+            FeatureFactory.getFactory(getContext()).getSearchFeatureProvider().sendPreIndexIntent(
+                    getContext());
         } else if (mIsEmbeddingActivityEnabled && isOnlyOneActivityInTask()
                 && !SplitController.getInstance().isActivityEmbedded(getActivity())) {
             // Set default highlight menu key for 1-pane homepage since it will show the placeholder
@@ -354,7 +357,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     }
 
     private interface PreferenceJob {
-        default void init() {}
+        default void init() {
+        }
+
         void doForEach(Preference preference);
     }
 
