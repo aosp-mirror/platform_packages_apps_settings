@@ -564,7 +564,13 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         Intent intent = BiometricUtils.getChooseLockIntent(this, getIntent());
         intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS, true);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, true);
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, true);
+        if (mHasFeatureFingerprint && mHasFeatureFace) {
+            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, true);
+        } else if (mHasFeatureFace) {
+            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, true);
+        } else if (mHasFeatureFingerprint) {
+            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, true);
+        }
 
         if (mUserId != UserHandle.USER_NULL) {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
