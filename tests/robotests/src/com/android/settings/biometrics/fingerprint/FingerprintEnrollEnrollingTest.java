@@ -222,6 +222,16 @@ public class FingerprintEnrollEnrollingTest {
         );
     }
 
+    @Test
+    public void fingerprintSfpsEnrollment_loseFocus_shouldNotCancel() {
+        initializeActivityFor(FingerprintSensorProperties.TYPE_POWER_BUTTON);
+
+        mActivity.onEnrollmentProgressChange(1, 1);
+        mActivity.onWindowFocusChanged(true);
+
+        verify(mActivity, never()).onCancelEnrollment(anyInt());
+    }
+
     private void initializeActivityFor(int sensorType) {
         final List<ComponentInfoInternal> componentInfo = new ArrayList<>();
         final FingerprintSensorPropertiesInternal prop =
