@@ -23,8 +23,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.spa.SpaEnvironment
-import com.android.settings.spa.app.InstallUnknownAppsListProvider
+import com.android.settings.spa.app.AppsMainPageProvider
 import com.android.settings.spa.notification.NotificationMainPageProvider
+import com.android.settingslib.spa.framework.common.SettingsEntry
+import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.widget.scaffold.HomeScaffold
 
@@ -35,12 +37,19 @@ object HomePageProvider : SettingsPageProvider {
     override fun Page(arguments: Bundle?) {
         HomePage()
     }
+
+    override fun buildEntry(arguments: Bundle?): List<SettingsEntry> {
+        val owner = SettingsPage.create(name, parameter, arguments)
+        return listOf(
+            AppsMainPageProvider.buildInjectEntry().setLink(fromPage = owner).build(),
+        )
+    }
 }
 
 @Composable
 private fun HomePage() {
     HomeScaffold(title = stringResource(R.string.settings_label)) {
-        InstallUnknownAppsListProvider.EntryItem()
+        AppsMainPageProvider.EntryItem()
         NotificationMainPageProvider.EntryItem()
 
         /**

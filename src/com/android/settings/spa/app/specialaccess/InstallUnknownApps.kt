@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.spa.app
+package com.android.settings.spa.app.specialaccess
 
 import android.Manifest
 import android.app.AppGlobals
