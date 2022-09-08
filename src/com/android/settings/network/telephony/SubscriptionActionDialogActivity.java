@@ -60,20 +60,8 @@ public class SubscriptionActionDialogActivity extends FragmentActivity {
      * @param message The string content should be displayed in the progress dialog.
      */
     protected void showProgressDialog(String message) {
-        showProgressDialog(message,false);
-    }
-
-    /**
-     * Displays a loading dialog.
-     *
-     * @param message The string content should be displayed in the progress dialog.
-     * @param updateIfNeeded is whether to update the progress state in the SharedPreferences.
-     */
-    protected void showProgressDialog(String message, boolean updateIfNeeded) {
         ProgressDialogFragment.show(getFragmentManager(), message, null);
-        if (updateIfNeeded) {
-            setProgressState(PROGRESS_IS_SHOWING);
-        }
+        setProgressState(PROGRESS_IS_SHOWING);
     }
 
     /** Dismisses the loading dialog. */

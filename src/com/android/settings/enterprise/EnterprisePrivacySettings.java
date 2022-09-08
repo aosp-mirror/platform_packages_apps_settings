@@ -77,10 +77,6 @@ public class EnterprisePrivacySettings extends DashboardFragment {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        if (mPrivacySettingsPreference instanceof PrivacySettingsFinancedPreference) {
-            return;
-        }
-
         replaceEnterprisePreferenceScreenTitle(
                 MANAGED_DEVICE_INFO, R.string.enterprise_privacy_settings);
 
