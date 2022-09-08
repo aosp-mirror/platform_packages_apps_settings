@@ -20,11 +20,12 @@ import com.android.settings.spa.app.AppsMainPageProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settings.spa.app.specialaccess.SpecialAppAccessPageProvider
+import com.android.settings.spa.development.UsageStatsPageProvider
 import com.android.settings.spa.home.HomePageProvider
-import com.android.settingslib.spa.framework.common.SettingsEntryRepository
-import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settings.spa.notification.AppListNotificationsPageProvider
 import com.android.settings.spa.notification.NotificationMainPageProvider
+import com.android.settingslib.spa.framework.common.SettingsEntryRepository
+import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.common.SettingsPageProviderRepository
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListTemplate
 
@@ -44,6 +45,7 @@ object SpaEnvironment {
                 SpecialAppAccessPageProvider,
                 NotificationMainPageProvider,
                 AppListNotificationsPageProvider,
+                UsageStatsPageProvider,
             ) + togglePermissionAppListTemplate.createPageProviders(),
             rootPages = listOf(
                 SettingsPage(HomePageProvider.name),

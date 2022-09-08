@@ -2911,15 +2911,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="UsageStatsActivity"
-                  android:exported="true"
-                  android:label="@string/usage_stats_label">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
-            </intent-filter>
-        </activity>
-
         <activity
             android:name="Settings$PowerUsageSummaryActivity"
             android:label="@string/power_usage_summary_title"
@@ -4584,10 +4575,20 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="com.android.settings.spa.SpaActivity"
-            android:exported="false">
-        </activity>
+        <activity android:name=".spa.SpaActivity" android:exported="false"/>
+        <activity android:name=".spa.SpaBridgeActivity" android:exported="false"/>
+
+        <activity-alias android:name="UsageStatsActivity"
+                        android:exported="true"
+                        android:label="@string/testing_usage_stats"
+                        android:targetActivity=".spa.SpaBridgeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                       android:value="UsageStats"/>
+        </activity-alias>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
