@@ -31,6 +31,7 @@ import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -123,6 +124,9 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         final TextView footerTitle2 = findViewById(R.id.footer_title_2);
         footerTitle1.setText(getFooterTitle1());
         footerTitle2.setText(getFooterTitle2());
+
+        final ScrollView scrollView = findViewById(R.id.sud_scroll_view);
+        scrollView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
     }
 
     @Override
