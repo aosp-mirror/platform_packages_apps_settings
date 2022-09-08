@@ -75,8 +75,7 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
         };
     }
 
-    @VisibleForTesting
-    boolean isUwbSupportedOnDevice() {
+    public boolean isUwbSupportedOnDevice() {
         return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_UWB);
     }
 
@@ -99,6 +98,9 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
 
     @Override
     public boolean isChecked() {
+        if (!isUwbSupportedOnDevice()) {
+            return false;
+        }
         int state = mUwbManager.getAdapterState();
         return state == STATE_ENABLED_ACTIVE || state == STATE_ENABLED_INACTIVE;
     }
