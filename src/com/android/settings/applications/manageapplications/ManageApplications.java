@@ -133,7 +133,7 @@ import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.app.AppNotificationSettings;
 import com.android.settings.spa.SpaActivity;
-import com.android.settings.spa.app.InstallUnknownAppsListProvider;
+import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settings.wifi.AppStateChangeWifiStateBridge;
 import com.android.settings.wifi.ChangeWifiStateDetails;
