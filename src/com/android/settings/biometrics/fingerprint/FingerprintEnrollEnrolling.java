@@ -203,7 +203,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         // Do NOT cancel enrollment progress after rotating, adding mIsOrientationChanged
         // to judge if the focus changed was triggered by rotation, current WMS has triple callbacks
         // (true > false > true), we need to reset mIsOrientationChanged when !hasFocus callback.
-        if (!mIsOrientationChanged) {
+        // Side fps do not have to synchronize udfpsController overlay state, we should bypass sfps
+        // from onWindowFocusChanged() as long press sfps power key will prompt dialog to users.
+        if (!mIsOrientationChanged && !mCanAssumeSfps) {
             onCancelEnrollment(FINGERPRINT_ERROR_USER_CANCELED);
         } else {
             mIsOrientationChanged = false;
