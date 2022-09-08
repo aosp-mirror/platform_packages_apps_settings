@@ -46,7 +46,7 @@ object SpaEnvironment {
                 AppListNotificationsPageProvider,
             ) + togglePermissionAppListTemplate.createPageProviders(),
             rootPages = listOf(
-                SettingsPage(HomePageProvider.name),
+                SettingsPage.create(HomePageProvider.name),
             ),
         )
     }
