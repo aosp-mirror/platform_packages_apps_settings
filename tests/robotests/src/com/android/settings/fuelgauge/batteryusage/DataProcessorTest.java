@@ -18,9 +18,12 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.ContentValues;
 import android.content.Context;
 import android.text.format.DateUtils;
@@ -28,6 +31,7 @@ import android.text.format.DateUtils;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,6 +56,7 @@ public class DataProcessorTest {
     private Context mContext;
 
     private FakeFeatureFactory mFeatureFactory;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
     @Before
@@ -61,6 +66,7 @@ public class DataProcessorTest {
 
         mContext = spy(RuntimeEnvironment.application);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
+        mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
         mPowerUsageFeatureProvider = mFeatureFactory.powerUsageFeatureProvider;
     }
 
@@ -75,6 +81,10 @@ public class DataProcessorTest {
         assertThat(DataProcessor.getBatteryLevelData(
                 mContext, /*handler=*/ null, new HashMap<>(), /*asyncResponseDelegate=*/ null))
                 .isNull();
+        verify(mMetricsFeatureProvider, never())
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT);
+        verify(mMetricsFeatureProvider, never())
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT);
     }
 
     @Test
@@ -88,6 +98,10 @@ public class DataProcessorTest {
         assertThat(DataProcessor.getBatteryLevelData(
                 mContext, /*handler=*/ null, batteryHistoryMap, /*asyncResponseDelegate=*/ null))
                 .isNull();
+        verify(mMetricsFeatureProvider, never())
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT);
+        verify(mMetricsFeatureProvider, never())
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT);
     }
 
     @Test
@@ -421,6 +435,10 @@ public class DataProcessorTest {
 
         assertThat(DataProcessor.getBatteryUsageMap(
                 mContext, hourlyBatteryLevelsPerDay, new HashMap<>())).isNull();
+        verify(mMetricsFeatureProvider, never())
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT);
+        verify(mMetricsFeatureProvider, never())
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT);
     }
 
     @Test
@@ -549,6 +567,10 @@ public class DataProcessorTest {
                 resultDiffData.getSystemDiffEntryList().get(0), currentUserId, /*uid=*/ 3L,
                 ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY, /*consumePercentage=*/ 25.0,
                 /*foregroundUsageTimeInMs=*/ 50, /*backgroundUsageTimeInMs=*/ 60);
+        verify(mMetricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT, 3);
+        verify(mMetricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT, 0);
     }
 
     @Test
@@ -640,6 +662,10 @@ public class DataProcessorTest {
                 /*backgroundUsageTimeInMs=*/ 0);
         assertThat(resultMap.get(0).get(0)).isNotNull();
         assertThat(resultMap.get(0).get(DataProcessor.SELECTED_INDEX_ALL)).isNotNull();
+        verify(mMetricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT, 2);
+        verify(mMetricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT, 0);
     }
 
     @Test
@@ -701,6 +727,10 @@ public class DataProcessorTest {
                 .isEqualTo(entry.mConsumePower * ratio);
         assertThat(resultMap.get(0).get(0)).isNotNull();
         assertThat(resultMap.get(0).get(DataProcessor.SELECTED_INDEX_ALL)).isNotNull();
+        verify(mMetricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT, 1);
+        verify(mMetricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT, 0);
     }
 
     @Test
@@ -772,6 +802,10 @@ public class DataProcessorTest {
                 resultDiffData.getAppDiffEntryList().get(0), currentUserId, /*uid=*/ 2L,
                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 50.0,
                 /*foregroundUsageTimeInMs=*/ 10, /*backgroundUsageTimeInMs=*/ 20);
+        verify(mMetricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT, 1);
+        verify(mMetricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT, 1);
     }
 
     @Test
@@ -843,6 +877,10 @@ public class DataProcessorTest {
         assertThat(resultEntry.mBackgroundUsageTimeInMs).isEqualTo(20);
         resultEntry = resultDiffData.getAppDiffEntryList().get(1);
         assertThat(resultEntry.mBackgroundUsageTimeInMs).isEqualTo(0);
+        verify(mMetricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT, 2);
+        verify(mMetricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT, 0);
     }
 
     private static Map<Long, Map<String, BatteryHistEntry>> createHistoryMap(
