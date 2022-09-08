@@ -44,7 +44,7 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Suspendido"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Desconocido"</string>
     <string name="sdcard_unmount" product="nosdcard" msgid="1816306320988638382">"Desconectar USB"</string>
-    <string name="sdcard_unmount" product="default" msgid="8078570285871053815">"Desconectar tarjeta SD"</string>
+    <string name="sdcard_unmount" product="default" msgid="8078570285871053815">"Desmontar tarjeta SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="3248760426252305366">"Borrar almacenamiento USB"</string>
     <string name="sdcard_format" product="default" msgid="3676635435136326182">"Borrar tarjeta SD"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Vista previa"</string>
@@ -326,7 +326,7 @@
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Cargando…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Las aplicaciones que tengan permiso para detectar dispositivos cercanos pueden determinar la posición relativa de los dispositivos conectados."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Las aplicaciones y los servicios no pueden acceder a la ubicación. Aun así, quizá se envíe la ubicación del dispositivo a los servicios de emergencia cuando llames o envíes mensajes a números de emergencia."</string>
-    <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"Consulta más información sobre los ajustes de ubicación."</string>
+    <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"Más información sobre los ajustes de ubicación"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Cuentas"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Seguridad"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Cifrado y credenciales"</string>
@@ -345,7 +345,7 @@
     <string name="safety_center_title" msgid="7732397372178774777">"Seguridad y privacidad"</string>
     <string name="safety_center_summary" msgid="3554867379951053869">"Seguridad de aplicaciones, bloqueo del dispositivo, permisos"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Cara añadida"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Toca para configurar cara"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Toca para configurar la cara"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Desbloqueo facial"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Desbloqueo facial para el trabajo"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Cómo configurar Desbloqueo facial"</string>
@@ -481,7 +481,7 @@
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Cuando configures Desbloqueo facial y Desbloqueo con huella digital, el teléfono te pedirá la huella digital si llevas mascarilla o estás en un lugar oscuro"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Formas de desbloqueo"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Desbloquear teléfono"</string>
-    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Verificar que eres tú"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Verificar que eres tú en aplicaciones"</string>
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Usar la cara"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Usar la huella digital"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Usar la cara o la huella digital"</string>
@@ -606,7 +606,7 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"¿Quitar todas las huellas?"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"Quitar \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"¿Quieres eliminar esta huella digital?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Se eliminarán las imágenes y el modelo de huella digital asociados a \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que están almacenados en tu dispositivo"</string>
+    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Se eliminarán las imágenes y el modelo de huella digital asociados a \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que están almacenados en tu dispositivo."</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"No podrás usar tu huella digital para desbloquear el teléfono ni para verificar que eres tú en aplicaciones."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"No podrás usar tu huella digital para desbloquear un perfil de trabajo, autorizar compras o iniciar sesión en aplicaciones de trabajo."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Sí, quitar"</string>
@@ -1262,7 +1262,7 @@
     <string name="sound_settings" msgid="7622986039384531304">"Sonido y vibración"</string>
     <string name="all_volume_title" msgid="6196367642878437513">"Volumen"</string>
     <string name="musicfx_title" msgid="5458574743312283473">"Efectos de música"</string>
-    <string name="ring_volume_title" msgid="4869034595079914541">"Volumen del tono y de las notificaciones"</string>
+    <string name="ring_volume_title" msgid="4869034595079914541">"Volumen de tonos y notificaciones"</string>
     <string name="vibrate_in_silent_title" msgid="5076579100685867363">"Vibrar en modo Silencio"</string>
     <string name="notification_sound_title" msgid="8747567935870133157">"Sonido de notificación predeterminado"</string>
     <string name="incoming_call_volume_title" msgid="8445408274513654261">"Tono"</string>
@@ -1524,7 +1524,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Almacenamiento y caché"</string>
     <string name="storage_usb_settings" msgid="7058142934214211583">"Almacenamiento"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Ajustes de almacenamiento"</string>
-    <string name="storage_settings_summary" product="nosdcard" msgid="3858049818577638926">"Desconectar almacenamiento USB, ver almacenamiento disponible"</string>
+    <string name="storage_settings_summary" product="nosdcard" msgid="3858049818577638926">"Desmontar almacenamiento USB, ver almacenamiento disponible"</string>
     <string name="storage_settings_summary" product="default" msgid="267557695753980969">"Desconectar tarjeta SD, ver almacenamiento disponible."</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (ranura SIM %1$d)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Para verla, selecciona una red guardada"</string>
@@ -1575,9 +1575,9 @@
     <string name="memory_music_usage" msgid="8100634000114206429">"Audio (música, tonos, etc.)"</string>
     <string name="memory_media_misc_usage" msgid="7066851245178533269">"Otros archivos"</string>
     <string name="memory_media_cache_usage" msgid="780808666853685824">"Datos almacenados en caché"</string>
-    <string name="sd_eject" product="nosdcard" msgid="6136102589751843304">"Desconectar almacenamiento compartido"</string>
-    <string name="sd_eject" product="default" msgid="8062832622096296251">"Desconectar tarjeta SD"</string>
-    <string name="sd_eject_summary" product="nosdcard" msgid="6859940774161708871">"Desconectar almacenamiento USB interno"</string>
+    <string name="sd_eject" product="nosdcard" msgid="6136102589751843304">"Desmontar almacenamiento compartido"</string>
+    <string name="sd_eject" product="default" msgid="8062832622096296251">"Desmontar tarjeta SD"</string>
+    <string name="sd_eject_summary" product="nosdcard" msgid="6859940774161708871">"Desmontar almacenamiento USB interno"</string>
     <string name="sd_eject_summary" product="default" msgid="5151243312587186226">"Desconectar la tarjeta SD para extraerla de forma segura"</string>
     <string name="sd_insert_summary" product="nosdcard" msgid="9164545135649775664">"Inserta USB para activar almacenamiento"</string>
     <string name="sd_insert_summary" product="default" msgid="5949168259622002192">"Insertar una tarjeta SD para el montaje"</string>
@@ -1590,14 +1590,14 @@
     <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"Borrar todos los datos del almacenamiento USB del teléfono, como la música y las fotos"</string>
     <string name="sd_format_summary" product="default" msgid="60583152211068164">"Borrar todos los datos de la tarjeta SD, como la música y las fotos"</string>
     <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"La función MTP o PTP está activa."</string>
-    <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"¿Desconectar almacenamiento USB?"</string>
-    <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"¿Desconectar tarjeta SD?"</string>
-    <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="1212025106709645023">"Si desconectas el almacenamiento USB, se detendrán algunas aplicaciones que estás usando y no estarán disponibles hasta que vuelvas a activarlo."</string>
-    <string name="dlg_confirm_unmount_text" product="default" msgid="3887768438615563697">"Si desconectas la tarjeta SD, se detendrán algunas aplicaciones en ejecución y no estarán disponibles hasta que la vuelvas a activar."</string>
+    <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"¿Desmontar almacenamiento USB?"</string>
+    <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"¿Desmontar tarjeta SD?"</string>
+    <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="1212025106709645023">"Si desmontas el almacenamiento USB, se detendrán algunas aplicaciones que estás usando y no estarán disponibles hasta que vuelvas a activarlo."</string>
+    <string name="dlg_confirm_unmount_text" product="default" msgid="3887768438615563697">"Si desmontas la tarjeta SD, se detendrán algunas aplicaciones en ejecución y no estarán disponibles hasta que la vuelvas a activar."</string>
     <string name="dlg_error_unmount_title" product="nosdcard" msgid="2205587942165199845"></string>
     <string name="dlg_error_unmount_title" product="default" msgid="2205587942165199845"></string>
-    <string name="dlg_error_unmount_text" product="nosdcard" msgid="7876201891724279436">"No se ha podido desconectar el almacenamiento USB. Inténtalo de nuevo más tarde."</string>
-    <string name="dlg_error_unmount_text" product="default" msgid="2185659901137961711">"No se ha podido desconectar la tarjeta SD. Inténtalo de nuevo más tarde."</string>
+    <string name="dlg_error_unmount_text" product="nosdcard" msgid="7876201891724279436">"No se ha podido desmontar el almacenamiento USB. Inténtalo de nuevo más tarde."</string>
+    <string name="dlg_error_unmount_text" product="default" msgid="2185659901137961711">"No se ha podido desmontar la tarjeta SD. Inténtalo de nuevo más tarde."</string>
     <string name="unmount_inform_text" product="nosdcard" msgid="5932607205977999175">"Se desactivará el almacenamiento USB."</string>
     <string name="unmount_inform_text" product="default" msgid="716578785262713312">"Se desactivará la tarjeta SD."</string>
     <string name="sd_ejecting_title" msgid="1641122369013595273">"Desactivando"</string>
@@ -1689,7 +1689,7 @@
     <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Almacenamiento portátil"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Configurar más tarde"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"¿Quieres formatear tu <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Si quieres almacenar aplicaciones, archivos y contenido multimedia en tu <xliff:g id="NAME_0">^1</xliff:g>, es necesario formatearla. \n\nDe esa forma, se borra todo el contenido de <xliff:g id="NAME_1">^2</xliff:g>. Para no perder el contenido, crea una copia de seguridad en otro dispositivo o <xliff:g id="NAME_2">^3</xliff:g>."</string>
+    <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Hay que formatear esta <xliff:g id="NAME_0">^1</xliff:g> para almacenar aplicaciones, archivos y contenido multimedia. \n\nEl formateado borrará todo el contenido de la <xliff:g id="NAME_1">^2</xliff:g>. Para no perderlo, crea una copia de seguridad en otro dispositivo o <xliff:g id="NAME_2">^3</xliff:g>."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formatear <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"¿Quieres mover contenido a tu <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Puedes mover archivos, contenido multimedia y determinadas aplicaciones a tu <xliff:g id="NAME">^1</xliff:g>. \n\nAl hacerlo, se liberarán <xliff:g id="SIZE">^2</xliff:g> del almacenamiento de tu teléfono. El proceso tardará <xliff:g id="DURATION">^3</xliff:g>, aproximadamente."</string>
@@ -1937,7 +1937,7 @@
     <string name="lockpassword_choose_your_password_header" msgid="2407205113298094824">"Establece una contraseña"</string>
     <string name="lockpassword_choose_your_profile_password_header" msgid="7038997227611893312">"Define una contraseña para el trabajo"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Establece un PIN"</string>
-    <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Define un PIN para el trabajo"</string>
+    <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Establece un PIN para el trabajo"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Crea un patrón"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Crea un patrón de trabajo"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Para usar una huella, establece un patrón"</string>
@@ -1964,7 +1964,7 @@
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Desbloqueo facial requiere un PIN"</string>
     <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Define una contraseña para usar la cara o una huella digital"</string>
     <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Define un patrón para usar la cara o una huella digital"</string>
-    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Define un PIN para usar la cara o una huella digital"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Establece un PIN para usar la cara o una huella digital"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"¿Has olvidado la contraseña?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"¿Has olvidado el patrón?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"¿Has olvidado el PIN?"</string>
@@ -2091,9 +2091,9 @@
     <string name="show_background_processes" msgid="5682856012453562151">"Procesos en caché"</string>
     <string name="default_emergency_app" msgid="1929974800666613803">"Aplicación Emergencia"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"Recuperar ajustes de aplicaciones"</string>
-    <string name="reset_app_preferences_title" msgid="8935136792316050759">"¿Recuperar preferencias de las aplicaciones?"</string>
-    <string name="reset_app_preferences_desc" msgid="6509978724602405805">"Se recuperarán todas las preferencias de:\n\n"<li>"Aplicaciones inhabilitadas"</li>\n<li>"Notificaciones de aplicaciones inhabilitadas"</li>\n<li>"Aplicaciones predeterminadas para acciones"</li>\n<li>"Restricciones de datos en segundo plano de aplicaciones"</li>\n<li>"Restricciones de permisos"</li>\n\n"No se perderán los datos de las aplicaciones."</string>
-    <string name="reset_app_preferences_button" msgid="2591318711372850058">"Recuperar aplicaciones"</string>
+    <string name="reset_app_preferences_title" msgid="8935136792316050759">"¿Restablecer preferencias de las aplicaciones?"</string>
+    <string name="reset_app_preferences_desc" msgid="6509978724602405805">"Se restablecerán todas las preferencias de:\n\n"<li>"Aplicaciones inhabilitadas"</li>\n<li>"Notificaciones de aplicaciones inhabilitadas"</li>\n<li>"Aplicaciones predeterminadas para acciones"</li>\n<li>"Restricciones de datos en segundo plano de aplicaciones"</li>\n<li>"Restricciones de permisos"</li>\n\n"No se perderán los datos de las aplicaciones."</string>
+    <string name="reset_app_preferences_button" msgid="2591318711372850058">"Restablecer aplicaciones"</string>
     <string name="manage_space_text" msgid="9013414693633572277">"Gestionar espacio"</string>
     <string name="filter" msgid="9039576690686251462">"Filtrar"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Seleccionar opciones de filtrado"</string>
@@ -2448,7 +2448,7 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Acceso directo a Invertir colores"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Invertir colores hace que las pantallas claras se vuelvan oscuras y que las pantallas oscuras se vuelvan claras."</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Ten en cuenta lo siguiente:&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Los colores cambiarán en el contenido multimedia y las imágenes.&lt;/li&gt; &lt;li&gt; Invertir colores funciona en todas las aplicaciones.&lt;/li&gt; &lt;li&gt; Si lo que quieres es que se muestre un fondo oscuro, prueba mejor a usar el tema oscuro.&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automático (tiempo de permanencia)"</string>
+    <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automático (tiempo permanencia)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Clic automático (permanencia)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Más información sobre el clic automático (tiempo de permanencia)"</string>
     <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"Puedes configurar un ratón conectado para que haga clic automáticamente cuando el cursor deje de moverse durante un intervalo de tiempo determinado"</string>
@@ -3037,7 +3037,7 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Activado"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Desactivado"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Almacenamiento de credenciales"</string>
-    <string name="credentials_install" msgid="3933218407598415827">"Instalar certificados"</string>
+    <string name="credentials_install" msgid="3933218407598415827">"Instalar un certificado"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Instala certificados desde el almacenamiento"</string>
     <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"Instala certificados desde la tarjeta SD"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Borrar credenciales"</string>
@@ -3424,7 +3424,7 @@
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"Ampliar ajustes de aplicación"</string>
     <string name="user_choose_copy_apps_to_another_user" msgid="5914037067347012870">"Selecciona las apps que quieres instalar"</string>
     <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"Instalar aplicaciones disponibles"</string>
-    <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Pagos contactless"</string>
+    <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Pagos sin contacto"</string>
     <string name="nfc_default_payment_settings_title" msgid="2150504446774382261">"Aplicación para pagos predeterminada"</string>
     <string name="nfc_default_payment_footer" msgid="978535088340021360">"Para pagar con una aplicación para pagos, acerca la parte posterior del dispositivo a un terminal"</string>
     <string name="nfc_more_details" msgid="1700713533074275233">"Más información"</string>
@@ -3441,15 +3441,15 @@
     <string name="nfc_payment_use_default_dialog" msgid="8556328090777785383">"Usar aplicación para pagos predeterminada"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"Siempre"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Excepto si hay otra aplicación para pagos abierta"</string>
-    <string name="nfc_payment_pay_with" msgid="3001320460566523453">"En un terminal contactless, paga con:"</string>
+    <string name="nfc_payment_pay_with" msgid="3001320460566523453">"En un terminal sin contacto, paga con:"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Cómo pagar en el terminal"</string>
-    <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Primero configura una aplicación para pagos. Cuando lo hayas hecho, solo tienes que acercar la parte trasera del dispositivo sobre cualquier terminal con el símbolo de pago contactless."</string>
+    <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Primero configura una aplicación para pagos. Cuando lo hayas hecho, solo tienes que acercar la parte trasera del dispositivo sobre cualquier terminal con el símbolo de pago sin contacto."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Entendido"</string>
     <string name="nfc_more_title" msgid="1041094244767216498">"Más…"</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Elegir aplicación de pago predeterminada"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"Actualizar aplicación de pago predeterminada"</string>
-    <string name="nfc_payment_set_default" msgid="4101484767872365195">"En un terminal contactless, paga con <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"En un terminal contactless, paga con <xliff:g id="APP_0">%1$s</xliff:g>.\n\nEsto reemplazará a <xliff:g id="APP_1">%2$s</xliff:g> como tu aplicación de pago predeterminada."</string>
+    <string name="nfc_payment_set_default" msgid="4101484767872365195">"En un terminal sin contacto, paga con <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"En un terminal sin contacto, paga con <xliff:g id="APP_0">%1$s</xliff:g>.\n\nEsto reemplazará a <xliff:g id="APP_1">%2$s</xliff:g> como tu aplicación de pago predeterminada."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Elegir como predeterminada"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Actualizar"</string>
     <string name="nfc_work_text" msgid="2496515165821504077">"Trabajo"</string>
@@ -3675,12 +3675,12 @@
     <string name="keywords_ambient_display" msgid="3149287105145443697">"notificación entrante"</string>
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"conexión compartida por usb, conexión compartida por bluetooth, punto de acceso wi‑fi"</string>
     <string name="keywords_accessibility_vibration_primary_switch" msgid="730692154347231253">"vibración al pulsar, vibrar, vibración"</string>
-    <string name="keywords_touch_vibration" msgid="1125291201902251273">"háptica, vibrar, pantalla, sensibilidad"</string>
-    <string name="keywords_ring_vibration" msgid="1736301626537417541">"háptica, vibrar, teléfono, llamada, sensibilidad, tono"</string>
-    <string name="keywords_ramping_ringer_vibration" msgid="3678966746742257366">"vibración, vibrar, teléfono, llamada, tono, gradual"</string>
-    <string name="keywords_notification_vibration" msgid="2620799301276142183">"háptica, vibrar, sensibilidad, notificación"</string>
-    <string name="keywords_alarm_vibration" msgid="4833220371621521817">"háptica, vibrar, sensibilidad, alarma"</string>
-    <string name="keywords_media_vibration" msgid="723896490102792327">"háptica, vibrar, sensibilidad, multimedia"</string>
+    <string name="keywords_touch_vibration" msgid="1125291201902251273">"vibración al pulsar, vibrar, pantalla, sensibilidad"</string>
+    <string name="keywords_ring_vibration" msgid="1736301626537417541">"vibración al pulsar, vibrar, teléfono, llamada, sensibilidad, tono"</string>
+    <string name="keywords_ramping_ringer_vibration" msgid="3678966746742257366">"vibración al pulsar, vibrar, teléfono, llamada, tono, gradual"</string>
+    <string name="keywords_notification_vibration" msgid="2620799301276142183">"vibración al pulsar, vibrar, sensibilidad, notificación"</string>
+    <string name="keywords_alarm_vibration" msgid="4833220371621521817">"vibración al pulsar, vibrar, sensibilidad, alarma"</string>
+    <string name="keywords_media_vibration" msgid="723896490102792327">"vibración al pulsar, vibrar, sensibilidad, multimedia"</string>
     <string name="keywords_vibration" msgid="670455132028025952">"vibración al pulsar, vibrar, vibración"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"ahorro de batería, batería fija, duradera, ahorro de batería, batería"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutina, horario, ahorro de batería, ahorro de corriente, batería, automático, porcentaje"</string>
@@ -3919,16 +3919,16 @@
     <string name="notification_pulse_title" msgid="8013178454646671529">"Luz parpadeante"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"Privacidad"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Saltar pantalla de bloqueo"</string>
-    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Después de desbloquear, ir a la última pantalla usada"</string>
+    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Después de desbloquear, ir a la última pantalla usada."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Pantalla de bloqueo, pantalla bloqueo, saltar, evitar"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Con el perfil de trabajo bloqueado"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificaciones en pantalla de bloqueo"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostrar conversaciones predeterminadas y silenciosas"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostrar conversaciones predeterminadas y silenciosas"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Ocultar conversaciones y notificaciones silenciosas"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Oculta conversaciones y notificaciones silenciosas"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"No mostrar ninguna notificación"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Notificaciones sensibles"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Mostrar contenido sensible en la pantalla de bloqueo"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Muestra contenido sensible en la pantalla de bloqueo"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Notificaciones sensibles del perfil de trabajo"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Mostrar contenido sensible del perfil de trabajo en la pantalla de bloqueo"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Mostrar todo el contenido de las notificaciones"</string>
@@ -3996,7 +3996,7 @@
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Sin sonido ni vibración"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Sin sonido ni vibración, y se muestra más abajo en la sección de conversaciones"</string>
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"Puede sonar o vibrar según los ajustes del teléfono"</string>
-    <string name="notification_channel_summary_high" msgid="3411637309360617621">"Cuando el dispositivo esté desbloqueado, muestra las notificaciones en la parte superior de la pantalla"</string>
+    <string name="notification_channel_summary_high" msgid="3411637309360617621">"Cuando el dispositivo esté desbloqueado, muestra las notificaciones como un banner en la parte superior de la pantalla"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Todas las notificaciones de \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Todas las notificaciones de <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Notificaciones adaptativas"</string>
@@ -4025,7 +4025,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"¿Permitir que <xliff:g id="SERVICE">%1$s</xliff:g> acceda a las notificaciones?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Las notificaciones mejoradas sustituyeron las notificaciones adaptativas en Android 12. Esta función te muestra acciones y respuestas sugeridas, y organiza tus notificaciones.\n\nLas notificaciones mejoradas pueden acceder al contenido de tus notificaciones, incluida información personal, como nombres de contactos y mensajes. También permiten descartar o responder a notificaciones; por ejemplo, es posible contestar llamadas telefónicas y controlar el modo No molestar."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"¿Permitir que <xliff:g id="SERVICE">%1$s</xliff:g> acceda a las notificaciones?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrá leer todas las notificaciones, incluidas las que tengan información personal, como nombres de contactos, fotos y texto de mensajes que recibas. Esta aplicación también podrá posponer o descartar notificaciones, o realizar acciones en botones de notificaciones, como responder a llamadas.. \n\nAdemás, podrá activar o desactivar el modo No molestar y modificar ajustes relacionados."</string>
+    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrá leer todas las notificaciones, incluidas las que tengan información personal, como nombres de contactos, fotos y texto de mensajes que recibas. Esta aplicación también podrá posponer o descartar notificaciones, o realizar acciones en botones de notificaciones, como responder a llamadas. \n\nAdemás, podrá activar o desactivar el modo No molestar y modificar ajustes relacionados."</string>
     <string name="nls_warning_prompt" msgid="9143226910825830619">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrá:"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Leer tus notificaciones"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Puede leer las notificaciones, incluidas las relacionadas con información personal, como contactos, mensajes y fotos."</string>
@@ -4052,7 +4052,7 @@
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Aplicaciones que se muestran en el dispositivo"</string>
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Esta aplicación no admite la configuración avanzada"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servicios de ayuda de RV"</string>
-    <string name="no_vr_listeners" msgid="8442646085375949755">"Ninguna aplicación instalada ha solicitado ejecutarse como servicios de ayuda de RV."</string>
+    <string name="no_vr_listeners" msgid="8442646085375949755">"Ninguna aplicación instalada ha solicitado ejecutarse como servicio de ayuda de RV."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"¿Permitir que el servicio de RV acceda a <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> podrá ejecutarse cuando utilices aplicaciones en el modo de realidad virtual."</string>
     <string name="display_vr_pref_title" msgid="4850474436291113569">"Cuando el dispositivo está en RV"</string>

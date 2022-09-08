@@ -190,8 +190,8 @@
     <string name="proxy_error_invalid_port" msgid="2830054691770209166">"Antamasi portti on virheellinen."</string>
     <string name="proxy_warning_limited_support" msgid="3277104160797351942">"Selain käyttää HTTP-välityspalvelinta, mutta muut sovellukset mahdollisesti eivät."</string>
     <string name="proxy_url_title" msgid="3502625766036404073">"Välitysp. aut. määr. URL: "</string>
-    <string name="radio_info_ping_hostname_v4" msgid="4790577760885127088">"Ping-kutsu isäntänimelle (www.google.com), IPv4:"</string>
-    <string name="radio_info_ping_hostname_v6" msgid="8327436534663560713">"Ping-kutsu isäntänimelle (www.google.com), IPv6:"</string>
+    <string name="radio_info_ping_hostname_v4" msgid="4790577760885127088">"Ping isäntänimelle (www.google.com), IPv4:"</string>
+    <string name="radio_info_ping_hostname_v6" msgid="8327436534663560713">"Ping isäntänimelle (www.google.com), IPv6:"</string>
     <string name="radio_info_http_client_test" msgid="5673975677271544085">"HTTP-asiakastesti:"</string>
     <string name="ping_test_label" msgid="265427033290391845">"Suorita ping-testi"</string>
     <string name="sdcard_changes_instructions" msgid="2331969501845866957">"Muutokset tulevat voimaan, kun USB-johto kytketään uudelleen."</string>
@@ -325,7 +325,7 @@
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Ladataan…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Sovellukset, joilla on lähellä olevien laitteiden lupa, voivat määrittää yhdistettyjen laitteiden suhteellisen sijainnin."</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Sijainnin käyttöoikeus on pois päältä sovelluksissa ja palveluissa. Tiedot laitteesi sijainnista voidaan silti lähettää pelastustyöntekijöille, kun soitat tai lähetät tekstiviestin hätänumeroon."</string>
+    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Sovelluksilla ja palveluilla ei ole sijaintilupaa. Tiedot laitteesi sijainnista voidaan silti lähettää pelastustyöntekijöille, kun soitat tai lähetät tekstiviestin hätänumeroon."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"Lue lisää sijaintiasetuksista."</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Tilit"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Suojaus"</string>
@@ -862,7 +862,7 @@
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"Lisäasetukset"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Bluetooth-lisäasetukset"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Kun Bluetooth on käytössä, laite voi viestiä lähiympäristön Bluetooth-laitteiden kanssa."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Kun Bluetooth on käytössä, laitteesi voi kommunikoida muiden lähellä olevien Bluetooth-laitteiden kanssa.\n\nParantaakseen laitteen käyttökokemusta sovellukset ja palvelut voivat silti hakea lähellä olevia laitteita aina, vaikka Bluetooth olisi pois käytöstä. Näin voidaan esimerkiksi kehittää sijaintiin perustuvia ominaisuuksia ja palveluita. Voit muuttaa tätä "<annotation id="link">"Bluetooth-haun asetuksissa"</annotation>"."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Kun Bluetooth on käytössä, laitteesi voi kommunikoida muiden lähellä olevien Bluetooth-laitteiden kanssa.\n\nKun Bluetooth on poissa käytöstä, sovellukset ja palvelut voivat silti hakea lähellä olevia laitteita käyttökokemuksen parantamiseksi. Näin voidaan esimerkiksi kehittää sijaintiin perustuvia ominaisuuksia ja palveluita. Voit muuttaa tätä "<annotation id="link">"Bluetooth-haun asetuksissa"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"Parantaakseen sijainnin tarkkuutta järjestelmäsovellukset ja -palvelut voivat edelleen havaita Bluetooth-laitteita. Voit muuttaa tätä <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>etsintäasetuksissa<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Yhteyttä ei voi muodostaa. Yritä uudelleen."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Laitteen tiedot"</string>
@@ -1288,7 +1288,7 @@
     <string name="volume_alarm_mute" msgid="3730895630530980760">"Mykistä herätykset"</string>
     <string name="dock_settings" msgid="4654404127402812514">"Telakointi"</string>
     <string name="dock_settings_title" msgid="1276956575555480214">"Telakointiasetukset"</string>
-    <string name="dock_audio_settings_title" msgid="8294821925086965934">"Ääni"</string>
+    <string name="dock_audio_settings_title" msgid="8294821925086965934">"Audio"</string>
     <string name="dock_audio_summary_desk" msgid="4158593887711452737">"Yhdistetyn työpöytätelakan asetukset"</string>
     <string name="dock_audio_summary_car" msgid="292911654994476080">"Yhdistetyn autotelakan asetukset"</string>
     <string name="dock_audio_summary_none" product="tablet" msgid="7758416095500202500">"Tablet-laitetta ei ole telakoitu"</string>
@@ -1792,7 +1792,7 @@
     <string name="main_clear_final_desc_esim" msgid="440406836793824969">"Kaikki henkilökohtaiset tietosi poistetaan, mukaan lukien ladatut sovellukset ja SIM-kortit. Toimintoa ei voi kumota."</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"Poistetaanko kaikki data?"</string>
     <string name="main_clear_not_available" msgid="3433795327146684827">"Tämä käyttäjä ei voi palauttaa tehdasasetuksia"</string>
-    <string name="main_clear_progress_title" msgid="7239741132015617719">"Poistetaan"</string>
+    <string name="main_clear_progress_title" msgid="7239741132015617719">"Tyhjennetään"</string>
     <string name="main_clear_progress_text" msgid="4636695115176327972">"Odota…"</string>
     <string name="call_settings_title" msgid="2531072044177194164">"Puheluasetukset"</string>
     <string name="call_settings_summary" msgid="8244293779053318053">"Ota käyttöön puhelinvastaaja, soitonsiirrot, koputuspalvelu, soittajan tunnus"</string>
@@ -2307,9 +2307,9 @@
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Näytönlukuohjelma ensisijaisesti näkövammaisille ja heikkonäköisille"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Napauta kohteita näytöllä, niin ne luetaan ääneen"</string>
-    <string name="accessibility_captioning_title" msgid="4561871958958925225">"Tekstitysvalinnat"</string>
+    <string name="accessibility_captioning_title" msgid="4561871958958925225">"Tekstitysasetukset"</string>
     <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"Tietoja tekstitysvalinnoista"</string>
-    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Lue lisää tekstitysvalinnoista"</string>
+    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Lue lisää tekstitysasetuksista"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Suurennus"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Suurennuksen pikanäppäin"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Suurenna kirjoitettava teksti"</string>
@@ -2438,7 +2438,7 @@
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 minuuttia"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Toiminnon aika (saavutettavuuskatkaisu)"</string>
     <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Tietoja toiminnon ajasta (saavutettavuuskatkaisu)"</string>
-    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Lue lisää toiminnon ajasta (saavutettavuuskatkaisu)"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Lue lisää reagointiajasta (saavutettavuuden aikakatkaisu)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Reagointiaika"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Kaikki sovellukset eivät tue tätä ajoitusasetusta"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Valitse, miten pitkään haluat nähdä tilapäiset viestit, joissa pyydetään tekemään toiminto"</string>
@@ -2839,7 +2839,7 @@
     <string name="power_cell" msgid="7793805106954398186">"Mobiiliverkko"</string>
     <string name="power_phone" msgid="2768396619208561670">"Äänipuhelut"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Tablet pois käytöstä"</string>
-    <string name="power_idle" product="default" msgid="9132502722499465252">"Puhelin on käyttämätön"</string>
+    <string name="power_idle" product="default" msgid="9132502722499465252">"Puhelin ei käytössä"</string>
     <string name="power_unaccounted" msgid="2160811497426475703">"Muut"</string>
     <string name="power_overcounted" msgid="3681101460287472876">"Yliarvioitu"</string>
     <string name="usage_type_cpu" msgid="8544148642836549011">"Suorittimen käyttöaika yhteensä"</string>
@@ -2854,7 +2854,7 @@
     <string name="usage_type_radio_active" msgid="1876069445855950097">"Mobiiliradio aktiivinen"</string>
     <string name="usage_type_data_wifi_send" msgid="6154038607322769558">"Lähetetyt Wi-Fi-paketit"</string>
     <string name="usage_type_data_wifi_recv" msgid="4821128213012023100">"Vastaanotetut Wi-Fi-paketit"</string>
-    <string name="usage_type_audio" msgid="1100651355357912864">"Ääni"</string>
+    <string name="usage_type_audio" msgid="1100651355357912864">"Audio"</string>
     <string name="usage_type_video" msgid="1068481638906679035">"Video"</string>
     <string name="usage_type_camera" msgid="3999579307204257822">"Kamera"</string>
     <string name="usage_type_flashlight" msgid="5629235220169383309">"Taskulamppu"</string>
@@ -2963,7 +2963,7 @@
     <string name="battery_percentage" msgid="1779934245963043490">"Akun varaus prosentteina"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Näytä akun varaus prosentteina tilapalkissa"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Akun varaustaso 24 viime tunnin sisällä"</string>
-    <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Sovelluksen käyttö 24 viime tunnin sisällä"</string>
+    <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Sovelluksen käyttö kuluneen vuorokauden aikana"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Järjestelmän käyttö 24 viime tunnin sisällä"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Järjestelmän käyttö: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Sovelluksen käyttö: <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -4416,7 +4416,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> käyttämätöntä sovellusta</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> käyttämätön sovellus</item>
     </plurals>
-    <string name="unused_apps_category" msgid="8954930958175500851">"Käyttämättömät sovellusasetukset"</string>
+    <string name="unused_apps_category" msgid="8954930958175500851">"Käyttämättömien sovellusten asetukset"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"Keskeytä sovellustoim. jos ei käytössä"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Poista käyttämättömät luvat ja väliaikaiset tiedostot ja pysäytä ilmoitukset"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Kaikki sovellukset"</string>
@@ -4741,7 +4741,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"Mobiilidatan käyttö"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Sovelluksen datan käyttö"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Wi-Fi-datan käyttö"</string>
-    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Muu kuin operaattorien käyttämä data"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Muun kuin mobiilidatan käyttö"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Ethernet-datan käyttö"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
