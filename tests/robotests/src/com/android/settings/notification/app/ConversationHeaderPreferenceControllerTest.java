@@ -20,6 +20,7 @@ import static android.app.NotificationManager.IMPORTANCE_NONE;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -121,6 +122,9 @@ public class ConversationHeaderPreferenceControllerTest {
         NotificationChannel channel = new NotificationChannel("cid", "cname", IMPORTANCE_NONE);
         mController.onResume(appRow, channel, null, null, null, null, null);
         assertEquals(channel.getName(), mController.getLabel());
+
+        mController.onResume(appRow, null, null, null, null, null, null);
+        assertNull(mController.getLabel());
     }
 
     @Test
