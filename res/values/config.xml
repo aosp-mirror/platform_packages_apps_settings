@@ -29,9 +29,6 @@
          very long strings too. -->
     <integer name="maximum_user_dictionary_word_length" translatable="false">48</integer>
 
-    <!-- Dashboard number of columns -->
-    <integer name="dashboard_num_columns">1</integer>
-
     <!-- Carrier_enabled editable -->
     <bool name="config_allow_edit_carrier_enabled" translatable="false">false</bool>
 
@@ -65,9 +62,6 @@
     <!-- Double twist sensor type and vendor used by gesture setting -->
     <string name="gesture_double_twist_sensor_type" translatable="false"></string>
     <string name="gesture_double_twist_sensor_vendor" translatable="false"></string>
-
-    <!-- When true enable gesture setting. -->
-    <bool name="config_gesture_settings_enabled">false</bool>
 
     <!-- If the Storage Manager settings are enabled. -->
     <bool name="config_storage_manager_settings_enabled">false</bool>
@@ -178,14 +172,6 @@
 
     <!-- List of packages that should be allowlisted for slice uri access. Do not translate -->
     <string-array name="slice_allowlist_package_names" translatable="false"/>
-
-    <!-- Whether or not App & Notification screen should display recently used apps -->
-    <bool name="config_display_recent_apps">true</bool>
-
-    <!-- Package name for the storage manager to use from Settings search. -->
-    <string name="config_deletion_helper_package" translatable="false">com.android.storagemanager</string>
-    <!-- Class name for the storage manager's deletion helper class. -->
-    <string name="config_deletion_helper_class" translatable="false">com.android.storagemanager.deletionhelper.DeletionHelperActivity</string>
 
     <!-- Whether to use a UI variant that minimizes the number of UI elements on screen. This is
          typically used when there is not enough space to display everything, because pattern view
@@ -302,8 +288,6 @@
     <bool name="has_dock_settings">false</bool>
     <!-- Whether there is a boot sounds checkbox -->
     <bool name="has_boot_sounds">false</bool>
-    <!-- Whether there is a silent mode checkbox  -->
-    <bool name="has_silent_mode">true</bool>
 
     <!-- Display additional System Update menu if true -->
     <bool name="config_additional_system_update_setting_enable">false</bool>
@@ -346,14 +330,8 @@
     <!-- Whether battery from app_info_settings is available or not. -->
     <bool name="config_show_app_info_settings_battery">true</bool>
 
-    <!-- Whether location mode is available or not. -->
-    <bool name="config_location_mode_available">true</bool>
-
     <!-- Whether location scanning is available or not. -->
     <bool name="config_show_location_scanning">true</bool>
-
-    <!-- Whether high_power_apps should be shown or not. -->
-    <bool name="config_show_high_power_apps">true</bool>
 
     <!-- Whether media_volume should be shown or not. -->
     <bool name="config_show_media_volume">true</bool>
@@ -469,9 +447,6 @@
     <!-- Whether to disable "Uninstall Updates" menu item for System apps or not. -->
     <bool name="config_disable_uninstall_update">false</bool>
 
-    <!-- Whether or not extra preview panels should be used for screen zoom setting. -->
-    <bool name="config_enable_extra_screen_zoom_preview">true</bool>
-
     <!-- Slice Uri to query nearby devices. -->
     <string name="config_nearby_devices_slice_uri" translatable="false">content://com.google.android.gms.nearby.fastpair/device_status_list_item</string>
 
@@ -548,9 +523,6 @@
 
     <!-- Whether to show Smart Storage toggle -->
     <bool name="config_show_smart_storage_toggle">true</bool>
-
-    <!-- Whether to support large screen -->
-    <bool name="config_supported_large_screen">false</bool>
 
     <!-- Display settings screen, Color mode options. Must be the same length and order as
          config_color_mode_options_values below. Only the values that also appear in

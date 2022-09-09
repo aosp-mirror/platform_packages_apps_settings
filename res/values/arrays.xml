@@ -18,27 +18,6 @@
 */
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Choices for timezone picker first level.
-         These values will be used as search terms for TimeZone displayName
-         strings. --> <skip />
-    <!-- The time zone picker screen has two levels.  The first level allows the user to choose a region. -->
-    <string-array name="timezone_filters">
-        <!-- The next level of the time zoner picker should show time zones from the Americas. -->
-        <item>America</item>
-        <!-- The next level of the time zoner picker should show time zones from Europe. -->
-        <item>Europe</item>
-        <!-- The next level of the time zoner picker should show time zones from Africa. -->
-        <item>Africa</item>
-        <!-- The next level of the time zoner picker should show time zones from Asia. -->
-        <item>Asia</item>
-        <!-- The next level of the time zoner picker should show time zones from Australia. -->
-        <item>Australia</item>
-        <!-- The next level of the time zoner picker should show time zones from Pacific. -->
-        <item>Pacific</item>
-        <!-- The next level of the time zoner picker should show time zones from ALL regions. -->
-        <item>All</item>
-    </string-array>
-
     <!-- Display settings.  The delay in inactivity before the screen is turned off. These are shown in a list dialog. -->
     <string-array name="screen_timeout_entries">
         <item>15 seconds</item>
@@ -52,38 +31,6 @@
 
     <!-- Do not translate. -->
     <string-array name="screen_timeout_values" translatable="false">
-        <!-- Do not translate. -->
-        <item>15000</item>
-        <!-- Do not translate. -->
-        <item>30000</item>
-        <!-- Do not translate. -->
-        <item>60000</item>
-        <!-- Do not translate. -->
-        <item>120000</item>
-        <!-- Do not translate. -->
-        <item>300000</item>
-        <!-- Do not translate. -->
-        <item>600000</item>
-        <!-- Do not translate. -->
-        <item>1800000</item>
-    </string-array>
-
-    <!-- Display settings.  The delay in inactivity before the dream is shown. These are shown in a list dialog. -->
-    <string-array name="dream_timeout_entries">
-        <item>Never</item>
-        <item>15 seconds</item>
-        <item>30 seconds</item>
-        <item>1 minute</item>
-        <item>2 minutes</item>
-        <item>5 minutes</item>
-        <item>10 minutes</item>
-        <item>30 minutes</item>
-    </string-array>
-
-    <!-- Do not translate. -->
-    <string-array name="dream_timeout_values" translatable="false">
-        <!-- Do not translate. -->
-        <item>0</item>
         <!-- Do not translate. -->
         <item>15000</item>
         <!-- Do not translate. -->
