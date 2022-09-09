@@ -5344,11 +5344,6 @@
     <string name="accessibility_hearingaid_left_and_right_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g>, left and right</string>
     <!-- Summary for the accessibility preference for hearing aid when there are more than one set of devices are active. [CHAR LIMIT=50] -->
     <string name="accessibility_hearingaid_more_device_summary"><xliff:g id="device_name" example="GN Hearing Aids">%1$s</xliff:g> +1 more</string>
-    <!-- Summary for the accessibility preference for hearing aid when there are saved devices. [CHAR LIMIT=50] -->
-    <plurals name="show_number_hearingaid_count">
-        <item quantity="one"><xliff:g id="number_device_count">%1$d</xliff:g> saved hearing aid</item>
-        <item quantity="other"><xliff:g id="number_device_count">%1$d</xliff:g> saved hearing aids</item>
-    </plurals>
     <!-- Title for the accessibility audio adjustment page. [CHAR LIMIT=50] -->
     <string name="accessibility_audio_adjustment_title">Audio adjustment</string>
     <!-- Title for control audio description preference. [CHAR LIMIT=50] -->
@@ -7650,11 +7645,6 @@
     <!--Dashboard strings-->
     <!-- Text to describe the dashboard fragment title [CHAR LIMIT=16] -->
     <string name="dashboard_title">Settings</string>
-    <!-- Text to describe the items to be expanded as suggested settings [CHAR LIMIT=none] -->
-    <plurals name="settings_suggestion_header_summary_hidden_items">
-        <item quantity="one">Show %d hidden item</item>
-        <item quantity="other">Show %d hidden items</item>
-    </plurals>
 
     <!-- Title for setting tile leading to network and Internet settings [CHAR LIMIT=40]-->
     <string name="network_dashboard_title">Network &amp; internet</string>
@@ -8841,13 +8831,6 @@
     <!-- Summary of preference to manage notification listeners, when none are enabled -->
     <string name="manage_notification_access_summary_zero">Apps cannot read notifications</string>
 
-    <!-- Summary of preference to manage notification listeners, when one or more are enabled
-         and are therefore able to read the user's notifications -->
-    <plurals name="manage_notification_access_summary_nonzero">
-        <item quantity="one">%d app can read notifications</item>
-        <item quantity="other">%d apps can read notifications</item>
-    </plurals>
-
     <!-- Title for Notification Assistant setting  [CHAR LIMIT=30]-->
     <string name="notification_assistant_title">Enhanced notifications</string>
     <!-- Summary of Notification Assistant provided features [CHAR LIMIT=NONE]-->
@@ -9085,12 +9068,6 @@
 
     <!-- [CHAR LIMIT=NONE] App notification settings: non-grouped-channels title -->
     <string name="notification_channels_other">Other</string>
-
-    <!-- [CHAR LIMIT=45] App notification settings, group summary-->
-    <plurals name="notification_group_summary">
-        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> category</item>
-        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> categories</item>
-    </plurals>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: no channels -->
     <string name="no_channels">This app has not posted any notifications</string>
@@ -9824,12 +9801,6 @@
         <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> permissions granted</item>
     </plurals>
 
-    <!-- Runtime permissions preference summary [CHAR LIMIT=40] -->
-    <plurals name="runtime_permissions_summary">
-        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> of <xliff:g id="count" example="1">%d</xliff:g> permission granted</item>
-        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> of <xliff:g id="count" example="10">%d</xliff:g> permissions granted</item>
-    </plurals>
-
     <!-- Runtime permissions preference summary.  Number of additional permissions granted. [CHAR LIMIT=40] -->
     <plurals name="runtime_permissions_additional_count">
         <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> additional permission</item>
@@ -9925,12 +9896,6 @@
 
     <!-- Summary of open web links settings when no app can open supported links [CHAR LIMIT=NONE] -->
     <string name="domain_urls_apps_summary_off">No app opening supported links</string>
-
-    <!-- Summary of open web links settings when at least one app can open supported links [CHAR LIMIT=NONE] -->
-    <plurals name="domain_urls_apps_summary_on">
-        <item quantity="one">One app opening supported links</item>
-        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> apps opening supported links</item>
-    </plurals>
 
     <!-- Explanation that the app that will ALWAYS be launched to open web links to domains that it understands -->
     <string name="app_link_open_always">Allow app to open supported links</string>
@@ -10065,18 +10030,6 @@
 
     <!-- Label for menu to show app usage [CHAR LIMIT=30] -->
     <string name="hide_extra_apps">Show app usage</string>
-
-    <!-- Summary for high usage item, showing app/apps are behaving abnormally [CHAR LIMIT=80] -->
-    <plurals name="power_high_usage_summary">
-        <item quantity="one"><xliff:g id="app">%1$s</xliff:g> behaving abnormally</item>
-        <item quantity="other"><xliff:g id="number">%2$d</xliff:g> apps behaving abnormally</item>
-    </plurals>
-
-    <!-- Title for high usage item, showing app/apps are draining battery [CHAR LIMIT=80] -->
-    <plurals name="power_high_usage_title">
-        <item quantity="one"><xliff:g id="app">%1$s</xliff:g> draining battery</item>
-        <item quantity="other">Apps draining battery</item>
-    </plurals>
 
     <!-- Filter for apps allowed to use a lot of power [CHAR LIMIT=25] -->
     <string name="high_power_filter_on">Not optimized</string>
@@ -10507,12 +10460,6 @@
     <!-- Summary of data usage [CHAR LIMIT=NONE] -->
     <string name="data_usage_wifi_format"><xliff:g id="amount" example="50%">^1</xliff:g> used on Wi\u2011Fi</string>
 
-    <!-- Summary of notifications [CHAR LIMIT=NONE] -->
-    <plurals name="notification_summary">
-        <item quantity="one">Off for 1 app</item>
-        <item quantity="other">Off for <xliff:g id="count" example="10">%d</xliff:g> apps</item>
-    </plurals>
-
     <!-- Summary of notifications when no apps are blocked [CHAR LIMIT=NONE] -->
     <string name="notification_summary_none">On for all apps</string>
 
@@ -10689,18 +10636,6 @@
     <!-- Title for the suggestions section on the dashboard, representing number of suggestions to show when expanded. [CHAR LIMIT=10] -->
     <string name="suggestions_more_title">+<xliff:g name="count" example="3">%1$d</xliff:g> more</string>
 
-    <!-- Title for the collapsed suggestions section on the dashboard, representing number of suggestions. [CHAR LIMIT=30] -->
-    <plurals name="suggestions_collapsed_title">
-        <item quantity="one">1 suggestion</item>
-        <item quantity="other"><xliff:g id="count" example="10">%1$d</xliff:g> suggestions</item>
-    </plurals>
-
-    <!-- Summary for the collapsed suggestions section on the dashboard, representing number of suggestions. [CHAR LIMIT=30] -->
-    <plurals name="suggestions_collapsed_summary">
-        <item quantity="one">+1 suggestion</item>
-        <item quantity="other">+<xliff:g id="count" example="10">%1$d</xliff:g> suggestions</item>
-    </plurals>
-
     <!-- Name of option to remove a suggestion from the list [CHAR LIMIT=30] -->
     <string name="suggestion_remove">Remove</string>
 
@@ -10775,12 +10710,6 @@
 
     <!-- Title of button and screen for which wifi networks have data restrictions [CHAR LIMIT=30 -->
     <string name="network_restrictions">Network restrictions</string>
-
-    <!-- Summary showing how many networks restrictions [CHAR LIMIT=NONE] -->
-    <plurals name="network_restrictions_summary">
-        <item quantity="one">1 restriction</item>
-        <item quantity="other"><xliff:g id="count" example="10">%1$d</xliff:g> restrictions</item>
-    </plurals>
 
     <!-- A summary shown on data usage screens to indicate inaccuracy of data tracking [CHAR LIMIT=NONE] -->
     <string name="operator_warning">Carrier data accounting may differ from device accounting</string>
@@ -11129,24 +11058,6 @@
     <string name="cross_profile_calendar_title">Cross-profile calendar</string>
     <!-- [CHAR LIMIT=NONE] Setting description. If the user turns on this setting, they can see their work events on their personal calendar. -->
     <string name="cross_profile_calendar_summary">Show work events on your personal calendar</string>
-
-    <!-- Time in hours -->
-    <plurals name="hours">
-        <item quantity="one">1 hour</item>
-        <item quantity="other"><xliff:g id="number" example="7">%s</xliff:g> hours</item>
-    </plurals>
-
-    <!-- Time in minutes -->
-    <plurals name="minutes">
-        <item quantity="one">1 minute</item>
-        <item quantity="other"><xliff:g id="number" example="7">%s</xliff:g> minutes</item>
-    </plurals>
-
-    <!-- Time in seconds -->
-    <plurals name="seconds">
-        <item quantity="one">1 second</item>
-        <item quantity="other"><xliff:g id="number" example="7">%s</xliff:g> seconds</item>
-    </plurals>
 
     <!-- Used as title on the automatic storage manager settings. [CHAR LIMIT=60] -->
     <string name="automatic_storage_manager_settings">Manage storage</string>
@@ -12166,13 +12077,6 @@
          service setup yet (eg no SIM card inserted and no eSIM configured). Tapping it leads to a
          UI where the user can setup service. [CHAR LIMIT=50] -->
     <string name="mobile_network_summary_add_a_network">Add a network</string>
-    <!-- Summary of the 'Mobile network' item on the Network & internet page when there is more than
-         one mobile service configured (aka "dual SIM") - it shows a count of SIM/eSIM and tapping
-         it leads to a page showing a list of the mobile service subscriptions. [CHAR LIMIT=40] -->
-    <plurals name="mobile_network_summary_count">
-        <item quantity="one"><xliff:g id="count" example="1">%1$d</xliff:g> SIM</item>
-        <item quantity="other"><xliff:g id="count" example="2">%1$d</xliff:g> SIMs</item>
-    </plurals>
 
     <!-- Network & internet page. Summary indicating that a SIM is used by default for calls when
          multiple SIMs are present. [CHAR LIMIT=50] -->
@@ -12576,11 +12480,6 @@
 
     <!-- Text for permission bar chart details in Privacy page.  [CHAR LIMIT=NONE] -->
     <string name="permission_bar_chart_details">See all in Dashboard</string>
-
-    <plurals name="permission_bar_chart_label">
-        <item quantity="one">1 app</item>
-        <item quantity="other"><xliff:g id="number" example="7">%s</xliff:g> apps</item>
-    </plurals>
 
     <!-- Title for the accessibility usage preference in the Privacy page.  [CHAR LIMIT=NONE] -->
     <string name="accessibility_usage_title">Accessibility usage</string>
