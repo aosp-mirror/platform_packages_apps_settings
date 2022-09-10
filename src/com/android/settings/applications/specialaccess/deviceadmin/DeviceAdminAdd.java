@@ -123,7 +123,6 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
     AppOpsManager mAppOps;
     DeviceAdminInfo mDeviceAdmin;
     String mAddMsgText;
-    String mProfileOwnerName;
 
     ImageView mAdminIcon;
     TextView mAdminName;
@@ -189,8 +188,6 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
             setResult(RESULT_CANCELED);
             setFinishOnTouchOutside(true);
             mAddingProfileOwner = true;
-            mProfileOwnerName =
-                    getIntent().getStringExtra(DevicePolicyManager.EXTRA_PROFILE_OWNER_NAME);
             String callingPackage = getCallingPackage();
             if (callingPackage == null || !callingPackage.equals(who.getPackageName())) {
                 Log.e(TAG, "Unknown or incorrect caller");
@@ -338,6 +335,8 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
                     .create();
             dialog.show();
 
+            String profileOwnerName =
+                    getIntent().getStringExtra(DevicePolicyManager.EXTRA_PROFILE_OWNER_NAME);
             mActionButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
             mActionButton.setFilterTouchesWhenObscured(true);
             mAddMsg = dialog.findViewById(R.id.add_msg_simplified);
@@ -345,8 +344,8 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
             mAdminWarning = dialog.findViewById(R.id.admin_warning_simplified);
             mAdminWarning.setText(
                     mDPM.getResources().getString(NEW_DEVICE_ADMIN_WARNING_SIMPLIFIED, () ->
-                    getString(R.string.device_admin_warning_simplified,
-                    mProfileOwnerName), mProfileOwnerName));
+                            getString(R.string.device_admin_warning_simplified,
+                            profileOwnerName), profileOwnerName));
             return;
         }
         setContentView(R.layout.device_admin_add);
@@ -524,8 +523,7 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
         }
         if (mAddingProfileOwner) {
             try {
-                mDPM.setProfileOwner(mDeviceAdmin.getComponent(),
-                        mProfileOwnerName, UserHandle.myUserId());
+                mDPM.setProfileOwner(mDeviceAdmin.getComponent(), UserHandle.myUserId());
             } catch (RuntimeException re) {
                 setResult(Activity.RESULT_CANCELED);
             }
