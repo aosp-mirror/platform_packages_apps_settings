@@ -36,6 +36,7 @@ import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settingslib.widget.LottieColorUtils;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -54,6 +55,9 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
 
     @Nullable
     private FingerprintFindSensorAnimation mAnimation;
+
+    @Nullable
+    private LottieAnimationView mIllustrationLottie;
 
     private FingerprintEnrollSidecar mSidecar;
     private boolean mNextClicked;
@@ -97,38 +101,14 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                     .build()
             );
 
-            LottieAnimationView lottieAnimationView = findViewById(R.id.illustration_lottie);
+            mIllustrationLottie = findViewById(R.id.illustration_lottie);
             AccessibilityManager am = getSystemService(AccessibilityManager.class);
             if (am.isEnabled()) {
-                lottieAnimationView.setAnimation(R.raw.udfps_edu_a11y_lottie);
+                mIllustrationLottie.setAnimation(R.raw.udfps_edu_a11y_lottie);
             }
         } else if (mCanAssumeSfps) {
             setHeaderText(R.string.security_settings_sfps_enroll_find_sensor_title);
             setDescriptionText(R.string.security_settings_sfps_enroll_find_sensor_message);
-            final LottieAnimationView lottieAnimationView = findViewById(R.id.illustration_lottie);
-            final LottieAnimationView lottieAnimationViewPortrait =
-                    findViewById(R.id.illustration_lottie_portrait);
-            final int rotation = getApplicationContext().getDisplay().getRotation();
-            switch(rotation) {
-                case Surface.ROTATION_90:
-                    lottieAnimationView.setVisibility(View.GONE);
-                    lottieAnimationViewPortrait.setVisibility(View.VISIBLE);
-                    break;
-                case Surface.ROTATION_180:
-                    lottieAnimationView.setVisibility(View.VISIBLE);
-                    lottieAnimationView.setRotation(180);
-                    lottieAnimationViewPortrait.setVisibility(View.GONE);
-                    break;
-                case Surface.ROTATION_270:
-                    lottieAnimationView.setVisibility(View.GONE);
-                    lottieAnimationViewPortrait.setVisibility(View.VISIBLE);
-                    lottieAnimationViewPortrait.setRotation(180);
-                    break;
-                default:
-                    lottieAnimationView.setVisibility(View.VISIBLE);
-                    lottieAnimationViewPortrait.setVisibility(View.GONE);
-                    break;
-            }
         } else {
             setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
             setDescriptionText(R.string.security_settings_fingerprint_enroll_find_sensor_message);
@@ -170,18 +150,52 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
 
         mAnimation = null;
         if (mCanAssumeUdfps) {
-            LottieAnimationView lottieAnimationView = findViewById(R.id.illustration_lottie);
-            lottieAnimationView.setOnClickListener(new OnClickListener() {
+            mIllustrationLottie.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onStartButtonClick(v);
                 }
             });
-        } else {
+        } else if (!mCanAssumeSfps) {
             View animationView = findViewById(R.id.fingerprint_sensor_location_animation);
             if (animationView instanceof FingerprintFindSensorAnimation) {
                 mAnimation = (FingerprintFindSensorAnimation) animationView;
             }
+        }
+    }
+
+    private void updateSfpsFindSensorAnimationAsset() {
+        mIllustrationLottie = findViewById(R.id.illustration_lottie);
+        LottieColorUtils.applyDynamicColors(getApplicationContext(), mIllustrationLottie);
+        mIllustrationLottie.setVisibility(View.VISIBLE);
+        final int rotation = getApplicationContext().getDisplay().getRotation();
+
+        switch (rotation) {
+            case Surface.ROTATION_90:
+                mIllustrationLottie.setAnimation(
+                        R.raw.fingerprint_edu_lottie_portrait_top_left);
+                break;
+            case Surface.ROTATION_180:
+                mIllustrationLottie.setAnimation(
+                        R.raw.fingerprint_edu_lottie_landscape_bottom_left);
+                break;
+            case Surface.ROTATION_270:
+                mIllustrationLottie.setAnimation(
+                        R.raw.fingerprint_edu_lottie_portrait_bottom_right);
+                break;
+            default:
+                mIllustrationLottie.setAnimation(
+                        R.raw.fingerprint_edu_lottie_landscape_top_right);
+                break;
+        }
+        mIllustrationLottie.playAnimation();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mCanAssumeSfps) {
+            updateSfpsFindSensorAnimationAsset();
         }
     }
 
