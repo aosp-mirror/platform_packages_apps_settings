@@ -47,6 +47,8 @@ public final class EnableVerboseVendorLoggingPreferenceControllerTest {
     private PreferenceScreen mPreferenceScreen;
     @Mock
     IDumpstateDevice mIDumpstateDevice;
+    @Mock
+    android.hardware.dumpstate.IDumpstateDevice mIDumpstateDeviceAidl;
 
     private Context mContext;
     private EnableVerboseVendorLoggingPreferenceController mController;
@@ -57,6 +59,7 @@ public final class EnableVerboseVendorLoggingPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mController = spy(new EnableVerboseVendorLoggingPreferenceController(mContext));
         doReturn(mIDumpstateDevice).when(mController).getDumpstateDeviceService();
+        doReturn(mIDumpstateDeviceAidl).when(mController).getDumpstateDeviceAidlService();
 
         // mock with Dumpstate HAL v1.1
         Field f = EnableVerboseVendorLoggingPreferenceController.class
@@ -70,7 +73,9 @@ public final class EnableVerboseVendorLoggingPreferenceControllerTest {
     }
 
     @Test
-    public void onPreferenceChange_settingEnable_enableVendorLoggingShouldBeOn() throws Exception {
+    public void onPreferenceChange_settingEnableByHidl_enableVendorLoggingShouldBeOn()
+            throws Exception {
+        doReturn(null).when(mController).getDumpstateDeviceAidlService();
         doReturn(true).when(mIDumpstateDevice).getVerboseLoggingEnabled();
 
         mController.onPreferenceChange(mPreference, true /* new value */);
@@ -80,8 +85,21 @@ public final class EnableVerboseVendorLoggingPreferenceControllerTest {
     }
 
     @Test
-    public void onPreferenceChange_settingDisable_enableVendorLoggingShouldBeOff()
+    public void onPreferenceChange_settingEnableByAidl_enableVendorLoggingShouldBeOn()
             throws Exception {
+        doReturn(mIDumpstateDeviceAidl).when(mController).getDumpstateDeviceAidlService();
+        doReturn(true).when(mIDumpstateDeviceAidl).getVerboseLoggingEnabled();
+
+        mController.onPreferenceChange(mPreference, true /* new value */);
+
+        final boolean enabled = mController.getVerboseLoggingEnabled();
+        assertTrue(enabled);
+    }
+
+    @Test
+    public void onPreferenceChange_settingDisableByHidl_enableVendorLoggingShouldBeOff()
+            throws Exception {
+        doReturn(null).when(mController).getDumpstateDeviceAidlService();
         doReturn(false).when(mIDumpstateDevice).getVerboseLoggingEnabled();
 
         mController.onPreferenceChange(mPreference,  false /* new value */);
@@ -91,7 +109,20 @@ public final class EnableVerboseVendorLoggingPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_settingDisabled_preferenceShouldNotBeChecked() throws Exception {
+    public void onPreferenceChange_settingDisableByAidl_enableVendorLoggingShouldBeOff()
+            throws Exception {
+        doReturn(mIDumpstateDeviceAidl).when(mController).getDumpstateDeviceAidlService();
+        doReturn(false).when(mIDumpstateDeviceAidl).getVerboseLoggingEnabled();
+
+        mController.onPreferenceChange(mPreference,  false /* new value */);
+
+        final boolean enabled = mController.getVerboseLoggingEnabled();
+        assertFalse(enabled);
+    }
+
+    @Test
+    public void updateState_settingDisabledByHidl_preferenceShouldNotBeChecked() throws Exception {
+        doReturn(null).when(mController).getDumpstateDeviceAidlService();
         doReturn(false).when(mIDumpstateDevice).getVerboseLoggingEnabled();
 
         mController.setVerboseLoggingEnabled(false);
@@ -101,7 +132,19 @@ public final class EnableVerboseVendorLoggingPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_settingEnabled_preferenceShouldBeChecked() throws Exception {
+    public void updateState_settingDisabledByAidl_preferenceShouldNotBeChecked() throws Exception {
+        doReturn(mIDumpstateDeviceAidl).when(mController).getDumpstateDeviceAidlService();
+        doReturn(false).when(mIDumpstateDeviceAidl).getVerboseLoggingEnabled();
+
+        mController.setVerboseLoggingEnabled(false);
+        mController.updateState(mPreference);
+
+        verify(mPreference).setChecked(false);
+    }
+
+    @Test
+    public void updateState_settingEnabledByHidl_preferenceShouldBeChecked() throws Exception {
+        doReturn(null).when(mController).getDumpstateDeviceAidlService();
         doReturn(true).when(mIDumpstateDevice).getVerboseLoggingEnabled();
 
         mController.setVerboseLoggingEnabled(true);
@@ -111,8 +154,33 @@ public final class EnableVerboseVendorLoggingPreferenceControllerTest {
     }
 
     @Test
-    public void onDeveloperOptionDisabled_shouldDisablePreference() throws Exception {
+    public void updateState_settingEnabledByAidl_preferenceShouldBeChecked() throws Exception {
+        doReturn(mIDumpstateDeviceAidl).when(mController).getDumpstateDeviceAidlService();
+        doReturn(true).when(mIDumpstateDeviceAidl).getVerboseLoggingEnabled();
+
+        mController.setVerboseLoggingEnabled(true);
+        mController.updateState(mPreference);
+
+        verify(mPreference).setChecked(true);
+    }
+
+    @Test
+    public void onDeveloperOptionDisabled_byHidl_shouldDisablePreference() throws Exception {
+        doReturn(null).when(mController).getDumpstateDeviceAidlService();
         doReturn(false).when(mIDumpstateDevice).getVerboseLoggingEnabled();
+
+        mController.onDeveloperOptionsSwitchDisabled();
+
+        final boolean enabled = mController.getVerboseLoggingEnabled();
+        assertFalse(enabled);
+        verify(mPreference).setChecked(false);
+        verify(mPreference).setEnabled(false);
+    }
+
+    @Test
+    public void onDeveloperOptionDisabled_byAidl_shouldDisablePreference() throws Exception {
+        doReturn(mIDumpstateDeviceAidl).when(mController).getDumpstateDeviceAidlService();
+        doReturn(false).when(mIDumpstateDeviceAidl).getVerboseLoggingEnabled();
 
         mController.onDeveloperOptionsSwitchDisabled();
 
