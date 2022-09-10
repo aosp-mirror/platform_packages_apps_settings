@@ -20,6 +20,7 @@ import android.annotation.Nullable;
 import android.content.Context;
 import android.hardware.dumpstate.V1_0.IDumpstateDevice;
 import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -40,8 +41,12 @@ public class EnableVerboseVendorLoggingPreferenceController
 
     private static final String ENABLE_VERBOSE_VENDOR_LOGGING_KEY = "enable_verbose_vendor_logging";
     private static final int DUMPSTATE_HAL_VERSION_UNKNOWN = -1;
-    private static final int DUMPSTATE_HAL_VERSION_1_0 = 0;
-    private static final int DUMPSTATE_HAL_VERSION_1_1 = 1;
+    private static final int DUMPSTATE_HAL_VERSION_1_0 = 0; // HIDL v1.0
+    private static final int DUMPSTATE_HAL_VERSION_1_1 = 1; // HIDL v1.1
+    private static final int DUMPSTATE_HAL_VERSION_2_0 = 2; // AIDL v1
+
+    private static final String DUMP_STATE_AIDL_SERVICE_NAME =
+            android.hardware.dumpstate.IDumpstateDevice.DESCRIPTOR + "/default";
 
     private int mDumpstateHalVersion;
 
@@ -57,9 +62,8 @@ public class EnableVerboseVendorLoggingPreferenceController
 
     @Override
     public boolean isAvailable() {
-        // Only show preference when IDumpstateDevice v1.1 is avalaible
-        // This is temperary strategy that may change later.
-        return isIDumpstateDeviceV1_1ServiceAvailable();
+        // Only show preference when IDumpstateDevice AIDL or HIDL v1.1 service is available
+        return isIDumpstateDeviceAidlServiceAvailable() || isIDumpstateDeviceV1_1ServiceAvailable();
     }
 
     @Override
@@ -86,15 +90,31 @@ public class EnableVerboseVendorLoggingPreferenceController
     boolean isIDumpstateDeviceV1_1ServiceAvailable() {
         IDumpstateDevice service = getDumpstateDeviceService();
         if (service == null) {
-            if (DBG) Log.d(TAG, "IDumpstateDevice service is not available.");
+            if (DBG) Log.d(TAG, "IDumpstateDevice v1.1 service is not available.");
         }
-        return service != null && mDumpstateHalVersion >= DUMPSTATE_HAL_VERSION_1_1;
+        return service != null && mDumpstateHalVersion == DUMPSTATE_HAL_VERSION_1_1;
+    }
+
+    @VisibleForTesting
+    boolean isIDumpstateDeviceAidlServiceAvailable() {
+        android.hardware.dumpstate.IDumpstateDevice aidlService = getDumpstateDeviceAidlService();
+        return aidlService != null;
     }
 
     @VisibleForTesting
     void setVerboseLoggingEnabled(boolean enable) {
-        IDumpstateDevice service = getDumpstateDeviceService();
+        // First check if AIDL service is available
+        android.hardware.dumpstate.IDumpstateDevice aidlService = getDumpstateDeviceAidlService();
+        if (aidlService != null) {
+            try {
+                aidlService.setVerboseLoggingEnabled(enable);
+            } catch (RemoteException re) {
+                if (DBG) Log.e(TAG, "aidlService.setVerboseLoggingEnabled fail: " + re);
+            }
+        }
 
+        // Then check HIDL v1.1 service
+        IDumpstateDevice service = getDumpstateDeviceService();
         if (service == null || mDumpstateHalVersion < DUMPSTATE_HAL_VERSION_1_1) {
             if (DBG) Log.d(TAG, "setVerboseLoggingEnabled not supported.");
             return;
@@ -107,14 +127,24 @@ public class EnableVerboseVendorLoggingPreferenceController
                 service11.setVerboseLoggingEnabled(enable);
             }
         } catch (RemoteException | RuntimeException e) {
-            if (DBG) Log.e(TAG, "setVerboseLoggingEnabled fail: " + e);
+            if (DBG) Log.e(TAG, "HIDL v1.1 setVerboseLoggingEnabled fail: " + e);
         }
     }
 
     @VisibleForTesting
     boolean getVerboseLoggingEnabled() {
-        IDumpstateDevice service = getDumpstateDeviceService();
+        // First check if AIDL service is available
+        android.hardware.dumpstate.IDumpstateDevice aidlService = getDumpstateDeviceAidlService();
+        if (aidlService != null) {
+            try {
+                return aidlService.getVerboseLoggingEnabled();
+            } catch (RemoteException re) {
+                if (DBG) Log.e(TAG, "aidlService.getVerboseLoggingEnabled fail: " + re);
+            }
+        }
 
+        // Then check HIDL v1.1 service
+        IDumpstateDevice service = getDumpstateDeviceService();
         if (service == null || mDumpstateHalVersion < DUMPSTATE_HAL_VERSION_1_1) {
             if (DBG) Log.d(TAG, "getVerboseLoggingEnabled not supported.");
             return false;
@@ -127,7 +157,7 @@ public class EnableVerboseVendorLoggingPreferenceController
                 return service11.getVerboseLoggingEnabled();
             }
         } catch (RemoteException | RuntimeException e) {
-            if (DBG) Log.e(TAG, "getVerboseLoggingEnabled fail: " + e);
+            if (DBG) Log.e(TAG, "HIDL v1.1 getVerboseLoggingEnabled fail: " + e);
         }
         return false;
     }
@@ -141,6 +171,7 @@ public class EnableVerboseVendorLoggingPreferenceController
                     .getService(true /* retry */);
             mDumpstateHalVersion = DUMPSTATE_HAL_VERSION_1_1;
         } catch (NoSuchElementException | RemoteException e) {
+            if (DBG) Log.e(TAG, "Get HIDL v1.1 service fail: " + e);
         }
 
         if (service == null) {
@@ -149,11 +180,32 @@ public class EnableVerboseVendorLoggingPreferenceController
                         .getService(true /* retry */);
                 mDumpstateHalVersion = DUMPSTATE_HAL_VERSION_1_0;
             } catch (NoSuchElementException | RemoteException e) {
+                if (DBG) Log.e(TAG, "Get HIDL v1.0 service fail: " + e);
             }
         }
 
         if (service == null) {
             mDumpstateHalVersion = DUMPSTATE_HAL_VERSION_UNKNOWN;
+        }
+        return service;
+    }
+
+    /**
+     * Return a {@link android.hardware.dumpstate.IDumpstateDevice} instance or null if service is
+     * not available.
+     */
+    @VisibleForTesting
+    @Nullable android.hardware.dumpstate.IDumpstateDevice getDumpstateDeviceAidlService() {
+        android.hardware.dumpstate.IDumpstateDevice service = null;
+        try {
+            service = android.hardware.dumpstate.IDumpstateDevice.Stub.asInterface(
+                    ServiceManager.waitForDeclaredService(DUMP_STATE_AIDL_SERVICE_NAME));
+        } catch (NoSuchElementException e) {
+            if (DBG) Log.e(TAG, "Get AIDL service fail: " + e);
+        }
+
+        if (service != null) {
+            mDumpstateHalVersion = DUMPSTATE_HAL_VERSION_2_0;
         }
         return service;
     }
