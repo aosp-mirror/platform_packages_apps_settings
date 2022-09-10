@@ -1826,18 +1826,11 @@
     <!-- Bluetooth device details companion apps. In the confirmation dialog for removing an associated app, this is the label on the button that will complete the disassociate action. [CHAR LIMIT=80] -->
     <string name = "bluetooth_companion_app_remove_association_confirm_button">Disconnect app</string>
 
-    <!-- Bluetooth settings.  Connection options screen.  The title of the screen. [CHAR LIMIT=40] -->
-    <string name="bluetooth_device_advanced_title">Paired Bluetooth device</string>
-    <!-- Bluetooth settings.  Connection options screen.  The title of the header that is above all of the profiles.
-         When a user decides what Bluetooth capabilities to use with the device.  -->
-    <string name="bluetooth_device_advanced_profile_header_title">Use for</string>
     <!-- Bluetooth settings. Connection options screen. The summary for the checkbox preference when PAN is connected (user role). [CHAR LIMIT=25]-->
     <string name="bluetooth_pan_user_profile_summary_connected">Connected to device for internet access</string>
     <!-- Bluetooth settings. Connection options screen. The summary for the checkbox preference when PAN is connected (NAP role). [CHAR LIMIT=25]-->
     <string name="bluetooth_pan_nap_profile_summary_connected">Sharing local internet connection with device</string>
 
-    <!-- Bluetooth settings.  Dock Setting Dialog - Checkbox selection 2: Use dock for media audio -->
-    <string name="bluetooth_dock_settings_a2dp">For music and media</string>
     <!-- Bluetooth settings.  Dock Setting Dialog - Remember setting and don't ask user again -->
     <string name="bluetooth_dock_settings_remember">Remember settings</string>
 
@@ -3111,8 +3104,6 @@
     <string name="screensaver_settings_summary_never">Never</string>
     <!-- Dream settings screen, action label, when to dream [CHAR LIMIT=20] -->
     <string name="screensaver_settings_when_to_dream">When to start</string>
-    <!-- Dream settings screen, action label, current selected screen saver [CHAR LIMIT=35] -->
-    <string name="screensaver_settings_current">Current screen saver</string>
     <!-- Sound & display settings screen, setting option name to change whether the screen adjusts automatically based on lighting conditions -->
     <string name="automatic_brightness">Automatic brightness</string>
     <!-- [CHAR LIMIT=40] Display settings screen, setting option name to change whether the device wakes up when a lift gesture is detected. -->
@@ -3258,8 +3249,6 @@
 
     <!-- About phone screen, show when a value of some status item is unavailable. -->
     <string name="device_info_not_available">Not available</string>
-    <!-- About phone screen, phone status screen title -->
-    <string name="device_status_activity_title">Status</string>
     <!-- Main settings screen item's title to go into the storage settings screen [CHAR LIMIT=25] -->
     <string name="storage_settings" >Storage</string>
     <!-- Settings title that shows user how much storage and cache space an App is taking [CHAR LIMIT=50] -->
@@ -6760,38 +6749,11 @@
     <!-- TODO: Remove it once the same entry in SettingsLib is translated. -->
     <!-- Title of data usage item that represents all uninstalled applications or removed users. [CHAR LIMIT=48] -->
     <string name="data_usage_uninstalled_apps_users">Removed apps and users</string>
-    <!-- Combination of total network bytes sent and received by an application. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_received_sent"><xliff:g id="received" example="128KB">%1$s</xliff:g> received, <xliff:g id="sent" example="1.3GB">%2$s</xliff:g> sent</string>
-    <!-- Label displaying total network data transferred during a specific time period. [CHAR LIMIT=64] -->
-    <string name="data_usage_total_during_range"><xliff:g id="range" example="Jul 1 - Jul 31">%2$s</xliff:g>: about <xliff:g id="total" example="128KB">%1$s</xliff:g> used.</string>
 
-    <!-- Label displaying total network data transferred during a specific time period, including a disclaimer that contrasts device versus carrier reporting. [CHAR LIMIT=80] -->
-    <string name="data_usage_total_during_range_mobile" product="tablet"><xliff:g id="range" example="Jul 1 - Jul 31">%2$s</xliff:g>: about <xliff:g id="total" example="128KB">%1$s</xliff:g> used, as measured by your tablet. Your carrier\u2019s data usage accounting may differ.</string>
-    <!-- Label displaying total network data transferred during a specific time period, including a disclaimer that contrasts device versus carrier reporting. [CHAR LIMIT=80] -->
-    <string name="data_usage_total_during_range_mobile" product="default"><xliff:g id="range" example="Jul 1 - Jul 31">%2$s</xliff:g>: about <xliff:g id="total" example="128KB">%1$s</xliff:g> used, as measured by your phone. Your carrier\u2019s data usage accounting may differ.</string>
-
-    <!-- Dialog title for selecting metered networks. [CHAR LIMIT=25] -->
-    <string name="data_usage_metered_title">Network restrictions</string>
-    <!-- Dialog body for selecting paid networks. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_metered_body">Metered networks are treated like mobile networks when background data is restricted. Apps may warn before using these networks for large downloads.</string>
-    <!-- Header for list of mobile networks. [CHAR LIMIT=32] -->
-    <string name="data_usage_metered_mobile">Mobile networks</string>
-    <!-- Header for list of Wi-Fi networks. [CHAR LIMIT=32] -->
-    <string name="data_usage_metered_wifi">Metered Wi\u2011Fi networks</string>
-    <!-- Body text prompting user to enable Wi-Fi to configure metered networks. [CHAR LIMIT=64] -->
-    <string name="data_usage_metered_wifi_disabled">To select metered networks, turn Wi\u2011Fi on.</string>
-
-    <!-- Option for indicating that a network being metered (expensive) should be determined automatically. [CHAR LIMIT=32] -->
-    <string name="data_usage_metered_auto">Automatic</string>
     <!-- Title for Network usage to control whether Wifi is metered or not [CHAR LIMIT=20] -->
     <string name="wifi_metered_title">Network usage</string>
     <!-- Option for indicating that a network is metered (expensive). [CHAR LIMIT=32] -->
     <string name="data_usage_metered_yes">Metered</string>
-    <!-- Option for indicating that a network is not metered (inexpensive). [CHAR LIMIT=32] -->
-    <string name="data_usage_metered_no">Not metered</string>
-
-    <!-- Disclaimer string for data usage measured by device. [CHAR LIMIT=80] -->
-    <string name="data_usage_disclaimer">Carrier data accounting may differ from your device.</string>
 
     <!-- Input label for the name of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_name">Name</string>
@@ -10704,9 +10666,6 @@
     <!-- Summary describing when the billing cycle for their phone carrier starts [CHAR LIMIT=NONE] -->
     <string name="billing_cycle_fragment_summary">Monthly on day <xliff:g name="day_of_month" example="17">%1$s</xliff:g></string>
 
-    <!-- Title of button and screen for which wifi networks have data restrictions [CHAR LIMIT=30 -->
-    <string name="network_restrictions">Network restrictions</string>
-
     <!-- A summary shown on data usage screens to indicate inaccuracy of data tracking [CHAR LIMIT=NONE] -->
     <string name="operator_warning">Carrier data accounting may differ from device accounting</string>
 
@@ -11883,12 +11842,6 @@
 
     <!-- Title for Connected device shortcut [CHAR LIMIT=30] -->
     <string name="devices_title">Devices</string>
-
-    <!-- Homepage bottom menu. Title for display all Settings [CHAR LIMIT=30] -->
-    <string name="homepage_all_settings">All Settings</string>
-
-    <!-- Homepage bottom menu. Title for display personalized Settings [CHAR LIMIT=30] -->
-    <string name="homepage_personal_settings">Suggestions</string>
 
     <!-- Available networks screen, name of button when user wants to select network manually [CHAR LIMIT=60] -->
     <string name="choose_network_title">Choose network</string>

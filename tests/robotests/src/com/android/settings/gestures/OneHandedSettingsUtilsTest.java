@@ -22,8 +22,6 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
 
-import com.android.settings.R;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,24 +31,17 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class OneHandedSettingsUtilsTest {
 
-    private static final int TIMEOUT_INDEX_NEVER = 0;
-    private static final int TIMEOUT_INDEX_SHORT = 1;
-    private static final int TIMEOUT_INDEX_MEDIUM = 2;
-    private static final int TIMEOUT_INDEX_LONG = 3;
-
     private static final int OFF = 0;
     private static final int ON = 1;
 
     private Context mContext;
 
-    private String[] mConfigTimeout;
     private int mCurrentUserId;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mCurrentUserId = UserHandle.myUserId();
-        mConfigTimeout = mContext.getResources().getStringArray(R.array.one_handed_timeout_values);
         OneHandedSettingsUtils.setUserId(mCurrentUserId);
     }
 
@@ -94,7 +85,7 @@ public class OneHandedSettingsUtilsTest {
         assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.ONE_HANDED_MODE_TIMEOUT,
                 OneHandedSettingsUtils.OneHandedTimeout.NEVER.getValue(), mCurrentUserId))
-                .isEqualTo(Integer.parseInt(mConfigTimeout[TIMEOUT_INDEX_NEVER]));
+                .isEqualTo(0);
     }
 
     @Test
@@ -105,7 +96,7 @@ public class OneHandedSettingsUtilsTest {
         assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.ONE_HANDED_MODE_TIMEOUT,
                 OneHandedSettingsUtils.OneHandedTimeout.SHORT.getValue(), mCurrentUserId))
-                .isEqualTo(Integer.parseInt(mConfigTimeout[TIMEOUT_INDEX_SHORT]));
+                .isEqualTo(4);
     }
 
     @Test
@@ -116,7 +107,7 @@ public class OneHandedSettingsUtilsTest {
         assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.ONE_HANDED_MODE_TIMEOUT,
                 OneHandedSettingsUtils.OneHandedTimeout.MEDIUM.getValue(), mCurrentUserId))
-                .isEqualTo(Integer.parseInt(mConfigTimeout[TIMEOUT_INDEX_MEDIUM]));
+                .isEqualTo(8);
     }
 
     @Test
@@ -127,6 +118,6 @@ public class OneHandedSettingsUtilsTest {
         assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.ONE_HANDED_MODE_TIMEOUT,
                 OneHandedSettingsUtils.OneHandedTimeout.LONG.getValue(), mCurrentUserId))
-                .isEqualTo(Integer.parseInt(mConfigTimeout[TIMEOUT_INDEX_LONG]));
+                .isEqualTo(12);
     }
 }
