@@ -22,6 +22,8 @@
     <string name="allow" msgid="3763244945363657722">"İzin ver"</string>
     <string name="deny" msgid="7326117222944479942">"Reddet"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"Aç"</string>
+    <string name="on" msgid="1702751473920047">"Açık"</string>
+    <string name="off" msgid="2898123876644709799">"Kapalı"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Bilinmiyor"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">Geliştirici olmanıza <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> adım kaldı.</item>
@@ -43,18 +45,12 @@
     <string name="radioInfo_data_connected" msgid="8816467971633020141">"Bağlandı"</string>
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Askıya alındı"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Bilinmiyor"</string>
-    <string name="sdcard_unmount" product="nosdcard" msgid="1816306320988638382">"USB belleğin bağln kes"</string>
-    <string name="sdcard_unmount" product="default" msgid="8078570285871053815">"SD kartının bağlantısını kes"</string>
-    <string name="sdcard_format" product="nosdcard" msgid="3248760426252305366">"USB belleği sil"</string>
-    <string name="sdcard_format" product="default" msgid="3676635435136326182">"SD kartı sil"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Önizleme"</string>
     <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"Önizleme, sayfa <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> / <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Küçült"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Büyüt"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Otomatik döndürmeyi kullan"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Yüz Algılama işlevi, otomatik döndürme doğruluğunu iyileştirmek için ön kamerayı kullanır. Görüntüler hiçbir zaman saklanmaz veya Google\'a gönderilmez."</string>
-    <string name="sdcard_setting" product="nosdcard" msgid="6071836464978826249">"USB bellek"</string>
-    <string name="sdcard_setting" product="default" msgid="3713462184783824923">"SD kart"</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
     <string name="bluetooth_is_discoverable" msgid="4798961627677790935">"Ykndki tüm Bluetooth chzlr trfndan görlblir (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="8122823110652921674">"Yakındki tüm Bluetooth cihazlrı trfndan görüleblir"</string>
@@ -166,33 +162,18 @@
     <string name="radio_info_ping_hostname_v6" msgid="8327436534663560713">"Ping Ana Makine Adı (www.google.com) IPv6:"</string>
     <string name="radio_info_http_client_test" msgid="5673975677271544085">"HTTP İstemcisi Testi:"</string>
     <string name="ping_test_label" msgid="265427033290391845">"Ping Testini Çalıştır"</string>
-    <string name="sdcard_changes_instructions" msgid="2331969501845866957">"Değişiklikler USB kablosu tekrar bağlandığında devreye girer."</string>
-    <string name="sdcard_settings_screen_mass_storage_text" msgid="129059989000252994">"USB yığın depolamasını etkinleştir"</string>
-    <string name="sdcard_settings_total_bytes_label" msgid="5298511430610207103">"Toplam bayt sayısı:"</string>
-    <string name="sdcard_settings_not_present_status" product="nosdcard" msgid="6189761476582690998">"USB bellek eklenmedi."</string>
-    <string name="sdcard_settings_not_present_status" product="default" msgid="6601962586941623203">"SD kart yok."</string>
-    <string name="sdcard_settings_available_bytes_label" msgid="7721283102767669004">"Kullanılabilir bayt:"</string>
-    <string name="sdcard_settings_mass_storage_status" product="nosdcard" msgid="4878190674458263222">"USB bellek, yığın depolama cihazı olarak kullanılıyor."</string>
-    <string name="sdcard_settings_mass_storage_status" product="default" msgid="8850227049504860012">"SD kart, yığın depolama cihazı olarak kullanılıyor."</string>
-    <string name="sdcard_settings_unmounted_status" product="nosdcard" msgid="1053258530368541571">"USB bellek şimdi güvenle çıkarılabilir."</string>
-    <string name="sdcard_settings_unmounted_status" product="default" msgid="5813940671700138561">"SD kart şimdi güvenli olarak çıkarılabilir."</string>
-    <string name="sdcard_settings_bad_removal_status" product="nosdcard" msgid="209564009449909311">"USB bellek kullanılırken çıkarıldı!"</string>
-    <string name="sdcard_settings_bad_removal_status" product="default" msgid="6817342973919819392">"SD kart kullanılırken çıkarıldı!"</string>
-    <string name="sdcard_settings_used_bytes_label" msgid="5646588579332741943">"Kullanılan bayt miktarı:"</string>
-    <string name="sdcard_settings_scanning_status" product="nosdcard" msgid="8037280964384235345">"USB bellekteki medya taranıyor…"</string>
-    <string name="sdcard_settings_scanning_status" product="default" msgid="3297316465982471437">"SD kartta medya aranıyor…"</string>
-    <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3444648373391629840">"USB bellek salt okunur olarak eklendi."</string>
-    <string name="sdcard_settings_read_only_status" product="default" msgid="4338796260718910164">"SD kart salt okunur olarak eklendi."</string>
     <string name="skip_label" msgid="6380034601349015895">"Atla"</string>
     <string name="next_label" msgid="1248293387735652187">"İleri"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Diller"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"Tercih edilen dil sırası"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"Sistem dili"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Kaldır"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Dil ekle"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Dil"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Tercih Edilen Dil"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Uygulama dilleri"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Uygulama dilleri"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Her uygulamanın dilini ayarlayın"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"Uygulama Dili"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"Uygulama dili"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Önerilen diller"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Tüm diller"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Sistem dili"</string>
@@ -200,6 +181,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Ayarlar\'da bu uygulama için dil seçimi mevcut değil."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Dil, uygulamada bulunan dillerden farklı olabilir. Bazı uygulamalar bu ayarı desteklemeyebilir."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Yalnızca dil seçimini destekleyen uygulamalar burada görünür."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Sisteminiz, uygulamalarınız ve web siteleriniz, tercih ettiğiniz diller arasındaki ilk desteklenen dili kullanır."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Her uygulamaya özel bir dil seçmek için uygulama dil ayarlarına gidin."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Diller hakkında daha fazla bilgi"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Seçilen diller kaldırılsın mı?</item>
       <item quantity="one">Seçilen dil kaldırılsın mı?</item>
@@ -207,17 +191,13 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Metin başka bir dilde görüntülenecek."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Tüm diller kaldırılamaz"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Tercih edilen en az dil bırakın"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"Bazı uygulamalarda kullanılamayabilir"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"Sistem dili olarak mevcut değil"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Yukarı taşı"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Aşağı taşı"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"En üste taşı"</string>
     <string name="action_drag_label_move_bottom" msgid="6266165197792827003">"En alta taşı"</string>
     <string name="action_drag_label_remove" msgid="1034900377796780568">"Dili kaldır"</string>
     <string name="activity_picker_label" msgid="351250401590691126">"Etkinlik seçin"</string>
-    <string name="display_label" msgid="3056320781191343221">"Ekran"</string>
-    <string name="sd_card_settings_label" product="nosdcard" msgid="1850505156136467106">"USB bellek"</string>
-    <string name="sd_card_settings_label" product="default" msgid="8715502912796241588">"SD kart"</string>
-    <string name="proxy_settings_label" msgid="6300573815025557843">"Proxy ayarları"</string>
     <string name="cancel" msgid="5780102414089664898">"İptal"</string>
     <string name="okay" msgid="4827099303045669054">"Tamam"</string>
     <string name="forget" msgid="3754013654135912783">"Unut"</string>
@@ -290,7 +270,6 @@
     <string name="Accounts_settings_title" msgid="8434263183710375412">"Hesaplar"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Konum"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Konumu kullan"</string>
-    <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Kapalı"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="other">Açık - <xliff:g id="COUNT_1">%1$d</xliff:g> uygulamanın konuma erişimi var</item>
       <item quantity="one">Açık - <xliff:g id="COUNT_0">%1$d</xliff:g> uygulamanın konuma erişimi var</item>
@@ -324,13 +303,17 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Yüz Tanıma Kilidi\'ni kurma"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Kimlik doğrulama için yüzünüzü kullanın"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Başla"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"Erişilebilirlik Yüz Tanıma Kilidi kapalıysa kurulum adımlarından bazıları TalkBack ile düzgün çalışmayabilir."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Geri dön"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Kuruluma devam et"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Erişilebilirlik kurulumunu kullan"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"İptal"</string>
@@ -340,7 +323,9 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Yüzünüzle kilidi açın"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Yüz tanıma kilidine izin verin"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Kimlik doğrulama için yüzünüzü kullanın"</string>
-    <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Telefonunuzun kilidini açmak, satın alma işlemlerini yetkilendirmek veya uygulamalarda oturum açmak için yüzünüzü kullanın."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"Telefonunuzun kilidini açmak, satın alma işlemlerini yetkilendirmek veya uygulamalarda oturum açmak için yüzünüzü kullanın."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"Tabletinizin kilidini açmak, satın alma işlemlerini yetkilendirmek veya uygulamalarda oturum açmak için yüzünüzü kullanın."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"Cihazınızın kilidini açmak, satın alma işlemlerini yetkilendirmek veya uygulamalarda oturum açmak için yüzünüzü kullanın."</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Çocuğunuzun, telefonunu açmak için yüzünü kullanmasına izin verin"</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Çocuğunuzun, tabletini açmak için yüzünü kullanmasına izin verin"</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Çocuğunuzun, cihazını açmak için yüzünü kullanmasına izin verin"</string>
@@ -352,19 +337,39 @@
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"Yüzünüzü çemberin ortasına getirin"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Atla"</string>
     <string name="face_add_max" msgid="4578405795494514876">"<xliff:g id="COUNT">%d</xliff:g> adede kadar yüz ekleyebilirsiniz"</string>
@@ -411,7 +416,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Tabletinizin kilidini açmak veya uygulamalarda oturum açma ya da satın alma işlemlerini onaylama gibi durumlarda kimliğinizi doğrulamak için parmak izinizi kullanın."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Telefonunuzun kilidini açmak veya uygulamalarda oturum açma ya da satın alma işlemlerini onaylama gibi durumlarda kimliğinizi doğrulamak için parmak izinizi kullanın."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Telefonunuzun kilidini açmak veya uygulamalarda oturum açma ya da satın alma işlemlerini onaylama gibi durumlarda kimliğinizi doğrulamak için parmak izinizi kullanın."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Çocuğunuzun telefonunun kilidini açmak veya kimliğini doğrulamak için parmak izini kullanmasına izin verin. Bu özellik, çocuğunuz uygulamalarda oturum açarken, satın alma işlemlerini onaylarken ve başka işlemler gerçekleştirirken kullanılır."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"Çocuğunuzun telefonunun kilidini açmak veya kimliğini doğrulamak için parmak izini kullanmasına izin verin. Bu özellik, çocuğunuz uygulamalarda oturum açarken, satın alma işlemlerini onaylarken ve başka işlemler gerçekleştirirken kullanılır."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"Çocuğunuzun tabletinin kilidini açmak veya kimliğini doğrulamak için parmak izini kullanmasına izin verin. Bu özellik, çocuğunuz uygulamalarda oturum açarken, satın alma işlemlerini onaylarken ve başka işlemler gerçekleştirirken kullanılır."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"Çocuğunuzun cihazının kilidini açmak veya kimliğini doğrulamak için parmak izini kullanmasına izin verin. Bu özellik, çocuğunuz uygulamalarda oturum açarken, satın alma işlemlerini onaylarken ve başka işlemler gerçekleştirirken kullanılır."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Kontrol sizde"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Kontrol sizde ve çocuğunuzdadır"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Unutmayın"</string>
@@ -421,17 +428,32 @@
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Kabul ediyorum"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Parmak izi atlansın mı?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Parmak izi kurulumu yalnızca birkaç dakika sürer. Bu adımı atlarsanız parmak izinizi daha sonra ayarlardan ekleyebilirsiniz."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Uygulamalarda oturum açma veya bir satın alma işlemini onaylama gibi işlemlerde bu simgeyi gördüğünüzde kimlik doğrulama için parmak izinizi kullanın"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Unutmayın"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"Telefonunuzun kilidini açmak için parmak izinizi kullanmak, güçlü bir desenden veya PIN\'den daha az güvenli olabilir"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"Tabletinizin kilidini açmak için parmak izinizi kullanmak, güçlü bir desenden veya PIN\'den daha az güvenli olabilir"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"Cihazınızın kilidini açmak için parmak izinizi kullanmak, güçlü bir desenden veya PIN\'den daha az güvenli olabilir"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"İşleyiş şekli"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Parmak İzi Kilidi, kimliğinizi doğrulamak için parmak izinizin benzersiz bir modelini oluşturur. Kurulum sırasında bu parmak izi modelini oluşturmak için parmak izinizin farklı pozisyonlardan resmini çekersiniz."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Parmak İzi Kilidi, çocuğunuzun kimliğini doğrulamak için parmak izinin benzersiz bir modelini oluşturur. Çocuğunuz, kurulum sırasında bu parmak izi modelini oluşturmak için parmak izinin farklı konumlardan resimlerini çeker."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"Pixel Imprint\'i kullandığınızda resimler, parmak izi modelinizi güncellemek için kullanılır. Parmak izi modelinizi oluşturmak için kullanılan resimler hiçbir zaman saklanmaz ancak parmak izi modeli, telefonunuzda güvenli bir şekilde saklanıp hiçbir zaman telefondan dışarı çıkmaz. Tüm işlemler, güvenli bir şekilde telefonunuzda gerçekleşir."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Çocuğunuz Pixel Imprint\'i kullandığında resimler, parmak izi modelini güncellemek için kullanılır. Çocuğunuzun parmak izi modelini oluşturmak için kullanılan resimler hiçbir zaman saklanmaz ancak parmak izi modeli, telefonda güvenli bir şekilde saklanıp hiçbir zaman telefondan dışarı çıkmaz. Tüm işlemler, güvenli bir şekilde telefonda gerçekleşir."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"İstediğiniz zaman parmak izi resimlerinizi ve modelinizi silebilir veya Ayarlar\'da Parmak İzi Kilidi\'ni kapatabilirsiniz. Siz silene kadar, parmak izi resimleri ve modelleri telefonda saklanır."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Siz ve çocuğunuz, istediğiniz zaman Ayarlar\'dan Parmak İzi Kilidi\'ni devre dışı bırakabilir veya çocuğunuzun parmak izi resimlerini ve modelini silebilirsiniz. Parmak izi resimleri ve modelleri, silinene kadar telefonda saklanır."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"Pixel Imprint\'i kullandığınızda resimler, parmak izi modelinizi güncellemek için kullanılır. Parmak izi modelinizi oluşturmak için kullanılan resimler hiçbir zaman saklanmaz ancak parmak izi modeli, telefonunuzda güvenli bir şekilde saklanıp hiçbir zaman telefondan dışarı çıkmaz. Tüm işlemler, güvenli bir şekilde telefonunuzda gerçekleşir."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"Pixel Imprint\'i kullandığınızda resimler, parmak izi modelinizi güncellemek için kullanılır. Parmak izi modelinizi oluşturmak için kullanılan resimler hiçbir zaman saklanmaz ancak parmak izi modeli, tabletinizde güvenli bir şekilde saklanıp hiçbir zaman tabletten dışarı çıkmaz. Tüm işlemler, güvenli bir şekilde tabletinizde gerçekleşir."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"Pixel Imprint\'i kullandığınızda resimler, parmak izi modelinizi güncellemek için kullanılır. Parmak izi modelinizi oluşturmak için kullanılan resimler hiçbir zaman saklanmaz ancak parmak izi modeli, cihazınızda güvenli bir şekilde saklanıp hiçbir zaman cihazdan dışarı çıkmaz. Tüm işlemler, güvenli bir şekilde cihazınızda gerçekleşir."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"Çocuğunuz Pixel Imprint\'i kullandığında resimler, parmak izi modelini güncellemek için kullanılır. Çocuğunuzun parmak izi modelini oluşturmak için kullanılan resimler hiçbir zaman saklanmaz ancak parmak izi modeli, telefonda güvenli bir şekilde saklanıp hiçbir zaman telefondan dışarı çıkmaz. Tüm işlemler, güvenli bir şekilde telefonda gerçekleşir."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"Çocuğunuz Pixel Imprint\'i kullandığında resimler, parmak izi modelini güncellemek için kullanılır. Çocuğunuzun parmak izi modelini oluşturmak için kullanılan resimler hiçbir zaman saklanmaz ancak parmak izi modeli, tablette güvenli bir şekilde saklanıp hiçbir zaman tabletten dışarı çıkmaz. Tüm işlemler, güvenli bir şekilde tablette gerçekleşir."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"Çocuğunuz Pixel Imprint\'i kullandığında resimler, parmak izi modelini güncellemek için kullanılır. Çocuğunuzun parmak izi modelini oluşturmak için kullanılan resimler hiçbir zaman saklanmaz ancak parmak izi modeli, cihazda güvenli bir şekilde saklanıp hiçbir zaman cihazdan dışarı çıkmaz. Tüm işlemler, güvenli bir şekilde cihazda gerçekleşir."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"İstediğiniz zaman parmak izi resimlerinizi ve modelinizi silebilir veya Ayarlar\'da Parmak İzi Kilidi\'ni kapatabilirsiniz. Siz silene kadar, parmak izi resimleri ve modelleri telefonda saklanır."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"İstediğiniz zaman parmak izi resimlerinizi ve modelinizi silebilir veya Ayarlar\'da Parmak İzi Kilidi\'ni kapatabilirsiniz. Siz silene kadar, parmak izi resimleri ve modelleri tablette saklanır."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"İstediğiniz zaman parmak izi resimlerinizi ve modelinizi silebilir veya Ayarlar\'da Parmak İzi Kilidi\'ni kapatabilirsiniz. Siz silene kadar, parmak izi resimleri ve modelleri cihazda saklanır."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"Siz ve çocuğunuz, istediğiniz zaman Ayarlar\'dan Parmak İzi Kilidi\'ni devre dışı bırakabilir veya çocuğunuzun parmak izi resimlerini ve modelini silebilirsiniz. Parmak izi resimleri ve modelleri, silinene kadar telefonda saklanır."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"Siz ve çocuğunuz, istediğiniz zaman Ayarlar\'dan Parmak İzi Kilidi\'ni devre dışı bırakabilir veya çocuğunuzun parmak izi resimlerini ve modelini silebilirsiniz. Parmak izi resimleri ve modelleri, silinene kadar tablette saklanır."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"Siz ve çocuğunuz, istediğiniz zaman Ayarlar\'dan Parmak İzi Kilidi\'ni devre dışı bırakabilir veya çocuğunuzun parmak izi resimlerini ve modelini silebilirsiniz. Parmak izi resimleri ve modelleri, silinene kadar cihazda saklanır."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Telefonunuzun kilidi, istemediğiniz zamanlarda da açılabilir. Örneğin, telefonunuz başka birisi tarafından parmağınıza tutulduğunda kilidi açılabilir."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Tabletinizin kilidi, istemediğiniz zamanlarda da açılabilir. Örneğin, tabletiniz başka birisi tarafından parmağınıza tutulduğunda kilidi açılabilir."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Cihazınızın kilidi, istemediğiniz zamanlarda da açılabilir. Örneğin, cihazınız başka birisi tarafından parmağınıza tutulduğunda kilidi açılabilir."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Çocuğunuz istemeden de telefonunun kilidi açılabilir. Örneğin, telefonu başka birisi tarafından parmağına tutulduğunda kilidi açılabilir."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"Çocuğunuz istemeden de telefonunun kilidi açılabilir. Örneğin, telefonu başka birisi tarafından parmağına tutulduğunda kilidi açılabilir."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"Çocuğunuz istemeden de tabletin kilidi açılabilir. Örneğin, tableti başka birisi tarafından parmağına tutulduğunda kilidi açılabilir."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"Çocuğunuz istemeden de cihazının kilidi açılabilir. Örneğin, cihazı başka birisi tarafından parmağına tutulduğunda kilidi açılabilir."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"En iyi sonuçlar için Made for Google sertifikalı bir ekran koruyucu kullanın. Parmak iziniz diğer ekran koruyucularla çalışmayabilir."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"En iyi sonuçlar için Made for Google sertifikalı bir ekran koruyucu kullanın. Çocuğunuzun parmak izi diğer ekran koruyucularla çalışmayabilir."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
@@ -465,8 +487,12 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"Atla"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"İptal"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Sensöre dokunun"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Bastırmadan güç düğmesine dokunun"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Parmak izinizi kurma adımları"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Telefonunuzun arkasındadır. İşaret parmağınızı kullanın."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"Parmak izi sensörü güç düğmesinin üzerindedir. Bu sensör, tabletin kenarındaki ses yükseltme düğmesinin yanında bulunan düz düğmedir.\n\nGüç düğmesine bastığınızda ekran kapanır."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"Parmak izi sensörü güç düğmesinin üzerindedir. Bu sensör, cihazın kenarındaki ses yükseltme düğmesinin yanında bulunan düz düğmedir.\n\nGüç düğmesine bastığınızda ekran kapanır."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"Parmak izi sensörü güç düğmesinin üzerindedir. Bu sensör, telefonun kenarındaki ses yükseltme düğmesinin yanında bulunan düz düğmedir.\n\nGüç düğmesine bastığınızda ekran kapanır."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Parmak izi sensörü ekranınızın üzerindedir. Bir sonraki ekranda parmak izinizi yakalayacaksınız."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Başlat"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Sensörü bulmak için parmağınızı ekranda hareket ettirin. Parmak izi sensörüne dokunup basılı tutun"</string>
@@ -478,6 +504,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Sensöre dokunun"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Parmağınızı sensörün üzerine koyun ve bir titreşim hissettiğinizde kaldırın"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Bir titreşim hissedene kadar parmak izinizi sensörün üzerinde düz tutun"</string>
+    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"Düğmeye bastırmadan bir titreşim hissedene kadar parmak izinizi sensörün üzerinde tutun.\n\nHer seferinde parmağınızı hafifçe hareket ettirin. Bu şekilde parmak iziniz daha fazla yakalanabilir"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Parmak izi sensörüne dokunup basılı tutun"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Kaldırın, tekrar dokunun"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Bir kez daha"</string>
@@ -487,13 +514,20 @@
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Parmağınızın ucunu sensöre yerleştirin"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Parmağınızın sol kenarını yerleştirin"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Parmağınızın sağ kenarını yerleştirin"</string>
+    <string name="security_settings_sfps_enroll_finger_center_title" msgid="1320688855767675739">"Parmağınızın ortasını sensöre yerleştirin"</string>
+    <string name="security_settings_sfps_enroll_fingertip_title" msgid="2737520837684516446">"Parmağınızın ucunu sensöre yerleştirin"</string>
+    <string name="security_settings_sfps_enroll_left_edge_title" msgid="9022963735924413343">"Parmağınızın sol kenarını sensöre yerleştirin"</string>
+    <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"Son olarak da parmağınızın sağ kenarını sensöre yerleştirin"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Parmak izinizin yan tarafını sensöre yerleştirip basılı tuttuktan sonra diğer tarafa geçin"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Bu şekilde parmak iziniz daha fazla yakalanabilir"</string>
+    <string name="security_settings_sfps_enroll_progress_a11y_message" msgid="6450772721691523736">"Parmak izi kaydı yüzde <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
+    <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Kaydolma işlemi yüzde <xliff:g id="PERCENTAGE">%d</xliff:g> tamamlandı"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Parmak izi kaydı yüzde <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Parmak izi eklendi"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Tabletinizin kilidini açmak veya uygulamalarda işlem yapan kişinin siz olduğunuzu doğrulamak için Parmak İzi Kilidi\'ni kullandıkça bu özellik daha da iyi çalışır"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Cihazınızın kilidini açmak veya uygulamalarda işlem yapan kişinin siz olduğunuzu doğrulamak için Parmak İzi Kilidi\'ni kullandıkça bu özellik daha da iyi çalışır"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Telefonunuzun kilidini açmak veya uygulamalarda işlem yapan kişinin siz olduğunuzu doğrulamak için Parmak İzi Kilidi\'ni kullandıkça bu özellik daha da iyi çalışır"</string>
+    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Artık tabletinizin kilidini açmak veya uygulamalarda oturum açma ya da satın alma işlemlerini onaylama gibi durumlarda kimliğinizi doğrulamak için parmak izinizi kullanabilirsiniz"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Artık tabletinizin kilidini açmak veya uygulamalarda oturum açma gibi işlemlerde kimliğinizi doğrulamak için parmak izinizi kullanabilirsiniz"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Artık telefonunuzun kilidini açmak veya uygulamalarda oturum açma gibi işlemlerde kimliğinizi doğrulamak için parmak izinizi kullanabilirsiniz"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Artık telefonunuzun kilidini açmak veya uygulamalarda oturum açma gibi işlemlerde kimliğinizi doğrulamak için parmak izinizi kullanabilirsiniz"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Daha sonra yap"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Kaldırın, tekrar dokunun"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Parmak izinizin yan tarafını sensöre yerleştirip basılı tuttuktan sonra diğer tarafa geçin"</string>
@@ -570,7 +604,7 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Maksimum sayıda parmak izi eklediniz"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Daha fazla parmak izi eklenemez"</string>
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Tüm parmak izleri kaldırılsın mı?"</string>
-    <string name="fingerprint_delete_title" msgid="1469865327307917858">"\"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" parmak izini kaldır"</string>
+    <string name="fingerprint_delete_title" msgid="5412123164503407098">"\"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" adlı parmak izini sil"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Bu parmak izini silmek istiyor musunuz?"</string>
     <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Bu işlem, cihazınızda saklanan \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" ile ilişkilendirilmiş parma izi resimlerini ve modeli siler"</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Telefonunuzun kilidini açmak veya uygulamalarda kimliğinizi doğrulamak için parmak izinizi kullanamazsınız."</string>
@@ -785,11 +819,8 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> etkin güven aracısı</item>
       <item quantity="one">1 etkin güven aracısı</item>
     </plurals>
-    <string name="bluetooth_quick_toggle_title" msgid="5955341060378240781">"Bluetooth"</string>
-    <string name="bluetooth_quick_toggle_summary" msgid="5257744297562880017">"Bluetooth\'u aç"</string>
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
-    <string name="bluetooth_settings_summary" msgid="6805458703566046784">"Bağlantıları yönet, cihaz adını gir ve keşfedilebilirlik ayarını yap"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ile eşlensin mi?"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Bluetooth eşleme kodu"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Eşleme kodunu yazın ve sonra Return veya Enter tuşuna basın"</string>
@@ -798,39 +829,16 @@
     <string name="bluetooth_pin_values_hint_16_digits" msgid="5603928271430883558">"18 basamaklı olmalıdır"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Bu PIN\'i diğer cihazda da yazmanız gerekebilir."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Bu parolayı diğer cihazda da girmeniz gerekebilir."</string>
-    <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"Şu cihazla eşlemek için:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Şu parolanın göründüğünden emin olun:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Koordine grupla eşlemeyi onaylayın"</string>
-    <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"Kaynak:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Bu cihaz ile eşlensin mi?"</string>
-    <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> ile eşlemek için cihaz üzerinde <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> yazarak Return veya Enter tuşuna basın."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Kişilerime ve çağrı geçmişime erişime izin ver"</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> adlı cihaza bağlanılamadı."</string>
-    <string name="bluetooth_preference_scan_title" msgid="3460316252463771851">"Cihazları tara"</string>
-    <string name="bluetooth_search_for_devices" msgid="6516902340975407648">"Yenile"</string>
-    <string name="bluetooth_searching_for_devices" msgid="6541984133657573124">"Arıyor…"</string>
-    <string name="bluetooth_preference_device_settings" msgid="1688662188157019998">"Cihaz ayarları"</string>
-    <string name="bluetooth_preference_paired_dialog_title" msgid="1090131276572055841">"Eşlenen cihaz"</string>
-    <string name="bluetooth_preference_paired_dialog_internet_option" msgid="4337953030661626289">"İnternet bağlantısı"</string>
-    <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="8247634441638919886">"Klavye"</string>
-    <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="8194423860397844579">"Kişiler ve çağrı geçmişi"</string>
-    <string name="bluetooth_pairing_dialog_title" msgid="6106058683134173178">"Bu cihaz ile eşlensin mi?"</string>
-    <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="5472835166206721325">"Telefon rehberi paylaşılsın mı?"</string>
-    <string name="bluetooth_pairing_dialog_contants_request" msgid="7516277926581535299">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, rehberinize ve çağrı geçmişinize erişmek istiyor."</string>
-    <string name="bluetooth_pairing_dialog_paring_request" msgid="1545098121090892788">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, Bluetooth ile eşlenmek istiyor. Bağlantı kurulduğunda, kişilerinize ve çağrı geçmişinize erişebilecek."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Kullanılabilir cihazlar"</string>
-    <string name="bluetooth_preference_no_found_devices" msgid="1331122763066030155">"Kullanılabilir cihaz yok"</string>
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"Bağlan"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Bağlantıyı kes"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Eşle ve bağlan"</string>
-    <string name="bluetooth_device_context_unpair" msgid="7525735305244087162">"Eşlemeyi bitir"</string>
-    <string name="bluetooth_device_context_disconnect_unpair" msgid="2001359431289794561">"Bağlantıyı kes ve eşlemeyi bitir"</string>
-    <string name="bluetooth_device_context_connect_advanced" msgid="934657460643490773">"Seçenekler…"</string>
-    <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"Gelişmiş"</string>
-    <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Gelişmiş Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Bluetooth açık olduğunda, cihazınız yakındaki Bluetooth cihazlarla iletişim kurabilir."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Bluetooth açıkken cihazınız yakındaki diğer Bluetooth cihazlarla iletişim kurabilir.\n\nUygulamalar ve hizmetler, cihaz deneyimini iyileştirmek için Bluetooth kapalıyken bile yakında cihaz olup olmadığını belirlemek her zaman için tarama yapabilir. Bu özellik, örneğin, konuma dayalı özellikleri ve hizmetleri iyileştirmek için kullanılabilir. Bunu istediğiniz zaman "<annotation id="link">"Bluetooth tarama ayarlarından"</annotation>" değiştirebilirsiniz."</string>
-    <string name="ble_scan_notify_text" msgid="1358879010396045164">"Sistem uygulamaları ve hizmetleri, konum doğruluğunu iyileştirmek için Bluetooth cihazları yine de algılayabilir. Bu ayarı, <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>tarama ayarlarından<xliff:g id="LINK_END_1">LINK_END</xliff:g> değiştirebilirsiniz."</string>
-    <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Bağlanılamadı. Tekrar deneyin."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Cihaz ayrıntıları"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Cihazın Bluetooth adresi: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Cihazın Bluetooth adresi:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -843,30 +851,23 @@
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> uygulaması, artık <xliff:g id="DEVICE_NAME">%2$s</xliff:g> cihazınıza bağlanmaz"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Cihazı unut"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Uygulamanın bağlantısını kes"</string>
-    <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Bağlan…"</string>
-    <string name="bluetooth_disconnect_a2dp_profile" msgid="339103864166293612">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> medya ses profilinden ayrılacak."</string>
-    <string name="bluetooth_disconnect_headset_profile" msgid="7857706184371154920">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> eller serbest ses profilinden ayrılacak."</string>
-    <string name="bluetooth_disconnect_hid_profile" msgid="4794752406024916925">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> giriş cihazından ayrılacak."</string>
-    <string name="bluetooth_disconnect_pan_user_profile" msgid="283176886159444413">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> üzerinden yapılan İnternet erişimi sona erdirilecek."</string>
-    <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="733193449967330892">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, bu tabletin internet bağlantısı paylaşımından çıkarılacak."</string>
-    <string name="bluetooth_disconnect_pan_nap_profile" product="default" msgid="7852265676243153982">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, bu telefonun internet bağlantısı paylaşımından çıkarılacak."</string>
     <string name="bluetooth_device_advanced_title" msgid="1181664272013729515">"Eşlenen Bluetooth cihaz"</string>
-    <string name="bluetooth_device_advanced_online_mode_title" msgid="8302236592496988747">"Bağlan"</string>
-    <string name="bluetooth_device_advanced_online_mode_summary" msgid="271856759516576615">"Bluetooth cihazına bağlan"</string>
     <string name="bluetooth_device_advanced_profile_header_title" msgid="7892879890208207223">"Şunun için kullan:"</string>
-    <string name="bluetooth_device_advanced_rename_device" msgid="4798081898389041132">"Yeniden adlandır"</string>
-    <string name="bluetooth_device_advanced_enable_opp_title" msgid="7604726126703453984">"Gelen dosya aktarmlrn izin ver"</string>
     <string name="bluetooth_pan_user_profile_summary_connected" msgid="7851033200857999275">"İnternet erişimi için cihaza bağlandı"</string>
     <string name="bluetooth_pan_nap_profile_summary_connected" msgid="5563892893331988809">"Cihazla yerel internet bağlantısını paylaşıyor"</string>
-    <string name="bluetooth_dock_settings" msgid="1709536202189755022">"Yuva Ayarları"</string>
-    <string name="bluetooth_dock_settings_title" msgid="4872789068019972847">"Ses öğesi için yuvayı kullan"</string>
-    <string name="bluetooth_dock_settings_headset" msgid="5756482379574272554">"Telefon hoparlörü olarak"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="434520221656010141">"Müzik ve medya için"</string>
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"Ayarları anımsa"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maksimum sayıda bağlı Bluetooth ses cihazı"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Maksimum sayıda bağlı Bluetooth ses cihazı seç"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC yığını hata ayıklama günlüğü"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"NFC yığını günlük kaydı seviyesini artırın"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC ayrıntılı satıcı hata ayıklama günlüğü"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Hata raporlarına cihaza özgü ek satıcı günlükleri ekleyin. Bu günlükler gizli bilgiler içerebilir."</string>
+    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"NFC NCI filtresiz araştırma günlüğü"</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Özel bilgiler içerebilen ayrıntılı NFC paketlerini yakalayın."</string>
+    <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Cihaz Yeniden Başlatılsın mı?"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Ayrıntılı NFC günlük kaydı, yalnızca geliştirme amaçlıdır. Hata raporlarında, özel bilgiler içerebilen ek NFC verileri yer alır. Bu ayarı değiştirmek için cihazınızı yeniden başlatın."</string>
+    <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Yeniden başlat"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Yayınlama"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ayna"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Kablosuz görüntülemeyi etkinleştir"</string>
@@ -906,7 +907,6 @@
     <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"NFC kullanımına yalnızca ekran kilitli değilken izin verilir"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"NFC ile uygulama içeriği aktarmaya hazır"</string>
-    <string name="android_beam_off_summary" msgid="5693961375631325042">"Kapalı"</string>
     <string name="nfc_disabled_summary" msgid="8737797364522502351">"NFC kapalı olduğundan kullanılamıyor"</string>
     <string name="android_beam_label" msgid="7168565080321110094">"Android Beam"</string>
     <string name="android_beam_explained" msgid="5684416131846701256">"Bu özellik açık olduğunda, cihazları birbirine yakın tutarak uygulama içeriğini NFC özelliği olan başka bir cihaza ışınlayabilirsiniz. Örneğin, web sayfalarını, YouTube videolarını, kişileri ve diğer verileri ışınlayabilirsiniz.\n\nCihazları bir araya getirmeniz (genellikle sırt sırta) ve ekranınıza dokunmanız yeterli. Uygulama nelerin ışınlanacağını belirler."</string>
@@ -1003,7 +1003,6 @@
     <string name="wifi_password" msgid="1458802324849513755">"Şifre"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"Şifreyi göster"</string>
     <string name="wifi_ap_band_config" msgid="1589020070150933055">"Erişim Noktası Bandı Seçin"</string>
-    <string name="wifi_ap_choose_auto" msgid="8944442003151215691">"Otomatik"</string>
     <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"2,4 GHz Bandı"</string>
     <string name="wifi_ap_choose_5G" msgid="8413248472288180075">"5,0 GHz Bandı"</string>
     <string name="wifi_ap_prefer_5G" msgid="2520628479818369902">"5,0 GHz Bandı tercih edilir"</string>
@@ -1217,7 +1216,6 @@
     <string name="emergency_address_title" msgid="8102786488994263815">"Acil durum adresi"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Kablosuz bağlantı üzerinden acil durum çağrısı yaptığınızda konumunuz olarak kullanılır"</string>
     <string name="private_dns_help_message" msgid="851221502063782306">"Gizli DNS özellikleri ile ilgili "<annotation id="url">"daha fazla bilgi edinin"</annotation></string>
-    <string name="private_dns_mode_on" msgid="8878679071975375696">"Açık"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="129524064888622179">"Ayar, operatör tarafından yönetiliyor"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Kablosuz çağrıyı etkinleştirin"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"Kablosuz çağrıyı açın"</string>
@@ -1276,8 +1274,6 @@
     <string name="search_settings" msgid="7573686516434589771">"Ara"</string>
     <string name="display_settings" msgid="7197750639709493852">"Ekran"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Ekranı otomatik döndür"</string>
-    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Kapalı"</string>
-    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Açık"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Açık - Yüze göre"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Yüz Algılama"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Telefonunuzu dikey ile yatay mod arasında hareket ettirdiğinizde ekran yönü otomatik olarak ayarlanır"</string>
@@ -1305,14 +1301,11 @@
     <string name="brightness_summary" msgid="6309641759293018049">"Ekranın parlaklığını ayarla"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Otomatik parlaklık"</string>
     <string name="auto_brightness_summary" msgid="1737148869232725883">"Ekran parlaklığı ortama uyarlanır"</string>
-    <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Açık"</string>
-    <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Kapalı"</string>
     <string name="auto_brightness_summary_very_low" msgid="2705445901659224330">"Tercih ettiğiniz parlaklık çok düşük"</string>
     <string name="auto_brightness_summary_low" msgid="1606100911112851291">"Tercih ettiğiniz parlaklık düşük"</string>
     <string name="auto_brightness_summary_default" msgid="9038441148247815684">"Tercih ettiğiniz parlaklık varsayılan"</string>
     <string name="auto_brightness_summary_high" msgid="2886260311484349010">"Tercih ettiğiniz parlaklık yüksek"</string>
     <string name="auto_brightness_summary_very_high" msgid="8294814315426024005">"Tercih ettiğiniz parlaklık çok yüksek"</string>
-    <string name="auto_brightness_off_title" msgid="5156056957376839677">"Kapalı"</string>
     <string name="auto_brightness_very_low_title" msgid="618973599332847430">"Çok düşük"</string>
     <string name="auto_brightness_low_title" msgid="4243763334776382492">"Düşük"</string>
     <string name="auto_brightness_default_title" msgid="1776584786251120907">"Varsayılan"</string>
@@ -1331,7 +1324,6 @@
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Geliştirilmiş dokunma duyarlılığı ve animasyon kalitesi için en yüksek yenileme hızı. Pil kullanımını artırır."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Ekrana dikkat verme"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Açık / Bakıyorsanız ekran kapanmaz"</string>
-    <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Kapat"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="1719759921214237016">"Kamera erişimi gerekiyor"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="5822591289468803691">"Ekrana dikkat verme için kamera erişimi gerekiyor. Cihaz Kişiselleştirme Hizmetleri izinlerini yönetmek için dokunun"</string>
     <string name="adaptive_sleep_manage_permission_button" msgid="1404510197847664846">"İzinleri yönet"</string>
@@ -1413,7 +1405,6 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Şarj olurken"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Yuvadayken"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Hiçbir zaman"</string>
-    <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Kapalı"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Başlama zamanı"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Geçerli ekran koruyucu"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Otomatik parlaklık"</string>
@@ -1429,7 +1420,6 @@
     <string name="short_summary_font_size" msgid="8444689613442419978">"Metni daha büyük veya daha küçük yapın"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"SIM kart kilit ayarları"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"SIM kart kilidi"</string>
-    <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Kapalı"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"Kilitli"</string>
     <string name="sim_lock_settings_title" msgid="1401619059761012696">"SIM kart kilidi"</string>
     <string name="sim_pin_toggle" msgid="98754920202404425">"SIM kartı kilitle"</string>
@@ -1481,15 +1471,9 @@
     <string name="module_version" msgid="1787518340082046658">"Google Play sistem güncellemesi"</string>
     <string name="device_info_not_available" msgid="4804474466616712326">"Yok"</string>
     <string name="device_status_activity_title" msgid="1812666241137263882">"Durum"</string>
-    <string name="device_status" msgid="7988547478034984649">"Durum"</string>
-    <string name="device_status_summary" product="tablet" msgid="8826216824111648900">"Pilin, ağın durumu ve diğer bilgiler"</string>
-    <string name="device_status_summary" product="default" msgid="8132661857066128832">"Telefon numarası, sinyal vb."</string>
     <string name="storage_settings" msgid="7472188817781592677">"Depolama"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Depolama alanı ve önbellek"</string>
-    <string name="storage_usb_settings" msgid="7058142934214211583">"Depolama"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Depolama ayarları"</string>
-    <string name="storage_settings_summary" product="nosdcard" msgid="3858049818577638926">"USB belleğin bağlantısını kes, kullanılabilir depolama alanını görüntüle"</string>
-    <string name="storage_settings_summary" product="default" msgid="267557695753980969">"SD kartın bağlantısını kes, kull. Depolama alanını görüntüle"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (SIM yuvası %1$d)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Görüntülemek için kaydedilmiş ağı seçin"</string>
     <string name="status_number" product="tablet" msgid="3597945414666253183">"MDN"</string>
@@ -1502,12 +1486,6 @@
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL sürümü"</string>
     <string name="meid_multi_sim" msgid="7645394486193991388">"MEID (SIM yuvası %1$d)"</string>
-    <string name="scanning_status_text_on" msgid="3846571210578042940">"Açık"</string>
-    <string name="scanning_status_text_off" msgid="4002352668313705132">"Kapalı"</string>
-    <string name="scanning_status_text_wifi_on_ble_on" msgid="7644609329607744714">"Kablosuz ağ ve Bluetooth taraması açık"</string>
-    <string name="scanning_status_text_wifi_on_ble_off" msgid="7215007787287418186">"Kablosuz ağ taraması açık, Bluetooth taraması kapalı"</string>
-    <string name="scanning_status_text_wifi_off_ble_on" msgid="1396882599556304165">"Bluetooth taraması açık, kablosuz ağ taraması kapalı"</string>
-    <string name="scanning_status_text_wifi_off_ble_off" msgid="7670694707427030537">"Kablosuz ağ ve Bluetooth taraması kapalı"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"Mobil veri ağı türü"</string>
@@ -1524,50 +1502,7 @@
     <string name="status_bt_address" msgid="6919660304578476547">"Bluetooth adresi"</string>
     <string name="status_serial_number" msgid="9060064164331466789">"Seri numarası"</string>
     <string name="status_up_time" msgid="1274778533719495438">"Açık kalma süresi"</string>
-    <string name="status_awake_time" msgid="2573925324168081586">"Uyanık geçen süre"</string>
-    <string name="internal_memory" msgid="1869518160077033848">"Dahili dep birm"</string>
-    <string name="sd_memory" product="nosdcard" msgid="5456718463397723781">"USB bellek"</string>
-    <string name="sd_memory" product="default" msgid="3098344183202722455">"SD kart"</string>
-    <string name="memory_available" msgid="712528795743654737">"Kullanılabilir"</string>
-    <string name="memory_available_read_only" msgid="3201969221573511590">"Kullanılabilir (salt okunur)"</string>
-    <string name="memory_size" msgid="2710897518522931469">"Toplam alan"</string>
     <string name="memory_calculating_size" msgid="3898240439798661242">"Hesaplanıyor..."</string>
-    <string name="memory_apps_usage" msgid="8818570780540532952">"Uygulamalar, uygulama verileri"</string>
-    <string name="memory_media_usage" msgid="5161308657995646963">"Medya"</string>
-    <string name="memory_downloads_usage" msgid="8252462247720191179">"İndirilenler"</string>
-    <string name="memory_dcim_usage" msgid="3568913845973164352">"Resimler, videolar"</string>
-    <string name="memory_music_usage" msgid="8100634000114206429">"Ses (müzik, zil sesleri vb...)"</string>
-    <string name="memory_media_misc_usage" msgid="7066851245178533269">"Diğer dosyalar"</string>
-    <string name="memory_media_cache_usage" msgid="780808666853685824">"Önbelleğe alınan veriler"</string>
-    <string name="sd_eject" product="nosdcard" msgid="6136102589751843304">"Payl dep birimnn bağl kes"</string>
-    <string name="sd_eject" product="default" msgid="8062832622096296251">"SD kartının bağlantısını kes"</string>
-    <string name="sd_eject_summary" product="nosdcard" msgid="6859940774161708871">"Dahili USB belleğin bağlntsn kes"</string>
-    <string name="sd_eject_summary" product="default" msgid="5151243312587186226">"Güvenle çıkarabilmnz için SD kartın bağl kesin"</string>
-    <string name="sd_insert_summary" product="nosdcard" msgid="9164545135649775664">"Bağlantı için USB belleği takın"</string>
-    <string name="sd_insert_summary" product="default" msgid="5949168259622002192">"Eklemek için bir SD kart yerleştirin"</string>
-    <string name="sd_mount" product="nosdcard" msgid="8305985249945415150">"USB belleği ekleyin"</string>
-    <string name="sd_mount" product="default" msgid="5279813999455776169">"SD kartı ekle"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="2190410240845521205"></string>
-    <string name="sd_mount_summary" product="default" msgid="2190410240845521205"></string>
-    <string name="sd_format" product="nosdcard" msgid="8657427883364711513">"USB belleği sil"</string>
-    <string name="sd_format" product="default" msgid="9085302892248732329">"SD kartı sil"</string>
-    <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"Dahili USB bellekteki müzik ve fotoğraf gibi tüm verileri siler"</string>
-    <string name="sd_format_summary" product="default" msgid="60583152211068164">"SD karttaki müzik ve fotoğraf gibi tüm verileri siler"</string>
-    <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"MTP veya PTP işlevi etkin"</string>
-    <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"USB belleğin bağlantısı kesilsin mi?"</string>
-    <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"SD kartının bağlantısı kesilsin mi?"</string>
-    <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="1212025106709645023">"USB belleğin bağlantısını keserseniz, kullanmakta olduğunuz bazı uygulamalar durur ve USB bellek yeniden bağlanıncaya kadar kullanılamayabilir."</string>
-    <string name="dlg_confirm_unmount_text" product="default" msgid="3887768438615563697">"SD kartı çıkarırsanız, kullanmakta olduğunuz bazı uygulamalar durur ve SD kart yeniden takılıncaya kadar kullanılamayabilir."</string>
-    <string name="dlg_error_unmount_title" product="nosdcard" msgid="2205587942165199845"></string>
-    <string name="dlg_error_unmount_title" product="default" msgid="2205587942165199845"></string>
-    <string name="dlg_error_unmount_text" product="nosdcard" msgid="7876201891724279436">"USB belleğin bağlantısı kesilemedi. Daha sonra tekrar deneyin."</string>
-    <string name="dlg_error_unmount_text" product="default" msgid="2185659901137961711">"SD kartın bağlantısı kesilemiyor. Daha sonra tekrar deneyin."</string>
-    <string name="unmount_inform_text" product="nosdcard" msgid="5932607205977999175">"USB belleğin bağlantısı kesilecek."</string>
-    <string name="unmount_inform_text" product="default" msgid="716578785262713312">"SD kart bağlantısı kesilecek."</string>
-    <string name="sd_ejecting_title" msgid="1641122369013595273">"Kaldırılıyor"</string>
-    <string name="sd_ejecting_summary" msgid="861928572729341132">"Kaldırma işlemi devam ediyor"</string>
-    <string name="storage_low_title" msgid="8002650511493419567">"Depolama alanı bitiyor"</string>
-    <string name="storage_low_summary" msgid="7341022293583384506">"Senkronizasyon gibi bazı sistem işlevleri doğru çalışmayabilir. Uygulamalar ve medya içerikleri gibi bazı öğelerin sabitleme işaretini kaldırarak veya öğeleri silerek yer açmayı deneyin."</string>
     <string name="storage_menu_rename" msgid="8549835371429159336">"Yeniden adlandır"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Ekle"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Çıkar"</string>
@@ -1580,29 +1515,15 @@
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Kur"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Yer aç"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Depolamayı yönet"</string>
-    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"temiz, depolama alanı"</string>
     <string name="storage_free_up_space_title" msgid="281047807372131975">"Yer aç"</string>
     <string name="storage_free_up_space_summary" msgid="6650027929735481350">"Yer açıp yönetmek için Files uygulamasına git"</string>
-    <string name="storage_title_usb" msgid="1332488715547400452">"USB bilgisayar bağlantısı"</string>
-    <string name="usb_connection_category" msgid="2288543238378907242">"Şu şekilde bağlan:"</string>
-    <string name="usb_mtp_title" msgid="9068009584556422314">"Medya cihazı (MTP)"</string>
-    <string name="usb_mtp_summary" msgid="6293240861011560842">"Windows\'da ya da Android Dosya Aktarımı\'nı kullanarak Mac üzerinde (www.android.com/filetransfer sayfasına bakın) medya dosyalarını aktarma olanağı sağlar"</string>
-    <string name="usb_ptp_title" msgid="4496529268189091846">"Kamera (PTP)"</string>
-    <string name="usb_ptp_summary" msgid="8382539472311655671">"Kamera yazılımını kullanarak fotoğrafları ve MTP\'yi desteklemeyen bilgisayarlardaki her türlü dosyayı aktarmanıza olanak sağlar."</string>
-    <string name="usb_midi_title" msgid="1139558846427981761">"MIDI"</string>
-    <string name="usb_midi_summary" msgid="1842457325845863840">"MIDI özellikli uygulamaların bilgisayarınızda MIDI yazılımıyla USB üzerinden çalışmasına olanak verir."</string>
     <string name="storage_other_users" msgid="7017206190449510992">"Diğer kullanıcılar"</string>
-    <string name="storage_internal_title" msgid="3265098802217660829">"Cihazdaki depolama birimleri"</string>
-    <string name="storage_external_title" msgid="8984075540312137135">"Taşınabilir depolama birimi"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> eklendi"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"<xliff:g id="NAME">%1$s</xliff:g> eklenemedi"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"<xliff:g id="NAME">%1$s</xliff:g> güvenli bir şekilde çıkarıldı"</string>
     <string name="storage_unmount_failure" msgid="3796912279003790607">"<xliff:g id="NAME">%1$s</xliff:g> güvenli bir şekilde çıkarılamadı"</string>
-    <string name="storage_format_success" msgid="3028114521294256851">"<xliff:g id="NAME">%1$s</xliff:g> biçimlendirildi"</string>
-    <string name="storage_format_failure" msgid="2042691589726261987">"<xliff:g id="NAME">%1$s</xliff:g> biçimlendirilemedi"</string>
     <string name="storage_rename_title" msgid="5911285992205282312">"Depolama alanına yeni ad ver"</string>
-    <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Bu <xliff:g id="NAME_0">^1</xliff:g> birimi güvenli şekilde çıkarıldı, ancak hâlâ kullanılabilir durumda bulunuyor. \n\nBu <xliff:g id="NAME_1">^1</xliff:g> birimini kullanmak için önce eklemeniz gerekiyor."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Bu <xliff:g id="NAME_0">^1</xliff:g> bozuk. \n\n<xliff:g id="NAME_1">^1</xliff:g> birimini kullanmak için öncelikle bu birimi kurmanız gerekiyor."</string>
     <string name="storage_internal_format_details" msgid="2399034372813686846">"Fotoğraf, video, müzik ve diğer içerikleri depolayıp bunlara diğer cihazlardan erişmek için bu SD kartı biçimlendirebilirsiniz. \n\n"<b>"Bu SD karttaki tüm veriler silinecektir."</b>" \n\n"<b>"Biçimlendirmeden önce"</b>" \n\n"<b>"Fotoğrafları ve diğer medyaları yedekleyin"</b>" \nMedya dosyalarınızı bu cihazdaki alternatif depolama alanına taşıyın veya USB kablosu kullanarak bilgisayara aktarın. \n\n"<b>"Uygulamaları yedekleyin"</b>" \nBu <xliff:g id="NAME">^1</xliff:g> içinde depolanan tüm uygulamalar kaldırılacak ve verileri silinecek. Bu uygulamaları kullanmaya devam etmek için bu cihazdaki alternatif depolama alanına taşıyın."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Bu <xliff:g id="NAME_0">^1</xliff:g> birimini çıkardığınızda, tekrar takılana kadar birimin içinde depolanmış olan uygulamalar artık çalışmaz ve depolanmış medya dosyaları ise kullanılamaz."</b>\n\n"Bu <xliff:g id="NAME_1">^1</xliff:g> birimi sadece bu cihazda çalışacak şekilde biçimlendirilmiştir. Başka cihazlarda çalışmaz."</string>
@@ -1611,43 +1532,20 @@
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Bu <xliff:g id="NAME">^1</xliff:g> biriminde depolanan tüm uygulamalar, fotoğraflar ve veriler kalıcı olarak silinecek."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Sistem, Android <xliff:g id="VERSION">%s</xliff:g> sürümünü çalıştırmak için kullanılan dosyaları içerir"</string>
     <string name="storage_wizard_guest" msgid="5813419895687733649">"Misafir modu kullanıcıları SD kart biçimlendiremez"</string>
-    <string name="storage_wizard_init_title" msgid="9036374223934708619">"<xliff:g id="NAME">^1</xliff:g> cihazınızı kurun"</string>
-    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"SD kartı taşınabilir depolama için biçimlendirin"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Fotoğraf, video, müzik ve diğer içerikleri kaydedip bunlara diğer cihazlardan erişin"</string>
-    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"SD kartı dahili depolama için biçimlendirin"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Uygulamaları ve medyaları yalnızca bu telefonda kullanacak şekilde kaydedin"</string>
-    <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Dahili depolama olarak biçimlen."</string>
-    <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Bu, <xliff:g id="NAME_0">^1</xliff:g> biriminin güvenli olması için biçimlendirilmesini gerektirir. \n\nBiçimlendirdikten sonra bu <xliff:g id="NAME_1">^1</xliff:g> birimi sadece bu cihazda çalışır. \n\n"<b>"Biçimlendirme işlemi <xliff:g id="NAME_2">^1</xliff:g> üzerinde depolanmış olan tüm bilgileri siler."</b>" Verilerin kaybolmaması için yedeklemeyi düşünün."</string>
-    <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Taşınabilir depolama olarak biçimlendir"</string>
-    <string name="storage_wizard_format_confirm_public_body" msgid="6219883780307218266">"Bu işlem <xliff:g id="NAME_0">^1</xliff:g> biriminin biçimlendirilmesini gerektiriyor. \n\n"<b>"Biçimlendirme işlemi şu anda <xliff:g id="NAME_1">^1</xliff:g> biriminde depolanmış olan tüm verileri siler."</b>" Veri kaybını önlemek için birimi yedeklemeniz önerilir."</string>
-    <string name="storage_wizard_format_confirm_next" msgid="4412063054982084056">"Sil ve biçimlendir"</string>
     <string name="storage_wizard_format_progress_title" msgid="9170393018855949774">"<xliff:g id="NAME">^1</xliff:g> biçimlendiriliyor…"</string>
     <string name="storage_wizard_format_progress_body" msgid="1044024044955390417">"Biçimlendirilirken <xliff:g id="NAME">^1</xliff:g> birimini çıkarmayın."</string>
-    <string name="storage_wizard_migrate_title" msgid="3013711737005104623">"Verileri yeni depol. birim. taşı"</string>
-    <string name="storage_wizard_migrate_body" msgid="1630853797296198275">"Fotoğraflarınızı, dosyalarınızı ve bazı uygulamaları bu yeni <xliff:g id="NAME">^1</xliff:g> birimine taşıyabilirsiniz. \n\nTaşıma işlemi yaklaşık <xliff:g id="TIME">^2</xliff:g> sürer ve dahili depolama biriminde <xliff:g id="SIZE">^3</xliff:g> yer açar. Bu işlem sürerken bazı uygulamalar çalışmaz."</string>
-    <string name="storage_wizard_migrate_now" msgid="175023718337037181">"Şimdi taşı"</string>
-    <string name="storage_wizard_migrate_later" msgid="6573789572520980112">"Daha sonra taşı"</string>
-    <string name="storage_wizard_migrate_confirm_title" msgid="255346780598924540">"Verileri şimdi taşı"</string>
-    <string name="storage_wizard_migrate_confirm_body" msgid="5039938578355576124"><b>"Taşıma işlemi yaklaşık <xliff:g id="TIME">^1</xliff:g> sürer. <xliff:g id="NAME">^3</xliff:g> üzerinde <xliff:g id="SIZE">^2</xliff:g> alan boşaltılır."</b></string>
-    <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Taşı"</string>
-    <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Veriler taşınıyor…"</string>
-    <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Taşıma sırasında: \n• <xliff:g id="NAME">^1</xliff:g> birimini çıkarmayın. \n• Bazı uygulamalar düzgün çalışmaz. \n• Cihaz şarjlı olmalıdır."</string>
     <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> biçimlendirildi"</string>
-    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"<xliff:g id="NAME">^1</xliff:g> biriminizi kullanmaya başlayabilirsiniz"</string>
-    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"<xliff:g id="NAME">^1</xliff:g> biriminizi kullanmaya başlayabilirsiniz"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"<xliff:g id="APP">^1</xliff:g> uygulamasını taşıyın"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"<xliff:g id="APP">^1</xliff:g> uygulamasını ve verilerini <xliff:g id="NAME_0">^2</xliff:g> birimine taşımak sadece birkaç saniye sürer. Taşıma işlemi tamamlanana kadar uygulamayı kullanamazsınız. \n\nTaşıma sırasında <xliff:g id="NAME_1">^2</xliff:g> birimini çıkarmayın."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Verileri taşımak için <xliff:g id="APP">^1</xliff:g> kullanıcısının kilidini açmanız gerekir."</string>
     <string name="storage_wizard_move_progress_title" msgid="3912406225614672391">"<xliff:g id="APP">^1</xliff:g> taşınıyor…"</string>
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Taşıma sırasında <xliff:g id="NAME">^1</xliff:g> birimini çıkarmayın. \nTaşıma işlemi tamamlanana kadar bu cihazdaki \n<xliff:g id="APP">^2</xliff:g> uygulaması kullanılamaz."</string>
-    <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Taşımayı iptal et"</string>
-    <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Bu <xliff:g id="NAME_0">^1</xliff:g> yavaş görünüyor. \n\nDevam edebilirsiniz, ancak bu konuma taşınan uygulamalar takılabilir ve veri aktarımları uzun sürebilir. \n\nDaha iyi performans için daha hızlı bir <xliff:g id="NAME_1">^1</xliff:g> kullanmayı düşünün."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Bu <xliff:g id="NAME">^1</xliff:g> nasıl kullanılacak?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"SD kartı dahili depolama için biçimlendirin"</string>
     <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Uygulamaları ve medyaları yalnızca bu tablette kullanacak şekilde depolayın. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD kart yapılandırma hakkında daha fazla bilgi&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Biçim"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"SD kartı dahili depolama için biçimlendirin"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Uygulamaları ve medyaları yalnızca bu telefonda kullanacak şekilde depolayın. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD kart yapılandırma hakkında daha fazla bilgi&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Sadece bu telefonda kullanılacak uygulama ve medya dosyalarını depolayın. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD kart yapılandırma hakkında daha fazla bilgi&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Biçim"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Veya"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"SD kartı taşınabilir depolama için biçimlendirin"</string>
@@ -1804,9 +1702,6 @@
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Bluetooth tethering"</string>
     <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"Tabletin internet bağlantısını Bluetooth üzerinden paylaşın"</string>
     <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Telefonun internet bağlantısını Bluetooth üzerinden paylaşın"</string>
-    <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"Bu <xliff:g id="DEVICE_NAME">%1$d</xliff:g> cihazının internet bağlantısı Bluetooth üzerinden paylaşılmıyor"</string>
-    <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"En çok <xliff:g id="MAXCONNECTION">%1$d</xliff:g> cihaz için tethering yapılabilir."</string>
-    <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> internet paylaşımı kesilecek."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet tethering"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Telefonun internet bağlantısını Ethernet üzerinden paylaşın"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Mobil veri bağlantınızdan başka cihazlara internet bağlantısı sağlamak için hotspot ve tethering\'i kullanın. Yakınlardaki cihazlarla içerik paylaşmak için uygulamalar da hotspot oluşturabilir."</string>
@@ -2032,8 +1927,6 @@
     <string name="application_size_label" msgid="6407051020651716729">"Uygulama boyutu"</string>
     <string name="external_code_size_label" msgid="7375146402660973743">"USB bellek uygulaması"</string>
     <string name="data_size_label" msgid="7814478940141255234">"Kullanıcı verileri"</string>
-    <string name="external_data_size_label" product="nosdcard" msgid="1054860423004751290">"USB bellek verileri"</string>
-    <string name="external_data_size_label" product="default" msgid="3370825186202856353">"SD kart"</string>
     <string name="uninstall_text" msgid="315764653029060126">"Kaldır"</string>
     <string name="uninstall_all_users_text" msgid="5924715251087176474">"Yüklemeyi tüm kullanıcılar için kaldır"</string>
     <string name="install_text" msgid="4558333621516996473">"Yükle"</string>
@@ -2067,8 +1960,6 @@
     <string name="filter_apps_disabled" msgid="5068011814871004105">"Devre dışı uygulamalar"</string>
     <string name="filter_apps_third_party" msgid="9049447784849114843">"İndirilenler"</string>
     <string name="filter_apps_running" msgid="535465683273284141">"Çalışanlar"</string>
-    <string name="filter_apps_onsdcard" product="nosdcard" msgid="5140211657134608469">"USB bellek"</string>
-    <string name="filter_apps_onsdcard" product="default" msgid="1774499644768369891">"SD kartta"</string>
     <string name="not_installed" msgid="5074606858798519449">"Bu kullanıcı için yüklü değil"</string>
     <string name="installed" msgid="2837449358488825884">"Yüklendi"</string>
     <string name="no_applications" msgid="985069304755391640">"Uygulama yok."</string>
@@ -2079,7 +1970,6 @@
     <string name="dlg_ok" msgid="1421350367857960997">"Tamam"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"İptal"</string>
     <string name="dlg_delete" msgid="1790919205039397659">"Sil"</string>
-    <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"Uygulama, yüklü uygulamalar listesinde bulunamadı."</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"Uygulama depolama alanı temizlenemedi."</string>
     <string name="join_two_items" msgid="7893073836681382429">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g> ve <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
@@ -2088,10 +1978,6 @@
     <string name="invalid_size_value" msgid="7017371543563259201">"Paket boyutu hesaplanamadı."</string>
     <string name="version_text" msgid="7628938665256107608">"sürüm <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5421158479447276791">"Taşı"</string>
-    <string name="move_app_to_internal" product="tablet" msgid="5799782476959541144">"Tablete taşı"</string>
-    <string name="move_app_to_internal" product="default" msgid="7395498801589544372">"Telefona taşı"</string>
-    <string name="move_app_to_sdcard" product="nosdcard" msgid="1145367822171576972">"USB belleğe taşı"</string>
-    <string name="move_app_to_sdcard" product="default" msgid="7161667212614143767">"SD karta taşı"</string>
     <string name="another_migration_already_in_progress" msgid="6550546307856052261">"Başka bir taşıma işlemi zaten çalışıyor."</string>
     <string name="insufficient_storage" msgid="8115088042669030558">"Yeterli depolama alanı yok."</string>
     <string name="does_not_exist" msgid="6499163879348776120">"Uygulama mevcut değil."</string>
@@ -2157,10 +2043,13 @@
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="2625863973434309085">"Bu hizmeti durdurursanız, telefonunuzun bazı özellikleri, telefon kapatılıp yeniden açılmadan düzgün çalışmayabilir."</string>
     <string name="language_input_gesture_title" msgid="3292455685728572960">"Diller, giriş ve hareketler"</string>
     <string name="language_settings" msgid="8700174277543875046">"Diller ve giriş"</string>
+    <string name="languages_settings" msgid="5784775502251770671">"Diller"</string>
+    <string name="keyboard_settings" msgid="184185708597386454">"Klavye"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"Cihazın dilini değiştirmek için izniniz yok."</string>
     <string name="language_keyboard_settings_title" msgid="7934844313233544557">"Diller ve giriş"</string>
     <string name="input_assistance" msgid="3437568284144952104">"Araçlar"</string>
     <string name="keyboard_settings_category" msgid="5392847229300117064">"Klavye ve giriş yöntemleri"</string>
+    <string name="system_language" msgid="1146762166579643257">"Sistem Dilleri"</string>
     <string name="phone_language" msgid="5986939176239963826">"Diller"</string>
     <string name="phone_language_summary" msgid="863041222809685325"></string>
     <string name="auto_replace" msgid="4830732960264447043">"Otomatik değiştir"</string>
@@ -2226,15 +2115,14 @@
     <string name="input_method" msgid="2982805181425436775">"Giriş yöntemi"</string>
     <string name="current_input_method" msgid="3471068842881330883">"Geçerli Klavye"</string>
     <string name="input_method_selector" msgid="8463209725824763600">"Giriş yöntemi seçicisi"</string>
-    <string name="input_method_selector_show_automatically_title" msgid="6483428482089875034">"Otomatik"</string>
-    <string name="input_method_selector_always_show_title" msgid="2479533500357556146">"Her zaman göster"</string>
-    <string name="input_method_selector_always_hide_title" msgid="807424180027384849">"Her zaman gizle"</string>
     <string name="configure_input_method" msgid="8831343065130376880">"Giriş yöntemlerini ayarla"</string>
     <string name="input_method_settings" msgid="4177883733022569830">"Ayarlar"</string>
     <string name="input_method_settings_button" msgid="5145039044301426311">"Ayarlar"</string>
     <string name="input_methods_settings_label_format" msgid="5809693308957109022">"<xliff:g id="IME_NAME">%1$s</xliff:g> ayarları"</string>
     <string name="input_methods_and_subtype_enabler_title" msgid="8940326108334307057">"Etkin giriş yöntemlerini seçin"</string>
     <string name="onscreen_keyboard_settings_summary" msgid="3975358507879701606">"Ekran klavyesi ayarları"</string>
+    <string name="keyboard_settings_summary" msgid="2716339620942356432">"Dokunmatik klavye, Konuşma, Araçlar"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Dokunmatik klavye, Fiziksel klavye, Konuşma, Araçlar"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Fiziksel klavye"</string>
     <string name="builtin_keyboard_settings_summary" msgid="4332792334499933856">"Fiziksel klavye ayarları"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Gadget seç"</string>
@@ -2360,7 +2248,6 @@
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Erişilebilirlik düğmesi <xliff:g id="SERVICE">%1$s</xliff:g> olarak ayarlandı. Büyütmeyi kullanmak için Erişilebilirlik düğmesine dokunup basılı tutun, ardından büyütmeyi seçin."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Erişilebilirlik hareketi <xliff:g id="SERVICE">%1$s</xliff:g> hizmetine ayarlandı. Büyütme özelliğini kullanmak için iki parmağınızla ekranın altından kaydırıp basılı tutun. Ardından büyütmeyi seçin."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="3713636732641882959">"Ses tuşu kısayolu"</string>
-    <string name="accessibility_shortcut_service_title" msgid="6842883700702723355">"Kısayol hizmeti"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Kısayol ayarları"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Kilit ekranından kısayol"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Özellik kısayolunun kilit ekranından açılmasına izin verin. Ses tuşlarının ikisini birden birkaç saniyeliğine basılı tutun."</string>
@@ -2431,8 +2318,6 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Otomatik tıklama süresi"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Titreşim ve dokunma teknolojisi"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Farklı kullanımlar için titreşim gücünü kontrol edin"</string>
-    <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Açık"</string>
-    <string name="accessibility_vibration_settings_state_off" msgid="7946588741954981703">"Kapalı"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Cihaz sessize alındığından ayar devre dışı bırakıldı"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Aramalar"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Bildirimler ve alarmlar"</string>
@@ -2486,18 +2371,12 @@
     <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, yalnızca sağ"</string>
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, sol ve sağ"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 1 tane daha"</string>
-    <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
-      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> işitme cihazı kayıtlı</item>
-      <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> işitme cihazı kayıtlı</item>
-    </plurals>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Ses ayarı"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Sesli açıklama"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Desteklenen filmlerde ve programlarda ekranda neler olduğuyla ilgili açıklamaları dinleyin"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"sesli açıklama, ses, açıklama, az görme,"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Kısayol açık"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Kapalı"</string>
-    <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"Açık"</string>
-    <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Kapalı"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Çalışmıyor. Bilgi için dokunun."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Bu hizmet hatalı çalışıyor."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Erişilebilirlik kısayolları"</string>
@@ -2539,8 +2418,6 @@
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> saniye</item>
     </plurals>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Ayarlar"</string>
-    <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Açık"</string>
-    <string name="accessibility_feature_state_off" msgid="169119895905460512">"Kapalı"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"Önizle"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Standart seçenekler"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"Dil"</string>
@@ -2614,7 +2491,6 @@
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Etrafımdaki cihazları tara"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Kayıtlı cihazlar"</string>
     <string name="print_settings" msgid="8519810615863882491">"Yazdırma"</string>
-    <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Kapalı"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> yazdırma hizmeti açık</item>
       <item quantity="one">1 yazdırma hizmeti açık</item>
@@ -2628,8 +2504,6 @@
     <string name="print_no_printers_found" msgid="4833082484646109486">"Yazıcı bulunamadı"</string>
     <string name="print_menu_item_settings" msgid="8202755044784599740">"Ayarlar"</string>
     <string name="print_menu_item_add_printers" msgid="7958192149202584039">"Yazıcı ekle"</string>
-    <string name="print_feature_state_on" msgid="7132063461008624685">"Açık"</string>
-    <string name="print_feature_state_off" msgid="1466195699995209446">"Kapalı"</string>
     <string name="print_menu_item_add_service" msgid="1549091062463044676">"Hizmet ekle"</string>
     <string name="print_menu_item_add_printer" msgid="8711630848324870892">"Yazıcı ekle"</string>
     <string name="print_menu_item_search" msgid="5989979785203603169">"Ara"</string>
@@ -2677,8 +2551,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Pil kullanımı"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Son 24 saatteki kullanımı göster"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Son tam şarjdan bu yana kullanımı göster"</string>
-    <!-- no translation found for battery_details_title (3289680399291090588) -->
-    <skip />
+    <string name="battery_details_title" msgid="3289680399291090588">"Uygulamaların pil kullanımı"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Kullanım ayrıntıları"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Pil kullanımını ayarla"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Dahil olan paketler"</string>
@@ -2697,12 +2570,11 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Bazı özellikler sınırlı olabilir"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Yüksek pil kullanımı"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"En fazla pil kullanan uygulamaları göster"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (5962767837251276527) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4236185146380247801) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Şarj işlemi duraklatıldı"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"Pili koruyarak pil ömrünü uzatır"</string>
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
     <skip />
+    <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Şarj işlemi duraklatıldı hakkında daha fazla bilgi"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Şarja devam et"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Yüksek sıcaklıklar ve uzun şarj etme süreleri gibi belirli durumlarda pil sağlığını korumak için şarj etme işlemi <xliff:g id="PERCENT">%1$s</xliff:g> ile sınırlanabilir.\n\nBu gibi durumlar sona erdiğinde telefonunuz otomatik olarak normal şarj etmeye başlar."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Yüksek sıcaklıklar ve uzun şarj etme süreleri gibi belirli durumlarda pil sağlığını korumak için şarj etme işlemi <xliff:g id="PERCENT">%1$s</xliff:g> ile sınırlanabilir.\n\nBu gibi durumlar sona erdiğinde tabletiniz otomatik olarak normal şarj etmeye başlar."</string>
@@ -2738,8 +2610,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Bu uygulama arka planda pil gücünü kullanabilecek. Piliniz beklenenden daha erken bitebilir."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Kaldır"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"İptal"</string>
-    <!-- no translation found for battery_tip_charge_to_full_button (6701709034348116261) -->
-    <skip />
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Tam kapasitede şarj et"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Uygulamalarınız normal miktarda pil kullanıyor. Uygulamalar çok fazla pil kullanırsa telefonunuz size bazı önerilerde bulunacaktır.\n\nPiliniz azaldığında her zaman Pil Tasarrufu\'nu açabilirsiniz."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Uygulamalarınız normal miktarda pil kullanıyor. Uygulamalar çok fazla pil kullanırsa tabletiniz size bazı önerilerde bulunacaktır.\n\nPiliniz azaldığında her zaman Pil Tasarrufu\'nu açabilirsiniz."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Uygulamalarınız normal miktarda pil kullanıyor. Uygulamalar çok fazla pil kullanırsa cihazınız size bazı önerilerde bulunacaktır.\n\nPiliniz azaldığında her zaman Pil Tasarrufu\'nu açabilirsiniz."</string>
@@ -2849,13 +2720,13 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Arka planda: Bir dakikadan az"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Toplam: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Arka planda: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Pil kullanımı verileri yaklaşık değerler olup telefon şarj olurken kullanım ölçülmez"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Pil kullanım verileri, telefonunuzu birkaç saat kullanmanızın ardından görüntülenebilir"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Pil kullanımı verileri yaklaşık değerler olup telefon şarj olurken kullanım ölçülmez"</string>
+    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"Pil kullanımı verileri yaklaşık değerler olup tablet şarj olurken kullanım ölçülmez"</string>
+    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"Pil kullanımı verileri yaklaşık değerler olup cihaz şarj olurken kullanım ölçülmez"</string>
+    <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Pil kullanım verileri, tamamen şarj olduktan sonraki birkaç saat içinde görüntülenebilir"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Pil kullanım grafiği"</string>
-    <!-- no translation found for daily_battery_usage_chart (4176059567682992686) -->
-    <skip />
-    <!-- no translation found for hourly_battery_usage_chart (3098314511076561272) -->
-    <skip />
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Günlük pil kullanımı grafiği"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Saatlik pil kullanımı grafiği"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"İşlem İstatistikleri"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Meraklısı için, çalışan işlemlerle ilgili istatistikler"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Bellek kullanımı"</string>
@@ -2919,8 +2790,6 @@
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> VPN güvenli değil."</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Uyarlanabilir bağlantı"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Ağ bağlantılarınızı otomatik olarak yöneterek pil ömrünü uzatır ve cihaz performansını iyileştirir"</string>
-    <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Açık"</string>
-    <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Kapalı"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Kimlik bilgileri deposu"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Sertifika yükle"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Sertifikaları depolama biriminden yükleyin"</string>
@@ -2966,8 +2835,6 @@
     <string name="emergency_tone_title" msgid="6673118505206685168">"Acil durum arama sinyali"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Acil çağrı yapıldığında nasıl işlev göreceğini ayarlayın"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Yedekleme"</string>
-    <string name="backup_summary_state_on" msgid="9018954639693085240">"Açık"</string>
-    <string name="backup_summary_state_off" msgid="5341339397224835909">"Kapalı"</string>
     <string name="backup_section_title" msgid="6539706829848457794">"Yedekleme ve geri yükleme"</string>
     <string name="personal_data_section_title" msgid="6368610168625722682">"Kişisel veriler"</string>
     <string name="backup_data_title" msgid="507663517227498525">"Verilerimi yedekle"</string>
@@ -3063,7 +2930,6 @@
     <string name="select_all" msgid="7898929601615536401">"Tümünü seç"</string>
     <string name="data_usage_summary_title" msgid="394067070764360142">"Veri kullanımı"</string>
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Mobil veri ve Kablosuz"</string>
-    <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Verileri otomatik senk. et"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Kişisel verileri otomatik senk. et"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"İş verilerini otomatik senk. et"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Dönemi değiştir..."</string>
@@ -3434,10 +3300,6 @@
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Seçim gerekiyor"</string>
     <string name="sim_selection_channel_title" msgid="3193666315607572484">"SIM seçimi"</string>
     <string name="dashboard_title" msgid="5660733037244683387">"Ayarlar"</string>
-    <plurals name="settings_suggestion_header_summary_hidden_items" formatted="false" msgid="6585075562837786847">
-      <item quantity="other">Gizli %d öğeyi göster</item>
-      <item quantity="one">Gizli %d öğeyi göster</item>
-    </plurals>
     <string name="network_dashboard_title" msgid="788543070557731240">"Ağ ve internet"</string>
     <string name="network_dashboard_summary_mobile" msgid="7750924671970583670">"Mobil, Kablosuz, hotspot"</string>
     <string name="network_dashboard_summary_no_mobile" msgid="4022575916334910790">"Kablosuz hotspot"</string>
@@ -3460,6 +3322,7 @@
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Kayıtlı şifreler, otomatik doldurma, senkronize edilen hesaplar"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Varsayılan uygulamalar"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Diller, hareketler, saat, yedekleme"</string>
+    <string name="languages_setting_summary" msgid="4924440599794956443">"Sistem dilleri, uygulama dilleri"</string>
     <string name="search_results_title" msgid="3360639917793022533">"Ayarlar"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"kablosuz, ağ bağlantısı, internet, kablosuz bağlantı, veri"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Kablosuz ağ bildirimi, kablosuz bağlantı bildirimi"</string>
@@ -3600,7 +3463,6 @@
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Telefon hoparlörü"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Kablolu kulaklık"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"Uyumlu medyadaki sesler daha yoğun hale gelir"</string>
-    <string name="spatial_summary_off" msgid="8272678804629774378">"Kapalı"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Açık/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Açık/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> ve <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Bluetooth cihazlar için de üç boyutlu sesi açabilirsiniz."</string>
@@ -3673,7 +3535,6 @@
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Yalnızca öncelikliler"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"Açık / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Aç"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Her zaman sor"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Siz kapatana kadar"</string>
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 saat}other{# saat}}"</string>
@@ -3882,10 +3743,6 @@
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Bildirimlerin hangi uygulama ve cihazlar tarafından okunabileceğini kontrol edin"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"İş profili bildirimlerine erişim engellendi"</string>
     <string name="manage_notification_access_summary_zero" msgid="7528633634628627431">"Uygulamalar bildirimleri okuyamaz"</string>
-    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="3703008881487586312">
-      <item quantity="other">%d uygulama bildirimleri okuyabilir</item>
-      <item quantity="one">%d uygulama bildirimleri okuyabilir</item>
-    </plurals>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Gelişmiş bildirimler"</string>
     <string name="notification_assistant_summary" msgid="1957783114840908887">"Önerilen işlemleri, yanıtları ve diğer içerikleri alın"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"Yok"</string>
@@ -3967,10 +3824,6 @@
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"İsteğiniz üzerine Android, bu bildirim grubunun bu cihazda görünmesini engelliyor"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Kategoriler"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Diğer"</string>
-    <plurals name="notification_group_summary" formatted="false" msgid="483490958130993160">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kategori</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> kategori</item>
-    </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Bu uygulama herhangi bir bildirim yayınlamadı"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Uygulamadaki ek ayarlar"</string>
     <string name="notification_screen_summary" msgid="5984915275134654822">"Bildirim geçmişi, baloncuklar, en son gönderilenler"</string>
@@ -3983,8 +3836,6 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kategori silindi</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> kategori silindi</item>
     </plurals>
-    <string name="notification_toggle_on" msgid="1624283327379059003">"Açık"</string>
-    <string name="notification_toggle_off" msgid="3295373308338024844">"Kapalı"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"Tümünü engelle"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Bu bildirimleri hiçbir zaman gösterme"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Bildirim göster"</string>
@@ -4164,12 +4015,6 @@
     <string name="suggestion_button_close" msgid="6865170855573283759">"Kapat"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Bu cihazla ilgili geri bildirim gönder"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Yönetici PIN\'ini girin"</string>
-    <string name="switch_on_text" msgid="5664542327776075105">"Açık"</string>
-    <string name="switch_off_text" msgid="1315547447393646667">"Kapalı"</string>
-    <string name="nfc_setting_on" msgid="7701896496026725772">"Açık"</string>
-    <string name="nfc_setting_off" msgid="7142103438532732309">"Kapalı"</string>
-    <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Açık"</string>
-    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Kapalı"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Uygulama sabitleme"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Uygulama sabitleme, geçerli uygulamayı sabitleme kaldırılana kadar görünür durumda tutmanıza olanak tanır. Bu özellik, örneğin, güvendiğiniz bir arkadaşınızın belli bir oyunu oynamasını sağlamak için kullanılabilir."</string>
     <string name="screen_pinning_description" msgid="4305370471370474846">"Bir uygulama sabitlendiğinde diğer uygulamaları açabilir ve kişisel verilere erişilebilir. \n\nUygulama sabitlemeyi kullanmak için: 	\n1. Uygulama sabitlemeyi açın 	\n2. Genel Bakış\'ı açın 	\n3. Ekranın üst tarafındaki uygulama simgesine dokunup ardından Sabitle\'ye dokunun"</string>
@@ -4246,9 +4091,7 @@
     <string name="change" msgid="273206077375322595">"Değiştir"</string>
     <string name="change_storage" msgid="8773820275624113401">"Depolamayı değiştirin"</string>
     <string name="notifications_label" msgid="8471624476040164538">"Bildirimler"</string>
-    <string name="notifications_enabled" msgid="7743168481579361019">"Etkin"</string>
     <string name="notifications_enabled_with_info" msgid="1808946629277684308">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
-    <string name="notifications_disabled" msgid="5603160425378437143">"Kapalı"</string>
     <string name="notifications_partly_blocked" msgid="5738239705473445725">"<xliff:g id="COUNT_0">%1$d</xliff:g> / <xliff:g id="COUNT_1">%2$d</xliff:g> kategori kapalı"</string>
     <string name="notifications_silenced" msgid="2673798575466545098">"Sesi kapatıldı"</string>
     <string name="notifications_redacted" msgid="8820993927920208612">"Hassas içerik kilit ekranında yok"</string>
@@ -4264,10 +4107,6 @@
     <plurals name="permissions_summary" formatted="false" msgid="5015472550875144481">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> izin verildi</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> izin verildi</item>
-    </plurals>
-    <plurals name="runtime_permissions_summary" formatted="false" msgid="2091022049141391855">
-      <item quantity="other">Toplam <xliff:g id="COUNT_3">%d</xliff:g> izinden <xliff:g id="COUNT_2">%d</xliff:g> tanesi onaylandı</item>
-      <item quantity="one">Toplam <xliff:g id="COUNT_1">%d</xliff:g> izinden <xliff:g id="COUNT_0">%d</xliff:g> tanesi onaylandı</item>
     </plurals>
     <plurals name="runtime_permissions_additional_count" formatted="false" msgid="5888624648943937645">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ek izin</item>
@@ -4308,10 +4147,6 @@
     <string name="domain_urls_summary_one" msgid="3312008753802762892">"<xliff:g id="DOMAIN">%s</xliff:g> alanını aç"</string>
     <string name="domain_urls_summary_some" msgid="1197692164421314523">"<xliff:g id="DOMAIN">%s</xliff:g> alanını ve diğer URL\'leri aç"</string>
     <string name="domain_urls_apps_summary_off" msgid="2534980824850890416">"Desteklenen bağlantıları hiçbir uygulama açmıyor"</string>
-    <plurals name="domain_urls_apps_summary_on" formatted="false" msgid="7864816862441985323">
-      <item quantity="other">Desteklenen bağlantıları <xliff:g id="COUNT">%d</xliff:g> uygulama açıyor</item>
-      <item quantity="one">Desteklenen bağlantıları bir uygulama açıyor</item>
-    </plurals>
     <string name="app_link_open_always" msgid="9167065494930657503">"Uygulamanın desteklenen bağlantıları açmasına izin verilir"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"Her zaman sor"</string>
     <string name="app_link_open_never" msgid="5299808605386052350">"Uygulamanın bağlantıları açmasına izin vermeyin"</string>
@@ -4357,14 +4192,6 @@
     <string name="additional_battery_info" msgid="3104208543623068714">"Kullanım uyarıları"</string>
     <string name="show_all_apps" msgid="4490719452453223082">"Ayrıntılı cihaz kullanımını göster"</string>
     <string name="hide_extra_apps" msgid="7313907836289865123">"Uygulama kullanımını göster"</string>
-    <plurals name="power_high_usage_summary" formatted="false" msgid="573433136005336970">
-      <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> uygulama anormal davranıyor</item>
-      <item quantity="one"><xliff:g id="APP">%1$s</xliff:g> anormal davranıyor</item>
-    </plurals>
-    <plurals name="power_high_usage_title" formatted="false" msgid="8013115866788425817">
-      <item quantity="other">Pili tüketen uygulamalar</item>
-      <item quantity="one"><xliff:g id="APP">%1$s</xliff:g> pili tüketiyor</item>
-    </plurals>
     <string name="high_power_filter_on" msgid="447849271630431531">"Optimize edilmeyenler"</string>
     <string name="high_power_on" msgid="8778058701270819268">"Optimize edilmedi"</string>
     <string name="high_power_off" msgid="317000444619279018">"Pil kullanımı optimize ediliyor"</string>
@@ -4520,14 +4347,9 @@
     <string name="keyboard_disconnected" msgid="796053864561894531">"Bağlı değil"</string>
     <string name="data_usage_summary_format" msgid="6844301859713164522">"<xliff:g id="AMOUNT">%1$s</xliff:g> veri kullanıldı"</string>
     <string name="data_usage_wifi_format" msgid="7644390582649568117">"Kablousuz ağda <xliff:g id="AMOUNT">^1</xliff:g> kullanıldı"</string>
-    <plurals name="notification_summary" formatted="false" msgid="7638388920823212470">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> uygulama için kapalı</item>
-      <item quantity="one">1 uygulama için kapalı</item>
-    </plurals>
     <string name="notification_summary_none" msgid="9179312319023988089">"Tüm uygulamalar için açık"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> uygulama yüklü"</string>
     <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> kullanılıyor - <xliff:g id="FREE_SPACE">%2$s</xliff:g> boş"</string>
-    <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Dahili depolama alanı: <xliff:g id="PERCENTAGE">%1$s</xliff:g> kullanılıyor - <xliff:g id="FREE_SPACE">%2$s</xliff:g> boş"</string>
     <string name="display_summary" msgid="5526061030874717172">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> süreyle işlem yapılmadığında uyku moduna geç"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Koyu tema, yazı tipi boyutu, parlaklık"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Toplam <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> belleğin ortalama <xliff:g id="USED_MEMORY">%1$s</xliff:g> kadarı kullanılıyor"</string>
@@ -4586,14 +4408,6 @@
     <string name="suggestions_title" msgid="61841299295602686">"Öneriler"</string>
     <string name="suggestions_summary" msgid="1709710458908440469">"+<xliff:g id="ID_1">%1$d</xliff:g>"</string>
     <string name="suggestions_more_title" msgid="240124526378997009">"+<xliff:g id="ID_1">%1$d</xliff:g> öneri daha"</string>
-    <plurals name="suggestions_collapsed_title" formatted="false" msgid="5023679825210836444">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> öneri</item>
-      <item quantity="one">1 öneri</item>
-    </plurals>
-    <plurals name="suggestions_collapsed_summary" formatted="false" msgid="3789011332018516832">
-      <item quantity="other">+<xliff:g id="COUNT">%1$d</xliff:g> öneri</item>
-      <item quantity="one">+1 öneri</item>
-    </plurals>
     <string name="suggestion_remove" msgid="6753986344585367776">"Kaldır"</string>
     <string name="color_temperature" msgid="8256912135746305176">"Soğuk renk sıcaklığı"</string>
     <string name="color_temperature_desc" msgid="6713259535885669622">"Daha soğuk ekran renkleri kullan"</string>
@@ -4619,10 +4433,6 @@
     <string name="cell_data_warning_and_limit" msgid="8393200831986035724">"<xliff:g id="ID_1">^1</xliff:g> veri uyarısı / <xliff:g id="ID_2">^2</xliff:g> veri sınırı"</string>
     <string name="billing_cycle_fragment_summary" msgid="6346655500491631357">"Her ayın <xliff:g id="ID_1">%1$s</xliff:g>. gününde"</string>
     <string name="network_restrictions" msgid="8385824604048229846">"Ağ kısıtlamaları"</string>
-    <plurals name="network_restrictions_summary" formatted="false" msgid="3875128958788008975">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> kısıtlama</item>
-      <item quantity="one">1 kısıtlama</item>
-    </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Operatörünüzün veri kullanımı hesaplaması, cihazdaki hesaplamadan farklı olabilir"</string>
     <string name="non_carrier_data_usage_warning" msgid="4707184871368847697">"Operatör ağları tarafından kullanılan verileri hariç tutar"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> kullanıldı"</string>
@@ -4661,8 +4471,6 @@
     <string name="data_saver_title" msgid="2593804270788863815">"Veri Tasarrufu"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Kısıtlanmamış veri"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Arka plan verisi kapalı"</string>
-    <string name="data_saver_on" msgid="7848893946018448793">"Açık"</string>
-    <string name="data_saver_off" msgid="5891210864117269045">"Kapalı"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Veri Tasarrufu\'nu kullan"</string>
     <string name="unrestricted_app_title" msgid="7117585996574329284">"Sınırsız veri kullanımı"</string>
     <string name="unrestricted_app_summary" msgid="282698963532000403">"Veri Tasarrufu açıkken sınırsız veri erişimine izin ver"</string>
@@ -4674,16 +4482,12 @@
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="8651761245246411947">"Cihazınızın başlatılması için şifre kullanılmasını gerektirin. Bu cihaz kapalıyken gelen çağrıları, iletileri, bildirimleri veya alarmları alamaz."</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Başka parmak izi ekleyin"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Kilidi farklı bir parmakla açın"</string>
-    <string name="battery_saver_on_summary" msgid="4605146593966255848">"Açık"</string>
     <string name="battery_saver_off_scheduled_summary" msgid="2193875981740829819">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> düzeyinde açılacak"</string>
-    <string name="battery_saver_off_summary" msgid="4411561435493109261">"Kapalı"</string>
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Şimdi aç"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Şimdi kapat"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Pil optimizasyonu kullanılmıyor"</string>
-    <!-- no translation found for app_battery_usage_title (346558380609793334) -->
-    <skip />
-    <!-- no translation found for app_battery_usage_summary (6349965904306339539) -->
-    <skip />
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Uygulamaların pil kullanımı"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Uygulamalar için pil kullanımını ayarlayın"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Kısıtlanmamış"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimize edilmiş"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Kısıtlanmış"</string>
@@ -4741,7 +4545,6 @@
     <string name="premium_sms_none" msgid="8737045049886416739">"Yüklü hiçbir uygulama, Premium SMS erişimi isteğinde bulunmadı"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"Premium SMS kullanımı, para ödemenizi gerektirebilir ve bu ücret operatör faturanıza eklenir. Bir uygulamaya bu izni verdiğinizde söz konusu uygulamayı kullanarak ücretli SMS gönderebilirsiniz."</string>
     <string name="premium_sms_access" msgid="5605970342699013212">"Premium SMS erişimi"</string>
-    <string name="bluetooth_disabled" msgid="835838280837359514">"Kapalı"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"<xliff:g id="ID_1">%1$s</xliff:g> ile bağlı"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Birden çok cihaza bağlı"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Sistem Kullanıcı Arayüzü demo modu"</string>
@@ -4762,18 +4565,6 @@
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Arama sorguları ve gelen aramalar BT yöneticiniz tarafından görülebilir"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Profiller arası takvim"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"İş etkinliklerini kişisel takvimimde göster"</string>
-    <plurals name="hours" formatted="false" msgid="1853396353451635458">
-      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> saat</item>
-      <item quantity="one">1 saat</item>
-    </plurals>
-    <plurals name="minutes" formatted="false" msgid="6244503272924425418">
-      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> dakika</item>
-      <item quantity="one">1 dakika</item>
-    </plurals>
-    <plurals name="seconds" formatted="false" msgid="4237020272336995370">
-      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> saniye</item>
-      <item quantity="one">1 saniye</item>
-    </plurals>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"Depolama alanını yönet"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"Depolama alanında yer açmaya yardımcı olmak için depolama yöneticisi, yedeklenen fotoğrafları ve videoları cihazınızdan kaldırır."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Fotoğrafları ve videoları kaldır"</string>
@@ -4865,8 +4656,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"Bildirimlerinizi kontrol etmek için tabletinizin arkasındaki parmak izi sensöründe parmağınızı hızlıca aşağı kaydırın."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3888927017311372398">"Bildirimlerinizi kontrol etmek için cihazınızın arkasındaki parmak izi sensöründe parmağınızı hızlıca aşağı kaydırın."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"Bildirimleri hızlıca görün"</string>
-    <string name="gesture_setting_on" msgid="3223448394997988591">"Açık"</string>
-    <string name="gesture_setting_off" msgid="3444029475726294919">"Kapalı"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="65713754674288193">"Önyükleyici kilidi zaten açık"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="8045017109714463041">"Önce internet\'e bağlanın"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="7425519481227423860">"İnternet\'e bağlanın veya operatörünüzle iletişim kurun"</string>
@@ -5090,7 +4879,6 @@
     <string name="gesture_prevent_ringing_sound_title" msgid="4529077822282099235">"Zilin çalmasını engelleme kısayolu"</string>
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Titreştir"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Sesi kapat"</string>
-    <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Hiçbir şey yapma"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Titreşim"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Sesi kapat"</string>
     <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"Etkinleştirmek için önce \"Güç düğmesini basılı tutun\" işlemini güç menüsünden değiştirin."</string>
@@ -5171,10 +4959,6 @@
     <string name="sms_preference" msgid="7742964962568219351">"SMS tercihi"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Her zaman sor"</string>
     <string name="mobile_network_summary_add_a_network" msgid="9079866102827526779">"Ağ ekleyin"</string>
-    <plurals name="mobile_network_summary_count" formatted="false" msgid="5173633860800230925">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> SIM</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> SIM</item>
-    </plurals>
     <string name="default_for_calls" msgid="2788950217176988034">"Aramalar için varsayılan"</string>
     <string name="default_for_sms" msgid="1316988329407434771">"SMS için varsayılan"</string>
     <string name="default_for_calls_and_sms" msgid="8223971369339958151">"Aramalar ve SMS için varsayılan"</string>
@@ -5194,7 +4978,6 @@
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Renk (uyumlu uygulamalar tarafından kullanılır)"</string>
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"Kaydet"</string>
     <string name="mobile_network_use_sim_on" msgid="7298332437547707908">"SIM\'i kullan"</string>
-    <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"Kapalı"</string>
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Bu SIM\'i devre dışı bırakmak için SIM kartı çıkarın"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"<xliff:g id="CARRIER">%1$s</xliff:g> operatörünü etkinleştirmek için dokunun"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"<xliff:g id="CARRIER">%1$s</xliff:g> adlı cihaza geçilsin mi?"</string>
@@ -5325,10 +5108,6 @@
     <string name="permission_bar_chart_empty_text" msgid="4856719891991325077">"0 uygulama izin kullandı"</string>
     <string name="permission_bar_chart_title" msgid="2493212904955611441">"Son 24 saat içinde gerçekleşen izin kullanımı"</string>
     <string name="permission_bar_chart_details" msgid="5816698018592357088">"Tümünü Kontrol Paneli\'nde göster"</string>
-    <plurals name="permission_bar_chart_label" formatted="false" msgid="4853396794340896078">
-      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> uygulama</item>
-      <item quantity="one">1 uygulama</item>
-    </plurals>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"Erişilebilirlik kullanımı"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="6910643986958263005">
       <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> hizmetin, cihazınıza tam erişimi var</item>
@@ -5420,18 +5199,14 @@
     <string name="media_controls_title" msgid="403271085636252597">"Medya"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Medya oynatıcıyı sabitle"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Medya oynatıcı, oynatmayı hızlıca devam ettirmek için Hızlı Ayarlar\'da açık kalır"</string>
-    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
-    <skip />
-    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
-    <skip />
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Medyaları kilit ekranında göster"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"Medya oynatıcı, oynatmayı hızlıca devam ettirmek için kilit ekranında açık kalır"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Medya önerilerini göster"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Etkinliğinize dayalı olarak"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Oynatıcıyı gizle"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Oynatıcıyı göster"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"medya"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth açılacak"</string>
-    <string name="bluetooth_setting_on" msgid="4808458394436224124">"Aç"</string>
-    <string name="bluetooth_setting_off" msgid="4965493913199554789">"Kapalı"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"İnternet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM\'ler"</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"uçak, uçakta kullanımı güvenli"</string>
@@ -5533,7 +5308,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"2G\'ye izin ver"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G daha az güvenli olsa da bazı konumlarda bağlantınızı iyileştirebilir. Acil durum aramaları için 2G\'ye her zaman izin verilir."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> için 2G\'nin kullanılabilir olması gerekir"</string>
-    <string name="app_info_all_services_label" msgid="3600929226735860271">"Tüm Hizmetler"</string>
+    <!-- no translation found for app_info_all_services_label (1487070364839071105) -->
+    <skip />
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Panoya erişimi göster"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Uygulamalar kopyaladığınız metne, resimlere veya diğer içeriklere eriştiğinde mesaj gösterilsin"</string>
     <string name="all_apps" msgid="3054120149509114789">"Tüm uygulamalar"</string>
@@ -5560,8 +5336,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Bağlanma"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Bağlan"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TARE Ayarları"</string>
-    <string name="tare_on" msgid="2386073225978684535">"Açık"</string>
-    <string name="tare_off" msgid="6305694402929756726">"Kapalı"</string>
     <string name="tare_revert" msgid="3855325741125236638">"Varsayılan Ayarlara geri dönülsün mü?"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Ayarlar varsayılana geri döndürüldü."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Maksimum Doymuş Bakiye"</string>
@@ -5605,7 +5379,8 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Önizleme"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Ekran koruyucu seçin"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Ek bilgi göster"</string>
-    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"Ekran koruyucuda saat, tarih, hava durumu, hava kalitesi ve yayın ayrıntılarını görüntüleyin"</string>
+    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Diğer ayarlar"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Ekran koruyucunuzu seçme"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Tabletiniz yuvaya yerleştirildiğinde ekranınızda nelerin görünmesini istediğinizi seçin. Ekran koruyucu kullanıldığında cihazınız daha fazla enerji tüketebilir."</string>
