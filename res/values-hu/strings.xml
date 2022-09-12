@@ -242,7 +242,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"A szöveg más nyelven fog megjelenni."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Nem lehet eltávolítani az összes nyelvet"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Legalább egy előnyben részesített nyelvet tartson meg"</string>
-    <string name="locale_not_translated" msgid="3071618135527110152">"Nem áll rendelkezésre rendszernyelvként"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"Nem áll rendelkezésre alapértelmezett nyelvként"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Mozgatás felfelé"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Mozgatás lefelé"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Mozgatás az elejére"</string>
@@ -379,10 +379,8 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Arcalapú feloldás engedélyezése"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Arc használata hitelesítéshez"</string>
     <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"Használja arcát telefonja feloldásához, vásárlások engedélyezéséhez és alkalmazásokba való bejelentkezéshez."</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_message (6144528803097608850) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_message (8600301257170347509) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"Használja arcát táblagépe feloldásához, vásárlások engedélyezéséhez és alkalmazásokba való bejelentkezéshez."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"Használja arcát eszköze feloldásához, vásárlások engedélyezéséhez és alkalmazásokba való bejelentkezéshez."</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Engedélyezheti gyermekének, hogy az arcával oldja fel a telefonja zárolását."</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Engedélyezheti gyermekének, hogy az arcával oldja fel a táblagépe zárolását."</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Engedélyezheti gyermekének, hogy az arcával oldja fel az eszköze zárolását."</string>
@@ -477,10 +475,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Használhatja ujjlenyomatát eszköze zárolásának feloldásához vagy személyazonossága igazolásához (például alkalmazásokba való bejelentkezés vagy vásárlás jóváhagyása során)."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Használhatja ujjlenyomatát telefonja zárolásának feloldásához vagy személyazonossága igazolásához (például alkalmazásokba való bejelentkezés vagy vásárlás jóváhagyása során)."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"Engedélyezheti gyermekének, hogy ujjlenyomata segítségével oldja fel a telefonja zárolását és igazolja személyazonosságát. Erre például akkor kerül sor, amikor alkalmazásokba jelentkezik be, vagy vásárlást hagy jóvá."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_consent_message (9019236661560266282) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_consent_message (1131446458892188764) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"Engedélyezheti gyermekének, hogy ujjlenyomata segítségével oldja fel a táblagépe zárolását és igazolja személyazonosságát. Erre például akkor kerül sor, amikor alkalmazásokba jelentkezik be, vagy vásárlást hagy jóvá."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"Engedélyezheti gyermekének, hogy ujjlenyomata segítségével oldja fel az eszköze zárolását és igazolja személyazonosságát. Erre például akkor kerül sor, amikor alkalmazásokba jelentkezik be, vagy vásárlást hagy jóvá."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Az irányítás az Ön kezében van"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Az irányítás az Ön és gyermeke kezében van"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Fontos tudnivalók"</string>
@@ -496,41 +492,29 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Ha ezt az ikont látja, akkor ujjlenyomatával végezheti el a hitelesítést (például amikor alkalmazásokba jelentkezik be, vagy vásárlást hagy jóvá)."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Fontos tudnivalók"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"Előfordulhat, hogy a telefon ujjlenyomat-alapú feloldása kevésbé biztonságos, mint egy bonyolult minta vagy PIN-kód."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_1 (3024180694355527323) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_1 (150132643609189029) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"Előfordulhat, hogy a táblagép ujjlenyomat-alapú feloldása kevésbé biztonságos, mint egy bonyolult minta vagy PIN-kód"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"Előfordulhat, hogy az eszköz ujjlenyomat-alapú feloldása kevésbé biztonságos, mint egy bonyolult minta vagy PIN-kód"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Hogyan működik?"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"A Feloldás ujjlenyomattal funkció egyéni modellt hoz létre az Ön ujjlenyomatáról a személyazonossága ellenőrzéséhez. Az ujjlenyomatmodellnek a beállítás során való létrehozásához képeket kell készítenie az ujjlenyomatáról különböző szögekből."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"A Feloldás ujjlenyomattal funkció egyéni modellt hoz létre az Ön gyermekének ujjlenyomatáról a személyazonossága ellenőrzéséhez. Az ujjlenyomatmodellnek a beállítás során való létrehozásához gyermekének képeket kell készítenie az ujjlenyomatáról különböző szögekből."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"A Pixel Imprint használatakor a rendszer felhasználja a képeket az ujjlenyomatmodell frissítésére. Az ujjlenyomatmodell elkészítéséhez használt képeket nem tárolja, magát az ujjlenyomatmodellt azonban biztonságosan tárolja a telefon, és az ujjlenyomatmodell sosem kerül ki róla. A feldolgozás teljes mértékben és biztonságos módon a telefonon történik."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (7537431055496985904) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (1392098506793837697) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"A Pixel Imprint használatakor a rendszer felhasználja a képeket az ujjlenyomatmodell frissítésére. Az ujjlenyomatmodell elkészítéséhez használt képeket nem, de magát az ujjlenyomatmodellt biztonságosan tárolja a táblagép, és az ujjlenyomatmodell sosem kerül ki róla. A feldolgozás teljes mértékben és biztonságos módon a táblagépen történik."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"A Pixel Imprint használatakor a rendszer felhasználja a képeket az ujjlenyomatmodell frissítésére. Az ujjlenyomatmodell elkészítéséhez használt képeket nem, de magát az ujjlenyomatmodellt biztonságosan tárolja az eszköz, és az ujjlenyomatmodell sosem kerül ki róla. A feldolgozás teljes mértékben és biztonságos módon az eszközön történik."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"Amikor gyermeke a Pixel Imprintet használja, a rendszer felhasználja a képeket az ujjlenyomatmodell frissítésére. Az ujjlenyomatmodell elkészítéséhez használt képeket nem, de magát az ujjlenyomatmodellt biztonságosan tárolja a telefon, és az ujjlenyomatmodell sosem kerül ki róla. A feldolgozás teljes mértékben és biztonságos módon a telefonon történik."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3 (530891604602839577) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3 (1735767057693277593) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"Amikor gyermeke a Pixel Imprintet használja, a rendszer felhasználja a képeket az ujjlenyomatmodell frissítésére. Az ujjlenyomatmodell elkészítéséhez használt képeket nem, de magát az ujjlenyomatmodellt biztonságosan tárolja a táblagép, és az ujjlenyomatmodell sosem kerül ki róla. A feldolgozás teljes mértékben és biztonságos módon a táblagépen történik."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"Amikor gyermeke a Pixel Imprintet használja, a rendszer felhasználja a képeket az ujjlenyomatmodell frissítésére. Az ujjlenyomatmodell elkészítéséhez használt képeket nem, de magát az ujjlenyomatmodellt biztonságosan tárolja az eszköz, és az ujjlenyomatmodell sosem kerül ki róla. A feldolgozás teljes mértékben és biztonságos módon a eszközön történik."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"A Beállítások menüben bármikor törölheti az ujjlenyomatképeket és -modellt, illetve kikapcsolhatja az ujjlenyomat-alapú feloldást. A telefon addig tárolja az ujjlenyomatképeket és -modelleket, amíg Ön nem törli őket."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (1577753788807120092) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (5092396314447369758) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"A Beállítások menüben bármikor törölheti az ujjlenyomatképeket és -modellt, illetve kikapcsolhatja a Feloldás ujjlenyomattal funkciót. A táblagép addig tárolja az ujjlenyomatképeket és -modelleket, amíg Ön nem törli őket."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"A Beállítások menüben bármikor törölheti az ujjlenyomatképeket és -modellt, illetve kikapcsolhatja a Feloldás ujjlenyomattal funkciót. Az eszköz addig tárolja az ujjlenyomatképeket és -modelleket, amíg Ön nem törli őket."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"Ön és gyermeke a Beállításokban bármikor törölheti gyermeke ujjlenyomatképeit és -modelljét, illetve kikapcsolhatja a Feloldás ujjlenyomattal funkciót. A telefon addig tárolja az ujjlenyomatképeket és -modelleket, amíg Ön vagy gyermeke nem törli őket."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4 (8752022694697150943) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4 (7234973062059196893) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"Ön és gyermeke a Beállításokban bármikor törölheti gyermeke ujjlenyomatképeit és -modelljét, illetve kikapcsolhatja a Feloldás ujjlenyomattal funkciót. A táblagép addig tárolja az ujjlenyomatképeket és -modelleket, amíg Ön vagy gyermeke nem törli őket."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"Ön és gyermeke a Beállításokban bármikor törölheti gyermeke ujjlenyomatképeit és -modelljét, illetve kikapcsolhatja a Feloldás ujjlenyomattal funkciót. Az eszköz addig tárolja az ujjlenyomatképeket és -modelleket, amíg Ön vagy gyermeke nem törli őket."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Telefonját az Ön szándéka ellenére más is feloldhatja, például ha valaki az ujjához tartja."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Táblagépét az Ön szándéka ellenére más is feloldhatja, például ha valaki az Ön ujjához tartja."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Eszközét az Ön szándéka ellenére más is feloldhatja, például ha valaki az Ön ujjához tartja."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"Gyermeke telefonját az ő szándéka ellenére valaki más is feloldhatja, például ha valaki az Ön gyermeke ujjához tartja a telefont."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5 (6956407873271178462) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5 (885555477843366483) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"Gyermeke táblagépét az ő szándéka ellenére valaki más is feloldhatja, például ha valaki az Ön gyermeke ujjához tartja a táblagépet."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"Gyermeke eszközét az ő szándéka ellenére valaki más is feloldhatja, például ha valaki az Ön gyermeke ujjához tartja az eszközt."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"A legjobb eredmény érdekében használjon Made for Google tanúsítvánnyal rendelkező kijelzővédőt. Előfordulhat, hogy más kijelzővédők esetében az ujjlenyomat nem működik."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"A legjobb eredmény érdekében használjon Made for Google tanúsítvánnyal rendelkező kijelzővédőt. Előfordulhat, hogy más kijelzővédők esetében gyermeke ujjlenyomata nem működik."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
@@ -571,16 +555,12 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"Kihagyás"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Mégse"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Érintse meg az érzékelőt"</string>
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_title (8327884364635804363) -->
-    <skip />
+    <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Érintse meg a bekapcsológombot, de ne nyomja le"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Az ujjlenyomat beállítása"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"A telefon hátoldalán találja. Használja a mutatóujját."</string>
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (3861487880213212565) -->
-    <skip />
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (700314363994033893) -->
-    <skip />
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (5857063580604638331) -->
-    <skip />
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"Az ujjlenyomat-érzékelő a bekapcsológombon található. A kiemelkedő hangerőgomb melletti lapos gomb a táblagép szélén.\n\nA bekapcsológomb lenyomásával kikapcsol a képernyő."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"Az ujjlenyomat-érzékelő a bekapcsológombon található. A kiemelkedő hangerőgomb melletti lapos gomb az eszköz szélén.\n\nA bekapcsológomb lenyomásával kikapcsol a képernyő."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"Az ujjlenyomat-érzékelő a bekapcsológombon található. A kiemelkedő hangerőgomb melletti lapos gomb a telefon szélén.\n\nA bekapcsológomb lenyomásával kikapcsol a képernyő."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Az ujjlenyomat-érzékelő a képernyőn található. Ujjlenyomatának rögzítése a következő képernyőn történik."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Kezdés"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Mozgassa az ujját a képernyőn, amíg megtalálja az érzékelőt. Tartsa ujját az ujjlenyomat-érzékelőn."</string>
@@ -592,8 +572,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Érintse meg az érzékelőt"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Helyezze az ujját az érzékelőre, és emelje fel a rezgést követően"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"A rezgésig tartsa az ujját egyenesen az érzékelőn"</string>
-    <!-- no translation found for security_settings_sfps_enroll_start_message (9054672627477685212) -->
-    <skip />
+    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"A gomb megnyomása nélkül tartsa ujját az érzékelőn, amíg rezgést nem észlel.\n\nÓvatosan mozgassa ujját minden alkalommal. Így az ujjlenyomata nagyobb részét rögzítheti a rendszer."</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Tartsa ujját az érzékelőn"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Emelje fel, majd érintse újra"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Még egyszer"</string>
@@ -603,24 +582,17 @@
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Helyezze az ujja hegyét az érzékelőre"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Helyezze rá ujja bal oldali felét"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Helyezze rá ujja jobb oldali felét"</string>
-    <!-- no translation found for security_settings_sfps_enroll_finger_center_title (1320688855767675739) -->
-    <skip />
-    <!-- no translation found for security_settings_sfps_enroll_fingertip_title (2737520837684516446) -->
-    <skip />
-    <!-- no translation found for security_settings_sfps_enroll_left_edge_title (9022963735924413343) -->
-    <skip />
-    <!-- no translation found for security_settings_sfps_enroll_right_edge_title (823106857743394392) -->
-    <skip />
+    <string name="security_settings_sfps_enroll_finger_center_title" msgid="1320688855767675739">"Helyezze az ujja közepét az érzékelőre"</string>
+    <string name="security_settings_sfps_enroll_fingertip_title" msgid="2737520837684516446">"Helyezze az ujja hegyét az érzékelőre"</string>
+    <string name="security_settings_sfps_enroll_left_edge_title" msgid="9022963735924413343">"Helyezze rá ujja bal oldali felét az érzékelőre"</string>
+    <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"Végezetül helyezze rá ujja jobb oldali felét az érzékelőre"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Helyezze az ujja oldalsó részét az érzékelőre, és tartsa lenyomva, majd helyezze az érzékelőre az ujja másik oldalát."</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Így az ujjlenyomata nagyobb részét tudja rögzíteni a rendszer."</string>
-    <!-- no translation found for security_settings_sfps_enroll_progress_a11y_message (6450772721691523736) -->
-    <skip />
-    <!-- no translation found for security_settings_sfps_animation_a11y_label (8808819903730940446) -->
-    <skip />
+    <string name="security_settings_sfps_enroll_progress_a11y_message" msgid="6450772721691523736">"Ujjlenyomat regisztrálása folyamatban – <xliff:g id="PERCENTAGE">%d</xliff:g> százalék"</string>
+    <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Regisztrálva <xliff:g id="PERCENTAGE">%d</xliff:g> százalék"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Ujjlenyomat regisztrálása folyamatban – <xliff:g id="PERCENTAGE">%d</xliff:g> százalék"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Ujjlenyomat hozzáadva"</string>
-    <!-- no translation found for security_settings_sfps_enroll_finish (3948249010300560451) -->
-    <skip />
+    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Mostantól használhatja ujjlenyomatát eszköze zárolásának feloldásához vagy személyazonossága igazolásához (például amikor valamilyen alkalmazásba jelentkezik be, vagy vásárlást hagy jóvá)."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Mostantól használhatja ujjlenyomatát táblagépe zárolásának feloldásához vagy személyazonossága igazolásához (például amikor alkalmazásokba jelentkezik be)."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Mostantól használhatja ujjlenyomatát eszköze zárolásának feloldásához vagy személyazonossága igazolásához (például amikor alkalmazásokba jelentkezik be)."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Mostantól használhatja ujjlenyomatát telefonja zárolásának feloldásához vagy személyazonossága igazolásához (például amikor alkalmazásokba jelentkezik be)."</string>
@@ -701,8 +673,7 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Elérte a hozzáadható ujjlenyomatok maximális számát"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Nem lehet több ujjlenyomatot hozzáadni"</string>
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Eltávolítja az összes ujjlenyomatot?"</string>
-    <!-- no translation found for fingerprint_delete_title (5412123164503407098) -->
-    <skip />
+    <string name="fingerprint_delete_title" msgid="5412123164503407098">"„<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>” törlése"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Szeretné eltávolítani ezt az ujjlenyomatot?"</string>
     <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Ezzel törli az eszközén tárolt „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>” ujjlenyomattal kapcsolatos ujjlenyomatképeket és -modellt."</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Nem tudja majd ujjlenyomatát használni a telefon zárolásának feloldásához és a személyazonossága igazolásához az alkalmazásokban."</string>
@@ -2831,7 +2802,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Akkumulátorhasználat"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Használat az elmúlt 24 óra során"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Használat az utolsó teljes feltöltés óta"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Akkuhasználat"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Alkalmazás akkumulátorhasználata"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Használat részletei"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Az energiafelhasználás beállítása"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Mellékelt csomagok"</string>
@@ -2851,12 +2822,10 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Magasabb akkuhasználat"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Az akkumulátort leginkább használó alkalmazások megtekintése"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"A töltés szünetel"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_summary (5254922316684499816) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"Az akkumulátor védelme az akkumulátor élettartamának növeléséhez"</string>
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
     <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_sec_button_content_description (5648444926736883551) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"További információ a töltés szüneteltetéséről"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Töltés folytatása"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Bizonyos körülmények között (pl. magas hőmérséklet és hosszú töltési idő esetén) a rendszer maximum <xliff:g id="PERCENT">%1$s</xliff:g>-os töltöttséget engedélyez az akkumulátor élettartamának megőrzése érdekében.\n\nAmint ezek a korlátozó körülmények megszűnnek, a telefon újra normál módban töltődik."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Bizonyos körülmények között (pl. magas hőmérséklet és hosszú töltési idő esetén) a rendszer maximum <xliff:g id="PERCENT">%1$s</xliff:g>-os töltöttséget engedélyez az akkumulátor élettartamának megőrzése érdekében.\n\nAmint ezek a korlátozó körülmények megszűnnek, a tablet újra normál módban töltődik."</string>
@@ -3083,12 +3052,9 @@
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Összesen: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Háttér: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Az akkumulátorhasználati adatok hozzávetőlegesek; a telefon töltése közben nem mérik a használatot"</string>
-    <!-- no translation found for battery_usage_screen_footer (3729564192877964259) -->
-    <skip />
-    <!-- no translation found for battery_usage_screen_footer (6610974734578869768) -->
-    <skip />
-    <!-- no translation found for battery_usage_screen_footer_empty (3301144846133808193) -->
-    <skip />
+    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"Az akkumulátorhasználati adatok hozzávetőlegesek; az eszköz töltése közben nem mérik a használatot"</string>
+    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"Az akkumulátorhasználati adatok hozzávetőlegesek; az eszköz töltése közben nem mérik a használatot"</string>
+    <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Az akkumulátorhasználati adatok néhány órán belül rendelkezésre állnak az akkumulátor teljes feltöltődése után"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Akkumulátorhasználatot szemléltető diagram"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Napi akkumulátorhasználatot szemléltető diagram"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Óránkénti akkumulátorhasználatot szemléltető diagram"</string>
@@ -4946,6 +4912,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Bekapcsolás most"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Kikapcsolás most"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Nem használ akkumulátoroptimalizálást"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Alkalmazás akkumulátorhasználata"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Akkumulátorhasználat beállítása az alkalmazásokhoz"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Korlátlan"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimalizált"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Korlátozott"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Ha az eszköz zárolva van, ne lehessen választ vagy egyéb szöveget beírni az értesítéseknél"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Szokásos helyesírás-ellenőrző"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Helyesírás-ellenőrző"</string>
@@ -5893,7 +5864,8 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Előnézet"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Képernyővédő kiválasztása"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"További információk megjelenítése"</string>
-    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"Idő, dátum, időjárás, levegőminőség és az átküldési adatok megjelenítése a képernyővédőn"</string>
+    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"További beállítások"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Képernyővédő kiválasztása"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Kiválaszthatja, hogy mi legyen látható a képernyőn, amikor a táblagép dokkolt állapotban van. Előfordulhat, hogy az eszköz több energiát használ, ha a képernyővédő be van kapcsolva."</string>
