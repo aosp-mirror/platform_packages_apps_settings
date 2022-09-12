@@ -617,4 +617,10 @@
 
     <!-- Whether to put the apps with system UID into system component bucket or not -->
     <bool name="config_battery_combine_system_components">false</bool>
+
+    <!-- An array of uid name for which packages exempt from Wi-Fi permission check. -->
+    <string-array name="config_exempt_wifi_permission_uid_name" translatable="false">
+        <item>@string/config_settingsintelligence_package_name</item>
+        <item>android.uid.system:1000</item>
+    </string-array>
 </resources>
