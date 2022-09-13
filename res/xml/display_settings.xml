@@ -182,12 +182,6 @@
             android:title="@string/network_traffic_state_title"
             android:defaultValue="true" />
 
-        <com.axiom.settings.preference.CustomSystemSeekBarPreference
-            android:key="network_traffic_autohide_threshold"
-            android:title="@string/network_traffic_autohide_threshold_title"
-            android:max="100"
-            android:min="0"
-            android:defaultValue="10"
-            settings:units="" />
+
     </PreferenceCategory>
 </PreferenceScreen>
