@@ -22,6 +22,8 @@
     <string name="allow" msgid="3763244945363657722">"כן, זה בסדר"</string>
     <string name="deny" msgid="7326117222944479942">"אני לא מרשה"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"הפעלה"</string>
+    <string name="on" msgid="1702751473920047">"הפעלה"</string>
+    <string name="off" msgid="2898123876644709799">"השבתה"</string>
     <string name="device_info_default" msgid="1406619232867343310">"לא ידוע"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="two">נותרו לך עוד  <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> שלבים כדי להיות מפתח.</item>
@@ -45,18 +47,12 @@
     <string name="radioInfo_data_connected" msgid="8816467971633020141">"מחובר"</string>
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"בהשעיה"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"לא ידוע"</string>
-    <string name="sdcard_unmount" product="nosdcard" msgid="1816306320988638382">"‏ביטול טעינה של אחסון USB"</string>
-    <string name="sdcard_unmount" product="default" msgid="8078570285871053815">"‏ביטול טעינה של כרטיס SD"</string>
-    <string name="sdcard_format" product="nosdcard" msgid="3248760426252305366">"‏מחיקת אחסון USB"</string>
-    <string name="sdcard_format" product="default" msgid="3676635435136326182">"‏מחיקת כרטיס SD"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"תצוגה מקדימה"</string>
     <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"תצוגה מקדימה, דף <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> מתוך <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"הקטנה"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"הגדלה"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"שימוש בסיבוב האוטומטי"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"‏בזיהוי הפנים נעשה שימוש במצלמה הקדמית כדי לשפר את הדיוק של הסיבוב האוטומטי. התמונות אף פעם לא נשמרות ולא נשלחות אל Google."</string>
-    <string name="sdcard_setting" product="nosdcard" msgid="6071836464978826249">"‏אחסון USB"</string>
-    <string name="sdcard_setting" product="default" msgid="3713462184783824923">"‏כרטיס SD"</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
     <string name="bluetooth_is_discoverable" msgid="4798961627677790935">"‏גלוי לכל מכשירי Bluetooth הסמוכים (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="8122823110652921674">"‏גלוי לכל מכשירי Bluetooth הסמוכים"</string>
@@ -168,33 +164,18 @@
     <string name="radio_info_ping_hostname_v6" msgid="8327436534663560713">"‏שליחת פינג לשם המארח (www.google.com) מסוג IPv6:"</string>
     <string name="radio_info_http_client_test" msgid="5673975677271544085">"‏בדיקת לקוח HTTP:"</string>
     <string name="ping_test_label" msgid="265427033290391845">"הפעלת בדיקת פינג"</string>
-    <string name="sdcard_changes_instructions" msgid="2331969501845866957">"‏השינויים ייכנסו לתוקף לאחר שכבל ה-USB יחובר מחדש."</string>
-    <string name="sdcard_settings_screen_mass_storage_text" msgid="129059989000252994">"‏הפעלת אחסון USB בנפח גדול"</string>
-    <string name="sdcard_settings_total_bytes_label" msgid="5298511430610207103">"נפח כולל (בייטים):"</string>
-    <string name="sdcard_settings_not_present_status" product="nosdcard" msgid="6189761476582690998">"‏לא נמצא אחסון USB טעון."</string>
-    <string name="sdcard_settings_not_present_status" product="default" msgid="6601962586941623203">"‏אין כרטיס SD."</string>
-    <string name="sdcard_settings_available_bytes_label" msgid="7721283102767669004">"נפח זמין (בייטים):"</string>
-    <string name="sdcard_settings_mass_storage_status" product="nosdcard" msgid="4878190674458263222">"‏אחסון ה-USB משמש כמכשיר אחסון בנפח גדול."</string>
-    <string name="sdcard_settings_mass_storage_status" product="default" msgid="8850227049504860012">"‏כרטיס ה-SD משמש כהתקן אחסון בנפח גדול."</string>
-    <string name="sdcard_settings_unmounted_status" product="nosdcard" msgid="1053258530368541571">"‏כעת ניתן להסיר את אחסון ה-USB באופן בטוח."</string>
-    <string name="sdcard_settings_unmounted_status" product="default" msgid="5813940671700138561">"‏כעת ניתן להסיר את כרטיס ה-SD באופן בטוח."</string>
-    <string name="sdcard_settings_bad_removal_status" product="nosdcard" msgid="209564009449909311">"‏אחסון USB הוסר תוך כדי שימוש!"</string>
-    <string name="sdcard_settings_bad_removal_status" product="default" msgid="6817342973919819392">"‏כרטיס SD הוסר תוך כדי שימוש!"</string>
-    <string name="sdcard_settings_used_bytes_label" msgid="5646588579332741943">"ניצול נפח (בייטים):"</string>
-    <string name="sdcard_settings_scanning_status" product="nosdcard" msgid="8037280964384235345">"‏מתבצעת סריקת אחסון USB עבור מדיה..."</string>
-    <string name="sdcard_settings_scanning_status" product="default" msgid="3297316465982471437">"‏מתבצעת סריקה של כרטיס SD למציאת מדיה..."</string>
-    <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3444648373391629840">"‏אחסון ה-USB טעון לקריאה בלבד."</string>
-    <string name="sdcard_settings_read_only_status" product="default" msgid="4338796260718910164">"‏כרטיס ה-SD טעון לקריאה בלבד."</string>
     <string name="skip_label" msgid="6380034601349015895">"דילוג"</string>
     <string name="next_label" msgid="1248293387735652187">"הבא"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"שפות"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"סדר השפות המועדפות"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"שפת המערכת"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"הסרה"</string>
     <string name="add_a_language" msgid="2126220398077503271">"הוספת שפה"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"שפה"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"השפה המועדפת"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"שפות של אפליקציות"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"שפות של אפליקציות"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"הגדרת השפה של כל אפליקציה"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"שפת האפליקציה"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"שפת האפליקציה"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"השפות המוצעות"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"כל השפות"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"שפת המערכת"</string>
@@ -202,6 +183,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"בחירות השפה לאפליקציה הזו לא זמינה בהגדרות."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"השפה עשויה להיות שונה מהשפות הזמינות באפליקציה. יכול להיות שחלק מהאפליקציות לא תומכות בהגדרה הזו."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"מוצגות כאן רק אפליקציות התומכות בבחירת שפה."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"המערכת, האפליקציות והאתרים שלך משתמשים בשפה הנתמכת הראשונה מתוך השפות שציינת כמועדפות."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"כדי לבחור שפה עבור כל אפליקציה, יש לעבור אל ההגדרות של שפת האפליקציה."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"מידע נוסף על שפות"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="two">להסיר את השפות שנבחרו?</item>
       <item quantity="many">להסיר את השפות שנבחרו?</item>
@@ -211,17 +195,13 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"הטקסט יוצג בשפה אחרת."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"לא ניתן להסיר את כל השפות"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"אני רוצה לשמור לפחות שפה מועדפת אחת"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"ייתכן שהשפה לא תהיה זמינה בחלק מהיישומים"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"השפה לא זמינה כשפת מערכת"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"הזזה למעלה"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"הזזה למטה"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"העברה לראש הרשימה"</string>
     <string name="action_drag_label_move_bottom" msgid="6266165197792827003">"העברה לסוף הרשימה"</string>
     <string name="action_drag_label_remove" msgid="1034900377796780568">"הסרת שפה"</string>
     <string name="activity_picker_label" msgid="351250401590691126">"בחירת פעילות"</string>
-    <string name="display_label" msgid="3056320781191343221">"מסך"</string>
-    <string name="sd_card_settings_label" product="nosdcard" msgid="1850505156136467106">"‏אחסון USB"</string>
-    <string name="sd_card_settings_label" product="default" msgid="8715502912796241588">"‏כרטיס SD"</string>
-    <string name="proxy_settings_label" msgid="6300573815025557843">"‏הגדרות שרת Proxy"</string>
     <string name="cancel" msgid="5780102414089664898">"ביטול"</string>
     <string name="okay" msgid="4827099303045669054">"אישור"</string>
     <string name="forget" msgid="3754013654135912783">"הסרה"</string>
@@ -294,7 +274,6 @@
     <string name="Accounts_settings_title" msgid="8434263183710375412">"חשבונות"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"מיקום"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"שימוש במיקום"</string>
-    <string name="location_settings_summary_location_off" msgid="4797932754681162262">"כבוי"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="two">פועל. ל-<xliff:g id="COUNT_1">%1$d</xliff:g> אפליקציות יש גישה למיקום</item>
       <item quantity="many">פועל. ל-<xliff:g id="COUNT_1">%1$d</xliff:g> אפליקציות יש גישה למיקום</item>
@@ -330,13 +309,17 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"הגדרת התכונה \'פתיחה ע\"י זיהוי הפנים\'"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"שימוש באימות פנים"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"התחלה"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"‏אם הגדרות נגישות של פתיחה ע\"י זיהוי הפנים מושבתות, ייתכן שחלק משלבי ההגדרה לא יפעלו באופן תקין עם TalkBack."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"חזרה"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"להמשך הגדרה"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"שימוש בהגדרת הנגישות"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"ביטול"</string>
@@ -346,7 +329,9 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"ביטול נעילה באמצעות אימות פנים"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"הרשאה לפתיחה ע\"י זיהוי הפנים"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"שימוש באימות פנים"</string>
-    <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"ניתן להשתמש בזיהוי פנים כדי לפתוח את הטלפון, לאשר רכישות או להיכנס אל אפליקציות."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"ניתן להשתמש בזיהוי פנים כדי לפתוח את הטלפון, לאשר רכישות או להיכנס אל אפליקציות."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"ניתן להשתמש באימות פנים כדי לבטל את נעילת הטאבלט, לאשר רכישות או להיכנס אל אפליקציות."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"ניתן להשתמש באימות פנים כדי לבטל את נעילת המכשיר, לאשר רכישות או להיכנס אל אפליקציות."</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"הרשאה לילד או לילדה להשתמש בזיהוי פנים כדי לבטל את הנעילה של הטלפון"</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"הרשאה לילד או לילדה להשתמש בזיהוי פנים כדי לבטל את הנעילה של הטאבלט"</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"הרשאה לילד או לילדה להשתמש בזיהוי פנים כדי לבטל את הנעילה של המכשיר"</string>
@@ -358,19 +343,39 @@
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"צריך למקם את הפנים בתוך העיגול"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"דילוג"</string>
     <string name="face_add_max" msgid="4578405795494514876">"ניתן להוסיף עד <xliff:g id="COUNT">%d</xliff:g> פנים"</string>
@@ -410,7 +415,7 @@
       <item quantity="two">נוספו <xliff:g id="COUNT">%1$d</xliff:g> טביעות אצבע</item>
       <item quantity="many">נוספו <xliff:g id="COUNT">%1$d</xliff:g> טביעות אצבע</item>
       <item quantity="other">נוספו <xliff:g id="COUNT">%1$d</xliff:g> טביעות אצבע</item>
-      <item quantity="one">נוספה טביעת האצבע</item>
+      <item quantity="one">נוספה טביעת אצבע</item>
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"הגדרת טביעת האצבע"</string>
@@ -419,7 +424,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"אפשר להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטאבלט או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות או באישור רכישה."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"אפשר להשתמש בטביעת האצבע כדי לבטל את נעילת המכשיר או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות או באישור רכישה."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"אפשר להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטלפון או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות או באישור רכישה."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"הרשאה לילד או לילדה להשתמש בטביעת אצבע כדי לבטל את הנעילה של הטלפון או לאמת את זהותם. הפעולה נדרשת בכניסה לאפליקציות, אישור רכישה ועוד."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"הרשאה לילד או לילדה להשתמש בטביעת אצבע כדי לבטל את הנעילה של הטלפון או לאמת את זהותם. הפעולה נדרשת בכניסה לאפליקציות, אישור רכישה ועוד."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"הרשאה לילד או לילדה להשתמש בטביעת אצבע כדי לבטל את הנעילה של הטאבלט או לאמת את זהותם. הפעולה נדרשת בכניסה לאפליקציות, לאישור רכישה ועוד."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"הרשאה לילד או לילדה להשתמש בטביעת אצבע כדי לבטל את הנעילה של המכשיר או לאמת את זהותם. הפעולה נדרשת בכניסה לאפליקציות, לאישור רכישה ועוד."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"השליטה בידיים שלך"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"השליטה נמצאת בידיים שלך ושל הילד או הילדה"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"חשוב לזכור"</string>
@@ -429,17 +436,32 @@
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"בסדר"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"לא להגדיר טביעת אצבע עכשיו?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"ההגדרה של טביעת האצבע אורכת דקה או שתיים. אם מדלגים עליה, אפשר להוסיף את טביעת האצבע מאוחר יותר בהגדרות."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"כשהסמל הזה מופיע, יש להשתמש בטביעת האצבע לצורך אימות במקרים כמו כניסה לאפליקציה או אישור רכישה"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"חשוב לזכור"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"ייתכן שביטול הנעילה על ידי שימוש בטביעת אצבע היא שיטה פחות בטוחה מקו ביטול נעילה או מקוד אימות חזקים"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"יכול להיות שביטול הנעילה של הטאבלט בטביעת אצבע היא שיטה פחות בטוחה מקו ביטול נעילה או מקוד אימות חזקים"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"יכול להיות שביטול הנעילה של המכשיר בטביעת אצבע היא שיטה פחות בטוחה מקו ביטול נעילה או מקוד אימות חזקים"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"איך זה עובד"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"הפיצ\'ר \'ביטול הנעילה בטביעת אצבע\' יוצר תבנית ייחודית של טביעת האצבע שלך כדי לאמת את זהותך. כדי ליצור את התבנית הזו לטביעת האצבע במהלך ההגדרה, עליך לצלם תמונות של טביעת האצבע מזוויות שונות."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"הפיצ\'ר \'ביטול הנעילה בטביעת אצבע\' יוצר תבנית ייחודית של טביעת האצבע של הילד או הילדה כדי לאמת את זהותם. כדי ליצור את התבנית הזו לטביעת האצבע במהלך ההגדרה, יהיה עליהם לצלם תמונות של טביעת האצבע מזוויות שונות."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"‏כשמשתמשים ב-Pixel Imprint, נעשה שימוש בתמונות כדי לעדכן את התבנית של טביעת האצבע. התמונות שמשמשות ליצירת התבנית של טביעת האצבע לא נשמרות. התבנית של טביעת האצבע נשמרת בצורה מאובטחת בטלפון שלך ואף פעם לא נשלחת או מועברת ממנו. כל פעולות העיבוד מתבצעות בטלפון באופן מאובטח."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"‏בשימוש ב-Pixel Imprint, נעשה שימוש בתמונות כדי לעדכן את התבנית של טביעת האצבע שלהם. התמונות המשמשות ליצירת התבנית של טביעת האצבע של הילד או הילדה אף פעם לא נשמרות. התבנית של טביעת האצבע נשמרת באופן מאובטח בטלפון ואף פעם לא נשלחת או מועברת ממנו. כל פעולות העיבוד מתבצעות בטלפון באופן מאובטח."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"בכל שלב אפשר למחוק את התבנית ואת התמונות של טביעת האצבע, או להשבית את התכונה \'ביטול הנעילה בטביעת אצבע\', דרך ה\'הגדרות\'. התמונות והתבניות של טביעת האצבע מאוחסנות בטלפון עד שהן נמחקות."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"האפשרות למחוק את התמונות והתבנית של טביעת האצבע, או להשבית את הפיצ\'ר \'ביטול הנעילה בטביעת אצבע\', זמינה לך ולילד או לילדה שלך בכל שלב בהגדרות. התמונות והתבניות של טביעת האצבע נשמרות בטלפון עד שהן נמחקות."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"‏כשמשתמשים ב-Pixel Imprint, נעשה שימוש בתמונות כדי לעדכן את התבנית של טביעת האצבע. התמונות שמשמשות ליצירת התבנית של טביעת האצבע לא נשמרות. התבנית של טביעת האצבע נשמרת בצורה מאובטחת בטלפון שלך ואף פעם לא נשלחת או מועברת ממנו. כל פעולות העיבוד מתבצעות בטלפון באופן מאובטח."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"‏כשמשתמשים ב-Pixel Imprint נעשה שימוש בתמונות כדי לעדכן את התבנית של טביעת האצבע. התמונות שמשמשות ליצירת התבנית של טביעת האצבע אף פעם לא נשמרות, אבל התבנית של טביעת האצבע נשמרת באופן מאובטח בטאבלט שלך ואף פעם לא נשלחת או מועברת ממנו. כל פעולות העיבוד מתבצעות בטאבלט באופן מאובטח."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"‏כשמשתמשים ב-Pixel Imprint נעשה שימוש בתמונות כדי לעדכן את התבנית של טביעת האצבע. התמונות שמשמשות ליצירת התבנית של טביעת האצבע אף פעם לא נשמרות, אבל התבנית של טביעת האצבע נשמרת באופן מאובטח במכשיר שלך ואף פעם לא נשלחת או מועברת ממנו. כל פעולות העיבוד מתבצעות במכשיר באופן מאובטח."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"‏בשימוש ב-Pixel Imprint, נעשה שימוש בתמונות כדי לעדכן את התבנית של טביעת האצבע שלהם. התמונות המשמשות ליצירת התבנית של טביעת האצבע של הילד או הילדה אף פעם לא נשמרות. התבנית של טביעת האצבע נשמרת באופן מאובטח בטלפון ואף פעם לא נשלחת או מועברת ממנו. כל פעולות העיבוד מתבצעות בטלפון באופן מאובטח."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"‏כשמשתמשים ב-Pixel Imprint נעשה שימוש בתמונות כדי לעדכן את התבנית של טביעת האצבע. התמונות המשמשות ליצירת התבנית של טביעת האצבע של הילד או הילדה אף פעם לא נשמרות. התבנית של טביעת האצבע נשמרת באופן מאובטח בטאבלט ואף פעם לא נשלחת או מועברת ממנו. כל פעולות העיבוד מתבצעות בטאבלט באופן מאובטח."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"‏כשמשתמשים ב-Pixel Imprint נעשה שימוש בתמונות כדי לעדכן את התבנית של טביעת האצבע. התמונות המשמשות ליצירת התבנית של טביעת האצבע של הילד או הילדה אף פעם לא נשמרות. התבנית של טביעת האצבע נשמרת באופן מאובטח במכשיר ואף פעם לא נשלחת או מועברת ממנו. כל פעולות העיבוד מתבצעות במכשיר באופן מאובטח."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"בכל שלב אפשר למחוק את התבנית ואת התמונות של טביעת האצבע, או להשבית את התכונה \'ביטול הנעילה בטביעת אצבע\', דרך ה\'הגדרות\'. התמונות והתבניות של טביעת האצבע מאוחסנות בטלפון עד שהן נמחקות."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"בכל שלב אפשר להיכנס להגדרות ולמחוק את התבנית ואת התמונות של טביעת האצבע, או להשבית את \'ביטול הנעילה בטביעת אצבע\'. התמונות והתבניות של טביעת האצבע נשמרות בטאבלט עד שהן נמחקות."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"בכל שלב אפשר להיכנס להגדרות ולמחוק את התבנית ואת התמונות של טביעת האצבע, או להשבית את \'ביטול הנעילה בטביעת אצבע\'. התמונות והתבניות של טביעת האצבע נשמרות במכשיר עד שהן נמחקות."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"האפשרות למחוק את התמונות והתבנית של טביעת האצבע, או להשבית את הפיצ\'ר \'ביטול הנעילה בטביעת אצבע\', זמינה לך ולילד או לילדה שלך בכל שלב בהגדרות. התמונות והתבניות של טביעת האצבע נשמרות בטלפון עד שהן נמחקות."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"לך ולילד או לילדה שלך יש אפשרות להיכנס בכל שלב להגדרות ולמחוק את התמונות והתבנית של טביעת האצבע, או להשבית את התכונה \'ביטול הנעילה בטביעת אצבע\'. התמונות והתבניות של טביעת האצבע נשמרות בטאבלט עד שהן נמחקות."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"לך ולילד או לילדה שלך יש אפשרות להיכנס בכל שלב להגדרות ולמחוק את התמונות והתבנית של טביעת האצבע, או להשבית את התכונה \'ביטול הנעילה בטביעת אצבע\'. התמונות והתבניות של טביעת האצבע נשמרות במכשיר עד שהן נמחקות."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"נעילת הטלפון עלולה להתבטל בלי כוונה, למשל כשמישהו מחזיק אותו בצמוד לאצבע שלך."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"נעילת הטאבלט עלולה להתבטל בלי כוונה, למשל כשמישהו מחזיק אותו בצמוד לאצבע שלך."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"נעילת המכשיר עלולה להתבטל בלי כוונה, למשל כשמישהו מחזיק אותו בצמוד לאצבע שלך."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"נעילת הטלפון של הילד או הילדה עשויה להתבטל ללא כוונה, למשל במקרה שמישהו יצמיד את הטלפון לאצבע שלהם."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"נעילת הטלפון של הילד או הילדה עשויה להתבטל ללא כוונה, למשל במקרה שמישהו יצמיד את הטלפון לאצבע שלהם."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"נעילת הטאבלט של הילד או הילדה עשויה להתבטל ללא כוונה, למשל במקרה שמישהו יצמיד את הטאבלט לאצבע שלהם."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"נעילת המכשיר של הילד או הילדה עשויה להתבטל ללא כוונה, למשל במקרה שמישהו יצמיד את המכשיר לאצבע שלהם."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"‏לקבלת התוצאות הטובות ביותר, כדאי להשתמש במגן מסך בעל אישור Made for Google. טביעת האצבע שלך עלולה לא לעבוד עם מגני מסך אחרים."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"‏לקבלת התוצאות הטובות ביותר, כדאי להשתמש במגן מסך בעל אישור Made for Google. טביעת האצבע של הילד או הילדה עלולה לא לעבוד עם מגני מסך אחרים."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
@@ -473,8 +495,12 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"דילוג"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"ביטול"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"נגיעה בחיישן"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"נגיעה בלחצן ההפעלה בלי ללחוץ עליו"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"איך מגדירים טביעת אצבע?"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"החיישן נמצא בגב הטלפון. יש להשתמש באצבע המורה."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"חיישן טביעת האצבע נמצא על לחצן ההפעלה. זה הלחצן השטוח ליד הלחצן הבולט של עוצמת הקול בפינת הטאבלט.\n\nלחיצה על לחצן ההפעלה מכבה את המסך."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"חיישן טביעת האצבע נמצא על לחצן ההפעלה. זה הלחצן השטוח ליד הלחצן הבולט של עוצמת הקול בפינת המכשיר.\n\nלחיצה על לחצן ההפעלה מכבה את המסך."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"חיישן טביעת האצבע נמצא על לחצן ההפעלה. זה הלחצן השטוח ליד הלחצן הבולט של עוצמת הקול בפינת הטלפון.\n\nלחיצה על לחצן ההפעלה מכבה את המסך."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"חיישן טביעות האצבע מופיע במסך. נצלם את טביעת האצבע שלך במסך הבא."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"התחלה"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"מזיזים את האצבע לאורך המסך כדי לאתר את החיישן. לוחצים לחיצה ארוכה על חיישן טביעות האצבע."</string>
@@ -486,6 +512,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"נגיעה בחיישן"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"יש להניח את האצבע על החיישן ולהרים אותה לאחר שמרגישים רטט"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"צריך להחזיק את האצבע כך שטביעת האצבע תהיה על החיישן, עד שמרגישים רטט"</string>
+    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"בלי ללחוץ על הלחצן, משאירים את טביעת האצבע על החיישן עד שמרגישים רטט.\n\nמזיזים מעט את האצבע כל פעם. כך יתועד חלק גדול יותר מהאצבע."</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"לוחצים לחיצה ארוכה על חיישן טביעות האצבע"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"מרימים את האצבע ושוב נוגעים בחיישן"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"ושוב…"</string>
@@ -495,15 +522,24 @@
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"מניחים את קצה האצבע על החיישן"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"יש להניח את הקצה השמאלי של האצבע"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"יש להניח את הקצה הימני של האצבע"</string>
+    <string name="security_settings_sfps_enroll_finger_center_title" msgid="1320688855767675739">"מניחים את מרכז האצבע על החיישן"</string>
+    <string name="security_settings_sfps_enroll_fingertip_title" msgid="2737520837684516446">"מניחים את קצה האצבע על החיישן"</string>
+    <string name="security_settings_sfps_enroll_left_edge_title" msgid="9022963735924413343">"מניחים את הקצה השמאלי של האצבע על החיישן"</string>
+    <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"לבסוף, מניחים את הקצה הימני של האצבע על החיישן"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"מניחים צד אחד של האצבע על החיישן ומחזיקים. אחר כך עוברים לצד השני"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"כך יתועד חלק גדול יותר מהאצבע"</string>
+    <!-- String.format failed for translation -->
+    <!-- no translation found for security_settings_sfps_enroll_progress_a11y_message (6450772721691523736) -->
+    <skip />
+    <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"הושלמו <xliff:g id="PERCENTAGE">%d</xliff:g> אחוזים מתהליך הרישום"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"טביעת האצבע שלך נקלטה"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"ביטול הנעילה בטביעת אצבע משתפר ככל שמשתמשים בו יותר כדי לבטל את הנעילה של הטאבלט או לאמת את הזהות שלך באפליקציות"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"ביטול הנעילה בטביעת אצבע משתפר ככל שמשתמשים בו יותר כדי לבטל את הנעילה של המכשיר או לאמת את הזהות שלך באפליקציות"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"ביטול הנעילה בטביעת אצבע משתפר ככל שמשתמשים בו יותר כדי לבטל את הנעילה של הטלפון או לאמת את הזהות שלך באפליקציות"</string>
+    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"עכשיו אפשר להשתמש בטביעת אצבע כדי לבטל את נעילת הטאבלט או כדי לאמת את זהותך, למשל בכניסה לחשבון באפליקציות או באישור רכישה"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"עכשיו אפשר להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטאבלט או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"עכשיו אפשר להשתמש בטביעת האצבע כדי לבטל את נעילת המכשיר או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"עכשיו אפשר להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטלפון או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"לא עכשיו"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"מרימים ונוגעים בחיישן שוב"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"מניחים צד אחד של האצבע על החיישן ומחזיקים. אחר כך עוברים לצד השני"</string>
@@ -580,7 +616,7 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"הוספת את המספר המרבי של טביעות אצבע."</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"לא ניתן להוסיף עוד טביעות אצבע"</string>
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"להסיר את כל טביעות האצבע?"</string>
-    <string name="fingerprint_delete_title" msgid="1469865327307917858">"הסרה של \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'"</string>
+    <string name="fingerprint_delete_title" msgid="5412123164503407098">"מחיקה של \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"למחוק את טביעת האצבע הזו?"</string>
     <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"פעולה זו מוחקת את התבנית והתמונות של טביעת האצבע המשויכות אל <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>, שמאוחסנות במכשיר שלך"</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"לא תהיה לך אפשרות להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטלפון או לאמת את הזהות שלך באפליקציות."</string>
@@ -821,11 +857,8 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> סביבות מהימנות פעילות</item>
       <item quantity="one"> סביבה מהימנה פעילה אחת</item>
     </plurals>
-    <string name="bluetooth_quick_toggle_title" msgid="5955341060378240781">"Bluetooth"</string>
-    <string name="bluetooth_quick_toggle_summary" msgid="5257744297562880017">"‏להפעלת Bluetooth"</string>
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
-    <string name="bluetooth_settings_summary" msgid="6805458703566046784">"ניהול חיבורים, הגדרת שם מכשיר ויכולת גילוי"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"לבצע התאמה עם <xliff:g id="DEVICE_NAME">%1$s</xliff:g>‏?"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"‏קוד התאמה (Bluetooth)"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"‏יש להקליד את קוד ההתאמה ולאחר מכן ללחוץ על Return או Enter"</string>
@@ -834,39 +867,16 @@
     <string name="bluetooth_pin_values_hint_16_digits" msgid="5603928271430883558">"חייב להיות בן 16 ספרות"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"ייתכן שתצטרך להקליד את קוד הגישה הזה גם במכשיר השני."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"ייתכן שתצטרך להקליד את המפתח הזה גם במכשיר השני."</string>
-    <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"‏כדי להתאים עם:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;ודא שהמכשיר מציג סיסמה זו:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"עליך לאשר התאמה עם הקבוצה המתואמת"</string>
-    <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"‏מאת:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;לבצע התאמה עם מכשיר זה?"</string>
-    <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"‏כדי להתאים עם:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>יש הקלד בו:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, ולאחר מכן להקיש על Return או Enter."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"אישור גישה אל אנשי הקשר והיסטוריית השיחות"</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"לא הייתה אפשרות להתחבר אל <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_preference_scan_title" msgid="3460316252463771851">"חיפוש מכשירים"</string>
-    <string name="bluetooth_search_for_devices" msgid="6516902340975407648">"רענון"</string>
-    <string name="bluetooth_searching_for_devices" msgid="6541984133657573124">"מתבצע חיפוש…"</string>
-    <string name="bluetooth_preference_device_settings" msgid="1688662188157019998">"הגדרות המכשיר"</string>
-    <string name="bluetooth_preference_paired_dialog_title" msgid="1090131276572055841">"מכשיר מותאם"</string>
-    <string name="bluetooth_preference_paired_dialog_internet_option" msgid="4337953030661626289">"חיבור אינטרנט"</string>
-    <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="8247634441638919886">"מקלדת"</string>
-    <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="8194423860397844579">"אנשי קשר והיסטוריית שיחות"</string>
-    <string name="bluetooth_pairing_dialog_title" msgid="6106058683134173178">"האם להתאים עם המכשיר הזה?"</string>
-    <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="5472835166206721325">"האם לשתף את ספר הטלפונים?"</string>
-    <string name="bluetooth_pairing_dialog_contants_request" msgid="7516277926581535299">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> רוצה לגשת אל אנשי הקשר והיסטוריית השיחות שלך."</string>
-    <string name="bluetooth_pairing_dialog_paring_request" msgid="1545098121090892788">"‏<xliff:g id="DEVICE_NAME">%1$s</xliff:g> מבקש לבצע התאמה עם Bluetooth. לאחר החיבור, תהיה לו גישה לאנשי הקשר ולהיסטוריית השיחות שלך."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"מכשירים זמינים"</string>
-    <string name="bluetooth_preference_no_found_devices" msgid="1331122763066030155">"אין מכשירים זמינים"</string>
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"התחברות"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"התנתקות"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"התאמה וחיבור"</string>
-    <string name="bluetooth_device_context_unpair" msgid="7525735305244087162">"ביטול התאמה"</string>
-    <string name="bluetooth_device_context_disconnect_unpair" msgid="2001359431289794561">"התנתקות וביטול התאמה"</string>
-    <string name="bluetooth_device_context_connect_advanced" msgid="934657460643490773">"אפשרויות..."</string>
-    <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"אפשרויות מתקדמות"</string>
-    <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"‏Bluetooth מתקדם"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"‏כשה-Bluetooth מופעל, המכשיר יכול לתקשר עם מכשירי Bluetooth אחרים שנמצאים בקרבת מקום."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"‏כשה-Bluetooth מופעל, המכשיר יכול לתקשר עם מכשירי Bluetooth אחרים שנמצאים בקרבת מקום.\n\nלשיפור חוויית השימוש במכשיר, אפליקציות ושירותים יכולים לסרוק מכשירים בקרבת מקום בכל שלב, גם כאשר ה-Bluetooth כבוי. אפשר להשתמש בכך, למשל, כדי לשפר תכונות ושירותים מבוססי-מיקום. ניתן לשנות זאת ב"<annotation id="link">"הגדרות הסריקה של Bluetooth‏"</annotation>"."</string>
-    <string name="ble_scan_notify_text" msgid="1358879010396045164">"‏כדי לשפר את דיוק המיקום, אפליקציות ושירותים של המערכת יכולים עדיין לזהות התקני Bluetooth. ניתן לשנות זאת ב<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>הגדרות הסריקה<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
-    <string name="bluetooth_connect_failed" msgid="7892663424429584925">"לא ניתן להתחבר. יש לנסות שוב."</string>
     <string name="device_details_title" msgid="1155622417516195481">"פרטי המכשיר"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"‏כתובת המכשיר לחיבור דרך Bluetooth‏: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"‏כתובת המכשיר לחיבור דרך Bluetooth:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -879,30 +889,23 @@
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"האפליקציה <xliff:g id="APP_NAME">%1$s</xliff:g> לא תהיה מחוברת יותר אל <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"אני רוצה לשכוח את המכשיר"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"ניתוק האפליקציה"</string>
-    <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"התחברות אל…"</string>
-    <string name="bluetooth_disconnect_a2dp_profile" msgid="339103864166293612">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ינותק מהאודיו של המדיה."</string>
-    <string name="bluetooth_disconnect_headset_profile" msgid="7857706184371154920">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ינותק מהאודיו של הדיבורית."</string>
-    <string name="bluetooth_disconnect_hid_profile" msgid="4794752406024916925">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ינותק ממכשיר הקלט."</string>
-    <string name="bluetooth_disconnect_pan_user_profile" msgid="283176886159444413">"הגישה לאינטרנט דרך <xliff:g id="DEVICE_NAME">%1$s</xliff:g> תנותק."</string>
-    <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="733193449967330892">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ינותק משיתוף החיבור לאינטרנט של טאבלט זה."</string>
-    <string name="bluetooth_disconnect_pan_nap_profile" product="default" msgid="7852265676243153982">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ינותק משיתוף החיבור לאינטרנט של טלפון זה."</string>
     <string name="bluetooth_device_advanced_title" msgid="1181664272013729515">"‏מכשיר Bluetooth מותאם"</string>
-    <string name="bluetooth_device_advanced_online_mode_title" msgid="8302236592496988747">"התחברות"</string>
-    <string name="bluetooth_device_advanced_online_mode_summary" msgid="271856759516576615">"‏התחברות למכשיר Bluetooth"</string>
     <string name="bluetooth_device_advanced_profile_header_title" msgid="7892879890208207223">"השתמש עבור"</string>
-    <string name="bluetooth_device_advanced_rename_device" msgid="4798081898389041132">"שינוי שם"</string>
-    <string name="bluetooth_device_advanced_enable_opp_title" msgid="7604726126703453984">"אפשר העברות קבצים נכנסות"</string>
     <string name="bluetooth_pan_user_profile_summary_connected" msgid="7851033200857999275">"יש חיבור למכשיר לצורך גישה לאינטרנט"</string>
     <string name="bluetooth_pan_nap_profile_summary_connected" msgid="5563892893331988809">"המערכת משתפת חיבור אינטרנט מקומי עם המכשיר"</string>
-    <string name="bluetooth_dock_settings" msgid="1709536202189755022">"הגדרות עגינה"</string>
-    <string name="bluetooth_dock_settings_title" msgid="4872789068019972847">"שימוש בעגינה לאודיו"</string>
-    <string name="bluetooth_dock_settings_headset" msgid="5756482379574272554">"כטלפון דיבורית"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="434520221656010141">"עבור מוזיקה ומדיה"</string>
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"לא לשכוח הגדרות"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"‏מקסימום התקני אודיו המחוברים באמצעות Bluetooth"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"‏בחירת מספר מקסימלי של התקני אודיו המחוברים באמצעות Bluetooth"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"‏יומן ניפוי באגים של מקבץ NFC"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"‏העלאת רמת הרישום של מקבץ NFC ביומן"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"‏יומן ניפוי באגים מפורט של ספקי NFC"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"הוספת רישומי יומן של יצרנים למכשירים ספציפיים בדוחות על באגים. הדוחות האלה עשויים להכיל מידע פרטי."</string>
+    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"‏הפעלת Snoop Log של NFC NCI ללא סינון"</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"‏תיעוד של פרטי חבילות NFC, שעשויות להכיל מידע פרטי."</string>
+    <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"להפעיל את המכשיר מחדש?"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"‏הרישום ביומן של פרטי NFC מיועד למטרות פיתוח בלבד. נתוני NFC נוספים נכללים בדוחות על באגים, שעשויים להכיל מידע פרטי. צריך להפעיל מחדש את המכשיר כדי לשנות את ההגדרה."</string>
+    <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"הפעלה מחדש"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"‏העברה (cast)"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"‏העברה (csat)"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"‏הפעלת תצוגת WiFi"</string>
@@ -942,7 +945,6 @@
     <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"‏ניתן להשתמש ב-NFC רק לאחר ביטול נעילת המסך"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"‏מוכן לשדר תוכן אפליקציה באמצעות NFC"</string>
-    <string name="android_beam_off_summary" msgid="5693961375631325042">"כבוי"</string>
     <string name="nfc_disabled_summary" msgid="8737797364522502351">"‏לא זמינה כי NFC כבוי"</string>
     <string name="android_beam_label" msgid="7168565080321110094">"Android Beam"</string>
     <string name="android_beam_explained" msgid="5684416131846701256">"‏כשתכונה זו מופעלת, אפשר לשדר תוכן מאפליקציה למכשיר אחר התומך ב-NFC על ידי החזקת המכשירים קרוב זה לזה. לדוגמה, אפשר לשדר דפי אינטרנט, סרטוני YouTube, אנשי קשר ועוד.\n\nפשוט מקרבים את המכשירים זה לזה (בדרך כלל גב אל גב) ולאחר מכן נוגעים במסך. האפליקציה תקבע מה ישודר."</string>
@@ -1039,7 +1041,6 @@
     <string name="wifi_password" msgid="1458802324849513755">"סיסמה"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"הצגת הסיסמה"</string>
     <string name="wifi_ap_band_config" msgid="1589020070150933055">"‏בחירת תדר AP"</string>
-    <string name="wifi_ap_choose_auto" msgid="8944442003151215691">"אוטומטי"</string>
     <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"‏תדר ‎2.4 GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8413248472288180075">"‏תדר ‎5.0GHz"</string>
     <string name="wifi_ap_prefer_5G" msgid="2520628479818369902">"‏עדיפות לתדר 5.0 GHz"</string>
@@ -1259,7 +1260,6 @@
     <string name="emergency_address_title" msgid="8102786488994263815">"כתובת למקרה חירום"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"‏משמש כמיקומך בעת ביצוע שיחת חירום באמצעות רשת Wi-Fi"</string>
     <string name="private_dns_help_message" msgid="851221502063782306">"‏"<annotation id="url">"מידע נוסף"</annotation>" על תכונות של DNS פרטי"</string>
-    <string name="private_dns_mode_on" msgid="8878679071975375696">"מופעל"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="129524064888622179">"ההגדרה מנוהלת על ידי הספק הסלולרי"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"‏הפעלה של שיחות Wi-Fi"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"‏הפעלה של שיחות Wi-Fi"</string>
@@ -1318,8 +1318,6 @@
     <string name="search_settings" msgid="7573686516434589771">"חיפוש"</string>
     <string name="display_settings" msgid="7197750639709493852">"תצוגה"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"סיבוב אוטומטי של המסך"</string>
-    <string name="auto_rotate_option_off" msgid="2788096269396290731">"כבוי"</string>
-    <string name="auto_rotate_option_on" msgid="5776678230808498171">"פועל"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"פועל – מבוסס על זיהוי פנים"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"זיהוי פנים"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"שינוי אוטומטי של כיוון המסך כשהופכים את הטלפון ממצב של תצוגה לאורך למצב של תצוגה לרוחב"</string>
@@ -1347,14 +1345,11 @@
     <string name="brightness_summary" msgid="6309641759293018049">"התאמת בהירות המסך"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"בהירות אוטומטית"</string>
     <string name="auto_brightness_summary" msgid="1737148869232725883">"בהירות המסך מתאימה עצמה לסביבה"</string>
-    <string name="auto_brightness_summary_on" msgid="2748088951224387004">"פועל"</string>
-    <string name="auto_brightness_summary_off" msgid="8077066192887677956">"כבויה"</string>
     <string name="auto_brightness_summary_very_low" msgid="2705445901659224330">"הבהירות המועדפת נמוכה מאוד"</string>
     <string name="auto_brightness_summary_low" msgid="1606100911112851291">"הבהירות המועדפת נמוכה"</string>
     <string name="auto_brightness_summary_default" msgid="9038441148247815684">"רמת הבהירות המועדפת היא ברירת המחדל"</string>
     <string name="auto_brightness_summary_high" msgid="2886260311484349010">"הבהירות המועדפת גבוהה"</string>
     <string name="auto_brightness_summary_very_high" msgid="8294814315426024005">"הבהירות המועדפת גבוהה מאוד"</string>
-    <string name="auto_brightness_off_title" msgid="5156056957376839677">"כבויה"</string>
     <string name="auto_brightness_very_low_title" msgid="618973599332847430">"נמוכה מאוד"</string>
     <string name="auto_brightness_low_title" msgid="4243763334776382492">"נמוכה"</string>
     <string name="auto_brightness_default_title" msgid="1776584786251120907">"ברירת מחדל"</string>
@@ -1373,7 +1368,6 @@
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"קצב הרענון הגבוה ביותר לתגובה משופרת למגע ולאיכות אנימציה טובה יותר. פעולה זו מגבירה את השימוש בסוללה."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"המסך יישאר דלוק בזמן צפייה"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"התכונה פועלת / המסך לא נכבה כשמביטים בו"</string>
-    <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"כבוי"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="1719759921214237016">"נדרשת גישה למצלמה"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="5822591289468803691">"יש צורך בגישה למצלמה כדי להפעיל את התכונה \'המסך יישאר דלוק בזמן צפייה\'. יש להקיש כדי לנהל את ההרשאות לשירותי התאמה אישית של מכשירים"</string>
     <string name="adaptive_sleep_manage_permission_button" msgid="1404510197847664846">"ניהול הרשאות"</string>
@@ -1455,7 +1449,6 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"במהלך טעינה"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"בזמן עגינה"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"אף פעם"</string>
-    <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"כבוי"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"מתי להפעיל"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"שומר המסך הנוכחי"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"בהירות אוטומטית"</string>
@@ -1471,7 +1464,6 @@
     <string name="short_summary_font_size" msgid="8444689613442419978">"הגדלה או הקטנה של גודל הטקסט"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"‏הגדרות של נעילת כרטיס SIM"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"‏נעילת כרטיס SIM"</string>
-    <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"כבוי"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"נעול"</string>
     <string name="sim_lock_settings_title" msgid="1401619059761012696">"‏נעילת כרטיס SIM"</string>
     <string name="sim_pin_toggle" msgid="98754920202404425">"‏נעילת כרטיס SIM"</string>
@@ -1525,15 +1517,9 @@
     <string name="module_version" msgid="1787518340082046658">"‏עדכון מערכת של Google Play"</string>
     <string name="device_info_not_available" msgid="4804474466616712326">"לא זמין"</string>
     <string name="device_status_activity_title" msgid="1812666241137263882">"סטטוס"</string>
-    <string name="device_status" msgid="7988547478034984649">"סטטוס"</string>
-    <string name="device_status_summary" product="tablet" msgid="8826216824111648900">"סטטוס הסוללה, הרשת ומידע אחר"</string>
-    <string name="device_status_summary" product="default" msgid="8132661857066128832">"מספר טלפון, אות וכדומה"</string>
     <string name="storage_settings" msgid="7472188817781592677">"אחסון"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"אחסון ומטמון"</string>
-    <string name="storage_usb_settings" msgid="7058142934214211583">"אחסון"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"הגדרות אחסון"</string>
-    <string name="storage_settings_summary" product="nosdcard" msgid="3858049818577638926">"‏ביטול טעינת אחסון USB, הצגת אחסון זמין"</string>
-    <string name="storage_settings_summary" product="default" msgid="267557695753980969">"‏ביטול טעינת כרטיס SD, הצגת שטח האחסון הזמין"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"‏IMEI (חריץ SIM ‏%1$d)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"יש לבחור רשת שמורה כדי להציג"</string>
     <string name="status_number" product="tablet" msgid="3597945414666253183">"MDN"</string>
@@ -1546,12 +1532,6 @@
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"‏גרסת PRL"</string>
     <string name="meid_multi_sim" msgid="7645394486193991388">"‏MEID (חריץ SIM ‏%1$d)"</string>
-    <string name="scanning_status_text_on" msgid="3846571210578042940">"פועל"</string>
-    <string name="scanning_status_text_off" msgid="4002352668313705132">"כבוי"</string>
-    <string name="scanning_status_text_wifi_on_ble_on" msgid="7644609329607744714">"‏חיפוש נקודות Wi‑Fi פועל וגם סריקת Bluetooth פועלת"</string>
-    <string name="scanning_status_text_wifi_on_ble_off" msgid="7215007787287418186">"‏חיפוש נקודות Wi-Fi פועל, סריקת Bluetooth כבויה"</string>
-    <string name="scanning_status_text_wifi_off_ble_on" msgid="1396882599556304165">"‏סריקת Bluetooth פועלת, סריקת Wi-Fi כבויה"</string>
-    <string name="scanning_status_text_wifi_off_ble_off" msgid="7670694707427030537">"‏חיפוש נקודות Wi‑Fi כבוי וגם סריקת Bluetooth כבויה"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"סוג הרשת של חבילת הגלישה"</string>
@@ -1568,53 +1548,10 @@
     <string name="status_bt_address" msgid="6919660304578476547">"‏כתובת Bluetooth"</string>
     <string name="status_serial_number" msgid="9060064164331466789">"מספר סידורי"</string>
     <string name="status_up_time" msgid="1274778533719495438">"זמן פעולה"</string>
-    <string name="status_awake_time" msgid="2573925324168081586">"משך פעילות"</string>
-    <string name="internal_memory" msgid="1869518160077033848">"אחסון פנימי"</string>
-    <string name="sd_memory" product="nosdcard" msgid="5456718463397723781">"‏אחסון USB"</string>
-    <string name="sd_memory" product="default" msgid="3098344183202722455">"‏כרטיס SD"</string>
-    <string name="memory_available" msgid="712528795743654737">"זמין"</string>
-    <string name="memory_available_read_only" msgid="3201969221573511590">"זמין (לקריאה בלבד)"</string>
-    <string name="memory_size" msgid="2710897518522931469">"שטח כולל"</string>
     <string name="memory_calculating_size" msgid="3898240439798661242">"החישוב מתבצע…"</string>
-    <string name="memory_apps_usage" msgid="8818570780540532952">"אפליקציות ונתוני אפליקציות"</string>
-    <string name="memory_media_usage" msgid="5161308657995646963">"מדיה"</string>
-    <string name="memory_downloads_usage" msgid="8252462247720191179">"הורדות"</string>
-    <string name="memory_dcim_usage" msgid="3568913845973164352">"תמונות, סרטוני וידאו"</string>
-    <string name="memory_music_usage" msgid="8100634000114206429">"אודיו (מוזיקה, רינגטונים, פודקאסטים ועוד)"</string>
-    <string name="memory_media_misc_usage" msgid="7066851245178533269">"קבצים אחרים"</string>
-    <string name="memory_media_cache_usage" msgid="780808666853685824">"נתונים בקובץ שמור"</string>
-    <string name="sd_eject" product="nosdcard" msgid="6136102589751843304">"ביטול טעינה של אחסון משותף"</string>
-    <string name="sd_eject" product="default" msgid="8062832622096296251">"‏ביטול טעינה של כרטיס SD"</string>
-    <string name="sd_eject_summary" product="nosdcard" msgid="6859940774161708871">"‏בטל טעינה של אמצעי אחסון פנימי מסוג USB"</string>
-    <string name="sd_eject_summary" product="default" msgid="5151243312587186226">"‏יש לבטל את טעינת כרטיס SD כדי שאפשר יהיה להסיר אותו בבטחה"</string>
-    <string name="sd_insert_summary" product="nosdcard" msgid="9164545135649775664">"‏הכנסת אחסון USB לצורך טעינה"</string>
-    <string name="sd_insert_summary" product="default" msgid="5949168259622002192">"‏יש להכניס כרטיס SD לצורך טעינה"</string>
-    <string name="sd_mount" product="nosdcard" msgid="8305985249945415150">"‏טעינת אחסון USB"</string>
-    <string name="sd_mount" product="default" msgid="5279813999455776169">"‏טעינת כרטיס SD"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="2190410240845521205"></string>
-    <string name="sd_mount_summary" product="default" msgid="2190410240845521205"></string>
-    <string name="sd_format" product="nosdcard" msgid="8657427883364711513">"‏מחיקת אחסון USB"</string>
-    <string name="sd_format" product="default" msgid="9085302892248732329">"‏מחיקת כרטיס SD"</string>
-    <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"‏מחיקת כל הנתונים שבאמצעי האחסון הפנימי מסוג USB, כגון מוזיקה ותמונות."</string>
-    <string name="sd_format_summary" product="default" msgid="60583152211068164">"‏מחיקת כל הנתונים שבכרטיס SD, כגון מוזיקה ותמונות."</string>
-    <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"‏פונקציית MTP או PTP פעילה"</string>
-    <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"‏לבטל את טעינת אחסון ה-USB?"</string>
-    <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"‏לבטל את הטעינה של כרטיס ה-SD?"</string>
-    <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="1212025106709645023">"‏אם טעינת אחסון ה-USB תבוטל, יופסקו אפליקציות מסוימות שמשמשות אותך וייתכן שהן לא יהיו זמינות עד שאחסון ה-USB ייטען מחדש."</string>
-    <string name="dlg_confirm_unmount_text" product="default" msgid="3887768438615563697">"‏בעקבות ביטול של טעינת כרטיס ה-SD, הפעולה של אפליקציות מסוימות שהשתמשת בהן תופסק וייתכן שהן לא יהיו זמינות עד לטעינה מחדש של כרטיס ה-SD."</string>
-    <string name="dlg_error_unmount_title" product="nosdcard" msgid="2205587942165199845"></string>
-    <string name="dlg_error_unmount_title" product="default" msgid="2205587942165199845"></string>
-    <string name="dlg_error_unmount_text" product="nosdcard" msgid="7876201891724279436">"‏לא ניתן לבטל את הטעינה של אחסון ה-USB. כדאי לנסות שוב מאוחר יותר."</string>
-    <string name="dlg_error_unmount_text" product="default" msgid="2185659901137961711">"‏לא ניתן לבטל את טעינת כרטיס ה-SD. אפשר לנסות שוב מאוחר יותר."</string>
-    <string name="unmount_inform_text" product="nosdcard" msgid="5932607205977999175">"‏הטעינה של אחסון USB תבוטל."</string>
-    <string name="unmount_inform_text" product="default" msgid="716578785262713312">"‏הטעינה של כרטיס SD תבוטל."</string>
-    <string name="sd_ejecting_title" msgid="1641122369013595273">"ביטול הטעינה מתבצע"</string>
-    <string name="sd_ejecting_summary" msgid="861928572729341132">"ביטול טעינה מתבצע"</string>
-    <string name="storage_low_title" msgid="8002650511493419567">"שטח האחסון הולך ואוזל"</string>
-    <string name="storage_low_summary" msgid="7341022293583384506">"ייתכן שפונקציות מסוימות של המערכת, כמו סנכרון, לא יפעלו כראוי. אפשר לפנות מקום על ידי מחיקה או ביטול הצמדה של פריטים, כגון אפליקציות או תוכן מדיה."</string>
     <string name="storage_menu_rename" msgid="8549835371429159336">"שינוי שם"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"טעינה"</string>
-    <string name="storage_menu_unmount" msgid="8171552487742912282">"הוצא"</string>
+    <string name="storage_menu_unmount" msgid="8171552487742912282">"הוצאה"</string>
     <string name="storage_menu_format" msgid="8903698999905354146">"‏פירמוט של כרטיס SD לאחסון נייד"</string>
     <string name="storage_menu_format_button" msgid="7623565190643699626">"לפירמוט הכרטיס"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"פירמוט כאחסון חיצוני"</string>
@@ -1624,29 +1561,15 @@
     <string name="storage_menu_set_up" msgid="4401074025612064744">"הגדרה"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"פינוי שטח אחסון"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"ניהול אחסון"</string>
-    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"ניקוי, שטח אחסון"</string>
     <string name="storage_free_up_space_title" msgid="281047807372131975">"פינוי מקום"</string>
     <string name="storage_free_up_space_summary" msgid="6650027929735481350">"‏אפשר להיכנס לאפליקציית Files כדי לנהל את האחסון ולפנות מקום"</string>
-    <string name="storage_title_usb" msgid="1332488715547400452">"‏חיבור USB למחשב"</string>
-    <string name="usb_connection_category" msgid="2288543238378907242">"חבר בתור"</string>
-    <string name="usb_mtp_title" msgid="9068009584556422314">"‏מכשיר מדיה (MTP)"</string>
-    <string name="usb_mtp_summary" msgid="6293240861011560842">"‏מאפשר העברת קובצי מדיה ב-Windows, או באמצעות העברת הקבצים של Android ב-Mac (ראה www.android.com/filetransfer)"</string>
-    <string name="usb_ptp_title" msgid="4496529268189091846">"‏מצלמה (PTP)"</string>
-    <string name="usb_ptp_summary" msgid="8382539472311655671">"‏מאפשר להעביר תמונות באמצעות תוכנת המצלמה, ולהעביר קבצים במחשבים שאינם תומכים ב-MTP"</string>
-    <string name="usb_midi_title" msgid="1139558846427981761">"MIDI"</string>
-    <string name="usb_midi_summary" msgid="1842457325845863840">"‏מאפשר לאפליקציות התומכות ב-MIDI לפעול דרך USB באמצעות תוכנת MIDI המותקנת במחשב."</string>
     <string name="storage_other_users" msgid="7017206190449510992">"משתמשים אחרים"</string>
-    <string name="storage_internal_title" msgid="3265098802217660829">"אחסון במכשיר"</string>
-    <string name="storage_external_title" msgid="8984075540312137135">"אחסון נייד"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> נטען"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"לא ניתן לטעון את <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"<xliff:g id="NAME">%1$s</xliff:g> הוצא בבטחה"</string>
     <string name="storage_unmount_failure" msgid="3796912279003790607">"לא ניתן להוציא את <xliff:g id="NAME">%1$s</xliff:g> בבטחה"</string>
-    <string name="storage_format_success" msgid="3028114521294256851">"<xliff:g id="NAME">%1$s</xliff:g> מפורמט"</string>
-    <string name="storage_format_failure" msgid="2042691589726261987">"לא ניתן לפרמט את <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_rename_title" msgid="5911285992205282312">"שינוי שם של אמצעי אחסון"</string>
-    <string name="storage_dialog_unmounted" msgid="1187960789775910051">"ה-<xliff:g id="NAME_0">^1</xliff:g> הזה הוצא באופן בטוח, אך הוא עדיין זמין.\n\nראשית עליך לטעון את ה-<xliff:g id="NAME_1">^1</xliff:g> הזה כדי להשתמש בו."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"ה-<xliff:g id="NAME_0">^1</xliff:g> הזה פגום. \n\nראשית עליך להגדיר את ה-<xliff:g id="NAME_1">^1</xliff:g> הזה כדי להשתמש בו."</string>
     <string name="storage_internal_format_details" msgid="2399034372813686846">"‏אפשר לפרמט את כרטיס ה-SD הזה כדי לאחסן תמונות, סרטונים, מוזיקה ועוד ולגשת אליהם במכשירים אחרים. \n\n"<b>"כל הנתונים בכרטיס ה-SD הזה יימחקו."</b>" \n\n"<b>"לפני הפירמוט"</b>" \n\n"<b>"גיבוי של התמונות ותכני מדיה אחרים"</b>" \nיש להעביר את קובצי המדיה לאחסון חלופי במכשיר הזה, או להעביר אותם למחשב באמצעות כבל USB. \n\n"<b>"גיבוי של האפליקציות"</b>" \nכל האפליקציות שמאוחסנות ב<xliff:g id="NAME">^1</xliff:g> יוסרו והנתונים שלהן יימחקו. כדי להשאיר את האפליקציות האלה, עליך להעביר אותן לאחסון חלופי במכשיר."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"כשמוציאים את ה-<xliff:g id="NAME_0">^1</xliff:g> הזה, האפליקציות המאוחסנות בו מפסיקות לפעול, וקובצי המדיה המאוחסנים בו לא זמינים עד שמכניסים אותו שוב."</b>\n\n"ה-<xliff:g id="NAME_1">^1</xliff:g> הזה הוגדר באמצעות פרמוט לפעול במכשיר הזה בלבד. הוא לא יפעל במכשירים אחרים."</string>
@@ -1655,37 +1578,14 @@
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"כל האפליקציות, התמונות והנתונים המאוחסנים ב-<xliff:g id="NAME">^1</xliff:g> הזה יימחקו לתמיד."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"‏המערכת כוללת קבצים המשמשים להפעלת גרסת Android <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="storage_wizard_guest" msgid="5813419895687733649">"‏משתמשים במצב אורח לא יכולים לפרמט כרטיסי SD"</string>
-    <string name="storage_wizard_init_title" msgid="9036374223934708619">"הגדרת <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"‏פירמוט של כרטיס SD לאחסון נייד"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"שמירת התמונות, הסרטונים, המוזיקה ועוד וכניסה אליהם ממכשירים אחרים"</string>
-    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"‏פירמוט של כרטיס SD לאחסון פנימי"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"שמירת האפליקציות והמדיה לשימוש בטלפון הזה בלבד"</string>
-    <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"קביעת פורמט כאחסון פנימי"</string>
-    <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"יש לפרמט את <xliff:g id="NAME_0">^1</xliff:g> כדי שיהיה מאובטח. \n\nלאחר הפרמוט, <xliff:g id="NAME_1">^1</xliff:g> זה יפעל רק במכשיר הזה. \n\n"<b>"הפרמוט מוחק את כל הנתונים שמאוחסנים כרגע ב-<xliff:g id="NAME_2">^1</xliff:g>."</b>" כדי למנוע את אובדן הנתונים, מומלץ לגבות אותם."</string>
-    <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"פירמוט כאחסון נייד"</string>
-    <string name="storage_wizard_format_confirm_public_body" msgid="6219883780307218266">"יש לפרמט את <xliff:g id="NAME_0">^1</xliff:g> כדי לבצע את הפעולה הזו. \n\n"<b>"פרמוט מוחק את כל הנתונים המאוחסנים ב<xliff:g id="NAME_1">^1</xliff:g>."</b>" מומלץ לגבות את הנתונים כדי לא לאבד אותם."</string>
-    <string name="storage_wizard_format_confirm_next" msgid="4412063054982084056">"מחיקה ופרמוט"</string>
     <string name="storage_wizard_format_progress_title" msgid="9170393018855949774">"פרמוט <xliff:g id="NAME">^1</xliff:g> מתבצע…"</string>
     <string name="storage_wizard_format_progress_body" msgid="1044024044955390417">"אין להסיר את <xliff:g id="NAME">^1</xliff:g> במהלך הפרמוט."</string>
-    <string name="storage_wizard_migrate_title" msgid="3013711737005104623">"העברת נתונים לאחסון חדש"</string>
-    <string name="storage_wizard_migrate_body" msgid="1630853797296198275">"אפשר להעביר את התמונות, הקבצים וחלק מהאפליקציות אל ה-<xliff:g id="NAME">^1</xliff:g> החדש הזה. \n\nההעברה אורכת כ-<xliff:g id="TIME">^2</xliff:g> ותפנה <xliff:g id="SIZE">^3</xliff:g> מהאחסון הפנימי. אפליקציות מסוימות לא יעבדו במהלך ההעברה."</string>
-    <string name="storage_wizard_migrate_now" msgid="175023718337037181">"ביצוע העברה עכשיו"</string>
-    <string name="storage_wizard_migrate_later" msgid="6573789572520980112">"העברה במועד מאוחר יותר"</string>
-    <string name="storage_wizard_migrate_confirm_title" msgid="255346780598924540">"העברת נתונים כעת"</string>
-    <string name="storage_wizard_migrate_confirm_body" msgid="5039938578355576124"><b>"ההעברה אורכת בערך <xliff:g id="TIME">^1</xliff:g>. היא תשחרר <xliff:g id="SIZE">^2</xliff:g> ב<xliff:g id="NAME">^3</xliff:g>."</b></string>
-    <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"העברה"</string>
-    <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"העברת נתונים..."</string>
-    <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"במהלך ההעברה: \n• אין להסיר את <xliff:g id="NAME">^1</xliff:g>. \n• אפליקציות מסוימות לא יעבדו באופן תקין. \n• יש להשאיר את המכשיר בטעינה."</string>
     <string name="storage_wizard_ready_title" msgid="3631022511474086605">"הפירמוט של <xliff:g id="NAME">^1</xliff:g> הושלם"</string>
-    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"אפשר להתחיל להשתמש ב<xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"אפשר להתחיל להשתמש ב<xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"העברת <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"העברת <xliff:g id="APP">^1</xliff:g> והנתונים שבה אל <xliff:g id="NAME_0">^2</xliff:g> אורכת מספר דקות בלבד. אי אפשר להשתמש באפליקציה לפני השלמת ההעברה. \n\nמומלץ שלא להסיר את ה-<xliff:g id="NAME_1">^2</xliff:g> במהלך ההעברה."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"כדי להעביר נתונים יש לבטל את נעילת המשתמש <xliff:g id="APP">^1</xliff:g>."</string>
     <string name="storage_wizard_move_progress_title" msgid="3912406225614672391">"העברת <xliff:g id="APP">^1</xliff:g>…"</string>
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"אין להסיר את ה-<xliff:g id="NAME">^1</xliff:g> במהלך ההעברה. \n\nהאפליקציה <xliff:g id="APP">^2</xliff:g> לא תהיה זמינה במכשיר לפני השלמת ההעברה."</string>
-    <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"ביטול העברה"</string>
-    <string name="storage_wizard_slow_body" msgid="8293565076885232029">"נראה שפעולת ה-<xliff:g id="NAME_0">^1</xliff:g> הזה איטית. \n\nתוכל להמשיך, אבל אפליקציות שהועברו אל המיקום הזה עשויות לפעול באופן מקוטע והעברות הנתונים עשויות לארוך זמן רב. \n\nמומלץ להשתמש ב-<xliff:g id="NAME_1">^1</xliff:g> מהיר יותר לשיפור הביצועים."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"למה ישמש <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"‏פירמוט של כרטיס SD לאחסון פנימי"</string>
     <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"‏ניתן לאחסן את האפליקציות והמדיה לשימוש בטאבלט הזה בלבד. &gt;a href=https://support.google.com/android/answer/12153449&lt;מידע נוסף על ההגדרה של כרטיס SD‏&gt;/a&lt;"</string>
@@ -1848,9 +1748,6 @@
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"‏שיתוף אינטרנט ב-Bluetooth"</string>
     <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"‏שיתוף החיבור לאינטרנט של הטאבלט דרך Bluetooth"</string>
     <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"‏שיתוף האינטרנט של הטלפון דרך Bluetooth"</string>
-    <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"‏החיבור לאינטרנט של <xliff:g id="DEVICE_NAME">%1$d</xliff:g> זה משותף דרך Bluetooth"</string>
-    <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"לא ניתן לשתף אינטרנט בין למעלה מ-<xliff:g id="MAXCONNECTION">%1$d</xliff:g> מכשירים."</string>
-    <string name="bluetooth_untether_blank" msgid="5087548945727762308">"קשירת <xliff:g id="DEVICE_NAME">%1$s</xliff:g> תבוטל."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"שיתוף אינטרנט דרך אתרנט"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"שיתוף האינטרנט של הטלפון דרך אתרנט"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"‏בעזרת נקודה לשיתוף אינטרנט (hotspot) ושיתוף אינטרנט בין ניידים (tethering) אפשר לתת למכשירים אחרים להתחבר לאינטרנט דרך חבילת הגלישה שלך. יש גם אפליקציות ליצירת נקודת אינטרנט ולשיתוף תכנים בין מכשירים שנמצאים בקרבת מקום."</string>
@@ -2082,8 +1979,6 @@
     <string name="application_size_label" msgid="6407051020651716729">"גודל האפליקציה"</string>
     <string name="external_code_size_label" msgid="7375146402660973743">"‏אפליקציה של אחסון USB"</string>
     <string name="data_size_label" msgid="7814478940141255234">"נתוני משתמש"</string>
-    <string name="external_data_size_label" product="nosdcard" msgid="1054860423004751290">"‏נתוני אחסון USB"</string>
-    <string name="external_data_size_label" product="default" msgid="3370825186202856353">"‏כרטיס SD"</string>
     <string name="uninstall_text" msgid="315764653029060126">"הסרת התקנה"</string>
     <string name="uninstall_all_users_text" msgid="5924715251087176474">"להסרת התקנה עבור כל המשתמשים"</string>
     <string name="install_text" msgid="4558333621516996473">"התקנה"</string>
@@ -2117,8 +2012,6 @@
     <string name="filter_apps_disabled" msgid="5068011814871004105">"אפליקציות מושבתות"</string>
     <string name="filter_apps_third_party" msgid="9049447784849114843">"הורדו"</string>
     <string name="filter_apps_running" msgid="535465683273284141">"פועלות"</string>
-    <string name="filter_apps_onsdcard" product="nosdcard" msgid="5140211657134608469">"‏אחסון USB"</string>
-    <string name="filter_apps_onsdcard" product="default" msgid="1774499644768369891">"‏בכרטיס SD"</string>
     <string name="not_installed" msgid="5074606858798519449">"לא מותקן עבור משתמש זה"</string>
     <string name="installed" msgid="2837449358488825884">"מותקנת"</string>
     <string name="no_applications" msgid="985069304755391640">"אין אפליקציות."</string>
@@ -2129,7 +2022,6 @@
     <string name="dlg_ok" msgid="1421350367857960997">"אישור"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"ביטול"</string>
     <string name="dlg_delete" msgid="1790919205039397659">"מחיקה"</string>
-    <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"האפליקציה לא נמצאת ברשימת האפליקציות המותקנות."</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"לא ניתן לפנות שטח אחסון לאפליקציה."</string>
     <string name="join_two_items" msgid="7893073836681382429">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g> וגם <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
@@ -2138,10 +2030,6 @@
     <string name="invalid_size_value" msgid="7017371543563259201">"לא ניתן לחשב את גודל החבילה."</string>
     <string name="version_text" msgid="7628938665256107608">"גרסה <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5421158479447276791">"העברה"</string>
-    <string name="move_app_to_internal" product="tablet" msgid="5799782476959541144">"העברה לטאבלט"</string>
-    <string name="move_app_to_internal" product="default" msgid="7395498801589544372">"העברה לטלפון"</string>
-    <string name="move_app_to_sdcard" product="nosdcard" msgid="1145367822171576972">"‏העברה להתקן USB"</string>
-    <string name="move_app_to_sdcard" product="default" msgid="7161667212614143767">"‏העברה לכרטיס SD"</string>
     <string name="another_migration_already_in_progress" msgid="6550546307856052261">"העברה אחרת מתבצעת כבר."</string>
     <string name="insufficient_storage" msgid="8115088042669030558">"אין מספיק שטח אחסון."</string>
     <string name="does_not_exist" msgid="6499163879348776120">"האפליקציה לא קיימת."</string>
@@ -2207,10 +2095,13 @@
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="2625863973434309085">"אם מפסיקים שירות זה, תכונות מסוימות של הטלפון עלולות להפסיק לפעול כהלכה עד לכיבוי המכשיר והפעלתו מחדש."</string>
     <string name="language_input_gesture_title" msgid="3292455685728572960">"שפות, קלט ותנועות"</string>
     <string name="language_settings" msgid="8700174277543875046">"שפות וקלט"</string>
+    <string name="languages_settings" msgid="5784775502251770671">"שפות"</string>
+    <string name="keyboard_settings" msgid="184185708597386454">"מקלדת"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"אין לך הרשאה לשנות את השפה במכשיר."</string>
     <string name="language_keyboard_settings_title" msgid="7934844313233544557">"שפות וקלט"</string>
     <string name="input_assistance" msgid="3437568284144952104">"כלים"</string>
     <string name="keyboard_settings_category" msgid="5392847229300117064">"מקלדת ושיטות קלט"</string>
+    <string name="system_language" msgid="1146762166579643257">"שפות מערכת"</string>
     <string name="phone_language" msgid="5986939176239963826">"שפות"</string>
     <string name="phone_language_summary" msgid="863041222809685325"></string>
     <string name="auto_replace" msgid="4830732960264447043">"החלפה אוטומטית"</string>
@@ -2276,15 +2167,14 @@
     <string name="input_method" msgid="2982805181425436775">"שיטת קלט"</string>
     <string name="current_input_method" msgid="3471068842881330883">"מקלדת נוכחית"</string>
     <string name="input_method_selector" msgid="8463209725824763600">"בורר שיטות קלט"</string>
-    <string name="input_method_selector_show_automatically_title" msgid="6483428482089875034">"אוטומטי"</string>
-    <string name="input_method_selector_always_show_title" msgid="2479533500357556146">"יופיע תמיד"</string>
-    <string name="input_method_selector_always_hide_title" msgid="807424180027384849">"הסתרה תמידית"</string>
     <string name="configure_input_method" msgid="8831343065130376880">"הגדר שיטות קלט"</string>
     <string name="input_method_settings" msgid="4177883733022569830">"הגדרות"</string>
     <string name="input_method_settings_button" msgid="5145039044301426311">"הגדרות"</string>
     <string name="input_methods_settings_label_format" msgid="5809693308957109022">"הגדרות <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
     <string name="input_methods_and_subtype_enabler_title" msgid="8940326108334307057">"בחירת שיטות קלט פעילות"</string>
     <string name="onscreen_keyboard_settings_summary" msgid="3975358507879701606">"הגדרות מקלדת במסך"</string>
+    <string name="keyboard_settings_summary" msgid="2716339620942356432">"מקלדת שמופיעה במסך, דיבור, כלים"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"מקלדת שמופיעה במסך, מקלדת פיזית, דיבור, כלים"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"מקלדת פיזית"</string>
     <string name="builtin_keyboard_settings_summary" msgid="4332792334499933856">"הגדרות מקלדת פיזית"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"בחירת גאדג\'ט"</string>
@@ -2410,7 +2300,6 @@
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"הלחצן \'נגישות\' מוגדר לשירות <xliff:g id="SERVICE">%1$s</xliff:g>. כדי להשתמש בהגדלה, יש ללחוץ לחיצה ארוכה על לחצן הנגישות ולאחר מכן לבחור בהגדלה."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"תנועת הנגישות מוגדרת לשירות <xliff:g id="SERVICE">%1$s</xliff:g>. כדי להשתמש בהגדלה, יש להחליק מעלה מהחלק התחתון של המסך באמצעות שתי אצבעות ולהחזיק. לאחר מכן יש לבחור באפשרות \'הגדלה\'."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="3713636732641882959">"מקש עוצמת הקול כמקש קיצור"</string>
-    <string name="accessibility_shortcut_service_title" msgid="6842883700702723355">"שירות קיצורי דרך"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"הגדרות של קיצורי דרך"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"מקש קיצור ממסך הנעילה"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"מקש הקיצור של תכונות הנגישות יפעל ממסך הנעילה. לוחצים על שני הלחצנים של עוצמת הקול למשך מספר שניות."</string>
@@ -2481,8 +2370,6 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"זמן לחיצה אוטומטית"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"רטט ומשוב פיזי"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"שליטה בעוצמת הרטט לשימושים שונים"</string>
-    <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"מופעלת"</string>
-    <string name="accessibility_vibration_settings_state_off" msgid="7946588741954981703">"כבויה"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"ההגדרה הושבתה מפני שהמכשיר מוגדר למצב שקט"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"שיחות"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"התראות"</string>
@@ -2536,20 +2423,12 @@
     <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, אוזן ימין בלבד"</string>
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, אוזן שמאל ואוזן ימין"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ועוד אחד"</string>
-    <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
-      <item quantity="two"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> מכשירי שמיעה נשמרו</item>
-      <item quantity="many"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> מכשירי שמיעה נשמרו</item>
-      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> מכשירי שמיעה נשמרו</item>
-      <item quantity="one">מכשיר שמיעה אחד (<xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g>) נשמר</item>
-    </plurals>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"כוונון אודיו"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"תיאור האודיו"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"השמעת תיאור של מה שמוצג במסך בתוכניות ובסרטים שתומכים בתכונה הזו"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"תיאור אודיו, תיאור האודיו, אודיו, שמע, תיאור, לקוי ראייה, ליקוי ראייה,"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"מקש הקיצור פועל"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"מצב כבוי"</string>
-    <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"פועל"</string>
-    <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"כבוי"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"לא פועל. יש להקיש לקבלת מידע."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"יש תקלה בשירות הזה."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"מקשי קיצור לנגישות"</string>
@@ -2599,8 +2478,6 @@
       <item quantity="one">שנייה אחת (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g>)</item>
     </plurals>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"הגדרות"</string>
-    <string name="accessibility_feature_state_on" msgid="1777344331063467511">"מצב פעיל"</string>
-    <string name="accessibility_feature_state_off" msgid="169119895905460512">"מצב כבוי"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"תצוגה מקדימה"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"אפשרויות רגילות"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"שפה"</string>
@@ -2674,7 +2551,6 @@
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"סריקה לאיתור מכשירים בקרבת מקום"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"מכשירים שמורים"</string>
     <string name="print_settings" msgid="8519810615863882491">"הדפסה"</string>
-    <string name="print_settings_summary_no_service" msgid="6721731154917653862">"כבוי"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
       <item quantity="two"><xliff:g id="COUNT">%1$d</xliff:g> שירותי הדפסה פועלים</item>
       <item quantity="many"><xliff:g id="COUNT">%1$d</xliff:g> שירותי הדפסה פועלים</item>
@@ -2692,8 +2568,6 @@
     <string name="print_no_printers_found" msgid="4833082484646109486">"לא נמצאו מדפסות"</string>
     <string name="print_menu_item_settings" msgid="8202755044784599740">"הגדרות"</string>
     <string name="print_menu_item_add_printers" msgid="7958192149202584039">"הוספת מדפסות"</string>
-    <string name="print_feature_state_on" msgid="7132063461008624685">"פועל"</string>
-    <string name="print_feature_state_off" msgid="1466195699995209446">"כבוי"</string>
     <string name="print_menu_item_add_service" msgid="1549091062463044676">"הוספת שירות"</string>
     <string name="print_menu_item_add_printer" msgid="8711630848324870892">"הוספת מדפסת"</string>
     <string name="print_menu_item_search" msgid="5989979785203603169">"חיפוש"</string>
@@ -2761,9 +2635,10 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"שימוש מוגבר בסוללה"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"האפליקציות המובילות במידת השימוש בסוללה"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"הטעינה הושהתה"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4236185146380247801">"כדאי להגן על הסוללה כדי להאריך את חיי הסוללה\nאפשר להקיש כדי לקרוא מידע נוסף"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"כדאי להגן על הסוללה כדי להאריך את חיי הסוללה"</string>
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
     <skip />
+    <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"מידע נוסף על השהיית הטעינה"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"המשך הטעינה"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"בתנאים מסוימים, למשל בטמפרטורה גבוהה או כשטעינה נמשכת הרבה זמן, יכול להיות שהיא תוגבל ל-<xliff:g id="PERCENT">%1$s</xliff:g> כדי לשמור על תקינות הסוללה.\n\nכשהתנאים ישתנו בחזרה, הטלפון יחזור להיטען כרגיל באופן אוטומטי."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"במצבים מסוימים, כמו טמפרטורה גבוהה וטעינה במשך הרבה זמן, יכול להיות שתהיה הגבלה של <xliff:g id="PERCENT">%1$s</xliff:g> על הטעינה כדי לשמור על תקינות הסוללה.\n\nכשמצבים כאלה מסתיימים, טעינת הטאבלט תחזור למצב הרגיל באופן אוטומטי."</string>
@@ -2923,8 +2798,10 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"ברקע: פחות מדקה"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"סה\"כ: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"ברקע: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"נתוני השימוש בסוללה משוערים ולא כוללים מדדים של השימוש בסוללה כשהטלפון בטעינה"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"נתוני השימוש בסוללה יהיו זמינים לאחר שייעשה שימוש בטלפון שלך במשך מספר שעות"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"נתוני השימוש בסוללה משוערים ולא כוללים מדדים של השימוש בסוללה כשהטלפון בטעינה"</string>
+    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"נתוני השימוש בסוללה משוערים ולא כוללים מדדים של השימוש בסוללה כשהטאבלט בטעינה"</string>
+    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"נתוני השימוש בסוללה משוערים ולא כוללים מדדים של השימוש בסוללה כשהמכשיר בטעינה"</string>
+    <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"נתוני השימוש בסוללה יהיו זמינים בעוד כמה שעות, כשהמכשיר יהיה טעון במלואו"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"תרשים של השימוש בסוללה"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"תרשים של השימוש היומי בסוללה"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"תרשים של השימוש השעתי בסוללה"</string>
@@ -2991,8 +2868,6 @@
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> לא מאובטח"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptive Connectivity"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"האפשרות הזו מאריכה את חיי הסוללה ומשפרת את ביצועי המכשיר על ידי ניהול אוטומטי של חיבורי הרשת שלך"</string>
-    <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"מצב פעיל"</string>
-    <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"כיבוי"</string>
     <string name="credentials_title" msgid="7535942196886123656">"אחסון פרטי כניסה"</string>
     <string name="credentials_install" msgid="3933218407598415827">"התקנת אישור"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"התקנת אישורים מאמצעי אחסון"</string>
@@ -3040,8 +2915,6 @@
     <string name="emergency_tone_title" msgid="6673118505206685168">"אות לחיוג חירום"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"הגדרת אופן פעולה בעת ביצוע שיחת חירום"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"גיבוי"</string>
-    <string name="backup_summary_state_on" msgid="9018954639693085240">"פועל"</string>
-    <string name="backup_summary_state_off" msgid="5341339397224835909">"כבוי"</string>
     <string name="backup_section_title" msgid="6539706829848457794">"גיבוי ושחזור"</string>
     <string name="personal_data_section_title" msgid="6368610168625722682">"נתונים אישיים"</string>
     <string name="backup_data_title" msgid="507663517227498525">"גיבוי הנתונים שלי"</string>
@@ -3139,7 +3012,6 @@
     <string name="select_all" msgid="7898929601615536401">"בחירת הכול"</string>
     <string name="data_usage_summary_title" msgid="394067070764360142">"שימוש בנתונים"</string>
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"‏חבילת גלישה ו-Wi‑Fi"</string>
-    <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"סנכרון אוטומטי של נתונים"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"סנכרון אוטומטי לנתונים האישיים"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"סנכרון אוטומטי של נתוני העבודה"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"שינוי הגדרת המחזור…"</string>
@@ -3514,12 +3386,6 @@
     <string name="sim_selection_required_pref" msgid="231437651041498359">"יש לציין בחירה"</string>
     <string name="sim_selection_channel_title" msgid="3193666315607572484">"‏בחירת SIM"</string>
     <string name="dashboard_title" msgid="5660733037244683387">"הגדרות"</string>
-    <plurals name="settings_suggestion_header_summary_hidden_items" formatted="false" msgid="6585075562837786847">
-      <item quantity="two">‏הצגת %d פריטים מוסתרים</item>
-      <item quantity="many">‏הצגת %d פריטים מוסתרים</item>
-      <item quantity="other">‏הצגת %d פריטים מוסתרים</item>
-      <item quantity="one">‏הצגת פריט %d מוסתר</item>
-    </plurals>
     <string name="network_dashboard_title" msgid="788543070557731240">"רשת ואינטרנט"</string>
     <string name="network_dashboard_summary_mobile" msgid="7750924671970583670">"‏נייד, Wi‑Fi, נקודת אינטרנט (Hotspot)"</string>
     <string name="network_dashboard_summary_no_mobile" msgid="4022575916334910790">"‏Wi-Fi, נקודת אינטרנט (Hotspot)"</string>
@@ -3542,6 +3408,7 @@
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"סיסמאות שמורות, מילוי אוטומטי, חשבונות מסונכרנים"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"אפליקציות ברירת מחדל"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"שפות, תנועות, שעה, גיבוי"</string>
+    <string name="languages_setting_summary" msgid="4924440599794956443">"שפות מערכת, שפות אפליקציה"</string>
     <string name="search_results_title" msgid="3360639917793022533">"הגדרות"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"‏wifi, Wi-Fi, חיבור רשת, אינטרנט, אלחוטי, נתונים, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"‏התראת Wi‑Fi, התראת wifi"</string>
@@ -3682,7 +3549,6 @@
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"רמקול של טלפון"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"אוזניות חוטיות"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"אודיו שמגיע ממכשירי מדיה תואמים יוצר חוויה עשירה יותר"</string>
-    <string name="spatial_summary_off" msgid="8272678804629774378">"התכונה כבויה"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"התכונה פועלת / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"התכונה פועלת / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> ו<xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"‏אפשר להפעיל גם \'אודיו מרחבי\' עבור מכשירי Bluetooth."</string>
@@ -3755,7 +3621,6 @@
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"עדיפות בלבד"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"פועל / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"פועל"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"יש לשאול בכל פעם"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"עד הכיבוי"</string>
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{שעה}two{שעתיים}many{# שעות}other{# שעות}}"</string>
@@ -3970,12 +3835,6 @@
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"לאילו אפליקציות ומכשירים תהיה אפשרות לקרוא התראות"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"הגישה חסומה להתראות של פרופיל העבודה"</string>
     <string name="manage_notification_access_summary_zero" msgid="7528633634628627431">"לאפליקציות אין אפשרות לקרוא התראות"</string>
-    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="3703008881487586312">
-      <item quantity="two">‏%d אפליקציות יכולות לקרוא התראות</item>
-      <item quantity="many">‏%d אפליקציות יכולות לקרוא התראות</item>
-      <item quantity="other">‏%d אפליקציות יכולות לקרוא התראות</item>
-      <item quantity="one">‏אפליקציה %d יכולה לקרוא התראות</item>
-    </plurals>
     <string name="notification_assistant_title" msgid="5889201903272393099">"התראות משופרות"</string>
     <string name="notification_assistant_summary" msgid="1957783114840908887">"קבלת הצעות לפעולות, לתשובות ועוד"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"אין"</string>
@@ -4059,12 +3918,6 @@
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"‏לבקשתך, מערכת Android לא מאפשרת להציג במכשיר הזה התראות מקבוצה זו"</string>
     <string name="notification_channels" msgid="1502969522886493799">"קטגוריות"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"אחר"</string>
-    <plurals name="notification_group_summary" formatted="false" msgid="483490958130993160">
-      <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> קטגוריות</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> קטגוריות</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> קטגוריות</item>
-      <item quantity="one">קטגוריה אחת (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
-    </plurals>
     <string name="no_channels" msgid="4716199078612071915">"האפליקציה הזו לא שלחה התראות"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"הגדרות נוספות באפליקציה"</string>
     <string name="notification_screen_summary" msgid="5984915275134654822">"היסטוריית התראות, בועות, התראות שנשלחו לאחרונה"</string>
@@ -4081,8 +3934,6 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> קטגוריות נמחקו</item>
       <item quantity="one">קטגוריה <xliff:g id="COUNT_0">%d</xliff:g> נמחקה</item>
     </plurals>
-    <string name="notification_toggle_on" msgid="1624283327379059003">"מופעל"</string>
-    <string name="notification_toggle_off" msgid="3295373308338024844">"כבוי"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"לחסום הכול"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"לעולם את תציג את ההתראות אלה"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"הצגת התראות"</string>
@@ -4266,12 +4117,6 @@
     <string name="suggestion_button_close" msgid="6865170855573283759">"סגירה"</string>
     <string name="device_feedback" msgid="5351614458411688608">"שליחת משוב על המכשיר הזה"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"יש להזין את קוד הגישה של מנהל המכשיר"</string>
-    <string name="switch_on_text" msgid="5664542327776075105">"פועל"</string>
-    <string name="switch_off_text" msgid="1315547447393646667">"מצב כבוי"</string>
-    <string name="nfc_setting_on" msgid="7701896496026725772">"התכונה פועלת"</string>
-    <string name="nfc_setting_off" msgid="7142103438532732309">"התכונה כבויה"</string>
-    <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"פועלת"</string>
-    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"מושבתת"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"הצמדת אפליקציה"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"התכונה \'הצמדת אפליקציה\' מאפשרת לקבע את האפליקציה הנוכחית בתצוגה עד לביטול ההצמדה. אפשר להשתמש בתכונה, למשל, כשנותנים לחבר מהימן לשחק במשחק מסוים."</string>
     <string name="screen_pinning_description" msgid="4305370471370474846">"לאחר הצמדת אפליקציה כלשהי, האפליקציה יכולה לפתוח אפליקציות אחרות ולאפשר גישה למידע האישי. \n\nכדי להשתמש בהצמדת אפליקציה: ←\n1. מפעילים את הצמדת האפליקציה ←\n2. פותחים את הסקירה הכללית ←\n3. מקישים על סמל האפליקציה שמופיע בחלק העליון של המסך ואז מקישים על \'הצמדה\'"</string>
@@ -4354,9 +4199,7 @@
     <string name="change" msgid="273206077375322595">"שינוי"</string>
     <string name="change_storage" msgid="8773820275624113401">"שינוי אחסון"</string>
     <string name="notifications_label" msgid="8471624476040164538">"התראות"</string>
-    <string name="notifications_enabled" msgid="7743168481579361019">"מופעל"</string>
     <string name="notifications_enabled_with_info" msgid="1808946629277684308">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
-    <string name="notifications_disabled" msgid="5603160425378437143">"כבויות"</string>
     <string name="notifications_partly_blocked" msgid="5738239705473445725">"<xliff:g id="COUNT_0">%1$d</xliff:g> מתוך <xliff:g id="COUNT_1">%2$d</xliff:g> קטגוריות כבויות"</string>
     <string name="notifications_silenced" msgid="2673798575466545098">"מושתקות"</string>
     <string name="notifications_redacted" msgid="8820993927920208612">"תוכן רגיש לא במסך הנעילה"</string>
@@ -4376,12 +4219,6 @@
       <item quantity="many">הוענקו <xliff:g id="COUNT_1">%d</xliff:g> הרשאות</item>
       <item quantity="other">הוענקו <xliff:g id="COUNT_1">%d</xliff:g> הרשאות</item>
       <item quantity="one">הוענקה הרשאה <xliff:g id="COUNT_0">%d</xliff:g></item>
-    </plurals>
-    <plurals name="runtime_permissions_summary" formatted="false" msgid="2091022049141391855">
-      <item quantity="two">הוענקו <xliff:g id="COUNT_2">%d</xliff:g> הרשאות מתוך <xliff:g id="COUNT_3">%d</xliff:g></item>
-      <item quantity="many">הוענקו <xliff:g id="COUNT_2">%d</xliff:g> הרשאות מתוך <xliff:g id="COUNT_3">%d</xliff:g></item>
-      <item quantity="other">הוענקו <xliff:g id="COUNT_2">%d</xliff:g> הרשאות מתוך <xliff:g id="COUNT_3">%d</xliff:g></item>
-      <item quantity="one">הוענקה הרשאה <xliff:g id="COUNT_0">%d</xliff:g> מתוך <xliff:g id="COUNT_1">%d</xliff:g></item>
     </plurals>
     <plurals name="runtime_permissions_additional_count" formatted="false" msgid="5888624648943937645">
       <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> הרשאות נוספות</item>
@@ -4426,12 +4263,6 @@
     <string name="domain_urls_summary_one" msgid="3312008753802762892">"פתיחה של <xliff:g id="DOMAIN">%s</xliff:g>"</string>
     <string name="domain_urls_summary_some" msgid="1197692164421314523">"‏פתיחה של <xliff:g id="DOMAIN">%s</xliff:g> וכתובות URL אחרות"</string>
     <string name="domain_urls_apps_summary_off" msgid="2534980824850890416">"אין אפליקציה שפותחת קישורים נתמכים"</string>
-    <plurals name="domain_urls_apps_summary_on" formatted="false" msgid="7864816862441985323">
-      <item quantity="two"><xliff:g id="COUNT">%d</xliff:g> אפליקציות פותחות קישורים נתמכים</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> אפליקציות פותחות קישורים נתמכים</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> אפליקציות פותחות קישורים נתמכים</item>
-      <item quantity="one">אפליקציה אחת פותחת קישורים נתמכים</item>
-    </plurals>
     <string name="app_link_open_always" msgid="9167065494930657503">"מתן הרשאה לאפליקציה לפתוח קישורים נתמכים"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"יש לשאול בכל פעם"</string>
     <string name="app_link_open_never" msgid="5299808605386052350">"לא לתת לאפליקציה הרשאה לפתוח קישורים"</string>
@@ -4479,18 +4310,6 @@
     <string name="additional_battery_info" msgid="3104208543623068714">"התראות על ניצול סוללה"</string>
     <string name="show_all_apps" msgid="4490719452453223082">"הצגת נתונים מלאים על השימוש במכשיר"</string>
     <string name="hide_extra_apps" msgid="7313907836289865123">"הצגת נתוני השימוש באפליקציה"</string>
-    <plurals name="power_high_usage_summary" formatted="false" msgid="573433136005336970">
-      <item quantity="two"><xliff:g id="NUMBER">%2$d</xliff:g> אפליקציות מתנהגות באופן חריג</item>
-      <item quantity="many"><xliff:g id="NUMBER">%2$d</xliff:g> אפליקציות מתנהגות באופן חריג</item>
-      <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> אפליקציות מתנהגות באופן חריג</item>
-      <item quantity="one"><xliff:g id="APP">%1$s</xliff:g> מתנהגת באופן חריג</item>
-    </plurals>
-    <plurals name="power_high_usage_title" formatted="false" msgid="8013115866788425817">
-      <item quantity="two">אפליקציות מרוקנות את הסוללה</item>
-      <item quantity="many">אפליקציות מרוקנות את הסוללה</item>
-      <item quantity="other">אפליקציות מרוקנות את הסוללה</item>
-      <item quantity="one">האפליקציה <xliff:g id="APP">%1$s</xliff:g> מרוקנת את הסוללה</item>
-    </plurals>
     <string name="high_power_filter_on" msgid="447849271630431531">"לא בוצעה אופטימיזציה"</string>
     <string name="high_power_on" msgid="8778058701270819268">"לא בוצעה אופטימיזציה"</string>
     <string name="high_power_off" msgid="317000444619279018">"מבצעת אופטימיזציה לשימוש בסוללה"</string>
@@ -4648,16 +4467,9 @@
     <string name="keyboard_disconnected" msgid="796053864561894531">"לא מחוברת"</string>
     <string name="data_usage_summary_format" msgid="6844301859713164522">"<xliff:g id="AMOUNT">%1$s</xliff:g> מהנתונים בשימוש"</string>
     <string name="data_usage_wifi_format" msgid="7644390582649568117">"‏נעשה שימוש ב-<xliff:g id="AMOUNT">^1</xliff:g> מהנתונים ב-Wi‑Fi"</string>
-    <plurals name="notification_summary" formatted="false" msgid="7638388920823212470">
-      <item quantity="two">כבויות עבור <xliff:g id="COUNT">%d</xliff:g> אפליקציות</item>
-      <item quantity="many">כבויות עבור <xliff:g id="COUNT">%d</xliff:g> אפליקציות</item>
-      <item quantity="other">כבויות עבור <xliff:g id="COUNT">%d</xliff:g> אפליקציות</item>
-      <item quantity="one">כבויות עבור אפליקציה אחת</item>
-    </plurals>
     <string name="notification_summary_none" msgid="9179312319023988089">"מופעלות לכל האפליקציות"</string>
     <string name="apps_summary" msgid="4007416751775414252">"הותקנו <xliff:g id="COUNT">%1$d</xliff:g> אפליקציות"</string>
     <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> בשימוש, <xliff:g id="FREE_SPACE">%2$s</xliff:g> פנויים"</string>
-    <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"אחסון פנימי: <xliff:g id="PERCENTAGE">%1$s</xliff:g> בשימוש – <xliff:g id="FREE_SPACE">%2$s</xliff:g> פנוי"</string>
     <string name="display_summary" msgid="5526061030874717172">"מעבר למצב שינה לאחר <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> של חוסר פעילות"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"עיצוב כהה, גודל הגופן, בהירות"</string>
     <string name="memory_summary" msgid="8221954450951651735">"ממוצע של <xliff:g id="USED_MEMORY">%1$s</xliff:g> מתוך <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> זיכרון בשימוש"</string>
@@ -4716,18 +4528,6 @@
     <string name="suggestions_title" msgid="61841299295602686">"הצעות"</string>
     <string name="suggestions_summary" msgid="1709710458908440469">"+<xliff:g id="ID_1">%1$d</xliff:g>"</string>
     <string name="suggestions_more_title" msgid="240124526378997009">"עוד <xliff:g id="ID_1">%1$d</xliff:g>"</string>
-    <plurals name="suggestions_collapsed_title" formatted="false" msgid="5023679825210836444">
-      <item quantity="two"><xliff:g id="COUNT">%1$d</xliff:g> הצעות</item>
-      <item quantity="many"><xliff:g id="COUNT">%1$d</xliff:g> הצעות</item>
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> הצעות</item>
-      <item quantity="one">הצעה אחת</item>
-    </plurals>
-    <plurals name="suggestions_collapsed_summary" formatted="false" msgid="3789011332018516832">
-      <item quantity="two"><xliff:g id="COUNT">%1$d</xliff:g> הצעות נוספות</item>
-      <item quantity="many"><xliff:g id="COUNT">%1$d</xliff:g> הצעות נוספות</item>
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> הצעות נוספות</item>
-      <item quantity="one">הצעה אחת נוספת</item>
-    </plurals>
     <string name="suggestion_remove" msgid="6753986344585367776">"הסרה"</string>
     <string name="color_temperature" msgid="8256912135746305176">"טמפרטורת צבעים קרים"</string>
     <string name="color_temperature_desc" msgid="6713259535885669622">"השתמש בצבעי תצוגה קרירים יותר"</string>
@@ -4753,12 +4553,6 @@
     <string name="cell_data_warning_and_limit" msgid="8393200831986035724">"אזהרה לגבי שימוש בנתונים – <xliff:g id="ID_1">^1</xliff:g> / מגבלת נתונים – <xliff:g id="ID_2">^2</xliff:g>"</string>
     <string name="billing_cycle_fragment_summary" msgid="6346655500491631357">"כל חודש ב-<xliff:g id="ID_1">%1$s</xliff:g> בחודש"</string>
     <string name="network_restrictions" msgid="8385824604048229846">"הגבלות רשת"</string>
-    <plurals name="network_restrictions_summary" formatted="false" msgid="3875128958788008975">
-      <item quantity="two"><xliff:g id="COUNT">%1$d</xliff:g> הגבלות</item>
-      <item quantity="many"><xliff:g id="COUNT">%1$d</xliff:g> הגבלות</item>
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> הגבלות</item>
-      <item quantity="one">הגבלה אחת</item>
-    </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"ייתכן שחישוב השימוש בנתונים אצל הספק יהיה שונה מזה שבמכשיר"</string>
     <string name="non_carrier_data_usage_warning" msgid="4707184871368847697">"לא כולל נתונים שמשמשים את רשתות הספק"</string>
     <string name="data_used_template" msgid="8229342096562327646">"נעשה שימוש ב-<xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -4801,8 +4595,6 @@
     <string name="data_saver_title" msgid="2593804270788863815">"‏חוסך הנתונים (Data Saver)"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"גישה בלתי מוגבלת לנתונים"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"נתוני הרקע כבויים"</string>
-    <string name="data_saver_on" msgid="7848893946018448793">"פועל"</string>
-    <string name="data_saver_off" msgid="5891210864117269045">"מצב כבוי"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"‏שימוש בחוסך הנתונים (Data Saver)"</string>
     <string name="unrestricted_app_title" msgid="7117585996574329284">"שימוש בלתי מוגבל בנתונים"</string>
     <string name="unrestricted_app_summary" msgid="282698963532000403">"‏גישה בלתי מוגבלת לנתונים כשחוסך הנתונים (Data Saver) פועל"</string>
@@ -4814,9 +4606,7 @@
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="8651761245246411947">"נדרשת סיסמה להפעלת המכשיר. כשהאפשרות כבויה, המכשיר הזה לא יכול לקבל שיחות, עדכונים, תזכורות או התראות."</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"הוספת טביעת אצבע"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"ביטול נעילה עם אצבע אחרת"</string>
-    <string name="battery_saver_on_summary" msgid="4605146593966255848">"פועל"</string>
     <string name="battery_saver_off_scheduled_summary" msgid="2193875981740829819">"יופעל כשהסוללה תגיע ל-<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_off_summary" msgid="4411561435493109261">"כבוי"</string>
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"הפעלה עכשיו"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"כיבוי עכשיו"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"לא נעשה שימוש באופטימיזציה של סוללה"</string>
@@ -4881,7 +4671,6 @@
     <string name="premium_sms_none" msgid="8737045049886416739">"‏לא התקבלה בקשת גישה ל-SMS פרימיום מאף אפליקציה מותקנת"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"‏פרימיום SMS עשוי לעלות כסף ויצורף לחשבונות הספק שלך. מתן הרשאה לאפליקציה יאפשר לך לשלוח פרימיום SMS באמצעות אפליקציה זו."</string>
     <string name="premium_sms_access" msgid="5605970342699013212">"‏גישה ל-SMS פרימיום"</string>
-    <string name="bluetooth_disabled" msgid="835838280837359514">"כבוי"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"מחובר אל <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"מחובר לכמה התקנים"</string>
     <string name="demo_mode" msgid="6566167465451386728">"מצב הדגמה בממשק המשתמש של המערכת"</string>
@@ -4902,24 +4691,6 @@
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"‏ייתכן שהשיחות הנכנסות והחיפושים שלך יהיו גלויים למנהל ה-IT"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"יומן למספר פרופילים"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"הצגת אירועי עבודה ביומן האישי"</string>
-    <plurals name="hours" formatted="false" msgid="1853396353451635458">
-      <item quantity="two"><xliff:g id="NUMBER">%s</xliff:g> שעות</item>
-      <item quantity="many"><xliff:g id="NUMBER">%s</xliff:g> שעות</item>
-      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> שעות</item>
-      <item quantity="one">שעה אחת</item>
-    </plurals>
-    <plurals name="minutes" formatted="false" msgid="6244503272924425418">
-      <item quantity="two"><xliff:g id="NUMBER">%s</xliff:g> דקות</item>
-      <item quantity="many"><xliff:g id="NUMBER">%s</xliff:g> דקות</item>
-      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> דקות</item>
-      <item quantity="one">דקה אחת</item>
-    </plurals>
-    <plurals name="seconds" formatted="false" msgid="4237020272336995370">
-      <item quantity="two"><xliff:g id="NUMBER">%s</xliff:g> שניות</item>
-      <item quantity="many"><xliff:g id="NUMBER">%s</xliff:g> שניות</item>
-      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> שניות</item>
-      <item quantity="one">שנייה אחת</item>
-    </plurals>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"ניהול אחסון"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"כדי לעזור בפינוי שטח אחסון, מנהל האחסון מסיר מהמכשיר שלך תמונות וסרטונים מגובים."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"הסרת תמונות וסרטונים"</string>
@@ -5011,8 +4782,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"כדי לבדוק התראות יש להחליק כלפי מטה בחיישן טביעות האצבע שבחלק האחורי של הטאבלט."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3888927017311372398">"כדי לבדוק התראות יש להחליק כלפי מטה בחיישן טביעות האצבע שבחלק האחורי של המכשיר."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"הצגה מהירה של ההתראות"</string>
-    <string name="gesture_setting_on" msgid="3223448394997988591">"מצב פעיל"</string>
-    <string name="gesture_setting_off" msgid="3444029475726294919">"מצב כבוי"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="65713754674288193">"הנעילה של תוכנת האתחול כבר בוטלה"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="8045017109714463041">"תחילה יש להתחבר לאינטרנט"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="7425519481227423860">"צריך להתחבר לאינטרנט או ליצור קשר עם הספק"</string>
@@ -5252,7 +5021,6 @@
     <string name="gesture_prevent_ringing_sound_title" msgid="4529077822282099235">"קיצור דרך למניעת צלצול"</string>
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"רטט"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"השתקה"</string>
-    <string name="prevent_ringing_option_none" msgid="7776676007180834163">"לא לבצע שום פעולה"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"רטט"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"השתקה"</string>
     <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"כדי להפעיל, קודם צריך לשנות את \'לחיצה ארוכה על לחצן ההפעלה\' לתפריט ההפעלה."</string>
@@ -5333,12 +5101,6 @@
     <string name="sms_preference" msgid="7742964962568219351">"‏העדפת SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"יש לשאול בכל פעם"</string>
     <string name="mobile_network_summary_add_a_network" msgid="9079866102827526779">"הוספת רשת"</string>
-    <plurals name="mobile_network_summary_count" formatted="false" msgid="5173633860800230925">
-      <item quantity="two">‏<xliff:g id="COUNT_1">%1$d</xliff:g> כרטיסי SIM</item>
-      <item quantity="many">‏<xliff:g id="COUNT_1">%1$d</xliff:g> כרטיסי SIM</item>
-      <item quantity="other">‏<xliff:g id="COUNT_1">%1$d</xliff:g> כרטיסי SIM</item>
-      <item quantity="one">‏כרטיס SIM אחד (‏<xliff:g id="COUNT_0">%1$d</xliff:g>)</item>
-    </plurals>
     <string name="default_for_calls" msgid="2788950217176988034">"ברירת מחדל לשירות"</string>
     <string name="default_for_sms" msgid="1316988329407434771">"‏ברירת מחדל ל-SMS"</string>
     <string name="default_for_calls_and_sms" msgid="8223971369339958151">"‏ברירת מחדל לשיחות ו-SMS"</string>
@@ -5358,7 +5120,6 @@
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"צבע (בשימוש על ידי אפליקציות תואמות)"</string>
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"שמירה"</string>
     <string name="mobile_network_use_sim_on" msgid="7298332437547707908">"‏שימוש ב-SIM"</string>
-    <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"מושבת"</string>
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"‏כדי להשבית את ה-SIM הזה, יש להסיר את כרטיס ה-SIM"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"יש להקיש כדי להפעיל את <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"לעבור אל <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -5489,12 +5250,6 @@
     <string name="permission_bar_chart_empty_text" msgid="4856719891991325077">"אפס אפליקציות השתמשו בהרשאות"</string>
     <string name="permission_bar_chart_title" msgid="2493212904955611441">"שימוש בהרשאות ב-24 השעות האחרונות"</string>
     <string name="permission_bar_chart_details" msgid="5816698018592357088">"הצגת כל הפרטים במרכז השליטה"</string>
-    <plurals name="permission_bar_chart_label" formatted="false" msgid="4853396794340896078">
-      <item quantity="two"><xliff:g id="NUMBER">%s</xliff:g> אפליקציות</item>
-      <item quantity="many"><xliff:g id="NUMBER">%s</xliff:g> אפליקציות</item>
-      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> אפליקציות</item>
-      <item quantity="one">אפליקציה אחת</item>
-    </plurals>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"שימוש בנגישות"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="6910643986958263005">
       <item quantity="two">ל-<xliff:g id="SERVICE_COUNT">%1$d</xliff:g> אפליקציות יש גישה מלאה למכשיר שלך</item>
@@ -5588,18 +5343,14 @@
     <string name="media_controls_title" msgid="403271085636252597">"מדיה"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"הצמדה של נגן המדיה"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"לצורך המשך מהיר של ההפעלה, נגן המדיה נשאר פתוח בהגדרות המהירות"</string>
-    <!-- no translation found for media_controls_lockscreen_title (2188311721857512510) -->
-    <skip />
-    <!-- no translation found for media_controls_lockscreen_description (3320333660404439510) -->
-    <skip />
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"הצגת מדיה במסך הנעילה"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"כדי שתהיה לך אפשרות להמשיך במהירות את ההפעלה, נגן המדיה נשאר פתוח במסך הנעילה"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"הצגת המלצות על מדיה"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"על סמך הפעילות שלך"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"הסתרת הנגן"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"הצגת הנגן"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"מדיה"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"‏Bluetooth יופעל"</string>
-    <string name="bluetooth_setting_on" msgid="4808458394436224124">"התכונה פועלת"</string>
-    <string name="bluetooth_setting_off" msgid="4965493913199554789">"התכונה כבויה"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"אינטרנט"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"‏כרטיסי SIM"</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"טיסה, בטוח לטיסה"</string>
@@ -5701,7 +5452,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"‏אישור שימוש ב-2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"‏רמת האבטחה של רשתות 2G נמוכה יותר, אבל הן עשויות לשפר את החיבור שלך במיקומים מסוימים. לרשתות 2G תמיד ניתנת הרשאה כשצריך לבצע שיחות חירום."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"‏לצורך זמינות ב-<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> נדרשת רשת 2G"</string>
-    <string name="app_info_all_services_label" msgid="3600929226735860271">"כל השירותים"</string>
+    <!-- no translation found for app_info_all_services_label (1487070364839071105) -->
+    <skip />
     <string name="show_clip_access_notification" msgid="7782300987639778542">"הצגת גישה ללוח העריכה"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"הצגת הודעה בזמן גישה של אפליקציות לטקסט, לתמונות או לכל תוכן אחר שהעתקת"</string>
     <string name="all_apps" msgid="3054120149509114789">"כל האפליקציות"</string>
@@ -5728,8 +5480,6 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"אין להתחבר"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"התחברות"</string>
     <string name="tare_settings" msgid="3788654800004869077">"‏הגדרות TARE"</string>
-    <string name="tare_on" msgid="2386073225978684535">"התכונה מופעלת"</string>
-    <string name="tare_off" msgid="6305694402929756726">"התכונה כבויה"</string>
     <string name="tare_revert" msgid="3855325741125236638">"חזרה להגדרות ברירת המחדל"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"ההגדרות חזרו לברירת המחדל."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"יתרה מקסימלית במצב מלא"</string>
@@ -5773,7 +5523,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"תצוגה מקדימה"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"בחירה של שומר מסך"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"הצגת מידע נוסף"</string>
-    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"‏הצגת השעה, התאריך, מזג האוויר, איכות האוויר ופרטי ההעברה (cast) בשומר המסך"</string>
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"הצגת פרטים כמו השעה, מזג האוויר ומידע אחר בשומר המסך"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"הגדרות נוספות"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"בחירת שומר המסך"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"אפשר לבחור מה יוצג במסך כשהטאבלט בעגינה. יכול להיות שהמכשיר ינצל יותר אנרגיה בזמן השימוש בשומר מסך."</string>
