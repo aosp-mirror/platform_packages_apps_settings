@@ -4605,6 +4605,17 @@
             android:exported="false">
         </activity>
 
+        <activity
+            android:name="com.android.settings.applications.mobilebundledapps.MobileBundledAppDetailsActivity"
+            android:label="@string/mobile_bundled_apps_details_title"
+            android:exported="true"
+            android:icon="@drawable/ic_homepage_connected_device">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.TRANSPARENCY_METADATA" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
