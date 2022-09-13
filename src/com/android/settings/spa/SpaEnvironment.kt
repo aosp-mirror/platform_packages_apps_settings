@@ -17,7 +17,11 @@
 package com.android.settings.spa
 
 import com.android.settings.spa.app.AppsMainPageProvider
+import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
+import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
+import com.android.settings.spa.app.specialaccess.MediaManagementAppsAppListProvider
+import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settings.spa.app.specialaccess.SpecialAppAccessPageProvider
 import com.android.settings.spa.home.HomePageProvider
@@ -33,6 +37,10 @@ object SpaEnvironment {
     lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
         val togglePermissionAppListTemplate = TogglePermissionAppListTemplate(
             allProviders = listOf(
+                AllFilesAccessAppListProvider,
+                DisplayOverOtherAppsAppListProvider,
+                MediaManagementAppsAppListProvider,
+                ModifySystemSettingsAppListProvider,
                 InstallUnknownAppsListProvider,
                 PictureInPictureListProvider,
             ),
