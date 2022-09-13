@@ -16,6 +16,8 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -68,9 +70,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private static final int ENABLED_ICON_ALPHA = 255;
     private static final int DISABLED_ICON_ALPHA = 255 / 3;
 
-    private static final long FADE_ANIMATION_DURATION = 350L;
-    private static final long VALID_USAGE_TIME_DURATION = DateUtils.HOUR_IN_MILLIS * 2;
-    private static final long VALID_DIFF_DURATION = DateUtils.MINUTE_IN_MILLIS * 3;
+    private static final long FADE_IN_ANIMATION_DURATION = 400L;
+    private static final long FADE_OUT_ANIMATION_DURATION = 200L;
 
     // Keys for bundle instance to restore configurations.
     private static final String KEY_EXPAND_SYSTEM_INFO = "expand_system_info";
@@ -121,6 +122,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private final CharSequence[] mNotAllowShowSummaryPackages;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
+    private final AnimatorListenerAdapter mHourlyChartFadeInAdapter =
+            createHourlyChartAnimatorListenerAdapter(/*isToShow=*/ true);
+    private final AnimatorListenerAdapter mHourlyChartFadeOutAdapter =
+            createHourlyChartAnimatorListenerAdapter(/*isToShow=*/ false);
 
     // Preference cache to avoid create new instance each time.
     @VisibleForTesting
@@ -382,9 +387,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
         if (mDailyChartIndex == BatteryChartViewModel.SELECTED_INDEX_ALL) {
             // Multiple days are selected, hide the hourly chart view.
-            mHourlyChartView.setVisibility(View.GONE);
+            animateBatteryHourlyChartView(/*isToShow=*/ false);
         } else {
-            mHourlyChartView.setVisibility(View.VISIBLE);
+            animateBatteryHourlyChartView(/*isToShow=*/ true);
             final BatteryChartViewModel hourlyViewModel = mHourlyViewModels.get(mDailyChartIndex);
             hourlyViewModel.setSelectedIndex(mHourlyChartIndex);
             mHourlyChartView.setViewModel(hourlyViewModel);
@@ -626,9 +631,53 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
     private void animateBatteryChartViewGroup() {
         if (mBatteryChartViewGroup != null && mBatteryChartViewGroup.getAlpha() == 0) {
-            mBatteryChartViewGroup.animate().alpha(1f).setDuration(FADE_ANIMATION_DURATION)
+            mBatteryChartViewGroup.animate().alpha(1f).setDuration(FADE_IN_ANIMATION_DURATION)
                     .start();
         }
+    }
+
+    private void animateBatteryHourlyChartView(final boolean isToShow) {
+        if (mHourlyChartView == null) {
+            return;
+        }
+
+        if (isToShow) {
+            mHourlyChartView.setAlpha(0f);
+            mHourlyChartView.setVisibility(View.VISIBLE);
+            mHourlyChartView.animate()
+                    .alpha(1f)
+                    .setDuration(FADE_IN_ANIMATION_DURATION)
+                    .setListener(mHourlyChartFadeInAdapter)
+                    .start();
+        } else {
+            mHourlyChartView.animate()
+                    .alpha(0f)
+                    .setDuration(FADE_OUT_ANIMATION_DURATION)
+                    .setListener(mHourlyChartFadeOutAdapter)
+                    .start();
+        }
+    }
+
+    private AnimatorListenerAdapter createHourlyChartAnimatorListenerAdapter(
+            final boolean isToShow) {
+        final int visibility = isToShow ? View.VISIBLE : View.GONE;
+
+        return new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                if (mHourlyChartView != null) {
+                    mHourlyChartView.setVisibility(visibility);
+                }
+            }
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                super.onAnimationCancel(animation);
+                if (mHourlyChartView != null) {
+                    mHourlyChartView.setVisibility(visibility);
+                }
+            }
+        };
     }
 
     private void addFooterPreferenceIfNeeded(boolean containAppItems) {
