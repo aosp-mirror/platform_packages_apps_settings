@@ -16,6 +16,9 @@
 
 package com.android.settings.network.telephony;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyBoolean;
@@ -92,7 +95,7 @@ public class RoamingPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_validSubId_returnAvailable() {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE);
+                AVAILABLE);
     }
 
     @Test
@@ -167,5 +170,30 @@ public class RoamingPreferenceControllerTest {
         mController.updateState(mPreference);
 
         verify(mPreference, never()).setEnabled(anyBoolean());
+    }
+
+    @Test
+    public void getAvailabilityStatus_carrierConfigIsNull_shouldReturnAvailable() {
+        doReturn(null).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_forceHomeNetworkIsFalse_shouldReturnAvailable() {
+        final PersistableBundle bundle = new PersistableBundle();
+        bundle.putBoolean(CarrierConfigManager.KEY_FORCE_HOME_NETWORK_BOOL, false);
+        doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_forceHomeNetworkIsTrue_shouldReturnConditionallyAvailable() {
+        final PersistableBundle bundle = new PersistableBundle();
+        bundle.putBoolean(CarrierConfigManager.KEY_FORCE_HOME_NETWORK_BOOL, false);
+        doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 }
