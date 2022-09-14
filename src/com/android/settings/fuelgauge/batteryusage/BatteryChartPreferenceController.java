@@ -31,6 +31,7 @@ import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -111,6 +112,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private View mCategoryTitleView;
     private PreferenceScreen mPreferenceScreen;
     private FooterPreference mFooterPreference;
+    private TextView mChartSummaryTextView;
     private BatteryChartViewModel mDailyViewModel;
     private List<BatteryChartViewModel> mHourlyViewModels;
 
@@ -121,9 +123,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final AnimatorListenerAdapter mHourlyChartFadeInAdapter =
-            createHourlyChartAnimatorListenerAdapter(/*isToShow=*/ true);
+            createHourlyChartAnimatorListenerAdapter(/*visible=*/ true);
     private final AnimatorListenerAdapter mHourlyChartFadeOutAdapter =
-            createHourlyChartAnimatorListenerAdapter(/*isToShow=*/ false);
+            createHourlyChartAnimatorListenerAdapter(/*visible=*/ false);
 
     @VisibleForTesting
     final DailyChartLabelTextGenerator mDailyChartLabelTextGenerator =
@@ -289,6 +291,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 getTotalHours(batteryLevelData));
 
         if (batteryLevelData == null) {
+            mDailyChartIndex = BatteryChartViewModel.SELECTED_INDEX_ALL;
+            mHourlyChartIndex = BatteryChartViewModel.SELECTED_INDEX_ALL;
             mDailyViewModel = null;
             mHourlyViewModels = null;
             refreshUi();
@@ -320,6 +324,11 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         if (mDailyChartView != dailyChartView || mHourlyChartView != hourlyChartView) {
             mHandler.post(() -> setBatteryChartViewInner(dailyChartView, hourlyChartView));
             animateBatteryChartViewGroup();
+        }
+        if (mBatteryChartViewGroup != null) {
+            final View grandparentView = (View) mBatteryChartViewGroup.getParent();
+            mChartSummaryTextView = grandparentView != null
+                    ? grandparentView.findViewById(R.id.chart_summary) : null;
         }
     }
 
@@ -367,8 +376,45 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             // Chart views are not initialized.
             return false;
         }
-        if (mDailyViewModel == null || mHourlyViewModels == null) {
-            // Fail to get battery level data, show an empty hourly chart view.
+
+        // When mDailyViewModel or mHourlyViewModels is null, there is no battery level data.
+        // This is mainly in 2 cases:
+        // 1) battery data is within 2 hours
+        // 2) no battery data in the latest 7 days (power off >= 7 days)
+        final boolean refreshUiResult = mDailyViewModel == null || mHourlyViewModels == null
+                ? refreshUiWithNoLevelDataCase()
+                : refreshUiWithLevelDataCase();
+
+        if (!refreshUiResult) {
+            return false;
+        }
+
+        mHandler.post(() -> {
+            final long start = System.currentTimeMillis();
+            removeAndCacheAllPrefs();
+            addAllPreferences();
+            refreshCategoryTitle();
+            Log.d(TAG, String.format("refreshUi is finished in %d/ms",
+                    (System.currentTimeMillis() - start)));
+        });
+        return true;
+    }
+
+    private boolean refreshUiWithNoLevelDataCase() {
+        setChartSummaryVisible(false);
+        if (mBatteryUsageMap == null) {
+            // There is no battery level data and battery usage data is not ready, wait for data
+            // ready to refresh UI. Show nothing temporarily.
+            mDailyChartView.setVisibility(View.GONE);
+            mHourlyChartView.setVisibility(View.GONE);
+            mDailyChartView.setViewModel(null);
+            mHourlyChartView.setViewModel(null);
+            return false;
+        } else if (mBatteryUsageMap
+                .get(BatteryChartViewModel.SELECTED_INDEX_ALL)
+                .get(BatteryChartViewModel.SELECTED_INDEX_ALL) == null) {
+            // There is no battery level data and battery usage data, show an empty hourly chart
+            // view.
             mDailyChartView.setVisibility(View.GONE);
             mHourlyChartView.setVisibility(View.VISIBLE);
             mHourlyChartView.setViewModel(null);
@@ -376,7 +422,12 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             addFooterPreferenceIfNeeded(false);
             return false;
         }
+        return true;
+    }
 
+    private boolean refreshUiWithLevelDataCase() {
+        setChartSummaryVisible(true);
+        // Gets valid battery level data.
         if (isBatteryLevelDataInOneDay()) {
             // Only 1 day data, hide the daily chart view.
             mDailyChartView.setVisibility(View.GONE);
@@ -389,10 +440,11 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
         if (mDailyChartIndex == BatteryChartViewModel.SELECTED_INDEX_ALL) {
             // Multiple days are selected, hide the hourly chart view.
-            animateBatteryHourlyChartView(/*isToShow=*/ false);
+            animateBatteryHourlyChartView(/*visible=*/ false);
         } else {
-            animateBatteryHourlyChartView(/*isToShow=*/ true);
-            final BatteryChartViewModel hourlyViewModel = mHourlyViewModels.get(mDailyChartIndex);
+            animateBatteryHourlyChartView(/*visible=*/ true);
+            final BatteryChartViewModel hourlyViewModel =
+                    mHourlyViewModels.get(mDailyChartIndex);
             hourlyViewModel.setSelectedIndex(mHourlyChartIndex);
             mHourlyChartView.setViewModel(hourlyViewModel);
         }
@@ -401,14 +453,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             // Battery usage data is not ready, wait for data ready to refresh UI.
             return false;
         }
-        mHandler.post(() -> {
-            final long start = System.currentTimeMillis();
-            removeAndCacheAllPrefs();
-            addAllPreferences();
-            refreshCategoryTitle();
-            Log.d(TAG, String.format("refreshUi is finished in %d/ms",
-                    (System.currentTimeMillis() - start)));
-        });
         return true;
     }
 
@@ -427,7 +471,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         if (!batteryDiffData.getAppDiffEntryList().isEmpty()) {
             addPreferenceToScreen(batteryDiffData.getAppDiffEntryList());
         }
-        // Adds the expabable divider if we have system entries data.
+        // Adds the expandable divider if we have system entries data.
         if (!batteryDiffData.getSystemDiffEntryList().isEmpty()) {
             if (mExpandDividerPreference == null) {
                 mExpandDividerPreference = new ExpandDividerPreference(mPrefContext);
@@ -645,12 +689,12 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         }
     }
 
-    private void animateBatteryHourlyChartView(final boolean isToShow) {
+    private void animateBatteryHourlyChartView(final boolean visible) {
         if (mHourlyChartView == null) {
             return;
         }
 
-        if (isToShow) {
+        if (visible) {
             mHourlyChartView.setAlpha(0f);
             mHourlyChartView.setVisibility(View.VISIBLE);
             mHourlyChartView.animate()
@@ -667,9 +711,15 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         }
     }
 
+    private void setChartSummaryVisible(final boolean visible) {
+        if (mChartSummaryTextView != null) {
+            mChartSummaryTextView.setVisibility(visible ? View.VISIBLE : View.GONE);
+        }
+    }
+
     private AnimatorListenerAdapter createHourlyChartAnimatorListenerAdapter(
-            final boolean isToShow) {
-        final int visibility = isToShow ? View.VISIBLE : View.GONE;
+            final boolean visible) {
+        final int visibility = visible ? View.VISIBLE : View.GONE;
 
         return new AnimatorListenerAdapter() {
             @Override
