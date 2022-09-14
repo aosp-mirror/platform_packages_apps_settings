@@ -90,7 +90,7 @@ class AppNotificationRepository(private val context: Context) {
         // If the app targets T but has not requested the permission, we cannot change the
         // permission state.
         return app.targetSdkVersion < Build.VERSION_CODES.TIRAMISU ||
-            hasRequestPermission(app, Manifest.permission.POST_NOTIFICATIONS)
+            app.hasRequestPermission(Manifest.permission.POST_NOTIFICATIONS)
     }
 
     fun setEnabled(app: ApplicationInfo, enabled: Boolean): Boolean {

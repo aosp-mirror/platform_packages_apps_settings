@@ -51,6 +51,12 @@ object SpecialAppAccessPageProvider : SettingsPageProvider {
     override fun buildEntry(arguments: Bundle?): List<SettingsEntry> {
         val owner = SettingsPage.create(name, parameter, arguments)
         return listOf(
+            AllFilesAccessAppListProvider.buildInjectEntry().setLink(fromPage = owner).build(),
+            DisplayOverOtherAppsAppListProvider.buildInjectEntry()
+                .setLink(fromPage = owner).build(),
+            MediaManagementAppsAppListProvider.buildInjectEntry().setLink(fromPage = owner).build(),
+            ModifySystemSettingsAppListProvider.buildInjectEntry()
+                .setLink(fromPage = owner).build(),
             PictureInPictureListProvider.buildInjectEntry().setLink(fromPage = owner).build(),
             InstallUnknownAppsListProvider.buildInjectEntry().setLink(fromPage = owner).build(),
         )
@@ -60,6 +66,10 @@ object SpecialAppAccessPageProvider : SettingsPageProvider {
 @Composable
 private fun SpecialAppAccessPage() {
     RegularScaffold(title = stringResource(R.string.special_access)) {
+        AllFilesAccessAppListProvider.EntryItem()
+        DisplayOverOtherAppsAppListProvider.EntryItem()
+        MediaManagementAppsAppListProvider.EntryItem()
+        ModifySystemSettingsAppListProvider.EntryItem()
         PictureInPictureListProvider.EntryItem()
         InstallUnknownAppsListProvider.EntryItem()
     }
