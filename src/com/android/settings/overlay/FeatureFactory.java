@@ -29,6 +29,7 @@ import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
+import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
@@ -160,6 +161,11 @@ public abstract class FeatureFactory {
     public abstract AwareFeatureProvider getAwareFeatureProvider();
 
     public abstract FaceFeatureProvider getFaceFeatureProvider();
+
+    /**
+     * Gets implementation for Biometrics repository provider.
+     */
+    public abstract BiometricsRepositoryProvider getBiometricsRepositoryProvider();
 
     /**
      * Gets implementation for the WifiTrackerLib.

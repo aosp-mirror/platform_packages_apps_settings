@@ -23,6 +23,7 @@ import com.android.settings.accounts.AccountFeatureProvider
 import com.android.settings.applications.ApplicationFeatureProvider
 import com.android.settings.aware.AwareFeatureProvider
 import com.android.settings.biometrics.face.FaceFeatureProvider
+import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider
 import com.android.settings.bluetooth.BluetoothFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProvider
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider
@@ -150,6 +151,10 @@ class FakeFeatureFactory : FeatureFactory() {
     }
 
     override fun getFaceFeatureProvider(): FaceFeatureProvider {
+        TODO("Not yet implemented")
+    }
+
+    override fun getBiometricsRepositoryProvider(): BiometricsRepositoryProvider {
         TODO("Not yet implemented")
     }
 

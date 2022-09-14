@@ -25,6 +25,7 @@ import android.content.IntentSender;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
+import android.os.Bundle;
 import android.os.storage.StorageManager;
 import android.util.Log;
 import android.view.Surface;
@@ -139,6 +140,31 @@ public class BiometricUtils {
                         .EXTRA_SHOW_OPTIONS_BUTTON, true);
             }
             WizardManagerHelper.copyWizardManagerExtras(activityIntent, intent);
+            return intent;
+        } else {
+            return new Intent(context, ChooseLockGeneric.class);
+        }
+    }
+
+    /**
+     * @param context caller's context
+     * @param isSuw if it is running in setup wizard flows
+     * @param suwExtras setup wizard extras for new intent
+     * @return Intent for starting ChooseLock*
+     */
+    public static Intent getChooseLockIntent(@NonNull Context context,
+            boolean isSuw, @NonNull Bundle suwExtras) {
+        if (isSuw) {
+            // Default to PIN lock in setup wizard
+            Intent intent = new Intent(context, SetupChooseLockGeneric.class);
+            if (StorageManager.isFileEncrypted()) {
+                intent.putExtra(
+                        LockPatternUtils.PASSWORD_TYPE_KEY,
+                        DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
+                intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment
+                        .EXTRA_SHOW_OPTIONS_BUTTON, true);
+            }
+            intent.putExtras(suwExtras);
             return intent;
         } else {
             return new Intent(context, ChooseLockGeneric.class);
