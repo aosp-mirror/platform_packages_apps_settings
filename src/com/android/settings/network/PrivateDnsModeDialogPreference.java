@@ -74,11 +74,14 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
 
     // Must match ConnectivitySettingsUtils
     private static final int PRIVATE_DNS_MODE_CLOUDFLARE = 4;
+    private static final int PRIVATE_DNS_MODE_AXIOM = 5;
+
 
     static {
         PRIVATE_DNS_MAP = new HashMap<>();
         PRIVATE_DNS_MAP.put(PRIVATE_DNS_MODE_OFF, R.id.private_dns_mode_off);
         PRIVATE_DNS_MAP.put(PRIVATE_DNS_MODE_CLOUDFLARE, R.id.private_dns_mode_cloudflare);
+        PRIVATE_DNS_MAP.put(PRIVATE_DNS_MODE_AXIOM, R.id.private_dns_mode_axiom);
         PRIVATE_DNS_MAP.put(PRIVATE_DNS_MODE_OPPORTUNISTIC, R.id.private_dns_mode_opportunistic);
         PRIVATE_DNS_MAP.put(PRIVATE_DNS_MODE_PROVIDER_HOSTNAME, R.id.private_dns_mode_provider);
     }
@@ -163,6 +166,9 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
         final RadioButton cloudflareRadioButton =
                 view.findViewById(R.id.private_dns_mode_cloudflare);
         cloudflareRadioButton.setText(R.string.private_dns_mode_cloudflare);
+        final RadioButton axiomRadioButton =
+                view.findViewById(R.id.private_dns_mode_axiom);
+        axiomRadioButton.setText(R.string.private_dns_mode_axiom);
         final RadioButton opportunisticRadioButton =
                 view.findViewById(R.id.private_dns_mode_opportunistic);
         opportunisticRadioButton.setText(R.string.private_dns_mode_opportunistic);
@@ -206,6 +212,8 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
             mMode = PRIVATE_DNS_MODE_OFF;
         } else if (checkedId == R.id.private_dns_mode_cloudflare) {
             mMode = PRIVATE_DNS_MODE_CLOUDFLARE;
+        } else if (checkedId == R.id.private_dns_mode_axiom) {
+            mMode = PRIVATE_DNS_MODE_AXIOM;
         } else if (checkedId == R.id.private_dns_mode_opportunistic) {
             mMode = PRIVATE_DNS_MODE_OPPORTUNISTIC;
         } else if (checkedId == R.id.private_dns_mode_provider) {

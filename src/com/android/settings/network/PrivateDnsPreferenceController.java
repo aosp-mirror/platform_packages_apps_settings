@@ -67,6 +67,8 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
 
     // Must match ConnectivitySettingsUtils
     private static final int PRIVATE_DNS_MODE_CLOUDFLARE = 4;
+    private static final int PRIVATE_DNS_MODE_AXIOM = 5;
+
 
     private final Handler mHandler;
     private final ContentObserver mSettingsObserver;
@@ -135,6 +137,10 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
             case PRIVATE_DNS_MODE_CLOUDFLARE:
                 return dnsesResolved
                         ? res.getString(R.string.private_dns_mode_cloudflare)
+                        : res.getString(R.string.private_dns_mode_provider_failure);
+            case PRIVATE_DNS_MODE_AXIOM:
+                return dnsesResolved
+                        ? res.getString(R.string.private_dns_mode_axiom)
                         : res.getString(R.string.private_dns_mode_provider_failure);
             case PRIVATE_DNS_MODE_OPPORTUNISTIC:
                 return dnsesResolved ? res.getString(R.string.private_dns_mode_on)
