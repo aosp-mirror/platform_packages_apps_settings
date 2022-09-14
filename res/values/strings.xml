@@ -47,8 +47,6 @@
     <string name="dev_settings_disabled_warning">Please enable developer options first.</string>
 
     <!-- Category headings in left-pane header menu --> <skip />
-    <!-- Settings main menu category heading. Wireless and networks (Wi-Fi, Bluetooth, data usage...). [CHAR LIMIT=40] -->
-    <string name="header_category_wireless_networks">Wireless &amp; networks</string>
     <!-- Settings main menu category heading. System (Updates, data, accessibility, about phone). [CHAR LIMIT=40] -->
     <string name="header_category_system">System</string>
 
@@ -56,8 +54,6 @@
     <string name="radioInfo_service_in">In Service</string>
     <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radioInfo_service_out">Out of Service</string>
-    <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_service_emergency">Emergency Calls Only</string>
     <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radioInfo_service_off">Radio Off</string>
 
@@ -80,8 +76,6 @@
 
     <!-- Content description for preview pager. [CHAR LIMIT=NONE] -->
     <string name="preview_pager_content_description">Preview</string>
-    <!-- Content description for dot pager indicator for preview pager. [CHAR LIMIT=NONE] -->
-    <string name="preview_page_indicator_content_description">Preview, page <xliff:g id="current_page" example="3">%1$d</xliff:g> of <xliff:g id="num_pages" example="9">%2$d</xliff:g></string>
 
     <!-- Description for the button that makes interface elements smaller. [CHAR_LIMIT=NONE] -->
     <string name="font_size_make_smaller_desc">Make smaller</string>
@@ -276,8 +270,6 @@
     <string name="connected_device_add_device_summary">Bluetooth will turn on to pair</string>
     <!-- Title for other connection preferences [CHAR LIMIT=none]-->
     <string name="connected_device_connections_title">Connection preferences</string>
-    <!-- Title for Bluetooth preference to open paired but no connection list [CHAR LIMIT=none]-->
-    <string name="connected_device_previously_connected_title">Previously connected devices</string>
     <!-- Preference screen title for Bluetooth preference to open paired but no connection list [CHAR LIMIT=none]-->
     <string name="connected_device_previously_connected_screen_title">Previously connected</string>
     <!-- Toast text for hint user bluetooth is turned on [CHAR LIMIT=none]-->
@@ -288,21 +280,6 @@
 
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time</string>
-    <!-- The title of the activity to pick a time zone. -->
-    <string name="choose_timezone">Choose time zone</string>
-
-    <!-- Used for diagnostic screens, precise translation is not necessary -->
-    <string name="intent_sender_data_label"><xliff:g id="data">Data:</xliff:g></string>
-    <!-- Used for diagnostic screens, precise translation is not necessary -->
-    <string name="intent_sender_sendbroadcast_text">Send <xliff:g id="broadcast">broadcast</xliff:g></string>
-    <!-- Used for diagnostic screens, precise translation is not necessary -->
-    <string name="intent_sender_action_label"><xliff:g id="action">Action</xliff:g>:</string>
-    <!-- Used for diagnostic screens, precise translation is not necessary -->
-    <string name="intent_sender_startactivity_text">Start <xliff:g id="activity">activity</xliff:g></string>
-    <!-- Used for diagnostic screens, precise translation is not necessary -->
-    <string name="intent_sender_resource_label"><xliff:g id="resource">Resource</xliff:g>: </string>
-    <!-- Used for diagnostic screens, precise translation is not necessary -->
-    <string name="intent_sender_account_label">Account: </string>
 
     <!-- HTTP proxy settings title -->
     <string name="proxy_settings_title">Proxy</string>
@@ -340,8 +317,6 @@
 
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_ping_hostname_v4">Ping Hostname(www.google.com) IPv4:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ping_hostname_v6">Ping Hostname(www.google.com) IPv6:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_http_client_test">HTTP Client Test:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
@@ -474,50 +449,22 @@
     <string name="airplane_mode">Airplane mode</string>
     <!-- Wireless Settings screen title for things like Wi-Fi, bluetooth, airplane mode. -->
     <string name="wireless_networks_settings_title">Wireless &amp; networks</string>
-    <!-- Main Settings screen settings summary text for the "Wireless controls" setting -->
-    <string name="radio_controls_summary">Manage Wi\u2011Fi, Bluetooth, airplane mode, mobile networks, &amp; VPNs</string>
 
-    <!-- check box cellular data summary [CHAR LIMIT=85] -->
-    <string name="cellular_data_summary">Allow data usage over mobile network</string>
-    <!-- check box to allow data usage when roaming [CHAR LIMIT=41] -->
-    <string name="allow_data_usage_title">Allow data usage when roaming</string>
     <!-- mobile network settings screen, setting check box title -->
     <string name="roaming">Roaming</string>
     <!-- mobile network settings screen, setting option summary text when check box is selected -->
     <string name="roaming_enable">Connect to data services when roaming</string>
     <!-- mobile network settings screen, setting option summary text when check box is clear -->
     <string name="roaming_disable">Connect to data services when roaming</string>
-    <!-- mobile network settings screen, dialog message when you are roaming and clear the "Data roaming" check box -->
-    <string name="roaming_reenable_message">You have lost data connectivity because you left your home network with data roaming turned off.</string>
-    <!-- mobile network settings screen, button on dialog box that appears when you are roaming and clear the "Data roaming" check box -->
-    <string name="roaming_turn_it_on_button">Turn it on</string>
     <!-- mobile network settings screen, message in dialog box that appears when you select the "Data roaming" check box -->
     <string name="roaming_warning">Roaming charges may apply.</string>
-    <!-- mobile network settings screen, message in dialog box that appears when you select the "Data roaming" check box. This is for multiuser tablets [CHAR LIMIT=none] -->
-    <string name="roaming_warning_multiuser" product="tablet">When you allow data roaming, roaming charges may apply.\n\nThis setting affects all users on this tablet.</string>
-    <!-- mobile network settings screen, message in dialog box that appears when you select the "Data roaming" check box. This is for multiuser phones [CHAR LIMIT=none] -->
-    <string name="roaming_warning_multiuser" product="default">When you allow data roaming, roaming charges may apply.\n\nThis setting affects all users on this phone.</string>
-    <!-- mobile network settings screen, title of dialog box that appears when you select the "Data roaming" check box -->
-    <string name="roaming_reenable_title">Allow data roaming?</string>
-    <!-- mobile network settings screen, setting option name -->
-    <string name="networks">Operator selection</string>
-    <!-- mobile network settings screen, setting option summary text -->
-    <string name="sum_carrier_select">Choose a network operator</string>
 
-    <!-- Main Settings screen setting option name to go into the date and time settings-->
-    <string name="date_and_time_settings_title">Date &amp; time</string>
-    <!-- Title for Date & Time settings screen in SetupWizard [CHAR LIMIT=40] -->
-    <string name="date_and_time_settings_title_setup_wizard">Set date and time</string>
-    <!-- Main Settings screen setting option summary text for the item to go into the date and time settings. -->
-    <string name="date_and_time_settings_summary">Set date, time, time zone, &amp; formats</string>
     <!-- Date & time setting screen setting switch title: whether the system clock (Unix epoch time) should be determined automatically [CHAR LIMIT=100] -->
     <string name="date_time_auto">Set time automatically</string>
     <!-- Date & time setting screen setting switch title: whether the time zone should be determined automatically [CHAR LIMIT=100]  -->
     <string name="zone_auto_title">Set automatically</string>
     <!-- Date & time setting screen setting option summary text for the automatic 24 hour setting checkbox [CHAR LIMIT=100] -->
     <string name="date_time_24hour_auto">Use locale default</string>
-    <!-- Date & time setting screen setting check box title [CHAR LIMIT=30] -->
-    <string name="date_time_24hour_title">24\u2011hour format</string>
     <!-- Date & time setting screen setting check box title -->
     <string name="date_time_24hour">Use 24-hour format</string>
     <!-- Date & time setting screen setting option title [CHAR LIMIT=30] -->
@@ -536,8 +483,6 @@
     <string name="date_time_select_region">Region</string>
     <!-- Setting option title in time zone setting screen [CHAR LIMIT=30] -->
     <string name="date_time_select_fixed_offset_time_zones">Select UTC offset</string>
-    <!-- Label describing when a given time zone changes to DST or standard time -->
-    <string name="zone_change_to_from_dst"><xliff:g id="time_type" example="Pacific Summer Time">%1$s</xliff:g> starts on <xliff:g id="transition_date" example="Mar 11 2018">%2$s</xliff:g>.</string>
     <!-- Label describing a exemplar location and time zone offset[CHAR LIMIT=NONE] -->
     <string name="zone_info_exemplar_location_and_offset"><xliff:g id="exemplar_location" example="Los Angeles">%1$s</xliff:g> (<xliff:g id="offset" example="GMT-08:00">%2$s</xliff:g>)</string>
     <!-- Label describing a time zone offset and name[CHAR LIMIT=NONE] -->
@@ -557,13 +502,6 @@
     <!-- The menu item to switch to selecting a time zone with a fixed offset (such as UTC or GMT+0200) [CHAR LIMIT=30] -->
     <string name="zone_menu_by_offset">Select by UTC offset</string>
 
-    <!-- Title string shown above DatePicker, letting a user select system date
-         [CHAR LIMIT=20] -->
-    <string name="date_picker_title">Date</string>
-    <!-- Title string shown above TimePicker, letting a user select system time
-         [CHAR LIMIT=20] -->
-    <string name="time_picker_title">Time</string>
-
     <!-- Security Settings --><skip />
 
     <!-- Security settings screen, setting option name to change screen timeout -->
@@ -574,32 +512,14 @@
     <string name="lock_immediately_summary_with_exception">Immediately after timeout, except when kept unlocked by <xliff:g id="trust_agent_name">%1$s</xliff:g></string>
     <!-- Security settings screen, setting option summary to change screen timeout, with additional explanation-->
     <string name="lock_after_timeout_summary_with_exception"><xliff:g id="timeout_string">%1$s</xliff:g> after timeout, except when kept unlocked by <xliff:g id="trust_agent_name">%2$s</xliff:g></string>
-    <!-- Text shown next to checkbox for showing owner info on LockScreen [CHAR LIMIT=50]-->
-    <string name="show_owner_info_on_lockscreen_label">Show owner info on lock screen</string>
     <!-- Text shown for title of owner info setting [CHAR LIMIT=30]-->
     <string name="owner_info_settings_title">Add text on lock screen</string>
-    <!-- Text shown for title of settings checkbox to enable widgets [CHAR LIMIT=20]-->
-    <string name="security_enable_widgets_title">Enable widgets</string>
-    <!-- Summary for settings checkbox to disable widgets when the setting has been disabled by an installed device admin [CHAR LIMIT=50] -->
-    <string name="security_enable_widgets_disabled_summary">Disabled by admin</string>
-
-    <!-- Text shown for the title of the lock when trust lost option [CHAR LIMIT=40] -->
-    <string name="trust_lost_locks_screen_title">Lock screen when trust is lost</string>
-    <!-- Text shown for the description of the lock when trust lost option [CHAR LIMIT=NONE -->
-    <string name="trust_lost_locks_screen_summary">If enabled, the device will lock when the last trust agent loses trust</string>
 
     <!-- Text shown for summary of owner info setting (if none set) [CHAR LIMIT=40]-->
     <string name="owner_info_settings_summary">None</string>
-    <!-- Description of how many characters are used in owner info [CHAR LIMIT=40]-->
-    <string name="owner_info_settings_status"><xliff:g id="count" example="90">%1$d</xliff:g> / <xliff:g id="count" example="100">%2$d</xliff:g></string>
     <!-- Hint text shown in owner info edit text [CHAR LIMIT=50] -->
     <string name="owner_info_settings_edit_text_hint">E.g., Joe\u2019s Android.</string>
 
-    <!-- Text shown next to checkbox for showing profile info on LockScreen [CHAR LIMIT=50]-->
-    <string name="show_profile_info_on_lockscreen_label">Show profile info on lock screen</string>
-
-    <!-- Main Settings screen setting option title for the item to take you to the Accounts screen [CHAR LIMIT=22] -->
-    <string name="Accounts_settings_title">Accounts</string>
     <!-- Main Settings screen setting option title for the item to take you to the location screen -->
     <string name="location_settings_title">Location</string>
     <!-- Used in the location settings to control turning on/off the feature entirely [CHAR LIMIT=60] -->
@@ -646,12 +566,6 @@
     <string name="lockscreen_settings_title">Lock screen</string>
     <!-- Category title for the settings that control what lockscreen shows. [CHAR LIMIT=30] -->
     <string name="lockscreen_settings_what_to_show_category">What to show</string>
-    <!-- Main Settings screen setting option summary text for the item tot ake you to the security and location screen -->
-    <string name="security_settings_summary">Set My Location, screen unlock, SIM card lock, credential storage lock</string>
-    <!-- Main Settings screen setting option summary text for the item to take you to the CDMA security and location screen -->
-    <string name="cdma_security_settings_summary">Set My Location, screen unlock, credential storage lock</string>
-    <!-- In the security screen, the header title for settings related to  Passwords-->
-    <string name="security_passwords_title">Privacy</string>
     <!-- Summary for settings preference disabled by administrator [CHAR LIMIT=50] -->
     <string name="disabled_by_administrator_summary">Not available</string>
     <!-- In the security screen, the header title for security statuses -->
@@ -822,8 +736,6 @@
     <string name="security_settings_face_enroll_repeat_title">Center your face in the circle</string>
     <!-- Button text to skip enrollment of face [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_enrolling_skip">Skip</string>
-    <!-- Text shown when "Add face" button is disabled -->
-    <string name="face_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> faces</string>
     <!-- Text shown when users has enrolled a maximum number of faces [CHAR LIMIT=NONE] -->
     <string name="face_intro_error_max">You\u2019ve added the maximum number of faces</string>
     <!-- Text shown when an unknown error caused the device to be unable to add faces [CHAR LIMIT=NONE] -->
@@ -1283,8 +1195,6 @@
     <string name="security_advanced_settings_keywords">security, more security settings, more settings, advanced security settings</string>
     <!-- Title for the section that has additional privacy settings. [CHAR LIMIT=60] -->
     <string name="privacy_advanced_settings">More privacy settings</string>
-    <!-- Title for the section that has additional privacy settings. [CHAR LIMIT=60] -->
-    <string name="privacy_advanced_settings_summary">Autofill, activity controls, and more</string>
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
@@ -1293,14 +1203,8 @@
     <!-- Text shown when an unknown error caused the device to be unable to add fingerprints [CHAR LIMIT=NONE] -->
     <string name="fingerprint_intro_error_unknown">Can\u2019t add more fingerprints</string>
 
-    <!-- Title shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by him. [CHAR LIMIT=50]-->
-    <string name="fingerprint_last_delete_title">Remove all fingerprints?</string>
-
     <!-- Title shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=50]-->
     <string name="fingerprint_delete_title">Delete \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\'</string>
-
-    <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
-    <string name="fingerprint_delete_message">Do you want to delete this fingerprint?</string>
 
     <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
     <string name="fingerprint_v2_delete_message">This deletes the fingerprint images and model associated with \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\' that are stored on your device</string>
@@ -1308,9 +1212,6 @@
     <!-- Message shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by him. [CHAR LIMIT=NONE]-->
     <string name="fingerprint_last_delete_message">You won\'t be able to use your fingerprint to unlock your phone or verify it\'s you in apps.</string>
     <string name="fingerprint_last_delete_message_profile_challenge">You won\'t be able to use your fingerprint to unlock your work profile, authorize purchases, or sign in to work apps.</string>
-
-    <!-- Button to confirm the last removing the last fingerprint. [CHAR LIMIT=20]-->
-    <string name="fingerprint_last_delete_confirm">Yes, remove</string>
 
     <!-- Title of the preferences category for preference items to control encryption -->
     <string name="encryption_settings_title">Encryption</string>
@@ -1407,49 +1308,24 @@
     <!--  Title for PreferenceScreen to launch picker for security method when there is none [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_launch_picker_title">Screen lock</string>
 
-    <!--  Summary for PreferenceScreen to launch picker for security method when there is none [CHAR LIMIT=NONE] -->
-    <string name="unlock_set_unlock_launch_picker_summary_lock_immediately"><xliff:g id="unlock_method" example="PIN">%1$s</xliff:g> / Immediately after sleep</string>
-
-    <!--  Summary for PreferenceScreen to launch picker for security method when there is none [CHAR LIMIT=NONE] -->
-    <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout"><xliff:g id="unlock_method" example="PIN">%1$s</xliff:g> / <xliff:g id="timeout_string">%2$s</xliff:g> after sleep</string>
-
     <!--  Profile Security lock settings --><skip />
     <!--  Title for PreferenceScreen to launch picker for security method for the managed profile when there is none [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_launch_picker_title_profile">Work profile lock</string>
 
-    <!--  Title for PreferenceScreen to change security method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
-    <string name="unlock_set_unlock_launch_picker_change_title">Change lock screen</string>
-
-    <!--  Summary for PreferenceScreen to change security method: None/Pattern/PIN/Password [CHAR LIMIT=45]  -->
-    <string name="unlock_set_unlock_launch_picker_change_summary">Change or disable pattern, PIN, or password security</string>
-
-    <!--  Summary for PreferenceScreen to change security method: None/Pattern/PIN/Password [CHAR LIMIT=45]  -->
-    <string name="unlock_set_unlock_launch_picker_enable_summary">Choose a method to lock the screen</string>
-
     <!-- Title for preference that disables unlock security [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_off_title">None</string>
-    <!-- Summary for preference that disables unlock security [CHAR LIMIT=45] -->
-    <string name="unlock_set_unlock_off_summary"></string>
 
     <!-- Title for preference that disables unlock security [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_none_title">Swipe</string>
-    <!-- Summary for preference that disables unlock security [CHAR LIMIT=45]-->
-    <string name="unlock_set_unlock_none_summary">No security</string>
 
     <!-- Title for preference that guides the user through creating an unlock pattern [CHAR LIMIT=22]-->
     <string name="unlock_set_unlock_pattern_title">Pattern</string>
-    <!-- Summary for preference that guides the user through creating an unlock pattern [CHAR LIMIT=45] -->
-    <string name="unlock_set_unlock_pattern_summary">Medium security</string>
 
     <!-- Title for preference that guides the user through creating an unlock PIN (Personal Identification Number) [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_pin_title">PIN</string>
-    <!-- Summary for preference that guides the user through creating an unlock PIN (Personal Identification Number) [CHAR LIMIT=45] -->
-    <string name="unlock_set_unlock_pin_summary">Medium to high security</string>
 
     <!-- Title for preference that guides the user through creating an unlock password [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_password_title">Password</string>
-    <!-- Title for preference that guides the user through creating an unlock password [CHAR LIMIT=45] -->
-    <string name="unlock_set_unlock_password_summary">High security</string>
 
     <!-- Title for preference that allows the user to setup their lock screen preference later [CHAR LIMIT=22] -->
     <string name="unlock_set_do_later_title">Not now</string>
@@ -1490,10 +1366,6 @@
     <!-- Message shown in screen lock picker while setting up the new screen lock with biometrics option. [CHAR LIMIT=NONE] -->
     <string name="biometrics_unlock_title">You can unlock your phone using your face or fingerprint. For security, this option requires a backup screen lock.</string>
 
-    <!-- Summary for preference that has been disabled by because of the DevicePolicyAdmin, or because device encryption is enabled, or because there are credentials in the credential storage [CHAR LIMIT=50] -->
-    <string name="unlock_set_unlock_disabled_summary">Disabled by admin, encryption policy, or
-        credential storage</string>
-
     <!-- Summary for "Configure lockscreen" when lock screen is off [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_mode_off">None</string>
     <!-- Summary for "Configure lockscreen" when security is disabled [CHAR LIMIT=45] -->
@@ -1504,14 +1376,6 @@
     <string name="unlock_set_unlock_mode_pin">PIN</string>
     <!-- Summary for "Configure lockscreen" when security password is enabled [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_mode_password">Password</string>
-
-    <!-- Footer text in when choosing screen lock type during setup wizard, telling the user that
-         they can add fingerprint after they complete setup wizard. The text "Settings > Security"
-         should match settings_label and security_settings_title [CHAR LIMIT=NONE] -->
-    <string name="unlock_setup_wizard_fingerprint_details">Once you\u2019ve set up a screen lock, you can also set up your fingerprint in Settings &gt; Security.</string>
-
-    <!-- Title for option to turn of password/pin/pattern unlock. [CHAR LIMIT=22] -->
-    <string name="unlock_disable_lock_title">Turn off screen lock</string>
 
     <!-- Title of the dialog shown when the user removes the device lock [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_title">Delete screen lock?</string>
@@ -1553,13 +1417,6 @@
 
     <!-- Affirmative action of the dialog shown when the user removes the device lock [CHAR LIMIT=25] -->
     <string name="unlock_disable_frp_warning_ok">Delete</string>
-
-    <!-- Title shown on security settings to allow the user to change their lockscreen pattern [CHAR LIMIT=22] -->
-    <string name="unlock_change_lock_pattern_title">Change unlock pattern</string>
-    <!-- Title shown on security settings to allow the user to change their lockscreen PIN [CHAR LIMIT=22] -->
-    <string name="unlock_change_lock_pin_title">Change unlock PIN</string>
-    <!-- Title shown on security settings to allow the user to change their lockscreen password [CHAR LIMIT=22]-->
-    <string name="unlock_change_lock_password_title">Change unlock password</string>
 
     <!-- Footer preference text in the screen lock type picker to indicate which app is requesting a new screen lock and that it requests for a strong PIN or password  [CHAR LIMIT=NONE] -->
     <string name="unlock_footer_high_complexity_requested"><xliff:g id="app_name" example="Gmail">%1$s</xliff:g> recommends a strong PIN or password and may not work as expected without one</string>
@@ -1613,9 +1470,6 @@
         <item quantity="other">PIN must be at least <xliff:g id="count" example="3">%d</xliff:g> digits</item>
     </plurals>
 
-    <!-- Hint shown after minimum password criteria is met -->
-    <string name="lockpassword_continue_label">Continue</string>
-
     <!-- Error shown in popup when password is too long -->
     <plurals name="lockpassword_password_too_long">
         <item quantity="one">Must be fewer than <xliff:g id="number" example="1">%d</xliff:g> character</item>
@@ -1632,15 +1486,6 @@
 
     <!-- Error shown when in PASSWORD mode and user enters an invalid character -->
     <string name="lockpassword_illegal_character">This can\'t include an invalid character</string>
-
-    <!-- Error shown when in PASSWORD mode and password is all digits -->
-    <string name="lockpassword_password_requires_alpha">Must contain at least one letter</string>
-
-    <!-- Error shown when in PASSWORD mode and password doesn't contain any digits -->
-    <string name="lockpassword_password_requires_digit">Must contain at least one digit</string>
-
-    <!-- Error shown when in PASSWORD mode and password doesn't contain any symbols -->
-    <string name="lockpassword_password_requires_symbol">Must contain at least one symbol</string>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of letters -->
     <plurals name="lockpassword_password_requires_letters">
@@ -1694,9 +1539,6 @@
     <!-- Label for Confirm button when entering PIN / password the second time. [CHAR LIMIT=30] -->
     <string name="lockpassword_confirm_label">Confirm</string>
 
-    <!-- Label for ChoosePassword/PIN OK button -->
-    <string name="lockpassword_cancel_label">Cancel</string>
-
     <!-- Label for ChoosePassword/PIN Clear button that clears all text entered by the user so far. -->
     <string name="lockpassword_clear_label">Clear</string>
 
@@ -1708,9 +1550,6 @@
 
     <!-- Label for LockPatternTutorial Continue button -->
     <string name="lockpattern_tutorial_continue_label">Next</string>
-
-    <!-- Toast shown when lock pattern or password successfully setup. [CHAR LIMIT=64] -->
-    <string name="lock_setup" msgid="5507462851158901718">Setup is complete.</string>
 
     <!-- Title of preference to manage device admin apps, which are used by IT admins to manage devices -->
     <string name="manage_device_admin">Device admin apps</string>
@@ -1826,14 +1665,6 @@
     <!-- Bluetooth device details companion apps. In the confirmation dialog for removing an associated app, this is the label on the button that will complete the disassociate action. [CHAR LIMIT=80] -->
     <string name = "bluetooth_companion_app_remove_association_confirm_button">Disconnect app</string>
 
-    <!-- Bluetooth settings. Connection options screen. The summary for the checkbox preference when PAN is connected (user role). [CHAR LIMIT=25]-->
-    <string name="bluetooth_pan_user_profile_summary_connected">Connected to device for internet access</string>
-    <!-- Bluetooth settings. Connection options screen. The summary for the checkbox preference when PAN is connected (NAP role). [CHAR LIMIT=25]-->
-    <string name="bluetooth_pan_nap_profile_summary_connected">Sharing local internet connection with device</string>
-
-    <!-- Bluetooth settings.  Dock Setting Dialog - Remember setting and don't ask user again -->
-    <string name="bluetooth_dock_settings_remember">Remember settings</string>
-
     <!-- Bluetooth developer settings: Maximum number of connected audio devices -->
     <string name="bluetooth_max_connected_audio_devices_string">Maximum connected Bluetooth audio devices</string>
     <!-- Bluetooth developer settings: Maximum number of connected audio devices -->
@@ -1875,8 +1706,6 @@
     <string name="wifi_display_status_in_use">In use</string>
     <!-- Wifi Display settings. The status summary for devices that's not available. [CHAR LIMIT=40] -->
     <string name="wifi_display_status_not_available">Unavailable</string>
-    <!-- Wifi Display settings. Image description for device details button. This opens the screen to rename, unpair, etc. a single device. -->
-    <string name="wifi_display_details">Display settings</string>
 
     <!-- Wifi Display settings. Options dialog.  The title of the dialog. [CHAR LIMIT=40] -->
     <string name="wifi_display_options_title">Wireless display options</string>
@@ -1919,8 +1748,6 @@
     <string name="wifi_time_remaining"><xliff:g id="Remaining time" example="1 day, 2 hours, 3 minutes">%1$s</xliff:g> left</string>
     <!-- Text shown in wifi settings indicating at what time the connection will expire on an internet access point that has a time limit for the session [CHAR LIMIT=40] -->
     <string name="wifi_expiry_time">Expires on <xliff:g id="Expiry time" example="2020/01/02 12:34PM">%1$s</xliff:g></string>
-    <!-- Wifi Sign in CTA for wifi settings when captive portal auth is required [CHAR LIMIT = 50] -->
-    <string name="wifi_tap_to_sign_in">Tap here to sign in to network</string>
     <!-- Transmit Link speed on Wifi Status screen [CHAR LIMIT=32] -->
     <string name="tx_link_speed"><xliff:g id="Transmit link speed" example="150 Mbps">%1$d</xliff:g> Mbps</string>
     <!-- Receive Link speed on Wifi Status screen [CHAR LIMIT=32] -->
@@ -1945,14 +1772,6 @@
     <!-- NFC settings -->
     <!-- Used in the 1st-level settings screen to turn on NFC -->
     <string name="nfc_quick_toggle_title">NFC</string>
-    <!-- Description of NFC in the 1st level settings screen, for a tablet. [CHAR LIMIT=NONE] -->
-    <string name="nfc_quick_toggle_summary" product="tablet">Allow data exchange when the tablet touches an NFC device</string>
-    <!-- Description of NFC in the 1st level settings screen, for a phone. [CHAR LIMIT=NONE] -->
-    <string name="nfc_quick_toggle_summary" product="default">Allow data exchange when the phone touches an NFC device</string>
-    <!-- Dialog title for NFC disclaimer [CHAR_LIMIT=40]-->
-    <string name="nfc_disclaimer_title">Turn on NFC</string>
-    <!-- Dialog content for NFC disclaimer: telling user NFC can exchange data when device is nearby other devices (for example: payment terminals, badge reader etc). [CHAR_LIMIT=NONE]-->
-    <string name="nfc_disclaimer_content">NFC exchanges data between this device and other nearby devices or targets, such as payment terminals, access readers, and interactive ads or tags.</string>
 
     <!-- Used in the settings screen to secure NFC [CHAR LIMIT=NONE] -->
     <string name="nfc_secure_settings_title">Require device unlock for NFC</string>
@@ -1965,16 +1784,10 @@
     <string name="android_beam_on_summary">Ready to transmit app content via NFC</string>
     <!-- Used to describe the enabled state of the Android Beam feature when NFC, which it relies on, is turned off [CHAR LIMIT=NONE] -->
     <string name="nfc_disabled_summary">Unavailable because NFC is turned off</string>
-    <!-- Used in the Android Beam sharing preferences screen. This phrase is a trademark. [CHAR LIMIT=32] -->
-    <string name="android_beam_label">Android Beam</string>
     <!-- Explanation of the Android Beam feature in the Android Beam settings panel. The use of "beam" here is as a verb and not considered trademarked. [CHAR LIMIT=NONE] -->
     <string name="android_beam_explained">When this feature is turned on, you can beam app content to another NFC-capable device by holding the devices close together. For example, you can beam web pages, YouTube videos, contacts, and more.\n\nJust bring the devices together (typically back to back) and then tap your screen. The app determines what gets beamed.</string>
 
     <!-- Wi-Fi Settings --> <skip />
-    <!-- Used in the 1st-level settings screen to turn on Wi-Fi -->
-    <string name="wifi_quick_toggle_title">Wi\u2011Fi</string>
-    <!-- Used in the 1st-level settings screen as the turn-on summary -->
-    <string name="wifi_quick_toggle_summary">Turn on Wi\u2011Fi</string>
     <!-- Used in the 1st-level settings screen to go to the 2nd-level settings screen  [CHAR LIMIT=20]-->
     <string name="wifi_settings">Wi\u2011Fi</string>
 
@@ -1982,10 +1795,6 @@
     <string name="wifi_settings_primary_switch_title">Use Wi\u2011Fi</string>
     <!-- Title of the Wi-fi settings screen -->
     <string name="wifi_settings_category">Wi\u2011Fi settings</string>
-    <!-- Title of the Wi-fi settings entry in the left top level menu -->
-    <string name="wifi_settings_title">Wi\u2011Fi</string>
-    <!-- Summary text of the Wi-fi settings screen -->
-    <string name="wifi_settings_summary">Set up &amp; manage wireless access points</string>
     <!-- Used by Account creation for turning on Wi-Fi  [CHAR LIMIT=60] -->
     <string name="wifi_select_network">Select Wi\u2011Fi</string>
     <!-- Summary text when turning Wi-Fi or bluetooth on -->
@@ -2008,24 +1817,6 @@
     <string name="wifi_wakeup_summary">Wi\u2011Fi will turn back on near high\u2011quality saved networks, like your home network</string>
     <!-- Checkbox summary for auto-wifi when user needs to enable location scanning to toggle it -->
     <string name="wifi_wakeup_summary_no_location">Unavailable because location is turned off. Turn on <annotation id="link">location</annotation>.</string>
-    <!-- Checkbox summary for Wi-Fi wakeup option to explain that Wi-Fi wakeup is disabled because Wi-Fi scanning is turned off -->
-    <string name="wifi_wakeup_summary_scanning_disabled">Unavailable because Wi\u2011Fi scanning is turned off</string>
-    <!-- Checkbox summary for Wi-Fi wakeup option to explain that a network rating provider needs to be selected to use the feature. -->
-    <string name="wifi_wakeup_summary_scoring_disabled">To use, select a network rating provider</string>
-    <!-- Checkbox title for option to toggle poor network detection -->
-    <string name="wifi_poor_network_detection">Avoid poor connections</string>
-    <!-- Checkbox summary for option to toggle poor network detection -->
-    <string name="wifi_poor_network_detection_summary">Don\u2019t use a Wi\u2011Fi network unless it has a good internet connection</string>
-    <!-- Checkbox summary for option to toggle poor network detection [CHAR LIMIT=60] -->
-    <string name="wifi_avoid_poor_network_detection_summary">Only use networks that have a good internet connection</string>
-    <!-- Checkbox title for option to connect to public Wi-Fi automatically [CHAR LIMIT=40] -->
-    <string name="use_open_wifi_automatically_title">Connect to public networks</string>
-    <!-- Checkbox summary for option to connect to open Wi-Fi automatically  [CHAR LIMIT=100] -->
-    <string name="use_open_wifi_automatically_summary">Automatically connect to high\u2011quality public networks</string>
-    <!-- Checkbox summary for option to connect to open Wi-Fi automatically, to explain that a network rating provider needs to be selected to use the feature. -->
-    <string name="use_open_wifi_automatically_summary_scoring_disabled">To use, select a network rating provider</string>
-    <!-- Checkbox summary for option to connect to open Wi-Fi automatically, to explain that a compatible network rating provider needs to be selected to use the feature. -->
-    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled">To use, select a compatible network rating provider</string>
     <!-- Preference title for option to install certificates -->
     <string name="wifi_install_credentials">Install certificates</string>
     <!-- Message to describe "Wi-Fi scan always available feature" when Wi-Fi is off and Wi-Fi
@@ -2039,24 +1830,6 @@
         turn on Wi-Fi scanning in
         <xliff:g id="link_begin">LINK_BEGIN</xliff:g>Wi\u2011Fi scanning
         settings<xliff:g id="link_end">LINK_END</xliff:g>.</string>
-    <!-- Wifi scan always mode checkbox text -->
-    <string name="wifi_scan_notify_remember_choice">Don\u2019t show again</string>
-    <!-- Setting title for setting the wifi sleep policy. Do we keep Wi-Fi active when the screen turns off? -->
-    <string name="wifi_setting_sleep_policy_title">Keep Wi\u2011Fi on during sleep</string>
-    <!-- Setting title for setting the wifi sleep policy. Do we keep Wi-Fi active when the screen turns off? [CHAR LIMIT=30] -->
-    <string name="wifi_setting_on_during_sleep_title">Wi\u2011Fi on during sleep</string>
-    <!-- Generic error message when the sleep policy could not be set. -->
-    <string name="wifi_setting_sleep_policy_error">There was a problem changing the setting</string>
-    <!-- Checkbox title for option to toggle suspend power optimizations [CHAR LIMIT=30] -->
-    <string name="wifi_suspend_efficiency_title">Improve efficiency</string>
-    <!-- Checkbox title for option to toggle suspend power optimizations -->
-    <string name="wifi_suspend_optimizations">Wi\u2011Fi optimization</string>
-    <!-- Checkbox summary for option to toggle suspend power optimizations -->
-    <string name="wifi_suspend_optimizations_summary">Minimize battery usage when Wi\u2011Fi is on</string>
-    <!-- Checkbox summary for option to toggle suspend power optimizations [CHAR LIMIT=30] -->
-    <string name="wifi_limit_optimizations_summary">Limit battery used by Wi\u2011Fi</string>
-    <!-- Checkbox title. Should we switch to using cellular data if Wi-Fi is still connected but the Wi-Fi network we're connected to no longer has Internet access (e.g., due to an outage)? -->
-    <string name="wifi_switch_away_when_unvalidated">Switch to mobile data if Wi\u2011Fi loses internet access.</string>
     <!-- Preference title for option to automatically switch away from bad wifi networks [CHAR LIMIT=60]-->
     <string name="wifi_cellular_data_fallback_title">Switch to mobile data automatically</string>
     <!-- Preference summary to automatically switch away from bad wifi networks [CHAR LIMIT=None]-->
@@ -3814,10 +3587,6 @@
     <string name="sms_change_default_dialog_title" translatable="true">Change SMS app?</string>
     <string name="sms_change_default_dialog_text" translatable="true">Use <xliff:g id="new_app">%1$s</xliff:g> instead of <xliff:g id="current_app">%2$s</xliff:g> as your SMS app?</string>
     <string name="sms_change_default_no_previous_dialog_text" translatable="true">Use <xliff:g id="new_app">%s</xliff:g> as your SMS app?</string>
-
-    <!-- Network Scorer Picker title [CHAR LIMIT=40]-->
-    <string name="network_scorer_picker_title">Network rating provider</string>
-    <string name="network_scorer_picker_none_preference">None</string>
 
     <!-- Wifi Assistant change wi-fi assistant title.  [CHAR LIMIT=40] -->
     <string name="network_scorer_change_active_dialog_title">Change Wi\u2011Fi assistant?</string>
@@ -6535,8 +6304,6 @@
     <string name="background_data_dialog_title">Disable background data?</string>
     <!-- Data synchronization settings screen, message of dialog that confirms the user's unchecking of background data [CHAR LIMIT=200] -->
     <string name="background_data_dialog_message">Disabling background data extends battery life and lowers data use. Some apps may still use the background data connection.</string>
-    <!-- Title for a checkbox that enables data synchronization in the account and sync screen [CHAR LIMIT=35] -->
-    <string name="sync_automatically">Auto-sync app data</string>
 
     <!-- Sync status messages on Accounts & Synchronization settings --><skip />
     <!-- Sync status shown when sync is enabled [CHAR LIMIT=25] -->
@@ -7888,9 +7655,6 @@
 
     <!-- Sound: Option for vibrate when ringing setting: Ramping ringer. [CHAR LIMIT=80] -->
     <string name="vibrate_when_ringing_option_ramping_ringer">Vibrate first then ring gradually</string>
-
-    <!-- Sound: Title for the other sounds option and associated settings page. [CHAR LIMIT=30] -->
-    <string name="other_sound_settings">Other sounds</string>
 
     <!-- Sound: Title for the option enabling spatializer effect. [CHAR LIMIT=30] -->
     <string name="spatial_audio_title">Spatial audio</string>
