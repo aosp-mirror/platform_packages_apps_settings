@@ -63,11 +63,6 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="form_value">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-    </style>
-
     <style name="PreferenceFragmentListSinglePane" parent="@*android:style/PreferenceFragmentList">
         <item name="android:layout_marginStart">0dp</item>
         <item name="android:layout_marginEnd">0dp</item>
@@ -78,22 +73,6 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:scrollbarStyle">outsideOverlay</item>
-    </style>
-
-    <style name="bt_item">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">8dip</item>
-        <item name="android:layout_marginStart">16dip</item>
-        <item name="android:layout_marginEnd">16dip</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:gravity">start</item>
-    </style>
-
-    <style name="bt_item_edit_content">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="wifi_item">
@@ -196,18 +175,6 @@
            parent="@*android:style/Animation.Material.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/confirm_credential_open_enter</item>
         <item name="android:activityOpenExitAnimation">@anim/confirm_credential_open_exit</item>
-    </style>
-
-    <style name="SetupWizardButton.Negative" parent="@style/SudGlifButton.Secondary">
-        <!-- Negative margin to offset for padding of the button itself. We want the label to be
-             aligned with the text above it -->
-        <item name="android:layout_marginStart">-16dp</item>
-    </style>
-
-    <style name="SetupWizardButton.Positive" parent="@style/SudGlifButton.Primary"/>
-
-    <style name="AccentColorHighlightBorderlessButton">
-        <item name="android:colorControlHighlight">?android:attr/colorAccent</item>
     </style>
 
     <style name="vpn_label">
