@@ -56,8 +56,9 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
     WifiTetherSoftApManager mWifiTetherSoftApManager;
 
     public WifiTetherPreferenceController(Context context, Lifecycle lifecycle) {
+        // TODO(b/246537032):Use fragment context to WifiManager service will caused memory leak
         this(context, lifecycle,
-                context.getSystemService(WifiManager.class),
+                context.getApplicationContext().getSystemService(WifiManager.class),
                 context.getSystemService(TetheringManager.class),
                 true /* initSoftApManager */,
                 WifiEnterpriseRestrictionUtils.isWifiTetheringAllowed(context));
