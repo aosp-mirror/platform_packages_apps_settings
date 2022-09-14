@@ -25,6 +25,7 @@ import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
 import android.text.style.TypefaceSpan;
 import android.text.style.URLSpan;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,12 @@ public class StorageWizardInit extends StorageWizardBase {
     private boolean mPortable;
 
     private ViewFlipper mFlipper;
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putBoolean("IS_PORTABLE", mPortable);
+        super.onSaveInstanceState(savedInstanceState);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,15 +71,27 @@ public class StorageWizardInit extends StorageWizardBase {
         mPortable = true;
 
         mFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
-        mFlipper.setDisplayedChild(0);
-        setHeaderText(R.string.storage_wizard_init_v2_external_title,
-            getDiskShortDescription());
-
-        setNextButtonText(R.string.storage_wizard_init_v2_external_action);
-        setBackButtonText(R.string.wizard_back_adoptable);
-        setNextButtonVisibility(View.VISIBLE);
-        if (!mDisk.isAdoptable()) {
-            setBackButtonVisibility(View.GONE);
+        if (savedInstanceState != null) {
+            mPortable = savedInstanceState.getBoolean("IS_PORTABLE");
+        }
+        if(mPortable) {
+            mFlipper.setDisplayedChild(0);
+            setHeaderText(R.string.storage_wizard_init_v2_external_title,
+                getDiskShortDescription());
+            setNextButtonText(R.string.storage_wizard_init_v2_external_action);
+            setBackButtonText(R.string.wizard_back_adoptable);
+            setNextButtonVisibility(View.VISIBLE);
+            if (!mDisk.isAdoptable()) {
+                setBackButtonVisibility(View.GONE);
+            }
+        }
+        else {
+            mFlipper.setDisplayedChild(1);
+            setHeaderText(R.string.storage_wizard_init_v2_internal_title,
+                getDiskShortDescription());
+            setNextButtonText(R.string.storage_wizard_init_v2_internal_action);
+            setBackButtonText(R.string.wizard_back_adoptable);
+            setNextButtonVisibility(View.VISIBLE);
         }
     }
 
@@ -144,6 +163,8 @@ public class StorageWizardInit extends StorageWizardBase {
 
         external_storage_textview.setMovementMethod(LinkMovementMethod.getInstance());
         internal_storage_textview.setMovementMethod(LinkMovementMethod.getInstance());
+        external_storage_textview.setOnTouchListener(listener);
+        internal_storage_textview.setOnTouchListener(listener);
     }
 
     private Spannable styleFont(String text) {
@@ -154,4 +175,22 @@ public class StorageWizardInit extends StorageWizardBase {
         }
         return s;
     }
+    private View.OnTouchListener listener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if(event.getAction() == MotionEvent.ACTION_UP) {
+                if (isInside(v, event)) {
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        private boolean isInside(View v, MotionEvent event) {
+            return !(event.getX() < 0 || event.getY() < 0
+                || event.getX() > v.getMeasuredWidth()
+                || event.getY() > v.getMeasuredHeight());
+        }
+    };
 }
