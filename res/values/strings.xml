@@ -12012,6 +12012,8 @@
     <string name="tare_nonwakeup_inexact" translatable="false">Inexact NonWakeup Alarm</string>
     <!-- Title for the AlarmClock alarm set via AlarmManager.setAlarmClock() [CHAR LIMIT=50]-->
     <string name="tare_alarm_clock" translatable="false">AlarmClock</string>
+    <!-- The action of installing an application onto the device [CHAR LIMIT=50]-->
+    <string name="tare_app_install">App Install</string>
     <!-- Top activity means an app is in the TOP android process state and is thus visible to the
     user[CHAR LIMIT=50]-->
     <string name="tare_top_activity">Top Activity</string>
@@ -12125,6 +12127,16 @@
         <item>@string/tare_notification_interaction</item>
         <item>@string/tare_widget_interaction</item>
         <item>@string/tare_other_interaction</item>
+    </string-array>
+    <!-- Titles for the different rewards apps could obtain for actions that benefit the user;
+    each has instant, ongoing, and max credit rewards apps could gain [CHAR LIMIT=50]-->
+    <string-array name="tare_job_scheduler_rewards_subfactors" translatable="false">
+        <item>@string/tare_top_activity</item>
+        <item>@string/tare_notification_seen</item>
+        <item>@string/tare_notification_interaction</item>
+        <item>@string/tare_widget_interaction</item>
+        <item>@string/tare_other_interaction</item>
+        <item>@string/tare_app_install</item>
     </string-array>
     <!-- Various JobScheduler tasks with different costs to produce and willingness to pay by apps
     if they want to carry out these different tasks [CHAR LIMIT=50]-->
