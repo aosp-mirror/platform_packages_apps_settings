@@ -66,6 +66,16 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
     }
 
     @Override
+    public int getAvailabilityStatus() {
+        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
+        if (carrierConfig != null && carrierConfig.getBoolean(
+                CarrierConfigManager.KEY_FORCE_HOME_NETWORK_BOOL)) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+        return AVAILABLE;
+    }
+
+    @Override
     public void onStart() {
         if (mListener == null) {
             mListener = new GlobalSettingsChangeListener(mContext,

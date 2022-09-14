@@ -143,35 +143,6 @@
         <item>Temporarily avoiding poor connection</item>
     </string-array>
 
-    <!-- Match this with the order of NetworkInfo.DetailedState. --> <skip />
-    <!-- Wi-Fi settings. The status messages when the network is known. -->
-    <string-array name="wifi_status_with_ssid">
-        <!-- Status message of Wi-Fi when it is idle. -->
-        <item></item>
-        <!-- Status message of Wi-Fi when it is scanning. -->
-        <item>Scanning\u2026</item>
-        <!-- Status message of Wi-Fi when it is connecting to a network. -->
-        <item>Connecting to <xliff:g id="network_name">%1$s</xliff:g>\u2026</item>
-        <!-- Status message of Wi-Fi when it is authenticating with a network. -->
-        <item>Authenticating with <xliff:g id="network_name">%1$s</xliff:g>\u2026</item>
-        <!-- Status message of Wi-Fi when it is obtaining IP address from a network. -->
-        <item>Obtaining IP address from <xliff:g id="network_name">%1$s</xliff:g>\u2026</item>
-        <!-- Status message of Wi-Fi when it is connected to a network. -->
-        <item>Connected to <xliff:g id="network_name">%1$s</xliff:g></item>
-        <!-- Status message of Wi-Fi when it is suspended. -->
-        <item>Suspended</item>
-        <!-- Status message of Wi-Fi when it is disconnecting from a network. -->
-        <item>Disconnecting from <xliff:g id="network_name">%1$s</xliff:g>\u2026</item>
-        <!-- Status message of Wi-Fi when it is disconnected. -->
-        <item>Disconnected</item>
-        <!-- Status message of Wi-Fi when it is a failure. -->
-        <item>Unsuccessful</item>
-        <!-- Status message of Wi-Fi when it is blocked. -->
-        <item>Blocked</item>
-        <!-- Status message of Wi-Fi when connectiong is being verified. -->
-        <item>Temporarily avoiding poor connection</item>
-    </string-array>
-
     <!-- Security types for wireless tether -->
     <string-array name="wifi_tether_security">
         <!-- Do not translate. -->
@@ -450,20 +421,6 @@
         <item>imsi</item>
         <!-- Do not translate. -->
         <item>gid</item>
-    </string-array>
-
-    <!-- Apps on SD installation location options in ApplicationSettings -->
-    <string-array name="app_install_location_entries">
-        <item>Internal device storage</item>
-        <item>Removable SD card</item>
-        <item>Let the system decide</item>
-    </string-array>
-
-    <!-- Do not translate. -->
-    <string-array name="app_install_location_values" translatable="false">
-        <item>device</item>
-        <item>sdcard</item>
-        <item>auto</item>
     </string-array>
 
     <!-- User display names for app ops codes -->
@@ -1328,14 +1285,6 @@
         <item>@string/rtt_settings_visible_during_call</item>
         <!-- 3:  Always visible -->
         <item>@string/rtt_settings_always_visible</item>
-    </string-array>
-
-    <!-- Values of list for one-handed timeout options. [DO NOT TRANSLATE] -->
-    <string-array name="one_handed_timeout_values" translatable="false">
-        <item>0</item>
-        <item>4</item>
-        <item>8</item>
-        <item>12</item>
     </string-array>
 
     <!-- All the preference when the open app supports TapPay -->
