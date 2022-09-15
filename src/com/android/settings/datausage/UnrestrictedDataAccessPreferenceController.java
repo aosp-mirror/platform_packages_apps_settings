@@ -194,7 +194,9 @@ public class UnrestrictedDataAccessPreferenceController extends BasePreferenceCo
             logSpecialPermissionChange(allowlisted, accessPreference.getEntry().info.packageName);
             mDataSaverBackend.setIsAllowlisted(accessPreference.getEntry().info.uid,
                     accessPreference.getEntry().info.packageName, allowlisted);
-            accessPreference.getDataUsageState().isDataSaverAllowlisted = allowlisted;
+            if (accessPreference.getDataUsageState() != null) {
+                accessPreference.getDataUsageState().isDataSaverAllowlisted = allowlisted;
+            }
             return true;
         }
         return false;
