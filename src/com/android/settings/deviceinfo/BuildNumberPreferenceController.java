@@ -240,6 +240,8 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
         mDevHitToast = Toast.makeText(mContext, R.string.show_dev_on,
                 Toast.LENGTH_LONG);
         mDevHitToast.show();
+
+        FeatureFactory.getFactory(mContext).getSearchFeatureProvider().sendPreIndexIntent(mContext);
     }
 
     @VisibleForTesting
