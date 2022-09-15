@@ -1842,26 +1842,8 @@
     <string name="wifi_configure_settings_preference_summary_wakeup_on">Wi\u2011Fi turns back on automatically</string>
     <!-- Summary for Wi-Fi Preferences that explains that Wi-Fi will not automatically be enabled when high quality saved networks are nearby-->
     <string name="wifi_configure_settings_preference_summary_wakeup_off">Wi\u2011Fi doesn\u0027t turn back on automatically</string>
-    <!-- Header for the list of wifi networks-->
-    <string name="wifi_access_points">Wi\u2011Fi networks</string>
-    <!-- Content description for menu button in Wifi setup. Not shown on the screen. [CHAR LIMIT=NONE] -->
-    <string name="wifi_menu_more_options">More options</string>
     <!-- Menu option to launch Wi-Fi Direct settings [CHAR LIMIT=20]-->
     <string name="wifi_menu_p2p">Wi\u2011Fi Direct</string>
-    <!-- Menu option to scan Wi-Fi networks -->
-    <string name="wifi_menu_scan">Scan</string>
-    <!-- Menu option to Wi-Fi advanced settings -->
-    <string name="wifi_menu_advanced">Advanced</string>
-    <!-- Menu option to Wi-Fi configure settings -->
-    <string name="wifi_menu_configure">Configure</string>
-    <!-- Menu option to connect to a Wi-Fi network -->
-    <string name="wifi_menu_connect">Connect to network</string>
-    <!-- Menu option to remember a temporary Wi-Fi network -->
-    <string name="wifi_menu_remember">Remember network</string>
-    <!-- Menu option to delete a Wi-Fi network -->
-    <string name="wifi_menu_forget">Forget network</string>
-    <!-- Menu option to modify a Wi-Fi network configuration -->
-    <string name="wifi_menu_modify">Modify network</string>
     <!-- Wi-Fi settings. text displayed when Wi-Fi is off and network list is empty [CHAR LIMIT=50]-->
     <string name="wifi_empty_list_wifi_off">To see available networks, turn Wi\u2011Fi on.</string>
     <!-- Wi-Fi settings. text displayed when Wi-Fi is on and network list is empty [CHAR LIMIT=50]-->
@@ -1934,20 +1916,10 @@
     <string name="wifi_password">Password</string>
     <!-- Label for the check box to show password -->
     <string name="wifi_show_password">Show password</string>
-    <!-- Label for the RadioGroup to choose wifi ap band -->
-    <string name="wifi_ap_band_config">Select AP Band</string>
     <!-- Label for the radio button to choose wifi ap 2.4 GHz band -->
     <string name="wifi_ap_choose_2G">2.4 GHz Band</string>
-    <!-- Label for the radio button to only choose wifi ap 5GHz band -->
-    <string name="wifi_ap_choose_5G">5.0 GHz Band</string>
     <!-- Label for the radio button to prefer 5GHz wifi ap band  [CHAR LIMIT=80]-->
     <string name="wifi_ap_prefer_5G">5.0 GHz Band preferred</string>
-    <!-- Label for adding to the list of selected bands when 2.4 GHz is selected -->
-    <string name="wifi_ap_2G">2.4 GHz</string>
-    <!-- Label for adding to the list of selected bands when 5.0 GHz is selected -->
-    <string name="wifi_ap_5G">5.0 GHz</string>
-    <!-- Label that is shown as a dialog summary informing users they must pick at LEAST one band for their hotspot [CHAR LIMIT=NONE]-->
-    <string name="wifi_ap_band_select_one">Choose at least one band for Wi\u2011Fi hotspot:</string>
     <!-- Label for the spinner to show ip settings [CHAR LIMIT=25] -->
     <string name="wifi_ip_settings">IP settings</string>
     <!-- Label for the spinner to show Wifi MAC randomization [CHAR LIMIT=25] -->
@@ -2045,8 +2017,6 @@
     <string name="wifi_use_system_certs">Use system certificates</string>
     <!-- Menu option for not providing an EAP user certificate -->
     <string name="wifi_do_not_provide_eap_user_cert">Do not provide</string>
-    <!-- Menu option for not validating the EAP server -->
-    <string name="wifi_do_not_validate_eap_server">Do not validate</string>
     <!-- Menu option for Trust On First Use[CHAR_LIMIT=64] -->
     <string name="wifi_trust_on_first_use">Trust on First Use</string>
     <!-- Warning message displayed if network name (ssid) is too long -->
@@ -2058,32 +2028,12 @@
          WPA3-Enterprise 192-bit. Only displayed if the user does not specify user certificate
          for WPA3-Enterprise 192-bit [CHAR LIMIT=80]-->
     <string name="wifi_no_user_cert_warning">Certificate required.</string>
-    <!-- Substring of status line when Wi-Fi Protected Setup (WPS) is available and
-         string is listed first [CHAR LIMIT=20]-->
-    <string name="wifi_wps_available_first_item">WPS available</string>
-    <!-- Substring of wifi status when Wi-Fi Protected Setup (WPS) is available and
-         string is listed after a wifi_secured_* string-->
-    <string name="wifi_wps_available_second_item">\u0020(WPS available)</string>
-
-    <!-- Message in dialog when the user tries to connect to a carrier network[CHAR_LIMIT=40] -->
-    <string name="wifi_carrier_connect">Carrier Wi\u2011Fi network</string>
-    <!-- Message in dialog when the user tries to connect to a carrier network[CHAR_LIMIT=60] -->
-    <string name="wifi_carrier_content">Connect via <xliff:g id="name">%1$s</xliff:g></string>
 
     <string name="wifi_scan_always_turnon_message">To improve location accuracy and for other purposes, <xliff:g id="app_name">%1$s</xliff:g> wants to turn on network scanning, even when Wi-Fi is off.\n\nAllow this for all apps that want to scan?</string>
     <!-- Message to inform user, an unknown app want to enable network scanning.  [CHAR LIMIT=250] -->
     <string name="wifi_scan_always_turn_on_message_unknown">To improve location accuracy and for other purposes, an unknown app wants to turn on network scanning, even when Wi\u2011Fi is off.\n\nAllow this for all apps that want to scan?</string>
-    <!-- Message informing the user how to turn off  [CHAR LIMIT=200] -->
-    <string name="wifi_scan_always_turnoff_message">To turn this off, go to Advanced in the overflow menu.</string>
     <string name="wifi_scan_always_confirm_allow">Allow</string>
     <string name="wifi_scan_always_confirm_deny">Deny</string>
-
-    <!-- Dialog label to sign in to a Hotspot. [CHAR LIMIT=50]-->
-    <string name="wifi_hotspot_title">Sign in to connect?</string>
-    <!-- Dialog message to sign in to a Hotspot. [CHAR LIMIT=50]-->
-    <string name="wifi_hotspot_message"><xliff:g id="app_name">%1$s</xliff:g> requires you to sign in online before you connect to the network.</string>
-    <!-- Wifi settings button to connect in to a Hotspot. [CHAR LIMIT=50]-->
-    <string name="wifi_hotspot_connect">CONNECT</string>
 
     <!-- Dialog text to tell the user that the selected network does not have Internet access. -->
     <string name="no_internet_access_text">This network has no internet access. Stay connected?</string>
@@ -2127,8 +2077,6 @@
     <string name="wifi_cancel">Cancel</string>
     <!-- Dialog title for forget confirmation dialog -->
     <string name="wifi_forget_dialog_title">Forget network?</string>
-    <!-- Dialog message for forget confirmation dialog -->
-    <string name="wifi_forget_dialog_message">All passwords for this network will be deleted</string>
 
     <!-- Wi-Fi Advanced Settings --> <skip />
     <!-- Wi-Fi settings screen, Saved networks summary.  This shows below the "Saved networks" item and indicates the number of networks, not including passpoint network, a user has saved. [CHAR LIMIT=30] -->
@@ -2146,8 +2094,6 @@
         <item quantity="one">1 network &amp; subscription</item>
         <item quantity="other">%d networks &amp; subscriptions</item>
     </plurals>
-    <!-- Wi-Fi settings screen, advanced, settings section.  This is a header shown above advanced wifi settings. [CHAR LIMIT=30] -->
-    <string name="wifi_advanced_titlebar">Advanced Wi\u2011Fi</string>
     <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's SSID. [CHAR LIMIT=20] -->
     <string name="wifi_advanced_ssid_title">SSID</string>
     <!-- Wi-Fi settings screen, advanced, title of the item to show the device's Wi-Fi MAC address. [CHAR LIMIT=50] -->
@@ -2156,9 +2102,6 @@
     <string name="wifi_advanced_randomized_mac_address_title">Randomized MAC address</string>
     <!-- Wi-Fi settings screen, advanced, title of the item to show the randomized Wi-Fi MAC address when disconnected. [CHAR LIMIT=69] -->
     <string name="wifi_advanced_randomized_mac_address_disconnected_title">Randomized MAC address (last used)</string>
-    <!-- Title of the screen to adjust IP settings -->
-    <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's current IP address. -->
-    <string name="wifi_advanced_ip_address_title">IP address</string>
 
     <!-- Wifi Network Details -->
     <!-- Wifi details title-->
@@ -2178,14 +2121,6 @@
     <string name="wifi_subscribed_access_points_tab">Subscriptions</string>
     <!-- Tab title for showing saved other networks. -->
     <string name="wifi_saved_other_networks_tab">Other networks</string>
-    <!-- Wifi Advanced settings.  Used as a label under the shortcut icon that goes to Wifi advanced settings. [CHAR LIMIT=20] -->
-    <string name="wifi_advanced_settings_label">IP settings</string>
-    <!-- Error message for users that aren't allowed to see or modify WiFi advanced settings [CHAR LIMIT=NONE] -->
-    <string name="wifi_advanced_not_available">Wi\u2011Fi advanced settings are not available for this user</string>
-    <!-- Menu item to save the IP settings -->
-    <string name="wifi_ip_settings_menu_save">Save</string>
-    <!-- Menu ietm to cancel the IP settings -->
-    <string name="wifi_ip_settings_menu_cancel">Cancel</string>
     <!-- Error message if the IP address is not valid [CHAR LIMIT=50]-->
     <string name="wifi_ip_settings_invalid_ip_address">Type a valid IP address.</string>
     <!-- Error message if the gateway is not valid [CHAR LIMIT=50]-->
@@ -2206,8 +2141,6 @@
     <!-- Wi-Fi p2p / Wi-Fi Direct settings -->
     <!-- Used in the 1st-level settings screen to launch Wi-fi Direct settings [CHAR LIMIT=25] -->
     <string name="wifi_p2p_settings_title">Wi\u2011Fi Direct</string>
-    <string name="wifi_p2p_device_info">Device information</string>
-    <string name="wifi_p2p_persist_network">Remember this connection</string>
     <!-- Menu option to discover peers-->
     <string name="wifi_p2p_menu_search">Search for devices</string>
     <!-- Menu option when discovery is in progress [CHAR LIMIT=25] -->
@@ -2240,30 +2173,16 @@
     <string name="wifi_hotspot_checkbox_text">Wi\u2011Fi hotspot</string>
     <!-- Summary text when turning hotspot off -->
     <string name="wifi_hotspot_off_subtext">Not sharing internet or content with other devices</string>
-    <!-- Summary text when tethering is on -->
-    <string name="wifi_hotspot_tethering_on_subtext" product="tablet">Sharing this tablet\u2019s internet connection via hotspot</string>
-    <!-- Summary text when tethering is on -->
-    <string name="wifi_hotspot_tethering_on_subtext" product="default">Sharing this phone\u2019s internet connection via hotspot</string>
-    <!-- Summary text when hotspot is on for local-only -->
-    <string name="wifi_hotspot_on_local_only_subtext">App is sharing content. To share internet connection, turn hotspot off, then on</string>
     <!-- Summary text when no password is set [CHAR LIMIT=60] -->
     <string name="wifi_hotspot_no_password_subtext">No password set</string>
 
     <!-- Wifi hotspot settings -->
     <!-- Label for Wifi hotspot name. -->
     <string name="wifi_hotspot_name_title">Hotspot name</string>
-    <!-- Summary for Wifi hotspot name when connection is in progress. -->
-    <string name="wifi_hotspot_name_summary_connecting">Turning on <xliff:g id="wifi_hotspot_name">%1$s</xliff:g>\u2026</string>
-    <!-- Summary for Wifi hotspot name when connected. -->
-    <string name="wifi_hotspot_name_summary_connected">Other devices can connect to <xliff:g id="wifi_hotspot_name">%1$s</xliff:g></string>
     <!-- Label for Wifi hotspot password. -->
     <string name="wifi_hotspot_password_title">Hotspot password</string>
     <!-- Label for Wifi hotspot AP Band. -->
     <string name="wifi_hotspot_ap_band_title">AP Band</string>
-    <!-- Wifi hotspot footer info for regular hotspot [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_footer_info_regular">Use hotspot to create a Wi\u2011Fi network for your other devices. Hotspot provides internet using your mobile data connection. Additional mobile data charges may apply.</string>
-    <!-- Wifi hotspot footer info [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_footer_info_local_only">Apps can create a hotspot to share content with nearby devices.</string>
 
     <!-- Title for the toggle to turn off hotspot automatically [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_auto_off_title">Turn off hotspot automatically</string>
@@ -2286,14 +2205,6 @@
     <string name="wifi_tether_carrier_unsupport_dialog_content">Contact your carrier for details</string>
     <!-- Subtext for wifi tether checkbox on success -->
     <string name="wifi_tether_enabled_subtext"><xliff:g id="network_ssid">%1$s</xliff:g> is active</string>
-    <!-- Subtext for wifi tether checkbox on failure -->
-    <string name="wifi_tether_failed_subtext">Portable Wi\u2011Fi hotspot error</string>
-    <!-- Used to open the ssid and security dialog for Wifi Access Point -->
-    <string name="wifi_tether_configure_ap_text">Set up Wi\u2011Fi hotspot</string>
-    <!-- Used to open the ssid and security dialog for Wifi Access Point.  [CHAR LIMIT=30]-->
-    <string name="wifi_hotspot_configure_ap_text">Wi\u2011Fi hotspot setup</string>
-    <!-- Summary Used to open the ssid and security dialog for Wifi Access Point.  [CHAR LIMIT=60] -->
-    <string name="wifi_hotspot_configure_ap_text_summary">AndroidAP WPA2 PSK hotspot</string>
     <!-- Default access point SSID used for tethering -->
     <string name="wifi_tether_configure_ssid_default">AndroidHotspot</string>
     <!-- Title for the panel of add Wi-Fi network from APP [CHAR LIMIT=50] -->
@@ -2467,116 +2378,18 @@
     <!-- Message of private dns that provides a help link. [CHAR LIMIT=NONE] -->
     <string name="private_dns_help_message"><annotation id="url">Learn more</annotation> about Private DNS features</string>
 
-    <!-- Message to display when setting wifi calling are not editable [CHAR LIMIT=NONE] -->
-    <string name="wifi_calling_pref_managed_by_carrier">Setting managed by carrier</string>
     <!-- Message to display when wifi calling needs activation [CHAR LIMIT=NONE] -->
     <string name="wifi_calling_settings_activation_instructions">Activate Wi\u2011Fi Calling</string>
     <!-- Message to display when wifi calling should be on [CHAR LIMIT=NONE] -->
     <string name="wifi_calling_turn_on">Turn on Wi\u2011Fi calling</string>
-    <!-- Message to display when carrier does not support wifi calling or doesn't want the user
-         to modify the settings [CHAR LIMIT=NONE] -->
-    <string name="wifi_calling_not_supported">Wi\u2011Fi calling is not supported for %1$s</string>
     <!-- Hint for a Wi-Fi network is disconnected successfully [CHAR LIMIT=NONE] -->
     <string name="wifi_disconnected_from">Disconnected from <xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g></string>
-    <!-- Carrier string to use in other messages -->
-    <string name="carrier">Carrier</string>
-    <!-- Sound and alerts settings -->
-    <skip/>
-    <string name="display_settings_title">Display</string>
     <!-- Sound and vibration settings screen heading. [CHAR LIMIT=30] -->
     <string name="sound_settings">Sound &amp; vibration</string>
     <!-- DO NOT TRANSLATE Summary placeholder -->
     <string name="summary_placeholder" translatable="false">&#160;</string>
     <!-- DO NOT TRANSLATE Summary placeholder reserving 2 lines -->
     <string name="summary_two_lines_placeholder" translatable="false">&#160;\n&#160;</string>
-    <!-- Sound settings screen, volume title -->
-    <string name="all_volume_title">Volumes</string>
-    <!-- Sound settings screen, music effects title [CHAR LIMIT=30]-->
-    <string name="musicfx_title">Music effects</string>
-    <!-- Sound settings screen, setting option name -->
-    <string name="ring_volume_title">Ring &amp; notification volume</string>
-    <!-- Sound settings screen, setting option name checkbox -->
-    <string name="vibrate_in_silent_title">Vibrate when silent</string>
-    <!-- Sound settings screen, setting option name -->
-    <string name="notification_sound_title">Default notification sound</string>
-    <!-- Sound settings screen, the title of the volume bar to adjust the incoming call volume -->
-    <string name="incoming_call_volume_title">Ringtone</string>
-    <!-- Sound settings screen, the title of the volume bar to adjust the notification volume -->
-    <string name="notification_volume_title">Notification</string>
-    <!-- Sound settings screen, the caption of the checkbox for having the notification volume be
-         the same as the incoming call volume. -->
-    <string name="checkbox_notification_same_as_incoming_call">Use incoming call volume for notifications</string>
-
-    <!-- Home settings screen, text indicating that a launcher does not support work profiles [CHAR LIMIT=100] -->
-    <string name="home_work_profile_not_supported">Doesn\'t support work profiles</string>
-
-    <!-- Sound settings screen, setting option title-->
-    <string name="notification_sound_dialog_title">Default notification sound</string>
-    <!-- Sound settings screen, setting option name -->
-    <string name="media_volume_title">Media</string>
-    <!-- Sound settings screen, setting option summary text -->
-    <string name="media_volume_summary">Set volume for music and videos</string>
-    <!-- Sound settings screen, alarm volume slider title -->
-    <string name="alarm_volume_title">Alarm</string>
-    <!-- Sound settings screen, dock settings summary-->
-    <string name="dock_settings_summary">Audio settings for the attached dock</string>
-    <!-- Sound settings screen, setting check box label -->
-    <string name="dtmf_tone_enable_title">Dial pad touch tones</string>
-    <!-- Sound settings screen, setting check box label -->
-    <string name="sound_effects_enable_title">Tap sounds</string>
-    <!-- Sound settings screen, setting check box label -->
-    <string name="lock_sounds_enable_title">Screen lock sound</string>
-    <!-- Sound settings screen, setting option name checkbox to enable/disable audio recording features that improve audio recording in noisy environments -->
-    <string name="audio_record_proc_title">Noise cancellation</string>
-    <!-- Volume description for media volume -->
-    <string name="volume_media_description">Music, video, games, &amp; other media</string>
-    <!-- Volume description for ringtone and notification volume -->
-    <string name="volume_ring_description">Ringtone &amp; notifications</string>
-    <!-- Volume description for notification volume -->
-    <string name="volume_notification_description">Notifications</string>
-    <!-- Volume description for alarm volume -->
-    <string name="volume_alarm_description">Alarms</string>
-    <!-- Image description for ring volume mute button. -->
-    <string name="volume_ring_mute">Mute ringtone &amp; notifications</string>
-    <!-- Image description for media volume mute button. -->
-    <string name="volume_media_mute">Mute music &amp; other media</string>
-    <!-- Image description for notification volume mute button. -->
-    <string name="volume_notification_mute">Mute notifications</string>
-    <!-- Image description for alarm volume mute button. -->
-    <string name="volume_alarm_mute">Mute alarms</string>
-
-    <!-- Dock settings title, top level -->
-    <string name="dock_settings">Dock</string>
-    <!-- Dock settings title -->
-    <string name="dock_settings_title">Dock settings</string>
-    <!-- Dock audio settings -->
-    <string name="dock_audio_settings_title">Audio</string>
-    <!-- Dock audio summary for docked to desk dock -->
-    <string name="dock_audio_summary_desk">Settings for the attached desktop dock</string>
-    <!-- Dock audio summary for docked to car dock -->
-    <string name="dock_audio_summary_car">Settings for the attached car dock</string>
-    <!-- Dock audio summary for undocked -->
-    <string name="dock_audio_summary_none" product="tablet">Tablet not docked</string>
-    <!-- Dock audio summary for undocked -->
-    <string name="dock_audio_summary_none" product="default">Phone not docked</string>
-    <!-- Dock audio summary for docked to unknown -->
-    <string name="dock_audio_summary_unknown">Settings for the attached dock</string>
-    <!-- Dock not found dialog title -->
-    <string name="dock_not_found_title">Dock not found</string>
-    <!-- Dock not found dialog text -->
-    <string name="dock_not_found_text" product="tablet">You need to dock the tablet before setting up dock audio.</string>
-    <!-- Dock not found dialog text -->
-    <string name="dock_not_found_text" product="default">You need to dock the phone before setting up dock audio.</string>
-    <!-- Dock settings screen, dock events SFX setting check box label -->
-    <string name="dock_sounds_enable_title">Dock insert sound</string>
-    <!-- Dock settings screen, setting option summary text when check box is selected -->
-    <string name="dock_sounds_enable_summary_on" product="tablet">Play sound when inserting or removing tablet from dock</string>
-    <!-- Dock settings screen, setting option summary text when check box is selected -->
-    <string name="dock_sounds_enable_summary_on" product="default">Play sound when inserting or removing phone from dock</string>
-    <!-- Sound settings screen, setting option summary text when check box is clear -->
-    <string name="dock_sounds_enable_summary_off" product="tablet">Don\u2019t play sound when inserting or removing tablet from dock</string>
-    <!-- Sound settings screen, setting option summary text when check box is clear -->
-    <string name="dock_sounds_enable_summary_off" product="default">Don\u2019t play sound when inserting or removing phone from dock</string>
 
     <!-- Account settings header. [CHAR LIMIT=30] -->
     <string name="account_settings">Accounts</string>
@@ -2633,58 +2446,11 @@
     <string name="color_mode_option_saturated">Saturated</string>
     <!-- Display settings screen, Color mode option for "Adaptive color"  [CHAR LIMIT=45] -->
     <string name="color_mode_option_automatic">Adaptive</string>
-    <!-- Display settings screen, "natural(sRGB) color" setting option summary [CHAR LIMIT=NONE] -->
-    <string name="color_mode_summary_natural">Use accurate colors only</string>
-    <!-- Display settings screen, "Adaptive color" setting option summary [CHAR LIMIT=NONE] -->
-    <string name="color_mode_summary_automatic">Adjust between vivid and accurate colors</string>
 
-    <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is selected -->
-    <string name="accelerometer_summary_on" product="tablet">Switch orientation automatically when rotating tablet</string>
-    <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is selected -->
-    <string name="accelerometer_summary_on" product="default">Switch orientation automatically when rotating phone</string>
-    <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is clear -->
-    <string name="accelerometer_summary_off" product="tablet">Switch orientation automatically when rotating tablet</string>
-    <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is clear -->
-    <string name="accelerometer_summary_off" product="default">Switch orientation automatically when rotating phone</string>
     <!-- Sound & display settings screen, setting option name to change brightness level -->
     <string name="brightness">Brightness level</string>
-    <!-- Sound & display settings screen, setting option name to change brightness level [CHAR LIMIT=30] -->
-    <string name="brightness_title">Brightness</string>
-    <!-- Sound & display settings screen, setting option summary to change brightness level -->
-    <string name="brightness_summary">Adjust the brightness of the screen</string>
     <!-- Sound & display settings screen, setting option name to enable adaptive brightness [CHAR LIMIT=30] -->
     <string name="auto_brightness_title">Adaptive brightness</string>
-    <!-- Summary about the feature adaptive brightness [CHAR LIMIT=NONE] -->
-    <string name="auto_brightness_summary">Screen brightness adjusts to environment</string>
-    <!-- Sound & display settings screen, setting option summary when preferred adaptive brightness is very low [CHAR LIMIT=100] -->
-    <string name="auto_brightness_summary_very_low">Preferred brightness is very low</string>
-    <!-- Sound & display settings screen, setting option summary when preferred adaptive brightness is low [CHAR LIMIT=100] -->
-    <string name="auto_brightness_summary_low">Preferred brightness is low</string>
-    <!-- Sound & display settings screen, setting option summary when preferred adaptive brightness is the default [CHAR LIMIT=100] -->
-    <string name="auto_brightness_summary_default">Preferred brightness is default</string>
-    <!-- Sound & display settings screen, setting option summary when preferred adaptive brightness is high [CHAR LIMIT=100] -->
-    <string name="auto_brightness_summary_high">Preferred brightness is high</string>
-    <!-- Sound & display settings screen, setting option summary when preferred adaptive brightness is very high [CHAR LIMIT=100] -->
-    <string name="auto_brightness_summary_very_high">Preferred brightness is very high</string>
-    <!-- Adaptive brightness settings screen, setting option to enable adaptive brightness when user prefers very low brightness [CHAR LIMIT=100] -->
-    <string name="auto_brightness_very_low_title">Very low</string>
-    <!-- Adaptive brightness settings screen, setting option to enable adaptive brightness when user prefers low brightness [CHAR LIMIT=100] -->
-    <string name="auto_brightness_low_title">Low</string>
-    <!-- Adaptive brightness settings screen, setting option to enable adaptive brightness when user prefers default brightness [CHAR LIMIT=100] -->
-    <string name="auto_brightness_default_title">Default</string>
-    <!-- Adaptive brightness settings screen, setting option to enable adaptive brightness when user prefers high brightness [CHAR LIMIT=100] -->
-    <string name="auto_brightness_high_title">High</string>
-    <!-- Adaptive brightness settings screen, setting option to enable adaptive brightness when user prefers very high brightness [CHAR LIMIT=100] -->
-    <string name="auto_brightness_very_high_title">Very high</string>
-    <!-- Adaptive brightness settings screen, subtitle [CHAR LIMIT=100] -->
-    <string name="auto_brightness_subtitle">Your preferred brightness level</string>
-    <!-- Adaptive brightness settings screen, setting option summary to disable adaptive brightness [CHAR LIMIT=100] -->
-    <string name="auto_brightness_off_summary">Don\'t adjust for available light</string>
-    <!-- Adaptive brightness settings screen, setting option summary to enable adaptive brightness when user prefers very high brightness.
-         Meant to make it clear that preferring very high brightness uses more battery. [CHAR LIMIT=100] -->
-    <string name="auto_brightness_very_high_summary">Increased battery usage</string>
-    <!-- Adaptive brightness settings screen, disclaimer that explains in more detail about how adaptive brightness works [CHAR LIMIT=150] -->
-    <string name="auto_brightness_disclaimer">Optimize brightness level for available light. When this feature is on, you can still adjust brightness temporarily.</string>
     <!-- Description about the feature adaptive brightness -->
     <string name="auto_brightness_description">Your screen brightness will automatically adjust to your environment and activities. You can move the slider manually to help adaptive brightness learn your preferences.</string>
 
@@ -2702,8 +2468,6 @@
     <string name="force_high_refresh_rate_desc">Highest refresh rate for improved touch responsiveness &amp; animation quality. Increases battery usage.</string>
     <!-- Display settings screen, setting option name to enable adaptive sleep [CHAR LIMIT=30] -->
     <string name="adaptive_sleep_title">Screen attention</string>
-    <!-- Setting option summary when adaptive sleep is on [CHAR LIMIT=NONE] -->
-    <string name="adaptive_sleep_summary_on">On / Screen won\u2019t turn off if you\u2019re looking at it</string>
     <!-- adaptive_sleep settings screen, title about the required permission is missing [CHAR LIMIT=NONE]-->
     <string name="adaptive_sleep_title_no_permission">Camera access needed</string>
     <!-- adaptive_sleep settings screen, subtitle when permission is missing [CHAR LIMIT=NONE]-->
@@ -2745,8 +2509,6 @@
     <string name="night_display_start_time_title">Start time</string>
     <!-- Night display screen, setting option name to configure time to automatically turn off night display. [CHAR LIMIT=30] -->
     <string name="night_display_end_time_title">End time</string>
-    <!-- Night display screen, setting option name controlling the current activation status. [CHAR LIMIT=30] -->
-    <string name="night_display_status_title">Status</string>
     <!-- Night display screen, setting the color temperature of the display. [CHAR LIMIT=30] -->
     <string name="night_display_temperature_title">Intensity</string>
     <!-- Display settings screen, summary of night display when off and will *never* turn on automatically. [CHAR LIMIT=NONE] -->
@@ -2761,18 +2523,6 @@
     <string name="night_display_summary_on_auto_mode_custom">Will turn off automatically at <xliff:g name="time" example="10 PM">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when on and will turn off automatically at sunrise. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_on_auto_mode_twilight">Will turn off automatically at sunrise</string>
-    <!-- Display settings screen, activation button action for manual mode. [CHAR LIMIT=40] -->
-    <string name="night_display_activation_on_manual">Turn on now</string>
-    <!-- Display settings screen, deactivation button action for manual mode. [CHAR LIMIT=40] -->
-    <string name="night_display_activation_off_manual">Turn off now</string>
-    <!-- Display settings screen, activation button action for sunset-to-sunrise schedule [CHAR LIMIT=40] -->
-    <string name="night_display_activation_on_twilight">Turn on until sunrise</string>
-    <!-- Display settings screen, deactivation button action for sunset-to-sunrise schedule [CHAR LIMIT=40] -->
-    <string name="night_display_activation_off_twilight">Turn off until sunset</string>
-    <!-- Display settings screen, activation button action for custom schedule [CHAR LIMIT=40] -->
-    <string name="night_display_activation_on_custom">Turn on until <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
-    <!-- Display settings screen, deactivation button action for custom schedule [CHAR LIMIT=40] -->
-    <string name="night_display_activation_off_custom">Turn off until <xliff:g name="time" example="10 PM">%1$s</xliff:g></string>
     <!-- Night display slice screen, subtitle of intensity setting when night light is off. [CHAR LIMIT=30] -->
     <string name="night_display_not_currently_on">Night Light not currently on</string>
 
@@ -2821,10 +2571,6 @@
     <string name="dark_ui_summary_on_auto_mode_custom">Will turn off automatically at <xliff:g name="time" example="10 PM">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of Dark UI when on and will turn off automatically after bedtime. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime">Will turn off automatically after bedtime</string>
-    <!-- Display settings screen, activation button action for custom schedule [CHAR LIMIT=40] -->
-    <string name="dark_ui_activation_on_custom">Turn on until <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
-    <!-- Display settings screen, deactivation button action for custom schedule [CHAR LIMIT=40] -->
-    <string name="dark_ui_activation_off_custom">Turn off until <xliff:g name="time" example="10 PM">%1$s</xliff:g></string>
     <!-- Dark theme screen, description of Dark theme feature. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_text">Dark theme uses a black background to help keep battery alive longer on some screens. Dark theme schedules wait to turn on until your screen is off.</string>
     <!-- Dark UI screen footer summary text shown when the when Dark theme turns on/off automatically according to a user bedtime schedule. [CHAR LIMIT=NONE] -->
@@ -2835,8 +2581,6 @@
 
     <!-- Sound & display settings screen, setting option name to change screen timeout -->
     <string name="screen_timeout">Screen timeout</string>
-    <!-- Sound & display settings screen, setting option name to change screen timeout [CHAR LIMIT=30] -->
-    <string name="screen_timeout_title">Screen turns off</string>
     <!-- Sound & display settings screen, setting option summary to change screen timeout -->
     <string name="screen_timeout_summary">After <xliff:g id="timeout_description">%1$s</xliff:g> of inactivity</string>
     <!-- Wallpaper settings title [CHAR LIMIT=30] -->
@@ -2845,10 +2589,6 @@
     <string name="style_and_wallpaper_settings_title">Wallpaper &amp; style</string>
     <!-- Summary for the top level wallpapers settings [CHAR LIMIT=NONE]-->
     <string name="wallpaper_dashboard_summary">Home, lock screen</string>
-    <!-- Wallpaper settings summary when default wallpaper is used [CHAR LIMIT=NONE] -->
-    <string name="wallpaper_settings_summary_default">Default</string>
-    <!-- Wallpaper settings summary when wallpaper has been updated [CHAR LIMIT=NONE] -->
-    <string name="wallpaper_settings_summary_custom">Custom</string>
     <!-- Wallpaper suggestion title [CHAR LIMIT=46] -->
     <string name="wallpaper_suggestion_title">Change wallpaper</string>
     <!-- Wallpaper suggestion summary [CHAR LIMIT=55] -->
@@ -2875,8 +2615,6 @@
     <string name="screensaver_settings_summary_never">Never</string>
     <!-- Dream settings screen, action label, when to dream [CHAR LIMIT=20] -->
     <string name="screensaver_settings_when_to_dream">When to start</string>
-    <!-- Sound & display settings screen, setting option name to change whether the screen adjusts automatically based on lighting conditions -->
-    <string name="automatic_brightness">Automatic brightness</string>
     <!-- [CHAR LIMIT=40] Display settings screen, setting option name to change whether the device wakes up when a lift gesture is detected. -->
     <string name="lift_to_wake_title">Lift to wake</string>
 
@@ -2899,17 +2637,11 @@
     <string name="title_font_size">Font size</string>
     <!-- Summary for Font size. Lets the user know that this will make text larger or smaller. Appears in the accessibility portion of setup wizard. [CHAR LIMIT=NONE] -->
     <string name="short_summary_font_size">Make text bigger or smaller</string>
-    <!-- Sound & display settings screen, setting option summary displaying the currently selected font size -->
-    <string name="summary_font_size" translatable="false">%1$s</string>
 
     <!-- SIM lock settings title  [CHAR LIMIT=40] -->
     <string name="sim_lock_settings">SIM card lock settings</string>
     <!-- Security & screen lock settings screen, SIM card lock setting option name  [CHAR LIMIT=40] -->
     <string name="sim_lock_settings_category">SIM card lock</string>
-    <!-- Security & screen lock settings screen, SIM card lock setting summary when on [CHAR LIMIT=NONE] -->
-    <string name="sim_lock_settings_summary_on">Locked</string>
-    <!-- Security & location settings screen, section heading for settings related to sim card locking  [CHAR LIMIT=40] -->
-    <string name="sim_lock_settings_title">SIM card lock</string>
     <!-- SIM card lock settings screen, setting check box label  [CHAR LIMIT=40] -->
     <string name="sim_pin_toggle">Lock SIM card</string>
     <!-- SIM card lock settings screen, setting option summary text when SIM lock check box is selected  [CHAR LIMIT=40] -->
@@ -2940,12 +2672,8 @@
     <string name="sim_invalid_pin_hint">Type a PIN that is 4 to 8 numbers</string>
     <!-- SIM card lock settings screen, SIM PIN dialog message when PINs don't match  [CHAR LIMIT=40] -->
     <string name="sim_pins_dont_match">PINs don\u2019t match</string>
-    <!-- SIM card lock settings screen, toast after not entering correct SIM PIN  [CHAR LIMIT=40] -->
-    <string name="sim_change_failed">Can\u2019t change PIN.\nPossibly incorrect PIN.</string>
     <!-- SIM card lock settings screen, SIM PIN dialog message when the entered PIN is correct [CHAR LIMIT=40] -->
     <string name="sim_change_succeeded">SIM PIN changed successfully</string>
-    <!-- SIM card lock settings screen, toast after not entering correct SIM PIN [CHAR LIMIT=40] -->
-    <string name="sim_lock_failed">Can\u2019t change SIM card lock state.\nPossibly incorrect PIN.</string>
     <!-- SIM card lock settings screen, toast after disabling PIN failed from modem -->
     <string name="sim_pin_disable_failed">Can\'t disable PIN.</string>
     <!-- SIM card lock settings screen, toast after enabling PIN failed from modem -->
@@ -2954,10 +2682,6 @@
     <string name="sim_enter_ok">OK</string>
     <!-- SIM card lock settings screen, SIM PIN dialog button labels: [CHAR LIMIT=40] -->
     <string name="sim_enter_cancel">Cancel</string>
-    <!-- Multiple SIMs found title.  [CHAR LIMIT=40] -->
-    <string name="sim_multi_sims_title">Multiple SIMs found</string>
-    <!-- Multiple SIMs found summary.  [CHAR LIMIT=100] -->
-    <string name="sim_multi_sims_summary">Choose the SIM you prefer for mobile data.</string>
     <!-- Title asking user if they wish to change the default sim for cellular data.  [CHAR LIMIT=40] -->
     <string name="sim_change_data_title">
         Use <xliff:g id="carrier" example="Verizon">%1$s</xliff:g> for mobile data?
@@ -3322,14 +3046,6 @@
     <string name="apn_mnc">MNC</string>
     <!-- Edit acces  point labels: Authenticaton type-->
     <string name="apn_auth_type">Authentication type</string>
-    <!-- Authentication Typs: None -->
-    <string name="apn_auth_type_none">None</string>
-    <!-- Authentication Typs: PAP -->
-    <string name="apn_auth_type_pap">PAP</string>
-    <!-- Authentication Typs: CHAP -->
-    <string name="apn_auth_type_chap">CHAP</string>
-    <!-- Authentication Typs: PAP or CHAP -->
-    <string name="apn_auth_type_pap_chap">PAP or CHAP</string>
     <!-- Edit access point labels: The type of APN -->
     <string name="apn_type">APN type</string>
     <!-- Edit access point labels: The protocol of the APN, e.g., "IPv4", "IPv6", or "IPv4/IPv6". -->
@@ -3376,11 +3092,6 @@
 
     <!-- Title for a screen containing all device reset options [CHAR LIMIT=50] -->
     <string name="reset_dashboard_title">Reset options</string>
-
-    <!-- Summary text for a screen containing all device reset options [CHAR LIMIT=None] -->
-    <string name="reset_dashboard_summary">Network, apps, or device can be reset</string>
-    <!-- Summary text for a screen device reset option for Apps [CHAR LIMIT=NONE] -->
-    <string name="reset_dashboard_summary_onlyApps">Apps can be reset</string>
 
     <!-- Reset Network -->
     <!-- Button title to reset Wi-Fi settings, Mobile data setting, bluetooth settings -->
@@ -3605,13 +3316,7 @@
 
     <!-- Location settings screen, sub category for recent location requests [CHAR LIMIT=42] -->
     <string name="location_category_recent_location_requests">Recent location requests</string>
-    <!-- Location settings screen, displayed when there're more than three recent location requests [CHAR LIMIT=30] -->
-    <string name="location_recent_location_requests_see_all">See all</string>
-    <!-- Location settings screen, sub category for location services [CHAR LIMIT=30] -->
-    <string name="location_category_location_services">Location services</string>
 
-    <!-- Security & location settings screen, section header for settings relating to location -->
-    <string name="location_title">My Location</string>
     <!-- [CHAR LIMIT=30] Title for managed profile location switch  -->
     <string name="managed_profile_location_switch_title">Location for work profile</string>
     <!-- [CHAR LIMIT=30] Location settings screen. It's a link that directs the user to a page that
@@ -3668,8 +3373,6 @@
     <string name="location_services_preference_title">Location services</string>
     <!-- [CHAR LIMIT=60] Location Services screen, screen title -->
     <string name="location_services_screen_title">Location services</string>
-    <!-- [CHAR LIMIT=50] Location settings screen, sub category for location services for managed profile -->
-    <string name="managed_profile_location_services">Location services for work</string>
 
     <!-- [CHAR LIMIT=60] Date&Time settings screen, toggle button title -->
     <string name="location_time_zone_detection_toggle_title">Use location</string>
@@ -3701,35 +3404,6 @@
     <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is enabled. -->
     <string name="location_time_zone_detection_auto_is_on">Location may be used to set time zone</string>
 
-    <!-- [CHAR LIMIT=30] Security & location settings screen, setting check box label for Google location service (cell ID, wifi, etc.) -->
-    <string name="location_network_based">Wi\u2011Fi &amp; mobile network location</string>
-    <!-- [CHAR LIMIT=130] Security & location settings screen, setting summary for Google location service check box-->
-    <string name="location_neighborhood_level">Let apps use Google\u2019s location service to estimate your location faster. Anonymous location data will be collected and sent to Google.</string>
-    <!-- [CHAR LIMIT=130] Security & location settings screen, setting summary when Use wireless networks check box is selected, for wifi-only devices -->
-    <string name="location_neighborhood_level_wifi">Location determined by Wi\u2011Fi</string>
-    <!-- [CHAR LIMIT=30] Security & location settings screen, setting check box label for GPS satellites -->
-    <string name="location_gps">GPS satellites</string>
-    <!-- [CHAR LIMIT=100] Security & location settings screen, setting check box summary for GPS satellites on a tablet -->
-    <string name="location_street_level" product="tablet">Let apps use GPS on your tablet to pinpoint your location</string>
-    <!-- [CHAR LIMIT=100] Security & location settings screen, setting check box summary for GPS satellites on a phone -->
-    <string name="location_street_level" product="default">Let apps use GPS on your phone to pinpoint your location</string>
-    <!-- Security & location settings screen, setting check box label if Assisted GPS should be enabled -->
-    <string name="assisted_gps">Use assisted GPS</string>
-    <!-- Security & location settings screen, setting summary when Assisted GPS check box is selected -->
-    <string name="assisted_gps_enabled">Use server to assist GPS (uncheck to reduce network usage)</string>
-    <!-- Security & location settings screen, setting summary when Assisted GPS check box is clear -->
-    <string name="assisted_gps_disabled">Use server to assist GPS (uncheck to improve GPS performance)</string>
-    <!-- [CHAR_LIMIT=30] Security & location settings screen, setting check box label for Google search -->
-    <string name="use_location_title">Location &amp; Google search</string>
-    <!-- [CHAR_LIMIT=100] Security & location settings screen, setting check box summary for Google search -->
-    <string name="use_location_summary">Let Google use your location to improve search results and other services</string>
-    <!-- [CHAR LIMIT=45] Label for turning on/off location access completely. -->
-    <string name="location_access_title">Access to my location</string>
-    <!-- [CHAR LIMIT=none] Description text for location access switch -->
-    <string name="location_access_summary">Let apps that have asked your permission use your location information</string>
-    <!-- [CHAR LIMIT=45] Section heading for location sources -->
-    <string name="location_sources_heading">Location sources</string>
-
     <!-- About --> <skip />
     <!-- Main settings screen, setting title for the user to go into the About phone screen -->
     <string name="about_settings" product="tablet">About tablet</string>
@@ -3743,8 +3417,6 @@
     <string name="about_settings_summary">View legal info, status, software version</string>
     <!-- About phone settings screen, setting option name to go to dialog that shows legal info -->
     <string name="legal_information">Legal information</string>
-    <!-- About phone settings screen, setting option name to see a list of contributors -->
-    <string name="contributors_title">Contributors</string>
     <!-- About phone settings screen, setting option name to show Manual [CHAR LIMIT=25] -->
     <string name="manual">Manual</string>
     <!-- About phone settings screen, setting option name to show regulatory labels [CHAR LIMIT=25] -->
@@ -3784,12 +3456,6 @@
     <!-- About phone settings screen, Open source license dialog title until license is fully loaded -->
     <string name="settings_license_activity_loading">Loading\u2026</string>
 
-    <!-- About phone settings, Safety Legal information setting option name and title of dialog box holding safety legal info -->
-    <string name="settings_safetylegal_title">Safety information</string>
-    <!-- About phone settings, Safety Legal information setting option name and title of dialog box holding safety legal info -->
-    <string name="settings_safetylegal_activity_title">Safety information</string>
-    <!-- About phone settings screen, Safety legal dialog message when data network is not connected -->
-    <string name="settings_safetylegal_activity_unreachable">You don\u2019t have a data connection. To view this information now, go to %s from any computer connected to the internet.</string>
     <!-- About phone settings screen, Safety Legal dialog title until the link is fully loaded -->
     <string name="settings_safetylegal_activity_loading">Loading\u2026</string>
 
@@ -4206,10 +3872,6 @@
     <string name="app_not_found_dlg_text"> The app wasn\u2019t found in the list of installed apps.</string>
     <!-- Manage applications, text for dialog if clear data fails-->
     <string name="clear_failed_dlg_text">Couldn\u2019t clear storage for app.</string>
-    <!-- [CHAR_LIMIT=NONE] Format to put together two items in a list. -->
-    <string name="join_two_items"><xliff:g id="first_item">%1$s</xliff:g> and <xliff:g id="second_item">%2$s</xliff:g></string>
-    <!-- [CHAR_LIMIT=NONE] Format to put together two unrelated items in a list when "and" is not an appropriate conjunction for these 2 items -->
-    <string name="join_two_unrelated_items"><xliff:g id="first_item">%1$s</xliff:g>, <xliff:g id="second_item">%2$s</xliff:g></string>
     <string name="computing_size">Computing\u2026</string>
     <string name="invalid_size_value">Couldn\u2019t compute package size.</string>
     <!-- Manage applications, version string displayed in app snippet -->
@@ -4232,16 +3894,10 @@
     <string name="force_stop_dlg_title">Force stop?</string>
     <!-- [CHAR LIMIT=200] Manage applications, text for dialog when killing persistent apps-->
     <string name="force_stop_dlg_text">If you force stop an app, it may misbehave.</string>
-    <!-- Manage applications, application installation location title -->
-    <string name="app_install_location_title">Preferred install location</string>
-    <!-- Manage applications. application installation location summary -->
-    <string name="app_install_location_summary">Change the preferred installation location for new apps</string>
     <!-- [CHAR LIMIT=30] Manage applications, label for option to disable app -->
     <string name="app_disable_dlg_positive">Disable app</string>
     <!-- [CHAR LIMIT=NONE] Manage applications, text for dialog when disabling apps -->
     <string name="app_disable_dlg_text">If you disable this app, Android and other apps may no longer function as intended. Keep in mind, you can\u2019t delete this app since it came pre-installed on your device. By disabling, you turn this app off and hide it on your device.</string>
-    <!-- [CHAR LIMIT=30] Manage applications, title for dialog when disabling notifications for an app -->
-    <string name="app_disable_notifications_dlg_title">Turn off notifications?</string>
     <!-- Manage applications, individual application info screen, section heading for information about the app installer [CHAR_LIMIT=25] -->
     <string name="app_install_details_group_title">Store</string>
     <!-- Manage applications, individual application info screen, title for the option which will trigger application info in it's installer [CHAR_LIMIT=25] -->
@@ -4258,13 +3914,8 @@
     <!-- [CHAR LIMIT=NONE] Time label for an operation that has never executed. -->
     <string name="app_ops_never_used">(Never used)</string>
 
-    <!-- [CHAR LIMIT=25] Text shown when there are no default Apps -->
-    <string name="no_default_apps">No default Apps.</string>
-
     <!-- [CHAR LIMIT=25] Services settings screen, setting option name for the user to go to the screen to view app storage use -->
     <string name="storageuse_settings_title">Storage use</string>
-    <!-- Services settings screen, setting option summary for the user to go to the screen to app storage use -->
-    <string name="storageuse_settings_summary">View storage used by apps</string>
 
     <!-- Label for a service item when it is restarting -->
     <string name="service_restarting">Restarting</string>
