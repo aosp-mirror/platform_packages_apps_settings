@@ -56,7 +56,7 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
     }
 
     @Test
-    public void init_leftSideDevice_expectedTitle() {
+    public void init_leftSideDevice_rightSideButtonTitle() {
         when(mCachedDevice.getDeviceSide()).thenReturn(HearingAidProfile.DeviceSide.SIDE_LEFT);
 
         mController.init(mScreen);
@@ -66,7 +66,7 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
     }
 
     @Test
-    public void init_rightSideDevice_expectedTitle() {
+    public void init_rightSideDevice_leftSideButtonTitle() {
         when(mCachedDevice.getDeviceSide()).thenReturn(HearingAidProfile.DeviceSide.SIDE_RIGHT);
 
         mController.init(mScreen);
@@ -117,5 +117,16 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
         when(mCachedDevice.getSubDevice()).thenReturn(null);
 
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void refresh_leftSideDevice_leftSideButtonTitle() {
+        when(mCachedDevice.getDeviceSide()).thenReturn(HearingAidProfile.DeviceSide.SIDE_RIGHT);
+        mController.init(mScreen);
+
+        mController.refresh();
+
+        assertThat(mPreference.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.bluetooth_pair_left_ear_button));
     }
 }
