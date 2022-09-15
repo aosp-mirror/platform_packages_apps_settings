@@ -232,8 +232,7 @@ public class QrCodeScanModeFragment extends InstrumentedFragment implements
     }
 
     private void updateSummary() {
-        mSummary.setText(getString(R.string.bt_le_audio_scan_qr_code_scanner,
-                null /* broadcast_name*/));;
+        mSummary.setText(R.string.bt_le_audio_scan_qr_code_scanner);
     }
 
     @Override
