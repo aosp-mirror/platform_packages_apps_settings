@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
 
 package com.android.settings.network.telephony;
@@ -47,7 +47,7 @@ import org.robolectric.shadows.ShadowSubscriptionManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowSubscriptionManager.class)
-public class DataDuringCallsPreferenceControllerTest {
+public class AutoDataSwitchPreferenceControllerTest {
     private static final String PREF_KEY = "pref_key";
     private static final int SUB_ID_1 = 111;
     private static final int SUB_ID_2 = 222;
@@ -59,7 +59,7 @@ public class DataDuringCallsPreferenceControllerTest {
 
     private Context mContext;
     private SwitchPreference mSwitchPreference;
-    private DataDuringCallsPreferenceController mController;
+    private AutoDataSwitchPreferenceController mController;
 
     @Before
     public void setUp() {
@@ -69,9 +69,11 @@ public class DataDuringCallsPreferenceControllerTest {
         when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
         mSwitchPreference = new SwitchPreference(mContext);
         when(mPreferenceScreen.findPreference(PREF_KEY)).thenReturn(mSwitchPreference);
-        mController = new DataDuringCallsPreferenceController(mContext, PREF_KEY) {
+        mController = new AutoDataSwitchPreferenceController(mContext, PREF_KEY) {
             @Override
-            protected boolean hasMobileData() { return true; }
+            protected boolean hasMobileData() {
+                return true;
+            }
         };
         mController.init(SUB_ID_1);
     }
@@ -79,8 +81,8 @@ public class DataDuringCallsPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_noInit_notAvailable() {
         ShadowSubscriptionManager.setDefaultDataSubscriptionId(SUB_ID_1);
-        DataDuringCallsPreferenceController controller =
-                new DataDuringCallsPreferenceController(mContext, PREF_KEY);
+        AutoDataSwitchPreferenceController controller =
+                new AutoDataSwitchPreferenceController(mContext, PREF_KEY);
 
         // note that we purposely don't call init first on the controller
         assertThat(controller.getAvailabilityStatus(INVALID_SUBSCRIPTION_ID)).isEqualTo(

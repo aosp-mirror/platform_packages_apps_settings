@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
 
 package com.android.settings.network.telephony;
@@ -36,7 +36,17 @@ import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.network.MobileDataContentObserver;
 import com.android.settings.network.SubscriptionsChangeListener;
 
-public class DataDuringCallsPreferenceController extends TelephonyTogglePreferenceController
+/**
+ * Controls whether switch mobile data to the non-default SIM if the non-default SIM has better
+ * availability.
+ *
+ * This is used for temporarily allowing data on the non-default data SIM when on-default SIM
+ * has better availability on DSDS devices, where better availability means strong
+ * signal/connectivity.
+ * If this feature is enabled, data will be temporarily enabled on the non-default data SIM,
+ * including during any voice calls.
+ */
+public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenceController
         implements LifecycleObserver,
         SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
 
@@ -46,7 +56,7 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
     private MobileDataContentObserver mMobileDataContentObserver;
     private PreferenceScreen mScreen;
 
-    public DataDuringCallsPreferenceController(Context context,
+    public AutoDataSwitchPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
     }
@@ -90,13 +100,13 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
     @Override
     public boolean isChecked() {
         return mManager.isMobileDataPolicyEnabled(
-                TelephonyManager.MOBILE_DATA_POLICY_DATA_ON_NON_DEFAULT_DURING_VOICE_CALL);
+                TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
         mManager.setMobileDataPolicyEnabled(
-                TelephonyManager.MOBILE_DATA_POLICY_DATA_ON_NON_DEFAULT_DURING_VOICE_CALL,
+                TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH,
                 isChecked);
         return true;
     }
