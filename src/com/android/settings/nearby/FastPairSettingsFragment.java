@@ -21,6 +21,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.nearby.NearbyManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -34,6 +35,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.util.Objects;
 
@@ -48,14 +50,17 @@ public class FastPairSettingsFragment extends SettingsPreferenceFragment {
     private static final String SCAN_SWITCH_KEY = "fast_pair_scan_switch";
     private static final String SAVED_DEVICES_PREF_KEY = "saved_devices";
 
+    private MainSwitchPreference mMainSwitchPreference;
+    private OnMainSwitchChangeListener mMainSwitchChangeListener;
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        MainSwitchPreference mainSwitchPreference = Objects.requireNonNull(
+        mMainSwitchPreference = Objects.requireNonNull(
                 findPreference(SCAN_SWITCH_KEY));
-        mainSwitchPreference.setChecked(false);
-
+        mMainSwitchChangeListener = (switchView, isChecked) ->
+                NearbyManager.setFastPairScanEnabled(getContext(), isChecked);
         Preference savedDevicePref = Objects.requireNonNull(
                 findPreference(SAVED_DEVICES_PREF_KEY));
         savedDevicePref.setOnPreferenceClickListener(preference -> {
@@ -65,6 +70,19 @@ public class FastPairSettingsFragment extends SettingsPreferenceFragment {
             }
             return true;
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mMainSwitchPreference.addOnSwitchChangeListener(mMainSwitchChangeListener);
+        mMainSwitchPreference.setChecked(NearbyManager.isFastPairScanEnabled(getContext()));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mMainSwitchPreference.removeOnSwitchChangeListener(mMainSwitchChangeListener);
     }
 
     @Override

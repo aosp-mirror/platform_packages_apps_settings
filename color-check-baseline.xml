@@ -3125,22 +3125,6 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="            android:color=&quot;@color/accessibility_feature_background&quot;/>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/drawable/ic_screen_zoom.xml"
-            line="22"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="    &lt;background android:drawable=&quot;@color/shortcut_background&quot;/>"
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -3739,38 +3723,6 @@
             file="res/layout/nfc_payment_how_it_works.xml"
             line="78"
             column="15"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="          &lt;item android:offset=&quot;0&quot; android:color=&quot;#FF4285F4&quot;/>"
-        errorLine2="                                   ~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/drawable/one_handed_guideline.xml"
-            line="34"
-            column="36"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="          &lt;item android:offset=&quot;1&quot; android:color=&quot;#004385F5&quot;/>"
-        errorLine2="                                   ~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/drawable/one_handed_guideline.xml"
-            line="35"
-            column="36"/>
     </issue>
 
     <issue
