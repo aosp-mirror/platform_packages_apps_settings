@@ -148,11 +148,11 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
             }, DELAY_COLLAPSE_DURATION_MILLIS);
         }
 
+        // Remove the animator as early as possible to avoid a RecyclerView crash.
+        recyclerView.setItemAnimator(null);
         // Scroll to correct position after 600 milliseconds.
         root.postDelayed(() -> {
             mHighlightRequested = true;
-            // Remove the animator to avoid a RecyclerView crash.
-            recyclerView.setItemAnimator(null);
             recyclerView.smoothScrollToPosition(position);
             mHighlightPosition = position;
         }, DELAY_HIGHLIGHT_DURATION_MILLIS);
