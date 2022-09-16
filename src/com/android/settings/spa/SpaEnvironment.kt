@@ -17,6 +17,7 @@
 package com.android.settings.spa
 
 import com.android.settings.spa.app.AppsMainPageProvider
+import com.android.settings.spa.app.appsettings.AppSettingsProvider
 import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
@@ -50,6 +51,7 @@ object SpaEnvironment {
             allPageProviders = listOf(
                 HomePageProvider,
                 AppsMainPageProvider,
+                AppSettingsProvider,
                 SpecialAppAccessPageProvider,
                 NotificationMainPageProvider,
                 AppListNotificationsPageProvider,
