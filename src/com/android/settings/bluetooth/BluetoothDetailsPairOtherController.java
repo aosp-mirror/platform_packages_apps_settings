@@ -56,19 +56,25 @@ public class BluetoothDetailsPairOtherController extends BluetoothDetailsControl
 
     @Override
     protected void init(PreferenceScreen screen) {
-        final int side = mCachedDevice.getDeviceSide();
-        final int stringRes = (side == HearingAidProfile.DeviceSide.SIDE_LEFT)
-                ? R.string.bluetooth_pair_right_ear_button
-                : R.string.bluetooth_pair_left_ear_button;
-
         mPreference = screen.findPreference(getPreferenceKey());
-        mPreference.setTitle(stringRes);
+        updateButtonPreferenceTitle(mPreference);
         mPreference.setOnClickListener(v -> launchPairingDetail());
     }
 
     @Override
     protected void refresh() {
+        updateButtonPreferenceTitle(mPreference);
         mPreference.setVisible(getButtonPreferenceVisibility(mCachedDevice));
+
+    }
+
+    private void updateButtonPreferenceTitle(ButtonPreference preference) {
+        final int side = mCachedDevice.getDeviceSide();
+        final int stringRes = (side == HearingAidProfile.DeviceSide.SIDE_LEFT)
+                ? R.string.bluetooth_pair_right_ear_button
+                : R.string.bluetooth_pair_left_ear_button;
+
+        preference.setTitle(stringRes);
     }
 
     private boolean getButtonPreferenceVisibility(CachedBluetoothDevice cachedDevice) {
