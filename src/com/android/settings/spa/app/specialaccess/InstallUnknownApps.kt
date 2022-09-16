@@ -22,6 +22,7 @@ import android.app.AppOpsManager.MODE_DEFAULT
 import android.app.AppOpsManager.OP_REQUEST_INSTALL_PACKAGES
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.os.UserManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import com.android.settings.R
@@ -49,6 +50,10 @@ class InstallUnknownAppsListModel(private val context: Context) :
     override val pageTitleResId = R.string.install_other_apps
     override val switchTitleResId = R.string.external_source_switch_title
     override val footerResId = R.string.install_all_warning
+    override val switchRestrictionKeys = listOf(
+        UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES,
+        UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY,
+    )
 
     override fun transformItem(app: ApplicationInfo) = InstallUnknownAppsRecord(
         app = app,
