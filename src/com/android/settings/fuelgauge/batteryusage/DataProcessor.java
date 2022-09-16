@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.utcToLocalTime;
 
+import android.app.settings.SettingsEnums;
 import android.content.ContentValues;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -36,6 +37,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 
 import java.time.Duration;
@@ -354,10 +356,25 @@ public final class DataProcessor {
         insertDailyUsageDiffData(hourlyBatteryLevelsPerDay, resultMap);
         // Insert diff data [SELECTED_INDEX_ALL][SELECTED_INDEX_ALL].
         insertAllUsageDiffData(resultMap);
+        // Compute the apps number before purge. Must put before purgeLowPercentageAndFakeData.
+        final int countOfAppBeforePurge = getCountOfApps(resultMap);
         purgeLowPercentageAndFakeData(context, resultMap);
+        // Compute the apps number after purge. Must put after purgeLowPercentageAndFakeData.
+        final int countOfAppAfterPurge = getCountOfApps(resultMap);
         if (!isUsageMapValid(resultMap, hourlyBatteryLevelsPerDay)) {
             return null;
         }
+
+        final MetricsFeatureProvider metricsFeatureProvider =
+                FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        metricsFeatureProvider.action(
+                context,
+                SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT,
+                countOfAppAfterPurge);
+        metricsFeatureProvider.action(
+                context,
+                SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT,
+                countOfAppBeforePurge - countOfAppAfterPurge);
         return resultMap;
     }
 
@@ -931,6 +948,15 @@ public final class DataProcessor {
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         return calendar.getTimeInMillis();
+    }
+
+    private static int getCountOfApps(final Map<Integer, Map<Integer, BatteryDiffData>> resultMap) {
+        final BatteryDiffData diffDataList =
+                resultMap.get(SELECTED_INDEX_ALL).get(SELECTED_INDEX_ALL);
+        return diffDataList == null
+                ? 0
+                : diffDataList.getAppDiffEntryList().size()
+                        + diffDataList.getSystemDiffEntryList().size();
     }
 
     private static boolean contains(String target, Set<CharSequence> packageNames) {

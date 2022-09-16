@@ -19,9 +19,15 @@ package com.android.settings.display;
 import static android.hardware.SensorPrivacyManager.Sensors.CAMERA;
 import static android.hardware.SensorPrivacyManager.Sources.DIALOG;
 
+import static androidx.lifecycle.Lifecycle.Event.ON_START;
+import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
+
 import android.content.Context;
 import android.hardware.SensorPrivacyManager;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -32,17 +38,34 @@ import com.android.settingslib.widget.BannerMessagePreference;
  * The controller of Screen attention's camera disabled warning preference.
  * The preference appears when the camera access is disabled for Screen Attention feature.
  */
-public class AdaptiveSleepCameraStatePreferenceController {
+public class AdaptiveSleepCameraStatePreferenceController implements LifecycleObserver {
     @VisibleForTesting
     BannerMessagePreference mPreference;
     private final SensorPrivacyManager mPrivacyManager;
     private final Context mContext;
 
-    public AdaptiveSleepCameraStatePreferenceController(Context context) {
+    private final SensorPrivacyManager.OnSensorPrivacyChangedListener mPrivacyChangedListener =
+            new SensorPrivacyManager.OnSensorPrivacyChangedListener() {
+                @Override
+                public void onSensorPrivacyChanged(int sensor, boolean enabled) {
+                    updateVisibility();
+                }
+            };
+
+    public AdaptiveSleepCameraStatePreferenceController(Context context, Lifecycle lifecycle) {
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
-        mPrivacyManager.addSensorPrivacyListener(CAMERA,
-                (sensor, enabled) -> updateVisibility());
         mContext = context;
+        lifecycle.addObserver(this);
+    }
+
+    @OnLifecycleEvent(ON_START)
+    public void onStart() {
+        mPrivacyManager.addSensorPrivacyListener(CAMERA, mPrivacyChangedListener);
+    }
+
+    @OnLifecycleEvent(ON_STOP)
+    public void onStop() {
+        mPrivacyManager.removeSensorPrivacyListener(CAMERA, mPrivacyChangedListener);
     }
 
     /**
@@ -55,7 +78,7 @@ public class AdaptiveSleepCameraStatePreferenceController {
     }
 
     /**
-     * Need this because all controller tests use RoboElectric. No easy way to mock this service,
+     * Need this because all controller tests use Robolectric. No easy way to mock this service,
      * so we mock the call we need
      */
     @VisibleForTesting
