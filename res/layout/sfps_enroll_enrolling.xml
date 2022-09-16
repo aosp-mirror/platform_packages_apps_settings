@@ -43,30 +43,32 @@
                 android:id="@+id/illustration_lottie"
                 android:layout_width="@dimen/fingerprint_progress_bar_max_size"
                 android:layout_height="@dimen/fingerprint_progress_bar_max_size"
-                android:layout_marginTop="@dimen/udfps_lottie_translate_y"
+                android:layout_marginRight="@dimen/sfps_lottie_translate_x"
+                android:layout_marginBottom="@dimen/sfps_lottie_translate_y"
                 android:scaleType="centerInside"
                 android:visibility="gone"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                app:lottie_speed=".85"
-                android:layout_marginVertical="24dp" />
+                app:lottie_speed=".85" />
 
             <com.google.android.setupdesign.view.FillContentLayout
                 android:layout_width="@dimen/fingerprint_progress_bar_max_size"
                 android:layout_height="@dimen/fingerprint_progress_bar_max_size"
                 android:paddingTop="0dp"
-                android:paddingBottom="0dp"
-                android:layout_marginVertical="24dp">
+                android:paddingBottom="0dp">
 
                 <com.android.settings.widget.RingProgressBar
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/fingerprint_progress_bar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/sfps_progress_bar_translate_x"
+                    android:layout_marginTop="@dimen/sfps_progress_bar_translate_y"
                     android:layout_gravity="center"
                     android:minHeight="@dimen/fingerprint_progress_bar_min_size"
+                    android:progressBackgroundTint="@color/sfps_enrollment_progress_bar_bg_color"
                     android:progress="0" />
             </com.google.android.setupdesign.view.FillContentLayout>
 
