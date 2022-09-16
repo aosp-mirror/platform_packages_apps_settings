@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge.batteryusage;
 import androidx.annotation.NonNull;
 import androidx.core.util.Preconditions;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -38,34 +39,59 @@ class BatteryChartViewModel {
         CENTER_OF_TRAPEZOIDS,
     }
 
+    interface LabelTextGenerator {
+        /** Generate the label text. The text may be abbreviated to save space. */
+        String generateText(List<Long> timestamps, int index);
+
+        /** Generate the full text for accessibility. */
+        String generateFullText(List<Long> timestamps, int index);
+    }
+
     private final List<Integer> mLevels;
-    private final List<String> mTexts;
+    private final List<Long> mTimestamps;
     private final AxisLabelPosition mAxisLabelPosition;
+    private final LabelTextGenerator mLabelTextGenerator;
+    private final String[] mTexts;
+    private final String[] mFullTexts;
+
     private int mSelectedIndex = SELECTED_INDEX_ALL;
 
-    BatteryChartViewModel(
-            @NonNull List<Integer> levels, @NonNull List<String> texts,
-            @NonNull AxisLabelPosition axisLabelPosition) {
+    BatteryChartViewModel(@NonNull List<Integer> levels, @NonNull List<Long> timestamps,
+            @NonNull AxisLabelPosition axisLabelPosition,
+            @NonNull LabelTextGenerator labelTextGenerator) {
         Preconditions.checkArgument(
-                levels.size() == texts.size() && levels.size() >= MIN_LEVELS_DATA_SIZE,
+                levels.size() == timestamps.size() && levels.size() >= MIN_LEVELS_DATA_SIZE,
                 String.format(Locale.ENGLISH,
-                        "Invalid BatteryChartViewModel levels.size: %d, texts.size: %d.",
-                        levels.size(), texts.size()));
+                        "Invalid BatteryChartViewModel levels.size: %d, timestamps.size: %d.",
+                        levels.size(), timestamps.size()));
         mLevels = levels;
-        mTexts = texts;
+        mTimestamps = timestamps;
         mAxisLabelPosition = axisLabelPosition;
+        mLabelTextGenerator = labelTextGenerator;
+        mTexts = new String[size()];
+        mFullTexts = new String[size()];
     }
 
     public int size() {
         return mLevels.size();
     }
 
-    public List<Integer> levels() {
-        return mLevels;
+    public Integer getLevel(int index) {
+        return mLevels.get(index);
     }
 
-    public List<String> texts() {
-        return mTexts;
+    public String getText(int index) {
+        if (mTexts[index] == null) {
+            mTexts[index] = mLabelTextGenerator.generateText(mTimestamps, index);
+        }
+        return mTexts[index];
+    }
+
+    public String getFullText(int index) {
+        if (mFullTexts[index] == null) {
+            mFullTexts[index] = mLabelTextGenerator.generateFullText(mTimestamps, index);
+        }
+        return mFullTexts[index];
     }
 
     public AxisLabelPosition axisLabelPosition() {
@@ -82,7 +108,7 @@ class BatteryChartViewModel {
 
     @Override
     public int hashCode() {
-        return Objects.hash(mLevels, mTexts, mSelectedIndex, mAxisLabelPosition);
+        return Objects.hash(mLevels, mTimestamps, mSelectedIndex, mAxisLabelPosition);
     }
 
     @Override
@@ -94,16 +120,26 @@ class BatteryChartViewModel {
         }
         final BatteryChartViewModel batteryChartViewModel = (BatteryChartViewModel) other;
         return Objects.equals(mLevels, batteryChartViewModel.mLevels)
-                && Objects.equals(mTexts, batteryChartViewModel.mTexts)
+                && Objects.equals(mTimestamps, batteryChartViewModel.mTimestamps)
                 && mAxisLabelPosition == batteryChartViewModel.mAxisLabelPosition
                 && mSelectedIndex == batteryChartViewModel.mSelectedIndex;
     }
 
     @Override
     public String toString() {
-        return String.format(Locale.ENGLISH,
-                "levels: %s,\ntexts: %s,\naxisLabelPosition: %s, selectedIndex: %d",
-                Objects.toString(mLevels), Objects.toString(mTexts), mAxisLabelPosition,
-                mSelectedIndex);
+        // Generate all the texts and full texts.
+        for (int i = 0; i < size(); i++) {
+            getText(i);
+            getFullText(i);
+        }
+
+        return new StringBuilder()
+                .append("levels: " + Objects.toString(mLevels))
+                .append(", timestamps: " + Objects.toString(mTimestamps))
+                .append(", texts: " + Arrays.toString(mTexts))
+                .append(", fullTexts: " + Arrays.toString(mFullTexts))
+                .append(", axisLabelPosition: " + mAxisLabelPosition)
+                .append(", selectedIndex: " + mSelectedIndex)
+                .toString();
     }
 }

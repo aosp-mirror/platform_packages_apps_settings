@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge.batteryusage;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -173,22 +174,33 @@ public final class BatteryChartPreferenceControllerTest {
 
     @Test
     public void setBatteryChartViewModel_6Hours() {
+        reset(mHourlyChartView);
         mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
 
         verify(mDailyChartView, atLeastOnce()).setVisibility(View.GONE);
         verify(mHourlyChartView, atLeastOnce()).setVisibility(View.VISIBLE);
-        verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
+        // Ignore fast refresh ui from the data processor callback.
+        verify(mHourlyChartView, atLeast(0)).setViewModel(null);
+        verify(mHourlyChartView, atLeastOnce()).setViewModel(new BatteryChartViewModel(
                 List.of(100, 97, 95),
-                List.of("8 AM", "10 AM", "12 PM"),
-                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
+                List.of(1619251200000L /* 8 AM */,
+                        1619258400000L /* 10 AM */,
+                        1619265600000L /* 12 PM */),
+                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS,
+                mBatteryChartPreferenceController.mHourlyChartLabelTextGenerator));
     }
 
     @Test
     public void setBatteryChartViewModel_60Hours() {
         BatteryChartViewModel expectedDailyViewModel = new BatteryChartViewModel(
                 List.of(100, 83, 59, 41),
-                List.of("Sat", "Sun", "Mon", "Mon"),
-                BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS);
+                // "Sat", "Sun", "Mon", "Mon"
+                List.of(1619251200000L /* Sat */,
+                        1619308800000L /* Sun */,
+                        1619395200000L /* Mon */,
+                        1619460000000L /* Mon */),
+                BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS,
+                mBatteryChartPreferenceController.mDailyChartLabelTextGenerator);
 
         mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(60));
 
@@ -208,9 +220,17 @@ public final class BatteryChartPreferenceControllerTest {
         verify(mDailyChartView).setViewModel(expectedDailyViewModel);
         verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
                 List.of(100, 97, 95, 93, 91, 89, 87, 85, 83),
-                List.of("8 AM", "10 AM", "12 PM", "2 PM", "4 PM", "6 PM", "8 PM", "10 PM",
-                        "12 AM"),
-                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
+                List.of(1619251200000L /* 8 AM */,
+                        1619258400000L /* 10 AM */,
+                        1619265600000L /* 12 PM */,
+                        1619272800000L /* 2 PM */,
+                        1619280000000L /* 4 PM */,
+                        1619287200000L /* 6 PM */,
+                        1619294400000L /* 8 PM */,
+                        1619301600000L /* 10 PM */,
+                        1619308800000L /* 12 AM */),
+                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS,
+                mBatteryChartPreferenceController.mHourlyChartLabelTextGenerator));
 
         reset(mDailyChartView);
         reset(mHourlyChartView);
@@ -224,9 +244,21 @@ public final class BatteryChartPreferenceControllerTest {
         verify(mDailyChartView).setViewModel(expectedDailyViewModel);
         BatteryChartViewModel expectedHourlyViewModel = new BatteryChartViewModel(
                 List.of(83, 81, 79, 77, 75, 73, 71, 69, 67, 65, 63, 61, 59),
-                List.of("12 AM", "2 AM", "4 AM", "6 AM", "8 AM", "10 AM", "12 PM", "2 PM",
-                        "4 PM", "6 PM", "8 PM", "10 PM", "12 AM"),
-                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS);
+                List.of(1619308800000L /* 12 AM */,
+                        1619316000000L /* 2 AM */,
+                        1619323200000L /* 4 AM */,
+                        1619330400000L /* 6 AM */,
+                        1619337600000L /* 8 AM */,
+                        1619344800000L /* 10 AM */,
+                        1619352000000L /* 12 PM */,
+                        1619359200000L /* 2 PM */,
+                        1619366400000L /* 4 PM */,
+                        1619373600000L /* 6 PM */,
+                        1619380800000L /* 8 PM */,
+                        1619388000000L /* 10 PM */,
+                        1619395200000L /* 12 AM */),
+                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS,
+                mBatteryChartPreferenceController.mHourlyChartLabelTextGenerator);
         expectedHourlyViewModel.setSelectedIndex(6);
         verify(mHourlyChartView).setViewModel(expectedHourlyViewModel);
 
@@ -243,9 +275,18 @@ public final class BatteryChartPreferenceControllerTest {
         verify(mDailyChartView).setViewModel(expectedDailyViewModel);
         verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
                 List.of(59, 57, 55, 53, 51, 49, 47, 45, 43, 41),
-                List.of("12 AM", "2 AM", "4 AM", "6 AM", "8 AM", "10 AM", "12 PM", "2 PM",
-                        "4 PM", "6 PM"),
-                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS));
+                List.of(1619395200000L /* 12 AM */,
+                        1619402400000L /* 2 AM */,
+                        1619409600000L /* 4 AM */,
+                        1619416800000L /* 6 AM */,
+                        1619424000000L /* 8 AM */,
+                        1619431200000L /* 10 AM */,
+                        1619438400000L /* 12 PM */,
+                        1619445600000L /* 2 PM */,
+                        1619452800000L /* 4 PM */,
+                        1619460000000L /* 6 PM */),
+                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS,
+                mBatteryChartPreferenceController.mHourlyChartLabelTextGenerator));
     }
 
     @Test
