@@ -22,6 +22,7 @@ import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
@@ -37,14 +38,21 @@ public class AppStateAppBatteryUsageBridge extends AppStateBaseBridge {
     private static final String TAG = AppStateAppBatteryUsageBridge.class.getSimpleName();
     static final boolean DEBUG = Build.IS_DEBUGGABLE;
 
-    private final Context mContext;
-    private final AppOpsManager mAppOpsManager;
-    private final PowerAllowlistBackend mPowerAllowlistBackend;
+    @VisibleForTesting
+    Context mContext;
+    @VisibleForTesting
+    AppOpsManager mAppOpsManager;
+    @VisibleForTesting
+    PowerAllowlistBackend mPowerAllowlistBackend;
 
-    private static final int MODE_UNKNOWN = 0;
-    private static final int MODE_UNRESTRICTED = 1;
-    private static final int MODE_OPTIMIZED = 2;
-    private static final int MODE_RESTRICTED = 3;
+    @VisibleForTesting
+    static final int MODE_UNKNOWN = 0;
+    @VisibleForTesting
+    static final int MODE_UNRESTRICTED = 1;
+    @VisibleForTesting
+    static final int MODE_OPTIMIZED = 2;
+    @VisibleForTesting
+    static final int MODE_RESTRICTED = 3;
 
     @IntDef(
             prefix = {"MODE_"},
@@ -110,8 +118,9 @@ public class AppStateAppBatteryUsageBridge extends AppStateBaseBridge {
         return new AppBatteryUsageDetails(mode);
     }
 
+    @VisibleForTesting
     @OptimizationMode
-    private static int getAppBatteryUsageDetailsMode(AppEntry entry) {
+    static int getAppBatteryUsageDetailsMode(AppEntry entry) {
         if (entry == null || entry.extraInfo == null) {
             return MODE_UNKNOWN;
         }
