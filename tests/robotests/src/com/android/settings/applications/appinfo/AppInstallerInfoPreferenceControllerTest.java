@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.appinfo;
 
+import static com.android.settings.applications.mobilebundledapps.MobileBundledAppDetailsActivity.ACTION_TRANSPARENCY_METADATA;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -41,11 +43,14 @@ import android.os.UserManager;
 
 import androidx.preference.Preference;
 
+import com.android.settings.applications.mobilebundledapps.ApplicationMetadataUtils;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -53,7 +58,8 @@ import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class AppInstallerInfoPreferenceControllerTest {
-
+    private static final String TEST_PACKAGE_NAME = "Package1";
+    private static final String TEST_CONTEXT_KEY = "test_key";
     @Mock
     private UserManager mUserManager;
     @Mock
@@ -67,11 +73,17 @@ public class AppInstallerInfoPreferenceControllerTest {
     @Mock
     private Preference mPreference;
 
+    @Mock
+    private ApplicationMetadataUtils mApplicationMetadataUtils;
+
+    @Captor
+    ArgumentCaptor<Intent> mIntentArgumentCaptor;
+
     private Context mContext;
     private AppInstallerInfoPreferenceController mController;
 
     @Before
-    public void setUp() throws PackageManager.NameNotFoundException {
+    public void setup() throws PackageManager.NameNotFoundException {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
@@ -81,9 +93,13 @@ public class AppInstallerInfoPreferenceControllerTest {
         when(mInstallSourceInfo.getInstallingPackageName()).thenReturn(installerPackage);
         when(mPackageManager.getApplicationInfo(eq(installerPackage), anyInt()))
                 .thenReturn(mAppInfo);
-        mController = new AppInstallerInfoPreferenceController(mContext, "test_key");
-        mController.setPackageName("Package1");
+        mController = new AppInstallerInfoPreferenceController(mContext, TEST_CONTEXT_KEY);
         mController.setParentFragment(mFragment);
+        mController.setPackageName(TEST_PACKAGE_NAME);
+        when(mApplicationMetadataUtils.packageContainsXmlFile(mPackageManager, TEST_PACKAGE_NAME))
+                .thenReturn(false);
+        mController.setMbaWithMetadataStatus(mApplicationMetadataUtils, TEST_PACKAGE_NAME);
+        mController.setEnableMbaFlag(true);
     }
 
     @Test
@@ -95,8 +111,42 @@ public class AppInstallerInfoPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_noAppLabel_shouldReturnDisabled() {
+    public void getAvailabilityStatus_noAppLabel_andNotMbaWithMetadata_shouldReturnDisabled()
+            throws PackageManager.NameNotFoundException {
         when(mUserManager.isManagedProfile()).thenReturn(false);
+        mockMainlineModule(TEST_PACKAGE_NAME, false /* isMainlineModule */);
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
+    }
+
+    @Test
+    public void getAvailabilityStatus_noAppLabel_andHaveMbaFile_shouldReturnAvailable()
+            throws PackageManager.NameNotFoundException {
+        mController = new AppInstallerInfoPreferenceController(mContext, TEST_CONTEXT_KEY);
+        mController.setPackageName(TEST_PACKAGE_NAME);
+        mController.setParentFragment(mFragment);
+        when(mApplicationMetadataUtils.packageContainsXmlFile(mPackageManager, TEST_PACKAGE_NAME))
+                .thenReturn(true);
+        mController.setMbaWithMetadataStatus(mApplicationMetadataUtils, TEST_PACKAGE_NAME);
+        mockMainlineModule(TEST_PACKAGE_NAME, false /* isMainlineModule */);
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
+    }
+
+    @Test
+    public void getAvailabilityStatus_noAppLabel_andMbaFeatureFlagDisabled_shouldReturnDisabled()
+            throws PackageManager.NameNotFoundException {
+        mController.setEnableMbaFlag(false);
+        when(mUserManager.isManagedProfile()).thenReturn(false);
+        mController = new AppInstallerInfoPreferenceController(mContext, TEST_CONTEXT_KEY);
+        mController.setPackageName(TEST_PACKAGE_NAME);
+        mController.setParentFragment(mFragment);
+        when(mApplicationMetadataUtils.packageContainsXmlFile(mPackageManager, TEST_PACKAGE_NAME))
+                .thenReturn(true);
+        mController.setMbaWithMetadataStatus(mApplicationMetadataUtils, TEST_PACKAGE_NAME);
+        mockMainlineModule(TEST_PACKAGE_NAME, false /* isMainlineModule */);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
@@ -105,13 +155,12 @@ public class AppInstallerInfoPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_hasAppLabel_shouldReturnAvailable()
             throws PackageManager.NameNotFoundException {
-        final String packageName = "Package1";
         when(mUserManager.isManagedProfile()).thenReturn(false);
         when(mAppInfo.loadLabel(mPackageManager)).thenReturn("Label1");
-        mController = new AppInstallerInfoPreferenceController(mContext, "test_key");
-        mController.setPackageName(packageName);
+        mController = new AppInstallerInfoPreferenceController(mContext, TEST_CONTEXT_KEY);
+        mController.setPackageName(TEST_PACKAGE_NAME);
         mController.setParentFragment(mFragment);
-        mockMainlineModule(packageName, false /* isMainlineModule */);
+        mockMainlineModule(TEST_PACKAGE_NAME, false /* isMainlineModule */);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
@@ -129,7 +178,7 @@ public class AppInstallerInfoPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_noAppStoreLink_shouldDisablePreference() {
+    public void updateState_noAppStoreLink_andNotMbaWithMetadata_shouldDisablePreference() {
         final PackageInfo packageInfo = mock(PackageInfo.class);
         packageInfo.applicationInfo = mAppInfo;
         when(mFragment.getPackageInfo()).thenReturn(packageInfo);
@@ -138,6 +187,39 @@ public class AppInstallerInfoPreferenceControllerTest {
         mController.updateState(mPreference);
 
         verify(mPreference).setEnabled(false);
+    }
+    @Test
+    public void updateState_noAppStoreLink_andMbaFeatureFlagDisabled_shouldDisablePreference() {
+        mController.setEnableMbaFlag(false);
+        when(mApplicationMetadataUtils.packageContainsXmlFile(mPackageManager, TEST_PACKAGE_NAME))
+                .thenReturn(true);
+        mController.setMbaWithMetadataStatus(mApplicationMetadataUtils, TEST_PACKAGE_NAME);
+        final PackageInfo packageInfo = mock(PackageInfo.class);
+        packageInfo.applicationInfo = mAppInfo;
+        when(mFragment.getPackageInfo()).thenReturn(packageInfo);
+        when(mPackageManager.resolveActivity(any(), anyInt())).thenReturn(null);
+
+        mController.updateState(mPreference);
+
+        verify(mPreference).setEnabled(false);
+    }
+
+    @Test
+    public void updateState_noAppStoreLink_andMbaWithMetadata_shouldSetPreferenceIntent() {
+        when(mApplicationMetadataUtils.packageContainsXmlFile(mPackageManager, TEST_PACKAGE_NAME))
+                .thenReturn(true);
+        mController.setMbaWithMetadataStatus(mApplicationMetadataUtils, TEST_PACKAGE_NAME);
+        final PackageInfo packageInfo = mock(PackageInfo.class);
+        packageInfo.applicationInfo = mAppInfo;
+        when(mFragment.getPackageInfo()).thenReturn(packageInfo);
+        when(mPackageManager.resolveActivity(any(), anyInt())).thenReturn(null);
+
+        mController.updateState(mPreference);
+
+        verify(mPreference, never()).setEnabled(false);
+        verify(mPreference).setIntent(mIntentArgumentCaptor.capture());
+        assertThat(mIntentArgumentCaptor.getValue().getAction())
+                .isEqualTo(ACTION_TRANSPARENCY_METADATA);
     }
 
     @Test
@@ -154,7 +236,9 @@ public class AppInstallerInfoPreferenceControllerTest {
         mController.updateState(mPreference);
 
         verify(mPreference, never()).setEnabled(false);
-        verify(mPreference).setIntent(any(Intent.class));
+        verify(mPreference).setIntent(mIntentArgumentCaptor.capture());
+        assertThat(mIntentArgumentCaptor.getValue().getAction())
+                .isEqualTo(Intent.ACTION_SHOW_APP_INFO);
     }
 
     @Test

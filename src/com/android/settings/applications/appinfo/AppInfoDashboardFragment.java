@@ -56,6 +56,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.applications.mobilebundledapps.ApplicationMetadataUtils;
 import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesDetailsPreferenceController;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetailPreferenceController;
 import com.android.settings.core.SubSettingLauncher;
@@ -162,6 +163,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 use(AppInstallerInfoPreferenceController.class);
         installer.setPackageName(packageName);
         installer.setParentFragment(this);
+        installer.setMbaWithMetadataStatus(ApplicationMetadataUtils.getDefaultInstance(),
+                packageName);
         use(AppInstallerPreferenceCategoryController.class).setChildren(Arrays.asList(installer));
         use(AppNotificationPreferenceController.class).setParentFragment(this);
 
