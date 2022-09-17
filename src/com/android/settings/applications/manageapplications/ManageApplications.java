@@ -1229,9 +1229,12 @@ public class ManageApplications extends InstrumentedFragment
                     rebuild(R.id.sort_order_alpha, true);
                 }
                 return;
-            } else if (mManageApplications.mListType == LIST_TYPE_BATTERY_OPTIMIZATION) {
+            }
+
+            if (mManageApplications.mListType == LIST_TYPE_BATTERY_OPTIMIZATION) {
                 logAppBatteryUsage(filterType);
             }
+
             rebuild();
         }
 
@@ -1706,7 +1709,7 @@ public class ManageApplications extends InstrumentedFragment
                     holder.setSummary(AppLocaleDetails.getSummary(mContext, entry));
                     break;
                 case LIST_TYPE_BATTERY_OPTIMIZATION:
-                    holder.setSummary(R.string.app_battery_usage_summary);
+                    holder.setSummary(null);
                     break;
                 default:
                     holder.updateSizeText(entry, mManageApplications.mInvalidSizeStr, mWhichSize);

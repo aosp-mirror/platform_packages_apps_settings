@@ -4180,16 +4180,26 @@
                   android:exported="true"
                   android:label="@string/connected_device_connections_title">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.NFC_SETTINGS" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter android:priority="1">
                 <action android:name="com.android.settings.ADVANCED_CONNECTED_DEVICE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_connected_devices"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
+        <activity android:name="Settings$NfcSettingsActivity"
+                  android:exported="true"
+                  android:label="@string/nfc_quick_toggle_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.NFC_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.connecteddevice.NfcAndPaymentFragment" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_connected_devices"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
