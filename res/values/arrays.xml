@@ -83,6 +83,50 @@
         <item>28800000</item>
     </string-array>
 
+    <!-- Wifi settings.  The delay in inactivity before wifi is turned off. These are shown in a list dialog. -->
+    <string-array name="wifi_timeout_entries">
+        <item>@string/wifi_timeout_summary_never</item>
+        <item>@string/wifi_timeout_summary_15secs</item>
+        <item>@string/wifi_timeout_summary_30secs</item>
+        <item>@string/wifi_timeout_summary_1min</item>
+        <item>@string/wifi_timeout_summary_2mins</item>
+        <item>@string/wifi_timeout_summary_5mins</item>
+        <item>@string/wifi_timeout_summary_10mins</item>
+        <item>@string/wifi_timeout_summary_30mins</item>
+        <item>@string/wifi_timeout_summary_1hour</item>
+        <item>@string/wifi_timeout_summary_2hours</item>
+        <item>@string/wifi_timeout_summary_4hours</item>
+        <item>@string/wifi_timeout_summary_8hours</item>
+    </string-array>
+
+    <!-- Do not translate. -->
+    <string-array name="wifi_timeout_values" translatable="false">
+        <!-- Do not translate. -->
+        <item>0</item>
+        <!-- Do not translate. -->
+        <item>15000</item>
+        <!-- Do not translate. -->
+        <item>30000</item>
+        <!-- Do not translate. -->
+        <item>60000</item>
+        <!-- Do not translate. -->
+        <item>120000</item>
+        <!-- Do not translate. -->
+        <item>300000</item>
+        <!-- Do not translate. -->
+        <item>600000</item>
+        <!-- Do not translate. -->
+        <item>1800000</item>
+        <!-- Do not translate. -->
+        <item>3600000</item>
+        <!-- Do not translate. -->
+        <item>7200000</item>
+        <!-- Do not translate. -->
+        <item>14400000</item>
+        <!-- Do not translate. -->
+        <item>28800000</item>
+    </string-array>
+
     <!-- Display settings.  The delay in inactivity before the screen is turned off. These are shown in a list dialog. -->
     <string-array name="screen_timeout_entries">
         <item>15 seconds</item>
