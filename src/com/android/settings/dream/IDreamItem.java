@@ -67,4 +67,11 @@ public interface IDreamItem {
     default boolean allowCustomization() {
         return false;
     }
+
+    /**
+     * Returns whether or not this item is the no screensaver item.
+     */
+    default @DreamItemViewTypes.ViewType int viewType() {
+        return DreamItemViewTypes.DREAM_ITEM;
+    }
 }
