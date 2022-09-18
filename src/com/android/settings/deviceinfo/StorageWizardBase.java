@@ -47,6 +47,7 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 import com.google.android.setupdesign.util.ThemeHelper;
+import com.google.android.setupdesign.util.ThemeResolver;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -72,7 +73,15 @@ public abstract class StorageWizardBase extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+        boolean isDayNightThemeSupportedBySuW = ThemeHelper.isSetupWizardDayNightEnabled(this);
+        int sudTheme =
+            new ThemeResolver.Builder(ThemeResolver.getDefault())
+                .setDefaultTheme(ThemeHelper.getSuwDefaultTheme(this))
+                .setUseDayNight(true)
+                .build()
+                .resolve("", !isDayNightThemeSupportedBySuW);
+
+        this.setTheme(sudTheme);
         ThemeHelper.trySetDynamicColor(this);
         super.onCreate(savedInstanceState);
 
