@@ -2478,39 +2478,31 @@
         <activity android:name=".deviceinfo.StorageWizardInit"
                 android:theme="@style/GlifTheme.Light"
                 android:exported="true"
-                android:configChanges="keyboardHidden|orientation|screenSize"
                 android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
         <activity android:name=".deviceinfo.StorageWizardFormatProgress"
                 android:theme="@style/GlifTheme.Light"
-                android:exported="false"
-                android:configChanges="keyboardHidden|orientation|screenSize"/>
+                android:exported="false"/>
         <activity android:name=".deviceinfo.StorageWizardFormatSlow"
                 android:theme="@style/GlifTheme.Light"
-                android:exported="false"
-                android:configChanges="keyboardHidden|orientation|screenSize"/>
+                android:exported="false"/>
         <activity android:name=".deviceinfo.StorageWizardMigrateConfirm"
                 android:theme="@style/GlifTheme.Light"
-                android:exported="false"
-                android:configChanges="keyboardHidden|orientation|screenSize"/>
+                android:exported="false"/>
         <activity android:name=".deviceinfo.StorageWizardMigrateProgress"
                 android:theme="@style/GlifTheme.Light"
                 android:exported="true"
-                android:configChanges="keyboardHidden|orientation|screenSize"
                 android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
         <activity android:name=".deviceinfo.StorageWizardReady"
                 android:theme="@style/GlifTheme.Light"
                 android:exported="true"
-                android:configChanges="keyboardHidden|orientation|screenSize"
                 android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
         <activity android:name=".deviceinfo.StorageWizardMoveConfirm"
                 android:theme="@style/GlifTheme.Light"
-                android:exported="false"
-                android:configChanges="keyboardHidden|orientation|screenSize"/>
+                android:exported="false"/>
         <activity android:name=".deviceinfo.StorageWizardMoveProgress"
                 android:theme="@style/GlifTheme.Light"
                 android:exported="true"
-                android:configChanges="keyboardHidden|orientation|screenSize"
                 android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
         <!-- Exported for SystemUI to trigger -->
