@@ -25,6 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.android.settings.R
+import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
@@ -75,7 +76,7 @@ private fun AppSettings(packageInfo: PackageInfo) {
             PictureInPictureListProvider.InfoPageEntryItem(app)
             InstallUnknownAppsListProvider.InfoPageEntryItem(app)
             // TODO: interact_across_profiles
-            // TODO: alarms_and_reminders
+            AlarmsAndRemindersAppListProvider.InfoPageEntryItem(app)
         }
 
         // TODO: app_installer
