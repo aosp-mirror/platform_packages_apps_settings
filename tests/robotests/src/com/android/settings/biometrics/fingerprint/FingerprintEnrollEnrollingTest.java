@@ -17,6 +17,7 @@
 package com.android.settings.biometrics.fingerprint;
 
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_POWER_BUTTON;
+import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_OPTICAL;
 
 import static com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling.KEY_STATE_PREVIOUS_ROTATION;
 import static com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling.SFPS_STAGE_NO_ANIMATION;
@@ -37,6 +38,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.hardware.biometrics.ComponentInfoInternal;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.FingerprintManager;
@@ -84,6 +86,8 @@ public class FingerprintEnrollEnrollingTest {
 
     @Mock private Display mMockDisplay;
 
+    @Mock private Resources.Theme mTheme;
+
     private final int[] mSfpsStageThresholds = new int[]{0, 9, 13, 19, 25};
 
     private FingerprintEnrollEnrolling mActivity;
@@ -110,7 +114,7 @@ public class FingerprintEnrollEnrollingTest {
 
     @Test
     public void fingerprintUdfpsEnrollSuccessProgress_shouldNotVibrate() {
-        initializeActivityFor(FingerprintSensorProperties.TYPE_UDFPS_OPTICAL);
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         mActivity.onEnrollmentProgressChange(1, 1);
 
@@ -128,7 +132,7 @@ public class FingerprintEnrollEnrollingTest {
 
     @Test
     public void fingerprintUdfpsOverlayEnrollment_gainFocus_shouldNotCancel() {
-        initializeActivityFor(FingerprintSensorProperties.TYPE_UDFPS_OPTICAL);
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         mActivity.onEnrollmentProgressChange(1, 1);
         mActivity.onWindowFocusChanged(true);
@@ -138,7 +142,7 @@ public class FingerprintEnrollEnrollingTest {
 
     @Test
     public void fingerprintUdfpsOverlayEnrollment_loseFocus_shouldCancel() {
-        initializeActivityFor(FingerprintSensorProperties.TYPE_UDFPS_OPTICAL);
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         mActivity.onEnrollmentProgressChange(1, 1);
         mActivity.onWindowFocusChanged(false);
@@ -230,6 +234,24 @@ public class FingerprintEnrollEnrollingTest {
         mActivity.onWindowFocusChanged(true);
 
         verify(mActivity, never()).onCancelEnrollment(anyInt());
+    }
+
+    @Test
+    public void fingerprintUdfpsEnroll_activityApplyDarkLightStyle() {
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+
+        mActivity.onApplyThemeResource(mTheme, R.style.GlifTheme, true /* first */);
+
+        verify(mTheme).applyStyle(R.style.SetupWizardPartnerResource, true);
+    }
+
+    @Test
+    public void fingerprintSfpsEnroll_activityApplyDarkLightStyle() {
+        initializeActivityFor(TYPE_POWER_BUTTON);
+
+        mActivity.onApplyThemeResource(mTheme, R.style.GlifTheme, true /* first */);
+
+        verify(mTheme).applyStyle(R.style.SetupWizardPartnerResource, true);
     }
 
     private void initializeActivityFor(int sensorType) {
