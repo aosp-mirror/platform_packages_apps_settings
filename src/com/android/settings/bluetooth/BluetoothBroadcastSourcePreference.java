@@ -171,6 +171,16 @@ class BluetoothBroadcastSourcePreference extends Preference {
     }
 
     /**
+     * Whether the broadcast source is connected at the beginging. We will get the
+     * BluetoothLeBroadcastReceiveState from the broadcast source.
+     * See {@link BluetoothFindBroadcastsFragment#addConnectedSourcePreference}
+     * @return If true, the broadcast source is already connected by the broadcast sink.
+     */
+    public boolean isCreatedByReceiveState() {
+        return mBluetoothLeBroadcastReceiveState != null;
+    }
+
+    /**
      * Clear the BluetoothLeBroadcastReceiveState and reset the state when the user clicks the
      * "leave broadcast" button.
      */
