@@ -11749,6 +11749,10 @@
     Balance is the same meaning as having money in a bank account.
     Remaining apps are those apps that don't fit into predefined categories. [CHAR LIMIT=80]-->
     <string name="tare_min_balance_other_app">Minimum Satiated Balance (Remaining Apps)</string>
+    <!-- Title for the TARE factor that app updaters (for example, an app store) additional
+    credits. "Satiated" in this context means that the battery is fully charged.
+    Balance is the same meaning as having money in a bank account. [CHAR LIMIT=80]-->
+    <string name="tare_min_balance_addition_app_updater">Minimum Satiated Balance Addition (App Updaters)</string>
     <!-- Titles for the minimum satiated credit balances for different types of apps
     (per battery cycle). Satiated means battery is fully charged. [CHAR LIMIT=40]-->
     <string-array name="tare_app_balance_subfactors" translatable="false">
@@ -11756,6 +11760,15 @@
         <item>@string/tare_min_balance_exempted</item>
         <item>@string/tare_min_balance_headless_app</item>
         <item>@string/tare_min_balance_other_app</item>
+    </string-array>
+    <!-- Titles for the minimum satiated credit balances for different types of apps
+    (per battery cycle). Satiated means battery is fully charged. [CHAR LIMIT=40]-->
+    <string-array name="tare_job_scheduler_app_balance_subfactors" translatable="false">
+        <item>@string/tare_max_satiated_balance</item>
+        <item>@string/tare_min_balance_exempted</item>
+        <item>@string/tare_min_balance_headless_app</item>
+        <item>@string/tare_min_balance_other_app</item>
+        <item>@string/tare_min_balance_addition_app_updater</item>
     </string-array>
     <!-- Various modifier subfactors that alter the cost of TARE tasks depending on what battery
     state the device is in [CHAR LIMIT=50]-->
