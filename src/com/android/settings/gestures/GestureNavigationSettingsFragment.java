@@ -80,9 +80,10 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
 
         initSeekBarPreference(LEFT_EDGE_SEEKBAR_KEY);
         initSeekBarPreference(RIGHT_EDGE_SEEKBAR_KEY);
+
         initSeekBarPreference(KEY_BACK_HEIGHT);
 
-        initGestureNavbarLengthPreference();
+//        initGestureNavbarLengthPreference();
     }
 
     @Override
