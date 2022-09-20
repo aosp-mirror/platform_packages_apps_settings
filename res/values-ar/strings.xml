@@ -691,8 +691,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"هل تريد إزالة جميع بصمات الأصابع؟"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"حذف \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"هل تريد حذف بصمة الإصبع هذه؟"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"يؤدي هذا الإجراء إلى حذف النموذج والصور المرتبطة ببصمة الإصبع \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\"، والتي تم تخزينها على جهازك."</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"لن تتمكّن من استخدام بصمة إصبعك لفتح قفل هاتفك أو إثبات هويتك في التطبيقات."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"يؤدي هذا الإجراء إلى حذف النموذج والصور المرتبطة ببصمة الإصبع \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\"، والتي تم تخزينها على هاتفك."</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"يؤدي هذا الإجراء إلى حذف النموذج والصور المرتبطة ببصمة الإصبع \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\"، والتي تم تخزينها على جهازك اللوحي."</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"يؤدي هذا الإجراء إلى حذف النموذج والصور المرتبطة ببصمة الإصبع \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\"، والتي تم تخزينها على جهازك."</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"لن تتمكّن من استخدام بصمة إصبعك لفتح قفل هاتفك أو إثبات هويتك في التطبيقات."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"لن تتمكّن من استخدام بصمة إصبعك لفتح قفل جهازك اللوحي أو إثبات هويتك في التطبيقات."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"لن تتمكّن من استخدام بصمة إصبعك لفتح قفل جهازك أو إثبات هويتك في التطبيقات."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"لن تتمكّن من استخدام بصمة إصبعك لفتح قفل الملف الشخصي للعمل أو السماح بعمليات الشراء أو تسجيل الدخول إلى تطبيقات العمل."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"نعم، إزالة"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"التشفير"</string>
@@ -1463,7 +1467,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"مفعّل"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"تفعيل - استنادًا للوجه"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"التعرّف على الوجوه"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"يمكنك ضبط اتجاه الشاشة تلقائيًا عند تحريك الهاتف عموديًا وأفقيًا."</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"يمكنك ضبط اتجاه الشاشة تلقائيًا عند تحريك الهاتف عموديًا وأفقيًا."</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"يمكنك ضبط اتجاه الشاشة تلقائيًا عند تحريك جهازك اللوحي عموديًا وأفقيًا."</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"مزيد من المعلومات عن التدوير التلقائي"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"عند تغيير اتّجاه شاشة هاتفك بين العمودي والأفقي"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"دقة الشاشة"</string>
@@ -6212,8 +6217,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"معاينة"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"اختيار شاشة استراحة"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"إظهار معلومات إضافية"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"يتم عرض الوقت أو الطقس أو غير ذلك من المعلومات على شاشة الاستراحة."</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"إعدادات إضافية"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"اختيار شاشة التوقف"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"اختَر ما يظهر لك على شاشتك عندما يكون جهازك اللوحي في حالة إرساء. قد يستهلك جهازك قدرًا أكبر من الطاقة عند استخدام شاشة توقّف."</string>

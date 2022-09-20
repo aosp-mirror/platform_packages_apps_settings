@@ -675,8 +675,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Bütün barmaq izləri silinsin?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Silin: \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Bu barmaq izi silinsin?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Bu, cihazınızda saxlanılan \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' ilə əlaqəli barmaq izi şəkillərini və modelini silir"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Telefonunuzu kiliddən çıxarmaq və ya tətbiqlərdə kimliyi doğrulamaq üçün barmaq izinizi istifadə edə bilməyəcəksiniz."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Bu, telefonunuzda saxlanılan \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' ilə əlaqəli barmaq izi şəkillərini və modelini silir"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Bu, planşetinizdə saxlanılan \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' ilə əlaqəli barmaq izi şəkillərini və modelini silir"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Bu, cihazınızda saxlanılan \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' ilə əlaqəli barmaq izi şəkillərini və modelini silir"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Telefonunuzu kiliddən çıxarmaq və ya tətbiqlərdə kimliyi doğrulamaq üçün barmaq izinizi istifadə edə bilməyəcəksiniz."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Planşetinizi kiliddən çıxarmaq və ya tətbiqlərdə kimliyi doğrulamaq üçün barmaq izinizi istifadə edə bilməyəcəksiniz."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Cihazınızı kiliddən çıxarmaq və ya tətbiqlərdə kimliyi doğrulamaq üçün barmaq izinizi istifadə edə bilməyəcəksiniz."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"İş profilinizi kiliddən çıxarmaq, alışları təsdiqləmək və ya iş tətbiqlərinə giriş üçün barmaq izinizi istifadə edə bilməyəcəksiniz"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Bəli, silin"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Şifrələmə"</string>
@@ -1383,7 +1387,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Aktiv"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Aktiv - Üz əsaslı"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Üz aşkarlanması"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Telefonunuzu portret və landşaft rejimi arasında keçirdiyiniz zaman ekranın orientasiyasını avtomatik tənzimləyin"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Telefonunuzu portret və landşaft rejimi arasında keçirdiyiniz zaman ekranın orientasiyasını avtomatik tənzimləyin"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Planşetinizi portret və landşaft rejimi arasında keçirdiyiniz zaman ekranın orientasiyasını avtomatik tənzimləyin"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Avtodönüş haqqında ətraflı məlumat"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Telefonunuzu portret və landşaft rejimi arasında keçirdikdə"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Ekran dəqiqliyi"</string>
@@ -5864,8 +5869,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Önizləmə"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Ekran qoruyucusu seçin"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Əlavə məlumat göstərin"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Ekran qoruyucusunda vaxt, hava və ya digər məlumatları göstərin"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Digər ayarlar"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Ekran qoruyucunu seçin"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Planşet doka yerləşdirildikdə ekranda nə görəcəyinizi seçin. Ekran qoruyucusu istifadə edildikdə cihazınız daha çox enerji sərf edə bilər."</string>

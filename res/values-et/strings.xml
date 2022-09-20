@@ -681,8 +681,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Kas eemaldada kõik sõrmejäljed?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Kustuta „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Kas soovite selle sõrmejälje kustutada?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"See kustutab sõrmejäljega „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ seotud sõrmejäljekujutised ja -mudeli, mis on teie seadmesse salvestatud"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Te ei saa oma sõrmejälge kasutades telefoni avada ega rakendustes oma isikut kinnitada."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"See kustutab sõrmejäljega „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ seotud sõrmejäljekujutised ja -mudeli, mis on teie telefoni salvestatud"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"See kustutab sõrmejäljega „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ seotud sõrmejäljekujutised ja -mudeli, mis on teie tahvelarvutisse salvestatud"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"See kustutab sõrmejäljega „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ seotud sõrmejäljekujutised ja -mudeli, mis on teie seadmesse salvestatud"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Te ei saa oma sõrmejälge kasutades telefoni avada ega rakendustes oma isikut kinnitada."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Te ei saa oma sõrmejälge kasutades tahvelarvutit avada ega rakendustes oma isikut kinnitada."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Te ei saa oma sõrmejälge kasutades seadet avada ega rakendustes oma isikut kinnitada."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Te ei saa oma sõrmejälge kasutades tööprofiili avada, oste volitada ega töörakendustesse sisse logida."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Jah, eemalda"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Krüpteerimine"</string>
@@ -1389,7 +1393,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Sees"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Sees – näopõhine"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Näotuvastus"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Ekraanikuva suunda kohandatakse automaatselt, kui liigutate telefoni vertikaalrežiimi ja horisontaalrežiimi vahel."</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Ekraanikuva suunda kohandatakse automaatselt, kui liigutate telefoni vertikaalrežiimi ja horisontaalrežiimi vahel."</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Ekraanikuva suunda kohandatakse automaatselt, kui liigutate tahvelarvutit vertikaalrežiimi ja horisontaalrežiimi vahel."</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Lisateave automaatse pööramise kohta"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Liigutades telefoni vertikaal- ja horisontaalrežiimi vahel"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Ekraani eraldusvõime"</string>
@@ -5870,8 +5875,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Eelvaade"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Valige ekraanisäästja"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Kuva lisateave"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Ekraanisäästjal kuvatakse näiteks kellaaeg, ilmateade või muu teave"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Rohkem seadeid"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Valige ekraanisäästja"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Valige, mida oma ekraanikuval näete, kui teie tahvelarvuti on dokitud. Kui kasutate ekraanisäästjat, võib teie seade rohkem energiat tarbida."</string>

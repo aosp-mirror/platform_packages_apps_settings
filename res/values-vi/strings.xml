@@ -681,8 +681,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Xóa mọi vân tay?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Xoá \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Bạn có muốn xóa vân tay này không?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Thao tác này sẽ xóa các hình ảnh và mẫu vân tay liên kết với \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" được lưu trữ trên thiết bị của bạn"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Bạn sẽ không thể dùng vân tay để mở khóa điện thoại hoặc xác minh danh tính của mình trong các ứng dụng."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Thao tác này sẽ xoá các hình ảnh và mẫu vân tay liên kết với \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" được lưu trữ trên điện thoại của bạn"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Thao tác này sẽ xoá các hình ảnh và mẫu vân tay liên kết với \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" được lưu trữ trên máy tính bảng của bạn"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Thao tác này sẽ xóa các hình ảnh và mẫu vân tay liên kết với \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" được lưu trữ trên thiết bị của bạn"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Bạn sẽ không thể dùng vân tay để mở khóa điện thoại hoặc xác minh danh tính của mình trong các ứng dụng."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Bạn sẽ không thể dùng vân tay để mở khoá máy tính bảng hoặc xác minh danh tính của mình trong các ứng dụng."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Bạn sẽ không thể dùng vân tay để mở khoá thiết bị hoặc xác minh danh tính của mình trong các ứng dụng."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Bạn sẽ không thể dùng vân tay để mở khóa hồ sơ công việc, ủy quyền mua hàng hay đăng nhập vào các ứng dụng công việc."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Có, xóa"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Mã hoá"</string>
@@ -1389,7 +1393,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Đang bật"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Đang bật – Dựa trên khuôn mặt"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Phát hiện khuôn mặt"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Tự động điều chỉnh hướng màn hình khi bạn chuyển điện thoại giữa chế độ dọc và chế độ ngang"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Tự động điều chỉnh hướng màn hình khi bạn chuyển điện thoại giữa chế độ dọc và chế độ ngang"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Tự động điều chỉnh hướng màn hình khi bạn chuyển máy tính bảng giữa chế độ dọc và chế độ ngang"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Tìm hiểu thêm về chế độ tự động xoay"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Khi bạn chuyển điện thoại giữa chế độ dọc và chế độ ngang"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Độ phân giải màn hình"</string>
@@ -5870,8 +5875,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Xem trước"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Chọn một trình bảo vệ màn hình"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Hiện thêm thông tin"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Hiển thị thời gian, thời tiết hoặc các thông tin khác trên trình bảo vệ màn hình"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Chế độ cài đặt khác"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Chọn trình bảo vệ màn hình"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Chọn nội dung bạn sẽ thấy trên màn hình khi máy tính bảng được cắm vào đế sạc. Thiết bị có thể tiêu hao nhiều năng lượng hơn khi bạn dùng trình bảo vệ màn hình."</string>

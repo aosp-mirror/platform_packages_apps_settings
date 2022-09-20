@@ -675,8 +675,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Të hiqen të gjitha gjurmët e gishtave?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Fshi \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Dëshiron ta fshish këtë gjurmë gishti?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Kjo fshin imazhet e gjurmës së gishtit dhe modelin e lidhur me \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" që ruhen në pajisjen tënde"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Nuk do të jesh në gjendje të përdorësh gjurmën e gishtit për të shkyçur telefonin tënd ose për të verifikuar që je ti në aplikacione."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Kjo fshin imazhet e gjurmës së gishtit dhe modelin e lidhur me \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" që ruhen në telefonin tënd"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Kjo fshin imazhet e gjurmës së gishtit dhe modelin e lidhur me \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" që ruhen në tabletin tënd"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Kjo fshin imazhet e gjurmës së gishtit dhe modelin e lidhur me \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" që ruhen në pajisjen tënde"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Nuk do të jesh në gjendje të përdorësh gjurmën e gishtit për të shkyçur telefonin tënd ose për të verifikuar që je ti në aplikacione."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Nuk do të jesh në gjendje të përdorësh gjurmën e gishtit për të shkyçur tabletin tënd ose për të verifikuar që je ti në aplikacione."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Nuk do të jesh në gjendje të përdorësh gjurmën e gishtit për të shkyçur pajisjen tënde ose për të verifikuar që je ti në aplikacione."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Nuk do të jesh në gjendje të përdorësh gjurmën e gishtit për të shkyçur profilin tënd të punës, për të autorizuar blerje ose për t\'u identifikuar në aplikacionet e punës."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Po, hiqi"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Enkriptimi"</string>
@@ -1383,7 +1387,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Aktiv"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Aktiv - Në bazë të fytyrave"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Zbulimi i fytyrës"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Rregullo automatikisht orientimin e ekranit kur lëviz telefonin mes modalitetit të portretit dhe atij horizontal"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Rregullo automatikisht orientimin e ekranit kur lëviz telefonin mes modalitetit të portretit dhe atij horizontal"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Rregullo automatikisht orientimin e ekranit kur lëviz tabletin mes modalitetit të portretit dhe atij horizontal"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Mëso më shumë për rrotullimin automatik"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Kur lëviz telefonin mes modalitetit \"portret\" e \"horizontal\""</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Rezolucioni i ekranit"</string>
@@ -5864,8 +5869,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Pamja paraprake"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Zgjidh një mbrojtës ekrani"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Shfaq informacione shtesë"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Shfaq gjëra të tilla si ora, moti ose informacione të tjera në mbrojtësin e ekranit"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Cilësime të tjera"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Zgjidh mbrojtësin e ekranit"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Zgjidh se çfarë do të shohësh në ekranin tënd kur tableti të jetë lidhur me stacionin. Pajisja jote mund të përdorë më shumë energji kur përdoret një mbrojtës ekrani."</string>
