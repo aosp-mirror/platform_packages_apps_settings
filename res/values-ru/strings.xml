@@ -683,8 +683,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Удалить отпечатки пальцев?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Удаление отпечатка пальца \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Удалить отпечаток пальца?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Изображения и модель отпечатка \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" будут удалены с устройства."</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Вы больше не сможете использовать отпечаток пальца для разблокировки телефона и подтверждения своей личности в приложениях."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Изображения и модель отпечатка \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" будут удалены с телефона."</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Изображения и модель отпечатка \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" будут удалены с планшета."</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Изображения и модель отпечатка \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" будут удалены с устройства."</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Вы больше не сможете использовать отпечаток пальца для разблокировки телефона и подтверждения своей личности в приложениях."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Вы больше не сможете использовать отпечаток пальца для разблокировки планшета и подтверждения личности в приложениях."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Вы больше не сможете использовать отпечаток пальца для разблокировки устройства и подтверждения личности в приложениях."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Вы больше не сможете использовать отпечаток пальца для разблокировки рабочего профиля, подтверждения покупок и входа в рабочие приложения."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Удалить"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Шифрование"</string>
@@ -1423,7 +1427,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Включено"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Включить (на основе распознавания лиц)"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Распознавание лица"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"При смене положения телефона экран автоматически переключается из вертикального режима в горизонтальный."</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"При смене положения телефона экран автоматически переключается из вертикального режима в горизонтальный."</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"При смене положения планшета экран автоматически переключается из вертикального режима в горизонтальный"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Подробнее об автоповороте"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Переключать ориентацию при изменении положения телефона"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Разрешение экрана"</string>
@@ -5818,9 +5823,9 @@
     <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Открытие меню кнопки питания"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Сначала необходимо настроить блокировку экрана"</string>
     <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Меню кнопки питания\nОдновременно нажмите кнопку питания и кнопку увеличения громкости."</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Отключение звука звонка\nНажмите кнопку регулировки громкости, чтобы применить сочетание клавиш."</string>
-    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Длительность нажатия и удержания"</string>
-    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Настройте чувствительность, выбрав длительность нажатия и удержания кнопки питания."</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Отключение звука звонка\nНажмите кнопку регулировки громкости, чтобы открыть."</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Длительность нажатия"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Настройте чувствительность, выбрав длительность нажатия кнопки питания."</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Быстро"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Долго"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Показывать кошелек"</string>
@@ -6038,8 +6043,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Посмотреть"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Выберите заставку"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Показывать дополнительную информацию"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Показывать время, погоду и другую информацию поверх заставки"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Дополнительные настройки"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Выберите заставку"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Выберите, что будет показано на экране, когда планшет подключен к док-станции. Устройство может потреблять больше энергии, если включена заставка."</string>

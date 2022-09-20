@@ -681,8 +681,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Remover todas as impressões digitais?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Excluir \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Quer excluir esta impressão digital?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Essa ação exclui as imagens e o modelo de impressão digital associados a \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que estão armazenados no seu dispositivo"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Não será possível usar a impressão digital para desbloquear o smartphone ou confirmar sua identidade em apps."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Essa ação exclui as imagens e o modelo de impressão digital associados a \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que estão armazenados no seu smartphone"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Essa ação exclui as imagens e o modelo de impressão digital associados a \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que estão armazenados no seu tablet"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Essa ação exclui as imagens e o modelo de impressão digital associados a \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que estão armazenados no seu dispositivo"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Não será possível usar a impressão digital para desbloquear o smartphone ou confirmar sua identidade em apps."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Não vai ser possível usar a impressão digital para desbloquear o tablet ou confirmar sua identidade em apps."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Não vai ser possível usar a impressão digital para desbloquear o dispositivo ou confirmar sua identidade em apps."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Não será possível usar a impressão digital para desbloquear seu perfil de trabalho, autorizar compras ou fazer login em apps de trabalho."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Sim, remover"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Criptografia"</string>
@@ -1389,7 +1393,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Ativado"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Ativ. - Reconhecimento facial"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Detecção facial"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Ajuste a orientação da tela automaticamente ao mover o smartphone entre os modos retrato e paisagem"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Ajuste a orientação da tela automaticamente ao mover o smartphone entre os modos retrato e paisagem"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Ajustar a orientação da tela automaticamente ao mover o tablet entre os modos retrato e paisagem"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Saiba mais sobre o giro automático"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Ao virar o smartphone para as posições vertical e horizontal"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Resolução da tela"</string>
@@ -5870,8 +5875,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Prévia"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Escolher um protetor de tela"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Mostrar outras informações"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Mostra dados como o horário, o clima ou outras informações no protetor de tela"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Mais configurações"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Escolher o protetor de tela"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Escolha o que ver na tela quando o tablet estiver na base. O dispositivo pode consumir mais energia quando o protetor de tela é usado."</string>

@@ -681,8 +681,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"모든 지문을 삭제할까요?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"\'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' 삭제"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"이 지문을 삭제하시겠습니까?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"기기에 저장된 \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' 지문과 관련된 지문 이미지와 모델이 삭제됩니다."</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"지문을 사용하여 휴대전화를 잠금 해제하거나 앱에서 본인을 인증할 수 없게 됩니다."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"휴대전화에 저장된 \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' 지문과 관련된 지문 이미지와 모델이 삭제됩니다."</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"태블릿에 저장된 \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' 지문과 관련된 지문 이미지와 모델이 삭제됩니다."</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"기기에 저장된 \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' 지문과 관련된 지문 이미지와 모델이 삭제됩니다."</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"지문을 사용하여 휴대전화를 잠금 해제하거나 앱에서 본인을 인증할 수 없게 됩니다."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"지문을 사용하여 태블릿을 잠금 해제하거나 앱에서 본인을 인증할 수 없게 됩니다."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"지문을 사용하여 기기를 잠금 해제하거나 앱에서 본인을 인증할 수 없게 됩니다."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"지문을 사용하여 직장 프로필을 잠금 해제하거나 구매를 승인하거나 직장 앱에 로그인할 수 없게 됩니다."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"삭제"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"암호화"</string>
@@ -1389,7 +1393,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"켜짐"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"켜짐 - 얼굴 기반"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"얼굴 인식"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"휴대전화를 가로 또는 세로로 움직이면 화면 방향이 자동으로 전환됩니다."</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"휴대전화를 가로 또는 세로로 움직이면 화면 방향이 자동으로 전환됩니다."</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"태블릿을 가로 또는 세로로 움직이면 화면 방향이 자동으로 전환됩니다."</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"자동 회전에 관해 자세히 알아보기"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"휴대전화를 가로 또는 세로로 움직이면 자동으로 방향 전환"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"화면 해상도"</string>
@@ -5643,7 +5648,7 @@
     <string name="cards_passes_sentence" msgid="1866311782387946944">"카드 및 패스"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"카드 및 패스"</string>
     <string name="power_menu_setting_name" msgid="2394440932633137229">"전원 버튼을 길게 누름"</string>
-    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"전원 버튼을 길게 눌러 액세스"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"전원 버튼을 길게 눌러 액세스할 대상"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"전원 메뉴"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"디지털 어시스턴트"</string>
     <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"디지털 어시스턴트 액세스"</string>
@@ -5870,8 +5875,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"미리보기"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"화면 보호기 선택"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"추가 정보 표시"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"시간, 날씨 또는 기타 정보를 화면 보호기에 표시"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"설정 더보기"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"화면 보호기 선택"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"태블릿이 도킹되었을 때 화면에 표시할 항목을 선택하세요. 화면 보호기를 사용하면 기기에서 더 많은 에너지를 사용할 수 있습니다."</string>
