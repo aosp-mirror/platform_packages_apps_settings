@@ -17,6 +17,8 @@ package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -251,5 +253,15 @@ public class WifiEntryPreferenceTest {
         pref.onBindViewHolder(holder);
 
         assertThat(view.findViewById(R.id.icon_button).getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void updateIcon_ShouldSetTintListForDrawable() {
+        WifiEntryPreference pref =
+                new WifiEntryPreference(mContext, mMockWifiEntry, mMockIconInjector);
+
+        pref.updateIcon(false /* showX */, 4 /* level */);
+
+        verify(mMockDrawable4).setTintList(any());
     }
 }
