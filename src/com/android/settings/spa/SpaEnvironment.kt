@@ -17,6 +17,8 @@
 package com.android.settings.spa
 
 import com.android.settings.spa.app.AppsMainPageProvider
+import com.android.settings.spa.app.appsettings.AppSettingsProvider
+import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
 import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
@@ -42,14 +44,16 @@ object SpaEnvironment {
                 DisplayOverOtherAppsAppListProvider,
                 MediaManagementAppsAppListProvider,
                 ModifySystemSettingsAppListProvider,
-                InstallUnknownAppsListProvider,
                 PictureInPictureListProvider,
+                InstallUnknownAppsListProvider,
+                AlarmsAndRemindersAppListProvider,
             ),
         )
         SettingsPageProviderRepository(
             allPageProviders = listOf(
                 HomePageProvider,
                 AppsMainPageProvider,
+                AppSettingsProvider,
                 SpecialAppAccessPageProvider,
                 NotificationMainPageProvider,
                 AppListNotificationsPageProvider,
