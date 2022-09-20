@@ -60,6 +60,13 @@ object AppSettingsProvider : SettingsPageProvider {
 
     @Composable
     fun navigator(app: ApplicationInfo) = navigator(route = "$name/${app.toRoute()}")
+
+    /**
+     * Gets the route to the App Settings page.
+     *
+     * Expose route to enable enter from non-SPA pages.
+     */
+    fun getRoute(packageName: String, userId: Int): String = "$name/$packageName/$userId"
 }
 
 @Composable
