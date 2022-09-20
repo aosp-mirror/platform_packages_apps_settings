@@ -335,22 +335,6 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         return SignalStrengthUtil.shouldInflateSignalStrength(mContext, subId);
     }
 
-    @VisibleForTesting
-    void setIcon(Preference pref, int subId, boolean isDefaultForData) {
-        final TelephonyManager mgr = mContext.getSystemService(
-                TelephonyManager.class).createForSubscriptionId(subId);
-        final SignalStrength strength = mgr.getSignalStrength();
-        int level = (strength == null) ? 0 : strength.getLevel();
-        int numLevels = SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
-        if (shouldInflateSignalStrength(subId)) {
-            level += 1;
-            numLevels += 1;
-        }
-
-        final boolean showCutOut = !isDefaultForData || !mgr.isDataEnabled();
-        pref.setIcon(mSubsPrefCtrlInjector.getIcon(mContext, level, numLevels, showCutOut));
-    }
-
     /**
      * The summary can have either 1 or 2 lines depending on which services (calls, SMS, data) this
      * subscription is the default for.
