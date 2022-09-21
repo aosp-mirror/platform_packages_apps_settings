@@ -283,7 +283,7 @@ public class ManageApplications extends InstrumentedFragment
         final String className = getClassName(activity.getIntent(), getArguments());
         if (className.equals(ManageExternalSourcesActivity.class.getName())) {
             SpaActivity.startSpaActivity(
-                    context, InstallUnknownAppsListProvider.INSTANCE.getRoute());
+                    context, InstallUnknownAppsListProvider.INSTANCE.getAppListRoute());
             activity.finish();
         }
     }
