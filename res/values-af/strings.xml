@@ -253,7 +253,7 @@
     <string name="sd_card_settings_label" product="nosdcard" msgid="1850505156136467106">"USB-berging"</string>
     <string name="sd_card_settings_label" product="default" msgid="8715502912796241588">"SD-kaart"</string>
     <string name="proxy_settings_label" msgid="6300573815025557843">"Instaan-instellings"</string>
-    <string name="cancel" msgid="5780102414089664898">"Kanselleer"</string>
+    <string name="cancel" msgid="5780102414089664898">"Kanselleer "</string>
     <string name="okay" msgid="4827099303045669054">"OK"</string>
     <string name="forget" msgid="3754013654135912783">"Vergeet"</string>
     <string name="save" msgid="3125033126936493822">"Stoor"</string>
@@ -675,8 +675,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Verwyder alle vingerafdrukke?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Vee \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" uit"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Wil jy hierdie vingerafdruk uitvee?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Dit vee die vingerafdrukprente en -model uit wat met \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" geassosieer word en op jou toestel geberg is"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Jy sal nie jou vingerafdruk kan gebruik om jou foon te ontsluit of in programme te verifieer dis jy nie."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Dit vee die vingerafdrukprente en -model uit wat met \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" geassosieer word en op jou foon geberg is"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Dit vee die vingerafdrukprente en -model uit wat met \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" geassosieer word en op jou tablet geberg is"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Dit vee die vingerafdrukprente en -model uit wat met \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" geassosieer word en op jou toestel geberg is"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Jy sal nie jou vingerafdruk kan gebruik om jou foon te ontsluit of in programme te verifieer dis jy nie."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Jy sal nie jou vingerafdruk kan gebruik om jou tablet te ontsluit nie of in programme te verifieer dis jy nie."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Jy sal nie jou vingerafdruk kan gebruik om jou toestel te ontsluit nie of in programme te verifieer dis jy nie."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Jy sal nie jou vingerafdruk kan gebruik om jou werkprofiel te ontsluit, aankope te magtig of by werkprogramme aan te meld nie."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ja, verwyder"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Enkripsie"</string>
@@ -1383,7 +1387,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Aan"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Aan – gesiggegrond"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Gesigbespeuring"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Verstel die skermoriëntasie outomaties wanneer jy jou foon tussen portret en landskap beweeg"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Verstel die skermoriëntasie outomaties wanneer jy jou foon tussen portret en landskap beweeg"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Verstel die skermoriëntasie outomaties wanneer jy jou tablet tussen portret en landskap beweeg"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Kom meer te wete oor outodraai"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Wanneer jy jou foon tussen portret en landskap beweeg"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Skermresolusie"</string>
@@ -1677,7 +1682,7 @@
     <string name="storage_menu_format" msgid="8903698999905354146">"Formateer SD-kaart vir draagbare berging"</string>
     <string name="storage_menu_format_button" msgid="7623565190643699626">"Formateer kaart"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formateer as draagbaar"</string>
-    <string name="storage_menu_format_option" msgid="4886059624052908432">"Formateer"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Formateer "</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Skuif data"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Vergeet"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Stel op"</string>
@@ -5864,8 +5869,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Voorbeskou"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Kies \'n sluimerskerm"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Wys bykomende inligting"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Wys goed soos die tyd, weer of ander inligting op die sluimerskerm"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Nog instellings"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Kies jou sluimerskerm"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Kies wat jy op jou skerm sal sien wanneer jou tablet gedok is. Jou toestel kan meer energie gebruik wanneer ’n sluimerskerm gebruik word."</string>

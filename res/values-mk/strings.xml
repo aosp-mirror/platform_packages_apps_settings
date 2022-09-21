@@ -679,8 +679,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Да се отстранат сите отпечатоци?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Избришете „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Дали сакате да го избришете отпечатоков?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Ова ги брише сликите од отпечатоците и моделите поврзани со „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ што се складирани на уредот"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Нема да може да го користите отпечатокот за да го отклучувате телефонот или да потврдувате дека сте вие во апликациите."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Ова ги брише сликите од отпечатоците и моделите поврзани со „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ што се складирани на телефонот"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Ова ги брише сликите од отпечатоците и моделите поврзани со „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ што се складирани на таблетот"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Ова ги брише сликите од отпечатоците и моделите поврзани со „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ што се складирани на уредот"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Нема да може да го користите отпечатокот за да го отклучувате телефонот или да потврдувате дека сте вие во апликациите."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Нема да може да го користите отпечатокот за да го отклучувате таблетот или да потврдувате дека сте вие во апликациите."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Нема да може да го користите отпечатокот за да го отклучувате уредот или да потврдувате дека сте вие во апликациите."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Нема да може да го користите отпечатокот за да го отклучувате работниот профил, да овластувате купувања или да се најавувате на работните апликации."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Отстрани"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Шифрирање"</string>
@@ -1387,7 +1391,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Вклучено"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Вклучено - според лице"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Откривање лица"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Автоматски ја приспособува ориентацијата на екранот помеѓу портрет и пејзаж кога го движите телефонот"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Автоматски ја приспособува ориентацијата на екранот помеѓу портрет и пејзаж кога го движите телефонот"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Автоматски ја приспособува ориентацијата на екранот помеѓу портрет и пејзаж кога го движите таблетот"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Дознајте повеќе за „Автоматско ротирање“"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Менувајте помеѓу портрет и пејзаж кога го движите телефонот"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Резолуција на екран"</string>
@@ -5868,8 +5873,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Преглед"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Изберете заштитник на екран"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Прикажување дополнителни податоци"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Прикажува работи како време, временска прогноза или други информации на заштитникот на екранот"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Повеќе поставки"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Изберете го заштитникот на екранот"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Изберете што да се прикажува на екранот кога таблетот е приклучен на док. Уредот може да користи повеќе енергија кога се користи заштитник на екранот."</string>

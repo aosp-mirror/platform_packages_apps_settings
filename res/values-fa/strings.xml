@@ -675,8 +675,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"همه اثر انگشت‌ها پاک شوند؟"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"حذف کردن «<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>»"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"می‌خواهید این اثر انگشت را پاک کنید؟"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"با این کار مدل و تصاویر اثر انگشت مرتبط با «<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>» که در دستگاهتان ذخیره شده‌اند حذف می‌شوند"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"نمی‌توانید از اثر انگشت برای باز کردن قفل تلفن یا تأیید هویتتان در برنامه‌ها استفاده کنید."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"با این کار مدل و تصاویر اثر انگشت مرتبط با «<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>» که در تلفنتان ذخیره شده‌اند حذف می‌شوند"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"با این کار مدل و تصاویر اثر انگشت مرتبط با «<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>» که در رایانه لوحی‌تان ذخیره شده‌اند حذف می‌شوند"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"با این کار مدل و تصاویر اثر انگشت مرتبط با «<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>» که در دستگاهتان ذخیره شده‌اند حذف می‌شوند"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"نمی‌توانید از اثر انگشت برای باز کردن قفل تلفن یا تأیید هویتتان در برنامه‌ها استفاده کنید."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"نمی‌توانید از اثر انگشت برای باز کردن قفل رایانه لوحی یا تأیید هویتتان در برنامه‌ها استفاده کنید."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"نمی‌توانید از اثر انگشت برای باز کردن قفل دستگاه یا تأیید هویتتان در برنامه‌ها استفاده کنید."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"نمی‌توانید از اثر انگشت برای باز کردن قفل نمایه کاری، اجازه دادن به خریدها، یا ورود به سیستم برنامه‌های کاری استفاده کنید."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"بله، پاک شود"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"رمزگذاری"</string>
@@ -1383,7 +1387,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"روشن"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"روشن - براساس چهره"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"تشخیص چهره"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"وقتی تلفن را بین حالت افقی و عمودی جابه‌جا می‌کنید، جهت صفحه‌نمایش به‌طور خودکار تغییر می‌کند"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"وقتی تلفن را بین حالت افقی و عمودی جابه‌جا می‌کنید، جهت صفحه‌نمایش به‌طور خودکار تغییر می‌کند"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"وقتی رایانه لوحی را بین حالت افقی و عمودی جابه‌جا کنید، جهت صفحه‌نمایش به‌طور خودکار تغییر می‌کند"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"درباره چرخش خودکار بیشتر بدانید"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"وقتی تلفن را بین حالت افقی و عمودی جابه‌جا می‌کنید"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"وضوح صفحه"</string>
@@ -5864,8 +5869,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"پیش‌نما"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"انتخاب محافظ صفحه"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"نمایش اطلاعات تکمیلی"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"نمایش مواردی مثل زمان، وضعیت آب‌وهوا، یا اطلاعات دیگر روی محافظ صفحه‌نمایش"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"تنظیمات بیشتر"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"انتخاب محافظ صفحه"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"انتخاب کنید وقتی رایانه لوحی روی پایه قرار می‌گیرد چه چیزی روی صفحه‌نمایش نشان داده شود. هنگام استفاده از محافظ صفحه، دستگاه ممکن است انرژی بیشتری مصرف کند."</string>

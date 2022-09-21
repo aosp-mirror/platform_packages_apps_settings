@@ -675,8 +675,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Alisin ang lahat ng fingerprint?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"I-delete ang \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Gusto mo bang i-delete ang fingerprint na ito?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Dine-delete nito ang mga larawan at modelo ng fingerprint na nauugnay sa \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' na naka-store sa iyong device"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Hindi mo magagamit ang iyong fingerprint para i-unlock ang telepono mo o i-verify na ikaw ito sa mga app."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Dine-delete nito ang mga larawan at modelo ng fingerprint na nauugnay sa \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' na naka-store sa iyong telepono"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Dine-delete nito ang mga larawan at modelo ng fingerprint na nauugnay sa \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' na naka-store sa iyong tablet"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Dine-delete nito ang mga larawan at modelo ng fingerprint na nauugnay sa \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' na naka-store sa iyong device"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Hindi mo magagamit ang iyong fingerprint para i-unlock ang telepono mo o i-verify na ikaw ito sa mga app."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Hindi mo magagamit ang iyong fingerprint para i-unlock ang tablet mo o i-verify na ikaw ito sa mga app."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Hindi mo magagamit ang iyong fingerprint para i-unlock ang device mo o i-verify na ikaw ito sa mga app."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Hindi mo magagamit ang iyong fingerprint para i-unlock ang profile mo sa trabaho, magpahintulot ng mga pagbili, o mag-sign in sa mga app para sa trabaho."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Oo, alisin"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Pag-encrypt"</string>
@@ -1383,7 +1387,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Naka-on"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Naka-on - Batay sa mukha"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Pag-detect ng Mukha"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Awtomatikong isaayos ang orientation ng screen kapag inilipat mo ang iyong telepono sa pagitan ng portrait at landscape"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Awtomatikong isaayos ang orientation ng screen kapag inilipat mo ang iyong telepono sa pagitan ng portrait at landscape"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Awtomatikong isaayos ang orientation ng screen kapag inilipat mo ang iyong tablet sa pagitan ng portrait at landscape"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Matuto pa tungkol sa auto-rotate"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Kapag pinalipat-lipat ang telepono sa portrait at landscape"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Resolusyon ng screen"</string>
@@ -1677,7 +1682,7 @@
     <string name="storage_menu_format" msgid="8903698999905354146">"I-format ang SD card para sa portable na storage"</string>
     <string name="storage_menu_format_button" msgid="7623565190643699626">"I-format ang card"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"I-format bilang portable"</string>
-    <string name="storage_menu_format_option" msgid="4886059624052908432">"I-format"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"  I-format"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Mag-migrate ng data"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Kalimutan"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"I-set up"</string>
@@ -5864,8 +5869,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Preview"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Pumili ng screen saver"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Magpakita ng karagdagang impormasyon"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Magpakita ng mga bagay gaya ng oras, lagay ng panahon, o iba pang impormasyon sa screen saver"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Higit pang setting"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Piliin ang iyong screen saver"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Piliin ang makikita mo sa iyong screen kapag naka-dock ang iyong tablet. Posibleng gumamit ng mas maraming enerhiya ang iyong device kapag gumagamit ng screen saver."</string>
