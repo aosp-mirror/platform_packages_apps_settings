@@ -679,8 +679,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Vai noņemt visus nospiedumus?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Pirksta nospieduma “<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>” dzēšana"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Vai vēlaties dzēst šo pirksta nospiedumu?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Tādējādi tiks dzēsti jūsu ierīcē glabātie pirksta nospieduma attēli un modelis, kas saistīti ar “<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”."</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Jūs nevarēsiet izmantot pirksta nospiedumu, lai autorizētu tālruni vai apstiprinātu savu identitāti lietotnēs."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Tādējādi tiks dzēsti jūsu tālrunī saglabātie pirksta nospieduma attēli un modelis, kas saistīti ar pirksta nospiedumu “<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Tādējādi tiks dzēsti jūsu planšetdatorā saglabātie pirksta nospieduma attēli un modelis, kas saistīti ar pirksta nospiedumu “<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Tādējādi tiks dzēsti jūsu ierīcē glabātie pirksta nospieduma attēli un modelis, kas saistīti ar “<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”."</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Jūs nevarēsiet izmantot pirksta nospiedumu, lai autorizētu tālruni vai apstiprinātu savu identitāti lietotnēs."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Jūs nevarēsiet izmantot pirksta nospiedumu, lai atbloķētu planšetdatoru vai apstiprinātu savu identitāti lietotnēs."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Jūs nevarēsiet izmantot pirksta nospiedumu, lai atbloķētu ierīci vai apstiprinātu savu identitāti lietotnēs."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Jūs nevarēsiet izmantot pirksta nospiedumu, lai atbloķētu darba profilu, autorizētu pirkumus vai pierakstītos darba lietotnēs."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Jā, noņemt"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Šifrēšana"</string>
@@ -1403,7 +1407,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Ieslēgt"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Ieslēgt (ar sejas noteikšanu)"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Sejas noteikšana"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Ekrāna virziens tiek automātiski pielāgots, kad tālruni no portreta režīma pārvietojat ainavas režīmā vai otrādi."</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Ekrāna virziens tiek automātiski pielāgots, kad tālruni no portreta režīma pārvietojat ainavas režīmā vai otrādi."</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Ekrāna virziens tiek automātiski pielāgots, kad planšetdatoru no portreta režīma pārvietojat ainavas režīmā vai otrādi"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Uzzināt vairāk par automātisko pagriešanu"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Pārvietojot tālruni no portreta režīma ainavas režīmā/otrādi"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Ekrāna izšķirtspēja"</string>
@@ -5723,8 +5728,8 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"ierīču vadīklas"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kartes un caurlaides"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kartes un caurlaides"</string>
-    <string name="power_menu_setting_name" msgid="2394440932633137229">"Nospiediet un turiet barošanas pogu"</string>
-    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Lai piekļūtu, nospiediet un turiet barošanas pogu"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Barošanas pogas nospiešana un turēšana"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Kad tiek nospiesta un turēta barošanas poga, ir jāatver"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Barošanas izvēlne"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Digitālais asistents"</string>
     <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Piekļūt digitālajam asistentam"</string>
@@ -5733,7 +5738,7 @@
     <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Barošanas izvēlne:\nvienlaikus nospiediet barošanas pogu un skaļuma palielināšanas pogu"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Zvana signāla novēršana:\nlai izmantotu īsinājumtaustiņu, nospiediet skaļuma pogu"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Nospiešanas un turēšanas ilgums"</string>
-    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Pielāgojiet jutīgumu, izvēloties, cik ilgi nospiest un turēt barošanas pogu."</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Pielāgojiet jutīgumu, izvēloties, cik ilgi barošanas poga ir jātur."</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Īsi"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Ilgi"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Rādīt maku"</string>
@@ -5951,8 +5956,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Priekšskatīt"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Izvēlieties ekrānsaudzētāju"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Rādīt papildu informāciju"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Ekrānsaudzētājā tiek rādīts pulksteņa laiks, laikapstākļu prognoze vai cita informācija."</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Citi iestatījumi"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Ekrānsaudzētāja izvēle"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Izvēlieties, kas būs redzams ekrānā, kad planšetdators būs dokots. Ja izmantosiet ekrānsaudzētāju, ierīce var patērēt vairāk enerģijas."</string>

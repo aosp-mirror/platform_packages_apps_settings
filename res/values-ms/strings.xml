@@ -675,8 +675,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Alih keluar semua cap jari?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Padamkan \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Adakah anda mahu memadamkan cap jari ini?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Ini akan memadamkan imej cap jari dan model yang berkaitan dengan \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' yang disimpan dalam peranti anda"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Anda tidak lagi dapat menggunakan cap jari anda untuk membuka kunci telefon atau mengesahkan diri dalam apl."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Tindakan ini akan memadamkan imej dan model cap jari yang berkaitan dengan \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' yang disimpan dalam telefon anda"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Tindakan ini akan memadamkan imej dan model cap jari yang berkaitan dengan \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' yang disimpan dalam tablet anda"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Ini akan memadamkan imej cap jari dan model yang berkaitan dengan \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' yang disimpan dalam peranti anda"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Anda tidak lagi dapat menggunakan cap jari anda untuk membuka kunci telefon atau mengesahkan diri dalam apl."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Anda tidak akan dapat menggunakan cap jari anda untuk membuka kunci tablet anda atau mengesahkan identiti anda dalam apl."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Anda tidak akan dapat menggunakan cap jari anda untuk membuka kunci peranti anda atau mengesahkan identiti anda dalam apl."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Anda tidak akan dapat menggunakan cap jari anda untuk membuka kunci profil kerja anda, membenarkan pembelian atau log masuk apl kerja."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ya, alih keluar"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Penyulitan"</string>
@@ -1383,7 +1387,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Hidup"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Di - Berasaskan wajah"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Pengesanan Wajah"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Laraskan orientasi skrin secara automatik apabila anda menggerakkan telefon anda antara potret dengan landskap"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Laraskan orientasi skrin secara automatik apabila anda menggerakkan telefon anda antara potret dengan landskap"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Laraskan orientasi skrin secara automatik apabila anda menggerakkan tablet anda antara potret dengan landskap"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Ketahui lebih lanjut tentang autoputar"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Apabila menggerakkan telefon antara potret dengan landskap"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Peleraian skrin"</string>
@@ -5864,8 +5869,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Pratonton"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Pilih penyelamat skrin"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Tunjukkan maklumat tambahan"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Paparkan benda seperti masa, cuaca atau maklumat lain pada penyelamat skrin"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Lagi tetapan"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Pilih penyelamat skrin anda"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Pilih perkara yang akan anda lihat pada skrin apabila tablet anda didok. Peranti anda mungkin menggunakan lebih banyak tenaga apabila penyelamat skrin digunakan."</string>

@@ -685,8 +685,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Выдаліць усе адбіткі пальцаў?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Выдаліць \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Хочаце выдаліць гэты адбітак пальца?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Відарысы і мадэль адбіткаў пальцаў, звязаныя з адбіткам \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\", будуць выдалены"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Вы не зможаце выкарыстоўваць адбітак пальца для разблакіроўкі тэлефона ці спраўджання сваёй асобы ў праграмах."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Відарысы і мадэль адбіткаў пальцаў, звязаныя з адбіткам \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\", будуць выдалены з тэлефона"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Відарысы і мадэль адбіткаў пальцаў, звязаныя з адбіткам \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\", будуць выдалены з планшэта"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Відарысы і мадэль адбіткаў пальцаў, звязаныя з адбіткам \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\", будуць выдалены"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Вы не зможаце выкарыстоўваць адбітак пальца для разблакіроўкі тэлефона ці спраўджання сваёй асобы ў праграмах."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Вы не зможаце выкарыстоўваць адбітак пальца для разблакіроўкі планшэта ці спраўджання сваёй асобы ў праграмах."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Вы не зможаце выкарыстоўваць адбітак пальца для разблакіроўкі прылады ці спраўджання сваёй асобы ў праграмах."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Вы не зможаце выкарыстоўваць адбітак пальца для разблакіроўкі свайго працоўнага профілю, аўтарызацыі купляў і ўваходу ў працоўныя праграмы."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Так, выдаліць"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Шыфраванне"</string>
@@ -1425,7 +1429,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Уключана"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Укл. – З улікам паставы галавы"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Выяўленне твару"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Аўтаматычна змяняць арыентацыю экрана пры паваротах тэлефона"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Аўтаматычна змяняць арыентацыю экрана пры паваротах тэлефона"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Аўтаматычна змяняць арыентацыю экрана пры паваротах планшэта"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Даведацца больш пра аўтапаварот"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Калі вы паварочваеце тэлефон для змянення арыентацыі экрана"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Раздзяляльнасць экрана"</string>
@@ -6040,8 +6045,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Прагледзець"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Выберыце экранную застаўку"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Паказваць дадатковую інфармацыю"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Паказваць час, надвор\'е і іншую інфармацыю на экраннай застаўцы"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Дадатковыя налады"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Выберыце экранную застаўку"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Выберыце змесціва, якое будзе паказвацца на экране, калі планшэт падключаны да док-станцыі. Пры выкарыстанні экраннай застаўкі прылада можа спажываць больш энергіі."</string>

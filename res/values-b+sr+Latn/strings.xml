@@ -679,8 +679,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Uklanjate sve otiske prstiju?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Izbrišite <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Želite li da izbrišete ovaj otisak prsta?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Ovim se brišu slike i model otiska prsta u vezi sa otiskom <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> koji su sačuvani na uređaju"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Nećete moći da koristite otisak prsta da biste otključavali telefon ni verifikovali identitet u aplikacijama."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Ovim se brišu slike i model otiska prsta u vezi sa otiskom <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> koji su sačuvani na telefonu"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Ovim se brišu slike i model otiska prsta u vezi sa otiskom <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> koji su sačuvani na tabletu"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Ovim se brišu slike i model otiska prsta u vezi sa otiskom <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> koji su sačuvani na uređaju"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Nećete moći da koristite otisak prsta da biste otključavali telefon ni verifikovali identitet u aplikacijama."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Nećete moći da koristite otisak prsta da biste otključavali tablet ili verifikovali identitet u aplikacijama."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Nećete moći da koristite otisak prsta da biste otključavali uređaj ili verifikovali identitet u aplikacijama."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Nećete moći da koristite otisak prsta za otključavanje poslovnog profila, ovlašćivanje kupovina ili prijavljivanje u poslovne aplikacije."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Da, ukloni"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Šifrovanje"</string>
@@ -1403,7 +1407,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Uključeno"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Uključeno – na osnovu lica"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Prepoznavanje lica"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Automatski prilagodite položaj ekrana kada prebacujete telefon između uspravnog i vodoravnog režima"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Automatski prilagodite položaj ekrana kada prebacujete telefon između uspravnog i vodoravnog režima"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Automatski prilagodite položaj ekrana kada prebacujete tablet između uspravnog i vodoravnog režima"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Saznajte više o automatskom rotiranju"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Kada okrećete telefon u uspravni ili vodoravni režim"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Rezolucija ekrana"</string>
@@ -5951,8 +5956,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Prikaži"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Odaberite čuvar ekrana"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Prikazuj dodatne informacije"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Omogućite da se na čuvaru ekrana prikazuju stavke poput vremena, vremenske prognoze ili drugih informacija"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Još podešavanja"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Izaberite čuvar ekrana"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Izaberite šta ćete videti na ekranu kada je tablet na baznoj stanici. Uređaj može da troši više energije kada se koristi čuvar ekrana."</string>

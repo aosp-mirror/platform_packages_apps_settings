@@ -675,8 +675,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Remove all fingerprints?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Delete \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Do you want to delete this fingerprint?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"This deletes the fingerprint images and model associated with \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' that are stored on your device"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"You won\'t be able to use your fingerprint to unlock your phone or verify that it\'s you in apps."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"This deletes the fingerprint images and model associated with \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' that are stored on your phone"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"This deletes the fingerprint images and model associated with \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' that are stored on your tablet"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"This deletes the fingerprint images and model associated with \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' that are stored on your device"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"You won\'t be able to use your fingerprint to unlock your phone or verify that it\'s you in apps."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"You won\'t be able to use your fingerprint to unlock your tablet or verify that it\'s you in apps."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"You won\'t be able to use your fingerprint to unlock your device or verify that it\'s you in apps."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"You won\'t be able to use your fingerprint to unlock your work profile, authorise purchases or sign in to work apps."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Yes, remove"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Encryption"</string>
@@ -1383,7 +1387,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"On"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"On – Face-based"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Face detection"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Automatically adjust the screen orientation when you move your phone between portrait and landscape"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Automatically adjust the screen orientation when you move your phone between portrait and landscape"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Automatically adjust the screen orientation when you move your tablet between portrait and landscape"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Learn more about auto-rotate"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"When you move your phone between portrait and landscape"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Screen resolution"</string>

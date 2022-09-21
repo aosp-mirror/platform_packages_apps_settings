@@ -677,8 +677,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"要移除所有指紋嗎？"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"刪除「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"要刪除這個指紋嗎？"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"系統會一併刪除裝置上與「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」連結的指紋圖像和模型"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"你將無法使用指紋解鎖手機或在應用程式中驗證身分。"</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"如果指紋圖像和模型與手機上儲存的「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」相關聯，系統也將一併刪除"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"如果指紋圖像和模型與平板電腦上儲存的「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」相關聯，系統也將一併刪除"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"系統會一併刪除裝置上與「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」連結的指紋圖像和模型"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"你將無法使用指紋解鎖手機或在應用程式中驗證身分。"</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"你將無法使用指紋解鎖平板電腦或在應用程式中驗證身分。"</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"你將無法使用指紋解鎖裝置或在應用程式中驗證身分。"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"你將無法使用指紋解鎖工作資料夾、授權購買交易，或是登入工作應用程式。"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"是，移除"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"加密"</string>
@@ -1385,7 +1389,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"開啟"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"已開啟 - 臉部偵測"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"臉部偵測"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"無論你是以直向或橫向模式使用手機，系統都會自動調整螢幕方向"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"無論你是以直向或橫向模式使用手機，系統都會自動調整螢幕方向"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"無論你是以直向或橫向模式使用平板電腦，系統都會自動調整螢幕方向"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"進一步瞭解「自動旋轉」功能"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"讓你無論直向或橫向都能使用手機"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"螢幕解析度"</string>
@@ -5866,8 +5871,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"預覽"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"選擇螢幕保護程式"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"顯示其他資訊"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"在螢幕保護程式上顯示時間、天氣或其他資訊"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"更多設定"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"選擇要使用的螢幕保護程式"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"選擇平板電腦插入座架時螢幕上要顯示的內容。請注意，如果裝置使用螢幕保護程式，可能會比較耗電。"</string>

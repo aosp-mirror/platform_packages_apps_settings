@@ -677,8 +677,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"¿Quitar las huellas dactilares?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Borrar \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"¿Quieres borrar esta huella dactilar?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Esta opción borra las imágenes de la huella dactilar y el modelo asociado con \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que se guardaron en el dispositivo"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"No podrás utilizar tu huella dactilar para desbloquear el teléfono ni verificar tu identidad en apps."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Esta opción borra las imágenes de la huella dactilar y el modelo asociado con \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que se guardaron en el teléfono"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Esta opción borra las imágenes de la huella dactilar y el modelo asociado con \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que se guardaron en la tablet"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Esta opción borra las imágenes de la huella dactilar y el modelo asociado con \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que se guardaron en el dispositivo"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"No podrás utilizar tu huella dactilar para desbloquear el teléfono ni verificar tu identidad en apps."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"No podrás utilizar tu huella dactilar para desbloquear la tablet ni verificar tu identidad en apps."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"No podrás utilizar tu huella dactilar para desbloquear el dispositivo ni verificar tu identidad en apps."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"No podrás usar tu huella dactilar para desbloquear tu perfil de trabajo, autorizar compras ni acceder a apps de trabajo."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Sí, deseo quitarlas"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Encriptación"</string>
@@ -1385,7 +1389,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Activada"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Activa - En función del rostro"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Detección de rostro"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Ajusta la orientación de la pantalla automáticamente cuando mueves el teléfono entre el modo vertical y el horizontal"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Ajusta la orientación de la pantalla automáticamente cuando mueves el teléfono entre el modo vertical y el horizontal"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Ajusta la orientación de la pantalla automáticamente cuando mueves la tablet entre el modo vertical y el horizontal"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Más información sobre girar automáticamente"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Cuando muevas el tel. entre el modo vertical y el horizontal"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Resolución de pantalla"</string>
@@ -5866,8 +5871,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Vista previa"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Selecciona un protector de pantalla"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Mostrar información adicional"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Mostrar datos como la hora, el clima o demás información en el protector de pantalla"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Más parámetros de configuración"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Elige tu protector de pantalla"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Elige lo que quieres ver en la pantalla cuando la tablet no está conectada. Es posible que el dispositivo emplee más energía cuando usar el protector de pantalla."</string>

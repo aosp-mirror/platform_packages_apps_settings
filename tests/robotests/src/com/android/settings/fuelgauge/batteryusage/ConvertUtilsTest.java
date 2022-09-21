@@ -71,7 +71,7 @@ public final class ConvertUtilsTest {
     }
 
     @Test
-    public void convert_returnsExpectedContentValues() {
+    public void convertToContentValues_returnsExpectedContentValues() {
         final int expectedType = 3;
         when(mMockBatteryEntry.getUid()).thenReturn(1001);
         when(mMockBatteryEntry.getLabel()).thenReturn("Settings");
@@ -88,7 +88,7 @@ public final class ConvertUtilsTest {
                 .thenReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
 
         final ContentValues values =
-                ConvertUtils.convert(
+                ConvertUtils.convertToContentValues(
                         mMockBatteryEntry,
                         mBatteryUsageStats,
                         /*batteryLevel=*/ 12,
@@ -128,9 +128,9 @@ public final class ConvertUtilsTest {
     }
 
     @Test
-    public void convert_nullBatteryEntry_returnsExpectedContentValues() {
+    public void convertToContentValues_nullBatteryEntry_returnsExpectedContentValues() {
         final ContentValues values =
-                ConvertUtils.convert(
+                ConvertUtils.convertToContentValues(
                         /*entry=*/ null,
                         /*batteryUsageStats=*/ null,
                         /*batteryLevel=*/ 12,
@@ -151,6 +151,76 @@ public final class ConvertUtilsTest {
         assertThat(values.getAsInteger(BatteryHistEntry.KEY_BATTERY_HEALTH))
                 .isEqualTo(BatteryManager.BATTERY_HEALTH_COLD);
         assertThat(values.getAsString(BatteryHistEntry.KEY_PACKAGE_NAME))
+                .isEqualTo(ConvertUtils.FAKE_PACKAGE_NAME);
+    }
+
+    @Test
+    public void convertToBatteryHistEntry_returnsExpectedResult() {
+        final int expectedType = 3;
+        when(mMockBatteryEntry.getUid()).thenReturn(1001);
+        when(mMockBatteryEntry.getLabel()).thenReturn("Settings");
+        when(mMockBatteryEntry.getDefaultPackageName())
+                .thenReturn("com.android.settings.battery");
+        when(mMockBatteryEntry.isHidden()).thenReturn(true);
+        when(mBatteryUsageStats.getConsumedPower()).thenReturn(5.1);
+        when(mMockBatteryEntry.getConsumedPower()).thenReturn(1.1);
+        mMockBatteryEntry.mPercent = 0.3;
+        when(mMockBatteryEntry.getTimeInForegroundMs()).thenReturn(1234L);
+        when(mMockBatteryEntry.getTimeInBackgroundMs()).thenReturn(5689L);
+        when(mMockBatteryEntry.getPowerComponentId()).thenReturn(expectedType);
+        when(mMockBatteryEntry.getConsumerType())
+                .thenReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
+
+        final BatteryHistEntry batteryHistEntry =
+                ConvertUtils.convertToBatteryHistEntry(
+                        mMockBatteryEntry,
+                        mBatteryUsageStats);
+
+        assertThat(batteryHistEntry.mUid).isEqualTo(1001L);
+        assertThat(batteryHistEntry.mUserId)
+                .isEqualTo(UserHandle.getUserId(1001));
+        assertThat(batteryHistEntry.mAppLabel)
+                .isEqualTo("Settings");
+        assertThat(batteryHistEntry.mPackageName)
+                .isEqualTo("com.android.settings.battery");
+        assertThat(batteryHistEntry.mIsHidden).isTrue();
+        assertThat(batteryHistEntry.mBootTimestamp)
+                .isEqualTo(0L);
+        assertThat(batteryHistEntry.mTimestamp).isEqualTo(0L);
+        assertThat(batteryHistEntry.mZoneId)
+                .isEqualTo(TimeZone.getDefault().getID());
+        assertThat(batteryHistEntry.mTotalPower).isEqualTo(5.1);
+        assertThat(batteryHistEntry.mConsumePower).isEqualTo(1.1);
+        assertThat(batteryHistEntry.mPercentOfTotal).isEqualTo(0.3);
+        assertThat(batteryHistEntry.mForegroundUsageTimeInMs)
+                .isEqualTo(1234L);
+        assertThat(batteryHistEntry.mBackgroundUsageTimeInMs)
+                .isEqualTo(5689L);
+        assertThat(batteryHistEntry.mDrainType).isEqualTo(expectedType);
+        assertThat(batteryHistEntry.mConsumerType)
+                .isEqualTo(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
+        assertThat(batteryHistEntry.mBatteryLevel).isEqualTo(0);
+        assertThat(batteryHistEntry.mBatteryStatus).isEqualTo(0);
+        assertThat(batteryHistEntry.mBatteryHealth).isEqualTo(0);
+    }
+
+    @Test
+    public void convertToBatteryHistEntry_nullBatteryEntry_returnsExpectedResult() {
+        final BatteryHistEntry batteryHistEntry =
+                ConvertUtils.convertToBatteryHistEntry(
+                        /*entry=*/ null,
+                        /*batteryUsageStats=*/ null);
+
+        assertThat(batteryHistEntry.mBootTimestamp)
+                .isEqualTo(0L);
+        assertThat(batteryHistEntry.mTimestamp)
+                .isEqualTo(0);
+        assertThat(batteryHistEntry.mZoneId)
+                .isEqualTo(TimeZone.getDefault().getID());
+        assertThat(batteryHistEntry.mBatteryLevel).isEqualTo(0);
+        assertThat(batteryHistEntry.mBatteryStatus).isEqualTo(0);
+        assertThat(batteryHistEntry.mBatteryHealth).isEqualTo(0);
+        assertThat(batteryHistEntry.mPackageName)
                 .isEqualTo(ConvertUtils.FAKE_PACKAGE_NAME);
     }
 

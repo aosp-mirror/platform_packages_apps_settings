@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -26,6 +27,8 @@ import static org.mockito.Mockito.when;
 import android.app.settings.SettingsEnums;
 import android.content.ContentValues;
 import android.content.Context;
+import android.os.BatteryConsumer;
+import android.os.BatteryUsageStats;
 import android.text.format.DateUtils;
 
 import com.android.settings.fuelgauge.BatteryUtils;
@@ -36,6 +39,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -58,6 +62,13 @@ public class DataProcessorTest {
     private FakeFeatureFactory mFeatureFactory;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
+
+    @Mock private BatteryUsageStats mBatteryUsageStats;
+    @Mock private BatteryEntry mMockBatteryEntry1;
+    @Mock private BatteryEntry mMockBatteryEntry2;
+    @Mock private BatteryEntry mMockBatteryEntry3;
+    @Mock private BatteryEntry mMockBatteryEntry4;
+
 
     @Before
     public void setUp() {
@@ -881,6 +892,60 @@ public class DataProcessorTest {
                 .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT, 2);
         verify(mMetricsFeatureProvider)
                 .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT, 0);
+    }
+
+    @Test
+    public void generateBatteryDiffData_emptyBatteryEntryList_returnNull() {
+        assertThat(DataProcessor.generateBatteryDiffData(
+                mContext, null, mBatteryUsageStats)).isNull();
+    }
+
+    @Test
+    public void generateBatteryDiffData_returnsExpectedResult() {
+        final List<BatteryEntry> batteryEntryList = new ArrayList<>();
+        batteryEntryList.add(mMockBatteryEntry1);
+        batteryEntryList.add(mMockBatteryEntry2);
+        batteryEntryList.add(mMockBatteryEntry3);
+        batteryEntryList.add(mMockBatteryEntry4);
+        doReturn(0.0).when(mMockBatteryEntry1).getConsumedPower();
+        doReturn(30L).when(mMockBatteryEntry1).getTimeInForegroundMs();
+        doReturn(40L).when(mMockBatteryEntry1).getTimeInBackgroundMs();
+        doReturn(1).when(mMockBatteryEntry1).getUid();
+        doReturn(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).when(mMockBatteryEntry1).getConsumerType();
+        doReturn(0.5).when(mMockBatteryEntry2).getConsumedPower();
+        doReturn(20L).when(mMockBatteryEntry2).getTimeInForegroundMs();
+        doReturn(20L).when(mMockBatteryEntry2).getTimeInBackgroundMs();
+        doReturn(2).when(mMockBatteryEntry2).getUid();
+        doReturn(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).when(mMockBatteryEntry2).getConsumerType();
+        doReturn(0.0).when(mMockBatteryEntry3).getConsumedPower();
+        doReturn(0L).when(mMockBatteryEntry3).getTimeInForegroundMs();
+        doReturn(0L).when(mMockBatteryEntry3).getTimeInBackgroundMs();
+        doReturn(3).when(mMockBatteryEntry3).getUid();
+        doReturn(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).when(mMockBatteryEntry3).getConsumerType();
+        doReturn(1.5).when(mMockBatteryEntry4).getConsumedPower();
+        doReturn(10L).when(mMockBatteryEntry4).getTimeInForegroundMs();
+        doReturn(10L).when(mMockBatteryEntry4).getTimeInBackgroundMs();
+        doReturn(4).when(mMockBatteryEntry4).getUid();
+        doReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY)
+                .when(mMockBatteryEntry4).getConsumerType();
+        doReturn(BatteryConsumer.POWER_COMPONENT_CAMERA)
+                .when(mMockBatteryEntry4).getPowerComponentId();
+
+        final BatteryDiffData batteryDiffData = DataProcessor.generateBatteryDiffData(
+                mContext, batteryEntryList, mBatteryUsageStats);
+
+        assertBatteryDiffEntry(
+                batteryDiffData.getAppDiffEntryList().get(0), 0, /*uid=*/ 2L,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 25.0,
+                /*foregroundUsageTimeInMs=*/ 20, /*backgroundUsageTimeInMs=*/ 20);
+        assertBatteryDiffEntry(
+                batteryDiffData.getAppDiffEntryList().get(1), 0, /*uid=*/ 1L,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 0.0,
+                /*foregroundUsageTimeInMs=*/ 30, /*backgroundUsageTimeInMs=*/ 40);
+        assertBatteryDiffEntry(
+                batteryDiffData.getSystemDiffEntryList().get(0), 0, /*uid=*/ 4L,
+                ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY, /*consumePercentage=*/ 75.0,
+                /*foregroundUsageTimeInMs=*/ 10, /*backgroundUsageTimeInMs=*/ 10);
     }
 
     private static Map<Long, Map<String, BatteryHistEntry>> createHistoryMap(
