@@ -677,8 +677,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Supprimer toutes les empreintes ?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Supprimer \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Voulez-vous supprimer cette empreinte ?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Les images et le modèle associés à \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" et stockés sur votre appareil seront supprimés"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Vous ne pourrez pas utiliser votre empreinte digitale pour déverrouiller votre téléphone ni pour confirmer votre identité dans les applis."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Les images et le modèle associés à \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" et stockés sur votre téléphone seront supprimés"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Les images et le modèle associés à \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" et stockés sur votre tablette seront supprimés"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Les images et le modèle associés à \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" et stockés sur votre appareil seront supprimés"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Vous ne pourrez pas utiliser votre empreinte digitale pour déverrouiller votre téléphone ni pour confirmer votre identité dans les applis."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Vous ne pourrez pas utiliser votre empreinte digitale pour déverrouiller votre tablette ni valider votre identité dans les applis."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Vous ne pourrez pas utiliser votre empreinte digitale pour déverrouiller votre appareil ni valider votre identité dans les applis."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Vous ne pourrez pas utiliser votre empreinte digitale pour déverrouiller votre profil professionnel, autoriser des achats ni vous connecter à des applis professionnelles."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Oui, supprimer"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Chiffrement"</string>
@@ -1385,12 +1389,12 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Activée"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Active - En fonction du visage"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Détection de visages"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Ajuster automatiquement l\'orientation de l\'écran lorsque vous basculez votre appareil de la position portrait à la position paysage, et inversement"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Ajuster automatiquement l\'orientation de l\'écran lorsque vous basculez votre appareil de la position portrait à la position paysage, et inversement"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Ajuster automatiquement l\'orientation de l\'écran de la tablette quand vous passez du mode portrait au mode paysage, et inversement"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"En savoir plus sur la rotation automatique"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Quand vous basculez votre téléphone en mode portrait ou paysage"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Résolution d\'écran"</string>
-    <!-- no translation found for screen_resolution_option_high (2617496842852992853) -->
-    <skip />
+    <string name="screen_resolution_option_high" msgid="2617496842852992853">"Haute résolution"</string>
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Pleine résolution"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"FHD+ 1080p"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"QHD+ 1440p"</string>
@@ -2373,7 +2377,7 @@
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Couleur et mouvement"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Assombrir l\'écran"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Commandes d\'interaction"</string>
-    <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Commandes de synchronisation"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Contrôle du temps d\'appui"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Commandes système"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Applications téléchargées"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Paramètres expérimentaux"</string>
@@ -2465,7 +2469,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Appuyer de manière prolongée sur les deux touches de volume"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Appuyer trois fois sur l\'écran"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"appuyer trois fois sur l\'écran"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"Appuyez rapidement {0,number,integer} fois sur l\'écran. Ce raccourci risque de ralentir votre appareil"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"Appuyez rapidement {0,number,integer} fois sur l\'écran. Ce raccourci peut ralentir votre appareil."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Paramètres avancés"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Le bouton Accessibilité est défini sur <xliff:g id="SERVICE">%1$s</xliff:g>. Pour utiliser la loupe, appuyez de manière prolongée sur le bouton Accessibilité, puis sélectionnez la loupe."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Le geste d\'accessibilité est défini sur <xliff:g id="SERVICE">%1$s</xliff:g>. Pour utiliser la loupe, balayez l\'écran de bas en haut avec deux doigts et maintenez la pression, puis sélectionnez la loupe."</string>
@@ -5639,17 +5643,17 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"commandes des appareils"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Cartes de crédit et autres cartes"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"cartes de crédit et autres cartes"</string>
-    <string name="power_menu_setting_name" msgid="2394440932633137229">"Appuyez de manière prolongée sur le bouton Marche/Arrêt"</string>
-    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Appui prolongé sur le bouton Marche/Arrêt pour y accéder"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Appui prolongé sur le bouton Marche/Arrêt"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Appuyer de manière prolongée sur le bouton pour afficher"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Menu Marche/Arrêt"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Assistant numérique"</string>
     <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Accéder à l\'assistant numérique"</string>
     <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Accéder au menu Marche/Arrêt"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Pour utiliser cette option, définissez d\'abord le verrouillage de l\'écran"</string>
     <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Menu Marche/Arrêt :\nAppuyez simultanément sur les boutons Marche/Arrêt et volume+"</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Bloquer la sonnerie :\nUtilisez un bouton de volume pour utiliser le raccourci"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Bloquer la sonnerie :\nAppuyez sur un bouton de volume pour utiliser le raccourci"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Durée de l\'appui prolongé"</string>
-    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Ajustez la sensibilité en choisissant combien de temps appuyer de manière prolongée sur le bouton Marche/Arrêt"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Ajustez la sensibilité en choisissant la durée de l\'appui"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Court"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Long"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Afficher le portefeuille"</string>
@@ -5867,8 +5871,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Prévisualiser"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Sélectionner un économiseur d\'écran"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Afficher des informations supplémentaires"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Afficher l\'heure, la météo ou d\'autres informations sur l\'économiseur d\'écran"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Plus de paramètres"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Choisir votre économiseur d\'écran"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Choisissez le contenu à afficher à l\'écran quand la tablette est sur la station d\'accueil. Votre appareil peut consommer plus d\'énergie quand un économiseur d\'écran est utilisé."</string>

@@ -675,8 +675,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Hatz-marka guztiak kendu nahi dituzu?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Ezabatu <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Hatz-marka ezabatu nahi duzu?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Ezabatu egingo dira gailuan \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" izenarekin gordetako hatz-markaren irudiak eta eredua"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Ezingo duzu erabili hatz-marka telefonoa desblokeatzeko edo aplikazioetan zeu zarela egiaztatzeko."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Gailuan \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" izenarekin gordetako hatz-markaren irudiak eta eredua ezabatuko dira"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Tabletan \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" izenarekin gordetako hatz-markaren irudiak eta eredua ezabatuko dira"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Ezabatu egingo dira gailuan \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" izenarekin gordetako hatz-markaren irudiak eta eredua"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Ezingo duzu erabili hatz-marka telefonoa desblokeatzeko edo aplikazioetan zeu zarela egiaztatzeko."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Ezingo duzu erabili hatz-marka tableta desblokeatzeko edo aplikazioetan zeu zarela egiaztatzeko."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Ezingo duzu erabili hatz-marka gailua desblokeatzeko edo aplikazioetan zeu zarela egiaztatzeko."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Ezingo duzu erabili hatz-marka laneko profila desblokeatzeko, erosketak baimentzeko edo laneko aplikazioetan saioa hasteko."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Bai, kendu"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Enkriptatzea"</string>
@@ -1383,7 +1387,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Aktibatuta"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Aktibatuta: aurpegian oinarrituta"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Aurpegi-hautematea"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Doitu automatikoki pantailaren orientazioa telefonoa modu bertikaletik horizontalera, eta alderantziz, aldatzen duzunean"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Doitu automatikoki pantailaren orientazioa telefonoa modu bertikaletik horizontalera, eta alderantziz, aldatzen duzunean"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Doitu automatikoki pantailaren orientazioa tableta modu bertikaletik horizontalera, eta alderantziz, aldatzen duzunean"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Lortu automatikoki biratzeko aukerari buruzko informazio gehiago"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Telefonoaren pantailaren orientazioa bertikaletik horizontalera, eta alderantziz, aldatzen duzunean"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Pantailaren bereizmena"</string>
@@ -5644,7 +5649,7 @@
     <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Atzitu itzaltzeko menua"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Erabili ahal izateko, konfiguratu pantailaren blokeoa"</string>
     <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Itzaltzeko menua:\nSakatu aldi berean etengailua eta bolumena igotzeko botoia"</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Ez jo tonurik:\nsakatu bolumen-botoia lasterbidea erabiltzeko"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Ez jo tonurik:\nSakatu bolumen-botoia lasterbidea erabiltzeko"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Sakatuta edukitzeko keinuaren iraupena"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Sentikortasuna doitzeko, aukeratu zenbat denboraz edukiko duzun sakatuta etengailua"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Laburra"</string>
@@ -5864,8 +5869,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Aurreikusi"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Aukeratu pantaila-babesle bat"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Erakutsi informazio gehiago"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Ikusi informazioa pantaila-babeslean; besteak beste, ordua eta eguraldia"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Ezarpen gehiago"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Aukeratu pantaila-babeslea"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Aukeratu zer ikusiko den pantailan tableta oinarrian dagoenean. Baliteke gailuak energia gehiago erabiltzea pantaila-babeslea erabiltzen denean."</string>

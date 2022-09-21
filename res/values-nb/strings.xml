@@ -675,8 +675,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Vil du fjerne alle fingeravtrykk?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Slett «<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>»"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Vil du slette dette fingeravtrykket?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Dette sletter fingeravtrykkbildene og -modellen tilknyttet «<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>» som er lagret på enheten"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Da kan du ikke bruke fingeravtrykket til å låse opp telefonen eller bekrefte identiteten din i apper."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Dette sletter fingeravtrykkbildene og -modellen tilknyttet «<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>» som er lagret på telefonen"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Dette sletter fingeravtrykkbildene og -modellen tilknyttet «<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>» som er lagret på nettbrettet"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Dette sletter fingeravtrykkbildene og -modellen tilknyttet «<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>» som er lagret på enheten"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Da kan du ikke bruke fingeravtrykket til å låse opp telefonen eller bekrefte identiteten din i apper."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Du kan ikke bruke fingeravtrykket til å låse opp nettbrettet eller bekrefte identiteten din i apper."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Du kan ikke bruke fingeravtrykket til å låse opp enheten eller bekrefte identiteten din i apper."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Da kan du ikke bruke fingeravtrykket til å låse opp jobbprofilen din, autorisere kjøp eller logge på jobbapper."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ja, fjern"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Kryptering"</string>
@@ -1383,7 +1387,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"På"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"På – ansiktsbasert"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Ansiktsgjenkjenning"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Juster skjermretningen automatisk når du beveger telefonen mellom stående og liggende format"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Juster skjermretningen automatisk når du beveger telefonen mellom stående og liggende format"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Juster skjermretningen automatisk når du beveger nettbrettet mellom stående og liggende format"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Finn ut mer om automatisk rotasjon"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Når du beveger telefonen mellom stående og liggende format"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Skjermoppløsning"</string>
@@ -4365,7 +4370,7 @@
     <string name="zen_mode_when" msgid="5710214762051824755">"Slå på automatisk"</string>
     <string name="zen_mode_when_never" msgid="2537537280091840672">"Aldri"</string>
     <string name="zen_mode_when_every_night" msgid="9018738747936038166">"Hver kveld"</string>
-    <string name="zen_mode_when_weeknights" msgid="531342225633264368">"Kvelder på ukedager"</string>
+    <string name="zen_mode_when_weeknights" msgid="531342225633264368">"Kvelder på hverdager"</string>
     <string name="zen_mode_start_time" msgid="1252665038977523332">"Starttid"</string>
     <string name="zen_mode_end_time" msgid="223502560367331706">"Sluttid"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="419683704068360804">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> neste dag"</string>
@@ -5864,8 +5869,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Forhåndsvis"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Velg en skjermsparer"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Vis tilleggsinformasjon"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Vis ting som klokkeslettet, været eller annen informasjon på skjermspareren"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Flere innstillinger"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Velg en skjermsparer"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Velg hva du ser på skjermen når nettbrettet er i dokken. Enheten kan bruke mer energi når en skjermsparer brukes."</string>

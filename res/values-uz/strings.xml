@@ -681,8 +681,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Barmoq izlari olib tashlansinmi?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"“<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>” qaydini oʻchirish"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Bu barmoq izi o‘chirib tashlansinmi?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Bunda qurilmadagi <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> barmoq izi tasvirlari va modellari tozalanadi"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Keyin barmoq izidan foydalanib telefon qulfini ocholmaysiz yoki ilovalarda shaxsingizni tasdiqlay olmaysiz."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Bunda telefondagi <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> barmoq izi tasvirlari va modellari tozalanadi"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Bunda planshetdagi <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> barmoq izi tasvirlari va modellari tozalanadi"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Bunda qurilmadagi <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> barmoq izi tasvirlari va modellari tozalanadi"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Keyin barmoq izidan foydalanib telefon qulfini ocholmaysiz yoki ilovalarda shaxsingizni tasdiqlay olmaysiz."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Planshetni qulfdan chiqarish yoki ilovalarda hisob tekshiruvi uchun barmoq izidan foydalana olmay qolasiz."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Qurilmani qulfdan chiqarish yoki ilovalarda hisob tekshiruvi uchun barmoq izidan foydalana olmay qolasiz."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Ishchi profilingizni qulfdan chiqarish, xaridlarni amalga oshirish yoki ish uchun ilovalarga kirish uchun barmoq izingizdan foydalana olmay qolasiz"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ha, olib tashlansin"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Shifrlash"</string>
@@ -1389,7 +1393,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Yoqish"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Yoqish - Yuz asosida"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Yuzni tanish"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Telefoningizni boʻyiga va eniga burganingizda ekran joylashuvini avtomatik ravishda sozlaydi"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Telefoningizni boʻyiga va eniga burganingizda ekran joylashuvini avtomatik ravishda sozlaydi"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Planshetni boʻyiga va eniga burganingizda ekran joylashuvini avtomatik ravishda sozlaydi"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Avtomatik burilish haqida batafsil"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Telefoningizni boʻyiga va eniga burganingizda"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Ekrandagi tasvir tiniqligi"</string>
@@ -5642,8 +5647,8 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"qurilmalarni boshqarish"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kartalar va talonlar"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kartalar va talonlar"</string>
-    <string name="power_menu_setting_name" msgid="2394440932633137229">"Quvvat tugmasini bosib turing"</string>
-    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Ochish uchun quvvat tugmasini bosib turing"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Quvvat tugmasini bosib turish"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Ochish uchun quvvat tugmasini bosib turish"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Quvvat menyusi"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Raqamli assistent"</string>
     <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Raqamli assistentni ochish"</string>
@@ -5652,7 +5657,7 @@
     <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Quvva menyusi:\nQuvvat va tovushni balandlatish tugmalarini birga bosing"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Jiringlamasin:\nYorliq uchun tovush tugmasini bosing"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Bosib turish davomiyligi"</string>
-    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Quvvat tugmasi qanchalik uzoq bosib turilishini tanlash orqali sezuvchanlikni sozlang"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Quvvat tugmasining qanchalik uzoq bosib turilishini tanlash orqali sezuvchanlikni sozlang"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Qisqa"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Uzun"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Hamyonni chiqarish"</string>

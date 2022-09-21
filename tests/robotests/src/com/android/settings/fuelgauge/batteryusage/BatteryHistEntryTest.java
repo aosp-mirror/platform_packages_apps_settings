@@ -64,7 +64,7 @@ public final class BatteryHistEntryTest {
         when(mMockBatteryEntry.getConsumerType())
                 .thenReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
         final ContentValues values =
-                ConvertUtils.convert(
+                ConvertUtils.convertToContentValues(
                         mMockBatteryEntry,
                         mBatteryUsageStats,
                         /*batteryLevel=*/ 12,

@@ -689,8 +689,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Želite odstraniti vse prstne odtise?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Izbriši »<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>«"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Ali želite izbrisati ta prstni odtis?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"S tem boste izbrisali v napravi shranjene slike in model prstnega odtisa, povezan z odtisom »<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>«."</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Za odklepanje telefona ali potrditev identitete v aplikacijah ne boste mogli uporabljati prstnega odtisa."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"S tem boste izbrisali v telefonu shranjene slike in model prstnega odtisa, povezane z odtisom »<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>«."</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"S tem boste izbrisali v tabličnem računalniku shranjene slike in model prstnega odtisa, povezane z odtisom »<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>«."</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"S tem boste izbrisali v napravi shranjene slike in model prstnega odtisa, povezan z odtisom »<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>«."</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Za odklepanje telefona ali potrditev identitete v aplikacijah ne boste mogli uporabljati prstnega odtisa."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Za odklepanje tabličnega računalnika ali potrditev identitete v aplikacijah ne boste mogli uporabljati prstnega odtisa."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Za odklepanje naprave ali potrditev identitete v aplikacijah ne boste mogli uporabljati prstnega odtisa."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Za odklepanje delovnega profila, odobritev nakupov ali prijavo v delovne aplikacije ne boste mogli uporabljati prstnega odtisa."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Da, odstrani"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Šifriranje"</string>
@@ -1429,7 +1433,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Vklopljeno"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Vklopljeno – na podlagi obraza"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Zaznavanje obraza"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Samodejna sprememba usmerjenosti zaslona, ko telefon obrnete iz navpičnega v vodoravni položaj ali obratno."</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Samodejna sprememba usmerjenosti zaslona, ko telefon obrnete iz navpičnega v vodoravni položaj ali obratno."</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Samodejna sprememba usmerjenosti zaslona, ko tablični računalnik obrnete iz navpičnega v vodoravni položaj ali obratno."</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Več o samodejnem zasuku"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Ko telefon obrnete iz navpičnega v vodoravni položaj ali obratno."</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Ločljivost zaslona"</string>
@@ -2590,15 +2595,15 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Krajše"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Daljše"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Čas za samodejni klik"</string>
-    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibriranje in haptični odziv"</string>
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibriranje in tipni odziv"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Nastavitev moči vibriranja za različne uporabe"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Vklopljeno"</string>
     <string name="accessibility_vibration_settings_state_off" msgid="7946588741954981703">"Izklopljeno"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Nastavitev je onemogočena, ker je naprava nastavljena na tiho."</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Klici"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Obvestila in alarmi"</string>
-    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Interaktivni haptični odziv"</string>
-    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Uporabi vibriranje in haptični odziv"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Interaktivni tipni odziv"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Uporabi vibriranje in tipni odziv"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibriranje alarma"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibriranje predstavnosti"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibriranje pri zvonjenju"</string>
@@ -3810,7 +3815,7 @@
     <string name="keywords_network_reset" msgid="4075670452112218042">"ponastavitev, obnovitev, tovarniško"</string>
     <string name="keywords_factory_data_reset" msgid="4979623326958976773">"izbrisati, obnoviti, počistiti, odstraniti, tovarniška ponastavitev, ponastavitev na tovarniške nastavitve"</string>
     <string name="keywords_printing" msgid="3528250034669909466">"tiskalnik"</string>
-    <string name="keywords_sounds" msgid="187191900698371911">"pisk zvočnika, zvočnik, glasnost, utišati, tišina, zvok, glasba, haptično, vibriranje, vibrirati"</string>
+    <string name="keywords_sounds" msgid="187191900698371911">"pisk zvočnika, zvočnik, glasnost, utišati, tišina, zvok, glasba, haptično, tipno, vibriranje, vibrirati"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"ne moti, prekinjaj, prekinitev, motnja"</string>
     <string name="keywords_app" msgid="7983814237980258061">"RAM"</string>
     <string name="keywords_location" msgid="8016374808099706213">"v bližini, lokacija, zgodovina, poročanje, GPS"</string>
@@ -3862,14 +3867,14 @@
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"plačilo, plačevanje, privzeto"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"dohodno obvestilo"</string>
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"povezava z internetom prek mobilnega telefona prek kabla USB, povezava z internetom prek mobilnega telefona prek povezave Bluetooth, dostopna točka wifi"</string>
-    <string name="keywords_accessibility_vibration_primary_switch" msgid="730692154347231253">"haptično, odziv na dotik, vibriranje, vibrirati"</string>
-    <string name="keywords_touch_vibration" msgid="1125291201902251273">"haptično, vibriranje, zaslon, občutljivost"</string>
-    <string name="keywords_ring_vibration" msgid="1736301626537417541">"haptično, vibriranje, telefon, klic, občutljivost, zvonjenje"</string>
-    <string name="keywords_ramping_ringer_vibration" msgid="3678966746742257366">"haptično, vibriranje, telefon, klic, zvonjenje, postopno"</string>
-    <string name="keywords_notification_vibration" msgid="2620799301276142183">"haptično, vibriranje, občutljivost, obvestilo"</string>
-    <string name="keywords_alarm_vibration" msgid="4833220371621521817">"haptično, vibriranje, občutljivost, alarm"</string>
+    <string name="keywords_accessibility_vibration_primary_switch" msgid="730692154347231253">"haptično, tipno, vibriranje, vibrirati"</string>
+    <string name="keywords_touch_vibration" msgid="1125291201902251273">"haptično, tipno, vibriranje, zaslon, občutljivost"</string>
+    <string name="keywords_ring_vibration" msgid="1736301626537417541">"haptično, tipno, vibriranje, telefon, klic, občutljivost, zvonjenje"</string>
+    <string name="keywords_ramping_ringer_vibration" msgid="3678966746742257366">"haptično, tipno, vibriranje, telefon, klic, zvonjenje, postopno"</string>
+    <string name="keywords_notification_vibration" msgid="2620799301276142183">"haptično, tipno, vibriranje, občutljivost, obvestilo"</string>
+    <string name="keywords_alarm_vibration" msgid="4833220371621521817">"haptično, tipno, vibriranje, občutljivost, alarm"</string>
     <string name="keywords_media_vibration" msgid="723896490102792327">"haptično, vibriranje, občutljivost, predstavnost"</string>
-    <string name="keywords_vibration" msgid="670455132028025952">"haptično, odziv na dotik, vibriranje, vibrirati"</string>
+    <string name="keywords_vibration" msgid="670455132028025952">"haptično, tipno, odziv na dotik, vibriranje, vibrirati"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"varčevanje z energijo baterije, lepljivo, trajno, varčevanje z energijo, baterija"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutina, vsakodnevni opravek, razpored, urnik, varčevanje z energijo baterije, varčevanje z energijo, baterija, samodejno, odstotek, delež"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, napredno klicanje, klicanje 4g"</string>
@@ -6044,8 +6049,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Predogled"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Izbira ohranjevalnika zaslona"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Prikaz dodatnih informacij"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Prikaz stvari, kot je ura, vreme ali drugi podatki, na ohranjevalniku zaslona."</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Več nastavitev"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Izbira ohranjevalnika zaslona"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Izberite, kaj bo prikazano na zaslonu, ko je tablični računalnik priklopljen na nosilec. Naprava bo med uporabo ohranjevalnika zaslona morda porabljala več energije."</string>

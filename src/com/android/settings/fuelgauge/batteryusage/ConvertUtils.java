@@ -55,11 +55,6 @@ public final class ConvertUtils {
     // Maximum total time value for each slot cumulative data at most 2 hours.
     private static final float TOTAL_TIME_THRESHOLD = DateUtils.HOUR_IN_MILLIS * 2;
 
-    // Keys for metric metadata.
-    static final int METRIC_KEY_PACKAGE = 1;
-    static final int METRIC_KEY_BATTERY_LEVEL = 2;
-    static final int METRIC_KEY_BATTERY_USAGE = 3;
-
     @VisibleForTesting
     static double PERCENTAGE_OF_TOTAL_THRESHOLD = 1f;
 
@@ -87,7 +82,7 @@ public final class ConvertUtils {
     }
 
     /** Converts to content values */
-    public static ContentValues convert(
+    public static ContentValues convertToContentValues(
             BatteryEntry entry,
             BatteryUsageStats batteryUsageStats,
             int batteryLevel,
@@ -128,6 +123,21 @@ public final class ConvertUtils {
         values.put(BatteryHistEntry.KEY_BATTERY_STATUS, Integer.valueOf(batteryStatus));
         values.put(BatteryHistEntry.KEY_BATTERY_HEALTH, Integer.valueOf(batteryHealth));
         return values;
+    }
+
+    /** Converts to {@link BatteryHistEntry} */
+    public static BatteryHistEntry convertToBatteryHistEntry(
+            BatteryEntry entry,
+            BatteryUsageStats batteryUsageStats) {
+        return new BatteryHistEntry(
+                convertToContentValues(
+                        entry,
+                        batteryUsageStats,
+                        /*batteryLevel=*/ 0,
+                        /*batteryStatus=*/ 0,
+                        /*batteryHealth=*/ 0,
+                        /*bootTimestamp=*/ 0,
+                        /*timestamp=*/ 0));
     }
 
     /** Converts UTC timestamp to human readable local time string. */
