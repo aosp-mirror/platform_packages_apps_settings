@@ -42,6 +42,7 @@ import android.os.UserManager;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImeAwareEditText;
@@ -63,6 +64,7 @@ import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics2.ui.view.FingerprintEnrollmentActivity;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
@@ -872,7 +874,11 @@ public class FingerprintSettings extends SubSettings {
         private void addFirstFingerprint() {
             Intent intent = new Intent();
             intent.setClassName(SETTINGS_PACKAGE_NAME,
-                    FingerprintEnrollIntroductionInternal.class.getName());
+                    FeatureFlagUtils.isEnabled(getActivity(),
+                            FeatureFlagUtils.SETTINGS_BIOMETRICS2_ENROLLMENT)
+                            ? FingerprintEnrollmentActivity.class.getName()
+                            : FingerprintEnrollIntroductionInternal.class.getName()
+            );
 
             intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, true);
             intent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
