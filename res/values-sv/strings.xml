@@ -675,8 +675,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Vill du ta bort alla fingeravtryck?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Radera <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Vill du radera det här fingeravtrycket?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Om du gör detta raderas fingeravtrycksbilderna och fingeravtrycksmodellen som har kopplats till <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> och lagras på enheten"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Du kan inte låsa upp telefonen eller verifiera din identitet i appar med ditt fingeravtryck."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Om du gör detta raderas fingeravtrycksbilderna och fingeravtrycksmodellen som har kopplats till <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> och lagras på telefonen"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Om du gör detta raderas fingeravtrycksbilderna och fingeravtrycksmodellen som har kopplats till <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> och lagras på surfplattan"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Om du gör detta raderas fingeravtrycksbilderna och fingeravtrycksmodellen som har kopplats till <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> och lagras på enheten"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Du kan inte låsa upp telefonen eller verifiera din identitet i appar med ditt fingeravtryck."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Du kan inte låsa upp surfplattan eller verifiera din identitet i appar med ditt fingeravtryck."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Du kan inte låsa upp enheten eller verifiera din identitet i appar med ditt fingeravtryck."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Då kan du inte låsa upp jobbprofilen, auktorisera köp eller logga in i jobbappar med ditt fingeravtryck."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ja, ta bort"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Kryptering"</string>
@@ -1383,7 +1387,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"På"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"På – ansiktsbaserad"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Ansiktsigenkänning"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Justera skärmriktningen automatiskt när du vänder telefonen mellan stående och liggande läge"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Justera skärmriktningen automatiskt när du vänder telefonen mellan stående och liggande läge"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Justera skärmriktningen automatiskt när du vänder surfplattan mellan stående och liggande läge"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Läs mer om automatisk rotation"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"När du vänder telefonen mellan stående och liggande läge"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Skärmupplösning"</string>
@@ -5864,8 +5869,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Förhandsgranska"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Välj en skärmsläckare"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Visa mer information"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Visa tid, väder eller annan information på skärmsläckaren"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Fler inställningar"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Välj skärmsläckare"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Välj vad som ska visas på skärmen när surfplattan har dockats. Energiförbrukningen kan öka när en skärmsläckare används."</string>

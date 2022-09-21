@@ -675,8 +675,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"すべての指紋を削除しますか？"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」を削除"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"この指紋を削除しますか？"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"デバイスに保存されている「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」に関連付けられた指紋の画像とモデルが削除されます"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"指紋を使ってスマートフォンのロック解除やアプリでの本人確認を行うことができなくなります。"</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"スマートフォンに保存されている「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」に関連付けられた指紋の画像とモデルが削除されます"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"タブレットに保存されている「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」に関連付けられた指紋の画像とモデルが削除されます"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"デバイスに保存されている「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」に関連付けられた指紋の画像とモデルが削除されます"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"指紋を使ってスマートフォンのロック解除やアプリでの本人確認を行うことができなくなります。"</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"指紋を使用したタブレットのロック解除やアプリでの本人確認ができなくなります。"</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"指紋を使用したデバイスのロック解除やアプリでの本人確認ができなくなります。"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"仕事用プロファイルのロック解除や、購入の承認、仕事用アプリへのログインに、指紋を使用できなくなります。"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"削除"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"暗号化"</string>
@@ -1383,7 +1387,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"ON"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"ON - 顔ベース"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"顔検出"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"スマートフォンを縦向きや横向きに動かすと、画面の向きが自動的に調整されます"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"スマートフォンを縦向きや横向きに動かすと、画面の向きが自動的に調整されます"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"タブレットを縦向きや横向きに動かすと、画面の向きが自動的に調整されます"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"自動回転の詳細"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"スマートフォンを動かして縦向きと横向きを切り替えたとき"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"画面の解像度"</string>
@@ -5864,8 +5869,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"プレビュー"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"スクリーン セーバーの選択"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"その他の情報の表示"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"時刻や天気などの情報をスクリーン セーバーに表示します"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"その他の設定"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"スクリーン セーバーの選択"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"タブレットが装着されているときに画面に表示するものを選択してください。スクリーン セーバーを使用すると、デバイスの電力使用量が増えることがあります。"</string>

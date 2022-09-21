@@ -683,8 +683,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Odstranit všechny otisky prstů?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Smažte otisk <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Chcete tento otisk prstu smazat?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Touto akcí vymažete snímky a model otisku prstu propojené s „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“, které jsou uloženy ve vašem zařízení"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Pomocí otisku prstu už nebude možné odemykat telefon ani ověřovat vaši identitu v aplikacích."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Touto akcí vymažete snímky a model otisků prstů propojené s „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“, které jsou uloženy ve vašem telefonu"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Touto akcí vymažete snímky a model otisků prstů propojené s „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“, které jsou uloženy ve vašem tabletu"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Touto akcí vymažete snímky a model otisku prstu propojené s „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“, které jsou uloženy ve vašem zařízení"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Pomocí otisku prstu už nebude možné odemykat telefon ani ověřovat vaši identitu v aplikacích."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Nebudete moci pomocí otisku prstu odemykat tablet ani ověřovat totožnost v aplikacích."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Nebudete moci pomocí otisku prstu odemykat zařízení ani ověřovat totožnost v aplikacích."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Otisk prstu už nebude možné používat k odemknutí pracovního profilu, autorizaci nákupů ani přihlašování do pracovních aplikací."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ano, odstranit"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Šifrování"</string>
@@ -1423,7 +1427,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Zapnuto"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Zap – podle obličeje"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Rozpoznání obličeje"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Automaticky změnit orientaci obrazovky, když telefon otočíte z režimu na výšku do režimu na šířku a naopak"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Automaticky změnit orientaci obrazovky, když telefon otočíte z režimu na výšku do režimu na šířku a naopak"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Automaticky změnit orientaci obrazovky, když tablet otočíte z režimu na výšku do režimu na šířku a naopak"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Další informace o automatickém otáčení"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Když telefon otočíte z režimu na výšku do režimu na šířku"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Rozlišení obrazovky"</string>
@@ -5817,7 +5822,7 @@
     <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Aktivace digitálního asistenta"</string>
     <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Otevření nabídky vypínače"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Před použitím nejdříve nastavte zámek obrazovky"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Nabídka vypínače:\nStiskněte současně vypínač a tlačítko zvýšení hlasitosti."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Nabídka vypínače:\nStiskněte současně vypínač a tlačítko zvýšení hlasitosti"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Vypnutí vyzvánění:\nStiskněte tlačítko hlasitosti pro zkratku"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Délka podržení"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Nastavte citlivost úpravou délky podržení vypínače"</string>
@@ -6038,8 +6043,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Náhled"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Vyberte spořič obrazovky"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Zobrazovat další informace"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Zobrazovat na spořiči obrazovky informace jako čas, počasí atd."</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Další nastavení"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Vyberte spořič obrazovky"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Určete, co chcete vídat na obrazovce, když je tablet v doku. Při používání spořiče obrazovky může mít zařízení vyšší spotřebu energie."</string>

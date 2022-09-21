@@ -675,8 +675,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"လက်ဗွေအားလုံး ဖယ်ရှားမလား။"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"‘<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>’ ကို ဖျက်ပါ"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"ဤလက်ဗွေကို ဖျက်လိုပါသလား။"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"၎င်းက သင့်စက်တွင်သိုလှောင်ထားသည့် \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' နှင့် ဆက်စပ်သည့် လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်သည်"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"အက်ပ်များတွင် သင်ဖြစ်ကြောင်းအတည်ပြုရန်အတွက် (သို့) သင့်ဖုန်းကို လော့ခ်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို အသုံးပြု၍ရတော့မည် မဟုတ်ပါ။"</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"၎င်းက သင့်ဖုန်းတွင်သိုလှောင်ထားသည့် ‘<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>’ နှင့် ဆက်စပ်သည့် လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်သည်"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"၎င်းက သင့်တက်ဘလက်တွင်သိုလှောင်ထားသည့် ‘<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>’ နှင့် ဆက်စပ်သည့် လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်သည်"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"၎င်းက သင့်စက်တွင်သိုလှောင်ထားသည့် \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' နှင့် ဆက်စပ်သည့် လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်သည်"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"အက်ပ်များတွင် သင်ဖြစ်ကြောင်းအတည်ပြုရန်အတွက် (သို့) သင့်ဖုန်းကို လော့ခ်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို အသုံးပြု၍ရတော့မည် မဟုတ်ပါ။"</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"အက်ပ်များတွင် သင်ဖြစ်ကြောင်းအတည်ပြုရန်အတွက် (သို့) သင့်တက်ဘလက်ကို လော့ခ်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို အသုံးပြု၍ရတော့မည် မဟုတ်ပါ။"</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"အက်ပ်များတွင် သင်ဖြစ်ကြောင်းအတည်ပြုရန်အတွက် (သို့) သင့်စက်ကို လော့ခ်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို အသုံးပြု၍ရတော့မည် မဟုတ်ပါ။"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"သင်၏အလုပ်ပရိုဖိုင်ကို လော့ခ်ဖွင့်ရန်၊ ဝယ်ယူမှုများကို ခွင့်ပြုရန် (သို့) အလုပ်သုံးအက်ပ်များသို့ လက်မှတ်ထိုးဝင်ရန်တို့အတွက် သင့်လက်ဗွေကို အသုံးပြု၍ရတော့မည် မဟုတ်ပါ။"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"ဖယ်ရှားပါ"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"အသွင်ဝှက်ခြင်း"</string>
@@ -1383,7 +1387,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"ဖွင့်"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"ဖွင့်ရန် - မျက်နှာအခြေခံ"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"မျက်နှာကို မှတ်မိခြင်း"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"သင့်ဖုန်းကို အလျားလိုက်နှင့် ဒေါင်လိုက် ပြောင်းသောအခါ ဖန်သားပြင်အနေအထားကို အလိုအလျောက် ချိန်ညှိပေးသည်"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"သင့်ဖုန်းကို အလျားလိုက်နှင့် ဒေါင်လိုက် ပြောင်းသောအခါ ဖန်သားပြင်အနေအထားကို အလိုအလျောက် ချိန်ညှိပေးသည်"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"သင့်တက်ဘလက်ကို အလျားလိုက်နှင့် ဒေါင်လိုက် ပြောင်းသောအခါ ဖန်သားပြင်အနေအထားကို အလိုအလျောက် ချိန်ညှိပေးသည်"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"အလိုအလျောက်လှည့်ခြင်းအကြောင်း ပိုမိုလေ့လာနိုင်သည်"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"သင့်ဖုန်းကို အလျားလိုက်နှင့် ဒေါင်လိုက် ပြောင်းသောအခါ"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"ဖန်သားပြင် ပုံရိပ်ပြတ်သားကိန်း"</string>
@@ -5864,8 +5869,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"အစမ်းကြည့်ရန်"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"ဖန်သားပြင်ချွေတာစနစ် ရွေးရန်"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"နောက်ထပ်အချက်အလက်များ ပြပါ"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"ဖန်သားပြင်နားချိန်တွင် အချိန်၊ မိုးလေဝသ (သို့) အခြားအချက်အလက်များ ပြနိုင်သည်"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"နောက်ထပ်ဆက်တင်များ"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"သင်၏စခရင်နားချိန်ပုံ ရွေးရန်"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"တက်ဘလက် တပ်ဆင်ထားချိန် စခရင်တွင် မြင်ရမည့်အရာကို ရွေးနိုင်သည်။ စခရင်နားချိန်ပုံသုံးပါက သင်၏စက်က စွမ်းအင်ပိုသုံးနိုင်သည်။"</string>

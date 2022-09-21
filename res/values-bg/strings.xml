@@ -681,8 +681,12 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Да се премахнат ли отпечатъците?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Изтриване на <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Искате ли да изтриете този отпечатък?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Това действие ще изтрие изображенията и модела на отпечатъка, свързани с(ъс) <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> и съхранявани на това устройство"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Няма да можете да използвате отпечатъка си за отключване на телефона, нито за потвърждаване на самоличността ви в приложения."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Това действие ще изтрие изображенията и модела на отпечатъка, свързани с(ъс) <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> и съхранявани на телефона ви"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Това действие ще изтрие изображенията и модела на отпечатъка, свързани с(ъс) <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> и съхранявани на таблета ви"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Това действие ще изтрие изображенията и модела на отпечатъка, свързани с(ъс) <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> и съхранявани на това устройство"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Няма да можете да използвате отпечатъка си за отключване на телефона, нито за потвърждаване на самоличността ви в приложения."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Няма да можете да използвате отпечатъка си за отключване на таблета, нито за потвърждаване на самоличността ви в приложения."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Няма да можете да използвате отпечатъка си за отключване на устройството, нито за потвърждаване на самоличността ви в приложения."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Няма да можете да използвате отпечатъка си, за да отключвате служебния си потребителски профил, да оторизирате покупки или да влизате в служебни приложения."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Да, да се премахнат"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Шифроване"</string>
@@ -1389,7 +1393,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Включено"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Вкл. – въз основа на лицето"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Лицево разпознаване"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Автоматично коригира ориентацията на екрана, когато завъртите телефона вертикално или хоризонтално"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Автоматично коригира ориентацията на екрана, когато завъртите телефона вертикално или хоризонтално"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Автоматично коригира ориентацията на екрана, когато завъртите таблета вертикално или хоризонтално"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Научете повече за автоматичното завъртане"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Когато завъртите телефона си вертикално или хоризонтално"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Разделит. способност на екрана"</string>
@@ -5652,7 +5657,7 @@
     <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Меню за включване/изключване:\nЕдновременно натиснете бутона за захранване и този за увеличаване на силата на звука"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Предотвратяване на звъненето:\nЗа целта натиснете бутон за силата на звука"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Продължителност на натискането и задържането"</string>
-    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Коригирайте чувствителността, като изберете колко дълго трябва да задържите натиснат бутона за включване/изключване"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Коригирайте чувствителността, като изберете колко дълго трябва да задържите натиснат бутона за захранване"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Кратко"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Продължително"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Показване на портфейла"</string>
@@ -5870,8 +5875,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Визуализация"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Избиране на скрийнсейвър"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Показване на допълнителна информация"</string>
-    <!-- no translation found for dream_complications_toggle_summary (8088911054987524904) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Показване на различни неща на скрийнсейвъра, като например часа, времето или друга информация"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Още настройки"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Избиране на скрийнсейвър"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Изберете какво да се показва на екрана, когато таблетът ви е свързан с докинг станция. Устройството ви може да изразходва повече енергия при използването на скрийнсейвър."</string>
