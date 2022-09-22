@@ -31,6 +31,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Animatable2;
@@ -63,6 +64,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.SetupWizardUtils;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
@@ -213,6 +215,13 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     }
 
     @Override
+    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
+        final int newResid = SetupWizardUtils.getTheme(this, getIntent());
+        theme.applyStyle(R.style.SetupWizardPartnerResource, true);
+        super.onApplyThemeResource(theme, newResid, first);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -316,6 +325,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         mFastOutLinearInInterpolator = AnimationUtils.loadInterpolator(
                 this, android.R.interpolator.fast_out_linear_in);
         if (mProgressBar != null) {
+            mProgressBar.setProgressBackgroundTintMode(PorterDuff.Mode.SRC);
             mProgressBar.setOnTouchListener((v, event) -> {
                 if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
                     mIconTouchCount++;
@@ -889,7 +899,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             ColorStateList fillColor = ColorStateList.valueOf(
                     isError ? error_color : progress_bar_fill_color);
             mProgressBar.setProgressTintList(fillColor);
-            mProgressBar.setProgressTintMode(PorterDuff.Mode.SRC_ATOP);
+            mProgressBar.setProgressTintMode(PorterDuff.Mode.SRC);
             mProgressBar.invalidate();
         }
     }
