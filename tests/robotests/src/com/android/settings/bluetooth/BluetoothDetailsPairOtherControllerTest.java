@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 import com.android.settings.R;
+import com.android.settings.applications.SpacePreference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.widget.ButtonPreference;
@@ -43,6 +44,7 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
     private CachedBluetoothDevice mSubCachedDevice;
     private BluetoothDetailsPairOtherController mController;
     private ButtonPreference mPreference;
+    private SpacePreference mSpacePreference;
 
     @Override
     public void setUp() {
@@ -51,8 +53,11 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
         mController = new BluetoothDetailsPairOtherController(mContext, mFragment, mCachedDevice,
                 mLifecycle);
         mPreference = new ButtonPreference(mContext);
+        mSpacePreference = new SpacePreference(mContext, null);
         mPreference.setKey(mController.getPreferenceKey());
+        mSpacePreference.setKey(BluetoothDetailsPairOtherController.KEY_SPACE);
         mScreen.addPreference(mPreference);
+        mScreen.addPreference(mSpacePreference);
     }
 
     @Test
@@ -76,7 +81,17 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
     }
 
     @Test
-    public void isAvailable_isConnectedHearingAidDevice_available() {
+    public void init_isNotConnectedHearingAidDevice_notVisiblePreference() {
+        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(false);
+
+        mController.init(mScreen);
+
+        assertThat(mPreference.isVisible()).isFalse();
+        assertThat(mSpacePreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void isAvailable_isNotConnectedHearingAidDevice_notAvailable() {
         when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
@@ -128,5 +143,16 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
 
         assertThat(mPreference.getTitle().toString()).isEqualTo(
                 mContext.getString(R.string.bluetooth_pair_left_ear_button));
+    }
+
+    @Test
+    public void refresh_isNotConnectedHearingAidDevice_notVisiblePreference() {
+        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(false);
+        mController.init(mScreen);
+
+        mController.refresh();
+
+        assertThat(mPreference.isVisible()).isFalse();
+        assertThat(mSpacePreference.isVisible()).isFalse();
     }
 }
