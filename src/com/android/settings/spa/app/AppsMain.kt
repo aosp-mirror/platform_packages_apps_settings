@@ -59,7 +59,7 @@ object AppsMainPageProvider : SettingsPageProvider {
         SettingsEntryBuilder.createInject(owner = SettingsPage.create(name)).setIsAllowSearch(false)
 
     override fun buildEntry(arguments: Bundle?): List<SettingsEntry> {
-        val owner = SettingsPage.create(name, parameter, arguments)
+        val owner = SettingsPage.create(name, parameter = parameter, arguments = arguments)
         return listOf(
             SpecialAppAccessPageProvider.buildInjectEntry().setLink(fromPage = owner).build(),
         )
