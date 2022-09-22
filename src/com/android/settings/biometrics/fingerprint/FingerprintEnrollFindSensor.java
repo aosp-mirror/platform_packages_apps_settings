@@ -18,6 +18,7 @@ package com.android.settings.biometrics.fingerprint;
 
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import android.view.accessibility.AccessibilityManager;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
+import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
@@ -209,6 +211,13 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     public void onBackPressed() {
         stopLookingForFingerprint();
         super.onBackPressed();
+    }
+
+    @Override
+    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
+        final int newResid = SetupWizardUtils.getTheme(this, getIntent());
+        theme.applyStyle(R.style.SetupWizardPartnerResource, true);
+        super.onApplyThemeResource(theme, newResid, first);
     }
 
     protected int getContentView() {
