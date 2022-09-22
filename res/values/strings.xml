@@ -1207,10 +1207,18 @@
     <string name="fingerprint_delete_title">Delete \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\'</string>
 
     <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
-    <string name="fingerprint_v2_delete_message">This deletes the fingerprint images and model associated with \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\' that are stored on your device</string>
+    <string name="fingerprint_v2_delete_message" product="default">This deletes the fingerprint images and model associated with \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\' that are stored on your phone</string>
+    <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_v2_delete_message" product="tablet">This deletes the fingerprint images and model associated with \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\' that are stored on your tablet</string>
+    <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_v2_delete_message" product="device">This deletes the fingerprint images and model associated with \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\' that are stored on your device</string>
 
     <!-- Message shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by him. [CHAR LIMIT=NONE]-->
-    <string name="fingerprint_last_delete_message">You won\'t be able to use your fingerprint to unlock your phone or verify it\'s you in apps.</string>
+    <string name="fingerprint_last_delete_message" product="default">You won\'t be able to use your fingerprint to unlock your phone or verify it\'s you in apps.</string>
+    <!-- Message shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by him. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_last_delete_message" product="tablet">You won\'t be able to use your fingerprint to unlock your tablet or verify it\'s you in apps.</string>
+    <!-- Message shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by him. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_last_delete_message" product="device">You won\'t be able to use your fingerprint to unlock your device or verify it\'s you in apps.</string>
     <string name="fingerprint_last_delete_message_profile_challenge">You won\'t be able to use your fingerprint to unlock your work profile, authorize purchases, or sign in to work apps.</string>
 
     <!-- Title of the preferences category for preference items to control encryption -->
