@@ -325,6 +325,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         mFastOutLinearInInterpolator = AnimationUtils.loadInterpolator(
                 this, android.R.interpolator.fast_out_linear_in);
         if (mProgressBar != null) {
+            mProgressBar.setProgressBackgroundTintMode(PorterDuff.Mode.SRC);
             mProgressBar.setOnTouchListener((v, event) -> {
                 if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
                     mIconTouchCount++;
@@ -898,7 +899,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             ColorStateList fillColor = ColorStateList.valueOf(
                     isError ? error_color : progress_bar_fill_color);
             mProgressBar.setProgressTintList(fillColor);
-            mProgressBar.setProgressTintMode(PorterDuff.Mode.SRC_ATOP);
+            mProgressBar.setProgressTintMode(PorterDuff.Mode.SRC);
             mProgressBar.invalidate();
         }
     }
