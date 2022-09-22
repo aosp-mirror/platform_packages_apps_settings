@@ -41,6 +41,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.content.pm.UserProperties;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -1163,7 +1164,7 @@ public final class Utils extends com.android.settingslib.Utils {
         final boolean isWork = args != null ? args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
                 == ProfileSelectFragment.ProfileType.WORK : false;
         try {
-            if (activity.getSystemService(UserManager.class).getUserProfiles().size() > 1
+            if (isNewTabNeeded(activity)
                     && ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName) != null
                     && !isWork && !isPersonal) {
                 f = Fragment.instantiate(activity,
@@ -1175,6 +1176,24 @@ public final class Utils extends com.android.settingslib.Utils {
             Log.e(TAG, "Unable to get target fragment", e);
         }
         return f;
+    }
+
+    /**
+     * Checks if a new tab is needed or not for any user profile associated with the context user.
+     *
+     * <p> Checks if any user has the property {@link UserProperties#SHOW_IN_SETTINGS_SEPARATE} set.
+     */
+    public static boolean isNewTabNeeded(Activity activity) {
+        UserManager userManager = activity.getSystemService(UserManager.class);
+        List<UserHandle> profiles = userManager.getUserProfiles();
+        for (UserHandle userHandle : profiles) {
+            UserProperties userProperties = userManager.getUserProperties(userHandle);
+            if (userProperties.getShowInSettings()
+                    == UserProperties.SHOW_IN_SETTINGS_SEPARATE) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
