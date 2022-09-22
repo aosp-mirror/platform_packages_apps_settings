@@ -77,7 +77,7 @@ public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSenso
 
         @NonNull
         public AlertDialog.Builder onCreateDialogBuilder() {
-            return new AlertDialog.Builder(getActivity(), R.style.GlifV2ThemeAlertDialog)
+            return new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.setup_fingerprint_enroll_skip_title)
                     .setPositiveButton(R.string.skip_anyway_button_label, this)
                     .setNegativeButton(R.string.go_back_button_label, this)
