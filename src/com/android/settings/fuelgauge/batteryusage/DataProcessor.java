@@ -172,6 +172,56 @@ public final class DataProcessor {
     }
 
     /**
+     * Gets the {@link BatteryUsageStats} from system service.
+     */
+    @Nullable
+    public static BatteryUsageStats getBatteryUsageStats(final Context context) {
+        final BatteryUsageStatsQuery batteryUsageStatsQuery =
+                new BatteryUsageStatsQuery.Builder().includeBatteryHistory().build();
+        return context.getSystemService(BatteryStatsManager.class)
+                .getBatteryUsageStats(batteryUsageStatsQuery);
+    }
+
+    /**
+     * Closes the {@link BatteryUsageStats} after using it.
+     */
+    public static void closeBatteryUsageStats(BatteryUsageStats batteryUsageStats) {
+        if (batteryUsageStats != null) {
+            try {
+                batteryUsageStats.close();
+            } catch (Exception e) {
+                Log.e(TAG, "BatteryUsageStats.close() failed", e);
+            }
+        }
+    }
+
+    /**
+     * Generates the list of {@link BatteryEntry} from the supplied {@link BatteryUsageStats}.
+     */
+    @Nullable
+    public static List<BatteryEntry> generateBatteryEntryListFromBatteryUsageStats(
+            final Context context,
+            @Nullable final BatteryUsageStats batteryUsageStats,
+            @Nullable BatteryAppListPreferenceController batteryAppListPreferenceController) {
+        if (batteryUsageStats == null) {
+            Log.w(TAG, "batteryUsageStats is null content");
+            return null;
+        }
+        // Loads the battery consuming data.
+        final BatteryAppListPreferenceController controller =
+                batteryAppListPreferenceController == null
+                        ? new BatteryAppListPreferenceController(
+                                context,
+                                /*preferenceKey=*/ null,
+                                /*lifecycle=*/ null,
+                                /*activity*=*/ null,
+                                /*fragment=*/ null)
+                        : batteryAppListPreferenceController;
+
+        return controller.getBatteryEntryList(batteryUsageStats, /*showAllApps=*/ true);
+    }
+
+    /**
      * @return Returns the processed history map which has interpolated to every hour data.
      * The start and end timestamp must be the even hours.
      * The keys of processed history map should contain every hour between the start and end
@@ -477,39 +527,19 @@ public final class DataProcessor {
             final Context context) {
         BatteryDiffData batteryDiffData = null;
         try {
-            final BatteryUsageStatsQuery batteryUsageStatsQuery =
-                    new BatteryUsageStatsQuery.Builder().includeBatteryHistory().build();
-            final BatteryUsageStats batteryUsageStats =
-                    context.getSystemService(BatteryStatsManager.class)
-                            .getBatteryUsageStats(batteryUsageStatsQuery);
-
-            if (batteryUsageStats == null) {
-                Log.w(TAG, "batteryUsageStats is null content");
-                return null;
-            }
-
+            final BatteryUsageStats batteryUsageStats = getBatteryUsageStats(context);
             final List<BatteryEntry> batteryEntryList =
-                    generateBatteryEntryListFromBatteryUsageStats(context, batteryUsageStats);
+                    generateBatteryEntryListFromBatteryUsageStats(
+                            context,
+                            batteryUsageStats,
+                            /*batteryAppListPreferenceController=*/ null);
             batteryDiffData = generateBatteryDiffData(context, batteryEntryList, batteryUsageStats);
+            closeBatteryUsageStats(batteryUsageStats);
         } catch (RuntimeException e) {
             Log.e(TAG, "load batteryUsageStats:" + e);
         }
 
         return batteryDiffData;
-    }
-
-    @Nullable
-    private static List<BatteryEntry> generateBatteryEntryListFromBatteryUsageStats(
-            final Context context, final BatteryUsageStats batteryUsageStats) {
-        // Loads the battery consuming data.
-        final BatteryAppListPreferenceController controller =
-                new BatteryAppListPreferenceController(
-                        context,
-                        /*preferenceKey=*/ null,
-                        /*lifecycle=*/ null,
-                        /*activity*=*/ null,
-                        /*fragment=*/ null);
-        return controller.getBatteryEntryList(batteryUsageStats, /*showAllApps=*/ true);
     }
 
     @Nullable
