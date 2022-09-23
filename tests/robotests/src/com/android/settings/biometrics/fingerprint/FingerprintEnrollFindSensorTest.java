@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_POWER_BUTTON;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_REAR;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_OPTICAL;
 
@@ -38,6 +39,7 @@ import android.annotation.NonNull;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.hardware.biometrics.ComponentInfoInternal;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.FingerprintManager;
@@ -87,6 +89,9 @@ public class FingerprintEnrollFindSensorTest {
     @Mock
     private FingerprintManager mFingerprintManager;
 
+    @Mock
+    private Resources.Theme mTheme;
+
     private ActivityController<FingerprintEnrollFindSensor> mActivityController;
 
     private FingerprintEnrollFindSensor mActivity;
@@ -120,6 +125,14 @@ public class FingerprintEnrollFindSensorTest {
     private void setupActivity_onUdfpsDevice() {
         final ArrayList<FingerprintSensorPropertiesInternal> props = new ArrayList<>();
         props.add(newFingerprintSensorPropertiesInternal(TYPE_UDFPS_OPTICAL));
+        doReturn(props).when(mFingerprintManager).getSensorPropertiesInternal();
+
+        mActivityController.setup();
+    }
+
+    private void setupActivity_onSfpsDevice() {
+        final ArrayList<FingerprintSensorPropertiesInternal> props = new ArrayList<>();
+        props.add(newFingerprintSensorPropertiesInternal(TYPE_POWER_BUTTON));
         doReturn(props).when(mFingerprintManager).getSensorPropertiesInternal();
 
         mActivityController.setup();
@@ -540,6 +553,16 @@ public class FingerprintEnrollFindSensorTest {
         assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(DEFAULT_ACTIVITY_RESULT);
 
         gotEnrollingResult_recreateActivityAndVerifyResultThenForward(RESULT_TIMEOUT, bundle);
+    }
+
+    @Test
+    public void fingerprintEnrollFindSensor_activityApplyDarkLightStyle() {
+        setupActivity_onSfpsDevice();
+        verifySidecar_onRearOrSfpsDevice();
+
+        mActivity.onApplyThemeResource(mActivity.getTheme(), R.style.GlifTheme, true /* first */);
+
+        verify(mTheme).applyStyle(R.style.SetupWizardPartnerResource, true);
     }
 
     private void triggerEnrollProgressAndError_onRearDevice() {
