@@ -51,7 +51,7 @@ public class DefaultRingtonePreference extends RingtonePreference {
             return;
         }
 
-        String mimeType = getContext().getContentResolver().getType(ringtoneUri);
+        String mimeType = mUserContext.getContentResolver().getType(ringtoneUri);
         if (mimeType == null) {
             Log.e(TAG, "onSaveRingtone for URI:" + ringtoneUri
                     + " ignored: failure to find mimeType (no access from this context?)");

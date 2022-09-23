@@ -34,7 +34,6 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
@@ -206,7 +205,10 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
         });
     }
 
-    public AutoSelectPreferenceController init(Lifecycle lifecycle, int subId) {
+    /**
+     * Initialization based on given subscription id.
+     **/
+    public AutoSelectPreferenceController init(int subId) {
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
@@ -217,7 +219,6 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
                 CarrierConfigManager.KEY_ONLY_AUTO_SELECT_IN_HOME_NETWORK_BOOL)
                 : false;
 
-        lifecycle.addObserver(this);
         return this;
     }
 

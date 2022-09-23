@@ -180,10 +180,11 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
                                 | AuthenticatorException e) {
                             // handled below
                             Log.w(TAG, "Remove account error: " + e);
-                            RemoveAccountFailureDialog.show(getTargetFragment());
                         }
                         Log.i(TAG, "failed: " + failed);
-                        if (!failed) {
+                        if (failed) {
+                            RemoveAccountFailureDialog.show(getTargetFragment());
+                        } else {
                             targetActivity.finish();
                         }
                     }, null, mUserHandle);

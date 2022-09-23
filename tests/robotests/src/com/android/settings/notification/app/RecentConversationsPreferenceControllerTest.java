@@ -37,9 +37,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.SpannedString;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -47,42 +45,46 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.widget.LayoutPreference;
 
+import com.google.common.collect.ImmutableList;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowApplication;
-
-import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
 public class RecentConversationsPreferenceControllerTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
+    private final Context mContext = ApplicationProvider.getApplicationContext();
     @Mock
     private NotificationBackend mBackend;
     @Mock
     private IPeopleManager mPs;
+    @Spy
+    private PreferenceGroup mPreferenceGroup = new PreferenceCategory(mContext);
 
     private RecentConversationsPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication shadowApplication = ShadowApplication.getInstance();
-        mContext = RuntimeEnvironment.application;
         mController = new RecentConversationsPreferenceController(mContext, mBackend, mPs);
+
+        PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        PreferenceScreen preferenceScreen = preferenceManager.createPreferenceScreen(mContext);
+        mPreferenceGroup.setKey(mController.getPreferenceKey());
+        preferenceScreen.addPreference(mPreferenceGroup);
+        mController.displayPreference(preferenceScreen);
     }
 
     @Test
@@ -92,38 +94,29 @@ public class RecentConversationsPreferenceControllerTest {
 
     @Test
     public void testPopulateList_hideIfNoConversations() {
-        PreferenceCategory outerContainer = mock(PreferenceCategory.class);
+        boolean hasContent = mController.populateList(ImmutableList.of());
 
-        mController.populateList(new ArrayList<>(), outerContainer);
-
-        verify(outerContainer).setVisible(false);
-        verify(outerContainer, never()).addPreference(any());
+        assertThat(hasContent).isFalse();
+        verify(mPreferenceGroup).setVisible(false);
+        verify(mPreferenceGroup, never()).addPreference(any());
     }
 
     @Test
     public void testPopulateList_validConversations() {
-        final PreferenceManager preferenceManager = new PreferenceManager(mContext);
-        PreferenceScreen ps = preferenceManager.createPreferenceScreen(mContext);
-        PreferenceCategory outerContainer = spy(new PreferenceCategory(mContext));
-        ps.addPreference(outerContainer);
-
         ConversationChannel ccw = new ConversationChannel(mock(ShortcutInfo.class), 6,
                 new NotificationChannel("hi", "hi", 4),
                 new NotificationChannelGroup("hi", "hi"), 7,
                 false);
 
-        ArrayList<ConversationChannel> list = new ArrayList<>();
-        list.add(ccw);
+        boolean hasContent = mController.populateList(ImmutableList.of(ccw));
 
-        mController.populateList(list, outerContainer);
+        assertThat(hasContent).isTrue();
         // one for the preference, one for the button ro clear all
-        verify(outerContainer, times(2)).addPreference(any());
+        verify(mPreferenceGroup, times(2)).addPreference(any());
     }
 
     @Test
     public void populateConversations_blocked() {
-        PreferenceCategory container = mock(PreferenceCategory.class);
-
         ConversationChannel ccw = new ConversationChannel(mock(ShortcutInfo.class), 6,
                 new NotificationChannel("hi", "hi", 4),
                 new NotificationChannelGroup("hi", "hi"), 7,
@@ -141,14 +134,10 @@ public class RecentConversationsPreferenceControllerTest {
                 blockedGroup, 7,
                 false);
 
-        ArrayList<ConversationChannel> list = new ArrayList<>();
-        list.add(ccw);
-        list.add(ccw2);
-        list.add(ccw3);
+        boolean hasContent = mController.populateConversations(ImmutableList.of(ccw, ccw2, ccw3));
 
-        mController.populateConversations(list, container);
-
-        verify(container, times(1)).addPreference(any());
+        assertThat(hasContent).isTrue();
+        verify(mPreferenceGroup, times(1)).addPreference(any());
     }
 
     @Test
@@ -223,8 +212,7 @@ public class RecentConversationsPreferenceControllerTest {
                 new NotificationChannelGroup("hi", "group"), 7,
                 true);
 
-        Preference pref = mController.createConversationPref(new PreferenceCategory(mContext),
-                ccw, 100);
+        Preference pref = mController.createConversationPref(ccw);
         try {
             pref.performClick();
         } catch (RuntimeException e) {
@@ -244,9 +232,7 @@ public class RecentConversationsPreferenceControllerTest {
                 new NotificationChannelGroup("hi", "group"), 7,
                 false);
 
-        RecentConversationPreference pref =
-                (RecentConversationPreference) mController.createConversationPref(
-                        new PreferenceCategory(mContext), ccw, 100);
+        RecentConversationPreference pref = mController.createConversationPref(ccw);
         final View view = View.inflate(mContext, pref.getLayoutResource(), null);
         PreferenceViewHolder holder = spy(PreferenceViewHolder.createInstanceForTests(view));
         View delete = View.inflate(mContext, pref.getSecondTargetResId(), null);
@@ -274,34 +260,28 @@ public class RecentConversationsPreferenceControllerTest {
                 new NotificationChannelGroup("hi", "group"), 7,
                 true);
 
-        PreferenceCategory group = new PreferenceCategory(mContext);
-        PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
-        screen.addPreference(group);
-
-        RecentConversationPreference pref = mController.createConversationPref(
-                        new PreferenceCategory(mContext), ccw, 100);
+        RecentConversationPreference pref = mController.createConversationPref(ccw);
         final View view = View.inflate(mContext, pref.getLayoutResource(), null);
         PreferenceViewHolder holder = spy(PreferenceViewHolder.createInstanceForTests(view));
         View delete = View.inflate(mContext, pref.getSecondTargetResId(), null);
         when(holder.findViewById(pref.getClearId())).thenReturn(delete);
-        group.addPreference(pref);
+        mPreferenceGroup.addPreference(pref);
 
-        RecentConversationPreference pref2 = mController.createConversationPref(
-                        new PreferenceCategory(mContext), ccw2, 100);
+        RecentConversationPreference pref2 = mController.createConversationPref(ccw2);
         final View view2 = View.inflate(mContext, pref2.getLayoutResource(), null);
         PreferenceViewHolder holder2 = spy(PreferenceViewHolder.createInstanceForTests(view2));
         View delete2 = View.inflate(mContext, pref2.getSecondTargetResId(), null);
         when(holder2.findViewById(pref.getClearId())).thenReturn(delete2);
-        group.addPreference(pref2);
+        mPreferenceGroup.addPreference(pref2);
 
-        LayoutPreference clearAll = mController.getClearAll(group);
-        group.addPreference(clearAll);
+        LayoutPreference clearAll = mController.getClearAll(mPreferenceGroup);
+        mPreferenceGroup.addPreference(clearAll);
 
         clearAll.findViewById(R.id.conversation_settings_clear_recents).performClick();
 
         verify(mPs).removeAllRecentConversations();
-        assertThat((Preference) group.findPreference("hi:person")).isNull();
-        assertThat((Preference) group.findPreference("bye:person")).isNotNull();
+        assertThat((Preference) mPreferenceGroup.findPreference("hi:person")).isNull();
+        assertThat((Preference) mPreferenceGroup.findPreference("bye:person")).isNotNull();
     }
 
     @Test
@@ -314,30 +294,23 @@ public class RecentConversationsPreferenceControllerTest {
                 new NotificationChannelGroup("hi", "group"), 7,
                 true);
 
-        RecentConversationPreference pref =
-                (RecentConversationPreference) mController.createConversationPref(
-                        new PreferenceCategory(mContext), ccw, 100);
+        RecentConversationPreference pref = mController.createConversationPref(ccw);
+
         assertThat(pref.hasClearListener()).isFalse();
     }
 
     @Test
     public void testPopulateList_onlyNonremoveableConversations() {
-        final PreferenceManager preferenceManager = new PreferenceManager(mContext);
-        PreferenceScreen ps = preferenceManager.createPreferenceScreen(mContext);
-        PreferenceCategory outerContainer = spy(new PreferenceCategory(mContext));
-        ps.addPreference(outerContainer);
-
         ConversationChannel ccw = new ConversationChannel(mock(ShortcutInfo.class), 6,
                 new NotificationChannel("hi", "hi", 4),
                 new NotificationChannelGroup("hi", "hi"), 7,
                 true /* hasactivenotifs */);
 
-        ArrayList<ConversationChannel> list = new ArrayList<>();
-        list.add(ccw);
+        boolean hasContent = mController.populateList(ImmutableList.of(ccw));
 
-        mController.populateList(list, outerContainer);
+        assertThat(hasContent).isTrue();
         // one for the preference, none for 'clear all'
-        verify(outerContainer, times(1)).addPreference(any());
+        verify(mPreferenceGroup, times(1)).addPreference(any());
     }
 
     @Test

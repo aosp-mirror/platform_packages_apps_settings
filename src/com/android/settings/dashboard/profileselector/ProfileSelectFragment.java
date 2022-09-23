@@ -99,6 +99,8 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
 
     private ViewGroup mContentView;
 
+    private ViewPager2 mViewPager;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -111,12 +113,21 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         final int selectedTab = getTabId(activity, getArguments());
 
         final View tabContainer = mContentView.findViewById(R.id.tab_container);
-        final ViewPager2 viewPager = tabContainer.findViewById(R.id.view_pager);
-        viewPager.setAdapter(new ProfileSelectFragment.ViewPagerAdapter(this));
+        mViewPager = tabContainer.findViewById(R.id.view_pager);
+        mViewPager.setAdapter(new ProfileSelectFragment.ViewPagerAdapter(this));
         final TabLayout tabs = tabContainer.findViewById(R.id.tabs);
-        new TabLayoutMediator(tabs, viewPager,
+        new TabLayoutMediator(tabs, mViewPager,
                 (tab, position) -> tab.setText(getPageTitle(position))
         ).attach();
+        mViewPager.registerOnPageChangeCallback(
+                new ViewPager2.OnPageChangeCallback() {
+                    @Override
+                    public void onPageSelected(int position) {
+                        super.onPageSelected(position);
+                        updateHeight(position);
+                    }
+                }
+        );
         tabContainer.setVisibility(View.VISIBLE);
         final TabLayout.Tab tab = tabs.getTabAt(selectedTab);
         tab.select();
@@ -131,6 +142,36 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         Utils.setActionBarShadowAnimation(activity, getSettingsLifecycle(), recyclerView);
 
         return mContentView;
+    }
+
+    protected boolean forceUpdateHeight() {
+        return false;
+    }
+
+    private void updateHeight(int position) {
+        if (!forceUpdateHeight()) {
+            return;
+        }
+        ViewPagerAdapter adapter = (ViewPagerAdapter) mViewPager.getAdapter();
+        if (adapter == null || adapter.getItemCount() <= position) {
+            return;
+        }
+
+        Fragment fragment = adapter.createFragment(position);
+        View newPage = fragment.getView();
+        if (newPage != null) {
+            int viewWidth = View.MeasureSpec.makeMeasureSpec(newPage.getWidth(),
+                    View.MeasureSpec.EXACTLY);
+            int viewHeight = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+            newPage.measure(viewWidth, viewHeight);
+            int currentHeight = mViewPager.getLayoutParams().height;
+            int newHeight = newPage.getMeasuredHeight();
+            if (newHeight != 0 && currentHeight != newHeight) {
+                ViewGroup.LayoutParams layoutParams = mViewPager.getLayoutParams();
+                layoutParams.height = newHeight;
+                mViewPager.setLayoutParams(layoutParams);
+            }
+        }
     }
 
     @Override

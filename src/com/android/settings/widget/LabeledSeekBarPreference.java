@@ -26,12 +26,12 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 /**
  * A labeled {@link SeekBarPreference} with left and right text label, icon label, or both.
@@ -61,8 +61,6 @@ public class LabeledSeekBarPreference extends SeekBarPreference {
     private final int mIconStartContentDescriptionId;
     private final int mIconEndContentDescriptionId;
     private OnPreferenceChangeListener mStopListener;
-    @Nullable
-    private CharSequence mSummary;
     private SeekBar.OnSeekBarChangeListener mSeekBarChangeListener;
 
     public LabeledSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr,
@@ -97,8 +95,6 @@ public class LabeledSeekBarPreference extends SeekBarPreference {
         Preconditions.checkArgument(!(mIconEndContentDescriptionId != 0 && mIconEndId == 0),
                 "The resource of the iconEnd attribute may be invalid or not set, "
                         + "you should set the iconEnd attribute and have the valid resource.");
-
-        mSummary = styledAttrs.getText(R.styleable.Preference_android_summary);
         styledAttrs.recycle();
     }
 
@@ -111,6 +107,17 @@ public class LabeledSeekBarPreference extends SeekBarPreference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
+
+        final TextView summaryView = (TextView) holder.findViewById(android.R.id.summary);
+        boolean isSummaryVisible = false;
+        if (summaryView != null) {
+            isSummaryVisible = (summaryView.getVisibility() == View.VISIBLE);
+        }
+        final TextView titleView = (TextView) holder.findViewById(android.R.id.title);
+        if (titleView != null && !isSelectable() && isEnabled() && isSummaryVisible) {
+            titleView.setTextColor(
+                    Utils.getColorAttr(getContext(), android.R.attr.textColorPrimary));
+        }
 
         final TextView startText = (TextView) holder.findViewById(android.R.id.text1);
         if (mTextStartId > 0) {
@@ -130,15 +137,6 @@ public class LabeledSeekBarPreference extends SeekBarPreference {
         if (mTickMarkId != 0) {
             final Drawable tickMark = getContext().getDrawable(mTickMarkId);
             seekBar.setTickMark(tickMark);
-        }
-
-        final TextView summary = (TextView) holder.findViewById(android.R.id.summary);
-        if (mSummary != null) {
-            summary.setText(mSummary);
-            summary.setVisibility(View.VISIBLE);
-        } else {
-            summary.setText(null);
-            summary.setVisibility(View.GONE);
         }
 
         final ViewGroup iconStartFrame = (ViewGroup) holder.findViewById(R.id.icon_start_frame);
@@ -186,25 +184,6 @@ public class LabeledSeekBarPreference extends SeekBarPreference {
 
         // Need to update the icon enabled status
         notifyChanged();
-    }
-
-    @Override
-    public void setSummary(CharSequence summary) {
-        super.setSummary(summary);
-        mSummary = summary;
-        notifyChanged();
-    }
-
-    @Override
-    public void setSummary(int summaryResId) {
-        super.setSummary(summaryResId);
-        mSummary = getContext().getText(summaryResId);
-        notifyChanged();
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        return mSummary;
     }
 
     public void setOnSeekBarChangeListener(SeekBar.OnSeekBarChangeListener seekBarChangeListener) {

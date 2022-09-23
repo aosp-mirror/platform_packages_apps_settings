@@ -225,8 +225,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"სისტემის ნაგულისხმევი"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"ამ აპისთვის ენის არჩევა პარამეტრებიდან მიუწვდომელია."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"ენა, შესაძლოა, განსხვავდებოდეს აპში ხელმისაწვდომი ენებისგან. ზოგიერთ აპს, შესაძლოა, არ ჰქონდეს ამ პარამეტრის მხარდაჭერა."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"აქ ნაჩვენებია მხოლოდ ის აპები, რომლებსაც ენის არჩევის მხარდაჭერა აქვს."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">გსურთ არჩეული ენების ამოშლა?</item>
       <item quantity="one">გსურთ არჩეული ენის ამოშლა?</item>
@@ -481,7 +480,7 @@
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"თქვენი ტელეფონის განსაბლოკად"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"აპებში ვინაობის დასადასტურებლად"</string>
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"სახის მეშვეობით"</string>
-    <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"თთის ანაბეჭდის მეშვეობით"</string>
+    <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"თითის ანაბეჭდის მეშვეობით"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"სახის ან თითის ანაბეჭდის მეშვეობით"</string>
     <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"დაუბრუნეთ ტელეფონი მშობელს"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"კარგი"</string>
@@ -522,9 +521,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"ეს ხელს შეუწყობს სრულყოფილი თითის ანაბეჭდის შექმნას"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"მიმდინარეობს თითის ანაბეჭდის რეგისტრაცია, <xliff:g id="PERCENTAGE">%d</xliff:g> პროცენტი"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"თითის ანაბეჭდი დამატებულია"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"ახლა უკვე შეგიძლიათ თითის ანაბეჭდით ტაბლეტის განბლოკვა ან ვინაობის დადასტურება, როცა აპებში შედიხართ"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"ახლა უკვე შეგიძლიათ თითის ანაბეჭდით მოწყობილობის განბლოკვა ან ვინაობის დადასტურება, როცა აპებში შედიხართ"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"ახლა უკვე შეგიძლიათ თითის ანაბეჭდით ტელეფონის განბლოკვა ან ვინაობის დადასტურება, როცა აპებში შედიხართ"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"ანაბეჭდით განბლოკვა მით უფრო უმჯობესდება, რაც უფრო მეტად გამოიყენებთ მას თქვენი ტაბლეტის განსაბლოკად ან აპებში თქვენი ვინაობის დადასტურებისთვის"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"ანაბეჭდით განბლოკვა მით უფრო უმჯობესდება, რაც უფრო მეტად გამოიყენებთ მას თქვენი მოწყობილობის განსაბლოკად ან აპებში თქვენი ვინაობის დადასტურებისთვის"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"ანაბეჭდით განბლოკვა მით უფრო უმჯობესდება, რაც უფრო მეტად გამოიყენებთ მას თქვენი ტელეფონის განსაბლოკად ან აპებში თქვენი ვინაობის დადასტურებისთვის"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"მოგვიანებით გაკეთება"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"აიღეთ თითი, შემდეგ კი ხელახლა შეეხეთ"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"დაადეთ თითის ცალი მხარე სენსორს და გააჩერეთ ცოტა ხნით, შემდეგ კი დაადეთ მეორე მხარე"</string>
@@ -573,7 +572,7 @@
     <string name="lock_screen_password_skip_title" msgid="8891463713793185768">"გამოტოვებთ პაროლის დაყენებას?"</string>
     <string name="lock_screen_password_skip_face_title" msgid="8166210519462164998">"გსურთ, გამოტოვოთ პაროლის და სახის დაყენება?"</string>
     <string name="lock_screen_password_skip_fingerprint_title" msgid="2506392546016772170">"გსურთ, გამოტოვოთ პაროლის და თითის ანაბეჭდის დაყენება?"</string>
-    <string name="lock_screen_password_skip_biometrics_title" msgid="900281322095862009">"გსურთ, გამოტოვოთ პაროლის, სახის და თითის ანაბეჭდის დაყენება?"</string>
+    <string name="lock_screen_password_skip_biometrics_title" msgid="900281322095862009">"გამოვტოვოთ პაროლის, სახის და თითის ანაბეჭდის დაყენება?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="7214938393640060932">"გამოტოვებთ ნიმუშის დაყენებას?"</string>
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"გსურთ, გამოტოვოთ განმბლოკავი ნიმუშის და სახის დაყენება?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"გსურთ, გამოტოვოთ განმბლოკავი ნიმუშის და თითის ანაბეჭდის დაყენება?"</string>
@@ -596,10 +595,8 @@
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"სამსახურის პროფილის დაბლოკვა, დაშიფვრა და სხვა"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"დაშიფვრა, ავტორიზაციის მონაცემები და სხვა"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"უსაფრთხოება, უსაფრთხოების მეტი პარამეტრი, მეტი პარამეტრი, უსაფრთხოების გაფართოებული პარამეტრები"</string>
-    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
-    <skip />
-    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
-    <skip />
+    <string name="privacy_advanced_settings" msgid="8828215456566937719">"კონფიდენციალურობის დამატებითი პარამეტრები"</string>
+    <string name="privacy_advanced_settings_summary" msgid="2927281894237561935">"ავტომატური შევსება, აქტივობის მართვის საშუალებები და სხვა"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"შეგიძლიათ დაამატოთ მაქსიმუმ <xliff:g id="COUNT">%d</xliff:g> თითის ანაბეჭდი"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"თქვენ უკვე დაამატეთ თითის ანაბეჭდების მაქსიმალური რაოდენობა"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"მეტი თითის ანაბეჭდის დამატება ვერ ხერხდება"</string>
@@ -638,10 +635,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"გაააქტიურეთ მოწყობილობის დაცვის ფუნქციები, რათა თქვენი ნებართვის გარეშე ეს მოწყობილობა ვერავინ გამოიყენოს. აირჩიეთ ეკრანის დაბლოკვის სასურველი ხერხი."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"გაააქტიურეთ მოწყობილობის დაცვის ფუნქციები, რათა თქვენი ნებართვის გარეშე ეს ტელეფონი ვერავინ გამოიყენოს. აირჩიეთ ეკრანის დაბლოკვის სასურველი ხერხი."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"აირჩიეთ ეკრანის დაბლოკვის სარეზერვო მეთოდი"</string>
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (3532653662159888328) -->
-    <skip />
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message_action (5956615234246626264) -->
-    <skip />
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"თუ დაგავიწყდათ ეკრანის საკეტი, თქვენი IT ადმინისტრატორი ვერ შეძლებს მის გადაყენებას."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"დააყენეთ ეკრანის ცალკე საკეტი სამსახურისთვის"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"თუ ბლოკი დაგავიწყდათ, სთხოვეთ თქვენს IT ადმინისტრატორს მისი გადაყენება"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"ეკრანის დაბლოკვის ვარიანტები"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"ეკრანის დაბლოკვის ვარიანტები"</string>
@@ -3732,10 +3727,12 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"მედიის ავტომ. სუბტიტრირება"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"ტელეფონის დინამიკი"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"სადენიანი ყურსასმენი"</string>
-    <string name="spatial_audio_text" msgid="3273982964342449273">"სივრცითი აუდიო ქმნის ჩაღრმავებულ ხმას, რომელიც თითქოს თქვენს გარშემო მოდის. მუშაობს მხოლოდ გარკვეულ მედიასთან."</string>
-    <string name="spatial_summary_off" msgid="8272678804629774378">"გამორთვა"</string>
+    <string name="spatial_audio_text" msgid="8201387855375146000">"თავსებადი მედიის ხმა უფრო იმერსიული ხდება"</string>
+    <string name="spatial_summary_off" msgid="8272678804629774378">"გამორთული"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"ჩართულია / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"ჩართულია / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> და <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
+    <string name="spatial_audio_footer_title" msgid="8775010547623606088">"ასევე, შეგიძლიათ, ჩაურთოთ Bluetooth მოწყობილობებს სივრცითი აუდიო."</string>
+    <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"დაკავშირებული მოწყობილობების პარამეტრები"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{არცერთი}=1{დაყენებულია 1 განრიგი}other{დაყენებულია # განრიგი}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"არ შემაწუხოთ"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"შეტყობინებების მიღება მხოლოდ მნიშვნელოვანი ხალხისგან და აპებიდან"</string>
@@ -3856,8 +3853,7 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"შეტყობინებების მართვა ინდივიდუალური აპებიდან"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"ზოგადი"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"სამსახურის შეტყობინებები"</string>
-    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
-    <skip />
+    <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"სამსახურის პროფილი"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"ადაპტაციური შეტყობინებები"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"ადაპტაციური შეტყობინების პრიორიტეტულობა"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"დაბალი პრიორიტეტის შეტყობინებები ავტომატურად დაყენდეს, როგორც მსუბუქი"</string>
@@ -3934,7 +3930,7 @@
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"სამსახურის პროფილის სენსიტიური კონტენტის ჩვენება, როცა ჩაკეტილია"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"შეტყობინების მთელი შინაარსის ჩვენება"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"სენსიტიური კონტენტი მარტო განბლოკილზე"</string>
-    <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"არ მაჩვენო შეტყობინება"</string>
+    <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"შეტყობინებები საერთოდ არ გამოჩნდეს"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"როგორ გსურთ, გამოჩნდეს ჩაკეტილი ეკრანი?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"ჩაკეტილი ეკრანი"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"სამსახურის შეტყობინებების მთელი კონტენტის ჩვენება"</string>
@@ -4880,8 +4876,6 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"ბატარეის დამზოგის გამო დროებით გათიშულია"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"ბატარეის დამზოგის გამორთვა"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"დროებით ჩართულია ბატარეის დამზოგის გამო"</string>
-    <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"მხარდაჭერილი აპებიც მუქ თემაზე გადაირთვება"</string>
-    <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"გასაგებია"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"ცადე მუქი თემა"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"ახანგრძლივებს ბატარეას"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"დეველოპერის სწრაფი პარამეტრების მოზაიკები"</string>
@@ -5096,7 +5090,7 @@
     <string name="financed_privacy_notifications" msgid="5932303271274089968">"შეტყობინებებისა და ტექსტური შეტყობინებების ნახვა"</string>
     <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"წვდომა აპებზე, რომლებიც დაშვებულია კრედიტის პროვაიდერის მიერ"</string>
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"მას შემდეგ, რაც თანხას სრულად გადაიხდით:"</string>
-    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"მოწყობილობას მოეხსნა ყველა შეზღუდვა"</string>
+    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"მოწყობილობას მოეხსნება ყველა შეზღუდვა"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"თქვენ შეგიძლიათ მოახდინოთ კრედიტორის აპის დეინსტალაცია"</string>
     <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
       <item quantity="other">კამერის აპები</item>
@@ -5580,8 +5574,8 @@
     <string name="allow_mock_modem" msgid="3832264806530479214">"სიმულაციური მოდემის დაშვება"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"დაუშვით ამ მოწყობილობაზე სიმულაციური მოდემის სერვისის გაშვება ინსტრუმენტული ტესტირებისთვის. ნუ ჩართავთ მას ტელეფონის ნორმალური გამოყენების დროს"</string>
     <string name="media_controls_title" msgid="403271085636252597">"მედია"</string>
-    <string name="media_controls_resume_title" msgid="855076860336652370">"მედია დამკვრელის ჩამაგრება"</string>
-    <string name="media_controls_resume_description" msgid="3163482266454802097">"დაკვრის სწრაფად გასაგრძელებლად მედია დამკვრელი გახსნილი დარჩება სწრაფ პარამეტრებში"</string>
+    <string name="media_controls_resume_title" msgid="855076860336652370">"მედიადამკვრელის ჩამაგრება"</string>
+    <string name="media_controls_resume_description" msgid="3163482266454802097">"დაკვრის სწრაფად გასაგრძელებლად მედიადამკვრელი გახსნილი დარჩება სწრაფ პარამეტრებში"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"მედიარეკომენდაციების ჩვენება"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"თქვენი აქტივობის საფუძველზე"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"დამკვრელის დამალვა"</string>
@@ -5630,10 +5624,8 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"ზარები"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"მობილური ინტერნეტი"</string>
-    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
-    <skip />
-    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"მოწყობილობისგან მიღებული გამოცდილების გასაუმჯობესებლად, აპებსა და სერვისებს მაინც შეუძლია სკანირება Wi‑Fi ქსელების აღმოსაჩენად, ნებისმიერ დროს, მაშინაც კი, როცა Wi‑Fi გამორთულია. მაგალითისთვის, ეს შეიძლება გამოიყენებოდეს მდებარეობაზე დაფუძნებული ფუნქციების და სერვისების გასაუმჯობესებლად. ამის შეცვლა Wi-Fi სკანირების პარამეტრებში შეგიძლიათ."</string>
+    <string name="wifi_scan_change" msgid="8438320311511852918">"შეცვლა"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"დაკავშირებული"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"კავშირი არ არის"</string>
@@ -5795,8 +5787,6 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"შეიყვანეთ პაროლი"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"დაკავშირება ვერ მოხერხდა. ცადეთ ხელახლა."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"პაროლი არასწორია"</string>
-    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
-    <skip />
-    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
-    <skip />
+    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"მოსმენის დასაწყებად ცენტრში მოაქციეთ ქვემოთ მოცემული QR კოდი"</string>
+    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR კოდის ფორმატი არასწორია"</string>
 </resources>

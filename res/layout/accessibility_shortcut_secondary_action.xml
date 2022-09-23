@@ -59,6 +59,7 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:textAppearance="?android:attr/textAppearanceListItem"
+                android:hyphenationFrequency="normalFast"
                 android:ellipsize="marquee" />
 
             <TextView
@@ -69,6 +70,7 @@
                 android:layout_alignStart="@android:id/title"
                 android:textAppearance="?android:attr/textAppearanceListItemSecondary"
                 android:textColor="?android:attr/textColorSecondary"
+                android:hyphenationFrequency="normalFast"
                 android:maxLines="10" />
 
         </RelativeLayout>
