@@ -565,8 +565,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Додадовте максимален број на отпечатоци"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Не може да се додадат повеќе отпечатоци"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Избришете „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Ова ги брише сликите од отпечатоците и моделите поврзани со „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ што се складирани на уредот"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Нема да може да го користите отпечатокот за да го отклучувате телефонот или да потврдувате дека сте вие во апликациите."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Ова ги брише сликите од отпечатоците и моделите поврзани со „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ што се складирани на телефонот"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Ова ги брише сликите од отпечатоците и моделите поврзани со „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ што се складирани на таблетот"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Ова ги брише сликите од отпечатоците и моделите поврзани со „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ што се складирани на уредот"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Нема да може да го користите отпечатокот за да го отклучувате телефонот или да потврдувате дека сте вие во апликациите."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Нема да може да го користите отпечатокот за да го отклучувате таблетот или да потврдувате дека сте вие во апликациите."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Нема да може да го користите отпечатокот за да го отклучувате уредот или да потврдувате дека сте вие во апликациите."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Нема да може да го користите отпечатокот за да го отклучувате работниот профил, да овластувате купувања или да се најавувате на работните апликации."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Шифрирање"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Шифрирајте го таблетот"</string>
@@ -1096,6 +1100,7 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"Полната резолуција повеќе ја троши батеријата. Префрлањето на резолуцијата може да предизвика рестартирање кај некои апликации."</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Избрано"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Бои"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Природни"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Нагласени"</string>
@@ -1308,14 +1313,14 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Не отстранувајте ја <xliff:g id="NAME">^1</xliff:g> за време на преместувањето. \n\nАпликацијата <xliff:g id="APP">^2</xliff:g> на уредов нема да биде достапна додека преместувањето не заврши."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Како ќе се користи <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Форматирајте SD-картичка за внатрешна меморија"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Складирајте апликации и аудиовизуелни содржини за да ги користите само на таблетов. &lt;a href=https://support.google.com/android/answer/12153449&gt;Дознајте повеќе за поставувањето SD-картичка&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Складирајте апликации и аудиовизуелни содржини за да ги користите само на таблетов. &lt;a href=https://support.google.com/android/answer/12153449&gt;Дознајте повеќе за поставувањето SD-картичка&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Форматирај"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Форматирајте SD-картичка за внатрешна меморија"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Складирајте апликации и аудиовизуелни содржини за да ги користите само на телефонов. &lt;a href=https://support.google.com/android/answer/12153449&gt;Дознајте повеќе за поставувањето SD-картичка&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Складирајте апликации и аудиовизуелни содржини за да ги користите само на телефонов. &lt;a href=https://support.google.com/android/answer/12153449&gt;Дознајте повеќе за поставувањето SD-картичка&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Форматирај"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"или"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Форматирајте SD-картичка за пренослив капацитет"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Складирајте фотографии, видеа, музика и друго и пристапувајте до нив од други уреди. &lt;a href=https://support.google.com/android/answer/12153449&gt;Дознајте повеќе за поставувањето SD-картичка&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Складирајте фотографии, видеа, музика и друго и пристапувајте до нив од други уреди. &lt;a href=https://support.google.com/android/answer/12153449&gt;Дознајте повеќе за поставувањето SD-картичка&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Форматирај"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Постави подоцна"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Дали да се форматира <xliff:g id="NAME">^1</xliff:g>?"</string>
@@ -4829,24 +4834,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Погрешна лозинка"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"За да започне слушањето, центрирајте го QR-кодот долу"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR-кодот не е во важечки формат"</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"Мобилни групирани апликации"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"Мобилни групирани апликации"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"Податоци за транспарентност за мобилни групирани апликации"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"Содржи реклами"</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"Податоци за програмери"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"Податоци за контакт"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"Опис"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"Политика за приватност"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"Категорија"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"Мобилна групирана апликација"</string>
 </resources>

@@ -567,8 +567,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Bạn đã thêm số vân tay tối đa"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Không thể thêm dấu vân tay khác"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Xoá \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Thao tác này sẽ xóa các hình ảnh và mẫu vân tay liên kết với \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" được lưu trữ trên thiết bị của bạn"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Bạn sẽ không thể dùng vân tay để mở khóa điện thoại hoặc xác minh danh tính của mình trong các ứng dụng."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Thao tác này sẽ xoá các hình ảnh và mẫu vân tay liên kết với \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" được lưu trữ trên điện thoại của bạn"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Thao tác này sẽ xoá các hình ảnh và mẫu vân tay liên kết với \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" được lưu trữ trên máy tính bảng của bạn"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Thao tác này sẽ xóa các hình ảnh và mẫu vân tay liên kết với \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" được lưu trữ trên thiết bị của bạn"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Bạn sẽ không thể dùng vân tay để mở khóa điện thoại hoặc xác minh danh tính của mình trong các ứng dụng."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Bạn sẽ không thể dùng vân tay để mở khoá máy tính bảng hoặc xác minh danh tính của mình trong các ứng dụng."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Bạn sẽ không thể dùng vân tay để mở khoá thiết bị hoặc xác minh danh tính của mình trong các ứng dụng."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Bạn sẽ không thể dùng vân tay để mở khóa hồ sơ công việc, ủy quyền mua hàng hay đăng nhập vào các ứng dụng công việc."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Mã hoá"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Mã hoá máy tính bảng"</string>
@@ -1098,6 +1102,7 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"FHD+ 1080p"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"QHD+ 1440p"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"Chế độ độ phân giải cao sử dụng nhiều pin hơn. Việc chuyển đổi độ phân giải của bạn có thể khiến một số ứng dụng khởi động lại."</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Đã chọn"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Màu"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Tự nhiên"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Tăng độ nét"</string>
@@ -1310,14 +1315,14 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Không tháo <xliff:g id="NAME">^1</xliff:g> trong khi di chuyển. \n\nỨng dụng <xliff:g id="APP">^2</xliff:g> trên thiết bị này sẽ không khả dụng cho tới khi hoàn tất di chuyển."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Bạn sẽ sử dụng <xliff:g id="NAME">^1</xliff:g> này như thế nào?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Định dạng thẻ SD cho bộ nhớ trong"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Lưu trữ ứng dụng và nội dung nghe nhìn để chỉ sử dụng trên máy tính bảng này &lt;a href=https://support.google.com/android/answer/12153449&gt;Tìm hiểu thêm về cách thiết lập thẻ SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Lưu trữ ứng dụng và nội dung nghe nhìn để chỉ sử dụng trên máy tính bảng này. &lt;a href=https://support.google.com/android/answer/12153449&gt;Tìm hiểu thêm về cách thiết lập thẻ SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Định dạng"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Định dạng thẻ SD cho bộ nhớ trong"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Lưu trữ ứng dụng và nội dung nghe nhìn để chỉ sử dụng trên điện thoại này &lt;a href=https://support.google.com/android/answer/12153449&gt;Tìm hiểu thêm về cách thiết lập thẻ SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Lưu trữ ứng dụng và nội dung nghe nhìn để chỉ sử dụng trên điện thoại này. &lt;a href=https://support.google.com/android/answer/12153449&gt;Tìm hiểu thêm về cách thiết lập thẻ SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Định dạng"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Hoặc"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Định dạng thẻ SD cho bộ nhớ di động"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Lưu trữ ảnh, video, nhạc và nhiều nội dung khác, đồng thời truy cập chúng từ các thiết bị khác &lt;a href=https://support.google.com/android/answer/12153449&gt;Tìm hiểu thêm về cách thiết lập thẻ SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Lưu trữ ảnh, video, nhạc và nhiều nội dung khác, đồng thời truy cập chúng từ các thiết bị khác. &lt;a href=https://support.google.com/android/answer/12153449&gt;Tìm hiểu thêm về cách thiết lập thẻ SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Định dạng"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Thiết lập sau"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Định dạng <xliff:g id="NAME">^1</xliff:g> này?"</string>
@@ -1851,12 +1856,9 @@
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Sau khi bạn tạo tiện ích, ứng dụng có thể truy cập vào mọi dữ liệu được hiển thị.\n\nỨng dụng: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nTiện ích: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Luôn cho phép <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> tạo các tiện ích và truy cập dữ liệu của chúng"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Thống kê sử dụng"</string>
-    <!-- no translation found for usage_stats_sort_by_usage_time (2927310334119998301) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_last_time_used (7039213339779884017) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_app_name (4463833145514850478) -->
-    <skip />
+    <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Sắp xếp theo thời gian dùng"</string>
+    <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Sắp xếp theo lần dùng gần đây nhất"</string>
+    <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Sắp xếp theo tên ứng dụng"</string>
     <string name="last_time_used_label" msgid="2639712813493534074">"Sử dụng lần cuối"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Thời gian sử dụng"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Hỗ trợ tiếp cận"</string>
@@ -4772,8 +4774,7 @@
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Số phần thưởng cho mỗi sự kiện"</string>
     <string name="tare_rewards_ongoing" msgid="7657030286658143416">"Phần thưởng cho mỗi giây thời lượng sự kiện"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Số phần thưởng tối đa mỗi ngày"</string>
-    <!-- no translation found for tare_app_install (7955806910408116882) -->
-    <skip />
+    <string name="tare_app_install" msgid="7955806910408116882">"Cài đặt ứng dụng"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Hoạt động hàng đầu"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Thông báo đã xem"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Thông báo đã xem trong vòng 15 phút"</string>

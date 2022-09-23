@@ -561,8 +561,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"तपाईंले अधिकतम संख्यामा फिंगरप्रिन्टहरू थप्नुभएको छ"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"थप फिंगरप्रिन्टहरू थप्न सकिँदैन"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"\"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" मेटाउनुहोस्"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"यो फिंगरप्रिन्ट मेटाइयो भने तपाईंको डिभाइसमा भण्डारण गरिएका \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' सँग सम्बन्धित फिंगरप्रिन्टका फोटो र मोडेल मेटाइन्छन्"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"तपाईं आफ्नो फोन अनलक गर्न वा एपमा आफ्नो पहिचान पुष्टि गर्न आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नु हुने छैन।"</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"यो फिंगरप्रिन्ट मेटाइयो भने तपाईंको फोनमा भण्डारण गरिएका \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' सँग सम्बन्धित फिंगरप्रिन्टका फोटो र मोडेल मेटाइन्छन्"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"यो फिंगरप्रिन्ट मेटाइयो भने तपाईंको ट्याब्लेटमा भण्डारण गरिएका \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' सँग सम्बन्धित फिंगरप्रिन्टका फोटो र मोडेल मेटाइन्छन्"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"यो फिंगरप्रिन्ट मेटाइयो भने तपाईंको डिभाइसमा भण्डारण गरिएका \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' सँग सम्बन्धित फिंगरप्रिन्टका फोटो र मोडेल मेटाइन्छन्"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"तपाईं आफ्नो फोन अनलक गर्न वा एपमा आफ्नो पहिचान पुष्टि गर्न आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नु हुने छैन।"</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"तपाईं आफ्नो ट्याब्लेट अनलक गर्न वा एपमा आफ्नो पहिचान पुष्टि गर्न आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नु हुने छैन।"</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"तपाईं आफ्नो डिभाइस अनलक गर्न वा एपमा आफ्नो पहिचान पुष्टि गर्न आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नु हुने छैन।"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"तपाईं आफ्नो कार्य प्रोफाइल अनलक गर्न, खरिद गर्ने अनुमति दिन, वा कामसम्बन्धी एपमा साइन इन गर्न आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नु हुने छैन।"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"इन्क्रिप्सन"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"ट्याब्लेट इन्क्रिप्ट गर्नुहोस्"</string>
@@ -1092,6 +1096,8 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"१०८० पिक्सेल FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"१४४० पिक्सेल QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"फुल रिजोल्युसन प्रयोग गर्दा तपाईंको डिभाइसको ब्याट्री बढी खपत हुन्छ। तपाईंले रोजेको रिजोल्युसन प्रयोग गर्नुभयो भने केही एपहरू रिस्टार्ट हुन सक्छन्।"</string>
+    <!-- no translation found for screen_resolution_selected_a11y (6158451180032224977) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"रङ्गहरू"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"प्राकृतिक"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"बुस्ट गरिएको"</string>
@@ -1304,14 +1310,17 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"सार्ने क्रममा <xliff:g id="NAME">^1</xliff:g> नहटाउनुहोस्। \n\nसार्ने क्रम पूरा नहुन्जेल सम्म यो डिभाइसको<xliff:g id="APP">^2</xliff:g> एप उपलब्ध हुने छैन।"</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"तपाईं यो <xliff:g id="NAME">^1</xliff:g> कसरी प्रयोग गर्नुहुन्छ?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"इन्टर्नल मेमोरीका लागि SD कार्ड फर्म्याट गर्नुहोस्"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"यो ट्याब्लेटमा मात्र प्रयोग गर्नका लागि एप र मिडिया भण्डारण गर्नुहोस्। &lt;a href=https://support.google.com/android/answer/12153449&gt;SD कार्ड सेटअप गर्ने तरिकाका बारेमा थप जान्नुहोस्&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_internal_summary (6050264373968853062) -->
+    <skip />
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"फर्म्याट गर्नुहोस्"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"इन्टर्नल मेमोरीका लागि SD कार्ड फर्म्याट गर्नुहोस्"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"यो फोनमा मात्र प्रयोग गर्नका लागि एप र मिडिया भण्डारण गर्नुहोस्। &lt;a href=https://support.google.com/android/answer/12153449&gt;SD कार्ड सेटअप गर्ने तरिकाका बारेमा थप जान्नुहोस्&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_internal_summary (4315288081962526508) -->
+    <skip />
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"फर्म्याट गर्नुहोस्"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"वा"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"पोर्टेबल भण्डारणका लागि SD कार्ड फर्म्याट गर्नुहोस्"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"फोटो, भिडियो, सङ्गीत र थप सामग्री भण्डारण गर्नुहोस् र ती सामग्री अर्को डिभासमार्फत हेर्नुहोस् तथा प्रयोग गर्नुहोस्। &lt;a href=https://support.google.com/android/answer/12153449&gt;SD कार्ड सेटअप गर्ने तरिकाका बारेमा थप जान्नुहोस्&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_external_summary (2002761631147966185) -->
+    <skip />
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"फर्म्याट गर्नुहोस्"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"पछि सेटअप गर्नुहोस्"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"यो <xliff:g id="NAME">^1</xliff:g> फर्म्याट गर्ने हो?"</string>
@@ -1845,12 +1854,9 @@
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"तपाईंले विजेट बनाएपछि यस एपले त्यहाँ देखाइने सबै कुरा प्रयोग गर्न सक्छ।\n\n एप: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\n विजेट: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"सधैँ <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>लाई विजेटहरू सिर्जना गर्ने अनुमति दिनुहोस् र तिनीहरूको डेटा पहुँच गर्नुहोस्"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"प्रयोग तथ्याङ्क"</string>
-    <!-- no translation found for usage_stats_sort_by_usage_time (2927310334119998301) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_last_time_used (7039213339779884017) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_app_name (4463833145514850478) -->
-    <skip />
+    <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"प्रयोग गरिएको समयअनुसार क्रमबद्ध गर्नुहोस्"</string>
+    <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"पछिल्लो पटक प्रयोग गरिएको समयअनुसार क्रमबद्ध गर्नुहोस्"</string>
+    <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"एपको नामअनुसार क्रमबद्ध गर्नुहोस्"</string>
     <string name="last_time_used_label" msgid="2639712813493534074">"पछिल्लो समय प्रयोग गरिएको"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"उपयोग समय"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"एक्सेसिबिलिटी"</string>
@@ -4766,8 +4772,7 @@
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"प्रत्येक कार्यक्रमबाट पाइने रिवार्डहरू"</string>
     <string name="tare_rewards_ongoing" msgid="7657030286658143416">"कार्यक्रमको अवधिमा प्रति सेकेन्ड दिइने पुरस्कारहरू"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"प्रत्येक दिन पाइने अधिकतम रिवार्डहरू"</string>
-    <!-- no translation found for tare_app_install (7955806910408116882) -->
-    <skip />
+    <string name="tare_app_install" msgid="7955806910408116882">"एप इन्स्टल गर्नुहोस्"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"सबैभन्दा उच्च गतिविधि"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"सूचना हेरियो"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"१५ मिनेटभित्रै सूचना हेरियो"</string>
@@ -4829,24 +4834,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"गलत पासवर्ड"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"अडियो सुन्न तलको QR कोडलाई केन्द्र भागमा पार्नुहोस्"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR कोडको फर्म्याट वैध छैन"</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"मोबाइल एपहरूको बन्डल"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"मोबाइल एपहरूको बन्डल"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"मोबाइल एपका बन्डलहरूका बारेमा पारदर्शितासम्बन्धी जानकारी"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"विज्ञापन समावेश हुन्छ"</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"विकासकर्ता(हरू) सँग सम्बन्धित जानकारी"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"सम्पर्क जानकारी"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"विवरण"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"गोपनीयता नीति"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"कोटी"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"मोबाइल एपको बन्डल"</string>
 </resources>

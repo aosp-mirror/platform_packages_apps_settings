@@ -561,8 +561,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Jy het die maksimum aantal vingerafdrukke bygevoeg"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Kan nie nog vingerafdrukke byvoeg nie"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Vee \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" uit"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Dit vee die vingerafdrukprente en -model uit wat met \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" geassosieer word en op jou toestel geberg is"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Jy sal nie jou vingerafdruk kan gebruik om jou foon te ontsluit of in programme te verifieer dis jy nie."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Dit vee die vingerafdrukprente en -model uit wat met \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" geassosieer word en op jou foon geberg is"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Dit vee die vingerafdrukprente en -model uit wat met \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" geassosieer word en op jou tablet geberg is"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Dit vee die vingerafdrukprente en -model uit wat met \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" geassosieer word en op jou toestel geberg is"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Jy sal nie jou vingerafdruk kan gebruik om jou foon te ontsluit of in programme te verifieer dis jy nie."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Jy sal nie jou vingerafdruk kan gebruik om jou tablet te ontsluit nie of in programme te verifieer dis jy nie."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Jy sal nie jou vingerafdruk kan gebruik om jou toestel te ontsluit nie of in programme te verifieer dis jy nie."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Jy sal nie jou vingerafdruk kan gebruik om jou werkprofiel te ontsluit, aankope te magtig of by werkprogramme aan te meld nie."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Enkripsie"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Enkripteer tablet"</string>
@@ -1092,6 +1096,7 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080 p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440 p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"Volle resolusie gebruik meer van jou battery. As jy jou resolusie oorskakel, sal sommige programme dalk herbegin."</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Gekies"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Kleure"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Natuurlik"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Gemaksimeer"</string>
@@ -1304,14 +1309,14 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Moenie die <xliff:g id="NAME">^1</xliff:g> verwyder terwyl daar geskuif word nie. \n\nDie <xliff:g id="APP">^2</xliff:g>-program in hierdie toestel sal nie beskikbaar wees voordat dit klaar geskuif is nie."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Hoe sal jy hierdie <xliff:g id="NAME">^1</xliff:g> gebruik?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formateer SD-kaart vir interne berging"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Berg programme en media om slegs op hierdie tablet te gebruik. &lt;a href=https://support.google.com/android/answer/12153449&gt;Kom meer te wete oor hoe om ’n SD-kaart op te stel&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Berg programme en media om slegs op hierdie tablet te gebruik. &lt;a href=https://support.google.com/android/answer/12153449&gt;Kom meer te wete oor hoe om ’n SD-kaart op te stel&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formateer"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formateer SD-kaart vir interne berging"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Berg programme en media om slegs op hierdie foon te gebruik. &lt;a href=https://support.google.com/android/answer/12153449&gt;Kom meer te wete oor hoe om ’n SD-kaart op te stel&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Berg programme en media om slegs op hierdie foon te gebruik. &lt;a href=https://support.google.com/android/answer/12153449&gt;Kom meer te wete oor hoe om ’n SD-kaart op te stel&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formateer"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Of"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formateer SD-kaart vir draagbare berging"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Berg foto\'s, video\'s, musiek en meer, en kry toegang daartoe van ander toestelle af. &lt;a href=https://support.google.com/android/answer/12153449&gt;Kom meer te wete oor hoe om ’n SD-kaart op te stel&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Berg foto\'s, video\'s, musiek en meer, en kry toegang daartoe van ander toestelle af. &lt;a href=https://support.google.com/android/answer/12153449&gt;Kom meer te wete oor hoe om ’n SD-kaart op te stel&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formateer"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Stel later op"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Formateer hierdie <xliff:g id="NAME">^1</xliff:g>?"</string>
@@ -1845,12 +1850,9 @@
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Nadat jy die legstuk geskep het, kan die program toegang kry tot alles wat vertoon word.\n\nProgram: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nLegstuk: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Laat <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> altyd toe om legstukke te skep en om by hul data in te gaan."</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Gebruikstatistieke"</string>
-    <!-- no translation found for usage_stats_sort_by_usage_time (2927310334119998301) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_last_time_used (7039213339779884017) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_app_name (4463833145514850478) -->
-    <skip />
+    <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Sorteer volgens gebruikstyd"</string>
+    <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Sorteer volgens laas gebruik"</string>
+    <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Sorteer volgens programnaam"</string>
     <string name="last_time_used_label" msgid="2639712813493534074">"Laas gebruik"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Gebruikstyd"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Toeganklikheid"</string>
@@ -4766,8 +4768,7 @@
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Belonings per enkele geval"</string>
     <string name="tare_rewards_ongoing" msgid="7657030286658143416">"Belonings per sekonde van geleentheidtydsduur"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Maksimum belonings per dag"</string>
-    <!-- no translation found for tare_app_install (7955806910408116882) -->
-    <skip />
+    <string name="tare_app_install" msgid="7955806910408116882">"Programinstallering"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Topaktiwiteit"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Kennisgewing gesien"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Kennisgewing binne 15 minute gesien"</string>
@@ -4829,24 +4830,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Verkeerde wagwoord"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Plaas die QR-kode hieronder in die middel om te begin luister"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR-kode is nie ’n geldige formaat nie"</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"Mobiele gebondelde programme"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"Mobiele gebondelde programme"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"Deursigtigheidinligting vir mobiele gebondelde programme"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"Bevat advertensies"</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"Ontwikkelaarsinligting"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"Kontakinligting"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"Beskrywing"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"Privaatheidsbeleid"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"Kategorie"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"Mobiele gebondelde program"</string>
 </resources>

@@ -561,8 +561,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"You’ve added the maximum number of fingerprints"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Can’t add more fingerprints"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Delete \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"This deletes the fingerprint images and model associated with \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' that are stored on your device"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"You won\'t be able to use your fingerprint to unlock your phone or verify that it\'s you in apps."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"This deletes the fingerprint images and model associated with \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' that are stored on your phone"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"This deletes the fingerprint images and model associated with \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' that are stored on your tablet"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"This deletes the fingerprint images and model associated with \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' that are stored on your device"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"You won\'t be able to use your fingerprint to unlock your phone or verify that it\'s you in apps."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"You won\'t be able to use your fingerprint to unlock your tablet or verify that it\'s you in apps."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"You won\'t be able to use your fingerprint to unlock your device or verify that it\'s you in apps."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"You won\'t be able to use your fingerprint to unlock your work profile, authorise purchases or sign in to work apps."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Encryption"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Encrypt tablet"</string>
@@ -1092,6 +1096,7 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"Full resolution uses more of your battery. Switching your resolution may cause some apps to restart."</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Selected"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Colours"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Natural"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Boosted"</string>
@@ -1304,14 +1309,14 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Don\'t remove the <xliff:g id="NAME">^1</xliff:g> during the move. \n\nThe <xliff:g id="APP">^2</xliff:g> app on this device won\'t be available until the move is complete."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"How will you use this <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Format SD card for internal storage"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Store apps &amp; media to use on this tablet only. &lt;a href=https://support.google.com/android/answer/12153449&gt;Learn more about setting up an SD card&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Store apps &amp; media to use on this tablet only. &lt;a href=https://support.google.com/android/answer/12153449&gt;Learn more about setting up an SD card&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Format"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Format SD card for internal storage"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Store apps &amp; media to use on this phone only. &lt;a href=https://support.google.com/android/answer/12153449&gt;Learn more about setting up an SD card&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Store apps &amp; media to use on this phone only. &lt;a href=https://support.google.com/android/answer/12153449&gt;Learn more about setting up an SD card&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Format"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Or"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Format SD card for portable storage"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Store photos, videos, music and more and access them from other devices. &lt;a href=https://support.google.com/android/answer/12153449&gt;Learn more about setting up an SD card&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Store photos, videos, music and more and access them from other devices. &lt;a href=https://support.google.com/android/answer/12153449&gt;Learn more about setting up an SD card&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Format"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Set up later"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Format this <xliff:g id="NAME">^1</xliff:g>?"</string>
@@ -4825,24 +4830,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Wrong password"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"To start listening, centre the QR code below"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR code isn\'t a valid format"</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"Mobile bundled apps"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"Mobile bundled apps"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"Mobile bundled apps transparency info"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"Contains ads"</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"Developer(s) information"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"Contact information"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"Description"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"Privacy policy"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"Category"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"Mobile bundled app"</string>
 </resources>
