@@ -695,7 +695,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         }
 
         if (visible) {
-            mHourlyChartView.setAlpha(0f);
             mHourlyChartView.setVisibility(View.VISIBLE);
             mHourlyChartView.animate()
                     .alpha(1f)

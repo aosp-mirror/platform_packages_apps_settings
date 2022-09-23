@@ -18,9 +18,11 @@ package com.android.settings.biometrics.fingerprint;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.verify;
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.Intent;
+import android.content.res.Resources.Theme;
 import android.hardware.fingerprint.FingerprintManager;
 
 import androidx.appcompat.app.AlertDialog;
@@ -48,14 +50,23 @@ import org.robolectric.annotation.Config;
 @Config(shadows = {ShadowUtils.class, ShadowAlertDialogCompat.class})
 public class SetupFingerprintEnrollFindSensorTest {
 
-    @Mock
-    private FingerprintManager mFingerprintManager;
+    @Mock private FingerprintManager mFingerprintManager;
+
+    @Mock private Theme mTheme;
+
+    private SetupFingerprintEnrollFindSensor mActivity;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         ShadowUtils.setFingerprintManager(mFingerprintManager);
         FakeFeatureFactory.setupForTest();
+
+        final Intent intent = new Intent()
+                // Set the challenge token so the confirm screen will not be shown
+                .putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
+        mActivity = Robolectric.buildActivity(SetupFingerprintEnrollFindSensor.class,
+                intent).setup().get();
     }
 
     @After
@@ -74,23 +85,14 @@ public class SetupFingerprintEnrollFindSensorTest {
     }
 
     @Test
-    public void fingerprintEnroll_showsAlert_setSudTheme() {
-        final AlertDialog alertDialog = setupAlertDialog();
+    public void fingerprintEnroll_activityApplyDarkLightStyle() {
+        mActivity.onApplyThemeResource(mTheme, R.style.GlifTheme, true /* first */);
 
-        assertThat(alertDialog.getContext().getThemeResId()).isEqualTo(
-                R.style.GlifV2ThemeAlertDialog);
+        verify(mTheme).applyStyle(R.style.SetupWizardPartnerResource, true);
     }
 
     private AlertDialog setupAlertDialog() {
-        final Intent intent = new Intent()
-                // Set the challenge token so the confirm screen will not be shown
-                .putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
-
-        final SetupFingerprintEnrollFindSensor activity =
-                Robolectric.buildActivity(SetupFingerprintEnrollFindSensor.class,
-                        intent).setup().get();
-
-        PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
+        PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
         layout.getMixin(FooterBarMixin.class).getSecondaryButtonView().performClick();
 
         final AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
