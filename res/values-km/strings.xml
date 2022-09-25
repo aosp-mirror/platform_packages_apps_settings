@@ -561,8 +561,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"អ្នក​បាន​បញ្ចូល​ស្នាម​ម្រាមដៃ​ដល់​ចំនួន​អតិបរមា​ហើយ"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"មិន​អាច​បញ្ចូល​ស្នាម​ម្រាមដៃ​បាន​ទៀត​ទេ"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"លុប \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"សកម្មភាពនេះ​លុបរូបភាព​ស្នាមម្រាមដៃ និងគំរូដែល​ពាក់ព័ន្ធនឹង \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' ដែលត្រូវបានរក្សាទុក​នៅលើឧបករណ៍របស់អ្នក"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"អ្នកនឹងមិន​អាចប្រើស្នាមម្រាមដៃ​របស់អ្នក ដើម្បីដោះសោ​ទូរសព្ទរបស់អ្នក ឬផ្ទៀងផ្ទាត់​ថាជាអ្នកនៅក្នុង​កម្មវិធីបានទេ។"</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"សកម្មភាពនេះ​លុបរូបភាព​ស្នាមម្រាមដៃ និងគំរូដែល​ពាក់ព័ន្ធនឹង \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' ដែលត្រូវបានរក្សាទុក​នៅលើទូរសព្ទរបស់អ្នក"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"សកម្មភាពនេះ​លុបរូបភាព​ស្នាមម្រាមដៃ និងគំរូដែល​ពាក់ព័ន្ធនឹង \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' ដែលត្រូវបានរក្សាទុក​នៅលើថេប្លេតរបស់អ្នក"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"សកម្មភាពនេះ​លុបរូបភាព​ស្នាមម្រាមដៃ និងគំរូដែល​ពាក់ព័ន្ធនឹង \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' ដែលត្រូវបានរក្សាទុក​នៅលើឧបករណ៍របស់អ្នក"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"អ្នកនឹងមិន​អាចប្រើស្នាមម្រាមដៃ​របស់អ្នក ដើម្បីដោះសោ​ទូរសព្ទរបស់អ្នក ឬផ្ទៀងផ្ទាត់​ថាជាអ្នកនៅក្នុង​កម្មវិធីបានទេ។"</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"អ្នកនឹងមិន​អាចប្រើស្នាមម្រាមដៃ​របស់អ្នក ដើម្បីដោះសោ​ថេប្លេតរបស់អ្នក ឬផ្ទៀងផ្ទាត់​ថាជាអ្នកនៅក្នុង​កម្មវិធីបានទេ។"</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"អ្នកនឹងមិន​អាចប្រើស្នាមម្រាមដៃ​របស់អ្នក ដើម្បីដោះសោ​ឧបករណ៍របស់អ្នក ឬផ្ទៀងផ្ទាត់​ថាជាអ្នកនៅក្នុង​កម្មវិធីបានទេ។"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"អ្នកនឹង​មិនអាចប្រើ​ស្នាមម្រាមដៃ​របស់អ្នក ដើម្បី​ដោះសោ​កម្រងព័ត៌មាន​ការងារ​របស់អ្នក ផ្តល់សិទ្ធិ​ក្នុងការទិញ ឬ​ចូល​កម្មវិធីការងារបានទេ។"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"ការ​អ៊ីនគ្រីប"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"អ៊ីនគ្រីប​ថេប្លេត"</string>
@@ -1092,6 +1096,8 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"កម្រិតច្បាស់​ពេញលេញប្រើថ្មរបស់អ្នកច្រើនជាង។ ការប្ដូរកម្រិតគុណភាពរបស់អ្នកអាចបណ្តាលឱ្យកម្មវិធីមួយចំនួនចាប់ផ្តើមឡើងវិញ។"</string>
+    <!-- no translation found for screen_resolution_selected_a11y (6158451180032224977) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"ពណ៌"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"ធម្មជាតិ"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"បង្កើនពន្លឺ"</string>
@@ -1304,14 +1310,17 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"កុំដក <xliff:g id="NAME">^1</xliff:g> ចេញអំឡុងពេលធ្វើការផ្លាស់ទី។ \n\nកម្មវិធី <xliff:g id="APP">^2</xliff:g> នៅលើឧបករណ៍នេះនឹងមិនមានទេ រហូតដល់ការផ្លាស់ទីបញ្ចប់។"</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"តើ​អ្នក​នឹង​ប្រើ <xliff:g id="NAME">^1</xliff:g> នេះ​ដោយ​របៀប​ណា?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"ឈូស​កាត SD សម្រាប់​ប្រើ​ជា​ទំហំ​​ផ្ទុក​ខាង​ក្នុង"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"រក្សា​ទុក​កម្មវិធី និង​មេឌៀ ដើម្បី​ប្រើប្រាស់​នៅ​លើ​ថេប្លេត​នេះ​តែ​ប៉ុណ្ណោះ។ &lt;a href=https://support.google.com/android/answer/12153449&gt;ស្វែង​យល់​បន្ថែម​អំពី​ការរៀបចំ​កាត SD&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_internal_summary (6050264373968853062) -->
+    <skip />
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"ឈូស"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"ឈូស​កាត SD សម្រាប់​ប្រើ​ជា​ទំហំ​​ផ្ទុក​ខាង​ក្នុង"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"រក្សា​ទុក​កម្មវិធី និង​មេឌៀ ដើម្បី​ប្រើប្រាស់​នៅ​លើ​ទូរសព្ទ​នេះ​តែ​ប៉ុណ្ណោះ។ &lt;a href=https://support.google.com/android/answer/12153449&gt;ស្វែង​យល់​បន្ថែម​អំពី​ការរៀបចំ​កាត SD&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_internal_summary (4315288081962526508) -->
+    <skip />
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"ឈូស"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"ឬ"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"ឈូស​កាត SD សម្រាប់​ប្រើ​ជា​ទំហំ​ផ្ទុក​ចល័ត"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"រក្សា​ទុក​រូបថត វីដេអូ តន្ត្រី និង​អ្វីៗ​ជាច្រើន​ទៀត ព្រមទាំង​ចូល​ប្រើប្រាស់​អ្វី​ទាំង​នេះ​ពី​ឧបករណ៍​ផ្សេង​ទៀត។ &lt;a href=https://support.google.com/android/answer/12153449&gt;ស្វែង​យល់​បន្ថែម​អំពី​ការរៀបចំ​កាត SD&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_external_summary (2002761631147966185) -->
+    <skip />
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"ឈូស"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"រៀបចំ​នៅពេល​ក្រោយ"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"សម្អាត <xliff:g id="NAME">^1</xliff:g> នេះ​ដែរទេ?"</string>
@@ -1845,12 +1854,9 @@
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"បន្ទាប់ពីអ្នកបង្កើតធាតុក្រាហ្វិករួច កម្មវិធីអាចចូលប្រើអ្វីគ្រប់យ៉ាងដែលបង្ហាញ។\n\nកម្មវិធី៖ <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nធាតុក្រាហ្វិក៖ <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"ឲ្យ <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> បង្កើត​ធាតុ​ក្រាហ្វិក និង​ចូល​ដំណើរ​ការ​ទិន្នន័យ​របស់​វា​ជា​និច្ច"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"ស្ថិតិ​ប្រើប្រាស់"</string>
-    <!-- no translation found for usage_stats_sort_by_usage_time (2927310334119998301) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_last_time_used (7039213339779884017) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_app_name (4463833145514850478) -->
-    <skip />
+    <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"តម្រៀបតាមរយៈពេលប្រើប្រាស់"</string>
+    <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"តម្រៀបតាមបានប្រើចុងក្រោយ"</string>
+    <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"តម្រៀបតាមឈ្មោះកម្មវិធី"</string>
     <string name="last_time_used_label" msgid="2639712813493534074">"បាន​ប្រើ​​​ចុងក្រោយ"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"ពេល​វាល​ប្រើ"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"ភាព​ងាយស្រួល"</string>
@@ -4766,8 +4772,7 @@
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"រង្វាន់សម្រាប់ព្រឹត្តិការណ៍តែមួយ"</string>
     <string name="tare_rewards_ongoing" msgid="7657030286658143416">"រង្វាន់ក្នុងមួយវិនាទីនៃរយៈពេលព្រឹត្តការណ៍"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"រង្វាន់ជាអតិបរមាក្នុងមួយថ្ងៃ"</string>
-    <!-- no translation found for tare_app_install (7955806910408116882) -->
-    <skip />
+    <string name="tare_app_install" msgid="7955806910408116882">"ការដំឡើងកម្មវិធី"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"សកម្មភាព​​លើ​គេ"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"បានឃើញការ​ជូនដំណឹង"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"បានឃើញការ​ជូនដំណឹងក្នុងរយៈពេល 15 នាទី"</string>
@@ -4829,24 +4834,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"ពាក្យសម្ងាត់មិនត្រឹមត្រូវទេ"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"ដើម្បីចាប់ផ្ដើមស្ដាប់ សូមដាក់កូដ QR ខាងក្រោមឱ្យ​នៅចំកណ្ដាល"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"កូដ QR មិនមែនជា​ទម្រង់​ដែលត្រឹមត្រូវ​ទេ"</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"កម្មវិធីឧបករណ៍ចល័តដែលបានដាក់ជាក្រុម"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"កម្មវិធីឧបករណ៍ចល័តដែលបានដាក់ជាក្រុម"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"ព័ត៌មានតម្លាភាពអំពីកម្មវិធីឧបករណ៍ចល័តដែលបានដាក់ជាក្រុម"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"មាន​ការផ្សាយ​ពាណិជ្ជកម្ម"</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"ព័ត៌មានអំពី​អ្នកអភិវឌ្ឍន៍"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"ព័ត៌មាន​ទំនាក់ទំនង"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"ការពណ៌នា"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"គោលការណ៍ឯកជនភាព"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"ប្រភេទ"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"កម្មវិធីឧបករណ៍ចល័តដែលបានដាក់ជាក្រុម"</string>
 </resources>

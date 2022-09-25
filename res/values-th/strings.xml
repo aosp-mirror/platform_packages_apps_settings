@@ -561,8 +561,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"คุณได้เพิ่มลายนิ้วมือถึงขีดจำกัดสูงสุดแล้ว"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"เพิ่มลายนิ้วมืออีกไม่ได้แล้ว"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"ลบ \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"การดำเนินการนี้จะลบรูปภาพและโมเดลลายนิ้วมือที่เชื่อมโยงกับ \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" ที่จัดเก็บในอุปกรณ์ของคุณ"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"คุณจะไม่สามารถใช้ลายนิ้วมือของคุณปลดล็อกโทรศัพท์หรือยืนยันว่าเป็นคุณในแอป"</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"การดำเนินการนี้จะลบรูปภาพและโมเดลลายนิ้วมือที่เชื่อมโยงกับ \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" ซึ่งจัดเก็บอยู่ในโทรศัพท์ของคุณ"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"การดำเนินการนี้จะลบรูปภาพและโมเดลลายนิ้วมือที่เชื่อมโยงกับ \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" ซึ่งจัดเก็บอยู่ในแท็บเล็ตของคุณ"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"การดำเนินการนี้จะลบรูปภาพและโมเดลลายนิ้วมือที่เชื่อมโยงกับ \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" ที่จัดเก็บในอุปกรณ์ของคุณ"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"คุณจะไม่สามารถใช้ลายนิ้วมือของคุณปลดล็อกโทรศัพท์หรือยืนยันว่าเป็นคุณในแอป"</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"คุณจะไม่สามารถใช้ลายนิ้วมือเพื่อปลดล็อกแท็บเล็ตหรือยืนยันตัวตนในแอปได้"</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"คุณจะไม่สามารถใช้ลายนิ้วมือเพื่อปลดล็อกอุปกรณ์หรือยืนยันตัวตนในแอปได้"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"คุณจะไม่สามารถใช้ลายนิ้วมือเพื่อปลดล็อกโปรไฟล์งาน ให้สิทธิ์การซื้อ หรือลงชื่อเข้าใช้แอปงาน"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"การเข้ารหัส"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"เข้ารหัสแท็บเล็ต"</string>
@@ -1092,6 +1096,7 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"ความละเอียดแบบเต็มจะใช้แบตเตอรี่มากขึ้น การเปลี่ยนความละเอียดอาจทำให้บางแอปรีสตาร์ท"</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"เลือกแล้ว"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"สี"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"ธรรมชาติ"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"บูสต์"</string>
@@ -1304,14 +1309,14 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"ห้ามนำ <xliff:g id="NAME">^1</xliff:g> ออกขณะทำการย้าย \n\nแอป <xliff:g id="APP">^2</xliff:g> บนอุปกรณ์นี้จะไม่สามารถใช้ได้จนกว่าการย้ายจะเสร็จสมบูรณ์"</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"คุณจะใช้ <xliff:g id="NAME">^1</xliff:g> นี้อย่างไร"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"ฟอร์แมตการ์ด SD สำหรับเป็นที่จัดเก็บข้อมูลภายใน"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"จัดเก็บแอปและสื่อเพื่อใช้ในแท็บเล็ตเครื่องนี้เท่านั้น &lt;a href=https://support.google.com/android/answer/12153449&gt;ดูข้อมูลเพิ่มเติมเกี่ยวกับการตั้งค่าการ์ด SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"จัดเก็บแอปและสื่อเพื่อใช้ในแท็บเล็ตเครื่องนี้เท่านั้น &lt;a href=https://support.google.com/android/answer/12153449&gt;ดูข้อมูลเพิ่มเติมเกี่ยวกับการตั้งค่าการ์ด SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"ฟอร์แมต"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"ฟอร์แมตการ์ด SD สำหรับเป็นที่จัดเก็บข้อมูลภายใน"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"จัดเก็บแอปและสื่อเพื่อใช้ในโทรศัพท์เครื่องนี้เท่านั้น &lt;a href=https://support.google.com/android/answer/12153449&gt;ดูข้อมูลเพิ่มเติมเกี่ยวกับการตั้งค่าการ์ด SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"จัดเก็บแอปและสื่อเพื่อใช้ในโทรศัพท์เครื่องนี้เท่านั้น &lt;a href=https://support.google.com/android/answer/12153449&gt;ดูข้อมูลเพิ่มเติมเกี่ยวกับการตั้งค่าการ์ด SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"ฟอร์แมต"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"หรือ"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"ฟอร์แมตการ์ด SD สำหรับเป็นพื้นที่เก็บข้อมูลแบบพกพา"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"จัดเก็บรูปภาพ วิดีโอ เพลง และอื่นๆ อีกทั้งยังเข้าถึงได้จากอุปกรณ์ต่างๆ &lt;a href=https://support.google.com/android/answer/12153449&gt;ดูข้อมูลเพิ่มเติมเกี่ยวกับการตั้งค่าการ์ด SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"จัดเก็บรูปภาพ วิดีโอ เพลง และอื่นๆ อีกทั้งยังเข้าถึงได้จากอุปกรณ์ต่างๆ &lt;a href=https://support.google.com/android/answer/12153449&gt;ดูข้อมูลเพิ่มเติมเกี่ยวกับการตั้งค่าการ์ด SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"ฟอร์แมต"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"ตั้งค่าทีหลัง"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"ฟอร์แมต<xliff:g id="NAME">^1</xliff:g> นี้ไหม"</string>
@@ -4825,24 +4830,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"รหัสผ่านไม่ถูกต้อง"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"ถือให้คิวอาร์โค้ดอยู่กลางช่องด้านล่างเพื่อเริ่มฟัง"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"คิวอาร์โค้ดมีรูปแบบไม่ถูกต้อง"</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"App Bundle บนอุปกรณ์เคลื่อนที่"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"App Bundle บนอุปกรณ์เคลื่อนที่"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"ข้อมูลความโปร่งใสของ App Bundle บนอุปกรณ์เคลื่อนที่"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"มีโฆษณา"</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"ข้อมูลจากนักพัฒนาแอป"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"ข้อมูลติดต่อ"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"คำอธิบาย"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"นโยบายความเป็นส่วนตัว"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"หมวดหมู่"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"App Bundle บนอุปกรณ์เคลื่อนที่"</string>
 </resources>
