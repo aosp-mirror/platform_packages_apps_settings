@@ -65,10 +65,11 @@
         settings:controller="com.android.settings.display.BatteryPercentagePreferenceController" />
 
 
-    <com.axiom.settings.preference.SystemSettingListPreference
+        <com.axiom.settings.preference.SystemSettingSwitchPreference
         android:key="sensor_block"
         android:title="@string/sensor_block_title"
-        android:summary="@string/sensor_block_summary" />
+        android:summary="@string/sensor_block_summary"
+        android:defaultValue="false" />
 
     <com.android.settings.fuelgauge.PowerGaugePreference
         android:key="battery_temperature"
