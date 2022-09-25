@@ -220,7 +220,7 @@
     <bool name="config_use_legacy_suggestion">false</bool>
 
     <!-- Whether or not homepage should display user's account avatar -->
-    <bool name="config_show_avatar_in_homepage">false</bool>
+    <bool name="config_show_avatar_in_homepage">true</bool>
 
     <!-- Whether or not emergency info tile should display in device info page -->
     <bool name="config_show_emergency_info_in_device_info">true</bool>
@@ -229,7 +229,7 @@
     <bool name="config_show_branded_account_in_device_info">true</bool>
 
     <!-- Whether or not device header widget tile should display in device info page -->
-    <bool name="config_show_device_header_in_device_info">true</bool>
+    <bool name="config_show_device_header_in_device_info">false</bool>
 
     <!-- Whether or not TopLevelSettings should force rounded icon for injected tiles -->
     <bool name="config_force_rounded_icon_TopLevelSettings">true</bool>
@@ -289,7 +289,7 @@
     <bool name="config_face_education_use_lottie">false</bool>
 
     <!-- App intent -->
-    <string name="config_account_intent_uri" translatable="false"></string>
+    <string name="config_account_intent_uri" translatable="false">intent:#Intent;action=com.android.settings.action.VIEW_ACCOUNT;category=android.intent.category.DEFAULT;launchFlags=0x8000;S.extra.callingPackageName=com.android.settings;end</string>
 
     <!-- Whether or not the dock settings are to be displayed for this device when docked -->
     <bool name="has_dock_settings">false</bool>

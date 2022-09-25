@@ -22,21 +22,28 @@
     android:background="?android:attr/colorBackground"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/account_avatar"
-        android:layout_width="@dimen/avatar_length"
-        android:layout_height="@dimen/avatar_length"
-        android:layout_marginTop="@dimen/avatar_margin_top"
-        android:layout_marginEnd="@dimen/avatar_margin_end"
-        android:layout_gravity="end"
-        android:visibility="invisible"
-        android:accessibilityTraversalAfter="@id/homepage_title"
-        android:contentDescription="@string/search_bar_account_avatar_content_description"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/homepage_title_margin_top"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/homepage_title"
-        android:text="@string/settings_label"
-        style="@style/HomepageTitleText"/>
+        <TextView
+            android:id="@+id/homepage_title"
+            android:text="@string/settings_label"
+            style="@style/HomepageTitleText"
+            android:layout_width="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/account_avatar"
+            android:layout_width="@dimen/avatar_length"
+            android:layout_height="@dimen/avatar_length"
+            android:layout_marginEnd="@dimen/avatar_margin_end"
+            android:visibility="invisible"
+            android:accessibilityTraversalAfter="@id/homepage_title"
+            android:contentDescription="@string/search_bar_account_avatar_content_description" />
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/suggestion_content"

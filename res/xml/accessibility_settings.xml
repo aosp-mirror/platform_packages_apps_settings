@@ -52,15 +52,6 @@
             android:title="@string/accessibility_color_and_motion_title"
             settings:searchable="true"/>
 
-        <com.android.settingslib.PrimarySwitchPreference
-            android:fragment="com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment"
-            android:key="reduce_bright_colors_preference"
-            android:icon="@drawable/ic_reduce_bright_colors"
-            android:persistent="false"
-            android:title="@string/reduce_bright_colors_preference_title"
-            settings:keywords="@string/keywords_reduce_bright_colors"
-            settings:controller="com.android.settings.accessibility.ReduceBrightColorsPreferenceController"/>
-
         <Preference
             android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"
             android:key="magnification_preference_screen"
