@@ -563,8 +563,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"您加入指紋的數目已達上限"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"無法加入更多指紋"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"刪除「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"此操作會刪除與裝置上儲存的「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」相關聯的指紋圖像和模型"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"您將無法使用指紋解鎖或在應用程式中驗證您的身分。"</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"此操作會刪除與手機上儲存的「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」相關聯的指紋圖像和模型"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"此操作會刪除與平板電腦上儲存的「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」相關聯的指紋圖像和模型"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"此操作會刪除與裝置上儲存的「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」相關聯的指紋圖像和模型"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"您將無法使用指紋解鎖或在應用程式中驗證您的身分。"</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"您將無法使用指紋解鎖平板電腦或在應用程式中驗證您的身分。"</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"您將無法使用指紋解鎖裝置或在應用程式中驗證您的身分。"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"您將無法使用指紋解鎖工作設定檔、授權購物，或登入工作應用程式。"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"加密"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"將平板電腦加密"</string>
@@ -1094,6 +1098,8 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"全解像度耗電量較高。切換解像度後，部分應用程式可能會重新啟動。"</string>
+    <!-- no translation found for screen_resolution_selected_a11y (6158451180032224977) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"顏色"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"自然"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"強化"</string>
@@ -1306,14 +1312,17 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"移動過程中請勿移除<xliff:g id="NAME">^1</xliff:g>。\n\n您將無法使用這部裝置上的<xliff:g id="APP">^2</xliff:g>應用程式，直到移動完成。"</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"您將如何使用此 <xliff:g id="NAME">^1</xliff:g>？"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"將 SD 卡格式化為內部儲存空間"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"儲存只供此平板電腦使用的應用程式和媒體。&lt;a href=https://support.google.com/android/answer/12153449&gt;進一步瞭解如何設定 SD 卡&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_internal_summary (6050264373968853062) -->
+    <skip />
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"格式化"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"將 SD 卡格式化為內部儲存空間"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"儲存只供此手機使用的應用程式和媒體。&lt;a href=https://support.google.com/android/answer/12153449&gt;進一步瞭解如何設定 SD 卡&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_internal_summary (4315288081962526508) -->
+    <skip />
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"格式化"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"或"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"將 SD 卡格式化為外置儲存空間"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"儲存相片、影片、音樂及其他檔案，以便在其他裝置上存取。&lt;a href=https://support.google.com/android/answer/12153449&gt;進一步瞭解如何設定 SD 卡&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_external_summary (2002761631147966185) -->
+    <skip />
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"格式化"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"稍後設定"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"要將此 <xliff:g id="NAME">^1</xliff:g>格式化嗎？"</string>
@@ -1847,9 +1856,9 @@
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"建立小工具後，應用程式便可存取顯示的所有內容。\n\n應用程式：<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\n小工具：<xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"永遠允許「<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>」建立小工具並存取其資料"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"用量統計資料"</string>
-    <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"依使用時間排序"</string>
-    <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"依上次使用時間排序"</string>
-    <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"依應用程式名稱排序"</string>
+    <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"按使用時間排序"</string>
+    <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"按最後使用時間排序"</string>
+    <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"按應用程式名稱排序"</string>
     <string name="last_time_used_label" msgid="2639712813493534074">"上次使用時間"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"使用時間"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"無障礙設定"</string>
@@ -4765,7 +4774,7 @@
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"每個活動的個別獎賞"</string>
     <string name="tare_rewards_ongoing" msgid="7657030286658143416">"活動期間每秒獎賞"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"每日獎賞上限"</string>
-    <string name="tare_app_install" msgid="7955806910408116882">"應用程式安裝"</string>
+    <string name="tare_app_install" msgid="7955806910408116882">"安裝應用程式"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"最上層顯示的活動"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"已查看通知"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"15 分鐘內看過通知"</string>
@@ -4827,24 +4836,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"密碼錯誤"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"如要開始收聽，請將掃瞄器對準下方的 QR 碼"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR 碼格式無效"</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"流動組合應用程式"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"流動組合應用程式"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"流動組合應用程式透明度政策資料"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"包含廣告"</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"開發人員資料"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"聯絡資料"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"說明"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"私隱權政策"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"類別"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"流動組合應用程式"</string>
 </resources>

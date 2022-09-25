@@ -561,8 +561,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Has afegit el nombre màxim d\'empremtes digitals"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"No es poden afegir més empremtes digitals"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Suprimeix \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Aquesta acció suprimeix les imatges i el model d\'empremta digital associats a <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>, que estan emmagatzemats al teu dispositiu"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"No podràs utilitzar l\'empremta digital per desbloquejar el telèfon o verificar la teva identitat en aplicacions."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Aquesta acció suprimeix les imatges i el model d\'empremta digital associats a <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>, que estan emmagatzemats al teu telèfon"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Aquesta acció suprimeix les imatges i el model d\'empremta digital associats a <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>, que estan emmagatzemats a la teva tauleta"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Aquesta acció suprimeix les imatges i el model d\'empremta digital associats a <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>, que estan emmagatzemats al teu dispositiu"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"No podràs utilitzar l\'empremta digital per desbloquejar el telèfon o verificar la teva identitat en aplicacions."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"No podràs utilitzar l\'empremta digital per desbloquejar la tauleta o verificar la teva identitat en aplicacions."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"No podràs utilitzar l\'empremta digital per desbloquejar el dispositiu o verificar la teva identitat en aplicacions."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"No podràs utilitzar l\'empremta digital per desbloquejar el teu perfil de treball, autoritzar compres ni iniciar la sessió en aplicacions de treball."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Encriptació"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Encripta la tauleta"</string>
@@ -1092,6 +1096,7 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"La resolució completa consumeix més bateria. Si canvies la resolució, és possible que algunes aplicacions es reiniciïn."</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Seleccionada"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Colors"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturals"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Millorats"</string>
@@ -1304,18 +1309,18 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"No extreguis <xliff:g id="NAME">^1</xliff:g> durant el desplaçament. \n\nL\'aplicació <xliff:g id="APP">^2</xliff:g> no estarà disponible en aquest dispositiu fins que el desplaçament no hagi finalitzat."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Com utilitzaràs aquest suport (<xliff:g id="NAME">^1</xliff:g>)?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formata la targeta SD com a emmagatzematge intern"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Emmagatzema aplicacions i contingut multimèdia per fer-los servir només en aquesta tauleta. &lt;a href=https://support.google.com/android/answer/12153449&gt;Més informació sobre com pots configurar una targeta SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Emmagatzema aplicacions i contingut multimèdia per fer-los servir només en aquesta tauleta. &lt;a href=https://support.google.com/android/answer/12153449&gt;Més informació sobre com pots configurar una targeta SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formata"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formata la targeta SD com a emmagatzematge intern"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Emmagatzema aplicacions i contingut multimèdia per fer-los servir només en aquest telèfon. &lt;a href=https://support.google.com/android/answer/12153449&gt;Més informació sobre com pots configurar una targeta SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Emmagatzema aplicacions i contingut multimèdia per fer-los servir només en aquest telèfon. &lt;a href=https://support.google.com/android/answer/12153449&gt;Més informació sobre com pots configurar una targeta SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formata"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"O"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formata la targeta SD com a emmagatzematge portàtil"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Emmagatzema fotos, vídeos, música i més, i accedeix-hi des d\'altres dispositius. &lt;a href=https://support.google.com/android/answer/12153449&gt;Més informació sobre com pots configurar una targeta SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Emmagatzema fotos, vídeos, música i més, i accedeix-hi des d\'altres dispositius. &lt;a href=https://support.google.com/android/answer/12153449&gt;Més informació sobre com pots configurar una targeta SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formata"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Configura més tard"</string>
-    <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Vols formatar aquest suport (<xliff:g id="NAME">^1</xliff:g>)?"</string>
-    <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Cal formatar aquest suport extern (<xliff:g id="NAME_0">^1</xliff:g>) per poder-hi emmagatzemar aplicacions, fitxers i contingut multimèdia. \n\nEn formatar-lo (<xliff:g id="NAME_1">^2</xliff:g>), se n\'esborrarà el contingut actual. Per tal d\'evitar que es perdi contingut, fes-ne còpies de seguretat en un altre dispositiu o <xliff:g id="NAME_2">^3</xliff:g>."</string>
+    <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Vols formatar aquesta <xliff:g id="NAME">^1</xliff:g>?"</string>
+    <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Cal formatar la teva <xliff:g id="NAME_0">^1</xliff:g> per poder-hi emmagatzemar aplicacions, fitxers i contingut multimèdia. \n\nEn fer-ho, s\'esborrarà el contingut actual de <xliff:g id="NAME_1">^2</xliff:g>. Per tal d\'evitar que es perdi contingut, fes-ne còpies de seguretat en un altre dispositiu o <xliff:g id="NAME_2">^3</xliff:g>."</string>
     <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Cal formatar aquesta <xliff:g id="NAME_0">^1</xliff:g> per emmagatzemar-hi fotos, vídeos, música i més. \n\nEn formatar-la, s\'esborrarà el contingut existent a <xliff:g id="NAME_1">^2</xliff:g>. Per tal d\'evitar que es perdi contingut, fes-ne una còpia de seguretat en una altra <xliff:g id="NAME_2">^3</xliff:g> o en un altre dispositiu."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formata (<xliff:g id="NAME">^1</xliff:g>)"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Vols transferir el contingut (<xliff:g id="NAME">^1</xliff:g>)?"</string>
@@ -1425,7 +1430,7 @@
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Punt d\'accés Wi-Fi activat, compartició de xarxa"</string>
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"Punt d\'accés Wi-Fi activat"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"Compartició de xarxa"</string>
-    <string name="tether_settings_disabled_on_data_saver" msgid="9054069463426952689">"No es pot compartir la xarxa ni utilitzar punts d\'accés Wi-Fi mentre la funció Economitzador de dades està activada"</string>
+    <string name="tether_settings_disabled_on_data_saver" msgid="9054069463426952689">"No es pot compartir la xarxa ni utilitzar punts d\'accés Wi-Fi mentre la funció Estalvi de dades està activada"</string>
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Només punt d\'accés Wi‑Fi"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"Només USB"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Només Bluetooth"</string>
@@ -1845,12 +1850,9 @@
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Després de crear el widget, l\'aplicació pot accedir a tot el que es mostra.\n\nAplicació: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nWidget: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Permet sempre que <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> creï widgets i que accedeixi a les seves dades"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Estadístiques d\'ús"</string>
-    <!-- no translation found for usage_stats_sort_by_usage_time (2927310334119998301) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_last_time_used (7039213339779884017) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_app_name (4463833145514850478) -->
-    <skip />
+    <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Ordena pel temps d\'ús"</string>
+    <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Ordena pel darrer ús"</string>
+    <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Ordena per nom de l\'aplicació"</string>
     <string name="last_time_used_label" msgid="2639712813493534074">"Darrer ús"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Temps d\'ús"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Accessibilitat"</string>
@@ -3894,7 +3896,7 @@
     <string name="condition_battery_summary" msgid="8436806157833107886">"Hi ha funcions restringides"</string>
     <string name="condition_cellular_title" msgid="155474690792125747">"Dades mòbils desactivades"</string>
     <string name="condition_cellular_summary" msgid="1678098728303268851">"Només es pot accedir a Internet per Wi‑Fi"</string>
-    <string name="condition_bg_data_title" msgid="2719263664589753094">"Economitzador de dades"</string>
+    <string name="condition_bg_data_title" msgid="2719263664589753094">"Estalvi de dades"</string>
     <string name="condition_bg_data_summary" msgid="1736255283216193834">"Hi ha funcions restringides"</string>
     <string name="condition_work_title" msgid="174326145616998813">"Perfil de treball desactivat"</string>
     <string name="condition_work_summary" msgid="7113473121312772398">"Per a les aplicacions i les notificacions"</string>
@@ -3944,8 +3946,8 @@
     <string name="configure" msgid="1499586749829665889">"Configura"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Altres aplicacions que utilitzen dades"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="3316296488378947221">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> aplicacions poden utilitzar dades sense restricció quan l\'Economitzador de dades està activat</item>
-      <item quantity="one">1 aplicació pot utilitzar dades sense restricció quan l\'Economitzador de dades està activat</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> aplicacions poden utilitzar dades sense restricció quan l\'Estalvi de dades està activat</item>
+      <item quantity="one">1 aplicació pot utilitzar dades sense restricció quan l\'Estalvi de dades està activat</item>
     </plurals>
     <string name="data_usage_title" msgid="4039024073687469094">"Dades principals"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Dades Wi‑Fi"</string>
@@ -3966,12 +3968,12 @@
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Actualitzat ara mateix"</string>
     <string name="launch_mdp_app_text" msgid="8791816789749304897">"Mostra el pla"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Mostra els detalls"</string>
-    <string name="data_saver_title" msgid="2593804270788863815">"Economitzador de dades"</string>
+    <string name="data_saver_title" msgid="2593804270788863815">"Estalvi de dades"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Dades sense restricció"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Les dades en segon pla estan desactivades"</string>
-    <string name="data_saver_switch_title" msgid="7111538580123722959">"Utilitza l\'Economitzador de dades"</string>
+    <string name="data_saver_switch_title" msgid="7111538580123722959">"Utilitza l\'Estalvi de dades"</string>
     <string name="unrestricted_app_title" msgid="7117585996574329284">"Ús de dades sense restricció"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"Permet dades sense restricció amb Economitzador de dades activat"</string>
+    <string name="unrestricted_app_summary" msgid="282698963532000403">"Permet dades sense restricció amb Estalvi de dades activat"</string>
     <string name="home_app" msgid="6056850504746902747">"Aplicació d\'inici"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Afegeix una altra empremta"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Desbloqueja amb un altre dit"</string>
@@ -4766,8 +4768,7 @@
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Recompenses per cada esdeveniment"</string>
     <string name="tare_rewards_ongoing" msgid="7657030286658143416">"Recompenses per segon de l\'esdeveniment"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Nombre màxim de recompenses al dia"</string>
-    <!-- no translation found for tare_app_install (7955806910408116882) -->
-    <skip />
+    <string name="tare_app_install" msgid="7955806910408116882">"Instal·la l\'aplicació"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Activitat principal"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Notificació vista"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Notificació vista en 15 minuts"</string>
@@ -4829,24 +4830,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Contrasenya incorrecta"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Per començar a escoltar, centra el codi QR de més avall"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"El codi QR no té un format vàlid"</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"Paquet d\'aplicacions mòbils"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"Paquet d\'aplicacions mòbils"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"Informació de transparència sobre el paquet d\'aplicacions mòbils"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"Conté anuncis"</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"Informació sobre els desenvolupadors"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"Informació de contacte"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"Descripció"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"Política de privadesa"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"Categoria"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"Paquet d\'aplicació mòbil"</string>
 </resources>

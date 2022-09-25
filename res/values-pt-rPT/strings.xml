@@ -561,8 +561,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Adicionou o número máximo de impressões digitais"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Não é possível adicionar mais impressões digitais"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Elimine \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Esta ação elimina as imagens da impressão digital e o modelo associado ao \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que estão armazenados no dispositivo"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Não poderá utilizar a sua impressão digital para desbloquear o telemóvel ou validar a sua identidade nas apps."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Esta ação elimina as imagens da impressão digital e o modelo associado ao \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que estão armazenados no telemóvel"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Esta ação elimina as imagens da impressão digital e o modelo associado ao \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que estão armazenados no tablet"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Esta ação elimina as imagens da impressão digital e o modelo associado ao \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que estão armazenados no dispositivo"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Não poderá utilizar a sua impressão digital para desbloquear o telemóvel ou validar a sua identidade nas apps."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Não vai poder usar a sua impressão digital para desbloquear o tablet ou validar a sua identidade nas apps."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Não vai poder usar a sua impressão digital para desbloquear o dispositivo ou validar a sua identidade nas apps."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Não poderá utilizar a sua impressão digital para desbloquear o perfil de trabalho, autorizar compras ou iniciar sessão nas apps de trabalho."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Encriptação"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Encriptar tablet"</string>
@@ -1092,6 +1096,7 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"A resolução total consome mais bateria. Se mudar a resolução, algumas apps podem ser reiniciadas."</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Selecionada"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Cores"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturais"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Amplificadas"</string>
@@ -1304,14 +1309,14 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Não remova o <xliff:g id="NAME">^1</xliff:g> durante a transferência. \n\nA aplicação <xliff:g id="APP">^2</xliff:g> neste dispositivo não está disponível até terminar a transferência."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Como vai utilizar este <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formatar cartão SD para armazenamento interno"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Armazene apps e conteúdos multimédia para usar apenas neste tablet. &lt;a href=https://support.google.com/android/answer/12153449&gt;Saiba mais sobre como configurar um cartão SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Armazene apps e conteúdos multimédia para usar apenas neste tablet. &lt;a href=https://support.google.com/android/answer/12153449&gt;Saiba mais sobre como configurar um cartão SD&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formato"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formatar cartão SD para armazenamento interno"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Armazene apps e conteúdos multimédia para usar apenas neste telemóvel. &lt;a href=https://support.google.com/android/answer/12153449&gt;Saiba mais sobre como configurar um cartão SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Armazene apps e conteúdos multimédia para usar apenas neste telemóvel. &lt;a href=https://support.google.com/android/answer/12153449&gt;Saiba mais sobre como configurar um cartão SD&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formato"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Ou"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formatar cartão SD para armaz. portátil"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Armazene fotos, vídeos, música e muito mais e aceda a esses conteúdos a partir de outros dispositivos. &lt;a href=https://support.google.com/android/answer/12153449&gt;Saiba mais sobre como configurar um cartão SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Armazene fotos, vídeos, música, etc. e aceda a esses conteúdos a partir de outros dispositivos. &lt;a href=https://support.google.com/android/answer/12153449&gt;Saiba mais sobre como configurar um cartão SD&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formatar"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Config. depois"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Quer formatar este <xliff:g id="NAME">^1</xliff:g>?"</string>
@@ -4825,24 +4830,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Palavra-passe incorreta"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Para começar a ouvir, centre o código QR abaixo"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"O código QR não é um formato válido"</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"Apps para dispositivos móveis agrupadas"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"Apps para dispositivos móveis agrupadas"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"Informações de transparência de apps para dispositivos móveis agrupadas"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"Contém anúncios"</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"Informações dos programadores"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"Informações de contacto"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"Descrição"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"Política de privacidade"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"Categoria"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"App para dispositivos móveis agrupada"</string>
 </resources>

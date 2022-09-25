@@ -561,8 +561,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Таны зөвшөөрөгдсөн хурууны хээний тоо гүйцсэн байна"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Өөр хурууны хээ нэмэх боломжгүй байна"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"\'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'-г устгах"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Энэ нь таны төхөөрөмж дээр хадгалсан \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'-тай холбоотой хурууны хээний зургууд болон загварыг устгана"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Та хурууны хээгээ утасныхаа түгжээг тайлах эсвэл аппуудад өөрийгөө мөн болохыг баталгаажуулахын тулд ашиглах боломжгүй болно."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Энэ нь таны утсан дээр хадгалсан \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'-тай холбоотой хурууны хээний зургууд болон загварыг устгана"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Энэ нь таны таблет дээр хадгалсан \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'-тай холбоотой хурууны хээний зургууд болон загварыг устгана"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Энэ нь таны төхөөрөмж дээр хадгалсан \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'-тай холбоотой хурууны хээний зургууд болон загварыг устгана"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Та хурууны хээгээ утасныхаа түгжээг тайлах эсвэл аппуудад өөрийгөө мөн болохыг баталгаажуулахын тулд ашиглах боломжгүй болно."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Та хурууны хээгээ таблетынхаа түгжээг тайлах эсвэл аппуудад өөрийгөө мөн болохыг баталгаажуулахын тулд ашиглах боломжгүй болно."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Та хурууны хээгээ төхөөрөмжийнхөө түгжээг тайлах эсвэл аппуудад өөрийгөө мөн болохыг баталгаажуулахын тулд ашиглах боломжгүй болно."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Та хурууны хээгээ ажлын профайлынхаа түгжээг тайлах, худалдан авалтуудыг зөвшөөрөх эсвэл ажлын аппуудад нэвтрэхийн тулд ашиглах боломжгүй болно."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Шифрлэлт"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Таблетыг шифрлэх"</string>
@@ -1092,6 +1096,7 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"Бүтэн нягтрал таны батарейг илүү их ашиглана. Нягтралаа сэлгэх нь зарим аппыг дахин эхлэхэд хүргэж магадгүй."</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Сонгосон"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Өнгө"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Байгалийн"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Өдөөсөн"</string>
@@ -1304,14 +1309,17 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Зөөвөрлөх явцад <xliff:g id="NAME">^1</xliff:g>-ыг хөдөлгөхгүй байна уу. \n\n Энэ төхөөрөмж дээрх <xliff:g id="APP">^2</xliff:g> апп нь зөөвөрлөж дуусах хүртэл ажиллахгүй."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Та энэ <xliff:g id="NAME">^1</xliff:g>-г хэрхэн ашиглах вэ?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"SD картыг дотоод сан болгож форматална уу"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Зөвхөн энэ таблет дээр ашиглах аппууд &amp; медиаг хадгална уу. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD карт тохируулах талаар нэмэлт мэдээлэл авах&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_internal_summary (6050264373968853062) -->
+    <skip />
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Форматлах"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"SD картыг дотоод сан болгож форматална уу"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Зөвхөн энэ утсан дээр ашиглах аппууд &amp; медиаг хадгална уу &lt;a href=https://support.google.com/android/answer/12153449&gt;SD карт тохируулах талаар нэмэлт мэдээлэл авах&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_internal_summary (4315288081962526508) -->
+    <skip />
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Форматлах"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Эсвэл"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Зөөврийн хадгалах сан авах бол SD картыг форматлах"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Зураг, видео, хөгжим болон бусад зүйлийг хадгалж, тэдгээрт бусад төхөөрөмжөөс хандана уу &lt;a href=https://support.google.com/android/answer/12153449&gt;SD карт тохируулах талаар нэмэлт мэдээлэл авах&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_external_summary (2002761631147966185) -->
+    <skip />
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Форматлах"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Дараа тохируулах"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Энэ <xliff:g id="NAME">^1</xliff:g>-г форматлах уу?"</string>
@@ -4825,24 +4833,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Нууц үг буруу байна"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Сонсож эхлэхийн тулд доорх QR кодыг голлуулаарай"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR код буруу форматтай байна"</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"Мобайлын багцалсан аппууд"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"Мобайлын багцалсан аппууд"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"Мобайлын багцалсан аппуудын ил тод байдлын мэдээлэл"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"Зар агуулсан"</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"Хөгжүүлэгчийн мэдээлэл"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"Холбоо барих мэдээлэл"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"Тайлбар"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"Нууцлалын бодлого"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"Ангилал"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"Мобайлын багцалсан апп"</string>
 </resources>

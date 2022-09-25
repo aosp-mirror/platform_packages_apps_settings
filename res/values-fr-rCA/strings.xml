@@ -561,8 +561,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Vous avez ajouté le nombre maximal d\'empreintes digitales"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Impossible d\'ajouter des empreintes digitales"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Supprimer « <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> »"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Les images et le modèle d\'empreinte digitale associés à « <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> » et stockés sur votre appareil seront supprimés"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Vous ne pourrez pas utiliser votre empreinte digitale pour déverrouiller votre téléphone ni vérifier qu\'il s\'agit bien de vous dans les applications."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Les images et le modèle d\'empreinte digitale associés à « <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> » et stockés sur votre téléphone seront supprimés"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Les images et le modèle d\'empreinte digitale associés à « <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> » et stockés sur votre tablette seront supprimés"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Les images et le modèle d\'empreinte digitale associés à « <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> » et stockés sur votre appareil seront supprimés"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Vous ne pourrez pas utiliser votre empreinte digitale pour déverrouiller votre téléphone ni vérifier qu\'il s\'agit bien de vous dans les applications."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Vous ne pourrez pas utiliser votre empreinte digitale pour déverrouiller votre tablette ni pour vérifier qu\'il s\'agit bien de vous dans les applications."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Vous ne pourrez pas utiliser votre empreinte digitale pour déverrouiller votre appareil ni pour vérifier qu\'il s\'agit bien de vous dans les applications."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Vous ne pourrez pas utiliser votre empreinte digitale pour déverrouiller votre profil professionnel, autoriser vos achats ni vous connecter à des applications professionnelles."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Chiffrement"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Chiffrer la tablette"</string>
@@ -1092,6 +1096,7 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p HD+ intégrale"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"La résolution intégrale sollicite davantage votre pile. Le changement de résolution peut entraîner le redémarrage de certaines applications."</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Sélectionnée"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Couleurs"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturelles"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Intenses"</string>
@@ -1304,14 +1309,14 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Ne retirez pas la mémoire de stockage « <xliff:g id="NAME">^1</xliff:g> » pendant le déplacement. \n\nL\'application « <xliff:g id="APP">^2</xliff:g> » ne sera pas disponible tant que l\'opération n\'est pas terminée."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Comment utiliserez-vous ce périphérique <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formater la carte SD en tant que mémoire interne"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Stockez vos applications et vos contenus multimédias pour les utiliser uniquement sur cette tablette. &lt;a href=https://support.google.com/android/answer/12153449&gt;En savoir plus sur la configuration d\'une carte SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Stockez vos applications et vos contenus multimédias pour les utiliser uniquement sur cette tablette. &lt;a href=https://support.google.com/android/answer/12153449&gt;En savoir plus sur la configuration d\'une carte SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formater"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formater la carte SD en tant que mémoire interne"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Stockez vos applications et vos contenus multimédias pour les utiliser uniquement sur ce téléphone. &lt;a href=https://support.google.com/android/answer/12153449&gt;En savoir plus sur la configuration d\'une carte SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Stockez vos applications et vos contenus multimédias pour les utiliser uniquement sur ce téléphone. &lt;a href=https://support.google.com/android/answer/12153449&gt;En savoir plus sur la configuration d\'une carte SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formater"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"ou"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formater la carte SD en tant que mémoire externe"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Stockez vos photos, vos vidéos, votre musique et plus encore, et accédez-y à partir d\'autres appareils. &lt;a href=https://support.google.com/android/answer/12153449&gt;En savoir plus sur la configuration d\'une carte SD&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Stockez vos photos, vos vidéos, votre musique et plus encore, et accédez-y à partir d\'autres appareils. &lt;a href=https://support.google.com/android/answer/12153449&gt;En savoir plus sur la configuration d\'une carte SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formater"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Configurer plus tard"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Formater cette <xliff:g id="NAME">^1</xliff:g>?"</string>
@@ -1845,12 +1850,9 @@
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Une fois le widget créé, l\'application peut accéder à tout ce qui est affiché.\n\nApplication : <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nWidget : <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Toujours autoriser <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> à créer des widgets et accéder à leurs données"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Données statistiques"</string>
-    <!-- no translation found for usage_stats_sort_by_usage_time (2927310334119998301) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_last_time_used (7039213339779884017) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_app_name (4463833145514850478) -->
-    <skip />
+    <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Trier par temps d\'utilisation"</string>
+    <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Trier par dernière utilisation"</string>
+    <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Trier par nom d\'application"</string>
     <string name="last_time_used_label" msgid="2639712813493534074">"Dernière utilisation :"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Temps d\'utilisation"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Accessibilité"</string>
@@ -4766,8 +4768,7 @@
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Récompenses par événement individuel"</string>
     <string name="tare_rewards_ongoing" msgid="7657030286658143416">"Récomp. par seconde de durée de l\'évén."</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Maximum de récompenses par jour"</string>
-    <!-- no translation found for tare_app_install (7955806910408116882) -->
-    <skip />
+    <string name="tare_app_install" msgid="7955806910408116882">"Installation d\'applications"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Activité principale"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Notification vue"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Notification vue dans les 15 minutes"</string>
@@ -4829,24 +4830,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Mot de passe incorrect"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Pour commencer à écouter, centrez le code QR ci-dessous"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Le format du code QR est incorrect"</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"Applications mobiles groupées"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"Applications mobiles groupées"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"Informations sur la transparence des applications mobiles groupées"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"Contient des annonces"</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"Informations sur le(s) développeur(s)"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"Coordonnées"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"Description"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"Politique de confidentialité"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"Catégorie"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"Application mobile groupée"</string>
 </resources>

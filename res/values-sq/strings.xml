@@ -561,8 +561,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Ke shtuar numrin maksimal të gjurmëve të gishtave"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Nuk mund të shtohen gjurmë të tjera të gishtave"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Fshi \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Kjo fshin imazhet e gjurmës së gishtit dhe modelin e lidhur me \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" që ruhen në pajisjen tënde"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Nuk do të jesh në gjendje të përdorësh gjurmën e gishtit për të shkyçur telefonin tënd ose për të verifikuar që je ti në aplikacione."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Kjo fshin imazhet e gjurmës së gishtit dhe modelin e lidhur me \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" që ruhen në telefonin tënd"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Kjo fshin imazhet e gjurmës së gishtit dhe modelin e lidhur me \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" që ruhen në tabletin tënd"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Kjo fshin imazhet e gjurmës së gishtit dhe modelin e lidhur me \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" që ruhen në pajisjen tënde"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Nuk do të jesh në gjendje të përdorësh gjurmën e gishtit për të shkyçur telefonin tënd ose për të verifikuar që je ti në aplikacione."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Nuk do të jesh në gjendje të përdorësh gjurmën e gishtit për të shkyçur tabletin tënd ose për të verifikuar që je ti në aplikacione."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Nuk do të jesh në gjendje të përdorësh gjurmën e gishtit për të shkyçur pajisjen tënde ose për të verifikuar që je ti në aplikacione."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Nuk do të jesh në gjendje të përdorësh gjurmën e gishtit për të shkyçur profilin tënd të punës, për të autorizuar blerje ose për t\'u identifikuar në aplikacionet e punës."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Enkriptimi"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Enkripto tabletin"</string>
@@ -1092,6 +1096,7 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"Rezolucioni i plotë përdor më shumë bateri. Ndryshimi i rezolucionit mund të shkaktojë rinisjen e disa aplikacioneve."</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Zgjedhur"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Ngjyrat"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Natyrale"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Të theksuara"</string>
@@ -1304,14 +1309,17 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Mos e hiq kartën <xliff:g id="NAME">^1</xliff:g> gjatë zhvendosjes. \n\nAplikacioni <xliff:g id="APP">^2</xliff:g> në këtë pajisje nuk do të mund të përdoret derisa të përfundojë zhvendosja."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Si do ta përdorësh këtë <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formato kartën SD si hapësirë ruajtëse të brendshme"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Ruaj aplikacionet dhe mediat për t\'i përdorur vetëm në këtë tablet. &lt;a href=https://support.google.com/android/answer/12153449&gt;Mëso më shumë për konfigurimin e një karte SD&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_internal_summary (6050264373968853062) -->
+    <skip />
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formato"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formato kartën SD si hapësirë ruajtëse të brendshme"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Ruaj aplikacionet dhe mediat për t\'i përdorur vetëm në këtë telefon. &lt;a href=https://support.google.com/android/answer/12153449&gt;Mëso më shumë për konfigurimin e një karte SD&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_internal_summary (4315288081962526508) -->
+    <skip />
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formato"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Ose"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formato kartën SD si hapësirë ruajtëse të lëvizshme"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Ruaj fotografitë, videot, muzikën etj. dhe qasu tek ato nga pajisje të tjera. &lt;a href=https://support.google.com/android/answer/12153449&gt;Mëso më shumë për konfigurimin e një karte SD&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_external_summary (2002761631147966185) -->
+    <skip />
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formato"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Konfiguro më vonë"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Të formatohet <xliff:g id="NAME">^1</xliff:g>?"</string>
@@ -1845,12 +1853,9 @@
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Pasi të krijosh miniaplikacionin, aplikacioni mund të ketë qasje në gjithçka që shfaqet.\n\nAplikacioni: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nMiniaplikacioni: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Lejo gjithmonë që <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> të krijojë miniaplikacione dhe të ketë qasje te të dhënat e tyre"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Statistikat e përdorimit"</string>
-    <!-- no translation found for usage_stats_sort_by_usage_time (2927310334119998301) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_last_time_used (7039213339779884017) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_app_name (4463833145514850478) -->
-    <skip />
+    <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Rendit sipas kohës së përdorimit"</string>
+    <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Rendit sipas herës së fundit të përdorimit"</string>
+    <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Rendit sipas emrit të aplikacionit"</string>
     <string name="last_time_used_label" msgid="2639712813493534074">"Përdorur për herë të fundit"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Koha e përdorimit"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Qasshmëria"</string>
@@ -4766,8 +4771,7 @@
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Shpërblimet për çdo ngjarje"</string>
     <string name="tare_rewards_ongoing" msgid="7657030286658143416">"Shpërblimet e kohëzgjatjes së ngjarjes"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Numri maksimal i shpërblimeve në ditë"</string>
-    <!-- no translation found for tare_app_install (7955806910408116882) -->
-    <skip />
+    <string name="tare_app_install" msgid="7955806910408116882">"Instalimi i aplikacionit"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Aktivitet kryesor"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Njoftim i parë"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Njoftim i parë brenda 15 minutave"</string>
@@ -4829,24 +4833,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Fjalëkalim i gabuar"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Që të fillosh të dëgjosh, vendos në qendër kodin QR më poshtë"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Kodi QR nuk është në format të vlefshëm"</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"Aplikacionet e vendosura në paketë për celularin"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"Aplikacionet e vendosura në paketë për celularin"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"Informacione për transparencën e aplikacioneve të vendosura në paketë për celularin"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"Përmban reklama"</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"Informacionet e zhvilluesve"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"Informacionet i kontaktit"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"Përshkrimi"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"Politika e privatësisë"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"Kategoria"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"Aplikacionet e vendosura në paketë për celularin"</string>
 </resources>

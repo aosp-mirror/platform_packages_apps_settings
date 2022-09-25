@@ -561,8 +561,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Դուք ավելացրել եք մատնահետքերի առավելագույն թույլատրելի քանակը"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Հնարավոր չէ ավելացնել այլ մատնահետքեր"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"«<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>»-ի ջնջում"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"«<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>» մատնահետքի պատկերներն ու նմուշը, որոնք պահված են ձեր սարքում, կջնջվեն"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Դուք չեք կարողանա օգտագործել ձեր մատնահետքը՝ հեռախոսն ապակողպելու կամ հավելվածներում ձեր ինքնությունը հաստատելու համար։"</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"«<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>» մատնահետքի հետ կապված պատկերներն ու նմուշը, որոնք պահված են ձեր հեռախոսում, կջնջվեն"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"«<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>» մատնահետքի հետ կապված պատկերներն ու նմուշը, որոնք պահված են ձեր հեռախոսում, կջնջվեն"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"«<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>» մատնահետքի պատկերներն ու նմուշը, որոնք պահված են ձեր սարքում, կջնջվեն"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Դուք չեք կարողանա օգտագործել ձեր մատնահետքը՝ հեռախոսն ապակողպելու կամ հավելվածներում ձեր ինքնությունը հաստատելու համար։"</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Դուք չեք կարողանա օգտագործել ձեր մատնահետքը՝ պլանշետն ապակողպելու կամ հավելվածներում ձեր ինքնությունը հաստատելու համար։"</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Դուք չեք կարողանա օգտագործել ձեր մատնահետքը՝ պլանշետն ապակողպելու կամ հավելվածներում ձեր ինքնությունը հաստատելու համար։"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Դուք չեք կարողանա օգտագործել ձեր մատնահետքը՝ աշխատանքային պրոֆիլն ապակողպելու, գնումները հաստատելու կամ աշխատանքային հավելվածներ մուտք գործելու համար։"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Գաղտնագրում"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Գաղտնագրել պլանշետը"</string>
@@ -1092,6 +1096,8 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"Լրիվ լուծաչափը մարտկոցի լիցքն ավելի շատ է սպառում։ Այս լուծաչափին անցնելու դեպքում որոշ հավելվածներ կարող են վերագործարկվել։"</string>
+    <!-- no translation found for screen_resolution_selected_a11y (6158451180032224977) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"Գույներ"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Բնական"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Պայծառ"</string>
@@ -1304,14 +1310,17 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Տեղափոխման ընթացքում չհեռացնեք <xliff:g id="NAME">^1</xliff:g>-ը: \n\n<xliff:g id="APP">^2</xliff:g> հավելվածը հասանելի չի լինի մինչև տեղափոխումը չավարտվի:"</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Ինչպե՞ս եք օգտագործելու <xliff:g id="NAME">^1</xliff:g> հիշասարքը"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Ֆորմատավորել SD քարտը որպես ներքին հիշողություն"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Պահել հավելվածներ և մեդիաֆայլեր՝ միայն այս պլանշետում օգտագործելու համար։ &lt;a href=https://support.google.com/android/answer/12153449&gt;Իմանալ ավելին SD քարտերի կարգավորման մասին&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_internal_summary (6050264373968853062) -->
+    <skip />
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Ֆորմատավորել"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Ֆորմատավորել SD քարտը որպես ներքին հիշողություն"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Պահել հավելվածներ և մեդիաֆայլեր՝ միայն այս հեռախոսում օգտագործելու համար։ &lt;a href=https://support.google.com/android/answer/12153449&gt;Իմանալ ավելին SD քարտերի կարգավորման մասին&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_internal_summary (4315288081962526508) -->
+    <skip />
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Ֆորմատավորել"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Կամ"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Ֆորմատավորել SD քարտը որպես շարժական կրիչ"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Պահեք լուսանկարներ, տեսանյութեր, երգեր և այլ բովանդակություն՝ այլ սարքերում օգտագործելու համար։ &lt;a href=https://support.google.com/android/answer/12153449&gt;Իմանալ ավելին SD քարտերի կարգավորման մասին&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_external_summary (2002761631147966185) -->
+    <skip />
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Ֆորմատավորել"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Կարգավորել ավելի ուշ"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Ֆորմատավորե՞լ այս <xliff:g id="NAME">^1</xliff:g>ը"</string>
@@ -1845,12 +1854,9 @@
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Երբ դուք ստեղծեք վիջեթը, հավելվածին հասանելի կլինի ցուցադրվող ամբողջ բովանդակությունը։\n\nՀավելված՝ <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nՎիջեթ՝ <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Միշտ թույլատրել <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>-ին ստեղծել վիջեթներ և մուտք գործել իրենց տվյալներ"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Օգտագործման վիճակագրություն"</string>
-    <!-- no translation found for usage_stats_sort_by_usage_time (2927310334119998301) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_last_time_used (7039213339779884017) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_app_name (4463833145514850478) -->
-    <skip />
+    <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Դասավորել ըստ օգտագործ. ժաման."</string>
+    <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Դասավորել ըստ վերջ. օգտագործ."</string>
+    <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Դասավորել ըստ հավելվ. անվանման"</string>
     <string name="last_time_used_label" msgid="2639712813493534074">"Վերջին օգտագործումը"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Օգտագործման ժամանակը"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Հատուկ գործառույթներ"</string>
@@ -4766,8 +4772,7 @@
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Պարգևներ մեկ իրադարձության համար"</string>
     <string name="tare_rewards_ongoing" msgid="7657030286658143416">"Պարգևները՝ միջոցառման մեկ վայրկյանում"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Պարգևների առավելագույն քանակը մեկ օրում"</string>
-    <!-- no translation found for tare_app_install (7955806910408116882) -->
-    <skip />
+    <string name="tare_app_install" msgid="7955806910408116882">"Տեղադրել հավելվածը"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Առավել հաճախակի կատարվող գործողությունը"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Ծանուցումը դիտվել է"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Ծանուցումը դիտվել է վերջին 15 ր․ ընթացքում"</string>
@@ -4829,24 +4834,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Գաղտնաբառը սխալ է"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Լսելու համար տեսախցիկը պահեք QR կոդի վրա"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR կոդի ձևաչափն անվավեր է"</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"Փաթեթում ներառված բջջային հավելվածներ"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"Փաթեթում ներառված բջջային հավելվածներ"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"Տեղեկություններ փաթեթում ներառված բջջային հավելվածների թափանցիկության մասին"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"Պարունակում է գովազդ"</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"Տեղեկություններ մշակող(ներ)ի մասին"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"Կոնտակտային տվյալներ"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"Նկարագրություն"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"Գաղտնիության քաղաքականություն"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"Կատեգորիա"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"Փաթեթում ներառված բջջային հավելված"</string>
 </resources>

@@ -573,8 +573,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"הוספת את המספר המרבי של טביעות אצבע."</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"לא ניתן להוסיף עוד טביעות אצבע"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"מחיקה של \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"פעולה זו מוחקת את התבנית והתמונות של טביעת האצבע המשויכות אל <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>, שמאוחסנות במכשיר שלך"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"לא תהיה לך אפשרות להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטלפון או לאמת את הזהות שלך באפליקציות."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"הפעולה הזו מוחקת את התבנית והתמונות של טביעת האצבע המשויכות אל <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>, שמאוחסנות בטלפון שלך"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"הפעולה הזו מוחקת את התבנית והתמונות של טביעת האצבע המשויכות אל <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>, שמאוחסנות בטאבלט שלך"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"פעולה זו מוחקת את התבנית והתמונות של טביעת האצבע המשויכות אל <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>, שמאוחסנות במכשיר שלך"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"לא תהיה לך אפשרות להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטלפון או לאמת את הזהות שלך באפליקציות."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"לא תהיה לך אפשרות להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטאבלט או לאמת את זהותך באפליקציות."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"לא תהיה לך אפשרות להשתמש בטביעת האצבע כדי לבטל את הנעילה של המכשיר או לאמת את זהותך באפליקציות."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"לא תהיה לך אפשרות להשתמש בטביעת האצבע כדי לבטל את נעילת פרופיל העבודה שלך, לאשר רכישות או להיכנס לאפליקציות לעבודה."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"הצפנה"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"הצפנת הטאבלט"</string>
@@ -1136,6 +1140,7 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"+1080p FHD"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"+1440p QHD"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"רזולוציה מלאה מובילה לשימוש גבוה בסוללה. שינוי הרזולוציה עלול לגרום להפעלה מחדש של חלק מהאפליקציות."</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"נבחרה"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"צבעים"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"גוון טבעי"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"גוון מוגבר"</string>
@@ -1350,14 +1355,14 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"אין להסיר את ה-<xliff:g id="NAME">^1</xliff:g> במהלך ההעברה. \n\nהאפליקציה <xliff:g id="APP">^2</xliff:g> לא תהיה זמינה במכשיר לפני השלמת ההעברה."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"למה ישמש <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"‏פירמוט של כרטיס SD לאחסון פנימי"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"‏ניתן לאחסן את האפליקציות והמדיה לשימוש בטאבלט הזה בלבד. &gt;a href=https://support.google.com/android/answer/12153449&lt;מידע נוסף על ההגדרה של כרטיס SD‏&gt;/a&lt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"‏ניתן לאחסן את האפליקציות והמדיה לשימוש בטאבלט הזה בלבד. &lt;a href=https://support.google.com/android/answer/12153449&gt;מידע נוסף על ההגדרה של כרטיס SD‏&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"פירמוט"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"‏פירמוט של כרטיס SD לאחסון פנימי"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"‏ניתן לאחסן את האפליקציות והמדיה לשימוש בטלפון הזה בלבד. &gt;a href=https://support.google.com/android/answer/12153449&lt;מידע נוסף על ההגדרה של כרטיס SD‏&gt;/a&lt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"‏ניתן לאחסן את האפליקציות והמדיה לשימוש בטלפון הזה בלבד. &lt;a href=https://support.google.com/android/answer/12153449&gt;מידע נוסף על ההגדרה של כרטיס SD‏&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"פירמוט"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"או"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"‏פירמוט של כרטיס SD לאחסון נייד"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"‏אפשר לאחסן תמונות, סרטונים, מוזיקה ועוד ולגשת אליהם ממכשירים אחרים. &gt;a href=https://support.google.com/android/answer/12153449&lt;מידע נוסף על ההגדרה של כרטיס SD‏&gt;/a&lt;"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"‏אפשר לאחסן תמונות, סרטונים, מוזיקה ועוד ולגשת אליהם ממכשירים אחרים. &lt;a href=https://support.google.com/android/answer/12153449&gt;מידע נוסף על ההגדרה של כרטיס SD‏&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"פירמוט"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"אני אגדיר מאוחר יותר"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"לפרמט <xliff:g id="NAME">^1</xliff:g> זה?"</string>
@@ -2831,7 +2836,7 @@
     <string name="vpn_create" msgid="7546073242936894638">"‏הוספת פרופיל VPN"</string>
     <string name="vpn_menu_edit" msgid="5100387853773792379">"עריכת פרופיל"</string>
     <string name="vpn_menu_delete" msgid="4455966182219039928">"מחיקת פרופיל"</string>
-    <string name="vpn_menu_lockdown" msgid="5284041663859541007">"‏VPN בחיבור תמידי"</string>
+    <string name="vpn_menu_lockdown" msgid="5284041663859541007">"‏VPN שפועל כל הזמן"</string>
     <string name="vpn_no_vpns_added" msgid="7387080769821533728">"‏לא נוספו רשתות VPN"</string>
     <string name="vpn_always_on_summary" msgid="2171252372476858166">"‏נשארים מחוברים ל-VPN תמיד"</string>
     <string name="vpn_always_on_summary_not_supported" msgid="9084872130449368437">"לא נתמך על ידי אפליקציה זו"</string>
@@ -4965,24 +4970,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"סיסמה שגויה"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"‏כדי להתחיל בהאזנה, צריך להציב את קוד ה‑QR במרכז החלון שבהמשך"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"‏הפורמט של קוד ה‑QR לא תקין"</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"אפליקציות בחבילה לנייד"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"אפליקציות בחבילה לנייד"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"מידע בנושא שקיפות של אפליקציות בחבילה לנייד"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"מכילה מודעות"</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"פרטי המפתח"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"פרטים ליצירת קשר"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"תיאור"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"מדיניות הפרטיות"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"קטגוריה"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"אפליקציה בחבילה לנייד"</string>
 </resources>

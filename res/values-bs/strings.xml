@@ -565,8 +565,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Dodali ste maksimalan broj otisaka prstiju"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Nije moguće dodati još otisaka prstiju"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Izbrišite \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Ovo briše slike otisaka prsta i model koji su povezani s ID-om \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" i pohranjeni na vašem uređaju."</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Nećete moći koristiti otisak prsta da otključate telefon niti da potvrdite identitet u aplikacijama."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Ovim se brišu slike otiska prsta i model koji su povezani s ID-om \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" i pohranjeni na vašem telefonu"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Ovim se brišu slike otiska prsta i model koji su povezani s ID-om \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" i pohranjeni na vašem tabletu"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Ovo briše slike otisaka prsta i model koji su povezani s ID-om \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" i pohranjeni na vašem uređaju."</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Nećete moći koristiti otisak prsta da otključate telefon niti da potvrdite identitet u aplikacijama."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Nećete moći koristiti otisak prsta da otključate tablet niti da potvrdite identitet u aplikacijama."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Nećete moći koristiti otisak prsta da otključate uređaj niti da potvrdite identitet u aplikacijama."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Nećete moći koristiti otisak prsta da otključate radni profil, odobrite kupovine niti da se prijavite u poslovne aplikacije."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Šifriranje"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Šifriraj tablet"</string>
@@ -1112,6 +1116,7 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080 p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440 p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"Puna rezolucija troši više baterije. Prebacivanjem rezolucije može uzrokovati ponovo pokretanje nekih aplikacija."</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Odabrano"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Boje"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Prirodne"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Pojačane"</string>
@@ -1325,14 +1330,14 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Nemojte uklanjati <xliff:g id="NAME">^1</xliff:g> tokom premještanja. Aplikacija \n\n <xliff:g id="APP">^2</xliff:g> na ovom uređaju neće biti dostupna sve dok se ne završi premještanje."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Kako ćete koristiti pohranu <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formatirajte SD karticu za unutrašnju pohranu"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Pohranite aplikacije i medijski sadržaj da ih koristite samo na ovom tabletu. &lt;a href=https://support.google.com/android/answer/12153449&gt;Saznajte više o postavljanju SD kartice&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Pohranite aplikacije i medijski sadržaj da ih koristite samo na ovom tabletu. &lt;a href=https://support.google.com/android/answer/12153449&gt;Saznajte više o postavljanju SD kartice&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formatiraj"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formatirajte SD karticu za unutrašnju pohranu"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Pohranite aplikacije i medijski sadržaj da ih koristite samo na ovom telefonu. &lt;a href=https://support.google.com/android/answer/12153449&gt;Saznajte više o postavljanju SD kartice&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Pohranite aplikacije i medijski sadržaj da ih koristite samo na ovom telefonu. &lt;a href=https://support.google.com/android/answer/12153449&gt;Saznajte više o postavljanju SD kartice&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formatiraj"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Ili"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formatirajte SD karticu za prenosivu pohranu"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Pohranite fotografije, videozapise, muziku i drugo te im pristupite s drugih uređaja. &lt;a href=https://support.google.com/android/answer/12153449&gt;Saznajte više o postavljanju SD kartice&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Pohranite fotografije, videozapise, muziku i još mnogo toga te im pristupite s drugih uređaja. &lt;a href=https://support.google.com/android/answer/12153449&gt;Saznajte više o postavljanju SD kartice&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formatiraj"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Postavi kasnije"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Formatirati medij <xliff:g id="NAME">^1</xliff:g>?"</string>
@@ -1869,12 +1874,9 @@
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Nakon što kreirate vidžet, aplikacija će moći pristupiti svemu prikazanom.\n\nAplikacija: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nVidžet: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Uvijek dopusti da aplikacija <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> kreira vidžete i koristi njihove podatke"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Statistika korištenja"</string>
-    <!-- no translation found for usage_stats_sort_by_usage_time (2927310334119998301) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_last_time_used (7039213339779884017) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_app_name (4463833145514850478) -->
-    <skip />
+    <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Poredaj prema vrem. korištenja"</string>
+    <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Pored. prema poslj. korištenja"</string>
+    <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Poredaj prema imenu aplikacije"</string>
     <string name="last_time_used_label" msgid="2639712813493534074">"Posljednji put korišteno"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Vrijeme korištenja"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Pristupačnost"</string>
@@ -4834,8 +4836,7 @@
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Nagrade po jednom događaju"</string>
     <string name="tare_rewards_ongoing" msgid="7657030286658143416">"Nagrade po sekundi trajanja događaja"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Maksimalni broj nagrada po danu"</string>
-    <!-- no translation found for tare_app_install (7955806910408116882) -->
-    <skip />
+    <string name="tare_app_install" msgid="7955806910408116882">"Instaliranje aplikacije"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Maksimalna aktivnost"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Obavještenje je viđeno"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Obavještenje je viđeno u roku od 15 minuta"</string>
@@ -4897,24 +4898,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Pogrešna lozinka"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Da pokrenete slušanje, centrirajte QR kôd ispod"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Format QR koda nije važeći"</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"Mobilne paketne aplikacije"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"Mobilne paketne aplikacije"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"Informacije o transparentnosti mobilnih paketnih aplikacija"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"Sadrži oglase"</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"Informacije o programerima"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"Kontakt podaci"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"Opis"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"Pravila privatnosti"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"Kategorija"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"Mobilna paketna aplikacija"</string>
 </resources>
