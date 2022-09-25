@@ -573,8 +573,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Ви додали максимальну кількість відбитків пальців"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Більше не можна додати відбитки пальців"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Видалити відбиток \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Буде видалено зображення й модель відбитка пальця \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\", що зберігаються на вашому пристрої"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Ви не зможете розблоковувати телефон або підтверджувати особу в додатках за допомогою відбитка пальця."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Буде видалено зображення й модель відбитка пальця \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\", що зберігаються на вашому телефоні"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Буде видалено зображення й модель відбитка пальця \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\", що зберігаються на вашому планшеті"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Буде видалено зображення й модель відбитка пальця \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\", що зберігаються на вашому пристрої"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Ви не зможете розблоковувати телефон або підтверджувати особу в додатках за допомогою відбитка пальця."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Ви не зможете розблоковувати планшет або підтверджувати особу в додатках за допомогою відбитка пальця."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Ви не зможете розблоковувати пристрій або підтверджувати особу в додатках за допомогою відбитка пальця."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Ви не зможете розблоковувати робочий профіль, дозволяти покупки та заходити в робочі додатки за допомогою відбитка пальця."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Шифрування"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Шифрувати планшет"</string>
@@ -1136,6 +1140,8 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"Коли екран працює з максимальною роздільною здатністю, акумулятор розряджається швидше. Якщо змінити роздільну здатність, деякі додатки можуть перезапуститися."</string>
+    <!-- no translation found for screen_resolution_selected_a11y (6158451180032224977) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"Кольори"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Природні"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Яскраві"</string>
@@ -1350,14 +1356,17 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Не видаляйте <xliff:g id="NAME">^1</xliff:g> під час переміщення. \n\nВи не зможете користуватися додатком <xliff:g id="APP">^2</xliff:g> на цьому пристрої, поки не завершиться переміщення."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Як буде використовуватися <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Форматуйте карту SD для внутрішнього сховища"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Зберігайте додатки й медіафайли, щоб використовувати їх лише на цьому планшеті. &lt;a href=https://support.google.com/android/answer/12153449&gt;Докладніше про налаштування карти SD&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_internal_summary (6050264373968853062) -->
+    <skip />
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Форматувати"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Форматуйте карту SD для внутрішнього сховища"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Зберігайте додатки й медіафайли, щоб використовувати їх лише на цьому телефоні. &lt;a href=https://support.google.com/android/answer/12153449&gt;Докладніше про налаштування карти SD&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_internal_summary (4315288081962526508) -->
+    <skip />
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Форматувати"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Або"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Форматуйте карту SD як портативне сховище"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Зберігайте фотографії, відео, музику тощо й відкривайте їх на інших пристроях. &lt;a href=https://support.google.com/android/answer/12153449&gt;Докладніше про налаштування карти SD&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_external_summary (2002761631147966185) -->
+    <skip />
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Форматувати"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Налаштувати пізніше"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Форматувати пристрій пам’яті (<xliff:g id="NAME">^1</xliff:g>)?"</string>
@@ -1897,12 +1906,9 @@
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Після того як ви створите віджет, додаток матиме доступ до всього контенту, що відображається.\n\nДодаток: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nВіджет: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Завжди дозволяти хосту <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> створювати віджети й отримувати доступ до їх даних"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Статистика викор."</string>
-    <!-- no translation found for usage_stats_sort_by_usage_time (2927310334119998301) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_last_time_used (7039213339779884017) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_app_name (4463833145514850478) -->
-    <skip />
+    <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"За часом використання"</string>
+    <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"За часом ост. використання"</string>
+    <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"За назвою додатка"</string>
     <string name="last_time_used_label" msgid="2639712813493534074">"Останнє використання"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Час використ."</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Спеціальні можливості"</string>
@@ -4906,8 +4912,7 @@
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Винагороди за кожну подію"</string>
     <string name="tare_rewards_ongoing" msgid="7657030286658143416">"Бонуси за секунду тривалості події"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Максимальна кількість винагород на день"</string>
-    <!-- no translation found for tare_app_install (7955806910408116882) -->
-    <skip />
+    <string name="tare_app_install" msgid="7955806910408116882">"Встановлення додатка"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Перші дії"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Сповіщення переглянуто"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Сповіщення переглянуто впродовж 15 хв"</string>

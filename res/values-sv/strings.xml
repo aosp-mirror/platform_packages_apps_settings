@@ -561,8 +561,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du har lagt till det högsta tillåtna antalet fingeravtryck"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Det går inte att lägga till fler fingeravtryck"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Radera <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Om du gör detta raderas fingeravtrycksbilderna och fingeravtrycksmodellen som har kopplats till <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> och lagras på enheten"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Du kan inte låsa upp telefonen eller verifiera din identitet i appar med ditt fingeravtryck."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Om du gör detta raderas fingeravtrycksbilderna och fingeravtrycksmodellen som har kopplats till <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> och lagras på telefonen"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Om du gör detta raderas fingeravtrycksbilderna och fingeravtrycksmodellen som har kopplats till <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> och lagras på surfplattan"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Om du gör detta raderas fingeravtrycksbilderna och fingeravtrycksmodellen som har kopplats till <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> och lagras på enheten"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Du kan inte låsa upp telefonen eller verifiera din identitet i appar med ditt fingeravtryck."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Du kan inte låsa upp surfplattan eller verifiera din identitet i appar med ditt fingeravtryck."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Du kan inte låsa upp enheten eller verifiera din identitet i appar med ditt fingeravtryck."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Då kan du inte låsa upp jobbprofilen, auktorisera köp eller logga in i jobbappar med ditt fingeravtryck."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Kryptering"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Kryptera surfplattan"</string>
@@ -1092,6 +1096,7 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"Full upplösning drar mer batteri. Om du byter upplösning kan vissa appar startas om."</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Vald"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Färger"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturliga"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Förstärkta"</string>
@@ -1304,14 +1309,17 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Ta inte bort ditt <xliff:g id="NAME">^1</xliff:g> under flytten. \n\nAppen <xliff:g id="APP">^2</xliff:g> på den här enheten blir inte tillgänglig förrän flytten är klar."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Hur ska du använda <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formatera SD-kortet för internt lagringsutrymme"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Lagra appar och media för att endast använda på den här surfplattan. &lt;a href=https://support.google.com/android/answer/12153449&gt;Läs mer om att konfigurera ett SD-kort&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_internal_summary (6050264373968853062) -->
+    <skip />
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formatera"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formatera SD-kortet för internt lagringsutrymme"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Lagra appar och media för att endast använda på den här telefonen. &lt;a href=https://support.google.com/android/answer/12153449&gt;Läs mer om att konfigurera ett SD-kort&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_internal_summary (4315288081962526508) -->
+    <skip />
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formatera"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Eller"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formatera SD-kortet för bärbart lagringsutrymme"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Lagra foton, videor, musik och annat, och få åtkomst till dem från andra enheter. &lt;a href=https://support.google.com/android/answer/12153449&gt;Läs mer om att konfigurera ett SD-kort&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_external_summary (2002761631147966185) -->
+    <skip />
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formatera"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Konfigurera senare"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Vill du formatera <xliff:g id="NAME">^1</xliff:g>?"</string>
@@ -1845,12 +1853,9 @@
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"När du har skapat widgeten kan appen få åtkomst till allt som visas.\n\nApp: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nWidget: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Tillåt alltid att <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> skapar widgetar och får åtkomst till deras data"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Användningsstatistik"</string>
-    <!-- no translation found for usage_stats_sort_by_usage_time (2927310334119998301) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_last_time_used (7039213339779884017) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_app_name (4463833145514850478) -->
-    <skip />
+    <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Sortera efter användningstid"</string>
+    <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Sortera efter senast användning"</string>
+    <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Sortera efter appnamn"</string>
     <string name="last_time_used_label" msgid="2639712813493534074">"Användes senast"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Användningstid"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Tillgänglighet"</string>
@@ -4766,8 +4771,7 @@
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Belöningar per enskild händelse"</string>
     <string name="tare_rewards_ongoing" msgid="7657030286658143416">"Belöningar/sekund medan händelsen pågår"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Högsta antal belöningar per dag"</string>
-    <!-- no translation found for tare_app_install (7955806910408116882) -->
-    <skip />
+    <string name="tare_app_install" msgid="7955806910408116882">"Appinstallation"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Toppaktivitet"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Aviseringen har setts"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Aviseringen sågs inom 15 minuter"</string>
@@ -4829,24 +4833,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Fel lösenord"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Centrera QR-koden nedan om du vill börja lyssna"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR-kodens format är ogiltigt"</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"Appar som ingår med telefonen"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"Appar som ingår med telefonen"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"Insynsinformation om appar som ingår med telefonen"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"Innehåller annonser"</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"Utvecklarinformation"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"Kontaktuppgifter"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"Beskrivning"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"Integritetspolicy"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"Kategori"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"App som ingår med telefonen"</string>
 </resources>

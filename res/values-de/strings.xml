@@ -567,8 +567,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du hast die maximale Anzahl an Fingerabdrücken hinzugefügt"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Es können keine Fingerabdrücke mehr hinzugefügt werden"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"„<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ löschen"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Dadurch werden die Aufnahmen und das Modell des Fingerabdruck für „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ gelöscht, die auf deinem Gerät gespeichert sind."</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Du kannst deinen Fingerabdruck dann nicht mehr verwenden, um dein Smartphone zu entsperren oder deine Identität in Apps zu bestätigen."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Dadurch werden die Aufnahmen und das Modell des Fingerabdrucks für „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ gelöscht, die auf deinem Smartphone gespeichert sind"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Dadurch werden die Aufnahmen und das Modell des Fingerabdrucks für „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ gelöscht, die auf deinem Tablet gespeichert sind"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Dadurch werden die Aufnahmen und das Modell des Fingerabdruck für „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ gelöscht, die auf deinem Gerät gespeichert sind."</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Du kannst deinen Fingerabdruck dann nicht mehr verwenden, um dein Smartphone zu entsperren oder deine Identität in Apps zu bestätigen."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Du kannst deinen Fingerabdruck dann nicht mehr verwenden, um dein Tablet zu entsperren oder deine Identität in Apps zu bestätigen."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Du kannst deinen Fingerabdruck dann nicht mehr verwenden, um dein Gerät zu entsperren oder deine Identität in Apps zu bestätigen."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Du kannst deinen Fingerabdruck dann nicht mehr verwenden, um dein Arbeitsprofil zu entsperren, Käufe zu autorisieren oder dich in geschäftlichen Apps anzumelden."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Verschlüsselung"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Tablet verschlüsseln"</string>
@@ -1098,6 +1102,7 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"Die volle Auflösung verbraucht mehr Akku. Wenn du die Auflösung änderst, werden einige Apps möglicherweise neu gestartet."</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Ausgewählt"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Farben"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Natürlich"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Verstärkt"</string>
@@ -1310,14 +1315,14 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Entferne die <xliff:g id="NAME">^1</xliff:g> während des Vorgangs nicht. \n\nDie App <xliff:g id="APP">^2</xliff:g> auf diesem Gerät ist erst wieder verfügbar, nachdem sie vollständig verschoben wurde."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Wie möchtest du das Gerät (<xliff:g id="NAME">^1</xliff:g>) nutzen?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"SD-Karte als internen Speicher formatieren"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"Apps &amp; Medien, die nur auf diesem Tablet verwendet werden sollen speichern. &lt;a href=https://support.google.com/android/answer/12153449&gt;Weitere Informationen zum Einrichten von SD-Karten&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Du kannst Apps und Medien speichern, die nur auf diesem Tablet verwendet werden sollen. &lt;a href=https://support.google.com/android/answer/12153449&gt;Weitere Informationen zum Einrichten von SD-Karten&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formatieren"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"SD-Karte als internen Speicher formatieren"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"Du kannst Apps und Medien speichern, die nur auf diesem Telefon verwendet werden sollen. &lt;a href=https://support.google.com/android/answer/12153449&gt;Weitere Informationen zum Einrichten von SD-Karten&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Du kannst Apps und Medien speichern, die nur auf diesem Telefon verwendet werden sollen. &lt;a href=https://support.google.com/android/answer/12153449&gt;Weitere Informationen zum Einrichten von SD-Karten&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formatieren"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"oder"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"SD-Karte als mobilen Speicher formatieren"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"Du kannst Fotos, Videos, Musik und mehr speichern und von anderen Geräten darauf zugreifen. &lt;a href=https://support.google.com/android/answer/12153449&gt;Weitere Informationen zum Einrichten von SD-Karten&lt;/a&gt;"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Du kannst Fotos, Videos, Musik und mehr speichern und von anderen Geräten darauf zugreifen. &lt;a href=https://support.google.com/android/answer/12153449&gt;Weitere Informationen zum Einrichten von SD-Karten&lt;/a&gt;"</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formatieren"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Später einrichten"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"<xliff:g id="NAME">^1</xliff:g> formatieren?"</string>
@@ -1851,12 +1856,9 @@
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Nach der Erstellung des Widgets hat die App Zugriff auf alle angezeigten Daten.\n\nApp: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nWidget: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> immer das Erstellen von Widgets und den Zugriff auf ihre Daten erlauben"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Nutzungsstatistik"</string>
-    <!-- no translation found for usage_stats_sort_by_usage_time (2927310334119998301) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_last_time_used (7039213339779884017) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_app_name (4463833145514850478) -->
-    <skip />
+    <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Nach Nutzungszeit sortieren"</string>
+    <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Nach „Zuletzt verwendet“ sortieren"</string>
+    <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Nach App-Name sortieren"</string>
     <string name="last_time_used_label" msgid="2639712813493534074">"Zuletzt verwendet"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Nutzungszeit"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Bedienungshilfen"</string>
@@ -3318,7 +3320,7 @@
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Vertrauliche Benachrichtigungen aus Arbeitsprofilen"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Auf dem Sperrbildschirm werden vertrauliche Inhalte aus Arbeitsprofilen angezeigt"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Gesamten Benachrichtigungs­inhalt anzeigen"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Sensible Inhalte nur im entsperrten Zustand zeigen"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Sensible Inhalte nur im entsperrten Zustand anzeigen"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Keine Benachrichtigungen anzeigen"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Wie sollen Benachrichtigungen auf dem Sperrbildschirm angezeigt werden?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Sperrbildschirm"</string>
@@ -4772,8 +4774,7 @@
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Prämien pro Ereignis"</string>
     <string name="tare_rewards_ongoing" msgid="7657030286658143416">"Prämien pro Sekunde Ereignisdauer"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Maximale Anzahl von Prämien pro Tag"</string>
-    <!-- no translation found for tare_app_install (7955806910408116882) -->
-    <skip />
+    <string name="tare_app_install" msgid="7955806910408116882">"App-Installation"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Topaktivität"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Benachrichtigung gesehen"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Benachrichtigung nach max. 15 min gesehen"</string>
@@ -4835,24 +4836,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Falsches Passwort"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Scanne zum Anhören den QR-Code unten"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Das Format des QR-Codes ist ungültig"</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"Mobile App-Bundles"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"Mobile App-Bundles"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"Transparenzinformationen zu mobilen App-Bundles"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"Enthält Werbung"</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"Informationen zum Entwickler"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"Kontaktdaten"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"Beschreibung"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"Datenschutzerklärung"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"Kategorie"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"Mobiles App-Bundle"</string>
 </resources>

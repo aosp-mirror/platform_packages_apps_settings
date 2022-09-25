@@ -567,8 +567,12 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"최대 개수의 지문을 추가했습니다."</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"지문을 추가할 수 없습니다."</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"\'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' 삭제"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"기기에 저장된 \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' 지문과 관련된 지문 이미지와 모델이 삭제됩니다."</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"지문을 사용하여 휴대전화를 잠금 해제하거나 앱에서 본인을 인증할 수 없게 됩니다."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"휴대전화에 저장된 \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' 지문과 관련된 지문 이미지와 모델이 삭제됩니다."</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"태블릿에 저장된 \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' 지문과 관련된 지문 이미지와 모델이 삭제됩니다."</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"기기에 저장된 \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' 지문과 관련된 지문 이미지와 모델이 삭제됩니다."</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"지문을 사용하여 휴대전화를 잠금 해제하거나 앱에서 본인을 인증할 수 없게 됩니다."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"지문을 사용하여 태블릿을 잠금 해제하거나 앱에서 본인을 인증할 수 없게 됩니다."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"지문을 사용하여 기기를 잠금 해제하거나 앱에서 본인을 인증할 수 없게 됩니다."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"지문을 사용하여 직장 프로필을 잠금 해제하거나 구매를 승인하거나 직장 앱에 로그인할 수 없게 됩니다."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"암호화"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"태블릿 암호화"</string>
@@ -1098,6 +1102,8 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"전체 해상도 사용 시 배터리 사용량이 증가합니다. 해상도를 전환하면 일부 앱이 다시 시작될 수 있습니다."</string>
+    <!-- no translation found for screen_resolution_selected_a11y (6158451180032224977) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"색상"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"자연스럽게"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"생생하게"</string>
@@ -1310,14 +1316,17 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"이동 중에 <xliff:g id="NAME">^1</xliff:g>을(를) 삭제하지 마세요. \n\n이동을 완료할 때까지 이 기기에 있는 <xliff:g id="APP">^2</xliff:g> 앱을 사용할 수 없습니다."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"이 <xliff:g id="NAME">^1</xliff:g>을(를) 어떻게 사용하시겠습니까?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"SD 카드를 내부 저장소로 포맷"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="1236154481658009267">"이 태블릿에서만 사용할 앱과 미디어를 저장하세요. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD 카드 설정 자세히 알아보기&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_internal_summary (6050264373968853062) -->
+    <skip />
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"포맷"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"SD 카드를 내부 저장소로 포맷"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3771689638403679317">"이 휴대전화에서만 사용할 앱과 미디어를 저장하세요. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD 카드 설정 자세히 알아보기&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_internal_summary (4315288081962526508) -->
+    <skip />
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"포맷"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"또는"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"SD 카드를 휴대용 저장소로 포맷"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="3867896101011977386">"사진, 동영상, 음악 등을 저장하여 다른 기기에서 액세스하세요. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD 카드 설정 자세히 알아보기&lt;/a&gt;"</string>
+    <!-- no translation found for storage_wizard_init_v2_external_summary (2002761631147966185) -->
+    <skip />
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"포맷"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"나중에 설정"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"<xliff:g id="NAME">^1</xliff:g>을(를) 포맷하시겠습니까?"</string>
@@ -1851,12 +1860,9 @@
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"위젯을 만든 다음에는 애플리케이션에서 표시된 모든 항목에 액세스할 수 있습니다.\n\n애플리케이션: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\n위젯: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>에서 위젯을 만들고 자체 데이터에 액세스할 수 있도록 항상 허용"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"사용 통계"</string>
-    <!-- no translation found for usage_stats_sort_by_usage_time (2927310334119998301) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_last_time_used (7039213339779884017) -->
-    <skip />
-    <!-- no translation found for usage_stats_sort_by_app_name (4463833145514850478) -->
-    <skip />
+    <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"사용 시간으로 정렬"</string>
+    <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"최근 사용 시간으로 정렬"</string>
+    <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"앱 이름으로 정렬"</string>
     <string name="last_time_used_label" msgid="2639712813493534074">"최근 사용"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"사용 시간"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"접근성"</string>
@@ -4772,8 +4778,7 @@
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"단일 이벤트별 리워드"</string>
     <string name="tare_rewards_ongoing" msgid="7657030286658143416">"이벤트 동안(초당) 받을 수 있는 리워드"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"일일 최대 리워드"</string>
-    <!-- no translation found for tare_app_install (7955806910408116882) -->
-    <skip />
+    <string name="tare_app_install" msgid="7955806910408116882">"앱 설치"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"상위 활동"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"알림 확인됨"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"15분 이내 알림 확인됨"</string>
@@ -4835,24 +4840,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"잘못된 비밀번호"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"오디오를 들으려면 아래의 QR 코드가 가운데에 오도록 스캔하세요"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR 코드가 유효한 형식이 아닙니다."</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"모바일 번들 앱"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"모바일 번들 앱"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"모바일 번들 앱 투명성 정보"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"광고 포함"</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"개발자 정보"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"연락처 정보"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"설명"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"개인정보처리방침"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"카테고리"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"모바일 번들 앱"</string>
 </resources>
