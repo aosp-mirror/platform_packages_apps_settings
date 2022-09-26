@@ -72,6 +72,7 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
 
                 public void onServiceDisconnected(int profile) {
                     mBluetoothPan.set(null);
+                    updateSummary();
                 }
             };
 
