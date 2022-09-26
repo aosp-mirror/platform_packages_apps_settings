@@ -17,10 +17,12 @@
 package com.android.settings.spa.app.appsettings
 
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
 import android.os.Bundle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
@@ -34,7 +36,6 @@ import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
 import com.android.settingslib.spa.widget.ui.Category
-import com.android.settingslib.spaprivileged.model.app.PackageManagers
 import com.android.settingslib.spaprivileged.model.app.toRoute
 import com.android.settingslib.spaprivileged.template.app.AppInfoProvider
 
@@ -53,9 +54,13 @@ object AppSettingsProvider : SettingsPageProvider {
     override fun Page(arguments: Bundle?) {
         val packageName = arguments!!.getString(PACKAGE_NAME)!!
         val userId = arguments.getInt(USER_ID)
-        remember { PackageManagers.getPackageInfoAsUser(packageName, userId) }?.let {
-            AppSettings(it)
+        val context = LocalContext.current
+        val coroutineScope = rememberCoroutineScope()
+        val packageInfoPresenter = remember {
+            PackageInfoPresenter(context, packageName, userId, coroutineScope)
         }
+        AppSettings(packageInfoPresenter)
+        packageInfoPresenter.PageCloser()
     }
 
     @Composable
@@ -63,11 +68,14 @@ object AppSettingsProvider : SettingsPageProvider {
 }
 
 @Composable
-private fun AppSettings(packageInfo: PackageInfo) {
+private fun AppSettings(packageInfoPresenter: PackageInfoPresenter) {
+    val packageInfo = packageInfoPresenter.flow.collectAsState().value ?: return
     RegularScaffold(title = stringResource(R.string.application_info_label)) {
         val appInfoProvider = remember { AppInfoProvider(packageInfo) }
 
         appInfoProvider.AppInfo()
+
+        AppButtons(packageInfoPresenter)
 
         Category(title = stringResource(R.string.advanced_apps)) {
             val app = packageInfo.applicationInfo
