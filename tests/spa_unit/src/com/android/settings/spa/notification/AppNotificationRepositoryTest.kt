@@ -29,8 +29,10 @@ import android.content.pm.ApplicationInfo
 import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.R
 import com.android.settingslib.spa.testutils.any
 import com.android.settingslib.spaprivileged.model.app.IPackageManagers
+import com.android.settingslib.spaprivileged.model.app.userId
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
@@ -89,6 +91,39 @@ class AppNotificationRepositoryTest {
         return channel
     }
 
+    private fun mockIsEnabled(app: ApplicationInfo, enabled: Boolean) {
+        whenever(notificationManager.areNotificationsEnabledForPackage(app.packageName, app.uid))
+            .thenReturn(enabled)
+    }
+
+    private fun mockChannelCount(app: ApplicationInfo, count: Int) {
+        whenever(
+            notificationManager.getNumNotificationChannelsForPackage(
+                app.packageName,
+                app.uid,
+                false,
+            )
+        ).thenReturn(count)
+    }
+
+    private fun mockBlockedChannelCount(app: ApplicationInfo, count: Int) {
+        whenever(notificationManager.getBlockedChannelCount(app.packageName, app.uid))
+            .thenReturn(count)
+    }
+
+    private fun mockSentCount(app: ApplicationInfo, sentCount: Int) {
+        val events = (1..sentCount).map {
+            UsageEvents.Event().apply {
+                mEventType = UsageEvents.Event.NOTIFICATION_INTERRUPTION
+            }
+        }
+        whenever(
+            usageStatsManager.queryEventsForPackageForUser(
+                any(), any(), eq(app.userId), eq(app.packageName), any()
+            )
+        ).thenReturn(UsageEvents(events, arrayOf()))
+    }
+
     @Test
     fun getAggregatedUsageEvents() = runTest {
         val events = listOf(
@@ -120,8 +155,7 @@ class AppNotificationRepositoryTest {
 
     @Test
     fun isEnabled() {
-        whenever(notificationManager.areNotificationsEnabledForPackage(APP.packageName, APP.uid))
-            .thenReturn(true)
+        mockIsEnabled(app = APP, enabled = true)
 
         val isEnabled = repository.isEnabled(APP)
 
@@ -209,6 +243,61 @@ class AppNotificationRepositoryTest {
 
         verify(notificationManager)
             .setNotificationsEnabledForPackage(APP.packageName, APP.uid, true)
+    }
+
+    @Test
+    fun getNotificationSummary_notEnabled() {
+        mockIsEnabled(app = APP, enabled = false)
+
+        val summary = repository.getNotificationSummary(APP)
+
+        assertThat(summary).isEqualTo(context.getString(R.string.off))
+    }
+
+    @Test
+    fun getNotificationSummary_noChannel() {
+        mockIsEnabled(app = APP, enabled = true)
+        mockChannelCount(app = APP, count = 0)
+        mockSentCount(app = APP, sentCount = 1)
+
+        val summary = repository.getNotificationSummary(APP)
+
+        assertThat(summary).isEqualTo("About 1 notification per week")
+    }
+
+    @Test
+    fun getNotificationSummary_allChannelsBlocked() {
+        mockIsEnabled(app = APP, enabled = true)
+        mockChannelCount(app = APP, count = 2)
+        mockBlockedChannelCount(app = APP, count = 2)
+
+        val summary = repository.getNotificationSummary(APP)
+
+        assertThat(summary).isEqualTo(context.getString(R.string.off))
+    }
+
+    @Test
+    fun getNotificationSummary_noChannelBlocked() {
+        mockIsEnabled(app = APP, enabled = true)
+        mockChannelCount(app = APP, count = 2)
+        mockSentCount(app = APP, sentCount = 2)
+        mockBlockedChannelCount(app = APP, count = 0)
+
+        val summary = repository.getNotificationSummary(APP)
+
+        assertThat(summary).isEqualTo("About 2 notifications per week")
+    }
+
+    @Test
+    fun getNotificationSummary_someChannelsBlocked() {
+        mockIsEnabled(app = APP, enabled = true)
+        mockChannelCount(app = APP, count = 2)
+        mockSentCount(app = APP, sentCount = 3)
+        mockBlockedChannelCount(app = APP, count = 1)
+
+        val summary = repository.getNotificationSummary(APP)
+
+        assertThat(summary).isEqualTo("About 3 notifications per week / 1 category turned off")
     }
 
     @Test
