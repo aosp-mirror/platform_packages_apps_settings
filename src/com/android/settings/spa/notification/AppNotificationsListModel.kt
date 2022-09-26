@@ -92,7 +92,7 @@ class AppNotificationsListModel(
     override fun getSummary(option: Int, record: AppNotificationsRecord) = record.sentState?.let {
         when (option.toSpinnerItem()) {
             SpinnerItem.MostRecent -> stateOf(formatLastSent(it.lastSent))
-            SpinnerItem.MostFrequent -> stateOf(calculateFrequent(it.sentCount))
+            SpinnerItem.MostFrequent -> stateOf(repository.calculateFrequencySummary(it.sentCount))
             else -> null
         }
     }
@@ -108,19 +108,6 @@ class AppNotificationsListModel(
             true,
             RelativeDateTimeFormatter.Style.LONG,
         ).toString()
-
-    private fun calculateFrequent(sentCount: Int): String {
-        val dailyFrequent = AppNotificationRepository.calculateDailyFrequent(sentCount)
-        return if (dailyFrequent > 0) {
-            context.resources.getQuantityString(
-                R.plurals.notifications_sent_daily, dailyFrequent, dailyFrequent
-            )
-        } else {
-            context.resources.getQuantityString(
-                R.plurals.notifications_sent_weekly, sentCount, sentCount
-            )
-        }
-    }
 
     @Composable
     override fun AppListItemModel<AppNotificationsRecord>.AppItem() {
