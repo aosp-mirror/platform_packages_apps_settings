@@ -58,6 +58,22 @@ import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.development.SystemPropPoker;
 
 public abstract class DevelopmentTiles extends TileService {
+
+    /**
+     * Meta-data for a development tile to declare a sysprop flag that needs to be enabled for
+     * the tile to be available.
+     *
+     * To define the flag, set this meta-data on the tile's manifest declaration.
+     * <pre class="prettyprint">
+     * {@literal
+     * <meta-data android:name="com.android.settings.development.qstile.REQUIRES_SYSTEM_PROPERTY"
+     *     android:value="persist.debug.flag_name_here" />
+     * }
+     * </pre>
+     */
+    public static final String META_DATA_REQUIRES_SYSTEM_PROPERTY =
+            "com.android.settings.development.qstile.REQUIRES_SYSTEM_PROPERTY";
+
     private static final String TAG = "DevelopmentTiles";
 
     protected abstract boolean isEnabled();
