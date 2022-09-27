@@ -66,6 +66,7 @@ private fun AllAppListPage() {
     AppListPage(
         title = stringResource(R.string.all_apps),
         listModel = rememberContext(::AllAppListModel),
+        showInstantApps = true,
     ) { itemModel ->
         AppListItem(
             itemModel = itemModel,
