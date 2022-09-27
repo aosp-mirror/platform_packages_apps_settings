@@ -18,8 +18,4 @@ package com.android.settings.spa
 
 import com.android.settingslib.spa.framework.DebugActivity
 
-class SpaDebugActivity : DebugActivity(
-    SpaEnvironment.settingsEntryRepository,
-    browseActivityClass = SpaActivity::class.java,
-    entryProviderAuthorities = "com.android.settings.spa.provider",
-)
+class SpaDebugActivity : DebugActivity(SettingsSpaEnvironment)

@@ -20,7 +20,7 @@ import android.content.Context
 import android.content.Intent
 import com.android.settingslib.spa.framework.BrowseActivity
 
-class SpaActivity : BrowseActivity(SpaEnvironment.settingsPageProviders) {
+class SpaActivity : BrowseActivity(SettingsSpaEnvironment) {
     companion object {
         @JvmStatic
         fun startSpaActivity(context: Context, destination: String) {
@@ -31,4 +31,3 @@ class SpaActivity : BrowseActivity(SpaEnvironment.settingsPageProviders) {
         }
     }
 }
-
