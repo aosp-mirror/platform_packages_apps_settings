@@ -4139,6 +4139,8 @@
             </intent-filter>
             <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                 android:value="true"/>
+            <meta-data android:name="com.android.settings.development.qstile.REQUIRES_SYSTEM_PROPERTY"
+                       android:value="persist.wm.debug.desktop_mode" />
         </service>
 
         <activity
