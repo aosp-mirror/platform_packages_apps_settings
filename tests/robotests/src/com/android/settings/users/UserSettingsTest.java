@@ -177,6 +177,7 @@ public class UserSettingsTest {
         doReturn(prefs).when(mMockPreferenceManager).getSharedPreferences();
         doReturn(mContext).when(mMockPreferenceManager).getContext();
         doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
+        doReturn(ACTIVE_USER_ID).when(mContext).getUserId();
 
         mFragment.mMePreference = mMePreference;
         mFragment.mAddUser = mAddUserPreference;
@@ -443,6 +444,7 @@ public class UserSettingsTest {
 
     @Test
     public void updateUserList_userSwitcherDisabled_shouldNotShowAddUser() {
+        givenUsers(getAdminUser(true));
         mUserCapabilities.mCanAddUser = true;
         mUserCapabilities.mUserSwitcherEnabled = false;
 
@@ -453,6 +455,7 @@ public class UserSettingsTest {
 
     @Test
     public void updateUserList_userSwitcherDisabled_shouldNotShowAddGuest() {
+        givenUsers(getAdminUser(true));
         mUserCapabilities.mCanAddGuest = true;
         mUserCapabilities.mUserSwitcherEnabled = false;
 
@@ -509,6 +512,47 @@ public class UserSettingsTest {
         assertThat(userPref.isEnabled()).isEqualTo(true);
         assertThat(userPref.isSelectable()).isEqualTo(true);
         assertThat(userPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
+    }
+
+    @Test
+    public void updateUserList_existingSecondaryUser_shouldAddOnlyCurrUser_MultiUserIsDisabled() {
+        givenUsers(getAdminUser(true), getSecondaryUser(false));
+        mUserCapabilities.mUserSwitcherEnabled = false;
+
+        mFragment.updateUserList();
+
+        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
+        verify(mFragment.mUserListCategory, times(1))
+                .addPreference(captor.capture());
+
+        List<UserPreference> userPrefs = captor.getAllValues();
+        assertThat(userPrefs.size()).isEqualTo(1);
+        assertThat(userPrefs.get(0)).isSameInstanceAs(mMePreference);
+    }
+
+    @Test
+    public void updateUserList_existingSecondaryUser_shouldAddSecondaryUser_MultiUserIsEnabled() {
+        givenUsers(getAdminUser(true), getSecondaryUser(false));
+
+        mFragment.updateUserList();
+
+        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
+        verify(mFragment.mUserListCategory, times(2))
+                .addPreference(captor.capture());
+
+        List<UserPreference> userPrefs = captor.getAllValues();
+        UserPreference adminPref = userPrefs.get(0);
+        UserPreference secondaryPref = userPrefs.get(1);
+
+        assertThat(userPrefs.size()).isEqualTo(2);
+        assertThat(adminPref).isSameInstanceAs(mMePreference);
+        assertThat(secondaryPref.getUserId()).isEqualTo(INACTIVE_SECONDARY_USER_ID);
+        assertThat(secondaryPref.getTitle()).isEqualTo(SECONDARY_USER_NAME);
+        assertThat(secondaryPref.getIcon()).isNotNull();
+        assertThat(secondaryPref.getKey()).isEqualTo("id=" + INACTIVE_SECONDARY_USER_ID);
+        assertThat(secondaryPref.isEnabled()).isEqualTo(true);
+        assertThat(secondaryPref.isSelectable()).isEqualTo(true);
+        assertThat(secondaryPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
     }
 
     @Test
@@ -800,6 +844,8 @@ public class UserSettingsTest {
         List<UserInfo> users = Arrays.asList(userInfo);
         doReturn(users).when(mUserManager).getUsers();
         doReturn(users).when(mUserManager).getAliveUsers();
+        users.forEach(user ->
+                doReturn(user).when(mUserManager).getUserInfo(user.id));
     }
 
     private static void removeFlag(UserInfo userInfo, int flag) {

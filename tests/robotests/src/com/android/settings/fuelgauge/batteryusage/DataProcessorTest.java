@@ -579,9 +579,13 @@ public class DataProcessorTest {
                 ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY, /*consumePercentage=*/ 25.0,
                 /*foregroundUsageTimeInMs=*/ 50, /*backgroundUsageTimeInMs=*/ 60);
         verify(mMetricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT, 3);
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT,
+                        3);
         verify(mMetricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT, 0);
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT,
+                        0);
     }
 
     @Test
@@ -674,9 +678,13 @@ public class DataProcessorTest {
         assertThat(resultMap.get(0).get(0)).isNotNull();
         assertThat(resultMap.get(0).get(DataProcessor.SELECTED_INDEX_ALL)).isNotNull();
         verify(mMetricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT, 2);
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT,
+                        2);
         verify(mMetricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT, 0);
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT,
+                        0);
     }
 
     @Test
@@ -739,9 +747,13 @@ public class DataProcessorTest {
         assertThat(resultMap.get(0).get(0)).isNotNull();
         assertThat(resultMap.get(0).get(DataProcessor.SELECTED_INDEX_ALL)).isNotNull();
         verify(mMetricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT, 1);
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT,
+                        1);
         verify(mMetricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT, 0);
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT,
+                        0);
     }
 
     @Test
@@ -814,9 +826,13 @@ public class DataProcessorTest {
                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 50.0,
                 /*foregroundUsageTimeInMs=*/ 10, /*backgroundUsageTimeInMs=*/ 20);
         verify(mMetricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT, 1);
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT,
+                        1);
         verify(mMetricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT, 1);
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT,
+                        1);
     }
 
     @Test
@@ -889,9 +905,13 @@ public class DataProcessorTest {
         resultEntry = resultDiffData.getAppDiffEntryList().get(1);
         assertThat(resultEntry.mBackgroundUsageTimeInMs).isEqualTo(0);
         verify(mMetricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT, 2);
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT,
+                        2);
         verify(mMetricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT, 0);
+                .action(mContext.getApplicationContext(),
+                        SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT,
+                        0);
     }
 
     @Test
