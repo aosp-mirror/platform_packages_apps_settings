@@ -1196,11 +1196,19 @@ public class UserSettings extends SettingsPreferenceFragment
         if (context == null) {
             return;
         }
-        final List<UserInfo> users = mUserManager.getAliveUsers()
-                // Only users that can be switched to should show up here.
-                // e.g. Managed profiles appear under Accounts Settings instead
-                .stream().filter(UserInfo::supportsSwitchToByUser)
-                .collect(Collectors.toList());
+
+        List<UserInfo> users;
+        if (mUserCaps.mUserSwitcherEnabled) {
+            // Only users that can be switched to should show up here.
+            // e.g. Managed profiles appear under Accounts Settings instead
+            users = mUserManager.getAliveUsers().stream()
+                    .filter(UserInfo::supportsSwitchToByUser)
+                    .collect(Collectors.toList());
+        } else {
+            // Only current user will be displayed in case of multi-user switch is disabled
+            users = List.of(mUserManager.getUserInfo(context.getUserId()));
+        }
+
         final ArrayList<Integer> missingIcons = new ArrayList<>();
         final ArrayList<UserPreference> userPreferences = new ArrayList<>();
 
@@ -1276,7 +1284,6 @@ public class UserSettings extends SettingsPreferenceFragment
             userPreferences.add(pref);
         }
 
-
         // Sort list of users by serialNum
         Collections.sort(userPreferences, UserPreference.SERIAL_NUMBER_COMPARATOR);
 
@@ -1299,7 +1306,6 @@ public class UserSettings extends SettingsPreferenceFragment
         // Remove everything from mUserListCategory and add new users.
         mUserListCategory.removeAll();
 
-        // If multi-user is disabled, just show top info and return.
         final Preference addUserOnLockScreen = getPreferenceScreen().findPreference(
                 mAddUserWhenLockedPreferenceController.getPreferenceKey());
         mAddUserWhenLockedPreferenceController.updateState(addUserOnLockScreen);
@@ -1311,15 +1317,10 @@ public class UserSettings extends SettingsPreferenceFragment
         final Preference multiUserTopIntroPreference = getPreferenceScreen().findPreference(
                 mMultiUserTopIntroPreferenceController.getPreferenceKey());
         mMultiUserTopIntroPreferenceController.updateState(multiUserTopIntroPreference);
-        mUserListCategory.setVisible(mUserCaps.mUserSwitcherEnabled);
         updateGuestPreferences();
         updateGuestCategory(context, users);
         updateAddUser(context);
         updateAddSupervisedUser(context);
-
-        if (!mUserCaps.mUserSwitcherEnabled) {
-            return;
-        }
 
         for (UserPreference userPreference : userPreferences) {
             userPreference.setOrder(Preference.DEFAULT_ORDER);
