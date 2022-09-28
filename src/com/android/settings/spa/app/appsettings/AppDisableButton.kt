@@ -58,7 +58,7 @@ class AppDisableButton(
         if (!app.hasFlag(ApplicationInfo.FLAG_SYSTEM)) return null
 
         return when {
-            app.enabled && !app.isDisabledUntilUsed() -> {
+            app.enabled && !app.isDisabledUntilUsed -> {
                 disableButton(enabled = isDisableButtonEnabled(packageInfo))
             }
 
