@@ -485,6 +485,11 @@ public class AddAppNetworksFragmentTest {
         assertThat(item.mDisplayedSsid).isEqualTo(FAKE_NEW_WPA_SSID);
     }
 
+    @Test
+    public void getWifiIconResource_wifiLevelIsUnreachable_shouldNotCrash() {
+        AddAppNetworksFragment.getWifiIconResource(WifiEntry.WIFI_LEVEL_UNREACHABLE);
+    }
+
     private void setUpOneScannedNetworkWithScanedLevel4() {
         final ArrayList list = new ArrayList<>();
         list.add(mWifiEntry);

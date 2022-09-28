@@ -27,8 +27,8 @@ import android.os.UserHandle
 import android.util.Log
 import androidx.compose.runtime.Composable
 import com.android.settings.overlay.FeatureFactory
-import com.android.settingslib.spa.framework.compose.DisposableBroadcastReceiverAsUser
 import com.android.settingslib.spa.framework.compose.LocalNavController
+import com.android.settingslib.spaprivileged.framework.compose.DisposableBroadcastReceiverAsUser
 import com.android.settingslib.spaprivileged.model.app.PackageManagers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

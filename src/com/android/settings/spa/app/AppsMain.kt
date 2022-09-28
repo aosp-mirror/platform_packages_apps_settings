@@ -61,6 +61,7 @@ object AppsMainPageProvider : SettingsPageProvider {
     override fun buildEntry(arguments: Bundle?): List<SettingsEntry> {
         val owner = SettingsPage.create(name, parameter = parameter, arguments = arguments)
         return listOf(
+            AllAppListPageProvider.buildInjectEntry().setLink(fromPage = owner).build(),
             SpecialAppAccessPageProvider.buildInjectEntry().setLink(fromPage = owner).build(),
         )
     }
@@ -69,6 +70,7 @@ object AppsMainPageProvider : SettingsPageProvider {
 @Composable
 private fun AppsMain() {
     RegularScaffold(title = stringResource(R.string.apps_dashboard_title)) {
+        AllAppListPageProvider.buildInjectEntry().build().UiLayout()
         SpecialAppAccessPageProvider.EntryItem()
     }
 }
