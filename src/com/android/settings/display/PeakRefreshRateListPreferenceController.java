@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2020 The Android Open Source Project
+ * Copyright (C) 2021 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,45 +25,49 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.Display;
 
-import androidx.annotation.VisibleForTesting;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
+import java.util.ArrayList;
 import java.util.concurrent.Executor;
+import java.util.List;
+import java.util.Locale;
 
-public class PeakRefreshRatePreferenceController extends TogglePreferenceController
-        implements LifecycleObserver, OnStart, OnStop {
+public class PeakRefreshRateListPreferenceController extends BasePreferenceController
+        implements LifecycleObserver, OnStart, OnStop, Preference.OnPreferenceChangeListener {
 
-    @VisibleForTesting static float DEFAULT_REFRESH_RATE = 60f;
+    private static float DEFAULT_REFRESH_RATE = 60f;
 
-    @VisibleForTesting float mPeakRefreshRate;
-
-    private static final String TAG = "RefreshRatePrefCtr";
+    private static final String TAG = "PeakRefreshRatePrefCtr";
     private static final float INVALIDATE_REFRESH_RATE = -1f;
 
     private final Handler mHandler;
     private final IDeviceConfigChange mOnDeviceConfigChange;
     private final DeviceConfigDisplaySettings mDeviceConfigDisplaySettings;
-    private Preference mPreference;
+    private ListPreference mListPreference;
+
+    private List<String> mEntries = new ArrayList<>();
+    private List<String> mValues = new ArrayList<>();
 
     private interface IDeviceConfigChange {
         void onDefaultRefreshRateChanged();
     }
 
-    public PeakRefreshRatePreferenceController(Context context, String key) {
+    public PeakRefreshRateListPreferenceController(Context context, String key) {
         super(context, key);
         mHandler = new Handler(context.getMainLooper());
         mDeviceConfigDisplaySettings = new DeviceConfigDisplaySettings();
         mOnDeviceConfigChange =
                 new IDeviceConfigChange() {
                     public void onDefaultRefreshRateChanged() {
-                        updateState(mPreference);
+                        updateState(mListPreference);
                     }
                 };
 
@@ -71,61 +76,55 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
 
         if (display == null) {
             Log.w(TAG, "No valid default display device");
-            mPeakRefreshRate = DEFAULT_REFRESH_RATE;
         } else {
-            mPeakRefreshRate = findPeakRefreshRate(display.getSupportedModes());
+            Display.Mode mode = display.getMode();
+            Display.Mode[] modes = display.getSupportedModes();
+            for (Display.Mode m : modes) {
+                if (m.getPhysicalWidth() == mode.getPhysicalWidth() &&
+                        m.getPhysicalHeight() == mode.getPhysicalHeight()) {
+                    mEntries.add(String.format("%.02fHz", m.getRefreshRate())
+                            .replaceAll("[\\.,]00", ""));
+                    mValues.add(String.format(Locale.US, "%.02f", m.getRefreshRate()));
+                }
+            }
         }
-
-        Log.d(
-                TAG,
-                "DEFAULT_REFRESH_RATE : "
-                        + DEFAULT_REFRESH_RATE
-                        + " mPeakRefreshRate : "
-                        + mPeakRefreshRate);
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mPreference = screen.findPreference(getPreferenceKey());
-
-        final String summary = mContext.getString(R.string.peak_refresh_rate_summary_custom,
-                (int)mPeakRefreshRate);
-        mPreference.setSummary(summary);
+        mListPreference = screen.findPreference(getPreferenceKey());
+        mListPreference.setEntries(mEntries.toArray(new String[mEntries.size()]));
+        mListPreference.setEntryValues(mValues.toArray(new String[mValues.size()]));
     }
 
     @Override
     public int getAvailabilityStatus() {
-        if (mContext.getResources().getBoolean(R.bool.config_show_smooth_display)) {
-            return mPeakRefreshRate > DEFAULT_REFRESH_RATE ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        if (mContext.getResources().getBoolean(R.bool.config_show_peak_refresh_rate_switch)) {
+            return AVAILABLE;
         } else {
             return UNSUPPORTED_ON_DEVICE;
         }
     }
 
     @Override
-    public boolean isChecked() {
-        final float peakRefreshRate =
-                Settings.System.getFloat(
-                        mContext.getContentResolver(),
-                        Settings.System.PEAK_REFRESH_RATE,
-                        getDefaultPeakRefreshRate());
-        return Math.round(peakRefreshRate) == Math.round(mPeakRefreshRate);
+    public void updateState(Preference preference) {
+        final float currentValue = Settings.System.getFloat(mContext.getContentResolver(),
+                Settings.System.PEAK_REFRESH_RATE, getDefaultPeakRefreshRate());
+        int index = mListPreference.findIndexOfValue(
+                String.format(Locale.US, "%.02f", currentValue));
+        if (index < 0) index = 0;
+        mListPreference.setValueIndex(index);
+        mListPreference.setSummary(mListPreference.getEntries()[index]);
     }
 
     @Override
-    public boolean setChecked(boolean isChecked) {
-        final float peakRefreshRate = isChecked ? mPeakRefreshRate : DEFAULT_REFRESH_RATE;
-        Log.d(TAG, "setChecked to : " + peakRefreshRate);
-
-        return Settings.System.putFloat(
-                mContext.getContentResolver(), Settings.System.PEAK_REFRESH_RATE, peakRefreshRate);
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_display;
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        Settings.System.putFloat(mContext.getContentResolver(), Settings.System.PEAK_REFRESH_RATE,
+                Float.valueOf((String) newValue));
+        updateState(preference);
+        return true;
     }
 
     @Override
@@ -138,11 +137,10 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
         mDeviceConfigDisplaySettings.stopListening();
     }
 
-    @VisibleForTesting
-    float findPeakRefreshRate(Display.Mode[] modes) {
+    private float findPeakRefreshRate(Display.Mode[] modes) {
         float peakRefreshRate = DEFAULT_REFRESH_RATE;
         for (Display.Mode mode : modes) {
-            if (Math.round(mode.getRefreshRate()) > peakRefreshRate) {
+            if (Math.round(mode.getRefreshRate()) > DEFAULT_REFRESH_RATE) {
                 peakRefreshRate = mode.getRefreshRate();
             }
         }
@@ -180,7 +178,7 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
             // Just force a UI update for any case.
             if (mOnDeviceConfigChange != null) {
                 mOnDeviceConfigChange.onDefaultRefreshRateChanged();
-                updateState(mPreference);
+                updateState(mListPreference);
             }
         }
 
@@ -199,7 +197,6 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
                     com.android.internal.R.integer.config_defaultPeakRefreshRate);
         }
 
-        Log.d(TAG, "DeviceConfig getDefaultPeakRefreshRate : " + defaultPeakRefreshRate);
         return defaultPeakRefreshRate;
     }
 }

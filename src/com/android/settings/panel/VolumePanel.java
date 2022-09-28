@@ -24,6 +24,7 @@ import static com.android.settings.slices.CustomSliceRegistry.REMOTE_MEDIA_SLICE
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_ALARM_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_CALL_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_MEDIA_URI;
+import static com.android.settings.slices.CustomSliceRegistry.VOLUME_NOTIFICATION_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_RINGER_URI;
 
 import android.app.Activity;
@@ -139,6 +140,10 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
         uris.add(MEDIA_OUTPUT_INDICATOR_SLICE_URI);
         uris.add(VOLUME_CALL_URI);
         uris.add(VOLUME_RINGER_URI);
+        if (com.android.settings.Utils.isVoiceCapable(mContext) && Settings.Secure.getInt(
+                mContext.getContentResolver(), Settings.Secure.VOLUME_LINK_NOTIFICATION, 1) == 0) {
+            uris.add(VOLUME_NOTIFICATION_URI);
+        }
         uris.add(VOLUME_ALARM_URI);
         return uris;
     }

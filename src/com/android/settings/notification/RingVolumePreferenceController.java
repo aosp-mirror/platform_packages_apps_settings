@@ -43,12 +43,12 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
     private static final String KEY_RING_VOLUME = "ring_volume";
 
     private Vibrator mVibrator;
-    private int mRingerMode = -1;
+    protected int mRingerMode = -1;
     private ComponentName mSuppressor;
     private final RingReceiver mReceiver = new RingReceiver();
     private final H mHandler = new H();
 
-    private int mMuteIcon;
+    protected int mMuteIcon;
 
     public RingVolumePreferenceController(Context context) {
         this(context, KEY_RING_VOLUME);
@@ -133,7 +133,7 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
         updatePreferenceIcon();
     }
 
-    private void updatePreferenceIcon() {
+    protected void updatePreferenceIcon() {
         if (mPreference != null) {
             if (mRingerMode == AudioManager.RINGER_MODE_VIBRATE) {
                 mMuteIcon = R.drawable.ic_volume_ringer_vibrate;
@@ -142,7 +142,7 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
                 mMuteIcon = R.drawable.ic_notifications_off_24dp;
                 mPreference.showIcon(R.drawable.ic_notifications_off_24dp);
             } else {
-                mPreference.showIcon(R.drawable.ic_notifications);
+                mPreference.showIcon(R.drawable.ic_audio_ring);
             }
         }
     }

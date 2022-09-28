@@ -164,6 +164,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layout_footer_learn_more"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -199,6 +200,7 @@
                     android:layout_width="16dp"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:id="@+id/footer_message_learn_more"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/BiometricEnrollIntroMessage"
