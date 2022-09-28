@@ -135,12 +135,18 @@ public class StorageDashboardFragment extends DashboardFragment
                     mStorageEntries.removeIf(storageEntry -> {
                         return storageEntry.equals(changedStorageEntry);
                     });
-                    if (volumeState != VolumeInfo.STATE_REMOVED
-                            && volumeState != VolumeInfo.STATE_BAD_REMOVAL) {
+                    if (volumeState == VolumeInfo.STATE_MOUNTED
+                            || volumeState == VolumeInfo.STATE_MOUNTED_READ_ONLY
+                            || volumeState == VolumeInfo.STATE_UNMOUNTABLE) {
                         mStorageEntries.add(changedStorageEntry);
-                    }
-                    if (changedStorageEntry.equals(mSelectedStorageEntry)) {
-                        mSelectedStorageEntry = changedStorageEntry;
+                        if (changedStorageEntry.equals(mSelectedStorageEntry)) {
+                            mSelectedStorageEntry = changedStorageEntry;
+                        }
+                    } else {
+                        if (changedStorageEntry.equals(mSelectedStorageEntry)) {
+                            mSelectedStorageEntry =
+                                    StorageEntry.getDefaultInternalStorageEntry(getContext());
+                        }
                     }
                     refreshUi();
                     break;
