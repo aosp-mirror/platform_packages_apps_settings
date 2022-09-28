@@ -33,3 +33,11 @@ java_library_static {
     },
     srcs: ["network_mode_choices.proto"],
 }
+
+java_library {
+    name: "fuelgauge-log-protos-lite",
+    proto: {
+        type: "lite",
+    },
+    srcs: ["fuelgauge_log.proto"],
+}

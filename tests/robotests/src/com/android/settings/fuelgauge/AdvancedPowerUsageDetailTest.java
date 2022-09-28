@@ -184,6 +184,7 @@ public class AdvancedPowerUsageDetailTest {
         mFragment.mBatteryUtils = new BatteryUtils(RuntimeEnvironment.application);
         mFragment.mBatteryOptimizeUtils = mBatteryOptimizeUtils;
         mFragment.mBackupManager = mBackupManager;
+        mFragment.mLogStringBuilder = new StringBuilder();
         mAppEntry.info = mock(ApplicationInfo.class);
 
         mTestActivity = spy(new SettingsActivity());

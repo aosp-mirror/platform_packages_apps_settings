@@ -41,6 +41,7 @@ import com.android.settings.applications.appinfo.ButtonActionDialogFragment;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry;
 import com.android.settings.fuelgauge.batteryusage.BatteryEntry;
 import com.android.settings.fuelgauge.batteryusage.BatteryHistEntry;
@@ -113,6 +114,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     int mOptimizationMode = BatteryOptimizeUtils.MODE_UNKNOWN;
     @VisibleForTesting
     BackupManager mBackupManager;
+    @VisibleForTesting
+    StringBuilder mLogStringBuilder;
 
     private AppButtonsPreferenceController mAppButtonsPreferenceController;
 
@@ -272,6 +275,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                 getContext(),
                 SettingsEnums.OPEN_APP_BATTERY_USAGE,
                 packageName);
+        mLogStringBuilder = new StringBuilder("onResume mode = ").append(mOptimizationMode);
     }
 
     @Override
@@ -281,8 +285,16 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final int selectedPreference = getSelectedPreference();
 
         notifyBackupManager();
+        mLogStringBuilder.append(", onPause mode = ").append(selectedPreference);
         logMetricCategory(selectedPreference);
-        mBatteryOptimizeUtils.setAppUsageState(selectedPreference);
+
+        BatteryHistoricalLogUtil.writeLog(
+                getContext().getApplicationContext(),
+                Action.MANUAL,
+                BatteryHistoricalLogUtil.getPackageNameWithUserId(
+                        mBatteryOptimizeUtils.getPackageName(), UserHandle.myUserId()),
+                mLogStringBuilder.toString());
+        mBatteryOptimizeUtils.setAppUsageState(selectedPreference, Action.APPLY);
         Log.d(TAG, "Leave with mode: " + selectedPreference);
     }
 

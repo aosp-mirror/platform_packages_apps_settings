@@ -47,6 +47,7 @@ import android.content.pm.UserInfo;
 import android.os.UserManager;
 import android.util.ArraySet;
 
+import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 import org.junit.Before;
@@ -152,7 +153,7 @@ public class BatteryOptimizeUtilsTest {
         mBatteryOptimizeUtils.mAllowListed = false;
         mBatteryOptimizeUtils.mMode = AppOpsManager.MODE_ALLOWED;
 
-        mBatteryOptimizeUtils.setAppUsageState(MODE_RESTRICTED);
+        mBatteryOptimizeUtils.setAppUsageState(MODE_RESTRICTED, Action.UNKNOWN);
         TimeUnit.SECONDS.sleep(1);
 
         verifySetAppOptimizationMode(AppOpsManager.MODE_IGNORED, /* allowListed */ false);
@@ -160,7 +161,7 @@ public class BatteryOptimizeUtilsTest {
 
     @Test
     public void testSetAppUsageState_Unrestricted_verifyAction() throws Exception {
-        mBatteryOptimizeUtils.setAppUsageState(MODE_UNRESTRICTED);
+        mBatteryOptimizeUtils.setAppUsageState(MODE_UNRESTRICTED, Action.UNKNOWN);
         TimeUnit.SECONDS.sleep(1);
 
         verifySetAppOptimizationMode(AppOpsManager.MODE_ALLOWED, /* allowListed */ true);
@@ -168,7 +169,7 @@ public class BatteryOptimizeUtilsTest {
 
     @Test
     public void testSetAppUsageState_Optimized_verifyAction() throws Exception {
-        mBatteryOptimizeUtils.setAppUsageState(MODE_OPTIMIZED);
+        mBatteryOptimizeUtils.setAppUsageState(MODE_OPTIMIZED, Action.UNKNOWN);
         TimeUnit.SECONDS.sleep(1);
 
         verifySetAppOptimizationMode(AppOpsManager.MODE_ALLOWED, /* allowListed */ false);
@@ -180,7 +181,7 @@ public class BatteryOptimizeUtilsTest {
         mBatteryOptimizeUtils.mAllowListed = true;
         mBatteryOptimizeUtils.mMode = AppOpsManager.MODE_ALLOWED;
 
-        mBatteryOptimizeUtils.setAppUsageState(MODE_UNRESTRICTED);
+        mBatteryOptimizeUtils.setAppUsageState(MODE_UNRESTRICTED, Action.UNKNOWN);
         TimeUnit.SECONDS.sleep(1);
 
         verifyNoInteractions(mMockBackend);
