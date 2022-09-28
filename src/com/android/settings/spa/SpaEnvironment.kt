@@ -16,6 +16,7 @@
 
 package com.android.settings.spa
 
+import com.android.settings.spa.app.AllAppListPageProvider
 import com.android.settings.spa.app.AppsMainPageProvider
 import com.android.settings.spa.app.appsettings.AppSettingsProvider
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
@@ -53,6 +54,7 @@ object SpaEnvironment {
             allPageProviders = listOf(
                 HomePageProvider,
                 AppsMainPageProvider,
+                AllAppListPageProvider,
                 AppSettingsProvider,
                 SpecialAppAccessPageProvider,
                 NotificationMainPageProvider,
