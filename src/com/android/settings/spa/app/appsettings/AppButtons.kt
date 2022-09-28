@@ -32,7 +32,7 @@ fun AppButtons(packageInfoPresenter: PackageInfoPresenter) {
 }
 
 private class AppButtonsHolder(private val packageInfoPresenter: PackageInfoPresenter) {
-    private val appLaunchButton = AppLaunchButton(context = packageInfoPresenter.context)
+    private val appLaunchButton = AppLaunchButton(packageInfoPresenter)
     private val appDisableButton = AppDisableButton(packageInfoPresenter)
     private val appUninstallButton = AppUninstallButton(packageInfoPresenter)
     private val appForceStopButton = AppForceStopButton(packageInfoPresenter)
