@@ -2103,6 +2103,22 @@
         </activity-alias>
 
         <activity
+            android:name="Settings$TextReadingSettingsActivity"
+            android:exported="true"
+            android:label="@string/accessibility_text_reading_options_title">
+            <intent-filter>
+                <action android:name="android.intent.action.TEXT_READING_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.accessibility.TextReadingPreferenceFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_accessibility"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
             android:name="Settings$AccessibilityDaltonizerSettingsActivity"
             android:exported="true"
             android:label="@string/accessibility_display_daltonizer_preference_title">

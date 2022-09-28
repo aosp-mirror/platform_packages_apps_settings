@@ -140,6 +140,8 @@ public class Settings extends SettingsActivity {
     public static class BlueToothPairingActivity extends SettingsActivity { /* empty */ }
     /** Activity for Reduce Bright Colors. */
     public static class ReduceBrightColorsSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity for text reading settings. */
+    public static class TextReadingSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for the security dashboard. */
     public static class SecurityDashboardActivity extends SettingsActivity {
 
