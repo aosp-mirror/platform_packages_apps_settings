@@ -48,9 +48,8 @@ class PackageInfoPresenter(
     private val coroutineScope: CoroutineScope,
 ) {
     private val metricsFeatureProvider = FeatureFactory.getFactory(context).metricsFeatureProvider
-    val packageManagerAsUser: PackageManager by lazy {
-        context.createContextAsUser(UserHandle.of(userId), 0).packageManager
-    }
+    val contextAsUser by lazy { context.createContextAsUser(UserHandle.of(userId), 0) }
+    val packageManagerAsUser: PackageManager by lazy { contextAsUser.packageManager }
     private val _flow: MutableStateFlow<PackageInfo?> = MutableStateFlow(null)
 
     val flow: StateFlow<PackageInfo?> = _flow
@@ -99,6 +98,15 @@ class PackageInfoPresenter(
             packageManagerAsUser.setApplicationEnabledSetting(
                 packageName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER, 0
             )
+            notifyChange()
+        }
+    }
+
+    /** Clears this instant app. */
+    fun clearInstantApp() {
+        logAction(SettingsEnums.ACTION_SETTINGS_CLEAR_INSTANT_APP)
+        coroutineScope.launch(Dispatchers.IO) {
+            packageManagerAsUser.deletePackageAsUser(packageName, null, 0, userId)
             notifyChange()
         }
     }
