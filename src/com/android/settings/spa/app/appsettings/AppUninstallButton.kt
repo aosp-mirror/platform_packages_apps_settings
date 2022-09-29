@@ -16,32 +16,21 @@
 
 package com.android.settings.spa.app.appsettings
 
-import android.app.settings.SettingsEnums
-import android.content.ComponentName
-import android.content.Intent
 import android.content.om.OverlayManager
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
-import android.net.Uri
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import com.android.settings.R
-import com.android.settings.Utils
-import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAdd
-import com.android.settingslib.RestrictedLockUtils
-import com.android.settingslib.RestrictedLockUtilsInternal
 import com.android.settingslib.spa.widget.button.ActionButton
-import com.android.settingslib.spaprivileged.framework.common.devicePolicyManager
 import com.android.settingslib.spaprivileged.model.app.hasFlag
 import com.android.settingslib.spaprivileged.model.app.isActiveAdmin
 import com.android.settingslib.spaprivileged.model.app.userHandle
-import com.android.settingslib.spaprivileged.model.app.userId
 
 class AppUninstallButton(private val packageInfoPresenter: PackageInfoPresenter) {
     private val context = packageInfoPresenter.context
     private val appButtonRepository = AppButtonRepository(context)
     private val overlayManager = context.getSystemService(OverlayManager::class.java)!!
-    private val devicePolicyManager = context.devicePolicyManager
 
     fun getActionButton(packageInfo: PackageInfo): ActionButton? {
         val app = packageInfo.applicationInfo
@@ -54,7 +43,7 @@ class AppUninstallButton(private val packageInfoPresenter: PackageInfoPresenter)
         !app.hasFlag(ApplicationInfo.FLAG_INSTALLED) -> false
 
         // Not allow to uninstall DO/PO.
-        Utils.isProfileOrDeviceOwner(devicePolicyManager, app.packageName, app.userId) -> false
+        app.isActiveAdmin(context) -> false
 
         appButtonRepository.isDisallowControl(app) -> false
 
@@ -99,20 +88,7 @@ class AppUninstallButton(private val packageInfoPresenter: PackageInfoPresenter)
     ) { onUninstallClicked(app) }
 
     private fun onUninstallClicked(app: ApplicationInfo) {
-        if (app.isActiveAdmin(context)) {
-            packageInfoPresenter.logAction(SettingsEnums.ACTION_SETTINGS_UNINSTALL_DEVICE_ADMIN)
-            val intent = Intent(context, DeviceAdminAdd::class.java).apply {
-                putExtra(DeviceAdminAdd.EXTRA_DEVICE_ADMIN_PACKAGE_NAME, app.packageName)
-            }
-            context.startActivityAsUser(intent, app.userHandle)
-            return
-        }
-        RestrictedLockUtilsInternal.checkIfUninstallBlocked(
-            context, app.packageName, app.userId
-        )?.let { admin ->
-            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(context, admin)
-            return
-        }
+        if (appButtonRepository.isUninstallBlockedByAdmin(app)) return
         packageInfoPresenter.startUninstallActivity()
     }
 }

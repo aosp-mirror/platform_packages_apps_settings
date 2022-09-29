@@ -16,6 +16,7 @@
 
 package com.android.settings.spa.app.appsettings
 
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowCircleDown
@@ -34,7 +35,6 @@ import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.spa.widget.button.ActionButton
 import com.android.settingslib.spaprivileged.framework.common.devicePolicyManager
 import com.android.settingslib.spaprivileged.framework.common.userManager
-import com.android.settingslib.spaprivileged.model.app.isActiveAdmin
 import com.android.settingslib.spaprivileged.model.app.isDisabledUntilUsed
 import com.android.settingslib.Utils as SettingsLibUtils
 
@@ -58,7 +58,7 @@ class AppDisableButton(
 
         return when {
             app.enabled && !app.isDisabledUntilUsed -> {
-                disableButton(enabled = isDisableButtonEnabled(packageInfo))
+                disableButton(app = app, enabled = isDisableButtonEnabled(packageInfo))
             }
 
             else -> enableButton()
@@ -82,9 +82,6 @@ class AppDisableButton(
             // signed with the system certificate.
             SettingsLibUtils.isSystemPackage(resources, packageManager, packageInfo) -> false
 
-            // If this is a device admin, it can't be disabled.
-            app.isActiveAdmin(context) -> false
-
             // We don't allow disabling DO/PO on *any* users if it's a system app, because
             // "disabling" is actually "downgrade to the system version + disable", and "downgrade"
             // will clear data on all users.
@@ -99,11 +96,16 @@ class AppDisableButton(
         }
     }
 
-    private fun disableButton(enabled: Boolean) = ActionButton(
+    private fun disableButton(app: ApplicationInfo, enabled: Boolean) = ActionButton(
         text = context.getString(R.string.disable_text),
         imageVector = Icons.Outlined.HideSource,
         enabled = enabled,
-    ) { openConfirmDialog = true }
+    ) {
+        // Currently we apply the same device policy for both the uninstallation and disable button.
+        if (!appButtonRepository.isUninstallBlockedByAdmin(app)) {
+            openConfirmDialog = true
+        }
+    }
 
     private fun enableButton() = ActionButton(
         text = context.getString(R.string.enable_text),
