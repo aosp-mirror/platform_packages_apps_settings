@@ -16,10 +16,7 @@
 
 package com.android.settings.spa.app.appsettings
 
-import android.app.admin.DevicePolicyManager
-import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
-import android.os.UserManager
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowCircleDown
 import androidx.compose.material.icons.outlined.HideSource
@@ -34,10 +31,12 @@ import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.overlay.FeatureFactory
-import com.android.settingslib.Utils as SettingsLibUtils
 import com.android.settingslib.spa.widget.button.ActionButton
-import com.android.settingslib.spaprivileged.model.app.hasFlag
+import com.android.settingslib.spaprivileged.framework.common.devicePolicyManager
+import com.android.settingslib.spaprivileged.framework.common.userManager
+import com.android.settingslib.spaprivileged.model.app.isActiveAdmin
 import com.android.settingslib.spaprivileged.model.app.isDisabledUntilUsed
+import com.android.settingslib.Utils as SettingsLibUtils
 
 class AppDisableButton(
     private val packageInfoPresenter: PackageInfoPresenter,
@@ -46,8 +45,8 @@ class AppDisableButton(
     private val appButtonRepository = AppButtonRepository(context)
     private val resources = context.resources
     private val packageManager = context.packageManager
-    private val userManager = context.getSystemService(UserManager::class.java)!!
-    private val devicePolicyManager = context.getSystemService(DevicePolicyManager::class.java)!!
+    private val userManager = context.userManager
+    private val devicePolicyManager = context.devicePolicyManager
     private val applicationFeatureProvider =
         FeatureFactory.getFactory(context).getApplicationFeatureProvider(context)
 
@@ -84,7 +83,7 @@ class AppDisableButton(
             SettingsLibUtils.isSystemPackage(resources, packageManager, packageInfo) -> false
 
             // If this is a device admin, it can't be disabled.
-            appButtonRepository.isActiveAdmin(app) -> false
+            app.isActiveAdmin(context) -> false
 
             // We don't allow disabling DO/PO on *any* users if it's a system app, because
             // "disabling" is actually "downgrade to the system version + disable", and "downgrade"

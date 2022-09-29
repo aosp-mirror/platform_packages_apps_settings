@@ -60,7 +60,7 @@ object AppSettingsProvider : SettingsPageProvider {
             PackageInfoPresenter(context, packageName, userId, coroutineScope)
         }
         AppSettings(packageInfoPresenter)
-        packageInfoPresenter.PageCloser()
+        packageInfoPresenter.PackageRemoveDetector()
     }
 
     @Composable
@@ -77,7 +77,13 @@ object AppSettingsProvider : SettingsPageProvider {
 @Composable
 private fun AppSettings(packageInfoPresenter: PackageInfoPresenter) {
     val packageInfo = packageInfoPresenter.flow.collectAsState().value ?: return
-    RegularScaffold(title = stringResource(R.string.application_info_label)) {
+    val app = packageInfo.applicationInfo
+    RegularScaffold(
+        title = stringResource(R.string.application_info_label),
+        actions = {
+            AppSettingsMoreOptions(packageInfoPresenter, app)
+        }
+    ) {
         val appInfoProvider = remember { AppInfoProvider(packageInfo) }
 
         appInfoProvider.AppInfo()
@@ -85,7 +91,6 @@ private fun AppSettings(packageInfoPresenter: PackageInfoPresenter) {
         AppButtons(packageInfoPresenter)
 
         Category(title = stringResource(R.string.advanced_apps)) {
-            val app = packageInfo.applicationInfo
             DisplayOverOtherAppsAppListProvider.InfoPageEntryItem(app)
             ModifySystemSettingsAppListProvider.InfoPageEntryItem(app)
             PictureInPictureListProvider.InfoPageEntryItem(app)
