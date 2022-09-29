@@ -293,6 +293,11 @@ public class TareFactorController {
                 new TareFactorData(mResources.getString(R.string.tare_min_balance_other_app),
                         EconomyManager.DEFAULT_JS_MIN_SATIATED_BALANCE_OTHER_APP_CAKES,
                         POLICY_JOB_SCHEDULER));
+        mJobSchedulerMap.put(EconomyManager.KEY_JS_MIN_SATIATED_BALANCE_INCREMENT_APP_UPDATER,
+                new TareFactorData(
+                        mResources.getString(R.string.tare_min_balance_addition_app_updater),
+                        EconomyManager.DEFAULT_JS_MIN_SATIATED_BALANCE_INCREMENT_APP_UPDATER_CAKES,
+                        POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_MAX_SATIATED_BALANCE,
                 new TareFactorData(mResources.getString(R.string.tare_max_satiated_balance),
                         EconomyManager.DEFAULT_JS_MAX_SATIATED_BALANCE_CAKES,
