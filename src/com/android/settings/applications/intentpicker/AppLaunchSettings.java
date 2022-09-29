@@ -246,15 +246,14 @@ public class AppLaunchSettings extends AppInfoBase implements
 
     /** Initialize verified links preference */
     private void initVerifiedLinksPreference() {
-        final VerifiedLinksPreference verifiedLinksPreference =
-                (VerifiedLinksPreference) mMainPreferenceCategory.findPreference(
-                        VERIFIED_LINKS_PREF_KEY);
-        verifiedLinksPreference.setWidgetFrameClickListener(l -> {
+        final Preference verifiedLinksPreference = mMainPreferenceCategory.findPreference(
+                VERIFIED_LINKS_PREF_KEY);
+        verifiedLinksPreference.setOnPreferenceClickListener(preference -> {
             showVerifiedLinksDialog();
+            return true;
         });
         final int verifiedLinksNo = getLinksNumber(DOMAIN_STATE_VERIFIED);
         verifiedLinksPreference.setTitle(getVerifiedLinksTitle(verifiedLinksNo));
-        verifiedLinksPreference.setCheckBoxVisible(verifiedLinksNo > 0);
         verifiedLinksPreference.setEnabled(verifiedLinksNo > 0);
     }
 
