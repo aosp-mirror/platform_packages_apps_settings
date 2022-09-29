@@ -55,7 +55,7 @@ class AppDisableButton(
 
     fun getActionButton(packageInfo: PackageInfo): ActionButton? {
         val app = packageInfo.applicationInfo
-        if (!app.hasFlag(ApplicationInfo.FLAG_SYSTEM)) return null
+        if (!app.isSystemApp) return null
 
         return when {
             app.enabled && !app.isDisabledUntilUsed -> {

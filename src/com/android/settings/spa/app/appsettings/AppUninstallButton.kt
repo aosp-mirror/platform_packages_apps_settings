@@ -46,7 +46,7 @@ class AppUninstallButton(private val packageInfoPresenter: PackageInfoPresenter)
 
     fun getActionButton(packageInfo: PackageInfo): ActionButton? {
         val app = packageInfo.applicationInfo
-        if (app.hasFlag(ApplicationInfo.FLAG_SYSTEM)) return null
+        if (app.isSystemApp || app.isInstantApp) return null
         return uninstallButton(app = app, enabled = isUninstallButtonEnabled(app))
     }
 
