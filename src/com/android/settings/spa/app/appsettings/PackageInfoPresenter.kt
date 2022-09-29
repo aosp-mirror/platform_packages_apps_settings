@@ -23,6 +23,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.UserHandle
 import android.util.Log
 import androidx.compose.runtime.Composable
@@ -65,17 +66,23 @@ class PackageInfoPresenter(
     }
 
     /**
-     * Closes the page when the package is uninstalled.
+     * Detects the package removed event.
      */
     @Composable
-    fun PageCloser() {
+    fun PackageRemoveDetector() {
         val intentFilter = IntentFilter(Intent.ACTION_PACKAGE_REMOVED).apply {
             addDataScheme("package")
         }
         val navController = LocalNavController.current
         DisposableBroadcastReceiverAsUser(userId, intentFilter) { intent ->
             if (packageName == intent.data?.schemeSpecificPart) {
-                navController.navigateBack()
+                val packageInfo = flow.value
+                if (packageInfo != null && packageInfo.applicationInfo.isSystemApp) {
+                    // System app still exists after uninstalling the updates, refresh the page.
+                    notifyChange()
+                } else {
+                    navController.navigateBack()
+                }
             }
         }
     }
@@ -100,6 +107,16 @@ class PackageInfoPresenter(
             )
             notifyChange()
         }
+    }
+
+    /** Starts the uninstallation activity. */
+    fun startUninstallActivity(forAllUsers: Boolean = false) {
+        logAction(SettingsEnums.ACTION_SETTINGS_UNINSTALL_APP)
+        val packageUri = Uri.parse("package:${packageName}")
+        val intent = Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri).apply {
+            putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, forAllUsers)
+        }
+        context.startActivityAsUser(intent, UserHandle.of(userId))
     }
 
     /** Clears this instant app. */

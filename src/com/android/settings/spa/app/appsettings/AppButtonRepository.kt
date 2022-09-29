@@ -17,19 +17,18 @@
 package com.android.settings.spa.app.appsettings
 
 import android.app.ActivityManager
-import android.app.admin.DevicePolicyManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
-import android.os.UserManager
-import com.android.settingslib.RestrictedLockUtilsInternal
 import com.android.settingslib.Utils
-import com.android.settingslib.spaprivileged.model.app.userId
+import com.android.settingslib.spaprivileged.framework.common.devicePolicyManager
+import com.android.settingslib.spaprivileged.model.app.isDisallowControl
 
 class AppButtonRepository(private val context: Context) {
     private val packageManager = context.packageManager
-    private val devicePolicyManager = context.getSystemService(DevicePolicyManager::class.java)!!
+    private val devicePolicyManager = context.devicePolicyManager
 
     /**
      * Checks whether the given application is disallowed from modifying.
@@ -41,20 +40,10 @@ class AppButtonRepository(private val context: Context) {
         // If the uninstallation intent is already queued, disable the button.
         devicePolicyManager.isUninstallInQueue(app.packageName) -> true
 
-        RestrictedLockUtilsInternal.hasBaseUserRestriction(
-            context, UserManager.DISALLOW_APPS_CONTROL, app.userId
-        ) -> true
-
-        else -> false
+        else -> app.isDisallowControl(context)
     }
 
-    /**
-     * Checks whether the given application is an active admin.
-     */
-    fun isActiveAdmin(app: ApplicationInfo): Boolean =
-        devicePolicyManager.packageHasActiveAdmins(app.packageName, app.userId)
-
-    fun getHomePackageInfo(): AppUninstallButton.HomePackages {
+    fun getHomePackageInfo(): HomePackages {
         val homePackages = mutableSetOf<String>()
         val homeActivities = ArrayList<ResolveInfo>()
         val currentDefaultHome = packageManager.getHomeActivities(homeActivities)
@@ -66,7 +55,7 @@ class AppButtonRepository(private val context: Context) {
                 homePackages.add(metaPackageName)
             }
         }
-        return AppUninstallButton.HomePackages(homePackages, currentDefaultHome)
+        return HomePackages(homePackages, currentDefaultHome)
     }
 
     private fun signaturesMatch(packageName1: String, packageName2: String): Boolean = try {
@@ -75,4 +64,9 @@ class AppButtonRepository(private val context: Context) {
         // e.g. named alternate package not found during lookup; this is an expected case sometimes
         false
     }
+
+    data class HomePackages(
+        val homePackages: Set<String>,
+        val currentDefaultHome: ComponentName?,
+    )
 }

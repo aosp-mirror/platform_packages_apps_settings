@@ -36,6 +36,7 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin
 import com.android.settingslib.RestrictedLockUtilsInternal
 import com.android.settingslib.spa.widget.button.ActionButton
 import com.android.settingslib.spaprivileged.model.app.hasFlag
+import com.android.settingslib.spaprivileged.model.app.isActiveAdmin
 import com.android.settingslib.spaprivileged.model.app.userId
 
 class AppForceStopButton(
@@ -61,7 +62,7 @@ class AppForceStopButton(
      */
     private fun isForceStopButtonEnable(app: ApplicationInfo): Boolean = when {
         // User can't force stop device admin.
-        appButtonRepository.isActiveAdmin(app) -> false
+        app.isActiveAdmin(context) -> false
 
         appButtonRepository.isDisallowControl(app) -> false
 
