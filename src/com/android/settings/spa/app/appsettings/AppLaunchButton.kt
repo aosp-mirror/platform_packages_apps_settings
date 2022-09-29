@@ -16,7 +16,6 @@
 
 package com.android.settings.spa.app.appsettings
 
-import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
@@ -26,11 +25,12 @@ import com.android.settings.R
 import com.android.settingslib.spa.widget.button.ActionButton
 import com.android.settingslib.spaprivileged.model.app.userHandle
 
-class AppLaunchButton(private val context: Context) {
-    private val packageManager = context.packageManager
+class AppLaunchButton(packageInfoPresenter: PackageInfoPresenter) {
+    private val context = packageInfoPresenter.context
+    private val packageManagerAsUser = packageInfoPresenter.packageManagerAsUser
 
     fun getActionButton(packageInfo: PackageInfo): ActionButton? =
-        packageManager.getLaunchIntentForPackage(packageInfo.packageName)?.let { intent ->
+        packageManagerAsUser.getLaunchIntentForPackage(packageInfo.packageName)?.let { intent ->
             launchButton(intent, packageInfo.applicationInfo)
         }
 

@@ -48,7 +48,7 @@ class PackageInfoPresenter(
     private val coroutineScope: CoroutineScope,
 ) {
     private val metricsFeatureProvider = FeatureFactory.getFactory(context).metricsFeatureProvider
-    private val packageManager by lazy {
+    val packageManagerAsUser: PackageManager by lazy {
         context.createContextAsUser(UserHandle.of(userId), 0).packageManager
     }
     private val _flow: MutableStateFlow<PackageInfo?> = MutableStateFlow(null)
@@ -85,7 +85,7 @@ class PackageInfoPresenter(
     fun enable() {
         logAction(SettingsEnums.ACTION_SETTINGS_ENABLE_APP)
         coroutineScope.launch(Dispatchers.IO) {
-            packageManager.setApplicationEnabledSetting(
+            packageManagerAsUser.setApplicationEnabledSetting(
                 packageName, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0
             )
             notifyChange()
@@ -96,7 +96,7 @@ class PackageInfoPresenter(
     fun disable() {
         logAction(SettingsEnums.ACTION_SETTINGS_DISABLE_APP)
         coroutineScope.launch(Dispatchers.IO) {
-            packageManager.setApplicationEnabledSetting(
+            packageManagerAsUser.setApplicationEnabledSetting(
                 packageName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER, 0
             )
             notifyChange()
