@@ -18,7 +18,4 @@ package com.android.settings.spa
 
 import com.android.settingslib.spa.framework.EntryProvider
 
-class SpaEntryProvider : EntryProvider(
-    SpaEnvironment.settingsEntryRepository,
-    browseActivityClass = SpaActivity::class.java,
-)
+class SpaEntryProvider : EntryProvider(SettingsSpaEnvironment)
