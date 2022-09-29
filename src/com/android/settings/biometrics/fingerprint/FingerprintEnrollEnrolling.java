@@ -64,7 +64,6 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
-import com.android.settings.SetupWizardUtils;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
@@ -216,9 +215,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     @Override
     protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        final int newResid = SetupWizardUtils.getTheme(this, getIntent());
         theme.applyStyle(R.style.SetupWizardPartnerResource, true);
-        super.onApplyThemeResource(theme, newResid, first);
+        super.onApplyThemeResource(theme, resid, first);
     }
 
     @Override
@@ -1062,7 +1060,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),
+                    R.style.Theme_AlertDialog);
             builder.setTitle(R.string.security_settings_fingerprint_enroll_touch_dialog_title)
                     .setMessage(R.string.security_settings_fingerprint_enroll_touch_dialog_message)
                     .setPositiveButton(R.string.security_settings_fingerprint_enroll_dialog_ok,
