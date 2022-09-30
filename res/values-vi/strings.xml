@@ -25,6 +25,8 @@
     <string name="on" msgid="1702751473920047">"Đang bật"</string>
     <string name="off" msgid="2898123876644709799">"Đang tắt"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Không xác định"</string>
+    <!-- no translation found for device_info_protected_single_press (3810785480060743677) -->
+    <skip />
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">Bây giờ, bạn chỉ cần thực hiện <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> bước nữa là trở thành nhà phát triển.</item>
       <item quantity="one">Bây giờ, bạn chỉ cần thực hiện <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> bước nữa là trở thành nhà phát triển.</item>
@@ -152,15 +154,13 @@
     <string name="skip_label" msgid="6380034601349015895">"Bỏ qua"</string>
     <string name="next_label" msgid="1248293387735652187">"Tiếp theo"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Ngôn ngữ"</string>
-    <string name="language_picker_category_title" msgid="1792199453060454565">"Thứ tự ngôn ngữ ưu tiên"</string>
-    <string name="desc_current_default_language" msgid="1901157141663662859">"Ngôn ngữ hệ thống"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Xóa"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Thêm ngôn ngữ"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Ngôn ngữ"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Ngôn ngữ ưa thích"</string>
-    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Ngôn ngữ ứng dụng"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Ngôn ngữ ứng dụng"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Đặt ngôn ngữ cho từng ứng dụng"</string>
-    <string name="app_locale_picker_title" msgid="2431448962911301366">"Ngôn ngữ ứng dụng"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"Ngôn ngữ ứng dụng"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Ngôn ngữ đề xuất"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Tất cả ngôn ngữ"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Ngôn ngữ hệ thống"</string>
@@ -168,9 +168,6 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Bạn chưa thể chọn ngôn ngữ cho ứng dụng này trong phần Cài đặt."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Ngôn ngữ có thể khác với ngôn ngữ có sẵn trong ứng dụng. Một số ứng dụng có thể không hỗ trợ cài đặt này."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Chỉ những ứng dụng cho phép lựa chọn ngôn ngữ mới xuất hiện ở đây."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Hệ thống, ứng dụng và trang web sẽ sử dụng ngôn ngữ đầu tiên được hỗ trợ trong số các ngôn ngữ mà bạn ưu tiên."</string>
-    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Để chọn ngôn ngữ cho từng ứng dụng, hãy chuyển đến phần cài đặt ngôn ngữ ứng dụng."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Tìm hiểu thêm về ngôn ngữ"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Xóa các ngôn ngữ đã chọn?</item>
       <item quantity="one">Xóa ngôn ngữ đã chọn?</item>
@@ -178,7 +175,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Văn bản sẽ hiển thị bằng ngôn ngữ khác."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Không thể xóa tất cả ngôn ngữ"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Giữ ít nhất một ngôn ngữ ưa thích"</string>
-    <string name="locale_not_translated" msgid="3071618135527110152">"Không có ở dạng ngôn ngữ hệ thống"</string>
+    <string name="locale_not_translated" msgid="5079729745235316146">"Có thể không khả dụng trong một số ứng dụng"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Chuyển lên"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Chuyển xuống"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Chuyển lên trên cùng"</string>
@@ -1011,7 +1008,7 @@
     <string name="wifi_gateway" msgid="3699227808616416759">"Cổng"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Độ dài tiền tố mạng"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi‑Fi Direct"</string>
-    <string name="wifi_p2p_menu_search" msgid="8383306178784876840">"Tìm kiếm thiết bị"</string>
+    <string name="wifi_p2p_menu_search" msgid="8383306178784876840">"Tìm thiết bị"</string>
     <string name="wifi_p2p_menu_searching" msgid="3428767661028761100">"Đang tìm kiếm…"</string>
     <string name="wifi_p2p_menu_rename" msgid="7059994112737743336">"Đổi tên thiết bị"</string>
     <string name="wifi_p2p_peer_devices" msgid="5158559154640283546">"Thiết bị ngang hàng"</string>
@@ -1453,6 +1450,8 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Điểm phát sóng, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Hiện không chia sẻ Internet với các thiết bị khác"</string>
+    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
+    <skip />
     <string name="tethering_interface_options" msgid="7575535888135143650">"Chia sẻ Internet"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Không dùng điểm phát sóng Wi‑Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Chỉ chia sẻ kết nối Internet qua USB"</string>
@@ -4795,6 +4794,8 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Số dư tối thiểu khi sạc đầy (Ứng dụng được miễn trừ)"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Số dư tối thiểu khi sạc đầy (Ứng dụng hệ thống không có giao diện người dùng)"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Số dư tối thiểu khi sạc đầy (Các ứng dụng còn lại)"</string>
+    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
+    <skip />
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"Đang sạc"</item>
     <item msgid="658627268149681677">"Nghỉ"</item>
@@ -4836,24 +4837,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Mật khẩu sai"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Để bắt đầu nghe, căn sao cho mã QR dưới nằm chính giữa"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Định dạng của mã QR không hợp lệ"</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"Ứng dụng di động dạng gói"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"Ứng dụng di động dạng gói"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"Thông tin về tính minh bạch của ứng dụng di động dạng gói"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"Có quảng cáo"</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"Thông tin về nhà phát triển"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"Thông tin liên hệ"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"Nội dung mô tả"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"Chính sách quyền riêng tư"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"Danh mục"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"Ứng dụng di động dạng gói"</string>
 </resources>
