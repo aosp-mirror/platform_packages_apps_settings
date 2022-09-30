@@ -182,9 +182,9 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             final TextView title = mLayoutPreference.findViewById(R.id.entity_header_title);
             title.setText(mCachedDevice.getName());
             final TextView summary = mLayoutPreference.findViewById(R.id.entity_header_summary);
-            summary.setText(mCachedDevice.getConnectionSummary(true /* shortSummary */));
 
             if (!mCachedDevice.isConnected() || mCachedDevice.isBusy()) {
+                summary.setText(mCachedDevice.getConnectionSummary(true /* shortSummary */));
                 updateDisconnectLayout();
                 return;
             }
@@ -196,6 +196,9 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                 mLayoutPreference.findViewById(R.id.layout_left).setVisibility(View.GONE);
                 mLayoutPreference.findViewById(R.id.layout_right).setVisibility(View.GONE);
 
+                summary.setText(mCachedDevice.getConnectionSummary(
+                        BluetoothUtils.getIntMetaData(device, BluetoothDevice.METADATA_MAIN_BATTERY)
+                                != BluetoothUtils.META_INT_ERROR));
                 updateSubLayout(mLayoutPreference.findViewById(R.id.layout_middle),
                         BluetoothDevice.METADATA_MAIN_ICON,
                         BluetoothDevice.METADATA_MAIN_BATTERY,
@@ -207,6 +210,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                     BluetoothDevice.DEVICE_TYPE_UNTETHERED_HEADSET)
                     || BluetoothUtils.getBooleanMetaData(device,
                     BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)) {
+                summary.setText(mCachedDevice.getConnectionSummary(true /* shortSummary */));
                 updateSubLayout(mLayoutPreference.findViewById(R.id.layout_left),
                         BluetoothDevice.METADATA_UNTETHERED_LEFT_ICON,
                         BluetoothDevice.METADATA_UNTETHERED_LEFT_BATTERY,

@@ -32,9 +32,11 @@ fun AppButtons(packageInfoPresenter: PackageInfoPresenter) {
 }
 
 private class AppButtonsHolder(private val packageInfoPresenter: PackageInfoPresenter) {
-    private val appLaunchButton = AppLaunchButton(context = packageInfoPresenter.context)
+    private val appLaunchButton = AppLaunchButton(packageInfoPresenter)
+    private val appInstallButton = AppInstallButton(packageInfoPresenter)
     private val appDisableButton = AppDisableButton(packageInfoPresenter)
     private val appUninstallButton = AppUninstallButton(packageInfoPresenter)
+    private val appClearButton = AppClearButton(packageInfoPresenter)
     private val appForceStopButton = AppForceStopButton(packageInfoPresenter)
 
     @Composable
@@ -46,14 +48,17 @@ private class AppButtonsHolder(private val packageInfoPresenter: PackageInfoPres
 
     private fun getActionButtons(packageInfo: PackageInfo): List<ActionButton> = listOfNotNull(
         appLaunchButton.getActionButton(packageInfo),
+        appInstallButton.getActionButton(packageInfo),
         appDisableButton.getActionButton(packageInfo),
         appUninstallButton.getActionButton(packageInfo),
+        appClearButton.getActionButton(packageInfo),
         appForceStopButton.getActionButton(packageInfo),
     )
 
     @Composable
     fun Dialogs() {
         appDisableButton.DisableConfirmDialog()
+        appClearButton.ClearConfirmDialog()
         appForceStopButton.ForceStopConfirmDialog()
     }
 }

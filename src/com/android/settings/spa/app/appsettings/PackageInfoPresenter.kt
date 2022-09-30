@@ -23,6 +23,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.UserHandle
 import android.util.Log
 import androidx.compose.runtime.Composable
@@ -48,9 +49,8 @@ class PackageInfoPresenter(
     private val coroutineScope: CoroutineScope,
 ) {
     private val metricsFeatureProvider = FeatureFactory.getFactory(context).metricsFeatureProvider
-    private val packageManager by lazy {
-        context.createContextAsUser(UserHandle.of(userId), 0).packageManager
-    }
+    val contextAsUser by lazy { context.createContextAsUser(UserHandle.of(userId), 0) }
+    val packageManagerAsUser: PackageManager by lazy { contextAsUser.packageManager }
     private val _flow: MutableStateFlow<PackageInfo?> = MutableStateFlow(null)
 
     val flow: StateFlow<PackageInfo?> = _flow
@@ -66,17 +66,23 @@ class PackageInfoPresenter(
     }
 
     /**
-     * Closes the page when the package is uninstalled.
+     * Detects the package removed event.
      */
     @Composable
-    fun PageCloser() {
+    fun PackageRemoveDetector() {
         val intentFilter = IntentFilter(Intent.ACTION_PACKAGE_REMOVED).apply {
             addDataScheme("package")
         }
         val navController = LocalNavController.current
         DisposableBroadcastReceiverAsUser(userId, intentFilter) { intent ->
             if (packageName == intent.data?.schemeSpecificPart) {
-                navController.navigateBack()
+                val packageInfo = flow.value
+                if (packageInfo != null && packageInfo.applicationInfo.isSystemApp) {
+                    // System app still exists after uninstalling the updates, refresh the page.
+                    notifyChange()
+                } else {
+                    navController.navigateBack()
+                }
             }
         }
     }
@@ -85,7 +91,7 @@ class PackageInfoPresenter(
     fun enable() {
         logAction(SettingsEnums.ACTION_SETTINGS_ENABLE_APP)
         coroutineScope.launch(Dispatchers.IO) {
-            packageManager.setApplicationEnabledSetting(
+            packageManagerAsUser.setApplicationEnabledSetting(
                 packageName, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0
             )
             notifyChange()
@@ -96,9 +102,28 @@ class PackageInfoPresenter(
     fun disable() {
         logAction(SettingsEnums.ACTION_SETTINGS_DISABLE_APP)
         coroutineScope.launch(Dispatchers.IO) {
-            packageManager.setApplicationEnabledSetting(
+            packageManagerAsUser.setApplicationEnabledSetting(
                 packageName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER, 0
             )
+            notifyChange()
+        }
+    }
+
+    /** Starts the uninstallation activity. */
+    fun startUninstallActivity(forAllUsers: Boolean = false) {
+        logAction(SettingsEnums.ACTION_SETTINGS_UNINSTALL_APP)
+        val packageUri = Uri.parse("package:${packageName}")
+        val intent = Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri).apply {
+            putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, forAllUsers)
+        }
+        context.startActivityAsUser(intent, UserHandle.of(userId))
+    }
+
+    /** Clears this instant app. */
+    fun clearInstantApp() {
+        logAction(SettingsEnums.ACTION_SETTINGS_CLEAR_INSTANT_APP)
+        coroutineScope.launch(Dispatchers.IO) {
+            packageManagerAsUser.deletePackageAsUser(packageName, null, 0, userId)
             notifyChange()
         }
     }
