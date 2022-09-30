@@ -669,6 +669,14 @@ public class FingerprintSettings extends SubSettings {
                 mLaunchedConfirm = false;
                 if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
                     if (data != null && BiometricUtils.containsGatekeeperPasswordHandle(data)) {
+                        if (!mHasFirstEnrolled && !mIsEnrolling) {
+                            final Activity activity = getActivity();
+                            if (activity != null) {
+                                // Apply pending transition for auto adding first fingerprint case
+                                activity.overridePendingTransition(R.anim.sud_slide_next_in,
+                                        R.anim.sud_slide_next_out);
+                            }
+                        }
                         mFingerprintManager.generateChallenge(mUserId,
                                 (sensorId, userId, challenge) -> {
                                     mToken = BiometricUtils.requestGatekeeperHat(getActivity(),
