@@ -3013,6 +3013,7 @@
                   android:taskAffinity="com.android.settings.FallbackHome"
                   android:exported="true"
                   android:theme="@style/FallbackHome"
+                  android:permission="android.permission.DEVICE_POWER"
                   android:configChanges="keyboardHidden">
             <intent-filter android:priority="-1000">
                 <action android:name="android.intent.action.MAIN" />
