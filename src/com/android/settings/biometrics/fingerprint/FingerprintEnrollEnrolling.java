@@ -286,8 +286,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         }
 
         mShouldShowLottie = shouldShowLottie();
-        // Only show the lottie if the current display density is the default density.
-        // Otherwise, the lottie will overlap with the settings header text.
+        // On non-SFPS devices, only show the lottie if the current display density is the default
+        // density. Otherwise, the lottie will overlap with the settings header text.
         boolean isLandscape = BiometricUtils.isReverseLandscape(getApplicationContext())
                 || BiometricUtils.isLandscape(getApplicationContext());
 
@@ -771,8 +771,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             CharSequence announcement = getString(
                     R.string.security_settings_sfps_enroll_progress_a11y_message, percent);
             announceEnrollmentProgress(announcement);
-            // mIllustrationLottie is only shown when current display density = default density,
-            // to prevent overlap with the settings header text.
             if (mIllustrationLottie != null) {
                 mIllustrationLottie.setContentDescription(
                         getString(
@@ -1019,9 +1017,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     private void updateOrientation(int orientation) {
         if (mCanAssumeSfps) {
-            if (mShouldShowLottie) {
-                mIllustrationLottie = findViewById(R.id.illustration_lottie);
-            }
+            mIllustrationLottie = findViewById(R.id.illustration_lottie);
         } else {
             switch(orientation) {
                 case Configuration.ORIENTATION_LANDSCAPE: {
