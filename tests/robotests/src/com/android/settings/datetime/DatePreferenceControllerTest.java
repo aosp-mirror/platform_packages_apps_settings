@@ -147,7 +147,7 @@ public class DatePreferenceControllerTest {
                 : Capabilities.CAPABILITY_NOT_SUPPORTED;
         TimeCapabilities capabilities = new TimeCapabilities.Builder(UserHandle.SYSTEM)
                 .setConfigureAutoDetectionEnabledCapability(Capabilities.CAPABILITY_POSSESSED)
-                .setSuggestManualTimeCapability(suggestManualCapability)
+                .setSetManualTimeCapability(suggestManualCapability)
                 .build();
         TimeConfiguration config = new TimeConfiguration.Builder()
                 .setAutoDetectionEnabled(!suggestManualAllowed)
