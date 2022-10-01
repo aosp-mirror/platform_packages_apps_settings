@@ -64,7 +64,6 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
-import com.android.settings.SetupWizardUtils;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
@@ -216,9 +215,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     @Override
     protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        final int newResid = SetupWizardUtils.getTheme(this, getIntent());
         theme.applyStyle(R.style.SetupWizardPartnerResource, true);
-        super.onApplyThemeResource(theme, newResid, first);
+        super.onApplyThemeResource(theme, resid, first);
     }
 
     @Override
@@ -286,8 +284,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         }
 
         mShouldShowLottie = shouldShowLottie();
-        // Only show the lottie if the current display density is the default density.
-        // Otherwise, the lottie will overlap with the settings header text.
+        // On non-SFPS devices, only show the lottie if the current display density is the default
+        // density. Otherwise, the lottie will overlap with the settings header text.
         boolean isLandscape = BiometricUtils.isReverseLandscape(getApplicationContext())
                 || BiometricUtils.isLandscape(getApplicationContext());
 
@@ -771,8 +769,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             CharSequence announcement = getString(
                     R.string.security_settings_sfps_enroll_progress_a11y_message, percent);
             announceEnrollmentProgress(announcement);
-            // mIllustrationLottie is only shown when current display density = default density,
-            // to prevent overlap with the settings header text.
             if (mIllustrationLottie != null) {
                 mIllustrationLottie.setContentDescription(
                         getString(
@@ -1019,9 +1015,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     private void updateOrientation(int orientation) {
         if (mCanAssumeSfps) {
-            if (mShouldShowLottie) {
-                mIllustrationLottie = findViewById(R.id.illustration_lottie);
-            }
+            mIllustrationLottie = findViewById(R.id.illustration_lottie);
         } else {
             switch(orientation) {
                 case Configuration.ORIENTATION_LANDSCAPE: {
@@ -1062,7 +1056,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),
+                    R.style.Theme_AlertDialog);
             builder.setTitle(R.string.security_settings_fingerprint_enroll_touch_dialog_title)
                     .setMessage(R.string.security_settings_fingerprint_enroll_touch_dialog_message)
                     .setPositiveButton(R.string.security_settings_fingerprint_enroll_dialog_ok,
