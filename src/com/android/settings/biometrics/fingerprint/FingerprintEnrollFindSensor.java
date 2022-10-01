@@ -168,8 +168,6 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
 
     private void updateSfpsFindSensorAnimationAsset() {
         mIllustrationLottie = findViewById(R.id.illustration_lottie);
-        LottieColorUtils.applyDynamicColors(getApplicationContext(), mIllustrationLottie);
-        mIllustrationLottie.setVisibility(View.VISIBLE);
         final int rotation = getApplicationContext().getDisplay().getRotation();
 
         switch (rotation) {
@@ -190,6 +188,9 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                         R.raw.fingerprint_edu_lottie_landscape_top_right);
                 break;
         }
+
+        LottieColorUtils.applyDynamicColors(getApplicationContext(), mIllustrationLottie);
+        mIllustrationLottie.setVisibility(View.VISIBLE);
         mIllustrationLottie.playAnimation();
     }
 
