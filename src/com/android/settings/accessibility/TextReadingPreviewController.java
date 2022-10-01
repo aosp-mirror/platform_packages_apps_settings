@@ -112,7 +112,9 @@ class TextReadingPreviewController extends BasePreferenceController implements
         mPreviewPreference.setPreviewAdapter(pagerAdapter);
         mPreviewPreference.setCurrentItem(
                 isLayoutRtl ? PREVIEW_SAMPLE_RES_IDS.length - 1 : FRAME_INITIAL_INDEX);
-        pagerAdapter.setPreviewLayer(getPagerIndex(), LAYER_INITIAL_INDEX,
+        final int initialPagerIndex =
+                mLastFontProgress * mDisplaySizeData.getValues().size() + mLastDisplayProgress;
+        pagerAdapter.setPreviewLayer(initialPagerIndex, LAYER_INITIAL_INDEX,
                 FRAME_INITIAL_INDEX, /* animate= */ false);
     }
 
@@ -168,11 +170,13 @@ class TextReadingPreviewController extends BasePreferenceController implements
 
     private int getPagerIndex() {
         final int displayDataSize = mDisplaySizeData.getValues().size();
+        final int fontSizeProgress = mFontSizePreference.getProgress();
+        final int displaySizeProgress = mDisplaySizePreference.getProgress();
 
         // To be consistent with the {@link PreviewPagerAdapter#setPreviewLayer(int, int, int,
         // boolean)} behavior, here also needs the same design. In addition, please also refer to
         // the {@link #createConfig(Configuration)}.
-        return mLastFontProgress * displayDataSize + mLastDisplayProgress;
+        return fontSizeProgress * displayDataSize + displaySizeProgress;
     }
 
     private void tryCommitFontSizeConfig() {
