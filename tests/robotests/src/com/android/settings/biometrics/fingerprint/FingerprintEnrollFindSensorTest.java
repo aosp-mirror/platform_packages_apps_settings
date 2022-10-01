@@ -89,7 +89,6 @@ public class FingerprintEnrollFindSensorTest {
     @Mock
     private FingerprintManager mFingerprintManager;
 
-    @Mock
     private Resources.Theme mTheme;
 
     private ActivityController<FingerprintEnrollFindSensor> mActivityController;
@@ -104,6 +103,7 @@ public class FingerprintEnrollFindSensorTest {
                         .putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0])
         );
         mActivity = mActivityController.get();
+        mTheme = mActivity.getTheme();
     }
 
     @Before
@@ -560,9 +560,10 @@ public class FingerprintEnrollFindSensorTest {
         setupActivity_onSfpsDevice();
         verifySidecar_onRearOrSfpsDevice();
 
-        mActivity.onApplyThemeResource(mActivity.getTheme(), R.style.GlifTheme, true /* first */);
+        mActivity.onApplyThemeResource(mTheme, R.style.GlifTheme, true /* first */);
 
-        verify(mTheme).applyStyle(R.style.SetupWizardPartnerResource, true);
+        final String appliedThemes = mTheme.toString();
+        assertThat(appliedThemes.contains("SetupWizardPartnerResource")).isTrue();
     }
 
     private void triggerEnrollProgressAndError_onRearDevice() {
