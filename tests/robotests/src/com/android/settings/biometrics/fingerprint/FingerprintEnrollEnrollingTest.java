@@ -86,7 +86,7 @@ public class FingerprintEnrollEnrollingTest {
 
     @Mock private Display mMockDisplay;
 
-    @Mock private Resources.Theme mTheme;
+    private Resources.Theme mTheme;
 
     private final int[] mSfpsStageThresholds = new int[]{0, 9, 13, 19, 25};
 
@@ -242,7 +242,8 @@ public class FingerprintEnrollEnrollingTest {
 
         mActivity.onApplyThemeResource(mTheme, R.style.GlifTheme, true /* first */);
 
-        verify(mTheme).applyStyle(R.style.SetupWizardPartnerResource, true);
+        final String appliedThemes = mTheme.toString();
+        assertThat(appliedThemes.contains("SetupWizardPartnerResource")).isTrue();
     }
 
     @Test
@@ -251,7 +252,8 @@ public class FingerprintEnrollEnrollingTest {
 
         mActivity.onApplyThemeResource(mTheme, R.style.GlifTheme, true /* first */);
 
-        verify(mTheme).applyStyle(R.style.SetupWizardPartnerResource, true);
+        final String appliedThemes = mTheme.toString();
+        assertThat(appliedThemes.contains("SetupWizardPartnerResource")).isTrue();
     }
 
     private void initializeActivityFor(int sensorType) {
@@ -291,6 +293,7 @@ public class FingerprintEnrollEnrollingTest {
         }
 
         ActivityController.of(mActivity).create(savedInstanceState);
+        mTheme = mActivity.getTheme();
     }
 
     private EnrollmentCallback verifyAndCaptureEnrollmentCallback() {

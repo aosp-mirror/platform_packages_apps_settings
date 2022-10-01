@@ -18,7 +18,6 @@ package com.android.settings.biometrics.fingerprint;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.verify;
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.Intent;
@@ -52,7 +51,7 @@ public class SetupFingerprintEnrollFindSensorTest {
 
     @Mock private FingerprintManager mFingerprintManager;
 
-    @Mock private Theme mTheme;
+    private Theme mTheme;
 
     private SetupFingerprintEnrollFindSensor mActivity;
 
@@ -67,6 +66,7 @@ public class SetupFingerprintEnrollFindSensorTest {
                 .putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
         mActivity = Robolectric.buildActivity(SetupFingerprintEnrollFindSensor.class,
                 intent).setup().get();
+        mTheme = mActivity.getTheme();
     }
 
     @After
@@ -88,7 +88,16 @@ public class SetupFingerprintEnrollFindSensorTest {
     public void fingerprintEnroll_activityApplyDarkLightStyle() {
         mActivity.onApplyThemeResource(mTheme, R.style.GlifTheme, true /* first */);
 
-        verify(mTheme).applyStyle(R.style.SetupWizardPartnerResource, true);
+        final String appliedThemes = mTheme.toString();
+        assertThat(appliedThemes.contains("SetupWizardPartnerResource")).isTrue();
+    }
+
+    @Test
+    public void fingerprintEnroll_showsAlert_setAlertDialogTheme() {
+        final AlertDialog alertDialog = setupAlertDialog();
+
+        assertThat(alertDialog.getContext().getThemeResId()).isEqualTo(
+                R.style.Theme_AlertDialog);
     }
 
     private AlertDialog setupAlertDialog() {
