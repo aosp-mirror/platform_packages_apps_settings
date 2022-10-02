@@ -25,6 +25,8 @@
     <string name="on" msgid="1702751473920047">"Activat"</string>
     <string name="off" msgid="2898123876644709799">"Desactivat"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Desconegut"</string>
+    <!-- no translation found for device_info_protected_single_press (3810785480060743677) -->
+    <skip />
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">Ara només et queden <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> passos per convertir-te en desenvolupador.</item>
       <item quantity="one">Ara només et queda <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> pas per convertir-te en desenvolupador.</item>
@@ -152,15 +154,13 @@
     <string name="skip_label" msgid="6380034601349015895">"Omet"</string>
     <string name="next_label" msgid="1248293387735652187">"Següent"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Idiomes"</string>
-    <string name="language_picker_category_title" msgid="1792199453060454565">"Ordre d\'idiomes preferits"</string>
-    <string name="desc_current_default_language" msgid="1901157141663662859">"Idioma del sistema"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Suprimeix"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Afegeix un idioma"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Idioma"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Idioma preferit"</string>
-    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Idiomes de les aplicacions"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Idiomes de les aplicacions"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Configura l\'idioma per a cada aplicació"</string>
-    <string name="app_locale_picker_title" msgid="2431448962911301366">"Idioma de l\'aplicació"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"Idioma de l\'aplicació"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Idiomes suggerits"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Tots els idiomes"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Idioma del sistema"</string>
@@ -168,9 +168,6 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La selecció d\'idioma per a aquesta aplicació no està disponible des de Configuració."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"És possible que l\'idioma no coincideixi amb els que hi ha disponibles a l\'aplicació. Algunes aplicacions no admeten aquesta opció de configuració."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Aquí només es mostren les aplicacions que admeten la selecció d\'idioma."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"El sistema, les aplicacions i els llocs web utilitzen el primer idioma admès dels teus idiomes preferits."</string>
-    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Per seleccionar un idioma en cada aplicació, ves a la configuració d\'idioma de l\'aplicació."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Més informació sobre els idiomes"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Vols suprimir els idiomes seleccionats?</item>
       <item quantity="one">Vols suprimir l\'idioma seleccionat?</item>
@@ -178,7 +175,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"El text es mostrarà en un altre idioma."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"No es poden suprimir tots els idiomes"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Conserva almenys un idioma preferit"</string>
-    <string name="locale_not_translated" msgid="3071618135527110152">"No disponible com a idioma del sistema"</string>
+    <string name="locale_not_translated" msgid="5079729745235316146">"És possible que no estigui disponible en algunes aplicacions"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Mou amunt"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Mou avall"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Mou a la part superior"</string>
@@ -1447,6 +1444,8 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth i Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Punt d\'accés Wi‑Fi, USB, Bluetooth i Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"No s\'està compartint la connexió a Internet amb altres dispositius"</string>
+    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
+    <skip />
     <string name="tethering_interface_options" msgid="7575535888135143650">"Compartició de xarxa"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"No utilitzis el punt d\'accés Wi‑Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Comparteix Internet només per USB"</string>
@@ -4789,6 +4788,8 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Saldo mínim amb càrrega completa (aplicacions exemptes)"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Saldo mínim amb càrrega completa (apps del sistema sense interfície gràfica)"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Saldo mínim amb càrrega completa (resta d\'aplicacions)"</string>
+    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
+    <skip />
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"Càrrega"</item>
     <item msgid="658627268149681677">"Migdiada"</item>

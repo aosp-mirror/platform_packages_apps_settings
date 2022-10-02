@@ -25,6 +25,7 @@
     <string name="on" msgid="1702751473920047">"Асаалттай"</string>
     <string name="off" msgid="2898123876644709799">"Унтраалттай"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Тодорхойгүй"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"Мэдээллийг харуулахын тулд товш"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">Танд одоо хөгжүүлэгч болоход <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> алхам дутуу байна.</item>
       <item quantity="one">Танд одоо хөгжүүлэгч болоход <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> алхам дутуу байна.</item>
@@ -152,15 +153,13 @@
     <string name="skip_label" msgid="6380034601349015895">"Алгасах"</string>
     <string name="next_label" msgid="1248293387735652187">"Дараагийн"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Хэл"</string>
-    <string name="language_picker_category_title" msgid="1792199453060454565">"Сонгосон хэлний дараалал"</string>
-    <string name="desc_current_default_language" msgid="1901157141663662859">"Системийн хэл"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Хасах"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Хэл нэмэх"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Хэл"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Сонгосон хэл"</string>
-    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Аппын хэлнүүд"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Аппын хэл"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Апп тус бүрд хэл тохируулна уу"</string>
-    <string name="app_locale_picker_title" msgid="2431448962911301366">"Аппын хэл"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"Аппын хэл"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Санал болгосон хэл"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Бүх хэл"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Системийн хэл"</string>
@@ -168,9 +167,6 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Энэ аппын хэлийг Тохиргоо хэсгээс сонгох боломжгүй байна."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Хэл нь аппад боломжтой хэлээс шалтгаалан харилцан адилгүй байж болно. Зарим апп энэ тохиргоог дэмждэггүй байж магадгүй."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Зөвхөн хэлний сонголтыг дэмждэг аппуудыг энд харуулав."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Таны систем, аппууд болон вебсайтууд таны сонгосон хэлээс эхний дэмжигдсэн хэлийг ашигладаг."</string>
-    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Апп тус бүрд хэл сонгохын тулд аппын хэлний тохиргоо руу очно уу."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Хэлнүүдийн талаар нэмэлт мэдээлэл авах"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Сонгосон хэлийг хасах уу?</item>
       <item quantity="one">Сонгосон хэлийг хасах уу?</item>
@@ -178,7 +174,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Текстийг өөр хэлээр харуулах болно."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Бүх хэлийг устгах боломжгүй"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Хамгийн багадаа нэг хэл үлдээнэ үү"</string>
-    <string name="locale_not_translated" msgid="3071618135527110152">"Системийн хэлээр боломжгүй"</string>
+    <string name="locale_not_translated" msgid="5079729745235316146">"Зарим апп-д боломжгүй байж болзошгүй"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Дээш зөөх"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Доош зөөх"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Хамгийн дээр оруулах"</string>
@@ -1309,17 +1305,14 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Зөөвөрлөх явцад <xliff:g id="NAME">^1</xliff:g>-ыг хөдөлгөхгүй байна уу. \n\n Энэ төхөөрөмж дээрх <xliff:g id="APP">^2</xliff:g> апп нь зөөвөрлөж дуусах хүртэл ажиллахгүй."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Та энэ <xliff:g id="NAME">^1</xliff:g>-г хэрхэн ашиглах вэ?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"SD картыг дотоод сан болгож форматална уу"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (6050264373968853062) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Зөвхөн энэ таблет дээр ашиглах аппууд &amp; медиаг хадгална уу. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD карт тохируулах талаар нэмэлт мэдээлэл авах&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Форматлах"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"SD картыг дотоод сан болгож форматална уу"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (4315288081962526508) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Зөвхөн энэ утсан дээр ашиглах аппууд &amp; медиаг хадгална уу. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD карт тохируулах талаар нэмэлт мэдээлэл авах&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Форматлах"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Эсвэл"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Зөөврийн хадгалах сан авах бол SD картыг форматлах"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_summary (2002761631147966185) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Зураг, видео, хөгжим болон бусад зүйлийг хадгалж, тэдгээрт бусад төхөөрөмжөөс хандана уу. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD карт тохируулах талаар нэмэлт мэдээлэл авах&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Форматлах"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Дараа тохируулах"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Энэ <xliff:g id="NAME">^1</xliff:g>-г форматлах уу?"</string>
@@ -1450,6 +1443,8 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Сүлжээний цэг, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Бусад төхөөрөмжтэй интернэт хуваалцахгүй"</string>
+    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
+    <skip />
     <string name="tethering_interface_options" msgid="7575535888135143650">"Модем болгох"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Wi-Fi сүлжээний цэгийг бүү ашигла"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Интернэтийг зөвхөн USB-р хуваалцана"</string>
@@ -4792,6 +4787,8 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Бүрэн цэнэглэгдсэн үеийн доод үлдэгдэл (Чөлөөлсөн)"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Бүрэн цэнэглэгдсэн үеийн доод үлдэгдэл (Хэрэглэгчийн интерфэйсгүй системийн апп)"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Бүрэн цэнэглэгдсэн үеийн доод үлдэгдэл (Үлдсэн аппууд)"</string>
+    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
+    <skip />
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"Цэнэглэж байна"</item>
     <item msgid="658627268149681677">"Зүүрмэглэх"</item>

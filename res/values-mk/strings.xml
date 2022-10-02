@@ -25,6 +25,7 @@
     <string name="on" msgid="1702751473920047">"Вклучено"</string>
     <string name="off" msgid="2898123876644709799">"Исклучено"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Непознато"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"Допрете за да се прикажат информации"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">Уште <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> чекор и ќе станете програмер.</item>
       <item quantity="other">Уште <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> чекора и ќе станете програмер.</item>
@@ -152,15 +153,13 @@
     <string name="skip_label" msgid="6380034601349015895">"Прескокни"</string>
     <string name="next_label" msgid="1248293387735652187">"Следно"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Јазици"</string>
-    <string name="language_picker_category_title" msgid="1792199453060454565">"Редослед на претпочитани јазици"</string>
-    <string name="desc_current_default_language" msgid="1901157141663662859">"Системски јазик"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Отстрани"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Додајте јазик"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Јазик"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Претпочитан јазик"</string>
-    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Јазици на апликациите"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Јазици за апликации"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Поставете го јазикот за секоја апликација"</string>
-    <string name="app_locale_picker_title" msgid="2431448962911301366">"Јазик на апликациjата"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"Јазик на апликациjата"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Предложени јазици"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Сите јазици"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Системски јазик"</string>
@@ -168,9 +167,6 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Не може да се бира јазик за апликацијава од „Поставките“."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Јазикот може да се разликува од јазиците достапни во апликацијата. Некои апликации може да не ја поддржуваат оваа поставка."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Само апликациите што поддржуваат бирање јазик се прикажани овде."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Системот, апликациите и веб-сајтовите го користат првиот поддржан јазик од вашите претпочитани јазици."</string>
-    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"За да изберете јазик за секоја апликација, одете во поставките за јазик на апликацијата."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Дознајте повеќе за јазиците"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Да се отстранат избраните јазици?</item>
       <item quantity="other">Да се отстранат избраните јазици?</item>
@@ -178,7 +174,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Текстот ќе се прикажува на друг јазик."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Не може да се отстранат сите јазици"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Задржете барем еден претпочитан јазик"</string>
-    <string name="locale_not_translated" msgid="3071618135527110152">"Не е достапен за системски јазик"</string>
+    <string name="locale_not_translated" msgid="5079729745235316146">"Може да не е достапно во некои апликации"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Премести нагоре"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Премести надолу"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Премести најгоре"</string>
@@ -1451,6 +1447,8 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, етернет"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Точка на пристап, USB, Bluetooth, етернет"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Не се споделува интернет со други уреди"</string>
+    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
+    <skip />
     <string name="tethering_interface_options" msgid="7575535888135143650">"Врзување"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Не користете точка на пристап за Wi‑Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Споделувајте интернет само преку USB"</string>
@@ -4793,6 +4791,8 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Минимално салдо при полна батерија (изземени апликации)"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Минимално салдо при полна батерија (апликации без кориснички интерфејс)"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Минимално салдо при полна батерија (останати апликации)"</string>
+    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
+    <skip />
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"Се полни"</item>
     <item msgid="658627268149681677">"Дремка"</item>

@@ -25,6 +25,7 @@
     <string name="on" msgid="1702751473920047">"இயக்கப்பட்டுள்ளது"</string>
     <string name="off" msgid="2898123876644709799">"முடக்கப்பட்டுள்ளது"</string>
     <string name="device_info_default" msgid="1406619232867343310">"தெரியவில்லை"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"தகவல்களைக் காட்ட தட்டவும்"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">டெவெலப்பராவதற்கு இப்போது <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> படிகளே உள்ளன.</item>
       <item quantity="one">டெவெலப்பராவதற்கு இப்போது <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> படியே உள்ளது.</item>
@@ -152,15 +153,13 @@
     <string name="skip_label" msgid="6380034601349015895">"தவிர்"</string>
     <string name="next_label" msgid="1248293387735652187">"அடுத்து"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"மொழிகள்"</string>
-    <string name="language_picker_category_title" msgid="1792199453060454565">"விருப்பமான மொழிகளின் வரிசை"</string>
-    <string name="desc_current_default_language" msgid="1901157141663662859">"சிஸ்டம் மொழி"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"அகற்று"</string>
     <string name="add_a_language" msgid="2126220398077503271">"மொழியைச் சேர்"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"மொழி"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"விருப்ப மொழி"</string>
-    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"ஆப்ஸ் மொழிகள்"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"ஆப்ஸ் மொழிகள்"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"ஒவ்வொரு ஆப்ஸுக்கும் மொழியை அமையுங்கள்"</string>
-    <string name="app_locale_picker_title" msgid="2431448962911301366">"ஆப்ஸ் மொழி"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"ஆப்ஸ் மொழி"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"பரிந்துரைக்கப்படும் மொழிகள்"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"எல்லா மொழிகளும்"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"சிஸ்டம் மொழி"</string>
@@ -168,9 +167,6 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"அமைப்புகளில் இந்த ஆப்ஸுக்கான மொழித் தேர்வு கிடைக்கவில்லை."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"ஆப்ஸில் இருக்கும் மொழிகளிலிருந்து மொழி வேறுபடலாம். சில ஆப்ஸில் இந்த அமைப்பைப் பயன்படுத்த முடியாது."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"மொழித் தேர்வை ஆதரிக்கும் ஆப்ஸ் மட்டும் இங்கே காட்டப்படும்."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"உங்களுக்கு விருப்பமான மொழிகளில் \'ஆதரிக்கப்படும் முதல் மொழியை\' உங்கள் சிஸ்டம், ஆப்ஸ், இணையதளங்கள் ஆகியவை பயன்படுத்தும்."</string>
-    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"ஒவ்வொரு ஆப்ஸுக்கும் மொழியைத் தேர்ந்தெடுக்க ஆப்ஸ் மொழி அமைப்புகளுக்குச் செல்லுங்கள்."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"மொழிகள் குறித்து மேலும் அறிந்துகொள்ளுங்கள்"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">தேர்ந்தெடுத்த மொழிகளை அகற்றவா?</item>
       <item quantity="one">தேர்ந்தெடுத்த மொழியை அகற்றவா?</item>
@@ -178,7 +174,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"உரை மற்றொரு மொழியில் காட்டப்படும்."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"எல்லா மொழிகளையும் அகற்ற முடியாது"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"விரும்பப்படும் மொழி ஒன்றாவது இருக்க வேண்டும்"</string>
-    <string name="locale_not_translated" msgid="3071618135527110152">"சிஸ்டம் மொழியாகக் கிடைக்கவில்லை"</string>
+    <string name="locale_not_translated" msgid="5079729745235316146">"சில பயன்பாடுகளில் கிடைக்காமல் இருக்கக்கூடும்"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"மேலே நகர்த்து"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"கீழே நகர்த்து"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"முதலாவதாக நகர்த்து"</string>
@@ -1309,17 +1305,14 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"நகர்த்தும்போது <xliff:g id="NAME">^1</xliff:g>ஐ அகற்ற வேண்டாம். \n\nநகர்த்தி முடிக்கும்வரை, சாதனத்தில் <xliff:g id="APP">^2</xliff:g> ஆப்ஸ் கிடைக்காது."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"<xliff:g id="NAME">^1</xliff:g>ஐ எப்படிப் பயன்படுத்துவீர்கள்?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"அகச் சேமிப்பகத்திற்கு SD கார்டை ஃபார்மேட் செய்தல்"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (6050264373968853062) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"இந்த டேப்லெட்டில் மட்டுமே பயன்படுத்துவதற்கான ஆப்ஸையும் மீடியாவையும் சேமிக்கலாம். &lt;a href=https://support.google.com/android/answer/12153449&gt;SD கார்டை அமைப்பது குறித்து மேலும் அறிக&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"ஃபார்மேட் செய்"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"அகச் சேமிப்பகத்திற்கு SD கார்டை ஃபார்மேட் செய்தல்"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (4315288081962526508) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"இந்த மொபைலில் மட்டுமே பயன்படுத்துவதற்கான ஆப்ஸையும் மீடியாவையும் சேமிக்கலாம். &lt;a href=https://support.google.com/android/answer/12153449&gt;SD கார்டை அமைப்பது குறித்து மேலும் அறிக&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"ஃபார்மேட் செய்"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"அல்லது"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"போர்டபிள் ஸ்டோரேஜுக்கு SD கார்டை ஃபார்மேட் செய்தல்"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_summary (2002761631147966185) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"படங்கள், வீடியோக்கள், இசை மற்றும் பலவற்றைச் சேமித்து பிற சாதனங்களில் அவற்றை அணுகலாம். &lt;a href=https://support.google.com/android/answer/12153449&gt;SD கார்டை அமைப்பது குறித்து மேலும் அறிக&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"ஃபார்மேட் செய்"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"பின்னர் அமை"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"<xliff:g id="NAME">^1</xliff:g>ஐ ஃபார்மேட் செய்யவா?"</string>
@@ -1450,6 +1443,8 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, புளூடூத், ஈதர்நெட்"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"ஹாட்ஸ்பாட், USB, புளூடூத், ஈதர்நெட்"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"பிற சாதனங்களுடன் இணையத்தைப் பகிர்வதில்லை"</string>
+    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
+    <skip />
     <string name="tethering_interface_options" msgid="7575535888135143650">"டெதெரிங்"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"வைஃபை ஹாட்ஸ்பாட்டைப் பயன்படுத்த வேண்டாம்"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"USB வழியாக மட்டும் இணையத்தைப் பகிரவும்"</string>
@@ -4792,6 +4787,8 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"முழு பேட்டரி நிலையில் குறைந்தபட்ச பேலன்ஸ் (விலக்களிக்கப்பட்டவை)"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"முழு பேட்டரி நிலையில் குறைந்தபட்ச பேலன்ஸ் (டீஃபால்ட்டாக நிறுவப்பட்ட ஆப்ஸ்)"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"முழு பேட்டரி நிலையில் குறைந்தபட்ச பேலன்ஸ் (மீதமுள்ள ஆப்ஸ்)"</string>
+    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
+    <skip />
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"சார்ஜாகிறது"</item>
     <item msgid="658627268149681677">"பேட்டரி சேமிப்பு"</item>

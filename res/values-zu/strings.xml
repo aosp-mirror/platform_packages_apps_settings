@@ -25,6 +25,7 @@
     <string name="on" msgid="1702751473920047">"Vuliwe"</string>
     <string name="off" msgid="2898123876644709799">"Valiwe"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Akwaziwa"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"Thepha ukuze ubonise ulwazi"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">Manje ususele ngamagxathu angu-<xliff:g id="STEP_COUNT_1">%1$d</xliff:g> ukuthi ube ngunjiniyela.</item>
       <item quantity="other">Manje ususele ngamagxathu angu-<xliff:g id="STEP_COUNT_1">%1$d</xliff:g> ukuthi ube ngunjiniyela.</item>
@@ -152,15 +153,13 @@
     <string name="skip_label" msgid="6380034601349015895">"Yeqa"</string>
     <string name="next_label" msgid="1248293387735652187">"Okulandelayo"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Izilimi"</string>
-    <string name="language_picker_category_title" msgid="1792199453060454565">"Ukuhleleka kolimi oluncanyelwayo"</string>
-    <string name="desc_current_default_language" msgid="1901157141663662859">"Ulimi lwesistimu"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Susa"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Engeza ulimi"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Ulimi"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Ulimi oluncanyelwayo"</string>
-    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Izilimi ze-app"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Izilimi ze-App"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Setha ulimi le-app ngayinye"</string>
-    <string name="app_locale_picker_title" msgid="2431448962911301366">"Ulimi lwe-app"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"Ulimi le-app"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Izilimi eziphakanyisiwe"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Zonke izilimi"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Ulimi lwesistimu"</string>
@@ -168,9 +167,6 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Ukukhetha ulimi kwale app akutholakali Kumasethingi."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Ulimi lungahluka ezilimini ezitholakala ku-app. Amanye ama-app angase angalisekeli leli sethingi."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Ama-app asekela ukukhethwa kolimi kuphela aboniswa lapha."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Amasistimu wakho, ama-app, namawebhusayithi kusebenzisa ulimi olusekelwayo lokuqala kusuka ezilimini zakho ezincanyelwayo."</string>
-    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Ukuze ukhethe ulimi lwe-app ngayinye, iya kumasethingi wolimi lwe-app."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Funda kabanzi ngezilimi"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Susa izilimi ezikhethiwe?</item>
       <item quantity="other">Susa izilimi ezikhethiwe?</item>
@@ -178,7 +174,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Umbhalo uzoboniswa ngolunye ulimi."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Ayikwazi ukususa zonke izilimi"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Gcina okungenani ulimi olulodwa oluncanyelwayo"</string>
-    <string name="locale_not_translated" msgid="3071618135527110152">"Akutholakali njengolimi lwesistimu"</string>
+    <string name="locale_not_translated" msgid="5079729745235316146">"Kungenzeka ingatholakali kwezinye izinhlelo zokusebenza"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Iya phezulu"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Iya phansi"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Thumela Phezulu"</string>
@@ -1309,17 +1305,14 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Ungasusi i-<xliff:g id="NAME">^1</xliff:g> ngesikhathi sokuhambisa. \n\nUhlelo lokusebenza lwe-<xliff:g id="APP">^2</xliff:g> kule divayisi ngeke luze lutholakale kuze kuqedwe ukuhambisa."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Uzoyisebenzisa kanjani le <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Fometha ikhadi le-SD ukuze uthole isitoreji sangaphakathi"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (6050264373968853062) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Gcina ama-app nemidiya ongayisebenzisa kule thebulethi kuphela. &lt;a href=https://support.google.com/android/answer/12153449&gt;Funda kabanzi ngokusetha ikhadi le-SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Ifomethi"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Fometha ikhadi le-SD ukuze uthole isitoreji sangaphakathi"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (4315288081962526508) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Gcina ama-app nemidiya ongayisebenzisa kule foni kuphela. &lt;a href=https://support.google.com/android/answer/12153449&gt;Funda kabanzi ngokusetha ikhadi le-SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Ifomethi"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Noma"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Fometha ikhadi le-SD ukuze uthole isitoreji esiphathekayo"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_summary (2002761631147966185) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Gcina izithombe, amavidiyo, umculo, nokuningi futhi ukufinyelele kwamanye amadivayisi. &lt;a href=https://support.google.com/android/answer/12153449&gt;Funda kabanzi ngokusetha ikhadi le-SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Ifomethi"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Setha emuva kwesikhathi"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Fomethi le <xliff:g id="NAME">^1</xliff:g>?"</string>
@@ -1451,6 +1444,8 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"I-USB, i-Bluetooth, i-Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"I-Hotspot, i-USB, i-Bluetooth, i-Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Ayabelani nge-inthanethi namanye amadivayisi"</string>
+    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
+    <skip />
     <string name="tethering_interface_options" msgid="7575535888135143650">"Ukusebenzisa ifoni njengemodemu"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Ungasebenzisi i-Wi‑Fi hotspot"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Yabelana i-inthanethi nge-USB"</string>
@@ -4793,6 +4788,8 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Ibhalansi Enelisekile (Ikhululiwe)"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Ibhalansi Enelisekile (I-App Yesistimu Engenazinhloko)"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Ibhalansi Enelisekile (Ama-app Asele)"</string>
+    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
+    <skip />
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"Iyashaja"</item>
     <item msgid="658627268149681677">"Ukozela"</item>
