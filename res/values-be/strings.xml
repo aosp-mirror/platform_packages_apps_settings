@@ -25,6 +25,8 @@
     <string name="on" msgid="1702751473920047">"Уключана"</string>
     <string name="off" msgid="2898123876644709799">"Выключана"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Невядома"</string>
+    <!-- no translation found for device_info_protected_single_press (3810785480060743677) -->
+    <skip />
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">Зараз вы ў <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> кроку ад таго, каб стаць распрацоўшчыкам.</item>
       <item quantity="few">Зараз вы ў <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> кроках ад таго, каб стаць распрацоўшчыкам.</item>
@@ -154,15 +156,13 @@
     <string name="skip_label" msgid="6380034601349015895">"Прапусціць"</string>
     <string name="next_label" msgid="1248293387735652187">"Далей"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Мовы"</string>
-    <string name="language_picker_category_title" msgid="1792199453060454565">"Парадак выбраных моў"</string>
-    <string name="desc_current_default_language" msgid="1901157141663662859">"Мова сістэмы"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Выдаліць"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Дадаць мову"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Мова"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Прыярытэтная мова"</string>
-    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Мовы праграмы"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Мовы праграмы"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Задаць мову для кожнай праграмы"</string>
-    <string name="app_locale_picker_title" msgid="2431448962911301366">"Мова праграмы"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"Мова праграмы"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Прапанаваныя мовы"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Усе мовы"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Мова сістэмы"</string>
@@ -170,9 +170,6 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Выбар мовы для гэтай праграмы недаступны ў Наладах."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Мова можа адрознівацца ад моў, даступных у праграме. Некаторыя праграмы могуць не падтрымліваць гэту наладу."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Тут паказаны толькі праграмы, якія падтрымліваюць выбар мовы."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Ваша сістэма, праграмы і вэб-сайты выкарыстоўваюць першую з выбраных вамі моў, якая падтрымліваецца."</string>
-    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Каб выбраць мову для кожнай праграмы, адкрыйце налады мовы."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Даведацца больш пра мовы"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Выдаліць выбраныя мовы?</item>
       <item quantity="few">Выдаліць выбраныя мовы?</item>
@@ -182,7 +179,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Тэкст будзе адлюстроўвацца на іншай мове."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Не атрымалася выдаліць усе мовы"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Пакіньце па меншай меры адну прыярытэтную мову"</string>
-    <string name="locale_not_translated" msgid="3071618135527110152">"Недаступна ў якасці мовы сістэмы"</string>
+    <string name="locale_not_translated" msgid="5079729745235316146">"Можа быць недаступна ў некаторых праграмах"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Перамясціць вышэй"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Перамясціць ніжэй"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Перамясціць уверх"</string>
@@ -1353,17 +1350,14 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Не вымайце <xliff:g id="NAME">^1</xliff:g> падчас перамяшчэння. \n\nДадатак <xliff:g id="APP">^2</xliff:g> не будзе даступны на гэтай прыладзе, пакуль перамяшчэнне не завершана."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Як выкарыстоўваць <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Фармаціраваць SD-карту для ўнутранага сховішча"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (6050264373968853062) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Захоўваць праграмы і мультымедыя для іх выкарыстання толькі на гэтым планшэце. &lt;a href=https://support.google.com/android/answer/12153449&gt;Даведацца больш пра наладжванне SD-карты&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Фармаціраваць"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Фармаціраваць SD-карту для ўнутранага сховішча"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (4315288081962526508) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Захоўваць праграмы і мультымедыя для іх выкарыстання толькі на гэтым тэлефоне. &lt;a href=https://support.google.com/android/answer/12153449&gt;Даведацца больш пра наладжванне SD-карты&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Фармаціраваць"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"або"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Фармаціраваць SD-карту для партатыўнага сховішча"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_summary (2002761631147966185) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Захоўваць фота, відэа, музыку і іншае змесціва і атрымліваць да яго доступ з іншых прылад. &lt;a href=https://support.google.com/android/answer/12153449&gt;Даведацца больш пра наладжванне SD-карты&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Фармаціраваць"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Наладзіць пазней"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Адфармаціраваць прыладу \"<xliff:g id="NAME">^1</xliff:g>\"?"</string>
@@ -1494,6 +1488,8 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Хот-спот, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Інтэрнэт не абагульваецца з іншымі прыладамі"</string>
+    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
+    <skip />
     <string name="tethering_interface_options" msgid="7575535888135143650">"Мадэм"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Не выкарыстоўваць хот-спот Wi‑Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Абагульваць інтэрнэт толькі праз USB"</string>
@@ -4930,6 +4926,8 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Мінімальны баланс пры поўнай зарадцы (для выключаных праграм)"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Мінімальны баланс пры поўнай зарадцы (для сістэмных праграм без інтэрфейсу)"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Мінімальны баланс пры поўнай зарадцы (для астатніх праграм)"</string>
+    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
+    <skip />
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"Зарадка"</item>
     <item msgid="658627268149681677">"Дрымота"</item>
