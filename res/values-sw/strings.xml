@@ -25,6 +25,8 @@
     <string name="on" msgid="1702751473920047">"Imewashwa"</string>
     <string name="off" msgid="2898123876644709799">"Imezimwa"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Haijulikani"</string>
+    <!-- no translation found for device_info_protected_single_press (3810785480060743677) -->
+    <skip />
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">Umebakisha hatua <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> uwe msanidi programu.</item>
       <item quantity="one">Umebakisha hatua <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> uwe msanidi programu.</item>
@@ -152,15 +154,13 @@
     <string name="skip_label" msgid="6380034601349015895">"Ruka"</string>
     <string name="next_label" msgid="1248293387735652187">"Endelea"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Lugha"</string>
-    <string name="language_picker_category_title" msgid="1792199453060454565">"Mpangilio wa lugha unayopendelea"</string>
-    <string name="desc_current_default_language" msgid="1901157141663662859">"Lugha ya mfumo"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Ondoa"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Ongeza lugha nyingine"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Lugha"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Lugha Inayopendelewa"</string>
-    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Lugha za programu"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Lugha za Programu"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Weka lugha ya kila programu"</string>
-    <string name="app_locale_picker_title" msgid="2431448962911301366">"Lugha ya programu"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"Lugha ya Programu"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Lugha zinazopendekezwa"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Lugha zote"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Lugha ya mfumo"</string>
@@ -168,9 +168,6 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Chaguo la lugha kwa programu hii halipatikani kwenye Mipangilio."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Huenda lugha ikatofautiana na zinazopatikana katika programu. Huenda baadhi ya programu zisiwe na uwezo wa kutumia mipangilio hii."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Programu zinazoruhusu kuteua lugha ndizo zinazoonyeshwa hapa."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Mfumo wako, programu na tovuti hutumia lugha ya kwanza inayotumika katika chaguo za lugha unazozipendelea."</string>
-    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Ili uchague lugha kwa kila programu, nenda kwenye mipangilio ya lugha ya programu."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Pata maelezo zaidi kuhusu lugha"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Ungependa kuondoa lugha zilizochaguliwa?</item>
       <item quantity="one">Ungependa kuondoa lugha iliyochaguliwa?</item>
@@ -178,7 +175,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Maandishi yataonyeshwa katika lugha nyingine."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Haiwezi kuondoa lugha zote"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Hifadhi angalau lugha moja unayopendelea"</string>
-    <string name="locale_not_translated" msgid="3071618135527110152">"Haipatikani kama lugha ya mfumo"</string>
+    <string name="locale_not_translated" msgid="5079729745235316146">"Huenda isipatikane katika baadhi ya programu"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Sogeza juu"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Sogeza chini"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Hamishia juu"</string>
@@ -1309,17 +1306,14 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Usionde <xliff:g id="NAME">^1</xliff:g> wakati wa kuhamisha. \n\nProgramu ya <xliff:g id="APP">^2</xliff:g> haitapatikana kwenye kifaa hiki hadi ukamilishe kuhamisha."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Ungependa kutumia <xliff:g id="NAME">^1</xliff:g> hii vipi?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Andaa kadi ya SD kwa ajili ya hifadhi ya mfumo"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (6050264373968853062) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Hifadhi programu na maudhui ya kutumia kwenye kompyuta kibao hii tu. &lt;a href=https://support.google.com/android/answer/12153449&gt;Pata maelezo zaidi kuhusu kuweka mipangilio ya kadi ya SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Andaa diski"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Andaa kadi ya SD kwa ajili ya hifadhi ya mfumo"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (4315288081962526508) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Hifadhi programu na maudhui ya kutumia kwenye simu hii tu. &lt;a href=https://support.google.com/android/answer/12153449&gt;Pata maelezo zaidi kuhusu kuweka mipangilio ya kadi ya SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Andaa diski"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Au"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Andaa kadi ya SD kwa ajili ya hifadhi inayohamishika"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_summary (2002761631147966185) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Hifadhi picha, video, muziki na zaidi, na uvifikie katika vifaa vingine. &lt;a href=https://support.google.com/android/answer/12153449&gt;Pata maelezo zaidi kuhusu kuweka mipangilio ya kadi ya SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Andaa diski"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Weka mipangilio baadaye"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Ungependa kuandaa <xliff:g id="NAME">^1</xliff:g>?"</string>
@@ -1450,6 +1444,8 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethaneti"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Mtandao pepe, USB, Bluetooth, Ethaneti"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Haishiriki intaneti na vifaa vingine"</string>
+    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
+    <skip />
     <string name="tethering_interface_options" msgid="7575535888135143650">"Kusambaza mtandao"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Usitumie mtandaopepe wa Wi-Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Shiriki intaneti kupitia USB pekee"</string>
@@ -4792,6 +4788,8 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Salio la Chini Wakati Kifaa Kimejaa Chaji (Kimeruhusiwa kutofuata kanuni)"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Salio la Chini Wakati Kifaa Kimejaa Chaji (Programu ya mfumo isiyo na kiolesura)"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Salio la Chini Wakati Kifaa Kimejaa Chaji (Programu Zilizosalia)"</string>
+    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
+    <skip />
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"Inachaji"</item>
     <item msgid="658627268149681677">"Sinzia"</item>

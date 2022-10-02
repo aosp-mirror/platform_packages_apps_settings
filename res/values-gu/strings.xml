@@ -25,6 +25,7 @@
     <string name="on" msgid="1702751473920047">"ચાલુ છે"</string>
     <string name="off" msgid="2898123876644709799">"બંધ છે"</string>
     <string name="device_info_default" msgid="1406619232867343310">"અજાણ્યું"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"માહિતી બતાવવા માટે ટૅપ કરો"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">તમે હવે એક વિકાસકર્તા બનવાથી <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> પગલાં દૂર છો.</item>
       <item quantity="other">તમે હવે એક વિકાસકર્તા બનવાથી <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> પગલાં દૂર છો.</item>
@@ -152,15 +153,13 @@
     <string name="skip_label" msgid="6380034601349015895">"છોડો"</string>
     <string name="next_label" msgid="1248293387735652187">"આગલું"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"ભાષાઓ"</string>
-    <string name="language_picker_category_title" msgid="1792199453060454565">"પસંદ કરેલી ભાષાનો ક્રમ"</string>
-    <string name="desc_current_default_language" msgid="1901157141663662859">"સિસ્ટમની ભાષા"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"કાઢી નાખો"</string>
     <string name="add_a_language" msgid="2126220398077503271">"ભાષા ઉમેરો"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"ભાષા"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"પસંદગીની ભાષા"</string>
-    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"ઍપની ભાષાઓ"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"ઍપની ભાષાઓ"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"દરેક ઍપ માટે કોઈ ભાષા સેટ કરો"</string>
-    <string name="app_locale_picker_title" msgid="2431448962911301366">"ઍપની ભાષા"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"ઍપની ભાષા"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"સૂચવેલી ભાષાઓ"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"બધી ભાષાઓ"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"સિસ્ટમની ભાષા"</string>
@@ -168,9 +167,6 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"આ ઍપ માટે સેટિંગમાંથી ભાષા પસંદ કરી શકાતી નથી."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"આ ભાષા ઍપમાં ઉપલબ્ધ ભાષાઓથી અલગ હોઈ શકે છે. કેટલીક ઍપ આ સેટિંગને સપોર્ટ ન કરે એવું બની શકે છે."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"માત્ર ભાષાની પસંદગીને સપોર્ટ કરતી ઍપ જ અહીં બતાવવામાં આવી છે."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"તમારી સિસ્ટમ, ઍપ અને વેબસાઇટ, તમારી પસંદગીની ભાષાઓમાંની પહેલી સપોર્ટેડ ભાષાનો ઉપયોગ કરે છે."</string>
-    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"દરેક ઍપ માટે ભાષા પસંદ કરવા, ઍપની ભાષાના સેટિંગ પર જાઓ."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"ભાષાઓ વિશે વધુ જાણો"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">પસંદ કરેલ ભાષાઓને કાઢી નાખીએ?</item>
       <item quantity="other">પસંદ કરેલ ભાષાઓને કાઢી નાખીએ?</item>
@@ -178,7 +174,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"ટેક્સ્ટ બીજી ભાષામાં પ્રદર્શિત કરવામાં આવશે."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"બધી ભાષાઓ દૂર કરી શકતાં નથી"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"ઓછામાં ઓછી એક પસંદીદા ભાષા રાખો"</string>
-    <string name="locale_not_translated" msgid="3071618135527110152">"સિસ્ટમની ભાષા તરીકે ઉપલબ્ધ નથી"</string>
+    <string name="locale_not_translated" msgid="5079729745235316146">"કેટલીક ઍપ્લિકેશનોમાં કદાચ ઉપલબ્ધ ન હોય"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"ઉપર ખસેડો"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"નીચે ખસેડો"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"ઉપર ખસેડો"</string>
@@ -1309,17 +1305,14 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"ખસેડવા દરમિયાન <xliff:g id="NAME">^1</xliff:g> ને દૂર કરશો નહીં. \n\nજ્યાં સુધી ખસેડવાનું પૂર્ણ થતું નથી ત્યાં સુધી આ ઉપકરણ પરની <xliff:g id="APP">^2</xliff:g> ઍપ્લિકેશન ઉપલબ્ધ થશે નહીં."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"તમે આ <xliff:g id="NAME">^1</xliff:g>નો કેવી રીતે ઉપયોગ કરશો?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"આંતરિક સ્ટોરેજ માટે SD કાર્ડને ફૉર્મેટ કરો"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (6050264373968853062) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"માત્ર આ ટૅબ્લેટ પર ઉપયોગ કરવા માટે ઍપ અને મીડિયા સ્ટોર કરો. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD કાર્ડનું સેટઅપ કરવા વિશે વધુ જાણો&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"ફૉર્મેટ કરો"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"આંતરિક સ્ટોરેજ માટે SD કાર્ડને ફૉર્મેટ કરો"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (4315288081962526508) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"માત્ર આ ફોન પર ઉપયોગ કરવા માટે ઍપ અને મીડિયા સ્ટોર કરો. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD કાર્ડનું સેટઅપ કરવા વિશે વધુ જાણો&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"ફૉર્મેટ કરો"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"અથવા"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"પોર્ટેબલ સ્ટોરેજ માટે SD કાર્ડને ફૉર્મેટ કરો"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_summary (2002761631147966185) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"ફોટા, વીડિયો, મ્યુઝિક અને બીજું ઘણું સ્ટોર કરો અને તેમને અન્ય ડિવાઇસમાંથી ઍક્સેસ કરો. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD કાર્ડનું સેટઅપ કરવા વિશે વધુ જાણો&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"ફૉર્મેટ કરો"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"થોડા સમય પછી સેટ કરો"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"આ <xliff:g id="NAME">^1</xliff:g>ને ફૉર્મેટ કરીએ?"</string>
@@ -1450,6 +1443,8 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, બ્લૂટૂથ, ઇથરનેટ"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"હૉટસ્પૉટ, USB, બ્લૂટૂથ, ઇથરનેટ"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"અન્ય ડિવાઇસ સાથે ઇન્ટરનેટ શેર કરી રહ્યાં નથી"</string>
+    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
+    <skip />
     <string name="tethering_interface_options" msgid="7575535888135143650">"ઇન્ટરનેટ શેર કરવાની સુવિધા"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"વાઇ-ફાઇ હૉટસ્પૉટનો ઉપયોગ કરશો નહીં"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"ફક્ત USB મારફતે ઇન્ટરનેટ શેર કરો"</string>
@@ -4792,6 +4787,8 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"બૅટરી પૂરી ચાર્જ થયેલી હોય ત્યારનું લઘુતમ બૅલેન્સ (બાકાત રાખેલી ઍપ)"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"બૅટરી પૂરી ચાર્જ થયેલી હોય ત્યારનું લઘુતમ બૅલેન્સ (હેડલેસ સિસ્ટમ ઍપ)"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"બૅટરી પૂરી ચાર્જ થયેલી હોય ત્યારનું લઘુતમ બૅલેન્સ (બાકી ઍપ)"</string>
+    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
+    <skip />
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"ચાર્જ થઈ રહ્યું છે"</item>
     <item msgid="658627268149681677">"ડોઝ"</item>

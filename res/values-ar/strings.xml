@@ -25,6 +25,8 @@
     <string name="on" msgid="1702751473920047">"مفعَّلة"</string>
     <string name="off" msgid="2898123876644709799">"غير مفعّلة"</string>
     <string name="device_info_default" msgid="1406619232867343310">"غير معروف"</string>
+    <!-- no translation found for device_info_protected_single_press (3810785480060743677) -->
+    <skip />
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="zero">لا يفصلك الآن عن الوصول إلى مرحلة مطوري البرامج سوى <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> خطوة.</item>
       <item quantity="two">لا يفصلك الآن عن الوصول إلى مرحلة مطوري البرامج سوى خطوتين (<xliff:g id="STEP_COUNT_1">%1$d</xliff:g>).</item>
@@ -156,15 +158,13 @@
     <string name="skip_label" msgid="6380034601349015895">"التخطي"</string>
     <string name="next_label" msgid="1248293387735652187">"التالي"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"اللغات"</string>
-    <string name="language_picker_category_title" msgid="1792199453060454565">"ترتيب اللغات المفضَّلة"</string>
-    <string name="desc_current_default_language" msgid="1901157141663662859">"لغة النظام"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"إزالة"</string>
     <string name="add_a_language" msgid="2126220398077503271">"إضافة لغة"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"اللغة"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"اللغة المفضلة"</string>
-    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"لغات التطبيقات"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"لغات التطبيقات"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"ضبط اللغة لكل تطبيق"</string>
-    <string name="app_locale_picker_title" msgid="2431448962911301366">"لغة التطبيق"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"لغة التطبيق"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"اللغات المقترحة"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"جميع اللغات"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"لغة النظام"</string>
@@ -172,9 +172,6 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"لا تتوفَّر إمكانية اختيار لغة لهذا التطبيق من الإعدادات."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"قد تختلف اللغة عن اللغات المتوفّرة في التطبيق. قد لا تدعم بعض التطبيقات هذا الإعداد."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"تظهر هنا فقط التطبيقات التي تتيح اختيار اللغة."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"يستخدم النظام والتطبيقات والمواقع الإلكترونية أول لغة متوافقة من اللغات المفضّلة."</string>
-    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"لاختيار لغة لكل تطبيق، انتقِل إلى إعدادات لغة التطبيق."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"مزيد من المعلومات عن اللغات"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="zero">هل تريد إزالة اللغة المحددة؟</item>
       <item quantity="two">هل تريد إزالة اللغتين المحددتين؟</item>
@@ -186,7 +183,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"سيتم عرض النص بلغة أخرى."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"تتعذر إزالة كل اللغات"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"يجب الاحتفاظ بلغة واحدة مفضَّلة على الأقل."</string>
-    <string name="locale_not_translated" msgid="3071618135527110152">"غير متاحة كلغة للنظام."</string>
+    <string name="locale_not_translated" msgid="5079729745235316146">"يمكن أن تكون اللغة غير متوفرة في بعض التطبيقات."</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"نقل لأعلى"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"نقل لأسفل"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"نقل إلى الأعلى"</string>
@@ -488,7 +485,7 @@
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"ضع طرف إصبعك على المستشعر."</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"ضع الحافة اليسرى لإصبعك"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"ضع الحافة اليمنى لإصبعك"</string>
-    <string name="security_settings_sfps_enroll_finger_center_title" msgid="1320688855767675739">"ضَع وسط إصبعك على أداة الاستشعار"</string>
+    <string name="security_settings_sfps_enroll_finger_center_title" msgid="1320688855767675739">"ضَع وسط بصمة إصبعك على أداة الاستشعار"</string>
     <string name="security_settings_sfps_enroll_fingertip_title" msgid="2737520837684516446">"ضع طرف إصبعك على أداة الاستشعار"</string>
     <string name="security_settings_sfps_enroll_left_edge_title" msgid="9022963735924413343">"ضع الحافة اليسرى لإصبعك على أداة الاستشعار"</string>
     <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"أخيرًا، ضع الحافة اليمنى لإصبعك على أداة الاستشعار"</string>
@@ -1176,8 +1173,7 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+‎"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+‎"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"تستخدِم الدقة الكاملة قدرًا أكبر من طاقة بطاريتك. وقد يؤدي تبديل الدقة إلى إعادة تشغيل بعض التطبيقات."</string>
-    <!-- no translation found for screen_resolution_selected_a11y (6158451180032224977) -->
-    <skip />
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"تم الاختيار"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"الألوان"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"طبيعية"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"مُحسنة"</string>
@@ -1394,17 +1390,14 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"لا تزِل <xliff:g id="NAME">^1</xliff:g> أثناء عملية النقل. \n\nولن يكون التطبيق <xliff:g id="APP">^2</xliff:g> على هذا الجهاز متاحًا حتى الانتهاء من عملية النقل."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"كيف ستستخدم <xliff:g id="NAME">^1</xliff:g>؟"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"‏تهيئة بطاقة SD كوحدة تخزين داخلية"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (6050264373968853062) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"‏يمكنك تخزين التطبيقات والوسائط لاستخدامها على هذا الجهاز اللوحي فقط. &lt;a href=https://support.google.com/android/answer/12153449&gt;تعرَّف على مزيد من المعلومات حول ضبط إعدادات بطاقة SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"تهيئة"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"‏تهيئة بطاقة SD كوحدة تخزين داخلية"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (4315288081962526508) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"‏يمكنك تخزين التطبيقات والوسائط لاستخدامها على هذا الهاتف فقط. &lt;a href=https://support.google.com/android/answer/12153449&gt;تعرَّف على مزيد من المعلومات حول ضبط إعدادات بطاقة SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"تهيئة"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"أو"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"‏تهيئة بطاقة SD كوحدة تخزين محمولة"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_summary (2002761631147966185) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"‏يمكنك تخزين الصور والفيديوهات والموسيقى وغير ذلك والوصول إليها من أجهزة أخرى. &lt;a href=https://support.google.com/android/answer/12153449&gt;تعرَّف على مزيد من المعلومات حول ضبط إعدادات بطاقة SD&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"تهيئة"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"الإعداد لاحقًا"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"هل تريد تهيئة <xliff:g id="NAME">^1</xliff:g>؟"</string>
@@ -1535,6 +1528,8 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"‏USB، بلوتوث، إيثرنت"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"‏نقطة اتصال، USB، بلوتوث، إيثرنت"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"عدم مشاركة الإنترنت مع الأجهزة الأخرى"</string>
+    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
+    <skip />
     <string name="tethering_interface_options" msgid="7575535888135143650">"التوصيل"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"‏عدم استخدام نقطة اتصال Wi‑Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"‏مشاركة اتصال الإنترنت من خلال USB فقط"</string>
@@ -2914,7 +2909,7 @@
     <string name="vpn_create" msgid="7546073242936894638">"‏إضافة ملف شخصي لشبكة افتراضية خاصة (VPN)"</string>
     <string name="vpn_menu_edit" msgid="5100387853773792379">"تعديل الملف الشخصي"</string>
     <string name="vpn_menu_delete" msgid="4455966182219039928">"حذف الملف الشخصي"</string>
-    <string name="vpn_menu_lockdown" msgid="5284041663859541007">"‏شبكة افتراضية خاصة (VPN) قيد التشغيل دائمًا"</string>
+    <string name="vpn_menu_lockdown" msgid="5284041663859541007">"‏شبكة VPN قيد التشغيل دائمًا"</string>
     <string name="vpn_no_vpns_added" msgid="7387080769821533728">"‏لم تتم إضافة أي شبكات افتراضية خاصة (VPN)."</string>
     <string name="vpn_always_on_summary" msgid="2171252372476858166">"‏متابعة الاتصال بشبكة VPN في جميع الأوقات"</string>
     <string name="vpn_always_on_summary_not_supported" msgid="9084872130449368437">"عدم التوافق مع هذا التطبيق"</string>
@@ -4353,7 +4348,7 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"النقر لفحص الجهاز"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"للاطّلاع على الوقت والإشعارات والمعلومات الأخرى، انقر على شاشتك."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"اتصالات الطوارئ"</string>
-    <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"استخدام اتصالات الطوارئ"</string>
+    <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"استخدام ميزة \"اتصالات الطوارئ\""</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"اضغط على زر التشغيل بسرعة 5 مرات أو أكثر لبدء تنفيذ الإجراءات أدناه."</string>
     <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"تشغيل إنذار العد التنازلي"</string>
     <string name="emergency_gesture_sound_setting_summary" msgid="6573377104470235173">"تشغيل صوت مرتفع عند بدء اتصالات الطوارئ"</string>
@@ -5065,6 +5060,8 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"أدنى رصيد عندما يكون شحن البطارية كاملاً (معفى)"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"أدنى رصيد عندما يكون شحن البطارية كاملاً (تطبيق نظام بلا واجهة مستخدم رسومية)"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"أدنى رصيد عندما يكون شحن البطارية كاملاً (باقي التطبيقات)"</string>
+    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
+    <skip />
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"الشحن"</item>
     <item msgid="658627268149681677">"القيلولة"</item>
@@ -5106,24 +5103,14 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"كلمة مرور غير صحيحة"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"لبدء الاستماع، امسَح ضوئيًا رمز الاستجابة السريعة التالي."</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"تنسيق رمز الاستجابة السريعة غير صالح."</string>
-    <!-- no translation found for mobile_bundled_apps (2489314376883098549) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_title (412673130389310169) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_title (8188809835544175997) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contains_ad_title (6686779781266120431) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_developer_info_title (7072157231818463124) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_contact_title (7799887880660497263) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_description_title (2495042345893715099) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_privacy_policy_title (4168169849635442576) -->
-    <skip />
-    <!-- no translation found for mobile_bundled_apps_details_category_title (2545221739515984464) -->
-    <skip />
-    <!-- no translation found for app_install_details_mba_summary (3279659565492150118) -->
-    <skip />
+    <string name="mobile_bundled_apps" msgid="2489314376883098549">"تطبيقات مُجمَّعة للجوَال"</string>
+    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"تطبيقات مُجمَّعة للجوَال"</string>
+    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"معلومات شفافية التطبيقات المجمَّعة للجوّال"</string>
+    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"تتضمن إعلانات."</string>
+    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"معلومات المطوّرين"</string>
+    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"معلومات الاتصال"</string>
+    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"الوصف"</string>
+    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"سياسة الخصوصية"</string>
+    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"الفئة"</string>
+    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"تطبيق مُجمَّع للجوَال"</string>
 </resources>

@@ -25,6 +25,7 @@
     <string name="on" msgid="1702751473920047">"Uključeno"</string>
     <string name="off" msgid="2898123876644709799">"Isključeno"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Nepoznato"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"Dodirnite da se prikažu informacije"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">Još <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> korak vas dijeli od toga da postanete programer.</item>
       <item quantity="few">Još <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> koraka vas dijele od toga da postanete programer.</item>
@@ -153,15 +154,13 @@
     <string name="skip_label" msgid="6380034601349015895">"Preskoči"</string>
     <string name="next_label" msgid="1248293387735652187">"Naprijed"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Jezici"</string>
-    <string name="language_picker_category_title" msgid="1792199453060454565">"Redoslijed željenih jezika"</string>
-    <string name="desc_current_default_language" msgid="1901157141663662859">"Jezik sistema"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Ukloni"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Dodajte jezik"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Jezik"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Željeni jezik"</string>
-    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Jezici aplikacija"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Jezici aplikacija"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Postavite jezik za svaku aplikaciju"</string>
-    <string name="app_locale_picker_title" msgid="2431448962911301366">"Jezik aplikacije"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"Jezik aplikacije"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Predloženi jezici"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Svi jezici"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Jezik sistema"</string>
@@ -169,9 +168,6 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Odabir jezika za ovu aplikaciju nije dostupan u Postavkama."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Jezik se može razlikovati od jezika dostupnih u aplikaciji. Neke aplikacije možda neće podržavati ovu postavku."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Ovdje su prikazane samo aplikacije koje podržavaju odabir jezika."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Vaš sistem, apikacije i web lokacije koriste prvi podržani od vaših preferiranih jezika."</string>
-    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Da odaberete jezik za svaku aplikaciju, idite u postavke jezika aplikacije."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Saznajte više o jezicima"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Ukloniti odabrane jezike?</item>
       <item quantity="few">Ukloniti odabrane jezike?</item>
@@ -180,7 +176,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Tekst će biti prikazan na drugom jeziku"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Ne mogu se ukloniti svi jezici"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Zadržite najmanje jedan preferirani jezik"</string>
-    <string name="locale_not_translated" msgid="3071618135527110152">"Nije dostupan kao jezik sistema"</string>
+    <string name="locale_not_translated" msgid="5079729745235316146">"Možda nije dostupno u nekim aplikacijama"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Pomjeri nagore"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Pomjeri nadolje"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Pomjeri na vrh"</string>
@@ -1468,6 +1464,8 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Pristupna tačka, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Internet se ne dijeli s drugim uređajima"</string>
+    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
+    <skip />
     <string name="tethering_interface_options" msgid="7575535888135143650">"Dijeljenje internetske veze"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Ne koristi WiFi pristupnu tačku"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Dijeljenje interneta isključivo putem USB-a"</string>
@@ -4857,6 +4855,8 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Minimalno stanje kada je uređaj napunjen (Izuzetak)"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Minimalno stanje kada je uređaj napunjen (Sistemska aplikacija bez interfejsa)"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Minimalno stanje kada je uređaj pun (Preostale aplikacije)"</string>
+    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
+    <skip />
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"Punjenje"</item>
     <item msgid="658627268149681677">"Doziranje"</item>

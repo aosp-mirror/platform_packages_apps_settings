@@ -25,6 +25,7 @@
     <string name="on" msgid="1702751473920047">"On"</string>
     <string name="off" msgid="2898123876644709799">"Off"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Sconosciuto"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"Tocca per visualizzare le informazioni"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">Ora ti mancano <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> passaggi per diventare uno sviluppatore.</item>
       <item quantity="one">Ora ti manca <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> passaggio per diventare uno sviluppatore.</item>
@@ -49,8 +50,8 @@
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Usa la rotazione automatica"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"La funzionalità di riconoscimento facciale usa la fotocamera anteriore per migliorare la precisione della rotazione automatica. Le immagini non vengono mai memorizzate o inviate a Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
-    <string name="bluetooth_is_discoverable" msgid="4798961627677790935">"Visibile a tutti dispositivi Bluetooth vicini (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
-    <string name="bluetooth_is_discoverable_always" msgid="8122823110652921674">"Visibile a tutti dispositivi Bluetooth vicini"</string>
+    <string name="bluetooth_is_discoverable" msgid="4798961627677790935">"Visibile a tutti i dispositivi Bluetooth vicini (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
+    <string name="bluetooth_is_discoverable_always" msgid="8122823110652921674">"Visibile a tutti i dispositivi Bluetooth vicini"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="6181960579190879601">"Non visibile ad altri dispositivi Bluetooth"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="3574936359739213455">"Visibile solo ai dispositivi accoppiati"</string>
     <string name="bluetooth_devices" msgid="1063177983261608277">"Dispositivi Bluetooth"</string>
@@ -152,15 +153,13 @@
     <string name="skip_label" msgid="6380034601349015895">"Salta"</string>
     <string name="next_label" msgid="1248293387735652187">"Avanti"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Lingue"</string>
-    <string name="language_picker_category_title" msgid="1792199453060454565">"Ordine delle lingue preferite"</string>
-    <string name="desc_current_default_language" msgid="1901157141663662859">"Lingua di sistema"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Rimuovi"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Aggiungi una lingua"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Lingua"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Lingua preferita"</string>
-    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Lingue delle app"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Lingue delle app"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Imposta la lingua di ogni app"</string>
-    <string name="app_locale_picker_title" msgid="2431448962911301366">"Lingua dell\'app"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"Lingua dell\'app"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Lingue suggerite"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Tutte le lingue"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Lingua di sistema"</string>
@@ -168,9 +167,6 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La selezione della lingua per questa app non è disponibile nelle Impostazioni."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"La lingua potrebbe essere diversa dalle lingue disponibili nell\'app. Alcune app potrebbero non supportare questa impostazione."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Qui vengono mostrate soltanto le app che supportano la selezione della lingua."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Per il sistema, le app e i siti web viene usata la prima lingua supportata delle tue lingue preferite."</string>
-    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Per selezionare una lingua per ogni app, vai alle impostazioni della lingua delle app."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Scopri di più sulle lingue"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Rimuovere le lingue selezionate?</item>
       <item quantity="one">Rimuovere la lingua selezionata?</item>
@@ -178,7 +174,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Il testo verrà mostrato in un\'altra lingua."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Impossibile rimuovere tutte le lingue"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Mantieni almeno una lingua preferita"</string>
-    <string name="locale_not_translated" msgid="3071618135527110152">"Non disponibile come lingua di sistema"</string>
+    <string name="locale_not_translated" msgid="5079729745235316146">"Potrebbe non essere disponibile in alcune app"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Sposta su"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Sposta giù"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Sposta all\'inizio"</string>
@@ -1447,6 +1443,8 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Hotspot, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Connessione a Internet non condivisa con altri dispositivi"</string>
+    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
+    <skip />
     <string name="tethering_interface_options" msgid="7575535888135143650">"Tethering"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Non usare hotspot Wi‑Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Condividi Internet solo tramite USB"</string>
@@ -4789,6 +4787,8 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Saldo minimo con dispositivo completamente carico (app esenti)"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Saldo minimo con dispositivo completamente carico (app di sistema headless)"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Saldo minimo con dispositivo completamente carico (app rimanenti)"</string>
+    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
+    <skip />
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"In carica"</item>
     <item msgid="658627268149681677">"Sospensione"</item>

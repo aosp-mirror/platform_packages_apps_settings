@@ -25,6 +25,7 @@
     <string name="on" msgid="1702751473920047">"Naka-on"</string>
     <string name="off" msgid="2898123876644709799">"Naka-off"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Hindi Kilala"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"I-tap para ipakita ang impormasyon"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> hakbang na lang, magiging developer ka na.</item>
       <item quantity="other"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> na hakbang na lang, magiging developer ka na.</item>
@@ -152,15 +153,13 @@
     <string name="skip_label" msgid="6380034601349015895">"Laktawan"</string>
     <string name="next_label" msgid="1248293387735652187">"Susunod"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Mga Wika"</string>
-    <string name="language_picker_category_title" msgid="1792199453060454565">"Pagkakasunod-sunod ng gustong wika"</string>
-    <string name="desc_current_default_language" msgid="1901157141663662859">"Wika ng system"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Alisin"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Magdagdag ng wika"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Wika"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Gustong Wika"</string>
-    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Mga wika ng app"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Mga Wika ng App"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Itakda ang wika para sa bawat app"</string>
-    <string name="app_locale_picker_title" msgid="2431448962911301366">"Wika ng app"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"Wika ng App"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Mga iminumungkahing wika"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Lahat ng wika"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Wika ng system"</string>
@@ -168,9 +167,6 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Hindi available sa Mga Setting ang pagpili ng wika para sa app na ito."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Posibleng iba ang wika sa mga wikang available sa app. Posibleng hindi suportahan ng ilang app ang setting na ito."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Mga app lang na sumusuporta sa pagpili ng wika ang ipinapakita dito."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Ginagamit ng iyong system, mga app, at mga website ang unang sinusuportahang wika mula sa mga gusto mong wika."</string>
-    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Para pumili ng wika para sa bawat app, pumunta sa mga setting ng wika ng app."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Matuto pa tungkol sa mga wika"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Alisin ang mga piniling wika?</item>
       <item quantity="other">Alisin ang mga piniling wika?</item>
@@ -178,7 +174,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Ipapakita ang text sa ibang wika."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Hindi maaalis ang lahat ng wika"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Magtira ng kahit isang gustong wika"</string>
-    <string name="locale_not_translated" msgid="3071618135527110152">"Hindi available bilang wika ng system"</string>
+    <string name="locale_not_translated" msgid="5079729745235316146">"Maaaring hindi available sa ilang app"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Ilipat pataas"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Ilipat pababa"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Ilipat sa itaas"</string>
@@ -1096,8 +1092,7 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"Mas malakas gumamit ng iyong baterya ang buong resolution. Kapag pinalitan mo ang iyong resolution, posible itong maging sanhi ng pag-restart ng ilang app."</string>
-    <!-- no translation found for screen_resolution_selected_a11y (6158451180032224977) -->
-    <skip />
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Napili"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Mga Kulay"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Natural"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Naka-boost"</string>
@@ -1310,17 +1305,14 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Huwag alisin ang <xliff:g id="NAME">^1</xliff:g> habang naglilipat. \n\nHindi magiging available ang <xliff:g id="APP">^2</xliff:g> app sa device na ito hanggang sa matapos ang paglilipat."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Paano mo gagamitin ang <xliff:g id="NAME">^1</xliff:g> na ito?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"I-format ang SD card para sa internal storage"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (6050264373968853062) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Mag-store ng mga app at media na gagamitin sa tablet na ito lang. &lt;a href=https://support.google.com/android/answer/12153449&gt;Matuto pa tungkol sa pag-set up ng SD card&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"I-format"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"I-format ang SD card para sa internal storage"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (4315288081962526508) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Mag-store ng mga app at media na gagamitin sa teleponong ito lang. &lt;a href=https://support.google.com/android/answer/12153449&gt;Matuto pa tungkol sa pag-set up ng SD card&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"I-format"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"O"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"I-format ang SD card para sa portable na storage"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_summary (2002761631147966185) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Mag-store ng mga larawan, video, musika, at higit pa at i-access ang mga ito sa iba pang device. &lt;a href=https://support.google.com/android/answer/12153449&gt;Matuto pa tungkol sa pag-set up ng SD card&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"I-format"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"I-set up sa ibang pagkakataon"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"I-format ang <xliff:g id="NAME">^1</xliff:g> na ito?"</string>
@@ -1451,6 +1443,8 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Hotspot, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Hindi nagbabahagi ng internet sa ibang device"</string>
+    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
+    <skip />
     <string name="tethering_interface_options" msgid="7575535888135143650">"Pag-tether"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Huwag gumamit ng Wi‑Fi hotspot"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Magbahagi ng internet sa pamamagitan lang ng USB"</string>
@@ -4793,6 +4787,8 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Minimum na Balanse Kapag Ganap na Na-charge (Hindi Kasama)"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Minimum na Balanse Kapag Ganap na Na-charge (Headless System App)"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Minimum na Balanse Kapag Ganap na Na-charge (Mga Natitirang App)"</string>
+    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
+    <skip />
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"Pag-charge"</item>
     <item msgid="658627268149681677">"Pag-doze"</item>

@@ -25,6 +25,8 @@
     <string name="on" msgid="1702751473920047">"روشن"</string>
     <string name="off" msgid="2898123876644709799">"خاموش"</string>
     <string name="device_info_default" msgid="1406619232867343310">"ناشناس"</string>
+    <!-- no translation found for device_info_protected_single_press (3810785480060743677) -->
+    <skip />
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">اکنون <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> قدم با برنامه‌نویس شدن فاصله دارید.</item>
       <item quantity="other">اکنون <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> قدم با برنامه‌نویس شدن فاصله دارید.</item>
@@ -152,15 +154,13 @@
     <string name="skip_label" msgid="6380034601349015895">"رد شدن"</string>
     <string name="next_label" msgid="1248293387735652187">"بعدی"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"زبان‌ها"</string>
-    <string name="language_picker_category_title" msgid="1792199453060454565">"ترتیب زبان ترجیحی"</string>
-    <string name="desc_current_default_language" msgid="1901157141663662859">"زبان سیستم"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"حذف کردن"</string>
     <string name="add_a_language" msgid="2126220398077503271">"افزودن زبان"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"زبان"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"زبان برگزیده"</string>
-    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"زبان برنامه‌ها"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"زبان برنامه‌ها"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"تنظیم زبان برای هر برنامه"</string>
-    <string name="app_locale_picker_title" msgid="2431448962911301366">"زبان برنامه"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"زبان برنامه"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"زبان‌های پیشنهادی"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"همه زبان‌ها"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"زبان سیستم"</string>
@@ -168,9 +168,6 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"انتخاب زبان از «تنظیمات» برای این برنامه دردسترس نیست."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"زبان ممکن است با زبان‌های موجود در برنامه متفاوت باشد. ممکن است برخی‌از برنامه‌ها از این تنظیم پشتیبانی نکنند."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"فقط برنامه‌هایی که از انتخاب زبان پشتیبانی می‌کنند اینجا نمایش داده می‌شود."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"سیستم، برنامه‌ها، و وب‌سایت‌های شما از اولین زبان پشتیبانی‌شده ازمیان زبان‌های ترجیحی استفاده می‌کنند."</string>
-    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"برای انتخاب زبان هر برنامه، به تنظیمات زبان برنامه بروید."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"درباره زبان‌ها بیشتر بدانید"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">زبان‌های انتخابی حذف شوند؟</item>
       <item quantity="other">زبان‌های انتخابی حذف شوند؟</item>
@@ -178,7 +175,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"نوشتار به زبان دیگری نشان داده می‌شود."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"همه زبان‌ها حذف نمی‌شوند"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"حداقل یک زبان ترجیحی را نگه دارید"</string>
-    <string name="locale_not_translated" msgid="3071618135527110152">"به‌عنوان زبان سیستم دردسترس نیست"</string>
+    <string name="locale_not_translated" msgid="5079729745235316146">"ممکن است در برخی برنامه‌ها در دسترس نباشد"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"انتقال به بالا"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"انتقال به پایین"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"انتقال به بالا"</string>
@@ -1309,17 +1306,14 @@
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"در طول انتقال، <xliff:g id="NAME">^1</xliff:g> را جدا نکنید. \n\nتا وقتی انتقال تکمیل نشود، برنامه <xliff:g id="APP">^2</xliff:g> در این دستگاه در دسترس نیست."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"چگونه از <xliff:g id="NAME">^1</xliff:g> استفاده خواهید کرد؟"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"‏قالب‌بندی کارت SD به‌عنوان حافظه داخلی"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (6050264373968853062) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"‏برنامه‌ها و رسانه‌ها را فقط برای استفاده در این رایانه لوحی ذخیره کنید. &lt;a href=https://support.google.com/android/answer/12153449&gt;درباره راه‌اندازی کارت SD بیشتر بدانید&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"قالب‌بندی"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"‏قالب‌بندی کارت SD به‌عنوان حافظه داخلی"</string>
-    <!-- no translation found for storage_wizard_init_v2_internal_summary (4315288081962526508) -->
-    <skip />
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"‏برنامه‌ها و رسانه‌ها را فقط برای استفاده در این تلفن ذخیره کنید. &lt;a href=https://support.google.com/android/answer/12153449&gt;درباره راه‌اندازی کارت SD بیشتر بدانید&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"قالب‌بندی"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"یا"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"‏قالب‌بندی کارت SD به‌عنوان فضای ذخیره‌سازی قابل‌حمل"</string>
-    <!-- no translation found for storage_wizard_init_v2_external_summary (2002761631147966185) -->
-    <skip />
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"‏عکس، ویدیو، موسیقی، و غیره را ذخیره کنید و از دستگاه‌های دیگر به آن‌ها دسترسی داشته باشید. &lt;a href=https://support.google.com/android/answer/12153449&gt;درباره راه‌اندازی کارت SD بیشتر بدانید&lt;/a&gt;."</string>
     <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"قالب‌بندی"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"بعداً تنظیم شود"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"این <xliff:g id="NAME">^1</xliff:g> قالب‌بندی شود؟"</string>
@@ -1450,6 +1444,8 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"‏USB، بلوتوث، اترنت"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"‏نقطه اتصال، USB، بلوتوث، اترنت"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"اینترنت با دستگاه‌های دیگر هم‌رسانی نمی‌شود"</string>
+    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
+    <skip />
     <string name="tethering_interface_options" msgid="7575535888135143650">"اشتراک‌گذاری اینترنت"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"‏استفاده نکردن از نقطه اتصال Wi-Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"‏اینترنت را فقط ازطریق USB هم‌رسانی کنید"</string>
@@ -4792,6 +4788,8 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"حداقل تراز در حالت شارژ کامل (مستثنی‌شده)"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"حداقل تراز درحالت شارژ کامل (برنامه سیستمی بی‌سر)"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"حداقل تراز در حالت شارژ کامل (برنامه‌های باقی مانده)"</string>
+    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
+    <skip />
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"شارژ شدن"</item>
     <item msgid="658627268149681677">"چرت"</item>
