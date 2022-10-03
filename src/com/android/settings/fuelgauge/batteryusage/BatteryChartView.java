@@ -18,8 +18,8 @@ package com.android.settings.fuelgauge.batteryusage;
 import static com.android.settings.Utils.formatPercentage;
 
 import static java.lang.Math.round;
+import static java.util.Objects.requireNonNull;
 
-import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -28,45 +28,37 @@ import android.graphics.CornerPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
-import android.os.Handler;
-import android.text.format.DateFormat;
-import android.text.format.DateUtils;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewParent;
+import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
+import android.view.accessibility.AccessibilityNodeInfo;
+import android.view.accessibility.AccessibilityNodeProvider;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.android.settings.R;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
 
-import java.time.Clock;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 /** A widget component to draw chart graph. */
-public class BatteryChartView extends AppCompatImageView implements View.OnClickListener,
-        AccessibilityManager.AccessibilityStateChangeListener {
+public class BatteryChartView extends AppCompatImageView implements View.OnClickListener {
     private static final String TAG = "BatteryChartView";
-    private static final List<String> ACCESSIBILITY_SERVICE_NAMES =
-            Arrays.asList("SwitchAccessService", "TalkBackService", "JustSpeakService");
 
-    private static final int DEFAULT_TRAPEZOID_COUNT = 12;
-    private static final int DEFAULT_TIMESTAMP_COUNT = 4;
-    private static final int TIMESTAMP_GAPS_COUNT = DEFAULT_TIMESTAMP_COUNT - 1;
     private static final int DIVIDER_COLOR = Color.parseColor("#CDCCC5");
     private static final long UPDATE_STATE_DELAYED_TIME = 500L;
-
-    /** Selects all trapezoid shapes. */
-    public static final int SELECTED_INDEX_ALL = -1;
-    public static final int SELECTED_INDEX_INVALID = -2;
 
     /** A callback listener for selected group index is updated. */
     public interface OnSelectListener {
@@ -74,50 +66,32 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         void onSelect(int trapezoidIndex);
     }
 
+    private final String[] mPercentages = getPercentages();
+    private final Rect mIndent = new Rect();
+    private final Rect[] mPercentageBounds = new Rect[]{new Rect(), new Rect(), new Rect()};
+    private final List<Rect> mAxisLabelsBounds = new ArrayList<>();
+
+    private BatteryChartViewModel mViewModel;
+    private int mHoveredIndex = BatteryChartViewModel.SELECTED_INDEX_INVALID;
     private int mDividerWidth;
     private int mDividerHeight;
-    private int mTrapezoidCount;
     private float mTrapezoidVOffset;
     private float mTrapezoidHOffset;
-    private boolean mIsSlotsClickabled;
-    private String[] mPercentages = getPercentages();
-
-    @VisibleForTesting
-    int mHoveredIndex = SELECTED_INDEX_INVALID;
-    @VisibleForTesting
-    int mSelectedIndex = SELECTED_INDEX_INVALID;
-    @VisibleForTesting
-    String[] mTimestamps;
-
-    // Colors for drawing the trapezoid shape and dividers.
     private int mTrapezoidColor;
     private int mTrapezoidSolidColor;
     private int mTrapezoidHoverColor;
-    // For drawing the percentage information.
     private int mTextPadding;
-    private final Rect mIndent = new Rect();
-    private final Rect[] mPercentageBounds =
-            new Rect[]{new Rect(), new Rect(), new Rect()};
-    // For drawing the timestamp information.
-    private final Rect[] mTimestampsBounds =
-            new Rect[]{new Rect(), new Rect(), new Rect(), new Rect()};
-
-    @VisibleForTesting
-    Handler mHandler = new Handler();
-    @VisibleForTesting
-    final Runnable mUpdateClickableStateRun = () -> updateClickableState();
-
-    private int[] mLevels;
-    private Paint mTextPaint;
     private Paint mDividerPaint;
     private Paint mTrapezoidPaint;
+    private Paint mTextPaint;
+    private AccessibilityNodeProvider mAccessibilityNodeProvider;
+    private BatteryChartView.OnSelectListener mOnSelectListener;
 
     @VisibleForTesting
-    Paint mTrapezoidCurvePaint = null;
-    private TrapezoidSlot[] mTrapezoidSlots;
+    TrapezoidSlot[] mTrapezoidSlots;
     // Records the location to calculate selected index.
-    private float mTouchUpEventX = Float.MIN_VALUE;
-    private BatteryChartView.OnSelectListener mOnSelectListener;
+    @VisibleForTesting
+    float mTouchUpEventX = Float.MIN_VALUE;
 
     public BatteryChartView(Context context) {
         super(context, null);
@@ -128,57 +102,25 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         initializeColors(context);
         // Registers the click event listener.
         setOnClickListener(this);
-        setSelectedIndex(SELECTED_INDEX_ALL);
-        setTrapezoidCount(DEFAULT_TRAPEZOID_COUNT);
         setClickable(false);
-        setLatestTimestamp(0);
+        requestLayout();
     }
 
-    /** Sets the total trapezoid count for drawing. */
-    public void setTrapezoidCount(int trapezoidCount) {
-        Log.i(TAG, "trapezoidCount:" + trapezoidCount);
-        mTrapezoidCount = trapezoidCount;
-        mTrapezoidSlots = new TrapezoidSlot[trapezoidCount];
-        // Allocates the trapezoid slot array.
-        for (int index = 0; index < trapezoidCount; index++) {
-            mTrapezoidSlots[index] = new TrapezoidSlot();
-        }
-        invalidate();
-    }
-
-    /** Sets all levels value to draw the trapezoid shape */
-    public void setLevels(int[] levels) {
-        Log.d(TAG, "setLevels() " + (levels == null ? "null" : levels.length));
-        if (levels == null) {
-            mLevels = null;
-            return;
-        }
-        // We should provide trapezoid count + 1 data to draw all trapezoids.
-        mLevels = levels.length == mTrapezoidCount + 1 ? levels : null;
-        setClickable(false);
-        invalidate();
-        if (mLevels == null) {
-            return;
-        }
-        // Sets the chart is clickable if there is at least one valid item in it.
-        for (int index = 0; index < mLevels.length - 1; index++) {
-            if (mLevels[index] != 0 && mLevels[index + 1] != 0) {
-                setClickable(true);
-                break;
-            }
-        }
-    }
-
-    /** Sets the selected group index to draw highlight effect. */
-    public void setSelectedIndex(int index) {
-        if (mSelectedIndex != index) {
-            mSelectedIndex = index;
+    /** Sets the data model of this view. */
+    public void setViewModel(BatteryChartViewModel viewModel) {
+        if (viewModel == null) {
+            mViewModel = null;
             invalidate();
-            // Callbacks to the listener if we have.
-            if (mOnSelectListener != null) {
-                mOnSelectListener.onSelect(mSelectedIndex);
-            }
+            return;
         }
+
+        Log.d(TAG, String.format("setViewModel(): size: %d, selectedIndex: %d.",
+                viewModel.size(), viewModel.selectedIndex()));
+        mViewModel = viewModel;
+        initializeAxisLabelsBounds();
+        initializeTrapezoidSlots(viewModel.size() - 1);
+        setClickable(hasAnyValidTrapezoid(viewModel));
+        requestLayout();
     }
 
     /** Sets the callback to monitor the selected group index. */
@@ -195,29 +137,6 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         } else {
             mTextPaint = null;
         }
-        setVisibility(View.VISIBLE);
-        requestLayout();
-    }
-
-    /** Sets the latest timestamp for drawing into x-axis information. */
-    public void setLatestTimestamp(long latestTimestamp) {
-        if (latestTimestamp == 0) {
-            latestTimestamp = Clock.systemUTC().millis();
-        }
-        if (mTimestamps == null) {
-            mTimestamps = new String[DEFAULT_TIMESTAMP_COUNT];
-        }
-        final long timeSlotOffset =
-                DateUtils.HOUR_IN_MILLIS * (/*total 24 hours*/ 24 / TIMESTAMP_GAPS_COUNT);
-        final boolean is24HourFormat = DateFormat.is24HourFormat(getContext());
-        for (int index = 0; index < DEFAULT_TIMESTAMP_COUNT; index++) {
-            mTimestamps[index] =
-                    ConvertUtils.utcToLocalTimeHour(
-                            getContext(),
-                            latestTimestamp - (TIMESTAMP_GAPS_COUNT - index)
-                                    * timeSlotOffset,
-                            is24HourFormat);
-        }
         requestLayout();
     }
 
@@ -226,6 +145,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         // Measures text bounds and updates indent configuration.
         if (mTextPaint != null) {
+            mTextPaint.setTextAlign(Paint.Align.LEFT);
             for (int index = 0; index < mPercentages.length; index++) {
                 mTextPaint.getTextBounds(
                         mPercentages[index], 0, mPercentages[index].length(),
@@ -235,15 +155,14 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             mIndent.top = mPercentageBounds[0].height();
             mIndent.right = mPercentageBounds[0].width() + mTextPadding;
 
-            if (mTimestamps != null) {
-                int maxHeight = 0;
-                for (int index = 0; index < DEFAULT_TIMESTAMP_COUNT; index++) {
-                    mTextPaint.getTextBounds(
-                            mTimestamps[index], 0, mTimestamps[index].length(),
-                            mTimestampsBounds[index]);
-                    maxHeight = Math.max(maxHeight, mTimestampsBounds[index].height());
+            if (mViewModel != null) {
+                int maxTop = 0;
+                for (int index = 0; index < mViewModel.size(); index++) {
+                    final String text = mViewModel.getText(index);
+                    mTextPaint.getTextBounds(text, 0, text.length(), mAxisLabelsBounds.get(index));
+                    maxTop = Math.max(maxTop, -mAxisLabelsBounds.get(index).top);
                 }
-                mIndent.bottom = maxHeight + round(mTextPadding * 1.5f);
+                mIndent.bottom = maxTop + round(mTextPadding * 2f);
             }
             Log.d(TAG, "setIndent:" + mPercentageBounds[0]);
         } else {
@@ -254,7 +173,12 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
+        // Before mLevels initialized, the count of trapezoids is unknown. Only draws the
+        // horizontal percentages and dividers.
         drawHorizontalDividers(canvas);
+        if (mViewModel == null) {
+            return;
+        }
         drawVerticalDividers(canvas);
         drawTrapezoids(canvas);
     }
@@ -284,17 +208,30 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
                 if (mHoveredIndex != trapezoidIndex) {
                     mHoveredIndex = trapezoidIndex;
                     invalidate();
+                    sendAccessibilityEventForHover(AccessibilityEvent.TYPE_VIEW_HOVER_ENTER);
                 }
-                break;
+                // Ignore the super.onHoverEvent() because the hovered trapezoid has already been
+                // sent here.
+                return true;
+            case MotionEvent.ACTION_HOVER_EXIT:
+                if (mHoveredIndex != BatteryChartViewModel.SELECTED_INDEX_INVALID) {
+                    sendAccessibilityEventForHover(AccessibilityEvent.TYPE_VIEW_HOVER_EXIT);
+                    mHoveredIndex = BatteryChartViewModel.SELECTED_INDEX_INVALID; // reset
+                    invalidate();
+                }
+                // Ignore the super.onHoverEvent() because the hovered trapezoid has already been
+                // sent here.
+                return true;
+            default:
+                return super.onTouchEvent(event);
         }
-        return super.onHoverEvent(event);
     }
 
     @Override
     public void onHoverChanged(boolean hovered) {
         super.onHoverChanged(hovered);
         if (!hovered) {
-            mHoveredIndex = SELECTED_INDEX_INVALID; // reset
+            mHoveredIndex = BatteryChartViewModel.SELECTED_INDEX_INVALID; // reset
             invalidate();
         }
     }
@@ -305,79 +242,58 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             Log.w(TAG, "invalid motion event for onClick() callback");
             return;
         }
-        final int trapezoidIndex = getTrapezoidIndex(mTouchUpEventX);
+        onTrapezoidClicked(view, getTrapezoidIndex(mTouchUpEventX));
+    }
+
+    @Override
+    public AccessibilityNodeProvider getAccessibilityNodeProvider() {
+        if (mViewModel == null) {
+            return super.getAccessibilityNodeProvider();
+        }
+        if (mAccessibilityNodeProvider == null) {
+            mAccessibilityNodeProvider = new BatteryChartAccessibilityNodeProvider();
+        }
+        return mAccessibilityNodeProvider;
+    }
+
+    private void onTrapezoidClicked(View view, int index) {
         // Ignores the click event if the level is zero.
-        if (trapezoidIndex == SELECTED_INDEX_INVALID
-                || !isValidToDraw(trapezoidIndex)) {
+        if (!isValidToDraw(mViewModel, index)) {
             return;
         }
-        // Selects all if users click the same trapezoid item two times.
-        if (trapezoidIndex == mSelectedIndex) {
-            setSelectedIndex(SELECTED_INDEX_ALL);
-        } else {
-            setSelectedIndex(trapezoidIndex);
+        if (mOnSelectListener != null) {
+            // Selects all if users click the same trapezoid item two times.
+            mOnSelectListener.onSelect(
+                    index == mViewModel.selectedIndex()
+                            ? BatteryChartViewModel.SELECTED_INDEX_ALL : index);
         }
         view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK);
     }
 
-    @Override
-    public void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        updateClickableState();
-        mContext.getSystemService(AccessibilityManager.class)
-                .addAccessibilityStateChangeListener(/*listener=*/ this);
-    }
-
-    @Override
-    public void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        mContext.getSystemService(AccessibilityManager.class)
-                .removeAccessibilityStateChangeListener(/*listener=*/ this);
-        mHandler.removeCallbacks(mUpdateClickableStateRun);
-    }
-
-    @Override
-    public void onAccessibilityStateChanged(boolean enabled) {
-        Log.d(TAG, "onAccessibilityStateChanged:" + enabled);
-        mHandler.removeCallbacks(mUpdateClickableStateRun);
-        // We should delay it a while since accessibility manager will spend
-        // some times to bind with new enabled accessibility services.
-        mHandler.postDelayed(
-                mUpdateClickableStateRun, UPDATE_STATE_DELAYED_TIME);
-    }
-
-    private void updateClickableState() {
-        final Context context = mContext;
-        mIsSlotsClickabled =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
-                        .isChartGraphSlotsEnabled(context)
-                        && !isAccessibilityEnabled(context);
-        Log.d(TAG, "isChartGraphSlotsEnabled:" + mIsSlotsClickabled);
-        setClickable(isClickable());
-        // Initializes the trapezoid curve paint for non-clickable case.
-        if (!mIsSlotsClickabled && mTrapezoidCurvePaint == null) {
-            mTrapezoidCurvePaint = new Paint();
-            mTrapezoidCurvePaint.setAntiAlias(true);
-            mTrapezoidCurvePaint.setColor(mTrapezoidSolidColor);
-            mTrapezoidCurvePaint.setStyle(Paint.Style.STROKE);
-            mTrapezoidCurvePaint.setStrokeWidth(mDividerWidth * 2);
-        } else if (mIsSlotsClickabled) {
-            mTrapezoidCurvePaint = null;
-            // Sets levels again to force update the click state.
-            setLevels(mLevels);
+    private boolean sendAccessibilityEvent(int virtualDescendantId, int eventType) {
+        ViewParent parent = getParent();
+        if (parent == null || !AccessibilityManager.getInstance(mContext).isEnabled()) {
+            return false;
         }
-        invalidate();
+        AccessibilityEvent accessibilityEvent = new AccessibilityEvent(eventType);
+        accessibilityEvent.setSource(this, virtualDescendantId);
+        accessibilityEvent.setEnabled(true);
+        accessibilityEvent.setClassName(getAccessibilityClassName());
+        accessibilityEvent.setPackageName(getContext().getPackageName());
+        return parent.requestSendAccessibilityEvent(this, accessibilityEvent);
     }
 
-    @Override
-    public void setClickable(boolean clickable) {
-        super.setClickable(mIsSlotsClickabled && clickable);
+    private void sendAccessibilityEventForHover(int eventType) {
+        if (isTrapezoidIndexValid(mViewModel, mHoveredIndex)) {
+            sendAccessibilityEvent(mHoveredIndex, eventType);
+        }
     }
 
-    @VisibleForTesting
-    void setClickableForce(boolean clickable) {
-        super.setClickable(clickable);
+    private void initializeTrapezoidSlots(int count) {
+        mTrapezoidSlots = new TrapezoidSlot[count];
+        for (int index = 0; index < mTrapezoidSlots.length; index++) {
+            mTrapezoidSlots[index] = new TrapezoidSlot();
+        }
     }
 
     private void initializeColors(Context context) {
@@ -434,10 +350,10 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
 
     private void drawPercentage(Canvas canvas, int index, float offsetY) {
         if (mTextPaint != null) {
+            mTextPaint.setTextAlign(Paint.Align.RIGHT);
             canvas.drawText(
                     mPercentages[index],
-                    getWidth() - mPercentageBounds[index].width()
-                            - mPercentageBounds[index].left,
+                    getWidth(),
                     offsetY + mPercentageBounds[index].height() * .5f,
                     mTextPaint);
         }
@@ -445,9 +361,9 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
 
     private void drawVerticalDividers(Canvas canvas) {
         final int width = getWidth() - mIndent.right;
-        final int dividerCount = mTrapezoidCount + 1;
+        final int dividerCount = mTrapezoidSlots.length + 1;
         final float dividerSpace = dividerCount * mDividerWidth;
-        final float unitWidth = (width - dividerSpace) / (float) mTrapezoidCount;
+        final float unitWidth = (width - dividerSpace) / (float) mTrapezoidSlots.length;
         final float bottomY = getHeight() - mIndent.bottom;
         final float startY = bottomY - mDividerHeight;
         final float trapezoidSlotOffset = mTrapezoidHOffset + mDividerWidth * .5f;
@@ -463,84 +379,154 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             }
             startX = nextX;
         }
-        // Draws the timestamp slot information.
-        if (mTimestamps != null) {
-            final float[] xOffsets = new float[DEFAULT_TIMESTAMP_COUNT];
-            final float baselineX = mDividerWidth * .5f;
-            final float offsetX = mDividerWidth + unitWidth;
-            final int slotBarOffset = (/*total 12 bars*/ 12) / TIMESTAMP_GAPS_COUNT;
-            for (int index = 0; index < DEFAULT_TIMESTAMP_COUNT; index++) {
-                xOffsets[index] = baselineX + index * offsetX * slotBarOffset;
+        // Draws the axis label slot information.
+        if (mViewModel != null) {
+            final float baselineY = getHeight() - mTextPadding;
+            Rect[] axisLabelDisplayAreas;
+            switch (mViewModel.axisLabelPosition()) {
+                case CENTER_OF_TRAPEZOIDS:
+                    axisLabelDisplayAreas = getAxisLabelDisplayAreas(
+                            /* size= */ mViewModel.size() - 1,
+                            /* baselineX= */ mDividerWidth + unitWidth * .5f,
+                            /* offsetX= */ mDividerWidth + unitWidth,
+                            baselineY,
+                            /* shiftFirstAndLast= */ false);
+                    break;
+                case BETWEEN_TRAPEZOIDS:
+                default:
+                    axisLabelDisplayAreas = getAxisLabelDisplayAreas(
+                            /* size= */ mViewModel.size(),
+                            /* baselineX= */ mDividerWidth * .5f,
+                            /* offsetX= */ mDividerWidth + unitWidth,
+                            baselineY,
+                            /* shiftFirstAndLast= */ true);
+                    break;
             }
-            drawTimestamp(canvas, xOffsets);
+            drawAxisLabels(canvas, axisLabelDisplayAreas, baselineY);
         }
     }
 
-    private void drawTimestamp(Canvas canvas, float[] xOffsets) {
-        // Draws the 1st timestamp info.
-        canvas.drawText(
-                mTimestamps[0],
-                xOffsets[0] - mTimestampsBounds[0].left,
-                getTimestampY(0), mTextPaint);
-        final int latestIndex = DEFAULT_TIMESTAMP_COUNT - 1;
-        // Draws the last timestamp info.
-        canvas.drawText(
-                mTimestamps[latestIndex],
-                xOffsets[latestIndex] - mTimestampsBounds[latestIndex].width()
-                        - mTimestampsBounds[latestIndex].left,
-                getTimestampY(latestIndex), mTextPaint);
-        // Draws the rest of timestamp info since it is located in the center.
-        for (int index = 1; index <= DEFAULT_TIMESTAMP_COUNT - 2; index++) {
-            canvas.drawText(
-                    mTimestamps[index],
-                    xOffsets[index]
-                            - (mTimestampsBounds[index].width() - mTimestampsBounds[index].left)
-                            * .5f,
-                    getTimestampY(index), mTextPaint);
+    /** Gets all the axis label texts displaying area positions if they are shown. */
+    private Rect[] getAxisLabelDisplayAreas(final int size, final float baselineX,
+            final float offsetX, final float baselineY, final boolean shiftFirstAndLast) {
+        final Rect[] result = new Rect[size];
+        for (int index = 0; index < result.length; index++) {
+            final float width = mAxisLabelsBounds.get(index).width();
+            float middle = baselineX + index * offsetX;
+            if (shiftFirstAndLast) {
+                if (index == 0) {
+                    middle += width * .5f;
+                }
+                if (index == size - 1) {
+                    middle -= width * .5f;
+                }
+            }
+            final float left = middle - width * .5f;
+            final float right = left + width;
+            final float top = baselineY + mAxisLabelsBounds.get(index).top;
+            final float bottom = top + mAxisLabelsBounds.get(index).height();
+            result[index] = new Rect(round(left), round(top), round(right), round(bottom));
+        }
+        return result;
+    }
 
+    private void drawAxisLabels(Canvas canvas, final Rect[] displayAreas, final float baselineY) {
+        final int lastIndex = displayAreas.length - 1;
+        // Suppose first and last labels are always able to draw.
+        drawAxisLabelText(canvas, 0, displayAreas[0], baselineY);
+        drawAxisLabelText(canvas, lastIndex, displayAreas[lastIndex], baselineY);
+        drawAxisLabelsBetweenStartIndexAndEndIndex(canvas, displayAreas, 0, lastIndex, baselineY);
+    }
+
+    /**
+     * Recursively draws axis labels between the start index and the end index. If the inner number
+     * can be exactly divided into 2 parts, check and draw the middle index label and then
+     * recursively draw the 2 parts. Otherwise, divide into 3 parts. Check and draw the middle two
+     * labels and then recursively draw the 3 parts. If there are any overlaps, skip drawing and go
+     * back to the uplevel of the recursion.
+     */
+    private void drawAxisLabelsBetweenStartIndexAndEndIndex(Canvas canvas,
+            final Rect[] displayAreas, final int startIndex, final int endIndex,
+            final float baselineY) {
+        if (endIndex - startIndex <= 1) {
+            return;
+        }
+        if ((endIndex - startIndex) % 2 == 0) {
+            int middleIndex = (startIndex + endIndex) / 2;
+            if (hasOverlap(displayAreas, startIndex, middleIndex)
+                    || hasOverlap(displayAreas, middleIndex, endIndex)) {
+                return;
+            }
+            drawAxisLabelText(canvas, middleIndex, displayAreas[middleIndex], baselineY);
+            drawAxisLabelsBetweenStartIndexAndEndIndex(
+                    canvas, displayAreas, startIndex, middleIndex, baselineY);
+            drawAxisLabelsBetweenStartIndexAndEndIndex(
+                    canvas, displayAreas, middleIndex, endIndex, baselineY);
+        } else {
+            int middleIndex1 = startIndex + round((endIndex - startIndex) / 3f);
+            int middleIndex2 = startIndex + round((endIndex - startIndex) * 2 / 3f);
+            if (hasOverlap(displayAreas, startIndex, middleIndex1)
+                    || hasOverlap(displayAreas, middleIndex1, middleIndex2)
+                    || hasOverlap(displayAreas, middleIndex2, endIndex)) {
+                return;
+            }
+            drawAxisLabelText(canvas, middleIndex1, displayAreas[middleIndex1], baselineY);
+            drawAxisLabelText(canvas, middleIndex2, displayAreas[middleIndex2], baselineY);
+            drawAxisLabelsBetweenStartIndexAndEndIndex(
+                    canvas, displayAreas, startIndex, middleIndex1, baselineY);
+            drawAxisLabelsBetweenStartIndexAndEndIndex(
+                    canvas, displayAreas, middleIndex1, middleIndex2, baselineY);
+            drawAxisLabelsBetweenStartIndexAndEndIndex(
+                    canvas, displayAreas, middleIndex2, endIndex, baselineY);
         }
     }
 
-    private int getTimestampY(int index) {
-        return getHeight() - mTimestampsBounds[index].height()
-                + (mTimestampsBounds[index].height() + mTimestampsBounds[index].top)
-                + round(mTextPadding * 1.5f);
+    private boolean hasOverlap(
+            final Rect[] displayAreas, final int leftIndex, final int rightIndex) {
+        return displayAreas[leftIndex].right + mTextPadding * 2.3f > displayAreas[rightIndex].left;
+    }
+
+    private void drawAxisLabelText(
+            Canvas canvas, final int index, final Rect displayArea, final float baselineY) {
+        mTextPaint.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText(
+                mViewModel.getText(index),
+                displayArea.centerX(),
+                baselineY,
+                mTextPaint);
     }
 
     private void drawTrapezoids(Canvas canvas) {
         // Ignores invalid trapezoid data.
-        if (mLevels == null) {
+        if (mViewModel == null) {
             return;
         }
         final float trapezoidBottom =
                 getHeight() - mIndent.bottom - mDividerHeight - mDividerWidth
                         - mTrapezoidVOffset;
-        final float availableSpace = trapezoidBottom - mDividerWidth * .5f - mIndent.top;
+        final float availableSpace =
+                trapezoidBottom - mDividerWidth * .5f - mIndent.top - mTrapezoidVOffset;
         final float unitHeight = availableSpace / 100f;
         // Draws all trapezoid shapes into the canvas.
         final Path trapezoidPath = new Path();
         Path trapezoidCurvePath = null;
-        for (int index = 0; index < mTrapezoidCount; index++) {
+        for (int index = 0; index < mTrapezoidSlots.length; index++) {
             // Not draws the trapezoid for corner or not initialization cases.
-            if (!isValidToDraw(index)) {
-                if (mTrapezoidCurvePaint != null && trapezoidCurvePath != null) {
-                    canvas.drawPath(trapezoidCurvePath, mTrapezoidCurvePaint);
-                    trapezoidCurvePath = null;
-                }
+            if (!isValidToDraw(mViewModel, index)) {
                 continue;
             }
             // Configures the trapezoid paint color.
-            final int trapezoidColor =
-                    !mIsSlotsClickabled
-                            ? mTrapezoidColor
-                            : mSelectedIndex == index || mSelectedIndex == SELECTED_INDEX_ALL
-                                    ? mTrapezoidSolidColor : mTrapezoidColor;
-            final boolean isHoverState =
-                    mIsSlotsClickabled && mHoveredIndex == index && isValidToDraw(mHoveredIndex);
+            final int trapezoidColor = (mViewModel.selectedIndex() == index
+                    || mViewModel.selectedIndex() == BatteryChartViewModel.SELECTED_INDEX_ALL)
+                    ? mTrapezoidSolidColor : mTrapezoidColor;
+            final boolean isHoverState = mHoveredIndex == index && isValidToDraw(mViewModel,
+                    mHoveredIndex);
             mTrapezoidPaint.setColor(isHoverState ? mTrapezoidHoverColor : trapezoidColor);
 
-            final float leftTop = round(trapezoidBottom - mLevels[index] * unitHeight);
-            final float rightTop = round(trapezoidBottom - mLevels[index + 1] * unitHeight);
+            final float leftTop = round(
+                    trapezoidBottom - requireNonNull(mViewModel.getLevel(index)) * unitHeight);
+            final float rightTop = round(trapezoidBottom
+                    - requireNonNull(mViewModel.getLevel(index + 1)) * unitHeight);
             trapezoidPath.reset();
             trapezoidPath.moveTo(mTrapezoidSlots[index].mLeft, trapezoidBottom);
             trapezoidPath.lineTo(mTrapezoidSlots[index].mLeft, leftTop);
@@ -551,27 +537,14 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             trapezoidPath.lineTo(mTrapezoidSlots[index].mLeft, leftTop);
             // Draws the trapezoid shape into canvas.
             canvas.drawPath(trapezoidPath, mTrapezoidPaint);
-
-            // Generates path for non-clickable trapezoid curve.
-            if (mTrapezoidCurvePaint != null) {
-                if (trapezoidCurvePath == null) {
-                    trapezoidCurvePath = new Path();
-                    trapezoidCurvePath.moveTo(mTrapezoidSlots[index].mLeft, leftTop);
-                } else {
-                    trapezoidCurvePath.lineTo(mTrapezoidSlots[index].mLeft, leftTop);
-                }
-                trapezoidCurvePath.lineTo(mTrapezoidSlots[index].mRight, rightTop);
-            }
-        }
-        // Draws the trapezoid curve for non-clickable case.
-        if (mTrapezoidCurvePaint != null && trapezoidCurvePath != null) {
-            canvas.drawPath(trapezoidCurvePath, mTrapezoidCurvePaint);
-            trapezoidCurvePath = null;
         }
     }
 
     // Searches the corresponding trapezoid index from x location.
     private int getTrapezoidIndex(float x) {
+        if (mTrapezoidSlots == null) {
+            return BatteryChartViewModel.SELECTED_INDEX_INVALID;
+        }
         for (int index = 0; index < mTrapezoidSlots.length; index++) {
             final TrapezoidSlot slot = mTrapezoidSlots[index];
             if (x >= slot.mLeft - mTrapezoidHOffset
@@ -579,15 +552,42 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
                 return index;
             }
         }
-        return SELECTED_INDEX_INVALID;
+        return BatteryChartViewModel.SELECTED_INDEX_INVALID;
     }
 
-    private boolean isValidToDraw(int trapezoidIndex) {
-        return mLevels != null
+    private void initializeAxisLabelsBounds() {
+        mAxisLabelsBounds.clear();
+        for (int i = 0; i < mViewModel.size(); i++) {
+            mAxisLabelsBounds.add(new Rect());
+        }
+    }
+
+    private static boolean isTrapezoidValid(
+            @NonNull BatteryChartViewModel viewModel, int trapezoidIndex) {
+        return viewModel.getLevel(trapezoidIndex) != null
+                && viewModel.getLevel(trapezoidIndex + 1) != null;
+    }
+
+    private static boolean isTrapezoidIndexValid(
+            @NonNull BatteryChartViewModel viewModel, int trapezoidIndex) {
+        return viewModel != null
                 && trapezoidIndex >= 0
-                && trapezoidIndex < mLevels.length - 1
-                && mLevels[trapezoidIndex] != 0
-                && mLevels[trapezoidIndex + 1] != 0;
+                && trapezoidIndex < viewModel.size() - 1;
+    }
+
+    private static boolean isValidToDraw(BatteryChartViewModel viewModel, int trapezoidIndex) {
+        return isTrapezoidIndexValid(viewModel, trapezoidIndex)
+                && isTrapezoidValid(viewModel, trapezoidIndex);
+    }
+
+    private static boolean hasAnyValidTrapezoid(@NonNull BatteryChartViewModel viewModel) {
+        // Sets the chart is clickable if there is at least one valid item in it.
+        for (int trapezoidIndex = 0; trapezoidIndex < viewModel.size() - 1; trapezoidIndex++) {
+            if (isTrapezoidValid(viewModel, trapezoidIndex)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static String[] getPercentages() {
@@ -597,31 +597,66 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
                 formatPercentage(/*percentage=*/ 0, /*round=*/ true)};
     }
 
-    @VisibleForTesting
-    static boolean isAccessibilityEnabled(Context context) {
-        final AccessibilityManager accessibilityManager =
-                context.getSystemService(AccessibilityManager.class);
-        if (!accessibilityManager.isEnabled()) {
-            return false;
-        }
-        final List<AccessibilityServiceInfo> serviceInfoList =
-                accessibilityManager.getEnabledAccessibilityServiceList(
-                        AccessibilityServiceInfo.FEEDBACK_SPOKEN
-                                | AccessibilityServiceInfo.FEEDBACK_GENERIC);
-        for (AccessibilityServiceInfo info : serviceInfoList) {
-            for (String serviceName : ACCESSIBILITY_SERVICE_NAMES) {
-                final String serviceId = info.getId();
-                if (serviceId != null && serviceId.contains(serviceName)) {
-                    Log.d(TAG, "acccessibilityEnabled:" + serviceId);
-                    return true;
+    private class BatteryChartAccessibilityNodeProvider extends AccessibilityNodeProvider {
+        @Override
+        public AccessibilityNodeInfo createAccessibilityNodeInfo(int virtualViewId) {
+            if (virtualViewId == AccessibilityNodeProvider.HOST_VIEW_ID) {
+                final AccessibilityNodeInfo hostInfo =
+                        new AccessibilityNodeInfo(BatteryChartView.this);
+                for (int index = 0; index < mViewModel.size() - 1; index++) {
+                    hostInfo.addChild(BatteryChartView.this, index);
                 }
+                return hostInfo;
+            }
+            final int index = virtualViewId;
+            if (!isTrapezoidIndexValid(mViewModel, index)) {
+                Log.w(TAG, "Invalid virtual view id:" + index);
+                return null;
+            }
+            final AccessibilityNodeInfo childInfo =
+                    new AccessibilityNodeInfo(BatteryChartView.this, index);
+            onInitializeAccessibilityNodeInfo(childInfo);
+            childInfo.setClickable(isValidToDraw(mViewModel, index));
+            childInfo.setText(mViewModel.getFullText(index));
+            childInfo.setContentDescription(mViewModel.getFullText(index));
+
+            final Rect bounds = new Rect();
+            getBoundsOnScreen(bounds, true);
+            final int hostLeft = bounds.left;
+            bounds.left = round(hostLeft + mTrapezoidSlots[index].mLeft);
+            bounds.right = round(hostLeft + mTrapezoidSlots[index].mRight);
+            childInfo.setBoundsInScreen(bounds);
+            return childInfo;
+        }
+
+        @Override
+        public boolean performAction(int virtualViewId, int action,
+                @Nullable Bundle arguments) {
+            if (virtualViewId == AccessibilityNodeProvider.HOST_VIEW_ID) {
+                return performAccessibilityAction(action, arguments);
+            }
+            switch (action) {
+                case AccessibilityNodeInfo.ACTION_CLICK:
+                    onTrapezoidClicked(BatteryChartView.this, virtualViewId);
+                    return true;
+
+                case AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS:
+                    return sendAccessibilityEvent(virtualViewId,
+                            AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED);
+
+                case AccessibilityNodeInfo.ACTION_CLEAR_ACCESSIBILITY_FOCUS:
+                    return sendAccessibilityEvent(virtualViewId,
+                            AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUS_CLEARED);
+
+                default:
+                    return performAccessibilityAction(action, arguments);
             }
         }
-        return false;
     }
 
     // A container class for each trapezoid left and right location.
-    private static final class TrapezoidSlot {
+    @VisibleForTesting
+    static final class TrapezoidSlot {
         public float mLeft;
         public float mRight;
 

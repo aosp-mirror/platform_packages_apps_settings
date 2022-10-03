@@ -20,15 +20,22 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Looper;
 import android.os.UserHandle;
+import android.text.TextUtils;
 import android.util.ArraySet;
 
 import androidx.preference.Preference;
@@ -46,6 +53,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
@@ -56,19 +64,26 @@ import java.util.Set;
 
 @RunWith(AndroidJUnit4.class)
 public class VpnSettingsTest {
-    private static final String ADVANCED_VPN_GROUP_KEY = "advanced_vpn_group";
-    private static final String VPN_GROUP_KEY = "vpn_group";
-    private static final String ADVANCED_VPN_GROUP_TITLE = "advanced_vpn_group_title";
-    private static final String VPN_GROUP_TITLE = "vpn_group_title";
-    private static final String FAKE_PACKAGE_NAME = "com.fake.package.name";
-    private static final String ADVANCED_VPN_GROUP_PACKAGE_NAME = "com.advanced.package.name";
     private static final int USER_ID_1 = UserHandle.USER_NULL;
+    private static final String VPN_GROUP_KEY = "vpn_group";
+    private static final String VPN_GROUP_TITLE = "vpn_group_title";
+    private static final String VPN_PACKAGE_NAME = "vpn.package.name";
+    private static final String VPN_LAUNCH_INTENT = "vpn.action";
+    private static final String ADVANCED_VPN_GROUP_KEY = "advanced_vpn_group";
+    private static final String ADVANCED_VPN_GROUP_TITLE = "advanced_vpn_group_title";
+    private static final String ADVANCED_VPN_PACKAGE_NAME = "advanced.vpn.package.name";
+    private static final String ADVANCED_VPN_LAUNCH_INTENT = "advanced.vpn.action";
+
+    private final Intent mVpnIntent = new Intent().setAction(VPN_LAUNCH_INTENT);
+    private final Intent mAdvancedVpnIntent = new Intent().setAction(ADVANCED_VPN_LAUNCH_INTENT);
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     @Mock
     private AppOpsManager mAppOpsManager;
+    @Mock
+    private PackageManager mPackageManager;
 
     private VpnSettings mVpnSettings;
     private Context mContext;
@@ -104,9 +119,10 @@ public class VpnSettingsTest {
         when(mFakeFeatureFactory.mAdvancedVpnFeatureProvider.getVpnPreferenceGroupTitle(mContext))
                 .thenReturn(VPN_GROUP_TITLE);
         when(mFakeFeatureFactory.mAdvancedVpnFeatureProvider.getAdvancedVpnPackageName())
-                .thenReturn(ADVANCED_VPN_GROUP_PACKAGE_NAME);
+                .thenReturn(ADVANCED_VPN_PACKAGE_NAME);
         when(mFakeFeatureFactory.mAdvancedVpnFeatureProvider.isAdvancedVpnSupported(any()))
                 .thenReturn(true);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
         doReturn(mContext).when(mContext).createContextAsUser(any(), anyInt());
         doReturn(mContext).when(mContext).createPackageContextAsUser(any(), anyInt(), any());
         doReturn(mPreferenceManager).when(mVpnGroup).getPreferenceManager();
@@ -117,7 +133,7 @@ public class VpnSettingsTest {
     public void setShownAdvancedPreferences_hasGeneralVpn_returnsVpnCountAs1() {
         Set<Preference> updates = new ArraySet<>();
         AppPreference pref =
-                spy(new AppPreference(mContext, USER_ID_1, FAKE_PACKAGE_NAME));
+                spy(new AppPreference(mContext, USER_ID_1, VPN_PACKAGE_NAME));
         updates.add(pref);
 
         mVpnSettings.setShownAdvancedPreferences(updates);
@@ -131,7 +147,7 @@ public class VpnSettingsTest {
     public void setShownAdvancedPreferences_hasAdvancedVpn_returnsAdvancedVpnCountAs1() {
         Set<Preference> updates = new ArraySet<>();
         AppPreference pref =
-                spy(new AppPreference(mContext, USER_ID_1, ADVANCED_VPN_GROUP_PACKAGE_NAME));
+                spy(new AppPreference(mContext, USER_ID_1, ADVANCED_VPN_PACKAGE_NAME));
         updates.add(pref);
 
         mVpnSettings.setShownAdvancedPreferences(updates);
@@ -154,14 +170,10 @@ public class VpnSettingsTest {
     }
 
     @Test
-    public void getVpnApps_isAdvancedVpn_returnsOne() {
-        int uid = 1111;
-        List<AppOpsManager.OpEntry> opEntries = new ArrayList<>();
-        List<AppOpsManager.PackageOps> apps = new ArrayList<>();
-        AppOpsManager.PackageOps packageOps =
-                new AppOpsManager.PackageOps(ADVANCED_VPN_GROUP_PACKAGE_NAME, uid, opEntries);
-        apps.add(packageOps);
-        when(mAppOpsManager.getPackagesForOps((int[]) any())).thenReturn(apps);
+    public void getVpnApps_isAdvancedVpn_returnsOne() throws Exception {
+        ApplicationInfo info = new ApplicationInfo();
+        info.uid = 1111;
+        when(mPackageManager.getApplicationInfo(anyString(), anyInt())).thenReturn(info);
 
         assertThat(VpnSettings.getVpnApps(mContext, /* includeProfiles= */ false,
                 mFakeFeatureFactory.getAdvancedVpnFeatureProvider(),
@@ -174,12 +186,100 @@ public class VpnSettingsTest {
         List<AppOpsManager.OpEntry> opEntries = new ArrayList<>();
         List<AppOpsManager.PackageOps> apps = new ArrayList<>();
         AppOpsManager.PackageOps packageOps =
-                new AppOpsManager.PackageOps(FAKE_PACKAGE_NAME, uid, opEntries);
+                new AppOpsManager.PackageOps(VPN_PACKAGE_NAME, uid, opEntries);
         apps.add(packageOps);
         when(mAppOpsManager.getPackagesForOps((int[]) any())).thenReturn(apps);
+        when(mFakeFeatureFactory.mAdvancedVpnFeatureProvider.isAdvancedVpnSupported(any()))
+                .thenReturn(false);
 
         assertThat(VpnSettings.getVpnApps(mContext, /* includeProfiles= */ false,
                 mFakeFeatureFactory.getAdvancedVpnFeatureProvider(),
                 mAppOpsManager)).isEmpty();
+    }
+
+    @Test
+    public void clickVpn_VpnConnected_doesNotStartVpnLaunchIntent()
+            throws PackageManager.NameNotFoundException {
+        Set<Preference> updates = new ArraySet<>();
+        AppPreference pref = spy(new AppPreference(mContext, USER_ID_1, VPN_PACKAGE_NAME));
+        pref.setState(AppPreference.STATE_CONNECTED);
+        updates.add(pref);
+        when(mContext.createPackageContextAsUser(any(), anyInt(), any())).thenReturn(mContext);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mPackageManager.getLaunchIntentForPackage(any())).thenReturn(mVpnIntent);
+        ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        doNothing().when(mContext).startActivityAsUser(captor.capture(), any());
+        mVpnSettings.setShownPreferences(updates);
+
+        mVpnSettings.onPreferenceClick(pref);
+
+        verify(mContext, never()).startActivityAsUser(any(), any());
+    }
+
+    @Test
+    public void clickVpn_VpnDisconnected_startsVpnLaunchIntent()
+            throws PackageManager.NameNotFoundException {
+        Set<Preference> updates = new ArraySet<>();
+        AppPreference pref = spy(new AppPreference(mContext, USER_ID_1, VPN_PACKAGE_NAME));
+        pref.setState(AppPreference.STATE_DISCONNECTED);
+        updates.add(pref);
+        when(mContext.createPackageContextAsUser(any(), anyInt(), any())).thenReturn(mContext);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mPackageManager.getLaunchIntentForPackage(any())).thenReturn(mVpnIntent);
+        ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        doNothing().when(mContext).startActivityAsUser(captor.capture(), any());
+        mVpnSettings.setShownPreferences(updates);
+
+        mVpnSettings.onPreferenceClick(pref);
+
+        verify(mContext).startActivityAsUser(captor.capture(), any());
+        assertThat(TextUtils.equals(captor.getValue().getAction(),
+                VPN_LAUNCH_INTENT)).isTrue();
+    }
+
+    @Test
+    public void clickAdvancedVpn_VpnConnectedDisconnectDialogDisabled_startsAppLaunchIntent()
+            throws PackageManager.NameNotFoundException {
+        Set<Preference> updates = new ArraySet<>();
+        AppPreference pref =
+                spy(new AppPreference(mContext, USER_ID_1, ADVANCED_VPN_PACKAGE_NAME));
+        pref.setState(AppPreference.STATE_CONNECTED);
+        updates.add(pref);
+        when(mFakeFeatureFactory.mAdvancedVpnFeatureProvider.isDisconnectDialogEnabled())
+                .thenReturn(false);
+        when(mContext.createPackageContextAsUser(any(), anyInt(), any())).thenReturn(mContext);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mPackageManager.getLaunchIntentForPackage(any())).thenReturn(mAdvancedVpnIntent);
+        ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        doNothing().when(mContext).startActivityAsUser(captor.capture(), any());
+        mVpnSettings.setShownAdvancedPreferences(updates);
+
+        mVpnSettings.onPreferenceClick(pref);
+
+        verify(mContext).startActivityAsUser(captor.capture(), any());
+        assertThat(TextUtils.equals(captor.getValue().getAction(),
+                ADVANCED_VPN_LAUNCH_INTENT)).isTrue();
+    }
+
+    @Test
+    public void clickAdvancedVpn_VpnConnectedDisconnectDialogEnabled_doesNotStartAppLaunchIntent()
+            throws PackageManager.NameNotFoundException {
+        Set<Preference> updates = new ArraySet<>();
+        AppPreference pref =
+                spy(new AppPreference(mContext, USER_ID_1, ADVANCED_VPN_PACKAGE_NAME));
+        pref.setState(AppPreference.STATE_CONNECTED);
+        updates.add(pref);
+        when(mFakeFeatureFactory.mAdvancedVpnFeatureProvider.isDisconnectDialogEnabled())
+                .thenReturn(true);
+        when(mContext.createPackageContextAsUser(any(), anyInt(), any())).thenReturn(mContext);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mPackageManager.getLaunchIntentForPackage(any())).thenReturn(mAdvancedVpnIntent);
+        ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        doNothing().when(mContext).startActivityAsUser(captor.capture(), any());
+        mVpnSettings.setShownAdvancedPreferences(updates);
+
+        mVpnSettings.onPreferenceClick(pref);
+
+        verify(mContext, never()).startActivityAsUser(any(), any());
     }
 }

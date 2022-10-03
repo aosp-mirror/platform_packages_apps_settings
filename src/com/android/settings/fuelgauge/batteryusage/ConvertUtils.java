@@ -55,11 +55,6 @@ public final class ConvertUtils {
     // Maximum total time value for each slot cumulative data at most 2 hours.
     private static final float TOTAL_TIME_THRESHOLD = DateUtils.HOUR_IN_MILLIS * 2;
 
-    // Keys for metric metadata.
-    static final int METRIC_KEY_PACKAGE = 1;
-    static final int METRIC_KEY_BATTERY_LEVEL = 2;
-    static final int METRIC_KEY_BATTERY_USAGE = 3;
-
     @VisibleForTesting
     static double PERCENTAGE_OF_TOTAL_THRESHOLD = 1f;
 
@@ -87,7 +82,7 @@ public final class ConvertUtils {
     }
 
     /** Converts to content values */
-    public static ContentValues convert(
+    public static ContentValues convertToContentValues(
             BatteryEntry entry,
             BatteryUsageStats batteryUsageStats,
             int batteryLevel,
@@ -130,6 +125,21 @@ public final class ConvertUtils {
         return values;
     }
 
+    /** Converts to {@link BatteryHistEntry} */
+    public static BatteryHistEntry convertToBatteryHistEntry(
+            BatteryEntry entry,
+            BatteryUsageStats batteryUsageStats) {
+        return new BatteryHistEntry(
+                convertToContentValues(
+                        entry,
+                        batteryUsageStats,
+                        /*batteryLevel=*/ 0,
+                        /*batteryStatus=*/ 0,
+                        /*batteryHealth=*/ 0,
+                        /*bootTimestamp=*/ 0,
+                        /*timestamp=*/ 0));
+    }
+
     /** Converts UTC timestamp to human readable local time string. */
     public static String utcToLocalTime(Context context, long timestamp) {
         final Locale locale = getLocale(context);
@@ -140,13 +150,22 @@ public final class ConvertUtils {
 
     /** Converts UTC timestamp to local time hour data. */
     public static String utcToLocalTimeHour(
-            Context context, long timestamp, boolean is24HourFormat) {
+            final Context context, final long timestamp, final boolean is24HourFormat) {
         final Locale locale = getLocale(context);
-        // e.g. for 12-hour format: 9 pm
+        // e.g. for 12-hour format: 9 PM
         // e.g. for 24-hour format: 09:00
         final String skeleton = is24HourFormat ? "HHm" : "ha";
         final String pattern = DateFormat.getBestDateTimePattern(locale, skeleton);
-        return DateFormat.format(pattern, timestamp).toString().toLowerCase(locale);
+        return DateFormat.format(pattern, timestamp).toString();
+    }
+
+    /** Converts UTC timestamp to local time day of week data. */
+    public static String utcToLocalTimeDayOfWeek(
+            final Context context, final long timestamp, final boolean isAbbreviation) {
+        final Locale locale = getLocale(context);
+        final String pattern = DateFormat.getBestDateTimePattern(locale,
+                isAbbreviation ? "E" : "EEEE");
+        return DateFormat.format(pattern, timestamp).toString();
     }
 
     /** Gets indexed battery usage data for each corresponding time slot. */
@@ -267,7 +286,7 @@ public final class ConvertUtils {
                 diffEntry.setTotalConsumePower(totalConsumePower);
             }
         }
-        insert24HoursData(BatteryChartView.SELECTED_INDEX_ALL, resultMap);
+        insert24HoursData(BatteryChartViewModel.SELECTED_INDEX_ALL, resultMap);
         resolveMultiUsersData(context, resultMap);
         if (purgeLowPercentageAndFakeData) {
             purgeLowPercentageAndFakeData(context, resultMap);

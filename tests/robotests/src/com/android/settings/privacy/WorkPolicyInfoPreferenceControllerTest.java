@@ -21,6 +21,7 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -30,6 +31,7 @@ import android.content.Context;
 import androidx.preference.Preference;
 
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
+import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -52,6 +54,7 @@ public class WorkPolicyInfoPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mEnterpriseProvider = mFakeFeatureFactory.getEnterprisePrivacyFeatureProvider(mContext);
+        SafetyCenterManagerWrapper.sInstance = mock(SafetyCenterManagerWrapper.class);
     }
 
     @Test
@@ -70,6 +73,15 @@ public class WorkPolicyInfoPreferenceControllerTest {
                 new WorkPolicyInfoPreferenceController(mContext, "test_key");
 
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_safetyCenterEnabled_shouldReturnUnsupported() {
+        when(SafetyCenterManagerWrapper.get().isEnabled(mContext)).thenReturn(true);
+        WorkPolicyInfoPreferenceController controller =
+                new WorkPolicyInfoPreferenceController(mContext, "test_key");
+
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test

@@ -32,7 +32,6 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
-import com.android.settings.password.ChooseLockSettingsHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
@@ -50,13 +49,29 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     @VisibleForTesting
     static final String FINGERPRINT_SUGGESTION_ACTIVITY =
             "com.android.settings.SetupFingerprintSuggestionActivity";
+    private FingerprintManager mFingerprintManager;
+    private boolean mCanAssumeSfps;
+
+    private boolean mIsAddAnotherOrFinish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fingerprint_enroll_finish);
+        mFingerprintManager = getSystemService(FingerprintManager.class);
+        final List<FingerprintSensorPropertiesInternal> props =
+                mFingerprintManager.getSensorPropertiesInternal();
+        mCanAssumeSfps = props != null && props.size() == 1 && props.get(0).isAnySidefpsType();
+        if (mCanAssumeSfps) {
+            setContentView(R.layout.sfps_enroll_finish);
+        } else {
+            setContentView(R.layout.fingerprint_enroll_finish);
+        }
         setHeaderText(R.string.security_settings_fingerprint_enroll_finish_title);
-        setDescriptionText(R.string.security_settings_fingerprint_enroll_finish_v2_message);
+        if (mCanAssumeSfps) {
+            setDescriptionText(R.string.security_settings_sfps_enroll_finish);
+        } else {
+            setDescriptionText(R.string.security_settings_fingerprint_enroll_finish_v2_message);
+        }
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
@@ -109,14 +124,25 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Reset it to false every time activity back to fg because this flag is stateless between
+        // different life cycle.
+        mIsAddAnotherOrFinish = false;
+    }
+
+    @Override
     protected void onNextButtonClick(View view) {
         updateFingerprintSuggestionEnableState();
+        finishAndToNext();
+    }
+
+    private void finishAndToNext() {
+        mIsAddAnotherOrFinish = true;
         setResult(RESULT_FINISHED);
         if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
             postEnroll();
-        } else if (mFromSettingsSummary) {
-            // Only launch fingerprint settings if enrollment was triggered through settings summary
-            launchFingerprintSettings();
         }
         finish();
     }
@@ -148,27 +174,22 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
         }
     }
 
-    private void launchFingerprintSettings() {
-        final Intent intent = new Intent(ACTION_FINGERPRINT_SETTINGS);
-        intent.setPackage(Utils.SETTINGS_PACKAGE_NAME);
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
-        intent.putExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, mChallenge);
-        startActivity(intent);
-        overridePendingTransition(R.anim.sud_slide_back_in, R.anim.sud_slide_back_out);
+    private void onAddAnotherButtonClick(View view) {
+        mIsAddAnotherOrFinish = true;
+        startActivityForResult(getFingerprintEnrollingIntent(), BiometricUtils.REQUEST_ADD_ANOTHER);
     }
 
-    private void onAddAnotherButtonClick(View view) {
-        startActivityForResult(getFingerprintEnrollingIntent(), BiometricUtils.REQUEST_ADD_ANOTHER);
+    @Override
+    protected boolean shouldFinishWhenBackgrounded() {
+        return !mIsAddAnotherOrFinish && super.shouldFinishWhenBackgrounded();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         updateFingerprintSuggestionEnableState();
         if (requestCode == BiometricUtils.REQUEST_ADD_ANOTHER && resultCode != RESULT_CANCELED) {
-            setResult(resultCode, data);
-            finish();
+            // If user cancel during "Add another", just use similar flow on "Next" button
+            finishAndToNext();
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
