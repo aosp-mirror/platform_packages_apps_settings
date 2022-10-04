@@ -29,6 +29,7 @@ import com.android.settings.accessibility.AccessibilityDetailsSettingsFragment;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
 import com.android.settings.accessibility.CaptioningPropertiesFragment;
+import com.android.settings.accessibility.ColorAndMotionFragment;
 import com.android.settings.accessibility.TextReadingPreferenceFragment;
 import com.android.settings.accessibility.TextReadingPreferenceFragmentForSetupWizard;
 import com.android.settings.accessibility.ToggleColorInversionPreferenceFragment;
@@ -353,7 +354,8 @@ public class SettingsGateway {
             AppLocaleDetails.class.getName(),
             TurnScreenOnSettings.class.getName(),
             TurnScreenOnDetails.class.getName(),
-            NfcAndPaymentFragment.class.getName()
+            NfcAndPaymentFragment.class.getName(),
+            ColorAndMotionFragment.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

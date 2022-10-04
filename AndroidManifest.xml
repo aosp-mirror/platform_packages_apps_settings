@@ -2196,6 +2196,22 @@
         </activity>
 
         <activity
+            android:name="Settings$ColorAndMotionActivity"
+            android:exported="true"
+            android:label="@string/accessibility_color_and_motion_title">
+            <intent-filter>
+                <action android:name="android.intent.action.ACCESSIBILITY_COLOR_MOTION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.accessibility.ColorAndMotionFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_accessibility"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
             android:name="Settings$TextToSpeechSettingsActivity"
             android:exported="true"
             android:label="@string/tts_settings">
