@@ -2709,9 +2709,15 @@
 
         <activity android:name=".development.AdbQrCodeActivity" />
 
-        <activity android:name=".development.DSULoader"
+        <activity android:name="com.android.settings.development.DSULoader"
                   android:label="Select DSU Package"
-                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"
+                  android:exported="true" >
+            <intent-filter>
+                <action android:name="android.settings.development.START_DSU_LOADER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".development.DSUTermsOfServiceActivity"
                   android:label="Terms of Service"
                   android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
