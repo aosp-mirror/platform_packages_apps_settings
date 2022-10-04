@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.android.settings"
           coreApp="true"
           android:sharedUserId="android.uid.system">
@@ -4634,6 +4635,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <!-- [b/197780098] Disable eager initialization of Jetpack libraries. -->
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            tools:node="remove" />
 
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
