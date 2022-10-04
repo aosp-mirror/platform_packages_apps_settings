@@ -16,7 +16,8 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.BluetoothA2dpHwOffloadPreferenceController.A2DP_OFFLOAD_SUPPORTED_PROPERTY;
+import static com.android.settings.development.BluetoothA2dpHwOffloadPreferenceController.A2DP_OFFLOAD_DISABLED_PROPERTY;
+
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
@@ -79,11 +80,11 @@ public class BluetoothLeAudioHwOffloadPreferenceController
 
         final boolean leAudioEnabled =
                 (mBluetoothAdapter.isLeAudioSupported() == BluetoothStatusCodes.FEATURE_SUPPORTED);
-
-        final boolean offloadSupported =
-                SystemProperties.getBoolean(A2DP_OFFLOAD_SUPPORTED_PROPERTY, false)
-                && SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_SUPPORTED_PROPERTY, false);
-        if (leAudioEnabled && offloadSupported) {
+        final boolean leAudioOffloadSupported =
+                SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_SUPPORTED_PROPERTY, false);
+        final boolean a2dpOffloadDisabled =
+                SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, false);
+        if (leAudioEnabled && leAudioOffloadSupported && !a2dpOffloadDisabled) {
             final boolean offloadDisabled =
                     SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, true);
             ((SwitchPreference) mPreference).setChecked(offloadDisabled);
@@ -102,10 +103,11 @@ public class BluetoothLeAudioHwOffloadPreferenceController
 
         final boolean leAudioEnabled =
                 (mBluetoothAdapter.isLeAudioSupported() == BluetoothStatusCodes.FEATURE_SUPPORTED);
-        final boolean offloadSupported =
-                SystemProperties.getBoolean(A2DP_OFFLOAD_SUPPORTED_PROPERTY, false)
-                && SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_SUPPORTED_PROPERTY, false);
-        if (leAudioEnabled && offloadSupported) {
+        final boolean leAudioOffloadSupported =
+                SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_SUPPORTED_PROPERTY, false);
+        final boolean a2dpOffloadDisabled =
+                SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, false);
+        if (leAudioEnabled && leAudioOffloadSupported && !a2dpOffloadDisabled) {
             ((SwitchPreference) mPreference).setChecked(true);
             SystemProperties.set(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, "true");
         } else {
@@ -118,7 +120,7 @@ public class BluetoothLeAudioHwOffloadPreferenceController
      */
     public boolean isDefaultValue() {
         final boolean offloadSupported =
-                SystemProperties.getBoolean(A2DP_OFFLOAD_SUPPORTED_PROPERTY, false)
+                !SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, false)
                 && SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_SUPPORTED_PROPERTY, false);
         final boolean offloadDisabled =
                     SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, false);
@@ -133,11 +135,11 @@ public class BluetoothLeAudioHwOffloadPreferenceController
             return;
         }
 
-        final boolean offloadDisabled =
+        final boolean leaudioOffloadDisabled =
                 SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY,
                 false);
         SystemProperties.set(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY,
-                Boolean.toString(!offloadDisabled));
+                Boolean.toString(!leaudioOffloadDisabled));
     }
 
     /**
