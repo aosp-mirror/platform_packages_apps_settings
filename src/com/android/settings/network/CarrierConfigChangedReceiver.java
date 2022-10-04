@@ -38,7 +38,8 @@ public class CarrierConfigChangedReceiver extends BroadcastReceiver {
     }
 
     public void registerOn(Context context) {
-        context.registerReceiver(this, new IntentFilter(ACTION_CARRIER_CONFIG_CHANGED));
+        context.registerReceiver(this, new IntentFilter(ACTION_CARRIER_CONFIG_CHANGED),
+                Context.RECEIVER_EXPORTED/*UNAUDITED*/);
     }
 
     @Override
