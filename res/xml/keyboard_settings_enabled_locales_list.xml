@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2016 The Android Open Source Project
+<!-- Copyright (C) 2022 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -16,20 +16,8 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/physical_keyboard_title">
-    <!-- Additional preference screens are inserted here programmatically
-         with low order values to set the key map of each attached keyboard. -->
     <PreferenceCategory
-        android:key="keyboard_options_category"
-        android:title="@string/keyboard_options_category">
-        <SwitchPreference
-            android:key="show_virtual_keyboard_switch"
-            android:title="@string/show_ime"
-            android:summary="@string/show_ime_summary"
-            android:defaultValue="false" />
-
-        <Preference
-            android:key="keyboard_shortcuts_helper"
-            android:title="@string/keyboard_shortcuts_helper"
-            android:summary="@string/keyboard_shortcuts_helper_summary" />
+        android:key="enabled_locales_keyboard_layout"
+        android:title="@string/enabled_locales_keyboard_layout">
     </PreferenceCategory>
 </PreferenceScreen>

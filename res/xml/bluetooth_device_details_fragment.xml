@@ -85,6 +85,12 @@
             settings:controller="com.android.settings.accessibility.LiveCaptionPreferenceController"/>
     </PreferenceCategory>
 
+    <Preference
+        android:key="keyboard_settings"
+        android:persistent="false"
+        android:title="@string/bluetooth_device_keyboard_settings_preference_title"
+        settings:controller="com.android.settings.inputmethod.KeyboardSettingsPreferenceController"/>
+
     <com.android.settingslib.widget.FooterPreference
         android:key="device_details_footer"
         android:selectable="false"

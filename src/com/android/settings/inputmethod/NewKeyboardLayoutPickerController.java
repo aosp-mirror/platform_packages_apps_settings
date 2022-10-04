@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package com.android.settings.inputmethod;
 
-
 import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
@@ -26,7 +25,6 @@ import android.view.InputDevice;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -37,28 +35,29 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-
-public class KeyboardLayoutPickerController extends BasePreferenceController implements
+public class NewKeyboardLayoutPickerController extends BasePreferenceController implements
         InputManager.InputDeviceListener, LifecycleObserver, OnStart, OnStop {
-
     private final InputManager mIm;
-    private final Map<SwitchPreference, KeyboardLayout> mPreferenceMap;
+    private final Map<KeyboardLayoutPreference, KeyboardLayout> mPreferenceMap;
 
     private Fragment mParent;
     private int mInputDeviceId;
     private InputDeviceIdentifier mInputDeviceIdentifier;
     private KeyboardLayout[] mKeyboardLayouts;
     private PreferenceScreen mScreen;
+    private String mPreviousSelection;
+    private String mLayout;
 
-
-    public KeyboardLayoutPickerController(Context context, String key) {
+    public NewKeyboardLayoutPickerController(Context context, String key) {
         super(context, key);
-        mIm = (InputManager) context.getSystemService(Context.INPUT_SERVICE);
+        mIm = context.getSystemService(InputManager.class);
         mInputDeviceId = -1;
         mPreferenceMap = new HashMap<>();
     }
 
-    public void initialize(Fragment parent, InputDeviceIdentifier inputDeviceIdentifier) {
+    public void initialize(Fragment parent, InputDeviceIdentifier inputDeviceIdentifier,
+            String layout) {
+        mLayout = layout;
         mParent = parent;
         mInputDeviceIdentifier = inputDeviceIdentifier;
         mKeyboardLayouts = mIm.getKeyboardLayoutsForInputDevice(mInputDeviceIdentifier);
@@ -68,7 +67,6 @@ public class KeyboardLayoutPickerController extends BasePreferenceController imp
     @Override
     public void onStart() {
         mIm.registerInputDeviceListener(this, null);
-
         final InputDevice inputDevice =
                 mIm.getInputDeviceByDescriptor(mInputDeviceIdentifier.getDescriptor());
         if (inputDevice == null) {
@@ -76,8 +74,6 @@ public class KeyboardLayoutPickerController extends BasePreferenceController imp
             return;
         }
         mInputDeviceId = inputDevice.getId();
-
-        updateCheckedState();
     }
 
     @Override
@@ -100,28 +96,28 @@ public class KeyboardLayoutPickerController extends BasePreferenceController imp
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!(preference instanceof SwitchPreference)) {
+
+        if (!(preference instanceof KeyboardLayoutPreference)) {
             return false;
         }
 
-        final SwitchPreference switchPref = (SwitchPreference) preference;
-        final KeyboardLayout layout = mPreferenceMap.get(switchPref);
-        if (layout != null) {
-            final boolean checked = switchPref.isChecked();
-            if (checked) {
-                mIm.addKeyboardLayoutForInputDevice(mInputDeviceIdentifier,
-                        layout.getDescriptor());
-            } else {
-                mIm.removeKeyboardLayoutForInputDevice(mInputDeviceIdentifier,
-                        layout.getDescriptor());
-            }
+        final KeyboardLayoutPreference pref = (KeyboardLayoutPreference) preference;
+        // TODO(b/259530132): Need APIs to update the available keyboards for input device.
+        // For example:
+        // inputManager.setCurrentKeyboardLayoutForInputDevice(
+        //            InputDevice..., Userid..., ImeSubType ..., String keyboardLayoutDescriptor)
+        if (mPreviousSelection != null && !mPreviousSelection.equals(preference.getKey())) {
+            KeyboardLayoutPreference preSelectedPref = mScreen.findPreference(mPreviousSelection);
+            pref.setCheckMark(true);
+            preSelectedPref.setCheckMark(false);
         }
+        mPreviousSelection = preference.getKey();
         return true;
     }
 
     @Override
     public void onInputDeviceAdded(int deviceId) {
-
+        // Do nothing.
     }
 
     @Override
@@ -139,26 +135,22 @@ public class KeyboardLayoutPickerController extends BasePreferenceController imp
     }
 
     private void updateCheckedState() {
-        final String[] enabledKeyboardLayouts = mIm.getEnabledKeyboardLayoutsForInputDevice(
-                mInputDeviceIdentifier);
-        Arrays.sort(enabledKeyboardLayouts);
-
-        for (Map.Entry<SwitchPreference, KeyboardLayout> entry : mPreferenceMap.entrySet()) {
-            entry.getKey().setChecked(Arrays.binarySearch(enabledKeyboardLayouts,
-                    entry.getValue().getDescriptor()) >= 0);
-        }
+        // TODO(b/259530132): Need API to update the keyboard language layout list.
     }
 
     private void createPreferenceHierarchy() {
         for (KeyboardLayout layout : mKeyboardLayouts) {
-            final SwitchPreference pref = new SwitchPreference(mScreen.getContext());
-            pref.setTitle(layout.getLabel());
-            pref.setSummary(layout.getCollection());
+            final KeyboardLayoutPreference pref;
+            if (mLayout.equals(layout.getLabel())) {
+                pref = new KeyboardLayoutPreference(mScreen.getContext(), layout.getLabel(), true);
+                mPreviousSelection = layout.getLabel();
+            } else {
+                pref = new KeyboardLayoutPreference(mScreen.getContext(), layout.getLabel(), false);
+            }
             // TODO: Waiting for new API to use a prefix with special number to setKey
-            pref.setKey(layout.getDescriptor());
+            pref.setKey(layout.getLabel());
             mScreen.addPreference(pref);
             mPreferenceMap.put(pref, layout);
         }
     }
 }
-
