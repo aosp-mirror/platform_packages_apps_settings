@@ -2108,7 +2108,7 @@
             android:exported="true"
             android:label="@string/accessibility_text_reading_options_title">
             <intent-filter>
-                <action android:name="android.intent.action.TEXT_READING_SETTINGS" />
+                <action android:name="android.settings.TEXT_READING_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -2201,7 +2201,7 @@
             android:exported="true"
             android:label="@string/accessibility_color_and_motion_title">
             <intent-filter>
-                <action android:name="android.intent.action.ACCESSIBILITY_COLOR_MOTION_SETTINGS" />
+                <action android:name="android.settings.ACCESSIBILITY_COLOR_MOTION_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
