@@ -86,8 +86,12 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (!mPositiveClicked) {
-            mPairingController.onCancel();
+        if (mPairingController.getDialogType()
+                != BluetoothPairingController.DISPLAY_PASSKEY_DIALOG) {
+            /* Cancel pairing unless explicitly accepted by user */
+            if (!mPositiveClicked) {
+                mPairingController.onCancel();
+            }
         }
     }
 
