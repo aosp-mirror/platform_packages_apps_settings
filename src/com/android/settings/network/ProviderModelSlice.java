@@ -34,6 +34,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.telephony.SubscriptionManager;
+import android.util.EventLog;
 import android.util.Log;
 import android.view.WindowManager.LayoutParams;
 
@@ -103,6 +104,12 @@ public class ProviderModelSlice extends WifiSlice {
         //  Fifth section: Add the Wi-Fi items which are not connected.
         //  Sixth section: Add the See All item.
         final ListBuilder listBuilder = mHelper.createListBuilder(getUri());
+        if (isGuestUser(mContext)) {
+            Log.e(TAG, "Guest user is not allowed to configure Internet!");
+            EventLog.writeEvent(0x534e4554, "227470877", -1 /* UID */, "User is a guest");
+            return listBuilder.build();
+        }
+
         int maxListSize = 0;
         final NetworkProviderWorker worker = getWorker();
         if (worker != null) {
@@ -297,6 +304,8 @@ public class ProviderModelSlice extends WifiSlice {
 
     @Override
     public Class getBackgroundWorkerClass() {
+        if (isGuestUser(mContext)) return null;
+
         return NetworkProviderWorker.class;
     }
 

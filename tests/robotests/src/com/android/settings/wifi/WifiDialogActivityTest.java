@@ -18,6 +18,7 @@ package com.android.settings.wifi;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
 import static com.android.settings.wifi.WifiDialogActivity.REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER;
 import static com.android.settings.wifi.WifiDialogActivity.RESULT_CONNECTED;
@@ -32,10 +33,12 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.KeyguardManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+import android.os.UserManager;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.wifi.AccessPoint;
@@ -58,6 +61,8 @@ public class WifiDialogActivityTest {
     static final int REQUEST_CODE = REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER;
 
     @Mock
+    UserManager mUserManager;
+    @Mock
     PackageManager mPackageManager;
     @Mock
     WifiManager mWifiManager;
@@ -77,6 +82,8 @@ public class WifiDialogActivityTest {
     Intent mResultData;
     @Mock
     WifiConfigController mController;
+    @Mock
+    KeyguardManager mKeyguardManager;
 
     WifiDialogActivity mActivity;
 
@@ -92,7 +99,9 @@ public class WifiDialogActivityTest {
         FakeFeatureFactory.setupForTest();
 
         mActivity = spy(Robolectric.setupActivity(WifiDialogActivity.class));
+        when(mActivity.getSystemService(UserManager.class)).thenReturn(mUserManager);
         when(mActivity.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+        when(mActivity.getSystemService(KeyguardManager.class)).thenReturn(mKeyguardManager);
     }
 
     @Test
@@ -212,6 +221,20 @@ public class WifiDialogActivityTest {
     }
 
     @Test
+    public void isConfigWifiAllowed_hasNoUserRestriction_returnTrue() {
+        when(mUserManager.hasUserRestriction(DISALLOW_CONFIG_WIFI)).thenReturn(false);
+
+        assertThat(mActivity.isConfigWifiAllowed()).isTrue();
+    }
+
+    @Test
+    public void isConfigWifiAllowed_hasUserRestriction_returnFalse() {
+        when(mUserManager.hasUserRestriction(DISALLOW_CONFIG_WIFI)).thenReturn(true);
+
+        assertThat(mActivity.isConfigWifiAllowed()).isFalse();
+    }
+
+    @Test
     public void hasPermissionForResult_noCallingPackage_returnFalse() {
         when(mActivity.getCallingPackage()).thenReturn(null);
 
@@ -273,5 +296,36 @@ public class WifiDialogActivityTest {
         final boolean result = mActivity.hasPermissionForResult();
 
         assertThat(result).isTrue();
+    }
+
+    @Test
+    public void dismissDialog_hasDialog_dialogDismiss() {
+        mActivity.mDialog = mWifiDialog;
+        mActivity.mDialog2 = mWifiDialog2;
+
+        mActivity.dismissDialog();
+
+        verify(mWifiDialog).dismiss();
+        verify(mWifiDialog2).dismiss();
+    }
+
+    @Test
+    public void onKeyguardLockedStateChanged_keyguardIsNotLocked_doNotDismissDialog() {
+        WifiDialogActivity.LockScreenMonitor lockScreenMonitor =
+                new WifiDialogActivity.LockScreenMonitor(mActivity);
+
+        lockScreenMonitor.onKeyguardLockedStateChanged(false /* isKeyguardLocked */);
+
+        verify(mActivity, never()).dismissDialog();
+    }
+
+    @Test
+    public void onKeyguardLockedStateChanged_keyguardIsLocked_dismissDialog() {
+        WifiDialogActivity.LockScreenMonitor lockScreenMonitor =
+                new WifiDialogActivity.LockScreenMonitor(mActivity);
+
+        lockScreenMonitor.onKeyguardLockedStateChanged(true /* isKeyguardLocked */);
+
+        verify(mActivity).dismissDialog();
     }
 }

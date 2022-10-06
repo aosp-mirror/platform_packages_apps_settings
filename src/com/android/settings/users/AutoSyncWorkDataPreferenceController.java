@@ -22,7 +22,8 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.settings.Utils;
 
-public class AutoSyncWorkDataPreferenceController extends AutoSyncPersonalDataPreferenceController {
+/** An account sync data preference controller for work */
+public class AutoSyncWorkDataPreferenceController extends AutoSyncDataPreferenceController {
 
     private static final String KEY_AUTO_SYNC_WORK_ACCOUNT = "auto_sync_work_account_data";
 
@@ -38,6 +39,7 @@ public class AutoSyncWorkDataPreferenceController extends AutoSyncPersonalDataPr
 
     @Override
     public boolean isAvailable() {
+        mUserHandle = Utils.getManagedProfileWithDisabled(mUserManager);
         return mUserHandle != null && !mUserManager.isManagedProfile() && !mUserManager.isLinkedUser()
                 && mUserManager.getProfiles(UserHandle.myUserId()).size() > 1;
     }

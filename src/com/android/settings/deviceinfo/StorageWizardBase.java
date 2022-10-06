@@ -41,17 +41,20 @@ import android.widget.TextView;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
-import com.android.settingslib.Utils;
+import com.android.settings.SetupWizardUtils;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
+import com.google.android.setupdesign.util.ThemeHelper;
+import com.google.android.setupdesign.util.ThemeResolver;
 
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Objects;
 
 public abstract class StorageWizardBase extends FragmentActivity {
+
     private static final String TAG = "StorageWizardBase";
 
     protected static final String EXTRA_FORMAT_FORGET_UUID = "format_forget_uuid";
@@ -70,6 +73,16 @@ public abstract class StorageWizardBase extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        boolean isDayNightThemeSupportedBySuW = ThemeHelper.isSetupWizardDayNightEnabled(this);
+        int sudTheme =
+            new ThemeResolver.Builder(ThemeResolver.getDefault())
+                .setDefaultTheme(ThemeHelper.getSuwDefaultTheme(this))
+                .setUseDayNight(true)
+                .build()
+                .resolve("", !isDayNightThemeSupportedBySuW);
+
+        this.setTheme(sudTheme);
+        ThemeHelper.trySetDynamicColor(this);
         super.onCreate(savedInstanceState);
 
         mStorage = getSystemService(StorageManager.class);
@@ -97,20 +110,20 @@ public abstract class StorageWizardBase extends FragmentActivity {
 
         mFooterBarMixin = getGlifLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
-                new FooterButton.Builder(this)
-                        .setText(R.string.wizard_back)
-                        .setListener(this::onNavigateBack)
-                        .setButtonType(FooterButton.ButtonType.OTHER)
-                        .setTheme(R.style.SudGlifButton_Secondary)
-                        .build()
+            new FooterButton.Builder(this)
+                .setText(R.string.wizard_back)
+                .setListener(this::onNavigateBack)
+                .setButtonType(FooterButton.ButtonType.OTHER)
+                .setTheme(R.style.SudGlifButton_Secondary)
+                .build()
         );
         mFooterBarMixin.setPrimaryButton(
-                new FooterButton.Builder(this)
-                        .setText(R.string.wizard_next)
-                        .setListener(this::onNavigateNext)
-                        .setButtonType(FooterButton.ButtonType.NEXT)
-                        .setTheme(R.style.SudGlifButton_Primary)
-                        .build()
+            new FooterButton.Builder(this)
+                .setText(R.string.wizard_next)
+                .setListener(this::onNavigateNext)
+                .setButtonType(FooterButton.ButtonType.NEXT)
+                .setTheme(R.style.SudGlifButton_Primary)
+                .build()
         );
         mBack = mFooterBarMixin.getSecondaryButton();
         mNext = mFooterBarMixin.getPrimaryButton();
@@ -149,7 +162,7 @@ public abstract class StorageWizardBase extends FragmentActivity {
     protected void setCurrentProgress(int progress) {
         getProgressBar().setProgress(progress);
         ((TextView) requireViewById(R.id.storage_wizard_progress_summary)).setText(
-                NumberFormat.getPercentInstance().format((double) progress / 100));
+            NumberFormat.getPercentInstance().format((double) progress / 100));
     }
 
     protected void setHeaderText(int resId, CharSequence... args) {
@@ -167,14 +180,14 @@ public abstract class StorageWizardBase extends FragmentActivity {
     protected void setAuxChecklist() {
         final FrameLayout aux = requireViewById(R.id.storage_wizard_aux);
         aux.addView(LayoutInflater.from(aux.getContext())
-                .inflate(R.layout.storage_wizard_checklist, aux, false));
+            .inflate(R.layout.storage_wizard_checklist, aux, false));
         aux.setVisibility(View.VISIBLE);
 
         // Customize string based on disk
         ((TextView) aux.requireViewById(R.id.storage_wizard_migrate_v2_checklist_media))
-                .setText(TextUtils.expandTemplate(
-                        getText(R.string.storage_wizard_migrate_v2_checklist_media),
-                        getDiskShortDescription()));
+            .setText(TextUtils.expandTemplate(
+                getText(R.string.storage_wizard_migrate_v2_checklist_media),
+                getDiskShortDescription()));
     }
 
     protected void setBackButtonText(int resId, CharSequence... args) {
@@ -198,7 +211,6 @@ public abstract class StorageWizardBase extends FragmentActivity {
     protected void setIcon(int resId) {
         final GlifLayout layout = getGlifLayout();
         final Drawable icon = getDrawable(resId).mutate();
-        icon.setTintList(Utils.getColorAccent(layout.getContext()));
         layout.setIcon(icon);
     }
 
@@ -250,14 +262,14 @@ public abstract class StorageWizardBase extends FragmentActivity {
             final List<VolumeInfo> vols = mStorage.getVolumes();
             for (VolumeInfo vol : vols) {
                 if (Objects.equals(mDisk.getId(), vol.getDiskId()) && (vol.getType() == type)
-                        && (vol.getState() == VolumeInfo.STATE_MOUNTED)) {
+                    && (vol.getState() == VolumeInfo.STATE_MOUNTED)) {
                     return vol;
                 }
             }
 
             if (--attempts > 0) {
                 Log.w(TAG, "Missing mounted volume of type " + type + " hosted by disk "
-                        + mDisk.getId() + "; trying again");
+                    + mDisk.getId() + "; trying again");
                 SystemClock.sleep(250);
             } else {
                 return null;
@@ -265,7 +277,8 @@ public abstract class StorageWizardBase extends FragmentActivity {
         }
     }
 
-    protected @NonNull CharSequence getDiskDescription() {
+    protected @NonNull
+    CharSequence getDiskDescription() {
         if (mDisk != null) {
             return mDisk.getDescription();
         } else if (mVolume != null) {
@@ -275,7 +288,8 @@ public abstract class StorageWizardBase extends FragmentActivity {
         }
     }
 
-    protected @NonNull CharSequence getDiskShortDescription() {
+    protected @NonNull
+    CharSequence getDiskShortDescription() {
         if (mDisk != null) {
             return mDisk.getShortDescription();
         } else if (mVolume != null) {

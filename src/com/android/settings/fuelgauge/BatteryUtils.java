@@ -69,6 +69,8 @@ public class BatteryUtils {
     public static final int UID_REMOVED_APPS = -4;
     /** Special UID value for data usage by tethering. */
     public static final int UID_TETHERING = -5;
+    /** Special UID for aggregated other users. */
+    public static final long UID_OTHER_USERS = Long.MIN_VALUE;
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({StatusType.SCREEN_USAGE,
@@ -190,7 +192,7 @@ public class BatteryUtils {
      * Returns true if the specified battery consumer should be excluded from
      * battery consumption lists, either short or full.
      */
-    boolean shouldHideUidBatteryConsumerUnconditionally(UidBatteryConsumer consumer,
+    public boolean shouldHideUidBatteryConsumerUnconditionally(UidBatteryConsumer consumer,
             String[] packages) {
         final int uid = consumer.getUid();
         return uid == UID_TETHERING

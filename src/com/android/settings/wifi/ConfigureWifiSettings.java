@@ -15,19 +15,21 @@
  */
 package com.android.settings.wifi;
 
-import static android.content.Context.WIFI_SERVICE;
-
+import android.annotation.Nullable;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.util.FeatureFlagUtils;
+import android.os.UserManager;
+import android.util.EventLog;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -43,7 +45,8 @@ import java.util.List;
 public class ConfigureWifiSettings extends DashboardFragment {
 
     private static final String TAG = "ConfigureWifiSettings";
-    private static final String KEY_INSTALL_CREDENTIALS = "install_credentials";
+    @VisibleForTesting
+    static final String KEY_INSTALL_CREDENTIALS = "install_credentials";
     private static final String ACTION_INSTALL_CERTS = "android.credentials.INSTALL";
     private static final String PACKAGE_INSTALL_CERTS = "com.android.certinstaller";
     private static final String CLASS_INSTALL_CERTS = "com.android.certinstaller.CertInstallerMain";
@@ -53,16 +56,26 @@ public class ConfigureWifiSettings extends DashboardFragment {
     public static final int WIFI_WAKEUP_REQUEST_CODE = 600;
 
     private WifiWakeupPreferenceController mWifiWakeupPreferenceController;
-    private Preference mCertinstallerPreference;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (isGuestUser(context)) return;
+
+        mWifiWakeupPreferenceController = use(WifiWakeupPreferenceController.class);
+        mWifiWakeupPreferenceController.setFragment(this);
+    }
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         getActivity().setTitle(R.string.network_and_internet_preferences_title);
 
-        mCertinstallerPreference = findPreference(KEY_INSTALL_CREDENTIALS);
-        if (mCertinstallerPreference != null) {
-            mCertinstallerPreference.setOnPreferenceClickListener(preference -> {
+        if (isGuestUser(getContext())) return;
+
+        final Preference installCredentialsPref = findPreference(KEY_INSTALL_CREDENTIALS);
+        if (installCredentialsPref != null) {
+            installCredentialsPref.setOnPreferenceClickListener(preference -> {
                 Intent intent = new Intent(ACTION_INSTALL_CERTS);
                 intent.setFlags(
                         Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -75,6 +88,23 @@ public class ConfigureWifiSettings extends DashboardFragment {
         } else {
             Log.d(TAG, "Can not find the preference.");
         }
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (!isGuestUser(getContext())) return;
+
+        Log.w(TAG, "Displays the restricted UI because the user is a guest.");
+        EventLog.writeEvent(0x534e4554, "231987122", -1 /* UID */, "User is a guest");
+
+        // Restricted UI
+        final TextView emptyView = getActivity().findViewById(android.R.id.empty);
+        if (emptyView != null) {
+            emptyView.setVisibility(View.VISIBLE);
+            emptyView.setText(R.string.wifi_empty_list_user_restricted);
+        }
+        getPreferenceScreen().removeAll();
     }
 
     @Override
@@ -94,7 +124,9 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+        if (isGuestUser(context)) return null;
+
+        final WifiManager wifiManager = getSystemService(WifiManager.class);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new WifiP2pPreferenceController(context, getSettingsLifecycle(),
                 wifiManager));
@@ -102,17 +134,8 @@ public class ConfigureWifiSettings extends DashboardFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-
-        mWifiWakeupPreferenceController = use(WifiWakeupPreferenceController.class);
-        mWifiWakeupPreferenceController.setFragment(this);
-    }
-
-    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == WIFI_WAKEUP_REQUEST_CODE) {
+        if (mWifiWakeupPreferenceController != null && requestCode == WIFI_WAKEUP_REQUEST_CODE) {
             mWifiWakeupPreferenceController.onActivityResult(requestCode, resultCode);
             return;
         }
@@ -122,8 +145,16 @@ public class ConfigureWifiSettings extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.wifi_configure_settings) {
                 protected boolean isPageSearchEnabled(Context context) {
+                    if (isGuestUser(context)) return false;
                     return context.getResources()
                             .getBoolean(R.bool.config_show_wifi_settings);
                 }
             };
+
+    private static boolean isGuestUser(Context context) {
+        if (context == null) return false;
+        final UserManager userManager = context.getSystemService(UserManager.class);
+        if (userManager == null) return false;
+        return userManager.isGuestUser();
+    }
 }
