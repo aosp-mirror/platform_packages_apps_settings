@@ -40,7 +40,7 @@ public final class HearingAidUtils {
      */
     public static void launchHearingAidPairingDialog(FragmentManager fragmentManager,
             @NonNull CachedBluetoothDevice device) {
-        if (device.isConnectedHearingAidDevice()
+        if (device.isConnectedAshaHearingAidDevice()
                 && device.getDeviceMode() == HearingAidProfile.DeviceMode.MODE_BINAURAL
                 && device.getSubDevice() == null) {
             launchHearingAidPairingDialogInternal(fragmentManager, device);

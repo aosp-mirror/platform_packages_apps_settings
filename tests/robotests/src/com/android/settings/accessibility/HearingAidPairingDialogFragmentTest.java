@@ -143,8 +143,8 @@ public class HearingAidPairingDialogFragmentTest {
     }
 
     @Test
-    public void onDeviceAttributesChanged_subHearingAidDeviceConnected_dialogDismiss() {
-        when(mCachedSubBluetoothDevice.isConnectedHearingAidDevice()).thenReturn(true);
+    public void onDeviceAttributesChanged_subAshaHearingAidDeviceConnected_dialogDismiss() {
+        when(mCachedSubBluetoothDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedBluetoothDevice.getSubDevice()).thenReturn(mCachedSubBluetoothDevice);
 
         mFragment.onDeviceAttributesChanged();

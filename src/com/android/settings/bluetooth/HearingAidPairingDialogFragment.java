@@ -120,7 +120,7 @@ public class HearingAidPairingDialogFragment extends InstrumentedDialogFragment 
     @Override
     public void onDeviceAttributesChanged() {
         final CachedBluetoothDevice subDevice = mDevice.getSubDevice();
-        if (subDevice != null && subDevice.isConnectedHearingAidDevice()) {
+        if (subDevice != null && subDevice.isConnectedAshaHearingAidDevice()) {
             this.dismiss();
         }
     }
