@@ -70,6 +70,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowToast;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowRestrictedPreference.class)
 public class WifiSettingsTest {
 
     private static final int NUM_NETWORKS = 4;
