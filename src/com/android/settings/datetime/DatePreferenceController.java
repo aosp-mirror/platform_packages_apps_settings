@@ -154,7 +154,7 @@ public class DatePreferenceController extends AbstractPreferenceController
     public boolean isEnabled() {
         TimeCapabilities timeZoneCapabilities =
                 mTimeManager.getTimeCapabilitiesAndConfig().getCapabilities();
-        int suggestManualTimeCapability = timeZoneCapabilities.getSuggestManualTimeCapability();
+        int suggestManualTimeCapability = timeZoneCapabilities.getSetManualTimeCapability();
         return suggestManualTimeCapability == CAPABILITY_POSSESSED;
     }
 }

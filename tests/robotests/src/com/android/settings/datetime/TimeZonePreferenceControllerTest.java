@@ -102,7 +102,7 @@ public class TimeZonePreferenceControllerTest {
         TimeZoneCapabilities capabilities = new TimeZoneCapabilities.Builder(UserHandle.SYSTEM)
                 .setConfigureAutoDetectionEnabledCapability(Capabilities.CAPABILITY_POSSESSED)
                 .setConfigureGeoDetectionEnabledCapability(Capabilities.CAPABILITY_NOT_SUPPORTED)
-                .setSuggestManualTimeZoneCapability(suggestManualCapability)
+                .setSetManualTimeZoneCapability(suggestManualCapability)
                 .build();
         TimeZoneConfiguration config = new TimeZoneConfiguration.Builder()
                 .setAutoDetectionEnabled(!suggestManualAllowed)

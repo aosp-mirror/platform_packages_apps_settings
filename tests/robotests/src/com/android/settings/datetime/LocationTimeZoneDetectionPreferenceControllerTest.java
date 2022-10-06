@@ -176,7 +176,7 @@ public class LocationTimeZoneDetectionPreferenceControllerTest {
         return new TimeZoneCapabilities.Builder(arbitraryUserHandle)
                 .setConfigureAutoDetectionEnabledCapability(CAPABILITY_POSSESSED)
                 .setConfigureGeoDetectionEnabledCapability(geoDetectionCapability)
-                .setSuggestManualTimeZoneCapability(CAPABILITY_NOT_APPLICABLE)
+                .setSetManualTimeZoneCapability(CAPABILITY_NOT_APPLICABLE)
                 .build();
     }
 
