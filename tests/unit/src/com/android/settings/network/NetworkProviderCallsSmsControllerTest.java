@@ -170,8 +170,8 @@ public class NetworkProviderCallsSmsControllerTest {
                 TelephonyManager.DEFAULT_PORT_INDEX, false, null,
                 SubscriptionManager.SUBSCRIPTION_TYPE_LOCAL_SIM, displayName, false,
                 "1234567890", true, "default", false, isValid,
-                true, isActive, isAvailable, isDefaultCall,
-                isDefaultSms, false, false);
+                true, isActive, isAvailable, isDefaultCall, isDefaultSms, false, false,
+                false);
     }
 
     @Test

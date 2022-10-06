@@ -348,7 +348,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                     mSubscriptionManager.getDefaultVoiceSubscriptionId() == mSubId,
                     mSubscriptionManager.getDefaultSmsSubscriptionId() == mSubId,
                     mSubscriptionManager.getDefaultDataSubscriptionId() == mSubId,
-                    mSubscriptionManager.getDefaultSubscriptionId() == mSubId);
+                    mSubscriptionManager.getDefaultSubscriptionId() == mSubId,
+                    mSubscriptionManager.getActiveDataSubscriptionId() == mSubId);
         }
     }
 

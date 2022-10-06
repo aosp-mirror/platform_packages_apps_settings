@@ -156,8 +156,7 @@ public class NetworkProviderSimListControllerTest {
                 mcc, mnc, countryIso, false, cardId, TelephonyManager.DEFAULT_PORT_INDEX, false,
                 null, SubscriptionManager.SUBSCRIPTION_TYPE_LOCAL_SIM, displayName, false,
                 "1234567890", true, defaultSimConfig.toString(), false, isValid, true, isActive,
-                isAvailable,
-                isDefaultCall, isDefaultSms, false, false);
+                isAvailable, isDefaultCall, isDefaultSms, false, false, false);
     }
 
     private String setSummaryResId(String resName, String value) {
