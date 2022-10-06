@@ -22,9 +22,9 @@ import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -41,6 +41,16 @@ public class MobileNetworkListFragment extends DashboardFragment {
     @VisibleForTesting
     static final String KEY_PREFERENCE_CATEGORY_DOWNLOADED_SIM =
             "provider_model_downloaded_sim_category";
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Disable the animation of the preference list
+        final RecyclerView prefListView = getListView();
+        if (prefListView != null) {
+            prefListView.setItemAnimator(null);
+        }
+    }
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -67,11 +77,11 @@ public class MobileNetworkListFragment extends DashboardFragment {
 
         NetworkProviderSimsCategoryController simCategoryPrefCtrl =
                 new NetworkProviderSimsCategoryController(context, KEY_PREFERENCE_CATEGORY_SIM,
-                        getSettingsLifecycle());
+                        getSettingsLifecycle(), this);
         controllers.add(simCategoryPrefCtrl);
         NetworkProviderDownloadedSimsCategoryController downloadedSimsCategoryCtrl =
                 new NetworkProviderDownloadedSimsCategoryController(context,
-                        KEY_PREFERENCE_CATEGORY_DOWNLOADED_SIM, getSettingsLifecycle());
+                        KEY_PREFERENCE_CATEGORY_DOWNLOADED_SIM, getSettingsLifecycle(), this);
         controllers.add(downloadedSimsCategoryCtrl);
 
         return controllers;
