@@ -65,18 +65,18 @@ public class BluetoothA2dpHwOffloadPreferenceControllerTest {
 
     @Test
     public void onA2dpHwDialogConfirmedAsA2dpOffloadDisabled_shouldChangeProperty() {
-        SystemProperties.set(A2DP_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(false));
+        SystemProperties.set(A2DP_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(true));
         mController.mChanged = true;
 
         mController.onRebootDialogConfirmed();
         final boolean mode = SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, false);
-        assertThat(mode).isTrue();
+        assertThat(mode).isFalse();
     }
 
     @Test
     public void onA2dpHwDialogConfirmedAsA2dpOffloadEnabled_shouldChangeProperty() {
-        SystemProperties.set(A2DP_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(true));
-        SystemProperties.set(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(true));
+        SystemProperties.set(A2DP_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(false));
+        SystemProperties.set(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(false));
 
         mController.mChanged = true;
 
@@ -84,8 +84,8 @@ public class BluetoothA2dpHwOffloadPreferenceControllerTest {
         final boolean a2dpMode = SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, true);
         final boolean leAudioMode = SystemProperties
                 .getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, true);
-        assertThat(a2dpMode).isFalse();
-        assertThat(leAudioMode).isFalse();
+        assertThat(a2dpMode).isTrue();
+        assertThat(leAudioMode).isTrue();
     }
 
     @Test
