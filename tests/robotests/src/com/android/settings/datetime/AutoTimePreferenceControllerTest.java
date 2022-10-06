@@ -158,7 +158,7 @@ public class AutoTimePreferenceControllerTest {
                         : Capabilities.CAPABILITY_NOT_SUPPORTED;
         TimeCapabilities capabilities = new TimeCapabilities.Builder(UserHandle.SYSTEM)
                 .setConfigureAutoDetectionEnabledCapability(configureAutoDetectionEnabledCapability)
-                .setSuggestManualTimeCapability(Capabilities.CAPABILITY_POSSESSED)
+                .setSetManualTimeCapability(Capabilities.CAPABILITY_POSSESSED)
                 .build();
         TimeConfiguration config = new TimeConfiguration.Builder()
                 .setAutoDetectionEnabled(autoEnabled)
