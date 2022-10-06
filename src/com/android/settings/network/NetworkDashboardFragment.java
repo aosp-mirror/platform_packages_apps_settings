@@ -27,6 +27,7 @@ import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -87,12 +88,12 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getSettingsLifecycle(), mMetricsFeatureProvider,
-                this /* fragment */, this /* mobilePlanHost */);
+                this /* fragment */, this /* mobilePlanHost */, this /* LifecycleOwner */);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle, MetricsFeatureProvider metricsFeatureProvider, Fragment fragment,
-            MobilePlanPreferenceHost mobilePlanHost) {
+            MobilePlanPreferenceHost mobilePlanHost, LifecycleOwner lifecycleOwner) {
         final MobilePlanPreferenceController mobilePlanPreferenceController =
                 new MobilePlanPreferenceController(context, mobilePlanHost);
         final InternetPreferenceController internetPreferenceController =
@@ -111,7 +112,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
 
-        controllers.add(new MobileNetworkSummaryController(context, lifecycle));
+        controllers.add(new MobileNetworkSummaryController(context, lifecycle, lifecycleOwner));
         controllers.add(new TetherPreferenceController(context, lifecycle));
         controllers.add(vpnPreferenceController);
         controllers.add(new ProxyPreferenceController(context));
@@ -172,7 +173,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                         context) {
                     return buildPreferenceControllers(context, null /* lifecycle */,
                             null /* metricsFeatureProvider */, null /* fragment */,
-                            null /* mobilePlanHost */);
+                            null /* mobilePlanHost */, null /* LifecycleOwner */);
                 }
             };
 }

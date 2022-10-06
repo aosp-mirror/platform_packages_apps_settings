@@ -82,6 +82,7 @@ import com.android.settings.network.telephony.TelephonyConstants.TelephonyManage
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.graph.SignalDrawable;
+import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Arrays;
@@ -1025,6 +1026,24 @@ public class MobileNetworkUtils {
         extra.putInt(Settings.EXTRA_SUB_ID, subId);
         new SubSettingLauncher(context)
                 .setTitleText(SubscriptionUtil.getUniqueSubscriptionDisplayName(info, context))
+                .setDestination(MobileNetworkSettings.class.getCanonicalName())
+                .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                .setArguments(extra)
+                .launch();
+    }
+
+    public static void launchMobileNetworkSettings(Context context, SubscriptionInfoEntity info) {
+        final int subId = Integer.valueOf(info.subId);
+        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            Log.d(TAG, "launchMobileNetworkSettings fail, subId is invalid.");
+            return;
+        }
+
+        Log.d(TAG, "launchMobileNetworkSettings for SubscriptionInfoEntity subId: " + subId);
+        final Bundle extra = new Bundle();
+        extra.putInt(Settings.EXTRA_SUB_ID, subId);
+        new SubSettingLauncher(context)
+                .setTitleText(info.uniqueName)
                 .setDestination(MobileNetworkSettings.class.getCanonicalName())
                 .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
                 .setArguments(extra)
