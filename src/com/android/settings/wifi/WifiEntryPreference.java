@@ -21,6 +21,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
+import android.os.UserManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
@@ -30,10 +31,10 @@ import android.widget.TextView;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settingslib.R;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
 import com.android.settingslib.wifi.WifiUtils;
 import com.android.wifitrackerlib.BaseWifiTracker;
@@ -42,7 +43,8 @@ import com.android.wifitrackerlib.WifiEntry;
 /**
  * Preference to display a WifiEntry in a wifi picker.
  */
-public class WifiEntryPreference extends Preference implements WifiEntry.WifiEntryCallback,
+public class WifiEntryPreference extends RestrictedPreference implements
+        WifiEntry.WifiEntryCallback,
         View.OnClickListener {
 
     private static final int[] STATE_SECURED = {
@@ -86,6 +88,7 @@ public class WifiEntryPreference extends Preference implements WifiEntry.WifiEnt
         mWifiEntry = wifiEntry;
         mWifiEntry.setListener(this);
         mIconInjector = iconInjector;
+        checkRestrictionAndSetDisabled(UserManager.DISALLOW_ADD_WIFI_CONFIG);
         refresh();
     }
 
@@ -309,5 +312,4 @@ public class WifiEntryPreference extends Preference implements WifiEntry.WifiEnt
         }
         return buttonIcon;
     }
-
 }
