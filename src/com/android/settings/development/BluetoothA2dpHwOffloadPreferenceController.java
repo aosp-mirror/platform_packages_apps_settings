@@ -102,7 +102,7 @@ public class BluetoothA2dpHwOffloadPreferenceController extends DeveloperOptions
         final boolean offloadDisabled =
                 SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, false);
         SystemProperties.set(A2DP_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(!offloadDisabled));
-        if (offloadDisabled) {
+        if (!offloadDisabled) {
             SystemProperties.set(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY,
                     Boolean.toString(!offloadDisabled));
         }
