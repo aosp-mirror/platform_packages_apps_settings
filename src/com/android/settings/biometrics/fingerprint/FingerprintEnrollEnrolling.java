@@ -168,7 +168,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private Vibrator mVibrator;
     private boolean mIsSetupWizard;
     private boolean mIsOrientationChanged;
-    private boolean mIsCanceled;
+    @VisibleForTesting
+    boolean mIsCanceled;
     private AccessibilityManager mAccessibilityManager;
     private boolean mIsAccessibilityEnabled;
     private LottieAnimationView mIllustrationLottie;
@@ -196,7 +197,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
-        if (hasFocus) {
+        if (hasFocus || mIsCanceled) {
             return;
         }
 
@@ -411,8 +412,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     @VisibleForTesting
     void onCancelEnrollment(@IdRes int errorMsgId) {
-        FingerprintErrorDialog.showErrorDialog(this, errorMsgId);
+        // showErrorDialog() will cause onWindowFocusChanged(false), set mIsCanceled to false
+        // before showErrorDialog() to prevent that another error dialog is triggered again.
         mIsCanceled = true;
+        FingerprintErrorDialog.showErrorDialog(this, errorMsgId);
         mIsOrientationChanged = false;
         cancelEnrollment();
         stopIconAnimation();
