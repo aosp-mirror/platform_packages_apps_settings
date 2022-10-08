@@ -18,29 +18,37 @@ package com.android.settings.privacy;
 
 import static android.os.UserManager.DISALLOW_CAMERA_TOGGLE;
 
-import static com.android.settings.utils.SensorPrivacyManagerHelper.CAMERA;
+import static com.android.settings.utils.SensorPrivacyManagerHelper.SENSOR_CAMERA;
 
 import android.content.Context;
-import android.provider.DeviceConfig;
+
+import androidx.annotation.VisibleForTesting;
+
+import com.android.settings.utils.SensorPrivacyManagerHelper;
 
 /**
  * Controller for microphone toggle
  */
 public class CameraToggleController extends SensorToggleController {
+
     public CameraToggleController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
-    @Override
-    public int getSensor() {
-        return CAMERA;
+    @VisibleForTesting
+    public CameraToggleController(Context context, String preferenceKey,
+            SensorPrivacyManagerHelper sensorPrivacyManagerHelper) {
+        super(context, preferenceKey, sensorPrivacyManagerHelper, /* ignoreDeviceConfig */ true);
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return mSensorPrivacyManagerHelper.supportsSensorToggle(getSensor())
-                && DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY, "camera_toggle_enabled",
-                true) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    public int getSensor() {
+        return SENSOR_CAMERA;
+    }
+
+    @Override
+    public String getDeviceConfigKey() {
+        return "camera_toggle_enabled";
     }
 
     @Override

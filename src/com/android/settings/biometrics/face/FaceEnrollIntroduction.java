@@ -171,7 +171,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         final SensorPrivacyManagerHelper helper = SensorPrivacyManagerHelper
                 .getInstance(getApplicationContext());
         final boolean cameraPrivacyEnabled = helper
-                .isSensorBlocked(SensorPrivacyManager.Sensors.CAMERA, mUserId);
+                .isSensorBlocked(SensorPrivacyManagerHelper.SENSOR_CAMERA);
         Log.v(TAG, "cameraPrivacyEnabled : " + cameraPrivacyEnabled);
     }
 
@@ -370,7 +370,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                 .getBooleanExtra(BiometricEnrollActivity.EXTRA_REQUIRE_PARENTAL_CONSENT, false);
         final boolean cameraPrivacyEnabled = SensorPrivacyManagerHelper
                 .getInstance(getApplicationContext())
-                .isSensorBlocked(SensorPrivacyManager.Sensors.CAMERA, mUserId);
+                .isSensorBlocked(SensorPrivacyManagerHelper.SENSOR_CAMERA);
         final boolean isSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         final boolean isSettingUp = isSetupWizard || (parentelConsentRequired
                 && !WizardManagerHelper.isUserSetupComplete(this));
