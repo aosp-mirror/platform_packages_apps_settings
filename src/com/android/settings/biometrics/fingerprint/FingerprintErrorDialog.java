@@ -72,6 +72,7 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
                                     dialog.dismiss();
                                     Activity activity = getActivity();
                                     Intent intent = activity.getIntent();
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                     intent.putExtra(KEY_STATE_CANCELED, false);
                                     activity.startActivity(intent);
                                     activity.finish();
