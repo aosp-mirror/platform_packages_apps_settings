@@ -151,6 +151,16 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     @Test
+    public void fingerprintUdfpsOverlayEnrollment_loseFocusWithCancelFlag_shouldNotCancelAgain() {
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+
+        mActivity.mIsCanceled = true;
+        mActivity.onWindowFocusChanged(true);
+
+        verify(mActivity, never()).onCancelEnrollment(anyInt());
+    }
+
+    @Test
     public void fingerprintSfpsEnroll_PlaysAllAnimationsAssetsCorrectly() {
         initializeActivityFor(TYPE_POWER_BUTTON);
 
