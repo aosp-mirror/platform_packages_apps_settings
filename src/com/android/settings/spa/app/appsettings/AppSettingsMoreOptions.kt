@@ -30,7 +30,6 @@ import com.android.settingslib.spa.widget.scaffold.MoreOptionsAction
 import com.android.settingslib.spaprivileged.framework.common.devicePolicyManager
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.android.settingslib.spaprivileged.model.app.PackageManagers
-import com.android.settingslib.spaprivileged.model.app.isActiveAdmin
 import com.android.settingslib.spaprivileged.model.app.isDisallowControl
 import com.android.settingslib.spaprivileged.model.app.userId
 
@@ -76,7 +75,7 @@ private fun isShowUninstallUpdates(context: Context, app: ApplicationInfo): Bool
         !context.resources.getBoolean(R.bool.config_disable_uninstall_update)
 
 private fun isShowUninstallForAllUsers(context: Context, app: ApplicationInfo): Boolean =
-    app.userId == 0 && !app.isSystemApp && !app.isInstantApp && !app.isActiveAdmin(context) &&
+    app.userId == 0 && !app.isSystemApp && !app.isInstantApp &&
         isOtherUserHasInstallPackage(context, app)
 
 private fun isOtherUserHasInstallPackage(context: Context, app: ApplicationInfo): Boolean =
