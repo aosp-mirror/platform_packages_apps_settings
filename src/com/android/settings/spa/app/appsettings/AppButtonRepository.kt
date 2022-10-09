@@ -22,9 +22,12 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
+import com.android.settingslib.RestrictedLockUtils
+import com.android.settingslib.RestrictedLockUtilsInternal
 import com.android.settingslib.Utils
 import com.android.settingslib.spaprivileged.framework.common.devicePolicyManager
 import com.android.settingslib.spaprivileged.model.app.isDisallowControl
+import com.android.settingslib.spaprivileged.model.app.userId
 
 class AppButtonRepository(private val context: Context) {
     private val packageManager = context.packageManager
@@ -42,6 +45,16 @@ class AppButtonRepository(private val context: Context) {
 
         else -> app.isDisallowControl(context)
     }
+
+    /**
+     * Checks whether uninstall is blocked by admin.
+     */
+    fun isUninstallBlockedByAdmin(app: ApplicationInfo): Boolean =
+        RestrictedLockUtilsInternal.checkIfUninstallBlocked(context, app.packageName, app.userId)
+            ?.let { admin ->
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(context, admin)
+                true
+            } ?: false
 
     fun getHomePackageInfo(): HomePackages {
         val homePackages = mutableSetOf<String>()
