@@ -25,8 +25,7 @@
     <string name="on" msgid="1702751473920047">"Activado"</string>
     <string name="off" msgid="2898123876644709799">"Desactivado"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Desconocido"</string>
-    <!-- no translation found for device_info_protected_single_press (3810785480060743677) -->
-    <skip />
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"Toca para que se muestre la información"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">Estás a <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> pasos de ser desarrollador.</item>
       <item quantity="one">Estás a <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> paso de ser desarrollador.</item>
@@ -761,7 +760,7 @@
     <string name="bluetooth_pin_values_hint" msgid="2753202519050044670">"Normalmente: 0000 o 1234"</string>
     <string name="bluetooth_pin_values_hint_16_digits" msgid="5603928271430883558">"Debe tener 16 dígitos"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Es posible que tengas que introducir este PIN en el otro dispositivo."</string>
-    <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Es posible que tengas que introducir la clave de acceso en el otro dispositivo."</string>
+    <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Es posible que tengas que introducir la llave de acceso en el otro dispositivo."</string>
     <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Confirma para emparejar con el conjunto coordinado"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Permitir acceso a tus contactos y al historial de llamadas"</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
@@ -924,7 +923,7 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"Compartiendo Wi‑Fi con este dispositivo…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"Conectando…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"Comparte el punto de acceso"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"Demuestra que eres tú"</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"Verifica que eres tú"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Contraseña de la red Wi‑Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Contraseña del punto de acceso: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Conexión automática"</string>
@@ -1297,7 +1296,7 @@
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"\"Sistema\" incluye los archivos necesarios para que Android <xliff:g id="VERSION">%s</xliff:g> funcione."</string>
     <string name="storage_wizard_guest" msgid="5813419895687733649">"No puede formatear tarjetas SD como invitado"</string>
     <string name="storage_wizard_format_progress_title" msgid="9170393018855949774">"Formateando <xliff:g id="NAME">^1</xliff:g>…"</string>
-    <string name="storage_wizard_format_progress_body" msgid="1044024044955390417">"No extraigas tu <xliff:g id="NAME">^1</xliff:g> mientras se esté formateando."</string>
+    <string name="storage_wizard_format_progress_body" msgid="1044024044955390417">"No extraigas tu <xliff:g id="NAME">^1</xliff:g> mientras se está formateando."</string>
     <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> se ha formateado"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Mover <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"La migración de <xliff:g id="APP">^1</xliff:g> y de sus datos a tu <xliff:g id="NAME_0">^2</xliff:g> solo durará un momento. No podrás utilizar la aplicación hasta que finalice el proceso. \n\nNo extraigas tu <xliff:g id="NAME_1">^2</xliff:g> durante la migración."</string>
@@ -1444,8 +1443,7 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth y Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Compartir Internet, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"No se está compartiendo Internet con otros dispositivos"</string>
-    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
-    <skip />
+    <string name="tether_preference_summary_off" msgid="6266799346319794630">"Desactivado"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Compartir conexión"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"No usar Compartir Internet"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Compartir Internet solo mediante USB"</string>
@@ -2414,9 +2412,12 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Programar"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Amplía la duración de la batería"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desactivar cuando la batería esté cargada"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"Ahorro de batería se desactiva cuando tu teléfono tiene más del <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g> de batería"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"Ahorro de batería se desactiva cuando tu tablet tiene más del <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> de batería"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="4128841327359445726">"Ahorro de batería se desactiva cuando tu dispositivo tiene más del <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> de batería"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (3618041244703216293) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (1733686775743601110) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (7449283917787428755) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Activar"</string>
@@ -4788,8 +4789,7 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Saldo mínimo con carga completa (exento)"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Saldo mínimo con carga completa (aplicación del sistema sin interfaz gráfica)"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Saldo mínimo con carga completa (aplicaciones restantes)"</string>
-    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
-    <skip />
+    <string name="tare_min_balance_addition_app_updater" msgid="5391956072471201269">"Adición de saldo mínimo con carga completa (actualizadores de aplicaciones)"</string>
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"Carga"</item>
     <item msgid="658627268149681677">"Descanso"</item>
