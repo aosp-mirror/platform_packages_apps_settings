@@ -844,8 +844,8 @@
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi-Fi aktiveres igen, når du er i nærheden af gemte netværk af høj kvalitet, f.eks dit hjemmenetværk"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Ikke tilgængelig, fordi lokation er deaktiveret. Aktivér "<annotation id="link">"lokation"</annotation>"."</string>
     <string name="wifi_install_credentials" msgid="5192903644606839972">"Installer certifikater"</string>
-    <string name="wifi_scan_notify_text" msgid="7163137260385995873">"For at gøre lokationen mere nøjagtig kan apps og tjenester stadig til enhver tid søge efter Wi‑Fi-netværk, også selvom Wi-Fi er deaktiveret. Dette kan f.eks. bruges til at forbedre stedbaserede funktioner og tjenester. Du kan ændre dette i <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>indstillingerne for Wi-Fi-scanning<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
-    <string name="wifi_scan_notify_text_scanning_off" msgid="7439201783168213149">"Du kan gøre lokationen mere nøjagtig ved at aktivere Wi-Fi-scanning i <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>indstillingerne for Wi‑Fi-scanning<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text" msgid="7163137260385995873">"For at forbedre lokationsnøjagtigheden kan apps og tjenester stadig til enhver tid søge efter Wi‑Fi-netværk, også selvom Wi-Fi er deaktiveret. Dette kan f.eks. bruges til at forbedre stedbaserede funktioner og tjenester. Du kan ændre dette i <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>indstillingerne for Wi-Fi-scanning<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text_scanning_off" msgid="7439201783168213149">"Du kan gøre forbedre lokationsnøjagtigheden ved at aktivere Wi-Fi-scanning i <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>indstillingerne for Wi‑Fi-scanning<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_cellular_data_fallback_title" msgid="2844653839490977040">"Skift automatisk til mobildata"</string>
     <string name="wifi_cellular_data_fallback_summary" msgid="7039944853033554386">"Brug mobildata, når du ikke har internetadgang via Wi-Fi. Du skal muligvis betale for dataforbrug."</string>
     <string name="wifi_add_network" msgid="4178564862173751181">"Tilføj netværk"</string>
@@ -942,8 +942,8 @@
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Netværksnavnet er for langt."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Domæne skal angives."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Certifikat er påkrævet."</string>
-    <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"For bl.a. at kunne angive en mere nøjagtig lokation vil <xliff:g id="APP_NAME">%1$s</xliff:g> gerne aktivere netværkssøgning, selv når Wi-Fi er deaktiveret.\n\nVil du tillade dette for alle apps, der gerne vil søge?"</string>
-    <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"For bl.a. at kunne angive en mere nøjagtig lokation vil en ukendt app gerne aktivere netværkssøgning, selv når Wi-Fi er deaktiveret.\n\nVil du tillade dette for alle apps, der gerne vil søge?"</string>
+    <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"For bl.a. at forbedre lokationsnøjagtigheden vil <xliff:g id="APP_NAME">%1$s</xliff:g> gerne aktivere netværkssøgning, selv når Wi-Fi er deaktiveret.\n\nVil du tillade dette for alle apps, der gerne vil søge?"</string>
+    <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"For bl.a. at forbedre lokationsnøjagtigheden vil en ukendt app gerne aktivere netværkssøgning, selv når Wi-Fi er deaktiveret.\n\nVil du tillade dette for alle apps, der gerne vil søge?"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Tillad"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Afvis"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Dette netværk har ingen internetadgang. Vil du bruge netværket alligevel?"</string>
@@ -1443,8 +1443,7 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Hotspot, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Deler ikke internet med andre enheder"</string>
-    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
-    <skip />
+    <string name="tether_preference_summary_off" msgid="6266799346319794630">"Fra"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Netdeling"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Brug ikke Wi-Fi-hotspot"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Del kun internet via USB"</string>
@@ -2413,9 +2412,12 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Angiv en tidsplan"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Forlæng batteritiden"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Deaktiver, når enheden er opladet"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"Batterisparefunktionen deaktiveres, når din telefon er opladet til mere end <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"Batterisparefunktionen deaktiveres, når din tablet er opladet til mere end <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="4128841327359445726">"Batterisparefunktionen deaktiveres, når din enhed er opladet til mere end <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g>"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (3618041244703216293) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (1733686775743601110) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (7449283917787428755) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Aktivér"</string>
@@ -4787,8 +4789,7 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Minimumssaldo for fuld opladning (undtagelse)"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Minimumssaldo for fuld opladning (systemapp uden grafisk brugerflade)"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Minimumssaldo for fuld opladning (øvrige apps)"</string>
-    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
-    <skip />
+    <string name="tare_min_balance_addition_app_updater" msgid="5391956072471201269">"Tilføjelse til minimumssaldo ved fuld opladning (platforme til appopdatering)"</string>
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"Opladning"</item>
     <item msgid="658627268149681677">"Hvil"</item>

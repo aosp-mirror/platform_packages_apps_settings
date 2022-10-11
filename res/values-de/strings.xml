@@ -252,7 +252,7 @@
     <string name="safety_center_summary" msgid="3554867379951053869">"App-Sicherheit, Gerätesperre, Berechtigungen"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Gesicht hinzugefügt"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Zum Einrichten der Gesichtsentsperrung tippen"</string>
-    <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Gesichtsentsperrung"</string>
+    <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Entsperrung per Gesicht"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Entsperrung per Gesichtserkennung für die Arbeit"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"So richtest du die Gesichtsentsperrung ein"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Entsperrung per Gesichtserkennung einrichten"</string>
@@ -349,7 +349,7 @@
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Bestätigung immer erforderlich"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Bei Gesichtsentsperrung in Apps immer Bestätigung anfordern"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Gesichtsmodell löschen"</string>
-    <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Gesichtsentsperrung einrichten"</string>
+    <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Entsperrung per Gesicht einrichten"</string>
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Du kannst die Entsperrung per Gesichtserkennung zum Entsperren deines Smartphones oder zur Authentifizierung in Apps verwenden, beispielsweise um dich anzumelden oder um Käufe zu autorisieren.\n\nHinweis:\nEs kann immer nur jeweils ein Gesicht eingerichtet sein. Wenn du ein anderes hinzufügen möchtest, lösche zuerst das aktuelle.\n\nEs kann passieren, dass das Smartphone unbeabsichtigt entsperrt wird, wenn du auf das Gerät blickst.\n\nEine andere Person kann dein Smartphone entsperren, indem sie es vor dein Gesicht hält.\n\nDein Smartphone kann eventuell auch von jemandem entsperrt werden, der dir sehr ähnlich sieht, beispielsweise von einem eineiigen Zwilling."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Du kannst die Entsperrung per Gesichtserkennung zum Entsperren deines Smartphones oder zur Authentifizierung in Apps verwenden, beispielsweise um dich anzumelden oder um Käufe zu autorisieren.\n\nHinweis:\nEs kann immer nur jeweils ein Gesicht eingerichtet sein. Wenn du ein anderes hinzufügen möchtest, lösche zuerst das aktuelle.\n\nEs kann passieren, dass das Smartphone unbeabsichtigt entsperrt wird, wenn du auf das Gerät blickst.\n\nEine andere Person kann dein Smartphone dadurch entsperren, dass sie es vor dein Gesicht hält, auch wenn deine Augen geschlossen sind.\n\nDein Smartphone kann eventuell auch von jemandem entsperrt werden, der dir sehr ähnlich sieht, beispielsweise von einem eineiigen Zwilling."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Gesichtsmodell löschen?"</string>
@@ -1449,8 +1449,7 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Hotspot, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Internetverbindung wird nicht für andere Geräte freigegeben"</string>
-    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
-    <skip />
+    <string name="tether_preference_summary_off" msgid="6266799346319794630">"Aus"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Tethering"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"WLAN-Hotspot nicht verwenden"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Internet nur über USB freigeben"</string>
@@ -2411,7 +2410,7 @@
     <string name="battery_saver" msgid="7737147344510595864">"Energiesparmodus"</string>
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"Automatisch aktivieren"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"Keine Aktivierung nach Zeitplan"</string>
-    <string name="battery_saver_auto_routine" msgid="4656495097900848608">"Aktivierung gemäß meiner Gewohnheiten"</string>
+    <string name="battery_saver_auto_routine" msgid="4656495097900848608">"Aktivierung gemäß deiner Gewohnheiten"</string>
     <string name="battery_saver_pref_auto_routine_summary" msgid="4739240095966241508">"Wird gemäß meiner Gewohnheiten aktiviert"</string>
     <string name="battery_saver_auto_percentage" msgid="558533724806281980">"Aktivierung gemäß festgelegtem Akkustand"</string>
     <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"Der Energiesparmodus wird automatisch aktiviert, wenn der Akku wahrscheinlich nicht bis zum nächsten Aufladen hält (ermittelt anhand deines üblichen Aufladezeitpunkts)."</string>
@@ -2419,9 +2418,12 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Zeitplan festlegen"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Akkulaufzeit verlängern"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Bei vollem Akku ausschalten"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"Der Energiesparmodus wird deaktiviert, sobald dein Akku zu über <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g> geladen ist"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"Der Energiesparmodus wird deaktiviert, wenn dein Tablet-Akku zu über <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g> geladen ist"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="4128841327359445726">"Der Energiesparmodus wird deaktiviert, wenn dein Geräteakku zu über <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g> geladen ist"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (3618041244703216293) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (1733686775743601110) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (7449283917787428755) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Aktivieren"</string>
@@ -4793,8 +4795,7 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Mindestsaldo bei vollem Akku (vom Energiesparen ausgenommene Apps)"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Mindestsaldo bei vollem Akku (System-App ohne Benutzeroberfläche)"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Mindestsaldo bei vollem Akku (restliche Apps)"</string>
-    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
-    <skip />
+    <string name="tare_min_balance_addition_app_updater" msgid="5391956072471201269">"Ergänzung des Mindestsaldos bei vollem Akku (App-Updater)"</string>
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"Laden"</item>
     <item msgid="658627268149681677">"Stromsparmodus"</item>

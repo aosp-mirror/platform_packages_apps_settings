@@ -25,8 +25,7 @@
     <string name="on" msgid="1702751473920047">"Activé"</string>
     <string name="off" msgid="2898123876644709799">"Désactivé"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Inconnu"</string>
-    <!-- no translation found for device_info_protected_single_press (3810785480060743677) -->
-    <skip />
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"Appuyez pour afficher les infos"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">Plus que <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> étape pour devenir développeur.</item>
       <item quantity="other">Plus que <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> étapes pour devenir développeur.</item>
@@ -826,11 +825,11 @@
     <string name="show_refresh_rate" msgid="5742688821872354973">"Voir la fréquence d\'actualisation"</string>
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Afficher la fréquence d\'actualisation actuelle"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Exiger le déverrouillage de l\'appareil pour la NFC"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"Autoriser l\'utilisation de la NFC uniquement lorsque l\'écran est déverrouillé"</string>
+    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Exiger le déverrouillage de l\'appareil pour le NFC"</string>
+    <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"Autoriser l\'utilisation de le NFC uniquement lorsque l\'écran est déverrouillé"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Prêt à partager le contenu d\'applications via NFC"</string>
-    <string name="nfc_disabled_summary" msgid="8737797364522502351">"Fonctionnalité indisponible, car la NFC est désactivée"</string>
+    <string name="nfc_disabled_summary" msgid="8737797364522502351">"Fonctionnalité indisponible, car le NFC est désactivée"</string>
     <string name="android_beam_explained" msgid="5684416131846701256">"Lorsque cette fonctionnalité est activée, vous pouvez partager le contenu d\'une application avec un appareil compatible NFC en rapprochant les appareils. Vous pouvez par exemple partager des pages Web, des vidéos YouTube ou des contacts.\n\nIl vous suffit de rapprocher les appareil (en les plaçant dos à dos), puis d\'appuyer sur votre écran. L\'application détermine le contenu à partager."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi-Fi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Utiliser le Wi-Fi"</string>
@@ -1446,8 +1445,7 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Point d\'accès, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Connexion Internet non partagée avec d\'autres appareils"</string>
-    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
-    <skip />
+    <string name="tether_preference_summary_off" msgid="6266799346319794630">"Désactivés"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Partage de connexion"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Ne pas utiliser le point d\'accès Wi-Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Ne partager Internet que via USB"</string>
@@ -2415,10 +2413,13 @@
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"S\'active à <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Définir une programmation"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Prolonger l\'autonomie de la batterie"</string>
-    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Désactiver quand chargé"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"Désactiver l\'économiseur de batterie quand le téléphone est chargé à plus de <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"Désactiver l\'économiseur de batterie quand la tablette est chargée à plus de <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="4128841327359445726">"Désactiver l\'économiseur de batterie quand l\'appareil est chargé à plus de <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
+    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Désactiver quand la batterie est chargée"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (3618041244703216293) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (1733686775743601110) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (7449283917787428755) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Activer"</string>
@@ -4711,7 +4712,7 @@
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Utiliser le débogage sans fil"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Utiliser les préférences du pilote graphique"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Utiliser l\'Éclairage nocturne"</string>
-    <string name="nfc_main_switch_title" msgid="6295839988954817432">"Utiliser la NFC"</string>
+    <string name="nfc_main_switch_title" msgid="6295839988954817432">"Utiliser le NFC"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Utiliser la luminosité adaptative"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Utiliser les appels Wi-Fi"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Voir toutes les applis"</string>
@@ -4790,8 +4791,7 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Solde minimal à pleine charge (exemptions)"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Solde minimal à pleine charge (appli système sans interface graphique)"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Solde minimal à pleine charge (applis restantes)"</string>
-    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
-    <skip />
+    <string name="tare_min_balance_addition_app_updater" msgid="5391956072471201269">"Addition au solde minimal à pleine charge (sites de mise à jour d\'applis)"</string>
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"En charge"</item>
     <item msgid="658627268149681677">"Sommeil"</item>

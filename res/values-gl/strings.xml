@@ -25,8 +25,7 @@
     <string name="on" msgid="1702751473920047">"Activado"</string>
     <string name="off" msgid="2898123876644709799">"Desactivado"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Descoñecido"</string>
-    <!-- no translation found for device_info_protected_single_press (3810785480060743677) -->
-    <skip />
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"Toca para mostrar máis información"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">Agora estás a <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> pasos de ser programador.</item>
       <item quantity="one">Agora estás a <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> paso de ser programador.</item>
@@ -1289,7 +1288,7 @@
     <string name="storage_unmount_failure" msgid="3796912279003790607">"Non se puido expulsar <xliff:g id="NAME">%1$s</xliff:g> con seguranza"</string>
     <string name="storage_rename_title" msgid="5911285992205282312">"Cambiar o nome do almacenamento"</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g> está danado. \n\nPara usar <xliff:g id="NAME_1">^1</xliff:g>, primeiro debes configuralo."</string>
-    <string name="storage_internal_format_details" msgid="2399034372813686846">"Podes formatar esta tarxeta SD para almacenar fotos, vídeos, música e máis contido para acceder a el noutros dispositivos. \n\n"<b>"Se o fas, borraranse todos os datos que haxa nesta tarxeta SD."</b>" \n\n"<b>"Antes de formatar a tarxeta SD, fai o seguinte"</b>" \n\n"<b>"Crea copias de seguranza do contido multimedia (por exemplo, das fotos)"</b>" \nPasa os ficheiros multimedia a outro almacenamento deste dispositivo ou transfíreos ao un ordenador usando un cable USB. \n\n"<b>"Fai copias de seguranza das aplicacións"</b>" \nDesinstalaranse todas as aplicacións almacenadas nesta <xliff:g id="NAME">^1</xliff:g> e borraranse os seus datos. Se queres conservar esas aplicacións, pásaas a outro almacenamento deste dispositivo."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Podes formatar esta tarxeta SD para almacenar fotos, vídeos, música e máis contido para acceder a el noutros dispositivos. \n\n"<b>"Se o fas, borraranse todos os datos que haxa nesta tarxeta SD."</b>" \n\n"<b>"Antes de formatar a tarxeta SD, fai o seguinte"</b>" \n\n"<b>"Crea copias de seguranza do contido multimedia (por exemplo, das fotos)"</b>" \nPasa os ficheiros multimedia a outro almacenamento deste dispositivo ou transfíreos a un ordenador usando un cable USB. \n\n"<b>"Fai copias de seguranza das aplicacións"</b>" \nDesinstalaranse todas as aplicacións almacenadas nesta <xliff:g id="NAME">^1</xliff:g> e borraranse os seus datos. Se queres conservar esas aplicacións, pásaas a outro almacenamento deste dispositivo."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Ao expulsar esta <xliff:g id="NAME_0">^1</xliff:g>, as aplicacións almacenadas nela deixarán de funcionar e os ficheiros multimedia almacenados non estarán dispoñibles ata que se volva inserir.\n\n"</b>"Esta <xliff:g id="NAME_1">^1</xliff:g> formátase para funcionar só neste dispositivo. Non funcionará noutros."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Para usar as aplicacións, as fotos ou os datos que contén a <xliff:g id="NAME">^1</xliff:g>, insírea de novo. \n\nTamén podes decidir borrar este almacenamento se o dispositivo non está dispoñible. \n\nSe decides borralo, todos os datos que contén o dispositivo perderanse para sempre. \n\nPodes volver instalar as aplicacións máis tarde, pero perderanse os seus datos almacenados neste dispositivo."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Queres esquecer a <xliff:g id="NAME">^1</xliff:g>?"</string>
@@ -1444,8 +1443,7 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth e Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Zona wifi, USB, Bluetooth e Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Non se está compartindo a conexión a Internet con outros dispositivos"</string>
-    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
-    <skip />
+    <string name="tether_preference_summary_off" msgid="6266799346319794630">"Desactivadas"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Conexión compartida"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Non utilizar zona wifi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Comparte Internet só por USB"</string>
@@ -2414,9 +2412,12 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Establecer unha planificación"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Aumenta a duración da batería"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desactivar cando a batería estea cargada"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"A función Aforro de batería desactívase cando a carga do teléfono é superior ao <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"A función Aforro de batería desactívase cando a carga da tableta é superior ao <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="4128841327359445726">"A función Aforro de batería desactívase cando a carga do dispositivo é superior ao <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (3618041244703216293) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (1733686775743601110) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (7449283917787428755) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Activar"</string>
@@ -4788,8 +4789,7 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Saldo mínimo coa carga completa (aplicacións exentas)"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Saldo mínimo coa carga completa (aplicacións do sistema sen interface)"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Saldo mínimo coa carga completa (aplicacións restantes)"</string>
-    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
-    <skip />
+    <string name="tare_min_balance_addition_app_updater" msgid="5391956072471201269">"Aumento de saldo mínimo coa carga completa (actualizadores de aplicacións)"</string>
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"Cargando"</item>
     <item msgid="658627268149681677">"Sesta"</item>

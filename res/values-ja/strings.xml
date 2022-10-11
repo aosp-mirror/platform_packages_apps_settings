@@ -441,7 +441,7 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"スキップ"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"キャンセル"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"センサーを指でタッチ"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"押し込まずに電源ボタンに触れてください"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"軽く電源ボタンに触れてください"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"指紋の登録方法"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"スマートフォンの背面にある指紋センサーを人差し指でタッチしてください。"</string>
     <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"指紋認証センサーは電源ボタンに内蔵されています。タブレットの端にある盛り上がった音量ボタンの横のフラットなボタンです。\n\n電源ボタンを押すと画面が OFF になります。"</string>
@@ -458,7 +458,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"センサーを指でタッチ"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"指をセンサーに当て、振動したら離します。"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"振動を感じるまでセンサーに指を平らに押し当てます"</string>
-    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"ボタンを押し込まずに、振動を感じるまでセンサーから指紋を離さないでください。\n\n毎回、指を少し動かしてください。これで指紋を正しく登録できるようになります。"</string>
+    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"ボタンを強く押さずに、振動を感じるまでセンターから指紋を離さないでください。\n\n毎回、指を少し動かしてください。それで指紋を正しく登録できるようになります。"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"指紋認証センサーを長押ししてください"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"指を離して、もう一度タッチ"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"もう一度"</string>
@@ -553,7 +553,7 @@
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"暗号化、認証情報など"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"セキュリティ, その他 セキュリティ 設定, その他 設定, 詳細 セキュリティ 設定"</string>
     <string name="privacy_advanced_settings" msgid="8828215456566937719">"プライバシーの詳細設定"</string>
-    <string name="fingerprint_add_max" msgid="8639321019299347447">"最大で<xliff:g id="COUNT">%d</xliff:g>個の指紋を追加できます"</string>
+    <string name="fingerprint_add_max" msgid="8639321019299347447">"最大で <xliff:g id="COUNT">%d</xliff:g> 件の指紋を追加できます"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"追加された指紋の数が上限に達しました"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"これ以上、指紋を追加できません"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」を削除"</string>
@@ -1443,8 +1443,7 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB、Bluetooth、イーサネット"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"アクセス ポイント、USB、Bluetooth、イーサネット"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"インターネットを他のデバイスと共有しない"</string>
-    <!-- no translation found for tether_preference_summary_off (6266799346319794630) -->
-    <skip />
+    <string name="tether_preference_summary_off" msgid="6266799346319794630">"OFF"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"テザリング"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Wi-Fi アクセス ポイントを使用しない"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"USB でのみインターネットを共有"</string>
@@ -2413,9 +2412,12 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"スケジュールの設定"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"電池を長持ちさせる"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"充電時に OFF にする"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"スマートフォンの充電率が <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> を超えると、バッテリー セーバーが OFF になります"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"タブレットの充電率が <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> を超えると、バッテリー セーバーが OFF になります"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="4128841327359445726">"デバイスの充電率が <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> を超えると、バッテリー セーバーが OFF になります"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (3618041244703216293) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (1733686775743601110) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (7449283917787428755) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"ON にする"</string>
@@ -2424,10 +2426,10 @@
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"使用しない"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"バッテリー残量が <xliff:g id="PERCENT">%1$s</xliff:g> になったとき"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"バッテリー残量"</string>
-    <string name="battery_percentage_description" msgid="2321465139126125541">"ステータスバーにバッテリー残量を％で表示"</string>
+    <string name="battery_percentage_description" msgid="2321465139126125541">"ステータスバーにバッテリー残量を％で表示する"</string>
     <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"前回のフル充電以降のバッテリー残量"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"過去 24 時間のバッテリー使用量"</string>
-    <string name="battery_app_usage" msgid="8976453608783133770">"前回のフル充電からのアプリの使用状況"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"前回のフル充電以降のアプリの使用状況"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"過去 24 時間のアプリのバッテリー使用量"</string>
     <string name="battery_system_usage" msgid="1395943945140097585">"前回のフル充電以降のシステムの使用状況"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"過去 24 時間のシステムのバッテリー使用量"</string>
@@ -4787,8 +4789,7 @@
     <string name="tare_min_balance_exempted" msgid="6693710075762973485">"充電完了時の最低残高（除外アプリ）"</string>
     <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"充電完了時の最低残高（ヘッドレス システム アプリ）"</string>
     <string name="tare_min_balance_other_app" msgid="3404774196832506476">"充電完了時の最低残高（その他のアプリ）"</string>
-    <!-- no translation found for tare_min_balance_addition_app_updater (5391956072471201269) -->
-    <skip />
+    <string name="tare_min_balance_addition_app_updater" msgid="5391956072471201269">"充電完了時の最低残高の追加（アプリ アップデータ）"</string>
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"充電"</item>
     <item msgid="658627268149681677">"Doze"</item>
