@@ -17,6 +17,7 @@
 package com.android.settings.slices;
 
 import static android.Manifest.permission.READ_SEARCH_INDEXABLES;
+import static android.app.slice.Slice.HINT_PARTIAL;
 
 import android.app.PendingIntent;
 import android.app.slice.SliceManager;
@@ -500,7 +501,7 @@ public class SettingsSliceProvider extends SliceProvider {
      */
     private static Slice getSliceStub(Uri uri) {
         // TODO: Switch back to ListBuilder when slice loading states are fixed.
-        return new Slice.Builder(uri).build();
+        return new Slice.Builder(uri).addHints(HINT_PARTIAL).build();
     }
 
     private static String[] parseStringArray(String value) {
