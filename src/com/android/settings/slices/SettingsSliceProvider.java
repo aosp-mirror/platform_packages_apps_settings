@@ -187,6 +187,7 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @Override
     public void onSliceUnpinned(Uri sliceUri) {
+        mSliceWeakDataCache.remove(sliceUri);
         final Context context = getContext();
         if (!VolumeSliceHelper.unregisterUri(context, sliceUri)) {
             SliceBroadcastRelay.unregisterReceivers(context, sliceUri);
@@ -257,11 +258,6 @@ public class SettingsSliceProvider extends SliceProvider {
             if (cachedSliceData == null) {
                 loadSliceInBackground(sliceUri);
                 return getSliceStub(sliceUri);
-            }
-
-            // Remove the SliceData from the cache after it has been used to prevent a memory-leak.
-            if (!getPinnedSlices().contains(sliceUri)) {
-                mSliceWeakDataCache.remove(sliceUri);
             }
             return SliceBuilderUtils.buildSlice(getContext(), cachedSliceData);
         } finally {
