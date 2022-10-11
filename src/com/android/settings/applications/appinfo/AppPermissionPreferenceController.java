@@ -56,7 +56,7 @@ public class AppPermissionPreferenceController extends AppInfoPreferenceControll
     final PermissionsSummaryHelper.PermissionsResultCallback mPermissionCallback
             = new PermissionsSummaryHelper.PermissionsResultCallback() {
         @Override
-        public void onPermissionSummaryResult(int standardGrantedPermissionCount,
+        public void onPermissionSummaryResult(
                 int requestedPermissionCount, int additionalGrantedPermissionCount,
                 List<CharSequence> grantedGroupLabels) {
             final Resources res = mContext.getResources();
