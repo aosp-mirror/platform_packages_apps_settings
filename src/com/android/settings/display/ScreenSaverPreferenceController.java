@@ -14,6 +14,7 @@
 package com.android.settings.display;
 
 import android.content.Context;
+import android.os.UserManager;
 
 import androidx.preference.Preference;
 
@@ -32,8 +33,11 @@ public class ScreenSaverPreferenceController extends AbstractPreferenceControlle
 
     @Override
     public boolean isAvailable() {
-        return mContext.getResources().getBoolean(
+        final boolean dreamsSupported = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_dreamsSupported);
+        final boolean dreamsOnlyEnabledForSystemUser = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_dreamsOnlyEnabledForSystemUser);
+        return dreamsSupported && (!dreamsOnlyEnabledForSystemUser || isSystemUser());
     }
 
     @Override
@@ -44,5 +48,10 @@ public class ScreenSaverPreferenceController extends AbstractPreferenceControlle
     @Override
     public void updateState(Preference preference) {
         preference.setSummary(DreamSettings.getSummaryTextWithDreamName(mContext));
+    }
+
+    private boolean isSystemUser() {
+        final UserManager userManager = mContext.getSystemService(UserManager.class);
+        return userManager.isSystemUser();
     }
 }

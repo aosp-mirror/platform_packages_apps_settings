@@ -44,48 +44,123 @@ public class PowerMenuSettingsUtilsTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         mResources = mock(Resources.class);
         when(mContext.getResources()).thenReturn(mResources);
+
+        when(mResources.getBoolean(
+                        com.android.internal.R.bool
+                                .config_longPressOnPowerForAssistantSettingAvailable))
+                .thenReturn(true);
     }
 
     @Test
-    public void longPressBehaviourValuePresent_returnsValue() {
-        when(mResources.getInteger(
-                com.android.internal.R.integer.config_longPressOnPowerBehavior))
-                .thenReturn(0);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.POWER_BUTTON_LONG_PRESS, 1);
-
-        assertThat(PowerMenuSettingsUtils.getPowerButtonSettingValue(mContext)).isEqualTo(1);
+    public void isLongPressPowerForAssistantEnabled_valueSetToAssistant_returnsTrue() {
+        Settings.Global.putInt(
+                mContext.getContentResolver(), Settings.Global.POWER_BUTTON_LONG_PRESS, 5);
+        assertThat(PowerMenuSettingsUtils.isLongPressPowerForAssistantEnabled(mContext)).isTrue();
     }
 
     @Test
-    public void longPressBehaviourValueNotPresent_returnsDefault() {
-        when(mResources.getInteger(
-                com.android.internal.R.integer.config_longPressOnPowerBehavior))
-                .thenReturn(2);
-
-        assertThat(PowerMenuSettingsUtils.getPowerButtonSettingValue(mContext)).isEqualTo(2);
+    public void isLongPressPowerForAssistantEnabled_valueNotSetToAssistant_returnsFalse() {
+        Settings.Global.putInt(
+                mContext.getContentResolver(), Settings.Global.POWER_BUTTON_LONG_PRESS, 3);
+        assertThat(PowerMenuSettingsUtils.isLongPressPowerForAssistantEnabled(mContext)).isFalse();
     }
 
     @Test
-    public void longPressBehaviourValueSetToAssistant_isAssistEnabledReturnsTrue() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.POWER_BUTTON_LONG_PRESS, 5);
-        assertThat(PowerMenuSettingsUtils.isLongPressPowerForAssistEnabled(mContext)).isTrue();
+    public void isLongPressPowerForAssistantEnabled_valueNotSet_defaultToAssistant_returnsTrue() {
+        when(mResources.getInteger(com.android.internal.R.integer.config_longPressOnPowerBehavior))
+                .thenReturn(5);
+
+        assertThat(PowerMenuSettingsUtils.isLongPressPowerForAssistantEnabled(mContext)).isTrue();
     }
 
     @Test
-    public void longPressBehaviourValueNotSetToAssistant_isAssistEnabledReturnsFalse() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.POWER_BUTTON_LONG_PRESS, 3);
-        assertThat(PowerMenuSettingsUtils.isLongPressPowerForAssistEnabled(mContext)).isFalse();
+    public void isLongPressPowerForAssistantEnabled_valueNotSet_defaultToPowerMenu_returnsFalse() {
+        when(mResources.getInteger(com.android.internal.R.integer.config_longPressOnPowerBehavior))
+                .thenReturn(1);
+
+        assertThat(PowerMenuSettingsUtils.isLongPressPowerForAssistantEnabled(mContext)).isFalse();
     }
 
     @Test
-    public void longPressBehaviourDefaultSetToAssistant_isAssistEnabledReturnsFalse() {
-        when(mResources.getInteger(
-                com.android.internal.R.integer.config_longPressOnPowerBehavior))
+    public void isLongPressPowerSettingAvailable_defaultToAssistant_returnsTrue() {
+        when(mResources.getInteger(com.android.internal.R.integer.config_longPressOnPowerBehavior))
+                .thenReturn(5);
+        assertThat(PowerMenuSettingsUtils.isLongPressPowerSettingAvailable(mContext)).isTrue();
+    }
+
+    @Test
+    public void isLongPressPowerSettingAvailable_defaultToPowerMenu_returnsTrue() {
+        when(mResources.getInteger(com.android.internal.R.integer.config_longPressOnPowerBehavior))
+                .thenReturn(1);
+        assertThat(PowerMenuSettingsUtils.isLongPressPowerSettingAvailable(mContext)).isTrue();
+    }
+
+    @Test
+    public void isLongPressPowerSettingAvailable_defaultToPowerOff_returnsFalse() {
+        // Power off is the unsupported option in long press power settings
+        when(mResources.getInteger(com.android.internal.R.integer.config_longPressOnPowerBehavior))
                 .thenReturn(3);
+        assertThat(PowerMenuSettingsUtils.isLongPressPowerSettingAvailable(mContext)).isFalse();
+    }
 
-        assertThat(PowerMenuSettingsUtils.isLongPressPowerForAssistEnabled(mContext)).isFalse();
+    @Test
+    public void isLongPressPowerSettingAvailable_settingDisabled_returnsFalse() {
+        // Disable the setting
+        when(mResources.getBoolean(
+                        com.android.internal.R.bool
+                                .config_longPressOnPowerForAssistantSettingAvailable))
+                .thenReturn(false);
+        when(mResources.getInteger(com.android.internal.R.integer.config_longPressOnPowerBehavior))
+                .thenReturn(1);
+
+        assertThat(PowerMenuSettingsUtils.isLongPressPowerSettingAvailable(mContext)).isFalse();
+    }
+
+    @Test
+    public void setLongPressPowerForAssistant_updatesValue() throws Exception {
+        boolean result = PowerMenuSettingsUtils.setLongPressPowerForAssistant(mContext);
+
+        assertThat(result).isTrue();
+        assertThat(
+                        Settings.Global.getInt(
+                                mContext.getContentResolver(),
+                                Settings.Global.POWER_BUTTON_LONG_PRESS))
+                .isEqualTo(5);
+    }
+
+    @Test
+    public void setLongPressPowerForAssistant_updatesKeyChordValueToPowerMenu() throws Exception {
+        PowerMenuSettingsUtils.setLongPressPowerForAssistant(mContext);
+        assertThat(
+                        Settings.Global.getInt(
+                                mContext.getContentResolver(),
+                                Settings.Global.KEY_CHORD_POWER_VOLUME_UP))
+                .isEqualTo(2);
+    }
+
+    @Test
+    public void setLongPressPowerForPowerMenu_updatesValue() throws Exception {
+        boolean result = PowerMenuSettingsUtils.setLongPressPowerForPowerMenu(mContext);
+
+        assertThat(result).isTrue();
+        assertThat(
+                        Settings.Global.getInt(
+                                mContext.getContentResolver(),
+                                Settings.Global.POWER_BUTTON_LONG_PRESS))
+                .isEqualTo(1);
+    }
+
+    @Test
+    public void setLongPressPowerForPowerMenu_updatesKeyChordValueToDefault() throws Exception {
+        when(mResources.getInteger(com.android.internal.R.integer.config_keyChordPowerVolumeUp))
+                .thenReturn(1);
+
+        PowerMenuSettingsUtils.setLongPressPowerForPowerMenu(mContext);
+
+        assertThat(
+                        Settings.Global.getInt(
+                                mContext.getContentResolver(),
+                                Settings.Global.KEY_CHORD_POWER_VOLUME_UP))
+                .isEqualTo(1);
     }
 }

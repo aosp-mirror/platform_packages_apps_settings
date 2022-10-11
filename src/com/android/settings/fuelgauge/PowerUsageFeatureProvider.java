@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.util.SparseIntArray;
 
+import com.android.settings.fuelgauge.batteryusage.BatteryHistEntry;
 import com.android.settingslib.fuelgauge.Estimate;
 
 import java.util.Map;
@@ -73,6 +74,7 @@ public interface PowerUsageFeatureProvider {
 
     /**
      * Returns an improved projection curve for future battery level.
+     *
      * @param zeroTime timestamps (array keys) are shifted by this amount
      */
     SparseIntArray getEnhancedBatteryPredictionCurve(Context context, long zeroTime);
@@ -84,21 +86,20 @@ public interface PowerUsageFeatureProvider {
 
     /**
      * Checks whether debugging should be enabled for battery estimates.
-     * @return
      */
     boolean isEstimateDebugEnabled();
 
     /**
      * Converts the provided string containing the remaining time into a debug string for enhanced
      * estimates.
-     * @param timeRemaining
+     *
      * @return A string containing the estimate and a label indicating it is an enhanced estimate
      */
     String getEnhancedEstimateDebugString(String timeRemaining);
 
     /**
      * Converts the provided string containing the remaining time into a debug string.
-     * @param timeRemaining
+     *
      * @return A string containing the estimate and a label indicating it is a normal estimate
      */
     String getOldEstimateDebugString(String timeRemaining);
@@ -114,7 +115,7 @@ public interface PowerUsageFeatureProvider {
      * to their next charging time.
      *
      * @param id Optional string used to identify the caller for metrics. Usually the class name of
-     * the caller
+     *           the caller
      */
     boolean getEarlyWarningSignal(Context context, String id);
 
@@ -139,6 +140,11 @@ public interface PowerUsageFeatureProvider {
     boolean isAdaptiveChargingSupported();
 
     /**
+     * Returns {@code true} if current defender mode is extra defend
+     */
+    boolean isExtraDefend();
+
+    /**
      * Gets a intent for one time bypass charge limited to resume charging.
      */
     Intent getResumeChargeIntent();
@@ -147,6 +153,11 @@ public interface PowerUsageFeatureProvider {
      * Returns battery history data with corresponding timestamp key.
      */
     Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context);
+
+    /**
+     * Returns battery history data since last full charge with corresponding timestamp key.
+     */
+    Map<Long, Map<String, BatteryHistEntry>> getBatteryHistorySinceLastFullCharge(Context context);
 
     /**
      * Returns {@link Uri} to monitor battery history data is update.

@@ -29,6 +29,7 @@ import android.provider.Settings;
 import android.speech.RecognitionService;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.Pair;
 import android.util.Xml;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -44,12 +45,11 @@ public final class VoiceInputHelper {
     static final String TAG = "VoiceInputHelper";
     final Context mContext;
 
-    final List<ResolveInfo> mAvailableRecognition;
-
     /**
      * Base info of the Voice Input provider.
      *
      * TODO: Remove this superclass as we only have 1 class now (RecognizerInfo).
+     * TODO: Group recognition service xml meta-data attributes in a single class.
      */
     public static class BaseInfo implements Comparable<BaseInfo> {
         public final ServiceInfo mService;
@@ -90,16 +90,12 @@ public final class VoiceInputHelper {
         }
     }
 
-    final ArrayList<RecognizerInfo> mAvailableRecognizerInfos = new ArrayList<>();
+    ArrayList<RecognizerInfo> mAvailableRecognizerInfos = new ArrayList<>();
 
     ComponentName mCurrentRecognizer;
 
     public VoiceInputHelper(Context context) {
         mContext = context;
-
-        mAvailableRecognition = mContext.getPackageManager().queryIntentServices(
-                new Intent(RecognitionService.SERVICE_INTERFACE),
-                PackageManager.GET_META_DATA);
     }
 
     /** Draws the UI of the Voice Input picker page. */
@@ -113,63 +109,120 @@ public final class VoiceInputHelper {
             mCurrentRecognizer = null;
         }
 
-        // Iterate through all the available recognizers and load up their info to show
-        // in the preference.
-        int size = mAvailableRecognition.size();
-        for (int i = 0; i < size; i++) {
-            ResolveInfo resolveInfo = mAvailableRecognition.get(i);
-            ComponentName comp = new ComponentName(resolveInfo.serviceInfo.packageName,
-                    resolveInfo.serviceInfo.name);
-            ServiceInfo si = resolveInfo.serviceInfo;
-            String settingsActivity = null;
-            // Always show in voice input settings unless specifically set to False.
-            boolean selectableAsDefault = true;
-            try (XmlResourceParser parser = si.loadXmlMetaData(mContext.getPackageManager(),
-                    RecognitionService.SERVICE_META_DATA)) {
-                if (parser == null) {
-                    throw new XmlPullParserException("No " + RecognitionService.SERVICE_META_DATA
-                            + " meta-data for " + si.packageName);
-                }
+        final ArrayList<RecognizerInfo> validRecognitionServices =
+                validRecognitionServices(mContext);
 
-                Resources res = mContext.getPackageManager().getResourcesForApplication(
-                        si.applicationInfo);
-
-                AttributeSet attrs = Xml.asAttributeSet(parser);
-
-                int type;
-                while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
-                        && type != XmlPullParser.START_TAG) {
-                    // Intentionally do nothing.
-                }
-
-                String nodeName = parser.getName();
-                if (!"recognition-service".equals(nodeName)) {
-                    throw new XmlPullParserException(
-                            "Meta-data does not start with recognition-service tag");
-                }
-
-                TypedArray array = res.obtainAttributes(attrs,
-                        com.android.internal.R.styleable.RecognitionService);
-                settingsActivity = array.getString(
-                        com.android.internal.R.styleable.RecognitionService_settingsActivity);
-                selectableAsDefault = array.getBoolean(
-                        com.android.internal.R.styleable.RecognitionService_selectableAsDefault,
-                        true);
-                array.recycle();
-            } catch (XmlPullParserException e) {
-                Log.e(TAG, "error parsing recognition service meta-data", e);
-            } catch (IOException e) {
-                Log.e(TAG, "error parsing recognition service meta-data", e);
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.e(TAG, "error parsing recognition service meta-data", e);
-            }
-            // The current recognizer must always be shown in the settings, whatever its
-            // selectableAsDefault value is.
-            if (selectableAsDefault || comp.equals(mCurrentRecognizer)) {
-                mAvailableRecognizerInfos.add(new RecognizerInfo(mContext.getPackageManager(),
-                        resolveInfo.serviceInfo, settingsActivity, selectableAsDefault));
+        // Filter all recognizers which can be selected as default or are the current recognizer.
+        mAvailableRecognizerInfos = new ArrayList<>();
+        for (RecognizerInfo recognizerInfo: validRecognitionServices) {
+            if (recognizerInfo.mSelectableAsDefault || new ComponentName(
+                    recognizerInfo.mService.packageName, recognizerInfo.mService.name)
+                    .equals(mCurrentRecognizer)) {
+                mAvailableRecognizerInfos.add(recognizerInfo);
             }
         }
+
         Collections.sort(mAvailableRecognizerInfos);
+    }
+
+    /**
+     * Query all services with {@link RecognitionService#SERVICE_INTERFACE} intent. Filter only
+     * those which have proper xml meta-data which start with a `recognition-service` tag.
+     * Filtered services are sorted by their labels in the ascending order.
+     *
+     * @param context {@link Context} inside which the settings app is run.
+     *
+     * @return {@link ArrayList}&lt;{@link RecognizerInfo}&gt;
+     * containing info about the filtered speech recognition services.
+     */
+    static ArrayList<RecognizerInfo> validRecognitionServices(Context context) {
+        final List<ResolveInfo> resolvedRecognitionServices =
+                context.getPackageManager().queryIntentServices(
+                        new Intent(RecognitionService.SERVICE_INTERFACE),
+                        PackageManager.GET_META_DATA);
+
+        final ArrayList<RecognizerInfo> validRecognitionServices = new ArrayList<>();
+
+        for (ResolveInfo resolveInfo: resolvedRecognitionServices) {
+            final ServiceInfo serviceInfo = resolveInfo.serviceInfo;
+
+            final Pair<String, Boolean> recognitionServiceAttributes =
+                    parseRecognitionServiceXmlMetadata(context, serviceInfo);
+
+            if (recognitionServiceAttributes != null) {
+                validRecognitionServices.add(new RecognizerInfo(
+                        context.getPackageManager(),
+                        serviceInfo,
+                        recognitionServiceAttributes.first      /* settingsActivity */,
+                        recognitionServiceAttributes.second     /* selectableAsDefault */));
+            }
+        }
+
+        return validRecognitionServices;
+    }
+
+    /**
+     * Load recognition service's xml meta-data and parse it. Return the meta-data attributes,
+     * namely, `settingsActivity` {@link String} and `selectableAsDefault` {@link Boolean}.
+     *
+     * <p>Parsing fails if the meta-data for the given service is not found
+     * or the found meta-data does not start with a `recognition-service`.</p>
+     *
+     * @param context {@link Context} inside which the settings app is run.
+     * @param serviceInfo {@link ServiceInfo} containing info
+     * about the speech recognition service in question.
+     *
+     * @return {@link Pair}&lt;{@link String}, {@link Boolean}&gt;  containing `settingsActivity`
+     * and `selectableAsDefault` attributes if the parsing was successful, {@code null} otherwise.
+     */
+    private static Pair<String, Boolean> parseRecognitionServiceXmlMetadata(
+            Context context, ServiceInfo serviceInfo) {
+        // Default recognition service attribute values.
+        // Every recognizer can be selected unless specified otherwise.
+        String settingsActivity;
+        boolean selectableAsDefault = true;
+
+        // Parse xml meta-data.
+        try (XmlResourceParser parser = serviceInfo.loadXmlMetaData(
+                context.getPackageManager(), RecognitionService.SERVICE_META_DATA)) {
+            if (parser == null) {
+                throw new XmlPullParserException(String.format("No %s meta-data for %s package",
+                        RecognitionService.SERVICE_META_DATA, serviceInfo.packageName));
+            }
+
+            final Resources res = context.getPackageManager().getResourcesForApplication(
+                    serviceInfo.applicationInfo);
+            final AttributeSet attrs = Xml.asAttributeSet(parser);
+
+            // Xml meta-data must start with a `recognition-service tag`.
+            int type;
+            while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
+                    && type != XmlPullParser.START_TAG) {
+                // Intentionally do nothing.
+            }
+
+            final String nodeName = parser.getName();
+            if (!"recognition-service".equals(nodeName)) {
+                throw new XmlPullParserException(String.format(
+                        "%s package meta-data does not start with a `recognition-service` tag",
+                        serviceInfo.packageName));
+            }
+
+            final TypedArray array = res.obtainAttributes(attrs,
+                    com.android.internal.R.styleable.RecognitionService);
+            settingsActivity = array.getString(
+                    com.android.internal.R.styleable.RecognitionService_settingsActivity);
+            selectableAsDefault = array.getBoolean(
+                    com.android.internal.R.styleable.RecognitionService_selectableAsDefault,
+                    selectableAsDefault);
+            array.recycle();
+        } catch (XmlPullParserException | IOException
+                | PackageManager.NameNotFoundException e) {
+            Log.e(TAG, String.format("Error parsing %s package recognition service meta-data",
+                    serviceInfo.packageName), e);
+            return null;
+        }
+
+        return Pair.create(settingsActivity, selectableAsDefault);
     }
 }

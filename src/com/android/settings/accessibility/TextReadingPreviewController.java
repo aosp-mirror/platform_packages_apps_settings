@@ -42,6 +42,8 @@ import java.util.Objects;
 class TextReadingPreviewController extends BasePreferenceController implements
         PreviewSizeSeekBarController.ProgressInteractionListener {
     private static final String TAG = "TextReadingPreviewCtrl";
+    private static final int LAYER_INITIAL_INDEX = 0;
+    private static final int FRAME_INITIAL_INDEX = 0;
     static final int[] PREVIEW_SAMPLE_RES_IDS = new int[]{
             R.layout.accessibility_text_reading_preview_app_grid,
             R.layout.screen_zoom_preview_1,
@@ -108,24 +110,17 @@ class TextReadingPreviewController extends BasePreferenceController implements
         final PreviewPagerAdapter pagerAdapter = new PreviewPagerAdapter(mContext, isLayoutRtl,
                 PREVIEW_SAMPLE_RES_IDS, createConfig(origConfig));
         mPreviewPreference.setPreviewAdapter(pagerAdapter);
-        pagerAdapter.setPreviewLayer(/* newLayerIndex= */ 0,
-                /* currentLayerIndex= */ 0,
-                /* currentFrameIndex= */ 0, /* animate= */ false);
+        mPreviewPreference.setCurrentItem(
+                isLayoutRtl ? PREVIEW_SAMPLE_RES_IDS.length - 1 : FRAME_INITIAL_INDEX);
+        final int initialPagerIndex =
+                mLastFontProgress * mDisplaySizeData.getValues().size() + mLastDisplayProgress;
+        pagerAdapter.setPreviewLayer(initialPagerIndex, LAYER_INITIAL_INDEX,
+                FRAME_INITIAL_INDEX, /* animate= */ false);
     }
 
     @Override
     public void notifyPreferenceChanged() {
-        final int displayDataSize = mDisplaySizeData.getValues().size();
-        final int fontSizeProgress = mFontSizePreference.getProgress();
-        final int displaySizeProgress = mDisplaySizePreference.getProgress();
-
-        // To be consistent with the
-        // {@link PreviewPagerAdapter#setPreviewLayer(int, int, int, boolean)} behavior,
-        // here also needs the same design. In addition, please also refer to
-        // the {@link #createConfig(Configuration)}.
-        final int pagerIndex = fontSizeProgress * displayDataSize + displaySizeProgress;
-
-        mPreviewPreference.notifyPreviewPagerChanged(pagerIndex);
+        mPreviewPreference.notifyPreviewPagerChanged(getPagerIndex());
     }
 
     @Override
@@ -171,6 +166,17 @@ class TextReadingPreviewController extends BasePreferenceController implements
         final Choreographer choreographer = Choreographer.getInstance();
         choreographer.removeFrameCallback(mCommit);
         choreographer.postFrameCallbackDelayed(mCommit, commitDelayMs);
+    }
+
+    private int getPagerIndex() {
+        final int displayDataSize = mDisplaySizeData.getValues().size();
+        final int fontSizeProgress = mFontSizePreference.getProgress();
+        final int displaySizeProgress = mDisplaySizePreference.getProgress();
+
+        // To be consistent with the {@link PreviewPagerAdapter#setPreviewLayer(int, int, int,
+        // boolean)} behavior, here also needs the same design. In addition, please also refer to
+        // the {@link #createConfig(Configuration)}.
+        return fontSizeProgress * displayDataSize + displaySizeProgress;
     }
 
     private void tryCommitFontSizeConfig() {

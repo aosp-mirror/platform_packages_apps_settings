@@ -22,9 +22,13 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.time.Capabilities;
+import android.app.time.TimeManager;
+import android.app.time.TimeZoneCapabilities;
+import android.app.time.TimeZoneCapabilitiesAndConfig;
+import android.app.time.TimeZoneConfiguration;
 import android.content.Context;
-import android.provider.Settings;
-import android.telephony.TelephonyManager;
+import android.os.UserHandle;
 
 import androidx.preference.Preference;
 
@@ -32,6 +36,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -46,7 +51,7 @@ public class AutoTimeZonePreferenceControllerTest {
     private AutoTimeZonePreferenceController mController;
     private Preference mPreference;
     @Mock
-    private TelephonyManager mTelephonyManager;
+    private TimeManager mTimeManager;
 
     @Before
     public void setUp() {
@@ -55,12 +60,15 @@ public class AutoTimeZonePreferenceControllerTest {
 
         mPreference = new Preference(mContext);
 
-        when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
-        when(mTelephonyManager.isDataCapable()).thenReturn(true);
+        when(mContext.getSystemService(TimeManager.class)).thenReturn(mTimeManager);
     }
 
     @Test
     public void isFromSUW_notAvailable() {
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* autoSupported= */true, /* autoEnabled= */false);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
         mController = new AutoTimeZonePreferenceController(
                 mContext, null /* callback */, true /* isFromSUW */);
 
@@ -69,6 +77,10 @@ public class AutoTimeZonePreferenceControllerTest {
 
     @Test
     public void notFromSUW_isAvailable() {
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* autoSupported= */true, /* autoEnabled= */false);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
         mController = new AutoTimeZonePreferenceController(
                 mContext, null /* callback */, false /* isFromSUW */);
 
@@ -76,8 +88,11 @@ public class AutoTimeZonePreferenceControllerTest {
     }
 
     @Test
-    public void isWifiOnly_notAvailable() {
-        when(mTelephonyManager.isDataCapable()).thenReturn(false);
+    public void autoTimeZoneNotSupported_notAvailable() {
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* autoSupported= */false, /* autoEnabled= */false);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
         mController = new AutoTimeZonePreferenceController(
                 mContext, null /* callback */, false /* fromSUW */);
 
@@ -86,54 +101,134 @@ public class AutoTimeZonePreferenceControllerTest {
 
     @Test
     public void isFromSUW_notEnable() {
-        mController =
-            new AutoTimeZonePreferenceController(mContext, null /* callback */, true /* fromSUW */);
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* autoSupported= */false, /* autoEnabled= */false);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
+        mController = new AutoTimeZonePreferenceController(
+                mContext, null /* callback */, true /* fromSUW */);
 
         assertThat(mController.isEnabled()).isFalse();
     }
 
     @Test
-    public void isWifiOnly_notEnable() {
-        when(mTelephonyManager.isDataCapable()).thenReturn(false);
+    public void isFromSUW_isEnable() {
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* autoSupported= */false, /* autoEnabled= */true);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
         mController = new AutoTimeZonePreferenceController(
-                mContext, null /* callback */, false /* fromSUW */);
+                mContext, null /* callback */, true /* fromSUW */);
 
-        assertThat(mController.isEnabled()).isFalse();
-    }
-
-    @Test
-    public void testIsEnabled_shouldReadFromSettingsProvider() {
-        mController = new AutoTimeZonePreferenceController(
-                mContext, null /* callback */, false /* fromSUW */);
-
-        // Disabled
-        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AUTO_TIME_ZONE, 0);
-        assertThat(mController.isEnabled()).isFalse();
-
-        // Enabled
-        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AUTO_TIME_ZONE, 1);
         assertThat(mController.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void autoTimeZoneNotSupported_notEnable() {
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* autoSupported= */false, /* autoEnabled= */false);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
+        mController = new AutoTimeZonePreferenceController(
+                mContext, null /* callback */, false /* fromSUW */);
+
+        assertThat(mController.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void testIsEnabled_shouldReadFromTimeManagerConfig() {
+        mController = new AutoTimeZonePreferenceController(
+                mContext, null /* callback */, false /* fromSUW */);
+
+        {
+            // Disabled
+            TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                    /* autoSupported= */true, /* autoEnabled= */false);
+            when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
+            assertThat(mController.isEnabled()).isFalse();
+        }
+
+        {
+            // Enabled
+            TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                    /* autoSupported= */true, /* autoEnabled= */true);
+            when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
+            assertThat(mController.isEnabled()).isTrue();
+        }
     }
 
     @Test
     public void updatePreferenceChange_prefIsChecked_shouldUpdatePreferenceAndNotifyCallback() {
-        mController =
-            new AutoTimeZonePreferenceController(mContext, mCallback, false /* fromSUW */);
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* autoSupported= */true, /* autoEnabled= */false);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+        when(mTimeManager.updateTimeZoneConfiguration(Mockito.any())).thenReturn(true);
 
-        mController.onPreferenceChange(mPreference, true);
+        mController = new AutoTimeZonePreferenceController(
+                mContext, mCallback, false /* fromSUW */);
+
+        assertThat(mController.onPreferenceChange(mPreference, true)).isTrue();
+        verify(mCallback).updateTimeAndDateDisplay(mContext);
+
+        // Check the service was asked to change the configuration correctly.
+        TimeZoneConfiguration timeZoneConfiguration = new TimeZoneConfiguration.Builder()
+                .setAutoDetectionEnabled(true)
+                .build();
+        verify(mTimeManager).updateTimeZoneConfiguration(timeZoneConfiguration);
+
+        // Update the mTimeManager mock so that it now returns the expected updated config.
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfigAfterUpdate =
+                createCapabilitiesAndConfig(/* autoSupported= */true, /* autoEnabled= */true);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig())
+                .thenReturn(capabilitiesAndConfigAfterUpdate);
 
         assertThat(mController.isEnabled()).isTrue();
-        verify(mCallback).updateTimeAndDateDisplay(mContext);
     }
 
     @Test
     public void updatePreferenceChange_prefIsUnchecked_shouldUpdatePreferenceAndNotifyCallback() {
-        mController =
-            new AutoTimeZonePreferenceController(mContext, mCallback, false /* fromSUW */);
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* autoSupported= */true, /* autoEnabled= */true);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+        when(mTimeManager.updateTimeZoneConfiguration(Mockito.any())).thenReturn(true);
 
-        mController.onPreferenceChange(mPreference, false);
+        mController = new AutoTimeZonePreferenceController(
+                mContext, mCallback, false /* fromSUW */);
+
+        assertThat(mController.onPreferenceChange(mPreference, false)).isTrue();
+        verify(mCallback).updateTimeAndDateDisplay(mContext);
+
+        // Check the service was asked to change the configuration correctly.
+        TimeZoneConfiguration timeZoneConfiguration = new TimeZoneConfiguration.Builder()
+                .setAutoDetectionEnabled(false)
+                .build();
+        verify(mTimeManager).updateTimeZoneConfiguration(timeZoneConfiguration);
+
+        // Update the mTimeManager mock so that it now returns the expected updated config.
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfigAfterUpdate =
+                createCapabilitiesAndConfig(/* autoSupported= */true, /* autoEnabled= */false);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig())
+                .thenReturn(capabilitiesAndConfigAfterUpdate);
 
         assertThat(mController.isEnabled()).isFalse();
-        verify(mCallback).updateTimeAndDateDisplay(mContext);
+    }
+
+    private static TimeZoneCapabilitiesAndConfig createCapabilitiesAndConfig(
+            boolean autoSupported, boolean autoEnabled) {
+        int configureAutoDetectionEnabledCapability =
+                autoSupported ? Capabilities.CAPABILITY_POSSESSED
+                        : Capabilities.CAPABILITY_NOT_SUPPORTED;
+        TimeZoneCapabilities capabilities = new TimeZoneCapabilities.Builder(UserHandle.SYSTEM)
+                .setConfigureAutoDetectionEnabledCapability(configureAutoDetectionEnabledCapability)
+                .setConfigureGeoDetectionEnabledCapability(Capabilities.CAPABILITY_NOT_SUPPORTED)
+                .setSuggestManualTimeZoneCapability(Capabilities.CAPABILITY_POSSESSED)
+                .build();
+        TimeZoneConfiguration config = new TimeZoneConfiguration.Builder()
+                .setAutoDetectionEnabled(autoEnabled)
+                .setGeoDetectionEnabled(false)
+                .build();
+        return new TimeZoneCapabilitiesAndConfig(capabilities, config);
     }
 }
