@@ -82,6 +82,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.users.EditUserInfoController;
 import com.android.settingslib.users.UserCreatingDialog;
 import com.android.settingslib.utils.ThreadUtils;
@@ -132,6 +133,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_GUEST_EXIT = "guest_exit";
     private static final String KEY_REMOVE_GUEST_ON_EXIT = "remove_guest_on_exit";
     private static final String KEY_GUEST_USER_CATEGORY = "guest_user_category";
+    private static final String KEY_ALLOW_MULTIPLE_USERS = "allow_multiple_users";
 
     private static final String SETTING_GUEST_HAS_LOGGED_IN = "systemui.guest_has_logged_in";
 
@@ -1715,6 +1717,27 @@ public class UserSettings extends SettingsPreferenceFragment
                 protected boolean isPageSearchEnabled(Context context) {
                     final UserCapabilities userCaps = UserCapabilities.create(context);
                     return userCaps.mEnabled;
+                }
+
+                @Override
+                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
+                        boolean enabled) {
+                    final List<SearchIndexableRaw> rawData = new ArrayList<>();
+
+                    SearchIndexableRaw allowMultipleUsersResult = new SearchIndexableRaw(context);
+
+                    allowMultipleUsersResult.key = KEY_ALLOW_MULTIPLE_USERS;
+                    allowMultipleUsersResult.title =
+                            context.getString(R.string.multiple_users_main_switch_title);
+                    allowMultipleUsersResult.keywords =
+                            context.getString(R.string.multiple_users_main_switch_keywords);
+                    allowMultipleUsersResult.screenTitle =
+                            context.getString(R.string.user_settings_title);
+                    allowMultipleUsersResult.className =
+                            MultiUserSwitchBarController.class.getName();
+
+                    rawData.add(allowMultipleUsersResult);
+                    return rawData;
                 }
 
                 @Override
