@@ -4621,13 +4621,6 @@
 
         <activity android:name=".spa.SpaActivity" android:exported="false"/>
         <activity android:name=".spa.SpaBridgeActivity" android:exported="false"/>
-        <activity android:name=".spa.SpaDebugActivity" android:exported="false"/>
-        <provider
-            android:name=".spa.SpaEntryProvider"
-            android:authorities="com.android.settings.spa.provider"
-            android:enabled="true"
-            android:exported="false">
-        </provider>
 
         <activity-alias android:name="UsageStatsActivity"
                         android:exported="true"

@@ -26,7 +26,9 @@ import androidx.window.embedding.SplitController;
 
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.homepage.SettingsHomepageActivity;
+import com.android.settings.spa.SettingsSpaEnvironment;
 import com.android.settingslib.applications.AppIconCacheManager;
+import com.android.settingslib.spa.framework.common.SpaEnvironmentFactory;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -41,6 +43,9 @@ public class SettingsApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        // Set Spa environment.
+        setSpaEnvironment();
+
         if (FeatureFlagUtils.isEnabled(this, FeatureFlagUtils.SETTINGS_SUPPORT_LARGE_SCREEN)
                 && SplitController.getInstance().isSplitSupported()) {
             if (WizardManagerHelper.isUserSetupComplete(this)) {
@@ -49,6 +54,14 @@ public class SettingsApplication extends Application {
                 new DeviceProvisionedObserver().registerContentObserver();
             }
         }
+    }
+
+    /**
+     * Set the spa environment instance.
+     * Override this function to set different spa environment for different Settings app.
+     */
+    protected void setSpaEnvironment() {
+        SpaEnvironmentFactory.INSTANCE.setInstance(new SettingsSpaEnvironment());
     }
 
     public void setHomeActivity(SettingsHomepageActivity homeActivity) {
