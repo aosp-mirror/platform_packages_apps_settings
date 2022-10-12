@@ -215,10 +215,10 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
-    public void testLoadSlice_cachedEntryRemovedOnBuild() {
+    public void testLoadSlice_cachedEntryRemovedOnUnpinned() {
         SliceData data = getMockData();
         mProvider.mSliceWeakDataCache.put(data.getUri(), data);
-        mProvider.onBindSlice(data.getUri());
+        mProvider.onSliceUnpinned(data.getUri());
         SliceTestUtils.insertSliceToDb(mContext, data.getKey());
 
         SliceData cachedData = mProvider.mSliceWeakDataCache.get(data.getUri());
