@@ -18,14 +18,19 @@ package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.res.Resources;
 import android.media.AudioManager;
 import android.os.Vibrator;
+import android.service.notification.NotificationListenerService;
 import android.telephony.TelephonyManager;
+
+import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,8 +56,13 @@ public class RingVolumePreferenceControllerTest {
     private NotificationManager mNotificationManager;
     @Mock
     private ComponentName mSuppressor;
+    @Mock
+    private Resources mResources;
+    @Mock
+    private VolumeSeekBarPreference mPreference;
 
     private Context mContext;
+
     private RingVolumePreferenceController mController;
 
     @Before
@@ -63,8 +73,9 @@ public class RingVolumePreferenceControllerTest {
         shadowContext.setSystemService(Context.AUDIO_SERVICE, mAudioManager);
         shadowContext.setSystemService(Context.VIBRATOR_SERVICE, mVibrator);
         shadowContext.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
         when(mNotificationManager.getEffectsSuppressor()).thenReturn(mSuppressor);
+        when(mContext.getResources()).thenReturn(mResources);
         mController = new RingVolumePreferenceController(mContext);
         mController.setAudioHelper(mHelper);
     }
@@ -109,4 +120,92 @@ public class RingVolumePreferenceControllerTest {
     public void isPublicSlice_returnTrue() {
         assertThat(mController.isPublicSlice()).isTrue();
     }
+
+    // todo: verify that the title change is displayed, by examining the underlying preference
+    @Test
+    public void ringNotificationStreamsNotAliased_sliderTitleSetToRingOnly() {
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_alias_ring_notif_stream_types))
+                .thenReturn(false);
+        final RingVolumePreferenceController controller =
+                new RingVolumePreferenceController(mContext);
+
+        int expectedTitleId = R.string.separate_ring_volume_option_title;
+
+        assertThat(controller.mTitleId).isEqualTo(expectedTitleId);
+    }
+
+    @Test
+    public void ringNotificationStreamsAliased_sliderTitleIncludesBothRingNotification() {
+
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_alias_ring_notif_stream_types)).thenReturn(true);
+        final RingVolumePreferenceController control = new RingVolumePreferenceController(mContext);
+
+        int expectedTitleId = R.string.ring_volume_option_title;
+
+        assertThat(control.mTitleId).isEqualTo(expectedTitleId);
+    }
+
+    @Test
+    public void setHintsRing_aliased_Matches() {
+        assertThat(mController.hintsMatch(
+                NotificationListenerService.HINT_HOST_DISABLE_CALL_EFFECTS, true)).isTrue();
+    }
+
+    @Test
+    public void setHintsRingNotification_aliased_Matches() {
+        assertThat(mController.hintsMatch(NotificationListenerService.HINT_HOST_DISABLE_EFFECTS,
+                true)).isTrue();
+    }
+
+    @Test
+    public void setHintNotification_aliased_Matches() {
+        assertThat(mController
+                .hintsMatch(NotificationListenerService.HINT_HOST_DISABLE_NOTIFICATION_EFFECTS,
+                true)).isTrue();
+    }
+
+    @Test
+    public void setHintsRing_unaliased_Matches() {
+        assertThat(mController.hintsMatch(
+                NotificationListenerService.HINT_HOST_DISABLE_CALL_EFFECTS, false)).isTrue();
+    }
+
+    @Test
+    public void setHintsRingNotification_unaliased_Matches() {
+        assertThat(mController.hintsMatch(NotificationListenerService.HINT_HOST_DISABLE_EFFECTS,
+                false)).isTrue();
+    }
+
+    @Test
+    public void setHintNotification_unaliased_doesNotMatch() {
+        assertThat(mController
+                .hintsMatch(NotificationListenerService.HINT_HOST_DISABLE_NOTIFICATION_EFFECTS,
+                        false)).isFalse();
+    }
+
+    @Test
+    public void setRingerModeToVibrate_butNoVibratorAvailable_iconIsSilent() {
+        when(mHelper.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_VIBRATE);
+
+        mController.setPreference(mPreference);
+        mController.setVibrator(null);
+        mController.updateRingerMode();
+
+        assertThat(mController.getMuteIcon()).isEqualTo(mController.mSilentIconId);
+    }
+
+    @Test
+    public void setRingerModeToVibrate_VibratorAvailable_iconIsVibrate() {
+        when(mHelper.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_VIBRATE);
+        when(mVibrator.hasVibrator()).thenReturn(true);
+
+        mController.setPreference(mPreference);
+        mController.setVibrator(mVibrator);
+        mController.updateRingerMode();
+
+        assertThat(mController.getMuteIcon()).isEqualTo(mController.mVibrateIconId);
+    }
+
 }
