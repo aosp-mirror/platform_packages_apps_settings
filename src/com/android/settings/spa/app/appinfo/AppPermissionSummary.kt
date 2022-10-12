@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.spa.app.appsettings
+package com.android.settings.spa.app.appinfo
 
 import android.content.Context
 import android.content.pm.ApplicationInfo

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.spa.app.appsettings
+package com.android.settings.spa.app.appinfo
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
@@ -34,7 +34,7 @@ import com.android.settingslib.spaprivileged.model.app.isDisallowControl
 import com.android.settingslib.spaprivileged.model.app.userId
 
 @Composable
-fun AppSettingsMoreOptions(packageInfoPresenter: PackageInfoPresenter, app: ApplicationInfo) {
+fun AppInfoSettingsMoreOptions(packageInfoPresenter: PackageInfoPresenter, app: ApplicationInfo) {
     val context = LocalContext.current
     // We don't allow uninstalling update for DO/PO if it's a system app, because it will clear data
     // on all users. We also don't allow uninstalling for all users if it's DO/PO for any user.
