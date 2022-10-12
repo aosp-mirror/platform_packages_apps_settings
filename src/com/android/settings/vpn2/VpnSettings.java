@@ -26,7 +26,6 @@ import android.app.AppOpsManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
@@ -43,7 +42,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.security.Credentials;
 import android.security.LegacyVpnProfileStore;
-import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
@@ -54,7 +52,6 @@ import android.view.MenuItem;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.GuardedBy;
 import com.android.internal.net.LegacyVpnInfo;
@@ -62,7 +59,6 @@ import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.GearPreference;
 import com.android.settings.widget.GearPreference.OnGearClickListener;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -83,12 +79,9 @@ import java.util.Set;
 public class VpnSettings extends RestrictedSettingsFragment implements
         Handler.Callback, Preference.OnPreferenceClickListener {
     private static final String LOG_TAG = "VpnSettings";
-    private static final boolean DEBUG = Log.isLoggable(LOG_TAG, Log.DEBUG);
 
     private static final int RESCAN_MESSAGE = 0;
     private static final int RESCAN_INTERVAL_MS = 1000;
-    private static final String ADVANCED_VPN_GROUP_KEY = "advanced_vpn_group";
-    private static final String VPN_GROUP_KEY = "vpn_group";
 
     private static final NetworkRequest VPN_REQUEST = new NetworkRequest.Builder()
             .removeCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)
@@ -109,9 +102,6 @@ public class VpnSettings extends RestrictedSettingsFragment implements
     private LegacyVpnInfo mConnectedLegacyVpn;
 
     private boolean mUnavailable;
-    private AdvancedVpnFeatureProvider mFeatureProvider;
-    private PreferenceScreen mPreferenceScreen;
-    private boolean mIsAdvancedVpnSupported;
 
     public VpnSettings() {
         super(UserManager.DISALLOW_CONFIG_VPN);
@@ -129,14 +119,11 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
         mConnectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         mVpnManager = (VpnManager) getSystemService(Context.VPN_MANAGEMENT_SERVICE);
-        mFeatureProvider = FeatureFactory.getFactory(getContext()).getAdvancedVpnFeatureProvider();
-        mIsAdvancedVpnSupported = mFeatureProvider.isAdvancedVpnSupported(getContext());
 
         mUnavailable = isUiRestricted();
         setHasOptionsMenu(!mUnavailable);
 
         addPreferencesFromResource(R.xml.vpn_settings2);
-        mPreferenceScreen = getPreferenceScreen();
     }
 
     @Override
@@ -242,8 +229,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
 
         // Run heavy RPCs before switching to UI thread
         final List<VpnProfile> vpnProfiles = loadVpnProfiles();
-        final List<AppVpnInfo> vpnApps = getVpnApps(context, /* includeProfiles */ true,
-                mFeatureProvider);
+        final List<AppVpnInfo> vpnApps = getVpnApps(context, /* includeProfiles */ true);
 
         final Map<String, LegacyVpnInfo> connectedLegacyVpns = getConnectedLegacyVpns();
         final Set<AppVpnInfo> connectedAppVpns = getConnectedAppVpns();
@@ -279,7 +265,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
 
         private final VpnSettings mSettings;
 
-        UpdatePreferences(VpnSettings settings) {
+        public UpdatePreferences(VpnSettings settings) {
             mSettings = settings;
         }
 
@@ -346,14 +332,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
             }
 
             // Trim out deleted VPN preferences
-            if (DEBUG) {
-                Log.d(LOG_TAG, "isAdvancedVpnSupported() : " + mSettings.mIsAdvancedVpnSupported);
-            }
-            if (mSettings.mIsAdvancedVpnSupported) {
-                mSettings.setShownAdvancedPreferences(updates);
-            } else {
-                mSettings.setShownPreferences(updates);
-            }
+            mSettings.setShownPreferences(updates);
         }
     }
 
@@ -364,61 +343,12 @@ public class VpnSettings extends RestrictedSettingsFragment implements
 
     @VisibleForTesting @UiThread
     public void setShownPreferences(final Collection<Preference> updates) {
-        retainAllPreference(updates);
-
-        final PreferenceGroup vpnGroup = mPreferenceScreen;
-        updatePreferenceGroup(vpnGroup, updates);
-
-        // Show all new preferences on the screen
-        for (Preference pref : updates) {
-            vpnGroup.addPreference(pref);
-        }
-    }
-
-    @VisibleForTesting @UiThread
-    void setShownAdvancedPreferences(final Collection<Preference> updates) {
-        retainAllPreference(updates);
-
-        PreferenceGroup advancedVpnGroup = mPreferenceScreen.findPreference(ADVANCED_VPN_GROUP_KEY);
-        PreferenceGroup vpnGroup = mPreferenceScreen.findPreference(VPN_GROUP_KEY);
-        advancedVpnGroup.setTitle(
-                mFeatureProvider.getAdvancedVpnPreferenceGroupTitle(getContext()));
-        vpnGroup.setTitle(mFeatureProvider.getVpnPreferenceGroupTitle(getContext()));
-        updatePreferenceGroup(advancedVpnGroup, updates);
-        updatePreferenceGroup(vpnGroup, updates);
-
-        // Show all new preferences on the screen
-        for (Preference pref : updates) {
-            String packageName = "";
-            if (pref instanceof LegacyVpnPreference) {
-                LegacyVpnPreference legacyPref = (LegacyVpnPreference) pref;
-                packageName = legacyPref.getPackageName();
-            } else if (pref instanceof AppPreference) {
-                AppPreference appPref = (AppPreference) pref;
-                packageName = appPref.getPackageName();
-            }
-            if (DEBUG) {
-                Log.d(LOG_TAG, "setShownAdvancedPreferences() package name : " + packageName);
-            }
-            if (TextUtils.equals(packageName, mFeatureProvider.getAdvancedVpnPackageName())) {
-                advancedVpnGroup.addPreference(pref);
-            } else {
-                vpnGroup.addPreference(pref);
-            }
-        }
-
-        advancedVpnGroup.setVisible(advancedVpnGroup.getPreferenceCount() > 0);
-        vpnGroup.setVisible(vpnGroup.getPreferenceCount() > 0);
-    }
-
-    private void retainAllPreference(Collection<Preference> updates) {
         mLegacyVpnPreferences.values().retainAll(updates);
         mAppPreferences.values().retainAll(updates);
-    }
 
-    private void updatePreferenceGroup(PreferenceGroup vpnGroup, Collection<Preference> updates) {
         // Change {@param updates} in-place to only contain new preferences that were not already
         // added to the preference screen.
+        final PreferenceGroup vpnGroup = getPreferenceScreen();
         for (int i = vpnGroup.getPreferenceCount() - 1; i >= 0; i--) {
             Preference p = vpnGroup.getPreference(i);
             if (updates.contains(p)) {
@@ -426,6 +356,11 @@ public class VpnSettings extends RestrictedSettingsFragment implements
             } else {
                 vpnGroup.removePreference(p);
             }
+        }
+
+        // Show any new preferences on the screen
+        for (Preference pref : updates) {
+            vpnGroup.addPreference(pref);
         }
     }
 
@@ -448,16 +383,14 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         } else if (preference instanceof AppPreference) {
             AppPreference pref = (AppPreference) preference;
             boolean connected = (pref.getState() == AppPreference.STATE_CONNECTED);
-            String vpnPackageName = pref.getPackageName();
 
-            if ((!connected) || (isAdvancedVpn(mFeatureProvider, vpnPackageName, getContext())
-                    && !mFeatureProvider.isDisconnectDialogEnabled())) {
+            if (!connected) {
                 try {
                     UserHandle user = UserHandle.of(pref.getUserId());
-                    Context userContext = getContext().createPackageContextAsUser(
-                            getContext().getPackageName(), 0 /* flags */, user);
+                    Context userContext = getActivity().createPackageContextAsUser(
+                            getActivity().getPackageName(), 0 /* flags */, user);
                     PackageManager pm = userContext.getPackageManager();
-                    Intent appIntent = pm.getLaunchIntentForPackage(vpnPackageName);
+                    Intent appIntent = pm.getLaunchIntentForPackage(pref.getPackageName());
                     if (appIntent != null) {
                         userContext.startActivityAsUser(appIntent, user);
                         return true;
@@ -537,30 +470,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
             pref.setOnPreferenceClickListener(this);
             mAppPreferences.put(app, pref);
         }
-        enableAdvancedVpnGearIconIfNecessary(pref);
         return pref;
-    }
-
-    private void enableAdvancedVpnGearIconIfNecessary(AppPreference pref) {
-        Context context = getContext();
-        if (!isAdvancedVpn(mFeatureProvider, pref.getPackageName(), context)) {
-            return;
-        }
-
-        boolean isEnabled = false;
-        AppOpsManager appOpsManager = getContext().getSystemService(AppOpsManager.class);
-        List<AppOpsManager.PackageOps> apps =
-                appOpsManager.getPackagesForOps(
-                        new int[] {OP_ACTIVATE_VPN, OP_ACTIVATE_PLATFORM_VPN});
-        if (apps != null) {
-            for (AppOpsManager.PackageOps pkg : apps) {
-                if (isAdvancedVpn(mFeatureProvider, pkg.getPackageName(), context)) {
-                    isEnabled = true;
-                    break;
-                }
-            }
-        }
-        pref.setOnGearClickListener(isEnabled ? mGearListener : null);
     }
 
     @WorkerThread
@@ -598,15 +508,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         return result;
     }
 
-    static List<AppVpnInfo> getVpnApps(Context context, boolean includeProfiles,
-            AdvancedVpnFeatureProvider featureProvider) {
-        return getVpnApps(context, includeProfiles, featureProvider,
-                context.getSystemService(AppOpsManager.class));
-    }
-
-    @VisibleForTesting
-    static List<AppVpnInfo> getVpnApps(Context context, boolean includeProfiles,
-            AdvancedVpnFeatureProvider featureProvider, AppOpsManager aom) {
+    static List<AppVpnInfo> getVpnApps(Context context, boolean includeProfiles) {
         List<AppVpnInfo> result = Lists.newArrayList();
 
         final Set<Integer> profileIds;
@@ -619,19 +521,8 @@ public class VpnSettings extends RestrictedSettingsFragment implements
             profileIds = Collections.singleton(UserHandle.myUserId());
         }
 
-        if (featureProvider.isAdvancedVpnSupported(context)) {
-            PackageManager pm = context.getPackageManager();
-            try {
-                ApplicationInfo appInfo =
-                        pm.getApplicationInfo(
-                                featureProvider.getAdvancedVpnPackageName(), /* flags= */ 0);
-                int userId = UserHandle.getUserId(appInfo.uid);
-                result.add(new AppVpnInfo(userId, featureProvider.getAdvancedVpnPackageName()));
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.e(LOG_TAG, "Advanced VPN package name not found.", e);
-            }
-        }
-
+        // Fetch VPN-enabled apps from AppOps.
+        AppOpsManager aom = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         List<AppOpsManager.PackageOps> apps =
                 aom.getPackagesForOps(new int[] {OP_ACTIVATE_VPN, OP_ACTIVATE_PLATFORM_VPN});
         if (apps != null) {
@@ -639,9 +530,6 @@ public class VpnSettings extends RestrictedSettingsFragment implements
                 int userId = UserHandle.getUserId(pkg.getUid());
                 if (!profileIds.contains(userId)) {
                     // Skip packages for users outside of our profile group.
-                    continue;
-                }
-                if (isAdvancedVpn(featureProvider, pkg.getPackageName(), context)) {
                     continue;
                 }
                 // Look for a MODE_ALLOWED permission to activate VPN.
@@ -662,12 +550,6 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         return result;
     }
 
-    private static boolean isAdvancedVpn(AdvancedVpnFeatureProvider featureProvider,
-            String packageName, Context context) {
-        return featureProvider.isAdvancedVpnSupported(context)
-                && TextUtils.equals(packageName, featureProvider.getAdvancedVpnPackageName());
-    }
-
     private static List<VpnProfile> loadVpnProfiles() {
         final ArrayList<VpnProfile> result = Lists.newArrayList();
 
@@ -679,11 +561,5 @@ public class VpnSettings extends RestrictedSettingsFragment implements
             }
         }
         return result;
-    }
-
-    @VisibleForTesting
-    void init(PreferenceScreen preferenceScreen, AdvancedVpnFeatureProvider featureProvider) {
-        mPreferenceScreen = preferenceScreen;
-        mFeatureProvider = featureProvider;
     }
 }
