@@ -36,7 +36,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.test.InstrumentationRegistry;
 
-import com.android.settings.wifi.ShadowRestrictedPreference;
 import com.android.settings.wifi.WifiEntryPreference;
 import com.android.wifitrackerlib.SavedNetworkTracker;
 import com.android.wifitrackerlib.WifiEntry;
@@ -46,12 +45,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowRestrictedPreference.class)
 public class WifiNetworkListFragmentTest {
     private WifiNetworkListFragment mWifiNetworkListFragment;
     private Context mContext;
