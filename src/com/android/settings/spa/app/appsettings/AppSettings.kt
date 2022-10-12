@@ -90,6 +90,8 @@ private fun AppSettings(packageInfoPresenter: PackageInfoPresenter) {
 
         AppButtons(packageInfoPresenter)
 
+        AppPermissionPreference(app)
+
         Category(title = stringResource(R.string.advanced_apps)) {
             DisplayOverOtherAppsAppListProvider.InfoPageEntryItem(app)
             ModifySystemSettingsAppListProvider.InfoPageEntryItem(app)
