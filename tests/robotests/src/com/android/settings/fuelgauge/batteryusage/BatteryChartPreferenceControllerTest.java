@@ -49,6 +49,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -172,6 +173,7 @@ public final class BatteryChartPreferenceControllerTest {
         verify(mAppListGroup).removeAll();
     }
 
+    @Ignore
     @Test
     public void setBatteryChartViewModel_6Hours() {
         reset(mHourlyChartView);
@@ -190,6 +192,7 @@ public final class BatteryChartPreferenceControllerTest {
                 mBatteryChartPreferenceController.mHourlyChartLabelTextGenerator));
     }
 
+    @Ignore
     @Test
     public void setBatteryChartViewModel_60Hours() {
         BatteryChartViewModel expectedDailyViewModel = new BatteryChartViewModel(
@@ -289,6 +292,7 @@ public final class BatteryChartPreferenceControllerTest {
                 mBatteryChartPreferenceController.mHourlyChartLabelTextGenerator));
     }
 
+    @Ignore
     @Test
     public void refreshUi_normalCase_returnTrue() {
         mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
@@ -313,6 +317,7 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(mBatteryChartPreferenceController.refreshUi()).isFalse();
     }
 
+    @Ignore
     @Test
     public void removeAndCacheAllPrefs_emptyContent_ignoreRemoveAll() {
         mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
@@ -323,6 +328,7 @@ public final class BatteryChartPreferenceControllerTest {
         verify(mAppListGroup, never()).removeAll();
     }
 
+    @Ignore
     @Test
     public void removeAndCacheAllPrefs_buildCacheAndRemoveAllPreference() {
         mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
@@ -583,6 +589,7 @@ public final class BatteryChartPreferenceControllerTest {
                 .isEqualTo("System usage since last full charge");
     }
 
+    @Ignore
     @Test
     public void selectedSlotText_selectAllDaysAllHours_returnNull() {
         mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(60));
@@ -594,6 +601,7 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(null);
     }
 
+    @Ignore
     @Test
     public void selectedSlotText_onlyOneDayDataSelectAllHours_returnNull() {
         mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
@@ -604,6 +612,7 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(null);
     }
 
+    @Ignore
     @Test
     public void selectedSlotText_selectADayAllHours_onlyDayText() {
         mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(60));
@@ -614,6 +623,7 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo("Sunday");
     }
 
+    @Ignore
     @Test
     public void selectedSlotText_onlyOneDayDataSelectAnHour_onlyHourText() {
         mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
@@ -624,6 +634,7 @@ public final class BatteryChartPreferenceControllerTest {
                 "10 AM - 12 PM");
     }
 
+    @Ignore
     @Test
     public void selectedSlotText_SelectADayAnHour_dayAndHourText() {
         mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(60));
@@ -634,6 +645,7 @@ public final class BatteryChartPreferenceControllerTest {
                 "Sunday 4 PM - 6 PM");
     }
 
+    @Ignore
     @Test
     public void onSaveInstanceState_restoreSelectedIndexAndExpandState() {
         final int expectedDailyIndex = 1;

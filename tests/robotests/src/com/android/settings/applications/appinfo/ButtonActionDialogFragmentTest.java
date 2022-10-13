@@ -35,6 +35,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -72,6 +73,7 @@ public class ButtonActionDialogFragmentTest {
         verify(mTargetFragment).handleDialogClick(anyInt());
     }
 
+    @Ignore
     @Test
     public void testOnClick_forceStop_dismissDialog() {
         ButtonActionDialogFragment fragment =
