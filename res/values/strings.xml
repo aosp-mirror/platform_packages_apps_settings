@@ -4248,12 +4248,6 @@
     <string name="accessibility_turn_screen_darker_title">Turn screen darker</string>
     <!-- Title for the accessibility preference category of interaction control services and settings. [CHAR LIMIT=50] -->
     <string name="interaction_control_category_title">Interaction controls</string>
-    <!-- Title for the accessibility Software Cursor settings . [CHAR LIMIT=50] -->
-    <string name="accessibility_software_cursor_title" translatable="false">Software Cursor</string>
-    <!-- Summary for the accessibility Software Cursor settings . [CHAR LIMIT=NONE] -->
-    <string name="accessibility_software_cursor_summary" translatable="false">Control your Android device using an on screen cursor</string>
-    <!-- Title for the accessibility Software Cursor settings screen. -->
-    <string name="accessibility_screen_software_cursor_title" translatable="false">Software Cursor</string>
     <!-- Title for the accessibility tap assistance page. [CHAR LIMIT=50] -->
     <string name="accessibility_tap_assistance_title">Timing controls</string>
     <!-- Title for the accessibility system controls page. [CHAR LIMIT=50] -->
@@ -4971,8 +4965,6 @@
     <string name="keywords_accessibility">Ease of use, ease of access, assistance, assistive</string>
     <!-- List of synonyms used in the settings search bar to find the “Magnification”. [CHAR LIMIT=NONE] -->
     <string name="keywords_magnification">Window Magnifier, Zoom, Magnification, Low vision, Enlarge, make bigger</string>
-    <!-- List of synonyms used in the settings search bar to find “Software Cursor". [CHAR LIMIT=NONE] -->
-    <string name="keywords_software_cursor" translatable="false">Cursor, Trackpad, Software Cursor, Mouse</string>
     <!-- List of synonyms used in the settings search bar to find the “TalkBack”. [CHAR LIMIT=NONE] -->
     <string name="keywords_talkback"></string>
     <!-- List of synonyms used in the settings search bar to find the “Live Caption”. [CHAR LIMIT=NONE] -->
@@ -7195,8 +7187,11 @@
     <!-- Sound: Title for the option managing alarm volume. [CHAR LIMIT=30] -->
     <string name="alarm_volume_option_title">Alarm volume</string>
 
-    <!-- Sound: Title for the option managing ring volume. [CHAR LIMIT=30] -->
+    <!-- Sound: Title for the option managing ring & notification volume. [CHAR LIMIT=30] -->
     <string name="ring_volume_option_title">Ring &amp; notification volume</string>
+
+    <!-- Sound: Title for the option managing ring volume. [CHAR LIMIT=30] -->
+    <string name="separate_ring_volume_option_title">Ring volume</string>
 
     <!-- Sound: Title for the option managing notification volume. [CHAR LIMIT=30] -->
     <string name="notification_volume_option_title">Notification volume</string>
@@ -9286,7 +9281,7 @@
     <string name="android_version_pending_update_summary">Update available</string>
 
     <!-- Title for dialog displayed when user taps a setting on their phone that's blocked by their IT admin [CHAR LIMIT=30 BACKUP_MESSAGE_ID:4867639270211833535] -->
-    <string name="disabled_by_policy_title">Blocked by your IT admin</string>
+    <string name="disabled_by_policy_title">Blocked by work policy</string>
     <!-- Title for dialog displayed to tell user that changing volume on their phone is blocked by their IT admin [CHAR LIMIT=50] -->
     <string name="disabled_by_policy_title_adjust_volume">Can’t change volume</string>
     <!-- Title for dialog displayed to tell user that outgoing calls are blocked by their IT admin [CHAR LIMIT=50] -->
@@ -9306,7 +9301,7 @@
     <!-- Dialog content shown when parental consent is required for the child to set up biometric authentication. [CHAR LIMIT=NONE] -->
     <string name="disabled_by_policy_content_biometric_parental_consent">Hand the phone to your parent to start setting this up</string>
     <!-- Shown when the user tries to change phone settings that are blocked by their IT admin [CHAR LIMIT=200] -->
-    <string name="default_admin_support_msg">If you have questions, contact your IT admin</string>
+    <string name="default_admin_support_msg">For more info, contact your IT admin</string>
     <!-- Shown in dialog to allow user to see more information about the device admin [CHAR LIMIT=30] -->
     <string name="admin_support_more_info">More details</string>
     <!-- Shown in admin details page to warn user about policies the admin can set in a work profile. [CHAR LIMIT=NONE] -->

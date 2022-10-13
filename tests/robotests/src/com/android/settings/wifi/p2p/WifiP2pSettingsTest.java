@@ -38,8 +38,9 @@ import android.net.wifi.p2p.WifiP2pGroupList;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
+
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -142,7 +143,8 @@ public class WifiP2pSettingsTest {
     }
 
     @Test
-    public void networkInfo_afterFragmentAttached_shouldBeRequested() {
+    public void networkInfo_afterOnDeviceInfoAvailable_shouldBeRequested() {
+        mFragment.onDeviceInfoAvailable(mock(WifiP2pDevice.class));
         verify(mWifiP2pManager, times(1)).requestNetworkInfo(any(), any());
     }
 
@@ -328,19 +330,19 @@ public class WifiP2pSettingsTest {
     }
 
     @Test
-    public void peerDiscovery_whenOnPause_shouldStop() {
-        mFragment.onPause();
+    public void peerDiscovery_whenOnStop_shouldStop() {
+        mFragment.onStop();
 
         verify(mWifiP2pManager, times(1)).stopPeerDiscovery(any(), any());
     }
 
     @Test
-    public void peerDiscovery_whenOnResume_shouldInitChannelAgain() {
-        mFragment.onPause();
+    public void peerDiscovery_whenOnStart_shouldInitChannelAgain() {
+        mFragment.onStop();
 
         verify(mWifiP2pManager, times(1)).stopPeerDiscovery(any(), any());
 
-        mFragment.onResume();
+        mFragment.onStart();
         assertThat(mFragment.mChannel).isNotNull();
     }
 

@@ -49,7 +49,7 @@ import org.mockito.Mockito.`when` as whenever
 
 @RunWith(RobolectricTestRunner::class)
 @Config(shadows = [ShadowPermissionsSummaryHelper::class])
-open class AppPermissionSummaryTest {
+class AppPermissionSummaryTest {
 
     @JvmField
     @Rule
@@ -75,8 +75,8 @@ open class AppPermissionSummaryTest {
     }
 
     @Test
-    open fun permissionsChangeListener() {
-        summaryLiveData.getOrAwaitValue() {
+    fun permissionsChangeListener() {
+        summaryLiveData.getOrAwaitValue {
             verify(packageManager).addOnPermissionsChangeListener(any())
             verify(packageManager, never()).removeOnPermissionsChangeListener(any())
         }
@@ -109,7 +109,7 @@ open class AppPermissionSummaryTest {
     }
 
     @Test
-    open fun onPermissionSummaryResult_hasRuntimePermission_shouldSetPermissionAsSummary() {
+    fun onPermissionSummaryResult_hasRuntimePermission_shouldSetPermissionAsSummary() {
         ShadowPermissionsSummaryHelper.requestedPermissionCount = 1
         ShadowPermissionsSummaryHelper.grantedGroupLabels = listOf(PERMISSION)
 
@@ -120,7 +120,7 @@ open class AppPermissionSummaryTest {
     }
 
     @Test
-    open fun onPermissionSummaryResult_hasAdditionalPermission_shouldSetAdditionalSummary() {
+    fun onPermissionSummaryResult_hasAdditionalPermission_shouldSetAdditionalSummary() {
         ShadowPermissionsSummaryHelper.requestedPermissionCount = 5
         ShadowPermissionsSummaryHelper.additionalGrantedPermissionCount = 2
         ShadowPermissionsSummaryHelper.grantedGroupLabels = listOf(PERMISSION)
