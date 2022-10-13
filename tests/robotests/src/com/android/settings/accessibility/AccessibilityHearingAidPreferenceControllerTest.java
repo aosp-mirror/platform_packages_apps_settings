@@ -46,6 +46,7 @@ import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.HapClientProfile;
+import com.android.settingslib.bluetooth.HearingAidInfo;
 import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
@@ -124,7 +125,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     @Test
     public void getSummary_connectedAshaHearingAidRightSide_connectedRightSideSummary() {
         when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
-                HearingAidProfile.DeviceSide.SIDE_RIGHT);
+                HearingAidInfo.DeviceSide.SIDE_RIGHT);
         when(mHearingAidProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
 
         mPreferenceController.onStart();
@@ -139,7 +140,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     @Test
     public void getSummary_connectedAshaHearingAidBothSide_connectedBothSideSummary() {
         when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
-                HearingAidProfile.DeviceSide.SIDE_LEFT);
+                HearingAidInfo.DeviceSide.SIDE_LEFT);
         when(mCachedSubBluetoothDevice.isConnected()).thenReturn(true);
         when(mCachedBluetoothDevice.getSubDevice()).thenReturn(mCachedSubBluetoothDevice);
         when(mHearingAidProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
@@ -154,9 +155,9 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     }
 
     @Test
-    public void getSummary_connectedLeAudioHearingAidOneSide_connectedOneSideSummary() {
+    public void getSummary_connectedLeAudioHearingAidLeftSide_connectedLeftSideSummary() {
         when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
-                HearingAidProfile.DeviceSide.SIDE_INVALID);
+                HearingAidInfo.DeviceSide.SIDE_LEFT);
         when(mCachedBluetoothDevice.getMemberDevice()).thenReturn(new HashSet<>());
         when(mHapClientProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
 
@@ -166,7 +167,39 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         sendIntent(intent);
 
         assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
-                "TEST_HEARING_AID_BT_DEVICE_NAME active")).isTrue();
+                "TEST_HEARING_AID_BT_DEVICE_NAME, left only")).isTrue();
+    }
+
+    @Test
+    public void getSummary_connectedLeAudioHearingAidRightSide_connectedRightSideSummary() {
+        when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
+                HearingAidInfo.DeviceSide.SIDE_RIGHT);
+        when(mCachedBluetoothDevice.getMemberDevice()).thenReturn(new HashSet<>());
+        when(mHapClientProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
+
+        mPreferenceController.onStart();
+        Intent intent = new Intent(BluetoothHapClient.ACTION_HAP_CONNECTION_STATE_CHANGED);
+        intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHapClient.STATE_CONNECTED);
+        sendIntent(intent);
+
+        assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
+                "TEST_HEARING_AID_BT_DEVICE_NAME, right only")).isTrue();
+    }
+
+    @Test
+    public void getSummary_connectedLeAudioHearingAidLeftAndRightSide_connectedSummary() {
+        when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
+                HearingAidInfo.DeviceSide.SIDE_LEFT_AND_RIGHT);
+        when(mCachedBluetoothDevice.getMemberDevice()).thenReturn(new HashSet<>());
+        when(mHapClientProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
+
+        mPreferenceController.onStart();
+        Intent intent = new Intent(BluetoothHapClient.ACTION_HAP_CONNECTION_STATE_CHANGED);
+        intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHapClient.STATE_CONNECTED);
+        sendIntent(intent);
+
+        assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
+                "TEST_HEARING_AID_BT_DEVICE_NAME, left and right")).isTrue();
     }
 
     @Test
@@ -187,7 +220,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     @Test
     public void getSummary_connectedMultipleHearingAids_connectedMultipleDevicesSummary() {
         when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
-                HearingAidProfile.DeviceSide.SIDE_LEFT);
+                HearingAidInfo.DeviceSide.SIDE_LEFT);
         when(mHearingAidProfile.getConnectedDevices()).thenReturn(
                 generateMultipleHearingAidDeviceList());
 
@@ -282,9 +315,9 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         final FragmentActivity mActivity = Robolectric.setupActivity(FragmentActivity.class);
         when(mCachedBluetoothDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedBluetoothDevice.getDeviceMode()).thenReturn(
-                HearingAidProfile.DeviceMode.MODE_BINAURAL);
+                HearingAidInfo.DeviceMode.MODE_BINAURAL);
         when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
-                HearingAidProfile.DeviceSide.SIDE_LEFT);
+                HearingAidInfo.DeviceSide.SIDE_LEFT);
         mPreferenceController.setFragmentManager(mActivity.getSupportFragmentManager());
 
         mPreferenceController.onActiveDeviceChanged(mCachedBluetoothDevice,
@@ -297,7 +330,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     @Test
     public void onServiceConnected_onHearingAidProfileConnected_updateSummary() {
         when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
-                HearingAidProfile.DeviceSide.SIDE_LEFT);
+                HearingAidInfo.DeviceSide.SIDE_LEFT);
         when(mHearingAidProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
 
         mPreferenceController.onStart();
@@ -310,14 +343,14 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     @Test
     public void onServiceConnected_onHapClientProfileConnected_updateSummary() {
         when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
-                HearingAidProfile.DeviceSide.SIDE_INVALID);
+                HearingAidInfo.DeviceSide.SIDE_RIGHT);
         when(mHapClientProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
 
         mPreferenceController.onStart();
         mPreferenceController.onServiceConnected();
 
         assertThat(mHearingAidPreference.getSummary().toString()).isEqualTo(
-                "TEST_HEARING_AID_BT_DEVICE_NAME active");
+                "TEST_HEARING_AID_BT_DEVICE_NAME, right only");
     }
 
     private void setupEnvironment() {
