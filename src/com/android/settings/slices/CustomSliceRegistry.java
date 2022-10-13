@@ -218,6 +218,16 @@ public class CustomSliceRegistry {
             .build();
 
     /**
+     * Full {@link Uri} for the Notification volume Slice.
+     */
+    public static final Uri VOLUME_NOTIFICATION_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("notification_volume")
+            .build();
+
+    /**
      * Full {@link Uri} for the all volume Slices.
      */
     public static final Uri VOLUME_SLICES_URI = new Uri.Builder()
