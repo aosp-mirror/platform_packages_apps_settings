@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.spa.app.appsettings
+package com.android.settings.spa.app.appinfo
 
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
@@ -42,8 +42,8 @@ import com.android.settingslib.spaprivileged.template.app.AppInfoProvider
 private const val PACKAGE_NAME = "packageName"
 private const val USER_ID = "userId"
 
-object AppSettingsProvider : SettingsPageProvider {
-    override val name = "AppSettings"
+object AppInfoSettingsProvider : SettingsPageProvider {
+    override val name = "AppInfoSettings"
 
     override val parameter = listOf(
         navArgument(PACKAGE_NAME) { type = NavType.StringType },
@@ -59,7 +59,7 @@ object AppSettingsProvider : SettingsPageProvider {
         val packageInfoPresenter = remember {
             PackageInfoPresenter(context, packageName, userId, coroutineScope)
         }
-        AppSettings(packageInfoPresenter)
+        AppInfoSettings(packageInfoPresenter)
         packageInfoPresenter.PackageRemoveDetector()
     }
 
@@ -67,7 +67,7 @@ object AppSettingsProvider : SettingsPageProvider {
     fun navigator(app: ApplicationInfo) = navigator(route = "$name/${app.toRoute()}")
 
     /**
-     * Gets the route to the App Settings page.
+     * Gets the route to the App Info Settings page.
      *
      * Expose route to enable enter from non-SPA pages.
      */
@@ -75,13 +75,13 @@ object AppSettingsProvider : SettingsPageProvider {
 }
 
 @Composable
-private fun AppSettings(packageInfoPresenter: PackageInfoPresenter) {
+private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
     val packageInfo = packageInfoPresenter.flow.collectAsState().value ?: return
     val app = packageInfo.applicationInfo
     RegularScaffold(
         title = stringResource(R.string.application_info_label),
         actions = {
-            AppSettingsMoreOptions(packageInfoPresenter, app)
+            AppInfoSettingsMoreOptions(packageInfoPresenter, app)
         }
     ) {
         val appInfoProvider = remember { AppInfoProvider(packageInfo) }

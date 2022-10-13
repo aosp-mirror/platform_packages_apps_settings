@@ -23,7 +23,7 @@ import android.util.FeatureFlagUtils;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.spa.SpaActivity;
-import com.android.settings.spa.app.appsettings.AppSettingsProvider;
+import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider;
 
 public class InstalledAppDetailsTop extends SettingsActivity {
 
@@ -35,7 +35,7 @@ public class InstalledAppDetailsTop extends SettingsActivity {
         }
         String packageName = super.getIntent().getData().getSchemeSpecificPart();
         SpaActivity.startSpaActivity(
-                this, AppSettingsProvider.INSTANCE.getRoute(packageName, getUserId()));
+                this, AppInfoSettingsProvider.INSTANCE.getRoute(packageName, getUserId()));
         finish();
     }
 

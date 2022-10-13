@@ -22,7 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
-import com.android.settings.spa.app.appsettings.AppSettingsProvider
+import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
 import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
 import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
@@ -65,7 +65,7 @@ private fun AllAppListPage() {
     ) { itemModel ->
         AppListItem(
             itemModel = itemModel,
-            onClick = AppSettingsProvider.navigator(app = itemModel.record.app),
+            onClick = AppInfoSettingsProvider.navigator(app = itemModel.record.app),
         )
     }
 }
