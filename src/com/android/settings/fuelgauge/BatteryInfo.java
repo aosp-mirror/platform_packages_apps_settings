@@ -302,7 +302,7 @@ public class BatteryInfo {
             info.remainingLabel = null;
             info.chargeLabel = info.batteryLevel == 100 ? info.batteryPercentString :
                     resources.getString(R.string.power_charging, info.batteryPercentString,
-                            chargeStatusLabel.toLowerCase());
+                            chargeStatusLabel);
         }
     }
 
