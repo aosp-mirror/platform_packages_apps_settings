@@ -102,17 +102,6 @@
             settings:keywords="@string/keywords_vibration"
             android:summary="@string/accessibility_vibration_settings_summary"/>
 
-        <!-- TODO(b/241023294): UX review of where Software Cursor feature should be positioned. -->
-        <Preference
-            android:key="software_cursor_preference_screen"
-            android:icon="@drawable/ic_accessibility_software_cursor"
-            android:fragment="com.android.settings.accessibility.CursorPreferenceFragment"
-            android:title="@string/accessibility_software_cursor_title"
-            settings:searchable="true"
-            settings:keywords="@string/keywords_software_cursor"
-            android:summary="@string/accessibility_software_cursor_summary"
-            settings:controller="com.android.settings.accessibility.SoftwareCursorPreferenceController"/>
-
     </PreferenceCategory>
 
     <PreferenceCategory

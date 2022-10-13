@@ -385,6 +385,10 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @VisibleForTesting
     void loadSlice(Uri uri) {
+        if (mSliceWeakDataCache.containsKey(uri)) {
+            Log.d(TAG, uri + " loaded from cache");
+            return;
+        }
         long startBuildTime = System.currentTimeMillis();
 
         final SliceData sliceData;

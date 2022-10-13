@@ -1181,7 +1181,8 @@ public class ManageApplications extends InstrumentedFragment
             } else if (mManageApplications.mListType == LIST_TYPE_MEDIA_MANAGEMENT_APPS) {
                 mExtraInfoBridge = new AppStateMediaManagementAppsBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_APPS_LOCALE) {
-                mExtraInfoBridge = new AppStateLocaleBridge(mContext, mState, this);
+                mExtraInfoBridge = new AppStateLocaleBridge(mContext, mState, this,
+                        mManageApplications.mUserManager);
             } else if (mManageApplications.mListType == LIST_TYPE_BATTERY_OPTIMIZATION) {
                 mExtraInfoBridge = new AppStateAppBatteryUsageBridge(mContext, mState, this);
             } else {
