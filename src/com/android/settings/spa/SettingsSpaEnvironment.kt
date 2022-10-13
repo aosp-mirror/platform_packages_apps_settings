@@ -36,7 +36,7 @@ import com.android.settingslib.spa.framework.common.SettingsPageProviderReposito
 import com.android.settingslib.spa.framework.common.SpaEnvironment
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListTemplate
 
-object SettingsSpaEnvironment : SpaEnvironment() {
+open class SettingsSpaEnvironment : SpaEnvironment() {
     override val pageProviderRepository = lazy {
         val togglePermissionAppListTemplate = TogglePermissionAppListTemplate(
             allProviders = listOf(
@@ -65,8 +65,4 @@ object SettingsSpaEnvironment : SpaEnvironment() {
             ),
         )
     }
-
-    override val browseActivityClass = SpaActivity::class.java
-
-    override val entryProviderAuthorities = "com.android.settings.spa.provider"
 }
