@@ -90,7 +90,10 @@ android_library {
         "WifiTrackerLib",
         "SettingsLibActivityEmbedding",
         "Settings-change-ids",
+        "androidx.room_room-runtime",
     ],
+
+    plugins: ["androidx.room_room-compiler-plugin"],
 
     libs: [
         "telephony-common",
