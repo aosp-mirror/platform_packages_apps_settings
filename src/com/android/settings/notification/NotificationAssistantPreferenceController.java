@@ -141,7 +141,10 @@ public class NotificationAssistantPreferenceController extends TogglePreferenceC
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        if (isNASSettingActivityAvailable()) {
+        if (mDefaultNASComponent == null) {
+            preference.setEnabled(false);
+            ((PrimarySwitchPreference) preference).setSwitchEnabled(false);
+        } else if (isNASSettingActivityAvailable()) {
             preference.setIntent(mNASSettingIntent);
         } else {
             // Cannot find settings activity from the default NAS app

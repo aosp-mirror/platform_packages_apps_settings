@@ -226,4 +226,14 @@ public class NotificationAssistantPreferenceControllerTest {
                 .setNASMigrationDoneAndResetDefault(eq(10), anyBoolean());
     }
 
+    @Test
+    public void testNASUnavailable_settingDisabled() throws Exception {
+        when(mBackend.getDefaultNotificationAssistant()).thenReturn(null);
+        mPreferenceController.getDefaultNASIntent();
+        mPreferenceController.updateState(mPreference);
+
+        verify(mPreference, times(1)).setSwitchEnabled(eq(false));
+        assertFalse(mPreference.isEnabled());
+    }
+
 }

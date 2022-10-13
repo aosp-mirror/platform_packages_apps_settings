@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.app.INotificationManager;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -26,29 +27,55 @@ import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.ServiceManager;
 import android.os.Vibrator;
+import android.service.notification.NotificationListenerService;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.lifecycle.OnLifecycleEvent;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.Objects;
 
+/**
+ * This slider can represent both ring and notification, if the corresponding streams are aliased,
+ * and only ring if the streams are not aliased.
+ */
 public class RingVolumePreferenceController extends VolumeSeekBarPreferenceController {
 
-    private static final String TAG = "RingVolumeController";
+    private static final String TAG = "RingVolumePreferenceController";
     private static final String KEY_RING_VOLUME = "ring_volume";
 
     private Vibrator mVibrator;
-    private int mRingerMode = -1;
+    private int mRingerMode = AudioManager.RINGER_MODE_NORMAL;
     private ComponentName mSuppressor;
     private final RingReceiver mReceiver = new RingReceiver();
     private final H mHandler = new H();
 
     private int mMuteIcon;
+
+    /*
+     * Whether ring and notification streams are aliased together by AudioManager.
+     * If they are, we'll present one volume control for both.
+     * If not, we'll present separate volume controls.
+     */
+    private final boolean mRingAliasNotif;
+
+    private final int mNormalIconId;
+    @VisibleForTesting
+    final int mVibrateIconId;
+    @VisibleForTesting
+    final int mSilentIconId;
+
+    @VisibleForTesting
+    final int mTitleId;
+
+    private INotificationManager mNoMan;
 
     public RingVolumePreferenceController(Context context) {
         this(context, KEY_RING_VOLUME);
@@ -60,7 +87,29 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
         if (mVibrator != null && !mVibrator.hasVibrator()) {
             mVibrator = null;
         }
+
+        mRingAliasNotif = isRingAliasNotification();
+        if (mRingAliasNotif) {
+            mTitleId = R.string.ring_volume_option_title;
+
+            mNormalIconId = R.drawable.ic_notifications;
+            mSilentIconId = R.drawable.ic_notifications_off_24dp;
+        } else {
+            mTitleId = R.string.separate_ring_volume_option_title;
+
+            mNormalIconId = R.drawable.ic_ring_volume;
+            mSilentIconId = R.drawable.ic_ring_volume_off;
+        }
+        // todo: set a distinct vibrate icon for ring vs notification
+        mVibrateIconId = R.drawable.ic_volume_ringer_vibrate;
+
         updateRingerMode();
+    }
+
+    @VisibleForTesting
+    boolean isRingAliasNotification() {
+        return mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_alias_ring_notif_stream_types);
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
@@ -70,6 +119,7 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
         mReceiver.register(true);
         updateEffectsSuppressor();
         updatePreferenceIcon();
+        setPreferenceTitle();
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
@@ -115,7 +165,8 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
         return mMuteIcon;
     }
 
-    private void updateRingerMode() {
+    @VisibleForTesting
+    void updateRingerMode() {
         final int ringerMode = mHelper.getRingerModeInternal();
         if (mRingerMode == ringerMode) return;
         mRingerMode = ringerMode;
@@ -125,25 +176,70 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
     private void updateEffectsSuppressor() {
         final ComponentName suppressor = NotificationManager.from(mContext).getEffectsSuppressor();
         if (Objects.equals(suppressor, mSuppressor)) return;
-        mSuppressor = suppressor;
-        if (mPreference != null) {
-            final String text = SuppressorHelper.getSuppressionText(mContext, suppressor);
-            mPreference.setSuppressionText(text);
+
+        if (mNoMan == null) {
+            mNoMan = INotificationManager.Stub.asInterface(
+                    ServiceManager.getService(Context.NOTIFICATION_SERVICE));
         }
-        updatePreferenceIcon();
+
+        final int hints;
+        try {
+            hints = mNoMan.getHintsFromListenerNoToken();
+        } catch (android.os.RemoteException ex) {
+            Log.w(TAG, "updateEffectsSuppressor: " + ex.getMessage());
+            return;
+        }
+
+        if (hintsMatch(hints, mRingAliasNotif)) {
+            mSuppressor = suppressor;
+            if (mPreference != null) {
+                final String text = SuppressorHelper.getSuppressionText(mContext, suppressor);
+                mPreference.setSuppressionText(text);
+            }
+        }
+    }
+
+    @VisibleForTesting
+    boolean hintsMatch(int hints, boolean ringNotificationAliased) {
+        return (hints & NotificationListenerService.HINT_HOST_DISABLE_CALL_EFFECTS) != 0
+                || (hints & NotificationListenerService.HINT_HOST_DISABLE_EFFECTS) != 0
+                || ((hints & NotificationListenerService.HINT_HOST_DISABLE_NOTIFICATION_EFFECTS)
+                != 0 && ringNotificationAliased);
+    }
+
+    @VisibleForTesting
+    void setPreference(VolumeSeekBarPreference volumeSeekBarPreference) {
+        mPreference = volumeSeekBarPreference;
+    }
+
+    @VisibleForTesting
+    void setVibrator(Vibrator vibrator) {
+        mVibrator = vibrator;
     }
 
     private void updatePreferenceIcon() {
         if (mPreference != null) {
-            if (mRingerMode == AudioManager.RINGER_MODE_VIBRATE) {
-                mMuteIcon = R.drawable.ic_volume_ringer_vibrate;
-                mPreference.showIcon(R.drawable.ic_volume_ringer_vibrate);
-            } else if (mRingerMode == AudioManager.RINGER_MODE_SILENT) {
-                mMuteIcon = R.drawable.ic_notifications_off_24dp;
-                mPreference.showIcon(R.drawable.ic_notifications_off_24dp);
+            if (mRingerMode == AudioManager.RINGER_MODE_NORMAL) {
+                mPreference.showIcon(mNormalIconId);
             } else {
-                mPreference.showIcon(R.drawable.ic_notifications);
+                if (mRingerMode == AudioManager.RINGER_MODE_VIBRATE && mVibrator != null) {
+                    mMuteIcon = mVibrateIconId;
+                } else {
+                    mMuteIcon = mSilentIconId;
+                }
+                mPreference.showIcon(mMuteIcon);
             }
+        }
+    }
+
+    /**
+     * This slider can represent both ring and notification, or only ring.
+     * Note: This cannot be used in the constructor, as the reference to preference object would
+     * still be null.
+     */
+    private void setPreferenceTitle() {
+        if (mPreference != null) {
+            mPreference.setTitle(mTitleId);
         }
     }
 
