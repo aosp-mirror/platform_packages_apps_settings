@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -116,19 +117,41 @@ public class DiscoverableFooterPreferenceControllerTest {
     }
 
     @Test
-    public void onResume() {
+    public void onResume_setAlwaysDiscoverableAsTrue_shouldRegisterBluetoothChanged() {
+        mDiscoverableFooterPreferenceController.setAlwaysDiscoverable(true);
         mDiscoverableFooterPreferenceController.onResume();
+
         assertThat(getRegisteredBroadcastReceivers()).contains(mBluetoothChangedReceiver);
         verify(mAlwaysDiscoverable).start();
     }
 
     @Test
-    public void onPause() {
+    public void onPause_setAlwaysDiscoverableAsTrue_shouldUnregisterBluetoothChanged() {
+        mDiscoverableFooterPreferenceController.setAlwaysDiscoverable(true);
         mDiscoverableFooterPreferenceController.onResume();
         mDiscoverableFooterPreferenceController.onPause();
 
         assertThat(getRegisteredBroadcastReceivers()).doesNotContain(mBluetoothChangedReceiver);
         verify(mAlwaysDiscoverable).stop();
+    }
+
+    @Test
+    public void onResume_setAlwaysDiscoverableAsFalse_shouldNotRegisterBluetoothChanged() {
+        mDiscoverableFooterPreferenceController.setAlwaysDiscoverable(false);
+        mDiscoverableFooterPreferenceController.onResume();
+
+        assertThat(getRegisteredBroadcastReceivers()).contains(mBluetoothChangedReceiver);
+        verify(mAlwaysDiscoverable, never()).start();
+    }
+
+    @Test
+    public void onPause_setAlwaysDiscoverableAsFalse_shouldNotUnregisterBluetoothChanged() {
+        mDiscoverableFooterPreferenceController.setAlwaysDiscoverable(false);
+        mDiscoverableFooterPreferenceController.onResume();
+        mDiscoverableFooterPreferenceController.onPause();
+
+        assertThat(getRegisteredBroadcastReceivers()).doesNotContain(mBluetoothChangedReceiver);
+        verify(mAlwaysDiscoverable, never()).stop();
     }
 
     @Test
