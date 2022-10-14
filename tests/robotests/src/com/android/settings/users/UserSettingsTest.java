@@ -69,6 +69,7 @@ import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.After;
 import org.junit.Before;
@@ -85,6 +86,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowIntent;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -98,6 +100,7 @@ import java.util.List;
 public class UserSettingsTest {
 
     private static final String KEY_USER_GUEST = "user_guest";
+    private static final String KEY_ALLOW_MULTIPLE_USERS = "allow_multiple_users";
     private static final int ACTIVE_USER_ID = 0;
     private static final int INACTIVE_ADMIN_USER_ID = 1;
     private static final int INACTIVE_SECONDARY_USER_ID = 14;
@@ -201,6 +204,21 @@ public class UserSettingsTest {
     public void testAssignDefaultPhoto_ContextNull_ReturnFalseAndNotCrash() {
         // Should not crash here
         assertThat(UserSettings.assignDefaultPhoto(null, ACTIVE_USER_ID)).isFalse();
+    }
+
+    @Test
+    public void testGetRawDataToIndex_returnAllIndexablePreferences() {
+        String[] expectedKeys = {KEY_ALLOW_MULTIPLE_USERS};
+        List<String> keysResultList = new ArrayList<>();
+
+        List<SearchIndexableRaw> rawData =
+                UserSettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
+
+        for (SearchIndexableRaw rawDataItem : rawData) {
+            keysResultList.add(rawDataItem.key);
+        }
+
+        assertThat(keysResultList).containsExactly(expectedKeys);
     }
 
     @Test

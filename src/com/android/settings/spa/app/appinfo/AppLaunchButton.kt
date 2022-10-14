@@ -14,32 +14,29 @@
  * limitations under the License.
  */
 
-package com.android.settings.spa.app.appsettings
+package com.android.settings.spa.app.appinfo
 
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.FileDownload
+import androidx.compose.material.icons.outlined.Launch
 import com.android.settings.R
-import com.android.settings.applications.AppStoreUtil
 import com.android.settingslib.spa.widget.button.ActionButton
 import com.android.settingslib.spaprivileged.model.app.userHandle
 
-class AppInstallButton(private val packageInfoPresenter: PackageInfoPresenter) {
+class AppLaunchButton(packageInfoPresenter: PackageInfoPresenter) {
     private val context = packageInfoPresenter.context
+    private val packageManagerAsUser = packageInfoPresenter.packageManagerAsUser
 
-    fun getActionButton(packageInfo: PackageInfo): ActionButton? {
-        val app = packageInfo.applicationInfo
-        if (!app.isInstantApp) return null
+    fun getActionButton(packageInfo: PackageInfo): ActionButton? =
+        packageManagerAsUser.getLaunchIntentForPackage(packageInfo.packageName)?.let { intent ->
+            launchButton(intent, packageInfo.applicationInfo)
+        }
 
-        return AppStoreUtil.getAppStoreLink(packageInfoPresenter.contextAsUser, app.packageName)
-            ?.let { intent -> installButton(intent, app) }
-    }
-
-    private fun installButton(intent: Intent, app: ApplicationInfo) = ActionButton(
-        text = context.getString(R.string.install_text),
-        imageVector = Icons.Outlined.FileDownload,
+    private fun launchButton(intent: Intent, app: ApplicationInfo) = ActionButton(
+        text = context.getString(R.string.launch_instant_app),
+        imageVector = Icons.Outlined.Launch,
     ) {
         context.startActivityAsUser(intent, app.userHandle)
     }

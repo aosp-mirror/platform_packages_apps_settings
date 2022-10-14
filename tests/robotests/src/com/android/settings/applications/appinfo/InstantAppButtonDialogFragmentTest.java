@@ -37,6 +37,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -62,6 +63,7 @@ public class InstantAppButtonDialogFragmentTest {
         doReturn(mContext).when(mFragment).getContext();
     }
 
+    @Ignore
     @Test
     public void onClick_shouldDeleteApp() {
         final PackageManager packageManager = mock(PackageManager.class);
@@ -73,6 +75,7 @@ public class InstantAppButtonDialogFragmentTest {
             .deletePackageAsUser(eq(TEST_PACKAGE), any(), anyInt(), anyInt());
     }
 
+    @Ignore
     @Test
     public void onCreateDialog_clearAppDialog_shouldShowClearAppDataConfirmation() {
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();

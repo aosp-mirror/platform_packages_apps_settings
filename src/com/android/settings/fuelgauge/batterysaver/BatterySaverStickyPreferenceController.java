@@ -3,7 +3,6 @@ package com.android.settings.fuelgauge.batterysaver;
 import android.content.Context;
 import android.provider.Settings;
 import android.provider.Settings.Global;
-import android.text.TextUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
@@ -42,8 +41,7 @@ public class BatterySaverStickyPreferenceController extends TogglePreferenceCont
         super.refreshSummary(preference);
         final int stickyShutoffLevel = Settings.Global.getInt(
             mContext.getContentResolver(), Global.LOW_POWER_MODE_STICKY_AUTO_DISABLE_LEVEL, 90);
-        preference.setSummary(TextUtils.expandTemplate(
-                mContext.getString(R.string.battery_saver_sticky_description_new),
+        preference.setSummary(mContext.getString(R.string.battery_saver_sticky_description_new,
                 Utils.formatPercentage(stickyShutoffLevel)));
     }
 
