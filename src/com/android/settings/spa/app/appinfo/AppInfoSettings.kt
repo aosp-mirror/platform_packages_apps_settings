@@ -92,6 +92,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
 
         AppPermissionPreference(app)
         AppStoragePreference(app)
+        AppTimeSpentPreference(app)
 
         Category(title = stringResource(R.string.advanced_apps)) {
             DisplayOverOtherAppsAppListProvider.InfoPageEntryItem(app)
