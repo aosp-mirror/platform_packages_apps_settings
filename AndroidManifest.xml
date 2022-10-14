@@ -3555,7 +3555,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.android.settings.files"
+            android:authorities="${applicationId}.files"
             android:grantUriPermissions="true"
             android:exported="false">
             <meta-data
@@ -3565,13 +3565,13 @@
 
         <provider
             android:name=".deviceinfo.legal.ModuleLicenseProvider"
-            android:authorities="com.android.settings.module_licenses"
+            android:authorities="${applicationId}.module_licenses"
             android:grantUriPermissions="true"
             android:exported="false"/>
 
         <provider
             android:name=".emergency.EmergencyActionContentProvider"
-            android:authorities="com.android.settings.emergency"
+            android:authorities="${applicationId}.emergency"
             android:permission="android.permission.CALL_PRIVILEGED"
             android:exported="true"/>
 
@@ -3685,7 +3685,7 @@
 
         <provider
             android:name=".search.SettingsSearchIndexablesProvider"
-            android:authorities="com.android.settings"
+            android:authorities="${applicationId}"
             android:multiprocess="false"
             android:grantUriPermissions="true"
             android:permission="android.permission.READ_SEARCH_INDEXABLES"
@@ -3697,7 +3697,7 @@
 
         <provider
             android:name=".dashboard.suggestions.SuggestionStateProvider"
-            android:authorities="com.android.settings.suggestions.status"
+            android:authorities="${applicationId}.suggestions.status"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.android.settings.action.SUGGESTION_STATE_PROVIDER" />
@@ -3940,7 +3940,7 @@
 
         <provider
             android:name=".dashboard.SummaryProvider"
-            android:authorities="com.android.settings.dashboard.SummaryProvider">
+            android:authorities="${applicationId}.dashboard.SummaryProvider">
         </provider>
 
         <activity android:name=".backup.UserBackupSettingsActivity"
@@ -4327,7 +4327,7 @@
         </activity>
 
         <provider android:name=".slices.SettingsSliceProvider"
-                  android:authorities="com.android.settings.slices;android.settings.slices"
+                  android:authorities="${applicationId}.slices;android.settings.slices"
                   android:exported="true"
                   android:grantUriPermissions="true" />
 
@@ -4369,13 +4369,13 @@
 
         <provider
             android:name=".homepage.contextualcards.CardContentProvider"
-            android:authorities="com.android.settings.homepage.CardContentProvider"
+            android:authorities="${applicationId}.homepage.CardContentProvider"
             android:exported="true"
             android:permission="android.permission.WRITE_SETTINGS_HOMEPAGE_DATA" />
 
         <provider
             android:name=".homepage.contextualcards.SettingsContextualCardProvider"
-            android:authorities="com.android.settings.homepage.contextualcards"
+            android:authorities="${applicationId}.homepage.contextualcards"
             android:permission="android.permission.WRITE_SETTINGS_HOMEPAGE_DATA"
             android:exported="true">
             <intent-filter>
@@ -4621,13 +4621,6 @@
 
         <activity android:name=".spa.SpaActivity" android:exported="false"/>
         <activity android:name=".spa.SpaBridgeActivity" android:exported="false"/>
-        <activity android:name=".spa.SpaDebugActivity" android:exported="false"/>
-        <provider
-            android:name=".spa.SpaEntryProvider"
-            android:authorities="com.android.settings.spa.provider"
-            android:enabled="true"
-            android:exported="false">
-        </provider>
 
         <activity-alias android:name="UsageStatsActivity"
                         android:exported="true"

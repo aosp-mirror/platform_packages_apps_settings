@@ -73,10 +73,11 @@
         android:order="55"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
-            android:key="remove_guest_on_exit"
-            android:title="@string/remove_guest_on_exit"
-            android:summary="@string/remove_guest_on_exit_summary"
-            android:order="60"/>
+        android:key="remove_guest_on_exit"
+        android:title="@string/remove_guest_on_exit"
+        android:summary="@string/remove_guest_on_exit_summary"
+        android:order="60"
+        settings:keywords="@string/remove_guest_on_exit_keywords"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="enable_guest_calling"

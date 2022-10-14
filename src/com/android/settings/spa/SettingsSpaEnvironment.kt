@@ -18,7 +18,7 @@ package com.android.settings.spa
 
 import com.android.settings.spa.app.AllAppListPageProvider
 import com.android.settings.spa.app.AppsMainPageProvider
-import com.android.settings.spa.app.appsettings.AppSettingsProvider
+import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
 import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
@@ -36,7 +36,7 @@ import com.android.settingslib.spa.framework.common.SettingsPageProviderReposito
 import com.android.settingslib.spa.framework.common.SpaEnvironment
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListTemplate
 
-object SettingsSpaEnvironment : SpaEnvironment() {
+open class SettingsSpaEnvironment : SpaEnvironment() {
     override val pageProviderRepository = lazy {
         val togglePermissionAppListTemplate = TogglePermissionAppListTemplate(
             allProviders = listOf(
@@ -54,7 +54,7 @@ object SettingsSpaEnvironment : SpaEnvironment() {
                 HomePageProvider,
                 AppsMainPageProvider,
                 AllAppListPageProvider,
-                AppSettingsProvider,
+                AppInfoSettingsProvider,
                 SpecialAppAccessPageProvider,
                 NotificationMainPageProvider,
                 AppListNotificationsPageProvider,
@@ -65,8 +65,4 @@ object SettingsSpaEnvironment : SpaEnvironment() {
             ),
         )
     }
-
-    override val browseActivityClass = SpaActivity::class.java
-
-    override val entryProviderAuthorities = "com.android.settings.spa.provider"
 }

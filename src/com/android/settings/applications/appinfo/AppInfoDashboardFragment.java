@@ -630,6 +630,20 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 .launch();
     }
 
+    /** Starts app info fragment from SPA pages. */
+    public static void startAppInfoFragment(
+            Class<?> destination, ApplicationInfo app, Context context, int sourceMetricsCategory) {
+        // start new fragment to display extended information
+        Bundle args = new Bundle();
+        args.putString(ARG_PACKAGE_NAME, app.packageName);
+        args.putInt(ARG_PACKAGE_UID, app.uid);
+        new SubSettingLauncher(context)
+                .setDestination(destination.getName())
+                .setArguments(args)
+                .setSourceMetricsCategory(sourceMetricsCategory)
+                .launch();
+    }
+
     private void onPackageRemoved() {
         getActivity().finishActivity(SUB_INFO_FRAGMENT);
         getActivity().finishAndRemoveTask();

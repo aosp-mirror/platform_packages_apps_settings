@@ -47,6 +47,7 @@ import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -230,6 +231,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
         assertThat(layout.findViewById(R.id.header_icon).getVisibility()).isEqualTo(View.VISIBLE);
     }
 
+    @Ignore
     @Test
     public void refresh_connectedWatch_checkSummary() {
         when(mBluetoothDevice.getMetadata(

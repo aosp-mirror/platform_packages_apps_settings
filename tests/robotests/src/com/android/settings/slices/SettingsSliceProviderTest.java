@@ -214,6 +214,7 @@ public class SettingsSliceProviderTest {
                 .isEqualTo(FakeToggleController.TestWorker.class);
     }
 
+    @Ignore
     @Test
     public void testLoadSlice_cachedEntryRemovedOnUnpinned() {
         SliceData data = getMockData();
