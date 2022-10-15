@@ -23,6 +23,9 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.RestrictedListPreference;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -33,9 +36,6 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.ArrayList;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class ShowOnLockScreenNotificationPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
