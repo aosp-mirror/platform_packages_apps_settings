@@ -28,6 +28,8 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.RestrictedListPreference;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
@@ -42,10 +44,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-
-import androidx.preference.PreferenceScreen;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowUserManager.class, ShadowRestrictedLockUtilsInternal.class})
