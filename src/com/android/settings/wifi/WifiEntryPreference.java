@@ -21,7 +21,6 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
-import android.os.UserManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
@@ -88,7 +87,6 @@ public class WifiEntryPreference extends RestrictedPreference implements
         mWifiEntry = wifiEntry;
         mWifiEntry.setListener(this);
         mIconInjector = iconInjector;
-        checkRestrictionAndSetDisabled(UserManager.DISALLOW_ADD_WIFI_CONFIG);
         refresh();
     }
 
