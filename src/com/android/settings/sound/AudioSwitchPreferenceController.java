@@ -45,6 +45,7 @@ import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HeadsetProfile;
 import com.android.settingslib.bluetooth.HearingAidProfile;
+import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -215,6 +216,25 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     }
 
     /**
+     * Get LE Audio profile connected devices
+     */
+    protected List<BluetoothDevice> getConnectedLeAudioDevices() {
+        final List<BluetoothDevice> connectedDevices = new ArrayList<>();
+        final LeAudioProfile leAudioProfile = mProfileManager.getLeAudioProfile();
+        if (leAudioProfile == null) {
+            Log.d(TAG, "LeAudioProfile is null");
+            return connectedDevices;
+        }
+        final List<BluetoothDevice> devices = leAudioProfile.getConnectedDevices();
+        for (BluetoothDevice device : devices) {
+            if (device.isConnected()) {
+                connectedDevices.add(device);
+            }
+        }
+        return connectedDevices;
+    }
+
+    /**
      * get hearing aid profile connected device, exclude other devices with same hiSyncId.
      */
     protected List<BluetoothDevice> getConnectedHearingAidDevices() {
@@ -256,6 +276,24 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
                 }
             }
         }
+        return null;
+    }
+
+    /**
+     * Find active LE Audio device
+     */
+    protected BluetoothDevice findActiveLeAudioDevice() {
+        final LeAudioProfile leAudioProfile = mProfileManager.getLeAudioProfile();
+
+        if (leAudioProfile != null) {
+            List<BluetoothDevice> activeDevices = leAudioProfile.getActiveDevices();
+            for (BluetoothDevice leAudioDevice : activeDevices) {
+                if (leAudioDevice != null) {
+                    return leAudioDevice;
+                }
+            }
+        }
+        Log.d(TAG, "There is no LE audio profile or no active LE audio device");
         return null;
     }
 
