@@ -1104,7 +1104,8 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"ဖန်သားပြင် အဖြူ ချိန်ညှိခြင်း"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"ချောမွေ့သော ဖန်သားပြင်ပြသမှု"</string>
-    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"အကြောင်းအရာအချို့အတွက် ပြန်လည်စတင်နှုန်းကို ၆၀ မှ ၉၀ Hz သို့ အလိုအလျောက် တိုးပေးသည်။ ဘက်ထရီ အသုံးပြုမှု တိုးလာပါမည်။"</string>
+    <!-- no translation found for peak_refresh_rate_summary (3627278682437562787) -->
+    <skip />
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"အမြင့်ဆုံး ပြန်လည် စတင်နှုန်းသို့ တွန်းအားပေးရန်"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"ထိတွေ့မှု တုံ့ပြန်အားနှင့် ကာတွန်းပုံအရည်အသွေးပိုကောင်းလာရန် အမြင့်ဆုံးပြန်ဖွင့်မှုနှုန်း။ ဘက်ထရီ အသုံးပြုမှု တိုးလာပါမည်။"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"ဖန်သားပြင်ကို အာရုံစိုက်ခြင်း"</string>
@@ -1162,6 +1163,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"အိပ်ချိန်မုဒ် ဆက်တင်များ"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ဖန်သားပြင် ခဏရပ်ချိန်"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>ကြာ အသုံးပြုမှု မရှိလျှင်"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"သတ်မှတ်မထားပါ"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"နောက်ခံ"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"နောက်ခံနှင့် ပုံစံ"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"ပင်မစာမျက်နှာ၊ လော့ခ်မျက်နှာပြင်"</string>
@@ -2412,12 +2414,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"အချိန်ဇယား သတ်မှတ်ပါ"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"ဘက်ထရီသက်တမ်းကို တိုးပေးသည်"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"အားသွင်းနေသည့်အခါ ပိတ်ရန်"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (3618041244703216293) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (1733686775743601110) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (7449283917787428755) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" product="default" msgid="3618041244703216293">"သင့်ဖုန်းကို <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> အထက် အားသွင်းပြီးသည့်အခါ ‘ဘက်ထရီအားထိန်း’ ပိတ်သွားသည်"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="1733686775743601110">"သင့်တက်ဘလက်ကို <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> အထက် အားသွင်းပြီးသည့်အခါ ‘ဘက်ထရီအားထိန်း’ ပိတ်သွားသည်"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="7449283917787428755">"သင့်စက်ကို <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> အထက် အားသွင်းပြီးသည့်အခါ ‘ဘက်ထရီအားထိန်း’ ပိတ်သွားသည်"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"ဖွင့်ရန်"</string>
@@ -2849,6 +2848,8 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"ဧည့်သည်မုဒ်မှ ထွက်ချိန်တွင် ဧည့်သည်အက်ပ်နှင့် ဒေတာအားလုံးကို ဖျက်ရန်"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"ဧည့်သည်လုပ်ဆောင်ချက် ဖျက်မလား။"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"ဤဧည့်သည် စက်ရှင်မှ အက်ပ်နှင့် ဒေတာများကို ယခုဖျက်လိုက်မည်ဖြစ်ပြီး လာမည့်ဧည့်သည် လုပ်ဆောင်ချက်အားလုံးကို ဧည့်သည်မုဒ်မှ ထွက်ချိန်တိုင်းတွင် ဖျက်လိုက်ပါမည်"</string>
+    <!-- no translation found for remove_guest_on_exit_keywords (4961310523576166193) -->
+    <skip />
     <string name="enable_guest_calling" msgid="8300355036005240911">"ဧည့်သည်ကို ဖုန်းသုံးခွင့်ပြုရန်"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"ခေါ်ဆိုမှုမှတ်တမ်းကို ဧည့်သည်အသုံးပြုသူနှင့် မျှဝေမည်"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"ဖုန်းခေါ်ဆိုမှုနှင့် SMS ဖွင့်မည်"</string>
@@ -3112,6 +3113,8 @@
     <string name="call_volume_option_title" msgid="1461105986437268924">"ဖုန်းခေါ်သံ အတိုးအကျယ်"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"နှိုးစက်အသံ အတိုးအကျယ်"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"မြည်သံနှင့် အကြောင်းကြားချက် အသံ"</string>
+    <!-- no translation found for separate_ring_volume_option_title (2212910223857375951) -->
+    <skip />
     <string name="notification_volume_option_title" msgid="4838818791683615978">"အကြောင်းကြားချက်သံ ပမာဏ"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"ဖုန်းမြည်သံ"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"မူရင်းအကြောင်းကြားသံ"</string>
@@ -3703,8 +3706,6 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"ပိတ်ထားသည်"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"အဆင့်မြင့်"</string>
     <string name="app_permissions" msgid="8666537659217653626">"ခွင့်ပြုချက် မန်နေဂျာ"</string>
-    <string name="app_permissions_summary" msgid="2709819220672938860">"<xliff:g id="APPS">%1$s</xliff:g> ကို သုံးထားသော အက်ပ်များ"</string>
-    <string name="app_permissions_summary_more" msgid="6247952473615352350">"<xliff:g id="APPS">%1$s</xliff:g> ကို သုံးနေသော အက်ပ်များနှင့် အခြား"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"နှိုးရန် တို့ပါ"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"စက်ကို နှိုးရန် ဖန်မျက်နှာပြင်၏ မည်သည့်နေရာမဆိုကို နှစ်ကြိမ်-တို့ပါ"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"လင့်ခ်များကို ဖွင့်ခြင်း"</string>
@@ -3866,7 +3867,8 @@
     <string name="users_summary" msgid="8473589474976307510">"<xliff:g id="USER_NAME">%1$s</xliff:g> အဖြစ် လက်မှတ်ထိုးဝင်ထားသည်"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"Android <xliff:g id="VERSION">%1$s</xliff:g> သို့ အပ်ဒိတ်လုပ်ထားသည်"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"အပ်ဒိတ် ရနိုင်သည်"</string>
-    <string name="disabled_by_policy_title" msgid="3635622338687810583">"သင်၏ IT စီမံခန့်ခွဲသူက ပိတ်ထားသည်"</string>
+    <!-- no translation found for disabled_by_policy_title (6852347040813204503) -->
+    <skip />
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"အသံအတိုးအကျယ်ကို ပြောင်း၍မရပါ"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="400089720689494562">"ဖုန်းဆက်၍ မရပါ"</string>
     <string name="disabled_by_policy_title_sms" msgid="8951840850778406831">"SMS မက်ဆေ့ဂျ်များ ပို့၍ မရပါ"</string>
@@ -3876,7 +3878,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"သင်၏ ခရက်ဒစ်ဝန်ဆောင်မှုပေးသူက ပိတ်ထားသည်"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"မိဘ လိုအပ်သည်"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"၎င်းကို စတင်ထည့်သွင်းရန် သင့်မိဘအား ဖုန်းပေးလိုက်ပါ"</string>
-    <string name="default_admin_support_msg" msgid="8338570262037182531">"မေးစရာများရှိလျှင် သင်၏ IT စီမံခန့်ခွဲသူကို ဆက်သွယ်ပါ"</string>
+    <!-- no translation found for default_admin_support_msg (8816296554831532033) -->
+    <skip />
     <string name="admin_support_more_info" msgid="8407433155725898290">"နောက်ထပ် အသေးစိတ်များ"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"သင်၏စီမံခန့်ခွဲသူသည် ဆက်တင်များ၊ ခွင့်ပြုချက်များ၊ ပူးပေါင်းသုံးစွဲခွင့်များ၊ ကွန်ရက်လုပ်ဆောင်ချက်နှင့် စက်ပစ္စည်း၏ တည်နေရာ အချက်အလက်များအပါအဝင် သင်၏ အလုပ်ပရိုဖိုင်နှင့် ဆက်စပ်နေသည့် အက်ပ်နှင့် ဒေတာများကို စောင့်ကြည့်စီမံနိုင်ပါသည်။"</string>
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"သင်၏စီမံခန့်ခွဲသူသည် ဆက်တင်များ၊ ခွင့်ပြုချက်များ၊ ပူးပေါင်းသုံးစွဲခွင့်များ၊ ကွန်ရက်လုပ်ဆောင်ချက်နှင့် စက်ပစ္စည်း၏ တည်နေရာ အချက်အလက်များအပါအဝင် ဤအသုံးပြုသူနှင့် ဆက်စပ်နေသည့် အက်ပ်နှင့် ဒေတာများကို စောင့်ကြည့်စီမံနိုင်ပါသည်။"</string>
@@ -4707,6 +4710,8 @@
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"ဆော့ဖ်ဝဲရေးသူ ရွေးစရာများကို သုံးခြင်း"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"ပုံနှိပ်ဝန်ဆောင်မှုကို သုံးရန်"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"အသုံးပြုသူအများအပြား ခွင့်ပြုရန်"</string>
+    <!-- no translation found for multiple_users_main_switch_keywords (4845954458094134356) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ကြိုးမဲ့ အမှားရှာပြင်ခြင်းကို သုံးပါ"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"ဂရပ်ဖစ်ဒရိုင်ဗာ သတ်မှတ်ချက်များကို သုံးခြင်း"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"ညအလင်းရောင် သုံးရန်"</string>
