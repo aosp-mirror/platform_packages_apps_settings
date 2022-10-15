@@ -53,12 +53,12 @@ import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.HeadsetProfile;
 import com.android.settingslib.bluetooth.HearingAidProfile;
+import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -74,7 +74,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Ignore
 @Config(shadows = {
         ShadowAudioManager.class,
         ShadowBluetoothUtils.class,
@@ -102,6 +101,8 @@ public class AudioOutputSwitchPreferenceControllerTest {
     private HeadsetProfile mHeadsetProfile;
     @Mock
     private HearingAidProfile mHearingAidProfile;
+    @Mock
+    private LeAudioProfile mLeAudioProfile;
 
     private Context mContext;
     private PreferenceScreen mScreen;
@@ -117,6 +118,7 @@ public class AudioOutputSwitchPreferenceControllerTest {
     private AudioSwitchPreferenceController mController;
     private List<BluetoothDevice> mProfileConnectedDevices;
     private List<BluetoothDevice> mHearingAidActiveDevices;
+    private List<BluetoothDevice> mLeAudioActiveDevices;
     private List<BluetoothDevice> mEmptyDevices;
     private ShadowPackageManager mPackageManager;
 
@@ -136,6 +138,7 @@ public class AudioOutputSwitchPreferenceControllerTest {
         when(mLocalBluetoothProfileManager.getA2dpProfile()).thenReturn(mA2dpProfile);
         when(mLocalBluetoothProfileManager.getHearingAidProfile()).thenReturn(mHearingAidProfile);
         when(mLocalBluetoothProfileManager.getHeadsetProfile()).thenReturn(mHeadsetProfile);
+        when(mLocalBluetoothProfileManager.getLeAudioProfile()).thenReturn(mLeAudioProfile);
         mPackageManager = Shadow.extract(mContext.getPackageManager());
         mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, true);
 
@@ -156,6 +159,7 @@ public class AudioOutputSwitchPreferenceControllerTest {
         mPreference = new ListPreference(mContext);
         mProfileConnectedDevices = new ArrayList<>();
         mHearingAidActiveDevices = new ArrayList<>(2);
+        mLeAudioActiveDevices = new ArrayList<>();
         mEmptyDevices = new ArrayList<>(2);
 
         when(mScreen.getPreferenceManager()).thenReturn(mock(PreferenceManager.class));
@@ -389,6 +393,55 @@ public class AudioOutputSwitchPreferenceControllerTest {
         mEmptyDevices.addAll(mController.getConnectedHfpDevices());
 
         assertThat(mEmptyDevices).containsExactly(mBluetoothDevice, mLeftBluetoothHapDevice);
+    }
+
+    @Test
+    public void getConnectedLeAudioDevices_connectedLeAudioDevice_shouldAddDeviceToList() {
+        mEmptyDevices.clear();
+        mProfileConnectedDevices.clear();
+        mProfileConnectedDevices.add(mBluetoothDevice);
+        when(mLeAudioProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
+
+        mEmptyDevices.addAll(mController.getConnectedLeAudioDevices());
+
+        assertThat(mEmptyDevices).containsExactly(mBluetoothDevice);
+    }
+
+    @Test
+    public void getConnectedLeAudioDevices_disconnectedLeAudioDevice_shouldNotAddDeviceToList() {
+        BluetoothDevice connectdBtLeAduioDevice =
+                spy(mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_2));
+        when(connectdBtLeAduioDevice.isConnected()).thenReturn(true);
+        BluetoothDevice disonnectdBtLeAduioDevice =
+                spy(mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_3));
+        when(disonnectdBtLeAduioDevice.isConnected()).thenReturn(false);
+        mEmptyDevices.clear();
+        mProfileConnectedDevices.clear();
+        mProfileConnectedDevices.add(mBluetoothDevice);
+        mProfileConnectedDevices.add(connectdBtLeAduioDevice);
+        mProfileConnectedDevices.add(disonnectdBtLeAduioDevice);
+        when(mLeAudioProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
+
+        mEmptyDevices.addAll(mController.getConnectedLeAudioDevices());
+
+        assertThat(mEmptyDevices).containsExactly(mBluetoothDevice, connectdBtLeAduioDevice);
+    }
+
+    @Test
+    public void findActiveLeAudioDevice_noActiveDevice_returnNull() {
+        mLeAudioActiveDevices.clear();
+        when(mLeAudioProfile.getActiveDevices()).thenReturn(mLeAudioActiveDevices);
+
+        assertThat(mController.findActiveLeAudioDevice()).isNull();
+    }
+
+    @Test
+    public void findActiveLeAudioDevice_withActiveDevice_returnActiveDevice() {
+        mLeAudioActiveDevices.clear();
+        mLeAudioActiveDevices.add(mBluetoothDevice);
+        when(mLeAudioProfile.getActiveDevices()).thenReturn(mLeAudioActiveDevices);
+
+        assertThat(mController.findActiveLeAudioDevice()).isEqualTo(mBluetoothDevice);
     }
 
     private class AudioSwitchPreferenceControllerTestable extends
