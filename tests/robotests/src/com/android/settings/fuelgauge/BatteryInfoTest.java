@@ -125,7 +125,7 @@ public class BatteryInfoTest {
         BatteryInfo info = BatteryInfo.getBatteryInfoOld(mContext, mChargingBatteryBroadcast,
                 mBatteryUsageStats, SystemClock.elapsedRealtime() * 1000, false /* shortString */);
 
-        assertThat(info.chargeLabel.toString()).isEqualTo(STATUS_CHARGING_NO_TIME);
+        assertThat(info.chargeLabel.toString()).ignoringCase().isEqualTo(STATUS_CHARGING_NO_TIME);
     }
 
     @Test
