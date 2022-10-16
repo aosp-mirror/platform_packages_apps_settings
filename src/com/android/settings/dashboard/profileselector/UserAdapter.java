@@ -36,7 +36,7 @@ import android.widget.TextView;
 
 import com.android.internal.util.UserIcons;
 import com.android.internal.widget.RecyclerView;
-import com.android.settingslib.R;
+import com.android.settings.R;
 import com.android.settingslib.Utils;
 
 import java.util.ArrayList;

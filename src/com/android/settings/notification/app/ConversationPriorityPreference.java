@@ -24,7 +24,6 @@ import static android.view.View.VISIBLE;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.graphics.drawable.Drawable;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.util.AttributeSet;
@@ -37,8 +36,8 @@ import android.widget.TextView;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settingslib.R;
 
 public class ConversationPriorityPreference extends Preference {
 
