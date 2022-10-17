@@ -298,6 +298,10 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             getUiccInfoBySubscriptionInfo(uiccSlotInfos, subInfo);
             insertUiccInfo();
             insertMobileNetworkInfo(context);
+            SubscriptionInfo firstRemovableSubInfo = SubscriptionUtil.getFirstRemovableSubscription(
+                    context);
+            SubscriptionInfo subscriptionOrDefault = SubscriptionUtil.getSubscriptionOrDefault(
+                    context, mSubId);
             Log.d(TAG, "convert subscriptionInfo to entity for subId = " + mSubId);
             return new SubscriptionInfoEntity(String.valueOf(mSubId),
                     subInfo.getSimSlotIndex(),
@@ -311,12 +315,11 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                     SubscriptionUtil.getUniqueSubscriptionDisplayName(subInfo, context).toString(),
                     SubscriptionUtil.isSubscriptionVisible(mSubscriptionManager, context, subInfo),
                     SubscriptionUtil.getFormattedPhoneNumber(context, subInfo),
-                    SubscriptionUtil.getFirstRemovableSubscription(context) == null ? false
-                            : SubscriptionUtil.getFirstRemovableSubscription(
-                                    context).getSubscriptionId() == mSubId,
+                    firstRemovableSubInfo == null ? false
+                            : firstRemovableSubInfo.getSubscriptionId() == mSubId,
                     String.valueOf(SubscriptionUtil.getDefaultSimConfig(context, mSubId)),
-                    SubscriptionUtil.getSubscriptionOrDefault(context, mSubId).getSubscriptionId()
-                            == mSubId,
+                    subscriptionOrDefault == null ? false
+                            : subscriptionOrDefault.getSubscriptionId() == mSubId,
                     mSubscriptionManager.isValidSubscriptionId(mSubId),
                     mSubscriptionManager.isUsableSubscriptionId(mSubId),
                     mSubscriptionManager.isActiveSubscriptionId(mSubId),
