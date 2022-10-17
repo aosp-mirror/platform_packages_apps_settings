@@ -1724,6 +1724,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.security.SecurityAdvancedSettings" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_security"/>
         </activity>
 
         <activity android:name="MonitoringCertInfoActivity"
