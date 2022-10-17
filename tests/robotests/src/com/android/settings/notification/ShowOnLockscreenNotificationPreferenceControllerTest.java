@@ -93,7 +93,7 @@ public class ShowOnLockscreenNotificationPreferenceControllerTest {
         assertThat(mPreference.getValue()).isEqualTo(
                 String.valueOf(R.string.lock_screen_notifs_show_none));
 
-        assertThat(mPreference.getSummary())
+        assertThat(mPreference.getSummary().toString())
                 .isEqualTo(mContext.getString(R.string.lock_screen_notifs_show_none));
     }
 
@@ -110,7 +110,7 @@ public class ShowOnLockscreenNotificationPreferenceControllerTest {
 
         assertThat(mPreference.getValue()).isEqualTo(
                 String.valueOf(R.string.lock_screen_notifs_show_alerting));
-        assertThat(mPreference.getSummary())
+        assertThat(mPreference.getSummary().toString())
                 .isEqualTo(mContext.getString(R.string.lock_screen_notifs_show_alerting));
     }
 
@@ -127,20 +127,20 @@ public class ShowOnLockscreenNotificationPreferenceControllerTest {
 
         assertThat(mPreference.getValue()).isEqualTo(
                 String.valueOf(R.string.lock_screen_notifs_show_all));
-        assertThat(mPreference.getSummary())
+        assertThat(mPreference.getSummary().toString())
                 .isEqualTo(mContext.getString(R.string.lock_screen_notifs_show_all));
     }
 
     @Test
-    public void updateState_allNotifsOnLockscreen_isDefault() {
+    public void updateState_alertingNotifsOnLockscreen_isDefault() {
         // settings don't exist
 
         mController.displayPreference(mScreen);
 
         assertThat(mPreference.getValue()).isEqualTo(
-                String.valueOf(R.string.lock_screen_notifs_show_all));
-        assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getString(R.string.lock_screen_notifs_show_all));
+                String.valueOf(R.string.lock_screen_notifs_show_alerting));
+        assertThat(mPreference.getSummary().toString())
+                .isEqualTo(mContext.getString(R.string.lock_screen_notifs_show_alerting));
     }
 
     @Test
