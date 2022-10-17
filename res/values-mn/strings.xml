@@ -1104,7 +1104,8 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"Дэлгэцийн цайралтын тэнцвэр"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
-    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Зарим контентын сэргээх хурдыг автоматаар 60-с 90 Гц болгож өсгөнө. Батарей ашиглалтыг нэмэгдүүлнэ."</string>
+    <!-- no translation found for peak_refresh_rate_summary (3627278682437562787) -->
+    <skip />
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Сэргээх хамгийн өндөр хурдыг хүчлэх"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Хүрэлтийн хариу үйлдэл болон анимацийн чанарыг сайжруулахад зориулсан хамгийн өндөр сэргээх үнэлгээ юм. Батарей ашиглалтыг нэмэгдүүлнэ."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Соргог дэлгэц"</string>
@@ -1162,6 +1163,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Унтлагын цагийн горимын тохиргоо"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Дэлгэцийн завсарлага"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Идэвхгүй <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> болсны дараа"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Тохируулаагүй"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Дэлгэцийн зураг"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Дэлгэцийн зураг, загвар"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Нүүр, түгжигдсэн дэлгэц"</string>
@@ -2412,12 +2414,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Хуваарь тохируулах"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Батарейн ажиллах хугацааг сунгах"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Цэнэглэсэн үед унтраах"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (3618041244703216293) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (1733686775743601110) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (7449283917787428755) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" product="default" msgid="3618041244703216293">"Таны утас <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>-с дээш цэнэглэгдэхэд Батарей хэмнэгч унтарна"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="1733686775743601110">"Таны таблет <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>-с дээш цэнэглэгдэхэд Батарей хэмнэгч унтарна"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="7449283917787428755">"Таны төхөөрөмж <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>-с дээш цэнэглэгдэхэд Батарей хэмнэгч унтарна"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Асаах"</string>
@@ -2849,6 +2848,8 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Бүх зочны апп болон өгөгдлийг зочны горимоос гарах үед устгана"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Зочны үйл ажиллагааг устгах уу?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Энэ зочны харилцан үйлдлийн аппууд болон өгөгдлийг одоо устгах бөгөөд ирээдүйн бүх зочны үйл ажиллагааг таныг зочны горимоос гарах бүрд устгана"</string>
+    <!-- no translation found for remove_guest_on_exit_keywords (4961310523576166193) -->
+    <skip />
     <string name="enable_guest_calling" msgid="8300355036005240911">"Зочинд утас ашиглахыг зөвшөөрөх"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Дуудлагын түүхийг зочин хэрэглэгчтэй хуваалцана"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Утасны дуудлага &amp; SMS авах"</string>
@@ -3112,6 +3113,8 @@
     <string name="call_volume_option_title" msgid="1461105986437268924">"Дуудлагын дууны түвшин"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Сэрүүлгийн дууны түвшин"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Хонх ба мэдэгдлийн дууны түвшин"</string>
+    <!-- no translation found for separate_ring_volume_option_title (2212910223857375951) -->
+    <skip />
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Мэдэгдлийн дууны түвшин"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Утасны хонхны ая"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Мэдэгдлийн өгөгдмөл ая"</string>
@@ -3703,8 +3706,6 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Унтраасан"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Дэлгэрэнгүй"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Зөвшөөрлийн менежер"</string>
-    <string name="app_permissions_summary" msgid="2709819220672938860">"<xliff:g id="APPS">%1$s</xliff:g>-г ашиглаж буй апп"</string>
-    <string name="app_permissions_summary_more" msgid="6247952473615352350">"<xliff:g id="APPS">%1$s</xliff:g>-г ашигладаг апп болон бусад"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Идэвхжүүлэхийн тулд товших"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Төхөөрөмжийг идэвхжүүлэхийн тулд дэлгэцийн аль нэг хэсэгт 2 удаа товших"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Холбоосыг нээх"</string>
@@ -3866,7 +3867,8 @@
     <string name="users_summary" msgid="8473589474976307510">"<xliff:g id="USER_NAME">%1$s</xliff:g>-р нэвтэрсэн"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"Андройдын <xliff:g id="VERSION">%1$s</xliff:g> хувилбарт шинэчилсэн"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"Шинэчлэх боломжтой"</string>
-    <string name="disabled_by_policy_title" msgid="3635622338687810583">"Таны IT админ блоклосон"</string>
+    <!-- no translation found for disabled_by_policy_title (6852347040813204503) -->
+    <skip />
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"Дууны түвшнийг өөрчлөх боломжгүй"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="400089720689494562">"Дуудлага хийх боломжгүй"</string>
     <string name="disabled_by_policy_title_sms" msgid="8951840850778406831">"SMS мессеж илгээх боломжгүй"</string>
@@ -3876,7 +3878,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Таны кредит олгогчоос блоклосон"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Эцэг эх шаардлагатай"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Үүнийг тохируулж эхлэхийн тулд утсыг эцэг эхдээ өгнө үү"</string>
-    <string name="default_admin_support_msg" msgid="8338570262037182531">"Хэрэв танд асуух зүйл байгаа бол IT админтайгаа холбогдоно уу"</string>
+    <!-- no translation found for default_admin_support_msg (8816296554831532033) -->
+    <skip />
     <string name="admin_support_more_info" msgid="8407433155725898290">"Илүү дэлгэрэнгүй"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Тохиргоо, зөвшөөрөл, байгууллагын хандалт, сүлжээний үйл ажиллагаа болон төхөөрөмжийн байршлын мэдээлэл зэрэг таны ажлын профайлтай холбоотой апп, өгөгдлийг таны админ удирдаж, хянах боломжтой."</string>
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"Тохиргоо, зөвшөөрөл, байгууллагын хандалт, сүлжээний үйл ажиллагаа болон төхөөрөмжийн байршлын мэдээлэл зэрэг энэ хэрэглэгчтэй холбоотой апп, өгөгдлийг таны админ удирдаж, хянах боломжтой."</string>
@@ -4707,6 +4710,8 @@
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Хөгжүүлэгчийн тохиргоог ашиглах"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Хэвлэгчийн үйлчилгээ ашиглах"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Олон хэрэглэгчийг зөвшөөрөх"</string>
+    <!-- no translation found for multiple_users_main_switch_keywords (4845954458094134356) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Wireless debugging-г ашиглах"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Графикийн драйверын сонголтыг ашиглах"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Шөнийн гэрлийг ашиглах"</string>
