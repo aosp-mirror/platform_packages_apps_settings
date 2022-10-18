@@ -1104,7 +1104,8 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"తెలుపు సమతుల్యతను ప్రదర్శించండి"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"స్మూత్ డిస్‌ప్లే"</string>
-    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"కొంత కంటెంట్ కోసం రిఫ్రెష్ రేటును ఆటోమేటిక్‌గా 60 నుండి 90 Hz వరకు పెంచుతుంది. బ్యాటరీ వినియోగం పెరుగుతుంది."</string>
+    <!-- no translation found for peak_refresh_rate_summary (3627278682437562787) -->
+    <skip />
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"ఫోర్స్ పీక్ రిఫ్రెష్ రేటు"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"మెరుగైన స్పర్శ ప్రతిస్పందన &amp; యానిమేషన్ క్వాలిటీ కోసం అత్యధిక రిఫ్రెష్ రేటు. ఇది బ్యాటరీ వినియోగం పెరిగేలా చేస్తుంది."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"స్క్రీన్ అటెన్ష‌న్‌"</string>
@@ -1162,6 +1163,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"నిద్రించే సమయ మోడ్ సెట్టింగ్‌లు"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"స్క్రీన్ గడువు ముగింపు"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"ఇన్‌యాక్టివ్‌గా ఉన్న <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> తర్వాత"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"సెట్ చేయనివి"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"వాల్‌పేపర్"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"వాల్‌పేపర్ &amp; స్టయిల్"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"మొదటి ట్యాబ్, లాక్ స్క్రీన్"</string>
@@ -1472,8 +1474,8 @@
     <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"మీ SMS అనువర్తనంగా <xliff:g id="CURRENT_APP">%2$s</xliff:g>కి బదులుగా <xliff:g id="NEW_APP">%1$s</xliff:g>ని ఉపయోగించాలా?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="6215622785087181275">"మీ SMS అనువర్తనంగా <xliff:g id="NEW_APP">%s</xliff:g>ని ఉపయోగించాలా?"</string>
     <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"Wi‑Fi అసిస్టెంట్‌ను మార్చాలా?"</string>
-    <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"మీ నెట్‌వర్క్ కనెక్షన్‌లను నిర్వహించడానికి <xliff:g id="CURRENT_APP">%2$s</xliff:g>కి బదులుగా <xliff:g id="NEW_APP">%1$s</xliff:g>ని ఉపయోగించాలా?"</string>
-    <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"మీ నెట్‌వర్క్ కనెక్షన్‌లను నిర్వహించడానికి <xliff:g id="NEW_APP">%s</xliff:g>ని ఉపయోగించాలా?"</string>
+    <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"మీ నెట్‌వర్క్ కనెక్షన్‌లను మేనేజ్ చేయడానికి <xliff:g id="CURRENT_APP">%2$s</xliff:g>కి బదులుగా <xliff:g id="NEW_APP">%1$s</xliff:g>ని ఉపయోగించాలా?"</string>
+    <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"మీ నెట్‌వర్క్ కనెక్షన్‌లను మేనేజ్ చేయడానికి <xliff:g id="NEW_APP">%s</xliff:g>ని ఉపయోగించాలా?"</string>
     <string name="mobile_unknown_sim_operator" msgid="6650422533065760963">"సిమ్ ఆపరేటర్ తెలియదు"</string>
     <string name="mobile_no_provisioning_url" msgid="609462719893503773">"<xliff:g id="OPERATOR">%1$s</xliff:g>కి తెలిసిన కేటాయింపు వెబ్‌సైట్ ఏదీ లేదు"</string>
     <string name="mobile_insert_sim_card" msgid="3639245241283948038">"దయచేసి సిమ్ కార్డును చొప్పించి, పునఃప్రారంభించండి"</string>
@@ -2412,12 +2414,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"షెడ్యూల్ సెట్ చేయండి"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"బ్యాటరీ జీవితకాలాన్ని పెంచుకోండి"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"ఛార్జ్ అయ్యాక ఆఫ్ చేయండి"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (3618041244703216293) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (1733686775743601110) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (7449283917787428755) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" product="default" msgid="3618041244703216293">"మీ ఫోన్ <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> కంటే ఎక్కువగా ఛార్జ్ అయినప్పుడు బ్యాటరీ సేవర్ ఆఫ్ అవుతుంది"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="1733686775743601110">"మీ టాబ్లెట్ <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> కంటే ఎక్కువగా ఛార్జ్ అయినప్పుడు బ్యాటరీ సేవర్ ఆఫ్ అవుతుంది"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="7449283917787428755">"మీ పరికరం <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> కంటే ఎక్కువగా ఛార్జ్ అయినప్పుడు బ్యాటరీ సేవర్ ఆఫ్ అవుతుంది"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"ఆన్ చేయి"</string>
@@ -2849,6 +2848,8 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"గెస్ట్ మోడ్ నుండి నిష్క్రమించినప్పుడు అన్ని గెస్ట్ యాప్‌లు, డేటాను తొలగించండి"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"గెస్ట్ యాక్టివిటీని తొలగించాలా?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"ఈ గెస్ట్ సెషన్‌లోని యాప్‌లు, డేటా ఇప్పుడు తొలగించబడతాయి, మీరు గెస్ట్ మోడ్ నుండి నిష్క్రమించిన ప్రతిసారీ భవిష్యత్ గెస్ట్ యాక్టివిటీ మొత్తం తొలగించబడుతుంది"</string>
+    <!-- no translation found for remove_guest_on_exit_keywords (4961310523576166193) -->
+    <skip />
     <string name="enable_guest_calling" msgid="8300355036005240911">"ఫోన్ ఉపయోగించడానికి గెస్ట్‌ను అనుమతించండి"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"కాల్ హిస్టరీ గెస్ట్ యూజర్‌తో షేర్ చేయబడుతుంది"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"ఫోన్ కాల్స్‌ &amp; SMS ఆన్ చేయి"</string>
@@ -2910,7 +2911,7 @@
     <string name="amber_alerts_summary" msgid="5755221775246075883">"పిల్లల అపహరణల గురించి వార్తలను స్వీకరించండి"</string>
     <string name="repeat_title" msgid="8676570486899483606">"రిపీట్‌ చేయండి"</string>
     <string name="call_manager_enable_title" msgid="1214301265395158720">"కాల్ నిర్వాహికిని ప్రారంభించు"</string>
-    <string name="call_manager_enable_summary" msgid="7362506369604163030">"మీరు కాల్స్‌ను ఎలా చేయాలో నిర్వహించడానికి ఈ సేవను అనుమతించండి."</string>
+    <string name="call_manager_enable_summary" msgid="7362506369604163030">"మీరు కాల్స్‌ను ఎలా చేయాలో మేనేజ్ చేయడానికి ఈ సేవను అనుమతించండి."</string>
     <string name="call_manager_title" msgid="3397433159509629466">"కాల్ నిర్వాహికి"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
@@ -3112,6 +3113,8 @@
     <string name="call_volume_option_title" msgid="1461105986437268924">"కాల్ వాల్యూమ్"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"అలారం వాల్యూమ్"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"రింగ్ &amp; నోటిఫికేషన్ వాల్యూమ్"</string>
+    <!-- no translation found for separate_ring_volume_option_title (2212910223857375951) -->
+    <skip />
     <string name="notification_volume_option_title" msgid="4838818791683615978">"నోటిఫికేషన్ వాల్యూమ్"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"ఫోన్ రింగ్‌టోన్"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"నోటిఫికేషన్ ఆటోమేటిక్ సౌండ్"</string>
@@ -3703,8 +3706,6 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"ఆఫ్ చేయబడింది"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"అధునాతన సెట్టింగ్‌లు"</string>
     <string name="app_permissions" msgid="8666537659217653626">"అనుమతి మేనేజర్"</string>
-    <string name="app_permissions_summary" msgid="2709819220672938860">"యాప్‌లు <xliff:g id="APPS">%1$s</xliff:g>‌ను ఉపయోగిస్తున్నాయి"</string>
-    <string name="app_permissions_summary_more" msgid="6247952473615352350">"<xliff:g id="APPS">%1$s</xliff:g>ను, మరిన్నిటిని ఉపయోగిస్తున్న యాప్‌లు"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"సక్రియం చేయడానికి నొక్కండి"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"పరికరాన్ని సక్రియం చేయడానికి స్క్రీన్‌పై ఎక్కడైనా రెండుసార్లు నొక్కండి"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"లింక్‌లను తెరవడం"</string>
@@ -3866,7 +3867,8 @@
     <string name="users_summary" msgid="8473589474976307510">"<xliff:g id="USER_NAME">%1$s</xliff:g>‌గా సైన్ ఇన్ చేశారు"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"Android <xliff:g id="VERSION">%1$s</xliff:g>కు అప్‌డేట్ చేయబడింది"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"అప్‌డేట్ అందుబాటులో ఉంది"</string>
-    <string name="disabled_by_policy_title" msgid="3635622338687810583">"మీ IT అడ్మిన్ ద్వారా బ్లాక్ చేయబడింది"</string>
+    <!-- no translation found for disabled_by_policy_title (6852347040813204503) -->
+    <skip />
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"వాల్యూమ్‌ని మార్చలేరు"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="400089720689494562">"కాల్స్‌ను చేయడం సాధ్యం కాదు"</string>
     <string name="disabled_by_policy_title_sms" msgid="8951840850778406831">"SMS మెసేజ్‌లను పంపడం సాధ్యం కాదు"</string>
@@ -3876,7 +3878,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"మీ క్రెడిట్ ప్రొవైడర్ ద్వారా బ్లాక్ చేయబడింది"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"తల్లి/తండ్రి అవసరం"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"దీనిని సెటప్ చేయడం ప్రారంభించడానికి ఫోన్‌ను మీ తల్లి/తండ్రికి అప్పగించండి"</string>
-    <string name="default_admin_support_msg" msgid="8338570262037182531">"మీకు ఏవైనా సందేహాలు ఉంటే, మీ IT అడ్మిన్‌ను సంప్రదించండి"</string>
+    <!-- no translation found for default_admin_support_msg (8816296554831532033) -->
+    <skip />
     <string name="admin_support_more_info" msgid="8407433155725898290">"మరిన్ని వివరాలు"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"సెట్టింగ్‌లు, అనుమతులు, కార్పొరేట్ యాక్సెస్, నెట్‌వర్క్ యాక్టివిటీ మరియు డివైజ్ యొక్క లొకేషన్ సమాచారంతో పాటు మీ కార్యాలయ ప్రొఫైల్‌కి అనుబంధితంగా ఉన్న యాప్‌లు మరియు డేటాను మీ అడ్మిన్ పర్యవేక్షించగలరు, మేనేజ్ చేయగలరు ."</string>
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"సెట్టింగ్‌లు, అనుమతులు, కార్పొరేట్ యాక్సెస్, నెట్‌వర్క్ యాక్టివిటీ మరియు డివైజ్ యొక్క లొకేషన్ సమాచారంతో పాటు ఈ యూజర్‌కు అనుబంధితంగా ఉన్న యాప్‌లు, డేటాను మీ అడ్మిన్ పర్యవేక్షించగలరు, మేనేజ్ చేయగలరు."</string>
@@ -4707,6 +4710,8 @@
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"డెవలపర్ ఆప్షన్‌లను ఉపయోగించండి"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"ప్రింట్ సర్వీస్‌ను ఉపయోగించండి"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"మల్టిపుల్ యూజర్‌లను అనుమతించండి"</string>
+    <!-- no translation found for multiple_users_main_switch_keywords (4845954458094134356) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"వైర్‌లెస్ డీబగ్గింగ్ ఫీచర్‌ను ఉపయోగించండి"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"గ్రాఫిక్స్ డ్రైవర్ ప్రాధాన్యతలను ఉపయోగించండి"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"\'రాత్రి కాంతి\' ఫీచర్‌ను ఉపయోగించండి"</string>

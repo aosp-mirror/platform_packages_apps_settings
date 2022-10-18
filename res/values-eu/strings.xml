@@ -880,7 +880,7 @@
     <string name="passpoint_content" msgid="5219226173518418335">"<xliff:g id="NAME">%1$s</xliff:g> kredentzialak"</string>
     <string name="wifi_eap_method" msgid="3776009521349381742">"EAP metodoa"</string>
     <string name="please_select_phase2" msgid="577633852089847142">"2. faseko autentifikazioa"</string>
-    <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"CA ziurtagiria"</string>
+    <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"Autoritate ziurtagiri-emaile batek jaulkitako ziurtagiria"</string>
     <string name="wifi_eap_ocsp" msgid="8713933962516871238">"Interneteko ziurtagirien egoera"</string>
     <string name="wifi_eap_domain" msgid="8304301470752333203">"Domeinua"</string>
     <string name="wifi_eap_user_cert" msgid="3569182430929173220">"Erabiltzaile-ziurtagiria"</string>
@@ -1104,7 +1104,8 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"Pantailaren zuri-balantzea"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
-    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Freskatze-abiadura 60 Hz-etik 90 Hz-era igotzen du automatikoki zenbait edukitarako. Bateria-erabilera areagotzen du."</string>
+    <!-- no translation found for peak_refresh_rate_summary (3627278682437562787) -->
+    <skip />
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Erabili gehieneko freskatze-abiadura"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Freskatze-abiadura handiena, ukipenei erantzuteko gaitasuna eta animazioen kalitatea hobetzeko. Bateria-erabilera areagotzen du."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Pantaila kontzientea"</string>
@@ -1162,6 +1163,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Lo egiteko garaiaren moduaren ezarpenak"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Pantailaren denbora-muga"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> inaktibo egon ondoren"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Ezarri gabe"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Horma-papera"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Horma-papera eta estiloa"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Hasierako pantaila, pantaila blokeatua"</string>
@@ -2287,7 +2289,7 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Bateria-erabilera handiena"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Ikusi bateria gehien erabiltzen duten aplikazioak"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Kargatze-prozesua etenda dago"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"Bateria babestu da gehiago iraun dezan"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"Bateria babestu da haren balio-bizitza luzatzeko"</string>
     <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
     <skip />
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Lortu kargatzea pausatzeari buruzko informazio gehiago"</string>
@@ -2393,7 +2395,7 @@
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Erabilerarik ez azken 24 orduetan"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"Beste erabiltzaileak"</string>
-    <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Gailuaren erabileran oinarritzen da gelditzen den bateriaren aurreikuspena"</string>
+    <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Gailuaren erabileran oinarritzen da gelditzen den bateriaren estimazioa"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Geratzen den denbora, gutxi gorabehera"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"guztiz kargatu arte"</string>
     <string name="estimated_time_description" msgid="211058785418596009">"Estimazioak gorabeherak izan ditzake erabileraren arabera"</string>
@@ -2412,12 +2414,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Ezarri programazio bat"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Luzatu bateriaren iraupena"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desaktibatu kargatuta dagoenean"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (3618041244703216293) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (1733686775743601110) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (7449283917787428755) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" product="default" msgid="3618041244703216293">"Telefonoaren bateria <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> baino gehiago kargatu denean, desaktibatu egiten da bateria-aurreztailea"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="1733686775743601110">"Tabletaren bateria <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> baino gehiago kargatu denean, desaktibatu egiten da bateria-aurreztailea"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="7449283917787428755">"Gailuaren bateria <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> baino gehiago kargatu denean, desaktibatu egiten da bateria-aurreztailea"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Aktibatu"</string>
@@ -2527,11 +2526,11 @@
     <string name="credentials_erased" msgid="9121052044566053345">"Kredentz. biltegia ezabatu da."</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"Ezin izan da kredentzialen biltegia ezabatu."</string>
     <string name="usage_access_title" msgid="1580006124578134850">"Erabilera-baimena dutenak"</string>
-    <string name="ca_certificate" msgid="3076484307693855611">"CA ziurtagiria"</string>
+    <string name="ca_certificate" msgid="3076484307693855611">"Autoritate ziurtagiri-emaile baten ziurtagiria"</string>
     <string name="user_certificate" msgid="6897024598058566466">"VPN eta aplikazioetarako erabiltzaile-ziurtagiria"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Wifi-ziurtagiria"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Datuak ez dira pribatuak izango"</string>
-    <string name="ca_certificate_warning_description" msgid="8409850109551028774">"Webguneek, aplikazioek eta VPNek erabiltzen dituzte CA ziurtagiriak enkriptatze-helburuetarako. Instalatu erakunde fidagarrien CA ziurtagiriak soilik. \n\n CA ziurtagiri bat instalatzen baduzu, ziurtagiriaren jabea zure datuak atzi litzake; besteak beste, bisitatzen dituzun webgune eta erabiltzen dituzun aplikazioetako pasahitzak edo kreditu-txartelen xehetasunak, baita datuak enkriptatuta badaude ere."</string>
+    <string name="ca_certificate_warning_description" msgid="8409850109551028774">"Webguneek, aplikazioek eta VPNek enkriptatze-helburuetarako erabiltzen dituzte  autoritate ziurtagiri-emaileek jaulkitako ziurtagiriak. Instalatu erakunde fidagarriei dagozkien autoritate ziurtagiri-emaileek jaulkitako ziurtagiriak soilik. \n\n  Autoritate ziurtagiri-emaile batek jaulkitako ziurtagiri bat instalatzen baduzu, baliteke ziurtagiriaren jabea zure datuak atzitzeko gai izatea; besteak beste, baliteke pasahitzak edo kreditu-txartelen xehetasunak atzitzea bisitatzen dituzun webguneen eta erabiltzen dituzun aplikazioen bidez, baita datuak enkriptatuta badaude ere."</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Ez instalatu"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Instalatu halere"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Ziurtagiria ez dago instalatuta"</string>
@@ -2712,7 +2711,7 @@
     <string name="vpn_ipsec_identifier" msgid="8511842694369254801">"IPSec identifikatzailea"</string>
     <string name="vpn_ipsec_secret" msgid="532007567355505963">"IPSec aurrez partekatutako gakoa"</string>
     <string name="vpn_ipsec_user_cert" msgid="2714372103705048405">"IPSec erabiltzaile-ziurtagiria"</string>
-    <string name="vpn_ipsec_ca_cert" msgid="5558498943577474987">"IPSec CA ziurtagiria"</string>
+    <string name="vpn_ipsec_ca_cert" msgid="5558498943577474987">"Autoritate ziurtagiri-emaile batek jaulkitako IPSec ziurtagiria"</string>
     <string name="vpn_ipsec_server_cert" msgid="1411390470454731396">"IPSec zerbitzari-ziurtagiria"</string>
     <string name="vpn_show_options" msgid="6105437733943318667">"Erakutsi aukera aurreratuak"</string>
     <string name="vpn_search_domains" msgid="1973799969613962440">"DNS bilaketa-domeinuak"</string>
@@ -2776,13 +2775,13 @@
     <string name="trusted_credentials_enable_label" msgid="5551204878588237991">"Gaitu"</string>
     <string name="trusted_credentials_remove_label" msgid="8296330919329489422">"Desinstalatu"</string>
     <string name="trusted_credentials_trust_label" msgid="4841047312274452474">"Fidagarria da"</string>
-    <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Sistemaren CA ziurtagiria gaitu?"</string>
-    <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Sistemaren CA ziurtagiria desgaitu?"</string>
-    <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Erabiltzailearen CA ziurtagiria betiko kendu?"</string>
+    <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Autoritate ziurtagiri-emaile batek jaulkitako sistema-ziurtagiria gaitu?"</string>
+    <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Autoritate ziurtagiri-emaile batek jaulkitako sistema-ziurtagiria desgaitu?"</string>
+    <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Autoritate ziurtagiri-emaile batek jaulkitako erabiltzaile-ziurtagiria betiko kendu?"</string>
     <string name="credential_contains" msgid="407972262032275476">"Sarreraren edukia:"</string>
     <string name="one_userkey" msgid="4417212932385103517">"erabiltzaile-gako bat"</string>
     <string name="one_usercrt" msgid="1865069301105101370">"erabiltzaile-ziurtagiri bat"</string>
-    <string name="one_cacrt" msgid="7467796501404158399">"CA ziurtagiri bat"</string>
+    <string name="one_cacrt" msgid="7467796501404158399">"autoritate ziurtagiri-emaile batek jaulkitako ziurtagiri bat"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"%d CA ziurtagiri"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"Kredentzialen xehetasunak"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"Kendu da kredentziala: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
@@ -2849,6 +2848,8 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Gonbidatu modutik irtetean, ezabatu gonbidatuaren aplikazio eta datu guztiak"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Gonbidatuaren jarduerak ezabatu nahi dituzu?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Gonbidatuentzako saio honetako aplikazio eta datuak orain ezabatuko dira; bestalde, etorkizuneko gonbidatuen jarduera guztiak gonbidatu modutik irteten zaren bakoitzean ezabatuko dira"</string>
+    <!-- no translation found for remove_guest_on_exit_keywords (4961310523576166193) -->
+    <skip />
     <string name="enable_guest_calling" msgid="8300355036005240911">"Eman telefonoa erabiltzeko baimena gonbidatuari"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Deien historia erabiltzaile gonbidatuarekin partekatuko da"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Aktibatu telefono-deiak eta SMSak"</string>
@@ -3112,6 +3113,8 @@
     <string name="call_volume_option_title" msgid="1461105986437268924">"Deien bolumena"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Alarmaren bolumena"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Tonu eta jakinarazpenen bolumena"</string>
+    <!-- no translation found for separate_ring_volume_option_title (2212910223857375951) -->
+    <skip />
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Jakinarazpenen bolumena"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Telefonoaren tonua"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Jakinarazpenen soinu lehenetsia"</string>
@@ -3703,8 +3706,6 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Desaktibatuta"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Aurreratuak"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Baimenen kudeatzailea"</string>
-    <string name="app_permissions_summary" msgid="2709819220672938860">"Hauek atzi ditzaketen aplikazioak: <xliff:g id="APPS">%1$s</xliff:g>"</string>
-    <string name="app_permissions_summary_more" msgid="6247952473615352350">"<xliff:g id="APPS">%1$s</xliff:g> eta beste erabiltzen dituzten aplikazioak"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Sakatu aktibatzeko"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Sakatu birritan pantailako edozein puntu gailua aktibatzeko"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Irekiko diren estekak"</string>
@@ -3866,7 +3867,8 @@
     <string name="users_summary" msgid="8473589474976307510">"<xliff:g id="USER_NAME">%1$s</xliff:g> gisa hasi duzu saioa"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"Android <xliff:g id="VERSION">%1$s</xliff:g> bertsiora eguneratuta"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"Eguneratu egin daiteke"</string>
-    <string name="disabled_by_policy_title" msgid="3635622338687810583">"IKT saileko administratzaileak blokeatu egin du"</string>
+    <!-- no translation found for disabled_by_policy_title (6852347040813204503) -->
+    <skip />
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"Ezin da aldatu bolumena"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="400089720689494562">"Ezin da deirik egin"</string>
     <string name="disabled_by_policy_title_sms" msgid="8951840850778406831">"Ezin da SMS mezurik bidali"</string>
@@ -3876,7 +3878,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Kreditu-hornitzaileak blokeatu egin du"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Guraso baten laguntza beharko duzu"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Eman telefonoa guraso bati konfiguratzen hasteko"</string>
-    <string name="default_admin_support_msg" msgid="8338570262037182531">"Galderarik baduzu, jarri IKT saileko administratzailearekin harremanetan"</string>
+    <!-- no translation found for default_admin_support_msg (8816296554831532033) -->
+    <skip />
     <string name="admin_support_more_info" msgid="8407433155725898290">"Xehetasun gehiago"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Administratzaileak gainbegiratu eta kudeatu egin ditzake laneko profilarekin erlazionatutako aplikazioak eta datuak, besteak beste, ezarpenak, baimenak, enpresaren sarbide-baimenak, sareko jarduerak eta gailuaren kokapen-informazioa."</string>
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"Administratzaileak gainbegiratu eta kudeatu egin ditzake erabiltzailearekin erlazionatutako aplikazioak eta datuak, besteak beste, ezarpenak, baimenak, enpresaren sarbide-baimenak, sareko jarduerak eta gailuaren kokapen-informazioa."</string>
@@ -4184,8 +4187,8 @@
     <string name="enterprise_privacy_ca_certs_personal" msgid="1516422660828485795">"Profil pertsonaleko kredentzial fidagarriak"</string>
     <string name="enterprise_privacy_ca_certs_work" msgid="4318941788592655561">"Laneko profileko kredentzial fidagarriak"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="6459725295322004179">
-      <item quantity="other">Gutxienez <xliff:g id="COUNT_1">%d</xliff:g> CA ziurtagiri</item>
-      <item quantity="one">Gutxienez <xliff:g id="COUNT_0">%d</xliff:g> CA ziurtagiri</item>
+      <item quantity="other">Autoritate ziurtagiri-emaile batek jaulkitako <xliff:g id="COUNT_1">%d</xliff:g> ziurtagiri gutxienez</item>
+      <item quantity="one">Autoritate ziurtagiri-emaile batek jaulkitako <xliff:g id="COUNT_0">%d</xliff:g> ziurtagiri gutxienez</item>
     </plurals>
     <string name="enterprise_privacy_lock_device" msgid="464054894363899866">"Administratzaileak gailua blokea eta pasahitza berrezar dezake"</string>
     <string name="enterprise_privacy_wipe_device" msgid="869589182352244591">"Administratzaileak gailuko datu guztiak ezaba ditzake"</string>
@@ -4707,6 +4710,8 @@
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Erabili garatzaileentzako aukerak"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Erabili inprimatzeko zerbitzua"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Baimendu erabiltzaile bat baino gehiago"</string>
+    <!-- no translation found for multiple_users_main_switch_keywords (4845954458094134356) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Erabili hari gabeko arazketa"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Erabili grafikoen kontrolatzailearen hobespenak"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Erabili gaueko argia"</string>

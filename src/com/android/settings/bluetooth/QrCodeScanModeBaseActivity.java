@@ -22,7 +22,7 @@ import android.os.SystemProperties;
 
 import androidx.fragment.app.FragmentManager;
 
-import com.android.settingslib.R;
+import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.ObservableActivity;
 
 import com.google.android.setupdesign.util.ThemeHelper;
