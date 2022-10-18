@@ -1106,7 +1106,8 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"螢幕白平衡"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"流暢顯示"</string>
-    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"自動將某些內容的重新整理頻率從 60 調高到 90 赫茲 (Hz)。請注意，開啟這項設定會增加電池用量。"</string>
+    <!-- no translation found for peak_refresh_rate_summary (3627278682437562787) -->
+    <skip />
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"強制使用最高重新整理頻率"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"強制使用最高重新整理頻率可提升觸控回應和動畫品質。請注意，開啟這項設定會增加電池用量。"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"螢幕感知"</string>
@@ -1164,6 +1165,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"就寢模式設定"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"螢幕自動關閉"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"閒置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>後"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"未設定"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"桌布"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"桌布和樣式"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"主畫面、螢幕鎖定畫面"</string>
@@ -2414,12 +2416,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"設定時間表"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"延長電池續航力"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"充電時關閉"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (3618041244703216293) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (1733686775743601110) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (7449283917787428755) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" product="default" msgid="3618041244703216293">"在手機充電達 <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> 的電量時關閉省電模式式"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="1733686775743601110">"在平板電腦充電達 <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> 的電量時關閉省電模式"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="7449283917787428755">"在裝置充電達 <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> 的電量時關閉省電模式"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"開啟"</string>
@@ -2851,6 +2850,8 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"離開訪客模式時刪除所有訪客應用程式和資料"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"要刪除訪客活動嗎？"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"系統將立即刪除這個訪客工作階段中的應用程式和資料，日後只要你離開訪客模式，系統都會將該次訪客活動全部刪除"</string>
+    <!-- no translation found for remove_guest_on_exit_keywords (4961310523576166193) -->
+    <skip />
     <string name="enable_guest_calling" msgid="8300355036005240911">"允許訪客使用手機"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"將與訪客使用者共用通話記錄。"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"開啟通話和簡訊功能"</string>
@@ -3114,6 +3115,8 @@
     <string name="call_volume_option_title" msgid="1461105986437268924">"通話音量"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"鬧鐘音量"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"鈴聲和通知音量"</string>
+    <!-- no translation found for separate_ring_volume_option_title (2212910223857375951) -->
+    <skip />
     <string name="notification_volume_option_title" msgid="4838818791683615978">"通知音量"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"手機鈴聲"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"預設通知音效"</string>
@@ -3705,8 +3708,6 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"已關閉"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"進階"</string>
     <string name="app_permissions" msgid="8666537659217653626">"權限管理員"</string>
-    <string name="app_permissions_summary" msgid="2709819220672938860">"目前使用<xliff:g id="APPS">%1$s</xliff:g>的應用程式"</string>
-    <string name="app_permissions_summary_more" msgid="6247952473615352350">"有權存取<xliff:g id="APPS">%1$s</xliff:g>和其他項目的應用程式"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"輕觸即可喚醒"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"在螢幕上任一處輕觸兩下即可喚醒裝置"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"開啟連結"</string>
@@ -3868,7 +3869,8 @@
     <string name="users_summary" msgid="8473589474976307510">"登入身分：<xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"已更新至 Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"有可用的更新"</string>
-    <string name="disabled_by_policy_title" msgid="3635622338687810583">"IT 管理員已封鎖這項設定"</string>
+    <!-- no translation found for disabled_by_policy_title (6852347040813204503) -->
+    <skip />
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"無法變更音量"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="400089720689494562">"無法撥打電話"</string>
     <string name="disabled_by_policy_title_sms" msgid="8951840850778406831">"無法傳送簡訊"</string>
@@ -3878,7 +3880,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"信貸提供者已封鎖這項設定"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"必須由家長操作"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"如要開始設定這項功能，請將手機交給家長"</string>
-    <string name="default_admin_support_msg" msgid="8338570262037182531">"如有任何問題，請與你的 IT 管理員聯絡"</string>
+    <!-- no translation found for default_admin_support_msg (8816296554831532033) -->
+    <skip />
     <string name="admin_support_more_info" msgid="8407433155725898290">"其他詳細資訊"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"你的管理員可以監控及管理與你的工作資料夾相關聯的應用程式和資料，包括設定、權限、公司系統權限、網路活動，以及裝置的位置資訊。"</string>
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"你的管理員可以監控及管理與這位使用者相關聯的應用程式和資料，包括設定、權限、公司系統權限、網路活動，以及裝置的位置資訊。"</string>
@@ -4709,6 +4712,8 @@
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"使用開發人員選項"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"使用列印服務"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"允許多位使用者"</string>
+    <!-- no translation found for multiple_users_main_switch_keywords (4845954458094134356) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"使用無線偵錯功能"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"使用繪圖驅動程式偏好設定"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"使用夜燈功能"</string>

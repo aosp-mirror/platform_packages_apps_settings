@@ -35,7 +35,6 @@ import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -73,14 +72,13 @@ public class ButtonActionDialogFragmentTest {
         verify(mTargetFragment).handleDialogClick(anyInt());
     }
 
-    @Ignore
     @Test
     public void testOnClick_forceStop_dismissDialog() {
         ButtonActionDialogFragment fragment =
-                spy(ButtonActionDialogFragment.newInstance(FORCE_STOP_ID));
+                ButtonActionDialogFragment.newInstance(FORCE_STOP_ID);
         FragmentController.setupFragment(fragment, FragmentActivity.class, 0 /* containerViewId */,
                 null /* bundle */);
-        doReturn(mTargetFragment).when(fragment).getTargetFragment();
+        fragment.setTargetFragment(mTargetFragment, 0);
         doNothing().when(mTargetFragment).handleDialogClick(anyInt());
         final AlertDialog dialog = mock(AlertDialog.class);
 

@@ -1110,7 +1110,8 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"Balanço de branco da tela"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
-    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Aumenta automaticamente a taxa de atualização de 60 para 90 Hz para alguns conteúdos. Maior uso da bateria"</string>
+    <!-- no translation found for peak_refresh_rate_summary (3627278682437562787) -->
+    <skip />
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Forçar taxa de atualização máxima"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Maior taxa de atualização para melhoria na resposta tátil e na qualidade das animações. Maior uso da bateria."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Reconhecimento de tela em uso"</string>
@@ -1168,6 +1169,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Configurações do Modo hora de dormir"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Tempo limite da tela"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Depois de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inatividade"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Sem definição"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Plano de fundo"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Plano de fundo e estilo"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Tela inicial, tela de bloqueio"</string>
@@ -2418,12 +2420,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Definir uma programação"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Prolongar a duração da bateria"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desativar após carregar"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (3618041244703216293) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (1733686775743601110) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (7449283917787428755) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" product="default" msgid="3618041244703216293">"A Economia de bateria é desativada quando a carga do smartphone chega a mais de <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="1733686775743601110">"A Economia de bateria é desativada quando a carga do tablet chega a mais de <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="7449283917787428755">"A Economia de bateria é desativada quando a carga do dispositivo chega a mais de <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Ativar"</string>
@@ -2855,6 +2854,8 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Excluir todos os apps e dados do convidado ao sair do modo convidado"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Excluir atividade do convidado?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Os apps e dados desta sessão de convidado serão excluídos agora e toda a atividade futura será excluída sempre que você sair do modo convidado"</string>
+    <!-- no translation found for remove_guest_on_exit_keywords (4961310523576166193) -->
+    <skip />
     <string name="enable_guest_calling" msgid="8300355036005240911">"Permitir que o visitante use o telefone"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"O histórico de ligações será compartilhado com o usuário visitante"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Ativar chamadas telefônicas e SMS"</string>
@@ -3118,6 +3119,8 @@
     <string name="call_volume_option_title" msgid="1461105986437268924">"Volume das chamadas"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Volume do alarme"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Volume de toques e notificações"</string>
+    <!-- no translation found for separate_ring_volume_option_title (2212910223857375951) -->
+    <skip />
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Volume das notificações"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Toque do telefone"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Som de notificação padrão"</string>
@@ -3709,8 +3712,6 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Desativadas"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Avançado"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Gestão de permissões"</string>
-    <string name="app_permissions_summary" msgid="2709819220672938860">"Apps usando <xliff:g id="APPS">%1$s</xliff:g>"</string>
-    <string name="app_permissions_summary_more" msgid="6247952473615352350">"Apps usando <xliff:g id="APPS">%1$s</xliff:g> e mais"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Tocar para ativar"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Toque duas vezes em qualquer parte da tela para ativar o dispositivo"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Abrir links"</string>
@@ -3872,7 +3873,8 @@
     <string name="users_summary" msgid="8473589474976307510">"Conectado como <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"Atualizado para o Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"Atualização disponível"</string>
-    <string name="disabled_by_policy_title" msgid="3635622338687810583">"Ação bloqueada pelo adm. de TI"</string>
+    <!-- no translation found for disabled_by_policy_title (6852347040813204503) -->
+    <skip />
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"Não é possível alterar o volume"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="400089720689494562">"Não é possível fazer chamadas"</string>
     <string name="disabled_by_policy_title_sms" msgid="8951840850778406831">"Não é possível enviar mensagens SMS"</string>
@@ -3882,7 +3884,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Configuração bloqueada pelo provedor de crédito"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Consentimento necessário"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Para iniciar a configuração, entregue o smartphone ao seu pai/mãe"</string>
-    <string name="default_admin_support_msg" msgid="8338570262037182531">"Se você tiver perguntas, entre em contato com o administrador de TI"</string>
+    <!-- no translation found for default_admin_support_msg (8816296554831532033) -->
+    <skip />
     <string name="admin_support_more_info" msgid="8407433155725898290">"Mais detalhes"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Seu administrador pode monitorar e gerenciar apps e dados associados ao seu perfil de trabalho, incluindo configurações, permissões, acesso corporativo, atividade de rede e informações de local do dispositivo."</string>
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"Seu administrador pode monitorar e gerenciar apps e dados associados a este usuário, incluindo configurações, permissões, acesso corporativo, atividade de rede e informações de local do dispositivo."</string>
@@ -4713,6 +4716,8 @@
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Usar as opções do desenvolvedor"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Usar o serviço de impressão"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Permitir vários usuários"</string>
+    <!-- no translation found for multiple_users_main_switch_keywords (4845954458094134356) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Usar a depuração por Wi-Fi"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Usar as preferências do driver gráfico"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Usar o Modo noturno"</string>

@@ -1130,7 +1130,8 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"Balansul de alb al ecranului"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
-    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Ridică automat rata de actualizare de la 60 la 90 Hz pentru unele tipuri de conținut. Mărește utilizarea bateriei."</string>
+    <!-- no translation found for peak_refresh_rate_summary (3627278682437562787) -->
+    <skip />
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Forțează rata maximă de actualizare"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Cea mai ridicată rată de actualizare, pentru receptivitate la atingere îmbunătățită și animații de calitate. Mărește utilizarea bateriei."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Atenție la ecran"</string>
@@ -1188,6 +1189,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Setările modului Ora de culcare"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Durată până la dezactivarea ecranului"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"După <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactivitate"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Nesetate"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Imagine de fundal"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Imagine de fundal și stil"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Ecran de pornire, ecran de blocare"</string>
@@ -2455,12 +2457,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Setează un program"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Prelungește autonomia bateriei"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Dezactivează când este încărcat complet"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (3618041244703216293) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (1733686775743601110) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (7449283917787428755) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" product="default" msgid="3618041244703216293">"Economisirea bateriei se dezactivează când telefonul se încarcă peste <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="1733686775743601110">"Economisirea bateriei se dezactivează când tableta se încarcă peste <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="7449283917787428755">"Economisirea bateriei se dezactivează când dispozitivul se încarcă peste <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Activează"</string>
@@ -2896,6 +2895,8 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Șterge toate aplicațiile și datele invitatului când ieși din modul pentru invitați"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Ștergi activitatea invitatului?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Aplicațiile și datele din această sesiune pentru invitați vor fi șterse acum și toate activitățile viitoare ale invitaților vor fi șterse de fiecare dată când ieși din modul pentru invitați"</string>
+    <!-- no translation found for remove_guest_on_exit_keywords (4961310523576166193) -->
+    <skip />
     <string name="enable_guest_calling" msgid="8300355036005240911">"Invitații pot folosi telefonul"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Utilizatorul invitat va avea acces la istoricul apelurilor"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Activează apelurile telefonice și SMS-urile"</string>
@@ -3159,6 +3160,8 @@
     <string name="call_volume_option_title" msgid="1461105986437268924">"Volumul apelului"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Volumul alarmei"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Volum pentru sonerie și notificări"</string>
+    <!-- no translation found for separate_ring_volume_option_title (2212910223857375951) -->
+    <skip />
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Volumul notificărilor"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Ton de sonerie al telefonului"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Sunet de notificare prestabilit"</string>
@@ -3763,8 +3766,6 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Dezactivate"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Avansate"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Manager de permisiuni"</string>
-    <string name="app_permissions_summary" msgid="2709819220672938860">"Aplicații care folosesc <xliff:g id="APPS">%1$s</xliff:g>"</string>
-    <string name="app_permissions_summary_more" msgid="6247952473615352350">"Aplicațiile care folosesc <xliff:g id="APPS">%1$s</xliff:g> și altele"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Atinge pentru a activa"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Atinge de două ori oriunde pe ecran pentru a activa dispozitivul"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Deschiderea linkurilor"</string>
@@ -3928,7 +3929,8 @@
     <string name="users_summary" msgid="8473589474976307510">"Te-ai conectat ca <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"Actualizat la Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"Actualizare disponibilă"</string>
-    <string name="disabled_by_policy_title" msgid="3635622338687810583">"Blocat de administratorul IT"</string>
+    <!-- no translation found for disabled_by_policy_title (6852347040813204503) -->
+    <skip />
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"Nu se poate modifica volumul"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="400089720689494562">"Nu se pot iniția apeluri"</string>
     <string name="disabled_by_policy_title_sms" msgid="8951840850778406831">"Nu se pot trimite SMS-uri"</string>
@@ -3938,7 +3940,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Blocată de creditor"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Acord parental necesar"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Dă telefonul părinților ca să înceapă configurarea"</string>
-    <string name="default_admin_support_msg" msgid="8338570262037182531">"Dacă ai întrebări, contactează administratorul IT"</string>
+    <!-- no translation found for default_admin_support_msg (8816296554831532033) -->
+    <skip />
     <string name="admin_support_more_info" msgid="8407433155725898290">"Mai multe detalii"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Administratorul poate să monitorizeze și să gestioneze aplicațiile și datele asociate profilului de serviciu, inclusiv setările, permisiunile, accesul la nivelul companiei, activitatea în rețea și informațiile despre locația dispozitivului."</string>
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"Administratorul poate să monitorizeze și să gestioneze aplicațiile și datele asociate acestui utilizator, inclusiv setările, permisiunile, accesul la nivelul companiei, activitatea în rețea și informațiile despre locația dispozitivului."</string>
@@ -4781,6 +4784,8 @@
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Folosește opțiuni pentru dezvoltatori"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Folosește serviciul de printare"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Permite utilizatori multipli"</string>
+    <!-- no translation found for multiple_users_main_switch_keywords (4845954458094134356) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Folosește remedierea erorilor wireless"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Folosește preferințele pentru driverul plăcii grafice"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Folosește Lumina de noapte"</string>
