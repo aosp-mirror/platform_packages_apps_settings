@@ -18,6 +18,7 @@ import android.os.UserManager;
 
 import androidx.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dream.DreamSettings;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -26,9 +27,12 @@ public class ScreenSaverPreferenceController extends AbstractPreferenceControlle
         PreferenceControllerMixin {
 
     private static final String KEY_SCREEN_SAVER = "screensaver";
+    private final boolean mDreamsDisabledByAmbientModeSuppression;
 
     public ScreenSaverPreferenceController(Context context) {
         super(context);
+        mDreamsDisabledByAmbientModeSuppression = context.getResources().getBoolean(
+                com.android.internal.R.bool.config_dreamsDisabledByAmbientModeSuppressionConfig);
     }
 
     @Override
@@ -47,7 +51,12 @@ public class ScreenSaverPreferenceController extends AbstractPreferenceControlle
 
     @Override
     public void updateState(Preference preference) {
-        preference.setSummary(DreamSettings.getSummaryTextWithDreamName(mContext));
+        if (mDreamsDisabledByAmbientModeSuppression
+                && AmbientDisplayAlwaysOnPreferenceController.isAodSuppressedByBedtime(mContext)) {
+            preference.setSummary(R.string.screensaver_settings_when_to_dream_bedtime);
+        } else {
+            preference.setSummary(DreamSettings.getSummaryTextWithDreamName(mContext));
+        }
     }
 
     private boolean isSystemUser() {
