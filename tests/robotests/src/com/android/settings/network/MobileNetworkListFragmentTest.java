@@ -21,8 +21,10 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.UserManager;
 
+import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 
 import org.junit.Before;
@@ -37,6 +39,8 @@ import org.robolectric.util.ReflectionHelpers;
 public class MobileNetworkListFragmentTest {
     @Mock
     private Context mContext;
+    @Mock
+    private Resources mResources;
     @Mock
     private UserManager mUserManager;
 
@@ -55,6 +59,9 @@ public class MobileNetworkListFragmentTest {
         final BaseSearchIndexProvider provider =
                 (BaseSearchIndexProvider) mFragment.SEARCH_INDEX_DATA_PROVIDER;
 
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
+
         final Object obj = ReflectionHelpers.callInstanceMethod(provider, "isPageSearchEnabled",
                 ReflectionHelpers.ClassParameter.from(Context.class, mContext));
         final boolean isEnabled = (Boolean) obj;
@@ -68,6 +75,9 @@ public class MobileNetworkListFragmentTest {
         when(mUserManager.isAdminUser()).thenReturn(false);
         final BaseSearchIndexProvider provider =
                 (BaseSearchIndexProvider) mFragment.SEARCH_INDEX_DATA_PROVIDER;
+
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
 
         final Object obj = ReflectionHelpers.callInstanceMethod(provider, "isPageSearchEnabled",
                 ReflectionHelpers.ClassParameter.from(Context.class, mContext));
