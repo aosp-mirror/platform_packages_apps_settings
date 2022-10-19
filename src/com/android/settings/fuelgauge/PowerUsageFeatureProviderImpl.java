@@ -25,7 +25,6 @@ import android.util.ArraySet;
 import android.util.SparseIntArray;
 
 import com.android.internal.util.ArrayUtils;
-import com.android.settings.R;
 import com.android.settings.fuelgauge.batteryusage.BatteryHistEntry;
 import com.android.settingslib.fuelgauge.Estimate;
 
@@ -189,11 +188,5 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public CharSequence[] getHideApplicationEntries(Context context) {
         return new CharSequence[0];
-    }
-
-    @Override
-    public CharSequence[] getHideApplicationSummary(Context context) {
-        return context.getResources().getTextArray(
-                R.array.allowlist_hide_summary_in_battery_usage);
     }
 }

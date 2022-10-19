@@ -114,9 +114,6 @@ public final class BatteryChartPreferenceControllerTest {
         final Resources resources = spy(mContext.getResources());
         resources.getConfiguration().setLocales(new LocaleList(new Locale("en_US")));
         doReturn(resources).when(mContext).getResources();
-        doReturn(new String[]{"com.android.googlequicksearchbox"})
-                .when(mFeatureFactory.powerUsageFeatureProvider)
-                .getHideApplicationSummary(mContext);
         doReturn(new String[]{"com.android.gms.persistent"})
                 .when(mFeatureFactory.powerUsageFeatureProvider)
                 .getHideApplicationEntries(mContext);
@@ -519,21 +516,6 @@ public final class BatteryChartPreferenceControllerTest {
     }
 
     @Test
-    public void setPreferenceSummary_notAllowShownPackage_setSummayAsNull() {
-        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
-        pref.setSummary(PREF_SUMMARY);
-        final BatteryDiffEntry batteryDiffEntry =
-                spy(createBatteryDiffEntry(
-                        /*foregroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS,
-                        /*backgroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS));
-        doReturn("com.android.googlequicksearchbox").when(batteryDiffEntry)
-                .getPackageName();
-
-        mBatteryChartPreferenceController.setPreferenceSummary(pref, batteryDiffEntry);
-        assertThat(pref.getSummary()).isNull();
-    }
-
-    @Test
     public void onExpand_expandedIsTrue_addSystemEntriesToPreferenceGroup() {
         doReturn(1).when(mAppListGroup).getPreferenceCount();
         mBatteryChartPreferenceController.mBatteryUsageMap = createBatteryUsageMap();
@@ -677,18 +659,6 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(mBatteryChartPreferenceController.mHourlyChartIndex)
                 .isEqualTo(expectedHourlyIndex);
         assertThat(mBatteryChartPreferenceController.mIsExpanded).isTrue();
-    }
-
-    @Test
-    public void isValidToShowSummary_returnExpectedResult() {
-        assertThat(mBatteryChartPreferenceController
-                .isValidToShowSummary("com.google.android.apps.scone"))
-                .isTrue();
-
-        // Verifies the item which is defined in the array list.
-        assertThat(mBatteryChartPreferenceController
-                .isValidToShowSummary("com.android.googlequicksearchbox"))
-                .isFalse();
     }
 
     @Test

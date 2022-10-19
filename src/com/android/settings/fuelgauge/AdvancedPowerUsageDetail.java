@@ -133,8 +133,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     /** Launches battery details page for an individual battery consumer. */
     public static void startBatteryDetailPage(
             Activity caller, InstrumentedPreferenceFragment fragment,
-            BatteryDiffEntry diffEntry, String usagePercent,
-            boolean isValidToShowSummary, String slotInformation) {
+            BatteryDiffEntry diffEntry, String usagePercent, String slotInformation) {
         final BatteryHistEntry histEntry = diffEntry.mBatteryHistEntry;
         final LaunchBatteryDetailPageArgs launchArgs = new LaunchBatteryDetailPageArgs();
         // configure the launch argument.
@@ -145,10 +144,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         launchArgs.mUid = (int) histEntry.mUid;
         launchArgs.mIconId = diffEntry.getAppIconId();
         launchArgs.mConsumedPower = (int) diffEntry.mConsumePower;
-        launchArgs.mForegroundTimeMs =
-            isValidToShowSummary ? diffEntry.mForegroundUsageTimeInMs : 0;
-        launchArgs.mBackgroundTimeMs =
-            isValidToShowSummary ? diffEntry.mBackgroundUsageTimeInMs : 0;
+        launchArgs.mForegroundTimeMs = diffEntry.mForegroundUsageTimeInMs;
+        launchArgs.mBackgroundTimeMs = diffEntry.mBackgroundUsageTimeInMs;
         launchArgs.mIsUserEntry = histEntry.isUserEntry();
         startBatteryDetailPage(caller, fragment, launchArgs);
     }
