@@ -44,12 +44,7 @@ import java.util.List;
 /** Tests for {@link BatteryUsageContentProvider}. */
 @RunWith(RobolectricTestRunner.class)
 public final class BatteryUsageContentProviderTest {
-    private static final Uri VALID_BATTERY_STATE_CONTENT_URI =
-            new Uri.Builder()
-                    .scheme(ContentResolver.SCHEME_CONTENT)
-                    .authority(DatabaseUtils.AUTHORITY)
-                    .appendPath(DatabaseUtils.BATTERY_STATE_TABLE)
-                    .build();
+    private static final Uri VALID_BATTERY_STATE_CONTENT_URI = DatabaseUtils.BATTERY_CONTENT_URI;
 
     private Context mContext;
     private BatteryUsageContentProvider mProvider;
