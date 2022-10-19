@@ -121,7 +121,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
             controllers.add(internetPreferenceController);
         }
         controllers.add(privateDnsPreferenceController);
-        controllers.add(new NetworkProviderCallsSmsController(context, lifecycle));
+        controllers.add(new NetworkProviderCallsSmsController(context, lifecycle, lifecycleOwner));
         return controllers;
     }
 
