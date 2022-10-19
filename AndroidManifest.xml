@@ -6,6 +6,11 @@
 
     <original-package android:name="com.android.settings"/>
 
+    <!-- Permissions for reading or writing battery-related data. -->
+    <permission
+        android:name="com.android.settings.BATTERY_DATA"
+        android:protectionLevel="signature|privileged"/>
+
     <uses-permission android:name="android.permission.REQUEST_NETWORK_SCORES" />
     <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
@@ -2960,6 +2965,13 @@
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_battery"/>
         </activity>
+
+        <provider
+            android:name=".fuelgauge.batteryusage.BatteryUsageContentProvider"
+            android:enabled="true"
+            android:exported="true"
+            android:authorities="${applicationId}.battery.usage.provider"
+            android:permission="com.android.settings.BATTERY_DATA"/>
 
         <activity
             android:name="Settings$BatterySaverSettingsActivity"

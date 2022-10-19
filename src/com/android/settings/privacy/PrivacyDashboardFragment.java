@@ -25,9 +25,12 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROF
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
@@ -130,6 +133,22 @@ public class PrivacyDashboardFragment extends DashboardFragment {
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+                    final int profileUserId =
+                            Utils.getManagedProfileId(
+                                    UserManager.get(context), UserHandle.myUserId());
+                    // If work profile is supported, we should keep the search result.
+                    if (profileUserId != UserHandle.USER_NULL) {
+                        return keys;
+                    }
+
+                    // Otherwise, we should hide the search result.
+                    keys.add(KEY_NOTIFICATION_WORK_PROFILE_NOTIFICATIONS);
+                    return keys;
                 }
             };
 }
