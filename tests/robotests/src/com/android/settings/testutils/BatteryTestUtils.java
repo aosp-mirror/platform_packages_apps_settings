@@ -16,8 +16,21 @@
 
 package com.android.settings.testutils;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.BatteryManager;
+import android.os.UserManager;
+
+import androidx.room.Room;
+
+import com.android.settings.fuelgauge.batteryusage.db.BatteryState;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDao;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
+
+import com.google.common.collect.ImmutableList;
+
+import org.robolectric.Shadows;
+import org.robolectric.shadows.ShadowUserManager;
 
 public class BatteryTestUtils {
 
@@ -35,6 +48,65 @@ public class BatteryTestUtils {
                 10 /* level */,
                 100 /* scale */,
                 BatteryManager.BATTERY_STATUS_DISCHARGING);
+    }
+
+    /** Sets the work profile mode. */
+    public static void setWorkProfile(Context context) {
+        final UserManager userManager = context.getSystemService(UserManager.class);
+        Shadows.shadowOf(userManager).setManagedProfile(true);
+        // Changes out of the default system user so isSystemUser() returns false.
+        final int userId = 1001;
+        Shadows.shadowOf(userManager)
+                .addUser(userId, "name", /*flags=*/ ShadowUserManager.FLAG_PRIMARY);
+        Shadows.shadowOf(userManager).switchUser(userId);
+    }
+
+    /** Creates and sets up the in-memory {@link BatteryStateDatabase}. */
+    public static BatteryStateDatabase setUpBatteryStateDatabase(Context context) {
+        final BatteryStateDatabase inMemoryDatabase =
+                Room.inMemoryDatabaseBuilder(context, BatteryStateDatabase.class)
+                        .allowMainThreadQueries()
+                        .build();
+        BatteryStateDatabase.setBatteryStateDatabase(inMemoryDatabase);
+        return inMemoryDatabase;
+    }
+
+    /** Inserts a fake data into the database for testing. */
+    public static void insertDataToBatteryStateDatabase(
+            Context context, long timestamp, String packageName) {
+        insertDataToBatteryStateDatabase(context, timestamp, packageName, /*multiple=*/ false);
+    }
+
+    /** Inserts a fake data into the database for testing. */
+    public static void insertDataToBatteryStateDatabase(
+            Context context, long timestamp, String packageName, boolean multiple) {
+        final BatteryState state =
+                new BatteryState(
+                        /*uid=*/ 1001L,
+                        /*userId=*/ 100L,
+                        /*appLabel=*/ "Settings",
+                        packageName,
+                        /*isHidden=*/ true,
+                        /*bootTimestamp=*/ timestamp - 1,
+                        timestamp,
+                        /*zoneId=*/ "Europe/Paris",
+                        /*totalPower=*/ 100f,
+                        /*consumePower=*/ 0.3f,
+                        /*percentOfTotal=*/ 10f,
+                        /*foregroundUsageTimeInMs=*/ 60000,
+                        /*backgroundUsageTimeInMs=*/ 10000,
+                        /*drainType=*/ 1,
+                        /*consumerType=*/ 2,
+                        /*batteryLevel=*/ 31,
+                        /*batteryStatus=*/ 0,
+                        /*batteryHealth=*/ 0);
+        BatteryStateDao dao =
+                BatteryStateDatabase.getInstance(context).batteryStateDao();
+        if (multiple) {
+            dao.insertAll(ImmutableList.of(state));
+        } else {
+            dao.insert(state);
+        }
     }
 
     private static Intent getCustomBatteryIntent(int plugged, int level, int scale, int status) {

@@ -86,8 +86,7 @@
     <com.android.settings.RestrictedListPreference
         android:key="privacy_lock_screen_notifications"
         android:title="@string/lock_screen_notifs_title"
-        android:summary="@string/summary_placeholder"
-        settings:searchable="false"/>
+        android:summary="@string/summary_placeholder"/>
 
     <!-- Show media on lock screen -->
     <SwitchPreference
@@ -117,8 +116,7 @@
             android:key="privacy_lock_screen_work_profile_notifications"
             android:title="@string/locked_work_profile_notification_title"
             android:summary="@string/summary_placeholder"
-            android:order="999"
-            settings:searchable="false"/>
+            android:order="999"/>
     </PreferenceCategory>
 
     <!-- Content Capture -->

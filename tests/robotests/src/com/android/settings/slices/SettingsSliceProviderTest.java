@@ -61,12 +61,9 @@ import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.wifi.slice.WifiScanWorker;
-import com.android.settingslib.wifi.WifiTracker;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -100,7 +97,6 @@ import java.util.Set;
 @Config(shadows = {ShadowUserManager.class, ShadowUtils.class,
         SlicesDatabaseAccessorTest.ShadowApplicationPackageManager.class,
         ShadowBluetoothAdapter.class, ShadowLockPatternUtils.class,
-        SettingsSliceProviderTest.ShadowWifiScanWorker.class,
         SettingsSliceProviderTest.ShadowTheme.class})
 public class SettingsSliceProviderTest {
 
@@ -123,6 +119,7 @@ public class SettingsSliceProviderTest {
     private Context mContext;
     private SettingsSliceProvider mProvider;
     private ShadowPackageManager mPackageManager;
+
     @Mock
     private SliceManager mManager;
 
@@ -573,14 +570,6 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
-    @Ignore
-    public void bindSlice_wifiSlice_returnsWifiSlice() {
-        final Slice wifiSlice = mProvider.onBindSlice(CustomSliceRegistry.WIFI_SLICE_URI);
-
-        assertThat(wifiSlice.getUri()).isEqualTo(CustomSliceRegistry.WIFI_SLICE_URI);
-    }
-
-    @Test
     public void bindSlice_flashlightSlice_returnsFlashlightSlice() {
         Settings.Secure.putInt(
                 mContext.getContentResolver(), Settings.Secure.FLASHLIGHT_AVAILABLE, 1);
@@ -601,32 +590,6 @@ public class SettingsSliceProviderTest {
                 .build();
 
         mProvider.onSlicePinned(uri);
-    }
-
-    @Test
-    @Ignore
-    public void onSlicePinned_backgroundWorker_started() {
-        mProvider.onSlicePinned(CustomSliceRegistry.WIFI_SLICE_URI);
-
-        verify(ShadowWifiScanWorker.getWifiTracker()).onStart();
-    }
-
-    @Test
-    @Ignore
-    public void onSlicePinned_backgroundWorker_stopped() {
-        mProvider.onSlicePinned(CustomSliceRegistry.WIFI_SLICE_URI);
-        mProvider.onSliceUnpinned(CustomSliceRegistry.WIFI_SLICE_URI);
-
-        verify(ShadowWifiScanWorker.getWifiTracker()).onStop();
-    }
-
-    @Test
-    @Ignore
-    public void shutdown_backgroundWorker_closed() {
-        mProvider.onSlicePinned(CustomSliceRegistry.WIFI_SLICE_URI);
-        mProvider.shutdown();
-
-        verify(ShadowWifiScanWorker.getWifiTracker()).onDestroy();
     }
 
     @Test
@@ -714,31 +677,6 @@ public class SettingsSliceProviderTest {
                 .setPreferenceControllerClassName(SliceTestUtils.FAKE_CONTROLLER_NAME)
                 .setHighlightMenuRes(SliceTestUtils.FAKE_HIGHLIGHT_MENU_RES)
                 .build();
-    }
-
-    @Implements(WifiScanWorker.class)
-    public static class ShadowWifiScanWorker {
-        private static WifiTracker mWifiTracker;
-
-        @Implementation
-        protected void onSlicePinned() {
-            mWifiTracker = mock(WifiTracker.class);
-            mWifiTracker.onStart();
-        }
-
-        @Implementation
-        protected void onSliceUnpinned() {
-            mWifiTracker.onStop();
-        }
-
-        @Implementation
-        protected void close() {
-            mWifiTracker.onDestroy();
-        }
-
-        static WifiTracker getWifiTracker() {
-            return mWifiTracker;
-        }
     }
 
     @Implements(value = StrictMode.class)
