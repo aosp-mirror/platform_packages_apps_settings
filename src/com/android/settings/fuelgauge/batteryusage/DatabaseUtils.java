@@ -141,6 +141,12 @@ public final class DatabaseUtils {
         });
     }
 
+    /** Gets the latest sticky battery intent from framework. */
+    static Intent getBatteryIntent(Context context) {
+        return context.registerReceiver(
+                /*receiver=*/ null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+    }
+
     static List<ContentValues> sendBatteryEntryData(
             Context context,
             List<BatteryEntry> batteryEntryList,
@@ -298,12 +304,6 @@ public final class DatabaseUtils {
             }
         }
         return resultMap;
-    }
-
-    /** Gets the latest sticky battery intent from framework. */
-    private static Intent getBatteryIntent(Context context) {
-        return context.registerReceiver(
-                /*receiver=*/ null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
     }
 
     private static int getBatteryLevel(Intent intent) {
