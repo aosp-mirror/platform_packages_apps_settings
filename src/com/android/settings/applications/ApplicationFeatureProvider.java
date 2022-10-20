@@ -19,6 +19,8 @@ package com.android.settings.applications;
 import android.annotation.UserIdInt;
 import android.content.Intent;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 import java.util.Set;
 
@@ -85,8 +87,9 @@ public interface ApplicationFeatureProvider {
      * Returns a user readable text explaining how much time user has spent in an app at a
      * pre-specified duration.
      */
+    @NonNull
     default CharSequence getTimeSpentInApp(String packageName) {
-        return null;
+        return "";
     }
 
     /**
