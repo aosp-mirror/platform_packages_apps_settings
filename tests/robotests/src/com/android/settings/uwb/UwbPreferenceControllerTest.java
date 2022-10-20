@@ -31,7 +31,6 @@ import android.uwb.UwbManager;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -94,9 +93,11 @@ public class UwbPreferenceControllerTest {
                 .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
-    @Ignore
     @Test
     public void isChecked_uwbEnabled_shouldReturnTrue() {
+        doReturn(mPackageManager).when(mContext).getPackageManager();
+        doReturn(true).when(mPackageManager)
+                .hasSystemFeature(PackageManager.FEATURE_UWB);
         doReturn(mController.STATE_ENABLED_ACTIVE).when(mUwbManager).getAdapterState();
 
         assertThat(mController.isChecked()).isTrue();
@@ -104,6 +105,9 @@ public class UwbPreferenceControllerTest {
 
     @Test
     public void isChecked_uwbDisabled_shouldReturnFalse() {
+        doReturn(mPackageManager).when(mContext).getPackageManager();
+        doReturn(true).when(mPackageManager)
+                .hasSystemFeature(PackageManager.FEATURE_UWB);
         doReturn(mController.STATE_DISABLED).when(mUwbManager).getAdapterState();
 
         assertThat(mController.isChecked()).isFalse();
