@@ -38,9 +38,7 @@ public class MoreSettingsPreferenceController extends BasePreferenceController {
 
     PackageManager mPm;
     String mPackage;
-    int mUserId;
-    Intent mIntent = new Intent(Intent.ACTION_MAIN)
-            .addCategory(NotificationListenerService.INTENT_CATEGORY_SETTINGS_HOME);
+    Intent mIntent = new Intent(NotificationListenerService.ACTION_SETTINGS_HOME);
 
     public MoreSettingsPreferenceController(Context context) {
         super(context, KEY_MORE_SETTINGS);

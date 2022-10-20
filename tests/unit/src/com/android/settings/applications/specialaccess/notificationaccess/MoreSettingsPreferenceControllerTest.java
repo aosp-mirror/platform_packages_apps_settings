@@ -22,7 +22,6 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -73,9 +72,8 @@ public class MoreSettingsPreferenceControllerTest {
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
         assertThat(captor.getValue().getPackage()).isEqualTo(mPkg);
-        assertThat(captor.getValue().getAction()).isEqualTo(Intent.ACTION_MAIN);
-        assertThat(captor.getValue().getCategories()).contains(
-                NotificationListenerService.INTENT_CATEGORY_SETTINGS_HOME);
+        assertThat(captor.getValue().getAction()).contains(
+                NotificationListenerService.ACTION_SETTINGS_HOME);
     }
 
     @Test
@@ -92,8 +90,7 @@ public class MoreSettingsPreferenceControllerTest {
         mController.updateState(preference);
 
         assertThat(preference.getIntent().getPackage()).isEqualTo(mPkg);
-        assertThat(preference.getIntent().getAction()).isEqualTo(Intent.ACTION_MAIN);
-        assertThat(preference.getIntent().getCategories()).contains(
-                NotificationListenerService.INTENT_CATEGORY_SETTINGS_HOME);
+        assertThat(preference.getIntent().getAction()).isEqualTo(
+                NotificationListenerService.ACTION_SETTINGS_HOME);
     }
 }
