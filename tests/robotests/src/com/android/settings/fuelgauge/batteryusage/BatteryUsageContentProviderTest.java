@@ -20,9 +20,11 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertThrows;
 
+import android.app.Application;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 
@@ -37,9 +39,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.Shadows;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /** Tests for {@link BatteryUsageContentProvider}. */
 @RunWith(RobolectricTestRunner.class)
@@ -301,6 +305,11 @@ public final class BatteryUsageContentProviderTest {
         final String actualPackageName3 = cursor.getString(packageNameIndex);
         assertThat(actualPackageName3).isEqualTo(packageName3);
         cursor.close();
-        // TODO: add verification for recheck broadcast.
+        // Verifies the broadcast intent.
+        TimeUnit.SECONDS.sleep(1);
+        final List<Intent> intents = Shadows.shadowOf((Application) mContext).getBroadcastIntents();
+        assertThat(intents).hasSize(1);
+        assertThat(intents.get(0).getAction()).isEqualTo(
+                BootBroadcastReceiver.ACTION_PERIODIC_JOB_RECHECK);
     }
 }
