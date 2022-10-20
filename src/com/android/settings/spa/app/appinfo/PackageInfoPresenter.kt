@@ -29,6 +29,7 @@ import android.util.Log
 import androidx.compose.runtime.Composable
 import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.spa.framework.compose.LocalNavController
+import com.android.settingslib.spaprivileged.framework.common.asUser
 import com.android.settingslib.spaprivileged.framework.compose.DisposableBroadcastReceiverAsUser
 import com.android.settingslib.spaprivileged.model.app.PackageManagers
 import kotlinx.coroutines.CoroutineScope
@@ -49,8 +50,8 @@ class PackageInfoPresenter(
     private val coroutineScope: CoroutineScope,
 ) {
     private val metricsFeatureProvider = FeatureFactory.getFactory(context).metricsFeatureProvider
-    val contextAsUser by lazy { context.createContextAsUser(UserHandle.of(userId), 0) }
-    val packageManagerAsUser: PackageManager by lazy { contextAsUser.packageManager }
+    val userContext by lazy { context.asUser(UserHandle.of(userId)) }
+    val packageManagerAsUser: PackageManager by lazy { userContext.packageManager }
     private val _flow: MutableStateFlow<PackageInfo?> = MutableStateFlow(null)
 
     val flow: StateFlow<PackageInfo?> = _flow

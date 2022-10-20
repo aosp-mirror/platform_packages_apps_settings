@@ -19,7 +19,7 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.android.settings.tests.spa_unit">
 
-    <application>
+    <application android:debuggable="true">
         <provider android:name="com.android.settings.slices.SettingsSliceProvider"
                   android:authorities="${applicationId}.slices"
                   tools:replace="android:authorities"/>

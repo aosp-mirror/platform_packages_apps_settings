@@ -68,12 +68,12 @@ class AppStoragePreferenceTest {
     }
 
     @Test
-    fun uninstalledApp_notDisplayed() {
-        val uninstalledApp = ApplicationInfo()
+    fun notInstalledApp_notDisplayed() {
+        val notInstalledApp = ApplicationInfo()
 
         composeTestRule.setContent {
             CompositionLocalProvider(LocalContext provides context) {
-                AppStoragePreference(uninstalledApp)
+                AppStoragePreference(notInstalledApp)
             }
         }
 
