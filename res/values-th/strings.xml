@@ -1104,8 +1104,7 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"แสดงไวท์บาลานซ์"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
-    <!-- no translation found for peak_refresh_rate_summary (3627278682437562787) -->
-    <skip />
+    <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"เพิ่มอัตราการรีเฟรชจาก 60 เป็น <xliff:g id="ID_1">%1$s</xliff:g> Hz โดยอัตโนมัติสำหรับเนื้อหาบางรายการ เพิ่มการใช้งานแบตเตอรี่"</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"บังคับอัตราการรีเฟรชเป็นสูงสุด"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"อัตราการรีเฟรชสูงสุดสำหรับการตอบสนองต่อการแตะและคุณภาพของภาพเคลื่อนไหวที่ดียิ่งขึ้น เพิ่มการใช้งานแบตเตอรี่"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"การจดจ่อที่หน้าจอ"</string>
@@ -1174,6 +1173,7 @@
     <string name="style_suggestion_summary" msgid="4271131877800968159">"ลองใช้รูปแบบ วอลเปเปอร์ และอื่นๆ ที่มีหลากหลาย"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"โปรแกรมรักษาหน้าจอ"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"โปรแกรมรักษาหน้าจอ"</string>
+    <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"ใช้ไม่ได้เนื่องจากโหมดเวลาเข้านอนเปิดอยู่"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"ใช้โปรแกรมรักษาหน้าจอ"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"ขณะชาร์จหรือวางอยู่บนแท่นชาร์จ"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"ขณะที่ชาร์จ"</string>
@@ -2848,8 +2848,7 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"ลบแอปและข้อมูลทั้งหมดของผู้ใช้ชั่วคราวเมื่อออกจากโหมดผู้ใช้ชั่วคราว"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"ลบกิจกรรมของผู้ใช้ชั่วคราวไหม"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"ระบบจะลบแอปและข้อมูลจากเซสชันผู้ใช้ชั่วคราวนี้ตอนนี้เลย และต่อไปนี้จะลบกิจกรรมทั้งหมดของผู้ใช้ชั่วคราวทุกครั้งที่คุณออกจากโหมดผู้ใช้ชั่วคราว"</string>
-    <!-- no translation found for remove_guest_on_exit_keywords (4961310523576166193) -->
-    <skip />
+    <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"ลบ, ผู้ใช้ชั่วคราว, กิจกรรม, นำออก, ข้อมูล, ผู้เข้าชม, ลบออก"</string>
     <string name="enable_guest_calling" msgid="8300355036005240911">"อนุญาตให้ผู้มาเยือนใช้โทรศัพท์"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"ระบบจะแชร์ประวัติการโทรกับผู้ใช้ที่เป็นผู้มาเยือน"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"เปิดการโทรและ SMS"</string>
@@ -3113,8 +3112,7 @@
     <string name="call_volume_option_title" msgid="1461105986437268924">"ระดับเสียงการโทร"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"ระดับเสียงปลุก"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"ระดับเสียงเรียกเข้าและการแจ้งเตือน"</string>
-    <!-- no translation found for separate_ring_volume_option_title (2212910223857375951) -->
-    <skip />
+    <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"ระดับเสียงเรียกเข้า"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"ระดับเสียงของการแจ้งเตือน"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"เสียงเรียกเข้า"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"เสียงแจ้งเตือนเริ่มต้น"</string>
@@ -3413,6 +3411,8 @@
     <string name="notif_listener_excluded_app_summary" msgid="2914567678047195396">"เปลี่ยนการตั้งค่าของแต่ละแอปที่ส่งการแจ้งเตือน"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"แอปที่แสดงในอุปกรณ์"</string>
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"แอปนี้ไม่รองรับการตั้งค่าที่ปรับปรุง"</string>
+    <string name="notif_listener_more_settings" msgid="1348409392307208921">"การตั้งค่าเพิ่มเติม"</string>
+    <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"สามารถใช้งานการตั้งค่าเพิ่มเติมได้ในแอปนี้"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"บริการตัวช่วย VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"แอปที่ติดตั้งอยู่ไม่ได้ขอให้เรียกใช้เป็นบริการตัวช่วย VR"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"อนุญาตให้ <xliff:g id="SERVICE">%1$s</xliff:g> เข้าถึงบริการ VR ไหม"</string>
@@ -3867,8 +3867,7 @@
     <string name="users_summary" msgid="8473589474976307510">"ลงชื่อเข้าใช้เป็น<xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"อัปเดตเป็น Android <xliff:g id="VERSION">%1$s</xliff:g> แล้ว"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"มีเวอร์ชันอัปเดต"</string>
-    <!-- no translation found for disabled_by_policy_title (6852347040813204503) -->
-    <skip />
+    <string name="disabled_by_policy_title" msgid="6852347040813204503">"นโยบายการทำงานบล็อกไว้"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"ปรับระดับเสียงไม่ได้"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="400089720689494562">"โทรออกไม่ได้"</string>
     <string name="disabled_by_policy_title_sms" msgid="8951840850778406831">"ส่งข้อความ SMS ไม่ได้"</string>
@@ -3878,8 +3877,7 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"ผู้ให้บริการเครดิตบล็อกไว้"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"ต้องขอความยินยอมจากผู้ปกครอง"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"ส่งโทรศัพท์ให้ผู้ปกครองเริ่มตั้งค่านี้"</string>
-    <!-- no translation found for default_admin_support_msg (8816296554831532033) -->
-    <skip />
+    <string name="default_admin_support_msg" msgid="8816296554831532033">"โปรดติดต่อผู้ดูแลระบบไอทีของคุณหากต้องการข้อมูลเพิ่มเติม"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"รายละเอียดเพิ่มเติม"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"ผู้ดูแลระบบสามารถตรวจสอบและจัดการแอปและข้อมูลที่เชื่อมโยงกับโปรไฟล์งานของคุณ ซึ่งรวมถึงการตั้งค่า สิทธิ์ การเข้าถึงขององค์กร กิจกรรมเครือข่าย และข้อมูลตำแหน่งของอุปกรณ์"</string>
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"ผู้ดูแลระบบสามารถตรวจสอบและจัดการแอปและข้อมูลที่เชื่อมโยงกับผู้ใช้นี้ ซึ่งรวมถึงการตั้งค่า สิทธิ์ การเข้าถึงขององค์กร กิจกรรมเครือข่าย และข้อมูลตำแหน่งของอุปกรณ์"</string>
@@ -4710,8 +4708,7 @@
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"ใช้ตัวเลือกสำหรับนักพัฒนาแอป"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"ใช้บริการพิมพ์"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"อนุญาตให้มีผู้ใช้หลายคน"</string>
-    <!-- no translation found for multiple_users_main_switch_keywords (4845954458094134356) -->
-    <skip />
+    <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"อนุญาต, หลายคน, ผู้ใช้, อนุมัติ, จำนวนมาก"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ใช้การแก้ไขข้อบกพร่องผ่าน Wi-Fi"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"ใช้ค่ากำหนดไดรเวอร์กราฟิก"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"ใช้แสงตอนกลางคืน"</string>

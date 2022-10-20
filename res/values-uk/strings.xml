@@ -350,7 +350,7 @@
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Видаліть наявну модель обличчя, щоб повторно налаштувати фейсконтроль.\n\nВашу модель обличчя буде вилучено назавжди.\n\nПісля цього, щоб розблокувати телефон або пройти автентифікацію в додатках, вам знадобиться відбиток пальця, PIN-код, ключ або пароль."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Функції фейсконтролю"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Коли ввімкнено фейсконтроль"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Очі мають бути відкритими"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Очі мають бути розплющеними"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Розблоковувати телефон, коли очі відкриті"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Завжди просити підтвердження"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Просити підтвердження під час використання фейсконтролю в додатках"</string>
@@ -1148,8 +1148,7 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"Баланс білого для екрана"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Плавне відображення"</string>
-    <!-- no translation found for peak_refresh_rate_summary (3627278682437562787) -->
-    <skip />
+    <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Автоматично збільшує частоту оновлення певного контенту із 60 до <xliff:g id="ID_1">%1$s</xliff:g> Гц. Збільшує використання заряду акумулятора."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Примусово найбільша частота оновлення"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Найвища частота оновлення для кращого реагування на дотики й вищої якості анімації. Підвищує використання заряду акумулятора."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Адаптивний сплячий режим"</string>
@@ -1207,8 +1206,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Налаштування нічного режиму"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Час вимкнення екрана"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Коли минає <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> бездіяльності"</string>
-    <!-- no translation found for screen_timeout_summary_not_set (5107680774964178875) -->
-    <skip />
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Не вказано"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Фоновий малюнок"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Оформлення та стиль"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Головний екран, заблокований екран"</string>
@@ -1219,6 +1217,8 @@
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Спробуйте інші стилі, фонові малюнки тощо"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Заставка"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"заставка"</string>
+    <!-- no translation found for screensaver_settings_when_to_dream_bedtime (3279310576803094771) -->
+    <skip />
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Використовувати заставку"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Під час заряджання чи в док-станції"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Під час заряджання"</string>
@@ -2935,8 +2935,7 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Видалити всі додатки й дані гостя під час виходу з режиму гостя"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Видалити дії в режимі гостя?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Додатки й дані з цього сеансу в режимі гостя буде видалено зараз, а всі майбутні дії гостя видалятимуться під час кожного виходу з цього режиму"</string>
-    <!-- no translation found for remove_guest_on_exit_keywords (4961310523576166193) -->
-    <skip />
+    <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"видалити, гість, дії, вилучити, дані, відвідувач, стерти"</string>
     <string name="enable_guest_calling" msgid="8300355036005240911">"Дозволити гостю користуватися телефоном"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"У режимі гостя користувач матиме доступ до історії викликів"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Увімкнути телефонні дзвінки й SMS"</string>
@@ -3200,8 +3199,7 @@
     <string name="call_volume_option_title" msgid="1461105986437268924">"Гучність розмови"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Гучність будильника"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Гучність дзвінків і сповіщень"</string>
-    <!-- no translation found for separate_ring_volume_option_title (2212910223857375951) -->
-    <skip />
+    <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Гучність дзвінка"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Гучність сповіщень"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Сигнал дзвінка"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Стандартний звук сповіщень"</string>
@@ -3506,6 +3504,10 @@
     <string name="notif_listener_excluded_app_summary" msgid="2914567678047195396">"Змінюйте налаштування для кожного додатка, що надсилає сповіщення"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Додатки, показані на пристрої"</string>
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Цей додаток не підтримує розширені налаштування"</string>
+    <!-- no translation found for notif_listener_more_settings (1348409392307208921) -->
+    <skip />
+    <!-- no translation found for notif_listener_more_settings_desc (7995492074281663658) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"Допоміжні VR-сервіси"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Установлені додатки не запитували доступу для роботи в режимі допоміжних VR-сервісів."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Надати VR-сервісу доступ до сервісу <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -3984,8 +3986,7 @@
     <string name="users_summary" msgid="8473589474976307510">"Ви ввійшли як <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"Оновлено до Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"Доступне оновлення"</string>
-    <!-- no translation found for disabled_by_policy_title (6852347040813204503) -->
-    <skip />
+    <string name="disabled_by_policy_title" msgid="6852347040813204503">"Заблоковано відповідно до правил організації"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"Гучність не можна змінити"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="400089720689494562">"Заборонено телефонувати"</string>
     <string name="disabled_by_policy_title_sms" msgid="8951840850778406831">"Заборонено надсилати повідомлення"</string>
@@ -3995,8 +3996,7 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Налаштування заблокував кредитор"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Потрібна згода батьків"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Щоб розпочати налаштування, передай телефон комусь із батьків"</string>
-    <!-- no translation found for default_admin_support_msg (8816296554831532033) -->
-    <skip />
+    <string name="default_admin_support_msg" msgid="8816296554831532033">"Щоб дізнатися більше, зверніться до системного адміністратора"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Докладніше"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Адміністратор може відстежувати та контролювати додатки й дані, пов’язані з вашим робочим профілем, зокрема налаштування, дозволи, корпоративний доступ, активність у мережі чи інформацію про місцезнаходження пристрою."</string>
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"Адміністратор може відстежувати та контролювати додатки й дані, пов’язані з цим користувачем, зокрема налаштування, дозволи, корпоративний доступ, активність у мережі чи інформацію про місцезнаходження пристрою."</string>
@@ -4851,8 +4851,7 @@
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Використовувати Параметри розробника"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Використовувати сервіс друку"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Дозволити кілька користувачів"</string>
-    <!-- no translation found for multiple_users_main_switch_keywords (4845954458094134356) -->
-    <skip />
+    <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"дозволити, кілька, користувач, дозвіл, багато"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Використовувати налагодження через Wi-Fi"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Використовувати параметри графічного драйвера"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Використовувати нічний екран"</string>
