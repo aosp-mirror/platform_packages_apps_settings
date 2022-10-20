@@ -2973,6 +2973,14 @@
             android:authorities="${applicationId}.battery.usage.provider"
             android:permission="com.android.settings.BATTERY_DATA"/>
 
+        <receiver android:name=".fuelgauge.batteryusage.BatteryUsageBroadcastReceiver"
+                  android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.settings.battery.action.FETCH_BATTERY_USAGE_DATA"/>
+                <action android:name="com.android.settings.battery.action.CLEAR_BATTERY_CACHE_DATA"/>
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name="Settings$BatterySaverSettingsActivity"
             android:label="@string/battery_saver"

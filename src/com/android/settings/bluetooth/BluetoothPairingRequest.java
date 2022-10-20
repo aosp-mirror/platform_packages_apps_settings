@@ -87,9 +87,7 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
                 return;
             }
 
-            if (mBluetoothManager.getCachedDeviceManager().shouldPairByCsip(device, groupId)) {
-                device.createBond(BluetoothDevice.TRANSPORT_LE);
-            }
+            mBluetoothManager.getCachedDeviceManager().pairDeviceByCsip(device, groupId);
         }
     }
 }

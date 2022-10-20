@@ -35,13 +35,11 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.testutils.FakeFeatureFactory
-import com.android.settingslib.spaprivileged.framework.common.storageStatsManager
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.any
 import org.mockito.Mockito.anyInt
 import org.mockito.Spy
