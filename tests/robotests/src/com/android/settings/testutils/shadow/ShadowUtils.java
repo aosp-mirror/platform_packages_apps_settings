@@ -22,6 +22,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -39,6 +40,7 @@ import java.util.Map;
 public class ShadowUtils {
 
     private static FingerprintManager sFingerprintManager = null;
+    private static FaceManager sFaceManager = null;
     private static boolean sIsUserAMonkey;
     private static boolean sIsDemoUser;
     private static ComponentName sDeviceOwnerComponentName;
@@ -61,6 +63,15 @@ public class ShadowUtils {
 
     public static void setFingerprintManager(FingerprintManager fingerprintManager) {
         sFingerprintManager = fingerprintManager;
+    }
+
+    @Implementation
+    protected static FaceManager getFaceManagerOrNull(Context context) {
+        return sFaceManager;
+    }
+
+    public static void setFaceManager(FaceManager faceManager) {
+        sFaceManager = faceManager;
     }
 
     public static void reset() {
