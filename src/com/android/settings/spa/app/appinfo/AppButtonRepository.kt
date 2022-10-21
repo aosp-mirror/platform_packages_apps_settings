@@ -60,13 +60,12 @@ class AppButtonRepository(private val context: Context) {
         val homePackages = mutableSetOf<String>()
         val homeActivities = ArrayList<ResolveInfo>()
         val currentDefaultHome = packageManager.getHomeActivities(homeActivities)
-        homeActivities.map { it.activityInfo }.forEach {
-            homePackages.add(it.packageName)
+        homeActivities.mapNotNull { it.activityInfo }.forEach { activityInfo ->
+            homePackages.add(activityInfo.packageName)
             // Also make sure to include anything proxying for the home app
-            val metaPackageName = it.metaData?.getString(ActivityManager.META_HOME_ALTERNATE)
-            if (metaPackageName != null && signaturesMatch(metaPackageName, it.packageName)) {
-                homePackages.add(metaPackageName)
-            }
+            activityInfo.metaData?.getString(ActivityManager.META_HOME_ALTERNATE)
+                ?.takeIf { signaturesMatch(it, activityInfo.packageName) }
+                ?.let { homePackages.add(it) }
         }
         return HomePackages(homePackages, currentDefaultHome)
     }

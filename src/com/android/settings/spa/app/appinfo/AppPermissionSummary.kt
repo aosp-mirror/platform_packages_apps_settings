@@ -24,6 +24,7 @@ import androidx.lifecycle.LiveData
 import com.android.settings.R
 import com.android.settingslib.applications.PermissionsSummaryHelper
 import com.android.settingslib.applications.PermissionsSummaryHelper.PermissionsResultCallback
+import com.android.settingslib.spaprivileged.framework.common.asUser
 import com.android.settingslib.spaprivileged.model.app.userHandle
 
 data class AppPermissionSummaryState(
@@ -35,8 +36,8 @@ class AppPermissionSummaryLiveData(
     private val context: Context,
     private val app: ApplicationInfo,
 ) : LiveData<AppPermissionSummaryState>() {
-    private val contextAsUser = context.createContextAsUser(app.userHandle, 0)
-    private val packageManager = contextAsUser.packageManager
+    private val userContext = context.asUser(app.userHandle)
+    private val packageManager = userContext.packageManager
 
     private val onPermissionsChangedListener = OnPermissionsChangedListener { uid ->
         if (uid == app.uid) update()
@@ -53,7 +54,7 @@ class AppPermissionSummaryLiveData(
 
     private fun update() {
         PermissionsSummaryHelper.getPermissionSummary(
-            contextAsUser, app.packageName, permissionsCallback
+            userContext, app.packageName, permissionsCallback
         )
     }
 

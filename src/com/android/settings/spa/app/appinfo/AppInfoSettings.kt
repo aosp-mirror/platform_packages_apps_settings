@@ -92,7 +92,12 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
 
         AppPermissionPreference(app)
         AppStoragePreference(app)
+        // TODO: instant_app_launch_supported_domain_urls
+        // TODO: data_settings
         AppTimeSpentPreference(app)
+        // TODO: battery
+        // TODO: app_language_setting
+        AppOpenByDefaultPreference(app)
 
         Category(title = stringResource(R.string.advanced_apps)) {
             DisplayOverOtherAppsAppListProvider.InfoPageEntryItem(app)
