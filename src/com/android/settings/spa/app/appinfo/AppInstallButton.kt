@@ -33,7 +33,7 @@ class AppInstallButton(private val packageInfoPresenter: PackageInfoPresenter) {
         val app = packageInfo.applicationInfo
         if (!app.isInstantApp) return null
 
-        return AppStoreUtil.getAppStoreLink(packageInfoPresenter.contextAsUser, app.packageName)
+        return AppStoreUtil.getAppStoreLink(packageInfoPresenter.userContext, app.packageName)
             ?.let { intent -> installButton(intent, app) }
     }
 

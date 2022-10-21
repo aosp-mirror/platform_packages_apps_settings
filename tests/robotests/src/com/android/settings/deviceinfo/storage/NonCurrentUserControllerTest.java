@@ -26,6 +26,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.IActivityManager;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
@@ -36,10 +37,11 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settingslib.applications.StorageStatsSource;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.drawable.UserIconDrawable;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,12 +50,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-public class SecondaryUserControllerTest {
+@Config(shadows = {ShadowActivityManager.class})
+public class NonCurrentUserControllerTest {
 
     private static final String TEST_NAME = "Fred";
     private static final String TARGET_PREFERENCE_GROUP_KEY = "pref_secondary_users";
@@ -63,10 +67,13 @@ public class SecondaryUserControllerTest {
     private PreferenceScreen mScreen;
     @Mock
     private PreferenceGroup mGroup;
+    @Mock
+    private IActivityManager mActivityService;
 
     private Context mContext;
-    private SecondaryUserController mController;
+    private NonCurrentUserController mController;
     private UserInfo mPrimaryUser;
+
 
     @Before
     public void setUp() throws Exception {
@@ -74,12 +81,18 @@ public class SecondaryUserControllerTest {
         mContext = RuntimeEnvironment.application;
         mPrimaryUser = new UserInfo();
         mPrimaryUser.flags = UserInfo.FLAG_PRIMARY;
-        mController = new SecondaryUserController(mContext, mPrimaryUser);
+        mController = new NonCurrentUserController(mContext, mPrimaryUser);
+        ShadowActivityManager.setService(mActivityService);
 
         when(mScreen.getContext()).thenReturn(mContext);
         when(mScreen.findPreference(anyString())).thenReturn(mGroup);
         when(mGroup.getKey()).thenReturn(TARGET_PREFERENCE_GROUP_KEY);
 
+    }
+
+    @After
+    public void tearDown() {
+        ShadowActivityManager.setCurrentUser(mPrimaryUser.id);
     }
 
     @Test
@@ -107,22 +120,18 @@ public class SecondaryUserControllerTest {
     }
 
     @Test
-    public void noSecondaryUserAddedIfNoneExist() {
+    public void noNonCurrentUserAddedIfNoneExist() {
         final ArrayList<UserInfo> userInfos = new ArrayList<>();
         userInfos.add(mPrimaryUser);
         when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
         when(mUserManager.getUsers()).thenReturn(userInfos);
-        final List<AbstractPreferenceController> controllers =
-                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager,
-                        false /* isWorkProfileOnly */);
-
-        assertThat(controllers).hasSize(1);
-        // We should have the NoSecondaryUserController.
-        assertThat(controllers.get(0) instanceof SecondaryUserController).isFalse();
+        final List<NonCurrentUserController> controllers =
+                NonCurrentUserController.getNonCurrentUserControllers(mContext, mUserManager);
+        assertThat(controllers).hasSize(0);
     }
 
     @Test
-    public void getSecondaryUserControllers_notWorkProfile_addSecondaryUserController() {
+    public void getNonCurrentUserControllers_notWorkProfile_addNonCurrentUserController() {
         final ArrayList<UserInfo> userInfos = new ArrayList<>();
         final UserInfo secondaryUser = spy(new UserInfo());
         secondaryUser.id = 10;
@@ -131,17 +140,16 @@ public class SecondaryUserControllerTest {
         userInfos.add(mPrimaryUser);
         userInfos.add(secondaryUser);
         when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
+        ShadowActivityManager.setCurrentUser(secondaryUser.id);
         when(mUserManager.getUsers()).thenReturn(userInfos);
-        final List<AbstractPreferenceController> controllers =
-                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager,
-                        false /* isWorkProfileOnly */);
+        final List<NonCurrentUserController> controllers =
+                NonCurrentUserController.getNonCurrentUserControllers(mContext, mUserManager);
 
         assertThat(controllers).hasSize(1);
-        assertThat(controllers.get(0) instanceof SecondaryUserController).isTrue();
     }
 
     @Test
-    public void getSecondaryUserControllers_workProfile_addNoSecondaryUserController() {
+    public void getNonCurrentUserControllers_workProfileOfNonCurrentUser() {
         final ArrayList<UserInfo> userInfos = new ArrayList<>();
         final UserInfo secondaryUser = spy(new UserInfo());
         secondaryUser.id = 10;
@@ -150,56 +158,37 @@ public class SecondaryUserControllerTest {
         userInfos.add(mPrimaryUser);
         userInfos.add(secondaryUser);
         when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
+        when(secondaryUser.isProfile()).thenReturn(true);
         when(mUserManager.getUsers()).thenReturn(userInfos);
-        final List<AbstractPreferenceController> controllers =
-                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager,
-                        false /* isWorkProfileOnly */);
+        final List<NonCurrentUserController> controllers =
+                NonCurrentUserController.getNonCurrentUserControllers(mContext, mUserManager);
 
-        assertThat(controllers).hasSize(1);
-        assertThat(controllers.get(0) instanceof SecondaryUserController).isTrue();
+        assertThat(controllers).hasSize(0);
     }
 
     @Test
-    public void getSecondaryUserControllers_notWorkProfileWorkProfileOnly_addNoSecondController() {
-        final ArrayList<UserInfo> userInfos = new ArrayList<>();
-        final UserInfo secondaryUser = spy(new UserInfo());
-        secondaryUser.id = 10;
-        secondaryUser.profileGroupId = 101010; // this just has to be something not 0
-        when(secondaryUser.isManagedProfile()).thenReturn(false);
-        userInfos.add(mPrimaryUser);
-        userInfos.add(secondaryUser);
-        when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
-        when(mUserManager.getUsers()).thenReturn(userInfos);
-        final List<AbstractPreferenceController> controllers =
-                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager,
-                        true /* isWorkProfileOnly */);
-
-        assertThat(controllers).hasSize(1);
-        assertThat(controllers.get(0) instanceof SecondaryUserController).isFalse();
-    }
-
-    @Test
-    public void profilesOfPrimaryUserAreIgnored() {
+    public void profilesOfCurrentUserAreIgnored() {
         final ArrayList<UserInfo> userInfos = new ArrayList<>();
         final UserInfo secondaryUser = new UserInfo();
         secondaryUser.id = mPrimaryUser.id;
         userInfos.add(mPrimaryUser);
         userInfos.add(secondaryUser);
+        userInfos.add(secondaryUser);
         when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
         when(mUserManager.getUsers()).thenReturn(userInfos);
 
-        final List<AbstractPreferenceController> controllers =
-                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager,
-                        false /* isWorkProfileOnly */);
+        final List<NonCurrentUserController> controllers =
+                NonCurrentUserController.getNonCurrentUserControllers(mContext, mUserManager);
 
-        assertThat(controllers).hasSize(1);
-        assertThat(controllers.get(0) instanceof SecondaryUserController).isFalse();
+        assertThat(controllers).hasSize(0);
     }
 
     @Test
     public void handleResult_noStatsResult_shouldShowCachedData() {
         mPrimaryUser.name = TEST_NAME;
         mPrimaryUser.id = 10;
+        int[] profiles = {mPrimaryUser.id};
+        mController = new NonCurrentUserController(mContext, mPrimaryUser, profiles);
         mController.displayPreference(mScreen);
         final StorageAsyncLoader.StorageResult userResult =
                 new StorageAsyncLoader.StorageResult();
@@ -232,15 +221,12 @@ public class SecondaryUserControllerTest {
         primaryUserRenamed.name = "Owner";
         primaryUserRenamed.flags = UserInfo.FLAG_PRIMARY;
         userInfos.add(primaryUserRenamed);
-        when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
+        ShadowActivityManager.setCurrentUser(primaryUserRenamed.id);
         when(mUserManager.getUsers()).thenReturn(userInfos);
-        final List<AbstractPreferenceController> controllers =
-                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager,
-                        false /* isWorkProfileOnly */);
+        final List<NonCurrentUserController> controllers =
+                NonCurrentUserController.getNonCurrentUserControllers(mContext, mUserManager);
 
-        assertThat(controllers).hasSize(1);
-        // We should have the NoSecondaryUserController.
-        assertThat(controllers.get(0) instanceof SecondaryUserController).isFalse();
+        assertThat(controllers).hasSize(0);
     }
 
     @Test
@@ -272,5 +258,32 @@ public class SecondaryUserControllerTest {
         mController.handleUserIcons(icons);
 
         // Doesn't crash
+    }
+
+    @Test
+    public void getNonCurrentUserControllers_switchUsers() {
+        final ArrayList<UserInfo> userInfo = new ArrayList<>();
+        final UserInfo secondaryUser = spy(new UserInfo());
+        secondaryUser.id = 10;
+        final UserInfo secondaryUser1 = spy(new UserInfo());
+        secondaryUser1.id = 11;
+        userInfo.add(mPrimaryUser);
+        userInfo.add(secondaryUser);
+        userInfo.add(secondaryUser1);
+        when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
+        when(mUserManager.getUsers()).thenReturn(userInfo);
+        List<NonCurrentUserController> controllers =
+                NonCurrentUserController.getNonCurrentUserControllers(mContext, mUserManager);
+
+        assertThat(controllers).hasSize(2);
+        assertThat(controllers.get(0).getUser().id == secondaryUser.id).isTrue();
+
+        ShadowActivityManager.setCurrentUser(secondaryUser.id);
+        when(mUserManager.getUsers()).thenReturn(userInfo);
+        controllers =
+                NonCurrentUserController.getNonCurrentUserControllers(mContext, mUserManager);
+
+        assertThat(controllers).hasSize(2);
+        assertThat(controllers.get(0).getUser().id == mPrimaryUser.id).isTrue();
     }
 }

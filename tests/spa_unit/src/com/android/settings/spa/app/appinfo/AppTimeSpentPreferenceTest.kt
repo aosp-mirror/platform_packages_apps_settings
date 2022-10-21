@@ -120,15 +120,15 @@ class AppTimeSpentPreferenceTest {
     }
 
     @Test
-    fun uninstalledApp_disabled() {
+    fun notInstalledApp_disabled() {
         mockActivitiesQueryResult(listOf(MATCHED_RESOLVE_INFO))
-        val uninstalledApp = ApplicationInfo().apply {
+        val notInstalledApp = ApplicationInfo().apply {
             packageName = PACKAGE_NAME
         }
 
         composeTestRule.setContent {
             CompositionLocalProvider(LocalContext provides context) {
-                AppTimeSpentPreference(uninstalledApp)
+                AppTimeSpentPreference(notInstalledApp)
             }
         }
 

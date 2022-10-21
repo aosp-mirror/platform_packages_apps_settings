@@ -16,6 +16,7 @@
 
 package com.android.settings.deviceinfo.storage;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
@@ -28,7 +29,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -37,14 +37,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * SecondaryUserController controls the preferences on the Storage screen which had to do with
- * secondary users.
+ * NonCurrentUserController controls the preferences on the Storage screen which had to do with
+ * other users.
  */
-public class SecondaryUserController extends AbstractPreferenceController implements
+public class NonCurrentUserController extends AbstractPreferenceController implements
         PreferenceControllerMixin, StorageAsyncLoader.ResultHandler,
         UserIconLoader.UserIconHandler {
     // PreferenceGroupKey to try to add our preference onto.
-    private static final String TARGET_PREFERENCE_GROUP_KEY = "pref_secondary_users";
+    private static final String TARGET_PREFERENCE_GROUP_KEY = "pref_non_current_users";
     private static final String PREFERENCE_KEY_BASE = "pref_user_";
     private static final int SIZE_NOT_SET = -1;
 
@@ -57,60 +57,60 @@ public class SecondaryUserController extends AbstractPreferenceController implem
     private long mSize;
     private long mTotalSizeBytes;
     private boolean mIsVisible;
+    private int[] mProfiles;
     private StorageCacheHelper mStorageCacheHelper;
 
     /**
-     * Adds the appropriate controllers to a controller list for handling all secondary users on
-     * a device.
+     * Adds the appropriate controllers to a controller list for handling all full non current
+     * users on a device.
      *
-     * @param context     Context for initializing the preference controllers.
-     * @param userManager UserManagerWrapper for figuring out which controllers to add.
-     * @param isWorkProfileOnly only shows secondary users of work profile.
-     *                          (e.g., it should be true in work profile tab)
+     * @param context           Context for initializing the preference controllers.
+     * @param userManager       UserManagerWrapper for figuring out which controllers to add.
      */
-    public static List<AbstractPreferenceController> getSecondaryUserControllers(
-            Context context, UserManager userManager, boolean isWorkProfileOnly) {
-
-        List<AbstractPreferenceController> controllers = new ArrayList<>();
-        UserInfo primaryUser = userManager.getPrimaryUser();
-        boolean addedUser = false;
+    public static List<NonCurrentUserController> getNonCurrentUserControllers(
+            Context context, UserManager userManager) {
+        int currentUserId = ActivityManager.getCurrentUser();
+        List<NonCurrentUserController> controllers = new ArrayList<>();
         List<UserInfo> infos = userManager.getUsers();
-        for (int i = 0, size = infos.size(); i < size; i++) {
-            UserInfo info = infos.get(i);
-            if (info.isPrimary()) {
+        for (UserInfo info : infos) {
+            if (info.id == currentUserId || info.isProfile()) {
                 continue;
             }
-
-            if (Utils.isProfileOf(primaryUser, info)) {
-                continue;
-            }
-
-            if (isWorkProfileOnly && !info.isManagedProfile()) {
-                continue;
-            }
-
-            controllers.add(new SecondaryUserController(context, info));
-            addedUser = true;
-        }
-
-        if (!addedUser) {
-            controllers.add(new NoSecondaryUserController(context));
+            int[] profiles = userManager.getProfileIds(info.id, false /* enabledOnly */);
+            controllers.add(new NonCurrentUserController(context, info, profiles));
         }
         return controllers;
     }
 
     /**
-     * Constructor for a given secondary user.
+     * Constructor for a given non-current user.
      *
      * @param context Context to initialize the underlying {@link AbstractPreferenceController}.
-     * @param info    {@link UserInfo} for the secondary user which this controllers covers.
+     * @param info    {@link UserInfo} for the non-current user which these controllers cover.
+     * @param profiles list of IDs or user and its profiles
      */
     @VisibleForTesting
-    SecondaryUserController(Context context, @NonNull UserInfo info) {
+    NonCurrentUserController(Context context, @NonNull UserInfo info, @NonNull int[] profiles) {
         super(context);
         mUser = info;
         mSize = SIZE_NOT_SET;
         mStorageCacheHelper = new StorageCacheHelper(context, info.id);
+        mProfiles = profiles;
+    }
+
+    /**
+     * Constructor for a given non-current user.
+     *
+     * @param context Context to initialize the underlying {@link AbstractPreferenceController}.
+     * @param info    {@link UserInfo} for the non-current user which these controllers cover.
+     */
+    @VisibleForTesting
+    NonCurrentUserController(Context context, @NonNull UserInfo info) {
+        super(context);
+        mUser = info;
+        mSize = SIZE_NOT_SET;
+        mStorageCacheHelper = new StorageCacheHelper(context, info.id);
+        mProfiles = new int[]{info.id};
     }
 
     @Override
@@ -140,7 +140,7 @@ public class SecondaryUserController extends AbstractPreferenceController implem
     }
 
     /**
-     * Returns the user for which this is the secondary user controller.
+     * Returns the user for which this is the non-current user controller.
      */
     @NonNull
     public UserInfo getUser() {
@@ -169,7 +169,7 @@ public class SecondaryUserController extends AbstractPreferenceController implem
     }
 
     /**
-     * Sets visibility of the PreferenceGroup of secondary user.
+     * Sets visibility of the PreferenceGroup of non-current user.
      *
      * @param visible Visibility of the PreferenceGroup.
      */
@@ -187,10 +187,15 @@ public class SecondaryUserController extends AbstractPreferenceController implem
             return;
         }
         final StorageAsyncLoader.StorageResult result = stats.get(getUser().id);
+
         if (result != null) {
-            setSize(result.externalStats.totalBytes, true /* animate */);
+            long totalSize = 0;
+            for (int id : mProfiles) {
+                totalSize += stats.get(id).externalStats.totalBytes;
+            }
+            setSize(totalSize, true /* animate */);
             // TODO(b/171758224): Update the source of size info
-            mStorageCacheHelper.cacheUsedSize(result.externalStats.totalBytes);
+            mStorageCacheHelper.cacheUsedSize(totalSize);
         }
     }
 
@@ -203,33 +208,6 @@ public class SecondaryUserController extends AbstractPreferenceController implem
     private void maybeSetIcon() {
         if (mUserIcon != null && mStoragePreference != null) {
             mStoragePreference.setIcon(mUserIcon);
-        }
-    }
-
-    @VisibleForTesting
-    static class NoSecondaryUserController extends AbstractPreferenceController implements
-            PreferenceControllerMixin {
-        public NoSecondaryUserController(Context context) {
-            super(context);
-        }
-
-        @Override
-        public void displayPreference(PreferenceScreen screen) {
-            final PreferenceGroup group = screen.findPreference(TARGET_PREFERENCE_GROUP_KEY);
-            if (group == null) {
-                return;
-            }
-            screen.removePreference(group);
-        }
-
-        @Override
-        public boolean isAvailable() {
-            return true;
-        }
-
-        @Override
-        public String getPreferenceKey() {
-            return null;
         }
     }
 }
