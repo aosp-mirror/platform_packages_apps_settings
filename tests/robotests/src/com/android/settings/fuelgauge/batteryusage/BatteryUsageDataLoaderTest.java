@@ -25,7 +25,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -83,7 +82,6 @@ public final class BatteryUsageDataLoaderTest {
     public void loadUsageData_loadUsageDataWithHistory() {
         final List<BatteryEntry> batteryEntryList = new ArrayList<>();
         batteryEntryList.add(mMockBatteryEntry);
-        setProviderSetting(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
         when(mBatteryStatsManager.getBatteryUsageStats(mStatsQueryCaptor.capture()))
                 .thenReturn(mBatteryUsageStats);
         when(mMockBatteryAppListController.getBatteryEntryList(mBatteryUsageStats, true))
@@ -102,7 +100,6 @@ public final class BatteryUsageDataLoaderTest {
 
     @Test
     public void loadUsageData_nullBatteryUsageStats_notLoadBatteryEntryData() {
-        setProviderSetting(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
         when(mBatteryStatsManager.getBatteryUsageStats(mStatsQueryCaptor.capture()))
                 .thenReturn(null);
 
@@ -119,7 +116,6 @@ public final class BatteryUsageDataLoaderTest {
 
     @Test
     public void loadUsageData_nullBatteryEntryList_insertFakeDataIntoProvider() {
-        setProviderSetting(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
         when(mBatteryStatsManager.getBatteryUsageStats(mStatsQueryCaptor.capture()))
                 .thenReturn(mBatteryUsageStats);
         when(mMockBatteryAppListController.getBatteryEntryList(mBatteryUsageStats, true))
@@ -132,7 +128,6 @@ public final class BatteryUsageDataLoaderTest {
 
     @Test
     public void loadUsageData_emptyBatteryEntryList_insertFakeDataIntoProvider() {
-        setProviderSetting(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
         when(mBatteryStatsManager.getBatteryUsageStats(mStatsQueryCaptor.capture()))
                 .thenReturn(mBatteryUsageStats);
         when(mMockBatteryAppListController.getBatteryEntryList(mBatteryUsageStats, true))
@@ -141,25 +136,5 @@ public final class BatteryUsageDataLoaderTest {
         BatteryUsageDataLoader.loadUsageData(mContext);
 
         verify(mMockContentResolver).insert(any(), any());
-    }
-
-    @Test
-    public void loadUsageData_providerIsDisabled_notLoadHistory() {
-        setProviderSetting(PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
-        when(mBatteryStatsManager.getBatteryUsageStats(mStatsQueryCaptor.capture()))
-                .thenReturn(mBatteryUsageStats);
-
-        BatteryUsageDataLoader.loadUsageData(mContext);
-
-        verify(mBatteryStatsManager, never()).getBatteryUsageStats(
-                mStatsQueryCaptor.capture());
-    }
-
-    private void setProviderSetting(int value) {
-        when(mPackageManager.getComponentEnabledSetting(
-                new ComponentName(
-                        DatabaseUtils.SETTINGS_PACKAGE_PATH,
-                        DatabaseUtils.BATTERY_PROVIDER_CLASS_PATH)))
-                .thenReturn(value);
     }
 }

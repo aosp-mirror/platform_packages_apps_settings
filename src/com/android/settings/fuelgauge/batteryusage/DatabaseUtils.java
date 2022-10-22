@@ -15,7 +15,6 @@
  */
 
 package com.android.settings.fuelgauge.batteryusage;
-import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -25,6 +24,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.os.BatteryUsageStats;
 import android.os.Handler;
@@ -36,6 +36,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 
 import java.time.Clock;
@@ -56,6 +57,7 @@ public final class DatabaseUtils {
     /** Clear memory threshold for device booting phase. **/
     private static final long CLEAR_MEMORY_THRESHOLD_MS = Duration.ofMinutes(5).toMillis();
     private static final long CLEAR_MEMORY_DELAYED_MS = Duration.ofSeconds(2).toMillis();
+    private static final long DATA_RETENTION_INTERVAL_MS = Duration.ofDays(9).toMillis();
 
     /** An authority name of the battery content provider. */
     public static final String AUTHORITY = "com.android.settings.battery.usage.provider";
@@ -81,11 +83,6 @@ public final class DatabaseUtils {
     public static boolean isWorkProfile(Context context) {
         final UserManager userManager = context.getSystemService(UserManager.class);
         return userManager.isManagedProfile() && !userManager.isSystemUser();
-    }
-
-    /** Returns true if the chart graph design is enabled. */
-    public static boolean isChartGraphEnabled(Context context) {
-        return isContentProviderEnabled(context);
     }
 
     /** Long: for timestamp and String: for BatteryHistEntry.getKey() */
@@ -115,11 +112,32 @@ public final class DatabaseUtils {
         return resultMap;
     }
 
-    static boolean isContentProviderEnabled(Context context) {
-        return context.getPackageManager()
-                .getComponentEnabledSetting(
-                        new ComponentName(SETTINGS_PACKAGE_PATH, BATTERY_PROVIDER_CLASS_PATH))
-                == PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
+    /** Clears all data in the battery usage database. */
+    public static void clearAll(Context context) {
+        AsyncTask.execute(() -> {
+            try {
+                BatteryStateDatabase
+                        .getInstance(context.getApplicationContext())
+                        .batteryStateDao()
+                        .clearAll();
+            } catch (RuntimeException e) {
+                Log.e(TAG, "clearAll() failed", e);
+            }
+        });
+    }
+
+    /** Clears all out-of-date data in the battery usage database. */
+    public static void clearExpiredDataIfNeeded(Context context) {
+        AsyncTask.execute(() -> {
+            try {
+                BatteryStateDatabase
+                        .getInstance(context.getApplicationContext())
+                        .batteryStateDao()
+                        .clearAllBefore(Clock.systemUTC().millis() - DATA_RETENTION_INTERVAL_MS);
+            } catch (RuntimeException e) {
+                Log.e(TAG, "clearAllBefore() failed", e);
+            }
+        });
     }
 
     static List<ContentValues> sendBatteryEntryData(
@@ -257,9 +275,6 @@ public final class DatabaseUtils {
                 Log.e(TAG, "context.createPackageContextAsUser() fail:" + e);
                 return null;
             }
-        }
-        if (!isContentProviderEnabled(context)) {
-            return null;
         }
         final Map<Long, Map<String, BatteryHistEntry>> resultMap = new HashMap();
         try (Cursor cursor =

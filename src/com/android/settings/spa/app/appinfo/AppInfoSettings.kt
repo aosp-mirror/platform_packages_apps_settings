@@ -98,6 +98,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         // TODO: battery
         // TODO: app_language_setting
         AppOpenByDefaultPreference(app)
+        DefaultAppShortcuts(app)
 
         Category(title = stringResource(R.string.advanced_apps)) {
             DisplayOverOtherAppsAppListProvider.InfoPageEntryItem(app)

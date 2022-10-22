@@ -49,7 +49,6 @@ import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.BatteryUtils;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -60,7 +59,6 @@ import com.android.settingslib.utils.StringUtil;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Controller that update the battery header view
@@ -85,7 +83,6 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     private final PackageManager mPackageManager;
     private final SettingsActivity mActivity;
     private final InstrumentedPreferenceFragment mFragment;
-    private final Set<CharSequence> mNotAllowShowSummaryPackages;
     private final String mPreferenceKey;
 
     private Context mPrefContext;
@@ -164,10 +161,6 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         mPackageManager = context.getPackageManager();
         mActivity = activity;
         mFragment = fragment;
-        mNotAllowShowSummaryPackages = Set.of(
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
-                        .getHideApplicationSummary(context));
     }
 
     @Override
@@ -439,15 +432,9 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         if (BatteryEntry.isSystemUid(entry.getUid())) {
             return;
         }
-        String packageName = entry.getDefaultPackageName();
-        if (packageName != null
-                && mNotAllowShowSummaryPackages != null
-                && mNotAllowShowSummaryPackages.contains(packageName)) {
-            return;
-        }
         // Only show summary when usage time is longer than one minute
         final long usageTimeMs = entry.getTimeInForegroundMs();
-        if (shouldShowSummary(entry) && usageTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
+        if (usageTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
             final CharSequence timeSequence =
                     StringUtil.formatElapsedTime(mContext, usageTimeMs, false, false);
             preference.setSummary(
@@ -468,21 +455,6 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             }
             mPreferenceCache.put(p.getKey(), p);
         }
-    }
-
-    private boolean shouldShowSummary(BatteryEntry entry) {
-        final CharSequence[] allowlistPackages =
-                FeatureFactory.getFactory(mContext)
-                        .getPowerUsageFeatureProvider(mContext)
-                        .getHideApplicationSummary(mContext);
-        final String target = entry.getDefaultPackageName();
-
-        for (CharSequence packageName : allowlistPackages) {
-            if (TextUtils.equals(target, packageName)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private static boolean isSharedGid(int uid) {
