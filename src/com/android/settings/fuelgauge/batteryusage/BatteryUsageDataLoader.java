@@ -44,11 +44,6 @@ public final class BatteryUsageDataLoader {
 
     @VisibleForTesting
     static void loadUsageData(Context context) {
-        // Checks whether the battery content provider is available.
-        if (!DatabaseUtils.isContentProviderEnabled(context)) {
-            Log.w(TAG, "battery usage content provider is disabled!");
-            return;
-        }
         final long start = System.currentTimeMillis();
         final BatteryUsageStats batteryUsageStats = DataProcessor.getBatteryUsageStats(context);
         final List<BatteryEntry> batteryEntryList =

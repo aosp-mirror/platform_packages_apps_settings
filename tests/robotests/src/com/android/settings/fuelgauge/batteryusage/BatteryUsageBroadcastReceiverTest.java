@@ -20,9 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -53,7 +51,6 @@ public final class BatteryUsageBroadcastReceiverTest {
 
     @Test
     public void onReceive_fetchUsageDataIntent_startService() {
-        setProviderSetting(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
         mBatteryUsageBroadcastReceiver.onReceive(mContext,
                 new Intent(BatteryUsageBroadcastReceiver.ACTION_FETCH_BATTERY_USAGE_DATA));
 
@@ -62,7 +59,6 @@ public final class BatteryUsageBroadcastReceiverTest {
 
     @Test
     public void onReceive_invalidIntent_notStartService() {
-        setProviderSetting(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
         mBatteryUsageBroadcastReceiver.onReceive(mContext, new Intent("invalid intent"));
 
         assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isFalse();
@@ -94,13 +90,5 @@ public final class BatteryUsageBroadcastReceiverTest {
                 new Intent(BatteryUsageBroadcastReceiver.ACTION_CLEAR_BATTERY_CACHE_DATA));
 
         assertThat(BatteryDiffEntry.sValidForRestriction).isNotEmpty();
-    }
-
-    private void setProviderSetting(int value) {
-        when(mPackageManager.getComponentEnabledSetting(
-                new ComponentName(
-                        DatabaseUtils.SETTINGS_PACKAGE_PATH,
-                        DatabaseUtils.BATTERY_PROVIDER_CLASS_PATH)))
-                .thenReturn(value);
     }
 }

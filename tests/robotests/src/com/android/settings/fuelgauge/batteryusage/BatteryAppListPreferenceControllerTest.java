@@ -83,8 +83,6 @@ public class BatteryAppListPreferenceControllerTest {
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{});
-        when(mFeatureFactory.powerUsageFeatureProvider.getHideApplicationSummary(mContext))
-                .thenReturn(new String[]{"com.android.googlequicksearchbox"});
 
         mPreference = new PowerGaugePreference(mContext);
 
@@ -129,20 +127,6 @@ public class BatteryAppListPreferenceControllerTest {
         mPreferenceController.setUsageSummary(mPreference, mBatteryEntry);
 
         assertThat(mPreference.getSummary().toString()).isEqualTo("Used for 2 min");
-    }
-
-    @Test
-    public void testSetUsageSummary_timeMoreThanOneMinute_GoogleApp_shouldNotSetScreenSummary() {
-        when(mBatteryEntry.getTimeInForegroundMs()).thenReturn(2 * DateUtils.MINUTE_IN_MILLIS);
-        when(mBatteryEntry.getDefaultPackageName())
-                .thenReturn("com.android.googlequicksearchbox");
-        doReturn(mContext.getText(R.string.battery_used_for)).when(mFragment).getText(
-                R.string.battery_used_for);
-        doReturn(mContext).when(mFragment).getContext();
-
-        mPreferenceController.setUsageSummary(mPreference, mBatteryEntry);
-
-        assertThat(mPreference.getSummary()).isNull();
     }
 
     @Test

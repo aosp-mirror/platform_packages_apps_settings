@@ -158,20 +158,6 @@ public final class DataProcessor {
     }
 
     /**
-     * @return Returns whether the target is in the CharSequence array.
-     */
-    public static boolean contains(String target, CharSequence[] packageNames) {
-        if (target != null && packageNames != null) {
-            for (CharSequence packageName : packageNames) {
-                if (TextUtils.equals(target, packageName)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
      * Gets the {@link BatteryUsageStats} from system service.
      */
     @Nullable
@@ -1221,6 +1207,20 @@ public final class DataProcessor {
                 context,
                 SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT,
                 countOfAppBeforePurge - countOfAppAfterPurge);
+    }
+
+    /**
+     * @return Returns whether the target is in the CharSequence array.
+     */
+    private static boolean contains(String target, CharSequence[] packageNames) {
+        if (target != null && packageNames != null) {
+            for (CharSequence packageName : packageNames) {
+                if (TextUtils.equals(target, packageName)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private static void log(Context context, final String content, final long timestamp,

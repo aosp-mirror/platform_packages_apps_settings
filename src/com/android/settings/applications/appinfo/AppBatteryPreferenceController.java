@@ -131,7 +131,6 @@ public class AppBatteryPreferenceController extends BasePreferenceController
                     mBatteryDiffEntry,
                     Utils.formatPercentage(
                             mBatteryDiffEntry.getPercentOfTotal(), /* round */ true),
-                    /*isValidToShowSummary=*/ true,
                     /*slotInformation=*/ null);
             return true;
         }

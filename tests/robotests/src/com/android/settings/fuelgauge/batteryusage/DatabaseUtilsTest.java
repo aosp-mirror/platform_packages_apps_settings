@@ -22,9 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -71,7 +69,6 @@ public final class DatabaseUtilsTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        setProviderSetting(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
         doReturn(mMockContentResolver2).when(mMockContext).getContentResolver();
         doReturn(mMockContentResolver).when(mContext).getContentResolver();
         doReturn(mPackageManager).when(mMockContext).getPackageManager();
@@ -95,30 +92,6 @@ public final class DatabaseUtilsTest {
         Shadows.shadowOf(mContext.getSystemService(UserManager.class)).setIsSystemUser(true);
 
         assertThat(DatabaseUtils.isWorkProfile(mContext)).isFalse();
-    }
-
-    @Test
-    public void isChartGraphEnabled_providerIsEnabled_returnTrue() {
-        setProviderSetting(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
-        assertThat(DatabaseUtils.isChartGraphEnabled(mContext)).isTrue();
-    }
-
-    @Test
-    public void isChartGraphEnabled_providerIsDisabled_returnFalse() {
-        setProviderSetting(PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
-        assertThat(DatabaseUtils.isChartGraphEnabled(mContext)).isFalse();
-    }
-
-    @Test
-    public void isContentProviderEnabled_providerEnabled_returnsTrue() {
-        setProviderSetting(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
-        assertThat(DatabaseUtils.isContentProviderEnabled(mContext)).isTrue();
-    }
-
-    @Test
-    public void isContentProviderEnabled_providerDisabled_returnsFalse() {
-        setProviderSetting(PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
-        assertThat(DatabaseUtils.isContentProviderEnabled(mContext)).isFalse();
     }
 
     @Test
@@ -212,13 +185,6 @@ public final class DatabaseUtilsTest {
         verify(mMockContentResolver).insert(any(), any());
         verify(mMockContentResolver).notifyChange(
                 DatabaseUtils.BATTERY_CONTENT_URI, /*observer=*/ null);
-    }
-
-    @Test
-    public void getHistoryMapSinceLastFullCharge_providerIsDisabled_returnNull() {
-        setProviderSetting(PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
-        assertThat(DatabaseUtils.getHistoryMapSinceLastFullCharge(
-                mContext, /*calendar=*/ null)).isNull();
     }
 
     @Test
@@ -372,14 +338,6 @@ public final class DatabaseUtilsTest {
 
         assertThat(DatabaseUtils.getStartTimestampForLastFullCharge(mContext, currentCalendar))
                 .isEqualTo(expectedTimestamp);
-    }
-
-    private void setProviderSetting(int value) {
-        when(mPackageManager.getComponentEnabledSetting(
-                new ComponentName(
-                        DatabaseUtils.SETTINGS_PACKAGE_PATH,
-                        DatabaseUtils.BATTERY_PROVIDER_CLASS_PATH)))
-                .thenReturn(value);
     }
 
     private static void verifyContentValues(double consumedPower, ContentValues values) {

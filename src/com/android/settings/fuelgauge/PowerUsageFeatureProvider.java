@@ -173,9 +173,4 @@ public interface PowerUsageFeatureProvider {
      * Returns package names for hidding application in the usage screen.
      */
     CharSequence[] getHideApplicationEntries(Context context);
-
-    /**
-     * Returns package names for hidding summary in the usage screen.
-     */
-    CharSequence[] getHideApplicationSummary(Context context);
 }

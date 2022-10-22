@@ -174,8 +174,9 @@ public class IccLockSettings extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (Utils.isMonkeyRunning()) {
-            finish();
+        if (Utils.isMonkeyRunning() ||
+                !SubscriptionUtil.isSimHardwareVisible(getContext())) {
+            finishFragment();
             return;
         }
 

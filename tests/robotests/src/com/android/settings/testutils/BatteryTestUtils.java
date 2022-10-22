@@ -30,7 +30,6 @@ import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
 import com.google.common.collect.ImmutableList;
 
 import org.robolectric.Shadows;
-import org.robolectric.shadows.ShadowUserManager;
 
 public class BatteryTestUtils {
 
@@ -54,11 +53,7 @@ public class BatteryTestUtils {
     public static void setWorkProfile(Context context) {
         final UserManager userManager = context.getSystemService(UserManager.class);
         Shadows.shadowOf(userManager).setManagedProfile(true);
-        // Changes out of the default system user so isSystemUser() returns false.
-        final int userId = 1001;
-        Shadows.shadowOf(userManager)
-                .addUser(userId, "name", /*flags=*/ ShadowUserManager.FLAG_PRIMARY);
-        Shadows.shadowOf(userManager).switchUser(userId);
+        Shadows.shadowOf(userManager).setIsSystemUser(false);
     }
 
     /** Creates and sets up the in-memory {@link BatteryStateDatabase}. */
