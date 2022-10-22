@@ -19,6 +19,8 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.android.settings.tests.spa_unit">
 
+    <uses-permission android:name="android.permission.WRITE_DEVICE_CONFIG" />
+
     <application android:debuggable="true">
         <provider android:name="com.android.settings.slices.SettingsSliceProvider"
                   android:authorities="${applicationId}.slices"

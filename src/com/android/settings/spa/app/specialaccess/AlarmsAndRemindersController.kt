@@ -16,7 +16,6 @@
 
 package com.android.settings.spa.app.specialaccess
 
-import android.app.AlarmManager
 import android.app.AppOpsManager
 import android.app.AppOpsManager.MODE_ALLOWED
 import android.app.AppOpsManager.MODE_ERRORED
@@ -24,30 +23,29 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.android.settingslib.spaprivileged.framework.common.alarmManager
+import com.android.settingslib.spaprivileged.framework.common.appOpsManager
 import com.android.settingslib.spaprivileged.model.app.userId
 
 class AlarmsAndRemindersController(
     context: Context,
     private val app: ApplicationInfo,
 ) {
-    private val alarmManager = context.getSystemService(AlarmManager::class.java)!!
-    private val appOpsManager = context.getSystemService(AppOpsManager::class.java)!!
+    private val alarmManager = context.alarmManager
+    private val appOpsManager = context.appOpsManager
 
     val isAllowed: LiveData<Boolean>
         get() = _allowed
 
     fun setAllowed(allowed: Boolean) {
         val mode = if (allowed) MODE_ALLOWED else MODE_ERRORED
-        appOpsManager.setUidMode(AppOpsManager.OPSTR_SCHEDULE_EXACT_ALARM, app.uid, mode)
+        appOpsManager.setUidMode(AppOpsManager.OP_SCHEDULE_EXACT_ALARM, app.uid, mode)
         _allowed.postValue(allowed)
     }
 
     private val _allowed = object : MutableLiveData<Boolean>() {
         override fun onActive() {
             postValue(alarmManager.hasScheduleExactAlarm(app.packageName, app.userId))
-        }
-
-        override fun onInactive() {
         }
     }
 }
