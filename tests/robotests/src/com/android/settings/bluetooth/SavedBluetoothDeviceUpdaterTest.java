@@ -77,6 +77,7 @@ public class SavedBluetoothDeviceUpdaterTest {
     private Context mContext;
     private SavedBluetoothDeviceUpdater mBluetoothDeviceUpdater;
     private BluetoothDevicePreference mPreference;
+    private List<CachedBluetoothDevice> mCachedDevices = new ArrayList<>();
 
     @Before
     public void setUp() {
@@ -99,6 +100,10 @@ public class SavedBluetoothDeviceUpdaterTest {
                 false, BluetoothDevicePreference.SortType.TYPE_DEFAULT);
         doNothing().when(mBluetoothDeviceUpdater).addPreference(any());
         doNothing().when(mBluetoothDeviceUpdater).removePreference(any());
+        mCachedDevices.add(mCachedBluetoothDevice);
+        when(mBluetoothManager.getCachedDeviceManager()).thenReturn(mDeviceManager);
+        when(mDeviceManager.getCachedDevicesCopy()).thenReturn(mCachedDevices);
+
     }
 
     @Test
@@ -141,6 +146,31 @@ public class SavedBluetoothDeviceUpdaterTest {
 
         verify(mBluetoothDeviceUpdater).addPreference(mCachedBluetoothDevice,
                 BluetoothDevicePreference.SortType.TYPE_NO_SORT);
+    }
+
+    @Test
+    public void
+            onProfileConnectionStateChanged_leDeviceDisconnected_inDeviceList_invokesAddPreference()
+    {
+        when(mBluetoothDevice.isConnected()).thenReturn(false);
+
+        mBluetoothDeviceUpdater.onProfileConnectionStateChanged(mCachedBluetoothDevice,
+                BluetoothProfile.STATE_DISCONNECTED, BluetoothProfile.LE_AUDIO);
+
+        verify(mBluetoothDeviceUpdater).addPreference(mCachedBluetoothDevice,
+                BluetoothDevicePreference.SortType.TYPE_NO_SORT);
+    }
+
+    @Test
+    public void
+    onProfileConnectionStateChanged_deviceDisconnected_notInDeviceList_invokesRemovePreference() {
+        when(mBluetoothDevice.isConnected()).thenReturn(false);
+        mCachedDevices.clear();
+
+        mBluetoothDeviceUpdater.onProfileConnectionStateChanged(mCachedBluetoothDevice,
+                BluetoothProfile.STATE_DISCONNECTED, BluetoothProfile.LE_AUDIO);
+
+        verify(mBluetoothDeviceUpdater).removePreference(mCachedBluetoothDevice);
     }
 
     @Test

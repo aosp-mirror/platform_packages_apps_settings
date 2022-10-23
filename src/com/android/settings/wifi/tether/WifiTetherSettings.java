@@ -159,6 +159,9 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         if (context != null) {
             context.registerReceiver(mTetherChangeReceiver, TETHER_STATE_CHANGE_FILTER,
                     Context.RECEIVER_EXPORTED_UNAUDITED);
+            // The intent WIFI_AP_STATE_CHANGED_ACTION is not sticky intent anymore after SC-V2
+            // Handle the initial state after register the receiver.
+            updateDisplayWithNewConfig();
         }
     }
 

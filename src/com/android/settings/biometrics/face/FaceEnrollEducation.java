@@ -227,6 +227,10 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mResultIntent = data;
+        boolean hasEnrolledFace = false;
+        if (data != null) {
+            hasEnrolledFace = data.getBooleanExtra(EXTRA_FINISHED_ENROLL_FACE, false);
+        }
         if (resultCode == RESULT_TIMEOUT) {
             setResult(resultCode, data);
             finish();
@@ -234,7 +238,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
                 || requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST) {
             // If the user finished or skipped enrollment, finish this activity
             if (resultCode == RESULT_SKIP || resultCode == RESULT_FINISHED
-                    || resultCode == SetupSkipDialog.RESULT_SKIP) {
+                    || resultCode == SetupSkipDialog.RESULT_SKIP || hasEnrolledFace) {
                 setResult(resultCode, data);
                 finish();
             }

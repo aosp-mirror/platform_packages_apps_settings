@@ -21,63 +21,73 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/app_header"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:clipChildren="true"
-        android:background="@drawable/button_ripple_radius"
+        android:layout_height="wrap_content"
         android:paddingTop="20dp"
-        android:orientation="horizontal"
         android:paddingBottom="18dp"
-        android:paddingStart="16dp">
+        android:paddingStart="16dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clipChildren="true">
+
         <ImageView
             android:id="@+id/icon"
-            android:layout_height="24dp"
             android:layout_width="24dp"
-            android:layout_gravity="center_vertical|start"
-            android:layout_marginEnd="14dp"
-            android:layout_centerVertical="true"
-            android:scaleType="centerInside"/>
+            android:layout_height="24dp"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification.Title"
+            android:textDirection="locale"
+            app:layout_constraintBottom_toTopOf="@id/count"
+            app:layout_constraintEnd_toStartOf="@id/expand_button_wrapper"
+            app:layout_constraintStart_toEndOf="@id/icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:paddingTop="4dp"
+            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"
+            android:textDirection="locale"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/expand_button_wrapper"
+            app:layout_constraintStart_toEndOf="@id/icon"
+            app:layout_constraintTop_toBottomOf="@id/label" />
+
+        <FrameLayout
+            android:id="@+id/expand_button_wrapper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/text"
-            android:layout_toEndOf="@+id/icon"
-            android:layout_gravity="center_vertical"
-            android:layout_centerVertical="true"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/label"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification.Title"/>
-            <TextView
-                android:id="@+id/count"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_gravity="start|center_vertical"
-                android:textDirection="locale"
-                android:paddingTop="4dp"
-                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"/>
-        </LinearLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <include layout="@*android:layout/notification_expand_button"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_alignParentEnd="true"
-                 android:layout_centerVertical="true"
-                 android:layout_gravity="center_vertical"
-        />
+            <include
+                layout="@*android:layout/notification_expand_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    </RelativeLayout>
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="?android:attr/listDivider"/>
+        android:background="?android:attr/listDivider" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/notification_list_wrapper"
@@ -85,20 +95,20 @@
         android:layout_height="wrap_content">
 
         <com.android.settings.notification.history.NotificationHistoryRecyclerView
+            android:id="@+id/notification_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/notification_list"
             android:clipChildren="true"
-            android:clipToPadding="true"
             android:clipToOutline="true"
+            android:clipToPadding="true"
             android:importantForAccessibility="yes"
             app:layout_constrainedHeight="true"
-            app:layout_constraintHeight_min="48dp"
-            app:layout_constraintHeight_max="500dp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_max="500dp"
+            app:layout_constraintHeight_min="48dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

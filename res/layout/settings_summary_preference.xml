@@ -33,7 +33,8 @@
         android:textColor="?android:attr/textColorPrimary"
         android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Display1"
         android:hyphenationFrequency="normalFast"
-        />
+        android:lineBreakWordStyle="phrase"
+     />
 
     <TextView android:id="@android:id/summary"
         android:layout_width="match_parent"
@@ -42,6 +43,7 @@
         android:textColor="?android:attr/textColorSecondary"
         android:paddingBottom="5dp"
         android:hyphenationFrequency="normalFast"
+        android:lineBreakWordStyle="phrase"
         android:maxLines="10" />
 
     <ProgressBar

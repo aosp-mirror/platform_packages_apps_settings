@@ -60,6 +60,8 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     public static final String EXTRA_KEY_SENSOR_ID = "sensor_id";
     public static final String EXTRA_KEY_CHALLENGE = "challenge";
     public static final String EXTRA_KEY_MODALITY = "sensor_modality";
+    public static final String EXTRA_FINISHED_ENROLL_FACE = "finished_enrolling_face";
+    public static final String EXTRA_FINISHED_ENROLL_FINGERPRINT = "finished_enrolling_fingerprint";
 
     /**
      * Used by the choose fingerprint wizard to indicate the wizard is
@@ -182,7 +184,8 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (!isChangingConfigurations() && shouldFinishWhenBackgrounded()) {
+        if (!isChangingConfigurations() && shouldFinishWhenBackgrounded()
+                && !BiometricUtils.isAnyMultiBiometricFlow(this)) {
             setResult(RESULT_TIMEOUT);
             finish();
         }
@@ -254,6 +257,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
         intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, mFromSettingsSummary);
         intent.putExtra(EXTRA_KEY_CHALLENGE, mChallenge);
         intent.putExtra(EXTRA_KEY_SENSOR_ID, mSensorId);
+        BiometricUtils.copyMultiBiometricExtras(getIntent(), intent);
         if (mUserId != UserHandle.USER_NULL) {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
         }

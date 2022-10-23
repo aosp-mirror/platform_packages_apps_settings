@@ -139,11 +139,11 @@ public class ParentalConsentHelper {
 
     @Nullable
     private Intent getNextConsentIntent(@NonNull Context context) {
-        if (mRequireFace && mConsentFace == null) {
-            return new Intent(context, FaceEnrollParentalConsent.class);
-        }
         if (mRequireFingerprint && mConsentFingerprint == null) {
             return new Intent(context, FingerprintEnrollParentalConsent.class);
+        }
+        if (mRequireFace && mConsentFace == null) {
+            return new Intent(context, FaceEnrollParentalConsent.class);
         }
         return null;
     }
