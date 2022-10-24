@@ -18,6 +18,8 @@ package com.android.settings.wifi.tether;
 
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_CHANGED_ACTION;
 
+import static com.android.settings.wifi.WifiUtils.canShowWifiHotspot;
+
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -107,6 +109,13 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        if (!canShowWifiHotspot(getContext())) {
+            Log.e(TAG, "can not launch Wi-Fi hotspot settings"
+                    + " because the config is not set to show.");
+            finish();
+            return;
+        }
+
         setIfOnlyAvailableForAdmins(true);
         mUnavailable = isUiRestricted() || !mWifiRestriction.isHotspotAvailable(getContext());
     }
