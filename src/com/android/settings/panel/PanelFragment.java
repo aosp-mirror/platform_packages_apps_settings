@@ -60,6 +60,7 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.android.setupdesign.DividerItemDecoration;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -339,8 +340,13 @@ public class PanelFragment extends Fragment {
             mSliceLiveData.put(uri, sliceLiveData);
 
             sliceLiveData.observe(getViewLifecycleOwner(), slice -> {
-                // If the Slice has already loaded, do nothing.
+
+                // If the Slice has already loaded, refresh list with slice data.
                 if (mPanelSlicesLoaderCountdownLatch.isSliceLoaded(uri)) {
+                    if (mAdapter != null) {
+                        int itemIndex = (new ArrayList<>(mSliceLiveData.keySet())).indexOf(uri);
+                        mAdapter.notifyItemChanged(itemIndex);
+                    }
                     return;
                 }
 
