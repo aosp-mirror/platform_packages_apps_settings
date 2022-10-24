@@ -16,6 +16,8 @@
 
 package com.android.settings.wifi.tether;
 
+import static com.android.settings.wifi.WifiUtils.setCanShowWifiHotspotCached;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -42,6 +44,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowFragment;
 
@@ -55,6 +58,8 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
@@ -88,6 +93,7 @@ public class WifiTetherSettingsTest {
 
     @Before
     public void setUp() {
+        setCanShowWifiHotspotCached(true);
         doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
         doReturn(mConnectivityManager)
                 .when(mContext).getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -98,6 +104,17 @@ public class WifiTetherSettingsTest {
         when(mWifiRestriction.isHotspotAvailable(mContext)).thenReturn(true);
 
         mWifiTetherSettings = new WifiTetherSettings(mWifiRestriction);
+    }
+
+    @Test
+    @Config(shadows = ShadowRestrictedDashboardFragment.class)
+    public void onCreate_canNotShowWifiHotspot_shouldFinish() {
+        setCanShowWifiHotspotCached(false);
+        mWifiTetherSettings = spy(new WifiTetherSettings(mWifiRestriction));
+
+        mWifiTetherSettings.onCreate(null);
+
+        verify(mWifiTetherSettings).finish();
     }
 
     @Test
@@ -218,5 +235,14 @@ public class WifiTetherSettingsTest {
         doReturn(mPreferenceScreen).when(mWifiTetherSettings).getPreferenceScreen();
 
         mWifiTetherSettings.onCreate(Bundle.EMPTY);
+    }
+
+    @Implements(RestrictedDashboardFragment.class)
+    public static final class ShadowRestrictedDashboardFragment {
+
+        @Implementation
+        public void onCreate(Bundle icicle) {
+            // do nothing
+        }
     }
 }
