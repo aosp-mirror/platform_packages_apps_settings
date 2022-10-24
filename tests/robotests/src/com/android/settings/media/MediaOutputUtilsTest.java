@@ -66,7 +66,18 @@ public class MediaOutputUtilsTest {
 
     @Test
     public void getActiveLocalMediaController_localMediaPlaying_returnController() {
-        initPlayback();
+        initPlayback(PlaybackState.STATE_PLAYING);
+
+        when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
+        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+
+        assertThat(MediaOutputUtils.getActiveLocalMediaController(mMediaSessionManager)).isEqualTo(
+                mMediaController);
+    }
+
+    @Test
+    public void getActiveLocalMediaController_localMediaPause_returnController() {
+        initPlayback(PlaybackState.STATE_PAUSED);
 
         when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
         when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
@@ -114,6 +125,44 @@ public class MediaOutputUtilsTest {
     }
 
     @Test
+    public void getActiveLocalMediaController_localMediaNone_returnNull() {
+        mPlaybackInfo = new MediaController.PlaybackInfo(
+                MediaController.PlaybackInfo.PLAYBACK_TYPE_LOCAL,
+                VolumeProvider.VOLUME_CONTROL_ABSOLUTE,
+                100,
+                10,
+                new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).build(),
+                null);
+        mPlaybackState = new PlaybackState.Builder()
+                .setState(PlaybackState.STATE_NONE, 0, 1)
+                .build();
+
+        when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
+        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+
+        assertThat(MediaOutputUtils.getActiveLocalMediaController(mMediaSessionManager)).isNull();
+    }
+
+    @Test
+    public void getActiveLocalMediaController_localMediaError_returnNull() {
+        mPlaybackInfo = new MediaController.PlaybackInfo(
+                MediaController.PlaybackInfo.PLAYBACK_TYPE_LOCAL,
+                VolumeProvider.VOLUME_CONTROL_ABSOLUTE,
+                100,
+                10,
+                new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).build(),
+                null);
+        mPlaybackState = new PlaybackState.Builder()
+                .setState(PlaybackState.STATE_ERROR, 0, 1)
+                .build();
+
+        when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
+        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+
+        assertThat(MediaOutputUtils.getActiveLocalMediaController(mMediaSessionManager)).isNull();
+    }
+
+    @Test
     public void getActiveLocalMediaController_bothHaveRemoteMediaAndLocalMedia_returnNull() {
         mMediaControllers.clear();
         final MediaController.PlaybackInfo playbackInfo = new MediaController.PlaybackInfo(
@@ -130,7 +179,7 @@ public class MediaOutputUtilsTest {
 
         mMediaControllers.add(remoteMediaController);
         mMediaControllers.add(mMediaController);
-        initPlayback();
+        initPlayback(PlaybackState.STATE_PLAYING);
 
         when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
         when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
@@ -155,7 +204,7 @@ public class MediaOutputUtilsTest {
         final MediaController remoteMediaController = mock(MediaController.class);
 
         mMediaControllers.add(remoteMediaController);
-        initPlayback();
+        initPlayback(PlaybackState.STATE_PLAYING);
 
         when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
         when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
@@ -165,7 +214,7 @@ public class MediaOutputUtilsTest {
         assertThat(MediaOutputUtils.getActiveLocalMediaController(mMediaSessionManager)).isNull();
     }
 
-    private void initPlayback() {
+    private void initPlayback(int playbackState) {
         mPlaybackInfo = new MediaController.PlaybackInfo(
                 MediaController.PlaybackInfo.PLAYBACK_TYPE_LOCAL,
                 VolumeProvider.VOLUME_CONTROL_ABSOLUTE,
@@ -174,7 +223,7 @@ public class MediaOutputUtilsTest {
                 new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).build(),
                 null);
         mPlaybackState = new PlaybackState.Builder()
-                .setState(PlaybackState.STATE_PLAYING, 0, 1)
+                .setState(playbackState, 0, 1)
                 .build();
     }
 }
