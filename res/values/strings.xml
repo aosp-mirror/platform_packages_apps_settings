@@ -6842,12 +6842,12 @@
     <!-- Title of a preference for whether to allow data during calls that is shown when mobile
          data is turned off. This is needed for some multi-SIM scenarios, because the SIM that is
          default for data might not be available during a phone call. [CHAR LIMIT=60] -->
-    <string name="data_during_calls_title">Data during calls</string>
+    <string name="auto_data_switch_title">Switch mobile data automatically</string>
     <!-- Title of a preference for whether to allow data during calls that is shown when mobile
          data is turned off. This is needed for some multi-SIM scenarios, because the SIM that is
          default for data might not be available during a phone call. [CHAR LIMIT=NONE] -->
-    <string name="data_during_calls_summary">
-        Allow this SIM to be used for mobile data only during calls
+    <string name="auto_data_switch_summary">
+        Temporarily use this network when it has better availability for calls and internet
     </string>
 
     <!-- Work SIM title.  [CHAR LIMIT=50] -->
@@ -11395,6 +11395,12 @@
     <!-- Provider Model:
          Summary indicating that a SIM has an active mobile data connection [CHAR LIMIT=50] -->
     <string name="mobile_data_connection_active">Connected</string>
+    <!-- Provider Model:
+     Summary indicating that a SIM has an active mobile data connection [CHAR LIMIT=50] -->
+    <string name="mobile_data_temp_connection_active">Temporarily connected</string>
+    <!-- Provider Model:
+     Summary indicating that a SIM is temporarily connected to mobile data [CHAR LIMIT=50] -->
+    <string name="mobile_data_temp_using">Temporarily using <xliff:g id="subName" example="Google Fi">%1$s</xliff:g></string>
     <!-- Provider Model:
          Summary indicating that a active SIM and no network available [CHAR LIMIT=50] -->
     <string name="mobile_data_no_connection">No connection</string>

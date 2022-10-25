@@ -192,11 +192,22 @@ public class InternetPreferenceController extends AbstractPreferenceController i
         if (subscriptionManager == null) {
             return;
         }
-        SubscriptionInfo subInfo = subscriptionManager.getDefaultDataSubscriptionInfo();
+        SubscriptionInfo subInfo = subscriptionManager.getActiveSubscriptionInfo(
+                SubscriptionManager.getActiveDataSubscriptionId());
+        SubscriptionInfo defaultSubInfo = subscriptionManager.getDefaultDataSubscriptionInfo();
+        subInfo = subscriptionManager.isSubscriptionVisible(subInfo) ? subInfo : defaultSubInfo;
         if (subInfo == null) {
             return;
         }
-        mPreference.setSummary(SubscriptionUtil.getUniqueSubscriptionDisplayName(
-                subInfo, mContext));
+        CharSequence summary;
+        if (subInfo.equals(defaultSubInfo)) {
+            // DDS is active
+            summary = SubscriptionUtil.getUniqueSubscriptionDisplayName(subInfo, mContext);
+        } else {
+            summary = mContext.getString(
+                    R.string.mobile_data_temp_using,
+                    SubscriptionUtil.getUniqueSubscriptionDisplayName(subInfo, mContext));
+        }
+        mPreference.setSummary(summary);
     }
 }
