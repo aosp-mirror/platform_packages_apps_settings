@@ -95,7 +95,7 @@ public class MobileNetworkSummaryControllerTest {
         doReturn(mSubscriptionManager).when(mContext).getSystemService(SubscriptionManager.class);
         doReturn(mEuiccManager).when(mContext).getSystemService(EuiccManager.class);
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
-        mMobileNetworkRepository = new MobileNetworkRepository(mContext, mMobileNetworkCallback);
+        mMobileNetworkRepository = MobileNetworkRepository.create(mContext, mMobileNetworkCallback);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mMobileNetworkRepository.addRegister(mLifecycleOwner);

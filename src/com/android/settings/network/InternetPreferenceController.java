@@ -101,7 +101,7 @@ public class InternetPreferenceController extends AbstractPreferenceController i
         mInternetUpdater = new InternetUpdater(context, lifecycle, this);
         mInternetType = mInternetUpdater.getInternetType();
         mLifecycleOwner = lifecycleOwner;
-        mMobileNetworkRepository = new MobileNetworkRepository(context, this);
+        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
         lifecycle.addObserver(this);
     }
 
@@ -163,7 +163,6 @@ public class InternetPreferenceController extends AbstractPreferenceController i
     /** @OnLifecycleEvent(ON_PAUSE) */
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
-        mMobileNetworkRepository.removeRegister();
         mSummaryHelper.register(false);
     }
 
@@ -203,20 +202,36 @@ public class InternetPreferenceController extends AbstractPreferenceController i
     @VisibleForTesting
     void updateCellularSummary() {
         CharSequence summary = null;
-        for (SubscriptionInfoEntity subInfo : mSubInfoEntityList) {
-            if (subInfo.isSubscriptionVisible && subInfo.isActiveDataSubscriptionId) {
-                summary = subInfo.uniqueName;
-                break;
-            } else if (subInfo.isDefaultDataSubscription) {
-                summary = mContext.getString(
-                        R.string.mobile_data_temp_using, subInfo.uniqueName);
+        SubscriptionInfoEntity activeSubInfo = null;
+        SubscriptionInfoEntity defaultSubInfo = null;
+
+        for (SubscriptionInfoEntity subInfo : getSubscriptionInfoList()) {
+            if (subInfo.isActiveDataSubscriptionId) {
+                activeSubInfo = subInfo;
+            }
+            if (subInfo.isDefaultDataSubscription) {
+                defaultSubInfo = subInfo;
             }
         }
-
-        if (summary == null) {
+        if (activeSubInfo == null) {
             return;
         }
+        activeSubInfo = activeSubInfo.isSubscriptionVisible ? activeSubInfo : defaultSubInfo;
+
+        if (activeSubInfo.equals(defaultSubInfo)) {
+            // DDS is active
+            summary = activeSubInfo.uniqueName;
+        } else {
+            summary = mContext.getString(
+                    R.string.mobile_data_temp_using, activeSubInfo.uniqueName);
+        }
+
         mPreference.setSummary(summary);
+    }
+
+    @VisibleForTesting
+    protected List<SubscriptionInfoEntity> getSubscriptionInfoList() {
+        return mSubInfoEntityList;
     }
 
     @Override

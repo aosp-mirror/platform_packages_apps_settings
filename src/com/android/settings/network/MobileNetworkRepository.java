@@ -93,10 +93,15 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private boolean mIsRemovable = false;
     private boolean mIsActive = false;
 
-    MobileNetworkRepository(Context context, MobileNetworkCallback mobileNetworkCallback) {
+    public static MobileNetworkRepository create(Context context,
+            MobileNetworkCallback mobileNetworkCallback) {
+        return new MobileNetworkRepository(context, mobileNetworkCallback);
+    }
+
+    private MobileNetworkRepository(Context context, MobileNetworkCallback mobileNetworkCallback) {
         mContext = context;
         mCallback = mobileNetworkCallback;
-        mMobileNetworkDatabase = MobileNetworkDatabase.createDatabase(context);
+        mMobileNetworkDatabase = MobileNetworkDatabase.getInstance(context);
         mSubscriptionInfoDao = mMobileNetworkDatabase.mSubscriptionInfoDao();
         mUiccInfoDao = mMobileNetworkDatabase.mUiccInfoDao();
         mMobileNetworkInfoDao = mMobileNetworkDatabase.mMobileNetworkInfoDao();
@@ -192,6 +197,10 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
 
     public List<MobileNetworkInfoEntity> getMobileNetworkInfoEntityList() {
         return mMobileNetworkInfoEntityList;
+    }
+
+    public SubscriptionInfoEntity getSubInfoById(String subId) {
+        return mSubscriptionInfoDao.querySubInfoById(subId);
     }
 
     public int getSubInfosCount() {
@@ -439,7 +448,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
      * Callback for clients to get the latest info changes if the framework or content observers.
      * updates the relevant info.
      */
-    interface MobileNetworkCallback {
+    public interface MobileNetworkCallback {
         void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList);
 
         void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList);
