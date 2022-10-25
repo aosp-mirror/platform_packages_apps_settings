@@ -43,6 +43,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toolbar;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -242,8 +243,19 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         if (isFinishing()) {
             return;
         }
+
+        if (ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)
+                && (intent.getFlags() & Intent.FLAG_ACTIVITY_CLEAR_TOP) != 0) {
+            initSplitPairRules();
+        }
+
         // Launch the intent from deep link for large screen devices.
         launchDeepLinkIntentToRight();
+    }
+
+    @VisibleForTesting
+    void initSplitPairRules() {
+        new ActivityEmbeddingRulesController(getApplicationContext()).initRules();
     }
 
     @Override
@@ -502,7 +514,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         return menuKey;
     }
 
-    private void reloadHighlightMenuKey() {
+    @VisibleForTesting
+    void reloadHighlightMenuKey() {
         mMainFragment.getArguments().putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
                 getHighlightMenuKey());
         mMainFragment.reloadHighlightMenuKey();
