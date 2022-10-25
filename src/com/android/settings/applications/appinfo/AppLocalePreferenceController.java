@@ -84,6 +84,6 @@ public class AppLocalePreferenceController extends AppInfoPreferenceControllerBa
     @VisibleForTesting
     boolean canDisplayLocaleUi() {
         return AppLocaleUtil
-                .canDisplayLocaleUi(mContext, mParent.getAppEntry().info.packageName, mListInfos);
+                .canDisplayLocaleUi(mContext, mParent.getAppEntry().info, mListInfos);
     }
 }

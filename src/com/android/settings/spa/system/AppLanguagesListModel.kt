@@ -58,7 +58,7 @@ class AppLanguagesListModel(private val context: Context) : AppListModel<AppLang
             appList.map { app ->
                 AppLanguagesRecord(app,
                     AppLocaleUtil.canDisplayLocaleUi(context,
-                    app.packageName, resolveInfos))
+                    app, resolveInfos))
             }
         }
 

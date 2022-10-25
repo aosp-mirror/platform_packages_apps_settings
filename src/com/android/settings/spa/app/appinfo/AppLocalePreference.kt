@@ -69,7 +69,7 @@ private class AppLocalePresenter(
             ResolveInfoFlags.of(PackageManager.GET_META_DATA.toLong()),
             app.userId,
         )
-        AppLocaleUtil.canDisplayLocaleUi(context, app.packageName, resolveInfos)
+        AppLocaleUtil.canDisplayLocaleUi(context, app, resolveInfos)
     }
 
     val summaryFlow = flow { emit(getSummary()) }
