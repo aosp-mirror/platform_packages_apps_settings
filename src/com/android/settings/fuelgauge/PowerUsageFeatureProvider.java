@@ -124,11 +124,6 @@ public interface PowerUsageFeatureProvider {
     boolean isSmartBatterySupported();
 
     /**
-     * Checks whether we should enable chart graph design or not.
-     */
-    boolean isChartGraphEnabled(Context context);
-
-    /**
      * Checks whether we should show usage information by slots or not.
      */
     boolean isChartGraphSlotsEnabled(Context context);

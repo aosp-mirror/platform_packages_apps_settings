@@ -480,15 +480,10 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final String slotTime = bundle.getString(EXTRA_SLOT_TIME, null);
         final long totalTimeMs = foregroundTimeMs + backgroundTimeMs;
         final CharSequence usageTimeSummary;
-        final boolean isChartGraphEnabled = FeatureFactory.getFactory(getContext())
-                .getPowerUsageFeatureProvider(getContext()).isChartGraphEnabled(getContext());
 
-        if (!isChartGraphEnabled && BatteryEntry.isSystemUid(uid)) {
-            return null;
-        }
         if (totalTimeMs == 0) {
             usageTimeSummary = getText(
-                    isChartGraphEnabled && consumedPower > 0 ? R.string.battery_usage_without_time
+                    consumedPower > 0 ? R.string.battery_usage_without_time
                             : R.string.battery_not_usage);
         } else if (slotTime == null) {
             // Shows summary text with last full charge if slot time is null.

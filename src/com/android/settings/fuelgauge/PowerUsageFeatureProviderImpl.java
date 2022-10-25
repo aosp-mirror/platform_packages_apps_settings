@@ -139,11 +139,6 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public boolean isChartGraphEnabled(Context context) {
-        return false;
-    }
-
-    @Override
     public boolean isChartGraphSlotsEnabled(Context context) {
         return false;
     }
