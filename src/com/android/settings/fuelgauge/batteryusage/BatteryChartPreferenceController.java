@@ -108,6 +108,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
     private boolean mIs24HourFormat;
     private boolean mIsFooterPrefAdded = false;
+    private boolean mHourlyChartVisible = true;
     private View mBatteryChartViewGroup;
     private View mCategoryTitleView;
     private PreferenceScreen mPreferenceScreen;
@@ -674,9 +675,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     }
 
     private void animateBatteryHourlyChartView(final boolean visible) {
-        if (mHourlyChartView == null) {
+        if (mHourlyChartView == null || mHourlyChartVisible == visible) {
             return;
         }
+        mHourlyChartVisible = visible;
 
         if (visible) {
             mHourlyChartView.setVisibility(View.VISIBLE);
