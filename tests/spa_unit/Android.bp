@@ -35,11 +35,12 @@ android_test {
         "androidx.compose.ui_ui-test-manifest",
         "androidx.test.ext.junit",
         "androidx.test.runner",
-        "mockito-target-inline-minus-junit4",
+        "mockito-target-extended-minus-junit4",
         "truth-prebuilt",
     ],
     jni_libs: [
         "libdexmakerjvmtiagent",
+        "libstaticjvmtiagent",
     ],
     kotlincflags: [
         "-Xjvm-default=all",

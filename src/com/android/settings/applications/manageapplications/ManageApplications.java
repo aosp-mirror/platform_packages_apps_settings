@@ -1707,7 +1707,7 @@ public class ManageApplications extends InstrumentedFragment
                     holder.setSummary(MediaManagementAppsDetails.getSummary(mContext, entry));
                     break;
                 case LIST_TYPE_APPS_LOCALE:
-                    holder.setSummary(AppLocaleDetails.getSummary(mContext, entry));
+                    holder.setSummary(AppLocaleDetails.getSummary(mContext, entry.info));
                     break;
                 case LIST_TYPE_BATTERY_OPTIMIZATION:
                     holder.setSummary(null);
