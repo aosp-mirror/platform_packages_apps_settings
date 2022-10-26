@@ -31,5 +31,11 @@
             android:key="keyboard_shortcuts_helper"
             android:title="@string/keyboard_shortcuts_helper"
             android:summary="@string/keyboard_shortcuts_helper_summary" />
+
+        <Preference
+            android:key="modifier_keys_settings"
+            android:title="@string/modifier_keys_settings"
+            android:summary="@string/modifier_keys_settings_summary"
+            android:fragment="com.android.settings.inputmethod.ModifierKeysSettings" />
     </PreferenceCategory>
 </PreferenceScreen>

@@ -67,6 +67,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     private static final String KEYBOARD_OPTIONS_CATEGORY = "keyboard_options_category";
     private static final String SHOW_VIRTUAL_KEYBOARD_SWITCH = "show_virtual_keyboard_switch";
     private static final String KEYBOARD_SHORTCUTS_HELPER = "keyboard_shortcuts_helper";
+    private static final String MODIFIER_KEYS_SETTINGS = "modifier_keys_settings";
 
     @NonNull
     private final ArrayList<HardKeyboardDeviceInfo> mLastHardKeyboards = new ArrayList<>();
@@ -94,9 +95,14 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         mShowVirtualKeyboardSwitch = Preconditions.checkNotNull(
                 (SwitchPreference) mKeyboardAssistanceCategory.findPreference(
                         SHOW_VIRTUAL_KEYBOARD_SWITCH));
+
         mIsNewKeyboardSettings = FeatureFlagUtils.isEnabled(
                 getContext(), FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI);
-        // TODO(b/247080921): Support shortcuts list & modifier keys
+        boolean isModifierKeySettingsEnabled = FeatureFlagUtils
+                .isEnabled(getContext(), FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_MODIFIER_KEY);
+        if (!isModifierKeySettingsEnabled) {
+            mKeyboardAssistanceCategory.removePreference(findPreference(MODIFIER_KEYS_SETTINGS));
+        }
     }
 
     @Override
