@@ -38,11 +38,14 @@ import android.media.session.MediaSessionManager;
 import android.media.session.PlaybackState;
 import android.net.Uri;
 
+import com.android.settings.bluetooth.Utils;
 import com.android.settings.slices.ShadowSliceBackgroundWorker;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
+import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.media.LocalMediaManager;
 
 import org.junit.Before;
@@ -69,13 +72,17 @@ public class MediaOutputIndicatorWorkerTest {
     @Mock
     private BluetoothEventManager mBluetoothEventManager;
     @Mock
-    private LocalBluetoothManager mLocalBluetoothManager;
+    private LocalBluetoothManager mLocalBtManager;
+    @Mock
+    private LocalBluetoothProfileManager mLocalBluetoothProfileManager;
     @Mock
     private MediaSessionManager mMediaSessionManager;
     @Mock
     private MediaController mMediaController;
     @Mock
     private LocalMediaManager mLocalMediaManager;
+    @Mock
+    private LocalBluetoothLeBroadcast mLeAudioBroadcastProfile;
 
     private Context mContext;
     private MediaOutputIndicatorWorker mMediaOutputIndicatorWorker;
@@ -84,14 +91,18 @@ public class MediaOutputIndicatorWorkerTest {
     private List<MediaController> mMediaControllers = new ArrayList<>();
     private PlaybackState mPlaybackState;
     private MediaController.PlaybackInfo mPlaybackInfo;
+    private LocalBluetoothManager mLocalBluetoothManager;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mShadowApplication = ShadowApplication.getInstance();
         mContext = spy(RuntimeEnvironment.application);
-        ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
+        ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBtManager;
+        mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
         when(mLocalBluetoothManager.getEventManager()).thenReturn(mBluetoothEventManager);
+        when(mLocalBluetoothManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
+        when(mLocalBluetoothProfileManager.getLeAudioBroadcastProfile()).thenReturn(null);
         mMediaOutputIndicatorWorker = new MediaOutputIndicatorWorker(mContext, URI);
         doReturn(mMediaSessionManager).when(mContext).getSystemService(MediaSessionManager.class);
         mMediaControllers.add(mMediaController);
@@ -283,5 +294,23 @@ public class MediaOutputIndicatorWorkerTest {
         when(remoteMediaController.getPlaybackState()).thenReturn(playbackState);
 
         assertThat(mMediaOutputIndicatorWorker.getActiveLocalMediaController()).isNull();
+    }
+
+    @Test
+    public void isBroadcastSupported_leAudioBroadcastProfileIsNull_returnFalse() {
+        mMediaOutputIndicatorWorker.mLocalMediaManager = mLocalMediaManager;
+        mMediaOutputIndicatorWorker.onSlicePinned();
+
+        assertThat(mMediaOutputIndicatorWorker.isBroadcastSupported()).isFalse();
+    }
+
+    @Test
+    public void isBroadcastSupported_leAudioBroadcastProfileNotNull_returnTrue() {
+        mMediaOutputIndicatorWorker.mLocalMediaManager = mLocalMediaManager;
+        mMediaOutputIndicatorWorker.onSlicePinned();
+        when(mLocalBluetoothProfileManager.getLeAudioBroadcastProfile())
+                .thenReturn(mLeAudioBroadcastProfile);
+
+        assertThat(mMediaOutputIndicatorWorker.isBroadcastSupported()).isTrue();
     }
 }

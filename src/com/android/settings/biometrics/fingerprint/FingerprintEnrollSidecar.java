@@ -21,8 +21,13 @@ import android.app.settings.SettingsEnums;
 import android.hardware.fingerprint.FingerprintManager;
 import android.util.Log;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Sidecar fragment to handle the state around fingerprint enrollment.
@@ -32,11 +37,19 @@ public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
 
     private FingerprintUpdater mFingerprintUpdater;
     private @FingerprintManager.EnrollReason int mEnrollReason;
+    private Set<Integer> mHelpIgnore;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mFingerprintUpdater = new FingerprintUpdater(activity);
+        final int[] ignoreAcquiredInfo = getResources().getIntArray(
+                R.array.fingerprint_acquired_ignore_list);
+        mHelpIgnore = new HashSet<>();
+        for (int acquiredInfo: ignoreAcquiredInfo) {
+            mHelpIgnore.add(acquiredInfo);
+        }
+        mHelpIgnore = Collections.unmodifiableSet(mHelpIgnore);
     }
 
     @Override
@@ -49,7 +62,6 @@ public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
                     getString(R.string.fingerprint_intro_error_unknown));
             return;
         }
-
         mFingerprintUpdater.enroll(mToken, mEnrollmentCancel, mUserId, mEnrollmentCallback,
                 mEnrollReason);
     }
@@ -58,7 +70,7 @@ public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
         mEnrollReason = enrollReason;
     }
 
-    private FingerprintManager.EnrollmentCallback mEnrollmentCallback
+    @VisibleForTesting FingerprintManager.EnrollmentCallback mEnrollmentCallback
             = new FingerprintManager.EnrollmentCallback() {
 
         @Override
@@ -68,6 +80,9 @@ public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
 
         @Override
         public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
+            if (mHelpIgnore.contains(helpMsgId)) {
+                return;
+            }
             FingerprintEnrollSidecar.super.onEnrollmentHelp(helpMsgId, helpString);
         }
 

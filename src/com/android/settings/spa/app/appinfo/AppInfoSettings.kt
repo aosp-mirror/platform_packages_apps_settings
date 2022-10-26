@@ -100,6 +100,10 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         AppOpenByDefaultPreference(app)
         DefaultAppShortcuts(app)
 
+        Category(title = stringResource(R.string.unused_apps_category)) {
+            HibernationSwitchPreference(app)
+        }
+
         Category(title = stringResource(R.string.advanced_apps)) {
             DisplayOverOtherAppsAppListProvider.InfoPageEntryItem(app)
             ModifySystemSettingsAppListProvider.InfoPageEntryItem(app)
