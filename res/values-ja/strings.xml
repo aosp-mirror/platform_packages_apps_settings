@@ -1104,8 +1104,7 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"ディスプレイのホワイト バランス"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"スムーズ ディスプレイ"</string>
-    <!-- no translation found for peak_refresh_rate_summary (3627278682437562787) -->
-    <skip />
+    <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"コンテンツに応じて、リフレッシュ レートを自動的に 60 Hz から <xliff:g id="ID_1">%1$s</xliff:g> Hz に変更します。バッテリー使用量が増えます。"</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"ピーク時のリフレッシュ レートの適用"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"最高のリフレッシュ レートを適用します。タップの反応とアニメーションの品質が向上します。バッテリー使用量が増えます。"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"スクリーン アテンション"</string>
@@ -1174,6 +1173,7 @@
     <string name="style_suggestion_summary" msgid="4271131877800968159">"別のスタイル、壁紙などを試す"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"スクリーン セーバー"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"スクリーンセーバー"</string>
+    <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"おやすみ時間モードが ON のため利用できません"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"スクリーン セーバーを使用する"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"充電時またはドッキング時"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"充電時"</string>
@@ -2848,8 +2848,7 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"ゲストモードの終了時にゲストのすべてのアプリとデータを削除します"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"ゲストのアクティビティを削除しますか？"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"今回のゲスト セッションのアプリとデータが今すぐ削除され、今後のゲストのアクティビティはすべて、ゲストモードを終了するたびに削除されます"</string>
-    <!-- no translation found for remove_guest_on_exit_keywords (4961310523576166193) -->
-    <skip />
+    <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"削除, ゲスト, アクティビティ, 消す, データ, ビジター, 消去"</string>
     <string name="enable_guest_calling" msgid="8300355036005240911">"スマートフォンの利用をゲストに許可する"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"発信履歴がゲストユーザーと共有されます。"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"通話とSMSをON"</string>
@@ -3113,8 +3112,7 @@
     <string name="call_volume_option_title" msgid="1461105986437268924">"通話の音量"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"アラームの音量"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"着信音と通知の音量"</string>
-    <!-- no translation found for separate_ring_volume_option_title (2212910223857375951) -->
-    <skip />
+    <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"着信音の音量"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"通知の音量"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"着信音"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"デフォルトの通知音"</string>
@@ -3413,6 +3411,8 @@
     <string name="notif_listener_excluded_app_summary" msgid="2914567678047195396">"通知を送信する各アプリの設定を変更します"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"デバイスに表示されるアプリ"</string>
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"このアプリは拡張設定に対応していません"</string>
+    <string name="notif_listener_more_settings" msgid="1348409392307208921">"その他の設定"</string>
+    <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"このアプリ内でその他の設定を利用できます"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR ヘルパー サービス"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"VR ヘルパー サービスとしての実行権限をリクエストしたインストール済みアプリはありません。"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR サービスから <xliff:g id="SERVICE">%1$s</xliff:g> へのアクセスの許可"</string>
@@ -3867,8 +3867,7 @@
     <string name="users_summary" msgid="8473589474976307510">"<xliff:g id="USER_NAME">%1$s</xliff:g>としてログイン中"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"Android <xliff:g id="VERSION">%1$s</xliff:g> に更新済み"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"アップデートを利用できます"</string>
-    <!-- no translation found for disabled_by_policy_title (6852347040813204503) -->
-    <skip />
+    <string name="disabled_by_policy_title" msgid="6852347040813204503">"仕事用ポリシーによりブロックされています"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"音量を変更することはできません"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="400089720689494562">"通話ができません"</string>
     <string name="disabled_by_policy_title_sms" msgid="8951840850778406831">"SMS メッセージを送信できません"</string>
@@ -3878,8 +3877,7 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"クレジット プロバイダによりブロックされています"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"保護者の同意が必要です"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"スマートフォンを保護者に渡し、設定してもらってください"</string>
-    <!-- no translation found for default_admin_support_msg (8816296554831532033) -->
-    <skip />
+    <string name="default_admin_support_msg" msgid="8816296554831532033">"詳しくは、IT 管理者にお問い合わせください"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"詳細"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"管理者は、設定、権限、コーポレート アクセス、ネットワーク アクティビティ、デバイスの位置情報など、ユーザーの仕事用プロファイルに関連付けられたアプリやデータの監視、管理を行えます。"</string>
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"管理者は、設定、権限、コーポレート アクセス、ネットワーク アクティビティ、デバイスの位置情報など、このユーザーに関連付けられたアプリやデータの監視、管理を行えます。"</string>
@@ -4710,8 +4708,7 @@
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"開発者向けオプションの使用"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"印刷サービスを使用"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"複数のユーザーを許可する"</string>
-    <!-- no translation found for multiple_users_main_switch_keywords (4845954458094134356) -->
-    <skip />
+    <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"許可, 複数, ユーザー, 認可, 大勢"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ワイヤレス デバッグの使用"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"グラフィックス ドライバの設定の使用"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"夜間モードを使用"</string>

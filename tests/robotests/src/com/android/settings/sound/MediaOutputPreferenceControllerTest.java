@@ -56,6 +56,8 @@ import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -77,6 +79,7 @@ import org.robolectric.shadows.ShadowBluetoothDevice;
 import org.robolectric.shadows.ShadowPackageManager;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -118,6 +121,12 @@ public class MediaOutputPreferenceControllerTest {
     private MediaSessionManager mMediaSessionManager;
     @Mock
     private MediaController mMediaController;
+    @Mock
+    private CachedBluetoothDeviceManager mCachedDeviceManager;
+    @Mock
+    private CachedBluetoothDevice mCachedBluetoothDeviceL;
+    @Mock
+    private CachedBluetoothDevice mCachedBluetoothDeviceR;
 
     private Context mContext;
     private PreferenceScreen mScreen;
@@ -142,6 +151,7 @@ public class MediaOutputPreferenceControllerTest {
     private ApplicationInfo mAppInfo;
     private PackageInfo mPackageInfo;
     private PackageStats mPackageStats;
+    private Collection<CachedBluetoothDevice> mCachedDevices;
 
     @Before
     public void setUp() {
@@ -173,12 +183,18 @@ public class MediaOutputPreferenceControllerTest {
 
         when(mLocalBluetoothManager.getEventManager()).thenReturn(mBluetoothEventManager);
         when(mLocalBluetoothManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
+        when(mLocalBluetoothManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
         when(mLocalBluetoothProfileManager.getA2dpProfile()).thenReturn(mA2dpProfile);
         when(mLocalBluetoothProfileManager.getHearingAidProfile()).thenReturn(mHearingAidProfile);
         when(mLocalBluetoothProfileManager.getLeAudioProfile()).thenReturn(mLeAudioProfile);
 
         mBluetoothManager = mContext.getSystemService(BluetoothManager.class);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
+
+        mCachedDevices = new ArrayList<>();
+        mCachedDevices.add(mCachedBluetoothDeviceL);
+        mCachedDevices.add(mCachedBluetoothDeviceR);
+        when(mCachedDeviceManager.getCachedDevicesCopy()).thenReturn(mCachedDevices);
 
         mBluetoothDevice = spy(mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_1));
         when(mBluetoothDevice.getName()).thenReturn(TEST_DEVICE_NAME_1);
@@ -280,6 +296,8 @@ public class MediaOutputPreferenceControllerTest {
     public void updateState_withActiveLeAudioDevice_setActivatedDeviceName() {
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLE_HEADSET);
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        when(mCachedBluetoothDeviceL.getDevice()).thenReturn(mBluetoothDevice);
+        when(mCachedBluetoothDeviceR.getDevice()).thenReturn(mSecondBluetoothDevice);
         when(mBluetoothDevice.getAlias()).thenReturn(TEST_LE_AUDIO_DEVICE_NAME_1);
         mProfileConnectedDevices.clear();
         mProfileConnectedDevices.add(mBluetoothDevice);
