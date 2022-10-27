@@ -60,7 +60,7 @@ public class AppLocalePreferenceController extends AppInfoPreferenceControllerBa
 
     @Override
     public CharSequence getSummary() {
-        return AppLocaleDetails.getSummary(mContext, mParent.getAppEntry());
+        return AppLocaleDetails.getSummary(mContext, mParent.getAppEntry().info);
     }
 
     @Override

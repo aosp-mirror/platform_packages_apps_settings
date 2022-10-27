@@ -59,6 +59,12 @@
             settings:controller="com.android.settings.network.telephony.MobileDataPreferenceController"
             settings:allowDividerAbove="true"/>
 
+        <SwitchPreference
+            android:key="auto_data_switch"
+            android:title="@string/auto_data_switch_title"
+            android:summary="@string/auto_data_switch_summary"
+            settings:controller="com.android.settings.network.telephony.AutoDataSwitchPreferenceController"/>
+
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="button_roaming_key"
             android:title="@string/roaming"
@@ -95,12 +101,6 @@
             android:title="@string/mms_message_title"
             android:summary="@string/mms_message_summary"
             settings:controller="com.android.settings.network.telephony.MmsMessagePreferenceController"/>
-
-        <SwitchPreference
-            android:key="data_during_calls"
-            android:title="@string/data_during_calls_title"
-            android:summary="@string/data_during_calls_summary"
-            settings:controller="com.android.settings.network.telephony.DataDuringCallsPreferenceController"/>
 
         <SwitchPreference
             android:key="enhanced_4g_lte"

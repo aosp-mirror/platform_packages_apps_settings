@@ -22,6 +22,7 @@ import static com.android.settings.network.InternetUpdater.INTERNET_WIFI;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -37,6 +38,7 @@ import android.net.NetworkScoreManager;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Looper;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
 import androidx.lifecycle.Lifecycle;
@@ -45,6 +47,8 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -145,7 +149,31 @@ public class InternetPreferenceControllerTest {
         final SubscriptionManager subscriptionManager = mock(SubscriptionManager.class);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(subscriptionManager);
         when(subscriptionManager.getDefaultDataSubscriptionInfo()).thenReturn(null);
+        when(subscriptionManager.getActiveSubscriptionInfo(anyInt())).thenReturn(null);
 
         mController.updateCellularSummary();
+    }
+
+    @Test
+    public void updateCellularSummary_getActiveSubscriptionInfo_cbrs() {
+        mController.displayPreference(mScreen);
+        final SubscriptionManager subscriptionManager = mock(SubscriptionManager.class);
+        final SubscriptionInfo defaultSubInfo = mock(SubscriptionInfo.class);
+        final SubscriptionInfo activeSubInfo = mock(SubscriptionInfo.class);
+        final String expectedSummary =
+                ResourcesUtils.getResourcesString(mContext, "mobile_data_temp_using", "");
+
+        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(subscriptionManager);
+        when(subscriptionManager.getDefaultDataSubscriptionInfo()).thenReturn(defaultSubInfo);
+
+        when(subscriptionManager.getActiveSubscriptionInfo(anyInt())).thenReturn(activeSubInfo);
+        when(subscriptionManager.isSubscriptionVisible(activeSubInfo)).thenReturn(false);
+
+        mController.updateCellularSummary();
+        assertThat(mPreference.getSummary()).isEqualTo("");
+
+        when(subscriptionManager.isSubscriptionVisible(activeSubInfo)).thenReturn(true);
+        mController.updateCellularSummary();
+        assertThat(mPreference.getSummary()).isEqualTo(expectedSummary);
     }
 }

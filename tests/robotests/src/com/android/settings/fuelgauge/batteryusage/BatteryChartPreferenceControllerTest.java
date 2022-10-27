@@ -184,8 +184,6 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
 
         verify(mDailyChartView, atLeastOnce()).setVisibility(View.GONE);
-        verify(mHourlyChartView, atLeastOnce()).setVisibility(View.VISIBLE);
-        verify(mViewPropertyAnimator, atLeastOnce()).alpha(1f);
         // Ignore fast refresh ui from the data processor callback.
         verify(mHourlyChartView, atLeast(0)).setViewModel(null);
         verify(mHourlyChartView, atLeastOnce()).setViewModel(new BatteryChartViewModel(
@@ -253,7 +251,6 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mHourlyChartIndex = 6;
         mBatteryChartPreferenceController.refreshUi();
         verify(mDailyChartView).setVisibility(View.VISIBLE);
-        verify(mHourlyChartView).setVisibility(View.VISIBLE);
         verify(mViewPropertyAnimator, atLeastOnce()).alpha(1f);
         expectedDailyViewModel.setSelectedIndex(1);
         verify(mDailyChartView).setViewModel(expectedDailyViewModel);
@@ -286,7 +283,6 @@ public final class BatteryChartPreferenceControllerTest {
                 BatteryChartViewModel.SELECTED_INDEX_ALL;
         mBatteryChartPreferenceController.refreshUi();
         verify(mDailyChartView).setVisibility(View.VISIBLE);
-        verify(mHourlyChartView).setVisibility(View.VISIBLE);
         verify(mViewPropertyAnimator, atLeastOnce()).alpha(1f);
         expectedDailyViewModel.setSelectedIndex(2);
         verify(mDailyChartView).setViewModel(expectedDailyViewModel);

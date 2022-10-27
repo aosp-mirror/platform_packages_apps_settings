@@ -96,7 +96,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         // TODO: data_settings
         AppTimeSpentPreference(app)
         // TODO: battery
-        // TODO: app_language_setting
+        AppLocalePreference(app)
         AppOpenByDefaultPreference(app)
         DefaultAppShortcuts(app)
 
