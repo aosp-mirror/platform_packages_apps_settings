@@ -34,6 +34,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
@@ -598,10 +599,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             return;
         }
 
-        if (mSelectedWifiEntry.isSaved() && mSelectedWifiEntry.getConnectedState()
-                != WifiEntry.CONNECTED_STATE_CONNECTED) {
-            menu.add(Menu.NONE, MENU_ID_MODIFY, 0 /* order */, R.string.wifi_modify);
-        }
+        addModifyMenuIfSuitable(menu, mSelectedWifiEntry);
     }
 
     @VisibleForTesting
@@ -618,6 +616,14 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     void addForgetMenuIfSuitable(ContextMenu menu) {
         if (mIsAdmin) {
             menu.add(Menu.NONE, MENU_ID_FORGET, 0 /* order */, R.string.forget);
+        }
+    }
+
+    @VisibleForTesting
+    void addModifyMenuIfSuitable(ContextMenu menu, WifiEntry wifiEntry) {
+        if (mIsAdmin && wifiEntry.isSaved()
+                && wifiEntry.getConnectedState() != WifiEntry.CONNECTED_STATE_CONNECTED) {
+            menu.add(Menu.NONE, MENU_ID_MODIFY, 0 /* order */, R.string.wifi_modify);
         }
     }
 
@@ -643,6 +649,12 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                         () -> launchWifiDppConfiguratorActivity(mSelectedWifiEntry));
                 return true;
             case MENU_ID_MODIFY:
+                if (!mIsAdmin) {
+                    Log.e(TAG, "Can't modify Wi-Fi because the user isn't admin.");
+                    EventLog.writeEvent(0x534e4554, "237672190", UserHandle.myUserId(),
+                            "User isn't admin");
+                    return true;
+                }
                 showDialog(mSelectedWifiEntry, WifiConfigUiBase2.MODE_MODIFY);
                 return true;
             default:
