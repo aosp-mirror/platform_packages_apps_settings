@@ -42,6 +42,7 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
 import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -73,6 +74,7 @@ public class InternetPreferenceControllerTest {
     private InternetPreferenceController mController;
     private PreferenceScreen mScreen;
     private Preference mPreference;
+    private LifecycleOwner mLifecycleOwner;
 
     @Before
     public void setUp() {
@@ -84,7 +86,8 @@ public class InternetPreferenceControllerTest {
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(wifiManager);
         when(wifiManager.getWifiState()).thenReturn(WifiManager.WIFI_STATE_DISABLED);
 
-        mController = new InternetPreferenceController(mContext, mock(Lifecycle.class));
+        mController = new InternetPreferenceController(mContext, mock(Lifecycle.class),
+                mLifecycleOwner);
         mController.sIconMap.put(INTERNET_WIFI, 0);
         if (Looper.myLooper() == null) {
             Looper.prepare();

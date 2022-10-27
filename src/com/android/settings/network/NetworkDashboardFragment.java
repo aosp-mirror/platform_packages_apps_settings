@@ -97,7 +97,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         final MobilePlanPreferenceController mobilePlanPreferenceController =
                 new MobilePlanPreferenceController(context, mobilePlanHost);
         final InternetPreferenceController internetPreferenceController =
-                new InternetPreferenceController(context, lifecycle);
+                new InternetPreferenceController(context, lifecycle, lifecycleOwner);
 
         final VpnPreferenceController vpnPreferenceController =
                 new VpnPreferenceController(context);
