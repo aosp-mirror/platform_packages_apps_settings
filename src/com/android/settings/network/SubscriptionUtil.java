@@ -610,7 +610,7 @@ public class SubscriptionUtil {
         boolean isDefaultData = subId == getDefaultDataSubscriptionId();
 
         if (!isDefaultData && !isDefaultCall && !isDefaultSms) {
-            return null;
+            return "";
         }
 
         final StringBuilder defaultConfig = new StringBuilder();

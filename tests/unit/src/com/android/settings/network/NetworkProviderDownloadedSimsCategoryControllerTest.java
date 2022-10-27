@@ -31,6 +31,7 @@ import android.telephony.SubscriptionInfo;
 import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
@@ -39,6 +40,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -47,6 +49,8 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+//TODO: Remove NetworkProviderDownloadedSimsCategoryControllerTest once it is removed in the
+// b/244769887.
 @RunWith(AndroidJUnit4.class)
 public class NetworkProviderDownloadedSimsCategoryControllerTest {
 
@@ -71,6 +75,7 @@ public class NetworkProviderDownloadedSimsCategoryControllerTest {
     private PreferenceManager mPreferenceManager;
     private PreferenceScreen mPreferenceScreen;
     private Preference mAddMorePreference;
+    private LifecycleOwner mLifecycleOwner;
 
     @Before
     public void setUp() throws Exception {
@@ -82,6 +87,7 @@ public class NetworkProviderDownloadedSimsCategoryControllerTest {
             Looper.prepare();
         }
 
+        mLifecycleOwner = () -> mLifecycle;
         mPreferenceManager = new PreferenceManager(mContext);
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mPreferenceCategory = new PreferenceCategory(mContext);
@@ -93,9 +99,10 @@ public class NetworkProviderDownloadedSimsCategoryControllerTest {
         mPreferenceScreen.addPreference(mAddMorePreference);
 
         mCategoryController = new NetworkProviderDownloadedSimsCategoryController(mContext,
-                KEY_PREFERENCE_CATEGORY_DOWNLOADED_SIM, mLifecycle);
+                KEY_PREFERENCE_CATEGORY_DOWNLOADED_SIM, mLifecycle, mLifecycleOwner);
     }
 
+    @Ignore
     @Test
     public void getAvailabilityStatus_returnUnavailable() {
         SubscriptionUtil.setAvailableSubscriptionsForTesting(new ArrayList<>());
@@ -104,6 +111,7 @@ public class NetworkProviderDownloadedSimsCategoryControllerTest {
                 CONDITIONALLY_UNAVAILABLE);
     }
 
+    @Ignore
     @Test
     public void displayPreference_isVisible() {
         setUpSubscriptionInfoForDownloadedSim(SUB_ID_1, SUB_1, mSubscriptionInfo1);
@@ -113,7 +121,7 @@ public class NetworkProviderDownloadedSimsCategoryControllerTest {
         assertEquals(mPreferenceCategory.isVisible(), true);
     }
 
-
+    @Ignore
     @Test
     public void updateState_setTitle_withTwoDownloadedSims_returnDownloadedSims() {
         setUpSubscriptionInfoForDownloadedSim(SUB_ID_1, SUB_1, mSubscriptionInfo1);
@@ -129,6 +137,7 @@ public class NetworkProviderDownloadedSimsCategoryControllerTest {
                 ResourcesUtils.getResourcesString(mContext, "downloaded_sims_category_title"));
     }
 
+    @Ignore
     @Test
     public void updateState_setTitle_withOneDownloadedSim_returnDownloadedSim() {
         setUpSubscriptionInfoForDownloadedSim(SUB_ID_1, SUB_1, mSubscriptionInfo1);
