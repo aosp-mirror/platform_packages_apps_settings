@@ -219,7 +219,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
      * Start packageName's battery detail page.
      */
     public static void startBatteryDetailPage(
-            Activity caller, Instrumentable instrumentable, String packageName) {
+            Activity caller, Instrumentable instrumentable, String packageName,
+            UserHandle userHandle) {
         final Bundle args = new Bundle(3);
         final PackageManager packageManager = caller.getPackageManager();
         args.putString(EXTRA_PACKAGE_NAME, packageName);
@@ -235,6 +236,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                 .setTitleRes(R.string.battery_details_title)
                 .setArguments(args)
                 .setSourceMetricsCategory(instrumentable.getMetricsCategory())
+                .setUserHandle(userHandle)
                 .launch();
     }
 
@@ -475,16 +477,12 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     private CharSequence getAppActiveTime(Bundle bundle) {
         final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
         final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
-        final int consumedPower = bundle.getInt(EXTRA_POWER_USAGE_AMOUNT);
-        final int uid = bundle.getInt(EXTRA_UID, 0);
         final String slotTime = bundle.getString(EXTRA_SLOT_TIME, null);
         final long totalTimeMs = foregroundTimeMs + backgroundTimeMs;
         final CharSequence usageTimeSummary;
 
         if (totalTimeMs == 0) {
-            usageTimeSummary = getText(
-                    consumedPower > 0 ? R.string.battery_usage_without_time
-                            : R.string.battery_not_usage);
+            usageTimeSummary = getText(R.string.battery_usage_without_time);
         } else if (slotTime == null) {
             // Shows summary text with last full charge if slot time is null.
             usageTimeSummary = getAppFullChargeActiveSummary(
