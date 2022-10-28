@@ -71,7 +71,7 @@ public class MobileNetworkListFragment extends DashboardFragment {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         if (!SubscriptionUtil.isSimHardwareVisible(getContext())) {
-            finishFragment();
+            finish();
             return controllers;
         }
 
