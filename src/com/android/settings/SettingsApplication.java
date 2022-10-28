@@ -61,7 +61,7 @@ public class SettingsApplication extends Application {
      * Override this function to set different spa environment for different Settings app.
      */
     protected void setSpaEnvironment() {
-        SpaEnvironmentFactory.INSTANCE.reset(new SettingsSpaEnvironment());
+        SpaEnvironmentFactory.INSTANCE.reset(new SettingsSpaEnvironment(this));
     }
 
     public void setHomeActivity(SettingsHomepageActivity homeActivity) {
