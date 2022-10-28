@@ -153,7 +153,7 @@ public class AppBatteryPreferenceController extends BasePreferenceController
         } else {
             Log.i(TAG, "Launch : " + mPackageName + " with package name");
             AdvancedPowerUsageDetail.startBatteryDetailPage(mParent.getActivity(), mParent,
-                    mPackageName);
+                    mPackageName, UserHandle.CURRENT);
         }
         return true;
     }
