@@ -56,7 +56,7 @@ import org.mockito.quality.Strictness
 import org.mockito.Mockito.`when` as whenever
 
 @RunWith(AndroidJUnit4::class)
-class AppLocalePresenterTest {
+class AppLocalePreferenceTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
