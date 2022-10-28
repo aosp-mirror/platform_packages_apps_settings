@@ -160,6 +160,37 @@ public final class AccessibilityGestureNavigationTutorial {
         return alertDialog;
     }
 
+    static AlertDialog createAccessibilityTutorialDialogForSetupWizard(Context context,
+            int shortcutTypes) {
+        return createAccessibilityTutorialDialogForSetupWizard(context, shortcutTypes,
+                mOnClickListener);
+    }
+
+    static AlertDialog createAccessibilityTutorialDialogForSetupWizard(Context context,
+            int shortcutTypes, @Nullable DialogInterface.OnClickListener actionButtonListener) {
+
+        final int category = SettingsEnums.SWITCH_SHORTCUT_DIALOG_ACCESSIBILITY_BUTTON_SETTINGS;
+        final DialogInterface.OnClickListener linkButtonListener =
+                (dialog, which) -> new SubSettingLauncher(context)
+                        .setDestination(AccessibilityButtonFragment.class.getName())
+                        .setSourceMetricsCategory(category)
+                        .launch();
+
+        final AlertDialog alertDialog = new AlertDialog.Builder(context)
+                .setPositiveButton(R.string.accessibility_tutorial_dialog_button,
+                        actionButtonListener)
+                .create();
+
+        final List<TutorialPage> tutorialPages =
+                createShortcutTutorialPages(context, shortcutTypes);
+        Preconditions.checkArgument(!tutorialPages.isEmpty(),
+                /* errorMessage= */ "Unexpected tutorial pages size");
+
+        alertDialog.setView(createShortcutNavigationContentView(context, tutorialPages, null));
+
+        return alertDialog;
+    }
+
     /**
      * Gets a content View for a dialog to confirm that they want to enable a service.
      *
