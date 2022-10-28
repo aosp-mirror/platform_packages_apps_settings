@@ -19,6 +19,7 @@ package com.android.settings.network;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -35,10 +36,11 @@ public class NetworkProviderSimsCategoryController extends PreferenceCategoryCon
     private NetworkProviderSimListController mNetworkProviderSimListController;
     private PreferenceCategory mPreferenceCategory;
 
-    public NetworkProviderSimsCategoryController(Context context, String key, Lifecycle lifecycle) {
+    public NetworkProviderSimsCategoryController(Context context, String key, Lifecycle lifecycle,
+            LifecycleOwner lifecycleOwner) {
         super(context, key);
         mNetworkProviderSimListController =
-                new NetworkProviderSimListController(mContext, lifecycle);
+                new NetworkProviderSimListController(mContext, lifecycle, lifecycleOwner);
     }
 
     @Override
