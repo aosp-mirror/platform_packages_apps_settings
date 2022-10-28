@@ -93,7 +93,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         AppPermissionPreference(app)
         AppStoragePreference(app)
         // TODO: instant_app_launch_supported_domain_urls
-        // TODO: data_settings
+        AppDataUsagePreference(app)
         AppTimeSpentPreference(app)
         AppBatteryPreference(app)
         AppLocalePreference(app)
