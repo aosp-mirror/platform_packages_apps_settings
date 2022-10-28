@@ -95,7 +95,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         // TODO: instant_app_launch_supported_domain_urls
         // TODO: data_settings
         AppTimeSpentPreference(app)
-        // TODO: battery
+        AppBatteryPreference(app)
         AppLocalePreference(app)
         AppOpenByDefaultPreference(app)
         DefaultAppShortcuts(app)
