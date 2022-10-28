@@ -27,10 +27,10 @@ import com.android.settingslib.spaprivileged.model.app.userHandle
 
 class AppLaunchButton(packageInfoPresenter: PackageInfoPresenter) {
     private val context = packageInfoPresenter.context
-    private val packageManagerAsUser = packageInfoPresenter.packageManagerAsUser
+    private val userPackageManager = packageInfoPresenter.userPackageManager
 
     fun getActionButton(packageInfo: PackageInfo): ActionButton? =
-        packageManagerAsUser.getLaunchIntentForPackage(packageInfo.packageName)?.let { intent ->
+        userPackageManager.getLaunchIntentForPackage(packageInfo.packageName)?.let { intent ->
             launchButton(intent, packageInfo.applicationInfo)
         }
 
