@@ -20,6 +20,7 @@ import static android.app.NotificationManager.IMPORTANCE_NONE;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -32,6 +33,7 @@ import android.os.UserManager;
 
 import androidx.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
 
 import com.google.common.collect.ImmutableList;
@@ -156,5 +158,24 @@ public class NotificationsOffPreferenceControllerTest {
 
         assertThat(pref.getTitle().toString()).contains("app");
         assertThat(pref.isSelectable()).isFalse();
+    }
+
+    @Test
+    public void testUpdateState_whenToggleDisabled() {
+        // Given: the app does not request to post notifications
+        // and it's preference toggle is disabled
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.banned = true;
+        appRow.permissionStateLocked = true;
+        mController.onResume(appRow, null, null, null, null, null, null);
+        Preference pref = new Preference(RuntimeEnvironment.application);
+
+        // When: updateState(Preference preference) is called
+        mController.updateState(pref);
+
+        // Then: title of pref should be app_notifications_not_send_desc
+        assertEquals(
+                RuntimeEnvironment.application.getString(R.string.app_notifications_not_send_desc),
+                pref.getTitle().toString());
     }
 }
