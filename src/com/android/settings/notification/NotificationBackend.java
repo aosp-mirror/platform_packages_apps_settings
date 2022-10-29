@@ -126,6 +126,7 @@ public class NotificationBackend {
             if (app.requestedPermissions == null || Arrays.stream(app.requestedPermissions)
                     .noneMatch(p -> p.equals(android.Manifest.permission.POST_NOTIFICATIONS))) {
                 row.lockedImportance = true;
+                row.permissionStateLocked = true;
             }
         }
     }
@@ -684,6 +685,9 @@ public class NotificationBackend {
         public boolean systemApp;
         public boolean lockedImportance;
         public boolean showBadge;
+        // For apps target T but have not but has not requested the permission
+        // we cannot change the permission state
+        public boolean permissionStateLocked;
         public int bubblePreference = NotificationManager.BUBBLE_PREFERENCE_NONE;
         public int userId;
         public int blockedChannelCount;
