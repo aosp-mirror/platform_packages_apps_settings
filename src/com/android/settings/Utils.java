@@ -21,7 +21,6 @@ import static android.content.Intent.EXTRA_USER_ID;
 import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
 import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 
-import android.annotation.Nullable;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -96,6 +95,7 @@ import android.widget.TabWidget;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
@@ -799,7 +799,9 @@ public final class Utils extends com.android.settingslib.Utils {
         }
     }
 
-    public static CharSequence getApplicationLabel(Context context, String packageName) {
+    /** Gets the application label of the given package name. */
+    @Nullable
+    public static CharSequence getApplicationLabel(Context context, @NonNull String packageName) {
         try {
             final ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(
                     packageName,

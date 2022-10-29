@@ -134,6 +134,14 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     public static void startBatteryDetailPage(
             Activity caller, InstrumentedPreferenceFragment fragment,
             BatteryDiffEntry diffEntry, String usagePercent, String slotInformation) {
+        startBatteryDetailPage(
+                caller, fragment.getMetricsCategory(), diffEntry, usagePercent, slotInformation);
+    }
+
+    /** Launches battery details page for an individual battery consumer fragment. */
+    public static void startBatteryDetailPage(
+            Context context, int sourceMetricsCategory,
+            BatteryDiffEntry diffEntry, String usagePercent, String slotInformation) {
         final BatteryHistEntry histEntry = diffEntry.mBatteryHistEntry;
         final LaunchBatteryDetailPageArgs launchArgs = new LaunchBatteryDetailPageArgs();
         // configure the launch argument.
@@ -147,7 +155,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         launchArgs.mForegroundTimeMs = diffEntry.mForegroundUsageTimeInMs;
         launchArgs.mBackgroundTimeMs = diffEntry.mBackgroundUsageTimeInMs;
         launchArgs.mIsUserEntry = histEntry.isUserEntry();
-        startBatteryDetailPage(caller, fragment, launchArgs);
+        startBatteryDetailPage(context, sourceMetricsCategory, launchArgs);
     }
 
     /** Launches battery details page for an individual battery consumer. */
@@ -165,11 +173,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         launchArgs.mForegroundTimeMs = isValidToShowSummary ? entry.getTimeInForegroundMs() : 0;
         launchArgs.mBackgroundTimeMs = isValidToShowSummary ? entry.getTimeInBackgroundMs() : 0;
         launchArgs.mIsUserEntry = entry.isUserEntry();
-        startBatteryDetailPage(caller, fragment, launchArgs);
+        startBatteryDetailPage(caller, fragment.getMetricsCategory(), launchArgs);
     }
 
-    private static void startBatteryDetailPage(Activity caller,
-            InstrumentedPreferenceFragment fragment, LaunchBatteryDetailPageArgs launchArgs) {
+    private static void startBatteryDetailPage(
+            Context context, int sourceMetricsCategory, LaunchBatteryDetailPageArgs launchArgs) {
         final Bundle args = new Bundle();
         if (launchArgs.mPackageName == null) {
             // populate data for system app
@@ -190,11 +198,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final int userId = launchArgs.mIsUserEntry ? ActivityManager.getCurrentUser()
             : UserHandle.getUserId(launchArgs.mUid);
 
-        new SubSettingLauncher(caller)
+        new SubSettingLauncher(context)
                 .setDestination(AdvancedPowerUsageDetail.class.getName())
                 .setTitleRes(R.string.battery_details_title)
                 .setArguments(args)
-                .setSourceMetricsCategory(fragment.getMetricsCategory())
+                .setSourceMetricsCategory(sourceMetricsCategory)
                 .setUserHandle(new UserHandle(userId))
                 .launch();
     }
