@@ -64,7 +64,7 @@ public class WhenToDreamPreferenceControllerTest {
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
-        mController = new WhenToDreamPreferenceController(mContext, true);
+        mController = new WhenToDreamPreferenceController(mContext, true, true);
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
         when(mContext.getSystemService(PowerManager.class)).thenReturn(mPowerManager);
         when(mPowerManager.isAmbientDisplaySuppressedForTokenByApp(anyString(), anyInt()))
@@ -88,7 +88,7 @@ public class WhenToDreamPreferenceControllerTest {
         final Preference mockPref = mock(Preference.class);
         when(mockPref.getContext()).thenReturn(mContext);
         when(mBackend.getWhenToDreamSetting()).thenReturn(testSetting);
-        final int expectedResId = DreamSettings.getDreamSettingDescriptionResId(testSetting);
+        final int expectedResId = DreamSettings.getDreamSettingDescriptionResId(testSetting, true);
 
         mController.updateState(mockPref);
         verify(mockPref).setSummary(expectedResId);

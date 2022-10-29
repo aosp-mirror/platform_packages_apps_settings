@@ -983,6 +983,20 @@
         <item>90</item>
     </string-array>
 
+    <!-- Options for screensaver "When to start" for devices that do not support screensavers
+         while on battery -->
+    <string-array name="when_to_start_screensaver_entries_no_battery" translatable="false">
+        <item>@string/screensaver_settings_summary_sleep</item>
+        <item>@string/screensaver_settings_summary_dock_and_charging</item>
+    </string-array>
+
+    <!-- Values for screensaver "When to start" for devices that do not support screensavers
+         while on battery -->
+    <string-array name="when_to_start_screensaver_values_no_battery" translatable="false">
+        <item>while_charging_only</item>
+        <item>while_docked_only</item>
+    </string-array>
+
     <string-array name="when_to_start_screensaver_entries" translatable="false">
         <item>@string/screensaver_settings_summary_sleep</item>
         <item>@string/screensaver_settings_summary_dock</item>
