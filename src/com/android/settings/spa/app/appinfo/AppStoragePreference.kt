@@ -16,7 +16,6 @@
 
 package com.android.settings.spa.app.appinfo
 
-import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import androidx.compose.runtime.Composable
@@ -70,6 +69,6 @@ private fun startStorageSettingsActivity(context: Context, app: ApplicationInfo)
         AppStorageSettings::class.java,
         app,
         context,
-        SettingsEnums.APPLICATIONS_INSTALLED_APP_DETAILS,
+        AppInfoSettingsProvider.METRICS_CATEGORY,
     )
 }

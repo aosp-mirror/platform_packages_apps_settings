@@ -28,6 +28,7 @@ import android.os.UserManager;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.dream.DreamBackend;
 
 import org.junit.Before;
@@ -37,9 +38,11 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = SettingsShadowResources.class)
 public class WhenToDreamPickerTest {
 
     private WhenToDreamPicker mPicker;
@@ -53,10 +56,15 @@ public class WhenToDreamPickerTest {
         MockitoAnnotations.initMocks(this);
         final Context context = spy(ApplicationProvider.getApplicationContext());
 
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.bool.config_dreamsEnabledOnBattery,
+                true);
+
         when(context.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         FakeFeatureFactory.setupForTest();
 
-        mPicker = new WhenToDreamPicker();
+        mPicker = spy(new WhenToDreamPicker());
+        when(mPicker.getContext()).thenReturn(context);
         mPicker.onAttach(context);
 
         ReflectionHelpers.setField(mPicker, "mBackend", mBackend);
