@@ -72,7 +72,7 @@ public class NetworkProviderDownloadedSimListController extends
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mPreferences = new ArrayMap<>();
         mLifecycleOwner = lifecycleOwner;
-        mMobileNetworkRepository = new MobileNetworkRepository(context, this);
+        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
         lifecycle.addObserver(this);
     }
 

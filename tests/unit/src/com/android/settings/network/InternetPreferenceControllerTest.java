@@ -40,16 +40,20 @@ import android.os.Handler;
 import android.os.Looper;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleRegistry;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.testutils.ResourcesUtils;
+import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -59,22 +63,44 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(AndroidJUnit4.class)
 public class InternetPreferenceControllerTest {
 
     private static final String TEST_SUMMARY = "test summary";
     private static final String NOT_CONNECTED = "Not connected";
+    private static final String SUB_ID_1 = "1";
+    private static final String SUB_ID_2 = "2";
+    private static final String INVALID_SUB_ID = "-1";
+    private static final String DISPLAY_NAME_1 = "Sub 1";
+    private static final String DISPLAY_NAME_2 = "Sub 2";
+    private static final String SUB_MCC_1 = "123";
+    private static final String SUB_MNC_1 = "456";
+    private static final String SUB_MCC_2 = "223";
+    private static final String SUB_MNC_2 = "456";
+    private static final String SUB_COUNTRY_ISO_1 = "Sub 1";
+    private static final String SUB_COUNTRY_ISO_2 = "Sub 2";
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
     @Mock
+    private SubscriptionInfoEntity mActiveSubInfo;
+    @Mock
+    private SubscriptionInfoEntity mDefaultDataSubInfo;
+    @Mock
     private ConnectivityManager mConnectivityManager;
+    @Mock
+    private LifecycleOwner mLifecycleOwner;
+
+    private LifecycleRegistry mLifecycleRegistry;
 
     private Context mContext;
-    private InternetPreferenceController mController;
+    private MockInternetPreferenceController mController;
     private PreferenceScreen mScreen;
     private Preference mPreference;
-    private LifecycleOwner mLifecycleOwner;
+    private List<SubscriptionInfoEntity> mSubscriptionInfoEntityList = new ArrayList<>();
 
     @Before
     public void setUp() {
@@ -85,18 +111,52 @@ public class InternetPreferenceControllerTest {
         final WifiManager wifiManager = mock(WifiManager.class);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(wifiManager);
         when(wifiManager.getWifiState()).thenReturn(WifiManager.WIFI_STATE_DISABLED);
-
-        mController = new InternetPreferenceController(mContext, mock(Lifecycle.class),
-                mLifecycleOwner);
-        mController.sIconMap.put(INTERNET_WIFI, 0);
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
+        mLifecycleRegistry = new LifecycleRegistry(mLifecycleOwner);
+        when(mLifecycleOwner.getLifecycle()).thenReturn(mLifecycleRegistry);
+        mController = new MockInternetPreferenceController(mContext, mock(Lifecycle.class),
+                mLifecycleOwner);
+        mController.sIconMap.put(INTERNET_WIFI, 0);
+
         final PreferenceManager preferenceManager = new PreferenceManager(mContext);
         mScreen = preferenceManager.createPreferenceScreen(mContext);
         mPreference = new Preference(mContext);
         mPreference.setKey(InternetPreferenceController.KEY);
         mScreen.addPreference(mPreference);
+    }
+
+    private class MockInternetPreferenceController extends
+            com.android.settings.network.InternetPreferenceController {
+        public MockInternetPreferenceController(Context context, Lifecycle lifecycle,
+                LifecycleOwner lifecycleOwner) {
+            super(context, lifecycle, lifecycleOwner);
+        }
+
+        private List<SubscriptionInfoEntity> mSubscriptionInfoEntity;
+
+        @Override
+        protected List<SubscriptionInfoEntity> getSubscriptionInfoList() {
+            return mSubscriptionInfoEntity;
+        }
+
+        public void setSubscriptionInfoList(List<SubscriptionInfoEntity> list) {
+            mSubscriptionInfoEntity = list;
+        }
+
+    }
+
+    private SubscriptionInfoEntity setupSubscriptionInfoEntity(String subId, int slotId,
+            int carrierId, String displayName, String mcc, String mnc, String countryIso,
+            int cardId, boolean isVisible, boolean isValid, boolean isActive, boolean isAvailable,
+            boolean isDefaultData, boolean isActiveData) {
+        return new SubscriptionInfoEntity(subId, slotId, carrierId,
+                displayName, displayName, 0, mcc, mnc, countryIso, false, cardId,
+                TelephonyManager.DEFAULT_PORT_INDEX, false, null,
+                SubscriptionManager.SUBSCRIPTION_TYPE_LOCAL_SIM, displayName, isVisible,
+                "1234567890", true, "default", false, isValid, true, isActive, isAvailable, false,
+                false, isDefaultData, false, isActiveData);
     }
 
     @Test
@@ -105,6 +165,7 @@ public class InternetPreferenceControllerTest {
     }
 
     @Test
+    @UiThreadTest
     public void onResume_shouldRegisterCallback() {
         mController.onResume();
 
@@ -117,6 +178,7 @@ public class InternetPreferenceControllerTest {
     }
 
     @Test
+    @UiThreadTest
     public void onPause_shouldUnregisterCallback() {
         mController.onResume();
         mController.onPause();
@@ -149,33 +211,33 @@ public class InternetPreferenceControllerTest {
 
     @Test
     public void updateCellularSummary_getNullSubscriptionInfo_shouldNotCrash() {
-        final SubscriptionManager subscriptionManager = mock(SubscriptionManager.class);
-        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(subscriptionManager);
-        when(subscriptionManager.getDefaultDataSubscriptionInfo()).thenReturn(null);
-        when(subscriptionManager.getActiveSubscriptionInfo(anyInt())).thenReturn(null);
+        mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
 
         mController.updateCellularSummary();
     }
 
     @Test
     public void updateCellularSummary_getActiveSubscriptionInfo_cbrs() {
+        mActiveSubInfo = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, false, true, true, true, false, true);
+        mDefaultDataSubInfo = setupSubscriptionInfoEntity(SUB_ID_2, 1, 1, DISPLAY_NAME_2, SUB_MCC_2,
+                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, false, true, true, true, true, false);
+        mSubscriptionInfoEntityList.add(mActiveSubInfo);
+        mSubscriptionInfoEntityList.add(mDefaultDataSubInfo);
+        mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
         mController.displayPreference(mScreen);
-        final SubscriptionManager subscriptionManager = mock(SubscriptionManager.class);
-        final SubscriptionInfo defaultSubInfo = mock(SubscriptionInfo.class);
-        final SubscriptionInfo activeSubInfo = mock(SubscriptionInfo.class);
-        final String expectedSummary =
-                ResourcesUtils.getResourcesString(mContext, "mobile_data_temp_using", "");
-
-        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(subscriptionManager);
-        when(subscriptionManager.getDefaultDataSubscriptionInfo()).thenReturn(defaultSubInfo);
-
-        when(subscriptionManager.getActiveSubscriptionInfo(anyInt())).thenReturn(activeSubInfo);
-        when(subscriptionManager.isSubscriptionVisible(activeSubInfo)).thenReturn(false);
 
         mController.updateCellularSummary();
-        assertThat(mPreference.getSummary()).isEqualTo("");
+        assertThat(mPreference.getSummary()).isEqualTo(DISPLAY_NAME_2);
 
-        when(subscriptionManager.isSubscriptionVisible(activeSubInfo)).thenReturn(true);
+        mActiveSubInfo = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true, true, false, true);
+        mSubscriptionInfoEntityList.add(mActiveSubInfo);
+        mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
+        mController.onAvailableSubInfoChanged(mSubscriptionInfoEntityList);
+        final String expectedSummary =
+                ResourcesUtils.getResourcesString(mContext, "mobile_data_temp_using",
+                        DISPLAY_NAME_1);
         mController.updateCellularSummary();
         assertThat(mPreference.getSummary()).isEqualTo(expectedSummary);
     }
