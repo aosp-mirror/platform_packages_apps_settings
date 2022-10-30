@@ -87,7 +87,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
         mMetricsFeatureProvider = FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
         mUserManager = context.getSystemService(UserManager.class);
         mLifecycleOwner = lifecycleOwner;
-        mMobileNetworkRepository = new MobileNetworkRepository(context, this);
+        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -101,7 +101,6 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
-        mMobileNetworkRepository.removeRegister();
     }
 
     @Override
