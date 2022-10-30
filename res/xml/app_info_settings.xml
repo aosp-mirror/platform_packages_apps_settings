@@ -189,6 +189,12 @@
             android:summary="@string/summary_placeholder"
             settings:controller="com.android.settings.applications.appinfo.AlarmsAndRemindersDetailPreferenceController" />
 
+        <Preference
+            android:key="long_background_tasks"
+            android:title="@string/long_background_tasks_title"
+            android:summary="@string/summary_placeholder"
+            settings:controller="com.android.settings.applications.appinfo.LongBackgroundTasksDetailsPreferenceController" />
+
     </PreferenceCategory>
 
     <!-- App installer info -->

@@ -94,6 +94,7 @@ import com.android.settings.Settings.AppBatteryUsageActivity;
 import com.android.settings.Settings.ChangeWifiStateActivity;
 import com.android.settings.Settings.GamesStorageActivity;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
+import com.android.settings.Settings.LongBackgroundTasksActivity;
 import com.android.settings.Settings.ManageExternalSourcesActivity;
 import com.android.settings.Settings.ManageExternalStorageActivity;
 import com.android.settings.Settings.MediaManagementAppsActivity;
@@ -112,6 +113,7 @@ import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateBaseBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateLocaleBridge;
+import com.android.settings.applications.AppStateLongBackgroundTasksBridge;
 import com.android.settings.applications.AppStateManageExternalStorageBridge;
 import com.android.settings.applications.AppStateMediaManagementAppsBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
@@ -128,6 +130,7 @@ import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.applications.appinfo.AppLocaleDetails;
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
+import com.android.settings.applications.appinfo.LongBackgroundTasksDetails;
 import com.android.settings.applications.appinfo.ManageExternalStorageDetails;
 import com.android.settings.applications.appinfo.MediaManagementAppsDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
@@ -256,6 +259,7 @@ public class ManageApplications extends InstrumentedFragment
     public static final int LIST_TYPE_MEDIA_MANAGEMENT_APPS = 13;
     public static final int LIST_TYPE_APPS_LOCALE = 14;
     public static final int LIST_TYPE_BATTERY_OPTIMIZATION = 15;
+    public static final int LIST_TYPE_LONG_BACKGROUND_TASKS = 16;
 
     // List types that should show instant apps.
     public static final Set<Integer> LIST_TYPES_WITH_INSTANT = new ArraySet<>(Arrays.asList(
@@ -402,6 +406,8 @@ public class ManageApplications extends InstrumentedFragment
             mListType = LIST_TYPE_APPS_LOCALE;
         } else if (className.equals(AppBatteryUsageActivity.class.getName())) {
             mListType = LIST_TYPE_BATTERY_OPTIMIZATION;
+        } else if (className.equals(LongBackgroundTasksActivity.class.getName())) {
+            mListType = LIST_TYPE_LONG_BACKGROUND_TASKS;
         } else {
             mListType = LIST_TYPE_MAIN;
         }
@@ -598,6 +604,8 @@ public class ManageApplications extends InstrumentedFragment
                 return SettingsEnums.APPS_LOCALE_LIST;
             case LIST_TYPE_BATTERY_OPTIMIZATION:
                 return SettingsEnums.BATTERY_OPTIMIZED_APPS_LIST;
+            case LIST_TYPE_LONG_BACKGROUND_TASKS:
+                return SettingsEnums.LONG_BACKGROUND_TASKS;
             default:
                 return SettingsEnums.PAGE_UNKNOWN;
         }
@@ -735,6 +743,10 @@ public class ManageApplications extends InstrumentedFragment
                         getActivity(), this, mCurrentPkgName,
                         UserHandle.getUserHandleForUid(mCurrentUid));
                 break;
+            case LIST_TYPE_LONG_BACKGROUND_TASKS:
+                startAppInfoFragment(LongBackgroundTasksDetails.class,
+                        R.string.long_background_tasks_label);
+                break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed
             // app. Maybe when they load the list of apps that contains managed profile apps.
@@ -828,6 +840,8 @@ public class ManageApplications extends InstrumentedFragment
                 return R.string.help_uri_alarms_and_reminders;
             case LIST_TYPE_MEDIA_MANAGEMENT_APPS:
                 return R.string.help_uri_media_management_apps;
+            case LIST_TYPE_LONG_BACKGROUND_TASKS:
+                return R.string.help_uri_long_background_tasks;
             default:
             case LIST_TYPE_MAIN:
                 return R.string.help_uri_apps;
@@ -1030,6 +1044,8 @@ public class ManageApplications extends InstrumentedFragment
             screenTitle = R.string.app_locales_picker_menu_title;
         } else if (className.equals(AppBatteryUsageActivity.class.getName())) {
             screenTitle = R.string.app_battery_usage_title;
+        } else if (className.equals(LongBackgroundTasksActivity.class.getName())) {
+            screenTitle = R.string.long_background_tasks_title;
         } else {
             if (screenTitle == -1) {
                 screenTitle = R.string.all_apps;
@@ -1233,6 +1249,8 @@ public class ManageApplications extends InstrumentedFragment
                         mManageApplications.mUserManager);
             } else if (mManageApplications.mListType == LIST_TYPE_BATTERY_OPTIMIZATION) {
                 mExtraInfoBridge = new AppStateAppBatteryUsageBridge(mContext, mState, this);
+            } else if (mManageApplications.mListType == LIST_TYPE_LONG_BACKGROUND_TASKS) {
+                mExtraInfoBridge = new AppStateLongBackgroundTasksBridge(mContext, mState, this);
             } else {
                 mExtraInfoBridge = null;
             }
@@ -1761,6 +1779,9 @@ public class ManageApplications extends InstrumentedFragment
                     break;
                 case LIST_TYPE_BATTERY_OPTIMIZATION:
                     holder.setSummary(null);
+                    break;
+                case LIST_TYPE_LONG_BACKGROUND_TASKS:
+                    holder.setSummary(LongBackgroundTasksDetails.getSummary(mContext, entry));
                     break;
                 default:
                     holder.updateSizeText(entry, mManageApplications.mInvalidSizeStr, mWhichSize);
