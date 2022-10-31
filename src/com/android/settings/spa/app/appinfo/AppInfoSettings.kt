@@ -94,7 +94,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         AppButtons(packageInfoPresenter)
 
         AppSettingsPreference(app)
-        // TODO: all_services_settings
+        AppAllServicesPreference(app)
         // TODO: notification_settings
         AppPermissionPreference(app)
         AppStoragePreference(app)
