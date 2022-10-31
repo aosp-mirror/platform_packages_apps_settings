@@ -713,6 +713,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         }
     }
 
+    @SuppressWarnings("MissingSuperCall") // TODO: Fix me
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         switch(newConfig.orientation) {

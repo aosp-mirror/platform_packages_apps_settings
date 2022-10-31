@@ -10,7 +10,7 @@ import java.util.Objects;
  * Holds packageName:userId pairs without any heavyweight fields.
  * {@see ApplicationInfo}
  */
-class AppVpnInfo implements Comparable {
+class AppVpnInfo implements Comparable<AppVpnInfo> {
     public final int userId;
     public final String packageName;
 
@@ -20,12 +20,10 @@ class AppVpnInfo implements Comparable {
     }
 
     @Override
-    public int compareTo(Object other) {
-        AppVpnInfo that = (AppVpnInfo) other;
-
-        int result = packageName.compareTo(that.packageName);
+    public int compareTo(AppVpnInfo other) {
+        int result = packageName.compareTo(other.packageName);
         if (result == 0) {
-            result = that.userId - userId;
+            result = other.userId - userId;
         }
         return result;
     }
