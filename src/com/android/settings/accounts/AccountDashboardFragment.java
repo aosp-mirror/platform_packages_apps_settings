@@ -123,6 +123,7 @@ public class AccountDashboardFragment extends DashboardFragment {
                     return controllers;
                 }
 
+                @SuppressWarnings("MissingSuperCall") // TODO: Fix me
                 @Override
                 public List<SearchIndexableRaw> getDynamicRawDataToIndex(Context context,
                         boolean enabled) {
