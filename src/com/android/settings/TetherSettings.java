@@ -20,6 +20,7 @@ import static android.net.ConnectivityManager.TETHERING_BLUETOOTH;
 import static android.net.ConnectivityManager.TETHERING_USB;
 import static android.net.TetheringManager.TETHERING_ETHERNET;
 
+import static com.android.settings.wifi.WifiUtils.canShowWifiHotspot;
 import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfUsbDataSignalingIsDisabled;
 
 import android.app.Activity;
@@ -589,6 +590,9 @@ public class TetherSettings extends RestrictedSettingsFragment
 
                     if (!TetherUtil.isTetherAvailable(context)) {
                         keys.add(KEY_TETHER_PREFS_SCREEN);
+                    }
+
+                    if (!canShowWifiHotspot(context) || !TetherUtil.isTetherAvailable(context)) {
                         keys.add(KEY_WIFI_TETHER);
                     }
 
