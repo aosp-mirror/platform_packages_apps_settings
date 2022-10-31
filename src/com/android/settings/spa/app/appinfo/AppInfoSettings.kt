@@ -115,7 +115,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
             ModifySystemSettingsAppListProvider.InfoPageEntryItem(app)
             PictureInPictureListProvider.InfoPageEntryItem(app)
             InstallUnknownAppsListProvider.InfoPageEntryItem(app)
-            // TODO: interact_across_profiles
+            InteractAcrossProfilesDetailsPreference(app)
             AlarmsAndRemindersAppListProvider.InfoPageEntryItem(app)
         }
 
