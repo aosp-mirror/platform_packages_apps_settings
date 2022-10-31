@@ -20,6 +20,8 @@ import static android.content.Intent.ACTION_MEDIA_SHARED;
 import static android.content.Intent.ACTION_MEDIA_UNSHARED;
 import static android.hardware.usb.UsbManager.ACTION_USB_STATE;
 
+import static com.android.settings.wifi.WifiUtils.setCanShowWifiHotspotCached;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -93,6 +95,7 @@ public class TetherSettingsTest {
                 any(String.class), anyInt(), any(UserHandle.class));
 
         setupIsTetherAvailable(true);
+        setCanShowWifiHotspotCached(true);
 
         when(mTetheringManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
         when(mTetheringManager.getTetherableBluetoothRegexs()).thenReturn(new String[0]);
@@ -121,6 +124,16 @@ public class TetherSettingsTest {
 
         assertThat(niks).contains(TetherSettings.KEY_TETHER_PREFS_SCREEN);
         assertThat(niks).contains(TetherSettings.KEY_WIFI_TETHER);
+    }
+
+    @Test
+    public void getNonIndexableKeys_canNotShowWifiHotspot_containsWifiTether() {
+        setCanShowWifiHotspotCached(false);
+        setupIsTetherAvailable(true);
+
+        List<String> keys = TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+
+        assertThat(keys).contains(TetherSettings.KEY_WIFI_TETHER);
     }
 
     @Test

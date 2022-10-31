@@ -37,6 +37,7 @@ import android.net.TetheringManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.util.FeatureFlagUtils;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
@@ -44,6 +45,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowFragment;
@@ -93,6 +95,7 @@ public class WifiTetherSettingsTest {
 
     @Before
     public void setUp() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
         setCanShowWifiHotspotCached(true);
         doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
         doReturn(mConnectivityManager)
@@ -216,6 +219,22 @@ public class WifiTetherSettingsTest {
         assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
         assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
         assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
+    }
+
+    @Test
+    public void isPageSearchEnabled_canShowWifiHotspot_returnTrue() {
+        setCanShowWifiHotspotCached(true);
+
+        assertThat(WifiTetherSettings.SEARCH_INDEX_DATA_PROVIDER.isPageSearchEnabled(mContext))
+                .isTrue();
+    }
+
+    @Test
+    public void isPageSearchEnabled_canNotShowWifiHotspot_returnFalse() {
+        setCanShowWifiHotspotCached(false);
+
+        assertThat(WifiTetherSettings.SEARCH_INDEX_DATA_PROVIDER.isPageSearchEnabled(mContext))
+                .isFalse();
     }
 
     private void spyWifiTetherSettings() {
