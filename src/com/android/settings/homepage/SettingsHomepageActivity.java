@@ -66,6 +66,7 @@ import com.android.settings.core.CategoryMixin;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
@@ -504,10 +505,26 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             final String menuKey = intent.getStringExtra(
                     EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY);
             if (!TextUtils.isEmpty(menuKey)) {
-                return menuKey;
+                return maybeRemapMenuKey(menuKey);
             }
         }
         return getString(DEFAULT_HIGHLIGHT_MENU_KEY);
+    }
+
+    private String maybeRemapMenuKey(String menuKey) {
+        boolean isPrivacyOrSecurityMenuKey =
+                getString(R.string.menu_key_privacy).equals(menuKey)
+                        || getString(R.string.menu_key_security).equals(menuKey);
+        boolean isSafetyCenterMenuKey = getString(R.string.menu_key_safety_center).equals(menuKey);
+
+        if (isPrivacyOrSecurityMenuKey && SafetyCenterManagerWrapper.get().isEnabled(this)) {
+            return getString(R.string.menu_key_safety_center);
+        }
+        if (isSafetyCenterMenuKey && !SafetyCenterManagerWrapper.get().isEnabled(this)) {
+            // We don't know if security or privacy, default to security as it is above.
+            return getString(R.string.menu_key_security);
+        }
+        return menuKey;
     }
 
     private void reloadHighlightMenuKey() {
