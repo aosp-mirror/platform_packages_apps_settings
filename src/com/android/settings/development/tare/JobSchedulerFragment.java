@@ -118,7 +118,8 @@ public class JobSchedulerFragment extends Fragment implements
         mKeys = new String[][]{
                 {
                         EconomyManager.KEY_JS_INITIAL_CONSUMPTION_LIMIT,
-                        EconomyManager.KEY_JS_HARD_CONSUMPTION_LIMIT
+                        EconomyManager.KEY_JS_MIN_CONSUMPTION_LIMIT,
+                        EconomyManager.KEY_JS_MAX_CONSUMPTION_LIMIT,
                 },
                 {
                         EconomyManager.KEY_JS_MAX_SATIATED_BALANCE,

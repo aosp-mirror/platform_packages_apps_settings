@@ -11586,13 +11586,17 @@
     <!-- Title for the TARE policy factor that determines the initial maximum amount of credits that
     can be consumed by all the apps [CHAR LIMIT=80]-->
     <string name="tare_initial_consumption_limit">Initial Consumption Limit</string>
+    <!-- Title for the TARE policy factor that determines the minimum consumption limit the system
+     can have [CHAR LIMIT=80]-->
+    <string name="tare_min_consumption_limit">Minimum Consumption Limit</string>
     <!-- Title for the TARE policy factor that determines the maximum consumption limit the system
      can have [CHAR LIMIT=80]-->
-    <string name="tare_hard_consumption_limit">Maximum Consumption Limit</string>
+    <string name="tare_max_consumption_limit">Maximum Consumption Limit</string>
     <!-- Titles for the consumption limits factors. [CHAR LIMIT=40]-->
     <string-array name="tare_consumption_limit_subfactors" translatable="false">
         <item>@string/tare_initial_consumption_limit</item>
-        <item>@string/tare_hard_consumption_limit</item>
+        <item>@string/tare_min_consumption_limit</item>
+        <item>@string/tare_max_consumption_limit</item>
     </string-array>
     <!-- Title for the various modifiers that alter the cost of TARE tasks based on battery status
     (charging, power save mode, etc.) [CHAR LIMIT=40]-->
