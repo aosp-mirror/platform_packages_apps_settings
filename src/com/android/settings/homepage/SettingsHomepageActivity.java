@@ -43,6 +43,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toolbar;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -223,8 +224,21 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         if (shouldLaunchDeepLinkIntentToRight()) {
             launchDeepLinkIntentToRight();
         }
+
+        // Settings app may be launched on an existing task. Reset SplitPairRule of SubSettings here
+        // to prevent SplitPairRule of an existing task applied on a new started Settings app.
+        if (ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)
+                && (getIntent().getFlags() & Intent.FLAG_ACTIVITY_CLEAR_TOP) != 0) {
+            initSplitPairRules();
+        }
+
         updateHomepagePaddings();
         updateSplitLayout();
+    }
+
+    @VisibleForTesting
+    void initSplitPairRules() {
+        new ActivityEmbeddingRulesController(getApplicationContext()).initRules();
     }
 
     @Override
