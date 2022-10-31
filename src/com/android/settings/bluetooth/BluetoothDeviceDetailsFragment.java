@@ -153,8 +153,11 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                 controlUri = null;
             }
         }
-        use(SlicePreferenceController.class).setSliceUri(sliceEnabled ? controlUri : null);
-        use(SlicePreferenceController.class).onStart();
+        final SlicePreferenceController slicePreferenceController = use(
+                SlicePreferenceController.class);
+        slicePreferenceController.setSliceUri(sliceEnabled ? controlUri : null);
+        slicePreferenceController.onStart();
+        slicePreferenceController.displayPreference(getPreferenceScreen());
     }
 
     private final ViewTreeObserver.OnGlobalLayoutListener mOnGlobalLayoutListener =
