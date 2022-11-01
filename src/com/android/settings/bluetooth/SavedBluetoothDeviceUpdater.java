@@ -106,7 +106,8 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
                     + cachedDevice.isConnected());
         }
         return device.getBondState() == BluetoothDevice.BOND_BONDED
-                && (mDisplayConnected || !device.isConnected());
+                && (mDisplayConnected || (!device.isConnected() && isDeviceInCachedDevicesList(
+                cachedDevice)));
     }
 
     @Override

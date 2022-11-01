@@ -27,8 +27,6 @@
     android:clipToPadding="false"
     android:baselineAligned="false">
 
-    <include layout="@layout/card_preference_icon_frame"/>
-
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -36,10 +34,22 @@
         android:paddingTop="16dp"
         android:paddingBottom="16dp">
 
+        <LinearLayout
+            android:id="@+id/card_preference_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@android:id/title"
+            android:layout_alignBottom="@android:id/summary"
+            android:gravity="center_vertical">
+
+            <include layout="@layout/card_preference_icon_frame"/>
+        </LinearLayout>
+
         <TextView
             android:id="@android:id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/card_preference_parent"
             android:maxLines="2"
             android:textAppearance="?android:attr/textAppearanceListItem"
             android:ellipsize="marquee"/>
@@ -57,6 +67,30 @@
             android:maxLines="10"
             style="@style/PreferenceSummaryTextStyle"/>
 
+        <RelativeLayout
+            android:id="@+id/card_preference_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_below="@android:id/summary"
+            android:visibility="gone">
+            <Button
+                android:id="@android:id/button1"
+                style="@style/CardPreferencePrimaryButton"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_toStartOf="@android:id/button2"
+                android:visibility="gone"/>
+            <Button
+                android:id="@android:id/button2"
+                style="@style/CardPreferenceBorderlessButton"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_alignParentEnd="true"
+                android:visibility="gone"/>
+        </RelativeLayout>
     </RelativeLayout>
 
     <!-- Preference should place its actual preference widget here. -->

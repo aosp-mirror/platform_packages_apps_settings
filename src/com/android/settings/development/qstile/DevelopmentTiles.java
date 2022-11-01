@@ -58,6 +58,22 @@ import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.development.SystemPropPoker;
 
 public abstract class DevelopmentTiles extends TileService {
+
+    /**
+     * Meta-data for a development tile to declare a sysprop flag that needs to be enabled for
+     * the tile to be available.
+     *
+     * To define the flag, set this meta-data on the tile's manifest declaration.
+     * <pre class="prettyprint">
+     * {@literal
+     * <meta-data android:name="com.android.settings.development.qstile.REQUIRES_SYSTEM_PROPERTY"
+     *     android:value="persist.debug.flag_name_here" />
+     * }
+     * </pre>
+     */
+    public static final String META_DATA_REQUIRES_SYSTEM_PROPERTY =
+            "com.android.settings.development.qstile.REQUIRES_SYSTEM_PROPERTY";
+
     private static final String TAG = "DevelopmentTiles";
 
     protected abstract boolean isEnabled();
@@ -474,6 +490,79 @@ public abstract class DevelopmentTiles extends TileService {
         protected void setIsEnabled(boolean isEnabled) {
             Settings.System.putInt(mContext.getContentResolver(),
                 Settings.System.SHOW_TOUCHES, isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
+        }
+    }
+
+    /**
+     * Tile to enable desktop mode
+     */
+    public static class DesktopMode extends DevelopmentTiles {
+
+        private static final int SETTING_VALUE_ON = 1;
+        private static final int SETTING_VALUE_OFF = 0;
+        private Context mContext;
+
+        @Override
+        public void onCreate() {
+            super.onCreate();
+            mContext = getApplicationContext();
+        }
+
+        @Override
+        protected boolean isEnabled() {
+            return Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.DESKTOP_MODE, SETTING_VALUE_OFF) == SETTING_VALUE_ON;
+        }
+
+        private boolean isDesktopModeFlagEnabled() {
+            return SystemProperties.getBoolean("persist.wm.debug.desktop_mode", false);
+        }
+
+        private boolean isFreeformFlagEnabled() {
+            return Settings.Global.getInt(mContext.getContentResolver(),
+                    Settings.Global.DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT, SETTING_VALUE_OFF)
+                    == SETTING_VALUE_ON;
+        }
+
+        private boolean isCaptionOnShellEnabled() {
+            return SystemProperties.getBoolean("persist.wm.debug.caption_on_shell", false);
+        }
+
+        @Override
+        protected void setIsEnabled(boolean isEnabled) {
+            if (isEnabled) {
+                // Check that all required features are enabled
+                if (!isDesktopModeFlagEnabled()) {
+                    closeShade();
+                    showMessage(
+                            "Enable 'Desktop Windowing Proto 1' from the Flag Flipper app");
+                    return;
+                }
+                if (!isCaptionOnShellEnabled()) {
+                    closeShade();
+                    showMessage("Enable 'Captions in Shell' from the Flag Flipper app");
+                    return;
+                }
+                if (!isFreeformFlagEnabled()) {
+                    closeShade();
+                    showMessage(
+                            "Enable freeform windows from developer settings");
+                    return;
+                }
+            }
+
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.DESKTOP_MODE,
+                    isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
+            closeShade();
+        }
+
+        private void closeShade() {
+            sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+        }
+
+        private void showMessage(String message) {
+            Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
         }
     }
 }

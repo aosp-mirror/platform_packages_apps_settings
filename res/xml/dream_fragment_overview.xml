@@ -17,13 +17,20 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/screensaver_settings_title">
+    android:key="screensaver_settings_screen"
+    android:title="@string/screensaver_settings_title"
+    settings:keywords="@string/keywords_screensaver">
 
     <com.android.settingslib.widget.MainSwitchPreference
         android:key="dream_main_settings_switch"
         android:title="@string/screensaver_settings_toggle_title"
         settings:controller="com.android.settings.dream.DreamMainSwitchPreferenceController"
         settings:searchable="false"/>
+
+    <Preference
+        android:key="when_to_start"
+        android:title="@string/screensaver_settings_when_to_dream"
+        android:fragment="com.android.settings.dream.WhenToDreamPicker"/>
 
     <PreferenceCategory
         android:title="@string/dream_picker_category">
@@ -34,17 +41,13 @@
             settings:controller="com.android.settings.dream.DreamPickerController"/>
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="@string/dream_more_settings_category">
-        <SwitchPreference
-            android:key="dream_complications_toggle"
-            android:title="@string/dream_complications_toggle_title"
-            android:summary="@string/dream_complications_toggle_summary"
-            settings:controller="com.android.settings.dream.DreamComplicationPreferenceController"/>
-        <Preference
-            android:key="when_to_start"
-            android:title="@string/screensaver_settings_when_to_dream"
-            android:fragment="com.android.settings.dream.WhenToDreamPicker"/>
-    </PreferenceCategory>
+    <SwitchPreference
+        android:key="dream_complications_toggle"
+        android:title="@string/dream_complications_toggle_title"
+        android:summary="@string/dream_complications_toggle_summary"
+        settings:controller="com.android.settings.dream.DreamComplicationPreferenceController"/>
+
+    <com.android.settings.applications.SpacePreference
+        android:layout_height="16dp" />
 
 </PreferenceScreen>

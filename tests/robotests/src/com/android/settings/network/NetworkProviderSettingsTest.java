@@ -751,6 +751,15 @@ public class NetworkProviderSettingsTest {
         assertThat(keys).contains(NetworkProviderSettings.PREF_KEY_WIFI_TOGGLE);
     }
 
+    @Test
+    public void launchConfigNewNetworkFragment_fragmentIsRestricted_ignoreWifiEntry() {
+        mNetworkProviderSettings.mIsRestricted = true;
+
+        mNetworkProviderSettings.launchConfigNewNetworkFragment(mWifiEntry);
+
+        verify(mWifiEntry, never()).getKey();
+    }
+
     @Implements(PreferenceFragmentCompat.class)
     public static class ShadowPreferenceFragmentCompat {
 

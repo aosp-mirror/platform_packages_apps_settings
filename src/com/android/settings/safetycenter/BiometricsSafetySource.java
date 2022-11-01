@@ -39,6 +39,9 @@ import com.android.settingslib.RestrictedLockUtils;
 public final class BiometricsSafetySource {
 
     public static final String SAFETY_SOURCE_ID = "AndroidBiometrics";
+    private static final int REQUEST_CODE_COMBINED_BIOMETRIC_SETTING = 10;
+    private static final int REQUEST_CODE_FACE_SETTING = 20;
+    private static final int REQUEST_CODE_FINGERPRINT_SETTING = 30;
 
     private BiometricsSafetySource() {
     }
@@ -62,9 +65,11 @@ public final class BiometricsSafetySource {
             setBiometricSafetySourceData(context,
                     context.getString(R.string.security_settings_biometric_preference_title),
                     combinedBiometricStatusUtils.getSummary(),
-                    biometricNavigationUtils.getBiometricSettingsIntent(context,
-                            combinedBiometricStatusUtils.getSettingsClassName(), disablingAdmin,
-                            Bundle.EMPTY),
+                    createPendingIntent(context,
+                            biometricNavigationUtils.getBiometricSettingsIntent(context,
+                                    combinedBiometricStatusUtils.getSettingsClassName(),
+                                    disablingAdmin, Bundle.EMPTY),
+                            REQUEST_CODE_COMBINED_BIOMETRIC_SETTING),
                     disablingAdmin == null /* enabled */,
                     combinedBiometricStatusUtils.hasEnrolled(),
                     safetyEvent);
@@ -80,9 +85,11 @@ public final class BiometricsSafetySource {
             setBiometricSafetySourceData(context,
                     context.getString(R.string.security_settings_face_preference_title),
                     faceStatusUtils.getSummary(),
-                    biometricNavigationUtils.getBiometricSettingsIntent(context,
-                            faceStatusUtils.getSettingsClassName(), disablingAdmin,
-                            Bundle.EMPTY),
+                    createPendingIntent(context,
+                            biometricNavigationUtils.getBiometricSettingsIntent(context,
+                                    faceStatusUtils.getSettingsClassName(), disablingAdmin,
+                                    Bundle.EMPTY),
+                            REQUEST_CODE_FACE_SETTING),
                     disablingAdmin == null /* enabled */,
                     faceStatusUtils.hasEnrolled(),
                     safetyEvent);
@@ -100,9 +107,11 @@ public final class BiometricsSafetySource {
             setBiometricSafetySourceData(context,
                     context.getString(R.string.security_settings_fingerprint_preference_title),
                     fingerprintStatusUtils.getSummary(),
-                    biometricNavigationUtils.getBiometricSettingsIntent(context,
-                            fingerprintStatusUtils.getSettingsClassName(), disablingAdmin,
-                            Bundle.EMPTY),
+                    createPendingIntent(context,
+                            biometricNavigationUtils.getBiometricSettingsIntent(context,
+                                    fingerprintStatusUtils.getSettingsClassName(), disablingAdmin,
+                                    Bundle.EMPTY),
+                            REQUEST_CODE_FINGERPRINT_SETTING),
                     disablingAdmin == null /* enabled */,
                     fingerprintStatusUtils.hasEnrolled(),
                     safetyEvent);
@@ -118,8 +127,8 @@ public final class BiometricsSafetySource {
     }
 
     private static void setBiometricSafetySourceData(Context context, String title, String summary,
-            Intent clickIntent, boolean enabled, boolean hasEnrolled, SafetyEvent safetyEvent) {
-        final PendingIntent pendingIntent = createPendingIntent(context, clickIntent);
+            PendingIntent pendingIntent, boolean enabled, boolean hasEnrolled,
+            SafetyEvent safetyEvent) {
         final int severityLevel =
                 enabled && hasEnrolled ? SafetySourceData.SEVERITY_LEVEL_INFORMATION
                         : SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED;
@@ -133,11 +142,12 @@ public final class BiometricsSafetySource {
                 context, SAFETY_SOURCE_ID, safetySourceData, safetyEvent);
     }
 
-    private static PendingIntent createPendingIntent(Context context, Intent intent) {
+    private static PendingIntent createPendingIntent(Context context, Intent intent,
+            int requestCode) {
         return PendingIntent
                 .getActivity(
                         context,
-                        0 /* requestCode */,
+                        requestCode,
                         intent,
                         PendingIntent.FLAG_IMMUTABLE);
     }

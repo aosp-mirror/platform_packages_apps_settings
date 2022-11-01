@@ -22,7 +22,13 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.time.Capabilities;
+import android.app.time.TimeManager;
+import android.app.time.TimeZoneCapabilities;
+import android.app.time.TimeZoneCapabilitiesAndConfig;
+import android.app.time.TimeZoneConfiguration;
 import android.content.Context;
+import android.os.UserHandle;
 
 import com.android.settingslib.RestrictedPreference;
 
@@ -38,8 +44,7 @@ import org.robolectric.RuntimeEnvironment;
 public class TimeZonePreferenceControllerTest {
 
     @Mock
-    private AutoTimeZonePreferenceController mAutoTimeZonePreferenceController;
-
+    private TimeManager mTimeManager;
     private Context mContext;
     private TimeZonePreferenceController mController;
     private RestrictedPreference mPreference;
@@ -47,10 +52,14 @@ public class TimeZonePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mTimeManager).when(mContext).getSystemService(TimeManager.class);
+
         mPreference = new RestrictedPreference(mContext);
-        mController = spy(new TimeZonePreferenceController(mContext,
-                mAutoTimeZonePreferenceController));
+
+        mController = spy(new TimeZonePreferenceController(mContext));
+        doReturn("test timezone").when(mController).getTimeZoneOffsetAndName();
     }
 
     @Test
@@ -59,26 +68,46 @@ public class TimeZonePreferenceControllerTest {
     }
 
     @Test
-    public void updateState_autoTimeZoneEnabled_shouldDisablePref() {
+    public void updateState_suggestManualNotAllowed_shouldDisablePref() {
         // Make sure not disabled by admin.
         mPreference.setDisabledByAdmin(null);
 
-        doReturn("test timezone").when(mController).getTimeZoneOffsetAndName();
-        when(mAutoTimeZonePreferenceController.isEnabled()).thenReturn(true);
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+            /* suggestManualAllowed= */false);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
         mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isFalse();
     }
 
     @Test
-    public void updateState_autoTimeZoneDisabled_shouldEnablePref() {
+    public void updateState_suggestManualAllowed_shouldEnablePref() {
         // Make sure not disabled by admin.
         mPreference.setDisabledByAdmin(null);
 
-        doReturn("test timezone").when(mController).getTimeZoneOffsetAndName();
-        when(mAutoTimeZonePreferenceController.isEnabled()).thenReturn(false);
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+            /* suggestManualAllowed= */true);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
         mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isTrue();
+    }
+
+    private static TimeZoneCapabilitiesAndConfig createCapabilitiesAndConfig(
+            boolean suggestManualAllowed) {
+        int suggestManualCapability = suggestManualAllowed ? Capabilities.CAPABILITY_POSSESSED
+                : Capabilities.CAPABILITY_NOT_SUPPORTED;
+        TimeZoneCapabilities capabilities = new TimeZoneCapabilities.Builder(UserHandle.SYSTEM)
+                .setConfigureAutoDetectionEnabledCapability(Capabilities.CAPABILITY_POSSESSED)
+                .setConfigureGeoDetectionEnabledCapability(Capabilities.CAPABILITY_NOT_SUPPORTED)
+                .setSuggestManualTimeZoneCapability(suggestManualCapability)
+                .build();
+        TimeZoneConfiguration config = new TimeZoneConfiguration.Builder()
+                .setAutoDetectionEnabled(!suggestManualAllowed)
+                .setGeoDetectionEnabled(false)
+                .build();
+        return new TimeZoneCapabilitiesAndConfig(capabilities, config);
     }
 }

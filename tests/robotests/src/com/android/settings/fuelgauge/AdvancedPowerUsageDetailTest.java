@@ -45,7 +45,6 @@ import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
-import android.util.Pair;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.loader.app.LoaderManager;
@@ -54,6 +53,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.fuelgauge.batteryusage.BatteryEntry;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
@@ -232,7 +232,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testGetPreferenceScreenResId_returnNewLayout() {
+    public void setPreferenceScreenResId_returnNewLayout() {
         assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(R.xml.power_usage_detail);
     }
 
@@ -252,7 +252,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_HasAppEntry_BuildByAppEntry() {
+    public void initHeader_HasAppEntry_BuildByAppEntry() {
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                 new InstantAppDataProvider() {
                     @Override
@@ -269,7 +269,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_HasAppEntry_InstantApp() {
+    public void initHeader_HasAppEntry_InstantApp() {
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                 new InstantAppDataProvider() {
                     @Override
@@ -286,7 +286,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_noUsageTimeAndGraphDisabled_hasCorrectSummary() {
+    public void initHeader_noUsageTimeAndGraphDisabled_hasCorrectSummary() {
         when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mContext))
                 .thenReturn(false);
 
@@ -304,7 +304,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_bgTwoMinFgZeroAndGraphDisabled_hasCorrectSummary() {
+    public void initHeader_bgTwoMinFgZeroAndGraphDisabled_hasCorrectSummary() {
         when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mContext))
                 .thenReturn(false);
 
@@ -324,7 +324,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_bgLessThanAMinFgZeroAndGraphDisabled_hasCorrectSummary() {
+    public void initHeader_bgLessThanAMinFgZeroAndGraphDisabled_hasCorrectSummary() {
         when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mContext))
                 .thenReturn(false);
 
@@ -345,7 +345,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_totalUsageLessThanAMinAndGraphDisabled_hasCorrectSummary() {
+    public void initHeader_totalUsageLessThanAMinAndGraphDisabled_hasCorrectSummary() {
         when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mContext))
                 .thenReturn(false);
 
@@ -367,7 +367,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_TotalAMinutesBgLessThanAMinAndGraphDisabled_hasCorrectSummary() {
+    public void initHeader_TotalAMinutesBgLessThanAMinAndGraphDisabled_hasCorrectSummary() {
         when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mContext))
                 .thenReturn(false);
 
@@ -387,7 +387,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_TotalAMinBackgroundZeroAndGraphDisabled_hasCorrectSummary() {
+    public void initHeader_TotalAMinBackgroundZeroAndGraphDisabled_hasCorrectSummary() {
         when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mContext))
                 .thenReturn(false);
         final long backgroundTimeZero = 0;
@@ -406,7 +406,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_fgTwoMinBgFourMinAndGraphDisabled_hasCorrectSummary() {
+    public void initHeader_fgTwoMinBgFourMinAndGraphDisabled_hasCorrectSummary() {
         when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mContext))
                 .thenReturn(false);
         final long backgroundTimeFourMinute = 240000;
@@ -424,7 +424,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_noUsageTime_hasCorrectSummary() {
+    public void initHeader_noUsageTime_hasCorrectSummary() {
         Bundle bundle = new Bundle(2);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, /* value */ 0);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, /* value */ 0);
@@ -435,11 +435,11 @@ public class AdvancedPowerUsageDetailTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString())
-                .isEqualTo("No usage for past 24 hr");
+                .isEqualTo("No usage from last full charge");
     }
 
     @Test
-    public void testInitHeader_noUsageTimeButConsumedPower_hasEmptySummary() {
+    public void initHeader_noUsageTimeButConsumedPower_hasEmptySummary() {
         Bundle bundle = new Bundle(3);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, /* value */ 0);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, /* value */ 0);
@@ -454,7 +454,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_backgroundTwoMinForegroundZero_hasCorrectSummary() {
+    public void initHeader_backgroundTwoMinForegroundZero_hasCorrectSummary() {
         final long backgroundTimeTwoMinutes = 120000;
         final long foregroundTimeZero = 0;
         Bundle bundle = new Bundle(2);
@@ -467,11 +467,11 @@ public class AdvancedPowerUsageDetailTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString())
-                .isEqualTo("2 min background for past 24 hr");
+                .isEqualTo("2 min background from last full charge");
     }
 
     @Test
-    public void testInitHeader_backgroundLessThanAMinForegroundZero_hasCorrectSummary() {
+    public void initHeader_backgroundLessThanAMinForegroundZero_hasCorrectSummary() {
         final long backgroundTimeLessThanAMinute = 59999;
         final long foregroundTimeZero = 0;
         Bundle bundle = new Bundle(2);
@@ -485,11 +485,11 @@ public class AdvancedPowerUsageDetailTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString())
-                .isEqualTo("Background less than a minute for past 24 hr");
+                .isEqualTo("Background less than a minute from last full charge");
     }
 
     @Test
-    public void testInitHeader_totalUsageLessThanAMin_hasCorrectSummary() {
+    public void initHeader_totalUsageLessThanAMin_hasCorrectSummary() {
         final long backgroundTimeLessThanHalfMinute = 20000;
         final long foregroundTimeLessThanHalfMinute = 20000;
         Bundle bundle = new Bundle(2);
@@ -504,11 +504,11 @@ public class AdvancedPowerUsageDetailTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString())
-                .isEqualTo("Total less than a minute for past 24 hr");
+                .isEqualTo("Total less than a minute from last full charge");
     }
 
     @Test
-    public void testInitHeader_TotalAMinutesBackgroundLessThanAMin_hasCorrectSummary() {
+    public void initHeader_TotalAMinutesBackgroundLessThanAMin_hasCorrectSummary() {
         final long backgroundTimeZero = 59999;
         final long foregroundTimeTwoMinutes = 1;
         Bundle bundle = new Bundle(2);
@@ -521,11 +521,11 @@ public class AdvancedPowerUsageDetailTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString())
-                .isEqualTo("1 min total • background less than a minute\nfor past 24 hr");
+                .isEqualTo("1 min total • background less than a minute\nfrom last full charge");
     }
 
     @Test
-    public void testInitHeader_TotalAMinBackgroundZero_hasCorrectSummary() {
+    public void initHeader_TotalAMinBackgroundZero_hasCorrectSummary() {
         final long backgroundTimeZero = 0;
         final long foregroundTimeAMinutes = 60000;
         Bundle bundle = new Bundle(2);
@@ -538,11 +538,11 @@ public class AdvancedPowerUsageDetailTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString())
-                .isEqualTo("1 min total for past 24 hr");
+                .isEqualTo("1 min total from last full charge");
     }
 
     @Test
-    public void testInitHeader_foregroundTwoMinBackgroundFourMin_hasCorrectSummary() {
+    public void initHeader_foregroundTwoMinBackgroundFourMin_hasCorrectSummary() {
         final long backgroundTimeFourMinute = 240000;
         final long foregroundTimeTwoMinutes = 120000;
         Bundle bundle = new Bundle(2);
@@ -555,11 +555,11 @@ public class AdvancedPowerUsageDetailTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString())
-                .isEqualTo("6 min total • 4 min background\nfor past 24 hr");
+                .isEqualTo("6 min total • 4 min background\nfrom last full charge");
     }
 
     @Test
-    public void testInitHeader_totalUsageLessThanAMinWithSlotTime_hasCorrectSummary() {
+    public void initHeader_totalUsageLessThanAMinWithSlotTime_hasCorrectSummary() {
         final long backgroundTimeLessThanHalfMinute = 20000;
         final long foregroundTimeLessThanHalfMinute = 20000;
         Bundle bundle = new Bundle(3);
@@ -579,7 +579,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_TotalAMinBackgroundLessThanAMinWithSlotTime_hasCorrectSummary() {
+    public void initHeader_TotalAMinBackgroundLessThanAMinWithSlotTime_hasCorrectSummary() {
         final long backgroundTimeZero = 59999;
         final long foregroundTimeTwoMinutes = 1;
         Bundle bundle = new Bundle(3);
@@ -597,7 +597,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_TotalAMinBackgroundZeroWithSlotTime_hasCorrectSummary() {
+    public void initHeader_TotalAMinBackgroundZeroWithSlotTime_hasCorrectSummary() {
         final long backgroundTimeZero = 0;
         final long foregroundTimeAMinutes = 60000;
         Bundle bundle = new Bundle(3);
@@ -615,7 +615,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_foregroundTwoMinBackgroundFourMinWithSlotTime_hasCorrectSummary() {
+    public void initHeader_foregroundTwoMinBackgroundFourMinWithSlotTime_hasCorrectSummary() {
         final long backgroundTimeFourMinute = 240000;
         final long foregroundTimeTwoMinutes = 120000;
         Bundle bundle = new Bundle(3);
@@ -633,7 +633,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_systemUidWithChartIsDisabled_nullSummary() {
+    public void initHeader_systemUidWithChartIsDisabled_nullSummary() {
         Bundle bundle = new Bundle(3);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, 240000);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, 120000);
@@ -650,7 +650,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_systemUidWithChartIsEnabled_notNullSummary() {
+    public void initHeader_systemUidWithChartIsEnabled_notNullSummary() {
         Bundle bundle = new Bundle(3);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, 240000);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, 120000);
@@ -665,21 +665,21 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testStartBatteryDetailPage_hasBasicData() {
+    public void startBatteryDetailPage_hasBasicData() {
         AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
                 mBatteryEntry, USAGE_PERCENT, /*isValidToShowSummary=*/ true);
 
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
         assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME))
-            .isEqualTo(BACKGROUND_TIME_MS);
+                .isEqualTo(BACKGROUND_TIME_MS);
         assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME))
-            .isEqualTo(FOREGROUND_TIME_MS);
+                .isEqualTo(FOREGROUND_TIME_MS);
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT))
-            .isEqualTo(USAGE_PERCENT);
+                .isEqualTo(USAGE_PERCENT);
     }
 
     @Test
-    public void testStartBatteryDetailPage_invalidToShowSummary_noFGBDData() {
+    public void startBatteryDetailPage_invalidToShowSummary_noFGBDData() {
         AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
                 mBatteryEntry, USAGE_PERCENT, /*isValidToShowSummary=*/ false);
 
@@ -693,7 +693,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testStartBatteryDetailPage_NormalApp() {
+    public void startBatteryDetailPage_NormalApp() {
         when(mBatteryEntry.getDefaultPackageName()).thenReturn(PACKAGE_NAME[0]);
 
         AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
@@ -704,7 +704,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testStartBatteryDetailPage_SystemApp() {
+    public void startBatteryDetailPage_SystemApp() {
         when(mBatteryEntry.getDefaultPackageName()).thenReturn(null);
 
         AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
@@ -716,7 +716,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testStartBatteryDetailPage_WorkApp() {
+    public void startBatteryDetailPage_WorkApp() {
         final int appUid = 1010019;
         doReturn(appUid).when(mBatteryEntry).getUid();
 
@@ -727,7 +727,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testStartBatteryDetailPage_typeUser_startByCurrentUser() {
+    public void startBatteryDetailPage_typeUser_startByCurrentUser() {
         when(mBatteryEntry.isUserEntry()).thenReturn(true);
 
         final int currentUser = 20;
@@ -739,7 +739,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testStartBatteryDetailPage_noBatteryUsage_hasBasicData() {
+    public void startBatteryDetailPage_noBatteryUsage_hasBasicData() {
         final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
 
         AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment, PACKAGE_NAME[0]);
@@ -747,16 +747,16 @@ public class AdvancedPowerUsageDetailTest {
         verify(mActivity).startActivity(captor.capture());
 
         assertThat(captor.getValue().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-            .getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME))
-            .isEqualTo(PACKAGE_NAME[0]);
+                .getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME))
+                .isEqualTo(PACKAGE_NAME[0]);
 
         assertThat(captor.getValue().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-            .getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT))
-            .isEqualTo("0%");
+                .getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT))
+                .isEqualTo("0%");
     }
 
     @Test
-    public void testStartBatteryDetailPage_batteryEntryNotExisted_extractUidFromPackageName() throws
+    public void startBatteryDetailPage_batteryEntryNotExisted_extractUidFromPackageName() throws
             PackageManager.NameNotFoundException {
         doReturn(UID).when(mPackageManager).getPackageUid(PACKAGE_NAME[0], 0 /* no flag */);
 
@@ -796,7 +796,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitPreferenceForTriState_isSystemOrDefaultApp_hasCorrectString() {
+    public void initPreferenceForTriState_isSystemOrDefaultApp_hasCorrectString() {
         when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
         when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
 
@@ -807,7 +807,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitPreferenceForTriState_hasCorrectString() {
+    public void initPreferenceForTriState_hasCorrectString() {
         when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
         when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(false);
 
@@ -818,7 +818,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testOnRadioButtonClicked_clickOptimizePref_optimizePreferenceChecked() {
+    public void onRadioButtonClicked_clickOptimizePref_optimizePreferenceChecked() {
         mOptimizePreference.setKey(KEY_PREF_OPTIMIZED);
         mRestrictedPreference.setKey(KEY_PREF_RESTRICTED);
         mUnrestrictedPreference.setKey(KEY_PREF_UNRESTRICTED);
@@ -830,7 +830,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testOnPause_optimizationModeChanged_logPreference() {
+    public void onPause_optimizationModeChanged_logPreference() {
         final int mode = BatteryOptimizeUtils.MODE_RESTRICTED;
         mFragment.mOptimizationMode = mode;
         when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(mode);
@@ -849,7 +849,7 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testOnPause_optimizationModeIsNotChanged_notInvokeLogging() {
+    public void onPause_optimizationModeIsNotChanged_notInvokeLogging() {
         final int mode = BatteryOptimizeUtils.MODE_OPTIMIZED;
         mFragment.mOptimizationMode = mode;
         when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(mode);
