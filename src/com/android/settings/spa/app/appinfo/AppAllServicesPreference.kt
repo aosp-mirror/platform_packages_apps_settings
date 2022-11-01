@@ -16,18 +16,19 @@
 
 package com.android.settings.spa.app.appinfo
 
-import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
+import android.content.res.Resources
+import android.os.Bundle
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
-import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.spa.framework.compose.collectAsStateWithLifecycle
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
@@ -38,54 +39,78 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 
 @Composable
-fun AppSettingsPreference(app: ApplicationInfo) {
+fun AppAllServicesPreference(app: ApplicationInfo) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
-    val presenter = remember { AppSettingsPresenter(context, app, coroutineScope) }
+    val presenter = remember { AppAllServicesPresenter(context, app, coroutineScope) }
     if (!presenter.isAvailableFlow.collectAsStateWithLifecycle(initialValue = false).value) return
 
     Preference(object : PreferenceModel {
-        override val title = stringResource(R.string.app_settings_link)
+        override val title = stringResource(R.string.app_info_all_services_label)
+        override val summary = presenter.summaryFlow.collectAsStateWithLifecycle(
+            initialValue = stringResource(R.string.summary_placeholder),
+        )
         override val onClick = presenter::startActivity
     })
 }
 
-private class AppSettingsPresenter(
+private class AppAllServicesPresenter(
     private val context: Context,
     private val app: ApplicationInfo,
     private val coroutineScope: CoroutineScope,
 ) {
     private val packageManager = context.packageManager
 
-    private val intentFlow = flow {
-        emit(packageManager.resolveActionForApp(app, Intent.ACTION_APPLICATION_PREFERENCES))
+    private val activityInfoFlow = flow {
+        emit(packageManager.resolveActionForApp(
+            app = app,
+            action = Intent.ACTION_VIEW_APP_FEATURES,
+            flags = PackageManager.GET_META_DATA,
+        ))
     }.shareIn(coroutineScope + Dispatchers.IO, SharingStarted.WhileSubscribed(), 1)
 
-    val isAvailableFlow = intentFlow.map { it != null }
+    val isAvailableFlow = activityInfoFlow.map { it != null }
 
-    fun startActivity() {
-        coroutineScope.launch {
-            intentFlow.firstOrNull()?.let(::startActivity)
+    val summaryFlow = activityInfoFlow.map { activityInfo ->
+        activityInfo?.metaData?.getSummary() ?: ""
+    }.flowOn(Dispatchers.IO)
+
+    private fun Bundle.getSummary(): String {
+        val resources = try {
+            packageManager.getResourcesForApplication(app)
+        } catch (exception: PackageManager.NameNotFoundException) {
+            Log.d(TAG, "Name not found for the application.")
+            return ""
+        }
+
+        return try {
+            resources.getString(getInt(SUMMARY_METADATA_KEY))
+        } catch (exception: Resources.NotFoundException) {
+            Log.d(TAG, "Resource not found for summary string.")
+            ""
         }
     }
 
-    private fun startActivity(activityInfo: ActivityInfo) {
-        FeatureFactory.getFactory(context).metricsFeatureProvider.action(
-            SettingsEnums.PAGE_UNKNOWN,
-            SettingsEnums.ACTION_OPEN_APP_SETTING,
-            AppInfoSettingsProvider.METRICS_CATEGORY,
-            null,
-            0,
-        )
-        val intent = Intent(Intent.ACTION_APPLICATION_PREFERENCES).apply {
-            component = activityInfo.componentName
+    fun startActivity() {
+        coroutineScope.launch {
+            activityInfoFlow.firstOrNull()?.let { activityInfo ->
+                val intent = Intent(Intent.ACTION_VIEW_APP_FEATURES).apply {
+                    component = activityInfo.componentName
+                }
+                context.startActivityAsUser(intent, app.userHandle)
+            }
         }
-        context.startActivityAsUser(intent, app.userHandle)
+    }
+
+    companion object {
+        private const val TAG = "AppAllServicesPresenter"
+        private const val SUMMARY_METADATA_KEY = "app_features_preference_summary"
     }
 }

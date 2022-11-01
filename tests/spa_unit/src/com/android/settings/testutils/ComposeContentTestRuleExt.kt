@@ -16,10 +16,18 @@
 
 package com.android.settings.testutils
 
+import androidx.compose.ui.test.ComposeTimeoutException
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 
 /** Blocks until the found a semantics node that match the given condition. */
 fun ComposeContentTestRule.waitUntilExists(matcher: SemanticsMatcher) = waitUntil {
     onAllNodes(matcher).fetchSemanticsNodes().isNotEmpty()
+}
+
+/** Blocks until the timeout is reached. */
+fun ComposeContentTestRule.delay(timeoutMillis: Long = 1_000) = try {
+    waitUntil(timeoutMillis) { false }
+} catch (_: ComposeTimeoutException) {
+    // Expected
 }

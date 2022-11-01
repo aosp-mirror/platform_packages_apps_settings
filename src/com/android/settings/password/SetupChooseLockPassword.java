@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -121,9 +120,8 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
                         forFace,
                         forBiometrics);
 
-                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
-                        Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                ConfirmDeviceCredentialUtils.hideImeImmediately(
+                        getActivity().getWindow().getDecorView());
 
                 dialog.show(getFragmentManager());
                 return;

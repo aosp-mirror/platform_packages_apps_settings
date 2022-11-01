@@ -16,7 +16,6 @@
 
 package com.android.settings.spa.app.appinfo
 
-import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.util.Log
@@ -123,7 +122,7 @@ private class AppBatteryPresenter(private val context: Context, private val app:
         Log.i(TAG, "handlePreferenceTreeClick():\n$this")
         AdvancedPowerUsageDetail.startBatteryDetailPage(
             context,
-            SettingsEnums.APPLICATIONS_INSTALLED_APP_DETAILS,
+            AppInfoSettingsProvider.METRICS_CATEGORY,
             this,
             Utils.formatPercentage(percentOfTotal, true),
             null,
@@ -141,7 +140,7 @@ private class AppBatteryPresenter(private val context: Context, private val app:
             .setDestination(AdvancedPowerUsageDetail::class.java.name)
             .setTitleRes(R.string.battery_details_title)
             .setArguments(args)
-            .setSourceMetricsCategory(SettingsEnums.APPLICATIONS_INSTALLED_APP_DETAILS)
+            .setSourceMetricsCategory(AppInfoSettingsProvider.METRICS_CATEGORY)
             .launch()
     }
 

@@ -954,6 +954,9 @@ public class ChooseLockPassword extends SettingsActivity {
                 return;
             }
 
+            ConfirmDeviceCredentialUtils.hideImeImmediately(
+                    getActivity().getWindow().getDecorView());
+
             mPasswordEntryInputDisabler.setInputEnabled(false);
             setNextEnabled(false);
 
