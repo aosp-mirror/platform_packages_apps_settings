@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityGestureNavigationTutorial.createAccessibilityTutorialDialog;
+import static com.android.settings.accessibility.AccessibilityGestureNavigationTutorial.createAccessibilityTutorialDialogForSetupWizard;
 import static com.android.settings.accessibility.AccessibilityGestureNavigationTutorial.createShortcutTutorialPages;
 import static com.android.settings.accessibility.AccessibilityGestureNavigationTutorial.showGestureNavigationTutorialDialog;
 import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
@@ -149,6 +150,18 @@ public final class AccessibilityGestureNavigationTutorialTest {
                 .isEqualTo(View.GONE);
     }
 
+    @Test
+    public void createTutorialPages_turnOnSoftwareShortcut_showFromSuW_linkButtonGone() {
+        mShortcutTypes |= UserShortcutType.SOFTWARE;
+
+        final AlertDialog alertDialog =
+                createAccessibilityTutorialDialogForSetupWizard(mContext, mShortcutTypes);
+        alertDialog.show();
+
+        assertThat(alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).getVisibility())
+                .isEqualTo(View.GONE);
+    }
+
 
     @Test
     public void performClickOnPositiveButton_turnOnSoftwareShortcut_dismiss() {
@@ -178,8 +191,7 @@ public final class AccessibilityGestureNavigationTutorialTest {
     public void performClickOnNegativeButton_turnOnSoftwareShortcut_directToSettingsPage() {
         mShortcutTypes |= UserShortcutType.SOFTWARE;
         Activity activity = Robolectric.buildActivity(Activity.class).create().get();
-        final AlertDialog alertDialog =
-                createAccessibilityTutorialDialog(activity, mShortcutTypes, mOnClickListener);
+        final AlertDialog alertDialog = createAccessibilityTutorialDialog(activity, mShortcutTypes);
         alertDialog.show();
 
         alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).performClick();

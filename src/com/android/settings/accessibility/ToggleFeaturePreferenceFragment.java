@@ -219,9 +219,17 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
                 setupEditShortcutDialog(mDialog);
                 return mDialog;
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
-                mDialog = AccessibilityGestureNavigationTutorial
-                        .createAccessibilityTutorialDialog(getPrefContext(),
-                                getUserShortcutTypes(), this::callOnTutorialDialogButtonClicked);
+                if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+                    mDialog = AccessibilityGestureNavigationTutorial
+                            .createAccessibilityTutorialDialogForSetupWizard(
+                                    getPrefContext(), getUserShortcutTypes(),
+                                    this::callOnTutorialDialogButtonClicked);
+                } else {
+                    mDialog = AccessibilityGestureNavigationTutorial
+                            .createAccessibilityTutorialDialog(
+                                    getPrefContext(), getUserShortcutTypes(),
+                                    this::callOnTutorialDialogButtonClicked);
+                }
                 mDialog.setCanceledOnTouchOutside(false);
                 return mDialog;
             default:
