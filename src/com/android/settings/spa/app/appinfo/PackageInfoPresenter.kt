@@ -51,7 +51,7 @@ class PackageInfoPresenter(
 ) {
     private val metricsFeatureProvider = FeatureFactory.getFactory(context).metricsFeatureProvider
     val userContext by lazy { context.asUser(UserHandle.of(userId)) }
-    val packageManagerAsUser: PackageManager by lazy { userContext.packageManager }
+    val userPackageManager: PackageManager by lazy { userContext.packageManager }
     private val _flow: MutableStateFlow<PackageInfo?> = MutableStateFlow(null)
 
     val flow: StateFlow<PackageInfo?> = _flow
@@ -92,7 +92,7 @@ class PackageInfoPresenter(
     fun enable() {
         logAction(SettingsEnums.ACTION_SETTINGS_ENABLE_APP)
         coroutineScope.launch(Dispatchers.IO) {
-            packageManagerAsUser.setApplicationEnabledSetting(
+            userPackageManager.setApplicationEnabledSetting(
                 packageName, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0
             )
             notifyChange()
@@ -103,7 +103,7 @@ class PackageInfoPresenter(
     fun disable() {
         logAction(SettingsEnums.ACTION_SETTINGS_DISABLE_APP)
         coroutineScope.launch(Dispatchers.IO) {
-            packageManagerAsUser.setApplicationEnabledSetting(
+            userPackageManager.setApplicationEnabledSetting(
                 packageName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER, 0
             )
             notifyChange()
@@ -124,7 +124,7 @@ class PackageInfoPresenter(
     fun clearInstantApp() {
         logAction(SettingsEnums.ACTION_SETTINGS_CLEAR_INSTANT_APP)
         coroutineScope.launch(Dispatchers.IO) {
-            packageManagerAsUser.deletePackageAsUser(packageName, null, 0, userId)
+            userPackageManager.deletePackageAsUser(packageName, null, 0, userId)
             notifyChange()
         }
     }

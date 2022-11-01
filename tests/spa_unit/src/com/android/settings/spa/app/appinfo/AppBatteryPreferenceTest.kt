@@ -16,7 +16,6 @@
 
 package com.android.settings.spa.app.appinfo
 
-import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import androidx.compose.runtime.CompositionLocalProvider
@@ -159,7 +158,7 @@ class AppBatteryPreferenceTest {
         ExtendedMockito.verify {
             AdvancedPowerUsageDetail.startBatteryDetailPage(
                 context,
-                SettingsEnums.APPLICATIONS_INSTALLED_APP_DETAILS,
+                AppInfoSettingsProvider.METRICS_CATEGORY,
                 batteryDiffEntry,
                 "10%",
                 null,
