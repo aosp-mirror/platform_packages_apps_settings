@@ -123,7 +123,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         super.onPause();
         // Resets the flag to reload usage data in onResume() callback.
         mIsChartDataLoaded = false;
-        final Uri uri = mPowerUsageFeatureProvider.getBatteryHistoryUri();
+        final Uri uri = DatabaseUtils.BATTERY_CONTENT_URI;
         if (uri != null) {
             getContext().getContentResolver().unregisterContentObserver(mBatteryObserver);
         }
@@ -132,7 +132,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     @Override
     public void onResume() {
         super.onResume();
-        final Uri uri = mPowerUsageFeatureProvider.getBatteryHistoryUri();
+        final Uri uri = DatabaseUtils.BATTERY_CONTENT_URI;
         if (uri != null) {
             getContext().getContentResolver().registerContentObserver(
                     uri, /*notifyForDescendants*/ true, mBatteryObserver);

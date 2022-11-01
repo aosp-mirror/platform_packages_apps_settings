@@ -58,6 +58,7 @@ import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -760,9 +761,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     public static List<BatteryDiffEntry> getAppBatteryUsageData(Context context) {
         final long start = System.currentTimeMillis();
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
-                        .getBatteryHistorySinceLastFullCharge(context);
+                DatabaseUtils.getHistoryMapSinceLastFullCharge(context, Calendar.getInstance());
         if (batteryHistoryMap == null || batteryHistoryMap.isEmpty()) {
             return null;
         }

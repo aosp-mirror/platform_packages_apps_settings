@@ -336,21 +336,6 @@ public final class ConvertUtilsTest {
         // Verifies the fake data is cleared out.
         assertThat(entryList.get(0).getPackageName())
                 .isNotEqualTo(ConvertUtils.FAKE_PACKAGE_NAME);
-
-        // Adds lacked data into the battery history map.
-        final int remainingSize = 25 - batteryHistoryKeys.length;
-        for (int index = 0; index < remainingSize; index++) {
-            batteryHistoryMap.put(105L + index + 1, new HashMap<>());
-        }
-        when(mPowerUsageFeatureProvider.getBatteryHistorySinceLastFullCharge(mContext))
-                .thenReturn(batteryHistoryMap);
-
-        final List<BatteryDiffEntry> batteryDiffEntryList =
-                BatteryChartPreferenceController.getAppBatteryUsageData(mContext);
-
-        assertThat(batteryDiffEntryList).isNotEmpty();
-        final BatteryDiffEntry resultEntry = batteryDiffEntryList.get(0);
-        assertThat(resultEntry.getPackageName()).isEqualTo("package2");
     }
 
     @Test
