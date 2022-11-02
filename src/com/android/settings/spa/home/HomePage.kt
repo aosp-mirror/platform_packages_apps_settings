@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.spa.app.AppsMainPageProvider
 import com.android.settings.spa.notification.NotificationMainPageProvider
+import com.android.settings.spa.system.SystemMainPageProvider
 import com.android.settingslib.spa.framework.common.SettingsEntry
 import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
@@ -48,5 +49,6 @@ private fun HomePage() {
     HomeScaffold(title = stringResource(R.string.settings_label)) {
         AppsMainPageProvider.EntryItem()
         NotificationMainPageProvider.EntryItem()
+        SystemMainPageProvider.EntryItem()
     }
 }

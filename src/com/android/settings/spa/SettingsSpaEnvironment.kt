@@ -32,6 +32,9 @@ import com.android.settings.spa.development.UsageStatsPageProvider
 import com.android.settings.spa.home.HomePageProvider
 import com.android.settings.spa.notification.AppListNotificationsPageProvider
 import com.android.settings.spa.notification.NotificationMainPageProvider
+import com.android.settings.spa.system.AppLanguagesPageProvider
+import com.android.settings.spa.system.LanguageAndInputPageProvider
+import com.android.settings.spa.system.SystemMainPageProvider
 import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.common.SettingsPageProviderRepository
 import com.android.settingslib.spa.framework.common.SpaEnvironment
@@ -59,6 +62,9 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
                 SpecialAppAccessPageProvider,
                 NotificationMainPageProvider,
                 AppListNotificationsPageProvider,
+                SystemMainPageProvider,
+                LanguageAndInputPageProvider,
+                AppLanguagesPageProvider,
                 UsageStatsPageProvider,
             ) + togglePermissionAppListTemplate.createPageProviders(),
             rootPages = listOf(
