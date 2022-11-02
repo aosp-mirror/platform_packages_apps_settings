@@ -21,6 +21,7 @@ import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -144,7 +145,7 @@ public class BatteryUsageContentProvider extends ContentProvider {
         } catch (RuntimeException e) {
             Log.e(TAG, "query() from:" + uri + " error:" + e);
         }
-        // TODO: Invokes hourly job recheck.
+        AsyncTask.execute(() -> BootBroadcastReceiver.invokeJobRecheck(getContext()));
         Log.w(TAG, "query battery states in " + (mClock.millis() - timestamp) + "/ms");
         return cursor;
     }

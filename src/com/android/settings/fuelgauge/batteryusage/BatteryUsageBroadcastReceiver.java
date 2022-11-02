@@ -20,20 +20,24 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.SystemClock;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settingslib.fuelgauge.BatteryStatus;
+
+import java.time.Duration;
+
 /** A {@link BatteryUsageBroadcastReceiver} for battery usage data requesting. */
 public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
     private static final String TAG = "BatteryUsageBroadcastReceiver";
-    /** An intent action to request Settings to fetch usage data. */
-    public static final String ACTION_FETCH_BATTERY_USAGE_DATA =
-            "com.android.settings.battery.action.FETCH_BATTERY_USAGE_DATA";
     /** An intent action to request Settings to clear cache data. */
     public static final String ACTION_CLEAR_BATTERY_CACHE_DATA =
             "com.android.settings.battery.action.CLEAR_BATTERY_CACHE_DATA";
 
+    @VisibleForTesting
+    static long sBroadcastDelayFromBoot = Duration.ofMinutes(40).toMillis();
     @VisibleForTesting
     static boolean sIsDebugMode = Build.TYPE.equals("userdebug");
 
@@ -47,9 +51,8 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
         }
         Log.d(TAG, "onReceive:" + intent.getAction());
         switch (intent.getAction()) {
-            case ACTION_FETCH_BATTERY_USAGE_DATA:
-                mFetchBatteryUsageData = true;
-                BatteryUsageDataLoader.enqueueWork(context);
+            case Intent.ACTION_BATTERY_LEVEL_CHANGED:
+                tryToFetchUsageData(context);
                 break;
             case ACTION_CLEAR_BATTERY_CACHE_DATA:
                 if (sIsDebugMode) {
@@ -58,5 +61,24 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
                 }
                 break;
         }
+    }
+
+    private void tryToFetchUsageData(Context context) {
+        final Intent batteryIntent = DatabaseUtils.getBatteryIntent(context);
+        // Returns when battery is not fully charged.
+        if (!BatteryStatus.isCharged(batteryIntent)) {
+            return;
+        }
+
+        final long broadcastDelay = sBroadcastDelayFromBoot - SystemClock.elapsedRealtime();
+        // If current boot time is smaller than expected delay, cancel sending the broadcast.
+        if (broadcastDelay > 0) {
+            Log.d(TAG, "cancel sendBroadcastToFetchUsageData when broadcastDelay is"
+                    + broadcastDelay + "ms.");
+            return;
+        }
+
+        mFetchBatteryUsageData = true;
+        BatteryUsageDataLoader.enqueueWork(context);
     }
 }

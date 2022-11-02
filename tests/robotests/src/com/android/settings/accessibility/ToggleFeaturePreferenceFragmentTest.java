@@ -398,6 +398,7 @@ public class ToggleFeaturePreferenceFragmentTest {
             // do nothing
         }
 
+        @SuppressWarnings("MissingSuperCall")
         @Override
         public void onDestroyView() {
             // do nothing

@@ -789,7 +789,8 @@
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Accroître le niveau de journalisation de la pile de la CCP"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Journal de débogage détaillé des fournisseurs CCP"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Incluez les journaux supplémentaires du fournisseur propres à l\'appareil dans les rapports de bogue, qui peuvent contenir des renseignements confidentiels."</string>
-    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"Journal CCP Snoop non filtré d\'ACTA"</string>
+    <!-- no translation found for nfc_snoop_log_title (1576197495976952388) -->
+    <skip />
     <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Capturez les détails des paquets CCP, qui peuvent contenir des renseignements confidentiels."</string>
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Redémarrer l\'appareil?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Les détails de la journalisation CCP sont enregistrés à des fins de développement uniquement. Des données CCP supplémentaires sont comprises dans les rapports de bogue, qui peuvent contenir des renseignements confidentiels. Redémarrez votre appareil pour modifier ce paramètre."</string>
@@ -1173,8 +1174,7 @@
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Essayez différents styles, fonds d\'écran, etc."</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Écran de veille"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"écran de veille"</string>
-    <!-- no translation found for screensaver_settings_when_to_dream_bedtime (3279310576803094771) -->
-    <skip />
+    <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Cette fonctionnalité n\'est pas accessible parce que le mode Nuit est activé"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Utiliser l\'écran de veille"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Pendant la charge ou sur la station d\'accueil"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Pendant la charge"</string>
@@ -1465,6 +1465,8 @@
     <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Partager la connexion Internet du téléphone par Bluetooth"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Partage connexion Ethernet"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Partager la connexion Internet du téléphone par connexion Ethernet"</string>
+    <!-- no translation found for ethernet_tethering_subtext (8796744370636115313) -->
+    <skip />
     <string name="tethering_footer_info" msgid="6782375845587483281">"Utilisez un point d\'accès et le partage de connexion pour fournir un accès Internet à d\'autres appareils par l\'intermédiaire de votre connexion cellulaire. Les applications peuvent aussi créer un point d\'accès pour partager du contenu avec d\'autres appareils à proximité."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Utilisez un point d\'accès et le partage de connexion pour fournir un accès Internet à d\'autres appareils par l\'intermédiaire de votre connexion de données Wi-Fi ou cellulaire. Les applications peuvent aussi créer un point d\'accès pour partager du contenu avec d\'autres appareils à proximité."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Aide"</string>
@@ -2694,10 +2696,6 @@
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"Limitation de la consommation de données cellulaires"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"Votre tablette désactivera les données cellulaires lorsqu\'elle atteindra la limite que vous définissez.\n\nComme c\'est votre tablette qui mesure la consommation des données, et que votre fournisseur de services peut utiliser un système de mesure différent, nous vous conseillons d\'utiliser une limite plus basse."</string>
     <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"Votre téléphone désactivera les données cellulaires lorsqu\'il atteindra la limite que vous définissez.\n\nComme c\'est votre téléphone qui mesure la consommation des données, et que votre fournisseur de services peut utiliser un système de mesure différent, nous vous conseillons de définir une limite plus basse."</string>
-    <string name="data_usage_restrict_background_title" msgid="2745551538820692821">"Limiter les données en arrière-plan?"</string>
-    <string name="data_usage_restrict_background" msgid="1893102079135282794">"Si vous limitez les données cellulaires en arrière-plan, certains services et applications ne fonctionneront que si vous êtes connecté au réseau Wi‑Fi."</string>
-    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="5588623586867665419">"Si vous limitez les données cellulaires en arrière-plan, certains services et applications ne fonctionneront que si vous êtes connecté au réseau Wi‑Fi.\n\nCe réglage s\'applique à tous les utilisateurs définis sur cette tablette."</string>
-    <string name="data_usage_restrict_background_multiuser" product="default" msgid="6402714504088590463">"Si vous limitez les données cellulaires en arrière-plan, certains services et applications ne fonctionneront que si vous êtes connecté au réseau Wi‑Fi.\n\nCe réglage s\'applique à tous les utilisateurs définis sur ce téléphone."</string>
     <string name="data_usage_sweep_warning" msgid="2072854703184614828"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"alerte"</font></string>
     <string name="data_usage_sweep_limit" msgid="6947019190890086284"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"limite"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="9065885396147675694">"Applications supprimées"</string>
@@ -2939,8 +2937,10 @@
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (recommandé)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"Messages multimédias"</string>
     <string name="mms_message_summary" msgid="2855847140141698341">"Envoi et réception lorsque les données cellulaires sont désactivées"</string>
-    <string name="data_during_calls_title" msgid="3940276893360429144">"Données durant les appels"</string>
-    <string name="data_during_calls_summary" msgid="2289050189544214759">"Autoriser l\'utilisation de cette carte SIM pour les données cellulaires seulement durant les appels"</string>
+    <!-- no translation found for auto_data_switch_title (5862200603753603464) -->
+    <skip />
+    <!-- no translation found for auto_data_switch_summary (135082667541071789) -->
+    <skip />
     <string name="work_sim_title" msgid="8999872928646924429">"Carte SIM professionnelle"</string>
     <string name="user_restrictions_title" msgid="4068914244980335993">"Accès aux applications et au contenu"</string>
     <string name="user_rename" msgid="8735940847878484249">"RENOMMER"</string>
@@ -2952,15 +2952,10 @@
     <string name="restriction_wifi_config_summary" msgid="920419010472168694">"Autoriser les modifications des paramètres du Wi‑Fi et des données cellulaires"</string>
     <string name="restriction_bluetooth_config_title" msgid="220586273589093821">"Bluetooth"</string>
     <string name="restriction_bluetooth_config_summary" msgid="7558879931011271603">"Autoriser les modifications des associations et des paramètres Bluetooth"</string>
-    <string name="restriction_nfc_enable_title" msgid="525512312298242911">"CCP"</string>
-    <string name="restriction_nfc_enable_summary_config" msgid="8065688740509581028">"Autoriser l\'échange de données lorsque cet appareil (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>) touche un autre appareil CCP"</string>
-    <string name="restriction_nfc_enable_summary" product="tablet" msgid="6397567147629410131">"Autoriser l\'échange de données lorsque la tablette est en contact avec un autre appareil"</string>
-    <string name="restriction_nfc_enable_summary" product="default" msgid="3331800894734678808">"Autoriser l\'échange de données lorsque le téléphone est en contact avecun autre appareil"</string>
     <string name="restriction_location_enable_title" msgid="4872281754836538066">"Position"</string>
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Autoriser les applications à utiliser vos données de localisation"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Précédent"</string>
     <string name="wizard_next" msgid="3884832431439072471">"SUIVANT"</string>
-    <string name="wizard_back_portable" msgid="5315939180781404882">"Passer à l\'espace externe"</string>
     <string name="wizard_back_adoptable" msgid="1447814356855134183">"Formater autrement"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_settings_title" msgid="8392862852842113531">"Cartes SIM"</string>
@@ -3412,10 +3407,8 @@
     <string name="notif_listener_excluded_app_summary" msgid="2914567678047195396">"Modifier les paramètres pour chaque application qui envoie des notifications"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Applications affichées sur l\'appareil"</string>
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Cette application ne prend pas en charge les paramètres améliorés"</string>
-    <!-- no translation found for notif_listener_more_settings (1348409392307208921) -->
-    <skip />
-    <!-- no translation found for notif_listener_more_settings_desc (7995492074281663658) -->
-    <skip />
+    <string name="notif_listener_more_settings" msgid="1348409392307208921">"Plus de paramètres"</string>
+    <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Plus de paramètres sont accessibles dans cette application"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Services d\'assistance pour la réalité virtuelle"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Aucune demande d\'exécution en tant que services d\'assistance pour la réalité virtuelle n\'a été envoyée pour les applications installées."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Autoriser <xliff:g id="SERVICE">%1$s</xliff:g> à accéder au service de réalité virtuelle?"</string>
@@ -3880,6 +3873,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Bloqué par votre fournisseur de crédit"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Consentement parental requis"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Remettez le téléphone à votre parent pour commencer la configuration de ce paramètre"</string>
+    <!-- no translation found for disabled_by_policy_parental_consent (9166060049019018978) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8816296554831532033">"Pour en savoir plus, communiquez avec votre administrateur informatique"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Détails supplémentaires"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Votre administrateur peut surveiller et gérer les applications et les données associées à votre profil professionnel, y compris les paramètres, les autorisations, l\'accès aux contenus de l\'entreprise, l\'activité réseau et les données de localisation de l\'appareil."</string>
@@ -4029,7 +4024,7 @@
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"La limitation de fréquence ShortcutManager a été réinitialisée"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"Gérer les données sur l\'écran de verrouillage"</string>
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Afficher ou masquer le contenu des notifications"</string>
-    <string name="page_tab_title_support" msgid="3235725053332345773">"Astuces et service à la clientèle"</string>
+    <string name="page_tab_title_support" msgid="3235725053332345773">"Astuces et assistance"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"La plus petite largeur"</string>
     <string name="premium_sms_none" msgid="8737045049886416739">"Aucune application installée n\'a demandé l\'accès aux textos payants"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"Les textos de cette catégorie peuvent être payants et s\'ajouter aux factures mensuelles de votre fournisseur de services. Si vous activez l\'autorisation pour une application, vous serez en mesure d\'envoyer des textos payants à l\'aide de cette dernière."</string>
@@ -4325,12 +4320,7 @@
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Changements désactivés par défaut"</string>
     <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Aucune application"</string>
     <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Les modifications de compatibilité des applications peuvent uniquement être modifiées pour les applications débogables. Installez une application débogable, puis réessayez."</string>
-    <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Le paramètre n\'est pas compatible avec ce téléphone"</string>
-    <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Le paramètre n\'est pas compatible avec cette tablette"</string>
-    <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Le paramètre n\'est pas compatible avec cet appareil"</string>
-    <string name="disabled_for_user_setting_summary" msgid="9096036019081828639">"Le paramètre ne peut pas être modifié par l\'utilisateur actuel"</string>
     <string name="disabled_dependent_setting_summary" msgid="4508635725315852504">"Dépend d\'un autre paramètre"</string>
-    <string name="unknown_unavailability_setting_summary" msgid="9060213910510360231">"Paramètre non accessible"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Compte"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Nom de l\'appareil"</string>
     <string name="my_device_info_basic_info_category_title" msgid="381963187269356548">"Renseignements généraux"</string>
@@ -4365,7 +4355,6 @@
     <string name="empty_networks_list" msgid="6519489879480673428">"Aucun réseau trouvé."</string>
     <string name="network_query_error" msgid="6406348372070035274">"Impossible de trouver des réseaux. Réessayez."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(interdit)"</string>
-    <string name="no_sim_card" msgid="1497407489810953863">"Aucune carte SIM"</string>
     <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
     <string name="wifi_no_sim_card" msgid="7144290066491585672">"Aucune carte SIM"</string>
     <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Aucune"</string>
@@ -4682,6 +4671,10 @@
     <string name="wifi_scan_change" msgid="8438320311511852918">"Changer"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> : <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Connexion active"</string>
+    <!-- no translation found for mobile_data_temp_connection_active (3430470299756236413) -->
+    <skip />
+    <!-- no translation found for mobile_data_temp_using (5211002380149434155) -->
+    <skip />
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Aucune connexion"</string>
     <string name="mobile_data_off_summary" msgid="1884248776904165539">"Aucune connexion auto. des données cellulaires"</string>
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Désactiver les données cellulaires?"</string>
@@ -4836,14 +4829,4 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Mot de passe incorrect"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Pour commencer à écouter, centrez le code QR ci-dessous"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Le format du code QR est incorrect"</string>
-    <string name="mobile_bundled_apps" msgid="2489314376883098549">"Applications mobiles groupées"</string>
-    <string name="mobile_bundled_apps_title" msgid="412673130389310169">"Applications mobiles groupées"</string>
-    <string name="mobile_bundled_apps_details_title" msgid="8188809835544175997">"Informations sur la transparence des applications mobiles groupées"</string>
-    <string name="mobile_bundled_apps_details_contains_ad_title" msgid="6686779781266120431">"Contient des annonces"</string>
-    <string name="mobile_bundled_apps_details_developer_info_title" msgid="7072157231818463124">"Informations sur le(s) développeur(s)"</string>
-    <string name="mobile_bundled_apps_details_contact_title" msgid="7799887880660497263">"Coordonnées"</string>
-    <string name="mobile_bundled_apps_details_description_title" msgid="2495042345893715099">"Description"</string>
-    <string name="mobile_bundled_apps_details_privacy_policy_title" msgid="4168169849635442576">"Politique de confidentialité"</string>
-    <string name="mobile_bundled_apps_details_category_title" msgid="2545221739515984464">"Catégorie"</string>
-    <string name="app_install_details_mba_summary" msgid="3279659565492150118">"Application mobile groupée"</string>
 </resources>

@@ -402,8 +402,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
      * @return the summary for the current state of whether the app associated with the given
      * {@code packageName} is allowed to interact across profiles.
      */
-    public static CharSequence getPreferenceSummary(
-            Context context, String packageName) {
+    public static String getPreferenceSummary(Context context, String packageName) {
         return context.getString(isInteractAcrossProfilesEnabled(context, packageName)
                 ? R.string.interact_across_profiles_summary_allowed
                 : R.string.interact_across_profiles_summary_not_allowed);

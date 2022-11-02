@@ -19,11 +19,8 @@ import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpd
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.net.Uri;
-import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.SearchIndexableResource;
@@ -66,10 +63,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             new BatteryHistoryLoaderCallbacks();
 
     private boolean mIsChartDataLoaded = false;
-    private boolean mIsChartGraphEnabled = false;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private BatteryChartPreferenceController mBatteryChartPreferenceController;
-    private BatteryAppListPreferenceController mBatteryAppListPreferenceController;
 
     private final ContentObserver mBatteryObserver =
             new ContentObserver(new Handler()) {
@@ -88,11 +83,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         final Context context = getContext();
         refreshFeatureFlag(context);
         mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_GRAPH);
-        if (mIsChartGraphEnabled) {
-            setBatteryChartPreferenceController();
-        } else {
-            updateHistPrefSummary(context);
-        }
+        setBatteryChartPreferenceController();
     }
 
     @Override
@@ -123,7 +114,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         super.onPause();
         // Resets the flag to reload usage data in onResume() callback.
         mIsChartDataLoaded = false;
-        final Uri uri = mPowerUsageFeatureProvider.getBatteryHistoryUri();
+        final Uri uri = DatabaseUtils.BATTERY_CONTENT_URI;
         if (uri != null) {
             getContext().getContentResolver().unregisterContentObserver(mBatteryObserver);
         }
@@ -132,7 +123,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     @Override
     public void onResume() {
         super.onResume();
-        final Uri uri = mPowerUsageFeatureProvider.getBatteryHistoryUri();
+        final Uri uri = DatabaseUtils.BATTERY_CONTENT_URI;
         if (uri != null) {
             getContext().getContentResolver().registerContentObserver(
                     uri, /*notifyForDescendants*/ true, mBatteryObserver);
@@ -143,19 +134,11 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         refreshFeatureFlag(context);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        // Creates based on the chart design is enabled or not.
-        if (mIsChartGraphEnabled) {
-            mBatteryChartPreferenceController =
-                    new BatteryChartPreferenceController(context, KEY_APP_LIST,
-                            getSettingsLifecycle(), (SettingsActivity) getActivity(), this);
-            controllers.add(mBatteryChartPreferenceController);
-            setBatteryChartPreferenceController();
-        } else {
-            mBatteryAppListPreferenceController =
-                    new BatteryAppListPreferenceController(context, KEY_APP_LIST,
-                            getSettingsLifecycle(), (SettingsActivity) getActivity(), this);
-            controllers.add(mBatteryAppListPreferenceController);
-        }
+        mBatteryChartPreferenceController =
+                new BatteryChartPreferenceController(context, KEY_APP_LIST,
+                        getSettingsLifecycle(), (SettingsActivity) getActivity(), this);
+        controllers.add(mBatteryChartPreferenceController);
+        setBatteryChartPreferenceController();
         return controllers;
     }
 
@@ -171,11 +154,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             return;
         }
         updatePreference(mHistPref);
-        if (mBatteryAppListPreferenceController != null && mBatteryUsageStats != null) {
-            updateHistPrefSummary(context);
-            mBatteryAppListPreferenceController.refreshAppListGroup(
-                    mBatteryUsageStats, /* showAllApps */true);
-        }
         if (mBatteryChartPreferenceController != null && mBatteryHistoryMap != null) {
             mBatteryChartPreferenceController.setBatteryHistoryMap(mBatteryHistoryMap);
         }
@@ -185,25 +163,10 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     protected void restartBatteryStatsLoader(int refreshType) {
         final Bundle bundle = new Bundle();
         bundle.putInt(KEY_REFRESH_TYPE, refreshType);
-        // Uses customized battery history loader if chart design is enabled.
-        if (mIsChartGraphEnabled && !mIsChartDataLoaded) {
+        if (!mIsChartDataLoaded) {
             mIsChartDataLoaded = true;
             getLoaderManager().restartLoader(LOADER_BATTERY_USAGE_STATS, bundle,
                     mBatteryHistoryLoaderCallbacks);
-        } else if (!mIsChartGraphEnabled) {
-            super.restartBatteryStatsLoader(refreshType);
-        }
-    }
-
-    private void updateHistPrefSummary(Context context) {
-        final Intent batteryIntent =
-                context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        final boolean plugged = batteryIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) != 0;
-        if (mPowerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(context) && !plugged) {
-            mHistPref.setBottomSummary(
-                    mPowerUsageFeatureProvider.getAdvancedUsageScreenInfoString());
-        } else {
-            mHistPref.hideBottomSummary();
         }
     }
 
@@ -211,7 +174,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         if (mPowerUsageFeatureProvider == null) {
             mPowerUsageFeatureProvider = FeatureFactory.getFactory(context)
                     .getPowerUsageFeatureProvider(context);
-            mIsChartGraphEnabled = mPowerUsageFeatureProvider.isChartGraphEnabled(context);
         }
     }
 
