@@ -55,13 +55,17 @@
                     android:src="@drawable/sfps_enroll_finish" />
             </com.google.android.setupdesign.view.FillContentLayout>
 
-            <!-- Added to align elements with fingerprint_enroll_enrolling_base -->
-            <TextView
-                style="@style/TextAppearance.ErrorText"
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <com.android.settings.biometrics.fingerprint.FingerprintRequireScreenOnToAuthToggle
+                style="@style/SudSwitchStyle"
+                android:id="@+id/require_screen_on_to_auth_toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
-                android:visibility="invisible" />
+                android:layout_gravity="center_horizontal|bottom" />
 
         </LinearLayout>
 
