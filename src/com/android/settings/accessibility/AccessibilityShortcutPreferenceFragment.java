@@ -208,9 +208,17 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
                 setupEditShortcutDialog(dialog);
                 return dialog;
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
-                dialog = AccessibilityGestureNavigationTutorial
-                        .createAccessibilityTutorialDialog(getPrefContext(),
-                                getUserShortcutTypes(), this::callOnTutorialDialogButtonClicked);
+                if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+                    dialog = AccessibilityGestureNavigationTutorial
+                            .createAccessibilityTutorialDialogForSetupWizard(
+                                    getPrefContext(), getUserShortcutTypes(),
+                                    this::callOnTutorialDialogButtonClicked);
+                } else {
+                    dialog = AccessibilityGestureNavigationTutorial
+                            .createAccessibilityTutorialDialog(
+                                    getPrefContext(), getUserShortcutTypes(),
+                                    this::callOnTutorialDialogButtonClicked);
+                }
                 dialog.setCanceledOnTouchOutside(false);
                 return dialog;
             default:

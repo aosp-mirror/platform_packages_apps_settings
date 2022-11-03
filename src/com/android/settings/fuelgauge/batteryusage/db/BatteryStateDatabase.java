@@ -40,7 +40,7 @@ public abstract class BatteryStateDatabase extends RoomDatabase {
         if (sBatteryStateDatabase == null) {
             sBatteryStateDatabase =
                     Room.databaseBuilder(
-                                    context, BatteryStateDatabase.class, "battery-usage-db-v1")
+                                    context, BatteryStateDatabase.class, "battery-usage-db-v5")
                             // Allows accessing data in the main thread for dumping bugreport.
                             .allowMainThreadQueries()
                             .fallbackToDestructiveMigration()

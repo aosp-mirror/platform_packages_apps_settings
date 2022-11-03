@@ -57,7 +57,9 @@ public final class DatabaseUtils {
     /** Clear memory threshold for device booting phase. **/
     private static final long CLEAR_MEMORY_THRESHOLD_MS = Duration.ofMinutes(5).toMillis();
     private static final long CLEAR_MEMORY_DELAYED_MS = Duration.ofSeconds(2).toMillis();
-    private static final long DATA_RETENTION_INTERVAL_MS = Duration.ofDays(9).toMillis();
+
+    @VisibleForTesting
+    static final int DATA_RETENTION_INTERVAL_DAY = 9;
 
     /** An authority name of the battery content provider. */
     public static final String AUTHORITY = "com.android.settings.battery.usage.provider";
@@ -65,8 +67,6 @@ public final class DatabaseUtils {
     public static final String BATTERY_STATE_TABLE = "BatteryState";
     /** A class name for battery usage data provider. */
     public static final String SETTINGS_PACKAGE_PATH = "com.android.settings";
-    public static final String BATTERY_PROVIDER_CLASS_PATH =
-            "com.android.settings.fuelgauge.batteryusage.BatteryUsageContentProvider";
 
     /** A content URI to access battery usage states data. */
     public static final Uri BATTERY_CONTENT_URI =
@@ -133,11 +133,18 @@ public final class DatabaseUtils {
                 BatteryStateDatabase
                         .getInstance(context.getApplicationContext())
                         .batteryStateDao()
-                        .clearAllBefore(Clock.systemUTC().millis() - DATA_RETENTION_INTERVAL_MS);
+                        .clearAllBefore(Clock.systemUTC().millis()
+                                - Duration.ofDays(DATA_RETENTION_INTERVAL_DAY).toMillis());
             } catch (RuntimeException e) {
                 Log.e(TAG, "clearAllBefore() failed", e);
             }
         });
+    }
+
+    /** Gets the latest sticky battery intent from framework. */
+    static Intent getBatteryIntent(Context context) {
+        return context.registerReceiver(
+                /*receiver=*/ null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
     }
 
     static List<ContentValues> sendBatteryEntryData(
@@ -297,12 +304,6 @@ public final class DatabaseUtils {
             }
         }
         return resultMap;
-    }
-
-    /** Gets the latest sticky battery intent from framework. */
-    private static Intent getBatteryIntent(Context context) {
-        return context.registerReceiver(
-                /*receiver=*/ null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
     }
 
     private static int getBatteryLevel(Intent intent) {

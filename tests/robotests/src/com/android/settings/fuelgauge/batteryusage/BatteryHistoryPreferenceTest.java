@@ -15,10 +15,6 @@
  */
 package com.android.settings.fuelgauge.batteryusage;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -32,7 +28,6 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryInfo;
-import com.android.settings.widget.UsageView;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,8 +39,6 @@ import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class BatteryHistoryPreferenceTest {
-
-    private static final String TEST_STRING = "test";
     @Mock
     private PreferenceViewHolder mViewHolder;
     @Mock
@@ -53,9 +46,9 @@ public class BatteryHistoryPreferenceTest {
     @Mock
     private TextView mTextView;
     @Mock
-    private UsageView mUsageView;
+    private BatteryChartView mDailyChartView;
     @Mock
-    private View mLabelView;
+    private BatteryChartView mHourlyChartView;
     private BatteryHistoryPreference mBatteryHistoryPreference;
 
     @Before
@@ -63,44 +56,23 @@ public class BatteryHistoryPreferenceTest {
         MockitoAnnotations.initMocks(this);
         final Context context = RuntimeEnvironment.application;
         final View itemView =
-                LayoutInflater.from(context).inflate(R.layout.battery_usage_graph, null);
+                LayoutInflater.from(context).inflate(R.layout.battery_chart_graph, null);
 
         mBatteryHistoryPreference = new BatteryHistoryPreference(context, null);
         mBatteryHistoryPreference.mBatteryInfo = mBatteryInfo;
         mViewHolder = spy(PreferenceViewHolder.createInstanceForTests(itemView));
-        when(mViewHolder.findViewById(R.id.battery_usage)).thenReturn(mUsageView);
-        when(mViewHolder.findViewById(R.id.charge)).thenReturn(mTextView);
-        when(mUsageView.findViewById(anyInt())).thenReturn(mLabelView);
+        when(mViewHolder.findViewById(R.id.daily_battery_chart)).thenReturn(mDailyChartView);
+        when(mViewHolder.findViewById(R.id.hourly_battery_chart)).thenReturn(mHourlyChartView);
+        when(mViewHolder.findViewById(R.id.companion_text)).thenReturn(mTextView);
     }
 
     @Test
     public void testOnBindViewHolder_updateBatteryUsage() {
         mBatteryHistoryPreference.onBindViewHolder(mViewHolder);
 
-        verify(mViewHolder).findViewById(R.id.battery_usage);
-        verify(mTextView).setText(nullable(String.class));
-        verify(mBatteryInfo).bindHistory(mUsageView);
-    }
-
-    @Test
-    public void testSetBottomSummary_updatesBottomSummaryTextIfSet() {
-        mBatteryHistoryPreference.setBottomSummary(TEST_STRING);
-        mBatteryHistoryPreference.onBindViewHolder(mViewHolder);
-
-        TextView view = (TextView) mViewHolder.findViewById(R.id.bottom_summary);
-        assertThat(view.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(view.getText()).isEqualTo(TEST_STRING);
-        assertThat(mBatteryHistoryPreference.mHideSummary).isFalse();
-    }
-
-    @Test
-    public void testSetBottomSummary_leavesBottomSummaryTextBlankIfNotSet() {
-        mBatteryHistoryPreference.hideBottomSummary();
-        mBatteryHistoryPreference.onBindViewHolder(mViewHolder);
-
-        TextView view = (TextView) mViewHolder.findViewById(R.id.bottom_summary);
-        assertThat(view.getVisibility()).isEqualTo(View.GONE);
-        assertThat(view.getText()).isEqualTo("");
-        assertThat(mBatteryHistoryPreference.mHideSummary).isTrue();
+        verify(mViewHolder).findViewById(R.id.daily_battery_chart);
+        verify(mDailyChartView).setCompanionTextView(mTextView);
+        verify(mViewHolder).findViewById(R.id.hourly_battery_chart);
+        verify(mHourlyChartView).setCompanionTextView(mTextView);
     }
 }

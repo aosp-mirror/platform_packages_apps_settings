@@ -25,6 +25,7 @@ import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -44,15 +45,23 @@ import java.util.List;
 public class FingerprintEnrollFinish extends BiometricEnrollBase {
 
     private static final String TAG = "FingerprintEnrollFinish";
+    private static final String KEY_REQUIRE_SCREEN_ON_TO_AUTH = "require_screen_on_to_auth_toggle";
     private static final String ACTION_FINGERPRINT_SETTINGS =
             "android.settings.FINGERPRINT_SETTINGS";
     @VisibleForTesting
     static final String FINGERPRINT_SUGGESTION_ACTIVITY =
             "com.android.settings.SetupFingerprintSuggestionActivity";
+
     private FingerprintManager mFingerprintManager;
+
+    private FingerprintSettingsRequireScreenOnToAuthPreferenceController
+            mRequireScreenOnToAuthPreferenceController;
+    private FingerprintRequireScreenOnToAuthToggle mRequireScreenOnToAuthToggle;
     private boolean mCanAssumeSfps;
 
     private boolean mIsAddAnotherOrFinish;
+
+    private CompoundButton.OnCheckedChangeListener mRequireScreenOnToAuthToggleListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +72,11 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
         mCanAssumeSfps = props != null && props.size() == 1 && props.get(0).isAnySidefpsType();
         if (mCanAssumeSfps) {
             setContentView(R.layout.sfps_enroll_finish);
+            mRequireScreenOnToAuthPreferenceController =
+                    new FingerprintSettingsRequireScreenOnToAuthPreferenceController(
+                            getApplicationContext(),
+                            KEY_REQUIRE_SCREEN_ON_TO_AUTH
+                    );
         } else {
             setContentView(R.layout.fingerprint_enroll_finish);
         }
@@ -90,6 +104,20 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
                         .setTheme(R.style.SudGlifButton_Primary)
                         .build()
         );
+
+        if (mCanAssumeSfps) {
+            mRequireScreenOnToAuthToggleListener =
+                (buttonView, isChecked) -> {
+                    mRequireScreenOnToAuthPreferenceController.setChecked(isChecked);
+                };
+            mRequireScreenOnToAuthToggle = findViewById(R.id.require_screen_on_to_auth_toggle);
+            mRequireScreenOnToAuthToggle.setChecked(
+            mRequireScreenOnToAuthPreferenceController.isChecked());
+            mRequireScreenOnToAuthToggle.setListener(mRequireScreenOnToAuthToggleListener);
+            mRequireScreenOnToAuthToggle.setOnClickListener(v -> {
+                mRequireScreenOnToAuthToggle.getSwitch().toggle();
+            });
+        }
     }
 
     @Override
@@ -103,6 +131,12 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     @Override
     protected void onResume() {
         super.onResume();
+        if (mCanAssumeSfps) {
+            mRequireScreenOnToAuthToggleListener.onCheckedChanged(
+                    mRequireScreenOnToAuthToggle.getSwitch(),
+                    mRequireScreenOnToAuthToggle.isChecked()
+            );
+        }
 
         FooterButton addButton = mFooterBarMixin.getSecondaryButton();
 
