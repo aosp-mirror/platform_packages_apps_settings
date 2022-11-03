@@ -98,7 +98,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         // TODO: notification_settings
         AppPermissionPreference(app)
         AppStoragePreference(app)
-        // TODO: instant_app_launch_supported_domain_urls
+        InstantAppDomainsPreference(app)
         AppDataUsagePreference(app)
         AppTimeSpentPreference(app)
         AppBatteryPreference(app)

@@ -23,7 +23,6 @@ import android.app.settings.SettingsEnums;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
 
@@ -35,6 +34,8 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
+
+import java.util.Set;
 
 /**
  * Display the Open Supported Links page. Allow users choose what kind supported links they need.
@@ -195,7 +196,7 @@ public class OpenSupportedLinks extends AppInfoWithHeader implements
 
     @VisibleForTesting
     void addLinksToFooter(FooterPreference footer) {
-        final ArraySet<String> result = Utils.getHandledDomains(mPackageManager, mPackageName);
+        final Set<String> result = Utils.getHandledDomains(mPackageManager, mPackageName);
         if (result.isEmpty()) {
             Log.w(TAG, "Can't find any app links.");
             return;
