@@ -39,6 +39,7 @@ import android.util.Log;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.mobile.dataservice.DataServiceUtils;
 import com.android.settingslib.mobile.dataservice.MobileNetworkDatabase;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoDao;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
@@ -49,6 +50,7 @@ import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -98,21 +100,29 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
 
     public static MobileNetworkRepository create(Context context,
             MobileNetworkCallback mobileNetworkCallback) {
-        return new MobileNetworkRepository(context, mobileNetworkCallback);
+        return new MobileNetworkRepository(context, mobileNetworkCallback,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
     }
 
-    private MobileNetworkRepository(Context context, MobileNetworkCallback mobileNetworkCallback) {
+    public static MobileNetworkRepository createBySubId(Context context,
+            MobileNetworkCallback mobileNetworkCallback, int subId) {
+        return new MobileNetworkRepository(context, mobileNetworkCallback, subId);
+    }
+
+    private MobileNetworkRepository(Context context, MobileNetworkCallback mobileNetworkCallback,
+            int subId) {
+        mSubId = subId;
         mContext = context;
-        mCallback = mobileNetworkCallback;
         mMobileNetworkDatabase = MobileNetworkDatabase.getInstance(context);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_MOBILE_NETWORK_DB_CREATED);
+        mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
+        mCallback = mobileNetworkCallback;
         mSubscriptionInfoDao = mMobileNetworkDatabase.mSubscriptionInfoDao();
         mUiccInfoDao = mMobileNetworkDatabase.mUiccInfoDao();
         mMobileNetworkInfoDao = mMobileNetworkDatabase.mMobileNetworkInfoDao();
-        mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mAirplaneModeObserver = new AirplaneModeObserver(new Handler(Looper.getMainLooper()));
         mAirplaneModeSettingUri = Settings.Global.getUriFor(Settings.Global.AIRPLANE_MODE_ON);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_MOBILE_NETWORK_DB_CREATED);
         mFilter.addAction(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED);
         mFilter.addAction(SubscriptionManager.ACTION_DEFAULT_SUBSCRIPTION_CHANGED);
     }
@@ -205,6 +215,10 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         return mSubscriptionInfoDao.querySubInfoById(subId);
     }
 
+    public MobileNetworkInfoEntity queryMobileNetworkInfoBySubId(String subId) {
+        return mMobileNetworkInfoDao.queryMobileNetworkInfoBySubId(subId);
+    }
+
     public int getSubInfosCount() {
         return mSubscriptionInfoDao.count();
     }
@@ -222,26 +236,26 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         for (int i = 0; i < uiccSlotInfos.length; i++) {
             UiccSlotInfo curSlotInfo = uiccSlotInfos[i];
             if (curSlotInfo.getCardStateInfo() == CARD_STATE_INFO_PRESENT) {
+                final int index = i;
                 mIsEuicc = curSlotInfo.getIsEuicc();
                 mCardState = curSlotInfo.getCardStateInfo();
                 mIsRemovable = curSlotInfo.isRemovable();
                 mCardId = subInfo.getCardId();
 
                 Collection<UiccPortInfo> uiccPortInfos = curSlotInfo.getPorts();
-                for (UiccPortInfo portInfo : uiccPortInfos) {
+                uiccPortInfos.forEach(portInfo -> {
                     if (portInfo.getPortIndex() == subInfo.getPortIndex()
                             && portInfo.getLogicalSlotIndex() == subInfo.getSimSlotIndex()) {
-                        mPhysicalSlotIndex = i;
+                        mPhysicalSlotIndex = index;
                         mLogicalSlotIndex = portInfo.getLogicalSlotIndex();
                         mIsActive = portInfo.isActive();
                         mPortIndex = portInfo.getPortIndex();
-                        break;
                     } else if (DEBUG) {
                         Log.d(TAG,
                                 "Can not get port index and physicalSlotIndex for subId "
                                         + mSubId);
                     }
-                }
+                });
                 if (mPhysicalSlotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
                     break;
                 }
@@ -398,7 +412,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 MobileNetworkUtils.shouldDisplayNetworkSelectOptions(context, mSubId),
                 MobileNetworkUtils.isTdscdmaSupported(context, mSubId),
                 MobileNetworkUtils.activeNetworkIsCellular(context),
-                SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)
+                SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager),
+                mTelephonyManager.isDataRoamingEnabled()
         );
     }
 
@@ -446,9 +461,10 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             }
 
             if (!mSubscriptionInfoMap.isEmpty()) {
-                mSubscriptionInfoMap.forEach((key, value) -> {
-                    deleteAllInfoBySubId(String.valueOf(key));
-                });
+                Iterator<Integer> iterator = mSubscriptionInfoMap.keySet().iterator();
+                while (iterator.hasNext()) {
+                    deleteAllInfoBySubId(String.valueOf(iterator.next()));
+                }
             }
         }
     }

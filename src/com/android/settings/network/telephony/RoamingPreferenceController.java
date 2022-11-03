@@ -16,6 +16,9 @@
 
 package com.android.settings.network.telephony;
 
+import static androidx.lifecycle.Lifecycle.Event.ON_START;
+import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
+
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.provider.Settings;
@@ -25,21 +28,31 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.network.GlobalSettingsChangeListener;
+import com.android.settings.network.MobileNetworkRepository;
 import com.android.settingslib.RestrictedSwitchPreference;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnStart;
-import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.mobile.dataservice.DataServiceUtils;
+import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
+import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
+import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Preference controller for "Roaming"
  */
 public class RoamingPreferenceController extends TelephonyTogglePreferenceController implements
-        LifecycleObserver, OnStart, OnStop {
+        LifecycleObserver, MobileNetworkRepository.MobileNetworkCallback {
 
     private static final String TAG = "RoamingController";
     private static final String DIALOG_TAG = "MobileDataDialog";
@@ -47,6 +60,9 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
     private RestrictedSwitchPreference mSwitchPreference;
     private TelephonyManager mTelephonyManager;
     private CarrierConfigManager mCarrierConfigManager;
+    protected MobileNetworkRepository mMobileNetworkRepository;
+    protected LifecycleOwner mLifecycleOwner;
+    private List<MobileNetworkInfoEntity> mMobileNetworkInfoEntityList = new ArrayList<>();
 
     /**
      * There're 2 listeners both activated at the same time.
@@ -59,10 +75,18 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
 
     @VisibleForTesting
     FragmentManager mFragmentManager;
+    MobileNetworkInfoEntity mMobileNetworkInfoEntity;
 
-    public RoamingPreferenceController(Context context, String key) {
+    public RoamingPreferenceController(Context context, String key, Lifecycle lifecycle,
+            LifecycleOwner lifecycleOwner, int subId) {
         super(context, key);
+        mSubId = subId;
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
+        mMobileNetworkRepository = MobileNetworkRepository.createBySubId(context, this, mSubId);
+        mLifecycleOwner = lifecycleOwner;
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
     }
 
     @Override
@@ -75,8 +99,9 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
         return AVAILABLE;
     }
 
-    @Override
+    @OnLifecycleEvent(ON_START)
     public void onStart() {
+        mMobileNetworkRepository.addRegister(mLifecycleOwner);
         if (mListener == null) {
             mListener = new GlobalSettingsChangeListener(mContext,
                     Settings.Global.DATA_ROAMING) {
@@ -100,8 +125,9 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
         };
     }
 
-    @Override
+    @OnLifecycleEvent(ON_STOP)
     public void onStop() {
+        mMobileNetworkRepository.removeRegister();
         stopMonitor();
         stopMonitorSubIdSpecific();
     }
@@ -114,7 +140,7 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
+        return mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 ? AVAILABLE
                 : AVAILABLE_UNSEARCHABLE;
     }
@@ -135,19 +161,26 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        final RestrictedSwitchPreference switchPreference = (RestrictedSwitchPreference) preference;
-        if (!switchPreference.isDisabledByAdmin()) {
-            switchPreference.setEnabled(mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-            switchPreference.setChecked(isChecked());
+        mSwitchPreference = (RestrictedSwitchPreference) preference;
+        update();
+    }
+
+    private void update() {
+        if (mSwitchPreference == null) {
+            return;
+        }
+        if (!mSwitchPreference.isDisabledByAdmin()) {
+            mSwitchPreference.setEnabled(mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+            mSwitchPreference.setChecked(isChecked());
         }
     }
 
     @VisibleForTesting
     boolean isDialogNeeded() {
-        final boolean isRoamingEnabled = mTelephonyManager.isDataRoamingEnabled();
+        final boolean isRoamingEnabled = mMobileNetworkInfoEntity == null ? false
+                : mMobileNetworkInfoEntity.isDataRoamingEnabled;
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(
                 mSubId);
-
         // Need dialog if we need to turn on roaming and the roaming charge indication is allowed
         if (!isRoamingEnabled && (carrierConfig == null || !carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_DISABLE_CHARGE_INDICATION_BOOL))) {
@@ -158,12 +191,14 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
 
     @Override
     public boolean isChecked() {
-        return mTelephonyManager.isDataRoamingEnabled();
+        return mMobileNetworkInfoEntity == null ? false
+                : mMobileNetworkInfoEntity.isDataRoamingEnabled;
     }
 
-    public void init(FragmentManager fragmentManager, int subId) {
+    public void init(FragmentManager fragmentManager, int subId, MobileNetworkInfoEntity entity) {
         mFragmentManager = fragmentManager;
         mSubId = subId;
+        mMobileNetworkInfoEntity = entity;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
         if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return;
@@ -195,6 +230,44 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
         if (mListenerForSubId != null) {
             mListenerForSubId.close();
             mListenerForSubId = null;
+        }
+    }
+
+    @VisibleForTesting
+    public void setMobileNetworkInfoEntity(MobileNetworkInfoEntity mobileNetworkInfoEntity) {
+        mMobileNetworkInfoEntity = mobileNetworkInfoEntity;
+    }
+
+    @Override
+    public void onAirplaneModeChanged(boolean airplaneModeEnabled) {
+    }
+
+    @Override
+    public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
+    }
+
+    @Override
+    public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
+    }
+
+    @Override
+    public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
+    }
+
+    @Override
+    public void onAllMobileNetworkInfoChanged(
+            List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
+        if (DataServiceUtils.shouldUpdateEntityList(mMobileNetworkInfoEntityList,
+                mobileNetworkInfoEntityList)) {
+            mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
+            mMobileNetworkInfoEntityList.forEach(entity -> {
+                if (Integer.parseInt(entity.subId) == mSubId) {
+                    mMobileNetworkInfoEntity = entity;
+                    update();
+                    refreshSummary(mSwitchPreference);
+                    return;
+                }
+            });
         }
     }
 }
