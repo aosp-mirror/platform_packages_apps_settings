@@ -117,6 +117,7 @@ import com.android.settingslib.widget.AdaptiveIcon;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 public final class Utils extends com.android.settingslib.Utils {
 
@@ -589,7 +590,9 @@ public final class Utils extends com.android.settingslib.Utils {
         return inflater.inflate(resId, parent, false);
     }
 
-    public static ArraySet<String> getHandledDomains(PackageManager pm, String packageName) {
+    /** Gets all the domains that the given package could handled. */
+    @NonNull
+    public static Set<String> getHandledDomains(PackageManager pm, String packageName) {
         final List<IntentFilterVerificationInfo> iviList =
                 pm.getIntentFilterVerifications(packageName);
         final List<IntentFilter> filters = pm.getAllIntentFilters(packageName);
@@ -597,9 +600,7 @@ public final class Utils extends com.android.settingslib.Utils {
         final ArraySet<String> result = new ArraySet<>();
         if (iviList != null && iviList.size() > 0) {
             for (IntentFilterVerificationInfo ivi : iviList) {
-                for (String host : ivi.getDomains()) {
-                    result.add(host);
-                }
+                result.addAll(ivi.getDomains());
             }
         }
         if (filters != null && filters.size() > 0) {

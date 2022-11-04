@@ -22,6 +22,7 @@ import android.os.AsyncTask;
 import android.os.BatteryUsageStats;
 import android.os.Bundle;
 import android.os.UidBatteryConsumer;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 
@@ -144,7 +145,7 @@ public class AppBatteryPreferenceController extends BasePreferenceController
         } else {
             Log.i(TAG, "Launch : " + mPackageName + " with package name");
             AdvancedPowerUsageDetail.startBatteryDetailPage(mParent.getActivity(), mParent,
-                    mPackageName);
+                    mPackageName, UserHandle.CURRENT);
         }
         return true;
     }
