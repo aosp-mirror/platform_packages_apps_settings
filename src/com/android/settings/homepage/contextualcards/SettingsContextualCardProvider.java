@@ -50,12 +50,6 @@ public class SettingsContextualCardProvider extends ContextualCardProvider {
                         .setCardName(CustomSliceRegistry.LOW_STORAGE_SLICE_URI.toString())
                         .setCardCategory(ContextualCard.Category.IMPORTANT)
                         .build();
-        final ContextualCard batteryFixCard =
-                ContextualCard.newBuilder()
-                        .setSliceUri(CustomSliceRegistry.BATTERY_FIX_SLICE_URI.toString())
-                        .setCardName(CustomSliceRegistry.BATTERY_FIX_SLICE_URI.toString())
-                        .setCardCategory(ContextualCard.Category.IMPORTANT)
-                        .build();
         final String contextualAdaptiveSleepSliceUri =
                 CustomSliceRegistry.CONTEXTUAL_ADAPTIVE_SLEEP_URI.toString();
         final ContextualCard contextualAdaptiveSleepCard =
@@ -80,7 +74,6 @@ public class SettingsContextualCardProvider extends ContextualCardProvider {
                 .addCard(wifiCard)
                 .addCard(connectedDeviceCard)
                 .addCard(lowStorageCard)
-                .addCard(batteryFixCard)
                 .addCard(contextualAdaptiveSleepCard)
                 .addCard(contextualFaceSettingsCard)
                 .addCard(darkThemeCard)
