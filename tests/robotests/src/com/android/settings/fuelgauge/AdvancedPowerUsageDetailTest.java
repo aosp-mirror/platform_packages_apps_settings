@@ -280,8 +280,7 @@ public class AdvancedPowerUsageDetailTest {
 
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
-        assertThat(captor.getValue().toString())
-                .isEqualTo("No usage from last full charge");
+        assertThat(captor.getValue().toString()).isEmpty();
     }
 
     @Test
@@ -571,7 +570,8 @@ public class AdvancedPowerUsageDetailTest {
     public void startBatteryDetailPage_noBatteryUsage_hasBasicData() {
         final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
 
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment, PACKAGE_NAME[0]);
+        AdvancedPowerUsageDetail.startBatteryDetailPage(
+                mActivity, mFragment, PACKAGE_NAME[0], UserHandle.OWNER);
 
         verify(mActivity).startActivity(captor.capture());
 
@@ -589,7 +589,8 @@ public class AdvancedPowerUsageDetailTest {
             PackageManager.NameNotFoundException {
         doReturn(UID).when(mPackageManager).getPackageUid(PACKAGE_NAME[0], 0 /* no flag */);
 
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment, PACKAGE_NAME[0]);
+        AdvancedPowerUsageDetail.startBatteryDetailPage(
+                mActivity, mFragment, PACKAGE_NAME[0], UserHandle.OWNER);
 
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
     }
