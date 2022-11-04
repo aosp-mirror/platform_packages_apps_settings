@@ -52,13 +52,12 @@ class AppDisableButton(
 
     private var openConfirmDialog by mutableStateOf(false)
 
-    fun getActionButton(packageInfo: PackageInfo): ActionButton? {
-        val app = packageInfo.applicationInfo
+    fun getActionButton(app: ApplicationInfo): ActionButton? {
         if (!app.isSystemApp) return null
 
         return when {
             app.enabled && !app.isDisabledUntilUsed -> {
-                disableButton(app = app, enabled = isDisableButtonEnabled(packageInfo))
+                disableButton(app = app, enabled = isDisableButtonEnabled(app))
             }
 
             else -> enableButton()
@@ -68,9 +67,8 @@ class AppDisableButton(
     /**
      * Gets whether a package can be disabled.
      */
-    private fun isDisableButtonEnabled(packageInfo: PackageInfo): Boolean {
-        val packageName = packageInfo.packageName
-        val app = packageInfo.applicationInfo
+    private fun isDisableButtonEnabled(app: ApplicationInfo): Boolean {
+        val packageName = app.packageName
         return when {
             packageName in applicationFeatureProvider.keepEnabledPackages -> false
 
@@ -80,7 +78,7 @@ class AppDisableButton(
 
             // Try to prevent the user from bricking their phone by not allowing disabling of apps
             // signed with the system certificate.
-            SettingsLibUtils.isSystemPackage(resources, packageManager, packageInfo) -> false
+            SettingsLibUtils.isSystemPackage(resources, packageManager, app) -> false
 
             // We don't allow disabling DO/PO on *any* users if it's a system app, because
             // "disabling" is actually "downgrade to the system version + disable", and "downgrade"

@@ -16,7 +16,7 @@
 
 package com.android.settings.spa.app.appinfo
 
-import android.content.pm.PackageInfo
+import android.content.pm.ApplicationInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
@@ -58,17 +58,17 @@ private class AppButtonsPresenter(private val packageInfoPresenter: PackageInfoP
     @Composable
     fun rememberActionsButtons() = remember {
         packageInfoPresenter.flow.map { packageInfo ->
-            if (packageInfo != null) getActionButtons(packageInfo) else emptyList()
+            if (packageInfo != null) getActionButtons(packageInfo.applicationInfo) else emptyList()
         }
     }.collectAsState(initial = emptyList())
 
-    private fun getActionButtons(packageInfo: PackageInfo): List<ActionButton> = listOfNotNull(
-        appLaunchButton.getActionButton(packageInfo),
-        appInstallButton.getActionButton(packageInfo),
-        appDisableButton.getActionButton(packageInfo),
-        appUninstallButton.getActionButton(packageInfo),
-        appClearButton.getActionButton(packageInfo),
-        appForceStopButton.getActionButton(packageInfo),
+    private fun getActionButtons(app: ApplicationInfo): List<ActionButton> = listOfNotNull(
+        appLaunchButton.getActionButton(app),
+        appInstallButton.getActionButton(app),
+        appDisableButton.getActionButton(app),
+        appUninstallButton.getActionButton(app),
+        appClearButton.getActionButton(app),
+        appForceStopButton.getActionButton(app),
     )
 
     @Composable
