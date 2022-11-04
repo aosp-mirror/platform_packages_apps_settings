@@ -24,6 +24,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.PowerManager;
 import android.os.UserManager;
 import android.util.Log;
@@ -125,8 +126,15 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                 // Create an intent triggered by clicking on the
                 // "Clear All Notifications" button
 
+                String bluetoothName;
+                try {
+                    bluetoothName = Utils.findBluetoothPackageName(context);
+                } catch (NameNotFoundException e) {
+                    e.printStackTrace();
+                    return;
+                }
                 Intent deleteIntent = new Intent(BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY);
-                deleteIntent.setPackage("com.android.bluetooth");
+                deleteIntent.setPackage(bluetoothName);
                 deleteIntent.putExtra(BluetoothDevice.EXTRA_DEVICE, mDevice);
                 deleteIntent.putExtra(BluetoothDevice.EXTRA_CONNECTION_ACCESS_RESULT,
                         BluetoothDevice.CONNECTION_ACCESS_NO);
