@@ -19,24 +19,16 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_gravity="start"
     style="?attr/fingerprint_layout_theme">
-
-    <!-- Top divider -->
-    <View
-        android:layout_alignParentTop="true"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
 
     <!-- Title -->
     <com.google.android.setupdesign.view.RichTextView
         android:id="@+id/title"
-        android:paddingHorizontal="8dp"
         android:paddingTop="8dp"
         android:paddingBottom="4dp"
-        android:gravity="start"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/toggle"
+        android:textAlignment="viewStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/security_settings_require_screen_on_to_auth_title"
@@ -47,25 +39,15 @@
     <!-- Subtitle -->
     <TextView
         android:id="@+id/subtitle"
-        android:paddingHorizontal="8dp"
         android:paddingBottom="8dp"
         android:layout_alignParentStart="true"
+        android:textAlignment="viewStart"
         android:layout_toStartOf="@+id/toggle"
         android:layout_below="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/security_settings_require_screen_on_to_auth_description"
         android:textColor="?android:attr/textColorSecondary"/>
-
-    <!-- Vertical divider -->
-    <View
-        android:layout_centerVertical="true"
-        android:layout_alignTop="@+id/toggle"
-        android:layout_alignBottom="@+id/toggle"
-        android:layout_toStartOf="@+id/toggle"
-        android:layout_width="1dp"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/listDivider" />
 
     <!-- Toggle -->
     <Switch
@@ -74,6 +56,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/toggle"
         android:layout_centerVertical="true"
-        android:checked="false"/>
+        android:checked="false"
+        style="@style/SudSwitchStyle"/>
 
 </RelativeLayout>

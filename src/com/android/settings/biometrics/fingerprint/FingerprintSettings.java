@@ -243,7 +243,9 @@ public class FingerprintSettings extends SubSettings {
                     }
 
                     private void updateDialog() {
-                        setRequireScreenOnToAuthVisibility();
+                        if (isSfps()) {
+                            setRequireScreenOnToAuthVisibility();
+                        }
                         RenameDialog renameDialog = (RenameDialog) getFragmentManager().
                                 findFragmentByTag(RenameDialog.class.getName());
                         if (renameDialog != null) {
@@ -455,6 +457,15 @@ public class FingerprintSettings extends SubSettings {
             return false;
         }
 
+        private boolean isSfps() {
+            for (FingerprintSensorPropertiesInternal prop : mSensorProperties) {
+                if (prop.isAnySidefpsType()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         protected void removeFingerprintPreference(int fingerprintId) {
             String name = genKey(fingerprintId);
             Preference prefToRemove = findPreference(name);
@@ -493,6 +504,10 @@ public class FingerprintSettings extends SubSettings {
                         mRequireScreenOnToAuthPreferenceController.setChecked(!isChecked);
                         return true;
                     });
+            mRequireScreenOnToAuthPreference.setVisible(false);
+            if (isSfps()) {
+                setRequireScreenOnToAuthVisibility();
+            }
             setPreferenceScreen(root);
             return root;
         }
