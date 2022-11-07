@@ -88,6 +88,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private Uri mAirplaneModeSettingUri;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private IntentFilter mFilter = new IntentFilter();
+    private MobileDataContentObserver mDataContentObserver;
 
     private int mPhysicalSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
     private int mLogicalSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
@@ -125,6 +126,13 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         mMobileNetworkInfoDao = mMobileNetworkDatabase.mMobileNetworkInfoDao();
         mAirplaneModeObserver = new AirplaneModeObserver(new Handler(Looper.getMainLooper()));
         mAirplaneModeSettingUri = Settings.Global.getUriFor(Settings.Global.AIRPLANE_MODE_ON);
+        mDataContentObserver = new MobileDataContentObserver(
+                new Handler(Looper.getMainLooper()));
+        mDataContentObserver.setOnMobileDataChangedListener(() -> {
+            mExecutor.execute(() -> {
+                insertMobileNetworkInfo(context);
+            });
+        });
         mFilter.addAction(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED);
         mFilter.addAction(SubscriptionManager.ACTION_DEFAULT_SUBSCRIPTION_CHANGED);
         mFilter.addAction(ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED);
@@ -163,6 +171,9 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     public void addRegister(LifecycleOwner lifecycleOwner) {
         mSubscriptionManager.addOnSubscriptionsChangedListener(mContext.getMainExecutor(), this);
         mAirplaneModeObserver.register(mContext);
+        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            mDataContentObserver.register(mContext, mSubId);
+        }
         mContext.registerReceiver(mDataSubscriptionChangedReceiver, mFilter);
         observeAllSubInfo(lifecycleOwner);
         observeAllUiccInfo(lifecycleOwner);
@@ -170,6 +181,9 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     }
 
     public void removeRegister() {
+        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            mDataContentObserver.unRegister(mContext);
+        }
         mAirplaneModeObserver.unRegister(mContext);
         if (mDataSubscriptionChangedReceiver != null) {
             mContext.unregisterReceiver(mDataSubscriptionChangedReceiver);
@@ -404,7 +418,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         return new MobileNetworkInfoEntity(String.valueOf(mSubId),
                 MobileNetworkUtils.isContactDiscoveryEnabled(context, mSubId),
                 MobileNetworkUtils.isContactDiscoveryVisible(context, mSubId),
-                MobileNetworkUtils.isMobileDataEnabled(context),
+                mTelephonyManager.isDataEnabled(),
                 MobileNetworkUtils.isCdmaOptions(context, mSubId),
                 MobileNetworkUtils.isGsmOptions(context, mSubId),
                 MobileNetworkUtils.isWorldMode(context, mSubId),
