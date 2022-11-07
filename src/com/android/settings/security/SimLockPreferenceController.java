@@ -28,6 +28,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.network.SubscriptionUtil;
 
 import java.util.List;
 
@@ -50,6 +51,10 @@ public class SimLockPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
+        if (!SubscriptionUtil.isSimHardwareVisible(mContext)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
         final List<SubscriptionInfo> subInfoList =
                 mSubscriptionManager.getActiveSubscriptionInfoList();
 
