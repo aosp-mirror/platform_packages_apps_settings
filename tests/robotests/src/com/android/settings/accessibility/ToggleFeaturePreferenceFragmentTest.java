@@ -60,6 +60,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
@@ -91,6 +92,7 @@ public class ToggleFeaturePreferenceFragmentTest {
             Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
 
     private TestToggleFeaturePreferenceFragment mFragment;
+    @Spy
     private final Context mContext = ApplicationProvider.getApplicationContext();
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -160,8 +162,10 @@ public class ToggleFeaturePreferenceFragmentTest {
     @Test
     public void updateShortcutPreferenceData_hasValueInSettings_assignToVariable() {
         mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
-        putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, PLACEHOLDER_COMPONENT_NAME.flattenToString());
-        putStringIntoSettings(HARDWARE_SHORTCUT_KEY, PLACEHOLDER_COMPONENT_NAME.flattenToString());
+        putSecureStringIntoSettings(SOFTWARE_SHORTCUT_KEY,
+                PLACEHOLDER_COMPONENT_NAME.flattenToString());
+        putSecureStringIntoSettings(HARDWARE_SHORTCUT_KEY,
+                PLACEHOLDER_COMPONENT_NAME.flattenToString());
 
         mFragment.updateShortcutPreferenceData();
 
@@ -327,8 +331,26 @@ public class ToggleFeaturePreferenceFragmentTest {
         assertThat(accessibilityFooterPreference.getOrder()).isEqualTo(Integer.MAX_VALUE - 1);
     }
 
-    private void putStringIntoSettings(String key, String componentName) {
+    @Test
+    @Config(shadows = ShadowFragment.class)
+    public void writeConfigDefaultIfNeeded_sameCNWithFragAndConfig_SameValueInVolumeSettingsKey() {
+        mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
+        doReturn(PLACEHOLDER_COMPONENT_NAME.flattenToString()).when(mFragment).getString(
+                com.android.internal.R.string.config_defaultAccessibilityService);
+
+        mFragment.writeConfigDefaultAccessibilityServiceIntoShortcutTargetServiceIfNeeded(mContext);
+
+        assertThat(
+                getSecureStringFromSettings(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE))
+                .isEqualTo(PLACEHOLDER_COMPONENT_NAME.flattenToString());
+    }
+
+    private void putSecureStringIntoSettings(String key, String componentName) {
         Settings.Secure.putString(mContext.getContentResolver(), key, componentName);
+    }
+
+    private String getSecureStringFromSettings(String key) {
+        return Settings.Secure.getString(mContext.getContentResolver(), key);
     }
 
     private void putUserShortcutTypeIntoSharedPreference(Context context,
