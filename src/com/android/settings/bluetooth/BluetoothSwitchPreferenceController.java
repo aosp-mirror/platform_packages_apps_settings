@@ -45,6 +45,7 @@ public class BluetoothSwitchPreferenceController
     private SwitchWidgetController mSwitch;
     private Context mContext;
     private FooterPreference mFooterPreference;
+    private boolean mIsAlwaysDiscoverable;
 
     @VisibleForTesting
     AlwaysDiscoverable mAlwaysDiscoverable;
@@ -78,7 +79,9 @@ public class BluetoothSwitchPreferenceController
     @Override
     public void onStart() {
         mBluetoothEnabler.resume(mContext);
-        mAlwaysDiscoverable.start();
+        if (mIsAlwaysDiscoverable) {
+            mAlwaysDiscoverable.start();
+        }
         if (mSwitch != null) {
             updateText(mSwitch.isChecked());
         }
@@ -87,7 +90,19 @@ public class BluetoothSwitchPreferenceController
     @Override
     public void onStop() {
         mBluetoothEnabler.pause();
-        mAlwaysDiscoverable.stop();
+        if (mIsAlwaysDiscoverable) {
+            mAlwaysDiscoverable.stop();
+        }
+    }
+
+    /**
+     * Set whether the device can be discovered. By default the value will be {@code false}.
+     *
+     * @param isAlwaysDiscoverable {@code true} if the device can be discovered,
+     *     otherwise {@code false}
+     */
+    public void setAlwaysDiscoverable(boolean isAlwaysDiscoverable) {
+        mIsAlwaysDiscoverable = isAlwaysDiscoverable;
     }
 
     @Override
