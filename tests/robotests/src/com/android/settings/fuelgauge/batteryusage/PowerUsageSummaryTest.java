@@ -140,7 +140,7 @@ public class PowerUsageSummaryTest {
     public void initPreference_hasCorrectSummary() {
         mFragment.initPreference();
 
-        verify(mBatteryUsagePreference).setSummary("View usage from last full charge");
+        verify(mBatteryUsagePreference).setSummary("View usage since last full charge");
     }
 
     @Test
