@@ -2269,19 +2269,19 @@
     <string name="short_summary_font_size">Make text bigger or smaller</string>
 
     <!-- SIM lock settings title  [CHAR LIMIT=40] -->
-    <string name="sim_lock_settings">SIM card lock settings</string>
-    <!-- Security & screen lock settings screen, SIM card lock setting option name  [CHAR LIMIT=40] -->
-    <string name="sim_lock_settings_category">SIM card lock</string>
-    <!-- SIM card lock settings screen, setting check box label  [CHAR LIMIT=40] -->
-    <string name="sim_pin_toggle">Lock SIM card</string>
+    <string name="sim_lock_settings">SIM lock settings</string>
+    <!-- Security & screen lock settings screen, SIM lock setting option name  [CHAR LIMIT=40] -->
+    <string name="sim_lock_settings_category">SIM lock</string>
+    <!-- SIM lock settings screen, setting check box label  [CHAR LIMIT=40] -->
+    <string name="sim_pin_toggle">Lock SIM</string>
     <!-- SIM card lock settings screen, setting option name to change the SIM PIN  [CHAR LIMIT=40] -->
     <string name="sim_pin_change">Change SIM PIN</string>
     <!-- SIM card lock settings screen, SIM PIN dialog message instruction  [CHAR LIMIT=40] -->
     <string name="sim_enter_pin">SIM PIN</string>
-    <!-- SIM card lock settings screen, SIM PIN dialog message instruction  [CHAR LIMIT=40] -->
-    <string name="sim_enable_sim_lock">Lock SIM card</string>
-    <!-- SIM card lock settings screen, SIM PIN dialog message instruction  [CHAR LIMIT=40] -->
-    <string name="sim_disable_sim_lock">Unlock SIM card</string>
+    <!-- SIM lock settings screen, SIM PIN dialog message instruction  [CHAR LIMIT=40] -->
+    <string name="sim_enable_sim_lock">Lock SIM</string>
+    <!-- SIM lock settings screen, SIM PIN dialog message instruction  [CHAR LIMIT=40] -->
+    <string name="sim_disable_sim_lock">Unlock SIM</string>
     <!-- SIM card lock settings screen, SIM PIN dialog message instruction  [CHAR LIMIT=40] -->
     <string name="sim_enter_old">Old SIM PIN</string>
     <!-- SIM card lock settings screen, SIM PIN dialog message instruction  [CHAR LIMIT=40] -->
@@ -2321,7 +2321,7 @@
         Use <xliff:g id="carrier" example="Verizon">%1$s</xliff:g>
     </string>
     <!-- Title for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=30] -->
-    <string name="sim_preferred_title">Update preferred SIM card?</string>
+    <string name="sim_preferred_title">Update preferred SIM?</string>
     <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
     <string name="sim_preferred_message"><xliff:g id="new_sim">%1$s</xliff:g> is the only SIM in your device. Do you want to use this SIM for mobile data, calls, and SMS messages?</string>
 
@@ -2690,7 +2690,7 @@
     <!-- Confirmation button of dialog to confirm resetting user's app preferences [CHAR LIMIT=NONE] -->
     <string name="erase_euicc_data_button">Erase</string>
     <!-- Erase Euicc dialog and SD card & phone storage settings screen, title for the menu option and checkbox to let user decide whether erase eSIM data together [CHAR LIMIT=50] -->
-    <string name="reset_esim_title">Erase downloaded SIMs</string>
+    <string name="reset_esim_title">Erase eSIMs</string>
     <!-- Erase Euicc dialog and SD card & phone storage settings screen, message for the checkbox to let user decide whether erase eSIM data together [CHAR LIMIT=NONE] -->
     <string name="reset_esim_desc">This won’t cancel any mobile service plans. To download replacement SIMs, contact your carrier.</string>
 
@@ -2699,7 +2699,7 @@
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset settings button -->
     <string name="reset_network_final_desc">Reset all network settings? You can\u2019t undo this action.</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset settings button [CHAR LIMIT=NONE] -->
-    <string name="reset_network_final_desc_esim">Reset all network settings and erase downloaded SIMs? You can\u2019t undo this action.</string>
+    <string name="reset_network_final_desc_esim">Reset all network settings and erase eSIMs? You can\u2019t undo this action.</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Reset settings button -->
     <string name="reset_network_final_button_text">Reset settings</string>
     <!-- Reset settings confirmation screen title [CHAR LIMIT=30] -->
@@ -2711,7 +2711,7 @@
     <!-- Title of the error message shown when error happens during erase eSIM data [CHAR LIMIT=NONE] -->
     <string name="reset_esim_error_title">Can\u2019t erase SIMs</string>
     <!-- Message of the error message shown when error happens during erase eSIM data [CHAR LIMIT=NONE] -->
-    <string name="reset_esim_error_msg">Downloaded SIMs can\u2019t be erased due to an error.\n\nRestart your device and try again.</string>
+    <string name="reset_esim_error_msg">eSIMs can\u2019t be erased due to an error.\n\nRestart your device and try again.</string>
 
     <!-- Main Clear -->
     <!-- Button title to factory data reset the entire device [CHAR LIMIT=NONE] -->
@@ -6278,7 +6278,7 @@
     <string name="regulatory_info_text"></string>
 
     <!-- Title for SIM settings title settings during Setup Wizard.  [CHAR LIMIT=40] -->
-    <string name="sim_settings_title">SIM cards</string>
+    <string name="sim_settings_title">SIMs</string>
     <!-- Message that Cellular data is unavailable.  [CHAR LIMIT=40] -->
     <string name="sim_cellular_data_unavailable">Mobile data is unavailable</string>
     <!-- Message summary that Cellular data is unavailable.  [CHAR LIMIT=60] -->
@@ -6313,8 +6313,8 @@
     <string name="sim_status_title_sim_slot">SIM status (sim slot %1$d)</string>
     <!-- Summary text describing signal strength to the user.  [CHAR LIMIT=60] -->
     <string name="sim_signal_strength"><xliff:g id="dbm">%1$d</xliff:g> dBm <xliff:g id="asu">%2$d</xliff:g> asu</string>
-    <!-- Title for SIM card notification.  [CHAR LIMIT=40] -->
-    <string name="sim_notification_title">SIM cards changed.</string>
+    <!-- Title for SIM notification.  [CHAR LIMIT=40] -->
+    <string name="sim_notification_title">SIMs changed.</string>
     <!-- Message under title informing the user to touch to go to SIM Cards in Settings.  [CHAR LIMIT=40] -->
     <string name="sim_notification_summary">Tap to set up</string>
 
@@ -8013,7 +8013,7 @@
     <!-- [CHAR LIMIT=60] turn eSim deletion confirmation on/off  -->
     <string name="confirm_sim_deletion_title">Confirm SIM deletion</string>
     <!-- [CHAR LIMIT=NONE] eSim deletion confirmation description  -->
-    <string name="confirm_sim_deletion_description">Verify it\u0027s you before erasing a downloaded SIM</string>
+    <string name="confirm_sim_deletion_description">Verify it\u0027s you before erasing a eSIM</string>
 
     <!-- TODO(b/258550150): Finalize all strings in this section and remove translatable="false" -->
     <!-- [CHAR LIMIT=32] Name of Advanced memory protection page in "More Security Settings" and heading of page. -->
@@ -10085,7 +10085,7 @@
     </string>
     <!-- Mobile network setting screen, summary of Mobile data switch preference when the network
          is unavailable, the preference selection will be disabled. [CHAR LIMIT=NONE] -->
-    <string name="mobile_data_settings_summary_unavailable">No SIM card available</string>
+    <string name="mobile_data_settings_summary_unavailable">No SIM available</string>
 
     <!-- Mobile network settings screen, title of item showing the name of the default subscription
      that will be used for calls. This only appears in multi-SIM mode. [CHAR LIMIT=NONE] -->
@@ -10139,10 +10139,10 @@
     <string name="mobile_network_inactive_sim">Inactive / SIM</string>
     <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
          that service is active and is tied to an eSIM profile [CHAR LIMIT=40] -->
-    <string name="mobile_network_active_esim">Active / Downloaded SIM</string>
+    <string name="mobile_network_active_esim">Active / eSIM</string>
     <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
          that service is inactive and is tied to an eSIM profile [CHAR LIMIT=40] -->
-    <string name="mobile_network_inactive_esim">Inactive / Downloaded SIM</string>
+    <string name="mobile_network_inactive_esim">Inactive / eSIM</string>
     <!-- Title of a dialog that lets a user modify the display name used for a mobile network
          subscription in various places in the Settings app. The default name is typically just the
          carrier name, but especially in multi-SIM configurations users may want to use a different
@@ -10242,8 +10242,8 @@
     <string name="sim_action_switch_sub_dialog_mep_title">Use <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>?</string>
     <!-- Body text of confirmation dialog for switching subscription that involves switching SIM slots. Indicates that only one SIM can be active at a time. Also that switching will not cancel the user's mobile service plan. [CHAR_LIMIT=NONE] -->
     <string name="sim_action_switch_sub_dialog_text">Only one SIM can be active at a time.\n\nSwitching to <xliff:g id="to_carrier_name" example="Google Fi">%1$s</xliff:g> won\u2019t cancel your <xliff:g id="from_carrier_name" example="Sprint">%2$s</xliff:g> service.</string>
-    <!-- Body text of confirmation dialog for switching subscription between two eSIM profiles. Indicates that only one downloaded SIM can be active at a time. Also that switching will not cancel the user's mobile service plan. [CHAR_LIMIT=NONE] -->
-    <string name="sim_action_switch_sub_dialog_text_downloaded">Only one downloaded SIM can be active at a time.\n\nSwitching to <xliff:g id="to_carrier_name" example="Google Fi">%1$s</xliff:g> won\u2019t cancel your <xliff:g id="from_carrier_name" example="Sprint">%2$s</xliff:g> service.</string>
+    <!-- Body text of confirmation dialog for switching subscription between two eSIM profiles. Indicates that only 1 eSIM can be active at a time. Also that switching will not cancel the user's mobile service plan. [CHAR_LIMIT=NONE] -->
+    <string name="sim_action_switch_sub_dialog_text_downloaded">Only 1 eSIM can be active at a time.\n\nSwitching to <xliff:g id="to_carrier_name" example="Google Fi">%1$s</xliff:g> won\u2019t cancel your <xliff:g id="from_carrier_name" example="Sprint">%2$s</xliff:g> service.</string>
     <!-- Body text of confirmation dialog for switching subscription between two eSIM profiles. Indicates that only one SIM can be active at a time. Also that switching will not cancel the user's mobile service plan. [CHAR_LIMIT=NONE] -->
     <string name="sim_action_switch_sub_dialog_text_single_sim">Only one SIM can be active at a time.\n\nSwitching won\u2019t cancel your <xliff:g id="to_carrier_name" example="Google Fi">%1$s</xliff:g> service.</string>
     <!-- Body text of confirmation dialog for switching subscription between two eSIM profiles. Indicates that only one downloaded SIM can be active at a time. Also that switching will not cancel the user's mobile service plan. [CHAR_LIMIT=NONE] -->
@@ -10337,12 +10337,12 @@
     <!--  The body text of skip sim switch dialog. [CHAR LIMIT=NONE] -->
     <string name="switch_sim_dialog_no_switch_text">To use mobile data, call features, and SMS at a later time, go to your network settings</string>
 
-    <!-- Button label of the removable sim card. [CHAR LIMIT=NONE] -->
-    <string name="sim_card_label">SIM card</string>
+    <!-- Button label of the removable sim. [CHAR LIMIT=NONE] -->
+    <string name="sim_card_label">SIM</string>
 
     <!-- Strings for deleting eUICC subscriptions dialog activity -->
-    <!-- Title on confirmation dialog asking the user if they want to erase the downloaded SIM from the device. [CHAR_LIMIT=NONE] -->
-    <string name="erase_sim_dialog_title">Erase this downloaded SIM?</string>
+    <!-- Title on confirmation dialog asking the user if they want to erase the eSIM from the device. [CHAR_LIMIT=NONE] -->
+    <string name="erase_sim_dialog_title">Erase this eSIM?</string>
     <!-- Body text in confirmation dialog indicating what erasing a SIM entails. [CHAR_LIMIT=NONE] -->
     <string name="erase_sim_dialog_text">Erasing this SIM removes <xliff:g id="carrier_name_a" example="Google Fi">%1$s</xliff:g> service from this device.\n\nService for <xliff:g id="carrier_name_b" example="Google Fi">%1$s</xliff:g> won\'t be canceled.</string>
     <!-- Button label to erase the eSIM [CHAR_LIMIT=20] -->
@@ -10716,10 +10716,10 @@
     <string name="carrier_wifi_network_title">W+ network</string>
     <!-- Provider Model: title of SIM category -->
     <string name="sim_category_title">SIM</string>
-    <!-- Provider Model: title of Downloaded SIM category. [CHAR LIMIT=50] -->
-    <string name="downloaded_sim_category_title">DOWNLOADED SIM</string>
-    <!-- Provider Model: title of Downloaded SIMs category. [CHAR LIMIT=50] -->
-    <string name="downloaded_sims_category_title">DOWNLOADED SIMS</string>
+    <!-- Provider Model: title of eSIM category. [CHAR LIMIT=50] -->
+    <string name="downloaded_sim_category_title">eSIM</string>
+    <!-- Provider Model: title of eSIMs category. [CHAR LIMIT=50] -->
+    <string name="downloaded_sims_category_title">eSIMs</string>
     <!-- Provider Model: summary of Active in SIM category. [CHAR LIMIT=50] -->
     <string name="sim_category_active_sim">Active</string>
     <!-- Provider Model: summary of Inactive in SIM category. [CHAR LIMIT=50] -->
@@ -10849,7 +10849,7 @@
     <!-- Dialog title for smart forwarding failed [CHAR LIMIT=50]-->
     <string name="smart_forwarding_failed_title">Call Settings error</string>
     <!-- Subtext for smart forwarding failed [CHAR LIMIT=50]-->
-    <string name="smart_forwarding_failed_text">Network or SIM card error.</string>
+    <string name="smart_forwarding_failed_text">Network or SIM error.</string>
     <!-- Subtext for sim is not activated [CHAR LIMIT=50]-->
     <string name="smart_forwarding_failed_not_activated_text">Sim is not activated.</string>
     <!-- Title when smart forwarding can't get the phone number [CHAR LIMIT=50]-->
@@ -10910,14 +10910,14 @@
     <!-- Content description of preview pager in colors preview -->
     <string name="colors_viewpager_content_description">Color preview</string>
 
-    <!-- Bluetooth sim card permission alert for notification title [CHAR LIMIT=none] -->
-    <string name="bluetooth_sim_card_access_notification_title">SIM card access request</string>
-    <!-- Bluetooth sim card permission alert for notification content [CHAR LIMIT=none] -->
-    <string name="bluetooth_sim_card_access_notification_content">A device wants to access your SIM card. Tap for details.</string>
-    <!-- Bluetooth sim card permission alert for dialog title [CHAR LIMIT=none] -->
-    <string name="bluetooth_sim_card_access_dialog_title">Allow access to SIM card?</string>
-    <!-- Bluetooth sim card permission alert for dialog content [CHAR LIMIT=none] -->
-    <string name="bluetooth_sim_card_access_dialog_content">A Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access data on your SIM card. This includes your contacts.\n\nWhile connected, <xliff:g id="device_name" example="My device">%2$s</xliff:g> will receive all calls made to <xliff:g id="phone_number" example="0912345678">%3$s</xliff:g>.</string>
+    <!-- Bluetooth sim permission alert for notification title [CHAR LIMIT=none] -->
+    <string name="bluetooth_sim_card_access_notification_title">SIM access request</string>
+    <!-- Bluetooth sim permission alert for notification content [CHAR LIMIT=none] -->
+    <string name="bluetooth_sim_card_access_notification_content">A device wants to access your SIM. Tap for details.</string>
+    <!-- Bluetooth sim permission alert for dialog title [CHAR LIMIT=none] -->
+    <string name="bluetooth_sim_card_access_dialog_title">Allow access to SIM?</string>
+    <!-- Bluetooth sim permission alert for dialog content [CHAR LIMIT=none] -->
+    <string name="bluetooth_sim_card_access_dialog_content">A Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access data from your SIM. This includes your contacts.\n\nWhile connected, <xliff:g id="device_name" example="My device">%2$s</xliff:g> will receive all calls made to <xliff:g id="phone_number" example="0912345678">%3$s</xliff:g>.</string>
     <!-- Bluetooth connect permission alert for notification title [CHAR LIMIT=none] -->
     <string name="bluetooth_connect_access_notification_title">Bluetooth device available</string>
     <!-- Bluetooth connect permission alert for notification content [CHAR LIMIT=none] -->
