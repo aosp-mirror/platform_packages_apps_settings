@@ -31,13 +31,12 @@ import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.mock;
-
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -185,6 +184,38 @@ public class FingerprintEnrollEnrollingTest {
         mActivity.onWindowFocusChanged(true);
 
         verify(mActivity, never()).onCancelEnrollment(anyInt());
+    }
+
+    @Test
+    public void fingerprintUdfpsOverlayEnrollment_PlaysAllAnimationsAssetsCorrectly() {
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+
+        int totalEnrollSteps = 25;
+        int initStageSteps = -1, initStageRemaining = 0;
+
+        when(mSidecar.getEnrollmentSteps()).thenReturn(initStageSteps);
+        when(mSidecar.getEnrollmentRemaining()).thenReturn(initStageRemaining);
+
+        mActivity.onEnrollmentProgressChange(initStageSteps, initStageRemaining);
+
+        when(mSidecar.getEnrollmentSteps()).thenReturn(totalEnrollSteps);
+
+        for (int remaining = totalEnrollSteps; remaining > 0; remaining--) {
+            when(mSidecar.getEnrollmentRemaining()).thenReturn(remaining);
+            mActivity.onEnrollmentProgressChange(totalEnrollSteps, remaining);
+        }
+
+        List<Integer> expectedLottieAssetOrder = List.of(
+                R.raw.udfps_center_hint_lottie,
+                R.raw.udfps_tip_hint_lottie,
+                R.raw.udfps_left_edge_hint_lottie,
+                R.raw.udfps_right_edge_hint_lottie
+        );
+
+        ArgumentCaptor<Integer> lottieAssetCaptor = ArgumentCaptor.forClass(Integer.class);
+        verify(mIllustrationLottie, times(4)).setAnimation(lottieAssetCaptor.capture());
+        List<Integer> observedLottieAssetOrder = lottieAssetCaptor.getAllValues();
+        assertThat(observedLottieAssetOrder).isEqualTo(expectedLottieAssetOrder);
     }
 
     @Test

@@ -176,6 +176,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private boolean mHaveShownUdfpsTipLottie;
     private boolean mHaveShownUdfpsLeftEdgeLottie;
     private boolean mHaveShownUdfpsRightEdgeLottie;
+    private boolean mHaveShownUdfpsCenterLottie;
+    private boolean mHaveShownUdfpsGuideLottie;
     private boolean mHaveShownSfpsNoAnimationLottie;
     private boolean mHaveShownSfpsCenterLottie;
     private boolean mHaveShownSfpsTipLottie;
@@ -503,18 +505,31 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         switch (getCurrentStage()) {
             case STAGE_CENTER:
                 setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
-                setDescriptionText(R.string.security_settings_udfps_enroll_start_message);
+                if (mIsAccessibilityEnabled || mIllustrationLottie == null) {
+                    setDescriptionText(R.string.security_settings_udfps_enroll_start_message);
+                } else if (!mHaveShownUdfpsCenterLottie && mIllustrationLottie != null) {
+                    mHaveShownUdfpsCenterLottie = true;
+                    // Note: Update string reference when differentiate in between udfps & sfps
+                    mIllustrationLottie.setContentDescription(
+                            getString(R.string.security_settings_sfps_enroll_finger_center_title)
+                    );
+                    configureEnrollmentStage("", R.raw.udfps_center_hint_lottie);
+                }
                 break;
 
             case STAGE_GUIDED:
                 setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
-                if (mIsAccessibilityEnabled) {
+                if (mIsAccessibilityEnabled || mIllustrationLottie == null) {
                     setDescriptionText(R.string.security_settings_udfps_enroll_repeat_a11y_message);
-                } else {
-                    setDescriptionText(R.string.security_settings_udfps_enroll_repeat_message);
+                } else if (!mHaveShownUdfpsGuideLottie && mIllustrationLottie != null) {
+                    mHaveShownUdfpsGuideLottie = true;
+                    mIllustrationLottie.setContentDescription(
+                            getString(R.string.security_settings_fingerprint_enroll_repeat_message)
+                    );
+                    // TODO(b/228100413) Could customize guided lottie animation
+                    configureEnrollmentStage("", R.raw.udfps_center_hint_lottie);
                 }
                 break;
-
             case STAGE_FINGERTIP:
                 setHeaderText(R.string.security_settings_udfps_enroll_fingertip_title);
                 if (!mHaveShownUdfpsTipLottie && mIllustrationLottie != null) {
@@ -525,7 +540,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                     configureEnrollmentStage("", R.raw.udfps_tip_hint_lottie);
                 }
                 break;
-
             case STAGE_LEFT_EDGE:
                 setHeaderText(R.string.security_settings_udfps_enroll_left_edge_title);
                 if (!mHaveShownUdfpsLeftEdgeLottie && mIllustrationLottie != null) {
