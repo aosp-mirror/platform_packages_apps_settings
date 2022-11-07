@@ -51,6 +51,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.ArraySet;
 
+import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 import org.junit.After;
@@ -312,8 +313,9 @@ public final class BatteryBackupHelperTest {
         TimeUnit.SECONDS.sleep(1);
 
         final InOrder inOrder = inOrder(mBatteryOptimizeUtils);
-        inOrder.verify(mBatteryOptimizeUtils).setAppUsageState(MODE_RESTRICTED);
-        inOrder.verify(mBatteryOptimizeUtils, never()).setAppUsageState(anyInt());
+        inOrder.verify(mBatteryOptimizeUtils).setAppUsageState(MODE_RESTRICTED, Action.RESTORE);
+        inOrder.verify(mBatteryOptimizeUtils, never())
+                .setAppUsageState(anyInt(), eq(Action.RESTORE));
     }
 
     @Test
@@ -327,9 +329,10 @@ public final class BatteryBackupHelperTest {
         TimeUnit.SECONDS.sleep(1);
 
         final InOrder inOrder = inOrder(mBatteryOptimizeUtils);
-        inOrder.verify(mBatteryOptimizeUtils).setAppUsageState(MODE_RESTRICTED);
-        inOrder.verify(mBatteryOptimizeUtils).setAppUsageState(MODE_UNRESTRICTED);
-        inOrder.verify(mBatteryOptimizeUtils, never()).setAppUsageState(MODE_RESTRICTED);
+        inOrder.verify(mBatteryOptimizeUtils).setAppUsageState(MODE_RESTRICTED, Action.RESTORE);
+        inOrder.verify(mBatteryOptimizeUtils).setAppUsageState(MODE_UNRESTRICTED, Action.RESTORE);
+        inOrder.verify(mBatteryOptimizeUtils, never())
+                .setAppUsageState(MODE_RESTRICTED, Action.RESTORE);
     }
 
     private void mockUid(int uid, String packageName) throws Exception {
