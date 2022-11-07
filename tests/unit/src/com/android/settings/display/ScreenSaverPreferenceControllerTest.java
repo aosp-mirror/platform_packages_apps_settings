@@ -60,7 +60,7 @@ public class ScreenSaverPreferenceControllerTest {
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_dreamsSupported)).thenReturn(true);
         when(mResources.getBoolean(
-                com.android.internal.R.bool.config_dreamsOnlyEnabledForSystemUser))
+                com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser))
                 .thenReturn(false);
         when(mUserManager.isSystemUser()).thenReturn(true);
         assertTrue(mController.isAvailable());
@@ -71,7 +71,7 @@ public class ScreenSaverPreferenceControllerTest {
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_dreamsSupported)).thenReturn(true);
         when(mResources.getBoolean(
-                com.android.internal.R.bool.config_dreamsOnlyEnabledForSystemUser))
+                com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser))
                 .thenReturn(false);
         when(mUserManager.isSystemUser()).thenReturn(false);
         assertTrue(mController.isAvailable());
@@ -82,7 +82,7 @@ public class ScreenSaverPreferenceControllerTest {
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_dreamsSupported)).thenReturn(false);
         when(mResources.getBoolean(
-                com.android.internal.R.bool.config_dreamsOnlyEnabledForSystemUser))
+                com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser))
                 .thenReturn(false);
         when(mUserManager.isSystemUser()).thenReturn(true);
         assertFalse(mController.isAvailable());
@@ -93,7 +93,7 @@ public class ScreenSaverPreferenceControllerTest {
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_dreamsSupported)).thenReturn(true);
         when(mResources.getBoolean(
-                com.android.internal.R.bool.config_dreamsOnlyEnabledForSystemUser))
+                com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser))
                 .thenReturn(true);
         when(mUserManager.isSystemUser()).thenReturn(true);
         assertTrue(mController.isAvailable());
@@ -104,7 +104,7 @@ public class ScreenSaverPreferenceControllerTest {
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_dreamsSupported)).thenReturn(true);
         when(mResources.getBoolean(
-                com.android.internal.R.bool.config_dreamsOnlyEnabledForSystemUser))
+                com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser))
                 .thenReturn(true);
         when(mUserManager.isSystemUser()).thenReturn(false);
         assertFalse(mController.isAvailable());

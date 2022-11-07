@@ -42,11 +42,11 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowFragment.class})
-public class TimeoutToUserZeroSettingsTest {
+public class TimeoutToDockUserSettingsTest {
     @Mock
     private FragmentActivity mActivity;
 
-    private TimeoutToUserZeroSettings mSettings;
+    private TimeoutToDockUserSettings mSettings;
 
     private String[] mEntries;
     private String[] mValues;
@@ -57,10 +57,10 @@ public class TimeoutToUserZeroSettingsTest {
 
         final Context context = spy(ApplicationProvider.getApplicationContext());
         mEntries = context.getResources().getStringArray(
-                R.array.switch_to_user_zero_when_docked_timeout_entries);
+                R.array.switch_to_dock_user_when_docked_timeout_entries);
         mValues = context.getResources().getStringArray(
-                R.array.switch_to_user_zero_when_docked_timeout_values);
-        mSettings = spy(new TimeoutToUserZeroSettings());
+                R.array.switch_to_dock_user_when_docked_timeout_values);
+        mSettings = spy(new TimeoutToDockUserSettings());
 
         doReturn(context).when(mSettings).getContext();
         doReturn(mActivity).when(mSettings).getActivity();

@@ -39,9 +39,10 @@ public class ScreenSaverPreferenceController extends AbstractPreferenceControlle
     public boolean isAvailable() {
         final boolean dreamsSupported = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_dreamsSupported);
-        final boolean dreamsOnlyEnabledForSystemUser = mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_dreamsOnlyEnabledForSystemUser);
-        return dreamsSupported && (!dreamsOnlyEnabledForSystemUser || isSystemUser());
+        final boolean dreamsOnlyEnabledForDockUser = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser);
+        // TODO(b/257333623): Allow the Dock User to be non-SystemUser user in HSUM.
+        return dreamsSupported && (!dreamsOnlyEnabledForDockUser || isSystemUser());
     }
 
     @Override
