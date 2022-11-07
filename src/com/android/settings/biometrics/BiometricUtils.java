@@ -57,6 +57,17 @@ public class BiometricUtils {
      * enrolled biometric of the same type.
      */
     public static int REQUEST_ADD_ANOTHER = 7;
+
+    /**
+     * Gatekeeper credential not match exception, it throws if VerifyCredentialResponse is not
+     * matched in requestGatekeeperHat().
+     */
+    public static class GatekeeperCredentialNotMatchException extends IllegalStateException {
+        public GatekeeperCredentialNotMatchException(String s) {
+            super(s);
+        }
+    };
+
     /**
      * Given the result from confirming or choosing a credential, request Gatekeeper to generate
      * a HardwareAuthToken with the Gatekeeper Password together with a biometric challenge.
@@ -66,6 +77,8 @@ public class BiometricUtils {
      * @param userId User ID that the credential/biometric operation applies to
      * @param challenge Unique biometric challenge from FingerprintManager/FaceManager
      * @return
+     * @throws GatekeeperCredentialNotMatchException if Gatekeeper response is not match
+     * @throws IllegalStateException if Gatekeeper Password is missing
      */
     public static byte[] requestGatekeeperHat(@NonNull Context context, @NonNull Intent result,
             int userId, long challenge) {
@@ -83,7 +96,7 @@ public class BiometricUtils {
         final VerifyCredentialResponse response = utils.verifyGatekeeperPasswordHandle(gkPwHandle,
                 challenge, userId);
         if (!response.isMatched()) {
-            throw new IllegalStateException("Unable to request Gatekeeper HAT");
+            throw new GatekeeperCredentialNotMatchException("Unable to request Gatekeeper HAT");
         }
         return response.getGatekeeperHAT();
     }
