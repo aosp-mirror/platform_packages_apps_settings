@@ -57,6 +57,11 @@ public class MultiUserSwitchBarController implements SwitchWidgetController.OnSw
             mSwitchBar.setDisabledByAdmin(RestrictedLockUtilsInternal
                     .checkIfRestrictionEnforced(mContext, UserManager.DISALLOW_USER_SWITCH,
                             UserHandle.myUserId()));
+
+        } else if (mUserCapabilities.mDisallowAddUser) {
+            mSwitchBar.setDisabledByAdmin(RestrictedLockUtilsInternal
+                    .checkIfRestrictionEnforced(mContext, UserManager.DISALLOW_ADD_USER,
+                            UserHandle.myUserId()));
         } else {
             mSwitchBar.setEnabled(!mUserCapabilities.mDisallowSwitchUser
                     && !mUserCapabilities.mIsGuest && mUserCapabilities.isAdmin());
