@@ -212,6 +212,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     protected boolean mIsRestricted;
     @VisibleForTesting
     boolean mIsAdmin = true;
+    @VisibleForTesting
+    boolean mIsGuest = false;
 
     @VisibleForTesting
     AirplaneModeEnabler mAirplaneModeEnabler;
@@ -302,13 +304,14 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         addPreferences();
 
         mIsRestricted = isUiRestricted();
-        mIsAdmin = isAdminUser();
+        updateUserType();
     }
 
-    private boolean isAdminUser() {
-        final UserManager userManager = getSystemService(UserManager.class);
-        if (userManager == null) return true;
-        return userManager.isAdminUser();
+    private void updateUserType() {
+        UserManager userManager = getSystemService(UserManager.class);
+        if (userManager == null) return;
+        mIsAdmin = userManager.isAdminUser();
+        mIsGuest = userManager.isGuestUser();
     }
 
     private void addPreferences() {
@@ -1400,7 +1403,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (!mAirplaneModeEnabler.isAirplaneModeOn()) {
+        if (!mIsGuest && !mAirplaneModeEnabler.isAirplaneModeOn()) {
             MenuItem item = menu.add(0, MENU_FIX_CONNECTIVITY, 0, R.string.fix_connectivity);
             item.setIcon(R.drawable.ic_repair_24dp);
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -1447,6 +1450,11 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     }
 
     private void fixConnectivity() {
+        if (mIsGuest) {
+            Log.e(TAG, "Can't reset network because the user is a guest.");
+            EventLog.writeEvent(0x534e4554, "252995826", UserHandle.myUserId(), "User is a guest");
+            return;
+        }
         if (mInternetResetHelper == null) {
             mInternetResetHelper = new InternetResetHelper(getContext(), getLifecycle());
             mInternetResetHelper.setResettingPreference(mResetInternetPreference);
