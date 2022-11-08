@@ -41,15 +41,13 @@ public class BluetoothMaxConnectedAudioDevicesPreferenceController extends
 
     private int mDefaultMaxConnectedAudioDevices = 0;
 
-    private final BluetoothManager mBluetoothManager;
-
     public BluetoothMaxConnectedAudioDevicesPreferenceController(Context context) {
         super(context);
 
-        mBluetoothManager = context.getSystemService(BluetoothManager.class);
+        final BluetoothManager bluetoothManager = context.getSystemService(BluetoothManager.class);
 
         mDefaultMaxConnectedAudioDevices =
-              mBluetoothManager.getAdapter().getMaxConnectedAudioDevices();
+              bluetoothManager.getAdapter().getMaxConnectedAudioDevices();
     }
 
     @Override
