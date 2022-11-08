@@ -453,6 +453,8 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Votre modèle facial sera supprimé de façon permanente et sécurisée.\n\nPour déverrouiller votre téléphone, vous aurez ensuite besoin de ce qui suit : NIP, schéma ou mot de passe."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Utilisez le déverrouillage par reconnaissance faciale pour déverrouiller votre téléphone"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Empreintes digitales"</string>
+    <!-- no translation found for security_settings_fingerprint_settings_preferences_category (8975029409126780752) -->
+    <skip />
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Empreinte digitale pour le travail"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Gérer les empreintes digitales"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Util. empr. dig. pour"</string>
@@ -591,6 +593,12 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Vous pouvez maintenant utiliser votre empreinte digitale pour déverrouiller votre tablette ou vérifier qu\'il s\'agit bien de vous, par exemple pour vous connecter à des applications"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Vous pouvez maintenant utiliser votre empreinte digitale pour déverrouiller votre appareil ou vérifier qu\'il s\'agit bien de vous, par exemple pour vous connecter à des applications"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Vous pouvez maintenant utiliser votre empreinte digitale pour déverrouiller votre téléphone ou vérifier qu\'il s\'agit bien de vous, par exemple pour vous connecter à des applications"</string>
+    <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
+    <skip />
+    <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
+    <skip />
+    <!-- no translation found for security_settings_require_screen_on_to_auth_keywords (5557869560397089603) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Plus tard"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Levez le doigt et touchez le capteur de nouveau"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Placez le côté de votre empreinte digitale sur le capteur et maintenez-le en place, puis passez à l\'autre côté"</string>
@@ -1515,6 +1523,7 @@
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Cette fonctionnalité n\'est pas accessible parce que le mode Nuit est activé"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Utiliser l\'écran de veille"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Pendant la charge ou sur la station d\'accueil"</string>
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Durant la recharge sur la station"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Pendant la charge"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Sur la station d\'accueil"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Jamais"</string>
@@ -1872,7 +1881,7 @@
     <string name="tether_settings_title_wifi" msgid="4327056146425282159">"Point d\'accès Wi-Fi mobile"</string>
     <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"Partage connexion Bluetooth"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="4437274151658505496">"Partage de connexion"</string>
-    <string name="tether_settings_title_all" msgid="6807525590937697228">"Point d\'accès et partage de connexion"</string>
+    <string name="tether_settings_title_all" msgid="6807525590937697228">"Point d\'accès sans fil et partage de connexion"</string>
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Point d\'accès activé, partage de connexion"</string>
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"Point d\'accès activé"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"Partage de connexion"</string>
@@ -1914,8 +1923,7 @@
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Le partage de connexion avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g> va être annulé."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Partage connexion Ethernet"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Partager la connexion Internet du téléphone par connexion Ethernet"</string>
-    <!-- no translation found for ethernet_tethering_subtext (8796744370636115313) -->
-    <skip />
+    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"Partager la connexion Internet de la tablette par connexion Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Utilisez un point d\'accès et le partage de connexion pour fournir un accès Internet à d\'autres appareils par l\'intermédiaire de votre connexion cellulaire. Les applications peuvent aussi créer un point d\'accès pour partager du contenu avec d\'autres appareils à proximité."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Utilisez un point d\'accès et le partage de connexion pour fournir un accès Internet à d\'autres appareils par l\'intermédiaire de votre connexion de données Wi-Fi ou cellulaire. Les applications peuvent aussi créer un point d\'accès pour partager du contenu avec d\'autres appareils à proximité."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Aide"</string>
@@ -4030,7 +4038,7 @@
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"N\'afficher aucune notification"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Notifications sensibles"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Afficher le contenu sensible lorsque l\'écran est verrouillé"</string>
-    <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Notifications sensibles du profil professionnel"</string>
+    <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Notifications confidentielles du profil professionnel"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Afficher le contenu sensible du profil professionnel lorsque l\'écran est verrouillé"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Afficher tout le contenu des notifications"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"N\'afficher le contenu sensible que si déverrouillé"</string>
@@ -4197,8 +4205,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"À votre demande, Android empêche les notifications de cette application de s\'afficher sur cet appareil"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"À votre demande, Android empêche cette catégorie de notifications de s\'afficher sur cet appareil"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"À votre demande, Android empêche ce groupe de notifications de s\'afficher sur cet appareil"</string>
-    <!-- no translation found for app_notifications_not_send_desc (5683060986735070528) -->
-    <skip />
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Cette application n\'envoie pas de notifications"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Catégories"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Autre"</string>
     <plurals name="notification_group_summary" formatted="false" msgid="483490958130993160">
