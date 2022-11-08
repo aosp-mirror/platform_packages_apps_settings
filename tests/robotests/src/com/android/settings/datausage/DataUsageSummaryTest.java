@@ -29,11 +29,14 @@ import static org.mockito.Mockito.verify;
 
 import android.app.usage.NetworkStatsManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.NetworkPolicyManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.FragmentActivity;
+
+import com.android.settings.R;
 
 import com.android.settings.testutils.shadow.ShadowDashboardFragment;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
@@ -70,6 +73,7 @@ public class DataUsageSummaryTest {
     private NetworkStatsManager mNetworkStatsManager;
     private TelephonyManager mTelephonyManager;
     private Context mContext;
+    private Resources mResources;
     private FragmentActivity mActivity;
 
     /**
@@ -84,13 +88,18 @@ public class DataUsageSummaryTest {
         ShadowUserManager.getShadow().setIsAdminUser(true);
         shadowContext.setSystemService(Context.NETWORK_POLICY_SERVICE, mNetworkPolicyManager);
 
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
         final ShadowTelephonyManager shadowTelephonyManager = Shadows.shadowOf(mTelephonyManager);
         shadowTelephonyManager.setTelephonyManagerForSubscriptionId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID, mTelephonyManager);
         shadowTelephonyManager.setTelephonyManagerForSubscriptionId(1, mTelephonyManager);
         mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
+
+        mResources = spy(mContext.getResources());
+        doReturn(mResources).when(mContext).getResources();
+        doReturn(true).when(mResources).getBoolean(R.bool.config_show_sim_info);
+
         doReturn(mNetworkStatsManager).when(mActivity).getSystemService(NetworkStatsManager.class);
     }
 
