@@ -203,7 +203,7 @@ public final class Utils {
     public static String findBluetoothPackageName(Context context)
             throws NameNotFoundException {
         // this activity will always be in the package where the rest of Bluetooth lives
-        String sentinelActivity = "com.android.bluetooth.opp.BluetoothOppLauncherActivity";
+        final String sentinelActivity = "com.android.bluetooth.opp.BluetoothOppLauncherActivity";
         PackageManager packageManager = context.createContextAsUser(UserHandle.SYSTEM, 0)
                 .getPackageManager();
         String[] allPackages = packageManager.getPackagesForUid(BLUETOOTH_UID);
