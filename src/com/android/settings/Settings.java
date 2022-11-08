@@ -46,6 +46,8 @@ public class Settings extends SettingsActivity {
     /*
     * Settings subclasses for launching independently.
     */
+
+    public static class MemtagPageActivity extends SettingsActivity { /* empty */}
     public static class AssistGestureSettingsActivity extends SettingsActivity { /* empty */}
     public static class BluetoothSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CreateShortcutActivity extends SettingsActivity { /* empty */ }
