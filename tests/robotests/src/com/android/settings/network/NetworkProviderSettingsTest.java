@@ -15,6 +15,7 @@
  */
 package com.android.settings.network;
 
+import static com.android.settings.network.NetworkProviderSettings.MENU_FIX_CONNECTIVITY;
 import static com.android.settings.network.NetworkProviderSettings.MENU_ID_DISCONNECT;
 import static com.android.settings.network.NetworkProviderSettings.MENU_ID_FORGET;
 import static com.android.settings.network.NetworkProviderSettings.MENU_ID_MODIFY;
@@ -135,6 +136,8 @@ public class NetworkProviderSettingsTest {
     @Mock
     private ContextMenu mContextMenu;
     @Mock
+    private Menu mMenu;
+    @Mock
     private MenuItem mMenuItem;
     @Mock
     InternetUpdater mInternetUpdater;
@@ -147,6 +150,8 @@ public class NetworkProviderSettingsTest {
 
     @Before
     public void setUp() {
+        when(mMenu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mMenuItem);
+
         mNetworkProviderSettings = spy(new NetworkProviderSettings() {
             @Override
             boolean showAnySubscriptionInfo(Context context) { return true; }
@@ -483,24 +488,39 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    public void onCreateOptionsMenu_airplanModeOn_fixConnectivityMenuInvisible() {
-        doReturn(true).when(mAirplaneModeEnabler).isAirplaneModeOn();
-        final Menu menu = mock(Menu.class);
-        mNetworkProviderSettings.onCreateOptionsMenu(menu, null /* inflater */);
+    public void onCreateOptionsMenu_isGuest_neverAddFixConnectivityMenu() {
+        mNetworkProviderSettings.mIsGuest = true;
 
-        verify(menu, never()).add(anyInt(), eq(NetworkProviderSettings.MENU_FIX_CONNECTIVITY),
-            anyInt(), eq(R.string.fix_connectivity));
+        mNetworkProviderSettings.onCreateOptionsMenu(mMenu, null /* inflater */);
+
+        verify(mMenu, never()).add(anyInt(), eq(MENU_FIX_CONNECTIVITY), anyInt(), anyInt());
     }
 
     @Test
-    public void onCreateOptionsMenu_airplanModeOff_fixConnectivityMenuVisible() {
-        doReturn(false).when(mAirplaneModeEnabler).isAirplaneModeOn();
-        final Menu menu = mock(Menu.class);
-        when(menu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mock(MenuItem.class));
-        mNetworkProviderSettings.onCreateOptionsMenu(menu, null /* inflater */);
+    public void onCreateOptionsMenu_isNotGuest_addFixConnectivityMenu() {
+        mNetworkProviderSettings.mIsGuest = false;
 
-        verify(menu).add(anyInt(), eq(NetworkProviderSettings.MENU_FIX_CONNECTIVITY),
-            anyInt(), eq(R.string.fix_connectivity));
+        mNetworkProviderSettings.onCreateOptionsMenu(mMenu, null /* inflater */);
+
+        verify(mMenu).add(anyInt(), eq(MENU_FIX_CONNECTIVITY), anyInt(), anyInt());
+    }
+
+    @Test
+    public void onCreateOptionsMenu_isAirplaneModeOn_neverAddFixConnectivityMenu() {
+        doReturn(true).when(mAirplaneModeEnabler).isAirplaneModeOn();
+
+        mNetworkProviderSettings.onCreateOptionsMenu(mMenu, null /* inflater */);
+
+        verify(mMenu, never()).add(anyInt(), eq(MENU_FIX_CONNECTIVITY), anyInt(), anyInt());
+    }
+
+    @Test
+    public void onCreateOptionsMenu_isNotAirplaneModeOn_addFixConnectivityMenu() {
+        doReturn(false).when(mAirplaneModeEnabler).isAirplaneModeOn();
+
+        mNetworkProviderSettings.onCreateOptionsMenu(mMenu, null /* inflater */);
+
+        verify(mMenu).add(anyInt(), eq(MENU_FIX_CONNECTIVITY), anyInt(), anyInt());
     }
 
     @Test
