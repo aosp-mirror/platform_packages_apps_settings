@@ -64,6 +64,7 @@
         android:order="50"
         android:key="sim_lock_settings"
         android:title="@string/sim_lock_settings_category"
+        settings:isPreferenceVisible="@bool/config_show_sim_info"
         settings:controller="com.android.settings.security.SimLockPreferenceController">
 
         <intent
@@ -103,6 +104,7 @@
         android:key="confirm_sim_deletion"
         android:title="@string/confirm_sim_deletion_title"
         android:summary="@string/confirm_sim_deletion_description"
+        settings:isPreferenceVisible="@bool/config_show_sim_info"
         settings:controller="com.android.settings.security.ConfirmSimDeletionPreferenceController" />
 
     <!-- work profile security section -->
