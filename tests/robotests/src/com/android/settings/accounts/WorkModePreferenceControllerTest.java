@@ -114,8 +114,7 @@ public class WorkModePreferenceControllerTest {
     @Test
     public void onStop_shouldUnregisterReceiver() {
         // register it first
-        mContext.registerReceiver(mController.mReceiver, null,
-                Context.RECEIVER_EXPORTED/*UNAUDITED*/);
+        mContext.registerReceiver(mController.mReceiver, null);
 
         mController.onStop();
         verify(mContext).unregisterReceiver(mController.mReceiver);

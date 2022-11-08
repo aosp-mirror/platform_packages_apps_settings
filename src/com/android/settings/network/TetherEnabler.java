@@ -166,8 +166,7 @@ public class TetherEnabler implements SwitchWidgetController.OnSwitchChangeListe
                 TetheringManager.ACTION_TETHER_STATE_CHANGED);
         filter.addAction(WifiManager.WIFI_AP_STATE_CHANGED_ACTION);
         filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
-        mContext.registerReceiver(mTetherChangeReceiver, filter,
-                Context.RECEIVER_EXPORTED/*UNAUDITED*/);
+        mContext.registerReceiver(mTetherChangeReceiver, filter);
         mTetheringEventCallback  =
                 new TetheringManager.TetheringEventCallback() {
                     @Override

@@ -86,8 +86,7 @@ public class CarrierConfigCache {
             final CarrierConfigChangeReceiver receiver = new CarrierConfigChangeReceiver();
             final Context appContext = context.getApplicationContext();
             sCarrierConfigManager = appContext.getSystemService(CarrierConfigManager.class);
-            appContext.registerReceiver(receiver, new IntentFilter(ACTION_CARRIER_CONFIG_CHANGED),
-                    Context.RECEIVER_EXPORTED/*UNAUDITED*/);
+            appContext.registerReceiver(receiver, new IntentFilter(ACTION_CARRIER_CONFIG_CHANGED));
             return sInstance;
         }
     }

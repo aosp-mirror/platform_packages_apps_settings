@@ -99,8 +99,7 @@ public class BluetoothDeviceNamePreferenceControllerTest {
     @Test
     public void testOnStop_receiverUnregistered() {
         // register it first
-        mContext.registerReceiver(mController.mReceiver, null,
-                Context.RECEIVER_EXPORTED/*UNAUDITED*/);
+        mContext.registerReceiver(mController.mReceiver, null);
 
         mController.onStop();
         verify(mContext).unregisterReceiver(mController.mReceiver);

@@ -1702,10 +1702,7 @@ public class UserSettings extends SettingsPreferenceFragment
         }
 
         UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        Bitmap decodedIcon = BitmapFactory.decodeStream(avatarDataStream);
-        CircleFramedDrawable drawable = CircleFramedDrawable.getInstance(context, decodedIcon);
-        Bitmap icon = UserIcons.convertToBitmapAtUserIconSize(context.getResources(), drawable);
-
+        Bitmap icon = BitmapFactory.decodeStream(avatarDataStream);
         um.setUserIcon(userId, icon);
         try {
             avatarDataStream.close();
