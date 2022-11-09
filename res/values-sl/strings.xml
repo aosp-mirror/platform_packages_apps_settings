@@ -459,6 +459,8 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Model obraza bo trajno in varno izbrisan.\n\nPo izbrisu boste za odklepanje telefona morali uporabiti kodo PIN, vzorec ali geslo."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Za odklepanje telefona uporabite obraz"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Prstni odtis"</string>
+    <!-- no translation found for security_settings_fingerprint_settings_preferences_category (8975029409126780752) -->
+    <skip />
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Prstni odtis za službo"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Upravlj. prst. odtisov"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Upor. prst. odtisa za"</string>
@@ -605,6 +607,12 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Zdaj lahko s prstnim odtisom odklenete tablični računalnik ali potrdite svojo identiteto, na primer ob prijavi v aplikacije."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Zdaj lahko s prstnim odtisom odklenete napravo ali potrdite svojo identiteto, na primer ob prijavi v aplikacije."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Zdaj lahko s prstnim odtisom odklenete telefon ali potrdite svojo identiteto, na primer ob prijavi v aplikacije."</string>
+    <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
+    <skip />
+    <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
+    <skip />
+    <!-- no translation found for security_settings_require_screen_on_to_auth_keywords (5557869560397089603) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Pozneje"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Dvignite in se spet dotaknite"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Stranski del prstnega odtisa položite na tipalo prstnih odtisov in ga pridržite, nato zamenjajte stran."</string>
@@ -682,7 +690,7 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Dodali ste največje dovoljeno število prstnih odtisov"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Prstnih odtisov ni več mogoče dodati"</string>
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Želite odstraniti vse prstne odtise?"</string>
-    <string name="fingerprint_delete_title" msgid="5412123164503407098">"Izbriši »<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>«"</string>
+    <string name="fingerprint_delete_title" msgid="5412123164503407098">"Brisanje prstnega odtisa »<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>«"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Ali želite izbrisati ta prstni odtis?"</string>
     <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"S tem boste izbrisali v telefonu shranjene slike in model prstnega odtisa, povezane z odtisom »<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>«."</string>
     <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"S tem boste izbrisali v tabličnem računalniku shranjene slike in model prstnega odtisa, povezane z odtisom »<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>«."</string>
@@ -1561,6 +1569,7 @@
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Ni na voljo, ker je vklopljen način za spanje."</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Uporabi ohranjevalnik zaslona"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Med polnjenjem ali v stojalu"</string>
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"V stojalu in med polnjenjem"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Med polnjenjem"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Ko je v stojalu"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Nikoli"</string>
@@ -1962,8 +1971,7 @@
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Internetna povezava z napravo <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bo prekinjena."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Internet prek etherneta"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Deljenje internetne povezave telefona prek etherneta."</string>
-    <!-- no translation found for ethernet_tethering_subtext (8796744370636115313) -->
-    <skip />
+    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"Deljenje internetne povezave tabličnega računalnika prek etherneta"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Uporabite dostopno točko in povezavo z internetom prek mobilnega telefona, da zagotovite internet drugim napravam prek svoje mobilne podatkovne povezave. Tudi aplikacije lahko ustvarijo dostopno točko za deljenje vsebin z napravami v bližini."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Uporabite dostopno točko in povezavo z internetom prek mobilnega telefona, da zagotovite internet drugim napravam prek Wi-Fi-ja ali mobilne podatkovne povezave. Tudi aplikacije lahko ustvarijo dostopno točko za deljenje vsebin z napravami v bližini."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Pomoč"</string>
@@ -4299,8 +4307,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Na vašo zahtevo je prikazovanje obvestil te aplikacije blokirano v tej napravi Android."</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Na vašo zahtevo je prikazovanje te kategorije obvestil blokirano v tej napravi Android"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Na vašo zahtevo je prikazovanje te skupine obvestil blokirano v tej napravi Android"</string>
-    <!-- no translation found for app_notifications_not_send_desc (5683060986735070528) -->
-    <skip />
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Ta aplikacija ne pošilja obvestil."</string>
     <string name="notification_channels" msgid="1502969522886493799">"Kategorije"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Drugo"</string>
     <plurals name="notification_group_summary" formatted="false" msgid="483490958130993160">
