@@ -30,12 +30,14 @@
         android:clipToPadding="false"
         android:clipChildren="false">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            <com.android.settings.biometrics.fingerprint.FingerprintRequireScreenOnToAuthToggle
+                style="@style/SudSwitchStyle"
+                android:id="@+id/require_screen_on_to_auth_toggle"
+                android:layout_gravity="start"
+                android:paddingLeft="0dp"
+                android:paddingStart="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <com.google.android.setupdesign.view.FillContentLayout
                 android:layout_width="@dimen/sfps_enrollment_finished_icon_max_size"
@@ -54,21 +56,6 @@
                     android:importantForAccessibility="no"
                     android:src="@drawable/sfps_enroll_finish" />
             </com.google.android.setupdesign.view.FillContentLayout>
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <com.android.settings.biometrics.fingerprint.FingerprintRequireScreenOnToAuthToggle
-                style="@style/SudSwitchStyle"
-                android:id="@+id/require_screen_on_to_auth_toggle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom" />
-
-        </LinearLayout>
-
     </LinearLayout>
 
 </com.google.android.setupdesign.GlifLayout>

@@ -295,7 +295,8 @@ public class SimStatusDialogController implements LifecycleObserver {
         if (mShowLatestAreaInfo) {
             updateAreaInfoText();
             mContext.registerReceiver(mAreaInfoReceiver,
-                    new IntentFilter(CellBroadcastIntents.ACTION_AREA_INFO_UPDATED));
+                    new IntentFilter(CellBroadcastIntents.ACTION_AREA_INFO_UPDATED),
+                    Context.RECEIVER_EXPORTED/*UNAUDITED*/);
         }
 
         mIsRegisteredListener = true;

@@ -1,0 +1,27 @@
+syntax = "proto2";
+
+package com.android.settings.intelligence;
+option java_multiple_files = true;
+option java_package = "com.android.settings.fuelgauge";
+option java_outer_classname = "FuelgaugeLogProto";
+
+// Stores history of setting optimize mode
+message BatteryOptimizeHistoricalLog {
+  repeated BatteryOptimizeHistoricalLogEntry log_entry = 1;
+}
+
+message BatteryOptimizeHistoricalLogEntry {
+
+  // The action to set optimize mode
+  enum Action {
+    UNKNOWN = 0;
+    MANUAL = 1;
+    APPLY = 2;
+    RESET = 3;
+    RESTORE = 4;
+  }
+
+  optional string package_name = 1;
+  optional Action action = 2;
+  optional string action_description = 3;
+}

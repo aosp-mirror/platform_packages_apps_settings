@@ -402,7 +402,7 @@ public class UserSettingsTest {
     }
 
     @Test
-    public void updateUserList_addUserDisallowedByAdmin_shouldShowDisabledAddUser() {
+    public void updateUserList_addUserDisallowedByAdmin_shouldNotShowAddUser() {
         RestrictedLockUtils.EnforcedAdmin enforcedAdmin = mock(
                 RestrictedLockUtils.EnforcedAdmin.class);
         mUserCapabilities.mEnforcedAdmin = enforcedAdmin;
@@ -413,20 +413,16 @@ public class UserSettingsTest {
 
         mFragment.updateUserList();
 
-        verify(mAddUserPreference).setVisible(true);
-        ArgumentCaptor<RestrictedLockUtils.EnforcedAdmin> captor = ArgumentCaptor.forClass(
-                RestrictedLockUtils.EnforcedAdmin.class);
-        verify(mAddUserPreference).setDisabledByAdmin(captor.capture());
-        assertThat(captor.getValue()).isEqualTo(enforcedAdmin);
+        verify(mAddUserPreference).setVisible(false);
     }
 
     @Test
-    public void updateUserList_cannotAddUserButCanSwitchUser_shouldNotShowAddUser() {
+    public void updateUserList_cannotAddUserButCanSwitchUser_shouldShowDisabledAddUser() {
         mUserCapabilities.mCanAddUser = false;
 
         mFragment.updateUserList();
 
-        verify(mAddUserPreference).setVisible(false);
+        verify(mAddUserPreference).setEnabled(false);
     }
 
     @Test

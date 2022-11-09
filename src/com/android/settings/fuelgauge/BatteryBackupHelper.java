@@ -221,7 +221,8 @@ public final class BatteryBackupHelper implements BackupHelper {
                 mBatteryOptimizeUtils != null
                         ? mBatteryOptimizeUtils /*testing only*/
                         : new BatteryOptimizeUtils(mContext, uid, packageName);
-        batteryOptimizeUtils.setAppUsageState(mode);
+        batteryOptimizeUtils.setAppUsageState(
+                mode, BatteryOptimizeHistoricalLogEntry.Action.RESTORE);
         Log.d(TAG, String.format("restore:%s mode=%d", packageName, mode));
     }
 
