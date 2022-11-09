@@ -453,6 +453,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your PIN, pattern or password to unlock your phone."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Use Face Unlock to unlock your phone"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Fingerprint"</string>
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"When using Fingerprint Unlock"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingerprint for work"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Manage fingerprints"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Use fingerprint for"</string>
@@ -591,6 +592,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Now you can use your fingerprint to unlock your tablet or verify that it’s you, like when you sign in to apps"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Now you can use your fingerprint to unlock your device or verify that it’s you, like when you sign in to apps"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Now you can use your fingerprint to unlock your phone or verify that it’s you, like when you sign in to apps"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Unlock only when screen is on"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"The screen must be on before you can unlock with your fingerprint. This makes accidental unlocking less likely."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Screen, unlock"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Do it later"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Lift, then touch again"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Place the side of your fingerprint on the sensor and hold, then switch to the other side"</string>
@@ -1515,6 +1519,7 @@
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Unavailable because bedtime mode is on"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Use screen saver"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"While charging or docked"</string>
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"While docked and charging"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"While charging"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"While docked"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Never"</string>
@@ -1914,8 +1919,7 @@
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> will be untethered."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet tethering"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Share phone’s Internet connection via Ethernet"</string>
-    <!-- no translation found for ethernet_tethering_subtext (8796744370636115313) -->
-    <skip />
+    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"Share tablet’s Internet connection via Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Use hotspot and tethering to provide Internet to other devices through your mobile data connection. Apps can also create a hotspot to share content with nearby devices."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Use hotspot and tethering to provide Internet to other devices through your Wi‑Fi or mobile data connection. Apps can also create a hotspot to share content with nearby devices."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Help"</string>
@@ -4197,8 +4201,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"At your request, Android is blocking this app\'s notifications from appearing on this device"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"At your request, Android is blocking this category of notifications from appearing on this device"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"At your request, Android is blocking this group of notifications from appearing on this device"</string>
-    <!-- no translation found for app_notifications_not_send_desc (5683060986735070528) -->
-    <skip />
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"This app does not send notifications"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Categories"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Other"</string>
     <plurals name="notification_group_summary" formatted="false" msgid="483490958130993160">

@@ -456,6 +456,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Model lica će se trajno i sigurno izbrisati.\n\nNakon brisanja će vam trebati PIN, uzorak ili lozinka radi otključavanja telefona."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Otključajte telefon pomoću otključavanja licem"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Otisak prsta"</string>
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Kad se koristi otključavanje otiskom prsta"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Otisak prsta za posao"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Upravljanje otiscima prstiju"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Koristi otisak prsta za"</string>
@@ -595,6 +596,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Sada možete koristiti otisak prsta da otključate tablet ili potvrdite identitet, naprimjer kada se prijavljujete u aplikacije"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Sada možete koristiti otisak prsta da otključate uređaj ili potvrdite identitet, naprimjer kada se prijavljujete u aplikacije"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Sada možete koristiti otisak prsta da otključate telefon ili potvrdite identitet, naprimjer kada se prijavljujete u aplikacije"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Otključavanje samo kad je zaslon uključen"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Zaslon mora biti uključen da biste ga mogli otključati otiskom prsta. Time se smanjuje mogućnost slučajnog otključavanja."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Zaslon, otključati"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Uradit ću to kasnije"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Podignite i ponovo dodirnite"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Stranu prsta postavite na senzor i zadržite, a zatim ga prebacite na drugu stranu"</string>
@@ -1535,6 +1539,7 @@
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Nedostupno jer je uključen način rada za spavanje"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Koristi čuvara ekrana"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Tokom punjenja ili kada je na priključnoj stanici"</string>
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Na priklj. stanici tijekom punjenja"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Tokom punjenja"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Kada je na priključnoj stanici"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Nikada"</string>
@@ -1935,8 +1940,7 @@
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Prestat će se dijeliti veza s uređajem <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Dijeljenje internetske veze putem Etherneta"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Dijeljenje internetske veze telefona putem etherneta"</string>
-    <!-- no translation found for ethernet_tethering_subtext (8796744370636115313) -->
-    <skip />
+    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"Dijeli internetsku vezu tableta putem Etherneta"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Koristite pristupnu tačku i Dijeljenje internetske veze da omogućite internet drugim uređajima putem veze za prijenos podataka na mobilnoj mreži. Aplikacije također mogu kreirati pristupne tačke za dijeljenje sadržaja s uređajima u blizini."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Koristite pristupnu tačku i dijeljenje internetske veze da omogućite internet drugim uređajima putem WiFi mreže ili veze za prijenos podataka na mobilnoj mreži. Aplikacije također mogu kreirati pristupne tačke za dijeljenje sadržaja s uređajima u blizini."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Pomoć"</string>
@@ -4245,8 +4249,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Na vaš zahtjev, Android blokira pojavljivanje obavještenja iz ove aplikacije na ovom uređaju"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Na vaš zahtjev, Android blokira pojavljivanje ove kategorije obavještenja na ovom uređaju"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Na vaš zahtjev, Android blokira pojavljivanje ove grupe obavještenja na ovom uređaju"</string>
-    <!-- no translation found for app_notifications_not_send_desc (5683060986735070528) -->
-    <skip />
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Ova aplikacija ne šalje obavijesti"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Kategorije"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Ostalo"</string>
     <plurals name="notification_group_summary" formatted="false" msgid="483490958130993160">
