@@ -453,6 +453,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"O seu modelo de rosto será eliminado de forma permanente e segura.\n\nApós a eliminação, precisará do seu PIN, padrão ou palavra-passe para desbloquear o telemóvel."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Utilize o Desbloqueio facial para desbloquear o telemóvel"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Impressão digital"</string>
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Ao usar o Desbloqueio por impressão digital"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Impress. dig. p/ trab."</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Gerir impressões dig."</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Usar impr. dig. para"</string>
@@ -480,7 +481,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_3" product="default" msgid="4757472591076060066">"O seu telemóvel irá utilizar ocasionalmente as suas imagens de impressões digitais recentes para criar modelos de impressões digitais melhorados."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Utilize a sua impressão digital para desbloquear o telemóvel ou para autorizar compras.\n\nNota: não pode utilizar a sua impressão digital para desbloquear este dispositivo. Para mais informações, contacte o gestor da sua entidade."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Cancelar"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"Não, obrigado"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"Não"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Aceito"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Ignorar impressão digital?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"A configuração da impressão digital demora apenas um ou dois minutos. Se ignorar este passo, pode adicionar a impressão digital mais tarde nas Definições."</string>
@@ -591,6 +592,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Já pode usar a impressão digital para desbloquear o tablet ou validar a sua identidade, como quando inicia sessão em apps"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Já pode usar a impressão digital para desbloquear o dispositivo ou validar a sua identidade, como quando inicia sessão em apps"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Já pode usar a impressão digital para desbloquear o telemóvel ou validar a sua identidade, como quando inicia sessão em apps"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Desbloquear apenas quando o ecrã está ligado"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"O ecrã tem de estar ativado antes de poder desbloquear com a sua impressão digital. Isto torna o desbloqueio acidental menos provável."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Ecrã, desbloqueio"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Fazer isto mais tarde"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Levante e toque novamente"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Coloque o lado da sua impressão digital no sensor, mantenha essa posição e, em seguida, mude para o outro lado"</string>
@@ -1515,6 +1519,7 @@
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Indisponível, modo de hora de dormir ativado"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Usar proteção de ecrã"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Ao carregar ou na estação de ancoragem"</string>
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Quando está ancorado ou a carregar"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Ao carregar"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Ancorado"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Nunca"</string>
@@ -1914,8 +1919,7 @@
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> será desligado."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ligação Ethernet via telemóvel"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Partilhar a ligação à Internet do telemóvel através de Ethernet"</string>
-    <!-- no translation found for ethernet_tethering_subtext (8796744370636115313) -->
-    <skip />
+    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"Partilhar a ligação à Internet do tablet por Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Utilize uma zona Wi-Fi e uma ligação via telemóvel para disponibilizar Internet a outros dispositivos através da sua ligação móvel de dados. As aplicações podem igualmente criar uma zona Wi-Fi para partilhar conteúdo com dispositivos próximos."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Use uma zona Wi-Fi e uma ligação (à Internet) via telemóvel para disponibilizar Internet a outros dispositivos através de Wi-Fi ou da sua ligação móvel de dados. As apps também podem criar uma zona Wi-Fi para partilhar conteúdo com dispositivos próximos."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Ajuda"</string>
@@ -4197,8 +4201,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"A seu pedido, o Android está a bloquear a apresentação das notificações desta aplicação neste dispositivo."</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"A seu pedido, o Android está a bloquear a apresentação desta categoria de notificações neste dispositivo."</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"A seu pedido, o Android está a bloquear a apresentação deste grupo de notificações neste dispositivo."</string>
-    <!-- no translation found for app_notifications_not_send_desc (5683060986735070528) -->
-    <skip />
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Esta app não envia notificações"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Categorias"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Outra"</string>
     <plurals name="notification_group_summary" formatted="false" msgid="483490958130993160">
