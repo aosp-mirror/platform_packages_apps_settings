@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2015 The Android Open Source Project
+<!-- Copyright (C) 2022 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -18,41 +18,13 @@
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:icon="@drawable/ic_enterprise">
+    android:icon="@drawable/ic_lock">
 
     <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
         android:id="@+id/topLayout"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="24dp">
-
-            <Button
-                android:id="@+id/cancelButton"
-                style="@style/SudGlifButton.Secondary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="?attr/sudMarginStart"
-                android:layout_marginEnd="?attr/sudMarginEnd"
-                android:layout_marginBottom="80dp"
-                android:text="@string/cancel" />
-
-            <Button
-                android:id="@+id/forgotButton"
-                style="@style/SudGlifButton.Secondary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="?attr/sudMarginStart"
-                android:layout_marginEnd="?attr/sudMarginEnd"
-                android:layout_gravity="center"
-                android:visibility="gone" />
-
-        </LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             style="@style/SudContentFrame"
@@ -71,8 +43,8 @@
 
                 <com.android.internal.widget.LockPatternView
                     android:id="@+id/lockPattern"
-                    android:layout_width="@dimen/biometric_auth_pattern_view_size"
-                    android:layout_height="@dimen/biometric_auth_pattern_view_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center" />
 
             </com.google.android.setupdesign.view.FillContentLayout>
@@ -84,12 +56,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:paddingStart="?attr/sudMarginStart"
-                android:paddingEnd="?attr/sudMarginEnd"
-                android:layout_marginTop="12dp"
+                android:layout_marginStart="?attr/sudMarginStart"
+                android:layout_marginEnd="?attr/sudMarginEnd"
                 android:gravity="center_vertical"/>
+
+            <Button
+                android:id="@+id/cancelButton"
+                style="@style/SudGlifButton.Secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="?attr/sudMarginStart"
+                android:layout_marginEnd="?attr/sudMarginEnd"
+                android:layout_marginBottom="80dp"
+                android:text="@string/cancel" />
 
         </LinearLayout>
 
     </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
+
 </com.google.android.setupdesign.GlifLayout>
