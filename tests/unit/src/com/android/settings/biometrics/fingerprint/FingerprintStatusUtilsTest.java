@@ -179,8 +179,20 @@ public class FingerprintStatusUtilsTest {
     }
 
     @Test
-    public void getSettingsClassName_whenNotEnrolled_returnsFingerprintSettings() {
+    public void getSettingsClassName_whenNotEnrolled_fingerprintOnly_returnsFingerprintEnrollInduction() {
         when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(false);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(false);
+
+        assertThat(mFingerprintStatusUtils.getSettingsClassName())
+                .isEqualTo(FingerprintEnrollIntroductionInternal.class.getName());
+    }
+
+    @Test
+    public void getSettingsClassName_whenNotEnrolled_fingerprintNotOnly_returnsFingerprintSettings() {
+        when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(false);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
 
         assertThat(mFingerprintStatusUtils.getSettingsClassName())
                 .isEqualTo(FingerprintSettings.class.getName());
