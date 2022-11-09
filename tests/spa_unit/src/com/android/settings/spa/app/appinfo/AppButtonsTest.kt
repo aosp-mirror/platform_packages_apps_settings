@@ -125,7 +125,10 @@ class AppButtonsTest {
     private companion object {
         const val PACKAGE_NAME = "package.name"
         val PACKAGE_INFO = PackageInfo().apply {
-            applicationInfo = ApplicationInfo()
+            applicationInfo = ApplicationInfo().apply {
+                packageName = PACKAGE_NAME
+            }
+            packageName = PACKAGE_NAME
         }
     }
 }
