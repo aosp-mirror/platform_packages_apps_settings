@@ -50,7 +50,8 @@ class PackageInfoPresenter(
     private val coroutineScope: CoroutineScope,
 ) {
     private val metricsFeatureProvider = FeatureFactory.getFactory(context).metricsFeatureProvider
-    val userContext by lazy { context.asUser(UserHandle.of(userId)) }
+    private val userHandle = UserHandle.of(userId)
+    val userContext by lazy { context.asUser(userHandle) }
     val userPackageManager: PackageManager by lazy { userContext.packageManager }
     private val _flow: MutableStateFlow<PackageInfo?> = MutableStateFlow(null)
 
@@ -75,7 +76,7 @@ class PackageInfoPresenter(
             addDataScheme("package")
         }
         val navController = LocalNavController.current
-        DisposableBroadcastReceiverAsUser(userId, intentFilter) { intent ->
+        DisposableBroadcastReceiverAsUser(intentFilter, userHandle) { intent ->
             if (packageName == intent.data?.schemeSpecificPart) {
                 val packageInfo = flow.value
                 if (packageInfo != null && packageInfo.applicationInfo.isSystemApp) {
@@ -117,7 +118,7 @@ class PackageInfoPresenter(
         val intent = Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri).apply {
             putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, forAllUsers)
         }
-        context.startActivityAsUser(intent, UserHandle.of(userId))
+        context.startActivityAsUser(intent, userHandle)
     }
 
     /** Clears this instant app. */
