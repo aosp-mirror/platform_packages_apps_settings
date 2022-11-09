@@ -35,7 +35,6 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -247,7 +246,6 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
         } catch (RemoteException e) {
             Log.w(TAG, "PackageManager is dead. Can't get list of packages granted "
                     + Arrays.toString(mPermissions), e);
-            return;
         }
     }
 
@@ -297,41 +295,6 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
      */
     private boolean shouldIgnorePackage(String packageName) {
         return packageName.equals("android") || packageName.equals(mContext.getPackageName());
-    }
-
-    public int getNumPackagesDeclaredPermission() {
-        SparseArray<ArrayMap<String, PermissionState>> entries = getEntries();
-        if (entries == null) {
-            return 0;
-        }
-        final ArrayMap<String, PermissionState> entriesForProfile =
-                entries.get(mUserManager.getProcessUserId());
-        if (entriesForProfile == null) {
-            return 0;
-        }
-        return entriesForProfile.size();
-    }
-
-    public int getNumPackagesAllowedByAppOps() {
-        SparseArray<ArrayMap<String, PermissionState>> entries = getEntries();
-        if (entries == null) {
-            return 0;
-        }
-        loadPermissionsStates(entries);
-        loadAppOpsStates(entries);
-        final ArrayMap<String, PermissionState> entriesForProfile =
-                entries.get(mUserManager.getProcessUserId());
-        if (entriesForProfile == null) {
-            return 0;
-        }
-        Collection<PermissionState> permStates = entriesForProfile.values();
-        int result = 0;
-        for (PermissionState permState : permStates) {
-            if (permState.isPermissible()) {
-                result++;
-            }
-        }
-        return result;
     }
 
     public static class PermissionState {

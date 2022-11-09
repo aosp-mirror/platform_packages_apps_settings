@@ -29,8 +29,6 @@ import com.android.settingslib.applications.ApplicationsState.AppFilter;
  * filters that can use the info.
  */
 public class AppStateWriteSettingsBridge extends AppStateAppOpsBridge {
-
-    private static final String TAG = "AppStateWriteSettingsBridge";
     private static final int APP_OPS_OP_CODE = AppOpsManager.OP_WRITE_SETTINGS;
     private static final String PM_WRITE_SETTINGS = Manifest.permission.WRITE_SETTINGS;
 
@@ -51,16 +49,6 @@ public class AppStateWriteSettingsBridge extends AppStateAppOpsBridge {
     public WriteSettingsState getWriteSettingsInfo(String pkg, int uid) {
         PermissionState permissionState = super.getPermissionInfo(pkg, uid);
         return new WriteSettingsState(permissionState);
-    }
-
-    // TODO: figure out how to filter out system apps for this method
-    public int getNumberOfPackagesWithPermission() {
-        return super.getNumPackagesDeclaredPermission();
-    }
-
-    // TODO: figure out how to filter out system apps for this method
-    public int getNumberOfPackagesCanWriteSettings() {
-        return super.getNumPackagesAllowedByAppOps();
     }
 
     public static class WriteSettingsState extends AppStateAppOpsBridge.PermissionState {
