@@ -32,6 +32,7 @@ import android.os.Process;
 import android.os.SystemClock;
 import android.os.UidBatteryConsumer;
 import android.os.UserHandle;
+import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.IntDef;
@@ -51,6 +52,9 @@ import com.android.settingslib.fuelgauge.EstimateKt;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.ThreadUtils;
+
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.MessageLite;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -313,6 +317,28 @@ public class BatteryUtils {
                     PackageManager.GET_META_DATA);
         } catch (PackageManager.NameNotFoundException e) {
             return UID_NULL;
+        }
+    }
+
+    /**
+     * Parses proto object from string.
+     *
+     * @param serializedProto the serialized proto string
+     * @param protoClass class of the proto
+     * @return instance of the proto class parsed from the string
+     */
+    @SuppressWarnings("unchecked")
+    public static <T extends MessageLite> T parseProtoFromString(
+            String serializedProto, T protoClass) {
+        if (serializedProto.isEmpty()) {
+            return (T) protoClass.getDefaultInstanceForType();
+        }
+        try {
+            return (T) protoClass.getParserForType()
+                    .parseFrom(Base64.decode(serializedProto, Base64.DEFAULT));
+        } catch (InvalidProtocolBufferException e) {
+            Log.e(TAG, "Failed to deserialize proto class", e);
+            return (T) protoClass.getDefaultInstanceForType();
         }
     }
 

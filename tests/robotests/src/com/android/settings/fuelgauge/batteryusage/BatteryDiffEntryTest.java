@@ -138,8 +138,13 @@ public final class BatteryDiffEntryTest {
         // Generates fake testing data.
         final ContentValues values = getContentValuesWithType(
                 ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
-        values.put(BatteryHistEntry.KEY_DRAIN_TYPE,
-                Integer.valueOf(BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY));
+        final BatteryInformation batteryInformation =
+                BatteryInformation
+                        .newBuilder()
+                        .setDrainType(BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY)
+                        .build();
+        values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION,
+                ConvertUtils.convertBatteryInformationToString(batteryInformation));
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
 
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
@@ -233,7 +238,13 @@ public final class BatteryDiffEntryTest {
         final String expectedAppLabel = "fake app label";
         final ContentValues values = getContentValuesWithType(
                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
-        values.put(BatteryHistEntry.KEY_APP_LABEL, expectedAppLabel);
+        final BatteryInformation batteryInformation =
+                BatteryInformation
+                        .newBuilder()
+                        .setAppLabel(expectedAppLabel)
+                        .build();
+        values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION,
+                ConvertUtils.convertBatteryInformationToString(batteryInformation));
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
 
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
@@ -461,7 +472,13 @@ public final class BatteryDiffEntryTest {
     private BatteryDiffEntry createBatteryDiffEntry(
             int consumerType, long uid, boolean isHidden) {
         final ContentValues values = getContentValuesWithType(consumerType);
-        values.put(BatteryHistEntry.KEY_IS_HIDDEN, isHidden);
+        final BatteryInformation batteryInformation =
+                BatteryInformation
+                        .newBuilder()
+                        .setIsHidden(isHidden)
+                        .build();
+        values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION,
+                ConvertUtils.convertBatteryInformationToString(batteryInformation));
         values.put(BatteryHistEntry.KEY_UID, uid);
         return new BatteryDiffEntry(
                 mContext,

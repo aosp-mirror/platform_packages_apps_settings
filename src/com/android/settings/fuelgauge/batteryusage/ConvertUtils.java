@@ -18,13 +18,16 @@ package com.android.settings.fuelgauge.batteryusage;
 import android.annotation.IntDef;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.BatteryUsageStats;
+import android.os.Build;
 import android.os.LocaleList;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.ArraySet;
+import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -83,46 +86,69 @@ public final class ConvertUtils {
 
     /** Converts to content values */
     public static ContentValues convertToContentValues(
-            BatteryEntry entry,
-            BatteryUsageStats batteryUsageStats,
-            int batteryLevel,
-            int batteryStatus,
-            int batteryHealth,
-            long bootTimestamp,
-            long timestamp) {
+            final BatteryEntry entry,
+            final BatteryUsageStats batteryUsageStats,
+            final int batteryLevel,
+            final int batteryStatus,
+            final int batteryHealth,
+            final long bootTimestamp,
+            final long timestamp) {
         final ContentValues values = new ContentValues();
         if (entry != null && batteryUsageStats != null) {
             values.put(BatteryHistEntry.KEY_UID, Long.valueOf(entry.getUid()));
             values.put(BatteryHistEntry.KEY_USER_ID,
                     Long.valueOf(UserHandle.getUserId(entry.getUid())));
-            values.put(BatteryHistEntry.KEY_APP_LABEL, entry.getLabel());
             values.put(BatteryHistEntry.KEY_PACKAGE_NAME,
                     entry.getDefaultPackageName());
-            values.put(BatteryHistEntry.KEY_IS_HIDDEN, Boolean.valueOf(entry.isHidden()));
-            values.put(BatteryHistEntry.KEY_TOTAL_POWER,
-                    Double.valueOf(batteryUsageStats.getConsumedPower()));
-            values.put(BatteryHistEntry.KEY_CONSUME_POWER,
-                    Double.valueOf(entry.getConsumedPower()));
-            values.put(BatteryHistEntry.KEY_PERCENT_OF_TOTAL,
-                    Double.valueOf(entry.mPercent));
-            values.put(BatteryHistEntry.KEY_FOREGROUND_USAGE_TIME,
-                    Long.valueOf(entry.getTimeInForegroundMs()));
-            values.put(BatteryHistEntry.KEY_BACKGROUND_USAGE_TIME,
-                    Long.valueOf(entry.getTimeInBackgroundMs()));
-            values.put(BatteryHistEntry.KEY_DRAIN_TYPE,
-                    Integer.valueOf(entry.getPowerComponentId()));
             values.put(BatteryHistEntry.KEY_CONSUMER_TYPE,
                     Integer.valueOf(entry.getConsumerType()));
         } else {
             values.put(BatteryHistEntry.KEY_PACKAGE_NAME, FAKE_PACKAGE_NAME);
         }
-        values.put(BatteryHistEntry.KEY_BOOT_TIMESTAMP, Long.valueOf(bootTimestamp));
         values.put(BatteryHistEntry.KEY_TIMESTAMP, Long.valueOf(timestamp));
-        values.put(BatteryHistEntry.KEY_ZONE_ID, TimeZone.getDefault().getID());
-        values.put(BatteryHistEntry.KEY_BATTERY_LEVEL, Integer.valueOf(batteryLevel));
-        values.put(BatteryHistEntry.KEY_BATTERY_STATUS, Integer.valueOf(batteryStatus));
-        values.put(BatteryHistEntry.KEY_BATTERY_HEALTH, Integer.valueOf(batteryHealth));
+        final BatteryInformation batteryInformation =
+                constructBatteryInformation(
+                        entry,
+                        batteryUsageStats,
+                        batteryLevel,
+                        batteryStatus,
+                        batteryHealth,
+                        bootTimestamp);
+        values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION,
+                convertBatteryInformationToString(batteryInformation));
+        // Save the BatteryInformation unencoded string into database for debugging.
+        if (Build.TYPE.equals("userdebug")) {
+            values.put(
+                    BatteryHistEntry.KEY_BATTERY_INFORMATION_DEBUG, batteryInformation.toString());
+        }
         return values;
+    }
+
+    /** Gets the encoded string from {@link BatteryInformation} instance. */
+    public static String convertBatteryInformationToString(
+            final BatteryInformation batteryInformation) {
+        return Base64.encodeToString(batteryInformation.toByteArray(), Base64.DEFAULT);
+    }
+
+    /** Gets the {@link BatteryInformation} instance from {@link ContentValues}. */
+    public static BatteryInformation getBatteryInformation(
+            final ContentValues values, final String key) {
+        final BatteryInformation defaultInstance = BatteryInformation.getDefaultInstance();
+        if (values != null && values.containsKey(key)) {
+            return BatteryUtils.parseProtoFromString(values.getAsString(key), defaultInstance);
+        }
+        return defaultInstance;
+    }
+
+    /** Gets the {@link BatteryInformation} instance from {@link Cursor}. */
+    public static BatteryInformation getBatteryInformation(final Cursor cursor, final String key) {
+        final BatteryInformation defaultInstance = BatteryInformation.getDefaultInstance();
+        final int columnIndex = cursor.getColumnIndex(key);
+        if (columnIndex >= 0) {
+            return BatteryUtils.parseProtoFromString(
+                    cursor.getString(columnIndex), defaultInstance);
+        }
+        return defaultInstance;
     }
 
     /** Converts to {@link BatteryHistEntry} */
@@ -329,6 +355,41 @@ public final class ConvertUtils {
                         consumePercentageFromOtherUsers));
             }
         }
+    }
+
+    private static BatteryInformation constructBatteryInformation(
+            final BatteryEntry entry,
+            final BatteryUsageStats batteryUsageStats,
+            final int batteryLevel,
+            final int batteryStatus,
+            final int batteryHealth,
+            final long bootTimestamp) {
+        final DeviceBatteryState deviceBatteryState =
+                DeviceBatteryState
+                        .newBuilder()
+                        .setBatteryLevel(batteryLevel)
+                        .setBatteryStatus(batteryStatus)
+                        .setBatteryHealth(batteryHealth)
+                        .build();
+        final BatteryInformation.Builder batteryInformationBuilder =
+                BatteryInformation
+                        .newBuilder()
+                        .setDeviceBatteryState(deviceBatteryState)
+                        .setBootTimestamp(bootTimestamp)
+                        .setZoneId(TimeZone.getDefault().getID());
+        if (entry != null && batteryUsageStats != null) {
+            batteryInformationBuilder
+                    .setIsHidden(entry.isHidden())
+                    .setAppLabel(entry.getLabel() != null ? entry.getLabel() : "")
+                    .setTotalPower(batteryUsageStats.getConsumedPower())
+                    .setConsumePower(entry.getConsumedPower())
+                    .setPercentOfTotal(entry.mPercent)
+                    .setDrainType(entry.getPowerComponentId())
+                    .setForegroundUsageTimeInMs(entry.getTimeInForegroundMs())
+                    .setBackgroundUsageTimeInMs(entry.getTimeInBackgroundMs());
+        }
+
+        return batteryInformationBuilder.build();
     }
 
     private static void insert24HoursData(

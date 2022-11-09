@@ -458,8 +458,7 @@ public class DataProcessorTest {
     @Test
     public void isFromFullCharge_chargedData_returnTrue() {
         final Map<String, BatteryHistEntry> entryMap = new HashMap<>();
-        final ContentValues values = new ContentValues();
-        values.put("batteryLevel", 100);
+        final ContentValues values = getContentValuesWithBatteryLevel(100);
         final BatteryHistEntry entry = new BatteryHistEntry(values);
         entryMap.put(FAKE_ENTRY_KEY, entry);
 
@@ -1042,8 +1041,7 @@ public class DataProcessorTest {
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
         for (int index = 0; index < timestamps.length; index++) {
             final Map<String, BatteryHistEntry> entryMap = new HashMap<>();
-            final ContentValues values = new ContentValues();
-            values.put(BatteryHistEntry.KEY_BATTERY_LEVEL, levels[index]);
+            final ContentValues values = getContentValuesWithBatteryLevel(levels[index]);
             final BatteryHistEntry entry = new BatteryHistEntry(values);
             entryMap.put(FAKE_ENTRY_KEY, entry);
             batteryHistoryMap.put(timestamps[index], entryMap);
@@ -1051,20 +1049,43 @@ public class DataProcessorTest {
         return batteryHistoryMap;
     }
 
+    private static ContentValues getContentValuesWithBatteryLevel(final int level) {
+        final ContentValues values = new ContentValues();
+        final DeviceBatteryState deviceBatteryState =
+                DeviceBatteryState
+                        .newBuilder()
+                        .setBatteryLevel(level)
+                        .build();
+        final BatteryInformation batteryInformation =
+                BatteryInformation
+                        .newBuilder()
+                        .setDeviceBatteryState(deviceBatteryState)
+                        .build();
+        values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION,
+                ConvertUtils.convertBatteryInformationToString(batteryInformation));
+        return values;
+    }
+
     private static BatteryHistEntry createBatteryHistEntry(
             final String packageName, final String appLabel, final double consumePower,
             final long uid, final long userId, final int consumerType,
             final long foregroundUsageTimeInMs, final long backgroundUsageTimeInMs) {
         // Only insert required fields.
+        final BatteryInformation batteryInformation =
+                BatteryInformation
+                        .newBuilder()
+                        .setAppLabel(appLabel)
+                        .setConsumePower(consumePower)
+                        .setForegroundUsageTimeInMs(foregroundUsageTimeInMs)
+                        .setBackgroundUsageTimeInMs(backgroundUsageTimeInMs)
+                        .build();
         final ContentValues values = new ContentValues();
         values.put(BatteryHistEntry.KEY_PACKAGE_NAME, packageName);
-        values.put(BatteryHistEntry.KEY_APP_LABEL, appLabel);
         values.put(BatteryHistEntry.KEY_UID, uid);
         values.put(BatteryHistEntry.KEY_USER_ID, userId);
         values.put(BatteryHistEntry.KEY_CONSUMER_TYPE, consumerType);
-        values.put(BatteryHistEntry.KEY_CONSUME_POWER, consumePower);
-        values.put(BatteryHistEntry.KEY_FOREGROUND_USAGE_TIME, foregroundUsageTimeInMs);
-        values.put(BatteryHistEntry.KEY_BACKGROUND_USAGE_TIME, backgroundUsageTimeInMs);
+        values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION,
+                ConvertUtils.convertBatteryInformationToString(batteryInformation));
         return new BatteryHistEntry(values);
     }
 

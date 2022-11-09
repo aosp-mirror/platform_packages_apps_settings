@@ -148,23 +148,37 @@ public final class BatteryUsageContentProviderTest {
     @Test
     public void insert_batteryState_returnsExpectedResult() {
         mProvider.onCreate();
+        final DeviceBatteryState deviceBatteryState =
+                DeviceBatteryState
+                        .newBuilder()
+                        .setBatteryLevel(51)
+                        .setBatteryStatus(2)
+                        .setBatteryHealth(3)
+                        .build();
+        final BatteryInformation batteryInformation =
+                BatteryInformation
+                        .newBuilder()
+                        .setDeviceBatteryState(deviceBatteryState)
+                        .setAppLabel("Settings")
+                        .setIsHidden(true)
+                        .setBootTimestamp(101L)
+                        .setTotalPower(99)
+                        .setConsumePower(9)
+                        .setPercentOfTotal(0.9)
+                        .setForegroundUsageTimeInMs(1000)
+                        .setBackgroundUsageTimeInMs(2000)
+                        .setDrainType(1)
+                        .build();
+        final String expectedBatteryInformationString =
+                ConvertUtils.convertBatteryInformationToString(batteryInformation);
         ContentValues values = new ContentValues();
-        values.put("uid", Long.valueOf(101L));
-        values.put("userId", Long.valueOf(1001L));
-        values.put("appLabel", new String("Settings"));
-        values.put("packageName", new String("com.android.settings"));
-        values.put("timestamp", Long.valueOf(2100021L));
-        values.put("isHidden", Boolean.valueOf(true));
-        values.put("totalPower", Double.valueOf(99.0));
-        values.put("consumePower", Double.valueOf(9.0));
-        values.put("percentOfTotal", Double.valueOf(0.9));
-        values.put("foregroundUsageTimeInMs", Long.valueOf(1000));
-        values.put("backgroundUsageTimeInMs", Long.valueOf(2000));
-        values.put("drainType", Integer.valueOf(1));
-        values.put("consumerType", Integer.valueOf(2));
-        values.put("batteryLevel", Integer.valueOf(51));
-        values.put("batteryStatus", Integer.valueOf(2));
-        values.put("batteryHealth", Integer.valueOf(3));
+        values.put(BatteryHistEntry.KEY_UID, Long.valueOf(101L));
+        values.put(BatteryHistEntry.KEY_USER_ID, Long.valueOf(1001L));
+        values.put(BatteryHistEntry.KEY_PACKAGE_NAME, new String("com.android.settings"));
+        values.put(BatteryHistEntry.KEY_TIMESTAMP, Long.valueOf(2100021L));
+        values.put(BatteryHistEntry.KEY_CONSUMER_TYPE, Integer.valueOf(2));
+        values.put(BatteryHistEntry.KEY_IS_FULL_CHARGE_CYCLE_START, true);
+        values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION, expectedBatteryInformationString);
 
         final Uri uri = mProvider.insert(VALID_BATTERY_STATE_CONTENT_URI, values);
 
@@ -175,31 +189,34 @@ public final class BatteryUsageContentProviderTest {
         assertThat(states).hasSize(1);
         assertThat(states.get(0).uid).isEqualTo(101L);
         assertThat(states.get(0).userId).isEqualTo(1001L);
-        assertThat(states.get(0).appLabel).isEqualTo("Settings");
         assertThat(states.get(0).packageName).isEqualTo("com.android.settings");
-        assertThat(states.get(0).isHidden).isTrue();
         assertThat(states.get(0).timestamp).isEqualTo(2100021L);
-        assertThat(states.get(0).totalPower).isEqualTo(99.0);
-        assertThat(states.get(0).consumePower).isEqualTo(9.0);
-        assertThat(states.get(0).percentOfTotal).isEqualTo(0.9);
-        assertThat(states.get(0).foregroundUsageTimeInMs).isEqualTo(1000);
-        assertThat(states.get(0).backgroundUsageTimeInMs).isEqualTo(2000);
-        assertThat(states.get(0).drainType).isEqualTo(1);
         assertThat(states.get(0).consumerType).isEqualTo(2);
-        assertThat(states.get(0).batteryLevel).isEqualTo(51);
-        assertThat(states.get(0).batteryStatus).isEqualTo(2);
-        assertThat(states.get(0).batteryHealth).isEqualTo(3);
+        assertThat(states.get(0).isFullChargeCycleStart).isTrue();
+        assertThat(states.get(0).batteryInformation).isEqualTo(expectedBatteryInformationString);
     }
 
     @Test
     public void insert_partialFieldsContentValues_returnsExpectedResult() {
         mProvider.onCreate();
+        final DeviceBatteryState deviceBatteryState =
+                DeviceBatteryState
+                        .newBuilder()
+                        .setBatteryLevel(52)
+                        .setBatteryStatus(3)
+                        .setBatteryHealth(2)
+                        .build();
+        final BatteryInformation batteryInformation =
+                BatteryInformation
+                        .newBuilder()
+                        .setDeviceBatteryState(deviceBatteryState)
+                        .build();
+        final String expectedBatteryInformationString =
+                ConvertUtils.convertBatteryInformationToString(batteryInformation);
         final ContentValues values = new ContentValues();
-        values.put("packageName", new String("fake_data"));
-        values.put("timestamp", Long.valueOf(2100022L));
-        values.put("batteryLevel", Integer.valueOf(52));
-        values.put("batteryStatus", Integer.valueOf(3));
-        values.put("batteryHealth", Integer.valueOf(2));
+        values.put(BatteryHistEntry.KEY_PACKAGE_NAME, new String("fake_data"));
+        values.put(BatteryHistEntry.KEY_TIMESTAMP, Long.valueOf(2100022L));
+        values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION, expectedBatteryInformationString);
 
         final Uri uri = mProvider.insert(VALID_BATTERY_STATE_CONTENT_URI, values);
 
@@ -210,9 +227,7 @@ public final class BatteryUsageContentProviderTest {
         assertThat(states).hasSize(1);
         assertThat(states.get(0).packageName).isEqualTo("fake_data");
         assertThat(states.get(0).timestamp).isEqualTo(2100022L);
-        assertThat(states.get(0).batteryLevel).isEqualTo(52);
-        assertThat(states.get(0).batteryStatus).isEqualTo(3);
-        assertThat(states.get(0).batteryHealth).isEqualTo(2);
+        assertThat(states.get(0).batteryInformation).isEqualTo(expectedBatteryInformationString);
     }
 
     @Test

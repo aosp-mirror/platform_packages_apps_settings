@@ -231,13 +231,13 @@ public final class DatabaseUtilsTest {
         // Verifies the BatteryHistEntry data for timestamp1.
         Map<String, BatteryHistEntry> batteryMap = batteryHistMap.get(timestamp1);
         assertThat(batteryMap).hasSize(1);
-        assertThat(batteryMap.get("1").mAppLabel).isEqualTo("app name1");
+        assertThat(batteryMap.get("1").mPackageName).isEqualTo("app name1");
         // Verifies the BatteryHistEntry data for timestamp2.
         batteryMap = batteryHistMap.get(timestamp2);
         assertThat(batteryMap).hasSize(3);
-        assertThat(batteryMap.get("2").mAppLabel).isEqualTo("app name2");
-        assertThat(batteryMap.get("3").mAppLabel).isEqualTo("app name3");
-        assertThat(batteryMap.get("4").mAppLabel).isEqualTo("app name4");
+        assertThat(batteryMap.get("2").mPackageName).isEqualTo("app name2");
+        assertThat(batteryMap.get("3").mPackageName).isEqualTo("app name3");
+        assertThat(batteryMap.get("4").mPackageName).isEqualTo("app name4");
     }
 
     @Test
@@ -341,20 +341,27 @@ public final class DatabaseUtilsTest {
     }
 
     private static void verifyContentValues(double consumedPower, ContentValues values) {
-        assertThat(values.getAsDouble(BatteryHistEntry.KEY_CONSUME_POWER))
-                .isEqualTo(consumedPower);
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_BATTERY_LEVEL)).isEqualTo(20);
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_BATTERY_STATUS))
+        final BatteryInformation batteryInformation =
+                ConvertUtils.getBatteryInformation(
+                        values, BatteryHistEntry.KEY_BATTERY_INFORMATION);
+        final DeviceBatteryState deviceBatteryState = batteryInformation.getDeviceBatteryState();
+        assertThat(batteryInformation.getConsumePower()).isEqualTo(consumedPower);
+        assertThat(deviceBatteryState.getBatteryLevel()).isEqualTo(20);
+        assertThat(deviceBatteryState.getBatteryStatus())
                 .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_BATTERY_HEALTH))
+        assertThat(deviceBatteryState.getBatteryHealth())
                 .isEqualTo(BatteryManager.BATTERY_HEALTH_COLD);
     }
 
     private static void verifyFakeContentValues(ContentValues values) {
-        assertThat(values.getAsInteger("batteryLevel")).isEqualTo(20);
-        assertThat(values.getAsInteger("batteryStatus"))
+        final BatteryInformation batteryInformation =
+                ConvertUtils.getBatteryInformation(
+                        values, BatteryHistEntry.KEY_BATTERY_INFORMATION);
+        final DeviceBatteryState deviceBatteryState = batteryInformation.getDeviceBatteryState();
+        assertThat(deviceBatteryState.getBatteryLevel()).isEqualTo(20);
+        assertThat(deviceBatteryState.getBatteryStatus())
                 .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);
-        assertThat(values.getAsInteger("batteryHealth"))
+        assertThat(deviceBatteryState.getBatteryHealth())
                 .isEqualTo(BatteryManager.BATTERY_HEALTH_COLD);
         assertThat(values.getAsString("packageName"))
                 .isEqualTo(ConvertUtils.FAKE_PACKAGE_NAME);
@@ -372,7 +379,7 @@ public final class DatabaseUtilsTest {
     private static MatrixCursor getMatrixCursor() {
         return new MatrixCursor(
                 new String[] {
-                        BatteryHistEntry.KEY_APP_LABEL,
+                        BatteryHistEntry.KEY_PACKAGE_NAME,
                         BatteryHistEntry.KEY_TIMESTAMP,
                         BatteryHistEntry.KEY_UID,
                         BatteryHistEntry.KEY_CONSUMER_TYPE});
