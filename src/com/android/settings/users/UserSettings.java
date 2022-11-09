@@ -1489,7 +1489,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void updateAddUserCommon(Context context, RestrictedPreference addUser,
             boolean canAddRestrictedProfile) {
-        if ((mUserCaps.mCanAddUser || !mUserCaps.mDisallowAddUserSetByAdmin)
+        if ((mUserCaps.mCanAddUser && !mUserCaps.mDisallowAddUserSetByAdmin)
                 && WizardManagerHelper.isDeviceProvisioned(context)
                 && mUserCaps.mUserSwitcherEnabled) {
             addUser.setVisible(true);
