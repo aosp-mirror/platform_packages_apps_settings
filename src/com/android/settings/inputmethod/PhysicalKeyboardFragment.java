@@ -20,6 +20,7 @@ import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
@@ -211,8 +212,10 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
 
     private final OnPreferenceChangeListener mShowVirtualKeyboardSwitchPreferenceChangeListener =
             (preference, newValue) -> {
-                Secure.putInt(getContentResolver(), Secure.SHOW_IME_WITH_HARD_KEYBOARD,
-                        ((Boolean) newValue) ? 1 : 0);
+                final ContentResolver cr = getContentResolver();
+                Secure.putInt(cr, Secure.SHOW_IME_WITH_HARD_KEYBOARD, ((Boolean) newValue) ? 1 : 0);
+                cr.notifyChange(Secure.getUriFor(Secure.SHOW_IME_WITH_HARD_KEYBOARD),
+                        null /* observer */, ContentResolver.NOTIFY_NO_DELAY);
                 return true;
             };
 
