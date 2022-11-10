@@ -217,41 +217,6 @@ public class BatteryUtilsTest {
     }
 
     @Test
-    public void testShouldHideSystemConsumer_TypeIdle_ReturnTrue() {
-        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
-                BatteryConsumer.POWER_COMPONENT_IDLE)).isTrue();
-    }
-
-    @Test
-    public void testShouldHideSystemConsumer_TypeMobileRadio_ReturnTrue() {
-        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
-                BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO)).isTrue();
-    }
-
-    @Test
-    public void testShouldHideSystemConsumer_TypeScreen_ReturnTrue() {
-        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
-                BatteryConsumer.POWER_COMPONENT_SCREEN)).isTrue();
-    }
-
-    @Test
-    public void testShouldHideSystemConsumer_TypeBluetooth_ReturnTrue() {
-        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
-                BatteryConsumer.POWER_COMPONENT_BLUETOOTH)).isTrue();    }
-
-    @Test
-    public void testShouldHideSystemConsumer_TypeWifi_ReturnTrue() {
-        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
-                BatteryConsumer.POWER_COMPONENT_WIFI)).isTrue();
-    }
-
-    @Test
-    public void testShouldHideSystemConsumer_OtherType_ReturnFalse() {
-        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
-                BatteryConsumer.POWER_COMPONENT_FLASHLIGHT)).isFalse();
-    }
-
-    @Test
     public void testCalculateBatteryPercent() {
         assertThat(mBatteryUtils.calculateBatteryPercent(BATTERY_SYSTEM_USAGE, TOTAL_BATTERY_USAGE,
                 DISCHARGE_AMOUNT))
