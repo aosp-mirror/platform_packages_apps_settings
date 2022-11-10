@@ -80,6 +80,7 @@ public class NetworkProviderSimListController extends AbstractPreferenceControll
 
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
+        mMobileNetworkRepository.removeRegister();
     }
 
     @Override
