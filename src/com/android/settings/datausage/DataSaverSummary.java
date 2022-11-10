@@ -67,9 +67,18 @@ public class DataSaverSummary extends SettingsPreferenceFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
+        if (!isDataSaverVisible(getContext())) {
+            finishFragment();
+            return;
+        }
+
         addPreferencesFromResource(R.xml.data_saver);
         mUnrestrictedAccess = findPreference(KEY_UNRESTRICTED_ACCESS);
+        mApplicationsState = ApplicationsState.getInstance(
+                (Application) getContext().getApplicationContext());
         mDataSaverBackend = new DataSaverBackend(getContext());
+        mDataUsageBridge = new AppStateDataUsageBridge(mApplicationsState, this, mDataSaverBackend);
+        mSession = mApplicationsState.newSession(this, getSettingsLifecycle());
     }
 
     @Override
@@ -202,12 +211,18 @@ public class DataSaverSummary extends SettingsPreferenceFragment
                 R.plurals.data_saver_unrestricted_summary, count, count));
     }
 
+    public static boolean isDataSaverVisible(Context context) {
+        return context.getResources()
+            .getBoolean(R.bool.config_show_data_saver);
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.data_saver) {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return DataUsageUtils.hasMobileData(context)
+                    return isDataSaverVisible(context)
+                            && DataUsageUtils.hasMobileData(context)
                             && DataUsageUtils.getDefaultSubscriptionId(context)
                             != SubscriptionManager.INVALID_SUBSCRIPTION_ID;
                 }
