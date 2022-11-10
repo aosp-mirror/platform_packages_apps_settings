@@ -48,7 +48,6 @@ public final class PeriodicJobManagerTest {
         mContext = ApplicationProvider.getApplicationContext();
         mPeriodicJobManager = PeriodicJobManager.getInstance(mContext);
         mShadowAlarmManager = shadowOf(mContext.getSystemService(AlarmManager.class));
-        ShadowAlarmManager.setCanScheduleExactAlarms(true);
     }
 
     @After
@@ -66,15 +65,6 @@ public final class PeriodicJobManagerTest {
         assertThat(alarm.type).isEqualTo(AlarmManager.RTC_WAKEUP);
         // Verifies there is pending intent in the alarm.
         assertThat(alarm.operation).isNotNull();
-    }
-
-    @Test
-    public void refreshJob_withoutPermission_notRefreshesAlarmJob() {
-        ShadowAlarmManager.setCanScheduleExactAlarms(false);
-
-        mPeriodicJobManager.refreshJob();
-
-        assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNull();
     }
 
     @Test

@@ -73,10 +73,6 @@ public final class PeriodicJobManager {
         // Cancels the previous alert job and schedules the next one.
         final PendingIntent pendingIntent = getPendingIntent();
         cancelJob(pendingIntent);
-        if (!canScheduleExactAlarms()) {
-            Log.w(TAG, "cannot schedule exact alarm job");
-            return;
-        }
         // Uses UTC time to avoid scheduler is impacted by different timezone.
         final long triggerAtMillis = getTriggerAtMillis(Clock.systemUTC());
         mAlarmManager.setExactAndAllowWhileIdle(
@@ -110,14 +106,5 @@ public final class PeriodicJobManager {
                 ALARM_MANAGER_REQUEST_CODE,
                 broadcastIntent,
                 PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-    }
-
-    private boolean canScheduleExactAlarms() {
-        return canScheduleExactAlarms(mAlarmManager);
-    }
-
-    /** Whether we can schedule exact alarm or not? */
-    public static boolean canScheduleExactAlarms(AlarmManager alarmManager) {
-        return alarmManager.canScheduleExactAlarms();
     }
 }

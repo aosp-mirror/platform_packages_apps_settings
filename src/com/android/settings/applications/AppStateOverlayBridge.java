@@ -33,7 +33,6 @@ import java.util.List;
  */
 public class AppStateOverlayBridge extends AppStateAppOpsBridge {
 
-    private static final String TAG = "AppStateOverlayBridge";
     private static final int APP_OPS_OP_CODE = AppOpsManager.OP_SYSTEM_ALERT_WINDOW;
     private static final String PM_SYSTEM_ALERT_WINDOW = Manifest.permission.SYSTEM_ALERT_WINDOW;
     private static final String[] PM_PERMISSION = {
@@ -52,16 +51,6 @@ public class AppStateOverlayBridge extends AppStateAppOpsBridge {
     public OverlayState getOverlayInfo(String pkg, int uid) {
         PermissionState permissionState = super.getPermissionInfo(pkg, uid);
         return new OverlayState(permissionState);
-    }
-
-    // TODO: figure out how to filter out system apps for this method
-    public int getNumberOfPackagesWithPermission() {
-        return super.getNumPackagesDeclaredPermission();
-    }
-
-    // TODO: figure out how to filter out system apps for this method
-    public int getNumberOfPackagesCanDrawOverlay() {
-        return super.getNumPackagesAllowedByAppOps();
     }
 
     public static class OverlayState extends AppStateAppOpsBridge.PermissionState {

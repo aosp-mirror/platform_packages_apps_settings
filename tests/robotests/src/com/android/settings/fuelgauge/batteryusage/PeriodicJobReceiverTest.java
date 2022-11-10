@@ -58,7 +58,6 @@ public final class PeriodicJobReceiverTest {
         mContext = ApplicationProvider.getApplicationContext();
         mPeriodicJobManager = PeriodicJobManager.getInstance(mContext);
         mShadowAlarmManager = shadowOf(mContext.getSystemService(AlarmManager.class));
-        ShadowAlarmManager.setCanScheduleExactAlarms(true);
         mReceiver = new PeriodicJobReceiver();
 
         // Inserts fake data into database for testing.

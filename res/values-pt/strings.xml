@@ -357,6 +357,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Seu modelo de rosto será excluído de maneira permanente e segura.\n\nApós a exclusão, seu PIN, padrão ou senha serão necessários para desbloquear o smartphone."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Usar o Desbloqueio facial para acessar o smartphone"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Impressão digital"</string>
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Ao usar o Desbloqueio por impressão digital"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Impressão digital do trabalho"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Adicionar impressão digital"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
@@ -488,6 +489,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Agora, você pode usar a impressão digital para desbloquear o tablet ou confirmar sua identidade, como ao fazer login em apps"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Agora, você pode usar a impressão digital para desbloquear o dispositivo ou confirmar sua identidade, como ao fazer login em apps"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Agora, você pode usar a impressão digital para desbloquear o smartphone ou confirmar sua identidade, como ao fazer login em apps"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Desbloquear somente quando a tela estiver ativada"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"A tela precisa estar ativada para desbloquear o dispositivo com sua impressão digital. Isso diminui as chances de desbloqueio acidental."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Tela, Desbloqueio"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Fazer isso depois"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Tire o dedo e toque novamente"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Coloque a lateral da sua impressão digital no sensor e mantenha o dedo parado por alguns instantes. Depois, mude para o outro lado"</string>
@@ -795,8 +799,7 @@
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Aumentar o nível de registros da pilha NFC"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Registro de depuração NFC detalhado do fornecedor"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Incluir mais registros de fornecedores específicos do dispositivo em relatórios de bugs, que podem conter informações particulares."</string>
-    <!-- no translation found for nfc_snoop_log_title (1576197495976952388) -->
-    <skip />
+    <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Registro NCI NFC sem filtro"</string>
     <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Capturar detalhes de pacotes NFC, que podem conter informações particulares."</string>
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Reiniciar o dispositivo?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"O registro detalhado de NFC é destinado apenas a fins de desenvolvimento. Dados NFC extras estão incluídos em relatórios de bugs, que podem conter informações particulares. Reinicie o dispositivo para mudar essa configuração."</string>
@@ -1183,6 +1186,7 @@
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Indisponível durante o Modo hora de dormir"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Usar o protetor de tela"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Ao carregar ou quando encaixado na base"</string>
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Na base e carregando"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Ao carregar"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Encaixado na base"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Nunca"</string>
@@ -1471,8 +1475,7 @@
     <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Compartilhar a conexão de Internet do smartphone via Bluetooth"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Tethering Ethernet"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Compartilhar a conexão de Internet do smartphone via Ethernet"</string>
-    <!-- no translation found for ethernet_tethering_subtext (8796744370636115313) -->
-    <skip />
+    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"Compartilhar a conexão de Internet do tablet via Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Use o ponto de acesso e tethering para que outros dispositivos possam usar a Internet pela sua conexão de dados móveis. Os apps também podem criar um ponto de acesso para compartilhar conteúdo com dispositivos por perto."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Use o ponto de acesso e tethering para que outros dispositivos possam usar a Internet pela sua conexão de dados móveis. Os apps também podem criar um ponto de acesso para compartilhar conteúdo com dispositivos por perto."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Ajuda"</string>
@@ -2943,10 +2946,8 @@
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (recomendado)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"Mensagens MMS"</string>
     <string name="mms_message_summary" msgid="2855847140141698341">"Enviar e receber quando os dados móveis estiverem desativados"</string>
-    <!-- no translation found for auto_data_switch_title (5862200603753603464) -->
-    <skip />
-    <!-- no translation found for auto_data_switch_summary (135082667541071789) -->
-    <skip />
+    <string name="auto_data_switch_title" msgid="5862200603753603464">"Alternar dados móveis automaticamente"</string>
+    <string name="auto_data_switch_summary" msgid="135082667541071789">"Usar esta rede temporariamente quando ela tiver melhor disponibilidade para ligações e Internet"</string>
     <string name="work_sim_title" msgid="8999872928646924429">"Chip de trabalho"</string>
     <string name="user_restrictions_title" msgid="4068914244980335993">"Acesso a apps e conteúdo"</string>
     <string name="user_rename" msgid="8735940847878484249">"RENOMEAR"</string>
@@ -3458,6 +3459,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"O Android está bloqueando as notificações desse app neste dispositivo, conforme você pediu."</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"O Android está bloqueando essa categoria de notificações neste dispositivo, conforme você pediu."</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"O Android está bloqueando esse grupo de notificações neste dispositivo, conforme seu pedido"</string>
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Esse app não envia notificações"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Categorias"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Outros"</string>
     <string name="no_channels" msgid="4716199078612071915">"Este app não postou nenhuma notificação"</string>
@@ -3879,8 +3881,7 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Configuração bloqueada pelo provedor de crédito"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Consentimento necessário"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Para iniciar a configuração, entregue o smartphone ao seu pai/mãe"</string>
-    <!-- no translation found for disabled_by_policy_parental_consent (9166060049019018978) -->
-    <skip />
+    <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"Entregue o smartphone a um familiar responsável para que ele permita a mudança dessa configuração."</string>
     <string name="default_admin_support_msg" msgid="8816296554831532033">"Para mais informações, entre em contato com o administrador de TI"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Mais detalhes"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Seu administrador pode monitorar e gerenciar apps e dados associados ao seu perfil de trabalho, incluindo configurações, permissões, acesso corporativo, atividade de rede e informações de local do dispositivo."</string>
@@ -4677,10 +4678,8 @@
     <string name="wifi_scan_change" msgid="8438320311511852918">"Mudar"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Conectado"</string>
-    <!-- no translation found for mobile_data_temp_connection_active (3430470299756236413) -->
-    <skip />
-    <!-- no translation found for mobile_data_temp_using (5211002380149434155) -->
-    <skip />
+    <string name="mobile_data_temp_connection_active" msgid="3430470299756236413">"Temporariamente conectado"</string>
+    <string name="mobile_data_temp_using" msgid="5211002380149434155">"Temporariamente usando: <xliff:g id="SUBNAME">%1$s</xliff:g>"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Sem conexão"</string>
     <string name="mobile_data_off_summary" msgid="1884248776904165539">"Não é possível se conectar aos dados móveis automaticamente"</string>
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Desativar os dados móveis?"</string>
@@ -4765,7 +4764,8 @@
     <string name="tare_balances" msgid="731881382594747961">"Saldos"</string>
     <string name="tare_consumption_limits" msgid="3230949387874396382">"Limites de consumo"</string>
     <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Limite de consumo inicial"</string>
-    <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"Limite máximo de consumo"</string>
+    <string name="tare_min_consumption_limit" msgid="3293145670921755789">"Limite mínimo de consumo"</string>
+    <string name="tare_max_consumption_limit" msgid="8335700580111808823">"Limite máximo de consumo"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Modificadores"</string>
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Ações (custo de produção)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Ações (preço base)"</string>
@@ -4806,7 +4806,7 @@
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Mostrar outras informações"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Mostra dados como o horário, o clima ou outras informações no protetor de tela"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Mais configurações"</string>
-    <string name="dream_setup_title" msgid="2458303874255396142">"Escolher o protetor de tela"</string>
+    <string name="dream_setup_title" msgid="2458303874255396142">"Escolha o protetor de tela"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Escolha o que ver na tela quando o tablet estiver na base. O dispositivo pode consumir mais energia quando o protetor de tela é usado."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Personalizar"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"É necessário reiniciar o dispositivo para ativar o suporte ao formato livre."</string>
