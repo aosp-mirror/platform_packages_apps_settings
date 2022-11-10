@@ -360,6 +360,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Model lica trajno će se i sigurno izbrisati.\n\nNakon brisanja trebat će vam PIN, uzorak ili zaporka da biste otključali telefon."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Otključajte telefon licem"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Otisak prsta"</string>
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Kad se koristi otključavanje otiskom prsta"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Otisak za posl. profil"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Dodajte otisak prsta"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
@@ -488,6 +489,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Sad svojim otiskom prsta možete otključati tablet ili potvrditi da ste to vi, na primjer kad se prijavljujete u aplikacije"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Sad svojim otiskom prsta možete otključati uređaj ili potvrditi da ste to vi, na primjer kad se prijavljujete u aplikacije"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Sad svojim otiskom prsta možete otključati telefon ili potvrditi da ste to vi, na primjer kad se prijavljujete u aplikacije"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Otključavanje samo kad je zaslon uključen"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Zaslon mora biti uključen da biste ga mogli otključati otiskom prsta. Time se smanjuje mogućnost slučajnog otključavanja."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Zaslon, otključati"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Kasnije ću"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Podignite i ponovo dodirnite"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Postavite rub prsta na senzor i zadržite ga, a zatim prijeđite na drugu stranu"</string>
@@ -808,8 +812,7 @@
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Povećaj razinu zapisivanja za NFC stog"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Opširni zapisnik dobavljača o otklanjanju pogrešaka za NFC"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Uključite dodatne zapisnike dobavljača pojedinog uređaja u izvješća o programskim pogreškama koja mogu sadržavati privatne podatke."</string>
-    <!-- no translation found for nfc_snoop_log_title (1576197495976952388) -->
-    <skip />
+    <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Nefiltrirani zapis za NFC NCI"</string>
     <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Snimite detaljne NFC pakete koji možda sadrže privatne informacije."</string>
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Ponovo pokrenuti?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Detaljno zapisivanje za NFC namijenjeno je samo u razvojne svrhe. Dodatni podaci NFC-a uključeni su u izvješća o programskim pogreškama koja mogu sadržavati privatne podatke. Ponovo pokrenite uređaj da biste promijenili tu postavku."</string>
@@ -1199,6 +1202,7 @@
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Nije dostupno jer je uključen način rada u vrijeme spavanja"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Koristi čuvar zaslona"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Tijekom punjenja ili kada je na priključnoj stanici"</string>
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Na priklj. stanici tijekom punjenja"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Tijekom punjenja"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Kada je na priključnoj stanici"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Nikada"</string>
@@ -1488,8 +1492,7 @@
     <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Dijelite internetsku vezu telefona putem Bluetootha"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Dijeljenje veze ethernetom"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Dijelite internetsku vezu telefona putem etherneta"</string>
-    <!-- no translation found for ethernet_tethering_subtext (8796744370636115313) -->
-    <skip />
+    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"Dijelite internetsku vezu tableta putem etherneta"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Pomoću žarišne točke i modemskog povezivanja drugi se uređaji mogu povezati s internetom putem podatkovne veze vašeg mobilnog uređaja. Žarišnu točku mogu izraditi i aplikacije radi dijeljenja sadržaja s uređajima u blizini."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Pomoću žarišne točke i modemskog povezivanja drugi se uređaji mogu povezati s internetom putem vašeg Wi-Fija ili podatkovne veze vašeg mobilnog uređaja. Žarišnu točku mogu izraditi i aplikacije radi dijeljenja sadržaja s uređajima u blizini."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Pomoć"</string>
@@ -2980,10 +2983,8 @@
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (preporučeno)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"MMS poruke"</string>
     <string name="mms_message_summary" msgid="2855847140141698341">"Slanje i primanje dok su mobilni podaci isključeni"</string>
-    <!-- no translation found for auto_data_switch_title (5862200603753603464) -->
-    <skip />
-    <!-- no translation found for auto_data_switch_summary (135082667541071789) -->
-    <skip />
+    <string name="auto_data_switch_title" msgid="5862200603753603464">"Automatski prebaci mobilne podatke"</string>
+    <string name="auto_data_switch_summary" msgid="135082667541071789">"Privremeno koristi ovu mrežu kad je dostupnija za pozive i internet"</string>
     <string name="work_sim_title" msgid="8999872928646924429">"Radni SIM"</string>
     <string name="user_restrictions_title" msgid="4068914244980335993">"Pristup aplikacijama i sadržaju"</string>
     <string name="user_rename" msgid="8735940847878484249">"PREIMENOVANJE"</string>
@@ -3499,6 +3500,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Android na vaš zahtjev blokira prikazivanje obavijesti te aplikacije na ovom uređaju"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Android na vaš zahtjev blokira prikazivanje te kategorije obavijesti na ovom uređaju"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Android na vaš zahtjev blokira prikazivanje te grupe obavijesti na ovom uređaju"</string>
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Ova aplikacija ne šalje obavijesti"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Kategorije"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Drugo"</string>
     <string name="no_channels" msgid="4716199078612071915">"Ova aplikacija nije objavila nijednu obavijest"</string>
@@ -4740,10 +4742,8 @@
     <string name="wifi_scan_change" msgid="8438320311511852918">"Promijeni"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Povezano"</string>
-    <!-- no translation found for mobile_data_temp_connection_active (3430470299756236413) -->
-    <skip />
-    <!-- no translation found for mobile_data_temp_using (5211002380149434155) -->
-    <skip />
+    <string name="mobile_data_temp_connection_active" msgid="3430470299756236413">"Privremeno povezano"</string>
+    <string name="mobile_data_temp_using" msgid="5211002380149434155">"Privremeno koristite <xliff:g id="SUBNAME">%1$s</xliff:g>"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Niste povezani"</string>
     <string name="mobile_data_off_summary" msgid="1884248776904165539">"Mobilni podaci neće se automatski povezati"</string>
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Isključiti mobilne podatke?"</string>
@@ -4828,7 +4828,8 @@
     <string name="tare_balances" msgid="731881382594747961">"Salda"</string>
     <string name="tare_consumption_limits" msgid="3230949387874396382">"Ograničenja potrošnje"</string>
     <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Početno ograničenje potrošnje"</string>
-    <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"Maksimalno ograničenje potrošnje"</string>
+    <string name="tare_min_consumption_limit" msgid="3293145670921755789">"Minimalno ograničenje potrošnje"</string>
+    <string name="tare_max_consumption_limit" msgid="8335700580111808823">"Maksimalno ograničenje potrošnje"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Modifikatori"</string>
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Radnje (trošak proizvodnje)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Radnje (osnovna cijena)"</string>

@@ -19,17 +19,22 @@ package com.android.settings.spa.system
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.Modifier
 import com.android.settings.R
 import com.android.settings.localepicker.AppLocalePickerActivity
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.framework.compose.rememberContext
 import com.android.settingslib.spa.framework.compose.toState
+import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
+import com.android.settingslib.spa.widget.ui.SettingsBody
 import com.android.settingslib.spaprivileged.template.app.AppListItem
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.android.settingslib.spaprivileged.template.app.AppListPage
@@ -42,6 +47,11 @@ object AppLanguagesPageProvider : SettingsPageProvider {
         AppListPage(
             title = stringResource(R.string.app_locales_picker_menu_title),
             listModel = rememberContext(::AppLanguagesListModel),
+            header = {
+                Box(Modifier.padding(SettingsDimension.itemPadding)) {
+                    SettingsBody(stringResource(R.string.desc_app_locale_selection_supported))
+                }
+            },
         ) {
             AppLanguageItem(it)
         }

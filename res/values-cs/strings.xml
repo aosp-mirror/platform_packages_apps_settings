@@ -363,6 +363,8 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Model obličeje bude trvale a bezpečně smazán.\n\nPo smazání budete k odemknutí telefonu potřebovat PIN, gesto nebo heslo."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Odemykejte telefon pomocí obličeje"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Otisk prstu"</string>
+    <!-- no translation found for security_settings_fingerprint_settings_preferences_category (8975029409126780752) -->
+    <skip />
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Otisk prstu pro práci"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Přidat otisk prstu"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
@@ -396,7 +398,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"Odemykání tabletu otiskem prstu může být méně bezpečné než silné gesto nebo PIN"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"Odemykání zařízení otiskem prstu může být méně bezpečné než silné gesto nebo PIN"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Jak to funguje"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Odemknutí otiskem prstu vytvoří unikátní model vašeho otisku prstu k ověření identity. Model otisku prstu vytvoříme při nastavování na základě snímků otisku prstu z různých úhlů."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Funkce odemknutí otiskem prstu používá unikátní model vašeho otisku prstu k ověření identity. Model otisku prstu se vytváří na základě snímků otisku prstu z různých úhlů."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Odemknutí otiskem prstu vytváří jedinečný model otisku prstu dítěte, podle kterého ho při ověření poznáme. Model otisku prstu vytvoříme při nastavování na základě snímků otisku prstu z různých úhlů."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"Když použijete Pixel Imprint, model vašeho otisku prstu se aktualizuje pomocí příslušných snímků. Snímky použité k vytvoření modelu otisku prstu se nikdy neukládají, ale model otisku prstu je bezpečně uložen v telefonu (a nikdy ho neopouští). Ke zpracování dochází bezpečně v telefonu."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"Když používáte Pixel Imprint, snímky slouží k aktualizaci modelu vašeho otisku prstu. Snímky použité k vytvoření modelu otisku prstu se nikdy neukládají, ale model otisku prstu je bezpečně uložen v tabletu (a nikdy ho neopouští). Veškeré zpracování probíhá bezpečně v tabletu."</string>
@@ -490,6 +492,12 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Odteď můžete pomocí otisku prstu odemykat tablet nebo ověřovat svoji identitu, například při přihlašování do aplikací"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Odteď můžete pomocí otisku prstu odemykat zařízení nebo ověřovat svoji identitu, například při přihlašování do aplikací"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Odteď můžete pomocí otisku prstu odemykat telefon nebo ověřovat svoji identitu, například při přihlašování do aplikací"</string>
+    <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
+    <skip />
+    <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
+    <skip />
+    <!-- no translation found for security_settings_require_screen_on_to_auth_keywords (5557869560397089603) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Později"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Zvedněte prst a dotkněte se znovu"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Umístěte boční stranu prstu na snímač a podržte ho, poté ho „překulte“ na druhou stranu"</string>
@@ -564,10 +572,10 @@
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Maximální počet otisků prstů, které lze přidat: <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Přidali jste maximální počet otisků prstů"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Další otisky prstů nelze přidat"</string>
-    <string name="fingerprint_delete_title" msgid="5412123164503407098">"Smažte otisk <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>"</string>
-    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Touto akcí vymažete snímky a model otisků prstů propojené s „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“, které jsou uloženy ve vašem telefonu"</string>
-    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Touto akcí vymažete snímky a model otisků prstů propojené s „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“, které jsou uloženy ve vašem tabletu"</string>
-    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Touto akcí vymažete snímky a model otisku prstu propojené s „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“, které jsou uloženy ve vašem zařízení"</string>
+    <string name="fingerprint_delete_title" msgid="5412123164503407098">"Smazat otisk <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>"</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Touto akcí vymažete snímky a model otisků prstů pro „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“, které jsou uloženy ve vašem telefonu"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Touto akcí vymažete snímky a model otisků prstů pro „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“, které jsou uloženy ve vašem tabletu"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Touto akcí vymažete snímky a model otisku prstu pro „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“, které jsou uloženy ve vašem zařízení"</string>
     <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Pomocí otisku prstu už nebude možné odemykat telefon ani ověřovat vaši identitu v aplikacích."</string>
     <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Nebudete moci pomocí otisku prstu odemykat tablet ani ověřovat totožnost v aplikacích."</string>
     <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Nebudete moci pomocí otisku prstu odemykat zařízení ani ověřovat totožnost v aplikacích."</string>
@@ -823,8 +831,7 @@
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Zvýšit úroveň protokolování sady NFC"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Podrobné protokolování ladění dodavatelů NFC"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Zahrnovat do zpráv o chybách dodatečné protokoly dodavatelů specifické pro zařízení, které mohou obsahovat soukromé informace."</string>
-    <!-- no translation found for nfc_snoop_log_title (1576197495976952388) -->
-    <skip />
+    <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Nefiltrovaný protokol NFC NCI"</string>
     <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Zaznamenávat podrobné balíčky NFC, které mohou obsahovat soukromé informace."</string>
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Restartovat zařízení?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Podrobné protokolování funkce NFC je určeno pouze pro účely vývoje. Další data funkce NFC budou zahrnuta ve zprávách o chybě, které mohou obsahovat soukromé informace. Pokud toto nastavení chcete změnit, restartujte zařízení."</string>
@@ -1217,6 +1224,7 @@
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Nedostupné, protože je zapnutý režim nočního klidu"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Používat spořič obrazovky"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Při nabíjení nebo v doku"</string>
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"V doku při nabízení"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Při nabíjení"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Při vložení do doku"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Nikdy"</string>
@@ -1507,8 +1515,7 @@
     <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Sdílet připojení telefonu k internetu přes Bluetooth"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Tethering přes ethernet"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Sdílet připojení telefonu k internetu přes ethernet"</string>
-    <!-- no translation found for ethernet_tethering_subtext (8796744370636115313) -->
-    <skip />
+    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"Sdílet připojení tabletu k internetu přes ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Hotspot a tethering umožňují poskytovat internet jiným zařízením prostřednictvím vašeho mobilního datového připojení. Hotspot ke sdílení obsahu s okolními zařízeními mohou vytvářet i aplikace."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Hotspot a tethering umožňují poskytovat internet jiným zařízením prostřednictvím vašeho připojení Wi-Fi nebo vašeho mobilního datového připojení. Hotspot ke sdílení obsahu s okolními zařízeními mohou vytvářet i aplikace."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Nápověda"</string>
@@ -3019,10 +3026,8 @@
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (doporučeno)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"Zprávy MMS"</string>
     <string name="mms_message_summary" msgid="2855847140141698341">"Odesílání a příjem při vypnutých mobilních datech"</string>
-    <!-- no translation found for auto_data_switch_title (5862200603753603464) -->
-    <skip />
-    <!-- no translation found for auto_data_switch_summary (135082667541071789) -->
-    <skip />
+    <string name="auto_data_switch_title" msgid="5862200603753603464">"Automaticky přepínat mobilní data"</string>
+    <string name="auto_data_switch_summary" msgid="135082667541071789">"Dočasně používat tuto síť, když má lepší dostupnost pro volání a internet"</string>
     <string name="work_sim_title" msgid="8999872928646924429">"Pracovní SIM karta"</string>
     <string name="user_restrictions_title" msgid="4068914244980335993">"Přístup k aplikacím a obsahu"</string>
     <string name="user_rename" msgid="8735940847878484249">"PŘEJMENOVAT"</string>
@@ -3542,6 +3547,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Oznámení této aplikace jsou v zařízení na vaši žádost blokována systémem Android"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Tato kategorie oznámení je v zařízení na vaši žádost blokována systémem Android"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Tato skupina oznámení je v zařízení na vaši žádost blokována systémem Android"</string>
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Tato aplikace neodesílá oznámení"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Kategorie"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Jiné"</string>
     <string name="no_channels" msgid="4716199078612071915">"Tato aplikace neodeslala žádná oznámení"</string>
@@ -3985,8 +3991,7 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Blokováno vaším poskytovatelem kreditu"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Je potřeba rodič"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Dejte telefon rodiči, který vše nastaví"</string>
-    <!-- no translation found for disabled_by_policy_parental_consent (9166060049019018978) -->
-    <skip />
+    <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"Předejte telefon rodiči, aby povolil změnu tohoto nastavení."</string>
     <string name="default_admin_support_msg" msgid="8816296554831532033">"Další informace vám poskytne váš administrátor IT"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Další podrobnosti"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Administrátor může sledovat a spravovat aplikace a data přidružená k vašemu pracovnímu profilu, včetně nastavení, oprávnění, firemního přístupu, aktivity v síti a informací o poloze zařízení."</string>
@@ -4807,10 +4812,8 @@
     <string name="wifi_scan_change" msgid="8438320311511852918">"Změnit"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Připojeno"</string>
-    <!-- no translation found for mobile_data_temp_connection_active (3430470299756236413) -->
-    <skip />
-    <!-- no translation found for mobile_data_temp_using (5211002380149434155) -->
-    <skip />
+    <string name="mobile_data_temp_connection_active" msgid="3430470299756236413">"Dočasně připojeno"</string>
+    <string name="mobile_data_temp_using" msgid="5211002380149434155">"Dočasně se používá <xliff:g id="SUBNAME">%1$s</xliff:g>"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Žádné připojení"</string>
     <string name="mobile_data_off_summary" msgid="1884248776904165539">"Mobilní data se nebudou připojovat automaticky"</string>
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Vypnout mobilní data?"</string>
@@ -4895,7 +4898,8 @@
     <string name="tare_balances" msgid="731881382594747961">"Zůstatky"</string>
     <string name="tare_consumption_limits" msgid="3230949387874396382">"Limity spotřeby"</string>
     <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Počáteční limit spotřeby"</string>
-    <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"Limit maximální spotřeby"</string>
+    <string name="tare_min_consumption_limit" msgid="3293145670921755789">"Limit minimální spotřeby"</string>
+    <string name="tare_max_consumption_limit" msgid="8335700580111808823">"Limit maximální spotřeby"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Modifikátory"</string>
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Akce (náklady na výrobu)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Akce (základní cena)"</string>
