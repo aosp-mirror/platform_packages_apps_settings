@@ -2996,6 +2996,14 @@
         </receiver>
 
         <receiver
+            android:name=".fuelgauge.BatterySettingsMigrateChecker"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver
             android:name=".fuelgauge.batteryusage.PeriodicJobReceiver"
             android:exported="false">
             <intent-filter>

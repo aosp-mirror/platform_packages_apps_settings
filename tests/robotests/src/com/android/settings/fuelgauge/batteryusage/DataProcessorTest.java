@@ -329,6 +329,18 @@ public class DataProcessorTest {
     public void getDailyTimestamps_notEnoughData_returnEmptyList() {
         assertThat(DataProcessor.getDailyTimestamps(new ArrayList<>())).isEmpty();
         assertThat(DataProcessor.getDailyTimestamps(List.of(100L))).isEmpty();
+        assertThat(DataProcessor.getDailyTimestamps(List.of(100L, 5400000L))).isEmpty();
+    }
+
+    @Test
+    public void getDailyTimestamps_OneHourDataPerDay_returnEmptyList() {
+        // Timezone GMT+8
+        final List<Long> timestamps = List.of(
+                1641049200000L, // 2022-01-01 23:00:00
+                1641052800000L, // 2022-01-02 00:00:00
+                1641056400000L  // 2022-01-02 01:00:00
+        );
+        assertThat(DataProcessor.getDailyTimestamps(timestamps)).isEmpty();
     }
 
     @Test
@@ -353,18 +365,75 @@ public class DataProcessorTest {
     public void getDailyTimestamps_MultipleDaysData_returnExpectedList() {
         // Timezone GMT+8
         final List<Long> timestamps = List.of(
-                1640988000000L, // 2022-01-01 06:00:00
+                1641045600000L, // 2022-01-01 22:00:00
+                1641060000000L, // 2022-01-02 02:00:00
+                1641160800000L, // 2022-01-03 06:00:00
+                1641232800000L  // 2022-01-04 02:00:00
+        );
+
+        final List<Long> expectedTimestamps = List.of(
+                1641045600000L, // 2022-01-01 22:00:00
+                1641052800000L, // 2022-01-02 00:00:00
+                1641139200000L, // 2022-01-03 00:00:00
+                1641225600000L, // 2022-01-04 00:00:00
+                1641232800000L  // 2022-01-04 02:00:00
+        );
+        assertThat(DataProcessor.getDailyTimestamps(timestamps)).isEqualTo(expectedTimestamps);
+    }
+
+    @Test
+    public void getDailyTimestamps_FirstDayOneHourData_returnExpectedList() {
+        // Timezone GMT+8
+        final List<Long> timestamps = List.of(
+                1641049200000L, // 2022-01-01 23:00:00
                 1641060000000L, // 2022-01-02 02:00:00
                 1641160800000L, // 2022-01-03 06:00:00
                 1641254400000L  // 2022-01-04 08:00:00
         );
 
         final List<Long> expectedTimestamps = List.of(
-                1640988000000L, // 2022-01-01 06:00:00
                 1641052800000L, // 2022-01-02 00:00:00
                 1641139200000L, // 2022-01-03 00:00:00
                 1641225600000L, // 2022-01-04 00:00:00
                 1641254400000L  // 2022-01-04 08:00:00
+        );
+        assertThat(DataProcessor.getDailyTimestamps(timestamps)).isEqualTo(expectedTimestamps);
+    }
+
+    @Test
+    public void getDailyTimestamps_LastDayNoData_returnExpectedList() {
+        // Timezone GMT+8
+        final List<Long> timestamps = List.of(
+                1640988000000L, // 2022-01-01 06:00:00
+                1641060000000L, // 2022-01-02 02:00:00
+                1641160800000L, // 2022-01-03 06:00:00
+                1641225600000L  // 2022-01-04 00:00:00
+        );
+
+        final List<Long> expectedTimestamps = List.of(
+                1640988000000L, // 2022-01-01 06:00:00
+                1641052800000L, // 2022-01-02 00:00:00
+                1641139200000L, // 2022-01-03 00:00:00
+                1641225600000L  // 2022-01-04 00:00:00
+        );
+        assertThat(DataProcessor.getDailyTimestamps(timestamps)).isEqualTo(expectedTimestamps);
+    }
+
+    @Test
+    public void getDailyTimestamps_LastDayOneHourData_returnExpectedList() {
+        // Timezone GMT+8
+        final List<Long> timestamps = List.of(
+                1640988000000L, // 2022-01-01 06:00:00
+                1641060000000L, // 2022-01-02 02:00:00
+                1641160800000L, // 2022-01-03 06:00:00
+                1641229200000L  // 2022-01-04 01:00:00
+        );
+
+        final List<Long> expectedTimestamps = List.of(
+                1640988000000L, // 2022-01-01 06:00:00
+                1641052800000L, // 2022-01-02 00:00:00
+                1641139200000L, // 2022-01-03 00:00:00
+                1641225600000L  // 2022-01-04 00:00:00
         );
         assertThat(DataProcessor.getDailyTimestamps(timestamps)).isEqualTo(expectedTimestamps);
     }
