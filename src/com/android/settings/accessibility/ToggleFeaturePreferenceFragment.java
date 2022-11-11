@@ -34,7 +34,6 @@ import android.icu.text.CaseMap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.quicksettings.TileService;
 import android.text.Html;
@@ -62,7 +61,6 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.utils.LocaleUtils;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.widget.SettingsMainSwitchPreference;
-import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
 import com.android.settingslib.widget.TopIntroPreference;
@@ -255,7 +253,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
             });
         }
 
-        writeDefaultShortcutTargetServiceToSettingsIfNeeded(getPrefContext());
+        writeConfigDefaultAccessibilityServiceIntoShortcutTargetServiceIfNeeded(getContext());
     }
 
     @Override
@@ -796,44 +794,36 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     }
 
     /**
-     * Setups a configurable default if the setting has never been set.
-     *
-     * TODO(b/228562075): Remove this function when correcting the format in config file
-     * `config_defaultAccessibilityService`.
+     * Setups {@link com.android.internal.R.string#config_defaultAccessibilityService} into
+     * {@link Settings.Secure#ACCESSIBILITY_SHORTCUT_TARGET_SERVICE} if that settings key has never
+     * been set and only write the key when user enter into corresponding page.
      */
-    private void writeDefaultShortcutTargetServiceToSettingsIfNeeded(Context context) {
+    @VisibleForTesting
+    void writeConfigDefaultAccessibilityServiceIntoShortcutTargetServiceIfNeeded(Context context) {
         if (mComponentName == null) {
             return;
         }
 
-        final ComponentName defaultService = ComponentName.unflattenFromString(context.getString(
-                com.android.internal.R.string.config_defaultAccessibilityService));
-        // write default accessibility service only when user enter into corresponding page.
-        if (!mComponentName.equals(defaultService)) {
+        // It might be shortened form (with a leading '.'). Need to unflatten back to ComponentName
+        // first, or it will encounter errors when getting service from
+        // `ACCESSIBILITY_SHORTCUT_TARGET_SERVICE`.
+        final ComponentName configDefaultService = ComponentName.unflattenFromString(
+                getString(com.android.internal.R.string.config_defaultAccessibilityService));
+
+        if (!mComponentName.equals(configDefaultService)) {
             return;
         }
 
         final String targetKey = Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
-        String targetString = Settings.Secure.getString(context.getContentResolver(), targetKey);
-        if (!TextUtils.isEmpty(targetString)) {
-            // The shortcut setting has been set
-            return;
-        }
+        final String targetString = Settings.Secure.getString(context.getContentResolver(),
+                targetKey);
 
-        // AccessibilityManager#getAccessibilityShortcutTargets may not return correct shortcut
-        // targets during boot. Needs to read settings directly here.
-        targetString = AccessibilityUtils.getShortcutTargetServiceComponentNameString(context,
-                UserHandle.myUserId());
-        if (TextUtils.isEmpty(targetString)) {
-            // No configurable default accessibility service
-            return;
-        }
-
-        // Only fallback to default accessibility service when setting is never updated.
-        final ComponentName shortcutName = ComponentName.unflattenFromString(targetString);
-        if (shortcutName != null) {
+        // By intentional, we only need to write the config string when the Settings key has never
+        // been set (== null). Empty string also means someone already wrote it before, so we need
+        // to respect the value.
+        if (targetString == null) {
             Settings.Secure.putString(context.getContentResolver(), targetKey,
-                    shortcutName.flattenToString());
+                    configDefaultService.flattenToString());
         }
     }
 

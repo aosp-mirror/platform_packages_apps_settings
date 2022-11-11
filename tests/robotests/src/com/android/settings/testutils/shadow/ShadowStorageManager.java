@@ -16,6 +16,7 @@
 
 package com.android.settings.testutils.shadow;
 
+import android.annotation.NonNull;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
@@ -24,6 +25,9 @@ import android.os.storage.VolumeRecord;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Implements(StorageManager.class)
 public class ShadowStorageManager {
@@ -38,6 +42,10 @@ public class ShadowStorageManager {
 
     public static boolean isForgetCalled() {
         return sIsForgetCalled;
+    }
+
+    public @NonNull List<VolumeInfo> getVolumes() {
+        return new ArrayList<VolumeInfo>();
     }
 
     @Resetter
