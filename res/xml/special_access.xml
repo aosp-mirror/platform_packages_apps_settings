@@ -97,6 +97,7 @@
         android:key="premium_sms"
         android:title="@string/premium_sms_access"
         android:fragment="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsAccess"
+        settings:isPreferenceVisible="@bool/config_show_premium_sms"
         settings:controller="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsController" />
 
     <Preference
