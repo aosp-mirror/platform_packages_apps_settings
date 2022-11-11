@@ -467,7 +467,7 @@ public class AdvancedPowerUsageDetailTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString())
-                .isEqualTo("2 min background from last full charge");
+                .isEqualTo("2 min background since last full charge");
     }
 
     @Test
@@ -485,7 +485,7 @@ public class AdvancedPowerUsageDetailTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString())
-                .isEqualTo("Background less than a minute from last full charge");
+                .isEqualTo("Background less than a minute since last full charge");
     }
 
     @Test
@@ -504,7 +504,7 @@ public class AdvancedPowerUsageDetailTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString())
-                .isEqualTo("Total less than a minute from last full charge");
+                .isEqualTo("Total less than a minute since last full charge");
     }
 
     @Test
@@ -520,8 +520,8 @@ public class AdvancedPowerUsageDetailTest {
 
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
-        assertThat(captor.getValue().toString())
-                .isEqualTo("1 min total • background less than a minute\nfrom last full charge");
+        assertThat(captor.getValue().toString()).isEqualTo(
+                "1 min total • background less than a minute\nsince last full charge");
     }
 
     @Test
@@ -538,7 +538,7 @@ public class AdvancedPowerUsageDetailTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString())
-                .isEqualTo("1 min total from last full charge");
+                .isEqualTo("1 min total since last full charge");
     }
 
     @Test
@@ -555,7 +555,7 @@ public class AdvancedPowerUsageDetailTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString())
-                .isEqualTo("6 min total • 4 min background\nfrom last full charge");
+                .isEqualTo("6 min total • 4 min background\nsince last full charge");
     }
 
     @Test
