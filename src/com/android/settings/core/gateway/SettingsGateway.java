@@ -160,6 +160,7 @@ import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.privacy.PrivacyControlsFragment;
 import com.android.settings.privacy.PrivacyDashboardFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
+import com.android.settings.security.MemtagPage;
 import com.android.settings.security.SecurityAdvancedSettings;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.shortcut.CreateShortcut;
@@ -328,6 +329,7 @@ public class SettingsGateway {
             EnterprisePrivacySettings.class.getName(),
             WebViewAppPicker.class.getName(),
             LockscreenDashboardFragment.class.getName(),
+            MemtagPage.class.getName(),
             BluetoothDeviceDetailsFragment.class.getName(),
             BluetoothBroadcastDialog.class.getName(),
             BluetoothFindBroadcastsFragment.class.getName(),
@@ -400,5 +402,6 @@ public class SettingsGateway {
             Settings.MyDeviceInfoActivity.class.getName(),
             Settings.ModuleLicensesActivity.class.getName(),
             UserBackupSettingsActivity.class.getName(),
+            Settings.MemtagPageActivity.class.getName(),
     };
 }
