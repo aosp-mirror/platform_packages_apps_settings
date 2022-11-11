@@ -521,8 +521,9 @@ public class ManageApplications extends InstrumentedFragment
         mFilterAdapter.enableFilter(filterType);
 
         if (mListType == LIST_TYPE_MAIN) {
-            if (UserManager.get(getActivity()).getUserProfiles().size() > 1 && !mIsWorkOnly
-                    && !mIsPersonalOnly) {
+            // Apply the personal and work filter only if new tab should be added
+            // for a given user profile. Else let it use the default all apps filter.
+            if (Utils.isNewTabNeeded(getActivity()) && !mIsWorkOnly && !mIsPersonalOnly) {
                 mFilterAdapter.enableFilter(FILTER_APPS_PERSONAL);
                 mFilterAdapter.enableFilter(FILTER_APPS_WORK);
             }
