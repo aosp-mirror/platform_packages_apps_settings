@@ -163,6 +163,7 @@ public class InternetPreferenceController extends AbstractPreferenceController i
     /** @OnLifecycleEvent(ON_PAUSE) */
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
+        mMobileNetworkRepository.removeRegister();
         mSummaryHelper.register(false);
     }
 
