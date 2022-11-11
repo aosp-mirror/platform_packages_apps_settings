@@ -20,8 +20,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.content.Intent;
-import android.provider.Settings;
 
+import com.android.settings.TestUtils;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScheduleRadioButtonsController;
 
 import org.junit.Before;
@@ -33,6 +33,9 @@ import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public final class BatterySettingsMigrateCheckerTest {
+
+    private static final Intent BOOT_COMPLETED_INTENT =
+            new Intent(Intent.ACTION_BOOT_COMPLETED);
 
     private Context mContext;
     private BatterySettingsMigrateChecker mBatterySettingsMigrateChecker;
@@ -49,7 +52,7 @@ public final class BatterySettingsMigrateCheckerTest {
         final int invalidScheduledLevel = 5;
         setScheduledLevel(invalidScheduledLevel);
 
-        mBatterySettingsMigrateChecker.onReceive(mContext, new Intent());
+        mBatterySettingsMigrateChecker.onReceive(mContext, BOOT_COMPLETED_INTENT);
 
         assertThat(getScheduledLevel())
                 .isEqualTo(BatterySaverScheduleRadioButtonsController.TRIGGER_LEVEL_MIN);
@@ -60,7 +63,7 @@ public final class BatterySettingsMigrateCheckerTest {
         final int validScheduledLevel = 12;
         setScheduledLevel(validScheduledLevel);
 
-        mBatterySettingsMigrateChecker.onReceive(mContext, new Intent());
+        mBatterySettingsMigrateChecker.onReceive(mContext, BOOT_COMPLETED_INTENT);
 
         assertThat(getScheduledLevel()).isEqualTo(validScheduledLevel);
     }
@@ -70,18 +73,36 @@ public final class BatterySettingsMigrateCheckerTest {
         final int validScheduledLevel = 0;
         setScheduledLevel(validScheduledLevel);
 
-        mBatterySettingsMigrateChecker.onReceive(mContext, new Intent());
+        mBatterySettingsMigrateChecker.onReceive(mContext, BOOT_COMPLETED_INTENT);
 
         assertThat(getScheduledLevel()).isEqualTo(validScheduledLevel);
     }
 
+    @Test
+    public void onReceive_nullIntnt_noAction() {
+        final int invalidScheduledLevel = 5;
+        setScheduledLevel(invalidScheduledLevel);
+
+        mBatterySettingsMigrateChecker.onReceive(mContext, null);
+
+        assertThat(getScheduledLevel()).isEqualTo(invalidScheduledLevel);
+    }
+
+    @Test
+    public void onReceive_invalidIntent_noAction() {
+        final int invalidScheduledLevel = 5;
+        setScheduledLevel(invalidScheduledLevel);
+
+        mBatterySettingsMigrateChecker.onReceive(mContext, new Intent());
+
+        assertThat(getScheduledLevel()).isEqualTo(invalidScheduledLevel);
+    }
+
     private void setScheduledLevel(int scheduledLevel) {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, scheduledLevel);
+        TestUtils.setScheduledLevel(mContext, scheduledLevel);
     }
 
     private int getScheduledLevel() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, /*defaultValue*/ 0);
+        return TestUtils.getScheduledLevel(mContext);
     }
 }

@@ -31,7 +31,14 @@ public final class BatterySettingsMigrateChecker extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        verifySaverConfiguration(context.getApplicationContext());
+        if (intent != null && Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
+            verifyConfiguration(context);
+        }
+    }
+
+    static void verifyConfiguration(Context context) {
+        context = context.getApplicationContext();
+        verifySaverConfiguration(context);
     }
 
     private static void verifySaverConfiguration(Context context) {

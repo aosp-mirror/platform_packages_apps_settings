@@ -88,6 +88,7 @@ public final class BatteryBackupHelper implements BackupHelper {
 
     @Override
     public void restoreEntity(BackupDataInputStream data) {
+        BatterySettingsMigrateChecker.verifyConfiguration(mContext);
         if (!isOwner() || data == null || data.size() == 0) {
             Log.w(TAG, "ignore restoreEntity() for non-owner or empty data");
             return;
