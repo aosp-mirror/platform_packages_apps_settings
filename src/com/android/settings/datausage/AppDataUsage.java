@@ -45,6 +45,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -109,6 +110,10 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     private long mSelectedCycle;
     private boolean mIsLoading;
 
+    public boolean isSimHardwareVisible(Context context) {
+        return SubscriptionUtil.isSimHardwareVisible(context);
+    }
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -161,7 +166,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
         final UidDetailProvider uidDetailProvider = getUidDetailProvider();
 
         if (mAppItem.key > 0) {
-            if (!UserHandle.isApp(mAppItem.key)) {
+            if ((!isSimHardwareVisible(mContext)) || !UserHandle.isApp(mAppItem.key)) {
                 final UidDetail uidDetail = uidDetailProvider.getUidDetail(mAppItem.key, true);
                 mIcon = uidDetail.icon;
                 mLabel = uidDetail.label;
@@ -328,6 +333,9 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     }
 
     private void updatePrefs(boolean restrictBackground, boolean unrestrictData) {
+        if (!isSimHardwareVisible(mContext)) {
+            return;
+        }
         setBackPreferenceListAnimatorIfLoaded();
         final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfMeteredDataRestricted(
                 mContext, mPackageName, UserHandle.getUserId(mAppItem.key));
