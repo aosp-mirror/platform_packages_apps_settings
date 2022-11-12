@@ -16,7 +16,7 @@
 
 package com.android.settings.applications;
 
-import static android.provider.DeviceConfig.NAMESPACE_SETTINGS_UI;
+import static android.provider.DeviceConfig.NAMESPACE_APP_CLONING;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
@@ -29,7 +29,7 @@ import android.provider.DeviceConfig;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.core.SettingsUIDeviceConfig;
+import com.android.settings.Utils;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 
 import org.junit.Before;
@@ -54,7 +54,7 @@ public class ClonedAppsPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_featureNotEnabled_shouldNotReturnAvailable() {
-        DeviceConfig.setProperty(NAMESPACE_SETTINGS_UI, SettingsUIDeviceConfig.CLONED_APPS_ENABLED,
+        DeviceConfig.setProperty(NAMESPACE_APP_CLONING, Utils.PROPERTY_CLONED_APPS_ENABLED,
                 "false", true /* makeDefault */);
 
         assertThat(mController.getAvailabilityStatus()).isNotEqualTo(AVAILABLE);
@@ -62,10 +62,9 @@ public class ClonedAppsPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_featureEnabled_shouldReturnAvailable() {
-        DeviceConfig.setProperty(NAMESPACE_SETTINGS_UI, SettingsUIDeviceConfig.CLONED_APPS_ENABLED,
+        DeviceConfig.setProperty(NAMESPACE_APP_CLONING, Utils.PROPERTY_CLONED_APPS_ENABLED,
                 "true", true /* makeDefault */);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
-
 }

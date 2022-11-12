@@ -42,9 +42,4 @@ public class SettingsUIDeviceConfig {
      * {@code true} whether or not event_log for generic actions is enabled. Default is true.
      */
     public static final String GENERIC_EVENT_LOGGING_ENABLED = "event_logging_enabled";
-
-    /**
-     * {@code true} if Cloned Apps menu is available in Apps page. Default is false.
-     */
-    public static final String CLONED_APPS_ENABLED = "cloned_apps_enabled";
 }
