@@ -197,7 +197,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     final List<AbstractPreferenceController> controllers = new ArrayList<>();
-                    controllers.add(new BatteryAppListPreferenceController(context,
+                    controllers.add(new BatteryChartPreferenceController(context,
                             KEY_APP_LIST, null /* lifecycle */, null /* activity */,
                             null /* fragment */));
                     return controllers;

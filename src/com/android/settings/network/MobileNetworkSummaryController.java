@@ -101,6 +101,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
+        mMobileNetworkRepository.removeRegister();
     }
 
     @Override
