@@ -13,7 +13,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"បាទ/ចាស"</string>
@@ -59,9 +58,6 @@
     <string name="bluetooth_rename_device" msgid="4219655243836021443">"ប្ដូរ​ឈ្មោះ​ឧបករណ៍​នេះ"</string>
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"ប្ដូរ​ឈ្មោះ"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"ផ្ដាច់​ឧបករណ៍?"</string>
-    <string name="bluetooth_disconnect_all_profiles" product="default" msgid="1934297101665686854">"ទូរសព្ទ​របស់អ្នក​នឹង​ផ្តាច់ចេញពី <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ។"</string>
-    <string name="bluetooth_disconnect_all_profiles" product="tablet" msgid="336622948210457991">"ថេប្លេតរបស់អ្នក​នឹង​ផ្តាច់ចេញពី <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ។"</string>
-    <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"ឧបករណ៍របស់អ្នក​នឹង​ផ្តាច់ចេញពី <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ។"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"ផ្គូផ្គង​ឧបករណ៍ថ្មី"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"ប៊្លូធូស"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"ផ្គូផ្គងឧបករណ៍ជំនួយការស្ដាប់ខាងស្ដាំ"</string>
@@ -72,9 +68,6 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"ផ្គូផ្គងឧបករណ៍ជំនួយការស្ដាប់ខាងស្ដាំ"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"ផ្គូផ្គងឧបករណ៍ជំនួយការស្ដាប់ខាងឆ្វេង"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"ពាក់ព័ន្ធ"</string>
-    <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"អាសយដ្ឋាន​ប៊្លូធូស​របស់ទូរសព្ទ៖ <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"អាសយដ្ឋាន​ប៊្លូធូស​របស់ថេប្លេត៖ <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="device" msgid="2863536947810007600">"អាសយដ្ឋាន​ប៊្លូធូស​របស់ឧបករណ៍៖ <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"ឧបករណ៍​ប៊្លូធូស​គ្មាន​ឈ្មោះ"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"ស្វែងរក"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"រក​មិន​ឃើញ​ឧបករណ៍​ប៊្លូធូស​ដែល​នៅ​ជិត។"</string>
@@ -88,22 +81,6 @@
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"<xliff:g id="APP_NAME">%1$s</xliff:g> ចង់បិទប៊្លូធូស"</string>
     <string name="bluetooth_ask_enablement_no_name" msgid="5091401961637405417">"កម្មវិធីចង់បើកប៊្លូធូស"</string>
     <string name="bluetooth_ask_disablement_no_name" msgid="382299750909188822">"កម្មវិធីចង់បិទប៊្លូធូស"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="1273405567801929487">"<xliff:g id="APP_NAME">%1$s</xliff:g> ចង់ធ្វើឲ្យឧបករណ៍ប៊្លូធូសផ្សេងទៀតអាចមើលឃើញថេប្លេតរបស់អ្នករយៈពេល <xliff:g id="TIMEOUT">%2$d</xliff:g> វិនាទី។"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="7013223328571883275">"<xliff:g id="APP_NAME">%1$s</xliff:g> ចង់ធ្វើឲ្យឧបករណ៍ប៊្លូធូសផ្សេងទៀតអាចមើលឃើញទូរសព្ទរបស់អ្នករយៈពេល <xliff:g id="TIMEOUT">%2$d</xliff:g> វិនាទី។"</string>
-    <string name="bluetooth_ask_discovery_no_name" product="tablet" msgid="3266007454914144057">"កម្មវិធីចង់ធ្វើឲ្យឧបករណ៍ប៊្លូធូសផ្សេងទៀតអាចមើលឃើញថេប្លេតរបស់អ្នករយៈពេល <xliff:g id="TIMEOUT">%1$d</xliff:g> វិនាទី។"</string>
-    <string name="bluetooth_ask_discovery_no_name" product="default" msgid="7989444746980501116">"កម្មវិធីចង់ធ្វើឲ្យឧបករណ៍ប៊្លូធូសផ្សេងទៀតអាចមើលឃើញទូរសព្ទរបស់អ្នករយៈពេល <xliff:g id="TIMEOUT">%1$d</xliff:g> វិនាទី។"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="6482084870735107773">"<xliff:g id="APP_NAME">%1$s</xliff:g> ចង់ធ្វើឲ្យឧបករណ៍ប៊្លូធូសផ្សេងទៀតអាចមើលឃើញថេប្លេតរបស់អ្នក។ អ្នកអាចផ្លាស់ប្តូរសកម្មភាពនេះពេលក្រោយនៅក្នុងការកំណត់ប៊្លូធូស។"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="2352494279465502950">"<xliff:g id="APP_NAME">%1$s</xliff:g> ចង់ធ្វើឲ្យឧបករណ៍ប៊្លូធូសផ្សេងទៀតអាចមើលឃើញទូរសព្ទរបស់អ្នក។ អ្នកអាចផ្លាស់ប្តូរសកម្មភាពនេះពេលក្រោយនៅក្នុងការកំណត់ប៊្លូធូស។"</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="tablet" msgid="2732992604509910896">"កម្មវិធីចង់ធ្វើឲ្យឧបករណ៍ប៊្លូធូសផ្សេងទៀតអាចមើលឃើញថេប្លេតរបស់អ្នក។ អ្នកអាចផ្លាស់ប្តូរសកម្មភាពនេះពេលក្រោយនៅក្នុងការកំណត់ប៊្លូធូស។"</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="default" msgid="356982103612920264">"កម្មវិធីចង់ធ្វើឲ្យឧបករណ៍ប៊្លូធូសផ្សេងទៀតអាចមើលឃើញទូរសព្ទរបស់អ្នក។ អ្នកអាចផ្លាស់ប្តូរសកម្មភាពនេះពេលក្រោយនៅក្នុងការកំណត់ប៊្លូធូស។"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="6103655179509599427">"<xliff:g id="APP_NAME">%1$s</xliff:g> ចង់បើកប៊្លូធូស និងធ្វើឲ្យឧបករណ៍ផ្សេងទៀតអាចមើលឃើញថេប្លេតរបស់អ្នករយៈពេល <xliff:g id="TIMEOUT">%2$d</xliff:g> វិនាទី។"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="934276632311449337">"<xliff:g id="APP_NAME">%1$s</xliff:g> ចង់បើកប៊្លូធូស និងធ្វើឲ្យឧបករណ៍ផ្សេងទៀតអាចមើលឃើញទូរសព្ទរបស់អ្នករយៈពេល <xliff:g id="TIMEOUT">%2$d</xliff:g> វិនាទី។"</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="tablet" msgid="1284048348024444485">"កម្មវិធីចង់បើកប៊្លូធូស និងធ្វើឲ្យឧបករណ៍ផ្សេងទៀតអាចមើលឃើញថេប្លេតរបស់អ្នករយៈពេល <xliff:g id="TIMEOUT">%1$d</xliff:g> វិនាទី។"</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="default" msgid="2661614145022629454">"កម្មវិធីចង់បើកប៊្លូធូស និងធ្វើឲ្យឧបករណ៍ផ្សេងទៀតអាចមើលឃើញទូរសព្ទរបស់អ្នករយៈពេល <xliff:g id="TIMEOUT">%1$d</xliff:g> វិនាទី។"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="8588317955400593623">"<xliff:g id="APP_NAME">%1$s</xliff:g> ចង់បើកប៊្លូធូស និងធ្វើឲ្យឧបករណ៍ផ្សេងទៀតអាចមើលឃើញថេប្លេតរបស់អ្នក។ អ្នកអាចផ្លាស់ប្តូរសកម្មភាពនេះពេលក្រោយនៅក្នុងការកំណត់ប៊្លូធូស។"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="4047444317445386579">"<xliff:g id="APP_NAME">%1$s</xliff:g> ចង់បើកប៊្លូធូស និងធ្វើឲ្យឧបករណ៍ផ្សេងទៀតអាចមើលឃើញទូរសព្ទរបស់អ្នក។ អ្នកអាចផ្លាស់ប្តូរសកម្មភាពនេះពេលក្រោយនៅក្នុងការកំណត់ប៊្លូធូស។"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="tablet" msgid="4922952478824372605">"កម្មវិធីចង់បើកប៊្លូធូស និងធ្វើឲ្យឧបករណ៍ផ្សេងទៀតអាចមើលឃើញថេប្លេតរបស់អ្នក។ អ្នកអាចផ្លាស់ប្តូរសកម្មភាពនេះពេលក្រោយនៅក្នុងការកំណត់ប៊្លូធូស។"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="default" msgid="1381582950049639439">"កម្មវិធីចង់បើកប៊្លូធូស និងធ្វើឲ្យឧបករណ៍ផ្សេងទៀតអាចមើលឃើញទូរសព្ទរបស់អ្នក។ អ្នកអាចផ្លាស់ប្តូរសកម្មភាពនេះពេលក្រោយនៅក្នុងការកំណត់ប៊្លូធូស។"</string>
     <string name="bluetooth_turning_on" msgid="3842613808709024730">"កំពុង​បើក​ប៊្លូធូស…"</string>
     <string name="bluetooth_turning_off" msgid="7406309124247701148">"កំពុង​បិទ​​ប៊្លូធូស…"</string>
     <string name="bluetooth_connection_permission_request" msgid="8793131019383198861">"ស្នើ​តភ្ជាប់​ប៊្លូធូស"</string>
@@ -239,10 +216,6 @@
     <string name="account_settings_title" msgid="9138880127246241885">"គណនី"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"សុវត្ថិភាព"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"ការ​អ៊ីនគ្រីប និងព័ត៌មានផ្ទៀងផ្ទាត់"</string>
-    <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"បានអ៊ិនគ្រីបទូរសព្ទ"</string>
-    <string name="not_encrypted_summary" product="default" msgid="2251945842585788254">"មិនបាន​អ៊ីនគ្រីប​ទូរសព្ទទេ"</string>
-    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"ឧបករណ៍​ត្រូវបានអ៊ិនគ្រីប"</string>
-    <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"មិនបាន​អ៊ីនគ្រីប​ឧបករណ៍ទេ"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"អេក្រង់ចាក់សោ"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"អ្វីដែលត្រូវ​បង្ហាញ​"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"មិនមានទេ"</string>
@@ -258,17 +231,11 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"រៀបចំ​ការដោះសោ​តាមទម្រង់មុខ"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"ប្រើ​មុខ​របស់អ្នកដើម្បីផ្ទៀងផ្ទាត់"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"ចាប់ផ្ដើម"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"ប្រសិនបើការដោះសោ​តាមទម្រង់មុខ​សម្រាប់​ភាពងាយស្រួលត្រូវបានបិទ ជំហាន​រៀបចំ​មួយចំនួនអាច​នឹង​ដំណើរការ​មិន​ប្រក្រតីជាមួយមុខងារ​តបវិញ។"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"ថយក្រោយ"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"បន្ត​រៀបចំ"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"ប្រើការរៀបចំភាពងាយស្រួល"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"បោះបង់"</string>
@@ -278,53 +245,14 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"ដោះសោ​ដោយប្រើ​មុខ​របស់អ្នក"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"អនុញ្ញាត​ការដោះសោតាមទម្រង់មុខ"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"ប្រើ​មុខ​របស់អ្នកដើម្បីផ្ទៀងផ្ទាត់"</string>
-    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"ប្រើ​មុខ​របស់អ្នក ដើម្បី​ដោះសោ​ទូរសព្ទ អនុញ្ញាត​ការទិញ ឬ​ចូលកម្មវិធី។"</string>
-    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"ប្រើមុខ​របស់អ្នក ដើម្បី​ដោះសោ​ថេប្លេត​របស់​អ្នក អនុញ្ញាត​ការទិញ ឬ​ចូលកម្មវិធី។"</string>
-    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"ប្រើ​មុខ​របស់អ្នក ដើម្បី​ដោះសោ​ឧបករណ៍​របស់​អ្នក អនុញ្ញាត​ការទិញ ឬ​ចូលកម្មវិធី។"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"អនុញ្ញាតឱ្យកូនរបស់អ្នកប្រើប្រាស់មុខរបស់គាត់ ដើម្បីដោះសោទូរសព្ទរបស់គាត់"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"អនុញ្ញាតឱ្យកូនរបស់អ្នកប្រើប្រាស់មុខរបស់គាត់ ដើម្បីដោះសោថេប្លេតរបស់គាត់"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"អនុញ្ញាតឱ្យកូនរបស់អ្នកប្រើប្រាស់មុខរបស់គាត់ ដើម្បីដោះសោឧបករណ៍របស់គាត់"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"ការ​ប្រើ​មុខ​កូន​របស់​អ្នក​ដើម្បី​ដោះសោ​ទូរសព្ទ​​របស់​ពួកគេ​ ប្រហែល​ជា​មិន​សូវ​មាន​សុវត្ថិភាព​ដូច​លំនាំ ឬ​កូដ PIN ទេ។"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"ការ​ប្រើ​មុខ​កូន​របស់​អ្នក​ដើម្បី​ដោះសោថេប្លេត​របស់​ពួកគេ​ ប្រហែល​ជា​មិន​សូវ​មាន​សុវត្ថិភាព​ដូច​លំនាំ ឬ​កូដ PIN ទេ។"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"ការ​ប្រើ​មុខ​កូន​របស់​អ្នក​ដើម្បី​ដោះសោ​ឧបករណ៍​របស់​ពួកគេ​ ប្រហែល​ជា​មិន​សូវ​មាន​សុវត្ថិភាព​ដូច​លំនាំ ឬ​កូដ PIN ទេ។"</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"ប្រើ​មុខ​របស់អ្នក​ដើម្បី​ដោះសោ​ទូរសព្ទ​របស់អ្នក ឬ​យល់ព្រម​លើ​ការទិញ។\n\nចំណាំ៖ អ្នក​មិនអាច​ប្រើមុខ​របស់អ្នក ដើម្បី​ដោះសោ​ឧបករណ៍​នេះ​បាន​ឡើយ។ សម្រាប់​ព័ត៌មាន​បន្ថែម សូមទាក់ទង​អ្នកគ្រប់គ្រង​របស់​ស្ថាប័ន​អ្នក។"</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"ប្រើមុខ​របស់អ្នក ដើម្បី​ដោះសោ​ទូរសព្ទ អនុញ្ញាត​ការទិញ ឬ​ចូលកម្មវិធី"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"ដាក់មុខ​របស់អ្នក​ឱ្យ​ចំកណ្ដាល​រង្វង់"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"រំលង"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"អ្នក​បាន​បញ្ចូល​មុខ​ដល់​ចំនួន​អតិបរមា​ហើយ"</string>
@@ -369,12 +297,6 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"រៀបចំស្នាម​ម្រាមដៃរបស់អ្នក"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"អនុញ្ញាតការដោះសោដោយប្រើស្នាមម្រាមដៃ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"ប្រើស្នាមម្រាមដៃរបស់អ្នក"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"ប្រើស្នាមម្រាមដៃ​របស់អ្នក ដើម្បីដោះសោ​ថេប្លេតរបស់អ្នក ឬផ្ទៀងផ្ទាត់​ថាជាអ្នក ដូចជានៅពេលអ្នក​ចូលកម្មវិធី ឬយល់ព្រមលើ​ការទិញជាដើម។"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"ប្រើស្នាមម្រាមដៃរបស់អ្នក ដើម្បីដោះសោឧបករណ៍របស់អ្នក ឬផ្ទៀងផ្ទាត់ថាជាអ្នក ដូចជានៅពេលអ្នកចូលកម្មវិធី ឬយល់ព្រមលើការទិញជាដើម។"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"ប្រើស្នាមម្រាមដៃ​របស់អ្នក ដើម្បីដោះសោ​ទូរសព្ទរបស់អ្នក ឬផ្ទៀងផ្ទាត់​ថាជាអ្នក ដូចជានៅពេលអ្នក​ចូលកម្មវិធី ឬយល់ព្រមលើ​ការទិញជាដើម។"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"អនុញ្ញាតឱ្យកូន​របស់អ្នកប្រើ​ស្នាមម្រាមដៃ​របស់គាត់ ដើម្បីដោះសោទូរសព្ទ​របស់គាត់ ឬផ្ទៀងផ្ទាត់ថាជាគាត់។ សកម្មភាពនេះ​កើតឡើង នៅពេលគាត់​ចូលកម្មវិធី យល់ព្រម​លើការទិញ និងអ្វីៗជាច្រើនទៀត។"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"អនុញ្ញាតឱ្យកូន​របស់អ្នកប្រើ​ស្នាមម្រាមដៃ​របស់គាត់ ដើម្បីដោះសោថេប្លេត​របស់គាត់ ឬផ្ទៀងផ្ទាត់ថាជាគាត់។ ករណី​នេះ​កើតឡើង នៅពេលគាត់​ចូលកម្មវិធី យល់ព្រម​លើការទិញ និងធ្វើ​អ្វីៗជាច្រើនទៀត។"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"អនុញ្ញាតឱ្យកូន​របស់អ្នកប្រើ​ស្នាមម្រាមដៃ​របស់គាត់ ដើម្បីដោះសោឧបករណ៍​របស់គាត់ ឬផ្ទៀងផ្ទាត់ថាជាគាត់។ ករណី​នេះ​កើតឡើង នៅពេលគាត់​ចូលកម្មវិធី យល់ព្រម​លើការទិញ និងធ្វើ​អ្វីៗជាច្រើនទៀត។"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"ការគ្រប់គ្រង​ស្ថិតក្នុង​ដៃអ្នក"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"ការគ្រប់គ្រង​ស្ថិតក្នុងដៃអ្នក និងកូនរបស់អ្នក"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"សូមចងចាំ"</string>
@@ -386,36 +308,12 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"ការរៀបចំស្នាមម្រាមដៃ​ចំណាយពេលត្រឹមតែមួយទៅពីរនាទីប៉ុណ្ណោះ។ ប្រសិនបើ​អ្នករំលងវា អ្នកអាច​បញ្ចូលស្នាមម្រាមដៃ​របស់អ្នក​ក្នុងការកំណត់​នៅពេលក្រោយបាន។"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"នៅពេលដែលអ្នកឃើញរូបតំណាងនេះ សូមប្រើស្នាមម្រាមដៃរបស់អ្នកសម្រាប់ការផ្ទៀងផ្ទាត់ដូចជា នៅពេលអ្នកចូលកម្មវិធី ឬយល់ព្រមលើការទិញជាដើម"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"សូមចងចាំ"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"ការប្រើ​ស្នាមម្រាមដៃ​របស់អ្នក ដើម្បីដោះសោ​ទូរសព្ទ​របស់អ្នក​អាចនឹងមិនសូវមាន​សុវត្ថិភាព​ដូចការប្រើ​លំនាំ ឬកូដ PIN ដែលខ្លាំង​នោះទេ"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"ការប្រើ​ស្នាមម្រាមដៃ​របស់អ្នក ដើម្បីដោះសោ​ថេប្លេត​របស់អ្នក​អាចមិនសូវមាន​សុវត្ថិភាព​ដូចការប្រើ​លំនាំ ឬកូដ PIN ដែលខ្លាំង​នោះទេ"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"ការប្រើ​ស្នាមម្រាមដៃ​របស់អ្នក ដើម្បីដោះសោ​ឧបករណ៍​របស់អ្នក​អាចមិនសូវមាន​សុវត្ថិភាព​ដូចការប្រើ​លំនាំ ឬកូដ PIN ដែលខ្លាំង​នោះទេ"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"របៀបដែលវាដំណើរការ"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ​បង្កើតគំរូស្នាមម្រាមដៃ​របស់អ្នក​ខុសប្លែកពីគេ ដើម្បីផ្ទៀងផ្ទាត់​ថាជាអ្នក។ ដើម្បីបង្កើត​គំរូស្នាមម្រាមដៃនេះ​ក្នុងអំឡុងពេល​រៀបចំ អ្នកនឹងត្រូវ​ថតរូបស្នាមម្រាមដៃ​របស់អ្នក​ពីផ្នែកខុសៗគ្នា។"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ​បង្កើតគំរូស្នាមម្រាមដៃ​របស់កូនអ្នក​ខុសប្លែកពីគេ ដើម្បីផ្ទៀងផ្ទាត់​ថាជាគាត់។ ដើម្បីបង្កើត​គំរូស្នាមម្រាមដៃនេះ​ក្នុងអំឡុងពេល​រៀបចំ គាត់នឹងត្រូវ​ថតរូបស្នាមម្រាមដៃ​របស់គាត់​ពីផ្នែក​ខុសៗគ្នា។"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"នៅពេលអ្នកប្រើ Pixel Imprint រូបភាពត្រូវ​បានប្រើ ដើម្បីធ្វើបច្ចុប្បន្នភាព​គំរូស្នាមម្រាមដៃរបស់អ្នក។ រូបភាព​ដែលប្រើ​សម្រាប់បង្កើត​គំរូស្នាមម្រាមដៃ​របស់អ្នក​មិនត្រូវបាន​រក្សាទុកទេ ប៉ុន្តែ​គំរូស្នាមម្រាមដៃនោះ​ត្រូវបានរក្សាទុក​ដោយសុវត្ថិភាព​នៅលើ​ទូរសព្ទ​របស់អ្នក និង​មិនចាកចេញ​ពីទូរសព្ទឡើយ។ ការដំណើរការ​ទាំងអស់​ប្រព្រឹត្តទៅ​ដោយសុវត្ថិភាព​នៅលើ​ទូរសព្ទ​របស់អ្នក​។"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"នៅពេលអ្នកប្រើ Pixel Imprint រូបភាពត្រូវ​បានប្រើ ដើម្បីធ្វើបច្ចុប្បន្នភាព​គំរូស្នាមម្រាមដៃរបស់អ្នក។ រូបភាព​ដែលត្រូវបានប្រើ​សម្រាប់បង្កើត​គំរូស្នាមម្រាមដៃ​របស់អ្នក​មិនត្រូវបាន​រក្សាទុកទេ ប៉ុន្តែ​គំរូស្នាមម្រាមដៃនោះ​ត្រូវបានរក្សាទុក​ដោយសុវត្ថិភាព​នៅលើ​ថេប្លេត​របស់អ្នក និង​មិនចាកចេញ​ពីថេប្លេតឡើយ។ ការដំណើរការ​ទាំងអស់​ប្រព្រឹត្តទៅ​ដោយសុវត្ថិភាព​នៅលើ​ថេប្លេត​​របស់អ្នក​។"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"នៅពេលអ្នកប្រើ Pixel Imprint រូបភាពត្រូវ​បានប្រើ ដើម្បីធ្វើបច្ចុប្បន្នភាព​គំរូស្នាមម្រាមដៃរបស់អ្នក។ រូបភាព​ដែលត្រូវបានប្រើ​សម្រាប់បង្កើត​គំរូស្នាមម្រាមដៃ​របស់អ្នក​មិនត្រូវបាន​រក្សាទុកទេ ប៉ុន្តែ​គំរូស្នាមម្រាមដៃនោះ​ត្រូវបានរក្សាទុក​ដោយសុវត្ថិភាព​នៅលើ​ឧបករណ៍​របស់អ្នក និង​មិនចាកចេញ​ពីឧបករណ៍ឡើយ។ ការដំណើរការ​ទាំងអស់​ប្រព្រឹត្តទៅ​ដោយសុវត្ថិភាព​នៅលើ​ឧបករណ៍​របស់អ្នក​។"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"នៅពេលគាត់ប្រើ Pixel Imprint រូបភាពត្រូវ​បានប្រើ ដើម្បីធ្វើបច្ចុប្បន្នភាព​គំរូស្នាមម្រាមដៃរបស់គាត់។ រូបភាព​ដែលប្រើ​សម្រាប់បង្កើត​គំរូស្នាមម្រាមដៃ​របស់កូនអ្នក​មិនត្រូវបាន​រក្សាទុកទេ ប៉ុន្តែ​គំរូស្នាមម្រាមដៃនោះ​ត្រូវបានរក្សាទុក​ដោយសុវត្ថិភាព​នៅលើ​ទូរសព្ទ និង​មិនចាកចេញ​ពីទូរសព្ទឡើយ​។ ការដំណើរការ​ទាំងអស់​ប្រព្រឹត្តទៅ​ដោយសុវត្ថិភាព​នៅលើ​ទូរសព្ទ។"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"នៅពេលគាត់ប្រើ Pixel Imprint រូបភាពត្រូវ​បានប្រើ ដើម្បីធ្វើបច្ចុប្បន្នភាព​គំរូស្នាមម្រាមដៃរបស់គាត់។ រូបភាព​ដែលត្រូវបានប្រើ​សម្រាប់បង្កើត​គំរូស្នាមម្រាមដៃ​របស់កូនអ្នក​មិនត្រូវបាន​រក្សាទុកទេ ប៉ុន្តែ​គំរូស្នាមម្រាមដៃនោះ​ត្រូវបានរក្សាទុក​ដោយសុវត្ថិភាព​នៅលើ​ថេប្លេត និង​មិនចាកចេញ​ពីថេប្លេតឡើយ​។ ការដំណើរការ​ទាំងអស់​ប្រព្រឹត្តទៅ​ដោយសុវត្ថិភាព​នៅលើ​ថេប្លេត។"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"នៅពេលគាត់ប្រើ Pixel Imprint រូបភាពត្រូវ​បានប្រើ ដើម្បីធ្វើបច្ចុប្បន្នភាព​គំរូស្នាមម្រាមដៃរបស់គាត់។ រូបភាព​ដែលត្រូវបានប្រើ​សម្រាប់បង្កើត​គំរូស្នាមម្រាមដៃ​របស់កូនអ្នក​មិនត្រូវបាន​រក្សាទុកទេ ប៉ុន្តែ​គំរូស្នាមម្រាមដៃនោះ​ត្រូវបានរក្សាទុក​ដោយសុវត្ថិភាព​នៅលើ​ឧបករណ៍ និង​មិនចាកចេញ​ពីឧបករណ៍ឡើយ​។ ការដំណើរការ​ទាំងអស់​ប្រព្រឹត្តទៅ​ដោយសុវត្ថិភាព​នៅលើ​ឧបករណ៍។"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"អ្នកអាច​លុបរូបភាព​ស្នាមម្រាមដៃ និងគំរូ​របស់អ្នក ឬបិទ​ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ​បានគ្រប់ពេល​នៅក្នុង​ការកំណត់។ រូបភាពស្នាមម្រាមដៃ និងគំរូត្រូវបានរក្សាទុកនៅលើទូរសព្ទ រហូតទាល់តែ​អ្នកលុបវា។"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"អ្នកអាច​លុបគំរូនិង​រូបភាព​ស្នាមម្រាមដៃរបស់អ្នក ឬបិទ​ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ​បានគ្រប់ពេល​នៅក្នុង​ការកំណត់។ គំរូ និង​រូបភាពស្នាមម្រាមដៃ​ត្រូវបានរក្សាទុកនៅលើថេប្លេត រហូតទាល់តែ​អ្នកលុបវា។"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"អ្នកអាច​លុបគំរូនិង​រូបភាព​ស្នាមម្រាមដៃរបស់អ្នក ឬបិទ​ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ​បានគ្រប់ពេល​នៅក្នុង​ការកំណត់។ គំរូ និង​រូបភាពស្នាមម្រាមដៃ​ត្រូវបានរក្សាទុកនៅលើឧបករណ៍ រហូតទាល់តែ​អ្នកលុបវា។"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"អ្នក និងកូនរបស់អ្នកអាច​លុបគំរូ និងរូបភាព​ស្នាមម្រាមដៃរបស់គាត់ ឬបិទ​ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ​បានគ្រប់ពេល​នៅក្នុង​ការកំណត់។ គំរូ និងរូបភាពស្នាមម្រាមដៃត្រូវបានរក្សាទុកនៅលើទូរសព្ទ រហូតទាល់តែគំរូ និងរូបភាព​ស្នាមម្រាមដៃទាំងនោះត្រូវបានលុប។"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"អ្នក និងកូនរបស់អ្នកអាច​លុបគំរូ និងរូបភាព​ស្នាមម្រាមដៃរបស់គាត់ ឬបិទ​ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ​បានគ្រប់ពេល​នៅក្នុង​ការកំណត់។ គំរូ និងរូបភាពស្នាមម្រាមដៃត្រូវបានរក្សាទុកនៅលើថេប្លេត រហូតទាល់តែគំរូ និងរូបភាព​ស្នាមម្រាមដៃទាំងនោះត្រូវបានលុប។"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"អ្នក និងកូនរបស់អ្នកអាច​លុបគំរូ និងរូបភាព​ស្នាមម្រាមដៃរបស់គាត់ ឬបិទ​ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ​បានគ្រប់ពេល​នៅក្នុង​ការកំណត់។ គំរូ និងរូបភាពស្នាមម្រាមដៃត្រូវបានរក្សាទុកនៅលើឧបករណ៍ រហូតទាល់តែគំរូ និងរូបភាព​ស្នាមម្រាមដៃទាំងនោះត្រូវបានលុប។"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"ទូរសព្ទ​របស់អ្នក​អាចត្រូវបាន​ដោះសោ នៅពេលដែល​អ្នកមិនមានបំណងដោះសោ​ ដូចជា​ប្រសិនបើ​នរណាម្នាក់​លើកវាមកប៉ះនឹង​ម្រាមដៃ​របស់អ្នក​ជាដើម។"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"ថេប្លេត​​របស់អ្នក​អាចត្រូវបាន​ដោះសោ នៅពេលដែល​អ្នកមិនមានបំណងដោះសោ​ ដូចជា​ប្រសិនបើ​នរណាម្នាក់​លើកវាមកប៉ះនឹង​ម្រាមដៃ​របស់អ្នក​ជាដើម។"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"ឧបករណ៍​របស់អ្នក​អាចត្រូវបាន​ដោះសោ នៅពេលដែល​អ្នកមិនមានបំណងដោះសោ​ ដូចជា​ប្រសិនបើ​នរណាម្នាក់​លើកវាមកប៉ះនឹង​ម្រាមដៃ​របស់អ្នក​ជាដើម។"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"ទូរសព្ទ​របស់កូនអ្នក​អាចត្រូវបាន​ដោះសោ ទោះបីជា​គាត់មិនមានបំណងដោះសោក៏ដោយដូចជា ប្រសិនបើ​នរណាម្នាក់​លើកវាមកប៉ះនឹង​ម្រាមដៃ​របស់គាត់​ជាដើម។"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"ថេប្លេត​របស់កូនអ្នក​អាចត្រូវបាន​ដោះសោ ទោះបីជា​គាត់មិនមានបំណងដោះសោក៏ដោយ ដូចជាប្រសិនបើ​នរណាម្នាក់​លើកថេប្លេត​នោះ​មកប៉ះនឹង​ម្រាមដៃ​របស់គាត់​ជាដើម។"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"ឧបករណ៍​របស់កូនអ្នក​អាចត្រូវបាន​ដោះសោ ទោះបីជា​គាត់មិនមានបំណងដោះសោក៏ដោយ ដូចជាប្រសិនបើ​នរណាម្នាក់​លើកឧបករណ៍​នោះ​មកប៉ះនឹង​ម្រាមដៃ​របស់គាត់​ជាដើម។"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"ដើម្បីទទួលបាន​លទ្ធផល​ល្អបំផុត សូមប្រើកញ្ចក់​ការពារ​អេក្រង់​ដែលបានទទួលស្គាល់​ពី Made for Google។ តាមរយៈ​កញ្ចក់​ការពារ​អេក្រង់ផ្សេងទៀត ស្នាមម្រាមដៃរបស់អ្នកអាចមិនដំណើរការ។"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"ដើម្បីទទួលបាន​លទ្ធផល​ល្អបំផុត សូមប្រើកញ្ចក់​ការពារ​អេក្រង់​ដែលបានទទួលស្គាល់​ពី Made for Google។ តាមរយៈ​កញ្ចក់​ការពារ​អេក្រង់ផ្សេងទៀត ស្នាមម្រាមដៃរបស់អ្នកអាចមិនដំណើរការ។"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"ប្រើស្នាមម្រាមដៃ​របស់អ្នក ដើម្បីដោះសោ​ថេប្លេតរបស់អ្នក ឬផ្ទៀងផ្ទាត់ថា​ជាអ្នកដូចជា នៅពេលអ្នក​ចូលកម្មវិធីជាដើម"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"ប្រើស្នាមម្រាមដៃរបស់អ្នកដើម្បីដោះសោឧបករណ៍របស់អ្នក ឬផ្ទៀងផ្ទាត់ថាវាគឺជាអ្នក ដូចជានៅពេលអ្នកចូលកម្មវិធីជាដើម"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"ប្រើស្នាមម្រាមដៃ​របស់អ្នក ដើម្បីដោះសោ​ទូរសព្ទរបស់អ្នក ឬផ្ទៀងផ្ទាត់ថា​ជាអ្នកដូចជា នៅពេលអ្នក​ចូលកម្មវិធីជាដើម"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"ការដោះសោ​ដោយប្រើ​ស្នាមម្រាមដៃ និងតាមទម្រង់មុខ"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"ចុច​ដើម្បី​រៀបចំ"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"បានបញ្ចូលស្នាមម្រាមដៃ និងមុខ"</string>
@@ -427,17 +325,8 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"ការប្រើមុខ"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"ការប្រើ​ស្នាមម្រាមដៃ"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"ការប្រើ​មុខ ឬស្នាមម្រាមដៃ"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"ឱ្យ​ថេប្លេត​ទៅមាតាបិតា​របស់អ្នកវិញ"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"ឱ្យឧបករណ៍​ទៅមាតាបិតា​របស់អ្នកវិញ"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"ឱ្យ​ទូរសព្ទ​ទៅមាតាបិតា​របស់អ្នកវិញ"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"យល់ព្រម"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"រំលង​ការចាក់សោអេក្រង់ឬ?"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"មុខងារការពារឧបករណ៍នឹងមិនត្រូវបានបើកទេ។ អ្នកនឹងមិនអាច​រារាំង​អ្នកផ្សេង​មិនឲ្យប្រើប្រាស់ថេប្លេតនេះបានទេ ប្រសិនបើវាបាត់ ត្រូវបានគេលួច ឬកំណត់ឡើងវិញ។"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"មុខងារការពារឧបករណ៍នឹងមិនត្រូវបានបើកទេ។ អ្នកនឹងមិនអាច​រារាំង​អ្នកផ្សេង​មិនឲ្យប្រើប្រាស់ឧបករណ៍នេះបានទេ ប្រសិនបើវាបាត់ ត្រូវបានគេលួច ឬកំណត់ឡើងវិញ។"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2412426429887900241">"មុខងារការពារឧបករណ៍នឹងមិនត្រូវបានបើកទេ។ អ្នកនឹងមិនអាច​រារាំង​អ្នកផ្សេង​មិនឲ្យប្រើប្រាស់ទូរសព្ទនេះបានទេ ប្រសិនបើវាបាត់ ត្រូវបានគេលួច ឬកំណត់ឡើងវិញ។"</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="7119039592587429936">"មុខងារការពារឧបករណ៍នឹងមិនត្រូវបានបើកទេ។ អ្នកនឹងមិនអាច​រារាំង​អ្នកផ្សេង​មិនឲ្យប្រើប្រាស់ថេប្លេតនេះបានទេ ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច។"</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3365990364131398523">"មុខងារការពារឧបករណ៍នឹងមិនត្រូវបានបើកទេ។ អ្នកនឹងមិនអាច​រារាំង​អ្នកផ្សេង​មិនឲ្យប្រើប្រាស់ឧបករណ៍នេះបានទេ ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច។"</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="4908278819257287536">"មុខងារការពារឧបករណ៍នឹងមិនត្រូវបានបើកទេ។ អ្នកនឹងមិនអាច​រារាំង​អ្នកផ្សេង​មិនឲ្យប្រើប្រាស់ទូរសព្ទនេះបានទេ ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច។"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"មិនអីទេ រំលង​ចុះ"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"ថយ​ក្រោយ"</string>
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"រំលង"</string>
@@ -446,9 +335,6 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"ប៉ះ​ប៊ូតុង​ថាមពល​ដោយ​មិន​ចុច​វា"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"របៀប​រៀបចំ​ស្នាមម្រាមដៃ​របស់អ្នក"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"វាស្ថិតនៅផ្នែកខាងក្រោយនៃទូរសព្ទរបស់អ្នក។ សូមប្រើម្រាមដៃចង្អុលរបស់អ្នក។"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"ឧបករណ៍ចាប់ស្នាមម្រាមដៃ​ស្ថិតនៅលើប៊ូតុង​ថាមពល។ វាជាប៊ូតុងរាបស្មើ​នៅ​ជាប់​នឹង​ប៊ូតុង​កម្រិត​សំឡេង​ដែល​លៀន​ចេញ​មក​នៅ​លើ​គែម​ថេប្លេត។\n\nការចុច​ប៊ូតុង​ថាមពល​នឹង​បិទ​អេក្រង់។"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"ឧបករណ៍ចាប់ស្នាមម្រាមដៃ​ស្ថិតនៅលើប៊ូតុង​ថាមពល។ វាជាប៊ូតុងរាបស្មើ​នៅ​ជាប់​នឹង​ប៊ូតុង​កម្រិត​សំឡេង​ដែល​លៀន​ចេញ​មក​នៅ​លើ​គែម​ឧបករណ៍។\n\nការចុច​ប៊ូតុង​ថាមពល​នឹង​បិទ​អេក្រង់។"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"ឧបករណ៍ចាប់ស្នាមម្រាមដៃ​ស្ថិតនៅលើប៊ូតុង​ថាមពល។ វាជាប៊ូតុងរាបស្មើ​នៅ​ជាប់​នឹង​ប៊ូតុង​កម្រិត​សំឡេង​ដែល​លៀន​ចេញ​មក​នៅ​លើ​គែម​ទូរសព្ទ។\n\nការចុច​ប៊ូតុង​ថាមពល​នឹង​បិទ​អេក្រង់។"</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"ឧបករណ៍ចាប់ស្នាមម្រាមដៃ​មាននៅលើអេក្រង់​របស់អ្នក។ អ្នកនឹងថត​ស្នាមម្រាមដៃ​របស់អ្នក​នៅលើ​អេក្រង់​បន្ទាប់។"</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"ចាប់ផ្ដើម"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"សូមរំកិល​ម្រាមដៃ​របស់អ្នក​លើអេក្រង់ ដើម្បីរកមើល​ឧបករណ៍ចាប់ស្នាមម្រាមដៃនោះ។ ចុច​ឧបករណ៍​ចាប់ស្នាមម្រាមដៃ​ឱ្យជាប់។"</string>
@@ -481,9 +367,6 @@
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"កំពុងចុះឈ្មោះ​ស្នាមម្រាមដៃ <xliff:g id="PERCENTAGE">%d</xliff:g> ភាគរយ"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"បានបញ្ចូល​ស្នាមម្រាមដៃ​រួចហើយ"</string>
     <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"ឥឡូវនេះ អ្នកអាចប្រើ​ស្នាមម្រាមដៃរបស់អ្នក ដើម្បីដោះសោ​ថេប្លេតរបស់អ្នក ឬផ្ទៀងផ្ទាត់​ថាជាអ្នក ដូចជានៅពេលអ្នក​ចូលកម្មវិធី ឬយល់ព្រមលើ​ការទិញជាដើម"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"ឥឡូវនេះ អ្នកអាចប្រើ​ស្នាមម្រាមដៃ​របស់អ្នក ដើម្បីដោះសោ​ថេប្លេតរបស់អ្នក ឬផ្ទៀងផ្ទាត់ថាជាអ្នក ដូចជា នៅពេលអ្នក​ចូលកម្មវិធីជាដើម"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"ឥឡូវនេះ អ្នកអាចប្រើ​ស្នាមម្រាមដៃ​របស់អ្នក ដើម្បីដោះសោឧបករណ៍របស់អ្នក ឬផ្ទៀងផ្ទាត់ថាជាអ្នក ដូចជា នៅពេលអ្នក​ចូលកម្មវិធីជាដើម"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"ឥឡូវនេះ អ្នកអាចប្រើ​ស្នាមម្រាមដៃ​របស់អ្នក ដើម្បីដោះសោ​ទូរសព្ទរបស់អ្នក ឬផ្ទៀងផ្ទាត់ថាជាអ្នក ដូចជា នៅពេលអ្នក​ចូលកម្មវិធីជាដើម"</string>
     <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
     <skip />
     <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
@@ -495,42 +378,6 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"ដាក់​ផ្នែកចំហៀង​នៃស្នាមម្រាមដៃ​របស់អ្នក​នៅលើ​ឧបករណ៍​ចាប់ស្នាមម្រាមដៃ​ឱ្យជាប់ រួចប្ដូរទៅ​ផ្នែកម្ខាងទៀត"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"រំលងការរៀបចំស្នាមម្រាមដៃឬទេ?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"អ្នកបានជ្រើសរើសប្រើស្នាមម្រាមដៃរបស់អ្នកជាវិធីមួយក្នុងការដោះសោទូរសព្ទរបស់អ្នក។ ប្រសិនបើអ្នករំលងឥឡូវនេះ អ្នកត្រូវរៀបចំវានៅពេលក្រោយ។ ការរៀបចំចំណាយពេលតែមួយភ្លែតប៉ុណ្ណោះ។"</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"កូដ PIN ការពារថេប្លេត ប្រសិនបើ​បាត់ថេប្លេត ឬត្រូវបានគេលួច"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="4359575348578515037">"លំនាំការពារថេប្លេត ប្រសិនបើ​បាត់ថេប្លេត ឬត្រូវបានគេលួច"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5420451292764062637">"ពាក្យសម្ងាត់​ការពារថេប្លេត ប្រសិនបើ​បាត់ថេប្លេត ឬត្រូវបានគេលួច"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="8841426051550671169">"កូដ PIN ​ការពារ​ឧបករណ៍ ប្រសិនបើ​បាត់ឧបករណ៍ ឬត្រូវបាន​គេលួច"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="6296702954920045923">"លំនាំ​ការពារ​ឧបករណ៍ ប្រសិនបើ​បាត់ឧបករណ៍ ឬត្រូវបាន​គេលួច"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="9186075211441188900">"ពាក្យសម្ងាត់​ការពារ​ឧបករណ៍ ប្រសិនបើ​បាត់ឧបករណ៍ ឬត្រូវបាន​គេលួច"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="4301690296689572747">"កូដ PIN ​ការពារទូរសព្ទ ប្រសិនបើ​បាត់ទូរសព្ទ ឬត្រូវបានគេលួច"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="7387967847446084260">"លំនាំ​ការពារទូរសព្ទ ប្រសិនបើ​បាត់ទូរសព្ទ ឬត្រូវបានគេលួច"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="6415788841227543063">"ពាក្យសម្ងាត់​ការពារទូរសព្ទ ប្រសិនបើ​បាត់ទូរសព្ទ ឬត្រូវបានគេលួច"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="2350062798056164403">"តម្រូវឱ្យមាន​កូដ PIN ដើម្បីរៀបចំ​ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ។\n\nកូដ PIN ​ការពារ​ថេប្លេត ប្រសិនបើ​បាត់ថេប្លេត ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="222574071926747300">"តម្រូវឱ្យមាន​លំនាំ ដើម្បីរៀបចំ​ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ។\n\nលំនាំ​ការពារ​ថេប្លេត ប្រសិនបើ​បាត់ថេប្លេត ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="7780323831330724644">"តម្រូវឱ្យមាន​ពាក្យសម្ងាត់ ដើម្បីរៀបចំ​ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ។\n\nពាក្យសម្ងាត់​ការពារ​ថេប្លេត ប្រសិនបើ​បាត់ថេប្លេត ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="7421096089691939451">"តម្រូវឱ្យមាន​កូដ PIN ដើម្បីរៀបចំ​ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ។\n\nកូដ PIN ​ការពារ​ឧបករណ៍ ប្រសិនបើ​បាត់ឧបករណ៍ ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6458468083711413617">"តម្រូវឱ្យមាន​លំនាំ ដើម្បីរៀបចំ​ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ។\n\nលំនាំ​ការពារ​ឧបករណ៍ ប្រសិនបើ​បាត់ឧបករណ៍ ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="1632249532665518954">"តម្រូវឱ្យមាន​ពាក្យសម្ងាត់ ​ដើម្បីរៀបចំ​ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ។\n\nពាក្យសម្ងាត់​ការពារ​ឧបករណ៍ ប្រសិនបើ​បាត់ឧបករណ៍ ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3101384462491132314">"តម្រូវឱ្យមាន​កូដ PIN ដើម្បីរៀបចំ​ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ។\n\nកូដ PIN ​ការពារ​ទូរសព្ទ ប្រសិនបើ​បាត់ទូរសព្ទ ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="382422778886929469">"តម្រូវឱ្យមាន​លំនាំ ដើម្បីរៀបចំ​ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ។\n\nលំនាំ​ការពារ​ទូរសព្ទ ប្រសិនបើ​បាត់ទូរសព្ទ ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="5515199168425229243">"តម្រូវឱ្យមាន​ពាក្យសម្ងាត់ ដើម្បីរៀបចំ​ការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ។\n\nពាក្យសម្ងាត់​ការពារ​ទូរសព្ទ ប្រសិនបើ​បាត់ទូរសព្ទ ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="2454239555320628731">"តម្រូវឱ្យមាន​កូដ PIN ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ។\n\nកូដ PIN ​ការពារ​ថេប្លេត ប្រសិនបើ​បាត់ថេប្លេត ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="4354138725903415816">"តម្រូវឱ្យមាន​លំនាំ ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ។\n\nលំនាំ​ការពារ​ថេប្លេត ប្រសិនបើ​បាត់ថេប្លេត ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="719339718267952196">"តម្រូវឱ្យមាន​ពាក្យសម្ងាត់ ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ។\n\nពាក្យសម្ងាត់​ការពារ​ថេប្លេត ប្រសិនបើ​បាត់ថេប្លេត ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="3729243407606881750">"តម្រូវឱ្យមាន​កូដ PIN ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ។\n\nកូដ PIN ​ការពារ​ឧបករណ៍ ប្រសិនបើ​បាត់ឧបករណ៍ ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="6966329744346503807">"តម្រូវឱ្យមាន​លំនាំ ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ។\n\nលំនាំ​ការពារ​ឧបករណ៍ ប្រសិនបើ​បាត់ឧបករណ៍ ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3020827854443297996">"តម្រូវឱ្យមាន​ពាក្យសម្ងាត់ ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ។\n\nពាក្យសម្ងាត់​ការពារ​ឧបករណ៍ ប្រសិនបើ​បាត់ឧបករណ៍ ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2155678903559865476">"តម្រូវឱ្យមាន​កូដ PIN ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ។\n\nកូដ PIN ​ការពារ​ទូរសព្ទ ប្រសិនបើ​បាត់ទូរសព្ទ ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="473271568005748452">"តម្រូវឱ្យមាន​លំនាំ ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ។\n\nលំនាំ​ការពារ​ទូរសព្ទ ប្រសិនបើ​បាត់ទូរសព្ទ ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="4319934862372116788">"តម្រូវឱ្យមាន​ពាក្យសម្ងាត់ ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ។\n\nពាក្យសម្ងាត់​ការពារ​ទូរសព្ទ ប្រសិនបើ​បាត់ទូរសព្ទ ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="647987565338402155">"តម្រូវឱ្យមាន​កូដ PIN ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ និង​ការដោះសោដោយប្រើ​ស្នាមម្រាមដៃ។\n\nកូដ PIN ​ការពារ​ថេប្លេត ប្រសិនបើ​បាត់ថេប្លេត ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="5293609077890072841">"តម្រូវឱ្យមាន​លំនាំ ​ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ និង​ការដោះសោដោយប្រើ​ស្នាមម្រាមដៃ។\n\nលំនាំ​ការពារ​ថេប្លេត ប្រសិនបើ​បាត់ថេប្លេត ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="2660359318928684172">"តម្រូវឱ្យមាន​ពាក្យសម្ងាត់ ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ និង​ការដោះសោដោយប្រើ​ស្នាមម្រាមដៃ។\n\nពាក្យសម្ងាត់​ការពារថេប្លេត ប្រសិនបើ​បាត់ថេប្លេត ឬត្រូវបានគេលួច។"</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="1278795063897397815">"តម្រូវឱ្យមាន​កូដ PIN ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ និង​ការដោះសោដោយប្រើ​ស្នាមម្រាមដៃ។\n\nកូដ PIN ​ការពារ​ឧបករណ៍ ប្រសិនបើ​បាត់ឧបករណ៍ ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="8766169819759371801">"តម្រូវឱ្យមាន​លំនាំ ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ និង​ការដោះសោដោយប្រើ​ស្នាមម្រាមដៃ។\n\nលំនាំ​ការពារ​ឧបករណ៍ ប្រសិនបើ​បាត់ឧបករណ៍ ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="8611216039321306045">"តម្រូវឱ្យមាន​ពាក្យសម្ងាត់ ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ និង​ការដោះសោដោយប្រើ​ស្នាមម្រាមដៃ។\n\nពាក្យសម្ងាត់​ការពារឧបករណ៍ ប្រសិនបើ​បាត់ឧបករណ៍ ឬត្រូវបានគេលួច។"</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="8796878521409329051">"តម្រូវឱ្យមាន​កូដ PIN ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ និង​ការដោះសោដោយប្រើ​ស្នាមម្រាមដៃ។\n\nកូដ PIN ​ការពារ​ទូរសព្ទ ប្រសិនបើ​បាត់ទូរសព្ទ ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="8423700958936341596">"តម្រូវឱ្យមាន​លំនាំ ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ និង​ការដោះសោដោយប្រើ​ស្នាមម្រាមដៃ។\n\nលំនាំ​ការពារ​ទូរសព្ទ ប្រសិនបើ​បាត់ទូរសព្ទ ឬត្រូវបាន​គេលួច។"</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="5411689248299854172">"តម្រូវឱ្យមាន​ពាក្យសម្ងាត់ ដើម្បីរៀបចំ​ការដោះសោ​តាមទម្រង់មុខ និង​ការដោះសោដោយប្រើ​ស្នាមម្រាមដៃ។\n\nពាក្យសម្ងាត់​ការពារទូរសព្ទ ប្រសិនបើ​បាត់ទូរសព្ទ ឬត្រូវបានគេលួច។"</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"រំលងការ​រៀបចំកូដ PIN?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"រំលងការរៀបចំសម្រាប់កូដ PIN និងមុខឬ?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"រំលងការរៀបចំសម្រាប់កូដ PIN និងស្នាមម្រាមដៃឬ?"</string>
@@ -565,40 +412,20 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"អ្នក​បាន​បញ្ចូល​ស្នាម​ម្រាមដៃ​ដល់​ចំនួន​អតិបរមា​ហើយ"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"មិន​អាច​បញ្ចូល​ស្នាម​ម្រាមដៃ​បាន​ទៀត​ទេ"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"លុប \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'"</string>
-    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"សកម្មភាពនេះ​លុបរូបភាព​ស្នាមម្រាមដៃ និងគំរូដែល​ពាក់ព័ន្ធនឹង \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' ដែលត្រូវបានរក្សាទុក​នៅលើទូរសព្ទរបស់អ្នក"</string>
-    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"សកម្មភាពនេះ​លុបរូបភាព​ស្នាមម្រាមដៃ និងគំរូដែល​ពាក់ព័ន្ធនឹង \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' ដែលត្រូវបានរក្សាទុក​នៅលើថេប្លេតរបស់អ្នក"</string>
-    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"សកម្មភាពនេះ​លុបរូបភាព​ស្នាមម្រាមដៃ និងគំរូដែល​ពាក់ព័ន្ធនឹង \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' ដែលត្រូវបានរក្សាទុក​នៅលើឧបករណ៍របស់អ្នក"</string>
-    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"អ្នកនឹងមិន​អាចប្រើស្នាមម្រាមដៃ​របស់អ្នក ដើម្បីដោះសោ​ទូរសព្ទរបស់អ្នក ឬផ្ទៀងផ្ទាត់​ថាជាអ្នកនៅក្នុង​កម្មវិធីបានទេ។"</string>
-    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"អ្នកនឹងមិន​អាចប្រើស្នាមម្រាមដៃ​របស់អ្នក ដើម្បីដោះសោ​ថេប្លេតរបស់អ្នក ឬផ្ទៀងផ្ទាត់​ថាជាអ្នកនៅក្នុង​កម្មវិធីបានទេ។"</string>
-    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"អ្នកនឹងមិន​អាចប្រើស្នាមម្រាមដៃ​របស់អ្នក ដើម្បីដោះសោ​ឧបករណ៍របស់អ្នក ឬផ្ទៀងផ្ទាត់​ថាជាអ្នកនៅក្នុង​កម្មវិធីបានទេ។"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"អ្នកនឹង​មិនអាចប្រើ​ស្នាមម្រាមដៃ​របស់អ្នក ដើម្បី​ដោះសោ​កម្រងព័ត៌មាន​ការងារ​របស់អ្នក ផ្តល់សិទ្ធិ​ក្នុងការទិញ ឬ​ចូល​កម្មវិធីការងារបានទេ។"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"ការ​អ៊ីនគ្រីប"</string>
-    <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"អ៊ីនគ្រីប​ថេប្លេត"</string>
-    <string name="encrypt_title" product="default" msgid="7337365190988321100">"អ៊ីនគ្រីប​ទូរសព្ទ"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"បាន​អ៊ីនគ្រីប"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"កំណត់​ការចាក់​សោអេក្រង់"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"ដើម្បីទទួលបានសុវត្ថិភាពបន្ថែម សូមកំណត់​កូដ PIN, លំនាំ ឬ​ពាក្យសម្ងាត់​សម្រាប់​ឧបករណ៍នេះ។"</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"កំណត់ការចាក់សោអេក្រង់"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"រក្សា​សុវត្ថិភាព​ទូរសព្ទ​របស់អ្នក"</string>
-    <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"កំណត់​ការ​ចាក់​សោ​អេក្រង់ ដើម្បី​ការពារ​ថេប្លេត"</string>
-    <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"កំណត់​ការ​ចាក់​សោ​អេក្រង់ ដើម្បី​ការពារ​ឧបករណ៍"</string>
-    <string name="suggested_lock_settings_summary" product="default" msgid="2443273582716671033">"កំណត់​ការ​ចាក់​សោ​អេក្រង់ ដើម្បី​ការពារ​ទូរសព្ទ"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"បញ្ចូល​ស្នាម​ម្រាមដៃ​ដើម្បី​ដោះសោ"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"ជ្រើស​រើសការ​ចាក់សោ​អេក្រង់"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"ជ្រើសរើសការចាក់សោអេក្រង់"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"ជ្រើសរើសការចាក់សោអេក្រង់ថ្មី"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"ជ្រើសរើសការចាក់សោសម្រាប់កម្មវិធីការងារ"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"ជ្រើសរើសការចាក់សោការងារថ្មី"</string>
-    <string name="setup_lock_settings_picker_title" product="tablet" msgid="1276283007274778191">"ការពារថេប្លេតរបស់អ្នក"</string>
-    <string name="setup_lock_settings_picker_title" product="device" msgid="3585905639045649905">"ការពារឧបករណ៍របស់អ្នក"</string>
-    <string name="setup_lock_settings_picker_title" product="default" msgid="2758197863515864300">"ការពារទូរស័ព្ទរបស់អ្នក"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"ដើម្បី​ទទួលបាន​សុវត្ថិភាព​បន្ថែម សូម​កំណត់​ការចាក់​សោអេក្រង់​បម្រុងទុក"</string>
-    <string name="setup_lock_settings_picker_message" product="tablet" msgid="4870877800737248926">"ទប់ស្កាត់អ្នកផ្សេងពីការប្រើថេប្លេតនេះដោយគ្មានការអនុញ្ញាតពីអ្នកដោយធ្វើឲ្យលក្ខណៈពិសេសការពារឧបករណ៍សកម្ម។ សូមជ្រើសការចាក់សោអេក្រង់ដែលអ្នកចង់ប្រើ។"</string>
-    <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"ទប់ស្កាត់អ្នកផ្សេងពីការប្រើឧបករណ៍នេះដោយគ្មានការអនុញ្ញាតពីអ្នកដោយធ្វើឲ្យលក្ខណៈពិសេសការពារឧបករណ៍សកម្ម។ សូមជ្រើសការចាក់សោអេក្រង់ដែលអ្នកចង់ប្រើ។"</string>
-    <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"ទប់ស្កាត់អ្នកផ្សេងពីការប្រើទូរស័ព្ទនេះដោយគ្មានការអនុញ្ញាតពីអ្នកដោយធ្វើឲ្យលក្ខណៈពិសេសការពារឧបករណ៍សកម្ម។ សូមជ្រើសការចាក់សោអេក្រង់ដែលអ្នកចង់ប្រើ។"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"ជ្រើសរើស​វិធីចាក់សោ​អេក្រង់បម្រុង​របស់អ្នក"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"ប្រសិនបើអ្នកភ្លេចកូដចាក់សោអេក្រង់ អ្នកគ្រប់គ្រងផ្នែកព័ត៌មានវិទ្យារបស់អ្នកមិនអាចកំណត់វាឡើងវិញទេ។"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"កំណត់​ការចាក់សោ​ដោយឡែកសម្រាប់ការងារ"</string>
@@ -638,43 +465,31 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"ដកការការពារប្រវត្តិរូបចេញឬទេ?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"លំនាំការពារទូរសព្ទរបស់អ្នក ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"លំនាំការពារទូរសព្ទរបស់អ្នក ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច។<xliff:g id="EMPTY_LINE">
-
 </xliff:g>សកម្មភាពនេះក៏លុបគំរូស្នាមម្រាមដៃ ដែលបានរក្សាទុកនៅលើឧបករណ៍របស់អ្នកផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​ស្នាមម្រាមដៃរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"លំនាំការពារទូរសព្ទរបស់អ្នក ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច។<xliff:g id="EMPTY_LINE">
-
 </xliff:g>គំរូមុខ​របស់អ្នកក៏​នឹងត្រូវលុប​ដោយសុវត្ថិភាព​ជាអចិន្ត្រៃយ៍ផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​មុខរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"លំនាំការពារទូរសព្ទរបស់អ្នក ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច។<xliff:g id="EMPTY_LINE">
-
 </xliff:g>សកម្មភាពនេះលុបគំរូស្នាមម្រាមដៃ ដែលបានរក្សាទុកនៅលើឧបករណ៍របស់អ្នក។ គំរូមុខ​របស់អ្នកក៏​នឹងត្រូវលុប​ដោយសុវត្ថិភាព​ជាអចិន្ត្រៃយ៍ផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​មុខ ឬស្នាមម្រាមដៃរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"កូដ PIN ការពារទូរសព្ទរបស់អ្នក ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច"</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"កូដ PIN ការពារទូរសព្ទរបស់អ្នក ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច។<xliff:g id="EMPTY_LINE">
-
 </xliff:g>សកម្មភាពនេះក៏លុបគំរូស្នាមម្រាមដៃ ដែលបានរក្សាទុកនៅលើឧបករណ៍របស់អ្នកផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​ស្នាមម្រាមដៃរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"កូដ PIN ការពារទូរសព្ទរបស់អ្នក ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច។<xliff:g id="EMPTY_LINE">
-
 </xliff:g>គំរូមុខ​របស់អ្នកក៏​នឹងត្រូវលុប​ដោយសុវត្ថិភាព​ជាអចិន្ត្រៃយ៍ផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​មុខរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"កូដ PIN ការពារទូរសព្ទរបស់អ្នក ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច។<xliff:g id="EMPTY_LINE">
-
 </xliff:g>សកម្មភាពនេះលុបគំរូស្នាមម្រាមដៃ ដែលបានរក្សាទុកនៅលើឧបករណ៍របស់អ្នក។ គំរូមុខ​របស់អ្នកក៏​នឹងត្រូវលុប​ដោយសុវត្ថិភាព​ជាអចិន្ត្រៃយ៍ផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​មុខ ឬស្នាមម្រាមដៃរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"ពាក្យសម្ងាត់ការពារទូរសព្ទរបស់អ្នក ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"ពាក្យសម្ងាត់ការពារទូរសព្ទរបស់អ្នក ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច។<xliff:g id="EMPTY_LINE">
-
 </xliff:g>សកម្មភាពនេះក៏លុបគំរូស្នាមម្រាមដៃ ដែលបានរក្សាទុកនៅលើឧបករណ៍របស់អ្នកផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​ស្នាមម្រាមដៃរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"ពាក្យសម្ងាត់ការពារទូរសព្ទរបស់អ្នក ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច។<xliff:g id="EMPTY_LINE">
-
 </xliff:g>គំរូមុខ​របស់អ្នកក៏​នឹងត្រូវលុប​ដោយសុវត្ថិភាព​ជាអចិន្ត្រៃយ៍ផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​មុខរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"ពាក្យសម្ងាត់ការពារទូរសព្ទរបស់អ្នក ប្រសិនបើវាបាត់ ឬត្រូវបានគេលួច។<xliff:g id="EMPTY_LINE">
-
 </xliff:g>សកម្មភាពនេះលុបគំរូស្នាមម្រាមដៃ ដែលបានរក្សាទុកនៅលើឧបករណ៍របស់អ្នក។ គំរូមុខ​របស់អ្នកក៏​នឹងត្រូវលុប​ដោយសុវត្ថិភាព​ជាអចិន្ត្រៃយ៍ផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​មុខ ឬស្នាមម្រាមដៃរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"មុខងារការពារឧបករណ៍នឹងមិនដំណើរការទេបើគ្មានការចាក់សោអេក្រង់របស់អ្នក។"</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"មុខងារ​ការពារ​ឧបករណ៍​នឹងមិន​ដំណើរការ​ដោយគ្មាន​ការចាក់សោ​អេក្រង់របស់​អ្នកទេ។<xliff:g id="EMPTY_LINE">
-
 </xliff:g>សកម្មភាពនេះក៏លុបគំរូស្នាមម្រាមដៃ ដែលបានរក្សាទុកនៅលើឧបករណ៍របស់អ្នកផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​ស្នាមម្រាមដៃរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"មុខងារ​ការពារ​ឧបករណ៍​នឹងមិន​ដំណើរការ​ដោយគ្មាន​ការចាក់សោ​អេក្រង់របស់​អ្នកទេ។<xliff:g id="EMPTY_LINE">
-
 </xliff:g>គំរូមុខ​របស់អ្នកក៏​នឹងត្រូវលុប​ដោយសុវត្ថិភាព​ជាអចិន្ត្រៃយ៍ផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​មុខរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"មុខងារ​ការពារ​ឧបករណ៍​នឹងមិន​ដំណើរការ​ដោយគ្មាន​ការចាក់សោ​អេក្រង់របស់​អ្នកទេ។<xliff:g id="EMPTY_LINE">
-
 </xliff:g>សកម្មភាពនេះលុបគំរូស្នាមម្រាមដៃ ដែលបានរក្សាទុកនៅលើឧបករណ៍របស់អ្នក។ គំរូមុខ​របស់អ្នកក៏​នឹងត្រូវលុប​ដោយសុវត្ថិភាព​ជាអចិន្ត្រៃយ៍ផងដែរ។ អ្នក​នឹង​មិនអាច​ប្រើ​មុខ ឬស្នាមម្រាមដៃរបស់អ្នក​ ដើម្បីផ្ទៀងផ្ទាត់នៅក្នុងកម្មវិធីបានទេ។"</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"លុប"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> ណែនាំ​កូដ PIN ឬ​ពាក្យសម្ងាត់​ខ្លាំង ហើយ​អាចនឹង​ដំណើរការ​មិនដូច​ការរំពឹងទុកទេ ប្រសិនបើ​គ្មានការចាក់សោ​អេក្រង់"</string>
@@ -785,9 +600,6 @@
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"បំភ្លេច​ឧបករណ៍?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"ដកភាពពាក់ព័ន្ធចេញ"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"ផ្ដាច់​កម្មវិធីឬ?"</string>
-    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"ទូរសព្ទ​របស់អ្នក​នឹង​ឈប់​ផ្គូផ្គង​ជាមួយ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ទៀតហើយ"</string>
-    <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"ថេប្លេត​របស់អ្នក​នឹង​ឈប់​ផ្គូផ្គង​ជាមួយ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ទៀតហើយ"</string>
-    <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"ឧបករណ៍​របស់អ្នក​នឹង​ឈប់​ផ្គូផ្គង​ជាមួយ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ទៀតហើយ"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"កម្មវិធី <xliff:g id="APP_NAME">%1$s</xliff:g> នឹងមិនភ្ជាប់ជាមួយ <xliff:g id="DEVICE_NAME">%2$s</xliff:g> របស់អ្នកទៀតទេ"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"បំភ្លេច​ឧបករណ៍"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"ផ្ដាច់​កម្មវិធី"</string>
@@ -832,7 +644,6 @@
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"បង្ហាញអត្រា​ផ្ទុកឡើងវិញ​នៃផ្ទាំងអេក្រង់បច្ចុប្បន្ន"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"តម្រូវ​ឱ្យ​ដោះសោ​ឧបករណ៍​សម្រាប់ NFC"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"អនុញ្ញាត​ឱ្យប្រើ NFC តែ​នៅពេល​អេក្រង់​មិនជាប់សោ​ប៉ុណ្ណោះ"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android បញ្ជូន"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"រួចរាល់​ដើម្បី​បញ្ជូន​ខ្លឹមសារ​កម្មវិធី​តាម NFC"</string>
     <string name="nfc_disabled_summary" msgid="8737797364522502351">"មិនអាច​ប្រើ​បានទេ ដោយសារ NFC បានបិទ"</string>
@@ -1040,14 +851,10 @@
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> ដំណើរការ"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"AndroidHotspot"</string>
     <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"រក្សាទុក​បណ្ដាញ​នេះ​ឬ​?"</string>
-    <string name="wifi_add_app_single_network_summary" product="default" msgid="6881712878537666626">"<xliff:g id="APPNAME">%1$s</xliff:g> ចង់រក្សាទុក​បណ្ដាញនៅក្នុង​ទូរសព្ទរបស់អ្នក"</string>
-    <string name="wifi_add_app_single_network_summary" product="tablet" msgid="8455616967601552440">"<xliff:g id="APPNAME">%1$s</xliff:g> ចង់រក្សាទុក​បណ្ដាញ​នៅក្នុង​ថេប្លេត​របស់អ្នក"</string>
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"កំពុង​រក្សាទុក…"</string>
     <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"បាន​រក្សាទុក"</string>
     <string name="wifi_add_app_network_save_failed_summary" msgid="7223817782309294652">"មិនអាច​រក្សាទុក​បានទេ។ សូមព្យាយាម​ម្ដងទៀត។"</string>
     <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"រក្សាទុក​បណ្ដាញឬ?"</string>
-    <string name="wifi_add_app_networks_summary" product="default" msgid="2670215712788515167">"<xliff:g id="APPNAME">%1$s</xliff:g> ចង់រក្សាទុក​បណ្ដាញទាំងនេះ​នៅក្នុងទូរសព្ទ​របស់អ្នក"</string>
-    <string name="wifi_add_app_networks_summary" product="tablet" msgid="2088967184512169910">"<xliff:g id="APPNAME">%1$s</xliff:g> ចង់រក្សាទុក​បណ្ដាញទាំងនេះ​នៅក្នុង​ថេប្លេត​របស់អ្នក"</string>
     <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"កំពុងរក្សាទុក​បណ្ដាញ <xliff:g id="NUMBER">%d</xliff:g>…"</string>
     <string name="wifi_add_app_networks_saved_summary" msgid="1648417628665152905">"បានរក្សាទុក​បណ្ដាញ"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"ការហៅតាម Wi-Fi"</string>
@@ -1090,8 +897,6 @@
     <string name="accelerometer_title" msgid="7745991950833748909">"បង្វិល​អេក្រង់​ស្វ័យប្រវត្តិ"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"បើក - ផ្អែកលើមុខ"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"ការសម្គាល់​មុខ"</string>
-    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"ប្ដូរទិសអេក្រង់​ដោយស្វ័យប្រវត្តិ នៅពេលដែល​អ្នកបង្វិល​ទូរសព្ទរបស់អ្នកទៅ​ជាបញ្ឈរ និងផ្ដេក"</string>
-    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"កែតម្រូវទិសអេក្រង់​ដោយស្វ័យប្រវត្តិ នៅពេល​អ្នកបង្វិល​ថេប្លេតរបស់អ្នកទៅ​ជាបញ្ឈរ និងផ្ដេក"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"ស្វែងយល់បន្ថែម​អំពីការបង្វិល​ស្វ័យប្រវត្តិ"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"នៅពេលដែល​អ្នកដាក់​ទូរសព្ទ​របស់អ្នកឱ្យ​បញ្ឈរ និងផ្ដេក"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"កម្រិតច្បាស់នៃអេក្រង់"</string>
@@ -1203,10 +1008,6 @@
     <string name="sim_lock_settings" msgid="4493069398250139205">"កំណត់​ការ​ចាក់សោ​ស៊ីម​កាត"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"ចាក់សោ​ស៊ីម​កាត"</string>
     <string name="sim_pin_toggle" msgid="98754920202404425">"ចាក់​សោ​ស៊ីម​កាត"</string>
-    <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"ទាមទារ​កូដ PIN ដើម្បី​ប្រើ​កុំព្យូទ័រ​បន្ទះ"</string>
-    <string name="sim_lock_on" product="default" msgid="3303147192981388923">"ទាមទារ​កូដ PIN ដើម្បី​ប្រើ​ទូរសព្ទ"</string>
-    <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"ទាមទារ​កូដ PIN ដើម្បី​ប្រើ​កុំព្យូទ័រ​បន្ទះ"</string>
-    <string name="sim_lock_off" product="default" msgid="4634118006847137785">"ទាមទារ​​​កូដ PIN ដើម្បី​ប្រើ​ទូរសព្ទ"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"ប្ដូរ​កូដ PIN ស៊ីម​កាត"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"កូដ​ PIN ស៊ីម​កាត"</string>
     <string name="sim_enable_sim_lock" msgid="8993991669975548653">"ចាក់​សោ​ស៊ីម​កាត"</string>
@@ -1251,12 +1052,6 @@
     <string name="storage_settings_title" msgid="486118156723194815">"កំណត់​ការ​​ផ្ទុក"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (រន្ធស៊ីម %1$d)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"ដើម្បីមើល សូមជ្រើសរើស​បណ្តាញដែលបាន​រក្សាទុក"</string>
-    <string name="status_number" product="tablet" msgid="3597945414666253183">"MDN"</string>
-    <string name="status_number" product="default" msgid="8407999629121682207">"លេខទូរសព្ទ"</string>
-    <string name="status_number_sim_slot" product="tablet" msgid="6582203988975619529">"MDN (រន្ធស៊ីម %1$d)"</string>
-    <string name="status_number_sim_slot" product="default" msgid="5724823197745786398">"លេខទូរសព្ទ (រន្ធស៊ីម %1$d)"</string>
-    <string name="status_number_sim_status" product="tablet" msgid="4239876366511743428">"MDN នៅលើស៊ីម"</string>
-    <string name="status_number_sim_status" product="default" msgid="2772745542921910086">"លេខទូរសព្ទនៅលើស៊ីម"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"កំណែ PRL"</string>
@@ -1316,12 +1111,6 @@
     <string name="storage_wizard_move_progress_title" msgid="3912406225614672391">"កំពុងផ្លាស់ទី <xliff:g id="APP">^1</xliff:g>…"</string>
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"កុំដក <xliff:g id="NAME">^1</xliff:g> ចេញអំឡុងពេលធ្វើការផ្លាស់ទី។ \n\nកម្មវិធី <xliff:g id="APP">^2</xliff:g> នៅលើឧបករណ៍នេះនឹងមិនមានទេ រហូតដល់ការផ្លាស់ទីបញ្ចប់។"</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"តើ​អ្នក​នឹង​ប្រើ <xliff:g id="NAME">^1</xliff:g> នេះ​ដោយ​របៀប​ណា?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"ឈូស​កាត SD សម្រាប់​ប្រើ​ជា​ទំហំ​​ផ្ទុក​ខាង​ក្នុង"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"រក្សា​ទុក​កម្មវិធី និង​មេឌៀ ដើម្បី​ប្រើប្រាស់​នៅ​លើ​ថេប្លេត​នេះ​តែ​ប៉ុណ្ណោះ។ &lt;a href=https://support.google.com/android/answer/12153449&gt;ស្វែង​យល់​បន្ថែម​អំពី​ការរៀបចំ​កាត SD&lt;/a&gt;។"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"ឈូស"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"ឈូស​កាត SD សម្រាប់​ប្រើ​ជា​ទំហំ​​ផ្ទុក​ខាង​ក្នុង"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"រក្សា​ទុក​កម្មវិធី និង​មេឌៀ ដើម្បី​ប្រើប្រាស់​នៅ​លើ​ទូរសព្ទ​នេះ​តែ​ប៉ុណ្ណោះ។ &lt;a href=https://support.google.com/android/answer/12153449&gt;ស្វែង​យល់​បន្ថែម​អំពី​ការរៀបចំ​កាត SD&lt;/a&gt;។"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"ឈូស"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"ឬ"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"ឈូស​កាត SD សម្រាប់​ប្រើ​ជា​ទំហំ​ផ្ទុក​ចល័ត"</string>
     <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"រក្សា​ទុក​រូបថត វីដេអូ តន្ត្រី និង​អ្វីៗ​ជាច្រើន​ទៀត ព្រមទាំង​ចូល​ប្រើប្រាស់​អ្វី​ទាំង​នេះ​ពី​ឧបករណ៍​ផ្សេង​ទៀត។ &lt;a href=https://support.google.com/android/answer/12153449&gt;ស្វែង​យល់​បន្ថែម​អំពី​ការរៀបចំ​កាត SD&lt;/a&gt;។"</string>
@@ -1332,13 +1121,9 @@
     <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"ត្រូវការ​ឈូស​<xliff:g id="NAME_0">^1</xliff:g> នេះ ដើម្បី​រក្សា​ទុក​រូបថត វីដេអូ តន្ត្រី និង​អ្វីៗ​ជាច្រើន​ទៀត។ \n\nការឈូស​នឹង​លុប​ខ្លឹមសារ​ដែល​មាន​ស្រាប់​នៅ​លើ​<xliff:g id="NAME_1">^2</xliff:g>។ ដើម្បី​ជៀសវាង​កុំ​ឱ្យ​បាត់បង់​ខ្លឹមសារ សូម​បម្រុង​ទុក​ខ្លឹមសារ​ទៅ​ឧបករណ៍ ឬ<xliff:g id="NAME_2">^3</xliff:g> ផ្សេង។"</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"សម្អាត <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"ផ្លាស់ទី​ខ្លឹមសារ​ទៅ <xliff:g id="NAME">^1</xliff:g> មែនទេ?"</string>
-    <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"អ្នក​អាច​ផ្លាស់ទី​ឯកសារ មេឌៀ និង​កម្មវិធី​ជាក់លាក់​ទៅ <xliff:g id="NAME">^1</xliff:g> នេះបាន។ \n\nការ​ផ្លាស់​ទី​នេះ​នឹង​បង្កើន​​ទំហំផ្ទុក​នៃ​ថេប្លេត​របស់អ្នកបាន <xliff:g id="SIZE">^2</xliff:g> និង​អាច​ចំណាយ​ពេល​ប្រមាណ <xliff:g id="DURATION">^3</xliff:g> ។"</string>
-    <string name="storage_wizard_migrate_v2_body" product="default" msgid="809730501314645325">"អ្នក​អាច​ផ្លាស់ទី​ឯកសារ មេឌៀ និង​កម្មវិធី​ជាក់លាក់​ទៅ <xliff:g id="NAME">^1</xliff:g> នេះបាន។ \n\nការ​ផ្លាស់​ទី​នេះ​នឹង​បង្កើន​​ទំហំផ្ទុក​នៃ​ទូរសព្ទ​របស់អ្នកបាន <xliff:g id="SIZE">^2</xliff:g> និង​អាច​ចំណាយ​ពេល​ប្រមាណ <xliff:g id="DURATION">^3</xliff:g> ។"</string>
     <string name="storage_wizard_migrate_v2_checklist" msgid="2618258869444553060">"អំឡុង​ពេល​ផ្លាស់​ទី៖"</string>
     <string name="storage_wizard_migrate_v2_checklist_media" msgid="5867134681730723744">"កុំយក <xliff:g id="NAME">^1</xliff:g> ចេញ​"</string>
     <string name="storage_wizard_migrate_v2_checklist_apps" msgid="1882077445750580783">"កម្មវិធី​មួយ​ចំនួន​នឹង​មិន​ដំណើរការ​ទេ"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="tablet" msgid="6111770421449869539">"ទុកឱ្យ​ថេប្លេតនេះ​បន្តសាក​ថ្ម"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="default" msgid="8826915870192535008">"ទុកឱ្យ​ទូរសព្ទ​នេះ​បន្តសាក​ថ្ម"</string>
     <string name="storage_wizard_migrate_v2_now" msgid="3341460117088026966">"ផ្លាស់ទី​ខ្លឹមសារ"</string>
     <string name="storage_wizard_migrate_v2_later" msgid="6067756122853315642">"ផ្លាស់ទី​ខ្លឹមសារ​នៅ​ពេល​ក្រោយ"</string>
     <string name="storage_wizard_migrate_progress_v2_title" msgid="8791318509516968103">"កំពុង​ផ្លាស់ទី​ខ្លឹមសារ…"</string>
@@ -1407,21 +1192,9 @@
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"មិន​អាច​លុប​ស៊ីម​ដែលបានទាញយក​ទេ ដោយសារ​មានបញ្ហា។\n\nសូម​ចាប់ផ្ដើម​​ឧបករណ៍​របស់អ្នក​ឡើងវិញ រួចព្យាយាម​ម្ដងទៀត។"</string>
     <string name="main_clear_title" msgid="277664302144837723">"លុបទិន្នន័យទាំងអស់ (កំណត់ដូច​ចេញពីរោងចក្រ)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"លុបទិន្នន័យទាំងអស់ (កំណត់ដូច​ចេញពីរោងចក្រ)"</string>
-    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"ការធ្វើបែបនេះ​នឹង​លុប​ទិន្នន័យ​ទាំងអស់ពី"<b>"ទំហំផ្ទុកខាងក្នុង"</b>"នៃថេប្លេត​របស់អ្នក រួមទាំង៖\n\n"<li>"គណនី Google របស់អ្នក"</li>\n<li>"ទិន្នន័យ​កម្មវិធី​និង​ប្រព័ន្ធ​ និងការកំណត់​"</li>\n<li>"កម្មវិធី​ដែលបានទាញយក"</li></string>
-    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"ការធ្វើបែបនេះ​នឹង​លុប​ទិន្នន័យ​ទាំងអស់​ពី"<b>"ទំហំផ្ទុក​ខាង​ក្នុង"</b>"នៃ​ទូរសព្ទ​របស់​អ្នក រួមទាំង៖\n\n"<li>"គណនី Google របស់​អ្នក"</li>\n<li>"ទិន្នន័យ​កម្មវិធី​និង​ប្រព័ន្ធ​ និងការកំណត់"</li>\n<li>"កម្មវិធី​ដែលបាន​ទាញ​យក"</li></string>
-    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"បច្ចុប្បន្ន អ្នក​បាន​ចូល​គណនី​ដូច​ខាង​ក្រោម៖\n"</string>
-    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"មានអ្នកប្រើប្រាស់​ផ្សេងទៀតមានវត្តមាន​នៅលើឧបករណ៍នេះ។\n"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"តន្ត្រី"</li>\n<li>"រូបថត"</li>\n<li>"ទិន្នន័យ​អ្នក​ប្រើ​ប្រាស់ផ្សេង​ទៀត"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"សកម្មភាពនេះ​នឹងមិនលុបចោលគម្រោង​សេវាកម្មឧបករណ៍ចល័ត​របស់អ្នកទេ។"</string>
-    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"ដើម្បី​សម្អាតតន្ត្រី រូបភាព និង​ទិន្នន័យ​អ្នកប្រើប្រាស់​ផ្សេងទៀត ចាំបាច់ត្រូវលុប"<b>"ឧបករណ៍ផ្ទុក USB"</b>"។"</string>
-    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"ដើម្បី​សម្អាត​តន្ត្រី រូបភាព និង​ទិន្នន័យ​អ្នកប្រើប្រាស់​ផ្សេងទៀត ចាំបាច់ត្រូវលុប"<b>"កាត SD"</b>"។"</string>
-    <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"លុប​ឧបករណ៍​ផ្ទុក​យូអេសប៊ី"</string>
-    <string name="erase_external_storage" product="default" msgid="2610056855012660451">"លុប​កាត​​អេសឌី"</string>
-    <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"លុប​ទិន្នន័យ​ទាំងអស់​លើ​ឧបករណ៍​ផ្ទុក​យូអេសប៊ី​ខាង​ក្នុង ដូច​ជា​តន្ត្រី ឬ​​រូបថត"</string>
-    <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"លុប​ទិន្នន័យ​ទាំងអស់​លើ​កាត​អេសឌី ដូច​ជា​តន្ត្រី ឬ​រូបថត"</string>
-    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"លុប​ទិន្នន័យ​ទាំង​អស់"</string>
-    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"លុប​ទិន្នន័យ​ទាំង​អស់"</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"ព័ត៌មាន​ផ្ទាល់ខ្លួន និងកម្មវិធី​ដែលបានទាញយក​ទាំងអស់​របស់អ្នកនឹងត្រូវបានលុបចេញ។ អ្នកមិន​អាចត្រឡប់​សកម្មភាពនេះ​វិញបានទេ។"</string>
     <string name="main_clear_final_desc_esim" msgid="440406836793824969">"ព័ត៌មាន​ផ្ទាល់ខ្លួន​ទាំងអស់​របស់អ្នក រួម​ទាំង​ស៊ីម និងកម្មវិធី​ដែលបាន​ទាញយកនឹងត្រូវបានលុបចេញ។ អ្នកមិន​អាចត្រឡប់​សកម្មភាពនេះ​វិញបានទេ។"</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"លុប​ទិន្នន័យ​ទាំង​អស់ឬ?"</string>
@@ -1467,14 +1240,8 @@
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"ចែករំលែក​អ៊ីនធឺណិត​តាមរយៈ USB, ប៊្លូធូស និងអ៊ីសឺរណិត​តែប៉ុណ្ណោះ"</string>
     <string name="usb_title" msgid="1157283449840612901">"យូអេសប៊ី"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"ការ​ភ្ជាប់​តាម USB"</string>
-    <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"ចែករំលែកការភ្ជាប់អ៊ីនធឺណិតរបស់ទូរសព្ទតាមរយៈ USB"</string>
-    <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"ចែករំលែកការភ្ជាប់អ៊ីនធឺណិតរបស់ថេប្លេតតាមរយៈ USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"ការ​ភ្ជាប់​តាមប៊្លូធូស"</string>
-    <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"ចែក​រំលែក​ការ​ភ្ជាប់​អ៊ីនធឺណិត​របស់ថេប្លេត​តាមរយៈប៊្លូធូស"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"ចែក​រំលែក​ការ​ភ្ជាប់​អ៊ីនធឺណិត​របស់ទូរសព្ទ​តាមរយៈប៊្លូធូស"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ការ​ភ្ជាប់អ៊ីសឺរណិត"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"ចែករំលែកការតភ្ជាប់អ៊ីនធឺណិតរបស់ទូរសព្ទតាមរយៈអ៊ីសឺរណិត"</string>
-    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"ចែក​រំលែក​ការត​ភ្ជាប់​អ៊ីនធឺណិត​របស់ថេប្លេត​តាមរយៈអ៊ីសឺរណិត"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"ប្រើហតស្ប៉ត និងការភ្ជាប់ ដើម្បីផ្តល់អ៊ីនធឺណិតដល់ឧបករណ៍ផ្សេងទៀតតាមរយៈការភ្ជាប់ទិន្នន័យទូរសព្ទចល័តរបស់អ្នក។ កម្មវិធីក៏អាចបង្កើតហតស្ប៉ត ដើម្បីចែករំលែកខ្លឹមសារជាមួយឧបករណ៍ដែលនៅជិតផងដែរ។"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"ប្រើ​ហតស្ប៉ត និង​ការភ្ជាប់ ដើម្បី​ផ្តល់​អ៊ីនធឺណិត​ដល់​ឧបករណ៍​ផ្សេងទៀត​តាមរយៈ​ការតភ្ជាប់ Wi-Fi ឬ​ទិន្នន័យ​ទូរសព្ទ​ចល័ត​របស់​អ្នក។ កម្មវិធី​ក៏​អាច​បង្កើត​ហតស្ប៉ត ដើម្បី​ចែករំលែក​ខ្លឹមសារ​ជាមួយ​ឧបករណ៍​ដែល​នៅជិត​បាន​ផងដែរ។"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"ជំនួយ"</string>
@@ -1522,10 +1289,6 @@
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"ការចាប់ដឹងពី​ល្វែងម៉ោងរបស់ទីតាំង​មិនអាចប្រើបានទេ"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"ការផ្លាស់ប្ដូរ​ការចាប់ដឹងពីល្វែងម៉ោង​របស់ទីតាំងមិនត្រូវបាន​អនុញ្ញាតទេ"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"ទីតាំងអាចនឹងត្រូវបានប្រើដើម្បីកំណត់ល្វែងម៉ោង"</string>
-    <string name="about_settings" product="tablet" msgid="2888705054709289693">"អំពី​កុំព្យូទ័រ​បន្ទះ"</string>
-    <string name="about_settings" product="default" msgid="4038626127378127613">"អំពី​ទូរសព្ទ"</string>
-    <string name="about_settings" product="device" msgid="9012888717090302815">"អំពីឧបករណ៍"</string>
-    <string name="about_settings" product="emulator" msgid="2516560858771320366">"អំពីឧបករណ៍ត្រាប់តាម"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"មើល​ព័ត៌មាន​ផ្លូវច្បាប់, ស្ថានភាព, កំណែ​កម្មវិធី"</string>
     <string name="legal_information" msgid="7509900979811934843">"ព័ត៌មាន​ផ្លូវ​ច្បាប់"</string>
     <string name="manual" msgid="3651593989906084868">"ឯកសារណែនាំ"</string>
@@ -1649,9 +1412,6 @@
     </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"ទាក់ទងអ្នកគ្រប់គ្រងផ្នែកព័ត៌មានវិទ្យារបស់អ្នក"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"អ្នកគ្រប់គ្រងផ្នែកព័ត៌មានវិទ្យាអាចជួយអ្នកក្នុងការកំណត់កូដ PIN, លំនាំ ឬពាក្យសម្ងាត់របស់អ្នកឡើងវិញ"</string>
-    <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"ថេប្លេត និងទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នកងាយនឹងរងគ្រោះពីការវាយប្រហារពីកម្មវិធីដែលមិនស្គាល់។ ប្រសិនបើដំឡើងកម្មវិធីពីប្រភពនេះ មានន័យថាអ្នកទទួលខុសត្រូវលើការខូចខាតណាមួយចំពោះទូរសព្ទ ឬការបាត់បង់ទិន្នន័យ ដែលអាចបណ្តាលមកពីការប្រើប្រាស់កម្មវិធីទាំងនោះ។"</string>
-    <string name="install_all_warning" product="default" msgid="652516435709047343">"ទូរសព្ទ និងទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នកកាន់តែងាយនឹងរងគ្រោះពីការវាយប្រហារពីកម្មវិធីដែលមិនស្គាល់។ ប្រសិនបើដំឡើងកម្មវិធីពីប្រភពនេះ អ្នកយល់ព្រមថា អ្នកទទួលខុសត្រូវលើការខូចខាតទាំងឡាយមកលើទូរសព្ទរបស់អ្នក ឬការបាត់បង់ទិន្នន័យ ដែលអាចបណ្ដាលមកពីការប្រើប្រាស់កម្មវិធីទាំងនោះ។"</string>
-    <string name="install_all_warning" product="device" msgid="2348262609815354500">"ឧបករណ៍ និងទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នកងាយនឹងរងគ្រោះពីការវាយប្រហារពីកម្មវិធីដែលមិនស្គាល់។ ប្រសិនបើដំឡើងកម្មវិធីពីប្រភពនេះ មានន័យថាអ្នកទទួលខុសត្រូវលើការខូចខាតទាំងឡាយចំពោះឧបករណ៍ ឬការបាត់បង់ទិន្នន័យ ដែលអាចបណ្តាលមកពីការប្រើប្រាស់កម្មវិធីទាំងនោះ។"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"ការ​កំណត់​កម្រិត​ខ្ពស់"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"បើក​ជម្រើស​កំណត់​ច្រើន​ទៀត"</string>
     <string name="application_info_label" msgid="1015706497694165866">"ព័ត៌មាន​កម្មវិធី"</string>
@@ -1779,8 +1539,6 @@
     <string name="process_service_in_use_description" msgid="4210957264507014878">"កំពុង​ប្រើ​សេវាកម្ម <xliff:g id="COMP_NAME">%1$s</xliff:g> ។"</string>
     <string name="process_provider_in_use_description" msgid="6730020083976048028">"កំពុង​ប្រើ​ក្រុមហ៊ុន​ផ្ដល់ <xliff:g id="COMP_NAME">%1$s</xliff:g> ។"</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="6201041461740445113">"បញ្ឈប់​សេវាកម្ម​ប្រព័ន្ធ?"</string>
-    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="2076922609580490122">"បើ​អ្នក​បញ្ឈប់​សេវាកម្ម​នេះ លក្ខណៈ​មួយ​ចំនួន​នៃ​កុំព្យូទ័រ​បន្ទះ​របស់​អ្នក​អាច​មិន​ដំណើរការ​ត្រឹមត្រូវ លុះ​ត្រា​តែ​អ្នក​បិទ ហើយ​បើក​វា​ឡើងវិញ។"</string>
-    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="2625863973434309085">"បើ​អ្នក​បញ្ឈប់​សេវាកម្ម​នេះ លក្ខណៈ​មួយ​ចំនួន​នៃ​ទូរស័ព្ទ​របស់​អ្នក​អាច​លែង​ដំណើរការ​តាម​ត្រឹមត្រូវ លុះ​ត្រា​តែ​អ្នក​បិទ ហើយ​បើក​វា​ឡើងវិញ។"</string>
     <string name="language_input_gesture_title" msgid="3292455685728572960">"ភាសា ការបញ្ចូល និងកាយវិការ"</string>
     <string name="language_settings" msgid="8700174277543875046">"ភាសា និងការបញ្ចូល"</string>
     <string name="languages_settings" msgid="5784775502251770671">"ភាសា"</string>
@@ -1849,8 +1607,6 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"សម្រាប់​ភាសា​ទាំងអស់"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"ភាសា​ផ្សេង​ទៀត…"</string>
     <string name="testing" msgid="6294172343766732037">"សាកល្បង"</string>
-    <string name="testing_phone_info" product="tablet" msgid="1910768200608214456">"ព័ត៌មាន​កុំព្យូទ័រ​បន្ទះ"</string>
-    <string name="testing_phone_info" product="default" msgid="1150527695827743906">"ព័ត៌មាន​ទូរស័ព្ទ"</string>
     <string name="keyboard_settings_summary" msgid="2716339620942356432">"ក្ដារ​ចុច​លើ​អេក្រង់ ការនិយាយ ឧបករណ៍"</string>
     <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"ក្ដារ​ចុច​លើ​អេក្រង់ ក្ដារចុច​រូបវន្ត ការនិយាយ ឧបករណ៍"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"ក្ដារចុចរូបវ័ន្ត"</string>
@@ -1927,8 +1683,6 @@
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"កំណត់ការកំណត់ឡើងវិញ"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"ការកំណត់អក្សរ និងទំហំនៃការបង្ហាញត្រូវបានកំណត់ឡើងវិញ"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"កំណត់អក្សរ និងទំហំបង្ហាញឡើងវិញឬ?"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"ចំណូលចិត្តអក្សរ និងទំហំបង្ហាញរបស់អ្នកនឹងកំណត់ឡើងវិញទៅការកំណត់ដើមរបស់ទូរសព្ទ"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"ចំណូលចិត្តអក្សរ និងទំហំបង្ហាញរបស់អ្នកនឹងកំណត់ឡើងវិញទៅការកំណត់ដើមរបស់ថេប្លេត"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"កំណត់​ឡើងវិញ"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"មានគម្រោងចុងសប្ដាហ៍ដែរទេ?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"ទៅលេងឆ្នេរសមុទ្រ។ ចង់ទៅដែរទេ?"</string>
@@ -2070,8 +1824,6 @@
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"បានបញ្ចូលមុខងារប្រើដៃម្ខាងទៅក្នុងការកំណត់រហ័ស។ អូសចុះក្រោម ដើម្បីបើក ឬបិទវាបានគ្រប់ពេល។"</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"អ្នកក៏អាចបញ្ចូលមុខងារប្រើដៃម្ខាងទៅក្នុងការកំណត់រហ័សបានផងដែរ ពីផ្នែកខាងលើនៃអេក្រង់របស់អ្នក"</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"ច្រានចោល"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"កែតម្រូវរបៀបដែលពណ៌បង្ហាញនៅលើទូរសព្ទរបស់អ្នក"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"កែតម្រូវ​របៀបដែលពណ៌​បង្ហាញនៅលើ​ថេប្លេត​របស់អ្នក"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"ប្រើ​ការ​កែតម្រូវពណ៌"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"ផ្លូវកាត់នៃការ​កែតម្រូវ​ពណ៌"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"អំពី​ការកែតម្រូវពណ៌"</string>
@@ -2121,11 +1873,7 @@
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"ធ្វើឱ្យ​អេក្រង់​មានពន្លឺ​តិចខ្លាំង"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"ផ្លូវកាត់នៃពន្លឺតិចខ្លាំង"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"អំពីពន្លឺតិចខ្លាំង"</string>
-    <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"បន្ថយពន្លឺ​អេក្រង់​ឱ្យតិចជាង​ពន្លឺ​អប្បបរមា​របស់ទូរសព្ទ​អ្នក"</string>
-    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"បន្ថយពន្លឺ​អេក្រង់​ឱ្យតិចជាង​ពន្លឺ​អប្បបរមា​របស់ថេប្លេត​អ្នក"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"ធ្វើឱ្យអេក្រង់របស់អ្នកងងឹតជាងមុន ដើម្បីងាយស្រួលអានជាងមុន"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"ពន្លឺតិចខ្លាំងអាចមានប្រយោជន៍នៅពេល៖ &lt;ol&gt; &lt;li&gt; ពន្លឺអប្បបរមាលំនាំដើមរបស់ទូរសព្ទអ្នកនៅតែភ្លឺខ្លាំងនៅឡើយ&lt;/li&gt; &lt;li&gt; អ្នកកំពុងប្រើទូរសព្ទរបស់អ្នកនៅក្នុងស្ថានភាពងងឹតដូចជា នៅពេលយប់ ឬក្នុងបន្ទប់ងងឹតមុនពេលចូលគេងជាដើម&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5158211121482010799">"ពន្លឺតិចខ្លាំងអាចមានប្រយោជន៍នៅពេល៖ &lt;ol&gt; &lt;li&gt; ពន្លឺអប្បបរមាលំនាំដើមរបស់ថេប្លេតអ្នកនៅតែភ្លឺខ្លាំងនៅឡើយ&lt;/li&gt; &lt;li&gt; អ្នកកំពុងប្រើថេប្លេតរបស់អ្នកនៅក្នុងស្ថានភាពងងឹតដូចជា នៅពេលយប់ ឬក្នុងបន្ទប់ងងឹតមុនពេលចូលគេងជាដើម&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"កម្រិត"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"ពន្លឺតិច​ជាងមុន"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"ភ្លឺ​ជាងមុន"</string>
@@ -2285,9 +2033,6 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"កែ​ការ​ប្រើ​ថាមពល"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"កញ្ចប់​រួម​បញ្ចូល"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"កម្មវិធី​កំពុង​ដំណើរការ​ជា​ធម្មតា"</string>
-    <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"ទូរសព្ទ​ប្រើប្រាស់ថ្ម​នៅផ្ទៃខាងក្រោយ​ធម្មតា"</string>
-    <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"ថេប្លេតប្រើប្រាស់ថ្ម​នៅផ្ទៃខាងក្រោយ​ធម្មតា"</string>
-    <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"ឧបករណ៍​ប្រើប្រាស់ថ្ម​នៅផ្ទៃខាងក្រោយ​ធម្មតា"</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"កម្រិតថ្មជិតអស់ហើយ"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"បើកមុខងារ​សន្សំ​ថ្ម ដើម្បីបង្កើនកម្រិតថាមពលថ្ម"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"បង្កើនកម្រិតថាមពលថ្ម"</string>
@@ -2305,11 +2050,6 @@
     <skip />
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"ស្វែងយល់បន្ថែមអំពីការណ៍ដែលការសាកថ្ម​ត្រូវ​បាន​ផ្អាក"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"បន្តសាកថ្ម"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"ក្នុងស្ថានភាពមួយចំនួន ដូចជាសីតុណ្ហភាពខ្ពស់ និងរយៈពេលសាកថ្មយូរ ការសាកថ្មអាចត្រូវបានដាក់កំហិតត្រឹម <xliff:g id="PERCENT">%1$s</xliff:g> ដើម្បីជួយការពារ​គុណភាពថ្ម។\n\nនៅពេលដែលស្ថានភាពទាំងនោះបញ្ចប់ ទូរសព្ទរបស់អ្នកនឹងសាកថ្មដូចធម្មតាដោយស្វ័យប្រវត្តិវិញ។"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"ក្នុងស្ថានភាពមួយចំនួន ដូចជាសីតុណ្ហភាពខ្ពស់ និងរយៈពេលសាកថ្មយូរ ការសាកថ្មអាចត្រូវបានដាក់កំហិតត្រឹម <xliff:g id="PERCENT">%1$s</xliff:g> ដើម្បីជួយការពារ​គុណភាពថ្ម។\n\nនៅពេលដែលស្ថានភាពទាំងនោះបញ្ចប់ ថេប្លេតរបស់អ្នកនឹងសាកថ្មដូចធម្មតាដោយស្វ័យប្រវត្តិវិញ។"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"ដោយសារអ្នក​បានប្រើ​ទូរសព្ទ​របស់អ្នក​ច្រើនជាងប្រក្រតី ថ្មរបស់អ្នក​អាចនឹង​ឆាប់អស់ជាង​ពេលធម្មតា។\n\nកម្មវិធី​ដែលប្រើថ្ម​ច្រើនបំផុត៖"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"ដោយសារអ្នក​បានប្រើ​ថេប្លេត​របស់អ្នក​ច្រើនជាងធម្មតា ថ្មរបស់អ្នក​អាចនឹង​ឆាប់អស់ជាង​ពេលធម្មតា។\n\nកម្មវិធី​ដែលប្រើថ្ម​ច្រើនបំផុត៖"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"ដោយសារអ្នក​បានប្រើ​ឧបករណ៍​របស់អ្នក​ច្រើនជាងធម្មតា ថ្មរបស់អ្នក​អាចនឹង​ឆាប់អស់ជាង​ពេលធម្មតា។\n\nកម្មវិធី​ដែលប្រើថ្ម​ច្រើនបំផុត៖"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"រួម​បញ្ចូល​សកម្មភាព​ផ្ទៃខាងក្រោយ​ដែលប្រើថាមពលច្រើន"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="other">ដាក់​កំហិត​កម្មវិធី %1$d</item>
@@ -2340,12 +2080,8 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"លុប"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"បោះបង់"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"សាក​ថ្ម​រហូត​ដល់​ពេញ"</string>
-    <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"កម្មវិធី​របស់អ្នក​កំពុង​​ប្រើប្រាស់​​​ថ្ម​ក្នុងកម្រិត​ធម្មតា។ ប្រសិនបើ​កម្មវិធី​ប្រើថ្ម​ច្រើន​ខ្លាំងពេក ទូរសព្ទ​របស់អ្នក​នឹងណែនាំ​សកម្មភាព​ផ្សេងៗ​ដែលអ្នក​អាចអនុវត្ត​បាន។\n\nអ្នក​អាច​បើក​មុខងារ​សន្សំ​ថ្មបាន​ជានិច្ច ប្រសិន​បើ​​ថ្ម​របស់អ្នក​នៅសល់តិច។"</string>
-    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"កម្មវិធី​របស់អ្នក​កំពុង​​ប្រើប្រាស់​​​ថ្ម​ក្នុងកម្រិត​ធម្មតា។ ប្រសិនបើ​កម្មវិធី​ប្រើថ្ម​ច្រើន​ខ្លាំងពេក ថេប្លេតរបស់អ្នក​នឹងណែនាំ​សកម្មភាព​ផ្សេងៗ​ដែលអ្នក​អាចអនុវត្ត​បាន។\n\nអ្នក​អាច​បើកមុខងារ​សន្សំ​ថ្ម​បាន​ជានិច្ច ប្រសិន​បើ​​ថ្ម​របស់អ្នក​នៅសល់តិច។"</string>
-    <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"កម្មវិធី​របស់អ្នក​កំពុង​​ប្រើប្រាស់​​​ថ្ម​ក្នុងកម្រិត​ធម្មតា។ ប្រសិនបើ​កម្មវិធី​ប្រើថ្ម​ច្រើន​ខ្លាំងពេក ឧបករណ៍​របស់អ្នក​នឹងណែនាំ​សកម្មភាព​ផ្សេងៗ​ដែលអ្នក​អាចអនុវត្ត​បាន។\n\nអ្នក​អាច​បើក​កម្មវិធី​សន្សំ​ថ្ម​បាន​ជានិច្ច ប្រសិន​បើ​​ថ្ម​របស់អ្នក​នៅសល់តិច។"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"កម្មវិធី​គ្រប់គ្រង​ថ្ម"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"គ្រប់គ្រង​កម្មវិធី​ដោយ​ស្វ័យប្រវត្តិ"</string>
-    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"ដាក់កម្រិត​ថ្ម​សម្រាប់​កម្មវិធី​ដែល​អ្នក​មិន​ប្រើ​ញឹកញាប់"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"នៅ​ពេល​កម្មវិធី​គ្រប់គ្រង​ថ្ម​រកឃើញ​ថាកម្មវិធី​កំពុងធ្វើឱ្យ​ថ្ម​ឆាប់​អស់ អ្នក​នឹង​មាន​ជម្រើស​ដើម្បីដាក់​កំហិត​កម្មវិធី​ទាំងនេះ។ កម្មវិធី​ដែល​បាន​កំហិតអាច​​មិន​ដំណើរការ​ប្រក្រតី ហើយ​ការជូនដំណឹង​អាច​​ត្រូវ​បាន​ពន្យារពេល។"</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"កម្មវិធី​ដែល​បាន​រឹតបន្តឹង"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
@@ -2373,8 +2109,6 @@
     <string name="power_bluetooth" msgid="5085900180846238196">"ប៊្លូធូស"</string>
     <string name="power_cell" msgid="7793805106954398186">"បណ្ដាញទូរសព្ទចល័ត"</string>
     <string name="power_phone" msgid="2768396619208561670">"ការ​ហៅ​ជា​សំឡេង"</string>
-    <string name="power_idle" product="tablet" msgid="4689321599298911021">"កុំព្យូទ័រ​បន្ទះ​ទំនេរ"</string>
-    <string name="power_idle" product="default" msgid="9132502722499465252">"ទូរសព្ទ​សម្ងំ"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"បានប្រើ​អស់​រយៈពេល <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"ការប្រើប្រាស់អេក្រង់មានរយៈពេល <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="PERCENT">%1$s</xliff:g> ប្រើប្រាស់ដោយ <xliff:g id="APP">%2$s</xliff:g>"</string>
@@ -2425,9 +2159,6 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"កំណត់​កាលវិភាគ"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"បង្កើនកម្រិត​ថាមពល​ថ្ម"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"បិទ នៅពេល​សាកថ្មពេញ"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="3618041244703216293">"មុខងារសន្សំថ្មនឹងបិទ នៅពេល​ទូរសព្ទរបស់អ្នក​សាកថ្មបានលើសពី <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="1733686775743601110">"មុខងារសន្សំថ្មនឹងបិទ នៅពេល​ថេប្លេតរបស់អ្នក​សាកថ្មបានលើសពី <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="7449283917787428755">"មុខងារសន្សំថ្មនឹងបិទ នៅពេល​ឧបករណ៍របស់អ្នក​សាកថ្មបានលើសពី <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"បើក"</string>
@@ -2449,9 +2180,6 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"ផ្ទៃខាងក្រោយ៖ តិចជាងមួយនាទី"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"សរុប៖ <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"ផ្ទៃខាងក្រោយ៖ <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"ទិន្នន័យ​ប្រើប្រាស់​ថ្មគឺជា​ចំនួន​ប្រហាក់ប្រហែល និងមិនវាស់ស្ទង់ការប្រើប្រាស់ នៅពេលទូរសព្ទកំពុងសាកថ្មទេ"</string>
-    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"ទិន្នន័យ​ប្រើប្រាស់​ថ្មគឺជា​ចំនួន​ប្រហាក់ប្រហែល និងមិនវាស់ស្ទង់ការប្រើប្រាស់ នៅពេលថេប្លេតកំពុងសាកថ្មទេ"</string>
-    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"ទិន្នន័យ​ប្រើប្រាស់​ថ្មគឺជា​ចំនួន​ប្រហាក់ប្រហែល និងមិនវាស់ស្ទង់ការប្រើប្រាស់ នៅពេលឧបករណ៍​កំពុងសាកថ្មទេ"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"ទិន្នន័យ​ប្រើប្រាស់ថ្ម​នឹងមាន​ក្នុង​រយៈ​ពេល​ពីរបី​ម៉ោង​ទៀត បន្ទាប់​ពី​សាកថ្ម​ពេញ"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"គំនូសតាង​ការប្រើប្រាស់​ថ្ម"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"គំនូស​តាង​ការប្រើប្រាស់​ថ្ម​រៀង​រាល់​ថ្ងៃ"</string>
@@ -2521,8 +2249,6 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"បង្កើនកម្រិតថាមពលថ្ម និងកែលម្អសមត្ថភាព​ឧបករណ៍​ដោយគ្រប់គ្រងការតភ្ជាប់បណ្ដាញ​របស់អ្នកដោយស្វ័យប្រវត្តិ"</string>
     <string name="credentials_title" msgid="7535942196886123656">"កន្លែងផ្ទុក​ព័ត៌មានផ្ទៀងផ្ទាត់"</string>
     <string name="credentials_install" msgid="3933218407598415827">"ដំឡើង​វិញ្ញាបនបត្រ"</string>
-    <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"ដំឡើង​វិញ្ញាបនបត្រ​ពី​ឧបករណ៍​ផ្ទុក"</string>
-    <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"ដំឡើង​វិញ្ញាបនបត្រ​ពី​កាត​អេសឌី"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"សម្អាត​ព័ត៌មានផ្ទៀងផ្ទាត់"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"លុប​វិញ្ញាបនបត្រ​ទាំងអស់"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"ព័ត៌មាន​ផ្ទៀងផ្ទាត់​ដែល​ទុកចិត្ត"</string>
@@ -2648,9 +2374,6 @@
     <string name="remove_account_label" msgid="4169490568375358010">"លុប​គណនី"</string>
     <string name="header_add_an_account" msgid="3919151542338822661">"បញ្ចូលគណនី"</string>
     <string name="really_remove_account_title" msgid="253097435885652310">"លុប​គណនី?"</string>
-    <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"លុប​គណនី​នេះ នឹង​លុប​សារ,​ ទំនាក់ទំនង និង​ទិន្នន័យ​ផ្សេងៗ​ទៀត​ទាំងអស់​ពី​កុំព្យូទ័រ​បន្ទះ​របស់​អ្នក!"</string>
-    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"ការ​លុប​គណនី​នេះ​នឹង​លុប​សារ ទំនាក់ទំនង និង​ទិន្នន័យ​ផ្សេងៗ​របស់​គណនីនេះទាំងអស់​ពី​ទូរសព្ទ!"</string>
-    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"ការលុប​គណនី​នេះ​នឹង​លុប​សារ ទំនាក់ទំនង និង​ទិន្នន័យ​ផ្សេងៗ​របស់​គណនី​នេះ​ទាំង​អស់​ចេញ​ពី​ឧបករណ៍!"</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"ការផ្លាស់ប្តូរនេះ​មិនត្រូវ​បាន​អនុញ្ញាត​ដោយអ្នកគ្រប់គ្រងរបស់អ្នក"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"មិន​អាច​ធ្វើ​សម​កាល​កម្ម​ដោយ​ដៃ"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"បច្ចុប្បន្ន​បាន​បិទ​ការ​ធ្វើ​សម​កាល​កម្ម​សម្រាប់​​ធាតុ​នេះ។ ដើម្បី​ប្ដូរ​ការ​កំណត់​នេះ បើក​ទិន្នន័យ​​ផ្ទៃ​ខាង​ក្រោយ និង​ធ្វើ​សម​កាល​កម្ម​​ស្វ័យ​ប្រវត្តិ​ជា​បណ្ដោះអាសន្ន។"</string>
@@ -2692,8 +2415,6 @@
     <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"លក្ខណៈ​នេះ​អាច​ធ្វើ​ឲ្យ​កម្មវិធី​ដែល​អាស្រ័យ​លើ​ទិន្នន័យ​ផ្ទៃ​ខាងក្រោយ​​ឈប់​ដំណើរការ ពេល​មាន​តែ​បណ្ដាញ​ចល័ត។\n\nអ្នក​អាច​រក​មើល​ការ​គ្រប់គ្រង​ការ​ប្រើ​ទិន្នន័យ​សមស្រប​ក្នុង​ការកំណត់​ដែល​មាន​ក្នុង​កម្មវិធី។"</string>
     <string name="data_usage_restrict_denied_dialog" msgid="8599940395497268584">"ការ​ដាក់​កំហិតលើ​ទិន្នន័យ​ផ្ទៃ​ខាង​ក្រោយ​អាច​ធ្វើ​បាន​ លុះត្រាតែ​អ្នក​បាន​កំណត់​កម្រិត​ទិន្នន័យចល័ត​ហើយប៉ុណ្ណោះ។"</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"បើក​ការ​ធ្វើ​សម​កាល​កម្ម​ទិន្នន័យ​ស្វ័យ​ប្រវត្តិ?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="6387714350903085918">"ការ​ផ្លាស់ប្ដូរ​ណា​មួយ​​ដែល​អ្នក​ធ្វើ​ចំពោះ​គណនី​របស់​អ្នក​នៅ​លើ​បណ្ដាញ​នឹង​ត្រូវ​បាន​ចម្លង​ដោយ​ស្វ័យ​ប្រវត្តិ​​កុំព្យូទ័រ​បន្ទះ​​របស់​អ្នក។​\n\nគណនី​មួយ​ចំនួន​ក៏​អាច​ចម្លង​ការ​ផ្លាស់ប្ដូរ​ដោយ​ស្វ័យ​ប្រវត្តិ​ផង​ដែរ ពេល​អ្នក​ធ្វើ​លើ​​កុំព្យូទ័រ​បន្ទះ​ទៅ​បណ្ដាញ។ គណនី Google ធ្វើការ​តាម​វិធី​នេះ។"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="6457107552266187107">"ការ​ផ្លាស់ប្ដូរ​ណា​មួយ​ដែល​អ្នក​ធ្វើ​ឡើងចំពោះ​គណនី​របស់​អ្នក​នៅ​លើ​បណ្ដាញ នឹង​ត្រូវ​បាន​ចម្លង​ដោយ​ស្វ័យ​ប្រវត្តិ​ទៅ​ទូរសព្ទ​របស់​អ្នក។​\n\nគណនី​មួយ​ចំនួន​ក៏​អាច​ចម្លង​ការ​ផ្លាស់ប្ដូរ​របស់អ្នក​នៅលើ​ទូរសព្ទ​ទៅ​បណ្ដាញដោយ​ស្វ័យ​ប្រវត្តិផងដែរ។ គណនី Google ដំណើរការ​តាម​វិធី​នេះ។"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"បិទ​ការ​ធ្វើ​សម​កាល​កម្ម​ទិន្នន័យ​ស្វ័យ​ប្រវត្តិ?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"វា​នឹង​សន្សំ​ការ​ប្រើ​ទិន្នន័យ និង​ថ្ម ប៉ុន្តែ​អ្នក​ត្រូវ​តែ​ធ្វើ​សម​កាល​កម្ម​គណនី​នីមួយៗ​ដោយ​ខ្លួនឯង ដើម្បី​ប្រមូល​​ព័ត៌មាន​ថ្មីៗ។ អ្នក​នឹង​មិន​ទទួល​ការ​ជូន​ដំណឹង​ពេល​មាន​បច្ចុប្បន្នភាព​​ទេ។"</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"កាលបរិច្ឆេទ​កំណត់​ខួប​​ប្រើ​ឡើង​វិញ"</string>
@@ -2702,8 +2423,6 @@
     <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"កំណត់​ការ​ព្រមានពី​ការ​ប្រើ​ទិន្នន័យ"</string>
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"កំណត់​ដែន​កំណត់​ប្រើទិន្នន័យ"</string>
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"ការដាក់កំហិតលើ​ការប្រើ​ទិន្នន័យ"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"ថេប្លេត​របស់​អ្នក​នឹង​បិទ​ទិន្នន័យ​ទូរសព្ទចល័ត ​នៅ​ពេល​ដែល​វា​ឈាន​ដល់កម្រិតដែល​អ្នក​បាន​កំណត់។\n\nដោយសារ​តែ​ការ​ប្រើ​ប្រាស់​ទិន្នន័យ​ត្រូវ​បាន​វាស់​ស្ទង់ដោយ​ថេប្លេតរបស់អ្នក ​ហើយក្រុមហ៊ុនបម្រើសេវាទូរសព្ទរបស់​អ្នកអាចគណនាលើការប្រើប្រាស់​ខុសពីនោះ សូមពិចារណា​កំណត់កម្រិតដែលទាបជាង។"</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"ទូរសព្ទ​របស់​អ្នក​នឹង​បិទ​ទិន្នន័យ​ទូរសព្ទចល័ត ​នៅ​ពេល​ដែល​វា​ឈាន​ដល់កម្រិតដែល​អ្នក​បាន​កំណត់។\n\nដោយសារ​តែ​ការ​ប្រើ​ប្រាស់​ទិន្នន័យ​ត្រូវ​បាន​វាស់​ស្ទង់ដោយ​ទូរសព្ទ​របស់អ្នក ​ហើយក្រុមហ៊ុនបម្រើសេវាទូរសព្ទ​របស់​អ្នកអាចគណនាលើការប្រើប្រាស់​ខុសពីនោះ សូមពិចារណា​កំណត់កម្រិតដែលទាបជាង។"</string>
     <string name="data_usage_sweep_warning" msgid="2072854703184614828"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"ការ​ព្រមាន"</font></string>
     <string name="data_usage_sweep_limit" msgid="6947019190890086284"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"ដែន​កំណត់"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="9065885396147675694">"កម្មវិធី​ដែល​បាន​លុប"</string>
@@ -2815,9 +2534,6 @@
       <item quantity="one">ពិនិត្យវិញ្ញាបនបត្រ</item>
     </plurals>
     <string name="user_settings_title" msgid="6550866465409807877">"អ្នក​ប្រើប្រាស់​ច្រើន"</string>
-    <string name="user_settings_footer_text" product="device" msgid="7523914344521302179">"ចែក​រំលែក​ឧបករណ៍​របស់អ្នក​ដោយ​បញ្ចូល​អ្នក​ប្រើប្រាស់​ថ្មី។ អ្នក​ប្រើ​ប្រាស់​ម្នាក់ៗ​មាន​កន្លែង​ផ្ទាល់​ខ្លួន​នៅលើ​ឧបករណ៍​របស់អ្នក​សម្រាប់​អេក្រង់​ដើមផ្ទាល់ខ្លួន គណនី​ កម្មវិធី ការកំណត់ និង​អ្វីៗ​ជាច្រើនទៀត។"</string>
-    <string name="user_settings_footer_text" product="tablet" msgid="3730074318510244552">"ចែក​រំលែកថេប្លេតរបស់អ្នក​ដោយ​បញ្ចូល​អ្នក​ប្រើប្រាស់​ថ្មី។ អ្នក​ប្រើ​ប្រាស់​ម្នាក់ៗ​មាន​កន្លែង​ផ្ទាល់​ខ្លួន​នៅលើ​ថេប្លេត​របស់អ្នក​សម្រាប់​អេក្រង់​ដើមផ្ទាល់ខ្លួន គណនី​ កម្មវិធី ការកំណត់ និង​អ្វីៗ​ជាច្រើនទៀត។"</string>
-    <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"ប្រើទូរសព្ទរបស់អ្នករួមគ្នា​ដោយ​បញ្ចូល​អ្នក​ប្រើប្រាស់​ថ្មី។ អ្នក​ប្រើ​ប្រាស់​ម្នាក់ៗ​មានលំហផ្ទាល់​ខ្លួន​នៅលើ​ទូរសព្ទ​របស់អ្នក​សម្រាប់​គណនី​ កម្មវិធី ការកំណត់ អេក្រង់​ដើមផ្ទាល់ខ្លួន និង​អ្វីៗ​ជាច្រើនទៀត។"</string>
     <string name="user_list_title" msgid="1387379079186123404">"អ្នកប្រើ &amp; ប្រវត្តិរូប"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"បញ្ចូលអ្នក​ប្រើប្រាស់ ឬ​កម្រងព័ត៌មាន"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"ប្រវត្តិរូប​បាន​ដាក់​កម្រិត"</string>
@@ -2827,8 +2543,6 @@
     <string name="user_admin" msgid="4024553191395768119">"អ្នកគ្រប់គ្រង"</string>
     <string name="user_you" msgid="3070562015202859996">"អ្នក (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"អ្នកមិនអាចបញ្ចូលអ្នកប្រើប្រាស់បន្ថែមទៀតទេ។ សូមដកអ្នកប្រើប្រាស់ណាម្នាក់ចេញ ដើម្បីបញ្ចូលអ្នកប្រើប្រាស់ថ្មី។"</string>
-    <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"មាន​តែ​ម្ចាស់​កុំព្យូទ័រ​បន្ទះ​ប៉ុណ្ណោះ​អាច​គ្រប់គ្រង​អ្នកប្រើ"</string>
-    <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"មាន​តែ​ម្ចាស់​ទូរស័ព្ទ​ប៉ុណ្ណោះ​អាច​គ្រប់គ្រង​អ្នកប្រើ។"</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"ប្រវត្តិរូប​បាន​ដាក់កម្រិត​មិន​អាច​បន្ថែម​គណនី"</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"លុប <xliff:g id="USER_NAME">%1$s</xliff:g> ពី​ឧបករណ៍​នេះ"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"ការកំណត់អេក្រង់ចាក់សោ"</string>
@@ -2838,8 +2552,6 @@
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"លុបអ្នកប្រើប្រាស់​នេះ?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"លុប​ប្រវត្តិ​រូប​នេះ?"</string>
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"លុបកម្រងព័ត៌មានការងារឬ?"</string>
-    <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"អ្នក​នឹង​បាត់បង់​ទំហំ​ ព្រម​ទាំង​ទិន្នន័យ​របស់​អ្នក​លើ​កុំព្យូទ័រ​បន្ទះ​នេះ​។ អ្នក​មិន​អាច​ធ្វើ​សកម្មភាព​នេះ​វិញ​បាន​ទេ។"</string>
-    <string name="user_confirm_remove_self_message" product="default" msgid="5991495192044543230">"អ្នក​នឹង​បាត់បង់​ទំហំ និង​ទិន្នន័យ​របស់​អ្នក​លើ​ទូរស័ព្ទ​នេះ។ អ្នក​មិន​អាច​ធ្វើ​សកម្មភាព​នេះ​វិញ​បាន​ទេ។"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"កម្មវិធី និង​ទិន្នន័យ​ទាំងអស់​នឹង​ត្រូវ​បាន​លុប។"</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"កម្មវិធី និងទិន្នន័យទាំងអស់នៅក្នុងកម្រងព័ត៌មាននេះនឹងត្រូវលុប ប្រសិនបើអ្នកបន្ត។"</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"កម្មវិធី និង​ទិន្នន័យ​ទាំងអស់​នឹង​ត្រូវ​បាន​លុប។"</string>
@@ -2904,9 +2616,6 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"យក​ការ​ដាក់កម្រិត​ចេញ"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"ប្ដូរ​កូដ PIN"</string>
     <string name="help_label" msgid="2896538416436125883">"ជំនួយ &amp; មតិស្ថាបនា"</string>
-    <string name="support_summary" product="default" msgid="6137136608018134563">"អត្ថបទជំនួយ ទូរសព្ទ និងការជជែក"</string>
-    <string name="support_summary" product="tablet" msgid="6681247727996378252">"អត្ថបទជំនួយ ថេប្លេត និងការជជែក"</string>
-    <string name="support_summary" product="device" msgid="1690554254039752541">"អត្ថបទជំនួយ ឧបករណ៍ និងការជជែក"</string>
     <string name="user_account_title" msgid="6389636876210834864">"គណនី​សម្រាប់​មាតិកា"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"លេខ​សម្គាល់​រូបថត"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"ការ​គំរាមកំហែង​ខ្លាំង​បំផុត"</string>
@@ -4091,9 +3800,6 @@
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"ការរុករកដោយប្រើ​ប៊ូតុង"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"ការរុករក​ដោយប្រើចលនា រំញោច​ថយក្រោយ ចលនា​ថយក្រោយ"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"ការរុករក ប៊ូតុងដើម"</string>
-    <string name="ambient_display_title" product="default" msgid="5885136049497127396">"ចុចពីរដងដើម្បីពិនិត្យទូរសព្ទ"</string>
-    <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"ប៉ះពីរដងដើម្បីពិនិត្យថេប្លេត"</string>
-    <string name="ambient_display_title" product="device" msgid="4164103424628824786">"ប៉ះពីរដងដើម្បីពិនិត្យឧបករណ៍"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"មុខងារប្រើដៃម្ខាង"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"ប្រើមុខងារប្រើដៃម្ខាង"</string>
     <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"ផ្លូវកាត់​មុខងារ​ប្រើដៃ​ម្ខាង"</string>
@@ -4107,16 +3813,7 @@
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"បង្ហាញ​ការ​ជូន​ដំណឹង"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"ការជូនដំណឹង និងការកំណត់​នឹងបង្ហាញ។"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"ដើម្បី​ពិនិត្យមើល​ម៉ោង ការជូន​ដំណឹង និងព័ត៌មាន​ផ្សេងទៀត សូម​ចុចអេក្រង់​របស់អ្នក​ពីរដង។"</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"លើកដើម្បីពិនិត្យទូរសព្ទ"</string>
-    <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"លើកដើម្បីពិនិត្យថេប្លេត"</string>
-    <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"លើកដើម្បីពិនិត្យឧបករណ៍"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"ដាស់ផ្ទាំងអេក្រង់"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"ដើម្បី​ពិនិត្យមើល​ម៉ោង ការជូន​ដំណឹង និងព័ត៌មាន​ផ្សេងទៀត សូមលើកទូរសព្ទ​របស់អ្នក។"</string>
-    <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"ដើម្បី​ពិនិត្យមើល​ម៉ោង ការជូន​ដំណឹង និងព័ត៌មាន​ផ្សេងទៀត សូមជ្រើសរើស​ថេប្លេត​របស់អ្នក។"</string>
-    <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"ដើម្បី​ពិនិត្យមើល​ម៉ោង ការជូន​ដំណឹង និងព័ត៌មាន​ផ្សេងទៀត សូមជ្រើសរើស​ឧបករណ៍​របស់អ្នក។"</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"ចុចដើម្បី​ពិនិត្យមើលទូរសព្ទ"</string>
-    <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"ចុចដើម្បី​ពិនិត្យមើលថេប្លេត"</string>
-    <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"ចុចដើម្បី​ពិនិត្យមើល​ឧបករណ៍"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"ដើម្បី​ពិនិត្យមើល​ម៉ោង ការជូន​ដំណឹង និងព័ត៌មាន​ផ្សេងទៀត សូម​ចុចអេក្រង់​របស់អ្នក។"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"SOS ពេលមានអាសន្ន"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"ប្រើ SOS ពេលមាន​អាសន្ន"</string>
@@ -4130,9 +3827,6 @@
     <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"ប្រសិនបើ​អ្នកបញ្ចូល​លេខទូរសព្ទ​ដែលមិនមែនជា​លេខសង្គ្រោះបន្ទាន់៖\n • ត្រូវតែដោះសោ​ឧបករណ៍​របស់អ្នក​ទើបអាចប្រើ SOS ពេលមានអាសន្នបាន\n • ការហៅទូរសព្ទ​របស់អ្នក​អាចនឹងគ្មាន​អ្នកទទួលទេ"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"អូសលើ​ឧបករណ៍ចាប់ស្នាមម្រាមដៃ​សម្រាប់​ការជូនដំណឹង"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"អូសស្នាមម្រាមដៃ"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"ដើម្បីពិនិត្យមើលការជូនដំណឹងរបស់អ្នក សូមអូសចុះក្រោមនៅលើឧបករណ៍ចាប់ស្នាមម្រាមដៃ ដែលស្ថិតនៅផ្នែកខាងក្រោយទូរសព្ទរបស់អ្នក។"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"ដើម្បីពិនិត្យមើលការជូនដំណឹងរបស់អ្នក សូមអូសចុះក្រោមនៅលើឧបករណ៍ចាប់ស្នាមម្រាមដៃ ដែលស្ថិតនៅផ្នែកខាងក្រោយថេប្លេតរបស់អ្នក។"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3888927017311372398">"ដើម្បីពិនិត្យមើលការជូនដំណឹងរបស់អ្នក សូមអូសចុះក្រោមនៅលើឧបករណ៍ចាប់ស្នាមម្រាមដៃ ដែលស្ថិតនៅផ្នែកខាងក្រោយឧបករណ៍របស់អ្នក។"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"មើលការជូនដំណឹងយ៉ាងឆាប់រហ័ស"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="65713754674288193">"Bootloader ត្រូវបានដោះសោរួចហើយ"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="7425519481227423860">"ភ្ជាប់ទៅអ៊ីនធឺណិត ឬទាក់ទងទៅក្រុមហ៊ុនសេវាទូរសព្ទរបស់អ្នក"</string>
@@ -4619,9 +4313,6 @@
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"បិទ VoLTE ឬ?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"សកម្មភាពនេះក៏បិទ​ការតភ្ជាប់ 5G របស់អ្នកផងដែរ។\nអំឡុងពេលហៅជាសំឡេង អ្នក​មិនអាចប្រើ​អ៊ីនធឺណិត ហើយកម្មវិធីមួយចំនួនប្រហែលជាមិនដំណើរការទេ។"</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"នៅពេល​ប្រើស៊ីម 2 ទូរសព្ទនេះនឹងត្រូវបានកំណត់ឱ្យប្រើ 4G។ "<annotation id="url">"ស្វែងយល់បន្ថែម"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"នៅពេល​ប្រើស៊ីម 2 ថេប្លេតនេះនឹងត្រូវបានកំណត់ឱ្យប្រើ 4G។ "<annotation id="url">"ស្វែងយល់បន្ថែម"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"នៅពេល​ប្រើស៊ីម 2 ឧបករណ៍នេះនឹងត្រូវបានកំណត់ឱ្យប្រើ 4G។ "<annotation id="url">"ស្វែងយល់បន្ថែម"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"ផ្អាកប្រតិបត្តិការសម្រាប់កម្មវិធីក្នុងឃ្លាំងបម្រុង"</string>
     <string name="blob_never_expires_text" msgid="7293376386620106623">"មិន​ផុត​កំណត់ទេ។"</string>
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"ភតិសន្យា​មិនផុតកំណត់ទេ។"</string>
@@ -4656,8 +4347,6 @@
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"ចំណូលចិត្ត​បណ្តាញ"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"ការតភ្ជាប់បណ្ដាញ, អ៊ីនធឺណិត, ឥតខ្សែ, ទិន្នន័យ, wifi, wi-fi, wi fi, បណ្ដាញចល័ត, ឧបករណ៍​ចល័ត, ក្រុមហ៊ុន​សេវាទូរសព្ទចល័ត, 4g, 3g, 2g, lte"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"កំណត់​អ៊ីនធឺណិត​របស់អ្នក​ឡើងវិញឬ?"</string>
-    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"ការធ្វើបែបនេះ​នឹងបញ្ចប់​ការហៅទូរសព្ទ​របស់អ្នក"</string>
-    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"ការធ្វើបែបនេះ​នឹងបញ្ចប់​ការហៅទូរសព្ទ​របស់អ្នក"</string>
     <string name="resetting_internet_text" msgid="6696779371800051806">"កំពុង​កំណត់​អ៊ីនធឺណិត​របស់អ្នក​ឡើងវិញ…"</string>
     <string name="fix_connectivity" msgid="2781433603228089501">"ដោះស្រាយ​ការតភ្ជាប់"</string>
     <string name="networks_available" msgid="3299512933684383474">"បណ្ដាញ​ដែលអាច​ប្រើបាន"</string>

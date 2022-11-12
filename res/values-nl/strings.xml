@@ -13,7 +13,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"Ja"</string>
@@ -59,9 +58,6 @@
     <string name="bluetooth_rename_device" msgid="4219655243836021443">"De naam van dit apparaat wijzigen"</string>
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"Naam wijzigen"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Apparaat loskoppelen?"</string>
-    <string name="bluetooth_disconnect_all_profiles" product="default" msgid="1934297101665686854">"De verbinding tussen je telefoon en <xliff:g id="DEVICE_NAME">%1$s</xliff:g> wordt verbroken."</string>
-    <string name="bluetooth_disconnect_all_profiles" product="tablet" msgid="336622948210457991">"De verbinding tussen je tablet en <xliff:g id="DEVICE_NAME">%1$s</xliff:g> wordt verbroken."</string>
-    <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"De verbinding tussen je apparaat en <xliff:g id="DEVICE_NAME">%1$s</xliff:g> wordt verbroken."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Apparaat koppelen"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Rechteroor koppelen"</string>
@@ -72,9 +68,6 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Rechteroor koppelen"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Linkeroor koppelen"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Gerelateerd"</string>
-    <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Bluetooth-adres van je telefoon: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Bluetooth-adres van je tablet: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="device" msgid="2863536947810007600">"Bluetooth-adres van je apparaat: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"Naamloos Bluetooth-apparaat"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"Zoeken"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"Geen Bluetooth-apparaten in de buurt."</string>
@@ -88,22 +81,6 @@
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"<xliff:g id="APP_NAME">%1$s</xliff:g> wil Bluetooth uitzetten"</string>
     <string name="bluetooth_ask_enablement_no_name" msgid="5091401961637405417">"Een app wil Bluetooth aanzetten"</string>
     <string name="bluetooth_ask_disablement_no_name" msgid="382299750909188822">"Een app wil Bluetooth uitzetten"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="1273405567801929487">"<xliff:g id="APP_NAME">%1$s</xliff:g> wil je tablet <xliff:g id="TIMEOUT">%2$d</xliff:g> seconden zichtbaar maken voor andere Bluetooth-apparaten."</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="7013223328571883275">"<xliff:g id="APP_NAME">%1$s</xliff:g> wil je telefoon <xliff:g id="TIMEOUT">%2$d</xliff:g> seconden zichtbaar maken voor andere Bluetooth-apparaten."</string>
-    <string name="bluetooth_ask_discovery_no_name" product="tablet" msgid="3266007454914144057">"Een app wil je tablet <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar maken voor andere Bluetooth-apparaten."</string>
-    <string name="bluetooth_ask_discovery_no_name" product="default" msgid="7989444746980501116">"Een app wil je telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar maken voor andere Bluetooth-apparaten."</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="6482084870735107773">"<xliff:g id="APP_NAME">%1$s</xliff:g> wil je tablet zichtbaar maken voor andere Bluetooth-apparaten. Je kunt dit later wijzigen in de Bluetooth-instellingen."</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="2352494279465502950">"<xliff:g id="APP_NAME">%1$s</xliff:g> wil je telefoon zichtbaar maken voor andere Bluetooth-apparaten. Je kunt dit later wijzigen in de Bluetooth-instellingen."</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="tablet" msgid="2732992604509910896">"Een app wil je telefoon zichtbaar maken voor andere Bluetooth-apparaten. Je kunt dit later wijzigen in de Bluetooth-instellingen."</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="default" msgid="356982103612920264">"Een app wil je telefoon zichtbaar maken voor andere Bluetooth-apparaten. Je kunt dit later wijzigen in de Bluetooth-instellingen."</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="6103655179509599427">"<xliff:g id="APP_NAME">%1$s</xliff:g> wil bluetooth aanzetten en je tablet <xliff:g id="TIMEOUT">%2$d</xliff:g> seconden zichtbaar maken voor andere apparaten."</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="934276632311449337">"<xliff:g id="APP_NAME">%1$s</xliff:g> wil bluetooth aanzetten en je telefoon <xliff:g id="TIMEOUT">%2$d</xliff:g> seconden zichtbaar maken voor andere apparaten."</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="tablet" msgid="1284048348024444485">"Een app wil bluetooth aanzetten en je tablet <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar maken voor andere apparaten."</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="default" msgid="2661614145022629454">"Een app wil bluetooth aanzetten en je telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar maken voor andere apparaten."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="8588317955400593623">"<xliff:g id="APP_NAME">%1$s</xliff:g> wil bluetooth aanzetten en je tablet zichtbaar maken voor andere apparaten. Je kunt dit later wijzigen in de bluetooth-instellingen."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="4047444317445386579">"<xliff:g id="APP_NAME">%1$s</xliff:g> wil bluetooth aanzetten en je telefoon zichtbaar maken voor andere apparaten. Je kunt dit later wijzigen in de bluetooth-instellingen."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="tablet" msgid="4922952478824372605">"Een app wil bluetooth aanzetten en je telefoon zichtbaar maken voor andere apparaten. Je kunt dit later wijzigen in de bluetooth-instellingen."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="default" msgid="1381582950049639439">"Een app wil bluetooth aanzetten en je telefoon zichtbaar maken voor andere apparaten. Je kunt dit later wijzigen in de bluetooth-instellingen."</string>
     <string name="bluetooth_turning_on" msgid="3842613808709024730">"Bluetooth aanzetten…"</string>
     <string name="bluetooth_turning_off" msgid="7406309124247701148">"Bluetooth uitzetten…"</string>
     <string name="bluetooth_connection_permission_request" msgid="8793131019383198861">"Bluetooth-verbindingsverzoek"</string>
@@ -239,10 +216,6 @@
     <string name="account_settings_title" msgid="9138880127246241885">"Accounts"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Beveiliging"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Versleuteling en inloggegevens"</string>
-    <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"Telefoon versleuteld"</string>
-    <string name="not_encrypted_summary" product="default" msgid="2251945842585788254">"Telefoon niet versleuteld"</string>
-    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"Apparaat versleuteld"</string>
-    <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"Apparaat niet versleuteld"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Vergrendelscherm"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Wat wordt getoond"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Niet beschikbaar"</string>
@@ -258,17 +231,11 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Ontgrendelen via gezichtsherkenning instellen"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Gebruik je gezicht voor verificatie"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Starten"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"Als de toegankelijkheidsfunctie Ontgrendelen via gezichtsherkenning uitstaat, werken sommige installatiestappen misschien niet goed met TalkBack."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Terug"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Doorgaan met instellen"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Toegankelijkheidsinst. gebruiken"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Annuleren"</string>
@@ -278,53 +245,14 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Ontgrendelen met je gezicht"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Ontgrendelen via gezichtsherkenning toestaan"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Gebruik je gezicht voor verificatie"</string>
-    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"Gebruik je gezicht om je telefoon te ontgrendelen, aankopen te autoriseren of in te loggen bij apps."</string>
-    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"Gebruik je gezicht om je tablet te ontgrendelen, aankopen te autoriseren of in te loggen bij apps"</string>
-    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"Gebruik je gezicht om je apparaat te ontgrendelen, aankopen te autoriseren of in te loggen bij apps."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Toestaan dat je kind het gezicht gebruikt om de telefoon te ontgrendelen"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Toestaan dat je kind het gezicht gebruikt om de tablet te ontgrendelen"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Toestaan dat je kind het gezicht gebruikt om het apparaat te ontgrendelen"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"Het gezicht van je kind gebruiken om de telefoon te ontgrendelen zorgt misschien voor minder goede beveiliging dan een sterk patroon of een sterke pincode."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"Het gezicht van je kind gebruiken om de tablet te ontgrendelen zorgt misschien voor minder goede beveiliging dan een sterk patroon of een sterke pincode."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"Het gezicht van je kind gebruiken om het apparaat te ontgrendelen zorgt misschien voor minder goede beveiliging dan een sterk patroon of een sterke pincode."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Gebruik je gezicht om je telefoon te ontgrendelen of aankopen goed te keuren.\n\nOpmerking: Je kunt je gezicht niet gebruiken om dit apparaat te ontgrendelen. Neem contact op met de beheerder van je organisatie voor meer informatie."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Gebruik je gezicht om je telefoon te ontgrendelen, aankopen te autoriseren of in te loggen bij apps"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"Centreer je gezicht in de cirkel"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Overslaan"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Je hebt het maximum aantal gezichten toegevoegd"</string>
@@ -369,12 +297,6 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Je vingerafdruk instellen"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Ontgrendelen met vingerafdruk toestaan"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Je vingerafdruk gebruiken"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Gebruik je vingerafdruk om je tablet te ontgrendelen of voor verificatie, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Gebruik je vingerafdruk om je apparaat te ontgrendelen of voor verificatie, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Gebruik je vingerafdruk om je telefoon te ontgrendelen of voor verificatie, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"Toestaan dat je kind een vingerafdruk gebruikt om de telefoon te ontgrendelen of voor verificatie. Dit gebeurt onder meer als je kind inlogt bij apps of een aankoop goedkeurt."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"Toestaan dat je kind een vingerafdruk gebruikt om de tablet te ontgrendelen of voor verificatie. Dit gebeurt onder meer als je kind inlogt bij apps of een aankoop goedkeurt."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"Toestaan dat je kind een vingerafdruk gebruikt om het apparaat te ontgrendelen of voor verificatie. Dit gebeurt onder meer als je kind inlogt bij apps of een aankoop goedkeurt."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Jij hebt het voor het zeggen"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Jij en je kind hebben de controle"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Aandachtspunt"</string>
@@ -386,36 +308,12 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Het instellen van een vingerafdruk kost slechts een minuut of twee. Als je dit nu overslaat, kun je je vingerafdruk later toevoegen via de instellingen."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Als je dit icoon ziet, gebruik je je vingerafdruk voor verificatie, net zoals wanneer je inlogt bij apps of aankopen goedkeurt"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Aandachtspunt"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"Je vingerafdruk gebruiken om je telefoon te ontgrendelen is mogelijk minder veilig dan een sterk patroon of sterke pincode"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"Je vingerafdruk gebruiken om je tablet te ontgrendelen zorgt misschien voor minder goede beveiliging dan een sterk patroon of sterke pincode"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"Je vingerafdruk gebruiken om je apparaat te ontgrendelen zorgt misschien voor minder goede beveiliging dan een sterk patroon of sterke pincode"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Hoe het werkt"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Ontgrendelen met vingerafdruk maakt een uniek model van je vingerafdruk om te verifiëren dat jij het bent. Tijdens het instelproces maak je afbeeldingen van je vingerafdruk in verschillende posities om een vingerafdrukmodel te maken."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Ontgrendelen met vingerafdruk maakt een uniek model van de vingerafdruk van je kind om je kind te herkennen tijdens verificatie. Tijdens het instelproces maakt je kind foto\'s van de vingerafdruk in verschillende posities om een vingerafdrukmodel te maken."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"Pixel Imprint gebruikt foto\'s om je vingerafdrukmodel te updaten. De foto\'s die worden gebruikt voor je vingerafdrukmodel, worden nooit opgeslagen. Het vingerafdrukmodel zelf wordt beveiligd opgeslagen op je telefoon en verlaat deze nooit. Alle verwerking gebeurt beveiligd op je telefoon."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"Pixel Imprint gebruikt foto\'s om je vingerafdrukmodel te updaten. De foto\'s die worden gebruikt voor je vingerafdrukmodel, worden nooit opgeslagen. Het vingerafdrukmodel zelf wordt beveiligd opgeslagen op je tablet en verlaat deze nooit. Alle verwerking gebeurt beveiligd op je tablet."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"Pixel Imprint gebruikt foto\'s om je vingerafdrukmodel te updaten. De foto\'s die worden gebruikt voor je vingerafdrukmodel, worden nooit opgeslagen. Het vingerafdrukmodel zelf wordt beveiligd opgeslagen op je apparaat en verlaat dit nooit. Alle verwerking gebeurt beveiligd op je apparaat."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"Als je kind Pixel Imprint gebruikt, worden foto\'s gebruikt om het vingerafdrukmodel van je kind te updaten. De foto\'s die worden gebruikt om het vingerafdrukmodel van je kind te maken, worden nooit opgeslagen, maar het vingerafdrukmodel zelf wordt beveiligd opgeslagen op de telefoon en verlaat deze nooit. Alle verwerking vindt beveiligd plaats op de telefoon."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"Als je kind Pixel Imprint gebruikt, worden foto\'s gebruikt om het vingerafdrukmodel van je kind te updaten. De foto\'s die worden gebruikt om het vingerafdrukmodel van je kind te maken, worden nooit opgeslagen, maar het vingerafdrukmodel zelf wordt beveiligd opgeslagen op de tablet en verlaat deze nooit. Alle verwerking vindt beveiligd plaats op de tablet."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"Als je kind Pixel Imprint gebruikt, worden foto\'s gebruikt om het vingerafdrukmodel van je kind te updaten. De foto\'s die worden gebruikt om het vingerafdrukmodel van je kind te maken, worden nooit opgeslagen, maar het vingerafdrukmodel zelf wordt beveiligd opgeslagen op het apparaat en verlaat dit nooit. Alle verwerking vindt beveiligd plaats op het apparaat."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"Je kunt je vingerafdrukafbeeldingen en -model op elk moment verwijderen of ontgrendeling via vingerafdruk uitzetten in Instellingen. Vingerafdrukafbeeldingen en -modellen worden opgeslagen op de telefoon totdat je ze verwijdert."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"Je kunt je vingerafdrukfoto\'s en -model op elk moment verwijderen of ontgrendeling met vingerafdruk uitzetten in Instellingen. Vingerafdrukfoto\'s en -modellen worden opgeslagen op de tablet totdat je ze verwijdert."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"Je kunt je vingerafdrukfoto\'s en -model op elk moment verwijderen of ontgrendeling met vingerafdruk uitzetten in Instellingen. Vingerafdrukfoto\'s en -modellen worden opgeslagen op het apparaat totdat je ze verwijdert."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"Jij en je kind kunnen op elk moment de vingerafdrukfoto\'s en het vingerafdrukmodel van het kind verwijderen of ontgrendelen met vingerafdruk uitzetten in Instellingen. Vingerafdrukfoto\'s en -modellen worden opgeslagen op de telefoon totdat ze worden verwijderd."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"Jij en je kind kunnen op elk moment de vingerafdrukfoto\'s en het vingerafdrukmodel van het kind verwijderen of ontgrendelen met vingerafdruk uitzetten in Instellingen. Vingerafdrukfoto\'s en -modellen worden opgeslagen op de tablet totdat ze worden verwijderd."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"Jij en je kind kunnen op elk moment de vingerafdrukfoto\'s en het vingerafdrukmodel van het kind verwijderen of ontgrendelen met vingerafdruk uitzetten in Instellingen. Vingerafdrukfoto\'s en -modellen worden opgeslagen op het apparaat totdat ze worden verwijderd."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Je telefoon kan onbedoeld worden ontgrendeld, bijvoorbeeld wanneer iemand deze tegen je vinger houdt."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Je tablet kan onbedoeld worden ontgrendeld, bijvoorbeeld als iemand deze tegen je vinger houdt."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Je apparaat kan onbedoeld worden ontgrendeld, bijvoorbeeld als iemand het tegen je vinger houdt."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"De telefoon van je kind kan onbedoeld worden ontgrendeld, bijvoorbeeld als iemand deze tegen de vinger van je kind houdt."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"De tablet van je kind kan onbedoeld worden ontgrendeld, bijvoorbeeld als iemand deze tegen de vinger van je kind houdt."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"Het apparaat van je kind kan onbedoeld worden ontgrendeld, bijvoorbeeld als iemand dit tegen de vinger van je kind houdt."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Voor de beste resultaten gebruik je een gecertificeerde Made for Google-screenprotector. Bij andere screenprotectors werkt je vingerafdruk misschien niet."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Voor de beste resultaten gebruik je een gecertificeerde Made for Google-screenprotector. Bij andere screenprotectors werkt de vingerafdruk van je kind misschien niet."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Gebruik je vingerafdruk om je tablet te ontgrendelen of te bevestigen dat jij het bent als je bijvoorbeeld inlogt bij apps"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Gebruik je vingerafdruk om je apparaat te ontgrendelen of te bevestigen dat jij het bent als je inlogt bij apps"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Gebruik je vingerafdruk om je telefoon te ontgrendelen of te bevestigen dat jij het bent als je inlogt bij apps"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Ontgrendelen via gezichtsherkenning en vingerafdruk"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Tik om in te stellen"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Gezicht en vingerafdrukken toegevoegd"</string>
@@ -427,17 +325,8 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Gezicht gebruiken"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Vingerafdruk gebruiken"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Gezicht of vingerafdruk gebruiken"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"Geef de tablet terug aan je ouder"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"Geef het apparaat terug aan je ouder"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Geef de telefoon terug aan je ouder"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Schermvergrendeling overslaan?"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"De apparaatbeschermingsfuncties worden niet aangezet. Je kunt niet voorkomen dat anderen deze tablet gebruiken als je deze verliest, als de tablet wordt gestolen of als deze wordt gereset."</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"De apparaatbeschermingsfuncties worden niet aangezet. Je kunt niet voorkomen dat anderen dit apparaat gebruiken als je het verliest, als het wordt gestolen of als het wordt gereset."</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2412426429887900241">"De apparaatbeschermingsfuncties worden niet aangezet. Je kunt niet voorkomen dat anderen deze telefoon gebruiken als je deze verliest, als de telefoon wordt gestolen of als deze wordt gereset."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="7119039592587429936">"De apparaatbeschermingsfuncties worden niet aangezet. Je kunt niet voorkomen dat anderen deze tablet gebruiken als je deze verliest of als deze wordt gestolen."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3365990364131398523">"De apparaatbeschermingsfuncties worden niet aangezet. Je kunt niet voorkomen dat anderen dit apparaat gebruiken als je het verliest of als het wordt gestolen."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="4908278819257287536">"De apparaatbeschermingsfuncties worden niet aangezet. Je kunt niet voorkomen dat anderen deze telefoon gebruiken als je deze verliest of als deze wordt gestolen."</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"Toch overslaan"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"Terug"</string>
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"Overslaan"</string>
@@ -446,9 +335,6 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Raak de aan/uit-knop aan zonder deze in te drukken"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Je vingerafdruk instellen"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"De sensor bevindt zich aan de achterkant van je telefoon. Gebruik je wijsvinger."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"Je vindt de vingerafdruksensor onder de aan/uit-knop. Het is de platte knop naast de verhoogde volumeknop aan de zijkant van de tablet.\n\nAls je op de aan/uit-knop drukt, gaat het scherm uit."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"Je vindt de vingerafdruksensor onder de aan/uit-knop. Het is de platte knop naast de verhoogde volumeknop aan de zijkant van het apparaat.\n\nAls je op de aan/uit-knop drukt, gaat het scherm uit."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"Je vindt de vingerafdruksensor onder de aan/uit-knop. Het is de platte knop naast de verhoogde volumeknop aan de zijkant van de telefoon.\n\nAls je op de aan/uit-knop drukt, gaat het scherm uit."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"De vingerafdruksensor bevindt zich op je scherm. Je legt je vingerafdruk vast op het volgende scherm."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Starten"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Beweeg je vinger over het scherm om de sensor te vinden. Raak de vingerafdruksensor aan en houd deze vast"</string>
@@ -481,9 +367,6 @@
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Vingerafdruk vastleggen: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Vingerafdruk toegevoegd"</string>
     <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Je kunt nu je vingerafdruk gebruiken om je tablet te ontgrendelen of om te bevestigen dat jij het bent, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Je kunt nu je vingerafdruk gebruiken om je tablet te ontgrendelen of voor verificatie, bijvoorbeeld als je inlogt bij apps"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Je kunt nu je vingerafdruk gebruiken om je apparaat te ontgrendelen of voor verificatie, bijvoorbeeld als je inlogt bij apps"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Je kunt nu je vingerafdruk gebruiken om je telefoon te ontgrendelen of voor verificatie, bijvoorbeeld als je inlogt bij apps"</string>
     <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
     <skip />
     <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
@@ -495,42 +378,6 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Leg de zijkant van je vingerafdruk op de sensor en houd vast. Doe dan hetzelfde aan de andere kant."</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Instellen van vingerafdruk overslaan?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Je hebt ervoor gekozen je vingerafdruk te gebruiken als manier om je telefoon te ontgrendelen. Als je dit nu overslaat, moet je het later instellen. Het instellen neemt ongeveer een minuut in beslag."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"Een pincode beschermt de tablet bij verlies of diefstal"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="4359575348578515037">"Een patroon beschermt de tablet bij verlies of diefstal"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5420451292764062637">"Een wachtwoord beschermt de tablet bij verlies of diefstal"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="8841426051550671169">"Een pincode beschermt het apparaat bij verlies of diefstal"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="6296702954920045923">"Een patroon beschermt het apparaat bij verlies of diefstal"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="9186075211441188900">"Een wachtwoord beschermt het apparaat bij verlies of diefstal"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="4301690296689572747">"Een pincode beschermt de telefoon bij verlies of diefstal"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="7387967847446084260">"Een patroon beschermt de telefoon bij verlies of diefstal"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="6415788841227543063">"Een wachtwoord beschermt de telefoon bij verlies of diefstal"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="2350062798056164403">"Je hebt een pincode nodig voor het instellen van Ontgrendelen met vingerafdruk.\n\nEen pincode beschermt de tablet bij verlies of diefstal."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="222574071926747300">"Je hebt een patroon nodig voor het instellen van Ontgrendelen met vingerafdruk.\n\nEen patroon beschermt de tablet bij verlies of diefstal."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="7780323831330724644">"Je hebt een wachtwoord nodig voor het instellen van Ontgrendelen met vingerafdruk.\n\nEen wachtwoord beschermt de tablet bij verlies of diefstal."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="7421096089691939451">"Je hebt een pincode nodig voor het instellen van Ontgrendelen met vingerafdruk.\n\nEen pincode beschermt het apparaat bij verlies of diefstal."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6458468083711413617">"Je hebt een patroon nodig voor het instellen van Ontgrendelen met vingerafdruk.\n\nEen patroon beschermt het apparaat bij verlies of diefstal."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="1632249532665518954">"Je hebt een wachtwoord nodig voor het instellen van Ontgrendelen met vingerafdruk.\n\nEen wachtwoord beschermt het apparaat bij verlies of diefstal."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3101384462491132314">"Je hebt een pincode nodig voor het instellen van Ontgrendelen met vingerafdruk.\n\nEen pincode beschermt de telefoon bij verlies of diefstal."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="382422778886929469">"Je hebt een patroon nodig voor het instellen van Ontgrendelen met vingerafdruk.\n\nEen patroon beschermt de telefoon bij verlies of diefstal."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="5515199168425229243">"Je hebt een wachtwoord nodig voor het instellen van Ontgrendelen met vingerafdruk.\n\nEen wachtwoord beschermt de telefoon bij verlies of diefstal."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="2454239555320628731">"Je hebt een pincode nodig voor het instellen van Ontgrendelen via gezichtsherkenning.\n\nEen pincode beschermt de tablet bij verlies of diefstal."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="4354138725903415816">"Je hebt een patroon nodig voor het instellen van Ontgrendelen via gezichtsherkenning.\n\nEen patroon beschermt de tablet bij verlies of diefstal."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="719339718267952196">"Je hebt een wachtwoord nodig voor het instellen van Ontgrendelen via gezichtsherkenning.\n\nEen wachtwoord beschermt de tablet bij verlies of diefstal."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="3729243407606881750">"Je hebt een pincode nodig voor het instellen van Ontgrendelen via gezichtsherkenning.\n\nEen pincode beschermt het apparaat bij verlies of diefstal."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="6966329744346503807">"Je hebt een patroon nodig voor het instellen van Ontgrendelen via gezichtsherkenning.\n\nEen patroon beschermt het apparaat bij verlies of diefstal."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3020827854443297996">"Je hebt een wachtwoord nodig voor het instellen van Ontgrendelen via gezichtsherkenning.\n\nEen wachtwoord beschermt het apparaat bij verlies of diefstal."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2155678903559865476">"Je hebt een pincode nodig voor het instellen van Ontgrendelen via gezichtsherkenning.\n\nEen pincode beschermt de telefoon bij verlies of diefstal."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="473271568005748452">"Je hebt een patroon nodig voor het instellen van Ontgrendelen via gezichtsherkenning.\n\nEen patroon beschermt de telefoon bij verlies of diefstal."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="4319934862372116788">"Je hebt een wachtwoord nodig voor het instellen van Ontgrendelen via gezichtsherkenning.\n\nEen wachtwoord beschermt de telefoon bij verlies of diefstal."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="647987565338402155">"Je hebt een pincode nodig voor het instellen van Ontgrendelen via gezichtsherkenning en Ontgrendelen met vingerafdruk.\n\nEen pincode beschermt de tablet bij verlies of diefstal."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="5293609077890072841">"Je hebt een patroon nodig voor het instellen van Ontgrendelen via gezichtsherkenning en Ontgrendelen met vingerafdruk.\n\nEen patroon beschermt de tablet bij verlies of diefstal."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="2660359318928684172">"Je hebt een wachtwoord nodig voor het instellen van Ontgrendelen via gezichtsherkenning en Ontgrendelen met vingerafdruk.\n\nEen wachtwoord beschermt de tablet bij verlies of diefstal."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="1278795063897397815">"Je hebt een pincode nodig voor het instellen van Ontgrendelen via gezichtsherkenning en Ontgrendelen met vingerafdruk.\n\nEen pincode beschermt het apparaat bij verlies of diefstal."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="8766169819759371801">"Je hebt een patroon nodig voor het instellen van Ontgrendelen via gezichtsherkenning en Ontgrendelen met vingerafdruk.\n\nEen patroon beschermt het apparaat bij verlies of diefstal."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="8611216039321306045">"Je hebt een wachtwoord nodig voor het instellen van Ontgrendelen via gezichtsherkenning en Ontgrendelen met vingerafdruk.\n\nEen wachtwoord beschermt het apparaat bij verlies of diefstal."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="8796878521409329051">"Je hebt een pincode nodig voor het instellen van Ontgrendelen via gezichtsherkenning en Ontgrendelen met vingerafdruk.\n\nEen pincode beschermt de telefoon bij verlies of diefstal."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="8423700958936341596">"Je hebt een patroon nodig voor het instellen van Ontgrendelen via gezichtsherkenning en Ontgrendelen met vingerafdruk.\n\nEen patroon beschermt de telefoon bij verlies of diefstal."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="5411689248299854172">"Je hebt een wachtwoord nodig voor het instellen van Ontgrendelen via gezichtsherkenning en Ontgrendelen met vingerafdruk.\n\nEen wachtwoord beschermt de telefoon bij verlies of diefstal."</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Instellen pincode overslaan?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Pincode en gezicht instellen overslaan?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Pincode en vingerafdruk instellen overslaan?"</string>
@@ -565,40 +412,20 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Je hebt het maximale aantal vingerafdrukken toegevoegd"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Kan geen extra vingerafdrukken toevoegen"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> verwijderen"</string>
-    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Hiermee verwijder je de vingerafdrukfoto\'s en het aan <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> gekoppelde model die zijn opgeslagen op je telefoon"</string>
-    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Hiermee verwijder je de vingerafdrukfoto\'s en het aan <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> gekoppelde model die zijn opgeslagen op je tablet"</string>
-    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Hiermee verwijder je vingerafdruk­afbeeldingen en het aan <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> gekoppelde model die zijn opgeslagen op je apparaat."</string>
-    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Je kunt je vingerafdruk dan niet meer gebruiken om je telefoon te ontgrendelen of voor verificatie in apps."</string>
-    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Je kunt je vingerafdruk niet gebruiken om je tablet te ontgrendelen of voor verificatie in apps."</string>
-    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Je kunt je vingerafdruk niet gebruiken om je apparaat te ontgrendelen of voor verificatie in apps."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Je kunt je vingerafdruk dan niet meer gebruiken om je werkprofiel te ontgrendelen, aankopen te autoriseren of in te loggen bij werk-apps."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Versleuteling"</string>
-    <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Tablet versleutelen"</string>
-    <string name="encrypt_title" product="default" msgid="7337365190988321100">"Telefoon versleutelen"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Versleuteld"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Schermvergrendeling instellen"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Stel een pincode, patroon of wachtwoord in voor dit apparaat voor extra beveiliging"</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Schermvergrendeling instellen"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Beveilig je telefoon"</string>
-    <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Schermvergrendeling instellen om tablet te beschermen"</string>
-    <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Schermvergrendeling instellen om apparaat te beveiligen"</string>
-    <string name="suggested_lock_settings_summary" product="default" msgid="2443273582716671033">"Schermvergrendeling instellen om telefoon te beschermen"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Voeg vingerafdruk toe om te ontgrendelen"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Scherm­vergrendeling kiezen"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Scherm­vergrendeling kiezen"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Nieuwe scherm­vergrendeling"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Vergrendeling werk-apps kiezen"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Nieuwe vergrendeling werk-apps kiezen"</string>
-    <string name="setup_lock_settings_picker_title" product="tablet" msgid="1276283007274778191">"Je tablet beschermen"</string>
-    <string name="setup_lock_settings_picker_title" product="device" msgid="3585905639045649905">"Je apparaat beschermen"</string>
-    <string name="setup_lock_settings_picker_title" product="default" msgid="2758197863515864300">"Bescherm je telefoon"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Stel een extra schermvergrendeling in voor betere beveiliging"</string>
-    <string name="setup_lock_settings_picker_message" product="tablet" msgid="4870877800737248926">"Stel apparaatbeschermingsfuncties in om te voorkomen dat anderen deze tablet zonder je toestemming gebruiken. Kies de schermvergrendeling die je wilt gebruiken."</string>
-    <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Stel apparaatbeschermingsfuncties in om te voorkomen dat anderen dit apparaat zonder je toestemming gebruiken. Kies de schermvergrendeling die je wilt gebruiken."</string>
-    <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Stel apparaatbeschermingsfuncties in om te voorkomen dat anderen deze telefoon zonder je toestemming gebruiken. Kies de schermvergrendeling die je wilt gebruiken."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Kies je back-upmethode voor schermvergrendeling"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Als je je schermvergrendeling vergeet, kan je IT-beheerder deze niet resetten."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Afzonderlijke vergrendeling voor werk instellen"</string>
@@ -638,43 +465,31 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"Profielbeveiliging verwijderen?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"Een patroon beschermt je telefoon bij verlies of diefstal"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"Een patroon beschermt je telefoon bij verlies of diefstal.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Hierdoor wordt ook het vingerafdrukmodel verwijderd dat op je apparaat is opgeslagen. Je kunt je vingerafdruk dan niet meer gebruiken voor verificatie in apps."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"Een patroon beschermt je telefoon bij verlies of diefstal.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Je gezichtsmodel wordt ook definitief en op een beveiligde manier verwijderd. Je kunt je gezicht niet gebruiken voor verificatie in apps."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"Een patroon beschermt je telefoon bij verlies of diefstal.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Hierdoor wordt het vingerafdrukmodel verwijderd dat op je apparaat is opgeslagen. Je gezichtsmodel wordt ook definitief en op een beveiligde manier verwijderd. Je kunt je gezicht of vingerafdruk niet gebruiken voor verificatie in apps."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"Een pincode beschermt je telefoon bij verlies of diefstal"</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"Een pincode beschermt je telefoon bij verlies of diefstal.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Hierdoor wordt ook het vingerafdrukmodel verwijderd dat op je apparaat is opgeslagen. Je kunt je vingerafdruk dan niet meer gebruiken voor verificatie in apps."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"Een pincode beschermt je telefoon bij verlies of diefstal.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Je gezichtsmodel wordt ook definitief en op een beveiligde manier verwijderd. Je kunt je gezicht niet gebruiken voor verificatie in apps."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"Een pincode beschermt je telefoon bij verlies of diefstal.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Hierdoor wordt het vingerafdrukmodel verwijderd dat op je apparaat is opgeslagen. Je gezichtsmodel wordt ook definitief en op een beveiligde manier verwijderd. Je kunt je gezicht of vingerafdruk niet gebruiken voor verificatie in apps."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"Een wachtwoord beschermt je telefoon bij verlies of diefstal"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"Een wachtwoord beschermt je telefoon bij verlies of diefstal.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Hierdoor wordt ook het vingerafdrukmodel verwijderd dat op je apparaat is opgeslagen. Je kunt je vingerafdruk dan niet meer gebruiken voor verificatie in apps."</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"Een wachtwoord beschermt je telefoon bij verlies of diefstal.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Je gezichtsmodel wordt ook permanent en op een beveiligde manier verwijderd. Je kunt je gezicht niet gebruiken voor verificatie in apps."</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"Een wachtwoord beschermt je telefoon bij verlies of diefstal.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Hierdoor wordt het vingerafdrukmodel verwijderd dat op je apparaat is opgeslagen. Je gezichtsmodel wordt ook definitief en op een beveiligde manier verwijderd. Je kunt je gezicht of vingerafdruk niet gebruiken voor verificatie in apps."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"De apparaatbeveiliging werkt niet zonder je schermvergendeling."</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"Functies voor apparaatbeveiliging werken niet zonder je schermvergrendeling.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Hierdoor wordt ook het vingerafdrukmodel verwijderd dat op je apparaat is opgeslagen. Je kunt je vingerafdruk dan niet meer gebruiken voor verificatie in apps."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"Functies voor apparaatbeveiliging werken niet zonder je schermvergrendeling.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Je gezichtsmodel wordt ook definitief en op een beveiligde manier verwijderd. Je kunt je gezicht niet gebruiken voor verificatie in apps."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"Functies voor apparaatbeveiliging werken niet zonder je schermvergrendeling.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Hierdoor wordt het vingerafdrukmodel verwijderd dat op je apparaat is opgeslagen. Je gezichtsmodel wordt ook definitief en op een beveiligde manier verwijderd. Je kunt je gezicht of vingerafdruk niet gebruiken voor verificatie in apps."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Verwijderen"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> raadt een sterke pincode of sterk wachtwoord aan en werkt zonder een van deze mogelijk niet zoals verwacht"</string>
@@ -785,9 +600,6 @@
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Apparaat vergeten?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"Koppeling verwijderen"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"App ontkoppelen?"</string>
-    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"Je telefoon is niet langer gekoppeld aan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Je tablet is niet langer gekoppeld aan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Je apparaat is niet langer gekoppeld aan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"De app <xliff:g id="APP_NAME">%1$s</xliff:g> maakt geen verbinding meer met je <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Apparaat vergeten"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"App ontkoppelen"</string>
@@ -832,7 +644,6 @@
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Toon huidige vernieuwingssnelheid van scherm"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Apparaatontgrendeling vereisen voor NFC"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"Sta NFC-gebruik alleen toe als het scherm is ontgrendeld"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Klaar om app-content te verzenden via NFC"</string>
     <string name="nfc_disabled_summary" msgid="8737797364522502351">"Niet beschikbaar omdat NFC uitstaat"</string>
@@ -1040,14 +851,10 @@
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> is actief"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"AndroidHotspot"</string>
     <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"Dit netwerk opslaan?"</string>
-    <string name="wifi_add_app_single_network_summary" product="default" msgid="6881712878537666626">"<xliff:g id="APPNAME">%1$s</xliff:g> wil een netwerk opslaan op je telefoon"</string>
-    <string name="wifi_add_app_single_network_summary" product="tablet" msgid="8455616967601552440">"<xliff:g id="APPNAME">%1$s</xliff:g> wil een netwerk opslaan op je tablet"</string>
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"Opslaan…"</string>
     <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"Opgeslagen"</string>
     <string name="wifi_add_app_network_save_failed_summary" msgid="7223817782309294652">"Kan niet opslaan. Probeer het opnieuw."</string>
     <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"Netwerken opslaan?"</string>
-    <string name="wifi_add_app_networks_summary" product="default" msgid="2670215712788515167">"<xliff:g id="APPNAME">%1$s</xliff:g> wil deze netwerken opslaan op je telefoon"</string>
-    <string name="wifi_add_app_networks_summary" product="tablet" msgid="2088967184512169910">"<xliff:g id="APPNAME">%1$s</xliff:g> wil deze netwerken opslaan op je tablet"</string>
     <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"<xliff:g id="NUMBER">%d</xliff:g> netwerken opslaan…"</string>
     <string name="wifi_add_app_networks_saved_summary" msgid="1648417628665152905">"Netwerken opgeslagen"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"Bellen via wifi"</string>
@@ -1090,8 +897,6 @@
     <string name="accelerometer_title" msgid="7745991950833748909">"Scherm automatisch draaien"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Aan: op basis van gezicht"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Gezichtsherkenning"</string>
-    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"De schermstand automatisch aanpassen als je met je telefoon wisselt tussen de staande en liggende stand"</string>
-    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"De schermstand automatisch aanpassen als je met je tablet wisselt tussen de staande en liggende stand"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Meer informatie over automatisch draaien"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Als je wisselt tussen de staande en liggende telefoonstand"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Schermresolutie"</string>
@@ -1202,10 +1007,6 @@
     <string name="sim_lock_settings" msgid="4493069398250139205">"Instellingen simkaart­vergrendeling"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"Simkaartvergrendeling"</string>
     <string name="sim_pin_toggle" msgid="98754920202404425">"Simkaart vergrendelen"</string>
-    <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"Pincode vereist voor gebruik van tablet"</string>
-    <string name="sim_lock_on" product="default" msgid="3303147192981388923">"Vereis pincode voor gebruik van telefoon"</string>
-    <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"Pincode vereist voor gebruik van tablet"</string>
-    <string name="sim_lock_off" product="default" msgid="4634118006847137785">"Vereis pincode voor gebruik van telefoon"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"Pincode simkaart wijzigen"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"Sim-pincode"</string>
     <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Simkaart vergrendelen"</string>
@@ -1250,12 +1051,6 @@
     <string name="storage_settings_title" msgid="486118156723194815">"Instellingen voor opslag"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (simkaartsleuf %1$d)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Kies opgeslagen netwerk om te bekijken"</string>
-    <string name="status_number" product="tablet" msgid="3597945414666253183">"MDN"</string>
-    <string name="status_number" product="default" msgid="8407999629121682207">"Telefoonnummer"</string>
-    <string name="status_number_sim_slot" product="tablet" msgid="6582203988975619529">"MDN (simkaartsleuf %1$d)"</string>
-    <string name="status_number_sim_slot" product="default" msgid="5724823197745786398">"Telefoonnummer (simsleuf %1$d)"</string>
-    <string name="status_number_sim_status" product="tablet" msgid="4239876366511743428">"MDN op simkaart"</string>
-    <string name="status_number_sim_status" product="default" msgid="2772745542921910086">"Telefoonnummer op simkaart"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL-versie"</string>
@@ -1315,12 +1110,6 @@
     <string name="storage_wizard_move_progress_title" msgid="3912406225614672391">"<xliff:g id="APP">^1</xliff:g> verplaatsen…"</string>
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Verwijder de <xliff:g id="NAME">^1</xliff:g> niet tijdens het verplaatsen. \n\nDe app <xliff:g id="APP">^2</xliff:g> op dit apparaat is pas weer beschikbaar zodra het verplaatsen is voltooid."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Hoe ga je deze <xliff:g id="NAME">^1</xliff:g> gebruiken?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"SD-kaart formatteren voor interne opslag"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Sla apps en media op om alleen op deze tablet te gebruiken. &lt;a href=https://support.google.com/android/answer/12153449&gt;Meer informatie over hoe je een SD-kaart instelt&lt;/a&gt;"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formatteren"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"SD-kaart formatteren voor interne opslag"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Sla apps en media op om alleen op deze telefoon te gebruiken. &lt;a href=https://support.google.com/android/answer/12153449&gt;Meer informatie over hoe je een SD-kaart instelt&lt;/a&gt;"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formatteren"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Of"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"SD-kaart formatteren voor draagbare opslag"</string>
     <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Sla onder meer foto\'s, video\'s en muziek op en open ze vanaf andere apparaten. &lt;a href=https://support.google.com/android/answer/12153449&gt;Meer informatie over hoe je een SD-kaart instelt&lt;/a&gt;"</string>
@@ -1331,13 +1120,9 @@
     <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Deze <xliff:g id="NAME_0">^1</xliff:g> moet worden geformatteerd om onder meer foto\'s, video\'s en muziek op te slaan. \n\nTijdens het formatteren wordt bestaande content op de <xliff:g id="NAME_1">^2</xliff:g> gewist. Maak een back-up op een andere <xliff:g id="NAME_2">^3</xliff:g> of een ander apparaat om te voorkomen dat je de content kwijtraakt."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g> formatteren"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Content naar <xliff:g id="NAME">^1</xliff:g> verplaatsen?"</string>
-    <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Je kunt bestanden, media en bepaalde apps naar deze <xliff:g id="NAME">^1</xliff:g> verplaatsen. \n\nHiermee maak je <xliff:g id="SIZE">^2</xliff:g> van je tabletopslag vrij. Het overzetten duurt ongeveer <xliff:g id="DURATION">^3</xliff:g>."</string>
-    <string name="storage_wizard_migrate_v2_body" product="default" msgid="809730501314645325">"Je kunt bestanden, media en bepaalde apps naar <xliff:g id="NAME">^1</xliff:g> verplaatsen. \n\nHiermee maak je <xliff:g id="SIZE">^2</xliff:g> van je telefoonopslag vrij. Het overzetten duurt ongeveer <xliff:g id="DURATION">^3</xliff:g>."</string>
     <string name="storage_wizard_migrate_v2_checklist" msgid="2618258869444553060">"Tijdens het overzetten:"</string>
     <string name="storage_wizard_migrate_v2_checklist_media" msgid="5867134681730723744">"verwijder <xliff:g id="NAME">^1</xliff:g> niet"</string>
     <string name="storage_wizard_migrate_v2_checklist_apps" msgid="1882077445750580783">"werken sommige apps niet"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="tablet" msgid="6111770421449869539">"moet de tablet opgeladen blijven"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="default" msgid="8826915870192535008">"moet de telefoon opgeladen blijven"</string>
     <string name="storage_wizard_migrate_v2_now" msgid="3341460117088026966">"Content verplaatsen"</string>
     <string name="storage_wizard_migrate_v2_later" msgid="6067756122853315642">"Content later verplaatsen"</string>
     <string name="storage_wizard_migrate_progress_v2_title" msgid="8791318509516968103">"Content verplaatsen…"</string>
@@ -1406,21 +1191,9 @@
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"Door een fout kunnen gedownloade simkaarten niet worden gewist.\n\nStart je apparaat opnieuw en probeer het nogmaals."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Alle gegevens wissen (fabrieksinstellingen terugzetten)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Alle gegevens wissen (fabrieksinstellingen terugzetten)"</string>
-    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Hiermee worden alle gegevens in de "<b>"interne opslag"</b>" van je tablet gewist, waaronder:\n\n"<li>"Je Google-account"</li>\n<li>"Gegevens en instellingen van systeem en apps"</li>\n<li>"Gedownloade apps"</li></string>
-    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Dit wist alle gegevens in de "<b>"interne opslag"</b>" van je telefoon, waaronder:\n\n"<li>"Je Google-account"</li>\n<li>"Gegevens en instellingen van systeem en apps"</li>\n<li>"Gedownloade apps"</li></string>
-    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"Je bent momenteel ingelogd op deze accounts:\n"</string>
-    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"Er zijn andere gebruikers aanwezig op dit apparaat.\n"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Muziek"</li>\n<li>"Foto\'s"</li>\n<li>"Andere gebruikersgegevens"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"E-simkaarten"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Je mobiele abonnement wordt niet opgezegd."</string>
-    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"Als je muziek, foto\'s en andere gebruikersgegevens wilt wissen, moet de "<b>"USB-opslag"</b>" worden gewist."</string>
-    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"Als je muziek, foto\'s en andere gebruikersgegevens wilt wissen, moet de "<b>"SD-kaart"</b>" worden gewist."</string>
-    <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"USB-opslag wissen"</string>
-    <string name="erase_external_storage" product="default" msgid="2610056855012660451">"SD-kaart wissen"</string>
-    <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"Alle gegevens in de interne USB-opslag wissen, zoals muziek en foto\'s"</string>
-    <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"Alle gegevens op de SD-kaart wissen, zoals muziek en foto\'s"</string>
-    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"Alle gegevens wissen"</string>
-    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"Alle gegevens wissen"</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"Al je persoonlijke informatie en gedownloade apps worden verwijderd. Je kunt deze actie niet ongedaan maken."</string>
     <string name="main_clear_final_desc_esim" msgid="440406836793824969">"Al je persoonlijke informatie wordt verwijderd, waaronder gedownloade apps en simkaarten. Je kunt deze actie niet ongedaan maken."</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"Alle gegevens wissen?"</string>
@@ -1466,14 +1239,8 @@
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Internet alleen delen via USB, bluetooth en ethernet"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB-tethering"</string>
-    <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Deel internetverbinding van telefoon via USB"</string>
-    <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"Internetverbinding van tablet delen via USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Bluetooth-tethering"</string>
-    <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"Internetverbinding van deze tablet delen via bluetooth"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Deel internetverbinding van telefoon via bluetooth"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet-tethering"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Deel internetverbinding van telefoon via ethernet"</string>
-    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"Internetverbinding van deze tablet delen via ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Gebruik hotspot en tethering om internet aan andere apparaten te leveren via je mobiele dataverbinding. Apps kunnen ook hotspots maken om content te delen met apparaten in de buurt."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Gebruik hotspot en tethering om internet aan andere apparaten te leveren via je wifi- of mobiele dataverbinding. Apps kunnen ook hotspots maken om content te delen met apparaten in de buurt."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Hulp"</string>
@@ -1521,10 +1288,6 @@
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Tijdzonedetectie op basis van locatie wordt niet ondersteund"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Wijzigingen in tijdzonedetectie op basis van locatie zijn niet toegestaan"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"Locatie kan worden gebruikt om tijdzone in te stellen"</string>
-    <string name="about_settings" product="tablet" msgid="2888705054709289693">"Over de tablet"</string>
-    <string name="about_settings" product="default" msgid="4038626127378127613">"Over de telefoon"</string>
-    <string name="about_settings" product="device" msgid="9012888717090302815">"Over het apparaat"</string>
-    <string name="about_settings" product="emulator" msgid="2516560858771320366">"Over het geëmuleerde apparaat"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Juridische info, status, softwareversie bekijken"</string>
     <string name="legal_information" msgid="7509900979811934843">"Juridische informatie"</string>
     <string name="manual" msgid="3651593989906084868">"Handleiding"</string>
@@ -1648,9 +1411,6 @@
     </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Neem contact op met je IT-beheerder"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"De beheerder kan je helpen je pincode, patroon of wachtwoord te resetten"</string>
-    <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Je tablet en persoonsgegevens zijn gevoelig voor aanvallen door onbekende apps. Als je apps van deze bron installeert, ga je ermee akkoord dat je verantwoordelijk bent voor eventuele schade aan je tablet of verlies van gegevens als gevolg van het gebruik van deze apps."</string>
-    <string name="install_all_warning" product="default" msgid="652516435709047343">"Je telefoon en persoonsgegevens zijn gevoelig voor aanvallen door onbekende apps. Als je apps van deze bron installeert, ga je ermee akkoord dat je verantwoordelijk bent voor eventuele schade aan je telefoon of verlies van gegevens als gevolg van het gebruik van deze apps."</string>
-    <string name="install_all_warning" product="device" msgid="2348262609815354500">"Je apparaat en persoonsgegevens zijn gevoelig voor aanvallen door onbekende apps. Als je apps van deze bron installeert, ga je ermee akkoord dat je verantwoordelijk bent voor eventuele schade aan je apparaat of verlies van gegevens als gevolg van het gebruik van deze apps."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Geavanceerde instellingen"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Meer opties voor instellingen aanzetten"</string>
     <string name="application_info_label" msgid="1015706497694165866">"App-info"</string>
@@ -1778,8 +1538,6 @@
     <string name="process_service_in_use_description" msgid="4210957264507014878">"Service <xliff:g id="COMP_NAME">%1$s</xliff:g> in gebruik."</string>
     <string name="process_provider_in_use_description" msgid="6730020083976048028">"Provider <xliff:g id="COMP_NAME">%1$s</xliff:g> in gebruik."</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="6201041461740445113">"Systeemservice stoppen?"</string>
-    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="2076922609580490122">"Als je deze service stopt, werken bepaalde functies van je telefoon mogelijk pas weer correct nadat je de tablet hebt uitgezet en weer aangezet."</string>
-    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="2625863973434309085">"Als je deze service stopt, werken bepaalde functies van je telefoon mogelijk pas weer correct nadat je de telefoon hebt uitgezet en weer aangezet."</string>
     <string name="language_input_gesture_title" msgid="3292455685728572960">"Talen, invoer en gebaren"</string>
     <string name="language_settings" msgid="8700174277543875046">"Talen en invoer"</string>
     <string name="languages_settings" msgid="5784775502251770671">"Talen"</string>
@@ -1848,8 +1606,6 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Voor alle talen"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Meer talen..."</string>
     <string name="testing" msgid="6294172343766732037">"Testen"</string>
-    <string name="testing_phone_info" product="tablet" msgid="1910768200608214456">"Tabletinformatie"</string>
-    <string name="testing_phone_info" product="default" msgid="1150527695827743906">"Telefooninformatie"</string>
     <string name="keyboard_settings_summary" msgid="2716339620942356432">"Schermtoetsenbord, spraak, tools"</string>
     <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Schermtoetsenbord, fysiek toetsenbord, spraak, tools"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Fysiek toetsenbord"</string>
@@ -1926,8 +1682,6 @@
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Instellingen resetten"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Instellingen voor weergavegrootte en tekst zijn gereset"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Weergavegrootte en tekst resetten?"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Je weergavegrootte en tekstvoorkeuren worden gereset naar de oorspronkelijke instellingen van de telefoon"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"Je weergavegrootte en tekstvoorkeuren worden gereset naar de oorspronkelijke instellingen van de tablet"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Resetten"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Heb je plannen voor het weekend?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Ik ga naar het strand. Ga je mee?"</string>
@@ -2069,8 +1823,6 @@
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Bediening met 1 hand is toegevoegd aan Snelle instellingen. Swipe omlaag om deze functie op elk moment aan of uit te zetten."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"Je kunt bediening met 1 hand ook aan Snelle instellingen toevoegen vanaf de bovenkant van het scherm"</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Sluiten"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"Pas aan hoe je kleuren ziet op je telefoon"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"Pas aan hoe je kleuren ziet op je telefoon"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Kleurcorrectie gebruiken"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Snelkoppeling voor kleurcorrectie"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Over kleurcorrectie"</string>
@@ -2120,11 +1872,7 @@
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Scherm extra dimmen"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Snelkoppeling voor extra dimmen"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Over extra dimmen"</string>
-    <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Dim het scherm meer dan de minimumhelderheid van je telefoon"</string>
-    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Het scherm meer dimmen dan de minimumhelderheid van je tablet"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Zet de helderheid van je scherm lager zodat je prettiger kunt lezen"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"Extra dimmen kan handig zijn in de volgende situaties: &lt;ol&gt; &lt;li&gt; De standaard minimumhelderheid van je telefoon is te helder voor je.&lt;/li&gt; &lt;li&gt; Je gebruikt je telefoon in een donkere omgeving, zoals \'s avonds laat of in een donkere kamer voordat je gaat slapen.&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5158211121482010799">"Extra dimmen kan handig zijn in de volgende situaties: &lt;ol&gt; &lt;li&gt; De standaard minimumhelderheid van je tablet is te helder voor je.&lt;/li&gt; &lt;li&gt; Je gebruikt je tablet in een donkere omgeving, zoals \'s avonds laat of in een donkere kamer voordat je gaat slapen.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensiteit"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Minder helder"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Helderder"</string>
@@ -2284,9 +2032,6 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Energieverbruik aanpassen"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Bijgeleverde pakketten"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Apps worden normaal uitgevoerd"</string>
-    <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"Telefoon heeft normaal batterijverbruik op de achtergrond"</string>
-    <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"Tablet heeft normaal batterijverbruik op de achtergrond"</string>
-    <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"Apparaat heeft normaal batterijverbruik op de achtergrond"</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Laag batterijniveau"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Zet Batterijbesparing aan om de batterijduur te verlengen"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"De batterijduur verbeteren"</string>
@@ -2304,11 +2049,6 @@
     <skip />
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Meer informatie over pauze tijdens opladen"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Opladen hervatten"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Onder bepaalde omstandigheden (zoals hoge temperaturen en lange oplaadtijden) kan het opladen worden beperkt tot <xliff:g id="PERCENT">%1$s</xliff:g> omdat dit beter is voor de batterij.\n\nAls die omstandigheden niet meer gelden, wordt je telefoon weer normaal opgeladen."</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Onder bepaalde omstandigheden (zoals hoge temperaturen en lange oplaadtijden) kan het opladen worden beperkt tot <xliff:g id="PERCENT">%1$s</xliff:g> omdat dit beter is voor de batterij.\n\nAls die omstandigheden niet meer gelden, wordt je tablet weer normaal opgeladen."</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Omdat je de telefoon vaker hebt gebruikt dan normaal, is de batterij misschien eerder leeg dan normaal.\n\nApps met het hoogste batterijverbruik:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Omdat je de tablet vaker hebt gebruikt dan normaal, is de batterij misschien eerder leeg dan normaal.\n\nApps met het hoogste batterijverbruik:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Omdat je het apparaat vaker hebt gebruikt dan normaal, is de batterij misschien eerder leeg dan normaal.\n\nApps met het hoogste batterijverbruik:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Omvat achtergrondactiviteit met hoog energieverbruik"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="other">%1$d apps beperken</item>
@@ -2339,12 +2079,8 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Verwijderen"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Annuleren"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Opladen tot vol"</string>
-    <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Je apps gebruiken een normale hoeveelheid batterijlading. Als apps te veel batterijlading gebruiken, stelt je telefoon acties voor die je kunt uitvoeren.\n\nJe kunt Batterijbesparing altijd aanzetten als de batterij bijna leeg is."</string>
-    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Je apps gebruiken een normale hoeveelheid batterijlading. Als apps te veel batterijlading gebruiken, stelt je tablet acties voor die je kunt uitvoeren.\n\nJe kunt Batterijbesparing altijd aanzetten als de batterij bijna leeg is."</string>
-    <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Je apps gebruiken een normale hoeveelheid batterijlading. Als apps te veel batterijlading gebruiken, stelt je apparaat acties voor die je kunt uitvoeren.\n\nJe kunt Batterijbesparing altijd aanzetten als de batterij bijna leeg is."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Batterijbeheer"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Apps automatisch beheren"</string>
-    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Batterijgebruik beperken voor apps die je niet vaak gebruikt"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"Wanneer batterijbeheer detecteert dat apps de batterij snel leegmaken, heb je de optie om deze apps te beperken. Beperkte apps werken mogelijk niet goed en meldingen worden mogelijk vertraagd."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Beperkte apps"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
@@ -2372,8 +2108,6 @@
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
     <string name="power_cell" msgid="7793805106954398186">"Mobiel netwerk"</string>
     <string name="power_phone" msgid="2768396619208561670">"Audiogesprekken"</string>
-    <string name="power_idle" product="tablet" msgid="4689321599298911021">"Tablet inactief"</string>
-    <string name="power_idle" product="default" msgid="9132502722499465252">"Telefoon inactief"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"<xliff:g id="TIME">^1</xliff:g> gebruikt"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"Schermgebruik <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="PERCENT">%1$s</xliff:g> gebruikt door <xliff:g id="APP">%2$s</xliff:g>"</string>
@@ -2424,9 +2158,6 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Planning instellen"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Gebruiksduur van de batterij verlengen"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Uitzetten na opladen"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="3618041244703216293">"Batterijbesparing gaat uit als je telefoon meer dan <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> batterij heeft"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="1733686775743601110">"Batterijbesparing gaat uit als je tablet meer dan <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> batterij heeft"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="7449283917787428755">"Batterijbesparing gaat uit als je apparaat meer dan <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> batterij heeft"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Aanzetten"</string>
@@ -2448,9 +2179,6 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Achtergrond: minder dan een minuut"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Totaal: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Achtergrond: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Gegevens over batterijgebruik zijn bij benadering en meten het gebruik niet als de telefoon wordt opgeladen."</string>
-    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"De batterijgebruikgegevens zijn bij benadering en meten het gebruik niet als de tablet wordt opgeladen"</string>
-    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"De batterijgebruikgegevens zijn bij benadering en meten het gebruik niet als het apparaat wordt opgeladen"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Batterijgebruikgegevens komen een paar uur na volledig opladen beschikbaar"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Diagram voor batterijgebruik"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Diagram van batterijgebruik per dag"</string>
@@ -2520,8 +2248,6 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Verlengt de batterijduur en verbetert de prestaties van het apparaat door de netwerkverbindingen automatisch te beheren"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Opslag van inloggegevens"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Certificaat installeren"</string>
-    <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Installeer certificaten vanuit opslag"</string>
-    <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"Certificaten installeren vanaf SD-kaart"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Inloggegevens wissen"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"Verwijder alle certificaten"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"Vertrouwde inloggegevens"</string>
@@ -2647,9 +2373,6 @@
     <string name="remove_account_label" msgid="4169490568375358010">"Account verwijderen"</string>
     <string name="header_add_an_account" msgid="3919151542338822661">"Account toevoegen"</string>
     <string name="really_remove_account_title" msgid="253097435885652310">"Account verwijderen?"</string>
-    <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"Als je dit account verwijdert, worden ook alle accountberichten, contacten en andere gegevens van de tablet verwijderd."</string>
-    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"Als je dit account verwijdert, worden ook alle account­berichten, contacten en andere gegevens van de telefoon verwijderd."</string>
-    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"Als je dit account verwijdert, worden ook alle bijbehorende berichten, contacten en andere gegevens van het apparaat verwijderd."</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"Deze wijziging is niet toegestaan door je beheerder"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Kan niet handmatig synchroniseren"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"Synchronisatie staat op dit moment uit voor dit item. Als je deze instelling wilt wijzigen, zet je achtergrondgegevens en automatisch synchroniseren tijdelijk aan."</string>
@@ -2691,8 +2414,6 @@
     <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"Deze functie kan ervoor zorgen dat een app die afhankelijk is van achtergrondgegevens, stopt als er alleen mobiele netwerken beschikbaar zijn.\n\nJe kunt meer geschikte besturingselementen voor datagebruik vinden in de instellingen van de app."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="8599940395497268584">"Je kunt achtergrondgegevens alleen beperken als je een limiet voor mobiele data hebt ingesteld."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"Auto-synchronisatie aanzetten?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="6387714350903085918">"Wijzigingen die je op internet aanbrengt in je accounts, worden automatisch naar je telefoon gekopieerd.\n\nBij sommige accounts worden mogelijk ook de wijzigingen die je op de tablet aanbrengt, naar internet gekopieerd. Dit geldt bijvoorbeeld voor Google-accounts."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="6457107552266187107">"Wijzigingen die je op internet aanbrengt in je accounts, worden automatisch naar je telefoon gekopieerd.\n\nBij sommige accounts worden mogelijk ook de wijzigingen die je op de telefoon aanbrengt, naar internet gekopieerd. Dit geldt bijvoorbeeld voor Google-accounts."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"Auto-synchronisatie uitzetten?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"Hiermee beperk je data- en batterijgebruik. Je moet wel elk account handmatig synchroniseren om recente informatie te verzamelen. Je ontvangt geen meldingen wanneer er updates zijn."</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"Gebruikscyclus resetten op:"</string>
@@ -2701,8 +2422,6 @@
     <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"Waarschuwing voor datagebruik instellen"</string>
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"Limiet voor datagebruik instellen"</string>
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"Datagebruik beperken"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"Je tablet zet mobiele data uit zodra je de ingestelde limiet bereikt.\n\nAangezien het datagebruik wordt gemeten door je tablet, en je provider tot een ander totaal kan komen, kun je het beste een voorzichtige limiet instellen."</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"Je telefoon zet mobiele data uit zodra je de ingestelde limiet bereikt.\n\nAangezien het datagebruik wordt gemeten door je telefoon, en je provider tot een ander totaal kan komen, kun je het beste een voorzichtige limiet instellen."</string>
     <string name="data_usage_sweep_warning" msgid="2072854703184614828"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"waar­schuwing"</font></string>
     <string name="data_usage_sweep_limit" msgid="6947019190890086284"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"limiet"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="9065885396147675694">"Verwijderde apps"</string>
@@ -2814,9 +2533,6 @@
       <item quantity="one">Certificaat controleren</item>
     </plurals>
     <string name="user_settings_title" msgid="6550866465409807877">"Meerdere gebruikers"</string>
-    <string name="user_settings_footer_text" product="device" msgid="7523914344521302179">"Deel je apparaat door nieuwe gebruikers toe te voegen. Elke gebruiker heeft een persoonlijke ruimte op je apparaat voor aangepaste startschermen, accounts, apps, instellingen en meer."</string>
-    <string name="user_settings_footer_text" product="tablet" msgid="3730074318510244552">"Deel je tablet door nieuwe gebruikers toe te voegen. Elke gebruiker heeft een persoonlijke ruimte op je tablet voor aangepaste startschermen, accounts, apps, instellingen en meer."</string>
-    <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"Deel je telefoon door nieuwe gebruikers toe te voegen. Elke gebruiker heeft een persoonlijke ruimte op je telefoon voor aangepaste startschermen, accounts, apps, instellingen en meer."</string>
     <string name="user_list_title" msgid="1387379079186123404">"Gebruikers en profielen"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Gebruiker of profiel toevoegen"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Beperkt profiel"</string>
@@ -2826,8 +2542,6 @@
     <string name="user_admin" msgid="4024553191395768119">"Beheerder"</string>
     <string name="user_you" msgid="3070562015202859996">"Jij (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Je kunt geen gebruikers meer toevoegen. Verwijder een gebruiker om een nieuwe toe te voegen."</string>
-    <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"Alleen de eigenaar van de tablet kan gebruikers beheren."</string>
-    <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"Alleen de eigenaar van de telefoon kan gebruikers beheren."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Beperkte profielen kunnen geen accounts toevoegen"</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"<xliff:g id="USER_NAME">%1$s</xliff:g> verwijderen van dit apparaat"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Instellingen voor vergrendelscherm"</string>
@@ -2837,8 +2551,6 @@
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Gebruiker verwijderen?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Dit profiel verwijderen?"</string>
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Werkprofiel verwijderen?"</string>
-    <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"Je raakt je opslagruimte en gegevens op deze tablet kwijt. Je kunt deze actie niet ongedaan maken."</string>
-    <string name="user_confirm_remove_self_message" product="default" msgid="5991495192044543230">"Je raakt je opslagruimte en gegevens op deze telefoon kwijt. Je kunt deze actie niet ongedaan maken."</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"Alle apps en gegevens worden verwijderd."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"Alle apps en gegevens in dit profiel worden verwijderd als je doorgaat."</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"Alle apps en gegevens worden verwijderd."</string>
@@ -2903,9 +2615,6 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"Beperkingen verwijderen"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Pincode wijzigen"</string>
     <string name="help_label" msgid="2896538416436125883">"Hulp en feedback"</string>
-    <string name="support_summary" product="default" msgid="6137136608018134563">"Help-artikelen, telefoon en chat"</string>
-    <string name="support_summary" product="tablet" msgid="6681247727996378252">"Help-artikelen, tablet en chat"</string>
-    <string name="support_summary" product="device" msgid="1690554254039752541">"Help-artikelen, apparaat en chat"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Account voor content"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Foto-ID"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Groot gevaar"</string>
@@ -4089,9 +3798,6 @@
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navigatie met knoppen"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigatie met gebaren, gevoeligheid voor terug, gebaar voor terug"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navigatie, startknop"</string>
-    <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Dubbeltikken om telefoon te checken"</string>
-    <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Dubbeltikken om tablet te checken"</string>
-    <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Dubbeltikken om apparaat te checken"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Bediening met 1 hand"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Bediening met 1 hand gebruiken"</string>
     <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Snelkoppeling voor bediening met 1 hand"</string>
@@ -4105,16 +3811,7 @@
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Meldingen tonen"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"Je ziet meldingen en instellingen"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Dubbeltik op je scherm om de tijd, meldingen en andere informatie te bekijken."</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Oppakken om telefoon te checken"</string>
-    <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Oppakken om tablet te checken"</string>
-    <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"Oppakken om apparaat te checken"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"Scherm activeren"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"Pak je telefoon op om de tijd, meldingen en andere informatie te bekijken"</string>
-    <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"Pak je tablet op om de tijd, meldingen en andere informatie te bekijken."</string>
-    <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"Pak je apparaat op om de tijd, meldingen en andere informatie te bekijken."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Tikken om telefoon te checken"</string>
-    <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Tik om tablet te controleren"</string>
-    <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Tik om apparaat te controleren"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Tik op je scherm om de tijd, meldingen en andere informatie te bekijken"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"SOS"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"SOS gebruiken"</string>
@@ -4128,9 +3825,6 @@
     <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Als je een niet-alarmnummer opgeeft:\n • Je apparaat moet ontgrendeld zijn om SOS te gebruiken.\n • Je gesprek wordt misschien niet beantwoord."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Over vingerafdruksensor swipen voor meldingen"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Over vingerafdruk swipen"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Swipe omlaag over de vingerafdruksensor achter op je telefoon om je meldingen te checken."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"Swipe omlaag over de vingerafdruksensor achter op je tablet om je meldingen te checken."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3888927017311372398">"Swipe omlaag over de vingerafdruksensor achter op je apparaat om je meldingen te checken."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"Snel meldingen bekijken"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="65713754674288193">"Bootloader is al ontgrendeld"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="7425519481227423860">"Verbind met internet of neem contact op met je provider"</string>
@@ -4617,9 +4311,6 @@
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"VoLTE uitzetten?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Hiermee wordt ook de 5G-verbinding uitgezet.\nTijdens een audiogesprek kun je internet niet gebruiken en werken bepaalde apps mogelijk niet."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"Als je twee simkaarten gebruikt, is deze telefoon beperkt tot 4G. "<annotation id="url">"Meer informatie"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Als je twee simkaarten gebruikt, is deze tablet beperkt tot 4G. "<annotation id="url">"Meer informatie"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Als je twee simkaarten gebruikt, is dit apparaat beperkt tot 4G. "<annotation id="url">"Meer informatie"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Uitvoering opschorten voor gecachte apps"</string>
     <string name="blob_never_expires_text" msgid="7293376386620106623">"Verloopt nooit."</string>
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"Toegangsperiode verloopt nooit."</string>
@@ -4654,8 +4345,6 @@
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"Netwerkvoorkeuren"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"netwerkverbinding, internet, draadloos, data, wifi, wi-fi, wi fi, mobiel, mobiele provider, 4g, 3g, 2g, lte"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Wil je je internet resetten?"</string>
-    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Hiermee wordt je telefoongesprek beëindigd"</string>
-    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Hiermee wordt je telefoongesprek beëindigd"</string>
     <string name="resetting_internet_text" msgid="6696779371800051806">"Je internet resetten…"</string>
     <string name="fix_connectivity" msgid="2781433603228089501">"Connectiviteitsproblemen oplossen"</string>
     <string name="networks_available" msgid="3299512933684383474">"Netwerken beschikbaar"</string>
