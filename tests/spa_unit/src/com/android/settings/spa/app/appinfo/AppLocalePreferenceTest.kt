@@ -77,7 +77,8 @@ class AppLocalePreferenceTest {
             .strictness(Strictness.LENIENT)
             .startMocking()
         whenever(context.packageManager).thenReturn(packageManager)
-        whenever(AppLocaleUtil.canDisplayLocaleUi(any(), eq(PACKAGE_NAME), any())).thenReturn(true)
+        whenever(AppLocaleUtil.canDisplayLocaleUi(any(), ArgumentMatchers.eq(APP), any()))
+                .thenReturn(true)
         whenever(AppLocaleDetails.getSummary(any(), ArgumentMatchers.eq(APP))).thenReturn(SUMMARY)
     }
 
@@ -88,7 +89,8 @@ class AppLocalePreferenceTest {
 
     @Test
     fun whenCanNotDisplayLocalUi_notDisplayed() {
-        whenever(AppLocaleUtil.canDisplayLocaleUi(any(), eq(PACKAGE_NAME), any())).thenReturn(false)
+        whenever(AppLocaleUtil.canDisplayLocaleUi(any(), ArgumentMatchers.eq(APP), any()))
+                .thenReturn(false)
 
         setContent()
 
