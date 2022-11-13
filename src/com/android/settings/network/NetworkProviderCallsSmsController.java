@@ -85,6 +85,7 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
 
     @OnLifecycleEvent(Event.ON_PAUSE)
     public void onPause() {
+        mMobileNetworkRepository.removeRegister();
     }
 
     @Override

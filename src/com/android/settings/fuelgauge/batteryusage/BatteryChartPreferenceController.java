@@ -198,7 +198,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
     @Override
     public void onDestroy() {
-        if (mActivity.isChangingConfigurations()) {
+        if (mActivity == null || mActivity.isChangingConfigurations()) {
             BatteryDiffEntry.clearCache();
         }
         mHandler.removeCallbacksAndMessages(/*token=*/ null);

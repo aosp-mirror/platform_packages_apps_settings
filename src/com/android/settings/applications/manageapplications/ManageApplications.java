@@ -19,6 +19,7 @@ package com.android.settings.applications.manageapplications;
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 
+import static com.android.internal.jank.InteractionJankMonitor.CUJ_SETTINGS_PAGE_SCROLL;
 import static com.android.settings.ChangeIds.CHANGE_RESTRICT_SAW_INTENT;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_ALL;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_BATTERY_OPTIMIZED;
@@ -86,6 +87,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.compat.IPlatformCompat;
+import com.android.internal.jank.InteractionJankMonitor;
 import com.android.settings.R;
 import com.android.settings.Settings.AlarmsAndRemindersActivity;
 import com.android.settings.Settings.AppBatteryUsageActivity;
@@ -521,8 +523,9 @@ public class ManageApplications extends InstrumentedFragment
         mFilterAdapter.enableFilter(filterType);
 
         if (mListType == LIST_TYPE_MAIN) {
-            if (UserManager.get(getActivity()).getUserProfiles().size() > 1 && !mIsWorkOnly
-                    && !mIsPersonalOnly) {
+            // Apply the personal and work filter only if new tab should be added
+            // for a given user profile. Else let it use the default all apps filter.
+            if (Utils.isNewTabNeeded(getActivity()) && !mIsWorkOnly && !mIsPersonalOnly) {
                 mFilterAdapter.enableFilter(FILTER_APPS_PERSONAL);
                 mFilterAdapter.enableFilter(FILTER_APPS_WORK);
             }
@@ -1241,8 +1244,10 @@ public class ManageApplications extends InstrumentedFragment
         @Override
         public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
             super.onAttachedToRecyclerView(recyclerView);
+            final String className =
+                    mManageApplications.getClass().getName() + "_" + mManageApplications.mListType;
             mRecyclerView = recyclerView;
-            mOnScrollListener = new OnScrollListener(this);
+            mOnScrollListener = new OnScrollListener(this, className);
             mRecyclerView.addOnScrollListener(mOnScrollListener);
         }
 
@@ -1802,11 +1807,15 @@ public class ManageApplications extends InstrumentedFragment
             private boolean mDelayNotifyDataChange;
             private ApplicationsAdapter mAdapter;
             private InputMethodManager mInputMethodManager;
+            private InteractionJankMonitor mMonitor;
+            private String mClassName;
 
-            public OnScrollListener(ApplicationsAdapter adapter) {
+            public OnScrollListener(ApplicationsAdapter adapter, String className) {
                 mAdapter = adapter;
                 mInputMethodManager = mAdapter.mContext.getSystemService(
                         InputMethodManager.class);
+                mMonitor = InteractionJankMonitor.getInstance();
+                mClassName = className;
             }
 
             @Override
@@ -1821,6 +1830,15 @@ public class ManageApplications extends InstrumentedFragment
                         mInputMethodManager.hideSoftInputFromWindow(recyclerView.getWindowToken(),
                                 0);
                     }
+                    // Start jank monitoring during page scrolling.
+                    final InteractionJankMonitor.Configuration.Builder builder =
+                            InteractionJankMonitor.Configuration.Builder.withView(
+                                            CUJ_SETTINGS_PAGE_SCROLL, recyclerView)
+                                    .setTag(mClassName);
+                    mMonitor.begin(builder);
+                } else if (mScrollState == SCROLL_STATE_IDLE) {
+                    // Stop jank monitoring on page scrolling.
+                    mMonitor.end(CUJ_SETTINGS_PAGE_SCROLL);
                 }
             }
 

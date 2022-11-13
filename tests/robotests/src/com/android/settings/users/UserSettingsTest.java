@@ -417,12 +417,12 @@ public class UserSettingsTest {
     }
 
     @Test
-    public void updateUserList_cannotAddUserButCanSwitchUser_shouldShowDisabledAddUser() {
+    public void updateUserList_cannotAddUserButCanSwitchUser_shouldNotShowAddUser() {
         mUserCapabilities.mCanAddUser = false;
 
         mFragment.updateUserList();
 
-        verify(mAddUserPreference).setEnabled(false);
+        verify(mAddUserPreference).setVisible(false);
     }
 
     @Test

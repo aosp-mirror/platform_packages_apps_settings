@@ -84,6 +84,7 @@ public class NetworkProviderDownloadedSimListController extends
 
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
+        mMobileNetworkRepository.removeRegister();
     }
 
     @Override
