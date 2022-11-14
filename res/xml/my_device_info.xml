@@ -57,6 +57,7 @@
             android:order="3"
             android:title="@string/status_number"
             android:summary="@string/summary_placeholder"
+            settings:isPreferenceVisible="@bool/config_show_sim_info"
             settings:controller="com.android.settings.deviceinfo.PhoneNumberPreferenceController"
             settings:enableCopying="true"/>
     </PreferenceCategory>
@@ -98,6 +99,7 @@
             android:title="@string/sim_status_title"
             settings:keywords="@string/keywords_sim_status"
             android:summary="@string/summary_placeholder"
+            settings:isPreferenceVisible="@bool/config_show_sim_info"
             settings:enableCopying="true"/>
 
         <!-- Model & hardware -->
@@ -119,6 +121,7 @@
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_imei_info"
             settings:enableCopying="true"
+            settings:isPreferenceVisible="@bool/config_show_sim_info"
             settings:controller="com.android.settings.deviceinfo.imei.ImeiInfoPreferenceController"/>
 
         <!-- Android version -->
