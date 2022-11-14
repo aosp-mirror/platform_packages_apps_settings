@@ -13,7 +13,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"Sí"</string>
@@ -59,9 +58,6 @@
     <string name="bluetooth_rename_device" msgid="4219655243836021443">"Canvia el nom del dispositiu"</string>
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"Canvia el nom"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Vols desconnectar el dispositiu?"</string>
-    <string name="bluetooth_disconnect_all_profiles" product="default" msgid="1934297101665686854">"El telèfon es desconnectarà de: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_disconnect_all_profiles" product="tablet" msgid="336622948210457991">"La tauleta es desconnectarà de: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"El dispositiu es desconnectarà de: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Vincula un dispositiu nou"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Vincula la dreta"</string>
@@ -72,9 +68,6 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Vincula la dreta"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Vincula l\'esquerra"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Relacionats"</string>
-    <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Adreça Bluetooth del telèfon: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Adreça Bluetooth de la tauleta: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="device" msgid="2863536947810007600">"Adreça Bluetooth del dispositiu: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"Dispositiu Bluetooth sense nom"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"S\'està cercant"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"No s\'ha trobat cap dispositiu Bluetooth a prop."</string>
@@ -88,22 +81,6 @@
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"<xliff:g id="APP_NAME">%1$s</xliff:g> vol desactivar el Bluetooth"</string>
     <string name="bluetooth_ask_enablement_no_name" msgid="5091401961637405417">"Una aplicació vol activar el Bluetooth"</string>
     <string name="bluetooth_ask_disablement_no_name" msgid="382299750909188822">"Una aplicació vol desactivar el Bluetooth"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="1273405567801929487">"<xliff:g id="APP_NAME">%1$s</xliff:g> vol que la tauleta sigui visible per a altres dispositius Bluetooth durant <xliff:g id="TIMEOUT">%2$d</xliff:g> segons."</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="7013223328571883275">"<xliff:g id="APP_NAME">%1$s</xliff:g> vol que el telèfon sigui visible per a altres dispositius Bluetooth durant <xliff:g id="TIMEOUT">%2$d</xliff:g> segons."</string>
-    <string name="bluetooth_ask_discovery_no_name" product="tablet" msgid="3266007454914144057">"Una aplicació vol que la tauleta sigui visible per a altres dispositius Bluetooth durant <xliff:g id="TIMEOUT">%1$d</xliff:g> segons."</string>
-    <string name="bluetooth_ask_discovery_no_name" product="default" msgid="7989444746980501116">"Una aplicació vol que el telèfon sigui visible per a altres dispositius Bluetooth durant <xliff:g id="TIMEOUT">%1$d</xliff:g> segons."</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="6482084870735107773">"<xliff:g id="APP_NAME">%1$s</xliff:g> vol que la tauleta sigui visible per a altres dispositius Bluetooth. Pots canviar aquesta opció més endavant a la configuració del Bluetooth."</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="2352494279465502950">"<xliff:g id="APP_NAME">%1$s</xliff:g> vol que el telèfon sigui visible per a altres dispositius Bluetooth. Pots canviar aquesta opció més endavant a la configuració del Bluetooth."</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="tablet" msgid="2732992604509910896">"Una aplicació vol que la tauleta sigui visible per a altres dispositius Bluetooth. Pots canviar aquesta opció més endavant a la configuració del Bluetooth."</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="default" msgid="356982103612920264">"Una aplicació vol que el telèfon sigui visible per a altres dispositius Bluetooth. Pots canviar aquesta opció més endavant a la configuració del Bluetooth."</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="6103655179509599427">"<xliff:g id="APP_NAME">%1$s</xliff:g> vol activar el Bluetooth i que la tauleta sigui visible per a altres dispositius durant <xliff:g id="TIMEOUT">%2$d</xliff:g> segons."</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="934276632311449337">"<xliff:g id="APP_NAME">%1$s</xliff:g> vol activar el Bluetooth i que el telèfon sigui visible per a altres dispositius durant <xliff:g id="TIMEOUT">%2$d</xliff:g> segons."</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="tablet" msgid="1284048348024444485">"Una aplicació vol activar el Bluetooth i que la tauleta sigui visible per a altres dispositius durant <xliff:g id="TIMEOUT">%1$d</xliff:g> segons."</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="default" msgid="2661614145022629454">"Una aplicació vol activar el Bluetooth i que el telèfon sigui visible per a altres dispositius durant <xliff:g id="TIMEOUT">%1$d</xliff:g> segons."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="8588317955400593623">"<xliff:g id="APP_NAME">%1$s</xliff:g> vol activar el Bluetooth i que la tauleta sigui visible per a altres dispositius. Pots canviar aquesta opció més endavant a la configuració del Bluetooth."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="4047444317445386579">"<xliff:g id="APP_NAME">%1$s</xliff:g> vol activar el Bluetooth i que el telèfon sigui visible per a altres dispositius. Pots canviar aquesta opció més endavant a la configuració del Bluetooth."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="tablet" msgid="4922952478824372605">"Una aplicació vol activar el Bluetooth i que la tauleta sigui visible per a altres dispositius. Pots canviar aquesta opció més endavant a la configuració del Bluetooth."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="default" msgid="1381582950049639439">"Una aplicació vol activar el Bluetooth i que el telèfon sigui visible per a altres dispositius. Pots canviar aquesta opció més endavant a la configuració del Bluetooth."</string>
     <string name="bluetooth_turning_on" msgid="3842613808709024730">"S\'està activant el Bluetooth..."</string>
     <string name="bluetooth_turning_off" msgid="7406309124247701148">"S\'està desactivant el Bluetooth…"</string>
     <string name="bluetooth_connection_permission_request" msgid="8793131019383198861">"Sol·licitud de connexió de Bluetooth"</string>
@@ -239,10 +216,6 @@
     <string name="account_settings_title" msgid="9138880127246241885">"Comptes"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Seguretat"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Encriptació i credencials"</string>
-    <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"Telèfon encriptat"</string>
-    <string name="not_encrypted_summary" product="default" msgid="2251945842585788254">"El telèfon no està encriptat"</string>
-    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"Dispositiu encriptat"</string>
-    <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"El dispositiu no està encriptat"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Pantalla de bloqueig"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Què es mostra"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"No disponible"</string>
@@ -258,17 +231,11 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Configura Desbloqueig facial"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Utilitza l\'autenticació facial"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Comença"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"Si Desbloqueig facial amb accessibilitat està desactivat, és possible que alguns passos de configuració no funcionin correctament amb TalkBack."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Torna"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Continua la configuració"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Utilitza la config. d\'accessibilitat"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Cancel·la"</string>
@@ -278,53 +245,14 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Desbloqueja amb la cara"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Permet el desbloqueig facial"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Utilitza l\'autenticació facial"</string>
-    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"Fes servir la cara per desbloquejar el telèfon, autoritzar compres o iniciar la sessió a les aplicacions."</string>
-    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"Fes servir la cara per desbloquejar la tauleta, autoritzar compres o iniciar la sessió en aplicacions."</string>
-    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"Fes servir la cara per desbloquejar el dispositiu, autoritzar compres o iniciar la sessió en aplicacions."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Permet que el teu fill o filla utilitzi la cara per desbloquejar el telèfon"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Permet que el teu fill o filla utilitzi la cara per desbloquejar la tauleta"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Permet que el teu fill o filla utilitzi la cara per desbloquejar el dispositiu"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"Utilitzar la cara del teu fill o filla per desbloquejar el telèfon pot ser menys segur que un bon patró o PIN."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"Utilitzar la cara del teu fill o filla per desbloquejar la tauleta pot ser menys segur que un bon patró o PIN."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"Utilitzar la cara del teu fill o filla per desbloquejar el dispositiu pot ser menys segur que un bon patró o PIN."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Utilitza la cara per desbloquejar el telèfon o aprovar compres.\n\nNota: no pots fer servir la cara per desbloquejar aquest dispositiu. Per obtenir més informació, contacta amb l\'administrador de la teva organització."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Fes servir la cara per desbloquejar el telèfon, autoritzar compres o iniciar la sessió a les aplicacions"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"Centra la cara dins del cercle"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Omet"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Has afegit el nombre màxim de cares"</string>
@@ -369,12 +297,6 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Configura l\'empremta digital"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Permet desbloqueig amb empremta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Utilitzar l\'empremta digital"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Utilitza l\'empremta digital per desbloquejar la tauleta o verificar que ets tu, com ara quan inicies la sessió en aplicacions o aproves una compra."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Utilitza l\'empremta digital per desbloquejar el dispositiu o verificar la teva identitat, com ara quan inicies la sessió en aplicacions o aproves una compra."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Utilitza l\'empremta digital per desbloquejar el telèfon o verificar la teva identitat, com ara quan inicies la sessió en aplicacions o aproves una compra."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"Permet que el teu fill utilitzi l\'empremta digital per desbloquejar el telèfon o verificar la seva identitat. Ho podrà fer quan iniciï la sessió en aplicacions, aprovi una compra, etc."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"Permet que el teu fill o filla utilitzi l\'empremta digital per desbloquejar la tauleta o verificar la seva identitat. Ho podrà fer quan iniciï la sessió en aplicacions, aprovi una compra, etc."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"Permet que el teu fill o filla utilitzi l\'empremta digital per desbloquejar el dispositiu o verificar la seva identitat. Ho podrà fer quan iniciï la sessió en aplicacions, aprovi una compra, etc."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Ets tu qui té el control"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Tu i el teu fill teniu el control"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Nota important"</string>
@@ -386,36 +308,12 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Només calen un parell de minuts per configurar l\'empremta digital. Si omets aquest pas, pots afegir-la més endavant a Configuració."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Quan vegis aquesta icona, utilitza l\'empremta digital per a l\'autenticació, com ara en iniciar la sessió en aplicacions o en aprovar una compra"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Nota important"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"Utilitzar l\'empremta digital per desbloquejar el telèfon pot ser menys segur que un bon patró o PIN"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"Utilitzar l\'empremta digital per desbloquejar la tauleta pot ser menys segur que un bon patró o PIN"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"Utilitzar l\'empremta digital per desbloquejar el dispositiu pot ser menys segur que un bon patró o PIN"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Com funciona"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Desbloqueig amb empremta digital crea un model únic de la teva empremta digital per verificar la teva identitat. Per crear aquest model d\'empremta digital, et faràs fotos de l\'empremta digital des de diverses posicions."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Desbloqueig amb empremta digital crea un model únic de l\'empremta digital del teu fill per verificar la seva identitat. Per crear aquest model d\'empremta digital durant la configuració, es farà fotos de l\'empremta digital des de diverses posicions."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"Quan fas servir Pixel Imprint, les imatges s\'utilitzen per actualitzar el teu model d\'empremta digital. Les imatges utilitzades per crear-lo no s\'emmagatzemen mai, però el model d\'empremta digital sí que s\'emmagatzema de manera segura i no surt del telèfon. Tot el procés es fa de manera segura al teu telèfon."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"Quan fas servir Pixel Imprint, les imatges s\'utilitzen per actualitzar el teu model d\'empremta digital. Les imatges utilitzades per crear-lo no s\'emmagatzemen mai, però el model d\'empremta digital sí que s\'emmagatzema de manera segura i no surt de la tauleta. Tot el procés es fa de manera segura a la tauleta."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"Quan fas servir Pixel Imprint, les imatges s\'utilitzen per actualitzar el teu model d\'empremta digital. Les imatges utilitzades per crear-lo no s\'emmagatzemen mai, però el model d\'empremta digital sí que s\'emmagatzema de manera segura i no surt del dispositiu. Tot el procés es fa de manera segura al dispositiu."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"Quan fa servir Pixel Imprint, les imatges s\'utilitzen per actualitzar el seu model d\'empremta digital. Les imatges utilitzades per crear-lo no s\'emmagatzemen mai, però el model d\'empremta digital sí que s\'emmagatzema de manera segura i no surt del dispositiu. Tot el procés es fa de manera segura al telèfon."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"Quan fa servir Pixel Imprint, les imatges s\'utilitzen per actualitzar el seu model d\'empremta digital. Les imatges utilitzades per crear-lo no s\'emmagatzemen mai, però el model d\'empremta digital sí que s\'emmagatzema de manera segura i no surt de la tauleta. Tot el procés es fa de manera segura a la tauleta."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"Quan fa servir Pixel Imprint, les imatges s\'utilitzen per actualitzar el seu model d\'empremta digital. Les imatges utilitzades per crear-lo no s\'emmagatzemen mai, però el model d\'empremta digital sí que s\'emmagatzema de manera segura i no surt del dispositiu. Tot el procés es fa de manera segura al dispositiu."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"Pots suprimir les imatges i el model de l\'empremta digital o desactivar el desbloqueig amb empremta digital en qualsevol moment a Configuració. Les imatges i els models d\'empremta digital s\'emmagatzemen al telèfon fins que els suprimeixes."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"Pots suprimir les imatges i el model de l\'empremta digital o desactivar el desbloqueig amb empremta digital en qualsevol moment a Configuració. Les imatges i els models d\'empremta digital s\'emmagatzemen a la tauleta fins que els suprimeixes."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"Pots suprimir les imatges i el model de l\'empremta digital o desactivar el desbloqueig amb empremta digital en qualsevol moment a Configuració. Les imatges i els models d\'empremta digital s\'emmagatzemen al dispositiu fins que els suprimeixes."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"Tu i el teu fill podeu suprimir les imatges i el model de la seva empremta digital o desactivar Desbloqueig amb empremta digital en qualsevol moment a Configuració. Les imatges i els models d\'empremta digital s\'emmagatzemen al telèfon fins que se suprimeixin."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"Tu i el teu fill o filla podeu suprimir les imatges i el model de la seva empremta digital o desactivar Desbloqueig amb empremta digital en qualsevol moment a Configuració. Les imatges i els models d\'empremta digital s\'emmagatzemen a la tauleta fins que se suprimeixin."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"Tu i el teu fill o filla podeu suprimir les imatges i el model de la seva empremta digital o desactivar Desbloqueig amb empremta digital en qualsevol moment a Configuració. Les imatges i els models d\'empremta digital s\'emmagatzemen al dispositiu fins que se suprimeixin."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"El teu telèfon es pot desbloquejar sense voler, per exemple si algú te l\'acosta al dit."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"La tauleta es pot desbloquejar sense voler; per exemple, si algú te l\'acosta al dit."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"El dispositiu es pot desbloquejar sense voler; per exemple, si algú te l\'acosta al dit."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"El telèfon del teu fill es pot desbloquejar sense voler, com quan algú li l\'apropi al dit."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"La tauleta del teu fill o filla es pot desbloquejar sense voler, per exemple, si algú l\'apropa al dit del nen."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"El dispositiu del teu fill o filla es pot desbloquejar sense voler, per exemple, si algú l\'apropa al dit del nen."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Per obtenir els millors resultats, utilitza un protector de pantalla que tingui la certificació Made For Google. Si utilitzes altres protectors de pantalla, pot ser que la teva empremta digital no funcioni."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Per obtenir els millors resultats, utilitza un protector de pantalla que tingui la certificació Made For Google. Si utilitzes altres protectors de pantalla, pot ser que l\'empremta digital del teu fill o filla no funcioni."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Utilitza l\'empremta digital per desbloquejar la tauleta o verificar que ets tu, com quan inicies la sessió en aplicacions"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Utilitza l\'empremta digital per desbloquejar el dispositiu o verificar la teva identitat, com quan inicies la sessió en aplicacions"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Utilitza l\'empremta digital per desbloquejar el telèfon o verificar la teva identitat, com quan inicies la sessió en aplicacions"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Desbloqueig facial i amb empremta digital"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Toca per configurar"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Cara i empremtes digitals afegides"</string>
@@ -427,17 +325,8 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Amb la cara"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Amb l\'empremta digital"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Amb la cara o l\'empremta digital"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"Torna la tauleta al teu pare o mare"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"Torna el dispositiu al teu pare o mare"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Torna el telèfon als pares"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"D\'acord"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Ometre bloqueig de pantalla?"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Les funcions de protecció del dispositiu no s\'activaran. Si perds la tauleta, te la roben o se\'n restableixen les dades de fàbrica, no podràs evitar que altres persones la utilitzin."</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Les funcions de protecció del dispositiu no s\'activaran. Si perds el dispositiu, te\'l roben o se\'n restableixen les dades de fàbrica, no podràs evitar que altres persones l\'utilitzin."</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2412426429887900241">"Les funcions de protecció del dispositiu no s\'activaran. Si perds el telèfon, te\'l roben o se\'n restableixen les dades de fàbrica, no podràs evitar que altres persones l\'utilitzin."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="7119039592587429936">"Les funcions de protecció del dispositiu no s\'activaran. Si perds la tauleta o te la roben, no podràs evitar que altres persones la utilitzin."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3365990364131398523">"Les funcions de protecció del dispositiu no s\'activaran. Si perds el dispositiu o te\'l roben, no podràs evitar que altres persones l\'utilitzin."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="4908278819257287536">"Les funcions de protecció del dispositiu no s\'activaran. Si perds el telèfon o te\'l roben, no podràs evitar que altres persones l\'utilitzin."</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"Omet de totes maneres"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"Torna"</string>
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"Omet"</string>
@@ -446,9 +335,6 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Toca el botó d\'engegada sense prémer-lo"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Com pots configurar l\'empremta digital"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"És a la part posterior del telèfon. Utilitza el dit índex."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"El sensor d\'empremtes digitals es troba al botó d\'engegada. És el botó pla situat al costat del botó de volum elevat a l\'extrem de la tauleta.\n\nEn prémer el botó d\'engegada, la pantalla es desactiva."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"El sensor d\'empremtes digitals es troba al botó d\'engegada. És el botó pla situat al costat del botó de volum elevat a l\'extrem del dispositiu.\n\nEn prémer el botó d\'engegada, la pantalla es desactiva."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"El sensor d\'empremtes digitals es troba al botó d\'engegada. És el botó pla situat al costat del botó de volum elevat a l\'extrem del telèfon.\n\nEn prémer el botó d\'engegada, la pantalla es desactiva."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"El sensor d\'empremtes digitals es troba a la pantalla. Capturaràs l\'empremta digital a la pantalla següent."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Comença"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Mou el dit per la pantalla per trobar el sensor d\'empremtes digitals. Mantén-lo premut."</string>
@@ -481,9 +367,6 @@
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registre de l\'empremta digital <xliff:g id="PERCENTAGE">%d</xliff:g> per cent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"S\'ha afegit l\'empremta digital"</string>
     <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Ara pots utilitzar l\'empremta digital per desbloquejar la tauleta o verificar que ets tu, com ara quan inicies la sessió en aplicacions o aproves una compra"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Ara pots utilitzar l\'empremta digital per desbloquejar la tauleta o verificar que ets tu, com ara quan inicies la sessió en aplicacions"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Ara pots utilitzar l\'empremta digital per desbloquejar el dispositiu o verificar la teva identitat, com ara quan inicies la sessió en aplicacions"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Ara pots utilitzar l\'empremta digital per desbloquejar el telèfon o verificar la teva identitat, com ara quan inicies la sessió en aplicacions"</string>
     <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
     <skip />
     <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
@@ -495,42 +378,6 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Col·loca un costat del dit al sensor i espera; a continuació, canvia a l\'altre costat"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Sortir de la configuració de l\'empremta?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Has triat utilitzar la teva empremta digital per desbloquejar el telèfon. Si omets aquest pas ara, hauràs de fer aquesta configuració més endavant. Aquest procés només triga un parell de minuts."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"El PIN protegeix la tauleta si es perd o te la roben"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="4359575348578515037">"El patró protegeix la tauleta si es perd o te la roben"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5420451292764062637">"La contrasenya protegeix la tauleta si es perd o te la roben"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="8841426051550671169">"El PIN protegeix el dispositiu si es perd o te\'l roben"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="6296702954920045923">"El patró protegeix el dispositiu si es perd o te\'l roben"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="9186075211441188900">"La contrasenya protegeix el dispositiu si es perd o te\'l roben"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="4301690296689572747">"El PIN protegeix el telèfon si es perd o te\'l roben"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="7387967847446084260">"El patró protegeix el telèfon si es perd o te\'l roben"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="6415788841227543063">"La contrasenya protegeix el telèfon si es perd o te\'l roben"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="2350062798056164403">"Cal definir un PIN per configurar Desbloqueig amb empremta digital.\n\nEl PIN protegeix la tauleta si es perd o te la roben."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="222574071926747300">"Cal definir un patró per configurar Desbloqueig amb empremta digital.\n\nEl patró protegeix la tauleta si es perd o te la roben."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="7780323831330724644">"Cal definir una contrasenya per configurar Desbloqueig amb empremta digital.\n\nLa contrasenya protegeix la tauleta si es perd o te la roben."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="7421096089691939451">"Cal definir un PIN per configurar Desbloqueig amb empremta digital.\n\nEl PIN protegeix el dispositiu si es perd o te\'l roben."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6458468083711413617">"Cal definir un patró per configurar Desbloqueig amb empremta digital.\n\nEl patró protegeix el dispositiu si es perd o te\'l roben."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="1632249532665518954">"Cal definir una contrasenya per configurar Desbloqueig amb empremta digital.\n\nLa contrasenya protegeix el dispositiu si es perd o te\'l roben."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3101384462491132314">"Cal definir un PIN per configurar Desbloqueig amb empremta digital.\n\nEl PIN protegeix el telèfon si es perd o te\'l roben."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="382422778886929469">"Cal definir un patró per configurar Desbloqueig amb empremta digital.\n\nEl patró protegeix el telèfon si es perd o te\'l roben."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="5515199168425229243">"Cal definir una contrasenya per configurar Desbloqueig amb empremta digital.\n\nLa contrasenya protegeix el telèfon si es perd o te\'l roben."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="2454239555320628731">"Cal definir un PIN per configurar Desbloqueig facial.\n\nEl PIN protegeix la tauleta si es perd o te la roben."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="4354138725903415816">"Cal definir un patró per configurar Desbloqueig facial.\n\nEl patró protegeix la tauleta si es perd o te la roben."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="719339718267952196">"Cal definir una contrasenya per configurar Desbloqueig facial.\n\nLa contrasenya protegeix la tauleta si es perd o te la roben."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="3729243407606881750">"Cal definir un PIN per configurar Desbloqueig facial.\n\nEl PIN protegeix el dispositiu si es perd o te\'l roben."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="6966329744346503807">"Cal definir un patró per configurar Desbloqueig facial.\n\nEl patró protegeix el dispositiu si es perd o te\'l roben."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3020827854443297996">"Cal definir una contrasenya per configurar Desbloqueig facial.\n\nLa contrasenya protegeix el dispositiu si es perd o te\'l roben."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2155678903559865476">"Cal definir un PIN per configurar Desbloqueig facial.\n\nEl PIN protegeix el telèfon si es perd o te\'l roben."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="473271568005748452">"Cal definir un patró per configurar Desbloqueig facial.\n\nEl patró protegeix el telèfon si es perd o te\'l roben."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="4319934862372116788">"Cal definir una contrasenya per configurar Desbloqueig facial.\n\nLa contrasenya protegeix el telèfon si es perd o te\'l roben."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="647987565338402155">"Cal definir un PIN per configurar Desbloqueig facial i Desbloqueig amb empremta digital.\n\nEl PIN protegeix la tauleta si es perd o te la roben."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="5293609077890072841">"Cal definir un patró per configurar Desbloqueig facial i Desbloqueig amb empremta digital.\n\nEl patró protegeix la tauleta si es perd o te la roben."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="2660359318928684172">"Cal definir una contrasenya per configurar Desbloqueig facial i Desbloqueig amb empremta digital.\n\nLa contrasenya protegeix la tauleta si es perd o te la roben."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="1278795063897397815">"Cal definir un PIN per configurar Desbloqueig facial i Desbloqueig amb empremta digital.\n\nEl PIN protegeix el dispositiu si es perd o te\'l roben."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="8766169819759371801">"Cal definir un patró per configurar Desbloqueig facial i Desbloqueig amb empremta digital.\n\nEl patró protegeix el dispositiu si es perd o te\'l roben."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="8611216039321306045">"Cal definir una contrasenya per configurar Desbloqueig facial i Desbloqueig amb empremta digital.\n\nLa contrasenya protegeix el dispositiu si es perd o te\'l roben."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="8796878521409329051">"Cal definir un PIN per configurar Desbloqueig facial i Desbloqueig amb empremta digital.\n\nEl PIN protegeix el telèfon si es perd o te\'l roben."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="8423700958936341596">"Cal definir un patró per configurar Desbloqueig facial i Desbloqueig amb empremta digital.\n\nEl patró protegeix el telèfon si es perd o te\'l roben."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="5411689248299854172">"Cal definir una contrasenya per configurar Desbloqueig facial i Desbloqueig amb empremta digital.\n\nLa contrasenya protegeix el telèfon si es perd o te\'l roben."</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"No vols configurar el PIN?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Vols ometre la configuració del PIN i la cara?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Vols ometre la configuració del PIN i l\'empremta digital?"</string>
@@ -565,40 +412,20 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Has afegit el nombre màxim d\'empremtes digitals"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"No es poden afegir més empremtes digitals"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Suprimeix \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
-    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Aquesta acció suprimeix les imatges i el model d\'empremta digital associats a <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>, que estan emmagatzemats al teu telèfon"</string>
-    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Aquesta acció suprimeix les imatges i el model d\'empremta digital associats a <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>, que estan emmagatzemats a la teva tauleta"</string>
-    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Aquesta acció suprimeix les imatges i el model d\'empremta digital associats a <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>, que estan emmagatzemats al teu dispositiu"</string>
-    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"No podràs utilitzar l\'empremta digital per desbloquejar el telèfon o verificar la teva identitat en aplicacions."</string>
-    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"No podràs utilitzar l\'empremta digital per desbloquejar la tauleta o verificar que ets tu en aplicacions."</string>
-    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"No podràs utilitzar l\'empremta digital per desbloquejar el dispositiu o verificar la teva identitat en aplicacions."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"No podràs utilitzar l\'empremta digital per desbloquejar el teu perfil de treball, autoritzar compres ni iniciar la sessió en aplicacions de treball."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Encriptació"</string>
-    <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Encripta la tauleta"</string>
-    <string name="encrypt_title" product="default" msgid="7337365190988321100">"Encripta el telèfon"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Encriptat"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Defineix un bloqueig de pantalla"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Per a més seguretat, defineix un PIN, un patró o una contrasenya per a aquest dispositiu."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Defineix un bloqueig de pantalla"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Protegeix el teu telèfon"</string>
-    <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Configura un bloqueig per protegir la tauleta"</string>
-    <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Configura un bloqueig per protegir el dispositiu"</string>
-    <string name="suggested_lock_settings_summary" product="default" msgid="2443273582716671033">"Configura un bloqueig per protegir el telèfon"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Afegeix una empremta digital per desbloquejar"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Tria bloqueig de pantalla"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Tria un bloqueig de pantalla"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Tria un bloqueig de pantalla"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Tria un bloqueig per a apps de treball"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Tria un bloqueig de treball"</string>
-    <string name="setup_lock_settings_picker_title" product="tablet" msgid="1276283007274778191">"Protegeix la tauleta"</string>
-    <string name="setup_lock_settings_picker_title" product="device" msgid="3585905639045649905">"Protegeix el dispositiu"</string>
-    <string name="setup_lock_settings_picker_title" product="default" msgid="2758197863515864300">"Protegeix el telèfon"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Per a més seguretat, defineix un bloqueig de pantalla alternatiu"</string>
-    <string name="setup_lock_settings_picker_message" product="tablet" msgid="4870877800737248926">"Activa les funcions de protecció del dispositiu per impedir que altres persones utilitzin aquesta tauleta sense permís. Tria el bloqueig de pantalla que vulguis utilitzar."</string>
-    <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Activa les funcions de protecció del dispositiu per impedir que altres persones el facin servir sense permís. Tria el bloqueig de pantalla que vulguis utilitzar."</string>
-    <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Activa les funcions de protecció del dispositiu per impedir que altres persones utilitzin aquest telèfon sense permís. Tria el bloqueig de pantalla que vulguis utilitzar."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Tria un mètode de bloqueig de pantalla alternatiu"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Si oblides el bloqueig de pantalla, l\'administrador de TI no el pot restablir."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Defineix-ne un altre per a la feina"</string>
@@ -638,43 +465,31 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"Vols suprimir la protecció del perfil?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"Un patró protegeix el teu telèfon si es perd o te\'l roben"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"Un patró protegeix el teu telèfon si es perd o te\'l roben.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Aquesta acció també suprimeix el model d\'empremta digital emmagatzemat al dispositiu. No podràs utilitzar la teva empremta digital per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"Un patró protegeix el teu telèfon si es perd o te\'l roben.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>El teu model facial també se suprimirà permanentment i de manera segura. No podràs utilitzar la cara per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"Un patró protegeix el teu telèfon si es perd o te\'l roben.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Aquesta acció suprimeix el model d\'empremta digital emmagatzemat al dispositiu. El teu model facial també se suprimirà permanentment i de manera segura. No podràs utilitzar la teva cara o empremta digital per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"El PIN protegeix el teu telèfon si es perd o te\'l roben"</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"El PIN protegeix el teu telèfon si es perd o te\'l roben.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Aquesta acció també suprimeix el model d\'empremta digital emmagatzemat al dispositiu. No podràs utilitzar la teva empremta digital per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"El PIN protegeix el teu telèfon si es perd o te\'l roben.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>El teu model facial també se suprimirà permanentment i de manera segura. No podràs utilitzar la cara per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"El PIN protegeix el teu telèfon si es perd o te\'l roben.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Aquesta acció suprimeix el model d\'empremta digital emmagatzemat al dispositiu. El teu model facial també se suprimirà permanentment i de manera segura. No podràs utilitzar la teva cara o empremta digital per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"Una contrasenya protegeix el teu telèfon si es perd o te\'l roben"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"Una contrasenya protegeix el teu telèfon si es perd o te\'l roben.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Aquesta acció també suprimeix el model d\'empremta digital emmagatzemat al dispositiu. No podràs utilitzar la teva empremta digital per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"Una contrasenya protegeix el teu telèfon si es perd o te\'l roben.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>El teu model facial també se suprimirà permanentment i de manera segura. No podràs utilitzar la teva cara per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"Una contrasenya protegeix el teu telèfon si es perd o te\'l roben.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Aquesta acció suprimeix el model d\'empremta digital emmagatzemat al dispositiu. El teu model facial també se suprimirà permanentment i de manera segura. No podràs utilitzar la teva cara o empremta digital per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"Les funcions de protecció del dispositiu no funcionaran sense el teu bloqueig de pantalla."</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"Les funcions de protecció del dispositiu no funcionen sense un bloqueig de pantalla.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Aquesta acció també suprimeix el model d\'empremta digital emmagatzemat al dispositiu. No podràs utilitzar la teva empremta digital per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"Les funcions de protecció del dispositiu no funcionen sense bloqueig de pantalla.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>El teu model facial també se suprimirà permanentment i de manera segura. No podràs utilitzar la cara per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"Les funcions de protecció del dispositiu no funcionen sense un bloqueig de pantalla.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Aquesta acció suprimeix el model d\'empremta digital emmagatzemat al dispositiu. El teu model facial també se suprimirà permanentment i de manera segura. No podràs utilitzar la teva cara o empremta digital per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Suprimeix"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> recomana que el PIN o la contrasenya siguin segurs; si no ho són, és possible que no funcioni correctament"</string>
@@ -785,9 +600,6 @@
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Vols que s\'oblidi el dispositiu?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"Suprimeix l\'associació"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Vols desconnectar l\'aplicació?"</string>
-    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"El telèfon es desvincularà de: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"La tauleta es desvincularà de: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"El teu dispositiu es desvincularà de: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"L\'aplicació <xliff:g id="APP_NAME">%1$s</xliff:g> deixarà de connectar-se a <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Oblida el dispositiu"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Desconnecta l\'aplicació"</string>
@@ -832,7 +644,6 @@
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Mostra la freqüència d\'actualització de la pantalla actual"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Sol·licita el desbloqueig del dispositiu per a l\'NFC"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"Permet l\'ús de l\'NFC només quan la pantalla estigui desbloquejada"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Preparat per compartir contingut d\'aplicacions per NFC"</string>
     <string name="nfc_disabled_summary" msgid="8737797364522502351">"No disponible perquè la funció NFC està desactivada"</string>
@@ -1040,14 +851,10 @@
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> està actiu"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"AndroidHotspot"</string>
     <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"Vols desar aquesta xarxa?"</string>
-    <string name="wifi_add_app_single_network_summary" product="default" msgid="6881712878537666626">"<xliff:g id="APPNAME">%1$s</xliff:g> vol desar una xarxa al teu telèfon"</string>
-    <string name="wifi_add_app_single_network_summary" product="tablet" msgid="8455616967601552440">"<xliff:g id="APPNAME">%1$s</xliff:g> vol desar una xarxa a la teva tauleta"</string>
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"S\'està desant…"</string>
     <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"S\'ha desat"</string>
     <string name="wifi_add_app_network_save_failed_summary" msgid="7223817782309294652">"No es pot desar. Torna-ho a provar."</string>
     <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"Vols desar aquestes xarxes?"</string>
-    <string name="wifi_add_app_networks_summary" product="default" msgid="2670215712788515167">"<xliff:g id="APPNAME">%1$s</xliff:g> vol desar aquestes xarxes al teu telèfon"</string>
-    <string name="wifi_add_app_networks_summary" product="tablet" msgid="2088967184512169910">"<xliff:g id="APPNAME">%1$s</xliff:g> vol desar aquestes xarxes a la teva tauleta"</string>
     <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"S\'estan desant <xliff:g id="NUMBER">%d</xliff:g> xarxes…"</string>
     <string name="wifi_add_app_networks_saved_summary" msgid="1648417628665152905">"S\'han desat les xarxes"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"Trucades per Wi-Fi"</string>
@@ -1090,8 +897,6 @@
     <string name="accelerometer_title" msgid="7745991950833748909">"Gira la pantalla automàticament"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Activat: basat en cares"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Detecció facial"</string>
-    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Ajusta l\'orientació de la pantalla automàticament quan canvies entre el mode vertical i horitzontal al telèfon"</string>
-    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Ajusta l\'orientació de la pantalla automàticament quan canvies entre el mode vertical i horitzontal a la tauleta"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Més informació sobre el gir automàtic"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Quan canvies entre el mode vertical i horitzontal al telèfon"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Resolució de pantalla"</string>
@@ -1202,10 +1007,6 @@
     <string name="sim_lock_settings" msgid="4493069398250139205">"Configuració de bloqueig de SIM"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"Bloqueig de la targeta SIM"</string>
     <string name="sim_pin_toggle" msgid="98754920202404425">"Bloqueja la targeta SIM"</string>
-    <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"Sol·licita el PIN per utilitzar la tauleta"</string>
-    <string name="sim_lock_on" product="default" msgid="3303147192981388923">"Sol·licita el PIN per utilitzar el telèfon"</string>
-    <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"Sol·licita el PIN per utilitzar la tauleta"</string>
-    <string name="sim_lock_off" product="default" msgid="4634118006847137785">"Sol·licita el PIN per utilitzar el telèfon"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"Canvia el PIN de la SIM"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"PIN de la SIM"</string>
     <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Bloqueja la targeta SIM"</string>
@@ -1250,12 +1051,6 @@
     <string name="storage_settings_title" msgid="486118156723194815">"Configuració d\'emmagatzematge"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (ranura de la targeta SIM %1$d)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Selecciona una xarxa desada per veure-la"</string>
-    <string name="status_number" product="tablet" msgid="3597945414666253183">"MDN"</string>
-    <string name="status_number" product="default" msgid="8407999629121682207">"Número de telèfon"</string>
-    <string name="status_number_sim_slot" product="tablet" msgid="6582203988975619529">"MDN (ranura de la SIM %1$d)"</string>
-    <string name="status_number_sim_slot" product="default" msgid="5724823197745786398">"Telèfon (ranura SIM %1$d)"</string>
-    <string name="status_number_sim_status" product="tablet" msgid="4239876366511743428">"MDN de la SIM"</string>
-    <string name="status_number_sim_status" product="default" msgid="2772745542921910086">"Número de telèfon de la SIM"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Versió de PRL"</string>
@@ -1315,12 +1110,6 @@
     <string name="storage_wizard_move_progress_title" msgid="3912406225614672391">"S\'està desplaçant <xliff:g id="APP">^1</xliff:g>…"</string>
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"No extreguis <xliff:g id="NAME">^1</xliff:g> durant el desplaçament. \n\nL\'aplicació <xliff:g id="APP">^2</xliff:g> no estarà disponible en aquest dispositiu fins que el desplaçament no hagi finalitzat."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Com utilitzaràs aquest suport (<xliff:g id="NAME">^1</xliff:g>)?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formata la targeta SD com a emmagatzematge intern"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Emmagatzema aplicacions i contingut multimèdia per fer-los servir només en aquesta tauleta. &lt;a href=https://support.google.com/android/answer/12153449&gt;Més informació sobre com pots configurar una targeta SD&lt;/a&gt;."</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formata"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formata la targeta SD com a emmagatzematge intern"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Emmagatzema aplicacions i contingut multimèdia per fer-los servir només en aquest telèfon. &lt;a href=https://support.google.com/android/answer/12153449&gt;Més informació sobre com pots configurar una targeta SD&lt;/a&gt;."</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formata"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"O"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formata la targeta SD com a emmagatzematge portàtil"</string>
     <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Emmagatzema fotos, vídeos, música i més, i accedeix-hi des d\'altres dispositius. &lt;a href=https://support.google.com/android/answer/12153449&gt;Més informació sobre com pots configurar una targeta SD&lt;/a&gt;."</string>
@@ -1331,13 +1120,9 @@
     <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Cal formatar aquesta <xliff:g id="NAME_0">^1</xliff:g> per emmagatzemar-hi fotos, vídeos, música i més. \n\nEn formatar-la, s\'esborrarà el contingut existent a <xliff:g id="NAME_1">^2</xliff:g>. Per tal d\'evitar que es perdi contingut, fes-ne una còpia de seguretat en una altra <xliff:g id="NAME_2">^3</xliff:g> o en un altre dispositiu."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formata (<xliff:g id="NAME">^1</xliff:g>)"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Vols transferir el contingut (<xliff:g id="NAME">^1</xliff:g>)?"</string>
-    <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Pots transferir fitxers, contingut multimèdia i algunes aplicacions a aquest suport extern (<xliff:g id="NAME">^1</xliff:g>). \n\nEn fer-ho, s\'alliberarà espai d\'emmagatzematge de la tauleta (<xliff:g id="SIZE">^2</xliff:g>). Aquest procés trigarà <xliff:g id="DURATION">^3</xliff:g> aproximadament."</string>
-    <string name="storage_wizard_migrate_v2_body" product="default" msgid="809730501314645325">"Pots transferir fitxers, contingut multimèdia i algunes aplicacions a aquest suport extern (<xliff:g id="NAME">^1</xliff:g>). \n\nEn fer-ho, s\'alliberarà espai d\'emmagatzematge del telèfon (<xliff:g id="SIZE">^2</xliff:g>). Aquest procés trigarà <xliff:g id="DURATION">^3</xliff:g> aproximadament."</string>
     <string name="storage_wizard_migrate_v2_checklist" msgid="2618258869444553060">"Durant la transferència:"</string>
     <string name="storage_wizard_migrate_v2_checklist_media" msgid="5867134681730723744">"No extreguis el suport extern (<xliff:g id="NAME">^1</xliff:g>)"</string>
     <string name="storage_wizard_migrate_v2_checklist_apps" msgid="1882077445750580783">"Algunes aplicacions no funcionaran"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="tablet" msgid="6111770421449869539">"Mantén aquesta tauleta carregada"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="default" msgid="8826915870192535008">"Mantén aquest telèfon carregat"</string>
     <string name="storage_wizard_migrate_v2_now" msgid="3341460117088026966">"Mou el contingut"</string>
     <string name="storage_wizard_migrate_v2_later" msgid="6067756122853315642">"Mou el contingut més tard"</string>
     <string name="storage_wizard_migrate_progress_v2_title" msgid="8791318509516968103">"S\'està transferint el contingut…"</string>
@@ -1406,21 +1191,9 @@
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"No s\'han pogut esborrar les targetes SIM que has baixat a causa d\'un error.\n\nReinicia el dispositiu i torna-ho a provar."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Esborra totes les dades (restabliment de fàbrica)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Esborra totes les dades (restabliment dades fàbrica)"</string>
-    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"S\'esborraran totes les dades de l\'"<b>"emmagatzematge intern"</b>" de la tauleta, com ara:\n\n"<li>"El teu Compte de Google"</li>\n<li>"Les dades i la configuració del sistema i de les aplicacions"</li>\n<li>"Les aplicacions baixades"</li></string>
-    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"S\'esborraran totes les dades de l\'"<b>"emmagatzematge intern"</b>" del telèfon, com ara:\n\n"<li>"El teu Compte de Google"</li>\n<li>"Les dades i la configuració del sistema i de les aplicacions"</li>\n<li>"Les aplicacions baixades"</li></string>
-    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"Tens la sessió iniciada als comptes següents:\n"</string>
-    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"En aquest dispositiu hi ha altres usuaris.\n"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"La música"</li>\n<li>"Les fotos"</li>\n<li>"Altres dades de l\'usuari"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"No es cancel·larà el teu pla de servei mòbil."</string>
-    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"Si vols suprimir música, imatges i altres dades de l\'usuari, cal que esborris l\'"<b>"emmagatzematge USB"</b>"."</string>
-    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"Si vols suprimir música, imatges i altres dades de l\'usuari, cal que esborris la "<b>"targeta SD"</b>"."</string>
-    <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"Esborra l\'emmagatzematge USB"</string>
-    <string name="erase_external_storage" product="default" msgid="2610056855012660451">"Esborra la targeta SD"</string>
-    <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"Esborra totes les dades de l\'emmagatzematge USB intern, com ara música o fotos"</string>
-    <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"Esborra totes les dades de la targeta SD, com ara música o fotos"</string>
-    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"Esborra totes les dades"</string>
-    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"Esborra totes les dades"</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"Se suprimiran tota la teva informació personal i les aplicacions baixades. Aquesta acció no es pot desfer."</string>
     <string name="main_clear_final_desc_esim" msgid="440406836793824969">"Se suprimirà tota la teva informació personal, incloses les targetes SIM i les aplicacions que hagis baixat. Aquesta acció no es pot desfer."</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"Vols esborrar totes les dades?"</string>
@@ -1466,14 +1239,8 @@
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Comparteix Internet només per USB, Bluetooth i Ethernet"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Compartició de xarxa per USB"</string>
-    <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Comparteix la connexió a Internet del telèfon per USB"</string>
-    <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"Comparteix la connexió a Internet de la tauleta per USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Compartició de xarxa per Bluetooth"</string>
-    <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"Comparteix la connexió a Internet de la tauleta per Bluetooth"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Comparteix la connexió a Internet del telèfon per Bluetooth"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Compartició de xarxa per Ethernet"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Comparteix la connexió a Internet del telèfon per Ethernet"</string>
-    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"Comparteix la connexió a Internet de la tauleta per Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Utilitza el punt d\'accés Wi-Fi i la compartició de xarxa per proporcionar Internet a altres dispositius mitjançant la teva connexió de dades mòbils. Les aplicacions també poden crear un punt d\'accés Wi-Fi per compartir contingut amb els dispositius que es trobin a prop."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Utilitza el punt d\'accés Wi‑Fi i la compartició de xarxa per proporcionar Internet a altres dispositius amb la teva connexió Wi‑Fi o de dades mòbils. Les aplicacions també poden crear un punt d\'accés Wi‑Fi per compartir contingut amb els dispositius propers."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Ajuda"</string>
@@ -1521,10 +1288,6 @@
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"No s\'admet la detecció de la zona horària de la ubicació"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"No es permeten canvis en la detecció de la zona horària de la ubicació"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"Pot ser que la ubicació s\'utilitzi per definir la zona horària"</string>
-    <string name="about_settings" product="tablet" msgid="2888705054709289693">"Informació de la tauleta"</string>
-    <string name="about_settings" product="default" msgid="4038626127378127613">"Informació del telèfon"</string>
-    <string name="about_settings" product="device" msgid="9012888717090302815">"Informació del dispositiu"</string>
-    <string name="about_settings" product="emulator" msgid="2516560858771320366">"Sobre el dispositiu emulat"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Mostra informació legal, estat, versió de programari"</string>
     <string name="legal_information" msgid="7509900979811934843">"Informació legal"</string>
     <string name="manual" msgid="3651593989906084868">"Manual"</string>
@@ -1648,9 +1411,6 @@
     </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Contacta amb l\'administrador de TI"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Et poden ajudar a restablir el PIN, el patró o la contrasenya"</string>
-    <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"La tauleta i les dades personals són més vulnerables a atacs d\'aplicacions desconegudes. En instal·lar aplicacions d\'aquesta font, acceptes que ets responsable de qualsevol dany a la tauleta i qualsevol pèrdua de dades que es pugui produir per l\'ús d\'aquestes aplicacions."</string>
-    <string name="install_all_warning" product="default" msgid="652516435709047343">"El telèfon i les dades personals són més vulnerables a atacs d\'aplicacions desconegudes. En instal·lar aplicacions d\'aquesta font, acceptes que ets responsable de qualsevol dany al telèfon i qualsevol pèrdua de dades que es pugui produir per l\'ús d\'aquestes aplicacions."</string>
-    <string name="install_all_warning" product="device" msgid="2348262609815354500">"El dispositiu i les dades personals són més vulnerables a atacs d\'aplicacions desconegudes. En instal·lar aplicacions d\'aquesta font, acceptes que ets responsable de qualsevol dany al dispositiu i de qualsevol pèrdua de dades que es pugui produir per l\'ús d\'aquestes aplicacions."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Configuració avançada"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Activa més opcions de configuració"</string>
     <string name="application_info_label" msgid="1015706497694165866">"Informació de l\'aplicació"</string>
@@ -1778,8 +1538,6 @@
     <string name="process_service_in_use_description" msgid="4210957264507014878">"El servei <xliff:g id="COMP_NAME">%1$s</xliff:g> està en ús."</string>
     <string name="process_provider_in_use_description" msgid="6730020083976048028">"El proveïdor <xliff:g id="COMP_NAME">%1$s</xliff:g> està en ús."</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="6201041461740445113">"Vols aturar el servei del sistema?"</string>
-    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="2076922609580490122">"Si atures aquest servei, hi ha funcions de la tauleta que és possible que deixin de funcionar correctament fins que no l\'apaguis i la tornis a engegar."</string>
-    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="2625863973434309085">"Si atures aquest servei, és possible que hi hagi funcions del telèfon que deixin de funcionar correctament fins que no l\'apaguis i el tornis a engegar."</string>
     <string name="language_input_gesture_title" msgid="3292455685728572960">"Idiomes, introducció de text i gestos"</string>
     <string name="language_settings" msgid="8700174277543875046">"Idiomes i introducció de text"</string>
     <string name="languages_settings" msgid="5784775502251770671">"Idiomes"</string>
@@ -1848,8 +1606,6 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Per a tots els idiomes"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Més idiomes..."</string>
     <string name="testing" msgid="6294172343766732037">"Proves"</string>
-    <string name="testing_phone_info" product="tablet" msgid="1910768200608214456">"Informació de la tauleta"</string>
-    <string name="testing_phone_info" product="default" msgid="1150527695827743906">"Informació del telèfon"</string>
     <string name="keyboard_settings_summary" msgid="2716339620942356432">"Teclat en pantalla, parla, eines"</string>
     <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Teclat en pantalla, teclat físic, parla, eines"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Teclat físic"</string>
@@ -1926,8 +1682,6 @@
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Restableix la configuració"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"S\'han restablert la mida de visualització i la configuració del text"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Vols restablir la mida de la pantalla i el text?"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Es restablirà la configuració original del telèfon pel que fa a les preferències de text i mida de la pantalla"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"Es restablirà la configuració original de la tauleta pel que fa a les preferències de text i mida de la pantalla"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Restableix"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Tens algun pla aquest cap de setmana?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Aniré a la platja. Vols venir?"</string>
@@ -2069,8 +1823,6 @@
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"El mode d\'una mà s\'ha afegit a la configuració ràpida. Llisca cap avall per activar-la o desactivar-la en qualsevol moment."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"També pots afegir el mode d\'una mà a la configuració ràpida des de la part superior de la pantalla"</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Ignora"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"Ajusta com es mostren els colors al telèfon"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"Ajusta com es mostren els colors a la tauleta"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Utilitza la correcció de color"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Drecera a Correcció de color"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Sobre la correcció de color"</string>
@@ -2120,11 +1872,7 @@
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Atenuació extra de la pantalla"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Drecera a Atenuació extra"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Sobre l\'atenuació extra"</string>
-    <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Atenua la pantalla més del que permet la brillantor mínima del telèfon"</string>
-    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Atenua la pantalla per sota de la brillantor mínima de la tauleta"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Atenua la pantalla per llegir més còmodament"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"L\'atenuació extra pot ser útil quan: &lt;ol&gt; &lt;li&gt; La brillantor mínima predeterminada del telèfon encara és massa clara.&lt;/li&gt; &lt;li&gt; Utilitzes el telèfon en situacions de poca llum, com ara a la nit o en una habitació fosca abans d\'anar a dormir.&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5158211121482010799">"L\'atenuació extra pot ser útil quan: &lt;ol&gt; &lt;li&gt; La brillantor mínima predeterminada de la tauleta encara és massa clara.&lt;/li&gt; &lt;li&gt; Utilitzes la tauleta en situacions de poca llum, com ara a la nit o en una habitació fosca abans d\'anar a dormir.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensitat"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Més tènue"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Més brillant"</string>
@@ -2284,9 +2032,6 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Redueix el consum de la bateria"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Paquets inclosos"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Les aplicacions funcionen correctament"</string>
-    <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"El telèfon té un ús normal de la bateria en segon pla"</string>
-    <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"La tauleta té un ús normal de la bateria en segon pla"</string>
-    <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"El dispositiu té un ús normal de la bateria en segon pla"</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Nivell de bateria baix"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Activa Estalvi de bateria per allargar la durada de la bateria"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Millora la durada de la bateria"</string>
@@ -2304,11 +2049,6 @@
     <skip />
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Més informació sobre la càrrega en pausa"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Reprèn la càrrega"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"En determinades condicions, com ara altes temperatures i llargs períodes de càrrega, pot ser que la càrrega de la bateria es limiti al <xliff:g id="PERCENT">%1$s</xliff:g> per mantenir el bon estat de la bateria.\n\nQuan finalitzin aquestes condicions, el telèfon tornarà a carregar-se de manera normal automàticament."</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"En determinades condicions, com ara altes temperatures i llargs períodes de càrrega, pot ser que la càrrega de la bateria es limiti al <xliff:g id="PERCENT">%1$s</xliff:g> per mantenir el bon estat de la bateria.\n\nQuan finalitzin aquestes condicions, la tauleta tornarà a carregar-se de manera normal automàticament."</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Com que has utilitzat el telèfon més de l\'habitual, és possible que la bateria s\'esgoti abans del normal.\n\nAquestes són les aplicacions que consumeixen més bateria:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Com que has utilitzat la tauleta més de l\'habitual, és possible que la bateria s\'esgoti abans del normal.\n\nAquestes són les aplicacions que consumeixen més bateria:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Com que has utilitzat el dispositiu més de l\'habitual, és possible que la bateria s\'esgoti abans del normal.\n\nAquestes són les aplicacions que consumeixen més bateria:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Inclou l\'activitat en segon pla que consumeix molta bateria"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="other">Restringeix %1$d aplicacions</item>
@@ -2339,12 +2079,8 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Suprimeix"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Cancel·la"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Carrega completament"</string>
-    <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Les teves aplicacions utilitzen una quantitat normal de bateria. Si n\'utilitzen massa, el telèfon et suggerirà mesures per evitar-ho.\n\nSi tens poca bateria, sempre pots activar l\'estalvi de bateria."</string>
-    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Les teves aplicacions utilitzen una quantitat normal de bateria. Si n\'utilitzen massa, la tauleta et suggerirà mesures per evitar-ho.\n\nSi tens poca bateria, sempre pots activar l\'estalvi de bateria."</string>
-    <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Les teves aplicacions utilitzen una quantitat normal de bateria. Si n\'utilitzen massa, el dispositiu et suggerirà mesures per evitar-ho.\n\nSi tens poca bateria, sempre pots activar l\'estalvi de bateria."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Gestor de bateria"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Gestiona les aplicacions automàticament"</string>
-    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Limita l\'ús de bateria de les aplicacions que no utilitzes habitualment"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"Quan el gestor de bateria detecta que hi ha aplicacions que estan exhaurint la bateria, t\'ofereix l\'opció de restringir-les. És possible que les aplicacions restringides no funcionin de la manera prevista i que les notificacions arribin amb retard."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Aplicacions restringides"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
@@ -2372,8 +2108,6 @@
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
     <string name="power_cell" msgid="7793805106954398186">"Xarxa mòbil"</string>
     <string name="power_phone" msgid="2768396619208561670">"Trucades de veu"</string>
-    <string name="power_idle" product="tablet" msgid="4689321599298911021">"Tauleta inactiva"</string>
-    <string name="power_idle" product="default" msgid="9132502722499465252">"Telèfon inactiu"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"En ús durant <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"Ús de la pantalla: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="PERCENT">%1$s</xliff:g> utilitzat per <xliff:g id="APP">%2$s</xliff:g>"</string>
@@ -2424,9 +2158,6 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Defineix una programació"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Allarga la durada de la bateria"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desactiva quan estigui carregada"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="3618041244703216293">"Estalvi de bateria es desactiva quan el telèfon té més d\'un <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> de bateria"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="1733686775743601110">"Estalvi de bateria es desactiva quan la tauleta té més d\'un <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> de bateria"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="7449283917787428755">"Estalvi de bateria es desactiva quan el dispositiu té més d\'un <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> de bateria"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Activa"</string>
@@ -2448,9 +2179,6 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"En segon pla: menys d\'un minut"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Total: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"En segon pla: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Les dades d\'ús de la bateria són aproximades i no es mesuren mentre el telèfon s\'està carregant."</string>
-    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"Les dades d\'ús de la bateria són aproximades i no es mesuren mentre la tauleta s\'està carregant"</string>
-    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"Les dades d\'ús de la bateria són aproximades i no es mesuren mentre el dispositiu s\'està carregant"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Les dades d\'ús de la bateria estaran disponibles d\'aquí a unes quantes hores un cop s\'hagi carregat del tot"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Gràfic de l\'ús de la bateria"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Gràfic de l\'ús diari de la bateria"</string>
@@ -2520,8 +2248,6 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Allarga la durada de la bateria i millora el rendiment del dispositiu gestionant automàticament les connexions a la xarxa"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Emmagatzematge de credencials"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Instal·la un certificat"</string>
-    <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Instal·la els certificats des de l\'emmagatzematge"</string>
-    <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"Instal·la els certificats des de la targeta SD"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Esborra les credencials"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"Esborra tots els certificats"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"Certificats de confiança"</string>
@@ -2647,9 +2373,6 @@
     <string name="remove_account_label" msgid="4169490568375358010">"Suprimeix el compte"</string>
     <string name="header_add_an_account" msgid="3919151542338822661">"Afegeix un compte"</string>
     <string name="really_remove_account_title" msgid="253097435885652310">"Vols suprimir el compte?"</string>
-    <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"Si elimines aquest compte, se\'n suprimiran tots els missatges, els contactes i les altres dades de la tauleta."</string>
-    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"Si suprimeixes aquest compte, se\'n suprimiran tots els missatges, els contactes i altres dades del telèfon."</string>
-    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"Si suprimeixes aquest compte, se\'n suprimiran tots els missatges, els contactes i altres dades del dispositiu."</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"L\'administrador no permet aquest canvi"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"No es pot sincronitzar manualment"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"En aquest moment, la sincronització d\'aquest element no està disponible. Per canviar la preferència, activa temporalment les dades en segon pla i la sincronització automàtica."</string>
@@ -2691,8 +2414,6 @@
     <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"Aquesta funció pot provocar que una aplicació que depengui de les dades en segon pla deixi de funcionar quan hi hagi només xarxes mòbils disponibles.\n\nPots trobar més controls d\'ús de dades adequats a la configuració disponible a l\'aplicació."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="8599940395497268584">"Només pots restringir les dades en segon pla si has establert un límit de dades mòbils."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"Activar sincronització automàtica?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="6387714350903085918">"Els canvis que facis als comptes des del web es reflectiran automàticament a la tauleta.\n\nAlguns comptes, com ara els comptes de Google, també reflectiran al web els canvis que hagis fet a la tauleta."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="6457107552266187107">"Els canvis que facis als comptes des del web es reflectiran automàticament al telèfon.\n\nÉs possible que alguns comptes també reflecteixin al web els canvis que hagis fet al telèfon. Així funcionen els comptes de Google."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"Desactivar sincronització automàtica?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"Et permetrà estalviar dades i bateria, però hauràs de sincronitzar cada compte manualment per obtenir la informació recent i no rebràs notificacions quan hi hagi actualitzacions."</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"Data de restabliment del cicle d\'ús"</string>
@@ -2701,8 +2422,6 @@
     <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"Estableix un advertiment d\'ús de dades"</string>
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"Estableix un límit d\'ús de dades"</string>
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"Limitació de l\'ús de dades"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"Es desactivaran les dades mòbils de la tauleta quan s\'arribi al límit que has definit.\n\nCom que la tauleta mesura l\'ús de dades i és possible que l\'operador de telefonia mòbil en faci un recompte diferent, et recomanem que defineixis un límit prudent."</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"Es desactivaran les dades mòbils del telèfon quan s\'arribi al límit que has establert.\n\nCom que el telèfon mesura l\'ús de dades i és possible que l\'operador de telefonia mòbil en faci un recompte diferent, et recomanem que estableixis un límit prudent."</string>
     <string name="data_usage_sweep_warning" msgid="2072854703184614828"><font size="18">" <xliff:g id="NUMBER">^1</xliff:g> "</font>" "<font size="9">" <xliff:g id="UNIT">^2</xliff:g> "</font>" \n "<font size="12">"avís"</font></string>
     <string name="data_usage_sweep_limit" msgid="6947019190890086284"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"límit"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="9065885396147675694">"Aplicacions eliminades"</string>
@@ -2814,9 +2533,6 @@
       <item quantity="one">Comprova el certificat</item>
     </plurals>
     <string name="user_settings_title" msgid="6550866465409807877">"Diversos usuaris"</string>
-    <string name="user_settings_footer_text" product="device" msgid="7523914344521302179">"Comparteix el dispositiu afegint usuaris nous. Cada usuari té un espai personal al dispositiu en què es poden personalitzar les pantalles d\'inici, els comptes, les aplicacions, la configuració i moltes altres coses."</string>
-    <string name="user_settings_footer_text" product="tablet" msgid="3730074318510244552">"Comparteix la tauleta afegint usuaris nous. Cada usuari té un espai personal a la tauleta en què es poden personalitzar les pantalles d\'inici, els comptes, les aplicacions, la configuració i moltes altres coses."</string>
-    <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"Comparteix el telèfon afegint usuaris nous. Cada usuari té un espai personal al teu telèfon per personalitzar les pantalles d\'inici, els comptes, les aplicacions, la configuració i moltes altres coses."</string>
     <string name="user_list_title" msgid="1387379079186123404">"Usuaris i perfils"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Afegeix un usuari o un perfil"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Perfil restringit"</string>
@@ -2826,8 +2542,6 @@
     <string name="user_admin" msgid="4024553191395768119">"Administrador"</string>
     <string name="user_you" msgid="3070562015202859996">"Tu (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"No pots afegir cap altre usuari. Suprimeix un usuari per afegir-ne un."</string>
-    <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"Només el propietari de la tauleta pot gestionar els usuaris."</string>
-    <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"Només el propietari del telèfon pot gestionar els usuaris."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Els perfils restringits no poden afegir comptes."</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Suprimeix <xliff:g id="USER_NAME">%1$s</xliff:g> del dispositiu"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Configuració de la pantalla de bloqueig"</string>
@@ -2837,8 +2551,6 @@
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Vols suprimir l\'usuari?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Vols suprimir el perfil?"</string>
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Vols suprimir el perfil de treball?"</string>
-    <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"Perdràs l\'espai i les dades de la tauleta. No pots desfer aquesta acció."</string>
-    <string name="user_confirm_remove_self_message" product="default" msgid="5991495192044543230">"Perdràs l\'espai i les dades del telèfon. No pots desfer aquesta acció."</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"Se suprimiran totes les dades i totes les aplicacions."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"Si continues, se suprimiran totes les aplicacions i les dades d\'aquest perfil."</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"Se suprimiran totes les dades i totes les aplicacions."</string>
@@ -2903,9 +2615,6 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"Suprimeix restriccions"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Canvia el PIN"</string>
     <string name="help_label" msgid="2896538416436125883">"Ajuda i suggeriments"</string>
-    <string name="support_summary" product="default" msgid="6137136608018134563">"Articles d\'ajuda, telèfon i xat"</string>
-    <string name="support_summary" product="tablet" msgid="6681247727996378252">"Articles d\'ajuda, tauleta i xat"</string>
-    <string name="support_summary" product="device" msgid="1690554254039752541">"Articles d\'ajuda, dispositiu i xat"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Compte per al contingut"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Identificador de la foto"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Amenaces extremes"</string>
@@ -4089,9 +3798,6 @@
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navegació amb botons"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navegació amb gestos, sensibilitat gest cap enrere, gest cap enrere"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navegació, botó d\'inici"</string>
-    <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Doble toc per consultar el telèfon"</string>
-    <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Doble toc per consultar la tauleta"</string>
-    <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Doble toc per consultar el dispositiu"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Mode d\'una mà"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Utilitza el mode d\'una mà"</string>
     <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Drecera del mode d\'una mà"</string>
@@ -4105,16 +3811,7 @@
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Mostrar les notificacions"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"Es mostraran notificacions i opcions de configuració."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Per veure l\'hora, les notificacions i altres dades, fes doble toc a la pantalla."</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Aixeca per consultar el telèfon"</string>
-    <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Aixeca per consultar la tauleta"</string>
-    <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"Aixeca per consultar el dispositiu"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"Activa la pantalla"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"Per veure l\'hora, les notificacions i altres dades, agafa el telèfon."</string>
-    <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"Per veure l\'hora, les notificacions i altres dades, agafa la tauleta."</string>
-    <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"Per veure l\'hora, les notificacions i altres dades, agafa el dispositiu."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Toca per consultar el telèfon"</string>
-    <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Toca per consultar la tauleta"</string>
-    <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Toca per consultar el dispositiu"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Per veure l\'hora, les notificacions i altres dades, toca la pantalla."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Emergència SOS"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Utilitza Emergència SOS"</string>
@@ -4128,9 +3825,6 @@
     <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Si introdueixes un número que no és d\'emergència:\n • El dispositiu ha d\'estar desbloquejat per utilitzar Emergència SOS.\n • És possible que no es respongui a la trucada."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Fes lliscar l\'empremta digital per veure notificacions"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Fes lliscar l\'empremta"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Per consultar les notificacions, llisca cap avall al sensor d\'empremtes digitals situat a la part posterior del telèfon."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"Per consultar les notificacions, llisca cap avall al sensor d\'empremtes digitals situat a la part posterior de la tauleta."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3888927017311372398">"Per consultar les notificacions, llisca cap avall al sensor d\'empremtes digitals situat a la part posterior del dispositiu."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"Consulta les notificacions més de pressa"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="65713754674288193">"El bootloader ja està desbloquejat"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="7425519481227423860">"Connecta\'t a Internet o contacta amb l\'operador de telefonia"</string>
@@ -4617,9 +4311,6 @@
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Vols desactivar VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"També es desactivarà la connexió 5G.\nDurant una trucada de veu, no podràs utilitzar Internet i és possible que algunes aplicacions no funcionin."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"Quan s\'utilitzen 2 SIM, la connexió del telèfon es limita a 4G. "<annotation id="url">"Més informació"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Quan s\'utilitzen 2 SIM, la connexió de la tauleta es limita a 4G. "<annotation id="url">"Més informació"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Quan s\'utilitzen 2 SIM, la connexió del dispositiu es limita a 4G. "<annotation id="url">"Més informació"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspèn l\'execució d\'aplicacions en la memòria cau"</string>
     <string name="blob_never_expires_text" msgid="7293376386620106623">"No caduca mai."</string>
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"La concessió no caduca mai."</string>
@@ -4654,8 +4345,6 @@
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"Preferències de xarxa"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"connexió a la xarxa, internet, sense fil, dades, wifi, wi‑fi, wi fi, mòbils, mòbil, operador de telefonia mòbil, 4g, 3g, 2g, lte"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Vols restablir la connexió a Internet?"</string>
-    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Aquesta acció finalitzarà la trucada"</string>
-    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Aquesta acció finalitzarà la trucada"</string>
     <string name="resetting_internet_text" msgid="6696779371800051806">"S\'està restablint la connexió a Internet…"</string>
     <string name="fix_connectivity" msgid="2781433603228089501">"Corregeix la connectivitat"</string>
     <string name="networks_available" msgid="3299512933684383474">"Xarxes disponibles"</string>

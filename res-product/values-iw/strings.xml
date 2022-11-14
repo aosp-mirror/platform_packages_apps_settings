@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="bluetooth_disconnect_all_profiles" product="default" msgid="1934297101665686854">"הטלפון שלך יתנתק מהמכשיר <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_disconnect_all_profiles" product="tablet" msgid="336622948210457991">"הטאבלט שלך יתנתק מהמכשיר <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"המכשיר שלך יתנתק מהמכשיר <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"‏כתובת הטלפון לחיבור דרך Bluetooth: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"‏כתובת הטאבלט לחיבור דרך Bluetooth: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_footer_mac_message" product="device" msgid="2863536947810007600">"‏כתובת המכשיר לחיבור דרך Bluetooth‏: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="1273405567801929487">"‏<xliff:g id="APP_NAME">%1$s</xliff:g> רוצה להפוך את הטאבלט שלך לגלוי בפני מכשירי Bluetooth אחרים למשך <xliff:g id="TIMEOUT">%2$d</xliff:g> שניות."</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="7013223328571883275">"‏<xliff:g id="APP_NAME">%1$s</xliff:g> רוצה להפוך את הטלפון שלך לגלוי בפני מכשירי Bluetooth אחרים למשך <xliff:g id="TIMEOUT">%2$d</xliff:g> שניות."</string>
+    <string name="bluetooth_ask_discovery_no_name" product="tablet" msgid="3266007454914144057">"‏אפליקציה מסוימת רוצה להפוך את הטאבלט שלך לגלוי בפני מכשירי Bluetooth אחרים למשך <xliff:g id="TIMEOUT">%1$d</xliff:g> שניות."</string>
+    <string name="bluetooth_ask_discovery_no_name" product="default" msgid="7989444746980501116">"‏אפליקציה מסוימת רוצה להפוך את הטלפון שלך לגלוי בפני מכשירי Bluetooth אחרים למשך <xliff:g id="TIMEOUT">%1$d</xliff:g> שניות."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="6482084870735107773">"‏<xliff:g id="APP_NAME">%1$s</xliff:g> רוצה להפוך את הטאבלט שלך לגלוי בפני מכשירי Bluetooth אחרים. ניתן לשנות זאת מאוחר יותר בהגדרות ה-Bluetooth."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="2352494279465502950">"‏<xliff:g id="APP_NAME">%1$s</xliff:g> רוצה להפוך את הטלפון שלך לגלוי בפני מכשירי Bluetooth אחרים. ניתן לשנות זאת מאוחר יותר בהגדרות ה-Bluetooth."</string>
+    <string name="bluetooth_ask_lasting_discovery_no_name" product="tablet" msgid="2732992604509910896">"‏אפליקציה מסוימת רוצה להפוך את הטאבלט שלך לגלוי בפני מכשירי Bluetooth אחרים. ניתן לשנות זאת מאוחר יותר בהגדרות ה-Bluetooth"</string>
+    <string name="bluetooth_ask_lasting_discovery_no_name" product="default" msgid="356982103612920264">"‏אפליקציה מסוימת רוצה להפוך את הטלפון שלך לגלוי בפני מכשירי Bluetooth אחרים. ניתן לשנות זאת מאוחר יותר בהגדרות ה-Bluetooth"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="6103655179509599427">"‏<xliff:g id="APP_NAME">%1$s</xliff:g> מבקשת להפעיל את ה-Bluetooth ולהפוך את הטאבלט שלך לגלוי בפני מכשירים אחרים למשך <xliff:g id="TIMEOUT">%2$d</xliff:g> שניות."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="934276632311449337">"‏<xliff:g id="APP_NAME">%1$s</xliff:g> מבקשת להפעיל את ה-Bluetooth ולהפוך את הטלפון שלך לגלוי בפני מכשירים אחרים למשך <xliff:g id="TIMEOUT">%2$d</xliff:g> שניות."</string>
+    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="tablet" msgid="1284048348024444485">"‏אפליקציה מסוימת רוצה להפעיל את ה-Bluetooth ולהפוך את הטאבלט שלך לגלוי בפני מכשירים אחרים למשך <xliff:g id="TIMEOUT">%1$d</xliff:g> שניות."</string>
+    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="default" msgid="2661614145022629454">"‏אפליקציה מסוימת רוצה להפעיל את ה-Bluetooth ולהפוך את הטלפון שלך לגלוי בפני מכשירים אחרים למשך <xliff:g id="TIMEOUT">%1$d</xliff:g> שניות."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="8588317955400593623">"‏<xliff:g id="APP_NAME">%1$s</xliff:g> רוצה להפעיל את ה-Bluetooth ולהפוך את הטאבלט שלך לגלוי בפני מכשירים אחרים. ניתן לשנות זאת מאוחר יותר בהגדרות ה-Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="4047444317445386579">"‏<xliff:g id="APP_NAME">%1$s</xliff:g> רוצה להפעיל את ה-Bluetooth ולהפוך את הטלפון שלך לגלוי בפני מכשירים אחרים. ניתן לשנות זאת מאוחר יותר בהגדרות ה-Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="tablet" msgid="4922952478824372605">"‏אפליקציה מסוימת רוצה להפעיל את ה-Bluetooth ולהפוך את הטאבלט שלך לגלוי בפני מכשירים אחרים. ניתן לשנות זאת מאוחר יותר בהגדרות ה-Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="default" msgid="1381582950049639439">"‏אפליקציה מסוימת רוצה להפעיל את ה-Bluetooth ולהפוך את הטלפון שלך לגלוי בפני מכשירים אחרים. ניתן לשנות זאת מאוחר יותר בהגדרות ה-Bluetooth."</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"טלפון מוצפן"</string>
+    <string name="not_encrypted_summary" product="default" msgid="2251945842585788254">"הטלפון לא מוצפן"</string>
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"המכשיר מוצפן"</string>
+    <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"המכשיר לא מוצפן"</string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"ניתן להשתמש בזיהוי פנים כדי לפתוח את הטלפון, לאשר רכישות או להיכנס אל אפליקציות."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"ניתן להשתמש באימות פנים כדי לבטל את נעילת הטאבלט, לאשר רכישות או להיכנס אל אפליקציות."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"ניתן להשתמש באימות פנים כדי לבטל את נעילת המכשיר, לאשר רכישות או להיכנס אל אפליקציות."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"הרשאה לילד או לילדה להשתמש בזיהוי פנים כדי לבטל את הנעילה של הטלפון"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"הרשאה לילד או לילדה להשתמש בזיהוי פנים כדי לבטל את הנעילה של הטאבלט"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"הרשאה לילד או לילדה להשתמש בזיהוי פנים כדי לבטל את הנעילה של המכשיר"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"ביטול הנעילה של הטלפון באמצעות זיהוי הפנים של הילדים עלול להיות פחות בטוח משימוש בקו ביטול נעילה או בקוד אימות חזקים."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"ביטול הנעילה של הטאבלט באמצעות זיהוי הפנים של הילדים עלול להיות פחות בטוח משימוש בקו ביטול נעילה או בקוד אימות חזקים."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"ביטול הנעילה של המכשיר באמצעות זיהוי הפנים של הילדים עלול להיות פחות בטוח משימוש בקו ביטול נעילה או בקוד אימות חזקים."</string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"אפשר להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטאבלט או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות או באישור רכישה."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"אפשר להשתמש בטביעת האצבע כדי לבטל את נעילת המכשיר או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות או באישור רכישה."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"אפשר להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטלפון או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות או באישור רכישה."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"הרשאה לילד או לילדה להשתמש בטביעת אצבע כדי לבטל את הנעילה של הטלפון או לאמת את זהותם. הפעולה נדרשת בכניסה לאפליקציות, אישור רכישה ועוד."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"הרשאה לילד או לילדה להשתמש בטביעת אצבע כדי לבטל את הנעילה של הטאבלט או לאמת את זהותם. הפעולה נדרשת בכניסה לאפליקציות, לאישור רכישה ועוד."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"הרשאה לילד או לילדה להשתמש בטביעת אצבע כדי לבטל את הנעילה של המכשיר או לאמת את זהותם. הפעולה נדרשת בכניסה לאפליקציות, לאישור רכישה ועוד."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"ייתכן שביטול הנעילה על ידי שימוש בטביעת אצבע היא שיטה פחות בטוחה מקו ביטול נעילה או מקוד אימות חזקים"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"יכול להיות שביטול הנעילה של הטאבלט בטביעת אצבע היא שיטה פחות בטוחה מקו ביטול נעילה או מקוד אימות חזקים"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"יכול להיות שביטול הנעילה של המכשיר בטביעת אצבע היא שיטה פחות בטוחה מקו ביטול נעילה או מקוד אימות חזקים"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"‏כשמשתמשים ב-Pixel Imprint, נעשה שימוש בתמונות כדי לעדכן את התבנית של טביעת האצבע. התמונות שמשמשות ליצירת התבנית של טביעת האצבע לא נשמרות. התבנית של טביעת האצבע נשמרת בצורה מאובטחת בטלפון שלך ואף פעם לא נשלחת או מועברת ממנו. כל פעולות העיבוד מתבצעות בטלפון באופן מאובטח."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"‏כשמשתמשים ב-Pixel Imprint נעשה שימוש בתמונות כדי לעדכן את התבנית של טביעת האצבע. התמונות שמשמשות ליצירת התבנית של טביעת האצבע אף פעם לא נשמרות, אבל התבנית של טביעת האצבע נשמרת באופן מאובטח בטאבלט שלך ואף פעם לא נשלחת או מועברת ממנו. כל פעולות העיבוד מתבצעות בטאבלט באופן מאובטח."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"‏כשמשתמשים ב-Pixel Imprint נעשה שימוש בתמונות כדי לעדכן את התבנית של טביעת האצבע. התמונות שמשמשות ליצירת התבנית של טביעת האצבע אף פעם לא נשמרות, אבל התבנית של טביעת האצבע נשמרת באופן מאובטח במכשיר שלך ואף פעם לא נשלחת או מועברת ממנו. כל פעולות העיבוד מתבצעות במכשיר באופן מאובטח."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"‏בשימוש ב-Pixel Imprint, נעשה שימוש בתמונות כדי לעדכן את התבנית של טביעת האצבע שלהם. התמונות המשמשות ליצירת התבנית של טביעת האצבע של הילד או הילדה אף פעם לא נשמרות. התבנית של טביעת האצבע נשמרת באופן מאובטח בטלפון ואף פעם לא נשלחת או מועברת ממנו. כל פעולות העיבוד מתבצעות בטלפון באופן מאובטח."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"‏כשמשתמשים ב-Pixel Imprint נעשה שימוש בתמונות כדי לעדכן את התבנית של טביעת האצבע. התמונות המשמשות ליצירת התבנית של טביעת האצבע של הילד או הילדה אף פעם לא נשמרות. התבנית של טביעת האצבע נשמרת באופן מאובטח בטאבלט ואף פעם לא נשלחת או מועברת ממנו. כל פעולות העיבוד מתבצעות בטאבלט באופן מאובטח."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"‏כשמשתמשים ב-Pixel Imprint נעשה שימוש בתמונות כדי לעדכן את התבנית של טביעת האצבע. התמונות המשמשות ליצירת התבנית של טביעת האצבע של הילד או הילדה אף פעם לא נשמרות. התבנית של טביעת האצבע נשמרת באופן מאובטח במכשיר ואף פעם לא נשלחת או מועברת ממנו. כל פעולות העיבוד מתבצעות במכשיר באופן מאובטח."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"בכל שלב אפשר למחוק את התבנית ואת התמונות של טביעת האצבע, או להשבית את התכונה \'ביטול הנעילה בטביעת אצבע\', דרך ה\'הגדרות\'. התמונות והתבניות של טביעת האצבע מאוחסנות בטלפון עד שהן נמחקות."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"בכל שלב אפשר להיכנס להגדרות ולמחוק את התבנית ואת התמונות של טביעת האצבע, או להשבית את \'ביטול הנעילה בטביעת אצבע\'. התמונות והתבניות של טביעת האצבע נשמרות בטאבלט עד שהן נמחקות."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"בכל שלב אפשר להיכנס להגדרות ולמחוק את התבנית ואת התמונות של טביעת האצבע, או להשבית את \'ביטול הנעילה בטביעת אצבע\'. התמונות והתבניות של טביעת האצבע נשמרות במכשיר עד שהן נמחקות."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"האפשרות למחוק את התמונות והתבנית של טביעת האצבע, או להשבית את הפיצ\'ר \'ביטול הנעילה בטביעת אצבע\', זמינה לך ולילד או לילדה שלך בכל שלב בהגדרות. התמונות והתבניות של טביעת האצבע נשמרות בטלפון עד שהן נמחקות."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"לך ולילד או לילדה שלך יש אפשרות להיכנס בכל שלב להגדרות ולמחוק את התמונות והתבנית של טביעת האצבע, או להשבית את התכונה \'ביטול הנעילה בטביעת אצבע\'. התמונות והתבניות של טביעת האצבע נשמרות בטאבלט עד שהן נמחקות."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"לך ולילד או לילדה שלך יש אפשרות להיכנס בכל שלב להגדרות ולמחוק את התמונות והתבנית של טביעת האצבע, או להשבית את התכונה \'ביטול הנעילה בטביעת אצבע\'. התמונות והתבניות של טביעת האצבע נשמרות במכשיר עד שהן נמחקות."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"נעילת הטלפון עלולה להתבטל בלי כוונה, למשל כשמישהו מחזיק אותו בצמוד לאצבע שלך."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"נעילת הטאבלט עלולה להתבטל בלי כוונה, למשל כשמישהו מחזיק אותו בצמוד לאצבע שלך."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"נעילת המכשיר עלולה להתבטל בלי כוונה, למשל כשמישהו מחזיק אותו בצמוד לאצבע שלך."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"נעילת הטלפון של הילד או הילדה עשויה להתבטל ללא כוונה, למשל במקרה שמישהו יצמיד את הטלפון לאצבע שלהם."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"נעילת הטאבלט של הילד או הילדה עשויה להתבטל ללא כוונה, למשל במקרה שמישהו יצמיד את הטאבלט לאצבע שלהם."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"נעילת המכשיר של הילד או הילדה עשויה להתבטל ללא כוונה, למשל במקרה שמישהו יצמיד את המכשיר לאצבע שלהם."</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"אפשר להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטאבלט או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"אפשר להשתמש בטביעת האצבע כדי לבטל את נעילת המכשיר או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"אפשר להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטלפון או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"צריך להחזיר את הטאבלט לאחד ההורים"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"צריך להחזיר את המכשיר לאחד ההורים"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"צריך להחזיר את הטלפון לאחד ההורים"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"תכונות ההגנה על המכשיר לא יופעלו. לא תהיה לך אפשרות למנוע מאנשים אחרים להשתמש בטאבלט אם הוא יאבד, ייגנב או יאופס."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"תכונות ההגנה על המכשיר לא יופעלו. לא תהיה לך אפשרות למנוע מאנשים אחרים להשתמש במכשיר אם הוא יאבד, ייגנב או יאופס."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2412426429887900241">"תכונות ההגנה על המכשיר לא יופעלו. לא תהיה לך אפשרות למנוע מאנשים אחרים להשתמש בטלפון אם הוא יאבד, ייגנב או יאופס."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="7119039592587429936">"תכונות ההגנה על המכשיר לא יופעלו. לא תהיה לך אפשרות למנוע מאנשים אחרים להשתמש בטאבלט אם הוא יאבד או ייגנב."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3365990364131398523">"תכונות ההגנה על המכשיר לא יופעלו. לא תהיה לך אפשרות למנוע מאנשים אחרים להשתמש במכשיר אם הוא יאבד או ייגנב."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="4908278819257287536">"תכונות ההגנה על המכשיר לא יופעלו. לא תהיה לך אפשרות למנוע מאנשים אחרים להשתמש בטלפון אם הוא יאבד או ייגנב."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"חיישן טביעת האצבע נמצא על לחצן ההפעלה. זה הלחצן השטוח ליד הלחצן הבולט של עוצמת הקול בפינת הטאבלט.\n\nלחיצה על לחצן ההפעלה מכבה את המסך."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"חיישן טביעת האצבע נמצא על לחצן ההפעלה. זה הלחצן השטוח ליד הלחצן הבולט של עוצמת הקול בפינת המכשיר.\n\nלחיצה על לחצן ההפעלה מכבה את המסך."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"חיישן טביעת האצבע נמצא על לחצן ההפעלה. זה הלחצן השטוח ליד הלחצן הבולט של עוצמת הקול בפינת הטלפון.\n\nלחיצה על לחצן ההפעלה מכבה את המסך."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"עכשיו אפשר להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטאבלט או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"עכשיו אפשר להשתמש בטביעת האצבע כדי לבטל את נעילת המכשיר או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"עכשיו אפשר להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטלפון או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות"</string>
+    <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"קוד האימות מגן על הטאבלט במקרים של אובדן או גניבה"</string>
+    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="4359575348578515037">"קו ביטול הנעילה מגן על הטאבלט במקרים של אובדן או גניבה"</string>
+    <string name="lock_screen_password_skip_message" product="tablet" msgid="5420451292764062637">"הסיסמה מגינה על הטאבלט במקרים של אובדן או גניבה"</string>
+    <string name="lock_screen_pin_skip_message" product="device" msgid="8841426051550671169">"קוד האימות מגן על המכשיר במקרים של אובדן או גניבה"</string>
+    <string name="lock_screen_pattern_skip_message" product="device" msgid="6296702954920045923">"קו ביטול הנעילה מגן על המכשיר במקרים של אובדן או גניבה"</string>
+    <string name="lock_screen_password_skip_message" product="device" msgid="9186075211441188900">"הסיסמה מגינה על המכשיר במקרים של אובדן או גניבה"</string>
+    <string name="lock_screen_pin_skip_message" product="default" msgid="4301690296689572747">"קוד האימות מגן על הטלפון במקרים של אובדן או גניבה"</string>
+    <string name="lock_screen_pattern_skip_message" product="default" msgid="7387967847446084260">"קו ביטול הנעילה מגן על הטלפון במקרים של אובדן או גניבה"</string>
+    <string name="lock_screen_password_skip_message" product="default" msgid="6415788841227543063">"הסיסמה מגינה על הטלפון במקרים של אובדן או גניבה"</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="2350062798056164403">"כדי להגדיר את התכונה \'ביטול הנעילה בטביעת אצבע\', נדרש קוד אימות.\n\nקוד האימות מגן על הטאבלט במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="222574071926747300">"כדי להגדיר את התכונה \'ביטול הנעילה בטביעת אצבע\', נדרש קו ביטול נעילה.\n\nקו ביטול הנעילה מגן על הטאבלט במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="7780323831330724644">"כדי להגדיר את התכונה \'ביטול הנעילה בטביעת אצבע\', נדרשת סיסמה.\n\nהסיסמה מגינה על הטאבלט במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="7421096089691939451">"כדי להגדיר את התכונה \'ביטול הנעילה בטביעת אצבע\', נדרש קוד אימות.\n\nקוד האימות מגן על המכשיר במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6458468083711413617">"כדי להגדיר את התכונה \'ביטול הנעילה בטביעת אצבע\', נדרש קו ביטול נעילה.\n\nקו ביטול הנעילה מגן על המכשיר במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="1632249532665518954">"כדי להגדיר את התכונה \'ביטול הנעילה בטביעת אצבע\', נדרשת סיסמה.\n\nהסיסמה מגינה על המכשיר במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3101384462491132314">"כדי להגדיר את התכונה \'ביטול הנעילה בטביעת אצבע\', נדרש קוד אימות.\n\nקוד האימות מגן על הטלפון במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="382422778886929469">"כדי להגדיר את התכונה \'ביטול הנעילה בטביעת אצבע\', נדרש קו ביטול נעילה.\n\nקו ביטול הנעילה מגן על הטלפון במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="5515199168425229243">"כדי להגדיר את התכונה \'ביטול הנעילה בטביעת אצבע\', נדרשת סיסמה.\n\nהסיסמה מגינה על הטלפון במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="2454239555320628731">"כדי להגדיר את התכונה \'פתיחה ע\"י זיהוי הפנים\', נדרש קוד אימות.\n\nקוד האימות מגן על הטאבלט במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="4354138725903415816">"כדי להגדיר את התכונה \'פתיחה ע\"י זיהוי הפנים\', נדרש קו ביטול נעילה.\n\nקו ביטול הנעילה מגן על הטאבלט במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="719339718267952196">"כדי להגדיר את התכונה \'פתיחה ע\"י זיהוי הפנים\', נדרשת סיסמה.\n\nהסיסמה מגינה על הטאבלט במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_pin_skip_face_message" product="device" msgid="3729243407606881750">"כדי להגדיר את התכונה \'פתיחה ע\"י זיהוי הפנים\', נדרש קוד אימות.\n\nקוד האימות מגן על המכשיר במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="6966329744346503807">"כדי להגדיר את התכונה \'פתיחה ע\"י זיהוי הפנים\', נדרש קו ביטול נעילה.\n\nקו ביטול הנעילה מגן על המכשיר במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_password_skip_face_message" product="device" msgid="3020827854443297996">"כדי להגדיר את התכונה \'פתיחה ע\"י זיהוי הפנים\', נדרשת סיסמה.\n\nהסיסמה מגינה על המכשיר במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2155678903559865476">"כדי להגדיר את התכונה \'פתיחה ע\"י זיהוי הפנים\', נדרש קוד אימות.\n\nקוד האימות מגן על הטלפון במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="473271568005748452">"כדי להגדיר את התכונה \'פתיחה ע\"י זיהוי הפנים\', נדרש קו ביטול נעילה.\n\nקו ביטול הנעילה מגן על הטלפון במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_password_skip_face_message" product="default" msgid="4319934862372116788">"כדי להגדיר את התכונה \'פתיחה ע\"י זיהוי הפנים\', נדרשת סיסמה.\n\nהסיסמה מגינה על הטלפון במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="647987565338402155">"כדי להגדיר את התכונות \'פתיחה ע\"י זיהוי הפנים\' ו\'ביטול הנעילה בטביעת אצבע\', נדרש קוד אימות.\n\nקוד האימות מגן על הטאבלט במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="5293609077890072841">"כדי להגדיר את התכונות \'פתיחה ע\"י זיהוי הפנים\' ו\'ביטול הנעילה בטביעת אצבע\', נדרש קו ביטול נעילה.\n\nקו ביטול הנעילה מגן על הטאבלט במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="2660359318928684172">"כדי להגדיר את התכונות \'פתיחה ע\"י זיהוי הפנים\' ו\'ביטול הנעילה בטביעת אצבע\', נדרשת סיסמה.\n\nהסיסמה מגינה על הטאבלט במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="1278795063897397815">"כדי להגדיר את התכונות \'פתיחה ע\"י זיהוי הפנים\' ו\'ביטול הנעילה בטביעת אצבע\', נדרש קוד אימות.\n\nקוד האימות מגן על המכשיר במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="8766169819759371801">"כדי להגדיר את התכונות \'פתיחה ע\"י זיהוי הפנים\' ו\'ביטול הנעילה בטביעת אצבע\', נדרש קו ביטול נעילה.\n\nקו ביטול הנעילה מגן על המכשיר במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="8611216039321306045">"כדי להגדיר את התכונות \'פתיחה ע\"י זיהוי הפנים\' ו\'ביטול הנעילה בטביעת אצבע\', נדרשת סיסמה.\n\nהסיסמה מגינה על המכשיר במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="8796878521409329051">"כדי להגדיר את התכונות \'פתיחה ע\"י זיהוי הפנים\' ו\'ביטול הנעילה בטביעת אצבע\', נדרש קוד אימות.\n\nקוד האימות מגן על הטלפון במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="8423700958936341596">"כדי להגדיר את התכונות \'פתיחה ע\"י זיהוי הפנים\' ו\'ביטול הנעילה בטביעת אצבע\', נדרש קו ביטול נעילה.\n\nקו ביטול הנעילה מגן על הטלפון במקרים של אובדן או גניבה."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="5411689248299854172">"כדי להגדיר את התכונות \'פתיחה ע\"י זיהוי הפנים\' ו\'ביטול הנעילה בטביעת אצבע\', נדרשת סיסמה.\n\nהסיסמה מגינה על הטלפון במקרים של אובדן או גניבה."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"הפעולה הזו מוחקת את התבנית והתמונות של טביעת האצבע המשויכות אל <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>, שמאוחסנות בטלפון שלך"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"הפעולה הזו מוחקת את התבנית והתמונות של טביעת האצבע המשויכות אל <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>, שמאוחסנות בטאבלט שלך"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"פעולה זו מוחקת את התבנית והתמונות של טביעת האצבע המשויכות אל <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>, שמאוחסנות במכשיר שלך"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"לא תהיה לך אפשרות להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטלפון או לאמת את הזהות שלך באפליקציות."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"לא תהיה לך אפשרות להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטאבלט או לאמת את זהותך באפליקציות."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"לא תהיה לך אפשרות להשתמש בטביעת האצבע כדי לבטל את הנעילה של המכשיר או לאמת את זהותך באפליקציות."</string>
+    <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"הצפנת הטאבלט"</string>
+    <string name="encrypt_title" product="default" msgid="7337365190988321100">"הצפנת הטלפון"</string>
+    <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"הגדרה של נעילת מסך לצורך הגנה על הטאבלט"</string>
+    <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"הגדרה של נעילת מסך לצורך הגנה על המכשיר"</string>
+    <string name="suggested_lock_settings_summary" product="default" msgid="2443273582716671033">"הגדרה של נעילת מסך לצורך הגנה על הטלפון"</string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="1040265358906410746"></string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="1040265358906410746"></string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
+    <string name="setup_lock_settings_picker_title" product="tablet" msgid="1276283007274778191">"הגנה על הטאבלט שלך"</string>
+    <string name="setup_lock_settings_picker_title" product="device" msgid="3585905639045649905">"הגנה על המכשיר"</string>
+    <string name="setup_lock_settings_picker_title" product="default" msgid="2758197863515864300">"הגנה על הטלפון שלך"</string>
+    <string name="setup_lock_settings_picker_message" product="tablet" msgid="4870877800737248926">"אפשר להפעיל את תכונות הגנת המכשיר כדי למנוע מאחרים להשתמש בטאבלט הזה ללא אישורך. עליך לבחור בנעילת המסך שבה ברצונך להשתמש."</string>
+    <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"אפשר להפעיל את תכונות הגנת המכשיר כדי למנוע מאחרים להשתמש במכשיר הזה ללא אישורך. עליך לבחור בנעילת המסך שבה ברצונך להשתמש."</string>
+    <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"תכונות הגנת המכשיר מאפשרות למנוע מאחרים להשתמש בטלפון הזה ללא אישורך. עליך לבחור בנעילת המסך שבה ברצונך להשתמש."</string>
+    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"ההתאמה בין הטלפון שלך למכשיר <xliff:g id="DEVICE_NAME">%1$s</xliff:g> תבוטל"</string>
+    <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"ההתאמה בין הטאבלט שלך להתקן <xliff:g id="DEVICE_NAME">%1$s</xliff:g> תבוטל"</string>
+    <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"ההתאמה בין המכשיר שלך להתקן <xliff:g id="DEVICE_NAME">%1$s</xliff:g> תבוטל"</string>
+    <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"‏ניתן להשתמש ב-NFC רק לאחר ביטול נעילת המסך"</string>
+    <string name="wifi_add_app_single_network_summary" product="default" msgid="6881712878537666626">"התקבלה בקשה מהאפליקציה <xliff:g id="APPNAME">%1$s</xliff:g> לשמור רשת בטלפון"</string>
+    <string name="wifi_add_app_single_network_summary" product="tablet" msgid="8455616967601552440">"התקבלה בקשה מהאפליקציה <xliff:g id="APPNAME">%1$s</xliff:g> לשמור רשת בטאבלט"</string>
+    <string name="wifi_add_app_networks_summary" product="default" msgid="2670215712788515167">"התקבלה בקשה מהאפליקציה <xliff:g id="APPNAME">%1$s</xliff:g> לשמור את הרשתות האלה בטלפון"</string>
+    <string name="wifi_add_app_networks_summary" product="tablet" msgid="2088967184512169910">"התקבלה בקשה מהאפליקציה <xliff:g id="APPNAME">%1$s</xliff:g> לשמור את הרשתות האלה בטאבלט"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"שינוי אוטומטי של כיוון המסך כשהופכים את הטלפון ממצב של תצוגה לאורך למצב של תצוגה לרוחב"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"שינוי אוטומטי של כיוון המסך כשהופכים את הטאבלט ממצב של תצוגה לאורך למצב של תצוגה לרוחב"</string>
+    <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"דרוש קוד גישה כדי להשתמש בטאבלט"</string>
+    <string name="sim_lock_on" product="default" msgid="3303147192981388923">"צריך קוד גישה כדי להשתמש בטלפון"</string>
+    <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"צריך קוד גישה כדי להשתמש בטאבלט"</string>
+    <string name="sim_lock_off" product="default" msgid="4634118006847137785">"צריך להקליד קוד אימות כדי להשתמש בטלפון"</string>
+    <string name="status_number" product="tablet" msgid="3597945414666253183">"MDN"</string>
+    <string name="status_number" product="default" msgid="8407999629121682207">"מספר טלפון"</string>
+    <string name="status_number_sim_slot" product="tablet" msgid="6582203988975619529">"‏MDN (חריץ SIM ‏%1$d)"</string>
+    <string name="status_number_sim_slot" product="default" msgid="5724823197745786398">"‏מספר טלפון (חריץ SIM ‏%1$d)"</string>
+    <string name="status_number_sim_status" product="tablet" msgid="4239876366511743428">"‏MDN ב-SIM"</string>
+    <string name="status_number_sim_status" product="default" msgid="2772745542921910086">"‏מספר הטלפון ב-SIM"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"‏פירמוט של כרטיס SD לאחסון פנימי"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"‏ניתן לאחסן את האפליקציות והמדיה לשימוש בטאבלט הזה בלבד. &lt;a href=https://support.google.com/android/answer/12153449&gt;מידע נוסף על ההגדרה של כרטיס SD‏&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"פירמוט"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"‏פירמוט של כרטיס SD לאחסון פנימי"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"‏ניתן לאחסן את האפליקציות והמדיה לשימוש בטלפון הזה בלבד. &lt;a href=https://support.google.com/android/answer/12153449&gt;מידע נוסף על ההגדרה של כרטיס SD‏&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"פירמוט"</string>
+    <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"ניתן להעביר קבצים, מדיה ואפליקציות מסוימות אל <xliff:g id="NAME">^1</xliff:g> זה. \n\nבעקבות ההעברה, יתפנה שטח אחסון של <xliff:g id="SIZE">^2</xliff:g> בטאבלט שלך. ההעברה אמורה להימשך בערך <xliff:g id="DURATION">^3</xliff:g>."</string>
+    <string name="storage_wizard_migrate_v2_body" product="default" msgid="809730501314645325">"ניתן להעביר קבצים, מדיה ואפליקציות מסוימות אל <xliff:g id="NAME">^1</xliff:g> זה. \n\nבעקבות ההעברה, יתפנה שטח אחסון של <xliff:g id="SIZE">^2</xliff:g> בטלפון שלך. ההעברה אמורה להימשך בערך <xliff:g id="DURATION">^3</xliff:g>."</string>
+    <string name="storage_wizard_migrate_v2_checklist_battery" product="tablet" msgid="6111770421449869539">"יש להשאיר את הטאבלט בטעינה"</string>
+    <string name="storage_wizard_migrate_v2_checklist_battery" product="default" msgid="8826915870192535008">"יש להשאיר את הטלפון בטעינה"</string>
+    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"‏פעולה זו תמחק את כל הנתונים מ"<b>"האחסון הפנימי"</b>" של הטאבלט, כולל:\n\n"<li>"חשבון Google שלך"</li>\n<li>"הנתונים וההגדרות של המערכת והאפליקציות"</li>\n<li>"האפליקציות שהורדת"</li></string>
+    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"‏הפעולה הזו תמחק את כל הנתונים מ"<b>"האחסון הפנימי"</b>" של הטלפון, כולל:\n\n"<li>"חשבון Google שלך"</li>\n<li>"הנתונים וההגדרות של המערכת והאפליקציות"</li>\n<li>"אפליקציות שהורדת"</li></string>
+    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"החשבונות הבאים פעילים כרגע:\n"</string>
+    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"קיימים משתמשים אחרים במכשיר זה.\n"</string>
+    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">"‏\n\nכדי למחוק פריטי מוזיקה, תמונות ונתוני משתמש אחרים, יש למחוק את "<b>"אחסון ה-USB"</b>"."</string>
+    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">"‏\n\nכדי למחוק פריטי מוזיקה, תמונות ונתוני משתמש אחרים, יש למחוק את "<b>"כרטיס ה-SD"</b>"."</string>
+    <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"‏מחיקת אחסון USB"</string>
+    <string name="erase_external_storage" product="default" msgid="2610056855012660451">"‏מחיקת כרטיס SD"</string>
+    <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"‏מחיקת כל הנתונים באחסון ה-USB הפנימי, כגון פריטי מוזיקה או תמונות"</string>
+    <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"‏מחיקת כל הנתונים שבכרטיס ה-SD, כגון מוזיקה או תמונות"</string>
+    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"מחיקת כל הנתונים"</string>
+    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"מחיקת כל הנתונים"</string>
+    <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"‏שיתוף האינטרנט של הטלפון דרך USB"</string>
+    <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"‏שיתוף בחיבור לאינטרנט של הטאבלט דרך USB"</string>
+    <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"‏שיתוף החיבור לאינטרנט של הטאבלט דרך Bluetooth"</string>
+    <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"‏שיתוף האינטרנט של הטלפון דרך Bluetooth"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"שיתוף האינטרנט של הטלפון דרך אתרנט"</string>
+    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"שיתוף החיבור לאינטרנט של הטאבלט דרך אתרנט"</string>
+    <string name="about_settings" product="tablet" msgid="2888705054709289693">"מידע על הטאבלט"</string>
+    <string name="about_settings" product="default" msgid="4038626127378127613">"מידע על הטלפון"</string>
+    <string name="about_settings" product="device" msgid="9012888717090302815">"מידע על המכשיר"</string>
+    <string name="about_settings" product="emulator" msgid="2516560858771320366">"מידע על מכשיר בגרסת האמולטור"</string>
+    <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"הטאבלט והנתונים האישיים שלך פגיעים יותר להתקפות של אפליקציות לא מוכרות. על ידי התקנת אפליקציות ממקור זה, מקובל עליך שתחול עליך האחריות לכל נזק לטאבלט או לכל אובדן של נתונים שעשויים להיגרם כתוצאה מהשימוש באפליקציות אלה."</string>
+    <string name="install_all_warning" product="default" msgid="652516435709047343">"הטלפון והנתונים האישיים שלך פגיעים יותר להתקפות של אפליקציות לא מוכרות. התקנת אפליקציות מהמקור הזה מהווה את הסכמתך לכך שהאחריות היא שלך לכל נזק לטלפון או לכל אובדן של נתונים שעשויים להיגרם כתוצאה מהשימוש באפליקציות האלה."</string>
+    <string name="install_all_warning" product="device" msgid="2348262609815354500">"המכשיר והנתונים האישיים שלך פגיעים יותר להתקפות של אפליקציות לא מוכרות. התקנת אפליקציות מהמקור הזה מבטאת את הסכמתך לכך שהאחריות לכל נזק למכשיר או לכל אובדן של נתונים שעשויים להיגרם כתוצאה מהשימוש באפליקציות אלה היא שלך בלבד."</string>
+    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="2076922609580490122">"אם תפסיק שירות זה, תכונות מסוימות של הטאבלט עלולות להפסיק לפעול כהלכה עד לכיבוי המכשיר והפעלתו מחדש."</string>
+    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="2625863973434309085">"אם מפסיקים שירות זה, תכונות מסוימות של הטלפון עלולות להפסיק לפעול כהלכה עד לכיבוי המכשיר והפעלתו מחדש."</string>
+    <string name="testing_phone_info" product="tablet" msgid="1910768200608214456">"פרטי טאבלט"</string>
+    <string name="testing_phone_info" product="default" msgid="1150527695827743906">"מידע על הטלפון"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"ההעדפות שלך לגבי גודל התצוגה והטקסט יאופסו להגדרות המקוריות של הטלפון"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"ההעדפות שלך לגבי גודל התצוגה והטקסט יאופסו להגדרות המקוריות של הטאבלט"</string>
+    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"כוונון של תצוגת הצבעים בטלפון"</string>
+    <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"כוונון של תצוגת הצבעים בטאבלט"</string>
+    <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"עמעום המסך לבהירות נמוכה מהרמה המינימלית של הטלפון"</string>
+    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"עמעום המסך לבהירות נמוכה מהרמה המינימלית של הטאבלט"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"‏מסך מעומעם במיוחד יכול להועיל במקרים הבאים: &lt;ol&gt; &lt;li&gt; כשעוצמת הבהירות המינימלית שמוגדרת כברירת מחדל בטלפון עדיין בהירה מדי&lt;/li&gt; &lt;li&gt; כשמשתמשים בטלפון בסביבה חשוכה, למשל בלילה או בחדר חשוך לפני השינה&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5158211121482010799">"‏מסך מעומעם במיוחד יכול להועיל במקרים הבאים: &lt;ol&gt; &lt;li&gt; כשעוצמת הבהירות המינימלית שמוגדרת כברירת מחדל בטאבלט עדיין בהירה מדי&lt;/li&gt; &lt;li&gt; כשמשתמשים בטאבלט בסביבה חשוכה, למשל בלילה או בחדר חשוך לפני השינה&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"דפוס השימוש בסוללה של אפליקציות הפועלות ברקע בטלפון זה הוא אופייני"</string>
+    <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"דפוס השימוש בסוללה בטאבלט זה של אפליקציות הפועלות ברקע הוא אופייני"</string>
+    <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"דפוס השימוש בסוללה במכשיר זה של אפליקציות הפועלות ברקע הוא אופייני"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"בתנאים מסוימים, למשל בטמפרטורה גבוהה או כשטעינה נמשכת הרבה זמן, יכול להיות שהיא תוגבל ל-<xliff:g id="PERCENT">%1$s</xliff:g> כדי לשמור על תקינות הסוללה.\n\nכשהתנאים ישתנו בחזרה, הטלפון יחזור להיטען כרגיל באופן אוטומטי."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"במצבים מסוימים, כמו טמפרטורה גבוהה וטעינה במשך הרבה זמן, יכול להיות שתהיה הגבלה של <xliff:g id="PERCENT">%1$s</xliff:g> על הטעינה כדי לשמור על תקינות הסוללה.\n\nכשמצבים כאלה מסתיימים, טעינת הטאבלט תחזור למצב הרגיל באופן אוטומטי."</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"נעשה שימוש רב מהרגיל בטלפון שלך. לכן, ייתכן שהסוללה תתרוקן מוקדם מהצפוי.\n\nהאפליקציות המובילות בצריכת סוללה:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"נעשה שימוש רב מהרגיל בטאבלט שלך. לכן, ייתכן שהסוללה תתרוקן מוקדם מהצפוי.\n\nהאפליקציות המובילות בצריכת סוללה:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"נעשה שימוש רב מהרגיל במכשיר שלך. לכן, ייתכן שהסוללה תתרוקן מוקדם מהצפוי.\n\nהאפליקציות המובילות בצריכת סוללה:"</string>
+    <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"האפליקציות משתמשות בכמות רגילה של צריכת סוללה. אם אפליקציות יצרכו יותר מדי מהסוללה, הטלפון יציע פעולות שאפשר לנקוט.\n\nניתן תמיד להפעיל את תכונת החיסכון בסוללה אם הסוללה עומדת להתרוקן."</string>
+    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"האפליקציות משתמשות בכמות רגילה של צריכת סוללה. אם אפליקציות יצרכו יותר מדי מהסוללה, הטאבלט יציע פעולות שאפשר לנקוט.\n\nניתן תמיד להפעיל את תכונת החיסכון בסוללה אם הסוללה עומדת להתרוקן."</string>
+    <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"האפליקציות משתמשות בכמות רגילה של צריכת סוללה. אם אפליקציות יצרכו יותר מדי מהסוללה, המכשיר יציע פעולות שאפשר לנקוט.\n\nניתן תמיד להפעיל את תכונת החיסכון בסוללה אם הסוללה עומדת להתרוקן."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"הגבלת שימוש בסוללה לאפליקציות שבהן לא נעשה שימוש לעתים קרובות"</string>
+    <string name="power_idle" product="tablet" msgid="4689321599298911021">"טאבלט לא פעיל"</string>
+    <string name="power_idle" product="default" msgid="9132502722499465252">"טלפון לא פעיל"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="3618041244703216293">"מצב \'חיסכון בסוללה\' כבה כשטעינת הטלפון גבוהה מ-<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="1733686775743601110">"מצב \'חיסכון בסוללה\' כבה כשטעינת הטאבלט גבוהה מ-<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="7449283917787428755">"מצב \'חיסכון בסוללה\' כבה כשטעינת המכשיר גבוהה מ-<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"נתוני השימוש בסוללה משוערים ולא כוללים מדדים של השימוש בסוללה כשהטלפון בטעינה"</string>
+    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"נתוני השימוש בסוללה משוערים ולא כוללים מדדים של השימוש בסוללה כשהטאבלט בטעינה"</string>
+    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"נתוני השימוש בסוללה משוערים ולא כוללים מדדים של השימוש בסוללה כשהמכשיר בטעינה"</string>
+    <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"התקנת אישורים מאמצעי אחסון"</string>
+    <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"‏התקנת אישורים מכרטיס SD"</string>
+    <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"הסרת חשבון זה תגרום להסרת כל ההודעות, אנשי הקשר ונתונים נוספים מהטאבלט!"</string>
+    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"הסרת החשבון הזה תגרום למחיקה של כל ההודעות, אנשי הקשר ונתונים נוספים של החשבון מהטלפון."</string>
+    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"הסרת חשבון זה תגרום למחיקת כל ההודעות, אנשי הקשר ונתונים נוספים מהמכשיר!"</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="6387714350903085918">"‏שינויים שתבצע בחשבונות שלך באינטרנט יועתקו באופן אוטומטי לטאבלט שלך.\n\nייתכן גם שחשבונות מסוימים יעתיקו לאינטרנט באופן אוטומטי שינויים שתבצע בטלפון. חשבון Google פועל באופן זה."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="6457107552266187107">"‏כל שינוי שיבוצע בחשבונות שלך באינטרנט יועתק לטלפון שלך באופן אוטומטי.\n\nייתכן גם שחשבונות מסוימים יעתיקו לאינטרנט באופן אוטומטי שינויים שיבוצעו בטלפון. כך פועל חשבון Google."</string>
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"הטאבלט יכבה את חבילת הגלישה כאשר הוא יגיע למגבלה שהגדרת.\n\nמכיוון שעשויים להיות הבדלים בין השימוש בנתונים שנמדד על ידי המכשיר לבין השימוש שנמדד על ידי הספק, מומלץ להגדיר מגבלה סבירה."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"הטלפון יכבה את חבילת הגלישה כאשר הוא יגיע למגבלה שהגדרת.\n\nמכיוון שעשויים להיות הבדלים בין השימוש בחבילת הגלישה שנמדד על ידי המכשיר לבין השימוש שנמדד על ידי הספק, מומלץ להגדיר מגבלה סבירה."</string>
+    <string name="user_settings_footer_text" product="device" msgid="7523914344521302179">"ניתן לשתף את המכשיר על ידי הוספת משתמשים חדשים. לכל משתמש יהיה מרחב אישי במכשיר למסכי בית מותאמים אישית, חשבונות, אפליקציות, הגדרות ועוד."</string>
+    <string name="user_settings_footer_text" product="tablet" msgid="3730074318510244552">"ניתן לשתף את הטאבלט על ידי הוספת משתמשים חדשים. לכל משתמש יהיה מרחב אישי במכשיר למסכי בית מותאמים אישית, חשבונות, אפליקציות, הגדרות ועוד."</string>
+    <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"ניתן לשתף את הטלפון על ידי הוספת משתמשים חדשים. לכל משתמש יהיה פרופיל אישי במכשיר למסכי בית מותאמים אישית, חשבונות, אפליקציות, הגדרות ועוד."</string>
+    <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"רק הבעלים של הטאבלט יכול לנהל משתמשים."</string>
+    <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"רק הבעלים של הטלפון יכול לנהל משתמשים."</string>
+    <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"השטח והנתונים שלך בטאבלט יאבדו. לא ניתן לבטל פעולה זו."</string>
+    <string name="user_confirm_remove_self_message" product="default" msgid="5991495192044543230">"יאבדו השטח והנתונים שלך בטלפון. לא ניתן לבטל פעולה זו."</string>
+    <string name="support_summary" product="default" msgid="6137136608018134563">"מאמרי עזרה, טלפון וצ\'אט"</string>
+    <string name="support_summary" product="tablet" msgid="6681247727996378252">"מאמרי עזרה, טאבלט וצ\'אט"</string>
+    <string name="support_summary" product="device" msgid="1690554254039752541">"מאמרי עזרה, מכשיר וצ\'אט"</string>
+    <string name="ambient_display_title" product="default" msgid="5885136049497127396">"הקשה כפולה לבדיקת הטלפון"</string>
+    <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"הקשה כפולה לבדיקת הטאבלט"</string>
+    <string name="ambient_display_title" product="device" msgid="4164103424628824786">"הקשה כפולה לבדיקת המכשיר"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"הרמה לבדיקת הטלפון"</string>
+    <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"הרמה לבדיקת הטאבלט"</string>
+    <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"הרמה לבדיקת המכשיר"</string>
+    <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"כדי לבדוק מה השעה, לראות התראות ולהציג מידע נוסף, פשוט מרימים את הטלפון."</string>
+    <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"כדי לדעת מה השעה, לבדוק התראות ולהציג מידע נוסף, פשוט מרימים את הטאבלט."</string>
+    <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"כדי לדעת מה השעה, לבדוק התראות ולהציג מידע נוסף, פשוט מרימים את המכשיר."</string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"הקשה לבדיקת הטלפון"</string>
+    <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"הקשה לבדיקת הטאבלט"</string>
+    <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"הקשה לבדיקת המכשיר"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"כדי לבדוק התראות, יש להחליק כלפי מטה על חיישן טביעת האצבע שבחלק האחורי של הטלפון."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"כדי לבדוק התראות יש להחליק כלפי מטה בחיישן טביעות האצבע שבחלק האחורי של הטאבלט."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3888927017311372398">"כדי לבדוק התראות יש להחליק כלפי מטה בחיישן טביעות האצבע שבחלק האחורי של המכשיר."</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"‏כשהטלפון מצויד בשני כרטיסי SIM, ניתן להשתמש בו רק ברשתות דור רביעי. "<annotation id="url">"מידע נוסף"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"‏כשהטאבלט מצויד בשני כרטיסי SIM, ניתן להשתמש בו רק ברשתות דור רביעי. "<annotation id="url">"מידע נוסף"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"‏כשהמכשיר מצויד בשני כרטיסי SIM, ניתן להשתמש בו רק ברשתות דור רביעי. "<annotation id="url">"מידע נוסף"</annotation></string>
+    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"הפעולה תגרום לסיום שיחת הטלפון"</string>
+    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"הפעולה תגרום לסיום שיחת הטלפון"</string>
+</resources>

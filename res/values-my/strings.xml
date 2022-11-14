@@ -13,7 +13,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"Yes"</string>
@@ -59,9 +58,6 @@
     <string name="bluetooth_rename_device" msgid="4219655243836021443">"ဤစက်ကို အမည်ပြောင်းရန်"</string>
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"အမည်ပြောင်းရန်"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"စက်ပစ္စည်းကို ချိတ်ဆက်မှုဖြုတ်လိုပါသလား။"</string>
-    <string name="bluetooth_disconnect_all_profiles" product="default" msgid="1934297101665686854">"သင့်ဖုန်းသည် <xliff:g id="DEVICE_NAME">%1$s</xliff:g> နှင့် ချိတ်ဆက်မှု ပြုတ်သွားပါလိမ့်မည်။"</string>
-    <string name="bluetooth_disconnect_all_profiles" product="tablet" msgid="336622948210457991">"သင့်တက်ဘလက်သည် <xliff:g id="DEVICE_NAME">%1$s</xliff:g> နှင့် ချိတ်ဆက်မှု ပြုတ်သွားပါလိမ့်မည်။"</string>
-    <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"သင့်စက်ပစ္စည်းသည် <xliff:g id="DEVICE_NAME">%1$s</xliff:g> နှင့် ချိတ်ဆက်မှု ပြုတ်သွားပါလိမ့်မည်။"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"စက်အသစ် တွဲချိတ်ရန်"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"ဘလူးတုသ်"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"ညာဘက်ကိုတွဲချိတ်ရန်"</string>
@@ -72,9 +68,6 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"ညာဘက် ချိတ်ဆက်ရန်"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"ဘယ်ဘက် ချိတ်ဆက်ရန်"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"ဆက်စပ်သည်များ"</string>
-    <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"ဖုန်း၏ ဘလူးတုသ်လိပ်စာ- <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"တက်ဘလက်၏ ဘလူးတုသ်လိပ်စာ- <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="device" msgid="2863536947810007600">"စက်ပစ္စည်း၏ ဘလူးတုသ်လိပ်စာ- <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"အမည်မသိသောဘလူးတုသ်စက်"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"ရှာဖွေနေသည်…"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"အနီးအနားတွင် မည်သည့်ဘလူးတုသ်စက်မှမရှိပါ"</string>
@@ -88,22 +81,6 @@
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"<xliff:g id="APP_NAME">%1$s</xliff:g> က ဘလူးတုသ် ပိတ်လိုသည်"</string>
     <string name="bluetooth_ask_enablement_no_name" msgid="5091401961637405417">"အက်ပ်တစ်ခုက ဘလူးတုသ် ဖွင့်လိုသည်"</string>
     <string name="bluetooth_ask_disablement_no_name" msgid="382299750909188822">"အက်ပ်တစ်ခုက ဘလူးတုသ် ပိတ်လိုသည်"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="1273405567801929487">"<xliff:g id="APP_NAME">%1$s</xliff:g> သည် အခြား ဘလူးတုသ်စက်ပစ္စည်းများက သင့်တက်ဘလက်ကို <xliff:g id="TIMEOUT">%2$d</xliff:g> စက္ကန့်ကြာမျှ မြင်တွေ့စေလိုသည်။"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="7013223328571883275">"<xliff:g id="APP_NAME">%1$s</xliff:g> သည် အခြား ဘလူးတုသ်စက်ပစ္စည်းများက သင့်ဖုန်းကို <xliff:g id="TIMEOUT">%2$d</xliff:g> စက္ကန့်ကြာမျှ မြင်တွေ့စေလိုသည်။"</string>
-    <string name="bluetooth_ask_discovery_no_name" product="tablet" msgid="3266007454914144057">"အက်ပ်တစ်ခုသည် အခြား ဘလူးတုသ်စက်ပစ္စည်းများက သင့်တက်ဘလက်ကို <xliff:g id="TIMEOUT">%1$d</xliff:g> စက္ကန့်ကြာမျှ မြင်တွေ့စေလိုသည်။"</string>
-    <string name="bluetooth_ask_discovery_no_name" product="default" msgid="7989444746980501116">"အက်ပ်တစ်ခုသည် အခြား ဘလူးတုသ်စက်ပစ္စည်းများက သင့်ဖုန်းကို <xliff:g id="TIMEOUT">%1$d</xliff:g> စက္ကန့်ကြာမျှ မြင်တွေ့စေလိုသည်။"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="6482084870735107773">"<xliff:g id="APP_NAME">%1$s</xliff:g> သည် အခြားဘလူးတုသ်စက်ပစ္စည်းများက သင့်တက်ဘလက်ကို မြင်တွေ့စေလိုသည်။ နောက်ပိုင်းတွင် ဘလူးတုသ်ဆက်တင်များသို့ သွား၍ ဤအရာကို ပြောင်းလဲနိုင်ပါသည်။"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="2352494279465502950">"<xliff:g id="APP_NAME">%1$s</xliff:g> သည် အခြားဘလူးတုသ်စက်ပစ္စည်းများက သင့်ဖုန်းကို မြင်တွေ့စေလိုသည်။ နောက်ပိုင်းတွင် ဘလူးတုသ်ဆက်တင်များသို့ သွား၍ ဤအရာကို ပြောင်းလဲနိုင်ပါသည်။"</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="tablet" msgid="2732992604509910896">"အက်ပ်တစ်ခုသည် အခြားဘလူးတုသ်စက်ပစ္စည်းများက သင့်တက်ဘလက်ကို မြင်တွေ့စေလိုသည်။ နောက်ပိုင်းတွင် ဘလူးတုသ်ဆက်တင်များသို့ သွား၍ ဤအရာကို ပြောင်းလဲနိုင်ပါသည်။"</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="default" msgid="356982103612920264">"အက်ပ်တစ်ခုသည် အခြားဘလူးတုသ်စက်ပစ္စည်းများက သင့်ဖုန်းကို မြင်တွေ့စေလိုသည်။ နောက်ပိုင်းတွင် ဘလူးတုသ်ဆက်တင်များသို့ သွား၍ ဤအရာကို ပြောင်းလဲနိုင်ပါသည်။"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="6103655179509599427">"<xliff:g id="APP_NAME">%1$s</xliff:g> က ဘလူးတုသ်ဖွင့်၍ အခြားစက်ပစ္စည်းများက သင့်တက်ဘလက်ကို <xliff:g id="TIMEOUT">%2$d</xliff:g> စက္ကန့်ကြာမျှ မြင်တွေ့စေလိုသည်။"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="934276632311449337">"<xliff:g id="APP_NAME">%1$s</xliff:g> က ဘလူးတုသ်ဖွင့်၍ အခြားစက်ပစ္စည်းများက သင့်ဖုန်းကို <xliff:g id="TIMEOUT">%2$d</xliff:g> စက္ကန့်ကြာမျှ မြင်တွေ့စေလိုသည်။"</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="tablet" msgid="1284048348024444485">"အက်ပ်တစ်ခုက ဘလူးတုသ် ဖွင့်၍ အခြားစက်ပစ္စည်းများက သင့်တက်ဘလက်ကို <xliff:g id="TIMEOUT">%1$d</xliff:g> စက္ကန့်ကြာမျှ မြင်တွေ့စေလိုသည်။"</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="default" msgid="2661614145022629454">"အက်ပ်တစ်ခုက ဘလူးတုသ် ဖွင့်၍ အခြားစက်ပစ္စည်းများက သင့်ဖုန်းကို <xliff:g id="TIMEOUT">%1$d</xliff:g> စက္ကန့်ကြာမျှ မြင်တွေ့စေလိုသည်။"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="8588317955400593623">"<xliff:g id="APP_NAME">%1$s</xliff:g> က ဘလူးတုသ် ဖွင့်၍ အခြားစက်ပစ္စည်းများက သင့်တက်ဘလက်ကို မြင်တွေ့စေလိုသည်။ နောက်ပိုင်းတွင် ဘလူးတုသ်ဆက်တင်များသို့ သွား၍ ဤအရာကို ပြောင်းလဲနိုင်ပါသည်။"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="4047444317445386579">"<xliff:g id="APP_NAME">%1$s</xliff:g> က ဘလူးတုသ် ဖွင့်၍ အခြားစက်ပစ္စည်းများက သင့်ဖုန်းကို မြင်တွေ့စေလိုသည်။ နောက်ပိုင်းတွင် ဘလူးတုသ်ဆက်တင်များသို့ သွား၍ ဤအရာကို ပြောင်းလဲနိုင်ပါသည်။"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="tablet" msgid="4922952478824372605">"အက်ပ်တစ်ခုက ဘလူးတုသ် ဖွင့်၍ အခြားစက်ပစ္စည်းများက သင့်တက်ဘလက်ကို မြင်တွေ့စေလိုသည်။ နောက်ပိုင်းတွင် ဘလူးတုသ်ဆက်တင်များသို့ သွား၍ ဤအရာကို ပြောင်းလဲနိုင်ပါသည်။"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="default" msgid="1381582950049639439">"အက်ပ်တစ်ခုက ဘလူးတုသ် ဖွင့်၍ အခြားစက်ပစ္စည်းများက သင့်ဖုန်းကို မြင်တွေ့စေလိုသည်။ နောက်ပိုင်းတွင် ဘလူးတုသ်ဆက်တင်များသို့ သွား၍ ဤအရာကို ပြောင်းလဲနိုင်ပါသည်။"</string>
     <string name="bluetooth_turning_on" msgid="3842613808709024730">"ဘလူးတုသ်ကို ဖွင့်နေစဉ်.."</string>
     <string name="bluetooth_turning_off" msgid="7406309124247701148">"ဘလူးတုသ်ကိုပိတ်ခြင်း"</string>
     <string name="bluetooth_connection_permission_request" msgid="8793131019383198861">"ဘလူးတုသ်ချိတ်ဆက်ရန် တောင်းခံသည်။"</string>
@@ -239,10 +216,6 @@
     <string name="account_settings_title" msgid="9138880127246241885">"အကောင့်များ"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"လုံခြုံရေး"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"အသွင်ဝှက်ခြင်းနှင့် အထောက်အထားများ"</string>
-    <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"ဖုန်းကို အသွင်ဝှက်ထားသည်"</string>
-    <string name="not_encrypted_summary" product="default" msgid="2251945842585788254">"ဖုန်းကို အသွင်ဝှက်မထားပါ"</string>
-    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"စက်ပစ္စည်းကို အသွင်ဝှက်ထားသည်"</string>
-    <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"စက်ပစ္စည်းကို အသွင်ဝှက်မထားပါ"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"လော့ခ်မျက်နှာပြင်"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"ပြသမည့်အရာ"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"မရနိုင်ပါ"</string>
@@ -258,17 +231,11 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"မျက်နှာပြ လော့ခ်ဖွင့်ခြင်းကို ထည့်သွင်းပါ"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"အထောက်အထားစိစစ်ရန် သင့်မျက်နှာကို သုံးပါ"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"စတင်ရန်"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"အများသုံးနိုင်သည့် မျက်နှာပြ လော့ခ်ဖွင့်ခြင်းကို ပိတ်ထားပါက အချို့သော ထည့်သွင်းခြင်းအဆင့်များသည် TalkBack နှင့် အဆင်ပြေစွာအလုပ်မလုပ်နိုင်ပါ။"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"နောက်သို့"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"ဆက်၍စနစ်ထည့်သွင်းရန်"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"အများသုံးစွဲနိုင်မှုကို သုံးရန်"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"မလုပ်တော့"</string>
@@ -278,53 +245,14 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"သင့်မျက်နှာဖြင့် လော့ခ်ဖွင့်ပါ"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"မျက်နှာပြ လော့ခ်ဖွင့်ခြင်းကိုခွင့်ပြုရန်"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"အထောက်အထားစိစစ်ရန် သင့်မျက်နှာသုံးပါ"</string>
-    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"သင့်ဖုန်းကိုလော့ခ်ဖွင့်ရန်၊ ဝယ်ယူမှုများကို အတည်ပြုရန် သို့မဟုတ် အက်ပ်များသို့ လက်မှတ်ထိုးဝင်ရန် သင့်မျက်နှာကို အသုံးပြုပါ။"</string>
-    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"သင့်တက်ဘလက်ဖွင့်ရန်၊ ဝယ်ယူမှုများအတည်ပြုရန် (သို့) အက်ပ်များတွင် လက်မှတ်ထိုးဝင်ရန် သင့်မျက်နှာကို အသုံးပြုနိုင်သည်။"</string>
-    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"သင့်စက်ပစ္စည်းဖွင့်ရန်၊ ဝယ်ယူမှုများအတည်ပြုရန် (သို့) အက်ပ်များတွင် လက်မှတ်ထိုးဝင်ရန် သင့်မျက်နှာကို အသုံးပြုနိုင်သည်။"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"သင့်ကလေးက သူ့ဖုန်းကို လော့ခ်ဖွင့်ရန်အတွက် သူ၏မျက်နှာကို သုံးခွင့်ပြုပါ"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"သင့်ကလေးက သူ့တက်ဘလက်ကို လော့ခ်ဖွင့်ရန်အတွက် သူ၏မျက်နှာကို သုံးခွင့်ပြုပါ"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"သင့်ကလေးက သူ့စက်ကို လော့ခ်ဖွင့်ရန်အတွက် သူ၏မျက်နှာကို သုံးခွင့်ပြုပါ"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"ကလေး၏ဖုန်းကို လော့ခ်ဖွင့်ရန် သူ့မျက်နှာသုံးခြင်းသည် အားကောင်းသည့် ပုံစံ (သို့) ပင်နံပါတ်လောက် မလုံခြုံပါ။"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"ကလေး၏တက်ဘလက်ကို လော့ခ်ဖွင့်ရန် သူ့မျက်နှာသုံးခြင်းသည် အားကောင်းသည့် ပုံစံ (သို့) ပင်နံပါတ်လောက် မလုံခြုံပါ။"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"ကလေး၏စက်ကို လော့ခ်ဖွင့်ရန် သူ့မျက်နှာသုံးခြင်းသည် အားကောင်းသည့် ပုံစံ (သို့) ပင်နံပါတ်လောက် မလုံခြုံပါ။"</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"သင့်ဖုန်းကို လော့ခ်ဖွင့်ရန် သို့မဟုတ် ဝယ်ယူမှုများကို ခွင့်ပြုပေးရန် သင့်မျက်နှာကို အသုံးပြုပါ။\n\nမှတ်ချက်- ဤစက်ပစ္စည်းကို လော့ခ်ဖွင့်ရန် သင့်မျက်နှာကို အသုံးပြု၍ မရနိုင်ပါ။ အသေးစိတ်အချက်များအတွက် သင့်အဖွဲ့အစည်း၏ စီမံခန့်ခွဲသူကို ဆက်သွယ်ပါ။"</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"သင့်ဖုန်းကိုလော့ခ်ဖွင့်ရန်၊ ဝယ်ယူမှုများကို အတည်ပြုရန် သို့မဟုတ် အက်ပ်များသို့ လက်မှတ်ထိုးဝင်ရန် သင့်မျက်နှာကို အသုံးပြုပါ"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"သင့်မျက်နှာကို စက်ဝိုင်းအလယ်တွင်ဖြစ်အောင် ချိန်ပါ"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"ကျော်ရန်"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"အများဆုံးထည့်နိုင်သည့် မျက်နှာအရေအတွက် ပြည့်သွားပါပြီ"</string>
@@ -369,12 +297,6 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"သင်၏လက်ဗွေကို စနစ်ထည့်သွင်းခြင်း"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်းကို ခွင့်ပြုရန်"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"သင့်လက်ဗွေကို သုံးပါ"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သောအခါ (သို့) ဝယ်ယူမှုကို အတည်ပြုသောအခါကဲ့သို့တွင် သင်ဖြစ်ကြောင်း အတည်ပြုရန်အတွက် (သို့) သင့်တက်ဘလက်ကို လော့ခ်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို သုံးပါ။"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သောအခါ (သို့) ဝယ်ယူမှုကို အတည်ပြုသောအခါ သင်ဖြစ်ကြောင်း အတည်ပြုရန် သို့မဟုတ် သင့်စက်ကို လော့ခ်ဖွင့်ရန် လက်ဗွေကို သုံးပါ။"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သောအခါ (သို့) ဝယ်ယူမှုကို အတည်ပြုသောအခါကဲ့သို့တွင် သင်ဖြစ်ကြောင်း အတည်ပြုရန်အတွက် (သို့) သင့်ဖုန်းကို လော့ခ်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို သုံးပါ။"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"သင့်ကလေးက သူ့ဖုန်းကို လော့ခ်ဖွင့်ရန်အတွက် (သို့) သူဖြစ်ကြောင်း အတည်ပြုရန်အတွက် သူ၏လက်ဗွေကို သုံးခွင့်ပြုပါ။ သူက အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သောအခါ၊ ဝယ်ယူမှုကို အတည်ပြုသောအခါ စသည်တို့တွင် ဖြစ်သည်။"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"သင့်ကလေးက သူ့တက်ဘလက်ကိုဖွင့်ရန် (သို့) သူဖြစ်ကြောင်း အတည်ပြုရန်အတွက် သူ၏လက်ဗွေ သုံးခွင့်ပြုနိုင်သည်။ အက်ပ်များတွင် သူလက်မှတ်ထိုးဝင်သောအခါ၊ ဝယ်ယူမှု အတည်ပြုသောအခါ စသည်တို့တွင် ဖြစ်သည်။"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"သင့်ကလေးက သူ့စက်ပစ္စည်းကိုဖွင့်ရန် (သို့) သူဖြစ်ကြောင်း အတည်ပြုရန်အတွက် သူ၏လက်ဗွေ သုံးခွင့်ပြုနိုင်သည်။ အက်ပ်များတွင် သူလက်မှတ်ထိုးဝင်သောအခါ၊ ဝယ်ယူမှု အတည်ပြုသောအခါ စသည်တို့တွင် ဖြစ်သည်။"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"သင့်ထိန်းချုပ်မှုအောက်တွင် ရှိပါသည်"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"သင်နှင့် သင့်ကလေး၏ ထိန်းချုပ်မှုအောက်တွင် ရှိပါသည်"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"သတိပြုရန်"</string>
@@ -386,36 +308,12 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"လက်ဗွေသတ်မှတ်မှုသည် မိနစ်အနည်းငယ်သာ ကြာပါသည်။ ၎င်းကိုကျော်လိုက်လျှင် သင့်လက်ဗွေကို နောင်တွင် ဆက်တင်များ၌ ထည့်သွင်းနိုင်ပါသည်။"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"ဤသင်္ကေတကိုမြင်ပါက အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သောအခါ (သို့) ဝယ်ယူမှုကို အတည်ပြုသောအခါကဲ့သို့ အထောက်အထားစိစစ်ခြင်းအတွက် သင့်လက်ဗွေကို သုံးပါ"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"သတိပြုရန်"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"သင့်လက်ဗွေကိုသုံး၍ ဖုန်းကိုလော့ခ်ဖွင့်ခြင်းသည် ခိုင်မာသည့်ပုံစံ (သို့) ပင်နံပါတ်လောက် လုံခြုံမှုမရှိနိုင်ပါ"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"သင့်လက်ဗွေသုံး၍ တက်ဘလက်ကိုဖွင့်ခြင်းသည် ခိုင်မာသည့်ပုံဖော်ခြင်း (သို့) ပင်နံပါတ်လောက် မလုံခြုံနိုင်ပါ"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"သင့်လက်ဗွေသုံး၍ စက်ပစ္စည်းကိုဖွင့်ခြင်းသည် ခိုင်မာသည့်ပုံဖော်ခြင်း (သို့) ပင်နံပါတ်လောက် မလုံခြုံနိုင်ပါ"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"အလုပ်လုပ်ပုံ"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ က သင်ဖြစ်ကြောင်း အတည်ပြုရန်အတွက် သင့်လက်ဗွေ၏ သီးခြားနမူနာတစ်ခုကို ပြုလုပ်သည်။ စနစ်ထည့်သွင်းနေစဉ် ဤလက်ဗွေနမူနာကို ပြုလုပ်ရန်အတွက် သင့်လက်ဗွေကို ရှုထောင့်အမျိုးမျိုးမှ ပုံများရိုက်ကူးရပါမည်။"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ က သင့်ကလေးကို သူဖြစ်ကြောင်း အတည်ပြုရန်အတွက် သူ့လက်ဗွေ၏ သီးခြားနမူနာတစ်ခုကို ပြုလုပ်သည်။ စနစ်ထည့်သွင်းနေစဉ် ဤလက်ဗွေနမူနာကို ပြုလုပ်ရန်အတွက် သူ့လက်ဗွေကို ရှုထောင့်အမျိုးမျိုးမှ ပုံများရိုက်ကူးမည်။"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"Pixel Imprint သုံးသောအခါ သင်၏လက်ဗွေနမူနာကို အပ်ဒိတ်လုပ်ရန် ပုံများကို သုံးသည်။ သင်၏လက်ဗွေနမူနာပြုလုပ်ရန် သုံးထားသောပုံများကို မည်သည့်အခါမှ မသိမ်းပါ။ သို့သော် လက်ဗွေနမူနာကို သင့်ဖုန်းတွင် လုံခြုံစွာသိမ်းပြီး ဖုန်းအတွင်း၌သာ ထားပါသည်။ လုပ်ဆောင်ချက်အားလုံး သင့်ဖုန်းတွင် လုံခြုံစွာ ဖြစ်ပေါ်သည်။"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"Pixel Imprint သုံးသောအခါ သင်၏လက်ဗွေနမူနာ အပ်ဒိတ်လုပ်ရန် ပုံများကို သုံးသည်။ သင်၏လက်ဗွေနမူနာပြုလုပ်ရန် သုံးထားသောပုံများကို မည်သည့်အခါမှ မသိမ်းပါ။ သို့သော် လက်ဗွေနမူနာကို သင့်တက်ဘလက်တွင် လုံခြုံစွာသိမ်းပြီး တက်ဘလက်အတွင်း၌သာ ထားပါသည်။ လုပ်ဆောင်ချက်အားလုံး သင့်တက်ဘလက်တွင် လုံခြုံစွာ ဖြစ်ပေါ်သည်။"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"Pixel Imprint သုံးသောအခါ သင်၏လက်ဗွေနမူနာ အပ်ဒိတ်လုပ်ရန် ပုံများကို သုံးသည်။ သင်၏လက်ဗွေနမူနာပြုလုပ်ရန် သုံးထားသောပုံများကို မည်သည့်အခါမှ မသိမ်းပါ။ သို့သော် လက်ဗွေနမူနာကို သင့်စက်တွင် လုံခြုံစွာသိမ်းပြီး စက်အတွင်း၌သာ ထားပါသည်။ လုပ်ဆောင်ချက်အားလုံး သင့်စက်ပစ္စည်းတွင် လုံခြုံစွာ ဖြစ်ပေါ်သည်။"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"သူက Pixel Imprint သုံးသောအခါ သူ၏လက်ဗွေနမူနာကို အပ်ဒိတ်လုပ်ရန် ပုံများကို သုံးသည်။ သင့်ကလေး၏ လက်ဗွေနမူနာပြုလုပ်ရန် သုံးထားသောပုံများကို မည်သည့်အခါမှ မသိမ်းပါ။ သို့သော် လက်ဗွေနမူနာကို ဖုန်းတွင် လုံခြုံစွာသိမ်းပြီး စက်အတွင်း၌သာ ထားပါသည်။ လုပ်ဆောင်ချက်အားလုံး ဖုန်းတွင် လုံခြုံစွာ ဖြစ်ပေါ်သည်။"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"သူက Pixel Imprint သုံးသောအခါ သူ၏လက်ဗွေနမူနာ အပ်ဒိတ်လုပ်ရန် ပုံများကို သုံးသည်။ သင့်ကလေး၏ လက်ဗွေနမူနာပြုလုပ်ရန် သုံးထားသောပုံများကို မည်သည့်အခါမှ မသိမ်းပါ။ သို့သော် လက်ဗွေနမူနာကို တက်ဘလက်တွင် လုံခြုံစွာသိမ်းပြီး တက်ဘလက်အတွင်း၌သာ ထားပါသည်။ လုပ်ဆောင်ချက်အားလုံး တက်ဘလက်တွင် လုံခြုံစွာ ဖြစ်ပေါ်သည်။"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"သူက Pixel Imprint သုံးသောအခါ သူ၏လက်ဗွေနမူနာ အပ်ဒိတ်လုပ်ရန် ပုံများကို သုံးသည်။ သင့်ကလေး၏ လက်ဗွေနမူနာပြုလုပ်ရန် သုံးထားသောပုံများကို မည်သည့်အခါမှ မသိမ်းပါ။ သို့သော် လက်ဗွေနမူနာကို စက်တွင် လုံခြုံစွာသိမ်းပြီး စက်အတွင်း၌သာ ထားပါသည်။ လုပ်ဆောင်ချက်အားလုံး စက်ပစ္စည်းတွင် လုံခြုံစွာ ဖြစ်ပေါ်သည်။"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"‘ဆက်တင်များ’ တွင် သင့်လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်ခြင်း (သို့) ‘လက်ဗွေသုံးသော့ဖွင့်ခြင်း’ ကို ပိတ်ခြင်းတို့ အချိန်မရွေး လုပ်နိုင်သည်။ လက်ဗွေပုံနှင့် နမူနာများကို သင်မဖျက်မချင်း ဖုန်းတွင်သိမ်းထားသည်။"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"ဆက်တင်များတွင် လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်ခြင်း (သို့) ‘လက်ဗွေသုံး သော့ဖွင့်ခြင်း’ ကို ပိတ်ခြင်းတို့ အချိန်မရွေး လုပ်နိုင်သည်။ လက်ဗွေပုံနှင့် နမူနာများကို သင်မဖျက်မချင်း တက်ဘလက်တွင်သိမ်းသည်။"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"ဆက်တင်များတွင် လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်ခြင်း (သို့) ‘လက်ဗွေသုံး သော့ဖွင့်ခြင်း’ ကို ပိတ်ခြင်းတို့ အချိန်မရွေး လုပ်နိုင်သည်။ လက်ဗွေပုံနှင့် နမူနာများကို သင်မဖျက်မချင်း စက်ပစ္စည်းတွင်သိမ်းသည်။"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"သင်နှင့် သင့်ကလေးက ဆက်တင်များတွင် လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်ခြင်း (သို့) ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ပိတ်ခြင်းတို့ အချိန်မရွေး လုပ်နိုင်သည်။ လက်ဗွေပုံနှင့် နမူနာများကို မဖျက်မချင်း ဖုန်းတွင် သိမ်းထားသည်။"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"သင်နှင့် သင့်ကလေးက ဆက်တင်များတွင် လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်ခြင်း (သို့) ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ပိတ်ခြင်းတို့ အချိန်မရွေး လုပ်နိုင်သည်။ လက်ဗွေပုံနှင့် နမူနာများကို မဖျက်မချင်း တက်ဘလက်တွင်သိမ်းသည်။"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"သင်နှင့် သင့်ကလေးက ဆက်တင်များတွင် လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်ခြင်း (သို့) ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ပိတ်ခြင်းတို့ အချိန်မရွေး လုပ်နိုင်သည်။ လက်ဗွေပုံနှင့် နမူနာများကို မဖျက်မချင်း စက်ပစ္စည်းတွင်သိမ်းသည်။"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"တစ်စုံတစ်ယောက်က သင့်လက်ချောင်းရှေ့တွင် သင့်ဖုန်းကို ကိုင်ထားခြင်းကဲ့သို့ သင်မရည်ရွယ်သည့်အချိန်တွင် ၎င်းကို လော့ခ်ဖွင့်နိုင်သည်။"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"တစ်စုံတစ်ယောက်က သင့်လက်ချောင်းရှေ့တွင် သင့်တက်ဘလက်ကို ကိုင်ထားခြင်းကဲ့သို့ သင်မရည်ရွယ်သည့်အချိန်တွင် ၎င်းကို လော့ခ်ဖွင့်နိုင်သည်။"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"တစ်စုံတစ်ယောက်က သင့်လက်ချောင်းရှေ့တွင် သင့်စက်ကို ကိုင်ထားခြင်းကဲ့သို့ သင်မရည်ရွယ်သည့်အချိန်တွင် ၎င်းကို လော့ခ်ဖွင့်နိုင်သည်။"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"တစ်စုံတစ်ယောက်က သင့်ကလေး၏ဖုန်းကို သူ၏လက်ချောင်းရှေ့တွင် ကိုင်ထားခြင်းကဲ့သို့ သူ မရည်ရွယ်သည့်အချိန်တွင် ၎င်းကို လော့ခ်ဖွင့်နိုင်သည်။"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"တစ်စုံတစ်ယောက်က တက်ဘလက်ကို သူ့လက်ချောင်းဆီမြှောက်လိုက်ခြင်းကဲ့သို့ မရည်ရွယ်သည့်အချိန်တွင် ၎င်းကိုဖွင့်နိုင်သည်။"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"တစ်စုံတစ်ယောက်က စက်ပစ္စည်းကို သူ့လက်ချောင်းဆီမြှောက်လိုက်ခြင်းကဲ့သို့ မရည်ရွယ်သည့်အချိန်တွင် ၎င်းကိုဖွင့်နိုင်သည်။"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"အကောင်းဆုံးရလဒ်များအတွက် ‘Google အတွက် ပြုလုပ်ထားသည်’ လက်မှတ်ရ ဖန်သားပြင် အကာအကွယ်ကို သုံးနိုင်သည်။ အခြားဖန်သားပြင် အကာအကွယ်များသုံးပါက သင်၏လက်ဗွေ အလုပ်မလုပ်နိုင်ပါ။"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"အကောင်းဆုံးရလဒ်များအတွက် Google အတွက် ပြုလုပ်ထားသည့် လက်မှတ်ရ ဖန်သားပြင် အကာအကွယ်သုံးနိုင်သည်။ အခြားဖန်သားပြင် အကာအကွယ်များသုံးပါက သင့်ကလေး၏လက်ဗွေ အလုပ်မလုပ်နိုင်ပါ။"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သောအခါကဲ့သို့ သင်ဖြစ်ကြောင်း အတည်ပြုရန်အတွက် (သို့) သင့်တက်ဘလက်ကို လော့ခ်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို သုံးပါ"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သည့်အခါမျိုးတွင် သင့်စက်ကို လော့ခ်ဖွင့်ရန် လက်ဗွေကိုသုံးပါ (သို့) သင်ဖြစ်ကြောင်း အတည်ပြုပါ"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သောအခါကဲ့သို့ သင်ဖြစ်ကြောင်း အတည်ပြုရန်အတွက် (သို့) သင့်ဖုန်းကို လော့ခ်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို သုံးပါ"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"မျက်နှာနှင့်လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"စနစ်ထည့်သွင်းရန် တို့ပါ"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"မျက်နှာနှင့် လက်ဗွေများ ထည့်ပြီးပါပြီ"</string>
@@ -427,17 +325,8 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"မျက်နှာသုံးခြင်း"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"လက်ဗွေသုံးခြင်း"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"မျက်နှာ (သို့) လက်ဗွေ သုံးခြင်း"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"သင့်မိဘအား ဤတက်ဘလက် ပြန်ပေးလိုက်ပါ"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"သင့်မိဘအား ဤစက် ပြန်ပေးလိုက်ပါ"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"သင့်မိဘအား ဤဖုန်း ပြန်ပေးလိုက်ပါ"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"ဖန်သားပြင်လော့ခ် ကျော်မလား။"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"စက်ပစ္စည်းကာကွယ်ရန် ဝန်ဆောင်မှုများ ပွင့်မည်မဟုတ်ပါ။ ပျောက်ဆုံးသွားလျှင်၊ ခိုးခံရလျှင် သို့မဟုတ် ပြင်ဆင်သတ်မှတ်ခံရလျှင် ဤတက်ဘလက်ကို အခြားသူများအသုံးပြုခြင်းမှ ကာကွယ်နိုင်မည်မဟုတ်ပါ။"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"စက်ပစ္စည်းကာကွယ်ရန် ဝန်ဆောင်မှုများ ပွင့်မည်မဟုတ်ပါ။ ပျောက်ဆုံးသွားလျှင်၊ ခိုးခံရလျှင် သို့မဟုတ် ပြင်ဆင်သတ်မှတ်ခံရလျှင် ဤစက်ပစ္စည်းကို အခြားသူများအသုံးပြုခြင်းမှ ကာကွယ်နိုင်မည်မဟုတ်ပါ။"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2412426429887900241">"စက်ပစ္စည်းကာကွယ်ရန် ဝန်ဆောင်မှုများ ပွင့်မည်မဟုတ်ပါ။ ပျောက်ဆုံးသွားလျှင်၊ ခိုးခံရလျှင် သို့မဟုတ် ပြင်ဆင်သတ်မှတ်ခံရလျှင် ဤဖုန်းကို အခြားသူများအသုံးပြုခြင်းမှ ကာကွယ်နိုင်မည်မဟုတ်ပါ။"</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="7119039592587429936">"စက်ပစ္စည်းကာကွယ်ရန် ဝန်ဆောင်မှုများ ပွင့်မည်မဟုတ်ပါ။ ပျောက်ဆုံးသွားလျှင် သို့မဟုတ် အခိုးခံရလျှင် ဤတက်ဘလက်ကို အခြားသူများအသုံးပြုခြင်းမှ ကာကွယ်နိုင်မည်မဟုတ်ပါ။"</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3365990364131398523">"စက်ပစ္စည်းကာကွယ်ရန် ဝန်ဆောင်မှုများ ပွင့်မည်မဟုတ်ပါ။ ပျောက်ဆုံးသွားလျှင် သို့မဟုတ် အခိုးခံရလျှင် ဤစက်ပစ္စည်းကို အခြားသူများအသုံးပြုခြင်းမှ ကာကွယ်နိုင်မည်မဟုတ်ပါ။"</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="4908278819257287536">"စက်ပစ္စည်းကာကွယ်ရန် ဝန်ဆောင်မှုများ ပွင့်မည်မဟုတ်ပါ။ ပျောက်ဆုံးသွားလျှင် သို့မဟုတ် အခိုးခံရလျှင် ဤဖုန်းကို အခြားသူများအသုံးပြုခြင်းမှ ကာကွယ်နိုင်မည်မဟုတ်ပါ။"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"ကျော်လိုက်ပါ"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"နောက်သို့"</string>
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"ကျော်ရန်"</string>
@@ -446,9 +335,6 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"ဖွင့်ပိတ်ခလုတ်ကို မနှိပ်ဘဲ ထိရုံထိပါ"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"သင့်လက်ဗွေ စနစ်ထည့်သွင်းနည်း"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"၎င်းသည် သင့်ဖုန်း၏ ကျောဘက်တွင်ရှိပါသည်။ လက်ညှိုးကို အသုံးပြုပါ။"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"လက်ဗွေ အာရုံခံကိရိယာသည် ဖွင့်ပိတ်ခလုတ်ပေါ်တွင် ရှိသည်။ တက်ဘလက်ဘေးဖက်ရှိ မြင့်တက်နေသည့်အသံထိန်းခလုတ်၏ ကပ်လျက်ရှိ ခလုတ်ပြားဖြစ်သည်။\n\nဖွင့်ပိတ်ခလုတ်ကိုနှိပ်ပါက ဖန်သားပြင်ပိတ်သွားမည်။"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"လက်ဗွေ အာရုံခံကိရိယာသည် ဖွင့်ပိတ်ခလုတ်ပေါ်တွင် ရှိသည်။ စက်ဘေးဖက်ရှိ မြင့်တက်နေသည့်အသံထိန်းခလုတ်၏ ကပ်လျက်ရှိ ခလုတ်ပြားဖြစ်သည်။\n\nဖွင့်ပိတ်ခလုတ်ကိုနှိပ်ပါက ဖန်သားပြင်ပိတ်သွားမည်။"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"လက်ဗွေ အာရုံခံကိရိယာသည် ဖွင့်ပိတ်ခလုတ်ပေါ်တွင် ရှိသည်။ ဖုန်းဘေးဖက်ရှိ မြင့်တက်နေသည့်အသံထိန်းခလုတ်၏ ကပ်လျက်ရှိ ခလုတ်ပြားဖြစ်သည်။\n\nဖွင့်ပိတ်ခလုတ်ကိုနှိပ်ပါက ဖန်သားပြင်ပိတ်သွားမည်။"</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"လက်ဗွေ အာရုံခံကိရိယာသည် သင့်စခရင်ပေါ်တွင်ရှိသည်။ နောက်စခရင်တွင် သင့်လက်ဗွေကို ရိုက်ကူးပါ။"</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"စတင်ရန်"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"အာရုံခံကိရိယာကို ရှာရန် သင့်လက်ချောင်းကို စခရင်ပေါ်တွင် ရွှေ့ပါ။ လက်ဗွေ အာရုံခံကိရိယာကို တို့ထိ၍ ဖိထားပါ။"</string>
@@ -481,9 +367,6 @@
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"လက်ဗွေ စာရင်းသွင်းခြင်း <xliff:g id="PERCENTAGE">%d</xliff:g> ရာခိုင်နှုန်း"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"လက်ဗွေကို ထည့်ပြီးပါပြီ"</string>
     <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သောအခါ (သို့) ပစ္စည်းဝယ်ယူသောအခါ သင်ဖြစ်ကြောင်းအတည်ပြုရန် (သို့) သင့်တက်ဘလက်ကိုဖွင့်ရန် သင့်လက်ဗွေကို ယခုသုံးနိုင်ပါပြီ"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သောအခါကဲ့သို့ သင်ဖြစ်ကြောင်း အတည်ပြုရန်အတွက် (သို့) သင့်တက်ဘလက်ကို လော့ခ်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို ယခု သုံးနိုင်သည်"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သောအခါကဲ့သို့ သင်ဖြစ်ကြောင်း အတည်ပြုရန်အတွက် (သို့) သင့်စက်ကို လော့ခ်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို ယခု သုံးနိုင်သည်"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သောအခါကဲ့သို့ သင်ဖြစ်ကြောင်း အတည်ပြုရန်အတွက် (သို့) သင့်ဖုန်းကို လော့ခ်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို ယခု သုံးနိုင်သည်"</string>
     <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
     <skip />
     <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
@@ -495,42 +378,6 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"အာရုံခံကိရိယာပေါ်တွင် သင့်လက်ဗွေ၏ဘေးခြမ်းကို တင်ပြီးဖိထားပါ။ ထို့နောက် အခြားတစ်ဘက်သို့ ပြောင်းပါ"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"လက်ဗွေ သတ်မှတ်မှုကို ကျော်မလား။"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"သင့်လက်ဗွေဖြင့် သင့်ဖုန်းကို သော့ဖွင့်ရန် နည်းလမ်းတစ်ခုအဖြစ် ရွေးချယ်ခဲ့သည်။ အကယ်၍ယခုကျော်သွားလျှင်၊ ၎င်းကိုနောက်နှောင်တွင် သတ်မှတ်ရပါလိမ့်မည်။ သတ်မှတ်ခြင်းသည် မိနစ်အနည်းငယ်သာ ကြာပါသည်။"</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"ဤတက်ဘလက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="4359575348578515037">"ဤတက်ဘလက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5420451292764062637">"ဤတက်ဘလက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="8841426051550671169">"ဤစက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="6296702954920045923">"ဤစက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="9186075211441188900">"ဤစက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="4301690296689572747">"ဤဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="7387967847446084260">"ဤဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="6415788841227543063">"ဤဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="2350062798056164403">"‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် ပင်နံပါတ် လိုအပ်သည်။\n\nဤတက်ဘလက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="222574071926747300">"‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် ပုံစံ လိုအပ်သည်။\n\nဤတက်ဘလက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="7780323831330724644">"‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် စကားဝှက် လိုအပ်သည်။\n\nဤတက်ဘလက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="7421096089691939451">"‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် ပင်နံပါတ် လိုအပ်သည်။\n\nဤစက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6458468083711413617">"‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် ပုံစံ လိုအပ်သည်။\n\nဤစက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="1632249532665518954">"‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် စကားဝှက် လိုအပ်သည်။\n\nဤစက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3101384462491132314">"‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် ပင်နံပါတ် လိုအပ်သည်။\n\nဤဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="382422778886929469">"‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် ပုံစံ လိုအပ်သည်။\n\nဤဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="5515199168425229243">"‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် စကားဝှက် လိုအပ်သည်။\n\nဤဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="2454239555320628731">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် ပင်နံပါတ် လိုအပ်သည်။\n\nဤတက်ဘလက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="4354138725903415816">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် ပုံစံ လိုအပ်သည်။\n\nဤတက်ဘလက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="719339718267952196">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် စကားဝှက် လိုအပ်သည်။\n\nဤတက်ဘလက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="3729243407606881750">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် ပင်နံပါတ် လိုအပ်သည်။\n\nဤစက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="6966329744346503807">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် ပုံစံ လိုအပ်သည်။\n\nဤစက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3020827854443297996">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် စကားဝှက် လိုအပ်သည်။\n\nဤစက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2155678903559865476">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် ပင်နံပါတ် လိုအပ်သည်။\n\nဤဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="473271568005748452">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် ပုံစံ လိုအပ်သည်။\n\nဤဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="4319934862372116788">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် စကားဝှက် လိုအပ်သည်။\n\nဤဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="647987565338402155">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ နှင့် ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် ပင်နံပါတ် လိုအပ်သည်။\n\nဤတက်ဘလက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="5293609077890072841">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ နှင့် ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် ပုံစံ လိုအပ်သည်။\n\nဤတက်ဘလက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="2660359318928684172">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ နှင့် ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် စကားဝှက် လိုအပ်သည်။\n\nဤတက်ဘလက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="1278795063897397815">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ နှင့် ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် ပင်နံပါတ် လိုအပ်သည်။\n\nဤစက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="8766169819759371801">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ နှင့် ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် ပုံစံ လိုအပ်သည်။\n\nဤစက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="8611216039321306045">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ နှင့် ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် စကားဝှက် လိုအပ်သည်။\n\nဤစက်ပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="8796878521409329051">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ နှင့် ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် ပင်နံပါတ် လိုအပ်သည်။\n\nဤဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="8423700958936341596">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ နှင့် ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် ပုံစံ လိုအပ်သည်။\n\nဤဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်။"</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="5411689248299854172">"‘မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း’ နှင့် ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ထည့်သွင်းရန် စကားဝှက် လိုအပ်သည်။\n\nဤဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်။"</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"ပင်နံပါတ်သတ်မှတ်မှု ကျော်မလား။"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"ပင်နံပါတ်နှင့် မျက်နှာ ထည့်သွင်းခြင်းကို ကျော်မလား။"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"ပင်နံပါတ်နှင့် လက်ဗွေ ထည့်သွင်းခြင်းကို ကျော်မလား။"</string>
@@ -565,40 +412,20 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"အများဆုံးထည့်နိုင်သည့် လက်ဗွေရာအရေအတွက်အထိ ထည့်သွင်းပြီးဖြစ်သည်"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"နောက်ထပ်လက်ဗွေရာများ ထည့်၍မရတော့ပါ"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"‘<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>’ ကို ဖျက်ပါ"</string>
-    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"၎င်းက သင့်ဖုန်းတွင်သိုလှောင်ထားသည့် ‘<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>’ နှင့် ဆက်စပ်သည့် လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်သည်"</string>
-    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"၎င်းက သင့်တက်ဘလက်တွင်သိုလှောင်ထားသည့် ‘<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>’ နှင့် ဆက်စပ်သည့် လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်သည်"</string>
-    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"၎င်းက သင့်စက်တွင်သိုလှောင်ထားသည့် \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' နှင့် ဆက်စပ်သည့် လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်သည်"</string>
-    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"အက်ပ်များတွင် သင်ဖြစ်ကြောင်းအတည်ပြုရန်အတွက် (သို့) သင့်ဖုန်းကို လော့ခ်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို အသုံးပြု၍ရတော့မည် မဟုတ်ပါ။"</string>
-    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"အက်ပ်များတွင် သင်ဖြစ်ကြောင်းအတည်ပြုရန်အတွက် (သို့) သင့်တက်ဘလက်ကို လော့ခ်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို အသုံးပြု၍ရတော့မည် မဟုတ်ပါ။"</string>
-    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"အက်ပ်များတွင် သင်ဖြစ်ကြောင်းအတည်ပြုရန်အတွက် (သို့) သင့်စက်ကို လော့ခ်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို အသုံးပြု၍ရတော့မည် မဟုတ်ပါ။"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"သင်၏အလုပ်ပရိုဖိုင်ကို လော့ခ်ဖွင့်ရန်၊ ဝယ်ယူမှုများကို ခွင့်ပြုရန် (သို့) အလုပ်သုံးအက်ပ်များသို့ လက်မှတ်ထိုးဝင်ရန်တို့အတွက် သင့်လက်ဗွေကို အသုံးပြု၍ရတော့မည် မဟုတ်ပါ။"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"အသွင်ဝှက်ခြင်း"</string>
-    <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"တက်ဘလက်ကို အသွင်ဝှက်ခြင်း"</string>
-    <string name="encrypt_title" product="default" msgid="7337365190988321100">"ဖုန်းကို အသွင်ဝှက်ခြင်း"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"အသွင်ဝှက်ထားသည်"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"ဖန်သားပြင်လော့ခ် သတ်မှတ်ပါ"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"လုံခြုံရေးတိုးမြှင့်ရန် ဤစက်အတွက် ပင်နံပါတ်၊ ပုံစံ (သို့) စကားဝှက် သတ်မှတ်ပါ။"</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"ဖန်သားပြင်လော့ခ် သတ်မှတ်ရန်"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"သင့်ဖုန်းကို လုံခြုံအောင်ပြုလုပ်ပါ"</string>
-    <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"တက်ဘလက်ကို ကာကွယ်ရန် ဖန်သားပြင်လော့ခ် သတ်မှတ်ပါ"</string>
-    <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"စက်ပစ္စည်းကို ကာကွယ်ရန် ဖန်သားပြင်လော့ခ် သတ်မှတ်ပါ"</string>
-    <string name="suggested_lock_settings_summary" product="default" msgid="2443273582716671033">"ဖုန်းကို ကာကွယ်ရန် ဖန်သားပြင်လော့ခ် သတ်မှတ်ပါ"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"လော့ခ်ဖွင့်ရန် လက်ဗွေကို ထည့်ပါ"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"ဖန်သားပြင်လော့ခ်ရွေးပါ"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"ဖန်သားပြင်လော့ခ် ရွေးပါ"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"ဖန်သားပြင်လော့ခ်အသစ် ရွေးပါ"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"အလုပ်သုံးအက်ပ်များအတွက် လော့ခ်ရွေးပါ"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"အလုပ်သုံးလော့ခ်အသစ် ရွေးပါ"</string>
-    <string name="setup_lock_settings_picker_title" product="tablet" msgid="1276283007274778191">"သင့်တက်ဘလက်ကို ကာကွယ်ပါ"</string>
-    <string name="setup_lock_settings_picker_title" product="device" msgid="3585905639045649905">"သင့်စက်ပစ္စည်းကို ကာကွယ်ပါ"</string>
-    <string name="setup_lock_settings_picker_title" product="default" msgid="2758197863515864300">"သင့်ဖုန်းကို ကာကွယ်ပါ"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"လုံခြုံရေး ပိုကောင်းရန် အရန်ဖန်သားပြင်လော့ခ်တစ်ခု သတ်မှတ်ပါ"</string>
-    <string name="setup_lock_settings_picker_message" product="tablet" msgid="4870877800737248926">"စက်ပစ္စည်းကာကွယ်ခြင်း ဝန်ဆောင်မှုများကိုဖွင့်ခြင်းအားဖြင့် ဤတက်ဘလက်ကို သင့်ခွင့်ပြုချက်မရဘဲ မည်သူမျှအသုံးပြု၍မရအောင် ကာကွယ်ပါ။ သင်အသုံးပြုလိုသည့် မျက်နှာပြင်လော့ခ်ချမှုကို ရွေးချယ်ပါ။"</string>
-    <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"စက်ပစ္စည်းကာကွယ်ခြင်း ဝန်ဆောင်မှုများကိုဖွင့်ခြင်းအားဖြင့် ဤစက်ပစ္စည်းကို သင့်ခွင့်ပြုချက်မရဘဲ မည်သူမျှအသုံးပြု၍မရအောင် ကာကွယ်ပါ။ သင်အသုံးပြုလိုသည့် မျက်နှာပြင်လော့ခ်ချမှုကို ရွေးချယ်ပါ။"</string>
-    <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"စက်ပစ္စည်းကာကွယ်ခြင်း ဝန်ဆောင်မှုများကိုဖွင့်ခြင်းအားဖြင့် ဤဖုန်းကို သင့်ခွင့်ပြုချက်မရဘဲ မည်သူမျှအသုံးပြု၍မရအောင် ကာကွယ်ပါ။ သင်အသုံးပြုလိုသည့် မျက်နှာပြင်လော့ခ်ချမှုကို ရွေးချယ်ပါ။"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"အရန်ဖန်သားပြင်လော့ခ် နည်းလမ်းတစ်ခု ရွေးချယ်ပါ"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"ဖန်သားပြင်လော့ခ် မေ့သွားပါက IT စီမံခန့်ခွဲသူက ပြင်ဆင်မသတ်မှတ်နိုင်ပါ။"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"သီးခြား အလုပ်သုံးလော့ခ် သတ်မှတ်နိုင်သည်"</string>
@@ -638,43 +465,31 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"ပရိုဖိုင်ကာကွယ်ခြင်းကို ဖယ်ရှားမလား။"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်။<xliff:g id="EMPTY_LINE">
-
 </xliff:g>၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေနမူနာကိုလည်း ဖျက်ပါသည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်။<xliff:g id="EMPTY_LINE">
-
 </xliff:g>သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်။<xliff:g id="EMPTY_LINE">
-
 </xliff:g>၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေနမူနာကို ဖျက်ပါသည်။ သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာ (သို့) လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်"</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်။<xliff:g id="EMPTY_LINE">
-
 </xliff:g>၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေနမူနာကိုလည်း ဖျက်ပါသည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်။<xliff:g id="EMPTY_LINE">
-
 </xliff:g>သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်။<xliff:g id="EMPTY_LINE">
-
 </xliff:g>၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေနမူနာကို ဖျက်ပါသည်။ သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာ (သို့) လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်။<xliff:g id="EMPTY_LINE">
-
 </xliff:g>၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေနမူနာကိုလည်း ဖျက်ပါသည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်။<xliff:g id="EMPTY_LINE">
-
 </xliff:g>သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်။<xliff:g id="EMPTY_LINE">
-
 </xliff:g>၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေနမူနာကို ဖျက်ပါသည်။ သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာ (သို့) လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"ကိရိယာအား ကာကွယ်ရေး အင်္ဂါရပ်များမှာ သင်၏ မျက်မှာပြင် သော့ခတ်မှု မရှိဘဲ အလုပ်မလုပ်နိုင်ပါ။"</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"စက်ကို အကာအကွယ်ပေးသော ဝန်ဆောင်မှုများသည် ဖန်သားပြင် လော့ခ်မပါဘဲ အလုပ်မလုပ်နိုင်ပါ။<xliff:g id="EMPTY_LINE">
-
 </xliff:g>၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေနမူနာကိုလည်း ဖျက်ပါသည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"စက်ကို အကာအကွယ်ပေးသော ဝန်ဆောင်မှုများသည် ဖန်သားပြင် လော့ခ်မပါဘဲ အလုပ်မလုပ်နိုင်ပါ။<xliff:g id="EMPTY_LINE">
-
 </xliff:g>သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"စက်ကို အကာအကွယ်ပေးသော ဝန်ဆောင်မှုများသည် ဖန်သားပြင် လော့ခ်မပါဘဲ အလုပ်မလုပ်နိုင်ပါ။<xliff:g id="EMPTY_LINE">
-
 </xliff:g>၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေနမူနာကို ဖျက်ပါသည်။ သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာ (သို့) လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"ဖျက်ပါ"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> က ခိုင်မာသော ပင်နံပါတ် သို့မဟုတ် စကားဝှက်တစ်ခု အသုံးပြုရန် အကြံပြုထားပြီး ထိုသို့မဟုတ်လျှင် မျှော်မှန်းထားသည့်အတိုင်း အလုပ်မလုပ်နိုင်ပါ"</string>
@@ -785,9 +600,6 @@
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"စက်ပစ္စည်းကို ပယ်ဖျက်လိုပါသလား။"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"အဖွဲ့ကို ဖယ်ရှားရန်"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"အက်ပ် ချိတ်ဆက်မှုဖြုတ်မလား။"</string>
-    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"သင့်ဖုန်းသည် <xliff:g id="DEVICE_NAME">%1$s</xliff:g> နှင့် တွဲချိတ်နေတော့မည် မဟုတ်ပါ"</string>
-    <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"သင့်တက်ဘလက်သည် <xliff:g id="DEVICE_NAME">%1$s</xliff:g> နှင့် တွဲချိတ်နေတော့မည် မဟုတ်ပါ"</string>
-    <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"သင့်စက်ပစ္စည်းသည် <xliff:g id="DEVICE_NAME">%1$s</xliff:g> နှင့် တွဲချိတ်နေတော့မည် မဟုတ်ပါ"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> အက်ပ်သည် သင့် <xliff:g id="DEVICE_NAME">%2$s</xliff:g> ကို ချိတ်ဆက်တော့မည်မဟုတ်ပါ"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"စက်ပစ္စည်းကို ပယ်ဖျက်ရန်"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"အက်ပ် ချိတ်ဆက်မှုဖြုတ်ရန်"</string>
@@ -832,7 +644,6 @@
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"လက်ရှိ ဖန်သားပြင်ပြသမှု ပြန်လည်စတင်နှုန်းကို ပြပါ"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"NFC အတွက် စက်ပစ္စည်းကို ဖွင့်ရန် လိုအပ်သည်"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"ဖန်သားပြင်လော့ခ်ဖွင့်ထားချိန်တွင်သာ NFC အသုံးပြုမှုကို ခွင့်ပြုသည်"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"NFC မှတစ်ဆင့် အက်ပ်၏အကြောင်းအရာကို ထုတ်လွှင့်ရန် အဆင်သင့် ဖြစ်နေပါသည်"</string>
     <string name="nfc_disabled_summary" msgid="8737797364522502351">"NFC ပိတ်ထားသောကြောင့် မရရှိနိုင်ပါ"</string>
@@ -1040,14 +851,10 @@
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> ပွင့်နေသည်"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"Android ဟော့စပေါ့"</string>
     <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"ဤကွန်ရက်ကို သိမ်းမလား။"</string>
-    <string name="wifi_add_app_single_network_summary" product="default" msgid="6881712878537666626">"<xliff:g id="APPNAME">%1$s</xliff:g> က သင့်ဖုန်းတွင် ကွန်ရက်တစ်ခုကို သိမ်းလိုသည်"</string>
-    <string name="wifi_add_app_single_network_summary" product="tablet" msgid="8455616967601552440">"<xliff:g id="APPNAME">%1$s</xliff:g> က သင့်တက်ဘလက်တွင် ကွန်ရက်တစ်ခုကို သိမ်းလိုသည်"</string>
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"သိမ်းနေသည်…"</string>
     <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"သိမ်းပြီးပါပြီ"</string>
     <string name="wifi_add_app_network_save_failed_summary" msgid="7223817782309294652">"သိမ်း၍မရပါ။ ပြန်စမ်းကြည့်ပါ။"</string>
     <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"ကွန်ရက်များကို သိမ်းမလား။"</string>
-    <string name="wifi_add_app_networks_summary" product="default" msgid="2670215712788515167">"<xliff:g id="APPNAME">%1$s</xliff:g> က သင့်ဖုန်းတွင် ဤကွန်ရက်များကို သိမ်းလိုသည်"</string>
-    <string name="wifi_add_app_networks_summary" product="tablet" msgid="2088967184512169910">"<xliff:g id="APPNAME">%1$s</xliff:g> က သင့်တက်ဘလက်တွင် ဤကွန်ရက်များကို သိမ်းလိုသည်"</string>
     <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"ကွန်ရက် <xliff:g id="NUMBER">%d</xliff:g> ခုကို သိမ်းနေသည်…"</string>
     <string name="wifi_add_app_networks_saved_summary" msgid="1648417628665152905">"ကွန်ရက်များကို သိမ်းပြီးပါပြီ"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"Wi-Fi  ခေါ်ဆိုမှု"</string>
@@ -1090,8 +897,6 @@
     <string name="accelerometer_title" msgid="7745991950833748909">"ဖန်သားပြင် အလိုအလျောက်လှည့်ခြင်း"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"ဖွင့်ရန် - မျက်နှာအခြေခံ"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"မျက်နှာကို မှတ်မိခြင်း"</string>
-    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"သင့်ဖုန်းကို အလျားလိုက်နှင့် ဒေါင်လိုက် ပြောင်းသောအခါ ဖန်သားပြင်အနေအထားကို အလိုအလျောက် ချိန်ညှိပေးသည်"</string>
-    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"သင့်တက်ဘလက်ကို အလျားလိုက်နှင့် ဒေါင်လိုက် ပြောင်းသောအခါ ဖန်သားပြင်အနေအထားကို အလိုအလျောက် ချိန်ညှိပေးသည်"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"အလိုအလျောက်လှည့်ခြင်းအကြောင်း ပိုမိုလေ့လာနိုင်သည်"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"သင့်ဖုန်းကို အလျားလိုက်နှင့် ဒေါင်လိုက် ပြောင်းသောအခါ"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"ဖန်သားပြင် ပုံရိပ်ပြတ်သားကိန်း"</string>
@@ -1202,10 +1007,6 @@
     <string name="sim_lock_settings" msgid="4493069398250139205">"ဆင်းမ်ကတ် လော့ခ်ဆက်တင်များ"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"ဆင်းမ်ကတ် လော့ခ်"</string>
     <string name="sim_pin_toggle" msgid="98754920202404425">"ဆင်းမ်ကတ် လော့ခ်ချခြင်း"</string>
-    <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"တက်ဘလက်ကိုအသုံးပြုရန် ပင်နံပါတ်လိုအပ်သည်"</string>
-    <string name="sim_lock_on" product="default" msgid="3303147192981388923">"ဖုန်းကိုအသုံးပြုရန် ပင်နံပါတ်လိုအပ်သည်"</string>
-    <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"တက်ဘလက်ကိုအသုံးပြုရန် ပင်နံပါတ်လိုအပ်သည်"</string>
-    <string name="sim_lock_off" product="default" msgid="4634118006847137785">"ဖုန်းကိုအသုံးပြုရန် ပင်နံပါတ်လိုအပ်သည်"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"ဆင်းမ်ကတ် ပင်နံပါတ်ပြောင်းရန်"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"ဆင်းကဒ် ပင်နံပါတ်"</string>
     <string name="sim_enable_sim_lock" msgid="8993991669975548653">"ဆင်းမ်ကတ် လော့ခ်ချခြင်း"</string>
@@ -1250,12 +1051,6 @@
     <string name="storage_settings_title" msgid="486118156723194815">"သိုလှောင်မှု ဆက်တင်များ"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (ဆင်းမ် အထိုင် %1$d)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"ကြည့်ရန် သိမ်းထားသည့် ကွန်ရက်ကို ရွေးပါ"</string>
-    <string name="status_number" product="tablet" msgid="3597945414666253183">"MDNနံပါတ်"</string>
-    <string name="status_number" product="default" msgid="8407999629121682207">"ဖုန်းနံပါတ်"</string>
-    <string name="status_number_sim_slot" product="tablet" msgid="6582203988975619529">"MDN (ဆင်းမ် အထိုင် %1$d)"</string>
-    <string name="status_number_sim_slot" product="default" msgid="5724823197745786398">"ဖုန်း နံပါတ် (ဆင်းမ် အထိုင် %1$d)"</string>
-    <string name="status_number_sim_status" product="tablet" msgid="4239876366511743428">"ဆင်းမ်ထဲက MDN"</string>
-    <string name="status_number_sim_status" product="default" msgid="2772745542921910086">"ဆင်းမ်ထဲက ဖုန်းနံပါတ်"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MINနံပါတ်"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSIDနံပါတ်"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRLဗားရှင်း"</string>
@@ -1315,12 +1110,6 @@
     <string name="storage_wizard_move_progress_title" msgid="3912406225614672391">"<xliff:g id="APP">^1</xliff:g>ရွှေ့နေသည်…"</string>
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"ရွှေ့လျားနေစဉ် <xliff:g id="NAME">^1</xliff:g>ကိုမဖယ်ရှားပါနှင့်။ \n\nဤစက်ပစ္စည်းပေါ်ရှိ <xliff:g id="APP">^2</xliff:g> အပ်ဖ်ကို ရွှေလျားမှုမပြီးသ၍ အသုံးပြု၍ရမည်မဟုတ်ပါ။"</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"<xliff:g id="NAME">^1</xliff:g> ကို သင်မည်သို့ သုံးမလဲ။"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"စက်တွင်းသိုလှောင်ခန်းအတွက် SD ကတ် ဖော်မက်လုပ်ရန်"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"အက်ပ်နှင့် မီဒီယာများကို ဤတက်ဘလက်တွင်သာသုံးရန် သိမ်းခြင်း။ &lt;a href=https://support.google.com/android/answer/12153449&gt;SD ကတ် ထည့်သွင်းခြင်းအကြောင်း ပိုမိုလေ့လာရန်&lt;/a&gt;။"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"ဖော်မက်လုပ်ရန်"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"စက်တွင်းသိုလှောင်ခန်းအတွက် SD ကတ် ဖော်မက်လုပ်ရန်"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"အက်ပ်နှင့် မီဒီယာများကို ဤဖုန်းတွင်သာသုံးရန် သိမ်းခြင်း။ &lt;a href=https://support.google.com/android/answer/12153449&gt;SD ကတ် ထည့်သွင်းခြင်းအကြောင်း ပိုမိုလေ့လာရန်&lt;/a&gt;။"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"ဖော်မက်လုပ်ရန်"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"သို့မဟုတ်"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"ခရီးဆောင်သိုလှောင်ခန်းအတွက် SD ကတ် ဖော်မက်လုပ်ရန်"</string>
     <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"ဓာတ်ပုံ၊ ဗီဒီယို၊ သီချင်းစသည်တို့ကို သိမ်းပြီး အခြားစက်များတွင် အသုံးပြုခြင်း။ &lt;a href=https://support.google.com/android/answer/12153449&gt;SD ကတ် ထည့်သွင်းခြင်းအကြောင်း ပိုမိုလေ့လာရန်&lt;/a&gt;။"</string>
@@ -1331,13 +1120,9 @@
     <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"ဓာတ်ပုံ၊ ဗီဒီယို၊ သီချင်းစသည်တို့ သိမ်းရန် ဤ <xliff:g id="NAME_0">^1</xliff:g> ကို ဖော်မက်လုပ်ရမည်။ \n\nဖော်မက်လုပ်ခြင်းက <xliff:g id="NAME_1">^2</xliff:g> ပေါ်ရှိ လက်ရှိအကြောင်းအရာများကို ဖျက်လိုက်မည်။ အကြောင်းအရာများ ပျောက်မသွားစေရန် နောက် <xliff:g id="NAME_2">^3</xliff:g> (သို့) စက်ပစ္စည်းတစ်ခုသို့ မိတ္တူကူးထားပါ။"</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g> ဖော်မက်လုပ်ရန်"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"အကြောင်းအရာကို <xliff:g id="NAME">^1</xliff:g> သို့ ရွှေ့မလား။"</string>
-    <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"ဖိုင်၊ မီဒီယာနှင့် အချို့သော အက်ပ်များကို ဤ <xliff:g id="NAME">^1</xliff:g> သို့ ရွှေ့နိုင်ပါသည်။ \n\nဤသို့ ရွှေ့ခြင်းအားဖြင့် သင့်တက်ဘလက်သိုလှောင်ခန်းတွင် <xliff:g id="SIZE">^2</xliff:g> နေရာလွတ်သွားစေမည်ဖြစ်ပြီး <xliff:g id="DURATION">^3</xliff:g> ခန့် ကြာနိုင်ပါသည်။"</string>
-    <string name="storage_wizard_migrate_v2_body" product="default" msgid="809730501314645325">"ဖိုင်၊ မီဒီယာနှင့် အချို့သော အက်ပ်များကို ဤ <xliff:g id="NAME">^1</xliff:g> သို့ ရွှေ့နိုင်ပါသည်။ \n\nဤသို့ ရွှေ့ခြင်းအားဖြင့် သင့်ဖုန်းသိုလှောင်ခန်းတွင် <xliff:g id="SIZE">^2</xliff:g> နေရာလွတ်သွားစေမည်ဖြစ်ပြီး <xliff:g id="DURATION">^3</xliff:g> ခန့် ကြာနိုင်ပါသည်။"</string>
     <string name="storage_wizard_migrate_v2_checklist" msgid="2618258869444553060">"ရွှေ့နေစဉ်−"</string>
     <string name="storage_wizard_migrate_v2_checklist_media" msgid="5867134681730723744">"<xliff:g id="NAME">^1</xliff:g> ကို မဖယ်ရှားပါနှင့်"</string>
     <string name="storage_wizard_migrate_v2_checklist_apps" msgid="1882077445750580783">"အချို့အက်ပ်များ အလုပ်လုပ်မည် မဟုတ်ပါ"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="tablet" msgid="6111770421449869539">"ဤတက်ဘလက်ကို အားသွင်းထားပါ"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="default" msgid="8826915870192535008">"ဤဖုန်းကို အားသွင်းထားပါ"</string>
     <string name="storage_wizard_migrate_v2_now" msgid="3341460117088026966">"အကြောင်းအရာကို ရွှေ့ရန်"</string>
     <string name="storage_wizard_migrate_v2_later" msgid="6067756122853315642">"အကြောင်းအရာကို နောက်မှ ရွှေ့ရန်"</string>
     <string name="storage_wizard_migrate_progress_v2_title" msgid="8791318509516968103">"အကြောင်းအရာကို ရွှေ့နေပါပြီ…"</string>
@@ -1406,21 +1191,9 @@
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"အမှားဖြစ်သွားသဖြင့် ဒေါင်းလုဒ်လုပ်ထားသော ဆင်းမ်ကတ်များကို ဖျက်၍မရပါ။\n\nသင့်စက်ပစ္စည်းကို ပြန်စတင်ပြီး ထပ်စမ်းကြည့်ပါ။"</string>
     <string name="main_clear_title" msgid="277664302144837723">"ဒေတာအားလုံးဖျက်ရန် (စက်ရုံထုတ်ဆက်တင် သတ်မှတ်ရန်)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"ဒေတာအားလုံးဖျက်ခြင်း (စက်ရုံထုတ်ဆက်တင် သတ်မှတ်ရန်)"</string>
-    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"ဤသို့ပြုလုပ်ခြင်းက သင့်တက်ဘလက်၏ "<b>"စက်အတွင်းသိုလှောင်ခန်း"</b>" အပါအဝင် အောက်ပါဒေတာအားလုံးကို ဖျက်ပါမည်-\n\n"<li>"သင်၏ Google အကောင့်"</li>\n<li>"စနစ်နှင့် အက်ပ်ဒေတာ၊ ဆက်တင်များ၊"</li>\n<li>"ဒေါင်းလုဒ်လုပ်ထားသည့်အက်ပ်များ"</li></string>
-    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"ဤသို့ပြုလုပ်ခြင်းဖြင့် အောက်ပါတို့ အပါအဝင် သင့်ဖုန်း၏ "<b>"စက်တွင်းသိုလှောင်ခန်း"</b>" ရှိဒေတာအားလုံးကို ဖျက်ပါမည်- \n\n"<li>"သင်၏ Google Account"</li>\n<li>"စနစ်နှင့် အက်ပ်ဒေတာ၊ ဆက်တင်များ၊"</li>\n<li>"ဒေါင်းလုဒ်လုပ်ထားသည့်အက်ပ်များ"</li></string>
-    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"သင်သည် လက်ရှိတွင် အောက်ပါအကောင့်များကို ဝင်ရောက်ထားပါသည်\n"</string>
-    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"ဤစက်ပစ္စည်းပေါ်တွင် အခြားအသုံးပြုသူများလည်း ရှိသည်။\n"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"သီချင်း"</li>\n<li>"ဓာတ်ပုံများ"</li>\n<li>"အသုံးပြုသူ၏အခြားဒေတာ"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM များ"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"၎င်းက သင်၏ မိုဘိုင်းဝန်ဆောင်မှုအစီအစဉ်ကို ပယ်ဖျက်မည်မဟုတ်ပါ။"</string>
-    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"သီချင်း၊ ပုံများနှင့် အသုံးပြုသူ၏အခြားဒေတာများကို ရှင်းလင်းရန်အတွက်"<b>"USB သိုလှောင်ကိရိယာ"</b>"အား ဖျက်ရန်လိုအပ်ပါသည်။"</string>
-    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"သီချင်း၊ ပုံများနှင့် အခြားာအသုံးပြုသူ၏ဒေတာများကို ရှင်းလင်းရန်အတွက်"<b>"SD ကတ်"</b>"အား ဖျက်ရန်လိုအပ်ပါသည်။"</string>
-    <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"USBသိုလှောင်ကိရိယာအား ဖျက်ခြင်း"</string>
-    <string name="erase_external_storage" product="default" msgid="2610056855012660451">"SD ကတ်အား ဖျက်ရန်"</string>
-    <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"USBသိုလှောင်မှုထဲမှ သီချင်းနှင့် ဓါတ်ပုံကဲ့သို့ စက်တွင်းဒေတာအားလုံးအားဖျက်မည်"</string>
-    <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"SD ကတ်ထဲရှိ သီချင်း သို့မဟုတ် ဓာတ်ပုံကဲ့သို့ ဒေတာအားလုံးကို ဖျက်ရန်"</string>
-    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"ဒေတာအားလုံး ဖျက်ရန်"</string>
-    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"ဒေတာအားလုံး ဖျက်ရန်"</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"သင့်ကိုယ်ရေးကိုယ်တာအချက်အလက်များနှင့် ဒေါင်းလုဒ်လုပ်ထားသော အက်ပ်အားလုံးကို ဖျက်ပါမည်။ ဤလုပ်ဆောင်ချက်ကို ပြန်ပြင်၍ မရပါ။"</string>
     <string name="main_clear_final_desc_esim" msgid="440406836793824969">"ဒေါင်းလုဒ်လုပ်ထားသော အက်ပ်နှင့် ဆင်းမ်ကဒ်များ အပါအဝင် သင်၏ ကိုယ်ရေးကိုယ်တာ အချက်အလက်အားလုံးကို ဖျက်ပါမည်။ ဤလုပ်ဆောင်ချက်ကို ပြန်ပြင်၍ မရပါ။"</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"ဒေတာအားလုံးကို ဖျက်မလား။"</string>
@@ -1466,14 +1239,8 @@
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"အင်တာနက်ကို USB၊ ဘလူးတုသ်နှင့် အီတာနက်မှတစ်ဆင့် မျှဝေရန်"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB သုံး၍ချိတ်ဆက်ခြင်း"</string>
-    <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"ဖုန်း၏ အင်တာနက်ကို USB မှတစ်ဆင့် မျှဝေရန်"</string>
-    <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"တက်ဘလက်၏ အင်တာနက်ကို USB မှတစ်ဆင့် မျှဝေရန်"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"ဘလူးတုသ်သုံးချိတ်ဆက်ခြင်း"</string>
-    <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"တက်ဘလက်၏ အင်တာနက်ကို ဘလူးတုသ်မှတစ်ဆင့် မျှဝေရန်"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"ဖုန်း၏ အင်တာနက်ကို ဘလူးတုသ်မှတစ်ဆင့် မျှဝေရန်"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"အီသာနက် ချိတ်၍မျှဝေခြင်း"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"ဖုန်း၏ အင်တာနက်ကို အီသာနက်မှတစ်ဆင့် မျှဝေရန်"</string>
-    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"တက်ဘလက်၏ အင်တာနက်ချိတ်ဆက်မှုကို အီသာနက်မှတစ်ဆင့် မျှဝေရန်"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"သင်၏ Wi-Fi သို့မဟုတ် မိုဘိုင်းဒေတာ ချိတ်ဆက်မှုမှတစ်ဆင့် အခြားစက်ပစ္စည်းများသို့ အင်တာနက်လွှင့်ရန် ဟော့စပေါ့နှင့် မိုဘိုင်းသုံးတွဲချိတ်ခြင်းကို သုံးပါ။ အနီးရှိစက်ပစ္စည်းများသို့ အကြောင်းအရာ မျှဝေရန်အတွက် အက်ပ်များသည်လည်း ဟော့စပေါ့ပြုလုပ်နိုင်သည်။"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"သင်၏ Wi-Fi သို့မဟုတ် မိုဘိုင်းဒေတာ ချိတ်ဆက်မှုမှတစ်ဆင့် အခြားစက်ပစ္စည်းများသို့ အင်တာနက်လွှင့်ရန် ဟော့စပေါ့နှင့် မိုဘိုင်းသုံးတွဲချိတ်ခြင်းကို သုံးပါ။ အနီးရှိစက်ပစ္စည်းများသို့ အကြောင်းအရာ မျှဝေရန်အတွက် အက်ပ်များသည်လည်း ဟော့စပေါ့ပြုလုပ်နိုင်သည်။"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"အကူအညီ"</string>
@@ -1521,10 +1288,6 @@
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"တည်နေရာဖြင့် ဒေသစံတော်ချိန်ရှာဖွေခြင်းကို ပံ့ပိုးမထားပါ"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"တည်နေရာဖြင့် ဒေသစံတော်ချိန်ရှာဖွေခြင်း အပြောင်းအလဲများကို ခွင့်ပြုမထားပါ"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"ဒေသစံတော်ချိန် သတ်မှတ်ရန် တည်နေရာကို သုံးထားနိုင်သည်"</string>
-    <string name="about_settings" product="tablet" msgid="2888705054709289693">"တက်ဘလက်အကြောင်း"</string>
-    <string name="about_settings" product="default" msgid="4038626127378127613">"ဖုန်းအကြောင်း"</string>
-    <string name="about_settings" product="device" msgid="9012888717090302815">"စက်ပစ္စည်းအကြောင်း"</string>
-    <string name="about_settings" product="emulator" msgid="2516560858771320366">"တုပထားသည့်စက်ပစ္စည်း"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"ဥပဒေဆိုင်ရာအချက်အလက်၊ အခြေအနေ၊ ဆော့ဝဲလ်ဗားရှင်းအား ကြည့်ရှုရန်"</string>
     <string name="legal_information" msgid="7509900979811934843">"ဥပဒေဆိုင်ရာအချက်အလက်များ"</string>
     <string name="manual" msgid="3651593989906084868">"ကိုယ်တိုင်ထည့်သွင်းခြင်း"</string>
@@ -1648,9 +1411,6 @@
     </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"IT စီမံခန့်ခွဲသူကို ဆက်သွယ်ပါ"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"၎င်းတို့သည် ပင်နံပါတ်၊ လော့ခ်ပုံစံ သို့မဟုတ် စကားဝှက်အား ပြင်ဆင်ရန် ကူညီသည်။"</string>
-    <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"သင်၏တက်ဘလက်နှင့် ကိုယ်ရေးကိုယ်တာ အချက်အလက်များသည် အမျိုးအမည် မသိသောအက်ပ်များ၏ တိုက်ခိုက်ခြင်းကို ပိုမိုခံရနိုင်ပါသည်။ ဤနေရာမှ ရယူထားသည့် အက်ပ်များကို ထည့်သွင်းအသုံးပြုခြင်းဖြင့် ဖြစ်ပေါ်လာနိုင်သော ဖုန်းပျက်စီးမှု သို့မဟုတ် ဒေတာဆုံးရှုံးမှုများအတွက် သင့်ထံ၌သာ တာဝန်ရှိကြောင်းကို သင်က သဘောတူရာရောက်ပါသည်။"</string>
-    <string name="install_all_warning" product="default" msgid="652516435709047343">"သင်၏ဖုန်းနှင့် ကိုယ်ရေးကိုယ်တာ အချက်အလက်များသည် အမျိုးအမည် မသိသောအက်ပ်များ၏ တိုက်ခိုက်ခြင်းကို ပိုမိုခံရနိုင်ပါသည်။ ဤနေရာမှ ရယူထားသည့် အက်ပ်များကို ထည့်သွင်းအသုံးပြုခြင်းဖြင့် ဖြစ်ပေါ်လာနိုင်သော ဖုန်းပျက်စီးမှု သို့မဟုတ် ဒေတာဆုံးရှုံးမှုများအတွက် သင့်ထံ၌သာ တာဝန်ရှိကြောင်းကို သင်က သဘောတူရာရောက်ပါသည်။"</string>
-    <string name="install_all_warning" product="device" msgid="2348262609815354500">"သင့်စက်ပစ္စည်းနှင့် ကိုယ်ရေးကိုယ်တာ အချက်အလက်များသည် အမျိုးအမည် မသိသောအက်ပ်များ၏ တိုက်ခိုက်ခြင်းကို ပိုမိုခံရနိုင်ပါသည်။ ဤနေရာမှ ရယူထားသည့် အက်ပ်များကို ထည့်သွင်းအသုံးပြုခြင်းအားဖြင့် ဖြစ်ပေါ်လာနိုင်သော စက်ပစ္စည်းပျက်စီးမှု (သို့) ဒေတာဆုံးရှုံးမှုများအတွက် သင့်ထံ၌သာ တာဝန်ရှိကြောင်းကို သင်သဘောတူထားပါသည်။"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"အဆင့်မြင့်အပြင်အဆင်များ"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"ပိုမိုပြီးရွေးချယ်နိုင်သော အပြင်အဆင်များ ရရှိခြင်း"</string>
     <string name="application_info_label" msgid="1015706497694165866">"အက်ပ်အချက်အလက်များ"</string>
@@ -1778,8 +1538,6 @@
     <string name="process_service_in_use_description" msgid="4210957264507014878">"<xliff:g id="COMP_NAME">%1$s</xliff:g>ဝန်ဆောင်မှုအား အသုံးပြုနေသည်"</string>
     <string name="process_provider_in_use_description" msgid="6730020083976048028">"<xliff:g id="COMP_NAME">%1$s</xliff:g> ပံ့ပိုးသူမှ အသုံးပြုနေသည်"</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="6201041461740445113">"စနစ်၏ဝန်ဆောင်မှုကို ရပ်ဆိုင်းမည်လား?"</string>
-    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="2076922609580490122">"အကယ်၍ ဤဆားဗစ်ကိုရပ်ဆိုင်းလျှင် သင့်တက်ဘလက်ထဲမှတချို့လုပ်ဆောင်ချက်များမှာ ပါဝါပိတ်ကာ ပြန်လည်ဖွင့်သည့်အထိ အလုပ်လုပ်မည်မဟုတ်ပါ။"</string>
-    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="2625863973434309085">"အကယ်၍ဤဝန်ဆောင်မှုကိုရပ်ဆိုင်းလျှင် သင့်ဖုန်း၏အချို့သောလုပ်ဆောင်ချက်များမှာ ပါဝါပိတ်ပြီး နောက်တခါပြန်လည်ဖွင့်သည့်အထိ ကောင်းစွာအလုပ်လုပ်မည်မဟုတ်ပါ"</string>
     <string name="language_input_gesture_title" msgid="3292455685728572960">"ဘာသာစကားများ၊ စာရိုက်စနစ်များနှင့် လက်ဟန်များ"</string>
     <string name="language_settings" msgid="8700174277543875046">"ဘာသာစကားနှင့် စာရိုက်စနစ်"</string>
     <string name="languages_settings" msgid="5784775502251770671">"ဘာသာစကားများ"</string>
@@ -1848,8 +1606,6 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"ဘာသာစကားအားလုံးအတွက်"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"ဘာသာစကားပိုများများ…"</string>
     <string name="testing" msgid="6294172343766732037">"စမ်းသပ်မှု"</string>
-    <string name="testing_phone_info" product="tablet" msgid="1910768200608214456">"တက်ဘလက်အကြောင်း"</string>
-    <string name="testing_phone_info" product="default" msgid="1150527695827743906">"ဖုန်းအကြောင်း"</string>
     <string name="keyboard_settings_summary" msgid="2716339620942356432">"မျက်နှာပြင် လက်ကွက်၊ စကားသံ၊ တူးလ်များ"</string>
     <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"မျက်နှာပြင် လက်ကွက်၊ ဒြပ်ရှိ ကီးဘုတ်၊ စကားသံ၊ တူးလ်များ"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"စက်၏ ကီးဘုတ်"</string>
@@ -1926,8 +1682,6 @@
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"ဆက်တင်ပြင်ဆင်သတ်မှတ်ရန်"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"ပြကွက်အရွယ်အစားနှင့် စာသားဆက်တင်များကို ပြင်ဆင်သတ်မှတ်ထားသည်"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"ပြကွက်အရွယ်နှင့် စာသားပြင်ဆင်သတ်မှတ်မလား။"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"သင့်ပြကွက်နှင့် စာသားသတ်မှတ်ချက်များကို ဖုန်း၏ မူလဆက်တင်များသို့ ပြင်ဆင်သတ်မှတ်ပါမည်"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"ပြကွက်နှင့် စာသားရွေးချယ်မှုများကို တက်ဘလက်၏ မူလဆက်တင်များသို့ ပြင်ဆင်သတ်မှတ်မည်"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"ပြင်ဆင်သတ်မှတ်ရန်"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"စနေ၊ တနင်္ဂနွေမှာ တစ်ခုခုစီစဉ်ထားလား။"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"ကမ်းခြေသွားမလို့။ လိုက်မလား။"</string>
@@ -2069,8 +1823,6 @@
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"‘အမြန် ဆက်တင်များ’ တွင် လက်တစ်ဖက်သုံးမုဒ် ထည့်လိုက်သည်။ ဖွင့်ရန် (သို့) ပိတ်ရန် အချိန်မရွေး အောက်သို့ပွတ်ဆွဲနိုင်သည်။"</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"စခရင်၏ထိပ်မှနေ၍ ‘အမြန် ဆက်တင်များ’ တွင် လက်တစ်ဖက်သုံးမုဒ်လည်း ထည့်နိုင်သည်"</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"ပယ်ရန်"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"သင့်ဖုန်းတွင် အရောင်များပြသပုံကို ချိန်ညှိနိုင်သည်"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"သင့်တက်ဘလက်တွင် အရောင်များပြသပုံကို ချိန်ညှိနိုင်သည်"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"အရောင်ပြင်ဆင်ခြင်းကို သုံးရန်"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"အရောင် အမှန်ပြင်ခြင်း ဖြတ်လမ်းလင့်ခ်"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"အရောင် အမှန်ပြင်ခြင်း အကြောင်း"</string>
@@ -2120,11 +1872,7 @@
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"ဖန်သားပြင်ကို ပိုမှိန်အောင်လုပ်ခြင်း"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"ပိုမှိန်ခြင်း ဖြတ်လမ်းလင့်ခ်"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"ပိုမှိန်ခြင်း အကြောင်း"</string>
-    <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"ဖန်သားပြင်ကို သင့်ဖုန်း၏ အနိမ့်ဆုံးတောက်ပမှုထက် ပိုမှိန်ရန်"</string>
-    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"ဖန်သားပြင်ကို သင့်တက်ဘလက်၏ အနိမ့်ဆုံးတောက်ပမှုထက် ပိုမှိန်ရန်"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"သက်သောင့်သက်သာ စာဖတ်နိုင်ရန် သင့်ဖန်သားပြင်ကို ပိုမှိန်နိုင်သည်"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"ပိုမှိန်ခြင်းသည် အောက်ပါတို့တွင် အသုံးဝင်သည်- &lt;ol&gt; &lt;li&gt; သင့်ဖုန်း၏ မူလ အနိမ့်ဆုံးတောက်ပမှုက အလွန်လင်းနေသေးသောအခါ&lt;/li&gt; &lt;li&gt; ညအချိန် (သို့) မအိပ်မီ အမှောင်ခန်းကဲ့သို့ မှောင်သည့်အခြေအနေမျိုးတွင် ဖုန်းသုံးနေသောအခါ&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5158211121482010799">"ပိုမှိန်ခြင်းသည် အောက်ပါတို့တွင် အသုံးဝင်သည်- &lt;ol&gt; &lt;li&gt; သင့်တက်ဘလက်၏ မူလ အနိမ့်ဆုံးတောက်ပမှုက အလွန်လင်းနေသေးသောအခါ&lt;/li&gt; &lt;li&gt; ညအချိန် (သို့) မအိပ်မီ အမှောင်ခန်းကဲ့သို့ မှောင်သည့်အခြေအနေမျိုးတွင် ဖုန်းသုံးနေသောအခါ&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"တောက်ပမှုပြင်းအား"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"တောက်ပမှုကို လျှော့ချရန်"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"ပိုမိုတောက်ပအောင်လုပ်ရန်"</string>
@@ -2284,9 +2032,6 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"ပါဝါအသုံးပြုမှုအား ချိန်တွယ်ခြင်း"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"ပါဝင်သော ဆော့ဝဲလ်များ"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"အက်ပ်များ ပုံမှန်လုပ်ဆောင်နေပါသည်"</string>
-    <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"ဖုန်းနောက်ခံတွင် ဘက်ထရီ အသုံးပြုမှု ပုံမှန်ဖြစ်သည်"</string>
-    <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"တက်ဘလက်နောက်ခံတွင် ဘက်ထရီ အသုံးပြုမှု ပုံမှန်ဖြစ်သည်"</string>
-    <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"စက်နောက်ခံတွင် ဘက်ထရီ အသုံးပြုမှု ပုံမှန်ဖြစ်သည်"</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"ဘက်ထရီ အားနည်းနေသည်"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"ဘက်ထရီသက်တမ်းရှည်စေရန် ‘ဘက်ထရီအားထိန်း’ ကို ဖွင့်ပါ"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"ဘက်ထရီသက်တမ်း ပိုကောင်းအောင်လုပ်ပါ"</string>
@@ -2304,11 +2049,6 @@
     <skip />
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"အားသွင်းမှု ခဏရပ်သည့်အကြောင်း ပိုမိုလေ့လာရန်"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"ဆက်အားသွင်းရန်"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"အရမ်းပူချိန်နှင့် ကြာမြင့်စွာအားသွင်းရခြင်း စသည့် အခြေအနေများတွင် ဘက်ထရီသက်တမ်း ပိုကြာစေရန် <xliff:g id="PERCENT">%1$s</xliff:g> အထိသာ အားသွင်းရန် ကန့်သတ်နိုင်သည်။\n\n၎င်းအခြေအနေများ မရှိတော့ပါက ဖုန်းကို အလိုအလျောက် ပုံမှန်အားပြန်သွင်းပါမည်။"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"အရမ်းပူနေချိန်နှင့် ကြာမြင့်စွာအားသွင်းရခြင်း စသည့် အခြေအနေများတွင် ဘက်ထရီသက်တမ်း ပိုကြာစေရန် <xliff:g id="PERCENT">%1$s</xliff:g> အထိသာ အားသွင်းရန် ကန့်သတ်နိုင်သည်။\n\n၎င်းအခြေအနေများ မရှိတော့ပါက တက်ဘလက်ကို အလိုအလျောက် ပုံမှန်အားပြန်သွင်းပါမည်။"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"သင့်ဖုန်းကို ပုံမှန်ထက်ပိုအသုံးပြုထားသောကြောင့် သင်၏ဘက်ထရီသည် သာမန်ထက် အကုန်မြန်နိုင်ပါသည်။\n\nဘက်ထရီအများဆုံးသုံးသည့် အက်ပ်များ-"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"သင့်တက်ဘလက်ကို ပုံမှန်ထက်ပိုအသုံးပြုထားသောကြောင့် သင်၏ဘက်ထရီသည် သာမန်ထက် အကုန်မြန်နိုင်ပါသည်။\n\nဘက်ထရီအများဆုံးသုံးသည့် အက်ပ်များ-"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"သင့်စက်ကို ပုံမှန်ထက်ပိုအသုံးပြုထားသောကြောင့် သင်၏ဘက်ထရီသည် သာမန်ထက် အကုန်မြန်နိုင်ပါသည်။\n\nဘက်ထရီအများဆုံးသုံးသည့် အက်ပ်များ-"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"စွမ်းအားမြင့် နောက်ခံလုပ်ဆောင်ချက် ပါဝင်သည်"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="other">အက်ပ် %1$d ခုကို ကန့်သတ်ရန်</item>
@@ -2339,12 +2079,8 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"ဖယ်ရှားရန်"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"မလုပ်တော့"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"အားအပြည့်သွင်းရန်"</string>
-    <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"သင့်အက်ပ်များသည် ပုံမှန်ဘက်ထရီပမာဏကို အသုံးပြုနေသည်။ ၎င်းတို့ ဘက်ထရီအသုံးများလျှင် သင့်ဖုန်းက သင်လုပ်ဆောင်နိုင်သည်များကို အကြံပြုပါမည်။ \n\nဘက်ထရီအားနည်းနေလျှင် \'ဘက်ထရီအားထိန်း\' ကို အချိန်မရွေး ဖွင့်နိုင်ပါသည်။"</string>
-    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"သင့်အက်ပ်များသည် ပုံမှန်ဘက်ထရီအားကို အသုံးပြုနေသည်။ ၎င်းတို့ ဘက်ထရီအသုံးများလျှင် သင့်တက်ဘလက်က သင်လုပ်ဆောင်နိုင်သည်များကို အကြံပြုပါမည်။ \n\nဘက်ထရီအားနည်းနေလျှင် \'ဘက်ထရီအားထိန်း\' ကို အချိန်မရွေး ဖွင့်နိုင်ပါသည်။"</string>
-    <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"သင့်အက်ပ်များသည် ပုံမှန်ဘက်ထရီအားကို အသုံးပြုနေသည်။ ၎င်းတို့ ဘက်ထရီအသုံးများလျှင် သင့်စက်က သင်လုပ်ဆောင်နိုင်သည်များကို အကြံပြုပါမည်။ \n\nဘက်ထရီအားနည်းနေလျှင် \'ဘက်ထရီအားထိန်း\' ကို အချိန်မရွေး ဖွင့်နိုင်ပါသည်။"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"ဘက်ထရီ စီမံခန့်ခွဲမှုစနစ်"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"အက်ပ်များကို အလိုအလျောက် စီမံခြင်း"</string>
-    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"အသုံးပြုလေ့ မရှိသော အက်ပ်များအတွက် ဘက်ထရီ ကန့်သတ်ရန်"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"အက်ပ်များက ဓာတ်ခဲကို အားကုန်စေကြောင်း \'ဘက်ထရီ မန်နေဂျာ\' က တွေ့ရှိသည့်အခါ ထိုအက်ပ်များကို ကန့်သတ်ရန် သင်က ရွေးချယ်နိုင်ပါမည်။ ကန့်သတ်ထားသော အက်ပ်များသည် ကောင်းစွာမလုပ်ဆောင်တော့ဘဲ အကြောင်းကြားချက်များ နောက်ကျနိုင်ပါသည်။"</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"ကန့်သတ်ထားသည့် အက်ပ်များ"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
@@ -2372,8 +2108,6 @@
     <string name="power_bluetooth" msgid="5085900180846238196">"ဘလူးတုသ်"</string>
     <string name="power_cell" msgid="7793805106954398186">"မိုဘိုင်းကွန်ရက်"</string>
     <string name="power_phone" msgid="2768396619208561670">"အသံဖြင့်ခေါ်ဆိုမှုများ"</string>
-    <string name="power_idle" product="tablet" msgid="4689321599298911021">"တက်ဘလက်အားမသုံးသည့်အခါ"</string>
-    <string name="power_idle" product="default" msgid="9132502722499465252">"ဖုန်းအသုံးမပြုခြင်း"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"<xliff:g id="TIME">^1</xliff:g> ကြာ သုံးထားသည်"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"မျက်နှာပြင်အသုံးပြုချိန် <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="PERCENT">%1$s</xliff:g> ကို <xliff:g id="APP">%2$s</xliff:g> က အသုံးပြုထားသည်"</string>
@@ -2424,9 +2158,6 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"အချိန်ဇယား သတ်မှတ်ပါ"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"ဘက်ထရီသက်တမ်းကို တိုးပေးသည်"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"အားသွင်းနေသည့်အခါ ပိတ်ရန်"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="3618041244703216293">"သင့်ဖုန်းကို <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> အထက် အားသွင်းပြီးသည့်အခါ ‘ဘက်ထရီအားထိန်း’ ပိတ်သွားသည်"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="1733686775743601110">"သင့်တက်ဘလက်ကို <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> အထက် အားသွင်းပြီးသည့်အခါ ‘ဘက်ထရီအားထိန်း’ ပိတ်သွားသည်"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="7449283917787428755">"သင့်စက်ကို <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> အထက် အားသွင်းပြီးသည့်အခါ ‘ဘက်ထရီအားထိန်း’ ပိတ်သွားသည်"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"ဖွင့်ရန်"</string>
@@ -2448,9 +2179,6 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"နောက်ခံအချိန်- တစ်မိနစ်ထက် နည်းသည်"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"စုစုပေါင်း- <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"နောက်ခံအချိန်- <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"ဘက်ထရီ အသုံးပြုမှုဒေတာသည် ခန့်မှန်းခြေဖြစ်ပြီး ဖုန်းအားသွင်းနေသည့်အခါ အသုံးပြုမှုကို မတိုင်းတာပါ"</string>
-    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"ဘက်ထရီ အသုံးပြုမှုဒေတာသည် ခန့်မှန်းခြေဖြစ်ပြီး တက်ဘလက်အားသွင်းနေသည့်အခါ အသုံးပြုမှုကို မတိုင်းတာပါ"</string>
-    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"ဘက်ထရီ အသုံးပြုမှုဒေတာသည် ခန့်မှန်းခြေဖြစ်ပြီး စက်အားသွင်းနေသည့်အခါ အသုံးပြုမှုကို မတိုင်းတာပါ"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"အားအပြည့်သွင်းအပြီး နာရီအနည်းငယ်အတွင်း ဘက်ထရီအသုံးပြုမှုဒေတာကို သိနိုင်မည်"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"ဘက်ထရီ အသုံးပြုမှု ပုံစံကားချပ်"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"နေ့စဉ် ဘက်ထရီ အသုံးပြုမှု ဇယားကွက်"</string>
@@ -2520,8 +2248,6 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"သင်၏ ကွန်ရက်ချိတ်ဆက်မှုကို အလိုအလျောက် စီမံခန့်ခွဲခြင်းဖြင့် ဘက်ထရီ သက်တမ်းကို ရှည်စေပြီး စက်၏စွမ်းဆောင်ရည်ကို ပိုမိုကောင်းမွန်စေသည်"</string>
     <string name="credentials_title" msgid="7535942196886123656">"ယုံကြည်စိတ်ချရသောသိုလှောင်နေရာ"</string>
     <string name="credentials_install" msgid="3933218407598415827">"လက်မှတ်ထည့်သွင်းခြင်း"</string>
-    <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"သိုလှောင်နေရာမှ အသိအမှတ်ပြုလက်မှတ်များကို ထည့်သွင်းရန်"</string>
-    <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"SD ကတ်မှ အသိအမှတ်ပြုလက်မှတ်များကို ထည့်သွင်းမှု"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"အထောက်အထားများကို ရှင်းလင်းခြင်း"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"အသိအမှတ်ပြုလက်မှတ်အားလုံးကို ဖယ်ရှားရန်"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"ယုံကြည်သော အထောက်အထားများ"</string>
@@ -2647,9 +2373,6 @@
     <string name="remove_account_label" msgid="4169490568375358010">"အကောင့်ကို ဖယ်ရှားရန်"</string>
     <string name="header_add_an_account" msgid="3919151542338822661">"အကောင့်တစ်ခုထည့်ရန်"</string>
     <string name="really_remove_account_title" msgid="253097435885652310">"အကောင့်ကို ဖယ်ရှားမလား"</string>
-    <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"ဤအကောင့်ကို ဖယ်ရှားခြင်းအားဖြင့် တက်ဘလက်ထဲမှ မက်ဆေ့ဂျ်များ၊ အဆက်အသွယ်များနှင့် တခြားဒေတာများအားလုံး ပျက်သွားပါမည်။"</string>
-    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"ဤအကောင့်ကို ဖယ်ရှားခြင်းအားဖြင့် ဖုန်းထဲမှ မက်ဆေ့ဂျ်များ၊ အဆက်အသွယ်များနှင့် အခြားဒေတာများအားလုံး ပျက်သွားပါမည်။"</string>
-    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"ဤအကောင့်ကို ဖယ်ရှားလိုက်ခြင်းဖြင့် စက်ပစ္စည်းထဲရှိ မက်ဆေ့ဂျ်၊ အဆက်အသွယ်နှင့် အခြားဒေတာများ အားလုံးကို ဖျက်လိုက်ပါမည်။"</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"ဤပြောင်းလဲမှုကို သင့်စီမံခန့်ခွဲသူက ခွင့်မပြုပါ"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"ထပ်တူကိုက်ညီရန် လူအားဖြင့်ပြုလုပ်၍မရပါ"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"လက်ရှိဤအရာအား ထပ်တူကိုက်ညီစေရန်ပြုလုပ်မရပါ။ ထိုအပြင်အဆင်အားပြောင်းရန် နောက်ခံဒေတာနှင့် အလိုအလျောက်ထပ်တူကိုက်ညီစေရန်ပြုလုပ်ခြင်းတို့အား ခေတ္တဖွင့်ပါ။"</string>
@@ -2691,8 +2414,6 @@
     <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"မိုဘိုင်းလ်ကွန်ရက်သာ ရှိနေသောအချိန်တွင် ဤအစီအစဥ်သည် နောက်ခံ အချက်အလက် အသုံးပြုခြင်းကို မှီခိုနေသော အပလီကေးရှင်းတစ်ခု အလုပ်လုပ်ခြင်းကို ရပ်စေနိုင်သည်။\n\nအပလီကေးရှင်းထဲမှ ဆက်တင်များထဲတွင် ပိုမိုသင့်လျော်သော ဒေတာအသုံးပြုခြင်းထိန်းချုပ်မှုများကို ရှာဖွေနိုင်သည်။"</string>
     <string name="data_usage_restrict_denied_dialog" msgid="8599940395497268584">"မိုဘိုင်းဒေတာကို ကန့်သတ်မှုပြုလုပ်ထားသည့် အခါတွင်သာ နောက်ခံ၌ ဒေတာအသုံးပြုမှုကို ကန့်သတ်နိုင်ပါသည်။"</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"ဒေတာ အော်တို-စင့်ခ် ဖွင့်မလား။"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="6387714350903085918">"ဝဘ်ပေါ်တွင် သင်၏ အကောင့်အတွက်လုပ်သည့် အပြောင်းအလဲအားလုံးကို သင့်တက်ဘလက်သို့ အလိုအလျောက် ကူးပေးမည်။ \n\nအချို့အကောင့်များသည် သင့်တက်ဘလက်သို့ ပြုလုပ်သည့် အပြောင်းအလဲများကို ဝဘ်ဆီသို့ အလိုအလျောက် ကူးပေးနိုင်ပါသည်။ Google အကောင့်၏ အလုပ်လုပ်ပုံ ဖြစ်ပါသည်။"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="6457107552266187107">"ဝဘ်ပေါ်တွင် သင်၏ အကောင့်တွင်း ပြုလုပ်သည့် အပြောင်းအလဲအားလုံးကို သင့်ဖုန်းထံသို့ အလိုအလျောက် ကူးပေးမည်။ \n\nအချို့ အကောင့်များသည် သင်က ဖုန်းတွင်ပြုလုပ်လိုက်သည့် အပြောင်းအလဲအားလုံးကိုလည်း ဝဘ်ဆီသို့ အလိုအလျောက် ကူးပေးနိုင်ပါသည်။ Google Account က ဤသို့ အလုပ်လုပ်ပါသည်။"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"ဒေတာ အော်တိုစင့်ခ် ပိတ်မလား။"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"၎င်းသည် ဒေတာနှင့် ဘက်ထရီအသုံးပြုမှုကို လျှော့ချပေးမည်၊ သို့သော် လတ်တလောအချက်အလက်များကို ရယူရန် သင်ကိုယ်တိုင် အကောင့်တစ်ခုချင်းကို စင့်ခ်လုပ်ရမည်။ အပ်ဒိတ်များထွက်သည့် အကြောင်းကြားချက်များကိုမူ သင်လက်ခံရရှိတော့မည်မဟုတ်ပါ။"</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"ဒေတာသုံးစက်ဝန်း ပြန်စရက်"</string>
@@ -2701,8 +2422,6 @@
     <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"ဒေတာအသုံးပြုမှုသတိပေးချက် သတ်မှတ်ရန်"</string>
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"ဒေတာအသုံးပြုမှု ကန့်သတ်ရန်"</string>
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"ဒေတာအသုံးပြုမှုအား ကန့်သတ်ခြင်း"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"သင်သတ်မှတ်ထားသည့် ကန့်သတ်ချက်ပြည့်သည်နှင့် သင့်တက်ဘလက်သည် မိုဘိုင်းဒေတာကို ပိတ်သွားပါမည်။\n\nဒေတာသုံးစွဲမှုကို သင်၏တက်ဘလက်က တိုင်းတာခြင်း ဖြစ်ပြီး ဖုန်းလိုင်းဝန်ဆောင်မှုပေးသူ၏ တွက်ချက်မှုနှင့် ကွာခြားနိုင်သောကြောင့် ကန့်သတ်ချက်ကို မယုတ်မလွန် သတ်မှတ်ပါ။"</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"သင်သတ်မှတ်ထားသည့် ကန့်သတ်ချက်ပြည့်သည်နှင့် သင့်ဖုန်းသည် မိုဘိုင်းဒေတာကို ပိတ်သွားပါမည်။\n\nဒေတာသုံးစွဲမှုကို သင်၏ဖုန်းက တိုင်းတာခြင်းဖြစ်ပြီး ဖုန်းလိုင်းဝန်ဆောင်မှုပေးသူ၏ တွက်ချက်မှုနှင့် ကွာခြားနိုင်သောကြောင့် ကန့်သတ်ချက်ကို မကျော်လွန်အောင် သတ်မှတ်ပါ။"</string>
     <string name="data_usage_sweep_warning" msgid="2072854703184614828"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"သတိပေးချက်"</font></string>
     <string name="data_usage_sweep_limit" msgid="6947019190890086284"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"ကန့်သတ်မှု"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="9065885396147675694">"ဖယ်ရှားထားသော အက်ပ်များ"</string>
@@ -2814,9 +2533,6 @@
       <item quantity="one">အသိအမှတ်ပြုလက်မှတ်ကို စစ်ဆေးပါ</item>
     </plurals>
     <string name="user_settings_title" msgid="6550866465409807877">"အသုံးပြုသူများစွာ"</string>
-    <string name="user_settings_footer_text" product="device" msgid="7523914344521302179">"အသုံးပြုသူအသစ်များ ထည့်ခြင်းဖြင့် သင့်စက်ပစ္စည်းကို မျှဝေအသုံးပြုပါ။ သင့်စက်ပေါ်တွင် အသုံးပြုသူတစ်ဦးစီအတွက် ပင်မစာမျက်နှာ၊ အကောင့်၊ အက်ပ်၊ ဆက်တင်နှင့် အခြားအရာများ အသုံးပြုရန် ကိုယ်ပိုင်နေရာရှိပါသည်။"</string>
-    <string name="user_settings_footer_text" product="tablet" msgid="3730074318510244552">"အသုံးပြုသူအသစ်များ ထည့်ခြင်းဖြင့် သင့်တက်ဘလက်ကို မျှဝေအသုံးပြုပါ။ သင့်တက်ဘလက်ပေါ်တွင် အသုံးပြုသူတစ်ဦးစီအတွက် ပင်မစာမျက်နှာ၊ အကောင့်၊ အက်ပ်၊ ဆက်တင်နှင့် အခြားအရာများ အသုံးပြုရန် ကိုယ်ပိုင်နေရာရှိပါသည်။"</string>
-    <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"အသုံးပြုသူအသစ်များ ထည့်ခြင်းဖြင့် သင့်ဖုန်းကို မျှဝေအသုံးပြုပါ။ သင့်ဖုန်းပေါ်တွင် အသုံးပြုသူတစ်ဦးစီအတွက် ပင်မစာမျက်နှာ၊ အကောင့်၊ အက်ပ်၊ ဆက်တင်နှင့် အခြားအရာများ အသုံးပြုရန် ကိုယ်ပိုင်နေရာရှိပါသည်။"</string>
     <string name="user_list_title" msgid="1387379079186123404">"သုံးစွဲသူများ &amp;ကိုယ်ရေးအချက်အလက်များ"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"အသုံးပြုသူ (သို့) ပရိုဖိုင်ထည့်ခြင်း"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"ကန့်သတ်ထားသော ကိုယ်ရေးအချက်အလက်များ"</string>
@@ -2826,8 +2542,6 @@
     <string name="user_admin" msgid="4024553191395768119">"စီမံခန့်ခွဲသူ"</string>
     <string name="user_you" msgid="3070562015202859996">"သင် (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"အသုံးပြုသူ ထပ်ထည့်၍မရပါ။ အသုံးပြုသူအသစ် ထည့်ရန် တစ်ဦးကို ဖယ်ရှားပါ။"</string>
-    <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"တက်ဘလက်၏ ပိုင်ရှင်သာ သုံးစွဲသူများကို စီမံခန့်ခွဲနိုင်သည်"</string>
-    <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"ဖုန်း၏ ပိုင်ရှင်သာ သုံးစွဲသူများကို စီမံခန့်ခွဲနိုင်သည်"</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"ကန့်သတ်ထားသော ကိုယ်ရေးအချက်အလက်များတွင် အကောင့်များ ထည့်၍မရပါ။"</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"ဤစက်မှ <xliff:g id="USER_NAME">%1$s</xliff:g>ကို ဖျက်ရန်"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"လော့ခ်မျက်နှာပြင် ဆက်တင်များ"</string>
@@ -2837,8 +2551,6 @@
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"ဤအသုံးပြုသူကို ဖျက်မလား။"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"ဒီပရိုဖိုင်ကို ဖယ်ရှားရမလား?"</string>
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"အလုပ်ပရိုဖိုင် ဖယ်ရှားမလား။"</string>
-    <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"ဤ တက်ဘလက်ပေါ်မှ သင့်နေရာနှင့် အချက်အလက်များသည် ပျောက်သွားလိမ့်မည်။ ဤလုပ်ဆောင်ချက်ကို ပြန်ပြင်၍မရပါ။"</string>
-    <string name="user_confirm_remove_self_message" product="default" msgid="5991495192044543230">"ဤဖုန်းပေါ်မှ သင့်နေရာနှင့် အချက်အလက်များသည် ပျောက်သွားလိမ့်မည်။ ဤလုပ်ဆောင်ချက်ကို ပြန်ပြင်၍မရပါ။"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"အက်ပ်အားလုံးနှင့် ဒေတာကို ဖျက်ပါမည်။"</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"သင် ရှေ့ဆက်သွားပါက ဤပရိုဖိုင်ရှိ အက်ပ်များနှင့် ဒေတာ အားလုံးကို ဖျက်ပစ်မည်။"</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"အက်ပ်အားလုံးနှင့် ဒေတာကို ဖျက်ပါမည်။"</string>
@@ -2903,9 +2615,6 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"ကန့်သတ်ချက်များဖယ်ရှားရန်"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"ပင်နံပါတ်ပြောင်းရန်"</string>
     <string name="help_label" msgid="2896538416436125883">"အကူအညီနှင့် အကြံပြုချက်"</string>
-    <string name="support_summary" product="default" msgid="6137136608018134563">"အကူအညီပေးဆောင်းပါးများ၊ ဖုန်းနှင့် ချတ်"</string>
-    <string name="support_summary" product="tablet" msgid="6681247727996378252">"အကူအညီပေးဆောင်းပါး၊ တက်ဘလက်နှင့် ချတ်"</string>
-    <string name="support_summary" product="device" msgid="1690554254039752541">"အကူအညီပေးဆောင်းပါးများ၊ စက်နှင့် ချတ်"</string>
     <string name="user_account_title" msgid="6389636876210834864">"မာတိကာ အကောင့်"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"ဓာတ်ပုံ အမှတ်သညာ"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"လွန်ကဲ အန္တရာယ်များ"</string>
@@ -4089,9 +3798,6 @@
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"ခလုတ်ဖြင့် လမ်းညွှန်ခြင်း"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"လက်ဟန်ဖြင့် လမ်းညွှန်ခြင်း၊ ကျောဘက် အာရုံခံနိုင်မှု၊ နောက်ဆုတ်လက်ဟန်"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"လမ်းညွှန်ခြင်း၊ ပင်မခလုတ်"</string>
-    <string name="ambient_display_title" product="default" msgid="5885136049497127396">"ဖုန်းကိုစစ်ရန် နှစ်ချက်တို့ခြင်း"</string>
-    <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"တက်ဘလက်ကို စစ်ဆေးကြည့်ရန် နှစ်ချက်တို့ပါ"</string>
-    <string name="ambient_display_title" product="device" msgid="4164103424628824786">"စက်ပစ္စည်းကို စစ်ဆေးကြည့်ရန် နှစ်ချက်တို့ပါ"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"လက်တစ်ဖက်သုံးမုဒ်"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"လက်တစ်ဖက်သုံးမုဒ် သုံးရန်"</string>
     <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"လက်တစ်ဖက်သုံးမုဒ် ဖြတ်လမ်းလင့်ခ်"</string>
@@ -4105,16 +3811,7 @@
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"အကြောင်းကြားချက်များ ပြရန်"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"အကြောင်းကြားချက်နှင့် ဆက်တင်များ ပေါ်လာပါမည်။"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"အချိန်၊ အကြောင်းကြားချက်နှင့် အခြားအချက်အလက်များ ကြည့်ရန် ဖန်သားပြင်ကို နှစ်ချက်တို့ပါ။"</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"ဖုန်းစစ်ရန် ကောက်ယူခြင်း"</string>
-    <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"တက်ဘလက်ကို စစ်ဆေးကြည့်ရန် မ လိုက်ပါ"</string>
-    <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"စက်ပစ္စည်းကို စစ်ဆေးကြည့်ရန် မ လိုက်ပါ"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"နှိုးသည့် ပြကွက်"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"အချိန်၊ အကြောင်းကြားချက်နှင့် အခြားအချက်အလက်များ ကြည့်ရန် ဖုန်းကို ကောက်ကိုင်လိုက်ပါ။"</string>
-    <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"အချိန်၊ အကြောင်းကြားချက်နှင့် အခြားအချက်အလက်များ ကြည့်ရန် တက်ဘလက်ကို ကောက်ကိုင်လိုက်ပါ။"</string>
-    <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"အချိန်၊ အကြောင်းကြားချက်နှင့် အခြားအချက်အလက်များ ကြည့်ရန် သင့်စက်ပစ္စည်းကို ကောက်ကိုင်လိုက်ပါ။"</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"ဖုန်းစစ်ရန် တို့ခြင်း"</string>
-    <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"တက်ဘလက်ကို စစ်ဆေးရန် တို့ပါ"</string>
-    <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"စက်ပစ္စည်းကို စစ်ဆေးရန် တို့ပါ"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"အချိန်၊ အကြောင်းကြားချက်နှင့် အခြားအချက်အလက်များ ကြည့်ရန် ဖန်သားပြင်ကို တို့ပါ။"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"အရေးပေါ် SOS"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"အရေးပေါ် SOS ကို သုံးခြင်း"</string>
@@ -4128,9 +3825,6 @@
     <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"အရေးပေါ်မဟုတ်သောနံပါတ်ကို ရိုက်ထည့်ပါက-\n • အရေးပေါ် SOS ကို သုံးရန် သင့်စက်ကို လော့ခ်ဖွင့်ထားရမည်\n • သင်၏ခေါ်ဆိုမှုကို ဖြေကြားရန် မသေချာပါ"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"သတိပေးချက်များကြည့်ရန် လက်ဗွေပွတ်ဆွဲခြင်း"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"လက်ဗွေပွတ်ဆွဲခြင်း"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"အကြောင်းကြားချက်များကို ကြည့်ရန် ဖုန်း၏ နောက်ကျောဘက်ရှိ လက်ဗွေ အာရုံခံကိရိယာပေါ်တွင် အောက်သို့ ပွတ်ဆွဲပါ။"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"အကြောင်းကြားချက်များကို ကြည့်ရန် တက်ဘလက်၏ နောက်ကျောဘက်ရှိ လက်ဗွေ အာရုံခံကိရိယာပေါ်တွင် အောက်သို့ ပွတ်ဆွဲပါ။"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3888927017311372398">"အကြောင်းကြားချက်များကို ကြည့်ရန် ကိရိယာ၏ နောက်ကျောဘက်ရှိ လက်ဗွေ အာရုံခံကိရိယာပေါ်တွင် အောက်သို့ ပွတ်ဆွဲပါ။"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"အကြောင်းကြားချက်များကို အမြန်ကြည့်ရန်"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="65713754674288193">"စဖွင့်သည့်စနစ်ကို လော့ခ်ဖွင့်ပြီးပါပြီ"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="7425519481227423860">"အင်တာနက် ချိတ်ပါ သို့မဟုတ် ဝန်ဆောင်မှုပေးသူအား ဆက်သွယ်ပါ"</string>
@@ -4617,9 +4311,6 @@
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"VoLTE ပိတ်မလား။"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"၎င်းက သင်၏ 5G ချိတ်ဆက်မှုကိုလည်း ပိတ်လိုက်ပါသည်။\nဖုန်းခေါ်ဆိုနေစဉ် အင်တာနက်အသုံးမပြုနိုင်သဖြင့် အက်ပ်အချို့ အလုပ်လုပ်နိုင်မည် မဟုတ်ပါ။"</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"ဆင်းမ်ကတ် ၂ ခုအသုံးပြုနေစဉ် ဤဖုန်းကို 4G အဖြစ် ကန့်သတ်ထားပါမည်။ "<annotation id="url">"ပိုမိုလေ့လာရန်"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"ဆင်းမ်ကတ် ၂ ခုအသုံးပြုနေစဉ် ဤတက်ဘလက်ကို 4G အဖြစ် ကန့်သတ်ထားပါမည်။ "<annotation id="url">"ပိုမိုလေ့လာရန်"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"ဆင်းမ်ကတ် ၂ ခုအသုံးပြုနေစဉ် ဤစက်ကို 4G အဖြစ် ကန့်သတ်ထားပါမည်။ "<annotation id="url">"ပိုမိုလေ့လာရန်"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"ကက်ရှ်ယူထားသောအက်ပ်များ ဆောင်ရွက်မှုဆိုင်းငံ့ခြင်း"</string>
     <string name="blob_never_expires_text" msgid="7293376386620106623">"ဘယ်တော့မှ သက်တမ်းမကုန်ပါ။"</string>
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"ငှားရမ်းမှုမှာ ဘယ်တော့မှ သက်တမ်းမကုန်ပါ။"</string>
@@ -4654,8 +4345,6 @@
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"ကွန်ရက် သတ်မှတ်ချက်များ"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"ကွန်ရက်ချိတ်ဆက်မှု၊ အင်တာနက်၊ ကြိုးမဲ့၊ ဒေတာ၊ wifi၊ wi-fi၊ wi fi၊ ဆယ်လူလာ၊ မိုဘိုင်း၊ ဖုန်းကုမ္ပဏီ၊ 4g၊ 3g၊ 2g၊ lte"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"သင့်အင်တာနက်ကို ပြင်ဆင်သတ်မှတ်မလား။"</string>
-    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"၎င်းက သင့်ဖုန်းခေါ်ဆိုမှုကို ရပ်ပါမည်"</string>
-    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"၎င်းက သင့်ဖုန်းခေါ်ဆိုမှုကို ရပ်ပါမည်"</string>
     <string name="resetting_internet_text" msgid="6696779371800051806">"သင့်အင်တာနက်ကို ပြင်ဆင်သတ်မှတ်နေသည်…"</string>
     <string name="fix_connectivity" msgid="2781433603228089501">"ပုံသေ ချိတ်ဆက်နိုင်မှု"</string>
     <string name="networks_available" msgid="3299512933684383474">"ကွန်ရက်များ ရနိုင်သည်"</string>

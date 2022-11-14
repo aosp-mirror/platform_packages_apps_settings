@@ -13,7 +13,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"Ja"</string>
@@ -59,9 +58,6 @@
     <string name="bluetooth_rename_device" msgid="4219655243836021443">"Omdøb denne enhed"</string>
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"Omdøb"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Afbryd forbindelse til enhed?"</string>
-    <string name="bluetooth_disconnect_all_profiles" product="default" msgid="1934297101665686854">"Telefonen afbryder forbindelsen fra <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_disconnect_all_profiles" product="tablet" msgid="336622948210457991">"Din tablet afbryder forbindelsen fra <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Enheden afbryder forbindelsen fra <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Par en ny enhed"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Par højre øre"</string>
@@ -72,9 +68,6 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Par højre apparat"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Par venstre apparat"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Relaterede"</string>
-    <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Telefonens Bluetooth-adresse: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Bluetooth-adresse for tablet: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="device" msgid="2863536947810007600">"Enhedens Bluetooth-adresse: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"Unavngiven Bluetooth-enhed"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"Søger"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"Der blev ikke fundet Bluetooth-enheder."</string>
@@ -88,22 +81,6 @@
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"<xliff:g id="APP_NAME">%1$s</xliff:g> ønsker at deaktivere Bluetooth"</string>
     <string name="bluetooth_ask_enablement_no_name" msgid="5091401961637405417">"En app ønsker at aktivere Bluetooth"</string>
     <string name="bluetooth_ask_disablement_no_name" msgid="382299750909188822">"En app ønsker at deaktivere Bluetooth."</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="1273405567801929487">"<xliff:g id="APP_NAME">%1$s</xliff:g> ønsker at gøre din tablet synlig for andre Bluetooth-enheder i <xliff:g id="TIMEOUT">%2$d</xliff:g> sekunder."</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="7013223328571883275">"<xliff:g id="APP_NAME">%1$s</xliff:g> ønsker at gøre din telefon synlig for andre Bluetooth-enheder i <xliff:g id="TIMEOUT">%2$d</xliff:g> sekunder."</string>
-    <string name="bluetooth_ask_discovery_no_name" product="tablet" msgid="3266007454914144057">"En app ønsker at gøre din tablet synlig for andre Bluetooth-enheder i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder."</string>
-    <string name="bluetooth_ask_discovery_no_name" product="default" msgid="7989444746980501116">"En app ønsker at gøre din telefon synlig for andre Bluetooth-enheder i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder."</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="6482084870735107773">"<xliff:g id="APP_NAME">%1$s</xliff:g> ønsker at gøre din tablet synlig for andre Bluetooth-enheder. Du kan ændre dette senere i Bluetooth-indstillingerne."</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="2352494279465502950">"<xliff:g id="APP_NAME">%1$s</xliff:g> ønsker at gøre din telefon synlig for andre Bluetooth-enheder. Du kan ændre dette senere i Bluetooth-indstillingerne."</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="tablet" msgid="2732992604509910896">"En app ønsker at gøre din tablet synlig for andre Bluetooth-enheder. Du kan ændre dette senere i Bluetooth-indstillingerne."</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="default" msgid="356982103612920264">"En app ønsker at gøre din telefon synlig for andre Bluetooth-enheder. Du kan ændre dette senere i Bluetooth-indstillingerne."</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="6103655179509599427">"<xliff:g id="APP_NAME">%1$s</xliff:g> ønsker at aktivere Bluetooth og gøre din tablet synlig for andre enheder i <xliff:g id="TIMEOUT">%2$d</xliff:g> sekunder."</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="934276632311449337">"<xliff:g id="APP_NAME">%1$s</xliff:g> ønsker at aktivere Bluetooth og gøre din telefon synlig for andre enheder i <xliff:g id="TIMEOUT">%2$d</xliff:g> sekunder."</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="tablet" msgid="1284048348024444485">"En app ønsker at aktivere Bluetooth og gøre din tablet synlig for andre enheder i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder."</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="default" msgid="2661614145022629454">"En app ønsker at aktivere Bluetooth og gøre din telefon synlig for andre enheder i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="8588317955400593623">"<xliff:g id="APP_NAME">%1$s</xliff:g> ønsker at aktivere Bluetooth og gøre din tablet synlig for andre enheder. Du kan ændre dette senere i Bluetooth-indstillingerne."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="4047444317445386579">"<xliff:g id="APP_NAME">%1$s</xliff:g> ønsker at aktivere Bluetooth og gøre din telefon synlig for andre enheder. Du kan ændre dette senere i Bluetooth-indstillingerne."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="tablet" msgid="4922952478824372605">"En app ønsker at aktivere Bluetooth og gøre din tablet synlig for andre enheder. Du kan ændre dette senere i Bluetooth-indstillinger."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="default" msgid="1381582950049639439">"En app ønsker at aktivere Bluetooth og gøre din telefon synlig for andre enheder. Du kan ændre dette senere i Bluetooth-indstillinger."</string>
     <string name="bluetooth_turning_on" msgid="3842613808709024730">"Aktiverer Bluetooth..."</string>
     <string name="bluetooth_turning_off" msgid="7406309124247701148">"Bluetooth slukker??"</string>
     <string name="bluetooth_connection_permission_request" msgid="8793131019383198861">"Anmodning om Bluetooth-forbindelse"</string>
@@ -239,10 +216,6 @@
     <string name="account_settings_title" msgid="9138880127246241885">"Konti"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Sikkerhed"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Kryptering og loginoplysninger"</string>
-    <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"Telefonen er krypteret"</string>
-    <string name="not_encrypted_summary" product="default" msgid="2251945842585788254">"Telefonen er ikke krypteret"</string>
-    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"Enheden er krypteret"</string>
-    <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"Enheden er ikke krypteret"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Låseskærm"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Hvad der skal vises"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Ikke tilgængelig"</string>
@@ -258,17 +231,11 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Konfigurer ansigtslås"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Brug dit ansigt til godkendelse"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Start"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"Hvis hjælpefunktionen ansigtslås er deaktiveret, fungerer nogle konfigurationstrin muligvis ikke korrekt via TalkBack."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Gå tilbage"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Fortsæt konfig."</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Brug avanceret konfiguration"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Annuller"</string>
@@ -278,53 +245,14 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Lås op med dit ansigt"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Tillad ansigtslås"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Brug dit ansigt til godkendelse"</string>
-    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"Brug dit ansigt til at låse din telefon op, godkende køb og logge ind i apps."</string>
-    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"Brug ansigtsgenkendelse til at låse din tablet op, godkende køb og logge ind i apps."</string>
-    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"Brug ansigtsgenkendelse til at låse din enhed op, godkende køb og logge ind i apps."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Tillad, at dit barn bruger ansigtet til at låse sin telefon op"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Tillad, at dit barn bruger ansigtet til at låse sin tablet op"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Tillad, at dit barn bruger ansigtet til at låse sin enhed op"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"En ansigtslås kan være mindre sikker end et stærkt mønster eller en stærk pinkode."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"En ansigtslås kan være mindre sikker end et stærkt mønster eller en stærk pinkode."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"En ansigtslås kan være mindre sikker end et stærkt mønster eller en stærk pinkode."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Lås din telefon op eller godkend køb ved hjælp af dit ansigt.\n\nBemærk! Du kan ikke bruge dit ansigt til at låse denne enhed op. Kontakt administratoren for din organisation for at få flere oplysninger."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Brug dit ansigt til at låse din telefon op, godkende køb og logge ind i apps"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"Centrer dit ansigt i cirklen"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Spring over"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Du har tilføjet det maksimale antal ansigter"</string>
@@ -369,12 +297,6 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Konfigurer dit fingeraftryk"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Tillad oplåsning med fingeraftryk"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Brug dit fingeraftryk"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Brug dit fingeraftryk til at låse din tablet op eller verificere din identitet, f.eks. når du logger ind i apps eller godkender et køb."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Brug dit fingeraftryk til at låse din enhed op eller bekræfte din identitet, f.eks. når du logger ind i apps eller godkender et køb."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Brug dit fingeraftryk til at låse din telefon op eller bekræfte din identitet, f.eks. når du logger ind i apps eller godkender et køb."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"Tillad, at dit barn bruger fingeraftryk til at låse telefonen op eller bekræfte sin identitet. Dette foregår, når barnet logger ind i apps, godkender et køb m.m."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"Tillad, at dit barn bruger fingeraftryk til at låse sin tablet op eller bekræfte sin identitet. Dette foregår, når barnet logger ind i apps, godkender et køb m.m."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"Tillad, at dit barn bruger fingeraftryk til at låse enheden op eller bekræfte sin identitet. Dette foregår, når barnet logger ind i apps, godkender et køb m.m."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Du bestemmer"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Du og dit barn har kontrollen"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Husk!"</string>
@@ -386,36 +308,12 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Konfigurationen af fingeraftryk tager ikke mere end et minut eller to. Hvis du springer dette trin over, kan du tilføje dit fingeraftryk på et senere tidspunkt i indstillingerne."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Når du ser dette ikon, kan du bruge dit fingeraftryk til godkendelse, f.eks. ved login i apps eller godkendelse af et køb"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Husk!"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"Oplåsning med fingeraftryk kan være mindre sikker end et stærkt mønster eller en stærk pinkode"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"Oplåsning med fingeraftryk kan være mindre sikker end et stærkt mønster eller en stærk pinkode"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"Oplåsning med fingeraftryk kan være mindre sikker end et stærkt mønster eller en stærk pinkode"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Sådan fungerer det"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Oplåsning med fingeraftryk opretter en unik model af dit fingeraftryk, så din identitet kan bekræftes. For at oprette denne fingeraftryksmodel under konfigurationen skal du tage billeder af dit fingeraftryk fra forskellige vinkler."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Oplåsning med fingeraftryk opretter en unik model af dit barns fingeraftryk, så barnets identitet kan bekræftes. For at oprette denne fingeraftryksmodel under konfigurationen skal dit barn tage billeder af sit fingeraftryk fra forskellige vinkler."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"Når du bruger Pixel Imprint, bruges billederne til at opdatere din fingeraftryksmodel. De billeder, der bruges til at oprette din fingeraftryksmodel, gemmes aldrig, men fingeraftryksmodellen gemmes på sikker vis på din telefon, og den forlader aldrig telefonen. Al behandling sker på sikker vis på din telefon."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"Når du bruger Pixel Imprint, bruges billederne til at opdatere din fingeraftryksmodel. De billeder, der bruges til at oprette din fingeraftryksmodel, gemmes aldrig, men fingeraftryksmodellen gemmes på sikker vis på din tablet, og den forlader aldrig tabletten. Al behandling sker på sikker vis på din tablet."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"Når du bruger Pixel Imprint, bruges billederne til at opdatere din fingeraftryksmodel. De billeder, der bruges til at oprette din fingeraftryksmodel, gemmes aldrig, men fingeraftryksmodellen gemmes på sikker vis på din enhed, og den forlader aldrig enheden. Al behandling sker på sikker vis på din enhed."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"Når barnet bruger Pixel Imprint, bruges billederne til at opdatere barnets fingeraftryksmodel. De billeder, der bruges til at oprette dit barns fingeraftryksmodel, gemmes aldrig, men fingeraftryksmodellen gemmes på sikker vis på telefonen, og den forlader aldrig telefonen. Al behandling sker på sikker vis på telefonen."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"Når barnet bruger Pixel Imprint, bruges billederne til at opdatere barnets fingeraftryksmodel. De billeder, der bruges til at oprette dit barns fingeraftryksmodel, gemmes aldrig, men fingeraftryksmodellen gemmes på sikker vis på tabletten, og den forlader aldrig tabletten. Al behandling sker på sikker vis på tabletten."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"Når barnet bruger Pixel Imprint, bruges billederne til at opdatere barnets fingeraftryksmodel. De billeder, der bruges til at oprette dit barns fingeraftryksmodel, gemmes aldrig, men fingeraftryksmodellen gemmes på sikker vis på enheden, og den forlader aldrig enheden. Al behandling sker på sikker vis på enheden."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"Du kan til enhver tid slette dine fingeraftryksbilleder og din fingeraftryksmodel eller deaktivere Oplåsning med fingeraftryk i Indstillinger. Fingeraftryksbilleder og fingeraftryksmodellen gemmes på telefonen, indtil du sletter dem."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"Du kan til enhver tid slette dine fingeraftryksbilleder og din fingeraftryksmodel eller deaktivere oplåsning med fingeraftryk i Indstillinger. Fingeraftryksbilleder og fingeraftryksmodellen gemmes på tabletten, indtil du sletter dem."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"Du kan til enhver tid slette dine fingeraftryksbilleder og din fingeraftryksmodel eller deaktivere oplåsning med fingeraftryk i Indstillinger. Fingeraftryksbilleder og fingeraftryksmodellen gemmes på enheden, indtil du sletter dem."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"Du og dit barn kan til enhver tid slette barnets billeder og model eller deaktivere oplåsning med fingeraftryk i Indstillinger. Fingeraftryksbilleder og -modeller gemmes på telefonen, indtil de slettes."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"Du og dit barn kan til enhver tid slette barnets billeder og model eller deaktivere oplåsning med fingeraftryk i Indstillinger. Fingeraftryksbilleder og -modeller gemmes på tabletten, indtil de slettes."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"Du og dit barn kan til enhver tid slette barnets billeder og model eller deaktivere oplåsning med fingeraftryk i Indstillinger. Fingeraftryksbilleder og -modeller gemmes på enheden, indtil de slettes."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Din telefon kan blive låst op, når det ikke er meningen, f.eks. hvis nogen holder din finger op mod den."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Din tablet kan blive låst op utilsigtet, f.eks. hvis nogen holder din finger op mod den."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Din enhed kan blive låst op utilsigtet, f.eks. hvis nogen holder din finger op mod den."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"Dit barns telefon kan låses op, når det ikke er meningen, f.eks. hvis nogen holder den op mod dit barns finger."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"Dit barns tablet kan låses op, når det ikke er meningen, f.eks. hvis nogen holder den op mod dit barns finger."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"Dit barns enhed kan låses op, når det ikke er meningen, f.eks. hvis nogen holder den op mod dit barns finger."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Du får de bedste resultater ved at bruge en skærmbeskytter, der er Made For Google-certificeret. Dit fingeraftryk virker muligvis ikke med andre skærmbeskyttere."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Du får de bedste resultater ved at bruge en skærmbeskytter, der er Made For Google-certificeret. Dit barns fingeraftryk virker muligvis ikke med andre skærmbeskyttere."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Brug dit fingeraftryk til at låse din tablet op eller verificere din identitet, f.eks. når du logger ind i apps"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Brug dit fingeraftryk til at låse din enhed op eller bekræfte din identitet, f.eks. når du logger ind i apps"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Brug dit fingeraftryk til at låse din telefon op eller verificere din identitet, f.eks. når du logger ind i apps"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Ansigtslås og oplåsning med fingeraftryk"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Tryk for at konfigurere"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Ansigt og fingeraftryk er tilføjet"</string>
@@ -427,17 +325,8 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Anvend ansigtsgenkendelse"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Anvend fingeraftryk"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Anvend ansigtsgenkendelse eller fingeraftryk"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"Giv tabletten tilbage til din forælder"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"Giv enheden tilbage til din forælder"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Giv telefonen tilbage til din forælder"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Vil du springe skærmlås over?"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Funktionerne til enhedsbeskyttelse aktiveres ikke. Du vil ikke kunne forhindre andre i at bruge denne tablet, hvis du mister den, eller hvis den bliver stjålet eller nulstillet."</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Funktionerne til enhedsbeskyttelse aktiveres ikke. Du vil ikke kunne forhindre andre i at bruge denne enhed, hvis du mister den, eller hvis den bliver stjålet eller nulstillet."</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2412426429887900241">"Funktionerne til enhedsbeskyttelse aktiveres ikke. Du vil ikke kunne forhindre andre i at bruge denne telefon, hvis du mister den, eller hvis den bliver stjålet eller nulstillet."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="7119039592587429936">"Funktionerne til enhedsbeskyttelse aktiveres ikke. Du vil ikke kunne forhindre andre i at bruge denne tablet, hvis du mister den, eller hvis den bliver stjålet."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3365990364131398523">"Funktionerne til enhedsbeskyttelse aktiveres ikke. Du vil ikke kunne forhindre andre i at bruge denne enhed, hvis du mister den, eller hvis den bliver stjålet."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="4908278819257287536">"Funktionerne til enhedsbeskyttelse aktiveres ikke. Du vil ikke kunne forhindre andre i at bruge denne telefon, hvis du mister den, eller hvis den bliver stjålet."</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"Spring over alligevel"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"Gå tilbage"</string>
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"Spring over"</string>
@@ -446,9 +335,6 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Tryk let på knappen uden at trykke den helt ned"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Sådan konfigurerer du fingeraftryk"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Den sidder på bagsiden af telefonen. Brug pegefingeren."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"Fingeraftrykssensoren sidder på afbryderknappen. Det er den flade knap ud for den hævede lydstyrkeknap på din tablets kant.\n\nNår du trykker på afbryderknappen, slukkes skærmen."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"Fingeraftrykssensoren sidder på afbryderknappen. Det er den flade knap ud for den hævede lydstyrkeknap på enhedens kant.\n\nNår du trykker på afbryderknappen, slukkes skærmen."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"Fingeraftrykssensoren sidder på afbryderknappen. Det er den flade knap ud for den hævede lydstyrkeknap på telefonens kant.\n\nNår du trykker på afbryderknappen, slukkes skærmen."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Fingeraftrykssensoren er på din skærm. Du registrerer dit fingeraftryk på den næste skærm."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Start"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Bevæg fingeren hen over skærmen for at finde sensoren. Hold fingeren nede på fingeraftrykslæseren."</string>
@@ -481,9 +367,6 @@
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Scanning af fingeraftryk: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingeraftryk tilføjet"</string>
     <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Nu kan du bruge dit fingeraftryk til at låse din tablet op eller verificere din identitet, f.eks. når du logger ind i apps eller godkender et køb"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Nu kan du bruge dit fingeraftryk til at låse din tablet op eller verificere din identitet, f.eks. når du logger ind i apps"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Nu kan du bruge dit fingeraftryk til at låse din enhed op eller verificere din identitet, f.eks. når du logger ind i apps"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Nu kan du bruge dit fingeraftryk til at låse din telefon op eller bekræfte din identitet, f.eks. når du logger ind i apps"</string>
     <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
     <skip />
     <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
@@ -495,42 +378,6 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Placer siden af din finger på sensoren, og hold den nede. Skift derefter til den anden side."</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Vil du springe registrering af fingeraftryk over?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Du har valgt at bruge fingeraftryk som en metode til at låse din telefon op. Hvis du springer det over nu, skal du konfigurere dette senere. Konfigurationen tager kun omkring et minut."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"En pinkode beskytter din tablet, hvis den bliver væk eller stjålet"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="4359575348578515037">"Et mønster beskytter din tablet, hvis den bliver væk eller stjålet"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5420451292764062637">"En adgangskode beskytter din tablet, hvis den bliver væk eller stjålet"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="8841426051550671169">"En pinkode beskytter enheden, hvis den bliver væk eller stjålet"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="6296702954920045923">"Et mønster beskytter enheden, hvis den bliver væk eller stjålet"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="9186075211441188900">"En adgangskode beskytter enheden, hvis den bliver væk eller stjålet"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="4301690296689572747">"En pinkode beskytter telefonen, hvis den bliver væk eller stjålet"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="7387967847446084260">"Et mønster beskytter telefonen, hvis den bliver væk eller stjålet"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="6415788841227543063">"En adgangskode beskytter telefonen, hvis den bliver væk eller stjålet"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="2350062798056164403">"Du skal angive en pinkode for at konfigurere oplåsning med fingeraftryk.\n\nEn pinkode beskytter din tablet, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="222574071926747300">"Du skal angive et mønster for at konfigurere oplåsning med fingeraftryk.\n\nEt mønster beskytter din tablet, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="7780323831330724644">"Du skal angive en adgangskode for at konfigurere oplåsning med fingeraftryk.\n\nEn adgangskode beskytter din tablet, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="7421096089691939451">"Du skal angive en pinkode for at konfigurere oplåsning med fingeraftryk.\n\nEn pinkode beskytter enheden, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6458468083711413617">"Du skal angive et mønster for at konfigurere oplåsning med fingeraftryk.\n\nEt mønster beskytter enheden, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="1632249532665518954">"Du skal angive en adgangskode for at konfigurere oplåsning med fingeraftryk.\n\nEn adgangskode beskytter enheden, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3101384462491132314">"Du skal angive en pinkode for at konfigurere oplåsning med fingeraftryk.\n\nEn pinkode beskytter telefonen, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="382422778886929469">"Du skal angive et mønster for at konfigurere oplåsning med fingeraftryk.\n\nEt mønster beskytter telefonen, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="5515199168425229243">"Du skal angive en adgangskode for at konfigurere oplåsning med fingeraftryk.\n\nEn adgangskode beskytter telefonen, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="2454239555320628731">"Du skal angive en pinkode for at konfigurere ansigtslås.\n\nEn pinkode beskytter din tablet, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="4354138725903415816">"Du skal angive et mønster for at konfigurere ansigtslås.\n\nEt mønster beskytter din tablet, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="719339718267952196">"Du skal angive en adgangskode for at konfigurere ansigtslås.\n\nEn adgangskode beskytter din tablet, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="3729243407606881750">"Du skal angive en pinkode for at konfigurere ansigtslås.\n\nEn pinkode beskytter enheden, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="6966329744346503807">"Du skal angive et mønster for at konfigurere ansigtslås.\n\nEt mønster beskytter enheden, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3020827854443297996">"Du skal angive en adgangskode for at konfigurere ansigtslås.\n\nEn adgangskode beskytter enheden, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2155678903559865476">"Du skal angive en pinkode for at konfigurere ansigtslås.\n\nEn pinkode beskytter telefonen, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="473271568005748452">"Du skal angive et mønster for at konfigurere ansigtslås.\n\nEt mønster beskytter telefonen, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="4319934862372116788">"Du skal angive en adgangskode for at konfigurere ansigtslås.\n\nEn adgangskode beskytter telefonen, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="647987565338402155">"Du skal angive en pinkode for at konfigurere ansigtslås og oplåsning med fingeraftryk.\n\nEn pinkode beskytter din tablet, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="5293609077890072841">"Du skal angive et mønster for at konfigurere ansigtslås og oplåsning med fingeraftryk.\n\nEt mønster beskytter din tablet, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="2660359318928684172">"Du skal angive en adgangskode for at konfigurere ansigtslås og oplåsning med fingeraftryk.\n\nEn adgangskode beskytter din tablet, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="1278795063897397815">"Du skal angive en pinkode for at konfigurere ansigtslås og oplåsning med fingeraftryk.\n\nEn pinkode beskytter enheden, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="8766169819759371801">"Du skal angive et mønster for at konfigurere ansigtslås og oplåsning med fingeraftryk.\n\nEt mønster beskytter enheden, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="8611216039321306045">"Du skal angive en adgangskode for at konfigurere ansigtslås og oplåsning med fingeraftryk.\n\nEn adgangskode beskytter enheden, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="8796878521409329051">"Du skal angive en pinkode for at konfigurere ansigtslås og oplåsning med fingeraftryk.\n\nEn pinkode beskytter telefonen, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="8423700958936341596">"Du skal angive et mønster for at konfigurere ansigtslås og oplåsning med fingeraftryk.\n\nEt mønster beskytter telefonen, hvis den bliver væk eller stjålet."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="5411689248299854172">"Du skal angive en adgangskode for at konfigurere ansigtslås og oplåsning med fingeraftryk.\n\nEn adgangskode beskytter telefonen, hvis den bliver væk eller stjålet."</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Vil du springe pinkodekonfiguration over?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Vil du udelade konfiguration af pinkode og ansigt?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Vil du udelade konfiguration af pinkode og fingeraftryk?"</string>
@@ -565,40 +412,20 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du har tilføjet det maksimale antal fingeraftryk"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Du kan ikke tilføje flere fingeraftryk"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Slet \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
-    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Dette sletter de fingeraftryksbilleder og den fingeraftryksmodel, der er knyttet til \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\", og som er gemt på din telefon"</string>
-    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Dette sletter de fingeraftryksbilleder og den fingeraftryksmodel, der er knyttet til \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\", og som er gemt på din tablet"</string>
-    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Dette sletter de fingeraftryksbilleder og den fingeraftryksmodel, der er knyttet til \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\", og som er gemt på din enhed"</string>
-    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Du vil ikke have mulighed for at bruge dit fingeraftryk til at låse din telefon op eller verificere din identitet i apps."</string>
-    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Du vil ikke have mulighed for at bruge dit fingeraftryk til at låse din tablet op eller verificere din identitet i apps."</string>
-    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Du vil ikke have mulighed for at bruge dit fingeraftryk til at låse din enhed op eller verificere din identitet i apps."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Du vil ikke have mulighed for at bruge dit fingeraftryk til at låse din arbejdsprofil op, godkende køb eller logge ind i arbejdsapps."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Kryptering"</string>
-    <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Kryptér tablet"</string>
-    <string name="encrypt_title" product="default" msgid="7337365190988321100">"Kryptér telefon"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Krypteret"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Konfigurer en skærmlås"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Få ekstra beskyttelse ved at konfigurere en pinkode, et mønster eller en adgangskode for denne enhed."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Konfigurer skærmlås"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Beskyt din telefon"</string>
-    <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Konfigurer skærmlåsen for at beskytte din tablet"</string>
-    <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Konfigurer skærmlåsen for at beskytte din enhed"</string>
-    <string name="suggested_lock_settings_summary" product="default" msgid="2443273582716671033">"Konfigurer skærmlåsen for at beskytte din telefon"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Tilføj fingeraftryk for at låse op"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Vælg skærmlås"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Vælg en skærmlås"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Vælg en ny skærmlås"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Vælg en lås for arbejdsapps"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Vælg en ny lås for arbejdsapps"</string>
-    <string name="setup_lock_settings_picker_title" product="tablet" msgid="1276283007274778191">"Beskyt din tablet"</string>
-    <string name="setup_lock_settings_picker_title" product="device" msgid="3585905639045649905">"Beskyt din enhed"</string>
-    <string name="setup_lock_settings_picker_title" product="default" msgid="2758197863515864300">"Beskyt din telefon"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Konfigurer en alternativ metode til skærmlåsning for at opnå større sikkerhed"</string>
-    <string name="setup_lock_settings_picker_message" product="tablet" msgid="4870877800737248926">"Du kan forhindre andre i at bruge denne tablet uden din tilladelse ved at aktivere funktionerne til enhedsbeskyttelse. Vælg den skærmlås, du vil bruge."</string>
-    <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Du kan forhindre andre i at bruge denne enhed uden din tilladelse ved at aktivere funktionerne til enhedsbeskyttelser. Vælg den skærmlås, du vil bruge."</string>
-    <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Du kan forhindre andre i at bruge denne telefon uden din tilladelse ved at aktivere funktionerne til enhedsbeskyttelse. Vælg den skærmlås, du vil bruge."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Vælg din alternative metode til skærmlåsning"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Din it-administrator kan ikke nulstille en glemt skærmlås."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Angiv en separat arbejdslås"</string>
@@ -638,43 +465,31 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"Vil du fjerne profilbeskyttelsen?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"Et mønster beskytter din telefon, hvis den bliver væk eller stjålet"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"Et mønster beskytter din telefon, hvis den bliver væk eller stjålet.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Dette medfører også sletning af den fingeraftryksmodel, der er gemt på din enhed. Du kan ikke længere bruge dit fingeraftryk til godkendelse i apps."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"Et mønster beskytter din telefon, hvis den bliver væk eller stjålet.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Din ansigtsmodel bliver også slettet permanent og på sikker vis. Du kan ikke længere bruge dit ansigt til godkendelse i apps."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"Et mønster beskytter din telefon, hvis den bliver væk eller stjålet.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Dette medfører også sletning af den fingeraftryksmodel, der er gemt på din enhed. Din ansigtsmodel bliver også slettet permanent og på sikker vis. Du kan ikke længere bruge dit ansigt eller fingeraftryk til godkendelse i apps."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"En pinkode beskytter din telefon, hvis den bliver væk eller stjålet"</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"En pinkode beskytter din telefon, hvis den bliver væk eller stjålet.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Dette medfører også sletning af den fingeraftryksmodel, der er gemt på din enhed. Du kan ikke længere bruge dit fingeraftryk til godkendelse i apps."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"En pinkode beskytter din telefon, hvis den bliver væk eller stjålet.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Din ansigtsmodel bliver også slettet permanent og på sikker vis. Du kan ikke længere bruge dit ansigt til godkendelse i apps."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"En pinkode beskytter din telefon, hvis den bliver væk eller stjålet.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Dette medfører også sletning af den fingeraftryksmodel, der er gemt på din enhed. Din ansigtsmodel bliver også slettet permanent og på sikker vis. Du kan ikke længere bruge dit ansigt eller fingeraftryk til godkendelse i apps."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"En adgangskode beskytter din telefon, hvis den bliver væk eller stjålet"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"En adgangskode beskytter din telefon, hvis den bliver væk eller stjålet.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Dette medfører også sletning af den fingeraftryksmodel, der er gemt på din enhed. Du kan ikke længere bruge dit fingeraftryk til godkendelse i apps."</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"En adgangskode beskytter din telefon, hvis den bliver væk eller stjålet.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Din ansigtsmodel bliver også slettet permanent og på sikker vis. Du kan ikke længere bruge dit ansigt til godkendelse i apps."</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"En adgangskode beskytter din telefon, hvis den bliver væk eller stjålet.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Dette medfører sletning af den fingeraftryksmodel, der er gemt på din enhed. Din ansigtsmodel bliver også slettet permanent og på sikker vis. Du kan ikke længere bruge dit ansigt eller fingeraftryk til godkendelse i apps."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"Funktionerne til enhedsbeskyttelse fungerer ikke uden din skærmlås."</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"Funktionerne til enhedsbeskyttelse fungerer ikke uden din skærmlås.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Dette medfører også sletning af den fingeraftryksmodel, der er gemt på din enhed. Du kan ikke længere bruge dit fingeraftryk til godkendelse i apps."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"Funktioner til enhedsbeskyttelse fungerer ikke uden skærmlåsen.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Din ansigtsmodel bliver også slettet permanent og på sikker vis. Du kan ikke længere bruge dit ansigt til godkendelse i apps."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"Funktionerne til enhedsbeskyttelse fungerer ikke uden din skærmlås.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Dette medfører sletning af den fingeraftryksmodel, der er gemt på din enhed. Din ansigtsmodel bliver også slettet permanent og på sikker vis. Du kan ikke længere bruge dit ansigt eller fingeraftryk til godkendelse i apps."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Slet"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> anbefaler en stærk pinkode eller adgangskode og fungerer muligvis ikke som forventet uden en af disse"</string>
@@ -785,9 +600,6 @@
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Vil du glemme denne enhed?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"Fjern tilknytning"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Vil du fjerne tilknytningen til appen?"</string>
-    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"Din telefon vil ikke længere være parret med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Din tablet vil ikke længere være parret med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Din enhed vil ikke længere være parret med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Appen <xliff:g id="APP_NAME">%1$s</xliff:g> opretter ikke længere forbindelse til <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Glem enhed"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Fjern tilknytning til app"</string>
@@ -832,7 +644,6 @@
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Vis skærmens aktuelle opdateringshastighed"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Kræv, at enheden låses op til NFC"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"Tillad kun brug af NFC, når skærmen er låst op"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Klar til at overføre appindhold via NFC"</string>
     <string name="nfc_disabled_summary" msgid="8737797364522502351">"Ikke tilgængelig, fordi NFC er slået fra"</string>
@@ -1040,14 +851,10 @@
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> er aktivt"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"AndroidHotspot"</string>
     <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"Vil du gemme dette netværk?"</string>
-    <string name="wifi_add_app_single_network_summary" product="default" msgid="6881712878537666626">"<xliff:g id="APPNAME">%1$s</xliff:g> vil gerne gemme et netværk på din telefon"</string>
-    <string name="wifi_add_app_single_network_summary" product="tablet" msgid="8455616967601552440">"<xliff:g id="APPNAME">%1$s</xliff:g> vil gerne gemme et netværk på din tablet"</string>
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"Gemmer…"</string>
     <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"Gemt"</string>
     <string name="wifi_add_app_network_save_failed_summary" msgid="7223817782309294652">"Der kan ikke gemmes. Prøv igen."</string>
     <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"Vil du gemme netværkene?"</string>
-    <string name="wifi_add_app_networks_summary" product="default" msgid="2670215712788515167">"<xliff:g id="APPNAME">%1$s</xliff:g> vil gerne gemme disse netværk på din telefon"</string>
-    <string name="wifi_add_app_networks_summary" product="tablet" msgid="2088967184512169910">"<xliff:g id="APPNAME">%1$s</xliff:g> vil gerne gemme disse netværk på din tablet"</string>
     <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"Gemmer <xliff:g id="NUMBER">%d</xliff:g> netværk…"</string>
     <string name="wifi_add_app_networks_saved_summary" msgid="1648417628665152905">"Netværkene blev gemt"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"Opkald via Wi-Fi"</string>
@@ -1090,8 +897,6 @@
     <string name="accelerometer_title" msgid="7745991950833748909">"Roter skærm automatisk"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Til – ansigtsbaseret"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Ansigtsgenkendelse"</string>
-    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Juster automatisk skærmretningen, når du skifter mellem stående og liggende format på telefonen ved at bevæge den"</string>
-    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Juster automatisk skærmretningen, når du skifter mellem stående og liggende format på din tablet ved at bevæge den"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Få flere oplysninger om automatisk rotering"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Når du drejer telefonen til stående eller liggende format"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Skærmopløsning"</string>
@@ -1203,10 +1008,6 @@
     <string name="sim_lock_settings" msgid="4493069398250139205">"Indstillinger for låst SIM-kort"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"SIM-kortlås"</string>
     <string name="sim_pin_toggle" msgid="98754920202404425">"Lås SIM-kort"</string>
-    <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"Kræv pinkode for at bruge tabletcomputeren"</string>
-    <string name="sim_lock_on" product="default" msgid="3303147192981388923">"Kræv pinkode for at bruge telefonen"</string>
-    <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"Kræv pinkode for at bruge tabletcomputeren"</string>
-    <string name="sim_lock_off" product="default" msgid="4634118006847137785">"Kræv pinkode for at bruge telefonen"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"Skift pinkode til SIM-kort"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"Pinkode til SIM-kort"</string>
     <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Lås SIM-kort"</string>
@@ -1251,12 +1052,6 @@
     <string name="storage_settings_title" msgid="486118156723194815">"Indstillinger for lagerplads"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI-nummer (SIM-kortrille %1$d)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Vælg et gemt netværk for at se"</string>
-    <string name="status_number" product="tablet" msgid="3597945414666253183">"MDN"</string>
-    <string name="status_number" product="default" msgid="8407999629121682207">"Telefonnummer"</string>
-    <string name="status_number_sim_slot" product="tablet" msgid="6582203988975619529">"MDN-nummer (SIM-kortrille %1$d)"</string>
-    <string name="status_number_sim_slot" product="default" msgid="5724823197745786398">"Telefonnummer (SIM-kortrille %1$d)"</string>
-    <string name="status_number_sim_status" product="tablet" msgid="4239876366511743428">"MDN-nummer på SIM-kort"</string>
-    <string name="status_number_sim_status" product="default" msgid="2772745542921910086">"Telefonnummer på SIM-kort"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL-version"</string>
@@ -1316,12 +1111,6 @@
     <string name="storage_wizard_move_progress_title" msgid="3912406225614672391">"Flytter <xliff:g id="APP">^1</xliff:g>…"</string>
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Fjern ikke dit <xliff:g id="NAME">^1</xliff:g> under flytningen. \n\nAppen <xliff:g id="APP">^2</xliff:g> på denne enhed vil ikke være tilgængelig, før flytningen er gennemført."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Hvordan vil du bruge dette <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formatér SD-kort til intern lagerplads"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Gem apps og medier, som kun skal bruges på denne tablet. &lt;a href=https://support.google.com/android/answer/12153449&gt;Se, hvordan du konfigurerer et SD-kort&lt;/a&gt;."</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formatér"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formatér SD-kort til intern lagerplads"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Gem apps og medier, som kun skal bruges på denne telefon. &lt;a href=https://support.google.com/android/answer/12153449&gt;Se, hvordan du konfigurerer et SD-kort&lt;/a&gt;."</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formatér"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Eller"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formatér SD-kort til flytbar lagerplads"</string>
     <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Gem billeder, videoer, musik m.m., og få adgang til indholdet fra andre enheder. &lt;a href=https://support.google.com/android/answer/12153449&gt;Se, hvordan du konfigurerer et SD-kort&lt;/a&gt;."</string>
@@ -1332,13 +1121,9 @@
     <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Dette <xliff:g id="NAME_0">^1</xliff:g> skal formateres, før du kan gemme billeder, videoer, musik m.m. på det. \n\nNår du formaterer, ryddes alt eksisterende indhold på dette <xliff:g id="NAME_1">^2</xliff:g>. Du kan undgå at miste indhold ved at sikkerhedskopiere det til et andet <xliff:g id="NAME_2">^3</xliff:g> eller en anden enhed."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formatér <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Vil du flytte indholdet til <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Du kan flytte filer, medier og visse apps til dette <xliff:g id="NAME">^1</xliff:g>. \n\nFlytningen frigør <xliff:g id="SIZE">^2</xliff:g> lagerplads på din tablet og bør tage ca. <xliff:g id="DURATION">^3</xliff:g>."</string>
-    <string name="storage_wizard_migrate_v2_body" product="default" msgid="809730501314645325">"Du kan flytte filer, medier og visse apps til dette <xliff:g id="NAME">^1</xliff:g>. \n\nFlytningen frigør <xliff:g id="SIZE">^2</xliff:g> lagerplads på din telefon og bør tage ca. <xliff:g id="DURATION">^3</xliff:g>."</string>
     <string name="storage_wizard_migrate_v2_checklist" msgid="2618258869444553060">"Under flytningen:"</string>
     <string name="storage_wizard_migrate_v2_checklist_media" msgid="5867134681730723744">"Undlad at fjerne <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_checklist_apps" msgid="1882077445750580783">"Nogle apps vil ikke fungere"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="tablet" msgid="6111770421449869539">"Hold din tablet opladet"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="default" msgid="8826915870192535008">"Hold telefonen opladet"</string>
     <string name="storage_wizard_migrate_v2_now" msgid="3341460117088026966">"Flyt indhold"</string>
     <string name="storage_wizard_migrate_v2_later" msgid="6067756122853315642">"Flyt indhold senere"</string>
     <string name="storage_wizard_migrate_progress_v2_title" msgid="8791318509516968103">"Flytter indhold…"</string>
@@ -1407,21 +1192,9 @@
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"Downloadede SIM-kort kan ikke ryddes på grund af en fejl.\n\nGenstart din enhed, og prøv igen."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Ryd alle data (gendan fabriksindstillinger)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Ryd alle data (gendan fabriksindstillinger)"</string>
-    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Dette rydder alle data fra den "<b>"interne lagerplads"</b>" på din tablet, f.eks.: \n\n"<li>"Din Google-konto"</li>\n<li>"Data og indstillinger for system og apps"</li>\n<li>"Downloadede apps"</li></string>
-    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Dette rydder alle data fra den "<b>"interne lagerplads"</b>" på din telefon, inklusive: \n\n"<li>"Din Google-konto"</li>\n<li>"Data og indstillinger for system og apps"</li>\n<li>"Downloadede apps"</li></string>
-    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"Du er i øjeblikket logget ind på følgende konti:\n"</string>
-    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"Der er andre brugere til stede på denne enhed.\n"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Musik"</li>\n<li>"Billeder"</li>\n<li>"Andre brugerdata"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM-kort"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Dette opsiger ikke automatisk dit mobilabonnement."</string>
-    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"Ryd musik, billeder og andre brugerdata ved at rydde "<b>"USB-lageret"</b>"."</string>
-    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"Hvis du vil rydde musik, billeder og andre brugerdata, skal du rydde "<b>"SD-kortet"</b>"."</string>
-    <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"Slet USB-lager"</string>
-    <string name="erase_external_storage" product="default" msgid="2610056855012660451">"Formatér SD-kort"</string>
-    <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"Slet alle data på det interne USB-lager, f.eks. musik eller billeder"</string>
-    <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"Formatér alle data på SD-kortet, f.eks. musik eller billeder"</string>
-    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"Ryd alle data"</string>
-    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"Ryd alle data"</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"Alle dine personlige oplysninger og downloadede apps slettes. Denne handling kan ikke fortrydes."</string>
     <string name="main_clear_final_desc_esim" msgid="440406836793824969">"Alle dine personlige oplysninger, bl.a. downloadede apps og SIM-kort, slettes. Denne handling kan ikke fortrydes."</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"Vil du rydde alle data?"</string>
@@ -1467,14 +1240,8 @@
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Del kun internet via USB, Bluetooth og Ethernet"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Netdeling via USB"</string>
-    <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Del telefonens internetforbindelse via USB"</string>
-    <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"Del denne tablets internetforbindelse via USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Netdeling via Bluetooth"</string>
-    <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"Del din tablets internetforbindelse via Bluetooth"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Del telefonens internetforbindelse via Bluetooth"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Netdeling via Ethernet"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Del telefonens internetforbindelse via Ethernet"</string>
-    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"Del din tablets internetforbindelse via Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Brug hotspot og netdeling til at give andre enheder adgang til internettet via din mobildataforbindelse. Apps kan også oprette et hotspot for at dele indhold med enheder i nærheden."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Brug hotspot og netdeling til at give andre enheder adgang til internettet via din Wi-Fi- eller mobildataforbindelse. Apps kan også oprette et hotspot til at dele indhold med enheder i nærheden."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Hjælp"</string>
@@ -1522,10 +1289,6 @@
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Registrering af tidszone ved hjælp af lokation understøttes ikke"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Ændringer i forbindelse med registrering af tidszone ved hjælp af lokation er ikke tilladt"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"Lokation kan anvendes til at angive tidszonen"</string>
-    <string name="about_settings" product="tablet" msgid="2888705054709289693">"Om din tablet"</string>
-    <string name="about_settings" product="default" msgid="4038626127378127613">"Om telefonen"</string>
-    <string name="about_settings" product="device" msgid="9012888717090302815">"Om enheden"</string>
-    <string name="about_settings" product="emulator" msgid="2516560858771320366">"Om efterlignet enhed"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Se juridisk info, status, softwareversion"</string>
     <string name="legal_information" msgid="7509900979811934843">"Juridiske oplysninger"</string>
     <string name="manual" msgid="3651593989906084868">"Brugervejledning"</string>
@@ -1649,9 +1412,6 @@
     </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Kontakt din it-administrator"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Vedkommende kan hjælpe dig med at nulstille din pinkode, dit mønster eller din adgangskode"</string>
-    <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Din tablet og dine personlige data er mere sårbare over for angreb fra ukendte apps. Når du installerer apps fra denne kilde, accepterer du, at du er ansvarlig for skader på din tablet eller tab af data, der kan skyldes brug af disse apps."</string>
-    <string name="install_all_warning" product="default" msgid="652516435709047343">"Din telefon og dine personlige data er mere sårbare over for angreb fra ukendte apps. Når du installerer apps fra denne kilde, accepterer du, at du er ansvarlig for skader på din telefon eller tab af data, der kan skyldes brug af disse apps."</string>
-    <string name="install_all_warning" product="device" msgid="2348262609815354500">"Din enhed og dine personlige data er mere sårbare over for angreb fra ukendte apps. Når du installerer apps fra denne kilde, accepterer du, at du er ansvarlig for skade på din enhed eller tab af data, der kan skyldes brug af disse apps."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Avancerede indstillinger"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Aktivér flere indstillinger"</string>
     <string name="application_info_label" msgid="1015706497694165866">"Appinfo"</string>
@@ -1779,8 +1539,6 @@
     <string name="process_service_in_use_description" msgid="4210957264507014878">"Tjenesten <xliff:g id="COMP_NAME">%1$s</xliff:g> er i brug."</string>
     <string name="process_provider_in_use_description" msgid="6730020083976048028">"Udbyderen <xliff:g id="COMP_NAME">%1$s</xliff:g> er i brug."</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="6201041461740445113">"Stop systemtjeneste?"</string>
-    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="2076922609580490122">"Hvis du stopper denne tjeneste, kan nogle af funktionerne på din tablet holde op med at fungere korrekt, indtil du slukker og tænder den igen."</string>
-    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="2625863973434309085">"Hvis du stopper denne tjeneste, kan nogle af funktionerne på din tablet holde op med at fungere korrekt, indtil du slukker og derefter tænder den igen."</string>
     <string name="language_input_gesture_title" msgid="3292455685728572960">"Sprog, indtastning og bevægelser"</string>
     <string name="language_settings" msgid="8700174277543875046">"Sprog og indtastning"</string>
     <string name="languages_settings" msgid="5784775502251770671">"Sprog"</string>
@@ -1849,8 +1607,6 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"For alle sprog"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Flere sprog..."</string>
     <string name="testing" msgid="6294172343766732037">"Tester"</string>
-    <string name="testing_phone_info" product="tablet" msgid="1910768200608214456">"Oplysninger om tablet"</string>
-    <string name="testing_phone_info" product="default" msgid="1150527695827743906">"Telefonoplysninger"</string>
     <string name="keyboard_settings_summary" msgid="2716339620942356432">"Skærmtastatur, tale, værktøjer"</string>
     <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Skærmtastatur, fysisk tastatur, tale, værktøjer"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Fysisk tastatur"</string>
@@ -1927,8 +1683,6 @@
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Nulstil indstillinger"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Skærmindstillinger for størrelse og tekst er blevet nulstillet"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Skal indstillingerne for skærmstørrelse og tekst nulstilles?"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Telefonens oprindelige skærmstørrelse og tekstpræferencer gendannes"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"Din tablets oprindelige skærmstørrelse og tekstpræferencer gendannes"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Nulstil"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Har du nogen planer for weekenden?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Jeg skal på stranden. Vil du med?"</string>
@@ -2070,8 +1824,6 @@
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Enhåndstilstand er føjet til kvikmenuen. Du kan altid stryge nedad for at slå funktionen til eller fra."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"Du kan også føje enhåndstilstand til kvikmenuen fra toppen af skærmen"</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Afvis"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"Juster, hvordan farverne vises på din telefon"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"Juster, hvordan farverne vises på din tablet"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Brug farvekorrigering"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Genvej til farvekorrigering"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Om farvekorrigering"</string>
@@ -2121,11 +1873,7 @@
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Gør skærmen ekstra mørk"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Genvej til ekstra dæmpet belysning"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Om ekstra dæmpet belysning"</string>
-    <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Gør skærmen mørkere end telefonens laveste indstilling for lysstyrke"</string>
-    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Gør skærmen mørkere end din tablets laveste indstilling for lysstyrke"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Nedton din skærm, så din læseoplevelse bliver mere behagelig"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"Ekstra dæmpet belysning kan være en nyttig funktion, når: &lt;ol&gt; &lt;li&gt; Din telefons minimumslysstyrke stadig er for lys&lt;/li&gt; &lt;li&gt; Du bruger din telefon i mørke omgivelser, f.eks. om aftenen eller på et mørkt værelse inden sengetid&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5158211121482010799">"Ekstra dæmpet belysning kan være en nyttig funktion, når: &lt;ol&gt; &lt;li&gt; Din tablets minimumslysstyrke stadig er for lys&lt;/li&gt; &lt;li&gt; Du bruger din tablet i mørke omgivelser, f.eks. om aftenen eller på et mørkt værelse inden sengetid&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensitet"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Mørkere"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Lysere"</string>
@@ -2285,9 +2033,6 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Juster strømforbrug"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Inkluderede pakker"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Apps kører normalt"</string>
-    <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"Telefonen har et normalt batteriforbrug i baggrunden"</string>
-    <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"Din tablet har et normalt batteriforbrug i baggrunden"</string>
-    <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"Enheden har et normalt batteriforbrug i baggrunden"</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Lavt batteriniveau"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Aktivér Batterisparefunktion for at forlænge batteritiden"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Forlæng batteritid"</string>
@@ -2305,11 +2050,6 @@
     <skip />
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Få flere oplysninger om, hvad det betyder, når opladning er sat på pause"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Genoptag opladning"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Under visse forhold, f.eks. ved høje temperaturer og længere perioder med opladning, kan opladningen stoppe på <xliff:g id="PERCENT">%1$s</xliff:g> for at passe på batteriet.\n\nNår disse forhold ikke længere er til stede, oplades din telefon automatisk som normalt igen."</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Under visse forhold, f.eks. ved høje temperaturer og længere perioder med opladning, kan opladningen stoppe på <xliff:g id="PERCENT">%1$s</xliff:g> for at passe på batteriet.\n\nNår disse forhold ikke længere er til stede, oplades din tablet automatisk som normalt igen."</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Da du har brugt din telefon mere end normalt, aflades dit batteri muligvis hurtigere end forventet.\n\nApps med størst batteriforbrug:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Da du har brugt din tablet mere end normalt, aflades dit batteri muligvis hurtigere end forventet.\n\nApps med størst batteriforbrug:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Da du har brugt din enhed mere end normalt, aflades dit batteri muligvis hurtigere end forventet.\n\nApps med størst batteriforbrug:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Omfatter batterikrævende aktivitet i baggrunden"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="one">Begræns %1$d app</item>
@@ -2340,12 +2080,8 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Fjern"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Annuller"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Oplad helt"</string>
-    <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Dine apps har et normalt batteriforbrug. Hvis apps bruger for meget batteri, foreslår din telefon, hvad du kan gøre.\n\nDu kan altid aktivere batterisparefunktionen, hvis telefonen er ved at løbe tør for batteri."</string>
-    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Dine apps har et normalt batteriforbrug. Hvis apps bruger for meget batteri, foreslår din tablet, hvad du kan gøre.\n\nDu kan altid aktivere batterisparefunktionen, hvis din tablet er ved at løbe tør for batteri."</string>
-    <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Dine apps har et normalt batteriforbrug. Hvis apps bruger for meget batteri, foreslår din enhed, hvad du kan gøre.\n\nDu kan altid aktivere batterisparefunktionen, hvis enheden er ved at løbe tør for batteri."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Batteriadministration"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Administrer automatisk apps"</string>
-    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Begræns batteriforbrug for apps, du ikke bruger så ofte"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"Når batteriadministrator registrerer, at der er apps, som dræner batteriet, får du mulighed for at begrænse disse apps. Begrænsede apps fungere muligvis ikke korrekt, og notifikationer kan være forsinkede."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Begrænsede apps"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
@@ -2373,8 +2109,6 @@
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
     <string name="power_cell" msgid="7793805106954398186">"Mobilnetværk"</string>
     <string name="power_phone" msgid="2768396619208561670">"Stemmeopkald"</string>
-    <string name="power_idle" product="tablet" msgid="4689321599298911021">"Tabletcomputeren er ikke aktiv"</string>
-    <string name="power_idle" product="default" msgid="9132502722499465252">"Inaktiv telefon"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"Har været aktiv i <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"Skærmtid <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="PERCENT">%1$s</xliff:g> anvendt af <xliff:g id="APP">%2$s</xliff:g>"</string>
@@ -2425,9 +2159,6 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Angiv en tidsplan"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Forlæng batteritiden"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Deaktiver, når enheden er opladet"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="3618041244703216293">"Batterisparefunktion deaktiveres, når din telefon er opladet til mere end <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="1733686775743601110">"Batterisparefunktion deaktiveres, når din tablet er opladet til mere end <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="7449283917787428755">"Batterisparefunktion deaktiveres, når din enhed er opladet til mere end <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Aktivér"</string>
@@ -2449,9 +2180,6 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Baggrund: Under et minut"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"I alt: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Baggrund: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Data om batteriforbrug er omtrentlige, og måler ikke forbrug, når telefonen oplades"</string>
-    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"Data om batteriforbrug er omtrentlige, og måler ikke forbrug, når din tablet oplades"</string>
-    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"Data om batteriforbrug er omtrentlige, og måler ikke forbrug, når enheden oplades"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Data om batteriforbrug bliver tilgængelige, et par timer efter at enheden er fuldt opladet"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Diagram over batteriforbrug"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Diagram med batteriforbrug pr. dag"</string>
@@ -2521,8 +2249,6 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Forlænger batteritiden og forbedrer enhedens ydeevne ved at administrere din netværksforbindelse automatisk"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Lager for loginoplysninger"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Installer et certifikat"</string>
-    <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Installer certifikater fra lager"</string>
-    <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"Installer certifikater fra SD-kortet"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Ryd loginoplysninger"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"Fjern alle certifikater"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"Pålidelige loginoplysninger"</string>
@@ -2648,9 +2374,6 @@
     <string name="remove_account_label" msgid="4169490568375358010">"Fjern konto"</string>
     <string name="header_add_an_account" msgid="3919151542338822661">"Tilføj en konto"</string>
     <string name="really_remove_account_title" msgid="253097435885652310">"Vil du fjerne kontoen?"</string>
-    <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"Hvis du fjerner denne konto, slettes alle tilknyttede beskeder, kontakter og andre data fra din tablet!"</string>
-    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"Hvis du fjerner denne konto, slettes alle tilknyttede beskeder, kontakter og andre data fra telefonen!"</string>
-    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"Hvis du fjerner denne konto, slettes alle tilknyttede beskeder, kontakter og andre data fra enheden."</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"Din administrator har ikke givet tilladelse til at foretage denne ændring"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Der kan ikke synkroniseres manuelt"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"Synkronisering af dette element er deaktiveret lige nu. Hvis du vil ændre indstillingen, skal du aktivere baggrundsdata og automatisk synkronisering midlertidigt."</string>
@@ -2692,8 +2415,6 @@
     <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"Denne funktion kan medføre, at en app, der er afhængig af baggrundsdata, ikke længere fungerer, når der kun er mobilnetværk til rådighed.\n\nDu kan finde mere hensigtsmæssige metoder til kontrol af dataforbruget i de indstillinger, der er tilgængelige i selve appen."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="8599940395497268584">"Begrænsning af baggrundsdata er kun mulig, hvis du har angivet en grænse for mobildata."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"Aktivér automatisk datasynk.?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="6387714350903085918">"Eventuelle ændringer, som du foretager på dine konti på nettet, kopieres automatisk til din tablet.\n\nNogle konti kan også automatisk kopiere de ændringer, du foretager på din tablet, til nettet. En Google-konto fungerer på denne måde."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="6457107552266187107">"Eventuelle ændringer, som du foretager på dine konti på nettet, kopieres automatisk til din telefon.\n\nNogle konti kan også automatisk kopiere de ændringer, du foretager på telefonen, til nettet. En Google-konto fungerer på denne måde."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"Deaktiver automatisk datasynk.?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"Dette vil sænke data- og batteriforbruget, men du skal til gengæld synkronisere hver konto manuelt for at hente de seneste oplysninger, og du vil ikke modtage notifikationer, når der kommer nye opdateringer."</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"Dato for nulstilling af forbrugsperiode"</string>
@@ -2702,8 +2423,6 @@
     <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"Konfigurer en advarsel om dataforbrug"</string>
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"Angiv en grænse for dataforbrug"</string>
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"Grænse for dataforbrug"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"Din tablet deaktiverer mobildata, når den angivne grænse er nået.\n\nEftersom dataforbrug måles af din tablet, og dit mobilselskab muligvis beregner forbrug på en anden måde, kan du eventuelt angive en lav grænse."</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"Din telefon deaktiverer mobildata, når den angivne grænse er nået.\n\nEftersom dataforbrug måles af din telefon, og dit mobilselskab muligvis beregner forbrug på en anden måde, kan du eventuelt angive en lav grænse."</string>
     <string name="data_usage_sweep_warning" msgid="2072854703184614828"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"advarsel"</font></string>
     <string name="data_usage_sweep_limit" msgid="6947019190890086284"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"grænse"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="9065885396147675694">"Fjernede apps"</string>
@@ -2815,9 +2534,6 @@
       <item quantity="other">Tjek certifikater</item>
     </plurals>
     <string name="user_settings_title" msgid="6550866465409807877">"Flere brugere"</string>
-    <string name="user_settings_footer_text" product="device" msgid="7523914344521302179">"Del din enhed ved at tilføje nye brugere. Hver bruger får sit personlige område på enheden til tilpassede startskærme, konti, apps, indstillinger og meget mere."</string>
-    <string name="user_settings_footer_text" product="tablet" msgid="3730074318510244552">"Del din tablet ved at tilføje nye brugere. Hver bruger får sit personlige område på din tablet til tilpassede startskærme, konti, apps, indstillinger og meget mere."</string>
-    <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"Del din telefon ved at tilføje nye brugere. Hver bruger får sit personlige område på telefonen til tilpassede startskærme, konti, apps, indstillinger og meget mere."</string>
     <string name="user_list_title" msgid="1387379079186123404">"Brugere og profiler"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Tilføj bruger eller profil"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Begrænset profil"</string>
@@ -2827,8 +2543,6 @@
     <string name="user_admin" msgid="4024553191395768119">"Administrator"</string>
     <string name="user_you" msgid="3070562015202859996">"Dig (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Du kan ikke tilføje flere brugere. Fjern en bruger for at tilføje en ny."</string>
-    <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"Kun ejeren af tabletten kan administrere brugere."</string>
-    <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"Kun ejeren af telefonen kan administrere brugere."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Begrænsede profiler kan ikke tilføje konti"</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Slet <xliff:g id="USER_NAME">%1$s</xliff:g> fra denne enhed"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Lås skærmindstillinger"</string>
@@ -2838,8 +2552,6 @@
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Vil du slette brugeren?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Vil du fjerne profilen?"</string>
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Fjern arbejdsprofilen?"</string>
-    <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"Du vil miste dit univers og dine data på denne tablet. Du kan ikke fortryde denne handling."</string>
-    <string name="user_confirm_remove_self_message" product="default" msgid="5991495192044543230">"Du vil miste dit rum og dine data på denne telefon. Du kan ikke fortryde denne handling."</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"Alle apps og data slettes."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"Alle apps og data i denne profil slettes, hvis du fortsætter."</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"Alle apps og data slettes."</string>
@@ -2904,9 +2616,6 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"Fjern begrænsninger"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Skift pinkode"</string>
     <string name="help_label" msgid="2896538416436125883">"Hjælp og feedback"</string>
-    <string name="support_summary" product="default" msgid="6137136608018134563">"Support – artikler, telefon og chat"</string>
-    <string name="support_summary" product="tablet" msgid="6681247727996378252">"Hjælpeartikler, tablet og chat"</string>
-    <string name="support_summary" product="device" msgid="1690554254039752541">"Hjælpeartikler, enhed og chat"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Konto til indhold"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Foto-id"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Ekstreme trusler"</string>
@@ -4091,9 +3800,6 @@
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navigation med knapper"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigation med bevægelser, følsomhed for bevægelse fra kant, bevægelse til at gå tilbage"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navigation, knappen Hjem"</string>
-    <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Tryk to gange for at tjekke telefonen"</string>
-    <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Tryk to gange for at tjekke din tablet"</string>
-    <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Tryk to gange for at tjekke enheden"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Enhåndstilstand"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Brug enhåndstilstand"</string>
     <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Genvej til enhåndstilstand"</string>
@@ -4107,16 +3813,7 @@
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Vise notifikationer"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"Notifikationer og indstillinger vises."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Tryk to gange på skærmen for at se klokkeslæt, notifikationer og andre oplysninger."</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Løft for at tjekke telefonen"</string>
-    <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Løft for at tjekke din tablet"</string>
-    <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"Løft for at tjekke enheden"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"Aktivering af skærm"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"Løft din telefon for at se klokkeslæt, notifikationer og andre oplysninger."</string>
-    <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"Se klokkeslæt, notifikationer og andre oplysninger, når du samler din tablet op."</string>
-    <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"Se klokkeslæt, notifikationer og andre oplysninger, når du samler din enhed op."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Tryk for at tjekke telefonen"</string>
-    <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Tryk for at tjekke din tablet"</string>
-    <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Tryk for at tjekke enheden"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Tryk på skærmen for at se klokkeslæt, notifikationer og andre oplysninger."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Alarm-SOS"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Brug Alarm-SOS"</string>
@@ -4130,9 +3827,6 @@
     <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Hvis du angiver et nummer, der ikke er et alarmnummer:\n • Din enhed skal låses op, før du kan bruge Alarm-SOS\n • Dit opkald besvares muligvis ikke"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Stryg over fingeraftrykslæser for at se notifikationer"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Stryg fingeraftryk"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Du kan tjekke dine notifikationer ved at stryge nedad på fingeraftrykssensoren på bagsiden af telefonen."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"Du kan tjekke dine notifikationer ved at stryge nedad på fingeraftrykslæseren på bagsiden af din tablet."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3888927017311372398">"Du kan tjekke dine notifikationer ved at stryge nedad på fingeraftrykslæseren på bagsiden af enheden."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"Se notifikationer hurtigt"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="65713754674288193">"Bootloaderen er allerede låst op"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="7425519481227423860">"Opret internetforbindelse, eller kontakt dit mobilselskab"</string>
@@ -4619,9 +4313,6 @@
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Vil du deaktivere VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Dette deaktiverer også din 5G-forbindelse.\nNår du er i et opkald, kan du ikke bruge internettet, og nogle apps fungerer muligvis ikke."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"Når du bruger to SIM-kort, begrænses denne telefon til 4G. "<annotation id="url">"Få flere oplysninger"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Når du bruger to SIM-kort, begrænses denne tablet til 4G. "<annotation id="url">"Få flere oplysninger"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Når du bruger to SIM-kort, begrænses denne enhed til 4G. "<annotation id="url">"Få flere oplysninger"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspender udførelse for cachelagrede apps"</string>
     <string name="blob_never_expires_text" msgid="7293376386620106623">"Udløber aldrig."</string>
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"Rettigheden udløber aldrig."</string>
@@ -4656,8 +4347,6 @@
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"Netværkspræferencer"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"netværksforbindelse, internet, trådløs, data, wifi, wi-fi, mobilnetværk, mobil, mobilselskab, 4g, 3g, 2g, lte"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Vil du nulstille dit internet?"</string>
-    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Dette afslutter telefonopkaldet"</string>
-    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Dette afslutter telefonopkaldet"</string>
     <string name="resetting_internet_text" msgid="6696779371800051806">"Nulstiller dit internet…"</string>
     <string name="fix_connectivity" msgid="2781433603228089501">"Løs problem med forbindelsen"</string>
     <string name="networks_available" msgid="3299512933684383474">"Tilgængelige netværk"</string>

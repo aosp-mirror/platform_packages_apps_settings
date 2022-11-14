@@ -13,7 +13,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"نعم"</string>
@@ -63,9 +62,6 @@
     <string name="bluetooth_rename_device" msgid="4219655243836021443">"إعادة تسمية هذا الجهاز"</string>
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"إعادة التسمية"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"هل تريد قطع الاتصال بالجهاز؟"</string>
-    <string name="bluetooth_disconnect_all_profiles" product="default" msgid="1934297101665686854">"سيتم قطع اتصال هاتفك بجهاز <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_disconnect_all_profiles" product="tablet" msgid="336622948210457991">"سيتم قطع اتصال جهازك اللوحي بجهاز <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"سيتم قطع الاتصال بجهاز <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"إقران جهاز جديد"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"بلوتوث"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"إقران السماعة اليمنى"</string>
@@ -76,9 +72,6 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"إقران السماعة اليمنى"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"إقران السماعة اليسرى"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"أدوات مشابهة"</string>
-    <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"عنوان بلوتوث الهاتف: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"عنوان البلوتوث للجهاز اللوحي: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="device" msgid="2863536947810007600">"عنوان البلوتوث للجهاز: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"جهاز بلوتوث بدون اسم"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"البحث"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"لم يتم العثور على أجهزة بلوتوث."</string>
@@ -92,22 +85,6 @@
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"يريد <xliff:g id="APP_NAME">%1$s</xliff:g> إيقاف البلوتوث"</string>
     <string name="bluetooth_ask_enablement_no_name" msgid="5091401961637405417">"يريد أحد التطبيقات تفعيل بلوتوث"</string>
     <string name="bluetooth_ask_disablement_no_name" msgid="382299750909188822">"يريد أحد التطبيقات إيقاف البلوتوث"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="1273405567801929487">"يريد <xliff:g id="APP_NAME">%1$s</xliff:g> أن يكون جهازك اللوحي مرئيًا لأجهزة بلوتوث الأخرى لمدة <xliff:g id="TIMEOUT">%2$d</xliff:g> من الثواني."</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="7013223328571883275">"يريد <xliff:g id="APP_NAME">%1$s</xliff:g> أن يكون هاتفك مرئيًا لأجهزة بلوتوث الأخرى لمدة <xliff:g id="TIMEOUT">%2$d</xliff:g> من الثواني."</string>
-    <string name="bluetooth_ask_discovery_no_name" product="tablet" msgid="3266007454914144057">"يريد أحد التطبيقات أن يكون جهازك اللوحي مرئيًا لأجهزة بلوتوث الأخرى لمدة <xliff:g id="TIMEOUT">%1$d</xliff:g> من الثواني."</string>
-    <string name="bluetooth_ask_discovery_no_name" product="default" msgid="7989444746980501116">"يريد أحد التطبيقات أن يكون هاتفك مرئيًا لأجهزة بلوتوث الأخرى لمدة <xliff:g id="TIMEOUT">%1$d</xliff:g> من الثواني."</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="6482084870735107773">"يريد <xliff:g id="APP_NAME">%1$s</xliff:g> جعل جهازك اللوحي مرئيًا لأجهزة بلوتوث الأخرى. يمكنك تغيير هذا لاحقًا في إعدادات بلوتوث."</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="2352494279465502950">"يريد <xliff:g id="APP_NAME">%1$s</xliff:g> جعل هاتفك مرئيًا لأجهزة بلوتوث الأخرى. يمكنك تغيير هذا لاحقًا في إعدادات بلوتوث."</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="tablet" msgid="2732992604509910896">"يريد أحد التطبيقات جعل جهازك اللوحي مرئيًا لأجهزة بلوتوث الأخرى. يمكنك تغيير هذا لاحقًا في إعدادات بلوتوث."</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="default" msgid="356982103612920264">"يريد أحد التطبيقات جعل هاتفك مرئيًا لأجهزة بلوتوث الأخرى. يمكنك تغيير هذا لاحقًا في إعدادات بلوتوث."</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="6103655179509599427">"يريد <xliff:g id="APP_NAME">%1$s</xliff:g> تفعيل البلوتوث وجعل جهازك اللوحي مرئيًا للأجهزة الأخرى لمدة <xliff:g id="TIMEOUT">%2$d</xliff:g> من الثواني."</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="934276632311449337">"يريد <xliff:g id="APP_NAME">%1$s</xliff:g> تفعيل البلوتوث وجعل هاتفك مرئيًا للأجهزة الأخرى لمدة <xliff:g id="TIMEOUT">%2$d</xliff:g> من الثواني."</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="tablet" msgid="1284048348024444485">"يريد أحد التطبيقات تفعيل البلوتوث وجعل جهازك اللوحي مرئيًا للأجهزة الأخرى لمدة <xliff:g id="TIMEOUT">%1$d</xliff:g> من الثواني."</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="default" msgid="2661614145022629454">"يريد أحد التطبيقات تفعيل البلوتوث وجعل هاتفك مرئيًا للأجهزة الأخرى لمدة <xliff:g id="TIMEOUT">%1$d</xliff:g> من الثواني."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="8588317955400593623">"يريد <xliff:g id="APP_NAME">%1$s</xliff:g> تفعيل البلوتوث وجعل جهازك اللوحي مرئيًا للأجهزة الأخرى. يمكنك تغيير هذا لاحقًا في إعدادات بلوتوث."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="4047444317445386579">"يريد <xliff:g id="APP_NAME">%1$s</xliff:g> تفعيل البلوتوث وجعل هاتفك مرئيًا للأجهزة الأخرى. يمكنك تغيير هذا لاحقًا في إعدادات بلوتوث."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="tablet" msgid="4922952478824372605">"يريد أحد التطبيقات تفعيل البلوتوث وجعل جهازك اللوحي مرئيًا للأجهزة الأخرى. يمكنك تغيير هذا لاحقًا في إعدادات بلوتوث."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="default" msgid="1381582950049639439">"يريد أحد التطبيقات تفعيل البلوتوث وجعل هاتفك مرئيًا للأجهزة الأخرى. يمكنك تغيير هذا لاحقًا في إعدادات بلوتوث."</string>
     <string name="bluetooth_turning_on" msgid="3842613808709024730">"جارٍ تفعيل البلوتوث..."</string>
     <string name="bluetooth_turning_off" msgid="7406309124247701148">"جارٍ إيقاف البلوتوث..."</string>
     <string name="bluetooth_connection_permission_request" msgid="8793131019383198861">"طلب اتصال بلوتوث"</string>
@@ -251,10 +228,6 @@
     <string name="account_settings_title" msgid="9138880127246241885">"الحسابات"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"الأمان"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"التشفير وبيانات الاعتماد"</string>
-    <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"تم ترميز الهاتف"</string>
-    <string name="not_encrypted_summary" product="default" msgid="2251945842585788254">"الهاتف ليس مشفّرًا."</string>
-    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"تم ترميز الجهاز"</string>
-    <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"الجهاز ليس مشفرًا."</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"شاشة القفل"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"ما يتم عرضه"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"غير متاح"</string>
@@ -270,17 +243,11 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"إعداد ميزة \"فتح الجهاز بالتعرف على الوجه\""</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"استخدام وجهك للمصادقة"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"بدء"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"‏إذا تم إيقاف ميزة \"فتح الجهاز بالتعرف على الوجه\" السهلة الاستخدام، قد لا تعمل بعض خطوات الإعداد بشكل سليم باستخدام TalkBack."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"رجوع"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"مواصلة الإعداد"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"استخدام إعدادات \"سهولة الاستخدام\""</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"إلغاء"</string>
@@ -290,53 +257,14 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"فتح القفل باستخدام وجهك"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"السماح بـ \"فتح الجهاز بالتعرف على الوجه\""</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"استخدام وجهك للمصادقة"</string>
-    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"استخدِم وجهك لفتح هاتفك أو للسماح بعمليات الشراء أو تسجيل الدخول إلى التطبيقات."</string>
-    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"استخدِم وجهك لفتح قفل جهازك اللوحي أو للسماح بعمليات الشراء أو تسجيل الدخول إلى التطبيقات."</string>
-    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"استخدِم وجهك لفتح قفل جهازك أو للسماح بعمليات الشراء أو تسجيل الدخول إلى التطبيقات."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"السماح لطفلك باستخدام وجهه لفتح قفل هاتفه"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"السماح لطفلك باستخدام وجهه لفتح قفل جهازه اللوحي"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"السماح لطفلك باستخدام وجهه لفتح قفل جهازه"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"قد يكون استخدام وجه طفلك لفتح قفل هاتفه أقل أمانًا من استخدام نقش أو رقم تعريف شخصي قوي."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"قد يكون استخدام وجه طفلك لفتح قفل جهازه اللوحي أقل أمانًا من استخدام نقش أو رقم تعريف شخصي قوي."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"قد يكون استخدام وجه طفلك لفتح قفل جهازه أقل أمانًا من استخدام نقش أو رقم تعريف شخصي قوي."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"يمكنك استخدام وجهك لفتح الهاتف أو الموافقة على عمليات الشراء.\n\nملاحظة: لا يمكنك استخدام وجهك لفتح هذا الجهاز. للحصول على المزيد من المعلومات، اتصل بمشرف المؤسسة."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"استخدِم وجهك لفتح هاتفك أو السماح بعمليات الشراء أو تسجيل الدخول إلى التطبيقات."</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"وضع الوجه في منتصف الدائرة"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"التخطّي"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"لقد أضفت الحد الأقصى لعدد الأوجه"</string>
@@ -385,12 +313,6 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"إعداد بصمة الإصبع"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"سماح بفتح الجهاز ببصمة الإصبع"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"استخدام بصمة الإصبع"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"يمكنك استخدام بصمة إصبعك لفتح قفل جهازك اللوحي أو لإثبات هويتك، مثلاً عند تسجيل الدخول إلى التطبيقات أو الموافقة على عملية شراء."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"يمكنك استخدام بصمة الإصبع لفتح قفل جهازك أو لإثبات هويتك، مثلاً عند تسجيل الدخول إلى التطبيقات أو الموافقة على عملية شراء."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"يمكنك استخدام بصمة الإصبع لفتح قفل هاتفك أو لإثبات هويتك، مثلاً عند تسجيل الدخول إلى التطبيقات أو الموافقة على عملية شراء."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"يتم السماح لطفلك باستخدام بصمة إصبعه لفتح قفل هاتفه أو إثبات هويته. يتم استخدام هذه الميزة عند تسجيل الدخول إلى التطبيقات والموافقة على عملية شراء والمزيد."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"يتم السماح لطفلك باستخدام بصمة إصبعه لفتح قفل جهازه اللوحي أو إثبات هويته. يتم استخدام هذه الميزة عند تسجيل الدخول إلى التطبيقات والموافقة على عملية شراء والمزيد."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"يتم السماح لطفلك باستخدام بصمة إصبعه لفتح قفل جهازه أو إثبات هويته. يتم استخدام هذه الميزة عند تسجيل الدخول إلى التطبيقات والموافقة على عملية شراء والمزيد."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"القرار لك"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"ستتحكّم في هذه الميزة أنت وطفلك"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"تنبيه"</string>
@@ -402,36 +324,12 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"لا يستغرق إعداد بصمة الإصبع أكثر من دقيقة أو دقيقتين. إذا تخطّيت هذا الإجراء، يمكنك إضافة بصمة الإصبع لاحقًا من الإعدادات."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"عندما يظهر لك هذا الرمز، استخدِم بصمة الإصبع للمصادقة، مثلاً عند تسجيل الدخول إلى التطبيقات أو الموافقة على عملية شراء"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"تنبيه"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"استخدام بصمة الإصبع لفتح قفل الهاتف قد يكون أقل أمانًا من استخدام نقش أو رقم تعريف شخصي قوي."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"استخدام بصمة الإصبع لفتح قفل جهازك اللوحي قد يكون أقل أمانًا من استخدام رقم تعريف شخصي أو نقش قوي."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"استخدام بصمة الإصبع لفتح قفل جهازك قد يكون أقل أمانًا من استخدام رقم تعريف شخصي أو نقش قوي."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"آلية العمل"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"تنشئ ميزة \"فتح الجهاز ببصمة الإصبع\" نموذجًا فريدًا من بصمة إصبعك لإثبات هويتك. لإنشاء نموذج بصمة الإصبع هذا أثناء عملية الإعداد، عليك تسجيل نسخ لبصمة إصبعك من مواضع مختلفة."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"تنشئ ميزة \"فتح الجهاز ببصمة الإصبع\" نموذجًا فريدًا من بصمة إصبع طفلك لإثبات هويته. لإنشاء نموذج بصمة الإصبع هذا أثناء الإعداد، على طفلك تسجيل نسخ لبصمة إصبعه من مواضع مختلفة."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"‏عندما تستخدم ميزة Pixel Imprint، يتم استخدام الصور لتعديل نموذج بصمة إصبعك. إن الصور المستخدمة لإنشاء نموذج بصمة الإصبع لا يتم تخزينها مطلقًا، بل يتم تخزين النموذج بأمان على هاتفك ولا يتم نقله خارج هاتفك مطلقًا. تتم كل عمليات المعالجة بأمان على هاتفك."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"‏عندما تستخدم ميزة Pixel Imprint، يتم استخدام الصور لتعديل نموذج بصمة إصبعك، علمًا بأنّ الصور المستخدمة لإنشاء نموذج بصمة الإصبع لا يتم تخزينها مطلقًا، بل يتم تخزين النموذج بأمان على جهازك اللوحي ولا يتم نقله خارج الجهاز مطلقًا. تتم كل عمليات المعالجة بأمان على جهازك اللوحي."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"‏عندما تستخدم ميزة Pixel Imprint، يتم استخدام الصور لتعديل نموذج بصمة إصبعك، علمًا بأنّ الصور المستخدمة لإنشاء نموذج بصمة الإصبع لا يتم تخزينها مطلقًا، بل يتم تخزين النموذج بأمان على جهازك ولا يتم نقله خارج الجهاز مطلقًا. تتم كل عمليات المعالجة بأمان على جهازك."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"‏عندما يستخدم ميزة Pixel Imprint، يتم استخدام الصور لتعديل نموذج بصمة إصبعه. لا يتم مطلقًا تخزين الصور المستخدمة لإنشاء نموذج بصمة إصبع طفلك، ولكن يتم تخزين نموذج بصمة الإصبع بأمان على الهاتف ولا يتم نقله خارج الهاتف مطلقًا. تتم كل عمليات المعالجة بأمان على الهاتف."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"‏عندما يستخدم الطفل ميزة Pixel Imprint، يتم استخدام الصور لتعديل نموذج بصمة إصبعه. لا يتم مطلقًا تخزين الصور المستخدمة لإنشاء نموذج بصمة إصبع طفلك، ولكن يتم تخزين نموذج بصمة الإصبع بأمان على الجهاز اللوحي ولا يتم نقله خارج الجهاز مطلقًا. تتم كل عمليات المعالجة بأمان على الجهاز اللوحي."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"‏عندما يستخدم الطفل ميزة Pixel Imprint، يتم استخدام الصور لتعديل نموذج بصمة إصبعه. لا يتم مطلقًا تخزين الصور المستخدمة لإنشاء نموذج بصمة إصبع طفلك، ولكن يتم تخزين نموذج بصمة الإصبع بأمان على الجهاز ولا يتم نقله خارج الجهاز مطلقًا. تتم كل عمليات المعالجة بأمان على الجهاز."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"يمكنك حذف صور بصمة الإصبع ونموذجها أو إيقاف ميزة \"فتح الجهاز ببصمة الإصبع\" في أي وقت في \"الإعدادات\". يتم تخزين صور بصمة الإصبع ونموذجها على الهاتف إلى أن تحذفها."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"يمكنك حذف صور بصمة الإصبع ونموذجها أو إيقاف ميزة \"فتح الجهاز ببصمة الإصبع\" في أي وقت في \"الإعدادات\". تظل صور بصمة الإصبع ونماذجها مخزّنة على الجهاز إلى أن تحذفها."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"يمكنك حذف صور بصمة الإصبع ونموذجها أو إيقاف ميزة \"فتح الجهاز ببصمة الإصبع\" في أي وقت في \"الإعدادات\". تظل صور بصمة الإصبع ونماذجها مخزّنة على الجهاز إلى أن تحذفها."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"يمكنك أنت وطفلك حذف نموذج وصور بصمة إصبعه أو إيقاف ميزة \"فتح الجهاز ببصمة الإصبع\" في أي وقت في \"الإعدادات\". يتم تخزين صور بصمة الإصبع ونموذجها على الهاتف إلى أن يتم حذفها."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"يمكنك أنت وطفلك حذف نموذج وصور بصمة إصبعه أو إيقاف ميزة \"فتح الجهاز ببصمة الإصبع\" في أي وقت في \"الإعدادات\". تظل صور بصمة الإصبع ونماذجها مخزّنة على الجهاز اللوحي إلى أن يتم حذفها."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"يمكنك أنت وطفلك حذف نموذج وصور بصمة إصبعه أو إيقاف ميزة \"فتح الجهاز ببصمة الإصبع\" في أي وقت في \"الإعدادات\". تظل صور بصمة الإصبع ونماذجها مخزّنة على الجهاز إلى أن يتم حذفها."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"يمكن فتح قفل هاتفك بدون قصدك، مثلاً عندما يضعه شخص على إصبعك."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"يمكن فتح قفل جهازك اللوحي بدون أن تتعمد ذلك، مثلاً عندما يضعه شخص على إصبعك."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"يمكن فتح قفل جهازك بدون أن تتعمد ذلك، مثلاً عندما يضعه شخص على إصبعك."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"يمكن فتح قفل هاتف طفلك بدون قصده، مثلاً عندما يضعه شخص على إصبعه."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"يمكن فتح قفل جهاز طفلك اللوحي بدون قصده، مثلاً عندما يضعه شخص على إصبع الطفل."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"يمكن فتح قفل جهاز طفلك بدون قصده، مثلاً عندما يضعه شخص على إصبع الطفل."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"‏للحصول على أفضل النتائج، استخدم واقي شاشة مُعتمَد ويحمل شعار Made for Google. قد لا تعمل بصمة إصبعك مع واقيات الشاشة الأخرى."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"‏للحصول على أفضل النتائج، استخدم واقي شاشة مُعتمَد ويحمل شعار Made for Google. قد لا تعمل بصمة إصبع طفلك مع واقيات الشاشة الأخرى."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"يمكنك استخدام بصمة إصبعك لفتح قفل جهازك اللوحي أو إثبات هويتك، مثلاً عند تسجيل الدخول إلى التطبيقات."</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"يمكنك استخدام بصمة إصبعك لفتح قفل جهازك أو إثبات هويتك، مثلاً عند تسجيل الدخول إلى التطبيقات."</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"يمكنك استخدام بصمة إصبعك لفتح قفل هاتفك أو إثبات هويتك، مثلاً عند تسجيل الدخول إلى التطبيقات."</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"فتح الجهاز بالتعرف على الوجه وببصمة الإصبع"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"انقر للإعداد."</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"تمت إضافة وجه وبصمات أصابع."</string>
@@ -443,17 +341,8 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"استخدام ميزة \"فتح الجهاز بالتعرف على الوجه\""</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"استخدام ميزة \"فتح الجهاز ببصمة الإصبع\""</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"استخدام الوجه أو بصمة الإصبع"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"عليك إعادة الجهاز اللوحي إلى أحد الوالدَين."</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"عليك إعادة الجهاز إلى أحد الوالدَين."</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"عليك إعادة الهاتف إلى أحد الوالدين."</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"حسنًا"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"هل تريد تخطّي قفل الشاشة؟"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"لن يتم تفعيل ميزات حماية الجهاز. ولن تتمكن من منع الآخرين من استخدام هذا الجهاز اللوحي في حالة فقدانه أو سرقته أو إعادة ضبطه."</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"لن يتم تفعيل ميزات حماية الجهاز. ولن تتمكن من منع الآخرين من استخدام هذا الجهاز في حالة فقدانه أو سرقته أو إعادة ضبطه."</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2412426429887900241">"لن يتم تفعيل ميزات حماية الجهاز. ولن تتمكن من منع الآخرين من استخدام هذا الهاتف في حالة فقدانه أو سرقته أو إعادة ضبطه."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="7119039592587429936">"لن يتم تفعيل ميزات حماية الجهاز. ولن تتمكن من منع الآخرين من استخدام هذا الجهاز اللوحي في حالة فقدانه أو سرقته."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3365990364131398523">"لن يتم تفعيل ميزات حماية الجهاز. ولن تتمكن من منع الآخرين من استخدام هذا الجهاز في حالة فقدانه أو سرقته."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="4908278819257287536">"لن يتم تفعيل ميزات حماية الجهاز. ولن تتمكن من منع الآخرين من استخدام هذا الهاتف في حالة فقدانه أو سرقته."</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"التخطّي"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"رجوع"</string>
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"التخطي"</string>
@@ -462,9 +351,6 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"لمس زر التشغيل بدون الضغط عليه"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"كيفية إعداد بصمة إصبعك"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"زر الاستشعار موجود على الجزء الخلفي لهاتفك. استخدِم إصبع السبابة."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"توجد أداة استشعار بصمة الإصبع على زر التشغيل. زر التشغيل هو الزر المسطح بجانب زرّي التحكم بمستوى الصوت البارزين في الجزء الجانبي من الجهاز اللوحي.\n\nيؤدي الضغط على زر التشغيل إلى إطفاء الشاشة."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"توجد أداة استشعار بصمة الإصبع على زر التشغيل. زر التشغيل هو الزر المسطح بجانب زرّي التحكم بمستوى الصوت البارزين في الجزء الجانبي من الجهاز.\n\nيؤدي الضغط على زر التشغيل إلى إطفاء الشاشة."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"توجد أداة استشعار بصمة الإصبع على زر التشغيل. زر التشغيل هو الزر المسطح بجانب زرّي التحكم بمستوى الصوت البارزين في الجزء الجانبي من الهاتف.\n\nيؤدي الضغط على زر التشغيل إلى إطفاء الشاشة."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"تكون أداة استشعار بصمات الإصبع متوفرة على شاشتك. يمكنك تسجيل بصمة إصبعك في الشاشة التالية."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"بدء"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"يمكنك تحريك إصبعك على الشاشة للعثور على المستشعر. انقر مع الاستمرار على مستشعر بصمات الإصبع."</string>
@@ -497,9 +383,6 @@
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"تسجيل بصمة الإصبع <xliff:g id="PERCENTAGE">%d</xliff:g> في المئة."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"تمت إضافة بصمة الإصبع"</string>
     <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"يمكنك الآن استخدام بصمة إصبعك لفتح قفل جهازك اللوحي أو إثبات هويتك، مثلاً عند تسجيل الدخول إلى التطبيقات أو الموافقة على عملية شراء."</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"يمكنك الآن استخدام بصمة إصبعك لفتح قفل جهازك اللوحي أو إثبات هويتك، مثلاً عند تسجيل الدخول إلى التطبيقات."</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"يمكنك الآن استخدام بصمة إصبعك لفتح قفل جهازك أو إثبات هويتك، مثلاً عند تسجيل الدخول إلى التطبيقات."</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"يمكنك الآن استخدام بصمة إصبعك لفتح قفل هاتفك أو إثبات هويتك، مثلاً عند تسجيل الدخول إلى التطبيقات."</string>
     <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
     <skip />
     <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
@@ -511,42 +394,6 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"ضع جانب بصمة الإصبع على المستشعر واضغط مع الاستمرار ثم بدِّل إلى الجانب الآخر."</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"هل تريد تخطي إعداد بصمة الإصبع؟"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"لقد اخترت استخدام بصمة الإصبع كوسيلة لإلغاء تأمين هاتفك. إذا تخطيت ذلك الآن، فستحتاج إلى إعداده لاحقًا. لن يستغرق منك الإعداد سوى دقيقة تقريبًا."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"يحمي رقم التعريف الشخصي الجهاز اللوحي في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="4359575348578515037">"يحمي النقش الجهاز اللوحي في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5420451292764062637">"تحمي كلمة المرور الجهاز اللوحي في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="8841426051550671169">"يحمي رقم التعريف الشخصي الجهاز في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="6296702954920045923">"يحمي النقش الجهاز في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="9186075211441188900">"تحمي كلمة المرور الجهاز في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="4301690296689572747">"يحمي رقم التعريف الشخصي الهاتف في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="7387967847446084260">"يحمي النقش الهاتف في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="6415788841227543063">"تحمي كلمة المرور الهاتف في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="2350062798056164403">"يجب ضبط رقم تعريف شخصي لإعداد ميزة \"فتح الجهاز ببصمة الإصبع\".\n\nيحمي رقم التعريف الشخصي الجهاز اللوحي في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="222574071926747300">"يجب ضبط نقش لإعداد ميزة \"فتح الجهاز ببصمة الإصبع\".\n\nيحمي النقش الجهاز اللوحي في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="7780323831330724644">"يجب ضبط كلمة مرور لإعداد ميزة \"فتح الجهاز ببصمة الإصبع\".\n\nتحمي كلمة المرور الجهاز اللوحي في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="7421096089691939451">"يجب ضبط رقم تعريف شخصي لإعداد ميزة \"فتح الجهاز ببصمة الإصبع\".\n\nيحمي رقم التعريف الشخصي الجهاز في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6458468083711413617">"يجب ضبط نقش لإعداد ميزة \"فتح الجهاز ببصمة الإصبع\".\n\nيحمي النقش الجهاز في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="1632249532665518954">"يجب ضبط كلمة مرور لإعداد ميزة \"فتح الجهاز ببصمة الإصبع\".\n\nتحمي كلمة المرور الجهاز في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3101384462491132314">"يجب ضبط رقم تعريف شخصي لإعداد ميزة \"فتح الجهاز ببصمة الإصبع\".\n\nيحمي رقم التعريف الشخصي الجهاز في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="382422778886929469">"يجب ضبط نقش لإعداد ميزة \"فتح الجهاز ببصمة الإصبع\".\n\nيحمي النقش الهاتف في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="5515199168425229243">"يجب ضبط كلمة مرور لإعداد ميزة \"فتح الجهاز ببصمة الإصبع\".\n\nتحمي كلمة المرور الهاتف في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="2454239555320628731">"يجب ضبط رقم تعريف شخصي لإعداد ميزة \"فتح الجهاز بالتعرف على الوجه\".\n\nيحمي رقم التعريف الشخصي الجهاز اللوحي في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="4354138725903415816">"يجب ضبط نقش لإعداد ميزة \"فتح الجهاز بالتعرف على الوجه\".\n\nيحمي النقش الجهاز اللوحي في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="719339718267952196">"يجب ضبط كلمة مرور لإعداد ميزة \"فتح الجهاز بالتعرف على الوجه\".\n\nتحمي كلمة المرور الجهاز اللوحي في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="3729243407606881750">"يجب ضبط رقم تعريف شخصي لإعداد ميزة \"فتح الجهاز بالتعرف على الوجه\".\n\nيحمي رقم التعريف الشخصي الجهاز في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="6966329744346503807">"يجب ضبط نقش لإعداد ميزة \"فتح الجهاز بالتعرف على الوجه\".\n\nيحمي النقش الجهاز في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3020827854443297996">"يجب ضبط كلمة مرور لإعداد ميزة \"فتح الجهاز بالتعرف على الوجه\".\n\nتحمي كلمة المرور الجهاز في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2155678903559865476">"يجب ضبط رقم تعريف شخصي لإعداد ميزة \"فتح الجهاز بالتعرف على الوجه\".\n\nيحمي رقم التعريف الشخصي الهاتف في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="473271568005748452">"يجب ضبط نقش لإعداد ميزة \"فتح الجهاز بالتعرف على الوجه\".\n\nيحمي النقش الهاتف في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="4319934862372116788">"يجب ضبط كلمة مرور لإعداد ميزة \"فتح الجهاز بالتعرف على الوجه\".\n\nتحمي كلمة المرور الهاتف في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="647987565338402155">"يجب ضبط رقم تعريف شخصي لإعداد ميزتَي \"فتح الجهاز بالتعرف على الوجه\" و\"فتح الجهاز ببصمة الإصبع\".\n\nيحمي رقم التعريف الشخصي الجهاز اللوحي في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="5293609077890072841">"يجب ضبط نقش لإعداد ميزتَي \"فتح الجهاز بالتعرف على الوجه\" و\"فتح الجهاز ببصمة الإصبع\".\n\nيحمي النقش الجهاز اللوحي في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="2660359318928684172">"يجب ضبط كلمة مرور لإعداد ميزتَي \"فتح الجهاز بالتعرف على الوجه\" و\"فتح الجهاز ببصمة الإصبع\".\n\nتحمي كلمة المرور الجهاز اللوحي في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="1278795063897397815">"يجب ضبط رقم تعريف شخصي لإعداد ميزتَي \"فتح الجهاز بالتعرف على الوجه\" و\"فتح الجهاز ببصمة الإصبع\".\n\nيحمي رقم التعريف الشخصي الجهاز في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="8766169819759371801">"يجب ضبط نقش لإعداد ميزتَي \"فتح الجهاز بالتعرف على الوجه\" و\"فتح الجهاز ببصمة الإصبع\".\n\nيحمي النقش الجهاز في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="8611216039321306045">"يجب ضبط كلمة مرور لإعداد ميزتَي \"فتح الجهاز بالتعرف على الوجه\" و\"فتح الجهاز ببصمة الإصبع\".\n\nتحمي كلمة المرور الجهاز في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="8796878521409329051">"يجب ضبط رقم تعريف شخصي لإعداد ميزتَي \"فتح الجهاز بالتعرف على الوجه\" و\"فتح الجهاز ببصمة الإصبع\".\n\nيحمي رقم التعريف الشخصي الهاتف في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="8423700958936341596">"يجب ضبط نقش لإعداد ميزتَي \"فتح الجهاز بالتعرف على الوجه\" و\"فتح الجهاز ببصمة الإصبع\".\n\nيحمي النقش الهاتف في حال فقدانه أو سرقته."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="5411689248299854172">"يجب ضبط كلمة مرور لإعداد ميزتَي \"فتح الجهاز بالتعرف على الوجه\" و\"فتح الجهاز ببصمة الإصبع\".\n\nتحمي كلمة المرور الهاتف في حال فقدانه أو سرقته."</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"أتريد تخطي إعداد رقم التعريف الشخصي؟"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"هل تريد تخطي إعداد رقم تعريف شخصي ووجه؟"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"هل تريد تخطي إعداد رقم تعريف شخصي وبصمة إصبع؟"</string>
@@ -581,40 +428,20 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"لقد أضفت الحد الأقصى لعدد بصمات الإصبع"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"يتعذر إضافة مزيد من بصمات الإصبع"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"حذف \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
-    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"يؤدي هذا الإجراء إلى حذف النموذج والصور المرتبطة ببصمة الإصبع \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\"، والتي تم تخزينها على هاتفك."</string>
-    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"يؤدي هذا الإجراء إلى حذف النموذج والصور المرتبطة ببصمة الإصبع \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\"، والتي تم تخزينها على جهازك اللوحي."</string>
-    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"يؤدي هذا الإجراء إلى حذف النموذج والصور المرتبطة ببصمة الإصبع \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\"، والتي تم تخزينها على جهازك."</string>
-    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"لن تتمكّن من استخدام بصمة إصبعك لفتح قفل هاتفك أو إثبات هويتك في التطبيقات."</string>
-    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"لن تتمكّن من استخدام بصمة إصبعك لفتح قفل جهازك اللوحي أو إثبات هويتك في التطبيقات."</string>
-    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"لن تتمكّن من استخدام بصمة إصبعك لفتح قفل جهازك أو إثبات هويتك في التطبيقات."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"لن تتمكّن من استخدام بصمة إصبعك لفتح قفل الملف الشخصي للعمل أو السماح بعمليات الشراء أو تسجيل الدخول إلى تطبيقات العمل."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"التشفير"</string>
-    <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"تشفير الجهاز اللوحي"</string>
-    <string name="encrypt_title" product="default" msgid="7337365190988321100">"تشفير الهاتف"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"مشفّر"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"ضبط قفل للشاشة"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"لمزيد من الأمان، عليك ضبط رقم تعريف شخصي أو نقش أو كلمة مرور لهذا الجهاز."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"ضبط قفل الشاشة"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"تأمين هاتفك"</string>
-    <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"ضبط قفل شاشة لحماية الجهاز اللوحي"</string>
-    <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"ضبط قفل شاشة لحماية الجهاز"</string>
-    <string name="suggested_lock_settings_summary" product="default" msgid="2443273582716671033">"ضبط قفل شاشة لحماية الهاتف"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"إضافة بصمة الإصبع لإلغاء القفل"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"اختيار قفل الشاشة"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"اختيار قفل شاشة"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"اختيار قفل شاشة جديد"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"القفل الحالي للشاشة"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"اختيار قفل جديد لتطبيقات العمل"</string>
-    <string name="setup_lock_settings_picker_title" product="tablet" msgid="1276283007274778191">"حماية جهازك اللوحي"</string>
-    <string name="setup_lock_settings_picker_title" product="device" msgid="3585905639045649905">"حماية جهازك"</string>
-    <string name="setup_lock_settings_picker_title" product="default" msgid="2758197863515864300">"حماية هاتفك"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"لتعزيز أمان الجهاز، يجب إعداد قفل شاشة احتياطي."</string>
-    <string name="setup_lock_settings_picker_message" product="tablet" msgid="4870877800737248926">"يمكنك منع الآخرين من استخدام هذا الجهاز اللوحي بدون إذنك من خلال تفعيل ميزات حماية الجهاز. اختر قفل الشاشة الذي تريد استخدامه."</string>
-    <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"يمكنك منع الآخرين من استخدام هذا الجهاز بدون إذنك من خلال تفعيل ميزات حماية الجهاز. اختر قفل الشاشة الذي تريد استخدامه."</string>
-    <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"يمكنك منع الآخرين من استخدام هذا الهاتف بدون إذنك من خلال تفعيل ميزات حماية الجهاز. اختر قفل الشاشة الذي تريد استخدامه."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"اختيار الطريقة الاحتياطية لقفل الشاشة"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"إذا نسيت قفل شاشة هاتفك، لن يتمكَّن مشرف تكنولوجيا المعلومات من إعادة ضبطه لك."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"اضبِط قفل شاشة منفصلاً لتطبيقات العمل."</string>
@@ -654,43 +481,31 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"هل تريد إزالة حماية الملف الشخصي؟"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"يحمي النقش هاتفك في حال فقدانه أو سرقته."</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"يحمي النقش هاتفك في حال فقدانه أو سرقته.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>سيؤدي هذا أيضًا إلى حذف نموذج بصمة الإصبع المُخزَّن على جهازك. لن تتمكن من استخدام بصمة الإصبع للمصادقة في التطبيقات."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"يحمي النقش هاتفك في حال فقدانه أو سرقته.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>سيتم أيضًا حذف نموذج وجهك نهائيًا وبأمان. لن تتمكن من استخدام وجهك للمصادقة في التطبيقات."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"يحمي النقش هاتفك في حال فقدانه أو سرقته.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>سيؤدي هذا إلى حذف نموذج بصمة الإصبع المُخزَّن على جهازك. سيتم أيضًا حذف نموذج وجهك نهائيًا وبأمان. لن تتمكن من استخدام وجهك أو بصمة إصبعك للمصادقة في التطبيقات."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"يحمي رقم التعريف الشخصي هاتفك في حال فقدانه أو سرقته."</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"يحمي رقم التعريف الشخصي هاتفك في حال فقدانه أو سرقته.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>سيؤدي هذا أيضًا إلى حذف نموذج بصمة الإصبع المُخزَّن على جهازك. لن تتمكن من استخدام بصمة الإصبع للمصادقة في التطبيقات."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"يحمي رقم التعريف الشخصي هاتفك في حال فقدانه أو سرقته.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>سيتم أيضًا حذف نموذج وجهك نهائيًا وبأمان. لن تتمكن من استخدام وجهك للمصادقة في التطبيقات."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"يحمي رقم التعريف الشخصي هاتفك في حال فقدانه أو سرقته.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>سيؤدي هذا إلى حذف نموذج بصمة الإصبع المُخزَّن على جهازك. سيتم أيضًا حذف نموذج وجهك نهائيًا وبأمان. لن تتمكن من استخدام وجهك أو بصمة إصبعك للمصادقة في التطبيقات."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"تحمي كلمة المرور هاتفك في حال فقدانه أو سرقته."</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"تحمي كلمة المرور هاتفك في حال فقدانه أو سرقته.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>سيؤدي هذا أيضًا إلى حذف نموذج بصمة الإصبع المُخزَّن على جهازك. لن تتمكن من استخدام بصمة الإصبع للمصادقة في التطبيقات."</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"تحمي كلمة المرور هاتفك في حال فقدانه أو سرقته.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>سيتم أيضًا حذف نموذج وجهك نهائيًا وبأمان. لن تتمكن من استخدام وجهك للمصادقة في التطبيقات."</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"تحمي كلمة المرور هاتفك في حال فقدانه أو سرقته.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>سيؤدي هذا إلى حذف نموذج بصمة الإصبع المُخزَّن على جهازك. سيتم أيضًا حذف نموذج وجهك نهائيًا وبأمان. لن تتمكن من استخدام وجهك أو بصمة إصبعك للمصادقة في التطبيقات."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"لن تعمل ميزات حماية الجهاز بدون قفل الشاشة."</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"لن تعمل ميزات حماية الجهاز بدون قفل الشاشة.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>سيؤدي هذا أيضًا إلى حذف نموذج بصمة الإصبع المُخزَّن على جهازك. لن تتمكن من استخدام بصمة الإصبع للمصادقة في التطبيقات."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"لن تعمل ميزات حماية الجهاز بدون قفل الشاشة.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>سيتم أيضًا حذف نموذج وجهك نهائيًا وبأمان. لن تتمكن من استخدام وجهك للمصادقة في التطبيقات."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"لن تعمل ميزات حماية الجهاز بدون قفل الشاشة.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>سيؤدي هذا إلى حذف نموذج بصمة الإصبع المُخزَّن على جهازك. سيتم أيضًا حذف نموذج وجهك نهائيًا وبأمان. لن تتمكن من استخدام وجهك أو بصمة إصبعك للمصادقة في التطبيقات."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"حذف"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"يوصي تطبيق <xliff:g id="APP_NAME">%1$s</xliff:g> باستخدام قفل شاشة برقم تعريف شخصي قوي أو كلمة مرور قوية، وقد لا يعمل على النحو المتوقع بدونه."</string>
@@ -853,9 +668,6 @@
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"هل تريد إلغاء إقران الجهاز؟"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"إزالة الربط"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"هل تريد إلغاء ربط التطبيق؟"</string>
-    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"لن يتم إقران هاتفك بعد الآن بجهاز <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"لن يتم إقران جهازك اللوحي بعد الآن بجهاز <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"لن يتم إقران جهازك بعد الآن بجهاز <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"لن يعود التطبيق <xliff:g id="APP_NAME">%1$s</xliff:g> مرتبطًا بجهازك <xliff:g id="DEVICE_NAME">%2$s</xliff:g>."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"إلغاء إقران الجهاز"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"إلغاء ربط التطبيق"</string>
@@ -900,7 +712,6 @@
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"إظهار معدّل إعادة التحميل الحالي للشاشة"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"‏الاتصال القصير المدى (NFC)"</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"‏يجب فتح قفل الجهاز لاستخدام تقنية الاتصال القصير المدى (NFC)"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"‏السماح باستخدام الاتصال القصير المدى (NFC) عندما تكون الشاشة مفتوحة فقط"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"‏شعاع Android"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"‏جاهز لنقل محتوى التطبيق عبر الاتصالات القريبة المدى (NFC)"</string>
     <string name="nfc_disabled_summary" msgid="8737797364522502351">"‏الإعداد غير متاح بسبب إيقاف تقنية الاتصال القصير المدى (NFC)."</string>
@@ -1120,14 +931,10 @@
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> نشطة"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"AndroidHotspot"</string>
     <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"هل تريد حفظ هذه الشبكة؟"</string>
-    <string name="wifi_add_app_single_network_summary" product="default" msgid="6881712878537666626">"يريد التطبيق <xliff:g id="APPNAME">%1$s</xliff:g> حفظ شبكة على هاتفك."</string>
-    <string name="wifi_add_app_single_network_summary" product="tablet" msgid="8455616967601552440">"يريد تطبيق <xliff:g id="APPNAME">%1$s</xliff:g> حفظ شبكة على جهازك اللوحي."</string>
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"جارٍ حفظ الشبكة…"</string>
     <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"تم حفظ الشبكة."</string>
     <string name="wifi_add_app_network_save_failed_summary" msgid="7223817782309294652">"لا يمكن حفظ الشبكة. يُرجى إعادة المحاولة."</string>
     <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"هل تريد حفظ الشبكات؟"</string>
-    <string name="wifi_add_app_networks_summary" product="default" msgid="2670215712788515167">"يريد التطبيق <xliff:g id="APPNAME">%1$s</xliff:g> حفظ هذه الشبكات على هاتفك."</string>
-    <string name="wifi_add_app_networks_summary" product="tablet" msgid="2088967184512169910">"يريد تطبيق <xliff:g id="APPNAME">%1$s</xliff:g> حفظ هذه الشبكات على جهازك اللوحي."</string>
     <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"جارٍ حفظ <xliff:g id="NUMBER">%d</xliff:g> شبكة…"</string>
     <string name="wifi_add_app_networks_saved_summary" msgid="1648417628665152905">"تم حفظ الشبكات"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"‏الاتصال عبر Wi-Fi"</string>
@@ -1170,8 +977,6 @@
     <string name="accelerometer_title" msgid="7745991950833748909">"التدوير التلقائي للشاشة"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"تفعيل - استنادًا للوجه"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"التعرّف على الوجوه"</string>
-    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"يمكنك ضبط اتجاه الشاشة تلقائيًا عند تحريك الهاتف عموديًا وأفقيًا."</string>
-    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"يمكنك ضبط اتجاه الشاشة تلقائيًا عند تحريك جهازك اللوحي عموديًا وأفقيًا."</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"مزيد من المعلومات عن التدوير التلقائي"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"عند تغيير اتّجاه شاشة هاتفك بين العمودي والأفقي"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"دقة الشاشة"</string>
@@ -1283,10 +1088,6 @@
     <string name="sim_lock_settings" msgid="4493069398250139205">"‏إعدادات قفل شريحة SIM"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"‏قفل شريحة SIM"</string>
     <string name="sim_pin_toggle" msgid="98754920202404425">"‏قفل شريحة SIM"</string>
-    <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"‏يلزم إدخال رمز PIN لاستخدام الجهاز اللوحي"</string>
-    <string name="sim_lock_on" product="default" msgid="3303147192981388923">"يتطلّب إدخال رقم التعريف الشخصي لاستخدام الهاتف."</string>
-    <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"‏يلزم إدخال رمز PIN لاستخدام الجهاز اللوحي"</string>
-    <string name="sim_lock_off" product="default" msgid="4634118006847137785">"يتطلّب إدخال رقم التعريف الشخصي لاستخدام الهاتف."</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"‏تغيير رقم التعريف الشخصي لشريحة SIM"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"‏رقم التعريف الشخصي لشريحة SIM"</string>
     <string name="sim_enable_sim_lock" msgid="8993991669975548653">"‏قفل شريحة SIM"</string>
@@ -1335,12 +1136,6 @@
     <string name="storage_settings_title" msgid="486118156723194815">"إعدادات وحدة التخزين"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"‏IMEI (المنفذ %1$d لشريحة SIM)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"‏لعرض عنوان MAC، اختَر شبكة محفوظة."</string>
-    <string name="status_number" product="tablet" msgid="3597945414666253183">"‏MDN (رقم دليل الجوال)"</string>
-    <string name="status_number" product="default" msgid="8407999629121682207">"رقم الهاتف"</string>
-    <string name="status_number_sim_slot" product="tablet" msgid="6582203988975619529">"‏MDN (المنفذ %1$d لشريحة SIM)"</string>
-    <string name="status_number_sim_slot" product="default" msgid="5724823197745786398">"‏رقم الهاتف (منفذ %1$d لـ SIM)"</string>
-    <string name="status_number_sim_status" product="tablet" msgid="4239876366511743428">"‏رقم دليل الجوّال على SIM"</string>
-    <string name="status_number_sim_status" product="default" msgid="2772745542921910086">"‏رقم الهاتف على شريحة SIM"</string>
     <string name="status_min_number" msgid="4492899165438225714">"دقيقة"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"‏إصدار PRL"</string>
@@ -1400,12 +1195,6 @@
     <string name="storage_wizard_move_progress_title" msgid="3912406225614672391">"جارٍ نقل <xliff:g id="APP">^1</xliff:g>…"</string>
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"لا تزِل <xliff:g id="NAME">^1</xliff:g> أثناء عملية النقل. \n\nولن يكون التطبيق <xliff:g id="APP">^2</xliff:g> على هذا الجهاز متاحًا حتى الانتهاء من عملية النقل."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"كيف ستستخدم <xliff:g id="NAME">^1</xliff:g>؟"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"‏تهيئة بطاقة SD كوحدة تخزين داخلية"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"‏يمكنك تخزين التطبيقات والوسائط لاستخدامها على هذا الجهاز اللوحي فقط. &lt;a href=https://support.google.com/android/answer/12153449&gt;تعرَّف على مزيد من المعلومات حول ضبط إعدادات بطاقة SD&lt;/a&gt;."</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"تهيئة"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"‏تهيئة بطاقة SD كوحدة تخزين داخلية"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"‏يمكنك تخزين التطبيقات والوسائط لاستخدامها على هذا الهاتف فقط. &lt;a href=https://support.google.com/android/answer/12153449&gt;تعرَّف على مزيد من المعلومات حول ضبط إعدادات بطاقة SD&lt;/a&gt;."</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"تهيئة"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"أو"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"‏تهيئة بطاقة SD كوحدة تخزين محمولة"</string>
     <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"‏يمكنك تخزين الصور والفيديوهات والموسيقى وغير ذلك والوصول إليها من أجهزة أخرى. &lt;a href=https://support.google.com/android/answer/12153449&gt;تعرَّف على مزيد من المعلومات حول ضبط إعدادات بطاقة SD&lt;/a&gt;."</string>
@@ -1416,13 +1205,9 @@
     <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"يجب تهيئة \"<xliff:g id="NAME_0">^1</xliff:g>\" حتى تتمكن من تخزين الصور والفيديوهات والموسيقى وغير ذلك. \n\nستؤدي عملية التهيئة إلى محو المحتوى الحالي في \"<xliff:g id="NAME_1">^2</xliff:g>\". لتجنّب فقدان المحتوى، يمكنك نسخه احتياطيًا إلى \"<xliff:g id="NAME_2">^3</xliff:g>\" أو جهاز آخر."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"تنسيق <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"هل تريد نقل المحتوى إلى <xliff:g id="NAME">^1</xliff:g>؟"</string>
-    <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"يمكنك نقل الملفات والوسائط وتطبيقات معيّنة إلى <xliff:g id="NAME">^1</xliff:g>. \n\nإخلاء مساحة قدرها <xliff:g id="SIZE">^2</xliff:g> من مساحة التخزين بالجهاز اللوحي وتستغرق في الغالب <xliff:g id="DURATION">^3</xliff:g> تقريبًا."</string>
-    <string name="storage_wizard_migrate_v2_body" product="default" msgid="809730501314645325">"يمكنك نقل الملفات والوسائط وتطبيقات معيّنة إلى <xliff:g id="NAME">^1</xliff:g>. \n\nستؤدي عملية النقل هذه إلى إخلاء مساحة قدرها <xliff:g id="SIZE">^2</xliff:g> من مساحة التخزين بالهاتف وتستغرق في الغالب <xliff:g id="DURATION">^3</xliff:g> تقريبًا."</string>
     <string name="storage_wizard_migrate_v2_checklist" msgid="2618258869444553060">"أثناء النقل:"</string>
     <string name="storage_wizard_migrate_v2_checklist_media" msgid="5867134681730723744">"تجنّب إزالة <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_checklist_apps" msgid="1882077445750580783">"لن تعمل بعض التطبيقات"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="tablet" msgid="6111770421449869539">"احرص على شحن هذا الجهاز اللوحي"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="default" msgid="8826915870192535008">"احرص على شحن هذا الهاتف"</string>
     <string name="storage_wizard_migrate_v2_now" msgid="3341460117088026966">"نقل المحتوى"</string>
     <string name="storage_wizard_migrate_v2_later" msgid="6067756122853315642">"نقل المحتوى لاحقًا"</string>
     <string name="storage_wizard_migrate_progress_v2_title" msgid="8791318509516968103">"جارٍ نقل المحتوى…"</string>
@@ -1491,21 +1276,9 @@
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"يتعذّر محو بيانات شرائح التي تم تنزيلها بسبب خطأ.\n\nيمكنك إعادة تشغيل الجهاز وإعادة المحاولة."</string>
     <string name="main_clear_title" msgid="277664302144837723">"محو جميع البيانات (إعادة الضبط على الإعدادات الأصلية)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"محو جميع البيانات (إعادة الضبط على الإعدادات الأصلية)"</string>
-    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"‏سيؤدي هذا إلى محو جميع البيانات من "<b>"وحدة التخزين الداخلية"</b>" لجهازك اللوحي، بما في ذلك:\n\n"<li>"حسابك على Google"</li>\n<li>"بيانات وإعدادات النظام والتطبيقات"</li>\n<li>"التطبيقات التي تم تنزيلها"</li></string>
-    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"‏سيؤدي هذا إلى محو جميع البيانات من "<b>"وحدة التخزين الداخلية"</b>" لهاتفك، بما في ذلك:\n\n"<li>"حسابك على Google"</li>\n<li>"بيانات وإعدادات النظام والتطبيقات"</li>\n<li>"التطبيقات التي تم تنزيلها"</li></string>
-    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"الحسابات المسجَّل الدخول إليها حاليًا:\n"</string>
-    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"هناك مستخدمون آخرون موجودون على هذا الجهاز.\n"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"الموسيقى"</li>\n<li>"الصور"</li>\n<li>"بيانات المستخدم الأخرى"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729">"‏"<li>"شرائح eSIM"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"لن يؤدي هذا إلى إلغاء خطة خدمة الجوّال."</string>
-    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">"‏\n\nلمحو الموسيقى والصور وبيانات المستخدم الأخرى أيضًا، يجب محو بيانات "<b>"وحدة تخزين USB"</b>"."</string>
-    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">"‏\n\nلمحو الموسيقى والصور وبيانات المستخدم الأخرى أيضًا، يجب محو بيانات "<b>"بطاقة SD"</b>"."</string>
-    <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"‏محو وحدة تخزين USB"</string>
-    <string name="erase_external_storage" product="default" msgid="2610056855012660451">"‏محو بطاقة SD"</string>
-    <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"‏محو جميع البيانات على وحدة تخزين USB الداخلية، مثل الموسيقى أو الصور"</string>
-    <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"‏محو جميع البيانات على بطاقة SD، مثل الموسيقى أو الصور"</string>
-    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"محو جميع البيانات"</string>
-    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"محو جميع البيانات"</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"سيتم حذف جميع المعلومات الشخصية والتطبيقات التي تم تنزيلها. لا يمكنك التراجع عن هذا الإجراء."</string>
     <string name="main_clear_final_desc_esim" msgid="440406836793824969">"‏سيتم حذف جميع المعلومات الشخصية، بما في ذلك التطبيقات وشرائح SIM التي تم تنزيلها. لا يمكنك التراجع عن هذا الإجراء."</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"هل تريد محو جميع البيانات؟"</string>
@@ -1551,14 +1324,8 @@
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"‏مشاركة اتصال الإنترنت من خلال USB والبلوتوث وإيثرنت"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"‏التوصيل عبر USB"</string>
-    <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"‏مشاركة اتصال الإنترنت على الهاتف عبر USB"</string>
-    <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"‏مشاركة اتصال الإنترنت على الجهاز اللوحي عبر USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"التوصيل عبر البلوتوث"</string>
-    <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"مشاركة اتصال الإنترنت على الجهاز اللوحي عبر البلوتوث"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"مشاركة اتصال الإنترنت على الهاتف عبر البلوتوث"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"التوصيل باستخدام إيثرنت"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"مشاركة اتصال الإنترنت الخاص بالهاتف عبر إيثرنت"</string>
-    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"مشاركة اتصال الإنترنت من الجهاز اللوحي عبر إيثرنت"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"يمكنك استخدام نقطة الاتصال والتوصيل لتوفير اتصال بالإنترنت للأجهزة الأخرى من خلال اتصال بيانات الجوّال، كما يمكن للتطبيقات إنشاء نقطة اتصال لمشاركة المحتوى مع الأجهزة المجاورة."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"‏يمكنك استخدام نقطة الاتصال والتوصيل لتوفير اتصال بالإنترنت للأجهزة الأخرى من خلال شبكة Wi‑Fi أو اتصال بيانات الجوّال، كما يمكن للتطبيقات إنشاء نقطة اتصال لمشاركة المحتوى مع الأجهزة المجاورة."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"مساعدة"</string>
@@ -1610,10 +1377,6 @@
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"ميزة رصد المنطقة الزمنية للموقع الجغرافي غير متاحة."</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"غير مسموح بتغييرات رصد المنطقة الزمنية للموقع الجغرافي."</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"قد يتم استخدام الموقع الجغرافي لضبط المنطقة الزمنية."</string>
-    <string name="about_settings" product="tablet" msgid="2888705054709289693">"لمحة عن الجهاز اللوحي"</string>
-    <string name="about_settings" product="default" msgid="4038626127378127613">"لمحة عن الهاتف"</string>
-    <string name="about_settings" product="device" msgid="9012888717090302815">"لمحة عن الجهاز"</string>
-    <string name="about_settings" product="emulator" msgid="2516560858771320366">"لمحة عن الجهاز في وضع المحاكاة"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"عرض المعلومات القانونية والحالة وإصدار البرنامج"</string>
     <string name="legal_information" msgid="7509900979811934843">"المعلومات القانونية"</string>
     <string name="manual" msgid="3651593989906084868">"الكتيب"</string>
@@ -1741,9 +1504,6 @@
     </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"تواصَل مع مشرف تكنولوجيا معلومات."</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"يمكن أن يساعدك مشرف تكنولوجيا المعلومات في إعادة ضبط رقم التعريف الشخصي أو النقش أو كلمة المرور."</string>
-    <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"جهازك اللوحي والبيانات الشخصية عُرضة لهجمات أكثر من قِبل تطبيقات غير معروفة. يعني تثبيت التطبيقات من هذا المصدر أنك توافق على تحملك المسؤولية عن أي ضرر يحدث لجهازك اللوحي أو أي فقد للبيانات ينتج عن استخدامها."</string>
-    <string name="install_all_warning" product="default" msgid="652516435709047343">"هاتفك والبيانات الشخصية عُرضة للهجمات من قِبل تطبيقات غير معروفة. يعني تثبيت التطبيقات من هذا المصدر أنك توافق على تحملك المسؤولية عن أي ضرر يحدث لهاتفك أو أي فقد للبيانات ينتج عن استخدامها."</string>
-    <string name="install_all_warning" product="device" msgid="2348262609815354500">"تزداد احتمالات تعرّض جهازك وبيانات الشخصية لهجمات أكثر عن طريق تطبيقات غير معروفة. ويعني تثبيت التطبيقات من هذا المصدر أنك توافق على تحملك المسؤولية عن أي ضرر يحدث لجهازك أو أي فقد للبيانات ينتج عن استخدامها."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"الإعدادات المتقدمة"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"تفعيل المزيد من خيارات الإعدادات."</string>
     <string name="application_info_label" msgid="1015706497694165866">"معلومات عن التطبيقات"</string>
@@ -1875,8 +1635,6 @@
     <string name="process_service_in_use_description" msgid="4210957264507014878">"الخدمة <xliff:g id="COMP_NAME">%1$s</xliff:g> قيد الاستخدام."</string>
     <string name="process_provider_in_use_description" msgid="6730020083976048028">"الموفر <xliff:g id="COMP_NAME">%1$s</xliff:g> قيد الاستخدام."</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="6201041461740445113">"هل تريد إيقاف خدمة النظام؟"</string>
-    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="2076922609580490122">"في حالة إيقاف هذه الخدمة، قد تتوقف بعض ميزات الجهاز اللوحي عن العمل بشكل صحيح حتى توقف تشغيلها، ثم تشغلها مرة أخرى."</string>
-    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="2625863973434309085">"في حالة إيقاف هذه الخدمة، قد تتوقف بعض ميزات الهاتف عن العمل بشكل صحيح حتى توقف تشغيلها، ثم تشغلها مرة أخرى."</string>
     <string name="language_input_gesture_title" msgid="3292455685728572960">"اللغات والإدخال والإيماءات"</string>
     <string name="language_settings" msgid="8700174277543875046">"اللغات والإدخال"</string>
     <string name="languages_settings" msgid="5784775502251770671">"اللغات"</string>
@@ -1945,8 +1703,6 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"لجميع اللغات"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"مزيد من اللغات..."</string>
     <string name="testing" msgid="6294172343766732037">"الاختبار"</string>
-    <string name="testing_phone_info" product="tablet" msgid="1910768200608214456">"معلومات الجهاز اللوحي"</string>
-    <string name="testing_phone_info" product="default" msgid="1150527695827743906">"معلومات الهاتف"</string>
     <string name="keyboard_settings_summary" msgid="2716339620942356432">"لوحة المفاتيح على الشاشة، الكلام، الأدوات"</string>
     <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"لوحة المفاتيح على الشاشة، لوحة المفاتيح الخارجية، الكلام، الأدوات"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"لوحة مفاتيح خارجية"</string>
@@ -2023,8 +1779,6 @@
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"إعادة ضبط الإعدادات"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"تمت إعادة ضبط إعدادات حجم الشاشة والنص."</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"هل تريد إعادة ضبط حجم الشاشة والنص؟"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"ستتم إعادة ضبط إعداداتك المفضّلة لحجم الشاشة والنص على الإعدادات الأصلية للهاتف."</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"ستتم إعادة ضبط إعداداتك المفضّلة لحجم الشاشة والنص على الإعدادات الأصلية للجهاز اللوحي."</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"إعادة الضبط"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"هل خطّطت لعطلة نهاية الأسبوع؟"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"سأذهب إلى الشاطئ. ما رأيك في الذهاب معي؟"</string>
@@ -2166,8 +1920,6 @@
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"تمت إضافة وضع \"التصفح بيد واحدة\" إلى قائمة \"الإعدادات السريعة\". مرِّر سريعًا للأسفل لتفعيله أو إيقافه في أي وقت."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"يمكنك أيضًا إضافة وضع \"التصفح بيد واحدة\" إلى قائمة \"الإعدادات السريعة\" من أعلى الشاشة."</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"إغلاق"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"يمكنك تعديل كيفية عرض الألوان على هاتفك."</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"يمكنك تعديل كيفية عرض الألوان على جهازك اللوحي."</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"تصحيح الألوان"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"اختصار تصحيح الألوان"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"لمحة عن تصحيح الألوان"</string>
@@ -2217,11 +1969,7 @@
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"زيادة تعتيم الشاشة"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"اختصار زيادة تعتيم الشاشة"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"لمحة عن زيادة تعتيم الشاشة"</string>
-    <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"يمكنك ضبط تعتيم الشاشة على مستوى أقلّ من الحد الأدنى لسطوع هاتفك."</string>
-    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"يمكنك ضبط تعتيم الشاشة على مستوى أقلّ من الحد الأدنى لسطوع جهازك اللوحي."</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"يمكنك زيادة تعتيم الشاشة لتصبح أنسب للقراءة."</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"‏يمكن الاستفادة من ميزة \"زيادة تعتيم الشاشة\" عندما: &lt;ol&gt; &lt;li&gt; تكون أقلّ درجة سطوع تلقائية في هاتفك غير كافية.&lt;/li&gt; &lt;li&gt; تستخدم هاتفك في الظلام، مثلاً عندما تستخدمه ليلاً أو في غرفة مظلمة قبل النوم.&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5158211121482010799">"‏يمكن الاستفادة من ميزة \"زيادة تعتيم الشاشة\" عندما: &lt;ol&gt; &lt;li&gt; تكون أقلّ درجة سطوع تلقائية في جهازك اللوحي غير كافية&lt;/li&gt; &lt;li&gt; تستخدم جهازك اللوحي في الظلام، مثلاً عندما تستخدمه ليلاً أو في غرفة مظلمة قبل النوم&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"درجة السطوع"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"أقل سطوعًا"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"أكثر سطوعًا"</string>
@@ -2405,9 +2153,6 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"ضبط استخدام الطاقة"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"الحزم المضمنة"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"التطبيقات تعمل بشكل طبيعي"</string>
-    <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"يتم استخدام بطارية الهاتف بشكل عادي في الخلفية."</string>
-    <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"يتم استخدام بطارية الجهاز اللوحي بشكل عادي في الخلفية."</string>
-    <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"يتم استخدام بطارية الجهاز بشكل عادي في الخلفية."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"مستوى شحن البطارية منخفض"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"يمكنك تفعيل خيار \"توفير شحن البطارية\" لإطالة عمر البطارية."</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"إطالة عمر البطارية"</string>
@@ -2425,11 +2170,6 @@
     <skip />
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"مزيد من المعلومات عن إيقاف الشحن مؤقتًا"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"استئناف الشحن"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"قد يتم ضبط نسبة الشحن على <xliff:g id="PERCENT">%1$s</xliff:g> كحد أقصى للمساعدة في الحفاظ على سلامة البطارية في حالات معيّنة، مثلاً في درجات الحرارة المرتفعة وفترات الشحن الطويلة.\n\nعند العودة إلى الحالة الطبيعية، سيتم تلقائيًا شحن الهاتف بشكلٍ عادي."</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"قد يتم ضبط نسبة الشحن على <xliff:g id="PERCENT">%1$s</xliff:g> كحد أقصى للمساعدة في الحفاظ على سلامة البطارية في حالات معيّنة، مثلاً في درجات الحرارة المرتفعة وفترات الشحن الطويلة.\n\nعند العودة إلى الحالة الطبيعية، سيتم تلقائيًا شحن الهاتف بشكلٍ عادي."</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"بسبب استخدام هاتفك بمعدل أكثر من الطبيعي، قد ينفد شحن بطاريتك أسرع من المعتاد.\n\nالتطبيقات التي تستخدم أكبر قدر من البطارية:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"بسبب استخدام جهازك اللوحي أكثر من الطبيعي، قد ينفد شحن بطاريتك أسرع من المعتاد.\n\nالتطبيقات التي تستخدم أكبر قدر من البطارية:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"بسبب استخدام جهازك أكثر من الطبيعي، قد ينفد شحن بطاريتك أسرع من المعتاد.\n\nالتطبيقات التي تستخدم أكبر قدر من البطارية:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"يشمل النشاط الكثيف لطاقة البطارية في الخلفية"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="zero">‏حظر %1$d تطبيق</item>
@@ -2480,12 +2220,8 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"إزالة"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"إلغاء"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"شحن الجهاز تمامًا"</string>
-    <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"تستخدم تطبيقاتك مقدارًا عاديًا من طاقة البطارية. إذا كانت التطبيقات تستهلك مقدارًا كبيرًا جدًا من طاقة البطارية، سيقترح هاتفك إجراءات يمكنك اتخاذها.\n\nيمكنك متى شئت تفعيل ميزة \"توفير شحن البطارية\" إذا كانت طاقة البطارية على وشك النفاد."</string>
-    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"تستخدم تطبيقاتك مقدارًا عاديًا من طاقة البطارية. إذا كانت التطبيقات تستهلك مقدارًا كبيرًا جدًا من طاقة البطارية، سيقترح جهازك اللوحي إجراءات يمكنك اتخاذها.\n\nيمكنك متى شئت تفعيل ميزة \"توفير شحن البطارية\" إذا كانت طاقة البطارية على وشك النفاد."</string>
-    <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"تستخدم تطبيقاتك مقدارًا عاديًا من الطاقة. إذا كانت التطبيقات تستهلك مقدارًا كبيرًا جدًا من الطاقة، سيقترح جهازك إجراءات يمكنك اتخاذها.\n\nيمكنك متى شئت تفعيل ميزة \"توفير شحن البطارية\" إذا كانت طاقة البطارية على وشك النفاد."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"مدير البطارية"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"إدارة التطبيقات تلقائيًا"</string>
-    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"تقييد استخدام البطارية للتطبيقات التي لا تستخدمها كثيرًا"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"عندما يرصد \"مدير البطارية\" تطبيقات تستنزف شحن البطارية، سيتوفر لديك خيار بتقييد هذه التطبيقات، علمًا بأن التطبيقات المقيدة قد لا تعمل على نحو صحيح وقد تتأخر الإشعارات."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"التطبيقات المقيّدة"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
@@ -2521,8 +2257,6 @@
     <string name="power_bluetooth" msgid="5085900180846238196">"بلوتوث"</string>
     <string name="power_cell" msgid="7793805106954398186">"شبكة الجوّال"</string>
     <string name="power_phone" msgid="2768396619208561670">"المكالمات الصوتية"</string>
-    <string name="power_idle" product="tablet" msgid="4689321599298911021">"الجهاز اللوحي خامل"</string>
-    <string name="power_idle" product="default" msgid="9132502722499465252">"الهاتف في وضع الخمول"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"تم استخدامه لمدة <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"استخدام الشاشة <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="PERCENT">%1$s</xliff:g> مستخدمة بواسطة <xliff:g id="APP">%2$s</xliff:g>"</string>
@@ -2573,9 +2307,6 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"ضبط جدول زمني"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"إطالة عمر البطارية"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"إيقاف الميزة عندما يكون الجهاز مشحونًا"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="3618041244703216293">"يتم إيقاف ميزة \"توفير شحن البطارية\" عندما تتخطى نسبة شحن بطارية الهاتف <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>."</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="1733686775743601110">"يتم إيقاف ميزة \"توفير شحن البطارية\" عندما تتخطى نسبة شحن بطارية الجهاز اللوحي <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>."</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="7449283917787428755">"يتم إيقاف ميزة \"توفير شحن البطارية\" عندما تتخطى نسبة شحن بطارية الجهاز <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>."</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"تفعيل"</string>
@@ -2597,9 +2328,6 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"مدة استخدام البطارية في الخلفية: أقل من دقيقة"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"مدة الاستخدام الإجمالي: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"مدة استخدام البطارية في الخلفية: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"بيانات استخدام البطارية تقريبية ولا تقيس الاستخدام عندما يجري شحن الهاتف."</string>
-    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"بيانات استخدام البطارية تقريبية ولا تقيس الاستخدام عندما يجري شحن الجهاز اللوحي."</string>
-    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"بيانات استخدام البطارية تقريبية ولا تقيس الاستخدام عندما يجري شحن الجهاز."</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"ستتوفّر بيانات استخدام البطارية خلال بضع ساعات بعد اكتمال عملية الشحن."</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"رسم بياني لاستخدام البطارية"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"رسم بياني لاستخدام البطارية في اليوم"</string>
@@ -2669,8 +2397,6 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"إطالة عمر البطارية وتحسين أداء الجهاز عن طريق الإدارة التلقائية للاتصالات بالشبكات"</string>
     <string name="credentials_title" msgid="7535942196886123656">"وحدة تخزين بيانات الاعتماد"</string>
     <string name="credentials_install" msgid="3933218407598415827">"تثبيت شهادة"</string>
-    <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"تثبيت الشهادات من وحدة تخزين"</string>
-    <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"‏تثبيت الشهادات من بطاقة SD"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"محو بيانات الاعتماد"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"إزالة جميع الشهادات"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"بيانات الاعتماد الموثوقة"</string>
@@ -2804,9 +2530,6 @@
     <string name="remove_account_label" msgid="4169490568375358010">"إزالة الحساب"</string>
     <string name="header_add_an_account" msgid="3919151542338822661">"إضافة حساب"</string>
     <string name="really_remove_account_title" msgid="253097435885652310">"هل تريد إزالة الحساب؟"</string>
-    <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"ستؤدي إزالة هذا الحساب إلى حذف جميع ما به من الرسائل وجهات الاتصال والبيانات الأخرى من الجهاز اللوحي."</string>
-    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"ستؤدي إزالة هذا الحساب إلى حذف جميع ما به من رسائل وجهات اتصال وبيانات أخرى من الهاتف."</string>
-    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"ستؤدي إزالة هذا الحساب إلى إزالة جميع رسائله وجهات الاتصال الخاصة به وبياناته الأخرى من الجهاز."</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"لا يسمح المشرف بإجراء هذا التغيير"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"لا يمكن المزامنة يدويًا"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"مزامنة هذا العنصر غير مفعّلة في الوقت الحالي. لتغيير هذا الإعداد، فعِّل بشكل مؤقت بيانات الخلفية والمزامنة التلقائية."</string>
@@ -2848,8 +2571,6 @@
     <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"قد تتسبب هذه الميزة في توقف تطبيق يعتمد على بيانات الخلفية عن العمل عند توفر شبكات جوال فقط.\n\nيمكنك العثور على المزيد من عناصر التحكم المناسبة في استخدام البيانات من خلال الإعدادات المتوفرة داخل التطبيق."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="8599940395497268584">"تقييد بيانات الخلفية ممكن فقط إذا عيّنت حدًا أقصى لبيانات الجوال."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"هل تريد تفعيل ميزة \"مزامنة البيانات تلقائيًا\"؟"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="6387714350903085918">"‏سيتم نسخ أي تغييرات تجريها على حساباتك على الويب إلى جهازك اللوحي تلقائيًا.\n\nويمكن أن تنسخ بعض الحسابات أيضًا أي تغييرات تجريها على الجهاز اللوحي إلى الويب تلقائيًا. يعمل حساب Google بهذه الطريقة."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="6457107552266187107">"‏أي تغييرات تجريها على حساباتك على الويب سيتم نسخها إلى هاتفك تلقائيًا.\n\nوقد تعمل بعض الحسابات أيضًا على نسخ التغييرات التي تجريها على الهاتف إلى الويب تلقائيًا، فهذه هي طريقة عمل حساب Google."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"هل تريد إيقاف مزامنة البيانات تلقائيًا؟"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"سيؤدي ذلك إلى توفير استخدام البيانات والبطارية، ولكن ستحتاج إلى مزامنة كل حساب يدويًا لجمع المعلومات الحديثة ولن تتلقّى إشعارات عند إتمام التحديثات."</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"تاريخ إعادة ضبط دورة الاستخدام"</string>
@@ -2858,8 +2579,6 @@
     <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"ضبط تحذيرات استخدام البيانات"</string>
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"ضبط الحد الأقصى لاستخدام البيانات"</string>
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"وضع حد أقصى لاستخدام البيانات"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"سيُوقف جهازك اللوحي بيانات الجوّال بعد الوصول إلى الحد الأقصى الذي وضعته.\n\nولأنّ جهازك اللوحي يقيس حجم استخدام البيانات بطريقة معيّنة ويحاسبك مشغّل شبكة الجوّال بطريقة مختلفة، ننصحك وضع حدٍ أقصى معتدل."</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"سيُوقف هاتفك بيانات الجوّال بعد الوصول إلى الحد الأقصى الذي وضعته.\n\nولأنّ هاتفك يقيس حجم استخدام البيانات بطريقة معيّنة وقد يحاسبك مشغّل شبكة الجوّال بطريقة مختلفة، ننصحك بوضع حدٍ أقصى معتدل."</string>
     <string name="data_usage_sweep_warning" msgid="2072854703184614828"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"تحذير"</font></string>
     <string name="data_usage_sweep_limit" msgid="6947019190890086284"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"الحد الأقصى"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="9065885396147675694">"التطبيقات المزالة"</string>
@@ -2979,9 +2698,6 @@
       <item quantity="one">الاطّلاع على الشهادة</item>
     </plurals>
     <string name="user_settings_title" msgid="6550866465409807877">"مستخدمون متعدِّدون"</string>
-    <string name="user_settings_footer_text" product="device" msgid="7523914344521302179">"يمكنك مشاركة جهازك من خلال تسجيل حسابات شخصية لمستخدمين جدد على هذا الجهاز، ليتسنى لكل واحد منهم استخدام ما يناسبه من شاشات رئيسية وحسابات وتطبيقات وإعدادات وغير ذلك."</string>
-    <string name="user_settings_footer_text" product="tablet" msgid="3730074318510244552">"يمكنك مشاركة جهازك اللوحي من خلال تسجيل حسابات شخصية لمستخدمين جدد على هذا الجهاز، ليتسنى لكل واحد منهم استخدام ما يناسبه من شاشات رئيسية وحسابات وتطبيقات وإعدادات وغير ذلك."</string>
-    <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"يمكنك مشاركة هاتفك من خلال إضافة حسابات شخصية لمستخدمين جدد على هذا الهاتف، ويستطيع كل منهم إعداد مساحته الخاصة واستخدام ما يناسبه من شاشات رئيسية وحسابات وتطبيقات وإعدادات وغير ذلك."</string>
     <string name="user_list_title" msgid="1387379079186123404">"المستخدمون والملفات الشخصية"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"إضافة مستخدم أو ملف شخصي"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"ملف شخصي محظور"</string>
@@ -2991,8 +2707,6 @@
     <string name="user_admin" msgid="4024553191395768119">"المشرف"</string>
     <string name="user_you" msgid="3070562015202859996">"أنت (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"لا يمكنك إضافة أي مستخدمين آخرين. عليك إزالة أحد المستخدمين لتتمكَّن من إضافة مستخدم جديد."</string>
-    <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"يمكن لمالك الجهاز اللوحي فقط إدارة المستخدمين."</string>
-    <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"يمكن لمالك الهاتف فقط إدارة المستخدمين."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"لا يمكن للملفات الشخصية إضافة حسابات"</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"حذف <xliff:g id="USER_NAME">%1$s</xliff:g> من هذا الجهاز"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"إعدادات شاشة القفل"</string>
@@ -3002,8 +2716,6 @@
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"هل تريد حذف هذا المستخدم؟"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"هل تريد حذف هذا الملف الشخصي؟"</string>
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"هل تريد إزالة الملف الشخصي للعمل؟"</string>
-    <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"ستفقد مساحتك وبياناتك من هذا الجهاز اللوحي. لا يمكنك التراجع عن هذا الإجراء."</string>
-    <string name="user_confirm_remove_self_message" product="default" msgid="5991495192044543230">"ستفقد مساحتك وبياناتك من هذا الهاتف. لا يمكنك التراجع عن هذا الإجراء."</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"سيتم حذف جميع التطبيقات والبيانات."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"سيتم حذف جميع التطبيقات والبيانات في هذا الملف الشخصي عند المتابعة."</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"سيتم حذف جميع التطبيقات والبيانات."</string>
@@ -3068,9 +2780,6 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"إزالة القيود"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"‏تغيير رمز PIN"</string>
     <string name="help_label" msgid="2896538416436125883">"المساعدة والملاحظات"</string>
-    <string name="support_summary" product="default" msgid="6137136608018134563">"مقالات المساعدة والهاتف والدردشة"</string>
-    <string name="support_summary" product="tablet" msgid="6681247727996378252">"مقالات المساعدة والجهاز اللوحي والدردشة"</string>
-    <string name="support_summary" product="device" msgid="1690554254039752541">"مقالات المساعدة والجهاز والدردشة"</string>
     <string name="user_account_title" msgid="6389636876210834864">"حساب المحتوى"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"معرف الصورة"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"التهديدات القصوى"</string>
@@ -4327,9 +4036,6 @@
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"التنقل باستخدام الأزرار"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"التنقُّل بالإيماءات، حساسية الرجوع، إيماءة الرجوع"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"التنقل، زر الشاشة الرئيسية"</string>
-    <string name="ambient_display_title" product="default" msgid="5885136049497127396">"النقر مرّتين للاطّلاع على الهاتف"</string>
-    <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"انقر مرّتين للاطلاع على الجهاز اللوحي"</string>
-    <string name="ambient_display_title" product="device" msgid="4164103424628824786">"انقر مرّتين للاطلاع على الجهاز"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"وضع \"التصفح بيد واحدة\""</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"استخدام وضع \"التصفح بيد واحدة\""</string>
     <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"اختصار وضع \"التصفح بيد واحدة\""</string>
@@ -4343,16 +4049,7 @@
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"عرض الإشعارات"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"ستظهر الإشعارات والإعدادات."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"للاطّلاع على الوقت والإشعارات والمعلومات الأخرى، انقر مرّتين على شاشتك."</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"حمل الهاتف للاطّلاع عليه"</string>
-    <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"يمكنك حمل الجهاز اللوحي للاطلاع عليه"</string>
-    <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"يمكنك حمل الجهاز للاطلاع عليه"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"عرض إيماءة التنبيه"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"للاطّلاع على الوقت والإشعارات والمعلومات الأخرى، ما عليك سوى حمل هاتفك."</string>
-    <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"للاطّلاع على الوقت والإشعارات والمعلومات الأخرى، يمكنك إلقاء نظرة على جهازك اللوحي."</string>
-    <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"للاطّلاع على الوقت والإشعارات والمعلومات الأخرى، يمكنك إلقاء نظرة على جهازك."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"النقر للاطّلاع على الهاتف"</string>
-    <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"النقر لفحص الجهاز اللوحي"</string>
-    <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"النقر لفحص الجهاز"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"للاطّلاع على الوقت والإشعارات والمعلومات الأخرى، انقر على شاشتك."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"اتصالات الطوارئ"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"استخدام ميزة \"اتصالات الطوارئ\""</string>
@@ -4366,9 +4063,6 @@
     <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"إذا أدخلت رقمًا غير أرقام الطوارئ:\n • يجب فتح قفل جهازك لاستخدام اتصالات الطوارئ.\n • قد لا يتم الرد على المكالمة."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"تمرير بصمة الإصبع لعرض الإشعارات"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"تمرير بصمة الإصبع"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"للاطّلاع على الإشعارات، مرِّر إصبعك للأسفل على زر استشعار بصمات الإصبع في الجزء الخلفي لهاتفك."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"للاطّلاع على الإشعارات، مرِّر إصبعك للأسفل على زر استشعار بصمات الإصبع في الجزء الخلفي من جهازك اللوحي."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3888927017311372398">"للاطّلاع على الإشعارات، مرِّر إصبعك للأسفل على زر استشعار بصمات الإصبع في الجزء الخلفي من جهازك."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"الاطّلاع على الإشعارات بسرعة"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="65713754674288193">"تم فتح قفل برنامج التحميل مسبقاً"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="7425519481227423860">"الاتصال بالإنترنت أو الاتصال بمشغِّل شبكة الجوّال"</string>
@@ -4891,9 +4585,6 @@
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"‏هل تريد إيقاف VoLTE؟"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"‏سيؤدي هذا أيضًا إلى إيقاف اتصال الجيل الخامس (5G).\nلا يمكنك استخدام الإنترنت أثناء إجراء مكالمة صوتية، وقد لا تعمل بعض التطبيقات أيضًا."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"‏عندما تستخدم شريحتَي SIM، سيقتصر عمل هذا الهاتف على الجيل الرابع. "<annotation id="url">"مزيد من المعلومات"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"‏عندما تستخدم شريحتَي SIM، سيقتصر عمل هذا الجهاز اللوحي على الجيل الرابع. "<annotation id="url">"مزيد من المعلومات"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"‏عندما تستخدم شريحتَي SIM، سيقتصر عمل هذا الجهاز على الجيل الرابع. "<annotation id="url">"مزيد من المعلومات"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"تعليق التنفيذ للتطبيقات المخزَّنة مؤقتًا"</string>
     <string name="blob_never_expires_text" msgid="7293376386620106623">"لا تنتهي الصلاحية أبدًا."</string>
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"لا تنتهي صلاحية الإيجار أبدًا."</string>
@@ -4928,8 +4619,6 @@
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"الإعدادات المفضَّلة للشبكة"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"‏الاتصال بالشبكة، الإنترنت، لاسلكي، بيانات، wifi، wi-fi، wi fi، خلوي، جهاز جوّال، مشغل شبكة الجوال، جيل رابع، جيل ثالث، جيل ثاني، lte"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"هل تريد إعادة ضبط شبكات الإنترنت؟"</string>
-    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"سيؤدي هذا إلى إنهاء مكالمتك الهاتفية."</string>
-    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"سيؤدي هذا إلى إنهاء مكالمتك الهاتفية."</string>
     <string name="resetting_internet_text" msgid="6696779371800051806">"جارٍ إعادة ضبط شبكات الإنترنت…"</string>
     <string name="fix_connectivity" msgid="2781433603228089501">"حل مشكلة اتصال البيانات"</string>
     <string name="networks_available" msgid="3299512933684383474">"الشبكات المتوفّرة"</string>

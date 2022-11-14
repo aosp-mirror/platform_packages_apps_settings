@@ -13,7 +13,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"Ja"</string>
@@ -59,9 +58,6 @@
     <string name="bluetooth_rename_device" msgid="4219655243836021443">"Dieses Gerät umbenennen"</string>
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"Umbenennen"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Geräteverbindung trennen?"</string>
-    <string name="bluetooth_disconnect_all_profiles" product="default" msgid="1934297101665686854">"Die Verbindung deines Smartphones mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> wird getrennt."</string>
-    <string name="bluetooth_disconnect_all_profiles" product="tablet" msgid="336622948210457991">"Die Verbindung deines Tablets mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> wird getrennt."</string>
-    <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Die Verbindung deines Geräts mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> wird getrennt."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Neues Gerät koppeln"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Rechtes Gerät koppeln"</string>
@@ -72,9 +68,6 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Rechtes Ohr koppeln"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Linkes Ohr koppeln"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Ähnlich"</string>
-    <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Bluetooth-Adresse des Smartphones: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Bluetooth-Adresse des Tablets: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="device" msgid="2863536947810007600">"Bluetooth-Adresse des Geräts: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"Unbenanntes Bluetooth-Gerät"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"Suche läuft"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"Kein Bluetooth-Gerät in der Nähe gefunden"</string>
@@ -88,22 +81,6 @@
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"<xliff:g id="APP_NAME">%1$s</xliff:g> fordert die Berechtigung, Bluetooth zu deaktivieren"</string>
     <string name="bluetooth_ask_enablement_no_name" msgid="5091401961637405417">"Eine App fordert die Berechtigung, Bluetooth zu aktivieren"</string>
     <string name="bluetooth_ask_disablement_no_name" msgid="382299750909188822">"Eine App fordert die Berechtigung, Bluetooth zu deaktivieren"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="1273405567801929487">"<xliff:g id="APP_NAME">%1$s</xliff:g> fordert die Berechtigung, dein Tablet <xliff:g id="TIMEOUT">%2$d</xliff:g> Sekunden lang für andere Bluetooth-Geräte sichtbar zu machen."</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="7013223328571883275">"<xliff:g id="APP_NAME">%1$s</xliff:g> fordert die Berechtigung, dein Smartphone <xliff:g id="TIMEOUT">%2$d</xliff:g> Sekunden lang für andere Bluetooth-Geräte sichtbar zu machen."</string>
-    <string name="bluetooth_ask_discovery_no_name" product="tablet" msgid="3266007454914144057">"Eine App fordert die Berechtigung, dein Tablet <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden lang für andere Bluetooth-Geräte sichtbar zu machen."</string>
-    <string name="bluetooth_ask_discovery_no_name" product="default" msgid="7989444746980501116">"Eine App fordert die Berechtigung, dein Smartphone <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden lang für andere Bluetooth-Geräte sichtbar zu machen."</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="6482084870735107773">"<xliff:g id="APP_NAME">%1$s</xliff:g> fordert die Berechtigung, dein Tablet für andere Bluetooth-Geräte sichtbar zu machen. Du kannst diese Option später in den Bluetooth-Einstellungen ändern."</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="2352494279465502950">"<xliff:g id="APP_NAME">%1$s</xliff:g> fordert die Berechtigung, dein Smartphone für andere Bluetooth-Geräte sichtbar zu machen. Du kannst diese Option später in den Bluetooth-Einstellungen ändern."</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="tablet" msgid="2732992604509910896">"Eine App fordert die Berechtigung, dein Tablet für andere Bluetooth-Geräte sichtbar zu machen. Du kannst diese Option später in den Bluetooth-Einstellungen ändern."</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="default" msgid="356982103612920264">"Eine App fordert die Berechtigung, dein Smartphone für andere Bluetooth-Geräte sichtbar zu machen. Du kannst diese Option später in den Bluetooth-Einstellungen ändern."</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="6103655179509599427">"<xliff:g id="APP_NAME">%1$s</xliff:g> fordert die Berechtigung, Bluetooth zu aktivieren und dein Tablet <xliff:g id="TIMEOUT">%2$d</xliff:g> Sekunden lang für andere Geräte sichtbar zu machen."</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="934276632311449337">"<xliff:g id="APP_NAME">%1$s</xliff:g> fordert die Berechtigung, Bluetooth zu aktivieren und dein Smartphone <xliff:g id="TIMEOUT">%2$d</xliff:g> Sekunden lang für andere Geräte sichtbar zu machen."</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="tablet" msgid="1284048348024444485">"Eine App fordert die Berechtigung, Bluetooth zu aktivieren und dein Tablet <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden lang für andere Geräte sichtbar zu machen."</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="default" msgid="2661614145022629454">"Eine App fordert die Berechtigung, Bluetooth zu aktivieren und dein Smartphone <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden lang für andere Geräte sichtbar zu machen."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="8588317955400593623">"<xliff:g id="APP_NAME">%1$s</xliff:g> fordert die Berechtigung, Bluetooth zu aktivieren und dein Tablet für andere Geräte sichtbar zu machen. Du kannst diese Option später in den Bluetooth-Einstellungen ändern."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="4047444317445386579">"<xliff:g id="APP_NAME">%1$s</xliff:g> fordert die Berechtigung, Bluetooth zu aktivieren und dein Smartphone für andere Geräte sichtbar zu machen. Du kannst diese Option später in den Bluetooth-Einstellungen ändern."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="tablet" msgid="4922952478824372605">"Eine App fordert die Berechtigung, Bluetooth zu aktivieren und dein Tablet für andere Geräte sichtbar zu machen. Du kannst diese Option später in den Bluetooth-Einstellungen ändern."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="default" msgid="1381582950049639439">"Eine App fordert die Berechtigung, Bluetooth zu aktivieren und dein Smartphone für andere Geräte sichtbar zu machen. Du kannst diese Option später in den Bluetooth-Einstellungen ändern."</string>
     <string name="bluetooth_turning_on" msgid="3842613808709024730">"Bluetooth wird aktiviert..."</string>
     <string name="bluetooth_turning_off" msgid="7406309124247701148">"Bluetooth wird deaktiviert..."</string>
     <string name="bluetooth_connection_permission_request" msgid="8793131019383198861">"Bluetooth-Verbindungsanfrage"</string>
@@ -239,10 +216,6 @@
     <string name="account_settings_title" msgid="9138880127246241885">"Konten"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Sicherheit"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Verschlüsselung &amp; Anmeldedaten"</string>
-    <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"Smartphone verschlüsselt"</string>
-    <string name="not_encrypted_summary" product="default" msgid="2251945842585788254">"Smartphone nicht verschlüsselt"</string>
-    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"Gerät verschlüsselt"</string>
-    <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"Gerät nicht verschlüsselt"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Sperrbildschirm"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Anzeige"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Nicht verfügbar"</string>
@@ -258,17 +231,11 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Entsperrung per Gesichtserkennung einrichten"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Per Gesichtserkennung authentifizieren"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Starten"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"Wenn die Gesichtsentsperrung mit Bedienungshilfen deaktiviert ist, funktionieren manche Einrichtungsschritte möglicherweise nicht richtig mit TalkBack."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Zurück"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Einrichtung fortsetzen"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Bedienungshilfen-Einrichtung verwenden"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Abbrechen"</string>
@@ -278,53 +245,14 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Per Gesicht entsperren"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Gesichtsentsperrung zulassen"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Per Gesichtserkennung authentifizieren"</string>
-    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"Verwende die Entsperrung per Gesichtserkennung, um dein Smartphone zu entsperren, Käufe zu autorisieren oder dich in Apps anzumelden."</string>
-    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"Mit der Entsperrung per Gesichtserkennung kannst du dein Tablet entsperren, Käufe autorisieren oder dich in Apps anmelden."</string>
-    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"Mit der Entsperrung per Gesichtserkennung kannst du dein Gerät entsperren, Käufe autorisieren oder dich in Apps anmelden."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Du kannst deinem Kind erlauben, sein Gesicht zum Entsperren des Smartphones zu verwenden"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Du kannst deinem Kind erlauben, sein Gesicht zum Entsperren des Tablets zu verwenden"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Du kannst deinem Kind erlauben, sein Gesicht zum Entsperren des Geräts zu verwenden"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"Das Entsperren des Smartphones deines Kindes mit seinem Gesicht kann weniger sicher sein als ein starkes Muster oder eine starke PIN."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"Das Entsperren des Tablets deines Kindes mit seinem Gesicht kann weniger sicher sein als ein starkes Muster oder eine starke PIN."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"Das Entsperren des Geräts deines Kindes mit seinem Gesicht kann weniger sicher sein als ein starkes Muster oder eine starke PIN."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Du kannst die Entsperrung per Gesichtserkennung verwenden, um dein Smartphone zu entsperren oder Käufe zu autorisieren.\n\nHinweis: Dieses Gerät kannst du nicht per Gesichtserkennung entsperren. Weitere Informationen erhältst du vom Administrator deiner Organisation."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Verwende die Entsperrung per Gesichtserkennung, um dein Smartphone zu entsperren, Käufe zu autorisieren oder dich in Apps anzumelden"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"Gesicht in den Kreis halten"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Überspringen"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Du hast die maximale Anzahl an Gesichtern hinzugefügt"</string>
@@ -369,12 +297,6 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Fingerabdruck einrichten"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Fingerabdruck zulassen"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Fingerabdruck verwenden"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Du kannst deinen Fingerabdruck verwenden, um dein Tablet zu entsperren oder dich in Apps zu authentifizieren, beispielsweise um dich anzumelden oder einen Kauf zu autorisieren."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Du kannst deinen Fingerabdruck verwenden, um dein Gerät zu entsperren oder deine Identität zu bestätigen, beispielsweise um dich in Apps anzumelden oder einen Kauf zu autorisieren."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Du kannst deinen Fingerabdruck verwenden, um dein Smartphone zu entsperren oder deine Identität zu bestätigen, beispielsweise um dich in Apps anzumelden oder einen Kauf zu autorisieren."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"Wenn du deinem Kind erlaubst, seinen Fingerabdruck zum Entsperren des Smartphones oder Bestätigen seiner Identität zu verwenden, kann es sich so z. B. in Apps anmelden oder Käufe autorisieren."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"Wenn du deinem Kind erlaubst, seinen Fingerabdruck zum Entsperren des Tablets oder zum Bestätigen seiner Identität zu verwenden, kann es sich so z. B. in Apps anmelden oder Käufe autorisieren."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"Wenn du deinem Kind erlaubst, seinen Fingerabdruck zum Entsperren des Geräts oder zum Bestätigen seiner Identität zu verwenden, kann es sich so z. B. in Apps anmelden oder Käufe autorisieren."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Du hast die Kontrolle"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Du und dein Kind habt die Kontrolle"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Hinweis"</string>
@@ -386,36 +308,12 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Die Einrichtung des Fingerabdrucks dauert nur wenige Minuten. Wenn du sie jetzt überspringst, kannst du sie später über die Einstellungen nachholen."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Wenn du dieses Symbol siehst, kannst du deinen Fingerabdruck zur Authentifizierung verwenden, beispielsweise zur Anmeldung in Apps oder um Käufe zu autorisieren"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Hinweis"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"Das Entsperren per Fingerabdruck kann möglicherweise nicht so sicher sein wie ein komplexes Muster oder eine PIN."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"Die Entsperrung per Fingerabdruck ist möglicherweise nicht so sicher wie ein komplexes Muster oder eine PIN"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"Die Entsperrung per Fingerabdruck ist möglicherweise nicht so sicher wie ein komplexes Muster oder eine PIN"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"So gehts"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Die Funktion „Entsperrung per Fingerabdruck“ erstellt ein eindeutiges Modell deines Fingerabdrucks, mit dem deine Identität bestätigt werden kann. Bei der Einrichtung legst du deinen Finger dazu immer wieder anders auf. Mit diesen Aufnahmen wird dann das Fingerabdruckmodell erstellt."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Die Funktion „Entsperrung per Fingerabdruck“ erstellt ein eindeutiges Modell des Fingerabdrucks deines Kindes, mit dem seine Identität bestätigt werden kann. Bei der Einrichtung legt es seinen Finger dazu immer wieder anders auf. Mit diesen Aufnahmen wird dann das Fingerabdruckmodell erstellt."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"Wenn du „Pixel Imprint“ nutzt, werden Bilder zum Aktualisieren deines Fingerabdruckmodells verwendet. Während die zum Erstellen deines Fingerabdruckmodells verwendeten Bilder niemals gespeichert werden, wird das Modell selbst sicher auf deinem Smartphone abgelegt, ohne es je zu verlassen. Die Verarbeitung der entsprechenden Daten findet unter Einhaltung aller Sicherheitsvorgaben ausschließlich auf dem Smartphone statt."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"Wenn du Pixel Imprint nutzt, werden Bilder zum Aktualisieren deines Fingerabdruckmodells verwendet. Während die zur Erstellung deines Fingerabdruckmodells verwendeten Bilder niemals gespeichert werden, wird das Modell selbst sicher auf deinem Tablet abgelegt, ohne es je zu verlassen. Die Verarbeitung der entsprechenden Daten findet unter Einhaltung aller Sicherheitsvorgaben ausschließlich auf dem Tablet statt."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"Wenn du Pixel Imprint nutzt, werden Bilder zum Aktualisieren deines Fingerabdruckmodells verwendet. Während die zur Erstellung deines Fingerabdruckmodells verwendeten Bilder niemals gespeichert werden, wird das Modell selbst sicher auf deinem Gerät abgelegt, ohne es je zu verlassen. Die Verarbeitung der entsprechenden Daten findet unter Einhaltung aller Sicherheitsvorgaben ausschließlich auf dem Gerät statt."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"Wenn es „Pixel Imprint“ nutzt, werden Bilder zum Aktualisieren seines Fingerabdruckmodells verwendet. Während die zum Erstellen des Fingerabdruckmodells verwendeten Bilder niemals gespeichert werden, wird das Modell selbst sicher auf dem Smartphone abgelegt, ohne es je zu verlassen. Die Verarbeitung der entsprechenden Daten findet unter Einhaltung aller Sicherheitsvorgaben ausschließlich auf dem Smartphone statt."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"Wenn dein Kind Pixel Imprint nutzt, werden Bilder zum Aktualisieren seines Fingerabdruckmodells verwendet. Während die zur Erstellung seines Fingerabdruckmodells verwendeten Bilder niemals gespeichert werden, wird das Modell selbst sicher auf dem Tablet abgelegt, ohne es je zu verlassen. Die Verarbeitung der entsprechenden Daten findet unter Einhaltung aller Sicherheitsvorgaben ausschließlich auf dem Tablet statt."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"Wenn dein Kind Pixel Imprint nutzt, werden Bilder zum Aktualisieren seines Fingerabdruckmodells verwendet. Während die zur Erstellung seines Fingerabdruckmodells verwendeten Bilder niemals gespeichert werden, wird das Modell selbst sicher auf dem Gerät abgelegt, ohne es je zu verlassen. Die Verarbeitung der entsprechenden Daten findet unter Einhaltung aller Sicherheitsvorgaben ausschließlich auf dem Gerät statt."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"Du kannst jederzeit die Aufnahmen und das Modell deines Fingerabdrucks löschen oder das Entsperren per Fingerabdruck in den Einstellungen deaktivieren. Aufnahmen und Modelle von Fingerabdrücken werden auf deinem Gerät gespeichert, bis du sie löschst."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"In den Einstellungen kannst du jederzeit die Bilder und das Modell deines Fingerabdrucks löschen oder die Funktion „Entsperrung per Fingerabdruck“ deaktivieren. Bilder und Modelle des Fingerabdrucks werden auf deinem Tablet gespeichert, bis du sie löschst."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"In den Einstellungen kannst du jederzeit die Bilder und das Modell deines Fingerabdrucks löschen oder die Funktion „Entsperrung per Fingerabdruck“ deaktivieren. Bilder und Modelle des Fingerabdrucks werden auf deinem Gerät gespeichert, bis du sie löschst."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"Du und dein Kind könnt jederzeit die Aufnahmen der Fingerabdrücke und das erstellte Fingerabdruckmodell löschen oder die Funktion „Entsperrung per Fingerabdruck“ in den Einstellungen deaktivieren. Aufnahmen von Fingerabdrücken und Fingerabdruckmodelle bleiben auf dem Smartphone gespeichert, bis sie gelöscht werden."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"Du und dein Kind könnt in den Einstellungen jederzeit die Bilder und das Modell seines Fingerabdrucks löschen oder die Funktion „Entsperrung per Fingerabdruck“ deaktivieren. Bilder und Modelle des Fingerabdrucks bleiben auf dem Tablet gespeichert, bis sie gelöscht werden."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"Du und dein Kind könnt in den Einstellungen jederzeit die Bilder und das Modell seines Fingerabdrucks löschen oder die Funktion „Entsperrung per Fingerabdruck“ deaktivieren. Bilder und Modelle des Fingerabdrucks bleiben auf dem Gerät gespeichert, bis sie gelöscht werden."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Es kann passieren, dass dein Smartphone unbeabsichtigt entsperrt wird, wenn es z. B. von jemandem gegen deinen Finger gehalten wird."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Es kann passieren, dass dein Tablet entsperrt wird, wenn du es nicht möchtest, z. B. wenn es von jemandem gegen deinen Finger gehalten wird."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Es kann passieren, dass dein Gerät entsperrt wird, wenn du es nicht möchtest, z. B. wenn es von jemandem gegen deinen Finger gehalten wird."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"Das Smartphone deines Kindes kann entsperrt werden, selbst wenn es das nicht beabsichtigt. Dazu kann es z. B. an seinen Finger gehalten werden."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"Das Tablet deines Kindes kann auch unbeabsichtigt entsperrt werden, z. B. wenn jemand es an seinen Finger hält."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"Das Gerät deines Kindes kann auch unbeabsichtigt entsperrt werden, z. B. wenn jemand es an seinen Finger hält."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Die besten Ergebnisse erzielst du mit einem Displayschutz, der das Zertifikat „Made for Google“ hat. Bei anderen Displayschutzfolien wird dein Fingerabdruck möglicherweise nicht erkannt."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Die besten Ergebnisse erzielst du mit einem Displayschutz, der das Zertifikat „Made for Google“ hat. Bei anderen Displayschutzfolien wird der Fingerabdruck deines Kindes möglicherweise nicht erkannt."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Du kannst deinen Fingerabdruck verwenden, um dein Tablet zu entsperren oder dich zu authentifizieren, beispielsweise um dich in Apps anzumelden"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Du kannst deinen Fingerabdruck verwenden, um dein Gerät zu entsperren oder dich zu authentifizieren, beispielsweise um dich in Apps anzumelden"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Du kannst deinen Fingerabdruck verwenden, um dein Smartphone zu entsperren oder dich zu authentifizieren, beispielsweise um dich in Apps anzumelden"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Entsperrung per Gesichtserkennung &amp; Fingerabdruck"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Zum Einrichten tippen"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Gesicht und Fingerabdrücke hinzugefügt"</string>
@@ -427,17 +325,8 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Gesicht verwenden"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Fingerabdruck verwenden"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Gesicht oder Fingerabdruck verwenden"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"Gib das Tablet an dein Elternteil zurück"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"Gib das Gerät an dein Elternteil zurück"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Gib das Telefon an dein Elternteil zurück"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Displaysperre überspringen?"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Die Schutzfunktionen für dein Mobilgerät werden nicht aktiviert. Du kannst dann nicht verhindern, dass andere Personen dieses Tablet verwenden, falls es verloren geht, gestohlen oder zurückgesetzt wird."</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Die Schutzfunktionen für dein Mobilgerät werden nicht aktiviert. Du kannst dann nicht verhindern, dass andere Personen dieses Gerät verwenden, falls es verloren geht, gestohlen oder zurückgesetzt wird."</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2412426429887900241">"Die Schutzfunktionen für dein Mobilgerät werden nicht aktiviert. Du kannst dann nicht verhindern, dass andere Personen dieses Smartphone verwenden, falls es verloren geht, gestohlen oder zurückgesetzt wird."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="7119039592587429936">"Die Schutzfunktionen für dein Mobilgerät werden nicht aktiviert. Du kannst dann nicht verhindern, dass andere Personen dieses Tablet verwenden, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3365990364131398523">"Die Schutzfunktionen für dein Mobilgerät werden nicht aktiviert. Du kannst dann nicht verhindern, dass andere Personen dieses Gerät verwenden, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="4908278819257287536">"Die Schutzfunktionen für dein Mobilgerät werden nicht aktiviert. Du kannst dann nicht verhindern, dass andere Personen dieses Smartphone verwenden, falls es verloren geht oder gestohlen wird."</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"Trotzdem überspringen"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"Zurück"</string>
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"Überspringen"</string>
@@ -446,9 +335,6 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Leg den Finger auf die Ein-/Aus-Taste, ohne sie zu drücken"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"So richtest du deinen Fingerabdruck ein"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Er befindet sich auf der Rückseite des Smartphones. Am besten den Zeigefinger verwenden."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"Der Fingerabdrucksensor befindet sich auf der Ein-/Aus-Taste. Das ist die flache Taste neben der erhöhten Lautstärketaste an der Seite des Tablets.\n\nWenn du die Ein-/Aus-Taste drückst, schaltet sich das Display aus."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"Der Fingerabdrucksensor befindet sich auf der Ein-/Aus-Taste. Das ist die flache Taste neben der erhöhten Lautstärketaste an der Seite des Geräts.\n\nWenn du die Ein-/Aus-Taste drückst, schaltet sich das Display aus."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"Der Fingerabdrucksensor befindet sich auf der Ein-/Aus-Taste. Das ist die flache Taste neben der erhöhten Lautstärketaste an der Seite des Smartphones.\n\nWenn du die Ein-/Aus-Taste drückst, schaltet sich das Display aus."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Der Fingerabdrucksensor befindet sich auf deinem Display. Auf dem nächsten Bildschirm zeichnest du deinen Fingerabdruck auf."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Starten"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Bewege deinen Finger über das Display, um den Sensor zu finden. Halte den Fingerabdrucksensor gedrückt."</string>
@@ -487,9 +373,6 @@
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingerabdruck hinzugefügt"</string>
     <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Du kannst jetzt deinen Fingerabdruck verwenden, um dein Tablet zu entsperren oder deine Identität zu bestätigen, z. B. um dich in Apps anzumelden oder Käufe zu autorisieren"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Du kannst jetzt deinen Fingerabdruck verwenden, um dein Tablet zu entsperren oder dich in Apps zu authentifizieren, beispielsweise um dich anzumelden"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Du kannst jetzt deinen Fingerabdruck verwenden, um dein Gerät zu entsperren oder dich in Apps zu authentifizieren, beispielsweise um dich anzumelden"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Du kannst jetzt deinen Fingerabdruck verwenden, um dein Smartphone zu entsperren oder dich in Apps zu authentifizieren, beispielsweise um dich anzumelden."</string>
     <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
     <skip />
     <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
@@ -501,42 +384,6 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Halte nacheinander beide Seiten der Fingerkuppe einen Moment lang auf den Sensor"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Fingerabdruck-Einrichtung überspringen?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Du hast festgelegt, dass du unter anderem deinen Fingerabdruck zum Entsperren deines Smartphones verwenden möchtest. Wenn du diesen Schritt jetzt überspringst, musst du die Einrichtung zu einem späteren Zeitpunkt vornehmen. Die Einrichtung dauert nur ca. eine Minute."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"Eine PIN schützt das Tablet, falls es verloren geht oder gestohlen wird"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="4359575348578515037">"Ein Muster schützt das Tablet, falls es verloren geht oder gestohlen wird"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5420451292764062637">"Ein Passwort schützt das Tablet, falls es verloren geht oder gestohlen wird"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="8841426051550671169">"Eine PIN schützt das Gerät, falls es verloren geht oder gestohlen wird"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="6296702954920045923">"Ein Muster schützt das Gerät, falls es verloren geht oder gestohlen wird"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="9186075211441188900">"Ein Passwort schützt das Gerät, falls es verloren geht oder gestohlen wird"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="4301690296689572747">"Eine PIN schützt das Smartphone, falls es verloren geht oder gestohlen wird"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="7387967847446084260">"Ein Muster schützt das Smartphone, falls es verloren geht oder gestohlen wird"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="6415788841227543063">"Ein Passwort schützt das Smartphone, falls es verloren geht oder gestohlen wird"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="2350062798056164403">"Zum Einrichten der Entsperrung per Fingerabdruck ist eine PIN erforderlich.\n\nEine PIN schützt das Tablet, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="222574071926747300">"Zum Einrichten der Entsperrung per Fingerabdruck ist ein Muster erforderlich.\n\nEin Muster schützt das Tablet, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="7780323831330724644">"Zum Einrichten der Entsperrung per Fingerabdruck ist ein Passwort erforderlich.\n\nEin Passwort schützt das Tablet, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="7421096089691939451">"Zum Einrichten der Entsperrung per Fingerabdruck ist eine PIN erforderlich.\n\nEine PIN schützt das Gerät, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6458468083711413617">"Zum Einrichten der Entsperrung per Fingerabdruck ist ein Muster erforderlich.\n\nEin Muster schützt das Gerät, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="1632249532665518954">"Zum Einrichten der Entsperrung per Fingerabdruck ist ein Passwort erforderlich.\n\nEin Passwort schützt das Gerät, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3101384462491132314">"Zum Einrichten der Entsperrung per Fingerabdruck ist eine PIN erforderlich.\n\nEine PIN schützt das Smartphone, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="382422778886929469">"Zum Einrichten der Entsperrung per Fingerabdruck ist ein Muster erforderlich.\n\nEin Muster schützt das Smartphone, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="5515199168425229243">"Zum Einrichten der Entsperrung per Fingerabdruck ist ein Passwort erforderlich.\n\nEin Passwort schützt das Smartphone, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="2454239555320628731">"Zum Einrichten der Entsperrung per Gesichtserkennung ist eine PIN erforderlich.\n\nEine PIN schützt das Tablet, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="4354138725903415816">"Zum Einrichten der Entsperrung per Gesichtserkennung ist ein Muster erforderlich.\n\nEin Muster schützt das Tablet, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="719339718267952196">"Zum Einrichten der Entsperrung per Gesichtserkennung ist ein Passwort erforderlich.\n\nEin Passwort schützt das Tablet, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="3729243407606881750">"Zum Einrichten der Entsperrung per Gesichtserkennung ist eine PIN erforderlich.\n\nEine PIN schützt das Gerät, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="6966329744346503807">"Zum Einrichten der Entsperrung per Gesichtserkennung ist ein Muster erforderlich.\n\nEin Muster schützt das Gerät, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3020827854443297996">"Zum Einrichten der Entsperrung per Gesichtserkennung ist ein Passwort erforderlich.\n\nEin Passwort schützt das Gerät, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2155678903559865476">"Zum Einrichten der Entsperrung per Gesichtserkennung ist eine PIN erforderlich.\n\nEine PIN schützt das Smartphone, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="473271568005748452">"Zum Einrichten der Entsperrung per Gesichtserkennung ist ein Muster erforderlich.\n\nEin Muster schützt das Smartphone, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="4319934862372116788">"Zum Einrichten der Entsperrung per Gesichtserkennung ist ein Passwort erforderlich.\n\nEin Passwort schützt das Smartphone, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="647987565338402155">"Zum Einrichten der Entsperrung per Gesichtserkennung und der Entsperrung per Fingerabdruck ist eine PIN erforderlich.\n\nEine PIN schützt das Tablet, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="5293609077890072841">"Zum Einrichten der Entsperrung per Gesichtserkennung und der Entsperrung per Fingerabdruck ist ein Muster erforderlich.\n\nEin Muster schützt das Tablet, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="2660359318928684172">"Zum Einrichten der Entsperrung per Gesichtserkennung und der Entsperrung per Fingerabdruck ist ein Passwort erforderlich.\n\nEin Passwort schützt das Tablet, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="1278795063897397815">"Zum Einrichten der Entsperrung per Gesichtserkennung und der Entsperrung per Fingerabdruck ist eine PIN erforderlich.\n\nEine PIN schützt das Gerät, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="8766169819759371801">"Zum Einrichten der Entsperrung per Gesichtserkennung und der Entsperrung per Fingerabdruck ist ein Muster erforderlich.\n\nEin Muster schützt das Gerät, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="8611216039321306045">"Zum Einrichten der Entsperrung per Gesichtserkennung und der Entsperrung per Fingerabdruck ist ein Passwort erforderlich.\n\nEin Passwort schützt das Gerät, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="8796878521409329051">"Zum Einrichten der Entsperrung per Gesichtserkennung und der Entsperrung per Fingerabdruck ist eine PIN erforderlich.\n\nEine PIN schützt das Smartphone, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="8423700958936341596">"Zum Einrichten der Entsperrung per Gesichtserkennung und der Entsperrung per Fingerabdruck ist ein Muster erforderlich.\n\nEin Muster schützt das Smartphone, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="5411689248299854172">"Zum Einrichten der Entsperrung per Gesichtserkennung und der Entsperrung per Fingerabdruck ist ein Passwort erforderlich.\n\nEin Passwort schützt das Smartphone, falls es verloren geht oder gestohlen wird."</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"PIN-Einrichtung überspringen?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Einrichtung für PIN &amp; Gesicht überspringen?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Einrichtung für PIN &amp; Fingerabdruck überspringen?"</string>
@@ -571,40 +418,20 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du hast die maximale Anzahl an Fingerabdrücken hinzugefügt"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Es können keine Fingerabdrücke mehr hinzugefügt werden"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"„<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ löschen"</string>
-    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Dadurch werden die Aufnahmen und das Modell des Fingerabdrucks für „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ gelöscht, die auf deinem Smartphone gespeichert sind"</string>
-    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Dadurch werden die Aufnahmen und das Modell des Fingerabdrucks für „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ gelöscht, die auf deinem Tablet gespeichert sind"</string>
-    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Dadurch werden die Aufnahmen und das Modell des Fingerabdruck für „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ gelöscht, die auf deinem Gerät gespeichert sind."</string>
-    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Du kannst deinen Fingerabdruck dann nicht mehr verwenden, um dein Smartphone zu entsperren oder deine Identität in Apps zu bestätigen."</string>
-    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Du kannst deinen Fingerabdruck dann nicht mehr verwenden, um dein Tablet zu entsperren oder deine Identität in Apps zu bestätigen."</string>
-    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Du kannst deinen Fingerabdruck dann nicht mehr verwenden, um dein Gerät zu entsperren oder deine Identität in Apps zu bestätigen."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Du kannst deinen Fingerabdruck dann nicht mehr verwenden, um dein Arbeitsprofil zu entsperren, Käufe zu autorisieren oder dich in geschäftlichen Apps anzumelden."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Verschlüsselung"</string>
-    <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Tablet verschlüsseln"</string>
-    <string name="encrypt_title" product="default" msgid="7337365190988321100">"Smartphone verschlüsseln"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Verschlüsselt"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Displaysperre einrichten"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Für zusätzliche Sicherheit kannst du eine PIN, ein Muster oder ein Passwort für dieses Gerät einrichten."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Displaysperre einrichten"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Smartphone schützen"</string>
-    <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Displaysperre einrichten, um das Tablet zu schützen"</string>
-    <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Displaysperre einrichten, um das Gerät zu schützen"</string>
-    <string name="suggested_lock_settings_summary" product="default" msgid="2443273582716671033">"Displaysperre einrichten, um das Smartphone zu schützen"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Fingerabdruck zum Entsperren hinzufügen"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Displaysperre wählen"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Displaysperre auswählen"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Neue Displaysperre wählen"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Sperre für geschäftliche Apps wählen"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Neue Arbeitsprofilsperre wählen"</string>
-    <string name="setup_lock_settings_picker_title" product="tablet" msgid="1276283007274778191">"Tablet schützen"</string>
-    <string name="setup_lock_settings_picker_title" product="device" msgid="3585905639045649905">"Gerät schützen"</string>
-    <string name="setup_lock_settings_picker_title" product="default" msgid="2758197863515864300">"Smartphone schützen"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Alternative Displaysperre einrichten für zusätzliche Sicherheit"</string>
-    <string name="setup_lock_settings_picker_message" product="tablet" msgid="4870877800737248926">"Du kannst verhindern, dass andere Personen dieses Tablet ohne deine Erlaubnis verwenden, indem du die Schutzfunktionen für dein Mobilgerät aktivierst. Wähle eine Displaysperre aus."</string>
-    <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Du kannst verhindern, dass andere Personen dieses Gerät ohne deine Erlaubnis verwenden, indem du die Schutzfunktionen für dein Mobilgerät aktivierst. Wähle eine Displaysperre aus."</string>
-    <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Du kannst verhindern, dass andere Personen dieses Smartphone ohne deine Erlaubnis verwenden, indem du die Schutzfunktionen für dein Mobilgerät aktivierst. Wähle eine Displaysperre aus."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Alternative Methode für die Displaysperre auswählen"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Wenn du deine Displaysperre vergessen hast, kann dein IT-Administrator sie nicht zurücksetzen."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Separate Sperre für geschäftliche Apps einrichten"</string>
@@ -644,43 +471,31 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"Profilschutz entfernen?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"Ein Muster schützt dein Smartphone, falls es verloren geht oder gestohlen wird"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"Ein Muster schützt dein Smartphone, falls es verloren geht oder gestohlen wird.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Dadurch wird auch das Fingerabdruckmodell gelöscht, das auf deinem Gerät gespeichert ist. Du kannst deinen Fingerabdruck dann nicht mehr zur Authentifizierung in Apps verwenden."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"Ein Muster schützt dein Smartphone, falls es verloren geht oder gestohlen wird.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Außerdem wird dein Gesichtsmodell dauerhaft und sicher gelöscht. Du kannst dein Gesicht nicht mehr zur Authentifizierung in Apps verwenden."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"Ein Muster schützt dein Smartphone, falls es verloren geht oder gestohlen wird.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Dadurch wird das Fingerabdruckmodell gelöscht, das auf deinem Gerät gespeichert ist. Außerdem wird dein Gesichtsmodell dauerhaft und sicher gelöscht. Du kannst dein Gesicht oder deinen Fingerabdruck nicht mehr zur Authentifizierung in Apps verwenden."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"Eine PIN schützt dein Smartphone, falls es verloren geht oder gestohlen wird"</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"Eine PIN schützt dein Smartphone, falls es verloren geht oder gestohlen wird.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Dadurch wird auch das Fingerabdruckmodell gelöscht, das auf deinem Gerät gespeichert ist. Du kannst deinen Fingerabdruck dann nicht mehr zur Authentifizierung in Apps verwenden."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"Eine PIN schützt dein Smartphone, falls es verloren geht oder gestohlen wird.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Außerdem wird dein Gesichtsmodell dauerhaft und sicher gelöscht. Du kannst dein Gesicht nicht mehr zur Authentifizierung in Apps verwenden."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"Eine PIN schützt dein Smartphone, falls es verloren geht oder gestohlen wird.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Dadurch wird das Fingerabdruckmodell gelöscht, das auf deinem Gerät gespeichert ist. Außerdem wird dein Gesichtsmodell dauerhaft und sicher gelöscht. Du kannst dein Gesicht oder deinen Fingerabdruck nicht mehr zur Authentifizierung in Apps verwenden."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"Ein Passwort schützt dein Smartphone, falls es verloren geht oder gestohlen wird"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"Ein Passwort schützt dein Smartphone, falls es verloren geht oder gestohlen wird.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Dadurch wird auch das Fingerabdruckmodell gelöscht, das auf deinem Gerät gespeichert ist. Du kannst deinen Fingerabdruck dann nicht mehr zur Authentifizierung in Apps verwenden."</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"Ein Passwort schützt dein Smartphone, falls es verloren geht oder gestohlen wird.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Außerdem wird dein Gesichtsmodell dauerhaft und sicher gelöscht. Du kannst dein Gesicht nicht mehr zur Authentifizierung in Apps verwenden."</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"Ein Passwort schützt dein Smartphone, falls es verloren geht oder gestohlen wird.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Dadurch wird das Fingerabdruckmodell gelöscht, das auf deinem Gerät gespeichert ist. Außerdem wird dein Gesichtsmodell dauerhaft und sicher gelöscht. Du kannst dein Gesicht oder deinen Fingerabdruck nicht mehr zur Authentifizierung in Apps verwenden."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"Der Geräteschutz funktioniert ohne deine Displaysperre nicht."</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"Der Geräteschutz funktioniert ohne deine Displaysperre nicht.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Dadurch wird auch das Fingerabdruckmodell gelöscht, das auf deinem Gerät gespeichert ist. Du kannst deinen Fingerabdruck dann nicht mehr zur Authentifizierung in Apps verwenden."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"Der Geräteschutz funktioniert ohne deine Displaysperre nicht.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Außerdem wird dein Gesichtsmodell dauerhaft und sicher gelöscht. Du kannst dein Gesicht nicht mehr zur Authentifizierung in Apps verwenden."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"Der Geräteschutz funktioniert ohne deine Displaysperre nicht.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Dadurch wird das Fingerabdruckmodell gelöscht, das auf deinem Gerät gespeichert ist. Außerdem wird dein Gesichtsmodell dauerhaft und sicher gelöscht. Du kannst dein Gesicht oder deinen Fingerabdruck nicht mehr zur Authentifizierung in Apps verwenden."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Löschen"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> empfiehlt, eine starke PIN oder ein starkes Passwort einzugeben – anderenfalls funktioniert die App möglicherweise nicht wie erwartet"</string>
@@ -791,9 +606,6 @@
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Gerät entkoppeln?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"Verknüpfung entfernen"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"App-Verknüpfung aufheben?"</string>
-    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"Dein Smartphone ist dann nicht mehr mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> gekoppelt"</string>
-    <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Dein Tablet ist dann nicht mehr mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> gekoppelt"</string>
-    <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Dein Gerät ist dann nicht mehr mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> gekoppelt"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Die <xliff:g id="APP_NAME">%1$s</xliff:g> App ist dann nicht mehr mit „<xliff:g id="DEVICE_NAME">%2$s</xliff:g>“ verknüpft"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Gerät entkoppeln"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"App-Verknüpfung aufheben"</string>
@@ -838,7 +650,6 @@
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Aktuelle Aktualisierungsrate des Displays anzeigen"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Für NFC muss das Gerät entsperrt werden"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"Verwendung von NFC nur bei entsperrtem Gerätebildschirm zulassen"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Bereit zur Übertragung von App-Inhalten über NFC"</string>
     <string name="nfc_disabled_summary" msgid="8737797364522502351">"Nicht verfügbar, weil NFC deaktiviert ist"</string>
@@ -1046,14 +857,10 @@
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> ist aktiviert"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"AndroidHotspot"</string>
     <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"Dieses Netzwerk speichern?"</string>
-    <string name="wifi_add_app_single_network_summary" product="default" msgid="6881712878537666626">"<xliff:g id="APPNAME">%1$s</xliff:g> möchte ein Netzwerk auf deinem Smartphone speichern"</string>
-    <string name="wifi_add_app_single_network_summary" product="tablet" msgid="8455616967601552440">"<xliff:g id="APPNAME">%1$s</xliff:g> möchte ein Netzwerk auf deinem Tablet speichern"</string>
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"Wird gespeichert…"</string>
     <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"Gespeichert"</string>
     <string name="wifi_add_app_network_save_failed_summary" msgid="7223817782309294652">"Speichern nicht möglich. Noch einmal versuchen."</string>
     <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"Netzwerke speichern?"</string>
-    <string name="wifi_add_app_networks_summary" product="default" msgid="2670215712788515167">"<xliff:g id="APPNAME">%1$s</xliff:g> möchte diese Netzwerke auf deinem Smartphone speichern"</string>
-    <string name="wifi_add_app_networks_summary" product="tablet" msgid="2088967184512169910">"<xliff:g id="APPNAME">%1$s</xliff:g> möchte diese Netzwerke auf deinem Tablet speichern"</string>
     <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"<xliff:g id="NUMBER">%d</xliff:g> Netzwerke werden gespeichert…"</string>
     <string name="wifi_add_app_networks_saved_summary" msgid="1648417628665152905">"Netzwerke gespeichert"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"WLAN-Telefonie"</string>
@@ -1096,8 +903,6 @@
     <string name="accelerometer_title" msgid="7745991950833748909">"Bildschirm automatisch drehen"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"An – gesichtsbasiert"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Gesichtserkennung"</string>
-    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Das Display wechselt automatisch zwischen Hoch- und Querformat, wenn du das Smartphone drehst"</string>
-    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Das Display wechselt automatisch zwischen Hoch- und Querformat, wenn du das Tablet drehst"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Weitere Informationen zum automatischen Drehen"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Wenn du das Smartphone drehst"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Bildschirmauflösung"</string>
@@ -1209,10 +1014,6 @@
     <string name="sim_lock_settings" msgid="4493069398250139205">"Einstellungen für SIM-Sperre"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"SIM-Kartensperre"</string>
     <string name="sim_pin_toggle" msgid="98754920202404425">"SIM-Karte sperren"</string>
-    <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"PIN zur Verwendung des Tablets erforderlich"</string>
-    <string name="sim_lock_on" product="default" msgid="3303147192981388923">"Telefon kann nur mit PIN genutzt werden"</string>
-    <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"PIN zur Verwendung des Tablets erforderlich"</string>
-    <string name="sim_lock_off" product="default" msgid="4634118006847137785">"Telefon kann nur mit PIN genutzt werden"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"PIN für SIM-Karte ändern"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"PIN für SIM-Karte"</string>
     <string name="sim_enable_sim_lock" msgid="8993991669975548653">"SIM-Karte sperren"</string>
@@ -1257,12 +1058,6 @@
     <string name="storage_settings_title" msgid="486118156723194815">"Speichereinstellungen"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (SIM-Steckplatz %1$d)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Wähle zum Ansehen ein gespeichertes Netzwerk aus"</string>
-    <string name="status_number" product="tablet" msgid="3597945414666253183">"MDN"</string>
-    <string name="status_number" product="default" msgid="8407999629121682207">"Telefonnummer"</string>
-    <string name="status_number_sim_slot" product="tablet" msgid="6582203988975619529">"MDN (SIM-Steckplatz %1$d)"</string>
-    <string name="status_number_sim_slot" product="default" msgid="5724823197745786398">"Telefonnummer (SIM-Steckplatz %1$d)"</string>
-    <string name="status_number_sim_status" product="tablet" msgid="4239876366511743428">"Mobilgerätnummer auf SIM"</string>
-    <string name="status_number_sim_status" product="default" msgid="2772745542921910086">"Telefonnummer auf SIM"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL-Version"</string>
@@ -1322,12 +1117,6 @@
     <string name="storage_wizard_move_progress_title" msgid="3912406225614672391">"<xliff:g id="APP">^1</xliff:g> wird verschoben…"</string>
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Entferne die <xliff:g id="NAME">^1</xliff:g> während des Vorgangs nicht. \n\nDie App <xliff:g id="APP">^2</xliff:g> auf diesem Gerät ist erst wieder verfügbar, nachdem sie vollständig verschoben wurde."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Wie möchtest du das Gerät (<xliff:g id="NAME">^1</xliff:g>) nutzen?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"SD-Karte als internen Speicher formatieren"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Du kannst Apps und Medien speichern, die nur auf diesem Tablet verwendet werden sollen. &lt;a href=https://support.google.com/android/answer/12153449&gt;Weitere Informationen zum Einrichten von SD-Karten&lt;/a&gt;"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formatieren"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"SD-Karte als internen Speicher formatieren"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Du kannst Apps und Medien speichern, die nur auf diesem Telefon verwendet werden sollen. &lt;a href=https://support.google.com/android/answer/12153449&gt;Weitere Informationen zum Einrichten von SD-Karten&lt;/a&gt;"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formatieren"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"oder"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"SD-Karte als mobilen Speicher formatieren"</string>
     <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Du kannst Fotos, Videos, Musik und mehr speichern und von anderen Geräten darauf zugreifen. &lt;a href=https://support.google.com/android/answer/12153449&gt;Weitere Informationen zum Einrichten von SD-Karten&lt;/a&gt;"</string>
@@ -1338,13 +1127,9 @@
     <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Diese <xliff:g id="NAME_0">^1</xliff:g> muss formatiert werden, um Fotos, Videos, Musik und mehr darauf speichern zu können. \n\nBeim Formatieren werden vorhandene Inhalte auf der <xliff:g id="NAME_1">^2</xliff:g> gelöscht. Wenn du vermeiden möchtest, dass Inhalte verloren gehen, sichere sie auf einer anderen <xliff:g id="NAME_2">^3</xliff:g> oder einem anderen Gerät."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g> formatieren"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Inhalte auf <xliff:g id="NAME">^1</xliff:g> verschieben?"</string>
-    <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Du kannst Dateien, Medien und bestimmte Apps auf dieses Speichergerät (<xliff:g id="NAME">^1</xliff:g>) verschieben. \n\nDabei werden <xliff:g id="SIZE">^2</xliff:g> des Tabletspeichers freigegeben. Der Vorgang dauert ungefähr <xliff:g id="DURATION">^3</xliff:g>."</string>
-    <string name="storage_wizard_migrate_v2_body" product="default" msgid="809730501314645325">"Du kannst Dateien, Medien und bestimmte Apps auf diese <xliff:g id="NAME">^1</xliff:g> verschieben. \n\nDabei werden <xliff:g id="SIZE">^2</xliff:g> des Smartphone-Speichers freigegeben. Der Vorgang dauert ungefähr <xliff:g id="DURATION">^3</xliff:g>."</string>
     <string name="storage_wizard_migrate_v2_checklist" msgid="2618258869444553060">"Während des Verschiebens:"</string>
     <string name="storage_wizard_migrate_v2_checklist_media" msgid="5867134681730723744">"Entferne nicht das Speichergerät (<xliff:g id="NAME">^1</xliff:g>)"</string>
     <string name="storage_wizard_migrate_v2_checklist_apps" msgid="1882077445750580783">"Einige Apps funktionieren nicht"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="tablet" msgid="6111770421449869539">"Sorge dafür, dass das Tablet genug Strom hat"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="default" msgid="8826915870192535008">"Sorge dafür, dass das Smartphone genug Strom hat"</string>
     <string name="storage_wizard_migrate_v2_now" msgid="3341460117088026966">"Inhalte jetzt verschieben"</string>
     <string name="storage_wizard_migrate_v2_later" msgid="6067756122853315642">"Inhalte später verschieben"</string>
     <string name="storage_wizard_migrate_progress_v2_title" msgid="8791318509516968103">"Inhalte werden verschoben…"</string>
@@ -1413,21 +1198,9 @@
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"Heruntergeladene SIMs können aufgrund eines Fehlers nicht gelöscht werden.\n\nStarte das Gerät neu und versuche es noch einmal."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Alle Daten löschen (auf Werkseinstellungen zurücksetzen)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Alle Daten löschen"</string>
-    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Hierdurch werden alle Daten aus dem "<b>"internen Speicher"</b>" deines Tablets gelöscht, wie z. B. die Folgenden:\n\n"<li>"Dein Google-Konto"</li>\n<li>"System- und App-Daten sowie entsprechende Einstellungen"</li>\n<li>"Heruntergeladene Apps"</li></string>
-    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Hierdurch werden alle Daten aus dem "<b>"internen Speicher"</b>" deines Smartphones gelöscht, wie z. B. die Folgenden:\n\n"<li>"Dein Google-Konto"</li>\n<li>"System- und App-Daten sowie entsprechende Einstellungen"</li>\n<li>"Heruntergeladene Apps"</li></string>
-    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"Du bist zurzeit in folgenden Konten angemeldet:\n"</string>
-    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"Auf diesem Gerät sind andere Nutzer vorhanden.\n"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Musik"</li>\n<li>"Fotos"</li>\n<li>"Sonstige Nutzerdaten"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIMs"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Dein Mobilfunkvertrag wird dadurch nicht gekündigt."</string>
-    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"Um auch Musik, Bilder und sonstige Nutzerdaten zu löschen, muss der "<b>"USB-Speicher"</b>" gelöscht werden."</string>
-    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"Um auch Musik, Bilder und sonstige Nutzerdaten zu löschen, muss die "<b>"SD-Karte"</b>" gelöscht werden."</string>
-    <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"USB-Speicher löschen"</string>
-    <string name="erase_external_storage" product="default" msgid="2610056855012660451">"SD-Karte löschen"</string>
-    <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"Alle Daten, z. B. Musik und Fotos, aus dem internen USB-Speicher löschen"</string>
-    <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"Alle Daten, z. B. Musik und Fotos, von der SD-Karte löschen"</string>
-    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"Alle Daten löschen"</string>
-    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"Alle Daten löschen"</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"Alle deine personenbezogenen Daten und heruntergeladenen Apps werden gelöscht. Dieser Vorgang kann nicht rückgängig gemacht werden."</string>
     <string name="main_clear_final_desc_esim" msgid="440406836793824969">"Alle deine personenbezogenen Daten, einschließlich heruntergeladener Apps und SIMs, werden gelöscht. Dieser Vorgang kann nicht rückgängig gemacht werden."</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"Alle Daten löschen?"</string>
@@ -1473,14 +1246,8 @@
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Internet nur über USB, Bluetooth und Ethernet freigeben"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB-Tethering"</string>
-    <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Internetverbindung des Smartphones über USB freigeben"</string>
-    <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"Internetverbindung des Tablets wird über USB freigegeben"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Bluetooth-Tethering"</string>
-    <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"Internetverbindung des Tablets über Bluetooth freigeben"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Internetverbindung des Smartphones über Bluetooth freigeben"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet-Tethering"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Internetverbindung des Smartphones über Ethernet freigeben"</string>
-    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"Internetverbindung des Tablets über Ethernet freigeben"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Mithilfe der Hotspot- und Tethering-Funktion kannst du deine mobile Datenverbindung für andere Geräte freigeben, damit diese eine Internetverbindung erhalten. Apps können ebenfalls einen Hotspot erstellen und so das Teilen von Inhalten mit Geräten in der Nähe ermöglichen."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Mithilfe der Hotspot- und Tethering-Funktion kannst du anderen Geräten erlauben, deine Internetverbindung (WLAN oder mobile Daten) mitzunutzen. Es gibt auch Apps für das Erstellen eines Hotspots, damit Inhalte mit Geräten in der Nähe geteilt werden können."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Hilfe"</string>
@@ -1528,10 +1295,6 @@
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Zeitzonenerkennung anhand des Standorts wird nicht unterstützt"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Änderungen an den Einstellungen für die Zeitzonenerkennung sind nicht erlaubt"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"Der Standort kann verwendet werden, um die Zeitzone festzulegen"</string>
-    <string name="about_settings" product="tablet" msgid="2888705054709289693">"Über das Tablet"</string>
-    <string name="about_settings" product="default" msgid="4038626127378127613">"Über das Telefon"</string>
-    <string name="about_settings" product="device" msgid="9012888717090302815">"Über das Gerät"</string>
-    <string name="about_settings" product="emulator" msgid="2516560858771320366">"Über emuliertes Gerät"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Rechtliche Hinweise, Status und Softwareversion anzeigen"</string>
     <string name="legal_information" msgid="7509900979811934843">"Rechtliche Hinweise"</string>
     <string name="manual" msgid="3651593989906084868">"Handbuch"</string>
@@ -1655,9 +1418,6 @@
     </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"IT-Administrator kontaktieren"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Der IT-Administrator hilft dir beim Zurücksetzen deiner PIN, deines Musters oder Passworts"</string>
-    <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Apps mit unbekannter Herkunft können gefährlich für dein Tablet und deine personenbezogenen Daten sein. Wenn du Apps aus dieser Quelle installierst, erklärst du dich damit einverstanden, dass du die Verantwortung für alle Schäden an deinem Tablet und jegliche Datenverluste trägst, die aus der Verwendung dieser Apps entstehen können."</string>
-    <string name="install_all_warning" product="default" msgid="652516435709047343">"Apps mit unbekannter Herkunft können gefährlich für dein Smartphone und deine personenbezogenen Daten sein. Wenn du Apps aus dieser Quelle installierst, erklärst du dich damit einverstanden, dass du die Verantwortung für alle Schäden an deinem Smartphone und jegliche Datenverluste trägst, die aus der Verwendung dieser Apps entstehen können."</string>
-    <string name="install_all_warning" product="device" msgid="2348262609815354500">"Apps mit unbekannter Herkunft können gefährlich für dein Gerät und deine personenbezogenen Daten sein. Wenn du Apps aus dieser Quelle installierst, erklärst du dich damit einverstanden, dass du die Verantwortung für alle Schäden an deinem Gerät und sämtliche Datenverluste trägst, die aus der Verwendung dieser Apps entstehen können."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Erweiterte Einstellungen"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Weitere Einstellungsoptionen aktivieren"</string>
     <string name="application_info_label" msgid="1015706497694165866">"App-Info"</string>
@@ -1785,8 +1545,6 @@
     <string name="process_service_in_use_description" msgid="4210957264507014878">"Dienst <xliff:g id="COMP_NAME">%1$s</xliff:g> wird verwendet."</string>
     <string name="process_provider_in_use_description" msgid="6730020083976048028">"Anbieter <xliff:g id="COMP_NAME">%1$s</xliff:g> wird verwendet."</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="6201041461740445113">"Systemdienst beenden?"</string>
-    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="2076922609580490122">"Wenn du diesen Dienst beendest, funktionieren möglicherweise einige Funktionen deines Tablets nicht mehr richtig, bis du es aus- und wieder einschaltest."</string>
-    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="2625863973434309085">"Wenn du diesen Dienst beendest, funktionieren möglicherweise einige Funktionen deines Telefons nicht mehr richtig, bis du es aus- und wieder einschaltest."</string>
     <string name="language_input_gesture_title" msgid="3292455685728572960">"Sprachen, Eingabe und Gesten"</string>
     <string name="language_settings" msgid="8700174277543875046">"Sprachen und Eingabe"</string>
     <string name="languages_settings" msgid="5784775502251770671">"Sprachen"</string>
@@ -1855,8 +1613,6 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Für alle Sprachen"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Weitere Sprachen..."</string>
     <string name="testing" msgid="6294172343766732037">"Test"</string>
-    <string name="testing_phone_info" product="tablet" msgid="1910768200608214456">"Tablet-Informationen"</string>
-    <string name="testing_phone_info" product="default" msgid="1150527695827743906">"Telefoninformation"</string>
     <string name="keyboard_settings_summary" msgid="2716339620942356432">"Bildschirmtastatur, Spracheingabe, Tools"</string>
     <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Bildschirmtastatur, physische Tastatur, Spracheingabe, Tools"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Physische Tastatur"</string>
@@ -1933,8 +1689,6 @@
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Einstellungen zurücksetzen"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Einstellungen für Anzeigegröße und Text wurden zurückgesetzt"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Anzeigegröße und Text zurücksetzen?"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Deine Einstellungen für Anzeigegröße und Text werden auf die ursprünglichen Einstellungen des Smartphones zurückgesetzt"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"Deine Einstellungen für Anzeigegröße und Text werden auf die ursprünglichen Einstellungen des Tablets zurückgesetzt"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Zurücksetzen"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Hast du Pläne fürs Wochenende?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Ich will zum Strand. Kommst du mit?"</string>
@@ -2076,8 +1830,6 @@
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Der Einhandmodus wurde zu den Schnelleinstellungen hinzugefügt. Du kannst jederzeit nach unten wischen und die Funktion aktivieren oder deaktivieren."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"Du kannst den Einhandmodus auch vom oberen Rand des Bildschirms in die Schnelleinstellungen aufnehmen"</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Schließen"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"Hier kannst du anpassen, wie Farben auf deinem Smartphone dargestellt werden"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"Hier kannst du anpassen, wie Farben auf deinem Tablet dargestellt werden"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Farbkorrektur aktivieren"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Kurzbefehl für Farbkorrektur"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Über die Farbkorrektur"</string>
@@ -2127,11 +1879,7 @@
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Display extradunkel aktivieren"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Kurzbefehl für Extradunkel"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Über die Funktion „Extradunkel“"</string>
-    <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Das Display dunkler machen als die niedrigste Helligkeit deines Smartphones"</string>
-    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Das Display dunkler machen als die niedrigste Helligkeit deines Tablets"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Hier kannst du dein Display dunkler machen, um beim Lesen die Augen zu schonen"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"Dies kann sinnvoll sein, wenn: &lt;ol&gt; &lt;li&gt; die niedrigste Standardhelligkeit deines Smartphones immer noch zu hell ist&lt;/li&gt; &lt;li&gt; du dein Smartphone in dunklen Umgebungen nutzt, wie z. B. nachts oder in einem dunklen Raum vor dem Schlafengehen&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5158211121482010799">"Dies kann sinnvoll sein, wenn: &lt;ol&gt; &lt;li&gt; die niedrigste Standardhelligkeit in deinem Tablet immer noch zu hell ist&lt;/li&gt; &lt;li&gt; du dein Tablet in dunklen Umgebungen nutzt, wie z. B. nachts oder in einem dunklen Raum vor dem Schlafengehen&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensität"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Dunkler"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Heller"</string>
@@ -2291,9 +2039,6 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Energieverbrauch anpassen"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Enthaltene Pakete"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Apps funktionieren normal"</string>
-    <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"Der Akkuverbrauch im Hintergrund ist normal"</string>
-    <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"Der Akkuverbrauch im Hintergrund des Tablets ist normal"</string>
-    <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"Der Akkuverbrauch im Hintergrund des Geräts ist normal"</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Akkustand niedrig"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Energiesparmodus aktivieren, um Akkulaufzeit zu erhöhen"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Akkulaufzeit optimieren"</string>
@@ -2311,11 +2056,6 @@
     <skip />
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Weitere Informationen zum pausierten Ladevorgang"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Ladevorgang fortsetzen"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Unter bestimmten Umständen, z. B. bei hohen Temperaturen und langen Ladezeiten, kann die Ladung auf <xliff:g id="PERCENT">%1$s</xliff:g> begrenzt werden, um den Akku zu schonen.\n\nSobald sich diese Umstände ändern, wird dein Smartphone wieder normal aufgeladen."</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Unter bestimmten Umständen, z. B. bei hohen Temperaturen und langen Ladezeiten, kann die Ladung auf <xliff:g id="PERCENT">%1$s</xliff:g> begrenzt werden, um den Akku zu schonen.\n\nSobald sich diese Umstände ändern, wird dein Tablet wieder normal aufgeladen."</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Dein Smartphone wurde intensiver als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps mit höchstem Akkuverbrauch:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Dein Tablet wurde intensiver als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps mit höchstem Akkuverbrauch:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Dein Gerät wurde intensiver als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps mit höchstem Akkuverbrauch:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Umfasst Hintergrundaktivitäten mit hohem Stromverbrauch"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="other">%1$d Apps einschränken</item>
@@ -2346,12 +2086,8 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Entfernen"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Abbrechen"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Vollständig aufladen"</string>
-    <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Der Akkuverbrauch durch Apps ist zurzeit normal. Falls der Akku zu stark beansprucht wird, werden dir mögliche Maßnahmen vorgeschlagen.\n\nBei niedrigem Akkustand kannst du jederzeit den Energiesparmodus aktivieren."</string>
-    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Der Akkuverbrauch durch Apps ist zurzeit normal. Falls der Akku zu stark beansprucht wird, werden dir mögliche Maßnahmen vorgeschlagen.\n\nBei niedrigem Akkustand kannst du jederzeit den Energiesparmodus aktivieren."</string>
-    <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Der Akkuverbrauch durch Apps ist zurzeit normal. Falls der Akku zu stark beansprucht wird, werden dir mögliche Maßnahmen vorgeschlagen.\n\nBei niedrigem Akkustand kannst du jederzeit den Energiesparmodus aktivieren."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Akku-Manager"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Apps automatisch verwalten"</string>
-    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Akkunutzung für selten verwendete Apps einschränken"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"Wenn die Funktion \"Akku-Manager\" Apps mit hohem Akkuverbrauch erkennt, hast du die Möglichkeit, diese Apps einzuschränken. Eventuell funktionieren sie dann nicht mehr richtig und Benachrichtigungen werden verzögert angezeigt."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Eingeschränkte Apps"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
@@ -2379,8 +2115,6 @@
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
     <string name="power_cell" msgid="7793805106954398186">"Mobilfunknetz"</string>
     <string name="power_phone" msgid="2768396619208561670">"Anrufe"</string>
-    <string name="power_idle" product="tablet" msgid="4689321599298911021">"Ruhezustand"</string>
-    <string name="power_idle" product="default" msgid="9132502722499465252">"Ruhezustand"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"Verwendungsdauer: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"Displaynutzung: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="PERCENT">%1$s</xliff:g> durch <xliff:g id="APP">%2$s</xliff:g> verbraucht"</string>
@@ -2431,9 +2165,6 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Zeitplan festlegen"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Akkulaufzeit verlängern"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Bei vollem Akku ausschalten"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="3618041244703216293">"Der Energiesparmodus wird deaktiviert, wenn dein Smartphone-Akku zu über <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> geladen ist"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="1733686775743601110">"Der Energiesparmodus wird deaktiviert, wenn dein Tablet-Akku zu über <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> geladen ist"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="7449283917787428755">"Der Energiesparmodus wird deaktiviert, wenn dein Geräteakku zu über <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> geladen ist"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Aktivieren"</string>
@@ -2455,9 +2186,6 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Hintergrund: weniger als eine Minute"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Gesamt: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Hintergrund: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Die Daten zum Akkuverbrauch sind eine Schätzung. Der Verbrauch wird nicht gemessen, während das Smartphone geladen wird."</string>
-    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"Die Daten zur Akkunutzung sind eine Schätzung. Die Nutzung wird nicht gemessen, während das Tablet geladen wird."</string>
-    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"Die Daten zur Akkunutzung sind eine Schätzung. Die Nutzung wird nicht gemessen, während das Gerät geladen wird."</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Sobald das Gerät vollständig geladen ist, sind Daten zur Akkunutzung in einigen Stunden verfügbar"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Diagramm zur Akkunutzung"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Diagramm zur täglichen Akkunutzung"</string>
@@ -2527,8 +2255,6 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Verlängert die Akkulaufzeit und optimiert die Leistung des Geräts durch automatisches Verwalten deiner Netzwerkverbindungen"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Anmeldedatenspeicher"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Ein Zertifikat installieren"</string>
-    <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Zertifikate von Speicher installieren"</string>
-    <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"Zertifikate von SD-Karte installieren"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Anmeldedaten löschen"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"Alle Zertifikate entfernen"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"Vertrauenswürdige Anmeldedaten"</string>
@@ -2654,9 +2380,6 @@
     <string name="remove_account_label" msgid="4169490568375358010">"Konto entfernen"</string>
     <string name="header_add_an_account" msgid="3919151542338822661">"Konto hinzufügen"</string>
     <string name="really_remove_account_title" msgid="253097435885652310">"Konto entfernen?"</string>
-    <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"Durch das Entfernen dieses Kontos werden alle zugehörigen Nachrichten, Kontakte und anderen Daten vom Tablet gelöscht!"</string>
-    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"Durch das Entfernen dieses Kontos werden alle zugehörigen Nachrichten, Kontakte und anderen Daten vom Telefon gelöscht!"</string>
-    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"Durch das Entfernen dieses Kontos werden alle zugehörigen Nachrichten, Kontakte und anderen Daten vom Gerät gelöscht!"</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"Dein Administrator lässt diese Änderung nicht zu"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Manuelle Synchronisierung nicht möglich"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"Die Synchronisierung hierfür ist deaktiviert. Zur Änderung dieser Einstellung aktiviere vorübergehend die Hintergrunddaten und die automatische Synchronisierung."</string>
@@ -2698,8 +2421,6 @@
     <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"Diese Funktion kann dazu führen, dass eine auf Hintergrunddaten basierende App nicht mehr funktioniert, wenn nur Mobilfunknetze verfügbar sind.\n\nGeeignetere Kontrollmechanismen für den Datenverbrauch findest du in den Einstellungen der App."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="8599940395497268584">"Hintergrunddaten können nur eingeschränkt werden, wenn du ein Limit für mobile Daten festgelegt hast."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"Automatische Synchronisierung aktivieren?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="6387714350903085918">"Wenn du im Web Änderungen an deinen Konten vornimmst, werden diese automatisch auf dein Tablet kopiert.\n\nIm Gegenzug werden bei manchen Konten automatisch alle Änderungen, die auf dem Tablet vorgenommen wurden, ins Web kopiert. Dazu gehören auch Google-Konten."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="6457107552266187107">"Wenn du im Web Änderungen an deinen Konten vornimmst, werden diese automatisch auf dein Telefon kopiert.\n\nIm Gegenzug werden bei manchen Konten automatisch alle Änderungen, die auf dem Telefon vorgenommen wurden, ins Web kopiert. Dazu gehören auch Google-Konten."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"Automatische Synchronisierung deaktivieren?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"So reduzierst du den Datenverbrauch und schonst den Akku, musst jedoch jedes einzelne Konto manuell synchronisieren, um neue Informationen abzurufen. Außerdem erhältst du keine Benachrichtigungen, wenn Aktualisierungen erfolgen."</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"Tag für Zurücksetzung des Nutzungszyklus"</string>
@@ -2708,8 +2429,6 @@
     <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"Warnung für Datenverbrauch festlegen"</string>
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"Datenlimit festlegen"</string>
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"Datennutzung begrenzen"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"Mobile Daten werden deaktiviert, sobald das von dir festgelegte Limit erreicht wurde.\n\nDer dabei angesetzte Wert wird von deinem Tablet berechnet und kann von der Messung des genutzten Datenvolumens durch deinen Mobilfunkanbieter abweichen. Daher empfiehlt es sich, ein etwas niedrigeres Limit anzugeben."</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"Mobile Daten werden deaktiviert, sobald das von dir festgelegte Limit erreicht wurde.\n\nDer dabei angesetzte Wert wird von deinem Smartphone berechnet und kann von der Messung des genutzten Datenvolumens durch deinen Mobilfunkanbieter abweichen. Daher empfiehlt es sich, ein etwas niedrigeres Limit anzugeben."</string>
     <string name="data_usage_sweep_warning" msgid="2072854703184614828"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g> "</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"Warnung"</font></string>
     <string name="data_usage_sweep_limit" msgid="6947019190890086284"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"Limit"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="9065885396147675694">"Entfernte Apps"</string>
@@ -2821,9 +2540,6 @@
       <item quantity="one">Zertifikat prüfen</item>
     </plurals>
     <string name="user_settings_title" msgid="6550866465409807877">"Mehrere Nutzer"</string>
-    <string name="user_settings_footer_text" product="device" msgid="7523914344521302179">"Du kannst dein Gerät teilen, indem du neue Nutzer hinzufügst. Jeder Nutzer hat einen privaten Bereich auf deinem Gerät für benutzerdefinierte Startbildschirme, Konten, Apps, Einstellungen usw."</string>
-    <string name="user_settings_footer_text" product="tablet" msgid="3730074318510244552">"Du kannst dein Tablet teilen, indem du neue Nutzer hinzufügst. Jeder Nutzer hat einen privaten Bereich auf deinem Tablet für benutzerdefinierte Startbildschirme, Konten, Apps, Einstellungen usw."</string>
-    <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"Wenn du dein Smartphone mit anderen teilen möchtest, kannst du neue Nutzer hinzufügen. Jeder Nutzer erhält auf deinem Smartphone einen privaten Bereich für eigene Startbildschirme, Konten, Apps, Einstellungen usw."</string>
     <string name="user_list_title" msgid="1387379079186123404">"Nutzer &amp; Profile"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Nutzer oder Profil hinzufügen"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Eingeschränktes Profil"</string>
@@ -2833,8 +2549,6 @@
     <string name="user_admin" msgid="4024553191395768119">"Administrator"</string>
     <string name="user_you" msgid="3070562015202859996">"Ich (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Du kannst keine weiteren Nutzer hinzufügen. Entferne dazu zuerst einen bisherigen Nutzer."</string>
-    <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"Nur der Eigentümer des Tablets kann Nutzer verwalten."</string>
-    <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"Nur der Eigentümer des Telefons kann Nutzer verwalten."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"In eingeschränkten Profilen können keine Konten hinzugefügt werden."</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"<xliff:g id="USER_NAME">%1$s</xliff:g> vom Gerät löschen"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Einstellungen für den Sperrbildschirm"</string>
@@ -2844,8 +2558,6 @@
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Diesen Nutzer löschen?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Dieses Profil entfernen?"</string>
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Arbeitsprofil entfernen?"</string>
-    <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"Dein Profil und deine Daten werden vom Tablet entfernt. Du kannst diese Aktion nicht rückgängig machen."</string>
-    <string name="user_confirm_remove_self_message" product="default" msgid="5991495192044543230">"Dein Profil und deine Daten werden vom Telefon entfernt. Du kannst diese Aktion nicht rückgängig machen."</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"Sämtliche Apps und Daten werden gelöscht."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"Wenn du den Vorgang fortsetzt, werden alle Apps und Daten in diesem Profil gelöscht."</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"Sämtliche Apps und Daten werden gelöscht."</string>
@@ -2910,9 +2622,6 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"Einschränkungen aufheben"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"PIN ändern"</string>
     <string name="help_label" msgid="2896538416436125883">"Hilfe &amp; Feedback"</string>
-    <string name="support_summary" product="default" msgid="6137136608018134563">"Hilfeartikel, Telefon- &amp; Chatsupport"</string>
-    <string name="support_summary" product="tablet" msgid="6681247727996378252">"Hilfeartikel, Tablet- &amp; Chatsupport"</string>
-    <string name="support_summary" product="device" msgid="1690554254039752541">"Hilfeartikel, Geräte- &amp; Chatsupport"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Konto für Inhalte"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Foto-ID"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Extreme Gefahren"</string>
@@ -4097,9 +3806,6 @@
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Bedienung über Schaltflächen"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"bedienung über gesten, gestensteuerung, gestenbedienung, empfindlichkeit bei touch-geste zurück, empfindlichkeit geste zurück, empfindlichkeit zurückgeste, touch-geste zurück, geste zurück, zurückgeste"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navigation, bedienung, startbildschirmtaste, taste in der mitte, home-taste, home button"</string>
-    <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Durch Doppeltippen auf das Display Bildschirm aktivieren"</string>
-    <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Durch Doppeltippen auf das Display Display aktivieren"</string>
-    <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Durch Doppeltippen auf das Display Display aktivieren"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Einhandmodus"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Einhandmodus verwenden"</string>
     <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Kurzbefehl für Einhandmodus"</string>
@@ -4113,16 +3819,7 @@
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Benachrichtigungen anzeigen"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"Benachrichtigungen und Einstellungen werden angezeigt."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Wenn du auf den Bildschirm doppeltippst, werden die Uhrzeit, Benachrichtigungen und andere Informationen angezeigt."</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Beim Hochheben Display aktivieren"</string>
-    <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Tablet hochnehmen, um das Display anzusehen"</string>
-    <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"Gerät hochnehmen, um das Display anzusehen"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"Bildschirm aktivieren"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"Wenn du das Smartphone in die Hand nimmst, werden die Uhrzeit, Benachrichtigungen und andere Informationen angezeigt."</string>
-    <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"Wenn das Tablet in die Hand genommen wird, werden die Uhrzeit, Benachrichtigungen und andere Informationen angezeigt."</string>
-    <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"Wenn du das Gerät in die Hand nimmst, werden die Uhrzeit, Benachrichtigungen und andere Informationen angezeigt."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Durch Tippen auf den Bildschirm Display aktivieren"</string>
-    <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Durch Tippen auf den Bildschirm Display aktivieren"</string>
-    <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Durch Tippen auf den Bildschirm Display aktivieren"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Wenn du auf den Bildschirm tippst, werden die Uhrzeit, Benachrichtigungen und andere Informationen angezeigt."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Notfall-SOS"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Notfall-SOS-Funktion verwenden"</string>
@@ -4136,9 +3833,6 @@
     <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Wenn du eine beliebige Nummer (keine Notrufnummer) eingibst:\n • Dein Gerät muss entsperrt sein, damit du die Notfall-SOS-Funktion nutzen kannst\n • Dein Anruf wird möglicherweise nicht angenommen"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Benachrichtigungen durch Wischen über Fingerabdrucksensor einblenden"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Fingerabdruck­sensor verwenden"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Auf der Rückseite des Smartphones über den Fingerabdrucksensor nach unten wischen, um Benachrichtigungen zu lesen."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"Auf der Rückseite des Tablets über den Fingerabdrucksensor nach unten wischen, um Benachrichtigungen zu lesen."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3888927017311372398">"Auf der Rückseite des Geräts über den Fingerabdrucksensor nach unten wischen, um Benachrichtigungen zu lesen."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"Benachrichtigungen schnell ansehen"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="65713754674288193">"Bootloader ist bereits entsperrt"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="7425519481227423860">"Internetverbindung herstellen oder Mobilfunkanbieter kontaktieren"</string>
@@ -4625,9 +4319,6 @@
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"VoLTE deaktivieren?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Dadurch wird auch deine 5G-Verbindung deaktiviert.\nWährend eines Sprachanrufs kannst du das Internet nicht nutzen und manche Apps funktionieren möglicherweise nicht."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"Wenn du zwei SIMs verwendest, kann dieses Smartphone sich nur mit 4G verbinden. "<annotation id="url">"Weitere Informationen"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Wenn du zwei SIMs verwendest, kann dieses Tablet sich nur mit 4G verbinden. "<annotation id="url">"Weitere Informationen"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Wenn du zwei SIMs verwendest, kann dieses Gerät sich nur mit 4G verbinden. "<annotation id="url">"Weitere Informationen"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Ausführung für Apps im Cache aussetzen"</string>
     <string name="blob_never_expires_text" msgid="7293376386620106623">"Läuft nicht ab."</string>
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"Freigabe läuft niemals ab."</string>
@@ -4662,8 +4353,6 @@
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"Netzwerkeinstellungen"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"netzwerkverbindung, internet, kabellos, drahtlos, daten, wlan, w-lan, mobilfunk, mobil, mobilfunkanbieter, 4g, 3g, 2g, lte"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Internetverbindung zurücksetzen?"</string>
-    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Dadurch wird dein Telefongespräch beendet"</string>
-    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Dadurch wird dein Telefongespräch beendet"</string>
     <string name="resetting_internet_text" msgid="6696779371800051806">"Internetverbindung wird zurückgesetzt…"</string>
     <string name="fix_connectivity" msgid="2781433603228089501">"Konnektivitätsprobleme beheben"</string>
     <string name="networks_available" msgid="3299512933684383474">"Netzwerke verfügbar"</string>

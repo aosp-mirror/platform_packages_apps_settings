@@ -13,7 +13,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"Có"</string>
@@ -59,9 +58,6 @@
     <string name="bluetooth_rename_device" msgid="4219655243836021443">"Đổi tên thiết bị này"</string>
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"Đổi tên"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Ngắt kết nối thiết bị?"</string>
-    <string name="bluetooth_disconnect_all_profiles" product="default" msgid="1934297101665686854">"Điện thoại của bạn sẽ ngắt kết nối khỏi <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_disconnect_all_profiles" product="tablet" msgid="336622948210457991">"Máy tính bảng của bạn sẽ ngắt kết nối khỏi <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Thiết bị của bạn sẽ ngắt kết nối khỏi <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Ghép nối thiết bị mới"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Ghép nối tai phải"</string>
@@ -72,9 +68,6 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Ghép nối tai phải"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Ghép nối tai trái"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Công cụ liên quan"</string>
-    <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Địa chỉ Bluetooth của điện thoại: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Địa chỉ Bluetooth của máy tính bảng: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="device" msgid="2863536947810007600">"Địa chỉ Bluetooth của thiết bị: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"Thiết bị Bluetooth chưa được đặt tên"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"Đang tìm kiếm"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"Ko tìm thấy th.bị Bluetooth lân cận nào."</string>
@@ -88,22 +81,6 @@
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"<xliff:g id="APP_NAME">%1$s</xliff:g> muốn tắt Bluetooth"</string>
     <string name="bluetooth_ask_enablement_no_name" msgid="5091401961637405417">"Một ứng dụng muốn bật Bluetooth"</string>
     <string name="bluetooth_ask_disablement_no_name" msgid="382299750909188822">"Một ứng dụng muốn tắt Bluetooth"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="1273405567801929487">"<xliff:g id="APP_NAME">%1$s</xliff:g> muốn đặt máy tính bảng của bạn ở chế độ hiển thị với các thiết bị Bluetooth khác trong <xliff:g id="TIMEOUT">%2$d</xliff:g> giây."</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="7013223328571883275">"<xliff:g id="APP_NAME">%1$s</xliff:g> muốn đặt điện thoại của bạn ở chế độ hiển thị với các thiết bị Bluetooth khác trong <xliff:g id="TIMEOUT">%2$d</xliff:g> giây."</string>
-    <string name="bluetooth_ask_discovery_no_name" product="tablet" msgid="3266007454914144057">"Một ứng dụng muốn đặt máy tính bảng của bạn ở chế độ hiển thị với các thiết bị Bluetooth khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây."</string>
-    <string name="bluetooth_ask_discovery_no_name" product="default" msgid="7989444746980501116">"Một ứng dụng muốn đặt điện thoại của bạn ở chế độ hiển thị với các thiết bị Bluetooth khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây."</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="6482084870735107773">"<xliff:g id="APP_NAME">%1$s</xliff:g> muốn đặt máy tính bảng của bạn ở chế độ hiển thị với các thiết bị Bluetooth khác. Bạn có thể thay đổi cài đặt này sau trong cài đặt Bluetooth."</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="2352494279465502950">"<xliff:g id="APP_NAME">%1$s</xliff:g> muốn đặt điện thoại của bạn ở chế độ hiển thị với các thiết bị Bluetooth khác. Bạn có thể thay đổi cài đặt này sau trong cài đặt Bluetooth."</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="tablet" msgid="2732992604509910896">"Một ứng dụng muốn đặt máy tính bảng của bạn ở chế độ hiển thị với các thiết bị Bluetooth khác. Bạn có thể thay đổi cài đặt này sau trong cài đặt Bluetooth."</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="default" msgid="356982103612920264">"Một ứng dụng muốn đặt điện thoại của bạn ở chế độ hiển thị với các thiết bị Bluetooth khác. Bạn có thể thay đổi cài đặt này sau trong cài đặt Bluetooth."</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="6103655179509599427">"<xliff:g id="APP_NAME">%1$s</xliff:g> muốn bật Bluetooth và đặt máy tính bảng của bạn ở chế độ hiển thị với các thiết bị khác trong <xliff:g id="TIMEOUT">%2$d</xliff:g> giây."</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="934276632311449337">"<xliff:g id="APP_NAME">%1$s</xliff:g> muốn bật Bluetooth và đặt điện thoại của bạn ở chế độ hiển thị với các thiết bị khác trong <xliff:g id="TIMEOUT">%2$d</xliff:g> giây."</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="tablet" msgid="1284048348024444485">"Một ứng dụng muốn bật Bluetooth và đặt máy tính bảng của bạn ở chế độ hiển thị với các thiết bị khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây."</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="default" msgid="2661614145022629454">"Một ứng dụng muốn bật Bluetooth và đặt điện thoại của bạn ở chế độ hiển thị với các thiết bị khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="8588317955400593623">"<xliff:g id="APP_NAME">%1$s</xliff:g> muốn bật Bluetooth và đặt máy tính bảng của bạn ở chế độ hiển thị với các thiết bị khác. Bạn có thể thay đổi cài đặt này sau trong cài đặt Bluetooth."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="4047444317445386579">"<xliff:g id="APP_NAME">%1$s</xliff:g> muốn bật Bluetooth và đặt điện thoại của bạn ở chế độ hiển thị với các thiết bị khác. Bạn có thể thay đổi cài đặt này sau trong cài đặt Bluetooth."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="tablet" msgid="4922952478824372605">"Một ứng dụng muốn bật Bluetooth và đặt máy tính bảng của bạn ở chế độ hiển thị với các thiết bị khác. Bạn có thể thay đổi cài đặt này sau trong cài đặt Bluetooth."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="default" msgid="1381582950049639439">"Một ứng dụng muốn bật Bluetooth và đặt điện thoại của bạn ở chế độ hiển thị với các thiết bị khác. Bạn có thể thay đổi cài đặt này sau trong cài đặt Bluetooth."</string>
     <string name="bluetooth_turning_on" msgid="3842613808709024730">"Đang bật Bluetooth…"</string>
     <string name="bluetooth_turning_off" msgid="7406309124247701148">"Đang tắt Bluetooth…"</string>
     <string name="bluetooth_connection_permission_request" msgid="8793131019383198861">"Yêu cầu kết nối Bluetooth"</string>
@@ -239,10 +216,6 @@
     <string name="account_settings_title" msgid="9138880127246241885">"Tài khoản"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Bảo mật"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Mã hóa và thông tin xác thực"</string>
-    <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"Đã mã hóa điện thoại"</string>
-    <string name="not_encrypted_summary" product="default" msgid="2251945842585788254">"Điện thoại chưa được mã hoá"</string>
-    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"Thiết bị được mã hóa"</string>
-    <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"Thiết bị chưa được mã hoá"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Màn hình khóa"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Nội dung hiển thị"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Không có sẵn"</string>
@@ -258,17 +231,11 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Thiết lập tính năng Mở khóa bằng khuôn mặt"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Sử dụng khuôn mặt của bạn để xác thực"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Bắt đầu"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"Nếu tính năng Mở khóa bằng khuôn mặt qua dịch vụ hỗ trợ tiếp cận đang tắt, thì một số bước thiết lập có thể hoạt động không đúng cách với TalkBack."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Quay lại"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Tiếp tục thiết lập"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Sử dụng thiết lập hỗ trợ tiếp cận"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Hủy"</string>
@@ -278,53 +245,14 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Mở khóa bằng khuôn mặt của bạn"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Cho phép mở khóa bằng khuôn mặt"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Sử dụng khuôn mặt của bạn để xác thực"</string>
-    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"Sử dụng khuôn mặt của bạn để mở khóa điện thoại, ủy quyền các giao dịch mua hoặc đăng nhập vào các ứng dụng."</string>
-    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"Dùng khuôn mặt để mở khoá máy tính bảng, uỷ quyền các giao dịch mua hoặc đăng nhập vào các ứng dụng."</string>
-    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"Dùng khuôn mặt để mở khoá thiết bị, uỷ quyền các giao dịch mua hoặc đăng nhập vào các ứng dụng."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Cho phép con bạn dùng khuôn mặt để mở khóa điện thoại"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Cho phép con bạn dùng khuôn mặt để mở khóa máy tính bảng"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Cho phép con bạn dùng khuôn mặt để mở khóa thiết bị"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"Sử dụng khuôn mặt của con bạn để mở khóa điện thoại của chúng có thể kém an toàn hơn so với hình mở khóa hoặc mã PIN mạnh."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"Sử dụng khuôn mặt của con bạn để mở khóa máy tính bảng của chúng có thể kém an toàn hơn so với hình mở khóa hoặc mã PIN mạnh."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"Sử dụng khuôn mặt của con bạn để mở khóa thiết bị của chúng có thể kém an toàn hơn so với hình mở khóa hoặc mã PIN mạnh."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Sử dụng khuôn mặt của bạn để mở khóa điện thoại hoặc phê duyệt các giao dịch mua.\n\nLưu ý: Bạn không thể sử dụng khuôn mặt của mình để mở khóa thiết bị này. Để biết thêm thông tin, hãy liên hệ với quản trị viên của tổ chức bạn."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Sử dụng khuôn mặt của bạn để mở khóa điện thoại, ủy quyền các giao dịch mua hoặc đăng nhập vào các ứng dụng"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"Căn giữa khuôn mặt trong hình tròn"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Bỏ qua"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Bạn đã thêm số khuôn mặt tối đa"</string>
@@ -369,12 +297,6 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Thiết lập vân tay"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Cho phép mở khóa bằng vân tay"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Sử dụng vân tay của bạn"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Bạn có thể dùng vân tay để mở khóa máy tính bảng hoặc xác minh danh tính, chẳng hạn như khi đăng nhập vào các ứng dụng hoặc phê duyệt một giao dịch mua hàng."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Bạn có thể dùng vân tay để mở khóa thiết bị hoặc xác minh danh tính, chẳng hạn như khi đăng nhập vào các ứng dụng hoặc phê duyệt một giao dịch mua hàng."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Bạn có thể dùng vân tay để mở khóa điện thoại hoặc xác minh danh tính, chẳng hạn như khi đăng nhập vào các ứng dụng hoặc phê duyệt một giao dịch mua hàng."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"Cho phép con bạn dùng vân tay để mở khóa điện thoại hoặc xác minh danh tính. Con có thể dùng khuôn mặt khi đăng nhập vào các ứng dụng, phê duyệt một giao dịch mua và làm nhiều việc khác nữa."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"Cho phép con bạn dùng vân tay để mở khoá máy tính bảng hoặc xác minh danh tính. Con có thể dùng vân tay khi đăng nhập vào các ứng dụng, phê duyệt một giao dịch mua và làm nhiều việc khác nữa."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"Cho phép con bạn dùng vân tay để mở khoá thiết bị hoặc xác minh danh tính. Con có thể dùng vân tay khi đăng nhập vào các ứng dụng, phê duyệt một giao dịch mua và làm nhiều việc khác nữa."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Bạn nắm quyền kiểm soát"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Bạn và con bạn nắm quyền kiểm soát"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Lưu ý"</string>
@@ -386,36 +308,12 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Bạn chỉ mất một hoặc hai phút để thiết lập vân tay. Nếu bỏ qua bước này, bạn có thể thêm vân tay vào lúc khác trong phần cài đặt."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Khi thấy biểu tượng này, hãy dùng vân tay để xác thực, chẳng hạn như khi bạn đăng nhập vào ứng dụng hoặc phê duyệt một giao dịch mua"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Lưu ý"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"Việc dùng vân tay để mở khóa điện thoại có thể kém an toàn hơn so với dùng một hình mở khóa hoặc mã PIN mạnh"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"Việc dùng vân tay để mở khoá máy tính bảng có thể kém an toàn hơn so với dùng một hình mở khoá hoặc mã PIN mạnh"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"Việc dùng vân tay để mở khoá thiết bị có thể kém an toàn hơn so với dùng một hình mở khoá hoặc mã PIN mạnh"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Cách thức hoạt động"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Tính năng Mở khóa bằng vân tay sẽ tạo một mẫu vân tay duy nhất để xác minh danh tính của bạn. Để tạo mẫu vân tay này trong khi thiết lập, bạn cần chụp ảnh vân tay của mình ở nhiều vị trí."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Tính năng Mở khóa bằng vân tay sẽ tạo một mẫu vân tay duy nhất để xác minh danh tính của con bạn. Để tạo mẫu vân tay này trong khi thiết lập, con bạn cần chụp ảnh vân tay của mình ở nhiều vị trí."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"Khi bạn dùng Pixel Imprint, các hình ảnh sẽ được dùng để cập nhật mẫu vân tay của bạn. Các hình ảnh dùng để tạo mẫu vân tay không bao giờ được lưu trữ. Tuy nhiên, mẫu vân tay sẽ được lưu trữ an toàn trên điện thoại và chỉ lưu trên điện thoại của bạn mà thôi. Toàn bộ quá trình xử lý sẽ diễn ra một cách an toàn trên điện thoại."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"Khi bạn dùng Pixel Imprint, các hình ảnh sẽ được dùng để cập nhật mẫu vân tay của bạn. Các hình ảnh dùng để tạo mẫu vân tay không bao giờ được lưu trữ. Tuy nhiên, mẫu vân tay sẽ được lưu trữ an toàn trên máy tính bảng mà bạn đang sử dụng và chỉ lưu trên máy tính bảng đó. Toàn bộ quá trình xử lý sẽ diễn ra một cách an toàn trên máy tính bảng."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"Khi bạn dùng Pixel Imprint, các hình ảnh sẽ được dùng để cập nhật mẫu vân tay của bạn. Các hình ảnh dùng để tạo mẫu vân tay không bao giờ được lưu trữ. Tuy nhiên, mẫu vân tay sẽ được lưu trữ an toàn trên thiết bị mà bạn đang sử dụng và chỉ lưu trên thiết bị đó. Toàn bộ quá trình xử lý sẽ diễn ra một cách an toàn trên thiết bị."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"Khi con bạn dùng Pixel Imprint, các hình ảnh sẽ được dùng để cập nhật mẫu vân tay của con. Các hình ảnh dùng để tạo mẫu vân tay không bao giờ được lưu trữ. Tuy nhiên, mẫu vân tay sẽ được lưu trữ an toàn trên điện thoại và chỉ lưu trên điện thoại của con bạn mà thôi. Toàn bộ quá trình xử lý sẽ diễn ra một cách an toàn trên điện thoại."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"Khi con bạn dùng Pixel Imprint, các hình ảnh sẽ được dùng để cập nhật mẫu vân tay của con. Các hình ảnh dùng để tạo mẫu vân tay không bao giờ được lưu trữ. Tuy nhiên, mẫu vân tay sẽ được lưu trữ an toàn trên máy tính bảng và chỉ lưu trên máy tính bảng của con bạn mà thôi. Toàn bộ quá trình xử lý sẽ diễn ra một cách an toàn trên máy tính bảng."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"Khi con bạn dùng Pixel Imprint, các hình ảnh sẽ được dùng để cập nhật mẫu vân tay của con. Các hình ảnh dùng để tạo mẫu vân tay không bao giờ được lưu trữ. Tuy nhiên, mẫu vân tay sẽ được lưu trữ an toàn trên thiết bị và chỉ lưu trên thiết bị của con bạn mà thôi. Toàn bộ quá trình xử lý sẽ diễn ra một cách an toàn trên thiết bị."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"Bạn có thể xóa các hình ảnh và mẫu vân tay của mình hoặc tắt tính năng Mở khóa bằng vân tay bất cứ lúc nào trong phần Cài đặt. Các hình ảnh và mẫu vân tay được lưu trữ trên điện thoại cho đến khi bạn xóa đi."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"Bạn có thể xoá các hình ảnh và mẫu vân tay của mình hoặc tắt tính năng Mở khoá bằng vân tay bất cứ lúc nào trong phần Cài đặt. Các hình ảnh và mẫu vân tay được lưu trữ trên máy tính bảng cho đến khi bạn xoá đi."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"Bạn có thể xoá các hình ảnh và mẫu vân tay của mình hoặc tắt tính năng Mở khoá bằng vân tay bất cứ lúc nào trong phần Cài đặt. Các hình ảnh và mẫu vân tay được lưu trữ trên điện thoại cho đến khi bạn xoá đi."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"Bạn và con bạn có thể xóa hình ảnh và mẫu vân tay của con hoặc tắt tính năng Mở khóa bằng vân tay bất cứ lúc nào trong phần Cài đặt. Các hình ảnh và mẫu vân tay sẽ được lưu trữ trên điện thoại này cho đến khi bạn hoặc con bạn xóa đi."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"Bạn và con bạn có thể xoá hình ảnh và mẫu vân tay của con hoặc tắt tính năng Mở khoá bằng vân tay bất cứ lúc nào trong phần Cài đặt. Các hình ảnh và mẫu vân tay được lưu trữ trên máy tính bảng này cho đến khi bị xoá đi."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"Bạn và con bạn có thể xoá hình ảnh và mẫu vân tay của con hoặc tắt tính năng Mở khoá bằng vân tay bất cứ lúc nào trong phần Cài đặt. Các hình ảnh và mẫu vân tay được lưu trữ trên thiết bị này cho đến khi bị xoá đi."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Điện thoại của bạn có thể mở khóa ngay cả khi bạn không định làm vậy, chẳng hạn như khi có người cầm điện thoại đưa lên ngón tay bạn."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Máy tính bảng của bạn có thể mở khóa ngay cả khi bạn không định làm vậy, chẳng hạn như khi có người cầm điện thoại đưa lên ngón tay bạn."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Thiết bị của bạn có thể mở khóa ngay cả khi bạn không định làm vậy, chẳng hạn như khi có người cầm điện thoại đưa lên ngón tay bạn."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"Điện thoại của con bạn có thể mở khóa ngay cả khi con không định làm vậy, chẳng hạn như khi có người cầm điện thoại đưa lên ngón tay của con."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"Máy tính bảng của con bạn có thể mở khoá ngay cả khi con không định làm vậy, chẳng hạn như khi có người cầm máy tính bảng đưa lên ngón tay của con."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"Thiết bị của con bạn có thể mở khoá ngay cả khi con không định làm vậy, chẳng hạn như khi có người cầm điện thoại đưa lên ngón tay của con."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Để đạt kết quả tốt nhất, hãy sử dụng miếng bảo vệ màn hình có chứng nhận Made for Google. Với các miếng bảo vệ màn hình khác, thiết bị có thể không nhận dạng được dấu vân tay của bạn."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Để đạt kết quả tốt nhất, hãy sử dụng miếng bảo vệ màn hình có chứng nhận Made for Google. Với các miếng bảo vệ màn hình khác, thiết bị có thể không nhận dạng được dấu vân tay của con bạn."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Bạn có thể dùng vân tay để mở khóa máy tính bảng hoặc xác minh danh tính, chẳng hạn như khi đăng nhập vào ứng dụng"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Bạn có thể dùng vân tay để mở khóa thiết bị hoặc xác minh danh tính, chẳng hạn như khi đăng nhập vào ứng dụng"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Bạn có thể dùng vân tay để mở khóa điện thoại hoặc xác minh danh tính, chẳng hạn như khi đăng nhập vào ứng dụng"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Mở khóa bằng khuôn mặt và vân tay"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Nhấn để thiết lập"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Đã thêm khuôn mặt và các vân tay"</string>
@@ -427,17 +325,8 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Dùng khuôn mặt"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Dùng vân tay"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Dùng khuôn mặt hoặc vân tay"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"Đưa lại máy tính bảng cho cha mẹ bạn"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"Đưa lại thiết bị cho cha mẹ bạn"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Đưa lại điện thoại cho cha mẹ bạn"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Bạn muốn bỏ qua phương thức khóa màn hình?"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Các tính năng bảo vệ thiết bị sẽ không được bật. Bạn sẽ không thể ngăn người khác sử dụng máy tính bảng này nếu máy tính bảng bị mất, bị đánh cắp hoặc bị đặt lại."</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Các tính năng bảo vệ thiết bị sẽ không được bật. Bạn sẽ không thể ngăn người khác sử dụng thiết bị này nếu thiết bị bị mất, bị đánh cắp hoặc bị đặt lại."</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2412426429887900241">"Các tính năng bảo vệ thiết bị sẽ không được bật. Bạn sẽ không thể ngăn người khác sử dụng điện thoại này nếu điện thoại bị mất, bị đánh cắp hoặc bị đặt lại."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="7119039592587429936">"Các tính năng bảo vệ thiết bị sẽ không được bật. Bạn sẽ không thể ngăn người khác sử dụng máy tính bảng này nếu máy tính bảng bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3365990364131398523">"Các tính năng bảo vệ thiết bị sẽ không được bật. Bạn sẽ không thể ngăn người khác sử dụng thiết bị này nếu thiết bị bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="4908278819257287536">"Các tính năng bảo vệ thiết bị sẽ không được bật. Bạn sẽ không thể ngăn người khác sử dụng điện thoại này nếu điện thoại bị mất hoặc bị đánh cắp."</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"Vẫn bỏ qua"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"Quay lại"</string>
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"Bỏ qua"</string>
@@ -446,9 +335,6 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Chạm vào nút nguồn nhưng không nhấn"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Cách thiết lập vân tay"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Cảm biến nằm ở mặt sau của điện thoại. Hãy dùng ngón tay trỏ của bạn."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"Cảm biến vân tay nằm trên nút nguồn. Đó là nút phẳng bên cạnh nút tăng âm lượng trên cạnh của máy tính bảng.\n\nKhi bạn nhấn nút nguồn, màn hình sẽ tắt."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"Cảm biến vân tay nằm trên nút nguồn. Đó là nút phẳng bên cạnh nút tăng âm lượng trên cạnh của thiết bị.\n\nKhi bạn nhấn nút nguồn, màn hình sẽ tắt."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"Cảm biến vân tay nằm trên nút nguồn. Đó là nút phẳng bên cạnh nút tăng âm lượng trên cạnh của điện thoại.\n\nKhi bạn nhấn nút nguồn, màn hình sẽ tắt."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Cảm biến vân tay ở trên màn hình. Bạn sẽ chụp vân tay của mình trên màn hình tiếp theo."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Bắt đầu"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Di chuyển ngón tay trên màn hình để tìm cảm biến. Chạm và giữ cảm biến vân tay."</string>
@@ -487,9 +373,6 @@
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Đã thêm vân tay"</string>
     <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Giờ đây, bạn có thể dùng vân tay để mở khoá máy tính bảng hoặc xác minh danh tính, chẳng hạn như khi đăng nhập vào ứng dụng hoặc phê duyệt giao dịch mua"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Giờ đây, bạn có thể dùng vân tay để mở khóa máy tính bảng hoặc xác minh danh tính, chẳng hạn như khi bạn đăng nhập vào các ứng dụng"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Giờ đây, bạn có thể dùng vân tay để mở khóa thiết bị hoặc xác minh danh tính, chẳng hạn như khi bạn đăng nhập vào các ứng dụng"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Giờ đây, bạn có thể dùng vân tay để mở khóa điện thoại hoặc xác minh danh tính, chẳng hạn như khi bạn đăng nhập vào các ứng dụng"</string>
     <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
     <skip />
     <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
@@ -501,42 +384,6 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Đặt vân tay ở phần bên của ngón tay lên cảm biến rồi giữ, sau đó chuyển sang phần bên kia"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Bỏ qua thiết lập vân tay?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Bạn đã chọn sử dụng vân tay là cách mở khóa điện thoại của mình. Nếu bỏ qua ngay bây giờ, bạn sẽ cần thiết lập cài đặt này sau. Thiết lập sẽ chỉ mất ít phút."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"Mã PIN giúp bảo vệ máy tính bảng trong trường hợp bị mất hoặc bị đánh cắp"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="4359575348578515037">"Hình mở khóa giúp bảo vệ máy tính bảng trong trường hợp bị mất hoặc bị đánh cắp"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5420451292764062637">"Mật khẩu giúp bảo vệ máy tính bảng trong trường hợp bị mất hoặc bị đánh cắp"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="8841426051550671169">"Mã PIN giúp bảo vệ thiết bị trong trường hợp bị mất hoặc bị đánh cắp"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="6296702954920045923">"Hình mở khóa giúp bảo vệ thiết bị trong trường hợp bị mất hoặc bị đánh cắp"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="9186075211441188900">"Mật khẩu giúp bảo vệ thiết bị trong trường hợp bị mất hoặc bị đánh cắp"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="4301690296689572747">"Mã PIN giúp bảo vệ điện thoại trong trường hợp bị mất hoặc bị đánh cắp"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="7387967847446084260">"Hình mở khóa giúp bảo vệ điện thoại trong trường hợp bị mất hoặc bị đánh cắp"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="6415788841227543063">"Mật khẩu giúp bảo vệ điện thoại trong trường hợp bị mất hoặc bị đánh cắp"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="2350062798056164403">"Bạn cần phải nhập mã PIN để thiết lập tính năng Mở khóa bằng vân tay.\n\nMã PIN giúp bảo vệ máy tính bảng trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="222574071926747300">"Bạn cần phải nhập hình mở khóa để thiết lập tính năng Mở khóa bằng vân tay.\n\nHình mở khóa giúp bảo vệ máy tính bảng trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="7780323831330724644">"Bạn cần phải nhập mật khẩu để thiết lập tính năng Mở khóa bằng vân tay.\n\nMật khẩu giúp bảo vệ máy tính bảng trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="7421096089691939451">"Bạn cần phải nhập mã PIN để thiết lập tính năng Mở khóa bằng vân tay.\n\nMã PIN giúp bảo vệ thiết bị trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6458468083711413617">"Bạn cần phải nhập hình mở khóa để thiết lập tính năng Mở khóa bằng vân tay.\n\nHình mở khóa giúp bảo vệ thiết bị trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="1632249532665518954">"Bạn cần phải nhập mật khẩu để thiết lập tính năng Mở khóa bằng vân tay.\n\nMật khẩu giúp bảo vệ thiết bị trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3101384462491132314">"Bạn cần phải nhập mã PIN để thiết lập tính năng Mở khóa bằng vân tay.\n\nMã PIN giúp bảo vệ điện thoại trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="382422778886929469">"Bạn cần phải nhập hình mở khóa để thiết lập tính năng Mở khóa bằng vân tay.\n\nHình mở khóa giúp bảo vệ điện thoại trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="5515199168425229243">"Bạn cần phải nhập mật khẩu để thiết lập tính năng Mở khóa bằng vân tay.\n\nMật khẩu giúp bảo vệ điện thoại trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="2454239555320628731">"Bạn cần phải nhập mã PIN để thiết lập tính năng Mở khóa bằng khuôn mặt.\n\nMã PIN giúp bảo vệ máy tính bảng trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="4354138725903415816">"Bạn cần phải nhập hình mở khóa để thiết lập tính năng Mở khóa bằng khuôn mặt.\n\nHình mở khóa giúp bảo vệ máy tính bảng trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="719339718267952196">"Bạn cần phải nhập mật khẩu để thiết lập tính năng Mở khóa bằng khuôn mặt.\n\nMật khẩu giúp bảo vệ máy tính bảng trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="3729243407606881750">"Bạn cần phải nhập mã PIN để thiết lập tính năng Mở khóa bằng khuôn mặt.\n\nMã PIN giúp bảo vệ thiết bị trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="6966329744346503807">"Bạn cần phải nhập hình mở khóa để thiết lập tính năng Mở khóa bằng khuôn mặt.\n\nHình mở khóa giúp bảo vệ thiết bị trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3020827854443297996">"Bạn cần phải nhập mật khẩu để thiết lập tính năng Mở khóa bằng khuôn mặt.\n\nMật khẩu giúp bảo vệ thiết bị trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2155678903559865476">"Bạn cần phải nhập mã PIN để thiết lập tính năng Mở khóa bằng khuôn mặt.\n\nMã PIN giúp bảo vệ điện thoại trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="473271568005748452">"Bạn cần phải nhập hình mở khóa để thiết lập tính năng Mở khóa bằng khuôn mặt.\n\nHình mở khóa giúp bảo vệ điện thoại trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="4319934862372116788">"Bạn cần phải nhập mật khẩu để thiết lập tính năng Mở khóa bằng khuôn mặt.\n\nMật khẩu giúp bảo vệ điện thoại trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="647987565338402155">"Bạn cần phải nhập mã PIN để thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay.\n\nMã PIN giúp bảo vệ máy tính bảng trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="5293609077890072841">"Bạn cần phải nhập hình mở khóa để thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay.\n\nHình mở khóa giúp bảo vệ máy tính bảng trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="2660359318928684172">"Bạn cần phải nhập mật khẩu để thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay.\n\nMật khẩu giúp bảo vệ máy tính bảng trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="1278795063897397815">"Bạn cần phải nhập mã PIN để thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay.\n\nMã PIN giúp bảo vệ thiết bị trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="8766169819759371801">"Bạn cần phải nhập hình mở khóa để thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay.\n\nHình mở khóa giúp bảo vệ thiết bị trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="8611216039321306045">"Bạn cần phải nhập mật khẩu để thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay.\n\nMật khẩu giúp bảo vệ thiết bị trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="8796878521409329051">"Bạn cần phải nhập mã PIN để thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay.\n\nMã PIN giúp bảo vệ điện thoại trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="8423700958936341596">"Bạn cần phải nhập hình mở khóa để thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay.\n\nHình mở khóa giúp bảo vệ điện thoại trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="5411689248299854172">"Bạn cần phải nhập mật khẩu để thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay.\n\nMật khẩu giúp bảo vệ điện thoại trong trường hợp bị mất hoặc bị đánh cắp."</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Bỏ qua bước thiết lập mã PIN?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Bỏ qua bước thiết lập mã PIN và khuôn mặt?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Bỏ qua bước thiết lập mã PIN và vân tay?"</string>
@@ -571,40 +418,20 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Bạn đã thêm số vân tay tối đa"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Không thể thêm dấu vân tay khác"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Xoá \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'"</string>
-    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Thao tác này sẽ xoá các hình ảnh và mẫu vân tay liên kết với \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" được lưu trữ trên điện thoại của bạn"</string>
-    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Thao tác này sẽ xoá các hình ảnh và mẫu vân tay liên kết với \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" được lưu trữ trên máy tính bảng của bạn"</string>
-    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Thao tác này sẽ xóa các hình ảnh và mẫu vân tay liên kết với \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" được lưu trữ trên thiết bị của bạn"</string>
-    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Bạn sẽ không thể dùng vân tay để mở khóa điện thoại hoặc xác minh danh tính của mình trong các ứng dụng."</string>
-    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Bạn sẽ không thể dùng vân tay để mở khoá máy tính bảng hoặc xác minh danh tính của mình trong các ứng dụng."</string>
-    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Bạn sẽ không thể dùng vân tay để mở khoá thiết bị hoặc xác minh danh tính của mình trong các ứng dụng."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Bạn sẽ không thể dùng vân tay để mở khóa hồ sơ công việc, ủy quyền mua hàng hay đăng nhập vào các ứng dụng công việc."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Mã hoá"</string>
-    <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Mã hoá máy tính bảng"</string>
-    <string name="encrypt_title" product="default" msgid="7337365190988321100">"Mã hoá điện thoại"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Đã mã hoá"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Đặt khoá màn hình"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Để tăng cường bảo mật, hãy đặt mã PIN, hình mở khoá hoặc mật khẩu cho thiết bị này."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Đặt khoá màn hình"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Bảo mật điện thoại của bạn"</string>
-    <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Đặt phương thức khóa màn hình để bảo vệ máy tính bảng"</string>
-    <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Đặt phương thức khóa màn hình để bảo vệ thiết bị"</string>
-    <string name="suggested_lock_settings_summary" product="default" msgid="2443273582716671033">"Đặt phương thức khóa màn hình để bảo vệ điện thoại"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Thêm vân tay để mở khóa"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Chọn phương thức khóa màn hình"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Chọn phương thức khóa màn hình"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Chọn phương thức khóa màn hình mới"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Chọn một kiểu khóa cho ứng dụng công việc"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Chọn khóa mới cho ứng dụng công việc"</string>
-    <string name="setup_lock_settings_picker_title" product="tablet" msgid="1276283007274778191">"Bảo vệ máy tính bảng của bạn"</string>
-    <string name="setup_lock_settings_picker_title" product="device" msgid="3585905639045649905">"Bảo vệ thiết bị của bạn"</string>
-    <string name="setup_lock_settings_picker_title" product="default" msgid="2758197863515864300">"Bảo vệ điện thoại của bạn"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Để tăng cường bảo mật, hãy đặt phương thức khóa màn hình dự phòng"</string>
-    <string name="setup_lock_settings_picker_message" product="tablet" msgid="4870877800737248926">"Ngăn người khác sử dụng máy tính bảng này mà không có sự cho phép của bạn bằng cách kích hoạt tính năng bảo vệ thiết bị. Chọn khóa màn hình bạn muốn sử dụng."</string>
-    <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Ngăn người khác sử dụng thiết bị này mà không có sự cho phép của bạn bằng cách kích hoạt tính năng bảo vệ thiết bị. Chọn khóa màn hình bạn muốn sử dụng."</string>
-    <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Ngăn người khác sử dụng điện thoại này mà không có sự cho phép của bạn bằng cách kích hoạt tính năng bảo vệ thiết bị. Chọn khóa màn hình bạn muốn sử dụng."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Chọn phương thức khóa màn hình dự phòng"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Quản trị viên CNTT sẽ không thể đặt lại nếu bạn quên phương thức khóa màn hình."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Đặt một khóa công việc riêng"</string>
@@ -644,43 +471,31 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"Xóa tính năng bảo vệ hồ sơ?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"Hình mở khóa giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"Hình mở khóa giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Thao tác xóa hình mở khóa cũng sẽ xóa mẫu vân tay lưu trên thiết bị của bạn. Bạn sẽ không thể dùng vân tay của mình để xác thực trong các ứng dụng."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"Hình mở khóa giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Mẫu khuôn mặt của bạn cũng sẽ bị xóa vĩnh viễn theo cách an toàn. Bạn sẽ không thể dùng khuôn mặt của mình để xác thực trong các ứng dụng."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"Hình mở khóa giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Thao tác xóa hình mở khóa sẽ xóa mẫu vân tay lưu trên thiết bị của bạn. Mẫu khuôn mặt của bạn cũng sẽ bị xóa vĩnh viễn theo cách an toàn. Bạn sẽ không thể dùng khuôn mặt hoặc vân tay của mình để xác thực trong các ứng dụng."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"Mã PIN giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp"</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"Mã PIN giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Thao tác xóa mã PIN cũng sẽ xóa mẫu vân tay lưu trên thiết bị của bạn. Bạn sẽ không thể dùng vân tay của mình để xác thực trong các ứng dụng."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"Mã PIN giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Mẫu khuôn mặt của bạn cũng sẽ bị xóa vĩnh viễn theo cách an toàn. Bạn sẽ không thể dùng khuôn mặt của mình để xác thực trong các ứng dụng."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"Mã PIN giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Thao tác xóa mã PIN sẽ xóa mẫu vân tay lưu trên thiết bị của bạn. Mẫu khuôn mặt của bạn cũng sẽ bị xóa vĩnh viễn theo cách an toàn. Bạn sẽ không thể dùng khuôn mặt hoặc vân tay của mình để xác thực trong các ứng dụng."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"Mật khẩu giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"Mật khẩu giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Thao tác xóa mật khẩu cũng sẽ xóa mẫu vân tay lưu trên thiết bị của bạn. Bạn sẽ không thể dùng vân tay của mình để xác thực trong các ứng dụng."</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"Mật khẩu giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Mẫu khuôn mặt của bạn cũng sẽ bị xóa vĩnh viễn theo cách an toàn. Bạn sẽ không thể dùng khuôn mặt của mình để xác thực trong các ứng dụng."</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"Mật khẩu giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Thao tác xóa mật khẩu sẽ xóa mẫu vân tay lưu trên thiết bị của bạn. Mẫu khuôn mặt của bạn cũng sẽ bị xóa vĩnh viễn theo cách an toàn. Bạn sẽ không thể dùng khuôn mặt hoặc vân tay của mình để xác thực trong các ứng dụng."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"Các tính năng bảo vệ thiết bị sẽ không hoạt động mà không có khóa màn hình của bạn."</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"Các tính năng bảo vệ thiết bị sẽ không hoạt động nếu không có phương thức khóa màn hình.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Thao tác xóa phương thức khóa cũng sẽ xóa mẫu vân tay lưu trên thiết bị của bạn. Bạn sẽ không thể dùng vân tay của mình để xác thực trong các ứng dụng."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"Các tính năng bảo vệ thiết bị sẽ không hoạt động nếu không có phương thức khóa màn hình.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Mẫu khuôn mặt của bạn cũng sẽ bị xóa vĩnh viễn theo cách an toàn. Bạn sẽ không thể dùng khuôn mặt của mình để xác thực trong các ứng dụng."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"Các tính năng bảo vệ thiết bị sẽ không hoạt động nếu không có phương thức khóa màn hình.<xliff:g id="EMPTY_LINE">
-
 </xliff:g>Thao tác xóa phương thức khóa sẽ xóa mẫu vân tay lưu trên thiết bị của bạn. Mẫu khuôn mặt của bạn cũng sẽ bị xóa vĩnh viễn theo cách an toàn. Bạn sẽ không thể dùng khuôn mặt hoặc vân tay của mình để xác thực trong các ứng dụng."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Xóa"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> đề xuất một mã PIN hoặc mật khẩu mạnh. Nếu không, ứng dụng này có thể không hoạt động như mong đợi"</string>
@@ -791,9 +606,6 @@
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Xóa thiết bị"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"Hủy liên kết"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Ngắt kết nối ứng dụng?"</string>
-    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"Điện thoại của bạn sẽ không được ghép nối với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> nữa"</string>
-    <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Máy tính bảng của bạn sẽ không được ghép nối với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> nữa"</string>
-    <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Thiết bị của bạn sẽ không được ghép nối với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> nữa"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Ứng dụng <xliff:g id="APP_NAME">%1$s</xliff:g> sẽ không kết nối với <xliff:g id="DEVICE_NAME">%2$s</xliff:g> nữa"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Xóa thiết bị"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Ngắt kết nối ứng dụng"</string>
@@ -838,7 +650,6 @@
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Hiện tốc độ làm mới trên màn hình hiện tại"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Yêu cầu mở khóa thiết bị để sử dụng NFC"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"Chỉ cho phép sử dụng NFC khi màn hình đang mở khóa"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Sẵn sàng truyền tải nội dung ứng dụng qua NFC"</string>
     <string name="nfc_disabled_summary" msgid="8737797364522502351">"Không sử dụng được vì đã tắt NFC"</string>
@@ -1046,14 +857,10 @@
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> đang hiện hoạt"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"AndroidHotspot"</string>
     <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"Bạn có muốn lưu mạng này không?"</string>
-    <string name="wifi_add_app_single_network_summary" product="default" msgid="6881712878537666626">"<xliff:g id="APPNAME">%1$s</xliff:g> muốn lưu một mạng vào điện thoại của bạn"</string>
-    <string name="wifi_add_app_single_network_summary" product="tablet" msgid="8455616967601552440">"<xliff:g id="APPNAME">%1$s</xliff:g> muốn lưu một mạng vào máy tính bảng của bạn"</string>
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"Đang lưu…"</string>
     <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"Đã lưu"</string>
     <string name="wifi_add_app_network_save_failed_summary" msgid="7223817782309294652">"Không lưu được. Hãy thử lại."</string>
     <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"Bạn có muốn lưu mạng không?"</string>
-    <string name="wifi_add_app_networks_summary" product="default" msgid="2670215712788515167">"<xliff:g id="APPNAME">%1$s</xliff:g> muốn lưu những mạng này vào điện thoại của bạn"</string>
-    <string name="wifi_add_app_networks_summary" product="tablet" msgid="2088967184512169910">"<xliff:g id="APPNAME">%1$s</xliff:g> muốn lưu những mạng này vào máy tính bảng của bạn"</string>
     <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"Đang lưu <xliff:g id="NUMBER">%d</xliff:g> mạng…"</string>
     <string name="wifi_add_app_networks_saved_summary" msgid="1648417628665152905">"Đã lưu mạng"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"Gọi qua Wi-Fi"</string>
@@ -1096,8 +903,6 @@
     <string name="accelerometer_title" msgid="7745991950833748909">"Tự động xoay màn hình"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Đang bật – Dựa trên khuôn mặt"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Phát hiện khuôn mặt"</string>
-    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Tự động điều chỉnh hướng màn hình khi bạn chuyển điện thoại giữa chế độ dọc và chế độ ngang"</string>
-    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Tự động điều chỉnh hướng màn hình khi bạn chuyển máy tính bảng giữa chế độ dọc và chế độ ngang"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Tìm hiểu thêm về chế độ tự động xoay"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Khi bạn chuyển điện thoại giữa chế độ dọc và chế độ ngang"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Độ phân giải màn hình"</string>
@@ -1208,10 +1013,6 @@
     <string name="sim_lock_settings" msgid="4493069398250139205">"Cài đặt cách khóa thẻ SIM"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"Khóa thẻ SIM"</string>
     <string name="sim_pin_toggle" msgid="98754920202404425">"Khóa thẻ SIM"</string>
-    <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"Cần có mã PIN để sử dụng máy tính bảng"</string>
-    <string name="sim_lock_on" product="default" msgid="3303147192981388923">"Cần có mã PIN để sử dụng điện thoại"</string>
-    <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"Cần có mã PIN để sử dụng máy tính bảng"</string>
-    <string name="sim_lock_off" product="default" msgid="4634118006847137785">"Cần có mã PIN để sử dụng điện thoại"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"Thay đổi mã PIN của SIM"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"Mã PIN của SIM"</string>
     <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Khoá thẻ SIM"</string>
@@ -1256,12 +1057,6 @@
     <string name="storage_settings_title" msgid="486118156723194815">"Cài đặt bộ nhớ"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (khe cắm thẻ SIM %1$d)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Để xem, hãy chọn mạng đã lưu"</string>
-    <string name="status_number" product="tablet" msgid="3597945414666253183">"SỐ THƯ MỤC DI ĐỘNG (MDN)"</string>
-    <string name="status_number" product="default" msgid="8407999629121682207">"Số điện thoại"</string>
-    <string name="status_number_sim_slot" product="tablet" msgid="6582203988975619529">"MDN (khe cắm thẻ SIM %1$d)"</string>
-    <string name="status_number_sim_slot" product="default" msgid="5724823197745786398">"Số điện thoại (khe SIM %1$d)"</string>
-    <string name="status_number_sim_status" product="tablet" msgid="4239876366511743428">"MDN trên SIM"</string>
-    <string name="status_number_sim_status" product="default" msgid="2772745542921910086">"Số điện thoại trên SIM"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Phiên bản PRL"</string>
@@ -1321,12 +1116,6 @@
     <string name="storage_wizard_move_progress_title" msgid="3912406225614672391">"Đang di chuyển <xliff:g id="APP">^1</xliff:g>…"</string>
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"Không tháo <xliff:g id="NAME">^1</xliff:g> trong khi di chuyển. \n\nỨng dụng <xliff:g id="APP">^2</xliff:g> trên thiết bị này sẽ không khả dụng cho tới khi hoàn tất di chuyển."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Bạn sẽ sử dụng <xliff:g id="NAME">^1</xliff:g> này như thế nào?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Định dạng thẻ SD cho bộ nhớ trong"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Lưu trữ ứng dụng và nội dung nghe nhìn để chỉ sử dụng trên máy tính bảng này. &lt;a href=https://support.google.com/android/answer/12153449&gt;Tìm hiểu thêm về cách thiết lập thẻ SD&lt;/a&gt;."</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Định dạng"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Định dạng thẻ SD cho bộ nhớ trong"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Lưu trữ ứng dụng và nội dung nghe nhìn để chỉ sử dụng trên điện thoại này. &lt;a href=https://support.google.com/android/answer/12153449&gt;Tìm hiểu thêm về cách thiết lập thẻ SD&lt;/a&gt;."</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Định dạng"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Hoặc"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Định dạng thẻ SD cho bộ nhớ di động"</string>
     <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Lưu trữ ảnh, video, nhạc và nhiều nội dung khác, đồng thời truy cập chúng từ các thiết bị khác. &lt;a href=https://support.google.com/android/answer/12153449&gt;Tìm hiểu thêm về cách thiết lập thẻ SD&lt;/a&gt;."</string>
@@ -1337,13 +1126,9 @@
     <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"<xliff:g id="NAME_0">^1</xliff:g> này cần được định dạng để lưu trữ ảnh, video, nhạc và các nội dung nghe nhìn khác. \n\nĐịnh dạng sẽ xóa nội dung hiện có trên <xliff:g id="NAME_1">^2</xliff:g>. Để tránh mất nội dung, hãy sao lưu nội dung này vào <xliff:g id="NAME_2">^3</xliff:g> hoặc thiết bị khác."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Định dạng <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Di chuyển nội dung sang <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Bạn có thể di chuyển tệp, phương tiện và một số ứng dụng sang <xliff:g id="NAME">^1</xliff:g> này. \n\nViệc di chuyển này sẽ giải phóng <xliff:g id="SIZE">^2</xliff:g> bộ nhớ máy tính bảng và mất khoảng <xliff:g id="DURATION">^3</xliff:g>."</string>
-    <string name="storage_wizard_migrate_v2_body" product="default" msgid="809730501314645325">"Bạn có thể di chuyển tệp, phương tiện và một số ứng dụng sang <xliff:g id="NAME">^1</xliff:g> này. \n\nViệc di chuyển này sẽ giải phóng <xliff:g id="SIZE">^2</xliff:g> bộ nhớ điện thoại và mất khoảng <xliff:g id="DURATION">^3</xliff:g>."</string>
     <string name="storage_wizard_migrate_v2_checklist" msgid="2618258869444553060">"Trong quá trình di chuyển:"</string>
     <string name="storage_wizard_migrate_v2_checklist_media" msgid="5867134681730723744">"Không tháo <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_checklist_apps" msgid="1882077445750580783">"Một số ứng dụng sẽ không hoạt động"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="tablet" msgid="6111770421449869539">"Tiếp tục sạc máy tính bảng này"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="default" msgid="8826915870192535008">"Tiếp tục sạc điện thoại này"</string>
     <string name="storage_wizard_migrate_v2_now" msgid="3341460117088026966">"Di chuyển nội dung"</string>
     <string name="storage_wizard_migrate_v2_later" msgid="6067756122853315642">"Di chuyển nội dung sau"</string>
     <string name="storage_wizard_migrate_progress_v2_title" msgid="8791318509516968103">"Đang di chuyển nội dung…"</string>
@@ -1412,21 +1197,9 @@
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"Không thể xóa SIM đã tải xuống do lỗi.\n\nHãy khởi động lại thiết bị của bạn rồi thử lại."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Xóa mọi dữ liệu (đặt lại về trạng thái ban đầu)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Xóa mọi dữ liệu (đặt lại về trạng thái ban đầu)"</string>
-    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Thao tác này sẽ xóa mọi dữ liệu khỏi "<b>"bộ nhớ trong"</b>" của máy tính bảng, bao gồm:\n\n"<li>"Tài khoản Google của bạn"</li>\n<li>"Dữ liệu cũng như các chế độ cài đặt của hệ thống và ứng dụng"</li>\n<li>"Các ứng dụng đã tải xuống"</li></string>
-    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Thao tác này sẽ xóa mọi dữ liệu khỏi "<b>"bộ nhớ trong"</b>" của điện thoại, bao gồm:\n\n"<li>"Tài khoản Google của bạn"</li>\n<li>"Dữ liệu cũng như các chế độ cài đặt của hệ thống và ứng dụng"</li>\n<li>"Các ứng dụng đã tải xuống"</li></string>
-    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"Bạn hiện đã đăng nhập vào các tài khoản sau đây:\n"</string>
-    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"Có người dùng khác trên thiết bị này.\n"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Nhạc"</li>\n<li>"Ảnh"</li>\n<li>"Dữ liệu khác của người dùng"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Thao tác này sẽ không hủy gói dịch vụ di động của bạn."</string>
-    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"Để xóa nhạc, ảnh và dữ liệu khác của người dùng, thì cần phải xóa "<b>"bộ lưu trữ USB"</b>"."</string>
-    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"Để xóa nhạc, ảnh và dữ liệu khác của người dùng, thì cần phải xóa "<b>"thẻ SD"</b>"."</string>
-    <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"Xóa bộ nhớ USB"</string>
-    <string name="erase_external_storage" product="default" msgid="2610056855012660451">"Xóa thẻ SD"</string>
-    <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"Xóa tất cả dữ liệu trên bộ nhớ trong USB, chẳng hạn như nhạc hoặc ảnh"</string>
-    <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"Xóa tất cả dữ liệu trên thẻ SD, chẳng hạn như nhạc hoặc ảnh"</string>
-    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"Xóa mọi dữ liệu"</string>
-    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"Xóa mọi dữ liệu"</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"Tất cả thông tin cá nhân và ứng dụng đã tải xuống của bạn đều bị xóa. Bạn không thể hủy thao tác này sau khi thực hiện."</string>
     <string name="main_clear_final_desc_esim" msgid="440406836793824969">"Tất cả thông tin cá nhân của bạn, kể cả SIM và ứng dụng đã tải xuống, đều bị xóa. Bạn không thể hủy thao tác này sau khi thực hiện."</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"Xóa mọi dữ liệu?"</string>
@@ -1472,14 +1245,8 @@
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Chỉ chia sẻ kết nối Internet qua USB, Bluetooth và Ethernet"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Chia sẻ Internet qua USB"</string>
-    <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Chia sẻ kết nối Internet của điện thoại qua USB"</string>
-    <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"Chia sẻ kết nối Internet của máy tính bảng qua USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Chia sẻ Internet qua Bluetooth"</string>
-    <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"Chia sẻ kết nối Internet của máy tính bảng qua Bluetooth"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Chia sẻ kết nối Internet của điện thoại qua Bluetooth"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Chia sẻ Internet qua Ethernet"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Chia sẻ kết nối Internet của điện thoại qua Ethernet"</string>
-    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"Chia sẻ kết nối Internet của máy tính bảng qua Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Sử dụng tính năng điểm phát sóng và chia sẻ Internet để cho phép các thiết bị khác kết nối với Internet thông qua dữ liệu di động của bạn. Các ứng dụng cũng có thể tạo điểm phát sóng để chia sẻ nội dung với thiết bị ở gần."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Dùng tính năng điểm phát sóng và chia sẻ Internet để cho phép các thiết bị khác kết nối với Internet thông qua dữ liệu di động hoặc Wi-Fi của bạn. Các ứng dụng cũng có thể tạo điểm phát sóng để chia sẻ nội dung với thiết bị ở gần."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Trợ giúp"</string>
@@ -1527,10 +1294,6 @@
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Tùy chọn Phát hiện múi giờ theo vị trí không được hỗ trợ"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Không được phép thay đổi tùy chọn Phát hiện múi giờ theo vị trí"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"Vị trí có thể dùng để đặt múi giờ"</string>
-    <string name="about_settings" product="tablet" msgid="2888705054709289693">"Giới thiệu về máy tính bảng"</string>
-    <string name="about_settings" product="default" msgid="4038626127378127613">"Giới thiệu về điện thoại"</string>
-    <string name="about_settings" product="device" msgid="9012888717090302815">"Giới thiệu về thiết bị"</string>
-    <string name="about_settings" product="emulator" msgid="2516560858771320366">"Giới thiệu về thiết bị được mô phỏng"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Xem thông tin pháp lý, trạng thái, phiên bản phần mềm"</string>
     <string name="legal_information" msgid="7509900979811934843">"Thông tin pháp lý"</string>
     <string name="manual" msgid="3651593989906084868">"Hướng dẫn sử dụng"</string>
@@ -1654,9 +1417,6 @@
     </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Liên hệ với quản trị viên CNTT của bạn"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Họ có thể giúp bạn đặt lại mã PIN, hình mở khóa hoặc mật khẩu"</string>
-    <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Máy tính bảng và dữ liệu cá nhân của bạn dễ bị các ứng dụng không xác định tấn công hơn. Bằng cách cài đặt ứng dụng từ nguồn này, bạn đồng ý tự chịu trách nhiệm cho mọi hỏng hóc đối với máy tính bảng của mình hoặc mất mát dữ liệu có thể phát sinh do sử dụng những ứng dụng này."</string>
-    <string name="install_all_warning" product="default" msgid="652516435709047343">"Điện thoại và dữ liệu cá nhân của bạn dễ bị các ứng dụng không rõ nguồn tấn công hơn. Bằng cách cài đặt ứng dụng từ nguồn này, bạn đồng ý tự chịu trách nhiệm cho mọi hỏng hóc đối với điện thoại của mình hoặc mất mát dữ liệu có thể phát sinh do sử dụng những ứng dụng này."</string>
-    <string name="install_all_warning" product="device" msgid="2348262609815354500">"Thiết bị và dữ liệu cá nhân của bạn dễ bị các ứng dụng không xác định tấn công hơn. Bằng cách cài đặt ứng dụng từ nguồn này, bạn đồng ý tự chịu trách nhiệm cho mọi hỏng hóc đối với thiết bị hoặc mất mát dữ liệu có thể phát sinh do sử dụng những ứng dụng này."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Cài đặt nâng cao"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Bật thêm tùy chọn cài đặt"</string>
     <string name="application_info_label" msgid="1015706497694165866">"Thông tin ứng dụng"</string>
@@ -1784,8 +1544,6 @@
     <string name="process_service_in_use_description" msgid="4210957264507014878">"Dịch vụ <xliff:g id="COMP_NAME">%1$s</xliff:g> đang được sử dụng."</string>
     <string name="process_provider_in_use_description" msgid="6730020083976048028">"Nhà cung cấp <xliff:g id="COMP_NAME">%1$s</xliff:g> đang được sử dụng."</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="6201041461740445113">"Dừng dịch vụ hệ thống?"</string>
-    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="2076922609580490122">"Nếu bạn dừng dịch vụ này, một số tính năng của máy tính bảng của bạn có thể ngừng hoạt động đúng cho tới khi bạn tắt rồi bật lại máy tính bảng."</string>
-    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="2625863973434309085">"Nếu bạn dừng dịch vụ này, một số tính năng của điện thoại của bạn có thể ngừng hoạt động đúng cho tới khi bạn tắt rồi bật lại điện thoại."</string>
     <string name="language_input_gesture_title" msgid="3292455685728572960">"Ngôn ngữ, phương thức nhập và cử chỉ"</string>
     <string name="language_settings" msgid="8700174277543875046">"Ngôn ngữ và nhập liệu"</string>
     <string name="languages_settings" msgid="5784775502251770671">"Ngôn ngữ"</string>
@@ -1854,8 +1612,6 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Cho tất cả ngôn ngữ"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Ngôn ngữ khác…"</string>
     <string name="testing" msgid="6294172343766732037">"Đang kiểm tra"</string>
-    <string name="testing_phone_info" product="tablet" msgid="1910768200608214456">"Thông tin về máy tính bảng"</string>
-    <string name="testing_phone_info" product="default" msgid="1150527695827743906">"Thông tin điện thoại"</string>
     <string name="keyboard_settings_summary" msgid="2716339620942356432">"Bàn phím ảo, lời nói, công cụ"</string>
     <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Bàn phím ảo, bàn phím vật lý, lời nói, công cụ"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Bàn phím vật lý"</string>
@@ -1932,8 +1688,6 @@
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Đặt lại chế độ cài đặt"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Cài đặt kích thước hiển thị và văn bản đã được đặt lại"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Đặt lại văn bản và kích thước hiển thị?"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Các lựa chọn ưu tiên của bạn về văn bản và kích thước hiển thị sẽ đặt lại về chế độ cài đặt ban đầu của điện thoại"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"Các lựa chọn ưu tiên của bạn về văn bản và kích thước hiển thị sẽ thiết lập máy tính bảng trở lại chế độ cài đặt ban đầu"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Đặt lại"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Cuối tuần này có kế hoạch gì chưa?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Tớ đi biển, cậu có muốn đi cùng không?"</string>
@@ -2075,8 +1829,6 @@
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Chế độ một tay đã được thêm vào phần Cài đặt nhanh. Hãy vuốt xuống để bật hoặc tắt tính năng này bất cứ lúc nào."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"Bạn cũng có thể thêm chế độ một tay vào phần Cài đặt nhanh từ đầu màn hình"</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Đóng"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"Điều chỉnh cách hiển thị màu sắc trên điện thoại"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"Điều chỉnh cách hiển thị màu sắc trên máy tính bảng"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Sử dụng tính năng chỉnh màu"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Phím tắt chỉnh màu"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Giới thiệu về tính năng chỉnh màu"</string>
@@ -2126,11 +1878,7 @@
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Đặt màn hình ở chế độ siêu tối"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Phím tắt siêu tối"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Giới thiệu về tính năng siêu tối"</string>
-    <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Giảm bớt độ sáng của màn hình xuống dưới độ sáng tối thiểu của điện thoại"</string>
-    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Giảm bớt độ sáng của màn hình xuống dưới độ sáng tối thiểu của máy tính bảng"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Giảm độ sáng màn hình để đọc thoải mái hơn"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"Chế độ Siêu tối có thể giúp ích khi: &lt;ol&gt; &lt;li&gt; Màn hình điện thoại vẫn rất sáng khi đặt ở độ sáng tối thiểu mặc định&lt;/li&gt; &lt;li&gt; Bạn dùng điện thoại trong điều kiện thiếu ánh sáng, chẳng hạn như vào ban đêm hoặc trong phòng tối trước khi ngủ&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5158211121482010799">"Chế độ Siêu tối có thể giúp ích khi: &lt;ol&gt; &lt;li&gt; Màn hình máy tính bảng vẫn rất sáng khi đặt ở độ sáng tối thiểu mặc định&lt;/li&gt; &lt;li&gt; Bạn dùng máy tính bảng trong điều kiện thiếu ánh sáng, chẳng hạn như vào ban đêm hoặc trong phòng tối trước khi ngủ&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Cường độ"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Tối hơn"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Sáng hơn"</string>
@@ -2290,9 +2038,6 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Điều chỉnh việc sử dụng nguồn"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Gói bao gồm"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Các ứng dụng đang chạy bình thường"</string>
-    <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"Điện thoại có mức sử dụng pin bình thường trong nền"</string>
-    <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"Máy tính bảng có mức sử dụng pin bình thường trong nền"</string>
-    <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"Thiết bị có mức sử dụng pin bình thường trong nền"</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Mức pin yếu"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Bật Trình tiết kiệm pin để kéo dài thời lượng pin"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Kéo dài thời lượng pin"</string>
@@ -2310,11 +2055,6 @@
     <skip />
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Tìm hiểu thêm về việc quá trình sạc bị tạm dừng"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Tiếp tục sạc"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Trong một số điều kiện, chẳng hạn như nhiệt độ cao và thời gian sạc lâu, mức sạc có thể bị hạn chế ở <xliff:g id="PERCENT">%1$s</xliff:g> để duy trì độ bền của pin.\n\nKhi các điều kiện đó chấm dứt, điện thoại của bạn sẽ tự động sạc như bình thường."</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Trong một số điều kiện, chẳng hạn như nhiệt độ cao và thời gian sạc lâu, mức sạc có thể bị hạn chế ở <xliff:g id="PERCENT">%1$s</xliff:g> để duy trì độ bền của pin.\n\nKhi các điều kiện đó chấm dứt, điện thoại của bạn sẽ tự động sạc như bình thường."</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Do bạn đã dùng điện thoại nhiều hơn mức bình thường, nên pin có thể hết sớm hơn thường lệ.\n\nNhững ứng dụng tiêu hao nhiều pin nhất:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Do bạn đã dùng máy tính bảng nhiều hơn mức bình thường, nên pin có thể hết sớm hơn thường lệ.\n\nNhững ứng dụng tiêu hao nhiều pin nhất:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Do bạn đã dùng thiết bị nhiều hơn mức bình thường, nên pin có thể hết sớm hơn thường lệ.\n\nNhững ứng dụng tiêu hao nhiều pin nhất:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Bao gồm hoạt động công suất cao trong nền"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="other"> Hạn chế %1$d ứng dụng</item>
@@ -2345,12 +2085,8 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Xóa"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Hủy"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Sạc đến khi đầy"</string>
-    <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Các ứng dụng của bạn đang sử dụng lượng pin ở mức bình thường. Nếu các ứng dụng sử dụng quá nhiều pin, thì điện thoại sẽ đề xuất các hành động mà bạn có thể thực hiện.\n\nBạn luôn có thể bật Trình tiết kiệm pin nếu sắp hết pin."</string>
-    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Các ứng dụng của bạn đang sử dụng lượng pin ở mức bình thường. Nếu các ứng dụng sử dụng quá nhiều pin, thì máy tính bảng sẽ đề xuất các hành động mà bạn có thể thực hiện.\n\nBạn luôn có thể bật Trình tiết kiệm pin nếu sắp hết pin."</string>
-    <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Các ứng dụng của bạn đang sử dụng lượng pin ở mức bình thường. Nếu các ứng dụng sử dụng quá nhiều pin, thì thiết bị sẽ đề xuất các hành động mà bạn có thể thực hiện.\n\nBạn luôn có thể bật Trình tiết kiệm pin nếu sắp hết pin."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Trình quản lý pin"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Tự động quản lý ứng dụng"</string>
-    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Hạn chế sử dụng pin cho các ứng dụng ít dùng"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"Khi Trình quản lý pin phát hiện thấy các ứng dụng đang tiêu hao pin, bạn có thể hạn chế những ứng dụng này. Các ứng dụng bị hạn chế có thể không hoạt động bình thường và thông báo có thể bị chậm trễ."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Ứng dụng bị hạn chế"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
@@ -2378,8 +2114,6 @@
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
     <string name="power_cell" msgid="7793805106954398186">"Mạng di động"</string>
     <string name="power_phone" msgid="2768396619208561670">"Cuộc gọi thoại"</string>
-    <string name="power_idle" product="tablet" msgid="4689321599298911021">"Máy tính bảng ở chế độ rảnh"</string>
-    <string name="power_idle" product="default" msgid="9132502722499465252">"Điện thoại ở chế độ rảnh"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"Đã dùng <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"Thời gian sử dụng màn hình <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="PERCENT">%1$s</xliff:g> được sử dụng bởi <xliff:g id="APP">%2$s</xliff:g>"</string>
@@ -2430,9 +2164,6 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Đặt lịch biểu"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Kéo dài thời lượng pin"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Tắt khi sạc đầy"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="3618041244703216293">"Trình tiết kiệm pin sẽ tắt khi điện thoại sạc được hơn <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="1733686775743601110">"Trình tiết kiệm pin sẽ tắt khi máy tính bảng sạc được hơn <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="7449283917787428755">"Trình tiết kiệm pin sẽ tắt khi thiết bị sạc được hơn <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Bật"</string>
@@ -2454,9 +2185,6 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Ở chế độ nền: chưa đến 1 phút"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Tổng: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Ở chế độ nền: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Dữ liệu về mức sử dụng pin chỉ mang tính tương đối và không đo lường mức sử dụng khi điện thoại đang sạc"</string>
-    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"Dữ liệu về mức sử dụng pin chỉ mang tính tương đối và không đo lường mức sử dụng khi máy tính bảng đang sạc"</string>
-    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"Dữ liệu về mức sử dụng pin chỉ mang tính tương đối và không đo lường mức sử dụng khi thiết bị đang sạc"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Bạn sẽ thấy dữ liệu về mức sử dụng pin sau vài giờ từ khi sạc đầy"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Biểu đồ mức sử dụng pin"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Biểu đồ mức sử dụng pin hằng ngày"</string>
@@ -2526,8 +2254,6 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Tự động quản lý các kết nối mạng để tăng thời lượng pin và cải thiện hiệu suất thiết bị"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Vùng lưu trữ thông tin xác thực"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Cài đặt chứng chỉ"</string>
-    <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Cài đặt chứng chỉ từ bộ nhớ"</string>
-    <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"Cài đặt chứng chỉ từ thẻ SD"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Xóa thông tin xác thực"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"Xóa tất cả chứng chỉ"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"Thông tin xác thực tin cậy"</string>
@@ -2653,9 +2379,6 @@
     <string name="remove_account_label" msgid="4169490568375358010">"Xóa tài khoản"</string>
     <string name="header_add_an_account" msgid="3919151542338822661">"Thêm tài khoản"</string>
     <string name="really_remove_account_title" msgid="253097435885652310">"Xóa tài khoản?"</string>
-    <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"Nếu bạn xóa tài khoản này, tất cả thư, danh bạ và dữ liệu khác có liên quan sẽ bị xóa khỏi máy tính bảng!"</string>
-    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"Nếu bạn xóa tài khoản này, tất cả thư, danh bạ và dữ liệu khác có liên quan sẽ bị xóa khỏi điện thoại!"</string>
-    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"Nếu bạn xóa tài khoản này, tất cả thư, danh bạ và dữ liệu khác có liên quan sẽ bị xóa khỏi thiết bị!"</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"Quản trị viên của bạn không cho phép thực hiện thay đổi này"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Không thể đồng bộ hóa theo cách thủ công"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"Đồng bộ hóa cho mục này hiện đã bị vô hiệu hóa. Để thay đổi cài đặt này, hãy tạm thời bật dữ liệu nền và đồng bộ hóa tự động."</string>
@@ -2697,8 +2420,6 @@
     <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"Tính năng này có thể khiến ứng dụng phụ thuộc vào dữ liệu nền ngừng hoạt động chỉ khi có mạng di động.\n\nBạn có thể tìm thấy biện pháp kiểm soát mức sử dụng dữ liệu thích hợp khác trong các cài đặt có trong ứng dụng."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="8599940395497268584">"Chỉ có thể giới hạn dữ liệu nền khi bạn đặt giới hạn dữ liệu di động."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"Bật tính năng tự động đồng bộ hóa dữ liệu?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="6387714350903085918">"Mọi thay đổi bạn thực hiện đối với các tài khoản trên web sẽ được tự động sao chép máy tính bảng.\n\nMột số tài khoản cũng có thể tự động sao chép mọi thay đổi bạn thực hiện trên máy tính bảng lên web. Đây là cách hoạt động của Tài khoản Google."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="6457107552266187107">"Mọi thay đổi bạn thực hiện đối với các tài khoản trên web sẽ được tự động sao chép vào điện thoại.\n\nMột số tài khoản cũng có thể tự động sao chép mọi thay đổi bạn thực hiện trên điện thoại lên web. Đây là cách hoạt động của Tài khoản Google."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"Tắt tính năng tự động đồng bộ hóa dữ liệu?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"Việc này sẽ bảo toàn mức sử dụng dữ liệu và pin, tuy nhiên, bạn sẽ cần phải đồng bộ hóa từng tài khoản theo cách thủ công để thu thập thông tin gần đây. Ngoài ra, bạn sẽ không nhận được thông báo khi có bản cập nhật."</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"Ngày đặt lại chu kỳ sử dụng"</string>
@@ -2707,8 +2428,6 @@
     <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"Đặt cảnh báo mức sử dụng dữ liệu"</string>
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"Đặt hạn mức sử dụng dữ liệu"</string>
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"Giới hạn mức sử dụng dữ liệu"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"Máy tính bảng của bạn sẽ tắt dữ liệu di động khi đạt đến giới hạn bạn đặt.\n\nDo việc sử dụng dữ liệu được máy tính bảng của bạn tính và nhà cung cấp dịch vụ có thể tính mức sử dụng khác nhau nên hãy xem xét việc đặt giới hạn vừa phải."</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"Điện thoại sẽ tắt dữ liệu di động khi đạt đến hạn mức mà bạn đã đặt.\n\nMức sử dụng dữ liệu do điện thoại tính toán, nhà mạng có thể có cách tính khác. Vì vậy, hãy cân nhắc đặt hạn mức dữ liệu ở mức hợp lý."</string>
     <string name="data_usage_sweep_warning" msgid="2072854703184614828"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"cảnh báo"</font></string>
     <string name="data_usage_sweep_limit" msgid="6947019190890086284"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"giới hạn"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="9065885396147675694">"Ứng dụng đã xóa"</string>
@@ -2820,9 +2539,6 @@
       <item quantity="one">Kiểm tra chứng chỉ</item>
     </plurals>
     <string name="user_settings_title" msgid="6550866465409807877">"Nhiều người dùng"</string>
-    <string name="user_settings_footer_text" product="device" msgid="7523914344521302179">"Chia sẻ thiết bị của bạn bằng cách thêm người dùng mới. Mỗi người dùng có một không gian riêng dành cho Màn hình chính tùy chỉnh, tài khoản, ứng dụng, tùy chọn cài đặt, v.v. trên thiết bị."</string>
-    <string name="user_settings_footer_text" product="tablet" msgid="3730074318510244552">"Chia sẻ máy tính bảng của bạn bằng cách thêm người dùng mới. Mỗi người dùng có một không gian riêng dành cho Màn hình chính tùy chỉnh, tài khoản, ứng dụng, tùy chọn cài đặt, v.v. trên máy tính bảng."</string>
-    <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"Chia sẻ điện thoại bằng cách thêm người dùng mới. Mỗi người dùng có một không gian riêng trên điện thoại dành cho các mục như Màn hình chính tùy chỉnh, tài khoản, ứng dụng, các tùy chọn cài đặt, v.v."</string>
     <string name="user_list_title" msgid="1387379079186123404">"Người dùng và tiểu sử"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Thêm người dùng hoặc hồ sơ"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Tiểu sử bị hạn chế"</string>
@@ -2832,8 +2548,6 @@
     <string name="user_admin" msgid="4024553191395768119">"Quản trị viên"</string>
     <string name="user_you" msgid="3070562015202859996">"Bạn (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Bạn không thêm được người dùng nào nữa. Hãy xoá một người dùng để thêm người dùng mới."</string>
-    <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"Chỉ chủ sở hữu máy tính bảng mới có thể quản lý người dùng."</string>
-    <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"Chỉ chủ sở hữu điện thoại mới có thể quản lý người dùng."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Các tiểu sử bị hạn chế không thể thêm tài khoản"</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Xóa <xliff:g id="USER_NAME">%1$s</xliff:g> khỏi thiết bị"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Cài đặt màn hình khóa"</string>
@@ -2843,8 +2557,6 @@
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Xóa người dùng này?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Xóa hồ sơ này?"</string>
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Xóa hồ sơ công việc?"</string>
-    <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"Bạn sẽ mất không gian và dữ liệu của mình trên máy tính bảng này. Bạn không thể hoàn tác tác vụ này."</string>
-    <string name="user_confirm_remove_self_message" product="default" msgid="5991495192044543230">"Bạn sẽ mất không gian và dữ liệu của mình trên điện thoại này. Bạn không thể hoàn tác tác vụ này."</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"Mọi ứng dụng và dữ liệu sẽ bị xóa."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"Tất cả ứng dụng và dữ liệu trong hồ sơ này sẽ bị xóa nếu bạn tiếp tục."</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"Mọi ứng dụng và dữ liệu sẽ bị xóa."</string>
@@ -2909,9 +2621,6 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"Xóa các hạn chế"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Thay đổi PIN"</string>
     <string name="help_label" msgid="2896538416436125883">"Trợ giúp và phản hồi"</string>
-    <string name="support_summary" product="default" msgid="6137136608018134563">"Bài viết trợ giúp, điện thoại và cuộc trò chuyện"</string>
-    <string name="support_summary" product="tablet" msgid="6681247727996378252">"Các bài viết trợ giúp, máy tính bảng &amp; trò chuyện"</string>
-    <string name="support_summary" product="device" msgid="1690554254039752541">"Các bài viết trợ giúp, thiết bị &amp; trò chuyện"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Tài khoản dành cho nội dung"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"ID ảnh"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Mối đe dọa cực kỳ nghiêm trọng"</string>
@@ -4095,9 +3804,6 @@
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Thao tác bằng nút"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"thao tác bằng cử chỉ, độ nhạy với cử chỉ quay lại, cử chỉ quay lại"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"thao tác, nút màn hình chính"</string>
-    <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Nhấn đúp để kiểm tra điện thoại"</string>
-    <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Nhấn đúp để kiểm tra máy tính bảng"</string>
-    <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Nhấn đúp để kiểm tra thiết bị"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Chế độ một tay"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Sử dụng chế độ một tay"</string>
     <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Phím tắt chế độ một tay"</string>
@@ -4111,16 +3817,7 @@
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Hiện thông báo"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"Thông báo và chế độ cài đặt sẽ xuất hiện."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Để xem giờ, thông báo và thông tin khác, hãy nhấn đúp vào màn hình."</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Nhấc để kiểm tra điện thoại"</string>
-    <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Nhấc để kiểm tra máy tính bảng"</string>
-    <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"Nhấc để kiểm tra thiết bị"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"Đánh thức màn hình"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"Để xem giờ, thông báo và thông tin khác, hãy nhấc điện thoại của bạn lên."</string>
-    <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"Để xem giờ, thông báo và thông tin khác, hãy nhấc máy tính bảng của bạn lên."</string>
-    <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"Để xem giờ, thông báo và thông tin khác, hãy nhấc thiết bị của bạn lên."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Nhấn để kiểm tra điện thoại"</string>
-    <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Nhấn để kiểm tra máy tính bảng"</string>
-    <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Nhấn để kiểm tra thiết bị"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Để xem giờ, thông báo và thông tin khác, hãy nhấn vào màn hình."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Khẩn cấp"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Sử dụng tính năng Khẩn cấp"</string>
@@ -4134,9 +3831,6 @@
     <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Nếu bạn nhập một số điện thoại không phải số khẩn cấp:\n • Bạn phải mở khóa thiết bị để dùng tính năng Khẩn cấp\n • Cuộc gọi của bạn có thể sẽ không có người trả lời"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Vuốt cảm biến vân tay để xem thông báo"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Vuốt vân tay"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Để kiểm tra thông báo, hãy vuốt xuống trên cảm biến vân tay ở mặt sau điện thoại."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"Để kiểm tra thông báo, hãy vuốt xuống trên cảm biến vân tay ở mặt sau máy tính bảng."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3888927017311372398">"Để kiểm tra thông báo, hãy vuốt xuống trên cảm biến vân tay ở mặt sau thiết bị."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"Xem nhanh thông báo"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="65713754674288193">"Đã mở khóa trình khởi động"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="7425519481227423860">"Kết nối với Internet hoặc liên hệ với nhà cung cấp dịch vụ"</string>
@@ -4623,9 +4317,6 @@
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Tắt VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Thao tác này cũng sẽ tắt kết nối 5G của bạn.\nTrong khi gọi thoại, bạn không thể sử dụng Internet và một số ứng dụng có thể không hoạt động."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"Khi dùng 2 SIM, điện thoại này chỉ dùng mạng 4G. "<annotation id="url">"Tìm hiểu thêm"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Khi dùng 2 SIM, máy tính bảng này chỉ dùng mạng 4G. "<annotation id="url">"Tìm hiểu thêm"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Khi dùng 2 SIM, thiết bị này chỉ dùng mạng 4G. "<annotation id="url">"Tìm hiểu thêm"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Tạm ngưng thực thi cho các ứng dụng được lưu vào bộ nhớ đệm"</string>
     <string name="blob_never_expires_text" msgid="7293376386620106623">"Vĩnh viễn không hết hạn."</string>
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"Thuê vĩnh viễn."</string>
@@ -4660,8 +4351,6 @@
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"Lựa chọn ưu tiên về mạng"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"kết nối mạng, Internet, không dây, dữ liệu, wifi, wi-fi, wi fi, di động, nhà mạng di động, 4g, 3g, 2g, lte"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Đặt lại Internet của bạn?"</string>
-    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Hành động này sẽ kết thúc cuộc gọi điện thoại của bạn"</string>
-    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Hành động này sẽ kết thúc cuộc gọi điện thoại của bạn"</string>
     <string name="resetting_internet_text" msgid="6696779371800051806">"Đang đặt lại Internet của bạn…"</string>
     <string name="fix_connectivity" msgid="2781433603228089501">"Khắc phục sự cố về kết nối"</string>
     <string name="networks_available" msgid="3299512933684383474">"Có mạng"</string>
