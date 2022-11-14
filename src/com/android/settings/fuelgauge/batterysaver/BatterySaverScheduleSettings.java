@@ -122,24 +122,12 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
     protected List<? extends CandidateInfo> getCandidates() {
         Context context = getContext();
         List<CandidateInfo> candidates = Lists.newArrayList();
-        String routineProviderApp = getContext().getResources()
-                .getString(com.android.internal.R.string.config_batterySaverScheduleProvider);
         candidates.add(new BatterySaverScheduleCandidateInfo(
                 context.getText(R.string.battery_saver_auto_no_schedule),
                 /* summary */ null,
                 BatterySaverScheduleRadioButtonsController.KEY_NO_SCHEDULE,
                 /* enabled */ true));
-        // only add routine option if an app has been specified
-        if (!TextUtils.isEmpty(routineProviderApp)) {
-            candidates.add(new BatterySaverScheduleCandidateInfo(
-                    context.getText(R.string.battery_saver_auto_routine),
-                    context.getText(R.string.battery_saver_auto_routine_summary),
-                    BatterySaverScheduleRadioButtonsController.KEY_ROUTINE,
-                    /* enabled */ true));
-        } else {
-            // Make sure routine is not selected if no provider app is configured
-            BatterySaverUtils.revertScheduleToNoneIfNeeded(context);
-        }
+        BatterySaverUtils.revertScheduleToNoneIfNeeded(context);
         candidates.add(new BatterySaverScheduleCandidateInfo(
                 context.getText(R.string.battery_saver_auto_percentage),
                 /* summary */ null,

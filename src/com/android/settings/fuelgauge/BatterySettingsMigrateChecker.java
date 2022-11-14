@@ -24,6 +24,7 @@ import android.provider.Settings;
 import android.util.Log;
 
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScheduleRadioButtonsController;
+import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
 /** Execute battery settings migration tasks in the device booting stage. */
 public final class BatterySettingsMigrateChecker extends BroadcastReceiver {
@@ -52,5 +53,7 @@ public final class BatterySettingsMigrateChecker extends BroadcastReceiver {
                     BatterySaverScheduleRadioButtonsController.TRIGGER_LEVEL_MIN);
             Log.w(TAG, "Reset invalid scheduled battery level from: " + threshold);
         }
+        // Force removing the 'schedule by routine' state.
+        BatterySaverUtils.revertScheduleToNoneIfNeeded(context);
     }
 }

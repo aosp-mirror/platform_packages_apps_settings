@@ -117,7 +117,9 @@ public class BatterySaverScheduleRadioButtonsController {
         if (mode == PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC || triggerLevel != 0) {
             BatterySaverUtils.suppressAutoBatterySaver(mContext);
         }
-        mSeekBarController.updateSeekBar();
+        if (mSeekBarController != null) {
+            mSeekBarController.updateSeekBar();
+        }
         return true;
     }
 }
