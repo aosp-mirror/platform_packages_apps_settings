@@ -16,7 +16,7 @@
 
 package com.android.settings.users;
 
-import static android.provider.Settings.Secure.TIMEOUT_TO_USER_ZERO;
+import static android.provider.Settings.Secure.TIMEOUT_TO_DOCK_USER;
 
 import android.content.Context;
 import android.os.UserHandle;
@@ -30,20 +30,20 @@ import java.util.Arrays;
 
 /**
  * Controls the preference which launches a settings screen for user to configure whether to
- * automatically switch to the admin user when the device is docked.
+ * automatically switch to the designated Dock User when the device is docked.
  */
-public class TimeoutToUserZeroPreferenceController extends BasePreferenceController {
+public class TimeoutToDockUserPreferenceController extends BasePreferenceController {
     private final String[] mEntries;
     private final String[] mValues;
 
-    public TimeoutToUserZeroPreferenceController(Context context,
+    public TimeoutToDockUserPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
 
         mEntries = mContext.getResources().getStringArray(
-                com.android.settings.R.array.switch_to_user_zero_when_docked_timeout_entries);
+                com.android.settings.R.array.switch_to_dock_user_when_docked_timeout_entries);
         mValues = mContext.getResources().getStringArray(
-                com.android.settings.R.array.switch_to_user_zero_when_docked_timeout_values);
+                com.android.settings.R.array.switch_to_dock_user_when_docked_timeout_values);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class TimeoutToUserZeroPreferenceController extends BasePreferenceControl
     public int getAvailabilityStatus() {
         // Feature not available on device.
         if (!mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_enableTimeoutToUserZeroWhenDocked)) {
+                com.android.internal.R.bool.config_enableTimeoutToDockUserWhenDocked)) {
             return UNSUPPORTED_ON_DEVICE;
         }
 
@@ -68,6 +68,7 @@ public class TimeoutToUserZeroPreferenceController extends BasePreferenceControl
         }
 
         // Is currently user zero. Only non user zero can have this setting.
+        // TODO(b/257333623): Allow the Dock User to be non-SystemUser user in HSUM.
         if (UserHandle.myUserId() == UserHandle.USER_SYSTEM) {
             return DISABLED_FOR_USER;
         }
@@ -78,9 +79,9 @@ public class TimeoutToUserZeroPreferenceController extends BasePreferenceControl
     @Override
     public CharSequence getSummary() {
         final String key = Settings.Secure.getStringForUser(mContext.getContentResolver(),
-                TIMEOUT_TO_USER_ZERO, UserHandle.myUserId());
+                TIMEOUT_TO_DOCK_USER, UserHandle.myUserId());
         final int index = Arrays.asList(mValues).indexOf(key != null ? key :
-                mValues[TimeoutToUserZeroSettings.DEFAULT_TIMEOUT_SETTING_VALUE_INDEX]);
+                mValues[TimeoutToDockUserSettings.DEFAULT_TIMEOUT_SETTING_VALUE_INDEX]);
 
         return mEntries[index];
     }
