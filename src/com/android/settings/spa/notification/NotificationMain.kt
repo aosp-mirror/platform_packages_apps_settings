@@ -22,38 +22,43 @@ import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
+import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
+import com.android.settingslib.spa.framework.common.SpaEnvironmentFactory
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.framework.compose.toState
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
 import com.android.settingslib.spa.widget.ui.SettingsIcon
+import com.android.settingslib.spa.framework.common.createSettingsPage
 
 object NotificationMainPageProvider : SettingsPageProvider {
     override val name = "NotificationMain"
+    private val owner = createSettingsPage()
 
     @Composable
     override fun Page(arguments: Bundle?) {
-        NotificationMain()
+        RegularScaffold(title = getTitle(arguments)) {
+            AppListNotificationsPageProvider.EntryItem()
+        }
     }
 
-    @Composable
-    fun EntryItem() {
-        Preference(object : PreferenceModel {
-            override val title = stringResource(R.string.configure_notification_settings)
-            override val summary = stringResource(R.string.notification_dashboard_summary).toState()
-            override val onClick = navigator(name)
-            override val icon = @Composable {
-                SettingsIcon(imageVector = Icons.Outlined.Notifications)
+    override fun getTitle(arguments: Bundle?): String {
+        return SpaEnvironmentFactory.instance.appContext.getString(R.string.configure_notification_settings)
+    }
+
+    fun buildInjectEntry(): SettingsEntryBuilder {
+        return SettingsEntryBuilder.createInject(owner = owner).setIsAllowSearch(false)
+            .setUiLayoutFn {
+                Preference(object : PreferenceModel {
+                    override val title = stringResource(R.string.configure_notification_settings)
+                    override val summary = stringResource(R.string.notification_dashboard_summary).toState()
+                    override val onClick = navigator(name)
+                    override val icon = @Composable {
+                        SettingsIcon(imageVector = Icons.Outlined.Notifications)
+                    }
+                })
             }
-        })
-    }
-}
-
-@Composable
-private fun NotificationMain() {
-    RegularScaffold(title = stringResource(R.string.configure_notification_settings)) {
-        AppListNotificationsPageProvider.EntryItem()
     }
 }

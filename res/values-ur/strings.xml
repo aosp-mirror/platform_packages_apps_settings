@@ -13,7 +13,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"ہاں"</string>
@@ -59,9 +58,6 @@
     <string name="bluetooth_rename_device" msgid="4219655243836021443">"اس آلہ کا نام تبدیل کریں"</string>
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"نام بدلیں"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"آلہ کو غیر منسلک کریں؟"</string>
-    <string name="bluetooth_disconnect_all_profiles" product="default" msgid="1934297101665686854">"آپ کا فون <xliff:g id="DEVICE_NAME">%1$s</xliff:g> سے غیر منسلک ہوجائے گا۔"</string>
-    <string name="bluetooth_disconnect_all_profiles" product="tablet" msgid="336622948210457991">"آپ کا ٹیبلیٹ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> سے غیر منسلک ہو جائے گا۔"</string>
-    <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"آپ کا آلہ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> سے غیر منسلک ہو جائے گا۔"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"نئے آلہ کا جوڑا بنائیں"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"بلوٹوتھ"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"دائیں کان کا جوڑا بنائیں"</string>
@@ -72,9 +68,6 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"دائیں کان کا جوڑا بنائیں"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"بائیں کان کا جوڑا بنائیں"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"متعلقہ"</string>
-    <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"فون کا بلوٹوتھ پتہ: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"ٹیبلیٹ کا بلوٹوتھ پتہ: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="device" msgid="2863536947810007600">"آلے کا بلوٹوتھ پتہ: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"بلا نام بلوٹوتھ آلہ"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"تلاش کر رہا ہے"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"کوئی قریبی بلوٹوتھ آلات نہیں ملے۔"</string>
@@ -88,22 +81,6 @@
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"<xliff:g id="APP_NAME">%1$s</xliff:g> بلوٹوتھ آف کرنا چاہتا ہے"</string>
     <string name="bluetooth_ask_enablement_no_name" msgid="5091401961637405417">"ایک ایپ بلوٹوتھ آن کرنا چاہتی ہے"</string>
     <string name="bluetooth_ask_disablement_no_name" msgid="382299750909188822">"ایک ایپ بلوٹوتھ آن کرنا چاہتی ہے"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="1273405567801929487">"<xliff:g id="APP_NAME">%1$s</xliff:g> آپ کے ٹیبلیٹ کو <xliff:g id="TIMEOUT">%2$d</xliff:g> سیکنڈ کیلئے دیگر بلوٹوتھ آلات پر مرئی بنانا چاہتی ہے۔"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="7013223328571883275">"<xliff:g id="APP_NAME">%1$s</xliff:g> آپ کے فون کو <xliff:g id="TIMEOUT">%2$d</xliff:g> سیکنڈ کیلئے دیگر بلوٹوتھ آلات پر مرئی بنانا چاہتی ہے۔"</string>
-    <string name="bluetooth_ask_discovery_no_name" product="tablet" msgid="3266007454914144057">"ایک ایپ آپ کے ٹیبلیٹ کو <xliff:g id="TIMEOUT">%1$d</xliff:g> سیکنڈ کیلئے دیگر بلوٹوتھ آلات پر مرئی بنانا چاہتی ہے۔"</string>
-    <string name="bluetooth_ask_discovery_no_name" product="default" msgid="7989444746980501116">"ایک ایپ آپ کے فون کو <xliff:g id="TIMEOUT">%1$d</xliff:g> سیکنڈ کیلئے دیگر بلوٹوتھ آلات پر مرئی بنانا چاہتی ہے۔"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="6482084870735107773">"<xliff:g id="APP_NAME">%1$s</xliff:g> بلوٹوتھ آن کرنا اور آپ کے ٹیبلیٹ کو دیگر آلات پر مرئی بنانا چاہتی ہے۔ آپ اسے بعد میں بلوٹوتھ کی ترتیبات میں تبدیل کر سکتے ہیں۔"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="2352494279465502950">"<xliff:g id="APP_NAME">%1$s</xliff:g> بلوٹوتھ آن کرنا اور آپ کے فون کو دیگر آلات پر مرئی بنانا چاہتی ہے۔ آپ اسے بعد میں بلوٹوتھ کی ترتیبات میں تبدیل کر سکتے ہیں۔"</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="tablet" msgid="2732992604509910896">"ایک ایپ آپ کے ٹیبلٹ کو دیگر بلوٹوتھ آلات پر مرئی بنانا چاہتی ہے۔ آپ اسے بعد میں بلوٹوتھ کی ترتیبات میں تبدیل کر سکتے ہیں۔"</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="default" msgid="356982103612920264">"ایک ایپ آپ کے فون کو دیگر بلوٹوتھ آلات پر مرئی بنانا چاہتی ہے۔ آپ اسے بعد میں بلوٹوتھ کی ترتیبات میں تبدیل کر سکتے ہیں۔"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="6103655179509599427">"<xliff:g id="APP_NAME">%1$s</xliff:g> بلوٹوتھ آن کرنا اور آپ کے ٹیبلیٹ کو <xliff:g id="TIMEOUT">%2$d</xliff:g> سیکنڈ کیلئے دیگر آلات پر مرئی بنانا چاہتی ہے۔"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="934276632311449337">"<xliff:g id="APP_NAME">%1$s</xliff:g> بلوٹوتھ آن کرنا اور آپ کے فون کو <xliff:g id="TIMEOUT">%2$d</xliff:g> سیکنڈ کیلئے دیگر آلات پر مرئی بنانا چاہتی ہے۔"</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="tablet" msgid="1284048348024444485">"ایک ایپ بلوٹوتھ آن کرنا اور <xliff:g id="TIMEOUT">%1$d</xliff:g> سیکنڈ کیلئے آپ کے ٹیبلٹ کو دیگر آلات پر مرئی بنانا چاہتی ہے۔"</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="default" msgid="2661614145022629454">"ایک ایپ بلوٹوتھ آن کرنا اور <xliff:g id="TIMEOUT">%1$d</xliff:g> سیکنڈ کیلئے آپ کے فون کو دیگر آلات پر مرئی بنانا چاہتی ہے۔"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="8588317955400593623">"<xliff:g id="APP_NAME">%1$s</xliff:g> بلوٹوتھ آن کرنا اور آپ کے ٹیبلیٹ کو دیگر آلات پر مرئی بنانا چاہتی ہے۔ آپ اسے بعد میں بلوٹوتھ ترتیبات میں تبدیل کر سکتے ہیں۔"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="4047444317445386579">"<xliff:g id="APP_NAME">%1$s</xliff:g> بلوٹوتھ آن کرنا اور آپ کے فون کو دیگر آلات پر مرئی بنانا چاہتی ہے۔ آپ اسے بعد میں بلوٹوتھ ترتیبات میں تبدیل کر سکتے ہیں۔"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="tablet" msgid="4922952478824372605">"ایک ایپ بلوٹوتھ آن کرنا اور آپ کے ٹیبلٹ کو دیگر آلات پر مرئی بنانا چاہتی ہے۔ آپ اسے بعد میں بلوٹوتھ کی ترتیبات میں تبدیل کر سکتے ہیں۔"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="default" msgid="1381582950049639439">"ایک ایپ بلوٹوتھ آن کرنا اور آپ کے فون کو دیگر آلات پر مرئی بنانا چاہتی ہے۔ آپ اسے بعد میں بلوٹوتھ کی ترتیبات میں تبدیل کر سکتے ہیں۔"</string>
     <string name="bluetooth_turning_on" msgid="3842613808709024730">"بلوٹوتھ آن ہو رہا ہے…"</string>
     <string name="bluetooth_turning_off" msgid="7406309124247701148">"بلوٹوتھ آف ہو رہا ہے…"</string>
     <string name="bluetooth_connection_permission_request" msgid="8793131019383198861">"بلوٹوتھ کنکشن کی درخواست"</string>
@@ -239,10 +216,6 @@
     <string name="account_settings_title" msgid="9138880127246241885">"اکاؤنٹس"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"سیکیورٹی"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"مرموز کاری اور اسناد"</string>
-    <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"فون مرموز کیا گيا"</string>
-    <string name="not_encrypted_summary" product="default" msgid="2251945842585788254">"فون مرموز کردہ نہیں ہے"</string>
-    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"آلہ کی مرموز کاری ہو گئی"</string>
-    <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"آلہ مرموز کردہ نہیں ہے"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"مقفل اسکرین"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"کیا دکھانا ہے"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"دستیاب نہیں ہے"</string>
@@ -258,17 +231,11 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"فیس اَنلاک سیٹ اپ کریں"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"تصدیق کرنے کے لیے اپنا چہرہ استعمال کریں"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"شروع کریں"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"‏ایکسیسبیلٹی فیس اَنلاک آف ہونے پر ممکن ہے کہ سیٹ اپ کے کچھ مراحل TalkBack کے ساتھ صحیح طریقے سے کام نہ کرے۔"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"واپس جائیں"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"سیٹ اپ جاری رکھیں"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"ایکسیسبیلٹی سیٹ اپ استعمال کریں"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"منسوخ کریں"</string>
@@ -278,53 +245,14 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"اپنے چہرے سے غیر مقفل کریں"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"فیس اَنلاک کی اجازت دیں"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"تصدیق کرنے کیلئے اپنا چہرہ استعمال کریں"</string>
-    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"اپنے فون کو غیر مقفل کرنے، خریداریوں کی اجازت دینے یا ایپس میں سائن ان کرنے کیلئے اپنے چہرے کا استعمال کریں۔"</string>
-    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"اپنے ٹیبلیٹ کو غیر مقفل کرنے، خریداریوں کی اجازت دینے یا ایپس میں سائن ان کرنے کیلئے اپنے چہرے کا استعمال کریں۔"</string>
-    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"اپنے آلہ کو غیر مقفل کرنے، خریداریوں کی اجازت دینے یا ایپس میں سائن ان کرنے کیلئے اپنے چہرے کا استعمال کریں۔"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"اپنے بچے کو اس بات کی اجازت دیں کہ وہ اپنا فون غیر مقفل کرنے کے لیے اپنے چہرے کا استعمال کریں"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"اپنے بچے کو اس بات کی اجازت دیں کہ وہ اپنا ٹیبلیٹ غیر مقفل کرنے کے لیے اپنے چہرے کا استعمال کریں"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"اپنے بچے کو اس بات کی اجازت دیں کہ وہ اپنا آلہ غیر مقفل کرنے کے لیے اپنے چہرے کا استعمال کریں"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"‏اپنے بچے کے فون کو غیر مقفل کرنے کے لیے اس کا چہرہ استعمال کرنا ایک مضبوط پیٹرن یا PIN کی بنسبت کم محفوظ ہو سکتا ہے۔"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"‏اپنے بچے کے ٹیبلیٹ کو غیر مقفل کرنے کے لیے اس کا چہرہ استعمال کرنا ایک مضبوط پیٹرن یا PIN کی بنسبت کم محفوظ ہو سکتا ہے۔"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"‏اپنے بچے کے آلے کو غیر مقفل کرنے کے لیے اس کا چہرہ استعمال کرنا ایک مضبوط پیٹرن یا PIN کی بنسبت کم محفوظ ہو سکتا ہے۔"</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"اپنا فون غیرمقفل کرنے یا خریداریاں منظور کرنے کے لیے اپنے چہرے کا استعمال کریں۔\n\nنوٹ: آپ اس آلہ کو غیرمقفل کرنے کے لیے اپنا چہرا استعمال نہیں کر سکتے۔ مزید معلومات کے لیے، اپنی تنظیم کے منتظم سے رابطہ کریں۔"</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"اپنے فون کو غیر مقفل کرنے، خریداریوں کی اجازت دینے یا ایپس میں سائن ان کرنے کیلئے اپنے چہرے کا استعمال کریں"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"حلقے کے مرکز میں اپنا چہرہ رکھیں"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"نظر انداز کریں"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"آپ چہروں کی زیادہ سے زیادہ تعداد شامل کر چکے ہیں"</string>
@@ -369,12 +297,6 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"اپنا فنگر پرنٹ سیٹ اپ کریں"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"فنگر پرنٹ اَن لاک کی اجازت دیں"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"اپنا فنگر پرنٹ استعمال کریں"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"اپنا ٹیبلیٹ غیر مقفل کرنے یا یہ توثیق کرنے کیلئے کہ یہ آپ ہی ہیں، اپنا فنگر پرنٹ استعمال کریں، جیسے ایپس میں سائن ان کرتے یا کسی خریداری کو منظوری دیتے وقت۔"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"اپنا آلہ غیر مقفل کرنے یا یہ توثیق کرنے کیلئے کہ یہ آپ ہی ہیں، اپنا فنگر پرنٹ استعمال کریں، جیسے ایپس میں سائن ان کرتے یا کسی خریداری کو منظوری دیتے وقت کرتے ہیں۔"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"اپنا فون غیر مقفل کرنے یا یہ توثیق کرنے کیلئے کہ یہ آپ ہی ہیں، اپنا فنگر پرنٹ استعمال کریں، جیسے ایپس میں سائن ان کرتے یا کسی خریداری کو منظوری دیتے وقت۔"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"اپنے بچے کو اس کا فون غیر مقفل کرنے یا یہ توثیق کرنے کے لیے کہ یہ وہی بچہ ہے، اسے اپنے فنگر پرنٹ کا استعمال کرنے کی اجازت دیں۔ ایسا اس وقت ہوتا ہے جب وہ ایپس میں سائن ان کرتا ہے اور خریداری وغیرہ کی منظوری دیتا ہے۔"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"اپنے بچے کو اپنا ٹیبلیٹ غیر مقفل کرنے یا یہ توثیق کرنے کے لیے کہ یہ وہی ہے، اپنا فنگر پرنٹ استعمال کرنے کی اجازت دیں۔ ایسا اس وقت ہوتا ہے جب وہ ایپس میں سائن ان کرتا، خریداری کی منظوری دیتا اور مزید بہت کچھ کرتا ہے۔"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"اپنے بچے کو اپنا آلہ غیر مقفل کرنے یا یہ توثیق کرنے کے لیے کہ یہ وہی ہے، اپنا فنگر پرنٹ استعمال کرنے کی اجازت دیں۔ ایسا اس وقت ہوتا ہے جب وہ ایپس میں سائن ان کرتا، خریداری کی منظوری دیتا اور مزید بہت کچھ کرتا ہے۔"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"سب کچھ آپ کے اختیار میں ہے"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"آپ اور آپ کے بچے کا کنٹرول ہے"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"یاد رکھیں"</string>
@@ -386,36 +308,12 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"فنگر پرنٹ سیٹ اپ میں صرف ایک یا دو منٹ لگتے ہیں۔ اگر آپ اسے نظر انداز کرتے ہیں، تو آپ بعد میں ترتیبات میں اپنی فنگر پرنٹ شامل کرسکتے ہیں۔"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"یہ آئیکن دیکھنے پر ایپس میں سائن ان کرنے یا خریداری کو منظوری دینے کی خاطر تصدیق کیلئے فنگر پرنٹ کا استعمال کریں"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"یاد رکھیں"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"‏اپنے فون کو غیر مقفل کرنے کے لیے اپنے فنگر پرنٹ کا استعمال کرنا ایک مضبوط پیٹرن یا PIN سے کم محفوظ ہو سکتا ہے"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"‏اپنے ٹیبلیٹ کو غیر مقفل کرنے کے لیے اپنے فنگر پرنٹ کا استعمال کرنا ایک مضبوط پیٹرن یا PIN سے کم محفوظ ہو سکتا ہے"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"‏اپنے آلہ کو غیر مقفل کرنے کے لیے اپنے فنگر پرنٹ کا استعمال کرنا ایک مضبوط پیٹرن یا PIN سے کم محفوظ ہو سکتا ہے"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"اس کے کام کرنے کا طریقہ"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"فنگر پرنٹ اَن لاک کی خصوصیت آپ کے فنگر پرنٹ کا ایک منفرد ماڈل تخلیق کرتی ہے تاکہ یہ توثیق کی جا سکے کہ یہ آپ ہی ہیں۔ سیٹ اپ کے دوران اس فنگر پرنٹ کا ماڈل تخلیق کرنے کے لیے آپ اپنے فنگر پرنٹ کی تصاویر مختلف پوزیشنز سے لیں گے۔"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"فنگر پرنٹ اَن لاک کی خصوصیت آپ کے بچے کے فنگر پرنٹ کا ایک منفرد ماڈل تخلیق کرتی ہے تاکہ یہ توثیق کی جا سکے کہ یہ وہی بچہ ہے۔ سیٹ اپ کے دوران اس فنگر پرنٹ کا ماڈل تخلیق کرنے کے لیے وہ اپنے فنگر پرنٹ کی تصاویر مختلف پوزیشنز سے لے گا۔"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"‏جب آپ Pixel Imprint کا استعمال کرتے ہیں تو تصاویر آپ کے فنگر پرنٹ ماڈل کو اپ ڈیٹ کرنے کے لیے استعمال کی جاتی ہیں۔ آپ کے فنگر پرنٹ کا ماڈل تخلیق کرنے کے لیے استعمال کی جانے والی تصاویر کو کبھی بھی اسٹور نہیں کیا جاتا ہے لیکن فنگر پرنٹ ماڈل آپ کے فون پر محفوظ طریقے سے اسٹور کیا جاتا ہے اور یہ کبھی بھی فون سے باہر نہیں جاتا ہے۔ آپ کے فون پر سبھی کارروائیاں محفوظ طریقے سے ہوتی ہیں۔"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"‏جب آپ Pixel Imprint کا استعمال کرتے ہیں تو تصاویر آپ کے فنگر پرنٹ ماڈل کو اپ ڈیٹ کرنے کے لیے استعمال کی جاتی ہیں۔ آپ کے فنگر پرنٹ کا ماڈل تخلیق کرنے کے لیے استعمال کی جانے والی تصاویر کو کبھی بھی اسٹور نہیں کیا جاتا ہے لیکن فنگر پرنٹ ماڈل آپ کے ٹیبلیٹ پر محفوظ طریقے سے اسٹور کیا جاتا ہے اور یہ کبھی بھی ٹیبلیٹ سے باہر نہیں جاتا ہے۔ آپ کے ٹیبلیٹ پر سبھی کاروائیاں محفوظ طریقے سے ہوتی ہیں۔"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"‏جب آپ Pixel Imprint کا استعمال کرتے ہیں تو تصاویر آپ کے فنگر پرنٹ ماڈل کو اپ ڈیٹ کرنے کے لیے استعمال کی جاتی ہیں۔ آپ کے فنگر پرنٹ کا ماڈل تخلیق کرنے کے لیے استعمال کی جانے والی تصاویر کو کبھی بھی اسٹور نہیں کیا جاتا ہے لیکن فنگر پرنٹ ماڈل آپ کے آلہ پر محفوظ طریقے سے اسٹور کیا جاتا ہے اور یہ کبھی بھی آلہ سے باہر نہیں جاتا ہے۔ آپ کے آلہ پر سبھی کاروائیاں محفوظ طریقے سے ہوتی ہیں۔"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"‏جب وہ Pixel Imprint کا استعمال کرتا ہے تو تصاویر اس کے فنگر پرنٹ ماڈل کو اپ ڈیٹ کرنے کے لیے استعمال کی جاتی ہیں۔ آپ کے بچے کے فنگر پرنٹ کا ماڈل تخلیق کرنے کے لیے استعمال کی جانے والی تصاویر کو کبھی بھی اسٹور نہیں کیا جاتا ہے لیکن فنگر پرنٹ ماڈل کو فون پر محفوظ طریقے سے اسٹور کیا جاتا ہے اور یہ کبھی بھی فون سے باہر نہیں جاتا ہے۔ فون پر سبھی کارروائیاں محفوظ طریقے سے ہوتی ہیں۔"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"‏جب وہ Pixel Imprint کا استعمال کرتا ہے تو تصاویر اس کے فنگر پرنٹ ماڈل کو اپ ڈیٹ کرنے کے لیے استعمال کی جاتی ہیں۔ آپ کے بچے کے فنگر پرنٹ کا ماڈل تخلیق کرنے کے لیے استعمال کی جانے والی تصاویر کو کبھی بھی اسٹور نہیں کیا جاتا ہے لیکن فنگر پرنٹ ماڈل کو ٹیبلیٹ پر محفوظ طریقے سے اسٹور کیا جاتا ہے اور یہ کبھی بھی ٹیبلیٹ سے باہر نہیں جاتا ہے۔ ٹیبلیٹ پر سبھی کاروائیاں محفوظ طریقے سے ہوتی ہیں۔"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"‏جب وہ Pixel Imprint کا استعمال کرتا ہے تو تصاویر اس کے فنگر پرنٹ ماڈل کو اپ ڈیٹ کرنے کے لیے استعمال کی جاتی ہیں۔ آپ کے بچے کے فنگر پرنٹ کا ماڈل تخلیق کرنے کے لیے استعمال کی جانے والی تصاویر کو کبھی بھی اسٹور نہیں کیا جاتا ہے لیکن فنگر پرنٹ ماڈل کو آلہ پر محفوظ طریقے سے اسٹور کیا جاتا ہے اور یہ کبھی بھی آلہ سے باہر نہیں جاتا ہے۔ آلہ پر سبھی کارروائیاں محفوظ طریقے سے ہوتی ہیں۔"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"آپ اپنے فنگر پرنٹ کی تصاویر اور ماڈل کو حذف کر سکتے ہیں یا ترتیبات میں کسی بھی وقت فنگر پرنٹ اَن لاک کی خصوصیت کو آف کر سکتے ہیں۔ فون پر فنگر پرنٹ کی تصاویر اور ماڈلز تب تک اسٹور ہوتے ہیں جب تک آپ انہیں حذف نہیں کرتے ہیں۔"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"آپ اپنے فنگر پرنٹ کی تصاویر اور ماڈل کو حذف کر سکتے ہیں یا ترتیبات میں کسی بھی وقت فنگر پرنٹ اَن لاک کی خصوصیت کو آف کر سکتے ہیں۔ ٹیبلیٹ پر فنگر پرنٹ کی تصاویر اور ماڈلز تب تک اسٹور ہوتے ہیں جب تک آپ انہیں حذف نہیں کرتے ہیں۔"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"آپ اپنے فنگر پرنٹ کی تصاویر اور ماڈل کو حذف کر سکتے ہیں یا ترتیبات میں کسی بھی وقت فنگر پرنٹ اَن لاک کی خصوصیت کو آف کر سکتے ہیں۔ آلہ پر فنگر پرنٹ کی تصاویر اور ماڈلز تب تک اسٹور ہوتے ہیں جب تک آپ انہیں حذف نہیں کرتے ہیں۔"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"آپ اور آپ کا بچہ اپنے فنگر پرنٹ کی تصاویر اور ماڈل کو حذف کر سکتے ہیں یا ترتیبات میں کسی بھی وقت فنگر پرنٹ اَن لاک کو آف کر سکتے ہیں۔ فون پر فنگر پرنٹ کی تصاویر اور ماڈلز تب تک اسٹور ہوتے ہیں جب تک انہیں حذف نہیں کیا جاتا ہے۔"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"آپ اور آپ کا بچہ اپنے فنگر پرنٹ کی تصاویر اور ماڈل کو حذف کر سکتے ہیں یا ترتیبات میں کسی بھی وقت فنگر پرنٹ اَن لاک کو آف کر سکتے ہیں۔ ٹیبلیٹ پر فنگر پرنٹ کی تصاویر اور ماڈلز تب تک اسٹور ہوتے ہیں جب تک انہیں حذف نہیں کیا جاتا ہے۔"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"آپ اور آپ کا بچہ اپنے فنگر پرنٹ کی تصاویر اور ماڈل کو حذف کر سکتے ہیں یا ترتیبات میں کسی بھی وقت فنگر پرنٹ اَن لاک کو آف کر سکتے ہیں۔ آلہ پر فنگر پرنٹ کی تصاویر اور ماڈلز تب تک اسٹور ہوتے ہیں جب تک انہیں حذف نہیں کیا جاتا ہے۔"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"جب آپ کا ارادہ نہ بھی ہو تب بھی آپ کا فون غیر مقفل ہو سکتا ہے مثال کے طور پر کوئی اور شخص فون کو آپ کی انگلی پر رکھ دے۔"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"جب آپ کا ارادہ نہ بھی ہو تب بھی آپ کا ٹیبلیٹ غیر مقفل ہو سکتا ہے مثال کے طور پر کوئی اور شخص ٹیبلیٹ کو آپ کی انگلی پر رکھ دے۔"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"جب آپ کا ارادہ نہ بھی ہو تب بھی آپ کا آلہ غیر مقفل ہو سکتا ہے مثال کے طور پر کوئی اور شخص آلے کو آپ کی انگلی پر رکھ دے۔"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"جب آپ کے بچے کا ارادہ نہ ہو تب بھی اس کا فون غیر مقفل ہو سکتا ہے جیسے کوئی اور شخص فون کو اس کی انگلی پر رکھ دے۔"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"جب آپ کے بچے کا ارادہ نہ ہو تب بھی اس کا ٹیبلیٹ غیر مقفل ہو سکتا ہے جیسے کوئی اور شخص فون کو اس کی انگلی پر رکھ دے۔"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"جب آپ کے بچے کا ارادہ نہ ہو تب بھی اس کا آلہ غیر مقفل ہو سکتا ہے جیسے کوئی اور شخص فون کو اس کی انگلی پر رکھ دے۔"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"‏بہترین نتائج کے لیے، ایک ایسے اسکرین پروٹیکٹر کا استعمال کریں جو Google کے لیے تیار کردہ سے سند یافتہ ہو۔ ممکن ہے کہ دوسرے اسکرین پروٹیکٹرز کے ساتھ آپ کا فنگر پرنٹ کام نہ کرے۔"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"‏بہترین نتائج کے لیے، ایک ایسے اسکرین پروٹیکٹر کا استعمال کریں جو Google کے لیے تیار کردہ سے سند یافتہ ہو۔ ممکن ہے کہ دوسرے اسکرین پروٹیکٹرز کے ساتھ آپ کے بچے کا فنگر پرنٹ کام نہ کرے۔"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"اپنا ٹیبلیٹ غیر مقفل کرنے یا یہ توثیق کرنے کیلئے کہ یہ آپ ہی ہیں، اپنا فنگر پرنٹ استعمال کریں، جیسے ایپس میں سائن ان کرتے وقت"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"اپنا آلہ غیر مقفل کرنے یا یہ توثیق کرنے کیلئے کہ یہ آپ ہی ہیں، اپنا فنگر پرنٹ استعمال کریں، جیسے ایپس میں سائن ان کرتے وقت"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"اپنا فون غیر مقفل کرنے یا یہ توثیق کرنے کیلئے کہ یہ آپ ہی ہیں، اپنا فنگر پرنٹ استعمال کریں، جیسے ایپس میں سائن ان کرتے وقت"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"فیس اور فنگر پرنٹ اَن لاک"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"سیٹ اپ کرنے کے لیے تھپتھپائیں"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"چہرے اور فنگر پرنٹس کو شامل کیا گیا"</string>
@@ -427,17 +325,8 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"چہرہ استعمال کر کے"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"فنگر پرنٹ استعمال کر کے"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"چہرہ یا فنگر پرنٹ کا استعمال کر کے"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"ٹیبلیٹ کو واپس اپنے والد/والدہ کے حوالے کر دیں"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"آلہ کو واپس اپنے والد/والدہ کے حوالے کر دیں"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"فون کو واپس اپنے والدین کے حوالے کر دیں"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"ٹھیک ہے"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"اسکرین لاک کو نظر انداز کریں؟"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"آلہ کے تحفظ کی خصوصیات آن نہیں ہوں گی۔ اس کے ضائع، چوری یا دوبارہ ترتیب دئے جانے پر آپ دوسروں کو اس ٹیبلیٹ کے استعمال سے نہیں روک پائیں گے۔"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"آلہ کے تحفظ کی خصوصیات آن نہیں ہوں گی۔ اس کے ضائع، چوری یا دوبارہ ترتیب دئے جانے پر آپ دوسروں کو اس آلہ کے استعمال سے نہیں روک پائیں گے۔"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2412426429887900241">"آلہ کے تحفظ کی خصوصیات آن نہیں ہوں گی۔ اس کے ضائع، چوری یا دوبارہ ترتیب دئے جانے پر آپ دوسروں کو اس فون کے استعمال سے نہیں روک پائیں گے۔"</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="7119039592587429936">"آلہ کے تحفظ کی خصوصیات آن نہیں ہوں گی۔ اس کے ضائع یا چوری ہوجانے پر آپ دوسروں کو اس ٹیبلیٹ کے استعمال سے نہیں روک پائیں گے۔"</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3365990364131398523">"آلہ کے تحفظ کی خصوصیات آن نہیں ہوں گی۔ اس کے ضائع یا چوری ہو جانے پر آپ دوسروں کو اس آلہ کے استعمال سے نہیں روک پائیں گے۔"</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="4908278819257287536">"آلہ کے تحفظ کی خصوصیات آن نہیں ہوں گی۔ اس کے ضائع یا چوری ہوجانے پر آپ دوسروں کو اس فون کے استعمال سے نہیں روک پائیں گے۔"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"بہرحال نظر انداز کریں"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"پیچھے جائیں"</string>
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"نظر انداز کریں"</string>
@@ -446,9 +335,6 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"پاور بٹن کو دبائے بغیر اسے ٹچ کریں"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"اپنے فنگر پرنٹ کو کیسے سیٹ اپ کریں"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"یہ آپ کے فون کے پشت پر ہے۔ اپنی انڈیکس فنگر کا استعمال کریں۔"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"فنگر پرنٹ سینسر پاور بٹن پر موجود ہے۔ یہ ٹیبلیٹ کے کنارے پر ابھرے ہوئے والیوم بٹن کے آگے والا ہموار بٹن ہے۔\n\nپاور بٹن دبانے سے اسکرین آف ہو جاتی ہے۔"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"فنگر پرنٹ سینسر پاور بٹن پر موجود ہے۔ یہ آلے کے کنارے پر ابھرے ہوئے والیوم بٹن کے آگے والا ہموار بٹن ہے۔\n\nپاور بٹن دبانے سے اسکرین آف ہو جاتی ہے۔"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"فنگر پرنٹ سینسر پاور بٹن پر موجود ہے۔ یہ فون کے کنارے پر ابھرے ہوئے والیوم بٹن کے آگے والا ہموار بٹن ہے۔\n\nپاور بٹن دبانے سے اسکرین آف ہو جاتی ہے۔"</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"فنگر پرنٹ سینسر آپ کی اسکرین پر ہے۔ آپ اگلی اسکرین پر اپنے فنگر پرنٹ کو کیپچر کریں گے۔"</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"شروع کریں"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"سینسر کو تلاش کرنے کے لئے اپنی انگلی کو اسکرین پر گھمائیں۔ فنگر پرنٹ سینسر کو ٹچ کریں اور دبائے رکھیں۔"</string>
@@ -481,9 +367,6 @@
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"فنگر پرنٹ اندراج کرنے کی کارروائی <xliff:g id="PERCENTAGE">%d</xliff:g> فیصد مکمل ہو چکی ہے"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"فنگر پرنٹ شامل ہو گیا"</string>
     <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"اب آپ اپنا ٹیبلیٹ غیر مقفل کرنے یا اس بات کی توثیق کرنے کیلئے اپنے فنگر پرنٹ کا استعمال کر سکتے ہیں کہ یہ آپ ہی ہیں، جیسے جب آپ ایپس میں سائن ان کرتے ہیں یا کسی خریداری کی منظوری دیتے ہیں"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"اب آپ اپنا ٹیبلیٹ غیر مقفل کرنے یا یہ توثیق کرنے کیلئے کہ یہ آپ ہی ہیں، اپنا فنگر پرنٹ استعمال کر سکتے ہیں، جیسے ایپس میں سائن ان کرتے وقت"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"اب آپ اپنا آلہ غیر مقفل کرنے یا یہ توثیق کرنے کیلئے کہ یہ آپ ہی ہیں، اپنا فنگر پرنٹ استعمال کر سکتے ہیں، جیسے ایپس میں سائن ان کرتے وقت"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"اب آپ اپنا فون غیر مقفل کرنے یا یہ توثیق کرنے کیلئے کہ یہ آپ ہی ہیں، اپنا فنگر پرنٹ استعمال کر سکتے ہیں، جیسے ایپس میں سائن ان کرتے وقت"</string>
     <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
     <skip />
     <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
@@ -495,42 +378,6 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"اپنے فنگر پرنٹ کے حصے کو سینسر پر رکھیں اور دبائے رکھیں پھر، دوسرے حصے پر سوئچ کریں"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"فنگر پرنٹ سیٹ اپ نظر انداز کریں؟"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"آپ نے اپنا فون غیر مقفل کرنے کیلئے ایک طریقہ اپنے فنگر پرنٹ کا استعمال منتخب کیا ہے۔ اگر آپ اب نظر انداز کرتے ہیں تو آپ کو اسے بعد میں سیٹ اپ کرنا ہوگا۔ سیٹ اپ میں کم و بیش ایک منٹ کا وقت لگتا ہے۔"</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"‏PIN ٹیبلیٹ کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="4359575348578515037">"پیٹرن ٹیبلیٹ کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5420451292764062637">"پاس ورڈ ٹیبلیٹ کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="8841426051550671169">"‏PIN آلے کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="6296702954920045923">"پیٹرن آلے کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="9186075211441188900">"پاس ورڈ آلے کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="4301690296689572747">"‏‫PIN فون کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="7387967847446084260">"پیٹرن فون کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="6415788841227543063">"پاس ورڈ فون کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="2350062798056164403">"‏فنگر پرنٹ اَن لاک سیٹ اپ کرنے کے لیے PIN درکار ہوتا ہے۔\n\nPIN ٹیبلیٹ کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="222574071926747300">"فنگر پرنٹ اَن لاک سیٹ اپ کرنے کے لیے پیٹرن درکار ہوتا ہے۔\n\nپیٹرن ٹیبلیٹ کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="7780323831330724644">"فنگر پرنٹ اَن لاک سیٹ اپ کرنے کے لیے پاس ورڈ درکار ہوتا ہے۔\n\nپاس ورڈ ٹیبلیٹ کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="7421096089691939451">"‏فنگر پرنٹ اَن لاک سیٹ اپ کرنے کے لیے PIN درکار ہوتا ہے۔\n\nPIN آلے کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6458468083711413617">"فنگر پرنٹ اَن لاک سیٹ اپ کرنے کے لیے پیٹرن درکار ہوتا ہے۔\n\nپیٹرن آلے کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="1632249532665518954">"فنگر پرنٹ اَن لاک سیٹ اپ کرنے کے لیے پاس ورڈ درکار ہوتا ہے۔\n\nپاس ورڈ آلے کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3101384462491132314">"‏فنگر پرنٹ اَن لاک سیٹ اپ کرنے کے لیے PIN درکار ہوتا ہے۔\n\n‫PIN فون کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="382422778886929469">"فنگر پرنٹ اَن لاک سیٹ اپ کرنے کے لیے پیٹرن درکار ہوتا ہے۔\n\nپیٹرن فون کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="5515199168425229243">"فنگر پرنٹ اَن لاک سیٹ اپ کرنے کے لیے پاس ورڈ درکار ہوتا ہے۔\n\nپاس ورڈ فون کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="2454239555320628731">"‏فیس اَنلاک سیٹ اپ کرنے کے لیے PIN درکار ہوتا ہے۔\n\nPIN ٹیبلیٹ کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="4354138725903415816">"فیس اَنلاک سیٹ اپ کرنے کے لیے پیٹرن درکار ہوتا ہے۔\n\nپیٹرن ٹیبلیٹ کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="719339718267952196">"فیس اَنلاک سیٹ اپ کرنے کے لیے پاس ورڈ درکار ہوتا ہے۔\n\nپاس ورڈ ٹیبلیٹ کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="3729243407606881750">"‏فیس اَنلاک سیٹ اپ کرنے کے لیے PIN درکار ہوتا ہے۔\n\nPIN آلے کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="6966329744346503807">"فیس اَنلاک سیٹ اپ کرنے کے لیے پیٹرن درکار ہوتا ہے۔\n\nپیٹرن آلے کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3020827854443297996">"فیس اَنلاک سیٹ اپ کرنے کے لیے پاس ورڈ درکار ہوتا ہے۔\n\nپاس ورڈ آلے کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2155678903559865476">"‏فیس اَنلاک سیٹ اپ کرنے کے لیے PIN درکار ہوتا ہے۔\n\n‫PIN فون کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="473271568005748452">"فیس اَنلاک سیٹ اپ کرنے کے لیے پیٹرن درکار ہوتا ہے۔\n\nپیٹرن فون کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="4319934862372116788">"فیس اَنلاک سیٹ اپ کرنے کے لیے پاس ورڈ درکار ہوتا ہے۔\n\nپاس ورڈ فون کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="647987565338402155">"‏فیس اَنلاک اور فنگر پرنٹ اَن لاک کو سیٹ اپ کرنے کے لیے PIN درکار ہوتا ہے۔\n\nPIN ٹیبلیٹ کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="5293609077890072841">"فیس اَنلاک اور فنگر پرنٹ اَن لاک کو سیٹ اپ کرنے کے لیے پیٹرن درکار ہوتا ہے۔\n\nپیٹرن ٹیبلیٹ کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="2660359318928684172">"فیس اَنلاک اور فنگر پرنٹ اَن لاک کو سیٹ اپ کرنے کے لیے پاس ورڈ درکار ہوتا ہے۔\n\nپاس ورڈ ٹیبلیٹ کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="1278795063897397815">"‏فیس اَنلاک اور فنگر پرنٹ اَن لاک کو سیٹ اپ کرنے کے لیے PIN درکار ہوتا ہے۔\n\nPIN آلے کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="8766169819759371801">"فیس اَنلاک اور فنگر پرنٹ اَن لاک کو سیٹ اپ کرنے کے لیے پیٹرن درکار ہوتا ہے۔\n\nپیٹرن آلے کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="8611216039321306045">"فیس اَنلاک اور فنگر پرنٹ اَن لاک کو سیٹ اپ کرنے کے لیے پاس ورڈ درکار ہوتا ہے۔\n\nپاس ورڈ آلے کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="8796878521409329051">"‏فیس اَنلاک اور فنگر پرنٹ اَنلاک کو سیٹ اپ کرنے کے لیے PIN درکار ہوتا ہے۔\n\n‫PIN فون کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="8423700958936341596">"فیس اَنلاک اور فنگر پرنٹ اَن لاک کو سیٹ اپ کرنے کے لیے پیٹرن درکار ہوتا ہے۔\n\nپیٹرن فون کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="5411689248299854172">"فیس اَنلاک اور فنگر پرنٹ اَن لاک کو سیٹ اپ کرنے کے لیے پاس ورڈ درکار ہوتا ہے۔\n\nپاس ورڈ فون کے گم یا چوری ہونے پر اس کی حفاظت کرتا ہے۔"</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"‏PIN سیٹ اپ کو نظر انداز کریں؟"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"‏PIN اور فیس کے سیٹ اپ کو چھوڑیں؟"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"‏PIN اور فنگر پرنٹ کے سیٹ اپ کو چھوڑیں؟"</string>
@@ -565,40 +412,20 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"آپ فنگر پرنٹس کی زیادہ سے زیادہ تعداد شامل کر چکے ہیں"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"مزید فنگر پرنٹس شامل نہیں کر سکتے"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"\'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' حذف کریں"</string>
-    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"اس سے آپ کے فون پر اسٹور کردہ \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' سے وابستہ فنگر پرنٹ کی تصاویر اور ماڈل حذف ہو جائیں گے"</string>
-    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"اس سے آپ کے ٹیبلیٹ پر اسٹور کردہ \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' سے وابستہ فنگر پرنٹ کی تصاویر اور ماڈل حذف ہو جائیں گے"</string>
-    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"اس سے آپ کے آلے پر اسٹور کردہ \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' سے وابستہ فنگر پرنٹ کی تصاویر اور ماڈل حذف ہو جائیں گے"</string>
-    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"اپنا فون غیر مقفل کرنے یا ایپس میں اپنی توثیق کرنے کے لیے اپنے فنگر پرنٹ کا استعمال نہیں کر پائیں گے۔"</string>
-    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"اپنا ٹیبلیٹ غیر مقفل کرنے یا ایپس میں اپنی توثیق کرنے کے لیے اپنے فنگر پرنٹ کا استعمال نہیں کر پائیں گے۔"</string>
-    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"اپنا آلہ غیر مقفل کرنے یا ایپس میں اپنی توثیق کرنے کے لیے اپنے فنگر پرنٹ کا استعمال نہیں کر پائیں گے۔"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"آپ اپنی دفتری پروفائل کو غیر مقفل کرنے، خریداریوں کی اجازت دینے یا ورک ایپس میں سائن ان کرنے کے لیے اپنے فنگر پرنٹ کا استعمال نہیں کر پائیں گے۔"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"مرموز کاری"</string>
-    <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"ٹیبلیٹ کی مرموز کاری کریں"</string>
-    <string name="encrypt_title" product="default" msgid="7337365190988321100">"فون کی مرموز کاری کریں"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"مرموز کردہ"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"اسکرین لاک سیٹ کریں"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"‏مزید سیکیورٹی کی خاطر اس آلے کے لیے PIN، پیٹرن یا پاس ورڈ سیٹ کریں۔"</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"اسکرین لاک سیٹ کریں"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"اپنے فون کو محفوظ بنائیں"</string>
-    <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"ٹیبلیٹ کی حفاظت کرنے کیلئے اسکرین لاک سیٹ کریں"</string>
-    <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"آلہ کی حفاظت کرنے کیلئے اسکرین لاک سیٹ کریں"</string>
-    <string name="suggested_lock_settings_summary" product="default" msgid="2443273582716671033">"فون کی حفاظت کرنے کیلئے اسکرین لاک سیٹ کریں"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"غیر مقفل کرنے کے لئے فنگر پرنٹ شامل کریں"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"اسکرین لاک منتخب کریں"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"اسکرین لاک منتخب کریں"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"نیا اسکرین لاک منتخب کریں"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"دفتری ایپس کے لیے لاک منتخب کریں"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"نیا دفتری لاک منتخب کریں"</string>
-    <string name="setup_lock_settings_picker_title" product="tablet" msgid="1276283007274778191">"اپنے ٹیبلٹ کا تحفظ کریں"</string>
-    <string name="setup_lock_settings_picker_title" product="device" msgid="3585905639045649905">"اپنے آلہ کا تحفظ کریں"</string>
-    <string name="setup_lock_settings_picker_title" product="default" msgid="2758197863515864300">"اپنے فون کا تحفظ کریں"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"اضافی سیکیورٹی کیلئے ایک بیک اپ اسکرین لاک سیٹ کریں"</string>
-    <string name="setup_lock_settings_picker_message" product="tablet" msgid="4870877800737248926">"آلہ کے تحفظ کی خصوصیات فعال کر کے اپنی اجازت کے بغیر دوسروں کو یہ ٹیبلیٹ استعمال کرنے سے روکیں۔ وہ اسکرین قفل منتخب کریں جو آپ استعمال کرنا چاہتے ہیں۔"</string>
-    <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"آلہ کے تحفظ کی خصوصیات فعال کر کے اپنی اجازت کے بغیر دوسروں کو یہ آلہ استعمال کرنے سے روکیں۔ وہ اسکرین قفل منتخب کریں جو آپ استعمال کرنا چاہتے ہیں۔"</string>
-    <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"آلہ کے تحفظ کی خصوصیات فعال کر کے اپنی اجازت کے بغیر دوسروں کو یہ فون استعمال کرنے سے روکیں۔ وہ اسکرین قفل منتخب کریں جو آپ استعمال کرنا چاہتے ہیں۔"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"اسکرین مقفل کرنے کا اپنا بیک اپ طریقہ منتخب کریں"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"‏اگر آپ اپنا اسکرین لاک بھول جاتے ہیں تو آپ کا IT منتظم اسے ری سیٹ نہیں کر سکتا۔"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"علیحدہ دفتری لاک سیٹ کریں"</string>
@@ -638,43 +465,31 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"پروفائل کے تحفظ کو ہٹا دیں؟"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"اگر آپ کا فون گم یا چوری ہو جاتا ہے تو پیٹرن اس کی حفاظت کرتا ہے"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"اگر آپ کا فون گم یا چوری ہو جاتا ہے تو پیٹرن اس کی حفاظت کرتا ہے۔<xliff:g id="EMPTY_LINE">
-
 </xliff:g>اس سے آپ کے آلے پر اسٹور کردہ فنگر پرنٹ کا ماڈل بھی حذف ہو جاتا ہے۔ آپ ایپس میں تصدیق کے لیے اپنے فنگر پرنٹ کا استعمال نہیں کر سکیں گے۔"</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"اگر آپ کا فون گم یا چوری ہو جاتا ہے تو پیٹرن اس کی حفاظت کرتا ہے۔<xliff:g id="EMPTY_LINE">
-
 </xliff:g>آپ کے چہرے کے ماڈل کو بھی مستقل اور محفوظ طریقے سے حذف کر دیا جائے گا۔ آپ ایپس میں تصدیق کے لیے اپنے چہرے کا استعمال نہیں کر سکیں گے۔"</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"اگر آپ کا فون گم یا چوری ہو جاتا ہے تو پیٹرن اس کی حفاظت کرتا ہے۔<xliff:g id="EMPTY_LINE">
-
 </xliff:g>اس سے آپ کے آلے پر اسٹور کردہ فنگر پرنٹ کا ماڈل حذف ہو جاتا ہے۔ آپ کے چہرے کے ماڈل کو بھی مستقل اور محفوظ طریقے سے حذف کر دیا جائے گا۔ آپ ایپس میں تصدیق کے لیے اپنے چہرے یا فنگر پرنٹ کا استعمال نہیں کر سکیں گے۔"</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"‏اگر آپ کا فون گم یا چوری ہو جاتا ہے تو PIN اس کی حفاظت کرتا ہے"</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"‏اگر آپ کا فون گم یا چوری ہو جاتا ہے تو PIN اس کی حفاظت کرتا ہے۔<xliff:g id="EMPTY_LINE">
-
 </xliff:g>اس سے آپ کے آلے پر اسٹور کردہ فنگر پرنٹ کا ماڈل بھی حذف ہو جاتا ہے۔ آپ ایپس میں تصدیق کے لیے اپنے فنگر پرنٹ کا استعمال نہیں کر سکیں گے۔"</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"‏اگر آپ کا فون گم یا چوری ہو جاتا ہے تو PIN اس کی حفاظت کرتا ہے۔<xliff:g id="EMPTY_LINE">
-
 </xliff:g>آپ کے چہرے کے ماڈل کو بھی مستقل اور محفوظ طریقے سے حذف کر دیا جائے گا۔ آپ ایپس میں تصدیق کے لیے اپنے چہرے کا استعمال نہیں کر سکیں گے۔"</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"‏اگر آپ کا فون گم یا چوری ہو جاتا ہے تو PIN اس کی حفاظت کرتا ہے۔<xliff:g id="EMPTY_LINE">
-
 </xliff:g>اس سے آپ کے آلے پر اسٹور کردہ فنگر پرنٹ کا ماڈل حذف ہو جاتا ہے۔ آپ کے چہرے کے ماڈل کو بھی مستقل اور محفوظ طریقے سے حذف کر دیا جائے گا۔ آپ ایپس میں تصدیق کے لیے اپنے چہرے یا فنگر پرنٹ کا استعمال نہیں کر سکیں گے۔"</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"اگر آپ کا فون گم یا چوری ہو جاتا ہے تو پاس ورڈ اس کی حفاظت کرتا ہے"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"اگر آپ کا فون گم یا چوری ہو جاتا ہے تو پاس ورڈ اس کی حفاظت کرتا ہے۔<xliff:g id="EMPTY_LINE">
-
 </xliff:g>اس سے آپ کے آلے پر اسٹور کردہ فنگر پرنٹ کا ماڈل بھی حذف ہو جاتا ہے۔ آپ ایپس میں تصدیق کے لیے اپنے فنگر پرنٹ کا استعمال نہیں کر سکیں گے۔"</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"اگر آپ کا فون گم یا چوری ہو جاتا ہے تو پاس ورڈ اس کی حفاظت کرتا ہے۔<xliff:g id="EMPTY_LINE">
-
 </xliff:g>آپ کے چہرے کے ماڈل کو بھی مستقل اور محفوظ طریقے سے حذف کر دیا جائے گا۔ آپ ایپس میں تصدیق کے لیے اپنے چہرے کا استعمال نہیں کر سکیں گے۔"</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"اگر آپ کا فون گم یا چوری ہو جاتا ہے تو پاس ورڈ اس کی حفاظت کرتا ہے۔<xliff:g id="EMPTY_LINE">
-
 </xliff:g>اس سے آپ کے آلے پر اسٹور کردہ فنگر پرنٹ کا ماڈل حذف ہو جاتا ہے۔ آپ کے چہرے کے ماڈل کو بھی مستقل اور محفوظ طریقے سے حذف کر دیا جائے گا۔ آپ ایپس میں تصدیق کے لیے اپنے چہرے یا فنگر پرنٹ کا استعمال نہیں کر سکیں گے۔"</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"آلہ کے تحفظ کی خصوصیات آپ کے اسکرین قفل کے بغیر کام نہیں کریں گی۔"</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"آلے کے تحفظ کی خصوصیات آپ کے اسکرین لاک کے بغیر کام نہیں کریں گی۔<xliff:g id="EMPTY_LINE">
-
 </xliff:g>اس سے آپ کے آلے پر اسٹور کردہ فنگر پرنٹ کا ماڈل بھی حذف ہو جاتا ہے۔ آپ ایپس میں تصدیق کے لیے اپنے فنگر پرنٹ کا استعمال نہیں کر سکیں گے۔"</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"آلے کے تحفظ کی خصوصیات آپ کے اسکرین لاک کے بغیر کام نہیں کریں گی۔<xliff:g id="EMPTY_LINE">
-
 </xliff:g>آپ کے چہرے کے ماڈل کو بھی مستقل اور محفوظ طریقے سے حذف کر دیا جائے گا۔ آپ ایپس میں تصدیق کے لیے اپنے چہرے کا استعمال نہیں کر سکیں گے۔"</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"آلے کے تحفظ کی خصوصیات آپ کے اسکرین لاک کے بغیر کام نہیں کریں گی۔<xliff:g id="EMPTY_LINE">
-
 </xliff:g>اس سے آپ کے آلے پر اسٹور کردہ فنگر پرنٹ کا ماڈل حذف ہو جاتا ہے۔ آپ کے چہرے کے ماڈل کو بھی مستقل اور محفوظ طریقے سے حذف کر دیا جائے گا۔ آپ ایپس میں تصدیق کے لیے اپنے چہرے یا فنگر پرنٹ کا استعمال نہیں کر سکیں گے۔"</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"حذف کریں"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"‏<xliff:g id="APP_NAME">%1$s</xliff:g> مضبوط PIN یا پاس ورڈ کی تجویز کرتی ہے اور ہو سکتا ہے کہ ان میں سے کسی ایک کے بغیر توقع کے مطابق کام نہ کرے"</string>
@@ -785,9 +600,6 @@
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"آلہ بھول جائیں؟"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"وابستگی ہٹائیں"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"ایپ کو غیر منسلک کریں؟"</string>
-    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"آپ کے فون کا <xliff:g id="DEVICE_NAME">%1$s</xliff:g> کے ساتھ جوڑا مزید برقرار نہیں رہے گا"</string>
-    <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"آپ کے ٹیبلیٹ کو <xliff:g id="DEVICE_NAME">%1$s</xliff:g> کے ساتھ مزید نہیں جوڑا جائے گا"</string>
-    <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"آپ کے آلہ کو <xliff:g id="DEVICE_NAME">%1$s</xliff:g> کے ساتھ مزید نہیں جوڑا جائے گا"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> ایپ اب آپ کے <xliff:g id="DEVICE_NAME">%2$s</xliff:g> سے منسلک نہیں ہوگی"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"آلہ بھول جائیں"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"ایپ کو غیر منسلک کریں"</string>
@@ -832,7 +644,6 @@
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"موجودہ ڈسپلے کی ریفریش کی شرح دکھائیں"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"‏NFC کے لیے آلہ کو غیر مقفل کرنے کی ضرورت ہے"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"‏NFC کو صرف اسکرین کے غیر مقفل ہونے کے وقت استعمال کرنے کی اجازت دیں"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"‏NFC کے ذریعے ایپ کا مواد ٹرانسمٹ کرنے کیلئے تیار"</string>
     <string name="nfc_disabled_summary" msgid="8737797364522502351">"‏دستیاب نہیں ہے کیونکہ NFC آف ہے"</string>
@@ -1040,14 +851,10 @@
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> فعال ہے"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"AndroidHotspot"</string>
     <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"اس نیٹ ورک کو محفوظ کریں؟"</string>
-    <string name="wifi_add_app_single_network_summary" product="default" msgid="6881712878537666626">"‫<xliff:g id="APPNAME">%1$s</xliff:g> آپ کے فون پر ایک نیٹ ورک کو محفوظ کرنا چاہے گی"</string>
-    <string name="wifi_add_app_single_network_summary" product="tablet" msgid="8455616967601552440">"<xliff:g id="APPNAME">%1$s</xliff:g> آپ کے ٹیبلیٹ پر ایک نیٹ ورک کو محفوظ کرنا چاہتی ہے"</string>
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"محفوظ ہو رہا ہے…"</string>
     <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"محفوظ کردہ"</string>
     <string name="wifi_add_app_network_save_failed_summary" msgid="7223817782309294652">"محفوظ نہیں ہو سکتا۔ دوبارہ کوشش کریں۔"</string>
     <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"نیٹ ورکس محفوظ کریں؟"</string>
-    <string name="wifi_add_app_networks_summary" product="default" msgid="2670215712788515167">"<xliff:g id="APPNAME">%1$s</xliff:g> آپ کے فون پر ان نیٹ ورکس کو محفوظ کرنا چاہے گی"</string>
-    <string name="wifi_add_app_networks_summary" product="tablet" msgid="2088967184512169910">"<xliff:g id="APPNAME">%1$s</xliff:g> آپ کے ٹیبلیٹ پر ان نیٹ ورکس کو محفوظ کرنا چاہتی ہے"</string>
     <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"<xliff:g id="NUMBER">%d</xliff:g> نیٹ ورکس محفوظ کیے جا رہے ہیں…"</string>
     <string name="wifi_add_app_networks_saved_summary" msgid="1648417628665152905">"نیٹ ورکس محفوظ کیے گئے"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"‏Wi-Fi کالنگ"</string>
@@ -1090,8 +897,6 @@
     <string name="accelerometer_title" msgid="7745991950833748909">"اسکرین کو خود کار طور پر گھمائیں"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"آن - چہرے پر مبنی"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"چہرے کی شناخت"</string>
-    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"اپنا فون پورٹریٹ اور لینڈ اسکیپ کے درمیان گھماتے وقت، خودکار طور پر اسکرین کی سمت بندی ایڈجسٹ کریں"</string>
-    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"اپنا ٹیبلیٹ پورٹریٹ اور لینڈ اسکیپ کے درمیان گھماتے وقت، خودکار طور پر اسکرین کی سمت بندی ایڈجسٹ کریں"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"\'خودکار طور پر گھمائیں\' کے بارے میں مزید جانیں"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"جب آپ اپنا فون پورٹریٹ اور لینڈ اسکیپ کے درمیان گھماتے ہیں"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"اسکرین ریزولیوشن"</string>
@@ -1203,10 +1008,6 @@
     <string name="sim_lock_settings" msgid="4493069398250139205">"‏SIM کارڈ لاک کی ترتیبات"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"‏SIM کارڈ لاک"</string>
     <string name="sim_pin_toggle" msgid="98754920202404425">"‏SIM کارڈ کو مقفل کریں"</string>
-    <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"‏ٹیبلٹ استعمال کرنے کیلئے PIN درکار ہے"</string>
-    <string name="sim_lock_on" product="default" msgid="3303147192981388923">"‏فون استعمال کرنے کیلئے PIN درکار ہے"</string>
-    <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"‏ٹیبلٹ استعمال کرنے کیلئے PIN درکار ہے"</string>
-    <string name="sim_lock_off" product="default" msgid="4634118006847137785">"‏فون استعمال کرنے کیلئے PIN درکار ہے"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"‏SIM PIN تبدیل کریں"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"SIM PIN"</string>
     <string name="sim_enable_sim_lock" msgid="8993991669975548653">"‏SIM کارڈ کو مقفل کریں"</string>
@@ -1251,12 +1052,6 @@
     <string name="storage_settings_title" msgid="486118156723194815">"اسٹوریج کی ترتیبات"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"‏IMEI (sim سلاٹ ‎%1$d)‎"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"دیکھنے کے لیے، محفوظ کردہ نیٹ ورک کا انتخاب کریں۔"</string>
-    <string name="status_number" product="tablet" msgid="3597945414666253183">"MDN"</string>
-    <string name="status_number" product="default" msgid="8407999629121682207">"فون نمبر"</string>
-    <string name="status_number_sim_slot" product="tablet" msgid="6582203988975619529">"‏MDN (sim سلاٹ ‎%1$d)‎"</string>
-    <string name="status_number_sim_slot" product="default" msgid="5724823197745786398">"‏فون نمبر (sim سلاٹ ‎%1$d)‎"</string>
-    <string name="status_number_sim_status" product="tablet" msgid="4239876366511743428">"‏SIM پر MDN"</string>
-    <string name="status_number_sim_status" product="default" msgid="2772745542921910086">"‏SIM پر فون نمبر"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"‏PRL ورژن"</string>
@@ -1316,12 +1111,6 @@
     <string name="storage_wizard_move_progress_title" msgid="3912406225614672391">"<xliff:g id="APP">^1</xliff:g> کو منتقل کیا جا رہا ہے…"</string>
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"‏منتقلی کے دوران <xliff:g id="NAME">^1</xliff:g> کو نہ ہٹائیں۔ ‎\n\n‎اس آلہ پر <xliff:g id="APP">^2</xliff:g> ایپ منتقلی مکمل ہونے تک دستیاب نہیں ہوگی۔"</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"آپ اس <xliff:g id="NAME">^1</xliff:g> کا استعمال کیسے کریں گے؟"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"‏داخلی اسٹوریج کے لئے SD کارڈ کو فارمیٹ کریں"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"‏صرف اس ٹیبلیٹ پر استعمال کرنے کے لیے ایپس اور میڈیا کو اسٹور کریں۔ &lt;a href=https://support.google.com/android/answer/12153449&gt;SD کارڈ سیٹ اپ کرنے کے بارے میں مزید جانیں&lt;/a&gt;."</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"فارمیٹ کریں"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"‏داخلی اسٹوریج کے لئے SD کارڈ کو فارمیٹ کریں"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"‏صرف اس فون پر استعمال کرنے کے لیے ایپس اور میڈیا کو اسٹور کریں۔ &lt;a href=https://support.google.com/android/answer/12153449&gt;SD کارڈ سیٹ اپ کرنے کے بارے میں مزید جانیں&lt;/a&gt;."</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"فارمیٹ کریں"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"یا"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"‏پورٹیبل اسٹوریج کے لئے SD کارڈ کو فارمیٹ کریں"</string>
     <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"‏تصاویر، ویڈیوز، موسیقی وغیرہ کو اسٹور کریں اور دیگر آلات سے ان تک رسائی حاصل کریں۔ &lt;a href=https://support.google.com/android/answer/12153449&gt;SD کارڈ سیٹ اپ کرنے کے بارے میں مزید جانیں&lt;/a&gt;."</string>
@@ -1332,13 +1121,9 @@
     <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"تصاویر، ویڈیوز، موسیقی وغیرہ کو اسٹور کرنے کے لئے اس <xliff:g id="NAME_0">^1</xliff:g> کو فارمیٹ کرنے کی ضرورت ہے۔ \n\nفارمیٹ کرنے سے <xliff:g id="NAME_1">^2</xliff:g> کا موجودہ ڈیٹا مٹ جائے گا۔ مواد کھونے سے بچنے کے لئے اس کا کسی اور <xliff:g id="NAME_2">^3</xliff:g> یا آلہ میں بیک اپ لیں۔"</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"فارمیٹ <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"مواد کو <xliff:g id="NAME">^1</xliff:g> میں منتقل کریں؟"</string>
-    <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"آپ فائلز، میڈیا اور مخصوص ایپس کو اس <xliff:g id="NAME">^1</xliff:g> میں منتقل کر سکتے ہیں:\n\n اس منتقلی سے آپ کے ٹیبلیٹ کے اسٹوریج کا <xliff:g id="SIZE">^2</xliff:g> حصہ خالی ہو جائے گا اور <xliff:g id="DURATION">^3</xliff:g> وقت لگے گا۔"</string>
-    <string name="storage_wizard_migrate_v2_body" product="default" msgid="809730501314645325">"آپ فائلز، میڈیا اور مخصوص ایپس کو اس <xliff:g id="NAME">^1</xliff:g> میں منتقل کر سکتے ہیں:\n\n اس منتقلی سے آپ کے فون اسٹوریج کا <xliff:g id="SIZE">^2</xliff:g> حصہ خالی ہو جائے گا اور <xliff:g id="DURATION">^3</xliff:g> وقت لگے گا۔"</string>
     <string name="storage_wizard_migrate_v2_checklist" msgid="2618258869444553060">"اس منتقلی کے دوران:"</string>
     <string name="storage_wizard_migrate_v2_checklist_media" msgid="5867134681730723744">"<xliff:g id="NAME">^1</xliff:g> کو نہ ہٹائيں"</string>
     <string name="storage_wizard_migrate_v2_checklist_apps" msgid="1882077445750580783">"کچھ ایپس کام نہیں کریں گی"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="tablet" msgid="6111770421449869539">"اس ٹیبلیٹ کو چارج رکھیں"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="default" msgid="8826915870192535008">"اس فون کو چارج رکھیں"</string>
     <string name="storage_wizard_migrate_v2_now" msgid="3341460117088026966">"مواد منتقل کریں"</string>
     <string name="storage_wizard_migrate_v2_later" msgid="6067756122853315642">"بعد میں مواد منتقل کریں"</string>
     <string name="storage_wizard_migrate_progress_v2_title" msgid="8791318509516968103">"مواد منتقل کیا جا رہا ہے…"</string>
@@ -1407,21 +1192,9 @@
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"‏کسی خرابی کی وجہ سے ڈاؤن لوڈ کردہ SIMs کو مٹایا نہیں جا سکتا ہے۔\n\nاپنا آلہ دوبارہ شروع کریں اور دوبارہ کوشش کریں۔"</string>
     <string name="main_clear_title" msgid="277664302144837723">"سبھی ڈیٹا کو حذف کریں (فیکٹری ری سیٹ)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"سبھی ڈیٹا کو حذف کریں (فیکٹری ری سیٹ)"</string>
-    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"‏یہ آپ کے ٹیبلیٹ کے "<b>"داخلی اسٹوریج"</b>" سے سبھی ڈیٹا کو صاف کر دے گا، بشمول:\n\n"<li>"آپ کا Google اکاؤنٹ"</li>\n<li>"سسٹم اور ایپ ڈیٹا اور ترتیبات"</li>\n<li>"ڈاؤن لوڈ کردہ ایپس"</li></string>
-    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"‏اس سے آپ کے فون کے "<b>"داخلی اسٹوریج"</b>" سے سبھی ڈیٹا صاف ہو جائے گا، بشمول:\n\n"<li>"آپ کا Google اکاؤنٹ"</li>\n<li>"سسٹم اور ایپ ڈیٹا اور ترتیبات"</li>\n<li>"ڈاؤن لوڈ کردہ ایپس"</li></string>
-    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"آپ فی الحال مندرجہ ذیل اکاؤنٹس میں سائن ان ہیں:\n"</string>
-    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"اس آلہ پر دوسرے صارفین موجود ہیں۔\n"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"موسیقی"</li>\n<li>"تصاویر"</li>\n<li>"صارف کا دیگر ڈیٹا"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIMs"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"اس سے آپ کے موبائل سروس کا پلان منسوخ نہیں ہوگا۔"</string>
-    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">"‏\n\nموسیقی، تصاویر اور صارف کا دیگر ڈیٹا، "<b>"USB اسٹوریج"</b>" کو حذف کیے جانے کی ضرورت ہے۔"</string>
-    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">"‏\n\nموسیقی، تصاویر اور صارف کا دیگر ڈیٹا صاف کرنے کیلئے، "<b>"SD کارڈ"</b>" کو حذف کیے جانے کی ضرورت ہے۔"</string>
-    <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"‏USB اسٹوریج کو حذف کریں"</string>
-    <string name="erase_external_storage" product="default" msgid="2610056855012660451">"‏SD کارڈ حذف کریں"</string>
-    <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"‏داخلی USB اسٹوریج پر موجود سبھی ڈیٹا، جیسے موسیقی یا تصاویر کو حذف کریں"</string>
-    <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"‏SD کارڈ پر موجود سبھی ڈیٹا حذف کریں، جیسے موسیقی یا تصاویر"</string>
-    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"سبھی ڈیٹا صاف کریں"</string>
-    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"سبھی ڈیٹا صاف کریں"</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"آپ کی سبھی ذاتی معلومات اور ڈاؤن لوڈ کردہ ایپس کو حذف کر دیا جائے گا۔ آپ اس کاروائی کو کالعدم نہیں کر سکتے ہیں۔"</string>
     <string name="main_clear_final_desc_esim" msgid="440406836793824969">"‏ڈاؤن لوڈ کردہ ایپس اور SIMs سمیت آپ کی سبھی ذاتی معلومات کو حذف کر دیا جائے گا۔ آپ اس کاروائی کو کالعدم نہیں کر سکتے ہیں۔"</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"سبھی ڈیٹا صاف کریں؟"</string>
@@ -1467,14 +1240,8 @@
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"‏USB بلوٹوتھ اور ایتھرنیٹ کے ذریعے صرف انٹرنیٹ کا اشتراک کریں"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"‏USB ٹیدرنگ"</string>
-    <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"‏USB کے ذریعے فون کے انٹرنیٹ کنیکشن کا اشتراک کریں"</string>
-    <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"‏USB کے ذریعے ٹیبلیٹ کے انٹرنیٹ کنیکشن کا اشتراک کریں"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"بلوٹوتھ ٹیدرنگ"</string>
-    <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"بلوٹوتھ کے ذریعے ٹیبلیٹ کے انٹرنیٹ کنکشن کا اشتراک کریں"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"بلوٹوتھ کے ذریعے فون کے انٹرنیٹ کنکشن کا اشتراک کریں"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ایتھرنیٹ ٹیدرنگ"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"‏Ethernet ایتھرنیٹ کے ذریعے فون کے انٹرنیٹ کنیکشن کا اشتراک کریں"</string>
-    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"ایتھرنیٹ کے ذریعے ٹیبلیٹ کے انٹرنیٹ کنکشن کا اشتراک کریں"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"اپنے موبائل ڈیٹا کنکشن کے ذریعے دیگر آلات کو انٹرنیٹ فراہم کرنے کیلئے ہاٹ اسپاٹ اور ٹیدرنگ کا استعمال کریں۔ ایپس بھی قریبی آلات کے ساتھ مواد کا اشتراک کرنے کیلئے ایک ہاٹ اسپاٹ تخلیق کر سکتی ہیں۔"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"‏اپنے Wi‑Fi یا موبائل ڈیٹا کنکشن کے ذریعے دیگر آلات کو انٹرنیٹ فراہم کرنے کے لیے ہاٹ اسپاٹ اور ٹیدرنگ کا استعمال کریں۔ ایپس بھی قریبی آلات کے ساتھ مواد کا اشتراک کرنے کے لیے ایک ہاٹ اسپاٹ تخلیق کر سکتی ہیں۔"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"مدد"</string>
@@ -1522,10 +1289,6 @@
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"مقام کے ٹائم زون کی شناخت تعاون یافتہ نہیں ہے"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"مقام کے ٹائم زون کی شناخت کی تبدیلیوں کی اجازت نہیں ہے"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"مقام کو ٹائم زون سیٹ کرنے کے لیے استعمال کیا جا سکتا ہے"</string>
-    <string name="about_settings" product="tablet" msgid="2888705054709289693">"ٹیبلٹ کے بارے میں"</string>
-    <string name="about_settings" product="default" msgid="4038626127378127613">"فون کے بارے میں"</string>
-    <string name="about_settings" product="device" msgid="9012888717090302815">"آلے کے بارے میں"</string>
-    <string name="about_settings" product="emulator" msgid="2516560858771320366">"ہمسر آلہ کے بارے میں"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"قانونی معلومات، اسٹیٹس، سافٹ ویئر ورژن دیکھیں"</string>
     <string name="legal_information" msgid="7509900979811934843">"قانونی معلومات"</string>
     <string name="manual" msgid="3651593989906084868">"مینوئل"</string>
@@ -1649,9 +1412,6 @@
     </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"‏اپنے IT منتظم سے رابطہ کریں"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"‏وہ آپ کو اپنا PIN، پیٹرن یا پاس ورڈ ری سیٹ کرنے میں مدد کرسکتے ہیں"</string>
-    <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"آپ کے ٹیبلیٹ اور ذاتی ڈیٹا کو نامعلوم ایپس کی جانب سے حملے کا زیادہ خطرہ ہے۔ اس ذریعے سے ایپس ڈاؤن لوڈ کر کے، آپ اس بات سے اتفاق کرتے ہیں کہ آپ ان ایپس سے اپنے ٹیبلیٹ کو ہونے والے کسی بھی نقصان یا ڈیٹا کے نقصان کیلئے تنہا خود ذمہ دار ہوں گے۔"</string>
-    <string name="install_all_warning" product="default" msgid="652516435709047343">"آپ کے فون اور ذاتی ڈیٹا کو نامعلوم ایپس کی جانب سے حملے کا زیادہ خطرہ ہے۔ اس ذریعے سے ایپس ڈاؤن لوڈ کر کے، آپ اس بات سے اتفاق کرتے ہیں کہ آپ ان ایپس سے اپنے فون کو ہونے والے کسی بھی نقصان یا ڈیٹا کے نقصان کیلئے تنہا خود ذمہ دار ہوں گے۔"</string>
-    <string name="install_all_warning" product="device" msgid="2348262609815354500">"آپ کے آلے اور ذاتی ڈیٹا کو نامعلوم ایپس کی جانب سے حملے کا زیادہ خطرہ ہے۔ اس ذریعے سے ایپس ڈاؤن لوڈ کر کے، آپ اس بات سے اتفاق کرتے ہیں کہ آپ ان ایپس سے اپنے آلے کو ہونے والے کسی بھی نقصان یا ڈیٹا کے نقصان کیلئے تنہا خود ذمہ دار ہوں گے۔"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"جدید ترین ترتیبات"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"مزید ترتیبات اختیارات کو فعال کریں"</string>
     <string name="application_info_label" msgid="1015706497694165866">"ایپ کی معلومات"</string>
@@ -1779,8 +1539,6 @@
     <string name="process_service_in_use_description" msgid="4210957264507014878">"سروس <xliff:g id="COMP_NAME">%1$s</xliff:g> زیر استعمال ہے۔"</string>
     <string name="process_provider_in_use_description" msgid="6730020083976048028">"فراہم کنندہ <xliff:g id="COMP_NAME">%1$s</xliff:g> زیر استعمال ہے۔"</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="6201041461740445113">"سسٹم سروس کو روکیں؟"</string>
-    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="2076922609580490122">"اگر آپ اس سروس کو روک دیتے ہیں تو آپ کے ٹیبلٹ کی کچھ خصوصیات ٹھیک سے کام کرنا بند کر سکتی ہیں الّا یہ کہ آپ اس کی پاور بند کر دیں اور پھر دوبارہ آن کریں۔"</string>
-    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="2625863973434309085">"اگر آپ اس سروس کو روک دیتے ہیں تو آپ کے فون کی کچھ خصوصیات ٹھیک سے کام کرنا بند کر سکتی ہیں الّا یہ کہ آپ اس کی پاور بند کر دیں اور پھر دوبارہ آن کریں۔"</string>
     <string name="language_input_gesture_title" msgid="3292455685728572960">"زبانیں، ان پٹ اور اشارات"</string>
     <string name="language_settings" msgid="8700174277543875046">"زبانیں اور ان پٹ"</string>
     <string name="languages_settings" msgid="5784775502251770671">"زبانیں"</string>
@@ -1849,8 +1607,6 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"سبھی زبانوں کیلئے"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"مزید زبانیں…"</string>
     <string name="testing" msgid="6294172343766732037">"ٹیسٹنگ"</string>
-    <string name="testing_phone_info" product="tablet" msgid="1910768200608214456">"ٹیبلٹ کی معلومات"</string>
-    <string name="testing_phone_info" product="default" msgid="1150527695827743906">"فون کی معلومات"</string>
     <string name="keyboard_settings_summary" msgid="2716339620942356432">"آن اسکرین کی بورڈ، اسپیچ، ٹولز"</string>
     <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"آن اسکرین کی بورڈ، فزیکل کی بورڈ، اسپیچ، ٹولز"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"فزیکل کی بورڈ"</string>
@@ -1927,8 +1683,6 @@
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"ترتیبات کو ری سیٹ کریں"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"ڈسپلے کا سائز اور ٹیکسٹ کی ترتیبات کو ری سیٹ کر دیا گیا ہے"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"ڈسپلے کا سائز اور ٹیکسٹ کو ری سیٹ کریں؟"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"آپ کے ڈسپلے کا سائز اور ٹیکسٹ کی ترجیحات فون کی اصل ترتیبات پر ری سیٹ ہو جائیں گی"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"آپ کے ڈسپلے کا سائز اور ٹیکسٹ کی ترجیحات ٹیبلیٹ کی اصل ترتیبات پر ری سیٹ ہو جائیں گی"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"ری سیٹ کریں"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"ویک اینڈ پر کوئی پلان ہے؟"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"ساحل کی طرف جانے کا پلان ہے۔ آپ بھی شامل ہونا چاہتے ہیں؟"</string>
@@ -2070,8 +1824,6 @@
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"فوری ترتیبات میں ایک ہاتھ کی وضع شامل کی گئی۔ اسے کسی بھی وقت آن یا آف کرنے کے لیے نیچے سوائپ کریں۔"</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"آپ اپنی اسکرین کے اوپری حصے سے فوری ترتیبات میں ایک ہاتھ کی وضع بھی شامل کر سکتے ہیں"</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"برخاست کریں"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"آپ کے فون پر رنگوں کے ڈسپلے ہونے کے طریقے کو ایڈجسٹ کریں"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"آپ کے ٹیبلیٹ پر رنگوں کے ڈسپلے ہونے کے طریقے کو ایڈجسٹ کریں"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"رنگ کی اصلاح استعمال کریں"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"رنگ کی اصلاح کا شارٹ کٹ"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"رنگ کی اصلاح کے بارے میں"</string>
@@ -2121,11 +1873,7 @@
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"اسکرین کو اضافی مدھم بنائیں"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"اضافی مدھم کا شارٹ کٹ"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"اضافی دھندلا کے بارے میں"</string>
-    <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"اپنے فون کی کم سے کم چمک سے پَرے اسکرین کو مدھم کریں"</string>
-    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"اپنے ٹیبلیٹ کی کم سے کم چمک سے پَرے اسکرین کو مدھم کریں"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"اپنی اسکرین کو زیادہ مدھم کریں تاکہ اس کو پڑھنے میں مزید سہولت ہو"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"‏اضافی مدھم کی خصوصیت مندرجہ ذیل صورت میں مددگار ثابت ہو سکتی ہے: &lt;ol&gt; &lt;li&gt; آپ کے فون کی ڈیفالٹ کم سے کم چمک ابھی بھی بہت روشن ہو&lt;/li&gt; &lt;li&gt; آپ اپنا فون تاریک ماحول میں استعمال کر رہے ہیں جیسے رات میں یا سونے سے پہلے کسی تاریک کمرے میں&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5158211121482010799">"‏اضافی دھندلا کی خصوصیت مندرجہ ذیل صورت میں مددگار ثابت ہو سکتی ہے: ;lt;ol&gt; &lt;li&amp;gt&amp; آپ کے ٹیبلیٹ کی ڈیفالٹ کم سے کم چمک ابھی بھی بہت روشن ہو;lt;/li&gt; &lt;li&amp;gt&amp; آپ اپنا ٹیبلیٹ تاریک حالات میں استعمال کر رہے ہیں جیسے رات میں یا سونے سے پہلے کسی تاریک کمرے میں;lt;/li&gt; &lt;/ol&amp;gt&amp;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"شدت"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"زيادہ مدھم"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"زیادہ روشن"</string>
@@ -2285,9 +2033,6 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"پاور کا استعمال ایڈجسٹ کریں"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"شامل کردہ پیکیجز"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"ایپس حسب معمول چل رہی ہیں"</string>
-    <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"فون پس منظر میں حسب معمول بیٹری استعمال کر رہا ہے"</string>
-    <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"ٹیبلیٹ پس منظر میں حسب معمول بیٹری استعمال کر رہا ہے"</string>
-    <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"آلہ پس منظر میں حسب معمول بیٹری استعمال کر رہا ہے"</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"بیٹری لیول کم ہے"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"بیٹری لائف کو بڑھانے کے لیے بیٹری سیور آن کریں"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"بیٹری لائف کو بہتر بنائیں"</string>
@@ -2305,11 +2050,6 @@
     <skip />
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"چارجنگ کے موقوف ہونے سے متعلق مزید جانیں"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"چارج کرنا دوبارہ شروع کریں"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"بہت زیادہ درجہ حرارت اور چارجنگ کی طویل مدتوں جیسے مخصوص حالات میں، چارجنگ بیٹری کی صحت کی حفاظت میں مدد کے لیے <xliff:g id="PERCENT">%1$s</xliff:g> تک محدود ہو سکتی ہے۔\n\nان حالات کے ختم ہونے پر آپ کا فون نارمل طریقے سے خودکار طور پر چارج ہوگا۔"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"بہت زیادہ درجہ حرارت اور چارجنگ کی طویل مدتوں جیسے مخصوص حالات میں، چارجنگ بیٹری کی صحت کی حفاظت میں مدد کے لیے <xliff:g id="PERCENT">%1$s</xliff:g> تک محدود ہو سکتی ہے۔\n\nان حالات کے ختم ہونے پر آپ کا ٹیبلیٹ نارمل طریقے سے خودکار طور پر چارج ہوگا۔"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"کیونکہ آپ نے اپنا فون معمول سے زیادہ استعمال کیا ہے آپ کی بیٹری اس سے معمول کے مطابق پہلے ختم ہو سکتی ہے\n\nبیشتر بیٹری استعمال کرنے والی ایپس:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"کیونکہ آپ نے اپنا ٹیبلیٹ معمول سے زیادہ استعمال کیا ہے آپ کی بیٹری اس سے معمول کے مطابق پہلے ختم ہو سکتی ہے\n\nبیشتر بیٹری استعمال کرنے والی ایپس:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"کیونکہ آپ نے اپنا آلہ معمول سے زیادہ استعمال کیا ہے آپ کی بیٹری اس سے معمول کے مطابق پہلے ختم ہو سکتی ہے\n\nبیشتر بیٹری استعمال کرنے والی ایپس:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"اس میں زیادہ پاور والی پس منظر کی سرگرمی شامل ہے"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="other">‏%1$d ایپس کو محدود کریں</item>
@@ -2340,12 +2080,8 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"ہٹائیں"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"منسوخ کریں"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"مکمل چارج کریں"</string>
-    <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"آپ کی ایپس حسب معمول مقدار میں بیٹری استعمال کر رہی ہیں۔ اگر ایپس بہت زیادہ بیٹری استعمال کرتی ہیں تو آپ کا فون ایسے اقدامات کی تجویز پیش کرے گا جو آپ کر سکتے ہیں۔\n\nاگر آپ کی بیٹری کم ہو رہی ہے تو آپ ہمیشہ بیٹری سیور آن کر سکتے ہیں۔"</string>
-    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"آپ کی ایپس حسب معمول مقدار میں بیٹری استعمال کر رہی ہیں۔ اگر ایپس بہت زیادہ بیٹری استعمال کرتی ہیں تو آپ کا ٹیبلیٹ ایسے اقدامات کی تجویز پیش کرے گا جو آپ کر سکتے ہیں۔\n\nاگر آپ کی بیٹری کم ہو رہی ہے تو آپ ہمیشہ بیٹری سیور آن کر سکتے ہیں۔"</string>
-    <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"آپ کی ایپس حسب معمول مقدار میں بیٹری استعمال کر رہی ہیں۔ اگر ایپس بہت زیادہ بیٹری استعمال کرتی ہیں تو آپ کا آلہ ایسے اقدامات کی تجویز پیش کرے گا جو آپ کر سکتے ہیں۔\n\nاگر آپ کی بیٹری کم ہو رہی ہے تو آپ ہمیشہ بیٹری سیور آن کر سکتے ہیں۔"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"بیٹری مینیجر"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"خودکار طور پر ایپس کا نظم کریں"</string>
-    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"ان ایپس کیلئے بیٹری کو محدود کریں جنہیں آپ اکثر استعمال نہیں کرتے ہیں"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"جب بیٹری مینیجر اس بات کا پتہ لگاتا ہے کہ ایپس بیٹری ختم کر رہی ہیں، تو آپ کو ان ایپس کو محدود کرنے کا اختیار دیا جائے گا۔ ہو سکتا ہے محدود کردہ ایپس ٹھیک طرح سے کام نہ کریں اور اطلاعات میں تاخیر ہو۔"</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"محدود کردہ ایپس"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
@@ -2373,8 +2109,6 @@
     <string name="power_bluetooth" msgid="5085900180846238196">"بلوٹوتھ"</string>
     <string name="power_cell" msgid="7793805106954398186">"موبائل نیٹ ورک"</string>
     <string name="power_phone" msgid="2768396619208561670">"صوتی کالز"</string>
-    <string name="power_idle" product="tablet" msgid="4689321599298911021">"ٹیبلٹ معطل ہے"</string>
-    <string name="power_idle" product="default" msgid="9132502722499465252">"فون معطل"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"<xliff:g id="TIME">^1</xliff:g> کیلئے استعمال کیا گیا"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"اسکرین کا استعمال <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="APP">%2$s</xliff:g> کے ذریعے <xliff:g id="PERCENT">%1$s</xliff:g> استعمال کیا گیا"</string>
@@ -2425,9 +2159,6 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"شیڈیول سیٹ کریں"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"بیٹری لائف میں توسیع کریں"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"چارج ہونے پر آف کریں"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="3618041244703216293">"فون <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> سے زیادہ چارج ہونے پر بیٹری سیور آف ہو جاتا ہے"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="1733686775743601110">"ٹیبلیٹ <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> سے زیادہ چارج ہونے پر بیٹری سیور آف ہو جاتا ہے"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="7449283917787428755">"آلہ <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> سے زیادہ چارج ہونے پر بیٹری سیور آف ہو جاتا ہے"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"آن کریں"</string>
@@ -2449,9 +2180,6 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"پس منظر: ایک منٹ سے کم"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"کُل: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"پس منظر: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"بیٹری کے استعمال کا ڈیٹا تخمینی ہے اور فون چارج ہوتے وقت بیٹری کے استعمال کی پیمائش نہیں کرتا ہے"</string>
-    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"بیٹری کے استعمال کا ڈیٹا تخمینی ہے اور ٹیبلیٹ چارج ہوتے وقت بیٹری کے استعمال کی پیمائش نہیں کرتا ہے"</string>
-    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"بیٹری کے استعمال کا ڈیٹا تخمینی ہے اور آلہ چارج ہوتے وقت بیٹری کے استعمال کی پیمائش نہیں کرتا ہے"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"مکمل چارج ہونے کے بعد چند گھنٹوں میں بیٹری کے استعمال کا ڈیٹا دستیاب ہو جائے گا"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"بیٹری کے استعمال کا چارٹ"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"یومیہ بیٹری کے استعمال کا چارٹ"</string>
@@ -2521,8 +2249,6 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"خودکار طور پر آپ کے نیٹ ورک کنکشنز کا نظم کر کے کارکردگی میں بہتری اور بیٹری لائف میں اضافہ کرتا ہے"</string>
     <string name="credentials_title" msgid="7535942196886123656">"اسناد کی اسٹوریج"</string>
     <string name="credentials_install" msgid="3933218407598415827">"ایک سرٹیفکیٹ انسٹال کریں"</string>
-    <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"اسٹوریج سے سرٹیفیکیٹس انسٹال کریں"</string>
-    <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"‏SD کارڈ سے سرٹیفیکیٹس انسٹال کریں"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"اسنادات صاف کریں"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"سبھی سرٹیفیکیٹس کو ہٹائیں"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"بھروسہ مند اسنادات"</string>
@@ -2648,9 +2374,6 @@
     <string name="remove_account_label" msgid="4169490568375358010">"اکاؤنٹ ہٹائیں"</string>
     <string name="header_add_an_account" msgid="3919151542338822661">"ایک اکاؤنٹ شامل کریں"</string>
     <string name="really_remove_account_title" msgid="253097435885652310">"اکاؤنٹ ہٹائیں؟"</string>
-    <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"اس اکاؤنٹ کو ہٹانے سے اس کے سبھی پیغامات، رابطے اور ٹیبلٹ سے دیگر ڈیٹا حذف ہو جائیں گے!"</string>
-    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"اس اکاؤنٹ کو ہٹانے سے اس کے سبھی پیغامات، رابطے اور فون سے دیگر ڈیٹا حذف ہو جائیں گے!"</string>
-    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"اس اکاؤنٹ کو ہٹانے سے اس کے تمام پیغامات، رابطے اور اس آلے کا دیگر ڈیٹا حذف ہو جائے گا!"</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"آپ کے منتظم کی طرف سے اس تبدیلی کی اجازت نہیں ہے"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"دستی طور پر مطابقت پذیری نہيں کر سکتے"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"اس آئٹم کیلئے مطابقت پذیری فی الحال غیر فعال ہے۔ اس ترتیب کو تبدیل کرنے کیلئے، عارضی طور پر پس منظر ڈیٹا اور خود کار مطابقت پذیری کو آن کریں۔"</string>
@@ -2692,8 +2415,6 @@
     <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"اس خصوصیت کی وجہ سے پس منظر کے ڈیٹا پر انحصار کرنے والی کوئی ایپ صرف موبائل نیٹ ورکس دستیاب ہونے پر کام کرنا بند کرسکتی ہے۔\n\nآپ مزید مناسب ڈیٹا کے استعمال کے کنٹرولز ایپ میں ہی دستیاب ترتیبات میں تلاش کرسکتے ہیں۔"</string>
     <string name="data_usage_restrict_denied_dialog" msgid="8599940395497268584">"پس منظر ڈیٹا کو محدود کرنا صرف اسی وقت ممکن ہے جب آپ نے موبائل ڈيٹا کی ایک حد مقرر کی ہو۔"</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"ڈیٹا آٹو سنک کریں کو آن کریں؟"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="6387714350903085918">"‏آپ ویب پر اپنے اکاؤنٹس میں جو بھی تبدیلیاں کرتے ہیں وہ آپ کے ٹیبلیٹ میں خود بخود کاپی ہو جائیں گی۔\n\nکچھ اکاؤنٹس ایسی تبدیلیاں جو آپ ٹیبلیٹ پر کرتے ہیں انہیں خود بخود ویب پر بھی کاپی کر سکتے ہیں۔ Google اکاؤنٹ اس طریقے سے کام کرتا ہے۔"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="6457107552266187107">"‏آپ ویب پر اپنے اکاؤنٹس میں جو بھی تبدیلیاں کرتے ہیں وہ آپ کے فون میں خود بخود کاپی ہو جائیں گی۔\n\nکچھ اکاؤنٹس ایسی تبدیلیاں جو آپ فون پر کرتے ہیں انہیں خود بخود ویب پر بھی کاپی کر سکتے ہیں۔ Google اکاؤنٹ اس طریقے سے کام کرتا ہے۔"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"ڈیٹا آٹو سنک کریں کو آف کریں؟"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"اس سے ڈیٹا اور بیٹری کے استعمال میں بچت ہو گی، لیکن آپ کو حالیہ معلومات اکٹھا کرنے کیلئے ہر اکاؤنٹ کو دستی طور پر مطابقت پذیر بنانا ہوگا۔ اور اپ ڈیٹس ہونے کے وقت آپ کو اطلاعات موصول نہیں ہوں گی۔"</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"استعمال کے دورانیے کو دوبارہ سیٹ کرنے کی تاریخ"</string>
@@ -2702,8 +2423,6 @@
     <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"ڈیٹا کے استعمال کی وارننگ سیٹ کریں"</string>
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"ڈیٹا کے استعمال کی حد سیٹ کریں"</string>
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"ڈیٹا کا استعمال محدود کرنا"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"آپ کا ٹیبلیٹ آپ کی مقرر کردہ حد کو پہنچ جانے پر موبائل ڈیٹا کو آف کردے گا۔\n\nچونکہ ڈیٹا کے استعمال کی پیمائش آپ کے ٹیبلیٹ کے ذریعے کی جاتی ہے اور آپ کا کیریئر استعمال کا حساب مختلف طریقے سے کرسکتا ہے لہذا ایک محتاط حد مقرر کرنے پر غور کریں۔"</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"آپ کا فون آپ کی مقرر کردہ حد کو پہنچ جانے پر موبائل ڈیٹا کو آف کردے گا۔\n\nچونکہ ڈیٹا کے استعمال کی پیمائش آپ کے فون کے ذریعے کی جاتی ہے اور آپ کا کیریئر استعمال کا حساب مختلف طریقے سے کرسکتا ہے لہذا ایک محتاط حد مقرر کرنے پر غور کریں۔"</string>
     <string name="data_usage_sweep_warning" msgid="2072854703184614828"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"وارننگ"</font></string>
     <string name="data_usage_sweep_limit" msgid="6947019190890086284"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"حد"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="9065885396147675694">"ہٹائی گئی ایپس"</string>
@@ -2815,9 +2534,6 @@
       <item quantity="one">سرٹیفیکیٹ چیک کریں</item>
     </plurals>
     <string name="user_settings_title" msgid="6550866465409807877">"متعدد صارفین"</string>
-    <string name="user_settings_footer_text" product="device" msgid="7523914344521302179">"نئے صارفین کو شامل کر کے اپنے آلہ کا اشتراک کریں۔ حسب ضرورت ہوم اسکرینز، اکاؤنٹس، ایپس اور ترتیبات وغیرہ کے لیے آپ کے آلہ پر ہر صارف کے لیے ذاتی جگہ ہوتی ہے۔"</string>
-    <string name="user_settings_footer_text" product="tablet" msgid="3730074318510244552">"نئے صارفین کو شامل کر کے اپنے ٹیبلیٹ کا اشتراک کریں۔ حسب ضرورت ہوم اسکرینز، اکاؤنٹس، ایپس اور ترتیبات وغیرہ کے لیے آپ کے ٹیبلیٹ پر ہر صارف کے لیے ذاتی جگہ ہوتی ہے۔"</string>
-    <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"نئے صارفین کو شامل کر کے اپنے فون کا اشتراک کریں۔ حسب ضرورت ہوم اسکرینز، اکاؤنٹس، ایپس اور ترتیبات وغیرہ کے لیے آپ کے فون پر ہر صارف کے لیے ذاتی جگہ ہوتی ہے۔"</string>
     <string name="user_list_title" msgid="1387379079186123404">"‏صارفین ‎اور‎ پروفائلز"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"صارف یا پروفائل شامل کریں"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"محدود پروفائل"</string>
@@ -2827,8 +2543,6 @@
     <string name="user_admin" msgid="4024553191395768119">"منتظم"</string>
     <string name="user_you" msgid="3070562015202859996">"آپ (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"آپ مزید صارفین شامل نہیں کر سکتے۔ ایک نیا صارف شامل کرنے کے لیے کسی صارف کو ہٹائیں۔"</string>
-    <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"صرف ٹیبلٹ کا مالک صارفین کا نظم کر سکتا ہے۔"</string>
-    <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"صرف فون کا مالک صارفین کا نظم کر سکتا ہے۔"</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"محدود پروفائلز اکاؤنٹس شامل نہیں کر سکتے ہیں"</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"اس آلہ سے <xliff:g id="USER_NAME">%1$s</xliff:g> حذف کریں"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"قفل اسکرین کی ترتیبات"</string>
@@ -2838,8 +2552,6 @@
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"اس صارف کو حذف کریں؟"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"یہ پروفائل ہٹا دیں؟"</string>
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"دفتری پروفائل ہٹائیں؟"</string>
-    <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"آپ اس ٹیبلٹ پر موجود اپنی جگہ اور ڈیٹا کھو دیں گے۔ آپ اس کارروائی کو کالعدم نہیں کر سکتے ہیں۔"</string>
-    <string name="user_confirm_remove_self_message" product="default" msgid="5991495192044543230">"آپ اس فون پر موجود اپنی جگہ اور ڈیٹا کھو دیں گے۔ آپ اس کارروائی کو کالعدم نہیں کر سکتے ہیں۔"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"سبھی ایپس اور ڈیٹا حذف ہو جائیں گے۔"</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"اگر آپ جاری رکھتے ہیں تو اس پروفائل میں موجود سبھی ایپس اور ڈیٹا حذف ہو جائے گا۔"</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"سبھی ایپس اور ڈیٹا حذف ہو جائیں گے۔"</string>
@@ -2904,9 +2616,6 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"پابندیاں ہٹائیں"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"‏PIN تبدیل کریں"</string>
     <string name="help_label" msgid="2896538416436125883">"مدد اور تاثرات"</string>
-    <string name="support_summary" product="default" msgid="6137136608018134563">"امدادی مضامین، فون اور چیٹ"</string>
-    <string name="support_summary" product="tablet" msgid="6681247727996378252">"امدادی مضامین، ٹیبلیٹ اور چیٹ"</string>
-    <string name="support_summary" product="device" msgid="1690554254039752541">"امدادی مضامین، آلہ اور چیٹ"</string>
     <string name="user_account_title" msgid="6389636876210834864">"مواد کیلئے اکاؤنٹ"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"‏تصویری ID"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"انتہائی خطرات"</string>
@@ -4091,9 +3800,6 @@
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"بٹن والی نیویگیشن"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"اشاروں والی نیویگیشن، پیچھے کی حساسیت، پیچھے کا اشارہ"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"نیویگیشن، ہوم بٹن"</string>
-    <string name="ambient_display_title" product="default" msgid="5885136049497127396">"فون کو چیک کرنے کیلئے دو بار تھپتھپائیں"</string>
-    <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"ٹیبلیٹ کو چیک کرنے کیلئے دو بار تھپتھپائیں"</string>
-    <string name="ambient_display_title" product="device" msgid="4164103424628824786">"آلہ کو چیک کرنے کیلئے دو بار تھپتھپائیں"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"ایک ہاتھ کی وضع"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"ایک ہاتھ کی وضع استعمال کریں"</string>
     <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"ایک ہاتھ کی وضع کا شارٹ کٹ"</string>
@@ -4107,16 +3813,7 @@
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"اطلاعات دکھائیں"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"اطلاعات اور ترتیبات ظاہر ہوں گی۔"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"وقت، اطلاعات، اور دیگر معلومات چیک کرنے کے لیے اپنی اسکرین کو دو بار تھپتھپائیں۔"</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"چیک کرنے کیلئے فون کو اٹھائیں"</string>
-    <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"چیک کرنے کیلئے ٹیبلیٹ کو اٹھائیں"</string>
-    <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"چیک کرنے کیلئے آلہ کو اٹھائیں"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"بیداری کا ڈسپلے"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"وقت، اطلاعات، اور دیگر معلومات چیک کرنے کے لیے اپنا فون اٹھائیں۔"</string>
-    <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"وقت، اطلاعات، اور دیگر معلومات چیک کرنے کے لیے اپنا ٹیبلیٹ اٹھائیں۔"</string>
-    <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"وقت، اطلاعات، اور دیگر معلومات چیک کرنے کے لیے اپنا آلہ اٹھائیں۔"</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"فون چیک کرنے کے لیے تھپتھپائیں"</string>
-    <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"ٹیبلیٹ چیک کرنے کے لیے تھپتھپائیں"</string>
-    <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"آلہ چیک کرنے کے لیے تھپتھپائیں"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"وقت، اطلاعات، اور دیگر معلومات چیک کرنے کے لیے اپنی اسکرین کو دو بار تھپتھپائیں۔"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"‏ایمرجنسی SOS"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"‏ایمرجنسی SOS کا استعمال کریں"</string>
@@ -4130,9 +3827,6 @@
     <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"‏اگر آپ غیر ایمرجنسی نمبر درج کرتے ہیں تو:\n • آپ کے آلے کا ایمرجنسی SOS استعمال کرنے کے لیے غیر مقفل ہونا ضروری ہے\n • ممکن ہے آپ کی کال کا جواب نہ دیا جائے"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"اطلاعات کیلئے فنگر پرنٹ سوائپ"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"سوائپ فنگر پرنٹ"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"اپنی اطلاعات چیک کرنے کیلئے اپنے فون کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں۔"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"اپنی اطلاعات چیک کرنے کیلئے اپنے ٹیبلیٹ کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں۔"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3888927017311372398">"اپنی اطلاعات چیک کرنے کیلئے اپنے آلہ کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں۔"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"جلدی سے اطلاعات دیکھیں"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="65713754674288193">"بوٹ لوڈر پہلے سے غیر مقفل ہے"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="7425519481227423860">"انٹرنیٹ سے منسلک ہوں یا اپنے کیرئیر سے رابطہ کریں"</string>
@@ -4619,9 +4313,6 @@
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"‏VoLTE آف کریں ؟"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"‏اس سے آپ کا 5G کنکشن بھی بند ہو جاتا ہے۔\n صوتی کال کے دوران، آپ انٹرنیٹ استعمال نہیں کر سکتے اور کچھ ایپس کام نہیں کر سکتی ہیں۔"</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"‏2 SIMs کا استعمال کرتے وقت، یہ فون 4G تک محدود ہوگا۔ "<annotation id="url">"مزید جانیں"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"‏2 SIMs کا استعمال کرتے وقت، یہ ٹیبلیٹ 4G تک محدود ہوگا۔ "<annotation id="url">"مزید جانیں"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"‏2 SIMs کا استعمال کرتے وقت، یہ آلہ 4G تک محدود ہوگا۔ "<annotation id="url">"مزید جانیں"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"کیشڈ ایپس کے ليے ایگزیکیوشن معطل کریں"</string>
     <string name="blob_never_expires_text" msgid="7293376386620106623">"میعاد کبھی ختم نہیں ہوتی ہے۔"</string>
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"لیز کی میعاد کبھی ختم نہیں ہوتی ہے۔"</string>
@@ -4656,8 +4347,6 @@
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"نیٹ ورک کی ترجیحات"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"‏نیٹ ورک کنکشن، انٹرنیٹ، وائرلیس، ڈیٹا، wifi، wi-fi، wi fi، سیلولر، موبائل، سیل کیریئر، 4g، 3g، 2g، ‏lte"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"اپنا انٹرنیٹ ری سیٹ کریں؟"</string>
-    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"اس سے آپ کی فون کال ختم ہو جائے گی"</string>
-    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"اس سے آپ کی فون کال ختم ہو جائے گی"</string>
     <string name="resetting_internet_text" msgid="6696779371800051806">"آپ کا انٹرنیٹ ری سیٹ کیا جا رہا ہے…"</string>
     <string name="fix_connectivity" msgid="2781433603228089501">"کنیکٹوٹی درست کریں"</string>
     <string name="networks_available" msgid="3299512933684383474">"نیٹ ورکس دستیاب ہیں"</string>

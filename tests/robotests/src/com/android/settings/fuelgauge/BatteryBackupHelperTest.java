@@ -51,6 +51,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.ArraySet;
 
+import com.android.settings.TestUtils;
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
@@ -288,6 +289,16 @@ public final class BatteryBackupHelperTest {
         final ArgumentCaptor<byte[]> captor = ArgumentCaptor.forClass(byte[].class);
         verify(mBackupDataInputStream).read(captor.capture(), eq(0), eq(dataSize));
         assertThat(captor.getValue().length).isEqualTo(dataSize);
+    }
+
+    @Test
+    public void restoreEntity_verifyConfiguration() {
+        final int invalidScheduledLevel = 5;
+        TestUtils.setScheduledLevel(mContext, invalidScheduledLevel);
+
+        mBatteryBackupHelper.restoreEntity(mBackupDataInputStream);
+
+        assertThat(TestUtils.getScheduledLevel(mContext)).isNotEqualTo(invalidScheduledLevel);
     }
 
     @Test

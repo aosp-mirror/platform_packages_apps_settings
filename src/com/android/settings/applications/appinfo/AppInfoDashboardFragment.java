@@ -215,9 +215,11 @@ public class AppInfoDashboardFragment extends DashboardFragment
         alarmsAndReminders.setPackageName(packageName);
         alarmsAndReminders.setParentFragment(this);
 
-        use(AdvancedAppInfoPreferenceCategoryController.class).setChildren(Arrays.asList(
-                writeSystemSettings, drawOverlay, pip, externalSource, acrossProfiles,
-                alarmsAndReminders));
+        final AdvancedAppInfoPreferenceCategoryController advancedAppInfo =
+                use(AdvancedAppInfoPreferenceCategoryController.class);
+        advancedAppInfo.setChildren(Arrays.asList(writeSystemSettings, drawOverlay, pip,
+                externalSource, acrossProfiles, alarmsAndReminders));
+        advancedAppInfo.setAppEntry(mAppEntry);
 
         final AppLocalePreferenceController appLocale =
                 use(AppLocalePreferenceController.class);
