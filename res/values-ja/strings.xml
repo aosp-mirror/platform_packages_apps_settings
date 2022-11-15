@@ -13,7 +13,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"はい"</string>
@@ -59,9 +58,6 @@
     <string name="bluetooth_rename_device" msgid="4219655243836021443">"このデバイスの名前を変更"</string>
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"名前を変更"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"デバイスの接続を解除しますか？"</string>
-    <string name="bluetooth_disconnect_all_profiles" product="default" msgid="1934297101665686854">"このスマートフォンと <xliff:g id="DEVICE_NAME">%1$s</xliff:g> との接続を解除します。"</string>
-    <string name="bluetooth_disconnect_all_profiles" product="tablet" msgid="336622948210457991">"このタブレットと <xliff:g id="DEVICE_NAME">%1$s</xliff:g> との接続を解除します。"</string>
-    <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"このデバイスと <xliff:g id="DEVICE_NAME">%1$s</xliff:g> との接続を解除します。"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"新しいデバイスとペア設定"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"右耳をペア設定"</string>
@@ -72,9 +68,6 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"右耳をペア設定"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"左耳をペア設定"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"関連ツール"</string>
-    <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"スマートフォンの Bluetooth アドレス: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"タブレットの Bluetooth アドレス: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="device" msgid="2863536947810007600">"デバイスの Bluetooth アドレス: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"名前のないBluetoothデバイス"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"検索中"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"周辺にBluetoothデバイスが見つかりません"</string>
@@ -88,22 +81,6 @@
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」が Bluetooth を OFF にしようとしています"</string>
     <string name="bluetooth_ask_enablement_no_name" msgid="5091401961637405417">"アプリが Bluetooth を ON にしようとしています"</string>
     <string name="bluetooth_ask_disablement_no_name" msgid="382299750909188822">"アプリが Bluetooth を OFF にしようとしています"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="1273405567801929487">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」が <xliff:g id="TIMEOUT">%2$d</xliff:g> 秒間他の Bluetooth デバイスにこのタブレットを表示しようとしています。"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="7013223328571883275">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」が <xliff:g id="TIMEOUT">%2$d</xliff:g> 秒間他の Bluetooth デバイスにこのスマートフォンを表示しようとしています。"</string>
-    <string name="bluetooth_ask_discovery_no_name" product="tablet" msgid="3266007454914144057">"アプリが <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒間他の Bluetooth デバイスにこのタブレットを表示しようとしています。"</string>
-    <string name="bluetooth_ask_discovery_no_name" product="default" msgid="7989444746980501116">"アプリが <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒間他の Bluetooth デバイスにこのスマートフォンを表示しようとしています。"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="6482084870735107773">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」が他の Bluetooth デバイスにこのタブレットを表示しようとしています。これは後から Bluetooth の設定で変更できます。"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="2352494279465502950">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」が他の Bluetooth デバイスにこのスマートフォンを表示しようとしています。これは後から Bluetooth の設定で変更できます。"</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="tablet" msgid="2732992604509910896">"アプリが他の Bluetooth デバイスにこのタブレットを表示しようとしています。これは後から Bluetooth の設定で変更できます。"</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="default" msgid="356982103612920264">"アプリが他の Bluetooth デバイスにこのスマートフォンを表示しようとしています。これは後から Bluetooth の設定で変更できます。"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="6103655179509599427">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」が <xliff:g id="TIMEOUT">%2$d</xliff:g> 秒間 Bluetooth を ON にして他のデバイスにこのタブレットを表示しようとしています。"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="934276632311449337">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」が <xliff:g id="TIMEOUT">%2$d</xliff:g> 秒間 Bluetooth を ON にして他のデバイスにこのスマートフォンを表示しようとしています。"</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="tablet" msgid="1284048348024444485">"アプリが <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒間 Bluetooth を ON にして他のデバイスにこのタブレットを表示しようとしています。"</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="default" msgid="2661614145022629454">"アプリが <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒間 Bluetooth を ON にして他のデバイスにこのスマートフォンを表示しようとしています。"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="8588317955400593623">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」が Bluetooth を ON にして他のデバイスにこのタブレットを表示しようとしています。これは後から Bluetooth の設定で変更できます。"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="4047444317445386579">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」が Bluetooth を ON にして他のデバイスにこのスマートフォンを表示しようとしています。これは後から Bluetooth の設定で変更できます。"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="tablet" msgid="4922952478824372605">"アプリが Bluetooth を ON にして他のデバイスにこのタブレットを表示しようとしています。これは後から Bluetooth の設定で変更できます。"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="default" msgid="1381582950049639439">"アプリが Bluetooth を ON にして他のデバイスにこのスマートフォンを表示しようとしています。これは後から Bluetooth の設定で変更できます。"</string>
     <string name="bluetooth_turning_on" msgid="3842613808709024730">"BluetoothをONにしています..."</string>
     <string name="bluetooth_turning_off" msgid="7406309124247701148">"BluetoothをOFFにしています..."</string>
     <string name="bluetooth_connection_permission_request" msgid="8793131019383198861">"Bluetooth接続リクエスト"</string>
@@ -239,10 +216,6 @@
     <string name="account_settings_title" msgid="9138880127246241885">"アカウント"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"セキュリティ"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"暗号化と認証情報"</string>
-    <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"スマートフォンの暗号化"</string>
-    <string name="not_encrypted_summary" product="default" msgid="2251945842585788254">"スマートフォンが暗号化されていません"</string>
-    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"デバイスの暗号化"</string>
-    <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"デバイスが暗号化されていません"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"ロック画面"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"表示する情報"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"利用不可"</string>
@@ -258,17 +231,11 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"顔認証の設定"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"顔で認証"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"開始"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"ユーザー補助の顔認証が OFF に設定されている場合、一部の設定手順は TalkBack を使用して適切に行えないことがあります。"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"戻る"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"設定を続行"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"ユーザー補助の設定を使用"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"キャンセル"</string>
@@ -278,53 +245,14 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"顔認証でロックを解除"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"顔認証の許可"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"顔で認証"</string>
-    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"顔認証を使用して、スマートフォンのロック解除、購入の許可、アプリへのログインを行うことができます。"</string>
-    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"顔認証を使用して、タブレットのロック解除、購入の承認、アプリへのログインを行うことができます。"</string>
-    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"顔認証を使用して、デバイスのロック解除、購入の承認、アプリへのログインを行うことができます。"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"お子様に、顔認証を使ってスマートフォンのロック解除を行うことを許可します"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"お子様に、顔認証を使ってタブレットのロック解除を行うことを許可します"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"お子様に、顔認証を使ってデバイスのロック解除を行うことを許可します"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"お子様の顔認証によるスマートフォンのロック解除は、複雑なパターンや PIN よりも安全面で劣る可能性があります。"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"お子様の顔認証によるタブレットのロック解除は、複雑なパターンや PIN よりも安全面で劣る可能性があります。"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"お子様の顔認証によるデバイスのロック解除は、複雑なパターンや PIN よりも安全面で劣る可能性があります。"</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"顔を使って、スマートフォンのロック解除や購入の承認を行います。\n\n注: 顔を使ってこのデバイスのロックを解除することはできません。詳しくは、組織の管理者にお問い合わせください。"</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"顔認証を使用して、スマートフォンのロック解除、購入の許可、アプリへのログインを行うことができます"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"顔が円の中央にくるようにしてください"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"スキップ"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"追加された顔の数が上限に達しました"</string>
@@ -369,12 +297,6 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"指紋の設定"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"指紋認証によるロック解除の許可"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"指紋の使用"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"指紋を使ってタブレットのロック解除や本人確認（アプリへのログインや購入の承認など）を行えるようになります。"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"指紋を使ってデバイスのロック解除や本人確認（アプリへのログインや購入の承認など）を行えるようにします。"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"指紋を使ってスマートフォンのロック解除や本人確認（アプリへのログインや購入の承認など）を行えるようにします。"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"お子様に、指紋を使ってスマートフォンのロック解除や本人確認を行うことを許可します。アプリへのログインや購入の承認などに顔を使用できるようになります。"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"指紋を使ってタブレットのロック解除や本人確認を行うことをお子様に許可します。アプリへのログインや購入の承認などの際に利用できます。"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"指紋を使ってデバイスのロック解除や本人確認を行うことをお子様に許可します。アプリへのログインや購入の承認などの際に利用できます。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"データはデバイス内だけに保存"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"あなたとお子様が管理できます"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"注意事項"</string>
@@ -386,36 +308,12 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"指紋の設定にかかる時間は 1～2 分です。スキップした場合は、後で設定から指紋を追加できます。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"このアイコンが表示される場合は、アプリへのログイン時や購入の承認時などの認証に指紋を使用してください"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"注意事項"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"指紋を使ったスマートフォンのロック解除は、複雑なパターンや PIN よりも安全面で劣る可能性があります"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"指紋を使ったタブレットのロック解除は、複雑なパターンや PIN よりも安全面で劣る可能性があります"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"指紋を使ったデバイスのロック解除は、複雑なパターンや PIN よりも安全面で劣る可能性があります"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"仕組み"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"指紋認証を設定する際に、本人確認に使う指紋の一意のモデルを作成します。この指紋モデルを作成するため、さまざまな角度から指紋の画像を撮影します。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"指紋認証を設定する際に、本人確認に使うお子様の指紋の一意のモデルを作成します。この指紋モデルを作成するため、さまざまな角度から指紋の画像を撮影します。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"Pixel Imprint を使用すると、画像を基に指紋モデルが更新されます。指紋モデルの作成に使用された画像が保存されることはありませんが、指紋モデルはスマートフォンに安全に保存されます。この情報が外部に送信されることは一切なく、処理はすべてスマートフォン上で安全に行われます。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"Pixel Imprint を使用すると、画像を基に指紋モデルが更新されます。指紋モデルの作成に使用された画像が保存されることはありませんが、指紋モデルはタブレットに安全に保存されます。この情報が外部に送信されることは一切なく、処理はすべてタブレット上で安全に行われます。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"Pixel Imprint を使用すると、画像を基に指紋モデルが更新されます。指紋モデルの作成に使用された画像が保存されることはありませんが、指紋モデルはデバイスに安全に保存されます。この情報が外部に送信されることは一切なく、処理はすべてデバイス上で安全に行われます。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"Pixel Imprint を使用すると、画像を基に指紋モデルが更新されます。お子様の指紋モデルの作成に使用された画像が保存されることはありませんが、指紋モデルはスマートフォンに安全に保存されます。この情報が外部に送信されることは一切なく、処理はすべてスマートフォン上で安全に行われます。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"Pixel Imprint を使用すると、画像を基に指紋モデルが更新されます。お子様の指紋モデルの作成に使用された画像が保存されることはありませんが、指紋モデルはタブレットに安全に保存されます。この情報が外部に送信されることは一切なく、処理はすべてタブレット上で安全に行われます。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"Pixel Imprint を使用すると、画像を基に指紋モデルが更新されます。お子様の指紋モデルの作成に使用された画像が保存されることはありませんが、指紋モデルはデバイスに安全に保存されます。この情報が外部に送信されることは一切なく、処理はすべてデバイス上で安全に行われます。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"いつでも [設定] で指紋の画像やモデルを削除したり、指紋認証を OFF にしたりできます。指紋の画像とモデルは、削除するまでデバイスに保存されたままになります。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"いつでも [設定] で指紋の画像や指紋モデルを削除したり指紋認証を OFF にしたりできます。指紋の画像と指紋モデルは、削除するまでタブレットに保存されたままになります。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"いつでも [設定] で指紋の画像や指紋モデルを削除したり指紋認証を OFF にしたりできます。指紋の画像と指紋モデルは、削除するまでデバイスに保存されたままになります。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"あなたとお子様はいつでも [設定] で指紋の画像や指紋モデルを削除したり指紋認証を OFF にしたりできます。指紋の画像と指紋モデルは、削除するまでスマートフォンに保存されたままになります。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"あなたとお子様はいつでも [設定] で指紋の画像や指紋モデルを削除したり指紋認証を OFF にしたりできます。指紋の画像と指紋モデルは、削除するまでタブレットに保存されたままになります。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"あなたとお子様はいつでも [設定] で指紋の画像や指紋モデルを削除したり指紋認証を OFF にしたりできます。指紋の画像と指紋モデルは、削除するまでデバイスに保存されたままになります。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"あなたの指にスマートフォンを近づけられた場合など、意図せずスマートフォンのロックが解除されることがあります。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"あなたの指にタブレットを近づけられた場合など、意図せずタブレットのロックが解除されることがあります。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"あなたの指にデバイスを近づけられた場合など、意図せずデバイスのロックが解除されることがあります。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"お子様の指にスマートフォンを近づけられた場合など、意図せずお子様のスマートフォンのロックが解除されることがあります。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"お子様の指にタブレットを近づけられた場合など、意図せずお子様のタブレットのロックが解除されることがあります。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"お子様の指にデバイスを近づけられた場合など、意図せずお子様のデバイスのロックが解除されることがあります。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"最適な結果を得るには、Made For Google 認定の画面保護シートを使用してください。これ以外の画面保護シートを使うと、指紋が認識されない可能性があります。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"最適な結果を得るには、Made For Google 認定の画面保護シートを使用してください。これ以外の画面保護シートを使うと、お子様の指紋が認識されない可能性があります。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"指紋を使ってタブレットのロック解除や本人確認（アプリへのログインなど）を行えるようになります。"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"指紋を使ってデバイストのロック解除や本人確認（アプリへのログインなど）を行えるようにします。"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"指紋を使ってスマートフォンのロック解除や本人確認（アプリへのログインなど）を行えるようにします。"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"顔認証と指紋認証によるロック解除"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"タップして設定してください"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"顔と指紋を登録しました"</string>
@@ -427,17 +325,8 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"顔認証を使用する"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"指紋認証を使用する"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"顔認証または指紋認証を使用する"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"タブレットを保護者に渡してください"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"デバイスを保護者に渡してください"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"スマートフォンを保護者に渡してください"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"画面ロックをスキップしますか？"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"デバイス保護機能は ON になりません。このタブレットの紛失、盗難、リセット時に、他人に使用されるのを阻止することはできません。"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"デバイス保護機能は ON になりません。このデバイスの紛失、盗難、リセット時に、他人に使用されるのを阻止することはできません。"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2412426429887900241">"デバイス保護機能は ON になりません。このスマートフォンの紛失、盗難、リセット時に、他人に使用されるのを阻止することはできません。"</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="7119039592587429936">"デバイス保護機能は ON になりません。このタブレットの紛失や盗難時に、他人に使用されるのを阻止することはできません。"</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3365990364131398523">"デバイス保護機能は ON になりません。このデバイスの紛失や盗難時に、他人に使用されるのを阻止することはできません。"</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="4908278819257287536">"デバイス保護機能は ON になりません。このスマートフォンの紛失や盗難時に、他人に使用されるのを阻止することはできません。"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"スキップ"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"戻る"</string>
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"スキップ"</string>
@@ -446,9 +335,6 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"軽く電源ボタンに触れてください"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"指紋の登録方法"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"スマートフォンの背面にある指紋センサーを人差し指でタッチしてください。"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"指紋認証センサーは電源ボタンに内蔵されています。タブレットの端にある盛り上がった音量ボタンの横のフラットなボタンです。\n\n電源ボタンを押すと画面が OFF になります。"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"指紋認証センサーは電源ボタンに内蔵されています。デバイスの端にある盛り上がった音量ボタンの横のフラットなボタンです。\n\n電源ボタンを押すと画面が OFF になります。"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"指紋認証センサーは電源ボタンに内蔵されています。スマートフォンの端にある盛り上がった音量ボタンの横のフラットなボタンです。\n\n電源ボタンを押すと画面が OFF になります。"</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"指紋認証センサーは画面上にあります。次の画面で指紋を登録します。"</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"開始"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"画面上で指を移動すると、センサーが見つかります。指紋認証センサーを長押ししてください。"</string>
@@ -481,9 +367,6 @@
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"指紋の登録中: <xliff:g id="PERCENTAGE">%d</xliff:g> パーセント"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"指紋の登録完了"</string>
     <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"指紋認証を使用して、タブレットのロック解除や本人確認（アプリへのログインや購入の承認など）を行えるようになりました"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"指紋を使って、タブレットのロック解除や本人確認（アプリへのログインなど）を行えるようになりました"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"指紋を使って、デバイスのロック解除や本人確認（アプリへのログインなど）を行えるようになりました"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"指紋を使って、スマートフォンのロック解除や本人確認（アプリへのログインなど）を行えるようになりました"</string>
     <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
     <skip />
     <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
@@ -495,42 +378,6 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"指紋をセンサーに当てて長押しし、指を離してから別の部分を当ててください"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"指紋の設定をスキップしますか？"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"スマートフォンのロック解除方法として指紋を選択しています。スキップした場合は、後でセットアップする必要があります。セットアップの所要時間は1分程度です。"</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"PIN は紛失・盗難時にタブレットを保護します"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="4359575348578515037">"パターンは紛失・盗難時にタブレットを保護します"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5420451292764062637">"パスワードは、紛失したり盗難に遭ったりした場合にタブレットを保護するものです"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="8841426051550671169">"PIN は紛失・盗難時にデバイスを保護します"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="6296702954920045923">"パターンは紛失・盗難時にデバイスを保護します"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="9186075211441188900">"パスワードは、紛失したり盗難に遭ったりした場合にデバイスを保護するものです"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="4301690296689572747">"PIN は紛失・盗難時にスマートフォンを保護します"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="7387967847446084260">"パターンは紛失・盗難時にスマートフォンを保護します"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="6415788841227543063">"パスワードは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="2350062798056164403">"指紋認証を設定するには PIN が必要です。\n\nPIN は紛失・盗難時にタブレットを保護します。"</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="222574071926747300">"指紋認証を設定するにはパターンが必要です。\n\nパターンは紛失・盗難時にタブレットを保護します。"</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="7780323831330724644">"指紋認証を設定するにはパスワードが必要です。\n\nパスワードは、紛失したり盗難に遭ったりした場合にタブレットを保護するものです。"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="7421096089691939451">"指紋認証を設定するには PIN が必要です。\n\nPIN は紛失・盗難時にデバイスを保護します。"</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6458468083711413617">"指紋認証を設定するにはパターンが必要です。\n\nパターンは紛失・盗難時にデバイスを保護します。"</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="1632249532665518954">"指紋認証を設定するにはパスワードが必要です。\n\nパスワードは、紛失したり盗難に遭ったりした場合にデバイスを保護するものです。"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3101384462491132314">"指紋認証を設定するには PIN が必要です。\n\nPIN は紛失・盗難時にスマートフォンを保護します。"</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="382422778886929469">"指紋認証を設定するにはパターンが必要です。\n\nパターンは紛失・盗難時にスマートフォンを保護します。"</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="5515199168425229243">"指紋認証を設定するにはパスワードが必要です。\n\nパスワードは紛失・盗難時にスマートフォンを保護します。"</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="2454239555320628731">"顔認証を設定するには PIN が必要です。\n\nPIN は紛失・盗難時にタブレットを保護します。"</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="4354138725903415816">"顔認証を設定するにはパターンが必要です。\n\nパターンは紛失・盗難時にタブレットを保護します。"</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="719339718267952196">"顔認証を設定するにはパスワードが必要です。\n\nパスワードは、紛失したり盗難に遭ったりした場合にタブレットを保護するものです。"</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="3729243407606881750">"顔認証を設定するには PIN が必要です。\n\nPIN は紛失・盗難時にデバイスを保護します。"</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="6966329744346503807">"顔認証を設定するにはパターンが必要です。\n\nパターンは紛失・盗難時にデバイスを保護します。"</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3020827854443297996">"顔認証を設定するにはパスワードが必要です。\n\nパスワードは、紛失したり盗難に遭ったりした場合にデバイスを保護するものです。"</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2155678903559865476">"顔認証を設定するには PIN が必要です。\n\nPIN は紛失・盗難時にスマートフォンを保護します。"</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="473271568005748452">"顔認証を設定するにはパターンが必要です。\n\nパターンは紛失・盗難時にスマートフォンを保護します。"</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="4319934862372116788">"顔認証を設定するにはパスワードが必要です。\n\nパスワードは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです。"</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="647987565338402155">"顔認証と指紋認証を設定するには PIN が必要です。\n\nPIN は紛失・盗難時にタブレットを保護します。"</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="5293609077890072841">"顔認証と指紋認証を設定するにはパターンが必要です。\n\nパターンは紛失・盗難時にタブレットを保護します。"</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="2660359318928684172">"顔認証と指紋認証を設定するにはパスワードが必要です。\n\nパスワードは、紛失したり盗難に遭ったりした場合にタブレットを保護するものです。"</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="1278795063897397815">"顔認証と指紋認証を設定するには PIN が必要です。\n\nPIN は紛失・盗難時にデバイスを保護します。"</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="8766169819759371801">"顔認証と指紋認証を設定するにはパターンが必要です。\n\nパターンは紛失・盗難時にデバイスを保護します。"</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="8611216039321306045">"顔認証と指紋認証を設定するにはパスワードが必要です。\n\nパスワードは、紛失したり盗難に遭ったりした場合にデバイスを保護するものです。"</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="8796878521409329051">"顔認証と指紋認証を設定するには PIN が必要です。\n\nPIN は紛失・盗難時にスマートフォンを保護します。"</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="8423700958936341596">"顔認証と指紋認証を設定するにはパターンが必要です。\n\nパターンは紛失・盗難時にスマートフォンを保護します。"</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="5411689248299854172">"顔認証と指紋認証を設定するにはパスワードが必要です。\n\nパスワードは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです。"</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"PIN の設定をスキップしますか？"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"PIN と顔の設定をスキップしますか？"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"PIN と指紋の設定をスキップしますか？"</string>
@@ -565,40 +412,20 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"追加された指紋の数が上限に達しました"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"これ以上、指紋を追加できません"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」を削除"</string>
-    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"スマートフォンに保存されている「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」に関連付けられた指紋の画像とモデルが削除されます"</string>
-    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"タブレットに保存されている「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」に関連付けられた指紋の画像とモデルが削除されます"</string>
-    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"デバイスに保存されている「<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>」に関連付けられた指紋の画像とモデルが削除されます"</string>
-    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"指紋を使ってスマートフォンのロック解除やアプリでの本人確認を行うことができなくなります。"</string>
-    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"指紋を使用したタブレットのロック解除やアプリでの本人確認ができなくなります。"</string>
-    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"指紋を使用したデバイスのロック解除やアプリでの本人確認ができなくなります。"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"仕事用プロファイルのロック解除や、購入の承認、仕事用アプリへのログインに、指紋を使用できなくなります。"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"暗号化"</string>
-    <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"タブレットの暗号化"</string>
-    <string name="encrypt_title" product="default" msgid="7337365190988321100">"スマートフォンの暗号化"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"暗号化されています"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"画面ロックの設定"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"セキュリティを強化するために、このデバイスの PIN、パターン、またはパスワードを設定してください。"</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"画面ロックを設定"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"スマートフォンの保護"</string>
-    <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"画面ロックを設定するとタブレットを保護できます"</string>
-    <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"画面ロックを設定するとデバイスを保護できます"</string>
-    <string name="suggested_lock_settings_summary" product="default" msgid="2443273582716671033">"画面ロックを設定するとスマートフォンを保護できます"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"ロック解除に使う指紋を追加"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="1040265358906410746"></string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"画面ロックを選択"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"画面ロックの選択"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"新しい画面ロックの選択"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"仕事用アプリのロックの選択"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"新しい仕事用ロックの選択"</string>
-    <string name="setup_lock_settings_picker_title" product="tablet" msgid="1276283007274778191">"タブレットの保護"</string>
-    <string name="setup_lock_settings_picker_title" product="device" msgid="3585905639045649905">"デバイスの保護"</string>
-    <string name="setup_lock_settings_picker_title" product="default" msgid="2758197863515864300">"スマートフォンの保護"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"セキュリティ強化のため、予備の画面ロックを設定してください"</string>
-    <string name="setup_lock_settings_picker_message" product="tablet" msgid="4870877800737248926">"このタブレットが他人に無断で使用されるのを防ぐには、デバイス保護機能を有効にします。利用する画面ロックを選択してください。"</string>
-    <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"このデバイスが他人に無断で使用されるのを防ぐには、デバイス保護機能を有効にします。利用する画面ロックを選択してください。"</string>
-    <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"このスマートフォンが他人に無断で使用されるのを防ぐには、デバイス保護機能を有効にします。利用する画面ロックを選択してください。"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"予備の画面ロック方式を選択してください"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"画面ロックを忘れるとIT管理者もリセットできません。"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"仕事用に別のロックを設定"</string>
@@ -638,43 +465,31 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"プロファイル保護を削除しますか？"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"パターンは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"パターンは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです。<xliff:g id="EMPTY_LINE">
-
 </xliff:g>パターンを削除すると、デバイスに保存されている指紋モデルも削除されます。アプリでの認証に指紋を使用できなくなります。"</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"パターンは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです。<xliff:g id="EMPTY_LINE">
-
 </xliff:g>パターンを削除すると、顔モデルも安全かつ完全に削除されます。アプリでの認証に顔を使用できなくなります。"</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"パターンは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです。<xliff:g id="EMPTY_LINE">
-
 </xliff:g>パターンを削除すると、デバイスに保存されている指紋モデルが削除されます。顔モデルも安全かつ完全に削除されます。アプリでの認証に顔や指紋を使用できなくなります。"</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"PIN は紛失・盗難時にスマートフォンを保護します"</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"PIN は紛失・盗難時にスマートフォンを保護します。<xliff:g id="EMPTY_LINE">
-
 </xliff:g>PIN を削除すると、デバイスに保存されている指紋モデルも削除されます。アプリでの認証に指紋を使用できなくなります。"</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"PIN は紛失・盗難時にスマートフォンを保護します。<xliff:g id="EMPTY_LINE">
-
 </xliff:g>PIN を削除すると、顔認証のモデルも安全かつ完全に削除されます。アプリでの認証に顔を使用できなくなります。"</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"PIN は紛失・盗難時にスマートフォンを保護します。<xliff:g id="EMPTY_LINE">
-
 </xliff:g>PIN を削除すると、デバイスに保存されている指紋モデルと顔認証モデルが安全かつ完全に削除されます。アプリでの認証に顔や指紋を使用できなくなります。"</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"パスワードは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"パスワードは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです。<xliff:g id="EMPTY_LINE">
-
 </xliff:g>パスワードを削除すると、デバイスに保存されている指紋モデルも削除されます。アプリでの認証に指紋を使用できなくなります。"</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"パスワードは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです。<xliff:g id="EMPTY_LINE">
-
 </xliff:g>パスワードを削除すると、顔モデルも安全かつ完全に削除されます。アプリでの認証に顔を使用できなくなります。"</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"パスワードは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです。<xliff:g id="EMPTY_LINE">
-
 </xliff:g>パスワードを削除すると、デバイスに保存されている指紋モデルが削除されます。顔モデルも安全かつ完全に削除されます。アプリでの認証に顔や指紋を使用できなくなります。"</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"画面ロックがないと、デバイス保護機能は利用できません。"</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"画面ロックがないと、デバイス保護機能は利用できません。<xliff:g id="EMPTY_LINE">
-
 </xliff:g>画面ロックを削除すると、デバイスに保存されている指紋モデルも削除されます。アプリでの認証に指紋を使用できなくなります。"</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"画面ロックがないと、デバイス保護機能は利用できません。<xliff:g id="EMPTY_LINE">
-
 </xliff:g>画面ロックを削除すると、顔モデルも安全かつ完全に削除されます。アプリでの認証に顔を使用できなくなります。"</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"画面ロックがないと、デバイス保護機能は利用できません。<xliff:g id="EMPTY_LINE">
-
 </xliff:g>画面ロックを削除すると、デバイスに保存されている指紋モデルが削除されます。顔モデルも安全かつ完全に削除されます。アプリでの認証に顔や指紋を使用できなくなります。"</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"削除"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> が安全な PIN またはパスワードの設定を推奨しています。設定しないと、正しく動作しない可能性があります"</string>
@@ -785,9 +600,6 @@
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"このデバイスとのペア設定を解除しますか？"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"関連付けを削除"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"アプリの接続を解除しますか？"</string>
-    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"お使いのスマートフォンと <xliff:g id="DEVICE_NAME">%1$s</xliff:g> とのペア設定が解除されます"</string>
-    <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"このタブレットと <xliff:g id="DEVICE_NAME">%1$s</xliff:g> とのペア設定を解除します"</string>
-    <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"このデバイスと <xliff:g id="DEVICE_NAME">%1$s</xliff:g> とのペア設定を解除します"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> アプリは <xliff:g id="DEVICE_NAME">%2$s</xliff:g> に接続できなくなります。"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"このデバイスとのペア設定を解除"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"アプリの接続を解除する"</string>
@@ -832,7 +644,6 @@
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"現在のディスプレイ リフレッシュ レートの表示"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"NFC の使用にロック解除を要求"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"画面がロック解除されている場合のみ NFC の利用を許可します"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android ビーム"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"アプリコンテンツをNFCで転送できます"</string>
     <string name="nfc_disabled_summary" msgid="8737797364522502351">"NFC が OFF のため使用できません"</string>
@@ -1040,14 +851,10 @@
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> はアクティブです"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"AndroidHotspot"</string>
     <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"このネットワークを保存しますか？"</string>
-    <string name="wifi_add_app_single_network_summary" product="default" msgid="6881712878537666626">"<xliff:g id="APPNAME">%1$s</xliff:g> がスマートフォンにネットワークを保存しようとしています"</string>
-    <string name="wifi_add_app_single_network_summary" product="tablet" msgid="8455616967601552440">"<xliff:g id="APPNAME">%1$s</xliff:g> がタブレットにネットワークを保存しようとしています"</string>
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"保存しています…"</string>
     <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"保存しました"</string>
     <string name="wifi_add_app_network_save_failed_summary" msgid="7223817782309294652">"保存できません。もう一度お試しください。"</string>
     <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"ネットワークを保存しますか？"</string>
-    <string name="wifi_add_app_networks_summary" product="default" msgid="2670215712788515167">"<xliff:g id="APPNAME">%1$s</xliff:g> がスマートフォンにこれらのネットワークを保存しようとしています"</string>
-    <string name="wifi_add_app_networks_summary" product="tablet" msgid="2088967184512169910">"<xliff:g id="APPNAME">%1$s</xliff:g> がタブレットにこれらのネットワークを保存しようとしています"</string>
     <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"<xliff:g id="NUMBER">%d</xliff:g> 件のネットワークを保存しています…"</string>
     <string name="wifi_add_app_networks_saved_summary" msgid="1648417628665152905">"ネットワークを保存しました"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"Wi-Fi 通話"</string>
@@ -1090,8 +897,6 @@
     <string name="accelerometer_title" msgid="7745991950833748909">"画面の自動回転"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"ON - 顔ベース"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"顔検出"</string>
-    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"スマートフォンを縦向きや横向きに動かすと、画面の向きが自動的に調整されます"</string>
-    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"タブレットを縦向きや横向きに動かすと、画面の向きが自動的に調整されます"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"自動回転の詳細"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"スマートフォンを動かして縦向きと横向きを切り替えたとき"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"画面の解像度"</string>
@@ -1202,10 +1007,6 @@
     <string name="sim_lock_settings" msgid="4493069398250139205">"SIM カードロック設定"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"SIM カードロック"</string>
     <string name="sim_pin_toggle" msgid="98754920202404425">"SIM カードをロック"</string>
-    <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"タブレット使用時にPIN入力が必要になります"</string>
-    <string name="sim_lock_on" product="default" msgid="3303147192981388923">"デバイスでの使用時に PIN 入力が要求されます"</string>
-    <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"タブレット使用時にPIN入力が必要になります"</string>
-    <string name="sim_lock_off" product="default" msgid="4634118006847137785">"ON にすると、デバイスでの使用時に PIN を要求します"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"SIM PINの変更"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"SIM PIN"</string>
     <string name="sim_enable_sim_lock" msgid="8993991669975548653">"SIM カードをロック"</string>
@@ -1250,12 +1051,6 @@
     <string name="storage_settings_title" msgid="486118156723194815">"ストレージの設定"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI（SIM スロット %1$d）"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"表示するには、保存済みネットワークを選択してください"</string>
-    <string name="status_number" product="tablet" msgid="3597945414666253183">"MDN"</string>
-    <string name="status_number" product="default" msgid="8407999629121682207">"電話番号"</string>
-    <string name="status_number_sim_slot" product="tablet" msgid="6582203988975619529">"MDN（SIM スロット %1$d）"</string>
-    <string name="status_number_sim_slot" product="default" msgid="5724823197745786398">"電話番号（SIM スロット %1$d）"</string>
-    <string name="status_number_sim_status" product="tablet" msgid="4239876366511743428">"SIM の MDN"</string>
-    <string name="status_number_sim_status" product="default" msgid="2772745542921910086">"SIM の電話番号"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRLバージョン:"</string>
@@ -1315,12 +1110,6 @@
     <string name="storage_wizard_move_progress_title" msgid="3912406225614672391">"<xliff:g id="APP">^1</xliff:g>を移動中…"</string>
     <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"移動中は<xliff:g id="NAME">^1</xliff:g>を取り外さないでください。\n\nこのデバイスの<xliff:g id="APP">^2</xliff:g>アプリは移動が完了するまで使用できません。"</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"この <xliff:g id="NAME">^1</xliff:g>の使用目的"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"内部ストレージとして SD カードをフォーマット"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"このタブレットでのみ使用するアプリとメディアを保存します。&lt;a href=https://support.google.com/android/answer/12153449&gt;SD カードのセットアップの詳細&lt;/a&gt;."</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"フォーマット"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"内部ストレージとして SD カードをフォーマット"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"このスマートフォンでのみ使用するアプリとメディアを保存します。&lt;a href=https://support.google.com/android/answer/12153449&gt;SD カードのセットアップの詳細&lt;/a&gt;."</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"フォーマット"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"または"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"外部ストレージとして SD カードをフォーマット"</string>
     <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"写真、動画、音楽などを保存して、他のデバイスからアクセスすることができます。&lt;a href=https://support.google.com/android/answer/12153449&gt;SD カードのセットアップの詳細&lt;/a&gt;."</string>
@@ -1331,13 +1120,9 @@
     <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"写真、動画、音楽などを保存するには、この <xliff:g id="NAME_0">^1</xliff:g>をフォーマットする必要があります。\n\nフォーマットすると、<xliff:g id="NAME_1">^2</xliff:g>上の既存のコンテンツは消去されます。コンテンツを失うことがないよう、別の <xliff:g id="NAME_2">^3</xliff:g>またはデバイスにバックアップしてください。"</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g>をフォーマット"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"<xliff:g id="NAME">^1</xliff:g>へコンテンツを移動しますか？"</string>
-    <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"ファイル、メディア、一部のアプリをこの <xliff:g id="NAME">^1</xliff:g>に移動できます。\n\nこの移動により、タブレットの空き容量が <xliff:g id="SIZE">^2</xliff:g> 増えます。この処理にはおよそ <xliff:g id="DURATION">^3</xliff:g>かかります。"</string>
-    <string name="storage_wizard_migrate_v2_body" product="default" msgid="809730501314645325">"ファイル、メディア、一部のアプリをこの <xliff:g id="NAME">^1</xliff:g>に移動できます。\n\nこの移動により、スマートフォンの空き容量が <xliff:g id="SIZE">^2</xliff:g> 増えます。この処理にはおよそ <xliff:g id="DURATION">^3</xliff:g>かかります。"</string>
     <string name="storage_wizard_migrate_v2_checklist" msgid="2618258869444553060">"移動中:"</string>
     <string name="storage_wizard_migrate_v2_checklist_media" msgid="5867134681730723744">"<xliff:g id="NAME">^1</xliff:g>を取り外さないでください"</string>
     <string name="storage_wizard_migrate_v2_checklist_apps" msgid="1882077445750580783">"一部のアプリを使用できなくなります"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="tablet" msgid="6111770421449869539">"このタブレットを充電器に接続したままにします"</string>
-    <string name="storage_wizard_migrate_v2_checklist_battery" product="default" msgid="8826915870192535008">"このスマートフォンを充電器に接続したままにします"</string>
     <string name="storage_wizard_migrate_v2_now" msgid="3341460117088026966">"コンテンツを移動"</string>
     <string name="storage_wizard_migrate_v2_later" msgid="6067756122853315642">"後で移動"</string>
     <string name="storage_wizard_migrate_progress_v2_title" msgid="8791318509516968103">"コンテンツを移動中…"</string>
@@ -1406,21 +1191,9 @@
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"エラーのためダウンロード型 SIM を消去できません。\n\nデバイスを再起動してもう一度お試しください。"</string>
     <string name="main_clear_title" msgid="277664302144837723">"すべてのデータを消去（初期設定にリセット）"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"すべてのデータを消去（初期設定にリセット）"</string>
-    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"この操作を行うと、以下のデータを含め、タブレットの"<b>"内部ストレージ"</b>"の全データが消去されます。\n\n"<li>"Google アカウント"</li>\n<li>"システムやアプリのデータと設定"</li>\n<li>"ダウンロードしたアプリ"</li></string>
-    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"この操作を行うと、以下のデータを含め、スマートフォンの"<b>"内部ストレージ"</b>"の全データが消去されます。\n\n"<li>"Google アカウント"</li>\n<li>"システムやアプリのデータと設定"</li>\n<li>"ダウンロードしたアプリ"</li></string>
-    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"以下のアカウントにログインしています:\n"</string>
-    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"このデバイスには他にもユーザーがいます。\n"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"音楽"</li>\n<li>"画像"</li>\n<li>"他のユーザーデータ"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"この操作を行っても、ご利用のモバイル サービス プランはキャンセルされません。"</string>
-    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"音楽、画像、その他のユーザーデータを消去する場合は "<b>"USB ストレージ データ"</b>"を消去する必要があります。"</string>
-    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"音楽、画像、その他のユーザーデータを消去するには、"<b>"SD カード"</b>"を消去する必要があります。"</string>
-    <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"USBストレージ内データの消去"</string>
-    <string name="erase_external_storage" product="default" msgid="2610056855012660451">"SDカード内データを消去"</string>
-    <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"内部USBストレージ内の全データ（音楽、画像など）を消去します"</string>
-    <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"SDカード内の全データ（音楽、画像など）を消去します"</string>
-    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"すべてのデータを消去"</string>
-    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"すべてのデータを消去"</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"個人情報とダウンロードしたアプリがすべて削除されます。この操作を取り消すことはできません。"</string>
     <string name="main_clear_final_desc_esim" msgid="440406836793824969">"ダウンロードしたアプリや SIM を含め、個人情報がすべて削除されます。この操作を取り消すことはできません。"</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"すべてのデータを消去しますか？"</string>
@@ -1466,14 +1239,8 @@
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"USB、Bluetooth、イーサネットでのみインターネットを共有"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB テザリング"</string>
-    <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"スマートフォンのインターネット接続を USB 経由で共有"</string>
-    <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"タブレットのインターネット接続を USB 経由で共有"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Bluetooth テザリング"</string>
-    <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"タブレットのインターネット接続を Bluetooth で共有"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"スマートフォンのインターネット接続を Bluetooth で共有"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"イーサネット テザリング"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"スマートフォンのインターネット接続をイーサネット経由で共有"</string>
-    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"タブレットのインターネット接続をイーサネット経由で共有"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"このデバイスをアクセス ポイントとして機能させること（テザリング）で、モバイルデータ通信のインターネット接続を他のデバイスと共有できます。アプリがアクセス ポイントを作成し、近くのデバイスに接続する場合もあります。"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"このデバイスをアクセス ポイントとして機能させること（テザリング）で、Wi-Fi またはモバイルデータ通信のインターネット接続を他のデバイスと共有できます。アプリがアクセス ポイントを作成し、近くのデバイスに接続する場合もあります。"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"ヘルプ"</string>
@@ -1521,10 +1288,6 @@
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"位置情報によるタイムゾーン検出はサポートされていません"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"位置情報によるタイムゾーン検出は変更できません"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"タイムゾーンの設定に位置情報が使用されることがあります"</string>
-    <string name="about_settings" product="tablet" msgid="2888705054709289693">"タブレット情報"</string>
-    <string name="about_settings" product="default" msgid="4038626127378127613">"デバイス情報"</string>
-    <string name="about_settings" product="device" msgid="9012888717090302815">"デバイス情報"</string>
-    <string name="about_settings" product="emulator" msgid="2516560858771320366">"エミュレートされたデバイスについて"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"規約、ステータス、ソフトウェアバージョン"</string>
     <string name="legal_information" msgid="7509900979811934843">"法的情報"</string>
     <string name="manual" msgid="3651593989906084868">"マニュアル"</string>
@@ -1648,9 +1411,6 @@
     </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"IT 管理者にお問い合わせください"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"PIN、パターン、またはパスワードのリセットを依頼できます"</string>
-    <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"不明なアプリをインストールするとタブレットや個人データの侵害に対する安全性が低下します。この提供元からアプリをインストールすることで、アプリの使用により生じる可能性があるタブレットへの侵害やデータの損失について、ユーザーご自身が責任を負うことに同意することになります。"</string>
-    <string name="install_all_warning" product="default" msgid="652516435709047343">"不明なアプリをインストールするとスマートフォンや個人データの侵害に対する安全性が低下します。この提供元からアプリをインストールすることで、アプリの使用により生じる可能性があるスマートフォンへの侵害やデータの損失について、ユーザーご自身が責任を負うことに同意することになります。"</string>
-    <string name="install_all_warning" product="device" msgid="2348262609815354500">"不明なアプリをインストールするとスマートフォンや個人データが攻撃を受ける可能性が高くなります。この提供元からアプリをインストールすることにより、アプリの使用により生じる可能性があるスマートフォンへの損害やデータの損失について、ユーザーご自身が責任を負うことに同意することになります。"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"詳細設定"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"詳細設定オプションを有効にする"</string>
     <string name="application_info_label" msgid="1015706497694165866">"アプリ情報"</string>
@@ -1778,8 +1538,6 @@
     <string name="process_service_in_use_description" msgid="4210957264507014878">"サービス<xliff:g id="COMP_NAME">%1$s</xliff:g>は使用中です。"</string>
     <string name="process_provider_in_use_description" msgid="6730020083976048028">"<xliff:g id="COMP_NAME">%1$s</xliff:g>プロバイダは使用中です。"</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="6201041461740445113">"システムサービスを停止しますか？"</string>
-    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="2076922609580490122">"このサービスを停止すると、電源を一旦OFFにして再度ONにするまで、タブレットの一部の機能が正常に動作しなくなる場合があります。"</string>
-    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="2625863973434309085">"このサービスを停止すると、電源を一旦OFFにして再度ONにするまで、モバイル デバイスの一部の機能が正常に動作しなくなる場合があります。"</string>
     <string name="language_input_gesture_title" msgid="3292455685728572960">"言語、入力とジェスチャー"</string>
     <string name="language_settings" msgid="8700174277543875046">"言語と入力"</string>
     <string name="languages_settings" msgid="5784775502251770671">"言語"</string>
@@ -1848,8 +1606,6 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"すべての言語用"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"その他の言語..."</string>
     <string name="testing" msgid="6294172343766732037">"テスト中"</string>
-    <string name="testing_phone_info" product="tablet" msgid="1910768200608214456">"タブレット情報"</string>
-    <string name="testing_phone_info" product="default" msgid="1150527695827743906">"携帯電話情報"</string>
     <string name="keyboard_settings_summary" msgid="2716339620942356432">"画面キーボード、読み上げ、ツール"</string>
     <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"画面キーボード、物理キーボード、読み上げ、ツール"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"物理キーボード"</string>
@@ -1926,8 +1682,6 @@
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"設定をリセット"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"サイズとテキストの表示設定がリセットされました"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"ディスプレイのサイズとテキストをリセットしますか？"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"ディスプレイのサイズとテキストの設定をスマートフォンの元の設定にリセットします"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"ディスプレイのサイズとテキストの設定をタブレットの元の設定にリセットします"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"リセット"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"週末の予定は？"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"ビーチに行こうと思っています。一緒にいかがですか？"</string>
@@ -2069,8 +1823,6 @@
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"「片手モード」をクイック設定に追加しました。下にスワイプすると、いつでも ON と OFF を切り替えられます。"</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"画面の上部からクイック設定に「片手モード」を追加することもできます"</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"閉じる"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"スマートフォンでの色表示を補正できます"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"スマートフォンでの色表示を補正できます"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"色補正を使用"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"色補正のショートカット"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"色補正について"</string>
@@ -2120,11 +1872,7 @@
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"画面の輝度をさらに下げる"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"さらに輝度を下げる機能のショートカット"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"さらに輝度を下げる機能について"</string>
-    <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"スマートフォンで設定できる最低限の明るさよりも画面を暗くします"</string>
-    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"タブレットで設定できる最低限の明るさよりも画面を暗くします"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"画面を暗くして表示を見やすくします"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"「さらに輝度を下げる」機能は次のような場合に便利です。&lt;ol&gt; &lt;li&gt; デフォルトの最低限の明るさでも、スマートフォンの画面が明るすぎる&lt;/li&gt; &lt;li&gt; 夜の時間帯や就寝前の照明を消した部屋など、暗い場所でスマートフォンを使用している&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5158211121482010799">"「さらに輝度を下げる」機能は次のような場合に便利です。&lt;ol&gt; &lt;li&gt; デフォルトの最低限の明るさでも、タブレットの画面が明るすぎる&lt;/li&gt; &lt;li&gt; 夜の時間帯や就寝前の照明を消した部屋など、暗い場所でタブレットを使用している&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"輝度"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"暗い"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"明るい"</string>
@@ -2284,9 +2032,6 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"消費電力の調整"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"含まれているパッケージ"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"アプリは正常に実行されています"</string>
-    <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"スマートフォンのバックグラウンドでのバッテリー使用量は正常です"</string>
-    <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"タブレットのバックグラウンドでのバッテリー使用量は正常です"</string>
-    <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"デバイスのバックグラウンドでのバッテリー使用量は正常です"</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"バッテリー残量が少なくなっています"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"バッテリー セーバーを ON にしてバッテリーを長持ちさせます"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"バッテリー寿命の改善"</string>
@@ -2304,11 +2049,6 @@
     <skip />
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"充電一時停止の詳細"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"充電を再開"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"気温が高い、充電時間が長いなど、条件によって、バッテリーの状態を保つために充電が <xliff:g id="PERCENT">%1$s</xliff:g> に制限されることがあります。\n\nこれらの条件が解消されると、スマートフォンは自動的に通常どおり充電されます。"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"気温が高い、充電時間が長いなど、条件によって、バッテリーの状態を保つために充電が <xliff:g id="PERCENT">%1$s</xliff:g> に制限されることがあります。\n\nこれらの条件が解消されると、タブレットは自動的に通常どおり充電されます。"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"スマートフォンのバッテリー使用量が通常より多いため、通常より早くバッテリーがなくなる可能性があります。\n\nバッテリーを多く使用しているアプリ:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"タブレットの使用が通常より多いため、バッテリーが通常より早くなくなる可能性があります。\n\nバッテリーを多く使用しているアプリ:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"デバイスの使用が通常より多いため、バッテリーが通常より早くなくなる可能性があります。\n\nバッテリーを多く使用しているアプリ:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"電力消費量の多いバックグラウンド アクティビティを含める"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="other">%1$d 個のアプリの制限</item>
@@ -2339,12 +2079,8 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"解除"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"キャンセル"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"フル充電"</string>
-    <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"アプリのバッテリー使用量は正常です。アプリがバッテリーを使いすぎる場合は、おすすめの対処方法をスマートフォンがお知らせします。\n\nバッテリーの残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
-    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"アプリのバッテリー使用量は正常です。アプリがバッテリーを使いすぎる場合は、対処可能なおすすめの方法がタブレットに表示されます。\n\nバッテリーの残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
-    <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"アプリのバッテリー使用量は正常です。アプリがバッテリーを使いすぎる場合は、対処可能なおすすめの方法がデバイスに表示されます。\n\nバッテリーの残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"バッテリー マネージャ"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"アプリを自動的に管理"</string>
-    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"使用頻度の低いアプリによる電池の使用を制限します"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"バッテリー使用量が多いと判断されたアプリは、バッテリー マネージャによって制限されます。制限されたアプリは正常に動作しない場合や、通知が遅れる可能性があります。"</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"アプリの制限"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
@@ -2372,8 +2108,6 @@
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
     <string name="power_cell" msgid="7793805106954398186">"モバイル ネットワーク"</string>
     <string name="power_phone" msgid="2768396619208561670">"通話"</string>
-    <string name="power_idle" product="tablet" msgid="4689321599298911021">"アイドル状態"</string>
-    <string name="power_idle" product="default" msgid="9132502722499465252">"アイドル状態"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"<xliff:g id="TIME">^1</xliff:g>使用"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"画面の使用: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="PERCENT">%1$s</xliff:g>: <xliff:g id="APP">%2$s</xliff:g>"</string>
@@ -2424,9 +2158,6 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"スケジュールの設定"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"電池を長持ちさせる"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"充電時に OFF にする"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="3618041244703216293">"スマートフォンの充電率が <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> を超えると、バッテリー セーバーが OFF になります"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="1733686775743601110">"タブレットの充電率が <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> を超えると、バッテリー セーバーが OFF になります"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="7449283917787428755">"デバイスの充電率が <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> を超えると、バッテリー セーバーが OFF になります"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"ON にする"</string>
@@ -2448,9 +2179,6 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"バックグラウンド: 1 分未満"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"合計: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"バックグラウンド: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"バッテリー使用量のデータは概算値です。スマートフォンの充電中の使用量は測定されません"</string>
-    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"バッテリー使用量のデータは概算値であり、タブレットの充電中の使用量は測定されません"</string>
-    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"バッテリー使用量のデータは概算値であり、デバイスの充電中の使用量は測定されません"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"バッテリー使用量のデータは、充電が完了してから数時間使用すると表示されます"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"バッテリー使用量グラフ"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"バッテリー使用量グラフ（日）"</string>
@@ -2520,8 +2248,6 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ネットワーク接続を自動的に管理することで、バッテリーが長持ちし、デバイスのパフォーマンスが改善します"</string>
     <string name="credentials_title" msgid="7535942196886123656">"認証情報ストレージ"</string>
     <string name="credentials_install" msgid="3933218407598415827">"証明書のインストール"</string>
-    <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"ストレージから証明書をインストールする"</string>
-    <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"証明書をSDカードからインストールする"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"認証情報の消去"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"証明書をすべて削除する"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"信頼できる認証情報"</string>
@@ -2647,9 +2373,6 @@
     <string name="remove_account_label" msgid="4169490568375358010">"アカウントを削除"</string>
     <string name="header_add_an_account" msgid="3919151542338822661">"アカウントの追加"</string>
     <string name="really_remove_account_title" msgid="253097435885652310">"アカウントを削除しますか？"</string>
-    <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"このアカウントを削除すると、メール、連絡先などのすべてのデータもタブレットから削除されます。"</string>
-    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"このアカウントを削除すると、メール、連絡先などのすべてのデータもモバイル デバイスから削除されます。"</string>
-    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"このアカウントを削除すると、メール、連絡先などのすべてのデータもデバイスから削除されます。"</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"この変更は管理者によって許可されていません"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"手動では同期できません"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"このアイテムの同期は現在無効になっています。この設定を変更するには、バックグラウンドデータと自動同期を一時的にONにします。"</string>
@@ -2691,8 +2414,6 @@
     <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"この機能をONにすると、モバイルネットワークしか使用できない場合にバックグラウンドデータに依存するアプリが停止する可能性があります。\n\nデータ使用をより適切に管理できるオプションがアプリの設定画面にないかどうかを確認してください。"</string>
     <string name="data_usage_restrict_denied_dialog" msgid="8599940395497268584">"バックグラウンド データを制限できるのは、モバイルデータの上限が設定済みの場合のみです。"</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"データ自動同期をONにしますか？"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="6387714350903085918">"ウェブでアカウントに変更を加えると自動的にタブレットに反映されます。\n\nGoogleアカウントなど、アカウントによっては、タブレットで変更を加えた場合も自動的にウェブに反映されます。"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="6457107552266187107">"ウェブでアカウントに変更を加えると自動的にスマートフォンに反映されます。\n\nGoogleアカウントなど、アカウントによっては、スマートフォンで変更を加えた場合も自動的にウェブに反映されます。"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"データ自動同期をOFFにしますか？"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"無効にすると、データと電池の使用を節約できますが、最新情報を取得するには手動で各アカウントを同期する必要があります。また、更新があったときに通知されません。"</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"使用サイクルのリセット日"</string>
@@ -2701,8 +2422,6 @@
     <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"データ使用量の警告の設定"</string>
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"データ使用量の上限の設定"</string>
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"データ使用量の上限の設定"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"タブレットで設定した上限に達するとモバイルデータが OFF になります。\n\nデータ使用量はタブレットで測定された値ですが、携帯通信会社による測定結果とは異なることがあるため、余裕をもって上限を設定することをおすすめします。"</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"スマートフォンで設定した上限に達するとモバイルデータが OFF になります。\n\nデータ使用量はスマートフォンで測定された値ですが、携帯通信会社による測定結果とは異なることがあるため、余裕をもって上限を設定することをおすすめします。"</string>
     <string name="data_usage_sweep_warning" msgid="2072854703184614828"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"警告"</font></string>
     <string name="data_usage_sweep_limit" msgid="6947019190890086284"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"上限"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="9065885396147675694">"削除したアプリケーション"</string>
@@ -2814,9 +2533,6 @@
       <item quantity="one">証明書を確認</item>
     </plurals>
     <string name="user_settings_title" msgid="6550866465409807877">"複数ユーザー"</string>
-    <string name="user_settings_footer_text" product="device" msgid="7523914344521302179">"新しいユーザーを追加してデバイスを共有できます。デバイス上にユーザーごとのスペースが作られ、ホーム画面、アカウント、アプリ、設定などをカスタマイズできます。"</string>
-    <string name="user_settings_footer_text" product="tablet" msgid="3730074318510244552">"新しいユーザーを追加してタブレットを共有できます。タブレット上にユーザーごとのスペースが作られ、ホーム画面、アカウント、アプリ、設定などをカスタマイズできます。"</string>
-    <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"新しいユーザーを追加してスマートフォンを共有できます。スマートフォン上にユーザーごとのスペースが作られ、ホーム画面、アカウント、アプリ、設定などをカスタマイズできます。"</string>
     <string name="user_list_title" msgid="1387379079186123404">"ユーザーとプロファイル"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"ユーザーまたはプロファイルを追加"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"制限付きプロファイル"</string>
@@ -2826,8 +2542,6 @@
     <string name="user_admin" msgid="4024553191395768119">"管理者"</string>
     <string name="user_you" msgid="3070562015202859996">"自分（<xliff:g id="NAME">%s</xliff:g>）"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"これ以上ユーザーを追加できません。新しいユーザーを追加するには、いずれかのユーザーを削除してください。"</string>
-    <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"ユーザーを管理できるのはタブレットの所有者のみです。"</string>
-    <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"ユーザーを管理できるのはモバイルデバイスの所有者のみです。"</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"制限付きプロファイルではアカウントを追加できません"</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"このデバイスから<xliff:g id="USER_NAME">%1$s</xliff:g>を削除"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"ロック画面の設定"</string>
@@ -2837,8 +2551,6 @@
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"このユーザーを削除しますか？"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"プロファイルを削除しますか？"</string>
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"仕事用プロファイルの削除"</string>
-    <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"このタブレットのスペースとデータが失われます。この操作は元に戻せません。"</string>
-    <string name="user_confirm_remove_self_message" product="default" msgid="5991495192044543230">"このモバイル デバイスのスペースとデータが失われます。この操作は元に戻せません。"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"すべてのアプリとデータが削除されます。"</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"続行すると、このプロファイル内のアプリとデータはすべて削除されます。"</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"すべてのアプリとデータが削除されます。"</string>
@@ -2903,9 +2615,6 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"制限を削除"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"PINを変更"</string>
     <string name="help_label" msgid="2896538416436125883">"ヘルプとフィードバック"</string>
-    <string name="support_summary" product="default" msgid="6137136608018134563">"ヘルプ記事、電話とチャット"</string>
-    <string name="support_summary" product="tablet" msgid="6681247727996378252">"ヘルプ記事、タブレットとチャット"</string>
-    <string name="support_summary" product="device" msgid="1690554254039752541">"ヘルプ記事、デバイスとチャット"</string>
     <string name="user_account_title" msgid="6389636876210834864">"コンテンツのアカウント"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"画像ID"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"極めて重大な脅威"</string>
@@ -4089,9 +3798,6 @@
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"ボタン ナビゲーション"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"ジェスチャー ナビゲーション, 「戻る」の感度, 「戻る」のジェスチャー"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"ナビゲーション, ホームボタン"</string>
-    <string name="ambient_display_title" product="default" msgid="5885136049497127396">"画面をダブルタップして通知を確認"</string>
-    <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"タブレットの画面をダブルタップして通知をチェック"</string>
-    <string name="ambient_display_title" product="device" msgid="4164103424628824786">"デバイスの画面をダブルタップして通知をチェック"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"片手モード"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"片手モードの使用"</string>
     <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"片手モードのショートカット"</string>
@@ -4105,16 +3811,7 @@
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"通知を表示"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"通知と設定が表示されます。"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"画面をダブルタップして、時刻、通知などの情報を確認できます。"</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"スマートフォンを持ち上げて通知を確認"</string>
-    <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"タブレットを持ち上げて通知をチェック"</string>
-    <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"デバイスを持ち上げて通知をチェック"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"ディスプレイの復帰"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"スマートフォンを持ち上げることで、時刻、通知などの情報を確認できます。"</string>
-    <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"タブレットを持ち上げることで、時刻、通知などの情報を確認できます。"</string>
-    <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"デバイスを持ち上げることで、時刻、通知などの情報を確認できます。"</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"スマートフォンをタップしてチェック"</string>
-    <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"タブレットをタップしてチェックする"</string>
-    <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"デバイスをタップしてチェックする"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"画面をタップして、時刻、通知などの情報を確認できます。"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"緊急 SOS"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"緊急 SOS の使用"</string>
@@ -4128,9 +3825,6 @@
     <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"緊急通報番号以外の番号を入力した場合:\n • 緊急 SOS を使用するには、デバイスのロックを解除する必要があります\n • 電話をかけても応答がない可能性があります"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"指紋センサーをスワイプして通知を表示"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"指紋センサーのスワイプ"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"スマートフォンの背面にある指紋認証センサーを下にスワイプして、通知を確認できます。"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"タブレットの背面にある指紋認証センサーを下にスワイプして、通知を確認できます。"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3888927017311372398">"デバイスの背面にある指紋認証センサーを下にスワイプして、通知を確認できます。"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"通知をすばやく確認"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="65713754674288193">"ブートローダーは既にロック解除されています"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="7425519481227423860">"インターネットに接続するか携帯通信会社にお問い合わせください"</string>
@@ -4617,9 +4311,6 @@
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"VoLTE を OFF にしますか？"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"また、5G 接続も OFF になります。\n音声通話中は、インターネットを使用できず、アプリによっては動作しないこともあります。"</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"SIM を 2 つ使用している場合、このスマートフォンの接続は 4G に制限されます。"<annotation id="url">"詳細"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"SIM を 2 つ使用している場合、このタブレットの接続は 4G に制限されます。"<annotation id="url">"詳細"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"SIM を 2 つ使用している場合、このデバイスの接続は 4G に制限されます。"<annotation id="url">"詳細"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"キャッシュに保存されたアプリの実行を停止"</string>
     <string name="blob_never_expires_text" msgid="7293376386620106623">"有効期限はありません。"</string>
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"リースの有効期限はありません。"</string>
@@ -4654,8 +4345,6 @@
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"ネットワーク設定"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"ネットワーク接続, インターネット, ワイヤレス, データ, wifi, Wi-Fi, ワイファイ, 携帯, モバイル, 携帯通信会社, 4G, 3G, 2G, LTE"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"インターネットを再設定しますか？"</string>
-    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"通話を終了します"</string>
-    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"通話を終了します"</string>
     <string name="resetting_internet_text" msgid="6696779371800051806">"インターネットを再設定しています…"</string>
     <string name="fix_connectivity" msgid="2781433603228089501">"接続を修正"</string>
     <string name="networks_available" msgid="3299512933684383474">"ネットワークが利用できます"</string>

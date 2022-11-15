@@ -23,8 +23,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
-import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
+import com.android.settingslib.spa.framework.common.SpaEnvironmentFactory
+import com.android.settingslib.spa.framework.common.createSettingsPage
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.framework.compose.toState
 import com.android.settingslib.spa.widget.preference.Preference
@@ -34,31 +35,30 @@ import com.android.settingslib.spa.widget.ui.SettingsIcon
 
 object SystemMainPageProvider : SettingsPageProvider {
     override val name = "SystemMain"
+    private val owner = createSettingsPage()
 
     @Composable
     override fun Page(arguments: Bundle?) {
-        SystemMain()
+        RegularScaffold(title = getTitle(arguments)) {
+            LanguageAndInputPageProvider.EntryItem()
+        }
     }
 
-    @Composable
-    fun EntryItem() {
-        Preference(object : PreferenceModel {
-            override val title = stringResource(R.string.header_category_system)
-            override val summary = stringResource(R.string.system_dashboard_summary).toState()
-            override val onClick = navigator(name)
-            override val icon = @Composable {
-                SettingsIcon(imageVector = Icons.Outlined.Info)
+    override fun getTitle(arguments: Bundle?): String {
+        return SpaEnvironmentFactory.instance.appContext.getString(R.string.header_category_system)
+    }
+
+    fun buildInjectEntry(): SettingsEntryBuilder {
+        return SettingsEntryBuilder.createInject(owner = owner).setIsAllowSearch(false)
+            .setUiLayoutFn {
+                Preference(object : PreferenceModel {
+                    override val title = stringResource(R.string.header_category_system)
+                    override val summary = stringResource(R.string.system_dashboard_summary).toState()
+                    override val onClick = navigator(name)
+                    override val icon = @Composable {
+                        SettingsIcon(imageVector = Icons.Outlined.Info)
+                    }
+                })
             }
-        })
-    }
-
-    fun buildInjectEntry() =
-        SettingsEntryBuilder.createInject(owner = SettingsPage.create(name)).setIsAllowSearch(false)
-}
-
-@Composable
-private fun SystemMain() {
-    RegularScaffold(title = stringResource(R.string.header_category_system)) {
-        LanguageAndInputPageProvider.EntryItem()
     }
 }

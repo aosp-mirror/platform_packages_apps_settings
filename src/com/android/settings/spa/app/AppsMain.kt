@@ -27,6 +27,8 @@ import com.android.settingslib.spa.framework.common.SettingsEntry
 import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
 import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
+import com.android.settingslib.spa.framework.common.SpaEnvironmentFactory
+import com.android.settingslib.spa.framework.common.createSettingsPage
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.framework.compose.toState
 import com.android.settingslib.spa.widget.preference.Preference
@@ -36,41 +38,38 @@ import com.android.settingslib.spa.widget.ui.SettingsIcon
 
 object AppsMainPageProvider : SettingsPageProvider {
     override val name = "AppsMain"
+    private val owner = createSettingsPage()
 
     @Composable
     override fun Page(arguments: Bundle?) {
-        AppsMain()
-    }
-
-    @Composable
-    fun EntryItem() {
-        Preference(object : PreferenceModel {
-            override val title = stringResource(R.string.apps_dashboard_title)
-            override val summary =
-                stringResource(R.string.app_and_notification_dashboard_summary).toState()
-            override val onClick = navigator(name)
-            override val icon = @Composable {
-                SettingsIcon(imageVector = Icons.Outlined.Apps)
-            }
-        })
+        RegularScaffold(title = getTitle(arguments)) {
+            AllAppListPageProvider.buildInjectEntry().build().UiLayout()
+            SpecialAppAccessPageProvider.EntryItem()
+        }
     }
 
     fun buildInjectEntry() =
-        SettingsEntryBuilder.createInject(owner = SettingsPage.create(name)).setIsAllowSearch(false)
+        SettingsEntryBuilder.createInject(owner = owner).setIsAllowSearch(false)
+            .setUiLayoutFn {
+                Preference(object : PreferenceModel {
+                    override val title = stringResource(R.string.apps_dashboard_title)
+                    override val summary =
+                        stringResource(R.string.app_and_notification_dashboard_summary).toState()
+                    override val onClick = navigator(name)
+                    override val icon = @Composable {
+                        SettingsIcon(imageVector = Icons.Outlined.Apps)
+                    }
+                })
+            }
+
+    override fun getTitle(arguments: Bundle?): String {
+        return SpaEnvironmentFactory.instance.appContext.getString(R.string.apps_dashboard_title)
+    }
 
     override fun buildEntry(arguments: Bundle?): List<SettingsEntry> {
-        val owner = SettingsPage.create(name, parameter = parameter, arguments = arguments)
         return listOf(
             AllAppListPageProvider.buildInjectEntry().setLink(fromPage = owner).build(),
             SpecialAppAccessPageProvider.buildInjectEntry().setLink(fromPage = owner).build(),
         )
-    }
-}
-
-@Composable
-private fun AppsMain() {
-    RegularScaffold(title = stringResource(R.string.apps_dashboard_title)) {
-        AllAppListPageProvider.buildInjectEntry().build().UiLayout()
-        SpecialAppAccessPageProvider.EntryItem()
     }
 }

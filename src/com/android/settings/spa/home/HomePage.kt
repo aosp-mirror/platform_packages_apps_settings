@@ -17,38 +17,28 @@
 package com.android.settings.spa.home
 
 import android.os.Bundle
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.spa.app.AppsMainPageProvider
 import com.android.settings.spa.notification.NotificationMainPageProvider
 import com.android.settings.spa.system.SystemMainPageProvider
 import com.android.settingslib.spa.framework.common.SettingsEntry
-import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
-import com.android.settingslib.spa.widget.scaffold.HomeScaffold
+import com.android.settingslib.spa.framework.common.SpaEnvironmentFactory
+import com.android.settingslib.spa.framework.common.createSettingsPage
 
 object HomePageProvider : SettingsPageProvider {
     override val name = "Home"
-
-    @Composable
-    override fun Page(arguments: Bundle?) {
-        HomePage()
-    }
+    private val owner = createSettingsPage()
 
     override fun buildEntry(arguments: Bundle?): List<SettingsEntry> {
-        val owner = SettingsPage.create(name, parameter = parameter, arguments = arguments)
         return listOf(
             AppsMainPageProvider.buildInjectEntry().setLink(fromPage = owner).build(),
+            NotificationMainPageProvider.buildInjectEntry().setLink(fromPage = owner).build(),
+            SystemMainPageProvider.buildInjectEntry().setLink(fromPage = owner).build(),
         )
     }
-}
 
-@Composable
-private fun HomePage() {
-    HomeScaffold(title = stringResource(R.string.settings_label)) {
-        AppsMainPageProvider.EntryItem()
-        NotificationMainPageProvider.EntryItem()
-        SystemMainPageProvider.EntryItem()
+    override fun getTitle(arguments: Bundle?): String {
+        return SpaEnvironmentFactory.instance.appContext.getString(R.string.settings_label)
     }
 }
