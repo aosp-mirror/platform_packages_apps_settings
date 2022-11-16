@@ -27,6 +27,7 @@ import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
 import android.os.Bundle;
 import android.os.storage.StorageManager;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.Surface;
 
@@ -41,6 +42,7 @@ import com.android.settings.biometrics.face.FaceEnrollIntroduction;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
 import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollIntroduction;
+import com.android.settings.biometrics2.ui.view.FingerprintEnrollmentActivity;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupChooseLockGeneric;
@@ -190,7 +192,13 @@ public class BiometricUtils {
      */
     public static Intent getFingerprintIntroIntent(@NonNull Context context,
             @NonNull Intent activityIntent) {
-        if (WizardManagerHelper.isAnySetupWizard(activityIntent)) {
+        if (FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_BIOMETRICS2_ENROLLMENT)) {
+            final Intent intent = new Intent(context, FingerprintEnrollmentActivity.class);
+            if (WizardManagerHelper.isAnySetupWizard(activityIntent)) {
+                WizardManagerHelper.copyWizardManagerExtras(activityIntent, intent);
+            }
+            return intent;
+        } else if (WizardManagerHelper.isAnySetupWizard(activityIntent)) {
             Intent intent = new Intent(context, SetupFingerprintEnrollIntroduction.class);
             WizardManagerHelper.copyWizardManagerExtras(activityIntent, intent);
             return intent;
