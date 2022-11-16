@@ -13,6 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"Po"</string>
@@ -285,8 +286,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Modeli yt i fytyrës do të fshihet përgjithmonë dhe në mënyrë të sigurt.\n\nPas fshirjes, do të të duhet kodi yt PIN, motivi ose fjalëkalimi për të shkyçur telefonin."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Përdor \"Shkyçjen me fytyrë\" për të shkyçur telefonin tënd"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Gjurma e gishtit"</string>
-    <!-- no translation found for security_settings_fingerprint_settings_preferences_category (8975029409126780752) -->
-    <skip />
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Kur përdoret \"Shkyçja me gjurmën e gishtit\""</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Gjurmë gishti për punë"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Shto gjurmë gishti"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
@@ -366,13 +366,9 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Regjistruar <xliff:g id="PERCENTAGE">%d</xliff:g> për qind"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Regjistrimi i gjurmës së gishtit: <xliff:g id="PERCENTAGE">%d</xliff:g> për qind"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Gjurma e gishtit u shtua"</string>
-    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Tani mund të përdorësh gjurmën tënde të gishtit për të shkyçur tabletin ose për të verifikuar që je ti, p.sh. kur identifikohesh në aplikacione ose kur miraton një blerje"</string>
-    <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_keywords (5557869560397089603) -->
-    <skip />
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Shkyç vetëm kur ekrani është i ndezur"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Ekrani duhet të jetë i ndezur para se të mund ta shkyçësh me gjurmën tënde të gishtit. Kjo bën që shkyçja aksidentale të ketë më pak gjasë të ndodhë."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Ekrani; Shkyçja"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Bëje më vonë"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Ngrije dhe më pas prek përsëri"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Vendos anën e gjurmës së gishtit në sensor dhe mbaje, më pas kalo në anën tjetër"</string>
@@ -465,31 +461,43 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"Të hiqet mbrojtja e profilit?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"Telefoni yt mbrohet nga një motiv në rast se humb ose vidhet."</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"Telefoni yt mbrohet nga një motiv në rast se humb ose vidhet.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Kjo fshin po ashtu modelin e gjurmës së gishtit të ruajtur në pajisjen tënde. Nuk do të mund të përdorësh gjurmën e gishtit për vërtetimin në aplikacione."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"Telefoni yt mbrohet nga një motiv në rast se humb ose vidhet.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Modeli yt i fytyrës do të fshihet gjithashtu përgjithmonë dhe në mënyrë të sigurt. Nuk do të mund ta përdorësh fytyrën për vërtetimin në aplikacione."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"Telefoni yt mbrohet nga një motiv në rast se humb ose vidhet.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Kjo fshin po ashtu modelin e gjurmës së gishtit të ruajtur në pajisjen tënde. Modeli yt i fytyrës do të fshihet gjithashtu përgjithmonë dhe në mënyrë të sigurt. Nuk do të mund të përdorësh fytyrën ose gjurmën e gishtit për vërtetimin në aplikacione."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"Telefoni yt mbrohet nga një kod PIN në rast se humb ose vidhet."</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"Telefoni yt mbrohet nga një kod PIN në rast se humb ose vidhet.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Kjo fshin po ashtu modelin e gjurmës së gishtit të ruajtur në pajisjen tënde. Nuk do të mund të përdorësh gjurmën e gishtit për vërtetimin në aplikacione."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"Telefoni yt mbrohet nga një kod PIN në rast se humb ose vidhet.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Modeli yt i fytyrës do të fshihet gjithashtu përgjithmonë dhe në mënyrë të sigurt. Nuk do të mund ta përdorësh fytyrën për vërtetimin në aplikacione."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"Telefoni yt mbrohet nga një kod PIN në rast se humb ose vidhet.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Kjo fshin modelin e gjurmës së gishtit të ruajtur në pajisjen tënde. Modeli yt i fytyrës do të fshihet gjithashtu përgjithmonë dhe në mënyrë të sigurt. Nuk do të mund të përdorësh fytyrën ose gjurmën e gishtit për vërtetimin në aplikacione."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"Telefoni yt mbrohet nga një fjalëkalim në rast se humb ose vidhet."</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"Telefoni yt mbrohet nga një fjalëkalim në rast se humb ose vidhet.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Kjo fshin po ashtu modelin e gjurmës së gishtit të ruajtur në pajisjen tënde. Nuk do të mund të përdorësh gjurmën e gishtit për vërtetimin në aplikacione."</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"Telefoni yt mbrohet nga një fjalëkalim në rast se humb ose vidhet.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Modeli yt i fytyrës do të fshihet gjithashtu përgjithmonë dhe në mënyrë të sigurt. Nuk do të mund ta përdorësh fytyrën për vërtetimin në aplikacione."</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"Telefoni yt mbrohet nga një fjalëkalim në rast se humb ose vidhet.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Kjo fshin modelin e gjurmës së gishtit të ruajtur në pajisjen tënde. Modeli yt i fytyrës do të fshihet gjithashtu përgjithmonë dhe në mënyrë të sigurt. Nuk do të mund të përdorësh fytyrën ose gjurmën e gishtit për vërtetimin në aplikacione."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"Veçoritë e mbrojtjes së pajisjes nuk do të funksionojnë pa kyçjen tënde të ekranit."</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"Veçoritë e mbrojtjes së pajisjes nuk do të funksionojnë pa kyçjen tënde të ekranit.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Kjo fshin po ashtu modelin e gjurmës së gishtit të ruajtur në pajisjen tënde. Nuk do të mund të përdorësh gjurmën e gishtit për vërtetimin në aplikacione."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"Veçoritë e mbrojtjes së pajisjes nuk do të funksionojnë pa kyçjen tënde të ekranit.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Modeli yt i fytyrës do të fshihet gjithashtu përgjithmonë dhe në mënyrë të sigurt. Nuk do të mund ta përdorësh fytyrën për vërtetimin në aplikacione."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"Veçoritë e mbrojtjes së pajisjes nuk do të funksionojnë pa kyçjen tënde të ekranit.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Kjo fshin modelin e gjurmës së gishtit të ruajtur në pajisjen tënde. Modeli yt i fytyrës do të fshihet gjithashtu përgjithmonë dhe në mënyrë të sigurt. Nuk do të mund të përdorësh fytyrën ose gjurmën e gishtit për vërtetimin në aplikacione."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Fshi"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> rekomandon një kod PIN ose fjalëkalim të fortë dhe nuk do të funksionojë siç pritet pa një të tillë"</string>
@@ -989,8 +997,7 @@
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Nuk ofrohet sepse modaliteti i orarit të gjumit është aktiv"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Përdor mbrojtësin e ekranit"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Gjatë karikimit ose lidhjes me stacionin"</string>
-    <!-- no translation found for screensaver_settings_summary_dock_and_charging (8485905100159376156) -->
-    <skip />
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Teksa është në stacion e në karikim"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Gjatë karikimit"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Kur vendoset në stacion"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Asnjëherë"</string>
@@ -1005,13 +1012,18 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Tekst i trashë"</string>
     <string name="title_font_size" msgid="570613010306330622">"Madhësia e shkrimit"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Zmadho ose zvogëlo tekstin"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"Kyçja e kartës SIM"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"Kyçja e kartës SIM"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"Kyçe kartën SIM"</string>
+    <!-- no translation found for sim_lock_settings (7331982427303002613) -->
+    <skip />
+    <!-- no translation found for sim_lock_settings_category (6475255139493877786) -->
+    <skip />
+    <!-- no translation found for sim_pin_toggle (6814489621760857328) -->
+    <skip />
     <string name="sim_pin_change" msgid="5978881209990507379">"Ndrysho PIN-in e kartës SIM"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"PIN-i i kartës SIM"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Kyçe kartën SIM"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"Shkyçe kartën SIM"</string>
+    <!-- no translation found for sim_enable_sim_lock (6486354334679225748) -->
+    <skip />
+    <!-- no translation found for sim_disable_sim_lock (6939439812841857306) -->
+    <skip />
     <string name="sim_enter_old" msgid="6882545610939674813">"Kodi i vjetër PIN i kartës SIM"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"PIN-i i ri i kartës SIM"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Shkruaj përsëri kodin e ri PIN"</string>
@@ -1026,7 +1038,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Do të përdorësh <xliff:g id="CARRIER">%1$s</xliff:g> për të dhënat celulare?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Po përdor <xliff:g id="CARRIER2_0">%2$s</xliff:g> për të dhënat celulare. Nëse kalon te <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> nuk do të përdoret më për të dhënat celulare."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Përdor <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"Të përditësohet karta e preferuar SIM?"</string>
+    <!-- no translation found for sim_preferred_title (8850185380445309835) -->
+    <skip />
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> është karta e vetme SIM në pajisjen tënde. Dëshiron që ta përdorësh këtë kartë SIM për të dhënat celulare, telefonatat dhe mesazhet SMS?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"PIN-i i kartës SIM është i pasaktë. Tani duhet të kontaktosh operatorin për ta shkyçur pajisjen tënde."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1179,17 +1192,20 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Rivendos Wi-Fi, lidhjen celulare dhe Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Kjo do të rivendosë të gjitha cilësimet e rrjetit, duke përfshirë:\n\n"<li>"Wi‑Fi"</li>\n<li>"Të dhënat celulare"</li>\n<li>"Bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Spastro"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Spastro kartat SIM të shkarkuara"</string>
+    <!-- no translation found for reset_esim_title (4194570573425902754) -->
+    <skip />
     <string name="reset_esim_desc" msgid="3662444090563399131">"Kjo nuk do të anulojë planet e shërbimit celular. Për të shkarkuar karta zëvendësuese SIM, kontakto me operatorin celular."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Rivendos cilësimet"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Të rivendosen të gjitha cilësimet e rrjetit? Ky veprim nuk mund të zhbëhet."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Do t\'i rivendosësh të gjitha cilësimet dhe t\'i spastrosh kartat SIM të shkarkuara? Nuk mund ta zhbësh këtë veprim."</string>
+    <!-- no translation found for reset_network_final_desc_esim (1129251284212847939) -->
+    <skip />
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Rivendos cilësimet"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Të rivendosen?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Rivendosja e rrjetit nuk është e disponueshme për këtë përdorues"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Cilësimet e rrjetit janë rivendosur"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Kartat SIM nuk mund të spastrohen"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"Kartat SIM të shkarkuara nuk mund të spastrohen për shkak të një gabimi.\n\nRinise pajisjen dhe provo përsëri."</string>
+    <!-- no translation found for reset_esim_error_msg (7279607120606365250) -->
+    <skip />
     <string name="main_clear_title" msgid="277664302144837723">"Spastro të gjitha të dhënat (rivendosja e fabrikës)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Spastro të gjitha të dhënat (rivendosja e fabrikës)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Muzika"</li>\n<li>"Fotografitë"</li>\n<li>"Të dhëna të tjera të përdoruesit"</li></string>
@@ -2027,7 +2043,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"Detajet e historikut"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Përdorimi i baterisë"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Shiko përdorimin për 24 orët e fundit"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Shiko përdorimin nga karikimi i fundit i plotë"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Shiko përdorimin që nga karikimi i fundit i plotë"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Përdorimi i baterisë për aplikacionet"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Përdor detajet"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Rregullo përdorimin e energjisë"</string>
@@ -2118,25 +2134,25 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Ngarkimi i plotë zgjat rreth"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Të dhënat e përdorimit të baterisë janë të përafërta dhe mund të ndryshojnë bazuar te përdorimi."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Përdorimi i baterisë"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> në total • <xliff:g id="TIME_1">^2</xliff:g> në sfond\nnga karikimi i fundit i plotë"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"<xliff:g id="TIME_0">^1</xliff:g> në total • <xliff:g id="TIME_1">^2</xliff:g> në sfond\nqë nga karikimi i fundit i plotë"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> në total • <xliff:g id="TIME_1">^2</xliff:g> në sfond\npër 24 orët e fundit"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"<xliff:g id="TIME_0">^1</xliff:g> në total • <xliff:g id="TIME_1">^2</xliff:g> në sfond\npër <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"Në total më pak se një minutë nga karikimi i fundit i plotë"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"Në total më pak se një minutë që nga karikimi i fundit i plotë"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"Përdorimi në total: më pak se një minutë për 24 orët e fundit"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Përdorimi në total: më pak se një minutë për periudhën <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"Në sfond më pak se një minutë nga karikimi i fundit i plotë"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"Në sfond më pak se një minutë që nga karikimi i fundit i plotë"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Në sfond për më pak se një minutë për 24 orët e fundit"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Në sfond për më pak se një minutë për periudhën <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"<xliff:g id="TIME">^1</xliff:g> në total nga karikimi i fundit i plotë"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"<xliff:g id="TIME">^1</xliff:g> në total që nga karikimi i fundit i plotë"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"<xliff:g id="TIME">^1</xliff:g> në total për 24 orët e fundit"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_0">^1</xliff:g> në total për periudhën <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"<xliff:g id="TIME">^1</xliff:g> në sfond nga karikimi i fundit i plotë"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"<xliff:g id="TIME">^1</xliff:g> në sfond që nga karikimi i fundit i plotë"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"<xliff:g id="TIME">^1</xliff:g> në sfond për 24 orët e fundit"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> në sfond për periudhën <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"<xliff:g id="TIME">^1</xliff:g> në total • në sfond më pak se një minutë\nnga karikimi i fundit i plotë"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"<xliff:g id="TIME">^1</xliff:g> në total • në sfond më pak se një minutë\nqë nga karikimi i fundit i plotë"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"<xliff:g id="TIME">^1</xliff:g> në total • në sfond më pak se një minutë\npër 24 orët e fundit"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"<xliff:g id="TIME_0">^1</xliff:g> në total • në sfond për më pak se një minutë\npër <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"Pa përdorim nga karikimi i fundit i plotë"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"Pa përdorim që nga karikimi i fundit i plotë"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Nuk është përdorur për 24 orët e fundit"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"Përdorues të tjerë"</string>
@@ -2547,7 +2563,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Fshije <xliff:g id="USER_NAME">%1$s</xliff:g> nga pajisja"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Cilësimet e ekranit të kyçjes"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Shto përdoruesit nga ekrani i kyçjes"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"Kalo te përdoruesi administrator kur stacionohet"</string>
+    <!-- no translation found for switch_to_dock_user_when_docked (2324395443311905635) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Do e fshish veten?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Të fshihet ky përdorues?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Të hiqet ky profil?"</string>
@@ -2673,7 +2690,8 @@
     <string name="wizard_next" msgid="3884832431439072471">"Para"</string>
     <string name="wizard_back_adoptable" msgid="1447814356855134183">"Formatoje në një mënyrë tjetër"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"Kartat SIM"</string>
+    <!-- no translation found for sim_settings_title (2254609719033946272) -->
+    <skip />
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Të dhënat celulare nuk ofrohen"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Trokit për të zgjedhur një kartë SIM për të dhëna"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Përdor gjithmonë këtë për telefonatat"</string>
@@ -2691,7 +2709,8 @@
     <string name="sim_status_title" msgid="6188770698037109774">"Statusi i kartës SIM"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"Statusi i kartës SIM (foleja %1$d e SIM)"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"Kartat SIM kanë ndryshuar."</string>
+    <!-- no translation found for sim_notification_title (2819551384383504031) -->
+    <skip />
     <string name="sim_notification_summary" msgid="5593339846307029991">"Trokit për ta konfiguruar"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Pyet çdo herë"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Kërkohet përzgjedhja"</string>
@@ -2717,6 +2736,8 @@
     <string name="account_dashboard_title" msgid="8228773251948253914">"Fjalëkalimet dhe llogaritë"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Fjalëkalimet e ruajtura, plotësimi automatik, llogaritë e sinkronizuara"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Apl. e parazgjedhura"</string>
+    <!-- no translation found for cloned_apps_dashboard_title (5542076801222950921) -->
+    <skip />
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Gjuhët, gjestet, koha, rezervimi"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"Gjuhët e sistemit, gjuhët e aplikacioneve"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, lidhja e rrjetit, internet, pa tel, të dhëna, wi fi"</string>
@@ -3167,8 +3188,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Me kërkesën tënde, Android po bllokon shfaqjen e njoftimeve të këtij aplikacioni në këtë pajisje"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Me kërkesën tënde, Android po bllokon shfaqjen e kësaj kategorie njoftimesh në këtë pajisje"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Me kërkesën tënde, Android po bllokon shfaqjen e këtij grupi njoftimesh në këtë pajisje"</string>
-    <!-- no translation found for app_notifications_not_send_desc (5683060986735070528) -->
-    <skip />
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Ky aplikacion nuk dërgon njoftime"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Kategoritë"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Të tjera"</string>
     <string name="no_channels" msgid="4716199078612071915">"Ky aplikacion nuk ka postuar asnjë njoftim"</string>
@@ -3332,7 +3352,8 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Kërko fjalëkalim para heqjes nga gozhdimi"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Kyçe pajisjen kur heq gozhdimin"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Konfirmo fshirjen e kartës SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Verifiko që je ti përpara se të fshish një kartë SIM të shkarkuar"</string>
+    <!-- no translation found for confirm_sim_deletion_description (5090811029854329373) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Ky profil pune menaxhohet nga:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"I menaxhuar nga <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"Nisje e sigurt"</string>
@@ -4108,7 +4129,8 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Të dhënat celulare"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Qasu te të dhënat duke përdorur rrjetin celular"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Telefoni do të kalojë automatikisht te ky operator celular kur të jetë brenda rrezes"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Nuk ka kartë SIM"</string>
+    <!-- no translation found for mobile_data_settings_summary_unavailable (9176513507571883986) -->
+    <skip />
     <string name="calls_preference" msgid="2166481296066890129">"Preferencat e telefonatave"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Preferenca për SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Pyet çdo herë"</string>
@@ -4123,8 +4145,10 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Shto më shumë"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Aktiv / SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Joaktiv / SIM"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Aktiv / karta SIM e shkarkuar"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Joaktiv / karta SIM e shkarkuar"</string>
+    <!-- no translation found for mobile_network_active_esim (3984452275968408382) -->
+    <skip />
+    <!-- no translation found for mobile_network_inactive_esim (8777415108263057939) -->
+    <skip />
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"Emri i kartës SIM dhe ngjyra"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Emri"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Ngjyra (e përdorur nga aplikacionet e përputhshme)"</string>
@@ -4160,7 +4184,8 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Dëshiron të kalosh te përdorimi i kartës SIM?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Të përdoret <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Vetëm një kartë SIM mund të jetë aktive në të njëjtën kohë.\n\nKalimi te <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> nuk do ta anulojë shërbimin e <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Vetëm një kartë SIM e shkarkuar mund të jetë aktive në të njëjtën kohë.\n\nKalimi te <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> nuk do ta anulojë shërbimin e <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_text_downloaded (8977951796005849471) -->
+    <skip />
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Vetëm një kartë SIM mund të jetë aktive në të njëjtën kohë.\n\nKalimi nuk do ta anulojë shërbimin e <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Mund të përdorësh 2 karta SIM në të njëjtën kohë. Për të përdorur <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, çaktivizo një kartë tjetër SIM."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Kalo te <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -4202,8 +4227,10 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> do të përdoret për të dhënat celulare, telefonatat dhe mesazhet SMS"</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Nuk ka karta SIM aktive"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Për të përdorur të dhënat celulare, veçoritë e telefonatave dhe mesazhet SMS më vonë, shko te cilësimet e tua të rrjetit"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"Karta SIM"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Të spastrohet kjo kartë SIM e shkarkuar?"</string>
+    <!-- no translation found for sim_card_label (6263064316075963775) -->
+    <skip />
+    <!-- no translation found for erase_sim_dialog_title (4742077437653028326) -->
+    <skip />
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Spastrimi i kësaj karte SIM e heq shërbimin e <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> nga kjo pajisje.\n\nShërbimi për <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> nuk do të anulohet."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Spastro"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"Karta SIM po spastrohet…"</string>
@@ -4355,8 +4382,10 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Lejoji Google Fi të përdorë rrjetet W+ për të përmirësuar shpejtësinë dhe mbulimin"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Rrjeti W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"KARTA SIM E SHKARKUAR"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"KARTAT SIM TË SHKARKUARA"</string>
+    <!-- no translation found for downloaded_sim_category_title (2876988650413179752) -->
+    <skip />
+    <!-- no translation found for downloaded_sims_category_title (487799905978489922) -->
+    <skip />
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Aktive"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Joaktive"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Parazgjedhja për <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -4412,7 +4441,8 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Cilësimet e telefonatave"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Po përditësohen cilësimet…"</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Gabim në cilësimet e telefonatave"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Gabim në rrjet ose në kartën SIM."</string>
+    <!-- no translation found for smart_forwarding_failed_text (8682640643264071789) -->
+    <skip />
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"Karta SIM nuk është aktivizuar."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Fut numrat e telefonit"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Fut numrin e telefonit"</string>
@@ -4436,10 +4466,14 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"Prapa"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Para"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Pamja paraprake e ngjyrave"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Kërkesë për qasje te karta SIM"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Një pajisje dëshiron të ketë qasje te karta jote SIM. Trokit për detaje."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Të lejohet qasja te karta SIM?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Një pajisje me Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, dëshiron të ketë qasje te të dhënat në kartën tënde SIM. Kjo përfshin kontaktet e tua.\n\nKur të jetë e lidhur, <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> do të marrë të gjitha telefonatat e kryera në numrin <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <!-- no translation found for bluetooth_sim_card_access_notification_title (7351015416346359536) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_notification_content (8685623260103018309) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_title (5616323725563125179) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_content (6281997628405909566) -->
+    <skip />
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Një pajisje me Bluetooth e disponueshme"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Një pajisje dëshiron të lidhet. Trokit për detaje."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Të lidhet me pajisjen me Bluetooth?"</string>
@@ -4453,10 +4487,8 @@
     <string name="tare_balances" msgid="731881382594747961">"Balancat"</string>
     <string name="tare_consumption_limits" msgid="3230949387874396382">"Kufijtë e konsumit"</string>
     <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Kufiri fillestar i konsumit"</string>
-    <!-- no translation found for tare_min_consumption_limit (3293145670921755789) -->
-    <skip />
-    <!-- no translation found for tare_max_consumption_limit (8335700580111808823) -->
-    <skip />
+    <string name="tare_min_consumption_limit" msgid="3293145670921755789">"Kufiri minimal i konsumit"</string>
+    <string name="tare_max_consumption_limit" msgid="8335700580111808823">"Kufiri maksimal i konsumit"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Modifikues"</string>
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Veprimet (kostoja e prodhimit)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Veprimet (çmimi bazë)"</string>

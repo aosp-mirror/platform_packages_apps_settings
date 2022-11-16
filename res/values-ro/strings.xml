@@ -13,6 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"Da"</string>
@@ -288,8 +289,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Modelul facial se va șterge definitiv și în siguranță.\n\nDupă ștergere, vei avea nevoie de codul PIN, de model sau de parolă ca să îți deblochezi telefonul."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Folosește Deblocarea facială ca să-ți deblochezi telefonul"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Amprentă"</string>
-    <!-- no translation found for security_settings_fingerprint_settings_preferences_category (8975029409126780752) -->
-    <skip />
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Când folosești Deblocarea cu amprenta"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Amprentă pentru lucru"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Adaugă o amprentă"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
@@ -376,13 +376,9 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Amprentă adăugată"</string>
-    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Acum îți poți folosi amprenta pentru a-ți debloca tableta sau pentru a-ți confirma identitatea, de exemplu, când te conectezi la aplicații sau aprobi o achiziție"</string>
-    <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_keywords (5557869560397089603) -->
-    <skip />
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Deblochează numai când ecranul este activ"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Ecranul trebuie să fie activat ca să poți debloca folosind amprenta. Astfel, scade riscul de deblocare accidentală."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Ecran, Deblocare"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Mai târziu"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Ridică, apoi atinge din nou"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Așează partea laterală a degetului pe senzor și menține, apoi procedează la fel cu cealaltă parte"</string>
@@ -475,31 +471,43 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"Elimini protecția profilului?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"Un model îți protejează telefonul dacă este pierdut sau furat"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"Un model îți protejează telefonul dacă este pierdut sau furat.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>În plus, această funcție șterge modelul cu amprentă stocat pe dispozitiv. Nu vei putea să îți folosești amprenta pentru autentificare în aplicații."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"Un model îți protejează telefonul dacă este pierdut sau furat.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>În plus, modelul facial va fi șters definitiv și în siguranță. Nu vei putea să-ți folosești fața pentru autentificare în aplicații."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"Un model îți protejează telefonul dacă este pierdut sau furat.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Această funcție șterge modelul cu amprentă stocat pe dispozitiv. În plus, modelul facial va fi șters definitiv și în siguranță. Nu vei putea să folosești fața sau amprenta pentru autentificare în aplicații."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"Un PIN îți protejează telefonul dacă este pierdut sau furat"</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"Un PIN îți protejează telefonul dacă este pierdut sau furat.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>În plus, această funcție șterge modelul cu amprentă stocat pe dispozitiv. Nu vei putea să-ți folosești amprenta pentru autentificare în aplicații."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"Un PIN îți protejează telefonul dacă este pierdut sau furat.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>În plus, modelul facial va fi șters definitiv și în siguranță. Nu vei putea să-ți folosești fața pentru autentificare în aplicații."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"Un PIN îți protejează telefonul dacă este pierdut sau furat.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Această funcție șterge modelul cu amprentă stocat pe dispozitiv. În plus, modelul facial va fi șters definitiv și în siguranță. Nu vei putea să folosești fața sau amprenta pentru autentificare în aplicații."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"O parolă îți protejează telefonul dacă este pierdut sau furat"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"O parolă îți protejează telefonul dacă este pierdut sau furat.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>În plus, această funcție șterge modelul cu amprentă stocat pe dispozitiv. Nu vei putea să-ți folosești amprenta pentru autentificare în aplicații."</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"O parolă îți protejează telefonul dacă este pierdut sau furat.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>În plus, modelul facial va fi șters definitiv și în siguranță. Nu vei putea să îți folosești fața pentru autentificare în aplicații."</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"O parolă îți protejează telefonul dacă este pierdut sau furat.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Această funcție șterge modelul cu amprentă stocat pe dispozitiv. În plus, modelul facial va fi șters definitiv și în siguranță. Nu vei putea să folosești fața sau amprenta pentru autentificare în aplicații."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"Funcțiile de protecție a dispozitivului nu vor funcționa fără blocarea ecranului."</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"Funcțiile de protecție a dispozitivului nu vor funcționa fără blocarea ecranului.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>În plus, această funcție șterge modelul cu amprentă stocat pe dispozitiv. Nu vei putea să-ți folosești amprenta pentru autentificare în aplicații."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"Funcțiile de protecție a dispozitivului nu vor funcționa fără blocarea ecranului.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>În plus, modelul facial va fi șters definitiv și în siguranță. Nu vei putea să îți folosești fața pentru autentificare în aplicații."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"Funcțiile de protecție a dispozitivului nu vor funcționa fără blocarea ecranului.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Această funcție șterge modelul cu amprentă stocat pe dispozitiv. În plus, modelul facial va fi șters definitiv și în siguranță. Nu vei putea să folosești fața sau amprenta pentru autentificare în aplicații."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Șterge"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> recomandă un cod PIN sau o parolă puternică și este posibil să nu funcționeze corect fără una dintre acestea"</string>
@@ -1030,13 +1038,18 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Text aldin"</string>
     <string name="title_font_size" msgid="570613010306330622">"Dimensiunea fontului"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Mărește sau micșorează texul"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"Setări de blocare a cardului SIM"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"Blocare card SIM"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"Blochează cardul SIM"</string>
+    <!-- no translation found for sim_lock_settings (7331982427303002613) -->
+    <skip />
+    <!-- no translation found for sim_lock_settings_category (6475255139493877786) -->
+    <skip />
+    <!-- no translation found for sim_pin_toggle (6814489621760857328) -->
+    <skip />
     <string name="sim_pin_change" msgid="5978881209990507379">"Schimbă codul PIN pentru SIM"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"PIN SIM"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Blochează cardul SIM"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"Deblochează cardul SIM"</string>
+    <!-- no translation found for sim_enable_sim_lock (6486354334679225748) -->
+    <skip />
+    <!-- no translation found for sim_disable_sim_lock (6939439812841857306) -->
+    <skip />
     <string name="sim_enter_old" msgid="6882545610939674813">"Vechiul cod PIN al cardului SIM"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"Nou cod PIN pentru SIM"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Reintrodu noul PIN"</string>
@@ -1051,7 +1064,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Folosești <xliff:g id="CARRIER">%1$s</xliff:g> pentru date mobile?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Folosești <xliff:g id="CARRIER2_0">%2$s</xliff:g> pentru datele mobile. Când comuți la <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> nu va mai fi folosit pentru date mobile."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Folosește <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"Actualizezi cardul SIM preferat?"</string>
+    <!-- no translation found for sim_preferred_title (8850185380445309835) -->
+    <skip />
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> este singurul card SIM de pe dispozitiv. Vrei să folosești acest card SIM pentru date mobile, apeluri și mesaje SMS?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Codul PIN pentru cardul SIM este incorect. Contactează operatorul pentru a-ți debloca dispozitivul."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1205,17 +1219,20 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Resetați Wi-Fi, date mobile și Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Astfel, toate setările pentru rețea vor fi reinițializate, inclusiv:\n\n"<li>"Wi‑Fi,"</li>\n<li>"date mobile,"</li>\n<li>"Bluetooth."</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Șterge"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Șterge SIM-urile descărcate"</string>
+    <!-- no translation found for reset_esim_title (4194570573425902754) -->
+    <skip />
     <string name="reset_esim_desc" msgid="3662444090563399131">"Acest lucru nu va anula niciun abonament de servicii mobile. Pentru a descărca SIM-uri de înlocuire, contactează operatorul."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Resetează opțiunile"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Restabilește toate setările pentru rețea? Nu poți anula această acțiune."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Resetează toate setările pentru rețea și șterge SIM-urile descărcate? Nu poți anula această acțiune."</string>
+    <!-- no translation found for reset_network_final_desc_esim (1129251284212847939) -->
+    <skip />
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Resetează setările"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Resetezi?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Resetarea rețelei nu este disponibilă pentru acest utilizator"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Setările pentru rețea au fost reinițializate"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Nu se pot șterge SIM-urile"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"SIM-urile descărcate nu pot fi șterse din cauza unei erori.\n\nReporniți dispozitivul și încercați din nou."</string>
+    <!-- no translation found for reset_esim_error_msg (7279607120606365250) -->
+    <skip />
     <string name="main_clear_title" msgid="277664302144837723">"Șterge datele (revino la setările din fabrică)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Șterge datele (revino la setările din fabrică)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"muzică;"</li>\n<li>"fotografii;"</li>\n<li>"alte date ale utilizatorului."</li></string>
@@ -2062,7 +2079,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"Detalii istoric"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Utilizarea bateriei"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Vezi utilizarea din ultimele 24 de ore"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Vezi utilizarea de la ultima încărcare completă"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Vezi utilizarea de la ultima încărcare completă"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Utilizarea bateriei pentru aplicații"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Detalii despre utilizare"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Ajustează utilizarea de energie"</string>
@@ -2160,25 +2177,25 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Încărcarea completă durează aproximativ"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Datele despre utilizarea bateriei sunt aproximative și se pot modifica în funcție de utilizare."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Utilizarea bateriei"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> în total • <xliff:g id="TIME_1">^2</xliff:g> în fundal\nde la ultima încărcare completă"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"<xliff:g id="TIME_0">^1</xliff:g> în total • <xliff:g id="TIME_1">^2</xliff:g> în fundal\nde la ultima încărcare completă"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> în total • <xliff:g id="TIME_1">^2</xliff:g> în fundal,\nîn ultimele 24 de ore"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"<xliff:g id="TIME_0">^1</xliff:g> în total • <xliff:g id="TIME_1">^2</xliff:g> în fundal,\nîn intervalul <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"În total mai puțin de un minut de la ultima încărcare completă"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"În total mai puțin de un minut de la ultima încărcare completă"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"În total mai puțin de un minut pentru ultimele 24 h"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"În total mai puțin de un minut pentru <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"Mai puțin de un minut în fundal de la ultima încărcare completă"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"Mai puțin de un minut în fundal de la ultima încărcare completă"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Mai puțin de un minut în fundal, în ultimele 24 h"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Mai puțin de un minut în fundal, în intervalul <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"<xliff:g id="TIME">^1</xliff:g> în total de la ultima încărcare completă"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"<xliff:g id="TIME">^1</xliff:g> în total de la ultima încărcare completă"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"<xliff:g id="TIME">^1</xliff:g> în total în ultimele 24 h"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_0">^1</xliff:g> în total pentru <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"<xliff:g id="TIME">^1</xliff:g> în fundal de la ultima încărcare completă"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"<xliff:g id="TIME">^1</xliff:g> în fundal de la ultima încărcare completă"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"<xliff:g id="TIME">^1</xliff:g> în fundal, în ultimele 24 h"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> în fundal, în intervalul <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"<xliff:g id="TIME">^1</xliff:g> în total • Mai puțin de un minut în fundal\nde la ultima încărcare completă"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"<xliff:g id="TIME">^1</xliff:g> în total • Mai puțin de un minut în fundal\nde la ultima încărcare completă"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"<xliff:g id="TIME">^1</xliff:g> în total • Mai puțin de un minut în fundal,\nîn ultimele 24 h"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"<xliff:g id="TIME_0">^1</xliff:g> în total • mai puțin de un minut în fundal,\nîn intervalul <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"Nu a fost folosită de la ultima încărcare completă"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"Nu a fost folosită de la ultima încărcare completă"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Nu a fost folosită în ultimele 24 h"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"Alți utilizatori"</string>
@@ -2593,7 +2610,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Șterge <xliff:g id="USER_NAME">%1$s</xliff:g> de pe dispozitiv"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Setările ecranului de blocare"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Adaugă utilizatori din ecranul de blocare"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"Treci la administrator când este andocat"</string>
+    <!-- no translation found for switch_to_dock_user_when_docked (2324395443311905635) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Te excluzi ca utilizator?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Ștergi utilizatorul?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Elimini acest profil?"</string>
@@ -2719,7 +2737,8 @@
     <string name="wizard_next" msgid="3884832431439072471">"Înainte"</string>
     <string name="wizard_back_adoptable" msgid="1447814356855134183">"Formatează altfel"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"Carduri SIM"</string>
+    <!-- no translation found for sim_settings_title (2254609719033946272) -->
+    <skip />
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Datele mobile sunt indisponibile"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Atinge pentru a selecta un card SIM de date"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Folosește întotdeauna pentru apeluri"</string>
@@ -2737,7 +2756,8 @@
     <string name="sim_status_title" msgid="6188770698037109774">"Starea cardului SIM"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"Stare card SIM (slot pentru SIM %1$d)"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"Cardurile SIM au fost schimbate."</string>
+    <!-- no translation found for sim_notification_title (2819551384383504031) -->
+    <skip />
     <string name="sim_notification_summary" msgid="5593339846307029991">"Atinge pentru a configura"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Întreabă de fiecare dată"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Selectează o opțiune"</string>
@@ -2763,6 +2783,8 @@
     <string name="account_dashboard_title" msgid="8228773251948253914">"Parole și conturi"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Parole salvate, completare automată, conturi sincronizate"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Aplicații prestabilite"</string>
+    <!-- no translation found for cloned_apps_dashboard_title (5542076801222950921) -->
+    <skip />
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Limbi, gesturi, ora, backup"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"Limbile sistemului, limbile aplicațiilor"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, conexiune la rețea, internet, wireless, date, wi fi"</string>
@@ -3384,7 +3406,8 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Solicită parola înainte de a anula fixarea"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Blochează dispozitivul la anularea fixării"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Confirmă ștergerea profilului SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Confirmă-ți identitatea înainte de a șterge un profil SIM descărcat"</string>
+    <!-- no translation found for confirm_sim_deletion_description (5090811029854329373) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Acest profil de serviciu este gestionat de:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Gestionat de <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"Pornire securizată"</string>
@@ -4179,7 +4202,8 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Date mobile"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Accesează datele folosind rețeaua mobilă"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Telefonul va comuta automat la acest operator când se află în aria de acoperire"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Nu este disponibil niciun card SIM"</string>
+    <!-- no translation found for mobile_data_settings_summary_unavailable (9176513507571883986) -->
+    <skip />
     <string name="calls_preference" msgid="2166481296066890129">"Preferință pentru apeluri"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Preferințe pentru SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Întreabă mereu"</string>
@@ -4194,8 +4218,10 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Adaugă mai multe"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Activ/SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Inactiv/SIM"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Activ / SIM descărcat"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Inactiv / SIM descărcat"</string>
+    <!-- no translation found for mobile_network_active_esim (3984452275968408382) -->
+    <skip />
+    <!-- no translation found for mobile_network_inactive_esim (8777415108263057939) -->
+    <skip />
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"Numele și culoarea cardului SIM"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Nume"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Culoare (folosită de aplicațiile compatibile)"</string>
@@ -4231,7 +4257,8 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Folosești cardul SIM?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Folosești <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Doar un SIM poate fi activ odată.\n\nCând treci la <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, nu se anulează serviciul <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Doar un SIM descărcat poate fi activ odată.\n\nCând treci la <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, nu se anulează serviciul <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_text_downloaded (8977951796005849471) -->
+    <skip />
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Doar un SIM poate fi activ odată.\n\nDacă faci această schimbare, nu se anulează serviciul <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Poți folosi două carduri SIM în același timp. Ca să folosești <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, dezactivează un alt SIM."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Treci la <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -4273,8 +4300,10 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> va fi folosit pentru date mobile, apeluri și SMS-uri."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Nu există carduri SIM disponibile"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Pentru a folosi datele mobile, funcțiile de apel și SMS-urile mai târziu, accesează setările pentru rețea"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"Card SIM"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Ștergi acest SIM descărcat?"</string>
+    <!-- no translation found for sim_card_label (6263064316075963775) -->
+    <skip />
+    <!-- no translation found for erase_sim_dialog_title (4742077437653028326) -->
+    <skip />
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Dacă ștergi acest SIM, vei elimina serviciul <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> de pe acest dispozitiv.\n\nServiciile <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> nu vor fi anulate."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Șterge"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"Se șterge SIM-ul…"</string>
@@ -4427,8 +4456,10 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Permite ca Google Fi să folosească rețele W+ pentru a îmbunătăți viteza și acoperirea"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Rețea W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"SIM DESCĂRCAT"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"SIM-URI DESCĂRCATE"</string>
+    <!-- no translation found for downloaded_sim_category_title (2876988650413179752) -->
+    <skip />
+    <!-- no translation found for downloaded_sims_category_title (487799905978489922) -->
+    <skip />
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Activ"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Inactiv"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Prestabilit pentru <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -4484,7 +4515,8 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Setări pentru apeluri"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Se actualizează setările…"</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Eroare în setările pentru apeluri"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Eroare de rețea sau de card SIM."</string>
+    <!-- no translation found for smart_forwarding_failed_text (8682640643264071789) -->
+    <skip />
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"Cardul SIM nu este activat."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Introduceți numerele de telefon"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Introdu numărul de telefon"</string>
@@ -4508,10 +4540,14 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"Înapoi"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Înainte"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Previzualizarea culorii"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Solicitare de acces la cardul SIM"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Un dispozitiv solicită acces la cardul SIM. Atinge pentru detalii."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Permiți accesul la cardul SIM?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Un dispozitiv Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, solicită acces la datele de pe cardul SIM. Aici este inclusă agenda.\n\nDupă ce se conectează, <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> va primi toate apelurile primite la <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <!-- no translation found for bluetooth_sim_card_access_notification_title (7351015416346359536) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_notification_content (8685623260103018309) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_title (5616323725563125179) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_content (6281997628405909566) -->
+    <skip />
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Este disponibil un dispozitiv Bluetooth"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Un dispozitiv solicită conectarea. Atinge pentru detalii."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Te conectezi la dispozitivul Bluetooth?"</string>

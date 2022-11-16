@@ -13,6 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"ຕົກລົງ"</string>
@@ -365,7 +366,6 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"ລົງທະບຽນແລ້ວ <xliff:g id="PERCENTAGE">%d</xliff:g> ເປີເຊັນ"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"ກຳລັງລົງທະບຽນລາຍນິ້ວມື <xliff:g id="PERCENTAGE">%d</xliff:g> ເປີເຊັນ"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"ເພີ່ມລາຍນິ້ວມືແລ້ວ"</string>
-    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"ຕອນນີ້ທ່ານສາມາດໃຊ້ລາຍນິ້ວມືຂອງທ່ານເພື່ອປົດລັອກແທັບເລັດຂອງທ່ານ ຫຼື ຢັ້ງຢືນວ່າແມ່ນທ່ານໄດ້ແລ້ວ, ເຊັ່ນ: ໃນເວລາທີ່ທ່ານເຂົ້າສູ່ລະບົບຫາແອັບ ຫຼື ອະນຸມັດການສັ່ງຊື້"</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"ປົດລັອກສະເພາະເມື່ອໜ້າຈໍເປີດຢູ່ເທົ່ານັ້ນ"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"ໜ້າຈໍຈະຕ້ອງເປີດຢູ່ທ່ານຈຶ່ງຈະສາມາດປົດລັອກດ້ວຍລາຍນິ້ວມືຂອງທ່ານໄດ້. ການດຳເນີນການນີ້ເຮັດໃຫ້ບໍ່ເກີດການປົດລັອກໂດຍບໍ່ຕັ້ງໃຈ."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"ປົດລັອກໜ້າຈໍ"</string>
@@ -461,31 +461,43 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"ເອົາການປົກປ້ອງໂປຣໄຟລ໌ອອກບໍ?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"ຮູບແບບຈະປົກປ້ອງໂທລະສັບຂອງທ່ານຫາກທ່ານເຮັດເສຍ ຫຼື ຖືກລັກ"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"ຮູບແບບຈະປົກປ້ອງໂທລະສັບຂອງທ່ານຫາກທ່ານເຮັດເສຍ ຫຼື ຖືກລັກ.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>ນີ້ຈະເປັນການລຶບຮູບແບບລາຍນິ້ວມືທີ່ຈັດເກັບໄວ້ຢູ່ອຸປະກອນຂອງທ່ານອອກນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ລາຍນິ້ວມືຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"ຮູບແບບຈະປົກປ້ອງໂທລະສັບຂອງທ່ານຫາກທ່ານເຮັດເສຍ ຫຼື ຖືກລັກ.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>ຮູບແບບໃບໜ້າຂອງທ່ານຈະຖືກລຶບອອກຢ່າງປອດໄພ ແລະ ຖາວອນນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ໜ້າຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"ຮູບແບບຈະປົກປ້ອງໂທລະສັບຂອງທ່ານຫາກທ່ານເຮັດເສຍ ຫຼື ຖືກລັກ.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>ນີ້ຈະເປັນການລຶບຮູບແບບລາຍນິ້ວມືທີ່ຈັດເກັບໄວ້ຢູ່ອຸປະກອນຂອງທ່ານອອກ. ຮູບແບບໃບໜ້າຂອງທ່ານຈະຖືກລຶບອອກຢ່າງປອດໄພ ແລະ ຖາວອນນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ໜ້າ ຫຼື ລາຍນິ້ວມືຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"PIN ຈະປົກປ້ອງໂທລະສັບຂອງທ່ານຫາກທ່ານເຮັດເສຍ ຫຼື ຖືກລັກ"</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"PIN ຈະປົກປ້ອງໂທລະສັບຂອງທ່ານຫາກທ່ານເຮັດເສຍ ຫຼື ຖືກລັກ.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>ນີ້ຈະເປັນການລຶບຮູບແບບລາຍນິ້ວມືທີ່ຈັດເກັບໄວ້ຢູ່ອຸປະກອນຂອງທ່ານອອກນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ລາຍນິ້ວມືຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"PIN ຈະປົກປ້ອງໂທລະສັບຂອງທ່ານຫາກທ່ານເຮັດເສຍ ຫຼື ຖືກລັກ.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>ຮູບແບບໃບໜ້າຂອງທ່ານຈະຖືກລຶບອອກຢ່າງປອດໄພ ແລະ ຖາວອນນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ໜ້າຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"PIN ຈະປົກປ້ອງໂທລະສັບຂອງທ່ານຫາກທ່ານເຮັດເສຍ ຫຼື ຖືກລັກ.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>ນີ້ຈະເປັນການລຶບຮູບແບບລາຍນິ້ວມືທີ່ຈັດເກັບໄວ້ຢູ່ອຸປະກອນຂອງທ່ານອອກ. ຮູບແບບໃບໜ້າຂອງທ່ານຈະຖືກລຶບອອກຢ່າງປອດໄພ ແລະ ຖາວອນນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ໜ້າ ຫຼື ລາຍນິ້ວມືຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"ລະຫັດຜ່ານຈະປົກປ້ອງໂທລະສັບຂອງທ່ານຫາກທ່ານເຮັດເສຍ ຫຼື ຖືກລັກ"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"ລະຫັດຜ່ານຈະປົກປ້ອງໂທລະສັບຂອງທ່ານຫາກທ່ານເຮັດເສຍ ຫຼື ຖືກລັກ.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>ນີ້ຈະເປັນການລຶບຮູບແບບລາຍນິ້ວມືທີ່ຈັດເກັບໄວ້ຢູ່ອຸປະກອນຂອງທ່ານອອກນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ລາຍນິ້ວມືຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"ລະຫັດຜ່ານຈະປົກປ້ອງໂທລະສັບຂອງທ່ານຫາກທ່ານເຮັດເສຍ ຫຼື ຖືກລັກ.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>ຮູບແບບໃບໜ້າຂອງທ່ານຈະຖືກລຶບອອກຢ່າງປອດໄພ ແລະ ຖາວອນນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ໜ້າຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"ລະຫັດຜ່ານຈະປົກປ້ອງໂທລະສັບຂອງທ່ານຫາກທ່ານເຮັດເສຍ ຫຼື ຖືກລັກ.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>ນີ້ຈະເປັນການລຶບຮູບແບບລາຍນິ້ວມືທີ່ຈັດເກັບໄວ້ຢູ່ອຸປະກອນຂອງທ່ານອອກ. ຮູບແບບໃບໜ້າຂອງທ່ານຈະຖືກລຶບອອກຢ່າງປອດໄພ ແລະ ຖາວອນນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ໜ້າ ຫຼື ລາຍນິ້ວມືຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"ຄຸນສົມບັດການປົກປ້ອງອຸປະກອນຈະໃຊ້ງານບໍ່ໄດ້ໂດຍບໍ່ມີການລັອກໜ້າຈໍຂອງທ່ານ."</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"ຄຸນສົມບັດການປົກປ້ອງອຸປະກອນຈະບໍ່ເຮັດວຽກຫາກບໍ່ມີການລັອກໜ້າຈໍຂອງທ່ານ.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>ນີ້ຈະເປັນການລຶບຮູບແບບລາຍນິ້ວມືທີ່ຈັດເກັບໄວ້ຢູ່ອຸປະກອນຂອງທ່ານອອກນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ລາຍນິ້ວມືຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"ຄຸນສົມບັດການປົກປ້ອງອຸປະກອນຈະບໍ່ເຮັດວຽກຫາກບໍ່ມີການລັອກໜ້າຈໍຂອງທ່ານ.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>ຮູບແບບໃບໜ້າຂອງທ່ານຈະຖືກລຶບອອກຢ່າງປອດໄພ ແລະ ຖາວອນນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ໜ້າຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"ຄຸນສົມບັດການປົກປ້ອງອຸປະກອນຈະບໍ່ເຮັດວຽກຫາກບໍ່ມີການລັອກໜ້າຈໍຂອງທ່ານ.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>ນີ້ຈະເປັນການລຶບຮູບແບບລາຍນິ້ວມືທີ່ຈັດເກັບໄວ້ຢູ່ອຸປະກອນຂອງທ່ານອອກ. ຮູບແບບໃບໜ້າຂອງທ່ານຈະຖືກລຶບອອກຢ່າງປອດໄພ ແລະ ຖາວອນນຳ. ທ່ານຈະບໍ່ສາມາດໃຊ້ໜ້າ ຫຼື ລາຍນິ້ວມືຂອງທ່ານສຳລັບການພິສູດຢືນຢັນໃນແອັບໄດ້."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"ລຶບ"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> ແນະນຳໃຫ້ໃຊ້ PIN ຫຼື ລະຫັດຜ່ານທີ່ຍາກ ແລະ ອາດບໍ່ສາມາດເຮັດວຽກໄດ້ຕາມຄາດຫາກບໍ່ໃຊ້"</string>
@@ -1000,13 +1012,18 @@
     <string name="force_bold_text" msgid="4620929631102086716">"ຂໍ້ຄວາມຕົວໜາ"</string>
     <string name="title_font_size" msgid="570613010306330622">"ຂະໜາດຕົວອັກສອນ"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"ເຮັດໃຫ້ຂໍ້ຄວາມໃຫຍ່ຂຶ້ນ ຫຼື ນ້ອຍລົງ"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"ການຕັ້ງຄ່າການລັອກ SIM ກາດ"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"ການລັອກຊິມກາດ"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"ລັອກຊິມກາດ"</string>
+    <!-- no translation found for sim_lock_settings (7331982427303002613) -->
+    <skip />
+    <!-- no translation found for sim_lock_settings_category (6475255139493877786) -->
+    <skip />
+    <!-- no translation found for sim_pin_toggle (6814489621760857328) -->
+    <skip />
     <string name="sim_pin_change" msgid="5978881209990507379">"ປ່ຽນລະຫັດ PIN ຂອງ SIM"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"ລະຫັດ PIN ຂອງ SIM"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"ລັອກຊິມກາດ"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"ປົດລັອກ SIM ກາດ"</string>
+    <!-- no translation found for sim_enable_sim_lock (6486354334679225748) -->
+    <skip />
+    <!-- no translation found for sim_disable_sim_lock (6939439812841857306) -->
+    <skip />
     <string name="sim_enter_old" msgid="6882545610939674813">"PIN ເກົ່າຂອງ SIM"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"ລະຫັດ PIN ໃໝ່ຂອງ SIM"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"ພິມ PIN ໃໝ່​ອີກ​ເທື່ອ​ນຶ່ງ"</string>
@@ -1021,7 +1038,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"ໃຊ້ <xliff:g id="CARRIER">%1$s</xliff:g> ສຳລັບອິນເຕີເນັດມືຖືບໍ?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"ທ່ານກຳລັງໃຊ້ <xliff:g id="CARRIER2_0">%2$s</xliff:g> ສຳລັບອິນເຕີເນັດມືຖື. ຫາກທ່ານສະຫຼັບໄປໃຊ້ <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> ຈະບໍ່ສາມາດຖືກໃຊ້ເຊື່ອມຕໍ່ອິນເຕີເນັດໄດ້ອີກຕໍ່ໄປ."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"ໃຊ້ <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"ອັບ​ເດດ​ແຜ່ນ SIM ທີ່​ມັກ?"</string>
+    <!-- no translation found for sim_preferred_title (8850185380445309835) -->
+    <skip />
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> ເປັນຊິມດຽວໃນອຸປະກອນຂອງທ່ານ. ທ່ານຕ້ອງການໃຊ້ຊິມນີ້ສຳລັບໃຊ້ອິນເຕີເນັດມືຖື, ການໂທ ແລະ ສົ່ງຂໍ້ຄວາມ SMS ບໍ່?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"ລະຫັດ PIN ຂອງ SIM ບໍ່ຖືກຕ້ອງທ່ານຕ້ອງຕິດຕໍ່ຫາຜູ່ໃຫ້ບໍລິການຂອງທ່ານ ເພື່ອປົດລັອກອຸປະກອນຂອງທ່ານ."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1174,17 +1192,20 @@
     <string name="reset_network_title" msgid="1395494440355807616">"ຣີເຊັດ Wi-Fi, ມືຖື ແລະ Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"ນີ້ຈະເປັນການຣີເຊັດການຕັ້ງຄ່າເຄືອຂ່າຍທັງໝົດ, ຮວມເຖິງ:\n\n"<li>"Wi‑Fi"</li>\n<li>"ອິນເຕີເນັດມືຖື"</li>\n<li>"Bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"ລຶບ"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"ລຶບ SIM ທີ່ດາວໂຫລດມາແລ້ວອອກ"</string>
+    <!-- no translation found for reset_esim_title (4194570573425902754) -->
+    <skip />
     <string name="reset_esim_desc" msgid="3662444090563399131">"ນີ້ຈະບໍ່ເປັນການຍົກເລີກແພັກເກດບໍລິການມືຖືໃດໆ. ເພື່ອດາວໂຫຼດຊິມທົດແທນ, ໃຫ້ຕິດຕໍ່ຫາຜູ້ໃຫ້ບໍລິການຂອງທ່ານ."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"ຣີ​ເຊັດການຕັ້ງຄ່າ"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"ຣີເຊັດການຕັ້ງຄ່າເຄືອຂ່າຍທັງໝົດບໍ? ທ່ານຈະບໍ່ສາມາດຍົກເລີກຄຳສັ່ງນີ້ໄດ້."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"ຣີເຊັດການຕັ້ງຄ່າເຄືອຂ່າຍທັງໝົດ ແລະ ລຶບລ້າງ SIM ທີ່ດາວໂຫລດມາແລ້ວອອກບໍ? ທ່ານບໍ່ສາມາດຍົກເລີກຄຳສັ່ງນີ້ໄດ້."</string>
+    <!-- no translation found for reset_network_final_desc_esim (1129251284212847939) -->
+    <skip />
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"ຣີ​ເຊັດການຕັ້ງຄ່າ"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"ຣີ​ເຊັດບໍ?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"ການ​ຕັ້ງ​ຄ່າ​ເຄືອ​ຂ່າຍ​ຄືນ​ໃໝ່​ແມ່ນ​ບໍ່​ມີ​ໃຫ້​ສຳ​ລັບ​ຜູ້​ໃຊ້​ຄົນ​ນີ້"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"​ການ​ຕັ້ງ​ຄ່າ​ເຄືອ​ຂ່າຍ​ຖືກຕັ້ງ​ຄ່າ​ຄືນ​ໃໝ່​ແລ້ວ."</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"ບໍ່ສາມາດລຶບ SIM ອອກໄດ້"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"ບໍ່ສາມາດລຶບຂໍ້ມູນ SIM ທີ່ດາວໂຫລດມາໄດ້ເນື່ອງຈາກມີຂໍ້ຜິດພາດຂຶ້ນ.\n\nກະລຸນາຣີສະຕາດແອັບຂອງທ່ານແລ້ວລອງໃໝ່."</string>
+    <!-- no translation found for reset_esim_error_msg (7279607120606365250) -->
+    <skip />
     <string name="main_clear_title" msgid="277664302144837723">"ລຶບຂໍ້ມູນທັງໝົດ (ຣີເຊັດເປັນຄ່າຈາກໂຮງງານ)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"ລຶບຂໍ້ມູນທັງໝົດ (ຣີເຊັດເປັນຄ່າຈາກໂຮງງານ)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"ເພງ"</li>\n<li>"ຮູບພາບ"</li>\n<li>"ຂໍ້ມູນຜູ້ໃຊ້ອື່ນໆ"</li></string>
@@ -2022,7 +2043,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"ລາຍລະອຽດປະຫວັດການນຳໃຊ້"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"ການໃຊ້ແບັດເຕີຣີ"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"ເບິ່ງການນຳໃຊ້ໃນຮອບ 24 ຊົ່ວໂມງທີ່ຜ່ານມາ"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"ເບິ່ງການນຳໃຊ້ນັບຈາກການສາກເຕັມຫຼ້າສຸດ"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"ເບິ່ງການນຳໃຊ້ຕັ້ງແຕ່ສາກຈົນເຕັມຫຼ້າສຸດ"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"ການໃຊ້ແບັດເຕີຣີຂອງແອັບ"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"ໃຊ້ລາຍລະອຽດ"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"ປັບແຕ່ງການໃຊ້ພະລັງງານ"</string>
@@ -2113,25 +2134,25 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"ສາກເຕັມຈະຢູ່ໄດ້ປະມານ"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"ຂໍ້ມູນການນຳໃຊ້ແບັດເຕີຣີເປັນການປະມານການເທົ່ານັ້ນ ແລະ ສາມາດປ່ຽນແປງໄດ້ຂຶ້ນກັບການນຳໃຊ້ຕົວຈິງ."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"ການໃຊ້ແບັດເຕີຣີ"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"ຮວມ <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> ພື້ນຫຼັງ\nຫຼັງຈາກສາກເຕັມຫຼ້າສຸດ"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"ນຳໃຊ້ຮວມ <xliff:g id="TIME_0">^1</xliff:g> • ນຳໃຊ້ໃນພື້ນຫຼັງ <xliff:g id="TIME_1">^2</xliff:g>\nຕັ້ງແຕ່ສາກຈົນເຕັມຫຼ້າສຸດ"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"ຮວມ <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> ພື້ນຫຼັງ\nໃນຮອບ 24 ຊມ ທີ່ຜ່ານມາ"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"ຮວມ <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> ພື້ນຫຼັງ\nສຳລັບ <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"ຮວມໜ້ອຍກວ່າໜຶ່ງນາທີຫຼັງຈາກສາກເຕັມຫຼ້າສຸດ"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"ນຳໃຊ້ຮວມບໍ່ຮອດ 1 ນາທີຕັ້ງແຕ່ສາກຈົນເຕັມຫຼ້າສຸດ"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"ຮວມໜ້ອຍກວ່າໜຶ່ງນາທີໃນຮອບ 24 ຊມ ທີ່ຜ່ານມາ"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"ຮວມໜ້ອຍກວ່າໜຶ່ງນາທີສຳລັບ <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"ພື້ນຫຼັງໜ້ອຍກວ່າໜຶ່ງນາທີຫຼັງຈາກສາກເຕັມຫຼ້າສຸດ"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"ນຳໃຊ້ໃນພື້ນຫຼັງບໍ່ຮອດ 1 ນາທີຕັ້ງແຕ່ສາກຈົນເຕັມຫຼ້າສຸດ"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"ພື້ນຫຼັງໜ້ອຍກວ່າໜຶ່ງນາທີໃນຮອບ 24 ຊມ ທີ່ຜ່ານມາ"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"ພື້ນຫຼັງໜ້ອຍກວ່າໜຶ່ງນາທີສຳລັບ <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"ຮວມ <xliff:g id="TIME">^1</xliff:g> ຫຼັງຈາກສາກເຕັມຫຼ້າສຸດ"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"ນຳໃຊ້ຮວມ <xliff:g id="TIME">^1</xliff:g> ຕັ້ງແຕ່ສາກຈົນເຕັມຫຼ້າສຸດ"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"ຮວມ <xliff:g id="TIME">^1</xliff:g> ໃນຮອບ 24 ຊມ ທີ່ຜ່ານມາ"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_0">^1</xliff:g> ຮວມສຳລັບ <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"<xliff:g id="TIME">^1</xliff:g> ພື້ນຫຼັງຫຼັງຈາກສາກເຕັມຫຼ້າສຸດ"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"ນຳໃຊ້ໃນພື້ນຫຼັງ <xliff:g id="TIME">^1</xliff:g> ຕັ້ງແຕ່ສາກຈົນເຕັມຫຼ້າສຸດ"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"<xliff:g id="TIME">^1</xliff:g> ພື້ນຫຼັງໃນຮອບ 24 ຊມ ທີ່ຜ່ານມາ"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> ພື້ນຫຼັງສຳລັບ <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"ຮວມ <xliff:g id="TIME">^1</xliff:g> • ພື້ນຫຼັງໜ້ອຍກວ່າໜຶ່ງນາທີ\nຫຼັງຈາກສາກເຕັມຫຼ້າສຸດ"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"ນຳໃຊ້ຮວມ <xliff:g id="TIME">^1</xliff:g> • ນຳໃຊ້ໃນພື້ນຫຼັງບໍ່ຮອດ 1 ນາທີ\nຕັ້ງແຕ່ສາກຈົນເຕັມຫຼ້າສຸດ"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"ຮວມ <xliff:g id="TIME">^1</xliff:g> • ພື້ນຫຼັງໜ້ອຍກວ່າໜຶ່ງນາທີ\nໃນຮອບ 24 ຊມ ທີ່ຜ່ານມາ"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"ຮວມ <xliff:g id="TIME_0">^1</xliff:g> • ພື້ນຫຼັງໜ້ອຍກວ່າໜຶ່ງນາທີ\nສຳລັບ <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"ບໍ່ມີການນຳໃຊ້ຫຼັງຈາກສາກເຕັມຫຼ້າສຸດ"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"ບໍ່ມີການນຳໃຊ້ຕັ້ງແຕ່ສາກຈົນເຕັມຫຼ້າສຸດ"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"ບໍ່ມີການນຳໃຊ້ໃນຮອບ 24 ຊມ ທີ່ຜ່ານມາ"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"ຜູ້ໃຊ້ອື່ນໆ"</string>
@@ -2542,7 +2563,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"ລຶບ <xliff:g id="USER_NAME">%1$s</xliff:g> ອອກຈາກອຸປະກອນນີ້"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"ການ​ຕັ້ງ​ຄ່າ​ຫນ້າ​ຈໍລັອກ"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"ເພີ່ມຜູ້ໃຊ້ຈາກໜ້າຈໍລັອກ"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"ສະຫຼັບໄປໃຊ້ຜູ້ໃຊ້ຜູ້ເບິ່ງແຍງເມື່ອວາງໃສ່ດັອກ"</string>
+    <!-- no translation found for switch_to_dock_user_when_docked (2324395443311905635) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"ລຶບໂຕທ່ານເອງ?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"ລຶບຜູ້ໃຊ້ນີ້ອອກບໍ?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"ລຶບ​ໂປຣ​ໄຟລ໌​ນີ້​ບໍ?"</string>
@@ -2668,7 +2690,8 @@
     <string name="wizard_next" msgid="3884832431439072471">"ຕໍ່ໄປ"</string>
     <string name="wizard_back_adoptable" msgid="1447814356855134183">"ຟໍແມັດດ້ວຍວິທີອື່ນ"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"SIM ກາດ"</string>
+    <!-- no translation found for sim_settings_title (2254609719033946272) -->
+    <skip />
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"ບໍ່ສາມາດໃຊ້ອິນເຕີເນັດມືຖືໄດ້"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"ແຕະເພື່ອເລືອກ SIM ຂໍ້ມູນ"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"ໃຊ້​ອັນ​ນີ້​ທຸກ​ເທື່ອ​ເພື່ອ​ໂທ"</string>
@@ -2686,7 +2709,8 @@
     <string name="sim_status_title" msgid="6188770698037109774">"ສະ​ຖາ​ນະ SIM"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"ສະຖານະ SIM (ຊິມຊ່ອງ %1$d)"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"ປ່ຽນ​ແຜ່ນ SIM ແລ້ວ."</string>
+    <!-- no translation found for sim_notification_title (2819551384383504031) -->
+    <skip />
     <string name="sim_notification_summary" msgid="5593339846307029991">"ແຕະເພື່ອຕັ້ງຄ່າ"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"​ຖາມ​ທຸກ​ເທື່ອ"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"ຕ້ອງເລືອກ​ອັນໃດອັນນຶ່ງ"</string>
@@ -2712,6 +2736,8 @@
     <string name="account_dashboard_title" msgid="8228773251948253914">"ລະຫັດຜ່ານ ແລະ ບັນຊີ"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"ລະຫັດຜ່ານທີ່ບັນທຶກໄວ້, ການຕື່ມຂໍ້ມູນອັດຕະໂນມັດ, ບັນຊີທີ່ຊິ້ງຂໍ້ມູນແລ້ວ"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"ແອັບເລີ່ມຕົ້ນ"</string>
+    <!-- no translation found for cloned_apps_dashboard_title (5542076801222950921) -->
+    <skip />
     <string name="system_dashboard_summary" msgid="7400745270362833832">"ພາສາ, ທ່າທາງ, ເວລາ, ສຳຮອງຂໍ້ມູນ"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"ພາສາຂອງລະບົບ, ພາສາຂອງແອັບ"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, ການເຊື່ອມຕໍ່ເຄືອຂ່າຍ, ອິນເຕີເນັດ, ໄຮ້ສາຍ, ຂໍ້ມູນ, wi fi"</string>
@@ -3326,7 +3352,8 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"​ຖາມ​ຫາ​ລະ​ຫັດ​ຜ່ານ​ກ່ອນ​ຍົກ​ເລີກ​ການ​ປັກ​ໝຸດ"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"ລັອກ​ອຸ​ປະ​ກອນ​ເມື່ອ​ຍົກ​ເລີກ​ການ​ປັກ​ໝຸດ"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"ຢືນຢັນການລຶບຊິມ"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"ກະລຸນາຢັ້ງຢືນວ່າແມ່ນທ່ານແທ້ກ່ອນການລຶບຊິມທີ່ດາວໂຫຼດມາອອກ"</string>
+    <!-- no translation found for confirm_sim_deletion_description (5090811029854329373) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"ໂປຣໄຟລບ່ອນເຮັດວຽກນີ້ຖືກຈັດການໂດຍ:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"ຈັດ​ການ​ໂດຍ <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"ການເລີ່ມຕົ້ນຢ່າງປອດໄພ"</string>
@@ -4102,7 +4129,8 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"ອິນເຕີເນັດມືຖື"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"ເຂົ້າເຖິງອິນເຕີເນັດຜ່ານເຄືອຂ່າຍມືຖື"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"ໂທລະສັບຈະສະຫຼັບໄປໃຊ້ຜູ້ໃຫ້ບໍລິການນີ້ໂດຍອັດຕະໂນມັດເມື່ອຢູ່ໃນໄລຍະ"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"ບໍ່ມີຊິມກາດທີ່ສາມາດໃຊ້ໄດ້"</string>
+    <!-- no translation found for mobile_data_settings_summary_unavailable (9176513507571883986) -->
+    <skip />
     <string name="calls_preference" msgid="2166481296066890129">"ການຕັ້ງຄ່າການໂທ"</string>
     <string name="sms_preference" msgid="7742964962568219351">"ການຕັ້ງຄ່າ SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"ຖາມທຸກເທື່ອ"</string>
@@ -4117,8 +4145,10 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"ເພີ່ມອີກ"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"ນຳໃຊ້ຢູ່ / SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"ບໍ່ເຄື່ອນໄຫວ / SIM"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"ເປີດໃຊ້ຢູ່ / SIM ທີ່ດາວໂຫລດແລ້ວ"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"ບໍ່ມີການນຳໃຊ້ / SIM ທີ່ດາວໂຫລດແລ້ວ"</string>
+    <!-- no translation found for mobile_network_active_esim (3984452275968408382) -->
+    <skip />
+    <!-- no translation found for mobile_network_inactive_esim (8777415108263057939) -->
+    <skip />
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"ຊື່ ແລະ ສີ SIM"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"ຊື່"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"ສີ (ໃຊ້ໂດຍແອັບທີ່ໃຊ້ຮ່ວມກັນໄດ້)"</string>
@@ -4154,7 +4184,8 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"ສະຫຼັບໄປໃຊ້ຊິມກາດບໍ?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"ໃຊ້ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ບໍ?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"ສາມາດເປີດໃຊ້ເທື່ອລະຊິມເທົ່ານັ້ນ.\n\nການສະຫຼັບໄປໃຊ້ <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> ຈະບໍ່ຍົກເລີກບໍລິການ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> ຂອງທ່ານ."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"ສາມາດເປີດໃຊ້ຊິມທີ່ດາວໂຫລດມາແລ້ວເທື່ອລະອັນເທົ່ານັ້ນ.\n\nການສະຫຼັບໄປໃຊ້ <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> ຈະບໍ່ຍົກເລີກບໍລິການ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> ຂອງທ່ານ."</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_text_downloaded (8977951796005849471) -->
+    <skip />
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"ສາມາດເປີດໃຊ້ໄດ້ເທື່ອລະຊິມເທົ່ານັ້ນ.\n\nການສະຫຼັບຈະບໍ່ຍົກເລີກບໍລິການ <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> ຂອງທ່ານ."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"ທ່ານສາມາດໃຊ້ 2 ຊິມພ້ອມກັນໄດ້. ເພື່ອໃຊ້ <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, ໃຫ້ປິດອີກຊິມໄວ້ກ່ອນ."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"ສະຫຼັບໄປ <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -4196,8 +4227,10 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ຈະຖືກໃຊ້ສຳລັບອິນເຕີເນັດມືຖື, ການໂທ ແລະ SMS."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"ບໍ່ມີ SIM ທີ່ສາມາດໃຊ້ໄດ້"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"ເພື່ອໃຊ້ອິນເຕີເນັດມືຖື, ຄຸນສົມບັດການໂທ ແລະ SMS ໃນພາຍຫຼັງ, ໃຫ້ໄປທີ່ການຕັ້ງຄ່າເຄືອຂ່າຍຂອງທ່ານ"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"ຊິມກາດ"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"ລຶບ SIM ທີ່ດາວໂຫລດມາແລ້ວນີ້ອອກບໍ?"</string>
+    <!-- no translation found for sim_card_label (6263064316075963775) -->
+    <skip />
+    <!-- no translation found for erase_sim_dialog_title (4742077437653028326) -->
+    <skip />
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"ການລຶບ SIM ນີ້ຈະລຶບບໍລິການ <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> ອອກຈາກອຸປະກອນນີ້.\n\nຈະບໍ່ຍົກເລີກບໍລິການສຳລັບ <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"ລຶບ"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"ກຳລັງລຶບ SIM…"</string>
@@ -4349,8 +4382,10 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"ອະນຸຍາດ Google Fi ໃຫ້ໃຊ້ເຄືອຂ່າຍ W+ ເພື່ອປັບປຸງຄວາມໄວ ແລະ ການຄອບຄຸມ"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"ເຄືອຂ່າຍ W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"ຊິມ"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"ຊິມທີ່ດາວໂຫຼດມາແລ້ວ"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"ຊິມທີ່ດາວໂຫຼດມາແລ້ວ"</string>
+    <!-- no translation found for downloaded_sim_category_title (2876988650413179752) -->
+    <skip />
+    <!-- no translation found for downloaded_sims_category_title (487799905978489922) -->
+    <skip />
     <string name="sim_category_active_sim" msgid="1503823567818544012">"ນຳໃຊ້ຢູ່"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"ບໍ່ໄດ້ນຳໃຊ້"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / ຄ່າເລີ່ມຕົ້ນສຳລັບ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -4406,7 +4441,8 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"​ການ​ຕັ້ງ​ຄ່າ​ການ​ໂທ"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"ກຳລັງອັບເດດການຕັ້ງຄ່າ..."</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"ການຕັ້ງຄ່າການໂທຜິດພາດ"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"ເຄືອຂ່າຍ ຫຼື ຊິມກາດຜິດພາດ."</string>
+    <!-- no translation found for smart_forwarding_failed_text (8682640643264071789) -->
+    <skip />
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"ບໍ່ໄດ້ເປີດນຳໃຊ້ຊິມ."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"ໃສ່ເບີໂທລະສັບ"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"ໃສ່ເບີໂທລະສັບ"</string>
@@ -4430,10 +4466,14 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"ກ່ອນໜ້າ"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"ຕໍ່ໄປ"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"ຕົວຢ່າງສີ"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"ຄຳຮ້ອງຂໍການເຂົ້າເຖິງຊິມກາດ"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"ມີອຸປະກອນຕ້ອງການເຂົ້າເຖິງຊິມກາດຂອງທ່ານ. ແຕະເພື່ອເບິ່ງລາຍລະອຽດ."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"ອະນຸຍາດການເຂົ້າເຖິງຊິມກາດບໍ?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"ອຸປະກອນ Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, ຕ້ອງການເຂົ້າເຖິງຂໍ້ມູນຢູ່ຊິມກາດຂອງທ່ານ ນີ້ຮວມມີລາຍຊື່ຜູ້ຕິດຕໍ່ຂອງທ່ານນຳ.\n\nໃນລະຫວ່າງເຊື່ອມຕໍ່, <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ຈະໄດ້ຮັບສາຍທັງໝົດທີ່ໂທຫາ <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <!-- no translation found for bluetooth_sim_card_access_notification_title (7351015416346359536) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_notification_content (8685623260103018309) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_title (5616323725563125179) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_content (6281997628405909566) -->
+    <skip />
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"ມີອຸປະກອນ Bluetooth ທີ່ສາມາດໃຊ້ໄດ້"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"ມີອຸປະກອນຕ້ອງການເຊື່ອມຕໍ່. ແຕະເພື່ອເບິ່ງລາຍລະອຽດ."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"ເຊື່ອມຕໍ່ຫາອຸປະກອນ Bluetooth ບໍ?"</string>
