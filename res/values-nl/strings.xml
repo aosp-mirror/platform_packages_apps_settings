@@ -347,7 +347,7 @@
     <string name="safety_center_summary" msgid="3554867379951053869">"App-beveiliging, apparaatvergrendeling, rechten"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Gezicht toegevoegd"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Tik om ontgrendelen via gezicht in te stellen"</string>
-    <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Ontgrendelen via gezicht"</string>
+    <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Ontgrendelen via gezichtsherkenning"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Ontgrendelen via gezichtsherkenning voor werk"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Ontgrendelen via gezichtsherkenning instellen"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Ontgrendelen via gezichtsherkenning instellen"</string>
@@ -453,8 +453,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Je gezichtsmodel wordt definitief en op een beveiligde manier verwijderd.\n\nDaarna heb je je pincode, patroon of wachtwoord nodig om je telefoon te ontgrendelen."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Ontgrendel je telefoon via gezichtsherkenning"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Vingerafdruk"</string>
-    <!-- no translation found for security_settings_fingerprint_settings_preferences_category (8975029409126780752) -->
-    <skip />
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Bij gebruik van Ontgrendelen met vingerafdruk"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Vingerafdruk voor werk"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Vingerafdrukbeheer"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Vingerafdruk voor"</string>
@@ -576,11 +575,11 @@
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Volg het vingerafdrukicoon"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Raak de sensor meerdere keren aan om de verschillende delen van je vingerafdruk toe te voegen."</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Tik en houd het vingerafdrukicoon vast elke keer dat het beweegt. Zo kan er meer van je vingerafdruk worden geregistreerd."</string>
-    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Leg het puntje van je vingertop op de sensor"</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Houd het puntje van je vingertop op de sensor"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Plaats de linkerrand van je vinger"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Plaats de rechterrand van je vinger"</string>
     <string name="security_settings_sfps_enroll_finger_center_title" msgid="1320688855767675739">"Plaats het midden van je vingertop op de sensor"</string>
-    <string name="security_settings_sfps_enroll_fingertip_title" msgid="2737520837684516446">"Plaats het puntje van je vingertop op de sensor"</string>
+    <string name="security_settings_sfps_enroll_fingertip_title" msgid="2737520837684516446">"Houd het puntje van je vingertop op de sensor"</string>
     <string name="security_settings_sfps_enroll_left_edge_title" msgid="9022963735924413343">"Plaats de linkerkant van je vinger op de sensor"</string>
     <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"Plaats tot slot de rechterkant van je vinger op de sensor"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Leg de zijkant van je vingerafdruk op de sensor en houd vast. Doe dan hetzelfde aan de andere kant."</string>
@@ -589,16 +588,12 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"<xliff:g id="PERCENTAGE">%d</xliff:g> procent vastgelegd"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Vingerafdruk vastleggen: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Vingerafdruk toegevoegd"</string>
-    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Je kunt nu je vingerafdruk gebruiken om je tablet te ontgrendelen of om te bevestigen dat jij het bent, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Je kunt nu je vingerafdruk gebruiken om je tablet te ontgrendelen of voor verificatie, bijvoorbeeld als je inlogt bij apps"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Je kunt nu je vingerafdruk gebruiken om je apparaat te ontgrendelen of voor verificatie, bijvoorbeeld als je inlogt bij apps"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Je kunt nu je vingerafdruk gebruiken om je telefoon te ontgrendelen of voor verificatie, bijvoorbeeld als je inlogt bij apps"</string>
-    <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_keywords (5557869560397089603) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Je kunt nu je vingerafdruk gebruiken om je tablet te ontgrendelen of om te bevestigen dat jij het bent, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Je kunt nu je vingerafdruk gebruiken om je apparaat te ontgrendelen of om te bevestigen dat jij het bent, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Je kunt nu je vingerafdruk gebruiken om je telefoon te ontgrendelen of om te bevestigen dat jij het bent, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Alleen ontgrendelen als het scherm aanstaat"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Het scherm moet aanstaan voordat je kunt ontgrendelen met je vingerafdruk. Zo wordt de kans op per ongeluk ontgrendelen kleiner."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Scherm, Ontgrendelen"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Later doen"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Raak de sensor opnieuw aan"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Leg de zijkant van je vingerafdruk op de sensor en houd vast. Doe dan hetzelfde aan de andere kant."</string>
@@ -2619,7 +2614,7 @@
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Uit"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Werkt niet. Tik voor informatie."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Deze service werkt niet goed."</string>
-    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Sneltoetsen voor toegankelijkheid"</string>
+    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Snelkoppelingen voor toegankelijkheid"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Tonen in Snelle instellingen"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Rood-groen"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Rood-groen"</string>
@@ -2813,7 +2808,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"Geschiedenisdetails"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Batterijgebruik"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Bekijk gebruik voor afgelopen 24 uur"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Bekijk gebruik sinds laatste volledige lading"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Gebruik sinds laatste volledige lading"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Batterijgebruik voor app"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Gebruiksdetails"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Energieverbruik aanpassen"</string>
@@ -2994,25 +2989,25 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Batterijgebruik"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Sinds volledige lading"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Batterijgebruik beheren"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> totaal gebruik • <xliff:g id="TIME_1">^2</xliff:g> achtergrondgebruik\nsinds laatste volledige lading"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"<xliff:g id="TIME_0">^1</xliff:g> totaal gebruik • <xliff:g id="TIME_1">^2</xliff:g> achtergrondgebruik\nsinds laatste volledige lading"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> totaal gebruik • <xliff:g id="TIME_1">^2</xliff:g> achtergrondgebruik\nin de afgelopen 24 u"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"<xliff:g id="TIME_0">^1</xliff:g> totaal gebruik • <xliff:g id="TIME_1">^2</xliff:g> achtergrondgebruik\n gedurende <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"Totaal gebruik minder dan een minuut sinds laatste volledige lading"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"Totaal gebruik minder dan een minuut sinds laatste volledige lading"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"Totaal gebruik minder dan een minuut in de afgelopen 24 u"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Totaal gebruik minder dan een minuut gedurende <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"Achtergrondgebruik minder dan een minuut sinds laatste volledige lading"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"Achtergrondgebruik minder dan een minuut sinds laatste volledige lading"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Achtergrondgebruik minder dan een minuut in de afgelopen 24 u"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Achtergrondgebruik minder dan een minuut gedurende <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"<xliff:g id="TIME">^1</xliff:g> totaal gebruik sinds laatste volledige lading"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"<xliff:g id="TIME">^1</xliff:g> totaal gebruik sinds laatste volledige lading"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"<xliff:g id="TIME">^1</xliff:g> gebruikt in de afgelopen 24 u"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_0">^1</xliff:g> totaal gebruik van <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"<xliff:g id="TIME">^1</xliff:g> achtergrondgebruik sinds laatste volledige lading"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"<xliff:g id="TIME">^1</xliff:g> achtergrondgebruik sinds laatste volledige lading"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"<xliff:g id="TIME">^1</xliff:g> achtergrondgebruik in de afgelopen 24 u"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> achtergrondgebruik gedurende <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"<xliff:g id="TIME">^1</xliff:g> totaal gebruik • Achtergrondgebruik minder dan een minuut\nsinds laatste volledige lading"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"<xliff:g id="TIME">^1</xliff:g> totaal gebruik • achtergrondgebruik minder dan een minuut\nsinds laatste volledige lading"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"<xliff:g id="TIME">^1</xliff:g> totaal gebruik • Achtergrondgebruik minder dan een minuut\nin de afgelopen 24 u"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"<xliff:g id="TIME_0">^1</xliff:g> totaal gebruik • Achtergrondgebruik minder dan 1 min\nvan <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"Geen gebruik sinds laatste volledige lading"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"Geen gebruik sinds laatste volledige lading"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Geen gebruik in de afgelopen 24 u"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"Andere gebruikers"</string>
@@ -3492,7 +3487,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"<xliff:g id="USER_NAME">%1$s</xliff:g> verwijderen van dit apparaat"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Instellingen voor vergrendelscherm"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Gebruikers toevoegen vanaf vergrendelscherm"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"Overschakelen naar beheerder als gedockt"</string>
+    <!-- no translation found for switch_to_dock_user_when_docked (2324395443311905635) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Wil je jezelf verwijderen?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Gebruiker verwijderen?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Dit profiel verwijderen?"</string>
