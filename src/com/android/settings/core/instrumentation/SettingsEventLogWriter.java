@@ -41,6 +41,22 @@ public class SettingsEventLogWriter extends EventLogWriter {
     }
 
     @Override
+    public void clicked(int sourceCategory, String key) {
+        if (shouldDisableGenericEventLogging()) {
+            return;
+        }
+        super.clicked(sourceCategory, key);
+    }
+
+    @Override
+    public void changed(int category, String key, int value) {
+        if (shouldDisableGenericEventLogging()) {
+            return;
+        }
+        super.changed(category, key, value);
+    }
+
+    @Override
     public void action(Context context, int category, String pkg) {
         if (shouldDisableGenericEventLogging()) {
             return;

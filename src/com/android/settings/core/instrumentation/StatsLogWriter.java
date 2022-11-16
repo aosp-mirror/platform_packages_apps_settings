@@ -55,6 +55,16 @@ public class StatsLogWriter implements LogWriter {
     }
 
     @Override
+    public void changed(int sourceCategory, String key, int value) {
+        SettingsStatsLog.write(SettingsStatsLog.SETTINGS_UI_CHANGED /* Atom name */,
+                sourceCategory /* attribution */,
+                SettingsEnums.ACTION_SETTINGS_PREFERENCE_CHANGE /* action */,
+                SettingsEnums.PAGE_UNKNOWN /* pageId */,
+                key /* changedPreferenceKey */,
+                value /* changedPreferenceIntValue */);
+    }
+
+    @Override
     public void action(Context context, int action, Pair<Integer, Object>... taggedData) {
         action(SettingsEnums.PAGE_UNKNOWN /* attribution */,
                 action,

@@ -69,11 +69,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
             setContentView(R.layout.fingerprint_enroll_finish);
         }
         setHeaderText(R.string.security_settings_fingerprint_enroll_finish_title);
-        if (mCanAssumeSfps) {
-            setDescriptionText(R.string.security_settings_sfps_enroll_finish);
-        } else {
-            setDescriptionText(R.string.security_settings_fingerprint_enroll_finish_v2_message);
-        }
+        setDescriptionText(R.string.security_settings_fingerprint_enroll_finish_v2_message);
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
