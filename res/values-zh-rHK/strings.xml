@@ -453,8 +453,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"系統會妥善地將您的面部模型永久刪除。面部模型刪除後，您便需要使用\n\n面部模型刪除後，您便需要使用 PIN、圖案或密碼來解鎖手機。"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"使用「面孔解鎖」解鎖手機"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"指紋"</string>
-    <!-- no translation found for security_settings_fingerprint_settings_preferences_category (8975029409126780752) -->
-    <skip />
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"使用「指紋解鎖」時"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"工作設定檔的指紋"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"管理指紋"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"使用指紋"</string>
@@ -591,16 +590,15 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"已加入指紋"</string>
-    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"現在可使用指紋解鎖平板電腦或驗證身分，例如用來登入應用程式或核准購買交易"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"現在可使用指紋解鎖平板電腦或驗證身分，例如用來登入應用程式"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"現在可使用指紋解鎖裝置或驗證身分，例如用來登入應用程式"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"現在可使用指紋解鎖手機或驗證身分，例如用來登入應用程式"</string>
-    <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6064618417107305796) -->
     <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (1948980056333872057) -->
     <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_keywords (5557869560397089603) -->
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (3084541878035403475) -->
     <skip />
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"僅在螢幕開啟時解鎖"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"您必須先開啟螢幕，才可以使用指紋解鎖，以避免意外解鎖。"</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"螢幕解鎖"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"稍後再做"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"移開手指，然後再次輕觸感應器"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"將指紋的一側放上感應器並按住，然後再換另一側"</string>
@@ -1525,7 +1523,7 @@
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"睡眠模式開啟時無法使用"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"使用螢幕保護程式"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"充電或放上插座時"</string>
-    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"已插上座架並進行充電時"</string>
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"放上插座充電時"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"充電時"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"放上插座時"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"永不"</string>
@@ -2816,7 +2814,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"詳細記錄"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"電池電量"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"查看過去 24 小時的使用情況"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"查看上次充滿電後的使用情況"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"查看自上次充飽電後的電池用量"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"應用程式電池用量"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"詳細使用狀況"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"調整電力使用"</string>
@@ -2997,25 +2995,25 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"電池用量"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"上次充滿電後"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"管理電池用量"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"總共使用 <xliff:g id="TIME_0">^1</xliff:g> • 背景使用 <xliff:g id="TIME_1">^2</xliff:g>\n(從上次充滿電後)"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"自上次充飽電後使用電池的時間總長度為 <xliff:g id="TIME_0">^1</xliff:g> • 在背景使用電池的時間長度為 <xliff:g id="TIME_1">^2</xliff:g>\n"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"總共使用 <xliff:g id="TIME_0">^1</xliff:g> • 背景使用 <xliff:g id="TIME_1">^2</xliff:g>\n(過去 24 小時)"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"總共使用 <xliff:g id="TIME_0">^1</xliff:g> • 背景使用 <xliff:g id="TIME_1">^2</xliff:g>\n(<xliff:g id="TIME_PERIOD">^3</xliff:g>)"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"上次充滿電後使用電池的總時間長度少於一分鐘"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"自上次充飽電後使用電池的時間總長度不到一分鐘"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"過去 24 小時使用電池的總時間長度少於一分鐘"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"<xliff:g id="TIME_PERIOD">^1</xliff:g> 這段期間內使用電池的總時間長度少於一分鐘"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"上次充滿電後在背景使用電池的時間長度少於一分鐘"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"自上次充飽電後在背景使用電池的時間長度不到一分鐘"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"過去 24 小時在背景使用電池的時間長度少於一分鐘"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"<xliff:g id="TIME_PERIOD">^1</xliff:g> 這段期間內在背景使用電池的時間長度少於一分鐘"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"上次充滿電後使用電池的總時間長度為 <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"自上次充飽電後使用電池的時間總長度為 <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"過去 24 小時總共使用了 <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_PERIOD">^2</xliff:g>這段期間內使用電池的總時間長度為 <xliff:g id="TIME_0">^1</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"上次充滿電後在背景使用電池的時間長度為 <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"自上次充飽電後在背景使用電池的時間長度為 <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"過去 24 小時在背景使用電池的時間長度為 <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_PERIOD">^2</xliff:g> 這段期間內在背景使用電池的時間長度為 <xliff:g id="TIME_0">^1</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"總共使用 <xliff:g id="TIME">^1</xliff:g> • 背景使用時間不到一分鐘\n(從上次充滿電後)"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"自上次充飽電後使用電池的時間總長度為 <xliff:g id="TIME">^1</xliff:g> • 在背景使用電池的時間長度不到一分鐘\n"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"總共使用了 <xliff:g id="TIME">^1</xliff:g> • 背景使用時間少於一分鐘\n(過去 24 小時)"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"總共使用 <xliff:g id="TIME_0">^1</xliff:g> • 背景使用時間不到一分鐘\n(<xliff:g id="TIME_PERIOD">^2</xliff:g>)"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"上次充滿電後未使用電池"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"自上次充飽電後未曾使用"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"過去 24 小時未使用電池"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"其他使用者"</string>
@@ -3495,7 +3493,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"將 <xliff:g id="USER_NAME">%1$s</xliff:g> 從這部裝置中刪除"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"上鎖畫面設定"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"在上鎖畫面加入使用者"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"放上插座後切換至管理員使用者"</string>
+    <!-- no translation found for switch_to_dock_user_when_docked (2324395443311905635) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"您要刪除自己嗎？"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"要刪除這名使用者嗎？"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"移除這個設定檔？"</string>
@@ -4208,7 +4207,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Android 目前按您的要求防止這個應用程式的通知在此裝置上顯示"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Android 目前按您的要求防止這類通知在此裝置上顯示"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Android 目前按您的要求防止這類通知在此裝置上顯示"</string>
-    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"這個應用程式不會傳送通知"</string>
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"此應用程式不會傳送通知"</string>
     <string name="notification_channels" msgid="1502969522886493799">"類別"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"其他"</string>
     <plurals name="notification_group_summary" formatted="false" msgid="483490958130993160">
