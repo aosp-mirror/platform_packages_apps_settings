@@ -132,12 +132,12 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     @Override
     protected void onNextButtonClick(View view) {
         updateFingerprintSuggestionEnableState();
-        finishAndToNext();
+        finishAndToNext(RESULT_FINISHED);
     }
 
-    private void finishAndToNext() {
+    private void finishAndToNext(int resultCode) {
         mIsAddAnotherOrFinish = true;
-        setResult(RESULT_FINISHED);
+        setResult(resultCode);
         if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
             postEnroll();
         }
@@ -184,9 +184,12 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         updateFingerprintSuggestionEnableState();
-        if (requestCode == BiometricUtils.REQUEST_ADD_ANOTHER && resultCode != RESULT_CANCELED) {
+        if (requestCode == BiometricUtils.REQUEST_ADD_ANOTHER && resultCode == RESULT_TIMEOUT) {
+            finishAndToNext(resultCode);
+        } else if (requestCode == BiometricUtils.REQUEST_ADD_ANOTHER
+                && resultCode != RESULT_CANCELED) {
             // If user cancel during "Add another", just use similar flow on "Next" button
-            finishAndToNext();
+            finishAndToNext(RESULT_FINISHED);
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
