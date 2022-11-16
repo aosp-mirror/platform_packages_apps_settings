@@ -37,6 +37,8 @@ import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.aware.AwareFeatureProviderImpl;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProviderImpl;
+import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
+import com.android.settings.biometrics2.factory.BiometricsRepositoryProviderImpl;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProviderImpl;
 import com.android.settings.connecteddevice.dock.DockUpdaterFeatureProviderImpl;
@@ -104,6 +106,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private BluetoothFeatureProvider mBluetoothFeatureProvider;
     private AwareFeatureProvider mAwareFeatureProvider;
     private FaceFeatureProvider mFaceFeatureProvider;
+    private BiometricsRepositoryProvider mBiometricsRepositoryProvider;
     private WifiTrackerLibProvider mWifiTrackerLibProvider;
     private SecuritySettingsFeatureProvider mSecuritySettingsFeatureProvider;
     private AccessibilitySearchFeatureProvider mAccessibilitySearchFeatureProvider;
@@ -303,6 +306,14 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mFaceFeatureProvider = new FaceFeatureProviderImpl();
         }
         return mFaceFeatureProvider;
+    }
+
+    @Override
+    public BiometricsRepositoryProvider getBiometricsRepositoryProvider() {
+        if (mBiometricsRepositoryProvider == null) {
+            mBiometricsRepositoryProvider = new BiometricsRepositoryProviderImpl();
+        }
+        return mBiometricsRepositoryProvider;
     }
 
     @Override
