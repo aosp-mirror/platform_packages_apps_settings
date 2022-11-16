@@ -7890,9 +7890,10 @@
     <string name="user_lockscreen_settings">Lock screen settings</string>
     <!-- User settings item to allow creating new users from locks screen [CHAR LIMIT=50] -->
     <string name="user_add_on_lockscreen_menu">Add users from lock screen</string>
-    <!-- User settings item to allow the system to automatically switch back to the admin user when
+    <!-- TODO(b/257333623): HSUM has no 1:1 admin:dream relationship. There can even be >1 admin -->
+    <!-- User settings item to allow the system to automatically switch back to the Dock User when
          the device is docked. [CHAR LIMIT=50] -->
-    <string name="switch_to_user_zero_when_docked">Switch to admin user when docked</string>
+    <string name="switch_to_dock_user_when_docked">Switch to admin user when docked</string>
 
     <!-- User (self) removal confirmation title [CHAR LIMIT=30] -->
     <string name="user_confirm_remove_self_title">Delete yourself?</string>
