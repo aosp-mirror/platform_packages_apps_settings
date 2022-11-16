@@ -24,6 +24,7 @@ import static com.android.settings.applications.appinfo.AppButtonsPreferenceCont
 
 import android.app.ActionBar;
 import android.app.ActivityManager;
+import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -230,11 +231,32 @@ public class SettingsActivity extends SettingsBaseActivity
 
     @Override
     public SharedPreferences getSharedPreferences(String name, int mode) {
-        if (name.equals(getPackageName() + "_preferences")) {
-            return new SharedPreferencesLogger(this, getMetricsTag(),
-                    FeatureFactory.getFactory(this).getMetricsFeatureProvider());
+        if (!TextUtils.equals(name, getPackageName() + "_preferences")) {
+            return super.getSharedPreferences(name, mode);
         }
-        return super.getSharedPreferences(name, mode);
+
+        String tag = getMetricsTag();
+
+        return new SharedPreferencesLogger(this, tag,
+                FeatureFactory.getFactory(this).getMetricsFeatureProvider(),
+                lookupMetricsCategory());
+    }
+
+    private int lookupMetricsCategory() {
+        int category = SettingsEnums.PAGE_UNKNOWN;
+        Bundle args = null;
+        if (getIntent() != null) {
+            args = getIntent().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+        }
+
+        Fragment fragment = Utils.getTargetFragment(this, getMetricsTag(), args);
+
+        if (fragment instanceof Instrumentable) {
+            category = ((Instrumentable) fragment).getMetricsCategory();
+        }
+        Log.d(LOG_TAG, "MetricsCategory is " + category);
+
+        return category;
     }
 
     private String getMetricsTag() {
@@ -242,12 +264,10 @@ public class SettingsActivity extends SettingsBaseActivity
         if (getIntent() != null && getIntent().hasExtra(EXTRA_SHOW_FRAGMENT)) {
             tag = getInitialFragmentName(getIntent());
         }
+
         if (TextUtils.isEmpty(tag)) {
             Log.w(LOG_TAG, "MetricsTag is invalid " + tag);
             tag = getClass().getName();
-        }
-        if (tag.startsWith("com.android.settings.")) {
-            tag = tag.replace("com.android.settings.", "");
         }
         return tag;
     }
@@ -320,7 +340,7 @@ public class SettingsActivity extends SettingsBaseActivity
         }
         mMainSwitch = findViewById(R.id.switch_bar);
         if (mMainSwitch != null) {
-            mMainSwitch.setMetricsTag(getMetricsTag());
+            mMainSwitch.setMetricsCategory(lookupMetricsCategory());
             mMainSwitch.setTranslationZ(findViewById(R.id.main_content).getTranslationZ() + 1);
         }
 

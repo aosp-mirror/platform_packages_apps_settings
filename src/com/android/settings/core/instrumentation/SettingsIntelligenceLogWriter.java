@@ -85,6 +85,10 @@ public class SettingsIntelligenceLogWriter implements LogWriter {
     }
 
     @Override
+    public void changed(int category, String key, int value) {
+    }
+
+    @Override
     public void action(Context context, int action, Pair<Integer, Object>... taggedData) {
         action(SettingsEnums.PAGE_UNKNOWN /* attribution */,
                 action,

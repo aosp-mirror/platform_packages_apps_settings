@@ -22,6 +22,7 @@ import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
@@ -36,9 +37,9 @@ import com.android.settingslib.fuelgauge.BatterySaverUtils;
  * See {@link Settings.Global#AUTOMATIC_POWER_SAVE_MODE} for more details.
  */
 public class BatterySaverScheduleRadioButtonsController {
+    private static final String TAG = "BatterySaverScheduleRadioButtonsController";
 
     public static final String KEY_NO_SCHEDULE = "key_battery_saver_no_schedule";
-    public static final String KEY_ROUTINE = "key_battery_saver_routine";
     public static final String KEY_PERCENTAGE = "key_battery_saver_percentage";
     public static final int TRIGGER_LEVEL_MIN = 10;
 
@@ -53,20 +54,17 @@ public class BatterySaverScheduleRadioButtonsController {
 
     public String getDefaultKey() {
         final ContentResolver resolver = mContext.getContentResolver();
-        // Note: this can also be obtained via PowerManager.getPowerSaveModeTrigger()
         final int mode = Settings.Global.getInt(resolver, Global.AUTOMATIC_POWER_SAVE_MODE,
                 PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
-        // if mode is "dynamic" we are in routine mode, percentage with non-zero threshold is
-        // percentage mode, otherwise it is no schedule mode
         if (mode == PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE) {
             final int threshold =
                     Settings.Global.getInt(resolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
-            if (threshold <= 0) {
-                return KEY_NO_SCHEDULE;
-            }
-            return KEY_PERCENTAGE;
+            return threshold <= 0 ? KEY_NO_SCHEDULE : KEY_PERCENTAGE;
         }
-        return KEY_ROUTINE;
+        // Convert the legacy routine mode into none.
+        BatterySaverUtils.revertScheduleToNoneIfNeeded(mContext);
+        Log.w(TAG, "Found the legacy routine mode and set into none");
+        return KEY_NO_SCHEDULE;
     }
 
     public boolean setDefaultKey(String key) {
@@ -88,12 +86,6 @@ public class BatterySaverScheduleRadioButtonsController {
                         PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
                 confirmationExtras.putInt(BatterySaverUtils.EXTRA_POWER_SAVE_MODE_TRIGGER_LEVEL,
                         triggerLevel);
-                break;
-            case KEY_ROUTINE:
-                mode = PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC;
-                confirmationExtras.putBoolean(BatterySaverUtils.EXTRA_CONFIRM_TEXT_ONLY, true);
-                confirmationExtras.putInt(BatterySaverUtils.EXTRA_POWER_SAVE_MODE_TRIGGER,
-                        PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC);
                 break;
             default:
                 throw new IllegalStateException(

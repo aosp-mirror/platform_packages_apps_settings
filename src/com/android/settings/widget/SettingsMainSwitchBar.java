@@ -18,7 +18,6 @@ package com.android.settings.widget;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -55,7 +54,7 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private OnBeforeCheckedChangeListener mOnBeforeListener;
 
-    private String mMetricsTag;
+    private int mMetricsCategory;
 
     public SettingsMainSwitchBar(Context context) {
         this(context, null);
@@ -125,12 +124,7 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
     }
 
     protected void onRestrictedIconClick() {
-        mMetricsFeatureProvider.action(
-                SettingsEnums.PAGE_UNKNOWN,
-                SettingsEnums.ACTION_SETTINGS_PREFERENCE_CHANGE,
-                SettingsEnums.PAGE_UNKNOWN,
-                mMetricsTag + "/switch_bar|restricted",
-                1);
+        mMetricsFeatureProvider.clicked(mMetricsCategory, "switch_bar|restricted");
     }
 
     @Override
@@ -159,8 +153,8 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
     /**
      * Set the metrics tag.
      */
-    public void setMetricsTag(String tag) {
-        mMetricsTag = tag;
+    public void setMetricsCategory(int category) {
+        mMetricsCategory = category;
     }
 
     private View getDelegatingView() {
@@ -168,11 +162,6 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
     }
 
     private void logMetrics(boolean isChecked) {
-        mMetricsFeatureProvider.action(
-                SettingsEnums.PAGE_UNKNOWN,
-                SettingsEnums.ACTION_SETTINGS_PREFERENCE_CHANGE,
-                SettingsEnums.PAGE_UNKNOWN,
-                mMetricsTag + "/switch_bar",
-                isChecked ? 1 : 0);
+        mMetricsFeatureProvider.changed(mMetricsCategory, "switch_bar", isChecked ? 1 : 0);
     }
 }
