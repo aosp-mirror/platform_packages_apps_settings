@@ -147,7 +147,19 @@ public class WifiP2pSettingsTest {
     }
 
     @Test
-    public void beSearching_getP2pStateEnabledIntent_shouldBeFalse() {
+    public void beSearching_getP2pStateDisabledIntent_shouldBeFalse() {
+        final Bundle bundle = new Bundle();
+        final Intent intent = new Intent(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
+        bundle.putInt(WifiP2pManager.EXTRA_WIFI_STATE, WifiP2pManager.WIFI_P2P_STATE_DISABLED);
+        intent.putExtras(bundle);
+
+        mFragment.mReceiver.onReceive(mContext, intent);
+
+        assertThat(mFragment.mWifiP2pSearching).isFalse();
+    }
+
+    @Test
+    public void beSearching_getP2pStateEnabledIntent_shouldBeTrue() {
         final Bundle bundle = new Bundle();
         final Intent intent = new Intent(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
         bundle.putInt(WifiP2pManager.EXTRA_WIFI_STATE, WifiP2pManager.WIFI_P2P_STATE_ENABLED);
@@ -155,7 +167,7 @@ public class WifiP2pSettingsTest {
 
         mFragment.mReceiver.onReceive(mContext, intent);
 
-        assertThat(mFragment.mWifiP2pSearching).isFalse();
+        assertThat(mFragment.mWifiP2pSearching).isTrue();
     }
 
     @Test
