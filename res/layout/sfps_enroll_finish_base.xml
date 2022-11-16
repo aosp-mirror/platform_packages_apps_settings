@@ -30,22 +30,13 @@
         android:clipToPadding="false"
         android:clipChildren="false">
 
-            <com.android.settings.biometrics.fingerprint.FingerprintRequireScreenOnToAuthToggle
-                style="@style/SudSwitchStyle"
-                android:id="@+id/require_screen_on_to_auth_toggle"
-                android:layout_gravity="start"
-                android:paddingLeft="0dp"
-                android:paddingStart="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
             <com.google.android.setupdesign.view.FillContentLayout
                 android:layout_width="@dimen/sfps_enrollment_finished_icon_max_size"
                 android:layout_height="@dimen/sfps_enrollment_finished_icon_max_size"
                 android:layout_marginTop="24dp"
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
-                android:gravity="center">
+                android:layout_gravity="center">
 
                 <ImageView
                     android:id="@+id/fingerprint_in_app_indicator"
