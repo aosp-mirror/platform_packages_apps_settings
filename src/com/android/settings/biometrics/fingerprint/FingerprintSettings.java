@@ -53,6 +53,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
@@ -158,6 +159,8 @@ public class FingerprintSettings extends SubSettings {
         private static final String KEY_IS_ENROLLING = "is_enrolled";
         private static final String KEY_REQUIRE_SCREEN_ON_TO_AUTH =
                 "security_settings_require_screen_on_to_auth";
+        private static final String KEY_FINGERPRINT_UNLOCK_CATEGORY =
+                "security_settings_fingerprint_unlock_category";
 
         private static final int MSG_REFRESH_FINGERPRINT_TEMPLATES = 1000;
         private static final int MSG_FINGER_AUTH_SUCCESS = 1001;
@@ -177,6 +180,7 @@ public class FingerprintSettings extends SubSettings {
         private FingerprintSettingsRequireScreenOnToAuthPreferenceController
                 mRequireScreenOnToAuthPreferenceController;
         private RestrictedSwitchPreference mRequireScreenOnToAuthPreference;
+        private PreferenceCategory mFingerprintUnlockCategory;
 
         private FingerprintManager mFingerprintManager;
         private FingerprintUpdater mFingerprintUpdater;
@@ -493,6 +497,7 @@ public class FingerprintSettings extends SubSettings {
             addFingerprintItemPreferences(root);
             addPreferencesFromResource(getPreferenceScreenResId());
             mRequireScreenOnToAuthPreference = findPreference(KEY_REQUIRE_SCREEN_ON_TO_AUTH);
+            mFingerprintUnlockCategory = findPreference(KEY_FINGERPRINT_UNLOCK_CATEGORY);
             for (AbstractPreferenceController controller : mControllers) {
                 ((FingerprintSettingsPreferenceController) controller).setUserId(mUserId);
             }
@@ -504,7 +509,7 @@ public class FingerprintSettings extends SubSettings {
                         mRequireScreenOnToAuthPreferenceController.setChecked(!isChecked);
                         return true;
                     });
-            mRequireScreenOnToAuthPreference.setVisible(false);
+            mFingerprintUnlockCategory.setVisible(false);
             if (isSfps()) {
                 setRequireScreenOnToAuthVisibility();
             }
@@ -517,9 +522,9 @@ public class FingerprintSettings extends SubSettings {
             final boolean removalInProgress = mRemovalSidecar.inProgress();
             // Removing last remaining fingerprint
             if (fingerprintsEnrolled == 0 && removalInProgress) {
-                mRequireScreenOnToAuthPreference.setVisible(false);
+                mFingerprintUnlockCategory.setVisible(false);
             } else {
-                mRequireScreenOnToAuthPreference.setVisible(true);
+                mFingerprintUnlockCategory.setVisible(true);
             }
         }
 
