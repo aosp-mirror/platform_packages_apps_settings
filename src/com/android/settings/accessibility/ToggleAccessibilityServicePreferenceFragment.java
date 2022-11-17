@@ -49,7 +49,6 @@ import androidx.annotation.Nullable;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.List;
@@ -71,15 +70,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     @Override
     public int getMetricsCategory() {
-        // Retrieve from getArguments() directly because this function will be executed from
-        // onAttach(), but variable mComponentName only available after onProcessArguments()
-        // which comes from onCreateView().
-        final ComponentName componentName = getArguments().getParcelable(
-                AccessibilitySettings.EXTRA_COMPONENT_NAME);
-
-        return FeatureFactory.getFactory(getActivity().getApplicationContext())
-                .getAccessibilityMetricsFeatureProvider()
-                .getDownloadedFeatureMetricsCategory(componentName);
+        return getArguments().getInt(AccessibilitySettings.EXTRA_METRICS_CATEGORY);
     }
 
     @Override
