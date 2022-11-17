@@ -13,6 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"예"</string>
@@ -285,8 +286,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"얼굴 모델이 영구적으로 안전하게 삭제됩니다.\n\n삭제 후 휴대전화를 잠금 해제하려면 PIN, 패턴 또는 비밀번호가 필요합니다."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"얼굴 인식 잠금 해제로 휴대전화를 잠금 해제하세요"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"지문"</string>
-    <!-- no translation found for security_settings_fingerprint_settings_preferences_category (8975029409126780752) -->
-    <skip />
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"지문 잠금 해제 사용 시"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"업무 시 사용할 지문"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"지문 추가"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
@@ -372,13 +372,9 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"지문 추가됨"</string>
-    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"이제 지문을 사용하여 태블릿을 잠금 해제하거나 앱 로그인, 구매 승인 등을 위해 본인 인증을 진행할 수 있습니다."</string>
-    <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_keywords (5557869560397089603) -->
-    <skip />
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"화면이 켜져 있을 때만 잠금 해제"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"지문으로 잠금 해제하려면 먼저 화면이 켜져 있어야 합니다. 이를 설정하면 실수로 잠금 해제될 가능성이 작아집니다."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"화면 잠금 해제"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"나중에"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"손가락을 뗀 후 다시 터치하세요"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"지문의 한쪽을 센서에 올리고 잠시 기다린 후 다른 쪽으로 돌리세요"</string>
@@ -471,31 +467,43 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"프로필 보호 기능을 삭제하시겠습니까?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"분실하거나 도난당한 경우 패턴으로 휴대전화를 보호합니다."</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"분실하거나 도난당한 경우 패턴으로 휴대전화를 보호합니다.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>또한 기기에 저장된 지문 모델이 삭제됩니다. 앱 내에서 지문 인증을 사용할 수 없게 됩니다."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"분실하거나 도난당한 경우 패턴으로 휴대전화를 보호합니다.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>또한 얼굴 모델이 영구적으로 안전하게 삭제됩니다. 앱 내에서 얼굴 인증을 사용할 수 없게 됩니다."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"분실하거나 도난당한 경우 패턴으로 휴대전화를 보호합니다.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>기기에 저장된 지문 모델이 삭제됩니다. 또한 얼굴 모델이 영구적으로 안전하게 삭제됩니다. 앱 내에서 얼굴 또는 지문 인증을 사용할 수 없게 됩니다."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"분실하거나 도난당한 경우 PIN으로 휴대전화를 보호합니다."</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"분실하거나 도난당한 경우 PIN으로 휴대전화를 보호합니다.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>또한 기기에 저장된 지문 모델이 삭제됩니다. 앱 내에서 지문 인증을 사용할 수 없게 됩니다."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"분실하거나 도난당한 경우 PIN으로 휴대전화를 보호합니다.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>또한 얼굴 모델이 영구적으로 안전하게 삭제됩니다. 앱 내에서 얼굴 인증을 사용할 수 없게 됩니다."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"분실하거나 도난당한 경우 PIN으로 휴대전화를 보호합니다.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>기기에 저장된 지문 모델이 삭제됩니다. 또한 얼굴 모델이 영구적으로 안전하게 삭제됩니다. 앱 내에서 얼굴 또는 지문 인증을 사용할 수 없게 됩니다."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"분실하거나 도난당한 경우 비밀번호로 휴대전화를 보호합니다."</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"분실하거나 도난당한 경우 비밀번호로 휴대전화를 보호합니다.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>또한 기기에 저장된 지문 모델이 삭제됩니다. 앱 내에서 지문 인증을 사용할 수 없게 됩니다."</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"분실하거나 도난당한 경우 비밀번호로 휴대전화를 보호합니다.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>또한 얼굴 모델이 영구적으로 안전하게 삭제됩니다. 앱 내에서 얼굴 인증을 사용할 수 없게 됩니다."</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"분실하거나 도난당한 경우 비밀번호로 휴대전화를 보호합니다.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>기기에 저장된 지문 모델이 삭제됩니다. 또한 얼굴 모델이 영구적으로 안전하게 삭제됩니다. 앱 내에서 얼굴 또는 지문 인증을 사용할 수 없게 됩니다."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"기기 보호 기능은 화면 잠금 없이 작동하지 않습니다."</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"기기 보호 기능은 화면 잠금 없이 작동하지 않습니다.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>또한 기기에 저장된 지문 모델이 삭제됩니다. 앱 내에서 지문 인증을 사용할 수 없게 됩니다."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"기기 보호 기능은 화면 잠금 없이 작동하지 않습니다.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>또한 얼굴 모델이 영구적으로 안전하게 삭제됩니다. 앱 내에서 얼굴 인증을 사용할 수 없게 됩니다."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"기기 보호 기능은 화면 잠금 없이 작동하지 않습니다.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>기기에 저장된 지문 모델이 삭제됩니다. 또한 얼굴 모델이 영구적으로 안전하게 삭제됩니다. 앱 내에서 얼굴 또는 지문 인증을 사용할 수 없게 됩니다."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"삭제"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g>에서 안전한 PIN 또는 비밀번호를 사용할 것을 제안합니다. 제안을 무시하면 앱이 제대로 작동하지 않을 수 있습니다."</string>
@@ -995,8 +1003,7 @@
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"취침 모드가 켜져 있으므로 사용할 수 없습니다."</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"화면 보호기 사용"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"충전 또는 도킹하는 동안"</string>
-    <!-- no translation found for screensaver_settings_summary_dock_and_charging (8485905100159376156) -->
-    <skip />
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"도킹 및 충전 중"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"충전하는 동안"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"도킹하는 동안"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"사용 안함"</string>
@@ -1011,13 +1018,18 @@
     <string name="force_bold_text" msgid="4620929631102086716">"텍스트 굵게 표시"</string>
     <string name="title_font_size" msgid="570613010306330622">"글꼴 크기"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"텍스트를 확대 또는 축소"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"SIM 카드 잠금 설정"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"SIM 카드 잠금"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"SIM 카드 잠금"</string>
+    <!-- no translation found for sim_lock_settings (7331982427303002613) -->
+    <skip />
+    <!-- no translation found for sim_lock_settings_category (6475255139493877786) -->
+    <skip />
+    <!-- no translation found for sim_pin_toggle (6814489621760857328) -->
+    <skip />
     <string name="sim_pin_change" msgid="5978881209990507379">"SIM PIN 변경"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"SIM PIN"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"SIM 카드 잠금"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"SIM 카드 잠금해제"</string>
+    <!-- no translation found for sim_enable_sim_lock (6486354334679225748) -->
+    <skip />
+    <!-- no translation found for sim_disable_sim_lock (6939439812841857306) -->
+    <skip />
     <string name="sim_enter_old" msgid="6882545610939674813">"이전 SIM PIN"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"새 SIM PIN"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"새 PIN을 다시 입력하세요."</string>
@@ -1032,7 +1044,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"<xliff:g id="CARRIER">%1$s</xliff:g>의 모바일 데이터를 사용하시겠습니까?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"<xliff:g id="CARRIER2_0">%2$s</xliff:g> 모바일 데이터를 사용하고 있습니다. <xliff:g id="CARRIER1">%1$s</xliff:g>(으)로 전환하면 <xliff:g id="CARRIER2_1">%2$s</xliff:g> 모바일 데이터를 더 이상 사용하지 않게 됩니다."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> 사용"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"기본 SIM 카드 업데이트"</string>
+    <!-- no translation found for sim_preferred_title (8850185380445309835) -->
+    <skip />
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g>이(가) 기기에 있는 유일한 SIM입니다. 모바일 데이터, 전화 및 SMS 메시지에 이 SIM을 사용하시겠습니까?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"SIM PIN 코드가 잘못되었습니다. 이동통신사에 문의하여 기기를 잠금 해제해야 합니다."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1185,17 +1198,20 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Wi-Fi, 모바일, 블루투스 초기화"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"다음을 포함한 모든 네트워크 설정이 초기화됩니다.\n\n"<li>"Wi‑Fi"</li>\n<li>"모바일 데이터"</li>\n<li>"블루투스"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"삭제"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"다운로드한 SIM 삭제"</string>
+    <!-- no translation found for reset_esim_title (4194570573425902754) -->
+    <skip />
     <string name="reset_esim_desc" msgid="3662444090563399131">"SIM을 삭제해도 모바일 서비스 요금제는 취소되지 않습니다. 교체 SIM을 다운로드하려면 이동통신사에 문의하세요."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"설정 초기화"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"네트워크 설정을 모두 초기화하시겠습니까? 이 작업은 실행취소할 수 없습니다."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"모든 네트워크 설정을 초기화하고 다운로드한 SIM을 삭제하시겠습니까? 이 작업은 실행취소할 수 없습니다."</string>
+    <!-- no translation found for reset_network_final_desc_esim (1129251284212847939) -->
+    <skip />
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"설정 초기화"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"초기화하시겠습니까?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"네트워크 재설정 권한이 없는 사용자입니다."</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"네트워크 설정이 재설정되었습니다."</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"SIM을 삭제할 수 없음"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"오류로 인해 다운로드한 SIM을 삭제할 수 없습니다.\n\n기기를 재부팅하고 다시 시도하세요."</string>
+    <!-- no translation found for reset_esim_error_msg (7279607120606365250) -->
+    <skip />
     <string name="main_clear_title" msgid="277664302144837723">"모든 데이터 삭제(초기화)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"모든 데이터 삭제(초기화)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"음악"</li>\n<li>"사진"</li>\n<li>"기타 사용자 데이터"</li></string>
@@ -2033,7 +2049,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"기록 세부정보"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"배터리 사용량"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"지난 24시간 동안의 사용량 보기"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"마지막으로 충전을 완료한 이후의 사용량 보기"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"마지막으로 완전히 충전한 이후 사용량"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"앱 배터리 사용량"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"사용 세부정보"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"전원 사용 조절"</string>
@@ -2124,25 +2140,25 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"충전 완료 후 사용 가능 시간"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"배터리 사용 데이터는 대략적인 수치이며, 사용량에 따라 변경될 수 있습니다."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"배터리 사용량"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"총 <xliff:g id="TIME_0">^1</xliff:g> • 마지막으로 완전히 충전한 이후\n백그라운드에서 <xliff:g id="TIME_1">^2</xliff:g> 사용"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"마지막으로 완전히 충전한 이후\n총 <xliff:g id="TIME_0">^1</xliff:g> • 백그라운드 <xliff:g id="TIME_1">^2</xliff:g> 사용"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"총 <xliff:g id="TIME_0">^1</xliff:g> • 지난 24시간 동안\n백그라운드에서 <xliff:g id="TIME_1">^2</xliff:g> 사용"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"총 <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_PERIOD">^3</xliff:g> 동안\n백그라운드에서 <xliff:g id="TIME_1">^2</xliff:g> 사용"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"마지막으로 완전히 충전한 이후 총 1분 미만 사용"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"마지막으로 완전히 충전한 이후 총 1분 미만 사용"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"지난 24시간 동안 총 1분 미만 사용"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"<xliff:g id="TIME_PERIOD">^1</xliff:g>의 총 사용 시간: 1분 미만"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"마지막으로 완전히 충전한 이후 백그라운드에서 1분 미만 사용"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"마지막으로 완전히 충전한 이후 백그라운드에서 1분 미만 사용"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"지난 24시간 동안 백그라운드에서 1분 미만 사용"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"<xliff:g id="TIME_PERIOD">^1</xliff:g> 동안 백그라운드에서 1분 미만 사용"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"마지막으로 완전히 충전한 이후 총 <xliff:g id="TIME">^1</xliff:g> 사용"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"마지막으로 완전히 충전한 이후 총 <xliff:g id="TIME">^1</xliff:g> 사용"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"지난 24시간 동안 총 <xliff:g id="TIME">^1</xliff:g> 사용"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_PERIOD">^2</xliff:g>의 총 사용 시간: <xliff:g id="TIME_0">^1</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"마지막으로 완전히 충전한 이후 백그라운드에서 <xliff:g id="TIME">^1</xliff:g> 사용"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"마지막으로 완전히 충전한 이후 백그라운드에서 <xliff:g id="TIME">^1</xliff:g> 사용"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"지난 24시간 동안 백그라운드에서 <xliff:g id="TIME">^1</xliff:g> 사용"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_PERIOD">^2</xliff:g> 동안 백드라운드에서 <xliff:g id="TIME_0">^1</xliff:g> 사용"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"총 <xliff:g id="TIME">^1</xliff:g> • 마지막으로 완전히 충전한 이후 백그라운드에서\n1분 미만 사용"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"마지막으로 완전히 충전한 이후\n총 <xliff:g id="TIME">^1</xliff:g> • 백그라운드 1분 미만 사용"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"총 <xliff:g id="TIME">^1</xliff:g> • 지난 24시간 동안\n백그라운드에서 1분 미만 사용"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"총 <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_PERIOD">^2</xliff:g> 동안\n백그라운드에서 1분 미만 사용"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"마지막으로 완전히 충전한 이후 사용 안 함"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"마지막으로 완전히 충전한 이후 사용 안함"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"지난 24시간 동안 사용 안 함"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"다른 사용자"</string>
@@ -2553,7 +2569,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"이 기기에서 <xliff:g id="USER_NAME">%1$s</xliff:g>님 삭제"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"잠금 화면 설정"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"잠금 화면에서 사용자 추가"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"도킹 시 관리자로 전환"</string>
+    <!-- no translation found for switch_to_dock_user_when_docked (2324395443311905635) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"본인을 삭제하시겠습니까?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"사용자를 삭제하시겠습니까?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"프로필을 삭제할까요?"</string>
@@ -2679,7 +2696,8 @@
     <string name="wizard_next" msgid="3884832431439072471">"다음"</string>
     <string name="wizard_back_adoptable" msgid="1447814356855134183">"다른 방법으로 포맷"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"SIM 카드"</string>
+    <!-- no translation found for sim_settings_title (2254609719033946272) -->
+    <skip />
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"모바일 데이터를 사용할 수 없습니다."</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"탭하여 데이터 SIM 선택"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"통화에 항상 사용"</string>
@@ -2697,7 +2715,8 @@
     <string name="sim_status_title" msgid="6188770698037109774">"SIM 상태"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"SIM 상태(SIM 슬롯 %1$d)"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g>dBm <xliff:g id="ASU">%2$d</xliff:g>asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"SIM 카드가 변경됨"</string>
+    <!-- no translation found for sim_notification_title (2819551384383504031) -->
+    <skip />
     <string name="sim_notification_summary" msgid="5593339846307029991">"탭하여 설정"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"항상 확인"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"선택 필요"</string>
@@ -2723,6 +2742,8 @@
     <string name="account_dashboard_title" msgid="8228773251948253914">"비밀번호 및 계정"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"저장된 비밀번호, 자동 완성, 동기화된 계정"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"기본 앱"</string>
+    <!-- no translation found for cloned_apps_dashboard_title (5542076801222950921) -->
+    <skip />
     <string name="system_dashboard_summary" msgid="7400745270362833832">"언어, 동작, 시간, 백업"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"시스템 언어, 앱 언어"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, Wi-Fi, 네트워크 연결, 인터넷, 무선, 데이터, WiFi"</string>
@@ -3173,8 +3194,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"사용자의 요청에 따라 Android에서 기기에 이 앱의 알림이 표시되지 않도록 차단하고 있습니다"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"사용자의 요청에 따라 Android에서 기기에 이 카테고리의 알림이 표시되지 않도록 차단하고 있습니다"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"사용자의 요청에 따라 Android에서 기기에 이 그룹의 알림이 표시되지 않도록 차단하고 있습니다"</string>
-    <!-- no translation found for app_notifications_not_send_desc (5683060986735070528) -->
-    <skip />
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"이 앱은 알림을 전송하지 않습니다."</string>
     <string name="notification_channels" msgid="1502969522886493799">"카테고리"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"기타"</string>
     <string name="no_channels" msgid="4716199078612071915">"이 앱에서 게시한 알림이 없음"</string>
@@ -3338,7 +3358,8 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"고정 해제 이전에 비밀번호 요청"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"화면 고정 해제 시 기기 잠금"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"SIM 삭제 확인"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"다운로드한 SIM을 삭제하기 전에 본인 확인을 진행합니다."</string>
+    <!-- no translation found for confirm_sim_deletion_description (5090811029854329373) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"다음에서 이 직장 프로필을 관리합니다."</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>에서 관리"</string>
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"안전한 시작"</string>
@@ -4114,7 +4135,8 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"모바일 데이터"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"모바일 네트워크를 사용하여 데이터 액세스"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"범위 안에 들어오면 휴대전화가 이 이동통신사로 자동 전환됩니다."</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"사용할 수 있는 SIM 카드가 없음"</string>
+    <!-- no translation found for mobile_data_settings_summary_unavailable (9176513507571883986) -->
+    <skip />
     <string name="calls_preference" msgid="2166481296066890129">"통화 환경설정"</string>
     <string name="sms_preference" msgid="7742964962568219351">"SMS 환경설정"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"항상 확인"</string>
@@ -4129,8 +4151,10 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"추가"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"활성/SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"비활성/SIM"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"활성화 상태/다운로드한 SIM"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"비활성/다운로드한 SIM"</string>
+    <!-- no translation found for mobile_network_active_esim (3984452275968408382) -->
+    <skip />
+    <!-- no translation found for mobile_network_inactive_esim (8777415108263057939) -->
+    <skip />
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"SIM 이름 및 색상"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"이름"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"색상(호환 앱에서 사용됨)"</string>
@@ -4166,7 +4190,8 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"SIM 카드 사용으로 전환하시겠습니까?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> SIM을 사용할까요?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"SIM은 한 번에 하나만 활성화할 수 있습니다.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> 서비스로 전환해도 <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> 서비스는 취소되지 않습니다."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"다운로드한 SIM은 한 번에 하나만 활성화할 수 있습니다.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> 서비스로 전환해도 <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> 서비스는 취소되지 않습니다."</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_text_downloaded (8977951796005849471) -->
+    <skip />
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"SIM은 한 번에 하나만 활성화할 수 있습니다.\n\nSIM으로 전환해도 <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> 서비스는 취소되지 않습니다."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"한 번에 2개의 SIM을 사용할 수 없습니다. <xliff:g id="CARRIER_NAME">%1$s</xliff:g> SIM을 사용하려면 다른 SIM을 사용 중지하세요."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> 서비스로 전환"</string>
@@ -4208,8 +4233,10 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>은(는) 모바일 데이터, 통화, SMS에 사용됩니다."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"활성화된 SIM 없음"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"나중에 모바일 데이터, 통화 기능, SMS를 사용하려면 네트워크 설정으로 이동하세요."</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"SIM 카드"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"다운로드한 SIM을 삭제하시겠습니까?"</string>
+    <!-- no translation found for sim_card_label (6263064316075963775) -->
+    <skip />
+    <!-- no translation found for erase_sim_dialog_title (4742077437653028326) -->
+    <skip />
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"이 SIM을 삭제하면 기기에서 <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> 서비스가 삭제됩니다.\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> 서비스는 취소되지 않습니다."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"삭제"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"SIM 삭제 중…"</string>
@@ -4361,8 +4388,10 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"속도와 범위를 개선하기 위해 Google Fi에서 W+ 네트워크를 사용하도록 허용합니다."</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ 네트워크"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"SIM 다운로드"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"다운로드한 SIM"</string>
+    <!-- no translation found for downloaded_sim_category_title (2876988650413179752) -->
+    <skip />
+    <!-- no translation found for downloaded_sims_category_title (487799905978489922) -->
+    <skip />
     <string name="sim_category_active_sim" msgid="1503823567818544012">"활성"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"비활성"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" /<xliff:g id="ID_1">%1$s</xliff:g> 기본값"</string>
@@ -4418,7 +4447,8 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"통화 설정"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"설정 업데이트 중..."</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"통화 설정 오류"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"네트워크 또는 SIM 카드 오류입니다."</string>
+    <!-- no translation found for smart_forwarding_failed_text (8682640643264071789) -->
+    <skip />
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM이 활성화되지 않았습니다."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"전화번호 입력"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"전화번호 입력"</string>
@@ -4442,10 +4472,14 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"이전"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"다음"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"색상 미리보기"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"SIM 카드 액세스 요청"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"기기에서 SIM 카드에 액세스하려고 합니다. 탭하여 세부정보를 확인하세요."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"SIM 카드 액세스를 허용하시겠습니까?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"블루투스 기기 <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>에서 SIM 카드 데이터에 액세스하려고 합니다. 여기에는 연락처 정보가 포함되어 있습니다.\n\n연결된 상태에서는 <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>에서 <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>번으로 수신되는 모든 전화를 받습니다."</string>
+    <!-- no translation found for bluetooth_sim_card_access_notification_title (7351015416346359536) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_notification_content (8685623260103018309) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_title (5616323725563125179) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_content (6281997628405909566) -->
+    <skip />
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"블루투스 기기 사용 가능"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"연결을 시도하는 기기가 있습니다. 탭하여 세부정보를 확인하세요."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"블루투스 기기에 연결하시겠습니까?"</string>
@@ -4459,10 +4493,8 @@
     <string name="tare_balances" msgid="731881382594747961">"잔액"</string>
     <string name="tare_consumption_limits" msgid="3230949387874396382">"소비 제한"</string>
     <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"초기 소비 제한"</string>
-    <!-- no translation found for tare_min_consumption_limit (3293145670921755789) -->
-    <skip />
-    <!-- no translation found for tare_max_consumption_limit (8335700580111808823) -->
-    <skip />
+    <string name="tare_min_consumption_limit" msgid="3293145670921755789">"최소 소비 제한"</string>
+    <string name="tare_max_consumption_limit" msgid="8335700580111808823">"최대 소비 제한"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"수정자"</string>
     <string name="tare_actions_ctp" msgid="5110104015354916401">"작업(제작 비용)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"작업(기본 가격)"</string>

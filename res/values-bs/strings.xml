@@ -13,6 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"Da"</string>
@@ -288,7 +289,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Model lica će se trajno i sigurno izbrisati.\n\nNakon brisanja će vam trebati PIN, uzorak ili lozinka radi otključavanja telefona."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Otključajte telefon pomoću otključavanja licem"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Otisak prsta"</string>
-    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Kad se koristi otključavanje otiskom prsta"</string>
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Kada koristite otključavanje otiskom prsta"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Otisak prsta za posao"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Dodajte otisak prsta"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
@@ -369,10 +370,9 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Prijavljeno je <xliff:g id="PERCENTAGE">%d</xliff:g> posto"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Prijava otiska prsta: <xliff:g id="PERCENTAGE">%d</xliff:g> posto"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Dodan je otisak prsta"</string>
-    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Sada možete koristiti otisak prsta da otključate tablet ili potvrdite identitet, naprimjer prilikom prijavljivanja u aplikacije ili odobravanja kupovine"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Otključavanje samo kad je zaslon uključen"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Zaslon mora biti uključen da biste ga mogli otključati otiskom prsta. Time se smanjuje mogućnost slučajnog otključavanja."</string>
-    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Zaslon, otključati"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Otključavanje samo kad je ekran uključen"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Ekran mora biti uključen da možete otključati otiskom prsta. To čini slučajno otključavanje manje vjerovatnim."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Ekran, otključavanje"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Uradit ću to kasnije"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Podignite i ponovo dodirnite"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Stranu prsta postavite na senzor i zadržite, a zatim ga prebacite na drugu stranu"</string>
@@ -465,31 +465,43 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"Želite li ukloniti zaštitu profila?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"Uzorak štiti telefon ako ga izgubite ili ga neko ukrade"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"Uzorak štiti telefon ako ga izgubite ili ga neko ukrade.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Ovim također brišete model otiska prsta pohranjen na uređaju. Nećete moći koristiti otisak prsta za autentifikaciju u aplikacijama."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"Uzorak štiti telefon ako ga izgubite ili ga neko ukrade.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Vaš model lica će se također trajno i sigurno izbrisati. Nećete moći koristiti lice za autentifikaciju u aplikacijama."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"Uzorak štiti telefon ako ga izgubite ili ga neko ukrade.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Ovim brišete model otiska prsta pohranjen na uređaju. Vaš model lica će se također trajno i sigurno izbrisati. Nećete moći koristiti lice niti otisak prsta za autentifikaciju u aplikacijama."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"PIN štiti telefon ako ga izgubite ili ga neko ukrade"</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"PIN štiti telefon ako ga izgubite ili ga neko ukrade.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Ovim također brišete model otiska prsta pohranjen na uređaju. Nećete moći koristiti otisak prsta za autentifikaciju u aplikacijama."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"PIN štiti telefon ako ga izgubite ili ga neko ukrade.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Vaš model lica će se također trajno i sigurno izbrisati. Nećete moći koristiti lice za autentifikaciju u aplikacijama."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"PIN štiti telefon ako ga izgubite ili ga neko ukrade.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Ovim brišete model otiska prsta pohranjen na uređaju. Vaš model lica će se također trajno i sigurno izbrisati. Nećete moći koristiti lice niti otisak prsta za autentifikaciju u aplikacijama."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"Lozinka štiti telefon ako ga izgubite ili ga neko ukrade"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"Lozinka štiti telefon ako ga izgubite ili ga neko ukrade.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Ovim također brišete model otiska prsta pohranjen na uređaju. Nećete moći koristiti otisak prsta za autentifikaciju u aplikacijama."</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"Lozinka štiti telefon ako ga izgubite ili ga neko ukrade.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Vaš model lica će se također trajno i sigurno izbrisati. Nećete moći koristiti lice za autentifikaciju u aplikacijama."</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"Lozinka štiti telefon ako ga izgubite ili ga neko ukrade.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Ovim brišete model otiska prsta pohranjen na uređaju. Vaš model lica će se također trajno i sigurno izbrisati. Nećete moći koristiti lice niti otisak prsta za autentifikaciju u aplikacijama."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"Funkcije zaštite uređaja neće raditi bez zaključavanja ekrana."</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"Funkcije za zaštitu uređaja neće raditi bez zaključavanja ekrana.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Ovim također brišete model otiska prsta pohranjen na uređaju. Nećete moći koristiti otisak prsta za autentifikaciju u aplikacijama."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"Funkcije za zaštitu uređaja neće raditi bez zaključavanja ekrana.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Vaš model lica će se također trajno i sigurno izbrisati. Nećete moći koristiti lice za autentifikaciju u aplikacijama."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"Funkcije za zaštitu uređaja neće raditi bez zaključavanja ekrana.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Ovim brišete model otiska prsta pohranjen na uređaju. Vaš model lica će se također trajno i sigurno izbrisati. Nećete moći koristiti lice niti otisak prsta za autentifikaciju u aplikacijama."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Izbriši"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"Aplikacija <xliff:g id="APP_NAME">%1$s</xliff:g> predlaže jak PIN ili lozinku, a moguće je da neće funkcionirati kako je očekivano ako to ne postavite"</string>
@@ -1005,7 +1017,7 @@
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Nedostupno jer je uključen način rada za spavanje"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Koristi čuvara ekrana"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Tokom punjenja ili kada je na priključnoj stanici"</string>
-    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Na priklj. stanici tijekom punjenja"</string>
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Dok je uređaj priključen i puni se"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Tokom punjenja"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Kada je na priključnoj stanici"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Nikada"</string>
@@ -1020,13 +1032,18 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Podebljani tekst"</string>
     <string name="title_font_size" msgid="570613010306330622">"Veličina fonta"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Povećajte ili smanjite tekst"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"Postavke zaključavanja SIM kartice"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"Zaključavanje SIM kartice"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"Zaključaj SIM karticu"</string>
+    <!-- no translation found for sim_lock_settings (7331982427303002613) -->
+    <skip />
+    <!-- no translation found for sim_lock_settings_category (6475255139493877786) -->
+    <skip />
+    <!-- no translation found for sim_pin_toggle (6814489621760857328) -->
+    <skip />
     <string name="sim_pin_change" msgid="5978881209990507379">"Promjena PIN-a SIM kartice"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"PIN za SIM"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Zaključavanje SIM kartice"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"Otključajte SIM karticu"</string>
+    <!-- no translation found for sim_enable_sim_lock (6486354334679225748) -->
+    <skip />
+    <!-- no translation found for sim_disable_sim_lock (6939439812841857306) -->
+    <skip />
     <string name="sim_enter_old" msgid="6882545610939674813">"Stari PIN za SIM"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"Novi PIN za SIM"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Ponovo unesite novi PIN"</string>
@@ -1041,7 +1058,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Koristiti <xliff:g id="CARRIER">%1$s</xliff:g> za mobilne podatke?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Koristite <xliff:g id="CARRIER2_0">%2$s</xliff:g> za prijenos podataka na mobilnoj mreži. Ako se prebacite na operatera <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> se više neće koristiti za prijenos podataka na mobilnoj mreži."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Koristi <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"Ažurirati željenu SIM karticu?"</string>
+    <!-- no translation found for sim_preferred_title (8850185380445309835) -->
+    <skip />
     <string name="sim_preferred_message" msgid="6004009449266648351">"SIM kartica <xliff:g id="NEW_SIM">%1$s</xliff:g> jedina je SIM kartica u vašem uređaju. Želite li tu SIM karticu koristiti za prijenos podataka na mobilnoj mreži, pozive i SMS poruke?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"PIN za SIM je netačan. Za otključavanje uređaja sada morate kontaktirati svog operatera."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1195,17 +1213,20 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Vrati WiFi, mobilnu i Bluetooth vezu na zadano"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Sve postavke mreže vratit će se na zadano, uključujući:\n\n"<li>"WiFi"</li>\n<li>"prijenos podataka na mobilnoj mreži"</li>\n<li>"Bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Izbriši"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Izbriši preuzete SIM-ove"</string>
+    <!-- no translation found for reset_esim_title (4194570573425902754) -->
+    <skip />
     <string name="reset_esim_desc" msgid="3662444090563399131">"Ovim se neće otkazati paketi mobilnih usluga. Da preuzmete zamjenske SIM-ove, kontaktirajte svog mobilnog operatera."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Vrati postavke na zadano"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Vratiti sve postavke mreže na zadano? Ovu radnju ne možete poništiti."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Vratiti sve postavke mreže na zadano i izbrisati preuzete SIM-ove? Ovu radnju ne možete poništiti."</string>
+    <!-- no translation found for reset_network_final_desc_esim (1129251284212847939) -->
+    <skip />
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Vrati postavke na zadano"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Vratiti na zadano?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Ponovno postavljanje mreže nije dostupno za ovog korisnika"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Postavke mreže vraćene su na zadano"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Nije moguće izbrisati SIM-ove"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"Preuzete SIM-ove nije moguće izbrisati zbog greške.\n\nPonovo pokrenite uređaj i pokušajte ponovo."</string>
+    <!-- no translation found for reset_esim_error_msg (7279607120606365250) -->
+    <skip />
     <string name="main_clear_title" msgid="277664302144837723">"Izbriši sve podatke (vraćanje na fabričke postavke)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Izbriši sve podatke"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"muziku"</li>\n<li>"fotografije"</li>\n<li>"ostale korisničke podatke"</li></string>
@@ -2052,7 +2073,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"Detalji historije"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Potrošnja baterije"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Prikaz potrošnje u posljednja 24 sata"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Korištenje od zadnjeg potpunog punjenja"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Prikaz potrošnje od poslj. pot. punjenja"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Potrošnja baterije za aplikaciju"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Detalji o upotrebi"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Podesite potrošnju energije"</string>
@@ -2150,25 +2171,25 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Potpuna napunjenost traje"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Podaci o potrošnji baterije su približni i mogu se promijeniti u zavisnosti od korištenja."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Potrošnja baterije"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Ukupno: <xliff:g id="TIME_0">^1</xliff:g> • vrijeme u pozadini\nod posljednje potpune napunjenosti: <xliff:g id="TIME_1">^2</xliff:g>"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"<xliff:g id="TIME_0">^1</xliff:g> ukupno • <xliff:g id="TIME_1">^2</xliff:g> pozadinske potrošnje\nod posljednjeg potpunog punjenja"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Ukupno: <xliff:g id="TIME_0">^1</xliff:g> • vrijeme u pozadini\nza posljednja 24 h: <xliff:g id="TIME_1">^2</xliff:g>"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Ukupno: <xliff:g id="TIME_0">^1</xliff:g> • vrijeme u pozadini\nza period <xliff:g id="TIME_PERIOD">^3</xliff:g>: <xliff:g id="TIME_1">^2</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"Ukupno vrijeme je kraće od minute od posljednje potpune napunjenosti"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"Ukupno vrijeme je kraće od minute od posljednje potpune napunjenosti"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"Ukupno vrijeme je kraće od minute za posljednja 24 h"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Ukupno vrijeme je kraće od minute za period <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"Vrijeme u pozadini je kraće od minute od posljednje potpune napunjenosti"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"Vrijeme u pozadini je kraće od minute od posljednje potpune napunjenosti"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Vrijeme u pozadini je kraće od minute za posljednja 24 h"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Vrijeme u pozadini je kraće od minute za period <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"Ukupno od posljednje potpune napunjenosti: <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"<xliff:g id="TIME">^1</xliff:g> ukupno od posljednjeg potpunog punjenja"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"Ukupno za posljednja 24 h: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"Ukupno <xliff:g id="TIME_0">^1</xliff:g> za period <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"Vrijeme u pozadini od posljednje potpune napunjenosti: <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"<xliff:g id="TIME">^1</xliff:g> pozadinske potrošnje od posljednjeg potpunog punjenja"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"Vrijeme u pozadini za posljednja 24 h: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> u pozadini za period <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"Ukupno: <xliff:g id="TIME">^1</xliff:g> • vrijeme u pozadini je kraće od minute\nod posljednje potpune napunjenosti"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"<xliff:g id="TIME">^1</xliff:g> ukupno • pozadinska potrošnja kraća od minutu\nod posljednjeg potpunog punjenja"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"Ukupno: <xliff:g id="TIME">^1</xliff:g> • vrijeme u pozadini je kraće od minute\nza posljednja 24 h"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"Ukupno: <xliff:g id="TIME_0">^1</xliff:g> • vrijeme u pozadini je kraće od minute\nza period <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"Nema korištenja od posljednje potpune napunjenosti"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"Nema potrošnje od posljednjeg potpunog punjenja"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Nema korištenja za posljednja 24 h"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"Drugi korisnici"</string>
@@ -2583,7 +2604,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Izbrišite <xliff:g id="USER_NAME">%1$s</xliff:g> sa uređaja"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Postavke zaključavanja ekrana"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Dodavanje korisnika sa zaključanog ekrana"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"Prebacite se na admin. kada je uređaj priključen"</string>
+    <!-- no translation found for switch_to_dock_user_when_docked (2324395443311905635) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Želite li izbrisati sebe?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Izbrisati ovog korisnika?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Ukloniti ovaj profil?"</string>
@@ -2709,7 +2731,8 @@
     <string name="wizard_next" msgid="3884832431439072471">"Naprijed"</string>
     <string name="wizard_back_adoptable" msgid="1447814356855134183">"Formatiraj na drugi način"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"SIM kartice"</string>
+    <!-- no translation found for sim_settings_title (2254609719033946272) -->
+    <skip />
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Prijenos podataka na mobilnoj mreži je nedostupan"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Dodirnite za odabir SIM-a za prijenos podataka"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Uvijek koristi ovo za pozive"</string>
@@ -2727,7 +2750,8 @@
     <string name="sim_status_title" msgid="6188770698037109774">"Status SIM-a"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"Status SIM-a (utor za sim %1$d)"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"SIM kartice promijenjene."</string>
+    <!-- no translation found for sim_notification_title (2819551384383504031) -->
+    <skip />
     <string name="sim_notification_summary" msgid="5593339846307029991">"Dodirnite za postavke"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Pitaj svaki put"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Potreban odabir"</string>
@@ -2753,6 +2777,7 @@
     <string name="account_dashboard_title" msgid="8228773251948253914">"Lozinke i računi"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Sačuvane lozinke, automatsko popunjavanje, sinhronizirani računi"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Zadane aplikacije"</string>
+    <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Klonirane aplikacije"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Jezici, pokreti, vrijeme, sigurnosna kopija"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"Jezici sistema, jezici aplikacije"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, veza s mrežom, internet, bežično, podaci, wi fi"</string>
@@ -3207,7 +3232,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Na vaš zahtjev, Android blokira pojavljivanje obavještenja iz ove aplikacije na ovom uređaju"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Na vaš zahtjev, Android blokira pojavljivanje ove kategorije obavještenja na ovom uređaju"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Na vaš zahtjev, Android blokira pojavljivanje ove grupe obavještenja na ovom uređaju"</string>
-    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Ova aplikacija ne šalje obavijesti"</string>
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Ova aplikacija ne šalje obavještenja"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Kategorije"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Ostalo"</string>
     <string name="no_channels" msgid="4716199078612071915">"Ova aplikacija nije objavila nikakva obavještenja"</string>
@@ -3374,7 +3399,8 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Traži lozinku prije poništavanja kačenja"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Zaključaj uređaj kada se ekran otkači"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Potvrda brisanja SIM-a"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Potvrdite svoj identitet prije potpunog brisanja preuzetog SIM-a"</string>
+    <!-- no translation found for confirm_sim_deletion_description (5090811029854329373) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Ovim radnim profilom upravlja:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Profilom upravlja <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"Sigurno pokretanje"</string>
@@ -3899,7 +3925,7 @@
     <string name="account_sync_summary_some_on" msgid="911460286297968724">"Sinhronizacija je uključena za stavke: <xliff:g id="ID_1">%1$d</xliff:g> od <xliff:g id="ID_2">%2$d</xliff:g>"</string>
     <string name="account_sync_summary_all_on" msgid="2953682111836599841">"Sinhronizacija je uključena za sve stavke"</string>
     <string name="account_sync_summary_all_off" msgid="6378301874540507884">"Sinhronizacija je isključena za sve stavke"</string>
-    <string name="enterprise_privacy_settings" msgid="786350385374794180">"Podaci o upravljanom uređaju"</string>
+    <string name="enterprise_privacy_settings" msgid="786350385374794180">"Podaci o uređaju kojim se upravlja"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5471858290610344646">"Promjene i postavke kojima upravlja vaša organizacija"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="1315413275836515937">"Promjene i postavke kojima upravlja organizacija <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>"</string>
     <string name="enterprise_privacy_header" msgid="4626225398848641603">"Za davanje pristupa vašim radnim podacima, vaša organizacija može na vašem uređaju promijeniti postavke i instalirati softver.\n\nZa više informacija, obratite se administratoru vaše organizacije."</string>
@@ -4169,7 +4195,8 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Prijenos podataka na mobilnoj mreži"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Pristup prijenosu podataka putem mobilne mreže"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Telefon će se automatski prebaciti na ovog operatera kada bude u dometu"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Sim kartica nije dostupna"</string>
+    <!-- no translation found for mobile_data_settings_summary_unavailable (9176513507571883986) -->
+    <skip />
     <string name="calls_preference" msgid="2166481296066890129">"Postavke za pozive"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Postavke za SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Pitaj svaki put"</string>
@@ -4184,8 +4211,10 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Dodajte još"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Aktivno/SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Neaktivno/SIM"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Aktivno / Preuzeti SIM"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Neaktivno / Preuzeti SIM"</string>
+    <!-- no translation found for mobile_network_active_esim (3984452275968408382) -->
+    <skip />
+    <!-- no translation found for mobile_network_inactive_esim (8777415108263057939) -->
+    <skip />
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"Naziv i boja SIM-a"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Naziv"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Boja (koriste kompatibilne aplikacije)"</string>
@@ -4221,7 +4250,8 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Prebaciti na korištenje SIM kartice?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Koristiti operatera <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"U datom trenutku može biti aktivan samo jedan SIM.\n\nPrebacivanjem na operatera <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> neće se otkazati usluga mobilnog operatera <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"U datom trenutku može biti aktivan samo jedan preuzeti SIM.\n\nPrebacivanjem na operatera <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> neće se otkazati usluga mobilnog operatera <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_text_downloaded (8977951796005849471) -->
+    <skip />
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"U datom trenutku može biti aktivan samo jedan SIM.\n\nPrebacivanjem se neće otkazati usluga mobilnog operatera <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Možete istovremeno koristiti 2 SIM-a. Da koristite operatera <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, isključite drugi SIM."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Prebaci na operatera <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -4263,8 +4293,10 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"Usluge operatera <xliff:g id="CARRIER_NAME">%1$s</xliff:g> će se koristiti za prijenos podataka na mobilnoj mreži, pozive i SMS."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Nema dostupnih SIM-ova"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Da kasnije koristite prijenos podataka na mobilnoj mreži, funkcije poziva i SMS, idite u postavke mreže"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"SIM kartica"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Potpuno izbrisati ovaj preuzeti SIM?"</string>
+    <!-- no translation found for sim_card_label (6263064316075963775) -->
+    <skip />
+    <!-- no translation found for erase_sim_dialog_title (4742077437653028326) -->
+    <skip />
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Ako potpuno izbrišete ovaj SIM, s ovog uređaja će se ukloniti usluga operatera <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>.\n\nUsluga za operatera <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> neće se otkazati."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Potpuno izbriši"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"Potpuno brisanje SIM-a…"</string>
@@ -4417,8 +4449,10 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Dozvolite da Google Fi koristi W+ mreže da poboljšate brzinu i pokrivenost"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ mreža"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"PREUZETI SIM"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"PREUZETI SIM-ovi"</string>
+    <!-- no translation found for downloaded_sim_category_title (2876988650413179752) -->
+    <skip />
+    <!-- no translation found for downloaded_sims_category_title (487799905978489922) -->
+    <skip />
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Aktivno"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Neaktivno"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Zadano za: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -4474,7 +4508,8 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Postavke poziva"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Ažuriranje postavki..."</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Greška u postavkama poziva"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Greška na mreži ili SIM kartici."</string>
+    <!-- no translation found for smart_forwarding_failed_text (8682640643264071789) -->
+    <skip />
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM nije aktiviran."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Unesite brojeve telefona"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Unesite broj telefona"</string>
@@ -4498,10 +4533,14 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"Nazad"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Naprijed"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Pregled boje"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Zahtjev za pristup SIM kartici"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Uređaj želi pristupiti vašoj SIM kartici. Dodirnite za detalje."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Dozvoliti pristup SIM kartici?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Bluetooth uređaj, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, želi pristupiti podacima na vašoj SIM kartici. To obuhvata vaše kontakte.\n\nDok je povezan, uređaj <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> će primati sve pozive upućene na broj <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <!-- no translation found for bluetooth_sim_card_access_notification_title (7351015416346359536) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_notification_content (8685623260103018309) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_title (5616323725563125179) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_content (6281997628405909566) -->
+    <skip />
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Bluetooth uređaj je dostupan"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Uređaj se želi povezati. Dodirnite za detalje."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Povezati se s Bluetooth uređajem?"</string>

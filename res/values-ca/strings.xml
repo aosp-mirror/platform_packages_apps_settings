@@ -13,6 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"Sí"</string>
@@ -285,8 +286,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Se suprimirà el teu model facial de manera permanent i segura.\n\nDesprés de suprimir-lo, necessitaràs un PIN, un patró o una contrasenya per desbloquejar el teu telèfon."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Utilitza Desbloqueig facial per desbloquejar el telèfon"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Empremta digital"</string>
-    <!-- no translation found for security_settings_fingerprint_settings_preferences_category (8975029409126780752) -->
-    <skip />
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"En utilitzar Desbloqueig amb empremta digital"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Empremta de la feina"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Afegeix una empremta digital"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
@@ -366,13 +366,9 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"S\'ha inscrit un <xliff:g id="PERCENTAGE">%d</xliff:g> per cent"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registre de l\'empremta digital <xliff:g id="PERCENTAGE">%d</xliff:g> per cent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"S\'ha afegit l\'empremta digital"</string>
-    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Ara pots utilitzar l\'empremta digital per desbloquejar la tauleta o verificar que ets tu, com ara quan inicies la sessió en aplicacions o aproves una compra"</string>
-    <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_keywords (5557869560397089603) -->
-    <skip />
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Desbloqueja només quan la pantalla estigui activada"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"La pantalla ha d\'estar activada abans de poder desbloquejar el dispositiu amb la teva empremta digital. Així és menys probable que hi hagi desbloquejos accidentals."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Pantalla, desbloqueig"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Fes-ho més tard"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Aixeca el dit i toca de nou"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Col·loca un costat del dit al sensor i espera; a continuació, canvia a l\'altre costat"</string>
@@ -465,31 +461,43 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"Vols suprimir la protecció del perfil?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"Un patró protegeix el teu telèfon si es perd o te\'l roben"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"Un patró protegeix el teu telèfon si es perd o te\'l roben.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Aquesta acció també suprimeix el model d\'empremta digital emmagatzemat al dispositiu. No podràs utilitzar la teva empremta digital per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"Un patró protegeix el teu telèfon si es perd o te\'l roben.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>El teu model facial també se suprimirà permanentment i de manera segura. No podràs utilitzar la cara per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"Un patró protegeix el teu telèfon si es perd o te\'l roben.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Aquesta acció suprimeix el model d\'empremta digital emmagatzemat al dispositiu. El teu model facial també se suprimirà permanentment i de manera segura. No podràs utilitzar la teva cara o empremta digital per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"El PIN protegeix el teu telèfon si es perd o te\'l roben"</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"El PIN protegeix el teu telèfon si es perd o te\'l roben.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Aquesta acció també suprimeix el model d\'empremta digital emmagatzemat al dispositiu. No podràs utilitzar la teva empremta digital per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"El PIN protegeix el teu telèfon si es perd o te\'l roben.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>El teu model facial també se suprimirà permanentment i de manera segura. No podràs utilitzar la cara per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"El PIN protegeix el teu telèfon si es perd o te\'l roben.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Aquesta acció suprimeix el model d\'empremta digital emmagatzemat al dispositiu. El teu model facial també se suprimirà permanentment i de manera segura. No podràs utilitzar la teva cara o empremta digital per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"Una contrasenya protegeix el teu telèfon si es perd o te\'l roben"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"Una contrasenya protegeix el teu telèfon si es perd o te\'l roben.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Aquesta acció també suprimeix el model d\'empremta digital emmagatzemat al dispositiu. No podràs utilitzar la teva empremta digital per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"Una contrasenya protegeix el teu telèfon si es perd o te\'l roben.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>El teu model facial també se suprimirà permanentment i de manera segura. No podràs utilitzar la teva cara per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"Una contrasenya protegeix el teu telèfon si es perd o te\'l roben.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Aquesta acció suprimeix el model d\'empremta digital emmagatzemat al dispositiu. El teu model facial també se suprimirà permanentment i de manera segura. No podràs utilitzar la teva cara o empremta digital per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"Les funcions de protecció del dispositiu no funcionaran sense el teu bloqueig de pantalla."</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"Les funcions de protecció del dispositiu no funcionen sense un bloqueig de pantalla.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Aquesta acció també suprimeix el model d\'empremta digital emmagatzemat al dispositiu. No podràs utilitzar la teva empremta digital per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"Les funcions de protecció del dispositiu no funcionen sense bloqueig de pantalla.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>El teu model facial també se suprimirà permanentment i de manera segura. No podràs utilitzar la cara per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"Les funcions de protecció del dispositiu no funcionen sense un bloqueig de pantalla.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Aquesta acció suprimeix el model d\'empremta digital emmagatzemat al dispositiu. El teu model facial també se suprimirà permanentment i de manera segura. No podràs utilitzar la teva cara o empremta digital per a l\'autenticació en aplicacions."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Suprimeix"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> recomana que el PIN o la contrasenya siguin segurs; si no ho són, és possible que no funcioni correctament"</string>
@@ -1004,13 +1012,18 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Text en negreta"</string>
     <string name="title_font_size" msgid="570613010306330622">"Cos de font"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Amplia o redueix el text"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"Configuració de bloqueig de SIM"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"Bloqueig de la targeta SIM"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"Bloqueja la targeta SIM"</string>
+    <!-- no translation found for sim_lock_settings (7331982427303002613) -->
+    <skip />
+    <!-- no translation found for sim_lock_settings_category (6475255139493877786) -->
+    <skip />
+    <!-- no translation found for sim_pin_toggle (6814489621760857328) -->
+    <skip />
     <string name="sim_pin_change" msgid="5978881209990507379">"Canvia el PIN de la SIM"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"PIN de la SIM"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Bloqueja la targeta SIM"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"Desbloqueja la targeta SIM"</string>
+    <!-- no translation found for sim_enable_sim_lock (6486354334679225748) -->
+    <skip />
+    <!-- no translation found for sim_disable_sim_lock (6939439812841857306) -->
+    <skip />
     <string name="sim_enter_old" msgid="6882545610939674813">"PIN de la SIM antic"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"PIN de la SIM nou"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Torna a escriure el PIN nou"</string>
@@ -1025,7 +1038,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Utilitzar <xliff:g id="CARRIER">%1$s</xliff:g> per a dades mòbils?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Estàs utilitzant <xliff:g id="CARRIER2_0">%2$s</xliff:g> per a les dades mòbils. Si canvies a <xliff:g id="CARRIER1">%1$s</xliff:g>, ja no es farà servir <xliff:g id="CARRIER2_1">%2$s</xliff:g> per a les dades mòbils."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Utilitza <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"Vols canviar la SIM preferida?"</string>
+    <!-- no translation found for sim_preferred_title (8850185380445309835) -->
+    <skip />
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> és l\'única SIM del dispositiu. Vols fer-la servir per a les dades mòbils, les trucades i els missatges SMS?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"El codi PIN de la SIM no és correcte. Has de contactar amb l\'operador de telefonia mòbil per desbloquejar el dispositiu."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1178,17 +1192,20 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Restableix Wi-Fi, dades mòbils i Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Es restabliran totes les opcions de configuració de la xarxa, inclosos:\n\n"<li>"La Wi‑Fi"</li>\n<li>"Les dades mòbils"</li>\n<li>"El Bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Esborra"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Esborra les SIM baixades"</string>
+    <!-- no translation found for reset_esim_title (4194570573425902754) -->
+    <skip />
     <string name="reset_esim_desc" msgid="3662444090563399131">"Aquesta acció no cancel·larà cap dels plans de servei mòbil. Per baixar targetes SIM de substitució, contacta amb el teu operador."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Restableix la configuració"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Vols restablir totes les opcions de configuració de la xarxa? Aquesta acció no es pot desfer."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Vols restablir totes les opcions de configuració de la xarxa i esborrar les targetes SIM baixades? Aquesta acció no es pot desfer."</string>
+    <!-- no translation found for reset_network_final_desc_esim (1129251284212847939) -->
+    <skip />
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Restableix la configuració"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Restablir?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"El restabliment de xarxa no està disponible per a aquest usuari"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"S\'ha restablert la configuració de la xarxa"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"No es poden esborrar les targetes SIM"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"No s\'han pogut esborrar les targetes SIM que has baixat a causa d\'un error.\n\nReinicia el dispositiu i torna-ho a provar."</string>
+    <!-- no translation found for reset_esim_error_msg (7279607120606365250) -->
+    <skip />
     <string name="main_clear_title" msgid="277664302144837723">"Esborra totes les dades (restabliment de fàbrica)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Esborra totes les dades (restabliment dades fàbrica)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"La música"</li>\n<li>"Les fotos"</li>\n<li>"Altres dades de l\'usuari"</li></string>
@@ -2026,7 +2043,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"Detalls de l\'historial"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Ús de la bateria"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Consulta l\'ús de les 24 darreres hores"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Mostra ús des de darrera càrrega completa"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Veure ús des de l\'última càrrega completa"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Ús de la bateria de l\'aplicació"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Detalls d\'ús"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Redueix el consum de la bateria"</string>
@@ -2117,25 +2134,25 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Durada aproximada de la càrrega completa"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Les dades d\'ús de la bateria són aproximades i poden variar en funció de l\'ús."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Ús de la bateria"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> en total • <xliff:g id="TIME_1">^2</xliff:g> en segon pla\ndes de la darrera càrrega completa"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"<xliff:g id="TIME_0">^1</xliff:g> en total • <xliff:g id="TIME_1">^2</xliff:g> en segon pla\ndes de la darrera càrrega completa"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> en total • <xliff:g id="TIME_1">^2</xliff:g> en segon pla\ndurant les 24 darreres hores"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"<xliff:g id="TIME_0">^1</xliff:g> en total • <xliff:g id="TIME_1">^2</xliff:g> en segon pla\nentre <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"Menys d\'1 minut en total des de la darrera càrrega completa"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"Menys d\'1 minut en total des de la darrera càrrega completa"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"Menys d\'1 minut en total durant les 24 darreres hores"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Menys d\'1 minut en total entre <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"Menys d\'1 minut en segon pla des de la darrera càrrega completa"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"Menys d\'un minut en segon pla des de la darrera càrrega completa"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Menys d\'1 minut en segon pla durant les 24 darreres hores"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Menys d\'1 minut en segon pla entre <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"<xliff:g id="TIME">^1</xliff:g> en total des de la darrera càrrega completa"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"<xliff:g id="TIME">^1</xliff:g> en total des de la darrera càrrega completa"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"<xliff:g id="TIME">^1</xliff:g> en total durant les 24 darreres hores"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_0">^1</xliff:g> en total entre <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"<xliff:g id="TIME">^1</xliff:g> en segon pla des de la darrera càrrega completa"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"<xliff:g id="TIME">^1</xliff:g> en segon pla des de la darrera càrrega completa"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"<xliff:g id="TIME">^1</xliff:g> en segon pla durant les 24 darreres hores"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> en segon pla entre <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"<xliff:g id="TIME">^1</xliff:g> en total • Menys d\'1 minut en segon pla\ndes de la darrera càrrega completa"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"<xliff:g id="TIME">^1</xliff:g> en total • menys d\'un minut en segon pla\ndes de la darrera càrrega completa"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"<xliff:g id="TIME">^1</xliff:g> en total • Menys d\'1 minut en segon pla\ndurant les 24 darreres hores"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"<xliff:g id="TIME_0">^1</xliff:g> en total • Menys d\'1 minut en segon pla\nentre <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"Sense ús des de la darrera càrrega completa"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"Sense ús des de la darrera càrrega completa"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Sense ús durant les 24 darreres hores"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"Altres usuaris"</string>
@@ -2525,8 +2542,8 @@
       <item quantity="other">Confia en els certificats o suprimeix-los</item>
       <item quantity="one">Confia en el certificat o suprimeix-lo</item>
     </plurals>
-    <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName} ha instal·lat una autoritat de certificació al teu dispositiu, que pot permetre-li supervisar l\'activitat a la xarxa del dispositiu, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nPer obtenir més informació sobre aquest certificat, contacta amb el teu administrador.}other{{orgName} ha instal·lat unes autoritats de certificació al teu dispositiu, que pot permetre-li supervisar l\'activitat a la xarxa del dispositiu, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nPer obtenir més informació sobre aquests certificats, contacta amb el teu administrador.}}"</string>
-    <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} ha instal·lat una autoritat de certificació per al teu perfil de treball, que pot permetre-li supervisar l\'activitat a la xarxa del perfil de treball, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nPer obtenir més informació sobre aquest certificat, contacta amb el teu administrador.}other{{orgName} ha instal·lat unes autoritats de certificació per al teu perfil de treball, que pot permetre-li supervisar l\'activitat a la xarxa del perfil de treball, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nPer obtenir més informació sobre aquests certificats, contacta amb el teu administrador.}}"</string>
+    <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName} ha instal·lat una autoritat de certificació al teu dispositiu, que pot permetre-li supervisar l\'activitat de xarxa del dispositiu, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nPer obtenir més informació sobre aquest certificat, contacta amb el teu administrador.}other{{orgName} ha instal·lat unes autoritats de certificació al teu dispositiu, que pot permetre-li supervisar l\'activitat de xarxa del dispositiu, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nPer obtenir més informació sobre aquests certificats, contacta amb el teu administrador.}}"</string>
+    <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} ha instal·lat una autoritat de certificació per al teu perfil de treball, que pot permetre-li supervisar l\'activitat de xarxa del perfil de treball, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nPer obtenir més informació sobre aquest certificat, contacta amb el teu administrador.}other{{orgName} ha instal·lat unes autoritats de certificació per al teu perfil de treball, que pot permetre-li supervisar l\'activitat de xarxa del perfil de treball, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nPer obtenir més informació sobre aquests certificats, contacta amb el teu administrador.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Un tercer pot supervisar la teva activitat de xarxa, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nHi ha una credencial de confiança instal·lada al teu dispositiu que ho fa possible."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
       <item quantity="other">Comprova els certificats</item>
@@ -2546,7 +2563,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Suprimeix <xliff:g id="USER_NAME">%1$s</xliff:g> del dispositiu"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Configuració de la pantalla de bloqueig"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Afegeix usuaris des de la pantalla de bloqueig"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"Canvia a l\'usuari administrador quan estigui acoblat"</string>
+    <!-- no translation found for switch_to_dock_user_when_docked (2324395443311905635) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Et vols suprimir a tu mateix?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Vols suprimir l\'usuari?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Vols suprimir el perfil?"</string>
@@ -2672,7 +2690,8 @@
     <string name="wizard_next" msgid="3884832431439072471">"Següent"</string>
     <string name="wizard_back_adoptable" msgid="1447814356855134183">"Formata d\'una altra manera"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"Targetes SIM"</string>
+    <!-- no translation found for sim_settings_title (2254609719033946272) -->
+    <skip />
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Les dades mòbils no estan disponibles"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Toca per seleccionar una SIM de dades"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Utilitza sempre per a les trucades"</string>
@@ -2690,7 +2709,8 @@
     <string name="sim_status_title" msgid="6188770698037109774">"Estat de la SIM"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"Estat de la SIM (ranura de la SIM %1$d)"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"S\'han canviat les targetes SIM"</string>
+    <!-- no translation found for sim_notification_title (2819551384383504031) -->
+    <skip />
     <string name="sim_notification_summary" msgid="5593339846307029991">"Toca per configurar"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Pregunta sempre"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Has de seleccionar una preferència."</string>
@@ -2716,6 +2736,8 @@
     <string name="account_dashboard_title" msgid="8228773251948253914">"Contrasenyes i comptes"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Contrasenyes desades, Emplenament automàtic i comptes sincronitzats"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Aplicacions predeterminades"</string>
+    <!-- no translation found for cloned_apps_dashboard_title (5542076801222950921) -->
+    <skip />
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Idiomes, gestos, hora, còpia de seguretat"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"Idiomes del sistema, idiomes de les aplicacions"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wi-fi, Wi-Fi, connexió a la xarxa, Internet, sense fil, dades, wifi"</string>
@@ -3330,7 +3352,8 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Demana la contrasenya per deixar de fixar"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Bloqueja el dispositiu en deixar de fixar"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Confirma la supressió de la SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Verifica la teva identitat abans d\'esborrar una SIM baixada"</string>
+    <!-- no translation found for confirm_sim_deletion_description (5090811029854329373) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"L\'administrador d\'aquest perfil de treball és:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Gestionat per <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"Inici segur"</string>
@@ -4106,7 +4129,8 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Dades mòbils"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Accedeix a les dades amb la xarxa mòbil"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"El telèfon canviarà de manera automàtica a aquest operador de telefonia mòbil quan estigui dins del seu abast"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"No hi ha cap targeta SIM disponible"</string>
+    <!-- no translation found for mobile_data_settings_summary_unavailable (9176513507571883986) -->
+    <skip />
     <string name="calls_preference" msgid="2166481296066890129">"Preferència de trucades"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Preferència d\'SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Pregunta sempre"</string>
@@ -4121,8 +4145,10 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Afegeix-ne més"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Actiu / SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Inactiu / SIM"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Actiu / SIM baixada"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Inactiu / SIM baixada"</string>
+    <!-- no translation found for mobile_network_active_esim (3984452275968408382) -->
+    <skip />
+    <!-- no translation found for mobile_network_inactive_esim (8777415108263057939) -->
+    <skip />
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"Nom i color de la SIM"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Nom"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Color (utilitzat en aplicacions compatibles)"</string>
@@ -4158,7 +4184,8 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Vols utilitzar la targeta SIM?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Vols utilitzar <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Només pot haver-hi una SIM activa.\n\nSi canvies a <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, el teu servei amb <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> no es cancel·larà."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Només pot haver-hi una SIM baixada activa.\n\nSi canvies a <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, el teu servei amb <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> no es cancel·larà."</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_text_downloaded (8977951796005849471) -->
+    <skip />
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Només pot haver-hi una SIM activa.\n\nSi canvies de SIM, el teu servei amb <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> no es cancel·larà."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Pots utilitzar 2 SIM alhora. Per utilitzar <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, desactiva una altra SIM."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Canvia a <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -4200,8 +4227,10 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"Es farà servir l\'operador <xliff:g id="CARRIER_NAME">%1$s</xliff:g> per a les dades mòbils, les trucades i els SMS."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"No hi ha cap SIM activa disponible"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Per utilitzar les dades mòbils, les funcions de trucada i els SMS més tard, ves a la configuració de xarxa."</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"Targeta SIM"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Vols esborrar la SIM que has baixat?"</string>
+    <!-- no translation found for sim_card_label (6263064316075963775) -->
+    <skip />
+    <!-- no translation found for erase_sim_dialog_title (4742077437653028326) -->
+    <skip />
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Si esborres aquesta targeta SIM, el servei de l\'operador <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> se suprimirà del dispositiu.\n\nEl servei de l\'operador <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> no es cancel·larà."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Esborra"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"S\'està esborrant la SIM…"</string>
@@ -4353,8 +4382,10 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Permet que Google Fi utilitzi les xarxes W+ per millorar la velocitat i la cobertura"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Xarxa W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"SIM BAIXADA"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"SIM BAIXADES"</string>
+    <!-- no translation found for downloaded_sim_category_title (2876988650413179752) -->
+    <skip />
+    <!-- no translation found for downloaded_sims_category_title (487799905978489922) -->
+    <skip />
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Activa"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Inactiva"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Opció predeterminada per a <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -4410,7 +4441,8 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Configuració de trucades"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"S\'està actualitzant la configuració..."</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Error de configuració de trucada"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Error de la xarxa o de la targeta SIM."</string>
+    <!-- no translation found for smart_forwarding_failed_text (8682640643264071789) -->
+    <skip />
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"La SIM no està activada."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Introdueix números de telèfon"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Introdueix un número de telèfon"</string>
@@ -4434,10 +4466,14 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"Anterior"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Següent"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Previsualització del color"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Sol·licitud d\'accés a la targeta SIM"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Un dispositiu vol accedir a la teva targeta SIM. Toca per obtenir informació."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Vols permetre l\'accés a la targeta SIM?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Un dispositiu Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, vol accedir a les dades de la teva targeta SIM. Això inclou els teus contactes.\n\nMentre estigui connectat, <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> rebrà totes les trucades que es facin a <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <!-- no translation found for bluetooth_sim_card_access_notification_title (7351015416346359536) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_notification_content (8685623260103018309) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_title (5616323725563125179) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_content (6281997628405909566) -->
+    <skip />
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Dispositiu Bluetooth disponible"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Un dispositiu vol connectar-se al teu. Toca per obtenir informació."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Vols connectar-te al dispositiu Bluetooth?"</string>

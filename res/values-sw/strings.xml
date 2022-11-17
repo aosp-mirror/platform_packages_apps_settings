@@ -13,6 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"Ndiyo"</string>
@@ -285,8 +286,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Muundo wa uso wako utafutwa kabisa kwa njia salama.\n\nBaada ya kufuta, utahitaji PIN, mchoro au nenosiri lako ili ufungue simu yako."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Tumia kipengele cha Kufungua kwa uso ili ufungue simu yako"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Alama ya kidole"</string>
-    <!-- no translation found for security_settings_fingerprint_settings_preferences_category (8975029409126780752) -->
-    <skip />
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Unapotumia kipengele cha Kufungua kwa alama ya kidole"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Alama ya kidole kwenye wasifu wa kazini"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Ongeza alama nyingine ya kidole"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
@@ -366,13 +366,9 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Imeandikishwa kwa asilimia <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Imeandikisha asilimia <xliff:g id="PERCENTAGE">%d</xliff:g> ya alama ya kidole"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Alama ya kidole imeongezwa"</string>
-    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Sasa unaweza kutumia alama ya kidole chako kufungua kompyuta kibao yako au kuthibitisha kuwa ni wewe, kama vile unapoingia katika akaunti kwenye programu au unapoidhinisha ununuzi"</string>
-    <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_keywords (5557869560397089603) -->
-    <skip />
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Fungua tu skrini inapowashwa"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Ni lazima skrini iwashwe kabla uweze kufungua kwa kutumia alama yako ya kidole. Hali hii hupunguza uwezekano wa kufungua kwa bahati mbaya."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Skrini, Fungua"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Ongeza baadaye"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Inua, kisha uguse tena"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Weka upande mmoja wa kidole chako kwenye kitambuzi na ushikilie, kisha uweke upande wa pili"</string>
@@ -465,31 +461,43 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"Ungependa kuondoa ulinzi wasifu?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"Mchoro hulinda simu yako ikipotea au ikiibwa."</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"Mchoro hulinda simu yako ikipotea au ikiibwa.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Hatua hii pia hufuta muundo wa alama ya kidole uliohifadhiwa kwenye kifaa chako. Hutaweza kutumia alama ya kidole chako kuthibitisha katika programu."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"Mchoro hulinda simu yako ikipotea au ikiibwa.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Muundo wa uso wako pia utafutwa kabisa kwa usalama. Hutaweza kutumia uso wako kuthibitisha katika programu."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"Mchoro hulinda simu yako ikipotea au ikiibwa.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Hatua hii hufuta muundo wa alama ya kidole uliohifadhiwa kwenye kifaa chako. Muundo wa uso wako pia utafutwa kabisa kwa usalama. Hutaweza kutumia uso wala alama ya kidole chako kuthibitisha katika programu."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"PIN hulinda simu yako ikipotea au ikiibwa."</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"PIN hulinda simu yako ikipotea au ikiibwa.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Hatua hii pia hufuta muundo wa alama ya kidole uliohifadhiwa kwenye kifaa chako. Hutaweza kutumia alama ya kidole chako kuthibitisha katika programu."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"PIN hulinda simu yako ikipotea au ikiibwa.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Muundo wa uso wako pia utafutwa kabisa kwa usalama. Hutaweza kutumia uso wako kuthibitisha katika programu."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"PIN hulinda simu yako ikipotea au ikiibwa.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Hatua hii hufuta muundo wa alama ya kidole uliohifadhiwa kwenye kifaa chako. Muundo wa uso wako pia utafutwa kabisa kwa usalama. Hutaweza kutumia uso wala alama ya kidole chako kuthibitisha katika programu."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"Nenosiri hulinda simu yako ikipotea au ikiibwa"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"Nenosiri hulinda simu yako ikipotea au ikiibwa.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Hatua hii pia hufuta muundo wa alama ya kidole uliohifadhiwa kwenye kifaa chako. Hutaweza kutumia alama ya kidole chako kuthibitisha katika programu."</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"Nenosiri hulinda simu yako ikipotea au ikiibwa.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Muundo wa uso wako pia utafutwa kabisa kwa usalama. Hutaweza kutumia uso wako kuthibitisha katika programu."</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"Nenosiri hulinda simu yako ikipotea au ikiibwa.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Hatua hii hufuta muundo wa alama ya kidole uliohifadhiwa kwenye kifaa chako. Muundo wa uso wako pia utafutwa kabisa kwa usalama. Hutaweza kutumia uso wala alama ya kidole chako kuthibitisha katika programu."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"Vipengele vya ulinzi wa kifaa havitafanya kazi bila kipengele chako cha kufunga skrini."</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"Vipengele vya ulinzi wa kifaa havitafanya kazi bila mbinu yako ya kufunga skrini.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Hatua hii pia hufuta muundo wa alama ya kidole uliohifadhiwa kwenye kifaa chako. Hutaweza kutumia alama ya kidole chako kuthibitisha katika programu."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"Vipengele vya ulinzi wa kifaa havitafanya kazi bila mbinu yako ya kufunga skrini.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Muundo wa uso wako pia utafutwa kabisa kwa usalama. Hutaweza kutumia uso wako kuthibitisha katika programu."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"Vipengele vya ulinzi wa kifaa havitafanya kazi bila mbinu yako ya kufunga skrini.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Hatua hii hufuta muundo wa alama ya kidole uliohifadhiwa kwenye kifaa chako. Muundo wa uso wako pia utafutwa kabisa kwa usalama. Hutaweza kutumia uso wala alama ya kidole chako kuthibitisha katika programu."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Futa"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> inapendekeza uweke PIN au nenosiri thabiti na huenda isifanye kazi kama kawaida bila kuwekwa"</string>
@@ -989,8 +997,7 @@
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Haipatikani kwa sababu umewasha hali ya wakati umelala"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Tumia taswira ya skrini"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Wakati imeunganishwa na kifaa kingine au inapochaji"</string>
-    <!-- no translation found for screensaver_settings_summary_dock_and_charging (8485905100159376156) -->
-    <skip />
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Inapounganishwa na kuchaji"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Inapochaji"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Wakati imeunganishwa na kifaa kingine"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Isiwahi"</string>
@@ -1005,13 +1012,18 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Herufi nzito"</string>
     <string name="title_font_size" msgid="570613010306330622">"Ukubwa wa fonti"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Inafanya maandishi kuwa makubwa zaidi au madogo zaidi"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"Mipangilio ya kufunga SIM"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"Kufunga SIM kadi"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"Funga SIM kadi"</string>
+    <!-- no translation found for sim_lock_settings (7331982427303002613) -->
+    <skip />
+    <!-- no translation found for sim_lock_settings_category (6475255139493877786) -->
+    <skip />
+    <!-- no translation found for sim_pin_toggle (6814489621760857328) -->
+    <skip />
     <string name="sim_pin_change" msgid="5978881209990507379">"Badilisha PIN ya SIM"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"PIN ya SIM"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Funga SIM kadi"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"Fungua SIM kadi"</string>
+    <!-- no translation found for sim_enable_sim_lock (6486354334679225748) -->
+    <skip />
+    <!-- no translation found for sim_disable_sim_lock (6939439812841857306) -->
+    <skip />
     <string name="sim_enter_old" msgid="6882545610939674813">"PIN ya zamani ya SIM"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"Nambari mpya ya PIN ya SIM"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Andika PIN mpya tena"</string>
@@ -1026,7 +1038,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Ungependa kutumia <xliff:g id="CARRIER">%1$s</xliff:g> kwa ajili ya data ya mtandao wa simu?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Unatumia <xliff:g id="CARRIER2_0">%2$s</xliff:g> kwa ajili ya data ya mtandao wa simu. Ukibadilisha uweke <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> haitatumika tena kwa ajili ya data ya mtandao wa simu."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Tumia <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"Unataka kubadili SIM kadi?"</string>
+    <!-- no translation found for sim_preferred_title (8850185380445309835) -->
+    <skip />
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> ndiyo SIM pekee iliyo katika kifaa chako. Ungependa kutumia SIM hii kupata data ya mtandao wa simu, kupiga simu na kutuma SMS?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Nambari ya PIN ya SIM uliyoweka si sahihi. Sasa lazima uwasiliane na mtoa huduma wako ili ukufungulie kifaa chako."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1179,17 +1192,20 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Badilisha mipangilio ya Wi-Fi, data ya simu na Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Hatua hii itabadilisha mipangilio yote ya mtandao ikiwa ni pamoja na:\n\n"<li>"Wi‑Fi"</li>\n<li>"Data ya simu"</li>\n<li>"Bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Futa"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Futa SIM zilizopakuliwa"</string>
+    <!-- no translation found for reset_esim_title (4194570573425902754) -->
+    <skip />
     <string name="reset_esim_desc" msgid="3662444090563399131">"Hatua hii haitaghairi mipango yoyote ya huduma za simu. Ili upakue SIM za kubadilisha, wasiliana na mtoa huduma wako."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Badilisha mipangilio"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Je, ungependa kubadilisha mipangilio yote ya mtandao? Huwezi kutendua kitendo hiki."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Je, ungependa kubadilisha mipangilio yote ya mtandao na ufute SIMs zilizopakuliwa? Huwezi kutendua kitendo hiki."</string>
+    <!-- no translation found for reset_network_final_desc_esim (1129251284212847939) -->
+    <skip />
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Badilisha mipangilio"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Iwekwe upya?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Kuweka upya mtandao hakupatikani kwa mtumiaji huyu"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Mipangilio ya mtandao imewekwa upya"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Imeshindwa kufuta data yote kwenye SIM"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"Hitilafu imetokea wakati wa kufuta data iliyopakuliwa kwenye SIM.\n\nZima na uwashe kifaa chako na ujaribu tena."</string>
+    <!-- no translation found for reset_esim_error_msg (7279607120606365250) -->
+    <skip />
     <string name="main_clear_title" msgid="277664302144837723">"Futa data yote (rejesha mipangilio iliyotoka nayo kiwandani)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Futa data yote (rejesha mipangilio Iliyotoka nayo kiwandani)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Muziki"</li>\n<li>"Picha"</li>\n<li>"data nyingine ya mtumiaji"</li></string>
@@ -2027,7 +2043,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"Maelezo ya historia"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Matumizi ya betri"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Angalia matumizi katika saa 24 zilizopita"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Angalia matumizi tangu mwisho ilipojazwa chaji"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Angalia data ya matumizi tangu ilipojaa chaji mara ya mwisho"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Matumizi ya betri ya programu"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Tumia maelezo"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Rekebisha utumiaji wa nishati"</string>
@@ -2118,25 +2134,25 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Ikijaa chaji, itadumu kwa takribani"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Data ya matumizi ya betri imekadiriwa na inaweza kubadilika kulingana na matumizi."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Matumizi ya betri"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Jumla ya <xliff:g id="TIME_0">^1</xliff:g> • Imetumika chinichini\nkwa <xliff:g id="TIME_1">^2</xliff:g>tangu ilipojazwa chaji mara ya mwisho"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"Jumla ya saa <xliff:g id="TIME_0">^1</xliff:g> • Imetumika chinichini kwa <xliff:g id="TIME_1">^2</xliff:g>\ntangu ilipojaa chaji mara ya mwisho"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Jumla ya <xliff:g id="TIME_0">^1</xliff:g> • Imetumika chinichini\n kwa <xliff:g id="TIME_1">^2</xliff:g> katika saa 24 zilizopita"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Jumla ya <xliff:g id="TIME_0">^1</xliff:g> • Imetumika chinichini\n kwa <xliff:g id="TIME_1">^2</xliff:g> katika <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"Jumla ya muda usiozidi dakika moja tangu ilipojazwa chaji mara ya mwisho"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"Imetumika kwa jumla ya muda usiozidi dakika moja tangu ilipojaa chaji mara ya mwisho"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"Jumla ya muda usiozidi dakika moja katika saa 24 zilizopita"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Jumla ya muda usiozidi dakika moja katika <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"Imetumika chinichini kwa muda usiozidi dakika moja tangu ilipojazwa chaji mara ya mwisho"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"Imetumika chinichini kwa muda usiozidi dakika moja tangu ilipojaa chaji mara ya mwisho"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Imetumika chinichini kwa muda usiozidi dakika moja katika saa 24 zilizopita"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Imetumika chinichini kwa muda usiozidi dakika moja kati ya <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"Jumla ya <xliff:g id="TIME">^1</xliff:g> imetumiwa tangu ilipojazwa chaji mara ya mwisho"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"Imetumika kwa jumla ya <xliff:g id="TIME">^1</xliff:g> tangu ilipojaa cha mara ya mwisho"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"Jumla ya <xliff:g id="TIME">^1</xliff:g> katika saa 24 zilizopita"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"Jumla ya <xliff:g id="TIME_0">^1</xliff:g> katika <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"Imetumika chinichini kwa <xliff:g id="TIME">^1</xliff:g> tangu ilipojazwa chaji mara ya mwisho"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"Imetumika chinichini kwa <xliff:g id="TIME">^1</xliff:g> tangu ilipojaa chaji mara ya mwisho"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"Imetumika chinichini kwa <xliff:g id="TIME">^1</xliff:g> katika saa 24 zilizopita"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"Imetumika chinichini kwa <xliff:g id="TIME_0">^1</xliff:g> katika <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"Jumla ya <xliff:g id="TIME">^1</xliff:g> • Imetumika chinichini kwa muda usiozidi dakika moja\ntangu ilipojazwa chaji mara ya mwisho"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"Jumla ya <xliff:g id="TIME">^1</xliff:g> • imetumika chinichini kwa muda usiozidi dakika moja\ntangu ilipojaa chaji mara ya mwisho"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"Jumla ya <xliff:g id="TIME">^1</xliff:g> • Imetumika chinichini kwa muda usiozidi dakika moja\nkatika saa 24 zilizopita"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"Jumla ya <xliff:g id="TIME_0">^1</xliff:g> • Imetumika chinichini kwa muda usiozidi dakika moja\nkatika <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"Haijatumika tangu ilipojazwa chaji mara ya mwisho"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"Haijatumika tangu mara ya mwisho ilipojaa chaji"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Haijatumika katika saa 24 zilizopita"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"Watumiaji wengine"</string>
@@ -2547,7 +2563,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Futa <xliff:g id="USER_NAME">%1$s</xliff:g> kutoka kwenye kifaa hiki"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Mipangilio ya kufunga skrini"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Ongeza watumiaji skrini ikiwa imefungwa"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"Rudisha kwa mtumiaji msimamizi wakati kimeambatishwa"</string>
+    <!-- no translation found for switch_to_dock_user_when_docked (2324395443311905635) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Ungependa kujifuta?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Ungependa kumfuta mtumiaji huyu?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Ungependa kuondoa wasifu?"</string>
@@ -2673,7 +2690,8 @@
     <string name="wizard_next" msgid="3884832431439072471">"Endelea"</string>
     <string name="wizard_back_adoptable" msgid="1447814356855134183">"Andaa diski kwa njia nyingine"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"SIM kadi"</string>
+    <!-- no translation found for sim_settings_title (2254609719033946272) -->
+    <skip />
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Data ya mtandao wa simu haipatikani"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Gusa ili uchague SIM ya data"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Tumia hii kwa simu wakati wote"</string>
@@ -2691,7 +2709,8 @@
     <string name="sim_status_title" msgid="6188770698037109774">"Hali ya SIM"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"Hali ya SIM (nafasi ya sim ya %1$d)"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"dBm <xliff:g id="DBM">%1$d</xliff:g> asu <xliff:g id="ASU">%2$d</xliff:g>"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"SIM kadi zimebadilishwa."</string>
+    <!-- no translation found for sim_notification_title (2819551384383504031) -->
+    <skip />
     <string name="sim_notification_summary" msgid="5593339846307029991">"Gusa ili uweke mipangilio"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Uliza kila wakati"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Uteuzi unahitajika"</string>
@@ -2717,6 +2736,8 @@
     <string name="account_dashboard_title" msgid="8228773251948253914">"Manenosiri na akaunti"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Manenosiri yaliyohifadhiwa, kujaza kiotomatiki, akaunti zilizosawazishwa"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Programu chaguomsingi"</string>
+    <!-- no translation found for cloned_apps_dashboard_title (5542076801222950921) -->
+    <skip />
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Lugha, ishara, saa, hifadhi nakala"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"Lugha za mfumo, lugha za programu"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, mtandao, muunganisho wa mtandao, intaneti, pasiwaya, data,"</string>
@@ -3167,8 +3188,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Kutokana na ombi lako, Android inazuia arifa za programu hii ili zisionekane kwenye kifaa hiki"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Kutokana na ombi lako, Android inazuia aina hizi za arifa ili zisionekane kwenye kifaa hiki"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Kutokana na ombi lako, Android inazuia kikundi hiki cha arifa ili zisionekane kwenye kifaa hiki"</string>
-    <!-- no translation found for app_notifications_not_send_desc (5683060986735070528) -->
-    <skip />
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Programu hii haitumi arifa"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Aina"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Nyingine"</string>
     <string name="no_channels" msgid="4716199078612071915">"Programu hii haijachapisha arifa zozote"</string>
@@ -3332,7 +3352,8 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Omba nenosiri kabla hujabandua"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Funga kifaa wakati wa kubandua"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Thibitisha hatua ya kufuta SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Thibitisha kuwa ni wewe kabla ya kufuta SIM iliyopakuliwa"</string>
+    <!-- no translation found for confirm_sim_deletion_description (5090811029854329373) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Wasifu huu wa kazini unasimamiwa na:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Inasimamiwa na <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"Uanzishaji salama"</string>
@@ -4108,7 +4129,8 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Data ya mtandao wa simu"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Tumia data ya mtandao wa simu"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Simu itabadili kiotomatiki itumie mtoa huduma huyu inapokuwa karibu"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Hakuna SIM kadi inayopatikana"</string>
+    <!-- no translation found for mobile_data_settings_summary_unavailable (9176513507571883986) -->
+    <skip />
     <string name="calls_preference" msgid="2166481296066890129">"Mapendeleo ya simu"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Mapendeleo ya SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Iulize kila wakati"</string>
@@ -4123,8 +4145,10 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Ongeza zaidi"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Inatumika / SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Haitumiki / SIM"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Mtandao unatumika / SIM imepakuliwa"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Haitumiki / Pakua SIM"</string>
+    <!-- no translation found for mobile_network_active_esim (3984452275968408382) -->
+    <skip />
+    <!-- no translation found for mobile_network_inactive_esim (8777415108263057939) -->
+    <skip />
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"Jina la SIM na rangi"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Jina"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Rangi (inatumiwa na programu zinazooana)"</string>
@@ -4160,7 +4184,8 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Ungependa kubadili ili utumie SIM kadi?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Ungependa kutumia <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Unaweza kutumia SIM moja tu kwa wakati mmoja.\n\nKubadili na kutumia <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> hakutaghairi huduma yako ya <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Unaweza kutumia SIM moja tu iliyopakuliwa kwa wakati mmoja.\n\nKubadili na kutumia <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> hakutaghairi huduma yako ya <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_text_downloaded (8977951796005849471) -->
+    <skip />
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Unaweza kutumia SIM moja tu kwa wakati mmoja.\n\nKubadili SIM hakutaghairi huduma yako ya <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Unaweza kutumia SIM mbili kwa wakati mmoja. Ili utumie <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, zima SIM nyingine."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Badili utumie <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -4202,8 +4227,10 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> itatumika kwa ajili ya data ya mtandao wa simu, simu na SMS."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Hakuna SIM zinazotumika zinazopatikana"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Ili utumie data ya mtandao wa simu, vipengele vya simu na SMS baadaye, nenda kwenye mipangilio ya mtandao wako"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"SIM kadi"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Je, ungependa kufuta data yote kwenye SIM hii iliyopakuliwa?"</string>
+    <!-- no translation found for sim_card_label (6263064316075963775) -->
+    <skip />
+    <!-- no translation found for erase_sim_dialog_title (4742077437653028326) -->
+    <skip />
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Kufuta data yote kwenye SIM hii huondoa huduma ya <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> kwenye kifaa hiki.\n\nHuduma ya <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> haitaghairiwa."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Futa"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"Inafuta data yote kwenye SIM…"</string>
@@ -4355,8 +4382,10 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Ruhusu Google Fi itumie mitandao ya W+ ili kuboresha kasi na upatikanaji wa mtandao"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Mtandao wa W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"SIM ILIYOPAKULIWA"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"SIM ZILIZOPAKULIWA"</string>
+    <!-- no translation found for downloaded_sim_category_title (2876988650413179752) -->
+    <skip />
+    <!-- no translation found for downloaded_sims_category_title (487799905978489922) -->
+    <skip />
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Inatumika"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Haitumiki"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Chaguomsingi ya <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -4412,7 +4441,8 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Mipangilio ya Simu"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Inasasisha Mipangilio…"</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Hitilafu ya Mipangilio ya Simu"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Hitilafu ya mtandao au ya SIM kadi."</string>
+    <!-- no translation found for smart_forwarding_failed_text (8682640643264071789) -->
+    <skip />
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM haijaanza kutumika."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Weka Nambari za simu"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Weka Nambari ya simu"</string>
@@ -4436,10 +4466,14 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"Uliotangulia"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Unaofuata"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Onyesho la kukagua rangi"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Ombi la kufikia SIM kadi"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Kifaa kinataka kufikia SIM kadi yako. Gusa ili upate maelezo."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Ungependa kuruhusu ifikie SIM kadi?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Kifaa chenye Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, kinataka kufikia data iliyo kwenye SIM kadi yako. Hii ni pamoja na anwani zako.\n\nKikiunganishwa, <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> kitapokea simu zote zinazopigwa kwa <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <!-- no translation found for bluetooth_sim_card_access_notification_title (7351015416346359536) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_notification_content (8685623260103018309) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_title (5616323725563125179) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_content (6281997628405909566) -->
+    <skip />
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Kifaa chenye Bluetooth kinapatikana"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Kifaa kinataka kuunganisha. Gusa ili upate maelezo."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Ungependa kuunganisha kwenye kifaa chenye Bluetooth?"</string>
@@ -4453,10 +4487,8 @@
     <string name="tare_balances" msgid="731881382594747961">"Salio"</string>
     <string name="tare_consumption_limits" msgid="3230949387874396382">"Kikomo cha Matumizi"</string>
     <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Kikomo cha Matumizi ya Mwanzo"</string>
-    <!-- no translation found for tare_min_consumption_limit (3293145670921755789) -->
-    <skip />
-    <!-- no translation found for tare_max_consumption_limit (8335700580111808823) -->
-    <skip />
+    <string name="tare_min_consumption_limit" msgid="3293145670921755789">"Kikomo cha chini cha Matumizi"</string>
+    <string name="tare_max_consumption_limit" msgid="8335700580111808823">"Kikomo cha Juu zaidi cha Matumizi"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Virekebishi"</string>
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Vitendo (Gharama ya Kuzalisha Bidhaa)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Vitendo (Bei ya Msingi)"</string>
@@ -4498,7 +4530,7 @@
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Onyesha vitu kama vile, muda, hali ya hewa au taarifa zingine kwenye taswira ya skrini"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Mipangilio zaidi"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Chagua taswira ya skrini yako"</string>
-    <string name="dream_setup_description" msgid="7508547154038580296">"Chagua utakachokiona kwenye skrini yako wakati kompyuta kibao yako itakapokuwa imeambatishwa. Kifaa chako kinaweza kutumia nishati nyingi zaidi pale taswira ya skrini inapotumika."</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"Chagua utakachokiona kwenye skrini wakati kompyuta kibao yako imeshikiliwa kwenye kiweko. Kifaa chako kinaweza kutumia nishati nyingi zaidi taswira ya skrini inapotumika."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Badilisha upendavyo"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Itahitaji kuwashwa tena ili kuruhusu uwezo wa muundo huru."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Itahitaji kuwashwa tena ili kuwezesha hali ya kompyuta ya mezani kwenye skrini nyingine."</string>
