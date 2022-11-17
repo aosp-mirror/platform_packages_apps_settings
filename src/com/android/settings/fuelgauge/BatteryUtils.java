@@ -23,6 +23,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.BatteryManager;
 import android.os.BatteryStats;
 import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
@@ -397,8 +398,7 @@ public class BatteryUtils {
         final long startTime = System.currentTimeMillis();
 
         // Stuff we always need to get BatteryInfo
-        final Intent batteryBroadcast = mContext.registerReceiver(null,
-                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        final Intent batteryBroadcast = getBatteryIntent(mContext);
 
         final long elapsedRealtimeUs = PowerUtil.convertMsToUs(
                 SystemClock.elapsedRealtime());
@@ -576,5 +576,20 @@ public class BatteryUtils {
         }
 
         return -1L;
+    }
+
+    /** Gets the latest sticky battery intent from the Android system. */
+    public static Intent getBatteryIntent(Context context) {
+        return context.registerReceiver(
+                /*receiver=*/ null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+    }
+
+    /** Gets the battery level from the intent. */
+    public static int getBatteryLevel(Intent intent) {
+        final int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        final int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 0);
+        return scale == 0
+                ? -1 /*invalid battery level*/
+                : Math.round((level / (float) scale) * 100f);
     }
 }
