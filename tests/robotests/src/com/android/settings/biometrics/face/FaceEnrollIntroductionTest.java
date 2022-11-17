@@ -22,13 +22,16 @@ import static com.google.common.truth.Truth.assertWithMessage;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.when;
 
 import android.content.Intent;
+import android.hardware.face.Face;
 import android.hardware.face.FaceManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.settings.R;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
@@ -46,6 +49,9 @@ import org.robolectric.Shadows;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
@@ -75,6 +81,34 @@ public class FaceEnrollIntroductionTest {
         mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, intent);
         mActivity = mController.get();
         mActivity.mOverrideFaceManager = mFaceManager;
+    }
+
+    private void setFaceManagerToHave(int numEnrollments) {
+        List<Face> faces = new ArrayList<>();
+        for (int i = 0; i < numEnrollments; i++) {
+            faces.add(new Face("Face " + i /* name */, 1 /*faceId */, 1 /* deviceId */));
+        }
+        when(mFaceManager.getEnrolledFaces(anyInt())).thenReturn(faces);
+    }
+
+    @Test
+    public void intro_CheckCanEnroll() {
+        setFaceManagerToHave(0 /* numEnrollments */);
+        setupActivity(new Intent());
+        mController.create();
+        int result = mActivity.checkMaxEnrolled();
+
+        assertThat(result).isEqualTo(0);
+    }
+
+    @Test
+    public void intro_CheckMaxEnrolled() {
+        setFaceManagerToHave(1 /* numEnrollments */);
+        setupActivity(new Intent());
+        mController.create();
+        int result = mActivity.checkMaxEnrolled();
+
+        assertThat(result).isEqualTo(R.string.face_intro_error_max);
     }
 
     @Test
