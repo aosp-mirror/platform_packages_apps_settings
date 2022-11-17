@@ -23,7 +23,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.os.BatteryConsumer;
 import android.os.BatteryStats;
 import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
@@ -198,24 +197,6 @@ public class BatteryUtils {
         return uid == UID_TETHERING
                 ? false
                 : uid < 0 || isHiddenSystemModule(packages);
-    }
-
-    /**
-     * Returns true if the specified device power component should be excluded from the summary
-     * battery consumption list.
-     */
-    public boolean shouldHideDevicePowerComponent(BatteryConsumer consumer,
-            @BatteryConsumer.PowerComponent int powerComponentId) {
-        switch (powerComponentId) {
-            case BatteryConsumer.POWER_COMPONENT_IDLE:
-            case BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO:
-            case BatteryConsumer.POWER_COMPONENT_SCREEN:
-            case BatteryConsumer.POWER_COMPONENT_BLUETOOTH:
-            case BatteryConsumer.POWER_COMPONENT_WIFI:
-                return true;
-            default:
-                return false;
-        }
     }
 
     /**

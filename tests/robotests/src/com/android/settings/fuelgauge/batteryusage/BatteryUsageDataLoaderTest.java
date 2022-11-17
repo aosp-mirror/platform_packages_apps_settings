@@ -20,7 +20,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -59,8 +58,6 @@ public final class BatteryUsageDataLoaderTest {
     @Mock
     private BatteryUsageStats mBatteryUsageStats;
     @Mock
-    private BatteryAppListPreferenceController mMockBatteryAppListController;
-    @Mock
     private BatteryEntry mMockBatteryEntry;
     @Captor
     private ArgumentCaptor<BatteryUsageStatsQuery> mStatsQueryCaptor;
@@ -69,7 +66,6 @@ public final class BatteryUsageDataLoaderTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        BatteryUsageDataLoader.sController = mMockBatteryAppListController;
         doReturn(mContext).when(mContext).getApplicationContext();
         doReturn(mBatteryStatsManager).when(mContext).getSystemService(
                 Context.BATTERY_STATS_SERVICE);
@@ -84,8 +80,7 @@ public final class BatteryUsageDataLoaderTest {
         batteryEntryList.add(mMockBatteryEntry);
         when(mBatteryStatsManager.getBatteryUsageStats(mStatsQueryCaptor.capture()))
                 .thenReturn(mBatteryUsageStats);
-        when(mMockBatteryAppListController.getBatteryEntryList(mBatteryUsageStats, true))
-                .thenReturn(batteryEntryList);
+        BatteryUsageDataLoader.sFakeBatteryEntryListSupplier = () -> batteryEntryList;
 
         BatteryUsageDataLoader.loadUsageData(mContext);
 
@@ -93,24 +88,6 @@ public final class BatteryUsageDataLoaderTest {
         assertThat(queryFlags
                 & BatteryUsageStatsQuery.FLAG_BATTERY_USAGE_STATS_INCLUDE_HISTORY)
                 .isNotEqualTo(0);
-        verify(mMockBatteryAppListController)
-                .getBatteryEntryList(mBatteryUsageStats, /*showAllApps=*/ true);
-        verify(mMockContentResolver).insert(any(), any());
-    }
-
-    @Test
-    public void loadUsageData_nullBatteryUsageStats_notLoadBatteryEntryData() {
-        when(mBatteryStatsManager.getBatteryUsageStats(mStatsQueryCaptor.capture()))
-                .thenReturn(null);
-
-        BatteryUsageDataLoader.loadUsageData(mContext);
-
-        final int queryFlags = mStatsQueryCaptor.getValue().getFlags();
-        assertThat(queryFlags
-                & BatteryUsageStatsQuery.FLAG_BATTERY_USAGE_STATS_INCLUDE_HISTORY)
-                .isNotEqualTo(0);
-        verify(mMockBatteryAppListController, never())
-                .getBatteryEntryList(mBatteryUsageStats, /*showAllApps=*/ true);
         verify(mMockContentResolver).insert(any(), any());
     }
 
@@ -118,8 +95,7 @@ public final class BatteryUsageDataLoaderTest {
     public void loadUsageData_nullBatteryEntryList_insertFakeDataIntoProvider() {
         when(mBatteryStatsManager.getBatteryUsageStats(mStatsQueryCaptor.capture()))
                 .thenReturn(mBatteryUsageStats);
-        when(mMockBatteryAppListController.getBatteryEntryList(mBatteryUsageStats, true))
-                .thenReturn(null);
+        BatteryUsageDataLoader.sFakeBatteryEntryListSupplier = () -> null;
 
         BatteryUsageDataLoader.loadUsageData(mContext);
 
@@ -130,8 +106,7 @@ public final class BatteryUsageDataLoaderTest {
     public void loadUsageData_emptyBatteryEntryList_insertFakeDataIntoProvider() {
         when(mBatteryStatsManager.getBatteryUsageStats(mStatsQueryCaptor.capture()))
                 .thenReturn(mBatteryUsageStats);
-        when(mMockBatteryAppListController.getBatteryEntryList(mBatteryUsageStats, true))
-                .thenReturn(new ArrayList<BatteryEntry>());
+        BatteryUsageDataLoader.sFakeBatteryEntryListSupplier = () -> new ArrayList<BatteryEntry>();
 
         BatteryUsageDataLoader.loadUsageData(mContext);
 
