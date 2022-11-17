@@ -66,6 +66,7 @@ public class SettingsInitialize extends BroadcastReceiver {
         UserInfo userInfo = um.getUserInfo(UserHandle.myUserId());
         final PackageManager pm = context.getPackageManager();
         managedProfileSetup(context, pm, broadcast, userInfo);
+        cloneProfileSetup(context, pm, userInfo);
         webviewSettingSetup(context, pm, userInfo);
         ThreadUtils.postOnBackgroundThread(() -> refreshExistingShortcuts(context));
         enableTwoPaneDeepLinkActivityIfNecessary(pm, context);
@@ -104,13 +105,24 @@ public class SettingsInitialize extends BroadcastReceiver {
         }
 
         // Disable launcher icon
-        ComponentName settingsComponentName = new ComponentName(context, Settings.class);
-        pm.setComponentEnabledSetting(settingsComponentName,
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+        disableComponent(pm, new ComponentName(context, Settings.class));
         // Disable shortcut picker.
-        ComponentName shortcutComponentName = new ComponentName(
-                context, CreateShortcutActivity.class);
-        pm.setComponentEnabledSetting(shortcutComponentName,
+        disableComponent(pm, new ComponentName(context, CreateShortcutActivity.class));
+    }
+
+    private void cloneProfileSetup(Context context, PackageManager pm, UserInfo userInfo) {
+        if (userInfo == null || !userInfo.isCloneProfile()) {
+            return;
+        }
+        // Disable launcher icon
+        disableComponent(pm, new ComponentName(context, Settings.class));
+
+        //Disable Shortcut picker
+        disableComponent(pm, new ComponentName(context, CreateShortcutActivity.class));
+    }
+
+    private void disableComponent(PackageManager pm, ComponentName componentName) {
+        pm.setComponentEnabledSetting(componentName,
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
     }
 
