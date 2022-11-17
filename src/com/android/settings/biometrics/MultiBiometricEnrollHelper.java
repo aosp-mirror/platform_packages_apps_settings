@@ -103,10 +103,9 @@ public class MultiBiometricEnrollHelper {
                         0 /* requestCode */, faceIntent,
                         PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
                 intent.putExtra(EXTRA_ENROLL_AFTER_FINGERPRINT, faceAfterFp);
-
-                BiometricUtils.launchEnrollForResult(mActivity, intent, REQUEST_FINGERPRINT_ENROLL,
-                        hardwareAuthToken, mGkPwHandle, mUserId);
             }
+            BiometricUtils.launchEnrollForResult(mActivity, intent, REQUEST_FINGERPRINT_ENROLL,
+                    hardwareAuthToken, mGkPwHandle, mUserId);
         }));
     }
 }
