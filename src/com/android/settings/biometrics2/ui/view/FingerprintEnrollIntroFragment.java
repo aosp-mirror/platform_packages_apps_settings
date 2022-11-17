@@ -89,7 +89,7 @@ public class FingerprintEnrollIntroFragment extends Fragment {
             @Nullable Bundle savedInstanceState) {
 
         final Context context = inflater.getContext();
-        mView = inflater.inflate(R.layout.fingerprint_enroll_introduction, container);
+        mView = inflater.inflate(R.layout.fingerprint_enroll_introduction, container, false);
 
         final ImageView iconFingerprint = mView.findViewById(R.id.icon_fingerprint);
         final ImageView iconDeviceLocked = mView.findViewById(R.id.icon_device_locked);
