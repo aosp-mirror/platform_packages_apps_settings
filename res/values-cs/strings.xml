@@ -459,8 +459,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Model obličeje bude trvale a bezpečně smazán.\n\nPo smazání budete k odemknutí telefonu potřebovat PIN, gesto nebo heslo."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Odemykejte telefon pomocí obličeje"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Otisk prstu"</string>
-    <!-- no translation found for security_settings_fingerprint_settings_preferences_category (8975029409126780752) -->
-    <skip />
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Při použití odemknutí otiskem prstu"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Otisk prstu pro práci"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Správa otisků prstů"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"K čemu otisk používat"</string>
@@ -597,16 +596,15 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Zaregistrováno <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registrace otisku prstu: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Otisk byl přidán"</string>
-    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Odteď můžete otiskem prstu odemykat tablet nebo ověřovat svoji identitu, například při přihlašování do aplikací nebo schvalování nákupů"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Odteď můžete pomocí otisku prstu odemykat tablet nebo ověřovat svoji identitu, například při přihlašování do aplikací"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Odteď můžete pomocí otisku prstu odemykat zařízení nebo ověřovat svoji identitu, například při přihlašování do aplikací"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Odteď můžete pomocí otisku prstu odemykat telefon nebo ověřovat svoji identitu, například při přihlašování do aplikací"</string>
-    <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6064618417107305796) -->
     <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (1948980056333872057) -->
     <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_keywords (5557869560397089603) -->
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (3084541878035403475) -->
     <skip />
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Odemknou jen při zapnuté obrazovce"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Před odemknutím pomocí otisku prstu musí být obrazovka zapnutá. Nezamýšlené odemknutí je tak méně pravděpodobné."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Obrazovka, odemknutí"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Později"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Zvedněte prst a dotkněte se znovu"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Umístěte boční stranu prstu na snímač a podržte ho, poté ho „překulte“ na druhou stranu"</string>
@@ -2875,7 +2873,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"Podrobnosti historie"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Využití baterie"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Využití za posledních 24 hodin"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Využití od posledního plného nabití"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Zobrazit využití od posledního úplného nabití"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Využití baterie aplikací"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Podrobnosti využívání"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Upravit spotřebu energie"</string>
@@ -3070,25 +3068,25 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Využití baterie"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Od úplného nabití"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Správa využití baterie"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Celkem <xliff:g id="TIME_0">^1</xliff:g> • Od posledního nabití\npoužíváno na pozadí <xliff:g id="TIME_1">^2</xliff:g>"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"Celkem <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> na pozadí\nod posledního úplného nabití"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Celkem <xliff:g id="TIME_0">^1</xliff:g> • Za uplynulých 24 hodin\npoužíváno na pozadí <xliff:g id="TIME_1">^2</xliff:g>"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Celkem <xliff:g id="TIME_0">^1</xliff:g> • V období <xliff:g id="TIME_PERIOD">^3</xliff:g>\npoužíváno na pozadí <xliff:g id="TIME_1">^2</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"Od posledního nabití celkem méně než minutu"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"Od posledního úplného nabití celkem méně než minutu"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"Za posledních 24 hodin používáno celkem méně než minutu"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"V období <xliff:g id="TIME_PERIOD">^1</xliff:g> používáno celkem méně než minutu"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"Od posledního nabití používáno na pozadí méně než minutu"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"Od posledního úplného nabití používáno na pozadí méně než minutu"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Za posledních 24 hodin používáno na pozadí méně než minutu"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"V období <xliff:g id="TIME_PERIOD">^1</xliff:g> používáno na pozadí méně než minutu"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"Celkem <xliff:g id="TIME">^1</xliff:g> od posledního nabití"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"Celkem <xliff:g id="TIME">^1</xliff:g> od posledního úplného nabití"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"Za posledních 24 hodin používáno celkem <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"Za období <xliff:g id="TIME_PERIOD">^2</xliff:g> používáno celkem <xliff:g id="TIME_0">^1</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"Od posledního nabití používáno na pozadí <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"Od posledního úplného nabití používáno <xliff:g id="TIME">^1</xliff:g> na pozadí"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"Za posledních 24 hodin používáno na pozadí <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"V období <xliff:g id="TIME_PERIOD">^2</xliff:g> používáno na pozadí <xliff:g id="TIME_0">^1</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"Celkem <xliff:g id="TIME">^1</xliff:g> • Od posledního nabití\npoužíváno na pozadí méně než minutu"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"Celkem <xliff:g id="TIME">^1</xliff:g> • na pozadí méně než minutu\nod posledního úplného nabití"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"Celkem <xliff:g id="TIME">^1</xliff:g> • Za posledních 24 hodin\npoužíváno na pozadí méně než minutu"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"Celkem <xliff:g id="TIME_0">^1</xliff:g> • V období <xliff:g id="TIME_PERIOD">^2</xliff:g> používáno na pozadí\nméně než minutu"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"Od posledního nabití žádné využití"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"Žádné využití od posledního úplného nabití"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Za posledních 24 hodin žádné využití"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"Další uživatelé"</string>
@@ -3576,7 +3574,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Smazat <xliff:g id="USER_NAME">%1$s</xliff:g> ze zařízení"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Nastavení obrazovky uzamčení"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Přidávat uživatele z obrazovky uzamčení"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"V doku přepnout na administrativního uživatele"</string>
+    <!-- no translation found for switch_to_dock_user_when_docked (2324395443311905635) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Chcete se smazat?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Smazat tohoto uživatele?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Odstranit tento profil?"</string>

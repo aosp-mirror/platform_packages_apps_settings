@@ -453,8 +453,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Ansiktsmodellen din blir slettet permanent og sikkert.\n\nEtter slettingen trenger du PIN-kode, mønster eller passord når du skal låse opp telefonen."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Bruk ansiktslås til å låse opp telefonen"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Fingeravtrykk"</string>
-    <!-- no translation found for security_settings_fingerprint_settings_preferences_category (8975029409126780752) -->
-    <skip />
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Ved bruk av opplåsing med fingeravtrykk"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingeravtrykk for jobb"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Admin. fingeravtrykk"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Bruk fingeravtrykk for"</string>
@@ -589,16 +588,15 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Registrert <xliff:g id="PERCENTAGE">%d</xliff:g> prosent"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registrerer fingeravtrykket: <xliff:g id="PERCENTAGE">%d</xliff:g> prosent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingeravtrykket er lagt til"</string>
-    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Nå kan du bruke fingeravtrykket til å låse opp nettbrettet eller bekrefte at det er deg, for eksempel når du logger på apper eller godkjenner kjøp"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Nå kan du bruke fingeravtrykket til å låse opp nettbrettet eller bekrefte at det er deg, for eksempel når du logger på apper"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Nå kan du bruke fingeravtrykket til å låse opp enheten eller bekrefte at det er deg, for eksempel når du logger på apper"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Nå kan du bruke fingeravtrykket til å låse opp telefonen eller bekrefte at det er deg, for eksempel når du logger på apper"</string>
-    <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6064618417107305796) -->
     <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (1948980056333872057) -->
     <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_keywords (5557869560397089603) -->
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (3084541878035403475) -->
     <skip />
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Lås bare opp enheten når skjermen er på"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Skjermen må være på før du kan låse opp enheten med fingeravtrykket. Dermed reduseres sannsynligheten for at enheten låses opp ved et uhell."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Skjerm, opplåsing"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Gjør det senere"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Løft fingeren og trykk igjen"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Plasser siden av fingeravtrykket på sensoren og hold. Bytt deretter til den andre siden."</string>
@@ -1523,8 +1521,7 @@
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Utilgjengelig fordi sengetidsmodus er på"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Bruk skjermsparer"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Når enheten lades / er i dokken"</string>
-    <!-- no translation found for screensaver_settings_summary_dock_and_charging (8485905100159376156) -->
-    <skip />
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Når enheten er dokket og lader"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Når enheten lades"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Når enheten er i dokken"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Aldri"</string>
@@ -2696,7 +2693,7 @@
     <string name="touch_filtered_warning" msgid="4225815157460318241">"Fordi en app skjuler tillatelsesforespørselen, kan ikke Innstillinger bekrefte svaret ditt."</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> ber om full kontroll over denne enheten. Tjenesten kan lese skjermen og handle på vegne av brukere med tilgjengelighetsbehov. Dette kontrollnivået er ikke passende for de fleste apper."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Full kontroll er passende for apper som hjelper deg med tilgjengelighetsbehov, men ikke for de fleste apper."</string>
-    <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Se og kontrollér skjermen"</string>
+    <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Se og kontroller skjermen"</string>
     <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Den kan lese alt innhold på skjermen og vise innhold over andre apper."</string>
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Se og utfør handlinger"</string>
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Den kan spore kommunikasjonen din med en app eller maskinvaresensor og kommunisere med apper på dine vegne."</string>
@@ -2814,7 +2811,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"Loggdetaljer"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Batteribruk"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Se bruk de siste 24 timene"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Se bruk siden siste fulle opplading"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Se bruk siden siste fullading"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Batteribruk for apper"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Bruksdetaljer"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Juster strømforbruk"</string>
@@ -2995,25 +2992,25 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Batteribruk"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Siden sist batteriet var fulladet"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Styr batteribruk"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> totalt • <xliff:g id="TIME_1">^2</xliff:g> i bakgrunnen\nsiden sist batteriet var fulladet"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"<xliff:g id="TIME_0">^1</xliff:g> totalt • <xliff:g id="TIME_1">^2</xliff:g> i bakgrunnen\nsiden siste fullading"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> totalt • <xliff:g id="TIME_1">^2</xliff:g> i bakgrunnen\nde siste 24 timene"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"<xliff:g id="TIME_0">^1</xliff:g> totalt • <xliff:g id="TIME_1">^2</xliff:g> i bakgrunnen\ni perioden <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"Totalt mindre enn ett minutt siden sist batteriet var fulladet"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"Totalt under et minutt siden siste fullading"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"Totalt mindre enn ett minutt de siste 24 timene"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Totalt mindre enn ett minutt <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"Mindre enn ett minutt i bakgrunnen siden sist batteriet var fulladet"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"Under et minutt i bakgrunnen siden siste fullading"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Mindre enn ett minutt i bakgrunnen de siste 24 timene"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Mindre enn ett minutt i bakgrunnen <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"<xliff:g id="TIME">^1</xliff:g> totalt siden sist batteriet var fulladet"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"<xliff:g id="TIME">^1</xliff:g> totalt siden siste fullading"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"<xliff:g id="TIME">^1</xliff:g> totalt de siste 24 timene"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_0">^1</xliff:g> i perioden <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"<xliff:g id="TIME">^1</xliff:g> i bakgrunnen siden sist batteriet var fulladet"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"<xliff:g id="TIME">^1</xliff:g> i bakgrunnen siden siste fullading"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"<xliff:g id="TIME">^1</xliff:g> i bakgrunnen de siste 24 timene"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> i bakgrunnen <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"<xliff:g id="TIME">^1</xliff:g> totalt • mindre enn ett minutt i bakgrunnen\nsiden sist batteriet var fulladet"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"<xliff:g id="TIME">^1</xliff:g> totalt • under et minutt i bakgrunnen\nsiden siste fullading"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"<xliff:g id="TIME">^1</xliff:g> totalt • mindre enn ett minutt i bakgrunnen\nde siste 24 timene"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"<xliff:g id="TIME_0">^1</xliff:g> totalt • mindre enn et minutt i bakgrunnen\ni perioden <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"Ingen bruk siden sist batteriet var fulladet"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"Ingen bruk siden siste fullading"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Ingen bruk de siste 24 timene"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"Andre brukere"</string>
@@ -3493,7 +3490,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Slett <xliff:g id="USER_NAME">%1$s</xliff:g> fra denne enheten"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Innstillinger for låseskjermen"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Legg til brukere fra låseskjermen"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"Bytt til administratorbruker under dokking"</string>
+    <!-- no translation found for switch_to_dock_user_when_docked (2324395443311905635) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Vil du slette deg selv?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Vil du slette brukeren?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Fjerne denne profilen?"</string>
@@ -3963,7 +3961,7 @@
     <string name="recent_notifications_see_all_title" msgid="3087299996651692987">"Se alt fra de siste 7 dagene"</string>
     <string name="general_notification_header" msgid="3669031068980713359">"Administrer"</string>
     <string name="app_notification_field" msgid="3858667320444612716">"Appinnstillinger"</string>
-    <string name="app_notification_field_summary" msgid="5981393613897713471">"Kontrollér varsler fra enkeltapper"</string>
+    <string name="app_notification_field_summary" msgid="5981393613897713471">"Kontroller varsler fra enkeltapper"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Generelt"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Jobbvarsler"</string>
     <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"Jobbprofil"</string>
@@ -4120,7 +4118,7 @@
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Aldri"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Enhets- og appvarsler"</string>
-    <string name="manage_notification_access_summary" msgid="2907135226478903997">"Kontrollér hvilke apper og enheter som kan lese varsler"</string>
+    <string name="manage_notification_access_summary" msgid="2907135226478903997">"Kontroller hvilke apper og enheter som kan lese varsler"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Tilgang til varsler fra jobbprofilen er blokkert"</string>
     <string name="manage_notification_access_summary_zero" msgid="7528633634628627431">"Apper kan ikke lese varsler"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="3703008881487586312">
@@ -4206,8 +4204,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"I tråd med det du har valgt, hindrer Android at varsler fra denne appen vises på denne enheten"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"I tråd med det du har valgt, blokkerer Android denne varselkategorien fra å vises på denne enheten"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"I tråd med det du har valgt, blokkerer Android denne varselgruppen fra å vises på denne enheten"</string>
-    <!-- no translation found for app_notifications_not_send_desc (5683060986735070528) -->
-    <skip />
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Denne appen sender ikke varsler"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Kategorier"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Annet"</string>
     <plurals name="notification_group_summary" formatted="false" msgid="483490958130993160">
@@ -4520,7 +4517,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Ingen tillatelser er gitt"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Ingen tillatelser er forespurt"</string>
-    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Kontrollér apptilgang til dataene dine"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Kontroller apptilgang til dataene dine"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"Personvernoversikt"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Vis hvilke apper som nylig har brukt tillatelser"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Ubrukte apper"</string>
@@ -4979,7 +4976,7 @@
     <string name="special_access_more" msgid="132919514147475846">"Se mer"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Tilbakestill kallgrense for ShortcutManager API"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"Frekvensberegning for ShortcutManager er tilbakestilt"</string>
-    <string name="notification_suggestion_title" msgid="6309263655965785411">"Kontrollér informasjon på låseskjermen"</string>
+    <string name="notification_suggestion_title" msgid="6309263655965785411">"Kontroller informasjon på låseskjermen"</string>
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Vis eller skjul varselinnhold"</string>
     <string name="page_tab_title_summary" msgid="7188875610123234454">"Alle"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Tips og brukerstøtte"</string>
