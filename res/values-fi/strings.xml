@@ -453,8 +453,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Kasvomalli poistetaan pysyvästi ja turvallisesti.\n\nPoistamisen jälkeen tarvitset PIN-koodia, kuviota tai salasanaa puhelimen lukituksen avaamiseen."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Avaa puhelimen lukitus kasvojentunnistusavauksella"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Sormenjälki"</string>
-    <!-- no translation found for security_settings_fingerprint_settings_preferences_category (8975029409126780752) -->
-    <skip />
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Kun sormenjälkiavaus on käytössä"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Sormenjälki (työ)"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Sormenjälkien hallinta"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Sormenj. käyttökohde"</string>
@@ -530,7 +529,7 @@
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Kasvot ja sormenjäljet lisättiin"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Kasvot ja sormenjälki lisättiin"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Otettuasi kasvojentunnistus- ja sormenjälkiavauksen käyttöön puhelimesi pyytää sormenjälkeäsi, kun käytät maskia tai olet pimeässä ympäristössä"</string>
-    <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Tapoja avata lukitus"</string>
+    <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Lukituksen avaustavat"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Avaa puhelimen lukitus"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Vahvista henkilöllisyytesi sovelluksilla"</string>
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Käytä kasvoja"</string>
@@ -589,16 +588,15 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"<xliff:g id="PERCENTAGE">%d</xliff:g> prosenttia otettu käyttöön"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Sormenjäljen käyttöönotosta <xliff:g id="PERCENTAGE">%d</xliff:g> prosenttia valmiina"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Sormenjälki lisätty"</string>
-    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Voit nyt käyttää sormenjälkeäsi tabletin lukituksen avaamiseen tai henkilöllisyyden todentamiseen esim. kirjautuessasi sovelluksiin tai hyväksyessäsi ostoksen"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Voit nyt käyttää sormenjälkeäsi tabletin lukituksen avaamiseen tai henkilöllisyyden todentamiseen esim. kirjautuessasi sovelluksiin"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Voit nyt käyttää sormenjälkeäsi laitteen lukituksen avaamiseen tai henkilöllisyyden todentamiseen esim. kirjautuessasi sovelluksiin"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Voit nyt käyttää sormenjälkeäsi puhelimen lukituksen avaamiseen tai henkilöllisyyden todentamiseen esim. kirjautuessasi sovelluksiin"</string>
-    <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6064618417107305796) -->
     <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (1948980056333872057) -->
     <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_keywords (5557869560397089603) -->
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (3084541878035403475) -->
     <skip />
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Avaa lukitus vain, kun näyttö on päällä"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Näytön täytyy olla päällä, jotta voit avata lukituksen sormenjäljellä. Näin on epätodennäköisempää, että lukitus avautuu vahingossa."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Näytön lukituksen avaaminen"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Tee myöhemmin"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Nosta sormi ja kosketa taas"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Aseta sormenjäljen reuna tunnistimen päälle ja pidä se siinä, ja tee sitten sama toiselle reunalle"</string>
@@ -2813,7 +2811,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"Historiatiedot"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Akun käyttö"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Näytä 24 viime tunnin käyttötiedot"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Katso käyttö edell. täyteen lataamisesta"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Katso täyden latauksen jälkeinen käyttö"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Sovelluksen akunkäyttö"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Käyttötiedot"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Säädä virrankäyttöä"</string>
@@ -2994,25 +2992,25 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Akun käyttö"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Edellisen täyden latauksen jälkeen"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Rajaa akunkäyttöä"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Yhteensä <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> taustalla\nviimeisimmän täyteen lataamisen jälkeen"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"Yhteensä <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> taustalla\nedellisen täyteen lataamisen jälkeen"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Yhteensä <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> taustalla\n24 viime tunnin aikana"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Yhteensä <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> taustalla\nklo <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"Yhteensä alle minuutti viimeisimmän täyteen lataamisen jälkeen"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"Yhteensä alle minuutti edellisen täyteen lataamisen jälkeen"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"Yhteensä alle minuutti 24 viime tunnin aikana"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Yhteensä alle minuutti klo <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"Alle minuutti taustalla viimeisimmän täyteen lataamisen jälkeen"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"Alle minuutti taustalla edellisen täyteen lataamisen jälkeen"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Alle minuutti taustalla 24 viime tunnin aikana"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Alle minuutti taustalla klo <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"Yhteensä <xliff:g id="TIME">^1</xliff:g> viimeisimmän täyteen lataamisen jälkeen"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"<xliff:g id="TIME">^1</xliff:g> edellisen täyteen lataamisen jälkeen"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"Yhteensä <xliff:g id="TIME">^1</xliff:g> 24 viime tunnin aikana"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"Yhteensä <xliff:g id="TIME_0">^1</xliff:g> klo <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"<xliff:g id="TIME">^1</xliff:g> taustalla viimeisimmän täyteen lataamisen jälkeen"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"<xliff:g id="TIME">^1</xliff:g> taustalla edellisen täyteen lataamisen jälkeen"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"<xliff:g id="TIME">^1</xliff:g> taustalla 24 viime tunnin aikana"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> taustalla klo <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"Yhteensä <xliff:g id="TIME">^1</xliff:g> • alle minuutti taustalla\nviimeisimmän täyteen lataamisen jälkeen"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"Yhteensä <xliff:g id="TIME">^1</xliff:g> • alle minuutti taustalla edellisen\ntäyteen lataamisen jälkeen"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"Yhteensä <xliff:g id="TIME">^1</xliff:g> • alle minuutti taustalla\n24 viime tunnin aikana"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"Yhteensä <xliff:g id="TIME_0">^1</xliff:g> • alle minuutti taustalla\nklo <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"Ei käyttöä viimeisimmän täyteen lataamisen jälkeen"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"Ei käyttöä edellisen täyteen lataamisen jälkeen"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Ei käyttöä 24 viime tunnin aikana"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"Muut käyttäjät"</string>
@@ -3492,7 +3490,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Poista <xliff:g id="USER_NAME">%1$s</xliff:g> laitteesta"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Lukitusnäytön asetukset"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Lisää käyttäjiä lukitusnäytöllä"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"Vaihda järjestelmänvalvojakäyttäjään telineessä"</string>
+    <!-- no translation found for switch_to_dock_user_when_docked (2324395443311905635) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Haluatko poistaa itsesi?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Poistetaanko käyttäjä?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Poistetaanko profiili?"</string>
