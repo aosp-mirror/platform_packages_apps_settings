@@ -53,10 +53,13 @@ public final class BatteryStateDaoTest {
         mContext = ApplicationProvider.getApplicationContext();
         mDatabase = BatteryTestUtils.setUpBatteryStateDatabase(mContext);
         mBatteryStateDao = mDatabase.batteryStateDao();
-        BatteryTestUtils.insertDataToBatteryStateDatabase(mContext, TIMESTAMP3, PACKAGE_NAME3);
-        BatteryTestUtils.insertDataToBatteryStateDatabase(mContext, TIMESTAMP2, PACKAGE_NAME2);
         BatteryTestUtils.insertDataToBatteryStateDatabase(
-                mContext, TIMESTAMP1, PACKAGE_NAME1, /*multiple=*/ true);
+                mContext, TIMESTAMP3, PACKAGE_NAME3);
+        BatteryTestUtils.insertDataToBatteryStateDatabase(
+                mContext, TIMESTAMP2, PACKAGE_NAME2);
+        BatteryTestUtils.insertDataToBatteryStateDatabase(
+                mContext, TIMESTAMP1, PACKAGE_NAME1, /*multiple=*/ true,
+                /*isFullChargeStart=*/ true);
     }
 
     @After
@@ -75,16 +78,26 @@ public final class BatteryStateDaoTest {
     }
 
     @Test
-    public void batteryStateDao_getCursorAfter() throws Exception {
-        final Cursor cursor = mBatteryStateDao.getCursorAfter(TIMESTAMP2);
-        assertThat(cursor.getCount()).isEqualTo(2);
-        assertThat(cursor.getColumnCount()).isEqualTo(CURSOR_COLUMN_SIZE);
+    public void batteryStateDao_getCursorSinceLastFullCharge() throws Exception {
+        final Cursor cursor1 = mBatteryStateDao.getCursorSinceLastFullCharge(TIMESTAMP1);
+        assertThat(cursor1.getCount()).isEqualTo(3);
+        assertThat(cursor1.getColumnCount()).isEqualTo(CURSOR_COLUMN_SIZE);
         // Verifies the queried first battery state.
-        cursor.moveToFirst();
-        assertThat(cursor.getString(3 /*packageName*/)).isEqualTo(PACKAGE_NAME3);
+        cursor1.moveToFirst();
+        assertThat(cursor1.getString(3 /*packageName*/)).isEqualTo(PACKAGE_NAME1);
         // Verifies the queried second battery state.
-        cursor.moveToNext();
-        assertThat(cursor.getString(3 /*packageName*/)).isEqualTo(PACKAGE_NAME2);
+        cursor1.moveToNext();
+        assertThat(cursor1.getString(3 /*packageName*/)).isEqualTo(PACKAGE_NAME2);
+        // Verifies the queried third battery state.
+        cursor1.moveToNext();
+        assertThat(cursor1.getString(3 /*packageName*/)).isEqualTo(PACKAGE_NAME3);
+
+        final Cursor cursor2 = mBatteryStateDao.getCursorSinceLastFullCharge(TIMESTAMP3);
+        assertThat(cursor2.getCount()).isEqualTo(1);
+        assertThat(cursor2.getColumnCount()).isEqualTo(CURSOR_COLUMN_SIZE);
+        // Verifies the queried first battery state.
+        cursor2.moveToFirst();
+        assertThat(cursor2.getString(3 /*packageName*/)).isEqualTo(PACKAGE_NAME3);
     }
 
     @Test

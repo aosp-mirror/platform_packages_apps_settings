@@ -40,9 +40,8 @@ import java.time.Duration;
 public class BatteryUsageContentProvider extends ContentProvider {
     private static final String TAG = "BatteryUsageContentProvider";
 
-    // TODO: Updates the duration to a more reasonable value for since-last-full-charge.
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    public static final Duration QUERY_DURATION_HOURS = Duration.ofHours(28);
+    public static final Duration QUERY_DURATION_HOURS = Duration.ofDays(6);
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     public static final String QUERY_KEY_TIMESTAMP = "timestamp";
@@ -141,7 +140,7 @@ public class BatteryUsageContentProvider extends ContentProvider {
         final long timestamp = mClock.millis();
         Cursor cursor = null;
         try {
-            cursor = mBatteryStateDao.getCursorAfter(firstTimestamp);
+            cursor = mBatteryStateDao.getCursorSinceLastFullCharge(firstTimestamp);
         } catch (RuntimeException e) {
             Log.e(TAG, "query() from:" + uri + " error:" + e);
         }
