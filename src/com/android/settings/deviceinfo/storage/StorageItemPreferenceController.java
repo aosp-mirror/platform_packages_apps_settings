@@ -229,7 +229,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mVolume = volume;
 
         if (mPublicStoragePreference != null) {
-            mPublicStoragePreference.setVisible(isValidPublicVolume());
+            mPublicStoragePreference.setVisible(isValidPublicVolume() && !mIsWorkProfile);
         }
 
         // If isValidPrivateVolume() is true, these preferences will become visible at
