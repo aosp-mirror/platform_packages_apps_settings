@@ -16,13 +16,17 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import static android.util.FeatureFlagUtils.SETTINGS_BIOMETRICS2_ENROLLMENT;
+
 import android.content.Context;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.fingerprint.FingerprintManager;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.ParentalControlsUtils;
+import com.android.settings.biometrics2.ui.view.FingerprintEnrollmentActivity;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
@@ -79,7 +83,9 @@ public class FingerprintStatusUtils {
      */
     public String getSettingsClassName() {
         return !hasEnrolled() && isAvailable()
-            ? FingerprintEnrollIntroductionInternal.class.getName()
+            ? (FeatureFlagUtils.isEnabled(mContext, SETTINGS_BIOMETRICS2_ENROLLMENT)
+                ? FingerprintEnrollmentActivity.class.getName()
+                : FingerprintEnrollIntroductionInternal.class.getName())
             : FingerprintSettings.class.getName();
     }
 
