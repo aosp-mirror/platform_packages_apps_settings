@@ -337,6 +337,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         addConnectedEthernetNetworkController();
         addWifiSwitchPreferenceController();
         mWifiStatusMessagePreference = findPreference(PREF_KEY_WIFI_STATUS_MESSAGE);
+
+        checkConnectivityRecovering();
     }
 
     private void updateAirplaneModeMsgPreference(boolean visible) {
@@ -380,6 +382,17 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                     new WifiSwitchPreferenceController(getContext(), getSettingsLifecycle());
         }
         mWifiSwitchPreferenceController.displayPreference(getPreferenceScreen());
+    }
+
+    private void checkConnectivityRecovering() {
+        mInternetResetHelper = new InternetResetHelper(getContext(), getLifecycle(),
+                mNetworkMobileProviderController,
+                findPreference(WifiSwitchPreferenceController.KEY),
+                mConnectedWifiEntryPreferenceCategory,
+                mFirstWifiEntryPreferenceCategory,
+                mWifiEntryPreferenceCategory,
+                mResetInternetPreference);
+        mInternetResetHelper.checkRecovering();
     }
 
     @Override
@@ -1454,16 +1467,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             Log.e(TAG, "Can't reset network because the user is a guest.");
             EventLog.writeEvent(0x534e4554, "252995826", UserHandle.myUserId(), "User is a guest");
             return;
-        }
-        if (mInternetResetHelper == null) {
-            mInternetResetHelper = new InternetResetHelper(getContext(), getLifecycle());
-            mInternetResetHelper.setResettingPreference(mResetInternetPreference);
-            mInternetResetHelper.setMobileNetworkController(mNetworkMobileProviderController);
-            mInternetResetHelper.setWifiTogglePreference(
-                    findPreference(WifiSwitchPreferenceController.KEY));
-            mInternetResetHelper.addWifiNetworkPreference(mConnectedWifiEntryPreferenceCategory);
-            mInternetResetHelper.addWifiNetworkPreference(mFirstWifiEntryPreferenceCategory);
-            mInternetResetHelper.addWifiNetworkPreference(mWifiEntryPreferenceCategory);
         }
         mInternetResetHelper.restart();
     }
