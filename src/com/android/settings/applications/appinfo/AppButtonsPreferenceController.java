@@ -352,6 +352,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                 mPackageInfo = mPm.getPackageInfo(mAppEntry.info.packageName,
                         PackageManager.MATCH_DISABLED_COMPONENTS |
                                 PackageManager.MATCH_ANY_USER |
+                                PackageManager.GET_SIGNATURES |
                                 PackageManager.GET_PERMISSIONS);
 
                 mPackageName = mAppEntry.info.packageName;
@@ -393,7 +394,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         // We don't allow uninstalling DO/PO on *any* users if it's a system app, because
         // "uninstall" is actually "downgrade to the system version + disable", and "downgrade"
         // will clear data on all users.
-        if (isSystemPackage(mActivity.getResources(), mPm, mPackageInfo.applicationInfo)) {
+        if (isSystemPackage(mActivity.getResources(), mPm, mPackageInfo)) {
             if (Utils.isProfileOrDeviceOwner(mUserManager, mDpm, mPackageInfo.packageName)) {
                 enabled = false;
             }
@@ -562,7 +563,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         // by not allowing disabling of apps signed with the
         // system cert and any launcher app in the system.
         if (mHomePackages.contains(mAppEntry.info.packageName)
-                || isSystemPackage(mActivity.getResources(), mPm, mPackageInfo.applicationInfo)) {
+                || isSystemPackage(mActivity.getResources(), mPm, mPackageInfo)) {
             // Disable button for core system applications.
             mButtonsPref.setButton2Text(R.string.disable_text)
                     .setButton2Icon(R.drawable.ic_settings_disable);
@@ -581,8 +582,8 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     }
 
     @VisibleForTesting
-    boolean isSystemPackage(Resources resources, PackageManager pm, ApplicationInfo app) {
-        return Utils.isSystemPackage(resources, pm, app);
+    boolean isSystemPackage(Resources resources, PackageManager pm, PackageInfo packageInfo) {
+        return Utils.isSystemPackage(resources, pm, packageInfo);
     }
 
     private boolean isDisabledUntilUsed() {
