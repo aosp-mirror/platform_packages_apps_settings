@@ -70,9 +70,6 @@ public class BatteryEntry {
         }
     }
 
-    public static final int MSG_UPDATE_NAME_ICON = 1;
-    public static final int MSG_REPORT_FULLY_DRAWN = 2;
-
     private static final String TAG = "BatteryEntry";
     private static final String PACKAGE_SYSTEM = "android";
 

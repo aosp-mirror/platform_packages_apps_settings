@@ -20,10 +20,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.SparseIntArray;
 
-import com.android.settings.fuelgauge.batteryusage.BatteryHistEntry;
 import com.android.settingslib.fuelgauge.Estimate;
 
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -104,12 +102,6 @@ public interface PowerUsageFeatureProvider {
     String getOldEstimateDebugString(String timeRemaining);
 
     /**
-     * Returns the string to show in the advanced usage battery page when enhanced estimates are
-     * enabled. This string notifies users that the estimate is using enhanced prediction.
-     */
-    String getAdvancedUsageScreenInfoString();
-
-    /**
      * Returns a signal to indicate if the device will need to warn the user they may not make it
      * to their next charging time.
      *
@@ -142,11 +134,6 @@ public interface PowerUsageFeatureProvider {
      * Gets a intent for one time bypass charge limited to resume charging.
      */
     Intent getResumeChargeIntent();
-
-    /**
-     * Returns battery history data with corresponding timestamp key.
-     */
-    Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context);
 
     /**
      * Returns {@link Set} for hidding applications background usage time.
