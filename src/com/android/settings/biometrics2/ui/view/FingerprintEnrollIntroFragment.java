@@ -24,18 +24,17 @@ import static com.android.settings.biometrics2.ui.model.FingerprintEnrollIntroSt
 
 import static com.google.android.setupdesign.util.DynamicColorPalette.ColorType.ACCENT;
 
-import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -69,6 +68,9 @@ public class FingerprintEnrollIntroFragment extends Fragment {
     private View mView = null;
     private FooterButton mPrimaryFooterButton = null;
     private FooterButton mSecondaryFooterButton = null;
+    private final OnClickListener mOnNextClickListener = (v) -> mViewModel.onNextButtonClick();
+    private final OnClickListener mOnSkipOrCancelClickListener =
+            (v) -> mViewModel.onSkipOrCancelButtonClick();
     private ImageView mIconShield = null;
     private TextView mFooterMessage6 = null;
     @Nullable private PorterDuffColorFilter mIconColorFilter;
@@ -150,8 +152,8 @@ public class FingerprintEnrollIntroFragment extends Fragment {
 
         final Context context = view.getContext();
 
-        mPrimaryFooterButton.setOnClickListener(mViewModel::onNextButtonClick);
-        mSecondaryFooterButton.setOnClickListener(mViewModel::onSkipOrCancelButtonClick);
+        mPrimaryFooterButton.setOnClickListener(mOnNextClickListener);
+        mSecondaryFooterButton.setOnClickListener(mOnSkipOrCancelClickListener);
 
         if (mViewModel.canAssumeUdfps()) {
             mFooterMessage6.setVisibility(View.VISIBLE);
@@ -165,15 +167,15 @@ public class FingerprintEnrollIntroFragment extends Fragment {
                 ? R.string.security_settings_fingerprint_enroll_introduction_cancel
                 : R.string.security_settings_fingerprint_enroll_introduction_no_thanks);
 
+        final GlifLayoutHelper glifLayoutHelper = new GlifLayoutHelper(getActivity(), getLayout());
         if (mViewModel.isBiometricUnlockDisabledByAdmin()
                 && !mViewModel.isParentalConsentRequired()) {
-            setHeaderText(
-                    getActivity(),
+            glifLayoutHelper.setHeaderText(
                     R.string.security_settings_fingerprint_enroll_introduction_title_unlock_disabled
             );
-            getLayout().setDescriptionText(getDescriptionDisabledByAdmin(context));
+            glifLayoutHelper.setDescriptionText(getDescriptionDisabledByAdmin(context));
         } else {
-            setHeaderText(getActivity(),
+            glifLayoutHelper.setHeaderText(
                     R.string.security_settings_fingerprint_enroll_introduction_title);
         }
         observePageStatusLiveDataIfNeed();
@@ -192,7 +194,7 @@ public class FingerprintEnrollIntroFragment extends Fragment {
         final RequireScrollMixin requireScrollMixin = getLayout()
                 .getMixin(RequireScrollMixin.class);
         requireScrollMixin.requireScrollWithButton(getActivity(), mPrimaryFooterButton,
-                getMoreButtonTextRes(), mViewModel::onNextButtonClick);
+                getMoreButtonTextRes(), mOnNextClickListener);
 
         // Always set true to setHasScrolledToBottom() before registering listener through
         // setOnRequireScrollStateChangedListener(), because listener will not be called if first
@@ -251,21 +253,6 @@ public class FingerprintEnrollIntroFragment extends Fragment {
             Log.w(TAG, "getDescriptionDisabledByAdmin, null device policy manager res");
             return "";
         }
-    }
-
-    private void setHeaderText(@NonNull Activity activity, int resId) {
-        TextView layoutTitle = getLayout().getHeaderTextView();
-        CharSequence previousTitle = layoutTitle.getText();
-        CharSequence title = activity.getText(resId);
-        if (previousTitle != title) {
-            if (!TextUtils.isEmpty(previousTitle)) {
-                layoutTitle.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
-            }
-            getLayout().setHeaderText(title);
-            getLayout().getHeaderTextView().setContentDescription(title);
-            activity.setTitle(title);
-        }
-        getLayout().getHeaderTextView().setContentDescription(activity.getText(resId));
     }
 
     void updateFooterButtons(@NonNull FingerprintEnrollIntroStatus status) {
