@@ -34,7 +34,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
-import com.android.settings.Utils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -49,6 +48,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * A helper class that loads recent app data in the background and sends it in a callback to a
@@ -65,10 +65,8 @@ public class RecentAppStatsMixin implements LifecycleObserver, OnStart {
     private final int mMaximumApps;
     private final Context mContext;
     private final PackageManager mPm;
+    private final UserManager mUserManager;
     private final PowerManager mPowerManager;
-    private final int mWorkUserId;
-    private final UsageStatsManager mPersonalUsageStatsManager;
-    private final Optional<UsageStatsManager> mWorkUsageStatsManager;
     private final ApplicationsState mApplicationsState;
     private final List<RecentAppStatsListener> mAppStatsListeners;
     private Calendar mCalendar;
@@ -89,13 +87,7 @@ public class RecentAppStatsMixin implements LifecycleObserver, OnStart {
         mMaximumApps = maximumApps;
         mPm = mContext.getPackageManager();
         mPowerManager = mContext.getSystemService(PowerManager.class);
-        final UserManager userManager = mContext.getSystemService(UserManager.class);
-        mWorkUserId = Utils.getManagedProfileId(userManager, UserHandle.myUserId());
-        mPersonalUsageStatsManager = mContext.getSystemService(UsageStatsManager.class);
-        final UserHandle workUserHandle = Utils.getManagedProfile(userManager);
-        mWorkUsageStatsManager = Optional.ofNullable(workUserHandle).map(
-                handle -> mContext.createContextAsUser(handle, /* flags */ 0)
-                        .getSystemService(UsageStatsManager.class));
+        mUserManager = mContext.getSystemService(UserManager.class);
         mApplicationsState = ApplicationsState.getInstance(
                 (Application) mContext.getApplicationContext());
         mRecentApps = new ArrayList<>();
@@ -122,34 +114,34 @@ public class RecentAppStatsMixin implements LifecycleObserver, OnStart {
         mCalendar = Calendar.getInstance();
         mCalendar.add(Calendar.DAY_OF_YEAR, -1);
 
-        final int personalUserId = UserHandle.myUserId();
-        final List<UsageStats> personalStats =
-                getRecentAppsStats(mPersonalUsageStatsManager, personalUserId);
-        final List<UsageStats> workStats = mWorkUsageStatsManager
-                .map(statsManager -> getRecentAppsStats(statsManager, mWorkUserId))
-                .orElse(new ArrayList<>());
+        List<UsageStatsWrapper> usageStatsAllUsers = new ArrayList<>();
 
-        // Both lists are already sorted, so we can create a sorted merge in linear time
-        int personal = 0;
-        int work = 0;
-        while (personal < personalStats.size() && work < workStats.size()
-                && mRecentApps.size() < limit) {
-            UsageStats currentPersonal = personalStats.get(personal);
-            UsageStats currentWork = workStats.get(work);
-            if (currentPersonal.getLastTimeUsed() > currentWork.getLastTimeUsed()) {
-                mRecentApps.add(new UsageStatsWrapper(currentPersonal, personalUserId));
-                personal++;
+        List<UserHandle> profiles = mUserManager.getUserProfiles();
+        for (UserHandle userHandle : profiles) {
+            int userId = userHandle.getIdentifier();
+
+            final Optional<UsageStatsManager> usageStatsManager;
+            if (userHandle.getIdentifier() == UserHandle.myUserId()) {
+                usageStatsManager = Optional.ofNullable(userHandle).map(
+                        handle -> mContext.getSystemService(UsageStatsManager.class));
             } else {
-                mRecentApps.add(new UsageStatsWrapper(currentWork, mWorkUserId));
-                work++;
+                usageStatsManager = Optional.ofNullable(userHandle).map(
+                        handle -> mContext.createContextAsUser(handle, /* flags */ 0)
+                                .getSystemService(UsageStatsManager.class));
             }
+
+            List<UsageStats> profileStats = usageStatsManager
+                    .map(statsManager -> getRecentAppsStats(statsManager, userId))
+                    .orElse(new ArrayList<>());
+            usageStatsAllUsers.addAll(profileStats.stream()
+                        .map(usageStats-> new UsageStatsWrapper(usageStats, userId))
+                        .collect(Collectors.toList()));
         }
-        while (personal < personalStats.size() && mRecentApps.size() < limit) {
-            mRecentApps.add(new UsageStatsWrapper(personalStats.get(personal++), personalUserId));
-        }
-        while (work < workStats.size() && mRecentApps.size() < limit) {
-            mRecentApps.add(new UsageStatsWrapper(workStats.get(work++), mWorkUserId));
-        }
+
+        // Sort apps by latest timestamp.
+        usageStatsAllUsers.sort(
+                Comparator.comparingLong(a -> -1 * a.mUsageStats.getLastTimeUsed()));
+        mRecentApps.addAll(usageStatsAllUsers.stream().limit(limit).collect(Collectors.toList()));
     }
 
     private List<UsageStats> getRecentAppsStats(UsageStatsManager usageStatsManager, int userId) {
