@@ -23,6 +23,7 @@ import com.android.settings.applications.AppStateAlarmsAndRemindersBridge;
 import com.android.settings.applications.AppStateAppBatteryUsageBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateLocaleBridge;
+import com.android.settings.applications.AppStateLongBackgroundTasksBridge;
 import com.android.settings.applications.AppStateManageExternalStorageBridge;
 import com.android.settings.applications.AppStateMediaManagementAppsBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
@@ -61,6 +62,7 @@ public class AppFilterRegistry {
                 FILTER_APPS_BATTERY_UNRESTRICTED,
                 FILTER_APPS_BATTERY_OPTIMIZED,
                 FILTER_APPS_BATTERY_RESTRICTED,
+                FILTER_LONG_BACKGROUND_TASKS,
             })
     @interface FilterType {}
 
@@ -89,8 +91,9 @@ public class AppFilterRegistry {
     public static final int FILTER_APPS_BATTERY_UNRESTRICTED = 21;
     public static final int FILTER_APPS_BATTERY_OPTIMIZED = 22;
     public static final int FILTER_APPS_BATTERY_RESTRICTED = 23;
-    // Next id: 24. If you add an entry here, please change NUM_FILTER_ENTRIES.
-    private static final int NUM_FILTER_ENTRIES = 24;
+    public static final int FILTER_LONG_BACKGROUND_TASKS = 24;
+    // Next id: 25. If you add an entry here, please change NUM_FILTER_ENTRIES.
+    private static final int NUM_FILTER_ENTRIES = 25;
 
     private static AppFilterRegistry sRegistry;
 
@@ -242,6 +245,12 @@ public class AppFilterRegistry {
                         AppStateAppBatteryUsageBridge.FILTER_BATTERY_RESTRICTED_APPS,
                         FILTER_APPS_BATTERY_RESTRICTED,
                         R.string.filter_battery_restricted_title);
+
+        // Apps that can run long background tasks
+        mFilters[FILTER_LONG_BACKGROUND_TASKS] = new AppFilterItem(
+                AppStateLongBackgroundTasksBridge.FILTER_LONG_JOBS_APPS,
+                FILTER_LONG_BACKGROUND_TASKS,
+                R.string.long_background_tasks_title);
     }
 
 
@@ -280,6 +289,8 @@ public class AppFilterRegistry {
                 return FILTER_APPS_LOCALE;
             case ManageApplications.LIST_TYPE_BATTERY_OPTIMIZATION:
                 return FILTER_APPS_BATTERY_OPTIMIZED;
+            case ManageApplications.LIST_TYPE_LONG_BACKGROUND_TASKS:
+                return FILTER_LONG_BACKGROUND_TASKS;
             default:
                 return FILTER_APPS_ALL;
         }

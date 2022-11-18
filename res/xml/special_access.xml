@@ -108,6 +108,16 @@
         settings:controller="com.android.settings.applications.specialaccess.DataSaverController" />
 
     <Preference
+        android:key="long_background_tasks"
+        android:title="@string/long_background_tasks_title"
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+        settings:keywords="@string/keywords_long_background_tasks">
+        <extra
+            android:name="classname"
+            android:value="com.android.settings.Settings$LongBackgroundTasksActivity" />
+    </Preference>
+
+    <Preference
         android:key="manage_external_sources"
         android:title="@string/install_other_apps"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"

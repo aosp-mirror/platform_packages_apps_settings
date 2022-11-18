@@ -26,10 +26,12 @@ import static com.android.settings.applications.manageapplications.AppFilterRegi
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_USAGE_ACCESS;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_WITH_OVERLAY;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_WRITE_SETTINGS;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_LONG_BACKGROUND_TASKS;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_ALARMS_AND_REMINDERS;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_BATTERY_OPTIMIZATION;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_GAMES;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_HIGH_POWER;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_LONG_BACKGROUND_TASKS;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MAIN;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MANAGE_SOURCES;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MEDIA_MANAGEMENT_APPS;
@@ -77,5 +79,8 @@ public class AppFilterRegistryTest {
         assertThat(registry.getDefaultFilterType(LIST_TYPE_STORAGE)).isEqualTo(FILTER_APPS_ALL);
 
         assertThat(registry.getDefaultFilterType(LIST_TYPE_GAMES)).isEqualTo(FILTER_APPS_ALL);
+
+        assertThat(registry.getDefaultFilterType(LIST_TYPE_LONG_BACKGROUND_TASKS))
+                .isEqualTo(FILTER_LONG_BACKGROUND_TASKS);
     }
 }
