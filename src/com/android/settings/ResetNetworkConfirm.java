@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.settings.SettingsEnums;
@@ -35,8 +33,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.RecoverySystem;
-import android.os.UserHandle;
-import android.os.UserManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
 import android.telephony.TelephonyManager;
@@ -52,9 +48,8 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.core.InstrumentedFragment;
-import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
+import com.android.settings.network.ResetNetworkRestrictionViewBuilder;
 import com.android.settings.network.apn.ApnSettings;
-import com.android.settingslib.RestrictedLockUtilsInternal;
 
 /**
  * Confirm and execute a reset of the network settings to a clean "just out of the box"
@@ -262,17 +257,10 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
-                mActivity, UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId());
-        if (RestrictedLockUtilsInternal.hasBaseUserRestriction(mActivity,
-                UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId())) {
-            return inflater.inflate(R.layout.network_reset_disallowed_screen, null);
-        } else if (admin != null) {
-            new ActionDisabledByAdminDialogHelper(mActivity)
-                    .prepareDialogBuilder(UserManager.DISALLOW_NETWORK_RESET, admin)
-                    .setOnDismissListener(__ -> mActivity.finish())
-                    .show();
-            return new View(mActivity);
+        View view = (new ResetNetworkRestrictionViewBuilder(mActivity)).build();
+        if (view != null) {
+            Log.w(TAG, "Access deny.");
+            return view;
         }
         mContentView = inflater.inflate(R.layout.reset_network_confirm, null);
         establishFinalConfirmationState();
