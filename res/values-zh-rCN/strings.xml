@@ -13,6 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"是"</string>
@@ -285,8 +286,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"系统会安全地永久删除您的脸部模型。\n\n脸部模型删除后，如需解锁手机，您将需要使用 PIN 码、解锁图案或密码。"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"使用人脸解锁功能解锁手机"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"指纹"</string>
-    <!-- no translation found for security_settings_fingerprint_settings_preferences_category (8975029409126780752) -->
-    <skip />
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"使用指纹解锁功能时"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"工作资料指纹"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"添加指纹"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
@@ -366,13 +366,9 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"当前注册进度为百分之 <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"指纹注册进度为百分之 <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"指纹已添加"</string>
-    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"现在，您可以通过指纹来解锁平板电脑或验证自己的身份，例如登录各种应用或批准购买交易"</string>
-    <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_keywords (5557869560397089603) -->
-    <skip />
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"仅在屏幕开启时解锁"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"屏幕必须开启，然后您才能使用指纹解锁。这样可以降低意外解锁的可能性。"</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"屏幕, 解锁, Screen, Unlock"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"以后再说"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"移开手指，然后再次触摸传感器"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"将指纹的一侧放在传感器上并按住，然后切换到另一侧"</string>
@@ -465,31 +461,43 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"要移除个人资料保护功能吗？"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"手机丢失或被盗时，解锁图案可保护手机中的数据"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"手机丢失或被盗时，解锁图案可保护手机中的数据。<xliff:g id="EMPTY_LINE">
+
 </xliff:g>这样做也会删除您的设备上存储的指纹模型。您将无法使用指纹在应用内验证自己的身份。"</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"手机丢失或被盗时，解锁图案可保护手机中的数据。<xliff:g id="EMPTY_LINE">
+
 </xliff:g>系统也会安全地永久删除您的脸部模型。您将无法使用面孔在应用内验证自己的身份。"</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"手机丢失或被盗时，解锁图案可保护手机中的数据。<xliff:g id="EMPTY_LINE">
+
 </xliff:g>这样做会删除您的设备上存储的指纹模型。系统也会安全地永久删除您的脸部模型。您将无法使用面孔或指纹在应用内验证自己的身份。"</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"手机丢失或被盗时，PIN 码可保护手机中的数据"</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"手机丢失或被盗时，PIN 码可保护手机中的数据。<xliff:g id="EMPTY_LINE">
+
 </xliff:g>这样做也会删除您的设备上存储的指纹模型。您将无法使用指纹在应用内验证自己的身份。"</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"手机丢失或被盗时，PIN 码可保护手机中的数据。<xliff:g id="EMPTY_LINE">
+
 </xliff:g>系统也会安全地永久删除您的脸部模型。您将无法使用面孔在应用内验证自己的身份。"</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"手机丢失或被盗时，PIN 码可保护手机中的数据。<xliff:g id="EMPTY_LINE">
+
 </xliff:g>这样做会删除您的设备上存储的指纹模型。系统也会安全地永久删除您的脸部模型。您将无法使用面孔或指纹在应用内验证自己的身份。"</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"手机丢失或被盗时，密码可保护手机中的数据"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"手机丢失或被盗时，密码可保护手机中的数据。<xliff:g id="EMPTY_LINE">
+
 </xliff:g>这样做也会删除您的设备上存储的指纹模型。您将无法使用指纹在应用内验证自己的身份。"</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"手机丢失或被盗时，密码可保护手机中的数据。<xliff:g id="EMPTY_LINE">
+
 </xliff:g>系统也会安全地永久删除您的脸部模型。您将无法使用面孔在应用内验证自己的身份。"</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"手机丢失或被盗时，密码可保护手机中的数据。<xliff:g id="EMPTY_LINE">
+
 </xliff:g>这样做会删除您的设备上存储的指纹模型。系统也会安全地永久删除您的脸部模型。您将无法使用面孔或指纹在应用内验证自己的身份。"</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"移除您的屏幕锁定方式后，设备保护功能将无法使用。"</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"如果您移除屏幕锁定方式，设备保护功能将无法使用。<xliff:g id="EMPTY_LINE">
+
 </xliff:g>这样做也会删除您的设备上存储的指纹模型。您将无法使用指纹在应用内验证自己的身份。"</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"如果您移除屏幕锁定方式，设备保护功能将无法使用。<xliff:g id="EMPTY_LINE">
+
 </xliff:g>系统也会安全地永久删除您的脸部模型。您将无法使用面孔在应用内验证自己的身份。"</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"如果您移除屏幕锁定方式，设备保护功能将无法使用。<xliff:g id="EMPTY_LINE">
+
 </xliff:g>这样做会删除您的设备上存储的指纹模型。系统也会安全地永久删除您的脸部模型。您将无法使用面孔或指纹在应用内验证自己的身份。"</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"删除"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g>建议使用安全系数高的 PIN 码或密码，否则，该应用可能无法按预期运行"</string>
@@ -989,8 +997,7 @@
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"就寝模式开启时无法使用"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"使用屏保"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"充电或插入基座时"</string>
-    <!-- no translation found for screensaver_settings_summary_dock_and_charging (8485905100159376156) -->
-    <skip />
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"插入基座充电时"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"充电时"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"插入基座时"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"一律不"</string>
@@ -1005,13 +1012,18 @@
     <string name="force_bold_text" msgid="4620929631102086716">"粗体文字"</string>
     <string name="title_font_size" msgid="570613010306330622">"字体大小"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"放大或缩小文字"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"SIM 卡锁定设置"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"SIM 卡锁定"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"锁定 SIM 卡"</string>
+    <!-- no translation found for sim_lock_settings (7331982427303002613) -->
+    <skip />
+    <!-- no translation found for sim_lock_settings_category (6475255139493877786) -->
+    <skip />
+    <!-- no translation found for sim_pin_toggle (6814489621760857328) -->
+    <skip />
     <string name="sim_pin_change" msgid="5978881209990507379">"更改 SIM 卡 PIN 码"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"SIM 卡 PIN 码"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"锁定 SIM 卡"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"解锁 SIM 卡"</string>
+    <!-- no translation found for sim_enable_sim_lock (6486354334679225748) -->
+    <skip />
+    <!-- no translation found for sim_disable_sim_lock (6939439812841857306) -->
+    <skip />
     <string name="sim_enter_old" msgid="6882545610939674813">"旧 SIM 卡 PIN 码"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"新 SIM 卡 PIN 码"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"重新输入新的PIN码"</string>
@@ -1026,7 +1038,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"要使用<xliff:g id="CARRIER">%1$s</xliff:g>的移动数据吗？"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"您目前使用的是<xliff:g id="CARRIER2_0">%2$s</xliff:g>的移动数据。如果切换到<xliff:g id="CARRIER1">%1$s</xliff:g>，系统将不再使用<xliff:g id="CARRIER2_1">%2$s</xliff:g>的移动数据。"</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"使用“<xliff:g id="CARRIER">%1$s</xliff:g>”"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"要更新首选 SIM 卡吗？"</string>
+    <!-- no translation found for sim_preferred_title (8850185380445309835) -->
+    <skip />
     <string name="sim_preferred_message" msgid="6004009449266648351">"“<xliff:g id="NEW_SIM">%1$s</xliff:g>”是此设备上唯一的 SIM 卡。您要将此 SIM 卡用于移动数据网络、通话和收发短信吗？"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"SIM 卡 PIN 码不正确，您现在必须联系运营商为您解锁设备。"</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1179,17 +1192,20 @@
     <string name="reset_network_title" msgid="1395494440355807616">"重置 WLAN、移动数据网络和蓝牙设置"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"此操作会重置所有网络设置，包括：\n\n"<li>"WLAN"</li>\n<li>"移动数据网络"</li>\n<li>"蓝牙"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"清除"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"清除已下载的 SIM 卡"</string>
+    <!-- no translation found for reset_esim_title (4194570573425902754) -->
+    <skip />
     <string name="reset_esim_desc" msgid="3662444090563399131">"此操作并不会取消任何移动服务套餐。如要下载替代 SIM 卡，请与您的运营商联系。"</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"重置设置"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"要重置所有网络设置吗？此操作无法撤消。"</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"要重置所有网络设置并清除已下载的 SIM 卡吗？此操作无法撤消。"</string>
+    <!-- no translation found for reset_network_final_desc_esim (1129251284212847939) -->
+    <skip />
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"重置设置"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"要重置网络设置吗？"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"此用户无权重置网络设置"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"网络设置已重置"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"无法清除 SIM 卡"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"发生错误，因此无法清除已下载的 SIM 卡。\n\n请重启设备，然后重试。"</string>
+    <!-- no translation found for reset_esim_error_msg (7279607120606365250) -->
+    <skip />
     <string name="main_clear_title" msgid="277664302144837723">"清除所有数据（恢复出厂设置）"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"清除所有数据（恢复出厂设置）"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"音乐"</li>\n<li>"照片"</li>\n<li>"其他用户数据"</li></string>
@@ -2027,7 +2043,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"详细电量使用记录"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"电池用量"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"查看过去 24 小时的使用情况"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"查看自上次充满电后的使用情况"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"查看自上次充满电后的电池用量"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"应用的电池用量"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"详细使用情况"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"省电提示"</string>
@@ -2118,25 +2134,25 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"电池充满电后的大致使用时长"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"电池用量数据为大致值，可能会因使用情形而变化。"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"电池用量"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"共 <xliff:g id="TIME_0">^1</xliff:g> • 自电池上次充满电后，在后台使用了 <xliff:g id="TIME_1">^2</xliff:g>\n"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"共使用了 <xliff:g id="TIME_0">^1</xliff:g> • 自上次充满电后，\n在后台使用了 <xliff:g id="TIME_1">^2</xliff:g>"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"共 <xliff:g id="TIME_0">^1</xliff:g> • 过去 24 小时内在后台使用了 <xliff:g id="TIME_1">^2</xliff:g>\n"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"共 <xliff:g id="TIME_0">^1</xliff:g> • 后台使用了 <xliff:g id="TIME_1">^2</xliff:g>\n（<xliff:g id="TIME_PERIOD">^3</xliff:g>）"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"自电池上次充满电后，共使用了不到 1 分钟"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"自上次充满电后，共使用了不到 1 分钟"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"过去 24 小时内共使用了不到 1 分钟"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"<xliff:g id="TIME_PERIOD">^1</xliff:g>之间共使用了不到 1 分钟"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"自电池上次充满电后，在后台使用了不到 1 分钟"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"自电池上次充满电后，在后台使用了不到 1 分钟"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"过去 24 小时内在后台使用了不到 1 分钟"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"<xliff:g id="TIME_PERIOD">^1</xliff:g>之间在后台使用了不到 1 分钟"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"自电池上次充满电后，共使用了 <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"自上次充满电后，共使用了 <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"过去 24 小时内共使用了 <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_PERIOD">^2</xliff:g>之间共使用了 <xliff:g id="TIME_0">^1</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"自电池上次充满电后，在后台使用了 <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"自上次充满电后，在后台使用了 <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"过去 24 小时内在后台使用了 <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_PERIOD">^2</xliff:g>之间在后台使用了 <xliff:g id="TIME_0">^1</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"共 <xliff:g id="TIME">^1</xliff:g> • 自电池上次充满电后，在后台使用了不到 1 分钟\n"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"共使用了 <xliff:g id="TIME">^1</xliff:g> • 自上次充满电后，\n在后台使用了不到 1 分钟"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"共 <xliff:g id="TIME">^1</xliff:g> • 过去 24 小时内在后台使用了不到 1 分钟\n"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"共 <xliff:g id="TIME_0">^1</xliff:g> • 后台使用了不到 1 分钟\n（<xliff:g id="TIME_PERIOD">^2</xliff:g>）"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"自电池上次充满电后未使用过"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"自上次充满电后，未曾使用"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"过去 24 小时内未使用过"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"其他用户"</string>
@@ -2547,7 +2563,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"将<xliff:g id="USER_NAME">%1$s</xliff:g>从此设备中删除"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"锁定屏幕设置"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"从锁定屏幕中添加用户"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"插入基座时切换到管理员用户"</string>
+    <!-- no translation found for switch_to_dock_user_when_docked (2324395443311905635) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"是否删除自己？"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"要删除此用户吗？"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"要移除此个人资料吗？"</string>
@@ -2673,7 +2690,8 @@
     <string name="wizard_next" msgid="3884832431439072471">"下一步"</string>
     <string name="wizard_back_adoptable" msgid="1447814356855134183">"以其他方式格式化"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"SIM 卡"</string>
+    <!-- no translation found for sim_settings_title (2254609719033946272) -->
+    <skip />
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"无法使用移动数据网络"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"点按即可选择上网用的 SIM 卡"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"一律使用这张卡进行通话"</string>
@@ -2691,7 +2709,8 @@
     <string name="sim_status_title" msgid="6188770698037109774">"SIM 卡状态"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"SIM 卡状态（SIM 卡插槽 %1$d）"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"SIM 卡已更改。"</string>
+    <!-- no translation found for sim_notification_title (2819551384383504031) -->
+    <skip />
     <string name="sim_notification_summary" msgid="5593339846307029991">"点按即可进行设置"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"每次都询问"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"必须选择"</string>
@@ -2717,6 +2736,8 @@
     <string name="account_dashboard_title" msgid="8228773251948253914">"密码和帐号"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"保存的密码、自动填充、同步的帐号"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"默认应用"</string>
+    <!-- no translation found for cloned_apps_dashboard_title (5542076801222950921) -->
+    <skip />
     <string name="system_dashboard_summary" msgid="7400745270362833832">"语言、手势、时间、备份"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"系统语言、应用语言"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, WLAN, 网络连接, 互联网, 无线, 数据, WLAN 网络"</string>
@@ -3167,8 +3188,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"根据您的要求，Android 会阻止此应用的通知显示在此设备上"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"根据您的要求，Android 会阻止这类通知显示在此设备上"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"根据您的要求，Android 会阻止这组通知显示在此设备上"</string>
-    <!-- no translation found for app_notifications_not_send_desc (5683060986735070528) -->
-    <skip />
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"此应用不会发送通知"</string>
     <string name="notification_channels" msgid="1502969522886493799">"类别"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"其他"</string>
     <string name="no_channels" msgid="4716199078612071915">"此应用未发布任何通知"</string>
@@ -3332,7 +3352,8 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"取消固定屏幕前要求输入密码"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"取消固定屏幕时锁定设备"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"删除 SIM 卡前需确认"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"须先验证身份，然后才能清除已下载的 SIM 卡"</string>
+    <!-- no translation found for confirm_sim_deletion_description (5090811029854329373) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"此工作资料由以下应用管理："</string>
     <string name="managing_admin" msgid="2633920317425356619">"由<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>管理"</string>
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"安全启动"</string>
@@ -4108,7 +4129,8 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"移动数据"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"通过移动网络访问数据"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"手机会在进入有效范围时自动切换到此运营商"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"没有可用的 SIM 卡"</string>
+    <!-- no translation found for mobile_data_settings_summary_unavailable (9176513507571883986) -->
+    <skip />
     <string name="calls_preference" msgid="2166481296066890129">"通话偏好设置"</string>
     <string name="sms_preference" msgid="7742964962568219351">"短信偏好设置"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"每次都询问"</string>
@@ -4123,8 +4145,10 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"添加更多"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"已激活 / SIM 卡"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"未激活 / SIM 卡"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"已激活 / 下载的 SIM 卡"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"未激活 / 下载的 SIM 卡"</string>
+    <!-- no translation found for mobile_network_active_esim (3984452275968408382) -->
+    <skip />
+    <!-- no translation found for mobile_network_inactive_esim (8777415108263057939) -->
+    <skip />
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"SIM 卡名称和颜色"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"名称"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"颜色（由兼容应用使用）"</string>
@@ -4160,7 +4184,8 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"要切换为使用 SIM 卡吗？"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"要使用“<xliff:g id="CARRIER_NAME">%1$s</xliff:g>”吗？"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"一次只能启用一个 SIM 卡。\n\n切换到<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>不会取消<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>服务。"</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"一次只能启用一个已下载的 SIM 卡。\n\n切换到<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>不会取消<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>服务。"</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_text_downloaded (8977951796005849471) -->
+    <skip />
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"一次只能启用一个 SIM 卡。\n\n进行切换并不会取消<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>服务。"</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"可以同时使用 2 张 SIM 卡。要使用<xliff:g id="CARRIER_NAME">%1$s</xliff:g>，请关闭另一张 SIM 卡。"</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"切换到<xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -4202,8 +4227,10 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"系统将通过<xliff:g id="CARRIER_NAME">%1$s</xliff:g>使用移动数据、通话和短信功能。"</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"没有可用的 SIM 卡"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"如要在日后使用移动数据、通话和短信功能，请转到“网络设置”部分"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"SIM 卡"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"要清除这个已下载的 SIM 卡吗？"</string>
+    <!-- no translation found for sim_card_label (6263064316075963775) -->
+    <skip />
+    <!-- no translation found for erase_sim_dialog_title (4742077437653028326) -->
+    <skip />
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"清除此 SIM 卡将从此设备中移除<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>服务。\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>的服务不会因此被取消。"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"清除"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"正在清空 SIM 卡…"</string>
@@ -4355,8 +4382,10 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"允许 Google Fi 使用 W+ 网络来提高速度和扩大覆盖范围"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ 网络"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM 卡"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"已下载的 SIM 卡"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"已下载的 SIM 卡"</string>
+    <!-- no translation found for downloaded_sim_category_title (2876988650413179752) -->
+    <skip />
+    <!-- no translation found for downloaded_sims_category_title (487799905978489922) -->
+    <skip />
     <string name="sim_category_active_sim" msgid="1503823567818544012">"使用中"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"未使用"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" /<xliff:g id="ID_1">%1$s</xliff:g>默认配置"</string>
@@ -4412,7 +4441,8 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"通话设置"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"正在更新设置…"</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"通话设置错误"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"网络或 SIM 卡错误。"</string>
+    <!-- no translation found for smart_forwarding_failed_text (8682640643264071789) -->
+    <skip />
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM 卡未激活。"</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"输入电话号码"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"输入电话号码"</string>
@@ -4436,10 +4466,14 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"上一页"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"下一页"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"颜色预览"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"SIM 卡访问请求"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"有一部设备想访问您的 SIM 卡。点按可了解详情。"</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"要允许访问 SIM 卡吗？"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"蓝牙设备“<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>”想访问您的 SIM 卡中的数据。其中包括您的联系人信息。\n\n在保持连接期间，“<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>”将会收到打给 <xliff:g id="PHONE_NUMBER">%3$s</xliff:g> 的所有电话。"</string>
+    <!-- no translation found for bluetooth_sim_card_access_notification_title (7351015416346359536) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_notification_content (8685623260103018309) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_title (5616323725563125179) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_content (6281997628405909566) -->
+    <skip />
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"有可用的蓝牙设备"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"有一部设备想要连接。点按可了解详情。"</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"要连接到蓝牙设备吗？"</string>
@@ -4453,10 +4487,8 @@
     <string name="tare_balances" msgid="731881382594747961">"可用电量"</string>
     <string name="tare_consumption_limits" msgid="3230949387874396382">"消耗量限制"</string>
     <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"初始消耗量限制"</string>
-    <!-- no translation found for tare_min_consumption_limit (3293145670921755789) -->
-    <skip />
-    <!-- no translation found for tare_max_consumption_limit (8335700580111808823) -->
-    <skip />
+    <string name="tare_min_consumption_limit" msgid="3293145670921755789">"消耗量下限"</string>
+    <string name="tare_max_consumption_limit" msgid="8335700580111808823">"消耗量上限"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"修饰符"</string>
     <string name="tare_actions_ctp" msgid="5110104015354916401">"操作（执行成本）"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"操作（基础价格）"</string>

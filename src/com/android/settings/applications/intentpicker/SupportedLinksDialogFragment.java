@@ -28,7 +28,7 @@ import android.util.Log;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -50,7 +50,7 @@ public class SupportedLinksDialogFragment extends InstrumentedDialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPackage = getArguments().getString(AppLaunchSettings.APP_PACKAGE_KEY);
-        mViewModel = ViewModelProviders.of(this.getActivity()).get(SupportedLinkViewModel.class);
+        mViewModel = new ViewModelProvider(this.getActivity()).get(SupportedLinkViewModel.class);
         mSupportedLinkWrapperList = mViewModel.getSupportedLinkWrapperList();
     }
 

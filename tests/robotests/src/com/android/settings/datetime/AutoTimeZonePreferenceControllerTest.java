@@ -16,6 +16,11 @@
 
 package com.android.settings.datetime;
 
+import static android.app.time.DetectorStatusTypes.DETECTION_ALGORITHM_STATUS_RUNNING;
+import static android.app.time.DetectorStatusTypes.DETECTOR_STATUS_RUNNING;
+import static android.app.time.LocationTimeZoneAlgorithmStatus.PROVIDER_STATUS_NOT_PRESENT;
+import static android.app.time.LocationTimeZoneAlgorithmStatus.PROVIDER_STATUS_NOT_READY;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
@@ -23,10 +28,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.time.Capabilities;
+import android.app.time.LocationTimeZoneAlgorithmStatus;
+import android.app.time.TelephonyTimeZoneAlgorithmStatus;
 import android.app.time.TimeManager;
 import android.app.time.TimeZoneCapabilities;
 import android.app.time.TimeZoneCapabilitiesAndConfig;
 import android.app.time.TimeZoneConfiguration;
+import android.app.time.TimeZoneDetectorStatus;
 import android.content.Context;
 import android.os.UserHandle;
 
@@ -215,6 +223,11 @@ public class AutoTimeZonePreferenceControllerTest {
 
     private static TimeZoneCapabilitiesAndConfig createCapabilitiesAndConfig(
             boolean autoSupported, boolean autoEnabled) {
+        TimeZoneDetectorStatus status = new TimeZoneDetectorStatus(DETECTOR_STATUS_RUNNING,
+                new TelephonyTimeZoneAlgorithmStatus(DETECTION_ALGORITHM_STATUS_RUNNING),
+                new LocationTimeZoneAlgorithmStatus(DETECTION_ALGORITHM_STATUS_RUNNING,
+                        PROVIDER_STATUS_NOT_READY, null,
+                        PROVIDER_STATUS_NOT_PRESENT, null));
         int configureAutoDetectionEnabledCapability =
                 autoSupported ? Capabilities.CAPABILITY_POSSESSED
                         : Capabilities.CAPABILITY_NOT_SUPPORTED;
@@ -227,6 +240,6 @@ public class AutoTimeZonePreferenceControllerTest {
                 .setAutoDetectionEnabled(autoEnabled)
                 .setGeoDetectionEnabled(false)
                 .build();
-        return new TimeZoneCapabilitiesAndConfig(capabilities, config);
+        return new TimeZoneCapabilitiesAndConfig(status, capabilities, config);
     }
 }

@@ -41,3 +41,11 @@ java_library {
     },
     srcs: ["fuelgauge_log.proto"],
 }
+
+java_library {
+    name: "fuelgauge-usage-state-protos-lite",
+    proto: {
+        type: "lite",
+    },
+    srcs: ["fuelgauge_usage_state.proto"],
+}

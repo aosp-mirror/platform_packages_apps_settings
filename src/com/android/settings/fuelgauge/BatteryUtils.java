@@ -23,7 +23,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.os.BatteryConsumer;
+import android.os.BatteryManager;
 import android.os.BatteryStats;
 import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
@@ -33,6 +33,7 @@ import android.os.Process;
 import android.os.SystemClock;
 import android.os.UidBatteryConsumer;
 import android.os.UserHandle;
+import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.IntDef;
@@ -52,6 +53,9 @@ import com.android.settingslib.fuelgauge.EstimateKt;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.ThreadUtils;
+
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.MessageLite;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -201,24 +205,6 @@ public class BatteryUtils {
     }
 
     /**
-     * Returns true if the specified device power component should be excluded from the summary
-     * battery consumption list.
-     */
-    public boolean shouldHideDevicePowerComponent(BatteryConsumer consumer,
-            @BatteryConsumer.PowerComponent int powerComponentId) {
-        switch (powerComponentId) {
-            case BatteryConsumer.POWER_COMPONENT_IDLE:
-            case BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO:
-            case BatteryConsumer.POWER_COMPONENT_SCREEN:
-            case BatteryConsumer.POWER_COMPONENT_BLUETOOTH:
-            case BatteryConsumer.POWER_COMPONENT_WIFI:
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    /**
      * Returns true if one the specified packages belongs to a hidden system module.
      */
     public boolean isHiddenSystemModule(String[] packages) {
@@ -335,6 +321,28 @@ public class BatteryUtils {
         }
     }
 
+    /**
+     * Parses proto object from string.
+     *
+     * @param serializedProto the serialized proto string
+     * @param protoClass class of the proto
+     * @return instance of the proto class parsed from the string
+     */
+    @SuppressWarnings("unchecked")
+    public static <T extends MessageLite> T parseProtoFromString(
+            String serializedProto, T protoClass) {
+        if (serializedProto.isEmpty()) {
+            return (T) protoClass.getDefaultInstanceForType();
+        }
+        try {
+            return (T) protoClass.getParserForType()
+                    .parseFrom(Base64.decode(serializedProto, Base64.DEFAULT));
+        } catch (InvalidProtocolBufferException e) {
+            Log.e(TAG, "Failed to deserialize proto class", e);
+            return (T) protoClass.getDefaultInstanceForType();
+        }
+    }
+
     public void setForceAppStandby(int uid, String packageName,
             int mode) {
         final boolean isPreOApp = isPreOApp(packageName);
@@ -390,8 +398,7 @@ public class BatteryUtils {
         final long startTime = System.currentTimeMillis();
 
         // Stuff we always need to get BatteryInfo
-        final Intent batteryBroadcast = mContext.registerReceiver(null,
-                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        final Intent batteryBroadcast = getBatteryIntent(mContext);
 
         final long elapsedRealtimeUs = PowerUtil.convertMsToUs(
                 SystemClock.elapsedRealtime());
@@ -569,5 +576,20 @@ public class BatteryUtils {
         }
 
         return -1L;
+    }
+
+    /** Gets the latest sticky battery intent from the Android system. */
+    public static Intent getBatteryIntent(Context context) {
+        return context.registerReceiver(
+                /*receiver=*/ null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+    }
+
+    /** Gets the battery level from the intent. */
+    public static int getBatteryLevel(Intent intent) {
+        final int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        final int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 0);
+        return scale == 0
+                ? -1 /*invalid battery level*/
+                : Math.round((level / (float) scale) * 100f);
     }
 }

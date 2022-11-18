@@ -24,13 +24,15 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 /** Load battery usage data in the background. */
 public final class BatteryUsageDataLoader {
     private static final String TAG = "BatteryUsageDataLoader";
 
+    // For testing only.
     @VisibleForTesting
-    static BatteryAppListPreferenceController sController;
+    static Supplier<List<BatteryEntry>> sFakeBatteryEntryListSupplier;
 
     private BatteryUsageDataLoader() {
     }
@@ -47,10 +49,9 @@ public final class BatteryUsageDataLoader {
         final long start = System.currentTimeMillis();
         final BatteryUsageStats batteryUsageStats = DataProcessor.getBatteryUsageStats(context);
         final List<BatteryEntry> batteryEntryList =
-                DataProcessor.generateBatteryEntryListFromBatteryUsageStats(
-                        context,
-                        batteryUsageStats,
-                        sController);
+                sFakeBatteryEntryListSupplier != null ? sFakeBatteryEntryListSupplier.get()
+                        : DataProcessor.generateBatteryEntryListFromBatteryUsageStats(context,
+                                batteryUsageStats);
         if (batteryEntryList == null || batteryEntryList.isEmpty()) {
             Log.w(TAG, "getBatteryEntryList() returns null or empty content");
         }

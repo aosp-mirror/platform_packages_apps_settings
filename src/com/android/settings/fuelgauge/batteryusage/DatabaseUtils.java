@@ -19,7 +19,6 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -36,6 +35,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 
@@ -141,24 +141,18 @@ public final class DatabaseUtils {
         });
     }
 
-    /** Gets the latest sticky battery intent from framework. */
-    static Intent getBatteryIntent(Context context) {
-        return context.registerReceiver(
-                /*receiver=*/ null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-    }
-
     static List<ContentValues> sendBatteryEntryData(
             Context context,
             List<BatteryEntry> batteryEntryList,
             BatteryUsageStats batteryUsageStats) {
         final long startTime = System.currentTimeMillis();
-        final Intent intent = getBatteryIntent(context);
+        final Intent intent = BatteryUtils.getBatteryIntent(context);
         if (intent == null) {
             Log.e(TAG, "sendBatteryEntryData(): cannot fetch battery intent");
             clearMemory();
             return null;
         }
-        final int batteryLevel = getBatteryLevel(intent);
+        final int batteryLevel = BatteryUtils.getBatteryLevel(intent);
         final int batteryStatus = intent.getIntExtra(
                 BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN);
         final int batteryHealth = intent.getIntExtra(
@@ -304,14 +298,6 @@ public final class DatabaseUtils {
             }
         }
         return resultMap;
-    }
-
-    private static int getBatteryLevel(Intent intent) {
-        final int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-        final int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 0);
-        return scale == 0
-                ? -1 /*invalid battery level*/
-                : Math.round((level / (float) scale) * 100f);
     }
 
     private static void clearMemory() {

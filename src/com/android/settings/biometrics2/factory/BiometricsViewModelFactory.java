@@ -42,7 +42,7 @@ public class BiometricsViewModelFactory implements ViewModelProvider.Factory {
     private static final String TAG = "BiometricsViewModelFact";
 
     public static final CreationExtras.Key<ChallengeGenerator> CHALLENGE_GENERATOR =
-            new CreationExtras.Key<>() {};
+            new CreationExtras.Key<ChallengeGenerator>() {};
 
     @NonNull
     @Override

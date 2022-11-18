@@ -26,7 +26,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryConsumer;
-import android.os.Handler;
 import android.os.Process;
 import android.os.RemoteException;
 import android.os.UidBatteryConsumer;
@@ -80,77 +79,8 @@ public class BatteryEntry {
     static final HashMap<String, UidToDetail> sUidCache = new HashMap<>();
 
     static final ArrayList<BatteryEntry> sRequestQueue = new ArrayList<BatteryEntry>();
-    static Handler sHandler;
 
     static Locale sCurrentLocale = null;
-
-    private static class NameAndIconLoader extends Thread {
-        private boolean mAbort = false;
-
-        NameAndIconLoader() {
-            super("BatteryUsage Icon Loader");
-        }
-
-        public void abort() {
-            mAbort = true;
-        }
-
-        @Override
-        public void run() {
-            while (true) {
-                BatteryEntry be;
-                synchronized (sRequestQueue) {
-                    if (sRequestQueue.isEmpty() || mAbort) {
-                        if (sHandler != null) {
-                            sHandler.sendEmptyMessage(MSG_REPORT_FULLY_DRAWN);
-                        }
-                        return;
-                    }
-                    be = sRequestQueue.remove(0);
-                }
-                final NameAndIcon nameAndIcon =
-                        BatteryEntry.loadNameAndIcon(
-                                be.mContext, be.getUid(), sHandler, be,
-                                be.mDefaultPackageName, be.mName, be.mIcon);
-                if (nameAndIcon != null) {
-                    be.mIcon = nameAndIcon.mIcon;
-                    be.mName = nameAndIcon.mName;
-                    be.mDefaultPackageName = nameAndIcon.mPackageName;
-                }
-            }
-        }
-    }
-
-    private static NameAndIconLoader sRequestThread;
-
-    /** Starts the request queue. */
-    public static void startRequestQueue() {
-        if (sHandler != null) {
-            synchronized (sRequestQueue) {
-                if (!sRequestQueue.isEmpty()) {
-                    if (sRequestThread != null) {
-                        sRequestThread.abort();
-                    }
-                    sRequestThread = new NameAndIconLoader();
-                    sRequestThread.setPriority(Thread.MIN_PRIORITY);
-                    sRequestThread.start();
-                    sRequestQueue.notify();
-                }
-            }
-        }
-    }
-
-    /** Stops the request queue. */
-    public static void stopRequestQueue() {
-        synchronized (sRequestQueue) {
-            if (sRequestThread != null) {
-                sRequestThread.abort();
-                sRequestThread = null;
-                sRequestQueue.clear();
-                sHandler = null;
-            }
-        }
-    }
 
     /** Clears the UID cache. */
     public static void clearUidCache() {
@@ -185,16 +115,14 @@ public class BatteryEntry {
         Drawable mIcon;
     }
 
-    public BatteryEntry(Context context, Handler handler, UserManager um,
-            BatteryConsumer batteryConsumer, boolean isHidden, int uid, String[] packages,
-            String packageName) {
-        this(context, handler, um, batteryConsumer, isHidden, uid, packages, packageName, true);
+    public BatteryEntry(Context context, UserManager um, BatteryConsumer batteryConsumer,
+            boolean isHidden, int uid, String[] packages, String packageName) {
+        this(context, um, batteryConsumer, isHidden, uid, packages, packageName, true);
     }
 
-    public BatteryEntry(Context context, Handler handler, UserManager um,
-            BatteryConsumer batteryConsumer, boolean isHidden, int uid, String[] packages,
-            String packageName, boolean loadDataInBackground) {
-        sHandler = handler;
+    public BatteryEntry(Context context, UserManager um, BatteryConsumer batteryConsumer,
+            boolean isHidden, int uid, String[] packages, String packageName,
+            boolean loadDataInBackground) {
         mContext = context;
         mBatteryConsumer = batteryConsumer;
         mIsHidden = isHidden;
@@ -332,20 +260,12 @@ public class BatteryEntry {
         } else {
             mIcon = mContext.getPackageManager().getDefaultActivityIcon();
         }
-
-        // Avoids post the loading icon and label in the background request.
-        if (sHandler != null && loadDataInBackground) {
-            synchronized (sRequestQueue) {
-                sRequestQueue.add(this);
-            }
-        }
     }
 
     /** Loads the app label and icon image and stores into the cache. */
     public static NameAndIcon loadNameAndIcon(
             Context context,
             int uid,
-            Handler handler,
             BatteryEntry batteryEntry,
             String defaultPackageName,
             String name,
@@ -432,9 +352,6 @@ public class BatteryEntry {
         utd.mPackageName = defaultPackageName;
 
         sUidCache.put(uidString, utd);
-        if (handler != null) {
-            handler.sendMessage(handler.obtainMessage(MSG_UPDATE_NAME_ICON, batteryEntry));
-        }
         return new NameAndIcon(name, defaultPackageName, icon, /*iconId=*/ 0);
     }
 
