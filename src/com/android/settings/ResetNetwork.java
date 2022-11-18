@@ -24,8 +24,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.UserHandle;
-import android.os.UserManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.telephony.SubscriptionInfo;
@@ -46,12 +44,10 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
+import com.android.settings.network.ResetNetworkRestrictionViewBuilder;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
-import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 import java.util.ArrayList;
@@ -115,7 +111,7 @@ public class ResetNetwork extends InstrumentedFragment {
         // confirmation prompt; otherwise, go back to the initial state.
         if (resultCode == Activity.RESULT_OK) {
             showFinalConfirmation();
-        } else {
+        } else if (mContentView != null) {
             establishInitialState(getActiveSubscriptionInfoList());
         }
     }
@@ -252,6 +248,10 @@ public class ResetNetwork extends InstrumentedFragment {
     public void onResume() {
         super.onResume();
 
+        if (mContentView == null) {
+            return;
+        }
+
         // update options if subcription has been changed
         List<SubscriptionInfo> updatedSubscriptions = getActiveSubscriptionInfoList();
         if ((mSubscriptions != null)
@@ -277,18 +277,10 @@ public class ResetNetwork extends InstrumentedFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final UserManager um = UserManager.get(getActivity());
-        final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
-                getActivity(), UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId());
-        if (!um.isAdminUser() || RestrictedLockUtilsInternal.hasBaseUserRestriction(getActivity(),
-                UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId())) {
-            return inflater.inflate(R.layout.network_reset_disallowed_screen, null);
-        } else if (admin != null) {
-            new ActionDisabledByAdminDialogHelper(getActivity())
-                    .prepareDialogBuilder(UserManager.DISALLOW_NETWORK_RESET, admin)
-                    .setOnDismissListener(__ -> getActivity().finish())
-                    .show();
-            return new View(getContext());
+        View view = (new ResetNetworkRestrictionViewBuilder(getActivity())).build();
+        if (view != null) {
+            Log.w(TAG, "Access deny.");
+            return view;
         }
 
         mContentView = inflater.inflate(R.layout.reset_network, null);
