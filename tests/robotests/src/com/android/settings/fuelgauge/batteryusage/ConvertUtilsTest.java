@@ -96,34 +96,33 @@ public final class ConvertUtilsTest {
                         /*batteryHealth=*/ BatteryManager.BATTERY_HEALTH_COLD,
                         /*bootTimestamp=*/ 101L,
                         /*timestamp=*/ 10001L);
+        final BatteryInformation batteryInformation =
+                ConvertUtils.getBatteryInformation(
+                        values, BatteryHistEntry.KEY_BATTERY_INFORMATION);
+        final DeviceBatteryState deviceBatteryState = batteryInformation.getDeviceBatteryState();
 
         assertThat(values.getAsLong(BatteryHistEntry.KEY_UID)).isEqualTo(1001L);
         assertThat(values.getAsLong(BatteryHistEntry.KEY_USER_ID))
                 .isEqualTo(UserHandle.getUserId(1001));
-        assertThat(values.getAsString(BatteryHistEntry.KEY_APP_LABEL))
-                .isEqualTo("Settings");
         assertThat(values.getAsString(BatteryHistEntry.KEY_PACKAGE_NAME))
                 .isEqualTo("com.google.android.settings.battery");
-        assertThat(values.getAsBoolean(BatteryHistEntry.KEY_IS_HIDDEN)).isTrue();
-        assertThat(values.getAsLong(BatteryHistEntry.KEY_BOOT_TIMESTAMP))
-                .isEqualTo(101L);
         assertThat(values.getAsLong(BatteryHistEntry.KEY_TIMESTAMP)).isEqualTo(10001L);
-        assertThat(values.getAsString(BatteryHistEntry.KEY_ZONE_ID))
-                .isEqualTo(TimeZone.getDefault().getID());
-        assertThat(values.getAsDouble(BatteryHistEntry.KEY_TOTAL_POWER)).isEqualTo(5.1);
-        assertThat(values.getAsDouble(BatteryHistEntry.KEY_CONSUME_POWER)).isEqualTo(1.1);
-        assertThat(values.getAsDouble(BatteryHistEntry.KEY_PERCENT_OF_TOTAL)).isEqualTo(0.3);
-        assertThat(values.getAsLong(BatteryHistEntry.KEY_FOREGROUND_USAGE_TIME))
-                .isEqualTo(1234L);
-        assertThat(values.getAsLong(BatteryHistEntry.KEY_BACKGROUND_USAGE_TIME))
-                .isEqualTo(5689L);
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_DRAIN_TYPE)).isEqualTo(expectedType);
         assertThat(values.getAsInteger(BatteryHistEntry.KEY_CONSUMER_TYPE))
                 .isEqualTo(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_BATTERY_LEVEL)).isEqualTo(12);
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_BATTERY_STATUS))
+        assertThat(batteryInformation.getAppLabel()).isEqualTo("Settings");
+        assertThat(batteryInformation.getIsHidden()).isTrue();
+        assertThat(batteryInformation.getBootTimestamp()).isEqualTo(101L);
+        assertThat(batteryInformation.getZoneId()).isEqualTo(TimeZone.getDefault().getID());
+        assertThat(batteryInformation.getTotalPower()).isEqualTo(5.1);
+        assertThat(batteryInformation.getConsumePower()).isEqualTo(1.1);
+        assertThat(batteryInformation.getPercentOfTotal()).isEqualTo(0.3);
+        assertThat(batteryInformation.getForegroundUsageTimeInMs()).isEqualTo(1234L);
+        assertThat(batteryInformation.getBackgroundUsageTimeInMs()).isEqualTo(5689L);
+        assertThat(batteryInformation.getDrainType()).isEqualTo(expectedType);
+        assertThat(deviceBatteryState.getBatteryLevel()).isEqualTo(12);
+        assertThat(deviceBatteryState.getBatteryStatus())
                 .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_BATTERY_HEALTH))
+        assertThat(deviceBatteryState.getBatteryHealth())
                 .isEqualTo(BatteryManager.BATTERY_HEALTH_COLD);
     }
 
@@ -139,17 +138,19 @@ public final class ConvertUtilsTest {
                         /*bootTimestamp=*/ 101L,
                         /*timestamp=*/ 10001L);
 
-        assertThat(values.getAsLong(BatteryHistEntry.KEY_BOOT_TIMESTAMP))
-                .isEqualTo(101L);
+        final BatteryInformation batteryInformation =
+                ConvertUtils.getBatteryInformation(
+                        values, BatteryHistEntry.KEY_BATTERY_INFORMATION);
+        final DeviceBatteryState deviceBatteryState = batteryInformation.getDeviceBatteryState();
+        assertThat(batteryInformation.getBootTimestamp()).isEqualTo(101L);
+        assertThat(batteryInformation.getZoneId()).isEqualTo(TimeZone.getDefault().getID());
+        assertThat(deviceBatteryState.getBatteryLevel()).isEqualTo(12);
+        assertThat(deviceBatteryState.getBatteryStatus())
+                .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);
+        assertThat(deviceBatteryState.getBatteryHealth())
+                .isEqualTo(BatteryManager.BATTERY_HEALTH_COLD);
         assertThat(values.getAsLong(BatteryHistEntry.KEY_TIMESTAMP))
                 .isEqualTo(10001L);
-        assertThat(values.getAsString(BatteryHistEntry.KEY_ZONE_ID))
-                .isEqualTo(TimeZone.getDefault().getID());
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_BATTERY_LEVEL)).isEqualTo(12);
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_BATTERY_STATUS))
-                .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_BATTERY_HEALTH))
-                .isEqualTo(BatteryManager.BATTERY_HEALTH_COLD);
         assertThat(values.getAsString(BatteryHistEntry.KEY_PACKAGE_NAME))
                 .isEqualTo(ConvertUtils.FAKE_PACKAGE_NAME);
     }
@@ -499,17 +500,21 @@ public final class ConvertUtilsTest {
             String packageName, String appLabel, double consumePower,
             long uid, long foregroundUsageTimeInMs, long backgroundUsageTimeInMs) {
         // Only insert required fields.
+        final BatteryInformation batteryInformation =
+                BatteryInformation
+                        .newBuilder()
+                        .setAppLabel(appLabel)
+                        .setConsumePower(consumePower)
+                        .setForegroundUsageTimeInMs(foregroundUsageTimeInMs)
+                        .setBackgroundUsageTimeInMs(backgroundUsageTimeInMs)
+                        .build();
         final ContentValues values = new ContentValues();
         values.put(BatteryHistEntry.KEY_PACKAGE_NAME, packageName);
-        values.put(BatteryHistEntry.KEY_APP_LABEL, appLabel);
         values.put(BatteryHistEntry.KEY_UID, Long.valueOf(uid));
         values.put(BatteryHistEntry.KEY_CONSUMER_TYPE,
                 Integer.valueOf(ConvertUtils.CONSUMER_TYPE_UID_BATTERY));
-        values.put(BatteryHistEntry.KEY_CONSUME_POWER, consumePower);
-        values.put(BatteryHistEntry.KEY_FOREGROUND_USAGE_TIME,
-                Long.valueOf(foregroundUsageTimeInMs));
-        values.put(BatteryHistEntry.KEY_BACKGROUND_USAGE_TIME,
-                Long.valueOf(backgroundUsageTimeInMs));
+        values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION,
+                ConvertUtils.convertBatteryInformationToString(batteryInformation));
         return new BatteryHistEntry(values);
     }
 

@@ -19,13 +19,10 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Base64;
-import android.util.Log;
 
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.MessageLite;
 
 import java.io.PrintWriter;
 import java.util.List;
@@ -76,22 +73,8 @@ public final class BatteryHistoricalLogUtil {
     }
 
     private static BatteryOptimizeHistoricalLog parseLogFromString(String storedLogs) {
-        return parseProtoFromString(storedLogs, BatteryOptimizeHistoricalLog.getDefaultInstance());
-    }
-
-    @SuppressWarnings("unchecked")
-    private static <T extends MessageLite> T parseProtoFromString(
-            String serializedProto, T protoClass) {
-        if (serializedProto.isEmpty()) {
-            return (T) protoClass.getDefaultInstanceForType();
-        }
-        try {
-            return (T) protoClass.getParserForType()
-                    .parseFrom(Base64.decode(serializedProto, Base64.DEFAULT));
-        } catch (InvalidProtocolBufferException e) {
-            Log.e(TAG, "Failed to deserialize proto class", e);
-            return (T) protoClass.getDefaultInstanceForType();
-        }
+        return BatteryUtils.parseProtoFromString(
+                storedLogs, BatteryOptimizeHistoricalLog.getDefaultInstance());
     }
 
     /**

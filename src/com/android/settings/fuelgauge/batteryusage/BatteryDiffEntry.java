@@ -337,10 +337,8 @@ public class BatteryDiffEntry {
             mAppIcon = nameAndIcon.mIcon;
         }
 
-        final BatteryEntry.NameAndIcon nameAndIcon =
-                BatteryEntry.loadNameAndIcon(
-                        mContext, uid, /*handler=*/ null, /*batteryEntry=*/ null,
-                        packageName, mAppLabel, mAppIcon);
+        final BatteryEntry.NameAndIcon nameAndIcon = BatteryEntry.loadNameAndIcon(
+                mContext, uid, /*batteryEntry=*/ null, packageName, mAppLabel, mAppIcon);
         // Clears BatteryEntry internal cache since we will have another one.
         BatteryEntry.clearUidCache();
         if (nameAndIcon != null) {

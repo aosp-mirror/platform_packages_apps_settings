@@ -23,6 +23,9 @@ import android.os.UserManager;
 
 import androidx.room.Room;
 
+import com.android.settings.fuelgauge.batteryusage.BatteryInformation;
+import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
+import com.android.settings.fuelgauge.batteryusage.DeviceBatteryState;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryState;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
@@ -75,26 +78,44 @@ public class BatteryTestUtils {
     /** Inserts a fake data into the database for testing. */
     public static void insertDataToBatteryStateDatabase(
             Context context, long timestamp, String packageName, boolean multiple) {
+        DeviceBatteryState deviceBatteryState =
+                DeviceBatteryState
+                        .newBuilder()
+                        .setBatteryLevel(31)
+                        .setBatteryStatus(0)
+                        .setBatteryHealth(0)
+                        .build();
+        BatteryInformation batteryInformation =
+                BatteryInformation
+                        .newBuilder()
+                        .setDeviceBatteryState(deviceBatteryState)
+                        .setIsHidden(true)
+                        .setBootTimestamp(timestamp - 1)
+                        .setZoneId("Europe/Paris")
+                        .setAppLabel("Settings")
+                        .setTotalPower(100f)
+                        .setConsumePower(0.3f)
+                        .setPercentOfTotal(10f)
+                        .setDrainType(1)
+                        .setForegroundUsageTimeInMs(60000)
+                        .setForegroundServiceUsageTimeInMs(30000)
+                        .setBackgroundUsageTimeInMs(10000)
+                        .setForegroundUsageConsumePower(0.1f)
+                        .setForegroundServiceUsageConsumePower(0.05f)
+                        .setBackgroundUsageConsumePower(0.1f)
+                        .setCachedUsageConsumePower(0.05f)
+                        .build();
+
         final BatteryState state =
                 new BatteryState(
                         /*uid=*/ 1001L,
                         /*userId=*/ 100L,
-                        /*appLabel=*/ "Settings",
                         packageName,
-                        /*isHidden=*/ true,
-                        /*bootTimestamp=*/ timestamp - 1,
                         timestamp,
-                        /*zoneId=*/ "Europe/Paris",
-                        /*totalPower=*/ 100f,
-                        /*consumePower=*/ 0.3f,
-                        /*percentOfTotal=*/ 10f,
-                        /*foregroundUsageTimeInMs=*/ 60000,
-                        /*backgroundUsageTimeInMs=*/ 10000,
-                        /*drainType=*/ 1,
                         /*consumerType=*/ 2,
-                        /*batteryLevel=*/ 31,
-                        /*batteryStatus=*/ 0,
-                        /*batteryHealth=*/ 0);
+                        /*isFullChargeCycleStart=*/ false,
+                        ConvertUtils.convertBatteryInformationToString(batteryInformation),
+                        "");
         BatteryStateDao dao =
                 BatteryStateDatabase.getInstance(context).batteryStateDao();
         if (multiple) {

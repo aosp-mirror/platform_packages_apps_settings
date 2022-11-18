@@ -77,6 +77,8 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifLayout;
+import com.google.android.setupdesign.template.DescriptionMixin;
+import com.google.android.setupdesign.template.HeaderMixin;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -341,6 +343,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                 return true;
             });
         }
+
+        final Configuration config = getApplicationContext().getResources().getConfiguration();
+        maybeHideSfpsText(config);
     }
 
     @Override
@@ -1041,6 +1046,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     @SuppressWarnings("MissingSuperCall") // TODO: Fix me
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        maybeHideSfpsText(newConfig);
         switch(newConfig.orientation) {
             case Configuration.ORIENTATION_LANDSCAPE: {
                 updateOrientation(Configuration.ORIENTATION_LANDSCAPE);
@@ -1053,6 +1059,27 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             default:
                 Log.e(TAG, "Error unhandled configuration change");
                 break;
+        }
+    }
+
+    private void maybeHideSfpsText(@NonNull Configuration newConfig) {
+        final HeaderMixin headerMixin = getLayout().getMixin(HeaderMixin.class);
+        final DescriptionMixin descriptionMixin = getLayout().getMixin(DescriptionMixin.class);
+        final boolean isLandscape = newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE;
+
+        if (mCanAssumeSfps) {
+            if (isLandscape) {
+                headerMixin.setAutoTextSizeEnabled(true);
+                headerMixin.getTextView().setMinLines(0);
+                headerMixin.getTextView().setMaxLines(10);
+                descriptionMixin.getTextView().setMinLines(0);
+                descriptionMixin.getTextView().setMaxLines(10);
+            } else {
+                headerMixin.setAutoTextSizeEnabled(false);
+                headerMixin.getTextView().setLines(4);
+                // hide the description
+                descriptionMixin.getTextView().setLines(0);
+            }
         }
     }
 

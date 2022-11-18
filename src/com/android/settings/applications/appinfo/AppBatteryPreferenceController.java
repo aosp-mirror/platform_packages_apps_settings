@@ -132,7 +132,7 @@ public class AppBatteryPreferenceController extends BasePreferenceController
         if (isBatteryStatsAvailable()) {
             final UserManager userManager =
                     (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-            final BatteryEntry entry = new BatteryEntry(mContext, /* handler */null, userManager,
+            final BatteryEntry entry = new BatteryEntry(mContext, userManager,
                     mUidBatteryConsumer, /* isHidden */ false,
                     mUidBatteryConsumer.getUid(), /* packages */ null, mPackageName);
             Log.i(TAG, "Battery consumer available, launch : "

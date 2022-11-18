@@ -13,6 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"Ja"</string>
@@ -365,7 +366,6 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"<xliff:g id="PERCENTAGE">%d</xliff:g> persent ingeskryf"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Skryf tans vingerafdruk in <xliff:g id="PERCENTAGE">%d</xliff:g> persent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Vingerafdruk bygevoeg"</string>
-    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Jy kan nou jou vingerafdruk gebruik om jou tablet te ontsluit of te verifieer dis jy, soos wanneer jy aanmeld by programme of ’n aankoop goedkeur"</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Ontsluit slegs wanneer skerm aan is"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Die skerm moet aan wees voordat jy met jou vingerafdruk kan ontsluit. Dit maak onbeplande ontsluiting minder waarskynlik."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Skerm, ontsluit"</string>
@@ -461,31 +461,43 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"Verwyder profielbeskerming?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"\'n Patroon beskerm jou foon as dit verlore raak of gesteel word"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"\'n Patroon beskerm jou foon as dit verlore raak of gesteel word.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Dit vee ook die vingerafdrukmodel uit wat op jou toestel geberg is. Jy sal nie jou vingerafdruk vir stawing in programme kan gebruik nie."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"\'n Patroon beskerm jou foon as dit verlore raak of gesteel word.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Jou gesigmodel sal ook permanent en veilig uitgevee word. Jy sal nie jou gesig vir stawing in programme kan gebruik nie."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"\'n Patroon beskerm jou foon as dit verlore raak of gesteel word.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Dit vee ook die vingerafdrukmodel uit wat op jou toestel geberg is. Jou gesigmodel sal ook permanent en veilig uitgevee word. Jy sal nie jou gesig of vingerafdruk vir stawing in programme kan gebruik nie."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"\'n PIN beskerm jou foon as dit verlore raak of gesteel word"</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"\'n PIN beskerm jou foon as dit verlore raak of gesteel word.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Dit vee ook die vingerafdrukmodel uit wat op jou toestel geberg is. Jy sal nie jou vingerafdruk vir stawing in programme kan gebruik nie."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"\'n PIN beskerm jou foon as dit verlore raak of gesteel word.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Jou gesigmodel sal ook permanent en veilig uitgevee word. Jy sal nie jou gesig vir stawing in programme kan gebruik nie."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"\'n PIN beskerm jou foon as dit verlore raak of gesteel word.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Dit vee ook die vingerafdrukmodel uit wat op jou toestel geberg is. Jou gesigmodel sal ook permanent en veilig uitgevee word. Jy sal nie jou gesig of vingerafdruk vir stawing in programme kan gebruik nie."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"\'n Wagwoord beskerm jou foon as dit verlore raak of gesteel word"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"\'n Wagwoord beskerm jou foon as dit verlore raak of gesteel word.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Dit vee ook die vingerafdrukmodel uit wat op jou toestel geberg is. Jy sal nie jou vingerafdruk vir stawing in programme kan gebruik nie."</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"\'n Wagwoord beskerm jou foon as dit verlore raak of gesteel word.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Jou gesigmodel sal ook permanent en veilig uitgevee word. Jy sal nie jou gesig vir stawing in programme kan gebruik nie."</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"\'n Wagwoord beskerm jou foon as dit verlore raak of gesteel word.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Dit vee die vingerafdrukmodel uit wat op jou toestel geberg is. Jou gesigmodel sal ook permanent en veilig uitgevee word. Jy sal nie jou gesig of vingerafdruk vir stawing in programme kan gebruik nie."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"Toestelbeskermingkenmerke sal nie sonder jou skermslot werk nie."</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"Toestelbeskermingkenmerke sal nie sonder jou skermslot werk nie.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Dit vee ook die vingerafdrukmodel uit wat op jou toestel geberg is. Jy sal nie jou vingerafdruk vir stawing in programme kan gebruik nie."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"Toestelbeskermingkenmerke sal nie sonder jou skermslot werk nie.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Jou gesigmodel sal ook permanent en veilig uitgevee word. Jy sal nie jou gesig vir stawing in programme kan gebruik nie."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"Toestelbeskermingkenmerke sal nie sonder jou skermslot werk nie.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Dit vee die vingerafdrukmodel uit wat op jou toestel geberg is. Jou gesigmodel sal ook permanent en veilig uitgevee word. Jy sal nie jou gesig of vingerafdruk vir stawing in programme kan gebruik nie."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Vee uit"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> beveel \'n sterk PIN of wagwoord aan en sonder een sal dit dalk nie werk soos verwag nie"</string>
@@ -1000,13 +1012,18 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Teks in vetdruk"</string>
     <string name="title_font_size" msgid="570613010306330622">"Lettertipegrootte"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Maak teks groter of kleiner"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"SIM-kaart-sluitinstellings"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"SIM-kaartslot"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"Sluit SIM-kaart"</string>
+    <!-- no translation found for sim_lock_settings (7331982427303002613) -->
+    <skip />
+    <!-- no translation found for sim_lock_settings_category (6475255139493877786) -->
+    <skip />
+    <!-- no translation found for sim_pin_toggle (6814489621760857328) -->
+    <skip />
     <string name="sim_pin_change" msgid="5978881209990507379">"Verander SIM-PIN"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"SIM PIN"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Sluit SIM-kaart"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"Ontsluit SIM-kaart"</string>
+    <!-- no translation found for sim_enable_sim_lock (6486354334679225748) -->
+    <skip />
+    <!-- no translation found for sim_disable_sim_lock (6939439812841857306) -->
+    <skip />
     <string name="sim_enter_old" msgid="6882545610939674813">"Ou SIM PIN"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"Nuwe SIM PIN"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Voer nuwe PIN weer in"</string>
@@ -1021,7 +1038,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Gebruik <xliff:g id="CARRIER">%1$s</xliff:g> vir mobiele data?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Jy gebruik tans <xliff:g id="CARRIER2_0">%2$s</xliff:g> vir mobiele data. As jy na <xliff:g id="CARRIER1">%1$s</xliff:g> oorskakel, sal <xliff:g id="CARRIER2_1">%2$s</xliff:g> nie meer vir mobiele data gebruik word nie."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Gebruik <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"Verander voorkeur-SIM-kaart?"</string>
+    <!-- no translation found for sim_preferred_title (8850185380445309835) -->
+    <skip />
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> is die enigste SIM in jou toestel. Wil jy hierdie SIM vir mobiele data, oproepe en SMS\'e gebruik?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Verkeerde SIM PIN-kode, jy sal nou jou diensverskaffer moet kontak om jou toestel te ontsluit."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1174,17 +1192,20 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Stel terug: Wi-Fi, mobiel en Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Dit sal alle netwerkinstellings terugstel, insluitend:\n\n"<li>"Wi‑Fi"</li>\n<li>"Mobiele data"</li>\n<li>"Bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Vee uit"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Vee afgelaaide SIM-kaarte uit"</string>
+    <!-- no translation found for reset_esim_title (4194570573425902754) -->
+    <skip />
     <string name="reset_esim_desc" msgid="3662444090563399131">"Dit sal geen mobielediensplanne kanselleer nie. Kontak jou diensverskaffer om vervanging-SIM\'s af te laai."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Stel instellings terug"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Stel alle netwerkinstellings terug? Jy kan nie hierdie handeling ontdoen nie."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Stel alle netwerkinstellings terug en vee afgelaaide SIM-kaarte uit? Jy kan nie hierdie handeling ontdoen nie."</string>
+    <!-- no translation found for reset_network_final_desc_esim (1129251284212847939) -->
+    <skip />
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Stel instellings terug"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Stel terug?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Netwerkterugstelling is nie vir hierdie gebruiker beskikbaar nie"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Netwerkinstellings is teruggestel"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Kan nie SIM-kaarte uitvee nie"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"Afgelaaide SIM-kaarte kan weens \'n fout nie uitgevee word nie.\n\nHerbegin jou toestel en probeer weer."</string>
+    <!-- no translation found for reset_esim_error_msg (7279607120606365250) -->
+    <skip />
     <string name="main_clear_title" msgid="277664302144837723">"Vee alle data uit (fabriekterugstelling)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Vee alle data uit (fabriekterugstelling)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Musiek"</li>\n<li>"Foto\'s"</li>\n<li>"Ander gebruikerdata"</li></string>
@@ -2022,7 +2043,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"Geskiedenisdetails"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Batterygebruik"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Bekyk gebruik in die afgelope 24 uur"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Bekyk gebruik sedert dit volgelaai is"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Bekyk gebruik sedert battery laas volgelaai is"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Programbatterygebruik"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Gebruikdetails"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Verstel kraggebruik"</string>
@@ -2113,25 +2134,25 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Volgelaaide battery hou omtrent"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Batterygebruikdata is benaderd en kan op grond van gebruik verander."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Batterygebruik"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Altesame <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> op agtergrond gebruik\nsedert dit laas volgelaai is"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"Altesaam <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> op die agtergrond gebruik\nsedert battery laas volgelaai is"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Altesame <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> op agtergrond gebruik\nin afgelope 24 uur"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Altesame <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> op agtergrond gebruik\ntydens <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"Altesame minder as \'n minuut sedert dit laas volgelaai is"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"Altesaam minder as ’n minuut gebruik sedert battery laas volgelaai is"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"Altesame minder as \'n minuut in afgelope 24 uur"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Totaal was minder as \'n minuut in <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"Minder as \'n minuut op agtergrond gebruik sedert dit laas volgelaai is"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"Minder as ’n minuut op die agtergrond gebruik sedert battery laas volgelaai is"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Minder as \'n minuut op agtergrond gebruik in afgelope 24 uur"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Minder as \'n minuut op agtergrond gebruik in <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"Altesame <xliff:g id="TIME">^1</xliff:g> sedert dit laas volgelaai is"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"Altesaam <xliff:g id="TIME">^1</xliff:g> gebruik sedert battery laas volgelaai is"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"Altesame <xliff:g id="TIME">^1</xliff:g> in afgelope 24 uur"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"Altesame <xliff:g id="TIME_0">^1</xliff:g> in <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"<xliff:g id="TIME">^1</xliff:g> op agtergrond gebruik sedert dit laas volgelaai is"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"<xliff:g id="TIME">^1</xliff:g> op die agtergrond gebruik sedert battery laas volgelaai is"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"<xliff:g id="TIME">^1</xliff:g> op agtergrond gebruik in afgelope 24 uur"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> op agtergrond gebruik in <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"Altesame <xliff:g id="TIME">^1</xliff:g> • minder as \'n minuut op agtergrond gebruik\nsedert dit laas volgelaai is"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"Altesaam <xliff:g id="TIME">^1</xliff:g> • minder as ’n minuut op die agtergrond gebruik\nsedert battery laas volgelaai is"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"Altesame <xliff:g id="TIME">^1</xliff:g> • minder as \'n minuut op agtergrond gebruik\nin afgelope 24 uur"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"Altesame <xliff:g id="TIME_0">^1</xliff:g> • minder as \'n minuut op agtergrond gebruik\ntydens <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"Geen gebruik sedert dit laas volgelaai is nie"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"Geen gebruik sedert battery laas volgelaai is nie"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Nie in afgelope 24 uur gebruik nie"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"Ander gebruikers"</string>
@@ -2542,7 +2563,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Vee <xliff:g id="USER_NAME">%1$s</xliff:g> van hierdie toestel af uit"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Sluitskerminstellings"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Voeg gebruikers van die sluitskerm af by"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"Skakel oor na admingebruiker wanneer gedok"</string>
+    <!-- no translation found for switch_to_dock_user_when_docked (2324395443311905635) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Verwyder jouself?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Vee dié gebruiker uit?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Verwyder hierdie profiel?"</string>
@@ -2668,7 +2690,8 @@
     <string name="wizard_next" msgid="3884832431439072471">"Volgende"</string>
     <string name="wizard_back_adoptable" msgid="1447814356855134183">"Formateer op ander manier"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"SIM-kaarte"</string>
+    <!-- no translation found for sim_settings_title (2254609719033946272) -->
+    <skip />
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Mobiele data is onbeskikbaar"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Tik om \'n data-SIM te kies"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Gebruik dit altyd vir oproepe"</string>
@@ -2686,7 +2709,8 @@
     <string name="sim_status_title" msgid="6188770698037109774">"SIM-status"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"SIM-status (SIM-gleuf %1$d)"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"SIM-kaarte het verander."</string>
+    <!-- no translation found for sim_notification_title (2819551384383504031) -->
+    <skip />
     <string name="sim_notification_summary" msgid="5593339846307029991">"Tik om op te stel"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Vra elke keer"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Keuse vereis"</string>
@@ -2712,6 +2736,8 @@
     <string name="account_dashboard_title" msgid="8228773251948253914">"Wagwoorde en rekeninge"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Gestoorde wagwoorde, outovul, gesinkroniseerde rekeninge"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Verstekprogramme"</string>
+    <!-- no translation found for cloned_apps_dashboard_title (5542076801222950921) -->
+    <skip />
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Tale, gebare, tyd, rugsteun"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"Stelseltale, programtale"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, netwerkverbinding, internet, draadloos, data, wi fi"</string>
@@ -3326,7 +3352,8 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Vra wagwoord voordat jy ontspeld"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Sluit toestel wanneer jy ontspeld"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Bevestig dat SIM uitgevee word"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Verifieer dat dit jy is voordat jy \'n afgelaaide SIM uitvee"</string>
+    <!-- no translation found for confirm_sim_deletion_description (5090811029854329373) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Hierdie werkprofiel word bestuur deur:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Bestuur deur <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"Begin veilig"</string>
@@ -4102,7 +4129,8 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Mobiele data"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Kry toegang tot data deur selnetwerk"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Foon sal outomaties na hierdie diensverskaffer oorskakel wanneer dit binne bereik is"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Geen SIM-kaart beskikbaar nie"</string>
+    <!-- no translation found for mobile_data_settings_summary_unavailable (9176513507571883986) -->
+    <skip />
     <string name="calls_preference" msgid="2166481296066890129">"Oproepevoorkeur"</string>
     <string name="sms_preference" msgid="7742964962568219351">"SMS-voorkeur"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Vra elke keer"</string>
@@ -4117,8 +4145,10 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Voeg nog by"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Aktief / SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Onaktief / SIM"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Aktief / Afgelaaide SIM"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Onaktief / Afgelaaide SIM"</string>
+    <!-- no translation found for mobile_network_active_esim (3984452275968408382) -->
+    <skip />
+    <!-- no translation found for mobile_network_inactive_esim (8777415108263057939) -->
+    <skip />
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"SIM-naam en -kleur"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Naam"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Kleur (gebruik deur versoenbare programme)"</string>
@@ -4154,7 +4184,8 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Skakel oor om SIM-kaart te gebruik?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Gebruik <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Net een SIM kan op \'n slag aktief wees.\n\nAs jy na <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> toe oorskakel, sal dit nie jou <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-diens kanselleer nie."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Net een afgelaaide SIM kan op \'n slag aktief wees.\n\nAs jy na <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> toe oorskakel, sal dit nie jou <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-diens kanselleer nie."</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_text_downloaded (8977951796005849471) -->
+    <skip />
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Net een SIM kan op \'n slag aktief wees.\n\nAs jy oorskakel, sal dit nie jou <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>-diens kanselleer nie."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Jy kan 2 SIM\'s op dieselfde tyd gebruik. Skakel ander SIM af om <xliff:g id="CARRIER_NAME">%1$s</xliff:g> te gebruik."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Skakel oor na <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -4196,8 +4227,10 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> sal vir mobiele data, oproepe en SMS\'e gebruik word"</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Geen aktiewe SIM-kaarte beskikbaar nie"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Gaan na jou netwerkinstellings om mobiele data, oproepkenmerke en SMS\'e later te kan gebruik"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"SIM-kaart"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Vee hierdie afgelaaide SIM uit?"</string>
+    <!-- no translation found for sim_card_label (6263064316075963775) -->
+    <skip />
+    <!-- no translation found for erase_sim_dialog_title (4742077437653028326) -->
+    <skip />
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"As jy hierdie SIM uitvee, word <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>-diens van hierdie toestel verwyder.\n\nDiens vir <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> sal nie gekanselleer word nie."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Vee uit"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"Vee tans SIM uit …"</string>
@@ -4349,8 +4382,10 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Maak dit vir Google Fi moontlik om W+-netwerke te gebruik om spoed en dekking te verbeter"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+-netwerk"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"AFGELAAIDE SIM"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"AFGELAAIDE SIM-KAARTE"</string>
+    <!-- no translation found for downloaded_sim_category_title (2876988650413179752) -->
+    <skip />
+    <!-- no translation found for downloaded_sims_category_title (487799905978489922) -->
+    <skip />
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Aktief"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Onaktief"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Verstek vir <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -4406,7 +4441,8 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Oproepinstellings"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Dateer tans instellings op …"</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Oproepinstellingsfout"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Netwerk- of SIM-kaartfout."</string>
+    <!-- no translation found for smart_forwarding_failed_text (8682640643264071789) -->
+    <skip />
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM is nie geaktiveer nie."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Voer foonnommers in"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Voer foonnommer in"</string>
@@ -4430,10 +4466,14 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"Vorige"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Volgende"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Kleurvoorskou"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Versoek vir toegang tot SIM-kaart"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"\'n Toestel wil toegang tot jou SIM-kaart hê. Tik vir besonderhede."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Laat toegang tot SIM-kaart toe?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"\'n Bluetooth-toestel, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, wil toegang tot data op jou SIM-kaart hê. Dit sluit jou kontakte in.\n\nTerwyl <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> gekoppel is, sal hulle alle oproepe ontvang wat na <xliff:g id="PHONE_NUMBER">%3$s</xliff:g> toe gemaak word."</string>
+    <!-- no translation found for bluetooth_sim_card_access_notification_title (7351015416346359536) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_notification_content (8685623260103018309) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_title (5616323725563125179) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_content (6281997628405909566) -->
+    <skip />
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Bluetooth-toestel is beskikbaar"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"\'n Toestel wil koppel. Tik vir besonderhede."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Koppel aan Bluetooth-toestel?"</string>

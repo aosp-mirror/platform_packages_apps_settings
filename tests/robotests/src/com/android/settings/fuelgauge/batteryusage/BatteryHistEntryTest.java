@@ -124,7 +124,13 @@ public final class BatteryHistEntryTest {
     public void testGetKey_consumerSystemType_returnExpectedString() {
         final ContentValues values = getContentValuesWithType(
                 ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
-        values.put(BatteryHistEntry.KEY_DRAIN_TYPE, 1);
+        final BatteryInformation batteryInformation =
+                BatteryInformation
+                        .newBuilder()
+                        .setDrainType(1)
+                        .build();
+        values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION,
+                ConvertUtils.convertBatteryInformationToString(batteryInformation));
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
 
         assertThat(batteryHistEntry.getKey()).isEqualTo("S|1");
@@ -308,42 +314,40 @@ public final class BatteryHistEntryTest {
             new String[]{
                 BatteryHistEntry.KEY_UID,
                 BatteryHistEntry.KEY_USER_ID,
-                BatteryHistEntry.KEY_APP_LABEL,
                 BatteryHistEntry.KEY_PACKAGE_NAME,
-                BatteryHistEntry.KEY_IS_HIDDEN,
-                BatteryHistEntry.KEY_BOOT_TIMESTAMP,
                 BatteryHistEntry.KEY_TIMESTAMP,
-                BatteryHistEntry.KEY_ZONE_ID,
-                BatteryHistEntry.KEY_TOTAL_POWER,
-                BatteryHistEntry.KEY_CONSUME_POWER,
-                BatteryHistEntry.KEY_PERCENT_OF_TOTAL,
-                BatteryHistEntry.KEY_FOREGROUND_USAGE_TIME,
-                BatteryHistEntry.KEY_BACKGROUND_USAGE_TIME,
-                BatteryHistEntry.KEY_DRAIN_TYPE,
                 BatteryHistEntry.KEY_CONSUMER_TYPE,
-                BatteryHistEntry.KEY_BATTERY_LEVEL,
-                BatteryHistEntry.KEY_BATTERY_STATUS,
-                BatteryHistEntry.KEY_BATTERY_HEALTH});
+                BatteryHistEntry.KEY_BATTERY_INFORMATION});
+        DeviceBatteryState deviceBatteryState =
+                DeviceBatteryState
+                        .newBuilder()
+                        .setBatteryLevel(batteryLevel)
+                        .setBatteryStatus(BatteryManager.BATTERY_STATUS_FULL)
+                        .setBatteryHealth(BatteryManager.BATTERY_HEALTH_COLD)
+                        .build();
+        BatteryInformation batteryInformation =
+                BatteryInformation
+                        .newBuilder()
+                        .setDeviceBatteryState(deviceBatteryState)
+                        .setIsHidden(true)
+                        .setBootTimestamp(bootTimestamp)
+                        .setZoneId(TimeZone.getDefault().getID())
+                        .setAppLabel("Settings")
+                        .setTotalPower(totalPower)
+                        .setConsumePower(consumePower)
+                        .setPercentOfTotal(0.3)
+                        .setDrainType(3)
+                        .setForegroundUsageTimeInMs(foregroundUsageTimeInMs)
+                        .setBackgroundUsageTimeInMs(backgroundUsageTimeInMs)
+                        .build();
         cursor.addRow(
             new Object[]{
                 Long.valueOf(1001),
                 Long.valueOf(UserHandle.getUserId(1001)),
-                "Settings",
                 "com.google.android.settings.battery",
-                Integer.valueOf(1),
-                Long.valueOf(bootTimestamp),
                 Long.valueOf(timestamp),
-                TimeZone.getDefault().getID(),
-                Double.valueOf(totalPower),
-                Double.valueOf(consumePower),
-                Double.valueOf(0.3),
-                Long.valueOf(foregroundUsageTimeInMs),
-                Long.valueOf(backgroundUsageTimeInMs),
-                Integer.valueOf(3),
                 Integer.valueOf(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY),
-                Integer.valueOf(batteryLevel),
-                Integer.valueOf(BatteryManager.BATTERY_STATUS_FULL),
-                Integer.valueOf(BatteryManager.BATTERY_HEALTH_COLD)});
+                ConvertUtils.convertBatteryInformationToString(batteryInformation)});
         cursor.moveToFirst();
         return new BatteryHistEntry(cursor);
     }

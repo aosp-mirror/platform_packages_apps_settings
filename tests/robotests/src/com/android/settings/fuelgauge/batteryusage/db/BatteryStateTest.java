@@ -18,8 +18,11 @@ package com.android.settings.fuelgauge.batteryusage.db;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.content.Intent;
 import android.os.BatteryManager;
+
+import com.android.settings.fuelgauge.batteryusage.BatteryInformation;
+import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
+import com.android.settings.fuelgauge.batteryusage.DeviceBatteryState;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,66 +36,58 @@ public final class BatteryStateTest {
     private static final int BATTERY_STATUS = BatteryManager.BATTERY_STATUS_FULL;
     private static final int BATTERY_HEALTH = BatteryManager.BATTERY_HEALTH_COLD;
 
-    private Intent mBatteryIntent;
+    private BatteryInformation mBatteryInformation;
 
     @Before
     public void setUp() {
-        mBatteryIntent = new Intent(Intent.ACTION_BATTERY_CHANGED);
-        // Inserts the battery states into intent.
-        mBatteryIntent.putExtra(BatteryManager.EXTRA_LEVEL, BATTERY_LEVEL);
-        mBatteryIntent.putExtra(BatteryManager.EXTRA_STATUS, BATTERY_STATUS);
-        mBatteryIntent.putExtra(BatteryManager.EXTRA_HEALTH, BATTERY_HEALTH);
+        final DeviceBatteryState deviceBatteryState =
+                DeviceBatteryState
+                        .newBuilder()
+                        .setBatteryLevel(BATTERY_LEVEL)
+                        .setBatteryStatus(BATTERY_STATUS)
+                        .setBatteryHealth(BATTERY_HEALTH)
+                        .build();
+        mBatteryInformation =
+                BatteryInformation
+                        .newBuilder()
+                        .setDeviceBatteryState(deviceBatteryState)
+                        .setBootTimestamp(101L)
+                        .setIsHidden(true)
+                        .setAppLabel("Settings")
+                        .setTotalPower(100)
+                        .setConsumePower(3)
+                        .setPercentOfTotal(10)
+                        .setDrainType(1)
+                        .setForegroundUsageTimeInMs(60000)
+                        .setBackgroundUsageTimeInMs(10000)
+                        .build();
     }
 
     @Test
     public void testBuilder_returnsExpectedResult() {
-        mBatteryIntent.putExtra(BatteryManager.EXTRA_SCALE, 100);
-        BatteryState state = create(mBatteryIntent);
+        BatteryState state = create(mBatteryInformation);
 
         // Verifies the app relative information.
         assertThat(state.uid).isEqualTo(1001L);
         assertThat(state.userId).isEqualTo(100L);
-        assertThat(state.appLabel).isEqualTo("Settings");
         assertThat(state.packageName).isEqualTo("com.android.settings");
-        assertThat(state.isHidden).isTrue();
-        assertThat(state.bootTimestamp).isEqualTo(101L);
         assertThat(state.timestamp).isEqualTo(100001L);
-        // Verifies the battery relative information.
-        assertThat(state.totalPower).isEqualTo(100);
-        assertThat(state.consumePower).isEqualTo(3);
-        assertThat(state.percentOfTotal).isEqualTo(10);
-        assertThat(state.foregroundUsageTimeInMs).isEqualTo(60000);
-        assertThat(state.backgroundUsageTimeInMs).isEqualTo(10000);
-        assertThat(state.drainType).isEqualTo(1);
         assertThat(state.consumerType).isEqualTo(2);
-        assertThat(state.batteryLevel).isEqualTo(BATTERY_LEVEL);
-        assertThat(state.batteryStatus).isEqualTo(BATTERY_STATUS);
-        assertThat(state.batteryHealth).isEqualTo(BATTERY_HEALTH);
+        assertThat(state.isFullChargeCycleStart).isTrue();
+        assertThat(state.batteryInformation).isEqualTo(
+                ConvertUtils.convertBatteryInformationToString(mBatteryInformation));
     }
 
-    @Test
-    public void create_withoutBatteryScale_returnsStateWithInvalidLevel() {
-        BatteryState state = create(mBatteryIntent);
-        assertThat(state.batteryLevel).isEqualTo(-1);
-    }
-
-    private static BatteryState create(Intent intent) {
+    private static BatteryState create(BatteryInformation batteryInformation) {
         return BatteryState.newBuilder()
                 .setUid(1001L)
                 .setUserId(100L)
-                .setAppLabel("Settings")
                 .setPackageName("com.android.settings")
-                .setIsHidden(true)
-                .setBootTimestamp(101L)
                 .setTimestamp(100001L)
-                .setTotalPower(100f)
-                .setConsumePower(3f)
-                .setPercentOfTotal(10f)
-                .setForegroundUsageTimeInMs(60000)
-                .setBackgroundUsageTimeInMs(10000)
-                .setDrainType(1)
                 .setConsumerType(2)
-                .setBatteryIntent(intent)
+                .setIsFullChargeCycleStart(true)
+                .setBatteryInformation(
+                        ConvertUtils.convertBatteryInformationToString(batteryInformation))
                 .build();
     }
 }

@@ -36,7 +36,7 @@ import java.util.List;
 /** Tests for {@link BatteryStateDao}. */
 @RunWith(RobolectricTestRunner.class)
 public final class BatteryStateDaoTest {
-    private static final int CURSOR_COLUMN_SIZE = 19;
+    private static final int CURSOR_COLUMN_SIZE = 9;
     private static final long TIMESTAMP1 = System.currentTimeMillis();
     private static final long TIMESTAMP2 = System.currentTimeMillis() + 2;
     private static final long TIMESTAMP3 = System.currentTimeMillis() + 4;
@@ -81,10 +81,10 @@ public final class BatteryStateDaoTest {
         assertThat(cursor.getColumnCount()).isEqualTo(CURSOR_COLUMN_SIZE);
         // Verifies the queried first battery state.
         cursor.moveToFirst();
-        assertThat(cursor.getString(4 /*packageName*/)).isEqualTo(PACKAGE_NAME3);
+        assertThat(cursor.getString(3 /*packageName*/)).isEqualTo(PACKAGE_NAME3);
         // Verifies the queried second battery state.
         cursor.moveToNext();
-        assertThat(cursor.getString(4 /*packageName*/)).isEqualTo(PACKAGE_NAME2);
+        assertThat(cursor.getString(3 /*packageName*/)).isEqualTo(PACKAGE_NAME2);
     }
 
     @Test

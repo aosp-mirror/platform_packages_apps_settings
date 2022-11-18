@@ -1,0 +1,41 @@
+syntax = "proto2";
+
+package com.android.settings.intelligence;
+option java_multiple_files = true;
+option java_package = "com.android.settings.fuelgauge.batteryusage";
+option java_outer_classname = "FuelgaugeUsageStateProto";
+
+// Stores device battery relative information.
+message DeviceBatteryState {
+  optional int32 battery_level = 1;
+  optional int32 battery_status = 2;
+  optional int32 battery_health = 3;
+}
+
+message BatteryInformation {
+  // Records device battery relative information.
+  optional DeviceBatteryState device_battery_state = 1;
+
+  // Whether the data is represented as a system component or not?
+  optional bool is_hidden = 2;
+
+  // Records the timestamp relative information.
+  optional int64 boot_timestamp = 3;
+  optional string zone_id = 4;
+
+  // Records app relative information.
+  optional string app_label = 7;
+
+  // Records the battery usage relative information.
+  optional double total_power = 10;
+  optional double consume_power = 11;
+  optional double percent_of_total = 12;
+  optional int32 drain_type = 13;
+  optional int64 foreground_usage_time_in_ms = 14;
+  optional int64 foreground_service_usage_time_in_ms = 15;
+  optional int64 background_usage_time_in_ms = 16;
+  optional double foreground_usage_consume_power = 17;
+  optional double foreground_service_usage_consume_power = 18;
+  optional double background_usage_consume_power = 19;
+  optional double cached_usage_consume_power = 20;
+}

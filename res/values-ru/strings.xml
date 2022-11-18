@@ -13,6 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="1999566976857398962">"Да"</string>
@@ -291,8 +292,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Модель вашего лица будет удалена навсегда.\n\n После этого для разблокировки телефона будет требоваться PIN-код, пароль или графический ключ."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Используйте фейсконтроль для разблокировки телефона"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Отпечатки пальцев"</string>
-    <!-- no translation found for security_settings_fingerprint_settings_preferences_category (8975029409126780752) -->
-    <skip />
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Когда применять разблокировку по отпечатку пальца"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Отпечаток для работы"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Добавить отпечаток пальца"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
@@ -374,13 +374,9 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Процент выполнения: <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Процент выполнения задачи по добавлению отпечатка пальца: <xliff:g id="PERCENTAGE">%d</xliff:g>."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Отпечаток добавлен"</string>
-    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Теперь вы можете использовать отпечаток пальца, чтобы снимать блокировку планшета и подтверждать свою личность, например для входа в приложения и одобрения покупок."</string>
-    <!-- no translation found for security_settings_require_screen_on_to_auth_title (6393244827110756927) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_description (8555651197315796037) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_keywords (5557869560397089603) -->
-    <skip />
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Разблокировка только при включенном экране"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Разблокировать устройство можно, только когда экран включен. Это снижает вероятность случайной разблокировки."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Экран, разблокировка"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Не сейчас"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Поднимите палец и снова приложите его к сканеру"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Наклоните палец вбок, приложите к датчику и удерживайте. Затем наклоните палец в противоположную сторону и повторите действия."</string>
@@ -473,31 +469,43 @@
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"Отключить защиту профиля?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"Графический ключ защитит данные на телефоне в случае его потери или кражи."</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"Графический ключ защитит данные на телефоне в случае его потери или кражи.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Модель отпечатка пальца, сохраненная на устройстве, также будет удалена. Вы не сможете пользоваться отпечатком пальца для аутентификации в приложениях."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"Графический ключ защитит данные на телефоне в случае его потери или кражи.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Модель вашего лица также будет безвозвратно удалена. Вы не сможете пользоваться фейсконтролем для аутентификации в приложениях."</string>
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"Графический ключ защитит данные на телефоне в случае его потери или кражи.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Модель отпечатка пальца, сохраненная на устройстве, будет удалена. Модель вашего лица также будет безвозвратно удалена. Вы не сможете пользоваться фейсконтролем и отпечатком пальца для аутентификации в приложениях."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"PIN-код защитит данные на телефоне в случае его потери или кражи."</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"PIN-код защитит данные на телефоне в случае его потери или кражи.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Модель отпечатка пальца, сохраненная на устройстве, также будет удалена. Вы не сможете пользоваться отпечатком пальца для аутентификации в приложениях."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"PIN-код защитит данные на телефоне в случае его потери или кражи.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Модель вашего лица также будет безвозвратно удалена. Вы не сможете пользоваться фейсконтролем для аутентификации в приложениях."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"PIN-код защитит данные на телефоне в случае его потери или кражи.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Модель отпечатка пальца, сохраненная на устройстве, будет удалена. Модель вашего лица также будет безвозвратно удалена. Вы не сможете пользоваться фейсконтролем и отпечатком пальца для аутентификации в приложениях."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"Пароль защитит данные на телефоне в случае его потери или кражи."</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"Пароль защитит данные на телефоне в случае его потери или кражи.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Модель отпечатка пальца, сохраненная на устройстве, также будет удалена. Вы не сможете пользоваться отпечатком пальца для аутентификации в приложениях."</string>
     <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"Пароль защитит данные на телефоне в случае его потери или кражи.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Модель вашего лица также будет безвозвратно удалена. Вы не сможете пользоваться фейсконтролем для аутентификации в приложениях."</string>
     <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"Пароль защитит данные на телефоне в случае его потери или кражи.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Модель отпечатка пальца, сохраненная на устройстве, будет удалена. Модель вашего лица также будет безвозвратно удалена. Вы не сможете пользоваться фейсконтролем и отпечатком пальца для аутентификации в приложениях."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"Без блокировки экрана не будет работать защита устройства."</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"Без блокировки экрана не будет работать защита устройства.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Модель отпечатка пальца, сохраненная на устройстве, также будет удалена. Вы не сможете пользоваться отпечатком пальца для аутентификации в приложениях."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"Без блокировки экрана не будет работать защита устройства.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Модель вашего лица также будет безвозвратно удалена. Вы не сможете пользоваться фейсконтролем для аутентификации в приложениях."</string>
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"Без блокировки экрана не будет работать защита устройства.<xliff:g id="EMPTY_LINE">
+
 </xliff:g>Модель отпечатка пальца, сохраненная на устройстве, будет удалена. Модель вашего лица также будет безвозвратно удалена. Вы не сможете пользоваться фейсконтролем и отпечатком пальца для аутентификации в приложениях."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Не использовать"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"Для стабильной работы приложения \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" рекомендуется настроить сложный PIN-код или пароль."</string>
@@ -1029,8 +1037,7 @@
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Недоступно в ночном режиме"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Использовать заставку"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Во время зарядки и на док-станции"</string>
-    <!-- no translation found for screensaver_settings_summary_dock_and_charging (8485905100159376156) -->
-    <skip />
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"На док-станции и во время зарядки"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Во время зарядки"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"На док-станции"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Никогда"</string>
@@ -1045,13 +1052,18 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Полужирный шрифт"</string>
     <string name="title_font_size" msgid="570613010306330622">"Размер шрифта"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Изменение размера текста"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"Настройки блокировки SIM-карты"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"Блокировка SIM-карты"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"Блокировка SIM-карты"</string>
+    <!-- no translation found for sim_lock_settings (7331982427303002613) -->
+    <skip />
+    <!-- no translation found for sim_lock_settings_category (6475255139493877786) -->
+    <skip />
+    <!-- no translation found for sim_pin_toggle (6814489621760857328) -->
+    <skip />
     <string name="sim_pin_change" msgid="5978881209990507379">"Изменить PIN-код SIM-карты"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"PIN-код SIM-карты"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Блокировка SIM-карты"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"Разблокировать SIM-карту"</string>
+    <!-- no translation found for sim_enable_sim_lock (6486354334679225748) -->
+    <skip />
+    <!-- no translation found for sim_disable_sim_lock (6939439812841857306) -->
+    <skip />
     <string name="sim_enter_old" msgid="6882545610939674813">"Прежний PIN-код SIM-карты"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"Новый PIN SIM-карты"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Введите новый PIN-код ещё раз"</string>
@@ -1066,7 +1078,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Переключиться на оператора \"<xliff:g id="CARRIER">%1$s</xliff:g>\"?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Вы пользуетесь мобильным Интернетом в сети оператора \"<xliff:g id="CARRIER2_0">%2$s</xliff:g>\". После переключения на SIM-карту \"<xliff:g id="CARRIER1">%1$s</xliff:g>\" вы не сможете использовать мобильный Интернет оператора \"<xliff:g id="CARRIER2_1">%2$s</xliff:g>\"."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Выбрать сеть оператора \"<xliff:g id="CARRIER">%1$s</xliff:g>\""</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"Изменить основную SIM-карту?"</string>
+    <!-- no translation found for sim_preferred_title (8850185380445309835) -->
+    <skip />
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> – единственная SIM-карта в устройстве. Использовать ее для звонков, отправки SMS-сообщений и передачи мобильных данных?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Неверный PIN-код. Обратитесь к оператору связи, чтобы разблокировать SIM-карту."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1221,17 +1234,20 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Сбросить настройки Wi-Fi, мобильного интернета и Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"На устройстве будут сброшены все сетевые настройки, в том числе:\n\n"<li>"Wi‑Fi"</li>\n<li>"Мобильный Интернет"</li>\n<li>"Bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Стереть"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Стереть скачанные SIM-карты"</string>
+    <!-- no translation found for reset_esim_title (4194570573425902754) -->
+    <skip />
     <string name="reset_esim_desc" msgid="3662444090563399131">"Это действие не отменит ваши тарифные планы. Чтобы скачать новые SIM-карты, обратитесь к оператору связи."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Сбросить настройки"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Сбросить все настройки сети? Это действие нельзя отменить."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Сбросить все сетевые настройки и удалить скачанные SIM-карты? Это действие нельзя отменить."</string>
+    <!-- no translation found for reset_network_final_desc_esim (1129251284212847939) -->
+    <skip />
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Да"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Сбросить настройки?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Этот пользователь не может сбрасывать настройки сети"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Сетевые настройки сброшены"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Не удалось стереть данные SIM-карт"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"Не удалось стереть данные скачанных SIM-карт из-за ошибки.\n\nПерезагрузите устройство и повторите попытку."</string>
+    <!-- no translation found for reset_esim_error_msg (7279607120606365250) -->
+    <skip />
     <string name="main_clear_title" msgid="277664302144837723">"Удалить все данные"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Удалить все данные"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"музыка;"</li>\n<li>"фото;"</li>\n<li>"другие данные."</li></string>
@@ -2087,7 +2103,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"Подробная история"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Расход заряда батареи"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Расход заряда за последние 24 часа"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Расход заряда с момента полной зарядки"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Данные об исп. с момента полной зарядки"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Расход заряда батареи для приложений"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Расход батареи"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Режим энергопотребления"</string>
@@ -2192,25 +2208,25 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Время работы при полном заряде батареи"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Расход заряда батареи указан приблизительно и может меняться в зависимости от интенсивности использования."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Расход заряда"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Всего <xliff:g id="TIME_0">^1</xliff:g> • В фоновом режиме <xliff:g id="TIME_1">^2</xliff:g>\nс момента последней полной зарядки"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"Всего <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> в фоновом режиме\nс момента последней полной зарядки"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Всего <xliff:g id="TIME_0">^1</xliff:g> • В фоновом режиме <xliff:g id="TIME_1">^2</xliff:g>\nза последние 24 часа"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Всего <xliff:g id="TIME_0">^1</xliff:g> • В фоновом режиме <xliff:g id="TIME_1">^2</xliff:g>\nв период <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"Всего меньше минуты с момента последней зарядки"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"Всего меньше минуты с момента последней полной зарядки"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"Всего меньше минуты за последние 24 часа"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Всего меньше минуты в период <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"Меньше минуты в фоновом режиме с момента последней полной зарядки"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"Меньше минуты в фоновом режиме с момента последней полной зарядки"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Меньше минуты в фоновом режиме за последние 24 часа"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"В фоновом режиме меньше минуты в период <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"Всего <xliff:g id="TIME">^1</xliff:g> с момента последней полной зарядки"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"Всего <xliff:g id="TIME">^1</xliff:g> с момента последней полной зарядки"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"Всего <xliff:g id="TIME">^1</xliff:g> за последние 24 часа"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"Всего <xliff:g id="TIME_0">^1</xliff:g> в период <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"<xliff:g id="TIME">^1</xliff:g> в фоновом режиме с момента последней полной зарядки"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"<xliff:g id="TIME">^1</xliff:g> в фоновом режиме с момента последней полной зарядки"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"<xliff:g id="TIME">^1</xliff:g> в фоновом режиме за последние 24 часа"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> в фоновом режиме в период <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"Всего <xliff:g id="TIME">^1</xliff:g> • В фоновом режиме меньше минуты\nс момента последней полной зарядки"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"Всего <xliff:g id="TIME">^1</xliff:g> • Меньше минуты в фоновом режиме\nс момента последней полной зарядки"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"Всего <xliff:g id="TIME">^1</xliff:g> • В фоновом режиме меньше минуты\nза последние 24 часа"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"Всего <xliff:g id="TIME_0">^1</xliff:g> • В фоновом режиме меньше минуты\nв период <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"Батарея не использовалась с момента последней полной зарядки"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"Батарея не использовалась с момента последней полной зарядки"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Батарея не использовалась за последние 24 часа"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"Другие пользователи"</string>
@@ -2629,7 +2645,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Удалить пользователя <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Заблокированный экран"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Добавить пользователя ­на заблокированном экране"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"Переключаться на администратора при подключении к док-станции"</string>
+    <!-- no translation found for switch_to_dock_user_when_docked (2324395443311905635) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Удалить ваш профиль?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Удалить пользователя?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Удалить профиль?"</string>
@@ -2755,7 +2772,8 @@
     <string name="wizard_next" msgid="3884832431439072471">"Далее"</string>
     <string name="wizard_back_adoptable" msgid="1447814356855134183">"Форматировать по-другому"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"SIM-карты"</string>
+    <!-- no translation found for sim_settings_title (2254609719033946272) -->
+    <skip />
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Мобильный Интернет недоступен"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Нажмите, чтобы выбрать SIM-карту для мобильных данных"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Всегда использовать для звонков"</string>
@@ -2773,7 +2791,8 @@
     <string name="sim_status_title" msgid="6188770698037109774">"Статус SIM-карты"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"Статус SIM (слот SIM %1$d)"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> дБмВт, asu: <xliff:g id="ASU">%2$d</xliff:g>"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"SIM-карты заменены"</string>
+    <!-- no translation found for sim_notification_title (2819551384383504031) -->
+    <skip />
     <string name="sim_notification_summary" msgid="5593339846307029991">"Нажмите, чтобы настроить"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Всегда спрашивать"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Выберите SIM-карту"</string>
@@ -2799,6 +2818,8 @@
     <string name="account_dashboard_title" msgid="8228773251948253914">"Пароли и аккаунты"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Сохраненные пароли, автозаполнение, синхронизируемые аккаунты"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Приложения по умолчанию"</string>
+    <!-- no translation found for cloned_apps_dashboard_title (5542076801222950921) -->
+    <skip />
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Языки, время, жесты, резервное копирование"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"Языки системы, языки приложений"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"Wi-Fi, WiFi, сетевое подключение, Интернет, беспроводной, данные, Wi Fi"</string>
@@ -3257,8 +3278,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Вы отключили уведомления от этого приложения."</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Вы отключили уведомления этой категории."</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Вы отключили эту группу уведомлений"</string>
-    <!-- no translation found for app_notifications_not_send_desc (5683060986735070528) -->
-    <skip />
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Это приложение не отправляет уведомления"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Категории"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Другие"</string>
     <string name="no_channels" msgid="4716199078612071915">"Это приложение не отправляло уведомлений."</string>
@@ -3428,7 +3448,8 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Запрашивать пароль"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Блокировать устройство при отключении функции"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Подтверждение удаления SIM-карты"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Запрашивать подтверждение личности перед удалением скачанной SIM-карты"</string>
+    <!-- no translation found for confirm_sim_deletion_description (5090811029854329373) -->
+    <skip />
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Профилем управляет"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Управляется <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"Безопасный запуск"</string>
@@ -4242,7 +4263,8 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Мобильный интернет"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Доступ к интернету по мобильной сети"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Телефон автоматически подключится к сети этого оператора, когда вы окажетесь в зоне ее действия."</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Нет SIM-карты"</string>
+    <!-- no translation found for mobile_data_settings_summary_unavailable (9176513507571883986) -->
+    <skip />
     <string name="calls_preference" msgid="2166481296066890129">"Настройки звонков"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Настройки SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Всегда спрашивать"</string>
@@ -4257,8 +4279,10 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Добавить"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Активно/SIM-карта"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Неактивно/SIM-карта"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Активно / Скачанная SIM-карта"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Неактивно / Скачанная SIM-карта"</string>
+    <!-- no translation found for mobile_network_active_esim (3984452275968408382) -->
+    <skip />
+    <!-- no translation found for mobile_network_inactive_esim (8777415108263057939) -->
+    <skip />
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"Название SIM-карты и цвет"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Название"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Цвет (для совместимых приложений)"</string>
@@ -4294,7 +4318,8 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Переключиться на SIM-карту?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Использовать <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Нельзя использовать несколько SIM-карт одновременно.\n\nВы можете переключиться на оператора \"<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>\". Ваш тарифный план у оператора \"<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>\" останется активным."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Нельзя использовать несколько скачанных SIM-карт одновременно.\n\nВы можете переключиться на оператора \"<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>\". Ваш тарифный план у оператора \"<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>\" останется активным."</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_text_downloaded (8977951796005849471) -->
+    <skip />
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Нельзя использовать несколько SIM-карт одновременно.\n\nВаш тарифный план у оператора \"<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>\" останется активным."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Вы можете использовать две SIM-карты одновременно. Чтобы выбрать <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, отключите другую SIM-карту."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Переключиться на <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -4336,8 +4361,10 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"Сеть \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\" будет использоваться для звонков, SMS и доступа к мобильному интернету."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Нет активных SIM-карт"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Чтобы использовать мобильный интернет, звонки и SMS, измените настройки сети."</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"SIM-карта"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Стереть эту скачанную SIM-карту?"</string>
+    <!-- no translation found for sim_card_label (6263064316075963775) -->
+    <skip />
+    <!-- no translation found for erase_sim_dialog_title (4742077437653028326) -->
+    <skip />
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Если вы сотрете эту SIM-карту, оператор \"<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>\" перестанет обслуживать устройство.\n\nТарифный план оператора \"<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>\" останется активным."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Стереть"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"Удаление данных SIM-карты…"</string>
@@ -4491,8 +4518,10 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Разрешить Google Fi использовать сети W+ для улучшения скорости и покрытия"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Сеть W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM-карта"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"СКАЧАННАЯ SIM-КАРТА"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"СКАЧАННЫЕ SIM-КАРТЫ"</string>
+    <!-- no translation found for downloaded_sim_category_title (2876988650413179752) -->
+    <skip />
+    <!-- no translation found for downloaded_sims_category_title (487799905978489922) -->
+    <skip />
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Активна"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Неактивна"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" /По умолчанию для категорий: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -4548,7 +4577,8 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Настройки вызовов"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Обновление настроек…"</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Ошибка настройки вызовов"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Ошибка сети или SIM-карты."</string>
+    <!-- no translation found for smart_forwarding_failed_text (8682640643264071789) -->
+    <skip />
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM-карта не активирована."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Введите номера телефонов"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Введите номер телефона"</string>
@@ -4572,10 +4602,14 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"Назад"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Далее"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Предпросмотр цвета"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Запрос на доступ к SIM-карте"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Устройство запрашивает доступ к вашей SIM-карте. Нажмите, чтобы узнать больше."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Предоставить доступ к SIM-карте?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Устройство Bluetooth \"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>\" запрашивает доступ к данным на SIM-карте, в том числе к вашим контактам.\n\nПока устройство \"<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>\" подключено, оно будет принимать все входящие вызовы на номер <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <!-- no translation found for bluetooth_sim_card_access_notification_title (7351015416346359536) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_notification_content (8685623260103018309) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_title (5616323725563125179) -->
+    <skip />
+    <!-- no translation found for bluetooth_sim_card_access_dialog_content (6281997628405909566) -->
+    <skip />
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Доступно устройство Bluetooth"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Устройство запрашивает разрешение на подключение. Нажмите, чтобы узнать больше."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Подключиться к устройству Bluetooth?"</string>
@@ -4589,10 +4623,8 @@
     <string name="tare_balances" msgid="731881382594747961">"Баланс"</string>
     <string name="tare_consumption_limits" msgid="3230949387874396382">"Ограничение потребления"</string>
     <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Начальное ограничение потребления"</string>
-    <!-- no translation found for tare_min_consumption_limit (3293145670921755789) -->
-    <skip />
-    <!-- no translation found for tare_max_consumption_limit (8335700580111808823) -->
-    <skip />
+    <string name="tare_min_consumption_limit" msgid="3293145670921755789">"Минимальное ограничение потребления"</string>
+    <string name="tare_max_consumption_limit" msgid="8335700580111808823">"Максимальное ограничение потребления"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Модификаторы"</string>
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Действия (затраты на выполнение)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Действия (базовые затраты)"</string>

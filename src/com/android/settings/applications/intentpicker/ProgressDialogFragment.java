@@ -35,7 +35,7 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -62,7 +62,7 @@ public class ProgressDialogFragment extends InstrumentedDialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this.getActivity()).get(SupportedLinkViewModel.class);
+        mViewModel = new ViewModelProvider(this.getActivity()).get(SupportedLinkViewModel.class);
     }
 
     @Override
