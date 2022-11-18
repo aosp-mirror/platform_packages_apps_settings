@@ -442,7 +442,8 @@ public class FingerprintSettings extends SubSettings {
                 mFooterColumns.add(column2);
             } else {
                 final FooterColumn column = new FooterColumn();
-                column.mTitle = getText(R.string.security_settings_fingerprint_v2_home_screen_text);
+                column.mTitle = getText(
+                        R.string.security_settings_fingerprint_enroll_introduction_v2_message);
                 column.mLearnMoreClickListener = learnMoreClickListener;
                 mFooterColumns.add(column);
             }
