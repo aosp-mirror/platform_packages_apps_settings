@@ -33,7 +33,6 @@ import android.os.BatteryManager;
 import android.os.PowerManager;
 
 import com.android.settings.Utils;
-import com.android.settings.homepage.contextualcards.slices.BatteryFixSliceTest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +41,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 public class BatteryBroadcastReceiverTest {
@@ -77,9 +75,6 @@ public class BatteryBroadcastReceiverTest {
     }
 
     @Test
-    @Config(shadows = {
-            BatteryFixSliceTest.ShadowBatteryTipLoader.class
-    })
     public void testOnReceive_batteryLevelChanged_dataUpdated() {
         mBatteryBroadcastReceiver.onReceive(mContext, mChargingIntent);
 
@@ -91,9 +86,6 @@ public class BatteryBroadcastReceiverTest {
     }
 
     @Test
-    @Config(shadows = {
-            BatteryFixSliceTest.ShadowBatteryTipLoader.class
-    })
     public void testOnReceive_batteryHealthChanged_dataUpdated() {
         mChargingIntent
                 .putExtra(BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_OVERHEAT);
@@ -105,9 +97,6 @@ public class BatteryBroadcastReceiverTest {
     }
 
     @Test
-    @Config(shadows = {
-            BatteryFixSliceTest.ShadowBatteryTipLoader.class
-    })
     public void onReceive_batteryNotPresent_shouldShowHelpMessage() {
         mChargingIntent.putExtra(BatteryManager.EXTRA_PRESENT, false);
 
@@ -117,9 +106,6 @@ public class BatteryBroadcastReceiverTest {
     }
 
     @Test
-    @Config(shadows = {
-            BatteryFixSliceTest.ShadowBatteryTipLoader.class
-    })
     public void testOnReceive_powerSaveModeChanged_listenerInvoked() {
         mBatteryBroadcastReceiver.onReceive(mContext,
                 new Intent(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
@@ -128,9 +114,6 @@ public class BatteryBroadcastReceiverTest {
     }
 
     @Test
-    @Config(shadows = {
-            BatteryFixSliceTest.ShadowBatteryTipLoader.class
-    })
     public void testOnReceive_batteryDataNotChanged_listenerNotInvoked() {
         final String batteryLevel = Utils.getBatteryPercentage(mChargingIntent);
         final String batteryStatus =
@@ -148,9 +131,6 @@ public class BatteryBroadcastReceiverTest {
     }
 
     @Test
-    @Config(shadows = {
-            BatteryFixSliceTest.ShadowBatteryTipLoader.class
-    })
     public void testRegister_updateBatteryStatus() {
         doReturn(mChargingIntent).when(mContext).registerReceiver(any(), any());
 
