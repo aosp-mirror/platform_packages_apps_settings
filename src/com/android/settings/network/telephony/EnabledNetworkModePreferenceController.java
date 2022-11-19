@@ -135,6 +135,11 @@ public class EnabledNetworkModePreferenceController extends
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+
+        if (mBuilder == null) {
+            return;
+        }
+
         final ListPreference listPreference = (ListPreference) preference;
 
         mBuilder.setPreferenceEntries();
@@ -871,6 +876,8 @@ public class EnabledNetworkModePreferenceController extends
 
     @Override
     public void onSubscriptionsChanged() {
-        mBuilder.updateConfig();
+        if (mBuilder != null) {
+            mBuilder.updateConfig();
+        }
     }
 }

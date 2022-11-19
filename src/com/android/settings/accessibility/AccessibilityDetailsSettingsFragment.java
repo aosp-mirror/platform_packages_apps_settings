@@ -41,6 +41,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.List;
@@ -230,6 +231,10 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
                     new ComponentName(packageName, tileServiceClassName).flattenToString());
         }
 
+        final int metricsCategory = FeatureFactory.getFactory(getActivity().getApplicationContext())
+                .getAccessibilityMetricsFeatureProvider()
+                .getDownloadedFeatureMetricsCategory(componentName);
+        extras.putInt(AccessibilitySettings.EXTRA_METRICS_CATEGORY, metricsCategory);
         extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName);
         extras.putInt(AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES, info.getAnimatedImageRes());
 

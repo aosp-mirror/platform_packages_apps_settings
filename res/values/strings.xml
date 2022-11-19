@@ -6026,7 +6026,8 @@
     <string name="help_uri_about" translatable="false"></string>
     <!-- Help URI, manage apps that can set alarms and reminders [DO NOT TRANSLATE] -->
     <string name="help_uri_alarms_and_reminders" translatable="false"></string>
-
+    <!-- Help URI, manage apps that can run long background tasks [DO NOT TRANSLATE] -->
+    <string name="help_uri_long_background_tasks" translatable="false"></string>
     <!-- Help URL, WiFi [DO NOT TRANSLATE] -->
     <string name="help_url_wifi" translatable="false"></string>
     <!-- Help URL, WiFi Direct [DO NOT TRANSLATE] -->
@@ -8016,9 +8017,9 @@
 
     <!-- TODO(b/258550150): Finalize all strings in this section and remove translatable="false" -->
     <!-- [CHAR LIMIT=32] Name of Advanced memory protection page in "More Security Settings" and heading of page. -->
-    <string name="memtag_title" translatable="false">Advanced memory protection</string>
+    <string name="memtag_title" translatable="false">Advanced memory protection beta</string>
     <!-- [CHAR LIMIT=52] Label for button to turn on / off Advanced memory protection.-->
-    <string name="memtag_toggle" translatable="false">Try Advanced memory protection</string>
+    <string name="memtag_toggle" translatable="false">Advanced memory protection</string>
     <!-- [CHAR LIMIT=NONE] Subtitle of Advanced memory protection page. -->
     <string name="memtag_intro" translatable="false">This beta feature helps you protect your device from bugs that may put your security at risk.</string>
     <!-- [CHAR LIMIT=NONE] Status label indicating that Advanced memory protection is on. -->
@@ -9116,6 +9117,22 @@
 
     <!-- Title for the See more preference item in Special app access settings [CHAR LIMIT=30] -->
     <string name="special_access_more">See more</string>
+
+    <!-- Label for the settings activity for controlling apps that can run long background tasks [CHAR LIMIT=30] -->
+    <string name="long_background_tasks_label">Long background tasks</string>
+    <!-- Label for the switch to toggle the permission for running long background tasks [CHAR LIMIT=50] -->
+    <string name="long_background_tasks_switch_title">Allow long-running background tasks</string>
+    <!-- Title for the settings screen for controlling apps that can run long background tasks [CHAR LIMIT=30] -->
+    <string name="long_background_tasks_title">Long background tasks</string>
+    <!-- Description that appears below the long_background_tasks switch [CHAR LIMIT=NONE] -->
+    <string name="long_background_tasks_footer_title">
+        Allow this app to run long background tasks. This lets the app run tasks that might
+        take longer than a few minutes to finish, such as downloads and uploads.
+        \n\nIf this permission is denied, the system will limit how long the app can perform
+        such tasks in the background.
+    </string>
+    <!-- Keywords for settings screen for controlling apps that can run long background tasks [CHAR LIMIT=NONE] -->
+    <string name="keywords_long_background_tasks">long jobs, data transfer, background tasks</string>
 
     <!-- Reset rate-limiting in the system service ShortcutManager.  "ShortcutManager" is the name of a system service and not translatable.
     If the word "rate-limit" is hard to translate, use "Reset ShortcutManager API call limit" as the source text, which means

@@ -96,7 +96,8 @@ public class MmsMessagePreferenceController extends TelephonyTogglePreferenceCon
 
     @Override
     public boolean isChecked() {
-        return mTelephonyManager.isDataEnabledForApn(ApnSetting.TYPE_MMS);
+        return mTelephonyManager != null && mTelephonyManager.isDataEnabledForApn(
+                ApnSetting.TYPE_MMS);
     }
 
     private void refreshPreference() {

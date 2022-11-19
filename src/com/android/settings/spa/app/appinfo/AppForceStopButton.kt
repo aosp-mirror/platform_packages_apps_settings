@@ -48,7 +48,8 @@ class AppForceStopButton(
 
     private var openConfirmDialog by mutableStateOf(false)
 
-    fun getActionButton(app: ApplicationInfo): ActionButton {
+    fun getActionButton(packageInfo: PackageInfo): ActionButton {
+        val app = packageInfo.applicationInfo
         return ActionButton(
             text = context.getString(R.string.force_stop),
             imageVector = Icons.Outlined.WarningAmber,

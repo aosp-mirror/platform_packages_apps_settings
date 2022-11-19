@@ -46,7 +46,7 @@ public class MemtagHelper {
         if (MemtagHelper.isForcedOff()) {
             return BasePreferenceController.DISABLED_DEPENDENT_SETTING;
         }
-        return SystemProperties.getBoolean("ro.arm64.memtag.bootctl_supported", false)
+        return SystemProperties.getBoolean("ro.arm64.memtag.bootctl_settings_toggle", false)
                 ? BasePreferenceController.AVAILABLE
                 : BasePreferenceController.UNSUPPORTED_ON_DEVICE;
     }
