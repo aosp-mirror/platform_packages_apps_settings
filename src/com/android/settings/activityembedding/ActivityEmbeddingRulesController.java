@@ -22,11 +22,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.util.FeatureFlagUtils;
-import android.util.LayoutDirection;
 import android.util.Log;
 
 import androidx.window.embedding.ActivityFilter;
 import androidx.window.embedding.ActivityRule;
+import androidx.window.embedding.SplitAttributes;
 import androidx.window.embedding.SplitController;
 import androidx.window.embedding.SplitPairFilter;
 import androidx.window.embedding.SplitPairRule;
@@ -46,6 +46,7 @@ import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.users.AvatarPickerActivity;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -60,7 +61,7 @@ public class ActivityEmbeddingRulesController {
 
     public ActivityEmbeddingRulesController(Context context) {
         mContext = context;
-        mSplitController = SplitController.getInstance();
+        mSplitController = SplitController.getInstance(context);
     }
 
     /**
@@ -85,8 +86,8 @@ public class ActivityEmbeddingRulesController {
             ComponentName primaryComponent,
             ComponentName secondaryComponent,
             String secondaryIntentAction,
-            int finishPrimaryWithSecondary,
-            int finishSecondaryWithPrimary,
+            SplitRule.FinishBehavior finishPrimaryWithSecondary,
+            SplitRule.FinishBehavior finishSecondaryWithPrimary,
             boolean clearTop) {
         if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(context)) {
             return;
@@ -95,14 +96,20 @@ public class ActivityEmbeddingRulesController {
         filters.add(new SplitPairFilter(primaryComponent, secondaryComponent,
                 secondaryIntentAction));
 
-        SplitController.getInstance().registerRule(new SplitPairRule(filters,
-                finishPrimaryWithSecondary,
-                finishSecondaryWithPrimary,
-                clearTop,
-                ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthPx(context),
-                ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthPx(context),
-                ActivityEmbeddingUtils.getSplitRatio(context),
-                LayoutDirection.LOCALE));
+        SplitAttributes attributes = new SplitAttributes.Builder()
+                .setSplitType(SplitAttributes.SplitType.ratio(
+                        ActivityEmbeddingUtils.getSplitRatio(context)))
+                .setLayoutDirection(SplitAttributes.LayoutDirection.LOCALE)
+                .build();
+        SplitPairRule splitPairRule = new SplitPairRule.Builder(filters)
+                .setFinishPrimaryWithSecondary(finishPrimaryWithSecondary)
+                .setFinishSecondaryWithPrimary(finishSecondaryWithPrimary)
+                .setClearTop(clearTop)
+                .setMinWidthDp(ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthDp())
+                .setMinSmallestWidthDp(ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthDp())
+                .setDefaultSplitAttributes(attributes)
+                .build();
+        SplitController.getInstance(context).addRule(splitPairRule);
     }
 
     /**
@@ -123,8 +130,10 @@ public class ActivityEmbeddingRulesController {
                 new ComponentName(context, Settings.class),
                 secondaryComponent,
                 secondaryIntentAction,
-                finishPrimaryWithSecondary ? SplitRule.FINISH_ADJACENT : SplitRule.FINISH_NEVER,
-                finishSecondaryWithPrimary ? SplitRule.FINISH_ADJACENT : SplitRule.FINISH_NEVER,
+                finishPrimaryWithSecondary ? SplitRule.FinishBehavior.ADJACENT
+                        : SplitRule.FinishBehavior.NEVER,
+                finishSecondaryWithPrimary ? SplitRule.FinishBehavior.ADJACENT
+                        : SplitRule.FinishBehavior.NEVER,
                 clearTop);
 
         registerTwoPanePairRule(
@@ -132,8 +141,10 @@ public class ActivityEmbeddingRulesController {
                 new ComponentName(context, SettingsHomepageActivity.class),
                 secondaryComponent,
                 secondaryIntentAction,
-                finishPrimaryWithSecondary ? SplitRule.FINISH_ADJACENT : SplitRule.FINISH_NEVER,
-                finishSecondaryWithPrimary ? SplitRule.FINISH_ADJACENT : SplitRule.FINISH_NEVER,
+                finishPrimaryWithSecondary ? SplitRule.FinishBehavior.ADJACENT
+                        : SplitRule.FinishBehavior.NEVER,
+                finishSecondaryWithPrimary ? SplitRule.FinishBehavior.ADJACENT
+                        : SplitRule.FinishBehavior.NEVER,
                 clearTop);
 
         // We should finish HomePageActivity altogether even if it shows in single pane for all deep
@@ -143,8 +154,10 @@ public class ActivityEmbeddingRulesController {
                 new ComponentName(context, DeepLinkHomepageActivity.class),
                 secondaryComponent,
                 secondaryIntentAction,
-                finishPrimaryWithSecondary ? SplitRule.FINISH_ALWAYS : SplitRule.FINISH_NEVER,
-                finishSecondaryWithPrimary ? SplitRule.FINISH_ALWAYS : SplitRule.FINISH_NEVER,
+                finishPrimaryWithSecondary ? SplitRule.FinishBehavior.ALWAYS
+                        : SplitRule.FinishBehavior.NEVER,
+                finishSecondaryWithPrimary ? SplitRule.FinishBehavior.ALWAYS
+                        : SplitRule.FinishBehavior.NEVER,
                 clearTop);
 
         registerTwoPanePairRule(
@@ -152,8 +165,10 @@ public class ActivityEmbeddingRulesController {
                 new ComponentName(context, DeepLinkHomepageActivityInternal.class),
                 secondaryComponent,
                 secondaryIntentAction,
-                finishPrimaryWithSecondary ? SplitRule.FINISH_ALWAYS : SplitRule.FINISH_NEVER,
-                finishSecondaryWithPrimary ? SplitRule.FINISH_ALWAYS : SplitRule.FINISH_NEVER,
+                finishPrimaryWithSecondary ? SplitRule.FinishBehavior.ALWAYS
+                        : SplitRule.FinishBehavior.NEVER,
+                finishSecondaryWithPrimary ? SplitRule.FinishBehavior.ALWAYS
+                        : SplitRule.FinishBehavior.NEVER,
                 clearTop);
     }
 
@@ -204,17 +219,20 @@ public class ActivityEmbeddingRulesController {
 
         final Intent intent = new Intent(mContext, Settings.NetworkDashboardActivity.class);
         intent.putExtra(SettingsActivity.EXTRA_IS_SECOND_LAYER_PAGE, true);
-        final SplitPlaceholderRule placeholderRule = new SplitPlaceholderRule(
-                activityFilters,
-                intent,
-                true /* stickyPlaceholder */,
-                SplitRule.FINISH_ADJACENT,
-                ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthPx(mContext),
-                ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthPx(mContext),
-                ActivityEmbeddingUtils.getSplitRatio(mContext),
-                LayoutDirection.LOCALE);
+        SplitAttributes attributes = new SplitAttributes.Builder()
+                .setSplitType(SplitAttributes.SplitType.ratio(
+                        ActivityEmbeddingUtils.getSplitRatio(mContext)))
+                .build();
+        final SplitPlaceholderRule placeholderRule = new SplitPlaceholderRule.Builder(
+                activityFilters, intent)
+                .setMinWidthDp(ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthDp())
+                .setMinSmallestWidthDp(ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthDp())
+                .setSticky(true)
+                .setFinishPrimaryWithPlaceholder(SplitRule.FinishBehavior.ADJACENT)
+                .setDefaultSplitAttributes(attributes)
+                .build();
 
-        mSplitController.registerRule(placeholderRule);
+        mSplitController.addRule(placeholderRule);
     }
 
     private void registerAlwaysExpandRule() {
@@ -229,14 +247,16 @@ public class ActivityEmbeddingRulesController {
         addActivityFilter(activityFilters, FingerprintEnrollIntroductionInternal.class);
         addActivityFilter(activityFilters, FingerprintEnrollEnrolling.class);
         addActivityFilter(activityFilters, AvatarPickerActivity.class);
-        mSplitController.registerRule(new ActivityRule(activityFilters, true /* alwaysExpand */));
+        ActivityRule activityRule = new ActivityRule.Builder(activityFilters).setAlwaysExpand(true)
+                .build();
+        mSplitController.addRule(activityRule);
     }
 
     private static void addActivityFilter(Set<ActivityFilter> activityFilters, Intent intent) {
         activityFilters.add(new ActivityFilter(COMPONENT_NAME_WILDCARD, intent.getAction()));
     }
 
-    private void addActivityFilter(Set<ActivityFilter> activityFilters,
+    private void addActivityFilter(Collection<ActivityFilter> activityFilters,
             Class<? extends Activity> activityClass) {
         activityFilters.add(new ActivityFilter(new ComponentName(mContext, activityClass),
                 null /* intentAction */));
