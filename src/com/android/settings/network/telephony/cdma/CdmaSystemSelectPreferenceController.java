@@ -18,6 +18,7 @@ package com.android.settings.network.telephony.cdma;
 
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA;
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA;
+import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_UNKNOWN;
 
 import android.content.Context;
 import android.provider.Settings;
@@ -43,7 +44,10 @@ public class CdmaSystemSelectPreferenceController extends CdmaBasePreferenceCont
         super.updateState(preference);
         final ListPreference listPreference = (ListPreference) preference;
         listPreference.setVisible(getAvailabilityStatus() == AVAILABLE);
-        final int mode = mTelephonyManager.getCdmaRoamingMode();
+        boolean hasTelephonyMgr = mTelephonyManager != null;
+        final int mode =
+                hasTelephonyMgr ? mTelephonyManager.getCdmaRoamingMode()
+                        : TelephonyManager.CDMA_ROAMING_MODE_RADIO_DEFAULT;
         if (mode != TelephonyManager.CDMA_ROAMING_MODE_RADIO_DEFAULT) {
             if (mode == TelephonyManager.CDMA_ROAMING_MODE_HOME
                     || mode == TelephonyManager.CDMA_ROAMING_MODE_ANY) {
@@ -53,9 +57,11 @@ public class CdmaSystemSelectPreferenceController extends CdmaBasePreferenceCont
             }
         }
 
-        final int settingsNetworkMode = MobileNetworkUtils.getNetworkTypeFromRaf(
-                (int) mTelephonyManager.getAllowedNetworkTypesForReason(
-                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
+        final int settingsNetworkMode =
+                hasTelephonyMgr ? MobileNetworkUtils.getNetworkTypeFromRaf(
+                        (int) mTelephonyManager.getAllowedNetworkTypesForReason(
+                                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER))
+                        : NETWORK_MODE_UNKNOWN;
         final boolean enableList = settingsNetworkMode != NETWORK_MODE_LTE_GSM_WCDMA
                 && settingsNetworkMode != NETWORK_MODE_NR_LTE_GSM_WCDMA;
         listPreference.setEnabled(enableList);

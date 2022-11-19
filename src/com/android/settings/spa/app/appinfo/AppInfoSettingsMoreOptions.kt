@@ -18,8 +18,6 @@ package com.android.settings.spa.app.appinfo
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
@@ -47,24 +45,16 @@ fun AppInfoSettingsMoreOptions(packageInfoPresenter: PackageInfoPresenter, app: 
     val shownUninstallUpdates = remember(app) { isShowUninstallUpdates(context, app) }
     val shownUninstallForAllUsers = remember(app) { isShowUninstallForAllUsers(context, app) }
     if (!shownUninstallUpdates && !shownUninstallForAllUsers) return
-    MoreOptionsAction { onDismissRequest ->
+    MoreOptionsAction {
         if (shownUninstallUpdates) {
-            DropdownMenuItem(
-                text = { Text(stringResource(R.string.app_factory_reset)) },
-                onClick = {
-                    onDismissRequest()
-                    packageInfoPresenter.startUninstallActivity(forAllUsers = false)
-                },
-            )
+            MenuItem(text = stringResource(R.string.app_factory_reset)) {
+                packageInfoPresenter.startUninstallActivity(forAllUsers = false)
+            }
         }
         if (shownUninstallForAllUsers) {
-            DropdownMenuItem(
-                text = { Text(stringResource(R.string.uninstall_all_users_text)) },
-                onClick = {
-                    onDismissRequest()
-                    packageInfoPresenter.startUninstallActivity(forAllUsers = true)
-                },
-            )
+            MenuItem(text = stringResource(R.string.uninstall_all_users_text)) {
+                packageInfoPresenter.startUninstallActivity(forAllUsers = true)
+            }
         }
     }
 }

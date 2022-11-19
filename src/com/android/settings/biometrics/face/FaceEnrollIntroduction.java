@@ -18,13 +18,14 @@ package com.android.settings.biometrics.face;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.FACE_UNLOCK_DISABLED;
 
+import static com.android.settings.biometrics.BiometricUtils.GatekeeperCredentialNotMatchException;
+
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.hardware.SensorPrivacyManager;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
-import android.hardware.face.FaceSensorPropertiesInternal;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -37,6 +38,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -44,7 +46,6 @@ import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.MultiBiometricEnrollHelper;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupSkipDialog;
 import com.android.settings.utils.SensorPrivacyManagerHelper;
@@ -54,8 +55,6 @@ import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.span.LinkSpan;
 
-import java.util.List;
-
 /**
  * Provides introductory info about face unlock and prompts the user to agree before starting face
  * enrollment.
@@ -64,7 +63,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     private static final String TAG = "FaceEnrollIntroduction";
 
     private FaceManager mFaceManager;
-    private FaceFeatureProvider mFaceFeatureProvider;
     @Nullable private FooterButton mPrimaryFooterButton;
     @Nullable private FooterButton mSecondaryFooterButton;
     @Nullable private SensorPrivacyManager mSensorPrivacyManager;
@@ -145,9 +143,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             infoMessageRequireEyes.setText(getInfoMessageRequireEyes());
         }
 
-        mFaceManager = Utils.getFaceManagerOrNull(this);
-        mFaceFeatureProvider = FeatureFactory.getFactory(getApplicationContext())
-                .getFaceFeatureProvider();
+        mFaceManager = getFaceManager();
 
         // This path is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
@@ -157,11 +153,22 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                 // We either block on generateChallenge, or need to gray out the "next" button until
                 // the challenge is ready. Let's just do this for now.
                 mFaceManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
-                    mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId,
-                            challenge);
-                    mSensorId = sensorId;
-                    mChallenge = challenge;
-                    mFooterBarMixin.getPrimaryButton().setEnabled(true);
+                    if (isFinishing()) {
+                        // Do nothing if activity is finishing
+                        Log.w(TAG, "activity finished before challenge callback launched.");
+                        return;
+                    }
+
+                    try {
+                        mToken = requestGatekeeperHat(challenge);
+                        mSensorId = sensorId;
+                        mChallenge = challenge;
+                        mFooterBarMixin.getPrimaryButton().setEnabled(true);
+                    } catch (GatekeeperCredentialNotMatchException e) {
+                        // Let BiometricEnrollBase#onCreate() to trigger confirmLock()
+                        getIntent().removeExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE);
+                        recreate();
+                    }
                 });
             }
         }
@@ -173,6 +180,18 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         final boolean cameraPrivacyEnabled = helper
                 .isSensorBlocked(SensorPrivacyManagerHelper.SENSOR_CAMERA);
         Log.v(TAG, "cameraPrivacyEnabled : " + cameraPrivacyEnabled);
+    }
+
+    @VisibleForTesting
+    @Nullable
+    protected FaceManager getFaceManager() {
+        return Utils.getFaceManagerOrNull(this);
+    }
+
+    @VisibleForTesting
+    @Nullable
+    protected byte[] requestGatekeeperHat(long challenge) {
+        return BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
     }
 
     @Override
@@ -289,20 +308,12 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     private boolean maxFacesEnrolled() {
-        final boolean isSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         if (mFaceManager != null) {
-            final List<FaceSensorPropertiesInternal> props =
-                    mFaceManager.getSensorPropertiesInternal();
             // This will need to be updated for devices with multiple face sensors.
-            final int max = props.get(0).maxEnrollmentsPerUser;
             final int numEnrolledFaces = mFaceManager.getEnrolledFaces(mUserId).size();
-            final int maxFacesEnrollableIfSUW = getApplicationContext().getResources()
+            final int maxFacesEnrollable = getApplicationContext().getResources()
                     .getInteger(R.integer.suw_max_faces_enrollable);
-            if (isSetupWizard) {
-                return numEnrolledFaces >= maxFacesEnrollableIfSUW;
-            } else {
-                return numEnrolledFaces >= max;
-            }
+            return numEnrolledFaces >= maxFacesEnrollable;
         } else {
             return false;
         }

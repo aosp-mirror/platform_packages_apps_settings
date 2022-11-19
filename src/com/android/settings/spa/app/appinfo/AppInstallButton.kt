@@ -18,6 +18,7 @@ package com.android.settings.spa.app.appinfo
 
 import android.content.Intent
 import android.content.pm.ApplicationInfo
+import android.content.pm.PackageInfo
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FileDownload
 import com.android.settings.R
@@ -28,7 +29,8 @@ import com.android.settingslib.spaprivileged.model.app.userHandle
 class AppInstallButton(private val packageInfoPresenter: PackageInfoPresenter) {
     private val context = packageInfoPresenter.context
 
-    fun getActionButton(app: ApplicationInfo): ActionButton? {
+    fun getActionButton(packageInfo: PackageInfo): ActionButton? {
+        val app = packageInfo.applicationInfo
         if (!app.isInstantApp) return null
 
         return AppStoreUtil.getAppStoreLink(packageInfoPresenter.userContext, app.packageName)

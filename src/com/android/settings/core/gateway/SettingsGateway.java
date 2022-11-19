@@ -48,6 +48,7 @@ import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.applications.appinfo.AppLocaleDetails;
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
+import com.android.settings.applications.appinfo.LongBackgroundTasksDetails;
 import com.android.settings.applications.appinfo.ManageExternalStorageDetails;
 import com.android.settings.applications.appinfo.MediaManagementAppsDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
@@ -357,7 +358,8 @@ public class SettingsGateway {
             TurnScreenOnSettings.class.getName(),
             TurnScreenOnDetails.class.getName(),
             NfcAndPaymentFragment.class.getName(),
-            ColorAndMotionFragment.class.getName()
+            ColorAndMotionFragment.class.getName(),
+            LongBackgroundTasksDetails.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

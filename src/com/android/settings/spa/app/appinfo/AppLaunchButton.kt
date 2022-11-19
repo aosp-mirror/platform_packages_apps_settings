@@ -18,6 +18,7 @@ package com.android.settings.spa.app.appinfo
 
 import android.content.Intent
 import android.content.pm.ApplicationInfo
+import android.content.pm.PackageInfo
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Launch
 import com.android.settings.R
@@ -28,9 +29,9 @@ class AppLaunchButton(packageInfoPresenter: PackageInfoPresenter) {
     private val context = packageInfoPresenter.context
     private val userPackageManager = packageInfoPresenter.userPackageManager
 
-    fun getActionButton(app: ApplicationInfo): ActionButton? =
-        userPackageManager.getLaunchIntentForPackage(app.packageName)?.let { intent ->
-            launchButton(intent, app)
+    fun getActionButton(packageInfo: PackageInfo): ActionButton? =
+        userPackageManager.getLaunchIntentForPackage(packageInfo.packageName)?.let { intent ->
+            launchButton(intent, packageInfo.applicationInfo)
         }
 
     private fun launchButton(intent: Intent, app: ApplicationInfo) = ActionButton(
