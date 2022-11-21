@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -40,8 +39,8 @@ import com.android.settings.Settings.MobileNetworkActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.datausage.BillingCyclePreferenceController;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
-import com.android.settings.network.ActiveSubscriptionsListener;
 import com.android.settings.network.CarrierWifiTogglePreferenceController;
+import com.android.settings.network.MobileNetworkRepository;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceController;
@@ -50,15 +49,26 @@ import com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenc
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.mobile.dataservice.DataServiceUtils;
+import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
+import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
+import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
+public class MobileNetworkSettings extends AbstractMobileNetworkSettings implements
+        MobileNetworkRepository.MobileNetworkCallback {
 
     private static final String LOG_TAG = "NetworkSettings";
     public static final int REQUEST_CODE_EXIT_ECM = 17;
@@ -66,9 +76,13 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
     @VisibleForTesting
     static final String KEY_CLICKED_PREF = "key_clicked_pref";
 
+    private static final String KEY_ROAMING_PREF = "button_roaming_key";
+
     //String keys for preference lookup
     private static final String BUTTON_CDMA_SYSTEM_SELECT_KEY = "cdma_system_select_key";
     private static final String BUTTON_CDMA_SUBSCRIPTION_KEY = "cdma_subscription_key";
+
+    private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 
     private TelephonyManager mTelephonyManager;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
@@ -79,9 +93,11 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
     private UserManager mUserManager;
     private String mClickedPrefKey;
 
-    private ActiveSubscriptionsListener mActiveSubscriptionsListener;
-    private boolean mDropFirstSubscriptionChangeNotify;
-    private int mActiveSubscriptionsListenerCount;
+    private MobileNetworkRepository mMobileNetworkRepository;
+    private List<SubscriptionInfoEntity> mSubInfoEntityList = new ArrayList<>();
+    private Map<Integer, SubscriptionInfoEntity> mSubscriptionInfoMap = new HashMap<>();
+    private SubscriptionInfoEntity mSubscriptionInfoEntity;
+    private MobileNetworkInfoEntity mMobileNetworkInfoEntity;
 
     public MobileNetworkSettings() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
@@ -138,12 +154,21 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
                     MobileNetworkUtils.getSearchableSubscriptionId(context));
             Log.d(LOG_TAG, "display subId from getArguments(): " + mSubId);
         }
-
-        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
+        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
+        mExecutor.execute(() -> {
+            mSubscriptionInfoEntity = mMobileNetworkRepository.getSubInfoById(
+                    String.valueOf(mSubId));
+            mMobileNetworkInfoEntity =
+                    mMobileNetworkRepository.queryMobileNetworkInfoBySubId(
+                            String.valueOf(mSubId));
+        });
+        if (mSubId <= SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return Arrays.asList();
         }
         return Arrays.asList(
                 new DataUsageSummaryPreferenceController(getActivity(), getSettingsLifecycle(),
+                        this, mSubId),
+                new RoamingPreferenceController(context, KEY_ROAMING_PREF, getSettingsLifecycle(),
                         this, mSubId));
     }
 
@@ -151,28 +176,38 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        Intent intent = getIntent();
-        SubscriptionInfo info = SubscriptionUtil.getSubscriptionOrDefault(context, mSubId);
-        if (info == null) {
+        if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             Log.d(LOG_TAG, "Invalid subId request " + mSubId);
             return;
         }
 
-        int oldSubId = mSubId;
-        updateSubscriptions(info);
-        // If the subscription has changed or the new intent does not contain the opt in action,
-        // remove the old discovery dialog. If the activity is being recreated, we will see
-        // onCreate -> onNewIntent, so the dialog will first be recreated for the old subscription
-        // and then removed.
-        if (!MobileNetworkActivity.doesIntentContainOptInAction(intent)) {
-            removeContactDiscoveryDialog(oldSubId);
-        }
+        Intent intent = getIntent();
+        if (intent != null) {
+            int updateSubscriptionIndex = intent.getIntExtra(Settings.EXTRA_SUB_ID,
+                    SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
-        // evaluate showing the new discovery dialog if this intent contains an action to show the
-        // opt-in.
-        if (MobileNetworkActivity.doesIntentContainOptInAction(intent)) {
-            showContactDiscoveryDialog(
-                    SubscriptionUtil.getSubscriptionOrDefault(context, mSubId));
+            if (updateSubscriptionIndex != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                int oldSubId = mSubId;
+                mSubId = updateSubscriptionIndex;
+                // If the subscription has changed or the new intent does not contain the opt in
+                // action,
+                // remove the old discovery dialog. If the activity is being recreated, we will see
+                // onCreate -> onNewIntent, so the dialog will first be recreated for the old
+                // subscription
+                // and then removed.
+                if (updateSubscriptionIndex != oldSubId
+                        || !MobileNetworkActivity.doesIntentContainOptInAction(intent)) {
+                    removeContactDiscoveryDialog(oldSubId);
+                }
+
+                // evaluate showing the new discovery dialog if this intent contains an action to
+                // show the
+                // opt-in.
+                if (MobileNetworkActivity.doesIntentContainOptInAction(intent)) {
+                    showContactDiscoveryDialog();
+                }
+            }
+
         }
 
         final DataUsageSummaryPreferenceController dataUsageSummaryPreferenceController =
@@ -194,7 +229,13 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         use(MobileDataPreferenceController.class).setWifiPickerTrackerHelper(
                 new WifiPickerTrackerHelper(getSettingsLifecycle(), context,
                         null /* WifiPickerTrackerCallback */));
-        use(RoamingPreferenceController.class).init(getFragmentManager(), mSubId);
+
+        final RoamingPreferenceController roamingPreferenceController =
+                use(RoamingPreferenceController.class);
+        if (roamingPreferenceController != null) {
+            roamingPreferenceController.init(getFragmentManager(), mSubId,
+                    mMobileNetworkInfoEntity);
+        }
         use(ApnPreferenceController.class).init(mSubId);
         use(CarrierPreferenceController.class).init(mSubId);
         use(DataUsagePreferenceController.class).init(mSubId);
@@ -258,68 +299,36 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
     @Override
     public void onResume() {
         super.onResume();
+        mMobileNetworkRepository.addRegister(this);
         // TODO: remove log after fixing b/182326102
         Log.d(LOG_TAG, "onResume() subId=" + mSubId);
-        if (mActiveSubscriptionsListener == null) {
-            mActiveSubscriptionsListener = new ActiveSubscriptionsListener(
-                    getContext().getMainLooper(), getContext(), mSubId) {
-                public void onChanged() {
-                    onSubscriptionDetailChanged();
-                }
-            };
-            mDropFirstSubscriptionChangeNotify = true;
-        }
-        mActiveSubscriptionsListener.start();
     }
 
     private void onSubscriptionDetailChanged() {
-        if (mDropFirstSubscriptionChangeNotify) {
-            mDropFirstSubscriptionChangeNotify = false;
-            Log.d(LOG_TAG, "Callback during onResume()");
-            return;
-        }
 
-        final SubscriptionInfo subInfo = SubscriptionUtil
-                .getSubscriptionOrDefault(getContext(), mSubId);
-
-        if (subInfo != null) {
+        if (mSubscriptionInfoEntity != null) {
             /**
              * Update the title when SIM stats got changed
              */
             final Consumer<Activity> renameTitle = activity -> {
                 if (activity != null && !activity.isFinishing()) {
                     if (activity instanceof SettingsActivity) {
-                        final CharSequence displayName = SubscriptionUtil
-                                .getUniqueSubscriptionDisplayName(subInfo, activity);
-                        ((SettingsActivity)activity).setTitle(displayName);
+                        ((SettingsActivity) activity).setTitle(mSubscriptionInfoEntity.uniqueName);
                     }
                 }
             };
 
-            ThreadUtils.postOnMainThread(() -> renameTitle.accept(getActivity()));
+            ThreadUtils.postOnMainThread(() -> {
+                renameTitle.accept(getActivity());
+                redrawPreferenceControllers();
+            });
         }
-
-        mActiveSubscriptionsListenerCount++;
-        if (mActiveSubscriptionsListenerCount != 1) {
-            return;
-        }
-
-        ThreadUtils.postOnMainThread(() -> {
-            if (subInfo == null) {
-                finishFragment();
-                return;
-            }
-            mActiveSubscriptionsListenerCount = 0;
-            redrawPreferenceControllers();
-        });
     }
 
     @Override
     public void onDestroy() {
-        if (mActiveSubscriptionsListener != null) {
-            mActiveSubscriptionsListener.stop();
-        }
         super.onDestroy();
+        mMobileNetworkRepository.removeRegister();
     }
 
     @VisibleForTesting
@@ -375,7 +384,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (SubscriptionManager.isValidSubscriptionId(mSubId)) {
+        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             final MenuItem item = menu.add(Menu.NONE, R.id.edit_sim_name, Menu.NONE,
                     R.string.mobile_network_sim_name);
             item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
@@ -386,7 +395,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if (SubscriptionManager.isValidSubscriptionId(mSubId)) {
+        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             if (menuItem.getItemId() == R.id.edit_sim_name) {
                 RenameMobileNetworkDialogFragment.newInstance(mSubId).show(
                         getFragmentManager(), RenameMobileNetworkDialogFragment.TAG);
@@ -422,18 +431,18 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         }
     }
 
-    private void showContactDiscoveryDialog(SubscriptionInfo info) {
-        if (info == null) {
-            Log.d(LOG_TAG, "Invalid subId request " + mSubId);
+    private void showContactDiscoveryDialog() {
+        ContactDiscoveryDialogFragment fragment = getContactDiscoveryFragment(mSubId);
+
+        if (mSubscriptionInfoEntity == null) {
+            Log.d(LOG_TAG, "Zoey, showContactDiscoveryDialog, Invalid subId request " + mSubId);
             onDestroy();
             return;
         }
 
-        CharSequence carrierName = SubscriptionUtil.getUniqueSubscriptionDisplayName(info,
-                getContext());
-        ContactDiscoveryDialogFragment fragment = getContactDiscoveryFragment(mSubId);
         if (fragment == null) {
-            fragment = ContactDiscoveryDialogFragment.newInstance(mSubId, carrierName);
+            fragment = ContactDiscoveryDialogFragment.newInstance(mSubId,
+                    mSubscriptionInfoEntity.uniqueName);
         }
         // Only try to show the dialog if it has not already been added, otherwise we may
         // accidentally add it multiple times, causing multiple dialogs.
@@ -443,12 +452,53 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         }
     }
 
-    private void updateSubscriptions(SubscriptionInfo subscription) {
-        if (subscription == null) {
-            return;
-        }
-        final int subscriptionIndex = subscription.getSubscriptionId();
+    @Override
+    public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
+    }
 
-        mSubId = subscriptionIndex;
+    @Override
+    public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
+        if (DataServiceUtils.shouldUpdateEntityList(mSubInfoEntityList, subInfoEntityList)) {
+
+            // Check the current subId is existed or not, if so, finish it.
+            if (!mSubscriptionInfoMap.isEmpty()) {
+
+                // Check each subInfo and remove it in the map based on the new list.
+                for (SubscriptionInfoEntity entity : subInfoEntityList) {
+                    mSubscriptionInfoMap.remove(Integer.parseInt(entity.subId));
+                }
+
+                Iterator<Integer> iterator = mSubscriptionInfoMap.keySet().iterator();
+                while (iterator.hasNext()) {
+                    if (iterator.next() == mSubId) {
+                        finishFragment();
+                        return;
+                    }
+                }
+            }
+
+            mSubInfoEntityList = subInfoEntityList;
+            mSubInfoEntityList.forEach(entity -> {
+                int subId = Integer.parseInt(entity.subId);
+                mSubscriptionInfoMap.put(subId, entity);
+                if (subId == mSubId) {
+                    mSubscriptionInfoEntity = entity;
+                    onSubscriptionDetailChanged();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
+    }
+
+    @Override
+    public void onAllMobileNetworkInfoChanged(
+            List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
+    }
+
+    @Override
+    public void onAirplaneModeChanged(boolean enabled) {
     }
 }
