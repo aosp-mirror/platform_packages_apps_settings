@@ -38,8 +38,8 @@ import com.android.dx.mockito.inline.extended.ExtendedMockito.mockitoSession
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.applications.AppStoreUtil
-import com.android.settings.testutils.waitUntilExists
 import com.android.settingslib.applications.AppUtils
+import com.android.settingslib.spa.testutils.waitUntilExists
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.android.settingslib.spaprivileged.model.app.userHandle
 import org.junit.After

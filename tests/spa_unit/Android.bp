@@ -30,13 +30,11 @@ android_test {
 
     static_libs: [
         "Settings-core",
+        "SpaLibTestUtils",
         "androidx.compose.runtime_runtime",
-        "androidx.compose.ui_ui-test-junit4",
-        "androidx.compose.ui_ui-test-manifest",
         "androidx.test.ext.junit",
         "androidx.test.runner",
         "mockito-target-extended-minus-junit4",
-        "truth-prebuilt",
     ],
     jni_libs: [
         "libdexmakerjvmtiagent",
