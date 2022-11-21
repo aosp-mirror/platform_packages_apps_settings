@@ -37,6 +37,7 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.mobile.dataservice.DataServiceUtils;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
@@ -97,7 +98,7 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
     @Override
     public CharSequence getSummary() {
         List<SubscriptionInfoEntity> list = getSubscriptionInfoList();
-        if (list == null || list .isEmpty()) {
+        if (list == null || list.isEmpty()) {
             return setSummaryResId(R.string.calls_sms_no_sim);
         } else {
             final StringBuilder summary = new StringBuilder();
@@ -223,10 +224,7 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
 
     @Override
     public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> activeSubInfoList) {
-        if ((mSubInfoEntityList != null &&
-                (activeSubInfoList.isEmpty() || !activeSubInfoList.equals(mSubInfoEntityList)))
-                || (!activeSubInfoList.isEmpty() && mSubInfoEntityList == null)) {
-            Log.d(TAG, "subInfo list from framework is changed, update the subInfo entity list.");
+        if (DataServiceUtils.shouldUpdateEntityList(mSubInfoEntityList, activeSubInfoList)) {
             mSubInfoEntityList = activeSubInfoList;
             update();
         }

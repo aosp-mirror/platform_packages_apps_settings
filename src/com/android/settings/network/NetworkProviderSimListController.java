@@ -41,6 +41,7 @@ import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.mobile.dataservice.DataServiceUtils;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
@@ -177,10 +178,7 @@ public class NetworkProviderSimListController extends AbstractPreferenceControll
 
     @Override
     public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-        if ((mSubInfoEntityList != null &&
-                (subInfoEntityList.isEmpty() || !subInfoEntityList.equals(mSubInfoEntityList)))
-                || (!subInfoEntityList.isEmpty() && mSubInfoEntityList == null)) {
-            Log.d(TAG, "subInfo list from framework is changed, update the subInfo entity list.");
+        if (DataServiceUtils.shouldUpdateEntityList(mSubInfoEntityList, subInfoEntityList)) {
             mSubInfoEntityList = subInfoEntityList;
             mPreferenceCategory.setVisible(isAvailable());
             update();

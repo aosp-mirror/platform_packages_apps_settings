@@ -57,8 +57,10 @@ public class NetworkProviderCallsSmsFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new CallsDefaultSubscriptionController(context, KEY_PREFERENCE_CALLS));
-        controllers.add(new SmsDefaultSubscriptionController(context, KEY_PREFERENCE_SMS));
+        controllers.add(new CallsDefaultSubscriptionController(context, KEY_PREFERENCE_CALLS,
+                getSettingsLifecycle(), this));
+        controllers.add(new SmsDefaultSubscriptionController(context, KEY_PREFERENCE_SMS,
+                getSettingsLifecycle(), this));
         mNetworkProviderWifiCallingPreferenceController =
                 new NetworkProviderWifiCallingPreferenceController(context,
                         KEY_PREFERENCE_CATEGORY_CALLING);

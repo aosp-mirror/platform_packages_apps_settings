@@ -17,25 +17,36 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
-import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
-import com.android.settings.Utils;
+import androidx.lifecycle.LifecycleOwner;
+
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 
 public class CallsDefaultSubscriptionController extends DefaultSubscriptionController {
 
-    public CallsDefaultSubscriptionController(Context context, String preferenceKey) {
-        super(context, preferenceKey);
+    private SubscriptionInfoEntity mSubscriptionInfoEntity;
+
+    public CallsDefaultSubscriptionController(Context context, String preferenceKey,
+            Lifecycle lifecycle, LifecycleOwner lifecycleOwner) {
+        super(context, preferenceKey, lifecycle, lifecycleOwner);
     }
 
     @Override
-    protected SubscriptionInfo getDefaultSubscriptionInfo() {
-        return mManager.getActiveSubscriptionInfo(getDefaultSubscriptionId());
+    protected SubscriptionInfoEntity getDefaultSubscriptionInfo() {
+        return mSubscriptionInfoEntity;
     }
 
     @Override
     protected int getDefaultSubscriptionId() {
-        return SubscriptionManager.getDefaultVoiceSubscriptionId();
+        for (SubscriptionInfoEntity subInfo : mSubInfoEntityList) {
+            if (subInfo.isActiveSubscriptionId && subInfo.isDefaultVoiceSubscription) {
+                mSubscriptionInfoEntity = subInfo;
+                return Integer.parseInt(subInfo.subId);
+            }
+        }
+        return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
     @Override
@@ -45,6 +56,7 @@ public class CallsDefaultSubscriptionController extends DefaultSubscriptionContr
 
     @Override
     public CharSequence getSummary() {
-        return MobileNetworkUtils.getPreferredStatus(isRtlMode(), mContext, mManager, true);
+        return MobileNetworkUtils.getPreferredStatus(isRtlMode(), mContext, true,
+                mSubInfoEntityList);
     }
 }
