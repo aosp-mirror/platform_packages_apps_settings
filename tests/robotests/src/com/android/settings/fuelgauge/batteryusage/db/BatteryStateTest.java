@@ -56,9 +56,14 @@ public final class BatteryStateTest {
                         .setAppLabel("Settings")
                         .setTotalPower(100)
                         .setConsumePower(3)
+                        .setForegroundUsageConsumePower(0)
+                        .setForegroundServiceUsageConsumePower(1)
+                        .setBackgroundUsageConsumePower(2)
+                        .setCachedUsageConsumePower(3)
                         .setPercentOfTotal(10)
                         .setDrainType(1)
                         .setForegroundUsageTimeInMs(60000)
+                        .setForegroundServiceUsageTimeInMs(30000)
                         .setBackgroundUsageTimeInMs(10000)
                         .build();
     }

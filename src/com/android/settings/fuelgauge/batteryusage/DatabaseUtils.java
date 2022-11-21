@@ -164,15 +164,20 @@ public final class DatabaseUtils {
             batteryEntryList.stream()
                     .filter(entry -> {
                         final long foregroundMs = entry.getTimeInForegroundMs();
+                        final long foregroundServiceMs = entry.getTimeInForegroundServiceMs();
                         final long backgroundMs = entry.getTimeInBackgroundMs();
                         if (entry.getConsumedPower() == 0
-                                && (foregroundMs != 0 || backgroundMs != 0)) {
+                                && (foregroundMs != 0
+                                || foregroundServiceMs != 0
+                                || backgroundMs != 0)) {
                             Log.w(TAG, String.format(
-                                    "no consumed power but has running time for %s time=%d|%d",
-                                    entry.getLabel(), foregroundMs, backgroundMs));
+                                    "no consumed power but has running time for %s time=%d|%d|%d",
+                                    entry.getLabel(), foregroundMs, foregroundServiceMs,
+                                    backgroundMs));
                         }
                         return entry.getConsumedPower() != 0
                                 || foregroundMs != 0
+                                || foregroundServiceMs != 0
                                 || backgroundMs != 0;
                     })
                     .forEach(entry -> valuesList.add(

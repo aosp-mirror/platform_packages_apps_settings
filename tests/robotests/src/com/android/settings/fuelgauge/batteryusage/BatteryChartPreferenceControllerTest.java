@@ -127,8 +127,13 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryDiffEntry = new BatteryDiffEntry(
                 mContext,
                 /*foregroundUsageTimeInMs=*/ 1,
+                /*foregroundServiceUsageTimeInMs=*/ 3,
                 /*backgroundUsageTimeInMs=*/ 2,
                 /*consumePower=*/ 3,
+                /*foregroundUsageConsumePower=*/ 0,
+                /*foregroundServiceUsageConsumePower=*/ 1,
+                /*backgroundUsageConsumePower=*/ 2,
+                /*cachedUsageConsumePower=*/ 0,
                 mBatteryHistEntry);
         mBatteryDiffEntry = spy(mBatteryDiffEntry);
         // Adds fake testing data.
@@ -458,6 +463,7 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.setPreferenceSummary(
                 pref, createBatteryDiffEntry(
                         /*foregroundUsageTimeInMs=*/ 0,
+                        /*foregroundServiceUsageTimeInMs=*/ 0,
                         /*backgroundUsageTimeInMs=*/ 0));
         assertThat(pref.getSummary()).isNull();
     }
@@ -470,6 +476,7 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.setPreferenceSummary(
                 pref, createBatteryDiffEntry(
                         /*foregroundUsageTimeInMs=*/ 0,
+                        /*foregroundServiceUsageTimeInMs=*/ 0,
                         /*backgroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS));
         assertThat(pref.getSummary()).isEqualTo("Background: 1 min");
     }
@@ -482,6 +489,7 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.setPreferenceSummary(
                 pref, createBatteryDiffEntry(
                         /*foregroundUsageTimeInMs=*/ 100,
+                        /*foregroundServiceUsageTimeInMs=*/ 200,
                         /*backgroundUsageTimeInMs=*/ 200));
         assertThat(pref.getSummary()).isEqualTo("Total: less than a min");
     }
@@ -494,6 +502,7 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.setPreferenceSummary(
                 pref, createBatteryDiffEntry(
                         /*foregroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS,
+                        /*foregroundServiceUsageTimeInMs=*/ 100,
                         /*backgroundUsageTimeInMs=*/ 200));
         assertThat(pref.getSummary())
                 .isEqualTo("Total: 1 min\nBackground: less than a min");
@@ -507,6 +516,7 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.setPreferenceSummary(
                 pref, createBatteryDiffEntry(
                         /*foregroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS,
+                        /*foregroundServiceUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS,
                         /*backgroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS));
         assertThat(pref.getSummary()).isEqualTo("Total: 2 min\nBackground: 1 min");
     }
@@ -717,10 +727,13 @@ public final class BatteryChartPreferenceControllerTest {
     }
 
     private BatteryDiffEntry createBatteryDiffEntry(
-            long foregroundUsageTimeInMs, long backgroundUsageTimeInMs) {
+            long foregroundUsageTimeInMs, long foregroundServiceUsageTimeInMs,
+            long backgroundUsageTimeInMs) {
         return new BatteryDiffEntry(
-                mContext, foregroundUsageTimeInMs, backgroundUsageTimeInMs,
-                /*consumePower=*/ 0, mBatteryHistEntry);
+                mContext, foregroundUsageTimeInMs, foregroundServiceUsageTimeInMs,
+                backgroundUsageTimeInMs, /*consumePower=*/ 0, /*foregroundUsageConsumePower=*/ 0,
+                /*foregroundServiceUsageConsumePower=*/ 0, /*backgroundUsageConsumePower=*/ 0,
+                /*cachedUsageConsumePower=*/ 0, mBatteryHistEntry);
     }
 
     private BatteryChartPreferenceController createController() {
