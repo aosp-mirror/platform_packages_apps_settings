@@ -385,7 +385,7 @@ public class StorageDashboardFragment extends DashboardFragment
             return;
         }
 
-        setLoading(false /* loading */, true /* animate */);
+        setLoading(false /* loading */, false /* animate */);
 
         final long privateUsedBytes = mStorageInfo.totalBytes - mStorageInfo.freeBytes;
         mPreferenceController.setVolume(mSelectedStorageEntry.getVolumeInfo());
