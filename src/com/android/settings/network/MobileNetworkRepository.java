@@ -17,6 +17,8 @@ package com.android.settings.network;
 
 import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
 
+import static com.android.internal.telephony.TelephonyIntents.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED;
+
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -125,6 +127,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         mAirplaneModeSettingUri = Settings.Global.getUriFor(Settings.Global.AIRPLANE_MODE_ON);
         mFilter.addAction(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED);
         mFilter.addAction(SubscriptionManager.ACTION_DEFAULT_SUBSCRIPTION_CHANGED);
+        mFilter.addAction(ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED);
+        mFilter.addAction(SubscriptionManager.ACTION_DEFAULT_SMS_SUBSCRIPTION_CHANGED);
     }
 
     private class AirplaneModeObserver extends ContentObserver {
@@ -152,11 +156,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private final BroadcastReceiver mDataSubscriptionChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (action.equals(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED)
-                    || action.equals(SubscriptionManager.ACTION_DEFAULT_SUBSCRIPTION_CHANGED)) {
-                onSubscriptionsChanged();
-            }
+            onSubscriptionsChanged();
         }
     };
 
@@ -171,7 +171,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
 
     public void removeRegister() {
         mAirplaneModeObserver.unRegister(mContext);
-        mContext.getContentResolver().unregisterContentObserver(mAirplaneModeObserver);
         if (mDataSubscriptionChangedReceiver != null) {
             mContext.unregisterReceiver(mDataSubscriptionChangedReceiver);
         }
