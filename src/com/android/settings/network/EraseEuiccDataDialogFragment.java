@@ -89,12 +89,9 @@ public class EraseEuiccDataDialogFragment extends InstrumentedDialogFragment imp
     }
 
     private void runAsyncWipe(Context context) {
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                RecoverySystem.wipeEuiccData(
-                        context, PACKAGE_NAME_EUICC_DATA_MANAGEMENT_CALLBACK);
-            }
-        });
+        Runnable runnable = (new ResetNetworkOperationBuilder(context))
+                .resetEsim(PACKAGE_NAME_EUICC_DATA_MANAGEMENT_CALLBACK)
+                .build();
+        AsyncTask.execute(runnable);
     }
 }
