@@ -25,6 +25,8 @@ import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -38,6 +40,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toolbar;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -55,6 +58,7 @@ import com.android.settings.core.CategoryMixin;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.password.PasswordUtils;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
@@ -351,6 +355,32 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             finish();
             return;
         }
+
+        if (!TextUtils.equals(PasswordUtils.getCallingAppPackageName(getActivityToken()),
+                getPackageName())) {
+            ActivityInfo targetActivityInfo = null;
+            try {
+                targetActivityInfo = getPackageManager().getActivityInfo(targetComponentName,
+                        /* flags= */ 0);
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.e(TAG, "Failed to get target ActivityInfo: " + e);
+                finish();
+                return;
+            }
+
+            if (!targetActivityInfo.exported) {
+                Log.e(TAG, "Must not launch an unexported Actvity for deep link");
+                finish();
+                return;
+            }
+
+            if (!isCallingAppPermitted(targetActivityInfo.permission)) {
+                Log.e(TAG, "Calling app must have the permission of deep link Activity");
+                finish();
+                return;
+            }
+        }
+
         targetIntent.setComponent(targetComponentName);
 
         // To prevent launchDeepLinkIntentToRight again for configuration change.
@@ -384,6 +414,12 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 SplitRule.FINISH_ALWAYS,
                 true /* clearTop */);
         startActivity(targetIntent);
+    }
+
+    @VisibleForTesting
+    boolean isCallingAppPermitted(String permission) {
+        return TextUtils.isEmpty(permission) || PasswordUtils.isCallingAppPermitted(
+                this, getActivityToken(), permission);
     }
 
     private String getHighlightMenuKey() {
