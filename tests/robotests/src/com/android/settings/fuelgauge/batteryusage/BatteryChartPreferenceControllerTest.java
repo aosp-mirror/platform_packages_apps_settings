@@ -619,7 +619,7 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mHourlyChartIndex = 1;
 
         assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(
-                "10 AM - 12 PM");
+                "10 AM - 12 PM");
     }
 
     @Test
@@ -629,7 +629,7 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mHourlyChartIndex = 8;
 
         assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(
-                "Sunday 4 PM - 6 PM");
+                "Sunday 4 PM - 6 PM");
     }
 
     @Test
