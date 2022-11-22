@@ -1017,6 +1017,10 @@ public class MobileNetworkUtils {
     }
 
     public static void launchMobileNetworkSettings(Context context, SubscriptionInfo info) {
+        if (!SubscriptionUtil.isSimHardwareVisible(context)) {
+            Log.e(TAG, "launchMobileNetworkSettings fail, device without such UI.");
+            return;
+        }
         final int subId = info.getSubscriptionId();
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             Log.d(TAG, "launchMobileNetworkSettings fail, subId is invalid.");
