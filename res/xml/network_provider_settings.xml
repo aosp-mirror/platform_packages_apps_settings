@@ -46,6 +46,7 @@
         android:key="provider_model_mobile_network"
         android:title="@string/summary_placeholder"
         android:layout="@layout/preference_category_no_label"
+        settings:isPreferenceVisible="@bool/config_show_sim_info"
         settings:controller="com.android.settings.network.NetworkMobileProviderController"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
