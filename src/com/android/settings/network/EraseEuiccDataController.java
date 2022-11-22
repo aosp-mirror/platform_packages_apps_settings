@@ -51,7 +51,8 @@ public class EraseEuiccDataController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return mContext.getPackageManager().hasSystemFeature(
+        return SubscriptionUtil.isSimHardwareVisible(mContext) &&
+                mContext.getPackageManager().hasSystemFeature(
                 PackageManager.FEATURE_TELEPHONY_EUICC) ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
