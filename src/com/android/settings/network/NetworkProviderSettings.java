@@ -341,7 +341,18 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
     }
 
+    /**
+     * Whether to show any UI which is SIM related.
+     */
+    @VisibleForTesting
+    boolean showAnySubscriptionInfo(Context context) {
+        return (context != null) && SubscriptionUtil.isSimHardwareVisible(context);
+    }
+
     private void addNetworkMobileProviderController() {
+        if (!showAnySubscriptionInfo(getContext())) {
+            return;
+        }
         if (mNetworkMobileProviderController == null) {
             mNetworkMobileProviderController = new NetworkMobileProviderController(
                     getContext(), PREF_KEY_PROVIDER_MOBILE_NETWORK);
