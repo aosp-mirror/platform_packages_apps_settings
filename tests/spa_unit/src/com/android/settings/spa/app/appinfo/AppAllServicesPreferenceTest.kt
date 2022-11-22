@@ -30,6 +30,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
@@ -38,6 +39,8 @@ import androidx.core.os.bundleOf
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settingslib.spa.testutils.delay
+import com.android.settingslib.spa.testutils.waitUntilExists
 import com.android.settingslib.spaprivileged.model.app.userHandle
 import com.android.settingslib.spaprivileged.model.app.userId
 import com.google.common.truth.Truth.assertThat
@@ -140,7 +143,7 @@ class AppAllServicesPreferenceTest {
 
         setContent()
 
-        composeTestRule.onNodeWithText(SUMMARY).assertIsDisplayed()
+        composeTestRule.waitUntilExists(hasText(SUMMARY))
     }
 
     @Test
@@ -149,6 +152,7 @@ class AppAllServicesPreferenceTest {
 
         setContent()
         composeTestRule.onRoot().performClick()
+        composeTestRule.delay()
 
         val intentCaptor = ArgumentCaptor.forClass(Intent::class.java)
         verify(context).startActivityAsUser(intentCaptor.capture(), eq(APP.userHandle))
