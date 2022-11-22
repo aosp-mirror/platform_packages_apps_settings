@@ -29,7 +29,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.DeviceInfoUtils;
 
 import java.util.ArrayList;
@@ -52,8 +51,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return SubscriptionUtil.isSimHardwareVisible(mContext) ?
-                AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return mTelephonyManager.isVoiceCapable() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -81,9 +79,6 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        if (!SubscriptionUtil.isSimHardwareVisible(mContext)) {
-            return;
-        }
         final Preference preference = screen.findPreference(getPreferenceKey());
         final PreferenceCategory category = screen.findPreference(KEY_PREFERENCE_CATEGORY);
         mPreferenceList.add(preference);

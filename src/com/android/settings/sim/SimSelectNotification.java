@@ -77,10 +77,6 @@ public class SimSelectNotification extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (!SubscriptionUtil.isSimHardwareVisible(context)) {
-            Log.w(TAG, "Received unexpected intent with null action.");
-            return;
-        }
         String action = intent.getAction();
 
         if (action == null) {
