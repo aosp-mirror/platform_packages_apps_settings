@@ -61,7 +61,7 @@ class AppDisableButtonTest {
     private lateinit var devicePolicyManager: DevicePolicyManager
 
     private val fakeFeatureFactory = FakeFeatureFactory()
-    private val appFeatureProvider = fakeFeatureFactory.applicationFeatureProvider
+    private val appFeatureProvider = fakeFeatureFactory.mockApplicationFeatureProvider
 
     private lateinit var appDisableButton: AppDisableButton
 
