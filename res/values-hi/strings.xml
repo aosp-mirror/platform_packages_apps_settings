@@ -588,12 +588,9 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"<xliff:g id="PERCENTAGE">%d</xliff:g> प्रतिशत रजिस्टर"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"फ़िंगरप्रिंट सेट अप करने की प्रक्रिया <xliff:g id="PERCENTAGE">%d</xliff:g> प्रतिशत तक पूरी हो चुकी है"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"फ़िंगरप्रिंट जोड़ा गया"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6064618417107305796) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (1948980056333872057) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (3084541878035403475) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"अब अपने फ़िंगरप्रिंट की मदद से, टैबलेट को अनलॉक किया जा सकता है. इसके अलावा, किसी ऐप्लिकेशन में साइन इन करने, किसी खरीदारी की मंज़ूरी देने या ऐसे और काम करने के दौरान, अपनी पहचान की पुष्टि करने के लिए भी फ़िंगरप्रिंट का इस्तेमाल किया जा सकता है"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"अब अपने फ़िंगरप्रिंट की मदद से, डिवाइस को अनलॉक किया जा सकता है. इसके अलावा, किसी ऐप्लिकेशन में साइन इन करने, किसी खरीदारी की मंज़ूरी देने या ऐसे और काम करने के दौरान, अपनी पहचान की पुष्टि करने के लिए भी फ़िंगरप्रिंट का इस्तेमाल किया जा सकता है"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"अब अपने फ़िंगरप्रिंट की मदद से, फ़ोन को अनलॉक किया जा सकता है. इसके अलावा, किसी ऐप्लिकेशन में साइन इन करने, किसी खरीदारी की मंज़ूरी देने या ऐसे और काम करने के दौरान, अपनी पहचान की पुष्टि करने के लिए भी फ़िंगरप्रिंट का इस्तेमाल किया जा सकता है"</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"स्क्रीन चालू होने पर ही अनलॉक होगा"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"फ़िंगरप्रिंट अनलॉक की सुविधा का इस्तेमाल करने से पहले, आपके डिवाइस की स्क्रीन चालू होनी चाहिए. इससे गलती से डिवाइस अनलॉक होने की संभावना कम होती है."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"स्क्रीन, अनलॉक करें"</string>
@@ -3490,8 +3487,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"इस उपकरण से <xliff:g id="USER_NAME">%1$s</xliff:g> को मिटाएं"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"लॉक स्‍क्रीन सेटिंग"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"लॉक स्क्रीन से उपयोगकर्ताओं को जोड़ें"</string>
-    <!-- no translation found for switch_to_dock_user_when_docked (2324395443311905635) -->
-    <skip />
+    <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"डिवाइस के डॉक होने पर एडमिन खाते पर जाएं"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"खुद को मिटाएं?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"इस उपयोगकर्ता को हटाएं?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"इस प्रोफ़ाइल को निकालें?"</string>
@@ -5673,6 +5669,9 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"इसका इस्तेमाल करने के लिए, सबसे पहले \"डिवाइस कंट्रोल दिखाएं\" को चालू करें"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"उपलब्ध होने पर, दो लाइन में समय दिखाएं"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"दो लाइन में समय दिखाएं"</string>
+    <!-- no translation found for lockscreen_quick_affordances_title (435869403114245620) -->
+    <skip />
+    <!-- no translation found for lockscreen_quick_affordances_summary (4225396036524703997) -->
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
