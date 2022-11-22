@@ -147,10 +147,7 @@ public class NetworkProviderSettingsTest {
 
     @Before
     public void setUp() {
-        mNetworkProviderSettings = spy(new NetworkProviderSettings() {
-            @Override
-            boolean showAnySubscriptionInfo(Context context) { return true; }
-        });
+        mNetworkProviderSettings = spy(new NetworkProviderSettings());
         doReturn(mContext).when(mNetworkProviderSettings).getContext();
         doReturn(mPreferenceManager).when(mNetworkProviderSettings).getPreferenceManager();
         doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);

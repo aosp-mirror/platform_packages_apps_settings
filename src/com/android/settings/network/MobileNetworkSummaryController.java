@@ -206,8 +206,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     @Override
     public boolean isAvailable() {
-        return SubscriptionUtil.isSimHardwareVisible(mContext) &&
-                !Utils.isWifiOnly(mContext) && mUserManager.isAdminUser();
+        return !Utils.isWifiOnly(mContext) && mUserManager.isAdminUser();
     }
 
     @Override
