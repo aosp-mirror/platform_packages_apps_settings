@@ -52,16 +52,6 @@ public final class BatterySaverScheduleSettingsTest {
     }
 
     @Test
-    public void onPause_withRoutineScheduleType_logExpectedData() {
-        int expectedPercentage = 0;
-        setSchedule(PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC, expectedPercentage);
-
-        mBatterySaverScheduleSettings.onPause();
-
-        verifySchedule("key_battery_saver_routine", expectedPercentage);
-    }
-
-    @Test
     public void onPause_withPercentageScheduleType_logExpectedData() {
         int expectedPercentage = 10;
         setSchedule(PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE, expectedPercentage);

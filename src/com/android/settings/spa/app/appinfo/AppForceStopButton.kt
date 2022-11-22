@@ -18,7 +18,6 @@ package com.android.settings.spa.app.appinfo
 
 import android.app.settings.SettingsEnums
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
 import android.os.UserManager
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.WarningAmber
@@ -48,8 +47,7 @@ class AppForceStopButton(
 
     private var openConfirmDialog by mutableStateOf(false)
 
-    fun getActionButton(packageInfo: PackageInfo): ActionButton {
-        val app = packageInfo.applicationInfo
+    fun getActionButton(app: ApplicationInfo): ActionButton {
         return ActionButton(
             text = context.getString(R.string.force_stop),
             imageVector = Icons.Outlined.WarningAmber,

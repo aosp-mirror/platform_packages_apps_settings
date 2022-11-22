@@ -4736,7 +4736,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".spa.SpaActivity" android:exported="false"/>
+        <activity
+            android:name=".spa.SpaActivity"
+            android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize"
+            android:exported="false" />
         <activity android:name=".spa.SpaBridgeActivity" android:exported="false"/>
 
         <activity-alias android:name="UsageStatsActivity"

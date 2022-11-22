@@ -41,6 +41,7 @@ import com.android.settings.widget.AddPreference;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.mobile.dataservice.DataServiceUtils;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
@@ -226,10 +227,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     @Override
     public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-        if ((mSubInfoEntityList != null &&
-                (subInfoEntityList.isEmpty() || !subInfoEntityList.equals(mSubInfoEntityList)))
-                || (!subInfoEntityList.isEmpty() && mSubInfoEntityList == null)) {
-            Log.d(TAG, "subInfo list from framework is changed, update the subInfo entity list.");
+        if (DataServiceUtils.shouldUpdateEntityList(mSubInfoEntityList, subInfoEntityList)) {
             mSubInfoEntityList = subInfoEntityList;
             update();
         }

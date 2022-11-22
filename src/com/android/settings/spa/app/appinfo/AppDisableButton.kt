@@ -17,7 +17,6 @@
 package com.android.settings.spa.app.appinfo
 
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowCircleDown
 import androidx.compose.material.icons.outlined.HideSource
@@ -52,13 +51,12 @@ class AppDisableButton(
 
     private var openConfirmDialog by mutableStateOf(false)
 
-    fun getActionButton(packageInfo: PackageInfo): ActionButton? {
-        val app = packageInfo.applicationInfo
+    fun getActionButton(app: ApplicationInfo): ActionButton? {
         if (!app.isSystemApp) return null
 
         return when {
             app.enabled && !app.isDisabledUntilUsed -> {
-                disableButton(app = app, enabled = isDisableButtonEnabled(packageInfo))
+                disableButton(app)
             }
 
             else -> enableButton()
@@ -68,38 +66,36 @@ class AppDisableButton(
     /**
      * Gets whether a package can be disabled.
      */
-    private fun isDisableButtonEnabled(packageInfo: PackageInfo): Boolean {
-        val packageName = packageInfo.packageName
-        val app = packageInfo.applicationInfo
-        return when {
-            packageName in applicationFeatureProvider.keepEnabledPackages -> false
+    private fun ApplicationInfo.canBeDisabled(): Boolean = when {
+        // Try to prevent the user from bricking their phone by not allowing disabling of apps
+        // signed with the system certificate.
+        isSignedWithPlatformKey -> false
 
-            // Home launcher apps need special handling. In system ones we don't risk downgrading
-            // because that can interfere with home-key resolution.
-            packageName in appButtonRepository.getHomePackageInfo().homePackages -> false
+        // system/vendor resource overlays can never be disabled.
+        isResourceOverlay -> false
 
-            // Try to prevent the user from bricking their phone by not allowing disabling of apps
-            // signed with the system certificate.
-            SettingsLibUtils.isSystemPackage(resources, packageManager, packageInfo) -> false
+        packageName in applicationFeatureProvider.keepEnabledPackages -> false
 
-            // We don't allow disabling DO/PO on *any* users if it's a system app, because
-            // "disabling" is actually "downgrade to the system version + disable", and "downgrade"
-            // will clear data on all users.
-            Utils.isProfileOrDeviceOwner(userManager, devicePolicyManager, packageName) -> false
+        // Home launcher apps need special handling. In system ones we don't risk downgrading
+        // because that can interfere with home-key resolution.
+        packageName in appButtonRepository.getHomePackageInfo().homePackages -> false
 
-            appButtonRepository.isDisallowControl(app) -> false
+        SettingsLibUtils.isEssentialPackage(resources, packageManager, packageName) -> false
 
-            // system/vendor resource overlays can never be disabled.
-            app.isResourceOverlay -> false
+        // We don't allow disabling DO/PO on *any* users if it's a system app, because
+        // "disabling" is actually "downgrade to the system version + disable", and "downgrade"
+        // will clear data on all users.
+        Utils.isProfileOrDeviceOwner(userManager, devicePolicyManager, packageName) -> false
 
-            else -> true
-        }
+        appButtonRepository.isDisallowControl(this) -> false
+
+        else -> true
     }
 
-    private fun disableButton(app: ApplicationInfo, enabled: Boolean) = ActionButton(
+    private fun disableButton(app: ApplicationInfo) = ActionButton(
         text = context.getString(R.string.disable_text),
         imageVector = Icons.Outlined.HideSource,
-        enabled = enabled,
+        enabled = app.canBeDisabled(),
     ) {
         // Currently we apply the same device policy for both the uninstallation and disable button.
         if (!appButtonRepository.isUninstallBlockedByAdmin(app)) {

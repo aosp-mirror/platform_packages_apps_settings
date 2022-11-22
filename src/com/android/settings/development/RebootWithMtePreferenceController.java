@@ -21,8 +21,10 @@ import android.text.TextUtils;
 
 import androidx.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.security.MemtagHelper;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public class RebootWithMtePreferenceController extends DeveloperOptionsPreferenceController
@@ -41,6 +43,20 @@ public class RebootWithMtePreferenceController extends DeveloperOptionsPreferenc
     @Override
     public boolean isAvailable() {
         return android.os.SystemProperties.getBoolean("ro.arm64.memtag.bootctl_supported", false);
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        if (MemtagHelper.isChecked()) {
+            return mContext.getResources().getString(R.string.reboot_with_mte_already_enabled);
+        }
+        return mContext.getResources().getString(R.string.reboot_with_mte_summary);
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        preference.setEnabled(!MemtagHelper.isChecked());
     }
 
     @Override

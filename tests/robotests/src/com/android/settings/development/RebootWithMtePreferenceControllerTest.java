@@ -22,6 +22,7 @@ import static junit.framework.Assert.assertTrue;
 import android.content.Context;
 import android.os.SystemProperties;
 
+import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
@@ -60,5 +61,20 @@ public class RebootWithMtePreferenceControllerTest {
     public void onAvailable_sysPropEnabled() {
         SystemProperties.set("ro.arm64.memtag.bootctl_supported", "1");
         assertTrue(mController.isAvailable());
+    }
+
+    @Test
+    public void updateState_enabledByDefault() {
+        Preference preference = new Preference(mContext);
+        mController.updateState(preference);
+        assertTrue(preference.isEnabled());
+    }
+
+    @Test
+    public void updateState_disabledIfAlreadyOn() {
+        SystemProperties.set("arm64.memtag.bootctl", "memtag");
+        Preference preference = new Preference(mContext);
+        mController.updateState(preference);
+        assertFalse(preference.isEnabled());
     }
 }
