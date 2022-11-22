@@ -113,7 +113,7 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.SYSTEM_ALERT_WINDOW_APPS;
+        return SettingsEnums.MODIFY_SYSTEM_SETTINGS;
     }
 
     public static CharSequence getSummary(Context context, AppEntry entry) {
