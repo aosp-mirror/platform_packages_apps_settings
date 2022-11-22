@@ -42,6 +42,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.clearInvocations;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -137,6 +138,7 @@ public class SimSelectNotificationTest {
         when(mSubInfo.getDisplayName()).thenReturn(mFakeDisplayName);
         when(mContext.getResources()).thenReturn(mResources);
 
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
         when(mResources.getText(R.string.enable_sending_mms_notification_title))
                 .thenReturn(mFakeNotificationTitle);
         when(mResources.getText(R.string.enable_mms_notification_channel_title))
@@ -236,6 +238,9 @@ public class SimSelectNotificationTest {
 
     @Test
     public void onReceivePrimarySubListChange_WithDismissExtra_shouldDismiss() {
+        doReturn(mExecutor).when(mActivity).getMainExecutor();
+        SimDialogProhibitService.supportDismiss(mActivity);
+
         Intent intent = new Intent(TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED);
         intent.putExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
                 EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA);
