@@ -25,7 +25,7 @@ import static com.android.settings.biometrics2.ui.model.FingerprintEnrollIntroSt
 import static com.google.android.setupdesign.util.DynamicColorPalette.ColorType.ACCENT;
 
 import android.app.Activity;
-import android.app.admin.DevicePolicyResourcesManager;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -63,9 +63,6 @@ public class FingerprintEnrollIntroFragment extends Fragment {
 
     private static final String TAG = "FingerprintEnrollIntroFragment";
 
-    @NonNull private final ViewModelProvider mViewModelProvider;
-    @Nullable private final DevicePolicyResourcesManager mDevicePolicyMgrRes;
-
     private FingerprintEnrollIntroViewModel mViewModel = null;
 
     private View mView = null;
@@ -75,12 +72,8 @@ public class FingerprintEnrollIntroFragment extends Fragment {
     private TextView mFooterMessage6 = null;
     @Nullable private PorterDuffColorFilter mIconColorFilter;
 
-    public FingerprintEnrollIntroFragment(
-            @NonNull ViewModelProvider viewModelProvider,
-            @Nullable DevicePolicyResourcesManager devicePolicyMgrRes) {
+    public FingerprintEnrollIntroFragment() {
         super();
-        mViewModelProvider = viewModelProvider;
-        mDevicePolicyMgrRes = devicePolicyMgrRes;
     }
 
     @Nullable
@@ -197,7 +190,8 @@ public class FingerprintEnrollIntroFragment extends Fragment {
 
     @Override
     public void onAttach(@NonNull Context context) {
-        mViewModel = mViewModelProvider.get(FingerprintEnrollIntroViewModel.class);
+        mViewModel = new ViewModelProvider(getActivity())
+                .get(FingerprintEnrollIntroViewModel.class);
         getLifecycle().addObserver(mViewModel);
         super.onAttach(context);
     }
@@ -232,12 +226,16 @@ public class FingerprintEnrollIntroFragment extends Fragment {
     private String getDescriptionDisabledByAdmin(@NonNull Context context) {
         final int defaultStrId =
                 R.string.security_settings_fingerprint_enroll_introduction_message_unlock_disabled;
-        if (mDevicePolicyMgrRes == null) {
+
+        final DevicePolicyManager devicePolicyManager = getActivity()
+                .getSystemService(DevicePolicyManager.class);
+        if (devicePolicyManager != null) {
+            return devicePolicyManager.getResources().getString(FINGERPRINT_UNLOCK_DISABLED,
+                    () -> context.getString(defaultStrId));
+        } else {
             Log.w(TAG, "getDescriptionDisabledByAdmin, null device policy manager res");
             return "";
         }
-        return mDevicePolicyMgrRes.getString(FINGERPRINT_UNLOCK_DISABLED,
-                () -> context.getString(defaultStrId));
     }
 
     private void setHeaderText(@NonNull Activity activity, int resId) {

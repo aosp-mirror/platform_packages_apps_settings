@@ -30,20 +30,21 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 
 import androidx.activity.result.ActivityResult;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.DefaultLifecycleObserver;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.VerifyCredentialResponse;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics.BiometricUtils.GatekeeperCredentialNotMatchException;
 import com.android.settings.biometrics2.data.repository.FingerprintRepository;
 import com.android.settings.biometrics2.ui.model.CredentialModel;
 import com.android.settings.password.ChooseLockGeneric;
@@ -57,31 +58,40 @@ import java.lang.annotation.RetentionPolicy;
  * AutoCredentialViewModel which uses CredentialModel to determine next actions for activity, like
  * start ChooseLockActivity, start ConfirmLockActivity, GenerateCredential, or do nothing.
  */
-public class AutoCredentialViewModel extends AndroidViewModel implements DefaultLifecycleObserver {
+public class AutoCredentialViewModel extends AndroidViewModel {
 
     private static final String TAG = "AutoCredentialViewModel";
-    private static final boolean DEBUG = true;
+
+    @VisibleForTesting
+    static final String KEY_CREDENTIAL_MODEL = "credential_model";
+
+    private static final boolean DEBUG = false;
+
+    /**
+     * Valid credential, activity doesn't need to do anything.
+     */
+    public static final int CREDENTIAL_VALID = 0;
+
+    /**
+     * This credential looks good, but still need to run generateChallenge().
+     */
+    public static final int CREDENTIAL_IS_GENERATING_CHALLENGE = 1;
 
     /**
      * Need activity to run choose lock
      */
-    public static final int CREDENTIAL_FAIL_NEED_TO_CHOOSE_LOCK = 1;
+    public static final int CREDENTIAL_FAIL_NEED_TO_CHOOSE_LOCK = 2;
 
     /**
      * Need activity to run confirm lock
      */
-    public static final int CREDENTIAL_FAIL_NEED_TO_CONFIRM_LOCK = 2;
-
-    /**
-     * Fail to use challenge from hardware generateChallenge(), shall finish activity with proper
-     * error code
-     */
-    public static final int CREDENTIAL_FAIL_DURING_GENERATE_CHALLENGE = 3;
+    public static final int CREDENTIAL_FAIL_NEED_TO_CONFIRM_LOCK = 3;
 
     @IntDef(prefix = { "CREDENTIAL_" }, value = {
+            CREDENTIAL_VALID,
+            CREDENTIAL_IS_GENERATING_CHALLENGE,
             CREDENTIAL_FAIL_NEED_TO_CHOOSE_LOCK,
-            CREDENTIAL_FAIL_NEED_TO_CONFIRM_LOCK,
-            CREDENTIAL_FAIL_DURING_GENERATE_CHALLENGE
+            CREDENTIAL_FAIL_NEED_TO_CONFIRM_LOCK
     })
     @Retention(RetentionPolicy.SOURCE)
     public @interface CredentialAction {}
@@ -157,11 +167,10 @@ public class AutoCredentialViewModel extends AndroidViewModel implements Default
         }
     }
 
-
     @NonNull private final LockPatternUtils mLockPatternUtils;
     @NonNull private final ChallengeGenerator mChallengeGenerator;
     private CredentialModel mCredentialModel = null;
-    @NonNull private final MutableLiveData<Integer> mActionLiveData =
+    @NonNull private final MutableLiveData<Boolean> mGenerateChallengeFailLiveData =
             new MutableLiveData<>();
 
     public AutoCredentialViewModel(
@@ -173,51 +182,63 @@ public class AutoCredentialViewModel extends AndroidViewModel implements Default
         mChallengeGenerator = challengeGenerator;
     }
 
-    public void setCredentialModel(@NonNull CredentialModel credentialModel) {
-        mCredentialModel = credentialModel;
+    /**
+     * Set CredentialModel, the source is coming from savedInstanceState or activity intent
+     */
+    public void setCredentialModel(@Nullable Bundle savedInstanceState, @NonNull Intent intent) {
+        mCredentialModel = new CredentialModel(
+                savedInstanceState != null
+                        ? savedInstanceState.getBundle(KEY_CREDENTIAL_MODEL)
+                        : intent.getExtras(),
+                SystemClock.elapsedRealtimeClock());
+
+        if (DEBUG) {
+            Log.d(TAG, "setCredentialModel " + mCredentialModel + ", savedInstanceState exist:"
+                    + (savedInstanceState != null));
+        }
     }
 
     /**
-     * Observe ActionLiveData for actions about choosing lock, confirming lock, or finishing
-     * activity
+     * Handle onSaveInstanceState from activity
      */
-    @NonNull
-    public LiveData<Integer> getActionLiveData() {
-        return mActionLiveData;
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putBundle(KEY_CREDENTIAL_MODEL, mCredentialModel.getBundle());
     }
 
-    @Override
-    public void onCreate(@NonNull LifecycleOwner owner) {
-        checkCredential();
+    @NonNull
+    public LiveData<Boolean> getGenerateChallengeFailLiveData() {
+        return mGenerateChallengeFailLiveData;
     }
 
     /**
      * Check credential status for biometric enrollment.
      */
-    private void checkCredential() {
+    @CredentialAction
+    public int checkCredential() {
         if (isValidCredential()) {
-            return;
+            return CREDENTIAL_VALID;
         }
         final long gkPwHandle = mCredentialModel.getGkPwHandle();
         if (isUnspecifiedPassword()) {
-            mActionLiveData.postValue(CREDENTIAL_FAIL_NEED_TO_CHOOSE_LOCK);
+            return CREDENTIAL_FAIL_NEED_TO_CHOOSE_LOCK;
         } else if (CredentialModel.isValidGkPwHandle(gkPwHandle)) {
             generateChallenge(gkPwHandle);
+            return CREDENTIAL_IS_GENERATING_CHALLENGE;
         } else {
-            mActionLiveData.postValue(CREDENTIAL_FAIL_NEED_TO_CONFIRM_LOCK);
+            return CREDENTIAL_FAIL_NEED_TO_CONFIRM_LOCK;
         }
     }
 
     private void generateChallenge(long gkPwHandle) {
         mChallengeGenerator.setCallback((sensorId, userId, challenge) -> {
-            mCredentialModel.setSensorId(sensorId);
-            mCredentialModel.setChallenge(challenge);
             try {
                 final byte[] newToken = requestGatekeeperHat(gkPwHandle, challenge, userId);
+                mCredentialModel.setSensorId(sensorId);
+                mCredentialModel.setChallenge(challenge);
                 mCredentialModel.setToken(newToken);
             } catch (IllegalStateException e) {
                 Log.e(TAG, "generateChallenge, IllegalStateException", e);
-                mActionLiveData.postValue(CREDENTIAL_FAIL_DURING_GENERATE_CHALLENGE);
+                mGenerateChallengeFailLiveData.postValue(true);
                 return;
             }
 
@@ -231,7 +252,7 @@ public class AutoCredentialViewModel extends AndroidViewModel implements Default
             // Check credential again
             if (!isValidCredential()) {
                 Log.w(TAG, "generateChallenge, invalid Credential");
-                mActionLiveData.postValue(CREDENTIAL_FAIL_DURING_GENERATE_CHALLENGE);
+                mGenerateChallengeFailLiveData.postValue(true);
             }
         });
         mChallengeGenerator.generateChallenge(getUserId());
@@ -282,16 +303,16 @@ public class AutoCredentialViewModel extends AndroidViewModel implements Default
         final VerifyCredentialResponse response = mLockPatternUtils
                 .verifyGatekeeperPasswordHandle(gkPwHandle, challenge, userId);
         if (!response.isMatched()) {
-            throw new IllegalStateException("Unable to request Gatekeeper HAT");
+            throw new GatekeeperCredentialNotMatchException("Unable to request Gatekeeper HAT");
         }
         return response.getGatekeeperHAT();
     }
 
     /**
-     * Get Credential bundle which will be used to launch next activity.
+     * Get Credential intent extra which will be used to launch next activity.
      */
     @NonNull
-    public Bundle getCredentialBundle() {
+    public Bundle getCredentialIntentExtra() {
         final Bundle retBundle = new Bundle();
         final long gkPwHandle = mCredentialModel.getGkPwHandle();
         if (CredentialModel.isValidGkPwHandle(gkPwHandle)) {
