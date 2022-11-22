@@ -267,6 +267,9 @@ public class ResetNetwork extends InstrumentedFragment {
     }
 
     private boolean showEuiccSettings(Context context) {
+        if (!SubscriptionUtil.isSimHardwareVisible(context)) {
+            return false;
+        }
         EuiccManager euiccManager =
                 (EuiccManager) context.getSystemService(Context.EUICC_SERVICE);
         if (!euiccManager.isEnabled()) {
