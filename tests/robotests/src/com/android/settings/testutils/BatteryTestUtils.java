@@ -125,7 +125,7 @@ public class BatteryTestUtils {
         }
     }
 
-    private static Intent getCustomBatteryIntent(int plugged, int level, int scale, int status) {
+    public static Intent getCustomBatteryIntent(int plugged, int level, int scale, int status) {
         Intent intent = new Intent();
         intent.putExtra(BatteryManager.EXTRA_PLUGGED, plugged);
         intent.putExtra(BatteryManager.EXTRA_LEVEL, level);

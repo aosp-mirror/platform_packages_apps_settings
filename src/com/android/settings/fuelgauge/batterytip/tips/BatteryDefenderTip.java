@@ -32,24 +32,15 @@ import com.android.settings.widget.CardPreference;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-import java.text.NumberFormat;
-
 /**
  * Tip to show current battery is overheated
  */
 public class BatteryDefenderTip extends BatteryTip {
 
     private static final String TAG = "BatteryDefenderTip";
-    private boolean mExtraDefend = false;
 
     public BatteryDefenderTip(@StateType int state) {
-        this(state, false);
-    }
-
-    public BatteryDefenderTip(@StateType int state, boolean extraDefend) {
-        super(TipType.BATTERY_DEFENDER, state, true /* showDialog */);
-        mExtraDefend = extraDefend;
-        mShowDialog = false;
+        super(TipType.BATTERY_DEFENDER, state, false /* showDialog */);
     }
 
     private BatteryDefenderTip(Parcel in) {
@@ -63,14 +54,6 @@ public class BatteryDefenderTip extends BatteryTip {
 
     @Override
     public CharSequence getSummary(Context context) {
-        if (mExtraDefend) {
-            final int extraValue = context.getResources()
-                    .getInteger(R.integer.config_battery_extra_tip_value);
-            final String extraPercentage = NumberFormat.getPercentInstance()
-                    .format(extraValue * 0.01f);
-            return context.getString(
-                    R.string.battery_tip_limited_temporarily_extra_summary, extraPercentage);
-        }
         return context.getString(R.string.battery_tip_limited_temporarily_summary);
     }
 
@@ -131,7 +114,7 @@ public class BatteryDefenderTip extends BatteryTip {
         final Intent intent =
                 FeatureFactory.getFactory(context)
                         .getPowerUsageFeatureProvider(context)
-                        .getResumeChargeIntent();
+                        .getResumeChargeIntent(false);
         if (intent != null) {
             context.sendBroadcast(intent);
         }
