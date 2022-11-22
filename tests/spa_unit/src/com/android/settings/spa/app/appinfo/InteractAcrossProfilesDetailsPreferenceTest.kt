@@ -24,6 +24,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
@@ -34,6 +35,8 @@ import com.android.dx.mockito.inline.extended.ExtendedMockito
 import com.android.settings.R
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesDetails
+import com.android.settingslib.spa.testutils.delay
+import com.android.settingslib.spa.testutils.waitUntilExists
 import com.android.settingslib.spaprivileged.framework.common.crossProfileApps
 import org.junit.After
 import org.junit.Before
@@ -110,7 +113,7 @@ class InteractAcrossProfilesDetailsPreferenceTest {
 
         setContent()
 
-        composeTestRule.onNodeWithText(SUMMARY).assertIsDisplayed()
+        composeTestRule.waitUntilExists(hasText(SUMMARY))
     }
 
     @Test
@@ -119,6 +122,7 @@ class InteractAcrossProfilesDetailsPreferenceTest {
 
         setContent()
         composeTestRule.onRoot().performClick()
+        composeTestRule.delay()
 
         ExtendedMockito.verify {
             AppInfoDashboardFragment.startAppInfoFragment(
