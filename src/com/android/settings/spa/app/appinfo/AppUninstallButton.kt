@@ -18,7 +18,6 @@ package com.android.settings.spa.app.appinfo
 
 import android.content.om.OverlayManager
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import com.android.settings.R
@@ -32,8 +31,7 @@ class AppUninstallButton(private val packageInfoPresenter: PackageInfoPresenter)
     private val appButtonRepository = AppButtonRepository(context)
     private val overlayManager = context.getSystemService(OverlayManager::class.java)!!
 
-    fun getActionButton(packageInfo: PackageInfo): ActionButton? {
-        val app = packageInfo.applicationInfo
+    fun getActionButton(app: ApplicationInfo): ActionButton? {
         if (app.isSystemApp || app.isInstantApp) return null
         return uninstallButton(app = app, enabled = isUninstallButtonEnabled(app))
     }

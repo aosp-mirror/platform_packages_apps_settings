@@ -16,7 +16,7 @@
 
 package com.android.settings.spa.app.appinfo
 
-import android.content.pm.PackageInfo
+import android.content.pm.ApplicationInfo
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.AlertDialog
@@ -37,8 +37,7 @@ class AppClearButton(
 
     private var openConfirmDialog by mutableStateOf(false)
 
-    fun getActionButton(packageInfo: PackageInfo): ActionButton? {
-        val app = packageInfo.applicationInfo
+    fun getActionButton(app: ApplicationInfo): ActionButton? {
         if (!app.isInstantApp) return null
 
         return clearButton()
