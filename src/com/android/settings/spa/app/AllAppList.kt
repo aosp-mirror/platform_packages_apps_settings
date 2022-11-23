@@ -58,10 +58,12 @@ object AllAppListPageProvider : SettingsPageProvider {
 
 @Composable
 private fun AllAppListPage() {
+    val resetAppDialogPresenter = rememberResetAppDialogPresenter()
     AppListPage(
         title = stringResource(R.string.all_apps),
         listModel = remember { AllAppListModel() },
         showInstantApps = true,
+        moreOptions = { ResetAppPreferences(resetAppDialogPresenter::open) }
     ) { itemModel ->
         AppListItem(
             itemModel = itemModel,
