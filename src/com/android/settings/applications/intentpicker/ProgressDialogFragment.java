@@ -19,6 +19,7 @@ package com.android.settings.applications.intentpicker;
 import static android.content.pm.verify.domain.DomainVerificationUserState.DOMAIN_STATE_NONE;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.verify.domain.DomainOwner;
@@ -113,7 +114,7 @@ public class ProgressDialogFragment extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return 0;
+        return SettingsEnums.PROGRESS_DIALOG;
     }
 
     /**

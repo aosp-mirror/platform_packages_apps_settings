@@ -17,6 +17,7 @@
 package com.android.settings.applications.intentpicker;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.verify.domain.DomainVerificationManager;
@@ -73,7 +74,7 @@ public class SupportedLinksDialogFragment extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return 0;
+        return SettingsEnums.SUPPORTED_LINKS_DIALOG;
     }
 
     /** Display the dialog. */
