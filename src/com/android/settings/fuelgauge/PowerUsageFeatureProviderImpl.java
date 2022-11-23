@@ -24,10 +24,8 @@ import android.util.ArraySet;
 import android.util.SparseIntArray;
 
 import com.android.internal.util.ArrayUtils;
-import com.android.settings.fuelgauge.batteryusage.BatteryHistEntry;
 import com.android.settingslib.fuelgauge.Estimate;
 
-import java.util.Map;
 import java.util.Set;
 
 /** Implementation of {@code PowerUsageFeatureProvider} */
@@ -123,11 +121,6 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public String getAdvancedUsageScreenInfoString() {
-        return null;
-    }
-
-    @Override
     public boolean getEarlyWarningSignal(Context context, String id) {
         return false;
     }
@@ -156,11 +149,6 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public boolean isExtraDefend() {
         return false;
-    }
-
-    @Override
-    public Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context) {
-        return null;
     }
 
     @Override
