@@ -145,7 +145,7 @@ public class FingerprintEnrollIntroViewModel extends AndroidViewModel
     }
 
     /**
-     * Clear user's action live data (like clicking Agree, Skip, or Done)
+     * Clear user's action live data
      */
     public void clearActionLiveData() {
         mActionLiveData.setValue(null);
@@ -168,8 +168,8 @@ public class FingerprintEnrollIntroViewModel extends AndroidViewModel
     /**
      * Update onboarding intro page has scrolled to bottom
      */
-    public void setHasScrolledToBottom() {
-        mHasScrolledToBottomLiveData.postValue(true);
+    public void setHasScrolledToBottom(boolean value) {
+        mHasScrolledToBottomLiveData.postValue(value);
     }
 
     /**

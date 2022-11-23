@@ -215,11 +215,13 @@ public class FingerprintEnrollIntroViewModelTest {
 
     @Test
     public void testSetHasScrolledToBottom() {
-        mViewModel.setHasScrolledToBottom();
-
+        mViewModel.setHasScrolledToBottom(true);
         FingerprintEnrollIntroStatus status = mViewModel.getPageStatusLiveData().getValue();
-
         assertThat(status.hasScrollToBottom()).isEqualTo(true);
+
+        mViewModel.setHasScrolledToBottom(false);
+        status = mViewModel.getPageStatusLiveData().getValue();
+        assertThat(status.hasScrollToBottom()).isEqualTo(false);
     }
 
     @Test

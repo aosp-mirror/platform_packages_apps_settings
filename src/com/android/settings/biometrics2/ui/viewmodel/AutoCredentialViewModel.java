@@ -68,7 +68,7 @@ public class AutoCredentialViewModel extends AndroidViewModel {
     private static final boolean DEBUG = false;
 
     /**
-     * Valid credential, activity doesn't need to do anything.
+     * Valid credential, activity does nothing.
      */
     public static final int CREDENTIAL_VALID = 0;
 
@@ -170,7 +170,7 @@ public class AutoCredentialViewModel extends AndroidViewModel {
     @NonNull private final LockPatternUtils mLockPatternUtils;
     @NonNull private final ChallengeGenerator mChallengeGenerator;
     private CredentialModel mCredentialModel = null;
-    @NonNull private final MutableLiveData<Boolean> mGenerateChallengeFailLiveData =
+    @NonNull private final MutableLiveData<Boolean> mGenerateChallengeFailedLiveData =
             new MutableLiveData<>();
 
     public AutoCredentialViewModel(
@@ -186,11 +186,13 @@ public class AutoCredentialViewModel extends AndroidViewModel {
      * Set CredentialModel, the source is coming from savedInstanceState or activity intent
      */
     public void setCredentialModel(@Nullable Bundle savedInstanceState, @NonNull Intent intent) {
-        mCredentialModel = new CredentialModel(
-                savedInstanceState != null
-                        ? savedInstanceState.getBundle(KEY_CREDENTIAL_MODEL)
-                        : intent.getExtras(),
-                SystemClock.elapsedRealtimeClock());
+        final Bundle bundle;
+        if (savedInstanceState != null) {
+            bundle = savedInstanceState.getBundle(KEY_CREDENTIAL_MODEL);
+        } else {
+            bundle = intent.getExtras();
+        }
+        mCredentialModel = new CredentialModel(bundle, SystemClock.elapsedRealtimeClock());
 
         if (DEBUG) {
             Log.d(TAG, "setCredentialModel " + mCredentialModel + ", savedInstanceState exist:"
@@ -206,8 +208,8 @@ public class AutoCredentialViewModel extends AndroidViewModel {
     }
 
     @NonNull
-    public LiveData<Boolean> getGenerateChallengeFailLiveData() {
-        return mGenerateChallengeFailLiveData;
+    public LiveData<Boolean> getGenerateChallengeFailedLiveData() {
+        return mGenerateChallengeFailedLiveData;
     }
 
     /**
@@ -238,7 +240,7 @@ public class AutoCredentialViewModel extends AndroidViewModel {
                 mCredentialModel.setToken(newToken);
             } catch (IllegalStateException e) {
                 Log.e(TAG, "generateChallenge, IllegalStateException", e);
-                mGenerateChallengeFailLiveData.postValue(true);
+                mGenerateChallengeFailedLiveData.postValue(true);
                 return;
             }
 
@@ -252,7 +254,7 @@ public class AutoCredentialViewModel extends AndroidViewModel {
             // Check credential again
             if (!isValidCredential()) {
                 Log.w(TAG, "generateChallenge, invalid Credential");
-                mGenerateChallengeFailLiveData.postValue(true);
+                mGenerateChallengeFailedLiveData.postValue(true);
             }
         });
         mChallengeGenerator.generateChallenge(getUserId());
@@ -312,7 +314,7 @@ public class AutoCredentialViewModel extends AndroidViewModel {
      * Get Credential intent extra which will be used to launch next activity.
      */
     @NonNull
-    public Bundle getCredentialIntentExtra() {
+    public Bundle createCredentialIntentExtra() {
         final Bundle retBundle = new Bundle();
         final long gkPwHandle = mCredentialModel.getGkPwHandle();
         if (CredentialModel.isValidGkPwHandle(gkPwHandle)) {
@@ -332,10 +334,10 @@ public class AutoCredentialViewModel extends AndroidViewModel {
     }
 
     /**
-     * Get Intent for choosing lock
+     * Create Intent for choosing lock
      */
     @NonNull
-    public Intent getChooseLockIntent(@NonNull Context context, boolean isSuw,
+    public Intent createChooseLockIntent(@NonNull Context context, boolean isSuw,
             @NonNull Bundle suwExtras) {
         final Intent intent = BiometricUtils.getChooseLockIntent(context, isSuw,
                 suwExtras);
@@ -352,10 +354,10 @@ public class AutoCredentialViewModel extends AndroidViewModel {
     }
 
     /**
-     * Get ConfirmLockLauncher
+     * Create ConfirmLockLauncher
      */
     @NonNull
-    public ChooseLockSettingsHelper getConfirmLockLauncher(@NonNull Activity activity,
+    public ChooseLockSettingsHelper createConfirmLockLauncher(@NonNull Activity activity,
             int requestCode, @NonNull String title) {
         final ChooseLockSettingsHelper.Builder builder =
                 new ChooseLockSettingsHelper.Builder(activity);
