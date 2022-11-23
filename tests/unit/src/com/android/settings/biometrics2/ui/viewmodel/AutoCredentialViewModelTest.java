@@ -26,6 +26,8 @@ import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_SENS
 import static com.android.settings.biometrics2.ui.model.CredentialModel.INVALID_CHALLENGE;
 import static com.android.settings.biometrics2.ui.model.CredentialModel.INVALID_GK_PW_HANDLE;
 import static com.android.settings.biometrics2.ui.model.CredentialModel.INVALID_SENSOR_ID;
+import static com.android.settings.biometrics2.ui.model.CredentialModel.isValidGkPwHandle;
+import static com.android.settings.biometrics2.ui.model.CredentialModel.isValidToken;
 import static com.android.settings.biometrics2.ui.model.CredentialModelTest.newCredentialModelIntentExtras;
 import static com.android.settings.biometrics2.ui.model.CredentialModelTest.newGkPwHandleCredentialIntentExtras;
 import static com.android.settings.biometrics2.ui.model.CredentialModelTest.newInvalidChallengeCredentialIntentExtras;
@@ -58,9 +60,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.VerifyCredentialResponse;
-import com.android.settings.biometrics2.ui.model.CredentialModel;
 import com.android.settings.password.ChooseLockPattern;
-import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.InstantTaskExecutorRule;
 
 import org.junit.Before;
@@ -79,12 +79,12 @@ public class AutoCredentialViewModelTest {
 
     @Mock private LockPatternUtils mLockPatternUtils;
     private TestChallengeGenerator mChallengeGenerator = null;
-    private AutoCredentialViewModel mAutoCredentialViewModel;
+    private AutoCredentialViewModel mViewModel;
 
     @Before
     public void setUp() {
         mChallengeGenerator = new TestChallengeGenerator();
-        mAutoCredentialViewModel = new AutoCredentialViewModel(
+        mViewModel = new AutoCredentialViewModel(
                 ApplicationProvider.getApplicationContext(),
                 mLockPatternUtils,
                 mChallengeGenerator);
@@ -99,22 +99,21 @@ public class AutoCredentialViewModelTest {
     }
 
     @Test
-    public void testGetCredentialIntentExtra_sameResultFromSavedInstanceOrIntent() {
+    public void testSetCredentialModel_sameResultFromSavedInstanceOrIntent() {
         final Bundle extras = newCredentialModelIntentExtras(12, 33, 1, new byte[] { 2, 3 }, 3L);
 
-        AutoCredentialViewModel autoCredentialViewModel2 = new AutoCredentialViewModel(
+        AutoCredentialViewModel viewModel2 = new AutoCredentialViewModel(
                 ApplicationProvider.getApplicationContext(),
                 mLockPatternUtils,
                 mChallengeGenerator);
 
-        mAutoCredentialViewModel.setCredentialModel(null,
-                new Intent().putExtras(extras));
+        mViewModel.setCredentialModel(null, new Intent().putExtras(extras));
         final Bundle savedInstance = new Bundle();
         savedInstance.putBundle(KEY_CREDENTIAL_MODEL, extras);
-        autoCredentialViewModel2.setCredentialModel(savedInstance, new Intent());
+        viewModel2.setCredentialModel(savedInstance, new Intent());
 
-        final Bundle bundle1 = mAutoCredentialViewModel.getCredentialIntentExtra();
-        final Bundle bundle2 = autoCredentialViewModel2.getCredentialIntentExtra();
+        final Bundle bundle1 = mViewModel.createCredentialIntentExtra();
+        final Bundle bundle2 = viewModel2.createCredentialIntentExtra();
         assertThat(bundle1.getLong(EXTRA_KEY_GK_PW_HANDLE))
                 .isEqualTo(bundle2.getLong(EXTRA_KEY_GK_PW_HANDLE));
         assertThat(bundle1.getLong(Intent.EXTRA_USER_ID))
@@ -134,23 +133,22 @@ public class AutoCredentialViewModelTest {
     }
 
     @Test
-    public void testGetCredentialIntentExtra_sameResultFromSavedInstanceOrIntent_invalidValues() {
+    public void testSetCredentialModel_sameResultFromSavedInstanceOrIntent_invalidValues() {
         final Bundle extras = newCredentialModelIntentExtras(UserHandle.USER_NULL,
                 INVALID_CHALLENGE, INVALID_SENSOR_ID, null, INVALID_GK_PW_HANDLE);
 
-        AutoCredentialViewModel autoCredentialViewModel2 = new AutoCredentialViewModel(
+        AutoCredentialViewModel viewModel2 = new AutoCredentialViewModel(
                 ApplicationProvider.getApplicationContext(),
                 mLockPatternUtils,
                 mChallengeGenerator);
 
-        mAutoCredentialViewModel.setCredentialModel(null,
-                new Intent().putExtras(extras));
+        mViewModel.setCredentialModel(null, new Intent().putExtras(extras));
         final Bundle savedInstance = new Bundle();
         savedInstance.putBundle(KEY_CREDENTIAL_MODEL, extras);
-        autoCredentialViewModel2.setCredentialModel(savedInstance, new Intent());
+        viewModel2.setCredentialModel(savedInstance, new Intent());
 
-        final Bundle bundle1 = mAutoCredentialViewModel.getCredentialIntentExtra();
-        final Bundle bundle2 = autoCredentialViewModel2.getCredentialIntentExtra();
+        final Bundle bundle1 = mViewModel.createCredentialIntentExtra();
+        final Bundle bundle2 = viewModel2.createCredentialIntentExtra();
         assertThat(bundle1.containsKey(EXTRA_KEY_GK_PW_HANDLE)).isFalse();
         assertThat(bundle2.containsKey(EXTRA_KEY_GK_PW_HANDLE)).isFalse();
         assertThat(bundle1.containsKey(EXTRA_KEY_CHALLENGE_TOKEN)).isFalse();
@@ -164,83 +162,83 @@ public class AutoCredentialViewModelTest {
     @Test
     public void testCheckCredential_validCredentialCase() {
         final int userId = 99;
-        mAutoCredentialViewModel.setCredentialModel(null,
+        mViewModel.setCredentialModel(null,
                 new Intent().putExtras(newValidTokenCredentialIntentExtras(userId)));
         when(mLockPatternUtils.getActivePasswordQuality(userId)).thenReturn(
                 PASSWORD_QUALITY_SOMETHING);
 
         // Run credential check
-        @CredentialAction final int action = mAutoCredentialViewModel.checkCredential();
+        @CredentialAction final int action = mViewModel.checkCredential();
 
         assertThat(action).isEqualTo(CREDENTIAL_VALID);
-        assertThat(mAutoCredentialViewModel.getGenerateChallengeFailLiveData().getValue()).isNull();
+        assertThat(mViewModel.getGenerateChallengeFailedLiveData().getValue()).isNull();
     }
 
     @Test
     public void testCheckCredential_needToChooseLock() {
         final int userId = 100;
-        mAutoCredentialViewModel.setCredentialModel(null,
+        mViewModel.setCredentialModel(null,
                 new Intent().putExtras(newInvalidChallengeCredentialIntentExtras(userId)));
         when(mLockPatternUtils.getActivePasswordQuality(userId)).thenReturn(
                 PASSWORD_QUALITY_UNSPECIFIED);
 
         // Run credential check
-        @CredentialAction final int action = mAutoCredentialViewModel.checkCredential();
+        @CredentialAction final int action = mViewModel.checkCredential();
 
         assertThat(action).isEqualTo(CREDENTIAL_FAIL_NEED_TO_CHOOSE_LOCK);
-        assertThat(mAutoCredentialViewModel.getGenerateChallengeFailLiveData().getValue()).isNull();
+        assertThat(mViewModel.getGenerateChallengeFailedLiveData().getValue()).isNull();
     }
 
     @Test
     public void testCheckCredential_needToConfirmLockFoSomething() {
         final int userId = 101;
-        mAutoCredentialViewModel.setCredentialModel(null,
+        mViewModel.setCredentialModel(null,
                 new Intent().putExtras(newInvalidChallengeCredentialIntentExtras(userId)));
         when(mLockPatternUtils.getActivePasswordQuality(userId)).thenReturn(
                 PASSWORD_QUALITY_SOMETHING);
 
         // Run credential check
-        @CredentialAction final int action = mAutoCredentialViewModel.checkCredential();
+        @CredentialAction final int action = mViewModel.checkCredential();
 
         assertThat(action).isEqualTo(CREDENTIAL_FAIL_NEED_TO_CONFIRM_LOCK);
-        assertThat(mAutoCredentialViewModel.getGenerateChallengeFailLiveData().getValue()).isNull();
+        assertThat(mViewModel.getGenerateChallengeFailedLiveData().getValue()).isNull();
     }
 
     @Test
     public void testCheckCredential_needToConfirmLockForNumeric() {
         final int userId = 102;
-        mAutoCredentialViewModel.setCredentialModel(null,
+        mViewModel.setCredentialModel(null,
                 new Intent().putExtras(newInvalidChallengeCredentialIntentExtras(userId)));
         when(mLockPatternUtils.getActivePasswordQuality(userId)).thenReturn(
                 PASSWORD_QUALITY_NUMERIC);
 
         // Run credential check
-        @CredentialAction final int action = mAutoCredentialViewModel.checkCredential();
+        @CredentialAction final int action = mViewModel.checkCredential();
 
         assertThat(action).isEqualTo(CREDENTIAL_FAIL_NEED_TO_CONFIRM_LOCK);
-        assertThat(mAutoCredentialViewModel.getGenerateChallengeFailLiveData().getValue()).isNull();
+        assertThat(mViewModel.getGenerateChallengeFailedLiveData().getValue()).isNull();
     }
 
     @Test
     public void testCheckCredential_needToConfirmLockForAlphabetic() {
         final int userId = 103;
-        mAutoCredentialViewModel.setCredentialModel(null,
+        mViewModel.setCredentialModel(null,
                 new Intent().putExtras(newInvalidChallengeCredentialIntentExtras(userId)));
         when(mLockPatternUtils.getActivePasswordQuality(userId)).thenReturn(
                 PASSWORD_QUALITY_ALPHABETIC);
 
         // Run credential check
-        @CredentialAction final int action = mAutoCredentialViewModel.checkCredential();
+        @CredentialAction final int action = mViewModel.checkCredential();
 
         assertThat(action).isEqualTo(CREDENTIAL_FAIL_NEED_TO_CONFIRM_LOCK);
-        assertThat(mAutoCredentialViewModel.getGenerateChallengeFailLiveData().getValue()).isNull();
+        assertThat(mViewModel.getGenerateChallengeFailedLiveData().getValue()).isNull();
     }
 
     @Test
     public void testCheckCredential_generateChallenge() {
         final int userId = 104;
         final long gkPwHandle = 1111L;
-        mAutoCredentialViewModel.setCredentialModel(null,
+        mViewModel.setCredentialModel(null,
                 new Intent().putExtras(newGkPwHandleCredentialIntentExtras(userId, gkPwHandle)));
         when(mLockPatternUtils.getActivePasswordQuality(userId)).thenReturn(
                 PASSWORD_QUALITY_SOMETHING);
@@ -252,17 +250,15 @@ public class AutoCredentialViewModelTest {
                 .thenReturn(newGoodCredential(gkPwHandle, new byte[] { 1 }));
 
         // Run credential check
-        @CredentialAction final int action = mAutoCredentialViewModel.checkCredential();
+        @CredentialAction final int action = mViewModel.checkCredential();
 
         assertThat(action).isEqualTo(CREDENTIAL_IS_GENERATING_CHALLENGE);
-        assertThat(mAutoCredentialViewModel.getGenerateChallengeFailLiveData().getValue()).isNull();
-        final Bundle extras = mAutoCredentialViewModel.getCredentialIntentExtra();
+        assertThat(mViewModel.getGenerateChallengeFailedLiveData().getValue()).isNull();
+        final Bundle extras = mViewModel.createCredentialIntentExtra();
         assertThat(extras.getInt(EXTRA_KEY_SENSOR_ID)).isEqualTo(newSensorId);
         assertThat(extras.getLong(EXTRA_KEY_CHALLENGE)).isEqualTo(newChallenge);
-        assertThat(CredentialModel.isValidToken(extras.getByteArray(EXTRA_KEY_CHALLENGE_TOKEN)))
-                .isTrue();
-        assertThat(CredentialModel.isValidGkPwHandle(extras.getLong(EXTRA_KEY_GK_PW_HANDLE)))
-                .isFalse();
+        assertThat(isValidToken(extras.getByteArray(EXTRA_KEY_CHALLENGE_TOKEN))).isTrue();
+        assertThat(isValidGkPwHandle(extras.getLong(EXTRA_KEY_GK_PW_HANDLE))).isFalse();
         assertThat(mChallengeGenerator.mCallbackRunCount).isEqualTo(1);
     }
 
@@ -270,7 +266,7 @@ public class AutoCredentialViewModelTest {
     public void testCheckCredential_generateChallengeFail() {
         final int userId = 104;
         final long gkPwHandle = 1111L;
-        mAutoCredentialViewModel.setCredentialModel(null,
+        mViewModel.setCredentialModel(null,
                 new Intent().putExtras(newGkPwHandleCredentialIntentExtras(userId, gkPwHandle)));
         when(mLockPatternUtils.getActivePasswordQuality(userId)).thenReturn(
                 PASSWORD_QUALITY_SOMETHING);
@@ -282,21 +278,21 @@ public class AutoCredentialViewModelTest {
                 .thenReturn(newBadCredential(0));
 
         // Run credential check
-        @CredentialAction final int action = mAutoCredentialViewModel.checkCredential();
+        @CredentialAction final int action = mViewModel.checkCredential();
 
         assertThat(action).isEqualTo(CREDENTIAL_IS_GENERATING_CHALLENGE);
-        assertThat(mAutoCredentialViewModel.getGenerateChallengeFailLiveData().getValue()).isTrue();
+        assertThat(mViewModel.getGenerateChallengeFailedLiveData().getValue()).isTrue();
         assertThat(mChallengeGenerator.mCallbackRunCount).isEqualTo(1);
     }
 
     @Test
     public void testGetUserId_fromIntent() {
         final int userId = 106;
-        mAutoCredentialViewModel.setCredentialModel(null,
+        mViewModel.setCredentialModel(null,
                 new Intent().putExtras(newInvalidChallengeCredentialIntentExtras(userId)));
 
         // Get userId
-        assertThat(mAutoCredentialViewModel.getUserId()).isEqualTo(userId);
+        assertThat(mViewModel.getUserId()).isEqualTo(userId);
     }
 
     @Test
@@ -305,79 +301,79 @@ public class AutoCredentialViewModelTest {
         final Bundle savedInstance = new Bundle();
         savedInstance.putBundle(KEY_CREDENTIAL_MODEL,
                 newInvalidChallengeCredentialIntentExtras(userId));
-        mAutoCredentialViewModel.setCredentialModel(savedInstance, new Intent());
+        mViewModel.setCredentialModel(savedInstance, new Intent());
 
         // Get userId
-        assertThat(mAutoCredentialViewModel.getUserId()).isEqualTo(userId);
+        assertThat(mViewModel.getUserId()).isEqualTo(userId);
     }
 
     @Test
     public void testCheckNewCredentialFromActivityResult_invalidChooseLock() {
         final int userId = 107;
         final long gkPwHandle = 3333L;
-        mAutoCredentialViewModel.setCredentialModel(null,
+        mViewModel.setCredentialModel(null,
                 new Intent().putExtras(newGkPwHandleCredentialIntentExtras(userId, gkPwHandle)));
         final Intent intent = new Intent();
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, gkPwHandle);
+        intent.putExtra(EXTRA_KEY_GK_PW_HANDLE, gkPwHandle);
 
         // run checkNewCredentialFromActivityResult()
-        final boolean ret = mAutoCredentialViewModel.checkNewCredentialFromActivityResult(true,
+        final boolean ret = mViewModel.checkNewCredentialFromActivityResult(true,
                 new ActivityResult(ChooseLockPattern.RESULT_FINISHED + 1, intent));
 
         assertThat(ret).isFalse();
-        assertThat(mAutoCredentialViewModel.getGenerateChallengeFailLiveData().getValue()).isNull();
+        assertThat(mViewModel.getGenerateChallengeFailedLiveData().getValue()).isNull();
     }
 
     @Test
     public void testCheckNewCredentialFromActivityResult_invalidConfirmLock() {
         final int userId = 107;
         final long gkPwHandle = 3333L;
-        mAutoCredentialViewModel.setCredentialModel(null,
+        mViewModel.setCredentialModel(null,
                 new Intent().putExtras(newGkPwHandleCredentialIntentExtras(userId, gkPwHandle)));
         final Intent intent = new Intent();
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, gkPwHandle);
+        intent.putExtra(EXTRA_KEY_GK_PW_HANDLE, gkPwHandle);
 
         // run checkNewCredentialFromActivityResult()
-        final boolean ret = mAutoCredentialViewModel.checkNewCredentialFromActivityResult(false,
+        final boolean ret = mViewModel.checkNewCredentialFromActivityResult(false,
                 new ActivityResult(Activity.RESULT_OK + 1, intent));
 
         assertThat(ret).isFalse();
-        assertThat(mAutoCredentialViewModel.getGenerateChallengeFailLiveData().getValue()).isNull();
+        assertThat(mViewModel.getGenerateChallengeFailedLiveData().getValue()).isNull();
     }
 
     @Test
     public void testCheckNewCredentialFromActivityResult_nullDataChooseLock() {
         final int userId = 108;
         final long gkPwHandle = 4444L;
-        mAutoCredentialViewModel.setCredentialModel(null,
+        mViewModel.setCredentialModel(null,
                 new Intent().putExtras(newGkPwHandleCredentialIntentExtras(userId, gkPwHandle)));
 
         // run checkNewCredentialFromActivityResult()
-        final boolean ret = mAutoCredentialViewModel.checkNewCredentialFromActivityResult(true,
+        final boolean ret = mViewModel.checkNewCredentialFromActivityResult(true,
                 new ActivityResult(ChooseLockPattern.RESULT_FINISHED, null));
 
         assertThat(ret).isFalse();
-        assertThat(mAutoCredentialViewModel.getGenerateChallengeFailLiveData().getValue()).isNull();
+        assertThat(mViewModel.getGenerateChallengeFailedLiveData().getValue()).isNull();
     }
 
     @Test
     public void testCheckNewCredentialFromActivityResult_nullDataConfirmLock() {
         final int userId = 109;
-        mAutoCredentialViewModel.setCredentialModel(null,
+        mViewModel.setCredentialModel(null,
                 new Intent().putExtras(newInvalidChallengeCredentialIntentExtras(userId)));
 
         // run checkNewCredentialFromActivityResult()
-        final boolean ret = mAutoCredentialViewModel.checkNewCredentialFromActivityResult(false,
+        final boolean ret = mViewModel.checkNewCredentialFromActivityResult(false,
                 new ActivityResult(Activity.RESULT_OK, null));
 
         assertThat(ret).isFalse();
-        assertThat(mAutoCredentialViewModel.getGenerateChallengeFailLiveData().getValue()).isNull();
+        assertThat(mViewModel.getGenerateChallengeFailedLiveData().getValue()).isNull();
     }
 
     @Test
     public void testCheckNewCredentialFromActivityResult_validChooseLock() {
         final int userId = 108;
-        mAutoCredentialViewModel.setCredentialModel(null,
+        mViewModel.setCredentialModel(null,
                 new Intent().putExtras(newInvalidChallengeCredentialIntentExtras(userId)));
         when(mLockPatternUtils.getActivePasswordQuality(userId)).thenReturn(
                 PASSWORD_QUALITY_SOMETHING);
@@ -390,20 +386,17 @@ public class AutoCredentialViewModelTest {
                 .thenReturn(newGoodCredential(gkPwHandle, new byte[] { 1 }));
 
         // Run checkNewCredentialFromActivityResult()
-        final Intent intent = new Intent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
-                gkPwHandle);
-        final boolean ret = mAutoCredentialViewModel.checkNewCredentialFromActivityResult(true,
+        final Intent intent = new Intent().putExtra(EXTRA_KEY_GK_PW_HANDLE, gkPwHandle);
+        final boolean ret = mViewModel.checkNewCredentialFromActivityResult(true,
                 new ActivityResult(ChooseLockPattern.RESULT_FINISHED, intent));
 
         assertThat(ret).isTrue();
-        assertThat(mAutoCredentialViewModel.getGenerateChallengeFailLiveData().getValue()).isNull();
-        final Bundle extras = mAutoCredentialViewModel.getCredentialIntentExtra();
+        assertThat(mViewModel.getGenerateChallengeFailedLiveData().getValue()).isNull();
+        final Bundle extras = mViewModel.createCredentialIntentExtra();
         assertThat(extras.getInt(EXTRA_KEY_SENSOR_ID)).isEqualTo(newSensorId);
         assertThat(extras.getLong(EXTRA_KEY_CHALLENGE)).isEqualTo(newChallenge);
-        assertThat(CredentialModel.isValidToken(extras.getByteArray(EXTRA_KEY_CHALLENGE_TOKEN)))
-                .isTrue();
-        assertThat(CredentialModel.isValidGkPwHandle(extras.getLong(EXTRA_KEY_GK_PW_HANDLE)))
-                .isFalse();
+        assertThat(isValidToken(extras.getByteArray(EXTRA_KEY_CHALLENGE_TOKEN))).isTrue();
+        assertThat(isValidGkPwHandle(extras.getLong(EXTRA_KEY_GK_PW_HANDLE))).isFalse();
         assertThat(mChallengeGenerator.mCallbackRunCount).isEqualTo(1);
     }
 
@@ -411,7 +404,7 @@ public class AutoCredentialViewModelTest {
     @Test
     public void testCheckNewCredentialFromActivityResult_validConfirmLock() {
         final int userId = 109;
-        mAutoCredentialViewModel.setCredentialModel(null,
+        mViewModel.setCredentialModel(null,
                 new Intent().putExtras(newInvalidChallengeCredentialIntentExtras(userId)));
         when(mLockPatternUtils.getActivePasswordQuality(userId)).thenReturn(
                 PASSWORD_QUALITY_SOMETHING);
@@ -424,20 +417,17 @@ public class AutoCredentialViewModelTest {
                 .thenReturn(newGoodCredential(gkPwHandle, new byte[] { 1 }));
 
         // Run checkNewCredentialFromActivityResult()
-        final Intent intent = new Intent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
-                gkPwHandle);
-        final boolean ret = mAutoCredentialViewModel.checkNewCredentialFromActivityResult(false,
+        final Intent intent = new Intent().putExtra(EXTRA_KEY_GK_PW_HANDLE, gkPwHandle);
+        final boolean ret = mViewModel.checkNewCredentialFromActivityResult(false,
                 new ActivityResult(Activity.RESULT_OK, intent));
 
         assertThat(ret).isTrue();
-        assertThat(mAutoCredentialViewModel.getGenerateChallengeFailLiveData().getValue()).isNull();
-        final Bundle extras = mAutoCredentialViewModel.getCredentialIntentExtra();
+        assertThat(mViewModel.getGenerateChallengeFailedLiveData().getValue()).isNull();
+        final Bundle extras = mViewModel.createCredentialIntentExtra();
         assertThat(extras.getInt(EXTRA_KEY_SENSOR_ID)).isEqualTo(newSensorId);
         assertThat(extras.getLong(EXTRA_KEY_CHALLENGE)).isEqualTo(newChallenge);
-        assertThat(CredentialModel.isValidToken(extras.getByteArray(EXTRA_KEY_CHALLENGE_TOKEN)))
-                .isTrue();
-        assertThat(CredentialModel.isValidGkPwHandle(extras.getLong(EXTRA_KEY_GK_PW_HANDLE)))
-                .isFalse();
+        assertThat(isValidToken(extras.getByteArray(EXTRA_KEY_CHALLENGE_TOKEN))).isTrue();
+        assertThat(isValidGkPwHandle(extras.getLong(EXTRA_KEY_GK_PW_HANDLE))).isFalse();
         assertThat(mChallengeGenerator.mCallbackRunCount).isEqualTo(1);
     }
 

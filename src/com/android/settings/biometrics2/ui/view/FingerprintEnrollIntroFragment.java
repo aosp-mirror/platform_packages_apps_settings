@@ -44,6 +44,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.android.settings.R;
@@ -120,15 +121,6 @@ public class FingerprintEnrollIntroFragment extends Fragment {
         footerTitle2.setText(
                 R.string.security_settings_fingerprint_enroll_introduction_footer_title_2);
 
-        return mView;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        final Context context = view.getContext();
-
         final TextView footerLink = mView.findViewById(R.id.footer_learn_more);
         footerLink.setMovementMethod(LinkMovementMethod.getInstance());
         final String footerLinkStr = getContext().getString(
@@ -139,17 +131,27 @@ public class FingerprintEnrollIntroFragment extends Fragment {
         // footer buttons
         mPrimaryFooterButton = new FooterButton.Builder(context)
                 .setText(R.string.security_settings_fingerprint_enroll_introduction_agree)
-                .setListener(mViewModel::onNextButtonClick)
                 .setButtonType(FooterButton.ButtonType.OPT_IN)
                 .setTheme(R.style.SudGlifButton_Primary)
                 .build();
         mSecondaryFooterButton = new FooterButton.Builder(context)
-                .setListener(mViewModel::onSkipOrCancelButtonClick)
                 .setButtonType(FooterButton.ButtonType.NEXT)
                 .setTheme(R.style.SudGlifButton_Primary)
                 .build();
         getFooterBarMixin().setPrimaryButton(mPrimaryFooterButton);
         getFooterBarMixin().setSecondaryButton(mSecondaryFooterButton, true /* usePrimaryStyle */);
+
+        return mView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        final Context context = view.getContext();
+
+        mPrimaryFooterButton.setOnClickListener(mViewModel::onNextButtonClick);
+        mSecondaryFooterButton.setOnClickListener(mViewModel::onSkipOrCancelButtonClick);
 
         if (mViewModel.canAssumeUdfps()) {
             mFooterMessage6.setVisibility(View.VISIBLE);
@@ -158,7 +160,7 @@ public class FingerprintEnrollIntroFragment extends Fragment {
             mFooterMessage6.setVisibility(View.GONE);
             mIconShield.setVisibility(View.GONE);
         }
-        mSecondaryFooterButton.setText(getContext(),
+        mSecondaryFooterButton.setText(context,
                 mViewModel.getEnrollmentRequest().isAfterSuwOrSuwSuggestedAction()
                 ? R.string.security_settings_fingerprint_enroll_introduction_cancel
                 : R.string.security_settings_fingerprint_enroll_introduction_no_thanks);
@@ -174,18 +176,31 @@ public class FingerprintEnrollIntroFragment extends Fragment {
             setHeaderText(getActivity(),
                     R.string.security_settings_fingerprint_enroll_introduction_title);
         }
+        observePageStatusLiveDataIfNeed();
+    }
 
-        mViewModel.getPageStatusLiveData().observe(this, this::updateFooterButtons);
+    private void observePageStatusLiveDataIfNeed() {
+        final LiveData<FingerprintEnrollIntroStatus> statusLiveData =
+                mViewModel.getPageStatusLiveData();
+        final FingerprintEnrollIntroStatus status = statusLiveData.getValue();
+        if (status != null && status.hasScrollToBottom()) {
+            // Do not requireScrollWithButton() again when "I agree" or "Done" button is visible,
+            // because if we requireScrollWithButton() again, it will become "More" after scroll-up.
+            return;
+        }
 
         final RequireScrollMixin requireScrollMixin = getLayout()
                 .getMixin(RequireScrollMixin.class);
         requireScrollMixin.requireScrollWithButton(getActivity(), mPrimaryFooterButton,
                 getMoreButtonTextRes(), mViewModel::onNextButtonClick);
-        requireScrollMixin.setOnRequireScrollStateChangedListener(scrollNeeded -> {
-            if (!scrollNeeded) {
-                mViewModel.setHasScrolledToBottom();
-            }
-        });
+
+        // Always set true to setHasScrolledToBottom() before registering listener through
+        // setOnRequireScrollStateChangedListener(), because listener will not be called if first
+        // scrollNeeded is true
+        mViewModel.setHasScrolledToBottom(true);
+        requireScrollMixin.setOnRequireScrollStateChangedListener(
+                scrollNeeded -> mViewModel.setHasScrolledToBottom(!scrollNeeded));
+        statusLiveData.observe(this, this::updateFooterButtons);
     }
 
     @Override
