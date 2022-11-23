@@ -31,8 +31,8 @@ import androidx.compose.ui.test.onRoot
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito
-import com.android.settings.testutils.delay
 import com.android.settingslib.applications.AppUtils
+import com.android.settingslib.spa.testutils.delay
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
 import org.junit.After

@@ -51,7 +51,9 @@ import org.mockito.Mockito.mock
 
 class FakeFeatureFactory : FeatureFactory() {
 
-    val applicationFeatureProvider: ApplicationFeatureProvider =
+    private val mockMetricsFeatureProvider: MetricsFeatureProvider =
+        mock(MetricsFeatureProvider::class.java)
+    val mockApplicationFeatureProvider: ApplicationFeatureProvider =
         mock(ApplicationFeatureProvider::class.java)
 
     init {
@@ -70,9 +72,7 @@ class FakeFeatureFactory : FeatureFactory() {
         TODO("Not yet implemented")
     }
 
-    override fun getMetricsFeatureProvider(): MetricsFeatureProvider {
-        TODO("Not yet implemented")
-    }
+    override fun getMetricsFeatureProvider(): MetricsFeatureProvider = mockMetricsFeatureProvider
 
     override fun getPowerUsageFeatureProvider(context: Context?): PowerUsageFeatureProvider {
         TODO("Not yet implemented")
@@ -96,7 +96,7 @@ class FakeFeatureFactory : FeatureFactory() {
         TODO("Not yet implemented")
     }
 
-    override fun getApplicationFeatureProvider(context: Context?) = applicationFeatureProvider
+    override fun getApplicationFeatureProvider(context: Context?) = mockApplicationFeatureProvider
 
     override fun getLocaleFeatureProvider(): LocaleFeatureProvider {
         TODO("Not yet implemented")

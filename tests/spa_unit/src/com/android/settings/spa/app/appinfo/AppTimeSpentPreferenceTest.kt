@@ -63,7 +63,7 @@ class AppTimeSpentPreferenceTest {
     private lateinit var packageManager: PackageManager
 
     private val fakeFeatureFactory = FakeFeatureFactory()
-    private val appFeatureProvider = fakeFeatureFactory.applicationFeatureProvider
+    private val appFeatureProvider = fakeFeatureFactory.mockApplicationFeatureProvider
 
     @Before
     fun setUp() {

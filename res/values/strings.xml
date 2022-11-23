@@ -10486,8 +10486,8 @@
     <!-- Title for the button to reboot with MTE enabled. [CHAR LIMIT=NONE] -->
     <string name="reboot_with_mte_title">Reboot with MTE</string>
     <string name="reboot_with_mte_message">System will reboot and allow to experiment with Memory Tagging Extension (MTE). MTE may negatively impact system performance and stability. Will be reset on next subsequent reboot.</string>
-    <string name="reboot_with_mte_summary">Try MTE for a single boot for app development.</string>
-    <string name="reboot_with_mte_already_enabled">MTE is enabled through Advanced memory protection.</string>
+    <string name="reboot_with_mte_summary">Try MTE for a single boot for app development</string>
+    <string name="reboot_with_mte_already_enabled">MTE is enabled through Advanced memory protection</string>
     <!-- Toast that is shown when the user initiates capturing a heap dump for the system server. [CHAR LIMIT=NONE] -->
     <string name="capturing_system_heap_dump_message">Capturing system heap dump</string>
     <!-- Toast that is shown if there's an error capturing the user initiated heap dump. [CHAR LIMIT=NONE] -->
@@ -10627,6 +10627,14 @@
     <string name="lockscreen_double_line_clock_summary">Show double-line clock when available</string>
     <!-- Lockscreen double-line clock toggle [CHAR LIMIT=60] -->
     <string name="lockscreen_double_line_clock_setting_toggle">Double-line clock</string>
+    <!-- Lock screen buttons preference [CHAR LIMIT=60] -->
+    <string name="lockscreen_quick_affordances_title">Buttons</string>
+    <!-- Summary for the lock screen button preference [CHAR LIMIT=60] -->
+    <plurals name="lockscreen_quick_affordances_summary">
+        <item quantity="zero">None</item>
+        <item quantity="one"><xliff:g id="first">%1$s</xliff:g></item>
+        <item quantity="other"><xliff:g id="first">%1$s</xliff:g>, <xliff:g id="second">%2$s</xliff:g></item>
+    </plurals>
 
     <!-- Title for RTT setting. [CHAR LIMIT=NONE] -->
     <string name="rtt_settings_title"></string>

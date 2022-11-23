@@ -527,7 +527,7 @@ public class ManageApplications extends InstrumentedFragment
             case LIST_TYPE_OVERLAY:
                 return SettingsEnums.SYSTEM_ALERT_WINDOW_APPS;
             case LIST_TYPE_WRITE_SETTINGS:
-                return SettingsEnums.SYSTEM_ALERT_WINDOW_APPS;
+                return SettingsEnums.MODIFY_SYSTEM_SETTINGS;
             case LIST_TYPE_MANAGE_SOURCES:
                 return SettingsEnums.MANAGE_EXTERNAL_SOURCES;
             case LIST_TYPE_WIFI_ACCESS:

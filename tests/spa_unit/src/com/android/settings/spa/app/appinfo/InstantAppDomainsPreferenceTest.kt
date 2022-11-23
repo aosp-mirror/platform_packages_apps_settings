@@ -24,10 +24,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
-import androidx.compose.ui.test.filterToOne
-import androidx.compose.ui.test.hasAnyAncestor
-import androidx.compose.ui.test.hasText
-import androidx.compose.ui.test.isDialog
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
@@ -37,7 +33,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito
 import com.android.settings.R
 import com.android.settings.Utils
-import com.android.settings.testutils.delay
+import com.android.settingslib.spa.testutils.delay
+import com.android.settingslib.spa.testutils.onDialogText
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -141,18 +138,14 @@ class InstantAppDomainsPreferenceTest {
         composeTestRule.onRoot().performClick()
         composeTestRule.delay()
 
-        assertDialogHasText(context.getString(R.string.app_launch_supported_domain_urls_title))
-        assertDialogHasText("abc")
-        assertDialogHasText("def")
+        composeTestRule.onDialogText(
+            context.getString(R.string.app_launch_supported_domain_urls_title)
+        ).assertIsDisplayed()
+        composeTestRule.onDialogText("abc").assertIsDisplayed()
+        composeTestRule.onDialogText("def").assertIsDisplayed()
     }
 
-    private fun assertDialogHasText(text: String) {
-        composeTestRule.onAllNodes(hasAnyAncestor(isDialog()))
-            .filterToOne(hasText(text))
-            .assertIsDisplayed()
-    }
-
-    private fun setContent(app:ApplicationInfo = INSTANT_APP) {
+    private fun setContent(app: ApplicationInfo = INSTANT_APP) {
         composeTestRule.setContent {
             CompositionLocalProvider(LocalContext provides context) {
                 InstantAppDomainsPreference(app)
