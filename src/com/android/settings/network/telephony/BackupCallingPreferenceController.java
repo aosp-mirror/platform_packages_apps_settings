@@ -38,7 +38,6 @@ import java.util.Objects;
 
 /**
  * Preference controller for "Backup Calling"
- * Deprecated ToDo: b/260059444 remove it next version
  **/
 public class BackupCallingPreferenceController extends TelephonyTogglePreferenceController {
 
