@@ -629,7 +629,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         if (batteryHistoryMap == null || batteryHistoryMap.isEmpty()) {
             return null;
         }
-        Log.d(TAG, String.format("getBatteryLast24HrData() size=%d time=&d/ms",
+        Log.d(TAG, String.format("getBatteryLast24HrData() size=%d time=%d/ms",
             batteryHistoryMap.size(), (System.currentTimeMillis() - start)));
         final Map<Integer, List<BatteryDiffEntry>> batteryIndexedMap =
             ConvertUtils.getIndexedUsageMap(
