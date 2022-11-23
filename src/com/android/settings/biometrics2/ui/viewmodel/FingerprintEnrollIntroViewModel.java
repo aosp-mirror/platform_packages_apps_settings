@@ -145,6 +145,13 @@ public class FingerprintEnrollIntroViewModel extends AndroidViewModel
     }
 
     /**
+     * Clear user's action live data (like clicking Agree, Skip, or Done)
+     */
+    public void clearActionLiveData() {
+        mActionLiveData.setValue(null);
+    }
+
+    /**
      * Get user's action live data (like clicking Agree, Skip, or Done)
      */
     public LiveData<Integer> getActionLiveData() {
