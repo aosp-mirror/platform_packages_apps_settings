@@ -40,6 +40,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.InstrumentedFragment;
@@ -70,6 +73,7 @@ public class ResetNetwork extends InstrumentedFragment {
     // Arbitrary to avoid conficts
     private static final int KEYGUARD_REQUEST = 55;
 
+    private ActivityResultLauncher mActivityResultLauncher;
     private List<SubscriptionInfo> mSubscriptions;
 
     private View mContentView;
@@ -82,6 +86,10 @@ public class ResetNetwork extends InstrumentedFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActivity().setTitle(R.string.reset_network_title);
+
+        mActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> onActivityLauncherResult(result));
     }
 
     /**
@@ -96,20 +104,14 @@ public class ResetNetwork extends InstrumentedFragment {
                 new ChooseLockSettingsHelper.Builder(getActivity(), this);
         return builder.setRequestCode(request)
                 .setTitle(res.getText(R.string.reset_network_title))
+                .setActivityResultLauncher(mActivityResultLauncher)
                 .show();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode != KEYGUARD_REQUEST) {
-            return;
-        }
-
+    public void onActivityLauncherResult(ActivityResult result) {
         // If the user entered a valid keyguard trace, present the final
         // confirmation prompt; otherwise, go back to the initial state.
-        if (resultCode == Activity.RESULT_OK) {
+        if (result.getResultCode() == Activity.RESULT_OK) {
             showFinalConfirmation();
         } else if (mContentView != null) {
             establishInitialState(getActiveSubscriptionInfoList());
