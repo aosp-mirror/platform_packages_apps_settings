@@ -30,7 +30,6 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.printToLog
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito
@@ -39,9 +38,9 @@ import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.datausage.AppDataUsage
-import com.android.settings.testutils.waitUntilExists
 import com.android.settingslib.net.NetworkCycleDataForUid
 import com.android.settingslib.net.NetworkCycleDataForUidLoader
+import com.android.settingslib.spa.testutils.waitUntilExists
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -134,9 +133,7 @@ class AppDataUsagePreferenceTest {
 
         setContent()
 
-        composeTestRule.onRoot().printToLog("AAA")
-        composeTestRule.onNodeWithText(context.getString(R.string.no_data_usage))
-            .assertIsDisplayed()
+        composeTestRule.waitUntilExists(hasText(context.getString(R.string.no_data_usage)))
     }
 
     @Test

@@ -24,6 +24,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotDisplayed
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
@@ -36,6 +37,8 @@ import com.android.settings.applications.AppInfoBase
 import com.android.settings.applications.AppLocaleUtil
 import com.android.settings.applications.appinfo.AppLocaleDetails
 import com.android.settings.localepicker.AppLocalePickerActivity
+import com.android.settingslib.spa.testutils.delay
+import com.android.settingslib.spa.testutils.waitUntilExists
 import com.android.settingslib.spaprivileged.model.app.userHandle
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
@@ -103,15 +106,16 @@ class AppLocalePreferenceTest {
 
         composeTestRule.onNodeWithText(context.getString(R.string.app_locale_preference_title))
             .assertIsDisplayed()
-        composeTestRule.onNodeWithText(SUMMARY).assertIsDisplayed()
+        composeTestRule.waitUntilExists(hasText(SUMMARY))
     }
 
     @Test
-    fun whenCanDisplayLocalUi_click_startsActivity() {
+    fun whenCanDisplayLocalUi_click_startActivity() {
         doNothing().`when`(context).startActivityAsUser(any(), any())
 
         setContent()
         composeTestRule.onRoot().performClick()
+        composeTestRule.delay()
 
         val intentCaptor = ArgumentCaptor.forClass(Intent::class.java)
         verify(context).startActivityAsUser(intentCaptor.capture(), eq(APP.userHandle))
