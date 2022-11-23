@@ -70,6 +70,10 @@ public class ControlsTrivialPrivacyPreferenceController extends TogglePreference
 
     @Override
     public int getAvailabilityStatus() {
+        if (CustomizableLockScreenUtils.isFeatureEnabled(mContext)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
         return showDeviceControlsSettingsEnabled() ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
     }
 
