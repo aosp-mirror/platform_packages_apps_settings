@@ -17,7 +17,6 @@
 package com.android.settings.dashboard.profileselector;
 
 import android.app.Activity;
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -42,6 +41,7 @@ import com.android.settings.deviceinfo.storage.StorageEntry;
 import com.android.settings.deviceinfo.storage.StorageSelectionPreferenceController;
 import com.android.settings.deviceinfo.storage.StorageUsageProgressBarPreferenceController;
 import com.android.settings.deviceinfo.storage.StorageUtils;
+import com.android.settingslib.core.instrumentation.Instrumentable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -323,7 +323,7 @@ public class ProfileSelectStorageFragment extends ProfileSelectFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.SETTINGS_STORAGE_CATEGORY;
+        return Instrumentable.METRICS_CATEGORY_UNKNOWN;
     }
 
     @Override
