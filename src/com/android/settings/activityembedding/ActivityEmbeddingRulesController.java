@@ -207,7 +207,7 @@ public class ActivityEmbeddingRulesController {
         final SplitPlaceholderRule placeholderRule = new SplitPlaceholderRule(
                 activityFilters,
                 intent,
-                true /* stickyPlaceholder */,
+                false /* stickyPlaceholder */,
                 SplitRule.FINISH_ADJACENT,
                 ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthPx(mContext),
                 ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthPx(mContext),
