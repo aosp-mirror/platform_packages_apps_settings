@@ -28,8 +28,10 @@ import android.net.wifi.WifiManager;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Looper;
 import android.os.RecoverySystem;
+import android.os.SystemClock;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import com.android.settings.network.apn.ApnSettings;
 
@@ -42,6 +44,10 @@ import java.util.function.Consumer;
  * A builder for creating a Runnable resetting network configurations.
  */
 public class ResetNetworkOperationBuilder {
+
+    private static final String TAG = "ResetNetworkOpBuilder";
+
+    private static final boolean DRY_RUN = false;
 
     private Context mContext;
     private List<Runnable> mResetSequence = new ArrayList<Runnable>();
@@ -127,10 +133,17 @@ public class ResetNetworkOperationBuilder {
     public ResetNetworkOperationBuilder resetEsim(String callerPackage,
             Consumer<Boolean> resultCallback) {
         Runnable runnable = () -> {
-            Boolean wipped = RecoverySystem.wipeEuiccData(mContext, callerPackage);
-            if (resultCallback != null) {
-                resultCallback.accept(wipped);
+            long startTime = SystemClock.elapsedRealtime();
+
+            if (!DRY_RUN) {
+                Boolean wipped = RecoverySystem.wipeEuiccData(mContext, callerPackage);
+                if (resultCallback != null) {
+                    resultCallback.accept(wipped);
+                }
             }
+
+            long endTime = SystemClock.elapsedRealtime();
+            Log.i(TAG, "Reset eSIM, takes " + (endTime - startTime) + " ms");
         };
         mResetSequence.add(runnable);
         return this;
@@ -179,14 +192,21 @@ public class ResetNetworkOperationBuilder {
      */
     public ResetNetworkOperationBuilder resetApn(int subscriptionId) {
         Runnable runnable = () -> {
+            long startTime = SystemClock.elapsedRealtime();
+
             Uri uri = Uri.parse(ApnSettings.RESTORE_CARRIERS_URI);
 
             if (SubscriptionManager.isUsableSubscriptionId(subscriptionId)) {
                 uri = Uri.withAppendedPath(uri, "subId/" + String.valueOf(subscriptionId));
             }
 
-            ContentResolver resolver = mContext.getContentResolver();
-            resolver.delete(uri, null, null);
+            if (!DRY_RUN) {
+                ContentResolver resolver = mContext.getContentResolver();
+                resolver.delete(uri, null, null);
+            }
+
+            long endTime = SystemClock.elapsedRealtime();
+            Log.i(TAG, "Reset " + uri + ", takes " + (endTime - startTime) + " ms");
         };
         mResetSequence.add(runnable);
         return this;
@@ -205,7 +225,14 @@ public class ResetNetworkOperationBuilder {
         if (service == null) {
             return;
         }
-        Runnable runnable = () -> serviceAccess.accept(service);
+        Runnable runnable = () -> {
+            long startTime = SystemClock.elapsedRealtime();
+            if (!DRY_RUN) {
+                serviceAccess.accept(service);
+            }
+            long endTime = SystemClock.elapsedRealtime();
+            Log.i(TAG, "Reset " + serviceName + ", takes " + (endTime - startTime) + " ms");
+        };
         mResetSequence.add(runnable);
     }
 }

@@ -167,7 +167,7 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return 0;
+        return SettingsEnums.FUELGAUGE_BATTERY_SAVER_SCHEDULE;
     }
 
     private void logPowerSaver() {

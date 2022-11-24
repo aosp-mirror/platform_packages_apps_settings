@@ -46,6 +46,7 @@ import android.hardware.fingerprint.FingerprintManager;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -90,6 +91,18 @@ public class FingerprintEnrollIntroViewModelTest {
         final FingerprintEnrollIntroStatus status = mViewModel.getPageStatusLiveData().getValue();
         assertThat(status.hasScrollToBottom()).isFalse();
         assertThat(status.getEnrollableStatus()).isEqualTo(FINGERPRINT_ENROLLABLE_UNKNOWN);
+    }
+
+    @Test
+    public void testClearActionLiveData() {
+        final MutableLiveData<Integer> actionLiveData =
+                (MutableLiveData<Integer>) mViewModel.getActionLiveData();
+        actionLiveData.postValue(1);
+        assertThat(actionLiveData.getValue()).isEqualTo(1);
+
+        mViewModel.clearActionLiveData();
+
+        assertThat(actionLiveData.getValue()).isNull();
     }
 
     @Test
@@ -202,11 +215,13 @@ public class FingerprintEnrollIntroViewModelTest {
 
     @Test
     public void testSetHasScrolledToBottom() {
-        mViewModel.setHasScrolledToBottom();
-
+        mViewModel.setHasScrolledToBottom(true);
         FingerprintEnrollIntroStatus status = mViewModel.getPageStatusLiveData().getValue();
-
         assertThat(status.hasScrollToBottom()).isEqualTo(true);
+
+        mViewModel.setHasScrolledToBottom(false);
+        status = mViewModel.getPageStatusLiveData().getValue();
+        assertThat(status.hasScrollToBottom()).isEqualTo(false);
     }
 
     @Test

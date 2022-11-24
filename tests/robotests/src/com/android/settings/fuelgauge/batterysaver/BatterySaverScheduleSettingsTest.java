@@ -1,5 +1,6 @@
 package com.android.settings.fuelgauge.batterysaver;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -80,6 +81,12 @@ public final class BatterySaverScheduleSettingsTest {
         mBatterySaverScheduleSettings.onPause();
 
         verifySchedule("key_battery_saver_percentage", expectedPercentage);
+    }
+
+    @Test
+    public void getMetricsCategory_returnExpectedResult() {
+        assertThat(mBatterySaverScheduleSettings.getMetricsCategory())
+                .isEqualTo(SettingsEnums.FUELGAUGE_BATTERY_SAVER_SCHEDULE);
     }
 
     private void setSchedule(int scheduleType, int schedulePercentage) {

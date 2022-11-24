@@ -22,6 +22,7 @@ import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_C
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.UserHandle;
 
 import androidx.annotation.NonNull;
@@ -80,15 +81,28 @@ public final class CredentialModel {
     @Nullable
     private Long mClearGkPwHandleMillis = null;
 
-    public CredentialModel(@NonNull Intent intent, @NonNull Clock clock) {
-        mUserId = intent.getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
-        mSensorId = intent.getIntExtra(EXTRA_KEY_SENSOR_ID, INVALID_SENSOR_ID);
-        mChallenge = intent.getLongExtra(EXTRA_KEY_CHALLENGE, INVALID_CHALLENGE);
-        mToken = intent.getByteArrayExtra(EXTRA_KEY_CHALLENGE_TOKEN);
-        mGkPwHandle = intent.getLongExtra(EXTRA_KEY_GK_PW_HANDLE,
-                INVALID_GK_PW_HANDLE);
+    public CredentialModel(@NonNull Bundle bundle, @NonNull Clock clock) {
+        mUserId = bundle.getInt(Intent.EXTRA_USER_ID, UserHandle.myUserId());
+        mSensorId = bundle.getInt(EXTRA_KEY_SENSOR_ID, INVALID_SENSOR_ID);
+        mChallenge = bundle.getLong(EXTRA_KEY_CHALLENGE, INVALID_CHALLENGE);
+        mToken = bundle.getByteArray(EXTRA_KEY_CHALLENGE_TOKEN);
+        mGkPwHandle = bundle.getLong(EXTRA_KEY_GK_PW_HANDLE, INVALID_GK_PW_HANDLE);
         mClock = clock;
         mInitMillis = mClock.millis();
+    }
+
+    /**
+     * Get a bundle which can be used to recreate CredentialModel
+     */
+    @NonNull
+    public Bundle getBundle() {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(Intent.EXTRA_USER_ID, mUserId);
+        bundle.putInt(EXTRA_KEY_SENSOR_ID, mSensorId);
+        bundle.putLong(EXTRA_KEY_CHALLENGE, mChallenge);
+        bundle.putByteArray(EXTRA_KEY_CHALLENGE_TOKEN, mToken);
+        bundle.putLong(EXTRA_KEY_GK_PW_HANDLE, mGkPwHandle);
+        return bundle;
     }
 
     /**
