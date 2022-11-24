@@ -31,6 +31,9 @@ import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
+import com.android.settings.testutils.shadow.ShadowRecoverySystem;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -43,7 +46,10 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowRecoverySystem.class, ShadowBluetoothAdapter.class})
 public class ResetNetworkConfirmTest {
+
+    private static final String TEST_PACKAGE = "com.android.settings";
 
     private FragmentActivity mActivity;
 
@@ -59,9 +65,28 @@ public class ResetNetworkConfirmTest {
         mResetNetworkConfirm.mActivity = mActivity;
     }
 
+    @After
+    public void tearDown() {
+        ShadowRecoverySystem.reset();
+    }
+
+    @Test
+    public void testResetNetworkData_notResetEsim() {
+        mResetNetworkConfirm.mResetNetworkRequest =
+                new ResetNetworkRequest(ResetNetworkRequest.RESET_NONE);
+
+        mResetNetworkConfirm.mFinalClickListener.onClick(null /* View */);
+        Robolectric.getBackgroundThreadScheduler().advanceToLastPostedRunnable();
+
+        assertThat(ShadowRecoverySystem.getWipeEuiccCalledCount()).isEqualTo(0);
+    }
+
     @Test
     public void setSubtitle_eraseEsim() {
-        mResetNetworkConfirm.mEraseEsim = true;
+        mResetNetworkConfirm.mResetNetworkRequest =
+                new ResetNetworkRequest(ResetNetworkRequest.RESET_NONE);
+        mResetNetworkConfirm.mResetNetworkRequest.setResetEsim(TEST_PACKAGE);
+
         mResetNetworkConfirm.mContentView =
                 LayoutInflater.from(mActivity).inflate(R.layout.reset_network_confirm, null);
 
@@ -74,7 +99,9 @@ public class ResetNetworkConfirmTest {
 
     @Test
     public void setSubtitle_notEraseEsim() {
-        mResetNetworkConfirm.mEraseEsim = false;
+        mResetNetworkConfirm.mResetNetworkRequest =
+                new ResetNetworkRequest(ResetNetworkRequest.RESET_NONE);
+
         mResetNetworkConfirm.mContentView =
                 LayoutInflater.from(mActivity).inflate(R.layout.reset_network_confirm, null);
 
