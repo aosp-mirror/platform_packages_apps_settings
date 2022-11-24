@@ -165,6 +165,6 @@ public class SelectSpecificDataSimDialogFragment extends SimDialogFragment imple
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.DIALOG_PREFERRED_SIM_PICKER;
+        return SettingsEnums.DIALOG_SPECIFIC_DDS_SIM_PICKER;
     }
 }
