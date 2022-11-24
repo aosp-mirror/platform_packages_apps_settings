@@ -119,14 +119,28 @@ public class ResetNetwork extends InstrumentedFragment {
     @VisibleForTesting
     void showFinalConfirmation() {
         Bundle args = new Bundle();
+
+        ResetNetworkRequest request = new ResetNetworkRequest(
+                ResetNetworkRequest.RESET_CONNECTIVITY_MANAGER |
+                ResetNetworkRequest.RESET_VPN_MANAGER |
+                ResetNetworkRequest.RESET_WIFI_MANAGER |
+                ResetNetworkRequest.RESET_WIFI_P2P_MANAGER |
+                ResetNetworkRequest.RESET_BLUETOOTH_MANAGER
+        );
         if (mSubscriptions != null && mSubscriptions.size() > 0) {
             int selectedIndex = mSubscriptionSpinner.getSelectedItemPosition();
             SubscriptionInfo subscription = mSubscriptions.get(selectedIndex);
-            args.putInt(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX,
-                    subscription.getSubscriptionId());
+            int subId = subscription.getSubscriptionId();
+            request.setResetTelephonyAndNetworkPolicyManager(subId)
+                   .setResetApn(subId);
         }
-        args.putBoolean(MainClear.ERASE_ESIMS_EXTRA,
-                mEsimContainer.getVisibility() == View.VISIBLE && mEsimCheckbox.isChecked());
+        if (mEsimContainer.getVisibility() == View.VISIBLE && mEsimCheckbox.isChecked()) {
+            request.setResetEsim(getContext().getPackageName())
+                   .writeIntoBundle(args);
+        } else {
+            request.writeIntoBundle(args);
+        }
+
         new SubSettingLauncher(getContext())
                 .setDestination(ResetNetworkConfirm.class.getName())
                 .setArguments(args)
