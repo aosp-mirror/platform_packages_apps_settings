@@ -84,6 +84,7 @@ import com.android.settingslib.drawable.CircleFramedDrawable;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.users.EditUserInfoController;
+import com.android.settingslib.users.GrantAdminDialogController;
 import com.android.settingslib.users.UserCreatingDialog;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -156,6 +157,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final int DIALOG_CONFIRM_RESET_AND_RESTART_GUEST = 13;
     private static final int DIALOG_CONFIRM_EXIT_GUEST_EPHEMERAL = 14;
     private static final int DIALOG_CONFIRM_EXIT_GUEST_NON_EPHEMERAL = 15;
+    private static final int DIALOG_GRANT_ADMIN = 16;
 
     private static final int MESSAGE_UPDATE_LIST = 1;
     private static final int MESSAGE_USER_CREATED = 2;
@@ -215,6 +217,9 @@ public class UserSettings extends SettingsPreferenceFragment
     private static SparseArray<Bitmap> sDarkDefaultUserBitmapCache = new SparseArray<>();
 
     private MultiUserSwitchBarController mSwitchBarController;
+
+    private GrantAdminDialogController mGrantAdminDialogController =
+            new GrantAdminDialogController();
     private EditUserInfoController mEditUserInfoController =
             new EditUserInfoController(Utils.FILE_PROVIDER_AUTHORITY);
     private AddUserWhenLockedPreferenceController mAddUserWhenLockedPreferenceController;
@@ -228,6 +233,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private CharSequence mPendingUserName;
     private Drawable mPendingUserIcon;
+    private boolean mGrantAdmin;
 
     // A place to cache the generated default avatar
     private Drawable mDefaultIconDrawable;
@@ -287,7 +293,6 @@ public class UserSettings extends SettingsPreferenceFragment
         mSwitchBarController = new MultiUserSwitchBarController(activity,
                 new MainSwitchBarController(switchBar), this /* listener */);
         getSettingsLifecycle().addObserver(mSwitchBarController);
-
         boolean openUserEditDialog = getIntent().getBooleanExtra(
                 EXTRA_OPEN_DIALOG_USER_PROFILE_EDITOR, false);
         if (switchBar.isChecked() && openUserEditDialog) {
@@ -306,7 +311,7 @@ public class UserSettings extends SettingsPreferenceFragment
         }
 
         mGuestUserAutoCreated = getPrefContext().getResources().getBoolean(
-                        com.android.internal.R.bool.config_guestUserAutoCreated);
+                com.android.internal.R.bool.config_guestUserAutoCreated);
 
         mAddUserWhenLockedPreferenceController = new AddUserWhenLockedPreferenceController(
                 activity, KEY_ADD_USER_WHEN_LOCKED);
@@ -712,17 +717,26 @@ public class UserSettings extends SettingsPreferenceFragment
                         .setPositiveButton(android.R.string.ok,
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        showDialog(DIALOG_USER_PROFILE_EDITOR_ADD_USER);
                                         if (!longMessageDisplayed) {
                                             preferences.edit().putBoolean(
                                                     KEY_ADD_USER_LONG_MESSAGE_DISPLAYED,
                                                     true).apply();
+                                        }
+                                        //TODO(b/262371063): check whether multiple admins allowed,
+                                        // not for HSUM
+                                        if (UserManager.isHeadlessSystemUserMode()) {
+                                            showDialog(DIALOG_GRANT_ADMIN);
+                                        } else {
+                                            showDialog(DIALOG_USER_PROFILE_EDITOR_ADD_USER);
                                         }
                                     }
                                 })
                         .setNegativeButton(android.R.string.cancel, null)
                         .create();
                 return dlg;
+            }
+            case DIALOG_GRANT_ADMIN: {
+                return buildGrantAdminDialog();
             }
             case DIALOG_CHOOSE_USER_TYPE: {
                 List<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
@@ -931,6 +945,19 @@ public class UserSettings extends SettingsPreferenceFragment
         return d;
     }
 
+    private Dialog buildGrantAdminDialog() {
+        return mGrantAdminDialogController.createDialog(
+                getActivity(),
+                (grantAdmin) -> {
+                    mGrantAdmin = grantAdmin;
+                    showDialog(DIALOG_USER_PROFILE_EDITOR_ADD_USER);
+                },
+                () -> {
+                    mGrantAdmin = false;
+                }
+        );
+    }
+
     @Override
     public int getDialogMetricsCategory(int dialogId) {
         switch (dialogId) {
@@ -938,6 +965,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 return SettingsEnums.DIALOG_USER_REMOVE;
             case DIALOG_USER_CANNOT_MANAGE:
                 return SettingsEnums.DIALOG_USER_CANNOT_MANAGE;
+            case DIALOG_GRANT_ADMIN:
+                return SettingsEnums.DIALOG_GRANT_USER_ADMIN;
             case DIALOG_ADD_USER:
                 return SettingsEnums.DIALOG_USER_ADD;
             case DIALOG_CHOOSE_USER_TYPE:
@@ -1031,6 +1060,9 @@ public class UserSettings extends SettingsPreferenceFragment
                         userName,
                         mUserManager.USER_TYPE_FULL_SECONDARY,
                         0);
+                if (mGrantAdmin) {
+                    mUserManager.setUserAdmin(user.id);
+                }
             } else {
                 user = mUserManager.createRestrictedProfile(userName);
             }
@@ -1351,20 +1383,20 @@ public class UserSettings extends SettingsPreferenceFragment
         mGuestResetPreference.setVisible(true);
 
         boolean isGuestFirstLogin = Settings.Secure.getIntForUser(
-                                        getContext().getContentResolver(),
-                                        SETTING_GUEST_HAS_LOGGED_IN,
-                                        0,
-                                        UserHandle.myUserId()) <= 1;
+                getContext().getContentResolver(),
+                SETTING_GUEST_HAS_LOGGED_IN,
+                0,
+                UserHandle.myUserId()) <= 1;
         String guestExitSummary;
         if (mUserCaps.mIsEphemeral) {
             guestExitSummary = getContext().getString(
-                                R.string.guest_notification_ephemeral);
+                    R.string.guest_notification_ephemeral);
         } else if (isGuestFirstLogin) {
             guestExitSummary = getContext().getString(
-                                R.string.guest_notification_non_ephemeral);
+                    R.string.guest_notification_non_ephemeral);
         } else {
             guestExitSummary = getContext().getString(
-                                R.string.guest_notification_non_ephemeral_non_first_login);
+                    R.string.guest_notification_non_ephemeral_non_first_login);
         }
         mGuestExitPreference.setSummary(guestExitSummary);
     }
