@@ -56,10 +56,9 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
     private static final String TAG = "ResetNetworkConfirm";
 
     @VisibleForTesting View mContentView;
-    @VisibleForTesting boolean mEraseEsim;
     @VisibleForTesting ResetNetworkTask mResetNetworkTask;
     @VisibleForTesting Activity mActivity;
-    private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+    @VisibleForTesting ResetNetworkRequest mResetNetworkRequest;
     private ProgressDialog mProgressDialog;
     private AlertDialog mAlertDialog;
     private OnSubscriptionsChangedListener mSubscriptionsChangedListener;
@@ -72,32 +71,25 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
         private static final String TAG = "ResetNetworkTask";
 
         private final Context mContext;
-        private final String mPackageName;
 
         ResetNetworkTask(Context context) {
             mContext = context;
-            mPackageName = context.getPackageName();
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             final AtomicBoolean resetEsimSuccess = new AtomicBoolean(true);
-            ResetNetworkOperationBuilder builder =
-                    (new ResetNetworkOperationBuilder(mContext))
-                    .resetConnectivityManager()
-                    .resetVpnManager()
-                    .resetWifiManager()
-                    .resetWifiP2pManager(Looper.getMainLooper());
-            if (mEraseEsim) {
-                builder = builder.resetEsim(mContext.getPackageName(),
+
+            String resetEsimPackageName = mResetNetworkRequest.getResetEsimPackageName();
+            ResetNetworkOperationBuilder builder = mResetNetworkRequest
+                    .toResetNetworkOperationBuilder(mContext, Looper.getMainLooper());
+            if (resetEsimPackageName != null) {
+                // Override reset eSIM option for the result of reset operation
+                builder = builder.resetEsim(resetEsimPackageName,
                         success -> { resetEsimSuccess.set(success); }
                         );
             }
-            builder.resetTelephonyAndNetworkPolicyManager(mSubId)
-                    .resetBluetoothManager()
-                    .resetApn(mSubId)
-                    .build()
-                    .run();
+            builder.build().run();
 
             boolean isResetSucceed = resetEsimSuccess.get();
             Log.d(TAG, "network factoryReset complete. succeeded: "
@@ -138,12 +130,13 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             }
 
             // abandon execution if subscription no longer active
-            if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            int subId = mResetNetworkRequest.getResetApnSubId();
+            if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
                 SubscriptionManager mgr = getSubscriptionManager();
                 // always remove listener
                 stopMonitorSubscriptionChange(mgr);
-                if (!isSubscriptionRemainActive(mgr, mSubId)) {
-                    Log.w(TAG, "subId " + mSubId + " disappear when confirm");
+                if (!isSubscriptionRemainActive(mgr, subId)) {
+                    Log.w(TAG, "subId " + subId + " disappear when confirm");
                     mActivity.finish();
                     return;
                 }
@@ -182,7 +175,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
 
     @VisibleForTesting
     void setSubtitle() {
-        if (mEraseEsim) {
+        if (mResetNetworkRequest.getResetEsimPackageName() != null) {
             ((TextView) mContentView.findViewById(R.id.reset_network_confirm))
                     .setText(R.string.reset_network_final_desc_esim);
         }
@@ -193,6 +186,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             Bundle savedInstanceState) {
         View view = (new ResetNetworkRestrictionViewBuilder(mActivity)).build();
         if (view != null) {
+            stopMonitorSubscriptionChange(getSubscriptionManager());
             Log.w(TAG, "Access deny.");
             return view;
         }
@@ -207,20 +201,26 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
         super.onCreate(savedInstanceState);
 
         Bundle args = getArguments();
-        if (args != null) {
-            mSubId = args.getInt(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX,
-                    SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-            mEraseEsim = args.getBoolean(MainClear.ERASE_ESIMS_EXTRA);
+        if (args == null) {
+            args = savedInstanceState;
         }
+        mResetNetworkRequest = new ResetNetworkRequest(args);
 
         mActivity = getActivity();
 
-        if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+        if (mResetNetworkRequest.getResetApnSubId()
+                == ResetNetworkRequest.INVALID_SUBSCRIPTION_ID) {
             return;
         }
         // close confirmation dialog when reset specific subscription
         // but removed priori to the confirmation button been pressed
         startMonitorSubscriptionChange(getSubscriptionManager());
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mResetNetworkRequest.writeIntoBundle(outState);
     }
 
     private SubscriptionManager getSubscriptionManager() {
@@ -240,12 +240,13 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
                 Looper.getMainLooper()) {
             @Override
             public void onSubscriptionsChanged() {
+                int subId = mResetNetworkRequest.getResetApnSubId();
                 SubscriptionManager mgr = getSubscriptionManager();
-                if (isSubscriptionRemainActive(mgr, mSubId)) {
+                if (isSubscriptionRemainActive(mgr, subId)) {
                     return;
                 }
                 // close UI if subscription no longer active
-                Log.w(TAG, "subId " + mSubId + " no longer active.");
+                Log.w(TAG, "subId " + subId + " no longer active.");
                 stopMonitorSubscriptionChange(mgr);
                 mActivity.finish();
             }
