@@ -40,6 +40,7 @@ import com.android.settings.network.CarrierConfigCache;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -47,6 +48,9 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
+/**
+ * Deprecated ToDo: b/260059444 remove it next version
+ */
 @RunWith(AndroidJUnit4.class)
 public class NetworkProviderBackupCallingGroupTest {
 
@@ -133,12 +137,14 @@ public class NetworkProviderBackupCallingGroupTest {
     }
 
     @Test
+    @Ignore
     public void shouldShowBackupCallingForSub_invalidSubId_returnFalse() {
         assertThat(mNetworkProviderBackupCallingGroup.hasBackupCallingFeature(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID)).isEqualTo(false);
     }
 
     @Test
+    @Ignore
     public void shouldShowBackupCallingForSub_carrierConfigIsUnavailable_returnFalse() {
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_CARRIER_CROSS_SIM_IMS_AVAILABLE_BOOL,
                 false);
@@ -148,6 +154,7 @@ public class NetworkProviderBackupCallingGroupTest {
     }
 
     @Test
+    @Ignore
     public void
     shouldShowBackupCallingForSub_crossSimDisabled_returnFalse() {
         doReturn(false).when(mNetworkProviderBackupCallingGroup).isCrossSimEnabledByPlatform(
@@ -158,6 +165,7 @@ public class NetworkProviderBackupCallingGroupTest {
     }
 
     @Test
+    @Ignore
     public void shouldBackupCallingForSub_crossSimEnabled_returnTrue() {
         doReturn(true).when(mNetworkProviderBackupCallingGroup).isCrossSimEnabledByPlatform(
                 mContext, SUB_ID_1);

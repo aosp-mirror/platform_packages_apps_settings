@@ -32,6 +32,7 @@ import java.util.List;
 
 /**
  * Preference controller for "Backup Calling" summary list
+ * Deprecated ToDo: b/260059444 remove it next version
  */
 public class NetworkProviderBackupCallingPreferenceController extends
         BasePreferenceController implements LifecycleObserver {

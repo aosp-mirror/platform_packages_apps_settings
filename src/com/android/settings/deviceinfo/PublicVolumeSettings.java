@@ -95,7 +95,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.DEVICEINFO_STORAGE;
+        return SettingsEnums.PUBLIC_VOLUME_SETTINGS;
     }
 
     @Override

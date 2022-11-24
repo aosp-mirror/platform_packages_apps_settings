@@ -19,20 +19,19 @@ package com.android.settings.biometrics2.ui.view;
 import static androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY;
 
 import static com.android.settings.biometrics2.factory.BiometricsViewModelFactory.CHALLENGE_GENERATOR;
-import static com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.CREDENTIAL_FAIL_DURING_GENERATE_CHALLENGE;
 import static com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.CREDENTIAL_FAIL_NEED_TO_CHOOSE_LOCK;
 import static com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.CREDENTIAL_FAIL_NEED_TO_CONFIRM_LOCK;
+import static com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.CREDENTIAL_IS_GENERATING_CHALLENGE;
+import static com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.CREDENTIAL_VALID;
 import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollIntroViewModel.FINGERPRINT_ENROLL_INTRO_ACTION_CONTINUE_ENROLL;
 import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollIntroViewModel.FINGERPRINT_ENROLL_INTRO_ACTION_DONE_AND_FINISH;
 import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollIntroViewModel.FINGERPRINT_ENROLL_INTRO_ACTION_SKIP_OR_CANCEL;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 
 import androidx.activity.result.ActivityResult;
@@ -42,7 +41,6 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.viewmodel.CreationExtras;
 import androidx.lifecycle.viewmodel.MutableCreationExtras;
@@ -51,11 +49,9 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
-import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollEnrolling;
+import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollFindSensor;
 import com.android.settings.biometrics2.data.repository.FingerprintRepository;
-import com.android.settings.biometrics2.factory.BiometricsFragmentFactory;
 import com.android.settings.biometrics2.factory.BiometricsViewModelFactory;
-import com.android.settings.biometrics2.ui.model.CredentialModel;
 import com.android.settings.biometrics2.ui.model.EnrollmentRequest;
 import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.FingerprintChallengeGenerator;
@@ -99,15 +95,10 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
         mViewModel = viewModelProvider.get(FingerprintEnrollmentViewModel.class);
         mViewModel.setRequest(new EnrollmentRequest(getIntent(), getApplicationContext()));
         mViewModel.setSavedInstanceState(savedInstanceState);
-        getLifecycle().addObserver(mViewModel);
 
         mAutoCredentialViewModel = viewModelProvider.get(AutoCredentialViewModel.class);
-        mAutoCredentialViewModel.setCredentialModel(new CredentialModel(getIntent(),
-                SystemClock.elapsedRealtimeClock()));
-        getLifecycle().addObserver(mAutoCredentialViewModel);
-
-        mViewModel.getSetResultLiveData().observe(this, this::onSetActivityResult);
-        mAutoCredentialViewModel.getActionLiveData().observe(this, this::onCredentialAction);
+        mAutoCredentialViewModel.setCredentialModel(savedInstanceState, getIntent());
+        checkCredential();
 
         // Theme
         setTheme(mViewModel.getRequest().getTheme());
@@ -116,21 +107,35 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
 
         // fragment
         setContentView(R.layout.biometric_enrollment_container);
-        final FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.setFragmentFactory(
-                new BiometricsFragmentFactory(getApplication(), viewModelProvider));
 
-        final FingerprintEnrollIntroViewModel fingerprintEnrollIntroViewModel =
+        final FingerprintEnrollIntroViewModel introViewModel =
                 viewModelProvider.get(FingerprintEnrollIntroViewModel.class);
-        fingerprintEnrollIntroViewModel.setEnrollmentRequest(mViewModel.getRequest());
-        fingerprintEnrollIntroViewModel.setUserId(mAutoCredentialViewModel.getUserId());
-        fingerprintEnrollIntroViewModel.getActionLiveData().observe(
-                this, this::observeIntroAction);
-        final String tag = "FingerprintEnrollIntroFragment";
-        fragmentManager.beginTransaction()
-                .setReorderingAllowed(true)
-                .add(R.id.fragment_container_view, FingerprintEnrollIntroFragment.class, null, tag)
-                .commit();
+        introViewModel.setEnrollmentRequest(mViewModel.getRequest());
+        introViewModel.setUserId(mAutoCredentialViewModel.getUserId());
+        if (savedInstanceState == null) {
+            final String tag = "FingerprintEnrollIntroFragment";
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.fragment_container_view, FingerprintEnrollIntroFragment.class, null,
+                            tag)
+                    .commit();
+        }
+
+        // observe LiveData
+        getLifecycle().addObserver(mViewModel);
+        mViewModel.getSetResultLiveData().observe(this, this::onSetActivityResult);
+
+        mAutoCredentialViewModel.getGenerateChallengeFailedLiveData().observe(this,
+                this::onGenerateChallengeFailed);
+
+        // Clear ActionLiveData in FragmentViewModel to prevent getting previous action during
+        // recreate, like press 'I agree' then press 'back' in FingerprintEnrollFindSensor activity.
+        introViewModel.clearActionLiveData();
+        introViewModel.getActionLiveData().observe(this, this::observeIntroAction);
+    }
+
+    private void onGenerateChallengeFailed(@NonNull Boolean ignoredBoolean) {
+        onSetActivityResult(new ActivityResult(RESULT_CANCELED, null));
     }
 
     private void onSetActivityResult(@NonNull ActivityResult result) {
@@ -141,10 +146,10 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
         finish();
     }
 
-    private void onCredentialAction(@NonNull Integer action) {
-        switch (action) {
+    private void checkCredential() {
+        switch (mAutoCredentialViewModel.checkCredential()) {
             case CREDENTIAL_FAIL_NEED_TO_CHOOSE_LOCK: {
-                final Intent intent = mAutoCredentialViewModel.getChooseLockIntent(this,
+                final Intent intent = mAutoCredentialViewModel.createChooseLockIntent(this,
                         mViewModel.getRequest().isSuw(), mViewModel.getRequest().getSuwExtras());
                 if (!mViewModel.isWaitingActivityResult().compareAndSet(false, true)) {
                     Log.w(TAG, "chooseLock, fail to set isWaiting flag to true");
@@ -153,7 +158,7 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
                 return;
             }
             case CREDENTIAL_FAIL_NEED_TO_CONFIRM_LOCK: {
-                final boolean launched = mAutoCredentialViewModel.getConfirmLockLauncher(
+                final boolean launched = mAutoCredentialViewModel.createConfirmLockLauncher(
                         this,
                         LAUNCH_CONFIRM_LOCK_ACTIVITY,
                         getString(R.string.security_settings_fingerprint_preference_title)
@@ -168,12 +173,9 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
                 }
                 return;
             }
-            case CREDENTIAL_FAIL_DURING_GENERATE_CHALLENGE: {
-                Log.w(TAG, "observeCredentialLiveData, finish with action:" + action);
-                if (mViewModel.getRequest().isAfterSuwOrSuwSuggestedAction()) {
-                    setResult(Activity.RESULT_CANCELED);
-                }
-                finish();
+            case CREDENTIAL_VALID:
+            case CREDENTIAL_IS_GENERATING_CHALLENGE: {
+                // Do nothing
             }
         }
     }
@@ -186,10 +188,15 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
         if (mAutoCredentialViewModel.checkNewCredentialFromActivityResult(
                 isChooseLock, activityResult)) {
             overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
+        } else {
+            onSetActivityResult(activityResult);
         }
     }
 
-    private void observeIntroAction(@NonNull Integer action) {
+    private void observeIntroAction(@Nullable Integer action) {
+        if (action == null) {
+            return;
+        }
         switch (action) {
             case FINGERPRINT_ENROLL_INTRO_ACTION_DONE_AND_FINISH: {
                 onSetActivityResult(
@@ -207,9 +214,9 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
                     Log.w(TAG, "startNext, isSuw:" + isSuw + ", fail to set isWaiting flag");
                 }
                 final Intent intent = new Intent(this, isSuw
-                        ? SetupFingerprintEnrollEnrolling.class
+                        ? SetupFingerprintEnrollFindSensor.class
                         : FingerprintEnrollFindSensor.class);
-                intent.putExtras(mAutoCredentialViewModel.getCredentialBundle());
+                intent.putExtras(mAutoCredentialViewModel.createCredentialIntentExtra());
                 intent.putExtras(mViewModel.getNextActivityBaseIntentExtras());
                 mNextActivityLauncher.launch(intent);
             }
@@ -272,5 +279,6 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         mViewModel.onSaveInstanceState(outState);
+        mAutoCredentialViewModel.onSaveInstanceState(outState);
     }
 }
