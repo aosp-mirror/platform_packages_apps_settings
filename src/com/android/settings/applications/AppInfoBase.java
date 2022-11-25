@@ -258,7 +258,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
 
         @Override
         public int getMetricsCategory() {
-            return SettingsEnums.DIALOG_APP_INFO_ACTION;
+            return SettingsEnums.DIALOG_BASE_APP_INFO_ACTION;
         }
 
         @Override
