@@ -52,7 +52,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     private static final String KEY_REFRESH_TYPE = "refresh_type";
     private static final String KEY_BATTERY_GRAPH = "battery_graph";
     private static final String KEY_APP_LIST = "app_list";
-    private static final int LOADER_BATTERY_USAGE_STATS = 2;
 
     @VisibleForTesting
     BatteryHistoryPreference mHistPref;
@@ -165,7 +164,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         bundle.putInt(KEY_REFRESH_TYPE, refreshType);
         if (!mIsChartDataLoaded) {
             mIsChartDataLoaded = true;
-            getLoaderManager().restartLoader(LOADER_BATTERY_USAGE_STATS, bundle,
+            restartLoader(LoaderIndex.BATTERY_HISTORY_LOADER, bundle,
                     mBatteryHistoryLoaderCallbacks);
         }
     }
