@@ -72,12 +72,21 @@ public class BatteryTestUtils {
     /** Inserts a fake data into the database for testing. */
     public static void insertDataToBatteryStateDatabase(
             Context context, long timestamp, String packageName) {
-        insertDataToBatteryStateDatabase(context, timestamp, packageName, /*multiple=*/ false);
+        insertDataToBatteryStateDatabase(
+                context, timestamp, packageName, /*multiple=*/ false, /*isFullChargeStart=*/ false);
     }
 
     /** Inserts a fake data into the database for testing. */
     public static void insertDataToBatteryStateDatabase(
-            Context context, long timestamp, String packageName, boolean multiple) {
+            Context context, long timestamp, String packageName, boolean isFullChargeStart) {
+        insertDataToBatteryStateDatabase(
+                context, timestamp, packageName, /*multiple=*/ false, isFullChargeStart);
+    }
+
+    /** Inserts a fake data into the database for testing. */
+    public static void insertDataToBatteryStateDatabase(
+            Context context, long timestamp, String packageName, boolean multiple,
+            boolean isFullChargeStart) {
         DeviceBatteryState deviceBatteryState =
                 DeviceBatteryState
                         .newBuilder()
@@ -113,7 +122,7 @@ public class BatteryTestUtils {
                         packageName,
                         timestamp,
                         /*consumerType=*/ 2,
-                        /*isFullChargeCycleStart=*/ false,
+                        isFullChargeStart,
                         ConvertUtils.convertBatteryInformationToString(batteryInformation),
                         "");
         BatteryStateDao dao =

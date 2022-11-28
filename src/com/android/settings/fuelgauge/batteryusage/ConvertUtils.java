@@ -92,7 +92,8 @@ public final class ConvertUtils {
             final int batteryStatus,
             final int batteryHealth,
             final long bootTimestamp,
-            final long timestamp) {
+            final long timestamp,
+            final boolean isFullChargeStart) {
         final ContentValues values = new ContentValues();
         if (entry != null && batteryUsageStats != null) {
             values.put(BatteryHistEntry.KEY_UID, Long.valueOf(entry.getUid()));
@@ -106,6 +107,8 @@ public final class ConvertUtils {
             values.put(BatteryHistEntry.KEY_PACKAGE_NAME, FAKE_PACKAGE_NAME);
         }
         values.put(BatteryHistEntry.KEY_TIMESTAMP, Long.valueOf(timestamp));
+        values.put(BatteryHistEntry.KEY_IS_FULL_CHARGE_CYCLE_START,
+                Boolean.valueOf(isFullChargeStart));
         final BatteryInformation batteryInformation =
                 constructBatteryInformation(
                         entry,
@@ -163,7 +166,8 @@ public final class ConvertUtils {
                         /*batteryStatus=*/ 0,
                         /*batteryHealth=*/ 0,
                         /*bootTimestamp=*/ 0,
-                        /*timestamp=*/ 0));
+                        /*timestamp=*/ 0,
+                        /*isFullChargeStart=*/ false));
     }
 
     /** Converts UTC timestamp to human readable local time string. */

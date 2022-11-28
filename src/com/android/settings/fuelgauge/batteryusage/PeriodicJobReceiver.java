@@ -39,7 +39,7 @@ public final class PeriodicJobReceiver extends BroadcastReceiver {
             Log.w(TAG, "do not refresh job for work profile action=" + action);
             return;
         }
-        BatteryUsageDataLoader.enqueueWork(context);
+        BatteryUsageDataLoader.enqueueWork(context, /*isFullChargeStart=*/ false);
         Log.d(TAG, "refresh periodic job from action=" + action);
         PeriodicJobManager.getInstance(context).refreshJob();
         DatabaseUtils.clearExpiredDataIfNeeded(context);

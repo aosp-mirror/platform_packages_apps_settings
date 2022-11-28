@@ -49,6 +49,9 @@ import java.util.concurrent.TimeUnit;
 @RunWith(RobolectricTestRunner.class)
 public final class BatteryUsageContentProviderTest {
     private static final Uri VALID_BATTERY_STATE_CONTENT_URI = DatabaseUtils.BATTERY_CONTENT_URI;
+    private static final String PACKAGE_NAME1 = "com.android.settings1";
+    private static final String PACKAGE_NAME2 = "com.android.settings2";
+    private static final String PACKAGE_NAME3 = "com.android.settings3";
 
     private Context mContext;
     private BatteryUsageContentProvider mProvider;
@@ -118,31 +121,60 @@ public final class BatteryUsageContentProviderTest {
     public void query_batteryState_returnsExpectedResult() throws Exception {
         mProvider.onCreate();
         final Duration currentTime = Duration.ofHours(52);
-        final long expiredTimeCutoff = currentTime.toMillis()
-                - BatteryUsageContentProvider.QUERY_DURATION_HOURS.toMillis();
-        testQueryBatteryState(currentTime, expiredTimeCutoff, /*hasQueryTimestamp=*/ false);
+        final long expiredTimeCutoff = currentTime.toMillis() - 3;
+
+        final Cursor cursor = insertBatteryState(currentTime, Long.toString(expiredTimeCutoff));
+
+        // Verifies the result not include expired data.
+        assertThat(cursor.getCount()).isEqualTo(3);
+        final int packageNameIndex = cursor.getColumnIndex("packageName");
+        // Verifies the first data package name.
+        cursor.moveToFirst();
+        final String actualPackageName1 = cursor.getString(packageNameIndex);
+        assertThat(actualPackageName1).isEqualTo(PACKAGE_NAME1);
+        // Verifies the second data package name.
+        cursor.moveToNext();
+        final String actualPackageName2 = cursor.getString(packageNameIndex);
+        assertThat(actualPackageName2).isEqualTo(PACKAGE_NAME2);
+        // Verifies the third data package name.
+        cursor.moveToNext();
+        final String actualPackageName3 = cursor.getString(packageNameIndex);
+        assertThat(actualPackageName3).isEqualTo(PACKAGE_NAME3);
+        cursor.close();
+        // Verifies the broadcast intent.
+        TimeUnit.SECONDS.sleep(1);
+        final List<Intent> intents = Shadows.shadowOf((Application) mContext).getBroadcastIntents();
+        assertThat(intents).hasSize(1);
+        assertThat(intents.get(0).getAction()).isEqualTo(
+                BootBroadcastReceiver.ACTION_PERIODIC_JOB_RECHECK);
     }
 
     @Test
     public void query_batteryStateTimestamp_returnsExpectedResult() throws Exception {
         mProvider.onCreate();
         final Duration currentTime = Duration.ofHours(52);
-        final long expiredTimeCutoff = currentTime.toMillis() - Duration.ofHours(10).toMillis();
-        testQueryBatteryState(currentTime, expiredTimeCutoff, /*hasQueryTimestamp=*/ true);
-    }
+        final long expiredTimeCutoff = currentTime.toMillis() - 1;
 
-    @Test
-    public void query_incorrectParameterFormat_returnsExpectedResult() throws Exception {
-        mProvider.onCreate();
-        final Duration currentTime = Duration.ofHours(52);
-        final long expiredTimeCutoff =
-                currentTime.toMillis()
-                        - BatteryUsageContentProvider.QUERY_DURATION_HOURS.toMillis();
-        testQueryBatteryState(
-                currentTime,
-                expiredTimeCutoff,
-                /*hasQueryTimestamp=*/ false,
-                /*customParameter=*/ "invalid number format");
+        final Cursor cursor = insertBatteryState(currentTime, Long.toString(expiredTimeCutoff));
+
+        // Verifies the result not include expired data.
+        assertThat(cursor.getCount()).isEqualTo(2);
+        final int packageNameIndex = cursor.getColumnIndex("packageName");
+        // Verifies the first data package name.
+        cursor.moveToFirst();
+        final String actualPackageName1 = cursor.getString(packageNameIndex);
+        assertThat(actualPackageName1).isEqualTo(PACKAGE_NAME2);
+        // Verifies the third data package name.
+        cursor.moveToNext();
+        final String actualPackageName2 = cursor.getString(packageNameIndex);
+        assertThat(actualPackageName2).isEqualTo(PACKAGE_NAME3);
+        cursor.close();
+        // Verifies the broadcast intent.
+        TimeUnit.SECONDS.sleep(1);
+        final List<Intent> intents = Shadows.shadowOf((Application) mContext).getBroadcastIntents();
+        assertThat(intents).hasSize(1);
+        assertThat(intents.get(0).getAction()).isEqualTo(
+                BootBroadcastReceiver.ACTION_PERIODIC_JOB_RECHECK);
     }
 
     @Test
@@ -247,54 +279,32 @@ public final class BatteryUsageContentProviderTest {
                                 /*strings=*/ null));
     }
 
-    private void testQueryBatteryState(
-            Duration currentTime, long expiredTimeCutoff, boolean hasQueryTimestamp)
-            throws Exception {
-        testQueryBatteryState(currentTime, expiredTimeCutoff, hasQueryTimestamp, null);
-    }
-
-    private void testQueryBatteryState(
+    private Cursor insertBatteryState(
             Duration currentTime,
-            long expiredTimeCutoff,
-            boolean hasQueryTimestamp,
-            String customParameter)
+            String queryTimestamp)
             throws Exception {
         mProvider.onCreate();
         final FakeClock fakeClock = new FakeClock();
         fakeClock.setCurrentTime(currentTime);
         mProvider.setClock(fakeClock);
-        // Inserts some expired testing data.
-        BatteryTestUtils.insertDataToBatteryStateDatabase(
-                mContext, expiredTimeCutoff - 1, "com.android.sysui1");
-        BatteryTestUtils.insertDataToBatteryStateDatabase(
-                mContext, expiredTimeCutoff - 2, "com.android.sysui2");
-        BatteryTestUtils.insertDataToBatteryStateDatabase(
-                mContext, expiredTimeCutoff - 3, "com.android.sysui3");
+        final long currentTimestamp = currentTime.toMillis();
         // Inserts some valid testing data.
-        final String packageName1 = "com.android.settings1";
-        final String packageName2 = "com.android.settings2";
-        final String packageName3 = "com.android.settings3";
         BatteryTestUtils.insertDataToBatteryStateDatabase(
-                mContext, currentTime.toMillis(), packageName1);
+                mContext, currentTimestamp - 2, PACKAGE_NAME1,
+                /*isFullChargeStart=*/ true);
         BatteryTestUtils.insertDataToBatteryStateDatabase(
-                mContext, expiredTimeCutoff + 2, packageName2);
+                mContext, currentTimestamp - 1, PACKAGE_NAME2);
         BatteryTestUtils.insertDataToBatteryStateDatabase(
-                mContext, expiredTimeCutoff, packageName3);
+                mContext, currentTimestamp, PACKAGE_NAME3);
 
-        final Uri.Builder builder =
+        final Uri batteryStateQueryContentUri =
                 new Uri.Builder()
                         .scheme(ContentResolver.SCHEME_CONTENT)
                         .authority(DatabaseUtils.AUTHORITY)
-                        .appendPath(DatabaseUtils.BATTERY_STATE_TABLE);
-        if (customParameter != null) {
-            builder.appendQueryParameter(
-                    BatteryUsageContentProvider.QUERY_KEY_TIMESTAMP, customParameter);
-        } else if (hasQueryTimestamp) {
-            builder.appendQueryParameter(
-                    BatteryUsageContentProvider.QUERY_KEY_TIMESTAMP,
-                    Long.toString(expiredTimeCutoff));
-        }
-        final Uri batteryStateQueryContentUri = builder.build();
+                        .appendPath(DatabaseUtils.BATTERY_STATE_TABLE)
+                        .appendQueryParameter(
+                                BatteryUsageContentProvider.QUERY_KEY_TIMESTAMP, queryTimestamp)
+                        .build();
 
         final Cursor cursor =
                 mProvider.query(
@@ -304,27 +314,6 @@ public final class BatteryUsageContentProviderTest {
                         /*strings1=*/ null,
                         /*s1=*/ null);
 
-        // Verifies the result not include expired data.
-        assertThat(cursor.getCount()).isEqualTo(3);
-        final int packageNameIndex = cursor.getColumnIndex("packageName");
-        // Verifies the first data package name.
-        cursor.moveToFirst();
-        final String actualPackageName1 = cursor.getString(packageNameIndex);
-        assertThat(actualPackageName1).isEqualTo(packageName1);
-        // Verifies the second data package name.
-        cursor.moveToNext();
-        final String actualPackageName2 = cursor.getString(packageNameIndex);
-        assertThat(actualPackageName2).isEqualTo(packageName2);
-        // Verifies the third data package name.
-        cursor.moveToNext();
-        final String actualPackageName3 = cursor.getString(packageNameIndex);
-        assertThat(actualPackageName3).isEqualTo(packageName3);
-        cursor.close();
-        // Verifies the broadcast intent.
-        TimeUnit.SECONDS.sleep(1);
-        final List<Intent> intents = Shadows.shadowOf((Application) mContext).getBroadcastIntents();
-        assertThat(intents).hasSize(1);
-        assertThat(intents.get(0).getAction()).isEqualTo(
-                BootBroadcastReceiver.ACTION_PERIODIC_JOB_RECHECK);
+        return cursor;
     }
 }

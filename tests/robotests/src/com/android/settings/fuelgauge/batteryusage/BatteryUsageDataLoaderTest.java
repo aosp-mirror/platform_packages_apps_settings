@@ -82,7 +82,7 @@ public final class BatteryUsageDataLoaderTest {
                 .thenReturn(mBatteryUsageStats);
         BatteryUsageDataLoader.sFakeBatteryEntryListSupplier = () -> batteryEntryList;
 
-        BatteryUsageDataLoader.loadUsageData(mContext);
+        BatteryUsageDataLoader.loadUsageData(mContext, /*isFullChargeStart=*/ false);
 
         final int queryFlags = mStatsQueryCaptor.getValue().getFlags();
         assertThat(queryFlags
@@ -97,7 +97,7 @@ public final class BatteryUsageDataLoaderTest {
                 .thenReturn(mBatteryUsageStats);
         BatteryUsageDataLoader.sFakeBatteryEntryListSupplier = () -> null;
 
-        BatteryUsageDataLoader.loadUsageData(mContext);
+        BatteryUsageDataLoader.loadUsageData(mContext, /*isFullChargeStart=*/ false);
 
         verify(mMockContentResolver).insert(any(), any());
     }
@@ -106,9 +106,9 @@ public final class BatteryUsageDataLoaderTest {
     public void loadUsageData_emptyBatteryEntryList_insertFakeDataIntoProvider() {
         when(mBatteryStatsManager.getBatteryUsageStats(mStatsQueryCaptor.capture()))
                 .thenReturn(mBatteryUsageStats);
-        BatteryUsageDataLoader.sFakeBatteryEntryListSupplier = () -> new ArrayList<BatteryEntry>();
+        BatteryUsageDataLoader.sFakeBatteryEntryListSupplier = () -> new ArrayList<>();
 
-        BatteryUsageDataLoader.loadUsageData(mContext);
+        BatteryUsageDataLoader.loadUsageData(mContext, /*isFullChargeStart=*/ false);
 
         verify(mMockContentResolver).insert(any(), any());
     }
