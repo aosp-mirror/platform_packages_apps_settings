@@ -44,6 +44,7 @@ import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.HapClientProfile;
+import com.android.settingslib.bluetooth.HearingAidInfo;
 import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
@@ -170,10 +171,13 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
         }
 
         final int side = device.getDeviceSide();
-        if (side == HearingAidProfile.DeviceSide.SIDE_LEFT) {
+        if (side == HearingAidInfo.DeviceSide.SIDE_LEFT_AND_RIGHT) {
+            return mContext.getString(
+                    R.string.accessibility_hearingaid_left_and_right_side_device_summary, name);
+        } else if (side == HearingAidInfo.DeviceSide.SIDE_LEFT) {
             return mContext.getString(
                     R.string.accessibility_hearingaid_left_side_device_summary, name);
-        } else if (side == HearingAidProfile.DeviceSide.SIDE_RIGHT) {
+        } else if (side == HearingAidInfo.DeviceSide.SIDE_RIGHT) {
             return mContext.getString(
                     R.string.accessibility_hearingaid_right_side_device_summary, name);
         }
