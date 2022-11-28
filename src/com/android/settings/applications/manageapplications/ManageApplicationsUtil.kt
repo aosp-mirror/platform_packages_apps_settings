@@ -21,6 +21,7 @@ import android.util.FeatureFlagUtils
 import com.android.settings.Settings.AlarmsAndRemindersActivity
 import com.android.settings.Settings.AppBatteryUsageActivity
 import com.android.settings.Settings.ChangeWifiStateActivity
+import com.android.settings.Settings.ClonedAppsListActivity
 import com.android.settings.Settings.GamesStorageActivity
 import com.android.settings.Settings.HighPowerApplicationsActivity
 import com.android.settings.Settings.LongBackgroundTasksActivity
@@ -38,6 +39,7 @@ import com.android.settings.applications.manageapplications.ManageApplications.L
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_ALARMS_AND_REMINDERS
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_APPS_LOCALE
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_BATTERY_OPTIMIZATION
+import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_CLONED_APPS
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_GAMES
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_HIGH_POWER
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_LONG_BACKGROUND_TASKS
@@ -81,6 +83,7 @@ object ManageApplicationsUtil {
         AppLocaleDetails::class to LIST_TYPE_APPS_LOCALE,
         AppBatteryUsageActivity::class to LIST_TYPE_BATTERY_OPTIMIZATION,
         LongBackgroundTasksActivity::class to LIST_TYPE_LONG_BACKGROUND_TASKS,
+        ClonedAppsListActivity::class to LIST_TYPE_CLONED_APPS,
     )
 
     @JvmField
