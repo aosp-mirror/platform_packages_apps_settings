@@ -60,10 +60,6 @@ public class MobileNetworkListFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        if (!SubscriptionUtil.isSimHardwareVisible(getContext())) {
-            finish();
-            return controllers;
-        }
 
         NetworkProviderSimsCategoryController simCategoryPrefCtrl =
                 new NetworkProviderSimsCategoryController(context, KEY_PREFERENCE_CATEGORY_SIM,
@@ -92,8 +88,7 @@ public class MobileNetworkListFragment extends DashboardFragment {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return SubscriptionUtil.isSimHardwareVisible(context) &&
-                            context.getSystemService(UserManager.class).isAdminUser();
+                    return context.getSystemService(UserManager.class).isAdminUser();
                 }
             };
 }
