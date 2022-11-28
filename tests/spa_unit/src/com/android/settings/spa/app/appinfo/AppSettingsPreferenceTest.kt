@@ -145,6 +145,7 @@ class AppSettingsPreferenceTest {
                 AppSettingsPreference(APP)
             }
         }
+        composeTestRule.delay()
     }
 
     private companion object {
