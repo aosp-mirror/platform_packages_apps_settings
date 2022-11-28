@@ -21,22 +21,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import com.android.settingslib.applications.AppUtils
-import com.android.settingslib.spa.framework.compose.collectAsStateWithLifecycle
 import com.android.settingslib.spa.widget.button.ActionButton
 import com.android.settingslib.spa.widget.button.ActionButtons
-import com.android.settingslib.spaprivileged.model.app.isSystemModule
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
 
 @Composable
 fun AppButtons(packageInfoPresenter: PackageInfoPresenter) {
+    if (remember(packageInfoPresenter) { packageInfoPresenter.isMainlineModule() }) return
     val presenter = remember { AppButtonsPresenter(packageInfoPresenter) }
-    if (!presenter.isAvailableFlow.collectAsStateWithLifecycle(initialValue = false).value) return
     presenter.Dialogs()
     ActionButtons(actionButtons = presenter.rememberActionsButtons().value)
 }
+
+private fun PackageInfoPresenter.isMainlineModule(): Boolean =
+    AppUtils.isMainlineModule(userPackageManager, packageName)
 
 private class AppButtonsPresenter(private val packageInfoPresenter: PackageInfoPresenter) {
     private val appLaunchButton = AppLaunchButton(packageInfoPresenter)
@@ -45,15 +43,6 @@ private class AppButtonsPresenter(private val packageInfoPresenter: PackageInfoP
     private val appUninstallButton = AppUninstallButton(packageInfoPresenter)
     private val appClearButton = AppClearButton(packageInfoPresenter)
     private val appForceStopButton = AppForceStopButton(packageInfoPresenter)
-
-    val isAvailableFlow = flow { emit(isAvailable()) }
-
-    private suspend fun isAvailable(): Boolean = withContext(Dispatchers.IO) {
-        !packageInfoPresenter.userPackageManager.isSystemModule(packageInfoPresenter.packageName) &&
-            !AppUtils.isMainlineModule(
-                packageInfoPresenter.userPackageManager, packageInfoPresenter.packageName
-            )
-    }
 
     @Composable
     fun rememberActionsButtons() = remember {
