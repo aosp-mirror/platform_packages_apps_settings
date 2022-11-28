@@ -167,6 +167,7 @@ class AppAllServicesPreferenceTest {
                 AppAllServicesPreference(APP)
             }
         }
+        composeTestRule.delay()
     }
 
     private companion object {
