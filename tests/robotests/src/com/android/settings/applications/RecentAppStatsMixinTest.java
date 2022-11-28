@@ -53,11 +53,15 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @RunWith(RobolectricTestRunner.class)
 public class RecentAppStatsMixinTest {
+
+    private static final UserHandle NORMAL_USER = UserHandle.SYSTEM;
+    private static final UserHandle CLONE_USER = new UserHandle(2222);
+    private static final UserHandle WORK_USER = new UserHandle(3333);
 
     @Mock
     private UsageStatsManager mUsageStatsManager;
@@ -75,24 +79,33 @@ public class RecentAppStatsMixinTest {
     private ApplicationInfo mApplicationInfo;
     @Mock
     private PowerManager mPowerManager;
+    @Mock
+    private UsageStatsManager mCloneUsageStatsManager;
+    @Mock
+    Context mMockContext;
+
+    private Context mContext;
 
     private RecentAppStatsMixin mRecentAppStatsMixin;
 
     @Before
-    public void setUp() {
+    public void setUp() throws PackageManager.NameNotFoundException {
         MockitoAnnotations.initMocks(this);
-        final Context context = spy(RuntimeEnvironment.application);
-        when(context.getApplicationContext()).thenReturn(context);
+        mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getApplicationContext()).thenReturn(mContext);
         ReflectionHelpers.setStaticField(ApplicationsState.class, "sInstance", mAppState);
-        doReturn(mUsageStatsManager).when(context).getSystemService(Context.USAGE_STATS_SERVICE);
-        doReturn(mUserManager).when(context).getSystemService(Context.USER_SERVICE);
-        doReturn(mPackageManager).when(context).getPackageManager();
-        doReturn(mPowerManager).when(context).getSystemService(PowerManager.class);
+        doReturn(mUsageStatsManager).when(mContext).getSystemService(UsageStatsManager.class);
+        doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
+        doReturn(mPackageManager).when(mContext).getPackageManager();
+        doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
         when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{});
 
-        mRecentAppStatsMixin = new RecentAppStatsMixin(context, 3 /* maximumApps */);
-        ReflectionHelpers.setField(mRecentAppStatsMixin, "mWorkUsageStatsManager",
-                Optional.of(mWorkUsageStatsManager));
+        doReturn(mMockContext).when(mContext).createContextAsUser(any(), anyInt());
+        doReturn(mMockContext).when(mContext).createPackageContextAsUser(any(), anyInt(), any());
+        when(mUserManager.getUserProfiles())
+                .thenReturn(new ArrayList<>(Arrays.asList(NORMAL_USER)));
+
+        mRecentAppStatsMixin = new RecentAppStatsMixin(mContext, 3 /* maximumApps */);
     }
 
     @Test
@@ -336,6 +349,10 @@ public class RecentAppStatsMixinTest {
                 .thenReturn(mAppEntry);
         when(mPackageManager.resolveActivityAsUser(any(Intent.class), anyInt(), anyInt()))
                 .thenReturn(new ResolveInfo());
+        when(mUserManager.getUserProfiles())
+                .thenReturn(new ArrayList<>(Arrays.asList(NORMAL_USER, WORK_USER)));
+        when(mMockContext.getSystemService(UsageStatsManager.class))
+                .thenReturn(mWorkUsageStatsManager);
         // personal app stats
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(personalStats);
@@ -356,7 +373,8 @@ public class RecentAppStatsMixinTest {
     }
 
     @Test
-    public void loadDisplayableRecentApps_usePersonalAndWorkApps_shouldBeUniquePerProfile() {
+    public void loadDisplayableRecentApps_usePersonalAndWorkApps_shouldBeUniquePerProfile()
+            throws PackageManager.NameNotFoundException {
         final String firstAppPackageName = "app1.pkg.class";
         final String secondAppPackageName = "app2.pkg.class";
         final List<UsageStats> personalStats = new ArrayList<>();
@@ -383,6 +401,10 @@ public class RecentAppStatsMixinTest {
 
         when(mAppState.getEntry(anyString(), anyInt()))
                 .thenReturn(mAppEntry);
+        when(mUserManager.getUserProfiles())
+                .thenReturn(new ArrayList<>(Arrays.asList(NORMAL_USER, WORK_USER)));
+        when(mMockContext.getSystemService(UsageStatsManager.class))
+                .thenReturn(mWorkUsageStatsManager);
         when(mPackageManager.resolveActivityAsUser(any(Intent.class), anyInt(), anyInt()))
                 .thenReturn(new ResolveInfo());
         // personal app stats
@@ -404,5 +426,64 @@ public class RecentAppStatsMixinTest {
                 secondAppPackageName);
         assertThat(mRecentAppStatsMixin.mRecentApps.get(2).mUsageStats.mPackageName).isEqualTo(
                 secondAppPackageName);
+    }
+
+    @Test
+    public void loadDisplayableRecentApps_multipleProfileApps_shouldBeSortedByLastTimeUse()
+            throws PackageManager.NameNotFoundException {
+        final List<UsageStats> personalStats = new ArrayList<>();
+        final UsageStats stats1 = new UsageStats();
+        final UsageStats stats2 = new UsageStats();
+        stats1.mLastTimeUsed = System.currentTimeMillis();
+        stats1.mPackageName = "personal.pkg.class";
+        personalStats.add(stats1);
+
+        stats2.mLastTimeUsed = System.currentTimeMillis() - 5000;
+        stats2.mPackageName = "personal.pkg.class2";
+        personalStats.add(stats2);
+
+        final List<UsageStats> workStats = new ArrayList<>();
+        final UsageStats stat3 = new UsageStats();
+        stat3.mLastTimeUsed = System.currentTimeMillis() - 2000;
+        stat3.mPackageName = "work.pkg.class3";
+        workStats.add(stat3);
+
+        final List<UsageStats> cloneStats = new ArrayList<>();
+        final UsageStats stat4 = new UsageStats();
+        stat4.mLastTimeUsed = System.currentTimeMillis() - 1000;
+        stat4.mPackageName = "clone.pkg.class4";
+        cloneStats.add(stat4);
+
+        when(mAppState.getEntry(anyString(), anyInt()))
+                .thenReturn(mAppEntry);
+        when(mUserManager.getUserProfiles())
+                .thenReturn(new ArrayList<>(Arrays.asList(NORMAL_USER, CLONE_USER, WORK_USER)));
+        when(mMockContext.getSystemService(UsageStatsManager.class))
+                .thenReturn(mCloneUsageStatsManager, mWorkUsageStatsManager);
+        when(mPackageManager.resolveActivityAsUser(any(Intent.class), anyInt(), anyInt()))
+                .thenReturn(new ResolveInfo());
+        // personal app stats
+        when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
+                .thenReturn(personalStats);
+        // work app stats
+        when(mWorkUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
+                .thenReturn(workStats);
+        // clone app stats
+        when(mCloneUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
+                .thenReturn(cloneStats);
+
+        mAppEntry.info = mApplicationInfo;
+
+        mRecentAppStatsMixin.loadDisplayableRecentApps(4);
+
+        assertThat(mRecentAppStatsMixin.mRecentApps.size()).isEqualTo(4);
+        assertThat(mRecentAppStatsMixin.mRecentApps.get(0).mUsageStats.mPackageName).isEqualTo(
+                "personal.pkg.class");
+        assertThat(mRecentAppStatsMixin.mRecentApps.get(1).mUsageStats.mPackageName).isEqualTo(
+                "clone.pkg.class4");
+        assertThat(mRecentAppStatsMixin.mRecentApps.get(2).mUsageStats.mPackageName).isEqualTo(
+                "work.pkg.class3");
+        assertThat(mRecentAppStatsMixin.mRecentApps.get(3).mUsageStats.mPackageName).isEqualTo(
+                "personal.pkg.class2");
     }
 }
