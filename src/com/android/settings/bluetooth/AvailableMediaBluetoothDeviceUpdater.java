@@ -72,7 +72,7 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
             }
             // If device is Hearing Aid or LE Audio, it is compatible with HFP and A2DP.
             // It would show in Available Devices group.
-            if (cachedDevice.isConnectedHearingAidDevice()
+            if (cachedDevice.isConnectedAshaHearingAidDevice()
                     || cachedDevice.isConnectedLeAudioDevice()) {
                 Log.d(TAG, "isFilterMatched() device : " +
                         cachedDevice.getName() + ", the profile is connected.");

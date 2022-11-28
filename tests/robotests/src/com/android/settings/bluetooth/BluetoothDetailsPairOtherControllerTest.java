@@ -81,8 +81,8 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
     }
 
     @Test
-    public void init_isNotConnectedHearingAidDevice_notVisiblePreference() {
-        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(false);
+    public void init_isNotConnectedAshaHearingAidDevice_notVisiblePreference() {
+        when(mCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(false);
 
         mController.init(mScreen);
 
@@ -91,35 +91,35 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
     }
 
     @Test
-    public void isAvailable_isNotConnectedHearingAidDevice_notAvailable() {
-        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(false);
+    public void isAvailable_isNotConnectedAshaHearingAidDevice_notAvailable() {
+        when(mCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
-    public void isAvailable_notConnectedHearingAidDevice_notAvailable() {
-        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
+    public void isAvailable_isConnectedAshaHearingAidDevice_isMonaural_notAvailable() {
+        when(mCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidProfile.DeviceMode.MODE_MONAURAL);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
-    public void isAvailable_subDeviceIsConnectedHearingAidDevice_notAvailable() {
-        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
+    public void isAvailable_subDeviceIsConnectedAshaHearingAidDevice_notAvailable() {
+        when(mCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidProfile.DeviceMode.MODE_BINAURAL);
-        when(mSubCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
+        when(mSubCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedDevice.getSubDevice()).thenReturn(mSubCachedDevice);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
-    public void isAvailable_subDeviceNotConnectedHearingAidDevice_available() {
-        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
+    public void isAvailable_subDeviceIsNotConnectedAshaHearingAidDevice_available() {
+        when(mCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidProfile.DeviceMode.MODE_BINAURAL);
-        when(mSubCachedDevice.isConnectedHearingAidDevice()).thenReturn(false);
+        when(mSubCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(false);
         when(mCachedDevice.getSubDevice()).thenReturn(mSubCachedDevice);
 
         assertThat(mController.isAvailable()).isTrue();
@@ -127,7 +127,7 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
 
     @Test
     public void isAvailable_subDeviceNotExist_available() {
-        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
+        when(mCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidProfile.DeviceMode.MODE_BINAURAL);
         when(mCachedDevice.getSubDevice()).thenReturn(null);
 
@@ -146,8 +146,8 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
     }
 
     @Test
-    public void refresh_isNotConnectedHearingAidDevice_notVisiblePreference() {
-        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(false);
+    public void refresh_isNotConnectedAshaHearingAidDevice_notVisiblePreference() {
+        when(mCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(false);
         mController.init(mScreen);
 
         mController.refresh();

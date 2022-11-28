@@ -107,12 +107,12 @@ public class BluetoothDetailsPairOtherController extends BluetoothDetailsControl
     }
 
     private boolean isOnlyOneSideConnected(CachedBluetoothDevice cachedDevice) {
-        if (!cachedDevice.isConnectedHearingAidDevice()) {
+        if (!cachedDevice.isConnectedAshaHearingAidDevice()) {
             return false;
         }
 
         final CachedBluetoothDevice subDevice = cachedDevice.getSubDevice();
-        if (subDevice != null && subDevice.isConnectedHearingAidDevice()) {
+        if (subDevice != null && subDevice.isConnectedAshaHearingAidDevice()) {
             return false;
         }
 

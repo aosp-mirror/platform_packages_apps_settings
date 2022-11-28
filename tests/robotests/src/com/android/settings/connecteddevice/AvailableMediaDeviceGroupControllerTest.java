@@ -244,7 +244,7 @@ public class AvailableMediaDeviceGroupControllerTest {
     @Test
     @Config(shadows = ShadowAlertDialogCompat.class)
     public void onActiveDeviceChanged_hearingAidProfile_launchHearingAidPairingDialog() {
-        when(mCachedBluetoothDevice.isConnectedHearingAidDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedBluetoothDevice.getDeviceMode()).thenReturn(
                 HearingAidProfile.DeviceMode.MODE_BINAURAL);
         when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(

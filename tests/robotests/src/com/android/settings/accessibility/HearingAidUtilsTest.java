@@ -86,8 +86,8 @@ public class HearingAidUtilsTest {
     }
 
     @Test
-    public void launchHearingAidPairingDialog_deviceNotConnectedHearingAid_noDialog() {
-        when(mCachedBluetoothDevice.isConnectedHearingAidDevice()).thenReturn(false);
+    public void launchHearingAidPairingDialog_deviceIsNotConnectedAshaHearingAid_noDialog() {
+        when(mCachedBluetoothDevice.isConnectedAshaHearingAidDevice()).thenReturn(false);
 
         HearingAidUtils.launchHearingAidPairingDialog(mFragmentManager, mCachedBluetoothDevice);
 
@@ -96,8 +96,8 @@ public class HearingAidUtilsTest {
     }
 
     @Test
-    public void launchHearingAidPairingDialog_deviceIsModeMonaural_noDialog() {
-        when(mCachedBluetoothDevice.isConnectedHearingAidDevice()).thenReturn(true);
+    public void launchHearingAidPairingDialog_deviceIsMonauralMode_noDialog() {
+        when(mCachedBluetoothDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedBluetoothDevice.getDeviceMode()).thenReturn(
                 HearingAidProfile.DeviceMode.MODE_MONAURAL);
 
@@ -109,7 +109,7 @@ public class HearingAidUtilsTest {
 
     @Test
     public void launchHearingAidPairingDialog_deviceHasSubDevice_noDialog() {
-        when(mCachedBluetoothDevice.isConnectedHearingAidDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedBluetoothDevice.getDeviceMode()).thenReturn(
                 HearingAidProfile.DeviceMode.MODE_BINAURAL);
         when(mCachedBluetoothDevice.getSubDevice()).thenReturn(mSubCachedBluetoothDevice);
@@ -122,7 +122,7 @@ public class HearingAidUtilsTest {
 
     @Test
     public void launchHearingAidPairingDialog_deviceIsInvalidSide_noDialog() {
-        when(mCachedBluetoothDevice.isConnectedHearingAidDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedBluetoothDevice.getDeviceMode()).thenReturn(
                 HearingAidProfile.DeviceMode.MODE_BINAURAL);
         when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
@@ -136,7 +136,7 @@ public class HearingAidUtilsTest {
 
     @Test
     public void launchHearingAidPairingDialog_dialogShown() {
-        when(mCachedBluetoothDevice.isConnectedHearingAidDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedBluetoothDevice.getDeviceMode()).thenReturn(
                 HearingAidProfile.DeviceMode.MODE_BINAURAL);
         when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
