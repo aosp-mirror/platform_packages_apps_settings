@@ -229,7 +229,8 @@ public class StorageCategoryFragment extends DashboardFragment
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.SETTINGS_STORAGE_CATEGORY;
+        return mIsWorkProfile ? SettingsEnums.SETTINGS_STORAGE_CATEGORY_WORK :
+                SettingsEnums.SETTINGS_STORAGE_CATEGORY;
     }
 
     @Override
