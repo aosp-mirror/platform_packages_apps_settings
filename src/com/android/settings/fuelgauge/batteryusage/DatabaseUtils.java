@@ -263,6 +263,11 @@ public final class DatabaseUtils {
                 }
                 batteryHistEntryMap.put(key, entry);
             }
+            try {
+                cursor.close();
+            } catch (Exception e) {
+                Log.e(TAG, "cursor.close() failed", e);
+            }
         }
         return resultMap;
     }
