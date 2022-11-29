@@ -46,9 +46,7 @@ object AppListNotificationsPageProvider : SettingsPageProvider {
         AppListPage(
             title = stringResource(R.string.app_notifications_title),
             listModel = rememberContext(::AppNotificationsListModel),
-        ) {
-            AppNotificationsItem(it)
-        }
+        ) { AppNotificationsItem() }
     }
 
     @Composable
@@ -62,24 +60,21 @@ object AppListNotificationsPageProvider : SettingsPageProvider {
 }
 
 @Composable
-private fun AppNotificationsItem(
-    itemModel: AppListItemModel<AppNotificationsRecord>,
-) {
+private fun AppListItemModel<AppNotificationsRecord>.AppNotificationsItem() {
     val appNotificationsRepository = rememberContext(::AppNotificationRepository)
     val context = LocalContext.current
     AppListSwitchItem(
-        itemModel = itemModel,
         onClick = {
             navigateToAppNotificationSettings(
                 context = context,
-                app = itemModel.record.app,
+                app = record.app,
             )
         },
-        checked = itemModel.record.controller.isEnabled.observeAsState(),
+        checked = record.controller.isEnabled.observeAsState(),
         changeable = produceState(initialValue = false) {
-            value = appNotificationsRepository.isChangeable(itemModel.record.app)
+            value = appNotificationsRepository.isChangeable(record.app)
         },
-        onCheckedChange = itemModel.record.controller::setEnabled,
+        onCheckedChange = record.controller::setEnabled,
     )
 }
 

@@ -64,10 +64,9 @@ private fun AllAppListPage() {
         listModel = remember { AllAppListModel() },
         showInstantApps = true,
         moreOptions = { ResetAppPreferences(resetAppDialogPresenter::open) }
-    ) { itemModel ->
+    ) {
         AppListItem(
-            itemModel = itemModel,
-            onClick = AppInfoSettingsProvider.navigator(app = itemModel.record.app),
+            onClick = AppInfoSettingsProvider.navigator(app = record.app),
         )
     }
 }
