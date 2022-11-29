@@ -49,6 +49,7 @@ import com.android.settings.R
 import com.android.settings.Utils.PROPERTY_APP_HIBERNATION_ENABLED
 import com.android.settings.Utils.PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS
 import com.android.settings.testutils.TestDeviceConfig
+import com.android.settings.testutils.mockAsUser
 import com.android.settingslib.spaprivileged.framework.common.appHibernationManager
 import com.android.settingslib.spaprivileged.framework.common.appOpsManager
 import com.android.settingslib.spaprivileged.framework.common.permissionControllerManager
@@ -75,8 +76,7 @@ import org.mockito.Mockito.`when` as whenever
 @RunWith(AndroidJUnit4::class)
 class HibernationSwitchPreferenceTest {
 
-    @JvmField
-    @Rule
+    @get:Rule
     val mockito: MockitoRule = MockitoJUnit.rule()
 
     @get:Rule
@@ -104,8 +104,7 @@ class HibernationSwitchPreferenceTest {
     fun setUp() {
         hibernationEnabledConfig.override(true)
         hibernationTargetsPreSConfig.override(false)
-        doReturn(context)
-            .`when`(context).createContextAsUser(UserHandle.getUserHandleForUid(UID), 0)
+        context.mockAsUser()
         whenever(context.permissionControllerManager).thenReturn(permissionControllerManager)
         whenever(context.appOpsManager).thenReturn(appOpsManager)
         whenever(context.appHibernationManager).thenReturn(appHibernationManager)
