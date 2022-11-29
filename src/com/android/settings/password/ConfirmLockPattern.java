@@ -100,6 +100,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         private CountDownTimer mCountdownTimer;
 
         private GlifLayout mGlifLayout;
+        private View mSudContent;
 
         // caller-supplied text for various prompts
         private CharSequence mHeaderText;
@@ -129,7 +130,10 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             mGlifLayout = view.findViewById(R.id.setup_wizard_layout);
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
-
+            // TODO(b/243008023) Workaround for Glif layout on 2 panel choose lock settings.
+            mSudContent = mGlifLayout.findViewById(R.id.sud_layout_content);
+            mSudContent.setPadding(mSudContent.getPaddingLeft(), 0, mSudContent.getPaddingRight(),
+                    0);
             mIsManagedProfile = UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId);
 
             // make it so unhandled touch events within the unlock screen go to the

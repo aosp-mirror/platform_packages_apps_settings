@@ -71,7 +71,8 @@ public final class BatteryHistEntryTest {
                         /*batteryStatus=*/ BatteryManager.BATTERY_STATUS_FULL,
                         /*batteryHealth=*/ BatteryManager.BATTERY_HEALTH_COLD,
                         /*bootTimestamp=*/ 101L,
-                        /*timestamp=*/ 10001L);
+                        /*timestamp=*/ 10001L,
+                        /*isFullChargeStart=*/ false);
 
         assertBatteryHistEntry(
                 new BatteryHistEntry(values),

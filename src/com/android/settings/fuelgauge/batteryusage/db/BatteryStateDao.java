@@ -41,9 +41,11 @@ public interface BatteryStateDao {
     @Query("SELECT * FROM BatteryState WHERE timestamp > :timestamp ORDER BY timestamp DESC")
     List<BatteryState> getAllAfter(long timestamp);
 
-    /** Gets the {@link Cursor} of all recorded data from a specific timestamp. */
-    @Query("SELECT * FROM BatteryState WHERE timestamp >= :timestamp ORDER BY timestamp DESC")
-    Cursor getCursorAfter(long timestamp);
+    /** Gets the {@link Cursor} of all recorded data since last full charge within 7 days. */
+    @Query("SELECT * FROM BatteryState WHERE timestamp >= :timestampSixDaysAgo AND timestamp >= "
+            + "(SELECT MAX(timestamp) FROM BatteryState WHERE isFullChargeCycleStart = 1)"
+            + " ORDER BY timestamp ASC")
+    Cursor getCursorSinceLastFullCharge(long timestampSixDaysAgo);
 
     /** Get the count of distinct timestamp after a specific timestamp. */
     @Query("SELECT COUNT(DISTINCT timestamp) FROM BatteryState WHERE timestamp > :timestamp")

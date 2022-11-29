@@ -92,6 +92,7 @@ import com.android.settings.R;
 import com.android.settings.Settings.AlarmsAndRemindersActivity;
 import com.android.settings.Settings.AppBatteryUsageActivity;
 import com.android.settings.Settings.ChangeWifiStateActivity;
+import com.android.settings.Settings.ClonedAppsListActivity;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.Settings.LongBackgroundTasksActivity;
 import com.android.settings.Settings.ManageExternalSourcesActivity;
@@ -109,6 +110,7 @@ import com.android.settings.applications.AppStateAlarmsAndRemindersBridge;
 import com.android.settings.applications.AppStateAppBatteryUsageBridge;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateBaseBridge;
+import com.android.settings.applications.AppStateClonedAppsBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateLocaleBridge;
 import com.android.settings.applications.AppStateLongBackgroundTasksBridge;
@@ -250,6 +252,7 @@ public class ManageApplications extends InstrumentedFragment
     public static final int LIST_TYPE_APPS_LOCALE = 14;
     public static final int LIST_TYPE_BATTERY_OPTIMIZATION = 15;
     public static final int LIST_TYPE_LONG_BACKGROUND_TASKS = 16;
+    public static final int LIST_TYPE_CLONED_APPS = 17;
 
     // List types that should show instant apps.
     public static final Set<Integer> LIST_TYPES_WITH_INSTANT = new ArraySet<>(Arrays.asList(
@@ -544,6 +547,8 @@ public class ManageApplications extends InstrumentedFragment
                 return SettingsEnums.BATTERY_OPTIMIZED_APPS_LIST;
             case LIST_TYPE_LONG_BACKGROUND_TASKS:
                 return SettingsEnums.LONG_BACKGROUND_TASKS;
+            case LIST_TYPE_CLONED_APPS:
+                return SettingsEnums.CLONED_APPS;
             default:
                 return SettingsEnums.PAGE_UNKNOWN;
         }
@@ -798,9 +803,11 @@ public class ManageApplications extends InstrumentedFragment
                 && mSortOrder != R.id.sort_order_size);
 
         mOptionsMenu.findItem(R.id.show_system).setVisible(!mShowSystem
-                && mListType != LIST_TYPE_HIGH_POWER && mListType != LIST_TYPE_APPS_LOCALE);
+                && mListType != LIST_TYPE_HIGH_POWER && mListType != LIST_TYPE_APPS_LOCALE
+                && mListType != LIST_TYPE_CLONED_APPS);
         mOptionsMenu.findItem(R.id.hide_system).setVisible(mShowSystem
-                && mListType != LIST_TYPE_HIGH_POWER && mListType != LIST_TYPE_APPS_LOCALE);
+                && mListType != LIST_TYPE_HIGH_POWER && mListType != LIST_TYPE_APPS_LOCALE
+                && mListType != LIST_TYPE_CLONED_APPS);
 
         mOptionsMenu.findItem(R.id.reset_app_preferences).setVisible(mListType == LIST_TYPE_MAIN);
 
@@ -983,6 +990,8 @@ public class ManageApplications extends InstrumentedFragment
             screenTitle = R.string.app_battery_usage_title;
         } else if (className.equals(LongBackgroundTasksActivity.class.getName())) {
             screenTitle = R.string.long_background_tasks_title;
+        } else if (className.equals(ClonedAppsListActivity.class.getName())) {
+            screenTitle = R.string.cloned_apps_dashboard_title;
         } else {
             if (screenTitle == -1) {
                 screenTitle = R.string.all_apps;
@@ -1111,6 +1120,7 @@ public class ManageApplications extends InstrumentedFragment
         private static final int VIEW_TYPE_APP = 0;
         private static final int VIEW_TYPE_EXTRA_VIEW = 1;
         private static final int VIEW_TYPE_APP_HEADER = 2;
+        private static final int VIEW_TYPE_TWO_TARGET = 3;
 
         private final ApplicationsState mState;
         private final ApplicationsState.Session mSession;
@@ -1188,6 +1198,8 @@ public class ManageApplications extends InstrumentedFragment
                 mExtraInfoBridge = new AppStateAppBatteryUsageBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_LONG_BACKGROUND_TASKS) {
                 mExtraInfoBridge = new AppStateLongBackgroundTasksBridge(mContext, mState, this);
+            } else if (mManageApplications.mListType == LIST_TYPE_CLONED_APPS) {
+                mExtraInfoBridge = new AppStateClonedAppsBridge(mContext, mState, this);
             } else {
                 mExtraInfoBridge = null;
             }
@@ -1301,6 +1313,14 @@ public class ManageApplications extends InstrumentedFragment
                         R.string.desc_app_locale_selection_supported);
             } else if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
                 view = ApplicationViewHolder.newView(parent, true /* twoTarget */);
+            } else if (mManageApplications.mListType == LIST_TYPE_CLONED_APPS
+                    && viewType == VIEW_TYPE_APP_HEADER) {
+                view = ApplicationViewHolder.newHeader(parent,
+                        R.string.desc_cloned_apps_intro_text);
+            } else if (mManageApplications.mListType == LIST_TYPE_CLONED_APPS
+                    && viewType == VIEW_TYPE_TWO_TARGET) {
+                view = ApplicationViewHolder.newView(
+                        parent, true, LIST_TYPE_CLONED_APPS, mContext);
             } else {
                 view = ApplicationViewHolder.newView(parent, false /* twoTarget */);
             }
@@ -1309,8 +1329,11 @@ public class ManageApplications extends InstrumentedFragment
 
         @Override
         public int getItemViewType(int position) {
-            if (position == 0 && mManageApplications.mListType == LIST_TYPE_APPS_LOCALE) {
+            if (position == 0 && (mManageApplications.mListType == LIST_TYPE_APPS_LOCALE
+                    || mManageApplications.mListType == LIST_TYPE_CLONED_APPS)) {
                 return VIEW_TYPE_APP_HEADER;
+            } else if (mManageApplications.mListType == LIST_TYPE_CLONED_APPS) {
+                return VIEW_TYPE_TWO_TARGET;
             }
             return VIEW_TYPE_APP;
         }
@@ -1570,7 +1593,8 @@ public class ManageApplications extends InstrumentedFragment
         @Override
         public int getItemCount() {
             int count = getApplicationCount();
-            if (count != 0 && mManageApplications.mListType == LIST_TYPE_APPS_LOCALE) {
+            if (count != 0 && (mManageApplications.mListType == LIST_TYPE_APPS_LOCALE
+                    || mManageApplications.mListType == LIST_TYPE_CLONED_APPS)) {
                 count++;
             }
             return count;
@@ -1720,6 +1744,9 @@ public class ManageApplications extends InstrumentedFragment
                 case LIST_TYPE_LONG_BACKGROUND_TASKS:
                     holder.setSummary(LongBackgroundTasksDetails.getSummary(mContext, entry));
                     break;
+                case LIST_TYPE_CLONED_APPS:
+                    holder.setSummary(null);
+                    break;
                 default:
                     holder.updateSizeText(entry, mManageApplications.mInvalidSizeStr, mWhichSize);
                     break;
@@ -1741,6 +1768,9 @@ public class ManageApplications extends InstrumentedFragment
                         holder.setSummary(null);
                     }
                     break;
+                case LIST_TYPE_CLONED_APPS:
+                    //todo(b/259022623): Attach onClick listener here.
+                    break;
             }
         }
 
@@ -1754,7 +1784,7 @@ public class ManageApplications extends InstrumentedFragment
         public static int getApplicationPosition(int listType, int position) {
             int applicationPosition = position;
             // Adjust position due to header added.
-            if (listType == LIST_TYPE_APPS_LOCALE) {
+            if (listType == LIST_TYPE_APPS_LOCALE || listType == LIST_TYPE_CLONED_APPS) {
                 applicationPosition = position > 0 ? position - 1 : RecyclerView.NO_POSITION;
             }
             return applicationPosition;

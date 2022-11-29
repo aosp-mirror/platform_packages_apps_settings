@@ -95,7 +95,8 @@ public final class ConvertUtilsTest {
                         /*batteryStatus=*/ BatteryManager.BATTERY_STATUS_FULL,
                         /*batteryHealth=*/ BatteryManager.BATTERY_HEALTH_COLD,
                         /*bootTimestamp=*/ 101L,
-                        /*timestamp=*/ 10001L);
+                        /*timestamp=*/ 10001L,
+                        /*isFullChargeStart=*/ true);
         final BatteryInformation batteryInformation =
                 ConvertUtils.getBatteryInformation(
                         values, BatteryHistEntry.KEY_BATTERY_INFORMATION);
@@ -109,6 +110,7 @@ public final class ConvertUtilsTest {
         assertThat(values.getAsLong(BatteryHistEntry.KEY_TIMESTAMP)).isEqualTo(10001L);
         assertThat(values.getAsInteger(BatteryHistEntry.KEY_CONSUMER_TYPE))
                 .isEqualTo(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
+        assertThat(values.getAsBoolean(BatteryHistEntry.KEY_IS_FULL_CHARGE_CYCLE_START)).isTrue();
         assertThat(batteryInformation.getAppLabel()).isEqualTo("Settings");
         assertThat(batteryInformation.getIsHidden()).isTrue();
         assertThat(batteryInformation.getBootTimestamp()).isEqualTo(101L);
@@ -136,7 +138,8 @@ public final class ConvertUtilsTest {
                         /*batteryStatus=*/ BatteryManager.BATTERY_STATUS_FULL,
                         /*batteryHealth=*/ BatteryManager.BATTERY_HEALTH_COLD,
                         /*bootTimestamp=*/ 101L,
-                        /*timestamp=*/ 10001L);
+                        /*timestamp=*/ 10001L,
+                        /*isFullChargeStart=*/ false);
 
         final BatteryInformation batteryInformation =
                 ConvertUtils.getBatteryInformation(
@@ -144,6 +147,7 @@ public final class ConvertUtilsTest {
         final DeviceBatteryState deviceBatteryState = batteryInformation.getDeviceBatteryState();
         assertThat(batteryInformation.getBootTimestamp()).isEqualTo(101L);
         assertThat(batteryInformation.getZoneId()).isEqualTo(TimeZone.getDefault().getID());
+        assertThat(values.getAsBoolean(BatteryHistEntry.KEY_IS_FULL_CHARGE_CYCLE_START)).isFalse();
         assertThat(deviceBatteryState.getBatteryLevel()).isEqualTo(12);
         assertThat(deviceBatteryState.getBatteryStatus())
                 .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);

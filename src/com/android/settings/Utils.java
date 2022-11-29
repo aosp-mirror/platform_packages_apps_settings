@@ -165,6 +165,11 @@ public final class Utils extends com.android.settingslib.Utils {
             "app_hibernation_targets_pre_s_apps";
 
     /**
+     * Whether or not Cloned Apps menu is available in Apps page. Default is false.
+     */
+    public static final String PROPERTY_CLONED_APPS_ENABLED = "cloned_apps_enabled";
+
+    /**
      * Finds a matching activity for a preference's intent. If a matching
      * activity is not found, it will remove the preference.
      *
@@ -1251,5 +1256,18 @@ public final class Utils extends com.android.settingslib.Utils {
     @ColorInt
     public static int getHomepageIconColorHighlight(Context context) {
         return context.getColor(R.color.accent_select_primary_text);
+    }
+
+    /**
+     * Returns user id of clone profile if present, else returns -1.
+     */
+    public static int getCloneUserId(Context context) {
+        UserManager userManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        for (UserHandle userHandle : userManager.getUserProfiles()) {
+            if (userManager.getUserInfo(userHandle.getIdentifier()).isCloneProfile()) {
+                return userHandle.getIdentifier();
+            }
+        }
+        return -1;
     }
 }

@@ -18,12 +18,8 @@ package com.android.settings.spa.app.appinfo
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import android.content.pm.ModuleInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.content.pm.PackageManager.NameNotFoundException
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -33,16 +29,13 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito
 import com.android.settingslib.applications.AppUtils
 import com.android.settingslib.spa.testutils.delay
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.doReturn
-import org.mockito.Mockito.doThrow
 import org.mockito.MockitoSession
 import org.mockito.Spy
 import org.mockito.quality.Strictness
@@ -74,7 +67,6 @@ class AppButtonsTest {
         whenever(packageInfoPresenter.context).thenReturn(context)
         whenever(packageInfoPresenter.packageName).thenReturn(PACKAGE_NAME)
         whenever(packageInfoPresenter.userPackageManager).thenReturn(packageManager)
-        doThrow(NameNotFoundException()).`when`(packageManager).getModuleInfo(PACKAGE_NAME, 0)
         whenever(packageManager.getPackageInfo(PACKAGE_NAME, 0)).thenReturn(PACKAGE_INFO)
         whenever(AppUtils.isMainlineModule(packageManager, PACKAGE_NAME)).thenReturn(false)
     }
@@ -82,15 +74,6 @@ class AppButtonsTest {
     @After
     fun tearDown() {
         mockSession.finishMocking()
-    }
-
-    @Test
-    fun isSystemModule_notDisplayed() {
-        doReturn(ModuleInfo()).`when`(packageManager).getModuleInfo(PACKAGE_NAME, 0)
-
-        setContent()
-
-        composeTestRule.onRoot().assertIsNotDisplayed()
     }
 
     @Test
@@ -110,12 +93,8 @@ class AppButtonsTest {
     }
 
     private fun setContent() {
+        whenever(packageInfoPresenter.flow).thenReturn(MutableStateFlow(PACKAGE_INFO))
         composeTestRule.setContent {
-            val scope = rememberCoroutineScope()
-            LaunchedEffect(Unit) {
-                whenever(packageInfoPresenter.flow).thenReturn(flowOf(PACKAGE_INFO).stateIn(scope))
-            }
-
             AppButtons(packageInfoPresenter)
         }
 

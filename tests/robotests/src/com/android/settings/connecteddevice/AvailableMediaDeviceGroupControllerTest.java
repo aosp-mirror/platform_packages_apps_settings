@@ -52,7 +52,7 @@ import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
-import com.android.settingslib.bluetooth.HearingAidProfile;
+import com.android.settingslib.bluetooth.HearingAidInfo;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import org.junit.Before;
@@ -244,11 +244,11 @@ public class AvailableMediaDeviceGroupControllerTest {
     @Test
     @Config(shadows = ShadowAlertDialogCompat.class)
     public void onActiveDeviceChanged_hearingAidProfile_launchHearingAidPairingDialog() {
-        when(mCachedBluetoothDevice.isConnectedHearingAidDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedBluetoothDevice.getDeviceMode()).thenReturn(
-                HearingAidProfile.DeviceMode.MODE_BINAURAL);
+                HearingAidInfo.DeviceMode.MODE_BINAURAL);
         when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
-                HearingAidProfile.DeviceSide.SIDE_LEFT);
+                HearingAidInfo.DeviceSide.SIDE_LEFT);
         mAvailableMediaDeviceGroupController.init(mDashboardFragment);
 
         mAvailableMediaDeviceGroupController.onActiveDeviceChanged(mCachedBluetoothDevice,
