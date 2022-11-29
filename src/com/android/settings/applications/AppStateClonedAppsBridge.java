@@ -41,6 +41,7 @@ public class AppStateClonedAppsBridge extends AppStateBaseBridge{
     private final Context mContext;
     private final List<String> mAllowedApps;
     private List<String> mCloneProfileApps = new ArrayList<>();
+    private int mCloneUserId;
 
     public AppStateClonedAppsBridge(Context context, ApplicationsState appState,
             Callback callback) {
@@ -48,17 +49,17 @@ public class AppStateClonedAppsBridge extends AppStateBaseBridge{
         mContext = context;
         mAllowedApps = Arrays.asList(mContext.getResources()
                 .getStringArray(com.android.internal.R.array.cloneable_apps));
-
-        int cloneUserId = Utils.getCloneUserId(mContext);
-        if (cloneUserId != -1) {
-            mCloneProfileApps = mContext.getPackageManager()
-                    .getInstalledPackagesAsUser(GET_ACTIVITIES,
-                            cloneUserId).stream().map(x -> x.packageName).toList();
-        }
     }
 
     @Override
     protected void loadAllExtraInfo() {
+        mCloneUserId = Utils.getCloneUserId(mContext);
+        if (mCloneUserId != -1) {
+            mCloneProfileApps = mContext.getPackageManager()
+                    .getInstalledPackagesAsUser(GET_ACTIVITIES,
+                            mCloneUserId).stream().map(x -> x.packageName).toList();
+        }
+
         final List<ApplicationsState.AppEntry> allApps = mAppSession.getAllApps();
         for (int i = 0; i < allApps.size(); i++) {
             ApplicationsState.AppEntry app = allApps.get(i);

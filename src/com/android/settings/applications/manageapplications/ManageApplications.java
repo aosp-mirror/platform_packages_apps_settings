@@ -236,6 +236,7 @@ public class ManageApplications extends InstrumentedFragment
 
     private Menu mOptionsMenu;
 
+    public static final int LIST_TYPE_NONE = -1;
     public static final int LIST_TYPE_MAIN = 0;
     public static final int LIST_TYPE_NOTIFICATION = 1;
     public static final int LIST_TYPE_STORAGE = 3;
@@ -1324,7 +1325,8 @@ public class ManageApplications extends InstrumentedFragment
                 view = ApplicationViewHolder.newHeader(parent,
                         R.string.desc_app_locale_selection_supported);
             } else if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
-                view = ApplicationViewHolder.newView(parent, true /* twoTarget */);
+                view = ApplicationViewHolder.newView(parent, true /* twoTarget */,
+                        LIST_TYPE_NOTIFICATION);
             } else if (mManageApplications.mListType == LIST_TYPE_CLONED_APPS
                     && viewType == VIEW_TYPE_APP_HEADER) {
                 view = ApplicationViewHolder.newHeader(parent,
@@ -1332,9 +1334,10 @@ public class ManageApplications extends InstrumentedFragment
             } else if (mManageApplications.mListType == LIST_TYPE_CLONED_APPS
                     && viewType == VIEW_TYPE_TWO_TARGET) {
                 view = ApplicationViewHolder.newView(
-                        parent, true, LIST_TYPE_CLONED_APPS, mContext);
+                        parent, true, LIST_TYPE_CLONED_APPS);
             } else {
-                view = ApplicationViewHolder.newView(parent, false /* twoTarget */);
+                view = ApplicationViewHolder.newView(parent, false /* twoTarget */,
+                        mManageApplications.mListType);
             }
             return new ApplicationViewHolder(view);
         }
@@ -1781,7 +1784,9 @@ public class ManageApplications extends InstrumentedFragment
                     }
                     break;
                 case LIST_TYPE_CLONED_APPS:
-                    //todo(b/259022623): Attach onClick listener here.
+                    holder.updateAppCloneWidget(mContext,
+                            holder.appCloneOnClickListener(entry, this,
+                                    mManageApplications.getActivity()), entry);
                     break;
             }
         }
