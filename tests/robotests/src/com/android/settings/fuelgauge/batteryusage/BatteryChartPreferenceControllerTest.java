@@ -24,16 +24,13 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-import android.app.settings.SettingsEnums;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.text.format.DateUtils;
@@ -41,27 +38,17 @@ import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.widget.LinearLayout;
 
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceGroup;
-
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.InstrumentedPreferenceFragment;
-import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -70,17 +57,8 @@ import java.util.TimeZone;
 
 @RunWith(RobolectricTestRunner.class)
 public final class BatteryChartPreferenceControllerTest {
-    private static final String PREF_KEY = "pref_key";
-    private static final String PREF_SUMMARY = "fake preference summary";
-
-    @Mock
-    private InstrumentedPreferenceFragment mFragment;
     @Mock
     private SettingsActivity mSettingsActivity;
-    @Mock
-    private PreferenceGroup mAppListGroup;
-    @Mock
-    private Drawable mDrawable;
     @Mock
     private BatteryHistEntry mBatteryHistEntry;
     @Mock
@@ -90,16 +68,11 @@ public final class BatteryChartPreferenceControllerTest {
     @Mock
     private ViewPropertyAnimator mViewPropertyAnimator;
     @Mock
-    private PowerGaugePreference mPowerGaugePreference;
-    @Mock
-    private BatteryUtils mBatteryUtils;
-    @Mock
     private LinearLayout.LayoutParams mLayoutParams;
 
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
     private BatteryDiffEntry mBatteryDiffEntry;
-    private MetricsFeatureProvider mMetricsFeatureProvider;
     private BatteryChartPreferenceController mBatteryChartPreferenceController;
 
     @Before
@@ -109,7 +82,6 @@ public final class BatteryChartPreferenceControllerTest {
         org.robolectric.shadows.ShadowSettings.set24HourTimeFormat(false);
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
         mContext = spy(RuntimeEnvironment.application);
         final Resources resources = spy(mContext.getResources());
         resources.getConfiguration().setLocales(new LocaleList(new Locale("en_US")));
@@ -121,7 +93,6 @@ public final class BatteryChartPreferenceControllerTest {
         setupHourlyChartViewAnimationMock();
         mBatteryChartPreferenceController = createController();
         mBatteryChartPreferenceController.mPrefContext = mContext;
-        mBatteryChartPreferenceController.mAppListPrefGroup = mAppListGroup;
         mBatteryChartPreferenceController.mDailyChartView = mDailyChartView;
         mBatteryChartPreferenceController.mHourlyChartView = mHourlyChartView;
         mBatteryDiffEntry = new BatteryDiffEntry(
@@ -159,24 +130,6 @@ public final class BatteryChartPreferenceControllerTest {
 
         mBatteryChartPreferenceController.onDestroy();
         assertThat(BatteryDiffEntry.sResourceCache).isNotEmpty();
-    }
-
-    @Test
-    public void onDestroy_clearPreferenceCache() {
-        // Ensures the testing environment is correct.
-        mBatteryChartPreferenceController.mPreferenceCache.put(
-                PREF_KEY, mPowerGaugePreference);
-        assertThat(mBatteryChartPreferenceController.mPreferenceCache).hasSize(1);
-
-        mBatteryChartPreferenceController.onDestroy();
-        // Verifies the result after onDestroy.
-        assertThat(mBatteryChartPreferenceController.mPreferenceCache).isEmpty();
-    }
-
-    @Test
-    public void onDestroy_removeAllPreferenceFromPreferenceGroup() {
-        mBatteryChartPreferenceController.onDestroy();
-        verify(mAppListGroup).removeAll();
     }
 
     @Test
@@ -313,9 +266,9 @@ public final class BatteryChartPreferenceControllerTest {
     }
 
     @Test
-    public void refreshUi_batteryIndexedMapIsNull_ignoreRefresh() {
+    public void refreshUi_batteryIndexedMapIsNull_returnTrue() {
         mBatteryChartPreferenceController.setBatteryHistoryMap(null);
-        assertThat(mBatteryChartPreferenceController.refreshUi()).isFalse();
+        assertThat(mBatteryChartPreferenceController.refreshUi()).isTrue();
     }
 
     @Test
@@ -328,261 +281,6 @@ public final class BatteryChartPreferenceControllerTest {
     public void refreshUi_hourlyChartViewIsNull_ignoreRefresh() {
         mBatteryChartPreferenceController.mHourlyChartView = null;
         assertThat(mBatteryChartPreferenceController.refreshUi()).isFalse();
-    }
-
-    @Test
-    public void removeAndCacheAllPrefs_emptyContent_ignoreRemoveAll() {
-        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
-        mBatteryChartPreferenceController.mBatteryUsageMap = createBatteryUsageMap();
-        doReturn(0).when(mAppListGroup).getPreferenceCount();
-
-        mBatteryChartPreferenceController.refreshUi();
-        verify(mAppListGroup, never()).removeAll();
-    }
-
-    @Test
-    public void removeAndCacheAllPrefs_buildCacheAndRemoveAllPreference() {
-        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
-        mBatteryChartPreferenceController.mBatteryUsageMap = createBatteryUsageMap();
-        doReturn(1).when(mAppListGroup).getPreferenceCount();
-        doReturn(mPowerGaugePreference).when(mAppListGroup).getPreference(0);
-        doReturn(PREF_KEY).when(mBatteryHistEntry).getKey();
-        doReturn(PREF_KEY).when(mPowerGaugePreference).getKey();
-        doReturn(mPowerGaugePreference).when(mAppListGroup).findPreference(PREF_KEY);
-        // Ensures the testing data is correct.
-        assertThat(mBatteryChartPreferenceController.mPreferenceCache).isEmpty();
-
-        mBatteryChartPreferenceController.refreshUi();
-
-        assertThat(mBatteryChartPreferenceController.mPreferenceCache.get(PREF_KEY))
-                .isEqualTo(mPowerGaugePreference);
-        verify(mAppListGroup).removeAll();
-    }
-
-    @Test
-    public void addPreferenceToScreen_emptyContent_ignoreAddPreference() {
-        mBatteryChartPreferenceController.addPreferenceToScreen(
-                new ArrayList<BatteryDiffEntry>());
-        verify(mAppListGroup, never()).addPreference(any());
-    }
-
-    @Test
-    public void addPreferenceToScreen_addPreferenceIntoScreen() {
-        final String appLabel = "fake app label";
-        doReturn(1).when(mAppListGroup).getPreferenceCount();
-        doReturn(mDrawable).when(mBatteryDiffEntry).getAppIcon();
-        doReturn(appLabel).when(mBatteryDiffEntry).getAppLabel();
-        doReturn(PREF_KEY).when(mBatteryHistEntry).getKey();
-        doReturn(null).when(mAppListGroup).findPreference(PREF_KEY);
-        doReturn(false).when(mBatteryDiffEntry).validForRestriction();
-
-        mBatteryChartPreferenceController.addPreferenceToScreen(
-                Arrays.asList(mBatteryDiffEntry));
-
-        // Verifies the preference cache.
-        final PowerGaugePreference pref =
-                (PowerGaugePreference) mBatteryChartPreferenceController.mPreferenceCache
-                        .get(PREF_KEY);
-        assertThat(pref).isNotNull();
-        // Verifies the added preference configuration.
-        verify(mAppListGroup).addPreference(pref);
-        assertThat(pref.getKey()).isEqualTo(PREF_KEY);
-        assertThat(pref.getTitle()).isEqualTo(appLabel);
-        assertThat(pref.getIcon()).isEqualTo(mDrawable);
-        assertThat(pref.getOrder()).isEqualTo(1);
-        assertThat(pref.getBatteryDiffEntry()).isSameInstanceAs(mBatteryDiffEntry);
-        assertThat(pref.isSingleLineTitle()).isTrue();
-        assertThat(pref.isEnabled()).isFalse();
-    }
-
-    @Test
-    public void addPreferenceToScreen_alreadyInScreen_notAddPreferenceAgain() {
-        final String appLabel = "fake app label";
-        doReturn(1).when(mAppListGroup).getPreferenceCount();
-        doReturn(mDrawable).when(mBatteryDiffEntry).getAppIcon();
-        doReturn(appLabel).when(mBatteryDiffEntry).getAppLabel();
-        doReturn(PREF_KEY).when(mBatteryHistEntry).getKey();
-        doReturn(mPowerGaugePreference).when(mAppListGroup).findPreference(PREF_KEY);
-
-        mBatteryChartPreferenceController.addPreferenceToScreen(
-                Arrays.asList(mBatteryDiffEntry));
-
-        verify(mAppListGroup, never()).addPreference(any());
-    }
-
-    @Test
-    public void handlePreferenceTreeClick_notPowerGaugePreference_returnFalse() {
-        assertThat(mBatteryChartPreferenceController.handlePreferenceTreeClick(mAppListGroup))
-                .isFalse();
-
-        verify(mMetricsFeatureProvider, never())
-                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM);
-        verify(mMetricsFeatureProvider, never())
-                .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM);
-    }
-
-    @Test
-    public void handlePreferenceTreeClick_forAppEntry_returnTrue() {
-        doReturn(false).when(mBatteryHistEntry).isAppEntry();
-        doReturn(mBatteryDiffEntry).when(mPowerGaugePreference).getBatteryDiffEntry();
-
-        assertThat(mBatteryChartPreferenceController.handlePreferenceTreeClick(
-                mPowerGaugePreference)).isTrue();
-        verify(mMetricsFeatureProvider)
-                .action(
-                        SettingsEnums.OPEN_BATTERY_USAGE,
-                        SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM,
-                        SettingsEnums.OPEN_BATTERY_USAGE,
-                        /* package name */ "none",
-                        /* percentage of total */ 0);
-    }
-
-    @Test
-    public void handlePreferenceTreeClick_forSystemEntry_returnTrue() {
-        mBatteryChartPreferenceController.mBatteryUtils = mBatteryUtils;
-        doReturn(true).when(mBatteryHistEntry).isAppEntry();
-        doReturn(mBatteryDiffEntry).when(mPowerGaugePreference).getBatteryDiffEntry();
-
-        assertThat(mBatteryChartPreferenceController.handlePreferenceTreeClick(
-                mPowerGaugePreference)).isTrue();
-        verify(mMetricsFeatureProvider)
-                .action(
-                        SettingsEnums.OPEN_BATTERY_USAGE,
-                        SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM,
-                        SettingsEnums.OPEN_BATTERY_USAGE,
-                        /* package name */ "none",
-                        /* percentage of total */ 0);
-    }
-
-    @Test
-    public void setPreferenceSummary_setNullContentIfTotalUsageTimeIsZero() {
-        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
-        pref.setSummary(PREF_SUMMARY);
-
-        mBatteryChartPreferenceController.setPreferenceSummary(
-                pref, createBatteryDiffEntry(
-                        /*foregroundUsageTimeInMs=*/ 0,
-                        /*backgroundUsageTimeInMs=*/ 0));
-        assertThat(pref.getSummary()).isNull();
-    }
-
-    @Test
-    public void setPreferenceSummary_setBackgroundUsageTimeOnly() {
-        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
-        pref.setSummary(PREF_SUMMARY);
-
-        mBatteryChartPreferenceController.setPreferenceSummary(
-                pref, createBatteryDiffEntry(
-                        /*foregroundUsageTimeInMs=*/ 0,
-                        /*backgroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS));
-        assertThat(pref.getSummary()).isEqualTo("Background: 1 min");
-    }
-
-    @Test
-    public void setPreferenceSummary_setTotalUsageTimeLessThanAMinute() {
-        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
-        pref.setSummary(PREF_SUMMARY);
-
-        mBatteryChartPreferenceController.setPreferenceSummary(
-                pref, createBatteryDiffEntry(
-                        /*foregroundUsageTimeInMs=*/ 100,
-                        /*backgroundUsageTimeInMs=*/ 200));
-        assertThat(pref.getSummary()).isEqualTo("Total: less than a min");
-    }
-
-    @Test
-    public void setPreferenceSummary_setTotalTimeIfBackgroundTimeLessThanAMinute() {
-        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
-        pref.setSummary(PREF_SUMMARY);
-
-        mBatteryChartPreferenceController.setPreferenceSummary(
-                pref, createBatteryDiffEntry(
-                        /*foregroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS,
-                        /*backgroundUsageTimeInMs=*/ 200));
-        assertThat(pref.getSummary())
-                .isEqualTo("Total: 1 min\nBackground: less than a min");
-    }
-
-    @Test
-    public void setPreferenceSummary_setTotalAndBackgroundUsageTime() {
-        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
-        pref.setSummary(PREF_SUMMARY);
-
-        mBatteryChartPreferenceController.setPreferenceSummary(
-                pref, createBatteryDiffEntry(
-                        /*foregroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS,
-                        /*backgroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS));
-        assertThat(pref.getSummary()).isEqualTo("Total: 2 min\nBackground: 1 min");
-    }
-
-    @Test
-    public void onExpand_expandedIsTrue_addSystemEntriesToPreferenceGroup() {
-        doReturn(1).when(mAppListGroup).getPreferenceCount();
-        mBatteryChartPreferenceController.mBatteryUsageMap = createBatteryUsageMap();
-        doReturn("label").when(mBatteryDiffEntry).getAppLabel();
-        doReturn(mDrawable).when(mBatteryDiffEntry).getAppIcon();
-        doReturn(PREF_KEY).when(mBatteryHistEntry).getKey();
-
-        mBatteryChartPreferenceController.onExpand(/*isExpanded=*/ true);
-
-        final ArgumentCaptor<Preference> captor = ArgumentCaptor.forClass(Preference.class);
-        verify(mAppListGroup).addPreference(captor.capture());
-        // Verifies the added preference.
-        assertThat(captor.getValue().getKey()).isEqualTo(PREF_KEY);
-        verify(mMetricsFeatureProvider)
-                .action(
-                        mContext,
-                        SettingsEnums.ACTION_BATTERY_USAGE_EXPAND_ITEM,
-                        true /*isExpanded*/);
-    }
-
-    @Test
-    public void onExpand_expandedIsFalse_removeSystemEntriesFromPreferenceGroup() {
-        doReturn(PREF_KEY).when(mBatteryHistEntry).getKey();
-        doReturn(mPowerGaugePreference).when(mAppListGroup).findPreference(PREF_KEY);
-        mBatteryChartPreferenceController.mBatteryUsageMap = createBatteryUsageMap();
-        // Verifies the cache is empty first.
-        assertThat(mBatteryChartPreferenceController.mPreferenceCache).isEmpty();
-
-        mBatteryChartPreferenceController.onExpand(/*isExpanded=*/ false);
-
-        verify(mAppListGroup).findPreference(PREF_KEY);
-        verify(mAppListGroup).removePreference(mPowerGaugePreference);
-        assertThat(mBatteryChartPreferenceController.mPreferenceCache).hasSize(1);
-        verify(mMetricsFeatureProvider)
-                .action(
-                        mContext,
-                        SettingsEnums.ACTION_BATTERY_USAGE_EXPAND_ITEM,
-                        false /*isExpanded*/);
-    }
-
-    @Test
-    public void refreshCategoryTitle_setLastFullChargeIntoBothTitleTextView() {
-        mBatteryChartPreferenceController = createController();
-        mBatteryChartPreferenceController.mAppListPrefGroup =
-                spy(new PreferenceCategory(mContext));
-        mBatteryChartPreferenceController.mExpandDividerPreference =
-                spy(new ExpandDividerPreference(mContext));
-        // Simulates select all condition.
-        mBatteryChartPreferenceController.mDailyChartIndex =
-                BatteryChartViewModel.SELECTED_INDEX_ALL;
-        mBatteryChartPreferenceController.mHourlyChartIndex =
-                BatteryChartViewModel.SELECTED_INDEX_ALL;
-
-        mBatteryChartPreferenceController.refreshCategoryTitle();
-
-        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        // Verifies the title in the preference group.
-        verify(mBatteryChartPreferenceController.mAppListPrefGroup)
-                .setTitle(captor.capture());
-        assertThat(captor.getValue())
-                .isEqualTo("App usage since last full charge");
-        // Verifies the title in the expandable divider.
-        captor = ArgumentCaptor.forClass(String.class);
-        verify(mBatteryChartPreferenceController.mExpandDividerPreference)
-                .setTitle(captor.capture());
-        assertThat(captor.getValue())
-                .isEqualTo("System usage since last full charge");
     }
 
     @Test
@@ -640,16 +338,13 @@ public final class BatteryChartPreferenceControllerTest {
     public void onSaveInstanceState_restoreSelectedIndexAndExpandState() {
         final int expectedDailyIndex = 1;
         final int expectedHourlyIndex = 2;
-        final boolean isExpanded = true;
         final Bundle bundle = new Bundle();
         mBatteryChartPreferenceController.mDailyChartIndex = expectedDailyIndex;
         mBatteryChartPreferenceController.mHourlyChartIndex = expectedHourlyIndex;
-        mBatteryChartPreferenceController.mIsExpanded = isExpanded;
         mBatteryChartPreferenceController.onSaveInstanceState(bundle);
         // Replaces the original controller with other values.
         mBatteryChartPreferenceController.mDailyChartIndex = -1;
         mBatteryChartPreferenceController.mHourlyChartIndex = -1;
-        mBatteryChartPreferenceController.mIsExpanded = false;
 
         mBatteryChartPreferenceController.onCreate(bundle);
         mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(25));
@@ -658,7 +353,6 @@ public final class BatteryChartPreferenceControllerTest {
                 .isEqualTo(expectedDailyIndex);
         assertThat(mBatteryChartPreferenceController.mHourlyChartIndex)
                 .isEqualTo(expectedHourlyIndex);
-        assertThat(mBatteryChartPreferenceController.mIsExpanded).isTrue();
     }
 
     @Test
@@ -704,36 +398,10 @@ public final class BatteryChartPreferenceControllerTest {
         return batteryHistoryMap;
     }
 
-    private Map<Integer, Map<Integer, BatteryDiffData>> createBatteryUsageMap() {
-        final int selectedAll = BatteryChartViewModel.SELECTED_INDEX_ALL;
-        return Map.of(
-                selectedAll, Map.of(
-                        selectedAll, new BatteryDiffData(
-                                Arrays.asList(mBatteryDiffEntry),
-                                Arrays.asList(mBatteryDiffEntry))),
-                0, Map.of(
-                        selectedAll, new BatteryDiffData(
-                                Arrays.asList(mBatteryDiffEntry),
-                                Arrays.asList(mBatteryDiffEntry)),
-                        0, new BatteryDiffData(
-                                Arrays.asList(mBatteryDiffEntry),
-                                Arrays.asList(mBatteryDiffEntry))));
-    }
-
-    private BatteryDiffEntry createBatteryDiffEntry(
-            long foregroundUsageTimeInMs, long backgroundUsageTimeInMs) {
-        return new BatteryDiffEntry(
-                mContext, foregroundUsageTimeInMs, backgroundUsageTimeInMs, /*consumePower=*/ 0,
-                /*foregroundUsageConsumePower=*/ 0, /*foregroundServiceUsageConsumePower=*/ 0,
-                /*backgroundUsageConsumePower=*/ 0, /*cachedUsageConsumePower=*/ 0,
-                mBatteryHistEntry);
-    }
-
     private BatteryChartPreferenceController createController() {
         final BatteryChartPreferenceController controller =
                 new BatteryChartPreferenceController(
-                        mContext, "app_list", /*lifecycle=*/ null,
-                        mSettingsActivity, mFragment);
+                        mContext, /*lifecycle=*/ null, mSettingsActivity);
         controller.mPrefContext = mContext;
         return controller;
     }

@@ -22,14 +22,30 @@
     settings:keywords="@string/keywords_battery_usage">
 
     <com.android.settings.fuelgauge.batteryusage.BatteryHistoryPreference
-        android:key="battery_graph"/>
+        android:key="battery_chart"
+        settings:controller=
+            "com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceController" />
 
     <PreferenceCategory
-        android:key="app_list"/>
+        android:key="battery_usage_breakdown"
+        settings:controller=
+            "com.android.settings.fuelgauge.batteryusage.BatteryUsageBreakdownController"
+        settings:isPreferenceVisible="false">
 
-    <com.android.settingslib.widget.FooterPreference
-        android:key="battery_graph_footer"
-        android:title="@string/battery_usage_screen_footer"
-        android:selectable="false"
-        settings:searchable="false"/>
+        <com.android.settings.fuelgauge.batteryusage.TabPreference
+            android:key="battery_usage_tab"
+            settings:isPreferenceVisible="false" />
+
+        <PreferenceCategory
+            android:key="app_list"
+            settings:isPreferenceVisible="false" />
+
+        <com.android.settingslib.widget.FooterPreference
+            android:key="battery_usage_footer"
+            android:selectable="false"
+            android:title="@string/battery_usage_screen_footer"
+            settings:isPreferenceVisible="false"
+            settings:searchable="false" />
+
+    </PreferenceCategory>
 </PreferenceScreen>
