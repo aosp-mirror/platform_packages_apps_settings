@@ -24,8 +24,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.os.UserManager;
 import android.content.res.Resources;
+import android.os.UserManager;
 import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.Fragment;
@@ -36,6 +36,9 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,13 +47,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class SimStatusPreferenceControllerTest {
 
     @Mock
     private Preference mPreference;
+    @Mock
+    private Preference mFirstSimPreference;
     @Mock
     private Preference mSecondSimPreference;
     @Mock
@@ -77,18 +81,31 @@ public class SimStatusPreferenceControllerTest {
         when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
 
+        doReturn(mTelephonyManager).when(mContext)
+                .getSystemService(Context.TELEPHONY_SERVICE);
+
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
-        mController = spy(new SimStatusPreferenceController(mContext, mFragment));
+        final List<Preference> preferencePool = new ArrayList<Preference>();
+        preferencePool.add(mFirstSimPreference);
+        preferencePool.add(mSecondSimPreference);
+
+        mController = spy(new SimStatusPreferenceController(mContext, mFragment) {
+            @Override
+            public Preference createNewPreference(Context context) {
+                return preferencePool.remove(0);
+            }
+        });
         doReturn(true).when(mController).isAvailable();
         when(mScreen.getContext()).thenReturn(mContext);
         final String categoryKey = "device_detail_category";
         when(mScreen.findPreference(categoryKey)).thenReturn(mCategory);
-        doReturn(mSecondSimPreference).when(mController).createNewPreference(mContext);
-        ReflectionHelpers.setField(mController, "mTelephonyManager", mTelephonyManager);
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
+        final String baseEntryKey = "sim_status";
+        when(mScreen.findPreference(baseEntryKey)).thenReturn(mPreference);
         final String prefKey = mController.getPreferenceKey();
         when(mPreference.getKey()).thenReturn(prefKey);
         when(mPreference.isVisible()).thenReturn(true);
+
+        mController.setSimSlotStatus(-1);
     }
 
     @Test
@@ -107,8 +124,8 @@ public class SimStatusPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setTitle(mContext.getString(R.string.sim_status_title));
-        verify(mPreference).setSummary(anyString());
+        verify(mFirstSimPreference).setTitle(mContext.getString(R.string.sim_status_title));
+        verify(mFirstSimPreference).setSummary(anyString());
     }
 
     @Test
@@ -118,11 +135,11 @@ public class SimStatusPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setTitle(
+        verify(mFirstSimPreference).setTitle(
                 mContext.getString(R.string.sim_status_title_sim_slot, 1 /* sim slot */));
         verify(mSecondSimPreference).setTitle(
                 mContext.getString(R.string.sim_status_title_sim_slot, 2 /* sim slot */));
-        verify(mPreference).setSummary(anyString());
+        verify(mFirstSimPreference).setSummary(anyString());
         verify(mSecondSimPreference).setSummary(anyString());
     }
 
@@ -130,9 +147,10 @@ public class SimStatusPreferenceControllerTest {
     public void handlePreferenceTreeClick_shouldStartDialogFragment() {
         when(mFragment.getChildFragmentManager()).thenReturn(
                 mock(FragmentManager.class, Answers.RETURNS_DEEP_STUBS));
+        when(mTelephonyManager.getPhoneCount()).thenReturn(2);
         mController.displayPreference(mScreen);
 
-        mController.handlePreferenceTreeClick(mPreference);
+        mController.handlePreferenceTreeClick(mFirstSimPreference);
 
         verify(mFragment).getChildFragmentManager();
     }
