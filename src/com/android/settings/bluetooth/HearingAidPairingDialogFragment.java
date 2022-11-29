@@ -31,7 +31,7 @@ import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.HearingAidProfile;
+import com.android.settingslib.bluetooth.HearingAidInfo;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
@@ -95,10 +95,10 @@ public class HearingAidPairingDialogFragment extends InstrumentedDialogFragment 
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         final int deviceSide = mDevice.getDeviceSide();
         final int titleId = R.string.bluetooth_pair_other_ear_dialog_title;
-        final int messageId = (deviceSide == HearingAidProfile.DeviceSide.SIDE_LEFT)
+        final int messageId = (deviceSide == HearingAidInfo.DeviceSide.SIDE_LEFT)
                         ? R.string.bluetooth_pair_other_ear_dialog_left_ear_message
                         : R.string.bluetooth_pair_other_ear_dialog_right_ear_message;
-        final int pairBtnId = (deviceSide == HearingAidProfile.DeviceSide.SIDE_LEFT)
+        final int pairBtnId = (deviceSide == HearingAidInfo.DeviceSide.SIDE_LEFT)
                         ? R.string.bluetooth_pair_other_ear_dialog_right_ear_positive_button
                         : R.string.bluetooth_pair_other_ear_dialog_left_ear_positive_button;
 
@@ -120,7 +120,7 @@ public class HearingAidPairingDialogFragment extends InstrumentedDialogFragment 
     @Override
     public void onDeviceAttributesChanged() {
         final CachedBluetoothDevice subDevice = mDevice.getSubDevice();
-        if (subDevice != null && subDevice.isConnectedHearingAidDevice()) {
+        if (subDevice != null && subDevice.isConnectedAshaHearingAidDevice()) {
             this.dismiss();
         }
     }

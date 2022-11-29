@@ -48,7 +48,7 @@ import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
-import com.android.settingslib.bluetooth.HearingAidProfile;
+import com.android.settingslib.bluetooth.HearingAidInfo;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import org.junit.Before;
@@ -104,7 +104,7 @@ public class HearingAidPairingDialogFragmentTest {
     @Test
     public void newInstance_deviceSideRight_argumentSideRight() {
         when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
-                HearingAidProfile.DeviceSide.SIDE_RIGHT);
+                HearingAidInfo.DeviceSide.SIDE_RIGHT);
         final AlertDialog dialog = (AlertDialog) mFragment.onCreateDialog(Bundle.EMPTY);
         dialog.show();
 
@@ -143,8 +143,8 @@ public class HearingAidPairingDialogFragmentTest {
     }
 
     @Test
-    public void onDeviceAttributesChanged_subHearingAidDeviceConnected_dialogDismiss() {
-        when(mCachedSubBluetoothDevice.isConnectedHearingAidDevice()).thenReturn(true);
+    public void onDeviceAttributesChanged_subAshaHearingAidDeviceConnected_dialogDismiss() {
+        when(mCachedSubBluetoothDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedBluetoothDevice.getSubDevice()).thenReturn(mCachedSubBluetoothDevice);
 
         mFragment.onDeviceAttributesChanged();

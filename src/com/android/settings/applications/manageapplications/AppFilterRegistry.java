@@ -21,6 +21,7 @@ import androidx.annotation.IntDef;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateAlarmsAndRemindersBridge;
 import com.android.settings.applications.AppStateAppBatteryUsageBridge;
+import com.android.settings.applications.AppStateClonedAppsBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateLocaleBridge;
 import com.android.settings.applications.AppStateLongBackgroundTasksBridge;
@@ -63,6 +64,7 @@ public class AppFilterRegistry {
                 FILTER_APPS_BATTERY_OPTIMIZED,
                 FILTER_APPS_BATTERY_RESTRICTED,
                 FILTER_LONG_BACKGROUND_TASKS,
+                FILTER_APPS_CLONE,
             })
     @interface FilterType {}
 
@@ -92,8 +94,9 @@ public class AppFilterRegistry {
     public static final int FILTER_APPS_BATTERY_OPTIMIZED = 22;
     public static final int FILTER_APPS_BATTERY_RESTRICTED = 23;
     public static final int FILTER_LONG_BACKGROUND_TASKS = 24;
-    // Next id: 25. If you add an entry here, please change NUM_FILTER_ENTRIES.
-    private static final int NUM_FILTER_ENTRIES = 25;
+    public static final int FILTER_APPS_CLONE = 25;
+    // Next id: 26. If you add an entry here, please change NUM_FILTER_ENTRIES.
+    private static final int NUM_FILTER_ENTRIES = 26;
 
     private static AppFilterRegistry sRegistry;
 
@@ -251,9 +254,14 @@ public class AppFilterRegistry {
                 AppStateLongBackgroundTasksBridge.FILTER_LONG_JOBS_APPS,
                 FILTER_LONG_BACKGROUND_TASKS,
                 R.string.long_background_tasks_title);
+
+        // Apps that are cloneable or cloned.
+        mFilters[FILTER_APPS_CLONE] =
+                new AppFilterItem(
+                        AppStateClonedAppsBridge.FILTER_APPS_CLONE,
+                        FILTER_APPS_CLONE,
+                        R.string.cloned_apps_dashboard_title);
     }
-
-
 
     public static AppFilterRegistry getInstance() {
         if (sRegistry == null) {
@@ -291,6 +299,8 @@ public class AppFilterRegistry {
                 return FILTER_APPS_BATTERY_OPTIMIZED;
             case ManageApplications.LIST_TYPE_LONG_BACKGROUND_TASKS:
                 return FILTER_LONG_BACKGROUND_TASKS;
+            case ManageApplications.LIST_TYPE_CLONED_APPS:
+                return FILTER_APPS_CLONE;
             default:
                 return FILTER_APPS_ALL;
         }

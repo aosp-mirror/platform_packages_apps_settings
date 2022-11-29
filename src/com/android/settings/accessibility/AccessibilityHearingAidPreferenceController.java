@@ -19,7 +19,9 @@ package com.android.settings.accessibility;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothHapClient;
 import android.bluetooth.BluetoothHearingAid;
+import android.bluetooth.BluetoothLeAudio;
 import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -41,6 +43,8 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.HapClientProfile;
+import com.android.settingslib.bluetooth.HearingAidInfo;
 import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
@@ -48,9 +52,12 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
+import java.util.stream.Collectors;
 
 /**
  * Controller that shows and updates the bluetooth device name
@@ -64,23 +71,7 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
     private final BroadcastReceiver mHearingAidChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (BluetoothHearingAid.ACTION_CONNECTION_STATE_CHANGED.equals(intent.getAction())) {
-                final int state = intent.getIntExtra(BluetoothHearingAid.EXTRA_STATE,
-                        BluetoothHearingAid.STATE_DISCONNECTED);
-                if (state == BluetoothHearingAid.STATE_CONNECTED) {
-                    updateState(mHearingAidPreference);
-                } else {
-                    mHearingAidPreference
-                            .setSummary(R.string.accessibility_hearingaid_not_connected_summary);
-                }
-            } else if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(intent.getAction())) {
-                final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
-                        BluetoothAdapter.ERROR);
-                if (state != BluetoothAdapter.STATE_ON) {
-                    mHearingAidPreference
-                            .setSummary(R.string.accessibility_hearingaid_not_connected_summary);
-                }
-            }
+            updateState(mHearingAidPreference);
         }
     };
 
@@ -107,17 +98,24 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
 
     @Override
     public int getAvailabilityStatus() {
-        return isHearingAidProfileSupported() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return isHearingAidSupported() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
     public void onStart() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(BluetoothHearingAid.ACTION_CONNECTION_STATE_CHANGED);
+        filter.addAction(BluetoothHapClient.ACTION_HAP_CONNECTION_STATE_CHANGED);
+        filter.addAction(BluetoothLeAudio.ACTION_LE_AUDIO_CONNECTION_STATE_CHANGED);
         filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
         mContext.registerReceiver(mHearingAidChangedReceiver, filter);
         mLocalBluetoothManager.getEventManager().registerCallback(this);
-        mProfileManager.addServiceListener(this);
+        // Can't get connected hearing aids when hearing aids related profiles are not ready. The
+        // profiles will be ready after the services are connected. Needs to add listener and
+        // updates the information when all hearing aids related services are connected.
+        if (isAnyHearingAidRelatedProfilesNotReady()) {
+            mProfileManager.addServiceListener(this);
+        }
     }
 
     @Override
@@ -143,6 +141,9 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
 
     @Override
     public CharSequence getSummary() {
+        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
+            return mContext.getText(R.string.accessibility_hearingaid_not_connected_summary);
+        }
         final CachedBluetoothDevice device = getConnectedHearingAidDevice();
         if (device == null) {
             return mContext.getText(R.string.accessibility_hearingaid_not_connected_summary);
@@ -150,24 +151,40 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
 
         final int connectedNum = getConnectedHearingAidDeviceNum();
         final CharSequence name = device.getName();
-        final int side = device.getDeviceSide();
-        final CachedBluetoothDevice subDevice = device.getSubDevice();
         if (connectedNum > 1) {
             return mContext.getString(R.string.accessibility_hearingaid_more_device_summary, name);
         }
+
+        // Check if another side of LE audio hearing aid is connected as a pair
+        final Set<CachedBluetoothDevice> memberDevices = device.getMemberDevice();
+        if (memberDevices.stream().anyMatch(m -> m.isConnected())) {
+            return mContext.getString(
+                    R.string.accessibility_hearingaid_left_and_right_side_device_summary,
+                    name);
+        }
+
+        // Check if another side of ASHA hearing aid is connected as a pair
+        final CachedBluetoothDevice subDevice = device.getSubDevice();
         if (subDevice != null && subDevice.isConnected()) {
             return mContext.getString(
                     R.string.accessibility_hearingaid_left_and_right_side_device_summary, name);
         }
-        if (side == HearingAidProfile.DeviceSide.SIDE_INVALID) {
+
+        final int side = device.getDeviceSide();
+        if (side == HearingAidInfo.DeviceSide.SIDE_LEFT_AND_RIGHT) {
             return mContext.getString(
-                    R.string.accessibility_hearingaid_active_device_summary, name);
+                    R.string.accessibility_hearingaid_left_and_right_side_device_summary, name);
+        } else if (side == HearingAidInfo.DeviceSide.SIDE_LEFT) {
+            return mContext.getString(
+                    R.string.accessibility_hearingaid_left_side_device_summary, name);
+        } else if (side == HearingAidInfo.DeviceSide.SIDE_RIGHT) {
+            return mContext.getString(
+                    R.string.accessibility_hearingaid_right_side_device_summary, name);
         }
-        return (side == HearingAidProfile.DeviceSide.SIDE_LEFT)
-                ? mContext.getString(
-                        R.string.accessibility_hearingaid_left_side_device_summary, name)
-                : mContext.getString(
-                        R.string.accessibility_hearingaid_right_side_device_summary, name);
+
+        // Invalid side
+        return mContext.getString(
+                R.string.accessibility_hearingaid_active_device_summary, name);
     }
 
     @Override
@@ -183,10 +200,7 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
 
     @Override
     public void onServiceConnected() {
-        // Every registered ProfileService will callback. So we need to use isProfileReady() to
-        // check is the HearingAidService callback here, not other service.
-        // When hearing aids service connected, updating the UI.
-        if (mProfileManager.getHearingAidProfile().isProfileReady()) {
+        if (!isAnyHearingAidRelatedProfilesNotReady()) {
             updateState(mHearingAidPreference);
             mProfileManager.removeServiceListener(this);
         }
@@ -203,38 +217,51 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
 
     @VisibleForTesting
     CachedBluetoothDevice getConnectedHearingAidDevice() {
-        if (!isHearingAidProfileSupported()) {
-            return null;
-        }
-
-        final HearingAidProfile hearingAidProfile = mProfileManager.getHearingAidProfile();
-        final List<BluetoothDevice> deviceList = hearingAidProfile.getConnectedDevices();
-        for (BluetoothDevice obj : deviceList) {
-            if (!mCachedDeviceManager.isSubDevice(obj)) {
-                return mCachedDeviceManager.findDevice(obj);
-            }
-        }
-        return null;
+        final List<BluetoothDevice> deviceList = getConnectedHearingAidDeviceList();
+        return deviceList.isEmpty() ? null : mCachedDeviceManager.findDevice(deviceList.get(0));
     }
 
     private int getConnectedHearingAidDeviceNum() {
-        if (!isHearingAidProfileSupported()) {
-            return 0;
-        }
-
-        final HearingAidProfile hearingAidProfile = mProfileManager.getHearingAidProfile();
-        final List<BluetoothDevice> deviceList = hearingAidProfile.getConnectedDevices();
-        return (int) deviceList.stream()
-                .filter(device -> !mCachedDeviceManager.isSubDevice(device))
-                .count();
+        return getConnectedHearingAidDeviceList().size();
     }
 
-    private boolean isHearingAidProfileSupported() {
+    private List<BluetoothDevice> getConnectedHearingAidDeviceList() {
+        if (!isHearingAidSupported()) {
+            return new ArrayList<>();
+        }
+        final List<BluetoothDevice> deviceList = new ArrayList<>();
+        final HapClientProfile hapClientProfile = mProfileManager.getHapClientProfile();
+        if (hapClientProfile != null) {
+            deviceList.addAll(hapClientProfile.getConnectedDevices());
+        }
+        final HearingAidProfile hearingAidProfile = mProfileManager.getHearingAidProfile();
+        if (hearingAidProfile != null) {
+            deviceList.addAll(hearingAidProfile.getConnectedDevices());
+        }
+        return deviceList.stream()
+                .distinct()
+                .filter(d -> !mCachedDeviceManager.isSubDevice(d)).collect(Collectors.toList());
+    }
+
+    private boolean isHearingAidSupported() {
         if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
             return false;
         }
         final List<Integer> supportedList = mBluetoothAdapter.getSupportedProfiles();
-        return supportedList.contains(BluetoothProfile.HEARING_AID);
+        return supportedList.contains(BluetoothProfile.HEARING_AID)
+                || supportedList.contains(BluetoothProfile.HAP_CLIENT);
+    }
+
+    private boolean isAnyHearingAidRelatedProfilesNotReady() {
+        HearingAidProfile hearingAidProfile = mProfileManager.getHearingAidProfile();
+        if (hearingAidProfile != null && !hearingAidProfile.isProfileReady()) {
+            return true;
+        }
+        HapClientProfile hapClientProfile = mProfileManager.getHapClientProfile();
+        if (hapClientProfile != null && !hapClientProfile.isProfileReady()) {
+            return true;
+        }
+        return false;
     }
 
     private LocalBluetoothManager getLocalBluetoothManager() {

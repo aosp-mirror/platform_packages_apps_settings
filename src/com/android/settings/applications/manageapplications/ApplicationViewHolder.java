@@ -16,6 +16,9 @@
 
 package com.android.settings.applications.manageapplications;
 
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_CLONED_APPS;
+
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -49,6 +52,8 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
     @VisibleForTesting
     final Switch mSwitch;
 
+    private static int sListType;
+
     private final ImageView mAppIcon;
 
     ApplicationViewHolder(View itemView) {
@@ -65,15 +70,31 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
         return newView(parent, false /* twoTarget */);
     }
 
+    static View newView(ViewGroup parent , boolean twoTarget, int listType, Context context) {
+        sListType = listType;
+        return newView(parent, twoTarget);
+    }
+
     static View newView(ViewGroup parent, boolean twoTarget) {
         ViewGroup view = (ViewGroup) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.preference_app, parent, false);
         final ViewGroup widgetFrame = view.findViewById(android.R.id.widget_frame);
         if (twoTarget) {
             if (widgetFrame != null) {
-                LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.preference_widget_primary_switch, widgetFrame, true);
-
+                if (sListType == LIST_TYPE_CLONED_APPS) {
+                    LayoutInflater.from(parent.getContext())
+                            .inflate(R.layout.preference_widget_add, widgetFrame, true);
+                    //todo(b/259022623): Invoke the clone backend flow i.e.
+                    // i) upon onclick of add icon, create new clone profile the first time
+                    // and clone an app.
+                    // ii) Show progress bar while app is being cloned
+                    // iii) And upon onClick of trash icon, delete the cloned app instance
+                    // from clone profile.
+                    // iv) Log metrics
+                } else {
+                    LayoutInflater.from(parent.getContext())
+                            .inflate(R.layout.preference_widget_primary_switch, widgetFrame, true);
+                }
                 View divider = LayoutInflater.from(parent.getContext()).inflate(
                         R.layout.preference_two_target_divider, view, false);
                 // second to last, before widget frame

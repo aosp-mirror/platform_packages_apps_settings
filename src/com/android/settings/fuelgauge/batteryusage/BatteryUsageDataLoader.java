@@ -37,15 +37,15 @@ public final class BatteryUsageDataLoader {
     private BatteryUsageDataLoader() {
     }
 
-    static void enqueueWork(Context context) {
+    static void enqueueWork(final Context context, final boolean isFullChargeStart) {
         AsyncTask.execute(() -> {
             Log.d(TAG, "loadUsageDataSafely() in the AsyncTask");
-            loadUsageDataSafely(context.getApplicationContext());
+            loadUsageDataSafely(context.getApplicationContext(), isFullChargeStart);
         });
     }
 
     @VisibleForTesting
-    static void loadUsageData(Context context) {
+    static void loadUsageData(final Context context, final boolean isFullChargeStart) {
         final long start = System.currentTimeMillis();
         final BatteryUsageStats batteryUsageStats = DataProcessor.getBatteryUsageStats(context);
         final List<BatteryEntry> batteryEntryList =
@@ -60,13 +60,14 @@ public final class BatteryUsageDataLoader {
 
         // Uploads the BatteryEntry data into SettingsIntelligence.
         DatabaseUtils.sendBatteryEntryData(
-                context, batteryEntryList, batteryUsageStats);
+                context, batteryEntryList, batteryUsageStats, isFullChargeStart);
         DataProcessor.closeBatteryUsageStats(batteryUsageStats);
     }
 
-    private static void loadUsageDataSafely(Context context) {
+    private static void loadUsageDataSafely(
+            final Context context, final boolean isFullChargeStart) {
         try {
-            loadUsageData(context);
+            loadUsageData(context, isFullChargeStart);
         } catch (RuntimeException e) {
             Log.e(TAG, "loadUsageData:" + e);
         }

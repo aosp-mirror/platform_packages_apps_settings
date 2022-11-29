@@ -80,6 +80,6 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
         }
 
         mFetchBatteryUsageData = true;
-        BatteryUsageDataLoader.enqueueWork(context);
+        BatteryUsageDataLoader.enqueueWork(context, /*isFullChargeStart=*/ true);
     }
 }

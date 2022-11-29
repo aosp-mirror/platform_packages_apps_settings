@@ -16,31 +16,100 @@
 
 package com.android.settings.applications;
 
-import static com.android.settings.core.SettingsUIDeviceConfig.CLONED_APPS_ENABLED;
+import static android.content.pm.PackageManager.GET_ACTIVITIES;
+
+import static com.android.settings.Utils.PROPERTY_CLONED_APPS_ENABLED;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.os.UserHandle;
 import android.provider.DeviceConfig;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
+import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A preference controller handling the logic for updating the summary of cloned apps.
  */
-public class ClonedAppsPreferenceController extends BasePreferenceController {
+public class ClonedAppsPreferenceController extends BasePreferenceController
+        implements LifecycleObserver {
+    private Preference mPreference;
+    private Context mContext;
 
     public ClonedAppsPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mContext = context;
     }
 
     @Override
-    public CharSequence getSummary() {
-        // todo(b/249916469): Update summary once we have mechanism of allowlisting available
-        //  for cloned apps.
-        return null;
-    }
-    @Override
     public int getAvailabilityStatus() {
-        return DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                CLONED_APPS_ENABLED, false) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_APP_CLONING,
+                PROPERTY_CLONED_APPS_ENABLED, false) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+    }
+    /**
+     * On lifecycle resume event.
+     */
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    public void onResume() {
+        updatePreferenceSummary();
+    }
+
+    private void updatePreferenceSummary() {
+        new AsyncTask<Void, Void, Integer[]>() {
+
+            @Override
+            protected Integer[] doInBackground(Void... unused) {
+                // Get list of allowlisted cloneable apps.
+                List<String> cloneableApps = Arrays.asList(
+                        mContext.getResources().getStringArray(
+                                com.android.internal.R.array.cloneable_apps));
+                List<String> primaryUserApps = mContext.getPackageManager()
+                        .getInstalledPackagesAsUser(GET_ACTIVITIES,
+                                UserHandle.myUserId()).stream().map(x -> x.packageName).toList();
+                // Count number of installed apps in system user.
+                int availableAppsCount = (int) cloneableApps.stream()
+                        .filter(x -> primaryUserApps.contains(x)).count();
+
+                int cloneUserId = Utils.getCloneUserId(mContext);
+                if (cloneUserId == -1) {
+                    return new Integer[]{0, availableAppsCount};
+                }
+                // Get all apps in clone profile if present.
+                List<String> cloneProfileApps = mContext.getPackageManager()
+                        .getInstalledPackagesAsUser(GET_ACTIVITIES,
+                                cloneUserId).stream().map(x -> x.packageName).toList();
+                // Count number of allowlisted app present in clone profile.
+                int clonedAppsCount = (int) cloneableApps.stream()
+                        .filter(x -> cloneProfileApps.contains(x)).count();
+
+                return new Integer[]{clonedAppsCount, availableAppsCount - clonedAppsCount};
+            }
+
+            @Override
+            protected void onPostExecute(Integer[] countInfo) {
+                updateSummary(countInfo[0], countInfo[1]);
+            }
+        }.execute();
+    }
+
+    private void updateSummary(int clonedAppsCount, int availableAppsCount) {
+        mPreference.setSummary(mContext.getResources().getString(
+                R.string.cloned_apps_summary, clonedAppsCount, availableAppsCount));
     }
 }

@@ -656,6 +656,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new StylusHandwritingPreferenceController(context));
         controllers.add(new IngressRateLimitPreferenceController((context)));
         controllers.add(new BackAnimationPreferenceController(context, fragment));
+        controllers.add(new PhantomProcessPreferenceController(context));
 
         return controllers;
     }
