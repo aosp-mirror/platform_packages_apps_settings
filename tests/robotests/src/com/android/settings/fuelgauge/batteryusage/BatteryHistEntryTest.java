@@ -57,8 +57,13 @@ public final class BatteryHistEntryTest {
         when(mMockBatteryEntry.isHidden()).thenReturn(true);
         when(mBatteryUsageStats.getConsumedPower()).thenReturn(5.1);
         when(mMockBatteryEntry.getConsumedPower()).thenReturn(1.1);
+        when(mMockBatteryEntry.getConsumedPowerInForeground()).thenReturn(1.2);
+        when(mMockBatteryEntry.getConsumedPowerInForegroundService()).thenReturn(1.3);
+        when(mMockBatteryEntry.getConsumedPowerInBackground()).thenReturn(1.4);
+        when(mMockBatteryEntry.getConsumedPowerInCached()).thenReturn(1.5);
         mMockBatteryEntry.mPercent = 0.3;
         when(mMockBatteryEntry.getTimeInForegroundMs()).thenReturn(1234L);
+        when(mMockBatteryEntry.getTimeInForegroundServiceMs()).thenReturn(3456L);
         when(mMockBatteryEntry.getTimeInBackgroundMs()).thenReturn(5689L);
         when(mMockBatteryEntry.getPowerComponentId()).thenReturn(expectedType);
         when(mMockBatteryEntry.getConsumerType())
@@ -94,7 +99,12 @@ public final class BatteryHistEntryTest {
                         /*timestamp=*/ 10001L,
                         /*totalPower=*/ 5.1,
                         /*consumePower=*/ 1.1,
+                        /*foregroundUsageConsumePower=*/ 1.2,
+                        /*foregroundServiceUsageConsumePower=*/ 1.3,
+                        /*backgroundUsageConsumePower=*/ 1.4,
+                        /*cachedUsageConsumePower=*/ 1.5,
                         /*foregroundUsageTimeInMs=*/ 1234L,
+                        /*foregroundServiceUsageTimeInMs=*/ 3456L,
                         /*backgroundUsageTimeInMs=*/ 5689L,
                         /*batteryLevel=*/ 12),
                 /*drainType=*/ 3,
@@ -178,7 +188,12 @@ public final class BatteryHistEntryTest {
                 lowerTimestamp,
                 /*totalPower=*/ 50,
                 /*consumePower=*/ 10,
+                /*foregroundUsageConsumePower=*/ 1,
+                /*foregroundServiceUsageConsumePower=*/ 2,
+                /*backgroundUsageConsumePower=*/ 3,
+                /*cachedUsageConsumePower=*/ 4,
                 /*foregroundUsageTimeInMs=*/ 100,
+                /*foregroundServiceUsageTimeInMs=*/ 150,
                 /*backgroundUsageTimeInMs=*/ 200,
                 /*batteryLevel=*/ 90);
         final BatteryHistEntry upperHistEntry = createBatteryHistEntry(
@@ -186,7 +201,12 @@ public final class BatteryHistEntryTest {
                 upperTimestamp,
                 /*totalPower=*/ 80,
                 /*consumePower=*/ 20,
+                /*foregroundUsageConsumePower=*/ 4,
+                /*foregroundServiceUsageConsumePower=*/ 5,
+                /*backgroundUsageConsumePower=*/ 6,
+                /*cachedUsageConsumePower=*/ 5,
                 /*foregroundUsageTimeInMs=*/ 200,
+                /*foregroundServiceUsageTimeInMs=*/ 250,
                 /*backgroundUsageTimeInMs=*/ 300,
                 /*batteryLevel=*/ 80);
 
@@ -204,7 +224,12 @@ public final class BatteryHistEntryTest {
                 /*timestamp=*/ slotTimestamp,
                 /*totalPower=*/ 50 + 0.5 * (80 - 50),
                 /*consumePower=*/ 10 + 0.5 * (20 - 10),
+                /*foregroundUsageConsumePower=*/ 1 + 0.5 * (4 - 1),
+                /*foregroundServiceUsageConsumePower=*/ 2 + 0.5 * (5 - 2),
+                /*backgroundUsageConsumePower=*/ 3 + 0.5 * (6 - 3),
+                /*cachedUsageConsumePower=*/ 4 + 0.5 * (5 - 4),
                 /*foregroundUsageTimeInMs=*/ Math.round(100 + 0.5 * (200 - 100)),
+                /*foregroundServiceUsageTimeInMs=*/ Math.round(150 + 0.5 * (250 - 150)),
                 /*backgroundUsageTimeInMs=*/ Math.round(200 + 0.5 * (300 - 200)),
                 /*batteryLevel=*/ (int) Math.round(90 + 0.5 * (80 - 90)));
     }
@@ -213,14 +238,18 @@ public final class BatteryHistEntryTest {
     public void testInterpolate_withoutLowerEntryData_returnExpectedResult() {
         final long slotTimestamp = 200L;
         final long upperTimestamp = 300L;
-        final long lowerTimestamp = 100L;
         final double ratio = 0.5;
         final BatteryHistEntry upperHistEntry = createBatteryHistEntry(
                 /*bootTimestamp=*/ 1200L,
                 upperTimestamp,
                 /*totalPower=*/ 80,
                 /*consumePower=*/ 20,
+                /*foregroundUsageConsumePower=*/ 4,
+                /*foregroundServiceUsageConsumePower=*/ 5,
+                /*backgroundUsageConsumePower=*/ 6,
+                /*cachedUsageConsumePower=*/ 5,
                 /*foregroundUsageTimeInMs=*/ 200,
+                /*foregroundServiceUsageTimeInMs=*/ 250,
                 /*backgroundUsageTimeInMs=*/ 300,
                 /*batteryLevel=*/ 80);
 
@@ -238,7 +267,12 @@ public final class BatteryHistEntryTest {
                 /*timestamp=*/ slotTimestamp,
                 /*totalPower=*/ 0.5 * 80,
                 /*consumePower=*/ 0.5 * 20,
+                /*foregroundUsageConsumePower=*/ 0.5 * 4,
+                /*foregroundServiceUsageConsumePower=*/ 0.5 * 5,
+                /*backgroundUsageConsumePower=*/ 0.5 * 6,
+                /*cachedUsageConsumePower=*/ 0.5 * 5,
                 /*foregroundUsageTimeInMs=*/ Math.round(0.5 * 200),
+                /*foregroundServiceUsageTimeInMs=*/ Math.round(0.5 * 250),
                 /*backgroundUsageTimeInMs=*/ Math.round(0.5 * 300),
                 /*batteryLevel=*/ upperHistEntry.mBatteryLevel);
     }
@@ -262,7 +296,12 @@ public final class BatteryHistEntryTest {
                 /*timestamp=*/ 10001L,
                 /*totalPower=*/ 5.1,
                 /*consumePower=*/ 1.1,
+                /*foregroundUsageConsumePower=*/ 1.2,
+                /*foregroundServiceUsageConsumePower=*/ 1.3,
+                /*backgroundUsageConsumePower=*/ 1.4,
+                /*cachedUsageConsumePower=*/ 1.5,
                 /*foregroundUsageTimeInMs=*/ 1234L,
+                /*foregroundServiceUsageTimeInMs=*/ 3456L,
                 /*backgroundUsageTimeInMs=*/ 5689L,
                 /*batteryLevel=*/ 12);
     }
@@ -275,7 +314,12 @@ public final class BatteryHistEntryTest {
             long timestamp,
             double totalPower,
             double consumePower,
+            double foregroundUsageConsumePower,
+            double foregroundServiceUsageConsumePower,
+            double backgroundUsageConsumePower,
+            double cachedUsageConsumePower,
             long foregroundUsageTimeInMs,
+            long foregroundServiceUsageTimeInMs,
             long backgroundUsageTimeInMs,
             int batteryLevel) {
         assertThat(entry.isValidEntry()).isTrue();
@@ -290,8 +334,15 @@ public final class BatteryHistEntryTest {
         assertThat(entry.mZoneId).isEqualTo(TimeZone.getDefault().getID());
         assertThat(entry.mTotalPower).isEqualTo(totalPower);
         assertThat(entry.mConsumePower).isEqualTo(consumePower);
+        assertThat(entry.mForegroundUsageConsumePower).isEqualTo(foregroundUsageConsumePower);
+        assertThat(entry.mForegroundServiceUsageConsumePower)
+                .isEqualTo(foregroundServiceUsageConsumePower);
+        assertThat(entry.mBackgroundUsageConsumePower).isEqualTo(backgroundUsageConsumePower);
+        assertThat(entry.mCachedUsageConsumePower).isEqualTo(cachedUsageConsumePower);
         assertThat(entry.mPercentOfTotal).isEqualTo(percentOfTotal);
         assertThat(entry.mForegroundUsageTimeInMs).isEqualTo(foregroundUsageTimeInMs);
+        assertThat(entry.mForegroundServiceUsageTimeInMs)
+                .isEqualTo(foregroundServiceUsageTimeInMs);
         assertThat(entry.mBackgroundUsageTimeInMs).isEqualTo(backgroundUsageTimeInMs);
         assertThat(entry.mDrainType).isEqualTo(drainType);
         assertThat(entry.mConsumerType)
@@ -308,7 +359,12 @@ public final class BatteryHistEntryTest {
             long timestamp,
             double totalPower,
             double consumePower,
+            double foregroundUsageConsumePower,
+            double foregroundServiceUsageConsumePower,
+            double backgroundUsageConsumePower,
+            double cachedUsageConsumePower,
             long foregroundUsageTimeInMs,
+            long foregroundServiceUsageTimeInMs,
             long backgroundUsageTimeInMs,
             int batteryLevel) {
         final MatrixCursor cursor = new MatrixCursor(
@@ -336,9 +392,14 @@ public final class BatteryHistEntryTest {
                         .setAppLabel("Settings")
                         .setTotalPower(totalPower)
                         .setConsumePower(consumePower)
+                        .setForegroundUsageConsumePower(foregroundUsageConsumePower)
+                        .setForegroundServiceUsageConsumePower(foregroundServiceUsageConsumePower)
+                        .setBackgroundUsageConsumePower(backgroundUsageConsumePower)
+                        .setCachedUsageConsumePower(cachedUsageConsumePower)
                         .setPercentOfTotal(0.3)
                         .setDrainType(3)
                         .setForegroundUsageTimeInMs(foregroundUsageTimeInMs)
+                        .setForegroundServiceUsageTimeInMs(foregroundServiceUsageTimeInMs)
                         .setBackgroundUsageTimeInMs(backgroundUsageTimeInMs)
                         .build();
         cursor.addRow(

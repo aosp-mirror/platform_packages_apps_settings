@@ -196,8 +196,13 @@ public final class BatteryUsageContentProviderTest {
                         .setBootTimestamp(101L)
                         .setTotalPower(99)
                         .setConsumePower(9)
+                        .setForegroundUsageConsumePower(1)
+                        .setForegroundServiceUsageConsumePower(2)
+                        .setBackgroundUsageConsumePower(3)
+                        .setCachedUsageConsumePower(3)
                         .setPercentOfTotal(0.9)
                         .setForegroundUsageTimeInMs(1000)
+                        .setForegroundServiceUsageTimeInMs(1500)
                         .setBackgroundUsageTimeInMs(2000)
                         .setDrainType(1)
                         .build();
