@@ -21,6 +21,7 @@ import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 
 import static com.android.internal.jank.InteractionJankMonitor.CUJ_SETTINGS_PAGE_SCROLL;
 import static com.android.settings.ChangeIds.CHANGE_RESTRICT_SAW_INTENT;
+import static com.android.settings.Utils.PROPERTY_DELETE_ALL_APP_CLONES_ENABLED;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_ALL;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_BATTERY_OPTIMIZED;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_BATTERY_RESTRICTED;
@@ -53,11 +54,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
+import android.os.IUserManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArraySet;
@@ -76,6 +79,7 @@ import android.widget.Filter;
 import android.widget.FrameLayout;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -831,6 +835,11 @@ public class ManageApplications extends InstrumentedFragment
         if (searchItem != null) {
             searchItem.setVisible(false);
         }
+
+        mOptionsMenu.findItem(R.id.delete_all_app_clones)
+                .setVisible(mListType == LIST_TYPE_CLONED_APPS  && DeviceConfig.getBoolean(
+                        DeviceConfig.NAMESPACE_APP_CLONING, PROPERTY_DELETE_ALL_APP_CLONES_ENABLED,
+                false) && Utils.getCloneUserId(getContext()) != -1);
     }
 
     @Override
@@ -871,6 +880,24 @@ public class ManageApplications extends InstrumentedFragment
                 startActivityForResult(intent, ADVANCED_SETTINGS);
             }
             return true;
+        } else if (i == R.id.delete_all_app_clones) {
+            int clonedUserId = Utils.getCloneUserId(getContext());
+            if (clonedUserId == -1) {
+                // No Apps Cloned Till now. Do Nothing.
+                return false;
+            }
+            IUserManager um = IUserManager.Stub.asInterface(
+                    ServiceManager.getService(Context.USER_SERVICE));
+            try {
+                // Warning: This removes all the data, media & images present in cloned user.
+                um.removeUser(clonedUserId);
+                mApplications.rebuild();
+            } catch (RemoteException e) {
+                Log.e(TAG, "Failed to remove cloned apps", e);
+                Toast.makeText(getContext(),
+                        getContext().getString(R.string.delete_all_app_clones_failure),
+                        Toast.LENGTH_LONG).show();
+            }
         } else {// Handle the home button
             return false;
         }

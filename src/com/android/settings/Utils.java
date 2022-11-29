@@ -170,6 +170,13 @@ public final class Utils extends com.android.settingslib.Utils {
     public static final String PROPERTY_CLONED_APPS_ENABLED = "cloned_apps_enabled";
 
     /**
+     * Whether or not Delete All App Clones sub-menu is available in the Cloned Apps page.
+     * Default is false.
+     */
+    public static final String PROPERTY_DELETE_ALL_APP_CLONES_ENABLED =
+            "delete_all_app_clones_enabled";
+
+    /**
      * Finds a matching activity for a preference's intent. If a matching
      * activity is not found, it will remove the preference.
      *
