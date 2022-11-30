@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,29 +19,30 @@ package com.android.settings.fuelgauge.batterytip.detectors;
 import android.content.Context;
 
 import com.android.settings.fuelgauge.BatteryInfo;
-import com.android.settings.fuelgauge.batterytip.tips.BatteryDefenderTip;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.fuelgauge.batterytip.tips.DockDefenderTip;
 
 /**
- * Detect whether the battery is overheated
+ * Detect whether the dock defender mode is enabled.
  */
-public class BatteryDefenderDetector implements BatteryTipDetector {
+public class DockDefenderDetector implements BatteryTipDetector {
     private final BatteryInfo mBatteryInfo;
     private final Context mContext;
 
-    public BatteryDefenderDetector(BatteryInfo batteryInfo, Context context) {
+    public DockDefenderDetector(BatteryInfo batteryInfo, Context context) {
         mBatteryInfo = batteryInfo;
         mContext = context;
     }
 
     @Override
     public BatteryTip detect() {
-        if (mBatteryInfo.isOverheated && !FeatureFactory.getFactory(mContext)
-                .getPowerUsageFeatureProvider(mContext)
-                .isExtraDefend()) {
-            return new BatteryDefenderTip(BatteryTip.StateType.NEW);
-        }
-        return new BatteryDefenderTip(BatteryTip.StateType.INVISIBLE);
+        int mode = BatteryUtils.getCurrentDockDefenderMode(mContext, mBatteryInfo);
+        return new DockDefenderTip(
+                mode != BatteryUtils.DockDefenderMode.DISABLED
+                        ? BatteryTip.StateType.NEW
+                        : BatteryTip.StateType.INVISIBLE,
+                mode);
     }
+
 }
