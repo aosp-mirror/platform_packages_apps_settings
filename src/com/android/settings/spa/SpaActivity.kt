@@ -19,14 +19,14 @@ package com.android.settings.spa
 import android.content.Context
 import android.content.Intent
 import com.android.settingslib.spa.framework.BrowseActivity
+import com.android.settingslib.spa.framework.util.appendSpaParams
 
 class SpaActivity : BrowseActivity() {
     companion object {
         @JvmStatic
         fun startSpaActivity(context: Context, destination: String) {
-            val intent = Intent(context, SpaActivity::class.java).apply {
-                putExtra(KEY_DESTINATION, destination)
-            }
+            val intent = Intent(context, SpaActivity::class.java)
+                .appendSpaParams(destination = destination)
             context.startActivity(intent)
         }
     }
