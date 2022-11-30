@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Looper;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -344,20 +345,20 @@ public class SimSlotChangeHandler {
         Intent intent = ChooseSimActivity.getIntent(mContext);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(ChooseSimActivity.KEY_HAS_PSIM, psimInserted);
-        mContext.startActivity(intent);
+        mContext.startActivityAsUser(intent, UserHandle.SYSTEM);
     }
 
     private void startSwitchSlotConfirmDialogActivity(SubscriptionInfo subscriptionInfo) {
         Intent intent = new Intent(mContext, SwitchToEsimConfirmDialogActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(SwitchToEsimConfirmDialogActivity.KEY_SUB_TO_ENABLE, subscriptionInfo);
-        mContext.startActivity(intent);
+        mContext.startActivityAsUser(intent, UserHandle.SYSTEM);
     }
 
     private void startDsdsDialogActivity() {
         Intent intent = new Intent(mContext, DsdsDialogActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        mContext.startActivity(intent);
+        mContext.startActivityAsUser(intent, UserHandle.SYSTEM);
     }
 
     private void startSimConfirmDialogActivity(int subId) {
@@ -368,7 +369,7 @@ public class SimSlotChangeHandler {
         Log.d(TAG, "Start ToggleSubscriptionDialogActivity with " + subId + " under DSDS+Mep.");
         Intent intent = ToggleSubscriptionDialogActivity.getIntent(mContext, subId, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        mContext.startActivity(intent);
+        mContext.startActivityAsUser(intent, UserHandle.SYSTEM);
     }
 
     private boolean isMultipleEnabledProfilesSupported() {
