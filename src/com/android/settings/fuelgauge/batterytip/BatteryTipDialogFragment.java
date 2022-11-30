@@ -43,7 +43,6 @@ import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 
-import java.text.NumberFormat;
 import java.util.List;
 
 /**
@@ -142,29 +141,6 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
                         .setPositiveButton(R.string.battery_tip_unrestrict_app_dialog_ok, this)
                         .setNegativeButton(R.string.battery_tip_unrestrict_app_dialog_cancel, null)
                         .create();
-            case BatteryTip.TipType.BATTERY_DEFENDER:
-                mMetricsFeatureProvider.action(context,
-                        SettingsEnums.ACTION_TIP_BATTERY_DEFENDER, mMetricsKey);
-                final double chargeLimitLevel = 0.8f;
-                final String percentage =
-                        NumberFormat.getPercentInstance().format(chargeLimitLevel);
-                final String message = context.getString(
-                        R.string.battery_tip_limited_temporarily_dialog_msg, percentage);
-                final boolean isPluggedIn = isPluggedIn();
-                final AlertDialog.Builder dialogBuilder =
-                        new AlertDialog.Builder(context)
-                                .setTitle(R.string.battery_tip_limited_temporarily_title)
-                                .setMessage(message);
-                if (isPluggedIn) {
-                    dialogBuilder
-                            .setPositiveButton(
-                                    R.string.battery_tip_limited_temporarily_dialog_resume_charge,
-                                    this)
-                            .setNegativeButton(R.string.okay, null);
-                } else {
-                    dialogBuilder.setPositiveButton(R.string.okay, null);
-                }
-                return dialogBuilder.create();
             default:
                 throw new IllegalArgumentException("unknown type " + mBatteryTip.getType());
         }
