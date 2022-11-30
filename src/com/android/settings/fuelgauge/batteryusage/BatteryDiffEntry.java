@@ -52,8 +52,13 @@ public class BatteryDiffEntry {
             (a, b) -> Double.compare(b.getPercentOfTotal(), a.getPercentOfTotal());
 
     public long mForegroundUsageTimeInMs;
+    public long mForegroundServiceUsageTimeInMs;
     public long mBackgroundUsageTimeInMs;
     public double mConsumePower;
+    public double mForegroundUsageConsumePower;
+    public double mForegroundServiceUsageConsumePower;
+    public double mBackgroundUsageConsumePower;
+    public double mCachedUsageConsumePower;
     // A BatteryHistEntry corresponding to this diff usage data.
     public final BatteryHistEntry mBatteryHistEntry;
 
@@ -78,12 +83,22 @@ public class BatteryDiffEntry {
     public BatteryDiffEntry(
             Context context,
             long foregroundUsageTimeInMs,
+            long foregroundServiceUsageTimeInMs,
             long backgroundUsageTimeInMs,
             double consumePower,
+            double foregroundUsageConsumePower,
+            double foregroundServiceUsageConsumePower,
+            double backgroundUsageConsumePower,
+            double cachedUsageConsumePower,
             BatteryHistEntry batteryHistEntry) {
         mContext = context;
         mConsumePower = consumePower;
+        mForegroundUsageConsumePower = foregroundUsageConsumePower;
+        mForegroundServiceUsageConsumePower = foregroundServiceUsageConsumePower;
+        mBackgroundUsageConsumePower = backgroundUsageConsumePower;
+        mCachedUsageConsumePower = cachedUsageConsumePower;
         mForegroundUsageTimeInMs = foregroundUsageTimeInMs;
+        mForegroundServiceUsageTimeInMs = foregroundServiceUsageTimeInMs;
         mBackgroundUsageTimeInMs = backgroundUsageTimeInMs;
         mBatteryHistEntry = batteryHistEntry;
         mUserManager = context.getSystemService(UserManager.class);
@@ -106,8 +121,13 @@ public class BatteryDiffEntry {
         return new BatteryDiffEntry(
                 this.mContext,
                 this.mForegroundUsageTimeInMs,
+                this.mForegroundServiceUsageTimeInMs,
                 this.mBackgroundUsageTimeInMs,
                 this.mConsumePower,
+                this.mForegroundUsageConsumePower,
+                this.mForegroundServiceUsageConsumePower,
+                this.mBackgroundUsageConsumePower,
+                this.mCachedUsageConsumePower,
                 this.mBatteryHistEntry /*same instance*/);
     }
 
@@ -361,10 +381,19 @@ public class BatteryDiffEntry {
                         mAppLabel, mValidForRestriction))
                 .append(String.format("\n\tconsume=%.2f%% %f/%f",
                         mPercentOfTotal, mConsumePower, mTotalConsumePower))
-                .append(String.format("\n\tforeground:%s background:%s",
-                        StringUtil.formatElapsedTime(mContext, mForegroundUsageTimeInMs,
+                .append(String.format("\n\tconsume power= foreground:%f foregroundService:%f",
+                        mForegroundUsageConsumePower, mForegroundServiceUsageConsumePower))
+                .append(String.format("\n\tconsume power= background:%f cached:%f",
+                        mBackgroundUsageConsumePower, mCachedUsageConsumePower))
+                .append(String.format("\n\ttime= foreground:%s foregroundService:%s background:%s",
+                        StringUtil.formatElapsedTime(mContext, (double) mForegroundUsageTimeInMs,
                                 /*withSeconds=*/ true, /*collapseTimeUnit=*/ false),
-                        StringUtil.formatElapsedTime(mContext, mBackgroundUsageTimeInMs,
+                        StringUtil.formatElapsedTime(
+                                mContext,
+                                (double) mForegroundServiceUsageTimeInMs,
+                                /*withSeconds=*/ true,
+                                /*collapseTimeUnit=*/ false),
+                        StringUtil.formatElapsedTime(mContext, (double) mBackgroundUsageTimeInMs,
                                 /*withSeconds=*/ true, /*collapseTimeUnit=*/ false)))
                 .append(String.format("\n\tpackage:%s|%s uid:%d userId:%d",
                         mBatteryHistEntry.mPackageName, getPackageName(),

@@ -33,6 +33,7 @@ import android.os.Process;
 import android.os.SystemClock;
 import android.os.UidBatteryConsumer;
 import android.os.UserHandle;
+import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
 
@@ -76,6 +77,11 @@ public class BatteryUtils {
     /** Special UID for aggregated other users. */
     public static final long UID_OTHER_USERS = Long.MIN_VALUE;
 
+    /** Flag to check if the dock defender mode has been temporarily bypassed */
+    public static final String SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS = "dock_defender_bypass";
+
+    public static final String BYPASS_DOCK_DEFENDER_ACTION = "battery.dock.defender.bypass";
+
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({StatusType.SCREEN_USAGE,
             StatusType.FOREGROUND,
@@ -87,6 +93,18 @@ public class BatteryUtils {
         int FOREGROUND = 1;
         int BACKGROUND = 2;
         int ALL = 3;
+    }
+
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({DockDefenderMode.FUTURE_BYPASS,
+            DockDefenderMode.ACTIVE,
+            DockDefenderMode.TEMPORARILY_BYPASSED,
+            DockDefenderMode.DISABLED})
+    public @interface DockDefenderMode {
+        int FUTURE_BYPASS = 0;
+        int ACTIVE = 1;
+        int TEMPORARILY_BYPASSED = 2;
+        int DISABLED = 3;
     }
 
     private static final String TAG = "BatteryUtils";
@@ -591,5 +609,22 @@ public class BatteryUtils {
         return scale == 0
                 ? -1 /*invalid battery level*/
                 : Math.round((level / (float) scale) * 100f);
+    }
+
+    /** Gets the current dock defender mode */
+    public static int getCurrentDockDefenderMode(Context context, BatteryInfo batteryInfo) {
+        if (batteryInfo.pluggedStatus == BatteryManager.BATTERY_PLUGGED_DOCK) {
+            if (Settings.Global.getInt(context.getContentResolver(),
+                    SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS, 0) == 1) {
+                return DockDefenderMode.TEMPORARILY_BYPASSED;
+            } else if (batteryInfo.isOverheated && FeatureFactory.getFactory(context)
+                    .getPowerUsageFeatureProvider(context)
+                    .isExtraDefend()) {
+                return DockDefenderMode.ACTIVE;
+            } else if (!batteryInfo.isOverheated) {
+                return DockDefenderMode.FUTURE_BYPASS;
+            }
+        }
+        return DockDefenderMode.DISABLED;
     }
 }

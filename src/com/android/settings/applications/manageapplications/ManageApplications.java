@@ -559,8 +559,15 @@ public class ManageApplications extends InstrumentedFragment
         super.onStart();
         updateView();
         if (mApplications != null) {
-            mApplications.resume(mSortOrder);
             mApplications.updateLoading();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mApplications != null) {
+            mApplications.resume(mSortOrder);
         }
     }
 
@@ -582,11 +589,16 @@ public class ManageApplications extends InstrumentedFragment
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onPause() {
+        super.onPause();
         if (mApplications != null) {
             mApplications.pause();
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
         if (mResetAppsHelper != null) {
             mResetAppsHelper.stop();
         }

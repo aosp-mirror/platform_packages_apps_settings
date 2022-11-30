@@ -24,12 +24,14 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotDisplayed
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settingslib.spa.testutils.waitUntilExists
 import com.android.settingslib.spaprivileged.framework.common.storageStatsManager
 import java.util.UUID
 import org.junit.Before
@@ -46,8 +48,7 @@ import org.mockito.Mockito.`when` as whenever
 
 @RunWith(AndroidJUnit4::class)
 class AppStoragePreferenceTest {
-    @JvmField
-    @Rule
+    @get:Rule
     val mockito: MockitoRule = MockitoJUnit.rule()
 
     @get:Rule
@@ -71,11 +72,7 @@ class AppStoragePreferenceTest {
     fun notInstalledApp_notDisplayed() {
         val notInstalledApp = ApplicationInfo()
 
-        composeTestRule.setContent {
-            CompositionLocalProvider(LocalContext provides context) {
-                AppStoragePreference(notInstalledApp)
-            }
-        }
+        setContent(notInstalledApp)
 
         composeTestRule.onRoot().assertIsNotDisplayed()
     }
@@ -88,15 +85,11 @@ class AppStoragePreferenceTest {
             storageUuid = STORAGE_UUID
         }
 
-        composeTestRule.setContent {
-            CompositionLocalProvider(LocalContext provides context) {
-                AppStoragePreference(internalApp)
-            }
-        }
+        setContent(internalApp)
 
         composeTestRule.onNodeWithText(context.getString(R.string.storage_settings_for_app))
             .assertIsDisplayed()
-        composeTestRule.onNodeWithText("123 B used in internal storage").assertIsDisplayed()
+        composeTestRule.waitUntilExists(hasText("123 B used in internal storage"))
     }
 
     @Test
@@ -107,15 +100,19 @@ class AppStoragePreferenceTest {
             storageUuid = STORAGE_UUID
         }
 
-        composeTestRule.setContent {
-            CompositionLocalProvider(LocalContext provides context) {
-                AppStoragePreference(externalApp)
-            }
-        }
+        setContent(externalApp)
 
         composeTestRule.onNodeWithText(context.getString(R.string.storage_settings_for_app))
             .assertIsDisplayed()
-        composeTestRule.onNodeWithText("123 B used in external storage").assertIsDisplayed()
+        composeTestRule.waitUntilExists(hasText("123 B used in external storage"))
+    }
+
+    private fun setContent(app: ApplicationInfo) {
+        composeTestRule.setContent {
+            CompositionLocalProvider(LocalContext provides context) {
+                AppStoragePreference(app)
+            }
+        }
     }
 
     companion object {

@@ -49,7 +49,7 @@ object AppsMainPageProvider : SettingsPageProvider {
     }
 
     fun buildInjectEntry() =
-        SettingsEntryBuilder.createInject(owner = owner).setIsAllowSearch(false)
+        SettingsEntryBuilder.createInject(owner = owner)
             .setUiLayoutFn {
                 Preference(object : PreferenceModel {
                     override val title = stringResource(R.string.apps_dashboard_title)

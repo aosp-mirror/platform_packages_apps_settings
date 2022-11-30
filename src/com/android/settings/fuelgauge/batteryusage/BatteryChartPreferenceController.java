@@ -629,6 +629,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             PowerGaugePreference preference, BatteryDiffEntry entry) {
         final long foregroundUsageTimeInMs = entry.mForegroundUsageTimeInMs;
         final long backgroundUsageTimeInMs = entry.mBackgroundUsageTimeInMs;
+        // TODO: update this value after the new API for foreground service is completed.
         final long totalUsageTimeInMs = foregroundUsageTimeInMs + backgroundUsageTimeInMs;
         String usageTimeSummary = null;
         // Not shows summary for some system components without usage time.

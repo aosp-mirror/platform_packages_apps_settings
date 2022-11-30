@@ -16,7 +16,6 @@
 
 package com.android.settings.spa.app.appinfo
 
-import android.app.ActivityManager
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
@@ -29,8 +28,10 @@ import android.util.Log
 import androidx.compose.runtime.Composable
 import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.spa.framework.compose.LocalNavController
+import com.android.settingslib.spaprivileged.framework.common.activityManager
 import com.android.settingslib.spaprivileged.framework.common.asUser
 import com.android.settingslib.spaprivileged.framework.compose.DisposableBroadcastReceiverAsUser
+import com.android.settingslib.spaprivileged.model.app.IPackageManagers
 import com.android.settingslib.spaprivileged.model.app.PackageManagers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -48,6 +49,7 @@ class PackageInfoPresenter(
     val packageName: String,
     val userId: Int,
     private val coroutineScope: CoroutineScope,
+    private val packageManagers: IPackageManagers = PackageManagers,
 ) {
     private val metricsFeatureProvider = FeatureFactory.getFactory(context).metricsFeatureProvider
     private val userHandle = UserHandle.of(userId)
@@ -134,9 +136,8 @@ class PackageInfoPresenter(
     fun forceStop() {
         logAction(SettingsEnums.ACTION_APP_FORCE_STOP)
         coroutineScope.launch(Dispatchers.Default) {
-            val activityManager = context.getSystemService(ActivityManager::class.java)!!
             Log.d(TAG, "Stopping package $packageName")
-            activityManager.forceStopPackageAsUser(packageName, userId)
+            context.activityManager.forceStopPackageAsUser(packageName, userId)
             notifyChange()
         }
     }
@@ -146,7 +147,7 @@ class PackageInfoPresenter(
     }
 
     private fun getPackageInfo() =
-        PackageManagers.getPackageInfoAsUser(
+        packageManagers.getPackageInfoAsUser(
             packageName = packageName,
             flags = PackageManager.MATCH_DISABLED_COMPONENTS or PackageManager.GET_PERMISSIONS,
             userId = userId,
