@@ -336,7 +336,7 @@ public class WifiP2pSettingsTest {
     public void onStop_notLastGroupFormed_shouldCloseChannel() {
         mFragment.onStop();
 
-        assertThat(mFragment.mChannel).isNull();
+        assertThat(mFragment.sChannel).isNull();
     }
 
     @Test
@@ -353,7 +353,7 @@ public class WifiP2pSettingsTest {
         verify(mWifiP2pManager, times(1)).stopPeerDiscovery(any(), any());
 
         mFragment.onResume();
-        assertThat(mFragment.mChannel).isNotNull();
+        assertThat(mFragment.sChannel).isNotNull();
     }
 
     @Test
@@ -524,7 +524,7 @@ public class WifiP2pSettingsTest {
 
     @Test
     public void onCreateView_withNullP2pManager_shouldGetP2pManagerAgain() {
-        mFragment.mChannel = null; // Reset channel to re-test onCreateView flow
+        mFragment.sChannel = null; // Reset channel to re-test onCreateView flow
         mFragment.mWifiP2pManager = null;
 
         mFragment.onCreateView(LayoutInflater.from(mContext), null, new Bundle());
@@ -535,7 +535,7 @@ public class WifiP2pSettingsTest {
     @Test
     public void onCreateView_withNullChannel_shouldSetP2pManagerNull() {
         doReturn(null).when(mWifiP2pManager).initialize(any(), any(), any());
-        mFragment.mChannel = null; // Reset channel to re-test onCreateView flow
+        mFragment.sChannel = null; // Reset channel to re-test onCreateView flow
         mFragment.onCreateView(LayoutInflater.from(mContext), null, new Bundle());
 
         assertThat(mFragment.mWifiP2pManager).isNull();
