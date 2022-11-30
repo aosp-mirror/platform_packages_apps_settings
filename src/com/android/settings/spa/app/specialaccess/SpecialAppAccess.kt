@@ -49,8 +49,7 @@ object SpecialAppAccessPageProvider : SettingsPageProvider {
         })
     }
 
-    fun buildInjectEntry() =
-        SettingsEntryBuilder.createInject(owner = SettingsPage.create(name)).setIsAllowSearch(false)
+    fun buildInjectEntry() = SettingsEntryBuilder.createInject(owner = SettingsPage.create(name))
 
     override fun buildEntry(arguments: Bundle?): List<SettingsEntry> {
         val owner = SettingsPage.create(name, parameter = parameter, arguments = arguments)

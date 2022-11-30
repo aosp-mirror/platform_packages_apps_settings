@@ -47,7 +47,7 @@ object AllAppListPageProvider : SettingsPageProvider {
 
     fun buildInjectEntry() = SettingsEntryBuilder
         .createInject(owner = SettingsPage.create(name))
-        .setIsAllowSearch(true)
+        .setSearchDataFn { null }
         .setUiLayoutFn {
             Preference(object : PreferenceModel {
                 override val title = stringResource(R.string.all_apps)

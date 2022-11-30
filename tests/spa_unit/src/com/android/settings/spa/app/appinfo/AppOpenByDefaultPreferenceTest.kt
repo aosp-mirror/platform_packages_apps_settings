@@ -35,6 +35,7 @@ import androidx.compose.ui.test.onRoot
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.testutils.mockAsUser
 import com.android.settingslib.spaprivileged.framework.common.domainVerificationManager
 import org.junit.Before
 import org.junit.Rule
@@ -51,8 +52,7 @@ import org.mockito.Mockito.`when` as whenever
 
 @RunWith(AndroidJUnit4::class)
 class AppOpenByDefaultPreferenceTest {
-    @JvmField
-    @Rule
+    @get:Rule
     val mockito: MockitoRule = MockitoJUnit.rule()
 
     @get:Rule
@@ -76,7 +76,7 @@ class AppOpenByDefaultPreferenceTest {
     @Before
     fun setUp() {
         whenever(context.packageManager).thenReturn(packageManager)
-        doReturn(context).`when`(context).createContextAsUser(any(), anyInt())
+        context.mockAsUser()
         whenever(context.domainVerificationManager).thenReturn(domainVerificationManager)
         whenever(allowedUserState.isLinkHandlingAllowed).thenReturn(true)
         whenever(notAllowedUserState.isLinkHandlingAllowed).thenReturn(false)

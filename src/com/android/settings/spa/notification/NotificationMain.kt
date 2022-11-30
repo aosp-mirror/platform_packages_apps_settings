@@ -49,7 +49,7 @@ object NotificationMainPageProvider : SettingsPageProvider {
     }
 
     fun buildInjectEntry(): SettingsEntryBuilder {
-        return SettingsEntryBuilder.createInject(owner = owner).setIsAllowSearch(false)
+        return SettingsEntryBuilder.createInject(owner = owner)
             .setUiLayoutFn {
                 Preference(object : PreferenceModel {
                     override val title = stringResource(R.string.configure_notification_settings)

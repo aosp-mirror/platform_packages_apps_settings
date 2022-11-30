@@ -133,7 +133,7 @@ public interface PowerUsageFeatureProvider {
     /**
      * Gets a intent for one time bypass charge limited to resume charging.
      */
-    Intent getResumeChargeIntent();
+    Intent getResumeChargeIntent(boolean isDockDefender);
 
     /**
      * Returns {@link Set} for hidding applications background usage time.

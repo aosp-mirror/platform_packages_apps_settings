@@ -23,46 +23,22 @@ import android.os.BatteryUsageStats;
 import android.os.Build;
 import android.os.LocaleList;
 import android.os.UserHandle;
-import android.os.UserManager;
 import android.text.format.DateFormat;
-import android.text.format.DateUtils;
-import android.util.ArraySet;
 import android.util.Base64;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryUtils;
-import com.android.settings.overlay.FeatureFactory;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 import java.util.TimeZone;
 
 /** A utility class to convert data into another types. */
 public final class ConvertUtils {
-    private static final boolean DEBUG = false;
     private static final String TAG = "ConvertUtils";
-    private static final Map<String, BatteryHistEntry> EMPTY_BATTERY_MAP = new HashMap<>();
-    private static final BatteryHistEntry EMPTY_BATTERY_HIST_ENTRY =
-            new BatteryHistEntry(new ContentValues());
-    // Maximum total time value for each slot cumulative data at most 2 hours.
-    private static final float TOTAL_TIME_THRESHOLD = DateUtils.HOUR_IN_MILLIS * 2;
 
-    @VisibleForTesting
-    static double PERCENTAGE_OF_TOTAL_THRESHOLD = 1f;
-
-    /** Invalid system battery consumer drain type. */
-    public static final int INVALID_DRAIN_TYPE = -1;
     /** A fake package name to represent no BatteryEntry data. */
     public static final String FAKE_PACKAGE_NAME = "fake_package";
 
@@ -198,167 +174,15 @@ public final class ConvertUtils {
         return DateFormat.format(pattern, timestamp).toString();
     }
 
-    /** Gets indexed battery usage data for each corresponding time slot. */
-    public static Map<Integer, List<BatteryDiffEntry>> getIndexedUsageMap(
-            final Context context,
-            final int timeSlotSize,
-            final long[] batteryHistoryKeys,
-            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap,
-            final boolean purgeLowPercentageAndFakeData) {
-        if (batteryHistoryMap == null || batteryHistoryMap.isEmpty()) {
-            return new HashMap<>();
-        }
-        final Map<Integer, List<BatteryDiffEntry>> resultMap = new HashMap<>();
-        // Each time slot usage diff data =
-        //     Math.abs(timestamp[i+2] data - timestamp[i+1] data) +
-        //     Math.abs(timestamp[i+1] data - timestamp[i] data);
-        // since we want to aggregate every two hours data into a single time slot.
-        final int timestampStride = 2;
-        for (int index = 0; index < timeSlotSize; index++) {
-            final Long currentTimestamp =
-                    Long.valueOf(batteryHistoryKeys[index * timestampStride]);
-            final Long nextTimestamp =
-                    Long.valueOf(batteryHistoryKeys[index * timestampStride + 1]);
-            final Long nextTwoTimestamp =
-                    Long.valueOf(batteryHistoryKeys[index * timestampStride + 2]);
-            // Fetches BatteryHistEntry data from corresponding time slot.
-            final Map<String, BatteryHistEntry> currentBatteryHistMap =
-                    batteryHistoryMap.getOrDefault(currentTimestamp, EMPTY_BATTERY_MAP);
-            final Map<String, BatteryHistEntry> nextBatteryHistMap =
-                    batteryHistoryMap.getOrDefault(nextTimestamp, EMPTY_BATTERY_MAP);
-            final Map<String, BatteryHistEntry> nextTwoBatteryHistMap =
-                    batteryHistoryMap.getOrDefault(nextTwoTimestamp, EMPTY_BATTERY_MAP);
-            // We should not get the empty list since we have at least one fake data to record
-            // the battery level and status in each time slot, the empty list is used to
-            // represent there is no enough data to apply interpolation arithmetic.
-            if (currentBatteryHistMap.isEmpty()
-                    || nextBatteryHistMap.isEmpty()
-                    || nextTwoBatteryHistMap.isEmpty()) {
-                resultMap.put(Integer.valueOf(index), new ArrayList<BatteryDiffEntry>());
-                continue;
-            }
-
-            // Collects all keys in these three time slot records as all populations.
-            final Set<String> allBatteryHistEntryKeys = new ArraySet<>();
-            allBatteryHistEntryKeys.addAll(currentBatteryHistMap.keySet());
-            allBatteryHistEntryKeys.addAll(nextBatteryHistMap.keySet());
-            allBatteryHistEntryKeys.addAll(nextTwoBatteryHistMap.keySet());
-
-            double totalConsumePower = 0.0;
-            final List<BatteryDiffEntry> batteryDiffEntryList = new ArrayList<>();
-            // Adds a specific time slot BatteryDiffEntry list into result map.
-            resultMap.put(Integer.valueOf(index), batteryDiffEntryList);
-
-            // Calculates all packages diff usage data in a specific time slot.
-            for (String key : allBatteryHistEntryKeys) {
-                final BatteryHistEntry currentEntry =
-                        currentBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
-                final BatteryHistEntry nextEntry =
-                        nextBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
-                final BatteryHistEntry nextTwoEntry =
-                        nextTwoBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
-                // Cumulative values is a specific time slot for a specific app.
-                long foregroundUsageTimeInMs =
-                        getDiffValue(
-                                currentEntry.mForegroundUsageTimeInMs,
-                                nextEntry.mForegroundUsageTimeInMs,
-                                nextTwoEntry.mForegroundUsageTimeInMs);
-                long backgroundUsageTimeInMs =
-                        getDiffValue(
-                                currentEntry.mBackgroundUsageTimeInMs,
-                                nextEntry.mBackgroundUsageTimeInMs,
-                                nextTwoEntry.mBackgroundUsageTimeInMs);
-                double consumePower =
-                        getDiffValue(
-                                currentEntry.mConsumePower,
-                                nextEntry.mConsumePower,
-                                nextTwoEntry.mConsumePower);
-                // Excludes entry since we don't have enough data to calculate.
-                if (foregroundUsageTimeInMs == 0
-                        && backgroundUsageTimeInMs == 0
-                        && consumePower == 0) {
-                    continue;
-                }
-                final BatteryHistEntry selectedBatteryEntry =
-                        selectBatteryHistEntry(currentEntry, nextEntry, nextTwoEntry);
-                if (selectedBatteryEntry == null) {
-                    continue;
-                }
-                // Forces refine the cumulative value since it may introduce deviation
-                // error since we will apply the interpolation arithmetic.
-                final float totalUsageTimeInMs =
-                        foregroundUsageTimeInMs + backgroundUsageTimeInMs;
-                if (totalUsageTimeInMs > TOTAL_TIME_THRESHOLD) {
-                    final float ratio = TOTAL_TIME_THRESHOLD / totalUsageTimeInMs;
-                    if (DEBUG) {
-                        Log.w(TAG, String.format("abnormal usage time %d|%d for:\n%s",
-                                Duration.ofMillis(foregroundUsageTimeInMs).getSeconds(),
-                                Duration.ofMillis(backgroundUsageTimeInMs).getSeconds(),
-                                currentEntry));
-                    }
-                    foregroundUsageTimeInMs =
-                            Math.round(foregroundUsageTimeInMs * ratio);
-                    backgroundUsageTimeInMs =
-                            Math.round(backgroundUsageTimeInMs * ratio);
-                    consumePower = consumePower * ratio;
-                }
-                totalConsumePower += consumePower;
-                batteryDiffEntryList.add(
-                        new BatteryDiffEntry(
-                                context,
-                                foregroundUsageTimeInMs,
-                                backgroundUsageTimeInMs,
-                                consumePower,
-                                selectedBatteryEntry));
-            }
-            // Sets total consume power data into all BatteryDiffEntry in the same slot.
-            for (BatteryDiffEntry diffEntry : batteryDiffEntryList) {
-                diffEntry.setTotalConsumePower(totalConsumePower);
-            }
-        }
-        insert24HoursData(BatteryChartViewModel.SELECTED_INDEX_ALL, resultMap);
-        resolveMultiUsersData(context, resultMap);
-        if (purgeLowPercentageAndFakeData) {
-            purgeLowPercentageAndFakeData(context, resultMap);
-        }
-        return resultMap;
-    }
-
     @VisibleForTesting
-    static void resolveMultiUsersData(
-            final Context context,
-            final Map<Integer, List<BatteryDiffEntry>> indexedUsageMap) {
-        final int currentUserId = context.getUserId();
-        final UserHandle userHandle =
-                Utils.getManagedProfile(context.getSystemService(UserManager.class));
-        final int workProfileUserId =
-                userHandle != null ? userHandle.getIdentifier() : Integer.MIN_VALUE;
-        // Loops for all BatteryDiffEntry in the different slots.
-        for (List<BatteryDiffEntry> entryList : indexedUsageMap.values()) {
-            double consumePowerFromOtherUsers = 0f;
-            double consumePercentageFromOtherUsers = 0f;
-            final Iterator<BatteryDiffEntry> iterator = entryList.iterator();
-            while (iterator.hasNext()) {
-                final BatteryDiffEntry entry = iterator.next();
-                final BatteryHistEntry batteryHistEntry = entry.mBatteryHistEntry;
-                if (batteryHistEntry.mConsumerType != CONSUMER_TYPE_UID_BATTERY) {
-                    continue;
-                }
-                // Whether the BatteryHistEntry represents the current user data?
-                if (batteryHistEntry.mUserId == currentUserId
-                        || batteryHistEntry.mUserId == workProfileUserId) {
-                    continue;
-                }
-                // Removes and aggregates non-current users data from the list.
-                iterator.remove();
-                consumePowerFromOtherUsers += entry.mConsumePower;
-                consumePercentageFromOtherUsers += entry.getPercentOfTotal();
-            }
-            if (consumePercentageFromOtherUsers != 0) {
-                entryList.add(createOtherUsersEntry(context, consumePowerFromOtherUsers,
-                        consumePercentageFromOtherUsers));
-            }
+    static Locale getLocale(Context context) {
+        if (context == null) {
+            return Locale.getDefault();
         }
+        final LocaleList locales =
+                context.getResources().getConfiguration().getLocales();
+        return locales != null && !locales.isEmpty() ? locales.get(0)
+                : Locale.getDefault();
     }
 
     private static BatteryInformation constructBatteryInformation(
@@ -387,121 +211,18 @@ public final class ConvertUtils {
                     .setAppLabel(entry.getLabel() != null ? entry.getLabel() : "")
                     .setTotalPower(batteryUsageStats.getConsumedPower())
                     .setConsumePower(entry.getConsumedPower())
+                    .setForegroundUsageConsumePower(entry.getConsumedPowerInForeground())
+                    .setForegroundServiceUsageConsumePower(
+                            entry.getConsumedPowerInForegroundService())
+                    .setBackgroundUsageConsumePower(entry.getConsumedPowerInBackground())
+                    .setCachedUsageConsumePower(entry.getConsumedPowerInCached())
                     .setPercentOfTotal(entry.mPercent)
                     .setDrainType(entry.getPowerComponentId())
                     .setForegroundUsageTimeInMs(entry.getTimeInForegroundMs())
+                    .setForegroundServiceUsageTimeInMs(entry.getTimeInForegroundServiceMs())
                     .setBackgroundUsageTimeInMs(entry.getTimeInBackgroundMs());
         }
 
         return batteryInformationBuilder.build();
-    }
-
-    private static void insert24HoursData(
-            final int desiredIndex,
-            final Map<Integer, List<BatteryDiffEntry>> indexedUsageMap) {
-        final Map<String, BatteryDiffEntry> resultMap = new HashMap<>();
-        double totalConsumePower = 0f;
-        // Loops for all BatteryDiffEntry and aggregate them together.
-        for (List<BatteryDiffEntry> entryList : indexedUsageMap.values()) {
-            for (BatteryDiffEntry entry : entryList) {
-                final String key = entry.mBatteryHistEntry.getKey();
-                final BatteryDiffEntry oldBatteryDiffEntry = resultMap.get(key);
-                // Creates new BatteryDiffEntry if we don't have it.
-                if (oldBatteryDiffEntry == null) {
-                    resultMap.put(key, entry.clone());
-                } else {
-                    // Sums up some fields data into the existing one.
-                    oldBatteryDiffEntry.mForegroundUsageTimeInMs +=
-                            entry.mForegroundUsageTimeInMs;
-                    oldBatteryDiffEntry.mBackgroundUsageTimeInMs +=
-                            entry.mBackgroundUsageTimeInMs;
-                    oldBatteryDiffEntry.mConsumePower += entry.mConsumePower;
-                }
-                totalConsumePower += entry.mConsumePower;
-            }
-        }
-        final List<BatteryDiffEntry> resultList = new ArrayList<>(resultMap.values());
-        // Sets total 24 hours consume power data into all BatteryDiffEntry.
-        for (BatteryDiffEntry entry : resultList) {
-            entry.setTotalConsumePower(totalConsumePower);
-        }
-        indexedUsageMap.put(Integer.valueOf(desiredIndex), resultList);
-    }
-
-    // Removes low percentage data and fake usage data, which will be zero value.
-    private static void purgeLowPercentageAndFakeData(
-            final Context context,
-            final Map<Integer, List<BatteryDiffEntry>> indexedUsageMap) {
-        final Set<CharSequence> backgroundUsageTimeHideList =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
-                        .getHideBackgroundUsageTimeSet(context);
-        for (List<BatteryDiffEntry> entries : indexedUsageMap.values()) {
-            final Iterator<BatteryDiffEntry> iterator = entries.iterator();
-            while (iterator.hasNext()) {
-                final BatteryDiffEntry entry = iterator.next();
-                if (entry.getPercentOfTotal() < PERCENTAGE_OF_TOTAL_THRESHOLD
-                        || FAKE_PACKAGE_NAME.equals(entry.getPackageName())) {
-                    iterator.remove();
-                }
-                final String packageName = entry.getPackageName();
-                if (packageName != null
-                        && !backgroundUsageTimeHideList.isEmpty()
-                        && backgroundUsageTimeHideList.contains(packageName)) {
-                    entry.mBackgroundUsageTimeInMs = 0;
-                }
-            }
-        }
-    }
-
-    private static long getDiffValue(long v1, long v2, long v3) {
-        return (v2 > v1 ? v2 - v1 : 0) + (v3 > v2 ? v3 - v2 : 0);
-    }
-
-    private static double getDiffValue(double v1, double v2, double v3) {
-        return (v2 > v1 ? v2 - v1 : 0) + (v3 > v2 ? v3 - v2 : 0);
-    }
-
-    private static BatteryHistEntry selectBatteryHistEntry(
-            BatteryHistEntry entry1,
-            BatteryHistEntry entry2,
-            BatteryHistEntry entry3) {
-        if (entry1 != null && entry1 != EMPTY_BATTERY_HIST_ENTRY) {
-            return entry1;
-        } else if (entry2 != null && entry2 != EMPTY_BATTERY_HIST_ENTRY) {
-            return entry2;
-        } else {
-            return entry3 != null && entry3 != EMPTY_BATTERY_HIST_ENTRY
-                    ? entry3 : null;
-        }
-    }
-
-    @VisibleForTesting
-    static Locale getLocale(Context context) {
-        if (context == null) {
-            return Locale.getDefault();
-        }
-        final LocaleList locales =
-                context.getResources().getConfiguration().getLocales();
-        return locales != null && !locales.isEmpty() ? locales.get(0)
-                : Locale.getDefault();
-    }
-
-    private static BatteryDiffEntry createOtherUsersEntry(
-            Context context, double consumePower, double consumePercentage) {
-        final ContentValues values = new ContentValues();
-        values.put(BatteryHistEntry.KEY_UID, BatteryUtils.UID_OTHER_USERS);
-        values.put(BatteryHistEntry.KEY_USER_ID, BatteryUtils.UID_OTHER_USERS);
-        values.put(BatteryHistEntry.KEY_CONSUMER_TYPE, CONSUMER_TYPE_UID_BATTERY);
-        // We will show the percentage for the "other users" item only, the aggregated
-        // running time information is useless for users to identify individual apps.
-        final BatteryDiffEntry batteryDiffEntry = new BatteryDiffEntry(
-                context,
-                /*foregroundUsageTimeInMs=*/ 0,
-                /*backgroundUsageTimeInMs=*/ 0,
-                consumePower,
-                new BatteryHistEntry(values));
-        batteryDiffEntry.setTotalConsumePower(100 * consumePower / consumePercentage);
-        return batteryDiffEntry;
     }
 }
