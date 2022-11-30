@@ -16,9 +16,6 @@
 
 package com.android.settings.display;
 
-import static com.android.settings.display.ScreenResolutionController.FHD_WIDTH;
-import static com.android.settings.display.ScreenResolutionController.QHD_WIDTH;
-
 import android.annotation.Nullable;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -48,7 +45,6 @@ import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -59,9 +55,8 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
     private static final String TAG = "ScreenResolution";
 
     private Resources mResources;
-    private static final int FHD_INDEX = 0;
-    private static final int QHD_INDEX = 1;
     private static final String SCREEN_RESOLUTION = "user_selected_resolution";
+    private static final String SCREEN_RESOLUTION_KEY = "screen_resolution";
     private Display mDefaultDisplay;
     private String[] mScreenResolutionOptions;
     private Set<Point> mResolutions;
@@ -70,6 +65,9 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
     private IllustrationPreference mImagePreference;
     private DisplayObserver mDisplayObserver;
     private AccessibilityManager mAccessibilityManager;
+
+    private int mHighWidth;
+    private int mFullWidth;
 
     @Override
     public void onAttach(Context context) {
@@ -81,11 +79,19 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
         mResources = context.getResources();
         mScreenResolutionOptions =
                 mResources.getStringArray(R.array.config_screen_resolution_options_strings);
-        mScreenResolutionSummaries =
-                mResources.getStringArray(R.array.config_screen_resolution_summaries_strings);
-        mResolutions = getAllSupportedResolution();
         mImagePreference = new IllustrationPreference(context);
         mDisplayObserver = new DisplayObserver(context);
+        ScreenResolutionController controller =
+                new ScreenResolutionController(context, SCREEN_RESOLUTION_KEY);
+        mResolutions = controller.getAllSupportedResolutions();
+        mHighWidth = controller.getHighWidth();
+        mFullWidth = controller.getFullWidth();
+        Log.i(TAG, "mHighWidth:" + mHighWidth + "mFullWidth:" + mFullWidth);
+        mScreenResolutionSummaries =
+                new String[] {
+                    mHighWidth + " x " + controller.getHighHeight(),
+                    mFullWidth + " x " + controller.getFullHeight()
+                };
     }
 
     @Override
@@ -133,16 +139,6 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
         return candidates;
     }
 
-    /** Get all supported resolutions on the device. */
-    private Set<Point> getAllSupportedResolution() {
-        Set<Point> resolutions = new HashSet<>();
-        for (Display.Mode mode : mDefaultDisplay.getSupportedModes()) {
-            resolutions.add(new Point(mode.getPhysicalWidth(), mode.getPhysicalHeight()));
-        }
-
-        return resolutions;
-    }
-
     /** Get prefer display mode. */
     private Display.Mode getPreferMode(int width) {
         for (Point resolution : mResolutions) {
@@ -177,6 +173,7 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
 
         try {
             /** Apply the resolution change. */
+            Log.i(TAG, "setUserPreferredDisplayMode: " + mode);
             mDefaultDisplay.setUserPreferredDisplayMode(mode);
         } catch (Exception e) {
             Log.e(TAG, "setUserPreferredDisplayMode() failed", e);
@@ -194,16 +191,20 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
     /** Get the key corresponding to the resolution. */
     @VisibleForTesting
     String getKeyForResolution(int width) {
-        return width == FHD_WIDTH
-                ? mScreenResolutionOptions[FHD_INDEX]
-                : width == QHD_WIDTH ? mScreenResolutionOptions[QHD_INDEX] : null;
+        return width == mHighWidth
+                ? mScreenResolutionOptions[ScreenResolutionController.HIGHRESOLUTION_IDX]
+                : width == mFullWidth
+                        ? mScreenResolutionOptions[ScreenResolutionController.FULLRESOLUTION_IDX]
+                        : null;
     }
 
     /** Get the width corresponding to the resolution key. */
     int getWidthForResoluitonKey(String key) {
-        return mScreenResolutionOptions[FHD_INDEX].equals(key)
-                ? FHD_WIDTH
-                : mScreenResolutionOptions[QHD_INDEX].equals(key) ? QHD_WIDTH : -1;
+        return mScreenResolutionOptions[ScreenResolutionController.HIGHRESOLUTION_IDX].equals(key)
+                ? mHighWidth
+                : mScreenResolutionOptions[ScreenResolutionController.FULLRESOLUTION_IDX].equals(
+                    key)
+                ? mFullWidth : -1;
     }
 
     @Override
@@ -248,9 +249,11 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
     private void updateIllustrationImage(IllustrationPreference preference) {
         String key = getDefaultKey();
 
-        if (TextUtils.equals(mScreenResolutionOptions[FHD_INDEX], key)) {
+        if (TextUtils.equals(
+                mScreenResolutionOptions[ScreenResolutionController.HIGHRESOLUTION_IDX], key)) {
             preference.setLottieAnimationResId(R.drawable.screen_resolution_1080p);
-        } else if (TextUtils.equals(mScreenResolutionOptions[QHD_INDEX], key)) {
+        } else if (TextUtils.equals(
+                mScreenResolutionOptions[ScreenResolutionController.FULLRESOLUTION_IDX], key)) {
             preference.setLottieAnimationResId(R.drawable.screen_resolution_1440p);
         }
     }
@@ -300,7 +303,7 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     ScreenResolutionController mController =
-                            new ScreenResolutionController(context, "fragment");
+                            new ScreenResolutionController(context, SCREEN_RESOLUTION_KEY);
                     return mController.checkSupportedResolutions();
                 }
             };
@@ -408,6 +411,8 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
                 return false;
             }
 
+            Log.i(TAG,
+                    "resolution changed from " + mPreviousWidth.get() + " to " + getCurrentWidth());
             return true;
         }
     }
