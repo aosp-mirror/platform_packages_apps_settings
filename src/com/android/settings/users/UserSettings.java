@@ -97,6 +97,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
@@ -239,9 +240,6 @@ public class UserSettings extends SettingsPreferenceFragment
             switch (msg.what) {
                 case MESSAGE_UPDATE_LIST:
                     updateUserList();
-                    break;
-                case MESSAGE_USER_CREATED:
-                    onUserCreated(msg.arg1);
                     break;
                 case MESSAGE_REMOVE_GUEST_ON_EXIT_CONTROLLER_GUEST_REMOVED:
                     updateUserList();
@@ -624,14 +622,13 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
-    private void onUserCreated(int userId) {
+    private void onUserCreated(UserInfo userInfo) {
         hideUserCreatingDialog();
         // prevent crash when config changes during user creation
         if (getContext() == null) {
             return;
         }
         mAddingUser = false;
-        UserInfo userInfo = mUserManager.getUserInfo(userId);
         openUserDetails(userInfo, true);
     }
 
@@ -1011,69 +1008,50 @@ public class UserSettings extends SettingsPreferenceFragment
 
         mUserCreatingDialog = new UserCreatingDialog(getActivity());
         mUserCreatingDialog.show();
-        ThreadUtils.postOnBackgroundThread(new AddUserNowImpl(userType, mAddingUserName));
+        createUser(userType, mAddingUserName);
     }
 
     @VisibleForTesting
-    class AddUserNowImpl implements Runnable{
-        int mUserType;
-        String mImplAddUserName;
-
-        AddUserNowImpl(final int userType, final String addUserName) {
-            mUserType = userType;
-            mImplAddUserName = addUserName;
-        }
-
-        @Override
-        public void run() {
-            runAddUser();
-            Trace.endAsyncSection("UserSettings.addUserNow", 0);
-        }
-
-        private void runAddUser() {
+    void createUser(final int userType, String userName) {
+        Future<?> unusedCreateUserFuture = ThreadUtils.postOnBackgroundThread(() -> {
             UserInfo user;
-            String username;
 
-            synchronized (mUserLock) {
-                username = mImplAddUserName;
-            }
-
-            // Could take a few seconds
-            if (mUserType == USER_TYPE_USER) {
-                user = mUserManager.createUser(username, 0);
+            if (userType == USER_TYPE_USER) {
+                user = mUserManager.createUser(
+                        userName,
+                        mUserManager.USER_TYPE_FULL_SECONDARY,
+                        0);
             } else {
-                user = mUserManager.createRestrictedProfile(username);
+                user = mUserManager.createRestrictedProfile(userName);
             }
 
-            synchronized (mUserLock) {
+            ThreadUtils.postOnMainThread(() -> {
                 if (user == null) {
                     mAddingUser = false;
                     mPendingUserIcon = null;
                     mPendingUserName = null;
-                    ThreadUtils.postOnMainThread(() -> onUserCreationFailed());
+                    onUserCreationFailed();
                     return;
                 }
 
-                Drawable newUserIcon = mPendingUserIcon;
-                if (newUserIcon == null) {
-                    newUserIcon = UserIcons.getDefaultUserIcon(getResources(), user.id, false);
-                }
-                mUserManager.setUserIcon(
-                        user.id, UserIcons.convertToBitmapAtUserIconSize(
-                                getResources(), newUserIcon));
-
-                if (mUserType == USER_TYPE_USER) {
-                    mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
-                }
-
-                mHandler.sendMessage(mHandler.obtainMessage(
-                        MESSAGE_USER_CREATED, user.id, user.serialNumber));
+                Future<?> unusedSettingIconFuture = ThreadUtils.postOnBackgroundThread(() -> {
+                    Drawable newUserIcon = mPendingUserIcon;
+                    if (newUserIcon == null) {
+                        newUserIcon = UserIcons.getDefaultUserIcon(getResources(), user.id, false);
+                    }
+                    mUserManager.setUserIcon(
+                            user.id, UserIcons.convertToBitmapAtUserIconSize(
+                                    getResources(), newUserIcon));
+                });
 
                 mPendingUserIcon = null;
                 mPendingUserName = null;
-            }
-        }
-    };
+
+                onUserCreated(user);
+            });
+        });
+    }
+
 
     /**
      * Erase the current user (guest) and switch to another user.
