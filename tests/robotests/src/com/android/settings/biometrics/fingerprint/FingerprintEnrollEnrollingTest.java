@@ -91,7 +91,10 @@ public class FingerprintEnrollEnrollingTest {
 
     private Resources.Theme mTheme;
 
+    private static final int TOTAL_ENROLL_STEPS = 25;
+
     private final int[] mSfpsStageThresholds = new int[]{0, 9, 13, 19, 25};
+    private final int[] mUdfpsStageThresholds = new int[]{0, 13, 17, 22};
 
     private FingerprintEnrollEnrolling mActivity;
     private Context mContext;
@@ -190,19 +193,19 @@ public class FingerprintEnrollEnrollingTest {
     public void fingerprintUdfpsOverlayEnrollment_PlaysAllAnimationsAssetsCorrectly() {
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
-        int totalEnrollSteps = 25;
         int initStageSteps = -1, initStageRemaining = 0;
+        final int totalStages = mUdfpsStageThresholds.length;
 
         when(mSidecar.getEnrollmentSteps()).thenReturn(initStageSteps);
         when(mSidecar.getEnrollmentRemaining()).thenReturn(initStageRemaining);
 
         mActivity.onEnrollmentProgressChange(initStageSteps, initStageRemaining);
 
-        when(mSidecar.getEnrollmentSteps()).thenReturn(totalEnrollSteps);
+        when(mSidecar.getEnrollmentSteps()).thenReturn(TOTAL_ENROLL_STEPS);
 
-        for (int remaining = totalEnrollSteps; remaining > 0; remaining--) {
+        for (int remaining = TOTAL_ENROLL_STEPS; remaining > 0; remaining--) {
             when(mSidecar.getEnrollmentRemaining()).thenReturn(remaining);
-            mActivity.onEnrollmentProgressChange(totalEnrollSteps, remaining);
+            mActivity.onEnrollmentProgressChange(TOTAL_ENROLL_STEPS, remaining);
         }
 
         List<Integer> expectedLottieAssetOrder = List.of(
@@ -213,7 +216,7 @@ public class FingerprintEnrollEnrollingTest {
         );
 
         ArgumentCaptor<Integer> lottieAssetCaptor = ArgumentCaptor.forClass(Integer.class);
-        verify(mIllustrationLottie, times(4)).setAnimation(lottieAssetCaptor.capture());
+        verify(mIllustrationLottie, times(totalStages)).setAnimation(lottieAssetCaptor.capture());
         List<Integer> observedLottieAssetOrder = lottieAssetCaptor.getAllValues();
         assertThat(observedLottieAssetOrder).isEqualTo(expectedLottieAssetOrder);
     }
@@ -222,7 +225,6 @@ public class FingerprintEnrollEnrollingTest {
     public void fingerprintSfpsEnroll_PlaysAllAnimationsAssetsCorrectly() {
         initializeActivityFor(TYPE_POWER_BUTTON);
 
-        int totalEnrollSteps = 25;
         int initStageSteps = -1, initStageRemaining = 0;
 
         when(mSidecar.getEnrollmentSteps()).thenReturn(initStageSteps);
@@ -230,11 +232,11 @@ public class FingerprintEnrollEnrollingTest {
 
         mActivity.onEnrollmentProgressChange(initStageSteps, initStageRemaining);
 
-        when(mSidecar.getEnrollmentSteps()).thenReturn(totalEnrollSteps);
+        when(mSidecar.getEnrollmentSteps()).thenReturn(TOTAL_ENROLL_STEPS);
 
-        for (int remaining = totalEnrollSteps; remaining > 0; remaining--) {
+        for (int remaining = TOTAL_ENROLL_STEPS; remaining > 0; remaining--) {
             when(mSidecar.getEnrollmentRemaining()).thenReturn(remaining);
-            mActivity.onEnrollmentProgressChange(totalEnrollSteps, remaining);
+            mActivity.onEnrollmentProgressChange(TOTAL_ENROLL_STEPS, remaining);
         }
 
         List<Integer> expectedLottieAssetOrder = List.of(
@@ -356,6 +358,16 @@ public class FingerprintEnrollEnrollingTest {
             // SFPS_STAGE_NO_ANIMATION = 0, ... , SFPS_STAGE_RIGHT_EDGE = 4
             for (int stage = SFPS_STAGE_NO_ANIMATION; stage <= SFPS_STAGE_RIGHT_EDGE; stage++) {
                 doReturn(mSfpsStageThresholds[stage]).when(mActivity).getStageThresholdSteps(stage);
+            }
+            doReturn(true).when(mSidecar).isEnrolling();
+        }
+
+        if (sensorType == TYPE_UDFPS_OPTICAL) {
+            // UDFPS : STAGE_CENTER = 0, ... , STAGE_RIGHT_EDGE = 3
+            final int totalStages = mUdfpsStageThresholds.length - 1;
+            for (int stage = 0; stage <= totalStages; stage++) {
+                doReturn(mUdfpsStageThresholds[stage]).when(mActivity).getStageThresholdSteps(
+                        stage);
             }
             doReturn(true).when(mSidecar).isEnrolling();
         }
