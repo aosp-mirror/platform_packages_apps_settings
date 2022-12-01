@@ -397,6 +397,10 @@ public class SettingsActivity extends SettingsBaseActivity
      */
     public static Intent getTrampolineIntent(Intent intent, String highlightMenuKey) {
         final Intent detailIntent = new Intent(intent);
+        // Guard against the arbitrary Intent injection.
+        if (detailIntent.getSelector() != null) {
+            detailIntent.setSelector(null);
+        }
         // It's a deep link intent, SettingsHomepageActivity will set SplitPairRule and start it.
         final Intent trampolineIntent = new Intent(ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY)
                 .setPackage(Utils.SETTINGS_PACKAGE_NAME)
