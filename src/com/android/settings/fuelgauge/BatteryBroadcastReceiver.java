@@ -98,6 +98,7 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
         final IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
         intentFilter.addAction(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED);
+        intentFilter.addAction(BatteryUtils.BYPASS_DOCK_DEFENDER_ACTION);
 
         final Intent intent = mContext.registerReceiver(this, intentFilter);
         updateBatteryStatus(intent, true /* forceUpdate */);
@@ -132,6 +133,8 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
                 mBatteryHealth = batteryHealth;
             } else if (PowerManager.ACTION_POWER_SAVE_MODE_CHANGED.equals(intent.getAction())) {
                 mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_SAVER);
+            } else if (BatteryUtils.BYPASS_DOCK_DEFENDER_ACTION.equals(intent.getAction())) {
+                mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_STATUS);
             }
         }
     }

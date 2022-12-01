@@ -55,6 +55,7 @@ public class BatteryBroadcastReceiverTest {
     private BatteryBroadcastReceiver mBatteryBroadcastReceiver;
     private Context mContext;
     private Intent mChargingIntent;
+    private Intent mDockDefenderBypassIntent;
 
     @Before
     public void setUp() {
@@ -72,6 +73,8 @@ public class BatteryBroadcastReceiverTest {
         mChargingIntent.putExtra(BatteryManager.EXTRA_SCALE, BATTERY_INTENT_SCALE);
         mChargingIntent
                 .putExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_CHARGING);
+        mDockDefenderBypassIntent = new Intent(BatteryUtils.BYPASS_DOCK_DEFENDER_ACTION);
+
     }
 
     @Test
@@ -128,6 +131,13 @@ public class BatteryBroadcastReceiverTest {
         assertThat(mBatteryBroadcastReceiver.mBatteryHealth)
                 .isEqualTo(BatteryManager.BATTERY_HEALTH_UNKNOWN);
         verify(mBatteryListener, never()).onBatteryChanged(anyInt());
+    }
+
+    @Test
+    public void testOnReceive_dockDefenderBypassed_listenerInvoked() {
+        mBatteryBroadcastReceiver.onReceive(mContext, mDockDefenderBypassIntent);
+
+        verify(mBatteryListener).onBatteryChanged(BatteryUpdateType.BATTERY_STATUS);
     }
 
     @Test
