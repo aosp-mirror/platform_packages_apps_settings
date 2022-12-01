@@ -11369,4 +11369,29 @@
     <!-- [CHAR LIMIT=NONE] Title for preference: Transfer eSIM to another device -->
     <string name="transfer_esim_to_another_device_title">Transfer eSIM to another device</string>
 
+    <!-- Background Install Control UI -->
+    <!-- [CHAR LIMIT=NONE] Preference Feature Summary -->
+    <string name="background_install_preference_summary">{count, plural,
+    =1    {# app}
+    other {# apps}
+    }</string>
+
+    <!-- [CHAR LIMIT=NONE] Feature Title -->
+    <string name="background_install_title">Apps installed in the background</string>
+    <!-- [CHAR LIMIT=NONE] Feature summary -->
+    <string name="background_install_summary">Your device manufacturer may install apps on your device in the background, or allow your carrier and other partners to do so.\u000a\u000aAny apps listed here aren\u0027t required for your device to function normally. You can uninstall apps you don\u0027t want. </string>
+    <!-- [CHAR LIMIT=NONE] Group list no entry -->
+    <string name="background_install_feature_list_no_entry">No apps installed in the background</string>
+    <!-- [CHAR LIMIT=NONE] Uninstall app button content description -->
+    <string name="background_install_uninstall_button_description">Uninstall app</string>
+    <!-- [CHAR LIMIT=NONE] Before time period group list title -->
+    <string name="background_install_before">{count, plural,
+    =1    {Apps installed in the last # month}
+    other {Apps installed in the last # months}
+    }</string>
+    <!-- [CHAR LIMIT=NONE] After time period group list title -->
+    <string name="background_install_after">{count, plural,
+    =1    {Apps installed more than # month ago}
+    other {Apps installed more than # months ago}
+    }</string>
 </resources>
