@@ -100,7 +100,7 @@
             settings:keywords="@string/keywords_sim_status"
             android:summary="@string/summary_placeholder"
             settings:isPreferenceVisible="@bool/config_show_sim_info"
-            settings:enableCopying="true"/>
+            settings:controller="com.android.settings.deviceinfo.simstatus.SimStatusPreferenceController"/>
 
         <!-- Model & hardware -->
         <Preference
