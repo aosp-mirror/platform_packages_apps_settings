@@ -53,6 +53,7 @@ public class BatteryTipLoaderTest {
             BatteryTip.TipType.BATTERY_SAVER,
             BatteryTip.TipType.LOW_BATTERY,
             BatteryTip.TipType.BATTERY_DEFENDER,
+            BatteryTip.TipType.DOCK_DEFENDER,
             BatteryTip.TipType.HIGH_DEVICE_USAGE,
             BatteryTip.TipType.SMART_BATTERY_MANAGER};
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)

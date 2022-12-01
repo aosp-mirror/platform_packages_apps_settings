@@ -132,7 +132,12 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
-    public void testGetResumeChargeIntent_returnNull() {
-        assertThat(mPowerFeatureProvider.getResumeChargeIntent()).isNull();
+    public void testGetResumeChargeIntentWithoutDockDefender_returnNull() {
+        assertThat(mPowerFeatureProvider.getResumeChargeIntent(false)).isNull();
+    }
+
+    @Test
+    public void testGetResumeChargeIntentWithDockDefender_returnNull() {
+        assertThat(mPowerFeatureProvider.getResumeChargeIntent(true)).isNull();
     }
 }
