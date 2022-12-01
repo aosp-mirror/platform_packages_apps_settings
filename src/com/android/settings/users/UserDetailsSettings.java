@@ -317,8 +317,12 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 mRemoveUserPref.setTitle(R.string.user_remove_user);
                 removePreference(KEY_APP_COPYING);
             }
+
+            // Remove preference KEY_REMOVE_USER if DISALLOW_REMOVE_USER restriction is set
+            // on the current user or the user selected in user details settings is a main user.
             if (RestrictedLockUtilsInternal.hasBaseUserRestriction(context,
-                    UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId())) {
+                    UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId())
+                    || mUserInfo.isMain()) {
                 removePreference(KEY_REMOVE_USER);
             }
 
@@ -331,7 +335,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     @VisibleForTesting
     boolean canDeleteUser() {
-        if (!mUserManager.isAdminUser()) {
+        if (!mUserManager.isAdminUser() || mUserInfo.isMain()) {
             return false;
         }
 

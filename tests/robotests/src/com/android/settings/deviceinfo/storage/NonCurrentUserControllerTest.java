@@ -80,7 +80,7 @@ public class NonCurrentUserControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mPrimaryUser = new UserInfo();
-        mPrimaryUser.flags = UserInfo.FLAG_PRIMARY;
+        mPrimaryUser.flags = UserInfo.FLAG_PRIMARY | UserInfo.FLAG_FULL;
         mController = new NonCurrentUserController(mContext, mPrimaryUser);
         ShadowActivityManager.setService(mActivityService);
 
@@ -267,6 +267,8 @@ public class NonCurrentUserControllerTest {
         secondaryUser.id = 10;
         final UserInfo secondaryUser1 = spy(new UserInfo());
         secondaryUser1.id = 11;
+        secondaryUser.flags = UserInfo.FLAG_FULL;
+        secondaryUser1.flags = UserInfo.FLAG_FULL;
         userInfo.add(mPrimaryUser);
         userInfo.add(secondaryUser);
         userInfo.add(secondaryUser1);

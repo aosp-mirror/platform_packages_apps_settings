@@ -37,9 +37,7 @@ object UsageStatsPageProvider : SettingsPageProvider {
             title = stringResource(R.string.testing_usage_stats),
             listModel = rememberContext(::UsageStatsListModel),
             primaryUserOnly = true,
-        ) { itemModel ->
-            AppListItem(itemModel) {}
-        }
+        ) { AppListItem {} }
     }
 
     @Composable

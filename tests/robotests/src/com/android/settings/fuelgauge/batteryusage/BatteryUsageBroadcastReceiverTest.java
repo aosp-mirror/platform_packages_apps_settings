@@ -132,6 +132,7 @@ public final class BatteryUsageBroadcastReceiverTest {
     private static Intent getBatteryIntent(int level, int status) {
         final Intent intent = new Intent(Intent.ACTION_BATTERY_CHANGED);
         intent.putExtra(BatteryManager.EXTRA_LEVEL, level);
+        intent.putExtra(BatteryManager.EXTRA_SCALE, 100);
         intent.putExtra(BatteryManager.EXTRA_STATUS, status);
         return intent;
     }

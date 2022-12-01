@@ -52,9 +52,7 @@ object AppLanguagesPageProvider : SettingsPageProvider {
                     SettingsBody(stringResource(R.string.desc_app_locale_selection_supported))
                 }
             },
-        ) {
-            AppLanguageItem(it)
-        }
+        ) { AppLanguageItem() }
     }
 
     @Composable
@@ -68,16 +66,13 @@ object AppLanguagesPageProvider : SettingsPageProvider {
 }
 
 @Composable
-private fun AppLanguageItem(itemModel: AppListItemModel<AppLanguagesRecord>) {
+private fun AppListItemModel<AppLanguagesRecord>.AppLanguageItem() {
     val context = LocalContext.current
-    AppListItem(
-        itemModel = itemModel,
-        onClick = {
-            val intent = Intent(context, AppLocalePickerActivity::class.java).apply {
-                setData(Uri.parse("package:${itemModel.record.app.packageName}"))
-                putExtra("uid", itemModel.record.app.uid)
-            }
-            context.startActivity(intent)
+    AppListItem {
+        val intent = Intent(context, AppLocalePickerActivity::class.java).apply {
+            data = Uri.parse("package:${record.app.packageName}")
+            putExtra("uid", record.app.uid)
         }
-    )
+        context.startActivity(intent)
+    }
 }

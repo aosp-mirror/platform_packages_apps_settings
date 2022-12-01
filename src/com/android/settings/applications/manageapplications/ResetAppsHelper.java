@@ -110,58 +110,57 @@ public class ResetAppsHelper implements DialogInterface.OnClickListener,
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        if (mResetDialog != dialog) {
-            return;
+        if (mResetDialog == dialog) {
+            resetApps();
         }
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                final List<String> allowList = Arrays.asList(
-                        mContext.getResources().getStringArray(
-                                R.array.config_skip_reset_apps_package_name));
-                for (UserHandle userHandle : mUm.getEnabledProfiles()) {
-                    final int userId = userHandle.getIdentifier();
-                    final List<ApplicationInfo> apps = mPm.getInstalledApplicationsAsUser(
-                            PackageManager.GET_DISABLED_COMPONENTS, userId);
-                    for (int i = 0; i < apps.size(); i++) {
-                        ApplicationInfo app = apps.get(i);
-                        if (allowList.contains(app.packageName)) {
-                            continue;
-                        }
+    }
+
+    /** Resets the app preferences. */
+    public void resetApps() {
+        AsyncTask.execute(() -> {
+            final List<String> allowList = Arrays.asList(
+                    mContext.getResources().getStringArray(
+                            R.array.config_skip_reset_apps_package_name));
+            for (UserHandle userHandle : mUm.getEnabledProfiles()) {
+                final int userId = userHandle.getIdentifier();
+                final List<ApplicationInfo> apps = mPm.getInstalledApplicationsAsUser(
+                        PackageManager.GET_DISABLED_COMPONENTS, userId);
+                for (ApplicationInfo app : apps) {
+                    if (allowList.contains(app.packageName)) {
+                        continue;
+                    }
+                    try {
+                        mNm.clearData(app.packageName, app.uid, false);
+                    } catch (RemoteException ex) {
+                    }
+                    if (!app.enabled) {
                         try {
-                            mNm.clearData(app.packageName, app.uid, false);
-                        } catch (android.os.RemoteException ex) {
-                        }
-                        if (!app.enabled) {
-                            try {
-                                if (mIPm.getApplicationEnabledSetting(app.packageName, userId)
-                                        == PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER) {
-                                    mIPm.setApplicationEnabledSetting(app.packageName,
-                                            PackageManager.COMPONENT_ENABLED_STATE_DEFAULT,
-                                            PackageManager.DONT_KILL_APP,
-                                            userId,
-                                            mContext.getPackageName());
-                                }
-                            } catch (RemoteException e) {
-                                Log.e(TAG, "Error during reset disabled apps.", e);
+                            if (mIPm.getApplicationEnabledSetting(app.packageName, userId)
+                                    == PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER) {
+                                mIPm.setApplicationEnabledSetting(app.packageName,
+                                        PackageManager.COMPONENT_ENABLED_STATE_DEFAULT,
+                                        PackageManager.DONT_KILL_APP,
+                                        userId,
+                                        mContext.getPackageName());
                             }
+                        } catch (RemoteException e) {
+                            Log.e(TAG, "Error during reset disabled apps.", e);
                         }
                     }
                 }
-                try {
-                    mIPm.resetApplicationPreferences(UserHandle.myUserId());
-                } catch (RemoteException e) {
-                }
-                mAom.resetAllModes();
-                BatteryOptimizeUtils.resetAppOptimizationMode(mContext, mIPm, mAom);
-                final int[] restrictedUids = mNpm.getUidsWithPolicy(
-                        POLICY_REJECT_METERED_BACKGROUND);
-                final int currentUserId = ActivityManager.getCurrentUser();
-                for (int uid : restrictedUids) {
-                    // Only reset for current user
-                    if (UserHandle.getUserId(uid) == currentUserId) {
-                        mNpm.setUidPolicy(uid, POLICY_NONE);
-                    }
+            }
+            try {
+                mIPm.resetApplicationPreferences(UserHandle.myUserId());
+            } catch (RemoteException e) {
+            }
+            mAom.resetAllModes();
+            BatteryOptimizeUtils.resetAppOptimizationMode(mContext, mIPm, mAom);
+            final int[] restrictedUids = mNpm.getUidsWithPolicy(POLICY_REJECT_METERED_BACKGROUND);
+            final int currentUserId = ActivityManager.getCurrentUser();
+            for (int uid : restrictedUids) {
+                // Only reset for current user
+                if (UserHandle.getUserId(uid) == currentUserId) {
+                    mNpm.setUidPolicy(uid, POLICY_NONE);
                 }
             }
         });
