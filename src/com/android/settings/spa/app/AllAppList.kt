@@ -27,7 +27,7 @@ import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
 import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.navigator
-import com.android.settingslib.spa.framework.util.asyncMapItem
+import com.android.settingslib.spa.framework.util.mapItem
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spaprivileged.model.app.AppListModel
@@ -78,15 +78,7 @@ data class AppRecordWithSize(
 private class AllAppListModel : AppListModel<AppRecordWithSize> {
 
     override fun transform(userIdFlow: Flow<Int>, appListFlow: Flow<List<ApplicationInfo>>) =
-        appListFlow.asyncMapItem { app ->
-            AppRecordWithSize(app)
-        }
-
-    override fun filter(
-        userIdFlow: Flow<Int>,
-        option: Int,
-        recordListFlow: Flow<List<AppRecordWithSize>>,
-    ) = recordListFlow
+        appListFlow.mapItem(::AppRecordWithSize)
 
     @Composable
     override fun getSummary(option: Int, record: AppRecordWithSize) = record.app.getStorageSize()
