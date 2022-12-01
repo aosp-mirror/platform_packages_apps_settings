@@ -244,20 +244,4 @@ public class BatteryTipDialogFragmentTest {
         assertThat(shadowDialog.getMessage()).isEqualTo(
                 mContext.getText(R.string.battery_tip_dialog_summary_message));
     }
-
-    @Test
-    public void testOnCreateDialog_defenderTip_fireDialog() {
-        mDialogFragment = BatteryTipDialogFragment.newInstance(mDefenderTip, METRICS_KEY);
-
-        FragmentController.setupFragment(mDialogFragment, FragmentActivity.class,
-                0 /* containerViewId */, null /* bundle */);
-
-        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
-
-        assertThat(shadowDialog.getTitle()).isEqualTo(
-                mContext.getString(R.string.battery_tip_limited_temporarily_title));
-        assertThat(shadowDialog.getMessage()).isEqualTo(
-                mContext.getString(R.string.battery_tip_limited_temporarily_dialog_msg, "80%"));
-    }
 }
