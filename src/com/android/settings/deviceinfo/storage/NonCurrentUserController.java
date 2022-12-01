@@ -64,8 +64,8 @@ public class NonCurrentUserController extends AbstractPreferenceController imple
      * Adds the appropriate controllers to a controller list for handling all full non current
      * users on a device.
      *
-     * @param context           Context for initializing the preference controllers.
-     * @param userManager       UserManagerWrapper for figuring out which controllers to add.
+     * @param context     Context for initializing the preference controllers.
+     * @param userManager UserManagerWrapper for figuring out which controllers to add.
      */
     public static List<NonCurrentUserController> getNonCurrentUserControllers(
             Context context, UserManager userManager) {
@@ -73,7 +73,7 @@ public class NonCurrentUserController extends AbstractPreferenceController imple
         List<NonCurrentUserController> controllers = new ArrayList<>();
         List<UserInfo> infos = userManager.getUsers();
         for (UserInfo info : infos) {
-            if (info.id == currentUserId || info.isProfile()) {
+            if (info.id == currentUserId || !info.isFull()) {
                 continue;
             }
             int[] profiles = userManager.getProfileIds(info.id, false /* enabledOnly */);
@@ -85,8 +85,8 @@ public class NonCurrentUserController extends AbstractPreferenceController imple
     /**
      * Constructor for a given non-current user.
      *
-     * @param context Context to initialize the underlying {@link AbstractPreferenceController}.
-     * @param info    {@link UserInfo} for the non-current user which these controllers cover.
+     * @param context  Context to initialize the underlying {@link AbstractPreferenceController}.
+     * @param info     {@link UserInfo} for the non-current user which these controllers cover.
      * @param profiles list of IDs or user and its profiles
      */
     @VisibleForTesting

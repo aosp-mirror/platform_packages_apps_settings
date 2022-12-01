@@ -58,14 +58,15 @@ object AllAppListPageProvider : SettingsPageProvider {
 
 @Composable
 private fun AllAppListPage() {
+    val resetAppDialogPresenter = rememberResetAppDialogPresenter()
     AppListPage(
         title = stringResource(R.string.all_apps),
         listModel = remember { AllAppListModel() },
         showInstantApps = true,
-    ) { itemModel ->
+        moreOptions = { ResetAppPreferences(resetAppDialogPresenter::open) }
+    ) {
         AppListItem(
-            itemModel = itemModel,
-            onClick = AppInfoSettingsProvider.navigator(app = itemModel.record.app),
+            onClick = AppInfoSettingsProvider.navigator(app = record.app),
         )
     }
 }

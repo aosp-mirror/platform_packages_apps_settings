@@ -602,15 +602,6 @@ public class BatteryUtils {
                 /*receiver=*/ null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
     }
 
-    /** Gets the battery level from the intent. */
-    public static int getBatteryLevel(Intent intent) {
-        final int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-        final int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 0);
-        return scale == 0
-                ? -1 /*invalid battery level*/
-                : Math.round((level / (float) scale) * 100f);
-    }
-
     /** Gets the current dock defender mode */
     public static int getCurrentDockDefenderMode(Context context, BatteryInfo batteryInfo) {
         if (batteryInfo.pluggedStatus == BatteryManager.BATTERY_PLUGGED_DOCK) {

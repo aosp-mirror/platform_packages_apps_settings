@@ -84,7 +84,7 @@ public class PictureInPictureDetails extends AppInfoWithHeader
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.SETTINGS_MANAGE_PICTURE_IN_PICTURE;
+        return SettingsEnums.SETTINGS_MANAGE_PICTURE_IN_PICTURE_DETAIL;
     }
 
     /**

@@ -388,6 +388,16 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
+    public void initialize_onMainUser_shouldNotShowRemovePreference() {
+        setupSelectedMainUser();
+        mUserManager.setIsAdminUser(true);
+
+        mFragment.initialize(mActivity, mArguments);
+
+        verify(mFragment).removePreference(KEY_REMOVE_USER);
+    }
+
+    @Test
     public void initialize_disallowRemoveUserRestriction_shouldNotShowRemovePreference() {
         setupSelectedUser();
         mUserManager.setIsAdminUser(true);
@@ -572,9 +582,21 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
+    public void canDeleteUser_onMainUser_shouldReturnFalse() {
+        setupSelectedMainUser();
+        mUserManager.setIsAdminUser(true);
+        mFragment.mUserInfo = mUserInfo;
+
+        boolean result = mFragment.canDeleteUser();
+
+        assertThat(result).isFalse();
+    }
+
+    @Test
     public void canDeleteUser_adminSelectsUser_noRestrictions_shouldReturnTrue() {
         setupSelectedUser();
         mUserManager.setIsAdminUser(true);
+        mFragment.mUserInfo = mUserInfo;
 
         boolean result = mFragment.canDeleteUser();
 
@@ -585,6 +607,7 @@ public class UserDetailsSettingsTest {
     public void canDeleteUser_adminSelectsUser_hasRemoveRestriction_shouldReturnFalse() {
         setupSelectedUser();
         mUserManager.setIsAdminUser(true);
+        mFragment.mUserInfo = mUserInfo;
         ComponentName componentName = new ComponentName("test", "test");
         ShadowDevicePolicyManager.getShadow().setDeviceOwnerComponentOnAnyUser(componentName);
         ShadowDevicePolicyManager.getShadow().setDeviceOwnerUserId(UserHandle.myUserId());
@@ -606,6 +629,15 @@ public class UserDetailsSettingsTest {
         mArguments.putInt("user_id", 1);
         mUserInfo = new UserInfo(1, "Tom", null,
                 UserInfo.FLAG_FULL | UserInfo.FLAG_INITIALIZED,
+                UserManager.USER_TYPE_FULL_SECONDARY);
+
+        mUserManager.addProfile(mUserInfo);
+    }
+
+    private void setupSelectedMainUser() {
+        mArguments.putInt("user_id", 11);
+        mUserInfo = new UserInfo(11, "Jerry", null,
+                UserInfo.FLAG_FULL | UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_MAIN,
                 UserManager.USER_TYPE_FULL_SECONDARY);
 
         mUserManager.addProfile(mUserInfo);

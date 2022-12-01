@@ -36,6 +36,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
+import com.android.settingslib.fuelgauge.BatteryStatus;
 
 import java.time.Clock;
 import java.time.Duration;
@@ -149,7 +150,7 @@ public final class DatabaseUtils {
             clearMemory();
             return null;
         }
-        final int batteryLevel = BatteryUtils.getBatteryLevel(intent);
+        final int batteryLevel = BatteryStatus.getBatteryLevel(intent);
         final int batteryStatus = intent.getIntExtra(
                 BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN);
         final int batteryHealth = intent.getIntExtra(
