@@ -53,10 +53,8 @@ public final class BatteryStateDaoTest {
         mContext = ApplicationProvider.getApplicationContext();
         mDatabase = BatteryTestUtils.setUpBatteryStateDatabase(mContext);
         mBatteryStateDao = mDatabase.batteryStateDao();
-        BatteryTestUtils.insertDataToBatteryStateDatabase(
-                mContext, TIMESTAMP3, PACKAGE_NAME3);
-        BatteryTestUtils.insertDataToBatteryStateDatabase(
-                mContext, TIMESTAMP2, PACKAGE_NAME2);
+        BatteryTestUtils.insertDataToBatteryStateDatabase(mContext, TIMESTAMP3, PACKAGE_NAME3);
+        BatteryTestUtils.insertDataToBatteryStateDatabase(mContext, TIMESTAMP2, PACKAGE_NAME2);
         BatteryTestUtils.insertDataToBatteryStateDatabase(
                 mContext, TIMESTAMP1, PACKAGE_NAME1, /*multiple=*/ true,
                 /*isFullChargeStart=*/ true);
@@ -98,6 +96,24 @@ public final class BatteryStateDaoTest {
         // Verifies the queried first battery state.
         cursor2.moveToFirst();
         assertThat(cursor2.getString(3 /*packageName*/)).isEqualTo(PACKAGE_NAME3);
+    }
+
+    @Test
+    public void batteryStateDao_getCursorSinceLastFullCharge_noFullChargeData_returnSevenDaysData()
+            throws Exception {
+        mBatteryStateDao.clearAll();
+        BatteryTestUtils.insertDataToBatteryStateDatabase(mContext, TIMESTAMP3, PACKAGE_NAME3);
+        BatteryTestUtils.insertDataToBatteryStateDatabase(mContext, TIMESTAMP2, PACKAGE_NAME2);
+        BatteryTestUtils.insertDataToBatteryStateDatabase(mContext, TIMESTAMP1, PACKAGE_NAME1);
+        final Cursor cursor = mBatteryStateDao.getCursorSinceLastFullCharge(TIMESTAMP2);
+        assertThat(cursor.getCount()).isEqualTo(2);
+        assertThat(cursor.getColumnCount()).isEqualTo(CURSOR_COLUMN_SIZE);
+        // Verifies the queried first battery state.
+        cursor.moveToFirst();
+        assertThat(cursor.getString(3 /*packageName*/)).isEqualTo(PACKAGE_NAME2);
+        // Verifies the queried third battery state.
+        cursor.moveToNext();
+        assertThat(cursor.getString(3 /*packageName*/)).isEqualTo(PACKAGE_NAME3);
     }
 
     @Test

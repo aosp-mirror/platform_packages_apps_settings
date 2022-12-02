@@ -46,6 +46,8 @@ public class SimStatusPreferenceController extends
     private final Fragment mFragment;
     private final List<Preference> mPreferenceList = new ArrayList<>();
 
+    private int mSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
+
     public SimStatusPreferenceController(Context context, Fragment fragment) {
         super(context);
 
@@ -57,7 +59,34 @@ public class SimStatusPreferenceController extends
 
     @Override
     public String getPreferenceKey() {
+        if (mSlotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
+            return KEY_SIM_STATUS + mSlotIndex;
+        }
         return KEY_SIM_STATUS;
+    }
+
+    /**
+     * Update the index of slot for this subscription.
+     * @param slotIndex index of slot
+     */
+    public void setSimSlotStatus(int slotIndex) {
+        mSlotIndex = slotIndex;
+    }
+
+    /**
+     * Get number of subscription slots.
+     * @return number of slots
+     */
+    public int getSimSlotSize() {
+        return isAvailable() ? mTelephonyManager.getPhoneCount() : 0;
+    }
+
+    /**
+     * Get the index of slot for this subscription.
+     * @return index of slot
+     */
+    public int getSimSlotIndex() {
+        return mSlotIndex;
     }
 
     @Override
@@ -72,22 +101,23 @@ public class SimStatusPreferenceController extends
         if (!SubscriptionUtil.isSimHardwareVisible(mContext)) {
             return;
         }
-        final Preference preference = screen.findPreference(getPreferenceKey());
+        final Preference preference = screen.findPreference(KEY_SIM_STATUS);
         if (!isAvailable() || preference == null || !preference.isVisible()) {
             return;
         }
         final PreferenceCategory category = screen.findPreference(KEY_PREFERENCE_CATEGORY);
 
-        mPreferenceList.add(preference);
-
         final int simStatusOrder = preference.getOrder();
+        screen.removePreference(preference);
+        preference.setVisible(false);
+
         // Add additional preferences for each sim in the device
-        for (int simSlotNumber = 1; simSlotNumber < mTelephonyManager.getPhoneCount();
+        for (int simSlotNumber = 0; simSlotNumber < mTelephonyManager.getPhoneCount();
                 simSlotNumber++) {
             final Preference multiSimPreference = createNewPreference(screen.getContext());
             multiSimPreference.setCopyingEnabled(true);
-            multiSimPreference.setOrder(simStatusOrder + simSlotNumber);
-            multiSimPreference.setKey(KEY_SIM_STATUS + simSlotNumber);
+            multiSimPreference.setOrder(simStatusOrder + simSlotNumber + 1);
+            multiSimPreference.setKey(KEY_SIM_STATUS + simSlotNumber + 1);
             category.addPreference(multiSimPreference);
             mPreferenceList.add(multiSimPreference);
         }

@@ -44,14 +44,17 @@
 
     <com.android.settingslib.widget.ButtonPreference
         android:key="hearing_aid_pair_other_button"
-        android:gravity="center" />
+        android:gravity="center"/>
     <com.android.settings.applications.SpacePreference
         android:key="hearing_aid_space_layout"
-        android:layout_height="8dp" />
+        android:layout_height="8dp"/>
 
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="action_buttons"
         settings:allowDividerBelow="true"/>
+
+    <PreferenceCategory
+        android:key="device_stylus"/>
 
     <com.android.settings.slices.SlicePreference
         android:key="bt_extra_control"
