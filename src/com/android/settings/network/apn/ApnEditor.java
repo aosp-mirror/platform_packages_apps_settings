@@ -568,7 +568,7 @@ public class ApnEditor extends SettingsPreferenceFragment
                 // Network code
                 final String mnc = (subInfo == null) ? null : subInfo.getMncString();
 
-                if ((!TextUtils.isEmpty(mcc)) && (!TextUtils.isEmpty(mcc))) {
+                if (!TextUtils.isEmpty(mcc)) {
                     // Auto populate MNC and MCC for new entries, based on what SIM reports
                     mMcc.setText(mcc);
                     mMnc.setText(mnc);

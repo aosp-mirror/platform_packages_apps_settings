@@ -220,8 +220,8 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 showProgressDialog(
                         getString(
                                 R.string.sim_action_switch_sub_dialog_progress,
-                                SubscriptionUtil.getUniqueSubscriptionDisplayName(
-                                        mSubInfo, this)));
+                                SubscriptionUtil.getUniqueSubscriptionDisplayName(mSubInfo, this)),
+                        removedSubInfo != null ? true : false);
                 if (mIsEsimOperation) {
                     mSwitchToEuiccSubscriptionSidecar.run(mSubInfo.getSubscriptionId(),
                             UiccSlotUtil.INVALID_PORT_ID,

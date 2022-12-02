@@ -25,10 +25,13 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+
+import com.android.settings.R;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -58,12 +61,15 @@ public class SubscriptionUtilTest {
     private SubscriptionManager mSubMgr;
     @Mock
     private TelephonyManager mTelMgr;
+    @Mock
+    private Resources mResources;
 
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
+        when(mContext.getResources()).thenReturn(mResources);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubMgr);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelMgr);
         when(mTelMgr.getUiccSlotsInfo()).thenReturn(null);
@@ -442,5 +448,19 @@ public class SubscriptionUtilTest {
     @Test
     public void isInactiveInsertedPSim_nullSubInfo_doesNotCrash() {
         assertThat(SubscriptionUtil.isInactiveInsertedPSim(null)).isFalse();
+    }
+
+    @Test
+    public void isSimHardwareVisible_configAsInvisible_returnFalse() {
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(false);
+
+        assertThat(SubscriptionUtil.isSimHardwareVisible(mContext)).isFalse();
+    }
+
+    @Test
+    public void isSimHardwareVisible_configAsVisible_returnTrue() {
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
+
+        assertTrue(SubscriptionUtil.isSimHardwareVisible(mContext));
     }
 }

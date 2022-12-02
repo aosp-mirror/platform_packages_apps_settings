@@ -75,6 +75,7 @@ public class SimStatusPreferenceController extends
         for (int simSlotNumber = 1; simSlotNumber < mTelephonyManager.getPhoneCount();
                 simSlotNumber++) {
             final Preference multiSimPreference = createNewPreference(screen.getContext());
+            multiSimPreference.setCopyingEnabled(true);
             multiSimPreference.setOrder(simStatusOrder + simSlotNumber);
             multiSimPreference.setKey(KEY_SIM_STATUS + simSlotNumber);
             category.addPreference(multiSimPreference);

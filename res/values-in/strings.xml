@@ -325,7 +325,7 @@
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Memuat…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikasi dengan izin Perangkat di sekitar dapat menentukan posisi relatif perangkat terhubung."</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Akses lokasi dinonaktifkan untuk aplikasi dan layanan. Lokasi perangkat masih dapat dikirimkan ke petugas tanggap darurat saat Anda menelepon atau mengirim SMS ke nomor darurat."</string>
+    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Akses lokasi dinonaktifkan untuk aplikasi dan layanan. Lokasi perangkat Anda tetap dapat dikirimkan ke petugas tanggap darurat saat Anda menelepon atau mengirim SMS ke nomor darurat."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"Pelajari Setelan Lokasi lebih lanjut."</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Akun"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Keamanan"</string>
@@ -862,7 +862,7 @@
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"Lanjutan"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Bluetooth Lanjutan"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Saat Bluetooth aktif, perangkat dapat berkomunikasi dengan perangkat Bluetooth terdekat lainnya."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Jika Bluetooth diaktifkan, perangkat dapat berkomunikasi dengan perangkat Bluetooth lainnya di sekitar.\n\nAgar pengalaman perangkat menjadi lebih baik, aplikasi dan layanan masih dapat memindai perangkat di sekitar kapan saja, meski Bluetooth nonaktif. Ini dapat digunakan, misalnya, untuk meningkatkan kualitas fitur dan layanan berbasis lokasi. Anda dapat mengubahnya di "<annotation id="link">"setelan pemindaian Bluetooth"</annotation>"."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Jika Bluetooth diaktifkan, perangkat Anda dapat berkomunikasi dengan perangkat Bluetooth di sekitar.\n\nUntuk meningkatkan fungsi perangkat, aplikasi dan layanan tetap dapat memindai perangkat di sekitar kapan saja, bahkan saat Bluetooth nonaktif. Ini dapat digunakan, misalnya, untuk meningkatkan kualitas fitur dan layanan berbasis lokasi. Anda dapat mengubahnya di "<annotation id="link">"setelan pemindaian"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"Untuk meningkatkan akurasi lokasi, aplikasi dan layanan sistem tetap dapat mendeteksi perangkat Bluetooth. Anda dapat mengubahnya di <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>setelan pemindaian<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Tidak dapat terhubung. Coba lagi."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detail perangkat"</string>
@@ -1606,7 +1606,7 @@
     <string name="storage_low_summary" msgid="7341022293583384506">"Beberapa fungsi sistem, seperti sinkronisasi, mungkin tidak bekerja dengan benar. Coba kosongkan ruang dengan menghapus atau mencopot sematan item, seperti konten media atau aplikasi."</string>
     <string name="storage_menu_rename" msgid="8549835371429159336">"Ganti nama"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Pasang"</string>
-    <string name="storage_menu_unmount" msgid="8171552487742912282">"Cabut"</string>
+    <string name="storage_menu_unmount" msgid="8171552487742912282">"Keluarkan"</string>
     <string name="storage_menu_format" msgid="5454870642788909443">"Format"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Format sebagai portabel"</string>
     <string name="storage_menu_format_private" msgid="3208326980027382079">"Format sebagai internal"</string>
@@ -2810,7 +2810,7 @@
       <item quantity="one">%1$d aplikasi dibatasi</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
-    <string name="battery_missing_message" msgid="400958471814422770">"Terjadi masalah saat membaca indikator baterai."</string>
+    <string name="battery_missing_message" msgid="400958471814422770">"Terjadi error saat membaca indikator baterai."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Ketuk untuk mempelajari error ini lebih lanjut"</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Hentikan aplikasi?"</string>
@@ -3087,8 +3087,8 @@
     <string name="personal_data_section_title" msgid="6368610168625722682">"Data pribadi"</string>
     <string name="backup_data_title" msgid="507663517227498525">"Cadangkan data saya"</string>
     <string name="backup_data_summary" msgid="8054551085241427531">"Mencadangkan data aplikasi, sandi Wi-Fi, dan setelan lainnya ke server Google"</string>
-    <string name="backup_configure_account_title" msgid="8574055186903658842">"Akun cadangan"</string>
-    <string name="backup_data_management_title" msgid="6596830198441939702">"Kelola akun cadangan"</string>
+    <string name="backup_configure_account_title" msgid="8574055186903658842">"Akun pencadangan"</string>
+    <string name="backup_data_management_title" msgid="6596830198441939702">"Kelola akun pencadangan"</string>
     <string name="include_app_data_title" msgid="2969603876620594523">"Sertakan data aplikasi"</string>
     <string name="auto_restore_title" msgid="4124345897936637561">"Pemulihan otomatis"</string>
     <string name="auto_restore_summary" msgid="6830198851045584001">"Pulihkan cadangan setelan dan data saat menginstal ulang aplikasi"</string>
@@ -3374,7 +3374,7 @@
       <item quantity="other">Periksa sertifikat</item>
       <item quantity="one">Periksa sertifikat</item>
     </plurals>
-    <string name="user_settings_title" msgid="6550866465409807877">"Beberapa pengguna"</string>
+    <string name="user_settings_title" msgid="6550866465409807877">"Multi-pengguna"</string>
     <string name="user_settings_footer_text" product="device" msgid="7523914344521302179">"Gunakan perangkat bersama orang lain dengan menambahkan pengguna baru. Setiap pengguna memiliki ruang pribadi di perangkat Anda untuk akun, aplikasi, setelan, Layar utama kustom, dan lainnya."</string>
     <string name="user_settings_footer_text" product="tablet" msgid="3730074318510244552">"Gunakan tablet bersama orang lain dengan menambahkan pengguna baru. Setiap pengguna memiliki ruang pribadi di perangkat Anda untuk akun, aplikasi, setelan, Layar utama kustom, dan lainnya."</string>
     <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"Gunakan ponsel bersama orang lain dengan menambahkan pengguna baru. Setiap pengguna memiliki ruang pribadi di ponsel Anda untuk akun, aplikasi, setelan, Layar utama kustom, dan lainnya."</string>
@@ -3451,7 +3451,7 @@
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"Di terminal nirsentuh, bayar dengan <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"Di terminal tanpa kontak kartu fisik, bayar dengan <xliff:g id="APP_0">%1$s</xliff:g>.\n\nIni menggantikan <xliff:g id="APP_1">%2$s</xliff:g> sebagai aplikasi pembayaran default."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Jadikan default"</string>
-    <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Update"</string>
+    <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Perbarui"</string>
     <string name="nfc_work_text" msgid="2496515165821504077">"Kerja"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"Batasan"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"Hapus batasan"</string>
@@ -3886,7 +3886,7 @@
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Beberapa notifikasi dan konten lainnya dapat muncul sebagai balon di layar. Untuk membuka balon, ketuk balon tersebut. Untuk menutupnya, tarik ke bawah layar."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Balon"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Semua setelan Balon"</string>
-    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Tampilkan balon percakapan ini"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Tampilkan percakapan ini dalam balon"</string>
     <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Menampilkan ikon mengambang di atas aplikasi"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Izinkan <xliff:g id="APP_NAME">%1$s</xliff:g> menampilkan beberapa notifikasi sebagai balon"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"Aktifkan balon untuk perangkat?"</string>
@@ -3925,10 +3925,10 @@
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notifikasi di layar kunci"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Menampilkan percakapan, default, dan senyap"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Menampilkan percakapan, default, dan senyap"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Menyembunyikan percakapan dan notifikasi senyap"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Menyembunyikan percakapan dan notifikasi yang disenyapkan"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Jangan tampilkan notifikasi"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Notifikasi sensitif"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Tampilkan konten sensitif saat terkunci"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Menampilkan konten sensitif saat terkunci"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Notifikasi profil kerja yang sensitif"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Tampilkan konten profil kerja yang sensitif saat terkunci"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Menampilkan semua konten notifikasi"</string>
@@ -4052,7 +4052,7 @@
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Aplikasi yang ditampilkan di perangkat"</string>
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Aplikasi ini tidak mendukung setelan yang ditingkatkan"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Layanan bantuan VR"</string>
-    <string name="no_vr_listeners" msgid="8442646085375949755">"Tidak ada aplikasi terinstall yang meminta dijalankan sebagai layanan bantuan VR"</string>
+    <string name="no_vr_listeners" msgid="8442646085375949755">"Tidak ada aplikasi terinstal yang meminta dijalankan sebagai layanan bantuan VR"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Izinkan akses layanan VR untuk <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> dapat dijalankan saat Anda sedang menggunakan aplikasi dalam mode virtual reality."</string>
     <string name="display_vr_pref_title" msgid="4850474436291113569">"Saat perangkat dalam mode VR"</string>
@@ -4670,7 +4670,7 @@
     <string name="users_summary" msgid="8473589474976307510">"Login sebagai <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="5513009140568552693">"<xliff:g id="APP_NAME">%1$s</xliff:g> default"</string>
     <string name="backup_disabled" msgid="4503062265560959320">"Pencadangan dinonaktifkan"</string>
-    <string name="android_version_summary" msgid="7818952662015042768">"Diupdate ke Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
+    <string name="android_version_summary" msgid="7818952662015042768">"Telah diupdate ke Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"Ada update"</string>
     <string name="disabled_by_policy_title" msgid="3635622338687810583">"Diblokir oleh admin IT Anda"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"Volume tidak dapat diubah"</string>
@@ -4741,7 +4741,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"Penggunaan data seluler"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Penggunaan data oleh aplikasi"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Penggunaan data Wi-Fi"</string>
-    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Penggunaan data non-operator"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Penggunaan data nonoperator"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Penggunaan data ethernet"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
@@ -5159,10 +5159,10 @@
     <string name="location_indicator_settings_title" msgid="6655916258720093451">"Status bar indikator lokasi"</string>
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"Tampilkan untuk semua lokasi, termasuk jaringan dan konektivitas"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Paksa ukuran GNSS penuh"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Melacak semua konstelasi dan frekuensi GNSS tanpa siklus tugas"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Melacak semua konstelasi dan frekuensi GNSS terus-menerus"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Metode Input"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"Tulis tangan stilus"</string>
-    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Saat aktif, Metode input saat ini akan menerima MotionEvent stilus jika Editor difokuskan."</string>
+    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Saat aktif, metode input saat ini akan menerima MotionEvent stilus jika Editor difokuskan."</string>
     <string name="device_theme" msgid="5027604586494772471">"Tema perangkat"</string>
     <string name="default_theme" msgid="4815428567082263639">"Default"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Nama jaringan"</string>
@@ -5445,7 +5445,7 @@
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"Aplikasi <xliff:g id="APPNAME">%1$s</xliff:g> ingin menggunakan jaringan Wi-Fi sementara untuk terhubung ke perangkat"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"Perangkat tidak ditemukan. Pastikan perangkat dihidupkan dan dapat terhubung ke jaringan."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Coba lagi"</string>
-    <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Ada masalah. Aplikasi telah membatalkan permintaan untuk memilih perangkat."</string>
+    <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Terjadi error. Aplikasi telah membatalkan permintaan untuk memilih perangkat."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Koneksi berhasil"</string>
     <string name="network_connection_connect_failure" msgid="6803313816657494319">"Koneksi gagal"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Tampilkan semua"</string>
@@ -5627,7 +5627,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"panggilan telepon"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"data seluler"</string>
-    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Untuk meningkatkan pengalaman perangkat, aplikasi dan layanan tetap dapat memindai jaringan Wi-Fi kapan saja, bahkan saat Wi-Fi nonaktif. Ini dapat digunakan, misalnya, untuk meningkatkan kualitas fitur dan layanan berbasis lokasi. Anda dapat mengubahnya di setelan pemindaian Wi‑Fi."</string>
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Untuk meningkatkan fungsi perangkat, aplikasi dan layanan tetap dapat memindai jaringan Wi-Fi kapan saja, bahkan saat Wi-Fi nonaktif. Ini dapat digunakan, misalnya, untuk meningkatkan kualitas fitur dan layanan berbasis lokasi. Anda dapat mengubahnya di setelan pemindaian Wi‑Fi."</string>
     <string name="wifi_scan_change" msgid="8438320311511852918">"Ubah"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Terhubung"</string>
@@ -5662,7 +5662,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Gunakan penyematan aplikasi"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Gunakan opsi developer"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Gunakan layanan pencetakan"</string>
-    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Izinkan beberapa pengguna"</string>
+    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Izinkan multi-pengguna"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Gunakan proses debug nirkabel"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Menggunakan preferensi driver grafis"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Menggunakan penghemat baterai"</string>

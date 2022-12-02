@@ -528,7 +528,7 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Đã thêm vân tay"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Tính năng mở khóa bằng vân tay cải thiện hơn khi bạn sử dụng để mở khóa thiết bị hoặc xác minh nhận dạng trong các ứng dụng"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Tính năng mở khóa bằng vân tay cải thiện hơn khi bạn sử dụng để mở khóa thiết bị hoặc xác minh nhận dạng trong các ứng dụng"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Tính năng mở khóa bằng vân tay cải thiện hơn khi bạn sử dụng để mở khóa thiết bị hoặc xác minh nhận dạng trong các ứng dụng"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Tính năng mở khóa bằng vân tay cải thiện hơn khi bạn sử dụng để mở khóa thiết bị hoặc xác minh danh tính của bạn trong các ứng dụng"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Thực hiện sau"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Nhấc ngón tay lên rồi chạm lại"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Đặt vân tay ở phần bên của ngón tay lên cảm biến rồi giữ, sau đó chuyển sang phần bên kia"</string>
@@ -989,7 +989,7 @@
     <string name="wifi_cellular_data_fallback_summary" msgid="7039944853033554386">"Sử dụng dữ liệu di động khi Wi‑Fi không truy cập được Internet. Bạn có thể mất thêm phí sử dụng dữ liệu."</string>
     <string name="wifi_add_network" msgid="4178564862173751181">"Thêm mạng"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"Tùy chọn Wi‑Fi"</string>
-    <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"Wi-Fi bật lại tự động"</string>
+    <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"Wi-Fi sẽ được tự động bật lại"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"Wi-Fi không bật lại tự động"</string>
     <string name="wifi_access_points" msgid="5846755709207101844">"Mạng Wi‑Fi"</string>
     <string name="wifi_menu_more_options" msgid="1236651929987819716">"Tùy chọn khác"</string>
@@ -1769,7 +1769,7 @@
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Bạn muốn đặt lại tất cả tùy chọn cài đặt mạng và xóa các SIM đã tải xuống? Bạn không thể hủy hành động này sau khi đã thực hiện."</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Đặt lại chế độ cài đặt"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Đặt lại?"</string>
-    <string name="network_reset_not_available" msgid="1966334631394607829">"Đặt lại mạng không khả dụng cho người dùng này"</string>
+    <string name="network_reset_not_available" msgid="1966334631394607829">"Người dùng này không được phép đặt lại mạng"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Cài đặt mạng đã được đặt lại"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Không thể xóa SIM"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"Không thể xóa SIM đã tải xuống do lỗi.\n\nHãy khởi động lại thiết bị của bạn rồi thử lại."</string>
@@ -1868,7 +1868,7 @@
     <string name="location_title" msgid="5819154746934945021">"Vị trí của tôi"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Vị trí của hồ sơ công việc"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Quyền truy cập thông tin vị trí cho ứng dụng"</string>
-    <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Vị trí đang tắt"</string>
+    <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Dịch vụ vị trí hiện đang tắt"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
       <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g>/<xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> ứng dụng có quyền truy cập vào vị trí</item>
       <item quantity="one"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g>/<xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> ứng dụng có quyền truy cập vào vị trí</item>
@@ -2501,7 +2501,7 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Tìm hiểu thêm về tính năng chỉnh màu"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Giới thiệu về tính năng đảo màu"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Tìm hiểu thêm về tính năng đảo màu"</string>
-    <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Hiển thị phụ đề"</string>
+    <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Hiện phụ đề"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Chỉ dành cho ứng dụng được hỗ trợ"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Kích thước và kiểu phụ đề"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"Kích thước văn bản <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
@@ -2547,7 +2547,7 @@
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Phân biệt màu đỏ kém, mù màu đỏ"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Mù màu lam vàng"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Siêu tối"</string>
-    <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Làm cho màn hình trở nên siêu tối"</string>
+    <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Đặt màn hình ở chế độ siêu tối"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Phím tắt siêu tối"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Giới thiệu về tính năng siêu tối"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Giảm bớt độ sáng của màn hình xuống dưới độ sáng tối thiểu của điện thoại"</string>
@@ -2752,7 +2752,7 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Mức sử dụng pin cao"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Xem các ứng dụng có mức sử dụng pin cao nhất"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Chức năng sạc tạm thời bị hạn chế"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Để kéo dài tuổi thọ pin. Tìm hiểu thêm."</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Để kéo dài thời lượng pin. Tìm hiểu thêm."</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Tiếp tục sạc"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Trong một số điều kiện, chẳng hạn như nhiệt độ cao và thời gian sạc lâu, mức sạc có thể bị hạn chế ở <xliff:g id="PERCENT">%1$s</xliff:g> để duy trì độ bền của pin.\n\nKhi các điều kiện đó chấm dứt, điện thoại của bạn sẽ tự động sạc như bình thường."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Trong một số điều kiện, chẳng hạn như nhiệt độ cao và thời gian sạc lâu, mức sạc có thể bị hạn chế ở <xliff:g id="PERCENT">%1$s</xliff:g> để duy trì độ bền của pin.\n\nKhi các điều kiện đó chấm dứt, điện thoại của bạn sẽ tự động sạc như bình thường."</string>
@@ -3147,7 +3147,7 @@
     <string name="background_data" msgid="321903213000101158">"Dữ liệu nền"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"Ứng dụng có thể đ.bộ hóa, gửi &amp; nhận dữ liệu bất kỳ lúc nào"</string>
     <string name="background_data_dialog_title" msgid="1692005302993229867">"Tắt dữ liệu nền?"</string>
-    <string name="background_data_dialog_message" msgid="7760280837612824670">"Tắt dữ liệu nền sẽ kéo dài tuổi thọ pin và giảm mức sử dụng dữ liệu. Một số ứng dụng vẫn có thể sử dụng kết nối dữ liệu nền."</string>
+    <string name="background_data_dialog_message" msgid="7760280837612824670">"Tắt dữ liệu nền sẽ kéo dài thời lượng pin và giảm mức sử dụng dữ liệu. Một số ứng dụng vẫn có thể sử dụng kết nối dữ liệu nền."</string>
     <string name="sync_automatically" msgid="4874122892765430304">"Tự động đồng bộ hóa dữ liệu ứng dụng"</string>
     <string name="sync_enabled" msgid="5794103781356455043">"Tính năng đồng bộ hóa đang BẬT"</string>
     <string name="sync_disabled" msgid="1636223106968593391">"Tính năng đồng bộ hóa đang TẮT"</string>
@@ -5238,9 +5238,9 @@
     <string name="media_output_switching" msgid="7488216595474868546">"Đang chuyển đổi…"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Thực hiện cuộc gọi trên"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"Không thể thay đổi APN (Tên điểm truy cập) này."</string>
-    <string name="battery_suggestion_title" product="tablet" msgid="1525940496459255289">"Tăng tuổi thọ pin của máy tính bảng"</string>
-    <string name="battery_suggestion_title" product="device" msgid="2280773774080720377">"Tăng tuổi thọ pin của thiết bị"</string>
-    <string name="battery_suggestion_title" product="default" msgid="4811554469047272537">"Tăng tuổi thọ pin của điện thoại"</string>
+    <string name="battery_suggestion_title" product="tablet" msgid="1525940496459255289">"Tăng thời lượng pin của máy tính bảng"</string>
+    <string name="battery_suggestion_title" product="device" msgid="2280773774080720377">"Tăng thời lượng pin của thiết bị"</string>
+    <string name="battery_suggestion_title" product="default" msgid="4811554469047272537">"Tăng thời lượng pin của điện thoại"</string>
     <string name="battery_suggestion_summary" msgid="8186720080540016197"></string>
     <string name="gesture_prevent_ringing_screen_title" msgid="8293094715267769349">"Ngăn đổ chuông"</string>
     <string name="gesture_prevent_ringing_title" msgid="5978577898997523581">"Nhấn đồng thời nút Nguồn và nút Tăng âm lượng để"</string>

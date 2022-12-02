@@ -363,7 +363,7 @@ public class SoundWorkSettingsController extends AbstractPreferenceController
                             () -> context.getString(R.string.work_sync_dialog_message)))
                     .setPositiveButton(R.string.work_sync_dialog_yes,
                             SoundWorkSettingsController.UnifyWorkDialogFragment.this)
-                    .setNegativeButton(android.R.string.no, /* listener= */ null)
+                    .setNegativeButton(android.R.string.cancel, /* listener= */ null)
                     .create();
         }
 

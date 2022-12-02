@@ -85,8 +85,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
     protected static final String FRAGMENT_BUNDLE_SUBID = "subId";
 
-    public static final int LAUCH_APP_ACTIVATE = 0;
-    public static final int LAUCH_APP_UPDATE = 1;
+    public static final int LAUNCH_APP_ACTIVATE = 0;
+    public static final int LAUNCH_APP_UPDATE = 1;
 
     //UI objects
     private SettingsMainSwitchPreference mSwitchBar;
@@ -179,7 +179,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
             preference -> {
                 final Intent carrierAppIntent = getCarrierActivityIntent();
                 if (carrierAppIntent != null) {
-                    carrierAppIntent.putExtra(EXTRA_LAUNCH_CARRIER_APP, LAUCH_APP_UPDATE);
+                    carrierAppIntent.putExtra(EXTRA_LAUNCH_CARRIER_APP, LAUNCH_APP_UPDATE);
                     startActivity(carrierAppIntent);
                 }
                 return true;
@@ -493,7 +493,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
      * Return null when no activity found.
      */
     private Intent getCarrierActivityIntent() {
-        // Retrive component name from carrier config
+        // Retrieve component name from carrier config
         final CarrierConfigManager configManager =
                 getActivity().getSystemService(CarrierConfigManager.class);
         if (configManager == null) return null;
@@ -549,7 +549,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                     // Call address management activity before turning on WFC
                     final Intent carrierAppIntent = getCarrierActivityIntent();
                     if (carrierAppIntent != null) {
-                        carrierAppIntent.putExtra(EXTRA_LAUNCH_CARRIER_APP, LAUCH_APP_ACTIVATE);
+                        carrierAppIntent.putExtra(EXTRA_LAUNCH_CARRIER_APP, LAUNCH_APP_ACTIVATE);
                         startActivityForResult(carrierAppIntent,
                                 REQUEST_CHECK_WFC_EMERGENCY_ADDRESS);
                     } else {

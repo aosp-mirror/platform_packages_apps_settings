@@ -43,16 +43,16 @@ public class ConfirmCredentialTest {
 
         // Launch only one instance at a time.
         assertThat(LastTryDialog.show(
-                fm, "title", mContext.getString(android.R.string.yes),
+                fm, "title", mContext.getString(android.R.string.ok),
                 android.R.string.ok, false)).isTrue();
         assertThat(LastTryDialog.show(
-                fm, "title", mContext.getString(android.R.string.yes),
+                fm, "title", mContext.getString(android.R.string.ok),
                 android.R.string.ok, false)).isFalse();
 
         // After cancelling, the dialog should be re-shown when asked for.
         LastTryDialog.hide(fm);
         assertThat(LastTryDialog.show(
-                fm, "title", mContext.getString(android.R.string.yes),
+                fm, "title", mContext.getString(android.R.string.ok),
                 android.R.string.ok, false)).isTrue();
     }
 }
