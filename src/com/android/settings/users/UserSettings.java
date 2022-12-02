@@ -623,14 +623,10 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
-    private void onUserCreated(UserInfo userInfo) {
+    private void onUserCreated(UserInfo userInfo, Context context) {
         hideUserCreatingDialog();
-        // prevent crash when config changes during user creation
-        if (getContext() == null) {
-            return;
-        }
         mAddingUser = false;
-        openUserDetails(userInfo, true);
+        openUserDetails(userInfo, true, context);
     }
 
     private void hideUserCreatingDialog() {
@@ -651,6 +647,12 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void openUserDetails(UserInfo userInfo, boolean newUser, Context context) {
+        // to prevent a crash when config changes during user creation,
+        // we simply ignore this redirection step
+        if (context == null) {
+            return;
+        }
+
         Bundle extras = new Bundle();
         extras.putInt(UserDetailsSettings.EXTRA_USER_ID, userInfo.id);
         extras.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, newUser);
@@ -1018,6 +1020,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     @VisibleForTesting
     void createUser(final int userType, String userName) {
+        Context context = getContext();
         Future<?> unusedCreateUserFuture = ThreadUtils.postOnBackgroundThread(() -> {
             UserInfo user;
 
@@ -1052,7 +1055,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 mPendingUserIcon = null;
                 mPendingUserName = null;
 
-                onUserCreated(user);
+                onUserCreated(user, context);
             });
         });
     }
