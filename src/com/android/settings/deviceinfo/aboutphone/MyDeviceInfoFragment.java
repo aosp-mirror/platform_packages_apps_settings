@@ -103,7 +103,17 @@ public class MyDeviceInfoFragment extends DashboardFragment
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, MyDeviceInfoFragment fragment, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new SimStatusPreferenceController(context, fragment));
+
+        SimStatusPreferenceController defaultRecord =
+            new SimStatusPreferenceController(context, fragment);
+
+        for (int slotIndex = 0; slotIndex < defaultRecord.getSimSlotSize(); slotIndex ++) {
+            SimStatusPreferenceController slotRecord =
+                new SimStatusPreferenceController(context, fragment);
+            slotRecord.setSimSlotStatus(slotIndex);
+            controllers.add(slotRecord);
+        }
+
         controllers.add(new IpAddressPreferenceController(context, lifecycle));
         controllers.add(new WifiMacAddressPreferenceController(context, lifecycle));
         controllers.add(new BluetoothAddressPreferenceController(context, lifecycle));
