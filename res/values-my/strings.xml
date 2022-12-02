@@ -147,8 +147,8 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3506962706611366830">"သင့်တက်ဘလက်အား အနီးအနားရှိ \'ဘလူးတုသ်\' စက်ပစ္စည်းများနှင့် ချိတ်ဆက်ခွင့်ပေးသည်"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"သင့်စက်ပစ္စည်းအား အနီးအနားရှိ \'ဘလူးတုသ်\' စက်ပစ္စည်းများနှင့် ချိတ်ဆက်ခွင့်ပေးသည်"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"သင့်ဖုန်းအား အနီးအနားရှိ \'ဘလူးတုသ်\' စက်ပစ္စည်းများနှင့် ချိတ်ဆက်ခွင့်ပေးသည်"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"ဘလူးတုသ် A2DP ဟာ့ဒ်ဝဲဖြုတ်ခြင်း ပိတ်ရန်"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"ဘလူးတုသ် LE အသံ ဟာ့ဒ်ဝဲဖြုတ်ချမှု ပိတ်ရန်"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"ဘလူးတုသ် A2DP ဟာ့ဒ်ဝဲသုံးပို့ခြင်း ပိတ်ရန်"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"ဘလူးတုသ် LE အသံ ဟာ့ဒ်ဝဲသုံးပို့ခြင်း ပိတ်ရန်"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"စက်ပြန်စလိုပါသလား။"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"ဤဆက်တင်ကိုပြောင်းရန် သင့်စက်ကို ပြန်စရမည်။"</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"ပြန်စရန်"</string>
@@ -159,7 +159,7 @@
     <string name="connected_device_call_device_title" msgid="88732390601723608">"ခေါ်ဆိုမှု စက်ပစ္စည်းများ"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"အခြား စက်ပစ္စည်းများ"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"သိမ်းထားသည့် စက်ပစ္စည်းများ"</string>
-    <string name="connected_device_add_device_summary" msgid="8671009879957120802">"တွဲချိတ်ရန် \'ဘလူးတုသ်\' ကို ဖွင့်ပါမည်"</string>
+    <string name="connected_device_add_device_summary" msgid="8671009879957120802">"တွဲချိတ်ရန် ဘလူးတုသ်ကို ဖွင့်ပါမည်"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"ချိတ်ဆက်မှု ဦးစားပေးများ"</string>
     <string name="connected_device_previously_connected_title" msgid="605808252622814415">"ယခင်က ချိတ်ဆက်ထားသော စက်များ"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"ယခင် ချိတ်ဆက်ထားသည်များ"</string>
@@ -1045,7 +1045,7 @@
     <string name="wifi_ap_5G" msgid="3493942667238551207">"၅.၀ GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Wi‑Fi ဟော့စပေါ့အတွက် အနည်းဆုံး လိုင်းတစ်လိုင်းရွေးပါ−"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"IP ဆက်တင်များ"</string>
-    <string name="wifi_privacy_settings" msgid="3283946009000725698">"ကန့်သတ်ဆက်တင်"</string>
+    <string name="wifi_privacy_settings" msgid="3283946009000725698">"ကိုယ်ရေးအချက်အလက်လုံခြုံမှု"</string>
     <string name="wifi_subscription" msgid="4432423938285430113">"စာရင်းသွင်းမှု"</string>
     <string name="wifi_subscription_summary" msgid="18802471063384598">"စာရင်းသွင်းမှုကို ကြည့်ရန် သို့မဟုတ် ပြောင်းရန်"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"ကျပန်း MAC"</string>
@@ -1424,8 +1424,8 @@
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"အိပ်ချိန်ကျော်လျှင် အလိုအလျောက်ပိတ်ပေးမည်"</string>
     <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"<xliff:g id="ID_1">%1$s</xliff:g> အထိ ဖွင့်ရန်"</string>
     <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"<xliff:g id="ID_1">%1$s</xliff:g> အထိ ပိတ်ရန်"</string>
-    <string name="dark_ui_text" msgid="4392646155331126666">"အချို့ဖန်သားပြင်များတွင် ဘက်ထရီသက်တမ်း ပိုခံနိုင်ရန် မှောင်သည့် အပြင်အဆင်က အနက်ရောင်နောက်ခံကို အသုံးပြုသည်။ သင့်ဖန်သားပြင်ပိတ်သည်အထိ စောင့်ပြီးမှ မှောင်သည့် အပြင်အဆင် စတင်သည်။"</string>
-    <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"မှောင်သည့် အပြင်အဆင်သည် သင့်အိပ်ချိန်မုဒ် အချိန်ဇယားအတိုင်း ယခုလုပ်ဆောင်နေသည်"</string>
+    <string name="dark_ui_text" msgid="4392646155331126666">"အချို့ဖန်သားပြင်များတွင် ဘက်ထရီသက်တမ်း ပိုခံနိုင်ရန် အမှောင်နောက်ခံက အနက်ရောင်နောက်ခံကို အသုံးပြုသည်။ သင့်ဖန်သားပြင်ပိတ်သည်အထိ စောင့်ပြီးမှ အမှောင်နောက်ခံ စတင်သည်။"</string>
+    <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"အမှောင်နောက်ခံသည် လက်ရှိတွင် သင့်အိပ်ချိန်မုဒ် အချိန်ဇယားအတိုင်း လုပ်ဆောင်နေသည်"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"အိပ်ချိန်မုဒ် ဆက်တင်များ"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ဖန်သားပြင် ခဏရပ်ချိန်"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"မျက်နှာပြင်ကို ပိတ်ထားသည်"</string>
@@ -1561,7 +1561,7 @@
     <string name="status_serial_number" msgid="9060064164331466789">"စက်မှတ်ပုံတင်နံပါတ်"</string>
     <string name="status_up_time" msgid="1274778533719495438">"ဖွင့်ထားသောအချိန်"</string>
     <string name="status_awake_time" msgid="2573925324168081586">"ပြန်ပွင့်မည်အချိန်"</string>
-    <string name="internal_memory" msgid="1869518160077033848">"စက်တွင်း သိုလှောင်ထားမှု"</string>
+    <string name="internal_memory" msgid="1869518160077033848">"စက်တွင်းသိုလှောင်ခန်း"</string>
     <string name="sd_memory" product="nosdcard" msgid="5456718463397723781">"USBဖြင့် သိမ်းဆည်းခြင်း"</string>
     <string name="sd_memory" product="default" msgid="3098344183202722455">"SD ကတ်"</string>
     <string name="memory_available" msgid="712528795743654737">"နေရာလွတ်"</string>
@@ -1648,9 +1648,9 @@
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"သင့် <xliff:g id="NAME">^1</xliff:g> ကိုတပ်ဆင်မည်"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"ရွှေ့လျားနိုင်သည့် သိုလှောင်မှုအဖြစ် သုံးမည်"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"စက်ပစ္စည်းများအကြား ပုံများနှင့် အခြားမီဒီယာများရွှေ့လျားရန်အတွက်။"</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"အတွင်းသိုလှောင်မှုအဖြစ် အသုံးပြုမည်"</string>
+    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"စက်တွင်းသိုလှောင်ခန်းအဖြစ် သုံးရန်"</string>
     <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"အပ်ဖ်များနှင့် ပုံများ အပါအဝင် ဤစက်ပစ္စည်းပေါ်တွင်သာ သိုလှောင်ရန်အတွက် ဖြစ်သည်။ ပုံစံချရန်လိုအပ်ပြီး ၎င်းသည်အခြားစက်ပစ္စည်းများနှင့် အလုပ်လုပ်ခြင်းမှ ကာကွယ်မည်ဖြစ်သည်။"</string>
-    <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"အတွင်းသိုလှောင်မှုအဖြစ် ပုံစံချမည်"</string>
+    <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"စက်တွင်းသိုလှောင်ခန်းအဖြစ်"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"လုံခြုံစေရန်အတွက် ၎င်းတွင် <xliff:g id="NAME_0">^1</xliff:g> ကိုပုံစံချထားရန် လိုအပ်ပါသည်။\n\nပုံစီချပြီးနောက်၊ <xliff:g id="NAME_1">^1</xliff:g> သည်ဤစက်ပစ္စည်းတွင်သာ အလုပ်လုပ်ပါမည်။ \n\n"<b>"ပုံစံချခြင်းဖြင့်<xliff:g id="NAME_2">^1</xliff:g>တွင်လက်ရှိသိုလှောင်ထားသည့် ဒေတာများအားလုံးကို ဖျက်ပစ်မည်ဖြစ်သည်။"</b>" ဒေတာများ ဆုံးရှုံးခြင်းမှ ကာကွယ်ရန်၊ အရံကူးယူထားရန် စဉ်းစားပါ။"</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"သယ်နိုင်သောသိုလှောင်မှုပုံစံချပါ"</string>
     <string name="storage_wizard_format_confirm_public_body" msgid="6219883780307218266">"<xliff:g id="NAME_0">^1</xliff:g> အား ပုံစံချရန် လိုအပ်သည်။ \n\n"<b>" ပုံစံချပါက <xliff:g id="NAME_1">^1</xliff:g> တွင် လတ်တလော သိမ်းထားသည်များအားလုံးအား ပျက်သွားမည်။ "</b>" ဒေတာများပျောက်ပျက်သွားခြင်းမှ ကာကွယ်လိုပါ၊ အရံသိမ်းဆည်းခြင်းပြုရန် စဉ်းစားပါ။"</string>
@@ -1658,7 +1658,7 @@
     <string name="storage_wizard_format_progress_title" msgid="9170393018855949774">"<xliff:g id="NAME">^1</xliff:g>ပုံစံချနေသည်…"</string>
     <string name="storage_wizard_format_progress_body" msgid="1044024044955390417">"ဖော်မက်လုပ်နေစဉ် <xliff:g id="NAME">^1</xliff:g> ကို မဖယ်ရှားပါနှင့်။"</string>
     <string name="storage_wizard_migrate_title" msgid="3013711737005104623">"ဒေတာကို သိုလှောင်မှုအသစ်သို့ ရွှေ့မည်"</string>
-    <string name="storage_wizard_migrate_body" msgid="1630853797296198275">"သင့်ပုံများ၊ ဖိုင်များနှင့် အချို့ အက်ပ်များကို ဤ<xliff:g id="NAME">^1</xliff:g> အသစ်ပေါ်သို့ ရွှေ့နိုင်သည်။ \n\nရွှေ့ခြင်းသည်<xliff:g id="TIME">^2</xliff:g> ခန့်ကြာမည်ဖြစ်ပြီး အတွင်းသိုလှောင်မှုတွင် <xliff:g id="SIZE">^3</xliff:g> ခန့်နေရာလွတ်သွားပါမည်။ ၎င်းပြုလုပ်နေစဉ် အချို့သော အက်ပ်များ အလုပ်လုပ်မည်မဟုတ်ပါ။"</string>
+    <string name="storage_wizard_migrate_body" msgid="1630853797296198275">"သင့်ပုံများ၊ ဖိုင်များနှင့် အချို့အက်ပ်များကို ဤ <xliff:g id="NAME">^1</xliff:g> အသစ်ပေါ်သို့ ရွှေ့နိုင်သည်။ \n\nရွှေ့ချိန် <xliff:g id="TIME">^2</xliff:g> ခန့်ကြာပြီး စက်တွင်းသိုလှောင်ခန်းတွင် <xliff:g id="SIZE">^3</xliff:g> နေရာလွတ်သွားပါမည်။ ၎င်းပြုလုပ်နေစဉ် အချို့သော အက်ပ်များ အလုပ်လုပ်မည်မဟုတ်ပါ။"</string>
     <string name="storage_wizard_migrate_now" msgid="175023718337037181">"ယခုရွှေ့မည်"</string>
     <string name="storage_wizard_migrate_later" msgid="6573789572520980112">"နောက်မှ ရွှေ့မည်"</string>
     <string name="storage_wizard_migrate_confirm_title" msgid="255346780598924540">"ဒေတာများယခု ရွှေ့မည်"</string>
@@ -1774,7 +1774,7 @@
     <string name="main_clear_title" msgid="277664302144837723">"ဒေတာအားလုံးဖျက်ရန် (စက်ရုံထုတ်ဆက်တင် သတ်မှတ်ရန်)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"ဒေတာအားလုံးဖျက်ခြင်း (စက်ရုံထုတ်ဆက်တင် သတ်မှတ်ရန်)"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"ဤသို့ပြုလုပ်ခြင်းက သင့်တက်ဘလက်၏ "<b>"စက်အတွင်းသိုလှောင်ခန်း"</b>" အပါအဝင် အောက်ပါဒေတာအားလုံးကို ဖျက်ပါမည်-\n\n"<li>"သင်၏ Google အကောင့်"</li>\n<li>"စနစ်နှင့် အက်ပ်ဒေတာ၊ ဆက်တင်များ၊"</li>\n<li>"ဒေါင်းလုဒ်လုပ်ထားသည့်အက်ပ်များ"</li></string>
-    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"ဤသို့ပြုလုပ်ခြင်းက သင့်ဖုန်း၏ "<b>"စက်အတွင်းသိုလှောင်ခန်း"</b>" အပါအဝင် အောက်ပါဒေတာအားလုံးကို ဖျက်ပါမည်- \n\n"<li>"သင်၏ Google အကောင့်"</li>\n<li>"စနစ်နှင့် အက်ပ်ဒေတာ၊ ဆက်တင်များ၊"</li>\n<li>"ဒေါင်းလုဒ်လုပ်ထားသည့်အက်ပ်များ"</li></string>
+    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"ဤသို့ပြုလုပ်ခြင်းဖြင့် အောက်ပါတို့ အပါအဝင် သင့်ဖုန်း၏ "<b>"စက်တွင်းသိုလှောင်ခန်း"</b>" ရှိဒေတာအားလုံးကို ဖျက်ပါမည်- \n\n"<li>"သင်၏ Google Account"</li>\n<li>"စနစ်နှင့် အက်ပ်ဒေတာ၊ ဆက်တင်များ၊"</li>\n<li>"ဒေါင်းလုဒ်လုပ်ထားသည့်အက်ပ်များ"</li></string>
     <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"သင်သည် လက်ရှိတွင် အောက်ပါအကောင့်များကို ဝင်ရောက်ထားပါသည်\n"</string>
     <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"ဤစက်ပစ္စည်းပေါ်တွင် အခြားအသုံးပြုသူများလည်း ရှိသည်။\n"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"သီချင်း"</li>\n<li>"ဓာတ်ပုံများ"</li>\n<li>"အသုံးပြုသူ၏အခြားဒေတာ"</li></string>
@@ -2067,7 +2067,7 @@
     <string name="data_size_label" msgid="7814478940141255234">"အသုံးပြုသူ၏ ဒေတာ"</string>
     <string name="external_data_size_label" product="nosdcard" msgid="1054860423004751290">"USBသိုလှောင်မှု ဒေတာ"</string>
     <string name="external_data_size_label" product="default" msgid="3370825186202856353">"SD ကတ်"</string>
-    <string name="uninstall_text" msgid="315764653029060126">"ဖယ်ရှားရန်"</string>
+    <string name="uninstall_text" msgid="315764653029060126">"ဖြုတ်ရန်"</string>
     <string name="uninstall_all_users_text" msgid="5924715251087176474">"သုံးစွဲသူအားလုံးအတွက် ဖြုတ်ရန်"</string>
     <string name="install_text" msgid="4558333621516996473">"ထည့်သွင်းရန်"</string>
     <string name="disable_text" msgid="5146002260857428005">"ပိတ်ထားရန်"</string>
@@ -2106,7 +2106,7 @@
     <string name="not_installed" msgid="5074606858798519449">"ဤအသုံးပြုသူအတွက် ထည့်သွင်းမထားပါ"</string>
     <string name="installed" msgid="2837449358488825884">"ထည့်သွင်းထားသည်"</string>
     <string name="no_applications" msgid="985069304755391640">"အက်ပ် မရှိပါ။"</string>
-    <string name="internal_storage" msgid="999496851424448809">"စက်တွင်း သိုလှောင်ထားမှု"</string>
+    <string name="internal_storage" msgid="999496851424448809">"သိုလှောင်ခန်း"</string>
     <string name="recompute_size" msgid="1098091228370999128">"အရွယ်အစားကို ပြန်လည်တွက်ချက်နေသည်"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"အက်ပ်ဒေတာ ဖျက်မလား။"</string>
     <string name="clear_data_dlg_text" msgid="3440011276559762619">"ဖိုင်နှင့် ဆက်တင်များအပါအဝင် ဤအက်ပ်၏ ဒေတာအားလုံးကို စက်မှ အပြီးဖျက်လိုက်ပါမည်"</string>
@@ -2331,7 +2331,7 @@
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"အများသုံးစွဲနိုင်မှု ခလုတ်သို့ ပြောင်းရန်"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"သုံးချက်တို့ခြင်းကို သုံးရန်"</string>
     <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"၎င်းသည် သင့်ကီးဘုတ်ကို နှေးသွားစေနိုင်သည်"</string>
-    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"သင်၏ဖန်သားပြင် တစ်စိတ်တစ်ပိုင်းကို ချဲ့ရန် သုံးချက်တို့သောအခါ ကီးဘုတ်တွင် ပြဿနာများကို တွေ့နိုင်သည်။\n\nဤသို့မဖြစ်စေရန် ချဲ့သည့်ဖြတ်လမ်းလင့်ခ်ကို သုံးချက်တို့ခြင်းမှ အခြားပုံစံတစ်ခုသို့ ပြောင်းနိုင်သည်။\n"<annotation id="link">"ဆက်တင်ပြောင်းရန်"</annotation></string>
+    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"သင်၏ဖန်သားပြင် တစ်စိတ်တစ်ပိုင်းကို ချဲ့ရန် သုံးချက်တို့သောအခါ ကီးဘုတ်တွင် ပြဿနာများကို တွေ့နိုင်သည်။\n\nဤသို့မဖြစ်စေရန် ချဲ့သည့်ဖြတ်လမ်းအတွက် သုံးချက်တို့ခြင်းမှ အခြားပုံစံတစ်ခုသို့ ပြောင်းနိုင်သည်။\n"<annotation id="link">"ဆက်တင်ပြောင်းရန်"</annotation></string>
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"မည်သို့ပင်ဖြစ်စေ ရှေ့ဆက်ရန်"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"မလုပ်တော့"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"ပုံကြီးချဲ့ခြင်း ဆက်တင်များ"</string>
@@ -2438,7 +2438,7 @@
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"၂ မိနစ်"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"လုပ်ရန်အချိန် (အသုံးလွယ်မှုအချိန်ကုန်ခြင်း)"</string>
     <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"လုပ်ရန်အချိန် အကြောင်း (အများသုံးစွဲနိုင်မှု အချိန်ကုန်သွားခြင်း)"</string>
-    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"လုပ်ရန်အချိန် အကြောင်း (အများသုံးစွဲနိုင်မှု အချိန်ကုန်သွားခြင်း) ပိုမိုလေ့လာရန်"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"လုပ်ဆောင်ရန် လိုအပ်ချိန် (အများသုံးစွဲနိုင်မှု အချိန်ကုန်သွားခြင်း) အကြောင်း ပိုမိုလေ့လာရန်"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"တစ်ခုခုလုပ်ဆောင်ရန် အချိန်"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"ဤအချိန်ကိုက်ခြင်းသတ်မှတ်ချက်ကို အက်ပ်တိုင်းက မပံ့ပိုးပါ"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"တစ်ခုခုလုပ်ဆောင်ရန်ပြောသည့် ယာယီမက်ဆေ့ဂျ်များ မည်မျှကြာပြရမည်ကို ရွေးနိုင်သည်"</string>
@@ -2447,10 +2447,10 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"အရောင် ပြောင်းပြန်လှန်ခြင်းကို သုံးပါ"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"အရောင်ပြောင်းပြန်ပြုလုပ်ခြင်း ဖြတ်လမ်းလင့်ခ်"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"အရောင်ပြောင်းပြန်ပြုလုပ်ခြင်းသည် လင်းသည့်ဖန်သားပြင်ကို မှောင်စေသည်။ မှောင်သည့်ဖန်သားပြင်ကိုလည်း လင်းစေသည်။"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;သတိပြုရန်&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; မီဒီယာနှင့် ပုံများတွင် အရောင်ပြောင်းသွားမည်&lt;/li&gt; &lt;li&gt; အရောင်ပြောင်းပြန်ပြုလုပ်ခြင်းသည် အက်ပ်အားလုံးတွင် အလုပ်လုပ်သည်&lt;/li&gt; &lt;li&gt; နောက်ခံအမှောင်ပြရန် ‘မှောင်သည့် အပြင်အဆင်’ ကို အစားထိုးသုံးနိုင်သည်&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"အလိုအလျောက် နှိပ်ခြင်း (ရွေ့လျားခြင်းမရှိသည့်အချိန်)"</string>
-    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"အလိုအလျောက်ကလစ် အကြောင်း (ကြာချိန်)"</string>
-    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"အလိုအလျောက်ကလစ် အကြောင်း (ကြာချိန်) ပိုမိုလေ့လာရန်"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;သတိပြုရန်&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; မီဒီယာနှင့် ပုံများတွင် အရောင်ပြောင်းသွားမည်&lt;/li&gt; &lt;li&gt; အရောင်ပြောင်းပြန်ပြုလုပ်ခြင်းသည် အက်ပ်အားလုံးတွင် အလုပ်လုပ်သည်&lt;/li&gt; &lt;li&gt; နောက်ခံအမှောင်ပြရန်အတွက် ၎င်းအစား ‘အမှောင်’ နောက်ခံကို သုံးနိုင်သည်&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"အလိုအလျောက်ကလစ် (စောင့်ဆိုင်းချိန်)"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"အလိုအလျောက်ကလစ် (စောင့်ဆိုင်းချိန်) အကြောင်း"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"အလိုအလျောက်ကလစ် (စောင့်ဆိုင်းချိန်) အကြောင်း ပိုမိုလေ့လာရန်"</string>
     <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"ကာဆာလှုပ်ရှားမှုရပ်သည့် အချိန်အပိုင်းအခြားတစ်ခုတွင် ချိတ်ဆက်ထားသည့်မောက်စ်ကို အလိုအလျောက်နှိပ်ရန် သတ်မှတ်နိုင်သည်"</string>
     <string name="accessibility_autoclick_description" msgid="6695732131412361101">"အော်တိုနှိပ်ခြင်းသည် မောက်စ်နှိပ်ရန် အခက်တွေ့ချိန်၌ အသုံးဝင်နိုင်သည်"</string>
     <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"အော်တိုနှိပ်ခြင်း ပိတ်ထားသည်"</string>
@@ -2625,7 +2625,7 @@
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"မည်သည့် ဝန်ဆောင်မှုကိုမျှ ရွေးမထားပါ"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"မည်သည့်အကြောင်းအရာမှမရှိပါ"</string>
     <string name="settings_button" msgid="2195468788019730377">"ဆက်တင်များ"</string>
-    <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"အလင်းသိမ်မွေ့မှု၊ အလင်းကြောက်ခြင်း၊ မှောင်သည့် အပြင်အဆင်၊ ခေါင်းတစ်ခြမ်းကိုက်ခြင်း၊ ခေါင်းကိုက်ခြင်း၊ စာဖတ်မုဒ်၊ ညသုံးမုဒ်၊ တောက်ပမှုကို လျှော့ခြင်း၊ အဖြူရောင်အမှတ်"</string>
+    <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"အလင်းသိမ်မွေ့မှု၊ အလင်းကြောက်ခြင်း၊ အမှောင်နောက်ခံ၊ ခေါင်းတစ်ခြမ်းကိုက်ခြင်း၊ ခေါင်းကိုက်ခြင်း၊ စာဖတ်မုဒ်၊ ညသုံးမုဒ်၊ တောက်ပမှုကို လျှော့ခြင်း၊ အဖြူရောင်အမှတ်"</string>
     <string name="keywords_accessibility" msgid="4263443239404659143">"အသုံးပြုရလွယ်ခြင်း၊ သုံးလွယ်ခြင်း၊ အကူအညီ၊ ကူညီပေးသော"</string>
     <string name="keywords_magnification" msgid="3908145308269840862">"ဝင်းဒိုးမှန်ဘီလူး၊ ဇူးမ်၊ ချဲ့ခြင်း၊ အမြင်အာရုံချို့တဲ့ခြင်း၊ ပုံကြီးချဲ့ခြင်း၊ ပိုကြီးအောင်လုပ်ခြင်း"</string>
     <string name="keywords_talkback" msgid="2816435437095102527"></string>
@@ -2696,14 +2696,14 @@
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"အကန့်အသတ်မဲ့"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"ပိုကောင်းအောင်လုပ်ရန်"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"ကန့်သတ်ရန်"</string>
-    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"ကန့်သတ်ချက်များမရှိဘဲ ဘက်ထရီ အသုံးပြုမှုကို နောက်ခံတွင် ခွင့်ပြုသည်။ ဘက်ထရီ ပိုသုံးနိုင်သည်။"</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"နောက်ခံတွင် ဘက်ထရီကို အကန့်အသတ်မရှိ သုံးခွင့်ပြုသည်။ ဘက်ထရီ ပိုသုံးနိုင်သည်။"</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"သင်၏အသုံးပြုမှုပေါ် အခြေခံ၍ ပိုကောင်းအောင်လုပ်သည်။ အက်ပ်အများစုအတွက် အကြံပြုထားသည်။"</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"နောက်ခံတွင်ရှိနေစဉ် ဘက်ထရီ အသုံးပြုမှုကို ကန့်သတ်သည်။ အက်ပ်သည် မျှော်မှန်းထားသည့်အတိုင်း အလုပ်မလုပ်နိုင်ပါ။ အကြောင်းကြားချက်များ ကြန့်ကြာနိုင်ပါသည်။"</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"အက်ပ်၏ဘက်ထရီအသုံးပြုပုံကို ပြောင်းခြင်းက ၎င်း၏စွမ်းဆောင်ရည်အပေါ် သက်ရောက်မှုရှိနိုင်သည်။"</string>
     <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"ဤအက်ပ်သည် <xliff:g id="STATE">%1$s</xliff:g> ဘက်ထရီ အသုံးပြုမှု လိုအပ်သည်။"</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"အကန့်အသတ်မဲ့"</string>
     <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"သင့်မြတ်အောင်ဆောင်ရွက်ထားသော"</string>
-    <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"ဘက်ထရီ အသုံးပြုမှုဆိုင်ရာ ရွေးချယ်စရာများအကြောင်း ပိုမိုလေ့လာပါ"</string>
+    <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"ဘက်ထရီ အသုံးပြုမှုဆိုင်ရာ ရွေးချယ်စရာများအကြောင်း ပိုမိုလေ့လာရန်"</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"အားအပြည့်သွင်းကတည်းက မျက်နှာပြင်သုံးမှု"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"အားအပြည့်သွင်းပြီးသည့် အချိန်မှစ၍ ဘက်ထရီအသုံးပြုမှု"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"အားအပြည့်သွင်းပြီးသည့် အချိန်မှစ၍ မျက်နှာပြင်ကို ဖွင့်ထားသောအချိန်"</string>
@@ -2839,7 +2839,7 @@
     <string name="power_cell" msgid="7793805106954398186">"မိုဘိုင်းကွန်ရက်"</string>
     <string name="power_phone" msgid="2768396619208561670">"အသံဖြင့်ခေါ်ဆိုမှုများ"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"တက်ဘလက်အားမသုံးသည့်အခါ"</string>
-    <string name="power_idle" product="default" msgid="9132502722499465252">"ဖုန်း မသုံးသည့်အခါ"</string>
+    <string name="power_idle" product="default" msgid="9132502722499465252">"ဖုန်းအသုံးမပြုခြင်း"</string>
     <string name="power_unaccounted" msgid="2160811497426475703">"အထွေထွေ အကြောင်းအရာများ"</string>
     <string name="power_overcounted" msgid="3681101460287472876">"အပိုရေတွက်မှု"</string>
     <string name="usage_type_cpu" msgid="8544148642836549011">"စုစုပေါင်းCPU"</string>
@@ -2907,7 +2907,7 @@
     <string name="battery_detail_info_title" msgid="5896661833554333683">"အားဖြည့်ပြီးချိန်ကတည်းက"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"ဘက်ထရီအသုံးပြုမှုကို စီမံခန့်ခွဲရန်"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"စုစုပေါင်း <xliff:g id="TIME_0">^1</xliff:g> • နောက်ဆုံးအကြိမ် အားအပြည့်သွင်းပြီးနောက်\nနောက်ခံအချိန်က <xliff:g id="TIME_1">^2</xliff:g> ရှိသည်"</string>
-    <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"စုစုပေါင်း <xliff:g id="TIME_0">^1</xliff:g> • ပြီးခဲ့သော ၂၄ နာရီအတွက်\nနောက်ခံအချိန်က <xliff:g id="TIME_1">^2</xliff:g> ရှိသည်"</string>
+    <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"စုစုပေါင်း <xliff:g id="TIME_0">^1</xliff:g> • ပြီးခဲ့သော ၂၄ နာရီအတွင်း\nနောက်ခံအချိန်က <xliff:g id="TIME_1">^2</xliff:g> ရှိသည်"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"စုစုပေါင်း <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_PERIOD">^3</xliff:g> အတွက်\nနောက်ခံအချိန်က <xliff:g id="TIME_1">^2</xliff:g> ရှိသည်"</string>
     <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"နောက်ဆုံးအကြိမ် အားအပြည့်သွင်းပြီးနောက် စုစုပေါင်းက တစ်မိနစ်အောက် ရှိသည်"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"ပြီးခဲ့သော ၂၄ နာရီအတွင်း စုစုပေါင်း တစ်မိနစ်အောက် ရှိသည်"</string>
@@ -2919,13 +2919,13 @@
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"ပြီးခဲ့သော ၂၄ နာရီအတွင်း စုစုပေါင်း <xliff:g id="TIME">^1</xliff:g> ရှိသည်"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_PERIOD">^2</xliff:g> အတွက် စုစုပေါင်းက <xliff:g id="TIME_0">^1</xliff:g> ရှိသည်"</string>
     <string name="battery_bg_usage" msgid="548670902301883980">"နောက်ဆုံးအကြိမ် အားအပြည့်သွင်းပြီးနောက် နောက်ခံအချိန်က <xliff:g id="TIME">^1</xliff:g> ရှိသည်"</string>
-    <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"ပြီးခဲ့သော ၂၄ နာရီအတွက် နောက်ခံအချိန်က <xliff:g id="TIME">^1</xliff:g> ရှိသည်"</string>
+    <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"ပြီးခဲ့သော ၂၄ နာရီအတွင်း နောက်ခံအချိန်က <xliff:g id="TIME">^1</xliff:g> ရှိသည်"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_PERIOD">^2</xliff:g> အတွက် နောက်ခံအချိန်က <xliff:g id="TIME_0">^1</xliff:g> ရှိသည်"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"စုစုပေါင်း <xliff:g id="TIME">^1</xliff:g> • နောက်ဆုံးအကြိမ် အားအပြည့်သွင်းပြီးနောက်\nနောက်ခံအချိန်က တစ်မိနစ်အောက် ရှိသည်"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"စုစုပေါင်း <xliff:g id="TIME">^1</xliff:g> • ပြီးခဲ့သော ၂၄ နာရီအတွက်\nနောက်ခံအချိန်က တစ်မိနစ်အောက် ရှိသည်"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"စုစုပေါင်း <xliff:g id="TIME">^1</xliff:g> • ပြီးခဲ့သော ၂၄ နာရီအတွင်း\nနောက်ခံအချိန်က တစ်မိနစ်အောက် ရှိသည်"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"စုစုပေါင်း <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_PERIOD">^2</xliff:g> အတွက်\nနောက်ခံအချိန်က တစ်မိနစ်အောက် ရှိသည်"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"နောက်ဆုံးအကြိမ် အားအပြည့်သွင်းပြီးနောက် အသုံးပြုမှု မရှိပါ"</string>
-    <string name="battery_not_usage_24hr" msgid="8397519536160741248">"ပြီးခဲ့သော ၂၄ နာရီအတွက် အသုံးပြုမှု မရှိပါ"</string>
+    <string name="battery_not_usage_24hr" msgid="8397519536160741248">"ပြီးခဲ့သော ၂၄ နာရီအတွင်း အသုံးပြုမှု မရှိပါ"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"ဘက်ထရီလက်ကျန်ခန့်မှန်းချက်သည် သင့်စက်၏ အသုံးပြုမှုအပေါ် အခြေခံပါသည်"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"ခန့်မှန်း ကျန်ရှိချိန်"</string>
@@ -2963,7 +2963,7 @@
     <string name="battery_percentage" msgid="1779934245963043490">"ဘက်ထရီ ရာခိုင်နှုန်း"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"ဘက်ထရီ ရာခိုင်နှုန်းကို အခြေအနေဘားတန်းတွင် ပြသပါသည်"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"ပြီးခဲ့သော ၂၄ နာရီအတွင်း ဘက်ထရီအား"</string>
-    <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"ပြီးခဲ့သော ၂၄ နာရီအတွက် အက်ပ်အသုံးပြုမှု"</string>
+    <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"ပြီးခဲ့သော ၂၄ နာရီအတွင်း အက်ပ်အသုံးပြုမှု"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"ပြီးခဲ့သော ၂၄ နာရီအတွင်း စနစ်အသုံးပြုမှု"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"<xliff:g id="SLOT">%s</xliff:g> အတွက် စနစ်အသုံးပြုမှု"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"<xliff:g id="SLOT">%s</xliff:g> အတွက် အက်ပ်အသုံးပြုမှု"</string>
@@ -3064,7 +3064,7 @@
     <string name="cert_not_installed" msgid="6725137773549974522">"အသိအမှတ်ပြုလက်မှတ်ကို ထည့်သွင်းမထားပါ"</string>
     <string name="request_manage_credentials_title" msgid="596805634568013413">"ဤစက်တွင် အသိအမှတ်ပြုလက်မှတ်များ ထည့်သွင်းရန် "<b>"<xliff:g id="APP_NAME">^1</xliff:g>"</b>" ကို ခွင့်ပြုမလား။"</string>
     <string name="request_manage_credentials_description" msgid="8044839857171509619">"ဤအသိအမှတ်ပြုလက်မှတ်များက သင့်စက်၏ သီးသန့် ID ကို အောက်ပါ အက်ပ်နှင့် URL များနှင့် မျှဝေခြင်းဖြင့် သင့်ကို စိစစ်ပါမည်"</string>
-    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"ခွင့်မပြုရန်"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"ခွင့်မပြုပါ"</string>
     <string name="request_manage_credentials_allow" msgid="4910940118408348245">"ခွင့်ပြုရန်"</string>
     <string name="request_manage_credentials_more" msgid="6101210283534101582">"ပိုပြပါ"</string>
     <string name="certificate_management_app" msgid="8086699498358080826">"အသိအမှတ်ပြုလက်မှတ် စီမံခန့်ခွဲသည့်အက်ပ်"</string>
@@ -3340,7 +3340,7 @@
     <string name="trusted_credentials_user_tab" msgid="4978365619630094339">"အသုံးပြုသူ"</string>
     <string name="trusted_credentials_disable_label" msgid="6649583220519447947">"ပိတ်ထားရန်"</string>
     <string name="trusted_credentials_enable_label" msgid="5551204878588237991">"ရနိုင်သည်"</string>
-    <string name="trusted_credentials_remove_label" msgid="8296330919329489422">"ဖယ်ရှားရန်"</string>
+    <string name="trusted_credentials_remove_label" msgid="8296330919329489422">"ဖြုတ်ရန်"</string>
     <string name="trusted_credentials_trust_label" msgid="4841047312274452474">"ယုံကြည်ပါ"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"စနစ်၏CA လက်မှတ်အား ဖွင့်ထားမလား?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"စနစ်၏CA လက်မှတ်အား ပိတ်ထားမည်"</string>
@@ -3653,7 +3653,7 @@
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"အမှတ်စဉ်၊ ဟာ့ဒ်ဝဲ ဗားရှင်း"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"android လုံခြုံရေး ပက်ချ် အဆင့်၊ baseband ဗားရှင်း၊ kernel ဗားရှင်း"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"အပြင်အဆင်၊ အလင်း၊ အမှောင်၊ မုဒ်၊ အလင်းသိမ်မွေ့မှု၊ အလင်းကြောက်ခြင်း၊ ပိုမှောင်အောင်လုပ်ခြင်း၊ မှောင်မည်းလာခြင်း၊ အမှောင်မုဒ်၊ ခေါင်းတစ်ခြမ်းကိုက်ခြင်း"</string>
-    <string name="keywords_systemui_theme" msgid="6341194275296707801">"မှောင်သည့် အပြင်အဆင်"</string>
+    <string name="keywords_systemui_theme" msgid="6341194275296707801">"အမှောင်နောက်ခံ"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"ချွတ်ယွင်းမှု"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"ဝန်းကျင် ပြကွက်၊ လော့ခ်မျက်နှာပြင် ပြကွက်"</string>
     <string name="keywords_lock_screen_notif" msgid="6363144436467429932">"လော့ခ်မျက်နှာပြင် အကြောင်းကြားချက်များ၊ အကြောင်းကြားချက်များ"</string>
@@ -3917,7 +3917,7 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="2068738866725616212">"ဆွဲချစာရင်း၊ အခြေအနေပြဘားတန်းနှင့် လော့ခ်မျက်နှာပြင်တွင် ပြပါ"</string>
     <string name="silent_notifications_status_bar" msgid="6113307620588767516">"အခြေအနေပြဘားရှိ အသံတိတ် အကြောင်းကြားချက်ကို ဖျောက်ပါ"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"မီး မှိတ်တုတ်မှိတ်တုတ်လုပ်ပါ"</string>
-    <string name="lock_screen_notifications_title" msgid="2876323153692406203">"ကန့်သတ်ဆက်တင်"</string>
+    <string name="lock_screen_notifications_title" msgid="2876323153692406203">"ကိုယ်ရေးအချက်အလက်လုံခြုံမှု"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"လော့ခ်မျက်နှာပြင် ကျော်ရန်"</string>
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"လော့ခ်ဖွင့်ပြီးပါက နောက်ဆုံးသုံးခဲ့သည့် ဖန်သားပြင်သို့ တန်းသွားပါ"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"လော့ခ်မျက်နှာပြင်၊ လော့ခ်ချမျက်နှာပြင်၊ ကျော်ရန်"</string>
@@ -3925,12 +3925,12 @@
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"လော့ခ်ချထားချိန် အသိပေးချက်"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"စကားဝိုင်း၊ မူရင်းနှင့် အသံတိတ် အကြောင်းကြားချက်များ ပြသည်"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"စကားဝိုင်း၊ မူရင်း၊ အသံတိတ် အကြောင်းကြားချက်အားလုံး ပြရန်"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"အရေးကြီးသော အကြောင်းကြားချက်များ ပြရန်"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"စကားဝိုင်းနှင့် အကြောင်းကြားချက်သင်္ကေတများ ဖျောက်ရန်"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"အကြောင်းကြားချက်များ မပြပါနှင့်"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"အရေးကြီးသည့် အကြောင်းကြားချက်များ"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"လော့ခ်ချထားစဉ် အရေးကြီးသည့် အကြောင်းအရာကို ပြရန်"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"လော့ခ်ချထားစဉ် သတိထားရမည့် အကြောင်းအရာကို ပြရန်"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"အရေးကြီးသည့် အလုပ်ပရိုဖိုင် အကြောင်းကြားချက်များ"</string>
-    <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"လော့ခ်ချထားစဉ် အရေးကြီးသည့် အလုပ်ပရိုဖိုင် အကြောင်းအရာကို ပြရန်"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"လော့ခ်ချထားစဉ် သတိထားရမည့် အလုပ်ပရိုဖိုင် အကြောင်းအရာကို ပြရန်"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"အကြောင်းကြားချက်ပါ အရာအားလုံး ပြပါ"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"သတိထားရသော အကြောင်းအရာကို လော့ခ်ဖွင့်မှသာ ပြပါ"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"အကြောင်းကြားချက်များ လုံးဝမပြပါနှင့်"</string>
@@ -4372,7 +4372,7 @@
     <string name="app_launch_supported_links_add" msgid="3271247750388016131">"ထည့်ရန်"</string>
     <string name="app_launch_supported_links_subtext" msgid="4268004019469184113">"<xliff:g id="APP_LABEL">%s</xliff:g> တွင် ဖွင့်သည်"</string>
     <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>ထဲတွင် <xliff:g id="SIZE">%1$s</xliff:g>သုံးထားသည်"</string>
-    <string name="storage_type_internal" msgid="979243131665635278">"စက်အတွင်းသိမ်းဆည်းရန်နေရာ"</string>
+    <string name="storage_type_internal" msgid="979243131665635278">"စက်တွင်းသိုလှောင်ခန်း"</string>
     <string name="storage_type_external" msgid="125078274000280821">"ပြင်ပသိုလှောင်ခန်း"</string>
     <string name="data_summary_format" msgid="8802057788950096650">"<xliff:g id="DATE">%2$s</xliff:g> မှစ၍ <xliff:g id="SIZE">%1$s</xliff:g> အသုံးပြုခဲ့သည်။"</string>
     <string name="storage_used" msgid="2591194906751432725">"အသုံးပြုပြီး သိုလှောင်ရုံ"</string>
@@ -4445,7 +4445,7 @@
       <item quantity="other">အက်ပ် <xliff:g id="COUNT">%d</xliff:g> ခုသည် ပံ့ပိုးထားသော လင့်ခ်များကို ဖွင့်နေသည်</item>
       <item quantity="one">အက်ပ်တစ်ခုသည် ပံ့ပိုးထားသော လင့်ခ်များကို ဖွင့်နေသည်</item>
     </plurals>
-    <string name="app_link_open_always" msgid="9167065494930657503">"ပံ့ပိုးထားသောလင့်ခ်များ ဖွင့်ရန် အက်ပ်ကို ခွင့်ပြုပါ"</string>
+    <string name="app_link_open_always" msgid="9167065494930657503">"ပံ့ပိုးထားသောလင့်ခ်များ ဖွင့်ရန် အက်ပ်ကို ခွင့်ပြုသည်"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"အမြဲမေးရန်"</string>
     <string name="app_link_open_never" msgid="5299808605386052350">"လင့်ခ်ကို ဖွင့်ရန် အက်ပ်အား ခွင့်မပြုပါ"</string>
     <plurals name="app_link_open_always_summary" formatted="false" msgid="1816161439007251694">
@@ -4508,7 +4508,7 @@
     <string name="battery_summary" msgid="2491764359695671207">"နောက်ဆုံးအကြိမ် အားအပြည့်သွင်းပြီးနောက် <xliff:g id="PERCENTAGE">%1$s</xliff:g> အသုံးပြုထားပါသည်"</string>
     <string name="battery_summary_24hr" msgid="7656033283282656551">"ပြီးခဲ့သော ၂၄ နာရီအတွက် <xliff:g id="PERCENTAGE">%1$s</xliff:g> ရာခိုင်နှုန်း အသုံးပြုသည်"</string>
     <string name="no_battery_summary" msgid="5769159953384122003">"နောက်ဆုံးအကြိမ် အားအပြည့်သွင်းပြီးကတည်းက ဘက်ထရီမသုံးပါ"</string>
-    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"ပြီးခဲ့သော ၂၄ နာရီအတွက် ဘက်ထရီ အသုံးပြုမှု မရှိပါ"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"ပြီးခဲ့သော ၂၄ နာရီအတွင်း ဘက်ထရီ အသုံးပြုမှု မရှိပါ"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"အက်ပ်ဆက်တင်များ"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"SystemUI Tuner ပြရန်"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"ထပ်တိုး ခွင့်ပြုချက်များ"</string>
@@ -4664,7 +4664,7 @@
     <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> သုံးထား - <xliff:g id="FREE_SPACE">%2$s</xliff:g> လွတ်"</string>
     <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"စက်တွင်းသိုလှောင်ခန်း− <xliff:g id="PERCENTAGE">%1$s</xliff:g> ကို အသုံးပြုထားပြီး - <xliff:g id="FREE_SPACE">%2$s</xliff:g> လွတ်နေပါသည်"</string>
     <string name="display_summary" msgid="5526061030874717172">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ကြာမျှ လှုပ်ရှားမှုမရှိလျှင် ပိတ်လိုက်ပါ"</string>
-    <string name="display_dashboard_summary" msgid="1599453894989339454">"မှောင်သည့် အပြင်အဆင်၊ ဖောင့်အရွယ်အစား၊ တောက်ပမှု"</string>
+    <string name="display_dashboard_summary" msgid="1599453894989339454">"အမှောင်နောက်ခံ၊ ဖောင့်အရွယ်အစား၊ တောက်ပမှု"</string>
     <string name="display_summary_example" msgid="4275121979039344438">"၁၀ မိနစ်ကြာမျှ လှုပ်ရှားမှုမရှိလျှင် ပိတ်လိုက်ပါ"</string>
     <string name="memory_summary" msgid="8221954450951651735">"မှတ်ဉာဏ် <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> မှ ပျှမ်းမျှ <xliff:g id="USED_MEMORY">%1$s</xliff:g> ကိုသုံးထားသည်"</string>
     <string name="users_summary" msgid="8473589474976307510">"<xliff:g id="USER_NAME">%1$s</xliff:g> အဖြစ် လက်မှတ်ထိုးဝင်ထားသည်"</string>
@@ -4874,12 +4874,12 @@
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"<xliff:g id="ID_1">%1$s</xliff:g> နှင့် ချိတ်ဆက်ထားပါသည်"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"စက်ပစ္စည်းအများအပြားနှင့် ချိတ်ဆက်ထားပါသည်"</string>
     <string name="demo_mode" msgid="6566167465451386728">"စနစ် UI သရုပ်ပြမုဒ်"</string>
-    <string name="dark_ui_mode" msgid="898146394425795281">"မှောင်သည့် အပြင်အဆင်"</string>
+    <string name="dark_ui_mode" msgid="898146394425795281">"အမှောင်နောက်ခံ"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"\'ဘက်ထရီအားထိန်း\' ကြောင့် ယာယီပိတ်ထားသည်"</string>
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"‘ဘက်ထရီ အားထိန်း’ ကြောင့် ယာယီပိတ်ထားသည်"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"ဘက်ထရီ အားထိန်း ပိတ်ရန်"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"\'ဘက်ထရီအားထိန်း\' ကြောင့် ယာယီဖွင့်ထားသည်"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"အမှောင်ဖြင့် စမ်းကြည့်ပါ"</string>
+    <string name="dark_theme_slice_title" msgid="4684222119481114062">"အမှောင်နောက်ခံ စမ်းကြည့်ပါ"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"ဘက်ထရီသက်တမ်း ပိုတိုးစေသည်"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"ဆော့ဖ်ဝဲရေးသူ အကွက်များ အမြန်သတ်မှတ်ခြင်း"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Adb ခွင့်ပြုချက် အချိန်ကုန်သွားခြင်းကို ပိတ်ရန်"</string>
@@ -5655,7 +5655,7 @@
     <string name="category_name_display_controls" msgid="7046581691184725216">"အခြား ဖန်သားပြင်ထိန်းချုပ်မှုများ"</string>
     <string name="category_name_others" msgid="2366006298768550310">"အခြား"</string>
     <string name="category_name_general" msgid="7737273712848115886">"အထွေထွေ"</string>
-    <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"မှောင်သည့်အပြင်အဆင် သုံးရန်"</string>
+    <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"အမှောင်နောက်ခံ သုံးရန်"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"ဘလူးတုသ်သုံးရန်"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"ဖုန်းသံမမြည်အောင်လုပ်ပါ"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Wi‑Fi ဟော့စပေါ့ကို သုံးခြင်း"</string>

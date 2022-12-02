@@ -27,6 +27,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
@@ -74,7 +75,9 @@ public class ScreenTimeoutPreferenceController extends BasePreferenceController 
     private CharSequence getTimeoutSummary(long maxTimeout) {
         final long currentTimeout = getCurrentScreenTimeout();
         final CharSequence description = getTimeoutDescription(currentTimeout, maxTimeout);
-        return mContext.getString(R.string.screen_timeout_summary, description);
+        return description == null ? mContext.getString(
+                R.string.screen_timeout_summary_not_set) : mContext.getString(
+                R.string.screen_timeout_summary, description);
     }
 
     private Long getMaxScreenTimeout() {
@@ -112,6 +115,7 @@ public class ScreenTimeoutPreferenceController extends BasePreferenceController 
                 SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE);
     }
 
+    @Nullable
     private CharSequence getTimeoutDescription(long currentTimeout, long maxTimeout) {
         if (currentTimeout < 0 || mTimeoutEntries == null || mTimeoutValues == null
                 || mTimeoutValues.length != mTimeoutEntries.length) {
@@ -127,6 +131,7 @@ public class ScreenTimeoutPreferenceController extends BasePreferenceController 
         }
     }
 
+    @Nullable
     private CharSequence getCurrentTimeout(long currentTimeout) {
         for (int i = 0; i < mTimeoutValues.length; i++) {
             if (currentTimeout == Long.parseLong(mTimeoutValues[i].toString())) {
@@ -136,6 +141,7 @@ public class ScreenTimeoutPreferenceController extends BasePreferenceController 
         return null;
     }
 
+    @Nullable
     private CharSequence getLargestTimeout(long maxTimeout) {
         CharSequence largestTimeout = null;
         // The list of timeouts is sorted
