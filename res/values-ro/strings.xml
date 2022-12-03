@@ -23,6 +23,7 @@
     <string name="deny" msgid="7326117222944479942">"Refuză"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"Activează"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Necunoscut"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"Atinge pentru a afișa informații"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="few">Mai ai <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> pași pentru a deveni dezvoltator.</item>
       <item quantity="other">Mai ai <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> de pași pentru a deveni dezvoltator.</item>
@@ -140,7 +141,8 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Solicitarea accesului la mesaje"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"%1$s dorește să-ți acceseze mesajele. Oferi acces pentru %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="473439406287008397">"Solicitare de acces la SIM"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> dorește să acceseze cardul SIM. Dacă acorzi accesul la cardul SIM, conexiunea de date de pe dispozitiv va fi dezactivată pe durata conectării. Acordă accesul pentru <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
+    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (6194086753523415820) -->
+    <skip />
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Vizibil ca „<xliff:g id="DEVICE_NAME">^1</xliff:g>” pentru alte dispozitive"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Activează Bluetooth ca să te conectezi la alte dispozitive."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Dispozitivele tale"</string>
@@ -339,7 +341,8 @@
     <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"Dispozitivul nu este criptat"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Ecran de blocare"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Ce se afișează"</string>
-    <string name="security_settings_summary" msgid="1627059516127354233">"Setează Locația mea, deblocarea ecranului, blocarea cardului SIM, blocarea stocării acreditărilor"</string>
+    <!-- no translation found for security_settings_summary (4248337854143139822) -->
+    <skip />
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"Setează Locația mea, deblocarea ecranului, blocarea stocării acreditărilor"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"Confidențialitate"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Indisponibil"</string>
@@ -1452,6 +1455,7 @@
     <string name="screen_timeout" msgid="7709947617767439410">"Durată până la dezactivarea ecranului"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Ecranul se dezactivează"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"După <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactivitate"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Nesetate"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Imagine de fundal"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Imagine de fundal și stil"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Ecran de pornire, ecran de blocare"</string>
@@ -1485,20 +1489,21 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Text aldin"</string>
     <string name="title_font_size" msgid="570613010306330622">"Dimensiunea fontului"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Mărește sau micșorează texul"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"Setări de blocare a cardului SIM"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"Blocare card SIM"</string>
+    <string name="sim_lock_settings" msgid="7331982427303002613">"Setări de restricționare pentru SIM"</string>
+    <string name="sim_lock_settings_category" msgid="6475255139493877786">"Restricționarea cartelei SIM"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Dezactivat"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"Blocat"</string>
-    <string name="sim_lock_settings_title" msgid="1401619059761012696">"Blocare card SIM"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"Blochează cardul SIM"</string>
+    <!-- no translation found for sim_lock_settings_title (3596566201762038857) -->
+    <skip />
+    <string name="sim_pin_toggle" msgid="6814489621760857328">"Blochează cartela SIM"</string>
     <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"Utilizarea tabletei necesită un cod PIN"</string>
     <string name="sim_lock_on" product="default" msgid="3303147192981388923">"Solicită codul PIN pentru utilizarea telefonului"</string>
     <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"Utilizarea tabletei necesită un cod PIN"</string>
     <string name="sim_lock_off" product="default" msgid="4634118006847137785">"Cod PIN necesar pt. a utiliza telefonul"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"Schimbă codul PIN pentru SIM"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"PIN SIM"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Blochează cardul SIM"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"Deblochează cardul SIM"</string>
+    <string name="sim_enable_sim_lock" msgid="6486354334679225748">"Blochează cartela SIM"</string>
+    <string name="sim_disable_sim_lock" msgid="6939439812841857306">"Deblochează cartela SIM"</string>
     <string name="sim_enter_old" msgid="6882545610939674813">"Vechiul cod PIN al cardului SIM"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"Nou cod PIN pentru SIM"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Reintrodu noul PIN"</string>
@@ -1507,7 +1512,8 @@
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"Codurile PIN nu corespund"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Nu se poate schimba codul PIN.\nCodul PIN poate fi incorect."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"Codul PIN pentru SIM a fost modificat"</string>
-    <string name="sim_lock_failed" msgid="16360418201678317">"Nu se poate modifica starea de blocare a cardului SIM.\nCodul PIN poate fi incorect."</string>
+    <!-- no translation found for sim_lock_failed (2088257523501265954) -->
+    <skip />
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"Nu se poate dezactiva codul PIN."</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"Nu se poate activa codul PIN."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"OK"</string>
@@ -1517,7 +1523,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Folosești <xliff:g id="CARRIER">%1$s</xliff:g> pentru date mobile?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Folosești <xliff:g id="CARRIER2_0">%2$s</xliff:g> pentru datele mobile. Când comuți la <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> nu va mai fi folosit pentru date mobile."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Folosește <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"Actualizezi cardul SIM preferat?"</string>
+    <string name="sim_preferred_title" msgid="8850185380445309835">"Actualizezi SIM-ul preferat?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> este singurul card SIM de pe dispozitiv. Vrei să folosești acest card SIM pentru date mobile, apeluri și mesaje SMS?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Codul PIN pentru cardul SIM este incorect. Contactează operatorul pentru a-ți debloca dispozitivul."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1783,17 +1789,17 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Resetați Wi-Fi, date mobile și Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Astfel, toate setările pentru rețea vor fi reinițializate, inclusiv:\n\n"<li>"Wi‑Fi,"</li>\n<li>"date mobile,"</li>\n<li>"Bluetooth."</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Șterge"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Șterge SIM-urile descărcate"</string>
+    <string name="reset_esim_title" msgid="4194570573425902754">"Șterge cartelele eSIM"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"Acest lucru nu va anula niciun abonament de servicii mobile. Pentru a descărca SIM-uri de înlocuire, contactează operatorul."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Resetează opțiunile"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Restabilește toate setările pentru rețea? Nu poți anula această acțiune."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Resetează toate setările pentru rețea și șterge SIM-urile descărcate? Nu poți anula această acțiune."</string>
+    <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"Resetezi toate setările de rețea și ștergi cartelele eSIM? Nu poți anula această acțiune."</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Resetează setările"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Resetezi?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Resetarea rețelei nu este disponibilă pentru acest utilizator"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Setările pentru rețea au fost reinițializate"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Nu se pot șterge SIM-urile"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"SIM-urile descărcate nu pot fi șterse din cauza unei erori.\n\nReporniți dispozitivul și încercați din nou."</string>
+    <string name="reset_esim_error_msg" msgid="7279607120606365250">"Cartelele eSIM nu se pot șterge din cauza unei erori.\n\nRepornește dispozitivul și încearcă din nou."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Șterge datele (revino la setările din fabrică)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Șterge datele (revino la setările din fabrică)"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Această acțiune va șterge toate datele din "<b>"memoria internă"</b>" a tabletei, inclusiv:\n\n"<li>"Contul tău Google,"</li>\n<li>"datele și setările sistemului și ale aplicațiilor,"</li>\n<li>"aplicațiile descărcate."</li></string>
@@ -3241,7 +3247,8 @@
     <string name="data_usage_menu_hide_ethernet" msgid="7792365022467586772">"Ascunde utilizare Ethernet"</string>
     <string name="data_usage_menu_metered" msgid="4279260736172851951">"Restricții de rețea"</string>
     <string name="data_usage_menu_auto_sync" msgid="2632694000068175025">"Sincronizează automat datele"</string>
-    <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"Carduri SIM"</string>
+    <!-- no translation found for data_usage_menu_sim_cards (2827882471528568628) -->
+    <skip />
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"Întreruptă la limită"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Sincronizează automat datele"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sincron. auto. date personale"</string>
@@ -3565,10 +3572,12 @@
     <string name="wizard_next" msgid="3884832431439072471">"Înainte"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Finalizează"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_setup_wizard_title" msgid="3945520353564138219">"Carduri SIM"</string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"Carduri SIM"</string>
+    <!-- no translation found for sim_setup_wizard_title (7030639256610746768) -->
+    <skip />
+    <string name="sim_settings_title" msgid="2254609719033946272">"Cartele SIM"</string>
     <string name="sim_settings_summary" msgid="5777472623476930332">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
-    <string name="sim_cards_changed_message" msgid="7726897488921853655">"Cardurile SIM s-au modificat"</string>
+    <!-- no translation found for sim_cards_changed_message (7374776581857835134) -->
+    <skip />
     <string name="sim_cards_changed_message_summary" msgid="7338082681445213621">"Atinge pentru a seta activitățile"</string>
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Datele mobile sunt indisponibile"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Atinge pentru a selecta un card SIM de date"</string>
@@ -3580,7 +3589,8 @@
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Când comuți la <xliff:g id="NEW_SIM">%1$s</xliff:g>, <xliff:g id="OLD_SIM">%2$s</xliff:g> nu va mai fi folosit pentru date mobile."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Folosește <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Apelează de pe"</string>
-    <string name="sim_select_card" msgid="1226182454109919045">"Selectează un card SIM"</string>
+    <!-- no translation found for sim_select_card (2975707305270216652) -->
+    <skip />
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_editor_name" msgid="5900178038499314621">"Numele cardului SIM"</string>
     <string name="sim_name_hint" msgid="8231524869124193119">"Introdu numele cardului SIM"</string>
@@ -3588,7 +3598,8 @@
     <string name="sim_editor_carrier" msgid="2424593350691002557">"Operator"</string>
     <string name="sim_editor_number" msgid="3209002966895156006">"Număr"</string>
     <string name="sim_editor_color" msgid="9067029630083892961">"Culoarea cardului SIM"</string>
-    <string name="sim_card_select_title" msgid="8146523005929848793">"Selectează cardul SIM"</string>
+    <!-- no translation found for sim_card_select_title (8387396377407327067) -->
+    <skip />
     <string name="color_orange" msgid="216547825489739010">"Portocaliu"</string>
     <string name="color_purple" msgid="6603701972079904843">"Violet"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"Nu a fost introdus niciun card SIM"</string>
@@ -3602,7 +3613,7 @@
     <string name="preferred_network_offload_footer" msgid="374984523082849648">"Dezactivarea trimiterii numelui rețelei împiedică utilizatorii terță parte să acceseze info. de rețea."</string>
     <string name="preferred_network_offload_popup" msgid="3949937898807213370">"Dezactivarea trimiterii numelui rețelei împiedică conectarea automată la rețele ascunse."</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"Cardurile SIM au fost schimbate."</string>
+    <string name="sim_notification_title" msgid="2819551384383504031">"Cartelele SIM s-au schimbat."</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Atinge pentru a configura"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Întreabă de fiecare dată"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Selectează o opțiune"</string>
@@ -4366,7 +4377,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Solicită parola înainte de a anula fixarea"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Blochează dispozitivul la anularea fixării"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Confirmă ștergerea profilului SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Confirmă-ți identitatea înainte de a șterge un profil SIM descărcat"</string>
+    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Confirmă-ți identitatea înainte să ștergi un eSIM"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Acest profil de serviciu este gestionat de:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Gestionat de <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Experimental)"</string>
@@ -5348,7 +5359,8 @@
     <string name="empty_networks_list" msgid="6519489879480673428">"Nicio rețea găsită."</string>
     <string name="network_query_error" msgid="6406348372070035274">"Nu s-au găsit rețele. Încearcă din nou."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(interzisă)"</string>
-    <string name="no_sim_card" msgid="1497407489810953863">"Niciun card SIM"</string>
+    <!-- no translation found for no_sim_card (1478277597822967684) -->
+    <skip />
     <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
     <string name="wifi_no_sim_card" msgid="7144290066491585672">"Niciun card SIM"</string>
     <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Fără"</string>
@@ -5398,7 +5410,8 @@
     <string name="label_available" msgid="5305726869955838606">"Rețele disponibile"</string>
     <string name="load_networks_progress" msgid="4717874401621250401">"Se caută…"</string>
     <string name="register_on_network" msgid="2169662800750709709">"Se înregistrează pe <xliff:g id="NETWORK">%s</xliff:g>…"</string>
-    <string name="not_allowed" msgid="5756935665192962915">"Cardul tău SIM nu permite conexiunea la această rețea."</string>
+    <!-- no translation found for not_allowed (8969977039734782273) -->
+    <skip />
     <string name="connect_later" msgid="2330538069949281352">"Nu se poate efectua conectarea la această rețea chiar acum. Încearcă din nou mai târziu."</string>
     <string name="registration_done" msgid="1750434215698850123">"Înregistrat în rețea."</string>
     <string name="select_automatically" msgid="2419752566747259155">"Selectează automat rețeaua"</string>
@@ -5407,7 +5420,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Date mobile"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Accesează datele folosind rețeaua mobilă"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Telefonul va comuta automat la acest operator când se află în aria de acoperire"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Nu este disponibil niciun card SIM"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"Niciun SIM disponibil"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Preferință pentru apeluri"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Preferințe pentru SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Întreabă mereu"</string>
@@ -5429,8 +5442,8 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Adaugă mai multe"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Activ/SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Inactiv/SIM"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Activ / SIM descărcat"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Inactiv / SIM descărcat"</string>
+    <string name="mobile_network_active_esim" msgid="3984452275968408382">"Activ / eSIM"</string>
+    <string name="mobile_network_inactive_esim" msgid="8777415108263057939">"Inactiv / eSIM"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"Numele și culoarea cardului SIM"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Nume"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Culoare (folosită de aplicațiile compatibile)"</string>
@@ -5440,7 +5453,8 @@
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Pentru a dezactiva acest SIM, îndepărtează cardul SIM"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Atinge pentru a activa <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"Comuți la <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
-    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Doar un SIM descărcat poate fi activ odată.\n\nCând treci la <xliff:g id="CARRIER1">%1$s</xliff:g>, nu se anulează serviciul <xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
+    <!-- no translation found for mobile_network_esim_swap_confirm_body (592668232798598450) -->
+    <skip />
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"Comută la <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"Șterge SIM-ul"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"Nu se poate șterge SIM-ul"</string>
@@ -5475,7 +5489,7 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Folosești cardul SIM?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Folosești <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Doar un SIM poate fi activ odată.\n\nCând treci la <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, nu se anulează serviciul <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Doar un SIM descărcat poate fi activ odată.\n\nCând treci la <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, nu se anulează serviciul <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"Doar un eSIM poate fi activ la un moment dat.\n\nTrecerea la <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> nu va anula serviciul <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Doar un SIM poate fi activ odată.\n\nDacă faci această schimbare, nu se anulează serviciul <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Poți folosi două carduri SIM în același timp. Ca să folosești <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, dezactivează un alt SIM."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Treci la <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -5521,8 +5535,8 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> va fi folosit pentru date mobile, apeluri și SMS-uri."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Nu există carduri SIM disponibile"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Pentru a folosi datele mobile, funcțiile de apel și SMS-urile mai târziu, accesează setările pentru rețea"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"Card SIM"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Ștergi acest SIM descărcat?"</string>
+    <string name="sim_card_label" msgid="6263064316075963775">"SIM"</string>
+    <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Ștergi acest eSIM?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Dacă ștergi acest SIM, vei elimina serviciul <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> de pe acest dispozitiv.\n\nServiciile <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> nu vor fi anulate."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Șterge"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"Se șterge SIM-ul…"</string>
@@ -5708,8 +5722,8 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Permite ca Google Fi să folosească rețele W+ pentru a îmbunătăți viteza și acoperirea"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Rețea W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"SIM DESCĂRCAT"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"SIM-URI DESCĂRCATE"</string>
+    <string name="downloaded_sim_category_title" msgid="2876988650413179752">"eSIM"</string>
+    <string name="downloaded_sims_category_title" msgid="487799905978489922">"Cartele eSIM"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Activ"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Inactiv"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Prestabilit pentru <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5769,7 +5783,7 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Setări pentru apeluri"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Se actualizează setările…"</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Eroare în setările pentru apeluri"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Eroare de rețea sau de card SIM."</string>
+    <string name="smart_forwarding_failed_text" msgid="8682640643264071789">"Eroare de rețea sau de SIM."</string>
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"Cardul SIM nu este activat."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Introduceți numerele de telefon"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Introdu numărul de telefon"</string>
@@ -5794,10 +5808,10 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"Înapoi"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Înainte"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Previzualizarea culorii"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Solicitare de acces la cardul SIM"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Un dispozitiv solicită acces la cardul SIM. Atinge pentru detalii."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Permiți accesul la cardul SIM?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Un dispozitiv Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, solicită acces la datele de pe cardul SIM. Aici este inclusă agenda.\n\nDupă ce se conectează, <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> va primi toate apelurile primite la <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="7351015416346359536">"Solicitare de acces la SIM"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="8685623260103018309">"Un dispozitiv solicită acces la cartela SIM. Atinge pentru detalii."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="5616323725563125179">"Permiți accesul la SIM?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="6281997628405909566">"Un dispozitiv Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, vrea să acceseze date de pe cartela ta SIM. Aici este inclusă agenda.\n\nDupă ce se conectează, <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> va primi toate apelurile primite la <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Este disponibil un dispozitiv Bluetooth"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Un dispozitiv solicită conectarea. Atinge pentru detalii."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Te conectezi la dispozitivul Bluetooth?"</string>

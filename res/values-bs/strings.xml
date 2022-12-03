@@ -23,6 +23,7 @@
     <string name="deny" msgid="7326117222944479942">"Odbij"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"Uključi"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Nepoznato"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"Dodirnite da se prikažu informacije"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">Još <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> korak vas dijeli od toga da postanete programer.</item>
       <item quantity="few">Još <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> koraka vas dijele od toga da postanete programer.</item>
@@ -140,7 +141,8 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Zahtjev za pristup porukama"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"%1$s želi pristupiti svojim porukama. Dozvoliti pristup za %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="473439406287008397">"Zahtjev za pristup SIM-u"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> želi pristupiti vašoj SIM kartici. Odobrenje pristupa SIM kartici će onemogućiti vezu za prijenos podataka na vašem uređaju za vrijeme trajanja veze. Odobri pristup uređaju <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
+    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (6194086753523415820) -->
+    <skip />
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Uređaj je vidljiv drugim uređajima kao \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\""</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Uključite Bluetooth za povezivanje s drugim uređajima."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Vaši uređaji"</string>
@@ -339,7 +341,8 @@
     <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"Uređaj nije šifriran"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Zaključani ekran"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Šta prikazati"</string>
-    <string name="security_settings_summary" msgid="1627059516127354233">"Postavite Moju lokaciju, otključavanje ekrana, zaključavanje SIM kartice, zaključavanje pohrane akreditiva"</string>
+    <!-- no translation found for security_settings_summary (4248337854143139822) -->
+    <skip />
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"Postavite Moju lokaciju, otključavanje ekrana, zaključavanje pohrane akreditiva"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"Privatnost"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Nije dostupno"</string>
@@ -1450,6 +1453,7 @@
     <string name="screen_timeout" msgid="7709947617767439410">"Istek vremena ekrana"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Ekran se isključuje"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Nakon <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> neaktivnosti"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Nije postavljeno"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Pozadinska slika"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Pozadinska slika i stil"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Početni ekran, zaključani ekran"</string>
@@ -1483,20 +1487,21 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Podebljani tekst"</string>
     <string name="title_font_size" msgid="570613010306330622">"Veličina fonta"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Povećajte ili smanjite tekst"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"Postavke zaključavanja SIM kartice"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"Zaključavanje SIM kartice"</string>
+    <string name="sim_lock_settings" msgid="7331982427303002613">"Postavke zaključavanja SIM-a"</string>
+    <string name="sim_lock_settings_category" msgid="6475255139493877786">"Zaključavanje SIM-a"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Isključeno"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"Zaključano"</string>
-    <string name="sim_lock_settings_title" msgid="1401619059761012696">"Zaključavanje SIM kartice"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"Zaključaj SIM karticu"</string>
+    <!-- no translation found for sim_lock_settings_title (3596566201762038857) -->
+    <skip />
+    <string name="sim_pin_toggle" msgid="6814489621760857328">"Zaključaj SIM"</string>
     <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"Zahtijevaj PIN za korištenje tableta"</string>
     <string name="sim_lock_on" product="default" msgid="3303147192981388923">"Potreban je PIN za korištenje telefona"</string>
     <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"Zahtijevaj PIN za korištenje tableta"</string>
     <string name="sim_lock_off" product="default" msgid="4634118006847137785">"Potreban je PIN za korištenje telefona"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"Promjena PIN-a SIM kartice"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"PIN za SIM"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Zaključavanje SIM kartice"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"Otključajte SIM karticu"</string>
+    <string name="sim_enable_sim_lock" msgid="6486354334679225748">"Zaključaj SIM"</string>
+    <string name="sim_disable_sim_lock" msgid="6939439812841857306">"Otključaj SIM"</string>
     <string name="sim_enter_old" msgid="6882545610939674813">"Stari PIN za SIM"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"Novi PIN za SIM"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Ponovo unesite novi PIN"</string>
@@ -1505,7 +1510,8 @@
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"PIN-ovi se ne podudaraju"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Nije moguće promijeniti PIN.\nMožda je PIN neispravan."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"PIN za SIM uspješno promijenjen"</string>
-    <string name="sim_lock_failed" msgid="16360418201678317">"Ne možete otključati SIM.\nPIN je možda pogrešan."</string>
+    <!-- no translation found for sim_lock_failed (2088257523501265954) -->
+    <skip />
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"Onemogućavanje PIN-a nije uspelo."</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"Omogućavanje PIN-a nije uspelo."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"Uredu"</string>
@@ -1515,7 +1521,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Koristiti <xliff:g id="CARRIER">%1$s</xliff:g> za mobilne podatke?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Koristite <xliff:g id="CARRIER2_0">%2$s</xliff:g> za prijenos podataka na mobilnoj mreži. Ako se prebacite na operatera <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> se više neće koristiti za prijenos podataka na mobilnoj mreži."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Koristi <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"Ažurirati željenu SIM karticu?"</string>
+    <string name="sim_preferred_title" msgid="8850185380445309835">"Ažurirati preferirani SIM?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"SIM kartica <xliff:g id="NEW_SIM">%1$s</xliff:g> jedina je SIM kartica u vašem uređaju. Želite li tu SIM karticu koristiti za prijenos podataka na mobilnoj mreži, pozive i SMS poruke?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"PIN za SIM je netačan. Za otključavanje uređaja sada morate kontaktirati svog operatera."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1781,17 +1787,17 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Vrati WiFi, mobilnu i Bluetooth vezu na zadano"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Sve postavke mreže vratit će se na zadano, uključujući:\n\n"<li>"WiFi"</li>\n<li>"prijenos podataka na mobilnoj mreži"</li>\n<li>"Bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Izbriši"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Izbriši preuzete SIM-ove"</string>
+    <string name="reset_esim_title" msgid="4194570573425902754">"Potpuno izbriši eSIM-ove"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"Ovim se neće otkazati paketi mobilnih usluga. Da preuzmete zamjenske SIM-ove, kontaktirajte svog mobilnog operatera."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Vrati postavke na zadano"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Vratiti sve postavke mreže na zadano? Ovu radnju ne možete poništiti."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Vratiti sve postavke mreže na zadano i izbrisati preuzete SIM-ove? Ovu radnju ne možete poništiti."</string>
+    <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"Poništiti sve postavke mreže i potpuno izbrisati eSIM-ove? Ne možete opozvati ovu radnju."</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Vrati postavke na zadano"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Vratiti na zadano?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Ponovno postavljanje mreže nije dostupno za ovog korisnika"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Postavke mreže vraćene su na zadano"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Nije moguće izbrisati SIM-ove"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"Preuzete SIM-ove nije moguće izbrisati zbog greške.\n\nPonovo pokrenite uređaj i pokušajte ponovo."</string>
+    <string name="reset_esim_error_msg" msgid="7279607120606365250">"Nije moguće izbrisati eSIM-ove zbog greške.\n\nPonovo pokrenite uređaj i pokušajte ponovo."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Izbriši sve podatke (vraćanje na fabričke postavke)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Izbriši sve podatke"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Ovim će se u potpunosti izbrisati svi podaci "<b>"unutrašnje pohrane"</b>" tableta, uključujući:\n\n"<li>"vaš Google račun"</li>\n<li>"podatke i postavke sistema i aplikacija"</li>\n<li>"preuzete aplikacije"</li></string>
@@ -3119,12 +3125,12 @@
     </plurals>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Signal za hitne pozive"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Postavi ponašanje prilikom upućivanja poziva za hitne situacije"</string>
-    <string name="privacy_settings_title" msgid="6437057228255974577">"Izrada sigurnosnih kopija"</string>
+    <string name="privacy_settings_title" msgid="6437057228255974577">"Izrada sigurnosne kopije"</string>
     <string name="backup_summary_state_on" msgid="9018954639693085240">"Uključeno"</string>
     <string name="backup_summary_state_off" msgid="5341339397224835909">"Isključeno"</string>
     <string name="backup_section_title" msgid="6539706829848457794">"Sigurnosna kopija i vraćanje"</string>
     <string name="personal_data_section_title" msgid="6368610168625722682">"Lični podaci"</string>
-    <string name="backup_data_title" msgid="507663517227498525">"Izrada sigurnosnih kopija podataka"</string>
+    <string name="backup_data_title" msgid="507663517227498525">"Izrada sigurnosne kopije podataka"</string>
     <string name="backup_data_summary" msgid="8054551085241427531">"Pravite sigurnosne kopije podataka aplikacija, lozinki za WiFi te drugih postavki na Google serverima"</string>
     <string name="backup_configure_account_title" msgid="8574055186903658842">"Račun za sigurnosne kopije"</string>
     <string name="backup_data_management_title" msgid="6596830198441939702">"Upravljajte računom za sigurnosne kopije"</string>
@@ -3239,7 +3245,8 @@
     <string name="data_usage_menu_hide_ethernet" msgid="7792365022467586772">"Sakrij korištenje podataka putem Etherneta"</string>
     <string name="data_usage_menu_metered" msgid="4279260736172851951">"Mrežna ograničenja"</string>
     <string name="data_usage_menu_auto_sync" msgid="2632694000068175025">"Automatsko sinhroniziranje podataka"</string>
-    <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"SIM kartice"</string>
+    <!-- no translation found for data_usage_menu_sim_cards (2827882471528568628) -->
+    <skip />
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"Pauzirano na ograničenju"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Automatski sinhroniziraj podatke"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Automatska sinhronizacija ličnih podataka"</string>
@@ -3563,10 +3570,12 @@
     <string name="wizard_next" msgid="3884832431439072471">"Naprijed"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Kraj"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM kartice"</string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"SIM kartice"</string>
+    <!-- no translation found for sim_setup_wizard_title (7030639256610746768) -->
+    <skip />
+    <string name="sim_settings_title" msgid="2254609719033946272">"SIM-ovi"</string>
     <string name="sim_settings_summary" msgid="5777472623476930332">"<xliff:g id="SIM_NAME">%1$s</xliff:g> – <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
-    <string name="sim_cards_changed_message" msgid="7726897488921853655">"SIM kartice su promijenjene"</string>
+    <!-- no translation found for sim_cards_changed_message (7374776581857835134) -->
+    <skip />
     <string name="sim_cards_changed_message_summary" msgid="7338082681445213621">"Dodirnite za podešavanje aktivnosti"</string>
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Prijenos podataka na mobilnoj mreži je nedostupan"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Dodirnite za odabir SIM-a za prijenos podataka"</string>
@@ -3578,7 +3587,8 @@
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Ako se prebacite na operatera <xliff:g id="NEW_SIM">%1$s</xliff:g>, <xliff:g id="OLD_SIM">%2$s</xliff:g> se više neće koristiti za prijenos podataka na mobilnoj mreži."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Koristi operatera <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Poziv putem"</string>
-    <string name="sim_select_card" msgid="1226182454109919045">"Odaberite SIM karticu"</string>
+    <!-- no translation found for sim_select_card (2975707305270216652) -->
+    <skip />
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_editor_name" msgid="5900178038499314621">"Ime SIM-a"</string>
     <string name="sim_name_hint" msgid="8231524869124193119">"Unesite ime SIM-a"</string>
@@ -3586,7 +3596,8 @@
     <string name="sim_editor_carrier" msgid="2424593350691002557">"Operater"</string>
     <string name="sim_editor_number" msgid="3209002966895156006">"Broj"</string>
     <string name="sim_editor_color" msgid="9067029630083892961">"Boja SIM-a"</string>
-    <string name="sim_card_select_title" msgid="8146523005929848793">"Odaberite SIM karticu"</string>
+    <!-- no translation found for sim_card_select_title (8387396377407327067) -->
+    <skip />
     <string name="color_orange" msgid="216547825489739010">"Narandžasta"</string>
     <string name="color_purple" msgid="6603701972079904843">"Ljubičasta"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"SIM kartica nije umetnuta"</string>
@@ -3600,7 +3611,7 @@
     <string name="preferred_network_offload_footer" msgid="374984523082849648">"Funkcija Onemogući emitiranje imena mreže sprečava da treće strane dobiju informacije o vašoj mreži."</string>
     <string name="preferred_network_offload_popup" msgid="3949937898807213370">"Onemogućavanje emitiranja imena mreže će spriječiti automatsko povezivanje na skrivene mreže."</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"SIM kartice promijenjene."</string>
+    <string name="sim_notification_title" msgid="2819551384383504031">"SIM-ovi su promijenjeni."</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Dodirnite za postavke"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Pitaj svaki put"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Potreban odabir"</string>
@@ -4364,7 +4375,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Traži lozinku prije poništavanja kačenja"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Zaključaj uređaj kada se ekran otkači"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Potvrda brisanja SIM-a"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Potvrdite svoj identitet prije potpunog brisanja preuzetog SIM-a"</string>
+    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Potvrdite identitet prije potpunog brisanja eSIM-a"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Ovim radnim profilom upravlja:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Profilom upravlja <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Eksperimentalno)"</string>
@@ -4736,7 +4747,7 @@
     <string name="memory_summary" msgid="8221954450951651735">"Iskorišteno prosječno <xliff:g id="USED_MEMORY">%1$s</xliff:g> od ukupno <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="8473589474976307510">"Prijavljeni ste kao <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="5513009140568552693">"<xliff:g id="APP_NAME">%1$s</xliff:g> je zadana aplikacija"</string>
-    <string name="backup_disabled" msgid="4503062265560959320">"Izrada sigurnosnih kopija je onemogućena"</string>
+    <string name="backup_disabled" msgid="4503062265560959320">"Izrada sigurnosne kopije je onemogućena"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"Ažurirano na Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"Dostupno je ažuriranje"</string>
     <string name="disabled_by_policy_title" msgid="3635622338687810583">"Blokirao je vaš IT administrator"</string>
@@ -5095,7 +5106,7 @@
     <string name="account_sync_summary_some_on" msgid="911460286297968724">"Sinhronizacija je uključena za stavke: <xliff:g id="ID_1">%1$d</xliff:g> od <xliff:g id="ID_2">%2$d</xliff:g>"</string>
     <string name="account_sync_summary_all_on" msgid="2953682111836599841">"Sinhronizacija je uključena za sve stavke"</string>
     <string name="account_sync_summary_all_off" msgid="6378301874540507884">"Sinhronizacija je isključena za sve stavke"</string>
-    <string name="enterprise_privacy_settings" msgid="786350385374794180">"Podaci o upravljanom uređaju"</string>
+    <string name="enterprise_privacy_settings" msgid="786350385374794180">"Podaci o uređaju kojim se upravlja"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5471858290610344646">"Promjene i postavke kojima upravlja vaša organizacija"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="1315413275836515937">"Promjene i postavke kojima upravlja organizacija <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>"</string>
     <string name="enterprise_privacy_header" msgid="4626225398848641603">"Za davanje pristupa vašim radnim podacima, vaša organizacija može na vašem uređaju promijeniti postavke i instalirati softver.\n\nZa više informacija, obratite se administratoru vaše organizacije."</string>
@@ -5346,7 +5357,8 @@
     <string name="empty_networks_list" msgid="6519489879480673428">"Nije pronađena nijedna mreža."</string>
     <string name="network_query_error" msgid="6406348372070035274">"Nisu pronađene mreže. Pokušajte ponovo."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(zabranjeno)"</string>
-    <string name="no_sim_card" msgid="1497407489810953863">"Nema SIM kartice"</string>
+    <!-- no translation found for no_sim_card (1478277597822967684) -->
+    <skip />
     <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
     <string name="wifi_no_sim_card" msgid="7144290066491585672">"Nema SIM-a"</string>
     <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Nema"</string>
@@ -5396,7 +5408,8 @@
     <string name="label_available" msgid="5305726869955838606">"Dostupne mreže"</string>
     <string name="load_networks_progress" msgid="4717874401621250401">"Pretraživanje…"</string>
     <string name="register_on_network" msgid="2169662800750709709">"Registriranje na mrežu <xliff:g id="NETWORK">%s</xliff:g> je u toku…"</string>
-    <string name="not_allowed" msgid="5756935665192962915">"Vaša SIM kartica ne dozvoljava povezivanje na ovu mrežu."</string>
+    <!-- no translation found for not_allowed (8969977039734782273) -->
+    <skip />
     <string name="connect_later" msgid="2330538069949281352">"Trenutno se nije moguće povezati na ovu mrežu. Pokušajte ponovo kasnije."</string>
     <string name="registration_done" msgid="1750434215698850123">"Registrirano na mrežu."</string>
     <string name="select_automatically" msgid="2419752566747259155">"Automatski odaberi mrežu"</string>
@@ -5405,7 +5418,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Prijenos podataka na mobilnoj mreži"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Pristup prijenosu podataka putem mobilne mreže"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Telefon će se automatski prebaciti na ovog operatera kada bude u dometu"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Sim kartica nije dostupna"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"Nije dostupan nijedan SIM"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Postavke za pozive"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Postavke za SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Pitaj svaki put"</string>
@@ -5427,8 +5440,8 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Dodajte još"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Aktivno/SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Neaktivno/SIM"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Aktivno / Preuzeti SIM"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Neaktivno / Preuzeti SIM"</string>
+    <string name="mobile_network_active_esim" msgid="3984452275968408382">"Aktivno / eSIM"</string>
+    <string name="mobile_network_inactive_esim" msgid="8777415108263057939">"Neaktivno / eSIM"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"Naziv i boja SIM-a"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Naziv"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Boja (koriste kompatibilne aplikacije)"</string>
@@ -5438,7 +5451,8 @@
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Uklonite SIM karticu da onemogućite ovaj SIM"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Dodirnite da aktivirate operatera <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"Prebaciti na operatera <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
-    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"U datom trenutku može biti aktivan samo jedan preuzeti SIM.\n\nPrebacivanjem na operatera <xliff:g id="CARRIER1">%1$s</xliff:g> neće se otkazati usluga mobilnog operatera <xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
+    <!-- no translation found for mobile_network_esim_swap_confirm_body (592668232798598450) -->
+    <skip />
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"Prebaci na operatera <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"Izbriši SIM"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"Nije moguće izbrisati SIM"</string>
@@ -5473,7 +5487,7 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Prebaciti na korištenje SIM kartice?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Koristiti operatera <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"U datom trenutku može biti aktivan samo jedan SIM.\n\nPrebacivanjem na operatera <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> neće se otkazati usluga mobilnog operatera <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"U datom trenutku može biti aktivan samo jedan preuzeti SIM.\n\nPrebacivanjem na operatera <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> neće se otkazati usluga mobilnog operatera <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"U datom trenutku može biti aktivan samo 1 eSIM.\n\nPrebacivanjem na operatera <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> se neće otkazati usluga operatera <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"U datom trenutku može biti aktivan samo jedan SIM.\n\nPrebacivanjem se neće otkazati usluga mobilnog operatera <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Možete istovremeno koristiti 2 SIM-a. Da koristite operatera <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, isključite drugi SIM."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Prebaci na operatera <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -5519,8 +5533,8 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"Usluge operatera <xliff:g id="CARRIER_NAME">%1$s</xliff:g> će se koristiti za prijenos podataka na mobilnoj mreži, pozive i SMS."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Nema dostupnih SIM-ova"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Da kasnije koristite prijenos podataka na mobilnoj mreži, funkcije poziva i SMS, idite u postavke mreže"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"SIM kartica"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Potpuno izbrisati ovaj preuzeti SIM?"</string>
+    <string name="sim_card_label" msgid="6263064316075963775">"SIM"</string>
+    <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Izbrisati ovaj eSIM?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Ako potpuno izbrišete ovaj SIM, s ovog uređaja će se ukloniti usluga operatera <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>.\n\nUsluga za operatera <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> neće se otkazati."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Potpuno izbriši"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"Potpuno brisanje SIM-a…"</string>
@@ -5706,8 +5720,8 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Dozvolite da Google Fi koristi W+ mreže da poboljšate brzinu i pokrivenost"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ mreža"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"PREUZETI SIM"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"PREUZETI SIM-ovi"</string>
+    <string name="downloaded_sim_category_title" msgid="2876988650413179752">"eSIM"</string>
+    <string name="downloaded_sims_category_title" msgid="487799905978489922">"eSIM-ovi"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Aktivno"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Neaktivno"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Zadano za: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5767,7 +5781,7 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Postavke poziva"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Ažuriranje postavki..."</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Greška u postavkama poziva"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Greška na mreži ili SIM kartici."</string>
+    <string name="smart_forwarding_failed_text" msgid="8682640643264071789">"Greška na mreži ili SIM-u."</string>
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM nije aktiviran."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Unesite brojeve telefona"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Unesite broj telefona"</string>
@@ -5792,10 +5806,10 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"Nazad"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Naprijed"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Pregled boje"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Zahtjev za pristup SIM kartici"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Uređaj želi pristupiti vašoj SIM kartici. Dodirnite za detalje."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Dozvoliti pristup SIM kartici?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Bluetooth uređaj, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, želi pristupiti podacima na vašoj SIM kartici. To obuhvata vaše kontakte.\n\nDok je povezan, uređaj <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> će primati sve pozive upućene na broj <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="7351015416346359536">"Zahtjev za pristup SIM-u"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="8685623260103018309">"Uređaj želi pristupiti vašem SIM-u. Dodirnite za detalje."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="5616323725563125179">"Dozvoliti pristup SIM-u?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="6281997628405909566">"Bluetooth uređaj, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, želi pristupiti podacima s vašeg SIM-a. To obuhvata vaše kontakte.\n\nDok je povezan, uređaj <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> će primati sve pozive upućene na broj <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Bluetooth uređaj je dostupan"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Uređaj se želi povezati. Dodirnite za detalje."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Povezati se s Bluetooth uređajem?"</string>

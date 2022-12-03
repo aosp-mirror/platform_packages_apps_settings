@@ -23,6 +23,7 @@
     <string name="deny" msgid="7326117222944479942">"Rexeitar"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"Activar"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Descoñecido"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"Toca para mostrar máis información"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">Agora estás a <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> pasos de ser programador.</item>
       <item quantity="one">Agora estás a <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> paso de ser programador.</item>
@@ -139,7 +140,8 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Solicitude de acceso á mensaxe"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"%1$s quere acceder ás túas mensaxes. Queres conceder acceso a %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="473439406287008397">"Solicitude de acceso á SIM"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> quere acceder á túa tarxeta SIM. Ao outorgar acceso á tarxeta SIM desactivarase a conectividade de datos no teu dispositivo durante a conexión. Outorgar acceso a <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
+    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (6194086753523415820) -->
+    <skip />
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Visible como \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" para outros dispositivos"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Activa o Bluetooth para conectarte a outros dispositivos."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Os teus dispositivos"</string>
@@ -336,7 +338,8 @@
     <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"O dispositivo non está encriptado"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Pantalla de bloqueo"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Que se debe mostrar"</string>
-    <string name="security_settings_summary" msgid="1627059516127354233">"Define A miña localización, o desbloqueo da pantalla, o bloqueo da tarxeta SIM e o bloqueo do almacenamento de credenciais"</string>
+    <!-- no translation found for security_settings_summary (4248337854143139822) -->
+    <skip />
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"Define A miña localización, o desbloqueo da pantalla e o bloqueo do almacenamento de credenciais"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"Privacidade"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Non dispoñible"</string>
@@ -1430,6 +1433,7 @@
     <string name="screen_timeout" msgid="7709947617767439410">"Tempo de espera da pantalla"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"A pantalla apágase"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactividade"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Sen configurar"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Fondo de pantalla"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Estilo e fondo de pantalla"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Inicio, pantalla de bloqueo"</string>
@@ -1463,20 +1467,21 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Texto en grosa"</string>
     <string name="title_font_size" msgid="570613010306330622">"Tamaño do tipo de letra"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Amplía ou reduce o texto"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"Configuración de bloqueo da SIM"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"Bloqueo da tarxeta SIM"</string>
+    <string name="sim_lock_settings" msgid="7331982427303002613">"Configuración de bloqueo da SIM"</string>
+    <string name="sim_lock_settings_category" msgid="6475255139493877786">"Bloqueo da SIM"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Desactivado"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"Bloqueada"</string>
-    <string name="sim_lock_settings_title" msgid="1401619059761012696">"Bloqueo da tarxeta SIM"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"Bloquear tarxeta SIM"</string>
+    <!-- no translation found for sim_lock_settings_title (3596566201762038857) -->
+    <skip />
+    <string name="sim_pin_toggle" msgid="6814489621760857328">"Bloquear SIM"</string>
     <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"Solicita o PIN para usar a tableta"</string>
     <string name="sim_lock_on" product="default" msgid="3303147192981388923">"Solicita o PIN para usar o teléfono"</string>
     <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"Solicita o PIN para usar a tableta"</string>
     <string name="sim_lock_off" product="default" msgid="4634118006847137785">"Solicita o PIN para usar o teléfono"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"Cambiar PIN da SIM"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"PIN da SIM"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Bloquear a tarxeta SIM"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"Desbloquear a tarxeta SIM"</string>
+    <string name="sim_enable_sim_lock" msgid="6486354334679225748">"Bloquear SIM"</string>
+    <string name="sim_disable_sim_lock" msgid="6939439812841857306">"Desbloquear SIM"</string>
     <string name="sim_enter_old" msgid="6882545610939674813">"Antigo PIN da tarxeta SIM"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"Novo PIN da SIM"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Volve escribir o novo PIN"</string>
@@ -1485,7 +1490,8 @@
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"Os PIN non coinciden"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Non se pode cambiar o PIN.\nÉ posible que o PIN non sexa correcto."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"PIN da SIM cambiado correctamente"</string>
-    <string name="sim_lock_failed" msgid="16360418201678317">"Non se pode cambiar o estado de bloqueo da tarxeta SIM.\nÉ posible que o PIN non sexa correcto."</string>
+    <!-- no translation found for sim_lock_failed (2088257523501265954) -->
+    <skip />
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"Non se puido desactivar o PIN."</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"Non se puido activar o PIN."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"Aceptar"</string>
@@ -1495,7 +1501,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Usar <xliff:g id="CARRIER">%1$s</xliff:g> para os datos móbiles?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Estás utilizando <xliff:g id="CARRIER2_0">%2$s</xliff:g> para os datos móbiles. Se cambias a <xliff:g id="CARRIER1">%1$s</xliff:g>, deixarase de utilizar <xliff:g id="CARRIER2_1">%2$s</xliff:g> para os datos móbiles."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Usar <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"Actualizar a SIM preferida?"</string>
+    <string name="sim_preferred_title" msgid="8850185380445309835">"Actualizar a SIM preferida?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"A única SIM do dispositivo é: <xliff:g id="NEW_SIM">%1$s</xliff:g>. Queres usar esta SIM para os datos móbiles, as chamadas e as mensaxes SMS?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Código PIN da SIM incorrecto. Agora debes contactar co operador para desbloquear o dispositivo."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1760,17 +1766,17 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Restablecer wifi, rede móbil e Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Con esta selección, restableceranse todas as opcións de configuración de rede, entre elas as referentes a:\n\n"<li>"Wifi"</li>\n<li>"Datos móbiles"</li>\n<li>"Bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Borrar"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Borrar SIM descargadas"</string>
+    <string name="reset_esim_title" msgid="4194570573425902754">"Borrar eSIM"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"Non se cancelará ningún dos plans de servizos móbiles que teñas. Para descargar tarxetas SIM de substitución, ponte en contacto co teu operador."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Restablecer configuración"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Queres restablecer toda a configuración de rede? Non se pode desfacer esta acción."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Queres restablecer todas as opcións de configuración de rede e borrar as SIM descargadas? Non se pode desfacer esta acción."</string>
+    <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"Queres restablecer todas as opcións de configuración de rede e borrar as eSIM? Non se poderá desfacer esta acción."</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Restablecer configuración"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Restablecer?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"O restablecemento de rede non está dispoñible para este usuario"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Restableceuse a configuración da rede"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Non se puideron borrar as SIM"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"As SIM descargadas non se poden borrar debido a un erro.\n\nReinicia o dispositivo e téntao de novo."</string>
+    <string name="reset_esim_error_msg" msgid="7279607120606365250">"As eSIM non se puideron borrar debido a un erro.\n\nReinicia o dispositivo e téntao de novo."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Borrar todos os datos (restablecemento da configuración de fábrica)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Borrar todos os datos"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Con esta acción borraranse todos os datos do "<b>"almacenamento interno"</b>" da túa tableta, entre os que se inclúen:\n\n"<li>"A túa Conta de Google"</li>\n<li>"Os datos e a configuración do sistema e das aplicacións"</li>\n<li>"As aplicacións descargadas"</li></string>
@@ -3199,7 +3205,8 @@
     <string name="data_usage_menu_hide_ethernet" msgid="7792365022467586772">"Ocultar o uso de Ethernet"</string>
     <string name="data_usage_menu_metered" msgid="4279260736172851951">"Restricións de rede"</string>
     <string name="data_usage_menu_auto_sync" msgid="2632694000068175025">"Sincronización automática de datos"</string>
-    <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"Tarxetas SIM"</string>
+    <!-- no translation found for data_usage_menu_sim_cards (2827882471528568628) -->
+    <skip />
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"En pausa no límite"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Sincronización automática"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sincr. auto. de datos persoais"</string>
@@ -3521,10 +3528,12 @@
     <string name="wizard_next" msgid="3884832431439072471">"Seguinte"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Finalizar"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_setup_wizard_title" msgid="3945520353564138219">"Tarxetas SIM"</string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"Tarxetas SIM"</string>
+    <!-- no translation found for sim_setup_wizard_title (7030639256610746768) -->
+    <skip />
+    <string name="sim_settings_title" msgid="2254609719033946272">"SIM"</string>
     <string name="sim_settings_summary" msgid="5777472623476930332">"<xliff:g id="SIM_NAME">%1$s</xliff:g>: <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
-    <string name="sim_cards_changed_message" msgid="7726897488921853655">"As tarxetas SIM cambiaron"</string>
+    <!-- no translation found for sim_cards_changed_message (7374776581857835134) -->
+    <skip />
     <string name="sim_cards_changed_message_summary" msgid="7338082681445213621">"Toca para definir as actividades"</string>
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Os datos móbiles non están dispoñibles"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Toca para seleccionar unha SIM de datos"</string>
@@ -3536,7 +3545,8 @@
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Se cambias a <xliff:g id="NEW_SIM">%1$s</xliff:g>, deixarase de utilizar <xliff:g id="OLD_SIM">%2$s</xliff:g> para os datos móbiles."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Usar <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Chamar con"</string>
-    <string name="sim_select_card" msgid="1226182454109919045">"Seleccionar unha tarxeta SIM"</string>
+    <!-- no translation found for sim_select_card (2975707305270216652) -->
+    <skip />
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_editor_name" msgid="5900178038499314621">"Nome da SIM"</string>
     <string name="sim_name_hint" msgid="8231524869124193119">"Introducir o nome da SIM"</string>
@@ -3544,7 +3554,8 @@
     <string name="sim_editor_carrier" msgid="2424593350691002557">"Operador"</string>
     <string name="sim_editor_number" msgid="3209002966895156006">"Número"</string>
     <string name="sim_editor_color" msgid="9067029630083892961">"Cor da SIM"</string>
-    <string name="sim_card_select_title" msgid="8146523005929848793">"Seleccionar tarxeta SIM"</string>
+    <!-- no translation found for sim_card_select_title (8387396377407327067) -->
+    <skip />
     <string name="color_orange" msgid="216547825489739010">"Laranxa"</string>
     <string name="color_purple" msgid="6603701972079904843">"Violeta"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"Non hai ningunha tarxeta SIM inserida"</string>
@@ -3558,7 +3569,7 @@
     <string name="preferred_network_offload_footer" msgid="374984523082849648">"Desactivar a emisión do nome da rede evita que terceiros accedan á información da túa rede."</string>
     <string name="preferred_network_offload_popup" msgid="3949937898807213370">"Desactivar a emisión do nome da rede evitará a conexión automática a redes ocultas."</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"Cambiáronse as tarxetas SIM."</string>
+    <string name="sim_notification_title" msgid="2819551384383504031">"Cambiáronse as SIM."</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Tocar para configurar"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Preguntar sempre"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"É necesario seleccionar unha opción"</string>
@@ -3995,7 +4006,7 @@
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"No panel despregable, contrae as notificacións e móstraas nunha liña"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Sen son nin vibración"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Sen son nin vibración, e aparecen máis abaixo na sección de conversas"</string>
-    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Poderían facer que o teléfono soe ou vibre en función da súa configuración"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"O teléfono pode soar ou vibrar en función da súa configuración"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Ao desbloquear o dispositivo, as notificacións móstranse nun cartel na parte superior da pantalla"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Todas as notificacións de \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Todas as notificacións de <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4311,7 +4322,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Pedir contrasinal antes de soltar a fixación"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Bloquear dispositivo ao deixar de fixar a aplicación"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Confirmar eliminación de SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Verifica a túa identidade antes de borrar unha SIM descargada"</string>
+    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Verifica a túa identidade antes de borrar unha eSIM"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Este perfil de traballo está xestionado por:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Xestionado por <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Experimental)"</string>
@@ -5262,7 +5273,8 @@
     <string name="empty_networks_list" msgid="6519489879480673428">"Non se atopou ningunha rede."</string>
     <string name="network_query_error" msgid="6406348372070035274">"Non se puido encontrar ningunha rede. Téntao de novo."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(rede non-permitida)"</string>
-    <string name="no_sim_card" msgid="1497407489810953863">"Non hai ningunha tarxeta SIM"</string>
+    <!-- no translation found for no_sim_card (1478277597822967684) -->
+    <skip />
     <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
     <string name="wifi_no_sim_card" msgid="7144290066491585672">"Non hai SIM"</string>
     <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Ningunha"</string>
@@ -5312,7 +5324,8 @@
     <string name="label_available" msgid="5305726869955838606">"Redes dispoñibles"</string>
     <string name="load_networks_progress" msgid="4717874401621250401">"Buscando…"</string>
     <string name="register_on_network" msgid="2169662800750709709">"Rexistrando en <xliff:g id="NETWORK">%s</xliff:g>…"</string>
-    <string name="not_allowed" msgid="5756935665192962915">"A tarxeta SIM non permite conectar o dispositivo a esta rede."</string>
+    <!-- no translation found for not_allowed (8969977039734782273) -->
+    <skip />
     <string name="connect_later" msgid="2330538069949281352">"Non se pode conectar con esta rede nestes momentos. Téntao de novo máis tarde."</string>
     <string name="registration_done" msgid="1750434215698850123">"Realizouse o rexistro na rede."</string>
     <string name="select_automatically" msgid="2419752566747259155">"Seleccionar rede automaticamente"</string>
@@ -5321,7 +5334,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Datos móbiles"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Accede aos datos cunha rede de telefonía móbil"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"O teléfono cambiará automaticamente a este operador cando esteas dentro da súa zona de cobertura"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Non hai ningunha tarxeta SIM dispoñible"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"Non hai SIM"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Preferencia para chamadas"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Preferencia para SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Preguntar sempre"</string>
@@ -5342,8 +5355,8 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Engadir máis"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Activado / SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Desactivado / SIM"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Activa/SIM descargada"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Inactiva/SIM descargada"</string>
+    <string name="mobile_network_active_esim" msgid="3984452275968408382">"Servizo activo/eSIM"</string>
+    <string name="mobile_network_inactive_esim" msgid="8777415108263057939">"Servizo inactivo/eSIM"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"Cor e nome da SIM"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Nome"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Cor (usada nas aplicacións compatibles)"</string>
@@ -5353,7 +5366,8 @@
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Para desactivar esta SIM, sácaa do teléfono"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Toca o operador <xliff:g id="CARRIER">%1$s</xliff:g> para activalo"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"Queres cambiar a <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
-    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Non se poden ter activadas varias SIM descargadas á vez.\n\nAo cambiar a <xliff:g id="CARRIER1">%1$s</xliff:g> non se cancelará o teu servizo de <xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
+    <!-- no translation found for mobile_network_esim_swap_confirm_body (592668232798598450) -->
+    <skip />
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"Cambiar a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"Borrar SIM"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"Non se puido borrar a SIM"</string>
@@ -5388,7 +5402,7 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Queres pasar a utilizar a tarxeta SIM?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Queres usar: <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Non se poden ter activadas varias SIM á vez.\n\nAo cambiar a <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, non se cancelará o teu servizo de <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Non se poden ter activadas varias SIM descargadas á vez.\n\nAo cambiar a <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, non se cancelará o teu servizo de <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"Non se poden ter activadas á vez varias eSIM.\n\nAo cambiar a <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> non se cancelará o teu servizo de <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Non se poden ter activadas varias SIM á vez.\n\nAo cambiar, non se cancelará o teu servizo de <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Podes utilizar 2 SIM á vez. Para utilizar <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, desactiva a outra SIM."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Cambiar a <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -5434,8 +5448,8 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"Utilizarase <xliff:g id="CARRIER_NAME">%1$s</xliff:g> para os datos móbiles, as chamadas e as SMS."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Non hai SIM activas dispoñibles"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Para utilizar os datos móbiles, as funcións de chamada e as SMS máis tarde, vai á configuración de rede"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"Tarxeta SIM"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Queres borrar esta SIM descargada?"</string>
+    <string name="sim_card_label" msgid="6263064316075963775">"SIM"</string>
+    <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Queres borrar esta eSIM?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Ao borrar esta SIM, quitarase o servizo de <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> deste dispositivo.\n\nNon se cancelará o servizo de <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Borrar"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"Borrando SIM…"</string>
@@ -5619,8 +5633,8 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Permitir que Google Fi use redes W+ para mellorar a velocidade e a cobertura"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Rede W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"SIM DESCARGADAS"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"SIM DESCARGADAS"</string>
+    <string name="downloaded_sim_category_title" msgid="2876988650413179752">"eSIM"</string>
+    <string name="downloaded_sims_category_title" msgid="487799905978489922">"eSIM"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Activa"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Inactiva"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Configuración predeterminada para <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5680,7 +5694,7 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Configuración de chamada"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Actualizando configuración…"</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Produciuse un erro na configuración das chamadas"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Produciuse un erro na rede ou na tarxeta SIM."</string>
+    <string name="smart_forwarding_failed_text" msgid="8682640643264071789">"Erro da SIM ou da rede."</string>
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"A SIM non está activada."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Escribir os números de teléfono"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Escribir o número de teléfono"</string>
@@ -5705,10 +5719,10 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"Anterior"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Seguinte"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Vista previa da cor"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Solicitude de acceso á tarxeta SIM"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Un dispositivo quere acceder á túa tarxeta SIM. Toca para obter información."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Queres permitir o acceso á tarxeta SIM?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Un dispositivo Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, quere acceder aos datos da túa tarxeta SIM, entre os que se inclúen os teus contactos.\n\nDurante a conexión, o dispositivo (<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>) recibirá todas as chamadas que se realicen desde o <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="7351015416346359536">"Solicitude de acceso á SIM"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="8685623260103018309">"Un dispositivo quere acceder á túa SIM. Toca para obter información."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="5616323725563125179">"Queres permitir o acceso á SIM?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="6281997628405909566">"Un dispositivo Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, quere acceder aos datos da túa SIM, entre os que se inclúen os teus contactos.\n\nDurante a conexión, o dispositivo (<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>) recibirá todas as chamadas que se realicen desde o <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Hai un dispositivo Bluetooth dispoñible"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Un dispositivo quere establecer conexión. Toca para obter información."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Queres establecer conexión co dispositivo Bluetooth?"</string>

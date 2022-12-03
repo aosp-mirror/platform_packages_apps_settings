@@ -23,6 +23,7 @@
     <string name="deny" msgid="7326117222944479942">"Απόρριψη"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"Ενεργοποίηση"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Άγνωστο"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"Πατήστε για εμφάνιση πληροφοριών"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">Απομένουν <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> βήματα για να γίνετε προγραμματιστής.</item>
       <item quantity="one">Απομένει<xliff:g id="STEP_COUNT_0">%1$d</xliff:g> βήμα για να γίνετε προγραμματιστής.</item>
@@ -139,7 +140,8 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Αίτημα πρόσβασης στο μήνυμα"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"%1$s επιθυμεί να αποκτήσει πρόσβαση στα μηνύματά σας. Παραχώρηση πρόσβασης σε %2$s;"</string>
     <string name="bluetooth_sap_request" msgid="473439406287008397">"Αίτημα πρόσβασης SIM"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"Η συσκευή <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> επιθυμεί πρόσβαση στην κάρτα SIM. Η χορήγηση πρόσβασης στην κάρτα SIM θα απενεργοποιήσει τη σύνδεση δεδομένων στη συσκευή σας κατά τη διάρκεια της σύνδεσης. Παραχώρηση πρόσβασης στη συσκευή <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
+    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (6194086753523415820) -->
+    <skip />
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Ορατή ως \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" σε άλλες συσκευές"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Ενεργοποιήστε το Bluetooth για να συνδεθείτε σε άλλες συσκευές."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Οι συσκευές σας"</string>
@@ -336,7 +338,8 @@
     <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"Η συσκευή δεν είναι κρυπτογραφημένη"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Οθόνη κλειδώματος"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Τι θα εμφανίζεται"</string>
-    <string name="security_settings_summary" msgid="1627059516127354233">"Ορισμός του \"Η τοποθεσία μου\", ξεκλειδώματος οθόνης, κλειδώματος κάρτας SIM, κλειδώματος αποθηκευτικού χώρου διαπιστευτηρίων"</string>
+    <!-- no translation found for security_settings_summary (4248337854143139822) -->
+    <skip />
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"Ορισμός του \"Η τοποθεσία μου\", του ξεκλειδώματος οθόνης και του κλειδώματος αποθηκευτικού χώρου διαπιστευτηρίων"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"Απόρρητο"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Μη διαθέσιμη"</string>
@@ -1430,6 +1433,7 @@
     <string name="screen_timeout" msgid="7709947617767439410">"Λήξη χρονικού ορίου οθόνης"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Η οθόνη απενεργοποιείται"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Μετά από <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> αδράνειας"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Δεν έχει οριστεί"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Ταπετσαρία"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Ταπετσαρία και στιλ"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Αρχική οθόνη, οθόνη κλειδώματος"</string>
@@ -1463,20 +1467,21 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Κείμενο με έντονη γραφή"</string>
     <string name="title_font_size" msgid="570613010306330622">"Μέγεθος γραμματοσειράς"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Αύξηση ή μείωση του μεγέθους του κειμένου"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"Ρυθμίσεις κλειδ/τος SIM"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"Κλείδωμα κάρτας SIM"</string>
+    <string name="sim_lock_settings" msgid="7331982427303002613">"Ρυθμίσεις κλειδώματος SIM"</string>
+    <string name="sim_lock_settings_category" msgid="6475255139493877786">"Κλείδωμα SIM"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Ανενεργή"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"Κλειδωμένο"</string>
-    <string name="sim_lock_settings_title" msgid="1401619059761012696">"Κλείδωμα κάρτας SIM"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"Κλείδωμα κάρτας SIM"</string>
+    <!-- no translation found for sim_lock_settings_title (3596566201762038857) -->
+    <skip />
+    <string name="sim_pin_toggle" msgid="6814489621760857328">"Κλείδωμα SIM"</string>
     <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"Απαιτείται PIN για τη χρήση του tablet"</string>
     <string name="sim_lock_on" product="default" msgid="3303147192981388923">"Απαιτείται PIN για τη χρήση του τηλεφώνου"</string>
     <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"Απαιτείται PIN για τη χρήση του tablet"</string>
     <string name="sim_lock_off" product="default" msgid="4634118006847137785">"Απαιτείται PIN για τη χρήση του τηλεφώνου"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"Αλλαγή αριθμού PIN κάρτας SIM"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"Αριθμός PIN κάρτας SIM"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Κλείδωμα κάρτας SIM"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"Ξεκλείδωμα κάρτας SIM"</string>
+    <string name="sim_enable_sim_lock" msgid="6486354334679225748">"Κλείδωμα SIM"</string>
+    <string name="sim_disable_sim_lock" msgid="6939439812841857306">"Ξεκλείδωμα κάρτας SIM"</string>
     <string name="sim_enter_old" msgid="6882545610939674813">"Παλιό PIN κάρτας SIM"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"Νέο PIN κάρτας SIM"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Πληκτρολογήστε ξανά το νέο PIN"</string>
@@ -1485,7 +1490,8 @@
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"Οι αριθμοί PIN δεν ταιριάζουν"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Δεν αλλάζει το PIN.\nΊσως να είναι λάθος."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"Το PIN της κάρτας SIM άλλαξε"</string>
-    <string name="sim_lock_failed" msgid="16360418201678317">"Δεν είναι δυνατή η αλλαγή της κατάστασης κλειδώματος της κάρτας SIM.\nΠιθανόν το PIN να είναι λάθος."</string>
+    <!-- no translation found for sim_lock_failed (2088257523501265954) -->
+    <skip />
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"Δεν είναι δυνατή η απενεργοποίηση του PIN."</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"Δεν είναι δυνατή η ενεργοποίηση του PIN."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"OK"</string>
@@ -1495,7 +1501,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Χρήση <xliff:g id="CARRIER">%1$s</xliff:g> για δεδ. κιν. τηλ.;"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Χρησιμοποιείτε <xliff:g id="CARRIER2_0">%2$s</xliff:g> για δεδομένα κινητής τηλεφωνίας. Εάν κάνετε εναλλαγή στην υπηρεσία <xliff:g id="CARRIER1">%1$s</xliff:g>, η υπηρεσία <xliff:g id="CARRIER2_1">%2$s</xliff:g> δεν θα χρησιμοποιείται πλέον για δεδομένα κινητής τηλεφωνίας."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Χρήση <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"Ενημέρωση προτιμώμενης SIM;"</string>
+    <string name="sim_preferred_title" msgid="8850185380445309835">"Ενημέρωση προτιμώμενης SIM;"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"Η κάρτα <xliff:g id="NEW_SIM">%1$s</xliff:g> είναι η μόνη SIM στη συσκευή σας. Θέλετε να χρησιμοποιήσετε αυτήν τη SIM για τα δεδομένα κινητής τηλεφωνίας, τις κλήσεις και τα μηνύματα SMS;"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Λανθασμένος κωδικός PIN κάρτας SIM. Θα πρέπει να επικοινωνήσετε με τον πάροχο κινητής τηλεφωνίας σας για να ξεκλειδώσετε τη συσκευή σας."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1760,17 +1766,17 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Επαναφ. Wi-Fi/mobile/Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Με αυτόν τον τρόπο θα γίνει επαναφορά όλων των ρυθμίσεων δικτύου, μεταξύ των οποίων για:\n\n"<li>"Wi‑Fi"</li>\n<li>"Δεδομένα κινητής τηλεφωνίας"</li>\n<li>"Bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Διαγραφή"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Διαγραφή ληφθεισών SIM"</string>
+    <string name="reset_esim_title" msgid="4194570573425902754">"Διαγραφή των eSIM"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"Με αυτήν την ενέργεια, δεν θα ακυρωθεί κανένα πρόγραμμα υπηρεσιών κινητής τηλεφωνίας. Για τη λήψη SIM αντικατάστασης, επικοινωνήστε με την εταιρεία κινητής τηλεφωνίας σας."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Επαναφορά ρυθμίσεων"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Επαναφορά όλων των ρυθμίσεων δικτύου; Δεν μπορείτε να αναιρέσετε αυτή την ενέργεια."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Να γίνει επαναφορά όλων των ρυθμίσεων δικτύου και διαγραφή όλων των SIM των οποίων έγινε λήψη; Δεν μπορείτε να αναιρέσετε αυτή την ενέργεια."</string>
+    <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"Επαναφορά όλων των ρυθμίσεων δικτύου και διαγραφή των eSIM; Δεν μπορείτε να αναιρέσετε αυτή την ενέργεια."</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Επαναφορά ρυθμίσεων"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Να γίνει επαναφορά;"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Η επαναφορά δικτύου δεν είναι διαθέσιμη γι\' αυτόν το χρήστη"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Έγινε επαναφορά των ρυθμίσεων δικτύου."</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Δεν είναι δυνατή η διαγραφή των SIM"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"Δεν είναι δυνατή η διαγραφή των SIM των οποίων έγινε λήψη λόγω ενός σφάλματος.\n\nΕπανεκκινήστε τη συσκευή σας και δοκιμάστε ξανά."</string>
+    <string name="reset_esim_error_msg" msgid="7279607120606365250">"Δεν είναι δυνατή η διαγραφή των eSIM λόγω σφάλματος.\n\nΕπανεκκινήστε τη συσκευή σας και δοκιμάστε ξανά."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Διαγραφή όλων των δεδομένων (επαναφορά εργοστασιακών ρυθμίσεων)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Διαγρ. δεδομ. (εργ. επαναφ.)"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Με αυτόν τον τρόπο, θα διαγραφούν όλα τα δεδομένα από τον εσωτερικό αποθηκευτικό χώρο "<b>"του tablet"</b>", συμπεριλαμβανομένων:\n\n"<li>"του Λογαριασμού σας Google"</li>\n<li>"των δεδομένων και των ρυθμίσεων συστήματος και εφαρμογών"</li>\n<li>"των ληφθέντων εφαρμογών"</li></string>
@@ -3199,7 +3205,8 @@
     <string name="data_usage_menu_hide_ethernet" msgid="7792365022467586772">"Απόκρυψη χρήσης Ethernet"</string>
     <string name="data_usage_menu_metered" msgid="4279260736172851951">"Περιορισμοί δικτύου"</string>
     <string name="data_usage_menu_auto_sync" msgid="2632694000068175025">"Αυτόματος συγχρονισμός δεδομένων"</string>
-    <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"Κάρτες SIM"</string>
+    <!-- no translation found for data_usage_menu_sim_cards (2827882471528568628) -->
+    <skip />
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"Παύση στο όριο"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Αυτόματος συγχρον. δεδομένων"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Αυτόματος συγχ. προσ.δεδομένων"</string>
@@ -3521,10 +3528,12 @@
     <string name="wizard_next" msgid="3884832431439072471">"Επόμενο"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Τέλος"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_setup_wizard_title" msgid="3945520353564138219">"Κάρτες SIM"</string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"Κάρτες SIM"</string>
+    <!-- no translation found for sim_setup_wizard_title (7030639256610746768) -->
+    <skip />
+    <string name="sim_settings_title" msgid="2254609719033946272">"Κάρτες SIM"</string>
     <string name="sim_settings_summary" msgid="5777472623476930332">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
-    <string name="sim_cards_changed_message" msgid="7726897488921853655">"Οι κάρτες SIM έχουν αλλάξει"</string>
+    <!-- no translation found for sim_cards_changed_message (7374776581857835134) -->
+    <skip />
     <string name="sim_cards_changed_message_summary" msgid="7338082681445213621">"Πατήστε για ορισμό δραστηριοτήτων"</string>
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Μη διαθέσιμα δεδομένα κινητής τηλεφωνίας"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Πατήστε για επιλογή μιας SIM δεδομένων"</string>
@@ -3536,7 +3545,8 @@
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Εάν κάνετε εναλλαγή στην κάρτα <xliff:g id="NEW_SIM">%1$s</xliff:g>, η κάρτα <xliff:g id="OLD_SIM">%2$s</xliff:g> δεν θα χρησιμοποιείται πλέον για δεδομένα κινητής τηλεφωνίας."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Χρήση <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Κλήση με"</string>
-    <string name="sim_select_card" msgid="1226182454109919045">"Επιλογή κάρτας SIM"</string>
+    <!-- no translation found for sim_select_card (2975707305270216652) -->
+    <skip />
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_editor_name" msgid="5900178038499314621">"Όνομα SIM"</string>
     <string name="sim_name_hint" msgid="8231524869124193119">"Πληκτρολογήστε το όνομα SIM"</string>
@@ -3544,7 +3554,8 @@
     <string name="sim_editor_carrier" msgid="2424593350691002557">"Εταιρεία κινητής τηλεφωνίας"</string>
     <string name="sim_editor_number" msgid="3209002966895156006">"Αριθμός"</string>
     <string name="sim_editor_color" msgid="9067029630083892961">"Χρώμα SIM"</string>
-    <string name="sim_card_select_title" msgid="8146523005929848793">"Επιλογή κάρτας SIM"</string>
+    <!-- no translation found for sim_card_select_title (8387396377407327067) -->
+    <skip />
     <string name="color_orange" msgid="216547825489739010">"Πορτοκαλί"</string>
     <string name="color_purple" msgid="6603701972079904843">"Μοβ"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"Δεν έχουν τοποθετηθεί κάρτες SIM"</string>
@@ -3558,7 +3569,7 @@
     <string name="preferred_network_offload_footer" msgid="374984523082849648">"Η απενεργοποίηση εκπομπής ονόματος δικτύου δεν επιτρέπει την πρόσβαση τρίτων σε πληροφορίες δικτύου."</string>
     <string name="preferred_network_offload_popup" msgid="3949937898807213370">"Η απενεργοποίηση εκπομπής ονόματος δικτύου εμποδίζει την αυτόματη σύνδεση σε κρυφά δίκτυα."</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"Οι κάρτες SIM άλλαξαν."</string>
+    <string name="sim_notification_title" msgid="2819551384383504031">"Οι SIM άλλαξαν."</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Πατήστε για ρύθμιση"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Ερώτηση κάθε φορά"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Απαιτείται επιλογή"</string>
@@ -4311,7 +4322,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Να ζητείται κωδικός πρόσβασης πριν από το ξεκαρφίτσωμα"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Κλείδωμα της συσκευής κατά το ξεκαρφίτσωμα"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Επιβεβαίωση διαγραφής SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Επαληθεύστε την ταυτότητά σας πριν από τη διαγραφή μιας ληφθείσας κάρτας SIM."</string>
+    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Επαληθεύστε την ταυτότητά σας πριν από τη διαγραφή μιας eSIM."</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Η διαχείριση αυτού του προφίλ γίνεται από:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Διαχείριση από <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Πειραματικό)"</string>
@@ -4967,7 +4978,7 @@
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Εμφάνιση ειδοποιήσεων"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"Οι ειδοποιήσεις και οι ρυθμίσεις θα εμφανίζονται."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Για να ελέγξετε την ώρα, τις ειδοποιήσεις και άλλες πληροφορίες, πατήστε δύο φορές στην οθόνη."</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Σηκώστε το για να δείτε"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Σηκώστε για έλεγχο του τηλεφώνου"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Σηκώστε το tablet για να το ελέγξετε"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"Σηκώστε τη συσκευή για να την ελέγξετε"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"Οθόνη ξυπνήματος"</string>
@@ -5262,7 +5273,8 @@
     <string name="empty_networks_list" msgid="6519489879480673428">"Δεν βρέθηκαν δίκτυα."</string>
     <string name="network_query_error" msgid="6406348372070035274">"Δεν ήταν δυνατή η εύρεση δικτύων. Δοκιμάστε ξανά."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(απαγορευμένο)"</string>
-    <string name="no_sim_card" msgid="1497407489810953863">"Δεν υπάρχει κάρτα SIM"</string>
+    <!-- no translation found for no_sim_card (1478277597822967684) -->
+    <skip />
     <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
     <string name="wifi_no_sim_card" msgid="7144290066491585672">"Δεν υπάρχει SIM"</string>
     <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Δεν υπάρχει"</string>
@@ -5312,7 +5324,8 @@
     <string name="label_available" msgid="5305726869955838606">"Διαθέσιμα δίκτυα"</string>
     <string name="load_networks_progress" msgid="4717874401621250401">"Αναζήτηση…"</string>
     <string name="register_on_network" msgid="2169662800750709709">"Εγγραφή στο δίκτυο <xliff:g id="NETWORK">%s</xliff:g>…"</string>
-    <string name="not_allowed" msgid="5756935665192962915">"Η κάρτα SIM δεν επιτρέπει τη σύνδεση σε αυτό το δίκτυο."</string>
+    <!-- no translation found for not_allowed (8969977039734782273) -->
+    <skip />
     <string name="connect_later" msgid="2330538069949281352">"Δεν είναι δυνατή η σύνδεση στο δίκτυο αυτήν τη στιγμή. Προσπαθήστε ξανά αργότερα."</string>
     <string name="registration_done" msgid="1750434215698850123">"Εγγράφηκε στο δίκτυο."</string>
     <string name="select_automatically" msgid="2419752566747259155">"Αυτόματη επιλογή δικτύου"</string>
@@ -5321,7 +5334,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Δεδομένα κινητής τηλεφωνίας"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Πρόσβαση σε δεδομένα μέσω δικτύου κινητής τηλεφωνίας"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Το τηλέφωνο θα κάνει αυτόματα εναλλαγή σε αυτήν την εταιρεία κινητής τηλεφωνίας όταν βρίσκεται εντός εμβέλειας"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Δεν υπάρχει διαθέσιμη κάρτα SIM"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"Δεν υπάρχει διαθέσιμη SIM."</string>
     <string name="calls_preference" msgid="2166481296066890129">"Προτίμηση κλήσεων"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Προτίμηση SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Ερώτηση κάθε φορά"</string>
@@ -5342,8 +5355,8 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Προσθήκη περισσότερων"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Ενεργή/SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Μη ενεργή/SIM"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Ενεργή/Ληφθείσα SIM"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Ανενεργή/Ληφθείσα SIM"</string>
+    <string name="mobile_network_active_esim" msgid="3984452275968408382">"Ενεργή/eSIM"</string>
+    <string name="mobile_network_inactive_esim" msgid="8777415108263057939">"Ανενεργή/eSIM"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"Όνομα και χρώμα SIM"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Όνομα"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Χρώμα (χρήση από συμβατές εφαρμογές)"</string>
@@ -5353,7 +5366,8 @@
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Για να απενεργοποιήσετε αυτήν τη SIM, καταργήστε την κάρτα SIM"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Πατήστε για ενεργοποίηση <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"Εναλλαγή σε <xliff:g id="CARRIER">%1$s</xliff:g>;"</string>
-    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Μόνο μία ληφθείσα SIM μπορεί να είναι ενεργή κάθε φορά.\n\nΗ εναλλαγή στο δίκτυο <xliff:g id="CARRIER1">%1$s</xliff:g> δεν θα ακυρώσει την υπηρεσία <xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
+    <!-- no translation found for mobile_network_esim_swap_confirm_body (592668232798598450) -->
+    <skip />
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"Εναλλαγή σε <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"Διαγραφή SIM"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"Δεν είναι δυνατή η διαγραφή της SIM"</string>
@@ -5388,7 +5402,7 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Εναλλαγή στη χρήση κάρτας SIM;"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Χρήση <xliff:g id="CARRIER_NAME">%1$s</xliff:g>;"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Μόνο μία SIM μπορεί να είναι ενεργή κάθε φορά.\n\nΗ εναλλαγή στο δίκτυο <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> δεν θα ακυρώσει την υπηρεσία <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Μόνο μία ληφθείσα SIM μπορεί να είναι ενεργή κάθε φορά.\n\nΗ εναλλαγή στο δίκτυο <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> δεν θα ακυρώσει την υπηρεσία <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"Μόνο μία eSIM μπορεί να είναι ενεργή κάθε φορά.\n\nΗ εναλλαγή στην εταιρεία <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> δεν θα ακυρώσει την παροχή υπηρεσιών από την εταιρεία <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Μόνο μία SIM μπορεί να είναι ενεργή κάθε φορά.\n\nΗ εναλλαγή δεν θα ακυρώσει την υπηρεσία <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Μπορείτε να χρησιμοποιείτε 2 SIM τη φορά. Για να χρησιμοποιήσετε την <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, απενεργοποιήστε κάποια άλλη SIM."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Εναλλαγή σε <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -5434,8 +5448,8 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"Η εταιρεία κινητής τηλεφωνίας <xliff:g id="CARRIER_NAME">%1$s</xliff:g> θα χρησιμοποιείται για δεδομένα κινητής τηλεφωνίας, κλήσεις και SMS."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Δεν υπάρχουν διαθέσιμες ενεργές SIM"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Για να χρησιμοποιήσετε αργότερα δεδομένα κινητής τηλεφωνίας, λειτουργίες κλήσεων και SMS, μεταβείτε στις ρυθμίσεις δικτύου σας."</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"Κάρτα SIM"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Διαγραφή αυτής της SIM της οποίας έγινε λήψη;"</string>
+    <string name="sim_card_label" msgid="6263064316075963775">"SIM"</string>
+    <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Διαγραφή αυτής της eSIM;"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Η διαγραφή αυτής της SIM καταργεί την υπηρεσία <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> από αυτήν τη συσκευή.\n\nΗ υπηρεσία για <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> δεν θα ακυρωθεί."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Διαγραφή"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"Διαγραφή SIM…"</string>
@@ -5619,8 +5633,8 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Να επιτρέπεται στο Google Fi να χρησιμοποιεί δίκτυα W+ για βελτίωση της ταχύτητας και της κάλυψης."</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Δίκτυο W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"ΛΗΦΘΕΙΣΑ SIM"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"ΛΗΦΘΕΙΣΕΣ SIM"</string>
+    <string name="downloaded_sim_category_title" msgid="2876988650413179752">"eSIM"</string>
+    <string name="downloaded_sims_category_title" msgid="487799905978489922">"eSIM"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Ενεργή"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Ανενεργή"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Προεπιλογή για <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5680,7 +5694,7 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Ρυθμίσεις κλήσης"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Ενημέρωση ρυθμίσεων…"</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Σφάλμα ρυθμίσεων κλήσης"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Σφάλμα δικτύου ή κάρτας SIM."</string>
+    <string name="smart_forwarding_failed_text" msgid="8682640643264071789">"Σφάλμα δικτύου ή SIM."</string>
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"Η SIM δεν είναι ενεργοποιημένη."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Εισαγωγή αριθμών τηλεφώνου"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Εισαγωγή αριθμού τηλεφώνου"</string>
@@ -5705,10 +5719,10 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"Προηγούμενο"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Επόμενο"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Προεπισκόπηση χρώματος"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Αίτημα πρόσβασης στην κάρτα SIM"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Μια συσκευή θέλει να αποκτήσει πρόσβαση στην κάρτα SIM. Πατήστε για λεπτομέρειες."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Να επιτρέπεται η πρόσβαση στην κάρτα SIM;"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Η συσκευή Bluetooth <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, θέλει να αποκτήσει πρόσβαση σε δεδομένα της κάρτας SIM. Στα δεδομένα περιλαμβάνονται οι επαφές σας.\n\nΌταν είναι συνδεδεμένη, η συσκευή <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> θα λαμβάνει όλες τις κλήσεις που πραγματοποιούνται στον αριθμό τηλεφώνου <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="7351015416346359536">"Αίτημα πρόσβασης στη SIM"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="8685623260103018309">"Μια συσκευή θέλει να αποκτήσει πρόσβαση στη SIM. Πατήστε για λεπτομέρειες."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="5616323725563125179">"Να επιτρέπεται η πρόσβαση στη SIM;"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="6281997628405909566">"Η συσκευή Bluetooth <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> θέλει να αποκτήσει πρόσβαση σε δεδομένα της SIM. Στα δεδομένα περιλαμβάνονται οι επαφές σας.\n\nΌταν είναι συνδεδεμένη, η συσκευή <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> θα λαμβάνει όλες τις κλήσεις που πραγματοποιούνται στον αριθμό τηλεφώνου <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Υπάρχει διαθέσιμη συσκευή Bluetooth"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Μια συσκευή θέλει να συνδεθεί. Πατήστε για λεπτομέρειες."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Σύνδεση σε συσκευή Bluetooth;"</string>

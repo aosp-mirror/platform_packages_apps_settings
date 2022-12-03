@@ -23,6 +23,7 @@
     <string name="deny" msgid="7326117222944479942">"Elutasítás"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"Bekapcsolás"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Ismeretlen"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"Koppintson az információk megjelenítéséhez"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> lépésre van attól, hogy fejlesztő legyen.</item>
       <item quantity="one"><xliff:g id="STEP_COUNT_0">%1$d</xliff:g> lépésre van attól, hogy fejlesztő legyen.</item>
@@ -139,7 +140,8 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Üzenet-hozzáférési kérelem"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"A(z) %1$s hozzáférést kér üzeneteihez. Biztosítja a(z) %2$s számára a hozzáférést?"</string>
     <string name="bluetooth_sap_request" msgid="473439406287008397">"SIM-hozzáférési kérelem"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"A következő eszköz szeretne hozzáférni az Ön SIM kártyájához: <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>. A hozzáférés megadásával letiltja eszközén az adatkapcsolatot a csatlakozás idejére. Hozzáférés megadása a következőnek: <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
+    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (6194086753523415820) -->
+    <skip />
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"A többi eszköz számára „<xliff:g id="DEVICE_NAME">^1</xliff:g>” néven jelenik meg"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Kapcsolja be a Bluetooth-t, ha másik eszközökhöz szeretne csatlakozni."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Eszközei"</string>
@@ -336,7 +338,8 @@
     <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"Az eszköz nincs titkosítva"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Lezárási képernyő"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Mi jelenjen meg?"</string>
-    <string name="security_settings_summary" msgid="1627059516127354233">"Saját pozíció beállítása, képernyőzár feloldása, SIM-kártya zárolása, hitelesítési adatok tárolójának zárolása"</string>
+    <!-- no translation found for security_settings_summary (4248337854143139822) -->
+    <skip />
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"Saját pozíció beállítása, képernyőzár feloldása, hitelesítési adatok tárolójának zárolása"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"Adatvédelem"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Nem hozzáférhető"</string>
@@ -1430,6 +1433,7 @@
     <string name="screen_timeout" msgid="7709947617767439410">"Képernyő időkorlátja"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"A kijelző kikapcsol"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> inaktivitás után"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Nincs beállítva"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Háttérkép"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Háttérkép és stílus"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Kezdőképernyő, lezárási képernyő"</string>
@@ -1463,20 +1467,21 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Félkövér szöveg"</string>
     <string name="title_font_size" msgid="570613010306330622">"Betűméret"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Szöveg nagyítása vagy kicsinyítése"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"SIM-kártya lezárási beállításai"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"SIM-kártya zárolása"</string>
+    <string name="sim_lock_settings" msgid="7331982427303002613">"Eszköz szolgáltatófüggésének beállításai"</string>
+    <string name="sim_lock_settings_category" msgid="6475255139493877786">"Eszköz szolgáltatófüggése"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Kikapcsolva"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"Zárolva"</string>
-    <string name="sim_lock_settings_title" msgid="1401619059761012696">"SIM-kártya zárolása"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"SIM-kártya lezárása"</string>
+    <!-- no translation found for sim_lock_settings_title (3596566201762038857) -->
+    <skip />
+    <string name="sim_pin_toggle" msgid="6814489621760857328">"SIM zárolása"</string>
     <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"PIN-kód kérése a táblagép használatához"</string>
     <string name="sim_lock_on" product="default" msgid="3303147192981388923">"PIN-kód kérése a telefon használatához"</string>
     <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"PIN-kód kérése a táblagép használatához"</string>
     <string name="sim_lock_off" product="default" msgid="4634118006847137785">"PIN-kód kérése a telefon használatához"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"SIM-kártya PIN-kódjának módosítása"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"SIM-kártya PIN-kódja"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"SIM-kártya lezárása"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"SIM-kártya feloldása"</string>
+    <string name="sim_enable_sim_lock" msgid="6486354334679225748">"SIM zárolása"</string>
+    <string name="sim_disable_sim_lock" msgid="6939439812841857306">"SIM feloldása"</string>
     <string name="sim_enter_old" msgid="6882545610939674813">"SIM-kártya régi PIN-kódja"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"Új PIN-kód a SIM kártyához"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Írja be ismét az új PIN-kódot"</string>
@@ -1485,7 +1490,8 @@
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"A PIN-kódok nem egyeznek"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Nem lehet megváltoztatni a PIN-kódot.\nLehet, hogy hibás a PIN-kód."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"A SIM-kártya PIN-kódja sikeresen módosításra került"</string>
-    <string name="sim_lock_failed" msgid="16360418201678317">"Nem lehet megváltoztatni a SIM-kártya zárolási állapotát.\nLehet, hogy hibás a PIN-kód."</string>
+    <!-- no translation found for sim_lock_failed (2088257523501265954) -->
+    <skip />
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"Nem sikerült letiltani a PIN-kódot."</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"Nem sikerült engedélyezni a PIN-kódot."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"OK"</string>
@@ -1495,7 +1501,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"A(z) <xliff:g id="CARRIER">%1$s</xliff:g> szolgáltatót használja?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"A(z) <xliff:g id="CARRIER2_0">%2$s</xliff:g> szolgáltatót használja a mobiladat-kapcsolathoz. Ha a(z) <xliff:g id="CARRIER1">%1$s</xliff:g> szolgáltatóra vált, az eszköz többé nem használja a(z) <xliff:g id="CARRIER2_1">%2$s</xliff:g> szolgáltatót a mobiladat-kapcsolathoz."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> használata"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"Frissíti a preferált SIM-et?"</string>
+    <string name="sim_preferred_title" msgid="8850185380445309835">"Frissíti a preferált SIM-et?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"Az eszközben található egyetlen SIM-kártya a következő: <xliff:g id="NEW_SIM">%1$s</xliff:g>. Ezt a SIM-kártyát szeretné használni mobiladat-kapcsolathoz, hívásokhoz és SMS-üzenetekhez?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Helytelen PIN-kód a SIM kártyához; vegye fel a kapcsolatot szolgáltatójával az eszköz feloldásához."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1760,17 +1766,17 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Wi-Fi, mobiladatok és Bluetooth visszaállítása"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Az összes hálózati beállítást visszaállítja, például a következőket:\n\n"<li>"Wi‑Fi"</li>\n<li>"Mobiladat"</li>\n<li>"Bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Törlés"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Letöltött SIM-ek törlése"</string>
+    <string name="reset_esim_title" msgid="4194570573425902754">"e-SIM-ek törlése"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"Ezzel nem szűnik meg egyetlen mobil-előfizetési csomag sem. Csere-SIM letöltése érdekében forduljon szolgáltatójához."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Beállítások visszaállítása"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Alaphelyzetbe állítja az összes hálózati beállítást? Ez a művelet nem vonható vissza."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Visszaállítja az összes hálózati beállítást, és törli a letöltött SIM-eket? Ez a művelet nem vonható vissza."</string>
+    <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"Visszaállítja az összes hálózati beállítást, és törli az eSIM-eket? Ez a művelet nem vonható vissza."</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Beállítások visszaállítása"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Visszaállítja?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"A hálózati beállítások visszaállítása nem hajtható végre ennél a felhasználónál"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"A hálózati beállítások vissza lettek állítva."</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Nem lehet törölni a SIM-eket"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"Hiba történt, ezért nem sikerült a letöltött SIM törlése.\n\nIndítsa újra az eszközt, majd próbálja újra."</string>
+    <string name="reset_esim_error_msg" msgid="7279607120606365250">"Hiba történt, ezért nem sikerült az eSIM törlése.\n\nIndítsa újra az eszközt, majd próbálja újra."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Összes adat törlése (gyári beállítások visszaállítása)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Összes adat törlése"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Ez minden adatot töröl a táblagép "<b>"belső tárhelyéről"</b>", többek között: \n\n"<li>"az Ön Google-fiókját"</li>\n<li>"a rendszer- és alkalmazásadatokat és a beállításokat"</li>\n<li>"a letöltött alkalmazásokat"</li></string>
@@ -3199,7 +3205,8 @@
     <string name="data_usage_menu_hide_ethernet" msgid="7792365022467586772">"Ethernet-használat rejtve"</string>
     <string name="data_usage_menu_metered" msgid="4279260736172851951">"Hálózati korlátozások"</string>
     <string name="data_usage_menu_auto_sync" msgid="2632694000068175025">"Adatok automatikus szinkronizálása"</string>
-    <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"SIM kártyák"</string>
+    <!-- no translation found for data_usage_menu_sim_cards (2827882471528568628) -->
+    <skip />
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"A korlátnál szüneteltetve"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Automata adatszinkronizálás"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Személyesadat-szinkronizálás"</string>
@@ -3521,10 +3528,12 @@
     <string name="wizard_next" msgid="3884832431439072471">"Tovább"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Befejezés"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM kártyák"</string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"SIM kártyák"</string>
+    <!-- no translation found for sim_setup_wizard_title (7030639256610746768) -->
+    <skip />
+    <string name="sim_settings_title" msgid="2254609719033946272">"SIM-ek"</string>
     <string name="sim_settings_summary" msgid="5777472623476930332">"<xliff:g id="SIM_NAME">%1$s</xliff:g> – <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
-    <string name="sim_cards_changed_message" msgid="7726897488921853655">"A SIM kártyák megváltoztak"</string>
+    <!-- no translation found for sim_cards_changed_message (7374776581857835134) -->
+    <skip />
     <string name="sim_cards_changed_message_summary" msgid="7338082681445213621">"Koppintson rá tevékenységek beállításához"</string>
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Nem áll rendelkezésre mobiladat"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Adatforgalmi SIM-kártya kiválasztásához koppintson rá"</string>
@@ -3536,7 +3545,8 @@
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Ha a(z) <xliff:g id="NEW_SIM">%1$s</xliff:g> szolgáltatóra vált, az eszköz többé nem használja a(z) <xliff:g id="OLD_SIM">%2$s</xliff:g> szolgáltatót a mobiladat-kapcsolathoz."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"<xliff:g id="NEW_SIM">%1$s</xliff:g> használata"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Hívás a következővel:"</string>
-    <string name="sim_select_card" msgid="1226182454109919045">"Válasszon egy SIM kártyát"</string>
+    <!-- no translation found for sim_select_card (2975707305270216652) -->
+    <skip />
     <string name="sim_card_number_title" msgid="4728780444646439845">"<xliff:g id="CARD_NUMBER">%1$d</xliff:g>. SIM-kártya"</string>
     <string name="sim_editor_name" msgid="5900178038499314621">"SIM-kártya neve"</string>
     <string name="sim_name_hint" msgid="8231524869124193119">"Adja meg a SIM-kártya nevét"</string>
@@ -3544,7 +3554,8 @@
     <string name="sim_editor_carrier" msgid="2424593350691002557">"Szolgáltató"</string>
     <string name="sim_editor_number" msgid="3209002966895156006">"Szám"</string>
     <string name="sim_editor_color" msgid="9067029630083892961">"SIM-kártya színe"</string>
-    <string name="sim_card_select_title" msgid="8146523005929848793">"SIM-kártya kiválasztása"</string>
+    <!-- no translation found for sim_card_select_title (8387396377407327067) -->
+    <skip />
     <string name="color_orange" msgid="216547825489739010">"Narancssárga"</string>
     <string name="color_purple" msgid="6603701972079904843">"Lila"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"Nincs SIM-kártya behelyezve"</string>
@@ -3558,7 +3569,7 @@
     <string name="preferred_network_offload_footer" msgid="374984523082849648">"A Hálózat nevének küldését kikapcsolva harmadik felek nem férhetnek hozzá a hálózati adatokhoz."</string>
     <string name="preferred_network_offload_popup" msgid="3949937898807213370">"A Hálózat nevének küldését kikapcsolva nem kapcsolódik automatikusan rejtett hálózatokhoz."</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"SIM kártyák módosítva."</string>
+    <string name="sim_notification_title" msgid="2819551384383504031">"SIM-ek módosítva."</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Koppintson ide a beállításhoz"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Mindig kérdezzen rá"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Ki kell választani"</string>
@@ -4311,7 +4322,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Jelszó kérése a rögzítés feloldásához"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Eszköz zárolása a rögzítés feloldásakor"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"SIM törlésének megerősítése"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"A letöltött SIM törlése előtt igazolnia kell magát"</string>
+    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Az eSIM törlése előtt igazolnia kell személyazonosságát"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"A munkahelyi profil kezelője:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Kezeli: <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Kísérleti)"</string>
@@ -5262,7 +5273,8 @@
     <string name="empty_networks_list" msgid="6519489879480673428">"Nem található hálózat."</string>
     <string name="network_query_error" msgid="6406348372070035274">"Nincs hálózat. Próbálja újra."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(tiltott)"</string>
-    <string name="no_sim_card" msgid="1497407489810953863">"Nincs SIM-kártya"</string>
+    <!-- no translation found for no_sim_card (1478277597822967684) -->
+    <skip />
     <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
     <string name="wifi_no_sim_card" msgid="7144290066491585672">"Nincs SIM-kártya"</string>
     <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Nincs"</string>
@@ -5312,7 +5324,8 @@
     <string name="label_available" msgid="5305726869955838606">"Rendelkezésre álló hálózatok"</string>
     <string name="load_networks_progress" msgid="4717874401621250401">"Keresés…"</string>
     <string name="register_on_network" msgid="2169662800750709709">"Regisztráció a(z) <xliff:g id="NETWORK">%s</xliff:g> hálózaton…"</string>
-    <string name="not_allowed" msgid="5756935665192962915">"SIM-kártyája nem teszi lehetővé a kapcsolódást ehhez a hálózathoz."</string>
+    <!-- no translation found for not_allowed (8969977039734782273) -->
+    <skip />
     <string name="connect_later" msgid="2330538069949281352">"Most nem lehet csatlakozni a hálózathoz. Próbálja meg később."</string>
     <string name="registration_done" msgid="1750434215698850123">"Regisztrálva a hálózaton."</string>
     <string name="select_automatically" msgid="2419752566747259155">"Hálózat automatikus kiválasztása"</string>
@@ -5321,7 +5334,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Mobiladat"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Adathozzáférés a mobilhálózaton keresztül"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"A telefon automatikusan erre a szolgáltatóra vált, ha hatókörön belül van"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Nem áll rendelkezésre SIM-kártya"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"Nincs rendelkezésre álló SIM"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Hívásokra vonatkozó preferencia"</string>
     <string name="sms_preference" msgid="7742964962568219351">"SMS-preferencia"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Mindig kérdezzen rá"</string>
@@ -5342,8 +5355,8 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Továbbiak hozzáadása"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Aktív / SIM-kártya"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Inaktív / SIM-kártya"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Aktív / Letöltött SIM"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Inaktív / Letöltött SIM"</string>
+    <string name="mobile_network_active_esim" msgid="3984452275968408382">"Aktív/eSIM"</string>
+    <string name="mobile_network_inactive_esim" msgid="8777415108263057939">"Inaktív/eSIM"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"SIM-kártya neve és színe"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Név"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Szín (kompatibilis alkalmazásokban)"</string>
@@ -5353,7 +5366,8 @@
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"A SIM letiltásához távolítsa el a kártyát az eszközből"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Koppintson a következő aktiválásához: <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"Vált a(z) <xliff:g id="CARRIER">%1$s</xliff:g> szolgáltatóra?"</string>
-    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Egyszerre csak egy letöltött SIM lehet aktív.\n\nHa átvált a(z) <xliff:g id="CARRIER1">%1$s</xliff:g> szolgáltatóra, nem mondja le a(z) <xliff:g id="CARRIER2">%2$s</xliff:g> szolgáltatását."</string>
+    <!-- no translation found for mobile_network_esim_swap_confirm_body (592668232798598450) -->
+    <skip />
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"Váltás erre: <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"SIM törlése"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"Nem lehet törölni a SIM-et"</string>
@@ -5388,7 +5402,7 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Átvált SIM-kártya használatára?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"A(z) <xliff:g id="CARRIER_NAME">%1$s</xliff:g> szolgáltatót szeretné használni?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Egyszerre csak egy SIM-kártya lehet aktív.\n\nA(z) <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> szolgáltatóra történő váltással nem mondja le a(z) <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> szolgáltatását."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Egyszerre csak egy letöltött SIM lehet aktív.\n\nA(z) <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> szolgáltatóra történő váltással nem mondja le a(z) <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> szolgáltatását."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"Egyszerre csak egy eSIM lehet aktív.\n\nA(z) <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> szolgáltatóra történő váltással nem mondja le a(z) <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> szolgáltatását."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Egyszerre csak egy SIM-kártya lehet aktív.\n\nA váltással nem mondja le a(z) <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> szolgáltatását."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Egyszerre két SIM-kártyát használhat. A(z) <xliff:g id="CARRIER_NAME">%1$s</xliff:g> szolgáltató használatához kapcsolja ki a másik SIM-kártyát."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Váltás erre: <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -5434,8 +5448,8 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"A rendszer a(z) <xliff:g id="CARRIER_NAME">%1$s</xliff:g> szolgáltatót használja a mobiladatokhoz, a hívásokhoz és az SMS-ekhez."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Nincs rendelkezésre álló aktív SIM-kártya"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Ha a jövőben mobiladatokkal, telefonhívással, továbbá SMS-ekkel kapcsolatos funkciókat szeretne használni, nyissa meg a hálózati beállításokat"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"SIM-kártya"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Törli ezt a letöltött SIM-et?"</string>
+    <string name="sim_card_label" msgid="6263064316075963775">"SIM"</string>
+    <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Törli ezt az eSIM-et?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"A SIM törlésével eltávolítja a(z) <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> szolgáltatását erről az eszközről.\n\nA(z) <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> szolgáltatását nem mondja le."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Törlés"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"SIM törlése…"</string>
@@ -5619,8 +5633,8 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Engedélyezi a Google Fi szolgáltatásnak W+-hálózatok használatát a sebesség és lefedettség növeléséhez"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+-hálózat"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"LETÖLTÖTT SIM"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"LETÖLTÖTT SIM-EK"</string>
+    <string name="downloaded_sim_category_title" msgid="2876988650413179752">"eSIM"</string>
+    <string name="downloaded_sims_category_title" msgid="487799905978489922">"eSIM-ek"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Aktív"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Inaktív"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Alapértelmezett a következőhöz: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5680,7 +5694,7 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Hívásbeállítások"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Beállítások frissítése…"</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Hiba a hívásbeállításokban"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Hiba a hálózatban vagy a SIM-kártyánál."</string>
+    <string name="smart_forwarding_failed_text" msgid="8682640643264071789">"Hálózati vagy SIM-hiba."</string>
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"A SIM nincs aktiválva."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Telefonszámok megadása"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Telefonszám megadása"</string>
@@ -5705,10 +5719,10 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"Előző"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Következő"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Szín előnézete"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"SIM-kártyához való hozzáférés kérése"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Egy eszköz szeretne hozzáférni a SIM-kártyájához. Koppintson a részletekért."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Engedélyezi a SIM-kártyához való hozzáférést?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Egy Bluetooth-eszköz (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) szeretne hozzáférni a SIM-kártyáján található adatokhoz (többek között a névjegyeihez is).\n\nAmíg csatlakozik, a(z) <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> eszköz fogadja majd a(z) <xliff:g id="PHONE_NUMBER">%3$s</xliff:g> telefonszámra érkező összes hívást."</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="7351015416346359536">"SIM-hozzáférési kérelem"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="8685623260103018309">"Egy eszköz hozzá szeretne férni az Ön SIM-jéhez. Koppintson a részletekért."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="5616323725563125179">"Engedélyezi a SIM-hez való hozzáférést?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="6281997628405909566">"Egy Bluetooth-eszköz (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) szeretne hozzáférni a SIM-jén található adatokhoz (többek között a névjegyeihez is).\n\nAmíg csatlakozik, a(z) <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> eszköz fogadja majd a(z) <xliff:g id="PHONE_NUMBER">%3$s</xliff:g> telefonszámra érkező összes hívást."</string>
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Bluetooth-eszköz áll rendelkezésre"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Egy eszköz csatlakozni szeretne. Koppintson a részletekért."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Csatlakozik a Bluetooth-eszközhöz?"</string>

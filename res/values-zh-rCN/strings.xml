@@ -23,6 +23,7 @@
     <string name="deny" msgid="7326117222944479942">"拒绝"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"开启"</string>
     <string name="device_info_default" msgid="1406619232867343310">"未知"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"点按即可显示信息"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">现在只需再执行 <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> 步操作即可进入开发者模式。</item>
       <item quantity="one">现在只需再执行 <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> 步操作即可进入开发者模式。</item>
@@ -139,7 +140,8 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"消息权限申请"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"“%1$s”想要查看您的消息。要向“%2$s”授予权限吗？"</string>
     <string name="bluetooth_sap_request" msgid="473439406287008397">"SIM 访问权限请求"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>想要访问您的 SIM 卡。如果授权该设备访问 SIM 卡，您设备的数据连接功能在蓝牙连接期间将停用。将访问权限授予<xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
+    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (6194086753523415820) -->
+    <skip />
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"向其他设备显示为“<xliff:g id="DEVICE_NAME">^1</xliff:g>”"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"开启蓝牙即可连接到其他设备。"</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"您的设备"</string>
@@ -336,7 +338,8 @@
     <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"设备未加密"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"锁定屏幕"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"要显示的内容"</string>
-    <string name="security_settings_summary" msgid="1627059516127354233">"设置我的位置、屏幕解锁、SIM 卡锁定和凭据存储锁定"</string>
+    <!-- no translation found for security_settings_summary (4248337854143139822) -->
+    <skip />
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"设置我的位置、屏幕解锁和凭据存储锁定"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"隐私"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"不可用"</string>
@@ -446,7 +449,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"使用指纹解锁手机或批准购买交易。\n\n请注意：您无法使用指纹来解锁此设备。要了解详情，请与贵单位的管理员联系。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"取消"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"不用了"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"同意"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"我同意"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"要跳过指纹设置？"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"指纹设置只需片刻时间。如果您跳过此设置，之后可以在设置中添加您的指纹。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"看到该图标时，您可以使用指纹验证身份，例如在登录应用或批准购买交易时"</string>
@@ -831,8 +834,8 @@
     <string name="bluetooth_pin_values_hint" msgid="2753202519050044670">"通常为 0000 或 1234"</string>
     <string name="bluetooth_pin_values_hint_16_digits" msgid="5603928271430883558">"必须为 16 位数字"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"您可能还需要在另一设备上输入此PIN码。"</string>
-    <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"您可能还需要在另一台设备上输入此密钥。"</string>
-    <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"要与以下设备配对：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;请确保其显示的配对密钥为：&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"您可能还需要在另一台设备上输入此通行密钥。"</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"要与以下设备配对：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;请确保其显示的通行密钥为：&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"确认与协调组配对"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"来自：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;要与此设备配对吗？"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"要与 <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> 设备配对，请在该设备上键入：<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>，然后按回车键。"</string>
@@ -1430,6 +1433,7 @@
     <string name="screen_timeout" msgid="7709947617767439410">"屏幕超时"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"屏幕关闭"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"闲置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>后"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"未设置"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"壁纸"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"壁纸和样式"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"主屏幕、锁定屏幕"</string>
@@ -1463,20 +1467,21 @@
     <string name="force_bold_text" msgid="4620929631102086716">"粗体文字"</string>
     <string name="title_font_size" msgid="570613010306330622">"字体大小"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"放大或缩小文字"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"SIM 卡锁定设置"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"SIM 卡锁定"</string>
+    <string name="sim_lock_settings" msgid="7331982427303002613">"SIM 卡锁定设置"</string>
+    <string name="sim_lock_settings_category" msgid="6475255139493877786">"SIM 卡锁定"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"已关闭"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"已锁定"</string>
-    <string name="sim_lock_settings_title" msgid="1401619059761012696">"SIM 卡锁定方式"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"锁定 SIM 卡"</string>
+    <!-- no translation found for sim_lock_settings_title (3596566201762038857) -->
+    <skip />
+    <string name="sim_pin_toggle" msgid="6814489621760857328">"锁定 SIM 卡"</string>
     <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"需要输入PIN码才能使用平板电脑"</string>
     <string name="sim_lock_on" product="default" msgid="3303147192981388923">"需要输入 PIN 码才能使用手机"</string>
     <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"需要输入PIN码才能使用平板电脑"</string>
     <string name="sim_lock_off" product="default" msgid="4634118006847137785">"需要输入 PIN 码才能使用手机"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"更改 SIM 卡 PIN 码"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"SIM 卡 PIN 码"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"锁定 SIM 卡"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"解锁 SIM 卡"</string>
+    <string name="sim_enable_sim_lock" msgid="6486354334679225748">"锁定 SIM 卡"</string>
+    <string name="sim_disable_sim_lock" msgid="6939439812841857306">"解锁 SIM 卡"</string>
     <string name="sim_enter_old" msgid="6882545610939674813">"旧 SIM 卡 PIN 码"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"新 SIM 卡 PIN 码"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"重新输入新的PIN码"</string>
@@ -1485,7 +1490,8 @@
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"PIN 码不匹配"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"无法更改PIN码。\n输入的PIN码可能不正确。"</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"已成功更改 SIM 卡 PIN 码"</string>
-    <string name="sim_lock_failed" msgid="16360418201678317">"无法更改 SIM 卡锁定状态。\nPIN 码可能不正确。"</string>
+    <!-- no translation found for sim_lock_failed (2088257523501265954) -->
+    <skip />
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"无法停用 PIN 码。"</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"无法启用 PIN 码。"</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"确定"</string>
@@ -1495,7 +1501,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"要使用<xliff:g id="CARRIER">%1$s</xliff:g>的移动数据吗？"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"您目前使用的是<xliff:g id="CARRIER2_0">%2$s</xliff:g>的移动数据。如果切换到<xliff:g id="CARRIER1">%1$s</xliff:g>，系统将不再使用<xliff:g id="CARRIER2_1">%2$s</xliff:g>的移动数据。"</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"使用“<xliff:g id="CARRIER">%1$s</xliff:g>”"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"要更新首选 SIM 卡吗？"</string>
+    <string name="sim_preferred_title" msgid="8850185380445309835">"要更新首选 SIM 卡吗？"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"“<xliff:g id="NEW_SIM">%1$s</xliff:g>”是此设备上唯一的 SIM 卡。您要将此 SIM 卡用于移动数据网络、通话和收发短信吗？"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"SIM 卡 PIN 码不正确，您现在必须联系运营商为您解锁设备。"</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1760,17 +1766,17 @@
     <string name="reset_network_title" msgid="1395494440355807616">"重置 WLAN、移动数据网络和蓝牙设置"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"此操作会重置所有网络设置，包括：\n\n"<li>"WLAN"</li>\n<li>"移动数据网络"</li>\n<li>"蓝牙"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"清除"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"清除已下载的 SIM 卡"</string>
+    <string name="reset_esim_title" msgid="4194570573425902754">"清空 eSIM 卡"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"此操作并不会取消任何移动服务套餐。如要下载替代 SIM 卡，请与您的运营商联系。"</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"重置设置"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"要重置所有网络设置吗？此操作无法撤消。"</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"要重置所有网络设置并清除已下载的 SIM 卡吗？此操作无法撤消。"</string>
+    <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"要重置所有网络设置并清空 eSIM 卡吗？此操作无法撤消。"</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"重置设置"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"要重置网络设置吗？"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"此用户无权重置网络设置"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"网络设置已重置"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"无法清除 SIM 卡"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"发生错误，因此无法清除已下载的 SIM 卡。\n\n请重启设备，然后重试。"</string>
+    <string name="reset_esim_error_msg" msgid="7279607120606365250">"发生错误，因此无法清空 eSIM 卡。\n\n请重启设备，然后重试。"</string>
     <string name="main_clear_title" msgid="277664302144837723">"清除所有数据（恢复出厂设置）"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"清除所有数据（恢复出厂设置）"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"此操作会清除您平板电脑"<b>"内部存储空间"</b>"中的所有数据，包括：\n\n"<li>"您的 Google 帐号"</li>\n<li>"系统和应用的数据和设置"</li>\n<li>"已下载的应用"</li></string>
@@ -2999,7 +3005,7 @@
     <string name="menu_duration_12h" msgid="9206922888181602565">"12 小时"</string>
     <string name="menu_duration_1d" msgid="8538390358158862330">"1天"</string>
     <string name="menu_show_system" msgid="3780310384799907818">"显示系统应用"</string>
-    <string name="menu_hide_system" msgid="5197937451381420622">"隐藏系统程序"</string>
+    <string name="menu_hide_system" msgid="5197937451381420622">"隐藏系统应用"</string>
     <string name="menu_show_percentage" msgid="6143205879027928330">"显示百分比"</string>
     <string name="menu_use_uss" msgid="1663914348353623749">"使用 USS"</string>
     <string name="menu_proc_stats_type" msgid="5048575824389855689">"统计信息类型"</string>
@@ -3199,7 +3205,8 @@
     <string name="data_usage_menu_hide_ethernet" msgid="7792365022467586772">"隐藏有线网络流量"</string>
     <string name="data_usage_menu_metered" msgid="4279260736172851951">"网络限制"</string>
     <string name="data_usage_menu_auto_sync" msgid="2632694000068175025">"自动同步数据"</string>
-    <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"SIM 卡"</string>
+    <!-- no translation found for data_usage_menu_sim_cards (2827882471528568628) -->
+    <skip />
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"已暂停（达到数据流量上限）"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"自动同步数据"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"自动同步个人帐号数据"</string>
@@ -3521,10 +3528,12 @@
     <string name="wizard_next" msgid="3884832431439072471">"下一步"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"完成"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM 卡"</string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"SIM 卡"</string>
+    <!-- no translation found for sim_setup_wizard_title (7030639256610746768) -->
+    <skip />
+    <string name="sim_settings_title" msgid="2254609719033946272">"SIM 卡"</string>
     <string name="sim_settings_summary" msgid="5777472623476930332">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
-    <string name="sim_cards_changed_message" msgid="7726897488921853655">"SIM 卡已更改"</string>
+    <!-- no translation found for sim_cards_changed_message (7374776581857835134) -->
+    <skip />
     <string name="sim_cards_changed_message_summary" msgid="7338082681445213621">"点按即可设置活动"</string>
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"无法使用移动数据网络"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"点按即可选择上网用的 SIM 卡"</string>
@@ -3536,7 +3545,8 @@
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"如果切换到<xliff:g id="NEW_SIM">%1$s</xliff:g>，系统将不再使用<xliff:g id="OLD_SIM">%2$s</xliff:g>的移动数据。"</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"使用“<xliff:g id="NEW_SIM">%1$s</xliff:g>”"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"选择用于通话的 SIM 卡"</string>
-    <string name="sim_select_card" msgid="1226182454109919045">"选择 SIM 卡"</string>
+    <!-- no translation found for sim_select_card (2975707305270216652) -->
+    <skip />
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM 卡 <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_editor_name" msgid="5900178038499314621">"SIM 卡名称"</string>
     <string name="sim_name_hint" msgid="8231524869124193119">"输入 SIM 卡名称"</string>
@@ -3544,7 +3554,8 @@
     <string name="sim_editor_carrier" msgid="2424593350691002557">"运营商"</string>
     <string name="sim_editor_number" msgid="3209002966895156006">"号码"</string>
     <string name="sim_editor_color" msgid="9067029630083892961">"SIM卡颜色"</string>
-    <string name="sim_card_select_title" msgid="8146523005929848793">"选择 SIM 卡"</string>
+    <!-- no translation found for sim_card_select_title (8387396377407327067) -->
+    <skip />
     <string name="color_orange" msgid="216547825489739010">"橙色"</string>
     <string name="color_purple" msgid="6603701972079904843">"紫色"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"尚未插入SIM卡"</string>
@@ -3558,7 +3569,7 @@
     <string name="preferred_network_offload_footer" msgid="374984523082849648">"关闭网络名称广播可防止第三方获取您的网络信息。"</string>
     <string name="preferred_network_offload_popup" msgid="3949937898807213370">"关闭网络名称广播可防止设备自动连接到隐藏的网络。"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"SIM 卡已更改。"</string>
+    <string name="sim_notification_title" msgid="2819551384383504031">"已更改 SIM 卡。"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"点按即可进行设置"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"每次都询问"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"必须选择"</string>
@@ -4311,7 +4322,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"取消固定屏幕前要求输入密码"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"取消固定屏幕时锁定设备"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"删除 SIM 卡前需确认"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"须先验证身份，然后才能清除已下载的 SIM 卡"</string>
+    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"先验证是您本人在操作，然后才能清空 eSIM 卡"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"此工作资料由以下应用管理："</string>
     <string name="managing_admin" msgid="2633920317425356619">"由<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>管理"</string>
     <string name="experimental_preference" msgid="869354050717870055">"（实验性）"</string>
@@ -5163,7 +5174,7 @@
     <string name="input_method_category" msgid="2252659253631639005">"输入法"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"触控笔手写功能"</string>
     <string name="stylus_handwriting_summary" msgid="6333425895172696950">"启用后，如果焦点位于编辑器，当前输入法将接收触控笔的 MotionEvent 对象。"</string>
-    <string name="device_theme" msgid="5027604586494772471">"设备主题背景"</string>
+    <string name="device_theme" msgid="5027604586494772471">"设备主题"</string>
     <string name="default_theme" msgid="4815428567082263639">"默认"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"网络名称"</string>
     <string name="show_operator_name_summary" msgid="5352696579216501773">"在状态栏中显示网络名称"</string>
@@ -5262,7 +5273,8 @@
     <string name="empty_networks_list" msgid="6519489879480673428">"未找到网络。"</string>
     <string name="network_query_error" msgid="6406348372070035274">"找不到网络，请重试。"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"（禁止）"</string>
-    <string name="no_sim_card" msgid="1497407489810953863">"没有 SIM 卡"</string>
+    <!-- no translation found for no_sim_card (1478277597822967684) -->
+    <skip />
     <string name="sim_card" msgid="6381158752066377709">"SIM 卡"</string>
     <string name="wifi_no_sim_card" msgid="7144290066491585672">"没有 SIM 卡"</string>
     <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"无"</string>
@@ -5312,7 +5324,8 @@
     <string name="label_available" msgid="5305726869955838606">"可用网络"</string>
     <string name="load_networks_progress" msgid="4717874401621250401">"正在搜索…"</string>
     <string name="register_on_network" msgid="2169662800750709709">"正在<xliff:g id="NETWORK">%s</xliff:g>上注册…"</string>
-    <string name="not_allowed" msgid="5756935665192962915">"您的 SIM 卡不允许连接到此网络。 daisy 您的 SIM 卡无法连接到此网络。"</string>
+    <!-- no translation found for not_allowed (8969977039734782273) -->
+    <skip />
     <string name="connect_later" msgid="2330538069949281352">"目前无法连接到此网络，请稍后重试。"</string>
     <string name="registration_done" msgid="1750434215698850123">"已在网络上注册。"</string>
     <string name="select_automatically" msgid="2419752566747259155">"自动选择网络"</string>
@@ -5321,7 +5334,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"移动数据"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"通过移动网络访问数据"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"手机会在进入有效范围时自动切换到此运营商"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"没有可用的 SIM 卡"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"没有可用的 SIM 卡"</string>
     <string name="calls_preference" msgid="2166481296066890129">"通话偏好设置"</string>
     <string name="sms_preference" msgid="7742964962568219351">"短信偏好设置"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"每次都询问"</string>
@@ -5342,8 +5355,8 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"添加更多"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"已激活 / SIM 卡"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"未激活 / SIM 卡"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"已激活 / 下载的 SIM 卡"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"未激活 / 下载的 SIM 卡"</string>
+    <string name="mobile_network_active_esim" msgid="3984452275968408382">"已启用/eSIM 卡"</string>
+    <string name="mobile_network_inactive_esim" msgid="8777415108263057939">"未启用/eSIM 卡"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"SIM 卡名称和颜色"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"名称"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"颜色（由兼容应用使用）"</string>
@@ -5353,7 +5366,8 @@
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"要停用此 SIM 卡，请将其拔出"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"点按即可激活<xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"要切换到<xliff:g id="CARRIER">%1$s</xliff:g>吗？"</string>
-    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"一次只能启用一个已下载的 SIM 卡。\n\n切换到<xliff:g id="CARRIER1">%1$s</xliff:g>不会取消<xliff:g id="CARRIER2">%2$s</xliff:g>服务。"</string>
+    <!-- no translation found for mobile_network_esim_swap_confirm_body (592668232798598450) -->
+    <skip />
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"切换到<xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"清除 SIM 卡"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"无法清除 SIM 卡"</string>
@@ -5388,7 +5402,7 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"要切换为使用 SIM 卡吗？"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"要使用“<xliff:g id="CARRIER_NAME">%1$s</xliff:g>”吗？"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"一次只能启用一个 SIM 卡。\n\n切换到<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>不会取消<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>服务。"</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"一次只能启用一个已下载的 SIM 卡。\n\n切换到<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>不会取消<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>服务。"</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"一次只能启用一个 eSIM 卡。\n\n切换到<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>不会取消<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>服务。"</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"一次只能启用一个 SIM 卡。\n\n进行切换并不会取消<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>服务。"</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"可以同时使用 2 张 SIM 卡。要使用<xliff:g id="CARRIER_NAME">%1$s</xliff:g>，请关闭另一张 SIM 卡。"</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"切换到<xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -5434,8 +5448,8 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"系统将通过<xliff:g id="CARRIER_NAME">%1$s</xliff:g>使用移动数据、通话和短信功能。"</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"没有可用的 SIM 卡"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"如要在日后使用移动数据、通话和短信功能，请转到“网络设置”部分"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"SIM 卡"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"要清除这个已下载的 SIM 卡吗？"</string>
+    <string name="sim_card_label" msgid="6263064316075963775">"SIM 卡"</string>
+    <string name="erase_sim_dialog_title" msgid="4742077437653028326">"要清空此 eSIM 卡吗？"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"清除此 SIM 卡将从此设备中移除<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>服务。\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>的服务不会因此被取消。"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"清除"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"正在清空 SIM 卡…"</string>
@@ -5619,8 +5633,8 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"允许 Google Fi 使用 W+ 网络来提高速度和扩大覆盖范围"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ 网络"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM 卡"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"已下载的 SIM 卡"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"已下载的 SIM 卡"</string>
+    <string name="downloaded_sim_category_title" msgid="2876988650413179752">"eSIM 卡"</string>
+    <string name="downloaded_sims_category_title" msgid="487799905978489922">"eSIM 卡"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"使用中"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"未使用"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" /<xliff:g id="ID_1">%1$s</xliff:g>默认配置"</string>
@@ -5680,7 +5694,7 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"通话设置"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"正在更新设置…"</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"通话设置错误"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"网络或 SIM 卡错误。"</string>
+    <string name="smart_forwarding_failed_text" msgid="8682640643264071789">"网络或 SIM 卡错误。"</string>
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM 卡未激活。"</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"输入电话号码"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"输入电话号码"</string>
@@ -5705,10 +5719,10 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"上一页"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"下一页"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"颜色预览"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"SIM 卡访问请求"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"有一部设备想访问您的 SIM 卡。点按可了解详情。"</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"要允许访问 SIM 卡吗？"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"蓝牙设备“<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>”想访问您的 SIM 卡中的数据。其中包括您的联系人信息。\n\n在保持连接期间，“<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>”将会收到打给 <xliff:g id="PHONE_NUMBER">%3$s</xliff:g> 的所有电话。"</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="7351015416346359536">"SIM 卡访问权限请求"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="8685623260103018309">"有一部设备想访问您的 SIM 卡。点按可了解详情。"</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="5616323725563125179">"要允许访问 SIM 卡吗？"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="6281997628405909566">"蓝牙设备“<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>”想访问您的 SIM 卡中的数据。其中包括您的联系人信息。\n\n在保持连接期间，“<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>”将会收到打给 <xliff:g id="PHONE_NUMBER">%3$s</xliff:g> 的所有电话。"</string>
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"有可用的蓝牙设备"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"有一部设备想要连接。点按可了解详情。"</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"要连接到蓝牙设备吗？"</string>

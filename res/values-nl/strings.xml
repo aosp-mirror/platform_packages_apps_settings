@@ -23,6 +23,7 @@
     <string name="deny" msgid="7326117222944479942">"Weigeren"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"Aanzetten"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Onbekend"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"Tik om informatie te tonen"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">Je moet nog <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> stappen uitvoeren om ontwikkelaar te worden.</item>
       <item quantity="one">Je moet nog <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> stap uitvoeren om ontwikkelaar te worden.</item>
@@ -139,7 +140,8 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Toegangsverzoek voor berichten"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"%1$s wil toegang tot je berichten. Toegang geven aan %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="473439406287008397">"Toegangsverzoek voor simkaart"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> wil toegang tot je simkaart. Als je toegang tot de simkaart verleent, heb je geen gegevensverbinding op je apparaat zolang je verbonden bent. Verleen <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> toegang"</string>
+    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (6194086753523415820) -->
+    <skip />
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Zichtbaar als <xliff:g id="DEVICE_NAME">^1</xliff:g> voor andere apparaten"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Zet bluetooth aan om verbinding met andere apparaten te maken."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Je apparaten"</string>
@@ -336,7 +338,8 @@
     <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"Apparaat niet versleuteld"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Vergrendelscherm"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Wat wordt getoond"</string>
-    <string name="security_settings_summary" msgid="1627059516127354233">"\'Mijn locatie\', schermontgrendeling, sim- en certificaatopslagvergrendeling instellen"</string>
+    <!-- no translation found for security_settings_summary (4248337854143139822) -->
+    <skip />
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"\'Mijn locatie\' instellen, scherm ontgrendelen, certificaatopslag vergrendelen"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"Privacy"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Niet beschikbaar"</string>
@@ -346,7 +349,7 @@
     <string name="safety_center_summary" msgid="3554867379951053869">"App-beveiliging, apparaatvergrendeling, rechten"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Gezicht toegevoegd"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Tik om ontgrendelen via gezicht in te stellen"</string>
-    <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Ontgrendelen via gezicht"</string>
+    <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Ontgrendelen via gezichtsherkenning"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Ontgrendelen via gezichtsherkenning voor werk"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Ontgrendelen via gezichtsherkenning instellen"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Ontgrendelen via gezichtsherkenning instellen"</string>
@@ -472,7 +475,7 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Ga naar een plek met zachter licht en probeer het opnieuw"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Je hebt het maximale aantal pogingen bereikt"</string>
     <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Gebruik je vingerafdruk om je tablet te ontgrendelen of te bevestigen dat jij het bent als je bijvoorbeeld inlogt bij apps"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Gebruik je vingerafdruk om je apparaat te ontgrendelen of te bevestigen dat jij het bent als je inlogt bij apps"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Gebruik je vingerafdruk om je apparaat te ontgrendelen of te bevestigen dat jij het bent als je inlogt bij apps."</string>
     <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Gebruik je vingerafdruk om je telefoon te ontgrendelen of te bevestigen dat jij het bent als je inlogt bij apps"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Ontgrendelen via gezichtsherkenning en vingerafdruk"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Tik om in te stellen"</string>
@@ -517,7 +520,7 @@
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Volg het vingerafdrukicoon"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Raak de sensor meerdere keren aan om de verschillende delen van je vingerafdruk toe te voegen."</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Tik en houd het vingerafdrukicoon vast elke keer dat het beweegt. Zo kan er meer van je vingerafdruk worden geregistreerd."</string>
-    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Leg het puntje van je vingertop op de sensor"</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Houd het puntje van je vingertop op de sensor"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Plaats de linkerrand van je vinger"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Plaats de rechterrand van je vinger"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Leg de zijkant van je vingerafdruk op de sensor en houd vast. Doe dan hetzelfde aan de andere kant."</string>
@@ -1430,6 +1433,7 @@
     <string name="screen_timeout" msgid="7709947617767439410">"Time-out voor scherm"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Scherm wordt uitgezet"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Na <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> inactiviteit"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Niet ingesteld"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Achtergrond"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Achtergrond en stijl"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Startscherm, vergrendelscherm"</string>
@@ -1463,20 +1467,21 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Vetgedrukte tekst"</string>
     <string name="title_font_size" msgid="570613010306330622">"Lettergrootte"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Maak de tekst groter of kleiner"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"Instellingen simkaart­vergrendeling"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"Simkaartvergrendeling"</string>
+    <string name="sim_lock_settings" msgid="7331982427303002613">"Instellingen voor simlock"</string>
+    <string name="sim_lock_settings_category" msgid="6475255139493877786">"Simlock"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Uit"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"Vergrendeld"</string>
-    <string name="sim_lock_settings_title" msgid="1401619059761012696">"Simkaartvergrendeling"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"Simkaart vergrendelen"</string>
+    <!-- no translation found for sim_lock_settings_title (3596566201762038857) -->
+    <skip />
+    <string name="sim_pin_toggle" msgid="6814489621760857328">"Simkaart vergrendelen"</string>
     <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"Pincode vereist voor gebruik van tablet"</string>
     <string name="sim_lock_on" product="default" msgid="3303147192981388923">"Vereis pincode voor gebruik van telefoon"</string>
     <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"Pincode vereist voor gebruik van tablet"</string>
     <string name="sim_lock_off" product="default" msgid="4634118006847137785">"Vereis pincode voor gebruik van telefoon"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"Pincode simkaart wijzigen"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"Sim-pincode"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Simkaart vergrendelen"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"Simkaart ontgrendelen"</string>
+    <string name="sim_enable_sim_lock" msgid="6486354334679225748">"Simkaart vergrendelen"</string>
+    <string name="sim_disable_sim_lock" msgid="6939439812841857306">"Simkaart ontgrendelen"</string>
     <string name="sim_enter_old" msgid="6882545610939674813">"Oude sim-pincode"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"Nieuwe sim-pincode"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Typ nieuwe pincode opnieuw"</string>
@@ -1485,7 +1490,8 @@
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"Pincodes komen niet overeen"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Kan pincode niet wijzigen.\nPincode mogelijk onjuist."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"Sim-pincode gewijzigd"</string>
-    <string name="sim_lock_failed" msgid="16360418201678317">"Kan status van simkaartblokkering niet wijzigen.\nPincode mogelijk onjuist."</string>
+    <!-- no translation found for sim_lock_failed (2088257523501265954) -->
+    <skip />
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"Kan pincode niet uitzetten."</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"Kan pincode niet aanzetten."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"OK"</string>
@@ -1495,7 +1501,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"<xliff:g id="CARRIER">%1$s</xliff:g> gebruiken voor mobiele data?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Je gebruikt <xliff:g id="CARRIER2_0">%2$s</xliff:g> voor mobiele data. Als je overschakelt naar <xliff:g id="CARRIER1">%1$s</xliff:g>, wordt <xliff:g id="CARRIER2_1">%2$s</xliff:g> niet meer gebruikt voor mobiele data."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> gebruiken"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"Voorkeurs-simkaart updaten?"</string>
+    <string name="sim_preferred_title" msgid="8850185380445309835">"Voorkeurssimkaart updaten?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> is de enige simkaart in je apparaat. Wil je deze simkaart gebruiken voor mobiele data, gesprekken en sms-berichten?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Onjuiste pincode voor simkaart. Je moet nu contact opnemen met je provider om je apparaat te ontgrendelen."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1639,7 +1645,7 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Naam van opslag wijzigen"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Deze <xliff:g id="NAME_0">^1</xliff:g> is veilig uitgeworpen, maar is nog steeds beschikbaar. \n\nAls je de <xliff:g id="NAME_1">^1</xliff:g> wilt gebruiken, moet je deze eerst koppelen."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Deze <xliff:g id="NAME_0">^1</xliff:g> is beschadigd. \n\nAls je de <xliff:g id="NAME_1">^1</xliff:g> wilt gebruiken, moet je deze eerst instellen."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"Na het formatteren kun je deze <xliff:g id="NAME_0">^1</xliff:g> gebruiken in andere apparaten. \n\nAlle gegevens op deze <xliff:g id="NAME_1">^1</xliff:g> worden gewist. Misschien wil je daarom eerst een back-up maken. \n\n"<b>"Maak back-ups van foto\'s en andere media"</b>" \nVerplaats je mediabestanden naar alternatieve opslagruimte op dit apparaat of zet ze over naar een computer via een USB-kabel. \n\n"<b>"Maak back-ups van apps"</b>" \nAlle apps die zijn opgeslagen op deze <xliff:g id="NAME_6">^1</xliff:g>, worden verwijderd en de bijbehorende gegevens worden gewist. Als je deze apps wilt behouden, verplaats je ze naar alternatieve opslagruimte op dit apparaat."</string>
+    <string name="storage_internal_format_details" msgid="8922023528848861812">"Na het formatteren kun je <xliff:g id="NAME_0">^1</xliff:g> gebruiken in andere apparaten. \n\nAlle gegevens op <xliff:g id="NAME_1">^1</xliff:g> worden gewist. Misschien wil je daarom eerst een back-up maken. \n\n"<b>"Maak back-ups van foto\'s en andere media"</b>" \nVerplaats je mediabestanden naar alternatieve opslagruimte op dit apparaat of zet ze over naar een computer via een USB-kabel. \n\n"<b>"Maak back-ups van apps"</b>" \nAlle apps die zijn opgeslagen op <xliff:g id="NAME_6">^1</xliff:g>, worden verwijderd en de bijbehorende gegevens worden gewist. Als je deze apps wilt behouden, verplaats je ze naar alternatieve opslagruimte op dit apparaat."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Wanneer je deze <xliff:g id="NAME_0">^1</xliff:g> uitwerpt, werken apps die erop zijn opgeslagen niet meer. Mediabestanden die hierop zijn opgeslagen, zijn pas weer beschikbaar als het opslagapparaat weer wordt geplaatst."</b>" \n\nDe <xliff:g id="NAME_1">^1</xliff:g> is geformatteerd voor gebruik in dit apparaat en werkt niet in andere apparaten."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Als je de apps, foto\'s of gegevens op deze <xliff:g id="NAME">^1</xliff:g> wilt gebruiken, plaats je deze opnieuw. \n\nJe kunt er ook voor kiezen dit opslagapparaat te vergeten als het apparaat niet beschikbaar is. \n\nAls je ervoor kiest het apparaat te vergeten, gaat alle gegevens op het apparaat definitief verloren. \n\nJe kunt de apps later opnieuw installeren, maar de op het apparaat opgeslagen app-gegevens gaan verloren."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g> vergeten?"</string>
@@ -1693,9 +1699,9 @@
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g> formatteren"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Content naar <xliff:g id="NAME">^1</xliff:g> verplaatsen?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Je kunt bestanden, media en bepaalde apps naar deze <xliff:g id="NAME">^1</xliff:g> verplaatsen. \n\nHiermee maak je <xliff:g id="SIZE">^2</xliff:g> van je tabletopslag vrij. Het overzetten duurt ongeveer <xliff:g id="DURATION">^3</xliff:g>."</string>
-    <string name="storage_wizard_migrate_v2_body" product="default" msgid="809730501314645325">"Je kunt bestanden, media en bepaalde apps naar deze <xliff:g id="NAME">^1</xliff:g> verplaatsen. \n\nHiermee maak je <xliff:g id="SIZE">^2</xliff:g> van je telefoonopslag vrij. Het overzetten duurt ongeveer <xliff:g id="DURATION">^3</xliff:g>."</string>
+    <string name="storage_wizard_migrate_v2_body" product="default" msgid="809730501314645325">"Je kunt bestanden, media en bepaalde apps naar <xliff:g id="NAME">^1</xliff:g> verplaatsen. \n\nHiermee maak je <xliff:g id="SIZE">^2</xliff:g> van je telefoonopslag vrij. Het overzetten duurt ongeveer <xliff:g id="DURATION">^3</xliff:g>."</string>
     <string name="storage_wizard_migrate_v2_checklist" msgid="2618258869444553060">"Tijdens het overzetten:"</string>
-    <string name="storage_wizard_migrate_v2_checklist_media" msgid="5867134681730723744">"verwijder de <xliff:g id="NAME">^1</xliff:g> niet"</string>
+    <string name="storage_wizard_migrate_v2_checklist_media" msgid="5867134681730723744">"verwijder <xliff:g id="NAME">^1</xliff:g> niet"</string>
     <string name="storage_wizard_migrate_v2_checklist_apps" msgid="1882077445750580783">"werken sommige apps niet"</string>
     <string name="storage_wizard_migrate_v2_checklist_battery" product="tablet" msgid="6111770421449869539">"moet de tablet opgeladen blijven"</string>
     <string name="storage_wizard_migrate_v2_checklist_battery" product="default" msgid="8826915870192535008">"moet de telefoon opgeladen blijven"</string>
@@ -1760,17 +1766,17 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Wifi, mobiel en bluetooth resetten"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Reset alle netwerkinstellingen, waaronder:\n\n"<li>"wifi"</li>\n<li>"mobiele data"</li>\n<li>"bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Wissen"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Gedownloade simkaarten wissen"</string>
+    <string name="reset_esim_title" msgid="4194570573425902754">"E-simkaarten wissen"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"Hiermee zeg je geen mobiele abonnementen op. Neem contact op met je provider als je vervangende simkaarten wilt downloaden."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Instellingen resetten"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Alle netwerkinstellingen resetten? Je kunt deze actie niet ongedaan maken."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Alle netwerkinstellingen resetten en gedownloade simkaarten wissen? Je kunt deze actie niet ongedaan maken."</string>
+    <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"Alle netwerkinstellingen resetten en e-simkaarten wissen? Je kunt deze actie niet ongedaan maken."</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Instellingen resetten"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Resetten?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Netwerk herstellen is niet beschikbaar voor deze gebruiker"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Netwerkinstellingen zijn gereset"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Kan simkaarten niet wissen"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"Door een fout kunnen gedownloade simkaarten niet worden gewist.\n\nStart je apparaat opnieuw en probeer het nogmaals."</string>
+    <string name="reset_esim_error_msg" msgid="7279607120606365250">"Door een fout kunnen e-simkaarten niet worden gewist.\n\nStart je apparaat opnieuw op en probeer het nogmaals."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Alle gegevens wissen (fabrieksinstellingen terugzetten)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Alle gegevens wissen (fabrieksinstellingen terugzetten)"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Hiermee worden alle gegevens in de "<b>"interne opslag"</b>" van je tablet gewist, waaronder:\n\n"<li>"Je Google-account"</li>\n<li>"Gegevens en instellingen van systeem en apps"</li>\n<li>"Gedownloade apps"</li></string>
@@ -2535,7 +2541,7 @@
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Uit"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Werkt niet. Tik voor informatie."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Deze service werkt niet goed."</string>
-    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Sneltoetsen voor toegankelijkheid"</string>
+    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Snelkoppelingen voor toegankelijkheid"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Tonen in Snelle instellingen"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Rood-groen"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Rood-groen"</string>
@@ -3199,7 +3205,8 @@
     <string name="data_usage_menu_hide_ethernet" msgid="7792365022467586772">"Ethernetgebruik verbergen"</string>
     <string name="data_usage_menu_metered" msgid="4279260736172851951">"Netwerkbeperkingen"</string>
     <string name="data_usage_menu_auto_sync" msgid="2632694000068175025">"Gegevens automatisch synchroniseren"</string>
-    <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"Simkaarten"</string>
+    <!-- no translation found for data_usage_menu_sim_cards (2827882471528568628) -->
+    <skip />
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"Onderbroken bij limiet"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Gegevens autom. synchroniseren"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Persoonsgegevens autom. synchr."</string>
@@ -3521,10 +3528,12 @@
     <string name="wizard_next" msgid="3884832431439072471">"Volgende"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Voltooien"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_setup_wizard_title" msgid="3945520353564138219">"Simkaarten"</string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"Simkaarten"</string>
+    <!-- no translation found for sim_setup_wizard_title (7030639256610746768) -->
+    <skip />
+    <string name="sim_settings_title" msgid="2254609719033946272">"Simkaarten"</string>
     <string name="sim_settings_summary" msgid="5777472623476930332">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
-    <string name="sim_cards_changed_message" msgid="7726897488921853655">"Simkaarten zijn gewijzigd"</string>
+    <!-- no translation found for sim_cards_changed_message (7374776581857835134) -->
+    <skip />
     <string name="sim_cards_changed_message_summary" msgid="7338082681445213621">"Tik om activiteiten in te stellen"</string>
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Mobiele data niet beschikbaar"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Tik om een simkaart voor gegevens te selecteren"</string>
@@ -3536,7 +3545,8 @@
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Als je overschakelt naar <xliff:g id="NEW_SIM">%1$s</xliff:g>, wordt <xliff:g id="OLD_SIM">%2$s</xliff:g> niet meer gebruikt voor mobiele data."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"<xliff:g id="NEW_SIM">%1$s</xliff:g> gebruiken"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Bellen met"</string>
-    <string name="sim_select_card" msgid="1226182454109919045">"Een simkaart selecteren"</string>
+    <!-- no translation found for sim_select_card (2975707305270216652) -->
+    <skip />
     <string name="sim_card_number_title" msgid="4728780444646439845">"Simkaart <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_editor_name" msgid="5900178038499314621">"Naam van simkaart"</string>
     <string name="sim_name_hint" msgid="8231524869124193119">"Voer de sim-naam in"</string>
@@ -3544,7 +3554,8 @@
     <string name="sim_editor_carrier" msgid="2424593350691002557">"Provider"</string>
     <string name="sim_editor_number" msgid="3209002966895156006">"Nummer"</string>
     <string name="sim_editor_color" msgid="9067029630083892961">"Kleur van simkaart"</string>
-    <string name="sim_card_select_title" msgid="8146523005929848793">"Simkaart selecteren"</string>
+    <!-- no translation found for sim_card_select_title (8387396377407327067) -->
+    <skip />
     <string name="color_orange" msgid="216547825489739010">"Oranje"</string>
     <string name="color_purple" msgid="6603701972079904843">"Paars"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"Geen simkaarten geplaatst"</string>
@@ -3558,7 +3569,7 @@
     <string name="preferred_network_offload_footer" msgid="374984523082849648">"Broadcast van netwerknaam uitzetten voorkomt dat derden toegang krijgen tot je netwerkgegevens."</string>
     <string name="preferred_network_offload_popup" msgid="3949937898807213370">"Broadcast van netwerknaam uitzetten voorkomt automatische verbinding met verborgen netwerken."</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"Simkaarten gewijzigd."</string>
+    <string name="sim_notification_title" msgid="2819551384383504031">"Simkaarten gewijzigd."</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Tik om in te stellen"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Elke keer vragen"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Selectie vereist"</string>
@@ -4311,7 +4322,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Vraag wachtwoord voor losmaken"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Apparaat vergrendelen wanneer items worden losgemaakt"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Verwijdering van simkaart bevestigen"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Bevestig dat jij het bent voordat je een gedownloade simkaart wist"</string>
+    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Bevestigen dat jij het bent voordat een e-simkaart wordt gewist"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Dit werkprofiel wordt beheerd door:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Beheerd door <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Experimenteel)"</string>
@@ -5262,7 +5273,8 @@
     <string name="empty_networks_list" msgid="6519489879480673428">"Geen netwerken gevonden."</string>
     <string name="network_query_error" msgid="6406348372070035274">"Kan geen netwerken vinden. Probeer het opnieuw."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(niet toegestaan)"</string>
-    <string name="no_sim_card" msgid="1497407489810953863">"Geen simkaart"</string>
+    <!-- no translation found for no_sim_card (1478277597822967684) -->
+    <skip />
     <string name="sim_card" msgid="6381158752066377709">"Simkaart"</string>
     <string name="wifi_no_sim_card" msgid="7144290066491585672">"Geen simkaart"</string>
     <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Geen"</string>
@@ -5312,7 +5324,8 @@
     <string name="label_available" msgid="5305726869955838606">"Beschikbare netwerken"</string>
     <string name="load_networks_progress" msgid="4717874401621250401">"Zoeken…"</string>
     <string name="register_on_network" msgid="2169662800750709709">"Registreren op <xliff:g id="NETWORK">%s</xliff:g>…"</string>
-    <string name="not_allowed" msgid="5756935665192962915">"Je simkaart staat geen verbinding met dit netwerk toe."</string>
+    <!-- no translation found for not_allowed (8969977039734782273) -->
+    <skip />
     <string name="connect_later" msgid="2330538069949281352">"Kan nu geen verbinding maken met dit netwerk. Probeer het later opnieuw."</string>
     <string name="registration_done" msgid="1750434215698850123">"Geregistreerd op netwerk."</string>
     <string name="select_automatically" msgid="2419752566747259155">"Netwerk automatisch selecteren"</string>
@@ -5321,7 +5334,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Mobiele data"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Datatoegang via mobiel netwerk"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Telefoon schakelt automatisch over naar deze provider als deze binnen bereik is"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Geen simkaart beschikbaar"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"Geen simkaart beschikbaar"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Voorkeur voor gesprekken"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Voorkeur voor sms\'jes"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Altijd vragen"</string>
@@ -5342,8 +5355,8 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Meer toevoegen"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Actief/simkaart"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Inactief/simkaart"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Actief, gedownloade simkaart"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Inactief, gedownloade simkaart"</string>
+    <string name="mobile_network_active_esim" msgid="3984452275968408382">"Actief/e-simkaart"</string>
+    <string name="mobile_network_inactive_esim" msgid="8777415108263057939">"Inactief/e-simkaart"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"Naam en kleur van simkaart"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Naam"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Kleur (gebruikt door geschikte apps)"</string>
@@ -5353,7 +5366,8 @@
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Verwijder de simkaart om deze simkaart uit te zetten"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Tik om <xliff:g id="CARRIER">%1$s</xliff:g> te activeren"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"Overschakelen naar <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
-    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Er kan maar 1 gedownloade simkaart tegelijk actief zijn.\n\nAls je overschakelt naar <xliff:g id="CARRIER1">%1$s</xliff:g>, wordt de service van <xliff:g id="CARRIER2">%2$s</xliff:g> niet geannuleerd."</string>
+    <!-- no translation found for mobile_network_esim_swap_confirm_body (592668232798598450) -->
+    <skip />
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"Overschakelen naar <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"Simkaart wissen"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"Kan simkaart niet wissen"</string>
@@ -5388,7 +5402,7 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Overschakelen naar simkaart?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> gebruiken?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Er kan maar 1 simkaart tegelijk actief zijn.\n\nAls je overschakelt naar <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, wordt de service van <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> niet geannuleerd."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Er kan maar 1 gedownloade simkaart tegelijk actief zijn.\n\nAls je overschakelt naar <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, wordt de service van <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> niet geannuleerd."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"Er kan maar 1 e-simkaart tegelijk actief zijn.\n\nAls je overschakelt naar <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, wordt de service van <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> niet opgezegd."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Er kan maar 1 simkaart tegelijk actief zijn.\n\nAls je overschakelt, wordt de service van <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> niet geannuleerd."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Je kunt 2 simkaarten tegelijk gebruiken. Als je <xliff:g id="CARRIER_NAME">%1$s</xliff:g> wilt gebruiken, zet je de andere simkaart uit."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Overschakelen naar <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -5434,8 +5448,8 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> wordt gebruikt voor mobiele data, gesprekken en sms\'jes."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Geen actieve simkaarten beschikbaar"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Als je mobiele data, gespreksfuncties en sms later wilt gebruiken, ga je naar de netwerkinstellingen"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"Simkaart"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Deze gedownloade simkaart wissen?"</string>
+    <string name="sim_card_label" msgid="6263064316075963775">"Simkaart"</string>
+    <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Deze e-simkaart wissen?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Als je deze simkaart wist, wordt de <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>-service van dit apparaat verwijderd.\n\nDe service voor <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> wordt niet geannuleerd."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Wissen"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"Simkaart wissen…"</string>
@@ -5619,8 +5633,8 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Toestaan dat Google Fi W+ netwerken gebruikt om de snelheid en dekking te verbeteren"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ netwerk"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"Simkaart"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"GEDOWNLOADE SIMKAART"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"GEDOWNLOADE SIMKAARTEN"</string>
+    <string name="downloaded_sim_category_title" msgid="2876988650413179752">"E-simkaart"</string>
+    <string name="downloaded_sims_category_title" msgid="487799905978489922">"E-simkaarten"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Actief"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Inactief"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Standaard voor <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5680,7 +5694,7 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Gespreksinstellingen"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Instellingen updaten..."</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Fout met gespreksinstellingen"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Netwerk- of simkaartfout."</string>
+    <string name="smart_forwarding_failed_text" msgid="8682640643264071789">"Netwerk- of simkaartfout."</string>
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"Simkaart is niet geactiveerd."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Telefoonnummers opgeven"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Telefoonnummer opgeven"</string>
@@ -5705,10 +5719,10 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"Vorige"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Volgende"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Kleurvoorbeeld"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Verzoek voor toegang tot simkaart"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Een apparaat wil toegang tot je simkaart. Tik voor informatie."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Toegang tot simkaart toestaan?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Een bluetooth-apparaat (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) wil toegang tot gegevens op je simkaart. Dit zijn onder andere je contacten.\n\nTerwijl <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> is verbonden, ontvangt dit apparaat alle gesprekken naar <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="7351015416346359536">"Toegangsverzoek voor simkaart"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="8685623260103018309">"Een apparaat wil toegang tot je simkaart. Tik voor details."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="5616323725563125179">"Toegang geven tot simkaart?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="6281997628405909566">"Een bluetooth-apparaat (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) wil toegang tot gegevens op je simkaart. Dit zijn onder andere je contacten.\n\nTerwijl <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> is verbonden, ontvangt dit apparaat alle gesprekken naar <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Bluetooth-apparaat beschikbaar"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Een apparaat wil verbinding maken. Tik voor informatie."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Verbinding maken met bluetooth-apparaat?"</string>

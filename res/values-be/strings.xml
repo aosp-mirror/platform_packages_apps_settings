@@ -23,6 +23,7 @@
     <string name="deny" msgid="7326117222944479942">"Адмовіць"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"Уключыць"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Невядома"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"Націсніце для паказу інфармацыі"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">Зараз вы ў <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> кроку ад таго, каб стаць распрацоўшчыкам.</item>
       <item quantity="few">Зараз вы ў <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> кроках ад таго, каб стаць распрацоўшчыкам.</item>
@@ -141,7 +142,8 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Запыт доступу да паведамленняў"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"%1$s спрабуе атрымаць доступ да вашых паведамленняў. Дазволіць доступ да %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="473439406287008397">"Запыт доступу да SIM"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> спрабуе атрымаць доступ да вашай SIM-карты. Прадастаўленне доступу да SIM-карты адключыць перадачу даных на прыладзе на час падлучэння. Даць доступ <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
+    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (6194086753523415820) -->
+    <skip />
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Бачная для іншых прылад як прылада \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\""</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Каб падключыцца да іншых прылад, уключыце Bluetooth."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Вашы прылады"</string>
@@ -342,7 +344,8 @@
     <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"Даныя не зашыфраваны"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Экран блакіроўкі"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Што паказваць"</string>
-    <string name="security_settings_summary" msgid="1627059516127354233">"Задаць Маё месцазнаходжанне, разблакаванне экрана, блакаванне SIM-карты, блакаванне сховішча ўліковых дадзеных"</string>
+    <!-- no translation found for security_settings_summary (4248337854143139822) -->
+    <skip />
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"Устанавіць маё месцазнаходжанне, разблакаванне экрана, блакаванне сховішча ўліковых дадзеных"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"Прыватнасць"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Недаступна"</string>
@@ -1472,6 +1475,7 @@
     <string name="screen_timeout" msgid="7709947617767439410">"Час да выключэння экрана"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Экран выключаецца"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Пасля бяздзейнасці: <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Не зададзена"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Шпалеры"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Шпалеры і стыль"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Галоўная старонка, экран блакіроўкі"</string>
@@ -1505,20 +1509,21 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Тлусты шрыфт"</string>
     <string name="title_font_size" msgid="570613010306330622">"Памер шрыфту"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Змяніць памер тэксту"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"Налады блакіроўкі SIM-карты"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"Блакіроўка SIM-карты"</string>
+    <string name="sim_lock_settings" msgid="7331982427303002613">"Налады прывязкі да аператара"</string>
+    <string name="sim_lock_settings_category" msgid="6475255139493877786">"Прывязка да аператара"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Выключана"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"Заблакіравана"</string>
-    <string name="sim_lock_settings_title" msgid="1401619059761012696">"Блакаванне SIM-карты"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"Заблакіраваць SIM-карту"</string>
+    <!-- no translation found for sim_lock_settings_title (3596566201762038857) -->
+    <skip />
+    <string name="sim_pin_toggle" msgid="6814489621760857328">"Заблакіраваць SIM-карту"</string>
     <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"Патрабаваць PIN-код для выкарыстання планшэту"</string>
     <string name="sim_lock_on" product="default" msgid="3303147192981388923">"Патрабаваць PIN-код для выкарыстання тэлефона"</string>
     <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"Патрабаваць PIN-код для выкарыстання планшэту"</string>
     <string name="sim_lock_off" product="default" msgid="4634118006847137785">"Патрабаваць PIN-код для выкарыстання тэлефона"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"Змена PIN-кода SIM-карты"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"PIN-код SIM-карты"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Заблакіраваць SIM-карту"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"Разблакіраваць SIM-карту"</string>
+    <string name="sim_enable_sim_lock" msgid="6486354334679225748">"Заблакіруйце SIM-карту"</string>
+    <string name="sim_disable_sim_lock" msgid="6939439812841857306">"Разблакіруйце SIM-карту"</string>
     <string name="sim_enter_old" msgid="6882545610939674813">"Стары PIN-код SIM-карты"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"Новы PIN-код SIM-карты"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Увядзіце новы PIN-код яшчэ раз"</string>
@@ -1527,7 +1532,8 @@
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"PIN-коды не супадаюць"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Немагчыма змян. PIN.\nМагч., няправ. PIN."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"PIN-код SIM-карты паспяхова зменены"</string>
-    <string name="sim_lock_failed" msgid="16360418201678317">"Немагч. разблак. SIM.\nМагч., няправ. PIN."</string>
+    <!-- no translation found for sim_lock_failed (2088257523501265954) -->
+    <skip />
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"Не ўдалося выключыць PIN."</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"Не ўдалося ўключыць PIN."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"ОК"</string>
@@ -1537,7 +1543,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Выкарыстоўваць <xliff:g id="CARRIER">%1$s</xliff:g> для трафіка?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Вы карыстаецеся паслугамі аператара \"<xliff:g id="CARRIER2_0">%2$s</xliff:g>\" для мабільнай перадачы даных. Пры пераключэнні на аператара \"<xliff:g id="CARRIER1">%1$s</xliff:g>\", <xliff:g id="CARRIER2_1">%2$s</xliff:g> больш не будзе выкарыстоўвацца для мабільнай перадачы даных."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Выкарыстоўваць аператара <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"Змяніць пажаданую SIM-карту?"</string>
+    <string name="sim_preferred_title" msgid="8850185380445309835">"Змяніць прыярытэтную SIM?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> з\'яўляецца адзінай SIM-картай на вашай прыладзе. Вы хочаце выкарыстоўваць гэту SIM-карту для мабільнай перадачы даных, выклікаў і SMS-паведамленняў?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Няправільны PIN-код SIM-карты, цяпер вы павінны звязацца з аператарам для разблакіроўкі прылады."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1619,7 +1625,7 @@
     <string name="memory_music_usage" msgid="8100634000114206429">"Аўдыя (музыка, рынгтоны, падкасты і г. д.)"</string>
     <string name="memory_media_misc_usage" msgid="7066851245178533269">"Іншыя файлы"</string>
     <string name="memory_media_cache_usage" msgid="780808666853685824">"Кэшаваныя дадзеныя"</string>
-    <string name="sd_eject" product="nosdcard" msgid="6136102589751843304">"Адключыць сумеснае сховішча"</string>
+    <string name="sd_eject" product="nosdcard" msgid="6136102589751843304">"Адкл. абагуленае сховішча"</string>
     <string name="sd_eject" product="default" msgid="8062832622096296251">"Адключыць SD-карту"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="6859940774161708871">"Адключыць унутраны USB-назапашвальнiк"</string>
     <string name="sd_eject_summary" product="default" msgid="5151243312587186226">"Адключыць SD-карту, каб можна было спакойна выдаліць яе"</string>
@@ -1804,17 +1810,17 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Скінуць налады Wi-Fi, мабільнай перадачы даных і Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Гэта прывядзе да скіду ўсіх налад сеткі, у тым ліку:\n\n"<li>"Wi‑Fi"</li>\n<li>"мабільнай перадачы даных"</li>\n<li>"Bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Сцерці даныя"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Сцерці даныя спампаваных SIM"</string>
+    <string name="reset_esim_title" msgid="4194570573425902754">"Сцерці eSIM-карты"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"Гэта дзеянне не прывядзе да скасавання тарыфных планаў. Каб спампаваць новыя SIM-карты, звярніцеся да аператара."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Скінуць налады"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Скінуць усе налады сеткі? Гэта дзеянне нельга адрабіць."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Скінуць усе налады сеткі і сцерці ўсе даныя смампаваных SIM? Гэта дзеянне нельга адрабіць."</string>
+    <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"Скінуць усе налады сеткі і сцерці eSIM-карты? Гэта дзеянне нельга адрабіць."</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Скінуць налады"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Скінуць?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Скід налад сеткі недаступны для гэтага карыстальніка"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Налады сеткі былі скінутыя"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Не ўдалося сцерці даныя SIM"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"Памылка сцірання спампаваных SIM.\n\nПеразапусціце прыладу і паўтарыце спробу."</string>
+    <string name="reset_esim_error_msg" msgid="7279607120606365250">"Памылка сцірання eSIM-карты.\n\nПеразапусціце прыладу і паўтарыце спробу."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Сцерці ўсе даныя (скід да заводскіх налад)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Сцерці ўсе даныя (скід да заводскіх налад)"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Гэта дзеянне дазволіць сцерці ўсе даныя з "<b>"унутранага сховішча"</b>" вашага планшэта, у тым ліку:\n\n"<li>"ваш Уліковы запіс Google;"</li>\n<li>"сістэмныя даныя і налады, а таксама даныя і налады праграм;"</li>\n<li>"спампаваныя праграмы"</li></string>
@@ -3281,7 +3287,8 @@
     <string name="data_usage_menu_hide_ethernet" msgid="7792365022467586772">"Схав. выкар. дан. Ethernet"</string>
     <string name="data_usage_menu_metered" msgid="4279260736172851951">"Сеткавыя абмежаванні"</string>
     <string name="data_usage_menu_auto_sync" msgid="2632694000068175025">"Аўтаматычная сiнхранiзацыя дадзеных"</string>
-    <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"SIM-карты"</string>
+    <!-- no translation found for data_usage_menu_sim_cards (2827882471528568628) -->
+    <skip />
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"Паўза пры дасягненні ліміту"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Аўтамат. сiнхранiзацыя даных"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Аўтам. сінхран. асабіст. даных"</string>
@@ -3607,10 +3614,12 @@
     <string name="wizard_next" msgid="3884832431439072471">"Далей"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Завершыць"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM-карты"</string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"SIM-карты"</string>
+    <!-- no translation found for sim_setup_wizard_title (7030639256610746768) -->
+    <skip />
+    <string name="sim_settings_title" msgid="2254609719033946272">"SIM-карты"</string>
     <string name="sim_settings_summary" msgid="5777472623476930332">"<xliff:g id="SIM_NAME">%1$s</xliff:g> – <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
-    <string name="sim_cards_changed_message" msgid="7726897488921853655">"SIM-карты зменены"</string>
+    <!-- no translation found for sim_cards_changed_message (7374776581857835134) -->
+    <skip />
     <string name="sim_cards_changed_message_summary" msgid="7338082681445213621">"Краніце, каб задаць дзеянні"</string>
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Мабільная перадача даных недаступная"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Краніце, каб выбраць SIM-карту для перадачы даных"</string>
@@ -3622,7 +3631,8 @@
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Пры пераключэнні на аператара \"<xliff:g id="NEW_SIM">%1$s</xliff:g>\" SIM-карта \"<xliff:g id="OLD_SIM">%2$s</xliff:g>\" больш не будзе выкарыстоўвацца для мабільнай перадачы даных."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Выкарыстоўваць SIM-карту \"<xliff:g id="NEW_SIM">%1$s</xliff:g>\""</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Выклікаць праз"</string>
-    <string name="sim_select_card" msgid="1226182454109919045">"Выбар SIM-карты"</string>
+    <!-- no translation found for sim_select_card (2975707305270216652) -->
+    <skip />
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_editor_name" msgid="5900178038499314621">"Імя SIM"</string>
     <string name="sim_name_hint" msgid="8231524869124193119">"Увядзіце імя SIM-карты"</string>
@@ -3630,7 +3640,8 @@
     <string name="sim_editor_carrier" msgid="2424593350691002557">"Аператар"</string>
     <string name="sim_editor_number" msgid="3209002966895156006">"Нумар"</string>
     <string name="sim_editor_color" msgid="9067029630083892961">"Колер SIM-карты"</string>
-    <string name="sim_card_select_title" msgid="8146523005929848793">"Выбраць SIM-карту"</string>
+    <!-- no translation found for sim_card_select_title (8387396377407327067) -->
+    <skip />
     <string name="color_orange" msgid="216547825489739010">"Аранжавы"</string>
     <string name="color_purple" msgid="6603701972079904843">"Фіялетавы"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"Няма ўстаўленых SIM-карт"</string>
@@ -3644,7 +3655,7 @@
     <string name="preferred_network_offload_footer" msgid="374984523082849648">"Адкл. «Перадаваць імя сеткі», каб прадухіліць атрым. доступу да інф. пра вашу сетку трэцімі асобамі."</string>
     <string name="preferred_network_offload_popup" msgid="3949937898807213370">"Адключэнне функцыі «Перадаваць імя сеткі» прадухіліць аўтаматычнае падлучэнне да схаваных сетак."</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> дБм <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"SIM-карты зменены."</string>
+    <string name="sim_notification_title" msgid="2819551384383504031">"SIM-карты зменены."</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Краніце, каб наладзіць"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Заўсёды пытацца"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Трэба выбраць"</string>
@@ -4419,7 +4430,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Запытваць пароль перад адмацаваннем"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Заблакіраваць прыладу падчас адмацавання"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Пацвярджаць выдаленне даных SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Перш чым сціраць даныя спампаванай SIM, пацвердзіце, што гэта вы"</string>
+    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Перш чым сціраць eSIM-карту, пацвердзіце, што гэта вы"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Гэты працоўны профіль знаходзіцца пад кіраваннем:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Пад кіраваннем <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Эксперыментальныя)"</string>
@@ -5000,7 +5011,7 @@
     <string name="display_cutout_emulation_keywords" msgid="4506580703807358127">"выраз дысплея, выемка"</string>
     <string name="overlay_option_device_default" msgid="7986355499809313848">"Стандартная налада"</string>
     <string name="overlay_toast_failed_to_apply" msgid="4839587811338164960">"Не ўдалося ўжыць накладанне на экран"</string>
-    <string name="special_access" msgid="1767980727423395147">"Спецыяльны доступ"</string>
+    <string name="special_access" msgid="1767980727423395147">"Спецыяльны доступ для праграм"</string>
     <plurals name="special_access_summary" formatted="false" msgid="4995506406763570815">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> праграма можа выкарыстоўваць даныя без абмежаванняў</item>
       <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> праграмы могуць выкарыстоўваць даныя без абмежаванняў</item>
@@ -5432,7 +5443,8 @@
     <string name="empty_networks_list" msgid="6519489879480673428">"Сеткі не знойдзены."</string>
     <string name="network_query_error" msgid="6406348372070035274">"Не ўдалося знайсці сеткі. Паўтарыце спробу."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(забаронена)"</string>
-    <string name="no_sim_card" msgid="1497407489810953863">"Няма SIM-карты"</string>
+    <!-- no translation found for no_sim_card (1478277597822967684) -->
+    <skip />
     <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
     <string name="wifi_no_sim_card" msgid="7144290066491585672">"Няма SIM-карты"</string>
     <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Няма"</string>
@@ -5482,7 +5494,8 @@
     <string name="label_available" msgid="5305726869955838606">"Даступныя сеткі"</string>
     <string name="load_networks_progress" msgid="4717874401621250401">"Ідзе пошук…"</string>
     <string name="register_on_network" msgid="2169662800750709709">"Выконваецца рэгістрацыя ў сетцы <xliff:g id="NETWORK">%s</xliff:g>…"</string>
-    <string name="not_allowed" msgid="5756935665192962915">"Ваша SIM-карта не дазваляе падключацца да гэтай сеткі."</string>
+    <!-- no translation found for not_allowed (8969977039734782273) -->
+    <skip />
     <string name="connect_later" msgid="2330538069949281352">"Не ўдалося падключыцца да гэтай сеткі. Паўтарыце спробу пазней."</string>
     <string name="registration_done" msgid="1750434215698850123">"Зарэгістравана ў сетцы."</string>
     <string name="select_automatically" msgid="2419752566747259155">"Выбіраць сетку аўтаматычна"</string>
@@ -5491,7 +5504,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Мабільная перадача даных"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Доступ да даных па мабільнай сетцы"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Калі сігнал гэтага аператара будзе ў межах дасягальнасці, тэлефон аўтаматычна пераключыцца на яго"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"SIM-карты недаступныя"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"SIM-карты недаступныя"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Параметры выклікаў"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Параметры SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Заўсёды пытацца"</string>
@@ -5514,8 +5527,8 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Яшчэ"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Актывавана / SIM-карта"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Не актывавана / SIM-карта"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Актывавана / Спампаваная SIM"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Не актывавана / Спампаваная SIM"</string>
+    <string name="mobile_network_active_esim" msgid="3984452275968408382">"Актыўна / eSIM-карта"</string>
+    <string name="mobile_network_inactive_esim" msgid="8777415108263057939">"Неактыўна / eSIM-карта"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"Назва і колер SIM-карты"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Назва"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Колер (ужываюць сумяшчальныя праграмы)"</string>
@@ -5525,7 +5538,8 @@
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Каб адключыць SIM-карту, выміце яе"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Націсніце, каб актываваць аператара \"<xliff:g id="CARRIER">%1$s</xliff:g>\""</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"Пераключыцца на аператара \"<xliff:g id="CARRIER">%1$s</xliff:g>\"?"</string>
-    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Нельга актываваць адначасова некалькі спампаваных SIM.\n\nПераключэнне на аператара \"<xliff:g id="CARRIER1">%1$s</xliff:g>\" не скасуе абслугоўванне ў аператара \"<xliff:g id="CARRIER2">%2$s</xliff:g>\"."</string>
+    <!-- no translation found for mobile_network_esim_swap_confirm_body (592668232798598450) -->
+    <skip />
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"Пераключыцца на <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"Сцерці даныя SIM"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"Не ўдалося сцерці даныя SIM"</string>
@@ -5560,7 +5574,7 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Пераключыцца на выкарыстанне SIM-карты?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Выкарыстоўваць паслугі аператара \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\"?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Нельга актываваць адначасова некалькі SIM-карт.\n\nПераключэнне на аператара \"<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>\" не скасуе абслугоўванне ў аператара \"<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>\"."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Нельга актываваць адначасова некалькі спампаваных SIM-карт.\n\nПераключэнне на аператара \"<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>\" не скасуе абслугоўванне ў аператара \"<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>\"."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"Нельга актываваць адначасова некалькі eSIM-карт.\n\nПераключэнне на аператара \"<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>\" не скасуе абслугоўванне ў аператара \"<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>\"."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Нельга актываваць адначасова некалькі SIM-карт.\n\nПераключэнне не скасуе абслугоўванне ў аператара \"<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>\"."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Вы можаце выкарыстоўваць 2 SIM-карты адначасова. Каб выкарыстоўваць паслугі аператара \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\", выключыце іншую SIM-карту."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Пераключыцца на аператара \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\""</string>
@@ -5606,8 +5620,8 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"Для мабільнай перадачы даных, выклікаў і SMS будзе выкарыстоўвацца сетка \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\"."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Актыўныя SIM-карты недаступныя"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Каб пазней карыстацца мабільнай перадачай даных, функцыямі выклікаў і SMS, перайдзіце ў налады сеткі"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"SIM-карта"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Сцерці даныя гэтай спампаванай SIM?"</string>
+    <string name="sim_card_label" msgid="6263064316075963775">"SIM-карта"</string>
+    <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Сцерці гэту eSIM-карту?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Сціранне даных гэтай SIM-карты выдаляе з гэтай прылады магчымасць карыстацца паслугамі аператара \"<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>\".\n\nАбслугоўванне ў аператара \"<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>\" не будзе спынена."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Сцерці"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"Сціраюцца даныя SIM…"</string>
@@ -5795,8 +5809,8 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Для павелічэння хуткасці і пашырэння зоны пакрыцця дазвольце Google Fi выкарыстоўваць сеткі W+"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Сетка W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM-карта"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"СПАМПАВАНАЯ SIM-КАРТА"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"СПАМПАВАНЫЯ SIM-КАРТЫ"</string>
+    <string name="downloaded_sim_category_title" msgid="2876988650413179752">"eSIM-карта"</string>
+    <string name="downloaded_sims_category_title" msgid="487799905978489922">"eSIM-карты"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Актыўная"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Неактыўная"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Стандартна для наступнага: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5856,7 +5870,7 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Налады выклікаў"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Абнаўляюцца налады…"</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Памылка налад выкліку"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Памылка сеткі ці SIM-карты."</string>
+    <string name="smart_forwarding_failed_text" msgid="8682640643264071789">"Памылка сеткі ці SIM-карты."</string>
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM-карта не актывавана."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Увядзіце нумары тэлефона"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Увядзіце нумар тэлефона"</string>
@@ -5881,10 +5895,10 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"Назад"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Далей"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Перадпрагляд колеру"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Запыт на доступ да SIM-карты"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Прылада запытвае доступ да SIM-карты. Націсніце, каб убачыць больш інфармацыі."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Дазволіць доступ да SIM-карты?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Прылада з Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, запытвае дазвол на доступ да даных на вашай SIM-карце, у прыватнасці да кантактаў.\n\nПры падключэнні прылада \"<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>\" будзе атрымліваць усе выклікі, адпраўленыя на нумар <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="7351015416346359536">"Запыт доступу да SIM-карты"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="8685623260103018309">"Прылада запытвае доступ да SIM-карты. Націсніце, каб убачыць больш інфармацыі."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="5616323725563125179">"Дазволіць доступ да SIM-карты?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="6281997628405909566">"Прылада з Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, запытвае дазвол на доступ да даных на вашай SIM-карце, у прыватнасці да кантактаў.\n\nПасля падключэння прылада \"<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>\" будзе прымаць усе выклікі, якія прыходзяць на нумар <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Даступная прылада з Bluetooth"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Прылада запытвае падключэнне. Націсніце, каб убачыць больш інфармацыі."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Падключыцца да прылады з Bluetooth?"</string>
