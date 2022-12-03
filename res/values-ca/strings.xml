@@ -1045,7 +1045,7 @@
     <string name="wifi_install_credentials" msgid="5192903644606839972">"Instal·la certificats"</string>
     <string name="wifi_scan_notify_text" msgid="7163137260385995873">"Per millorar la precisió de la ubicació, les aplicacions i els serveis poden cercar xarxes Wi‑Fi en qualsevol moment, fins i tot quan la Wi‑Fi estigui desactivada. Aquesta opció es pot utilitzar, per exemple, per millorar les funcions i els serveis basats en la ubicació, i pots canviar-la a la <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>configuració de cerca de xarxes Wi‑Fi<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="7439201783168213149">"Per millorar la precisió de la ubicació, ves a la <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>configuració de cerca de xarxes Wi‑Fi<xliff:g id="LINK_END_1">LINK_END</xliff:g> i activa aquesta funció."</string>
-    <string name="wifi_scan_notify_remember_choice" msgid="8436897497968907701">"No m\'ho tornis a mostrar"</string>
+    <string name="wifi_scan_notify_remember_choice" msgid="8436897497968907701">"No ho tornis a mostrar"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="6285374200292675649">"Utilitza la Wi-Fi en repòs"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8753852404141070878">"Wi‑Fi activa en repòs"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="4512566787805720422">"S\'ha produït un problema en canviar la configuració"</string>
@@ -4102,7 +4102,7 @@
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"Pot sonar o vibrar en funció de la configuració del telèfon"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Quan el dispositiu estigui desbloquejat, mostra les notificacions en forma de bàner a la part superior de la pantalla"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Totes les notificacions de: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_app_switch_label" msgid="4422902423925084193">"Totes les notificacions de l\'aplicació <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"Totes les notificacions de: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Notificacions adaptatives"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
       <item quantity="other">Aproximadament <xliff:g id="NUMBER_1">%,d</xliff:g> notificacions per dia</item>
@@ -5669,9 +5669,11 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Per utilitzar-ho, primer activa Mostra el control de dispositius"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Mostra el rellotge de doble línia quan estigui disponible"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Rellotge de doble línia"</string>
-    <!-- no translation found for lockscreen_quick_affordances_title (435869403114245620) -->
-    <skip />
-    <!-- no translation found for lockscreen_quick_affordances_summary (4225396036524703997) -->
+    <string name="lockscreen_quick_affordances_title" msgid="435869403114245620">"Botons"</string>
+    <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
+      <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
+      <item quantity="one"><xliff:g id="FIRST_0">%1$s</xliff:g></item>
+    </plurals>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
