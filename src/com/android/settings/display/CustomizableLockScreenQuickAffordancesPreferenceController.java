@@ -50,13 +50,13 @@ public class CustomizableLockScreenQuickAffordancesPreferenceController extends
         final Preference preference = screen.findPreference(getPreferenceKey());
         if (preference != null) {
             preference.setOnPreferenceClickListener(preference1 -> {
-                // TODO(b/258471384): open the buttons destination within wallpaper picker.
                 final Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
                 final String packageName =
                         mContext.getString(R.string.config_wallpaper_picker_package);
                 if (!TextUtils.isEmpty(packageName)) {
                     intent.setPackage(packageName);
                 }
+                intent.putExtra("destination", "quick_affordances");
                 mContext.startActivity(intent);
                 return true;
             });
