@@ -16,12 +16,16 @@
 
 package com.android.settings.security;
 
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.content.Context;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.RestrictedPreference;
 
 public class MemtagPagePreferenceController extends BasePreferenceController {
     static final String KEY_MEMTAG = "memtag_page";
@@ -39,6 +43,10 @@ public class MemtagPagePreferenceController extends BasePreferenceController {
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         Preference preference = screen.findPreference(getPreferenceKey());
+        EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfMteIsDisabled(mContext);
+        if (admin != null) {
+            ((RestrictedPreference) preference).setDisabledByAdmin(admin);
+        }
         refreshSummary(preference);
     }
 
