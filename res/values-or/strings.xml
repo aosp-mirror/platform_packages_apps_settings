@@ -4099,7 +4099,7 @@
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"ପୁଲ୍-ଡାଉନ୍ ସେଡ୍‌ରେ, ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକୁ ଗୋଟିଏ ଧାଡ଼ିରେ ସଙ୍କୁଚିତ କରନ୍ତୁ"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"କୌଣସି ସାଉଣ୍ଡ କିମ୍ବା ଭାଇବ୍ରେସନ୍ ନାହିଁ"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"କୌଣସି ସାଉଣ୍ଡ କିମ୍ବା ଭାଇବ୍ରେସନ୍ ନାହିଁ ଏବଂ ବାର୍ତ୍ତାଳାପ ବିଭାଗର ନିମ୍ନରେ ଦେଖାଯାଏ"</string>
-    <string name="notification_channel_summary_default" msgid="3674057458265438896">"ଫୋନ ସେଟିଂସ ଆଧାରରେ ରିଙ୍ଗ କିମ୍ବା ଭାଇବ୍ରେଟ୍ ହୋଇପାରେ"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"ଫୋନ ସେଟିଂସ ଆଧାରରେ ରିଙ୍ଗ କିମ୍ବା ଭାଇବ୍ରେଟ ହୋଇପାରେ"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"ଡିଭାଇସ ଅନଲକ ଥିବା ବେଳେ ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକ ସ୍କ୍ରିନର ଉପର ପାର୍ଶ୍ୱରେ ବ୍ୟାନର ଭଳି ଦେଖାଯିବ"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"ସମସ୍ତ \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" ବିଜ୍ଞପ୍ତି"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g> ବିଷୟରେ ସମସ୍ତ ବିଜ୍ଞପ୍ତି"</string>
@@ -5669,9 +5669,11 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"ବ୍ୟବହାର କରିବା ପାଇଁ, ପ୍ରଥମେ \"ଡିଭାଇସ ନିୟନ୍ତ୍ରଣଗୁଡ଼ିକୁ ଦେଖାନ୍ତୁ\"କୁ ଚାଲୁ କରନ୍ତୁ"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"ଉପଲବ୍ଧ ହେଲେ ଡବଲ-ଲାଇନ ଘଣ୍ଟା ଦେଖାନ୍ତୁ"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"ଡବଲ-ଲାଇନ ଘଣ୍ଟା"</string>
-    <!-- no translation found for lockscreen_quick_affordances_title (435869403114245620) -->
-    <skip />
-    <!-- no translation found for lockscreen_quick_affordances_summary (4225396036524703997) -->
+    <string name="lockscreen_quick_affordances_title" msgid="435869403114245620">"ବଟନଗୁଡ଼ିକ"</string>
+    <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
+      <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
+      <item quantity="one"><xliff:g id="FIRST_0">%1$s</xliff:g></item>
+    </plurals>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
