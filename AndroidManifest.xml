@@ -3031,6 +3031,11 @@
             android:authorities="${applicationId}.battery.usage.provider"
             android:permission="com.android.settings.BATTERY_DATA"/>
 
+        <provider
+            android:name=".fuelgauge.batteryusage.bugreport.BugReportContentProvider"
+            android:exported="false"
+            android:authorities="${applicationId}.battery.usage.bugreport"/>
+
         <receiver android:name=".fuelgauge.batteryusage.BatteryUsageBroadcastReceiver"
                   android:exported="true">
             <intent-filter>
