@@ -23,6 +23,7 @@
     <string name="deny" msgid="7326117222944479942">"مسترد کریں"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"آن کریں"</string>
     <string name="device_info_default" msgid="1406619232867343310">"نامعلوم"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"معلومات دکھانے کے لیے تھپتھپائیں"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">اب آپ ایک ڈویلپر بننے سے <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> قدم دور ہیں۔</item>
       <item quantity="one">اب آپ ایک ڈویلپر بننے سے <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> قدم دور ہیں۔</item>
@@ -139,7 +140,8 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"پیغام تک رسائی کی درخواست"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"‏%1$s آپ کے پیغامات تک رسائی حاصل کرنا چاہتا ہے۔ ‎%2$s کو رسائی دیں؟"</string>
     <string name="bluetooth_sap_request" msgid="473439406287008397">"‏SIM تک رسائی کی درخواست"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"‏<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> آپ کے SIM کارڈ تک رسائی حاصل کرنا چاہتا ہے۔ SIM کارڈ تک رسائی دینے سے کنکشن کے دورانیہ تک کیلئے آپ کے آلہ پر ڈیٹا کنیکٹیوٹی غیر فعال ہو جائے گی۔ <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> تک رسائی دیں"</string>
+    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (6194086753523415820) -->
+    <skip />
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"دیگر آلات کو بطور \'<xliff:g id="DEVICE_NAME">^1</xliff:g>\' دکھائی دے رہا ہے"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"دیگر آلات سے منسلک کرنے کے لیے بلوٹوتھ آن کریں۔"</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"آپ کے آلات"</string>
@@ -336,7 +338,8 @@
     <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"آلہ مرموز کردہ نہیں ہے"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"مقفل اسکرین"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"کیا دکھانا ہے"</string>
-    <string name="security_settings_summary" msgid="1627059516127354233">"‏میرا مقام، اسکرین اَن لاک، SIM کارڈ لاک، اسناد کے اسٹوریج کا لاک سیٹ کریں"</string>
+    <!-- no translation found for security_settings_summary (4248337854143139822) -->
+    <skip />
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"میرا مقام، اسکرین ان لاک، اسناد کے اسٹوریج کا لاک سیٹ کریں"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"رازداری"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"دستیاب نہیں ہے"</string>
@@ -1430,6 +1433,7 @@
     <string name="screen_timeout" msgid="7709947617767439410">"اسکرین ٹائم آؤٹ"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"اسکرین آف ہوجاتی ہے"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"غیر فعالیت کے <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> بعد"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"سیٹ نہیں ہے"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"وال پیپر"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"وال پیپر اور طرز"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"ہوم، مقفل اسکرین"</string>
@@ -1463,20 +1467,21 @@
     <string name="force_bold_text" msgid="4620929631102086716">"بولڈ ٹیکسٹ"</string>
     <string name="title_font_size" msgid="570613010306330622">"فونٹ سائز"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"ٹیکسٹ کو بڑا یا چھوٹا بنائیں"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"‏SIM کارڈ لاک کی ترتیبات"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"‏SIM کارڈ لاک"</string>
+    <string name="sim_lock_settings" msgid="7331982427303002613">"‏SIM لاک کی ترتیبات"</string>
+    <string name="sim_lock_settings_category" msgid="6475255139493877786">"‏SIM لاک"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"آف"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"مقفل"</string>
-    <string name="sim_lock_settings_title" msgid="1401619059761012696">"‏SIM کارڈ لاک"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"‏SIM کارڈ کو مقفل کریں"</string>
+    <!-- no translation found for sim_lock_settings_title (3596566201762038857) -->
+    <skip />
+    <string name="sim_pin_toggle" msgid="6814489621760857328">"‏SIM مقفل کریں"</string>
     <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"‏ٹیبلٹ استعمال کرنے کیلئے PIN درکار ہے"</string>
     <string name="sim_lock_on" product="default" msgid="3303147192981388923">"‏فون استعمال کرنے کیلئے PIN درکار ہے"</string>
     <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"‏ٹیبلٹ استعمال کرنے کیلئے PIN درکار ہے"</string>
     <string name="sim_lock_off" product="default" msgid="4634118006847137785">"‏فون استعمال کرنے کیلئے PIN درکار ہے"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"‏SIM PIN تبدیل کریں"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"SIM PIN"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"‏SIM کارڈ کو مقفل کریں"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"‏SIM کارڈ غیر مقفل کریں"</string>
+    <string name="sim_enable_sim_lock" msgid="6486354334679225748">"‏SIM مقفل کریں"</string>
+    <string name="sim_disable_sim_lock" msgid="6939439812841857306">"‏SIM غیر مقفل کریں"</string>
     <string name="sim_enter_old" msgid="6882545610939674813">"‏پرانا SIM PIN"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"‏نیا SIM PIN"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"‏نیا PIN دوبارہ ٹائپ کریں"</string>
@@ -1485,7 +1490,8 @@
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"‏PINs مماثل نہیں ہیں"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"‏PIN تبدیل نہیں کر سکتے ہیں۔\nممکنہ طور پر غلط PIN۔"</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"‏SIM PIN کامیابی کے ساتھ تبدیل ہو گیا"</string>
-    <string name="sim_lock_failed" msgid="16360418201678317">"‏SIM کارڈ لاک کی حالت کو تبدیل نہيں کر سکتے ہیں۔\nممکنہ طور پر غلط PIN۔"</string>
+    <!-- no translation found for sim_lock_failed (2088257523501265954) -->
+    <skip />
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"‏PIN کو غیر فعال نہیں کیا جا سکتا۔"</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"‏PIN کو فعال نہیں کیا جا سکتا۔"</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"ٹھیک ہے"</string>
@@ -1495,7 +1501,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"موبائل ڈیٹا کیلئے <xliff:g id="CARRIER">%1$s</xliff:g> استعمال کریں؟"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"موبائل ڈیٹا کے لیے آپ <xliff:g id="CARRIER2_0">%2$s</xliff:g> استعمال کر رہے ہیں۔ اگر آپ <xliff:g id="CARRIER1">%1$s</xliff:g> پر سوئچ کریں گے تو <xliff:g id="CARRIER2_1">%2$s</xliff:g> کو موبائل ڈیٹا کے لیے مزید استعمال نہیں کیا جائے گا۔"</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> استعمال کریں"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"‏ترجیحی SIM کارڈ اپ ڈیٹ کریں؟"</string>
+    <string name="sim_preferred_title" msgid="8850185380445309835">"‏ترجیحی SIM اپ ڈیٹ کریں؟"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"‏<xliff:g id="NEW_SIM">%1$s</xliff:g> آپ کے آلے میں واحد SIM ہے۔ کیا آپ اس SIM کو موبائل ڈیٹا، کالز اور SMS پیغامات کیلئے استعمال کرنا چاہتے ہیں؟"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"‏SIM کا غلط PIN اب آپ کو اپنا آلہ غیر مقفل کرنے کیلئے اپنے کیریئر سے رابطہ کرنا چاہیے۔"</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1760,17 +1766,17 @@
     <string name="reset_network_title" msgid="1395494440355807616">"‏Wi-Fi، موبائل اور بلوٹوتھ ری سیٹ کریں"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"‏اس سے نیٹ ورک کی سبھی ترتیبات ری سیٹ ہو جائیں گی، بشمول:\n\n"<li>"Wi‑Fi"</li>\n<li>"موبائل ڈیٹا"</li>\n<li>"بلوٹوتھ"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"مٹائیں"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"‏ڈاؤن لوڈ کردہ SIMs کو مٹائیں"</string>
+    <string name="reset_esim_title" msgid="4194570573425902754">"‏eSIMs مٹائیں"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"‏اس سے موبائل سروس کا کوئی بھی پلان منسوخ نہیں ہوگا۔ متبادل SIMs کو ڈاؤن لوڈ کرنے کے لیے، اپنے کیریئر سے رابطہ کریں۔"</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"ترتیبات ری سیٹ کریں"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"نیٹ ورک کی سبھی ترتیبات کو دوبارہ ترتیب دیں؟ آپ اس کارروائی کو کالعدم نہیں کر سکتے ہیں۔"</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"‏نیٹ ورک کی سبھی ترتیبات کو ری سیٹ کریں اور ڈاؤن لوڈ کردہ SIMs کو مٹائیں؟ آپ اس کارروائی کو کالعدم نہیں کر سکتے ہیں۔"</string>
+    <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"‏نیٹ ورک کی تمام ترتیبات کو ری سیٹ کریں اور eSIMs کو مٹائیں؟ آپ اس کاروائی کو کالعدم نہیں کر سکتے ہیں۔"</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"ترتیبات ری سیٹ کریں"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"ری سیٹ کریں؟"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"اس صارف کیلئے نیٹ ورک کو دوبارہ ترتیب دینا دستیاب نہیں ہے"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"نیٹ ورک کی ترتیبات کو دوبارہ ترتیب دیا گیا ہے"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"‏SIMs کو نہیں مٹا سکتے"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"‏کسی خرابی کی وجہ سے ڈاؤن لوڈ کردہ SIMs کو مٹایا نہیں جا سکتا ہے۔\n\nاپنا آلہ دوبارہ شروع کریں اور دوبارہ کوشش کریں۔"</string>
+    <string name="reset_esim_error_msg" msgid="7279607120606365250">"‏ایک خرابی کی وجہ سے eSIMs کو مٹایا نہیں جا سکتا ہے۔\n\nاپنا آلہ ری اسٹارٹ کریں اور دوبارہ کوشش کریں۔"</string>
     <string name="main_clear_title" msgid="277664302144837723">"سبھی ڈیٹا کو حذف کریں (فیکٹری ری سیٹ)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"سبھی ڈیٹا کو حذف کریں (فیکٹری ری سیٹ)"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"‏یہ آپ کے ٹیبلیٹ کے "<b>"داخلی اسٹوریج"</b>" سے سبھی ڈیٹا کو صاف کر دے گا، بشمول:\n\n"<li>"آپ کا Google اکاؤنٹ"</li>\n<li>"سسٹم اور ایپ ڈیٹا اور ترتیبات"</li>\n<li>"ڈاؤن لوڈ کردہ ایپس"</li></string>
@@ -2447,7 +2453,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"رنگوں کی تقلیب استعمال کریں"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"رنگوں کی تقلیب کا شارٹ کٹ"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"رنگوں کی تقلیب سے اسکرینز کا ہلکا رنگ گہرا ہو جاتا ہے۔ یہ گہری اسکرینز کو ہلکے رنگ میں بھی تبدیل کرتی ہے۔"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"‏‎&lt;b&gt;‎یاد رکھیں‎&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt;‎  میڈیا اور تصاویر میں رنگ تبدیل ہو جائیں گے‎&lt;/li&gt; &lt;li&gt;‎  رنگوں کی تقلیب تمام ایپس پر کام کرتی ہے‎&lt;/li&gt; &lt;li&gt;‎  گہرے پس منظر کو ڈسپلے کرنے کے لیے، اس کی بجائے گہری تھیم کا استعمال کیا جا سکتا ہے‎&lt;/li&gt; &lt;/ol&gt;‎"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"‏&lt;b&gt;یاد رکھیں&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; میڈیا اور تصاویر میں رنگ تبدیل ہو جائیں گے&lt;/li&gt; &lt;li&gt; رنگوں کی تقلیب تمام ایپس پر کام کرتی ہے&lt;/li&gt; &lt;li&gt; گہرے پس منظر کو ڈسپلے کرنے کے لیے، اس کی بجائے گہری تھیم کا استعمال کیا جا سکتا ہے&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"خودکار کلک (ہولڈ کا وقت)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"خودکار کلک کے بارے میں (پسنے کا وقت)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"خود کار کلک کے بارے میں مزید جانیں (پسنے کا وقت)"</string>
@@ -3199,7 +3205,8 @@
     <string name="data_usage_menu_hide_ethernet" msgid="7792365022467586772">"ایتھرنیٹ استعمال چھپائیں"</string>
     <string name="data_usage_menu_metered" msgid="4279260736172851951">"نیٹ ورک کی پابندیاں"</string>
     <string name="data_usage_menu_auto_sync" msgid="2632694000068175025">"ڈیٹا آٹو سنک کریں"</string>
-    <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"‏SIM کارڈز"</string>
+    <!-- no translation found for data_usage_menu_sim_cards (2827882471528568628) -->
+    <skip />
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"حد پر موقوف ہو گیا"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"ڈیٹا آٹو سنک کریں"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"ذاتی ڈیٹا آٹو سنک کریں"</string>
@@ -3426,7 +3433,7 @@
     <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"دستیاب ایپس انسٹال کریں"</string>
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"کنٹیکٹ لیس ادائیگیاں"</string>
     <string name="nfc_default_payment_settings_title" msgid="2150504446774382261">"ڈیفالٹ ادائیگی ایپ"</string>
-    <string name="nfc_default_payment_footer" msgid="978535088340021360">"ادائیگیوں کی ایپ کا استعمال کرتے ہوئے ادائیگی کرنے کے لیے، اپنے آلے کے پچھلے حصے کو ادائیگی ٹرمنل پر رکھیں"</string>
+    <string name="nfc_default_payment_footer" msgid="978535088340021360">"ادائیگیوں کی ایپ استعمال کرتے ہوئے ادائیگی کرنے کیلئے اپنے آلے کے پچھلے حصے کو پیمنٹ ٹرمنل پر رکھیں"</string>
     <string name="nfc_more_details" msgid="1700713533074275233">"مزید جانیں"</string>
     <string name="nfc_default_payment_workapp_confirmation_title" msgid="746921251872504687">"ڈیفالٹ ادائیگی ایپ کے طور پر ورک ایپ کو سیٹ کریں؟"</string>
     <string name="nfc_default_payment_workapp_confirmation_message_title" msgid="1533022606333010329">"ورک ایپ کا استعمال کرتے ہوئے ادائیگی کرنے کے لیے:"</string>
@@ -3521,10 +3528,12 @@
     <string name="wizard_next" msgid="3884832431439072471">"اگلا"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"مکمل کریں"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_setup_wizard_title" msgid="3945520353564138219">"‏SIM کارڈز"</string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"‏SIM کارڈز"</string>
+    <!-- no translation found for sim_setup_wizard_title (7030639256610746768) -->
+    <skip />
+    <string name="sim_settings_title" msgid="2254609719033946272">"SIMs"</string>
     <string name="sim_settings_summary" msgid="5777472623476930332">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
-    <string name="sim_cards_changed_message" msgid="7726897488921853655">"‏SIM کارڈز تبدیل ہوگئے ہیں"</string>
+    <!-- no translation found for sim_cards_changed_message (7374776581857835134) -->
+    <skip />
     <string name="sim_cards_changed_message_summary" msgid="7338082681445213621">"سرگرمیاں سیٹ کرنے کیلئے تھپتھپائیں"</string>
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"موبائل ڈیٹا دستیاب نہیں ہے"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"‏ایک ڈیٹا SIM منتخب کرنے کیلئے تھپتھپائیں"</string>
@@ -3536,7 +3545,8 @@
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"اگر آپ <xliff:g id="NEW_SIM">%1$s</xliff:g> پر سوئچ کرتے ہیں تو موبائل ڈیٹا کے لیے <xliff:g id="OLD_SIM">%2$s</xliff:g> کا مزید استعمال نہیں کیا جائے گا۔"</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"<xliff:g id="NEW_SIM">%1$s</xliff:g> استعمال کریں"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"کال کریں مع"</string>
-    <string name="sim_select_card" msgid="1226182454109919045">"‏ایک SIM کارڈ منتخب کریں"</string>
+    <!-- no translation found for sim_select_card (2975707305270216652) -->
+    <skip />
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_editor_name" msgid="5900178038499314621">"‏SIM کا نام"</string>
     <string name="sim_name_hint" msgid="8231524869124193119">"‏SIM کا نام درج کریں"</string>
@@ -3544,7 +3554,8 @@
     <string name="sim_editor_carrier" msgid="2424593350691002557">"کیریئر"</string>
     <string name="sim_editor_number" msgid="3209002966895156006">"نمبر"</string>
     <string name="sim_editor_color" msgid="9067029630083892961">"‏SIM کا رنگ"</string>
-    <string name="sim_card_select_title" msgid="8146523005929848793">"‏SIM کارڈ منتخب کریں"</string>
+    <!-- no translation found for sim_card_select_title (8387396377407327067) -->
+    <skip />
     <string name="color_orange" msgid="216547825489739010">"نارنجی"</string>
     <string name="color_purple" msgid="6603701972079904843">"جامنی"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"‏کوئی SIM کارڈز داخل نہیں کیے گئے"</string>
@@ -3558,7 +3569,7 @@
     <string name="preferred_network_offload_footer" msgid="374984523082849648">"نیٹ ورک کے نام کا نشریہ غیر فعال کریں تیسرے فریقوں کو آپ کی نیٹ ورک کی معلومات تک رسائی سے روکتا ہے۔"</string>
     <string name="preferred_network_offload_popup" msgid="3949937898807213370">"نیٹ ورک کے نام کا نشریہ غیر فعال کرنا مخفی نیٹ ورکس کیلئے خودکار کنکشن کو روک دے گا۔"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"‎<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"‏SIM کارڈز تبدیل ہوگئے۔"</string>
+    <string name="sim_notification_title" msgid="2819551384383504031">"‏SIMs کو تبدیل کر دیا گیا۔"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"سیٹ اپ کرنے کیلئے تھپتھپائیں"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"ہر بار پوچھیں"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"انتخاب درکار ہے"</string>
@@ -4311,7 +4322,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"پن ہٹانے سے پہلے پاس ورڈ طلب کریں"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"پن ہٹاتے وقت آلہ کو مقفل کریں"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"‏SIM کو حذف کرنے کی تصدیق کریں"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"‏ڈاؤن لوڈ کردہ SIM کو مٹانے سے پہلے تصدیق کریں کہ یہ آپ ہیں"</string>
+    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"‏eSIM کو مٹانے سے پہلے توثیق کریں کہ یہ آپ ہی ہیں"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"یہ دفتری پروفائل اس کے زیر انتظام ہے:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> کے زیر انتظام ہے"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(تجرباتی)"</string>
@@ -5262,7 +5273,8 @@
     <string name="empty_networks_list" msgid="6519489879480673428">"کوئی نیٹ ورک نہیں ملا۔"</string>
     <string name="network_query_error" msgid="6406348372070035274">"نیٹ ورکس نہیں مل سکے۔ دوبارہ کوشش کریں۔"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(ممنوع)"</string>
-    <string name="no_sim_card" msgid="1497407489810953863">"‏کوئی SIM کارڈ نہیں ہے"</string>
+    <!-- no translation found for no_sim_card (1478277597822967684) -->
+    <skip />
     <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
     <string name="wifi_no_sim_card" msgid="7144290066491585672">"‏کوئی SIM نہیں ہے"</string>
     <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"کوئی نہیں"</string>
@@ -5312,7 +5324,8 @@
     <string name="label_available" msgid="5305726869955838606">"دستیاب نیٹ ورکس"</string>
     <string name="load_networks_progress" msgid="4717874401621250401">"تلاش کیا جا رہا ہے…"</string>
     <string name="register_on_network" msgid="2169662800750709709">"<xliff:g id="NETWORK">%s</xliff:g> پر رجسٹر کیا جا رہا ہے…"</string>
-    <string name="not_allowed" msgid="5756935665192962915">"‏آپ کے SIM کارڈ کو اس نیٹ ورک سے منسلک ہونے کی اجازت نہیں ہے۔"</string>
+    <!-- no translation found for not_allowed (8969977039734782273) -->
+    <skip />
     <string name="connect_later" msgid="2330538069949281352">"ابھی اس نیٹ ورک سے منسلک نہیں ہو سکتا۔ بعد میں دوبارہ کوشش کریں۔"</string>
     <string name="registration_done" msgid="1750434215698850123">"نیٹ ورک پر رجسٹرڈ ہو گیا۔"</string>
     <string name="select_automatically" msgid="2419752566747259155">"خودکار طور پر نیٹ ورک منتخب کریں"</string>
@@ -5321,7 +5334,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"موبائل ڈیٹا"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"موبائل نیٹ ورک استعمال کر کے ڈیٹا تک رسائی حاصل کریں"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"رینج میں ہونے پر فون خودکار طور پر اس کیریئر پر سوئچ ہو جائے گا"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"‏کوئی SIM کارڈ دستیاب نہيں ہے"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"‏کوئی SIM دستیاب نہیں ہے"</string>
     <string name="calls_preference" msgid="2166481296066890129">"کالز کی ترجیح"</string>
     <string name="sms_preference" msgid="7742964962568219351">"‏SMS کی ترجیح"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"ہر بار پوچھیں"</string>
@@ -5342,8 +5355,8 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"مزید شامل کریں"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"‏فعال / SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"‏غیر فعال / SIM"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"‏فعال / ڈاؤن لوڈ کردہ SIM"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"‏غیر فعال / ڈاؤن لوڈ کردہ SIM"</string>
+    <string name="mobile_network_active_esim" msgid="3984452275968408382">"‏فعال / eSIM"</string>
+    <string name="mobile_network_inactive_esim" msgid="8777415108263057939">"‏غیر فعال / eSIM"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"‏SIM کا نام اور رنگ"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"نام"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"(موافق ایپس کے ذریعے استعمال کردہ) رنگ"</string>
@@ -5353,7 +5366,8 @@
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"‏اس SIM کو غیر فعال کرنے کے لیے، SIM کارڈ ہٹائيں"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"‫<xliff:g id="CARRIER">%1$s</xliff:g> فعال کرنے کے لیے تھپتھپائیں"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"‫<xliff:g id="CARRIER">%1$s</xliff:g> پر سوئچ کریں؟"</string>
-    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"‏ایک وقت میں صرف ایک ڈاؤن لوڈ کردہ SIM فعال ہو سکتی ہے۔\n\n‫<xliff:g id="CARRIER1">%1$s</xliff:g> پر سوئچ کرنے سے آپ کی <xliff:g id="CARRIER2">%2$s</xliff:g> سروس منسوخ نہیں ہوگی۔"</string>
+    <!-- no translation found for mobile_network_esim_swap_confirm_body (592668232798598450) -->
+    <skip />
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"<xliff:g id="CARRIER">%1$s</xliff:g> پر سوئچ کریں"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"‏SIM مٹائیں"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"‏SIM کو نہیں مٹا سکتے"</string>
@@ -5388,7 +5402,7 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"‏SIM کارڈ استعمال کرنے کے لیے سوئچ کریں؟"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> کا استعمال کریں؟"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"‏ایک وقت میں صرف ایک SIM فعال ہو سکتی ہے۔\n\n‫<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> پر سوئچ کرنے سے آپ کے <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> کی سروس منسوخ نہیں ہو گی۔"</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"‏ایک وقت میں صرف ایک ڈاؤن لوڈ کردہ SIM فعال ہو سکتی ہے۔\n\n‫<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> پر سوئچ کرنے سے آپ کے <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> کی سروس منسوخ نہیں ہو گی۔"</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"‏ایک وقت میں صرف 1 eSIM فعال ہو سکتا ہے۔\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> پر سوئچ کرنے سے آپ کی <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> سروس منسوخ نہیں ہوگی۔"</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"‏ایک وقت میں صرف ایک SIM فعال ہو سکتی ہے۔\n\nسوئچ کرنے سے آپ کے <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> کی سروس منسوخ نہیں ہوگی۔"</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"‏آپ ایک وقت میں 2 SIM کا استعمال کر سکتے ہیں۔ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> کا استعمال کرنے کے لیے، دوسری SIM آف کریں۔"</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"‫<xliff:g id="CARRIER_NAME">%1$s</xliff:g> پر سوئچ کریں"</string>
@@ -5434,8 +5448,8 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"‏<xliff:g id="CARRIER_NAME">%1$s</xliff:g> کا استعمال موبائل ڈیٹا، کالز اور SMS کے لیے کیا جائے گا۔"</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"‏کوئی فعال SIMs دستیاب نہیں ہے"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"‏موبائل ڈیٹا، کال کی خصوصیات اور SMS کو بعد میں استعمال کرنے کے لیے اپنے نیٹ ورک کی ترتیبات پر جائیں"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"‏SIM کارڈ"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"‏ڈاؤن لوڈ کردہ اس SIM کو مٹائیں؟"</string>
+    <string name="sim_card_label" msgid="6263064316075963775">"SIM"</string>
+    <string name="erase_sim_dialog_title" msgid="4742077437653028326">"‏اس eSIM کو مٹائیں؟"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"‏اس SIM کو مٹانے سے اس آلہ سے <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> سروس ہٹ جاتی ہے۔\n\n ‫<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> کی سروس منسوخ نہیں ہوگی۔"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"مٹائیں"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"‏SIM کو مٹایا جا رہا ہے…"</string>
@@ -5619,8 +5633,8 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"‏رفتار اور کوریج کو بہتر بنانے کیلئے Google Fi کو W+ نیٹ ورکس استعمال کرنے کی اجازت دیں"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"‏W+ نیٹ ورک"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"‏ڈاؤن لوڈ کردہ SIM"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"‏ڈاؤن لوڈ کردہ SIMs"</string>
+    <string name="downloaded_sim_category_title" msgid="2876988650413179752">"eSIM"</string>
+    <string name="downloaded_sims_category_title" msgid="487799905978489922">"eSIMs"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"فعال"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"غیر فعال"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / <xliff:g id="ID_1">%1$s</xliff:g> کے لیے ڈیفالٹ"</string>
@@ -5680,7 +5694,7 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"کال کی ترتیبات"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"ترتیبات اپ ڈیٹ ہورہی ہیں…"</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"کال کی ترتیبات کی خرابی"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"‏نیٹ ورک یا SIM کارڈ کی خرابی۔"</string>
+    <string name="smart_forwarding_failed_text" msgid="8682640643264071789">"‏نیٹ ورک یا SIM کی خرابی۔"</string>
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"‏Sim فعال نہیں ہے۔"</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"فون نمبرز درج کریں"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"فون نمبر درج کریں"</string>
@@ -5705,10 +5719,10 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"پچھلا"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"اگلا"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"رنگ کا پیش منظر"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"‏SIM کارڈ تک رسائی کی درخواست"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"‏ایک آلہ آپ کے SIM کارڈ تک رسائی حاصل کرنا چاہتا ہے۔ تفصیلات کے ليے تھپتھپائيں۔"</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"‏SIM کارڈ تک رسائی کی اجازت دیں؟"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"‏ایک بلوٹوتھ آلہ، <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>، آپ کے SIM کارڈ پر ڈیٹا تک رسائی حاصل کرنا چاہتا ہے۔ اس میں آپ کے رابطے شامل ہیں۔\n\n منسلک ہونے کے دوران، <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> کو <xliff:g id="PHONE_NUMBER">%3$s</xliff:g> پر کی جانے والی تمام کالز موصول ہوں گی۔"</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="7351015416346359536">"‏SIM تک رسائی کی درخواست"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="8685623260103018309">"‏ایک آلہ آپ کے SIM تک رسائی حاصل کرنا چاہتا ہے۔ تفصیلات کے ليے تھپتھپائيں۔"</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="5616323725563125179">"‏SIM تک رسائی کی اجازت دیں؟"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="6281997628405909566">"‏ایک بلوٹوتھ آلہ، <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>، آپ کے SIM پر ڈیٹا تک رسائی حاصل کرنا چاہتا ہے۔ اس میں آپ کے رابطے شامل ہیں۔\n\nمنسلک ہونے کے دوران، <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> کو <xliff:g id="PHONE_NUMBER">%3$s</xliff:g> پر کی جانے والی تمام کالز موصول ہوں گی۔"</string>
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"بلوٹوتھ آلہ دستیاب ہے"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"ایک آلہ منسلک ہونا چاہتا ہے۔ تفصیلات کے ليے تھپتھپائيں۔"</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"بلوٹوتھ آلے سے منسلک ہوں؟"</string>

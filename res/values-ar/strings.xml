@@ -23,6 +23,7 @@
     <string name="deny" msgid="7326117222944479942">"رفض"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"تفعيل"</string>
     <string name="device_info_default" msgid="1406619232867343310">"غير معروف"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"انقر لإظهار المعلومات."</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="zero">لا يفصلك الآن عن الوصول إلى مرحلة مطوري البرامج سوى <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> خطوة.</item>
       <item quantity="two">لا يفصلك الآن عن الوصول إلى مرحلة مطوري البرامج سوى خطوتين (<xliff:g id="STEP_COUNT_1">%1$d</xliff:g>).</item>
@@ -141,9 +142,10 @@
     <string name="bluetooth_remember_choice" msgid="173821849670438110">"لا تسألني مرة أخرى"</string>
     <string name="bluetooth_pb_remember_choice" msgid="2080511174185036562">"لا تسألني مرة أخرى"</string>
     <string name="bluetooth_map_request" msgid="8664081227240707479">"طلب الدخول إلى الرسائل"</string>
-    <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"‏يريد %1$s الدخول إلى رسائلك. هل تريد منح %2$s حق الدخول؟"</string>
-    <string name="bluetooth_sap_request" msgid="473439406287008397">"‏طلب حق الوصول إلى شريحة SIM"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"‏يريد <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> الوصول إلى شريحة SIM. ويؤدي منح حق الوصول إلى شريحة SIM إلى إيقاف اتصال البيانات على جهازك طوال مدة الاتصال. منح حق الوصول إلى <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
+    <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"‏يريد %1$s الوصول إلى رسائلك. هل تريد منح %2$s إذن الوصول؟"</string>
+    <string name="bluetooth_sap_request" msgid="473439406287008397">"‏طلب الإذن بالوصول إلى شريحة SIM"</string>
+    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (6194086753523415820) -->
+    <skip />
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"يظهر باسم \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" للأجهزة الأخرى."</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"يجب تفعيل بلوتوث للاتصال بالأجهزة الأخرى."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"أجهزتك"</string>
@@ -328,12 +330,12 @@
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"استخدام الموقع الجغرافي"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"خدمة الموقع الجغرافي غير مفعّلة."</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="zero">خدمة \"الموقع الجغرافي\" مفعَّلة - يمتلك <xliff:g id="COUNT_1">%1$d</xliff:g> تطبيق حق الوصول إلى بيانات الموقع الجغرافي.</item>
-      <item quantity="two">خدمة \"الموقع الجغرافي\" مفعَّلة - يمتلك تطبيقان (<xliff:g id="COUNT_1">%1$d</xliff:g>) حق الوصول إلى بيانات الموقع الجغرافي.</item>
-      <item quantity="few">خدمة \"الموقع الجغرافي\" مفعَّلة - تمتلك <xliff:g id="COUNT_1">%1$d</xliff:g> تطبيقات حق الوصول إلى بيانات الموقع الجغرافي.</item>
-      <item quantity="many">خدمة \"الموقع الجغرافي\" مفعَّلة - يمتلك <xliff:g id="COUNT_1">%1$d</xliff:g> تطبيقًا حق الوصول إلى بيانات الموقع الجغرافي.</item>
-      <item quantity="other">خدمة \"الموقع الجغرافي\" مفعَّلة - يمتلك <xliff:g id="COUNT_1">%1$d</xliff:g> تطبيق حق الوصول إلى بيانات الموقع الجغرافي.</item>
-      <item quantity="one">خدمة \"الموقع الجغرافي\" مفعَّلة - يمتلك تطبيق واحد (<xliff:g id="COUNT_0">%1$d</xliff:g>) حق الوصول إلى بيانات الموقع الجغرافي.</item>
+      <item quantity="zero">خدمة \"الموقع الجغرافي\" مفعَّلة - يمتلك <xliff:g id="COUNT_1">%1$d</xliff:g> تطبيق الإذن بالوصول إلى بيانات الموقع الجغرافي.</item>
+      <item quantity="two">خدمة \"الموقع الجغرافي\" مفعَّلة - يمتلك تطبيقان (<xliff:g id="COUNT_1">%1$d</xliff:g>) الإذن بالوصول إلى بيانات الموقع الجغرافي.</item>
+      <item quantity="few">خدمة \"الموقع الجغرافي\" مفعَّلة - تمتلك <xliff:g id="COUNT_1">%1$d</xliff:g> تطبيقات الإذن بالوصول إلى بيانات الموقع الجغرافي.</item>
+      <item quantity="many">خدمة \"الموقع الجغرافي\" مفعَّلة - يمتلك <xliff:g id="COUNT_1">%1$d</xliff:g> تطبيقًا الإذن بالوصول إلى بيانات الموقع الجغرافي.</item>
+      <item quantity="other">خدمة \"الموقع الجغرافي\" مفعَّلة - يمتلك <xliff:g id="COUNT_1">%1$d</xliff:g> تطبيق الإذن بالوصول إلى بيانات الموقع الجغرافي.</item>
+      <item quantity="one">خدمة \"الموقع الجغرافي\" مفعَّلة - يمتلك تطبيق واحد (<xliff:g id="COUNT_0">%1$d</xliff:g>) الإذن بالوصول إلى بيانات الموقع الجغرافي.</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"جارٍ التحميل..."</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"يمكن للتطبيقات التي لديها إذن بالوصول إلى الأجهزة المجاورة تحديد الموضع النسبي للأجهزة المتصلة بجهازك."</string>
@@ -348,7 +350,8 @@
     <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"الجهاز ليس مشفرًا."</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"شاشة القفل"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"ما يتم عرضه"</string>
-    <string name="security_settings_summary" msgid="1627059516127354233">"‏تعيين موقعي، فتح قفل الشاشة، تأمين شريحة SIM، تأمين تخزين الاعتماد"</string>
+    <!-- no translation found for security_settings_summary (4248337854143139822) -->
+    <skip />
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"تعيين موقعي، فتح قفل الشاشة، تأمين تخزين الاعتماد"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"الخصوصية"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"غير متاح"</string>
@@ -1487,7 +1490,7 @@
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"الإيقاف الآن"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"تفعيل الوضع حتى الشروق"</string>
     <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"إيقاف الوضع حتى الغروب"</string>
-    <string name="dark_ui_title" msgid="3373976268671557416">"الوضع المُعتِم"</string>
+    <string name="dark_ui_title" msgid="3373976268671557416">"الوضع الداكن"</string>
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"الجدول الزمني"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"مطلقًا"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"التفعيل من غروب الشمس حتى شروقها"</string>
@@ -1510,6 +1513,7 @@
     <string name="screen_timeout" msgid="7709947617767439410">"مهلة غلق الشاشة"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"إيقاف الشاشة"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"بعد <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> من عدم النشاط"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"لم يتم تحديد اقتراح مطابق."</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"الخلفية"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"الخلفية والأسلوب"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"الشاشة الرئيسية وشاشة القفل"</string>
@@ -1543,20 +1547,21 @@
     <string name="force_bold_text" msgid="4620929631102086716">"تغميق النص"</string>
     <string name="title_font_size" msgid="570613010306330622">"حجم الخط"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"تكبير النص أو تصغيره"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"‏إعدادات قفل شريحة SIM"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"‏قفل شريحة SIM"</string>
+    <string name="sim_lock_settings" msgid="7331982427303002613">"‏إعدادات قفل شريحة SIM"</string>
+    <string name="sim_lock_settings_category" msgid="6475255139493877786">"‏قفل شريحة SIM"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"تم الإيقاف"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"تم القفل"</string>
-    <string name="sim_lock_settings_title" msgid="1401619059761012696">"‏قفل شريحة SIM"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"‏قفل شريحة SIM"</string>
+    <!-- no translation found for sim_lock_settings_title (3596566201762038857) -->
+    <skip />
+    <string name="sim_pin_toggle" msgid="6814489621760857328">"‏قفل شريحة SIM"</string>
     <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"‏يلزم إدخال رمز PIN لاستخدام الجهاز اللوحي"</string>
     <string name="sim_lock_on" product="default" msgid="3303147192981388923">"يتطلّب إدخال رقم التعريف الشخصي لاستخدام الهاتف."</string>
     <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"‏يلزم إدخال رمز PIN لاستخدام الجهاز اللوحي"</string>
     <string name="sim_lock_off" product="default" msgid="4634118006847137785">"يتطلّب إدخال رقم التعريف الشخصي لاستخدام الهاتف."</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"‏تغيير رقم التعريف الشخصي لشريحة SIM"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"‏رقم التعريف الشخصي لشريحة SIM"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"‏قفل شريحة SIM"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"‏فتح قفل شريحة SIM"</string>
+    <string name="sim_enable_sim_lock" msgid="6486354334679225748">"‏قفل شريحة SIM"</string>
+    <string name="sim_disable_sim_lock" msgid="6939439812841857306">"‏فتح قفل SIM"</string>
     <string name="sim_enter_old" msgid="6882545610939674813">"‏رقم التعريف الشخصي القديم لشريحة SIM"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"‏رقم تعريف شخصي جديد لبطاقة SIM"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"إعادة كتابة رقم التعريف الشخصي الجديد"</string>
@@ -1565,7 +1570,8 @@
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"رقما التعريف الشخصي غير متطابقَين"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"‏لا يمكن تغيير رمز PIN.\nيحتمل أن يكون رمز PIN غير صحيح."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"‏تم تغيير رمز PIN لبطاقة SIM بنجاح"</string>
-    <string name="sim_lock_failed" msgid="16360418201678317">"‏لا يمكن تغيير حالة تأمين شريحة SIM.\nيُحتمل أن يكون رقم التعريف الشخصي غير صحيح."</string>
+    <!-- no translation found for sim_lock_failed (2088257523501265954) -->
+    <skip />
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"يتعذَّر إيقاف رقم التعريف الشخصي."</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"يتعذَّر تفعيل رقم التعريف الشخصي."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"حسنًا"</string>
@@ -1575,7 +1581,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"هل تريد بيانات الجوّال من <xliff:g id="CARRIER">%1$s</xliff:g>؟"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"أنت تستخدم <xliff:g id="CARRIER2_0">%2$s</xliff:g> للاتصال ببيانات الجوّال. عند التبديل إلى <xliff:g id="CARRIER1">%1$s</xliff:g>، لن يتم استخدام <xliff:g id="CARRIER2_1">%2$s</xliff:g> مرة أخرى للاتصال ببيانات الجوّال."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"استخدام <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"‏هل تريد تحديث شريحة SIM المفضلة؟"</string>
+    <string name="sim_preferred_title" msgid="8850185380445309835">"‏أتريد تعديل شريحة SIM المفضلة؟"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"‏<xliff:g id="NEW_SIM">%1$s</xliff:g> هي شريحة SIM الوحيدة في جهازك، فهل تريد استخدام هذه الشريحة لبيانات الجوال والمكالمات والرسائل القصيرة SMS؟"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"‏رمز \"رقم التعريف الشخصي\" لبطاقة SIM غير صحيح، ويلزمك الاتصال الآن بمشغّل شبكة الجوّال لإلغاء قفل الجهاز."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1844,17 +1850,17 @@
     <string name="reset_network_title" msgid="1395494440355807616">"‏إعادة ضبط شبكة Wi-Fi والجوّال والبلوتوث"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"‏سيؤدي هذا إلى إعادة ضبط كل إعدادات الشبكة، بما فيها:\n\n"<li>"شبكة Wi‑Fi"</li>\n<li>"بيانات الجوّال"</li>\n<li>"البلوتوث"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"محو البيانات"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"‏محو بيانات شرائح SIM التي تم تنزيلها"</string>
+    <string name="reset_esim_title" msgid="4194570573425902754">"‏محو بيانات شرائح eSIM"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"‏لن يؤدي هذا إلى إلغاء أيّ خطة من خطط خدمة الجوّال. لتنزيل شرائح SIM بديلة، يمكنك التواصل مع مشغّل شبكة الجوّال."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"إعادة ضبط الإعدادات"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"هل تريد إعادة ضبط جميع إعدادات الشبكة؟ لا يمكنك التراجع عن هذا الإجراء."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"‏هل تريد إعادة ضبط كل إعدادات الشبكة ومحو بيانات شريحة SIM التي تم تنزيلها؟ لا يمكنك التراجع عن هذا الإجراء."</string>
+    <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"‏هل تريد إعادة ضبط كل إعدادات الشبكة ومحو بيانات شرائح eSIM؟ لا يمكنك التراجع عن هذا الإجراء."</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"إعادة ضبط الإعدادات"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"هل تريد إعادة الضبط؟"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"إعادة ضبط الشبكة ليست متاحة لهذا المستخدم"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"تمت إعادة ضبط إعدادات الشبكة"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"‏يتعذّر محو بيانات شرائح SIM"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"يتعذّر محو بيانات شرائح التي تم تنزيلها بسبب خطأ.\n\nيمكنك إعادة تشغيل الجهاز وإعادة المحاولة."</string>
+    <string name="reset_esim_error_msg" msgid="7279607120606365250">"‏يتعذّر محو بيانات شرائح eSIM هذه بسبب حدوث خطأ.\n\nيمكنك إعادة تشغيل الجهاز والمحاولة مرة أخرى."</string>
     <string name="main_clear_title" msgid="277664302144837723">"محو جميع البيانات (إعادة الضبط على الإعدادات الأصلية)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"محو جميع البيانات (إعادة الضبط على الإعدادات الأصلية)"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"‏سيؤدي هذا إلى محو جميع البيانات من "<b>"وحدة التخزين الداخلية"</b>" لجهازك اللوحي، بما في ذلك:\n\n"<li>"حسابك على Google"</li>\n<li>"بيانات وإعدادات النظام والتطبيقات"</li>\n<li>"التطبيقات التي تم تنزيلها"</li></string>
@@ -3359,7 +3365,8 @@
     <string name="data_usage_menu_hide_ethernet" msgid="7792365022467586772">"‏إخفاء استخدام Ethernet"</string>
     <string name="data_usage_menu_metered" msgid="4279260736172851951">"قيود الشبكات"</string>
     <string name="data_usage_menu_auto_sync" msgid="2632694000068175025">"مزامنة البيانات تلقائيًا"</string>
-    <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"‏بطاقات SIM"</string>
+    <!-- no translation found for data_usage_menu_sim_cards (2827882471528568628) -->
+    <skip />
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"تُوقف مؤقتًا عند بلوغ الحد"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"مزامنة البيانات تلقائيًا"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"مزامنة البيانات الشخصية تلقائيًا"</string>
@@ -3480,7 +3487,7 @@
     <string name="vpn_create" msgid="7546073242936894638">"‏إضافة ملف شخصي لشبكة افتراضية خاصة (VPN)"</string>
     <string name="vpn_menu_edit" msgid="5100387853773792379">"تعديل الملف الشخصي"</string>
     <string name="vpn_menu_delete" msgid="4455966182219039928">"حذف الملف الشخصي"</string>
-    <string name="vpn_menu_lockdown" msgid="5284041663859541007">"‏شبكة افتراضية خاصة (VPN) قيد التشغيل دائمًا"</string>
+    <string name="vpn_menu_lockdown" msgid="5284041663859541007">"‏شبكة VPN قيد التشغيل دائمًا"</string>
     <string name="vpn_no_vpns_added" msgid="7387080769821533728">"‏لم تتم إضافة أي شبكات افتراضية خاصة (VPN)."</string>
     <string name="vpn_always_on_summary" msgid="2171252372476858166">"‏متابعة الاتصال بشبكة VPN في جميع الأوقات"</string>
     <string name="vpn_always_on_summary_not_supported" msgid="9084872130449368437">"عدم التوافق مع هذا التطبيق"</string>
@@ -3689,10 +3696,12 @@
     <string name="wizard_next" msgid="3884832431439072471">"التالي"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"إنهاء"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_setup_wizard_title" msgid="3945520353564138219">"‏بطاقات SIM"</string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"‏بطاقات SIM"</string>
+    <!-- no translation found for sim_setup_wizard_title (7030639256610746768) -->
+    <skip />
+    <string name="sim_settings_title" msgid="2254609719033946272">"‏شرائح SIM"</string>
     <string name="sim_settings_summary" msgid="5777472623476930332">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
-    <string name="sim_cards_changed_message" msgid="7726897488921853655">"‏تم تغيير بطاقات SIM"</string>
+    <!-- no translation found for sim_cards_changed_message (7374776581857835134) -->
+    <skip />
     <string name="sim_cards_changed_message_summary" msgid="7338082681445213621">"انقر لضبط الأنشطة."</string>
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"بيانات الجوّال غير متاحة"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"‏انقر لاختيار شريحة SIM للبيانات."</string>
@@ -3704,7 +3713,8 @@
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"إذا تم التبديل إلى <xliff:g id="NEW_SIM">%1$s</xliff:g>، لن تكون <xliff:g id="OLD_SIM">%2$s</xliff:g> مستخدمة للاتصال ببيانات الجوّال."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"استخدام <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"الاتصال باستخدام"</string>
-    <string name="sim_select_card" msgid="1226182454109919045">"‏اختيار شريحة SIM"</string>
+    <!-- no translation found for sim_select_card (2975707305270216652) -->
+    <skip />
     <string name="sim_card_number_title" msgid="4728780444646439845">"‏شريحة SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_editor_name" msgid="5900178038499314621">"‏اسم شريحة SIM"</string>
     <string name="sim_name_hint" msgid="8231524869124193119">"‏إدخال اسم SIM"</string>
@@ -3712,7 +3722,8 @@
     <string name="sim_editor_carrier" msgid="2424593350691002557">"مشغل شبكة الجوّال"</string>
     <string name="sim_editor_number" msgid="3209002966895156006">"الرقم"</string>
     <string name="sim_editor_color" msgid="9067029630083892961">"‏لون شريحة SIM"</string>
-    <string name="sim_card_select_title" msgid="8146523005929848793">"‏اختيار شريحة SIM"</string>
+    <!-- no translation found for sim_card_select_title (8387396377407327067) -->
+    <skip />
     <string name="color_orange" msgid="216547825489739010">"برتقالي"</string>
     <string name="color_purple" msgid="6603701972079904843">"أرجواني"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"‏لم يتم إدراج بطاقات SIM"</string>
@@ -3726,7 +3737,7 @@
     <string name="preferred_network_offload_footer" msgid="374984523082849648">"يؤدي إيقاف بث اسم الشبكة إلى منع وصول الجهات الخارجية إلى معلومات الشبكة."</string>
     <string name="preferred_network_offload_popup" msgid="3949937898807213370">"سيؤدي إيقاف بث اسم الشبكة إلى منع الاتصال بالشبكات المخفية تلقائيًا."</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> ديسبل ميلي واط <xliff:g id="ASU">%2$d</xliff:g> وحدة إشارة واحدة"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"‏تم تغيير بطاقات SIM."</string>
+    <string name="sim_notification_title" msgid="2819551384383504031">"‏تم تغيير شرائح SIM"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"انقر للإعداد."</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"طرح السؤال كل مرة"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"يلزم التحديد"</string>
@@ -4208,7 +4219,7 @@
     <string name="notification_assistant_title" msgid="5889201903272393099">"الإشعارات المحسّنة"</string>
     <string name="notification_assistant_summary" msgid="1957783114840908887">"الحصول على الردود والإجراءات المقترحة والمزيد"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"بدون"</string>
-    <string name="no_notification_listeners" msgid="2839354157349636000">"لم تطلب أي تطبيقات مثبّتة حق الوصول إلى الإشعارات."</string>
+    <string name="no_notification_listeners" msgid="2839354157349636000">"لم تطلب أي تطبيقات مثبّتة الإذن بالوصول إلى الإشعارات."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"السماح بالوصول إلى الإشعارات"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"هل تسمح بوصول خدمة <xliff:g id="SERVICE">%1$s</xliff:g> إلى الإشعارات؟"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"‏تم إبدال الإشعارات التكيُّفية لنظام التشغيل Android في الإصدار 12 منه بالإشعارات المحسّنة. تعرض هذه الميزة إجراءات وردودًا مقترحة وتنظِّم الإشعارات. \n\nيمكن للإشعارات المحسّنة الوصول إلى محتوى الإشعارات، بما في ذلك المعلومات الشخصية، مثلاً أسماء جهات الاتصال والرسائل. يمكن لهذه الميزة أيضًا إغلاق الإشعارات أو الاستجابة لها، مثلاً الردّ على مكالمات الهاتف والتحكّم في ميزة \"عدم الإزعاج\"."</string>
@@ -4283,7 +4294,7 @@
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"انقر لتنزيل التطبيق."</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"الوصول إلى إعداد \"عدم الإزعاج\""</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"السماح بميزة \"عدم الإزعاج\""</string>
-    <string name="zen_access_empty_text" msgid="3779921853282293080">"لم تطلّب أي تطبيقات مثبّتة حق الوصول إلى إعداد \"عدم الإزعاج\""</string>
+    <string name="zen_access_empty_text" msgid="3779921853282293080">"لم تطلّب أي تطبيقات مثبّتة الإذن بالوصول إلى إعداد \"عدم الإزعاج\""</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"جارٍ تحميل التطبيقات…"</string>
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"‏بناءً على طلبك، يمنع Android ظهور إشعارات هذا التطبيق على هذا الجهاز."</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"‏بناءً على طلبك، يمنع Android ظهور هذه الفئة من الإشعارات على هذا الجهاز."</string>
@@ -4523,7 +4534,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"طلب إدخال كلمة المرور قبل إزالة التثبيت"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"إقفال الجهاز عند إزالة التثبيت"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"‏تأكيد حذف بيانات شريحة SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"‏عليك إثبات هويتك قبل محو بيانات شريحة SIM التي تم تنزيلها."</string>
+    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"‏يجب إثبات هويتك قبل محو بيانات شريحة eSIM."</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"تتم إدارة الملف الشخصي للعمل هذا بواسطة:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"يديرها <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(تجريبي)"</string>
@@ -5283,7 +5294,7 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"النقر لفحص الجهاز"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"للاطّلاع على الوقت والإشعارات والمعلومات الأخرى، انقر على شاشتك."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"اتصالات الطوارئ"</string>
-    <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"استخدام اتصالات الطوارئ"</string>
+    <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"استخدام ميزة \"اتصالات الطوارئ\""</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"تحت إدارة <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"اضغط على زر التشغيل بسرعة 5 مرات أو أكثر لبدء تنفيذ الإجراءات أدناه."</string>
     <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"تشغيل إنذار العد التنازلي"</string>
@@ -5598,7 +5609,8 @@
     <string name="empty_networks_list" msgid="6519489879480673428">"لم يتم العثور على شبكات."</string>
     <string name="network_query_error" msgid="6406348372070035274">"تعذّر العثور على شبكات. حاوِل مرة أخرى."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(محظورة)"</string>
-    <string name="no_sim_card" msgid="1497407489810953863">"‏ليست هناك شريحة SIM."</string>
+    <!-- no translation found for no_sim_card (1478277597822967684) -->
+    <skip />
     <string name="sim_card" msgid="6381158752066377709">"‏شريحة SIM"</string>
     <string name="wifi_no_sim_card" msgid="7144290066491585672">"‏ليس هناك شريحة SIM"</string>
     <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"بدون شريحة"</string>
@@ -5648,7 +5660,8 @@
     <string name="label_available" msgid="5305726869955838606">"الشبكات المُتاحة"</string>
     <string name="load_networks_progress" msgid="4717874401621250401">"جارٍ البحث…"</string>
     <string name="register_on_network" msgid="2169662800750709709">"جارٍ التسجيل على <xliff:g id="NETWORK">%s</xliff:g>…"</string>
-    <string name="not_allowed" msgid="5756935665192962915">"‏لا تسمح شريحة SIM بالاتصال بهذه الشبكة."</string>
+    <!-- no translation found for not_allowed (8969977039734782273) -->
+    <skip />
     <string name="connect_later" msgid="2330538069949281352">"يتعذَّر الاتصال بهذه الشبكة في الوقت الحالي. حاول مرة أخرى لاحقًا."</string>
     <string name="registration_done" msgid="1750434215698850123">"مُسجَّلة على الشبكة."</string>
     <string name="select_automatically" msgid="2419752566747259155">"اختيار الشبكة تلقائيًا"</string>
@@ -5657,7 +5670,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"بيانات الجوّال"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"الوصول إلى البيانات باستخدام شبكة الجوّال"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"سيتم تبديل الهاتف تلقائيًا إلى مشغّل شبكة الجوّال هذا عند وجوده داخل النطاق."</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"‏لا تتوفّر شريحة SIM."</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"‏لا تتوفّر شريحة SIM."</string>
     <string name="calls_preference" msgid="2166481296066890129">"خيار المكالمات المفضَّل"</string>
     <string name="sms_preference" msgid="7742964962568219351">"‏خيار SMS المفضَّل"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"الطلب في كل مرة"</string>
@@ -5682,8 +5695,8 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"إضافة المزيد"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"‏مفعّلة / SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"‏غير مفعّلة / SIM"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"‏مفعّلة / شريحة SIM التي تم تنزيلها"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"‏غير مفعّلة / شريحة SIM التي تم تنزيلها"</string>
+    <string name="mobile_network_active_esim" msgid="3984452275968408382">"‏مفعَّلة / شريحة eSIM"</string>
+    <string name="mobile_network_inactive_esim" msgid="8777415108263057939">"‏غير مفعّلة / شريحة eSIM"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"‏اسم شريحة SIM ولونها"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"الاسم"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"اللون (تستخدمه التطبيقات المتوافقة)"</string>
@@ -5693,7 +5706,8 @@
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"‏لإيقاف شريحة SIM هذه، يمكنك إزالتها."</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"يمكنك النقر لتفعيل <xliff:g id="CARRIER">%1$s</xliff:g>."</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"هل تريد التبديل إلى <xliff:g id="CARRIER">%1$s</xliff:g>؟"</string>
-    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"‏لا يمكن تفعيل أكثر من شريحة SIM واحدة تم تنزيلها.\n\nلن يؤدي اختيار <xliff:g id="CARRIER1">%1$s</xliff:g> كبديل إلى إلغاء خدمة <xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
+    <!-- no translation found for mobile_network_esim_swap_confirm_body (592668232798598450) -->
+    <skip />
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"التبديل إلى <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"‏محو بيانات شريحة SIM"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"‏يتعذّر محو بيانات شريحة SIM"</string>
@@ -5728,7 +5742,7 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"‏هل تريد التبديل إلى استخدام شريحة SIM؟"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"هل تريد استخدام <xliff:g id="CARRIER_NAME">%1$s</xliff:g>؟"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"‏لا يمكن تفعيل أكثر من شريحة SIM واحدة في آنٍ واحد.\n\nلن يؤدي التبديل إلى <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> إلى إلغاء خدمة <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"‏لا يمكن تفعيل أكثر من شريحة SIM واحدة تم تنزيلها.\n\nلن يؤدي التبديل إلى <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> إلى إلغاء خدمة <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"‏لا يمكن تفعيل أكثر من شريحة eSIM واحدة في آنٍ واحد.\n\nلن يؤدي التبديل إلى \"<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>\" إلى إلغاء خدمة \"<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>\"."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"‏لا يمكن تفعيل أكثر من شريحة SIM واحدة في آنٍ واحد.\n\nلن يؤدي التبديل إلى إلغاء خدمة <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"‏لا يمكنك استخدام شريحتَي SIM في آنٍ واحد. لاستخدام <xliff:g id="CARRIER_NAME">%1$s</xliff:g>، عليك إيقاف شريحة SIM الأخرى."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"التبديل إلى <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -5774,8 +5788,8 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"سيتم استخدام <xliff:g id="CARRIER_NAME">%1$s</xliff:g> لبيانات الجوَّال والمكالمات والرسائل القصيرة."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"‏لا تتوفّر أي شرائح SIM مفعّلة"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"لاستخدام بيانات الجوّال وميزات المكالمات والرسائل القصيرة في وقتٍ لاحق، انتقِل إلى إعدادات الشبكة."</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"‏شريحة SIM"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"‏هل تريد محو بيانات شريحة SIM هذه التي تم تنزيلها؟"</string>
+    <string name="sim_card_label" msgid="6263064316075963775">"‏شريحة SIM"</string>
+    <string name="erase_sim_dialog_title" msgid="4742077437653028326">"‏هل تريد محو بيانات شريحة eSIM؟"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"‏سيؤدي محو بيانات شريحة SIM هذه إلى إزالة خدمة <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> من هذا الجهاز.\n\nلن يتم إلغاء خدمة <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"محو البيانات"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"‏جارٍ محو بيانات شريحة SIM…"</string>
@@ -5967,8 +5981,8 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"‏يؤدي السماح لخدمة Google Fi باستخدام شبكات W+‎ إلى تحسين السرعة والتغطية."</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"‏شبكة W+‎"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"‏شريحة SIM التي تم تنزيلها"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"‏شرائح SIM التي تم تنزيلها"</string>
+    <string name="downloaded_sim_category_title" msgid="2876988650413179752">"eSIM"</string>
+    <string name="downloaded_sims_category_title" msgid="487799905978489922">"‏شرائح eSIM"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"نشطة"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"غير نشطة"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / الإعدادات التلقائية لـ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -6028,7 +6042,7 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"إعدادات المكالمات"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"جارٍ تعديل الإعدادات..."</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"خطأ في \"إعدادات الاتصال\""</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"‏حدث خطأ في الشبكة أو في شريحة SIM."</string>
+    <string name="smart_forwarding_failed_text" msgid="8682640643264071789">"‏حدث خطأ في الشبكة أو في شريحة SIM."</string>
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"‏شريحة SIM غير مفعّلة."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"إدخال أرقام الهواتف"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"إدخال رقم الهاتف"</string>
@@ -6053,10 +6067,10 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"السابق"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"التالي"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"معاينة اللون"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"‏طلب الوصول إلى شريحة SIM"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"‏يريد أحد الأجهزة الوصول إلى شريحة SIM. انقر للحصول على التفاصيل."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"‏هل تريد السماح بالوصول إلى شريحة SIM؟"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"‏يريد الجهاز الذي يتضمّن بلوتوث <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> الوصول إلى البيانات على شريحة SIM. يتضمّن ذلك جهات اتصالك.\n\nعندما يكون الجهاز متصلاً، سيتلقّى <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> كل المكالمات التي يتم إجراؤها إلى الرقم <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="7351015416346359536">"‏تلقيّت طلبًا بالوصول إلى شريحة SIM"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="8685623260103018309">"‏يريد أحد الأجهزة الوصول إلى شريحة SIM. انقر للحصول على التفاصيل."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="5616323725563125179">"‏هل تريد السماح للجهاز بالوصول إلى شريحة SIM؟"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="6281997628405909566">"‏يريد الجهاز الذي يتضمّن بلوتوث \"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>\" الوصول إلى البيانات من شريحة SIM. يشمل ذلك جهات اتصالك.\n\nعندما يكون الجهاز \"<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>\" متصلاً، سيتلقّى كل المكالمات الواردة إلى الرقم <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"يتوفّر جهاز يتضمّن بلوتوث"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"يريد أحد الأجهزة الاتصال بجهازك. انقر للحصول على التفاصيل."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"هل تريد الاتصال بالجهاز الذي يتضمّن بلوتوث؟"</string>
@@ -6111,8 +6125,8 @@
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"إظهار معلومات إضافية"</string>
     <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"‏يمكنك من خلال شاشة الاستراحة عرض تفاصيل حول الوقت والتاريخ وحالة الطقس وجودة الهواء وCast."</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"إعدادات إضافية"</string>
-    <string name="dream_setup_title" msgid="2458303874255396142">"اختيار شاشة التوقف"</string>
-    <string name="dream_setup_description" msgid="7508547154038580296">"اختَر ما يظهر لك على شاشتك عندما يكون جهازك اللوحي في حالة إرساء. قد يستهلك جهازك قدرًا أكبر من الطاقة عند استخدام شاشة توقّف."</string>
+    <string name="dream_setup_title" msgid="2458303874255396142">"اختيار شاشة الاستراحة"</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"اختَر ما تريد أن يظهر على شاشتك عندما يكون جهازك اللوحي في حالة إرساء. قد يستهلك جهازك قدرًا أكبر من الطاقة عند استخدام شاشة الاستراحة."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"تخصيص"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"يجب إعادة التشغيل لتفعيل النوافذ الحرة."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"يجب إعادة التشغيل لفرض وضع الكمبيوتر المكتبي على الشاشات الثانوية."</string>

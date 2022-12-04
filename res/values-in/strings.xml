@@ -23,6 +23,7 @@
     <string name="deny" msgid="7326117222944479942">"Tolak"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"Aktifkan"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Tidak diketahui"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"Ketuk untuk menampilkan info"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">Tinggal <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> langkah untuk menjadi developer.</item>
       <item quantity="one">Tinggal <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> langkah untuk menjadi developer.</item>
@@ -139,7 +140,8 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Permintaan akses pesan"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"%1$s ingin mengakses pesan Anda. Berikan akses pada %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="473439406287008397">"Permintaan akses SIM"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> ingin mengakses kartu SIM. Memberi akses ke kartu SIM akan menonaktifkan konektivitas data di perangkat selama terhubung. Berikan akses ke <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
+    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (6194086753523415820) -->
+    <skip />
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Terlihat sebagai “<xliff:g id="DEVICE_NAME">^1</xliff:g>” oleh perangkat lain"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Aktifkan Bluetooth untuk menghubungkan ke perangkat lain."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Perangkat Anda"</string>
@@ -336,7 +338,8 @@
     <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"Perangkat tidak dienkripsi"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Layar kunci"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Elemen yang ditampilkan"</string>
-    <string name="security_settings_summary" msgid="1627059516127354233">"Setel Lokasiku, pembuka kunci layar, kunci kartu SIM, kunci penyimpanan kredensial"</string>
+    <!-- no translation found for security_settings_summary (4248337854143139822) -->
+    <skip />
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"Setel Lokasiku, pembuka kunci layar, kunci penyimpanan kredensial"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"Privasi"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Tidak tersedia"</string>
@@ -524,9 +527,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Tindakan ini membantu mengambil sidik jari Anda secara lebih menyeluruh"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Mendaftarkan sidik jari <xliff:g id="PERCENTAGE">%d</xliff:g> persen"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Sidik jari ditambahkan"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Fingerprint Unlock menjadi lebih akurat jika Anda makin sering menggunakannya untuk membuka kunci tablet atau memverifikasi diri Anda di aplikasi"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Fingerprint Unlock menjadi lebih akurat jika Anda makin sering menggunakannya untuk membuka kunci perangkat atau memverifikasi diri Anda di aplikasi"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Fingerprint Unlock menjadi lebih akurat jika Anda makin sering menggunakannya untuk membuka kunci ponsel atau memverifikasi diri Anda di aplikasi"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Fitur Buka dengan Sidik Jari menjadi lebih akurat jika Anda makin sering menggunakannya untuk membuka kunci tablet atau memverifikasi diri Anda di aplikasi"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Fitur Buka dengan Sidik Jari menjadi lebih akurat jika Anda makin sering menggunakannya untuk membuka kunci perangkat atau memverifikasi diri Anda di aplikasi"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Fitur Buka dengan Sidik Jari menjadi lebih akurat jika Anda makin sering menggunakannya untuk membuka kunci ponsel atau memverifikasi diri Anda di aplikasi"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Lakukan nanti"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Angkat jari, lalu sentuh lagi"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Posisikan sisi sidik jari Anda pada sensor, kemudian tahan, lalu beralihlah ke sisi lainnya"</string>
@@ -1430,6 +1433,7 @@
     <string name="screen_timeout" msgid="7709947617767439410">"Waktu tunggu layar"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Layar mati"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Setelah tidak aktif selama <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Tidak disetel"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Wallpaper"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Wallpaper &amp; gaya"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Layar utama, layar kunci"</string>
@@ -1442,7 +1446,7 @@
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Coba wallpaper dan gaya yang berbeda, serta banyak lagi"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Screensaver"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Gunakan screensaver"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Saat mengisi baterai atau dipasang ke dok"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Saat mengisi baterai atau terpasang di dok"</string>
     <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"Keduanya"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Saat mengisi baterai"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Saat terpasang di dok"</string>
@@ -1463,20 +1467,21 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Teks tebal"</string>
     <string name="title_font_size" msgid="570613010306330622">"Ukuran font"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Memperbesar atau memperkecil teks"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"Setelan kunci kartu SIM"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"Kunci kartu SIM"</string>
+    <string name="sim_lock_settings" msgid="7331982427303002613">"Setelan kunci SIM"</string>
+    <string name="sim_lock_settings_category" msgid="6475255139493877786">"Kunci SIM"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Nonaktif"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"Dikunci"</string>
-    <string name="sim_lock_settings_title" msgid="1401619059761012696">"Kunci kartu SIM"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"Kunci kartu SIM"</string>
+    <!-- no translation found for sim_lock_settings_title (3596566201762038857) -->
+    <skip />
+    <string name="sim_pin_toggle" msgid="6814489621760857328">"Kunci SIM"</string>
     <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"Memerlukan PIN untuk menggunakan tablet"</string>
     <string name="sim_lock_on" product="default" msgid="3303147192981388923">"Perlu PIN untuk menggunakan ponsel"</string>
     <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"Memerlukan PIN untuk menggunakan tablet"</string>
     <string name="sim_lock_off" product="default" msgid="4634118006847137785">"Perlu PIN untuk menggunakan ponsel"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"Ubah PIN SIM"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"PIN SIM"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Kunci kartu SIM"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"Buka kunci kartu SIM"</string>
+    <string name="sim_enable_sim_lock" msgid="6486354334679225748">"Kunci SIM"</string>
+    <string name="sim_disable_sim_lock" msgid="6939439812841857306">"Buka kunci SIM"</string>
     <string name="sim_enter_old" msgid="6882545610939674813">"PIN SIM lama"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"PIN SIM baru"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Ketik ulang PIN baru"</string>
@@ -1485,7 +1490,8 @@
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"PIN tidak cocok"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Tidak dapat mengubah PIN.\nPIN mungkin salah."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"PIN SIM berhasil diubah"</string>
-    <string name="sim_lock_failed" msgid="16360418201678317">"Tidak bisa mengubah status kunci kartu SIM.\nPIN Mungkin salah."</string>
+    <!-- no translation found for sim_lock_failed (2088257523501265954) -->
+    <skip />
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"Tidak dapat menonaktifkan PIN."</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"Tidak dapat mengaktifkan PIN."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"Oke"</string>
@@ -1495,7 +1501,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Gunakan <xliff:g id="CARRIER">%1$s</xliff:g> untuk data seluler?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Anda menggunakan <xliff:g id="CARRIER2_0">%2$s</xliff:g> untuk data seluler. Jika Anda beralih ke <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> tidak akan digunakan lagi untuk data seluler."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Gunakan <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"Perbarui kartu SIM pilihan?"</string>
+    <string name="sim_preferred_title" msgid="8850185380445309835">"Perbarui SIM pilihan?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> satu-satunya SIM di perangkat. Ingin menggunakan SIM ini untuk data seluler, panggilan telepon, dan SMS?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Kode PIN SIM salah, sekarang Anda harus menghubungi operator untuk membuka kunci perangkat."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1760,17 +1766,17 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Reset Wi-Fi, data seluler &amp; Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Tindakan ini akan mereset semua setelan jaringan, termasuk:\n\n"<li>"Wi‑Fi"</li>\n<li>"Data seluler"</li>\n<li>"Bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Hapus"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Hapus SIM hasil download"</string>
+    <string name="reset_esim_title" msgid="4194570573425902754">"Hapus eSIM"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"Tindakan ini tidak akan membatalkan paket layanan seluler apa pun. Untuk mendownload SIM pengganti, hubungi operator Anda."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Reset setelan"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Reset semua setelan jaringan? Anda tidak dapat mengurungkan tindakan ini."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Reset semua setelan jaringan dan hapus SIM yang didownload? Anda tidak dapat mengurungkan tindakan ini."</string>
+    <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"Reset semua setelan jaringan dan hapus eSIM? Anda tidak dapat mengurungkan tindakan ini."</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Reset setelan"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Reset?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Reset jaringan tidak tersedia untuk pengguna ini"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Setelan jaringan telah direset"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Tidak dapat menghapus SIM"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"SIM hasil download tidak dapat dihapus karena terjadi error.\n\nMulai ulang perangkat Anda, lalu coba lagi."</string>
+    <string name="reset_esim_error_msg" msgid="7279607120606365250">"eSIM tidak dapat dihapus karena terjadi error.\n\nMulai ulang perangkat, lalu coba lagi."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Hapus semua data (reset ke setelan pabrik)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Hapus semua data"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Tindakan ini akan menghapus semua data dari "<b>"penyimpanan internal"</b>" tablet Anda, termasuk:\n\n"<li>"Akun Google Anda"</li>\n<li>"Data sistem dan aplikasi serta setelan"</li>\n<li>"Aplikasi yang didownload"</li></string>
@@ -3199,7 +3205,8 @@
     <string name="data_usage_menu_hide_ethernet" msgid="7792365022467586772">"Sembunyikan Ethernet"</string>
     <string name="data_usage_menu_metered" msgid="4279260736172851951">"Batasan jaringan"</string>
     <string name="data_usage_menu_auto_sync" msgid="2632694000068175025">"Otomatis sinkronkan data"</string>
-    <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"Kartu SIM"</string>
+    <!-- no translation found for data_usage_menu_sim_cards (2827882471528568628) -->
+    <skip />
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"Dijeda saat di batas"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Otomatis sinkronkan data"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sinkronisasi otomatis data pribadi"</string>
@@ -3521,10 +3528,12 @@
     <string name="wizard_next" msgid="3884832431439072471">"Berikutnya"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Selesai"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_setup_wizard_title" msgid="3945520353564138219">"Kartu SIM"</string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"Kartu SIM"</string>
+    <!-- no translation found for sim_setup_wizard_title (7030639256610746768) -->
+    <skip />
+    <string name="sim_settings_title" msgid="2254609719033946272">"SIM"</string>
     <string name="sim_settings_summary" msgid="5777472623476930332">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
-    <string name="sim_cards_changed_message" msgid="7726897488921853655">"Kartu SIM telah diubah"</string>
+    <!-- no translation found for sim_cards_changed_message (7374776581857835134) -->
+    <skip />
     <string name="sim_cards_changed_message_summary" msgid="7338082681445213621">"Ketuk untuk menyetel aktivitas"</string>
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Data seluler tidak tersedia"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Ketuk untuk memilih SIM data"</string>
@@ -3536,7 +3545,8 @@
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Jika Anda beralih ke <xliff:g id="NEW_SIM">%1$s</xliff:g>, <xliff:g id="OLD_SIM">%2$s</xliff:g> tidak akan digunakan lagi untuk data seluler."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Gunakan <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Telepon dengan"</string>
-    <string name="sim_select_card" msgid="1226182454109919045">"Pilih kartu SIM"</string>
+    <!-- no translation found for sim_select_card (2975707305270216652) -->
+    <skip />
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_editor_name" msgid="5900178038499314621">"Nama SIM"</string>
     <string name="sim_name_hint" msgid="8231524869124193119">"Masukkan nama SIM"</string>
@@ -3544,7 +3554,8 @@
     <string name="sim_editor_carrier" msgid="2424593350691002557">"Operator"</string>
     <string name="sim_editor_number" msgid="3209002966895156006">"Nomor"</string>
     <string name="sim_editor_color" msgid="9067029630083892961">"Warna SIM"</string>
-    <string name="sim_card_select_title" msgid="8146523005929848793">"Pilih kartu SIM"</string>
+    <!-- no translation found for sim_card_select_title (8387396377407327067) -->
+    <skip />
     <string name="color_orange" msgid="216547825489739010">"Oranye"</string>
     <string name="color_purple" msgid="6603701972079904843">"Ungu"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"Tidak ada kartu SIM yang dimasukkan"</string>
@@ -3558,7 +3569,7 @@
     <string name="preferred_network_offload_footer" msgid="374984523082849648">"Menonaktifkan Siaran Nama Jaringan melindungi informasi jaringan Anda dari akses pihak ketiga."</string>
     <string name="preferred_network_offload_popup" msgid="3949937898807213370">"Penonaktifan Siaran Nama Jaringan akan mencegah sambungan otomatis ke jaringan tersembunyi."</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"Kartu SIM diganti."</string>
+    <string name="sim_notification_title" msgid="2819551384383504031">"SIM diubah."</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Ketuk untuk menyiapkan"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Selalu tanya"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Perlu dipilih"</string>
@@ -4311,7 +4322,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Minta sandi sebelum melepas sematan"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Kunci perangkat saat melepas sematan"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Konfirmasi penghapusan SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Memverifikasi identitas Anda sebelum menghapus SIM hasil download"</string>
+    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Verifikasi diri Anda sebelum menghapus eSIM"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Profil kerja ini dikelola oleh:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Dikelola oleh <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Eksperimental)"</string>
@@ -5262,7 +5273,8 @@
     <string name="empty_networks_list" msgid="6519489879480673428">"Jaringan tidak ditemukan."</string>
     <string name="network_query_error" msgid="6406348372070035274">"Tidak dapat menemukan jaringan. Coba lagi."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(terlarang)"</string>
-    <string name="no_sim_card" msgid="1497407489810953863">"Tidak ada kartu SIM"</string>
+    <!-- no translation found for no_sim_card (1478277597822967684) -->
+    <skip />
     <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
     <string name="wifi_no_sim_card" msgid="7144290066491585672">"Tidak ada SIM"</string>
     <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Tidak ada"</string>
@@ -5312,7 +5324,8 @@
     <string name="label_available" msgid="5305726869955838606">"Jaringan yang tersedia"</string>
     <string name="load_networks_progress" msgid="4717874401621250401">"Mencari..."</string>
     <string name="register_on_network" msgid="2169662800750709709">"Mendaftarkan ke <xliff:g id="NETWORK">%s</xliff:g>…"</string>
-    <string name="not_allowed" msgid="5756935665192962915">"Kartu SIM Anda tidak mengizinkan koneksi ke jaringan ini."</string>
+    <!-- no translation found for not_allowed (8969977039734782273) -->
+    <skip />
     <string name="connect_later" msgid="2330538069949281352">"Tidak dapat terhubung ke jaringan ini sekarang. Coba lagi nanti."</string>
     <string name="registration_done" msgid="1750434215698850123">"Terdaftar pada jaringan."</string>
     <string name="select_automatically" msgid="2419752566747259155">"Pilih jaringan secara otomatis"</string>
@@ -5321,7 +5334,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Data seluler"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Mengakses data menggunakan jaringan seluler"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Ponsel akan otomatis beralih ke operator ini saat berada dalam jangkauan"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Tidak ada kartu SIM yang tersedia"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"Tidak ada SIM yang tersedia"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Preferensi panggilan"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Preferensi SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Selalu tanya"</string>
@@ -5342,8 +5355,8 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Tambahkan lainnya"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Aktif / SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Tidak aktif / SIM"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Aktif / SIM hasil download"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Tidak Aktif / SIM hasil download"</string>
+    <string name="mobile_network_active_esim" msgid="3984452275968408382">"Aktif/eSIM"</string>
+    <string name="mobile_network_inactive_esim" msgid="8777415108263057939">"Tidak aktif/eSIM"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"Nama &amp; warna SIM"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Nama"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Warna (digunakan oleh apl kompatibel)"</string>
@@ -5353,7 +5366,8 @@
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Untuk menonaktifkan SIM ini, keluarkan kartu SIM"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Ketuk untuk mengaktifkan <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"Beralih ke <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
-    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Hanya satu SIM hasil download yang dapat diaktifkan pada satu waktu.\n\nBeralih ke <xliff:g id="CARRIER1">%1$s</xliff:g> tidak akan membatalkan layanan <xliff:g id="CARRIER2">%2$s</xliff:g> Anda."</string>
+    <!-- no translation found for mobile_network_esim_swap_confirm_body (592668232798598450) -->
+    <skip />
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"Beralih ke <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"Hapus SIM"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"Tidak dapat menghapus SIM"</string>
@@ -5388,7 +5402,7 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Beralih menggunakan kartu SIM?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Gunakan <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Hanya satu SIM yang dapat diaktifkan pada satu waktu.\n\nBeralih ke <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> tidak akan membatalkan layanan <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Hanya satu SIM hasil download yang dapat diaktifkan pada satu waktu.\n\nBeralih ke <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> tidak akan membatalkan layanan <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"Hanya 1 eSIM yang dapat aktif pada satu waktu.\n\nBeralih ke <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> tidak akan membatalkan layanan <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Hanya satu SIM yang dapat diaktifkan pada satu waktu.\n\nPengalihan tidak akan membatalkan layanan <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Anda tidak dapat menggunakan 2 SIM sekaligus. Untuk menggunakan <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, nonaktifkan SIM lainnya."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Alihkan ke <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -5434,8 +5448,8 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> akan digunakan untuk data seluler, panggilan, dan SMS."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Tidak ada SIM aktif yang tersedia"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Untuk menggunakan data seluler, fitur panggilan, dan SMS di lain waktu, buka setelan jaringan"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"Kartu SIM"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Hapus SIM hasil download ini?"</string>
+    <string name="sim_card_label" msgid="6263064316075963775">"SIM"</string>
+    <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Hapus eSIM ini?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Menghapus SIM ini akan menghapus layanan <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> dari perangkat ini.\n\nLayanan untuk <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> tidak akan dibatalkan."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Hapus"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"Menghapus SIM …"</string>
@@ -5619,8 +5633,8 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Izinkan Google Fi menggunakan jaringan W+ untuk meningkatkan kecepatan dan cakupan"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Jaringan W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"SIM HASIL DOWNLOAD"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"SIM YANG DIDOWNLOAD"</string>
+    <string name="downloaded_sim_category_title" msgid="2876988650413179752">"eSIM"</string>
+    <string name="downloaded_sims_category_title" msgid="487799905978489922">"eSIM"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Aktif"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Tidak aktif"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Default untuk <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5680,7 +5694,7 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Setelan Panggilan"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Memperbarui Setelan ..."</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Error Setelan panggilan"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Error jaringan atau kartu SIM."</string>
+    <string name="smart_forwarding_failed_text" msgid="8682640643264071789">"Error jaringan atau SIM."</string>
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"Sim tidak diaktifkan."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Masukkan Nomor telepon"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Masukkan Nomor telepon"</string>
@@ -5705,10 +5719,10 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"Sebelumnya"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Berikutnya"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Pratinjau warna"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Permintaan akses kartu SIM"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Sebuah perangkat ingin mengakses kartu SIM Anda. Ketuk untuk melihat detailnya."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Izinkan akses ke kartu SIM?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Perangkat Bluetooth bernama <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> ingin mengakses data di kartu SIM Anda. Data ini mencakup kontak Anda.\n\nSaat terhubung, <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> akan menerima semua panggilan telepon yang dilakukan ke <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="7351015416346359536">"Permintaan akses SIM"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="8685623260103018309">"Sebuah perangkat ingin mengakses SIM Anda. Ketuk untuk melihat detailnya."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="5616323725563125179">"Izinkan akses ke SIM?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="6281997628405909566">"Perangkat Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, ingin mengakses data dari SIM Anda. Data ini mencakup kontak Anda.\n\nSaat terhubung, <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> akan menerima semua panggilan yang masuk ke <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Perangkat Bluetooth tersedia"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Sebuah perangkat ingin terhubung. Ketuk untuk melihat detailnya."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Hubungkan ke perangkat Bluetooth?"</string>

@@ -23,6 +23,7 @@
     <string name="deny" msgid="7326117222944479942">"Recusar"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"Ativar"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Desconhecido"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"Toque para mostrar informações"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">Faltam <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> etapas para você se tornar um desenvolvedor.</item>
       <item quantity="other">Faltam <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> etapas para você se tornar um desenvolvedor.</item>
@@ -139,7 +140,8 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Solicitação de acesso a mensagens"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"%1$s deseja acessar suas mensagens. Permitir acesso a %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="473439406287008397">"Solicitação de acesso ao chip"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"O <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> deseja acessar seu chip. A concessão de acesso ao chip desativará a conectividade de dados no seu dispositivo durante a conexão. Conceda acesso ao <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
+    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (6194086753523415820) -->
+    <skip />
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Visível como \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" para outros dispositivos."</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Ative o Bluetooth para se conectar a outros dispositivos."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Seus dispositivos"</string>
@@ -336,7 +338,8 @@
     <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"Dispositivo não criptografado"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Tela de bloqueio"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"O que mostrar"</string>
-    <string name="security_settings_summary" msgid="1627059516127354233">"Definir Meu local, desbloqueio de tela, bloqueio do chip e do armazenamento de credenciais"</string>
+    <!-- no translation found for security_settings_summary (4248337854143139822) -->
+    <skip />
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"Definir o Meu local, o desbloqueio de tela, o bloqueio do armazenamento de credenciais"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"Privacidade"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Indisponível"</string>
@@ -1432,6 +1435,7 @@
     <string name="screen_timeout" msgid="7709947617767439410">"Tempo limite da tela"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"A tela é desativada"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Depois de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inatividade"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Sem definição"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Plano de fundo"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Plano de fundo e estilo"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Tela inicial, tela de bloqueio"</string>
@@ -1465,20 +1469,21 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Negrito"</string>
     <string name="title_font_size" msgid="570613010306330622">"Tamanho da fonte"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Aumente ou diminua o texto"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"Bloqueio do chip"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"Bloqueio do chip"</string>
+    <string name="sim_lock_settings" msgid="7331982427303002613">"Configurações de bloqueio do chip"</string>
+    <string name="sim_lock_settings_category" msgid="6475255139493877786">"Bloqueio do chip"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Desativado"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"Bloqueado"</string>
-    <string name="sim_lock_settings_title" msgid="1401619059761012696">"Bloqueio do chip"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"Bloquear chip"</string>
+    <!-- no translation found for sim_lock_settings_title (3596566201762038857) -->
+    <skip />
+    <string name="sim_pin_toggle" msgid="6814489621760857328">"Bloquear chip"</string>
     <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"Exigir PIN para usar o tablet"</string>
     <string name="sim_lock_on" product="default" msgid="3303147192981388923">"Exigir PIN para usar o telefone"</string>
     <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"Exigir PIN para usar o tablet"</string>
     <string name="sim_lock_off" product="default" msgid="4634118006847137785">"Exigir PIN para usar o telefone"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"Alterar PIN do chip"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"PIN do chip"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Bloquear chip"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"Desbloquear chip"</string>
+    <string name="sim_enable_sim_lock" msgid="6486354334679225748">"Bloquear chip"</string>
+    <string name="sim_disable_sim_lock" msgid="6939439812841857306">"Desbloquear chip"</string>
     <string name="sim_enter_old" msgid="6882545610939674813">"PIN do chip antigo"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"Novo PIN do chip"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Digitar novo PIN novamente"</string>
@@ -1487,7 +1492,8 @@
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"Os PINs não correspondem"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Não é possível alterar o PIN.\nPIN possivelmente incorreto."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"PIN do chip alterado"</string>
-    <string name="sim_lock_failed" msgid="16360418201678317">"Não é possível alterar o estado de bloqueio do chip.\nPIN possivelmente incorreto."</string>
+    <!-- no translation found for sim_lock_failed (2088257523501265954) -->
+    <skip />
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"Não é possível desativar o PIN."</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"Não é possível ativar o PIN."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"OK"</string>
@@ -1497,7 +1503,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Usar <xliff:g id="CARRIER">%1$s</xliff:g> para dados móveis?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Você está usando <xliff:g id="CARRIER2_0">%2$s</xliff:g> para dados móveis. Se alterar para <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> não será mais usada para dados móveis."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Usar <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"Atualizar chip preferido?"</string>
+    <string name="sim_preferred_title" msgid="8850185380445309835">"Atualizar chip preferido?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"O <xliff:g id="NEW_SIM">%1$s</xliff:g> é o único chip no seu dispositivo. Quer usá-lo para dados móveis, chamadas e mensagens SMS?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Código PIN do chip incorreto. Entre em contato com a operadora para desbloquear o dispositivo."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1762,17 +1768,17 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Redefinir Wi-Fi, rede móvel e Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Esta ação redefinirá todas as configurações de rede, inclusive:\n\n"<li>"Wi‑Fi"</li>\n<li>"Dados móveis"</li>\n<li>"Bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Limpar"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Apagar chips salvos"</string>
+    <string name="reset_esim_title" msgid="4194570573425902754">"Limpar eSIMs"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"Isso não cancelará nenhum plano de serviços móveis. Para fazer o download de chips substitutos, entre em contato com a operadora."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Redefinir configurações"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Redefinir todas as configurações de rede? Não é possível desfazer essa ação."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Redefinir todas as configurações de rede e apagar os chips salvos? Não é possível desfazer essa ação."</string>
+    <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"Você quer mesmo redefinir todas as configurações de rede e apagar os eSIMs salvos? Não é possível desfazer essa ação."</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Redefinir configurações"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Redefinir?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"A redefinição da rede não está disponível para esse usuário"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"As configurações de rede foram redefinidas"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Não é possível limpar chips"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"Os chips transferidos por download não podem ser limpos devido a um erro.\n\nReinicie o dispositivo e tente novamente."</string>
+    <string name="reset_esim_error_msg" msgid="7279607120606365250">"Ocorreu um erro ao apagar o eSIM.\n\nReinicie o dispositivo e tente de novo."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Limpar todos os dados (redefinir para a configuração original)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Limpar todos os dados"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Essa ação vai apagar todos os dados do "<b>"armazenamento interno"</b>" do seu tablet, incluindo:\n\n"<li>"Sua Conta do Google"</li>\n<li>"Configurações e dados do sistema e dos apps"</li>\n<li>"Apps instalados"</li></string>
@@ -3201,7 +3207,8 @@
     <string name="data_usage_menu_hide_ethernet" msgid="7792365022467586772">"Ocultar uso da ethernet"</string>
     <string name="data_usage_menu_metered" msgid="4279260736172851951">"Restrições de rede"</string>
     <string name="data_usage_menu_auto_sync" msgid="2632694000068175025">"Sincronizar dados automaticamente"</string>
-    <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"Chips"</string>
+    <!-- no translation found for data_usage_menu_sim_cards (2827882471528568628) -->
+    <skip />
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"Pausa no limite"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Sincron. dados automaticamente"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sincronizar dados pessoais"</string>
@@ -3523,10 +3530,12 @@
     <string name="wizard_next" msgid="3884832431439072471">"Próxima"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Concluir"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_setup_wizard_title" msgid="3945520353564138219">"Chips"</string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"Chips"</string>
+    <!-- no translation found for sim_setup_wizard_title (7030639256610746768) -->
+    <skip />
+    <string name="sim_settings_title" msgid="2254609719033946272">"Chips"</string>
     <string name="sim_settings_summary" msgid="5777472623476930332">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
-    <string name="sim_cards_changed_message" msgid="7726897488921853655">"Os chips foram alterados"</string>
+    <!-- no translation found for sim_cards_changed_message (7374776581857835134) -->
+    <skip />
     <string name="sim_cards_changed_message_summary" msgid="7338082681445213621">"Toque para configurar atividades"</string>
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Os dados móveis estão indisponíveis"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Toque para selecionar um chip de dados"</string>
@@ -3538,7 +3547,8 @@
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Se você mudar para o chip <xliff:g id="NEW_SIM">%1$s</xliff:g>, o <xliff:g id="OLD_SIM">%2$s</xliff:g> não vai mais ser usado para dados móveis."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Usar <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Ligar com"</string>
-    <string name="sim_select_card" msgid="1226182454109919045">"Selecionar um chip"</string>
+    <!-- no translation found for sim_select_card (2975707305270216652) -->
+    <skip />
     <string name="sim_card_number_title" msgid="4728780444646439845">"Chip <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_editor_name" msgid="5900178038499314621">"Nome do chip"</string>
     <string name="sim_name_hint" msgid="8231524869124193119">"Inserir nome do chip"</string>
@@ -3546,7 +3556,8 @@
     <string name="sim_editor_carrier" msgid="2424593350691002557">"Operadora"</string>
     <string name="sim_editor_number" msgid="3209002966895156006">"Número"</string>
     <string name="sim_editor_color" msgid="9067029630083892961">"Cor do chip"</string>
-    <string name="sim_card_select_title" msgid="8146523005929848793">"Selecionar chip"</string>
+    <!-- no translation found for sim_card_select_title (8387396377407327067) -->
+    <skip />
     <string name="color_orange" msgid="216547825489739010">"Laranja"</string>
     <string name="color_purple" msgid="6603701972079904843">"Roxo"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"Nenhum chip inserido"</string>
@@ -3560,7 +3571,7 @@
     <string name="preferred_network_offload_footer" msgid="374984523082849648">"A opção \"Des. transm. nome de rede\" protege contra o acesso de terceiros a suas informações de rede."</string>
     <string name="preferred_network_offload_popup" msgid="3949937898807213370">"A desativação da transmissão de nome de rede impedirá uma conexão automática a redes ocultas."</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"Alteração em chips."</string>
+    <string name="sim_notification_title" msgid="2819551384383504031">"O chip foi mudado."</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Toque para configurar"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Perguntar sempre"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Seleção necessária"</string>
@@ -4313,7 +4324,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Pedir senha antes de liberar a tela"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Bloquear dispositivo ao liberar a tela"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Confirmar exclusão do chip"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Confirme sua identidade antes de apagar um chip transferido por download"</string>
+    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Confirme sua identidade antes de apagar o eSIM"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"O perfil de trabalho é gerenciado por:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Gerenciado por <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Experimental)"</string>
@@ -5264,7 +5275,8 @@
     <string name="empty_networks_list" msgid="6519489879480673428">"Nenhuma rede encontrada."</string>
     <string name="network_query_error" msgid="6406348372070035274">"Não foi possível encontrar redes. Tente novamente."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(proibida)"</string>
-    <string name="no_sim_card" msgid="1497407489810953863">"Sem chip"</string>
+    <!-- no translation found for no_sim_card (1478277597822967684) -->
+    <skip />
     <string name="sim_card" msgid="6381158752066377709">"Chip"</string>
     <string name="wifi_no_sim_card" msgid="7144290066491585672">"Sem chip"</string>
     <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Nenhuma"</string>
@@ -5314,7 +5326,8 @@
     <string name="label_available" msgid="5305726869955838606">"Redes disponíveis"</string>
     <string name="load_networks_progress" msgid="4717874401621250401">"Pesquisando…"</string>
     <string name="register_on_network" msgid="2169662800750709709">"Registrando na rede <xliff:g id="NETWORK">%s</xliff:g>…"</string>
-    <string name="not_allowed" msgid="5756935665192962915">"Seu chip não permite uma conexão com esta rede."</string>
+    <!-- no translation found for not_allowed (8969977039734782273) -->
+    <skip />
     <string name="connect_later" msgid="2330538069949281352">"Não é possível se conectar a esta rede no momento. Tente novamente mais tarde."</string>
     <string name="registration_done" msgid="1750434215698850123">"Registrado na rede."</string>
     <string name="select_automatically" msgid="2419752566747259155">"Selecionar a rede automaticamente"</string>
@@ -5323,7 +5336,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Dados móveis"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Acessar os dados pela rede móvel"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"O smartphone mudará automaticamente para esta operadora quando estiver dentro do alcance"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Nenhum chip disponível"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"Não há chips disponíveis"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Preferência de chamadas"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Preferência de SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Perguntar sempre"</string>
@@ -5344,8 +5357,8 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Adicionar mais"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Ativo/chip"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Inativo/chip"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Chip ativo/transferido por download"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Chip inativo/transferido por download"</string>
+    <string name="mobile_network_active_esim" msgid="3984452275968408382">"Ativo / eSIM"</string>
+    <string name="mobile_network_inactive_esim" msgid="8777415108263057939">"Inativo / eSIM"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"Nome e cor do chip"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Nome"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Cor (usada por apps compatíveis)"</string>
@@ -5355,7 +5368,8 @@
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Para desativar este chip ele deve ser removido."</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Toque para ativar a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"Trocar para <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
-    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Somente um chip transferido por download pode estar ativo por vez.\n\nAlternar para <xliff:g id="CARRIER1">%1$s</xliff:g> não cancelará o serviço da operadora <xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
+    <!-- no translation found for mobile_network_esim_swap_confirm_body (592668232798598450) -->
+    <skip />
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"Alternar para operadora <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"Limpar chip"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"Não é possível limpar o chip"</string>
@@ -5390,7 +5404,7 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Começar a usar o chip?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Usar <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Somente um chip pode estar ativo por vez.\n\nMudar para a <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> não cancelará o serviço da <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Somente um chip transferido por download pode estar ativo por vez.\n\nMudar para a <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> não cancelará o serviço da <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"Apenas um eSIM pode ficar ativo por vez.\n\nAlternar para a operadora <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> não cancela o serviço da <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Somente um chip pode estar ativo por vez.\n\nMudar de operadora não cancelará o serviço da <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Você pode usar dois chips ao mesmo tempo. Para usar a operadora <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, desative o outro chip."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Mudar para <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -5436,8 +5450,8 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"A operadora <xliff:g id="CARRIER_NAME">%1$s</xliff:g> será usada para dados móveis, chamadas e SMS."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Nenhum chip ativo disponível"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Para usar dados móveis, recursos de chamada e SMS mais tarde, acesse as configurações de rede"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"Chip"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Limpar este chip transferido por download?"</string>
+    <string name="sim_card_label" msgid="6263064316075963775">"Chip"</string>
+    <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Você quer mesmo apagar este eSIM?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"A limpeza do chip remove o serviço da <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> deste dispositivo.\n\nO serviço da <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> não será cancelado."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Limpar"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"Limpando chip…"</string>
@@ -5535,8 +5549,8 @@
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Padrão do sistema"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Essa opção não é mais válida. Tente novamente."</string>
     <string name="quick_controls_lower" msgid="6675573610027367819">"controles do dispositivo"</string>
-    <string name="cards_passes_sentence" msgid="1866311782387946944">"Cartões e passes"</string>
-    <string name="cards_passes_lower" msgid="2429722007109957877">"cartões e passes"</string>
+    <string name="cards_passes_sentence" msgid="1866311782387946944">"Cartões de pagamento e de transporte"</string>
+    <string name="cards_passes_lower" msgid="2429722007109957877">"cartões e tickets"</string>
     <string name="power_menu_setting_name" msgid="7291642927216934159">"Aperte e mantenha pressionado o botão liga/desliga"</string>
     <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Aperte o botão e o mantenha pressionado para abrir o Google Assistente"</string>
     <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Aperte o botão e o mantenha pressionado para abrir o menu liga/desliga"</string>
@@ -5621,8 +5635,8 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Permitir que o Google Fi use redes W+ para melhorar a velocidade e cobertura"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Rede W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"Chip"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"CHIP TRANSFERIDO POR DOWNLOAD"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"CHIPS TRANSFERIDOS POR DOWNLOAD"</string>
+    <string name="downloaded_sim_category_title" msgid="2876988650413179752">"eSIM"</string>
+    <string name="downloaded_sims_category_title" msgid="487799905978489922">"eSIMs"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Ativo"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Inativo"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Padrão para <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5682,7 +5696,7 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Configurações de chamada"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Atualizando configurações…"</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Erro de configurações de chamada"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Erro de rede ou do chip."</string>
+    <string name="smart_forwarding_failed_text" msgid="8682640643264071789">"Ocorreu um erro de rede ou no chip."</string>
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"O chip não está ativado."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Inserir números de telefone"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Inserir número de telefone"</string>
@@ -5707,10 +5721,10 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"Anterior"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Próxima"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Visualização da cor"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Solicitação de acesso ao chip"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Um dispositivo quer acessar seu chip. Toque para ver detalhes."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Permitir acesso ao chip?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Um dispositivo Bluetooth (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) quer acessar dados no seu chip. Isso inclui seus contatos.\n\nEnquanto estiver conectado, o <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> receberá todas as chamadas feitas para o número <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="7351015416346359536">"Solicitação de acesso ao chip"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="8685623260103018309">"Um dispositivo quer acessar seu chip. Toque para ver detalhes."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="5616323725563125179">"Você quer mesmo permitir o acesso ao chip?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="6281997628405909566">"Um dispositivo Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, quer acessar dados no seu chip. Isso inclui seus contatos.\n\nEnquanto estiver conectado, o <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> vai receber todas as chamadas feitas para o número <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Dispositivo Bluetooth disponível"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Um dispositivo quer se conectar. Toque para ver detalhes."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Conectar ao dispositivo Bluetooth?"</string>
@@ -5765,7 +5779,7 @@
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Mostrar outras informações"</string>
     <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"Mostrar horário, data, clima, qualidade do ar e detalhes do Cast no protetor de tela"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Mais configurações"</string>
-    <string name="dream_setup_title" msgid="2458303874255396142">"Escolher o protetor de tela"</string>
+    <string name="dream_setup_title" msgid="2458303874255396142">"Escolha o protetor de tela"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Escolha o que ver na tela quando o tablet estiver na base. O dispositivo pode consumir mais energia quando o protetor de tela é usado."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Personalizar"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"É necessário reiniciar o dispositivo para ativar o suporte ao formato livre."</string>

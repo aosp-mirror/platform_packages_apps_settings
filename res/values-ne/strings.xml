@@ -23,6 +23,7 @@
     <string name="deny" msgid="7326117222944479942">"अस्वीकार गर्नुहोस्"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"सक्रिय गरियोस्"</string>
     <string name="device_info_default" msgid="1406619232867343310">"अज्ञात"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"जानकारी देखाउन ट्याप गर्नुहोस्"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">अहिले तपाईं विकासकर्ता हुनका लागि <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> चरण टाढा हुनुहुन्छ।</item>
       <item quantity="one">अहिले तपाईं विकासकर्ता हुनका लागि <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> चरण टाढा हुनुहुन्छ।</item>
@@ -139,7 +140,8 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"सन्देश पहुँच अनुरोध"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"%1$s तपाईँको सन्देशमा पहुँच चाहन्छ। %2$s मा पहुँच दिने हो?"</string>
     <string name="bluetooth_sap_request" msgid="473439406287008397">"SIM पहुँच अनुरोध"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> ले तपाईँको SIM कार्ड पहुँच गर्न चाहन्छ। डिभाइसमा SIM कार्ड पहुँच प्रदान गर्दा जडान अवधिको समयमा तपाईँको डेटा जडान निष्क्रिय हुनेछ। <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> लाई पहुँच प्रदान गर्नुहोस्"</string>
+    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (6194086753523415820) -->
+    <skip />
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"अन्य डिभाइसमा <xliff:g id="DEVICE_NAME">^1</xliff:g> को रूपमा देखिन्छ"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"अन्य डिभाइससँग कनेक्ट गर्न ब्लुटुथ अन गर्नुहोस्‌।"</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"तपाईंका डिभाइसहरू"</string>
@@ -336,7 +338,8 @@
     <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"डिभाइस इन्क्रिप्ट गरिएको छैन"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"लक स्क्रिन"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"देखाइने वस्तु"</string>
-    <string name="security_settings_summary" msgid="1627059516127354233">"मेरो स्थान, स्क्रिन अनलक, SIM कार्ड लक, प्रामाणिक भण्डारण लक सेट गर्नुहोस्"</string>
+    <!-- no translation found for security_settings_summary (4248337854143139822) -->
+    <skip />
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"मेरो स्थान, स्क्रिन अनलक, भण्डारण लकका गोप्य डेटा सेट गर्नुहोस्"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"गोपनीयता"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"उपलब्ध छैन"</string>
@@ -1430,6 +1433,7 @@
     <string name="screen_timeout" msgid="7709947617767439410">"स्क्रिन टाइम आउट हुने समय"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"स्क्रिन बन्द हुन्छ"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>को निष्क्रियतापछि"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"सेट गरिएको छैन"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"वालपेपर"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"वालपेपर तथा शैली"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"होम, लक स्क्रिन"</string>
@@ -1463,20 +1467,21 @@
     <string name="force_bold_text" msgid="4620929631102086716">"बोल्ड टेक्स्ट"</string>
     <string name="title_font_size" msgid="570613010306330622">"फन्टको आकार"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"टेक्स्ट अझ ठुलो वा अझ सानो बनाउनुहोस्"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"SIM कार्ड लक गर्ने सेटिङ"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"सिमकार्ड लक"</string>
+    <string name="sim_lock_settings" msgid="7331982427303002613">"SIM लकसम्बन्धी सेटिङ"</string>
+    <string name="sim_lock_settings_category" msgid="6475255139493877786">"SIM लक"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"निष्क्रिय छ"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"लक गरिएको छ"</string>
-    <string name="sim_lock_settings_title" msgid="1401619059761012696">"सिमकार्ड लक"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"SIM कार्ड लक गरियोस्"</string>
+    <!-- no translation found for sim_lock_settings_title (3596566201762038857) -->
+    <skip />
+    <string name="sim_pin_toggle" msgid="6814489621760857328">"SIM लक गर्नुहोस्"</string>
     <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"ट्याब्लेट प्रयोग गर्न PIN आवश्यक हुन्छ"</string>
     <string name="sim_lock_on" product="default" msgid="3303147192981388923">"फोन प्रयोग गर्नको लागि PIN को आवश्यकता हुन्छ"</string>
     <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"ट्याब्लेट प्रयोग गर्नको लागि PIN को आवश्यकता हुन्छ"</string>
     <string name="sim_lock_off" product="default" msgid="4634118006847137785">"फोन प्रयोग गर्न PIN आवश्यक छ"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"SIM को PIN परिवर्तन गर्नुहोस्"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"SIM PIN"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"SIM कार्ड लक गरियोस्"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"SIM कार्ड अनलक गर्नुहोस्"</string>
+    <string name="sim_enable_sim_lock" msgid="6486354334679225748">"SIM लक गर्नुहोस्"</string>
+    <string name="sim_disable_sim_lock" msgid="6939439812841857306">"SIM अनलक गर्नुहोस्"</string>
     <string name="sim_enter_old" msgid="6882545610939674813">"पुराना SIM PIM"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"नयाँ SIM PIN"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"पुनः नयाँ PIN टाइप गर्नुहोस्"</string>
@@ -1485,7 +1490,8 @@
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"PIN मिलेन"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"PIN बदल्न सक्दैन।\n सम्भवत: गलत PIN।"</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"SIM PIN सफलतापूर्वक परिवर्तन गरियो"</string>
-    <string name="sim_lock_failed" msgid="16360418201678317">"SIM कार्डको लक स्थितिलाई बदल्न सकिँदैन। \n सम्भवत गलत PIN।"</string>
+    <!-- no translation found for sim_lock_failed (2088257523501265954) -->
+    <skip />
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"PIN असक्षम पार्न सकिँदैन।"</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"PIN सक्षम पार्न सकिँदैन।"</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"ठिक छ"</string>
@@ -1495,7 +1501,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"मोबाइल डेटाका लागि <xliff:g id="CARRIER">%1$s</xliff:g> प्रयोग गर्ने हो?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"तपाईं मोबाइल डेटाका लागि <xliff:g id="CARRIER2_0">%2$s</xliff:g> प्रयोग गर्नुहुन्छ। तपाईं <xliff:g id="CARRIER1">%1$s</xliff:g> मा जानुभयो भने मोबाइल डेटाका लागि अब उप्रान्त <xliff:g id="CARRIER2_1">%2$s</xliff:g> को प्रयोग गरिने छैन।"</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> प्रयोग गर्नुहोस्"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"प्रमुख SIM कार्ड अपडेट गर्ने?"</string>
+    <string name="sim_preferred_title" msgid="8850185380445309835">"SIM को प्राथमिकता बदल्ने हो?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"तपाईंको डिभाइसमा <xliff:g id="NEW_SIM">%1$s</xliff:g> SIM मात्र छ। तपाईं मोबाइल डेटा, कल र SMS सन्देशहरूका लागि यो SIM प्रयोग गर्न चाहनुहुन्छ?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"SIM PIN कोड गलत छ तपाईंले आफ्नो उपकरण खोल्नलाई तपाईंको वाहकसँग सम्पर्क गर्नै पर्दर्छ।"</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1760,17 +1766,17 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Wi-Fi, मोबाइल र ब्लुटुथ रिसेट गर्नुहोस्"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"यसले निम्न सेटिङहरू लगायत सम्पूर्ण नेटवर्कसम्बन्धी सेटिङ रिसेट गर्छ:\n\n"<li>"Wi‑Fi"</li>\n<li>"मोबाइल डेटा"</li>\n<li>"ब्लुटुथ"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"मेटाउनुहोस्"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"डाउनलोड गरिएका SIM हरू मेट्नुहोस्"</string>
+    <string name="reset_esim_title" msgid="4194570573425902754">"eSIM हरू मेटाउनुहोस्"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"यसो गर्दा मोबाइल सेवाका कुनै पनि योजना रद्द हुने छैनन्। अर्को सिम डाउनलोड गर्न आफ्नो मोबाइल सेवा प्रदायकलाई सम्पर्क गर्नुहोस्।"</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"सेटिङहरू रिसेट गर्नुहोस्"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"नेटवर्कसम्बन्धी सबै सेटिङहरू रिसेट गर्ने हो? तपाईं यो कार्य उल्टाउन सक्नुहुन्न।"</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"नेटवर्कसम्बन्धी सबै सेटिङहरू रिसेट गर्ने र डाउनलोड गरिएका SIM हरू मेटाउने हो? तपाईं यस कार्यलाई अन्डू गर्न सक्नुहुन्न!"</string>
+    <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"नेटवर्कसम्बन्धी सबै सेटिङ रिसेट गर्ने अनि eSIM हरू मेटाउने हो? तपाईं यो कार्य अन्डू गर्न सक्नुहुन्न।"</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"सेटिङहरू रिसेट गर्नुहोस्"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"रिसेट गर्ने हो?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"नेटवर्क रिसेट यो प्रयोगकर्ताको लागि उपलब्ध छैन"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"सञ्जाल सेटिङहरू रिसेट गरियो"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"SIM हरू मेट्न सकिँदैन"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"कुनै त्रुटि भएका कारण डाउनलोड गरिएका SIM हरू मेटाउन सकिएन।\n\nआफ्नो यन्त्र पुनः सुरु गरी फेरि प्रयास गर्नुहोस्।"</string>
+    <string name="reset_esim_error_msg" msgid="7279607120606365250">"कुनै त्रुटि भएका कारण eSIM हरू मेटाउन सकिएन।\n\nआफ्नो डिभाइस रिस्टार्ट गर्नुहोस् र फेरि प्रयास गर्नुहोस्।"</string>
     <string name="main_clear_title" msgid="277664302144837723">"सबै डेटा मेटाउनुहोस् (फ्याक्ट्री रिसेट गर्नुहोस्)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"सबै डेटा मेटाउनुहोस् (फ्याक्ट्री रिसेट गर्नुहोस्)"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"यसो गर्नुभयो भने तपाईंको ट्याब्लेटको "<b>"आन्तरिक भण्डारण"</b>"मा भएका निम्नलगायतका सबै डेटा मेटाइने छ:\n\n"<li>"तपाईंको Google खाता"</li>\n<li>"सिस्टम र एपका डेटा तथा सेटिङ"</li>\n<li>"डाउनलोड गरिएका एपहरू"</li></string>
@@ -3199,7 +3205,8 @@
     <string name="data_usage_menu_hide_ethernet" msgid="7792365022467586772">"इथरनेट प्रयोग लुकाउनुहोस्"</string>
     <string name="data_usage_menu_metered" msgid="4279260736172851951">"सञ्जाल प्रतिबन्धहरू"</string>
     <string name="data_usage_menu_auto_sync" msgid="2632694000068175025">"स्वचालित सिंक डेटा"</string>
-    <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"SIM कार्डहरू"</string>
+    <!-- no translation found for data_usage_menu_sim_cards (2827882471528568628) -->
+    <skip />
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"सीमामा रोकिएको"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"डेटा स्वत: सिंक गर्नुहोस्"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"व्यक्तिगत डेटा अटोसिंक गरियोस्"</string>
@@ -3521,10 +3528,12 @@
     <string name="wizard_next" msgid="3884832431439072471">"अर्को"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"समाप्त गर्नुहोस्"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_setup_wizard_title" msgid="3945520353564138219">"सिम कार्ड"</string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"SIM कार्डहरू"</string>
+    <!-- no translation found for sim_setup_wizard_title (7030639256610746768) -->
+    <skip />
+    <string name="sim_settings_title" msgid="2254609719033946272">"SIM हरू"</string>
     <string name="sim_settings_summary" msgid="5777472623476930332">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
-    <string name="sim_cards_changed_message" msgid="7726897488921853655">"SIM कार्ड परिवर्तन गरेको छ"</string>
+    <!-- no translation found for sim_cards_changed_message (7374776581857835134) -->
+    <skip />
     <string name="sim_cards_changed_message_summary" msgid="7338082681445213621">"गतिविधिहरु सेट गर्न ट्याप गर्नुहोस्"</string>
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"मोबाइल डेटा अनुपलब्ध छ।"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"डेटा SIM चयन गर्न ट्याप गर्नुहोस्"</string>
@@ -3536,7 +3545,8 @@
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"तपाईंले <xliff:g id="NEW_SIM">%1$s</xliff:g> चलाउनुभयो भने अबदेखि <xliff:g id="OLD_SIM">%2$s</xliff:g> को मोबाइल डेटा प्रयोग गरिने छैन।"</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"<xliff:g id="NEW_SIM">%1$s</xliff:g> चलाउनुहोस्"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"संग कल"</string>
-    <string name="sim_select_card" msgid="1226182454109919045">"SIM कार्ड चयन गर्नुहोस्"</string>
+    <!-- no translation found for sim_select_card (2975707305270216652) -->
+    <skip />
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_editor_name" msgid="5900178038499314621">"SIM नाम"</string>
     <string name="sim_name_hint" msgid="8231524869124193119">"SIM नाम प्रविष्टि गर्नुहोस्"</string>
@@ -3544,7 +3554,8 @@
     <string name="sim_editor_carrier" msgid="2424593350691002557">"वाहक"</string>
     <string name="sim_editor_number" msgid="3209002966895156006">"संख्या"</string>
     <string name="sim_editor_color" msgid="9067029630083892961">"SIM रङ्ग"</string>
-    <string name="sim_card_select_title" msgid="8146523005929848793">"सिम कार्ड चयन गर्नुहोस्"</string>
+    <!-- no translation found for sim_card_select_title (8387396377407327067) -->
+    <skip />
     <string name="color_orange" msgid="216547825489739010">"सुन्तले"</string>
     <string name="color_purple" msgid="6603701972079904843">"बैजनी"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"कुनै SIM कार्ड राखिएको छैन"</string>
@@ -3558,7 +3569,7 @@
     <string name="preferred_network_offload_footer" msgid="374984523082849648">"आफ्नो सञ्जाल जानकारी तेस्रो दलको पहुँचबाट नेटवर्कको नाम प्रसारण जोगाउने कार्य असक्षम पार्नुहोस्।"</string>
     <string name="preferred_network_offload_popup" msgid="3949937898807213370">"नेटवर्कको नाम प्रसारणले लुकेका सञ्जालहरू स्वचालित जडान हुनमा रोक्ने असक्षम पार्दै।"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"SIM कार्डहरू परिवर्तन गरिए।"</string>
+    <string name="sim_notification_title" msgid="2819551384383504031">"SIM हरू बदलिएका छन्।"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"सेटअप गर्न ट्याप गर्नुहोस्"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"प्रत्येक पटक सोधियोस्"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"छनौट आवश्यक छ"</string>
@@ -4311,7 +4322,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"पिन निकाल्नुअघि पासवर्ड सोध्नुहोस्"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"अनपिन गर्दा डिभाइस लक गरियोस्"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"पुष्टि गरेपछि मात्र SIM मेटाइयोस"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"डाउनलोड गरिएको SIM मेट्नुभन्दा पहिले यो व्यक्ति तपाईं नै हो भन्ने पुष्टि गर्नुहोस्"</string>
+    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"eSIM मेटाउनुअघि आफ्नो पहिचान पुष्टि गर्नुहोस्"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"यो कार्य प्रोफाइल निम्नद्वारा व्यवस्थित गरिन्छ:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> द्वारा व्यवस्थापन गरिएको"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(प्रयोगात्मक)"</string>
@@ -5262,7 +5273,8 @@
     <string name="empty_networks_list" msgid="6519489879480673428">"कुनै पनि नेटवर्क भेटिएन।"</string>
     <string name="network_query_error" msgid="6406348372070035274">"नेटवर्कहरू फेला पार्न सकिएन। फेरि प्रयास गर्नुहोस्।"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(निषेध गरिएको)"</string>
-    <string name="no_sim_card" msgid="1497407489810953863">"SIM कार्ड छैन"</string>
+    <!-- no translation found for no_sim_card (1478277597822967684) -->
+    <skip />
     <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
     <string name="wifi_no_sim_card" msgid="7144290066491585672">"SIM कार्ड छैन"</string>
     <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"SIM कार्डसम्बन्धी कुनै पनि जानकारी दिइएको छैन"</string>
@@ -5312,7 +5324,8 @@
     <string name="label_available" msgid="5305726869955838606">"उपलब्ध नेटवर्कहरू"</string>
     <string name="load_networks_progress" msgid="4717874401621250401">"खोजी गरिँदै छ…"</string>
     <string name="register_on_network" msgid="2169662800750709709">"<xliff:g id="NETWORK">%s</xliff:g> मा दर्ता गर्दै…"</string>
-    <string name="not_allowed" msgid="5756935665192962915">"तपाईंको SIM कार्ड यो नेटवर्कलाई जडानको अनुमति दिँदैन।"</string>
+    <!-- no translation found for not_allowed (8969977039734782273) -->
+    <skip />
     <string name="connect_later" msgid="2330538069949281352">"यो नेटवर्कमा अहिले नै जडान गर्न सकिँदैन। पछि फेरि प्रयास गर्नुहोस्।"</string>
     <string name="registration_done" msgid="1750434215698850123">"नेटवर्कमा दर्ता गरियो।"</string>
     <string name="select_automatically" msgid="2419752566747259155">"स्वतः नेटवर्क छानियोस्"</string>
@@ -5321,7 +5334,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"मोबाइल डेटा"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"मोबाइल डेटा प्रयोग गरियोस्"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"फोन दायरामा हुँदा यस सेवा प्रदायकमा स्वत: स्विच हुने छ"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"कुनै पनि SIM कार्ड उपलब्ध छैन"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"कुनै पनि SIM उपलब्ध छैन"</string>
     <string name="calls_preference" msgid="2166481296066890129">"कलसम्बन्धी प्राथमिकता"</string>
     <string name="sms_preference" msgid="7742964962568219351">"SMS सम्बन्धी प्राथमिकता"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"प्रत्येक पटक सोधियोस्"</string>
@@ -5342,8 +5355,8 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"अरू थप्नुहोस्"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"सक्रिय / SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"निष्क्रिय / SIM"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"अन छ / डाउनलोड गरिएको SIM"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"अफ छ / डाउनलोड गरिएको SIM"</string>
+    <string name="mobile_network_active_esim" msgid="3984452275968408382">"सक्रिय / eSIM"</string>
+    <string name="mobile_network_inactive_esim" msgid="8777415108263057939">"निष्क्रिय / eSIM"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"SIM को नाम र रङ्ग"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"नाम"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"रङ्ग (मिल्दा एपहरूले प्रयोग गरेका)"</string>
@@ -5353,7 +5366,8 @@
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"यो SIM असक्षम पार्न SIM कार्ड हटाउनुहोस्"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"<xliff:g id="CARRIER">%1$s</xliff:g> सक्रिय गर्न ट्याप गर्नुहोस्"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"SIM को सदस्यता बदलेर <xliff:g id="CARRIER">%1$s</xliff:g> पार्ने हो?"</string>
-    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"एक पटकमा डाउनलोड गरिएको  एउटा SIM मात्र सक्रिय हुन सक्छ।\n\nयसलाई बदलेर <xliff:g id="CARRIER1">%1$s</xliff:g> मा जानुले तपाईंको <xliff:g id="CARRIER2">%2$s</xliff:g> को सेवा रद्द गर्दैन।"</string>
+    <!-- no translation found for mobile_network_esim_swap_confirm_body (592668232798598450) -->
+    <skip />
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"<xliff:g id="CARRIER">%1$s</xliff:g> मा जानुहोस्"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"SIM मेट्नुहोस्"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"SIM मेटाउन सकिँदैन"</string>
@@ -5388,7 +5402,7 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"यो SIM बदलेर प्रयोग भइरहेको SIM प्रयोग गर्ने हो?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> प्रयोग गर्ने हो?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"एक पटकमा एउटा SIM मात्र अन गर्न मिल्छ।\n\nयसलाई बदलेर <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> बनाउँदा पनि तपाईंको <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> को सेवा रद्द हुँदैन।"</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"एक पटकमा एउटा मात्र डाउनलोड गरिएको SIM अन गर्न मिल्छ।\n\nयसलाई बदलेर <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> बनाउँदा पनि तपाईंको <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> को सेवा रद्द हुँदैन।"</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"एक पटकमा एउटा eSIM मात्र एक्टिभेट गर्न सकिन्छ।\n\nतपाईंले <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> प्रयोग गर्न थाल्नुभयो भने पनि तपाईंको <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> सेवा रद्द हुने छैन।"</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"एक पटकमा एउटा SIM मात्र अन गर्न मिल्छ।\n\nSIM बदल्दा तपाईंको <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> को सेवा रद्द हुने छैन।"</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"तपाईं एकै पटकमा २ वटा SIM चलाउन सक्नुहुन्छ। तपाईं <xliff:g id="CARRIER_NAME">%1$s</xliff:g> प्रयोग गर्न चाहनुहुन्छ भने अर्को SIM अफ गर्नुहोस्।"</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> प्रयोग गर्न थाल्नुहोस्"</string>
@@ -5434,8 +5448,8 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"मोबाइल डेटा, कल र SMS का लागि <xliff:g id="CARRIER_NAME">%1$s</xliff:g> प्रयोग गरिने छ।"</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"कुनै पनि सक्रिय SIM उपलब्ध छैन"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"पछि मोबाइल डेटा, कल गर्ने सुविधा र SMS सेवा प्रयोग गर्नु परेमा आफ्नो नेटवर्कका सेटिङमा जानुहोस्"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"SIM कार्ड"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"डाउनलोड गरिएको यो SIM मेटाउने हो?"</string>
+    <string name="sim_card_label" msgid="6263064316075963775">"SIM"</string>
+    <string name="erase_sim_dialog_title" msgid="4742077437653028326">"यो eSIM मेटाउने हो?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"तपाईंले यो SIM मेटाउनुभयो भने यस डिभाइसबाट <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> सेवा हटाइने छ।\n\n <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> को सेवा भने रद्द गरिने छैन।"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"मेट्नुहोस्"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"SIM मेटाइँदै छ…"</string>
@@ -5619,8 +5633,8 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"गति तथा कभरेज सुधार गर्नका निम्ति Google Fi लाई W+ नेटवर्कहरू प्रयोग गर्ने अनुमति दिनुहोस्"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ नेटवर्क"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"डाउनलोड गरिएको SIM"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"डाउनलोड गरिएका SIM हरू"</string>
+    <string name="downloaded_sim_category_title" msgid="2876988650413179752">"eSIM"</string>
+    <string name="downloaded_sims_category_title" msgid="487799905978489922">"eSIM हरू"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"सक्रिय छ"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"निष्क्रिय छ"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / <xliff:g id="ID_1">%1$s</xliff:g> को डिफल्ट कन्फिगुरेसन"</string>
@@ -5680,7 +5694,7 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"कलसम्बन्धी सेटिङ"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"सेटिङ अपडेट गरिँदै छ…"</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"कलसम्बन्धी सेटिङमा त्रुटि भयो"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"नेटवर्क वा SIM कार्डसम्बन्धी त्रुटि भयो।"</string>
+    <string name="smart_forwarding_failed_text" msgid="8682640643264071789">"नेटवर्क वा SIM सम्बन्धी त्रुटि भयो।"</string>
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM सक्रिय गरिएको छैन।"</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"फोन नम्बरहरू हाल्नुहोस्"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"फोन नम्बर हाल्नुहोस्"</string>
@@ -5705,10 +5719,10 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"अघिल्लो"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"अर्को"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"रङको प्रिभ्यू"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"SIM कार्डमा भएका डेटा हेर्ने तथा प्रयोग गर्ने अनुमति"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"कुनै डिभाइसले तपाईंको SIM कार्डमा भएका डेटा हेर्ने तथा प्रयोग गर्ने अनुमति माग्दै छ। विवरणहरू हेर्न ट्याप गर्नुहोस्।"</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"SIM कार्डमा भएका डेटा हेर्न तथा प्रयोग गर्न दिने हो?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> नामक ब्लुटुथ डिभाइसले तपाईंको SIM कार्डमा भएका डेटा हेर्ने तथा प्रयोग गर्ने अनुमति माग्दै छ। ती डेटामा तपाईंका सम्पर्क ठेगाना पनि समावेश छ।\n\nकनेक्ट गरिएको बेला <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ले <xliff:g id="PHONE_NUMBER">%3$s</xliff:g> मा गरिएका सबै कलहरू रिसिभ गर्ने छ।"</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="7351015416346359536">"SIM प्रयोग गर्ने अनुरोध"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="8685623260103018309">"कुनै डिभाइसले तपाईंको SIM मा भएका डेटा हेर्ने तथा प्रयोग गर्ने अनुमति माग्दै छ। विवरणहरू हेर्न ट्याप गर्नुहोस्।"</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="5616323725563125179">"SIM प्रयोग गर्न अनुमति दिने हो?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="6281997628405909566">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> नामक ब्लुटुथ डिभाइसले तपाईंको SIM मा भएका डेटा हेर्ने तथा प्रयोग गर्ने अनुमति माग्दै छ। ती डेटामा तपाईंका कन्ट्याक्ट पनि समावेश छ।\n\nकनेक्ट गरिएको बेला <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ले <xliff:g id="PHONE_NUMBER">%3$s</xliff:g> मा गरिएका सबै कलहरू रिसिभ गर्ने छ।"</string>
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"ब्लुटुथ डिभाइस उपलब्ध छ"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"कुनै डिभाइसले कनेक्ट गर्ने अनुमति माग्दै छ। विवरणहरू हेर्न ट्याप गर्नुहोस्।"</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"ब्लुटुथ डिभाइससँग कनेक्ट गर्ने हो?"</string>

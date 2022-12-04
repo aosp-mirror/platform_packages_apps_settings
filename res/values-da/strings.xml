@@ -23,6 +23,7 @@
     <string name="deny" msgid="7326117222944479942">"Afvis"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"Aktivér"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Ukendt"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"Tryk for at vise oplysninger"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">Du er nu <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> skridt fra at være udvikler.</item>
       <item quantity="other">Du er nu <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> skridt fra at være udvikler.</item>
@@ -139,7 +140,8 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Anmodning om adgang til meddelelse"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"%1$s vil gerne have adgang til dine beskeder. Vil du give %2$s adgang?"</string>
     <string name="bluetooth_sap_request" msgid="473439406287008397">"Anmodning om SIM-adgang"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> vil have adgang til dit SIM-kort. Hvis du giver adgang til SIM-kortet, deaktiveres dataforbindelsen på din enhed, så længe den anden enhed er forbundet. Giv adgang til <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
+    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (6194086753523415820) -->
+    <skip />
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Vises som \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" på andre enheder"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Aktivér Bluetooth for at oprette forbindelse til andre enheder."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Dine enheder"</string>
@@ -336,7 +338,8 @@
     <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"Enheden er ikke krypteret"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Låseskærm"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Hvad der skal vises"</string>
-    <string name="security_settings_summary" msgid="1627059516127354233">"Angiv Min lokation, oplåsning af skærmen, låst SIM-kort og lager for loginoplysninger"</string>
+    <!-- no translation found for security_settings_summary (4248337854143139822) -->
+    <skip />
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"Angiv Min lokation, oplåsning af skærmen, lager for loginoplysninger"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"Privatliv"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Ikke tilgængelig"</string>
@@ -433,7 +436,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Konfigurer dit fingeraftryk"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Tillad oplåsning med fingeraftryk"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Brug dit fingeraftryk"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Brug dit fingeraftryk til at låse din tablet op eller bekræfte din identitet, f.eks. når du logger ind i apps eller godkender et køb."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Brug dit fingeraftryk til at låse din tablet op eller verificere din identitet, f.eks. når du logger ind i apps eller godkender et køb."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Brug dit fingeraftryk til at låse din enhed op eller bekræfte din identitet, f.eks. når du logger ind i apps eller godkender et køb."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Brug dit fingeraftryk til at låse din telefon op eller bekræfte din identitet, f.eks. når du logger ind i apps eller godkender et køb."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Tillad, at dit barn bruger fingeraftryk til at låse telefonen op eller bekræfte sin identitet. Dette foregår, når barnet logger ind i apps, godkender et køb m.m."</string>
@@ -471,9 +474,9 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Løft fingeren, når du mærker en vibration"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Gå et sted hen med mere dæmpet belysning, og prøv igen"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Du har nået grænsen for det maksimale antal forsøg"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Brug dit fingeraftryk til at låse din tablet op eller bekræfte din identitet, f.eks. når du logger ind i apps"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Brug dit fingeraftryk til at låse din tablet op eller verificere din identitet, f.eks. når du logger ind i apps"</string>
     <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Brug dit fingeraftryk til at låse din enhed op eller bekræfte din identitet, f.eks. når du logger ind i apps"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Brug dit fingeraftryk til at låse din telefon op eller bekræfte din identitet, f.eks. når du logger ind i apps"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Brug dit fingeraftryk til at låse din telefon op eller verificere din identitet, f.eks. når du logger ind i apps"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Ansigtslås og oplåsning med fingeraftryk"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Tryk for at konfigurere"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Ansigt og fingeraftryk er tilføjet"</string>
@@ -501,7 +504,7 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Tryk på sensoren"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Sådan konfigurerer du fingeraftryk"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Den sidder på bagsiden af telefonen. Brug pegefingeren."</string>
-    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Fingeraftrykslæseren er på din skærm. Du registrerer dit fingeraftryk på den næste skærm."</string>
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Fingeraftrykssensoren er på din skærm. Du registrerer dit fingeraftryk på den næste skærm."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Start"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Bevæg fingeren hen over skærmen for at finde sensoren. Hold fingeren nede på fingeraftrykslæseren."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Illustration med enhed og lokation af fingeraftrykslæser"</string>
@@ -511,7 +514,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Tryk på sensoren"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Placer fingeren på sensoren, og løft, når du mærker en vibration"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Tryk fingeren helt ned på sensoren, indtil du mærker en vibration"</string>
-    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Hold fingeren nede på fingeraftrykslæseren"</string>
+    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Hold fingeren nede på fingeraftrykssensoren"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Løft, og tryk igen"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Én gang til"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Følg fingeraftryksikonet"</string>
@@ -524,9 +527,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"På den måde registreres en større del af dit fingeraftryk"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Scanning af fingeraftryk: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingeraftryk tilføjet"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Oplåsning med fingeraftryk forbedres, jo oftere du bruger funktionen til at låse din tablet op eller bekræfte din identitet i apps"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Oplåsning med fingeraftryk forbedres, jo oftere du bruger funktionen til at låse din enhed op eller bekræfte din identitet i apps"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Oplåsning med fingeraftryk forbedres, jo oftere du bruger funktionen til at låse din telefon op eller bekræfte din identitet i apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Oplåsning med fingeraftryk forbedres, jo oftere du bruger funktionen til at låse din tablet op eller verificere din identitet i apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Oplåsning med fingeraftryk forbedres, jo oftere du bruger funktionen til at låse din enhed op eller verificere din identitet i apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Oplåsning med fingeraftryk forbedres, jo oftere du bruger funktionen til at låse din telefon op eller verificere din identitet i apps"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Gør det senere"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Løft, og tryk igen"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Placer siden af din finger på sensoren, og hold den nede. Skift derefter til den anden side."</string>
@@ -593,7 +596,7 @@
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Muligheden for skærmlås er deaktiveret. Kontakt administratoren af din organisation for at få flere oplysninger."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Du kan stadig bruge fingeraftryk til at godkende køb og få adgang til apps."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Løft fingeren, og tryk på sensoren igen"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Fingeraftrykslæseren kan ikke bruges. Få den repareret"</string>
+    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Fingeraftrykssensoren kan ikke bruges. Få den repareret"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Flere sikkerhedsindstillinger"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Lås til arbejdsprofil, kryptering og mere"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Kryptering, loginoplysninger og mere"</string>
@@ -607,7 +610,7 @@
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"Fjern \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Vil du slette dette fingeraftryk?"</string>
     <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Dette sletter de fingeraftryksbilleder og den fingeraftryksmodel, der er knyttet til \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\", og som er gemt på din enhed"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Du vil ikke have mulighed for at bruge dit fingeraftryk til at låse din telefon op eller bekræfte din identitet i apps."</string>
+    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Du vil ikke have mulighed for at bruge dit fingeraftryk til at låse din telefon op eller verificere din identitet i apps."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Du vil ikke have mulighed for at bruge dit fingeraftryk til at låse din arbejdsprofil op, godkende køb eller logge ind i arbejdsapps."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ja, fjern"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Kryptering"</string>
@@ -972,8 +975,8 @@
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"Vælg en udbyder af netværksvurdering for at bruge funktionen"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"Vælg en kompatibel udbyder af netværksvurdering for at bruge funktionen"</string>
     <string name="wifi_install_credentials" msgid="5192903644606839972">"Installer certifikater"</string>
-    <string name="wifi_scan_notify_text" msgid="7163137260385995873">"For at gøre lokationen mere nøjagtig kan apps og tjenester stadig til enhver tid søge efter Wi‑Fi-netværk, også selvom Wi-Fi er deaktiveret. Dette kan f.eks. bruges til at forbedre stedbaserede funktioner og tjenester. Du kan ændre dette i <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>indstillingerne for Wi-Fi-scanning<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
-    <string name="wifi_scan_notify_text_scanning_off" msgid="7439201783168213149">"Du kan gøre lokationen mere nøjagtig ved at aktivere Wi-Fi-scanning i <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>indstillingerne for Wi‑Fi-scanning<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text" msgid="7163137260385995873">"For at forbedre lokationsnøjagtigheden kan apps og tjenester stadig til enhver tid søge efter Wi‑Fi-netværk, også selvom Wi-Fi er deaktiveret. Dette kan f.eks. bruges til at forbedre stedbaserede funktioner og tjenester. Du kan ændre dette i <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>indstillingerne for Wi-Fi-scanning<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text_scanning_off" msgid="7439201783168213149">"Du kan gøre forbedre lokationsnøjagtigheden ved at aktivere Wi-Fi-scanning i <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>indstillingerne for Wi‑Fi-scanning<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="8436897497968907701">"Vis ikke igen"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="6285374200292675649">"Hold Wi-Fi aktiveret i dvale"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8753852404141070878">"Wi-Fi aktiveret i dvaletilstand"</string>
@@ -1077,7 +1080,7 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"Deler Wi-Fi med denne enhed…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"Opretter forbindelse…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"Del hotspot"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"Bekræft, at det er dig"</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"Verificer, at det er dig"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Adgangskode til Wi-Fi-netværk: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Adgangskode til hotspot: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Opret automatisk forbindelse"</string>
@@ -1101,8 +1104,8 @@
     <string name="wifi_wps_available_second_item" msgid="1717024103303480804">" (WPS er tilgængelig)"</string>
     <string name="wifi_carrier_connect" msgid="4511538300946413213">"Wi-Fi-netværk for mobilselskab"</string>
     <string name="wifi_carrier_content" msgid="2876499905644083615">"Opret forbindelse via <xliff:g id="NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"For bl.a. at kunne angive en mere nøjagtig lokation vil <xliff:g id="APP_NAME">%1$s</xliff:g> gerne aktivere netværkssøgning, selv når Wi-Fi er deaktiveret.\n\nVil du tillade dette for alle apps, der gerne vil søge?"</string>
-    <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"For bl.a. at kunne angive en mere nøjagtig lokation vil en ukendt app gerne aktivere netværkssøgning, selv når Wi-Fi er deaktiveret.\n\nVil du tillade dette for alle apps, der gerne vil søge?"</string>
+    <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"For bl.a. at forbedre lokationsnøjagtigheden vil <xliff:g id="APP_NAME">%1$s</xliff:g> gerne aktivere netværkssøgning, selv når Wi-Fi er deaktiveret.\n\nVil du tillade dette for alle apps, der gerne vil søge?"</string>
+    <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"For bl.a. at forbedre lokationsnøjagtigheden vil en ukendt app gerne aktivere netværkssøgning, selv når Wi-Fi er deaktiveret.\n\nVil du tillade dette for alle apps, der gerne vil søge?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="93691286302680448">"Gå til Avanceret i prikmenuen for at slå denne funktion fra."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Tillad"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Afvis"</string>
@@ -1430,6 +1433,7 @@
     <string name="screen_timeout" msgid="7709947617767439410">"Timeout for skærmen"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Skærmen slukker"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Efter <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> med inaktivitet"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Ikke angivet"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Baggrund"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Baggrund og stil"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Startskærm, låseskærm"</string>
@@ -1442,7 +1446,7 @@
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Prøv forskellige layout, baggrunde og meget mere"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Pauseskærm"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Brug pauseskærm"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Når enheden oplades eller tilsluttes en dockingstation"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Under opladning, eller når enheden er sluttet til en dockingstation"</string>
     <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"Begge dele"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Under opladning"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Når enheden er tilsluttet en dockingstation"</string>
@@ -1463,20 +1467,21 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Fed tekst"</string>
     <string name="title_font_size" msgid="570613010306330622">"Skriftstørrelse"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Gør tekst større eller mindre"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"Indstillinger for låst SIM-kort"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"SIM-kortlås"</string>
+    <string name="sim_lock_settings" msgid="7331982427303002613">"Indstillinger for SIM-lås"</string>
+    <string name="sim_lock_settings_category" msgid="6475255139493877786">"SIM-lås"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Oplåst"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"Låst"</string>
-    <string name="sim_lock_settings_title" msgid="1401619059761012696">"Låst SIM-kort"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"Lås SIM-kort"</string>
+    <!-- no translation found for sim_lock_settings_title (3596566201762038857) -->
+    <skip />
+    <string name="sim_pin_toggle" msgid="6814489621760857328">"Lås SIM-kort"</string>
     <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"Kræv pinkode for at bruge tabletcomputeren"</string>
     <string name="sim_lock_on" product="default" msgid="3303147192981388923">"Kræv pinkode for at bruge telefonen"</string>
     <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"Kræv pinkode for at bruge tabletcomputeren"</string>
     <string name="sim_lock_off" product="default" msgid="4634118006847137785">"Kræv pinkode for at bruge telefonen"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"Skift pinkode til SIM-kort"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"Pinkode til SIM-kort"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"Lås SIM-kort"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"Lås op for SIM-kortet"</string>
+    <string name="sim_enable_sim_lock" msgid="6486354334679225748">"Lås SIM-kort"</string>
+    <string name="sim_disable_sim_lock" msgid="6939439812841857306">"Lås SIM-kort op"</string>
     <string name="sim_enter_old" msgid="6882545610939674813">"Nuværende pinkode til SIM-kort"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"Ny pinkode til SIM-kort"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"Angiv ny pinkode igen"</string>
@@ -1485,7 +1490,8 @@
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"Pinkoderne er ikke ens"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Pinkoden kan ikke ændres.\nPinkoden er muligvis forkert."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"PIN-koden til SIM-kortet er ændret"</string>
-    <string name="sim_lock_failed" msgid="16360418201678317">"SIM-kortets tilstand kan ikke ændres.\nMuligvis pga. en forkert pinkode."</string>
+    <!-- no translation found for sim_lock_failed (2088257523501265954) -->
+    <skip />
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"Pinkoden kan ikke deaktiveres."</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"Pinkoden kan ikke aktiveres."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"OK"</string>
@@ -1495,7 +1501,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Vil du bruge <xliff:g id="CARRIER">%1$s</xliff:g> til mobildata?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Du bruger <xliff:g id="CARRIER2_0">%2$s</xliff:g> til mobildata. Hvis du skifter til <xliff:g id="CARRIER1">%1$s</xliff:g>, anvendes <xliff:g id="CARRIER2_1">%2$s</xliff:g> ikke længere til mobildata."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Brug <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"Skal dit SIM-kort opdateres?"</string>
+    <string name="sim_preferred_title" msgid="8850185380445309835">"Vil du opdatere dit foretrukne SIM-kort?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> er det eneste SIM-kort i din enhed. Vil du bruge dette SIM-kort til mobildata, opkald og sms-beskeder?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Forkert pinkode til SIM-kort. Du skal nu kontakte dit mobilselskab for at låse din enhed op."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1760,17 +1766,17 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Nulstil Wi-Fi, mobil og Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Denne handling nulstiller alle netværksindstillinger, bl.a.:\n\n"<li>"Wi‑Fi"</li>\n<li>"Mobildata"</li>\n<li>"Bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Ryd"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Ryd downloadede SIM-kort"</string>
+    <string name="reset_esim_title" msgid="4194570573425902754">"Slet eSIM-kort"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"Mobilabonnementer opsiges ikke. Kontakt dit mobilselskab for at downloade nye SIM-kort."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Nulstil indstillinger"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Vil du nulstille alle netværksindstillinger? Denne handling kan ikke fortrydes."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Vil du nulstille alle netværksindstillingerne og rydde downloadede SIM-kort? Denne handling kan ikke fortrydes."</string>
+    <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"Vil du rydde alle netværksindstillinger og rydde eSIM-kort? Denne handling kan ikke fortrydes."</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Nulstil indstillinger"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Vil du nulstille?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Gendannelse af netværk er ikke tilgængeligt for denne bruger"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Netværksindstillingerne er blevet nulstillet"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"SIM-kortene kan ikke ryddes"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"Downloadede SIM-kort kan ikke ryddes på grund af en fejl.\n\nGenstart din enhed, og prøv igen."</string>
+    <string name="reset_esim_error_msg" msgid="7279607120606365250">"eSIM-kort kan ikke ryddes på grund af en fejl.\n\nGenstart din enhed, og prøv igen."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Ryd alle data (gendan fabriksindstillinger)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Ryd alle data (gendan fabriksindstillinger)"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Dette rydder alle data fra den "<b>"interne lagerplads"</b>" på din tablet, f.eks.: \n\n"<li>"Din Google-konto"</li>\n<li>"Data og indstillinger for system og apps"</li>\n<li>"Downloadede apps"</li></string>
@@ -2951,7 +2957,7 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Forlæng batteritiden"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Deaktiver, når enheden er opladet"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"Batterisparefunktionen deaktiveres, når din telefon er opladet til mere end <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"Batterisparefunktionen deaktiveres, når din tablet er opladet til mere end <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"Batterisparefunktionen deaktiveres, når din tablet er opladet til mere end <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="device" msgid="4128841327359445726">"Batterisparefunktionen deaktiveres, når din enhed er opladet til mere end <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
@@ -3199,7 +3205,8 @@
     <string name="data_usage_menu_hide_ethernet" msgid="7792365022467586772">"Skjul Ethernetforbrug"</string>
     <string name="data_usage_menu_metered" msgid="4279260736172851951">"Netværksbegrænsninger"</string>
     <string name="data_usage_menu_auto_sync" msgid="2632694000068175025">"Synkroniser data automatisk"</string>
-    <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"SIM-kort"</string>
+    <!-- no translation found for data_usage_menu_sim_cards (2827882471528568628) -->
+    <skip />
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"Midlertidigt sat på pause"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Synkroniser data automatisk"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Automatisk synk. af persondata"</string>
@@ -3521,10 +3528,12 @@
     <string name="wizard_next" msgid="3884832431439072471">"Næste"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Udfør"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM-kort"</string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"SIM-kort"</string>
+    <!-- no translation found for sim_setup_wizard_title (7030639256610746768) -->
+    <skip />
+    <string name="sim_settings_title" msgid="2254609719033946272">"SIM-kort"</string>
     <string name="sim_settings_summary" msgid="5777472623476930332">"<xliff:g id="SIM_NAME">%1$s</xliff:g> – <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
-    <string name="sim_cards_changed_message" msgid="7726897488921853655">"SIM-kort er skiftet"</string>
+    <!-- no translation found for sim_cards_changed_message (7374776581857835134) -->
+    <skip />
     <string name="sim_cards_changed_message_summary" msgid="7338082681445213621">"Tryk for at indstille aktiviteter"</string>
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Mobildata er ikke tilgængelig"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Tryk for at vælge et data-SIM-kort"</string>
@@ -3536,7 +3545,8 @@
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Hvis du skifter til <xliff:g id="NEW_SIM">%1$s</xliff:g>, anvendes <xliff:g id="OLD_SIM">%2$s</xliff:g> ikke længere til mobildata."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Brug <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Ring med"</string>
-    <string name="sim_select_card" msgid="1226182454109919045">"Vælg et SIM-kort"</string>
+    <!-- no translation found for sim_select_card (2975707305270216652) -->
+    <skip />
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM-kort: <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_editor_name" msgid="5900178038499314621">"Navn på SIM-kort"</string>
     <string name="sim_name_hint" msgid="8231524869124193119">"Angiv SIM-kortnavn"</string>
@@ -3544,7 +3554,8 @@
     <string name="sim_editor_carrier" msgid="2424593350691002557">"Mobilselskab"</string>
     <string name="sim_editor_number" msgid="3209002966895156006">"Nummer"</string>
     <string name="sim_editor_color" msgid="9067029630083892961">"Farve på SIM-kort"</string>
-    <string name="sim_card_select_title" msgid="8146523005929848793">"Vælg SIM-kort"</string>
+    <!-- no translation found for sim_card_select_title (8387396377407327067) -->
+    <skip />
     <string name="color_orange" msgid="216547825489739010">"Orange"</string>
     <string name="color_purple" msgid="6603701972079904843">"Lilla"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"Der er ikke isat et SIM-kort"</string>
@@ -3558,7 +3569,7 @@
     <string name="preferred_network_offload_footer" msgid="374984523082849648">"Deaktivering af udsendelse af netværksnavn beskytter mod, at tredjeparter får adgang til dine netværksoplysninger."</string>
     <string name="preferred_network_offload_popup" msgid="3949937898807213370">"Deaktivering af udsendelse af netværksnavn forhindrer automatisk forbindelse til skjulte netværk."</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"SIM-kortene er ændret."</string>
+    <string name="sim_notification_title" msgid="2819551384383504031">"Der blev skiftet SIM-kort."</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Tryk for at konfigurere"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Spørg hver gang"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Du har ikke valgt endnu"</string>
@@ -4311,7 +4322,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Bed om adgangskode inden frigørelse"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Lås enheden ved frigørelse"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Bekræft sletning af SIM-kort"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Bekræft din identitet, før du sletter et downloadet SIM-kort"</string>
+    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Verificer din identitet, inden du rydder et eSIM"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Denne arbejdsprofil administreres af:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Administreret af <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Eksperimentel)"</string>
@@ -4991,7 +5002,7 @@
     <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Hvis du angiver et nummer, der ikke er et alarmnummer:\n • Din enhed skal låses op, før du kan bruge Alarm-SOS\n • Dit opkald besvares muligvis ikke"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Stryg over fingeraftrykslæser for at se notifikationer"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Stryg fingeraftryk"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Du kan tjekke dine notifikationer ved at stryge nedad på fingeraftrykslæseren på bagsiden af telefonen."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Du kan tjekke dine notifikationer ved at stryge nedad på fingeraftrykssensoren på bagsiden af telefonen."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"Du kan tjekke dine notifikationer ved at stryge nedad på fingeraftrykslæseren på bagsiden af din tablet."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3888927017311372398">"Du kan tjekke dine notifikationer ved at stryge nedad på fingeraftrykslæseren på bagsiden af enheden."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"Se notifikationer hurtigt"</string>
@@ -5262,7 +5273,8 @@
     <string name="empty_networks_list" msgid="6519489879480673428">"Der blev ikke fundet nogen netværk."</string>
     <string name="network_query_error" msgid="6406348372070035274">"Der blev ikke fundet nogen netværk. Prøv igen."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(forbudt)"</string>
-    <string name="no_sim_card" msgid="1497407489810953863">"Intet SIM-kort"</string>
+    <!-- no translation found for no_sim_card (1478277597822967684) -->
+    <skip />
     <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
     <string name="wifi_no_sim_card" msgid="7144290066491585672">"Intet SIM-kort"</string>
     <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Ingen"</string>
@@ -5312,7 +5324,8 @@
     <string name="label_available" msgid="5305726869955838606">"Tilgængelige netværk"</string>
     <string name="load_networks_progress" msgid="4717874401621250401">"Søger…"</string>
     <string name="register_on_network" msgid="2169662800750709709">"Registrerer på <xliff:g id="NETWORK">%s</xliff:g>…"</string>
-    <string name="not_allowed" msgid="5756935665192962915">"Dit SIM-kort tillader ikke en forbindelse til dette netværk."</string>
+    <!-- no translation found for not_allowed (8969977039734782273) -->
+    <skip />
     <string name="connect_later" msgid="2330538069949281352">"Der kan ikke oprettes forbindelse til dette netværk lige nu. Prøv igen senere."</string>
     <string name="registration_done" msgid="1750434215698850123">"Registreret på netværket."</string>
     <string name="select_automatically" msgid="2419752566747259155">"Vælg netværk automatisk"</string>
@@ -5321,7 +5334,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Mobildata"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Brug data via mobilnetværk"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Telefonen skifter automatisk til dette mobilselskab, når netværket er inden for rækkevidde"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Der er ikke noget tilgængeligt SIM-kort"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"Der er ikke et tilgængeligt SIM-kort"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Opkaldspræference"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Sms-præference"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Spørg hver gang"</string>
@@ -5342,8 +5355,8 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Tilføj flere"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Aktiv/knyttet til SIM-kort"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Inaktiv/knyttet til SIM-kort"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Aktiv/knyttet til downloadet SIM-kort"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Inaktiv/knyttet til downloadet SIM-kort"</string>
+    <string name="mobile_network_active_esim" msgid="3984452275968408382">"Aktivt/eSIM"</string>
+    <string name="mobile_network_inactive_esim" msgid="8777415108263057939">"Inaktivt/eSIM"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"Navn på SIM-kort og farve"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Navn"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Farve (anvendes af kompatible apps)"</string>
@@ -5353,7 +5366,8 @@
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Fjern SIM-kortet for at deaktivere det"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Tryk for at aktivere <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"Vil du skifte til <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
-    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Der kan kun være ét aktivt downloadet SIM-kort ad gangen.\n\nSelvom du skifter til <xliff:g id="CARRIER1">%1$s</xliff:g>, opsiger det ikke din tjeneste fra <xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
+    <!-- no translation found for mobile_network_esim_swap_confirm_body (592668232798598450) -->
+    <skip />
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"Skift til <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"Ryd SIM-kort"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"SIM-kortet kan ikke ryddes"</string>
@@ -5388,7 +5402,7 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Vil du skifte til at bruge SIM-kort?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Vil du bruge <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Der kan kun være ét aktivt SIM-kort ad gangen.\n\nSelvom du skifter til <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, opsiges din tjeneste fra <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> ikke."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Der kan kun være ét aktivt downloadet SIM-kort ad gangen.\n\nSelvom du skifter til <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, opsiges din tjeneste fra <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> ikke."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"Der kan kun være 1 aktivt eSIM ad gangen.\n\nDin <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-tjeneste opsiges ikke, hvisdu skifter til <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Der kan kun være ét aktivt SIM-kort ad gangen.\n\nSelvom du skifter SIM-kort, opsiges din tjeneste fra <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> ikke."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Du kan ikke bruge 2 SIM-kort ad gangen. Hvis du vil bruge <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, skal du deaktivere et andet SIM-kort."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Skift til <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -5434,8 +5448,8 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> anvendes til mobildata, opkald og sms-beskeder."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Der er ingen tilgængelige aktive SIM-kort"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Hvis du senere vil bruge mobildata, opkaldsfunktioner og sms, kan du gå til dine netværksindstillinger"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"SIM-kort"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Vil du rydde dette downloadede SIM-kort?"</string>
+    <string name="sim_card_label" msgid="6263064316075963775">"SIM-kort"</string>
+    <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Vil du rydde dette eSIM?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Hvis du rydder dette SIM-kort, fjernes tjenesten fra <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> på denne enhed.\n\nTjenesten fra <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> opsiges ikke."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Ryd"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"Rydder SIM-kort…"</string>
@@ -5619,8 +5633,8 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Tillad, at Google Fi bruger W+-netværk for at øge hastigheden og dækningen"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+-netværk"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"DOWNLOADEDE SIM-KORT"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"DOWNLOADEDE SIMKORT"</string>
+    <string name="downloaded_sim_category_title" msgid="2876988650413179752">"eSIM"</string>
+    <string name="downloaded_sims_category_title" msgid="487799905978489922">"eSIM-kort"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Aktiv"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Inaktiv"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Standard til <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5680,7 +5694,7 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Indstillinger for opkald"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Opdaterer indstillinger..."</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Fejl i indstillinger for opkald."</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Fejl på netværk eller SIM-kort."</string>
+    <string name="smart_forwarding_failed_text" msgid="8682640643264071789">"Fejl med netværk eller SIM-kort"</string>
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM-kortet er ikke aktiveret."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Angiv telefonnumre"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Angiv telefonnummer"</string>
@@ -5705,10 +5719,10 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"Forrige"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Næste"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Forhåndsvisning af farve"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Anmodning om adgang til SIM-kort"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"En enhed vil gerne have adgang til dit SIM-kort. Tryk for at få flere oplysninger."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Vil du give adgang til SIM-kortet?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Bluetooth-enheden <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> vil gerne have adgang til data på dit SIM-kort. Dette omfatter dine kontakter.\n\nNår der er oprettet forbindelse, vil <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> modtage alle indgående opkald til <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="7351015416346359536">"Anmodning om SIM-adgang"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="8685623260103018309">"En enhed anmoder om adgang til dit SIM-kort. Tryk for at få flere oplysninger."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="5616323725563125179">"Vil du give adgang til SIM-kortet?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="6281997628405909566">"En Bluetooth-enhed, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, anmoder om adgang til data på dit SIM-kort. Dette omfatter dine kontakter.\n\nNår der er oprettet forbindelse, vil <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> modtage alle indgående opkald til <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"En Bluetooth-enhed er tilgængelig"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"En enhed vil gerne oprette forbindelse. Tryk for at få flere oplysninger."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Vil du oprette forbindelse til Bluetooth-enheden?"</string>

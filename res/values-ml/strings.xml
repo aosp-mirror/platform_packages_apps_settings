@@ -23,6 +23,7 @@
     <string name="deny" msgid="7326117222944479942">"നിരസിക്കുക"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"ഓണാക്കുക"</string>
     <string name="device_info_default" msgid="1406619232867343310">"അജ്ഞാതം"</string>
+    <string name="device_info_protected_single_press" msgid="3810785480060743677">"വിവരങ്ങൾ കാണിക്കാൻ ടാപ്പ് ചെയ്യുക"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">ഒരു ഡെവലപ്പറാകാൻ നിങ്ങൾക്കിനി <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> ചുവടുകൾ മാത്രം.</item>
       <item quantity="one">ഒരു ഡെവലപ്പറാകാൻ നിങ്ങൾക്കിനി <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> ചുവട് മാത്രം.</item>
@@ -139,7 +140,8 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"സന്ദേശ ആക്‌സസ്സ് അഭ്യർത്ഥന"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"%1$s, നിങ്ങളുടെ സന്ദേശങ്ങൾ ആക്‌സസ്സുചെയ്യാൻ താൽപ്പര്യപ്പെടുന്നു. %2$s എന്നതിലേക്ക് ആക്‌സസ്സ് നൽകണോ?"</string>
     <string name="bluetooth_sap_request" msgid="473439406287008397">"SIM ആക്‌സസ്സ് അഭ്യർത്ഥന"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> ഉപകരണം SIM കാർഡ് ആക്‌സസ്സ് ചെയ്യാൻ താൽപ്പര്യപ്പെടുന്നു. SIM കാർഡിലേക്ക് ആക്‌സസ്സ് അനുവദിക്കുന്നത് കണക്ഷന്റെ സമയപരിധിയ്‌ക്കായി ഉപകരണത്തിൽ ഡാറ്റ കണക്റ്റിവിറ്റിയെ പ്രവർത്തനരഹിതമാക്കുന്നതിനിടയാക്കും. <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> ഉപകരണത്തിന് ആക്‌സസ്സ് നൽകുക"</string>
+    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (6194086753523415820) -->
+    <skip />
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"<xliff:g id="DEVICE_NAME">^1</xliff:g> എന്ന പേരിൽ മറ്റ് ഉപകരണങ്ങൾക്ക് ദൃശ്യമാകും"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"മറ്റ് ഉപകരണങ്ങളിലേക്ക് കണക്‌റ്റ് ചെയ്യാൻ Bluetooth ഓണാക്കുക."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"നിങ്ങളുടെ ഉപകരണങ്ങൾ"</string>
@@ -336,7 +338,8 @@
     <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"ഉപകരണം എൻക്രിപ്റ്റ് ചെയ്‌തിട്ടില്ല"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"ലോക്ക് സ്‌ക്രീൻ"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"എന്താണ് കാണിക്കേണ്ടത്"</string>
-    <string name="security_settings_summary" msgid="1627059516127354233">"എന്റെ ലൊക്കേഷൻ, സ്‌ക്രീൻ അൺലോക്ക്, സിം കാർഡ് ലോക്ക്, ക്രഡൻഷ്യൽ സംഭരണ ലോക്ക് എന്നിവ സജ്ജീകരിക്കുക"</string>
+    <!-- no translation found for security_settings_summary (4248337854143139822) -->
+    <skip />
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"എന്റെ ലൊക്കേഷൻ, സ്‌ക്രീൻ അൺലോക്ക്, ക്രെഡൻഷ്യൽ സംഭരണ ലോക്ക് എന്നിവ സജ്ജീകരിക്കുക"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"സ്വകാര്യത"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"ലഭ്യമല്ല"</string>
@@ -1430,6 +1433,7 @@
     <string name="screen_timeout" msgid="7709947617767439410">"സ്ക്രീൻ ടൈംഔട്ട്"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"സ്ക്രീൻ ഓഫാക്കുന്നു"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> നിഷ്ക്രിയത്വത്തിന് ശേഷം"</string>
+    <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"സജ്ജീകരിച്ചിട്ടില്ല"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"വാൾപേപ്പർ"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"വാൾപേപ്പറും സ്‌റ്റൈലും"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"ഹോം, ലോക്ക് സ്‌ക്രീൻ"</string>
@@ -1463,20 +1467,21 @@
     <string name="force_bold_text" msgid="4620929631102086716">"ബോൾഡ് ടെക്സ്റ്റ്"</string>
     <string name="title_font_size" msgid="570613010306330622">"ഫോണ്ട് വലുപ്പം"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"ടെക്‌സ്‌റ്റ് വലുതാക്കുകയോ ചെറുതാക്കുകയോ ചെയ്യുക"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"സിം കാർഡ് ലോക്ക് ക്രമീകരണങ്ങൾ"</string>
-    <string name="sim_lock_settings_category" msgid="4280307997492851625">"സിം കാർഡ് ലോക്ക്"</string>
+    <string name="sim_lock_settings" msgid="7331982427303002613">"സിം ലോക്ക് ക്രമീകരണം"</string>
+    <string name="sim_lock_settings_category" msgid="6475255139493877786">"സിം ലോക്ക്"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"ഓഫ്"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"ലോക്കുചെയ്‌തു"</string>
-    <string name="sim_lock_settings_title" msgid="1401619059761012696">"സിം കാർഡ് ലോക്ക്"</string>
-    <string name="sim_pin_toggle" msgid="98754920202404425">"സിം കാർഡ് ലോക്ക് ചെയ്യുക"</string>
+    <!-- no translation found for sim_lock_settings_title (3596566201762038857) -->
+    <skip />
+    <string name="sim_pin_toggle" msgid="6814489621760857328">"സിം ലോക്ക് ചെയ്യുക"</string>
     <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"ടാബ്‌ലെറ്റ് ഉപയോഗിക്കുന്നതിന് പിൻ ആവശ്യമാണ്"</string>
     <string name="sim_lock_on" product="default" msgid="3303147192981388923">"ഫോൺ ഉപയോഗിക്കുന്നതിന് പിൻ ആവശ്യമാണ്"</string>
     <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"ടാബ്‌ലെറ്റ് ഉപയോഗിക്കുന്നതിന് പിൻ ആവശ്യമാണ്"</string>
     <string name="sim_lock_off" product="default" msgid="4634118006847137785">"ഫോൺ ഉപയോഗിക്കുന്നതിന് പിൻ ആവശ്യമാണ്"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"സിം പിൻ മാറ്റുക"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"സിം പിൻ"</string>
-    <string name="sim_enable_sim_lock" msgid="8993991669975548653">"സിം കാർഡ് ലോക്ക് ചെയ്യുക"</string>
-    <string name="sim_disable_sim_lock" msgid="7656447857474746157">"സിം കാർഡ് അൺലോക്ക് ചെയ്യുക"</string>
+    <string name="sim_enable_sim_lock" msgid="6486354334679225748">"സിം ലോക്ക് ചെയ്യുക"</string>
+    <string name="sim_disable_sim_lock" msgid="6939439812841857306">"സിം അൺലോക്ക് ചെയ്യുക"</string>
     <string name="sim_enter_old" msgid="6882545610939674813">"പഴയ സിം പിൻ"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"പുതിയ സിം പിൻ"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"പുതിയ പിൻ വീണ്ടും ടൈപ്പുചെയ്യുക"</string>
@@ -1485,7 +1490,8 @@
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"പിൻ നമ്പറുകൾ പൊരുത്തപ്പെടുന്നില്ല"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"പിൻ മാറ്റാനായില്ല.\nപിൻ തെറ്റായിരിക്കാൻ സാധ്യതയുണ്ട്."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"സിമ്മിന്റെ പിൻ മാറ്റി"</string>
-    <string name="sim_lock_failed" msgid="16360418201678317">"സിം കാർഡ് ലോക്ക് നില മാറ്റാനായില്ല.\nപിൻ തെറ്റായിരിക്കാൻ സാധ്യതയുണ്ട്."</string>
+    <!-- no translation found for sim_lock_failed (2088257523501265954) -->
+    <skip />
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"പിൻ പ്രവർത്തനരഹിതമാക്കാനാവില്ല."</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"പിൻ പ്രവർത്തനക്ഷമമാക്കാനാവില്ല."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"ശരി"</string>
@@ -1495,7 +1501,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"മൊബൈൽ ഡാറ്റയ്ക്ക് <xliff:g id="CARRIER">%1$s</xliff:g> വേണോ?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"നിങ്ങൾ മൊബൈൽ ഡാറ്റയ്ക്ക് <xliff:g id="CARRIER2_0">%2$s</xliff:g> ഉപയോഗിക്കുന്നു. നിങ്ങൾ <xliff:g id="CARRIER1">%1$s</xliff:g> എന്നതിലേക്ക് മാറുകയാണെങ്കിൽ മൊബൈൽ ഡാറ്റ ലഭിക്കാൻ <xliff:g id="CARRIER2_1">%2$s</xliff:g> എന്നത് ഇനിമുതൽ ഉപയോഗിക്കാനാവില്ല."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> ഉപയോഗിക്കുക"</string>
-    <string name="sim_preferred_title" msgid="7182406911552216373">"തിരഞ്ഞെടുത്ത SIM കാർഡ് അപ്‌ഡേറ്റുചെയ്യണോ?"</string>
+    <string name="sim_preferred_title" msgid="8850185380445309835">"തിരഞ്ഞെടുത്ത സിം അപ്ഡേറ്റുചെയ്യണോ?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"നിങ്ങളുടെ ഉപകരണത്തിൽ ഉള്ള ഒരേയൊരു സിം <xliff:g id="NEW_SIM">%1$s</xliff:g> ആണ്. മൊബൈൽ ഡാറ്റ, കോളുകൾ, SMS സന്ദേശങ്ങൾ എന്നിവയ്ക്ക് ഈ സിം ഉപയോഗിക്കാൻ ആഗ്രഹിക്കുന്നുണ്ടോ?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"സിം പിൻ കോഡ് തെറ്റാണ്, നിങ്ങളുടെ ഉപകരണം അൺലോക്കുചെയ്യാൻ ഇപ്പോൾ നിങ്ങളുടെ കാരിയറുമായി ബന്ധപ്പെടണം."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
@@ -1760,17 +1766,17 @@
     <string name="reset_network_title" msgid="1395494440355807616">"വൈഫൈ, മൊബൈൽ, Bluetooth റീസെറ്റ് ചെയ്യുക"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"ഇനിപ്പറയുന്നവ ഉൾപ്പെടെ എല്ലാ നെറ്റ്‍വർക്ക് ക്രമീകരണങ്ങളും ഇത് റീസെറ്റ് ചെയ്യും:\n\n"<li>"വൈഫൈ"</li>\n<li>"മൊബൈൽ ഡാറ്റ"</li>\n<li>"Bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"മായ്ക്കുക"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"ഡൗൺലോഡ് ചെയ്‌ത SIM-കൾ മായ്ക്കുക"</string>
+    <string name="reset_esim_title" msgid="4194570573425902754">"ഇ-സിമ്മുകൾ മായ്‌ക്കുക"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"ഇത്, ഒരു മൊബെെൽ സേവന പ്ലാനുകളും റദ്ദാക്കില്ല. പകരം ഉപയോഗിക്കാനുള്ള സിമ്മുകൾ ഡൗൺലോഡ് ചെയ്യാൻ നിങ്ങളുടെ സേവനദാതാവിനെ ബന്ധപ്പെടുക."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"ക്രമീകരണം റീസെറ്റ് ചെയ്യുക"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"എല്ലാ നെറ്റ്‌വർക്കിംഗ് ക്രമീകരണവും പുനഃസജ്ജീകരിക്കണോ? നിങ്ങൾക്ക് ഈ പ്രവർത്തനം പഴയപടിയാക്കാനാവില്ല."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"എല്ലാ നെറ്റ്‌വർക്കിംഗ് ക്രമീകരണവും റീസെറ്റ് ചെയ്യുകയും ഡൗൺലോഡ് ചെയ്‌ത സിമ്മുകൾ മായ്ക്കുകയും ചെയ്യണോ? ഇത് പഴയപടിയാക്കാനാകില്ല."</string>
+    <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"എല്ലാ നെറ്റ്‌വർക്ക് ക്രമീകരണവും റീസെറ്റ് ചെയ്ത് ഇ-സിമ്മുകൾ മായ്ക്കണോ? ഈ പ്രവർത്തനം നിങ്ങൾക്ക് പഴയപടിയാക്കാനാകില്ല."</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"ക്രമീകരണം റീസെറ്റ് ചെയ്യുക"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"റീസെറ്റ് ചെയ്യണോ?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"ഈ ഉപയോക്താവിന് നെറ്റ്‌വർക്ക് റീസെറ്റ് ലഭ്യമല്ല"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"നെറ്റ്‌വർക്ക് ക്രമീകരണം റീസെറ്റുചെയ്‌തു"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"SIM-കൾ മായ്ക്കാനാവില്ല"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"പിശക് കാരണം ഡൗൺലോഡ് ചെയ്‌ത ഈ SIM-കൾ മായ്ക്കാനാവില്ല.\n\nനിങ്ങളുടെ ഉപകരണം റീസ്‌റ്റാർട്ട് ചെയ്‌ത് വീണ്ടും ശ്രമിക്കുക."</string>
+    <string name="reset_esim_error_msg" msgid="7279607120606365250">"ഒരു പിശക് കാരണം ഇ-സിമ്മുകൾ മായ്ക്കാനാകുന്നില്ല.\n\nനിങ്ങളുടെ ഉപകരണം റീസ്‌റ്റാർട്ട് ചെയ്‌ത് വീണ്ടും ശ്രമിക്കുക."</string>
     <string name="main_clear_title" msgid="277664302144837723">"എല്ലാ ഡാറ്റയും മായ്‌ക്കുക (ഫാക്‌ടറി റീസെറ്റ്)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"എല്ലാ ഡാറ്റയും മായ്‌ക്കുക (ഫാക്‌ടറി റീസെറ്റ്)"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"ഇത് നിങ്ങളുടെ ടാബ്‌ലെറ്റിന്റെ "<b>"ഉള്ളിലെ മെമ്മറിയിൽ"</b>" നിന്നും ഇനിപ്പറയുന്നവ ഉൾപ്പെടെയുള്ള എല്ലാ ഡാറ്റയും മായ്ക്കും:\n\n"<li>"നിങ്ങളുടെ Google അക്കൗണ്ട്"</li>\n<li>"സിസ്‌റ്റം, ആപ്പ് ഡാറ്റയും ക്രമീകരണവും"</li>\n<li>"ഡൗൺലോഡ് ചെയ്‌ത ആപ്പുകൾ"</li></string>
@@ -2292,7 +2298,7 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"ആവശ്യങ്ങൾക്ക് അനുസരിച്ച് നിങ്ങൾക്ക് ഈ ഉപകരണം ഇഷ്ടാനുസൃതമാക്കാം. ഈ ഉപയോഗസഹായി ഫീച്ചറുകൾ പിന്നീട് ക്രമീകരണത്തിൽ മാറ്റാവുന്നതാണ്."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"ഫോണ്ട് വലുപ്പം മാറ്റുക"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"സ്‌ക്രീൻ റീഡർ"</string>
-    <string name="captions_category_title" msgid="574490148949400274">"അടിക്കുറിപ്പുകൾ"</string>
+    <string name="captions_category_title" msgid="574490148949400274">"സബ്ടൈറ്റിലുകൾ"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"ഓഡിയോ"</string>
     <string name="general_category_title" msgid="6298579528716834157">"പൊതുവായവ"</string>
     <string name="display_category_title" msgid="6638191682294461408">"ഡി‌സ്‌പ്ലേ"</string>
@@ -3199,7 +3205,8 @@
     <string name="data_usage_menu_hide_ethernet" msgid="7792365022467586772">"ഇതർനെറ്റ് ഉപയോഗം മറയ്‌ക്കുക"</string>
     <string name="data_usage_menu_metered" msgid="4279260736172851951">"നെറ്റ്‌വർക്ക് നിയന്ത്രണം"</string>
     <string name="data_usage_menu_auto_sync" msgid="2632694000068175025">"ഡാറ്റ സ്വയമേ സമന്വയിപ്പിക്കൂ"</string>
-    <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"സിം കാർഡുകൾ"</string>
+    <!-- no translation found for data_usage_menu_sim_cards (2827882471528568628) -->
+    <skip />
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"പരിധിയിൽ തൽക്കാലം നിർത്തി"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"ഡാറ്റ സ്വയമേ സമന്വയിപ്പിക്കൂ"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"വ്യക്തിപരമായ ഡാറ്റ സ്വയമേവ സമന്വയിപ്പിക്കുക"</string>
@@ -3521,10 +3528,12 @@
     <string name="wizard_next" msgid="3884832431439072471">"അടുത്തത്"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"പൂര്‍ത്തിയാക്കുക"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_setup_wizard_title" msgid="3945520353564138219">"സിം കാർഡുകൾ"</string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"സിം കാർഡുകൾ"</string>
+    <!-- no translation found for sim_setup_wizard_title (7030639256610746768) -->
+    <skip />
+    <string name="sim_settings_title" msgid="2254609719033946272">"സിമ്മുകൾ"</string>
     <string name="sim_settings_summary" msgid="5777472623476930332">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
-    <string name="sim_cards_changed_message" msgid="7726897488921853655">"സിം കാർഡുകൾ മാറി"</string>
+    <!-- no translation found for sim_cards_changed_message (7374776581857835134) -->
+    <skip />
     <string name="sim_cards_changed_message_summary" msgid="7338082681445213621">"ആക്ടിവിറ്റികൾ സജ്ജീകരിക്കാൻ ടാപ്പുചെയ്യുക"</string>
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"മൊബൈൽ ഡാറ്റ ലഭ്യമല്ല"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"ഡാറ്റ സിം തിരഞ്ഞെടുക്കാൻ ടാപ്പുചെയ്യുക"</string>
@@ -3536,7 +3545,8 @@
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"നിങ്ങൾ <xliff:g id="NEW_SIM">%1$s</xliff:g> എന്നതിലേക്ക് മാറുകയാണെങ്കിൽ മൊബൈൽ ഡാറ്റ ലഭിക്കാൻ ഇനി മുതൽ <xliff:g id="OLD_SIM">%2$s</xliff:g> ഉപയോഗിക്കില്ല."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"<xliff:g id="NEW_SIM">%1$s</xliff:g> ഉപയോഗിക്കുക"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"ഇത് ഉപയോഗിച്ച് വിളിക്കുക"</string>
-    <string name="sim_select_card" msgid="1226182454109919045">"ഒരു സിം കാർഡ് തിരഞ്ഞെടുക്കുക"</string>
+    <!-- no translation found for sim_select_card (2975707305270216652) -->
+    <skip />
     <string name="sim_card_number_title" msgid="4728780444646439845">"സിം <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_editor_name" msgid="5900178038499314621">"സിം പേര്"</string>
     <string name="sim_name_hint" msgid="8231524869124193119">"SIM പേര് നൽകുക"</string>
@@ -3544,7 +3554,8 @@
     <string name="sim_editor_carrier" msgid="2424593350691002557">"കാരിയര്‍"</string>
     <string name="sim_editor_number" msgid="3209002966895156006">"നമ്പർ"</string>
     <string name="sim_editor_color" msgid="9067029630083892961">"സിം വർണ്ണം"</string>
-    <string name="sim_card_select_title" msgid="8146523005929848793">"സിം കാർഡ് തിരഞ്ഞെടുക്കുക"</string>
+    <!-- no translation found for sim_card_select_title (8387396377407327067) -->
+    <skip />
     <string name="color_orange" msgid="216547825489739010">"ഓറഞ്ച്"</string>
     <string name="color_purple" msgid="6603701972079904843">"പര്‍പ്പിള്‍"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"സിം കാർഡുകളൊന്നും ചേർത്തിട്ടില്ല"</string>
@@ -3558,7 +3569,7 @@
     <string name="preferred_network_offload_footer" msgid="374984523082849648">"നെറ്റ്‌വർക്ക് പേര് പ്രക്ഷേപണം പ്രവർത്തനരഹിതമാക്കുന്നത്, മൂന്നാം കക്ഷികൾ നിങ്ങളുടെ നെറ്റ്‌വർക്ക് വിവരങ്ങളിലേയ്‌ക്ക് ആക്‌സസ്സ് നേടുന്നതിൽ നിന്നും പരിരക്ഷിക്കുന്നു."</string>
     <string name="preferred_network_offload_popup" msgid="3949937898807213370">"നെറ്റ്‌വർക്ക് പേര് പ്രക്ഷേപണം പ്രവർത്തനരഹിതമാക്കുന്നത്, മറച്ച നെറ്റ്‌വർക്കുകളിലേക്കുള്ള യാന്ത്രിക കണക്ഷനെ തടയും."</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="584752983048661108">"SIM കാർഡുകൾ മാറ്റി."</string>
+    <string name="sim_notification_title" msgid="2819551384383504031">"സിമ്മുകൾ മാറ്റി."</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"സജ്ജമാക്കാൻ ടാപ്പുചെയ്യുക"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"എപ്പോഴും ചോദിക്കുക"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"തിരഞ്ഞെടുക്കൽ ആവശ്യമാണ്"</string>
@@ -4311,7 +4322,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"അൺപിന്നിനുമുമ്പ് പാസ്‌വേഡ് ആവശ്യപ്പെടൂ"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"അൺപിൻ ചെയ്യുമ്പോൾ ഉപകരണം ലോക്ക് ചെയ്യുക"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"സിം ഇല്ലാതാക്കൽ സ്ഥിരീകരിക്കുക"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"ഡൗൺലോഡ് ചെയ്ത സിം മായ്ക്കുന്നതിന് മുമ്പ് ഇത് നിങ്ങൾ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കുക"</string>
+    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"ഇ-സിം മായ്ക്കുന്നതിന് മുമ്പ് ഇത് നിങ്ങൾ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കുക"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"ഈ ഔദ്യോഗിക പ്രൊഫൈൽ നിയന്ത്രിക്കുന്നത്:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> നിയന്ത്രിക്കുന്നു"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(പരീക്ഷണാത്മകം)"</string>
@@ -5262,7 +5273,8 @@
     <string name="empty_networks_list" msgid="6519489879480673428">"നെറ്റ്‌വർക്കുകളൊന്നും കണ്ടെത്തിയില്ല."</string>
     <string name="network_query_error" msgid="6406348372070035274">"നെറ്റ്‌വർക്കുകൾ കണ്ടെത്താനായില്ല. വീണ്ടും ശ്രമിക്കുക."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(നിരോധിക്കപ്പെട്ടത്)"</string>
-    <string name="no_sim_card" msgid="1497407489810953863">"സിം കാർഡില്ല"</string>
+    <!-- no translation found for no_sim_card (1478277597822967684) -->
+    <skip />
     <string name="sim_card" msgid="6381158752066377709">"സിം"</string>
     <string name="wifi_no_sim_card" msgid="7144290066491585672">"സിം ഇല്ല"</string>
     <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"ഒന്നുമില്ല"</string>
@@ -5312,7 +5324,8 @@
     <string name="label_available" msgid="5305726869955838606">"ലഭ്യമായ നെറ്റ്‌വർക്കുകൾ"</string>
     <string name="load_networks_progress" msgid="4717874401621250401">"തിരയുന്നു..."</string>
     <string name="register_on_network" msgid="2169662800750709709">"<xliff:g id="NETWORK">%s</xliff:g> എന്നതിൽ രജിസ്‌റ്റർ ചെയ്യുന്നു…"</string>
-    <string name="not_allowed" msgid="5756935665192962915">"നിങ്ങളുടെ സിം കാർഡ്, ഈ നെറ്റ്‌വർക്കിലേക്ക് കണക്ഷൻ അനുവദിക്കുന്നില്ല."</string>
+    <!-- no translation found for not_allowed (8969977039734782273) -->
+    <skip />
     <string name="connect_later" msgid="2330538069949281352">"ഈ നെറ്റ്‌വർക്കിലേക്ക് ഇപ്പോൾ കണക്‌റ്റ് ചെയ്യാനാവുന്നില്ല. പിന്നീട് വീണ്ടും ശ്രമിക്കുക."</string>
     <string name="registration_done" msgid="1750434215698850123">"നെറ്റ്‌വർക്കിൽ രജിസ്‌റ്റർ ചെയ്‌തു."</string>
     <string name="select_automatically" msgid="2419752566747259155">"സ്വയമേവ നെറ്റ്‌വർക്ക് തിരഞ്ഞെടുക്കുക"</string>
@@ -5321,7 +5334,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"മൊബൈൽ ഡാറ്റ"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"മൊബൈൽ നെറ്റ്‌വർക്ക് ഉപയോഗിച്ച് ഡാറ്റ ആക്‌സസ് ചെയ്യുക"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"പരിധിയിൽ വരുമ്പോൾ ഫോൺ ഈ സേവനദാതാവിലേക്ക് സ്വയമേവ മാറും"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"സിം കാർഡ് ലഭ്യമല്ല"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"സിമ്മൊന്നും ലഭ്യമല്ല"</string>
     <string name="calls_preference" msgid="2166481296066890129">"കോൾ മുൻഗണന"</string>
     <string name="sms_preference" msgid="7742964962568219351">"SMS മുൻഗണന"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"എപ്പോഴും ചോദിക്കുക"</string>
@@ -5342,8 +5355,8 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"കൂടുതല്‍ ചേര്‍ക്കുക"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"സജീവ / SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"നിഷ്‌ക്രിയം / SIM"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"സജീവം / ഡൗൺലോഡ് ചെയ്‌ത SIM"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"നിഷ്‌ക്രിയം / ഡൗൺലോഡ് ചെയ്‌ത SIM"</string>
+    <string name="mobile_network_active_esim" msgid="3984452275968408382">"സജീവം / ഇ-സിം"</string>
+    <string name="mobile_network_inactive_esim" msgid="8777415108263057939">"നിഷ്‌ക്രിയം / ഇ-സിം"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"സിമ്മിൻ്റെ പേരും വർണ്ണവും"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"പേര്"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"വർണ്ണം (അനുയോജ്യമായ ആപ്പുകൾ ഉപയോഗിക്കുന്നത്)"</string>
@@ -5353,7 +5366,8 @@
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"ഈ SIM പ്രവർത്തനരഹിതമാക്കാൻ സിം കാർഡ് നീക്കം ചെയ്യുക"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"<xliff:g id="CARRIER">%1$s</xliff:g> എന്നതിനെ സജീവമാക്കാൻ ടാപ്പ് ചെയ്യുക"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"<xliff:g id="CARRIER">%1$s</xliff:g>എന്നതിലേക്ക് മാറണോ?"</string>
-    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"ഡൗൺലോഡ് ചെയ്‌ത ഒരു SIM മാത്രമേ ഒരു സമയത്ത് സജീവമായിരിക്കൂ.\n\n<xliff:g id="CARRIER1">%1$s</xliff:g> എന്നതിലേക്ക് മാറുന്നത് നിങ്ങളുടെ <xliff:g id="CARRIER2">%2$s</xliff:g> സേവനം റദ്ദാക്കില്ല."</string>
+    <!-- no translation found for mobile_network_esim_swap_confirm_body (592668232798598450) -->
+    <skip />
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"<xliff:g id="CARRIER">%1$s</xliff:g> എന്നതിലേക്ക് മാറുക"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"SIM മായ്‌ക്കുക"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"SIM മായ്ക്കാനാവില്ല"</string>
@@ -5388,7 +5402,7 @@
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"SIM കാർഡ് ഉപയോഗിക്കുക എന്നതിലേക്ക് മാറണോ?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ഉപയോഗിക്കണോ?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"ഒരു സമയത്ത് ഒരു SIM മാത്രമേ സജീവമായിരിക്കൂ.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> എന്നതിലേക്ക് മാറുന്നത് നിങ്ങളുടെ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> സേവനം റദ്ദാക്കില്ല."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"ഡൗൺലോഡ് ചെയ്‌ത ഒരു SIM മാത്രമേ ഒരു സമയത്ത് സജീവമായിരിക്കൂ.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> എന്നതിലേക്ക് മാറുന്നത് നിങ്ങളുടെ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> സേവനം റദ്ദാക്കില്ല."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"ഒരു സമയത്ത് 1 ഇ-സിം മാത്രമേ സജീവമായിരിക്കൂ.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> എന്നതിലേക്ക് മാറുന്നത് നിങ്ങളുടെ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> സേവനം റദ്ദാക്കില്ല."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"ഒരു സമയത്ത് ഒരു SIM മാത്രമേ സജീവമായിരിക്കൂ.\n\nമാറുന്നത് നിങ്ങളുടെ <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> സേവനം റദ്ദാക്കില്ല."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"ഒരേസമയം 2 സിമ്മുകൾ നിങ്ങൾക്ക് ഉപയോഗിക്കാനാകും. <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ഉപയോഗിക്കാൻ, മറ്റൊരു സിം ഓഫാക്കുക."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> എന്നതിലേക്ക് മാറുക"</string>
@@ -5434,8 +5448,8 @@
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"മൊബൈൽ ഡാറ്റ, കോളുകൾ, SMS എന്നിവയ്‌ക്ക് <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ഉപയോഗിക്കും."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"സജീവമായ സിമ്മുകളൊന്നും ലഭ്യമല്ല"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"മൊബൈൽ ഡാറ്റ, കോൾ ഫീച്ചറുകൾ, SMS എന്നിവ പിന്നീട് ഉപയോഗിക്കാൻ നിങ്ങളുടെ നെറ്റ്‌വർക്ക് ക്രമീകരണത്തിലേക്ക് പോകുക"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"സിം കാർഡ്"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"ഡൗൺലോഡ് ചെയ്‌ത ഈ സിം മായ്ക്കണോ?"</string>
+    <string name="sim_card_label" msgid="6263064316075963775">"സിം"</string>
+    <string name="erase_sim_dialog_title" msgid="4742077437653028326">"ഈ ഇ-സിം മായ്ക്കണോ?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"ഈ സിം മായ്ക്കുന്നതിലൂടെ <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> സേവനം ഈ ഉപകരണത്തിൽ നിന്ന് നീക്കം ചെയ്യപ്പെടും.\n\n <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> എന്നതിനുള്ള സേവനം റദ്ദാക്കില്ല."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"മായ്ക്കുക"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"സിം മായ്ക്കുന്നു…"</string>
@@ -5619,8 +5633,8 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"വേഗതയും കവറേജും മെച്ചപ്പെടുത്തുന്നതിന് W+ നെറ്റ്‌വർക്കുകൾ ഉപയോഗിക്കാൻ Google Fi-യെ അനുവദിക്കുക"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ നെറ്റ്‌വർക്ക്"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"സിം"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"ഡൗൺലോഡ് ചെയ്‌ത സിം"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"ഡൗൺലോഡ് ചെയ്‌ത SIM-കൾ"</string>
+    <string name="downloaded_sim_category_title" msgid="2876988650413179752">"ഇ-സിം"</string>
+    <string name="downloaded_sims_category_title" msgid="487799905978489922">"ഇ-സിമ്മുകൾ"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"സജീവം"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"നിഷ്ക്രിയം"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / <xliff:g id="ID_1">%1$s</xliff:g> എന്നിവയ്ക്കുള്ള ഡിഫോൾട്ട്"</string>
@@ -5680,7 +5694,7 @@
     <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"കോൾ ക്രമീകരണം"</string>
     <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"ക്രമീകരണം അപ്‌ഡേറ്റ് ചെയ്യുന്നു..."</string>
     <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"കോൾ ക്രമീകരണ പിശക്"</string>
-    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"നെറ്റ്‌വർക്ക് അല്ലെങ്കിൽ സിം കാർഡ് പിശക്."</string>
+    <string name="smart_forwarding_failed_text" msgid="8682640643264071789">"നെറ്റ്‌വർക്ക് അല്ലെങ്കിൽ സിം പിശക്."</string>
     <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"സിം സജീവമാക്കിയിട്ടില്ല."</string>
     <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"ഫോൺ നമ്പറുകൾ നൽകുക"</string>
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"ഫോൺ നമ്പർ നൽകുക"</string>
@@ -5705,10 +5719,10 @@
     <string name="previous_page_content_description" msgid="6438292457923282991">"മുമ്പത്തേത്"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"അടുത്തത്"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"വർണ്ണ പ്രിവ്യു"</string>
-    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"സിം കാർഡ് ആക്സസ് ചെയ്യാനുള്ള അഭ്യർത്ഥന"</string>
-    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"ഒരു ഉപകരണത്തിന് നിങ്ങളുടെ സിം കാർഡ് ആക്സസ് ചെയ്യണമെന്നുണ്ട്. വിശദാംശങ്ങൾക്ക് ടാപ്പ് ചെയ്യുക."</string>
-    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"സിം കാർഡിലേക്ക് ആക്സസ് അനുവദിക്കണോ?"</string>
-    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Bluetooth ഉപകരണമായ <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> എന്നതിന് നിങ്ങളുടെ സിം കാർഡിലെ ഡാറ്റ ആക്സസ് ചെയ്യണമെന്നുണ്ട്. ഇതിൽ നിങ്ങളുടെ കോൺടാക്റ്റുകൾ ഉൾപ്പെടുന്നു.\n\nകണക്റ്റ് ചെയ്തിരിക്കുമ്പോൾ, <xliff:g id="PHONE_NUMBER">%3$s</xliff:g> എന്ന നമ്പറിലേക്ക് വരുന്ന എല്ലാ കോളുകളും <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> സ്വീകരിക്കും."</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="7351015416346359536">"സിം ആക്‌സസ് അഭ്യർത്ഥന"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="8685623260103018309">"ഒരു ഉപകരണത്തിന് നിങ്ങളുടെ സിം ആക്സസ് ചെയ്യണമെന്നുണ്ട്. വിശദാംശങ്ങൾക്ക് ടാപ്പ് ചെയ്യുക."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="5616323725563125179">"സിമ്മിലേക്ക് ആക്‌സസ് അനുവദിക്കണോ?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="6281997628405909566">"Bluetooth ഉപകരണമായ <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> എന്നതിന് നിങ്ങളുടെ സിമ്മിലെ ഡാറ്റ ആക്സസ് ചെയ്യണമെന്നുണ്ട്. ഇതിൽ നിങ്ങളുടെ കോൺടാക്റ്റുകൾ ഉൾപ്പെടുന്നു.\n\nകണക്റ്റ് ചെയ്തിരിക്കുമ്പോൾ, <xliff:g id="PHONE_NUMBER">%3$s</xliff:g> എന്ന നമ്പറിലേക്ക് വരുന്ന എല്ലാ കോളുകളും <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> സ്വീകരിക്കും."</string>
     <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Bluetooth ഉപകരണം ലഭ്യമാണ്"</string>
     <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"ഒരു ഉപകരണത്തിന് കണക്റ്റ് ചെയ്യണമെന്നുണ്ട്. വിശദാംശങ്ങൾക്ക് ടാപ്പ് ചെയ്യുക."</string>
     <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Bluetooth ഉപകരണത്തിൽ കണ‌ക്റ്റ് ചെയ്യണോ?"</string>
