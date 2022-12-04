@@ -114,6 +114,7 @@ public class MediaVolumePreferenceControllerTest {
     @Test
     public void isSupportEndItem_withBleDevice_returnsTrue() {
         doReturn(true).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
+        doReturn(false).when(sMediaOutputIndicatorWorker).isDeviceBroadcasting();
         doReturn(mDevice1).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
 
         assertThat(mController.isSupportEndItem()).isTrue();
@@ -130,14 +131,35 @@ public class MediaVolumePreferenceControllerTest {
     @Test
     public void isSupportEndItem_withNonBleDevice_returnsFalse() {
         doReturn(true).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
+        doReturn(false).when(sMediaOutputIndicatorWorker).isDeviceBroadcasting();
         doReturn(mDevice2).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
 
         assertThat(mController.isSupportEndItem()).isFalse();
     }
 
     @Test
+    public void isSupportEndItem_deviceIsBroadcastingAndConnectedToNonBleDevice_returnsTrue() {
+        doReturn(true).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
+        doReturn(true).when(sMediaOutputIndicatorWorker).isDeviceBroadcasting();
+        doReturn(mDevice2).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
+
+        assertThat(mController.isSupportEndItem()).isTrue();
+    }
+
+    @Test
+    public void isSupportEndItem_deviceIsNotBroadcastingAndConnectedToNonBleDevice_returnsFalse() {
+        doReturn(true).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
+        doReturn(false).when(sMediaOutputIndicatorWorker).isDeviceBroadcasting();
+        doReturn(mDevice2).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
+
+        assertThat(mController.isSupportEndItem()).isFalse();
+    }
+
+
+    @Test
     public void getSliceEndItem_NotSupportEndItem_getsNullSliceAction() {
         doReturn(true).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
+        doReturn(false).when(sMediaOutputIndicatorWorker).isDeviceBroadcasting();
         doReturn(mDevice2).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
 
         final SliceAction sliceAction = mController.getSliceEndItem(mContext);
