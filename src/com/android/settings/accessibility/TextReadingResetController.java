@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint;
+import com.android.settings.accessibility.TextReadingResetPreference.ButtonStyle;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.instrumentation.SettingsStatsLog;
 
@@ -30,6 +31,8 @@ import com.android.settings.core.instrumentation.SettingsStatsLog;
  * The controller of the reset button in the text and reading options page.
  */
 class TextReadingResetController extends BasePreferenceController {
+    @ButtonStyle
+    private int mButtonStyle;
     private final View.OnClickListener mOnResetClickListener;
 
     @EntryPoint
@@ -63,6 +66,12 @@ class TextReadingResetController extends BasePreferenceController {
                         AccessibilityStatsLogUtils.convertToEntryPoint(mEntryPoint));
             }
         });
+
+        resetPreference.setSetupWizardStyle(mButtonStyle);
+    }
+
+    void setSetupWizardStyle() {
+        mButtonStyle = ButtonStyle.SUW;
     }
 
     /**
