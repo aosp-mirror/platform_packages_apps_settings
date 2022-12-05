@@ -130,7 +130,10 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button">Pair right ear</string>
     <!-- Connected devices settings. Positive button of the dialog to help user to pair left ear of the hearing aid device. Dialog shows when only one of the hearing aid device set is connected. [CHAR LIMIT=20] -->
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button">Pair left ear</string>
-
+    <!-- Connected devices settings. Title of the preference to show the entrance of the hearing device controls page. [CHAR LIMIT=35] -->
+    <string name="bluetooth_device_controls_title">Hearing device controls</string>
+    <!-- Connected devices settings. Summary of the preference to show the entrance of the hearing device controls page. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_device_controls_summary">Hearing device shortcut, hearing aid compatibility</string>
     <!-- Title for related tools section. This section will list related tools below. [CHAR LIMIT=15] -->
     <string name="bluetooth_screen_related">Related</string>
 
@@ -4198,8 +4201,8 @@
 
     <!-- Button text for the accessibility dialog continue to the next screen for hearing aid. [CHAR LIMIT=32] -->
     <string name="accessibility_hearingaid_instruction_continue_button">Continue</string>
-    <!-- Title for the accessibility preference for hearing aid. [CHAR LIMIT=35] -->
-    <string name="accessibility_hearingaid_title">Hearing aids</string>
+    <!-- Title for the accessibility preference for hearing devices. [CHAR LIMIT=35] -->
+    <string name="accessibility_hearingaid_title">Hearing devices</string>
     <!-- Summary for the accessibility preference for hearing aid when not connected. [CHAR LIMIT=50] -->
     <string name="accessibility_hearingaid_not_connected_summary">No hearing aids connected</string>
     <!-- Summary for the accessibility preference for hearing aid when adding new devices. [CHAR LIMIT=50] -->
@@ -4218,6 +4221,29 @@
     <string name="accessibility_hearingaid_left_and_right_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g>, left and right</string>
     <!-- Summary for the accessibility preference for hearing aid when there are more than one set of devices are active. [CHAR LIMIT=50] -->
     <string name="accessibility_hearingaid_more_device_summary"><xliff:g id="device_name" example="GN Hearing Aids">%1$s</xliff:g> +1 more</string>
+    <!-- Title for the hearing device pairing preference. [CHAR LIMIT=20] -->
+    <string name="accessibility_hearing_device_pairing_title">Pair new device</string>
+    <!-- Title for the preference category containing the connected hearing device group. [CHAR LIMIT=20]-->
+    <string name="accessibility_hearing_device_saved_title">Saved devices</string>
+    <!-- Title for the preference category containing the controls of the hearing device. [CHAR LIMIT=35] -->
+    <string name="accessibility_hearing_device_control">Hearing device controls</string>
+    <!-- Title for the accessibility preference for hearing devices. [CHAR LIMIT=35] -->
+    <string name="accessibility_hearing_device_shortcut_title">Hearing device shortcut</string>
+    <!-- Title for the Hearing Aid Compatibility preference in the accessibility page. [CHAR LIMIT=35] -->
+    <string name="accessibility_hac_mode_title">Hearing aid compatibility</string>
+    <!--Summary for the Hearing Aid Compatibility preference in the accessibility page. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_hac_mode_summary">Improve audio for some hearing devices</string>
+    <!-- Description for text in accessibility hearing aids footer. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_hearing_device_footer_summary">Make sure your hearing devices are turned on and in pairing mode</string>
+    <!-- Title for the pair hearing device page. [CHAR LIMIT=25] -->
+    <string name="accessibility_hearing_device_pairing_page_title">Pair hearing device</string>
+    <!-- Title for the preference category containing the list of the available hearing during and after bluetooth scanning devices. [CHAR LIMIT=30] -->
+    <string name="accessibility_found_hearing_devices">Available devices</string>
+    <!-- Title for the preference category containing the all bluetooth devices during and after bluetooth scanning devices. Used when people can not find their hearing device in hearing device pairing list. [CHAR LIMIT=45] -->
+    <string name="accessibility_found_all_devices">Don\u2019t see your hearing device?</string>
+    <!-- Title for listing all bluetooth devices preference in the accessibility page. [CHAR LIMIT=40] -->
+    <string name="accessibility_list_all_devices_title">View all Bluetooth devices</string>
+
     <!-- Title for the accessibility audio adjustment page. [CHAR LIMIT=50] -->
     <string name="accessibility_audio_adjustment_title">Audio adjustment</string>
     <!-- Title for control audio description preference. [CHAR LIMIT=50] -->
