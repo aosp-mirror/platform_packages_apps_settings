@@ -28,7 +28,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
-import com.android.settingslib.spa.framework.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spaprivileged.model.app.resolveActionForApp
@@ -43,6 +44,7 @@ import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun AppSettingsPreference(app: ApplicationInfo) {
     val context = LocalContext.current

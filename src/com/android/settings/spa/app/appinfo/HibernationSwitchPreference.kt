@@ -35,7 +35,8 @@ import com.android.settings.R
 import com.android.settings.Utils.PROPERTY_APP_HIBERNATION_ENABLED
 import com.android.settings.Utils.PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS
 import com.android.settingslib.spa.framework.compose.OverridableFlow
-import com.android.settingslib.spa.framework.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
@@ -51,6 +52,7 @@ import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun HibernationSwitchPreference(app: ApplicationInfo) {
     val context = LocalContext.current
