@@ -3339,6 +3339,24 @@
     <!-- Header shown when the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
     <string name="lockpassword_confirm_your_password_header_frp">Verify password</string>
 
+    <!-- Header shown when prompted for remote device credential validation. [CHAR LIMIT=17] -->
+    <string name="lockpassword_remote_validation_header">Verify it\u0027s you</string>
+
+    <!-- Details shown when pattern is prompted for remote device credential validation. [CHAR LIMIT=100] -->
+    <string name="lockpassword_remote_validation_pattern_details">Enter your other device\u0027s pattern to securely transfer Google Accounts, settings, and more. Your pattern is encrypted.</string>
+    <!-- Details shown when PIN is prompted for remote device credential validation. [CHAR LIMIT=100] -->
+    <string name="lockpassword_remote_validation_pin_details">Enter your other device\u0027s PIN to securely transfer Google Accounts, settings, and more. Your PIN is encrypted.</string>
+    <!-- Details shown when password is prompted for remote device credential validation. [CHAR LIMIT=100] -->
+    <string name="lockpassword_remote_validation_password_details">Enter your other device\u0027s password to securely transfer Google Accounts, settings, and more. Your password is encrypted.</string>
+
+    <!-- Checkbox label to set pattern as new screen lock if remote device credential validation succeeds. [CHAR LIMIT=43] -->
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock">Also use pattern to unlock this device</string>
+    <!-- Checkbox label to set PIN as new screen lock if remote device credential validation succeeds. [CHAR LIMIT=43] -->
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock">Also use PIN to unlock this device</string>
+    <!-- Checkbox label to set password as new screen lock if remote device credential validation succeeds. [CHAR LIMIT=43] -->
+    <string name="lockpassword_remote_validation_set_password_as_screenlock">Also use password to unlock this device</string>
+
+
     <!-- Security & location settings screen, change security method screen instruction if user
          enters incorrect PIN [CHAR LIMIT=30] -->
     <string name="lockpassword_invalid_pin">Wrong PIN</string>
