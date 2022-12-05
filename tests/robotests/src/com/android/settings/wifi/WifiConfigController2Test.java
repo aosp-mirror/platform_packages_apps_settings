@@ -73,10 +73,15 @@ import org.robolectric.shadows.ShadowInputMethodManager;
 import org.robolectric.shadows.ShadowSubscriptionManager;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowConnectivityManager.class)
 public class WifiConfigController2Test {
+
+    static final String WIFI_EAP_TLS_V1_3 = "TLS v1.3";
 
     @Mock
     private WifiConfigUiBase2 mConfigUiBase;
@@ -936,6 +941,26 @@ public class WifiConfigController2Test {
         setUpModifyingSavedCertificateConfigController(null, SAVED_USER_CERT);
 
         assertThat(mEapUserCertSpinner.getSelectedItem()).isEqualTo(SAVED_USER_CERT);
+    }
+
+    @Test
+    public void getEapMinTlsVerSpinner_isTlsV13Supported_containsTlsV13() {
+        Spinner spinner = mController.getEapMinTlsVerSpinner(true /* isTlsV13Supported */);
+
+        List<Object> list = IntStream.range(0, spinner.getAdapter().getCount())
+                .mapToObj(spinner.getAdapter()::getItem)
+                .collect(Collectors.toList());
+        assertThat(list).contains(WIFI_EAP_TLS_V1_3);
+    }
+
+    @Test
+    public void getEapMinTlsVerSpinner_isNotTlsV13Supported_doesNotContainTlsV13() {
+        Spinner spinner = mController.getEapMinTlsVerSpinner(false /* isTlsV13Supported */);
+
+        List<Object> list = IntStream.range(0, spinner.getAdapter().getCount())
+                .mapToObj(spinner.getAdapter()::getItem)
+                .collect(Collectors.toList());
+        assertThat(list).doesNotContain(WIFI_EAP_TLS_V1_3);
     }
 
     private void setUpModifyingSavedCertificateConfigController(String savedCaCertificate,
