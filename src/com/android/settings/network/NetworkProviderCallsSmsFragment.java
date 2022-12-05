@@ -84,7 +84,7 @@ public class NetworkProviderCallsSmsFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.ACTION_UNKNOWN;
+        return SettingsEnums.NETWORK_PROVIDER_CALLS_SMS;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
