@@ -131,10 +131,11 @@ class AppLocalePreferenceTest {
                 AppLocalePreference(APP)
             }
         }
+        composeTestRule.delay()
     }
 
     private companion object {
-        const val PACKAGE_NAME = "packageName"
+        const val PACKAGE_NAME = "package.name"
         const val UID = 123
         val APP = ApplicationInfo().apply {
             packageName = PACKAGE_NAME
