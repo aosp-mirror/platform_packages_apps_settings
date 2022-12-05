@@ -50,6 +50,7 @@ public final class CredentialModel {
     /**
      * Default value if GkPwHandle is invalid.
      */
+    @VisibleForTesting
     public static final long INVALID_GK_PW_HANDLE = 0L;
 
     /**
@@ -115,8 +116,8 @@ public final class CredentialModel {
     /**
      * Check user id is valid or not
      */
-    public static boolean isValidUserId(int userId) {
-        return userId != UserHandle.USER_NULL;
+    public boolean isValidUserId() {
+        return mUserId != UserHandle.USER_NULL;
     }
 
     /**
@@ -132,6 +133,13 @@ public final class CredentialModel {
     public void setChallenge(long value) {
         mUpdateChallengeMillis = mClock.millis();
         mChallenge = value;
+    }
+
+    /**
+     * Check challenge is valid or not
+     */
+    public boolean isValidChallenge() {
+        return mChallenge != INVALID_CHALLENGE;
     }
 
     /**
@@ -153,8 +161,8 @@ public final class CredentialModel {
     /**
      * Check challengeToken is valid or not
      */
-    public static boolean isValidToken(@Nullable byte[] token) {
-        return token != null;
+    public boolean isValidToken() {
+        return mToken != null;
     }
 
     /**
@@ -175,8 +183,8 @@ public final class CredentialModel {
     /**
      * Check gkPwHandle is valid or not
      */
-    public static boolean isValidGkPwHandle(long gkPwHandle) {
-        return gkPwHandle != INVALID_GK_PW_HANDLE;
+    public boolean isValidGkPwHandle() {
+        return mGkPwHandle != INVALID_GK_PW_HANDLE;
     }
 
     /**
@@ -206,10 +214,10 @@ public final class CredentialModel {
                 + ", userId:" + mUserId
                 + ", challenge:{len:" + challengeLen
                 + ", updateMillis:" + mUpdateChallengeMillis + "}"
-                + ", token:{len:" + tokenLen + ", isValid:" + isValidToken(mToken)
+                + ", token:{len:" + tokenLen + ", isValid:" + isValidToken()
                 + ", updateMillis:" + mUpdateTokenMillis + "}"
-                + ", gkPwHandle:{len:" + gkPwHandleLen + ", isValid:"
-                + isValidGkPwHandle(mGkPwHandle) + ", clearMillis:" + mClearGkPwHandleMillis + "}"
+                + ", gkPwHandle:{len:" + gkPwHandleLen + ", isValid:" + isValidGkPwHandle()
+                + ", clearMillis:" + mClearGkPwHandleMillis + "}"
                 + ", mSensorId:{id:" + mSensorId + ", updateMillis:" + mUpdateSensorIdMillis + "}"
                 + " }";
     }

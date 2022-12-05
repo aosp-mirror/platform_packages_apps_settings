@@ -65,6 +65,10 @@ public class AutoCredentialViewModel extends AndroidViewModel {
     @VisibleForTesting
     static final String KEY_CREDENTIAL_MODEL = "credential_model";
 
+    @VisibleForTesting
+    static final String KEY_IS_GENERATING_CHALLENGE_DURING_CHECKING_CREDENTIAL =
+            "is_generating_challenge_during_checking_credential";
+
     private static final boolean DEBUG = false;
 
     /**
@@ -173,6 +177,9 @@ public class AutoCredentialViewModel extends AndroidViewModel {
     @NonNull private final MutableLiveData<Boolean> mGenerateChallengeFailedLiveData =
             new MutableLiveData<>();
 
+    // flag if token is generating through checkCredential()'s generateChallenge()
+    private boolean mIsGeneratingChallengeDuringCheckingCredential;
+
     public AutoCredentialViewModel(
             @NonNull Application application,
             @NonNull LockPatternUtils lockPatternUtils,
@@ -189,10 +196,13 @@ public class AutoCredentialViewModel extends AndroidViewModel {
         final Bundle bundle;
         if (savedInstanceState != null) {
             bundle = savedInstanceState.getBundle(KEY_CREDENTIAL_MODEL);
+            mIsGeneratingChallengeDuringCheckingCredential = savedInstanceState.getBoolean(
+                    KEY_IS_GENERATING_CHALLENGE_DURING_CHECKING_CREDENTIAL);
         } else {
             bundle = intent.getExtras();
         }
-        mCredentialModel = new CredentialModel(bundle, SystemClock.elapsedRealtimeClock());
+        mCredentialModel = new CredentialModel(bundle != null ? bundle : new Bundle(),
+                SystemClock.elapsedRealtimeClock());
 
         if (DEBUG) {
             Log.d(TAG, "setCredentialModel " + mCredentialModel + ", savedInstanceState exist:"
@@ -204,12 +214,32 @@ public class AutoCredentialViewModel extends AndroidViewModel {
      * Handle onSaveInstanceState from activity
      */
     public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putBoolean(KEY_IS_GENERATING_CHALLENGE_DURING_CHECKING_CREDENTIAL,
+                mIsGeneratingChallengeDuringCheckingCredential);
         outState.putBundle(KEY_CREDENTIAL_MODEL, mCredentialModel.getBundle());
     }
 
     @NonNull
     public LiveData<Boolean> getGenerateChallengeFailedLiveData() {
         return mGenerateChallengeFailedLiveData;
+    }
+
+    /**
+     * Get bundle which passing back to FingerprintSettings for late generateChallenge()
+     */
+    @Nullable
+    public Bundle createGeneratingChallengeExtras() {
+        if (!mIsGeneratingChallengeDuringCheckingCredential
+                || !mCredentialModel.isValidToken()
+                || !mCredentialModel.isValidChallenge()) {
+            return null;
+        }
+
+        Bundle bundle = new Bundle();
+        bundle.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
+                mCredentialModel.getToken());
+        bundle.putLong(EXTRA_KEY_CHALLENGE, mCredentialModel.getChallenge());
+        return bundle;
     }
 
     /**
@@ -220,11 +250,11 @@ public class AutoCredentialViewModel extends AndroidViewModel {
         if (isValidCredential()) {
             return CREDENTIAL_VALID;
         }
-        final long gkPwHandle = mCredentialModel.getGkPwHandle();
         if (isUnspecifiedPassword()) {
             return CREDENTIAL_FAIL_NEED_TO_CHOOSE_LOCK;
-        } else if (CredentialModel.isValidGkPwHandle(gkPwHandle)) {
-            generateChallenge(gkPwHandle);
+        } else if (mCredentialModel.isValidGkPwHandle()) {
+            generateChallenge(mCredentialModel.getGkPwHandle());
+            mIsGeneratingChallengeDuringCheckingCredential = true;
             return CREDENTIAL_IS_GENERATING_CHALLENGE;
         } else {
             return CREDENTIAL_FAIL_NEED_TO_CONFIRM_LOCK;
@@ -261,8 +291,7 @@ public class AutoCredentialViewModel extends AndroidViewModel {
     }
 
     private boolean isValidCredential() {
-        return !isUnspecifiedPassword()
-                && CredentialModel.isValidToken(mCredentialModel.getToken());
+        return !isUnspecifiedPassword() && mCredentialModel.isValidToken();
     }
 
     private boolean isUnspecifiedPassword() {
@@ -316,17 +345,14 @@ public class AutoCredentialViewModel extends AndroidViewModel {
     @NonNull
     public Bundle createCredentialIntentExtra() {
         final Bundle retBundle = new Bundle();
-        final long gkPwHandle = mCredentialModel.getGkPwHandle();
-        if (CredentialModel.isValidGkPwHandle(gkPwHandle)) {
-            retBundle.putLong(EXTRA_KEY_GK_PW_HANDLE, gkPwHandle);
+        if (mCredentialModel.isValidGkPwHandle()) {
+            retBundle.putLong(EXTRA_KEY_GK_PW_HANDLE, mCredentialModel.getGkPwHandle());
         }
-        final byte[] token = mCredentialModel.getToken();
-        if (CredentialModel.isValidToken(token)) {
-            retBundle.putByteArray(EXTRA_KEY_CHALLENGE_TOKEN, token);
+        if (mCredentialModel.isValidToken()) {
+            retBundle.putByteArray(EXTRA_KEY_CHALLENGE_TOKEN, mCredentialModel.getToken());
         }
-        final int userId = getUserId();
-        if (CredentialModel.isValidUserId(userId)) {
-            retBundle.putInt(Intent.EXTRA_USER_ID, userId);
+        if (mCredentialModel.isValidUserId()) {
+            retBundle.putInt(Intent.EXTRA_USER_ID, mCredentialModel.getUserId());
         }
         retBundle.putLong(EXTRA_KEY_CHALLENGE, mCredentialModel.getChallenge());
         retBundle.putInt(EXTRA_KEY_SENSOR_ID, mCredentialModel.getSensorId());
@@ -346,9 +372,8 @@ public class AutoCredentialViewModel extends AndroidViewModel {
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, true);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, true);
 
-        final int userId = getUserId();
-        if (CredentialModel.isValidUserId(userId)) {
-            intent.putExtra(Intent.EXTRA_USER_ID, userId);
+        if (mCredentialModel.isValidUserId()) {
+            intent.putExtra(Intent.EXTRA_USER_ID, mCredentialModel.getUserId());
         }
         return intent;
     }
@@ -367,9 +392,8 @@ public class AutoCredentialViewModel extends AndroidViewModel {
                 .setForegroundOnly(true)
                 .setReturnCredentials(true);
 
-        final int userId = mCredentialModel.getUserId();
-        if (CredentialModel.isValidUserId(userId)) {
-            builder.setUserId(userId);
+        if (mCredentialModel.isValidUserId()) {
+            builder.setUserId(mCredentialModel.getUserId());
         }
         return builder.build();
     }
