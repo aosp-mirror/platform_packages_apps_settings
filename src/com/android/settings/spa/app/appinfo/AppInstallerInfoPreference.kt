@@ -27,7 +27,8 @@ import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.applications.AppStoreUtil
 import com.android.settingslib.applications.AppUtils
-import com.android.settingslib.spa.framework.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spaprivileged.framework.common.asUser
@@ -44,6 +45,7 @@ import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun AppInstallerInfoPreference(app: ApplicationInfo) {
     val context = LocalContext.current
