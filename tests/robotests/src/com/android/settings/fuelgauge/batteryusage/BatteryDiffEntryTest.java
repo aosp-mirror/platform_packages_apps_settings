@@ -96,7 +96,6 @@ public final class BatteryDiffEntryTest {
                 new BatteryDiffEntry(
                         mContext,
                         /*foregroundUsageTimeInMs=*/ 10001L,
-                        /*foregroundServiceUsageTimeInMs=*/ 10002L,
                         /*backgroundUsageTimeInMs=*/ 20002L,
                         /*consumePower=*/ 22.0,
                         /*foregroundUsageConsumePower=*/ 10.0,
@@ -115,7 +114,6 @@ public final class BatteryDiffEntryTest {
                 new BatteryDiffEntry(
                         mContext,
                         /*foregroundUsageTimeInMs=*/ 10001L,
-                        /*foregroundServiceUsageTimeInMs=*/ 10002L,
                         /*backgroundUsageTimeInMs=*/ 20002L,
                         /*consumePower=*/ 22.0,
                         /*foregroundUsageConsumePower=*/ 10.0,
@@ -493,7 +491,6 @@ public final class BatteryDiffEntryTest {
         return new BatteryDiffEntry(
                 mContext,
                 /*foregroundUsageTimeInMs=*/ 0,
-                /*foregroundServiceUsageTimeInMs=*/ 0,
                 /*backgroundUsageTimeInMs=*/ 0,
                 /*consumePower=*/ 0,
                 /*foregroundUsageConsumePower=*/ 0,
@@ -508,7 +505,6 @@ public final class BatteryDiffEntryTest {
         final BatteryDiffEntry entry = new BatteryDiffEntry(
                 mContext,
                 /*foregroundUsageTimeInMs=*/ 0,
-                /*foregroundServiceUsageTimeInMs=*/ 0,
                 /*backgroundUsageTimeInMs=*/ 0,
                 consumePower,
                 /*foregroundUsageConsumePower=*/ 0,

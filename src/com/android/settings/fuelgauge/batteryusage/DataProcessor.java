@@ -479,7 +479,6 @@ public final class DataProcessor {
                 final BatteryDiffEntry currentBatteryDiffEntry = new BatteryDiffEntry(
                         context,
                         entry.mForegroundUsageTimeInMs,
-                        entry.mForegroundServiceUsageTimeInMs,
                         entry.mBackgroundUsageTimeInMs,
                         entry.mConsumePower,
                         entry.mForegroundUsageConsumePower,
@@ -573,12 +572,10 @@ public final class DataProcessor {
         return batteryEntryList.stream()
                 .filter(entry -> {
                     final long foregroundMs = entry.getTimeInForegroundMs();
-                    final long foregroundServiceMs = entry.getTimeInForegroundServiceMs();
                     final long backgroundMs = entry.getTimeInBackgroundMs();
                     return entry.getConsumedPower() > 0
                             || (entry.getConsumedPower() == 0
-                            && (foregroundMs != 0 || foregroundServiceMs != 0
-                            || backgroundMs != 0));
+                            && (foregroundMs != 0 || backgroundMs != 0));
                 })
                 .map(entry -> ConvertUtils.convertToBatteryHistEntry(
                                 entry,
@@ -699,14 +696,9 @@ public final class DataProcessor {
             if (lowerEntry != null) {
                 final boolean invalidForegroundUsageTime =
                         lowerEntry.mForegroundUsageTimeInMs > upperEntry.mForegroundUsageTimeInMs;
-                final boolean invalidForegroundServiceUsageTime =
-                        lowerEntry.mForegroundServiceUsageTimeInMs
-                                > upperEntry.mForegroundServiceUsageTimeInMs;
                 final boolean invalidBackgroundUsageTime =
                         lowerEntry.mBackgroundUsageTimeInMs > upperEntry.mBackgroundUsageTimeInMs;
-                if (invalidForegroundUsageTime
-                        || invalidForegroundServiceUsageTime
-                        || invalidBackgroundUsageTime) {
+                if (invalidForegroundUsageTime || invalidBackgroundUsageTime) {
                     newHistEntryMap.put(entryKey, upperEntry);
                     log(context, "abnormal reset condition is found", currentSlot, upperEntry);
                     continue;
@@ -937,11 +929,6 @@ public final class DataProcessor {
                             currentEntry.mForegroundUsageTimeInMs,
                             nextEntry.mForegroundUsageTimeInMs,
                             nextTwoEntry.mForegroundUsageTimeInMs);
-            long foregroundServiceUsageTimeInMs =
-                    getDiffValue(
-                            currentEntry.mForegroundServiceUsageTimeInMs,
-                            nextEntry.mForegroundServiceUsageTimeInMs,
-                            nextTwoEntry.mForegroundServiceUsageTimeInMs);
             long backgroundUsageTimeInMs =
                     getDiffValue(
                             currentEntry.mBackgroundUsageTimeInMs,
@@ -974,7 +961,6 @@ public final class DataProcessor {
                             nextTwoEntry.mCachedUsageConsumePower);
             // Excludes entry since we don't have enough data to calculate.
             if (foregroundUsageTimeInMs == 0
-                    && foregroundServiceUsageTimeInMs == 0
                     && backgroundUsageTimeInMs == 0
                     && consumePower == 0) {
                 continue;
@@ -986,7 +972,6 @@ public final class DataProcessor {
             }
             // Forces refine the cumulative value since it may introduce deviation error since we
             // will apply the interpolation arithmetic.
-            // TODO: update this value after the new API for foreground service is completed.
             final float totalUsageTimeInMs =
                     foregroundUsageTimeInMs + backgroundUsageTimeInMs;
             if (totalUsageTimeInMs > TOTAL_HOURLY_TIME_THRESHOLD) {
@@ -999,8 +984,6 @@ public final class DataProcessor {
                 }
                 foregroundUsageTimeInMs =
                         Math.round(foregroundUsageTimeInMs * ratio);
-                foregroundServiceUsageTimeInMs =
-                        Math.round(foregroundServiceUsageTimeInMs * ratio);
                 backgroundUsageTimeInMs =
                         Math.round(backgroundUsageTimeInMs * ratio);
                 consumePower = consumePower * ratio;
@@ -1019,7 +1002,6 @@ public final class DataProcessor {
                 final BatteryDiffEntry currentBatteryDiffEntry = new BatteryDiffEntry(
                         context,
                         foregroundUsageTimeInMs,
-                        foregroundServiceUsageTimeInMs,
                         backgroundUsageTimeInMs,
                         consumePower,
                         foregroundUsageConsumePower,
@@ -1105,8 +1087,6 @@ public final class DataProcessor {
             // Sums up some field data into the existing one.
             oldBatteryDiffEntry.mForegroundUsageTimeInMs +=
                     entry.mForegroundUsageTimeInMs;
-            oldBatteryDiffEntry.mForegroundServiceUsageTimeInMs +=
-                    entry.mForegroundServiceUsageTimeInMs;
             oldBatteryDiffEntry.mBackgroundUsageTimeInMs +=
                     entry.mBackgroundUsageTimeInMs;
             oldBatteryDiffEntry.mConsumePower += entry.mConsumePower;
@@ -1404,7 +1384,6 @@ public final class DataProcessor {
         final BatteryDiffEntry batteryDiffEntry = new BatteryDiffEntry(
                 context,
                 /*foregroundUsageTimeInMs=*/ 0,
-                /*foregroundServiceUsageTimeInMs=*/ 0,
                 /*backgroundUsageTimeInMs=*/ 0,
                 consumePower,
                 /*foregroundUsageConsumePower=*/ 0,

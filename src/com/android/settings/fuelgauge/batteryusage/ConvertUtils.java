@@ -219,7 +219,6 @@ public final class ConvertUtils {
                     .setPercentOfTotal(entry.mPercent)
                     .setDrainType(entry.getPowerComponentId())
                     .setForegroundUsageTimeInMs(entry.getTimeInForegroundMs())
-                    .setForegroundServiceUsageTimeInMs(entry.getTimeInForegroundServiceMs())
                     .setBackgroundUsageTimeInMs(entry.getTimeInBackgroundMs());
         }
 
