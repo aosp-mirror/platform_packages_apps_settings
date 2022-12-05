@@ -37,6 +37,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.lang.annotation.Retention;
@@ -168,6 +169,9 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
                         v -> showDialog(DialogEnums.DIALOG_RESET_SETTINGS));
         resetController.setEntryPoint(mEntryPoint);
         controllers.add(resetController);
+        if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            resetController.setSetupWizardStyle();
+        }
 
         return controllers;
     }
