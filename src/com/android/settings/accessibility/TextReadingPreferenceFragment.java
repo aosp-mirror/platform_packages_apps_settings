@@ -64,7 +64,12 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
     static final String RESET_KEY = "reset";
     private static final String PREVIEW_KEY = "preview";
     private static final String NEED_RESET_SETTINGS = "need_reset_settings";
+    private static final String LAST_PREVIEW_INDEX = "last_preview_index";
+    private static final int UNKNOWN_INDEX = -1;
+
     private FontWeightAdjustmentPreferenceController mFontWeightAdjustmentController;
+    private TextReadingPreviewController mPreviewController;
+    private int mLastPreviewIndex = UNKNOWN_INDEX;
     private int mEntryPoint = EntryPoint.UNKNOWN_ENTRY;
 
     /**
@@ -95,14 +100,20 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
     boolean mNeedResetSettings;
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         mNeedResetSettings = false;
         mResetStateListeners = getResetStateListeners();
 
-        if (icicle != null && icicle.getBoolean(NEED_RESET_SETTINGS)) {
-            mResetStateListeners.forEach(ResetStateListener::resetState);
+        if (savedInstanceState != null) {
+            if (savedInstanceState.getBoolean(NEED_RESET_SETTINGS)) {
+                mResetStateListeners.forEach(ResetStateListener::resetState);
+            }
+
+            if (savedInstanceState.containsKey(LAST_PREVIEW_INDEX)) {
+                mLastPreviewIndex = savedInstanceState.getInt(LAST_PREVIEW_INDEX);
+            }
         }
     }
 
@@ -139,19 +150,19 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
         final FontSizeData fontSizeData = new FontSizeData(context);
         final DisplaySizeData displaySizeData = createDisplaySizeData(context);
 
-        final TextReadingPreviewController previewController = new TextReadingPreviewController(
-                context, PREVIEW_KEY, fontSizeData, displaySizeData);
-        previewController.setEntryPoint(mEntryPoint);
-        controllers.add(previewController);
+        mPreviewController = new TextReadingPreviewController(context, PREVIEW_KEY, fontSizeData,
+                displaySizeData);
+        mPreviewController.setEntryPoint(mEntryPoint);
+        controllers.add(mPreviewController);
 
         final PreviewSizeSeekBarController fontSizeController = new PreviewSizeSeekBarController(
                 context, FONT_SIZE_KEY, fontSizeData);
-        fontSizeController.setInteractionListener(previewController);
+        fontSizeController.setInteractionListener(mPreviewController);
         controllers.add(fontSizeController);
 
         final PreviewSizeSeekBarController displaySizeController = new PreviewSizeSeekBarController(
                 context, DISPLAY_SIZE_KEY, displaySizeData);
-        displaySizeController.setInteractionListener(previewController);
+        displaySizeController.setInteractionListener(mPreviewController);
         controllers.add(displaySizeController);
 
         mFontWeightAdjustmentController =
@@ -205,6 +216,17 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
     public void onSaveInstanceState(Bundle outState) {
         if (mNeedResetSettings) {
             outState.putBoolean(NEED_RESET_SETTINGS, true);
+        }
+
+        outState.putInt(LAST_PREVIEW_INDEX, mPreviewController.getCurrentItem());
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        if (mLastPreviewIndex != UNKNOWN_INDEX) {
+            mPreviewController.setCurrentItem(mLastPreviewIndex);
         }
     }
 
