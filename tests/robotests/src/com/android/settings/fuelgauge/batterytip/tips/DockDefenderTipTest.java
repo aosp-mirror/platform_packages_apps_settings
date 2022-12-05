@@ -109,9 +109,19 @@ public class DockDefenderTipTest {
     }
 
     @Test
-    public void testGetIconId() {
-        assertThat(mDockDefenderTipFutureBypass.getIconId()).isEqualTo(
+    public void testGetIconId_dockDefenderActive_getProtectedIcon() {
+        assertThat(mDockDefenderTipActive.getIconId()).isEqualTo(
                 R.drawable.ic_battery_status_protected_24dp);
+    }
+
+    @Test
+    public void testGetIconId_dockDefenderNotActive_getUntriggeredIcon() {
+        assertThat(mDockDefenderTipFutureBypass.getIconId()).isEqualTo(
+                R.drawable.ic_battery_dock_defender_untriggered_24dp);
+        assertThat(mDockDefenderTipTemporarilyBypassed.getIconId()).isEqualTo(
+                R.drawable.ic_battery_dock_defender_untriggered_24dp);
+        assertThat(mDockDefenderTipDisabled.getIconId()).isEqualTo(
+                R.drawable.ic_battery_dock_defender_untriggered_24dp);
     }
 
     @Test
