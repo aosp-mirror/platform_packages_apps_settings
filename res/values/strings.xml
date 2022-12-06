@@ -8042,15 +8042,15 @@
     <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: switch to alarms only forever. -->
     <string name="zen_mode_summary_alarms_only_indefinite">Change to alarms only indefinitely</string>
     <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: switch to alarms only for < 60 minutes. -->
-    <plurals name="zen_mode_summary_alarms_only_by_minute">
-        <item quantity="one">Change to alarms only for one minute until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
-        <item quantity="other">Change to alarms only for <xliff:g id="duration" example="2">%1$d</xliff:g> minutes (until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g>)</item>
-    </plurals>
+    <string name="zen_mode_summary_alarms_only_by_minute">{count, plural,
+      =1      {Change to alarms only for one minute until {time}}
+      other   {Change to alarms only for # minutes (until {time})}
+    }</string>
     <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: switch to alarms only for N hours. -->
-    <plurals name="zen_mode_summary_alarms_only_by_hour">
-        <item quantity="one">Change to alarms only for one hour until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
-        <item quantity="other">Change to alarms only for <xliff:g id="duration" example="2">%1$d</xliff:g> hours until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
-    </plurals>
+    <string name="zen_mode_summary_alarms_only_by_hour">{count, plural,
+      =1      {Change to alarms only for one hour until {time}}
+      other   {Change to alarms only for # hours until {time}}
+    }</string>
     <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: switch to alarms only until a specific time. -->
     <string name="zen_mode_summary_alarms_only_by_time">Change to alarms only until <xliff:g id="formattedTime" example="10:00 PM">%1$s</xliff:g></string>
     <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: Turn on all notifications. -->
@@ -8241,14 +8241,14 @@
     <string name="app_launch_footer">An app can verify links to automatically open in the app.</string>
 
     <!-- Title, message and button for verified links dialog. -->
-    <plurals name="app_launch_verified_links_title">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> verified link</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> verified links</item>
-    </plurals>
-    <plurals name="app_launch_verified_links_message">
-        <item quantity="one">This link is verified and automatically opens in this app.</item>
-        <item quantity="other">These links are verified and automatically open in this app.</item>
-    </plurals>
+    <string name="app_launch_verified_links_title">{count, plural,
+      =1      {# verified link}
+      other   {# verified links}
+    }</string>
+    <string name="app_launch_verified_links_message">{count, plural,
+      =1      {This link is verified and automatically opens in this app.}
+      other   {These links are verified and automatically open in this app.}
+    }</string>
     <!-- OK button for verified links dialog. [CHAR LIMIT=20] -->
     <string name="app_launch_dialog_ok">OK</string>
     <!-- Info icon description of the verified links. [CHAR LIMIT=NONE] -->
@@ -8260,10 +8260,10 @@
     <string name="app_launch_dialog_cancel">Cancel</string>
 
     <!-- Title and button for supported links dialog. -->
-    <plurals name="app_launch_supported_links_title">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> supported link</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> supported links</item>
-    </plurals>
+    <string name="app_launch_supported_links_title">{count, plural,
+      =1      {# supported link}
+      other   {# supported links}
+    }</string>
     <!-- Add button for supported links dialog. [CHAR LIMIT=20] -->
     <string name="app_launch_supported_links_add">Add</string>
     <!-- The subtext of the link title in supported links dialog. [CHAR LIMIT=30] -->
@@ -8294,16 +8294,16 @@
     <string name="notifications_enabled_with_info"><xliff:g id="notifications_sent" example="~6 per week">%1$s</xliff:g> / <xliff:g id="notifications_categories_off" example="3 categories turned off">%2$s</xliff:g> </string>
 
     <!-- Permissions preference summary [CHAR LIMIT=40] -->
-    <plurals name="notifications_categories_off">
-        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> category turned off</item>
-        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> categories turned off</item>
-    </plurals>
+    <string name="notifications_categories_off">{count, plural,
+      =1      {# category turned off}
+      other   {# categories turned off}
+    }</string>
 
     <!-- Runtime permissions preference summary.  Number of additional permissions granted. [CHAR LIMIT=40] -->
-    <plurals name="runtime_permissions_additional_count">
-        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> additional permission</item>
-        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> additional permissions</item>
-    </plurals>
+    <string name="runtime_permissions_additional_count">{count, plural,
+      =1      {# additional permission}
+      other   {# additional permissions}
+    }</string>
 
     <!-- Runtime permissions preference summary, shown when the app has no permissions granted. [CHAR LIMIT=40] -->
     <string name="runtime_permissions_summary_no_permissions_granted">No permissions granted</string>
@@ -8324,10 +8324,10 @@
     <string name="unused_apps">Unused apps</string>
 
     <!-- Summary of number of apps that have not been used for months. [CHAR LIMIT=40]-->
-    <plurals name="unused_apps_summary">
-        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> unused app</item>
-        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> unused apps</item>
-    </plurals>
+    <string name="unused_apps_summary">{count, plural,
+      =1      {# unused app}
+      other   {# unused apps}
+    }</string>
 
     <!-- Label for category for unused app settings for an app. [CHAR LIMIT=40]-->
     <string name="unused_apps_category">Unused app settings</string>
@@ -8382,10 +8382,10 @@
     <string name="app_link_open_never">Don&#8217;t allow app to open links</string>
 
     <!-- Summary for allow app to open supported links [CHAR LIMIT=42] -->
-    <plurals name="app_link_open_always_summary">
-        <item quantity="one">App claims to handle <xliff:g id="count">%d</xliff:g> link</item>
-        <item quantity="other">App claims to handle <xliff:g id="count">%d</xliff:g> links</item>
-    </plurals>
+    <string name="app_link_open_always_summary">{count, plural,
+      =1      {App claims to handle # link}
+      other   {App claims to handle # links}
+    }</string>
 
     <!-- Footer of open supported links settings [CHAR LIMIT=NONE] -->
     <string name="open_supported_links_footer">App claims to handle following links:</string>
@@ -8645,10 +8645,10 @@
     <string name="memory_usage_apps">Memory used by apps</string>
 
     <!-- Description of number of apps using memory [CHAR LIMIT=NONE] -->
-    <plurals name="memory_usage_apps_summary">
-        <item quantity="one">1 app used memory in the last <xliff:g id="duration" example="3 hours">%2$s</xliff:g></item>
-        <item quantity="other"><xliff:g id="count" example="10">%1$d</xliff:g> apps used memory in the last <xliff:g id="duration" example="3 hours">%2$s</xliff:g></item>
-    </plurals>
+    <string name="memory_usage_apps_summary">{count, plural,
+      =1      {1 app used memory in the last {time}}
+      other   {# apps used memory in the last {time}}
+    }</string>
 
     <!-- Label for frequency that the app is runnig (e.g. always, sometimes, etc.) [CHAR LIMIT=25] -->
     <string name="running_frequency">Frequency</string>
@@ -9037,10 +9037,10 @@
     <string name="data_usage_other_apps">Other apps included in usage</string>
 
     <!-- Description of number of apps allowed to ignore Data Saver [CHAR LIMIT=NONE] -->
-    <plurals name="data_saver_unrestricted_summary">
-        <item quantity="one">1 app allowed to use unrestricted data when Data Saver is on</item>
-        <item quantity="other"><xliff:g id="count" example="10">%1$d</xliff:g> apps allowed to use unrestricted data when Data Saver is on</item>
-    </plurals>
+    <string name="data_saver_unrestricted_summary">{count, plural,
+      =1      {1 app allowed to use unrestricted data when Data Saver is on}
+      other   {# apps allowed to use unrestricted data when Data Saver is on}
+    }</string>
 
     <!-- Data usage title text [CHAR LIMIT=30] -->
     <string name="data_usage_title">Primary data</string>
@@ -9064,10 +9064,10 @@
     <string name="data_usage_chart_no_data_content_description">No data in this date range</string>
 
     <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
-    <plurals name="billing_cycle_days_left">
-        <item quantity="one">%d day left</item>
-        <item quantity="other">%d days left</item>
-    </plurals>
+    <string name="billing_cycle_days_left">{count, plural,
+      =1      {# day left}
+      other   {# days left}
+    }</string>
 
     <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
     <string name="billing_cycle_none_left">No time remaining</string>
