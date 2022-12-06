@@ -28,14 +28,12 @@ import com.android.settingslib.spa.widget.scaffold.MoreOptionsScope
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Spy
 
 @RunWith(AndroidJUnit4::class)
 class ResetAppPreferencesTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    @Spy
     private val context: Context = ApplicationProvider.getApplicationContext()
 
     @Test
