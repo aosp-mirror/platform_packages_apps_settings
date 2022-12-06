@@ -102,6 +102,8 @@ public class CustomizableLockScreenQuickAffordancesPreferenceControllerTest {
         assertThat(intentCaptor.getValue().getPackage()).isEqualTo(
                 mContext.getString(R.string.config_wallpaper_picker_package));
         assertThat(intentCaptor.getValue().getAction()).isEqualTo(Intent.ACTION_SET_WALLPAPER);
+        assertThat(intentCaptor.getValue().getStringExtra("destination"))
+                .isEqualTo("quick_affordances");
     }
 
     @Test
