@@ -16,6 +16,9 @@
 
 package com.android.settings.bluetooth;
 
+import static com.android.settings.bluetooth.BluetoothDeviceDetailsFragment.FEATURE_HEAD_TRACKING_ORDER;
+import static com.android.settings.bluetooth.BluetoothDeviceDetailsFragment.FEATURE_SPATIAL_AUDIO_ORDER;
+
 import android.content.Context;
 import android.media.AudioDeviceAttributes;
 import android.media.AudioDeviceInfo;
@@ -42,7 +45,7 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
         implements Preference.OnPreferenceClickListener {
 
     private static final String TAG = "BluetoothSpatialAudioController";
-    private static final String KEY_SPATIAL_AUDIO_GROUP = "spatial_audio_group";
+    private static final String KEY_FEATURE_CONTROLS_GROUP = "feature_controls_group";
     private static final String KEY_SPATIAL_AUDIO = "spatial_audio";
     private static final String KEY_HEAD_TRACKING = "head_tracking";
 
@@ -95,13 +98,12 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
 
     @Override
     public String getPreferenceKey() {
-        return KEY_SPATIAL_AUDIO_GROUP;
+        return KEY_FEATURE_CONTROLS_GROUP;
     }
 
     @Override
     protected void init(PreferenceScreen screen) {
         mProfilesContainer = screen.findPreference(getPreferenceKey());
-        mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
         refresh();
     }
 
@@ -110,6 +112,7 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
         SwitchPreference spatialAudioPref = mProfilesContainer.findPreference(KEY_SPATIAL_AUDIO);
         if (spatialAudioPref == null) {
             spatialAudioPref = createSpatialAudioPreference(mProfilesContainer.getContext());
+            spatialAudioPref.setOrder(FEATURE_SPATIAL_AUDIO_ORDER);
             mProfilesContainer.addPreference(spatialAudioPref);
         }
 
@@ -120,6 +123,7 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
         SwitchPreference headTrackingPref = mProfilesContainer.findPreference(KEY_HEAD_TRACKING);
         if (headTrackingPref == null) {
             headTrackingPref = createHeadTrackingPreference(mProfilesContainer.getContext());
+            headTrackingPref.setOrder(FEATURE_HEAD_TRACKING_ORDER);
             mProfilesContainer.addPreference(headTrackingPref);
         }
 
