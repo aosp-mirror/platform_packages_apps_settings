@@ -55,7 +55,11 @@ android_library {
     ],
 
     srcs: ["src/**/*.java", "src/**/*.kt"],
-    resource_dirs: ["res", "res-product"],
+    resource_dirs: [
+        "res",
+        "res-export", // for external usage
+        "res-product",
+    ],
     static_libs: [
         "androidx-constraintlayout_constraintlayout",
         "androidx.slice_slice-builders",
