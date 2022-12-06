@@ -41,6 +41,12 @@
         <item name="android:textAppearance">@style/TextAppearance.info_value</item>
     </style>
 
+    <style name="info_small">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textAppearance">@style/TextAppearance.info_small</item>
+    </style>
+
     <style name="info_layout">
         <item name="android:orientation">vertical</item>
         <item name="android:paddingStart">10dip</item>
@@ -211,6 +217,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TextAppearance.info_small">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
     <style name="TextAppearance.info_value">
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">normal</item>
@@ -290,6 +301,15 @@
         <item name="android:gravity">center</item>
         <item name="android:focusable">true</item>
         <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="TextAppearance.NotificationHistory" parent="@android:style/Theme.DeviceDefault.DayNight">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.NotificationHistory.AppName">
+        <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="TextAppearance.ContextualCardDismissalText"
@@ -479,6 +499,10 @@
         <item name="headerSubtitleSize">14dp</item>
     </style>
 
+    <style name="Widget.SliceView.Panel.Slider.LargeIcon">
+        <item name="rowStyle">@style/SliceRow.Slider.LargeIcon</item>
+    </style>
+
     <style name="SliceRow">
         <!-- 2dp start padding for the start icon -->
         <item name="titleItemStartPadding">2dp</item>
@@ -528,6 +552,15 @@
         <item name="iconSize">25dp</item>
     </style>
 
+    <style name="SliceRow.Slider.LargeIcon">
+        <!-- 10dp start padding for the start icon -->
+        <item name="titleItemStartPadding">10dp</item>
+        <!-- Title icon size -->
+        <item name="iconSize">36dp</item>
+        <!-- RecycleView item animator -->
+        <item name="disableRecyclerViewItemAnimator">true</item>
+    </style>
+
     <style name="DisclaimerPositiveButton" parent="@style/SudGlifButton.Primary">
         <item name="android:layout_margin">16dp</item>
         <item name="android:paddingStart">8dp</item>
@@ -566,6 +599,10 @@
         <item name="android:textSize">@dimen/notification_importance_button_text</item>
         <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
         <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TextAppearance.NotificationImportanceButton.Selected" parent="TextAppearance.NotificationImportanceButton">
+        <item name="android:textColor">?android:attr/colorAccent</item>
     </style>
 
     <style name="TextAppearance.NotificationImportanceButton.Unselected" parent="TextAppearance.NotificationImportanceButton">
@@ -723,6 +760,16 @@
         <item name="android:textColor">?android:attr/textColorSecondary</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:gravity">start</item>
+    </style>
+
+    <style name="TextAppearance.HeadLineFontFamily"
+           parent="@*android:style/TextAppearance.DeviceDefault.Title">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
+    </style>
+
+    <style name="TextAppearance.HeadLineFontFamily.Subhead"
+           parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
     </style>
 
     <style name="HomepageTitleText" parent="CollapsingToolbarTitle.Expanded">

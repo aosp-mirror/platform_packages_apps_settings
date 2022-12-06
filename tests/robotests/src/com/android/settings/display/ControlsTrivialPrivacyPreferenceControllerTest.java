@@ -21,14 +21,10 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.MatrixCursor;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
@@ -44,7 +40,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
@@ -67,11 +62,9 @@ public class ControlsTrivialPrivacyPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(ApplicationProvider.getApplicationContext());
-        mContentResolver = spy(mContext.getContentResolver());
-        when(mContext.getContentResolver()).thenReturn(mContentResolver);
+        mContext = ApplicationProvider.getApplicationContext();
 
-        setCustomizableLockScreenQuickAffordancesEnabled(false);
+        mContentResolver = mContext.getContentResolver();
 
         mController = new ControlsTrivialPrivacyPreferenceController(mContext, TEST_KEY);
     }
@@ -138,32 +131,11 @@ public class ControlsTrivialPrivacyPreferenceControllerTest {
     }
 
     @Test
-    public void updateStateWithCustomizableLockScreenQuickAffordancesEnabled() {
-        setCustomizableLockScreenQuickAffordancesEnabled(true);
-        Settings.Secure.putInt(mContentResolver, DEPENDENCY_SETTING_KEY, 0);
-
-        mController.updateState(mPreference);
-
-        verify(mPreference).setEnabled(true);
-        verify(mPreference, atLeastOnce()).setSummary(
-                mContext.getString(R.string.lockscreen_trivial_controls_summary));
-    }
-
-    @Test
     public void getAvailabilityStatusWithoutDeviceControls() {
         Settings.Secure.putInt(mContentResolver, DEPENDENCY_SETTING_KEY, 0);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.DISABLED_DEPENDENT_SETTING);
-    }
-
-    @Test
-    public void getAvailabilityStatusWithCustomizableLockScreenQuickAffordancesEnabled() {
-        setCustomizableLockScreenQuickAffordancesEnabled(true);
-        Settings.Secure.putInt(mContentResolver, DEPENDENCY_SETTING_KEY, 0);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE);
     }
 
     @Test
@@ -181,23 +153,5 @@ public class ControlsTrivialPrivacyPreferenceControllerTest {
                 .findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);
         verify(mPreference).setDependency(anyString());
-    }
-
-    private void setCustomizableLockScreenQuickAffordancesEnabled(boolean isEnabled) {
-        when(
-                mContentResolver.query(
-                        CustomizableLockScreenUtils.FLAGS_URI, null, null, null))
-                .thenAnswer((Answer<Cursor>) invocation -> {
-                    final MatrixCursor cursor = new MatrixCursor(
-                            new String[] {
-                                    CustomizableLockScreenUtils.NAME,
-                                    CustomizableLockScreenUtils.VALUE
-                            });
-                    cursor.addRow(
-                            new Object[] {
-                                    CustomizableLockScreenUtils.ENABLED_FLAG, isEnabled ? 1 : 0
-                            });
-                    return cursor;
-                });
     }
 }

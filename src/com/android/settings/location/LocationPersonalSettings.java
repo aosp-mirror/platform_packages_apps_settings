@@ -32,7 +32,7 @@ public class LocationPersonalSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.LOCATION_PERSONAL;
+        return SettingsEnums.LOCATION;
     }
 
     @Override

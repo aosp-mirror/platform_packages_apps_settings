@@ -37,7 +37,7 @@ public class BluetoothScanningFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.LOCATION_SERVICES_BLUETOOTH_SCANNING;
+        return SettingsEnums.LOCATION_SERVICES;
     }
 
     @Override
