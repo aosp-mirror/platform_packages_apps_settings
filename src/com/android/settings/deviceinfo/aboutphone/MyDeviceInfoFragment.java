@@ -51,6 +51,8 @@ import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @SearchIndexable
 public class MyDeviceInfoFragment extends DashboardFragment
@@ -105,14 +107,9 @@ public class MyDeviceInfoFragment extends DashboardFragment
             Context context, MyDeviceInfoFragment fragment, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
 
-        final SlotSimStatus slotSimStatus = new SlotSimStatus(context);
-        for (int slotIndex = 0; slotIndex < slotSimStatus.size(); slotIndex ++) {
-            SimStatusPreferenceController slotRecord =
-                    new SimStatusPreferenceController(context,
-                    slotSimStatus.getPreferenceKey(slotIndex));
-            slotRecord.init(fragment, slotSimStatus);
-            controllers.add(slotRecord);
-        }
+        final ExecutorService executor = (fragment == null) ? null :
+                Executors.newSingleThreadExecutor();
+        final SlotSimStatus slotSimStatus = new SlotSimStatus(context, executor);
 
         controllers.add(new IpAddressPreferenceController(context, lifecycle));
         controllers.add(new WifiMacAddressPreferenceController(context, lifecycle));
@@ -123,6 +120,17 @@ public class MyDeviceInfoFragment extends DashboardFragment
         controllers.add(new FeedbackPreferenceController(fragment, context));
         controllers.add(new FccEquipmentIdPreferenceController(context));
         controllers.add(new UptimePreferenceController(context, lifecycle));
+
+        for (int slotIndex = 0; slotIndex < slotSimStatus.size(); slotIndex ++) {
+            SimStatusPreferenceController slotRecord =
+                    new SimStatusPreferenceController(context,
+                    slotSimStatus.getPreferenceKey(slotIndex));
+            slotRecord.init(fragment, slotSimStatus);
+            controllers.add(slotRecord);
+        }
+        if (executor != null) {
+            executor.shutdown();
+        }
         return controllers;
     }
 
