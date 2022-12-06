@@ -16,34 +16,25 @@
 
 package com.android.settings.security;
 
-import static android.app.admin.DevicePolicyResources.Strings.Settings.FINGERPRINT_FOR_WORK;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.MANAGED_DEVICE_INFO;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.MANAGE_DEVICE_ADMIN_APPS;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_SECURITY_TITLE;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_SET_UNLOCK_LAUNCH_PICKER_TITLE;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_UNIFY_LOCKS_SUMMARY;
-
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
-import com.android.settings.biometrics.combination.CombinedBiometricProfileStatusPreferenceController;
-import com.android.settings.biometrics.face.FaceProfileStatusPreferenceController;
-import com.android.settings.biometrics.fingerprint.FingerprintProfileStatusPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
+import com.android.settings.safetycenter.SafetyCenterUtils;
+import com.android.settings.safetycenter.SafetyCenterUtils.EnterpriseOverrideString;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
-import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,7 +46,6 @@ import java.util.List;
 public class SecurityAdvancedSettings extends DashboardFragment {
 
     private static final String TAG = "SecurityAdvancedSettings";
-    private static final String WORK_PROFILE_SECURITY_CATEGORY = "security_category_profile";
 
     /** Used in case of old Security settings when SafetyCenter is disabled */
     private static final String CATEGORY_SECURITY_LEGACY_ADVANCED_SETTINGS =
@@ -64,22 +54,13 @@ public class SecurityAdvancedSettings extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        replaceEnterpriseStringTitle("unlock_set_or_change_profile",
-                WORK_PROFILE_SET_UNLOCK_LAUNCH_PICKER_TITLE,
-                R.string.unlock_set_unlock_launch_picker_title_profile);
-        replaceEnterpriseStringSummary("unification",
-                WORK_PROFILE_UNIFY_LOCKS_SUMMARY,
-                R.string.lock_settings_profile_unification_summary);
-        replaceEnterpriseStringTitle("fingerprint_settings_profile",
-                FINGERPRINT_FOR_WORK,
-                R.string.security_settings_work_fingerprint_preference_title);
-        replaceEnterpriseStringTitle("manage_device_admin",
-                MANAGE_DEVICE_ADMIN_APPS, R.string.manage_device_admin);
-        replaceEnterpriseStringTitle("security_category_profile",
-                WORK_PROFILE_SECURITY_TITLE, R.string.lock_settings_profile_title);
-        replaceEnterpriseStringTitle("enterprise_privacy", MANAGED_DEVICE_INFO,
-                R.string.enterprise_privacy_settings);
-
+        List<EnterpriseOverrideString> securityOverrideStrings =
+                SafetyCenterUtils.getEnterpriseOverrideStringForSecurityEntries();
+        for (int i = 0; i < securityOverrideStrings.size(); i++) {
+            EnterpriseOverrideString overrideString = securityOverrideStrings.get(i);
+            replaceEnterpriseStringTitle(overrideString.getPreferenceKey(),
+                    overrideString.getOverrideKey(), overrideString.getResource());
+        }
     }
 
     @Override
@@ -140,26 +121,7 @@ public class SecurityAdvancedSettings extends DashboardFragment {
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle, DashboardFragment host) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new TrustAgentListPreferenceController(context, host, lifecycle));
-
-        final List<AbstractPreferenceController> profileSecurityControllers = new ArrayList<>();
-        profileSecurityControllers.add(new ChangeProfileScreenLockPreferenceController(
-                context, host));
-        profileSecurityControllers.add(new LockUnificationPreferenceController(context, host));
-        profileSecurityControllers.add(new VisiblePatternProfilePreferenceController(
-                context, lifecycle));
-        profileSecurityControllers.add(new FaceProfileStatusPreferenceController(
-                context, lifecycle));
-        profileSecurityControllers.add(new FingerprintProfileStatusPreferenceController(
-                context, lifecycle));
-        profileSecurityControllers
-                .add(new CombinedBiometricProfileStatusPreferenceController(context, lifecycle));
-        controllers.add(new PreferenceCategoryController(context, WORK_PROFILE_SECURITY_CATEGORY)
-                .setChildren(profileSecurityControllers));
-        controllers.addAll(profileSecurityControllers);
-
-        return controllers;
+        return SafetyCenterUtils.getControllersForAdvancedSecurity(context, lifecycle, host);
     }
 
     /**
@@ -167,6 +129,18 @@ public class SecurityAdvancedSettings extends DashboardFragment {
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.security_advanced_settings) {
+                /**
+                 * If SafetyCenter is enabled, all of these entries will be in the More Settings
+                 * page, and we don't want to index these entries.
+                 */
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    if (SafetyCenterManagerWrapper.get().isEnabled(context)) {
+                        return null;
+                    }
+                    return super.getXmlResourcesToIndex(context, enabled);
+                }
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(Context
