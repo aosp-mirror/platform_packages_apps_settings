@@ -72,6 +72,7 @@ public class SimStatusPreferenceControllerTest {
 
     private Context mContext;
     private Resources mResources;
+    private SlotSimStatus mSlotSimStatus;
     private SimStatusPreferenceController mController;
 
     @Before
@@ -105,13 +106,13 @@ public class SimStatusPreferenceControllerTest {
         final String prefKey = mController.getPreferenceKey();
         when(mPreference.getKey()).thenReturn(prefKey);
         when(mPreference.isVisible()).thenReturn(true);
-
-        mController.init(mFragment, SubscriptionManager.INVALID_SIM_SLOT_INDEX);
     }
 
     @Test
     public void displayPreference_multiSim_shouldAddSecondPreference() {
         when(mTelephonyManager.getPhoneCount()).thenReturn(2);
+        SlotSimStatus slotSimStatus = new SlotSimStatus(mContext);
+        mController.init(mFragment, slotSimStatus);
 
         mController.displayPreference(mScreen);
 
@@ -121,6 +122,8 @@ public class SimStatusPreferenceControllerTest {
     @Test
     public void updateState_singleSim_shouldSetSingleSimTitleAndSummary() {
         when(mTelephonyManager.getPhoneCount()).thenReturn(1);
+        SlotSimStatus slotSimStatus = new SlotSimStatus(mContext);
+        mController.init(mFragment, slotSimStatus);
         mController.displayPreference(mScreen);
 
         mController.updateState(mPreference);
@@ -132,6 +135,8 @@ public class SimStatusPreferenceControllerTest {
     @Test
     public void updateState_multiSim_shouldSetMultiSimTitleAndSummary() {
         when(mTelephonyManager.getPhoneCount()).thenReturn(2);
+        SlotSimStatus slotSimStatus = new SlotSimStatus(mContext);
+        mController.init(mFragment, slotSimStatus);
         mController.displayPreference(mScreen);
 
         mController.updateState(mPreference);
@@ -149,6 +154,8 @@ public class SimStatusPreferenceControllerTest {
         when(mFragment.getChildFragmentManager()).thenReturn(
                 mock(FragmentManager.class, Answers.RETURNS_DEEP_STUBS));
         when(mTelephonyManager.getPhoneCount()).thenReturn(2);
+        SlotSimStatus slotSimStatus = new SlotSimStatus(mContext);
+        mController.init(mFragment, slotSimStatus);
         mController.displayPreference(mScreen);
 
         mController.handlePreferenceTreeClick(mFirstSimPreference);
