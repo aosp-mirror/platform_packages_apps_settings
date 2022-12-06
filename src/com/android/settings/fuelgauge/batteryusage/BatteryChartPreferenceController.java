@@ -47,6 +47,8 @@ import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
+import com.google.common.base.Objects;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -238,7 +240,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                     hourlyBatteryLevelsPerDay.getLevels(),
                     hourlyBatteryLevelsPerDay.getTimestamps(),
                     BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS,
-                    mHourlyChartLabelTextGenerator));
+                    mHourlyChartLabelTextGenerator.setLatestTimestamp(getLast(getLast(
+                            batteryLevelData.getHourlyBatteryLevelsPerDay()).getTimestamps()))));
         }
         refreshUi();
     }
@@ -514,6 +517,13 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         return allBatteryDiffData == null ? null : allBatteryDiffData.getAppDiffEntryList();
     }
 
+    private static <T> T getLast(List<T> list) {
+        if (list == null || list.isEmpty()) {
+            return null;
+        }
+        return list.get(list.size() - 1);
+    }
+
     /** Used for {@link AppBatteryPreferenceController}. */
     public static BatteryDiffEntry getAppBatteryUsageData(
             Context context, String packageName, int userId) {
@@ -553,18 +563,33 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
     private final class HourlyChartLabelTextGenerator implements
             BatteryChartViewModel.LabelTextGenerator {
+        private Long mLatestTimestamp;
+
         @Override
         public String generateText(List<Long> timestamps, int index) {
+            if (Objects.equal(timestamps.get(index), mLatestTimestamp)) {
+                // Replaces the latest timestamp text to "now".
+                return mContext.getString(R.string.battery_usage_chart_label_now);
+            }
             return ConvertUtils.utcToLocalTimeHour(mContext, timestamps.get(index),
                     mIs24HourFormat);
         }
 
         @Override
         public String generateFullText(List<Long> timestamps, int index) {
+            if (Objects.equal(timestamps.get(index), mLatestTimestamp)) {
+                // Replaces the latest timestamp text to "now".
+                return mContext.getString(R.string.battery_usage_chart_label_now);
+            }
             return index == timestamps.size() - 1
                     ? generateText(timestamps, index)
                     : String.format("%s%s%s", generateText(timestamps, index),
-                            mIs24HourFormat ? "-" : " - ", generateText(timestamps, index + 1));
+                    mIs24HourFormat ? "-" : " - ", generateText(timestamps, index + 1));
+        }
+
+        public HourlyChartLabelTextGenerator setLatestTimestamp(Long latestTimestamp) {
+            this.mLatestTimestamp = latestTimestamp;
+            return this;
         }
     }
 }

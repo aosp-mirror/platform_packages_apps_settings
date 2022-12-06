@@ -21,6 +21,7 @@ import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.utcToLoca
 import android.app.settings.SettingsEnums;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.BatteryConsumer;
@@ -86,6 +87,12 @@ public final class DataProcessor {
     static final double PERCENTAGE_OF_TOTAL_THRESHOLD = 1f;
     @VisibleForTesting
     static final int SELECTED_INDEX_ALL = BatteryChartViewModel.SELECTED_INDEX_ALL;
+    @VisibleForTesting
+    static final String CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER =
+            "CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER";
+
+    @VisibleForTesting
+    static long sFakeCurrentTimeMillis = 0;
 
     /** A callback listener when battery usage loading async task is executed. */
     public interface UsageMapAsyncResponse {
@@ -239,11 +246,12 @@ public final class DataProcessor {
             return resultMap;
         }
         Collections.sort(rawTimestampList);
-        final List<Long> expectedTimestampList = getTimestampSlots(rawTimestampList);
+        final long currentTime = getCurrentTimeMillis();
+        final List<Long> expectedTimestampList = getTimestampSlots(rawTimestampList, currentTime);
         final boolean isFromFullCharge =
                 isFromFullCharge(batteryHistoryMap.get(rawTimestampList.get(0)));
         interpolateHistory(
-                context, rawTimestampList, expectedTimestampList, isFromFullCharge,
+                context, rawTimestampList, expectedTimestampList, currentTime, isFromFullCharge,
                 batteryHistoryMap, resultMap);
         Log.d(TAG, String.format("getHistoryMapWithExpectedTimestamps() size=%d in %d/ms",
                 resultMap.size(), (System.currentTimeMillis() - startTime)));
@@ -278,19 +286,16 @@ public final class DataProcessor {
      * between start and end two even hour values.
      */
     @VisibleForTesting
-    static List<Long> getTimestampSlots(final List<Long> rawTimestampList) {
+    static List<Long> getTimestampSlots(final List<Long> rawTimestampList, final long currentTime) {
         final List<Long> timestampSlots = new ArrayList<>();
-        final int rawTimestampListSize = rawTimestampList.size();
-        // If timestamp number is smaller than 2, the following computation is not necessary.
-        if (rawTimestampListSize < MIN_TIMESTAMP_DATA_SIZE) {
+        if (rawTimestampList.isEmpty()) {
             return timestampSlots;
         }
         final long rawStartTimestamp = rawTimestampList.get(0);
-        final long rawEndTimestamp = rawTimestampList.get(rawTimestampListSize - 1);
         // No matter the start is from last full charge or 6 days ago, use the nearest even hour.
         final long startTimestamp = getNearestEvenHourTimestamp(rawStartTimestamp);
-        // Use the even hour before the raw end timestamp as the end.
-        final long endTimestamp = getLastEvenHourBeforeTimestamp(rawEndTimestamp);
+        // Use the first even hour after the current time as the end.
+        final long endTimestamp = getFirstEvenHourAfterTimestamp(currentTime);
         // If the start timestamp is later or equal the end one, return the empty list.
         if (startTimestamp >= endTimestamp) {
             return timestampSlots;
@@ -451,10 +456,7 @@ public final class DataProcessor {
     @Nullable
     static BatteryDiffData generateBatteryDiffData(
             final Context context,
-            @Nullable final List<BatteryEntry> batteryEntryList,
-            final BatteryUsageStats batteryUsageStats) {
-        final List<BatteryHistEntry> batteryHistEntryList =
-                convertToBatteryHistEntry(batteryEntryList, batteryUsageStats);
+            final List<BatteryHistEntry> batteryHistEntryList) {
         if (batteryHistEntryList == null || batteryHistEntryList.isEmpty()) {
             Log.w(TAG, "batteryHistEntryList is null or empty in generateBatteryDiffData()");
             return null;
@@ -531,7 +533,7 @@ public final class DataProcessor {
         final Map<Integer, BatteryDiffData> allUsageMap = new HashMap<>();
         // Always construct the map whether the value is null or not.
         allUsageMap.put(SELECTED_INDEX_ALL,
-                getBatteryDiffDataFromBatteryStatsService(context));
+                generateBatteryDiffData(context, getBatteryHistListFromFromStatsService(context)));
         resultMap.put(SELECTED_INDEX_ALL, allUsageMap);
 
         // Compute the apps number before purge. Must put before purgeLowPercentageAndFakeData.
@@ -545,24 +547,33 @@ public final class DataProcessor {
     }
 
     @Nullable
-    private static BatteryDiffData getBatteryDiffDataFromBatteryStatsService(
+    private static List<BatteryHistEntry> getBatteryHistListFromFromStatsService(
             final Context context) {
-        BatteryDiffData batteryDiffData = null;
+        List<BatteryHistEntry> batteryHistEntryList = null;
         try {
             final BatteryUsageStats batteryUsageStats = getBatteryUsageStats(context);
             final List<BatteryEntry> batteryEntryList =
                     generateBatteryEntryListFromBatteryUsageStats(context, batteryUsageStats);
-            batteryDiffData = generateBatteryDiffData(context, batteryEntryList, batteryUsageStats);
+            batteryHistEntryList = convertToBatteryHistEntry(batteryEntryList, batteryUsageStats);
             closeBatteryUsageStats(batteryUsageStats);
         } catch (RuntimeException e) {
             Log.e(TAG, "load batteryUsageStats:" + e);
         }
 
-        return batteryDiffData;
+        return batteryHistEntryList;
     }
 
+    private static Map<String, BatteryHistEntry> getCurrentBatteryHistoryMapFromStatsService(
+            final Context context) {
+        final List<BatteryHistEntry> batteryHistEntryList =
+                getBatteryHistListFromFromStatsService(context);
+        return batteryHistEntryList == null ? new HashMap<>()
+                : batteryHistEntryList.stream().collect(Collectors.toMap(e -> e.getKey(), e -> e));
+    }
+
+    @VisibleForTesting
     @Nullable
-    private static List<BatteryHistEntry> convertToBatteryHistEntry(
+    static List<BatteryHistEntry> convertToBatteryHistEntry(
             @Nullable final List<BatteryEntry> batteryEntryList,
             final BatteryUsageStats batteryUsageStats) {
         if (batteryEntryList == null || batteryEntryList.isEmpty()) {
@@ -591,6 +602,7 @@ public final class DataProcessor {
             Context context,
             final List<Long> rawTimestampList,
             final List<Long> expectedTimestampSlots,
+            final long currentTime,
             final boolean isFromFullCharge,
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap,
             final Map<Long, Map<String, BatteryHistEntry>> resultMap) {
@@ -611,6 +623,17 @@ public final class DataProcessor {
         final int expectedTimestampSlotsSize = expectedTimestampSlots.size();
         for (int index = startIndex; index < expectedTimestampSlotsSize; index++) {
             final long currentSlot = expectedTimestampSlots.get(index);
+            if (currentSlot > currentTime) {
+                // The slot timestamp is greater than the current time. Puts a placeholder first,
+                // then in the async task, loads the real time battery usage data from the battery
+                // stats service.
+                // If current time is odd hour, one placeholder is added. If the current hour is
+                // even hour, two placeholders are added. This is because the method
+                // insertHourlyUsageDiffDataPerSlot() requires continuing three hours data.
+                resultMap.put(currentSlot,
+                        Map.of(CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER, EMPTY_BATTERY_HIST_ENTRY));
+                continue;
+            }
             final boolean isStartOrEnd = index == 0 || index == expectedTimestampSlotsSize - 1;
             interpolateHistoryForSlot(
                     context, currentSlot, rawTimestampList, batteryHistoryMap, resultMap,
@@ -733,6 +756,13 @@ public final class DataProcessor {
     }
 
     /**
+     * @return Returns the fist even hour timestamp after the given timestamp.
+     */
+    private static long getFirstEvenHourAfterTimestamp(long rawTimestamp) {
+        return getLastEvenHourBeforeTimestamp(rawTimestamp + DateUtils.HOUR_IN_MILLIS * 2);
+    }
+
+    /**
      * @return Returns the last even hour timestamp before the given timestamp.
      */
     private static long getLastEvenHourBeforeTimestamp(long rawTimestamp) {
@@ -808,6 +838,12 @@ public final class DataProcessor {
             Log.e(TAG, "abnormal entry list in the timestamp:"
                     + utcToLocalTime(context, timestamp));
             return null;
+        }
+        // The current time battery history hasn't been loaded yet, returns the current battery
+        // level.
+        if (entryMap.containsKey(CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER)) {
+            final Intent intent = BatteryUtils.getBatteryIntent(context);
+            return BatteryStatus.getBatteryLevel(intent);
         }
         // Averages the battery level in each time slot to avoid corner conditions.
         float batteryLevelCounter = 0;
@@ -1394,6 +1430,10 @@ public final class DataProcessor {
         return batteryDiffEntry;
     }
 
+    private static long getCurrentTimeMillis() {
+        return sFakeCurrentTimeMillis > 0 ? sFakeCurrentTimeMillis : System.currentTimeMillis();
+    }
+
     private static void logAppCountMetrics(
             Context context, final int countOfAppBeforePurge, final int countOfAppAfterPurge) {
         context = context.getApplicationContext();
@@ -1465,6 +1505,17 @@ public final class DataProcessor {
                 return null;
             }
             final long startTime = System.currentTimeMillis();
+            // Loads the current battery usage data from the battery stats service and replaces the
+            // placeholder in mBatteryHistoryMap.
+            Map<String, BatteryHistEntry> currentBatteryHistoryMap =
+                    getCurrentBatteryHistoryMapFromStatsService(mApplicationContext);
+            for (Map.Entry<Long, Map<String, BatteryHistEntry>> mapEntry
+                    : mBatteryHistoryMap.entrySet()) {
+                if (mapEntry.getValue().containsKey(CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER)) {
+                    mapEntry.setValue(currentBatteryHistoryMap);
+                }
+            }
+
             final Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageMap =
                     getBatteryUsageMap(
                             mApplicationContext, mHourlyBatteryLevelsPerDay, mBatteryHistoryMap);

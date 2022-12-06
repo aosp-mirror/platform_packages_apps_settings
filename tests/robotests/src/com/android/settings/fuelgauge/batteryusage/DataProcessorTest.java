@@ -18,7 +18,10 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -27,7 +30,9 @@ import static org.mockito.Mockito.when;
 import android.app.settings.SettingsEnums;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.os.BatteryConsumer;
+import android.os.BatteryManager;
 import android.os.BatteryUsageStats;
 import android.text.format.DateUtils;
 
@@ -63,6 +68,7 @@ public class DataProcessorTest {
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
+    @Mock private Intent mIntent;
     @Mock private BatteryUsageStats mBatteryUsageStats;
     @Mock private BatteryEntry mMockBatteryEntry1;
     @Mock private BatteryEntry mMockBatteryEntry2;
@@ -79,6 +85,10 @@ public class DataProcessorTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
         mPowerUsageFeatureProvider = mFeatureFactory.powerUsageFeatureProvider;
+
+        doReturn(mIntent).when(mContext).registerReceiver(any(), any());
+        doReturn(100).when(mIntent).getIntExtra(eq(BatteryManager.EXTRA_SCALE), anyInt());
+        doReturn(66).when(mIntent).getIntExtra(eq(BatteryManager.EXTRA_LEVEL), anyInt());
     }
 
     @Test
@@ -100,11 +110,15 @@ public class DataProcessorTest {
 
     @Test
     public void getBatteryLevelData_notEnoughData_returnNull() {
-        // The timestamps are within 1 hour.
-        final long[] timestamps = {1000000L, 2000000L, 3000000L};
+        // The timestamps and the current time are within half hour before an even hour.
+        final long[] timestamps = {
+                DateUtils.HOUR_IN_MILLIS * 2 - 300L,
+                DateUtils.HOUR_IN_MILLIS * 2 - 200L,
+                DateUtils.HOUR_IN_MILLIS * 2 - 100L};
         final int[] levels = {100, 99, 98};
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
                 createHistoryMap(timestamps, levels);
+        DataProcessor.sFakeCurrentTimeMillis = timestamps[timestamps.length - 1];
 
         assertThat(DataProcessor.getBatteryLevelData(
                 mContext, /*handler=*/ null, batteryHistoryMap, /*asyncResponseDelegate=*/ null))
@@ -117,11 +131,12 @@ public class DataProcessorTest {
 
     @Test
     public void getBatteryLevelData_returnExpectedResult() {
-        // Timezone GMT+8: 2022-01-01 00:00:00, 2022-01-01 01:00:00, 2022-01-01 02:00:00
-        final long[] timestamps = {1640966400000L, 1640970000000L, 1640973600000L};
-        final int[] levels = {100, 99, 98};
+        // Timezone GMT+8: 2022-01-01 00:00:00, 2022-01-01 01:00:00
+        final long[] timestamps = {1640966400000L, 1640970000000L};
+        final int[] levels = {100, 99};
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
                 createHistoryMap(timestamps, levels);
+        DataProcessor.sFakeCurrentTimeMillis = timestamps[timestamps.length - 1];
 
         final BatteryLevelData resultData =
                 DataProcessor.getBatteryLevelData(
@@ -130,8 +145,10 @@ public class DataProcessorTest {
                         batteryHistoryMap,
                         /*asyncResponseDelegate=*/ null);
 
-        final List<Long> expectedDailyTimestamps = List.of(timestamps[0], timestamps[2]);
-        final List<Integer> expectedDailyLevels = List.of(levels[0], levels[2]);
+        final List<Long> expectedDailyTimestamps = List.of(
+                1640966400000L,  // 2022-01-01 00:00:00
+                1640973600000L); // 2022-01-01 02:00:00
+        final List<Integer> expectedDailyLevels = List.of(100, 66);
         final List<List<Long>> expectedHourlyTimestamps = List.of(expectedDailyTimestamps);
         final List<List<Integer>> expectedHourlyLevels = List.of(expectedDailyLevels);
         verifyExpectedBatteryLevelData(
@@ -162,6 +179,7 @@ public class DataProcessorTest {
         final int[] levels = {100, 94, 90, 82, 50};
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
                 createHistoryMap(timestamps, levels);
+        DataProcessor.sFakeCurrentTimeMillis = timestamps[timestamps.length - 1];
 
         final Map<Long, Map<String, BatteryHistEntry>> resultMap =
                 DataProcessor.getHistoryMapWithExpectedTimestamps(mContext, batteryHistoryMap);
@@ -172,13 +190,19 @@ public class DataProcessorTest {
                 1640970000000L, // 2022-01-01 01:00:00
                 1640973600000L, // 2022-01-01 02:00:00
                 1640977200000L, // 2022-01-01 03:00:00
-                1640980800000L  // 2022-01-01 04:00:00
+                1640980800000L, // 2022-01-01 04:00:00
+                1640984400000L, // 2022-01-01 05:00:00
+                1640988000000L  // 2022-01-01 06:00:00
         };
-        final int[] expectedLevels = {100, 94, 90, 84, 56};
+        final int[] expectedLevels = {100, 94, 90, 84, 56, 98, 98};
         assertThat(resultMap).hasSize(expectedLevels.length);
-        for (int index = 0; index < expectedLevels.length; index++) {
+        for (int index = 0; index < 5; index++) {
             assertThat(resultMap.get(expectedTimestamps[index]).get(FAKE_ENTRY_KEY).mBatteryLevel)
                     .isEqualTo(expectedLevels[index]);
+        }
+        for (int index = 5; index < 7; index++) {
+            assertThat(resultMap.get(expectedTimestamps[index]).containsKey(
+                    DataProcessor.CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER)).isTrue();
         }
     }
 
@@ -188,6 +212,7 @@ public class DataProcessorTest {
         final int[] levels = {100};
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
                 createHistoryMap(timestamps, levels);
+        DataProcessor.sFakeCurrentTimeMillis = timestamps[timestamps.length - 1];
 
         assertThat(
                 DataProcessor.getLevelDataThroughProcessedHistoryMap(mContext, batteryHistoryMap))
@@ -207,6 +232,7 @@ public class DataProcessorTest {
         final int[] levels = {100, 94, 90, 82, 50};
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
                 createHistoryMap(timestamps, levels);
+        DataProcessor.sFakeCurrentTimeMillis = timestamps[timestamps.length - 1];
 
         final BatteryLevelData resultData =
                 DataProcessor.getLevelDataThroughProcessedHistoryMap(mContext, batteryHistoryMap);
@@ -239,6 +265,7 @@ public class DataProcessorTest {
         final int[] levels = {100, 94, 90, 82};
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
                 createHistoryMap(timestamps, levels);
+        DataProcessor.sFakeCurrentTimeMillis = timestamps[timestamps.length - 1];
 
         final BatteryLevelData resultData =
                 DataProcessor.getLevelDataThroughProcessedHistoryMap(mContext, batteryHistoryMap);
@@ -290,8 +317,8 @@ public class DataProcessorTest {
 
     @Test
     public void getTimestampSlots_emptyRawList_returnEmptyList() {
-        final List<Long> resultList =
-                DataProcessor.getTimestampSlots(new ArrayList<>());
+        final List<Long> resultList = DataProcessor.getTimestampSlots(
+                new ArrayList<>(), 1641038400000L); // 2022-01-01 20:00:00
         assertThat(resultList).isEmpty();
     }
 
@@ -305,7 +332,7 @@ public class DataProcessorTest {
         final Calendar expectedStartCalendar = Calendar.getInstance();
         expectedStartCalendar.set(2022, 6, 5, 6, 0, 0); // 2022-07-05 06:00:00
         final Calendar expectedEndCalendar = Calendar.getInstance();
-        expectedEndCalendar.set(2022, 6, 5, 22, 0, 0); // 2022-07-05 22:00:00
+        expectedEndCalendar.set(2022, 6, 6, 0, 0, 0); // 2022-07-05 22:00:00
         verifyExpectedTimestampSlots(
                 startCalendar, endCalendar, expectedStartCalendar, expectedEndCalendar);
     }
@@ -320,7 +347,7 @@ public class DataProcessorTest {
         final Calendar expectedStartCalendar = Calendar.getInstance();
         expectedStartCalendar.set(2022, 6, 5, 6, 00, 00); // 2022-07-05 06:00:00
         final Calendar expectedEndCalendar = Calendar.getInstance();
-        expectedEndCalendar.set(2022, 6, 6, 20, 00, 00); // 2022-07-06 20:00:00
+        expectedEndCalendar.set(2022, 6, 6, 22, 00, 00); // 2022-07-06 20:00:00
         verifyExpectedTimestampSlots(
                 startCalendar, endCalendar, expectedStartCalendar, expectedEndCalendar);
     }
@@ -1110,8 +1137,8 @@ public class DataProcessorTest {
 
     @Test
     public void generateBatteryDiffData_emptyBatteryEntryList_returnNull() {
-        assertThat(DataProcessor.generateBatteryDiffData(
-                mContext, null, mBatteryUsageStats)).isNull();
+        assertThat(DataProcessor.generateBatteryDiffData(mContext,
+                DataProcessor.convertToBatteryHistEntry(null, mBatteryUsageStats))).isNull();
     }
 
     @Test
@@ -1161,8 +1188,8 @@ public class DataProcessorTest {
         doReturn(BatteryConsumer.POWER_COMPONENT_CAMERA)
                 .when(mMockBatteryEntry4).getPowerComponentId();
 
-        final BatteryDiffData batteryDiffData = DataProcessor.generateBatteryDiffData(
-                mContext, batteryEntryList, mBatteryUsageStats);
+        final BatteryDiffData batteryDiffData = DataProcessor.generateBatteryDiffData(mContext,
+                DataProcessor.convertToBatteryHistEntry(batteryEntryList, mBatteryUsageStats));
 
         assertBatteryDiffEntry(
                 batteryDiffData.getAppDiffEntryList().get(0), 0, /*uid=*/ 2L,
@@ -1284,16 +1311,15 @@ public class DataProcessorTest {
 
     private static void verifyExpectedTimestampSlots(
             final Calendar start,
-            final Calendar end,
+            final Calendar current,
             final Calendar expectedStart,
             final Calendar expectedEnd) {
         expectedStart.set(Calendar.MILLISECOND, 0);
         expectedEnd.set(Calendar.MILLISECOND, 0);
         final ArrayList<Long> timestampSlots = new ArrayList<>();
         timestampSlots.add(start.getTimeInMillis());
-        timestampSlots.add(end.getTimeInMillis());
         final List<Long> resultList =
-                DataProcessor.getTimestampSlots(timestampSlots);
+                DataProcessor.getTimestampSlots(timestampSlots, current.getTimeInMillis());
 
         for (int index = 0; index < resultList.size(); index++) {
             final long expectedTimestamp =
