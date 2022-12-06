@@ -521,9 +521,6 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Altxatu hatza dardara sumatzen duzunean"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Joan argi gutxiagoko toki batera eta saiatu berriro"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Gehieneko saiakera kopurua agortu duzu"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Erabili hatz-marka tableta desblokeatzeko edo zeu zarela egiaztatzeko, hala nola aplikazioetan saioa hastean"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Erabili hatz-marka gailua blokeatzeko edo zeu zarela egiaztatzeko, hala nola aplikazioetan saioa hastean"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Erabili hatz-marka telefonoa desblokeatzeko edo zeu zarela egiaztatzeko, hala nola aplikazioetan saioa hastean"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Aurpegi eta hatz-marka bidez desblokeatzea"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Sakatu konfiguratzeko"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Aurpegia eta hatz-markak gehitu dira"</string>
@@ -1174,7 +1171,7 @@
     <string name="wifi_carrier_content" msgid="2876499905644083615">"Konektatu <xliff:g id="NAME">%1$s</xliff:g> bidez"</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"Kokapenaren zehaztasuna hobetzeko eta beste helburu batzuetarako, <xliff:g id="APP_NAME">%1$s</xliff:g> aplikazioak sare-bilaketa aktibatu nahi du, Wi-Fia desaktibatuta egonda ere.\n\nBilaketa egin nahi duten beste aplikazio guztiei ere baimendu nahi diezu?"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Kokapen-zehaztasuna hobetzeko eta beste helburu batzuetarako, aplikazio ezezagun batek sare-bilaketa aktibatu nahi du, wifia desaktibatuta egonda ere.\n\nBilaketa egin nahi duten aplikazio guztiei eman nahi diezu baimena?"</string>
-    <string name="wifi_scan_always_turnoff_message" msgid="93691286302680448">"Desaktibatzeko, joan menuko \"Ezarpen aurreratuak\" aukerara."</string>
+    <string name="wifi_scan_always_turnoff_message" msgid="93691286302680448">"Desaktibatzeko, joan luzapen-menuko \"Ezarpen aurreratuak\" aukerara."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Eman baimena"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Ukatu"</string>
     <string name="wifi_hotspot_title" msgid="1918712370697971229">"Saioa hasi nahi duzu konektatzeko?"</string>
@@ -2830,7 +2827,17 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Ikusi bateria gehien erabiltzen duten aplikazioak"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Kargatze-prozesua etenda dago"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"Bateria babestu da haren balio-bizitza luzatzeko"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <!-- no translation found for battery_tip_dock_defender_future_bypass_title (7257251934903787366) -->
+    <skip />
+    <!-- no translation found for battery_tip_dock_defender_future_bypass_summary (428474483479026813) -->
+    <skip />
+    <!-- no translation found for battery_tip_dock_defender_active_title (8843454404807737776) -->
+    <skip />
+    <!-- no translation found for battery_tip_dock_defender_active_summary (5582869291068635429) -->
+    <skip />
+    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_title (1679449361090557201) -->
+    <skip />
+    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_summary (5107293805054133144) -->
     <skip />
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Lortu kargatzea pausatzeari buruzko informazio gehiago"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Berrekin kargatzeari"</string>
@@ -5669,9 +5676,11 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Erabiltzeko, lehendabizi aktibatu \"Erakutsi gailua kontrolatzeko aukerak\""</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Ahal denean, erakutsi erlojua bi lerrotan"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Bi lerroko erlojua"</string>
-    <!-- no translation found for lockscreen_quick_affordances_title (435869403114245620) -->
-    <skip />
-    <!-- no translation found for lockscreen_quick_affordances_summary (4225396036524703997) -->
+    <string name="lockscreen_quick_affordances_title" msgid="435869403114245620">"Botoiak"</string>
+    <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
+      <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g> eta <xliff:g id="SECOND">%2$s</xliff:g></item>
+      <item quantity="one"><xliff:g id="FIRST_0">%1$s</xliff:g></item>
+    </plurals>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>

@@ -521,9 +521,6 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"တုန်ခါမှုကို ခံစားရချိန်တွင် သင့်လက်ချောင်းကို လွှတ်လိုက်ပါ"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"အလင်းပိုဖျော့သောနေရာသို့ ရွှေ့ပြီး ထပ်စမ်းကြည့်ပါ"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"သင် ကြိုးစားနိုင်သည့်အကြိမ်ရေ ပြည့်သွားပါပြီ"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သောအခါကဲ့သို့ သင်ဖြစ်ကြောင်း အတည်ပြုရန်အတွက် (သို့) သင့်တက်ဘလက်ကို လော့ခ်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို သုံးပါ"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သည့်အခါမျိုးတွင် သင့်စက်ကို လော့ခ်ဖွင့်ရန် လက်ဗွေကိုသုံးပါ (သို့) သင်ဖြစ်ကြောင်း အတည်ပြုပါ"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သောအခါကဲ့သို့ သင်ဖြစ်ကြောင်း အတည်ပြုရန်အတွက် (သို့) သင့်ဖုန်းကို လော့ခ်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို သုံးပါ"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"မျက်နှာနှင့်လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"စနစ်ထည့်သွင်းရန် တို့ပါ"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"မျက်နှာနှင့် လက်ဗွေများ ထည့်ပြီးပါပြီ"</string>
@@ -2830,7 +2827,17 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"အများဆုံးသုံးသည့် အက်ပ်များ ကြည့်ပါ"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"အားသွင်းခြင်းကို ခဏရပ်ထားသည်"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"ဘက်ထရီသက်တမ်း ကြာရှည်စေရန် ကာကွယ်ပေးသည်"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <!-- no translation found for battery_tip_dock_defender_future_bypass_title (7257251934903787366) -->
+    <skip />
+    <!-- no translation found for battery_tip_dock_defender_future_bypass_summary (428474483479026813) -->
+    <skip />
+    <!-- no translation found for battery_tip_dock_defender_active_title (8843454404807737776) -->
+    <skip />
+    <!-- no translation found for battery_tip_dock_defender_active_summary (5582869291068635429) -->
+    <skip />
+    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_title (1679449361090557201) -->
+    <skip />
+    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_summary (5107293805054133144) -->
     <skip />
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"အားသွင်းမှု ခဏရပ်သည့်အကြောင်း ပိုမိုလေ့လာရန်"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"ဆက်အားသွင်းရန်"</string>
@@ -5669,9 +5676,11 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"အသုံးပြုရန်အတွက် \"စက်ထိန်းစနစ် ပြရန်\" ကို ဦးစွာဖွင့်ပါ"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"နှစ်လိုင်းပြနာရီကို ရနိုင်ပါက ပြပါ"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"နှစ်လိုင်းပြနာရီ"</string>
-    <!-- no translation found for lockscreen_quick_affordances_title (435869403114245620) -->
-    <skip />
-    <!-- no translation found for lockscreen_quick_affordances_summary (4225396036524703997) -->
+    <string name="lockscreen_quick_affordances_title" msgid="435869403114245620">"ခလုတ်များ"</string>
+    <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
+      <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>၊ <xliff:g id="SECOND">%2$s</xliff:g></item>
+      <item quantity="one"><xliff:g id="FIRST_0">%1$s</xliff:g></item>
+    </plurals>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
