@@ -1,0 +1,16 @@
+package {
+    // See: http://go/android-license-faq
+    // A large-scale-change added 'default_applicable_licenses' to import
+    // all of the 'license_kinds' from "packages_apps_Settings_license"
+    // to get the below license kinds:
+    //   SPDX-license-identifier-Apache-2.0
+    default_applicable_licenses: ["packages_apps_Settings_license"],
+}
+
+java_library {
+    name: "fuelgauge-usage-state-protos-lite",
+    proto: {
+        type: "lite",
+    },
+    srcs: ["fuelgauge_usage_state.proto"],
+}

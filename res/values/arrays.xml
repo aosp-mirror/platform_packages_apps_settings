@@ -211,6 +211,15 @@
         <item>Require certificate status</item>
     </string-array>
 
+    <!-- Match this with the integer value of WifiEnterpriseConfig.TlsVersion -->
+    <!-- Type of TlsVersion -->
+    <string-array name="wifi_eap_tls_ver" translatable="false">
+        <item>TLS v1.0</item>
+        <item>TLS v1.1</item>
+        <item>TLS v1.2</item>
+        <item>TLS v1.3</item>
+    </string-array>
+
     <!-- Wi-Fi AP band settings.  Either 2.4GHz or 5GHz prefer. -->
     <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array translatable="false" name="wifi_ap_band">
@@ -1345,11 +1354,6 @@
         <item>125000</item> <!-- 1Mbps == 125000B/s -->
         <item>625000</item> <!-- 5Mbps == 625000/s -->
         <item>1875000</item> <!-- 15Mbps == 1875000/s -->
-    </string-array>
-
-    <!-- An allowlist which packages won't show summary in battery usage screen.
-         [CHAR LIMIT=NONE] -->
-    <string-array name="allowlist_hide_summary_in_battery_usage" translatable="false">
     </string-array>
 
     <!-- Array containing help message codes that should not be displayed

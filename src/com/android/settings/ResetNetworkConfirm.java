@@ -61,6 +61,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
     @VisibleForTesting ResetNetworkRequest mResetNetworkRequest;
     private ProgressDialog mProgressDialog;
     private AlertDialog mAlertDialog;
+    @VisibleForTesting ResetSubscriptionContract mResetSubscriptionContract;
     private OnSubscriptionsChangedListener mSubscriptionsChangedListener;
 
     /**
@@ -130,16 +131,11 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             }
 
             // abandon execution if subscription no longer active
-            int subId = mResetNetworkRequest.getResetApnSubId();
-            if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-                SubscriptionManager mgr = getSubscriptionManager();
-                // always remove listener
-                stopMonitorSubscriptionChange(mgr);
-                if (!isSubscriptionRemainActive(mgr, subId)) {
-                    Log.w(TAG, "subId " + subId + " disappear when confirm");
-                    mActivity.finish();
-                    return;
-                }
+            Integer subId = mResetSubscriptionContract.getAnyMissingSubscriptionId();
+            if (subId != null) {
+                Log.w(TAG, "subId " + subId + " no longer active");
+                getActivity().onBackPressed();
+                return;
             }
 
             // Should dismiss the progress dialog firstly if it is showing
@@ -186,7 +182,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             Bundle savedInstanceState) {
         View view = (new ResetNetworkRestrictionViewBuilder(mActivity)).build();
         if (view != null) {
-            stopMonitorSubscriptionChange(getSubscriptionManager());
+            mResetSubscriptionContract.close();
             Log.w(TAG, "Access deny.");
             return view;
         }
@@ -208,13 +204,15 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
 
         mActivity = getActivity();
 
-        if (mResetNetworkRequest.getResetApnSubId()
-                == ResetNetworkRequest.INVALID_SUBSCRIPTION_ID) {
-            return;
-        }
-        // close confirmation dialog when reset specific subscription
-        // but removed priori to the confirmation button been pressed
-        startMonitorSubscriptionChange(getSubscriptionManager());
+        mResetSubscriptionContract = new ResetSubscriptionContract(getContext(),
+                mResetNetworkRequest) {
+            @Override
+            public void onSubscriptionInactive(int subscriptionId) {
+                // close UI if subscription no longer active
+                Log.w(TAG, "subId " + subscriptionId + " no longer active.");
+                getActivity().onBackPressed();
+            }
+        };
     }
 
     @Override
@@ -223,55 +221,15 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
         mResetNetworkRequest.writeIntoBundle(outState);
     }
 
-    private SubscriptionManager getSubscriptionManager() {
-        SubscriptionManager mgr = mActivity.getSystemService(SubscriptionManager.class);
-        if (mgr == null) {
-            Log.w(TAG, "No SubscriptionManager");
-        }
-        return mgr;
-    }
-
-    private void startMonitorSubscriptionChange(SubscriptionManager mgr) {
-        if (mgr == null) {
-            return;
-        }
-        // update monitor listener
-        mSubscriptionsChangedListener = new OnSubscriptionsChangedListener(
-                Looper.getMainLooper()) {
-            @Override
-            public void onSubscriptionsChanged() {
-                int subId = mResetNetworkRequest.getResetApnSubId();
-                SubscriptionManager mgr = getSubscriptionManager();
-                if (isSubscriptionRemainActive(mgr, subId)) {
-                    return;
-                }
-                // close UI if subscription no longer active
-                Log.w(TAG, "subId " + subId + " no longer active.");
-                stopMonitorSubscriptionChange(mgr);
-                mActivity.finish();
-            }
-        };
-        mgr.addOnSubscriptionsChangedListener(
-                mActivity.getMainExecutor(), mSubscriptionsChangedListener);
-    }
-
-    private boolean isSubscriptionRemainActive(SubscriptionManager mgr, int subscriptionId) {
-        return (mgr == null) ? false : (mgr.getActiveSubscriptionInfo(subscriptionId) != null);
-    }
-
-    private void stopMonitorSubscriptionChange(SubscriptionManager mgr) {
-        if ((mgr == null) || (mSubscriptionsChangedListener == null)) {
-            return;
-        }
-        mgr.removeOnSubscriptionsChangedListener(mSubscriptionsChangedListener);
-        mSubscriptionsChangedListener = null;
-    }
-
     @Override
     public void onDestroy() {
         if (mResetNetworkTask != null) {
             mResetNetworkTask.cancel(true /* mayInterruptIfRunning */);
             mResetNetworkTask = null;
+        }
+        if (mResetSubscriptionContract != null) {
+            mResetSubscriptionContract.close();
+            mResetSubscriptionContract = null;
         }
         if (mProgressDialog != null) {
             mProgressDialog.dismiss();
@@ -279,7 +237,6 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
         if (mAlertDialog != null) {
             mAlertDialog.dismiss();
         }
-        stopMonitorSubscriptionChange(getSubscriptionManager());
         super.onDestroy();
     }
 

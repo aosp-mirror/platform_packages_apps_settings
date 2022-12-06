@@ -20,10 +20,14 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.IntDef;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * The preference which is used for resetting the status of all preferences in the display size
@@ -32,10 +36,20 @@ import com.android.settings.R;
 public class TextReadingResetPreference extends Preference {
     private View.OnClickListener mOnResetClickListener;
 
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({
+            ButtonStyle.DEFAULT,
+            ButtonStyle.SUW,
+    })
+    @interface ButtonStyle {
+        int DEFAULT = 0;
+        int SUW = 1;
+    }
+
     public TextReadingResetPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        setLayoutResource(R.layout.accessibility_text_reading_reset_button);
+        setSetupWizardStyle(ButtonStyle.DEFAULT);
     }
 
     @Override
@@ -44,6 +58,13 @@ public class TextReadingResetPreference extends Preference {
 
         final View view = holder.findViewById(R.id.reset_button);
         view.setOnClickListener(mOnResetClickListener);
+    }
+
+    void setSetupWizardStyle(@ButtonStyle int style) {
+        final int layoutResId = (style == ButtonStyle.SUW)
+                ? R.layout.accessibility_text_reading_reset_button_suw
+                : R.layout.accessibility_text_reading_reset_button;
+        setLayoutResource(layoutResId);
     }
 
     void setOnResetClickListener(View.OnClickListener resetClickListener) {

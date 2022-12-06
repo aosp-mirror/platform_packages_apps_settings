@@ -26,6 +26,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.UserManager;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.Fragment;
@@ -35,6 +36,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,21 +83,20 @@ public class SimStatusPreferenceControllerTest {
         when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
 
-        doReturn(mTelephonyManager).when(mContext)
-                .getSystemService(Context.TELEPHONY_SERVICE);
+        mockService(Context.TELEPHONY_SERVICE, TelephonyManager.class, mTelephonyManager);
 
-        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
+        mockService(Context.USER_SERVICE, UserManager.class, mUserManager);
         final List<Preference> preferencePool = new ArrayList<Preference>();
         preferencePool.add(mFirstSimPreference);
         preferencePool.add(mSecondSimPreference);
 
-        mController = spy(new SimStatusPreferenceController(mContext, mFragment) {
+        mController = spy(new SimStatusPreferenceController(mContext, "sim_status") {
             @Override
             public Preference createNewPreference(Context context) {
                 return preferencePool.remove(0);
             }
         });
-        doReturn(true).when(mController).isAvailable();
+        doReturn(BasePreferenceController.AVAILABLE).when(mController).getAvailabilityStatus();
         when(mScreen.getContext()).thenReturn(mContext);
         final String categoryKey = "device_detail_category";
         when(mScreen.findPreference(categoryKey)).thenReturn(mCategory);
@@ -105,7 +106,7 @@ public class SimStatusPreferenceControllerTest {
         when(mPreference.getKey()).thenReturn(prefKey);
         when(mPreference.isVisible()).thenReturn(true);
 
-        mController.setSimSlotStatus(-1);
+        mController.init(mFragment, SubscriptionManager.INVALID_SIM_SLOT_INDEX);
     }
 
     @Test
@@ -153,5 +154,10 @@ public class SimStatusPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mFirstSimPreference);
 
         verify(mFragment).getChildFragmentManager();
+    }
+
+    private <T> void mockService(String serviceName, Class<T> serviceClass, T service) {
+        when(mContext.getSystemServiceName(serviceClass)).thenReturn(serviceName);
+        when(mContext.getSystemService(serviceName)).thenReturn(service);
     }
 }
