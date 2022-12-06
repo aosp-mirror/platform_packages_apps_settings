@@ -74,6 +74,14 @@ public class ResetNetworkConfirmTest {
     public void testResetNetworkData_notResetEsim() {
         mResetNetworkConfirm.mResetNetworkRequest =
                 new ResetNetworkRequest(ResetNetworkRequest.RESET_NONE);
+        mResetNetworkConfirm.mResetSubscriptionContract =
+                new ResetSubscriptionContract(mActivity,
+                mResetNetworkConfirm.mResetNetworkRequest) {
+            @Override
+            public void onSubscriptionInactive(int subscriptionId) {
+                mActivity.onBackPressed();
+            }
+        };
 
         mResetNetworkConfirm.mFinalClickListener.onClick(null /* View */);
         Robolectric.getBackgroundThreadScheduler().advanceToLastPostedRunnable();

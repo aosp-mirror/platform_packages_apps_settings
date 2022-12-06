@@ -179,6 +179,7 @@ public class WifiConfigController2 implements TextWatcher,
     private int mLastShownEapMethod;
     @VisibleForTesting Spinner mEapSimSpinner;    // For EAP-SIM, EAP-AKA and EAP-AKA-PRIME.
     @VisibleForTesting Spinner mEapCaCertSpinner;
+    private Spinner mEapMinTlsVerSpinner;
     private Spinner mEapOcspSpinner;
     private TextView mEapDomainView;
     private Spinner mPhase2Spinner;
@@ -744,11 +745,14 @@ public class WifiConfigController2 implements TextWatcher,
                             + ") should not both be non-null");
                 }
 
-                // Only set OCSP option if there is a valid CA certificate.
+                // Only set certificate option if there is a valid CA certificate.
                 if (caCert.equals(mUnspecifiedCertString)) {
                     config.enterpriseConfig.setOcsp(WifiEnterpriseConfig.OCSP_NONE);
+                    config.enterpriseConfig.setMinimumTlsVersion(WifiEnterpriseConfig.TLS_V1_0);
                 } else {
                     config.enterpriseConfig.setOcsp(mEapOcspSpinner.getSelectedItemPosition());
+                    config.enterpriseConfig.setMinimumTlsVersion(
+                            mEapMinTlsVerSpinner.getSelectedItemPosition());
                 }
 
                 String clientCert = (String) mEapUserCertSpinner.getSelectedItem();
@@ -1005,6 +1009,8 @@ public class WifiConfigController2 implements TextWatcher,
             mPhase2Spinner.setOnItemSelectedListener(this);
             mEapCaCertSpinner = (Spinner) mView.findViewById(R.id.ca_cert);
             mEapCaCertSpinner.setOnItemSelectedListener(this);
+            mEapMinTlsVerSpinner = getEapMinTlsVerSpinner(mWifiManager.isTlsV13Supported());
+
             mEapOcspSpinner = (Spinner) mView.findViewById(R.id.ocsp);
             mEapDomainView = (TextView) mView.findViewById(R.id.domain);
             mEapDomainView.addTextChangedListener(this);
@@ -1148,6 +1154,7 @@ public class WifiConfigController2 implements TextWatcher,
                     setSelection(mEapCaCertSpinner, mMultipleCertSetString);
                 }
             }
+            mEapMinTlsVerSpinner.setSelection(enterpriseConfig.getMinimumTlsVersion());
             mEapOcspSpinner.setSelection(enterpriseConfig.getOcsp());
             mEapDomainView.setText(enterpriseConfig.getDomainSuffixMatch());
             String userCert = enterpriseConfig.getClientCertificateAlias();
@@ -1179,6 +1186,7 @@ public class WifiConfigController2 implements TextWatcher,
         mEapMethodSpinner.setAccessibilityDelegate(selectedEventBlocker);
         mPhase2Spinner.setAccessibilityDelegate(selectedEventBlocker);
         mEapCaCertSpinner.setAccessibilityDelegate(selectedEventBlocker);
+        mEapMinTlsVerSpinner.setAccessibilityDelegate(selectedEventBlocker);
         mEapOcspSpinner.setAccessibilityDelegate(selectedEventBlocker);
         mEapUserCertSpinner.setAccessibilityDelegate(selectedEventBlocker);
     }
@@ -1214,6 +1222,9 @@ public class WifiConfigController2 implements TextWatcher,
         // Defaults for most of the EAP methods and over-riden by
         // by certain EAP methods
         mView.findViewById(R.id.l_ca_cert).setVisibility(View.VISIBLE);
+        if (mWifiManager.isTlsMinimumVersionSupported()) {
+            mView.findViewById(R.id.l_min_tls_ver).setVisibility(View.VISIBLE);
+        }
         mView.findViewById(R.id.l_ocsp).setVisibility(View.VISIBLE);
         mView.findViewById(R.id.password_layout).setVisibility(View.VISIBLE);
         mView.findViewById(R.id.show_password_layout).setVisibility(View.VISIBLE);
@@ -1224,6 +1235,7 @@ public class WifiConfigController2 implements TextWatcher,
             case WIFI_EAP_METHOD_PWD:
                 setPhase2Invisible();
                 setCaCertInvisible();
+                setMinTlsVerInvisible();
                 setOcspInvisible();
                 setDomainInvisible();
                 setAnonymousIdentInvisible();
@@ -1265,6 +1277,7 @@ public class WifiConfigController2 implements TextWatcher,
                 setPhase2Invisible();
                 setAnonymousIdentInvisible();
                 setCaCertInvisible();
+                setMinTlsVerInvisible();
                 setOcspInvisible();
                 setDomainInvisible();
                 setUserCertInvisible();
@@ -1278,6 +1291,7 @@ public class WifiConfigController2 implements TextWatcher,
             if (eapCertSelection.equals(mUnspecifiedCertString)
                     || (mIsTrustOnFirstUseSupported
                             && eapCertSelection.equals(mTrustOnFirstUse))) {
+                setMinTlsVerInvisible();
                 // Domain suffix matching is not relevant if the user hasn't chosen a CA
                 // certificate yet, or chooses not to validate the EAP server.
                 setDomainInvisible();
@@ -1317,6 +1331,11 @@ public class WifiConfigController2 implements TextWatcher,
     private void setCaCertInvisible() {
         mView.findViewById(R.id.l_ca_cert).setVisibility(View.GONE);
         setSelection(mEapCaCertSpinner, mUnspecifiedCertString);
+    }
+
+    private void setMinTlsVerInvisible() {
+        mView.findViewById(R.id.l_min_tls_ver).setVisibility(View.GONE);
+        mEapMinTlsVerSpinner.setSelection(WifiEnterpriseConfig.TLS_V1_0);
     }
 
     private void setOcspInvisible() {
@@ -1919,5 +1938,19 @@ public class WifiConfigController2 implements TextWatcher,
                 info.addAction(customClick);
             }
         });
+    }
+
+    @VisibleForTesting
+    Spinner getEapMinTlsVerSpinner(boolean isTlsV13Supported) {
+        Spinner spinner = mView.findViewById(R.id.min_tls_ver);
+        String[] stringArray = mContext.getResources().getStringArray(R.array.wifi_eap_tls_ver);
+        if (!isTlsV13Supported) {
+            Log.w(TAG, "Wi-Fi Enterprise TLS v1.3 is not supported on this device");
+            List<String> list = new ArrayList<>(Arrays.asList(stringArray));
+            list.remove(WifiEnterpriseConfig.TLS_V1_3);
+            stringArray = list.toArray(new String[0]);
+        }
+        spinner.setAdapter(getSpinnerAdapter(stringArray));
+        return spinner;
     }
 }

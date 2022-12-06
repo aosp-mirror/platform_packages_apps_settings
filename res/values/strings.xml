@@ -1545,6 +1545,8 @@
     <string name="please_select_phase2">Phase 2 authentication</string>
     <!-- Label for the EAP CA certificate of the network -->
     <string name="wifi_eap_ca_cert">CA certificate</string>
+    <!-- Label for the EAP minimum TLS version of the network -->
+    <string name="wifi_eap_min_tls_ver">Minimum TLS version</string>
     <!-- Label for the OCSP type of the network. [CHAR LIMIT=32] -->
     <string name="wifi_eap_ocsp">Online Certificate Status</string>
     <!-- Label for the domain name that the EAP CA certificate(s) can be used to validate. -->
@@ -8048,7 +8050,9 @@
     <!-- [CHAR LIMIT=37] Status label indicating that system needs to be rebooted for Advanced memory protection to be off. -->
     <string name="memtag_off_pending" translatable="false">Off after restart</string>
     <!-- [CHAR LIMIT=37] Status label indicating that Advanced memory protection was forced off via remote device configuration. -->
-    <string name="memtag_force_off" translatable="false">Currently unavailable for your device.</string>
+    <string name="memtag_force_off" translatable="false">Currently unavailable for your device</string>
+    <!-- [CHAR LIMIT=37] Status label indicating that Advanced memory protection was forced on via remote device configuration. -->
+    <string name="memtag_force_on" translatable="false">Always on for your device</string>
     <!-- [CHAR LIMIT=NONE] Subtext on page to control Advanced memory protection settings. -->
     <string name="memtag_footer" translatable="false">You\u0027ll have to restart your device to turn Advanced memory protection on or off. When it\u0027s on, you may notice slower device performance.</string>
     <!-- [CHAR LIMIT=31] Header of dialog asking user to reboot device. -->

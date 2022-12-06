@@ -20,6 +20,7 @@ import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.os.UserManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
@@ -28,48 +29,39 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.SubscriptionUtil;
-import com.android.settingslib.deviceinfo.AbstractSimStatusImeiInfoPreferenceController;
+import com.android.settingslib.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimStatusPreferenceController extends
-        AbstractSimStatusImeiInfoPreferenceController implements PreferenceControllerMixin {
+public class SimStatusPreferenceController extends BasePreferenceController {
 
-    private static final String KEY_SIM_STATUS = "sim_status";
+    public static final String KEY_SIM_STATUS = "sim_status";
     private static final String KEY_PREFERENCE_CATEGORY = "device_detail_category";
 
     private final TelephonyManager mTelephonyManager;
     private final SubscriptionManager mSubscriptionManager;
-    private final Fragment mFragment;
     private final List<Preference> mPreferenceList = new ArrayList<>();
 
+    private Fragment mFragment;
     private int mSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
 
-    public SimStatusPreferenceController(Context context, Fragment fragment) {
-        super(context);
+    public SimStatusPreferenceController(Context context, String prefKey) {
+        super(context, prefKey);
 
-        mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        mSubscriptionManager = (SubscriptionManager) context.getSystemService(
-                Context.TELEPHONY_SUBSCRIPTION_SERVICE);
-        mFragment = fragment;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        if (mSlotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
-            return KEY_SIM_STATUS + mSlotIndex;
-        }
-        return KEY_SIM_STATUS;
+        mTelephonyManager = context.getSystemService(TelephonyManager.class);
+        mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
     }
 
     /**
-     * Update the index of slot for this subscription.
+     * Initialize this preference controller.
+     * @param fragment parent fragment
      * @param slotIndex index of slot
      */
-    public void setSimSlotStatus(int slotIndex) {
+    public void init(Fragment fragment, int slotIndex) {
+        mFragment = fragment;
         mSlotIndex = slotIndex;
     }
 
@@ -90,9 +82,14 @@ public class SimStatusPreferenceController extends
     }
 
     @Override
-    public boolean isAvailable() {
-        return SubscriptionUtil.isSimHardwareVisible(mContext) &&
-                super.isAvailable();
+    public int getAvailabilityStatus() {
+        if (getSimSlotIndex() == SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+        boolean isAvailable = SubscriptionUtil.isSimHardwareVisible(mContext) &&
+                mContext.getSystemService(UserManager.class).isAdminUser() &&
+                !Utils.isWifiOnly(mContext);
+        return isAvailable ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

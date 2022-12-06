@@ -104,13 +104,14 @@ public class MyDeviceInfoFragment extends DashboardFragment
             Context context, MyDeviceInfoFragment fragment, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
 
+        String simStatusKey = SimStatusPreferenceController.KEY_SIM_STATUS;
         SimStatusPreferenceController defaultRecord =
-            new SimStatusPreferenceController(context, fragment);
+            new SimStatusPreferenceController(context, simStatusKey);
 
         for (int slotIndex = 0; slotIndex < defaultRecord.getSimSlotSize(); slotIndex ++) {
             SimStatusPreferenceController slotRecord =
-                new SimStatusPreferenceController(context, fragment);
-            slotRecord.setSimSlotStatus(slotIndex);
+                new SimStatusPreferenceController(context, simStatusKey + slotIndex + 1);
+            slotRecord.init(fragment, slotIndex);
             controllers.add(slotRecord);
         }
 

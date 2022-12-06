@@ -23,16 +23,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.applications.AppLocaleUtil
 import com.android.settings.applications.appinfo.AppLocaleDetails
-import com.android.settingslib.applications.ApplicationsState
-import com.android.settingslib.applications.ApplicationsState.AppEntry
-import com.android.settingslib.spa.framework.compose.collectAsStateWithLifecycle
-import com.android.settingslib.spa.framework.util.asyncMapItem
 import com.android.settingslib.spaprivileged.model.app.AppListModel
 import com.android.settingslib.spaprivileged.model.app.AppRecord
-import com.android.settingslib.spaprivileged.model.app.userId
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
@@ -70,6 +67,7 @@ class AppLanguagesListModel(private val context: Context) : AppListModel<AppLang
         recordList.filter { it.isAppLocaleSupported }
     }
 
+    @OptIn(ExperimentalLifecycleComposeApi::class)
     @Composable
     override fun getSummary(option: Int, record: AppLanguagesRecord): State<String>? =
         remember(record.app) {
