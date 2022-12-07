@@ -590,6 +590,7 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void onAddGuestClicked() {
+        Context context = getContext();
         final UserCreatingDialog guestCreatingDialog =
                 new UserCreatingDialog(getActivity(), /* isGuest= */ true);
         guestCreatingDialog.show();
@@ -597,18 +598,18 @@ public class UserSettings extends SettingsPreferenceFragment
         ThreadUtils.postOnBackgroundThread(() -> {
             mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_USER_GUEST_ADD);
             Trace.beginSection("UserSettings.addGuest");
-            final UserInfo guest = mUserManager.createGuest(getContext());
+            final UserInfo guest = mUserManager.createGuest(context);
             Trace.endSection();
 
             ThreadUtils.postOnMainThread(() -> {
                 guestCreatingDialog.dismiss();
                 if (guest == null) {
-                    Toast.makeText(getContext(),
+                    Toast.makeText(context,
                             com.android.settingslib.R.string.add_guest_failed,
                             Toast.LENGTH_SHORT).show();
                     return;
                 }
-                openUserDetails(guest, true);
+                openUserDetails(guest, true, context);
             });
         });
     }
@@ -646,11 +647,15 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void openUserDetails(UserInfo userInfo, boolean newUser) {
+        openUserDetails(userInfo, newUser, getContext());
+    }
+
+    private void openUserDetails(UserInfo userInfo, boolean newUser, Context context) {
         Bundle extras = new Bundle();
         extras.putInt(UserDetailsSettings.EXTRA_USER_ID, userInfo.id);
         extras.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, newUser);
 
-        SubSettingLauncher launcher = new SubSettingLauncher(getContext())
+        SubSettingLauncher launcher = new SubSettingLauncher(context)
                 .setDestination(UserDetailsSettings.class.getName())
                 .setArguments(extras)
                 .setTitleText(userInfo.name)
