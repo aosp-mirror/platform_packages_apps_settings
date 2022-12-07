@@ -1568,6 +1568,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceClick(Preference pref) {
+        mMetricsFeatureProvider.logSettingsTileClick(pref.getKey(), getMetricsCategory());
         if (isCurrentUserGuest()) {
             if (mGuestResetPreference != null && pref == mGuestResetPreference) {
                 showDialog(DIALOG_CONFIRM_RESET_AND_RESTART_GUEST);
