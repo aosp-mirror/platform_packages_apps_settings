@@ -33,6 +33,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 @RunWith(AndroidJUnit4.class)
 public class SlotSimStatusTest {
 
@@ -54,6 +57,16 @@ public class SlotSimStatusTest {
         doReturn(2).when(mTelephonyManager).getPhoneCount();
 
         SlotSimStatus target = new SlotSimStatus(mContext);
+
+        assertEquals(new Integer(target.size()), new Integer(2));
+    }
+
+    @Test
+    public void size_returnNumberOfPhone_whenQueryInBackgroundThread() {
+        doReturn(2).when(mTelephonyManager).getPhoneCount();
+
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        SlotSimStatus target = new SlotSimStatus(mContext, executor);
 
         assertEquals(new Integer(target.size()), new Integer(2));
     }

@@ -21,6 +21,10 @@ import android.telephony.TelephonyManager;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Phaser;
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * A class for showing a summary of status of sim slots.
  */
@@ -28,7 +32,8 @@ public class SlotSimStatus {
 
     private static final String TAG = "SlotSimStatus";
 
-    private int mNumberOfSlots;
+    private final AtomicInteger mNumberOfSlots = new AtomicInteger(0);
+    private final Phaser mBlocker = new Phaser(1);
     private int mBasePreferenceOrdering;
 
     private static final String KEY_SIM_STATUS = "sim_status";
@@ -38,11 +43,32 @@ public class SlotSimStatus {
      * @param context Context
      */
     public SlotSimStatus(Context context) {
-        TelephonyManager telMgr = context.getSystemService(TelephonyManager.class);
-        if (telMgr == null) {
-            return;
+        this(context, null);
+    }
+
+    /**
+     * Construct of class.
+     * @param context Context
+     * @param executor executor for offload to thread
+     */
+    public SlotSimStatus(Context context, Executor executor) {
+        if (executor == null) {
+            queryRecords(context);
+        } else {
+            executor.execute(() -> queryRecords(context));
         }
-        mNumberOfSlots = telMgr.getPhoneCount();
+    }
+
+    protected void queryRecords(Context context) {
+        TelephonyManager telMgr = context.getSystemService(TelephonyManager.class);
+        if (telMgr != null) {
+            mNumberOfSlots.set(telMgr.getPhoneCount());
+        }
+        mBlocker.arrive();
+    }
+
+    protected void waitForResult() {
+        mBlocker.awaitAdvance(0);
     }
 
     /**
@@ -58,7 +84,8 @@ public class SlotSimStatus {
      * @return number of slots
      */
     public int size() {
-        return mNumberOfSlots;
+        waitForResult();
+        return mNumberOfSlots.get();
     }
 
     /**
