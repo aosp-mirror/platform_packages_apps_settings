@@ -1021,6 +1021,8 @@ public class UserSettings extends SettingsPreferenceFragment
     @VisibleForTesting
     void createUser(final int userType, String userName) {
         Context context = getContext();
+        Resources resources = getResources();
+        final Drawable selectedUserIcon = mPendingUserIcon;
         Future<?> unusedCreateUserFuture = ThreadUtils.postOnBackgroundThread(() -> {
             UserInfo user;
 
@@ -1043,13 +1045,13 @@ public class UserSettings extends SettingsPreferenceFragment
                 }
 
                 Future<?> unusedSettingIconFuture = ThreadUtils.postOnBackgroundThread(() -> {
-                    Drawable newUserIcon = mPendingUserIcon;
+                    Drawable newUserIcon = selectedUserIcon;
                     if (newUserIcon == null) {
-                        newUserIcon = UserIcons.getDefaultUserIcon(getResources(), user.id, false);
+                        newUserIcon = UserIcons.getDefaultUserIcon(resources, user.id, false);
                     }
                     mUserManager.setUserIcon(
                             user.id, UserIcons.convertToBitmapAtUserIconSize(
-                                    getResources(), newUserIcon));
+                                    resources, newUserIcon));
                 });
 
                 mPendingUserIcon = null;
