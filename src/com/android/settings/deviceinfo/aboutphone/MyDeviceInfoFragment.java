@@ -41,6 +41,7 @@ import com.android.settings.deviceinfo.UptimePreferenceController;
 import com.android.settings.deviceinfo.WifiMacAddressPreferenceController;
 import com.android.settings.deviceinfo.imei.ImeiInfoPreferenceController;
 import com.android.settings.deviceinfo.simstatus.SimStatusPreferenceController;
+import com.android.settings.deviceinfo.simstatus.SlotSimStatus;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -104,14 +105,12 @@ public class MyDeviceInfoFragment extends DashboardFragment
             Context context, MyDeviceInfoFragment fragment, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
 
-        String simStatusKey = SimStatusPreferenceController.KEY_SIM_STATUS;
-        SimStatusPreferenceController defaultRecord =
-            new SimStatusPreferenceController(context, simStatusKey);
-
-        for (int slotIndex = 0; slotIndex < defaultRecord.getSimSlotSize(); slotIndex ++) {
+        final SlotSimStatus slotSimStatus = new SlotSimStatus(context);
+        for (int slotIndex = 0; slotIndex < slotSimStatus.size(); slotIndex ++) {
             SimStatusPreferenceController slotRecord =
-                new SimStatusPreferenceController(context, simStatusKey + slotIndex + 1);
-            slotRecord.init(fragment, slotIndex);
+                    new SimStatusPreferenceController(context,
+                    slotSimStatus.getPreferenceKey(slotIndex));
+            slotRecord.init(fragment, slotSimStatus);
             controllers.add(slotRecord);
         }
 

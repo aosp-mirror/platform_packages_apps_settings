@@ -93,7 +93,8 @@ public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceCont
 
     @VisibleForTesting
     boolean isSupportEndItem() {
-        return getWorker() != null && getWorker().isBroadcastSupported() && isConnectedBLEDevice();
+        return getWorker() != null && getWorker().isBroadcastSupported()
+                && (getWorker().isDeviceBroadcasting() || isConnectedBLEDevice());
     }
 
     private boolean isConnectedBLEDevice() {

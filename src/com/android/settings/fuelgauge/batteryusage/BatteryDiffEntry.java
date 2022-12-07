@@ -52,7 +52,6 @@ public class BatteryDiffEntry {
             (a, b) -> Double.compare(b.getPercentOfTotal(), a.getPercentOfTotal());
 
     public long mForegroundUsageTimeInMs;
-    public long mForegroundServiceUsageTimeInMs;
     public long mBackgroundUsageTimeInMs;
     public double mConsumePower;
     public double mForegroundUsageConsumePower;
@@ -83,7 +82,6 @@ public class BatteryDiffEntry {
     public BatteryDiffEntry(
             Context context,
             long foregroundUsageTimeInMs,
-            long foregroundServiceUsageTimeInMs,
             long backgroundUsageTimeInMs,
             double consumePower,
             double foregroundUsageConsumePower,
@@ -98,7 +96,6 @@ public class BatteryDiffEntry {
         mBackgroundUsageConsumePower = backgroundUsageConsumePower;
         mCachedUsageConsumePower = cachedUsageConsumePower;
         mForegroundUsageTimeInMs = foregroundUsageTimeInMs;
-        mForegroundServiceUsageTimeInMs = foregroundServiceUsageTimeInMs;
         mBackgroundUsageTimeInMs = backgroundUsageTimeInMs;
         mBatteryHistEntry = batteryHistEntry;
         mUserManager = context.getSystemService(UserManager.class);
@@ -121,7 +118,6 @@ public class BatteryDiffEntry {
         return new BatteryDiffEntry(
                 this.mContext,
                 this.mForegroundUsageTimeInMs,
-                this.mForegroundServiceUsageTimeInMs,
                 this.mBackgroundUsageTimeInMs,
                 this.mConsumePower,
                 this.mForegroundUsageConsumePower,
@@ -385,14 +381,9 @@ public class BatteryDiffEntry {
                         mForegroundUsageConsumePower, mForegroundServiceUsageConsumePower))
                 .append(String.format("\n\tconsume power= background:%f cached:%f",
                         mBackgroundUsageConsumePower, mCachedUsageConsumePower))
-                .append(String.format("\n\ttime= foreground:%s foregroundService:%s background:%s",
+                .append(String.format("\n\ttime= foreground:%s background:%s",
                         StringUtil.formatElapsedTime(mContext, (double) mForegroundUsageTimeInMs,
                                 /*withSeconds=*/ true, /*collapseTimeUnit=*/ false),
-                        StringUtil.formatElapsedTime(
-                                mContext,
-                                (double) mForegroundServiceUsageTimeInMs,
-                                /*withSeconds=*/ true,
-                                /*collapseTimeUnit=*/ false),
                         StringUtil.formatElapsedTime(mContext, (double) mBackgroundUsageTimeInMs,
                                 /*withSeconds=*/ true, /*collapseTimeUnit=*/ false)))
                 .append(String.format("\n\tpackage:%s|%s uid:%d userId:%d",

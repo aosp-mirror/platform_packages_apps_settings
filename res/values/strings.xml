@@ -2697,6 +2697,16 @@
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset network settings [CHAR LIMIT=NONE] -->
     <string name="reset_network_desc">This will reset all network settings, including:\n\n<li>Wi\u2011Fi</li>\n<li>Mobile data</li>\n<li>Bluetooth</li>"</string>
 
+    <!-- Reset Bluetooth and Wi-Fi Network -->
+    <!-- Dialog title to reset Bluetooth and Wi-Fi settings -->
+    <string name="reset_bluetooth_wifi_title">Reset Bluetooth &amp; Wi\u2011Fi</string>
+    <!-- Dialog context when reset Bluetooth and Wi-Fi settings [CHAR LIMIT=NONE] -->
+    <string name="reset_bluetooth_wifi_desc">This will reset all Wi\u2011Fi &amp; Bluetooth settings. You can\u2019t undo this action.</string>
+    <!-- Confirmation button text when reset Bluetooth and Wi-Fi settings [CHAR LIMIT=NONE] -->
+    <string name="reset_bluetooth_wifi_button_text">Reset</string>
+    <!-- Reset Bluetooth and Wi-Fi complete toast text [CHAR LIMIT=75] -->
+    <string name="reset_bluetooth_wifi_complete_toast">Bluetooth &amp; Wi\u2011Fi have been reset</string>
+
     <!-- Erase Euicc -->
     <!-- Confirmation button of dialog to confirm resetting user's app preferences [CHAR LIMIT=NONE] -->
     <string name="erase_euicc_data_button">Erase</string>
@@ -4987,12 +4997,22 @@
     <string name="battery_usage_for_background_time">Background: <xliff:g id="time">%s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer for empty content -->
     <string name="battery_usage_screen_footer_empty">Battery usage data will be available in a few hours once fully charged</string>
+    <!-- [CHAR_LIMIT=NONE] Battery chart label for the current time. -->
+    <string name="battery_usage_chart_label_now">now</string>
     <!-- [CHAR_LIMIT=NONE] Accessibility content description for battery chart view. -->
     <string name="battery_usage_chart">Battery usage chart</string>
     <!-- [CHAR_LIMIT=NONE] Accessibility content description for daily battery chart view. -->
     <string name="daily_battery_usage_chart">Daily battery usage chart</string>
     <!-- [CHAR_LIMIT=NONE] Accessibility content description for hourly battery chart view. -->
     <string name="hourly_battery_usage_chart">Hourly battery usage chart</string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage breakdown title since last full charge -->
+    <string name="battery_usage_breakdown_title_since_last_full_charge">Usage proportional breakdown since last full charge</string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage breakdown title for a selected slot -->
+    <string name="battery_usage_breakdown_title_for_slot">Usage proportional breakdown for <xliff:g id="slot">%s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] The tab title in the battery usage breakdown. -->
+    <string name="battery_usage_app_tab">App</string>
+    <!-- [CHAR_LIMIT=NONE] The tab title in the battery usage breakdown. -->
+    <string name="battery_usage_system_tab">System</string>
     <!-- Process Stats strings -->
     <skip />
 
@@ -8034,39 +8054,38 @@
     <!-- [CHAR LIMIT=NONE] eSim deletion confirmation description  -->
     <string name="confirm_sim_deletion_description">Verify it\u0027s you before erasing a eSIM</string>
 
-    <!-- TODO(b/258550150): Finalize all strings in this section and remove translatable="false" -->
     <!-- [CHAR LIMIT=32] Name of Advanced memory protection page in "More Security Settings" and heading of page. -->
-    <string name="memtag_title" translatable="false">Advanced memory protection beta</string>
+    <string name="memtag_title">Advanced memory protection beta</string>
     <!-- [CHAR LIMIT=52] Label for button to turn on / off Advanced memory protection.-->
-    <string name="memtag_toggle" translatable="false">Advanced memory protection</string>
+    <string name="memtag_toggle">Advanced memory protection</string>
     <!-- [CHAR LIMIT=NONE] Subtitle of Advanced memory protection page. -->
-    <string name="memtag_intro" translatable="false">This beta feature helps you protect your device from bugs that may put your security at risk.</string>
+    <string name="memtag_intro">This beta feature helps you protect your device from bugs that may put your security at risk.</string>
     <!-- [CHAR LIMIT=NONE] Status label indicating that Advanced memory protection is on. -->
-    <string name="memtag_on" translatable="false">On</string>
+    <string name="memtag_on">On</string>
     <!-- [CHAR LIMIT=37] Status label indicating that Advanced memory protection is off. -->
-    <string name="memtag_off" translatable="false">Off</string>
+    <string name="memtag_off">Off</string>
     <!-- [CHAR LIMIT=37] Status label indicating that system needs to be rebooted for Advanced memory protection to be on. -->
-    <string name="memtag_on_pending" translatable="false">On after restart</string>
+    <string name="memtag_on_pending">On after restart</string>
     <!-- [CHAR LIMIT=37] Status label indicating that system needs to be rebooted for Advanced memory protection to be off. -->
-    <string name="memtag_off_pending" translatable="false">Off after restart</string>
+    <string name="memtag_off_pending">Off after restart</string>
     <!-- [CHAR LIMIT=37] Status label indicating that Advanced memory protection was forced off via remote device configuration. -->
-    <string name="memtag_force_off" translatable="false">Currently unavailable for your device</string>
+    <string name="memtag_force_off">Currently unavailable for your device</string>
     <!-- [CHAR LIMIT=37] Status label indicating that Advanced memory protection was forced on via remote device configuration. -->
-    <string name="memtag_force_on" translatable="false">Always on for your device</string>
+    <string name="memtag_force_on">Always on for your device</string>
     <!-- [CHAR LIMIT=NONE] Subtext on page to control Advanced memory protection settings. -->
-    <string name="memtag_footer" translatable="false">You\u0027ll have to restart your device to turn Advanced memory protection on or off. When it\u0027s on, you may notice slower device performance.</string>
+    <string name="memtag_footer">You\u0027ll have to restart your device to turn Advanced memory protection on or off. When it\u0027s on, you may notice slower device performance.</string>
     <!-- [CHAR LIMIT=31] Header of dialog asking user to reboot device. -->
-    <string name="memtag_reboot_title" translatable="false">Restart device?</string>
+    <string name="memtag_reboot_title">Restart device?</string>
     <!-- [CHAR LIMIT=NONE] Message shown in dialog prompting user to reboot device to turn on Advanced memory protection.-->
-    <string name="memtag_reboot_message_on" translatable="false">You\u0027ll need to restart your device to turn on Advanced memory protection.</string>
+    <string name="memtag_reboot_message_on">You\u0027ll need to restart your device to turn on Advanced memory protection.</string>
     <!-- [CHAR LIMIT=NONE] Message shown in dialog prompting user to reboot device to turn off Advanced memory protection.-->
-    <string name="memtag_reboot_message_off" translatable="false">You\u0027ll need to restart your device to turn off Advanced memory protection.</string>
+    <string name="memtag_reboot_message_off">You\u0027ll need to restart your device to turn off Advanced memory protection.</string>
     <!-- [CHAR LIMIT=17] Button label in dialog prompting user to reboot device.-->
-    <string name="memtag_reboot_yes" translatable="false">Restart</string>
+    <string name="memtag_reboot_yes">Restart</string>
     <!-- [CHAR LIMIT=17] Button label in dialog prompting user to reboot device.-->
-    <string name="memtag_reboot_no" translatable="false">Not now</string>
+    <string name="memtag_reboot_no">Not now</string>
     <!-- [CHAR LIMIT=NONE] Label for Learn More link. -->
-    <string name="memtag_learn_more" translatable="false">Learn more about Advanced memory protection.</string>
+    <string name="memtag_learn_more">Learn more about Advanced memory protection.</string>
 
     <!-- Opening string on the dialog that prompts the user to confirm that they really want to delete their existing work profile. The administration app icon and name appear after the final colon. [CHAR LIMIT=NONE] -->
     <string name="opening_paragraph_delete_profile_unknown_company">This work profile is managed by:</string>
@@ -10654,8 +10673,8 @@
     <string name="lockscreen_double_line_clock_summary">Show double-line clock when available</string>
     <!-- Lockscreen double-line clock toggle [CHAR LIMIT=60] -->
     <string name="lockscreen_double_line_clock_setting_toggle">Double-line clock</string>
-    <!-- Lock screen buttons preference [CHAR LIMIT=60] -->
-    <string name="lockscreen_quick_affordances_title">Buttons</string>
+    <!-- Lock screen shortcuts preference [CHAR LIMIT=60] -->
+    <string name="lockscreen_quick_affordances_title">Shortcuts</string>
     <!-- Summary for the lock screen button preference [CHAR LIMIT=60] -->
     <plurals name="lockscreen_quick_affordances_summary">
         <item quantity="zero">None</item>

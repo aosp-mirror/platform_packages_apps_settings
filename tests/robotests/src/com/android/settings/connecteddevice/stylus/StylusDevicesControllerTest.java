@@ -32,6 +32,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.provider.Settings.Secure;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodManager;
 
@@ -225,6 +226,42 @@ public class StylusDevicesControllerTest {
         assertThat(handwritingPref.isChecked()).isEqualTo(true);
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.STYLUS_HANDWRITING_ENABLED, -1)).isEqualTo(1);
+    }
+
+    @Test
+    public void buttonsPreference_checkedWhenFlagTrue() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_BUTTONS_DISABLED, 1);
+
+        showScreen(mController);
+        SwitchPreference buttonsPref = (SwitchPreference) mPreferenceContainer.getPreference(2);
+
+        assertThat(buttonsPref.isChecked()).isEqualTo(true);
+    }
+
+    @Test
+    public void buttonsPreference_uncheckedWhenFlagFalse() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_BUTTONS_DISABLED, 0);
+
+        showScreen(mController);
+        SwitchPreference buttonsPref = (SwitchPreference) mPreferenceContainer.getPreference(2);
+
+        assertThat(buttonsPref.isChecked()).isEqualTo(false);
+    }
+
+    @Test
+    public void buttonsPreference_updatesFlagOnClick() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_BUTTONS_DISABLED, 1);
+        showScreen(mController);
+        SwitchPreference buttonsPref = (SwitchPreference) mPreferenceContainer.getPreference(2);
+
+        buttonsPref.performClick();
+
+        assertThat(buttonsPref.isChecked()).isEqualTo(false);
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Secure.STYLUS_BUTTONS_DISABLED, -1)).isEqualTo(0);
     }
 
     private void showScreen(StylusDevicesController controller) {

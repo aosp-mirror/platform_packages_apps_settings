@@ -37,19 +37,19 @@ class AppPermissionSummaryLiveData(
     private val app: ApplicationInfo,
 ) : LiveData<AppPermissionSummaryState>() {
     private val userContext = context.asUser(app.userHandle)
-    private val packageManager = userContext.packageManager
+    private val userPackageManager = userContext.packageManager
 
     private val onPermissionsChangedListener = OnPermissionsChangedListener { uid ->
         if (uid == app.uid) update()
     }
 
     override fun onActive() {
-        packageManager.addOnPermissionsChangeListener(onPermissionsChangedListener)
+        userPackageManager.addOnPermissionsChangeListener(onPermissionsChangedListener)
         update()
     }
 
     override fun onInactive() {
-        packageManager.removeOnPermissionsChangeListener(onPermissionsChangedListener)
+        userPackageManager.removeOnPermissionsChangeListener(onPermissionsChangedListener)
     }
 
     private fun update() {
@@ -69,12 +69,10 @@ class AppPermissionSummaryLiveData(
                 return
             }
             val labels = getDisplayLabels(additionalGrantedPermissionCount, grantedGroupLabels)
-            val summary = when {
-                labels.isEmpty() -> {
-                    context.getString(R.string.runtime_permissions_summary_no_permissions_granted)
-                }
-
-                else -> ListFormatter.getInstance().format(labels)
+            val summary = if (labels.isNotEmpty()) {
+                ListFormatter.getInstance().format(labels)
+            } else {
+                context.getString(R.string.runtime_permissions_summary_no_permissions_granted)
             }
             postValue(AppPermissionSummaryState(summary = summary, enabled = true))
         }
