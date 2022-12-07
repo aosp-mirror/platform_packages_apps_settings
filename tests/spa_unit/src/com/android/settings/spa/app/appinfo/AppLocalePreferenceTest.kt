@@ -22,11 +22,9 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
@@ -47,7 +45,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentCaptor
-import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito.any
 import org.mockito.Mockito.doNothing
@@ -80,9 +77,8 @@ class AppLocalePreferenceTest {
             .strictness(Strictness.LENIENT)
             .startMocking()
         whenever(context.packageManager).thenReturn(packageManager)
-        whenever(AppLocaleUtil.canDisplayLocaleUi(any(), ArgumentMatchers.eq(APP), any()))
-                .thenReturn(true)
-        whenever(AppLocaleDetails.getSummary(any(), ArgumentMatchers.eq(APP))).thenReturn(SUMMARY)
+        whenever(AppLocaleUtil.canDisplayLocaleUi(any(), eq(APP), any())).thenReturn(true)
+        whenever(AppLocaleDetails.getSummary(any(), eq(APP))).thenReturn(SUMMARY)
     }
 
     @After
@@ -92,8 +88,7 @@ class AppLocalePreferenceTest {
 
     @Test
     fun whenCanNotDisplayLocalUi_notDisplayed() {
-        whenever(AppLocaleUtil.canDisplayLocaleUi(any(), ArgumentMatchers.eq(APP), any()))
-                .thenReturn(false)
+        whenever(AppLocaleUtil.canDisplayLocaleUi(any(), eq(APP), any())).thenReturn(false)
 
         setContent()
 
@@ -104,8 +99,9 @@ class AppLocalePreferenceTest {
     fun whenCanDisplayLocalUi_displayed() {
         setContent()
 
-        composeTestRule.onNodeWithText(context.getString(R.string.app_locale_preference_title))
-            .assertIsDisplayed()
+        composeTestRule.waitUntilExists(
+            hasText(context.getString(R.string.app_locale_preference_title))
+        )
         composeTestRule.waitUntilExists(hasText(SUMMARY))
     }
 
