@@ -521,9 +521,6 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Inua kidole chako utakapohisi mtetemo"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Nenda mahali penye mwangaza hafifu kisha ujaribu tena"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Umefikia idadi ya juu ya mara ambazo unaruhusiwa kujaribu"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Tumia alama ya kidole chako kufungua kompyuta kibao yako au kuthibitisha kuwa ni wewe, kama vile unapoingia katika akaunti kwenye programu"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Tumia alama ya kidole chako kufungua kifaa chako au kuthibitisha kuwa ni wewe, kama vile unapoingia katika akaunti kwenye programu"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Tumia alama ya kidole chako kufungua simu yako au kuthibitisha kuwa ni wewe, kama vile unapoingia katika akaunti kwenye programu"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Kufungua kwa Alama ya Kidole na Uso"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Gusa ili uweke mipangilio"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Uso na alama za vidole zimeongezwa"</string>
@@ -2830,8 +2827,12 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Angalia programu zinazotumia betri zaidi"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Imesitisha kuchaji"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"Inalinda betri ili kuongeza muda wa kudumu wa betri"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
-    <skip />
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="7257251934903787366">"Itachaji hadi <xliff:g id="PERCENT">%1$s</xliff:g> ili kulinda betri"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="428474483479026813">"Kompyuta kibao yako inapoambatishwa, kuchaji kutasitishwa ikifika <xliff:g id="PERCENT">%1$s</xliff:g> ili kuongeza muda wa matumizi ya betri"</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="8843454404807737776">"Imesitisha kuchaji ili kulinda betri"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="5582869291068635429">"Kompyuta kibao yako inapoambatishwa, kuchaji husitishwa ikifika <xliff:g id="PERCENT">%1$s</xliff:g> ili kuongeza muda wa matumizi ya betri"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Kuchaji hadi ijae"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="5107293805054133144">"Ili kulinda betri yako, kompyuta kibao itasitisha kuchaji ikifika <xliff:g id="PERCENT">%1$s</xliff:g> ikiwa imeambatishwa"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Pata maelezo zaidi kuhusu kusitisha kuchaji"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Endelea kuchaji"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Katika hali fulani, kama vile halijoto za kiwango cha juu na vipindi virefu vya kuchaji, huenda isichaji zaidi ya <xliff:g id="PERCENT">%1$s</xliff:g> ili kusaidia kudumisha muda wa matumizi ya betri. \n\nHali hizo zitakapoisha, simu yako itachaji kiotomatiki kwa njia ya kawaida."</string>
@@ -5670,9 +5671,11 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Ili utumie, washa kwanza \"Onyesha vidhibiti vya vifaa\""</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Onyesha saa yenye mistari miwili inapopatikana"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Saa yenye mistari miwili"</string>
-    <!-- no translation found for lockscreen_quick_affordances_title (435869403114245620) -->
-    <skip />
-    <!-- no translation found for lockscreen_quick_affordances_summary (4225396036524703997) -->
+    <string name="lockscreen_quick_affordances_title" msgid="435869403114245620">"Vitufe"</string>
+    <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
+      <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
+      <item quantity="one"><xliff:g id="FIRST_0">%1$s</xliff:g></item>
+    </plurals>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
