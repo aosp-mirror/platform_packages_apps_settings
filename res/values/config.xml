@@ -624,4 +624,11 @@
     <!-- Whether sim related information is visible to the end user. -->
     <bool name="config_show_sim_info">true</bool>
 
+    <!-- In the case of receiving both help and progress message, display progress message. -->
+    <bool name="enrollment_progress_priority_over_help">false</bool>
+    <!-- Prioritize help message by their occurrence -->
+    <bool name="enrollment_prioritize_acquire_messages">false</bool>
+    <!-- Control messages displayed during enrollment -->
+    <bool name="enrollment_message_display_controller_flag">false</bool>
+
 </resources>
