@@ -107,7 +107,6 @@ public class BatteryTestUtils {
                         .setPercentOfTotal(10f)
                         .setDrainType(1)
                         .setForegroundUsageTimeInMs(60000)
-                        .setForegroundServiceUsageTimeInMs(30000)
                         .setBackgroundUsageTimeInMs(10000)
                         .setForegroundUsageConsumePower(0.1f)
                         .setForegroundServiceUsageConsumePower(0.05f)

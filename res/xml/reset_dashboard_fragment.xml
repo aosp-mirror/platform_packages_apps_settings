@@ -28,6 +28,14 @@
         settings:useAdminDisabledSummary="true"
         android:fragment="com.android.settings.ResetNetwork" />
 
+    <!-- Bluetooth and WiFi reset -->
+    <com.android.settingslib.RestrictedPreference
+        android:key="network_reset_bluetooth_wifi_pref"
+        android:title="@string/reset_bluetooth_wifi_title"
+        settings:userRestriction="no_network_reset"
+        settings:useAdminDisabledSummary="true"
+        settings:controller="com.android.settings.network.BluetoothWiFiResetPreferenceController" />
+
     <!-- Reset app preferences -->
     <Preference
         android:key="reset_app_prefs"

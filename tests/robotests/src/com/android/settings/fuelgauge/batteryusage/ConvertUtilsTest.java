@@ -70,7 +70,6 @@ public final class ConvertUtilsTest {
         when(mMockBatteryEntry.getConsumedPowerInCached()).thenReturn(1.5);
         mMockBatteryEntry.mPercent = 0.3;
         when(mMockBatteryEntry.getTimeInForegroundMs()).thenReturn(1234L);
-        when(mMockBatteryEntry.getTimeInForegroundServiceMs()).thenReturn(3456L);
         when(mMockBatteryEntry.getTimeInBackgroundMs()).thenReturn(5689L);
         when(mMockBatteryEntry.getPowerComponentId()).thenReturn(expectedType);
         when(mMockBatteryEntry.getConsumerType())
@@ -112,7 +111,6 @@ public final class ConvertUtilsTest {
         assertThat(batteryInformation.getCachedUsageConsumePower()).isEqualTo(1.5);
         assertThat(batteryInformation.getPercentOfTotal()).isEqualTo(0.3);
         assertThat(batteryInformation.getForegroundUsageTimeInMs()).isEqualTo(1234L);
-        assertThat(batteryInformation.getForegroundServiceUsageTimeInMs()).isEqualTo(3456L);
         assertThat(batteryInformation.getBackgroundUsageTimeInMs()).isEqualTo(5689L);
         assertThat(batteryInformation.getDrainType()).isEqualTo(expectedType);
         assertThat(deviceBatteryState.getBatteryLevel()).isEqualTo(12);
@@ -169,7 +167,6 @@ public final class ConvertUtilsTest {
         when(mMockBatteryEntry.getConsumedPowerInCached()).thenReturn(1.5);
         mMockBatteryEntry.mPercent = 0.3;
         when(mMockBatteryEntry.getTimeInForegroundMs()).thenReturn(1234L);
-        when(mMockBatteryEntry.getTimeInForegroundServiceMs()).thenReturn(3456L);
         when(mMockBatteryEntry.getTimeInBackgroundMs()).thenReturn(5689L);
         when(mMockBatteryEntry.getPowerComponentId()).thenReturn(expectedType);
         when(mMockBatteryEntry.getConsumerType())
@@ -202,8 +199,6 @@ public final class ConvertUtilsTest {
         assertThat(batteryHistEntry.mPercentOfTotal).isEqualTo(0.3);
         assertThat(batteryHistEntry.mForegroundUsageTimeInMs)
                 .isEqualTo(1234L);
-        assertThat(batteryHistEntry.mForegroundServiceUsageTimeInMs)
-                .isEqualTo(3456L);
         assertThat(batteryHistEntry.mBackgroundUsageTimeInMs)
                 .isEqualTo(5689L);
         assertThat(batteryHistEntry.mDrainType).isEqualTo(expectedType);

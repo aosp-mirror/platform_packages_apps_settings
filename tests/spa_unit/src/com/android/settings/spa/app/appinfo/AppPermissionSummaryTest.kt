@@ -19,16 +19,17 @@ package com.android.settings.spa.app.appinfo
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.dx.mockito.inline.extended.ExtendedMockito.mockitoSession
 import com.android.settings.R
+import com.android.settings.testutils.mockAsUser
 import com.android.settingslib.applications.PermissionsSummaryHelper
 import com.android.settingslib.applications.PermissionsSummaryHelper.PermissionsResultCallback
+import com.android.settingslib.spa.testutils.getOrAwaitValue
 import com.google.common.truth.Truth.assertThat
-import java.util.concurrent.CountDownLatch
-import java.util.concurrent.TimeUnit
-import java.util.concurrent.TimeoutException
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -39,22 +40,17 @@ import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.eq
 import org.mockito.Mockito.never
 import org.mockito.Mockito.verify
+import org.mockito.MockitoSession
 import org.mockito.Spy
-import org.mockito.junit.MockitoJUnit
-import org.mockito.junit.MockitoRule
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
-import org.robolectric.annotation.Implementation
-import org.robolectric.annotation.Implements
+import org.mockito.quality.Strictness
 import org.mockito.Mockito.`when` as whenever
 
-@RunWith(RobolectricTestRunner::class)
-@Config(shadows = [ShadowPermissionsSummaryHelper::class])
+@RunWith(AndroidJUnit4::class)
 class AppPermissionSummaryTest {
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @JvmField
-    @Rule
-    val mockito: MockitoRule = MockitoJUnit.rule()
+    private lateinit var mockSession: MockitoSession
 
     @Spy
     private var context: Context = ApplicationProvider.getApplicationContext()
@@ -66,27 +62,53 @@ class AppPermissionSummaryTest {
 
     @Before
     fun setUp() {
-        doReturn(context).`when`(context).createContextAsUser(any(), eq(0))
+        mockSession = mockitoSession()
+            .initMocks(this)
+            .mockStatic(PermissionsSummaryHelper::class.java)
+            .strictness(Strictness.LENIENT)
+            .startMocking()
+        context.mockAsUser()
         whenever(context.packageManager).thenReturn(packageManager)
 
-        val app = ApplicationInfo().apply {
-            packageName = PACKAGE_NAME
-        }
-        summaryLiveData = AppPermissionSummaryLiveData(context, app)
+        summaryLiveData = AppPermissionSummaryLiveData(context, APP)
+    }
+
+    private fun mockGetPermissionSummary(
+        requestedPermissionCount: Int = 0,
+        additionalGrantedPermissionCount: Int = 0,
+        grantedGroupLabels: List<CharSequence> = emptyList(),
+    ) {
+        whenever(PermissionsSummaryHelper.getPermissionSummary(any(), eq(PACKAGE_NAME), any()))
+            .thenAnswer {
+                val callback = it.arguments[2] as PermissionsResultCallback
+                callback.onPermissionSummaryResult(
+                    requestedPermissionCount,
+                    additionalGrantedPermissionCount,
+                    grantedGroupLabels,
+                )
+            }
+    }
+
+    @After
+    fun tearDown() {
+        mockSession.finishMocking()
     }
 
     @Test
     fun permissionsChangeListener() {
+        mockGetPermissionSummary()
+
         summaryLiveData.getOrAwaitValue {
             verify(packageManager).addOnPermissionsChangeListener(any())
             verify(packageManager, never()).removeOnPermissionsChangeListener(any())
         }
+
         verify(packageManager).removeOnPermissionsChangeListener(any())
     }
 
     @Test
     fun summary_noPermissionsRequested() {
-        ShadowPermissionsSummaryHelper.requestedPermissionCount = 0
+        mockGetPermissionSummary(requestedPermissionCount = 0)
 
         val (summary, enabled) = summaryLiveData.getOrAwaitValue()!!
 
@@ -98,8 +120,7 @@ class AppPermissionSummaryTest {
 
     @Test
     fun summary_noPermissionsGranted() {
-        ShadowPermissionsSummaryHelper.requestedPermissionCount = 1
-        ShadowPermissionsSummaryHelper.grantedGroupLabels = emptyList()
+        mockGetPermissionSummary(requestedPermissionCount = 1, grantedGroupLabels = emptyList())
 
         val (summary, enabled) = summaryLiveData.getOrAwaitValue()!!
 
@@ -111,8 +132,10 @@ class AppPermissionSummaryTest {
 
     @Test
     fun onPermissionSummaryResult_hasRuntimePermission_shouldSetPermissionAsSummary() {
-        ShadowPermissionsSummaryHelper.requestedPermissionCount = 1
-        ShadowPermissionsSummaryHelper.grantedGroupLabels = listOf(PERMISSION)
+        mockGetPermissionSummary(
+            requestedPermissionCount = 1,
+            grantedGroupLabels = listOf(PERMISSION),
+        )
 
         val (summary, enabled) = summaryLiveData.getOrAwaitValue()!!
 
@@ -122,9 +145,11 @@ class AppPermissionSummaryTest {
 
     @Test
     fun onPermissionSummaryResult_hasAdditionalPermission_shouldSetAdditionalSummary() {
-        ShadowPermissionsSummaryHelper.requestedPermissionCount = 5
-        ShadowPermissionsSummaryHelper.additionalGrantedPermissionCount = 2
-        ShadowPermissionsSummaryHelper.grantedGroupLabels = listOf(PERMISSION)
+        mockGetPermissionSummary(
+            requestedPermissionCount = 5,
+            additionalGrantedPermissionCount = 2,
+            grantedGroupLabels = listOf(PERMISSION),
+        )
 
         val (summary, enabled) = summaryLiveData.getOrAwaitValue()!!
 
@@ -132,54 +157,11 @@ class AppPermissionSummaryTest {
         assertThat(enabled).isTrue()
     }
 
-    companion object {
-        private const val PACKAGE_NAME = "packageName"
-        private const val PERMISSION = "Storage"
-    }
-}
-
-@Implements(PermissionsSummaryHelper::class)
-private object ShadowPermissionsSummaryHelper {
-    var requestedPermissionCount = 0
-    var additionalGrantedPermissionCount = 0
-    var grantedGroupLabels: List<CharSequence> = emptyList()
-
-    @Implementation
-    @JvmStatic
-    @Suppress("UNUSED_PARAMETER")
-    fun getPermissionSummary(context: Context, pkg: String, callback: PermissionsResultCallback) {
-        callback.onPermissionSummaryResult(
-            requestedPermissionCount,
-            additionalGrantedPermissionCount,
-            grantedGroupLabels,
-        )
-    }
-}
-
-private fun <T> LiveData<T>.getOrAwaitValue(
-    time: Long = 2,
-    timeUnit: TimeUnit = TimeUnit.SECONDS,
-    afterObserve: () -> Unit = {},
-): T? {
-    var data: T? = null
-    val latch = CountDownLatch(1)
-    val observer = Observer<T> { o ->
-        data = o
-        latch.countDown()
-    }
-    this.observeForever(observer)
-
-    afterObserve()
-
-    try {
-        // Don't wait indefinitely if the LiveData is not set.
-        if (!latch.await(time, timeUnit)) {
-            throw TimeoutException("LiveData value was never set.")
+    private companion object {
+        const val PACKAGE_NAME = "packageName"
+        const val PERMISSION = "Storage"
+        val APP = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
         }
-
-    } finally {
-        this.removeObserver(observer)
     }
-
-    return data
 }

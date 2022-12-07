@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
+import android.provider.Settings.Secure;
 import android.util.Log;
 import android.view.InputDevice;
 
@@ -125,6 +126,8 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         pref.setTitle(mContext.getString(R.string.stylus_ignore_button));
         pref.setIcon(R.drawable.ic_block);
         pref.setOnPreferenceClickListener(this);
+        pref.setChecked(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_BUTTONS_DISABLED, 0) == 1);
         return pref;
     }
 
@@ -147,7 +150,9 @@ public class StylusDevicesController extends AbstractPreferenceController implem
                         ((SwitchPreference) preference).isChecked() ? 1 : 0);
                 break;
             case KEY_IGNORE_BUTTON:
-                // TODO(b/251199452): to turn off stylus button presses
+                Settings.Secure.putInt(mContext.getContentResolver(),
+                        Secure.STYLUS_BUTTONS_DISABLED,
+                        ((SwitchPreference) preference).isChecked() ? 1 : 0);
                 break;
         }
         return true;

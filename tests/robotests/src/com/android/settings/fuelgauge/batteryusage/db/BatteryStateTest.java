@@ -63,7 +63,6 @@ public final class BatteryStateTest {
                         .setPercentOfTotal(10)
                         .setDrainType(1)
                         .setForegroundUsageTimeInMs(60000)
-                        .setForegroundServiceUsageTimeInMs(30000)
                         .setBackgroundUsageTimeInMs(10000)
                         .build();
     }

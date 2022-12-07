@@ -112,7 +112,6 @@ public class BatteryEntry {
     private final int mPowerComponentId;
     private long mUsageDurationMs;
     private long mTimeInForegroundMs;
-    private long mTimeInForegroundServiceMs;
     private long mTimeInBackgroundMs;
 
     public String mName;
@@ -175,9 +174,6 @@ public class BatteryEntry {
             }
             getQuickNameIconForUid(uid, packages, loadDataInBackground);
             mTimeInForegroundMs =
-                    uidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_FOREGROUND);
-            //TODO: update this to the correct API after the new API is completed.
-            mTimeInForegroundServiceMs =
                     uidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_FOREGROUND);
             mTimeInBackgroundMs =
                     uidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_BACKGROUND);
@@ -436,15 +432,6 @@ public class BatteryEntry {
         }
     }
 
-    /** Returns foreground service time/ms that is attributed to this entry. */
-    public long getTimeInForegroundServiceMs() {
-        if (mBatteryConsumer instanceof UidBatteryConsumer) {
-            return mTimeInForegroundServiceMs;
-        } else {
-            return 0;
-        }
-    }
-
     /** Returns background activity time/ms that is attributed to this entry. */
     public long getTimeInBackgroundMs() {
         if (mBatteryConsumer instanceof UidBatteryConsumer) {
@@ -517,9 +504,6 @@ public class BatteryEntry {
         if (batteryConsumer instanceof UidBatteryConsumer) {
             UidBatteryConsumer uidBatteryConsumer = (UidBatteryConsumer) batteryConsumer;
             mTimeInForegroundMs += uidBatteryConsumer.getTimeInStateMs(
-                    UidBatteryConsumer.STATE_FOREGROUND);
-            //TODO: update this to the correct API after the new API is completed.
-            mTimeInForegroundServiceMs += uidBatteryConsumer.getTimeInStateMs(
                     UidBatteryConsumer.STATE_FOREGROUND);
             mTimeInBackgroundMs += uidBatteryConsumer.getTimeInStateMs(
                     UidBatteryConsumer.STATE_BACKGROUND);

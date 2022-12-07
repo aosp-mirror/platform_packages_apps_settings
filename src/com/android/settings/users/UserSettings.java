@@ -1582,6 +1582,7 @@ public class UserSettings extends SettingsPreferenceFragment
             openUserDetails(userInfo, false);
             return true;
         } else if (pref == mAddUser) {
+            mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_USER_ADD);
             // If we allow both types, show a picker, otherwise directly go to
             // flow for full user.
             if (mUserCaps.mCanAddRestrictedProfile) {

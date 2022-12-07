@@ -133,6 +133,14 @@ class TextReadingPreviewController extends BasePreferenceController implements
         postCommitDelayed(CHANGE_BY_SEEKBAR_DELAY_MS);
     }
 
+    void setCurrentItem(int index) {
+        mPreviewPreference.setCurrentItem(index);
+    }
+
+    int getCurrentItem() {
+        return mPreviewPreference.getCurrentItem();
+    }
+
     /**
      * The entry point is used for logging.
      *

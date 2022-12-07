@@ -50,8 +50,7 @@ import java.util.Map;
 public class PowerUsageAdvanced extends PowerUsageBase {
     private static final String TAG = "AdvancedBatteryUsage";
     private static final String KEY_REFRESH_TYPE = "refresh_type";
-    private static final String KEY_BATTERY_GRAPH = "battery_graph";
-    private static final String KEY_APP_LIST = "app_list";
+    private static final String KEY_BATTERY_CHART = "battery_chart";
 
     @VisibleForTesting
     BatteryHistoryPreference mHistPref;
@@ -81,7 +80,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         super.onCreate(icicle);
         final Context context = getContext();
         refreshFeatureFlag(context);
-        mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_GRAPH);
+        mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_CHART);
         setBatteryChartPreferenceController();
     }
 
@@ -134,9 +133,17 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         refreshFeatureFlag(context);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mBatteryChartPreferenceController =
-                new BatteryChartPreferenceController(context, KEY_APP_LIST,
-                        getSettingsLifecycle(), (SettingsActivity) getActivity(), this);
+                new BatteryChartPreferenceController(
+                        context, getSettingsLifecycle(), (SettingsActivity) getActivity());
+        BatteryUsageBreakdownController batteryUsageBreakdownController =
+                new BatteryUsageBreakdownController(
+                        context, getSettingsLifecycle(), (SettingsActivity) getActivity(), this);
+
+        mBatteryChartPreferenceController.setOnBatteryUsageUpdatedListener(
+                batteryUsageBreakdownController::handleBatteryUsageUpdated);
+
         controllers.add(mBatteryChartPreferenceController);
+        controllers.add(batteryUsageBreakdownController);
         setBatteryChartPreferenceController();
         return controllers;
     }
@@ -196,8 +203,10 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     final List<AbstractPreferenceController> controllers = new ArrayList<>();
-                    controllers.add(new BatteryChartPreferenceController(context,
-                            KEY_APP_LIST, null /* lifecycle */, null /* activity */,
+                    controllers.add(new BatteryChartPreferenceController(
+                            context, null /* lifecycle */, null /* activity */));
+                    controllers.add(new BatteryUsageBreakdownController(
+                            context, null /* lifecycle */, null /* activity */,
                             null /* fragment */));
                     return controllers;
                 }

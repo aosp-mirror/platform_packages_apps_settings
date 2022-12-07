@@ -31,10 +31,9 @@ message BatteryInformation {
   optional double percent_of_total = 12;
   optional int32 drain_type = 13;
   optional int64 foreground_usage_time_in_ms = 14;
-  optional int64 foreground_service_usage_time_in_ms = 15;
-  optional int64 background_usage_time_in_ms = 16;
-  optional double foreground_usage_consume_power = 17;
-  optional double foreground_service_usage_consume_power = 18;
-  optional double background_usage_consume_power = 19;
-  optional double cached_usage_consume_power = 20;
+  optional int64 background_usage_time_in_ms = 15;
+  optional double foreground_usage_consume_power = 16;
+  optional double foreground_service_usage_consume_power = 17;
+  optional double background_usage_consume_power = 18;
+  optional double cached_usage_consume_power = 19;
 }
