@@ -521,9 +521,6 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"请在感觉到振动后抬起手指"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"请移到光线较柔和的地方，然后重试"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"您已达到尝试次数上限"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"您可以使用指纹解锁平板电脑，或验证自己的身份（例如在登录应用时）"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"您可以使用指纹解锁设备或验证自己的身份，例如在登录应用时"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"您可以使用指纹解锁手机或验证自己的身份，例如在登录应用时"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"人脸解锁和指纹解锁"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"点按即可进行设置"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"已添加面孔和多个指纹"</string>
@@ -902,8 +899,8 @@
     <string name="bluetooth_pin_values_hint" msgid="2753202519050044670">"通常为 0000 或 1234"</string>
     <string name="bluetooth_pin_values_hint_16_digits" msgid="5603928271430883558">"必须为 16 位数字"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"您可能还需要在另一设备上输入此PIN码。"</string>
-    <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"您可能还需要在另一台设备上输入此密钥。"</string>
-    <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"要与以下设备配对：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;请确保其显示的配对密钥为：&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"您可能还需要在另一台设备上输入此通行密钥。"</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"要与以下设备配对：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;请确保其显示的通行密钥为：&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"确认与协调组配对"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"来自：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;要与此设备配对吗？"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"要与 <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> 设备配对，请在该设备上键入：<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>，然后按回车键。"</string>
@@ -2830,7 +2827,17 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看耗电量较高的应用"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"充电已暂停"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"为了延长电池寿命，目前正在保护电池"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <!-- no translation found for battery_tip_dock_defender_future_bypass_title (7257251934903787366) -->
+    <skip />
+    <!-- no translation found for battery_tip_dock_defender_future_bypass_summary (428474483479026813) -->
+    <skip />
+    <!-- no translation found for battery_tip_dock_defender_active_title (8843454404807737776) -->
+    <skip />
+    <!-- no translation found for battery_tip_dock_defender_active_summary (5582869291068635429) -->
+    <skip />
+    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_title (1679449361090557201) -->
+    <skip />
+    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_summary (5107293805054133144) -->
     <skip />
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"详细了解充电暂停的原因"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"继续充电"</string>
@@ -5273,7 +5280,7 @@
     <string name="input_method_category" msgid="2252659253631639005">"输入法"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"触控笔手写功能"</string>
     <string name="stylus_handwriting_summary" msgid="6333425895172696950">"启用后，如果焦点位于编辑器，当前输入法将接收触控笔的 MotionEvent 对象。"</string>
-    <string name="device_theme" msgid="5027604586494772471">"设备主题背景"</string>
+    <string name="device_theme" msgid="5027604586494772471">"设备主题"</string>
     <string name="default_theme" msgid="4815428567082263639">"默认"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"网络名称"</string>
     <string name="show_operator_name_summary" msgid="5352696579216501773">"在状态栏中显示网络名称"</string>
