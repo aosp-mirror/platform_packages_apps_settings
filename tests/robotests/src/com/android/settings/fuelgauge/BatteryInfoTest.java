@@ -68,6 +68,7 @@ public class BatteryInfoTest {
     private static final String STATUS_CHARGING_TIME = "50% - 0 min left until full";
     private static final String STATUS_NOT_CHARGING = "Not charging";
     private static final String STATUS_CHARGING_FUTURE_BYPASS = "50% - Charging to 12%";
+    private static final String STATUS_CHARGING_PAUSED = "50% - Charging paused";
     private static final long REMAINING_TIME_NULL = -1;
     private static final long REMAINING_TIME = 2;
     // Strings are defined in frameworks/base/packages/SettingsLib/res/values/strings.xml
@@ -256,8 +257,6 @@ public class BatteryInfoTest {
 
     @Test
     public void testGetBatteryInfo_chargingWithOverheated_updateChargeLabel() {
-        final String expectedString =
-                mContext.getString(R.string.battery_tip_limited_temporarily_title);
         doReturn(TEST_CHARGE_TIME_REMAINING)
                 .when(mBatteryUsageStats)
                 .getChargeTimeRemainingMs();
@@ -269,13 +268,11 @@ public class BatteryInfoTest {
                 false /* shortString */);
 
         assertThat(info.isOverheated).isTrue();
-        assertThat(info.chargeLabel.toString()).contains(expectedString);
+        assertThat(info.chargeLabel.toString()).contains(STATUS_CHARGING_PAUSED);
     }
 
     @Test
     public void testGetBatteryInfo_dockDefenderActive_updateChargeString() {
-        final String expectedString =
-                mContext.getString(R.string.battery_tip_limited_temporarily_title);
         doReturn(TEST_CHARGE_TIME_REMAINING / 1000)
                 .when(mBatteryUsageStats).getChargeTimeRemainingMs();
         doReturn(true).when(mFeatureFactory.powerUsageFeatureProvider).isExtraDefend();
@@ -289,7 +286,7 @@ public class BatteryInfoTest {
                 mBatteryUsageStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
                 false /* shortString */);
 
-        assertThat(info.chargeLabel.toString()).contains(expectedString);
+        assertThat(info.chargeLabel.toString()).contains(STATUS_CHARGING_PAUSED);
     }
 
     @Test
