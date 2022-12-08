@@ -200,16 +200,13 @@ public class BatteryEntry {
 
     /** Battery entry for a power component of AggregateBatteryConsumer */
     public BatteryEntry(Context context, int powerComponentId, double devicePowerMah,
-            double appsPowerMah, long usageDurationMs) {
+            long usageDurationMs) {
         mContext = context;
         mBatteryConsumer = null;
         mUid = Process.INVALID_UID;
         mIsHidden = false;
         mPowerComponentId = powerComponentId;
-        mConsumedPower =
-                powerComponentId == BatteryConsumer.POWER_COMPONENT_SCREEN
-                        ? devicePowerMah
-                        : devicePowerMah - appsPowerMah;
+        mConsumedPower = devicePowerMah;
         mUsageDurationMs = usageDurationMs;
         mConsumerType = ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY;
 
@@ -224,7 +221,7 @@ public class BatteryEntry {
 
     /** Battery entry for a custom power component of AggregateBatteryConsumer */
     public BatteryEntry(Context context, int powerComponentId, String powerComponentName,
-            double devicePowerMah, double appsPowerMah) {
+            double devicePowerMah) {
         mContext = context;
         mBatteryConsumer = null;
         mUid = Process.INVALID_UID;
@@ -234,10 +231,7 @@ public class BatteryEntry {
         mIconId = R.drawable.ic_power_system;
         mIcon = context.getDrawable(mIconId);
         mName = powerComponentName;
-        mConsumedPower =
-                powerComponentId == BatteryConsumer.POWER_COMPONENT_SCREEN
-                        ? devicePowerMah
-                        : devicePowerMah - appsPowerMah;
+        mConsumedPower = devicePowerMah;
         mConsumerType = ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY;
     }
 
