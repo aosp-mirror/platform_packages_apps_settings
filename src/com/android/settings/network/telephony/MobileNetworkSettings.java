@@ -464,10 +464,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
     @Override
     public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-    }
-
-    @Override
-    public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
         if (DataServiceUtils.shouldUpdateEntityList(mSubInfoEntityList, subInfoEntityList)) {
 
             // Check the current subId is existed or not, if so, finish it.
@@ -497,6 +493,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 }
             });
         }
+    }
+
+    @Override
+    public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
     }
 
     @Override

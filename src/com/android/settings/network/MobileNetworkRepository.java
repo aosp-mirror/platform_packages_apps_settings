@@ -264,8 +264,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                         mIsActive = portInfo.isActive();
                         mPortIndex = portInfo.getPortIndex();
                     } else if (DEBUG) {
-                        Log.d(TAG,
-                                "Can not get port index and physicalSlotIndex for subId "
+                        Log.d(TAG, "Can not get port index and physicalSlotIndex for subId "
                                         + mSubId);
                     }
                 });
@@ -297,8 +296,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         setActiveSubInfoList(mActiveSubInfoEntityList);
     }
 
-    private void setActiveSubInfoList(
-            List<SubscriptionInfoEntity> activeSubInfoEntityList) {
+    private void setActiveSubInfoList(List<SubscriptionInfoEntity> activeSubInfoEntityList) {
         if (DEBUG) {
             Log.d(TAG,
                     "onActiveSubInfoChanged, activeSubInfoEntityList = " + activeSubInfoEntityList);
@@ -460,11 +458,16 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             if (DEBUG) {
                 Log.d(TAG, "availableSudInfoList from framework is empty, remove all subs");
             }
-            for (SubscriptionInfoEntity info : mAvailableSubInfoEntityList) {
+
+            SubscriptionInfoEntity[] availableInfoArray = mAvailableSubInfoEntityList.toArray(
+                    new SubscriptionInfoEntity[0]);
+            for (SubscriptionInfoEntity info : availableInfoArray) {
                 deleteAllInfoBySubId(info.subId);
             }
+
         } else if (availableInfoList != null) {
-            for (SubscriptionInfo subInfo : availableInfoList) {
+            SubscriptionInfo[] infoArray = availableInfoList.toArray(new SubscriptionInfo[0]);
+            for (SubscriptionInfo subInfo : infoArray) {
                 mSubscriptionInfoMap.remove(subInfo.getSubscriptionId());
                 if (DEBUG) {
                     Log.d(TAG,
