@@ -157,6 +157,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public boolean delayHourlyJobWhenBooting() {
+        return true;
+    }
+
+    @Override
     public Set<CharSequence> getHideBackgroundUsageTimeSet(Context context) {
         return new ArraySet<>();
     }

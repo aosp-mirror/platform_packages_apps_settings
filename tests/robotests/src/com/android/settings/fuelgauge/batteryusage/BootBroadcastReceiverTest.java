@@ -125,28 +125,6 @@ public final class BootBroadcastReceiverTest {
     }
 
     @Test
-    public void onReceive_containsExpiredData_clearsExpiredDataFromDatabase()
-            throws InterruptedException {
-        insertExpiredData(/*shiftDay=*/ DatabaseUtils.DATA_RETENTION_INTERVAL_DAY);
-
-        mReceiver.onReceive(mContext, new Intent(Intent.ACTION_BOOT_COMPLETED));
-
-        TimeUnit.MILLISECONDS.sleep(100);
-        assertThat(mDao.getAllAfter(0)).hasSize(1);
-    }
-
-    @Test
-    public void onReceive_withoutExpiredData_notClearsExpiredDataFromDatabase()
-            throws InterruptedException {
-        insertExpiredData(/*shiftDay=*/ DatabaseUtils.DATA_RETENTION_INTERVAL_DAY - 1);
-
-        mReceiver.onReceive(mContext, new Intent(Intent.ACTION_BOOT_COMPLETED));
-
-        TimeUnit.MILLISECONDS.sleep(100);
-        assertThat(mDao.getAllAfter(0)).hasSize(3);
-    }
-
-    @Test
     public void onReceive_withTimeChangedIntent_clearsAllDataAndRefreshesJob()
             throws InterruptedException {
         mReceiver.onReceive(mContext, new Intent(Intent.ACTION_TIME_CHANGED));

@@ -24,6 +24,8 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.overlay.FeatureFactory;
+
 import java.text.SimpleDateFormat;
 import java.time.Clock;
 import java.time.Duration;
@@ -45,6 +47,9 @@ public final class PeriodicJobManager {
     @VisibleForTesting
     static final int DATA_FETCH_INTERVAL_MINUTE = 60;
 
+    @VisibleForTesting
+    static long sBroadcastDelayFromBoot = Duration.ofMinutes(40).toMillis();
+
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     void reset() {
         sSingleton = null; // for testing only
@@ -65,7 +70,7 @@ public final class PeriodicJobManager {
 
     /** Schedules the next alarm job if it is available. */
     @SuppressWarnings("JavaUtilDate")
-    public void refreshJob() {
+    public void refreshJob(final boolean fromBoot) {
         if (mAlarmManager == null) {
             Log.e(TAG, "cannot schedule next alarm job");
             return;
@@ -74,7 +79,7 @@ public final class PeriodicJobManager {
         final PendingIntent pendingIntent = getPendingIntent();
         cancelJob(pendingIntent);
         // Uses UTC time to avoid scheduler is impacted by different timezone.
-        final long triggerAtMillis = getTriggerAtMillis(Clock.systemUTC());
+        final long triggerAtMillis = getTriggerAtMillis(mContext, Clock.systemUTC(), fromBoot);
         mAlarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
         Log.d(TAG, "schedule next alarm job at "
@@ -90,11 +95,21 @@ public final class PeriodicJobManager {
     }
 
     /** Gets the next alarm trigger UTC time in milliseconds. */
-    static long getTriggerAtMillis(Clock clock) {
+    static long getTriggerAtMillis(Context context, Clock clock, final boolean fromBoot) {
         long currentTimeMillis = clock.millis();
+        final boolean delayHourlyJobWhenBooting =
+                FeatureFactory.getFactory(context)
+                        .getPowerUsageFeatureProvider(context)
+                        .delayHourlyJobWhenBooting();
         // Rounds to the previous nearest time slot and shifts to the next one.
         long timeSlotUnit = Duration.ofMinutes(DATA_FETCH_INTERVAL_MINUTE).toMillis();
-        return (currentTimeMillis / timeSlotUnit) * timeSlotUnit + timeSlotUnit;
+        long targetTime = (currentTimeMillis / timeSlotUnit) * timeSlotUnit + timeSlotUnit;
+        if (delayHourlyJobWhenBooting
+                && fromBoot
+                && (targetTime - currentTimeMillis) <= sBroadcastDelayFromBoot) {
+            targetTime += timeSlotUnit;
+        }
+        return targetTime;
     }
 
     private PendingIntent getPendingIntent() {
