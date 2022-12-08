@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.doReturn;
@@ -25,12 +26,19 @@ import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.usage.IUsageStatsManager;
+import android.app.usage.UsageEvents;
+import android.app.usage.UsageEvents.Event;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.UserInfo;
 import android.os.BatteryConsumer;
 import android.os.BatteryManager;
 import android.os.BatteryUsageStats;
+import android.os.Parcel;
+import android.os.RemoteException;
+import android.os.UserManager;
 import android.text.format.DateUtils;
 
 import com.android.settings.fuelgauge.BatteryUtils;
@@ -65,10 +73,13 @@ public class DataProcessorTest {
 
     @Mock private Intent mIntent;
     @Mock private BatteryUsageStats mBatteryUsageStats;
+    @Mock private UserManager mUserManager;
+    @Mock private IUsageStatsManager mUsageStatsManager;
     @Mock private BatteryEntry mMockBatteryEntry1;
     @Mock private BatteryEntry mMockBatteryEntry2;
     @Mock private BatteryEntry mMockBatteryEntry3;
     @Mock private BatteryEntry mMockBatteryEntry4;
+    @Mock private UsageEvents mUsageEvents1;
 
 
     @Before
@@ -80,9 +91,11 @@ public class DataProcessorTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mPowerUsageFeatureProvider = mFeatureFactory.powerUsageFeatureProvider;
 
+        DataProcessor.sUsageStatsManager = mUsageStatsManager;
         doReturn(mIntent).when(mContext).registerReceiver(any(), any());
         doReturn(100).when(mIntent).getIntExtra(eq(BatteryManager.EXTRA_SCALE), anyInt());
         doReturn(66).when(mIntent).getIntExtra(eq(BatteryManager.EXTRA_LEVEL), anyInt());
+        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
     }
 
     @Test
@@ -143,6 +156,86 @@ public class DataProcessorTest {
                 expectedDailyLevels,
                 expectedHourlyTimestamps,
                 expectedHourlyLevels);
+    }
+
+    @Test
+    public void getAppUsageEvents_returnExpectedResult() throws RemoteException {
+        UserInfo userInfo = new UserInfo(/*id=*/ 0, "user_0", /*flags=*/ 0);
+        final List<UserInfo> userInfoList = new ArrayList<>();
+        userInfoList.add(userInfo);
+        doReturn(userInfoList).when(mUserManager).getAliveUsers();
+        doReturn(true).when(mUserManager).isUserUnlocked(userInfo.id);
+        doReturn(mUsageEvents1)
+                .when(mUsageStatsManager)
+                .queryEventsForUser(anyLong(), anyLong(), anyInt(), any());
+
+        final Map<Long, UsageEvents> resultMap = DataProcessor.getAppUsageEvents(mContext);
+
+        assertThat(resultMap.size()).isEqualTo(1);
+        assertThat(resultMap.get(Long.valueOf(userInfo.id))).isEqualTo(mUsageEvents1);
+    }
+
+    @Test
+    public void getAppUsageEvents_lockedUser_returnNull() throws RemoteException {
+        UserInfo userInfo = new UserInfo(/*id=*/ 0, "user_0", /*flags=*/ 0);
+        final List<UserInfo> userInfoList = new ArrayList<>();
+        userInfoList.add(userInfo);
+        doReturn(userInfoList).when(mUserManager).getAliveUsers();
+        // Test locked user.
+        doReturn(false).when(mUserManager).isUserUnlocked(userInfo.id);
+
+        final Map<Long, UsageEvents> resultMap = DataProcessor.getAppUsageEvents(mContext);
+
+        assertThat(resultMap).isNull();
+    }
+
+    @Test
+    public void getAppUsageEvents_nullUsageEvents_returnNull() throws RemoteException {
+        UserInfo userInfo = new UserInfo(/*id=*/ 0, "user_0", /*flags=*/ 0);
+        final List<UserInfo> userInfoList = new ArrayList<>();
+        userInfoList.add(userInfo);
+        doReturn(userInfoList).when(mUserManager).getAliveUsers();
+        doReturn(true).when(mUserManager).isUserUnlocked(userInfo.id);
+        doReturn(null)
+                .when(mUsageStatsManager).queryEventsForUser(anyLong(), anyLong(), anyInt(), any());
+
+        final Map<Long, UsageEvents> resultMap = DataProcessor.getAppUsageEvents(mContext);
+
+        assertThat(resultMap).isNull();
+    }
+
+    @Test public void generateAppUsageEventListFromUsageEvents_returnExpectedResult() {
+        Event event1 = getUsageEvent(Event.NOTIFICATION_INTERRUPTION, /*timestamp=*/ 1);
+        Event event2 = getUsageEvent(Event.ACTIVITY_RESUMED, /*timestamp=*/ 2);
+        Event event3 = getUsageEvent(Event.ACTIVITY_STOPPED, /*timestamp=*/ 3);
+        Event event4 = getUsageEvent(Event.DEVICE_SHUTDOWN, /*timestamp=*/ 4);
+        Event event5 = getUsageEvent(Event.ACTIVITY_RESUMED, /*timestamp=*/ 5);
+        event5.mPackage = null;
+        List<Event> events1 = new ArrayList<>();
+        events1.add(event1);
+        events1.add(event2);
+        List<Event> events2 = new ArrayList<>();
+        events2.add(event3);
+        events2.add(event4);
+        events2.add(event5);
+        final long userId1 = 101L;
+        final long userId2 = 102L;
+        final long userId3 = 103L;
+        final Map<Long, UsageEvents> appUsageEvents = new HashMap();
+        appUsageEvents.put(userId1, getUsageEvents(events1));
+        appUsageEvents.put(userId2, getUsageEvents(events2));
+        appUsageEvents.put(userId3, getUsageEvents(new ArrayList<>()));
+
+        final List<AppUsageEvent> appUsageEventList =
+                DataProcessor.generateAppUsageEventListFromUsageEvents(mContext, appUsageEvents);
+
+        assertThat(appUsageEventList.size()).isEqualTo(3);
+        assetAppUsageEvent(
+                appUsageEventList.get(0), AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 2);
+        assetAppUsageEvent(
+                appUsageEventList.get(1), AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 3);
+        assetAppUsageEvent(
+                appUsageEventList.get(2), AppUsageEventType.DEVICE_SHUTDOWN, /*timestamp=*/ 4);
     }
 
     @Test
@@ -1211,6 +1304,30 @@ public class DataProcessorTest {
         values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION,
                 ConvertUtils.convertBatteryInformationToString(batteryInformation));
         return new BatteryHistEntry(values);
+    }
+
+    private UsageEvents getUsageEvents(final List<Event> events) {
+        UsageEvents usageEvents = new UsageEvents(events, new String[] {"package"});
+        Parcel parcel = Parcel.obtain();
+        parcel.setDataPosition(0);
+        usageEvents.writeToParcel(parcel, 0);
+        parcel.setDataPosition(0);
+        return UsageEvents.CREATOR.createFromParcel(parcel);
+    }
+
+    private Event getUsageEvent(
+            final int eventType, final long timestamp) {
+        final Event event = new Event();
+        event.mEventType = eventType;
+        event.mPackage = "package";
+        event.mTimeStamp = timestamp;
+        return event;
+    }
+
+    private void assetAppUsageEvent(
+            final AppUsageEvent event, final AppUsageEventType eventType, final long timestamp) {
+        assertThat(event.getType()).isEqualTo(eventType);
+        assertThat(event.getTimestamp()).isEqualTo(timestamp);
     }
 
     private static void verifyExpectedBatteryLevelData(

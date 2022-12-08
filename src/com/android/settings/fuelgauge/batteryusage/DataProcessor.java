@@ -18,10 +18,14 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.utcToLocalTime;
 
+import android.app.usage.IUsageStatsManager;
+import android.app.usage.UsageEvents;
+import android.app.usage.UsageEvents.Event;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
 import android.os.AsyncTask;
 import android.os.BatteryConsumer;
 import android.os.BatteryStatsManager;
@@ -30,6 +34,8 @@ import android.os.BatteryUsageStatsQuery;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Process;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.UidBatteryConsumer;
 import android.os.UserBatteryConsumer;
 import android.os.UserHandle;
@@ -89,6 +95,11 @@ public final class DataProcessor {
 
     @VisibleForTesting
     static long sFakeCurrentTimeMillis = 0;
+
+    @VisibleForTesting
+    static IUsageStatsManager sUsageStatsManager =
+            IUsageStatsManager.Stub.asInterface(
+                    ServiceManager.getService(Context.USAGE_STATS_SERVICE));
 
     /** A callback listener when battery usage loading async task is executed. */
     public interface UsageMapAsyncResponse {
@@ -184,6 +195,55 @@ public final class DataProcessor {
     }
 
     /**
+     * Gets the {@link UsageEvents} from system service for all unlocked users.
+     */
+    @Nullable
+    public static Map<Long, UsageEvents> getAppUsageEvents(Context context) {
+        final long start = System.currentTimeMillis();
+        final boolean isWorkProfileUser = DatabaseUtils.isWorkProfile(context);
+        Log.d(TAG, "getAppUsageEvents() isWorkProfileUser:" + isWorkProfileUser);
+        if (isWorkProfileUser) {
+            try {
+                context = context.createPackageContextAsUser(
+                        /*packageName=*/ context.getPackageName(),
+                        /*flags=*/ 0,
+                        /*user=*/ UserHandle.OWNER);
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.e(TAG, "context.createPackageContextAsUser() fail:" + e);
+                return null;
+            }
+        }
+        final Map<Long, UsageEvents> resultMap = new HashMap();
+        final UserManager userManager = context.getSystemService(UserManager.class);
+        if (userManager == null) {
+            return null;
+        }
+        final long sixDaysAgoTimestamp =
+                DatabaseUtils.getTimestampSixDaysAgo(Calendar.getInstance());
+        final String callingPackage = context.getPackageName();
+        final long now = System.currentTimeMillis();
+        for (final UserInfo user : userManager.getAliveUsers()) {
+            // When the user is not unlocked, UsageStatsManager will return null, so bypass the
+            // following data loading logics directly.
+            if (!userManager.isUserUnlocked(user.id)) {
+                Log.w(TAG, "fail to load app usage event for user :" + user.id + " because locked");
+                continue;
+            }
+            final long startTime = DatabaseUtils.getAppUsageStartTimestampOfUser(
+                    context, user.id, sixDaysAgoTimestamp);
+            final UsageEvents events = getAppUsageEventsForUser(
+                    sUsageStatsManager, startTime, now, user.id, callingPackage);
+            if (events != null) {
+                resultMap.put(Long.valueOf(user.id), events);
+            }
+        }
+        final long elapsedTime = System.currentTimeMillis() - start;
+        Log.d(TAG, String.format("getAppUsageEvents() for all unlocked users in %d/ms",
+                elapsedTime));
+        return resultMap.isEmpty() ? null : resultMap;
+    }
+
+    /**
      * Closes the {@link BatteryUsageStats} after using it.
      */
     public static void closeBatteryUsageStats(BatteryUsageStats batteryUsageStats) {
@@ -194,6 +254,59 @@ public final class DataProcessor {
                 Log.e(TAG, "BatteryUsageStats.close() failed", e);
             }
         }
+    }
+
+    /**
+     * Generates the list of {@link AppUsageEvent} from the supplied {@link UsageEvents}.
+     */
+    public static List<AppUsageEvent> generateAppUsageEventListFromUsageEvents(
+            Context context, Map<Long, UsageEvents> usageEventsMap) {
+        final List<AppUsageEvent> appUsageEventList = new ArrayList<>();
+        long numEventsFetched = 0;
+        long numAllEventsFetched = 0;
+        final Set<CharSequence> ignoreScreenOnTimeTaskRootSet =
+                FeatureFactory.getFactory(context)
+                        .getPowerUsageFeatureProvider(context)
+                        .getIgnoreScreenOnTimeTaskRootSet(context);
+        for (final long userId : usageEventsMap.keySet()) {
+            final UsageEvents usageEvents = usageEventsMap.get(userId);
+            while (usageEvents.hasNextEvent()) {
+                final Event event = new Event();
+                usageEvents.getNextEvent(event);
+                numAllEventsFetched++;
+                switch (event.getEventType()) {
+                    case Event.ACTIVITY_RESUMED:
+                    case Event.ACTIVITY_STOPPED:
+                    case Event.DEVICE_SHUTDOWN:
+                        final String taskRootClassName = event.getTaskRootClassName();
+                        if (!TextUtils.isEmpty(taskRootClassName)
+                                && !ignoreScreenOnTimeTaskRootSet.isEmpty()
+                                && contains(
+                                        taskRootClassName, ignoreScreenOnTimeTaskRootSet)) {
+                            Log.w(TAG, String.format(
+                                    "Ignoring a usage event with task root class name %s, "
+                                            + "(timestamp=%d, type=%d)",
+                                    taskRootClassName,
+                                    event.getTimeStamp(),
+                                    event.getEventType()));
+                            break;
+                        }
+                        final AppUsageEvent appUsageEvent =
+                                ConvertUtils.convertToAppUsageEvent(context, event, userId);
+                        if (appUsageEvent != null) {
+                            numEventsFetched++;
+                            appUsageEventList.add(appUsageEvent);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        Log.w(TAG, String.format(
+                "Read %d relevant events (%d total) from UsageStatsManager", numEventsFetched,
+                numAllEventsFetched));
+        return appUsageEventList;
     }
 
     /**
@@ -508,13 +621,30 @@ public final class DataProcessor {
                 asyncResponseDelegate).execute();
     }
 
+    @Nullable
+    private static UsageEvents getAppUsageEventsForUser(
+            final IUsageStatsManager usageStatsManager, final long startTime, final long endTime,
+            final int userId, final String callingPackage) {
+        final long start = System.currentTimeMillis();
+        UsageEvents events = null;
+        try {
+            events = usageStatsManager.queryEventsForUser(
+                    startTime, endTime, userId, callingPackage);
+        } catch (RemoteException e) {
+            Log.e(TAG, "Error fetching usage events: ", e);
+        }
+        final long elapsedTime = System.currentTimeMillis() - start;
+        Log.d(TAG, String.format("getAppUsageEventsForUser(): %d from %d to %d in %d/ms", userId,
+                startTime, endTime, elapsedTime));
+        return events;
+    }
+
     /**
      * @return Returns the overall battery usage data from battery stats service directly.
      *
      * The returned value should be always a 2d map and composed by only 1 part:
      * - [SELECTED_INDEX_ALL][SELECTED_INDEX_ALL]
      */
-    @Nullable
     private static Map<Integer, Map<Integer, BatteryDiffData>> getBatteryUsageMapFromStatsService(
             final Context context) {
         final Map<Integer, Map<Integer, BatteryDiffData>> resultMap = new HashMap<>();
@@ -1335,6 +1465,7 @@ public final class DataProcessor {
         return calendar.getTimeInMillis();
     }
 
+    /** Whether the Set contains the target. */
     private static boolean contains(String target, Set<CharSequence> packageNames) {
         if (target != null && packageNames != null) {
             for (CharSequence packageName : packageNames) {
