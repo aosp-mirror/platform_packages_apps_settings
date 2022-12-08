@@ -48,6 +48,8 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupSkipDialog;
 import com.android.settings.utils.SensorPrivacyManagerHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.systemui.unfold.compat.ScreenSizeFoldProvider;
+import com.android.systemui.unfold.updates.FoldProvider;
 
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -57,7 +59,8 @@ import com.google.android.setupdesign.span.LinkSpan;
  * Provides introductory info about face unlock and prompts the user to agree before starting face
  * enrollment.
  */
-public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
+public class FaceEnrollIntroduction extends BiometricEnrollIntroduction implements
+        FoldProvider.FoldCallback {
     private static final String TAG = "FaceEnrollIntroduction";
 
     private FaceManager mFaceManager;
@@ -170,10 +173,30 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         final boolean cameraPrivacyEnabled = helper
                 .isSensorBlocked(SensorPrivacyManager.Sensors.CAMERA, mUserId);
         Log.v(TAG, "cameraPrivacyEnabled : " + cameraPrivacyEnabled);
+
+        if (mPostureGuidanceIntent != null) {
+            mScreenSizeFoldProvider = new ScreenSizeFoldProvider(getApplicationContext());
+            mScreenSizeFoldProvider.registerCallback(this, getMainExecutor());
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mScreenSizeFoldProvider != null) {
+            mScreenSizeFoldProvider.unregisterCallback(this);
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_POSTURE_GUIDANCE) {
+            setResult(resultCode, data);
+            if (resultCode == RESULT_CANCELED || resultCode == RESULT_SKIP) {
+                finish();
+            }
+            return;
+        }
         // If user has skipped or finished enrolling, don't restart enrollment.
         final boolean isEnrollRequest = requestCode == BIOMETRIC_FIND_SENSOR_REQUEST
                 || requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST;
@@ -421,5 +444,12 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         }
         data.putExtra(MultiBiometricEnrollHelper.EXTRA_SKIP_PENDING_ENROLL, true);
         return data;
+    }
+
+    @Override
+    public void onFoldUpdated(boolean isFolded) {
+        if (!isFolded) {
+            launchPostureGuidance();
+        }
     }
 }
