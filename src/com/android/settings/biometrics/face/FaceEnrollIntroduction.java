@@ -19,10 +19,12 @@ package com.android.settings.biometrics.face;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.FACE_UNLOCK_DISABLED;
 
 import static com.android.settings.biometrics.BiometricUtils.GatekeeperCredentialNotMatchException;
+import static com.android.settings.biometrics.BiometricUtils.DEVICE_POSTURE_UNKNOWN;
 
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.hardware.SensorPrivacyManager;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
@@ -50,6 +52,8 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupSkipDialog;
 import com.android.settings.utils.SensorPrivacyManagerHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.systemui.unfold.compat.ScreenSizeFoldProvider;
+import com.android.systemui.unfold.updates.FoldProvider;
 
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -66,6 +70,12 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     @Nullable private FooterButton mPrimaryFooterButton;
     @Nullable private FooterButton mSecondaryFooterButton;
     @Nullable private SensorPrivacyManager mSensorPrivacyManager;
+
+    @VisibleForTesting
+    @BiometricUtils.DevicePostureInt
+    protected int mDevicePostureState = DEVICE_POSTURE_UNKNOWN;
+    @VisibleForTesting
+    protected FoldProvider.FoldCallback mFoldCallback = null;
 
     @Override
     protected void onCancelButtonClick(View view) {
@@ -97,6 +107,12 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                 "finished")) {
             super.onFinishedEnrolling(data);
         }
+    }
+
+    @Override
+    protected boolean shouldFinishWhenBackgrounded() {
+        return super.shouldFinishWhenBackgrounded() && !BiometricUtils.isPostureGuidanceShowing(
+                mDevicePostureState, mLaunchedPostureGuidance);
     }
 
     @Override
@@ -195,7 +211,57 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
+    protected boolean launchPostureGuidance() {
+        // Visible for testing
+        return super.launchPostureGuidance();
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (mScreenSizeFoldProvider != null && mFoldCallback != null) {
+            mScreenSizeFoldProvider.onConfigurationChange(newConfig);
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mPostureGuidanceIntent == null) {
+            Log.d(TAG, "Device do not support posture guidance");
+            return;
+        }
+
+        BiometricUtils.setDevicePosturesAllowEnroll(
+                getResources().getInteger(R.integer.config_face_enroll_supported_posture));
+
+        if (mFoldCallback == null) {
+            mFoldCallback = isFolded -> {
+                mDevicePostureState = isFolded ? BiometricUtils.DEVICE_POSTURE_CLOSED
+                        : BiometricUtils.DEVICE_POSTURE_OPENED;
+                if (BiometricUtils.shouldShowPostureGuidance(mDevicePostureState,
+                        mLaunchedPostureGuidance) && !mNextLaunched) {
+                    launchPostureGuidance();
+                }
+            };
+        }
+
+        if (mScreenSizeFoldProvider == null) {
+            mScreenSizeFoldProvider = new ScreenSizeFoldProvider(getApplicationContext());
+            mScreenSizeFoldProvider.registerCallback(mFoldCallback, getMainExecutor());
+        }
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_POSTURE_GUIDANCE) {
+            mLaunchedPostureGuidance = false;
+            if (resultCode == RESULT_CANCELED || resultCode == RESULT_SKIP) {
+                onSkipButtonClick(getCurrentFocus());
+            }
+            return;
+        }
+
         // If user has skipped or finished enrolling, don't restart enrollment.
         final boolean isEnrollRequest = requestCode == BIOMETRIC_FIND_SENSOR_REQUEST
                 || requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST;
@@ -206,10 +272,12 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             hasEnrolledFace = data.getBooleanExtra(EXTRA_FINISHED_ENROLL_FACE, false);
         }
 
-        if (resultCode == RESULT_CANCELED && hasEnrolledFace) {
-            setResult(resultCode, data);
-            finish();
-            return;
+        if (resultCode == RESULT_CANCELED) {
+            if (hasEnrolledFace || !BiometricUtils.isPostureAllowEnrollment(mDevicePostureState)) {
+                setResult(resultCode, data);
+                finish();
+                return;
+            }
         }
 
         if (isEnrollRequest && isResultSkipOrFinished || hasEnrolledFace) {
