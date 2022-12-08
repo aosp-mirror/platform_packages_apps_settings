@@ -590,6 +590,7 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void onAddGuestClicked() {
+        Context context = getContext();
         final UserCreatingDialog guestCreatingDialog =
                 new UserCreatingDialog(getActivity(), /* isGuest= */ true);
         guestCreatingDialog.show();
@@ -597,18 +598,18 @@ public class UserSettings extends SettingsPreferenceFragment
         ThreadUtils.postOnBackgroundThread(() -> {
             mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_USER_GUEST_ADD);
             Trace.beginSection("UserSettings.addGuest");
-            final UserInfo guest = mUserManager.createGuest(getContext());
+            final UserInfo guest = mUserManager.createGuest(context);
             Trace.endSection();
 
             ThreadUtils.postOnMainThread(() -> {
                 guestCreatingDialog.dismiss();
                 if (guest == null) {
-                    Toast.makeText(getContext(),
+                    Toast.makeText(context,
                             com.android.settingslib.R.string.add_guest_failed,
                             Toast.LENGTH_SHORT).show();
                     return;
                 }
-                openUserDetails(guest, true);
+                openUserDetails(guest, true, context);
             });
         });
     }
@@ -622,14 +623,10 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
-    private void onUserCreated(UserInfo userInfo) {
+    private void onUserCreated(UserInfo userInfo, Context context) {
         hideUserCreatingDialog();
-        // prevent crash when config changes during user creation
-        if (getContext() == null) {
-            return;
-        }
         mAddingUser = false;
-        openUserDetails(userInfo, true);
+        openUserDetails(userInfo, true, context);
     }
 
     private void hideUserCreatingDialog() {
@@ -646,11 +643,21 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void openUserDetails(UserInfo userInfo, boolean newUser) {
+        openUserDetails(userInfo, newUser, getContext());
+    }
+
+    private void openUserDetails(UserInfo userInfo, boolean newUser, Context context) {
+        // to prevent a crash when config changes during user creation,
+        // we simply ignore this redirection step
+        if (context == null) {
+            return;
+        }
+
         Bundle extras = new Bundle();
         extras.putInt(UserDetailsSettings.EXTRA_USER_ID, userInfo.id);
         extras.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, newUser);
 
-        SubSettingLauncher launcher = new SubSettingLauncher(getContext())
+        SubSettingLauncher launcher = new SubSettingLauncher(context)
                 .setDestination(UserDetailsSettings.class.getName())
                 .setArguments(extras)
                 .setTitleText(userInfo.name)
@@ -1013,6 +1020,9 @@ public class UserSettings extends SettingsPreferenceFragment
 
     @VisibleForTesting
     void createUser(final int userType, String userName) {
+        Context context = getContext();
+        Resources resources = getResources();
+        final Drawable selectedUserIcon = mPendingUserIcon;
         Future<?> unusedCreateUserFuture = ThreadUtils.postOnBackgroundThread(() -> {
             UserInfo user;
 
@@ -1035,19 +1045,19 @@ public class UserSettings extends SettingsPreferenceFragment
                 }
 
                 Future<?> unusedSettingIconFuture = ThreadUtils.postOnBackgroundThread(() -> {
-                    Drawable newUserIcon = mPendingUserIcon;
+                    Drawable newUserIcon = selectedUserIcon;
                     if (newUserIcon == null) {
-                        newUserIcon = UserIcons.getDefaultUserIcon(getResources(), user.id, false);
+                        newUserIcon = UserIcons.getDefaultUserIcon(resources, user.id, false);
                     }
                     mUserManager.setUserIcon(
                             user.id, UserIcons.convertToBitmapAtUserIconSize(
-                                    getResources(), newUserIcon));
+                                    resources, newUserIcon));
                 });
 
                 mPendingUserIcon = null;
                 mPendingUserName = null;
 
-                onUserCreated(user);
+                onUserCreated(user, context);
             });
         });
     }
