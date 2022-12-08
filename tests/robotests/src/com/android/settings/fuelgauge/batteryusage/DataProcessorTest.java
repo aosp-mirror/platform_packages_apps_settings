@@ -671,19 +671,19 @@ public class DataProcessorTest {
                         .get(DataProcessor.SELECTED_INDEX_ALL);
         assertBatteryDiffEntry(
                 resultDiffData.getAppDiffEntryList().get(0), currentUserId, /*uid=*/ 2L,
-                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 40.0,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 50.0,
                 /*foregroundUsageConsumePower=*/ 14, /*foregroundServiceUsageConsumePower=*/ 9,
                 /*backgroundUsageConsumePower=*/ 9, /*cachedUsageConsumePower=*/ 8,
                 /*foregroundUsageTimeInMs=*/ 30, /*backgroundUsageTimeInMs=*/ 40);
         assertBatteryDiffEntry(
                 resultDiffData.getAppDiffEntryList().get(1), currentUserId, /*uid=*/ 4L,
-                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 40.0,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 50.0,
                 /*foregroundUsageConsumePower=*/ 8, /*foregroundServiceUsageConsumePower=*/ 8,
                 /*backgroundUsageConsumePower=*/ 8, /*cachedUsageConsumePower=*/ 8,
                 /*foregroundUsageTimeInMs=*/ 5, /*backgroundUsageTimeInMs=*/ 5);
         assertBatteryDiffEntry(
                 resultDiffData.getSystemDiffEntryList().get(0), currentUserId, /*uid=*/ 3L,
-                ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY, /*consumePercentage=*/ 20.0,
+                ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY, /*consumePercentage=*/ 100.0,
                 /*foregroundUsageConsumePower=*/ 5, /*foregroundServiceUsageConsumePower=*/ 5,
                 /*backgroundUsageConsumePower=*/ 5, /*cachedUsageConsumePower=*/ 5,
                 /*foregroundUsageTimeInMs=*/ 50, /*backgroundUsageTimeInMs=*/ 60);
@@ -697,19 +697,19 @@ public class DataProcessorTest {
         resultDiffData = resultMap.get(1).get(DataProcessor.SELECTED_INDEX_ALL);
         assertBatteryDiffEntry(
                 resultDiffData.getAppDiffEntryList().get(0), currentUserId, /*uid=*/ 4L,
-                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 50.0,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 66.66666666666666,
                 /*foregroundUsageConsumePower=*/ 8, /*foregroundServiceUsageConsumePower=*/ 8,
                 /*backgroundUsageConsumePower=*/ 8, /*cachedUsageConsumePower=*/ 8,
                 /*foregroundUsageTimeInMs=*/ 5, /*backgroundUsageTimeInMs=*/ 5);
         assertBatteryDiffEntry(
                 resultDiffData.getAppDiffEntryList().get(1), currentUserId, /*uid=*/ 2L,
-                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 25.0,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 33.33333333333333,
                 /*foregroundUsageConsumePower=*/ 9, /*foregroundServiceUsageConsumePower=*/ 4,
                 /*backgroundUsageConsumePower=*/ 4, /*cachedUsageConsumePower=*/ 3,
                 /*foregroundUsageTimeInMs=*/ 15, /*backgroundUsageTimeInMs=*/ 15);
         assertBatteryDiffEntry(
                 resultDiffData.getSystemDiffEntryList().get(0), currentUserId, /*uid=*/ 3L,
-                ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY, /*consumePercentage=*/ 25.0,
+                ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY, /*consumePercentage=*/ 100.0,
                 /*foregroundUsageConsumePower=*/ 5, /*foregroundServiceUsageConsumePower=*/ 5,
                 /*backgroundUsageConsumePower=*/ 5, /*cachedUsageConsumePower=*/ 5,
                 /*foregroundUsageTimeInMs=*/ 50, /*backgroundUsageTimeInMs=*/ 60);
@@ -830,14 +830,14 @@ public class DataProcessorTest {
                         .get(DataProcessor.SELECTED_INDEX_ALL);
         assertBatteryDiffEntry(
                 resultDiffData.getAppDiffEntryList().get(0), currentUserId, /*uid=*/ 1L,
-                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 25.0,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 100.0,
                 /*foregroundUsageConsumePower=*/ 5, /*foregroundServiceUsageConsumePower=*/ 5,
                 /*backgroundUsageConsumePower=*/ 5, /*cachedUsageConsumePower=*/ 5,
                 /*foregroundUsageTimeInMs=*/ 10, /*backgroundUsageTimeInMs=*/ 10);
         assertBatteryDiffEntry(
                 resultDiffData.getSystemDiffEntryList().get(0), BatteryUtils.UID_OTHER_USERS,
                 /*uid=*/ BatteryUtils.UID_OTHER_USERS, ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
-                /*consumePercentage=*/ 75.0,
+                /*consumePercentage=*/ 100.0,
                 /*foregroundUsageConsumePower=*/ 0, /*foregroundServiceUsageConsumePower=*/ 0,
                 /*backgroundUsageConsumePower=*/ 0, /*cachedUsageConsumePower=*/ 0,
                 /*foregroundUsageTimeInMs=*/ 0, /*backgroundUsageTimeInMs=*/ 0);
@@ -1193,7 +1193,7 @@ public class DataProcessorTest {
 
         assertBatteryDiffEntry(
                 batteryDiffData.getAppDiffEntryList().get(0), 0, /*uid=*/ 2L,
-                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 25.0,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 100.0,
                 /*foregroundUsageConsumePower=*/ 0.5, /*foregroundServiceUsageConsumePower=*/ 0,
                 /*backgroundUsageConsumePower=*/ 0, /*cachedUsageConsumePower=*/ 0,
                 /*foregroundUsageTimeInMs=*/ 20, /*backgroundUsageTimeInMs=*/ 20);
@@ -1205,7 +1205,7 @@ public class DataProcessorTest {
                 /*foregroundUsageTimeInMs=*/ 30, /*backgroundUsageTimeInMs=*/ 40);
         assertBatteryDiffEntry(
                 batteryDiffData.getSystemDiffEntryList().get(0), 0, /*uid=*/ 4L,
-                ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY, /*consumePercentage=*/ 75.0,
+                ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY, /*consumePercentage=*/ 100.0,
                 /*foregroundUsageConsumePower=*/ 0.9, /*foregroundServiceUsageConsumePower=*/ 0.2,
                 /*backgroundUsageConsumePower=*/ 0.3, /*cachedUsageConsumePower=*/ 0.1,
                 /*foregroundUsageTimeInMs=*/ 10, /*backgroundUsageTimeInMs=*/ 10);
