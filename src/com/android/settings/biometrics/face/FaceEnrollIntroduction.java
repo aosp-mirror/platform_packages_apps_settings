@@ -99,6 +99,12 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
+    protected boolean shouldFinishWhenBackgrounded() {
+        return super.shouldFinishWhenBackgrounded() && !BiometricUtils.isPostureGuidanceShowing(
+                mDevicePostureState, mLaunchedPostureGuidance);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -174,6 +180,14 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_POSTURE_GUIDANCE) {
+            mLaunchedPostureGuidance = false;
+            if (resultCode == RESULT_CANCELED || resultCode == RESULT_SKIP) {
+                onSkipButtonClick(getCurrentFocus());
+            }
+            return;
+        }
+
         // If user has skipped or finished enrolling, don't restart enrollment.
         final boolean isEnrollRequest = requestCode == BIOMETRIC_FIND_SENSOR_REQUEST
                 || requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST;
@@ -184,10 +198,12 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             hasEnrolledFace = data.getBooleanExtra(EXTRA_FINISHED_ENROLL_FACE, false);
         }
 
-        if (resultCode == RESULT_CANCELED && hasEnrolledFace) {
-            setResult(resultCode, data);
-            finish();
-            return;
+        if (resultCode == RESULT_CANCELED) {
+            if (hasEnrolledFace || !BiometricUtils.isPostureAllowEnrollment(mDevicePostureState)) {
+                setResult(resultCode, data);
+                finish();
+                return;
+            }
         }
 
         if (isEnrollRequest && isResultSkipOrFinished || hasEnrolledFace) {
