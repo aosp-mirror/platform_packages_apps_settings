@@ -48,6 +48,13 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
     private String mFeatureName;
     private OneHandedSettingsUtils mUtils;
 
+    /**
+     * One handed settings no need to set any restriction key for pin protected.
+     */
+    public OneHandedSettings() {
+        super(/* restrictionKey= */ null);
+    }
+
     @Override
     protected void updatePreferenceStates() {
         OneHandedSettingsUtils.setUserId(UserHandle.myUserId());
