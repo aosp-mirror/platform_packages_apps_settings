@@ -18,6 +18,9 @@ package com.android.settings.biometrics.face;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.FACE_UNLOCK_DISABLED;
 
+import static com.android.settings.biometrics.BiometricUtils.isInPostureGuidanceFlow;
+import static com.android.settings.biometrics.BiometricUtils.isPostureAllowEnrollment;
+
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
@@ -48,6 +51,8 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupSkipDialog;
 import com.android.settings.utils.SensorPrivacyManagerHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.systemui.unfold.compat.ScreenSizeFoldProvider;
+import com.android.systemui.unfold.updates.FoldProvider;
 
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -57,7 +62,8 @@ import com.google.android.setupdesign.span.LinkSpan;
  * Provides introductory info about face unlock and prompts the user to agree before starting face
  * enrollment.
  */
-public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
+public class FaceEnrollIntroduction extends BiometricEnrollIntroduction implements
+        FoldProvider.FoldCallback {
     private static final String TAG = "FaceEnrollIntroduction";
 
     private FaceManager mFaceManager;
@@ -65,6 +71,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     @Nullable private FooterButton mPrimaryFooterButton;
     @Nullable private FooterButton mSecondaryFooterButton;
     @Nullable private SensorPrivacyManager mSensorPrivacyManager;
+    private boolean mIsFoldedState;
 
     @Override
     protected void onCancelButtonClick(View view) {
@@ -99,8 +106,38 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if (mScreenSizeFoldProvider == null) {
+            mScreenSizeFoldProvider = new ScreenSizeFoldProvider(getApplicationContext());
+            mScreenSizeFoldProvider.registerCallback(this, getMainExecutor());
+        }
+    }
+
+    @Override
+    protected boolean shouldFinishWhenBackgrounded() {
+        return super.shouldFinishWhenBackgrounded()
+                && !isInPostureGuidanceFlow(mIsFoldedState, mLaunchedPostureGuidance);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mScreenSizeFoldProvider != null) {
+            mScreenSizeFoldProvider.unregisterCallback(this);
+            mScreenSizeFoldProvider = null;
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            mLaunchedPostureGuidance = savedInstanceState.getBoolean(
+                    EXTRA_LAUNCHED_POSTURE_GUIDANCE);
+            mNextLaunched = savedInstanceState.getBoolean(EXTRA_KEY_NEXT_LAUNCHED);
+        }
 
         // Apply extracted theme color to icons.
         final ImageView iconGlasses = findViewById(R.id.icon_glasses);
@@ -174,6 +211,14 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_POSTURE_GUIDANCE) {
+            mLaunchedPostureGuidance = false;
+            if (resultCode == RESULT_CANCELED || resultCode == RESULT_SKIP) {
+                onSkipButtonClick(getCurrentFocus());
+            }
+            return;
+        }
+
         // If user has skipped or finished enrolling, don't restart enrollment.
         final boolean isEnrollRequest = requestCode == BIOMETRIC_FIND_SENSOR_REQUEST
                 || requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST;
@@ -184,10 +229,12 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             hasEnrolledFace = data.getBooleanExtra(EXTRA_FINISHED_ENROLL_FACE, false);
         }
 
-        if (resultCode == RESULT_CANCELED && hasEnrolledFace) {
-            setResult(resultCode, data);
-            finish();
-            return;
+        if (resultCode == RESULT_CANCELED) {
+            if (hasEnrolledFace || !isPostureAllowEnrollment(mIsFoldedState)) {
+                setResult(resultCode, data);
+                finish();
+                return;
+            }
         }
 
         if (isEnrollRequest && isResultSkipOrFinished || hasEnrolledFace) {
@@ -421,5 +468,14 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         }
         data.putExtra(MultiBiometricEnrollHelper.EXTRA_SKIP_PENDING_ENROLL, true);
         return data;
+    }
+
+    @Override
+    public void onFoldUpdated(boolean isFolded) {
+        mIsFoldedState = isFolded;
+        if (!isPostureAllowEnrollment(mIsFoldedState) && !mLaunchedPostureGuidance
+                && !mNextLaunched) {
+            launchPostureGuidance();
+        }
     }
 }
