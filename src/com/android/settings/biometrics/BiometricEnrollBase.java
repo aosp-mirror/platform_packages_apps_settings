@@ -38,7 +38,10 @@ import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
 import com.android.settings.core.InstrumentedActivity;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.systemui.unfold.compat.ScreenSizeFoldProvider;
+import com.android.systemui.unfold.updates.FoldProvider;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
@@ -60,8 +63,10 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     public static final String EXTRA_KEY_SENSOR_ID = "sensor_id";
     public static final String EXTRA_KEY_CHALLENGE = "challenge";
     public static final String EXTRA_KEY_MODALITY = "sensor_modality";
+    public static final String EXTRA_KEY_NEXT_LAUNCHED = "next_launched";
     public static final String EXTRA_FINISHED_ENROLL_FACE = "finished_enrolling_face";
     public static final String EXTRA_FINISHED_ENROLL_FINGERPRINT = "finished_enrolling_fingerprint";
+    public static final String EXTRA_LAUNCHED_POSTURE_GUIDANCE = "launched_posture_guidance";
 
     /**
      * Used by the choose fingerprint wizard to indicate the wizard is
@@ -115,14 +120,25 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
      * example, when starting fingerprint enroll after face enroll.
      */
     public static final int ENROLL_NEXT_BIOMETRIC_REQUEST = 6;
+    public static final int REQUEST_POSTURE_GUIDANCE = 7;
 
     protected boolean mLaunchedConfirmLock;
+    protected boolean mLaunchedPostureGuidance;
+    protected boolean mNextLaunched;
     protected byte[] mToken;
     protected int mUserId;
     protected int mSensorId;
+    @BiometricUtils.DevicePostureInt
+    protected int mDevicePostureState;
     protected long mChallenge;
     protected boolean mFromSettingsSummary;
     protected FooterBarMixin mFooterBarMixin;
+    @Nullable
+    protected ScreenSizeFoldProvider mScreenSizeFoldProvider;
+    @Nullable
+    protected Intent mPostureGuidanceIntent = null;
+    @Nullable
+    protected FoldProvider.FoldCallback mFoldCallback = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,16 +155,23 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
         }
         mFromSettingsSummary = getIntent().getBooleanExtra(EXTRA_FROM_SETTINGS_SUMMARY, false);
-        if (savedInstanceState != null && mToken == null) {
-            mLaunchedConfirmLock = savedInstanceState.getBoolean(EXTRA_KEY_LAUNCHED_CONFIRM);
-            mToken = savedInstanceState.getByteArray(
-                    ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
-            mFromSettingsSummary =
-                    savedInstanceState.getBoolean(EXTRA_FROM_SETTINGS_SUMMARY, false);
-            mChallenge = savedInstanceState.getLong(EXTRA_KEY_CHALLENGE);
-            mSensorId = savedInstanceState.getInt(EXTRA_KEY_SENSOR_ID);
+        if (savedInstanceState != null) {
+            if (mToken == null) {
+                mLaunchedConfirmLock = savedInstanceState.getBoolean(EXTRA_KEY_LAUNCHED_CONFIRM);
+                mToken = savedInstanceState.getByteArray(
+                        ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+                mFromSettingsSummary =
+                        savedInstanceState.getBoolean(EXTRA_FROM_SETTINGS_SUMMARY, false);
+                mChallenge = savedInstanceState.getLong(EXTRA_KEY_CHALLENGE);
+                mSensorId = savedInstanceState.getInt(EXTRA_KEY_SENSOR_ID);
+            }
+            mLaunchedPostureGuidance = savedInstanceState.getBoolean(
+                    EXTRA_LAUNCHED_POSTURE_GUIDANCE);
+            mNextLaunched = savedInstanceState.getBoolean(EXTRA_KEY_NEXT_LAUNCHED);
         }
         mUserId = getIntent().getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
+        mPostureGuidanceIntent = FeatureFactory.getFactory(getApplicationContext())
+                .getFaceFeatureProvider().getPostureGuidanceIntent(getApplicationContext());
     }
 
     @Override
@@ -159,6 +182,8 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
         outState.putBoolean(EXTRA_FROM_SETTINGS_SUMMARY, mFromSettingsSummary);
         outState.putLong(EXTRA_KEY_CHALLENGE, mChallenge);
         outState.putInt(EXTRA_KEY_SENSOR_ID, mSensorId);
+        outState.putBoolean(EXTRA_LAUNCHED_POSTURE_GUIDANCE, mLaunchedPostureGuidance);
+        outState.putBoolean(EXTRA_KEY_NEXT_LAUNCHED, mNextLaunched);
     }
 
     @Override
@@ -184,11 +209,28 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        if (mScreenSizeFoldProvider != null && mFoldCallback != null) {
+            mScreenSizeFoldProvider.unregisterCallback(mFoldCallback);
+        }
+        mScreenSizeFoldProvider = null;
+        mFoldCallback = null;
+
         if (!isChangingConfigurations() && shouldFinishWhenBackgrounded()
                 && !BiometricUtils.isAnyMultiBiometricFlow(this)) {
             setResult(RESULT_TIMEOUT);
             finish();
         }
+    }
+
+    protected boolean launchPostureGuidance() {
+        if (mPostureGuidanceIntent == null || mLaunchedPostureGuidance) {
+            return false;
+        }
+        BiometricUtils.copyMultiBiometricExtras(getIntent(), mPostureGuidanceIntent);
+        startActivityForResult(mPostureGuidanceIntent, REQUEST_POSTURE_GUIDANCE);
+        mLaunchedPostureGuidance = true;
+        overridePendingTransition(0 /* no enter anim */, 0 /* no exit anim */);
+        return mLaunchedPostureGuidance;
     }
 
     protected boolean shouldFinishWhenBackgrounded() {

@@ -272,6 +272,19 @@
     <!-- ComponentName to launch a vendor-specific enrollment activity if available -->
     <string name="config_face_enroll" translatable="false"></string>
 
+    <!-- ComponentName to launch a vendor-specific posture guidance activity if available -->
+    <string name="config_face_enroll_guidance_page" translatable="false"></string>
+
+    <!-- Whether to support posture listening for face auth, default is 0(DEVICE_POSTURE_UNKNOWN)
+     means setting will try listening on device posture changes.
+     0 : DEVICE_POSTURE_UNKNOWN
+     1 : DEVICE_POSTURE_CLOSED
+     2 : DEVICE_POSTURE_HALF_OPENED
+     3 : DEVICE_POSTURE_OPENED
+     4 : DEVICE_POSTURE_FLIPPED
+     -->
+    <integer name="config_face_enroll_supported_posture">0</integer>
+
     <!-- Whether to show the "less secure" info section on the face enroll intro screen -->
     <bool name="config_face_intro_show_less_secure">false</bool>
 
