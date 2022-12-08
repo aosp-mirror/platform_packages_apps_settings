@@ -155,6 +155,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         if (savedInstanceState != null) {
             mConfirmingCredentials = savedInstanceState.getBoolean(KEY_CONFIRMING_CREDENTIALS);
             mHasScrolledToBottom = savedInstanceState.getBoolean(KEY_SCROLLED_TO_BOTTOM);
+            mLaunchedPostureGuidance = savedInstanceState.getBoolean(
+                    EXTRA_LAUNCHED_POSTURE_GUIDANCE);
         }
 
         Intent intent = getIntent();
@@ -273,6 +275,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 finish();
             }
         }
+        mNextLaunched = true;
     }
 
     private void launchChooseLock() {
