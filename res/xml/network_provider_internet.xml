@@ -42,7 +42,7 @@
         settings:keywords="@string/calls_and_sms"
         settings:useAdminDisabledSummary="true" />
 
-    <com.android.settings.widget.AddPreference
+    <com.android.settingslib.RestrictedPreference
         android:key="mobile_network_list"
         android:title="@string/provider_network_settings_title"
         android:summary="@string/summary_placeholder"
