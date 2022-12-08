@@ -30,6 +30,11 @@ import java.util.Set;
 public interface PowerUsageFeatureProvider {
 
     /**
+     * Check whether the battery usage button is enabled in the battery page
+     */
+    boolean isBatteryUsageEnabled(Context context);
+
+    /**
      * Check whether location setting is enabled
      */
     boolean isLocationSettingEnabled(String[] packages);
