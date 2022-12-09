@@ -211,7 +211,7 @@ public final class BatteryUsageBreakdownControllerTest {
                         SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM,
                         SettingsEnums.OPEN_BATTERY_USAGE,
                         /* package name */ "none",
-                        /* percentage of total */ 0);
+                        /* percentage of total */ 100);
     }
 
     @Test
@@ -227,7 +227,7 @@ public final class BatteryUsageBreakdownControllerTest {
                         SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM,
                         SettingsEnums.OPEN_BATTERY_USAGE,
                         /* package name */ "none",
-                        /* percentage of total */ 0);
+                        /* percentage of total */ 100);
     }
 
     @Test
