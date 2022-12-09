@@ -19,6 +19,7 @@ package com.android.settings.deviceinfo.simstatus;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -30,17 +31,22 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.Executor;
 
 @RunWith(AndroidJUnit4.class)
 public class SlotSimStatusTest {
 
     @Mock
     private TelephonyManager mTelephonyManager;
+    @Mock
+    private Executor mExecutor;
+    @Captor
+    private ArgumentCaptor<Runnable> mRunnableCaptor;
 
     private Context mContext;
 
@@ -65,8 +71,10 @@ public class SlotSimStatusTest {
     public void size_returnNumberOfPhone_whenQueryInBackgroundThread() {
         doReturn(2).when(mTelephonyManager).getPhoneCount();
 
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        SlotSimStatus target = new SlotSimStatus(mContext, executor);
+        SlotSimStatus target = new SlotSimStatus(mContext, mExecutor);
+
+        verify(mExecutor).execute(mRunnableCaptor.capture());
+        mRunnableCaptor.getValue().run();
 
         assertEquals(new Integer(target.size()), new Integer(2));
     }

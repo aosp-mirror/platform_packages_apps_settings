@@ -72,6 +72,9 @@ public class SimStatusPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
+        if (getSimSlotIndex() == SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
         boolean isAvailable = SubscriptionUtil.isSimHardwareVisible(mContext) &&
                 mContext.getSystemService(UserManager.class).isAdminUser() &&
                 !Utils.isWifiOnly(mContext);
@@ -81,7 +84,7 @@ public class SimStatusPreferenceController extends BasePreferenceController {
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        if (!SubscriptionUtil.isSimHardwareVisible(mContext)) {
+        if ((!SubscriptionUtil.isSimHardwareVisible(mContext)) || (mSlotSimStatus == null)) {
             return;
         }
         String basePreferenceKey = mSlotSimStatus.getPreferenceKey(
@@ -133,17 +136,23 @@ public class SimStatusPreferenceController extends BasePreferenceController {
                 R.string.sim_status_title);
     }
 
-    private CharSequence getCarrierName(int simSlot) {
+    private SubscriptionInfo getSubscriptionInfo(int simSlot) {
         final List<SubscriptionInfo> subscriptionInfoList =
                 mSubscriptionManager.getActiveSubscriptionInfoList();
         if (subscriptionInfoList != null) {
             for (SubscriptionInfo info : subscriptionInfoList) {
                 if (info.getSimSlotIndex() == simSlot) {
-                    return info.getCarrierName();
+                    return info;
                 }
             }
         }
-        return mContext.getText(R.string.device_info_not_available);
+        return null;
+    }
+
+    private CharSequence getCarrierName(int simSlot) {
+        SubscriptionInfo subInfo = getSubscriptionInfo(simSlot);
+        return (subInfo != null) ? subInfo.getCarrierName() :
+                mContext.getText(R.string.device_info_not_available);
     }
 
     @VisibleForTesting
