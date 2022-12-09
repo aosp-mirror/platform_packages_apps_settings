@@ -64,18 +64,4 @@ public class NetworkProviderSimsCategoryController extends PreferenceCategoryCon
         }
         mPreferenceCategory.setVisible(isAvailable());
     }
-
-    @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-        if (mPreferenceCategory == null) {
-            Log.d(LOG_TAG, "updateState(), Can not find the category.");
-            return;
-        }
-        int count = mPreferenceCategory.getPreferenceCount();
-        String title = mContext.getString(count > 1
-                ? R.string.provider_network_settings_title
-                : R.string.sim_category_title);
-        mPreferenceCategory.setTitle(title);
-    }
 }
