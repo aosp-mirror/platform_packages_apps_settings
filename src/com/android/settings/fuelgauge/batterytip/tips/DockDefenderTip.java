@@ -90,7 +90,8 @@ public class DockDefenderTip extends BatteryTip {
 
     @Override
     public int getIconId() {
-        return R.drawable.ic_battery_status_protected_24dp;
+        return mMode == DockDefenderMode.ACTIVE ? R.drawable.ic_battery_status_protected_24dp :
+                R.drawable.ic_battery_dock_defender_untriggered_24dp;
     }
 
     @Override
