@@ -93,6 +93,7 @@ public class WifiTetherSwitchBarController implements
         mSwitchBar.addOnSwitchChangeListener(this);
         mContext.registerReceiver(mReceiver, WIFI_INTENT_FILTER,
                 Context.RECEIVER_EXPORTED_UNAUDITED);
+        handleWifiApStateChanged(mWifiManager.getWifiApState());
     }
 
     @Override

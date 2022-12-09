@@ -58,10 +58,10 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedPreference;
@@ -101,7 +101,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
     private Preference mProfileNotAvailablePreference;
     private String[] mAuthorities;
     private int mAuthoritiesCount = 0;
-    private SettingsPreferenceFragment mFragment;
+    private DashboardFragment mFragment;
     private int mAccountProfileOrder = ORDER_ACCOUNT_PROFILES;
     private AccountRestrictionHelper mHelper;
     private MetricsFeatureProvider mMetricsFeatureProvider;
@@ -145,13 +145,13 @@ public class AccountPreferenceController extends AbstractPreferenceController
         public ArrayMap<String, AccountTypePreference> accountPreferences = new ArrayMap<>();
     }
 
-    public AccountPreferenceController(Context context, SettingsPreferenceFragment parent,
+    public AccountPreferenceController(Context context, DashboardFragment parent,
             String[] authorities, @ProfileSelectFragment.ProfileType int type) {
         this(context, parent, authorities, new AccountRestrictionHelper(context), type);
     }
 
     @VisibleForTesting
-    AccountPreferenceController(Context context, SettingsPreferenceFragment parent,
+    AccountPreferenceController(Context context, DashboardFragment parent,
             String[] authorities, AccountRestrictionHelper helper,
             @ProfileSelectFragment.ProfileType int type) {
         super(context);
@@ -314,6 +314,9 @@ public class AccountPreferenceController extends AbstractPreferenceController
         for (int i = 0; i < profilesCount; i++) {
             updateAccountTypes(mProfiles.valueAt(i));
         }
+
+        // Refresh for the auto-sync preferences
+        mFragment.forceUpdatePreferences();
     }
 
     private void updateProfileUi(final UserInfo userInfo) {
@@ -408,7 +411,6 @@ public class AccountPreferenceController extends AbstractPreferenceController
         preference.setOrder(ORDER_LAST);
         return preference;
     }
-
 
     private Preference newManagedProfileSettings() {
         Preference preference = new Preference(mFragment.getPreferenceManager().getContext());

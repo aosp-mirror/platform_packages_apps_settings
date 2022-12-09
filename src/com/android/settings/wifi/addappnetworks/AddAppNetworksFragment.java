@@ -39,6 +39,7 @@ import android.os.SimpleClock;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.EventLog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -518,7 +519,13 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
 
         UiConfigurationItem(String displayedSsid, WifiNetworkSuggestion wifiNetworkSuggestion,
                 int index, int level) {
-            mDisplayedSsid = displayedSsid;
+            if (displayedSsid.contains("\n") || displayedSsid.contains("\r")) {
+                mDisplayedSsid = displayedSsid.replaceAll("\\r|\\n", "");
+                Log.e(TAG, "Ignore CRLF strings in display SSIDs to avoid display errors!");
+                EventLog.writeEvent(0x534e4554, "224545390", -1 /* UID */, "CRLF injection");
+            } else {
+                mDisplayedSsid = displayedSsid;
+            }
             mWifiNetworkSuggestion = wifiNetworkSuggestion;
             mIndex = index;
             mLevel = level;

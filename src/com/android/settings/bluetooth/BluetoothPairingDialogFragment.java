@@ -254,8 +254,8 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
                 mPairingController.getDeviceName()));
         EditText pairingView = (EditText) view.findViewById(R.id.text);
 
-        contactSharing.setVisibility(mPairingController.isProfileReady()
-                ? View.GONE : View.VISIBLE);
+        contactSharing.setVisibility(
+                mPairingController.isContactSharingVisible() ? View.VISIBLE : View.GONE);
         mPairingController.setContactSharingState();
         contactSharing.setOnCheckedChangeListener(mPairingController);
         contactSharing.setChecked(mPairingController.getContactSharingState());
@@ -346,7 +346,7 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
                 mPairingController.getDeviceName()));
 
         contactSharing.setVisibility(
-                mPairingController.isProfileReady() ? View.GONE : View.VISIBLE);
+                mPairingController.isContactSharingVisible() ? View.VISIBLE : View.GONE);
         mPairingController.setContactSharingState();
         contactSharing.setChecked(mPairingController.getContactSharingState());
         contactSharing.setOnCheckedChangeListener(mPairingController);
@@ -363,5 +363,4 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
                 ? View.VISIBLE : View.GONE);
         return view;
     }
-
 }

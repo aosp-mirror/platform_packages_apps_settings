@@ -40,8 +40,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.SettingsActivity;
-import com.android.settings.fuelgauge.BatteryDiffEntry;
 import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
@@ -162,7 +162,8 @@ public class AppBatteryPreferenceControllerTest {
 
         mController.updateBatteryWithDiffEntry();
 
-        assertThat(mBatteryPreference.getSummary()).isEqualTo("No battery use for past 24 hours");
+        assertThat(mBatteryPreference.getSummary().toString()).isEqualTo(
+                "No battery use since last full charge");
     }
 
     @Test
@@ -175,7 +176,8 @@ public class AppBatteryPreferenceControllerTest {
 
         mController.updateBatteryWithDiffEntry();
 
-        assertThat(mBatteryPreference.getSummary()).isEqualTo("60% use for past 24 hours");
+        assertThat(mBatteryPreference.getSummary().toString()).isEqualTo(
+                "60% use since last full charge");
     }
 
     @Test

@@ -14,124 +14,30 @@
      limitations under the License.
 -->
 
-<com.google.android.setupdesign.GlifLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/setup_wizard_layout"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/storage_wizard_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true">
 
-    <LinearLayout
-        style="@style/SudContentFrame"
+   <com.google.android.setupdesign.GlifLayout
+        android:id="@+id/setup_wizard_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+      <LinearLayout
+          style="@style/SudContentFrame"
+          android:id="@+id/storage_wizard_init"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical">
+          <ViewFlipper
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:id="@+id/viewFlipper">
+              <include layout = "@layout/storage_wizard_init_external" />
+              <include layout = "@layout/storage_wizard_init_internal" />
+          </ViewFlipper>
+      </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/sud_description_margin_top"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-            <ImageView
-                android:layout_width="144dp"
-                android:layout_height="144dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_storage_wizard_internal" />
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="@dimen/sud_glif_margin_start"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/sud_description_margin_bottom"
-                    android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
-                    android:text="@string/storage_wizard_init_v2_internal_title" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/sud_description_margin_bottom"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:text="@string/storage_wizard_init_v2_internal_summary" />
-                <Button
-                    android:id="@+id/storage_wizard_init_internal"
-                    style="@style/SudGlifButton.Primary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/storage_wizard_init_v2_internal_action"
-                    android:onClick="onNavigateInternal" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/sud_description_margin_top"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:background="@android:color/black"
-                android:backgroundTint="?android:attr/textColorTertiary" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/storage_wizard_init_v2_or"
-                android:textColor="?android:attr/textColorTertiary"
-                android:textAllCaps="true" />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:background="@android:color/black"
-                android:backgroundTint="?android:attr/textColorTertiary" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/sud_description_margin_top"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-            <ImageView
-                android:layout_width="144dp"
-                android:layout_height="144dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_storage_wizard_external" />
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="@dimen/sud_glif_margin_start"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/sud_description_margin_bottom"
-                    android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
-                    android:text="@string/storage_wizard_init_v2_external_title" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/sud_description_margin_bottom"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:text="@string/storage_wizard_init_v2_external_summary" />
-                <Button
-                    android:id="@+id/storage_wizard_init_external"
-                    style="@style/SudGlifButton.Primary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/storage_wizard_init_v2_external_action"
-                    android:onClick="onNavigateExternal" />
-            </LinearLayout>
-        </LinearLayout>
-
-    </LinearLayout>
-
-</com.google.android.setupdesign.GlifLayout>
+  </com.google.android.setupdesign.GlifLayout>
+</RelativeLayout>

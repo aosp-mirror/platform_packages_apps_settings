@@ -36,6 +36,7 @@ public class BatteryManagerPreferenceController extends BasePreferenceController
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private AppOpsManager mAppOpsManager;
     private UserManager mUserManager;
+    private boolean mEnableAppBatteryUsagePage;
 
     public BatteryManagerPreferenceController(Context context) {
         super(context, KEY_BATTERY_MANAGER);
@@ -43,6 +44,8 @@ public class BatteryManagerPreferenceController extends BasePreferenceController
                 context).getPowerUsageFeatureProvider(context);
         mAppOpsManager = context.getSystemService(AppOpsManager.class);
         mUserManager = context.getSystemService(UserManager.class);
+        mEnableAppBatteryUsagePage =
+                mContext.getResources().getBoolean(R.bool.config_app_battery_usage_list_enabled);
     }
 
     @Override
@@ -53,9 +56,12 @@ public class BatteryManagerPreferenceController extends BasePreferenceController
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        final int num = BatteryTipUtils.getRestrictedAppsList(mAppOpsManager, mUserManager).size();
+        if (!mEnableAppBatteryUsagePage) {
+            final int num = BatteryTipUtils.getRestrictedAppsList(mAppOpsManager,
+                    mUserManager).size();
 
-        updateSummary(preference, num);
+            updateSummary(preference, num);
+        }
     }
 
     @VisibleForTesting

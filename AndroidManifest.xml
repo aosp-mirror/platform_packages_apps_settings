@@ -131,7 +131,8 @@
             android:usesCleartextTraffic="true"
             android:defaultToDeviceProtectedStorage="true"
             android:directBootAware="true"
-            android:appComponentFactory="androidx.core.app.CoreComponentFactory">
+            android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+            android:enableOnBackInvokedCallback="true">
 
         <uses-library android:name="org.apache.http.legacy" />
 
@@ -2475,32 +2476,32 @@
 
         <!-- Exported for SystemUI to launch into -->
         <activity android:name=".deviceinfo.StorageWizardInit"
-                android:theme="@style/GlifV3Theme.Light"
+                android:theme="@style/GlifTheme.Light"
                 android:exported="true"
                 android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
         <activity android:name=".deviceinfo.StorageWizardFormatProgress"
-                android:theme="@style/GlifV3Theme.Light"
-                android:exported="false" />
+                android:theme="@style/GlifTheme.Light"
+                android:exported="false"/>
         <activity android:name=".deviceinfo.StorageWizardFormatSlow"
-                android:theme="@style/GlifV3Theme.Light"
-                android:exported="false" />
+                android:theme="@style/GlifTheme.Light"
+                android:exported="false"/>
         <activity android:name=".deviceinfo.StorageWizardMigrateConfirm"
-                android:theme="@style/GlifV3Theme.Light"
-                android:exported="false" />
+                android:theme="@style/GlifTheme.Light"
+                android:exported="false"/>
         <activity android:name=".deviceinfo.StorageWizardMigrateProgress"
-                android:theme="@style/GlifV3Theme.Light"
+                android:theme="@style/GlifTheme.Light"
                 android:exported="true"
                 android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
         <activity android:name=".deviceinfo.StorageWizardReady"
-                android:theme="@style/GlifV3Theme.Light"
+                android:theme="@style/GlifTheme.Light"
                 android:exported="true"
                 android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
         <activity android:name=".deviceinfo.StorageWizardMoveConfirm"
-                android:theme="@style/GlifV3Theme.Light"
-                android:exported="false" />
+                android:theme="@style/GlifTheme.Light"
+                android:exported="false"/>
         <activity android:name=".deviceinfo.StorageWizardMoveProgress"
-                android:theme="@style/GlifV3Theme.Light"
+                android:theme="@style/GlifTheme.Light"
                 android:exported="true"
                 android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
@@ -2848,7 +2849,7 @@
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.fuelgauge.PowerUsageSummary" />
+                android:value="com.android.settings.fuelgauge.batteryusage.PowerUsageSummary" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_battery"/>
         </activity>
@@ -4052,6 +4053,22 @@
             </intent-filter>
             <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                        android:value="true"/>
+        </service>
+
+        <service
+            android:name=".development.qstile.DevelopmentTiles$DesktopMode"
+            android:label="@string/desktop_mode"
+            android:icon="@drawable/tile_icon_desktop_mode"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:exported="true"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                android:value="true"/>
+            <meta-data android:name="com.android.settings.development.qstile.REQUIRES_SYSTEM_PROPERTY"
+                       android:value="persist.wm.debug.desktop_mode" />
         </service>
 
         <activity

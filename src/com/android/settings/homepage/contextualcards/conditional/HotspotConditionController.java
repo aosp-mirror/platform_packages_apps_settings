@@ -106,6 +106,9 @@ public class HotspotConditionController implements ConditionalCardController {
     @Override
     public void startMonitoringStateChange() {
         mAppContext.registerReceiver(mReceiver, WIFI_AP_STATE_FILTER);
+        // The intent WIFI_AP_STATE_CHANGED_ACTION is not sticky intent anymore after SC-V2
+        // Handle the initial state after register the receiver.
+        mConditionManager.onConditionChanged();
     }
 
     @Override

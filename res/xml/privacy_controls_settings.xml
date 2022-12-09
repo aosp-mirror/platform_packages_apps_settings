@@ -34,12 +34,6 @@
         android:summary="@string/mic_toggle_description"
         settings:controller="com.android.settings.privacy.MicToggleController"/>
 
-    <!-- Location toggle -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="privacy_location_toggle"
-        android:title="@string/location_toggle_title"
-        android:summary="@string/perm_toggle_description"/>
-
     <!-- Clipboard access notifications -->
     <SwitchPreference
         android:key="show_clip_access_notification"

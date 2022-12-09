@@ -86,6 +86,8 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Du har ikke tillatelse til å endre Bluetooth-innstillingene."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Koble til en ny enhet"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Tilkoble høyre øre"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Tilkoble venstre øre"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Tilkoble det andre øret"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Det venstre høreapparatet ditt er tilkoblet.\n\nFor å koble til det høyre høreapparatet må du sørge for at det er slått på og klart til å koble til."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Det høyre høreapparatet ditt er tilkoblet.\n\nFor å koble til det venstre høreapparatet må du sørge for at det er slått på og klart til å koble til."</string>
@@ -355,13 +357,17 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Konfigurer ansiktslås"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Bruk ansiktet ditt til å godkjenne"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Start"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"Hvis ansiktslås med tilgjengelighet er slått av, fungerer muligens ikke enkelte konfigureringstrinn som de skal, med TalkBack."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Gå tilbake"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Fortsett konfig."</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Bruk tilgjengelighetsoppsett"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Avbryt"</string>
@@ -371,25 +377,53 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Lås opp med ansiktet ditt"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Tillat ansiktslås"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Bruk ansiktet ditt til å godkjenne"</string>
-    <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Bruk ansiktet til å låse opp telefonen, godkjenne kjøp eller logge på apper."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Gi barnet ditt tillatelse til å bruke ansiktet til å låse opp telefonen sin eller bekrefte identiteten sin. Dette skjer når hen logger på apper, godkjenner kjøp med mer."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"Bruk ansiktet til å låse opp telefonen, godkjenne kjøp eller logge på apper."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"Bruk ansiktet til å låse opp nettbrettet, godkjenne kjøp eller logge på apper."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"Bruk ansiktet til å låse opp enheten, godkjenne kjøp eller logge på apper."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Gi barnet ditt tillatelse til å bruke ansiktet til å låse opp telefonen sin"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Gi barnet ditt tillatelse til å bruke ansiktet til å låse opp nettbrettet sitt"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Gi barnet ditt tillatelse til å bruke ansiktet til å låse opp enheten sin"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"Bruk av ansiktet til barnet for å låse opp telefonen kan være mindre sikkert enn et sterkt mønster eller en sterk PIN-kode."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"Bruk av ansiktet til barnet for å låse opp nettbrettet kan være mindre sikkert enn et sterkt mønster eller en sterk PIN-kode."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"Bruk av ansiktet til barnet for å låse opp enheten kan være mindre sikkert enn et sterkt mønster eller en sterk PIN-kode."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Bruk ansiktet ditt til å låse opp telefonen eller godta kjøp.\n\nMerk: Du kan ikke bruke ansiktet til å låse opp denne enheten. Ta kontakt med administratoren for organisasjonen din for å få mer informasjon."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Bruk ansiktet til å låse opp telefonen, godkjenne kjøp eller logge på apper"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"Ha ansiktet ditt midt i sirkelen"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Hopp over"</string>
     <string name="face_add_max" msgid="4578405795494514876">"Du kan legge til opptil <xliff:g id="COUNT">%d</xliff:g> ansikter"</string>
@@ -439,7 +473,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Bruk fingeravtrykket til å låse opp nettbrettet eller bekrefte at det er deg, for eksempel når du logger på apper eller godkjenner kjøp."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Bruk fingeravtrykket til å låse opp enheten eller bekrefte at det er deg, for eksempel når du logger på apper eller godkjenner kjøp."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Bruk fingeravtrykket til å låse opp telefonen eller bekrefte at det er deg, for eksempel når du logger på apper eller godkjenner kjøp."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Gi barnet ditt tillatelse til å bruke fingeravtrykket til å låse opp telefonen sin eller bekrefte identiteten sin. Dette skjer når hen logger på apper, godkjenner kjøp med mer."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"Gi barnet ditt tillatelse til å bruke fingeravtrykket til å låse opp telefonen sin eller bekrefte identiteten sin. Dette skjer når hen logger på apper, godkjenner kjøp med mer."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"Gi barnet ditt tillatelse til å bruke fingeravtrykket til å låse opp nettbrettet sitt eller bekrefte identiteten sin. Dette skjer når hen logger på apper, godkjenner kjøp med mer."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"Gi barnet ditt tillatelse til å bruke fingeravtrykket til å låse opp enheten sin eller bekrefte identiteten sin. Dette skjer når hen logger på apper, godkjenner kjøp med mer."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Du har kontrollen"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Du og barnet ditt har kontrollen"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Vær obs på dette"</string>
@@ -454,16 +490,30 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Det tar bare et minutt eller to å konfigurere fingeravtrykk. Hvis du hopper over dette, kan du legge til fingeravtrykket ditt senere i innstillingene."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Når du ser dette ikonet, kan du autentisere med fingeravtrykk, f.eks. når du logger på apper eller godkjenner kjøp"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Vær obs på dette"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Bruk av fingeravtrykket for å låse opp telefonen kan være mindre sikkert enn et sterkt mønster eller en sterk PIN-kode"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"Bruk av fingeravtrykket for å låse opp telefonen kan være mindre sikkert enn et sterkt mønster eller en sterk PIN-kode"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"Bruk av fingeravtrykket for å låse opp nettbrettet kan være mindre sikkert enn et sterkt mønster eller en sterk PIN-kode"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"Bruk av fingeravtrykket for å låse opp enheten kan være mindre sikkert enn et sterkt mønster eller en sterk PIN-kode"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Slik fungerer det"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Opplåsing med fingeravtrykk lager en unik modell av fingeravtrykket ditt for å bekrefte identiteten din. For å opprette denne fingeravtrykkmodellen under konfigureringen tar du bilder av fingeravtrykket ditt fra forskjellige posisjoner."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Opplåsing med fingeravtrykk lager en unik modell av fingeravtrykket til barnet ditt for å bekrefte barnets identitet. For å opprette denne fingeravtrykkmodellen under konfigureringen tar hen bilder av fingeravtrykket sitt fra forskjellige posisjoner."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"Når du bruker Pixel Imprint, brukes bilder til å oppdatere fingeravtrykkmodellen. Bildene som brukes til å lage fingeravtrykkmodellen, lagres aldri, men fingeravtrykkmodellen lagres på en sikker måte på telefonen og forlater aldri telefonen. All behandling skjer på en sikker måte på telefonen."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Når hen bruker Pixel Imprint, brukes bilder til å oppdatere fingeravtrykkmodellen. Bildene som brukes til å lage barnets fingeravtrykkmodell, lagres aldri, men fingeravtrykkmodellen lagres på en sikker måte på telefonen og forlater aldri telefonen. All behandling skjer på en sikker måte på telefonen."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Du kan når som helst slette fingeravtrykkbildene og -modellen din eller slå av opplåsing med fingeravtrykk i innstillingene. Fingeravtrykkbildene og -modellene lagres på telefonen til du sletter dem."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Du og barnet ditt kan når som helst slette fingeravtrykkbildene og -modellen til barnet eller slå av opplåsing med fingeravtrykk i innstillingene. Fingeravtrykkbildene og -modellene lagres på telefonen til de slettes."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Telefonen kan låses opp selv om det ikke er meningen, for eksempel hvis noen holder den opp mot fingeren din."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Telefonen til barnet ditt kan låses opp selv om det ikke er meningen, for eksempel hvis noen holder den opp mot fingeren til barnet."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"Når du bruker Pixel Imprint, brukes bilder til å oppdatere fingeravtrykkmodellen. Bildene som brukes til å lage fingeravtrykkmodellen, lagres aldri, men fingeravtrykkmodellen lagres på en sikker måte på telefonen og forlater aldri telefonen. All behandling skjer på en sikker måte på telefonen."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"Når du bruker Pixel Imprint, brukes bilder til å oppdatere fingeravtrykkmodellen. Bildene som brukes til å lage fingeravtrykkmodellen, lagres aldri, men fingeravtrykkmodellen lagres trygt på nettbrettet og forlater aldri nettbrettet. All behandling skjer på en sikker måte på nettbrettet."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"Når du bruker Pixel Imprint, brukes bilder til å oppdatere fingeravtrykkmodellen. Bildene som brukes til å lage fingeravtrykkmodellen, lagres aldri, men fingeravtrykkmodellen lagres trygt på enheten og forlater aldri enheten. All behandling skjer på en sikker måte på enheten."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"Når hen bruker Pixel Imprint, brukes bilder til å oppdatere fingeravtrykkmodellen. Bildene som brukes til å lage barnets fingeravtrykkmodell, lagres aldri, men fingeravtrykkmodellen lagres på en sikker måte på telefonen og forlater aldri telefonen. All behandling skjer på en sikker måte på telefonen."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"Når hen bruker Pixel Imprint, brukes bilder til å oppdatere fingeravtrykkmodellen. Bildene som brukes til å lage barnets fingeravtrykkmodell, lagres aldri, men fingeravtrykkmodellen lagres trygt på nettbrettet og forlater aldri nettbrettet. All behandling skjer på en sikker måte på nettbrettet."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"Når hen bruker Pixel Imprint, brukes bilder til å oppdatere fingeravtrykkmodellen. Bildene som brukes til å lage barnets fingeravtrykkmodell, lagres aldri, men fingeravtrykkmodellen lagres trygt på enheten og forlater aldri enheten. All behandling skjer på en sikker måte på enheten."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"Du kan når som helst slette fingeravtrykkbildene og -modellen din eller slå av opplåsing med fingeravtrykk i innstillingene. Fingeravtrykkbildene og -modellene lagres på telefonen til du sletter dem."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"Du kan når som helst slette fingeravtrykkbildene og -modellen din eller slå av opplåsing med fingeravtrykk i innstillingene. Fingeravtrykkbildene og -modellene lagres på nettbrettet til du sletter dem."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"Du kan når som helst slette fingeravtrykkbildene og -modellen din eller slå av opplåsing med fingeravtrykk i innstillingene. Fingeravtrykkbildene og -modellene lagres på enheten til du sletter dem."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"Du og barnet ditt kan når som helst slette fingeravtrykkbildene og -modellen til barnet eller slå av opplåsing med fingeravtrykk i innstillingene. Fingeravtrykkbildene og -modellene lagres på telefonen til de slettes."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"Du og barnet ditt kan når som helst slette fingeravtrykkbildene og -modellen til barnet eller slå av opplåsing med fingeravtrykk i innstillingene. Fingeravtrykkbildene og -modellene lagres på nettbrettet til de slettes."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"Du og barnet ditt kan når som helst slette fingeravtrykkbildene og -modellen til barnet eller slå av opplåsing med fingeravtrykk i innstillingene. Fingeravtrykkbildene og -modellene lagres på enheten til de slettes."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Telefonen kan låses opp selv om det ikke er meningen, for eksempel hvis noen holder den opp mot fingeren din."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Nettbrettet kan låses opp selv om det ikke er meningen, for eksempel hvis noen holder den opp mot fingeren din."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Enheten kan låses opp selv om det ikke er meningen, for eksempel hvis noen holder den opp mot fingeren din."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"Telefonen til barnet ditt kan låses opp selv om det ikke er meningen, for eksempel hvis noen holder den opp mot fingeren til barnet."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"Nettbrettet til barnet ditt kan låses opp selv om det ikke er meningen, for eksempel hvis noen holder det opp mot fingeren til barnet."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"Enheten til barnet ditt kan låses opp selv om det ikke er meningen, for eksempel hvis noen holder den opp mot fingeren til barnet."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Du får best resultater ved å bruke en skjermbeskytter som er Made For Google-sertifisert. Fingeravtrykket ditt fungerer muligens ikke med andre skjermbeskyttere."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Du får best resultater ved å bruke en skjermbeskytter som er Made For Google-sertifisert. Fingeravtrykket til barnet ditt fungerer muligens ikke med andre skjermbeskyttere."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
@@ -488,7 +538,9 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Med ansiktet"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Med fingeravtrykket"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Med ansiktet eller fingeravtrykket"</string>
-    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Gi telefonen tilbake til forelderen din"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"Gi nettbrettet tilbake til forelderen din"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"Gi enheten tilbake til forelderen din"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Gi telefonen tilbake til forelderen din"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Vil du hoppe over skjermlås?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Funksjoner for enhetsbeskyttelse blir ikke slått på. Du kommer ikke til å kunne forhindre at andre bruker dette nettbrettet hvis du mister det eller det blir stjålet eller tilbakestilt."</string>
@@ -502,18 +554,24 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"Hopp over"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Avbryt"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Berør sensoren"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Hold på av/på-knappen uten å trykke på den"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Slik konfigurerer du fingeravtrykket ditt"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Den er på baksiden av telefonen. Bruk pekefingeren."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"Fingeravtrykkssensoren er på av/på-knappen. Det er den flate knappen ved siden av den opphøyde volumknappen på kanten av nettbrettet.\n\nHvis du trykker på av/på-knappen, slås skjermen av."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"Fingeravtrykkssensoren er på av/på-knappen. Det er den flate knappen ved siden av den opphøyde volumknappen på kanten av enheten.\n\nHvis du trykker på av/på-knappen, slås skjermen av."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"Fingeravtrykkssensoren er på av/på-knappen. Det er den flate knappen ved siden av den opphøyde volumknappen på kanten av telefonen.\n\nHvis du trykker på av/på-knappen, slås skjermen av."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Fingeravtrykkssensoren er på skjermen. Du registrerer fingeravtrykket på den neste skjermen."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Start"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Beveg fingeren over skjermen for å finne sensoren. Trykk og hold på fingeravtrykks-sensoren."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Illustrasjon med enheten og plasseringen av fingeravtrykksensoren"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Navn"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
+    <string name="security_settings_fingerprint_enroll_dialog_try_again" msgid="8117874972945407006">"Prøv igjen"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Slett"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Berør sensoren"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Legg fingeren på sensoren, og løft den når du kjenner en vibrasjon"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Hold fingeravtrykket flatt på sensoren til du føler en vibrering"</string>
+    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"Uten å trykke på knappen holder du fingeravtrykket på sensoren til du føler en vibrasjon.\n\nFlytt fingeren litt hver gang. Dette bidrar til å registrere mer av fingeravtrykket."</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Hold på finger-​\\navtrykkssensoren"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Løft fingeren og berør igjen"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"En gang til"</string>
@@ -523,13 +581,20 @@
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Plasser fingertuppen på sensoren"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Plasser den venstre kanten av fingeren"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Plasser den høyre kanten av fingeren"</string>
+    <string name="security_settings_sfps_enroll_finger_center_title" msgid="1320688855767675739">"Plasser midten av fingeren på sensoren"</string>
+    <string name="security_settings_sfps_enroll_fingertip_title" msgid="2737520837684516446">"Plasser fingertuppen på sensoren"</string>
+    <string name="security_settings_sfps_enroll_left_edge_title" msgid="9022963735924413343">"Plasser den venstre kanten av fingeren på sensoren"</string>
+    <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"Plasser til slutt den høyre kanten av fingeren på sensoren"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Plassér siden av fingeravtrykket på sensoren og hold. Bytt deretter til den andre siden"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Dette bidrar til å registrere mer av fingeravtrykket"</string>
+    <string name="security_settings_sfps_enroll_progress_a11y_message" msgid="6450772721691523736">"Registrerer fingeravtrykket: <xliff:g id="PERCENTAGE">%d</xliff:g> prosent"</string>
+    <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Registrert <xliff:g id="PERCENTAGE">%d</xliff:g> prosent"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registrerer fingeravtrykket: <xliff:g id="PERCENTAGE">%d</xliff:g> prosent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingeravtrykket er lagt til"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Opplåsing med fingeravtrykk fungerer bedre jo mer du bruker det til å låse opp nettbrettet og bekrefte identiteten din i apper"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Opplåsing med fingeravtrykk fungerer bedre jo mer du bruker det til å låse opp enheten og bekrefte identiteten din i apper"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Opplåsing med fingeravtrykk fungerer bedre jo mer du bruker det til å låse opp telefonen og bekrefte identiteten din i apper"</string>
+    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Nå kan du bruke fingeravtrykket til å låse opp nettbrettet eller bekrefte at det er deg, for eksempel når du logger på apper eller godkjenner kjøp"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Nå kan du bruke fingeravtrykket til å låse opp nettbrettet eller bekrefte at det er deg, for eksempel når du logger på apper"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Nå kan du bruke fingeravtrykket til å låse opp enheten eller bekrefte at det er deg, for eksempel når du logger på apper"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Nå kan du bruke fingeravtrykket til å låse opp telefonen eller bekrefte at det er deg, for eksempel når du logger på apper"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Gjør det senere"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Løft fingeren og trykk igjen"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Plasser siden av fingeravtrykket på sensoren og hold. Bytt deretter til den andre siden."</string>
@@ -587,8 +652,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Ferdig"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ops, det er ikke sensoren"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Berør sensoren på baksiden av telefonen. Bruk pekefingeren."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Registreringen er ikke fullført"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Tidsgrensen for registrering av fingeravtrykk er nådd. Prøv på nytt."</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Konfigurering av fingeravtrykk er tidsavbrutt"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Prøv på nytt nå, eller konfigurer fingeravtrykket senere i innstillingene"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Registrering av fingeravtrykket mislyktes. Prøv på nytt, eller bruk en annen finger."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Legg til ett til"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Neste"</string>
@@ -607,10 +672,14 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du har lagt til maksimalt antall fingeravtrykk"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Kan ikke legge til flere fingeravtrykk"</string>
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Vil du fjerne alle fingeravtrykk?"</string>
-    <string name="fingerprint_delete_title" msgid="1469865327307917858">"Fjern «<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>»"</string>
+    <string name="fingerprint_delete_title" msgid="5412123164503407098">"Slett «<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>»"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Vil du slette dette fingeravtrykket?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Dette sletter fingeravtrykkbildene og -modellen tilknyttet «<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>» som er lagret på enheten"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Da kan du ikke bruke fingeravtrykket til å låse opp telefonen eller bekrefte identiteten din i apper."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Dette sletter fingeravtrykkbildene og -modellen tilknyttet «<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>» som er lagret på telefonen"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Dette sletter fingeravtrykkbildene og -modellen tilknyttet «<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>» som er lagret på nettbrettet"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Dette sletter fingeravtrykkbildene og -modellen tilknyttet «<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>» som er lagret på enheten"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Da kan du ikke bruke fingeravtrykket til å låse opp telefonen eller bekrefte identiteten din i apper."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Du kan ikke bruke fingeravtrykket til å låse opp nettbrettet eller bekrefte identiteten din i apper."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Du kan ikke bruke fingeravtrykket til å låse opp enheten eller bekrefte identiteten din i apper."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Da kan du ikke bruke fingeravtrykket til å låse opp jobbprofilen din, autorisere kjøp eller logge på jobbapper."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ja, fjern"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Kryptering"</string>
@@ -1317,15 +1386,17 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"På"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"På – ansiktsbasert"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Ansiktsgjenkjenning"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Juster skjermretningen automatisk når du beveger telefonen mellom stående og liggende format"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Juster skjermretningen automatisk når du beveger telefonen mellom stående og liggende format"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Juster skjermretningen automatisk når du beveger nettbrettet mellom stående og liggende format"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Finn ut mer om automatisk rotasjon"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Når du beveger telefonen mellom stående og liggende format"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Skjermoppløsning"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Høy oppløsning"</string>
-    <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Høyeste oppløsning"</string>
+    <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Full oppløsning"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <string name="screen_resolution_footer" msgid="2563830074752340045">"Hvis du bytter oppløsning, kan det føre til lukking av noen apper som kjører."</string>
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"Full oppløsning bruker mer batteri. Hvis du endrer oppløsningen, kan det føre til at noen apper starter på nytt."</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Valgt"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Farger"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturlig"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Forsterket"</string>
@@ -1445,17 +1516,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"Tilpass telefonen"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Prøv forskjellige stiler, bakgrunner med mer"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Skjermsparer"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"skjermsparer"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Bruk skjermsparer"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Når enheten lades / er i dokken"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"Begge"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Når enheten lades"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Når enheten er i dokken"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Aldri"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Av"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"For å kontrollere hva som skjer når telefonen er plassert i dokken og/eller i hvilemodus, slå på skjermspareren."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Starttidspunkt"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Aktiv skjermsparer"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"Innstillinger"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Automatisk lysstyrke"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Aktiver enheten med løftebevegelser"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Passiv skjerm"</string>
@@ -1613,9 +1682,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Gi nytt navn"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Montér"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Løs ut"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Formatér"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Formater SD-kort som bærbar lagring"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Formater kort"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatér som bærbar"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Formatér som intern"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Formatér"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Overfør data"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Glem"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Konfigurer"</string>
@@ -1645,17 +1715,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Gi nytt navn til lagring"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"<xliff:g id="NAME_0">^1</xliff:g> er trygt løst ut, men fortsatt tilgjengelig.\n\n<xliff:g id="NAME_1">^1</xliff:g> må settes inn før bruk."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g> er ødelagt. \n\n<xliff:g id="NAME_1">^1</xliff:g> må konfigureres før bruk."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"Etter formatering kan du bruke <xliff:g id="NAME_0">^1</xliff:g> på andre enheter. \n\nAlle dataene på <xliff:g id="NAME_1">^1</xliff:g> blir slettet. Vurder å ta en sikkerhetskopi først. \n\n"<b>"Sikkerhetskopiér bilder og andre medier"</b>\n"Flytt mediefilene dine til en alternativ lagringsplass på denne enheten, eller overfør dem til en datamaskin ved hjelp av en USB-kabel. \n\n"<b>"Sikkerhetskopiér apper"</b>\n" Alle apper som er lagret på denne <xliff:g id="NAME_6">^1</xliff:g> avinstalleres, og appdata blir slettet. For å beholde disse appene, må du flytte dem til en alternativ lagringsplass på denne enheten."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Du kan formatere dette SD-kortet for å lagre bilder, videoer, musikk med mer og bruke dem på andre enheter. \n\n"<b>"Alle data på dette SD-kortet blir tømt."</b>" \n\n"<b>"Før formatering"</b>" \n\n"<b>"Sikkerhetskopier bilder og andre medier"</b>" \nFlytt mediefilene dine til alternativ lagring på denne enheten, eller overfør dem til en datamaskin via en USB-kabel. \n\n"<b>"Sikkerhetskopier apper"</b>" \nAlle apper som er lagret på <xliff:g id="NAME">^1</xliff:g>, blir avinstallert, og de tilhørende dataene blir tømt. For å beholde disse appene, flytt dem til alternativ lagring på denne enheten."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Når du løser ut <xliff:g id="NAME_0">^1</xliff:g>, slutter apper som er lagret på den å virke, og mediefiler som er lagret på den, blir ikke tilgjengelige før lagringsmediet settes inn igjen."</b>" \n\n<xliff:g id="NAME_1">^1</xliff:g> er formatert til å bare fungere med denne enheten. Lagringsmediet fungerer ikke på andre enheter."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"For å bruke appene, bildene eller dataene som <xliff:g id="NAME">^1</xliff:g> inneholder, sett den inn på nytt. \n\nAlternativt kan du velge å glemme denne lagringen hvis enheten ikke er tilgjengelig. \n\nHvis du velger å glemme, forsvinner alle dataene som enheten inneholder for alltid. \n\nDu kan installere appene på nytt senere, men dataene som er lagret på denne enheten, går tapt."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Vil du at enheten skal glemme <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Alle appene, bildene og dataene som er lagret på <xliff:g id="NAME">^1</xliff:g>, går tapt for alltid."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Systemet inkluderer filer som brukes for å kjøre Android versjon <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Brukere i gjestemodus kan ikke formatere SD-kort"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Konfigurer <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Bruk som bærbar lagring"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"For å flytte bilder og andre medier mellom enheter."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Bruk som intern lagring"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"For å lagre ting på bare denne enheten, inkludert apper og bilder. Krever formatering som hindrer den i å fungere med andre enheter."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Formater SD-kort som bærbar lagring"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Lagre bilder, videoer, musikk med mer, og bruk innholdet fra andre enheter"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Formater SD-kort som internminne"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Lagre apper og medier som bare skal brukes på denne telefonen"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Formatér som intern lagring"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Dette krever at <xliff:g id="NAME_0">^1</xliff:g> er formatert for å gjøre det sikkert. \n\nEtter formatering fungerer <xliff:g id="NAME_1">^1</xliff:g> bare med denne enheten. \n\n"<b>"Formatering sletter alle data som er lagret på <xliff:g id="NAME_2">^1</xliff:g> for øyeblikket."</b>" For å unngå at data går tapt, bør du vurdere å ta en sikkerhetskopi."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Formatér som bærbar lagring"</string>
@@ -1672,9 +1743,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Flytt"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Flytter data …"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Under flyttingen: \n• Ikke fjern <xliff:g id="NAME">^1</xliff:g>. \n• Noen apper kommer ikke til å fungere skikkelig. \n• Hold enheten ladet."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"<xliff:g id="NAME">^1</xliff:g> er klar til bruk"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"<xliff:g id="NAME">^1</xliff:g> er klart til bruk med bilder og andre medier."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"<xliff:g id="NAME">^1</xliff:g> fungerer. \n\nFor å flytte bilder, filer og programdata til denne enheten, gå til Innstillinger og lagring."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> er formatert"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Du kan begynne å bruke <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Du kan begynne å bruke <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Flytt <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Det tar bare et par øyeblikk å flytte <xliff:g id="APP">^1</xliff:g> og tilhørende data til <xliff:g id="NAME_0">^2</xliff:g>. Du kan ikke bruke appen før flyttingen er ferdig. \n\nIkke fjern <xliff:g id="NAME_1">^2</xliff:g> mens flyttingen pågår."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Du må låse opp brukeren <xliff:g id="APP">^1</xliff:g> for å flytte data."</string>
@@ -1683,19 +1754,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Avbryt flyttingen"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"<xliff:g id="NAME_0">^1</xliff:g> ser ut til å være treg. \n\nDu kan fortsette, men apper flyttet til denne plasseringen, kan hakke, og dataoverføringer kan ta lang tid. \n\nVurder å bruke raskere <xliff:g id="NAME_1">^1</xliff:g> for bedre ytelse."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Hvordan skal du bruke <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Bruk som ekstra nettbrettlagring"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"For apper, filer og medier bare på dette nettbrettet"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Lagring på nettbrett"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Bruk som ekstra telefonlagring"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"For apper, filer og medier bare på denne telefonen"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Telefonlagring"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formater SD-kort som internminne"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Lagre apper og medieinnhold som bare skal brukes på dette nettbrettet. &lt;a href=https://support.google.com/android/answer/12153449&gt;Finn ut mer om konfigurering av SD-kort&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formatér"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formater SD-kort som internminne"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Lagre apper og medieinnhold som bare skal brukes på denne telefonen. &lt;a href=https://support.google.com/android/answer/12153449&gt;Finn ut mer om konfigurering av SD-kort&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formatér"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Eller"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Bruk som bærbar lagring"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"For å overføre filer og medier mellom enheter"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Bærbar lagring"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formater SD-kort som bærbar lagring"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Lagre blant annet bilder, videoer og musikk, og få tilgang til det fra andre enheter. &lt;a href=https://support.google.com/android/answer/12153449&gt;Finn ut mer om konfigurering av SD-kort&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formatér"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Konfigurer senere"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Vil du formatere <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"<xliff:g id="NAME_0">^1</xliff:g> må formateres for å lagre apper, filer og medier. \n\nFormatering tømmer eksisterende innhold på <xliff:g id="NAME_1">^2</xliff:g>. For å unngå å miste innhold, sikkerhetskopiér det til en annen <xliff:g id="NAME_2">^3</xliff:g> eller enhet."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Du må formatere <xliff:g id="NAME_0">^1</xliff:g> for å lagre bilder, videoer, musikk med mer. \n\nFormatering tømmer eksisterende innhold på <xliff:g id="NAME_1">^2</xliff:g>. For å unngå å miste innhold, sikkerhetskopier det til en annen enhet eller <xliff:g id="NAME_2">^3</xliff:g>."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formatér <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Vil du flytte innhold til <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Du kan flytte filer, media og visse apper til <xliff:g id="NAME">^1</xliff:g>. \n\nFlyttingen frigjør <xliff:g id="SIZE">^2</xliff:g> av nettbrettets lagring og bør ta omtrent <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1712,9 +1784,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Du kan fremdeles bruke <xliff:g id="NAME_0">^1</xliff:g>, men det kan være tregt. \n\nApper som er lagret på <xliff:g id="NAME_1">^2</xliff:g>, fungerer kanskje ikke som de skal, og overføring av innhold kan ta lang tid. \n\nPrøv å bruke et raskere <xliff:g id="NAME_2">^3</xliff:g>, eller bruk <xliff:g id="NAME_3">^4</xliff:g> som bærbar lagring i stedet."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Start på nytt"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Fortsett"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Du kan flytte innhold til <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"For å flytte innhold til <xliff:g id="NAME">^1</xliff:g>, gå til "<b>"Innstillinger og lagring"</b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Innholdet ble flyttet til <xliff:g id="NAME_0">^1</xliff:g>. \n\nFor å administrere <xliff:g id="NAME_1">^2</xliff:g>, gå til "<b>"Innstilling og lagring"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Du kan begynne å bruke <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Du kan begynne å bruke <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Du kan begynne å bruke <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Batteristatus"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Batterinivå"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
@@ -1945,6 +2017,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Angi en PIN-kode"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Angi en jobb-PIN-kode"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Angi et mønster"</string>
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"For å øke sikkerheten, angi et mønster for å låse opp enheten"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Angi et jobbmønster"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Angi passord for å bruke fingeravtrykk"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Angi mønster for å bruke fingeravtrykk"</string>
@@ -2098,7 +2171,7 @@
     <string name="default_emergency_app" msgid="1929974800666613803">"Nødapp"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"Tilbakestill app-innstillingene"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Vil du tilbakestille app-innstillingene?"</string>
-    <string name="reset_app_preferences_desc" msgid="6509978724602405805">"Dette tilbakestiller alle innstillinger for\n\n"<li>"deaktiverte apper"</li>\n<li>"deaktiverte appvarsler"</li>\n<li>"standardapper for handlinger"</li>\n<li>"begrensninger på bakgrunnsdata for apper"</li>\n<li>"eventuelle tillatelsesbegrensninger"</li>\n\n"Du mister ingen appdata."</string>
+    <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Dette tilbakestiller alle innstillinger for\n\n"<li>"deaktiverte apper"</li>\n<li>"deaktiverte appvarsler"</li>\n<li>"standardapper for handlinger"</li>\n<li>"begrensninger for bakgrunnsdata for apper"</li>\n<li>"eventuelle tillatelsesbegrensninger"</li>\n<li>"innstillinger for batteribruk"</li>\n\n"Du mister ingen appdata."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Tilbakestill apper"</string>
     <string name="manage_space_text" msgid="9013414693633572277">"Styr lagring"</string>
     <string name="filter" msgid="9039576690686251462">"Filter"</string>
@@ -2353,7 +2426,8 @@
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Tilbakestill valgene"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Skjermstørrelsen og tekstinnstillingene er tilbakestilt"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Vil du tilbakestille visningsstørrelse og tekst?"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Innstillingene for visningsstørrelse og tekst blir tilbakestilt til de opprinnelge telefoninnstillingene"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Innstillingene for visningsstørrelse og tekst blir tilbakestilt til de opprinnelge telefoninnstillingene"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"Innstillingene for visningsstørrelse og tekst blir tilbakestilt til de opprinnelige nettbrettinnstillingene"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Tilbakestill"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Har du planer for helgen?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Jeg skal til stranden. Vil du bli med?"</string>
@@ -2736,7 +2810,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Batteribruk"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Se bruk de siste 24 timene"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Se bruk siden siste fulle opplading"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Batteribruk"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Batteribruk for apper"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Bruksdetaljer"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Juster strømforbruk"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Pakker"</string>
@@ -2755,8 +2829,11 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Noen funksjoner kan være begrenset"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Høyere batteribruk"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Se appene med høyest batteribruk"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Lading er midlertidig begrenset"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"For å forlenge batterilevetiden. Finn ut mer."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Ladingen er satt på pause"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"Batteriet beskyttes for å forlenge batterilevetiden"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
+    <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Finn ut mer om lading satt på pause"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Gjenoppta ladingen"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Under visse omstendigheter, for eksempel høye temperaturer og lange ladetider, kan ladingen begrenses til <xliff:g id="PERCENT">%1$s</xliff:g> for å bevare batteriet.\n\nNår slike omstendigheter er over, gjenopptar telefonen automatisk normal lading."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Under visse omstendigheter, for eksempel høye temperaturer og lange ladetider, kan ladingen begrenses til <xliff:g id="PERCENT">%1$s</xliff:g> for å bevare batteriet.\n\nNår slike omstendigheter er over, gjenopptar telefonen automatisk normal lading."</string>
@@ -2792,6 +2869,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Denne appen kan bruke batteri i bakgrunnen. Batteriet kan gå tomt raskere enn forventet."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Fjern"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Avbryt"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Lad til batteriet er fullt"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Appene bruker en normal batterimengde. Hvis apper bruker for mye batteri, får du forslag om hva du kan gjøre.\n\nDu kan når som helst slå på batterisparing hvis du har lite batteri."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Appene bruker en normal batterimengde. Hvis apper bruker for mye batteri, får du forslag om hva du kan gjøre.\n\nDu kan når som helst slå på batterisparing hvis du har lite batteri."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Appene bruker en normal batterimengde. Hvis apper bruker for mye batteri, får du forslag om hva du kan gjøre.\n\nDu kan når som helst slå på batterisparing hvis du har lite batteri."</string>
@@ -2933,6 +3011,7 @@
     <string name="battery_not_usage" msgid="1472275761547230196">"Ingen bruk siden sist batteriet var fulladet"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Ingen bruk de siste 24 timene"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
+    <string name="battery_usage_other_users" msgid="9002643295562500693">"Andre brukere"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Beregnet gjenværende batteritid er basert på måten du bruker enheten på"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Anslått tid som er igjen"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Til det er fulladet"</string>
@@ -2968,8 +3047,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"med <xliff:g id="PERCENT">%1$s</xliff:g> batteri"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Batteriprosent"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Vis batteriprosenten i statusfeltet"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Batterinivå siden sist batteriet var fulladet"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Batterinivå de siste 24 timene"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"Appbruk siden sist batteriet var fulladet"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Appbruk de siste 24 timene"</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"Systembruk siden sist batteriet var fulladet"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Systembruk de siste 24 timene"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Systembruk for <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Appbruk for <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -2977,9 +3059,13 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Bakgrunn: mindre enn ett minutt"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Totalt: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Bakgrunn: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Data om batteribruk er omtrentlig og måler ikke bruk når telefonen lader"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Data om batteribruk blir tilgjengelig etter at du har brukt telefonen i noen timer"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Data om batteribruk er omtrentlig og måler ikke bruk når telefonen lader"</string>
+    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"Data om batteribruk er omtrentlig og måler ikke bruk når nettbrettet lader"</string>
+    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"Data om batteribruk er omtrentlig og måler ikke bruk når enheten lader"</string>
+    <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Data om batteribruk blir tilgjengelig noen timer etter at enheten er fulladet"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Diagram over batteribruk"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Diagram over batteribruk per dag"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Diagram over batteribruk per time"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Prosess-statistikk"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Nerdete statistikk om prosesser som er i gang"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Minnebruk"</string>
@@ -3022,6 +3108,9 @@
     <string name="voice_interactor_preference_summary" msgid="3942881638813452880">"Full tjeneste for kommandoord og interaksjon"</string>
     <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"Enkel tjeneste for tale til tekst"</string>
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"Denne taleinndata-tjenesten kan utføre «alltid på»-taleovervåking og kontrollere taleaktiverte apper på dine vegne. Den kommer fra <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>-appen. Vil du slå på denne tjenesten?"</string>
+    <string name="on_device_recognition_settings" msgid="6503160369314598069">"Innstillinger for gjenkjenning på enheten"</string>
+    <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"Gjenkjenning på enheten"</string>
+    <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"Talegjenkjenning på enheten"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"Foretrukket motor"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"Innstillinger for motor"</string>
     <string name="tts_sliders_title" msgid="6901146958648426181">"Talehastighet og stemmeleie"</string>
@@ -3415,6 +3504,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Slett"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Alle apper og data i denne økten blir slettet."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Fjern"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"Gjest (du)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Brukere"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Andre brukere"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Slett gjesteaktivitet"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Slett alle gjesteapper og -data når du avslutter gjestemodus"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Vil du slette gjesteaktivitet?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Apper og data fra denne gjesteøkten slettes nå, og all fremtidig gjesteaktivitet slettes hver gang du avslutter gjestemodus"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Slå på telefonsamtaler"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Slå på telefonsamtaler og SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Slett brukeren"</string>
@@ -3526,6 +3622,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Lar apper bruke posisjonsinformasjon"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Tilbake"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Neste"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Bytt til bærbar"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Formater på en annen måte"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Fullfør"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <!-- no translation found for sim_setup_wizard_title (7030639256610746768) -->
@@ -4011,13 +4109,13 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"«<xliff:g id="APP_NAME">%1$s</xliff:g>»: alle varsler"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g>: alle varsler"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Varsler som kan tilpasses"</string>
-    <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> varsler per dag</item>
-      <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> varsel per dag</item>
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="other">Omtrent <xliff:g id="NUMBER_1">%,d</xliff:g> varsler per dag</item>
+      <item quantity="one">Omtrent <xliff:g id="NUMBER_0">%d</xliff:g> varsel per dag</item>
     </plurals>
-    <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">ca. <xliff:g id="NUMBER_1">%,d</xliff:g> varsler per uke</item>
-      <item quantity="one">ca. <xliff:g id="NUMBER_0">%d</xliff:g> varsel per uke</item>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="other">Omtrent <xliff:g id="NUMBER_1">%,d</xliff:g> varsler per uke</item>
+      <item quantity="one">Omtrent <xliff:g id="NUMBER_0">%d</xliff:g> varsel per uke</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Aldri"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Enhets- og appvarsler"</string>
@@ -4827,6 +4925,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Slå på nå"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Slå av nå"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Bruker ikke funksjonen for batterioptimalisering"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Batteribruk for apper"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Angi batteribruk for apper"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Ubegrenset"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimalisert"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Begrenset"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Når enheten er låst, kan man ikke skrive svar eller annen tekst i varsler"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Standard stavekontroll"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Velg stavekontroll"</string>
@@ -5259,7 +5362,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Ikke gjør noe"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibrer"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Ignorer"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"For å slå på, endre først «Trykk og hold på av/på-knappen» til av/på-menyen."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"For å slå på dette, endre først «Trykk og hold på av/på-knappen» til av/på-menyen."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Nettverksdetaljer"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Enhetsnavnet ditt er synlig for apper på telefonen. Det kan også ses av andre personer når du kobler til Bluetooth-enheter, kobler til et Wifi-nettverk eller konfigurerer en wifi-sone."</string>
     <string name="devices_title" msgid="649715719278562515">"Enheter"</string>
@@ -5549,15 +5652,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"enhetsstyring"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kort og billetter"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kort og billetter"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"Trykk og hold av/på-knappen"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Trykk og hold for assistenten"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Trykk og hold for av/på-menyen"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Trykk og hold er slått av"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Trykk og hold på av/på-knappen"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Trykk og hold på av/på-knappen for å åpne"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Av/på-meny"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Digital assistent"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Åpne den digitale assistenten"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Åpne av/på-menyen"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Du må angi en skjermlås for å bruke denne funksjonen"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Hold for å starte assistenten"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Start assistenten ved å holde inne av/på-knappen"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Av/på- og nødmeny:\nTrykk inn av/på og volum opp samtidig."</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Forhindre ringing:\nEn snarvei er tilgjengelig i volummenyen."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Av/på-meny:\nTrykk på av/på-knappen og volum opp-knappen samtidig"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Forhindre ringing:\nTrykk på en volumknapp for å bruke snarveien"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Varighet for trykk og hold"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Juster følsomheten ved å velge hvor lenge av/på-knappen skal holdes inne"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Kort"</string>
@@ -5593,6 +5696,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"Medier"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Fest medieavspilleren"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"For å gjenoppta avspilling raskt holdes medieavspilleren åpen i hurtiginnstillingene"</string>
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Vis medier på låseskjermen"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"Medieavspilleren vises fortsatt på låseskjermen, slik at du kan gjenoppta avspillingen raskt"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Vis medieanbefalinger"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Basert på aktiviteten din"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Skjul spilleren"</string>
@@ -5775,7 +5880,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Forhåndsvis"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Velg en skjermsparer"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Vis tilleggsinformasjon"</string>
-    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"Vis klokkeslett, dato, vær, luftkvalitet og casteinformasjon på skjermspareren"</string>
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Vis ting som klokkeslettet, været eller annen informasjon på skjermspareren"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Flere innstillinger"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Velg en skjermsparer"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Velg hva du ser på skjermen når nettbrettet er i dokken. Enheten kan bruke mer energi når en skjermsparer brukes."</string>

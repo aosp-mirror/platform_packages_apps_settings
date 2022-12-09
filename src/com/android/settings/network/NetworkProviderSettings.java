@@ -1324,6 +1324,12 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @VisibleForTesting
     void launchConfigNewNetworkFragment(WifiEntry wifiEntry) {
+        if (mIsRestricted) {
+            Log.e(TAG, "Can't configure Wi-Fi because NetworkProviderSettings is restricted.");
+            EventLog.writeEvent(0x534e4554, "246301667", -1 /* UID */, "Fragment is restricted.");
+            return;
+        }
+
         final Bundle bundle = new Bundle();
         bundle.putString(WifiNetworkDetailsFragment.KEY_CHOSEN_WIFIENTRY_KEY,
                 wifiEntry.getKey());
