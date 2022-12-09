@@ -118,18 +118,29 @@ public class AccessibilityQuickSettingsPrimarySwitchPreferenceControllerTest {
         mController = new TestAccessibilityQuickSettingsPrimarySwitchPreferenceController(mContext,
                 TEST_KEY);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
-        mController.displayPreference(mScreen);
     }
 
     @Test
     public void setChecked_showTooltipView() {
+        mController.displayPreference(mScreen);
+
         mController.setChecked(true);
 
         assertThat(getLatestPopupWindow().isShowing()).isTrue();
     }
 
     @Test
+    public void setChecked_notCallDisplayPreference_notShowTooltipView() {
+        // Simulates the slice highlight menu that does not call {@link #displayPreference} before
+        // {@link #setChecked} called.
+        mController.setChecked(true);
+
+        assertThat(getLatestPopupWindow()).isNull();
+    }
+
+    @Test
     public void setChecked_tooltipViewShown_notShowTooltipView() {
+        mController.displayPreference(mScreen);
         mController.setChecked(true);
         getLatestPopupWindow().dismiss();
         mController.setChecked(false);
@@ -142,6 +153,7 @@ public class AccessibilityQuickSettingsPrimarySwitchPreferenceControllerTest {
     @Test
     @Config(shadows = ShadowFragment.class)
     public void restoreValueFromSavedInstanceState_showTooltipView() {
+        mController.displayPreference(mScreen);
         mController.setChecked(true);
         final Bundle savedInstanceState = new Bundle();
         savedInstanceState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, /* value= */ true);

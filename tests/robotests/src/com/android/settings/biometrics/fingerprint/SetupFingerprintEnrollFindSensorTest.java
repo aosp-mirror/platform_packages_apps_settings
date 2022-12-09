@@ -21,8 +21,8 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.Intent;
+import android.content.res.Resources.Theme;
 import android.hardware.fingerprint.FingerprintManager;
-import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -49,14 +49,24 @@ import org.robolectric.annotation.Config;
 @Config(shadows = {ShadowUtils.class, ShadowAlertDialogCompat.class})
 public class SetupFingerprintEnrollFindSensorTest {
 
-    @Mock
-    private FingerprintManager mFingerprintManager;
+    @Mock private FingerprintManager mFingerprintManager;
+
+    private Theme mTheme;
+
+    private SetupFingerprintEnrollFindSensor mActivity;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         ShadowUtils.setFingerprintManager(mFingerprintManager);
         FakeFeatureFactory.setupForTest();
+
+        final Intent intent = new Intent()
+                // Set the challenge token so the confirm screen will not be shown
+                .putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
+        mActivity = Robolectric.buildActivity(SetupFingerprintEnrollFindSensor.class,
+                intent).setup().get();
+        mTheme = mActivity.getTheme();
     }
 
     @After
@@ -66,23 +76,37 @@ public class SetupFingerprintEnrollFindSensorTest {
 
     @Test
     public void fingerprintEnroll_showsAlert_whenClickingSkip() {
-        final Intent intent = new Intent()
-                // Set the challenge token so the confirm screen will not be shown
-                .putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
+        final AlertDialog alertDialog = setupAlertDialog();
+        final ShadowAlertDialogCompat shadowAlertDialog = ShadowAlertDialogCompat.shadowOf(
+                alertDialog);
+        final int titleRes = R.string.setup_fingerprint_enroll_skip_title;
 
-        final SetupFingerprintEnrollFindSensor activity =
-                Robolectric.buildActivity(SetupFingerprintEnrollFindSensor.class,
-                        intent).setup().get();
+        assertThat(application.getString(titleRes)).isEqualTo(shadowAlertDialog.getTitle());
+    }
 
-        PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
+    @Test
+    public void fingerprintEnroll_activityApplyDarkLightStyle() {
+        mActivity.onApplyThemeResource(mTheme, R.style.GlifTheme, true /* first */);
+
+        final String appliedThemes = mTheme.toString();
+        assertThat(appliedThemes.contains("SetupWizardPartnerResource")).isTrue();
+    }
+
+    @Test
+    public void fingerprintEnroll_showsAlert_setAlertDialogTheme() {
+        final AlertDialog alertDialog = setupAlertDialog();
+
+        assertThat(alertDialog.getContext().getThemeResId()).isEqualTo(
+                R.style.Theme_AlertDialog);
+    }
+
+    private AlertDialog setupAlertDialog() {
+        PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
         layout.getMixin(FooterBarMixin.class).getSecondaryButtonView().performClick();
 
         final AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(alertDialog).isNotNull();
 
-        final ShadowAlertDialogCompat shadowAlertDialog = ShadowAlertDialogCompat.shadowOf(
-                alertDialog);
-        final int titleRes = R.string.setup_fingerprint_enroll_skip_title;
-        assertThat(application.getString(titleRes)).isEqualTo(shadowAlertDialog.getTitle());
+        return alertDialog;
     }
 }

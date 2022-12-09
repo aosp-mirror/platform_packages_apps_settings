@@ -26,26 +26,57 @@
         settings:controller="com.android.settings.users.MultiUserTopIntroPreferenceController"/>
 
     <PreferenceCategory
-        android:key="user_list"
-        android:title="@string/user_list_title"
-        android:order="10"
-        settings:searchable="false">
-    </PreferenceCategory>
+        android:key="guest_category"
+        android:title="@string/guest_category_title"
+        android:order="2"
+        settings:searchable="false"/>
 
-    <com.android.settingslib.RestrictedPreference
-        android:key="guest_add"
-        android:title="@string/guest_new_guest"
-        android:order="15"/>
+    <Preference
+        android:key="guest_exit"
+        android:title="@string/guest_exit_button"
+        android:icon="@drawable/ic_guest_exit"
+        android:order="3"/>
+
+    <Preference
+        android:key="guest_reset"
+        android:title="@string/guest_reset_button"
+        android:icon="@drawable/ic_guest_reset"
+        android:order="4"/>
+
+    <PreferenceCategory
+        android:key="user_list"
+        android:title="@string/user_category_title"
+        android:order="10"
+        settings:searchable="false"/>
 
     <com.android.settingslib.RestrictedPreference
         android:key="user_add"
         android:title="@string/user_add_user_or_profile_menu"
+        android:icon="@drawable/ic_add_40dp"
         android:order="20"/>
 
     <com.android.settingslib.RestrictedPreference
         android:key="supervised_user_add"
         android:title="@*android:string/supervised_user_creation_label"
+        android:icon="@drawable/ic_add_40dp"
         android:order="25"/>
+
+    <PreferenceCategory
+        android:key="guest_user_category"
+        android:title="@*android:string/guest_name"
+        android:order="50"/>
+
+    <com.android.settingslib.RestrictedPreference
+        android:key="guest_add"
+        android:title="@string/guest_new_guest"
+        android:icon="@drawable/ic_add_40dp"
+        android:order="55"/>
+
+    <com.android.settingslib.RestrictedSwitchPreference
+            android:key="remove_guest_on_exit"
+            android:title="@string/remove_guest_on_exit"
+            android:summary="@string/remove_guest_on_exit_summary"
+            android:order="60"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="user_settings_add_users_when_locked"

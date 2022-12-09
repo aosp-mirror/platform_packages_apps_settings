@@ -16,6 +16,10 @@
 
 package com.android.settings.datetime;
 
+import static android.app.time.Capabilities.CAPABILITY_POSSESSED;
+
+import android.app.time.TimeManager;
+import android.app.time.TimeZoneCapabilities;
 import android.content.Context;
 
 import androidx.annotation.VisibleForTesting;
@@ -33,12 +37,11 @@ public class TimeZonePreferenceController extends AbstractPreferenceController
 
     private static final String KEY_TIMEZONE = "timezone";
 
-    private final AutoTimeZonePreferenceController mAutoTimeZonePreferenceController;
+    private final TimeManager mTimeManager;
 
-    public TimeZonePreferenceController(Context context,
-            AutoTimeZonePreferenceController autoTimeZonePreferenceController) {
+    public TimeZonePreferenceController(Context context) {
         super(context);
-        mAutoTimeZonePreferenceController = autoTimeZonePreferenceController;
+        mTimeManager = context.getSystemService(TimeManager.class);
     }
 
     @Override
@@ -47,8 +50,9 @@ public class TimeZonePreferenceController extends AbstractPreferenceController
             return;
         }
         preference.setSummary(getTimeZoneOffsetAndName());
-        if( !((RestrictedPreference) preference).isDisabledByAdmin()) {
-            preference.setEnabled(!mAutoTimeZonePreferenceController.isEnabled());
+        if (!((RestrictedPreference) preference).isDisabledByAdmin()) {
+            boolean enableManualTimeZoneSelection = shouldEnableManualTimeZoneSelection();
+            preference.setEnabled(enableManualTimeZoneSelection);
         }
     }
 
@@ -67,5 +71,13 @@ public class TimeZonePreferenceController extends AbstractPreferenceController
         final Calendar now = Calendar.getInstance();
         return ZoneGetter.getTimeZoneOffsetAndName(mContext,
                 now.getTimeZone(), now.getTime());
+    }
+
+    private boolean shouldEnableManualTimeZoneSelection() {
+        TimeZoneCapabilities timeZoneCapabilities =
+                mTimeManager.getTimeZoneCapabilitiesAndConfig().getCapabilities();
+        int suggestManualTimeZoneCapability =
+                timeZoneCapabilities.getSuggestManualTimeZoneCapability();
+        return suggestManualTimeZoneCapability == CAPABILITY_POSSESSED;
     }
 }

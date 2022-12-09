@@ -86,6 +86,8 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"თქვენ არ გაქვთ Bluetooth-ის პარამეტრების შეცვლის ნებართვა."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"ახალი მოწყობილობის დაწყვილება"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"დააწყვილეთ მარჯვენა დინამიკი"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"მარცხენა დინამიკის დაკავშირება"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"დააწყვილეთ სხვა დინამიკი"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"თქვენი სმენის მარცხენა მოწყობილობა დაკავშირებულია.\n\nმარჯვენის დასაწყვილებლად უნდა ჩართოთ და დასაწყვილებლად მზად უნდა იყოს ის."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"თქვენი სმენის მარჯვენა მოწყობილობა დაკავშირებულია.\n\nმარცხენის დასაწყვილებლად ის უნდა ჩართოთ და დასაწყვილებლად მზად უნდა იყოს ის."</string>
@@ -355,13 +357,17 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"სახით განბლოკვის პარამეტრების დაყენება"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"გამოიყენეთ თქვენი სახე ავტორიზაციისთვის"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"დაწყება"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"თუ მარტივი წვდომის მეშვეობით სახით განბლოკვა გამორთულია, დაყენებასთან დაკავშირებულმა ზოგიერთმა ქმედებამ შესაძლოა TalkBack-ში გამართულად არ იმუშაოს."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"უკან"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"დაყენების გაგრძელება"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"ადაპტირებული დაყენება"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"გაუქმება"</string>
@@ -371,25 +377,53 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"განბლოკეთ სახის მეშვეობით"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"სახით განბლოკვის დაშვება"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"გამოიყენეთ თქვენი სახე ავტორიზაციისთვის"</string>
-    <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"გამოიყენეთ თქვენი სახე ტელეფონის განსაბლოკად, შენაძენების ავტორიზაციისთვის თუ აპებში შესასვლელად."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"მიეცით უფლება თქვენს ბავშვს, სახის მეშვეობით განბლოკოს ტელეფონი ან დაადასტუროს ვინაობა. ეს ხდება იმ შემთხვევაში, როცა ბავშვი შედის აპებში ან ადასტურებს შენაძენს და ა.შ."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"გამოიყენეთ თქვენი სახე ტელეფონის განსაბლოკად, შენაძენების ავტორიზაციისთვის თუ აპებში შესასვლელად."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"გამოიყენეთ თქვენი სახე ტაბლეტის განსაბლოკად, შენაძენების ავტორიზაციისთვის თუ აპებში შესასვლელად."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"გამოიყენეთ თქვენი სახე მოწყობილობის განსაბლოკად, შენაძენების ავტორიზაციისთვის თუ აპებში შესასვლელად."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"მიეცით უფლება თქვენს ბავშვს, სახის მეშვეობით განბლოკოს თავისი ტელეფონი"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"მიეცით უფლება თქვენს ბავშვს, სახის მეშვეობით განბლოკოს თავისი ტაბლეტი"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"მიეცით უფლება თქვენს ბავშვს, სახის მეშვეობით განბლოკოს თავისი მოწყობილობა"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"თქვენი ბავშვის სახის გამოყენება მისი მოწყობილობის განსაბლოკად შეიძლება ნაკლებად უსაფრთხო იყოს, ვიდრე სანდო ნიმუში ან PIN-კოდი."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"თქვენი ბავშვის სახის გამოყენება მისი ტაბლეტის განსაბლოკად შეიძლება ნაკლებად უსაფრთხო იყოს, ვიდრე სანდო ნიმუში ან PIN-კოდი."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"თქვენი ბავშვის სახის გამოყენება მისი მოწყობილობის განსაბლოკად შეიძლება ნაკლებად უსაფრთხო იყოს, ვიდრე სანდო ნიმუში ან PIN-კოდი."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"გამოიყენეთ თქვენი სახე ტელეფონის განსაბლოკად ან შენაძენების დასადასტურებლად.\n\nგაითვალისწინეთ: ამ მოწყობილობას სახით ვერ განბლოკავთ. დამატებითი ინფორმაციისთვის დაუკავშირდით თქვენი ორგანიზაციის ადმინისტრატორს."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"გამოიყენეთ თქვენი სახე ტელეფონის განსაბლოკად, შენაძენების ავტორიზაციისთვის თუ აპებში შესასვლელად"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"მოაქციეთ თქვენი სახე წრეში"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"გამოტოვება"</string>
     <string name="face_add_max" msgid="4578405795494514876">"შეგიძლიათ დაამატოთ მაქსიმუმ <xliff:g id="COUNT">%d</xliff:g> სახე"</string>
@@ -439,7 +473,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"გამოიყენეთ თქვენი თითის ანაბეჭდი ტაბლეტის განსაბლოკად ან ვინაობის დასადასტურებლად, ისეთ შემთხვევებში, როცა აპებში შედიხართ ან შეძენას ადასტურებთ."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"გამოიყენეთ თქვენი თითის ანაბეჭდი მოწყობილობის განსაბლოკად ან ვინაობის დასადასტურებლად, ისეთ შემთხვევებში, როცა აპებში შედიხართ ან შეძენას ადასტურებთ."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"გამოიყენეთ თქვენი თითის ანაბეჭდი ტელეფონის განსაბლოკად ან ვინაობის დასადასტურებლად, ისეთ შემთხვევებში, როცა აპებში შედიხართ ან შეძენას ადასტურებთ."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"მიეცით უფლება თქვენს ბავშვს, სახის მეშვეობით განბლოკოს ტელეფონი ან დაადასტუროს ვინაობა. ეს ხდება იმ შემთხვევაში, როცა ბავშვი შედის აპებში ან ადასტურებს შენაძენს და ა.შ."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"მიეცით უფლება თქვენს ბავშვს, სახის მეშვეობით განბლოკოს ტელეფონი ან დაადასტუროს ვინაობა. ეს ხდება იმ შემთხვევაში, როცა ბავშვი შედის აპებში ან ადასტურებს შენაძენს და ა.შ."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"მიეცით უფლება თქვენს ბავშვს, სახის მეშვეობით განბლოკოს ტაბლეტი ან დაადასტუროს ვინაობა. ეს ხდება იმ შემთხვევაში, როცა ბავშვი შედის აპებში ან ადასტურებს შენაძენს და ა.შ."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"მიეცით უფლება თქვენს ბავშვს, სახის მეშვეობით განბლოკოს მოწყობილობა ან დაადასტუროს ვინაობა. ეს ხდება იმ შემთხვევაში, როცა ბავშვი შედის აპებში ან ადასტურებს შენაძენს და ა.შ."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"ამას თქვენ აკონტროლებთ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"თქვენ და თქვენი ბავშვი აკონტროლებთ ყველაფერს"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"გაითვალისწინეთ"</string>
@@ -454,16 +490,30 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"თითის ანაბეჭდის დაყენებას მხოლოდ რამდენიმე წუთი სჭირდება. თუ ამ ეტაპს გამოტოვებთ, თითის ანაბეჭდის მოგვიანებით დამატებას პარამეტრებში შეძლებთ."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"ამ ხატულის დანახვისას გამოიყენეთ თქვენი თითის ანაბეჭდი ავტორიზაციისთვის, მაგალითად, ისეთ შემთხვევებში, როცა აპებში შედიხართ ან შეძენას ადასტურებთ"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"გაითვალისწინეთ"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"თითის ანაბეჭდით განბლოკვა, შესაძლოა, ძლიერ განმბლოკავ ნიმუშსა და PIN-კოდზე ნაკლებად დაცული იყოს"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"თითის ანაბეჭდით განბლოკვა, შესაძლოა, ძლიერ განმბლოკავ ნიმუშსა და PIN-კოდზე ნაკლებად დაცული იყოს"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"თითის ანაბეჭდით ტაბლეტის განბლოკვა, შესაძლოა, ძლიერ ნიმუშსა და PIN-კოდზე ნაკლებად დაცული იყოს"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"თითის ანაბეჭდით მოწყობილობის განბლოკვა, შესაძლოა, ძლიერ ნიმუშსა და PIN-კოდზე ნაკლებად დაცული იყოს"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"მუშაობის პრინციპი"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"თითის ანაბეჭდით განბლოკვის ფუნქცია თქვენი თითის ანაბეჭდის უნიკალურ მოდელს ქმნის ვინაობის დადასტურებისას თქვენს ამოსაცნობად. დაყენებისას ამ თითის ანაბეჭდის მოდელის შესაქმნელად თითის ანაბეჭდი სხვადასხვა რაკურსიდან უნდა გადაიღოთ."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"ანაბეჭდით განბლოკვის ფუნქცია თქვენი ბავშვის თითის ანაბეჭდის უნიკალურ მოდელს ქმნის, ვინაობის დადასტურების მიზნით. დაყენების პროცესში თითის ანაბეჭდის ამ მოდელის შესაქმნელად საჭირო იქნება თითის ანაბეჭდის სურათების გადაღება სხვადასხვა რაკურსიდან."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"Pixel Imprint-ის გამოყენებისას თითის ანაბეჭდის მოდელი სურათების მეშვეობით იქმნება. თითის ანაბეჭდის მოდელის შესაქმნელად გამოყენებული სურათები არ ინახება, თითის ანაბეჭდის მოდელი კი უსაფრთხოდ შეინახება თქვენს ტელეფონში. ტელეფონში ყველა დამუშავება ხდება უსაფრთხოდ."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Pixel Imprint-ის გამოყენებისას თითის ანაბეჭდის მოდელი სურათების მეშვეობით იქმნება. თქვენი ბავშვის თითის ანაბეჭდის მოდელის შესაქმნელად გამოყენებული სურათები არ ინახება, მაგრამ თითის ანაბეჭდის მოდელი უსაფრთხოდ ინახება ტელეფონში. ტელეფონში ყველა დამუშავება ხდება უსაფრთხოდ."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"თქვენი თითის ანაბეჭდის სურათებისა და მოდელის წაშლა ან თითის ანაბეჭდით განბლოკვის პარამეტრებიდან გამორთვა ნებისმიერ დროს შეგიძლიათ. თითის ანაბეჭდის სურათები და მოდელები ტელეფონზე შეინახება, სანამ მათ წაშლიდეთ."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"თქვენ ან თქვენ ბავშვს შეგიძლიათ თითის ანაბეჭდის სურათების და მოდელის წაშლა ან ანაბეჭდით განბლოკვის ნებისმიერ დროს გამორთვა პარამეტრებიდან. თითის ანაბეჭდის სურათები და მოდელები მანამ ინახება ტელეფონში, სანამ მათ არ წაშლით."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"თქვენი ტელეფონი შეიძლება მაშინაც განიბლოკოს, როცა ამის განზრახვა არ გაქვთ, მაგალითად, მაშინ, თუ ვინმე მასზე თითს მიგაჭერინებთ."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"თქვენი ბავშვის ტელეფონის განბლოკვა მაშინაც შესაძლებელია, როცა ამის განზრახვა არ გაქვთ, მაგალითად, თუ ვინმე მასზე თითს მიგაჭერინებთ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"Pixel Imprint-ის გამოყენებისას თითის ანაბეჭდის მოდელი სურათების მეშვეობით იქმნება. თითის ანაბეჭდის მოდელის შესაქმნელად გამოყენებული სურათები არ ინახება, თითის ანაბეჭდის მოდელი კი უსაფრთხოდ შეინახება თქვენს ტელეფონში. ტელეფონში ყველა დამუშავება ხდება უსაფრთხოდ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"Pixel Imprint-ის გამოყენებისას თითის ანაბეჭდის მოდელი სურათების მეშვეობით იქმნება. თითის ანაბეჭდის მოდელის შესაქმნელად გამოყენებული სურათები არასდროს შეინახება, თითის ანაბეჭდის მოდელი კი უსაფრთხოდ შეინახება თქვენს ტაბლეტში. თქვენს ტაბლეტში ყველაფერი უსაფრთხოდ დამუშავდება."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"Pixel Imprint-ის გამოყენებისას თითის ანაბეჭდის მოდელი სურათების მეშვეობით იქმნება. თითის ანაბეჭდის მოდელის შესაქმნელად გამოყენებული სურათები არასდროს შეინახება, თითის ანაბეჭდის მოდელი კი უსაფრთხოდ შეინახება თქვენს მოწყობილობაში. თქვენს მოწყობილობაში ყველაფერი უსაფრთხოდ დამუშავდება."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"Pixel Imprint-ის გამოყენებისას თითის ანაბეჭდის მოდელი სურათების მეშვეობით იქმნება. თქვენი ბავშვის თითის ანაბეჭდის მოდელის შესაქმნელად გამოყენებული სურათები არ ინახება, მაგრამ თითის ანაბეჭდის მოდელი უსაფრთხოდ ინახება ტელეფონში. ტელეფონში ყველა დამუშავება ხდება უსაფრთხოდ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"Pixel Imprint-ის გამოყენებისას თითის ანაბეჭდის მოდელი სურათების მეშვეობით იქმნება. თქვენი ბავშვის თითის ანაბეჭდის მოდელის შესაქმნელად გამოყენებული სურათები არასდროს შეინახება, მაგრამ თითის ანაბეჭდის მოდელი უსაფრთხოდ შეინახება ტაბლეტში. ტაბლეტში ყველაფერი უსაფრთხოდ დამუშავდება."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"Pixel Imprint-ის გამოყენებისას თითის ანაბეჭდის მოდელი სურათების მეშვეობით იქმნება. თქვენი ბავშვის თითის ანაბეჭდის მოდელის შესაქმნელად გამოყენებული სურათები არასდროს შეინახება, მაგრამ თითის ანაბეჭდის მოდელი უსაფრთხოდ შეინახება მოწყობილობაში. მოწყობილობაში ყველაფერი უსაფრთხოდ დამუშავდება."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"თქვენი თითის ანაბეჭდის სურათებისა და მოდელის წაშლა ან თითის ანაბეჭდით განბლოკვის პარამეტრებიდან გამორთვა ნებისმიერ დროს შეგიძლიათ. თითის ანაბეჭდის სურათები და მოდელები ტელეფონზე შეინახება, სანამ მათ წაშლიდეთ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"თქვენი თითის ანაბეჭდის სურათებისა და მოდელის წაშლა ან თითის ანაბეჭდით განბლოკვის პარამეტრებიდან გამორთვა ნებისმიერ დროს შეგიძლიათ. თითის ანაბეჭდის სურათები და მოდელები ტაბლეტში შეინახება, სანამ მათ წაშლით."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"თქვენი თითის ანაბეჭდის სურათებისა და მოდელის წაშლა ან თითის ანაბეჭდით განბლოკვის პარამეტრებიდან გამორთვა ნებისმიერ დროს შეგიძლიათ. თითის ანაბეჭდის სურათები და მოდელები მოწყობილობაში შეინახება, სანამ მათ წაშლით."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"თქვენ ან თქვენ ბავშვს შეგიძლიათ თითის ანაბეჭდის სურათების და მოდელის წაშლა ან ანაბეჭდით განბლოკვის ნებისმიერ დროს გამორთვა პარამეტრებიდან. თითის ანაბეჭდის სურათები და მოდელები მანამ ინახება ტელეფონში, სანამ მათ არ წაშლით."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"თქვენ ან თქვენ ბავშვს შეგიძლიათ თითის ანაბეჭდის სურათების და მოდელის წაშლა ან ანაბეჭდით განბლოკვის ნებისმიერ დროს გამორთვა პარამეტრებიდან. თითის ანაბეჭდის სურათები და მოდელები მათ წაშლამდე ტაბლეტში შეინახება."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"თქვენ ან თქვენ ბავშვს შეგიძლიათ თითის ანაბეჭდის სურათების და მოდელის წაშლა ან ანაბეჭდით განბლოკვის ნებისმიერ დროს გამორთვა პარამეტრებიდან. თითის ანაბეჭდის სურათები და მოდელები მათ წაშლამდე მოწყობილობაში შეინახება."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"თქვენი ტელეფონი შეიძლება მაშინაც განიბლოკოს, როცა ამის განზრახვა არ გაქვთ, მაგალითად, მაშინ, თუ ვინმე მასზე თითს მიგაჭერინებთ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"თქვენი პლანშეტი შეიძლება გაუთვალისწინებლადაც განიბლოკოს, მაგალითად, თუ ვინმე მასზე თითს მიგაჭერინებთ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"თქვენი ტელეფონი შეიძლება გაუთვალისწინებლადაც განიბლოკოს, მაგალითად, თუ ვინმე მასზე თითს მიგაჭერინებთ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"თქვენი ბავშვის ტელეფონის განბლოკვა მაშინაც შესაძლებელია, როცა ამის განზრახვა არ გაქვთ, მაგალითად, თუ ვინმე მასზე თითს მიგაჭერინებთ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"თქვენი ბავშვის ტაბლეტის განბლოკვა მაშინაც შესაძლებელია, როცა ამის განზრახვა არ გაქვთ, მაგალითად, თუ ვინმე მასზე თითს მიგაჭერინებთ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"თქვენი ბავშვის მოწყობილობის განბლოკვა მაშინაც შესაძლებელია, როცა ამის განზრახვა არ გაქვთ, მაგალითად, თუ ვინმე მასზე თითს მიგაჭერინებთ."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"საუკეთესო შედეგების მისაღებად გამოიყენეთ ეკრანის დამცავი, რომელიც სერტიფიცირებულია Made for Google-ის მიერ. ეკრანის სხვა დამცავებზე თქვენი თითის ანაბეჭდი, შესაძლოა, არ მუშაობდეს."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"საუკეთესო შედეგების მისაღებად გამოიყენეთ ეკრანის დამცავი, რომელიც სერტიფიცირებულია Made for Google-ის მიერ. ეკრანის სხვა დამცავებზე თქვენი ბავშვის თითის ანაბეჭდი, შესაძლოა, არ მუშაობდეს."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
@@ -488,7 +538,9 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"სახის მეშვეობით"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"თითის ანაბეჭდის მეშვეობით"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"სახის ან თითის ანაბეჭდის მეშვეობით"</string>
-    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"დაუბრუნეთ ტელეფონი მშობელს"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"დაუბრუნეთ ტაბლეტი მშობელს"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"დაუბრუნეთ მოწყობილობა მშობელს"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"დაუბრუნეთ ტელეფონი მშობელს"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"კარგი"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"ეკრანის დაბლოკვის გამოტოვება გსურთ?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"მოწყობილობის დაცვის ფუნქციები არ ჩაირთვება. ამ ტაბლეტის დაკარგვის, მოპარვის ან მისი ქარხნული პარამეტრების დაბრუნების შემთხვევაში, თქვენ ვერ შეძლებთ ხელი შეუშალოთ სხვას მის გამოყენებაში."</string>
@@ -502,18 +554,24 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"გამოტოვება"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"გაუქმება"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"შეეხეთ სენსორს"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"შეეხეთ ჩართვის ღილაკს მასზე დაჭერის გარეშე"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"როგორ უნდა დააყენოთ თქვენი თითის ანაბეჭდი"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"ის თქვენი ტელეფონის უკანა მხარეს მდებარეობს. მისაგნებად, გამოიყენეთ საჩვენებელი თითი."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"თითის ანაბეჭდის სენსორი არ არის ჩართვის ღილაკზე. ეს არის ბრტყელი ღილაკი ხმის აწევის ღილაკის გვერდით ტაბლეტის კიდეზე.\n\nჩართვის ღილაკზე დაწკაპუნება გამორთავს ეკრანს."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"თითის ანაბეჭდის სენსორი არ არის ჩართვის ღილაკზე. ეს არის ბრტყელი ღილაკი ხმის აწევის ღილაკის გვერდით მოწყობილობის კიდეზე.\n\nჩართვის ღილაკზე დაწკაპუნება გამორთავს ეკრანს."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"თითის ანაბეჭდის სენსორი არ არის ჩართვის ღილაკზე. ეს არის ბრტყელი ღილაკი ხმის აწევის ღილაკის გვერდით ტელეფონის კიდეზე.\n\nჩართვის ღილაკზე დაწკაპუნება გამორთავს ეკრანს."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"თითის ანაბეჭდის სენსორი თქვენს ეკრანზეა. თქვენი თითის ანაბეჭდის აღბეჭდვას შემდეგ ეკრანზე შეძლებთ."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"დაწყება"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"სენსორის საპოვნელად გადაატარეთ თითი ეკრანს. ხანგრძლივად შეეხეთ თითის ანაბეჭდის სენსორს."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"ილუსტრაცია მოწყობილობისა და თითის ანაბეჭდის სენსორის ადგილმდებარეობით"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"სახელი"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"კარგი"</string>
+    <string name="security_settings_fingerprint_enroll_dialog_try_again" msgid="8117874972945407006">"ხელახლა ცდა"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"წაშლა"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"შეეხეთ სენსორს"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"დაადეთ თითი სენსორს და ვიბრაციის შეგრძნების შემდეგ აიღეთ"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"გეჭიროთ თითი სენსორზე, სანამ ვიბრაციას არ იგრძნობთ"</string>
+    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"ღილაკზე დაჭერის გარეშე დაადეთ ანაბეჭდი ეკრანს, სანამ ვიბრაციას იგრძნობთ.\n\nყოველ ჯერზე თითი ნელა გაამოძრავეთ. ეს ხელს შეუწყობს სრულყოფილი თითის ანაბეჭდის შექმნას."</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"ხანგრძლივად შეეხეთ თითის ანაბეჭდის სენსორს"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"აიღეთ თითი, შემდეგ კი ხელახლა შეეხეთ"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"კიდევ ერთხელ"</string>
@@ -523,13 +581,20 @@
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"თითის წვერი დაადეთ სენსორს"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"დაადეთ თითის მარცხენა კიდე"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"დაადეთ თითის მარჯვენა კიდე"</string>
+    <string name="security_settings_sfps_enroll_finger_center_title" msgid="1320688855767675739">"დაადეთ სენსორს თითის ცენტრალური ნაწილი"</string>
+    <string name="security_settings_sfps_enroll_fingertip_title" msgid="2737520837684516446">"თითის წვერი დაადეთ სენსორს"</string>
+    <string name="security_settings_sfps_enroll_left_edge_title" msgid="9022963735924413343">"დაადეთ სენსორს თითის მარცხენა კიდე"</string>
+    <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"დაბოლოს, დაადეთ სენსორს თითის მარჯვენა კიდე"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"დაადეთ თითის ერთი მხარე სენსორს და გააჩერეთ ცოტა ხნით, შემდეგ კი დაადეთ მეორე მხარე"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"ეს ხელს შეუწყობს სრულყოფილი თითის ანაბეჭდის შექმნას"</string>
+    <string name="security_settings_sfps_enroll_progress_a11y_message" msgid="6450772721691523736">"მიმდინარეობს თითის ანაბეჭდის რეგისტრაცია, <xliff:g id="PERCENTAGE">%d</xliff:g> პროცენტი"</string>
+    <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"რეგისტრირებულია <xliff:g id="PERCENTAGE">%d</xliff:g> პროცენტი"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"მიმდინარეობს თითის ანაბეჭდის რეგისტრაცია, <xliff:g id="PERCENTAGE">%d</xliff:g> პროცენტი"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"თითის ანაბეჭდი დამატებულია"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"ანაბეჭდით განბლოკვა მით უფრო უმჯობესდება, რაც უფრო მეტად გამოიყენებთ მას თქვენი ტაბლეტის განსაბლოკად ან აპებში თქვენი ვინაობის დადასტურებისთვის"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"ანაბეჭდით განბლოკვა მით უფრო უმჯობესდება, რაც უფრო მეტად გამოიყენებთ მას თქვენი მოწყობილობის განსაბლოკად ან აპებში თქვენი ვინაობის დადასტურებისთვის"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"ანაბეჭდით განბლოკვა მით უფრო უმჯობესდება, რაც უფრო მეტად გამოიყენებთ მას თქვენი ტელეფონის განსაბლოკად ან აპებში თქვენი ვინაობის დადასტურებისთვის"</string>
+    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"ახლა უკვე შეგიძლიათ თითის ანაბეჭდის გამოყენება ტაბლეტის განსაბლოკად ან ვინაობის დასადასტურებლად, ისეთ შემთხვევებში, როცა აპებში შედიხართ ან შენაძენს ადასტურებთ"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"ახლა უკვე შეგიძლიათ თითის ანაბეჭდით ტაბლეტის განბლოკვა ან ვინაობის დადასტურება, როცა აპებში შედიხართ"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"ახლა უკვე შეგიძლიათ თითის ანაბეჭდით მოწყობილობის განბლოკვა ან ვინაობის დადასტურება, როცა აპებში შედიხართ"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"ახლა უკვე შეგიძლიათ თითის ანაბეჭდით ტელეფონის განბლოკვა ან ვინაობის დადასტურება, როცა აპებში შედიხართ"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"მოგვიანებით გაკეთება"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"აიღეთ თითი, შემდეგ კი ხელახლა შეეხეთ"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"დაადეთ თითის ცალი მხარე სენსორს და გააჩერეთ ცოტა ხნით, შემდეგ კი დაადეთ მეორე მხარე"</string>
@@ -587,8 +652,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"შესრულდა"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"ეს სენსორი არ არის"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"შეეხეთ თქვენი ტელეფონის უკანა მხარეს მდებარე სენსორს. ამისთვის გამოიყენეთ საჩვენებელი თითი."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"რეგისტრაცია არ დასრულდა"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"თითის ანაბეჭდის რეგისტრაციის დროის ლიმიტი ამოიწურა. ცადეთ ისევ."</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"თითის ანაბეჭდის დაყენების დრო ამოიწურა"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"ცადეთ ხელახლა ახლავე ან დააყენეთ თითის ანაბეჭდი მოგვიანებით პარამეტრებიდან"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"თითის ანაბეჭდის რეგისტრაცია ვერ მოხერხდა. ცადეთ ისევ ან გამოიყენეთ სხვა თითი."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"კიდევ ერთის დამატება"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"შემდეგი"</string>
@@ -607,10 +672,14 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"თქვენ უკვე დაამატეთ თითის ანაბეჭდების მაქსიმალური რაოდენობა"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"მეტი თითის ანაბეჭდის დამატება ვერ ხერხდება"</string>
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"წაიშალოს ყველა თითის ანაბეჭდი?"</string>
-    <string name="fingerprint_delete_title" msgid="1469865327307917858">"„<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“-ის ამოშლა"</string>
+    <string name="fingerprint_delete_title" msgid="5412123164503407098">"„<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“-ის წაშლა"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"გსურთ თითის ანაბეჭდის წაშლა?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"ამ მოქმედებით წაიშლება თითის ანაბეჭდის სურათები და თქვენს მოწყობილობაზე შენახული მოდელები, რომლებიც ასოცირებულია „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“-თან"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"ტელეფონის განსაბლოკად ან აპებში ვინაობის დასადასტურებლად ვეღარ შეძლებთ თითის ანაბეჭდის გამოყენებას."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"ამ მოქმედებით წაიშლება თითის ანაბეჭდის სურათები და თქვენს ტელეფონზე შენახული მოდელები, რომლებიც ასოცირებულია „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“-თან"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"ამ მოქმედებით წაიშლება თითის ანაბეჭდის სურათები და თქვენს ტაბლეტზე შენახული მოდელები, რომლებიც ასოცირებულია „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“-თან"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"ამ მოქმედებით წაიშლება თითის ანაბეჭდის სურათები და თქვენს მოწყობილობაზე შენახული მოდელები, რომლებიც ასოცირებულია „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“-თან"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"ტელეფონის განსაბლოკად ან აპებში ვინაობის დასადასტურებლად ვეღარ შეძლებთ თითის ანაბეჭდის გამოყენებას."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"ტაბლეტის განსაბლოკად ან აპებში ვინაობის დასადასტურებლად ვეღარ შეძლებთ თითის ანაბეჭდის გამოყენებას."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"მოწყობილობის განსაბლოკად ან აპებში ვინაობის დასადასტურებლად ვეღარ შეძლებთ თითის ანაბეჭდის გამოყენებას."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"თქვენ ვეღარ შეძლებთ თითის ანაბეჭდის გამოყენებას სამსახურის პროფილის განსაბლოკად, შენაძენების ავტორიზაციისთვის თუ სამსახურის აპებში შესასვლელად."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"დიახ, წაიშალოს"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"დაშიფვრა"</string>
@@ -1317,15 +1386,17 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"ჩართული"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"ჩართული — სახის მიხედვით"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"სახის ამოცნობა"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"ავტომატურად გაასწორეთ ეკრანის ორიენტაცია, როცა ამოძრავების მეშვეობით ტელეფონი პორტრეტის რეჟიმიდან პეიზაჟის რეჟიმზე გადაგყავთ"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"ავტომატურად გაასწორეთ ეკრანის ორიენტაცია, როცა ამოძრავების მეშვეობით ტელეფონი პორტრეტის რეჟიმიდან პეიზაჟის რეჟიმზე გადაგყავთ"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"ავტომატურად გაასწორეთ ეკრანის ორიენტაცია, როცა ამოძრავების მეშვეობით ტაბლეტი პორტრეტის რეჟიმიდან პეიზაჟის რეჟიმზე გადაგყავთ"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"შეიტყვეთ მეტი ავტომატური შეტრიალების შესახებ"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"როცა ტელეფონი პორტრეტის რეჟიმიდან პეიზაჟის რეჟიმზე გადაგყავთ"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"ეკრანის გარჩევადობა"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"მაღალი გარჩევადობა"</string>
-    <string name="screen_resolution_option_highest" msgid="7892101083236381555">"მაქსიმალური გარჩევადობა"</string>
+    <string name="screen_resolution_option_highest" msgid="9134161136319625840">"სრული გარჩევადობა"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <string name="screen_resolution_footer" msgid="2563830074752340045">"გარჩევადობის გადართვამ შეიძლება გამოიწვიოს გარკვეული აპების დახურვა."</string>
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"სრული გარჩევადობა მეტად მოიხმარს ბატარეას. თქვენი გარჩევადობის გადართვამ შეიძლება გამოიწვიოს ზოგიერთი აპის გადატვირთვა."</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"არჩეულია"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"ფერები"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"ბუნებრივი"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"გაძლიერებული"</string>
@@ -1445,17 +1516,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"მოირგეთ ტელეფონი"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"ცადეთ სხვადასხვა სტილი, ფონი და ა.შ."</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"ეკრანმზოგი"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"ეკრანმზოგი"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"გამოიყენეთ ეკრანმზოგი"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"დატენვისას ან სანამ ჩამაგრებულია"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"ორივე შემთხვევაში"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"დატენვისას"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"სანამ ჩამაგრებულია"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"არასოდეს"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"გამორთული"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"დოკ-სადგურთან მიერთების და/ან ძილის რეჟიმზე გადასვლის დროს ტელეფონის ქცევის სამართავად, ჩართეთ ეკრანმზოგი."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"გაშვების დრო"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"ამჟამინდელი ეკრანმზოგი"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"პარამეტრები"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"ავტომატური სიკაშკაშე"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"გაღვიძება აწევისას"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"ემბიენტური ეკრანი"</string>
@@ -1613,9 +1682,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"გადარქმევა"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"მიერთება"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"გამოღება"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"დაფორმატება"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"SD ბარათის დაფორმატება პორტატიული მეხსიერებისთვის"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"ბარათის დაფორმატება"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"პორტატულად დაფორმატება"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"შიდად დაფორმატება"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">" ფორმატი"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"მონაცემთა გადატანა"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"დავიწყება"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"დაყენება"</string>
@@ -1645,17 +1715,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"მეხსიერების სახელის გადარქმევა"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"ამ <xliff:g id="NAME_0">^1</xliff:g>-ის სისტემიდან ჩახსნა უსაფრთხოდ მოხდა, მაგრამ მაინც ხელმისაწვდომია. \n\n <xliff:g id="NAME_1">^1</xliff:g>-ის გამოსაყენებლად ჯერ სისტემას უნდა მიუერთოთ."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"ეს <xliff:g id="NAME_0">^1</xliff:g> დაზიანებულია. \n\nიმისათვის, რომ გამოიყენოთ ეს <xliff:g id="NAME_1">^1</xliff:g>, ჯერ უნდა დააყენოთ ის."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"დაფორმატების შემდეგ, ამ <xliff:g id="NAME_0">^1</xliff:g>-ის გამოყენება სხვა მოწყობილობებში შეგიძლიათ. \n\nამ <xliff:g id="NAME_1">^1</xliff:g>-ზე არსებული ყველა მონაცემი წაიშლება. პირველ რიგში, სასურველია, შექმნათ მონაცემთა სარეზერვო ასლი. \n\n"<b>"დაამარქაფეთ ფოტოები და სხვა მედია"</b>" \nგადაიტანეთ მედია ფაილები ამ მოწყობილობის ალტერნატიულ საცავში ან კომპიუტერში USB კაბელის გამოყენებით. \n\n"<b>"დაამარქაფეთ აპები"</b>" \nმოხდება ამ <xliff:g id="NAME_6">^1</xliff:g>-ზე შენახული ყველა აპის დეინსტალაცია, ხოლო მათი მონაცემები წაიშლება. ამ აპების შესანარჩუნებლად, გადააადგილეთ ისინი ამ მოწყობილობის ალტერნატიულ საცავში."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"ამ SD ბარათის დაფორმატება შესაძლებელია ფოტოების, ვიდეოების, მუსიკისა და ბევრი სხვა რამის შესანახად და სხვა მოწყობილობებიდან მათზე წვდომისთვის. \n\n"<b>"ამ SD ბარათზე არსებული ყველა ინფორმაცია წაიშლება."</b>" \n\n"<b>"სანამ დააფორმატებთ"</b>" \n\n"<b>"შექმენით ფოტოებისა და სხვა მედიის სარეზერვო ასლები"</b>" \nგადაიტანეთ თქვენი მედია ფაილები ალტერნატიულ საცავში ან კომპიუტერში USB კაბელის გამოყენებით. \n\n"<b>"აპების სარეზერვო ასლების შექმნა"</b>" \nამ <xliff:g id="NAME">^1</xliff:g>-ში შენახული ყველა აპი დეინსტალირდება და მათი მონაცემები წაიშლება. ამ აპების შესანარჩუნებლად გადაიტანეთ ისინი ალტერნატიულ საცავში ამავე მოწყობილობაზე."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"<xliff:g id="NAME_0">^1</xliff:g>-ის ამოღებისას მასზე შენახული აპები შეწყვეტს მუშაობას, ხოლო მასზე შენახული მედია ფაილები ხელახლა ჩასმამდე მიუწვდომელი იქნება."</b>" \n\nეს <xliff:g id="NAME_1">^1</xliff:g> დაფორმატებულია მხოლოდ ამ მოწყობილობაზე სამუშაოდ. ის არცერთ სხვა მოწყობილობაზე არ იმუშავებს."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"ხელმეორედ ჩასვით <xliff:g id="NAME">^1</xliff:g> მასში შენახული აპების, ფოტოების ან მონაცემების გამოსაყენებლად. \n\nან, შეგიძლიათ აირჩიოთ ამ მეხსიერების დავიწყება, თუ მოწყობილობა მიუწვდომელია. \n\nთუ დავიწყებას აირჩევთ, მოწყობილობაზე შენახული ყველა მონაცემი სამუდამოდ დაიკარგება. \n\nმოგვიანებით შეგიძლიათ ხელახლა დააინსტალიროთ აპები, მაგრამ ამ მოწყობილობაზე შენახული მათი მონაცემები დაიკარგება."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"გსურთ <xliff:g id="NAME">^1</xliff:g>-ის დავიწყება?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"ყველა აპი, ფოტო და მონაცემი, რომელიც ინახება ამ <xliff:g id="NAME">^1</xliff:g>-ზე, სამუდამოდ დაიკარგება."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"სისტემა მოიცავს ფაილებს, რომლებიც Android <xliff:g id="VERSION">%s</xliff:g>-ის გასაშვებად გამოიყენება"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"სტუმრის რეჟიმში მყოფთ არ შეუძლიათ SD ბარათის დაფ."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"დააყენეთ თქვენი <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"პორტატულ საცავად გამოყენება"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"მოწყობილობებს შორის ფოტოებისა და სხვა მედიის გადასაადგილებლად."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"შიდა მეხსიერებად გამოყენება"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"განკუთვნილია ნებისმიერი ერთეულის, მათ შორის, აპებისა და ფოტოების შესანახად მხოლოდ ამ მოწყობილობაზე. საჭიროებს დაფორმატებას, რაც შეუძლებელს გახდის მის სხვა მოწყობილობებზე მუშაობას."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"SD ბარათის დაფორმატება პორტატიული მეხსიერებისთვის"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"შეინახეთ ფოტოები, ვიდეოები, მუსიკა და ბევრი სხვა რამ და იქონიეთ მათზე წვდომა სხვა მოწყობილობებიდან"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"SD ბარათის დაფორმატება შიდა მეხსიერებისთვის"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"შეინახეთ აპები და მედია მხოლოდ ამ ტელეფონზე გამოყენებისთვის"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"შიდა მეხსიერებად დაფორმატება"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"ეს საჭიროებს <xliff:g id="NAME_0">^1</xliff:g>-ის დაფორმატებას უსაფრთხოების მიზნით. \n\nდაფორმატების შემდეგ, ეს <xliff:g id="NAME_1">^1</xliff:g> მხოლოდ ამ მოწყობილობაზე იმუშავებს. \n\n"<b>"დაფორმატება წაშლის <xliff:g id="NAME_2">^1</xliff:g>-ზე ამჟამად შენახულ ყველა მონაცემს."</b>" მონაცემთა დაკარგვის თავიდან ასაცილებლად, სასურველია, დამარქაფება."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"პორტატული მეხსიერების სახით ფორმატირება"</string>
@@ -1672,9 +1743,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"გადაადგილება"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"მონაცემთა გადაადგილება…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"გადაადგილებისას: \n• არ ამოიღოთ <xliff:g id="NAME">^1</xliff:g>. \n• ზოგიერთი აპი სათანადოდ არ იმუშავებს. \n• არ შეწყვიტოთ მოწყობილობის დამუხტვა."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"თქვენი <xliff:g id="NAME">^1</xliff:g> გამოსაყენებლად მზადაა"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"თქვენი <xliff:g id="NAME">^1</xliff:g> ფოტოებისა და სხვა მედიის გამოსაყენებლად მზად არის."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"თქვენი ახალი <xliff:g id="NAME">^1</xliff:g> მუშაობს. \n\nფოტოების, ფაილებისა და აპების მონაცემების ამ მოწყობილობაზე გადასაადგილებლად გადადით: პარამეტრები &gt; მეხსიერება."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> დაფორმატდა"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"შეგიძლიათ, გამოიყენოთ <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"შეგიძლიათ, გამოიყენოთ <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"გადაადგილეთ <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"<xliff:g id="APP">^1</xliff:g>-ის და მისი მონაცემების <xliff:g id="NAME_0">^2</xliff:g>-ზე გადაადგილებას მხოლოდ რამდენიმე წამი დასჭირდება. გადაადგილების დასრულებამდე აპის გამოყენებას ვერ შეძლებთ. \n\nარ ამოიღოთ <xliff:g id="NAME_1">^2</xliff:g> გადაადგილებისას."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"თქვენი მონაცემების გადასატანად, საჭიროა განბლოკოთ მომხმარებელი აპისთვის <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1683,19 +1754,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"გადაადგილების გაუქმება"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"როგორც ჩანს, ეს <xliff:g id="NAME_0">^1</xliff:g> ნელია. \n\nშეგიძლიათ გაგრძელდება, მაგრამ ამ მდებარეობაზე გადატანილი აპები შეიძლება შეფერხდეს და მონაცემთა გადაცემას დიდი დრო დასჭირდეს. \n\nმხედველობაში იქონიეთ უფრო სწრაფის გამოყენება <xliff:g id="NAME_1">^1</xliff:g> უკეთესი შესრულებისთვის."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"როგორ გამოიყენებთ <xliff:g id="NAME">^1</xliff:g>-ს?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"ტაბლეტის დამატებით მეხსიერებად გამოყენება"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"მხოლოდ ამ ტაბლეტზე არსებული აპების, ფაილების და მედია-კონტენტისთვის"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"ტაბლეტის მეხსიერება"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"ტელეფონის დამატებით მეხსიერებად გამოყენება"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"მხოლოდ ამ ტელეფონზე არსებული აპების, ფაილების და მედია-კონტენტისთვის"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"ტელეფონის მეხსიერება"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"SD ბარათის დაფორმატება შიდა მეხსიერებისთვის"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"შეინახეთ აპები და მედია მხოლოდ ამ ტაბლეტზე გამოყენებისთვის. &lt;a href=https://support.google.com/android/answer/12153449&gt;შეიტყვეთ მეტი SD ბარათის დაყენების შესახებ"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"ფორმატი"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"SD ბარათის დაფორმატება შიდა მეხსიერებისთვის"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"შეინახეთ აპები და მედია მხოლოდ ამ ტელეფონზე გამოყენებისთვის. &lt;a href=https://support.google.com/android/answer/12153449&gt;შეიტყვეთ მეტი SD ბარათის დაყენების შესახებ"</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"ფორმატი"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"ან"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"პორტატულ მეხსიერებად გამოყენება"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"ფაილებისა და მედია-კონტენტის მოწყობილობებს შორის გადასატანად"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"პორტატული მეხსიერება"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"SD ბარათის დაფორმატება პორტატიული მეხსიერებისთვის"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"შეინახეთ ფოტოები, ვიდეოები, მუსიკა და ბევრი სხვა რამ და იქონიეთ მათზე წვდომა სხვა მოწყობილობებიდან. &lt;a href=https://support.google.com/android/answer/12153449&gt;შეიტყვეთ მეტი SD ბარათის დაყენების შესახებ"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"ფორმატი"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"მოგვიანებით დაყენება"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"გსურთ, <xliff:g id="NAME">^1</xliff:g>-ის დაფორმატება?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"საჭიროა ამ <xliff:g id="NAME_0">^1</xliff:g>-ის დაფორმატება, რათა მასში მოხერხდეს აპების, ფაილებისა და მედია-კონტენტის შენახვა. \n\nდაფორმატება ამოშლის <xliff:g id="NAME_1">^2</xliff:g>-ზე არსებულ კონტენტს. კონტენტის დაკარგვის ასაცილებლად დაარეზერვეთ ის სხვა <xliff:g id="NAME_2">^3</xliff:g>-ზე ან მოწყობილობაზე."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"ეს <xliff:g id="NAME_0">^1</xliff:g> საჭიროებს დაფორმატებას ფოტოების, ვიდეოების, მუსიკისა და ბევრი სხვა რამის შესანახად. \n\nდაფორმატება წაშლის <xliff:g id="NAME_1">^2</xliff:g>-ზე არსებულ ყველა კონტენტს. კონტენტი რომ არ დაკარგოთ, შექმენით მისი სარეზერვო ასლები სხვა <xliff:g id="NAME_2">^3</xliff:g>-ზე ან მოწყობილობაზე."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g>-ის დაფორმატება"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"გსურთ კონტენტის <xliff:g id="NAME">^1</xliff:g>-ზე გადატანა?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"თქვენ შეგიძლიათ ფაილების, მედია-კონტენტისა და გარკვეული აპების ამ <xliff:g id="NAME">^1</xliff:g>-ზე გადატანა. \n\nეს გამოათავისუფლებს თქვენი ტაბლეტის მეხსიერებას (<xliff:g id="SIZE">^2</xliff:g>) და დაახლოებით დასჭირდება <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1712,9 +1784,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"თქვენ კვლავაც შეგიძლიათ <xliff:g id="NAME_0">^1</xliff:g>-ის გამოყენება, მაგრამ მისი მუშაობა შესაძლოა შენელებული იყოს. \n\nამ <xliff:g id="NAME_1">^2</xliff:g>-ზე განთავსებული აპები შესაძლოა სათანადოდ არ მუშაობდეს, კონტენტის გადატანას კი დიდი დრო დასჭირდეს. \n\nცადეთ უფრო სწრაფი <xliff:g id="NAME_2">^3</xliff:g>-ის გამოყენება, ან, სანაცვლოდ, გამოიყენეთ <xliff:g id="NAME_3">^4</xliff:g> პორტატული მეხსიერებისთვის."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"თავიდან დაწყება"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"გაგრძელება"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"თქვენ შეგიძლიათ, გადაიტანოთ კონტენტი <xliff:g id="NAME">^1</xliff:g>-ზე"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"კონტენტის <xliff:g id="NAME">^1</xliff:g>-ზე გადასატანად, გადადით შემდეგზე: "<b>"პარამეტრები &gt; მეხსიერება"</b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"თქვენი კონტენტი გადატანილია <xliff:g id="NAME_0">^1</xliff:g>-ზე. \n\nამის სამართავად <xliff:g id="NAME_1">^2</xliff:g> გადადით შემდეგზე: "<b>"პარამეტრები &gt; მეხსიერება"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"შეგიძლიათ, გამოიყენოთ <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"შეგიძლიათ, გამოიყენოთ <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"შეგიძლიათ, გამოიყენოთ <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"ბატარეის სტატუსი"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"ბატარეის დატენვის დონე"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN-ები"</string>
@@ -1945,6 +2017,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"დააყენეთ PIN-კოდი"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"დააყენეთ სამსახურის PIN-კოდი"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"დააყენეთ ნიმუში"</string>
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"დამატებითი უსაფრთხოებისთვის დააყენეთ ნიმუში მოწყობილობის განსაბლოკად"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"დააყენეთ სამსახურის ნიმუში"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"თითის ანაბეჭდის გამოსაყენებლად დააყენეთ პაროლი"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"თითის ანაბეჭდისთვის დააყენეთ ნიმუში"</string>
@@ -2098,7 +2171,7 @@
     <string name="default_emergency_app" msgid="1929974800666613803">"საგანგებო სიტუაციების აპი"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"აპის პარამეტრების აღდგენა"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"დაბრუნდეს აპის პარამეტრები?"</string>
-    <string name="reset_app_preferences_desc" msgid="6509978724602405805">"ეს ქმედება გადააყენებს ყველა პარამეტრს, რომელიც ეხება:\n\n"<li>"გათიშულ აპებს"</li>\n<li>"აპების გათიშულ შეტყობინებებს"</li>\n<li>"ქმედებებზე მიმაგრებულ ნაგულისხმევ აპლიკაციებს"</li>\n<li>"ფონურ რეჟიმში მონაცემთა გამოყენების შეზღუდვებს აპებისთვის"</li>\n<li>"ნებისმიერი ნებართვის შეზღუდვას"</li>\n\n"აპების მონაცემები არ დაიკარგება."</string>
+    <string name="reset_app_preferences_desc" msgid="8550782670650158299">"ამგვარად გადაყენდება პარამეტრები შემდეგი კომპონენტებისთვის:\n\n"<li>"გათიშული აპები"</li>\n<li>"აპების გათიშული შეტყობინებები"</li>\n<li>"ქმედებებისთვის ნაგულისხმევი აპები"</li>\n<li>"ფონური მონაცემების შეზღუდვები აპებისთვის"</li>\n<li>"ნებისმიერი ნებართვის შეზღუდვა"</li>\n<li>"ბატარეის გამოყენების პარამეტრები"</li>\n\n"აპების მონაცემები არ დაიკარგება."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"აპების საწყისი მდგომარეობის აღდგენა"</string>
     <string name="manage_space_text" msgid="9013414693633572277">"სივრცის მართვა"</string>
     <string name="filter" msgid="9039576690686251462">"გაფილტვრა"</string>
@@ -2353,7 +2426,8 @@
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"პარამეტრების გადაყენება"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"ეკრანის ზომა და ტექსტის პარამეტრები გადაყენებულია"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"გსურთ ეკრანის ზომის და ტექსტის პარამეტრების გადაყენება?"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"თქვენი ეკრანის ზომის და ტექსტის პარამეტრები დაუბრუნდება ტელეფონის თავდაპირველ პარამეტრებს"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"თქვენი ეკრანის ზომის და ტექსტის პარამეტრები დაუბრუნდება ტელეფონის თავდაპირველ პარამეტრებს"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"თქვენი ეკრანის ზომის და ტექსტის პარამეტრები დაუბრუნდება ტაბლეტის თავდაპირველ პარამეტრებს"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"გადაყენება"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"გაქვს რაიმე გეგმა უქმეებისთვის?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"პლაჟზე ვაპირებ წასვლას. ხომ არ წამოხვალ?"</string>
@@ -2736,7 +2810,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"ბატარეის მოხმარება"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"ბოლო 24 საათის მანძილზე მოხმარების ნახვა"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"ბოლო სრული დატენვიდან მოხმარების ნახვა"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"ბატარეის მოხმარება"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"აპლიკაციის ბატარეის გამოყენება"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"გამოყენების დეტალები"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"ენერგიის მოხმარების მორგება"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"შესული პაკეტები"</string>
@@ -2755,8 +2829,11 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"ზოგიერთი ფუნქცია შეიძლება შეზღუდული იყოს"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"ბატარეის მოხმარება"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"ყველაზე დიდი მოხმარების აპების ნახვა"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"დატენვა დროებით შეზღუდულია"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"თქვენი ბატარეის დასაზოგად. შეიტყვეთ მეტი."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"დატენვა შეჩერებულია"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"ბატარეის დაცვა ბატარეის სიცოცხლის გახანგრძლივების მიზნით"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
+    <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"შეიტყვეთ მეტი დატენვის შეწყვეტის შესახებ"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"დატენვის გაგრძელება"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"გარკვეულ პირობებში, მაგალითად, მაღალი ტემპერატურის ან ხანგრძლივი დატენვის დროს, დატენვა, შესაძლოა, შეიზღუდოს <xliff:g id="PERCENT">%1$s</xliff:g>-მდე ბატარეის გამართულობის შესანარჩუნებლად.\n\nამ პირობების დასრულებისთანავე თქვენი ტელეფონი ავტომატურად ჩვეულ რეჟიმში დაიტენება."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"გარკვეულ პირობებში, მაგალითად, მაღალი ტემპერატურის ან ხანგრძლივი დატენვის დროს, დატენვა, შესაძლოა, შეიზღუდოს <xliff:g id="PERCENT">%1$s</xliff:g>-მდე ბატარეის გამართულობის შესანარჩუნებლად.\n\nამ პირობების დასრულებისთანავე თქვენი ტაბლეტი ავტომატურად ჩვეულ რეჟიმში დაიტენება."</string>
@@ -2792,6 +2869,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"ეს აპი შეძლებს თქვენი ბატარეის ფონურ რეჟიმში მოხმარებას. ამან შესაძლოა ბატარეა სწრაფად ამოწუროს."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"წაშლა"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"გაუქმება"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"სრულად დატენვა"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"თქვენი აპები ბატარეის ნორმალური მოხმარებით ხასიათდება. თუ აპები ბატარეას ზედმეტად მოიხმარს, თქვენი ტელეფონი შემოგთავაზებთ პოტენციურ ქმედებებს ამის აღსაკვეთად.\n\nამასთანავე, თქვენ ყოველთვის შეგიძლიათ ჩართოთ ბატარეის დამზოგი, თუ ბატარეა გეწურებათ."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"თქვენი აპები ბატარეის ნორმალური მოხმარებით ხასიათდება. თუ აპები ბატარეას ზედმეტად მოიხმარს, თქვენი ტაბლეტი შემოგთავაზებთ პოტენციურ ქმედებებს ამის აღსაკვეთად.\n\nამასთანავე, თქვენ ყოველთვის შეგიძლიათ ჩართოთ ბატარეის დამზოგი, თუ ბატარეა გეწურებათ."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"თქვენი აპები ბატარეის ნორმალური მოხმარებით ხასიათდება. თუ აპები ბატარეას ზედმეტად მოიხმარს, თქვენი მოწყობილობა შემოგთავაზებთ პოტენციურ ქმედებებს ამის აღსაკვეთად.\n\nამასთანავე, თქვენ ყოველთვის შეგიძლიათ ჩართოთ ბატარეის დამზოგი, თუ ბატარეა გეწურებათ."</string>
@@ -2933,6 +3011,7 @@
     <string name="battery_not_usage" msgid="1472275761547230196">"ბოლო სრული დატენვის შემდეგ მოხმარება არ ფიქსირდება"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"ბოლო 24 საათში გამოყენება არ მომხდარა"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
+    <string name="battery_usage_other_users" msgid="9002643295562500693">"სხვა მომხმარებლები"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"ბატარეის მუშაობის დარჩენილი ხანგრძლივობის მიახლოებითი ვარაუდი თქვენი მოწყობილობის მოხმარებას ეყრდნობა"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"სავარაუდო დარჩენილი დრო"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"სრულ დატენვამდე"</string>
@@ -2968,8 +3047,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"ბატარეის <xliff:g id="PERCENT">%1$s</xliff:g>-ზე"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"ბატარეის პროცენტულობა"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"ბატარეის პროცენტულობის ჩვენება სტატუსის ზოლში"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"ბატარეის დონე ბოლო სრული დატენვის შემდეგ"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"ბატარეის დონე ბოლო 24 საათის მანძილზე"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"აპის გამოყენების დეტალები ბოლო სრული დატენვის შემდეგ"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"აპის გამოყენება ბოლო 24 საათის მანძილზე"</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"სისტემის გამოყენება ბოლო სრული დატენვის შემდეგ"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"სისტემის გამოყენება ბოლო 24 საათის მანძილზე"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"სისტემის გამოყენება შემდეგისთვის: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"აპის გამოყენება შემდეგისთვის: <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -2977,9 +3059,13 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"ფონი: წუთზე ნაკლები"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"სულ: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"ფონი: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"ბატარეის მოხმარების მონაცემები მიახლოებითია და არ ზომავს მოხმარებას დამუხტვისას"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"ბატარეის მოხმარების მონაცემები ხელმისაწვდომი გახდება მას შემდეგ, რაც ტელეფონს რამდენიმე საათით გამოიყენებთ"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"ბატარეის მოხმარების მონაცემები მიახლოებითია და არ ზომავს მოხმარებას დამუხტვისას"</string>
+    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"ბატარეის მოხმარების მონაცემები მიახლოებითია და არ ზომავს მოხმარებას ტაბლეტის დატენვისას"</string>
+    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"ბატარეის მოხმარების მონაცემები მიახლოებითია და არ ზომავს მოხმარებას მოწყობილობის დატენვისას"</string>
+    <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"ბატარეის მოხმარების მონაცემები ხელმისაწვდომი გახდება რამდენიმე საათში, როცა ბოლომდე დაიტენება"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"ბატარეის მოხმარების დიაგრამა"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"ბატარეის ყოველდღიური გამოყენების სქემა"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"ბატარეის სააᲗობრივი გამოყენების სქემა"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"პროცესის სტატისტიკა"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"მიმდინარე პროცესების შემაჯამებელი სტატისტიკა"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"გამოყენებული მეხსიერება"</string>
@@ -3022,6 +3108,9 @@
     <string name="voice_interactor_preference_summary" msgid="3942881638813452880">"სრული ჯადოსნური სიტყვა და ინტერაქცია"</string>
     <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"მარტივი მეტყველების ტექსტში გადაყვანა"</string>
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"ხმოვანი შეყვანის სერვისი შეძლებს შეასრულოს ხმის მონიტორინგი, რომელიც მუდამ ჩართულია და აკონტროლოს ხმასთან თავსებადი აპლიკაციები თქვენი სახელით. ის მომდინარეობს <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> აპლიკაციიდან. გსურთ ამ სერვისის ჩათვლა?"</string>
+    <string name="on_device_recognition_settings" msgid="6503160369314598069">"მოწყობილობაზე მომუშავე ამოცნობის პარამეტრები"</string>
+    <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"მოწყობილობაზე მომუშავე ამოცნობა"</string>
+    <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"მოწყობილობაზე მომუშავე მეტყველების ამოცნობა"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"რჩეული ძრავა"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"ძრავის პარამეტრები"</string>
     <string name="tts_sliders_title" msgid="6901146958648426181">"მეტყველების ტემპი და ტონი"</string>
@@ -3415,6 +3504,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"წაშლა"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"ამ სესიის ყველა აპი და მონაცემი წაიშლება."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"ამოშლა"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"სტუმარი (თქვენ)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"მომხმარებლები"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"სხვა მომხმარებლები"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"სტუმრის აქტივობის წაშლა"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"სტუმრის ყველა აპის და მონაცემის წაშლა სტუმრის რეჟიმიდან გასვლისას"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"გსურთ სტუმრის აქტივობის წაშლა?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"აპები და მონაცემები სტუმრის ამ სესიიდან წაიშლება ახლავე, ხოლო სტუმრის ყველა მომავალი აქტივობა წაიშლება ყოველთვის, როცა სტუმრის რეჟიმიდან გახვალთ"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"სატელეფონო ზარების ჩართვა"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"სატელ. ზარების და SMS-ის ჩართვა"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"მომხმარებლის წაშლა"</string>
@@ -3526,6 +3622,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"აპებს მიეცეთ თქვენი ადგილმდებარეობის შესახებ ინფორმაციით სარგებლობის საშუალება თქვენი მდებარეობის დასადგენად"</string>
     <string name="wizard_back" msgid="8257697435061870191">"უკან"</string>
     <string name="wizard_next" msgid="3884832431439072471">"მომდევნო"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"პორტატიულზე გადართვა"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"სხვაგვარად დაფორმატება"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"დასრულება"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <!-- no translation found for sim_setup_wizard_title (7030639256610746768) -->
@@ -4011,13 +4109,13 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"„<xliff:g id="APP_NAME">%1$s</xliff:g>“-ის ყველა შეტყობინება"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g>-ის ყველა შეტყობინება"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"ადაპტაციური შეტყობინებები"</string>
-    <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> შეტყობინება დღეში</item>
-      <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> შეტყობინება დღეში</item>
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
+      <item quantity="other">დაახლოებით <xliff:g id="NUMBER_1">%,d</xliff:g> შეტყობინება დღეში</item>
+      <item quantity="one">დაახლოებით <xliff:g id="NUMBER_0">%d</xliff:g> შეტყობინება დღეში</item>
     </plurals>
-    <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> შეტყობინება კვირაში</item>
-      <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> შეტყობინება კვირაში</item>
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
+      <item quantity="other">დაახლოებით <xliff:g id="NUMBER_1">%,d</xliff:g> შეტყობინება კვირაში</item>
+      <item quantity="one">დაახლოებით <xliff:g id="NUMBER_0">%d</xliff:g> შეტყობინება კვირაში</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"არასოდეს"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"მოწყობილობისა და აპის შეტყობინებები"</string>
@@ -4827,6 +4925,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"ახლავე ჩართვა"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"ახლავე გამორთვა"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"არ იყენებს ბატარეის ოპტიმიზაციას"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"აპლიკაციის ბატარეის გამოყენება"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"დააყენეთ ბატარეის მოხმარება აპებისთვის"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"შეუზღუდავი"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"ოპტიმიზებული"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"შეზღუდული"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"შეტყობინებებში პასუხების ან სხვა ტექსტის აკრეფის აკრძალვა, როცა მოწყობილობა ჩაკეტილია"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"ნაგულ. მართლწერის შემმოწმებელი"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"მართლწერის შემმოწმებლის არჩევა"</string>
@@ -5259,7 +5362,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"არ შეიცვალოს არაფერი"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"ვიბრაცია"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"დადუმება"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"ჩასართავად ჯერ შეცვალეთ „ხანგრძლივად დააჭირეთ ჩართვის ღილაკს“ ჩართვის მენიუთი."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"ჩასართავად ჯერ შეცვალეთ „ხანგრძლივად დააჭირეთ ჩართვის ღილაკს“ ჩართვის მენიუთი."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"ქსელის დეტალები"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"თქვენი მოწყობილობის სახელი ხილულია თქვენს ტელეფონზე არსებული აპებისთვის. მის დანახვას შეძლებენ სხვა პირებიც, როცა Bluetooth მოწყობილობებს ან Wi-Fi ქსელს დაუკავშირდებით, ან Wi-Fi უსადენო ქსელს დააყენებთ."</string>
     <string name="devices_title" msgid="649715719278562515">"მოწყობილობები"</string>
@@ -5549,15 +5652,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"მოწყობილობის მართვის საშუალებები"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"ბარათები და საშვები"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"ბარათები და საშვები"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"ხანგრძლივად დააჭირეთ ჩართვის ღილაკს"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"ხანგრძლივად დააჭირეთ ასისტენტის გამოსაძახებლად"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"ხანგრძლივად დააჭირეთ ჩართვის მენიუს სანახავად"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"ხანგრძლივად დაჭერა გათიშულია"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"ხანგრძლივად დააჭირეთ ჩართვის ღილაკს"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"წვდომისათვის ხანგრძლივად დააჭირეთ ჩართვის ღილაკს"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"ჩართვის მენიუ"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"ციფრული ასისტენტი"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"ციფრულ ასისტენტზე წვდომა"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"ჩართვის მენიუზე წვდომა"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"გამოსაყენებლად, ჯერ დააყენეთ ეკრანის ბლოკი"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"ხანგრძლივად დაჭერა ასისტენტის გამოსაძახებლად"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"ასისტენტის გაშვება ჩართვის ღილაკზე ხანგრძლივად დაჭერით"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"ჩართვის და საგანგებო მენიუ:\nერთდროულად დააჭირეთ ჩართვას და ხმის აწევას."</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"დარეკვის თავიდან აცილება:\nმალსახმობი ხმის სიმძლავრის მენიუშია."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"ჩართვის მენიუ:\nერთდროულად დააჭირეთ ჩართვის და ხმის აწევის ღილაკებს"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"თავიდან აიცილეთ რეკვა:\nდააჭირეთ ხმის ღილაკს მალსახმობისთვის"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"დაჭერის ხანგრძლივობა"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"დაარეგულირეთ მგრძნობიარობა იმის არჩევით, თუ რამდენი ხნით უნდა გეჭიროთ ჩართვის ღილაკი"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"ხანმოკლე"</string>
@@ -5593,6 +5696,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"მედია"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"მედიადამკვრელის ჩამაგრება"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"დაკვრის სწრაფად გასაგრძელებლად მედიადამკვრელი გახსნილი დარჩება სწრაფ პარამეტრებში"</string>
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"მედიის ჩაკეტილ ეკრანზე ჩვენება"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"დაკვრის სწრაფად გასაგრძელებლად მედიადამკვრელი გახსნილი იქნება ჩაკეტილ ეკრანზე"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"მედიარეკომენდაციების ჩვენება"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"თქვენი აქტივობის საფუძველზე"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"დამკვრელის დამალვა"</string>
@@ -5775,7 +5880,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"გადახედვა"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"აირჩიეთ ეკრანმზოგი"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"დამატებითი ინფორმაციის ჩვენება"</string>
-    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"ერკანმზოგზე დროის, თარიღის, ამინდის, ჰაერის სისუფთავის ხარისხის და ტრანსლაციის შესახებ ცნობების ჩვენება"</string>
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"აჩვენეთ ისეთი რამ, როგორიცაა დრო, ამინდი ან სხვა ინფორმაცია ეკრანმზოგში"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"სხვა პარამეტრები"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"აირჩიეთ ეკრანმზოგი"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"აირჩიეთ, რას იხილავთ თქვენს ეკრანზე, როცა თქვენი ტაბლეტი დოკ-სადგურთან იქნება მიერთებული. ეკრანმზოგის გამოყენების შემთხვევაში თქვენმა მოწყობილობამ შეიძლება მეტი ენერგია გამოიყენოს."</string>

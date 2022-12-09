@@ -31,26 +31,16 @@
         android:clipToPadding="false"
         android:clipChildren="false">
 
+        <!-- Animation res MUST be set in code because asset is dependent on device orientation -->
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/illustration_lottie"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerInside"
-            app:lottie_imageAssetsFolder="images"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/fingerprint_edu_lottie"/>
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/illustration_lottie_portrait"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="centerInside"
             android:visibility="gone"
             app:lottie_imageAssetsFolder="images"
             app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/fingerprint_edu_lottie_portrait"/>
+            app:lottie_loop="true"/>
 
     </LinearLayout>
 </com.google.android.setupdesign.GlifLayout>

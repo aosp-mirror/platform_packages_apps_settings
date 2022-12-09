@@ -249,6 +249,8 @@ public class BatteryInfoTest {
 
     @Test
     public void testGetBatteryInfo_chargingWithOverheated_updateChargeLabel() {
+        final String expectedString =
+                mContext.getString(R.string.battery_tip_limited_temporarily_title);
         doReturn(TEST_CHARGE_TIME_REMAINING)
                 .when(mBatteryUsageStats)
                 .getChargeTimeRemainingMs();
@@ -260,7 +262,7 @@ public class BatteryInfoTest {
                 false /* shortString */);
 
         assertThat(info.isOverheated).isTrue();
-        assertThat(info.chargeLabel).isEqualTo("50% - Charging temporarily limited");
+        assertThat(info.chargeLabel.toString()).contains(expectedString);
     }
 
     // Make our battery stats return a sequence of battery events.

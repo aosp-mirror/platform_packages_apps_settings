@@ -52,11 +52,17 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
      */
     private void hidePreferenceSettingComponents() {
         // Intro
-        mTopIntroPreference.setVisible(false);
+        if (mTopIntroPreference != null) {
+            mTopIntroPreference.setVisible(false);
+        }
         // Setting of magnification type
-        mSettingsPreference.setVisible(false);
+        if (mSettingsPreference != null) {
+            mSettingsPreference.setVisible(false);
+        }
         // Setting of following typing
-        mFollowingTypingSwitchPreference.setVisible(false);
+        if (mFollowingTypingSwitchPreference != null) {
+            mFollowingTypingSwitchPreference.setVisible(false);
+        }
     }
 
     @Override

@@ -42,6 +42,13 @@
         settings:searchable="false"
         settings:controller="com.android.settings.bluetooth.LeAudioBluetoothDetailsHeaderController"/>
 
+    <com.android.settingslib.widget.ButtonPreference
+        android:key="hearing_aid_pair_other_button"
+        android:gravity="center" />
+    <com.android.settings.applications.SpacePreference
+        android:key="hearing_aid_space_layout"
+        android:layout_height="8dp" />
+
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="action_buttons"
         settings:allowDividerBelow="true"/>

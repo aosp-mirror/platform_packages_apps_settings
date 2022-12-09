@@ -86,6 +86,8 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"คุณไม่มีสิทธิ์ในการเปลี่ยนการตั้งค่าบลูทูธ"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"จับคู่อุปกรณ์ใหม่"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"บลูทูธ"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"จับคู่หูฟังข้างขวา"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"จับคู่หูฟังข้างซ้าย"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"จับคู่หูฟังอีกข้าง"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"เชื่อมต่อเครื่องช่วยฟังข้างซ้ายแล้ว\n\nหากต้องการจับคู่ข้างขวา โปรดตรวจสอบว่าคุณเปิดเครื่องช่วยฟังแล้วและอุปกรณ์พร้อมจับคู่"</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"เชื่อมต่อเครื่องช่วยฟังข้างขวาแล้ว\n\nหากต้องการจับคู่ข้างซ้าย โปรดตรวจสอบว่าคุณเปิดเครื่องช่วยฟังแล้วและอุปกรณ์พร้อมจับคู่"</string>
@@ -355,13 +357,17 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"ตั้งค่าการปลดล็อกด้วยใบหน้า"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"ใช้ใบหน้าในการตรวจสอบสิทธิ์"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"เริ่ม"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"หากการปลดล็อกด้วยใบหน้าในการช่วยเหลือพิเศษปิดอยู่ ขั้นตอนการตั้งค่าบางอย่างอาจทำงานกับ TalkBack ไม่ถูกต้อง"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"ย้อนกลับ"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"ตั้งค่าต่อ"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"ใช้การตั้งค่าการช่วยเหลือพิเศษ"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"ยกเลิก"</string>
@@ -371,25 +377,53 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"ปลดล็อกด้วยใบหน้า"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"อนุญาตให้ปลดล็อกด้วยใบหน้า"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"ใช้ใบหน้าในการตรวจสอบสิทธิ์"</string>
-    <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"ใช้ใบหน้าเพื่อปลดล็อกโทรศัพท์ อนุญาตการซื้อ หรือลงชื่อเข้าใช้แอป"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"อนุญาตให้บุตรหลานใช้ใบหน้าเพื่อปลดล็อกโทรศัพท์หรือยืนยันว่าเป็นตนเอง ซึ่งจะเกิดขึ้นเมื่อลงชื่อเข้าใช้แอป ยืนยันการซื้อ และอื่นๆ"</string>
+    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"ใช้ใบหน้าเพื่อปลดล็อกโทรศัพท์ อนุญาตการซื้อ หรือลงชื่อเข้าใช้แอป"</string>
+    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"ใช้ใบหน้าเพื่อปลดล็อกแท็บเล็ต อนุญาตการซื้อ หรือลงชื่อเข้าใช้แอป"</string>
+    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"ใช้ใบหน้าเพื่อปลดล็อกอุปกรณ์ อนุญาตการซื้อ หรือลงชื่อเข้าใช้แอป"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"อนุญาตให้บุตรหลานใช้ใบหน้าเพื่อปลดล็อกโทรศัพท์"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"อนุญาตให้บุตรหลานใช้ใบหน้าเพื่อปลดล็อกแท็บเล็ต"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"อนุญาตให้บุตรหลานใช้ใบหน้าเพื่อปลดล็อกอุปกรณ์"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"การใช้ใบหน้าของบุตรหลานเพื่อปลดล็อกโทรศัพท์อาจมีความปลอดภัยน้อยกว่ารูปแบบหรือ PIN ที่เดายาก"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"การใช้ใบหน้าของบุตรหลานเพื่อปลดล็อกแท็บเล็ตอาจมีความปลอดภัยน้อยกว่ารูปแบบหรือ PIN ที่เดายาก"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"การใช้ใบหน้าของบุตรหลานเพื่อปลดล็อกอุปกรณ์อาจมีความปลอดภัยน้อยกว่ารูปแบบหรือ PIN ที่เดายาก"</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"ใช้ใบหน้าเพื่อปลดล็อกโทรศัพท์หรืออนุมัติการซื้อ\n\nหมายเหตุ: คุณใช้ใบหน้าเพื่อปลดล็อกอุปกรณ์นี้ไม่ได้ โปรดติดต่อผู้ดูแลระบบขององค์กรสำหรับข้อมูลเพิ่มเติม"</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"ใช้ใบหน้าเพื่อปลดล็อกโทรศัพท์ อนุญาตการซื้อ หรือลงชื่อเข้าใช้แอป"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"จัดใบหน้าของคุณให้อยู่กลางวงกลม"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"ข้าม"</string>
     <string name="face_add_max" msgid="4578405795494514876">"คุณเพิ่มใบหน้าได้สูงสุด <xliff:g id="COUNT">%d</xliff:g> รายการ"</string>
@@ -439,7 +473,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"ใช้ลายนิ้วมือเพื่อปลดล็อกแท็บเล็ตหรือยืนยันว่าเป็นคุณ เช่น เมื่อลงชื่อเข้าใช้แอปหรืออนุมัติการซื้อ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"ใช้ลายนิ้วมือเพื่อปลดล็อกอุปกรณ์หรือยืนยันว่าเป็นคุณ เช่น เมื่อลงชื่อเข้าใช้แอปหรืออนุมัติการซื้อ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"ใช้ลายนิ้วมือเพื่อปลดล็อกโทรศัพท์หรือยืนยันว่าเป็นคุณ เช่น เมื่อลงชื่อเข้าใช้แอปหรืออนุมัติการซื้อ"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"อนุญาตให้บุตรหลานใช้ลายนิ้วมือเพื่อปลดล็อกโทรศัพท์หรือยืนยันว่าเป็นตนเอง ซึ่งจะเกิดขึ้นเมื่อลงชื่อเข้าใช้แอป ยืนยันการซื้อ และอื่นๆ"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"อนุญาตให้บุตรหลานใช้ลายนิ้วมือเพื่อปลดล็อกโทรศัพท์หรือยืนยันว่าเป็นตนเอง ซึ่งจะเกิดขึ้นเมื่อลงชื่อเข้าใช้แอป ยืนยันการซื้อ และอื่นๆ"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"อนุญาตให้บุตรหลานใช้ลายนิ้วมือเพื่อปลดล็อกแท็บเล็ตหรือยืนยันว่าเป็นตนเอง ซึ่งจะทำได้เวลาลงชื่อเข้าใช้แอป ยืนยันการซื้อ และอื่นๆ"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"อนุญาตให้บุตรหลานใช้ลายนิ้วมือเพื่อปลดล็อกอุปกรณ์หรือยืนยันว่าเป็นตนเอง ซึ่งจะทำได้เวลาลงชื่อเข้าใช้แอป ยืนยันการซื้อ และอื่นๆ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"คุณควบคุมได้"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"คุณและบุตรหลานจะเป็นผู้ควบคุม"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"ข้อควรจำ"</string>
@@ -454,16 +490,30 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"การตั้งค่าลายนิ้วมือใช้เวลาเพียง 1-2 นาทีเท่านั้น หากข้ามขั้นตอนนี้ คุณสามารถเพิ่มลายนิ้วมือภายหลังได้ใน \"การตั้งค่า\""</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"เมื่อคุณเห็นไอคอนนี้ ให้ใช้ลายนิ้วมือในการตรวจสอบสิทธิ์ เช่น เมื่อลงชื่อเข้าใช้แอปหรืออนุมัติการซื้อ"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"โปรดทราบ"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"การใช้ลายนิ้วมือเพื่อปลดล็อกโทรศัพท์อาจไม่ปลอดภัยเท่ารูปแบบหรือ PIN ที่เดายาก"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"การใช้ลายนิ้วมือเพื่อปลดล็อกโทรศัพท์อาจไม่ปลอดภัยเท่ารูปแบบหรือ PIN ที่เดายาก"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"การใช้ลายนิ้วมือเพื่อปลดล็อกแท็บเล็ตอาจมีความปลอดภัยน้อยกว่ารูปแบบหรือ PIN ที่เดาได้ยาก"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"การใช้ลายนิ้วมือเพื่อปลดล็อกอุปกรณ์อาจมีความปลอดภัยน้อยกว่ารูปแบบหรือ PIN ที่เดาได้ยาก"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"วิธีการทำงาน"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"การปลดล็อกด้วยลายนิ้วมือจะสร้างรูปแบบลายนิ้วมือที่เป็นเอกลักษณ์เพื่อยืนยันตัวตนว่าเป็นคุณ ระหว่างการตั้งค่า คุณจะได้สร้างรูปแบบลายนิ้วมือนี้ด้วยการถ่ายภาพลายนิ้วมือจากมุมต่างๆ ที่ไม่ซ้ำกัน"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"การปลดล็อกด้วยลายนิ้วมือจะสร้างรูปแบบลายนิ้วมือที่เป็นเอกลักษณ์ของบุตรหลานเพื่อยืนยันว่าเป็นตนเอง ในการสร้างรูปแบบลายนิ้วมือนี้ระหว่างการตั้งค่า บุตรหลานจะถ่ายภาพลายนิ้วมือจากมุมต่างๆ ที่ไม่ซ้ำกัน"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"เมื่อใช้ Pixel Imprint ระบบจะใช้รูปภาพเพื่ออัปเดตรูปแบบลายนิ้วมือ ระบบจะไม่เก็บรูปภาพที่ใช้สร้างรูปแบบลายนิ้วมือ แต่จะเก็บรูปแบบลายนิ้วมือไว้อย่างปลอดภัยในโทรศัพท์และจะไม่มีการส่งออกไปไหน การประมวลผลข้อมูลทั้งหมดเกิดขึ้นอย่างปลอดภัยในโทรศัพท์"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"เมื่อใช้ Pixel Imprint ระบบจะใช้รูปภาพเพื่ออัปเดตรูปแบบลายนิ้วมือ ระบบจะไม่เก็บรูปภาพที่ใช้สร้างรูปแบบลายนิ้วมือของบุตรหลาน แต่จะเก็บรูปแบบลายนิ้วมือไว้อย่างปลอดภัยในโทรศัพท์และจะไม่มีการส่งออกไปไหน การประมวลผลข้อมูลทั้งหมดเกิดขึ้นอย่างปลอดภัยในโทรศัพท์"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"คุณลบรูปภาพและรูปแบบลายนิ้วมือหรือปิดการปลดล็อกด้วยลายนิ้วมือได้ทุกเมื่อในการตั้งค่า ระบบจะจัดเก็บรูปภาพและรูปแบบลายนิ้วมือไว้ในโทรศัพท์จนกว่าคุณจะลบออก"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"คุณและบุตรหลานลบรูปภาพและรูปแบบลายนิ้วมือ หรือปิดการปลดล็อกด้วยลายนิ้วมือได้ทุกเมื่อในการตั้งค่า ระบบจะเก็บรูปภาพและรูปแบบลายนิ้วมือไว้ในโทรศัพท์จนกว่าจะมีการลบออก"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"โทรศัพท์อาจปลดล็อกโดยที่คุณไม่ได้ตั้งใจ เช่น มีใครบางคนจ่อโทรศัพท์ที่นิ้วของคุณ"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"โทรศัพท์ของบุตรหลานอาจปลดล็อกโดยที่ไม่ได้ตั้งใจ เช่น มีใครบางคนเอาโทรศัพท์ไปแตะที่นิ้วของบุตรหลาน"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"เมื่อใช้ Pixel Imprint ระบบจะใช้รูปภาพเพื่ออัปเดตรูปแบบลายนิ้วมือ ระบบจะไม่เก็บรูปภาพที่ใช้สร้างรูปแบบลายนิ้วมือ แต่จะเก็บรูปแบบลายนิ้วมือไว้อย่างปลอดภัยในโทรศัพท์และจะไม่มีการส่งออกไปไหน การประมวลผลข้อมูลทั้งหมดเกิดขึ้นอย่างปลอดภัยในโทรศัพท์"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"เมื่อใช้ Pixel Imprint ระบบจะใช้รูปภาพเพื่ออัปเดตรูปแบบลายนิ้วมือ ระบบจะไม่เก็บรูปภาพที่ใช้สร้างรูปแบบลายนิ้วมือ แต่จะเก็บรูปแบบลายนิ้วมือไว้อย่างปลอดภัยในแท็บเล็ตและจะไม่ส่งออกไปที่อื่น การประมวลผลข้อมูลทั้งหมดเกิดขึ้นอย่างปลอดภัยในแท็บเล็ต"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"เมื่อใช้ Pixel Imprint ระบบจะใช้รูปภาพเพื่ออัปเดตรูปแบบลายนิ้วมือ ระบบจะไม่เก็บรูปภาพที่ใช้สร้างรูปแบบลายนิ้วมือ แต่จะเก็บรูปแบบลายนิ้วมือไว้อย่างปลอดภัยในอุปกรณ์และจะไม่ส่งออกไปที่อื่น การประมวลผลข้อมูลทั้งหมดเกิดขึ้นอย่างปลอดภัยในอุปกรณ์"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"เมื่อใช้ Pixel Imprint ระบบจะใช้รูปภาพเพื่ออัปเดตรูปแบบลายนิ้วมือ ระบบจะไม่เก็บรูปภาพที่ใช้สร้างรูปแบบลายนิ้วมือของบุตรหลาน แต่จะเก็บรูปแบบลายนิ้วมือไว้อย่างปลอดภัยในโทรศัพท์และจะไม่มีการส่งออกไปไหน การประมวลผลข้อมูลทั้งหมดเกิดขึ้นอย่างปลอดภัยในโทรศัพท์"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"เมื่อใช้ Pixel Imprint ระบบจะใช้รูปภาพเพื่ออัปเดตรูปแบบลายนิ้วมือ ระบบจะไม่เก็บรูปภาพที่ใช้สร้างรูปแบบลายนิ้วมือของบุตรหลาน แต่จะเก็บรูปแบบลายนิ้วมือไว้อย่างปลอดภัยในแท็บเล็ตและจะไม่ส่งออกไปที่อื่น การประมวลผลข้อมูลทั้งหมดเกิดขึ้นอย่างปลอดภัยในแท็บเล็ต"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"เมื่อใช้ Pixel Imprint ระบบจะใช้รูปภาพเพื่ออัปเดตรูปแบบลายนิ้วมือ ระบบจะไม่เก็บรูปภาพที่ใช้สร้างรูปแบบลายนิ้วมือของบุตรหลาน แต่จะเก็บรูปแบบลายนิ้วมือไว้อย่างปลอดภัยในอุปกรณ์และจะไม่ส่งออกไปที่อื่น การประมวลผลข้อมูลทั้งหมดเกิดขึ้นอย่างปลอดภัยในอุปกรณ์"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"คุณลบรูปภาพและรูปแบบลายนิ้วมือหรือปิดการปลดล็อกด้วยลายนิ้วมือได้ทุกเมื่อในการตั้งค่า ระบบจะจัดเก็บรูปภาพและรูปแบบลายนิ้วมือไว้ในโทรศัพท์จนกว่าคุณจะลบออก"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"คุณลบรูปภาพและรูปแบบลายนิ้วมือ หรือปิดการปลดล็อกด้วยลายนิ้วมือได้ทุกเมื่อในการตั้งค่า ระบบจะเก็บรูปภาพและรูปแบบลายนิ้วมือไว้ในแท็บเล็ตจนกว่าคุณจะลบออก"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"คุณลบรูปภาพและรูปแบบลายนิ้วมือ หรือปิดการปลดล็อกด้วยลายนิ้วมือได้ทุกเมื่อในการตั้งค่า ระบบจะเก็บรูปภาพและรูปแบบลายนิ้วมือไว้ในอุปกรณ์จนกว่าคุณจะลบออก"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"คุณและบุตรหลานลบรูปภาพและรูปแบบลายนิ้วมือ หรือปิดการปลดล็อกด้วยลายนิ้วมือได้ทุกเมื่อในการตั้งค่า ระบบจะเก็บรูปภาพและรูปแบบลายนิ้วมือไว้ในโทรศัพท์จนกว่าจะมีการลบออก"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"คุณและบุตรหลานลบรูปภาพและรูปแบบลายนิ้วมือ หรือปิดการปลดล็อกด้วยลายนิ้วมือได้ทุกเมื่อในการตั้งค่า ระบบจะเก็บรูปภาพและรูปแบบลายนิ้วมือไว้ในแท็บเล็ตจนกว่าจะลบออก"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"คุณและบุตรหลานลบรูปภาพและรูปแบบลายนิ้วมือ หรือปิดการปลดล็อกด้วยลายนิ้วมือได้ทุกเมื่อในการตั้งค่า ระบบจะเก็บรูปภาพและรูปแบบลายนิ้วมือไว้ในอุปกรณ์จนกว่าจะลบออก"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"โทรศัพท์อาจปลดล็อกโดยที่คุณไม่ได้ตั้งใจ เช่น มีใครบางคนจ่อโทรศัพท์ที่นิ้วของคุณ"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"แท็บเล็ตอาจปลดล็อกได้แม้คุณไม่ได้ตั้งใจ เช่น เมื่อมีการยกแท็บเล็ตไปแตะกับนิ้วของคุณ"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"อุปกรณ์อาจปลดล็อกโดยที่คุณไม่ได้ตั้งใจ เช่น หากมีใครบางคนจ่ออุปกรณ์ที่นิ้วของคุณ"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"โทรศัพท์ของบุตรหลานอาจปลดล็อกโดยที่ไม่ได้ตั้งใจ เช่น มีใครบางคนเอาโทรศัพท์ไปแตะที่นิ้วของบุตรหลาน"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"แท็บเล็ตของบุตรหลานอาจปลดล็อกโดยที่ไม่ได้ตั้งใจ เช่น มีคนเอาแท็บเล็ตไปแตะที่นิ้วของบุตรหลาน"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"อุปกรณ์ของบุตรหลานอาจปลดล็อกโดยที่ไม่ได้ตั้งใจ เช่น มีคนเอาอุปกรณ์ไปแตะที่นิ้วของบุตรหลาน"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"ใช้แผ่นปกป้องหน้าจอที่มีป้ายรับรอง Made For Google เพื่อให้ได้ผลลัพธ์ที่ดีที่สุด หากใช้แผ่นปกป้องหน้าจออื่นๆ อาจใช้ลายนิ้วมือของคุณไม่ได้"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"ใช้แผ่นปกป้องหน้าจอที่มีป้ายรับรอง Made For Google เพื่อให้ได้ผลลัพธ์ที่ดีที่สุด หากใช้แผ่นปกป้องหน้าจออื่นๆ อาจใช้ลายนิ้วมือของบุตรหลานไม่ได้"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
@@ -488,7 +538,9 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"ใช้ใบหน้า"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"ใช้ลายนิ้วมือ"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"ใช้ใบหน้าหรือลายนิ้วมือ"</string>
-    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"ส่งโทรศัพท์ให้ผู้ปกครอง"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"ส่งแท็บเล็ตให้ผู้ปกครอง"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"ส่งอุปกรณ์ให้ผู้ปกครอง"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"ส่งโทรศัพท์ให้ผู้ปกครอง"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"ตกลง"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"ข้ามการล็อกหน้าจอไหม"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"ระบบจะไม่เปิดฟีเจอร์การปกป้องอุปกรณ์ คุณจะไม่สามารถป้องกันไม่ให้ผู้อื่นใช้แท็บเล็ตนี้หากทำอุปกรณ์หาย ถูกขโมย หรือถูกรีเซ็ต"</string>
@@ -502,18 +554,24 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"ข้าม"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"ยกเลิก"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"แตะเซ็นเซอร์"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"แตะปุ่มเปิด/ปิดโดยไม่ต้องกด"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"วิธีตั้งค่าลายนิ้วมือ"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"เซ็นเซอร์อยู่ที่ด้านหลังโทรศัพท์ โปรดใช้นิ้วขี้"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"เซ็นเซอร์ลายนิ้วมืออยู่ที่ปุ่มเปิด/ปิด ซึ่งเป็นปุ่มแบนข้างปุ่มปรับระดับเสียงที่บริเวณขอบของแท็บเล็ต\n\nการกดปุ่มเปิด/ปิดจะเป็นการปิดหน้าจอ"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"เซ็นเซอร์ลายนิ้วมืออยู่ที่ปุ่มเปิด/ปิด ซึ่งเป็นปุ่มแบนข้างปุ่มปรับระดับเสียงที่บริเวณขอบของอุปกรณ์\n\nการกดปุ่มเปิด/ปิดจะเป็นการปิดหน้าจอ"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"เซ็นเซอร์ลายนิ้วมืออยู่ที่ปุ่มเปิด/ปิด ซึ่งเป็นปุ่มแบนข้างปุ่มปรับระดับเสียงที่บริเวณขอบของโทรศัพท์\n\nการกดปุ่มเปิด/ปิดจะเป็นการปิดหน้าจอ"</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"เซ็นเซอร์ลายนิ้วมืออยู่ในหน้าจอ คุณจะจับภาพลายนิ้วมือในหน้าจอถัดไป"</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"เริ่ม"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"เลื่อนนิ้วไปมาบนหน้าจอเพื่อค้นหาเซ็นเซอร์ แตะเซ็นเซอร์ลายนิ้วมือค้างไว้"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"ภาพประกอบที่มีตำแหน่งของอุปกรณ์และเซ็นเซอร์ลายนิ้วมือ"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"ชื่อ"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"ตกลง"</string>
+    <string name="security_settings_fingerprint_enroll_dialog_try_again" msgid="8117874972945407006">"ลองอีกครั้ง"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"ลบ"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"แตะเซ็นเซอร์"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"วางนิ้วบนเซ็นเซอร์และยกขึ้นหลังจากรู้สึกถึงการสั่น"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"วางลายนิ้วมือราบลงบนเซ็นเซอร์จนกว่าจะรู้สึกถึงแรงสั่น"</string>
+    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"วางนิ้วมือค้างไว้บนเซ็นเซอร์โดยไม่ต้องออกแรงกดจนกว่าจะรู้สึกว่าเซ็นเซอร์สั่น\n\nขยับตำแหน่งนิ้วเล็กน้อยในแต่ละครั้งเพื่อช่วยให้บันทึกลายนิ้วมือได้ครบถ้วนมากขึ้น"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"แตะเซ็นเซอร์ลายนิ้วมือค้างไว้"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"ยกนิ้วขึ้นแล้วแตะอีกครั้ง"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"อีกครั้งหนึ่ง"</string>
@@ -523,13 +581,20 @@
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"วางปลายนิ้วลงบนเซ็นเซอร์"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"วางขอบด้านซ้ายของนิ้ว"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"วางขอบด้านขวาของนิ้ว"</string>
+    <string name="security_settings_sfps_enroll_finger_center_title" msgid="1320688855767675739">"วางตรงกลางของนิ้วลงบนเซ็นเซอร์"</string>
+    <string name="security_settings_sfps_enroll_fingertip_title" msgid="2737520837684516446">"วางปลายนิ้วลงบนเซ็นเซอร์"</string>
+    <string name="security_settings_sfps_enroll_left_edge_title" msgid="9022963735924413343">"วางขอบด้านซ้ายของนิ้วบนเซ็นเซอร์"</string>
+    <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"สุดท้าย ให้วางขอบด้านขวาของนิ้วบนเซ็นเซอร์"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"วางด้านข้างของนิ้วค้างไว้บนเซ็นเซอร์ จากนั้นเปลี่ยนข้าง"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"การทำเช่นนี้จะช่วยให้บันทึกลายนิ้วมือของคุณได้มากขึ้น"</string>
+    <string name="security_settings_sfps_enroll_progress_a11y_message" msgid="6450772721691523736">"กำลังลงทะเบียนลายนิ้วมือ <xliff:g id="PERCENTAGE">%d</xliff:g> เปอร์เซ็นต์"</string>
+    <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"ลงทะเบียนแล้ว <xliff:g id="PERCENTAGE">%d</xliff:g> เปอร์เซ็นต์"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"กำลังลงทะเบียนลายนิ้วมือ <xliff:g id="PERCENTAGE">%d</xliff:g> เปอร์เซ็นต์"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"เพิ่มลายนิ้วมือแล้ว"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"ฟีเจอร์ปลดล็อกด้วยลายนิ้วมือจะยิ่งทำงานได้ดีขึ้น เมื่อคุณใช้ปลดล็อกแท็บเล็ตหรือยืนยันตัวตนในแอปมากยิ่งขึ้น"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"ฟีเจอร์ปลดล็อกด้วยลายนิ้วมือจะยิ่งทำงานได้ดีขึ้น เมื่อคุณใช้ปลดล็อกอุปกรณ์หรือยืนยันตัวตนในแอปมากยิ่งขึ้น"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"ฟีเจอร์ปลดล็อกด้วยลายนิ้วมือจะทำงานได้ดียิ่งขึ้นเมื่อใช้ปลดล็อกโทรศัพท์หรือยืนยันตัวตนในแอปบ่อยๆ"</string>
+    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"ตอนนี้คุณใช้ลายนิ้วมือเพื่อปลดล็อกแท็บเล็ตหรือยืนยันตัวตนได้ เช่น เมื่อลงชื่อเข้าใช้แอปหรืออนุมัติการซื้อ"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"ตอนนี้คุณสามารถใช้ลายนิ้วมือเพื่อปลดล็อกแท็บเล็ตหรือยืนยันว่าเป็นคุณ เช่น เมื่อลงชื่อเข้าใช้แอป"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"ตอนนี้คุณสามารถใช้ลายนิ้วมือเพื่อปลดล็อกอุปกรณ์หรือยืนยันว่าเป็นคุณ เช่น เมื่อลงชื่อเข้าใช้แอป"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"ตอนนี้คุณสามารถใช้ลายนิ้วมือเพื่อปลดล็อกโทรศัพท์หรือยืนยันว่าเป็นคุณ เช่น เมื่อลงชื่อเข้าใช้แอป"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"ข้ามไปก่อน"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"ยกนิ้วขึ้นแล้วแตะอีกครั้ง"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"วางด้านข้างของนิ้วค้างไว้บนเซ็นเซอร์ จากนั้นเปลี่ยนข้าง"</string>
@@ -587,8 +652,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"เสร็จสิ้น"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"อ๊ะ นั่นไม่ใช่เซ็นเซอร์"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"แตะเซ็นเซอร์ที่ด้านหลังโทรศัพท์โดยใช้นิ้วชี้"</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"การลงทะเบียนยังไม่เสร็จสมบูรณ์"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"หมดเวลาลงทะเบียนลายนิ้วมือ โปรดลองอีกครั้ง"</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"การตั้งค่าลายนิ้วมือหมดเวลา"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"ลองอีกครั้งตอนนี้หรือตั้งค่าลายนิ้วมือภายหลังในการตั้งค่า"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"การลงทะเบียนลายนิ้วมือไม่ทำงาน โปรดลองอีกครั้งหรือใช้นิ้วอื่น"</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"เพิ่มอีก"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"ถัดไป"</string>
@@ -607,10 +672,14 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"คุณได้เพิ่มลายนิ้วมือถึงขีดจำกัดสูงสุดแล้ว"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"เพิ่มลายนิ้วมืออีกไม่ได้แล้ว"</string>
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"นำลายนิ้วมือทั้งหมดออกใช่ไหม"</string>
-    <string name="fingerprint_delete_title" msgid="1469865327307917858">"นำ \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" ออก"</string>
+    <string name="fingerprint_delete_title" msgid="5412123164503407098">"ลบ \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"คุณต้องการลบลายนิ้วมือนี้ไหม"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"การดำเนินการนี้จะลบรูปภาพและรูปแบบลายนิ้วมือที่เชื่อมโยงกับ \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" ซึ่งจัดเก็บในอุปกรณ์ของคุณ"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"คุณจะไม่สามารถใช้ลายนิ้วมือของคุณปลดล็อกโทรศัพท์หรือยืนยันว่าเป็นคุณในแอป"</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"การดำเนินการนี้จะลบรูปภาพและรูปแบบลายนิ้วมือที่เชื่อมโยงกับ \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" ซึ่งจัดเก็บในโทรศัพท์ของคุณ"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"การดำเนินการนี้จะลบรูปภาพและรูปแบบลายนิ้วมือที่เชื่อมโยงกับ \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" ซึ่งจัดเก็บในแท็บเล็ตของคุณ"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"การดำเนินการนี้จะลบรูปภาพและรูปแบบลายนิ้วมือที่เชื่อมโยงกับ \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" ซึ่งจัดเก็บในอุปกรณ์ของคุณ"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"คุณจะไม่สามารถใช้ลายนิ้วมือของคุณปลดล็อกโทรศัพท์หรือยืนยันว่าเป็นคุณในแอป"</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"คุณจะไม่สามารถใช้ลายนิ้วมือเพื่อปลดล็อกแท็บเล็ตหรือยืนยันตัวตนในแอปได้"</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"คุณจะไม่สามารถใช้ลายนิ้วมือเพื่อปลดล็อกอุปกรณ์หรือยืนยันตัวตนในแอปได้"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"คุณจะไม่สามารถใช้ลายนิ้วมือเพื่อปลดล็อกโปรไฟล์งาน ให้สิทธิ์การซื้อ หรือลงชื่อเข้าใช้แอปงาน"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"ใช่ นำออกเลย"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"การเข้ารหัส"</string>
@@ -1317,15 +1386,17 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"เปิด"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"เปิด - ตามใบหน้า"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"การตรวจจับใบหน้า"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"ปรับการวางแนวหน้าจอโดยอัตโนมัติเมื่อคุณหมุนโทรศัพท์ไปมาระหว่างแนวตั้งและแนวนอน"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"ปรับการวางแนวหน้าจอโดยอัตโนมัติเมื่อคุณหมุนโทรศัพท์ไปมาระหว่างแนวตั้งและแนวนอน"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"ปรับการวางแนวหน้าจอโดยอัตโนมัติเมื่อคุณหมุนแท็บเล็ตไปมาระหว่างแนวตั้งและแนวนอน"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"ดูข้อมูลเพิ่มเติมเกี่ยวกับการหมุนอัตโนมัติ"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"เมื่อคุณหมุนโทรศัพท์ไปมาระหว่างแนวตั้งและแนวนอน"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"ความละเอียดของหน้าจอ"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"ความละเอียดสูง"</string>
-    <string name="screen_resolution_option_highest" msgid="7892101083236381555">"ความละเอียดสูงสุด"</string>
+    <string name="screen_resolution_option_highest" msgid="9134161136319625840">"ความละเอียดเต็ม"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <string name="screen_resolution_footer" msgid="2563830074752340045">"การเปลี่ยนความละเอียดอาจปิดแอปที่กำลังทำงานอยู่บางแอป"</string>
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"ความละเอียดแบบเต็มจะใช้แบตเตอรี่มากขึ้น การเปลี่ยนความละเอียดอาจทำให้บางแอปรีสตาร์ท"</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"เลือกแล้ว"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"สี"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"ธรรมชาติ"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"บูสต์"</string>
@@ -1445,17 +1516,15 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"ปรับแต่งโทรศัพท์"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"ลองใช้รูปแบบ วอลเปเปอร์ และอื่นๆ ที่มีหลากหลาย"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"โปรแกรมรักษาหน้าจอ"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"โปรแกรมรักษาหน้าจอ"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"ใช้โปรแกรมรักษาหน้าจอ"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"ขณะชาร์จหรือวางอยู่บนแท่นชาร์จ"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"แบบใดก็ได้"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"ขณะที่ชาร์จ"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"ขณะวางอยู่บนแท่นชาร์จ"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"ไม่เลย"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"ปิด"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"หากต้องการควบคุมสิ่งที่เกิดขึ้นขณะที่โทรศัพท์อยู่บนแท่นชาร์จและ/หรืออยู่ในโหมดสลีป ให้เปิดโปรแกรมรักษาหน้าจอ"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"เริ่มเมื่อใด"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"โปรแกรมรักษาหน้าจอในปัจจุบัน"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"การตั้งค่า"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"ปรับความสว่างอัตโนมัติ"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"ยกขึ้นเพื่อเวก"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"หน้าจอแอมเบียนท์"</string>
@@ -1613,9 +1682,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"เปลี่ยนชื่อ"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"ต่อเชื่อม"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"ยกเลิกการต่อเชื่อม"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"ฟอร์แมต"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"ฟอร์แมตการ์ด SD สำหรับเป็นพื้นที่เก็บข้อมูลแบบพกพา"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"ฟอร์แมตการ์ด"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"ฟอร์แมตเป็นแบบพกพา"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"ฟอร์แมตเป็นแบบภายใน"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"ฟอร์แมต"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"ย้ายข้อมูล"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"ไม่จำ"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"ตั้งค่า"</string>
@@ -1645,17 +1715,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"เปลี่ยนชื่อที่เก็บข้อมูล"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"นำ <xliff:g id="NAME_0">^1</xliff:g> ออกอย่างปลอดภัยแล้ว แต่ยังคงพร้อมใช้งานอยู่ \n\nหากต้องการใช้ <xliff:g id="NAME_1">^1</xliff:g> นี้ คุณจะต้องต่อเชื่อมก่อน"</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g> นี้ได้รับความเสียหาย \n\nหากต้องการใช้ <xliff:g id="NAME_1">^1</xliff:g> นี้ คุณจะต้องตั้งค่าก่อน"</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"หลังจากการฟอร์แมต คุณสามารถใช้ <xliff:g id="NAME_0">^1</xliff:g> นี้ในอุปกรณ์อื่นๆ ได้ \n\nข้อมูลทั้งหมดใน <xliff:g id="NAME_1">^1</xliff:g> นี้จะถูกลบ ขอแนะนำให้คุณสำรองข้อมูลไว้ก่อน \n\n"<b>"สำรองข้อมูลรูปภาพและสื่ออื่นๆ"</b>" \nย้ายไฟล์สื่อของคุณไปยังที่จัดเก็บข้อมูลสำรองบนอุปกรณ์นี้ หรือโอนไปยังคอมพิวเตอร์ที่ใช้สาย USB \n\n"<b>"สำรองข้อมูลแอป"</b>" \nแอปทั้งหมดที่จัดเก็บบน <xliff:g id="NAME_6">^1</xliff:g> นี้จะถูกถอนการติดตั้งและข้อมูลของแอปจะถูกลบ หากต้องการเก็บแอปเหล่านี้ไว้ ให้ย้ายไปยังที่จัดเก็บข้อมูลสำรองบนอุปกรณ์นี้"</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"คุณสามารถฟอร์แมตการ์ด SD นี้เพื่อจัดเก็บรูปภาพ วิดีโอ เพลง และอื่นๆ อีกทั้งยังเข้าถึงได้ในอุปกรณ์ต่างๆ \n\n"<b>"ข้อมูลทั้งหมดในการ์ด SD นี้จะถูกลบ"</b>" \n\n"<b>"ก่อนการฟอร์แมต"</b>" \n\n"<b>"สำรองข้อมูลรูปภาพและสื่ออื่นๆ"</b>" \nย้ายไฟล์สื่อไปยังพื้นที่เก็บข้อมูลอื่นในอุปกรณ์นี้ หรือโอนไปยังคอมพิวเตอร์โดยใช้สาย USB \n\n"<b>"สำรองข้อมูลแอป"</b>" \nระบบจะถอนการติดตั้งแอปทั้งหมดที่จัดเก็บใน<xliff:g id="NAME">^1</xliff:g> นี้และข้อมูลของแอปจะถูกลบ หากต้องการเก็บแอปเหล่านี้ไว้ ให้ย้ายไปยังพื้นที่เก็บข้อมูลอื่นในอุปกรณ์นี้"</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"เมื่อคุณนำ <xliff:g id="NAME_0">^1</xliff:g> นี้ออก แอปที่จัดเก็บไว้จะหยุดทำงาน และจะไม่พบไฟล์สื่อที่จัดเก็บไว้จนกว่าจะมีการใส่เข้าไปอีกครั้ง"</b>" \n\nโดย <xliff:g id="NAME_1">^1</xliff:g> นี้ได้รับการฟอร์แมตเพื่อให้ทำงานบนอุปกรณ์นี้เท่านั้น และจะไม่ทำงานบนอุปกรณ์อื่น"</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"หากต้องการใช้แอป รูปภาพ หรือข้อมูลที่มีใน <xliff:g id="NAME">^1</xliff:g> ให้เสียบอุปกรณ์อีกครั้ง \n\nหรือคุณสามารถเลือกไม่จำที่เก็บข้อมูลนี้หากอุปกรณ์ไม่พร้อมใช้งาน \n\nหากคุณเลือกไม่จำ ข้อมูลทั้งหมดที่มีในอุปกรณ์จะสูญหายตลอดไป \n\nคุณสามารถติดตั้งแอปอีกครั้งในภายหลัง แต่ข้อมูลที่จัดเก็บไว้ในอุปกรณ์นี้จะสูญหาย"</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"ไม่จำ <xliff:g id="NAME">^1</xliff:g> ใช่ไหม"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"แอป รูปภาพ และข้อมูลทั้งหมดที่เก็บไว้ใน <xliff:g id="NAME">^1</xliff:g> นี้จะหายไปอย่างถาวร"</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"ระบบรวมไฟล์สำหรับเรียกใช้ Android เวอร์ชัน <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"ผู้ใช้ในโหมดผู้มาเยือนจะฟอร์แมตการ์ด SD ไม่ได้"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"ตั้งค่า <xliff:g id="NAME">^1</xliff:g> ของคุณ"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"ใช้เป็นที่จัดเก็บข้อมูลแบบพกพา"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"สำหรับการย้ายรูปภาพและสื่ออื่นๆ ระหว่างอุปกรณ์"</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"ใช้เป็นที่จัดเก็บข้อมูลภายใน"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"สำหรับการจัดเก็บสิ่งต่างๆ ไว้บนอุปกรณ์นี้เท่านั้น รวมถึงแอปและรูปภาพ จำเป็นต้องมีการฟอร์แมตที่ป้องกันไม่ให้มีการทำงานร่วมกับอุปกรณ์อื่นๆ"</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"ฟอร์แมตการ์ด SD สำหรับเป็นพื้นที่เก็บข้อมูลแบบพกพา"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"บันทึกรูปภาพ วิดีโอ เพลง และอื่นๆ อีกทั้งยังเข้าถึงได้จากอุปกรณ์ต่างๆ"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"ฟอร์แมตการ์ด SD สำหรับเป็นที่จัดเก็บข้อมูลภายใน"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"บันทึกแอปและสื่อเพื่อใช้ในโทรศัพท์เครื่องนี้เท่านั้น"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"ฟอร์แมตเป็นที่จัดเก็บข้อมูลภายใน"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"จำเป็นต้องฟอร์แมต <xliff:g id="NAME_0">^1</xliff:g> เพื่อให้มีความปลอดภัย \n\nหลังการฟอร์แมต <xliff:g id="NAME_1">^1</xliff:g> จะทำงานบนอุปกรณ์นี้เท่านั้น \n\n"<b>"การฟอร์แมตจะลบข้อมูลทั้งหมดที่จัดเก็บไว้ใน <xliff:g id="NAME_2">^1</xliff:g> ขณะนี้"</b>" ขอแนะนำให้คุณสำรองข้อมูลเพื่อหลีกเลี่ยงการสูญหายของข้อมูล"</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"ฟอร์แมตเป็นที่จัดเก็บข้อมูลพกพา"</string>
@@ -1672,9 +1743,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"ย้าย"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"กำลังย้ายข้อมูล…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"ระหว่างการย้าย: \n• ห้ามนำ<xliff:g id="NAME">^1</xliff:g>ออก\n• แอปบางแอปอาจทำงานไม่ถูกต้อง \n• ชาร์จอุปกรณ์ไว้เสมอ"</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"<xliff:g id="NAME">^1</xliff:g> พร้อมใช้งานแล้ว"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"<xliff:g id="NAME">^1</xliff:g> ของคุณพร้อมใช้งานกับรูปภาพและสื่ออื่นๆ แล้ว"</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"<xliff:g id="NAME">^1</xliff:g> ใหม่ของคุณกำลังทำงาน \n\nหากต้องการย้ายรูปภาพ ไฟล์ และข้อมูลแอปมายังอุปกรณ์นี้ ให้ไปที่การตั้งค่า &amp;gt ที่จัดเก็บข้อมูล"</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"ฟอร์แมต<xliff:g id="NAME">^1</xliff:g> แล้ว"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"คุณเริ่มใช้<xliff:g id="NAME">^1</xliff:g> ได้แล้ว"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"คุณเริ่มใช้<xliff:g id="NAME">^1</xliff:g> ได้แล้ว"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"ย้าย <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"การย้าย <xliff:g id="APP">^1</xliff:g> และข้อมูลในแอปไปยัง <xliff:g id="NAME_0">^2</xliff:g> จะใช้เวลาไม่นาน คุณจะไม่สามารถใช้แอปดังกล่าวได้จนกว่าการย้ายจะเสร็จสมบูรณ์ \n\nห้ามนำ <xliff:g id="NAME_1">^2</xliff:g> ออกระหว่างการย้าย"</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"คุณต้องปลดล็อกผู้ใช้ <xliff:g id="APP">^1</xliff:g> จึงจะย้ายข้อมูลได้"</string>
@@ -1683,19 +1754,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"ยกเลิกการย้าย"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"ดูเหมือนว่า <xliff:g id="NAME_0">^1</xliff:g> นี้ทำงานช้า \n\nคุณสามารถดำเนินการต่อ แต่แอปที่ย้ายไปยังตำแหน่งนี้อาจทำงานไม่สม่ำเสมอและการโอนข้อมูลอาจใช้เวลานาน\n\nโปรดพิจารณาการใช้ <xliff:g id="NAME_1">^1</xliff:g> ที่เร็วขึ้นเพื่อเพิ่มประสิทธิภาพ"</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"คุณจะใช้ <xliff:g id="NAME">^1</xliff:g> นี้อย่างไร"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"ใช้เป็นอีกที่เก็บข้อมูลแท็บเล็ต"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"สำหรับแอป ไฟล์ และสื่อในแท็บเล็ตนี้เท่านั้น"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"พื้นที่เก็บข้อมูลในแท็บเล็ต"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"ใช้เป็นอีกที่เก็บข้อมูลโทรศัพท์"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"สำหรับแอป ไฟล์ และสื่อในโทรศัพท์นี้เท่านั้น"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"พื้นที่เก็บข้อมูลโทรศัพท์"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"ฟอร์แมตการ์ด SD สำหรับเป็นที่จัดเก็บข้อมูลภายใน"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"จัดเก็บแอปและสื่อเพื่อใช้ในแท็บเล็ตเครื่องนี้เท่านั้น &lt;a href=https://support.google.com/android/answer/12153449&gt;ดูข้อมูลเพิ่มเติมเกี่ยวกับการตั้งค่าการ์ด SD&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"ฟอร์แมต"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"ฟอร์แมตการ์ด SD สำหรับเป็นที่จัดเก็บข้อมูลภายใน"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"จัดเก็บแอปและสื่อเพื่อใช้ในโทรศัพท์เครื่องนี้เท่านั้น &lt;a href=https://support.google.com/android/answer/12153449&gt;ดูข้อมูลเพิ่มเติมเกี่ยวกับการตั้งค่าการ์ด SD&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"ฟอร์แมต"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"หรือ"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"ใช้เป็นที่เก็บข้อมูลแบบพกพา"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"สำหรับการโอนไฟล์และสื่อระหว่างอุปกรณ์"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"ที่เก็บข้อมูลแบบพกพา"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"ฟอร์แมตการ์ด SD สำหรับเป็นพื้นที่เก็บข้อมูลแบบพกพา"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"จัดเก็บรูปภาพ วิดีโอ เพลง และอื่นๆ อีกทั้งยังเข้าถึงได้จากอุปกรณ์ต่างๆ &lt;a href=https://support.google.com/android/answer/12153449&gt;ดูข้อมูลเพิ่มเติมเกี่ยวกับการตั้งค่าการ์ด SD&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"ฟอร์แมต"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"ตั้งค่าทีหลัง"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"ฟอร์แมต<xliff:g id="NAME">^1</xliff:g> นี้ไหม"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"ต้องฟอร์แมต<xliff:g id="NAME_0">^1</xliff:g> นี้เพื่อจัดเก็บแอป ไฟล์ และสื่อ \n\nการฟอร์แมตจะลบเนื้อหาที่มีอยู่ใน<xliff:g id="NAME_1">^2</xliff:g> โปรดสำรองข้อมูลไว้ในอุปกรณ์หรือ<xliff:g id="NAME_2">^3</xliff:g> อื่นเพื่อป้องกันเนื้อหาสูญหาย"</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"ต้องฟอร์แมต<xliff:g id="NAME_0">^1</xliff:g> นี้เพื่อจัดเก็บรูปภาพ วิดีโอ เพลง และอื่นๆ \n\nการฟอร์แมตจะลบเนื้อหาที่มีอยู่ใน<xliff:g id="NAME_1">^2</xliff:g> โปรดสำรองข้อมูลไว้ในอุปกรณ์หรือ<xliff:g id="NAME_2">^3</xliff:g> อื่นเพื่อป้องกันเนื้อหาสูญหาย"</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"ฟอร์แมต <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"ย้ายเนื้อหาไปที่ <xliff:g id="NAME">^1</xliff:g> ไหม"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"คุณย้ายไฟล์ สื่อ และแอปบางรายการไปที่ <xliff:g id="NAME">^1</xliff:g> นี้ได้ \n\nวิธีนี้จะช่วยเพิ่มพื้นที่เก็บข้อมูลในแท็บเล็ตได้ <xliff:g id="SIZE">^2</xliff:g> และน่าจะใช้เวลาประมาณ <xliff:g id="DURATION">^3</xliff:g>"</string>
@@ -1712,9 +1784,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"คุณยังคงใช้ <xliff:g id="NAME_0">^1</xliff:g> นี้ได้ แต่อาจทำงานช้า \n\nแอปที่เก็บไว้ใน <xliff:g id="NAME_1">^2</xliff:g> นี้อาจทำงานไม่ถูกต้อง และการโอนเนื้อหาอาจใช้เวลานาน \n\nลองใช้ <xliff:g id="NAME_2">^3</xliff:g> ที่เร็วขึ้น หรือใช้ <xliff:g id="NAME_3">^4</xliff:g> นี้เป็นที่เก็บข้อมูลแบบพกพาแทน"</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"เริ่มต้นใหม่"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"ต่อไป"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"คุณสามารถย้ายเนื้อหาไปยัง <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"หากต้องการย้ายเนื้อหาไปยัง <xliff:g id="NAME">^1</xliff:g> ให้ไปที่"<b>"การตั้งค่า &gt; พื้นที่เก็บข้อมูล"</b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"ระบบย้ายเนื้อหาไปที่ <xliff:g id="NAME_0">^1</xliff:g> แล้ว \n\nหากต้องการจัดการ <xliff:g id="NAME_1">^2</xliff:g> นี้ ให้ไปที่"<b>"การตั้งค่า &gt; พื้นที่เก็บข้อมูล"</b></string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"คุณเริ่มใช้<xliff:g id="NAME">^1</xliff:g> ได้แล้ว"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"คุณเริ่มใช้<xliff:g id="NAME">^1</xliff:g> ได้แล้ว"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"คุณเริ่มใช้<xliff:g id="NAME">^1</xliff:g> ได้แล้ว"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"สถานะแบตเตอรี่"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"ระดับแบตเตอรี่"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
@@ -1945,6 +2017,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"ตั้ง PIN"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"ตั้ง PIN โปรไฟล์งาน"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"ตั้งรูปแบบ"</string>
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"ตั้งค่ารูปแบบสำหรับปลดล็อกอุปกรณ์เพื่อให้ปลอดภัยยิ่งขึ้น"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"ตั้งรูปแบบโปรไฟล์งาน"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"ตั้งรหัสผ่านเพื่อใช้ลายนิ้วมือ"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"ตั้งรูปแบบเพื่อใช้ลายนิ้วมือ"</string>
@@ -2098,7 +2171,7 @@
     <string name="default_emergency_app" msgid="1929974800666613803">"แอปฉุกเฉิน"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"รีเซ็ตค่ากำหนดแอป"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"รีเซ็ตค่ากำหนดแอปไหม"</string>
-    <string name="reset_app_preferences_desc" msgid="6509978724602405805">"คำสั่งนี้จะรีเซ็ตค่ากำหนดทั้งหมดของรายการต่อไปนี้\n\n"<li>"แอปที่ปิดใช้"</li>\n<li>"การแจ้งเตือนของแอปที่ปิดใช้"</li>\n<li>"แอปพลิเคชันเริ่มต้นสำหรับการทำงานต่างๆ"</li>\n<li>"การจำกัดอินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลังของแอป"</li>\n<li>"การจำกัดสิทธิ์ใดๆ"</li>\n\n"ทั้งนี้ข้อมูลแอปจะไม่หายไป"</string>
+    <string name="reset_app_preferences_desc" msgid="8550782670650158299">"การดำเนินการนี้จะรีเซ็ตค่ากำหนดทั้งหมดสำหรับ\n\n"<li>"แอปที่ปิดใช้"</li>\n<li>"การแจ้งเตือนแอปที่ปิดใช้"</li>\n<li>"แอปพลิเคชันเริ่มต้นสำหรับการทำงานต่างๆ"</li>\n<li>"ข้อจำกัดอินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลังสำหรับแอป"</li>\n<li>"ข้อจำกัดสิทธิ์ใดๆ"</li>\n<li>"การตั้งค่าการใช้งานแบตเตอรี่"</li>\n\n"ข้อมูลแอปทั้งหมดของคุณจะยังคงอยู่เหมือนเดิม"</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"รีเซ็ตแอป"</string>
     <string name="manage_space_text" msgid="9013414693633572277">"จัดการพื้นที่"</string>
     <string name="filter" msgid="9039576690686251462">"ตัวกรอง"</string>
@@ -2353,7 +2426,8 @@
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"รีเซ็ตการตั้งค่า"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"รีเซ็ตการตั้งค่าขนาดที่แสดงและข้อความแล้ว"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"รีเซ็ตขนาดการแสดงผลและข้อความหรือไม่"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"ค่ากำหนดของขนาดการแสดงผลและข้อความของคุณจะเปลี่ยนกลับไปเป็นการตั้งค่าเดิมของโทรศัพท์"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"ค่ากำหนดของขนาดการแสดงผลและข้อความของคุณจะเปลี่ยนกลับไปเป็นการตั้งค่าเดิมของโทรศัพท์"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"ค่ากำหนดของขนาดการแสดงผลและข้อความจะเปลี่ยนกลับไปเป็นการตั้งค่าเดิมของแท็บเล็ต"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"รีเซ็ต"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"เสาร์อาทิตย์นี้มีแผนจะทำอะไรมั้ย"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"ไปทะเล อยากไปด้วยมั้ย"</string>
@@ -2736,7 +2810,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"การใช้งานแบตเตอรี่"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"ดูการใช้งานใน 24 ชั่วโมงที่ผ่านมา"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"ดูการใช้งานตั้งแต่การชาร์จเต็มล่าสุด"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"การใช้งานแบตเตอรี่"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"การใช้งานแบตเตอรี่ของแอป"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"ใช้รายละเอียด"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"ปรับการใช้พลังงาน"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"แพ็คเก็จที่รวมมาด้วย"</string>
@@ -2755,8 +2829,11 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"อาจมีการจำกัดฟีเจอร์บางอย่าง"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"การใช้งานแบตเตอรี่สูงกว่าปกติ"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"ดูแอปที่มีการใช้งานแบตเตอรี่สูงสุด"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"จำกัดการชาร์จชั่วคราว"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"เพื่อถนอมแบตเตอรี่ ดูข้อมูลเพิ่มเติม"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"การชาร์จหยุดชั่วคราว"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"ปกป้องแบตเตอรี่เพื่อยืดอายุการใช้งานแบตเตอรี่"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
+    <skip />
+    <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"ดูข้อมูลเพิ่มเติมเกี่ยวกับการชาร์จหยุดชั่วคราว"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"ชาร์จต่อ"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"ในบางสภาวะ เช่น อุณหภูมิสูงและชาร์จเป็นเวลานาน การชาร์จอาจจำกัดอยู่ที่ <xliff:g id="PERCENT">%1$s</xliff:g> เพื่อรักษาประสิทธิภาพของแบตเตอรี่\n\nโทรศัพท์จะกลับมาชาร์จตามปกติโดยอัตโนมัติเมื่อไม่ได้อยู่ในสภาวะดังกล่าวแล้ว"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"ในบางสภาวะ เช่น อุณหภูมิสูงและชาร์จเป็นเวลานาน การชาร์จอาจจำกัดอยู่ที่ <xliff:g id="PERCENT">%1$s</xliff:g> เพื่อรักษาประสิทธิภาพของแบตเตอรี่\n\nแท็บเล็ตจะกลับมาชาร์จตามปกติโดยอัตโนมัติเมื่อไม่ได้อยู่ในสภาวะดังกล่าวแล้ว"</string>
@@ -2792,6 +2869,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"แอปนี้จะใช้แบตเตอรี่ในเบื้องหลังได้ แบตเตอรี่จึงอาจจะหมดเร็วกว่าที่คาดไว้"</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"นำออก"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"ยกเลิก"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"ชาร์จจนเต็ม"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"แอปกำลังใช้แบตเตอรี่ตามปกติ หากแอปใช้แบตเตอรี่มากเกินไป โทรศัพท์จะแนะนำการดำเนินการที่คุณทำได้\n\nคุณเปิดโหมดประหยัดแบตเตอรี่ได้ทุกเมื่อหากแบตเตอรี่เหลือน้อย"</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"แอปกำลังใช้แบตเตอรี่ตามปกติ หากแอปใช้แบตเตอรี่มากเกินไป แท็บเล็ตจะแนะนำการดำเนินการที่คุณทำได้\n\nคุณเปิดโหมดประหยัดแบตเตอรี่ได้ทุกเมื่อหากแบตเตอรี่เหลือน้อย"</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"แอปกำลังใช้แบตเตอรี่ตามปกติ หากแอปใช้แบตเตอรี่มากเกินไป อุปกรณ์จะแนะนำการดำเนินการที่คุณทำได้\n\nคุณเปิดโหมดประหยัดแบตเตอรี่ได้ทุกเมื่อหากแบตเตอรี่เหลือน้อย"</string>
@@ -2933,6 +3011,7 @@
     <string name="battery_not_usage" msgid="1472275761547230196">"ไม่มีการใช้งานตั้งแต่ชาร์จเต็มครั้งล่าสุด"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"ไม่มีการใช้งานในช่วง 24 ชม. ที่ผ่านมา"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
+    <string name="battery_usage_other_users" msgid="9002643295562500693">"ผู้ใช้รายอื่นๆ"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"ค่าประมาณแบตเตอรี่ที่เหลืออิงตามการใช้งานอุปกรณ์ของคุณ"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"เวลาที่เหลือโดยประมาณ"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"จนกว่าจะชาร์จเต็ม"</string>
@@ -2968,8 +3047,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"ที่แบตเตอรี่ <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"เปอร์เซ็นต์แบตเตอรี่"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"แสดงเปอร์เซ็นต์แบตเตอรี่ในแถบสถานะ"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"ระดับแบตเตอรี่นับตั้งแต่ชาร์จจนเต็มครั้งล่าสุด"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"ระดับแบตเตอรี่ใน 24 ชม. ที่ผ่านมา"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"การใช้งานแอปนับตั้งแต่ชาร์จจนเต็มครั้งล่าสุด"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"การใช้งานแอปใน 24 ชม. ที่ผ่านมา"</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"การใช้งานระบบนับตั้งแต่ชาร์จจนเต็มครั้งล่าสุด"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"การใช้งานระบบใน 24 ชม. ที่ผ่านมา"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"การใช้งานระบบเมื่อ <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"การใช้งานแอปเมื่อ <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -2977,9 +3059,13 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"การทำงานในเบื้องหลัง: ไม่ถึง 1 นาที"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"รวม: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"การทำงานในเบื้องหลัง: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"ข้อมูลการใช้งานแบตเตอรี่เป็นการระบุโดยประมาณ และไม่วัดปริมาณการใช้งานเมื่อโทรศัพท์ชาร์จอยู่"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"ข้อมูลการใช้งานแบตเตอรี่จะแสดงหลังจากที่คุณใช้โทรศัพท์ไป 2-3 ชั่วโมง"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"ข้อมูลการใช้งานแบตเตอรี่เป็นการระบุโดยประมาณ และไม่วัดปริมาณการใช้งานเมื่อโทรศัพท์ชาร์จอยู่"</string>
+    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"ข้อมูลการใช้งานแบตเตอรี่เป็นการระบุโดยประมาณ และไม่วัดปริมาณการใช้งานเมื่อแท็บเล็ตชาร์จอยู่"</string>
+    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"ข้อมูลการใช้งานแบตเตอรี่เป็นการระบุโดยประมาณ และไม่วัดปริมาณการใช้งานเมื่ออุปกรณ์ชาร์จอยู่"</string>
+    <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"ข้อมูลการใช้งานแบตเตอรี่จะแสดงใน 2-3 ชั่วโมงเมื่อชาร์จเต็มแล้ว"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"แผนภูมิการใช้งานแบตเตอรี่"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"แผนภูมิการใช้งานแบตเตอรี่รายวัน"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"แผนภูมิการใช้งานแบตเตอรี่รายชั่วโมง"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"สถิติเกี่ยวกับกระบวนงาน"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"สถิติเชิงลึกเกี่ยวกับกระบวนงานที่ทำงานอยู่"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"การใช้หน่วยความจำ"</string>
@@ -3022,6 +3108,9 @@
     <string name="voice_interactor_preference_summary" msgid="3942881638813452880">"คำที่นิยมและการโต้ตอบเต็มรูปแบบ"</string>
     <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"เขียนตามคำบอกแบบง่ายๆ"</string>
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"บริการป้อนข้อมูลด้วยเสียงนี้สามารถคอยตรวจสอบเสียงอยู่ตลอดเวลาและควบคุมแอปพลิเคชันที่สามารถใช้เสียงในนามของคุณได้ บริการนี้มาจากแอปพลิเคชัน <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> เปิดใช้การทำงานของบริการนี้ไหม"</string>
+    <string name="on_device_recognition_settings" msgid="6503160369314598069">"การตั้งค่าการจดจำในอุปกรณ์"</string>
+    <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"การจดจำในอุปกรณ์"</string>
+    <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"การจดจำคำพูดในอุปกรณ์"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"เครื่องมือที่ต้องการ"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"การตั้งค่าเครื่องมือ"</string>
     <string name="tts_sliders_title" msgid="6901146958648426181">"ความเร็วและระดับเสียงสูงต่ำของเสียงพูด"</string>
@@ -3415,6 +3504,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"ลบ"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"ระบบจะลบแอปและข้อมูลทั้งหมดในเซสชันนี้"</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"นำออก"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"ผู้ใช้ชั่วคราว (คุณ)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"ผู้ใช้"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"ผู้ใช้รายอื่นๆ"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"ลบกิจกรรมของผู้ใช้ชั่วคราว"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"ลบแอปและข้อมูลทั้งหมดของผู้ใช้ชั่วคราวเมื่อออกจากโหมดผู้ใช้ชั่วคราว"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"ลบกิจกรรมของผู้ใช้ชั่วคราวไหม"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"ระบบจะลบแอปและข้อมูลจากเซสชันผู้ใช้ชั่วคราวนี้ตอนนี้เลย และต่อไปนี้จะลบกิจกรรมทั้งหมดของผู้ใช้ชั่วคราวทุกครั้งที่คุณออกจากโหมดผู้ใช้ชั่วคราว"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"เปิดการโทร"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"เปิดการโทรและ SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"ลบผู้ใช้"</string>
@@ -3526,6 +3622,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"ให้แอปพลิเคชันใช้ข้อมูลตำแหน่งของคุณ"</string>
     <string name="wizard_back" msgid="8257697435061870191">"ย้อนกลับ"</string>
     <string name="wizard_next" msgid="3884832431439072471">"ถัดไป"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"เปลี่ยนเป็นแบบพกพา"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"ฟอร์แมตด้วยวิธีอื่น"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"เสร็จสิ้น"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <!-- no translation found for sim_setup_wizard_title (7030639256610746768) -->
@@ -4011,11 +4109,11 @@
     <string name="notification_switch_label" msgid="8029371325967501557">"การแจ้งเตือนทั้งหมดของ \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"การแจ้งเตือนทั้งหมดของ <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"การแจ้งเตือนแบบปรับอัตโนมัติ"</string>
-    <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
+    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
       <item quantity="other">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_1">%,d</xliff:g> ครั้งต่อวัน</item>
       <item quantity="one">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_0">%d</xliff:g> ครั้งต่อวัน</item>
     </plurals>
-    <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
+    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
       <item quantity="other">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_1">%,d</xliff:g> ครั้งต่อสัปดาห์</item>
       <item quantity="one">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_0">%d</xliff:g> ครั้งต่อสัปดาห์</item>
     </plurals>
@@ -4827,6 +4925,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"เปิดเลย"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"ปิดเลย"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"ไม่ได้ใช้การเพิ่มประสิทธิภาพแบตเตอรี่"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"การใช้งานแบตเตอรี่ของแอป"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"ตั้งค่าการใช้งานแบตเตอรี่สำหรับแอป"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"ไม่จำกัด"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"เพิ่มประสิทธิภาพแล้ว"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"ถูกจำกัด"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"หากอุปกรณ์ล็อกอยู่ จะป้องกันไม่ให้มีการพิมพ์คำตอบหรือข้อความอื่นๆ ในการแจ้งเตือน"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"โปรแกรมตรวจตัวสะกดเริ่มต้น"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"เลือกโปรแกรมตรวจตัวสะกด"</string>
@@ -5259,7 +5362,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"ไม่ต้องทำอะไร"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"สั่น"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"ปิดเสียง"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"หากต้องการเปิดใช้งาน ก่อนอื่นให้เปลี่ยน \"กดปุ่มเปิด/ปิดค้างไว้\" เป็นเมนูเปิด/ปิด"</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"หากต้องการเปิดใช้ ก่อนอื่นให้เปลี่ยน \"กดปุ่มเปิด/ปิดค้างไว้\" เป็นเมนูเปิด/ปิด"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"รายละเอียดเครือข่าย"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"แอปในโทรศัพท์จะเห็นชื่อของอุปกรณ์ และคนอื่นก็อาจเห็นเช่นกันหากคุณเชื่อมต่อกับอุปกรณ์บลูทูธหรือเครือข่าย Wi-Fi หรือตั้งค่าฮอตสปอต Wi-Fi"</string>
     <string name="devices_title" msgid="649715719278562515">"อุปกรณ์"</string>
@@ -5549,15 +5652,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"ระบบควบคุมอุปกรณ์"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"บัตรและบัตรผ่าน"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"บัตรและบัตรผ่าน"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"กดปุ่มเปิด/ปิดค้างไว้"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"กดค้างเพื่อเปิดใช้ Assistant"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"กดค้างเพื่อแสดงเมนูเปิด/ปิด"</string>
-    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"การกดค้างปิดใช้อยู่"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"กดปุ่มเปิด/ปิดค้างไว้"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"กดปุ่มเปิด/ปิดค้างไว้เพื่อเข้าถึง"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"เมนูเปิด/ปิด"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"ผู้ช่วยดิจิทัล"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"เข้าถึงผู้ช่วยดิจิทัล"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"เข้าถึงเมนูเปิด/ปิด"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"หากต้องการใช้ ให้ตั้งค่าการล็อกหน้าจอก่อน"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"กดค้างไว้เพื่อเปิดใช้งาน Assistant"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"เรียกให้ Assistant ทำงานโดยกดปุ่มเปิด/ปิดค้างไว้"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"เมนูเปิด/ปิดและกรณีฉุกเฉิน\nกดปุ่มเปิด/ปิดและปุ่มเพิ่มระดับเสียงพร้อมกัน"</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"ป้องกันการส่งเสียง\nมีทางลัดให้ใช้ในเมนูระดับเสียง"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"เมนูเปิด/ปิด\nกดปุ่มเปิด/ปิดและปุ่มเพิ่มระดับเสียงพร้อมกัน"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"ป้องกันการส่งเสียง\nกดปุ่มปรับระดับเสียงเพื่อใช้ทางลัด"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"ระยะเวลาการกดค้าง"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"ปรับความไวโดยเลือกระยะเวลาการกดปุ่มเปิด/ปิดค้างไว้"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"ไม่นาน"</string>
@@ -5593,6 +5696,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"สื่อ"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"ปักหมุดโปรแกรมเล่นสื่อ"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"โปรแกรมเล่นสื่อจะยังเปิดอยู่ในการตั้งค่าด่วนเพื่อกลับมาเล่นต่อได้โดยเร็ว"</string>
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"แสดงสื่อในหน้าจอล็อก"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"โปรแกรมเล่นสื่อจะยังเปิดอยู่ในหน้าจอล็อกเพื่อกลับมาเล่นต่อได้โดยเร็ว"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"แสดงคำแนะนำสื่อ"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"อิงตามกิจกรรมของคุณ"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"ซ่อนโปรแกรมเล่น"</string>
@@ -5775,7 +5880,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"แสดงตัวอย่าง"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"เลือกโปรแกรมรักษาหน้าจอ"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"แสดงข้อมูลเพิ่มเติม"</string>
-    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"แสดงเวลา วันที่ สภาพอากาศ คุณภาพอากาศ และรายละเอียดของ Cast ในโปรแกรมรักษาหน้าจอ"</string>
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"แสดงสิ่งต่างๆ เช่น เวลา สภาพอากาศ หรือข้อมูลอื่นๆ บนโปรแกรมรักษาหน้าจอ"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"การตั้งค่าเพิ่มเติม"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"เลือกโปรแกรมรักษาหน้าจอ"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"เลือกสิ่งที่คุณจะเห็นในหน้าจอเมื่อวางแท็บเล็ตบนแท่นชาร์จ อุปกรณ์อาจใช้พลังงานมากขึ้นเมื่อใช้โปรแกรมรักษาหน้าจอ"</string>

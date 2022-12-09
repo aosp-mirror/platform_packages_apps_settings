@@ -64,6 +64,13 @@
             android:fragment="com.android.settings.language.DefaultVoiceInputPicker" />
 
         <Preference
+            android:key="on_device_recognition_settings"
+            android:title="@string/on_device_recognition_settings_title"
+            android:summary="@string/on_device_recognition_settings_summary"
+            settings:controller=
+                "com.android.settings.language.OnDeviceRecognitionPreferenceController" />
+
+        <Preference
             android:key="tts_settings_summary"
             android:title="@string/tts_settings_title"
             android:fragment="com.android.settings.tts.TextToSpeechSettings"

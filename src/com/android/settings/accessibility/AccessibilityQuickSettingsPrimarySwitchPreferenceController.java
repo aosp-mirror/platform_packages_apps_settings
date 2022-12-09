@@ -102,6 +102,11 @@ public abstract class AccessibilityQuickSettingsPrimarySwitchPreferenceControlle
     }
 
     private void showQuickSettingsTooltipIfNeeded() {
+        if (mPreference == null) {
+            // Returns if no preference found by slice highlight menu.
+            return;
+        }
+
         final ComponentName tileComponentName = getTileComponentName();
         if (tileComponentName == null) {
             // Returns if no tile service assigned.

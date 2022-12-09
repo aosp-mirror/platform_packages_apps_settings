@@ -31,13 +31,13 @@ import androidx.slice.SliceProvider;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
-import com.android.settings.fuelgauge.BatteryUsageStatsLoader;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.EarlyWarningTip;
 import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
 import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;
+import com.android.settings.fuelgauge.batteryusage.BatteryUsageStatsLoader;
 import com.android.settings.slices.SliceBackgroundWorker;
 
 import org.junit.After;
