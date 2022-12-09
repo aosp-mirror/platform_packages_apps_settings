@@ -1243,14 +1243,11 @@ public final class DataProcessor {
 
         final BatteryConsumer deviceConsumer = batteryUsageStats.getAggregateBatteryConsumer(
                 BatteryUsageStats.AGGREGATE_BATTERY_CONSUMER_SCOPE_DEVICE);
-        final BatteryConsumer appsConsumer = batteryUsageStats.getAggregateBatteryConsumer(
-                BatteryUsageStats.AGGREGATE_BATTERY_CONSUMER_SCOPE_ALL_APPS);
 
         for (int componentId = 0; componentId < BatteryConsumer.POWER_COMPONENT_COUNT;
                 componentId++) {
             results.add(new BatteryEntry(context, componentId,
                     deviceConsumer.getConsumedPower(componentId),
-                    appsConsumer.getConsumedPower(componentId),
                     deviceConsumer.getUsageDurationMillis(componentId)));
         }
 
@@ -1260,8 +1257,7 @@ public final class DataProcessor {
                 componentId++) {
             results.add(new BatteryEntry(context, componentId,
                     deviceConsumer.getCustomPowerComponentName(componentId),
-                    deviceConsumer.getConsumedPowerForCustomComponent(componentId),
-                    appsConsumer.getConsumedPowerForCustomComponent(componentId)));
+                    deviceConsumer.getConsumedPowerForCustomComponent(componentId)));
         }
 
         final List<UserBatteryConsumer> userBatteryConsumers =
