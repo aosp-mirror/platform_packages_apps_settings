@@ -2827,18 +2827,12 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"பேட்டரியை அதிகமாக உபயோகிக்கும் ஆப்ஸைக் காண்க"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"சார்ஜ் ஏறுவது இடைநிறுத்தப்பட்டுள்ளது"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"பேட்டரி ஆயுளை நீட்டிக்க பேட்டரியைப் பாதுகாக்கிறது"</string>
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_title (7257251934903787366) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_summary (428474483479026813) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_title (8843454404807737776) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_summary (5582869291068635429) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_title (1679449361090557201) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_summary (5107293805054133144) -->
-    <skip />
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="7257251934903787366">"பேட்டரியைப் பாதுகாக்க <xliff:g id="PERCENT">%1$s</xliff:g> சார்ஜ் செய்யப்படுகிறது"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="428474483479026813">"உங்கள் டேப்லெட் டாக்கில் உள்ளபோது பேட்டரியின் ஆயுட்காலத்தை நீட்டிக்க <xliff:g id="PERCENT">%1$s</xliff:g> இல் சார்ஜிங் இடைநிறுத்தப்படும்"</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="8843454404807737776">"பேட்டரி ஆயுளைப் பாதுகாக்க சார்ஜிங் இடைநிறுத்தப்பட்டது"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="5582869291068635429">"உங்கள் டேப்லெட் டாக்கில் உள்ளபோது பேட்டரியின் ஆயுட்காலத்தை நீட்டிக்க <xliff:g id="PERCENT">%1$s</xliff:g> இல் சார்ஜிங் இடைநிறுத்தப்பட்டது"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"முழுமையாகச் சார்ஜ் செய்தல்"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="5107293805054133144">"உங்கள் பேட்டரியைப் பாதுகாக்க அடுத்த முறை டேப்லெட் டாக்கில் உள்ளபோது சார்ஜிங் <xliff:g id="PERCENT">%1$s</xliff:g> இல் இடைநிறுத்தப்படும்"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"சார்ஜிங் இடைநிறுத்தப்பட்டது குறித்து மேலும் அறிக"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"சார்ஜ் செய்வதை மீண்டும் தொடங்கு"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"அதிக வெப்பநிலை மற்றும் நீண்ட நேரம் சார்ஜ் ஆவது போன்ற குறிப்பிட்ட சில சூழல்களில் பேட்டரியின் ஆயுளைப் பாதுகாக்க <xliff:g id="PERCENT">%1$s</xliff:g> அளவிற்கு மட்டுமே உங்கள் மொபைல் சார்ஜ் ஆகக்கூடும்.\n\n அந்தச் சூழல்கள் முடிந்த பின் உங்கள் மொபைல் தானாக எப்போதும் போல் சார்ஜ் ஆகும்."</string>
@@ -5676,9 +5670,12 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"பயன்படுத்த வேண்டுமெனில் \"சாதனக் கட்டுப்பாடுகளைக் காட்டு\" என்பதை முதலில் இயக்கவும்"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"இயக்கத்தில் இருக்கும்போது இரட்டை-வரிக் கடிகாரத்தைக் காட்டும்"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"இரட்டை-வரிக் கடிகாரம்"</string>
-    <!-- no translation found for lockscreen_quick_affordances_title (435869403114245620) -->
+    <!-- no translation found for lockscreen_quick_affordances_title (8615741551327565793) -->
     <skip />
-    <!-- no translation found for lockscreen_quick_affordances_summary (4225396036524703997) -->
+    <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
+      <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
+      <item quantity="one"><xliff:g id="FIRST_0">%1$s</xliff:g></item>
+    </plurals>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
