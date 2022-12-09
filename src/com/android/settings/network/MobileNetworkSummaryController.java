@@ -37,7 +37,7 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.AddPreference;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -58,7 +58,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private UserManager mUserManager;
-    private AddPreference mPreference;
+    private RestrictedPreference mPreference;
 
     private MobileNetworkRepository mMobileNetworkRepository;
     private List<SubscriptionInfoEntity> mSubInfoEntityList;
@@ -89,6 +89,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
         mUserManager = context.getSystemService(UserManager.class);
         mLifecycleOwner = lifecycleOwner;
         mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
+        mIsAirplaneModeOn = mMobileNetworkRepository.isAirplaneModeOn();
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -152,7 +153,6 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
     private void initPreference() {
         refreshSummary(mPreference);
         mPreference.setOnPreferenceClickListener(null);
-        mPreference.setOnAddClickListener(null);
         mPreference.setFragment(null);
         mPreference.setEnabled(!mIsAirplaneModeOn);
     }
@@ -179,33 +179,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
             return;
         }
 
-        // We have one or more existing subscriptions, so we want the plus button if eSIM is
-        // supported.
-        if (MobileNetworkUtils.showEuiccSettingsDetecting(mContext)) {
-            mPreference.setAddWidgetEnabled(!mIsAirplaneModeOn);
-            mPreference.setOnAddClickListener(p -> {
-                logPreferenceClick(p);
-                startAddSimFlow();
-            });
-        }
-
-        if (mSubInfoEntityList.size() == 1) {
-            mPreference.setOnPreferenceClickListener((Preference pref) -> {
-                logPreferenceClick(pref);
-                SubscriptionInfoEntity info = mSubInfoEntityList.get(0);
-                if (info.isEmbedded || mUiccInfoEntityList.get(0).isActive
-                        || mMobileNetworkInfoEntityList.get(0).showToggleForPhysicalSim) {
-                    MobileNetworkUtils.launchMobileNetworkSettings(mContext, info);
-                    return true;
-                }
-
-                SubscriptionUtil.startToggleSubscriptionDialogActivity(
-                        mContext, Integer.parseInt(info.subId), true);
-                return true;
-            });
-        } else {
-            mPreference.setFragment(MobileNetworkListFragment.class.getCanonicalName());
-        }
+        mPreference.setFragment(MobileNetworkListFragment.class.getCanonicalName());
     }
 
     @Override
@@ -221,8 +195,10 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     @Override
     public void onAirplaneModeChanged(boolean airplaneModeEnabled) {
-        mIsAirplaneModeOn = airplaneModeEnabled;
-        update();
+        if (mIsAirplaneModeOn != airplaneModeEnabled) {
+            mIsAirplaneModeOn = airplaneModeEnabled;
+            update();
+        }
     }
 
     @Override
@@ -239,14 +215,19 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     @Override
     public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
-        mUiccInfoEntityList = uiccInfoEntityList;
-        update();
+        if (DataServiceUtils.shouldUpdateEntityList(mUiccInfoEntityList, uiccInfoEntityList)) {
+            mUiccInfoEntityList = uiccInfoEntityList;
+            update();
+        }
     }
 
     @Override
     public void onAllMobileNetworkInfoChanged(
             List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
-        mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
-        update();
+        if (DataServiceUtils.shouldUpdateEntityList(mMobileNetworkInfoEntityList,
+                mobileNetworkInfoEntityList)) {
+            mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
+            update();
+        }
     }
 }
