@@ -375,8 +375,8 @@ public class BatteryInfo {
         boolean first = true;
         final BatteryStatsHistoryIterator iterator1 =
                 mBatteryUsageStats.iterateBatteryStatsHistory();
-        final HistoryItem rec = new HistoryItem();
-        while (iterator1.next(rec)) {
+        HistoryItem rec;
+        while ((rec = iterator1.next()) != null) {
             pos++;
             if (first) {
                 first = false;
@@ -420,7 +420,7 @@ public class BatteryInfo {
         if (endWalltime > startWalltime) {
             final BatteryStatsHistoryIterator iterator2 =
                     mBatteryUsageStats.iterateBatteryStatsHistory();
-            while (iterator2.next(rec) && i < N) {
+            while ((rec = iterator2.next()) != null && i < N) {
                 if (rec.isDeltaData()) {
                     curWalltime += rec.time - lastRealtime;
                     lastRealtime = rec.time;
