@@ -31,6 +31,7 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.Utils;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -158,5 +159,29 @@ public class SimStatusPreferenceController extends BasePreferenceController {
     @VisibleForTesting
     Preference createNewPreference(Context context) {
         return new Preference(context);
+    }
+
+    @Override
+    public void updateDynamicRawDataToIndex(List<SearchIndexableRaw> rawData) {
+        int simSlot = getSimSlotIndex();
+        SubscriptionInfo subInfo = getSubscriptionInfo(simSlot);
+        if (subInfo == null) {
+            /**
+             * Only add to search when SIM is active
+             * (presented in SIM Slot Status as availavle.)
+             */
+            return;
+        }
+
+        /* Have different search keywork when comes to eSIM */
+        int keywordId = subInfo.isEmbedded() ?
+                R.string.keywords_sim_status_esim : R.string.keywords_sim_status;
+
+        SearchIndexableRaw data = new SearchIndexableRaw(mContext);
+        data.key = getPreferenceKey();
+        data.title = getPreferenceTitle(simSlot);
+        data.screenTitle = mContext.getString(R.string.about_settings);
+        data.keywords = mContext.getString(keywordId).toString();
+        rawData.add(data);
     }
 }
