@@ -19,6 +19,7 @@ package com.android.settings.bluetooth;
 import static com.android.settings.bluetooth.BluetoothDeviceDetailsFragment.FEATURE_HEARING_DEVICE_CONTROLS_ORDER;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 
 import androidx.preference.Preference;
@@ -27,16 +28,22 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityHearingAidsFragment;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import com.google.common.annotations.VisibleForTesting;
 
 /**
  * The controller of the hearing device controls in the bluetooth detail settings.
  */
-public class BluetoothDetailsHearingDeviceControlsController extends BluetoothDetailsController {
+public class BluetoothDetailsHearingDeviceControlsController extends BluetoothDetailsController
+        implements Preference.OnPreferenceClickListener {
 
     private static final String KEY_FEATURE_CONTROLS_GROUP = "feature_controls_group";
-    private static final String KEY_HEARING_DEVICE_CONTROLS = "hearing_device_controls";
+    @VisibleForTesting
+    static final String KEY_HEARING_DEVICE_CONTROLS = "hearing_device_controls";
 
     public BluetoothDetailsHearingDeviceControlsController(Context context,
             PreferenceFragmentCompat fragment, CachedBluetoothDevice device, Lifecycle lifecycle) {
@@ -70,12 +77,30 @@ public class BluetoothDetailsHearingDeviceControlsController extends BluetoothDe
         return KEY_FEATURE_CONTROLS_GROUP;
     }
 
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        if (TextUtils.equals(preference.getKey(), KEY_HEARING_DEVICE_CONTROLS)) {
+            launchAccessibilityHearingDeviceSettings();
+            return true;
+        }
+        return false;
+    }
+
     private Preference createHearingDeviceControlsPreference(Context context) {
         final Preference preference = new Preference(context);
         preference.setKey(KEY_HEARING_DEVICE_CONTROLS);
         preference.setTitle(context.getString(R.string.bluetooth_device_controls_title));
         preference.setSummary(context.getString(R.string.bluetooth_device_controls_summary));
+        preference.setOnPreferenceClickListener(this);
 
         return preference;
+    }
+
+    private void launchAccessibilityHearingDeviceSettings() {
+        new SubSettingLauncher(mContext)
+                .setDestination(AccessibilityHearingAidsFragment.class.getName())
+                .setSourceMetricsCategory(
+                        ((BluetoothDeviceDetailsFragment) mFragment).getMetricsCategory())
+                .launch();
     }
 }
