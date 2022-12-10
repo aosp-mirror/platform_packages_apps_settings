@@ -96,7 +96,7 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
      * @return true if Settings cannot modify the config due to lockDown.
      */
     public static boolean isNetworkLockedDown(Context context, WifiConfiguration config) {
-        if (config == null) {
+        if (context == null || config == null) {
             return false;
         }
 
