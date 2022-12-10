@@ -2827,18 +2827,12 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看耗电量较高的应用"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"充电已暂停"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"为了延长电池寿命，目前正在保护电池"</string>
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_title (7257251934903787366) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_summary (428474483479026813) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_title (8843454404807737776) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_summary (5582869291068635429) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_title (1679449361090557201) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_summary (5107293805054133144) -->
-    <skip />
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="7257251934903787366">"为保护电池，充电量上限为 <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="428474483479026813">"当平板电脑插入基座时，电量达到 <xliff:g id="PERCENT">%1$s</xliff:g> 将会暂停充电，从而延长电池寿命"</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="8843454404807737776">"为保护电池，系统已暂停充电"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="5582869291068635429">"当平板电脑插入基座时，电量达到 <xliff:g id="PERCENT">%1$s</xliff:g> 就会暂停充电，从而延长电池寿命"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"充满电"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="5107293805054133144">"为保护电池，下次平板电脑插入基座时，电量达到 <xliff:g id="PERCENT">%1$s</xliff:g> 将会暂停充电"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"详细了解充电暂停的原因"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"继续充电"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"在某些情况下（例如高温和长时间充电时），手机可能会限制充电量，充电到 <xliff:g id="PERCENT">%1$s</xliff:g> 时便暂停充电。这样有助于使电池保持良好状态。\n\n这类情况结束时，手机会自动恢复正常充电。"</string>
@@ -4165,7 +4159,7 @@
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 助手服务"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"没有任何已安装的应用请求以 VR 助手服务的形式运行。"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"允许<xliff:g id="SERVICE">%1$s</xliff:g>访问 VR 服务吗？"</string>
-    <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"只有当您在虚拟实境模式下使用应用时，才能运行<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g>。"</string>
+    <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"只有当您在虚拟现实模式下使用应用时，才能运行<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g>。"</string>
     <string name="display_vr_pref_title" msgid="4850474436291113569">"当设备处于 VR 模式时"</string>
     <string name="display_vr_pref_low_persistence" msgid="7039841277157739871">"减少模糊（建议）"</string>
     <string name="display_vr_pref_off" msgid="4008841566387432721">"减少闪烁"</string>
@@ -4722,7 +4716,7 @@
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"允许应用管理媒体"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"如果允许，此应用可以直接修改或删除通过其他应用创建的媒体文件，无需事先征得您的同意。应用必须有访问文件和媒体的权限。"</string>
     <string name="keywords_media_management_apps" msgid="7499959607583088690">"媒体, 文件, 管理, 管理器, 编辑, 编辑器, 应用, 程序, Media, File, Management, Manager, Manage, Edit, Editor, App, Application, Program"</string>
-    <string name="keywords_vr_listener" msgid="902737490270081131">"vr 虚拟实境 监听器 立体 助手服务"</string>
+    <string name="keywords_vr_listener" msgid="902737490270081131">"vr 虚拟现实 监听器 立体 助手服务"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"显示在其他应用的上层"</string>
     <string name="system_alert_window_summary" msgid="1435856750594492891">"<xliff:g id="COUNT_0">%1$d</xliff:g> 个（共 <xliff:g id="COUNT_1">%2$d</xliff:g> 个）应用可以显示在其他应用的上层"</string>
     <string name="filter_overlay_apps" msgid="2483998217116789206">"具有该权限的应用"</string>
@@ -5676,7 +5670,8 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"需要先开启“显示设备控制器”才能使用"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"显示双行时钟（若可用）"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"双行时钟"</string>
-    <string name="lockscreen_quick_affordances_title" msgid="435869403114245620">"按钮"</string>
+    <!-- no translation found for lockscreen_quick_affordances_title (8615741551327565793) -->
+    <skip />
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>、<xliff:g id="SECOND">%2$s</xliff:g></item>
       <item quantity="one"><xliff:g id="FIRST_0">%1$s</xliff:g></item>
