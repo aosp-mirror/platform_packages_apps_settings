@@ -125,7 +125,7 @@ public class BluetoothWiFiResetPreferenceController extends BasePreferenceContro
             final AtomicReference<Exception> exceptionDuringReset =
                     new AtomicReference<Exception>();
             try {
-                resetOperation();
+                resetOperation().run();
             } catch (Exception exception) {
                 exceptionDuringReset.set(exception);
             }
@@ -144,13 +144,28 @@ public class BluetoothWiFiResetPreferenceController extends BasePreferenceContro
     }
 
     @VisibleForTesting
-    protected void resetOperation() throws Exception {
-        new ResetNetworkRequest(
+    protected Runnable resetOperation() throws Exception {
+        if (SubscriptionUtil.isSimHardwareVisible(mContext)) {
+            return new ResetNetworkRequest(
+                    ResetNetworkRequest.RESET_WIFI_MANAGER |
+                    ResetNetworkRequest.RESET_WIFI_P2P_MANAGER |
+                    ResetNetworkRequest.RESET_BLUETOOTH_MANAGER)
+                .toResetNetworkOperationBuilder(mContext, Looper.getMainLooper())
+                .build();
+        }
+
+        /**
+         * For device without SIMs visible to the user
+         */
+        return new ResetNetworkRequest(
+                ResetNetworkRequest.RESET_CONNECTIVITY_MANAGER |
+                ResetNetworkRequest.RESET_VPN_MANAGER |
                 ResetNetworkRequest.RESET_WIFI_MANAGER |
                 ResetNetworkRequest.RESET_WIFI_P2P_MANAGER |
-                ResetNetworkRequest.RESET_BLUETOOTH_MANAGER
-        ).toResetNetworkOperationBuilder(mContext, Looper.getMainLooper())
-                .build().run();
+                ResetNetworkRequest.RESET_BLUETOOTH_MANAGER)
+            .toResetNetworkOperationBuilder(mContext, Looper.getMainLooper())
+            .resetTelephonyAndNetworkPolicyManager(ResetNetworkRequest.ALL_SUBSCRIPTION_ID)
+            .build();
     }
 
     @VisibleForTesting

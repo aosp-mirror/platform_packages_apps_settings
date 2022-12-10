@@ -34,8 +34,6 @@ import androidx.loader.content.Loader;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.fuelgauge.BatteryBroadcastReceiver;
-import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -61,7 +59,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             new BatteryHistoryLoaderCallbacks();
 
     private boolean mIsChartDataLoaded = false;
-    private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private BatteryChartPreferenceController mBatteryChartPreferenceController;
 
     private final ContentObserver mBatteryObserver =
@@ -78,9 +75,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        final Context context = getContext();
-        refreshFeatureFlag(context);
-        mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_CHART);
+        mHistPref = findPreference(KEY_BATTERY_CHART);
         setBatteryChartPreferenceController();
     }
 
@@ -130,7 +125,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        refreshFeatureFlag(context);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mBatteryChartPreferenceController =
                 new BatteryChartPreferenceController(
@@ -173,13 +167,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             mIsChartDataLoaded = true;
             restartLoader(LoaderIndex.BATTERY_HISTORY_LOADER, bundle,
                     mBatteryHistoryLoaderCallbacks);
-        }
-    }
-
-    private void refreshFeatureFlag(Context context) {
-        if (mPowerUsageFeatureProvider == null) {
-            mPowerUsageFeatureProvider = FeatureFactory.getFactory(context)
-                    .getPowerUsageFeatureProvider(context);
         }
     }
 
