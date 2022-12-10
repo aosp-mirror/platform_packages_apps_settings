@@ -26,23 +26,14 @@ public class BatteryDiffData {
     private final List<BatteryDiffEntry> mAppEntries;
     private final List<BatteryDiffEntry> mSystemEntries;
 
-    /** Constructor for the diff entries which already have totalConsumePower value. */
+    /** Constructor for the diff entries. */
     public BatteryDiffData(
             @NonNull List<BatteryDiffEntry> appDiffEntries,
             @NonNull List<BatteryDiffEntry> systemDiffEntries) {
         mAppEntries = appDiffEntries;
         mSystemEntries = systemDiffEntries;
-        sortEntries();
-    }
-
-    /** Constructor for the diff entries which have not set totalConsumePower value. */
-    public BatteryDiffData(
-            @NonNull List<BatteryDiffEntry> appDiffEntries,
-            @NonNull List<BatteryDiffEntry> systemDiffEntries,
-            final double totalConsumePower) {
-        mAppEntries = appDiffEntries;
-        mSystemEntries = systemDiffEntries;
-        setTotalConsumePowerForAllEntries(totalConsumePower);
+        setTotalConsumePowerForAllEntries(mAppEntries);
+        setTotalConsumePowerForAllEntries(mSystemEntries);
         sortEntries();
     }
 
@@ -55,9 +46,14 @@ public class BatteryDiffData {
     }
 
     // Sets total consume power for each entry.
-    private void setTotalConsumePowerForAllEntries(final double totalConsumePower) {
-        mAppEntries.forEach(diffEntry -> diffEntry.setTotalConsumePower(totalConsumePower));
-        mSystemEntries.forEach(diffEntry -> diffEntry.setTotalConsumePower(totalConsumePower));
+    private void setTotalConsumePowerForAllEntries(List<BatteryDiffEntry> batteryDiffEntries) {
+        double totalConsumePower = 0.0;
+        for (BatteryDiffEntry batteryDiffEntry : batteryDiffEntries) {
+            totalConsumePower += batteryDiffEntry.mConsumePower;
+        }
+        for (BatteryDiffEntry batteryDiffEntry : batteryDiffEntries) {
+            batteryDiffEntry.setTotalConsumePower(totalConsumePower);
+        }
     }
 
     // Sorts entries based on consumed percentage.

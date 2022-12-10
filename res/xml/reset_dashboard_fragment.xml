@@ -26,6 +26,7 @@
         android:title="@string/reset_network_title"
         settings:userRestriction="no_network_reset"
         settings:useAdminDisabledSummary="true"
+        settings:isPreferenceVisible="@bool/config_show_sim_info"
         android:fragment="com.android.settings.ResetNetwork" />
 
     <!-- Bluetooth and WiFi reset -->

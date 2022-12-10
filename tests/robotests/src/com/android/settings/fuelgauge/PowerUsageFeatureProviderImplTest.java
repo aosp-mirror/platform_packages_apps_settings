@@ -63,6 +63,11 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
+    public void testIsBatteryUsageEnabled_returnFalse() {
+        assertThat(mPowerFeatureProvider.isBatteryUsageEnabled(mContext)).isTrue();
+    }
+
+    @Test
     public void testIsTypeSystem_uidRoot_returnTrue() {
         assertThat(mPowerFeatureProvider.isTypeSystem(Process.ROOT_UID, null)).isTrue();
     }

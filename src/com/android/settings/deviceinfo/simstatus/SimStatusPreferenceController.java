@@ -31,6 +31,7 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.Utils;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +73,9 @@ public class SimStatusPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
+        if (getSimSlotIndex() == SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
         boolean isAvailable = SubscriptionUtil.isSimHardwareVisible(mContext) &&
                 mContext.getSystemService(UserManager.class).isAdminUser() &&
                 !Utils.isWifiOnly(mContext);
@@ -81,7 +85,7 @@ public class SimStatusPreferenceController extends BasePreferenceController {
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        if (!SubscriptionUtil.isSimHardwareVisible(mContext)) {
+        if ((!SubscriptionUtil.isSimHardwareVisible(mContext)) || (mSlotSimStatus == null)) {
             return;
         }
         String basePreferenceKey = mSlotSimStatus.getPreferenceKey(
@@ -133,21 +137,51 @@ public class SimStatusPreferenceController extends BasePreferenceController {
                 R.string.sim_status_title);
     }
 
-    private CharSequence getCarrierName(int simSlot) {
+    private SubscriptionInfo getSubscriptionInfo(int simSlot) {
         final List<SubscriptionInfo> subscriptionInfoList =
                 mSubscriptionManager.getActiveSubscriptionInfoList();
         if (subscriptionInfoList != null) {
             for (SubscriptionInfo info : subscriptionInfoList) {
                 if (info.getSimSlotIndex() == simSlot) {
-                    return info.getCarrierName();
+                    return info;
                 }
             }
         }
-        return mContext.getText(R.string.device_info_not_available);
+        return null;
+    }
+
+    private CharSequence getCarrierName(int simSlot) {
+        SubscriptionInfo subInfo = getSubscriptionInfo(simSlot);
+        return (subInfo != null) ? subInfo.getCarrierName() :
+                mContext.getText(R.string.device_info_not_available);
     }
 
     @VisibleForTesting
     Preference createNewPreference(Context context) {
         return new Preference(context);
+    }
+
+    @Override
+    public void updateDynamicRawDataToIndex(List<SearchIndexableRaw> rawData) {
+        int simSlot = getSimSlotIndex();
+        SubscriptionInfo subInfo = getSubscriptionInfo(simSlot);
+        if (subInfo == null) {
+            /**
+             * Only add to search when SIM is active
+             * (presented in SIM Slot Status as availavle.)
+             */
+            return;
+        }
+
+        /* Have different search keywork when comes to eSIM */
+        int keywordId = subInfo.isEmbedded() ?
+                R.string.keywords_sim_status_esim : R.string.keywords_sim_status;
+
+        SearchIndexableRaw data = new SearchIndexableRaw(mContext);
+        data.key = getPreferenceKey();
+        data.title = getPreferenceTitle(simSlot);
+        data.screenTitle = mContext.getString(R.string.about_settings);
+        data.keywords = mContext.getString(keywordId).toString();
+        rawData.add(data);
     }
 }
