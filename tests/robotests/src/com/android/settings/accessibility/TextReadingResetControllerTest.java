@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -69,5 +71,21 @@ public class TextReadingResetControllerTest {
         mResetController.displayPreference(mPreferenceScreen);
 
         verify(mResetPreference).setOnResetClickListener(any(View.OnClickListener.class));
+    }
+
+    @Test
+    public void setVisibleAsFalse_preferenceInvisible() {
+        mResetController.setVisible(false);
+        mResetController.displayPreference(mPreferenceScreen);
+
+        assertThat(mResetPreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void setVisibleAsTrue_preferenceVisible() {
+        mResetController.setVisible(true);
+        mResetController.displayPreference(mPreferenceScreen);
+
+        assertThat(mResetPreference.isVisible()).isTrue();
     }
 }
