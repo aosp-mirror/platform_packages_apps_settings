@@ -16,6 +16,8 @@
 
 package com.android.settings.deviceinfo.simstatus;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -26,6 +28,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.UserManager;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
@@ -37,6 +40,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +66,10 @@ public class SimStatusPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
     @Mock
+    private SubscriptionManager mSubscriptionManager;
+    @Mock
+    private SubscriptionInfo mSubscriptionInfo;
+    @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
     private UserManager mUserManager;
@@ -85,6 +93,8 @@ public class SimStatusPreferenceControllerTest {
         when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
 
         mockService(Context.TELEPHONY_SERVICE, TelephonyManager.class, mTelephonyManager);
+        mockService(Context.TELEPHONY_SUBSCRIPTION_SERVICE, SubscriptionManager.class,
+                mSubscriptionManager);
 
         mockService(Context.USER_SERVICE, UserManager.class, mUserManager);
         final List<Preference> preferencePool = new ArrayList<Preference>();
@@ -95,6 +105,10 @@ public class SimStatusPreferenceControllerTest {
             @Override
             public Preference createNewPreference(Context context) {
                 return preferencePool.remove(0);
+            }
+            @Override
+            public int getSimSlotIndex() {
+                return 0;
             }
         });
         doReturn(BasePreferenceController.AVAILABLE).when(mController).getAvailabilityStatus();
@@ -161,6 +175,47 @@ public class SimStatusPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mFirstSimPreference);
 
         verify(mFragment).getChildFragmentManager();
+    }
+
+    @Test
+    public void updateDynamicRawDataToIndex_notAddToSearch_emptySimSlot() {
+        doReturn(null).when(mSubscriptionManager).getActiveSubscriptionInfoList();
+        SlotSimStatus slotSimStatus = new SlotSimStatus(mContext);
+        List<SearchIndexableRaw> rawData = new ArrayList<SearchIndexableRaw>();
+
+        mController.init(mFragment, slotSimStatus);
+        mController.updateDynamicRawDataToIndex(rawData);
+
+        assertThat(rawData.size()).isEqualTo(0);
+    }
+
+    @Test
+    public void updateDynamicRawDataToIndex_addToSearch_simInSimSlot() {
+        doReturn(false).when(mSubscriptionInfo).isEmbedded();
+        doReturn(List.of(mSubscriptionInfo)).when(mSubscriptionManager)
+                .getActiveSubscriptionInfoList();
+        SlotSimStatus slotSimStatus = new SlotSimStatus(mContext);
+        List<SearchIndexableRaw> rawData = new ArrayList<SearchIndexableRaw>();
+
+        mController.init(mFragment, slotSimStatus);
+        mController.updateDynamicRawDataToIndex(rawData);
+
+        assertThat(rawData.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void updateDynamicRawDataToIndex_addEsimToSearch_esimInSimSlot() {
+        doReturn(true).when(mSubscriptionInfo).isEmbedded();
+        doReturn(List.of(mSubscriptionInfo)).when(mSubscriptionManager)
+                .getActiveSubscriptionInfoList();
+        SlotSimStatus slotSimStatus = new SlotSimStatus(mContext);
+        List<SearchIndexableRaw> rawData = new ArrayList<SearchIndexableRaw>();
+
+        mController.init(mFragment, slotSimStatus);
+        mController.updateDynamicRawDataToIndex(rawData);
+
+        assertThat(rawData.size()).isEqualTo(1);
+        assertThat(rawData.get(0).keywords.contains("eid")).isTrue();
     }
 
     private <T> void mockService(String serviceName, Class<T> serviceClass, T service) {

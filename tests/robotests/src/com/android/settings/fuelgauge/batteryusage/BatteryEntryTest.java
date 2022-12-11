@@ -104,11 +104,19 @@ public class BatteryEntryTest {
     }
 
     private BatteryEntry createAggregateBatteryEntry(int powerComponentId) {
-        return new BatteryEntry(mMockContext, powerComponentId, 200, 100, 1000);
+        return new BatteryEntry(
+                mMockContext,
+                powerComponentId,
+                /* devicePowerMah= */ 200,
+                /* usageDurationMs= */ 1000);
     }
 
     private BatteryEntry createCustomAggregateBatteryEntry(int powerComponentId) {
-        return new BatteryEntry(mMockContext, powerComponentId, "CUSTOM", 200, 100);
+        return new BatteryEntry(
+                mMockContext,
+                powerComponentId,
+                /* powerComponentName= */ "CUSTOM",
+                /* devicePowerMah= */ 200);
     }
 
     private BatteryEntry createUserBatteryConsumer(int userId) {
@@ -159,7 +167,9 @@ public class BatteryEntryTest {
     @Test
     public void batteryEntryForAOD_containCorrectInfo() {
         final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application,
-                BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY, 200, 100, 1000);
+                BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY,
+                /* devicePowerMah= */ 200,
+                /* usageDurationMs= */ 1000);
 
         assertThat(entry.mIconId).isEqualTo(R.drawable.ic_settings_aod);
         assertThat(entry.mName).isEqualTo("Ambient display");
@@ -168,7 +178,9 @@ public class BatteryEntryTest {
     @Test
     public void batteryEntryForCustomComponent_containCorrectInfo() {
         final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application,
-                BatteryConsumer.FIRST_CUSTOM_POWER_COMPONENT_ID + 42, "ABC", 200, 100);
+                BatteryConsumer.FIRST_CUSTOM_POWER_COMPONENT_ID + 42,
+                /* powerComponentName= */ "ABC",
+                /* devicePowerMah= */ 200);
 
         assertThat(entry.mIconId).isEqualTo(R.drawable.ic_power_system);
         assertThat(entry.mName).isEqualTo("ABC");
@@ -188,7 +200,9 @@ public class BatteryEntryTest {
     @Test
     public void getTimeInForegroundMs_aggregateBatteryConsumer() {
         final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application,
-                BatteryConsumer.POWER_COMPONENT_BLUETOOTH, 10, 20, 100);
+                BatteryConsumer.POWER_COMPONENT_BLUETOOTH,
+                /* devicePowerMah= */ 10,
+                /* usageDurationMs= */ 100);
 
         assertThat(entry.getTimeInForegroundMs()).isEqualTo(100L);
     }
@@ -207,7 +221,9 @@ public class BatteryEntryTest {
     @Test
     public void getTimeInBackgroundMs_systemConsumer() {
         final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application,
-                BatteryConsumer.POWER_COMPONENT_BLUETOOTH, 100, 200, 1000);
+                BatteryConsumer.POWER_COMPONENT_BLUETOOTH,
+                /* devicePowerMah= */ 100,
+                /* usageDurationMs= */ 1000);
 
         assertThat(entry.getTimeInBackgroundMs()).isEqualTo(0);
     }

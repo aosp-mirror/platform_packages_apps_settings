@@ -2274,6 +2274,12 @@
     <string name="screensaver_settings_summary_dock">While docked</string>
     <!-- Display settings screen, summary fragment for screen saver options, activated never [CHAR LIMIT=35] -->
     <string name="screensaver_settings_summary_never">Never</string>
+    <!-- Display settings screen, summary for screen saver options, screen saver is turned on [CHAR LIMIT=50] -->
+    <string name="screensaver_settings_summary_on">
+        On / <xliff:g id="screen_saver" example="Art gallery">%1$s</xliff:g>
+    </string>
+    <!-- Display settings screen, summary for screen saver options, screen saver is turned off [CHAR LIMIT=20] -->
+    <string name="screensaver_settings_summary_off">Off</string>
     <!-- Dream settings screen, action label, when to dream [CHAR LIMIT=20] -->
     <string name="screensaver_settings_when_to_dream">When to start</string>
     <!-- [CHAR LIMIT=40] Display settings screen, setting option name to change whether the device wakes up when a lift gesture is detected. -->
@@ -6530,7 +6536,11 @@
     <string name="keywords_face_unlock">face, unlock, auth, sign in</string>
     <string name="keywords_biometric_unlock">face, unlock, auth, sign in, fingerprint, biometric</string>
     <string name="keywords_imei_info">imei, meid, min, prl version, imei sv</string>
-    <string name="keywords_sim_status">network, mobile network state, service state, signal strength, mobile network type, roaming, iccid, eid</string>
+    <string name="keywords_sim_status">network, mobile network state, service state, signal strength, mobile network type, roaming</string>
+    <string name="keywords_sim_status_esim">network, mobile network state, service state, signal strength, mobile network type, roaming, eid</string>
+    <string name="keywords_sim_status_iccid">network, mobile network state, service state, signal strength, mobile network type, roaming, iccid</string>
+    <string name="keywords_sim_status_iccid_esim">network, mobile network state, service state, signal strength, mobile network type, roaming, iccid, eid</string>
+    <string name="keywords_esim_eid">eid</string>
     <string name="keywords_model_and_hardware">serial number, hardware version</string>
     <string name="keywords_android_version">android security patch level, baseband version, kernel version</string>
     <!-- Search keywords for dark mode settings [CHAR LIMIT=NONE] -->
@@ -8129,7 +8139,8 @@
     <string name="memtag_reboot_no">Not now</string>
     <!-- [CHAR LIMIT=NONE] Label for Learn More link. -->
     <string name="memtag_learn_more">Learn more about Advanced memory protection.</string>
-    <!-- [CHAR LIMIT=NONE] Search keywords for Advanced memory protection option. -->
+    <!-- [CHAR LIMIT=NONE] Search keywords for Advanced memory protection option.
+         This is not translatable because it's the technical name for the technology. -->
     <string name="keywords_memtag" translatable="false">MTE, Memory Tagging Extension</string>
 
     <!-- Opening string on the dialog that prompts the user to confirm that they really want to delete their existing work profile. The administration app icon and name appear after the final colon. [CHAR LIMIT=NONE] -->

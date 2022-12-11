@@ -66,6 +66,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public boolean isBatteryUsageEnabled(Context context) {
+        return true;
+    }
+
+    @Override
     public boolean isLocationSettingEnabled(String[] packages) {
         return false;
     }

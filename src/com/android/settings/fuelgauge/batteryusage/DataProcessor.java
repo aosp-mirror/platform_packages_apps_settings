@@ -372,7 +372,7 @@ public final class DataProcessor {
 
     @VisibleForTesting
     static long[] findNearestTimestamp(final List<Long> timestamps, final long target) {
-        final long[] results = new long[] {Long.MIN_VALUE, Long.MAX_VALUE};
+        final long[] results = new long[]{Long.MIN_VALUE, Long.MAX_VALUE};
         // Searches the nearest lower and upper timestamp value.
         timestamps.forEach(timestamp -> {
             if (timestamp <= target && timestamp > results[0]) {
@@ -398,7 +398,7 @@ public final class DataProcessor {
     }
 
     /**
-     *  Returns whether currentSlot will be used in daily chart.
+     * Returns whether currentSlot will be used in daily chart.
      */
     @VisibleForTesting
     static boolean isForDailyChart(final boolean isStartOrEnd, final long currentSlot) {
@@ -468,13 +468,11 @@ public final class DataProcessor {
                 userHandle != null ? userHandle.getIdentifier() : Integer.MIN_VALUE;
         final List<BatteryDiffEntry> appEntries = new ArrayList<>();
         final List<BatteryDiffEntry> systemEntries = new ArrayList<>();
-        double totalConsumePower = 0f;
         double consumePowerFromOtherUsers = 0f;
 
         for (BatteryHistEntry entry : batteryHistEntryList) {
             final boolean isFromOtherUsers = isConsumedFromOtherUsers(
                     currentUserId, workProfileUserId, entry);
-            totalConsumePower += entry.mConsumePower;
             if (isFromOtherUsers) {
                 consumePowerFromOtherUsers += entry.mConsumePower;
             } else {
@@ -504,7 +502,7 @@ public final class DataProcessor {
             return null;
         }
 
-        return new BatteryDiffData(appEntries, systemEntries, totalConsumePower);
+        return new BatteryDiffData(appEntries, systemEntries);
     }
 
     /**
@@ -588,9 +586,7 @@ public final class DataProcessor {
                             || (entry.getConsumedPower() == 0
                             && (foregroundMs != 0 || backgroundMs != 0));
                 })
-                .map(entry -> ConvertUtils.convertToBatteryHistEntry(
-                                entry,
-                                batteryUsageStats))
+                .map(entry -> ConvertUtils.convertToBatteryHistEntry(entry, batteryUsageStats))
                 .collect(Collectors.toList());
     }
 
@@ -949,7 +945,6 @@ public final class DataProcessor {
         allBatteryHistEntryKeys.addAll(nextBatteryHistMap.keySet());
         allBatteryHistEntryKeys.addAll(nextTwoBatteryHistMap.keySet());
 
-        double totalConsumePower = 0.0;
         double consumePowerFromOtherUsers = 0f;
         // Calculates all packages diff usage data in a specific time slot.
         for (String key : allBatteryHistEntryKeys) {
@@ -1028,7 +1023,6 @@ public final class DataProcessor {
                 backgroundUsageConsumePower = backgroundUsageConsumePower * ratio;
                 cachedUsageConsumePower = cachedUsageConsumePower * ratio;
             }
-            totalConsumePower += consumePower;
 
             final boolean isFromOtherUsers = isConsumedFromOtherUsers(
                     currentUserId, workProfileUserId, selectedBatteryEntry);
@@ -1061,9 +1055,7 @@ public final class DataProcessor {
             return null;
         }
 
-        final BatteryDiffData resultDiffData =
-                new BatteryDiffData(appEntries, systemEntries, totalConsumePower);
-        return resultDiffData;
+        return new BatteryDiffData(appEntries, systemEntries);
     }
 
     private static boolean isConsumedFromOtherUsers(
@@ -1078,7 +1070,6 @@ public final class DataProcessor {
     @Nullable
     private static BatteryDiffData getAccumulatedUsageDiffData(
             final Collection<BatteryDiffData> diffEntryListData) {
-        double totalConsumePower = 0f;
         final Map<String, BatteryDiffEntry> diffEntryMap = new HashMap<>();
         final List<BatteryDiffEntry> appEntries = new ArrayList<>();
         final List<BatteryDiffEntry> systemEntries = new ArrayList<>();
@@ -1089,18 +1080,14 @@ public final class DataProcessor {
             }
             for (BatteryDiffEntry entry : diffEntryList.getAppDiffEntryList()) {
                 computeUsageDiffDataPerEntry(entry, diffEntryMap);
-                totalConsumePower += entry.mConsumePower;
             }
             for (BatteryDiffEntry entry : diffEntryList.getSystemDiffEntryList()) {
                 computeUsageDiffDataPerEntry(entry, diffEntryMap);
-                totalConsumePower += entry.mConsumePower;
             }
         }
 
         final Collection<BatteryDiffEntry> diffEntryList = diffEntryMap.values();
         for (BatteryDiffEntry entry : diffEntryList) {
-            // Sets total daily consume power data into all BatteryDiffEntry.
-            entry.setTotalConsumePower(totalConsumePower);
             if (entry.isSystemEntry()) {
                 systemEntries.add(entry);
             } else {
@@ -1243,14 +1230,11 @@ public final class DataProcessor {
 
         final BatteryConsumer deviceConsumer = batteryUsageStats.getAggregateBatteryConsumer(
                 BatteryUsageStats.AGGREGATE_BATTERY_CONSUMER_SCOPE_DEVICE);
-        final BatteryConsumer appsConsumer = batteryUsageStats.getAggregateBatteryConsumer(
-                BatteryUsageStats.AGGREGATE_BATTERY_CONSUMER_SCOPE_ALL_APPS);
 
         for (int componentId = 0; componentId < BatteryConsumer.POWER_COMPONENT_COUNT;
                 componentId++) {
             results.add(new BatteryEntry(context, componentId,
                     deviceConsumer.getConsumedPower(componentId),
-                    appsConsumer.getConsumedPower(componentId),
                     deviceConsumer.getUsageDurationMillis(componentId)));
         }
 
@@ -1260,8 +1244,7 @@ public final class DataProcessor {
                 componentId++) {
             results.add(new BatteryEntry(context, componentId,
                     deviceConsumer.getCustomPowerComponentName(componentId),
-                    deviceConsumer.getConsumedPowerForCustomComponent(componentId),
-                    appsConsumer.getConsumedPowerForCustomComponent(componentId)));
+                    deviceConsumer.getConsumedPowerForCustomComponent(componentId)));
         }
 
         final List<UserBatteryConsumer> userBatteryConsumers =
