@@ -36,6 +36,8 @@ import com.android.settingslib.widget.AppPreference;
  */
 public class PowerGaugePreference extends AppPreference {
 
+    private static final double PERCENTAGE_TO_SHOW_THRESHOLD = 1f;
+
     private BatteryEntry mInfo;
     private BatteryDiffEntry mBatteryDiffEntry;
     private CharSequence mContentDescription;
@@ -75,7 +77,8 @@ public class PowerGaugePreference extends AppPreference {
 
     /** Sets the percent of total. */
     public void setPercent(double percentOfTotal) {
-        mProgress = Utils.formatPercentage(percentOfTotal, true);
+        mProgress = percentOfTotal < PERCENTAGE_TO_SHOW_THRESHOLD
+                ? "-" : Utils.formatPercentage(percentOfTotal, true);
         notifyChanged();
     }
 
