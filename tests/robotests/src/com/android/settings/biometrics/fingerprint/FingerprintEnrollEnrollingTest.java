@@ -18,7 +18,6 @@ package com.android.settings.biometrics.fingerprint;
 
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_POWER_BUTTON;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_OPTICAL;
-import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UNKNOWN;
 
 import static com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling.KEY_STATE_PREVIOUS_ROTATION;
 import static com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling.SFPS_STAGE_NO_ANIMATION;
@@ -31,7 +30,6 @@ import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -52,9 +50,6 @@ import android.os.CancellationSignal;
 import android.os.Vibrator;
 import android.view.Display;
 import android.view.Surface;
-import android.widget.TextView;
-
-import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -103,42 +98,6 @@ public class FingerprintEnrollEnrollingTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest();
-    }
-
-    @Test
-    public void fingerprintEnrollHelp_shouldShowHelpText() {
-        initializeActivityFor(TYPE_UNKNOWN);
-        TestFingerprintEnrollSidecar sidecar = new TestFingerprintEnrollSidecar();
-        Resources resources = mock(Resources.class);
-        doReturn(resources).when(mContext).getResources();
-        when(resources.getIntArray(R.array.fingerprint_acquired_ignore_list))
-                .thenReturn(new int[]{3});
-
-        sidecar.setListener(mActivity);
-        sidecar.onAttach(mActivity);
-        sidecar.mEnrollmentCallback.onEnrollmentHelp(5,
-                "Help message should be displayed.");
-
-        TextView errorText = mActivity.findViewById(R.id.error_text);
-        assertThat(errorText.getText()).isEqualTo("Help message should be displayed.");
-    }
-
-    @Test
-    public void fingerprintEnrollHelp_shouldNotShowHelpText() {
-        initializeActivityFor(TYPE_UNKNOWN);
-        TestFingerprintEnrollSidecar sidecar = new TestFingerprintEnrollSidecar();
-        Resources resources = mock(Resources.class);
-        doReturn(resources).when(mContext).getResources();
-        when(resources.getIntArray(R.array.fingerprint_acquired_ignore_list))
-                .thenReturn(new int[]{3});
-
-        sidecar.setListener(mActivity);
-        sidecar.onAttach(mActivity);
-        sidecar.mEnrollmentCallback.onEnrollmentHelp(3,
-                "Help message should not be displayed.");
-
-        TextView errorText = mActivity.findViewById(R.id.error_text);
-        assertThat(errorText.getText()).isEqualTo("");
     }
 
     @Test
@@ -388,13 +347,5 @@ public class FingerprintEnrollEnrollingTest {
                         eq(FingerprintManager.ENROLL_ENROLL));
 
         return callbackCaptor.getValue();
-    }
-
-    private class TestFingerprintEnrollSidecar extends FingerprintEnrollSidecar {
-        @Nullable
-        @Override
-        public Context getContext() {
-            return mContext;
-        }
     }
 }

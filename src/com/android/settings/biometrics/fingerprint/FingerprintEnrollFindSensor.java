@@ -293,8 +293,8 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         mSidecar = (FingerprintEnrollSidecar) getSupportFragmentManager().findFragmentByTag(
                 FingerprintEnrollEnrolling.TAG_SIDECAR);
         if (mSidecar == null) {
-            mSidecar = new FingerprintEnrollSidecar();
-            mSidecar.setEnrollReason(FingerprintManager.ENROLL_FIND_SENSOR);
+            mSidecar = new FingerprintEnrollSidecar(this,
+                    FingerprintManager.ENROLL_FIND_SENSOR);
             getSupportFragmentManager().beginTransaction()
                     .add(mSidecar, FingerprintEnrollEnrolling.TAG_SIDECAR)
                     .commitAllowingStateLoss();
