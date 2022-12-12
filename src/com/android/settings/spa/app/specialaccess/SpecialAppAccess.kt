@@ -43,10 +43,12 @@ object SpecialAppAccessPageProvider : SettingsPageProvider {
 
     @Composable
     fun EntryItem() {
-        Preference(object : PreferenceModel {
-            override val title = stringResource(R.string.special_access)
-            override val onClick = navigator(name)
-        })
+        Preference(
+            object : PreferenceModel {
+                override val title = stringResource(R.string.special_access)
+                override val onClick = navigator(name)
+            }
+        )
     }
 
     fun buildInjectEntry() = SettingsEntryBuilder.createInject(owner = SettingsPage.create(name))
@@ -54,13 +56,15 @@ object SpecialAppAccessPageProvider : SettingsPageProvider {
     override fun buildEntry(arguments: Bundle?): List<SettingsEntry> {
         val owner = SettingsPage.create(name, parameter = parameter, arguments = arguments)
         return listOf(
-            AllFilesAccessAppListProvider,
-            DisplayOverOtherAppsAppListProvider,
-            MediaManagementAppsAppListProvider,
-            ModifySystemSettingsAppListProvider,
-            PictureInPictureListProvider,
-            InstallUnknownAppsListProvider,
-            AlarmsAndRemindersAppListProvider,
-        ).map { it.buildAppListInjectEntry().setLink(fromPage = owner).build() }
+                AllFilesAccessAppListProvider,
+                DisplayOverOtherAppsAppListProvider,
+                MediaManagementAppsAppListProvider,
+                ModifySystemSettingsAppListProvider,
+                PictureInPictureListProvider,
+                InstallUnknownAppsListProvider,
+                AlarmsAndRemindersAppListProvider,
+                WifiControlAppListProvider,
+            )
+            .map { it.buildAppListInjectEntry().setLink(fromPage = owner).build() }
     }
 }
