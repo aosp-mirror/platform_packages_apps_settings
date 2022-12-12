@@ -104,4 +104,18 @@ public class PowerGaugePreferenceTest {
         assertThat(mPreferenceViewHolder.findViewById(android.R.id.title).getContentDescription())
                 .isEqualTo(CONTENT_DESCRIPTION);
     }
+
+    @Test
+    public void setPercent_greaterThanThreshold_showNumber() {
+        mPowerGaugePreference.setPercent(99.5);
+
+        assertThat(mPowerGaugePreference.getPercent()).isEqualTo("100%");
+    }
+
+    @Test
+    public void setPercent_lessThanThreshold_showBar() {
+        mPowerGaugePreference.setPercent(0.95);
+
+        assertThat(mPowerGaugePreference.getPercent()).isEqualTo("-");
+    }
 }

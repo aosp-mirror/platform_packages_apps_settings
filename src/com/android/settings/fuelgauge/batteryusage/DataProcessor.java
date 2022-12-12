@@ -84,8 +84,6 @@ public final class DataProcessor {
             new BatteryHistEntry(new ContentValues());
 
     @VisibleForTesting
-    static final double PERCENTAGE_OF_TOTAL_THRESHOLD = 1f;
-    @VisibleForTesting
     static final int SELECTED_INDEX_ALL = BatteryChartViewModel.SELECTED_INDEX_ALL;
     @VisibleForTesting
     static final String CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER =
@@ -441,7 +439,7 @@ public final class DataProcessor {
         insertAllUsageDiffData(resultMap);
         // Compute the apps number before purge. Must put before purgeLowPercentageAndFakeData.
         final int countOfAppBeforePurge = getCountOfApps(resultMap);
-        purgeLowPercentageAndFakeData(context, resultMap);
+        purgeFakeAndHiddenPackages(context, resultMap);
         // Compute the apps number after purge. Must put after purgeLowPercentageAndFakeData.
         final int countOfAppAfterPurge = getCountOfApps(resultMap);
         if (!isUsageMapValid(resultMap, hourlyBatteryLevelsPerDay)) {
@@ -536,7 +534,7 @@ public final class DataProcessor {
 
         // Compute the apps number before purge. Must put before purgeLowPercentageAndFakeData.
         final int countOfAppBeforePurge = getCountOfApps(resultMap);
-        purgeLowPercentageAndFakeData(context, resultMap);
+        purgeFakeAndHiddenPackages(context, resultMap);
         // Compute the apps number after purge. Must put after purgeLowPercentageAndFakeData.
         final int countOfAppAfterPurge = getCountOfApps(resultMap);
 
@@ -1122,7 +1120,7 @@ public final class DataProcessor {
     }
 
     // Removes low percentage data and fake usage data, which will be zero value.
-    private static void purgeLowPercentageAndFakeData(
+    private static void purgeFakeAndHiddenPackages(
             final Context context,
             final Map<Integer, Map<Integer, BatteryDiffData>> resultMap) {
         final Set<CharSequence> backgroundUsageTimeHideList =
@@ -1139,17 +1137,17 @@ public final class DataProcessor {
                 if (diffEntryLists == null) {
                     return;
                 }
-                purgeLowPercentageAndFakeData(
+                purgeFakeAndHiddenPackages(
                         diffEntryLists.getAppDiffEntryList(), backgroundUsageTimeHideList,
                         notAllowShowEntryPackages);
-                purgeLowPercentageAndFakeData(
+                purgeFakeAndHiddenPackages(
                         diffEntryLists.getSystemDiffEntryList(), backgroundUsageTimeHideList,
                         notAllowShowEntryPackages);
             });
         });
     }
 
-    private static void purgeLowPercentageAndFakeData(
+    private static void purgeFakeAndHiddenPackages(
             final List<BatteryDiffEntry> entries,
             final Set<CharSequence> backgroundUsageTimeHideList,
             final CharSequence[] notAllowShowEntryPackages) {
@@ -1157,8 +1155,7 @@ public final class DataProcessor {
         while (iterator.hasNext()) {
             final BatteryDiffEntry entry = iterator.next();
             final String packageName = entry.getPackageName();
-            if (entry.getPercentOfTotal() < PERCENTAGE_OF_TOTAL_THRESHOLD
-                    || ConvertUtils.FAKE_PACKAGE_NAME.equals(packageName)
+            if (ConvertUtils.FAKE_PACKAGE_NAME.equals(packageName)
                     || contains(packageName, notAllowShowEntryPackages)) {
                 iterator.remove();
             }
