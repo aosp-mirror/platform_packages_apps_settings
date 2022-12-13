@@ -22,6 +22,7 @@ import android.annotation.Nullable;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
@@ -72,7 +73,8 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * Controller for Sim Status information within the About Phone Settings page.
  */
-public class SimStatusDialogController implements LifecycleObserver {
+public class SimStatusDialogController implements LifecycleObserver,
+        DialogInterface.OnShowListener {
 
     private final static String TAG = "SimStatusDialogCtrl";
 
@@ -106,6 +108,8 @@ public class SimStatusDialogController implements LifecycleObserver {
     final static int EID_INFO_LABEL_ID = R.id.esim_id_label;
     @VisibleForTesting
     final static int EID_INFO_VALUE_ID = R.id.esim_id_value;
+    @VisibleForTesting
+    final static int EID_INFO_QRCODE_ID = R.id.esim_id_qrcode;
     @VisibleForTesting
     final static int IMS_REGISTRATION_STATE_LABEL_ID = R.id.ims_reg_state_label;
     @VisibleForTesting
@@ -158,6 +162,7 @@ public class SimStatusDialogController implements LifecycleObserver {
 
     private boolean mShowLatestAreaInfo;
     private boolean mIsRegisteredListener = false;
+    private AtomicReference<String> mEid = null;
 
     private final BroadcastReceiver mAreaInfoReceiver = new BroadcastReceiver() {
         @Override
@@ -261,6 +266,19 @@ public class SimStatusDialogController implements LifecycleObserver {
         updateRoamingStatus(serviceState);
         updateIccidNumber();
         updateImsRegistrationState();
+    }
+
+    /**
+     * Callback when dialog end of show().
+     */
+    public void onShow(DialogInterface dialog) {
+        if (mEid != null) {
+            String eidText = mEid.get();
+            if (eidText != null) {
+                // Present QR code after the completion of layout
+                mDialog.setQrCode(EID_INFO_QRCODE_ID, eidText);
+            }
+        }
     }
 
     /**
@@ -618,8 +636,8 @@ public class SimStatusDialogController implements LifecycleObserver {
     @VisibleForTesting
     protected void requestForUpdateEid() {
         ThreadUtils.postOnBackgroundThread(() -> {
-            final AtomicReference<String> eid = getEid(mSlotIndex);
-            ThreadUtils.postOnMainThread(() -> updateEid(eid));
+            mEid = getEid(mSlotIndex);
+            ThreadUtils.postOnMainThread(() -> updateEid(mEid));
         });
     }
 
@@ -663,11 +681,20 @@ public class SimStatusDialogController implements LifecycleObserver {
 
     @VisibleForTesting
     protected void updateEid(AtomicReference<String> eid) {
+        boolean removeQrCode = true;
         if (eid == null) {
             mDialog.removeSettingFromScreen(EID_INFO_LABEL_ID);
             mDialog.removeSettingFromScreen(EID_INFO_VALUE_ID);
-        } else if (eid.get() != null) {
-            mDialog.setText(EID_INFO_VALUE_ID, eid.get());
+            mDialog.removeSettingFromScreen(EID_INFO_QRCODE_ID);
+        } else {
+            String eidText = eid.get();
+            if (eidText != null) {
+                mDialog.setText(EID_INFO_VALUE_ID, eidText);
+                removeQrCode = (eidText == "");
+            }
+        }
+        if (removeQrCode) {
+            mDialog.removeSettingFromScreen(EID_INFO_QRCODE_ID);
         }
     }
 

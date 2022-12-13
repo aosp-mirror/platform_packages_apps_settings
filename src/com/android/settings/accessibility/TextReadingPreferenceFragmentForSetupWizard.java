@@ -16,6 +16,10 @@
 
 package com.android.settings.accessibility;
 
+import static android.app.Activity.RESULT_CANCELED;
+
+import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums.DIALOG_RESET_SETTINGS;
+
 import android.app.settings.SettingsEnums;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -28,8 +32,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settingslib.Utils;
 
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifPreferenceLayout;
-
 
 /**
  * A {@link androidx.preference.PreferenceFragmentCompat} that displays the settings page related
@@ -48,6 +53,28 @@ public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPref
         icon.setTintList(Utils.getColorAttr(getContext(), android.R.attr.colorPrimary));
         AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
                 /* description= */ null, icon);
+
+        final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
+        mixin.setSecondaryButton(
+                new FooterButton.Builder(getContext())
+                        .setText(R.string.accessibility_text_reading_reset_button_title)
+                        .setListener(l -> showDialog(DIALOG_RESET_SETTINGS))
+                        .setButtonType(FooterButton.ButtonType.CLEAR)
+                        .setTheme(R.style.SudGlifButton_Secondary)
+                        .build());
+
+        if (isCallingFromAnythingElseEntryPoint()) {
+            mixin.setPrimaryButton(
+                    new FooterButton.Builder(getContext())
+                            .setText(R.string.done)
+                            .setListener(l -> {
+                                setResult(RESULT_CANCELED);
+                                finish();
+                            })
+                            .setButtonType(FooterButton.ButtonType.DONE)
+                            .setTheme(R.style.SudGlifButton_Primary)
+                            .build());
+        }
     }
 
     @Override

@@ -17,6 +17,7 @@
 
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
@@ -168,6 +169,11 @@
             android:layout_height="wrap_content"
             android:textIsSelectable="true"
             android:text="@string/device_info_not_available"/>
+        <ImageView
+            android:id="@+id/esim_id_qrcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="ContentDescription" />
 
         <TextView
             style="@style/device_info_dialog_label"
