@@ -18,6 +18,8 @@ package com.android.settings.spa.app.appinfo
 
 import android.content.om.OverlayManager
 import android.content.pm.ApplicationInfo
+import android.os.UserHandle
+import android.os.UserManager
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import com.android.settings.R
@@ -30,6 +32,7 @@ class AppUninstallButton(private val packageInfoPresenter: PackageInfoPresenter)
     private val context = packageInfoPresenter.context
     private val appButtonRepository = AppButtonRepository(context)
     private val overlayManager = context.getSystemService(OverlayManager::class.java)!!
+    private val userManager = context.getSystemService(UserManager::class.java)!!
 
     fun getActionButton(app: ApplicationInfo): ActionButton? {
         if (app.isSystemApp || app.isInstantApp) return null
@@ -80,7 +83,8 @@ class AppUninstallButton(private val packageInfoPresenter: PackageInfoPresenter)
             overlayManager.getOverlayInfo(packageName, userHandle)?.isEnabled == true
 
     private fun uninstallButton(app: ApplicationInfo, enabled: Boolean) = ActionButton(
-        text = context.getString(R.string.uninstall_text),
+        text = if (isCloneApp(app)) context.getString(R.string.delete) else
+            context.getString(R.string.uninstall_text),
         imageVector = Icons.Outlined.Delete,
         enabled = enabled,
     ) { onUninstallClicked(app) }
@@ -88,5 +92,10 @@ class AppUninstallButton(private val packageInfoPresenter: PackageInfoPresenter)
     private fun onUninstallClicked(app: ApplicationInfo) {
         if (appButtonRepository.isUninstallBlockedByAdmin(app)) return
         packageInfoPresenter.startUninstallActivity()
+    }
+
+    private fun isCloneApp(app: ApplicationInfo): Boolean  {
+        val userInfo = userManager.getUserInfo(UserHandle.getUserId(app.uid))
+        return userInfo != null && userInfo.isCloneProfile
     }
 }

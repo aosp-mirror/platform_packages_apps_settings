@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.manageapplications;
 
+import static android.util.FeatureFlagUtils.SETTINGS_ENABLE_SPA;
+
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 
@@ -46,6 +48,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
+import android.content.pm.UserInfo;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -61,6 +64,7 @@ import android.preference.PreferenceFrameLayout;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArraySet;
+import android.util.FeatureFlagUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -144,6 +148,8 @@ import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.app.AppNotificationSettings;
 import com.android.settings.spa.SpaActivity;
+import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider;
+import com.android.settings.spa.app.appinfo.CloneAppInfoSettingsProvider;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settings.wifi.AppStateChangeWifiStateBridge;
 import com.android.settings.wifi.ChangeWifiStateDetails;
@@ -702,6 +708,20 @@ public class ManageApplications extends InstrumentedFragment
             case LIST_TYPE_LONG_BACKGROUND_TASKS:
                 startAppInfoFragment(LongBackgroundTasksDetails.class,
                         R.string.long_background_tasks_label);
+                break;
+            case LIST_TYPE_CLONED_APPS:
+                if (!FeatureFlagUtils.isEnabled(getContext(), SETTINGS_ENABLE_SPA)) {
+                    return;
+                }
+                int userId = UserHandle.getUserId(mCurrentUid);
+                UserInfo userInfo = mUserManager.getUserInfo(userId);
+                if (userInfo != null && !userInfo.isCloneProfile()) {
+                    SpaActivity.startSpaActivity(getContext(), CloneAppInfoSettingsProvider.INSTANCE
+                            .getRoute(mCurrentPkgName, userId));
+                } else {
+                    SpaActivity.startSpaActivity(getContext(), AppInfoSettingsProvider.INSTANCE
+                            .getRoute(mCurrentPkgName, userId));
+                }
                 break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed
