@@ -80,6 +80,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     private static final String KEY_CALLS_PREF = "calls_preference";
     private static final String KEY_SMS_PREF = "sms_preference";
     private static final String KEY_MOBILE_DATA_PREF = "mobile_data_enable";
+    private static final String KEY_CONVERT_TO_ESIM_PREF = "convert_to_esim";
 
     //String keys for preference lookup
     private static final String BUTTON_CDMA_SYSTEM_SELECT_KEY = "cdma_system_select_key";
@@ -178,6 +179,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 new SmsDefaultSubscriptionController(context, KEY_SMS_PREF, getSettingsLifecycle(),
                         this),
                 new MobileDataPreferenceController(context, KEY_MOBILE_DATA_PREF,
+                        getSettingsLifecycle(), this, mSubId),
+                new ConvertToEsimPreferenceController(context, KEY_CONVERT_TO_ESIM_PREF,
                         getSettingsLifecycle(), this, mSubId));
     }
 
@@ -286,6 +289,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 .addListener(videoCallingPreferenceController);
         use(ContactDiscoveryPreferenceController.class).init(getParentFragmentManager(), mSubId);
         use(NrAdvancedCallingPreferenceController.class).init(mSubId);
+        use(TransferEsimPreferenceController.class).init(mSubId, mSubscriptionInfoEntity);
+        use(ConvertToEsimPreferenceController.class).init(mSubId, mSubscriptionInfoEntity);
     }
 
     @Override
