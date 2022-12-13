@@ -70,7 +70,17 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Правый слуховой аппарат подключен.\n\nУбедитесь, что левый аппарат работает и готов к подключению."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Подключить прав. ухо"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Подключить левое ухо"</string>
+    <string name="bluetooth_device_controls_title" msgid="7115710864094259075">"Управление слуховым аппаратом"</string>
+    <string name="bluetooth_device_controls_summary" msgid="5843475712424478172">"Ярлык для слухового аппарата, совместимость со слуховыми аппаратами"</string>
+    <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Аудиовыход"</string>
+    <string name="bluetooth_audio_routing_summary" msgid="7236959154306472259">"Выберите, как будет воспроизводиться аудио: через слуховой аппарат или через динамик телефона"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Похожие"</string>
+    <string name="bluetooth_ringtone_title" msgid="3049822968673742328">"Рингтон"</string>
+    <string name="bluetooth_call_title" msgid="3170657843273743928">"Аудио во время звонка"</string>
+    <string name="bluetooth_media_title" msgid="343705257183053699">"Мультимедиа"</string>
+    <string name="bluetooth_system_sounds_title" msgid="5331556107110163039">"Системные звуки"</string>
+    <string name="bluetooth_audio_path_hearing_device_title" msgid="2073463574123159850">"Воспроизведение через слуховой аппарат"</string>
+    <string name="bluetooth_audio_path_phone_speaker_title" msgid="4259772328898172657">"Воспроизведение через динамик телефона"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"Bluetooth-устройство без названия"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"Поиск"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"Устройства Bluetooth не найдены."</string>
@@ -110,6 +120,11 @@
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Ранее подключенные устройства"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Модуль Bluetooth включен"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Показать все"</string>
+    <string name="stylus_device_details_title" msgid="7618295136015480864">"Стилус"</string>
+    <string name="stylus_default_notes_app" msgid="3111290761558445874">"Системное приложение для заметок"</string>
+    <string name="stylus_textfield_handwriting" msgid="6962904622425646128">"Разрешить надписи стилусом в текстовых полях"</string>
+    <string name="stylus_ignore_button" msgid="7734540973145241391">"Игнорировать нажатия кнопок стилусом"</string>
+    <string name="stylus_usi_header_title" msgid="1949011797718972583">"Стилус USI"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Дата и время"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Прокси-сервер"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Очистить"</string>
@@ -742,6 +757,7 @@
     <string name="wifi_eap_method" msgid="3776009521349381742">"Метод EAP"</string>
     <string name="please_select_phase2" msgid="577633852089847142">"Второй этап аутентификации"</string>
     <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"Сертификат центра сертификации"</string>
+    <string name="wifi_eap_min_tls_ver" msgid="174023604103299457">"Минимальная версия TLS"</string>
     <string name="wifi_eap_ocsp" msgid="8713933962516871238">"Статус онлайн-сертификата"</string>
     <string name="wifi_eap_domain" msgid="8304301470752333203">"Домен"</string>
     <string name="wifi_eap_user_cert" msgid="3569182430929173220">"Сертификат пользователя"</string>
@@ -1041,6 +1057,9 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Во время зарядки"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"На док-станции"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Никогда"</string>
+    <!-- no translation found for screensaver_settings_summary_on (4210827304351483645) -->
+    <skip />
+    <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Отключено"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Когда запускать"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Активация в вертикальном положении"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Автоматич. включение экрана"</string>
@@ -1227,6 +1246,10 @@
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Сброс настроек"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Сбросить настройки Wi-Fi, мобильного интернета и Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"На устройстве будут сброшены все сетевые настройки, в том числе:\n\n"<li>"Wi‑Fi"</li>\n<li>"Мобильный Интернет"</li>\n<li>"Bluetooth"</li></string>
+    <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"Сбросить настройки Bluetooth и Wi‑Fi"</string>
+    <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"Настройки Wi‑Fi и Bluetooth будут сброшены. Это действие нельзя отменить."</string>
+    <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Сбросить"</string>
+    <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"Настройки Bluetooth и Wi‑Fi сброшены."</string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Стереть"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"Удалить все данные eSIM"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"Это действие не отменит ваши тарифные планы. Чтобы скачать новые SIM-карты, обратитесь к оператору связи."</string>
@@ -1897,7 +1920,7 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Удерживание кнопок регулировки громкости"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Тройное нажатие на экран"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Далее"</string>
-    <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Слуховые аппараты"</string>
+    <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Слуховые аппараты"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Нет подключенных слуховых аппаратов"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Добавить слуховой аппарат"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Подключите аппараты"</string>
@@ -1907,6 +1930,17 @@
     <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, только правое ухо"</string>
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, левое и правое ухо"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> и ещё 1"</string>
+    <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Добавить устройство"</string>
+    <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Сохраненные аппараты"</string>
+    <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Управление слуховым аппаратом"</string>
+    <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Ярлык для слухового аппарата"</string>
+    <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Поддержка слуховых аппаратов"</string>
+    <string name="accessibility_hac_mode_summary" msgid="5164793702798871478">"Улучшать качество аудио для некоторых слуховых аппаратов"</string>
+    <string name="accessibility_hearing_device_footer_summary" msgid="4636110586636490256">"Убедитесь, что слуховые аппараты включены и находятся в режиме подключения."</string>
+    <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Подключение аппарата"</string>
+    <string name="accessibility_found_hearing_devices" msgid="3472605919692789408">"Доступные устройства"</string>
+    <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Не нашли свой слуховой аппарат?"</string>
+    <string name="accessibility_list_all_devices_title" msgid="3555097127022458571">"Посмотреть все устройства Bluetooth"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Корректировка аудио"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Аудиодескрипция"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Аудиосопровождение в фильмах и сериалах поможет вам понять, что происходит на экране"</string>
@@ -2111,18 +2145,12 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Посмотрите, какие приложения расходуют больше всего заряда."</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Зарядка приостановлена"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"Это поможет продлить срок службы батареи."</string>
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_title (7257251934903787366) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_summary (428474483479026813) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_title (8843454404807737776) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_summary (5582869291068635429) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_title (1679449361090557201) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_summary (5107293805054133144) -->
-    <skip />
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="7257251934903787366">"Зарядка до <xliff:g id="PERCENT">%1$s</xliff:g> для защиты батареи"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="428474483479026813">"Если ваш планшет подключен к док-станции, его зарядка будет приостановлена на <xliff:g id="PERCENT">%1$s</xliff:g>. Это поможет продлить срок службы батареи."</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="8843454404807737776">"Зарядка приостановлена для защиты батареи"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="5582869291068635429">"Если ваш планшет подключен к док-станции, его зарядка приостанавливается на <xliff:g id="PERCENT">%1$s</xliff:g>. Это помогает продлить срок службы батареи."</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Полная зарядка"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="5107293805054133144">"Если ваш планшет подключен к док-станции, его зарядка будет приостановлена на <xliff:g id="PERCENT">%1$s</xliff:g>. Это поможет продлить срок службы батареи."</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Подробнее о приостановке зарядки"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Продолжить зарядку"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Идут фоновые процессы с высоким потреблением энергии."</string>
@@ -2268,9 +2296,14 @@
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Всего: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"В фоновом режиме: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Сведения о расходе заряда батареи будут доступны через несколько часов после полной зарядки."</string>
+    <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"сейчас"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Диаграмма расхода заряда батареи"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Диаграмма расхода заряда батареи по дням"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Диаграмма расхода заряда батареи по часам"</string>
+    <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="8219417894003454299">"Пропорциональная разбивка использования с момента последней полной зарядки"</string>
+    <string name="battery_usage_breakdown_title_for_slot" msgid="5897712719834293709">"Пропорциональная разбивка использования (<xliff:g id="SLOT">%s</xliff:g>)"</string>
+    <string name="battery_usage_app_tab" msgid="47007533921631047">"Приложение"</string>
+    <string name="battery_usage_system_tab" msgid="2723499428460455537">"Система"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статистика процессов"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Статистика запущенных процессов"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Использование памяти"</string>
@@ -2814,10 +2847,8 @@
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Сохраненные пароли, автозаполнение, синхронизируемые аккаунты"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Приложения по умолчанию"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Дубликаты приложений"</string>
-    <!-- no translation found for desc_cloned_apps_intro_text (1369621522882622476) -->
-    <skip />
-    <!-- no translation found for cloned_apps_summary (8805362440770795709) -->
-    <skip />
+    <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Создайте второй экземпляр приложения, чтобы одновременно использовать два аккаунта."</string>
+    <string name="cloned_apps_summary" msgid="8805362440770795709">"Клонировано приложений: <xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g> из <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g>"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Языки, время, жесты, резервное копирование"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"Языки системы, языки приложений"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"Wi-Fi, WiFi, сетевое подключение, Интернет, беспроводной, данные, Wi Fi"</string>
@@ -2877,7 +2908,16 @@
     <string name="keywords_face_unlock" msgid="545338452730885392">"фейсконтроль, аутентификация, вход"</string>
     <string name="keywords_biometric_unlock" msgid="8569545388717753692">"фейсконтроль, разблокировка, разблокировать, аутентификация, вход, войти, отпечаток пальца, биометрия"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"imei, meid, min, версия prl, imeisv"</string>
-    <string name="keywords_sim_status" msgid="8784456547742075508">"сеть, подключение к мобильной сети, доступность мобильной сети, уровень сигнала, тип мобильной сети, роуминг, ICCID, EID"</string>
+    <!-- no translation found for keywords_sim_status (4221401945956122228) -->
+    <skip />
+    <!-- no translation found for keywords_sim_status_esim (3338719238556853609) -->
+    <skip />
+    <!-- no translation found for keywords_sim_status_iccid (4775398796251969759) -->
+    <skip />
+    <!-- no translation found for keywords_sim_status_iccid_esim (4634015619840979184) -->
+    <skip />
+    <!-- no translation found for keywords_esim_eid (8128175058237372457) -->
+    <skip />
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"серийный номер, версия аппаратного обеспечения"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"обновление системы безопасности, прошивка модуля связи, версия ядра"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"тема, свет, темнота, режим, светобоязнь, фотофобия, сделать темнее, затемнить, тёмная тема, мигрень"</string>
@@ -3447,6 +3487,22 @@
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Блокировать устройство при отключении функции"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Подтверждение удаления SIM-карты"</string>
     <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Запрашивать подтверждение личности перед удалением eSIM"</string>
+    <string name="memtag_title" msgid="5096176296797727201">"Расширенная защита памяти (бета)"</string>
+    <string name="memtag_toggle" msgid="8695028758462939212">"Расширенная защита памяти"</string>
+    <string name="memtag_intro" msgid="579408691329568953">"Эта функция проходит бета-тестирование. Она помогает защитить устройство от ошибок, которые могут поставить вашу безопасность под угрозу."</string>
+    <string name="memtag_on" msgid="824938319141503923">"Включена"</string>
+    <string name="memtag_off" msgid="4835589640091709019">"Отключена"</string>
+    <string name="memtag_on_pending" msgid="1592053425431532361">"Включится после перезапуска"</string>
+    <string name="memtag_off_pending" msgid="1543177181383593726">"Отключится после перезапуска"</string>
+    <string name="memtag_force_off" msgid="1143468955988138470">"Пока недоступна для вашего устройства"</string>
+    <string name="memtag_force_on" msgid="3254349938627883664">"Всегда включена для вашего устройства"</string>
+    <string name="memtag_footer" msgid="8480784485124271376">"Чтобы настроить расширенную защиту памяти, нужно перезапустить устройство. Когда эта функция включена, устройство может работать медленнее."</string>
+    <string name="memtag_reboot_title" msgid="1413471876903578769">"Перезапустить устройство?"</string>
+    <string name="memtag_reboot_message_on" msgid="3270256606602439418">"Чтобы включить расширенную защиту памяти, нужно перезапустить устройство."</string>
+    <string name="memtag_reboot_message_off" msgid="2567062468140476451">"Чтобы отключить расширенную защиту памяти, нужно перезапустить устройство."</string>
+    <string name="memtag_reboot_yes" msgid="5788896350697141429">"Перезапустить"</string>
+    <string name="memtag_reboot_no" msgid="2860671356184849330">"Не сейчас"</string>
+    <string name="memtag_learn_more" msgid="1596145970669119776">"Подробнее о расширенной защите памяти…"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Профилем управляет"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Управляется <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"Безопасный запуск"</string>
@@ -4468,7 +4524,7 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Чтобы использовать эту функцию, включите параметр \"Показывать виджеты управления устройством\""</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Показывать вертикальные часы, если они доступны"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Вертикальные часы"</string>
-    <string name="lockscreen_quick_affordances_title" msgid="435869403114245620">"Кнопки"</string>
+    <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"Быстрые действия"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="one"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
       <item quantity="few"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
@@ -4678,10 +4734,8 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Ограничить пропускную способность входящего трафика. Эта настройка применяется ко всем сетям, подключенным к интернету."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Настроить ограничение скорости скачивания"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Без ограничений"</string>
-    <!-- no translation found for disable_phantom_process_monitor_title (8348108346706188771) -->
-    <skip />
-    <!-- no translation found for disable_phantom_process_monitor_summary (3044464635550256985) -->
-    <skip />
+    <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"Отключить ограничения для дочерних процессов"</string>
+    <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Отключить ограничения на использование системных ресурсов для дочерних процессов приложения"</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Трансляция"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Транслировать \"<xliff:g id="CURRENTAPP">%1$s</xliff:g>\""</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Подключайтесь к трансляциям рядом с вами."</string>
