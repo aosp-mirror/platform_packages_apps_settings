@@ -350,8 +350,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     @Override
     protected BiometricEnrollSidecar getSidecar() {
-        final FingerprintEnrollSidecar sidecar = new FingerprintEnrollSidecar();
-        sidecar.setEnrollReason(FingerprintManager.ENROLL_ENROLL);
+        final FingerprintEnrollSidecar sidecar = new FingerprintEnrollSidecar(this,
+                FingerprintManager.ENROLL_ENROLL);
         return sidecar;
     }
 
