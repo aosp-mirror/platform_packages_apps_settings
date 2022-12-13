@@ -78,9 +78,9 @@ public class KeyboardPreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        boolean isFeatureOn = FeatureFlagUtils
-                .isEnabled(mContext, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI);
-        return isFeatureOn ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI)
+                ? AVAILABLE
+                : CONDITIONALLY_UNAVAILABLE;
     }
 
     private void updateSummary() {
