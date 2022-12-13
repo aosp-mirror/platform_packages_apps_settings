@@ -19,13 +19,9 @@ package com.android.settings.network;
 import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.provider.Settings;
+import android.graphics.drawable.Drawable;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 import android.util.ArrayMap;
 import android.util.Log;
 
@@ -38,6 +34,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.network.telephony.MobileNetworkUtils;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -58,7 +55,7 @@ public class NetworkProviderSimListController extends AbstractPreferenceControll
 
     private SubscriptionManager mSubscriptionManager;
     private PreferenceCategory mPreferenceCategory;
-    private Map<Integer, Preference> mPreferences;
+    private Map<Integer, RestrictedPreference> mPreferences;
     private LifecycleOwner mLifecycleOwner;
     private MobileNetworkRepository mMobileNetworkRepository;
     private List<SubscriptionInfoEntity> mSubInfoEntityList = new ArrayList<>();
@@ -96,25 +93,27 @@ public class NetworkProviderSimListController extends AbstractPreferenceControll
             return;
         }
 
-        final Map<Integer, Preference> existingPreferences = mPreferences;
+        final Map<Integer, RestrictedPreference> existingPreferences = mPreferences;
         mPreferences = new ArrayMap<>();
 
         final List<SubscriptionInfoEntity> subscriptions = getAvailablePhysicalSubscriptions();
         for (SubscriptionInfoEntity info : subscriptions) {
             final int subId = Integer.parseInt(info.subId);
-            Preference pref = existingPreferences.remove(subId);
+            RestrictedPreference pref = existingPreferences.remove(subId);
             if (pref == null) {
-                pref = new Preference(mPreferenceCategory.getContext());
+                pref = new RestrictedPreference(mPreferenceCategory.getContext());
                 mPreferenceCategory.addPreference(pref);
             }
             final CharSequence displayName = info.uniqueName;
             pref.setTitle(displayName);
             boolean isActiveSubscriptionId = info.isActiveSubscriptionId;
             pref.setSummary(getSummary(info, displayName));
-
+            final Drawable drawable = mContext.getDrawable(
+                    info.isEmbedded ? R.drawable.ic_sim_card_download : R.drawable.ic_sim_card);
+            pref.setIcon(drawable);
             pref.setOnPreferenceClickListener(clickedPref -> {
-                if (!isActiveSubscriptionId && !SubscriptionUtil.showToggleForPhysicalSim(
-                        mSubscriptionManager)) {
+                if (!info.isEmbedded && !isActiveSubscriptionId
+                        && !SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
                     SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, subId,
                             true);
                 } else {
@@ -124,7 +123,7 @@ public class NetworkProviderSimListController extends AbstractPreferenceControll
             });
             mPreferences.put(subId, pref);
         }
-        for (Preference pref : existingPreferences.values()) {
+        for (RestrictedPreference pref : existingPreferences.values()) {
             mPreferenceCategory.removePreference(pref);
         }
     }
@@ -141,10 +140,13 @@ public class NetworkProviderSimListController extends AbstractPreferenceControll
                 activeSim.append(summary).append(config);
                 return activeSim;
             }
-        } else if (SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
-            return mContext.getString(R.string.sim_category_inactive_sim);
         } else {
-            return mContext.getString(R.string.mobile_network_tap_to_activate, displayName);
+            if (!subInfo.isEmbedded && !SubscriptionUtil.showToggleForPhysicalSim(
+                    mSubscriptionManager)) {
+                return mContext.getString(R.string.mobile_network_tap_to_activate, displayName);
+            } else {
+                return mContext.getString(R.string.sim_category_inactive_sim);
+            }
         }
     }
 
@@ -160,9 +162,7 @@ public class NetworkProviderSimListController extends AbstractPreferenceControll
     protected List<SubscriptionInfoEntity> getAvailablePhysicalSubscriptions() {
         List<SubscriptionInfoEntity> subList = new ArrayList<>();
         for (SubscriptionInfoEntity info : mSubInfoEntityList) {
-            if (!info.isEmbedded) {
-                subList.add(info);
-            }
+            subList.add(info);
         }
         return subList;
     }

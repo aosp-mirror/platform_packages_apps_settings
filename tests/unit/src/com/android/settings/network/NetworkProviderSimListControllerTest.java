@@ -28,6 +28,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Looper;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -45,6 +46,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.R;
 import com.android.settings.testutils.ResourcesUtils;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 
@@ -90,7 +92,7 @@ public class NetworkProviderSimListControllerTest {
     private PreferenceManager mPreferenceManager;
     private PreferenceCategory mPreferenceCategory;
     private PreferenceScreen mPreferenceScreen;
-    private Preference mPreference;
+    private RestrictedPreference mPreference;
     private Context mContext;
     private List<SubscriptionInfoEntity> mSubscriptionInfoEntityList = new ArrayList<>();
 
@@ -130,7 +132,7 @@ public class NetworkProviderSimListControllerTest {
 
         mPreferenceManager = new PreferenceManager(mContext);
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
-        mPreference = new Preference(mContext);
+        mPreference = new RestrictedPreference(mContext);
         mPreference.setKey(KEY_PREFERENCE_SIM_LIST);
         mPreferenceCategory = new PreferenceCategory(mContext);
         mPreferenceCategory.setKey(KEY_PREFERENCE_CATEGORY_SIM);
@@ -171,10 +173,9 @@ public class NetworkProviderSimListControllerTest {
     @UiThreadTest
     public void getSummary_tapToActivePSim() {
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, "", true, false, false, false, false);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, "", true, false, true, false, false);
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
-
         displayPreferenceWithLifecycle();
         String summary = setSummaryResId("mobile_network_tap_to_activate", DISPLAY_NAME_1);
 
@@ -185,7 +186,7 @@ public class NetworkProviderSimListControllerTest {
     @UiThreadTest
     public void getSummary_inactivePSim() {
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, "", true, false, false, false, false);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, "", true, false, true, false, false);
         doReturn(true).when(mSubscriptionManager).canDisablePhysicalSubscription();
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
@@ -201,7 +202,7 @@ public class NetworkProviderSimListControllerTest {
     public void getSummary_defaultCalls() {
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
                 SUB_MNC_1, SUB_COUNTRY_ISO_1, 1,
-                mContext.getString(R.string.sim_category_default_active_sim,
+                setSummaryResId("sim_category_default_active_sim",
                         setSummaryResId("default_active_sim_calls")), true, true, true, true,
                 false);
         mSubscriptionInfoEntityList.add(mSubInfo1);
@@ -225,7 +226,7 @@ public class NetworkProviderSimListControllerTest {
                 .append(setSummaryResId("default_active_sim_sms"));
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
                 SUB_MNC_1, SUB_COUNTRY_ISO_1, 1,
-                mContext.getString(R.string.sim_category_default_active_sim, defaultConfig), true,
+                setSummaryResId("sim_category_default_active_sim", defaultConfig.toString()), true,
                 true, true, true, true);
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
