@@ -18,6 +18,8 @@ package com.android.settings.dream;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -104,23 +106,28 @@ public class DreamSettingsTest {
 
     @Test
     public void summaryText_whenDreamsAreOff() {
-        DreamBackend mockBackend = mock(DreamBackend.class);
-        Context mockContext = mock(Context.class);
+        final String fakeSummaryOff = "test dream off";
+        final DreamBackend mockBackend = mock(DreamBackend.class);
+        final Context mockContext = mock(Context.class);
         when(mockBackend.isEnabled()).thenReturn(false);
+        when(mockContext.getString(R.string.screensaver_settings_summary_off)).thenReturn(
+                fakeSummaryOff);
 
-        assertThat(DreamSettings.getSummaryTextFromBackend(mockBackend, mockContext))
-                .isEqualTo(mockContext.getString(R.string.screensaver_settings_summary_off));
+        assertThat(DreamSettings.getSummaryTextFromBackend(mockBackend, mockContext)).isEqualTo(
+                fakeSummaryOff);
     }
 
     @Test
     public void summaryTest_WhenDreamsAreOn() {
         final String fakeName = "test_name";
-        DreamBackend mockBackend = mock(DreamBackend.class);
-        Context mockContext = mock(Context.class);
+        final DreamBackend mockBackend = mock(DreamBackend.class);
+        final Context mockContext = mock(Context.class);
         when(mockBackend.isEnabled()).thenReturn(true);
         when(mockBackend.getActiveDreamName()).thenReturn(fakeName);
+        when(mockContext.getString(eq(R.string.screensaver_settings_summary_on), anyString()))
+                .thenAnswer(i -> i.getArgument(1) + " test dream is on");
 
-        assertThat(DreamSettings.getSummaryTextFromBackend(mockBackend, mockContext))
-                .isEqualTo(fakeName);
+        assertThat(DreamSettings.getSummaryTextFromBackend(mockBackend, mockContext)).isEqualTo(
+                fakeName + " test dream is on");
     }
 }
