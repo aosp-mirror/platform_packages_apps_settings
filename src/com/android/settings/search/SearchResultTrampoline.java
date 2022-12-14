@@ -100,6 +100,8 @@ public class SearchResultTrampoline extends Activity {
             }
         }
 
+        intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+
         if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)) {
             startActivity(intent);
         } else if (isSettingsIntelligence(callingActivity)) {

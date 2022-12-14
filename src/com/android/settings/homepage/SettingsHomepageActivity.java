@@ -178,6 +178,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             if (userInfo.isManagedProfile()) {
                 final Intent intent = new Intent(getIntent())
                         .setClass(this, DeepLinkHomepageActivityInternal.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                         .putExtra(EXTRA_USER_HANDLE, getUser());
                 intent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivityAsUser(intent, um.getPrimaryUser().getUserHandle());
@@ -496,6 +497,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         intent.setAction(null);
 
         targetIntent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+        targetIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
 
         // Sender of intent may want to send intent extra data to the destination of targetIntent.
         targetIntent.replaceExtras(intent);
