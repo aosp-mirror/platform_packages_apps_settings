@@ -22,4 +22,7 @@ import android.content.Context;
 public interface FaceFeatureProvider {
     /** Returns true if attention checking is supported. */
     boolean isAttentionSupported(Context context);
+
+    /** Returns true if setup wizard supported face enrollment. */
+    boolean isSetupWizardSupported(Context context);
 }
