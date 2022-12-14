@@ -24,6 +24,7 @@ import androidx.lifecycle.LiveData
 import com.android.settings.R
 import com.android.settingslib.applications.PermissionsSummaryHelper
 import com.android.settingslib.applications.PermissionsSummaryHelper.PermissionsResultCallback
+import com.android.settingslib.spa.framework.util.formatString
 import com.android.settingslib.spaprivileged.framework.common.asUser
 import com.android.settingslib.spaprivileged.model.app.userHandle
 
@@ -91,10 +92,9 @@ class AppPermissionSummaryLiveData(
         else -> {
             grantedGroupLabels +
                 // N additional permissions.
-                context.resources.getQuantityString(
-                    R.plurals.runtime_permissions_additional_count,
-                    additionalGrantedPermissionCount,
-                    additionalGrantedPermissionCount,
+                context.formatString(
+                    R.string.runtime_permissions_additional_count,
+                    "count" to additionalGrantedPermissionCount,
                 )
         }
     }

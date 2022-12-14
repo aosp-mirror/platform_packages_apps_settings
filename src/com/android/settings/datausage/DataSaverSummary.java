@@ -17,6 +17,7 @@ package com.android.settings.datausage;
 import android.app.Application;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.icu.text.MessageFormat;
 import android.os.Bundle;
 import android.telephony.SubscriptionManager;
 import android.widget.Switch;
@@ -38,6 +39,9 @@ import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 @SearchIndexable
 public class DataSaverSummary extends SettingsPreferenceFragment
@@ -207,8 +211,12 @@ public class DataSaverSummary extends SettingsPreferenceFragment
                 count++;
             }
         }
-        mUnrestrictedAccess.setSummary(getResources().getQuantityString(
-                R.plurals.data_saver_unrestricted_summary, count, count));
+        MessageFormat msgFormat = new MessageFormat(
+                getResources().getString(R.string.data_saver_unrestricted_summary),
+                Locale.getDefault());
+        Map<String, Object> arguments = new HashMap<>();
+        arguments.put("count", count);
+        mUnrestrictedAccess.setSummary(msgFormat.format(arguments));
     }
 
     public static boolean isDataSaverVisible(Context context) {
