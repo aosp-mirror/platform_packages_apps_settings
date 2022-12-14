@@ -214,6 +214,8 @@ public class PanelFragment extends Fragment {
         // Make the panel layout gone here, to avoid janky animation when updating from old panel.
         // We will make it visible once the panel is ready to load.
         mPanelSlices.setVisibility(View.GONE);
+        // Remove the animator to avoid a RecyclerView crash.
+        mPanelSlices.setItemAnimator(null);
 
         final Bundle arguments = getArguments();
         final String callingPackageName =
