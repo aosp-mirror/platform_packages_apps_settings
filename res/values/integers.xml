@@ -26,4 +26,11 @@
     <integer name="suw_max_faces_enrollable">1</integer>
     <!-- Controls the maximum number of fingerprints enrollable during SUW -->
     <integer name="suw_max_fingerprints_enrollable">1</integer>
+
+    <!-- Minimum display time (in millis) for help messages in fingerprint enrollment. -->
+    <integer name="enrollment_help_minimum_time_display">0</integer>
+    <!-- Minimum display time (in millis) for progress messages in fingerprint enrollment. -->
+    <integer name="enrollment_progress_minimum_time_display">0</integer>
+    <!-- The time (in millis) to wait to collect messages in fingerprint enrollment before displaying it. -->
+    <integer name="enrollment_collect_time">0</integer>
 </resources>
