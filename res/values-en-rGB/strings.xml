@@ -68,7 +68,17 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Your right hearing aid is connected.\n\nTo pair the left one, make sure that it’s turned on and ready to pair."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Pair right ear"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Pair left ear"</string>
+    <string name="bluetooth_device_controls_title" msgid="7115710864094259075">"Hearing device controls"</string>
+    <string name="bluetooth_device_controls_summary" msgid="5843475712424478172">"Hearing device shortcut, hearing aid compatibility"</string>
+    <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Audio output"</string>
+    <string name="bluetooth_audio_routing_summary" msgid="7236959154306472259">"Choose whether different types of audio are played on your hearing device or phone speaker"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Related"</string>
+    <string name="bluetooth_ringtone_title" msgid="3049822968673742328">"Ringtone"</string>
+    <string name="bluetooth_call_title" msgid="3170657843273743928">"Call"</string>
+    <string name="bluetooth_media_title" msgid="343705257183053699">"Media"</string>
+    <string name="bluetooth_system_sounds_title" msgid="5331556107110163039">"System sounds"</string>
+    <string name="bluetooth_audio_path_hearing_device_title" msgid="2073463574123159850">"Play on hearing device"</string>
+    <string name="bluetooth_audio_path_phone_speaker_title" msgid="4259772328898172657">"Play on phone speaker"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"Unnamed Bluetooth device"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"Searching"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"No nearby Bluetooth devices were found."</string>
@@ -108,6 +118,11 @@
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Previously connected"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth turned on"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"See all"</string>
+    <string name="stylus_device_details_title" msgid="7618295136015480864">"Stylus"</string>
+    <string name="stylus_default_notes_app" msgid="3111290761558445874">"System note taking app"</string>
+    <string name="stylus_textfield_handwriting" msgid="6962904622425646128">"Stylus writing in textfields"</string>
+    <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignore all stylus button presses"</string>
+    <string name="stylus_usi_header_title" msgid="1949011797718972583">"USI stylus"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Date and time"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Clear"</string>
@@ -708,6 +723,7 @@
     <string name="wifi_eap_method" msgid="3776009521349381742">"EAP method"</string>
     <string name="please_select_phase2" msgid="577633852089847142">"Phase 2 authentication"</string>
     <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"CA certificate"</string>
+    <string name="wifi_eap_min_tls_ver" msgid="174023604103299457">"Minimum TLS version"</string>
     <string name="wifi_eap_ocsp" msgid="8713933962516871238">"Online certificate status"</string>
     <string name="wifi_eap_domain" msgid="8304301470752333203">"Domain"</string>
     <string name="wifi_eap_user_cert" msgid="3569182430929173220">"User certificate"</string>
@@ -1001,6 +1017,9 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"While charging"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"While docked"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Never"</string>
+    <!-- no translation found for screensaver_settings_summary_on (4210827304351483645) -->
+    <skip />
+    <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Off"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"When to start"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Lift to wake"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Ambient display"</string>
@@ -1185,6 +1204,10 @@
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Reset options"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Reset Wi-Fi, mobile &amp; Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"This will reset all network settings, including:\n\n"<li>"Wi‑Fi"</li>\n<li>"Mobile data"</li>\n<li>"Bluetooth"</li></string>
+    <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"Reset Bluetooth &amp; Wi‑Fi"</string>
+    <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"This will reset all Wi‑Fi &amp; Bluetooth settings. You can’t undo this action."</string>
+    <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Reset"</string>
+    <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"Bluetooth &amp; Wi‑Fi have been reset"</string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Erase"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"Erase eSIMs"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"This won’t cancel any mobile service plans. To download replacement SIMs, contact your operator."</string>
@@ -1849,7 +1872,7 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Hold volume keys"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Triple-tap screen"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continue"</string>
-    <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Hearing aids"</string>
+    <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Hearing devices"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"No hearing aids connected"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Add hearing aids"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Pair hearing aids"</string>
@@ -1859,6 +1882,17 @@
     <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, right only"</string>
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, left and right"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> +1 more"</string>
+    <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Pair new device"</string>
+    <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Saved devices"</string>
+    <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Hearing device controls"</string>
+    <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Hearing device shortcut"</string>
+    <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Hearing aid compatibility"</string>
+    <string name="accessibility_hac_mode_summary" msgid="5164793702798871478">"Improve audio for some hearing devices"</string>
+    <string name="accessibility_hearing_device_footer_summary" msgid="4636110586636490256">"Make sure that your hearing devices are turned on and in pairing mode"</string>
+    <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Pair hearing device"</string>
+    <string name="accessibility_found_hearing_devices" msgid="3472605919692789408">"Available devices"</string>
+    <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Don’t see your hearing device?"</string>
+    <string name="accessibility_list_all_devices_title" msgid="3555097127022458571">"View all Bluetooth devices"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Audio adjustment"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Audio description"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Hear a description of what’s happening on screen in supported movies and shows"</string>
@@ -2051,18 +2085,12 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"See apps with highest usage"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Charging is paused"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"Protecting battery to extend battery lifespan"</string>
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_title (7257251934903787366) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_summary (428474483479026813) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_title (8843454404807737776) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_summary (5582869291068635429) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_title (1679449361090557201) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_summary (5107293805054133144) -->
-    <skip />
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="7257251934903787366">"Charging to <xliff:g id="PERCENT">%1$s</xliff:g> to protect the battery"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="428474483479026813">"When your tablet is docked, charging will be paused at <xliff:g id="PERCENT">%1$s</xliff:g> to extend battery lifespan"</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="8843454404807737776">"Charging paused to protect battery"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="5582869291068635429">"When your tablet is docked, charging is paused at <xliff:g id="PERCENT">%1$s</xliff:g> to extend battery lifespan"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Charging to full"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="5107293805054133144">"To protect your battery, charging will be paused at <xliff:g id="PERCENT">%1$s</xliff:g> the next time that your tablet is docked"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Learn more about charging is paused"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Resume charging"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Includes high-power background activity"</string>
@@ -2194,9 +2222,14 @@
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Total: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Background: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Battery usage data will be available in a few hours once fully charged"</string>
+    <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"now"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Battery usage chart"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Daily battery usage chart"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Hourly battery usage chart"</string>
+    <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="8219417894003454299">"Usage proportional breakdown since last full charge"</string>
+    <string name="battery_usage_breakdown_title_for_slot" msgid="5897712719834293709">"Usage proportional breakdown for <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_usage_app_tab" msgid="47007533921631047">"App"</string>
+    <string name="battery_usage_system_tab" msgid="2723499428460455537">"System"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Process Stats"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Geeky stats about running processes"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Memory use"</string>
@@ -2793,7 +2826,16 @@
     <string name="keywords_face_unlock" msgid="545338452730885392">"face, unlock, auth, sign in"</string>
     <string name="keywords_biometric_unlock" msgid="8569545388717753692">"face, unlock, auth, sign in, fingerprint, biometric"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"imei, meid, min, prl version, imei sv"</string>
-    <string name="keywords_sim_status" msgid="8784456547742075508">"network, mobile network state, service state, signal strength, mobile network type, roaming, iccid, eid"</string>
+    <!-- no translation found for keywords_sim_status (4221401945956122228) -->
+    <skip />
+    <!-- no translation found for keywords_sim_status_esim (3338719238556853609) -->
+    <skip />
+    <!-- no translation found for keywords_sim_status_iccid (4775398796251969759) -->
+    <skip />
+    <!-- no translation found for keywords_sim_status_iccid_esim (4634015619840979184) -->
+    <skip />
+    <!-- no translation found for keywords_esim_eid (8128175058237372457) -->
+    <skip />
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"serial number, hardware version"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"android security patch level, baseband version, kernel version"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"theme, light, dark, mode, light sensitivity, photophobia, make darker, darken, dark mode, migraine"</string>
@@ -3349,6 +3391,22 @@
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Lock device when unpinning"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Confirm SIM deletion"</string>
     <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Verify that it\'s you before erasing a eSIM"</string>
+    <string name="memtag_title" msgid="5096176296797727201">"Advanced memory protection beta"</string>
+    <string name="memtag_toggle" msgid="8695028758462939212">"Advanced memory protection"</string>
+    <string name="memtag_intro" msgid="579408691329568953">"This beta feature helps you protect your device from bugs that may put your security at risk."</string>
+    <string name="memtag_on" msgid="824938319141503923">"On"</string>
+    <string name="memtag_off" msgid="4835589640091709019">"Off"</string>
+    <string name="memtag_on_pending" msgid="1592053425431532361">"On after restart"</string>
+    <string name="memtag_off_pending" msgid="1543177181383593726">"Off after restart"</string>
+    <string name="memtag_force_off" msgid="1143468955988138470">"Currently unavailable for your device"</string>
+    <string name="memtag_force_on" msgid="3254349938627883664">"Always on for your device"</string>
+    <string name="memtag_footer" msgid="8480784485124271376">"You\'ll have to restart your device to turn advanced memory protection on or off. When it\'s on, you may notice slower device performance."</string>
+    <string name="memtag_reboot_title" msgid="1413471876903578769">"Restart device?"</string>
+    <string name="memtag_reboot_message_on" msgid="3270256606602439418">"You\'ll need to restart your device to turn on advanced memory protection."</string>
+    <string name="memtag_reboot_message_off" msgid="2567062468140476451">"You\'ll need to restart your device to turn off advanced memory protection."</string>
+    <string name="memtag_reboot_yes" msgid="5788896350697141429">"Restart"</string>
+    <string name="memtag_reboot_no" msgid="2860671356184849330">"Not now"</string>
+    <string name="memtag_learn_more" msgid="1596145970669119776">"Learn more about advanced memory protection."</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"This work profile is managed by:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Managed by <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"Secure start-up"</string>
@@ -4330,7 +4388,7 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"To use, first turn on ‘Show device controls’"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Show double-line clock when available"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Double-line clock"</string>
-    <string name="lockscreen_quick_affordances_title" msgid="435869403114245620">"Buttons"</string>
+    <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"Shortcuts"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
       <item quantity="one"><xliff:g id="FIRST_0">%1$s</xliff:g></item>

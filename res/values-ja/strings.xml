@@ -68,7 +68,17 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"右の補聴器を接続しました。\n\n左耳をペア設定するには、電源が入り、ペア設定できる状態になっていることをご確認ください。"</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"右耳をペア設定"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"左耳をペア設定"</string>
+    <string name="bluetooth_device_controls_title" msgid="7115710864094259075">"補聴器の操作"</string>
+    <string name="bluetooth_device_controls_summary" msgid="5843475712424478172">"補聴器のショートカット、補聴器両立性"</string>
+    <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"音声出力"</string>
+    <string name="bluetooth_audio_routing_summary" msgid="7236959154306472259">"補聴器またはスマートフォンのスピーカーで再生する音声の種類を指定します"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"関連ツール"</string>
+    <string name="bluetooth_ringtone_title" msgid="3049822968673742328">"着信音"</string>
+    <string name="bluetooth_call_title" msgid="3170657843273743928">"通話"</string>
+    <string name="bluetooth_media_title" msgid="343705257183053699">"メディア"</string>
+    <string name="bluetooth_system_sounds_title" msgid="5331556107110163039">"システム音"</string>
+    <string name="bluetooth_audio_path_hearing_device_title" msgid="2073463574123159850">"補聴器で再生"</string>
+    <string name="bluetooth_audio_path_phone_speaker_title" msgid="4259772328898172657">"スマートフォンのスピーカーで再生"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"名前のないBluetoothデバイス"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"検索中"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"周辺にBluetoothデバイスが見つかりません"</string>
@@ -108,6 +118,11 @@
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"ペア設定済み"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth を ON にしました"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"すべて表示"</string>
+    <string name="stylus_device_details_title" msgid="7618295136015480864">"タッチペン"</string>
+    <string name="stylus_default_notes_app" msgid="3111290761558445874">"システムメモ作成アプリ"</string>
+    <string name="stylus_textfield_handwriting" msgid="6962904622425646128">"テキスト フィールドでのタッチペン入力"</string>
+    <string name="stylus_ignore_button" msgid="7734540973145241391">"タッチペンのボタン押下をすべて無視する"</string>
+    <string name="stylus_usi_header_title" msgid="1949011797718972583">"USI タッチペン"</string>
     <string name="date_and_time" msgid="1788358029823431692">"日付と時刻"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"プロキシ"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"消去"</string>
@@ -708,6 +723,7 @@
     <string name="wifi_eap_method" msgid="3776009521349381742">"EAP方式"</string>
     <string name="please_select_phase2" msgid="577633852089847142">"フェーズ 2 認証"</string>
     <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"CA 証明書"</string>
+    <string name="wifi_eap_min_tls_ver" msgid="174023604103299457">"TLS の最小バージョン"</string>
     <string name="wifi_eap_ocsp" msgid="8713933962516871238">"証明書のオンライン検証"</string>
     <string name="wifi_eap_domain" msgid="8304301470752333203">"ドメイン"</string>
     <string name="wifi_eap_user_cert" msgid="3569182430929173220">"ユーザー証明書"</string>
@@ -1001,6 +1017,9 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"充電時"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"ドッキング時"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"なし"</string>
+    <!-- no translation found for screensaver_settings_summary_on (4210827304351483645) -->
+    <skip />
+    <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"OFF"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"起動するタイミング"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"指を離してスリープ状態から復帰"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"アンビエント表示"</string>
@@ -1185,6 +1204,10 @@
     <string name="reset_dashboard_title" msgid="7423200250697886918">"リセット オプション"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Wi-Fi、モバイル、Bluetooth をリセット"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"以下を含む、すべてのネットワーク設定がリセットされます。\n\n"<li>"Wi‑Fi"</li>\n<li>"モバイルデータ"</li>\n<li>"Bluetooth"</li></string>
+    <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"Bluetooth と Wi-Fi のリセット"</string>
+    <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"すべての Wi-Fi と Bluetooth の設定をリセットします。この操作を元に戻すことはできません。"</string>
+    <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"リセット"</string>
+    <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"Bluetooth と Wi-Fi をリセットしました"</string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"消去"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"eSIM を消去"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"この操作でモバイルのサービスプランが解約されることはありません。別の eSIM をダウンロードするには、携帯通信会社にお問い合わせください。"</string>
@@ -1849,7 +1872,7 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"音量ボタンを長押し"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"画面をトリプルタップ"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"続行"</string>
-    <string name="accessibility_hearingaid_title" msgid="427173678199203191">"補聴器"</string>
+    <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"補聴器"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"接続されている補聴器はありません"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"補聴器を追加する"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"補聴器のペア設定"</string>
@@ -1859,6 +1882,17 @@
     <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>、右のみ"</string>
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>、左と右"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>、他 1 台"</string>
+    <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"新規デバイスのペア設定"</string>
+    <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"保存済みのデバイス"</string>
+    <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"補聴器の操作"</string>
+    <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"補聴器のショートカット"</string>
+    <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"補聴器両立性"</string>
+    <string name="accessibility_hac_mode_summary" msgid="5164793702798871478">"一部の補聴器で音質を向上"</string>
+    <string name="accessibility_hearing_device_footer_summary" msgid="4636110586636490256">"補聴器が ON で、ペア設定モードになっていることを確認します"</string>
+    <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"補聴器とのペア設定"</string>
+    <string name="accessibility_found_hearing_devices" msgid="3472605919692789408">"使用可能なデバイス"</string>
+    <string name="accessibility_found_all_devices" msgid="7817834722148556520">"補聴器が表示されない場合"</string>
+    <string name="accessibility_list_all_devices_title" msgid="3555097127022458571">"すべての Bluetooth デバイスを表示"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"音声の調整"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"音声による説明"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"対応する映画や番組にて、画面の表示内容の説明を読み上げます"</string>
@@ -2051,18 +2085,12 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"使用量の多いアプリを確認"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"充電は一時停止中"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"バッテリーの消耗を抑えて長持ちさせます"</string>
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_title (7257251934903787366) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_summary (428474483479026813) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_title (8843454404807737776) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_summary (5582869291068635429) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_title (1679449361090557201) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_summary (5107293805054133144) -->
-    <skip />
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="7257251934903787366">"バッテリーを保護するために充電が <xliff:g id="PERCENT">%1$s</xliff:g> で一時停止します"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="428474483479026813">"バッテリーを長持ちさせるために、タブレットをホルダーに置いている間は充電が <xliff:g id="PERCENT">%1$s</xliff:g> で一時停止します"</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="8843454404807737776">"バッテリーを保護するために充電が一時停止します"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="5582869291068635429">"バッテリーを長持ちさせるために、タブレットをホルダーに置いている間は充電が <xliff:g id="PERCENT">%1$s</xliff:g> で一時停止します"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"フル充電する"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="5107293805054133144">"バッテリーを保護するために、次回タブレットをホルダーに置いたときは充電が <xliff:g id="PERCENT">%1$s</xliff:g> で一時停止します"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"充電一時停止の詳細"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"充電を再開"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"電力消費量の多いバックグラウンド アクティビティを含める"</string>
@@ -2194,9 +2222,16 @@
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"合計: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"バックグラウンド: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"バッテリー使用量のデータは、充電が完了してから数時間使用すると表示されます"</string>
+    <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"今"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"バッテリー使用量グラフ"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"バッテリー使用量グラフ（日）"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"バッテリー使用量グラフ（時間）"</string>
+    <!-- String.format failed for translation -->
+    <!-- no translation found for battery_usage_breakdown_title_since_last_full_charge (8219417894003454299) -->
+    <skip />
+    <string name="battery_usage_breakdown_title_for_slot" msgid="5897712719834293709">"<xliff:g id="SLOT">%s</xliff:g> の使用状況の内訳"</string>
+    <string name="battery_usage_app_tab" msgid="47007533921631047">"アプリ"</string>
+    <string name="battery_usage_system_tab" msgid="2723499428460455537">"システム"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"プロセスの統計情報"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"プロセスの実行に関する独自の統計情報"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"メモリ使用"</string>
@@ -2793,7 +2828,16 @@
     <string name="keywords_face_unlock" msgid="545338452730885392">"顔, フェイス, ロック解除, アンロック, 認証, ログイン, 顔認証"</string>
     <string name="keywords_biometric_unlock" msgid="8569545388717753692">"顔, ロック解除, 認証, ログイン, 指紋, 生体認証"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"IMEI, MEID, MIN, PRL バージョン, IMEI SV"</string>
-    <string name="keywords_sim_status" msgid="8784456547742075508">"ネットワーク, モバイル ネットワークの状態, サービスの状態, 電波強度, モバイル ネットワークの種類, ローミング, ICCID, EID"</string>
+    <!-- no translation found for keywords_sim_status (4221401945956122228) -->
+    <skip />
+    <!-- no translation found for keywords_sim_status_esim (3338719238556853609) -->
+    <skip />
+    <!-- no translation found for keywords_sim_status_iccid (4775398796251969759) -->
+    <skip />
+    <!-- no translation found for keywords_sim_status_iccid_esim (4634015619840979184) -->
+    <skip />
+    <!-- no translation found for keywords_esim_eid (8128175058237372457) -->
+    <skip />
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"シリアル番号, ハードウェア バージョン"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"Android セキュリティ パッチ レベル, ベースバンド バージョン, カーネル バージョン"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"テーマ, ライト, ダーク, モード, 光 過敏, 羞明, 切り替え 暗く, 暗くする, ダーク モード, 頭痛"</string>
@@ -3349,6 +3393,22 @@
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"アプリ固定の解除時にデバイスをロック"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"SIM の削除の確認"</string>
     <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"eSIM を消去する前に本人確認を行います"</string>
+    <string name="memtag_title" msgid="5096176296797727201">"高度なメモリ保護（ベータ版）"</string>
+    <string name="memtag_toggle" msgid="8695028758462939212">"高度なメモリ保護"</string>
+    <string name="memtag_intro" msgid="579408691329568953">"このベータ版機能を使用すると、セキュリティ上のリスクがあるバグからデバイスを保護できます。"</string>
+    <string name="memtag_on" msgid="824938319141503923">"ON"</string>
+    <string name="memtag_off" msgid="4835589640091709019">"OFF"</string>
+    <string name="memtag_on_pending" msgid="1592053425431532361">"再起動後に ON"</string>
+    <string name="memtag_off_pending" msgid="1543177181383593726">"再起動後に OFF"</string>
+    <string name="memtag_force_off" msgid="1143468955988138470">"デバイスで現在利用不可"</string>
+    <string name="memtag_force_on" msgid="3254349938627883664">"デバイスで常に ON"</string>
+    <string name="memtag_footer" msgid="8480784485124271376">"高度なメモリ保護の ON / OFF を切り替えるにはデバイスを再起動する必要があります。ON の場合、デバイスのパフォーマンスが低下することがあります。"</string>
+    <string name="memtag_reboot_title" msgid="1413471876903578769">"デバイスを再起動しますか？"</string>
+    <string name="memtag_reboot_message_on" msgid="3270256606602439418">"高度なメモリ保護を ON にするにはデバイスを再起動する必要があります。"</string>
+    <string name="memtag_reboot_message_off" msgid="2567062468140476451">"高度なメモリ保護を OFF にするにはデバイスを再起動する必要があります。"</string>
+    <string name="memtag_reboot_yes" msgid="5788896350697141429">"再起動"</string>
+    <string name="memtag_reboot_no" msgid="2860671356184849330">"後で"</string>
+    <string name="memtag_learn_more" msgid="1596145970669119776">"高度なメモリ保護の詳細"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"この仕事用プロファイルを管理するアプリ:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>によって管理されています"</string>
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"起動時の保護"</string>
@@ -4330,7 +4390,7 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"使用するには、[デバイス コントロールを表示] を ON にしてください"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"使用可能な場合はダブルライン時計を表示します"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"ダブルライン時計"</string>
-    <string name="lockscreen_quick_affordances_title" msgid="435869403114245620">"ボタン"</string>
+    <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"ショートカット"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>、<xliff:g id="SECOND">%2$s</xliff:g></item>
       <item quantity="one"><xliff:g id="FIRST_0">%1$s</xliff:g></item>

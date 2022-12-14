@@ -68,7 +68,17 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Dit højre høreapparat er tilsluttet.\n\nDu kan parre det venstre ved at sørge for, at det er tændt og klar til at blive parret."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Par højre apparat"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Par venstre apparat"</string>
+    <string name="bluetooth_device_controls_title" msgid="7115710864094259075">"Indstillinger for høreapparatet"</string>
+    <string name="bluetooth_device_controls_summary" msgid="5843475712424478172">"Genvej til høreapparat, høreapparatskompatibilitet"</string>
+    <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Lydudgang"</string>
+    <string name="bluetooth_audio_routing_summary" msgid="7236959154306472259">"Vælg, om forskellige typer lyd skal afspilles på høreapparatet eller telefonens højttaler"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Relaterede"</string>
+    <string name="bluetooth_ringtone_title" msgid="3049822968673742328">"Ringetone"</string>
+    <string name="bluetooth_call_title" msgid="3170657843273743928">"Ring"</string>
+    <string name="bluetooth_media_title" msgid="343705257183053699">"Medier"</string>
+    <string name="bluetooth_system_sounds_title" msgid="5331556107110163039">"Systemlyde"</string>
+    <string name="bluetooth_audio_path_hearing_device_title" msgid="2073463574123159850">"Afspil på høreapparat"</string>
+    <string name="bluetooth_audio_path_phone_speaker_title" msgid="4259772328898172657">"Afspil på telefonens højttaler"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"Unavngiven Bluetooth-enhed"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"Søger"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"Der blev ikke fundet Bluetooth-enheder."</string>
@@ -108,6 +118,11 @@
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Tidligere forbindelser"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth er aktiveret"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Se alle"</string>
+    <string name="stylus_device_details_title" msgid="7618295136015480864">"Styluspen"</string>
+    <string name="stylus_default_notes_app" msgid="3111290761558445874">"Systemets app til notetagning"</string>
+    <string name="stylus_textfield_handwriting" msgid="6962904622425646128">"Skrivning med styluspen i tekstfelter"</string>
+    <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignorer alle trykker på knapper med styluspen"</string>
+    <string name="stylus_usi_header_title" msgid="1949011797718972583">"UPI-styluspen"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Dato og klokkeslæt"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Ryd"</string>
@@ -708,6 +723,7 @@
     <string name="wifi_eap_method" msgid="3776009521349381742">"EAP-metode"</string>
     <string name="please_select_phase2" msgid="577633852089847142">"Fase 2-godkendelse"</string>
     <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"CA-certifikat"</string>
+    <string name="wifi_eap_min_tls_ver" msgid="174023604103299457">"Minimumversion af TLS"</string>
     <string name="wifi_eap_ocsp" msgid="8713933962516871238">"Certifikatstatus online"</string>
     <string name="wifi_eap_domain" msgid="8304301470752333203">"Domæne"</string>
     <string name="wifi_eap_user_cert" msgid="3569182430929173220">"Brugercertifikat"</string>
@@ -1001,6 +1017,9 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Under opladning"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Når enheden er tilsluttet en dockingstation"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Aldrig"</string>
+    <!-- no translation found for screensaver_settings_summary_on (4210827304351483645) -->
+    <skip />
+    <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Fra"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Starttidspunkt"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Løft enheden for at vække den"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Aktiv låseskærm"</string>
@@ -1185,6 +1204,10 @@
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Nulstil valg"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Nulstil Wi-Fi, mobil og Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Denne handling nulstiller alle netværksindstillinger, bl.a.:\n\n"<li>"Wi‑Fi"</li>\n<li>"Mobildata"</li>\n<li>"Bluetooth"</li></string>
+    <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"Nulstil Bluetooth og Wi‑Fi"</string>
+    <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"Denne handling nulstiller alle indstillinger for Wi‑Fi og Bluetooth. Denne handling kan ikke fortrydes."</string>
+    <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Nulstil"</string>
+    <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"Bluetooth og Wi‑Fi er blevet nulstillet"</string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Ryd"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"Slet eSIM-kort"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"Mobilabonnementer opsiges ikke. Kontakt dit mobilselskab for at downloade nye SIM-kort."</string>
@@ -1849,7 +1872,7 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Hold lydstyrketasterne inde"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tryk tre gange på skærmen"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Fortsæt"</string>
-    <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Høreapparater"</string>
+    <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Høreapparater"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Der er ikke tilknyttet nogen høreapparater"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Tilføj høreapparater"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Par høreapparater"</string>
@@ -1859,6 +1882,17 @@
     <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> – kun højre"</string>
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> –venstre og højre"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"Mindst 1 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> mere"</string>
+    <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Par ny enhed"</string>
+    <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Gemte enheder"</string>
+    <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Indstillinger for høreapparatet"</string>
+    <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Genvej til høreapparat"</string>
+    <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Høreapparatskompatibilitet"</string>
+    <string name="accessibility_hac_mode_summary" msgid="5164793702798871478">"Gør lyden bedre for visse høreapparater"</string>
+    <string name="accessibility_hearing_device_footer_summary" msgid="4636110586636490256">"Sørg for, at dine høreapparater er tændt, og at parringstilstand er aktiveret"</string>
+    <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Par høreapparat"</string>
+    <string name="accessibility_found_hearing_devices" msgid="3472605919692789408">"Tilgængelige enheder"</string>
+    <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Kan du ikke se dit høreapparat?"</string>
+    <string name="accessibility_list_all_devices_title" msgid="3555097127022458571">"Se alle Bluetooth-enheder"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Lydjustering"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Synstolkning"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Hør en beskrivelse af, hvad der sker på skærmen, i understøttede film og tv-serier"</string>
@@ -2051,18 +2085,12 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Se apps med højest forbrug"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Opladningen er sat på pause"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"Beskytter batteriet for at forlænge dets levetid"</string>
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_title (7257251934903787366) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_summary (428474483479026813) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_title (8843454404807737776) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_summary (5582869291068635429) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_title (1679449361090557201) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_summary (5107293805054133144) -->
-    <skip />
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="7257251934903787366">"Oplader til <xliff:g id="PERCENT">%1$s</xliff:g> for at forlænge batteriet"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="428474483479026813">"Når din tablet er sat i dockingstation, sættes opladning på pause ved <xliff:g id="PERCENT">%1$s</xliff:g> for at forlænge batteritiden"</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="8843454404807737776">"Opladning er sat på pause for at beskytte batteriet"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="5582869291068635429">"Når din tablet er sat i dockingtilstand, sættes opladning på pause ved <xliff:g id="PERCENT">%1$s</xliff:g> for at forlænge batteritiden"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Lader helt op"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="5107293805054133144">"For at beskytte dit batteri sættes opladning på pause ved <xliff:g id="PERCENT">%1$s</xliff:g>, næste gang din tablet sættes i dockingstation"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Få flere oplysninger om, hvad det betyder, når opladning er sat på pause"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Genoptag opladning"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Omfatter batterikrævende aktivitet i baggrunden"</string>
@@ -2194,9 +2222,14 @@
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"I alt: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Baggrund: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Data om batteriforbrug bliver tilgængelige, et par timer efter at enheden er fuldt opladet"</string>
+    <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"nu"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Diagram over batteriforbrug"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Diagram med batteriforbrug pr. dag"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Diagram med batteriforbrug pr. time"</string>
+    <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="8219417894003454299">"Forholdsmæssig oversigt over forbrug siden sidste fulde opladning"</string>
+    <string name="battery_usage_breakdown_title_for_slot" msgid="5897712719834293709">"Forholdsmæssig oversigt over forbrug for <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_usage_app_tab" msgid="47007533921631047">"App"</string>
+    <string name="battery_usage_system_tab" msgid="2723499428460455537">"System"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Processtatistikker"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Nørdede statistikker om kørende processer"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"hukommelse brugt"</string>
@@ -2732,10 +2765,8 @@
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Gemte adgangskoder, autofyld, synkroniserede konti"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Standardapps"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Klonede apps"</string>
-    <!-- no translation found for desc_cloned_apps_intro_text (1369621522882622476) -->
-    <skip />
-    <!-- no translation found for cloned_apps_summary (8805362440770795709) -->
-    <skip />
+    <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Opret en anden forekomst af appen, så du kan bruge to konti på samme tid."</string>
+    <string name="cloned_apps_summary" msgid="8805362440770795709">"<xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g> er klonet, <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g> kan klones"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Sprog, bevægelser, klokkeslæt, backup"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"Systemsprog, appsprog"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, netværksforbindelse, internet, trådløs, data, wi fi"</string>
@@ -2795,7 +2826,16 @@
     <string name="keywords_face_unlock" msgid="545338452730885392">"ansigt, oplåsning, godkendelse, log ind"</string>
     <string name="keywords_biometric_unlock" msgid="8569545388717753692">"ansigt, lås op, ansigtslås, godkendelse, log ind, fingeraftryk, biometri, biometrisk"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"imei, meid, min, prl version, imei sv"</string>
-    <string name="keywords_sim_status" msgid="8784456547742075508">"netværk, mobilnetværkstilstand, netværkstilstand, signalstyrke, mobilnetværkstype, roaming, iccid, eid"</string>
+    <!-- no translation found for keywords_sim_status (4221401945956122228) -->
+    <skip />
+    <!-- no translation found for keywords_sim_status_esim (3338719238556853609) -->
+    <skip />
+    <!-- no translation found for keywords_sim_status_iccid (4775398796251969759) -->
+    <skip />
+    <!-- no translation found for keywords_sim_status_iccid_esim (4634015619840979184) -->
+    <skip />
+    <!-- no translation found for keywords_esim_eid (8128175058237372457) -->
+    <skip />
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"serienummer, hardwareversion"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"seneste sikkerhedsopdatering i Android, basebandversion, kernesystem"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"tema, lyst, mørkt, tilstand, lysfølsomhed, fotofobi, gør mørkere, mørkere, mørk tilstand, migræne"</string>
@@ -3351,6 +3391,22 @@
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Lås enheden ved frigørelse"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Bekræft sletning af SIM-kort"</string>
     <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Verificer din identitet, inden du rydder et eSIM"</string>
+    <string name="memtag_title" msgid="5096176296797727201">"Avanceret beskyttelse af hukommelsen (beta)"</string>
+    <string name="memtag_toggle" msgid="8695028758462939212">"Avanceret beskyttelse af hukommelsen"</string>
+    <string name="memtag_intro" msgid="579408691329568953">"Denne betafunktion hjælper dig med at beskytte din enhed mod fejl, der kan bringe din sikkerhed i fare."</string>
+    <string name="memtag_on" msgid="824938319141503923">"Til"</string>
+    <string name="memtag_off" msgid="4835589640091709019">"Fra"</string>
+    <string name="memtag_on_pending" msgid="1592053425431532361">"Til efter genstart"</string>
+    <string name="memtag_off_pending" msgid="1543177181383593726">"Fra efter genstart"</string>
+    <string name="memtag_force_off" msgid="1143468955988138470">"Fås i øjeblikket ikke til din enhed"</string>
+    <string name="memtag_force_on" msgid="3254349938627883664">"Altid aktiveret på din enhed"</string>
+    <string name="memtag_footer" msgid="8480784485124271376">"Genstart din enhed for at aktivere eller deaktivere avanceret beskyttelse af hukommelsen. Når funktionen er aktiveret, vil du muligvis opleve, at enheden er langsommere."</string>
+    <string name="memtag_reboot_title" msgid="1413471876903578769">"Vil du genstarte enheden?"</string>
+    <string name="memtag_reboot_message_on" msgid="3270256606602439418">"Genstart din enhed for at aktivere avanceret beskyttelse af hukommelsen."</string>
+    <string name="memtag_reboot_message_off" msgid="2567062468140476451">"Genstart din enhed for at deaktivere avanceret beskyttelse af hukommelsen."</string>
+    <string name="memtag_reboot_yes" msgid="5788896350697141429">"Genstart"</string>
+    <string name="memtag_reboot_no" msgid="2860671356184849330">"Ikke nu"</string>
+    <string name="memtag_learn_more" msgid="1596145970669119776">"Få flere oplysninger om avanceret beskyttelse af hukommelsen."</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Denne arbejdsprofil administreres af:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Administreret af <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"Sikker opstart"</string>
@@ -4332,7 +4388,7 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Du skal først aktivere \"Vis enhedsstyring\"."</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Vis uret med to linjer, når det er tilgængeligt"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Ur med to linjer"</string>
-    <string name="lockscreen_quick_affordances_title" msgid="435869403114245620">"Knapper"</string>
+    <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"Genveje"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="one"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
       <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
@@ -4540,10 +4596,8 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Konfigurer grænsen for indgående båndbredde på netværket, som vil gælde for alle netværk, der leverer internetforbindelse."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Konfigurer grænsen for downloadhastighed på netværket"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Ubegrænset"</string>
-    <!-- no translation found for disable_phantom_process_monitor_title (8348108346706188771) -->
-    <skip />
-    <!-- no translation found for disable_phantom_process_monitor_summary (3044464635550256985) -->
-    <skip />
+    <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"Deaktiver begrænsningerne for underprocesser"</string>
+    <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Deaktiver begrænsningerne for brugen af systemets ressourcer på underprocesser i appen"</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Udsendelse"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Udsend <xliff:g id="CURRENTAPP">%1$s</xliff:g>"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Lyt til udsendelser, der afspilles i nærheden"</string>
