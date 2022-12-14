@@ -44,8 +44,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowLog;
 
-import java.text.NumberFormat;
-
 @RunWith(RobolectricTestRunner.class)
 public class DockDefenderTipTest {
     private Context mContext;
@@ -85,8 +83,7 @@ public class DockDefenderTipTest {
     @Test
     public void testGetTitle() {
         assertThat(mDockDefenderTipFutureBypass.getTitle(mContext).toString()).isEqualTo(
-                mContext.getString(R.string.battery_tip_dock_defender_future_bypass_title,
-                        getExtraPercentage(mContext)));
+                mContext.getString(R.string.battery_tip_dock_defender_future_bypass_title));
         assertThat(mDockDefenderTipActive.getTitle(mContext).toString()).isEqualTo(
                 mContext.getString(R.string.battery_tip_dock_defender_active_title));
         assertThat(mDockDefenderTipTemporarilyBypassed.getTitle(mContext).toString()).isEqualTo(
@@ -97,14 +94,12 @@ public class DockDefenderTipTest {
     @Test
     public void testGetSummary() {
         assertThat(mDockDefenderTipFutureBypass.getSummary(mContext).toString()).isEqualTo(
-                mContext.getString(R.string.battery_tip_dock_defender_future_bypass_summary,
-                        getExtraPercentage(mContext)));
+                mContext.getString(R.string.battery_tip_dock_defender_future_bypass_summary));
         assertThat(mDockDefenderTipActive.getSummary(mContext).toString()).isEqualTo(
-                mContext.getString(R.string.battery_tip_dock_defender_active_summary,
-                        getExtraPercentage(mContext)));
+                mContext.getString(R.string.battery_tip_dock_defender_active_summary));
         assertThat(mDockDefenderTipTemporarilyBypassed.getSummary(mContext).toString()).isEqualTo(
-                mContext.getString(R.string.battery_tip_dock_defender_temporarily_bypassed_summary,
-                        getExtraPercentage(mContext)));
+                mContext.getString(
+                        R.string.battery_tip_dock_defender_temporarily_bypassed_summary));
         assertThat(mDockDefenderTipDisabled.getSummary(mContext)).isNull();
     }
 
@@ -195,11 +190,4 @@ public class DockDefenderTipTest {
     private ShadowLog.LogItem createErrorLog(String msg) {
         return new ShadowLog.LogItem(Log.ERROR, "tag", msg, null);
     }
-
-    private String getExtraPercentage(Context context) {
-        final int extraValue = context.getResources().getInteger(
-                R.integer.config_battery_extra_tip_value);
-        return NumberFormat.getPercentInstance().format(extraValue * 0.01f);
-    }
-
 }
