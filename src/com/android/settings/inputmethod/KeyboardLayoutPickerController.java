@@ -154,6 +154,7 @@ public class KeyboardLayoutPickerController extends BasePreferenceController imp
             final SwitchPreference pref = new SwitchPreference(mScreen.getContext());
             pref.setTitle(layout.getLabel());
             pref.setSummary(layout.getCollection());
+            // TODO: Waiting for new API to use a prefix with special number to setKey
             pref.setKey(layout.getDescriptor());
             mScreen.addPreference(pref);
             mPreferenceMap.put(pref, layout);

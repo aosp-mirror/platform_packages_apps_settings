@@ -18,7 +18,6 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.utcToLocalTime;
 
-import android.app.settings.SettingsEnums;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -48,7 +47,6 @@ import com.android.internal.os.PowerProfile;
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 
 import java.time.Duration;
@@ -437,16 +435,10 @@ public final class DataProcessor {
         insertDailyUsageDiffData(hourlyBatteryLevelsPerDay, resultMap);
         // Insert diff data [SELECTED_INDEX_ALL][SELECTED_INDEX_ALL].
         insertAllUsageDiffData(resultMap);
-        // Compute the apps number before purge. Must put before purgeLowPercentageAndFakeData.
-        final int countOfAppBeforePurge = getCountOfApps(resultMap);
         purgeFakeAndHiddenPackages(context, resultMap);
-        // Compute the apps number after purge. Must put after purgeLowPercentageAndFakeData.
-        final int countOfAppAfterPurge = getCountOfApps(resultMap);
         if (!isUsageMapValid(resultMap, hourlyBatteryLevelsPerDay)) {
             return null;
         }
-
-        logAppCountMetrics(context, countOfAppBeforePurge, countOfAppAfterPurge);
         return resultMap;
     }
 
@@ -531,14 +523,7 @@ public final class DataProcessor {
         allUsageMap.put(SELECTED_INDEX_ALL,
                 generateBatteryDiffData(context, getBatteryHistListFromFromStatsService(context)));
         resultMap.put(SELECTED_INDEX_ALL, allUsageMap);
-
-        // Compute the apps number before purge. Must put before purgeLowPercentageAndFakeData.
-        final int countOfAppBeforePurge = getCountOfApps(resultMap);
         purgeFakeAndHiddenPackages(context, resultMap);
-        // Compute the apps number after purge. Must put after purgeLowPercentageAndFakeData.
-        final int countOfAppAfterPurge = getCountOfApps(resultMap);
-
-        logAppCountMetrics(context, countOfAppBeforePurge, countOfAppAfterPurge);
         return resultMap;
     }
 
@@ -1350,15 +1335,6 @@ public final class DataProcessor {
         return calendar.getTimeInMillis();
     }
 
-    private static int getCountOfApps(final Map<Integer, Map<Integer, BatteryDiffData>> resultMap) {
-        final BatteryDiffData diffDataList =
-                resultMap.get(SELECTED_INDEX_ALL).get(SELECTED_INDEX_ALL);
-        return diffDataList == null
-                ? 0
-                : diffDataList.getAppDiffEntryList().size()
-                        + diffDataList.getSystemDiffEntryList().size();
-    }
-
     private static boolean contains(String target, Set<CharSequence> packageNames) {
         if (target != null && packageNames != null) {
             for (CharSequence packageName : packageNames) {
@@ -1412,21 +1388,6 @@ public final class DataProcessor {
 
     private static long getCurrentTimeMillis() {
         return sFakeCurrentTimeMillis > 0 ? sFakeCurrentTimeMillis : System.currentTimeMillis();
-    }
-
-    private static void logAppCountMetrics(
-            Context context, final int countOfAppBeforePurge, final int countOfAppAfterPurge) {
-        context = context.getApplicationContext();
-        final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-        metricsFeatureProvider.action(
-                context,
-                SettingsEnums.ACTION_BATTERY_USAGE_SHOWN_APP_COUNT,
-                countOfAppAfterPurge);
-        metricsFeatureProvider.action(
-                context,
-                SettingsEnums.ACTION_BATTERY_USAGE_HIDDEN_APP_COUNT,
-                countOfAppBeforePurge - countOfAppAfterPurge);
     }
 
     /**

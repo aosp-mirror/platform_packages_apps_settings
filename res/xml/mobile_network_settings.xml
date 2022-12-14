@@ -251,6 +251,18 @@
     </PreferenceCategory>
 
     <Preference
+        android:key="convert_to_esim"
+        android:persistent="false"
+        android:title="@string/convert_to_esim_title"
+        settings:controller="com.android.settings.network.telephony.ConvertToEsimPreferenceController"/>
+
+    <Preference
+        android:key="transfer_esim"
+        android:persistent="false"
+        android:title="@string/transfer_esim_to_another_device_title"
+        settings:controller="com.android.settings.network.telephony.TransferEsimPreferenceController"/>
+
+    <Preference
         android:key="erase_sim"
         android:persistent="false"
         android:title="@string/mobile_network_erase_sim"
