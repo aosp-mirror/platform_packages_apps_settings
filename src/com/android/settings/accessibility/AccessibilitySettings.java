@@ -43,6 +43,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
 
@@ -303,6 +304,7 @@ public class AccessibilitySettings extends DashboardFragment {
     void updateAllPreferences() {
         updateSystemPreferences();
         updateServicePreferences();
+        updatePreferencesState();
     }
 
     private void registerContentMonitors() {
@@ -476,6 +478,13 @@ public class AccessibilitySettings extends DashboardFragment {
      */
     protected void updateSystemPreferences() {
         // Do nothing.
+    }
+
+    private void updatePreferencesState() {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        getPreferenceControllers().forEach(controllers::addAll);
+        controllers.forEach(controller -> controller.updateState(
+                findPreference(controller.getPreferenceKey())));
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

@@ -54,6 +54,9 @@ public class PreviewSizeSeekBarControllerTest {
     @Mock
     private PreferenceScreen mPreferenceScreen;
 
+    @Mock
+    private PreviewSizeSeekBarController.ProgressInteractionListener mInteractionListener;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -65,6 +68,8 @@ public class PreviewSizeSeekBarControllerTest {
 
         mSeekBarPreference = spy(new LabeledSeekBarPreference(mContext, /* attrs= */ null));
         when(mPreferenceScreen.findPreference(anyString())).thenReturn(mSeekBarPreference);
+
+        mSeekBarController.setInteractionListener(mInteractionListener);
     }
 
     @Test
@@ -97,5 +102,13 @@ public class PreviewSizeSeekBarControllerTest {
         mSeekBarController.resetState();
 
         assertThat(mSeekBarPreference.getProgress()).isEqualTo(defaultProgress);
+    }
+
+    @Test
+    public void resetState_verifyOnProgressChanged() {
+        mSeekBarController.displayPreference(mPreferenceScreen);
+        mSeekBarController.resetState();
+
+        verify(mInteractionListener).onProgressChanged();
     }
 }

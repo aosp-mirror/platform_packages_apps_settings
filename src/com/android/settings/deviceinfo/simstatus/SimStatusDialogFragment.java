@@ -19,11 +19,14 @@ package com.android.settings.deviceinfo.simstatus;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -32,6 +35,7 @@ import androidx.fragment.app.FragmentManager;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.deviceinfo.PhoneNumberUtil;
+import com.android.settingslib.qrcode.QrCodeGenerator;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;
@@ -80,6 +84,7 @@ public class SimStatusDialogFragment extends InstrumentedDialogFragment {
         Dialog dlg = builder.setView(mRootView).create();
         dlg.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                 WindowManager.LayoutParams.FLAG_SECURE);
+        dlg.setOnShowListener(mController);
 
         return dlg;
     }
@@ -107,6 +112,10 @@ public class SimStatusDialogFragment extends InstrumentedDialogFragment {
             .sorted().toArray();
 
     public void setText(int viewId, CharSequence text) {
+        setText(viewId, text, true);
+    }
+
+    public void setText(int viewId, CharSequence text, boolean enableCopy) {
         final TextView textView = mRootView.findViewById(viewId);
         if (textView == null) {
             return;
@@ -117,5 +126,21 @@ public class SimStatusDialogFragment extends InstrumentedDialogFragment {
             text = PhoneNumberUtil.expandByTts(text);
         }
         textView.setText(text);
+        textView.setTextIsSelectable(enableCopy);
+    }
+
+    public void setQrCode(int viewId, String qrcodeText) {
+        ImageView qrCodeView = (ImageView) mRootView.findViewById(viewId);
+
+        Bitmap qrCodeBitmap = null;
+        try {
+            qrCodeBitmap = QrCodeGenerator.encodeQrCode(qrcodeText, qrCodeView.getWidth());
+        } catch (Exception exception) {
+            Log.w(TAG, "Error when presenting QR code in + " + qrCodeView, exception);
+        }
+        if (qrCodeBitmap == null) {
+            return;
+        }
+        qrCodeView.setImageBitmap(qrCodeBitmap);
     }
 }

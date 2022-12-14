@@ -20,6 +20,7 @@ import static com.android.settings.accessibility.TextReadingPreferenceFragment.R
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -27,11 +28,13 @@ import static org.mockito.Mockito.verify;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settingslib.widget.LayoutPreference;
 
+import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupdesign.GlifPreferenceLayout;
 
 import org.junit.Before;
@@ -50,8 +53,16 @@ public class TextReadingPreferenceFragmentForSetupWizardTest {
 
     @Rule
     public final MockitoRule mMockito = MockitoJUnit.rule();
+
     @Mock
     private GlifPreferenceLayout mGlifLayoutView;
+
+    @Mock
+    private FooterBarMixin mFooterBarMixin;
+
+    @Mock
+    private FragmentActivity mActivity;
+
     @Spy
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private TextReadingPreferenceFragmentForSetupWizard mFragment;
@@ -61,13 +72,14 @@ public class TextReadingPreferenceFragmentForSetupWizardTest {
         mFragment = spy(new TextReadingPreferenceFragmentForSetupWizard());
         final LayoutPreference resetPreference =
                 new LayoutPreference(mContext, R.layout.accessibility_text_reading_reset_button);
+        doReturn(mContext).when(mFragment).getContext();
         doReturn(resetPreference).when(mFragment).findPreference(RESET_KEY);
+        doReturn(mFooterBarMixin).when(mGlifLayoutView).getMixin(FooterBarMixin.class);
     }
 
     @Test
     public void setHeaderText_onViewCreated_verifyAction() {
         final String title = "title";
-        doReturn(mContext).when(mFragment).getContext();
         doReturn(title).when(mContext).getString(
                 R.string.accessibility_text_reading_options_title);
 
@@ -85,5 +97,22 @@ public class TextReadingPreferenceFragmentForSetupWizardTest {
     @Test
     public void getHelpResource_shouldNotHaveHelpResource() {
         assertThat(mFragment.getHelpResource()).isEqualTo(0);
+    }
+
+    @Test
+    public void onViewCreated_verifySetSecondaryButton() {
+        mFragment.onViewCreated(mGlifLayoutView, null);
+
+        verify(mFooterBarMixin).setSecondaryButton(any());
+    }
+
+    @Test
+    public void onViewCreated_verifySetPrimaryButton() {
+        doReturn(mActivity).when(mFragment).getActivity();
+        doReturn("setupwizard").when(mActivity).getCallingPackage();
+
+        mFragment.onViewCreated(mGlifLayoutView, null);
+
+        verify(mFooterBarMixin).setPrimaryButton(any());
     }
 }
