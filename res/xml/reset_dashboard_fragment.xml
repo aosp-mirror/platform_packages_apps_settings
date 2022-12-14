@@ -20,10 +20,10 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/reset_dashboard_title">
 
-    <!-- Network reset -->
+    <!-- Mobile Network reset -->
     <com.android.settingslib.RestrictedPreference
-        android:key="network_reset_pref"
-        android:title="@string/reset_network_title"
+        android:key="network_reset_mobile_network_settings_pref"
+        android:title="@string/reset_mobile_network_settings_title"
         settings:userRestriction="no_network_reset"
         settings:useAdminDisabledSummary="true"
         settings:isPreferenceVisible="@bool/config_show_sim_info"
