@@ -183,6 +183,14 @@
                 android:persistent="true"
                 settings:controller="com.android.settings.network.telephony.VideoCallingPreferenceController"/>
 
+            <SwitchPreference
+                android:key="backup_calling_key"
+                android:title="@string/backup_calling_settings_title"
+                android:persistent="false"
+                android:summary="@string/backup_calling_setting_summary"
+                settings:keywords="@string/keywords_backup_calling"
+                settings:controller="com.android.settings.network.telephony.BackupCallingPreferenceController"/>
+
         </PreferenceCategory>
 
         <com.android.settings.network.telephony.cdma.CdmaListPreference
