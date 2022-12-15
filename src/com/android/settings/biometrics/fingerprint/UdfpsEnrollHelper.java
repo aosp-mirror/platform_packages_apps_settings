@@ -22,11 +22,14 @@ import android.content.Context;
 import android.graphics.PointF;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.accessibility.AccessibilityManager;
+
+import com.android.settings.core.InstrumentedFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +37,7 @@ import java.util.List;
 /**
  * Helps keep track of enrollment state and animates the progress bar accordingly.
  */
-public class UdfpsEnrollHelper {
+public class UdfpsEnrollHelper extends InstrumentedFragment {
     private static final String TAG = "UdfpsEnrollHelper";
 
     private static final String SCALE_OVERRIDE =
@@ -50,6 +53,10 @@ public class UdfpsEnrollHelper {
         void onEnrollmentHelp(int remaining, int totalSteps);
 
         void onAcquired(boolean animateIfLastStepGood);
+
+        void onPointerDown(int sensorId);
+
+        void onPointerUp(int sensorId);
     }
 
     @NonNull
@@ -124,6 +131,17 @@ public class UdfpsEnrollHelper {
         }
     }
 
+    @Override
+    public int getMetricsCategory() {
+        return 0;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
     void onEnrollmentProgress(int totalSteps, int remaining) {
         if (mTotalSteps == -1) {
             mTotalSteps = totalSteps;
@@ -144,7 +162,7 @@ public class UdfpsEnrollHelper {
     }
 
     void onEnrollmentHelp() {
-        if (mListener != null && mTotalSteps != -1) {
+        if (mListener != null) {
             mListener.onEnrollmentHelp(mRemainingSteps, mTotalSteps);
         }
     }
@@ -152,6 +170,18 @@ public class UdfpsEnrollHelper {
     void onAcquired(boolean isAcquiredGood) {
         if (mListener != null && mTotalSteps != -1) {
             mListener.onAcquired(isAcquiredGood && animateIfLastStep());
+        }
+    }
+
+    void onPointerDown(int sensorId) {
+        if (mListener != null) {
+            mListener.onPointerDown(sensorId);
+        }
+    }
+
+    void onPointerUp(int sensorId) {
+        if (mListener != null) {
+            mListener.onPointerUp(sensorId);
         }
     }
 

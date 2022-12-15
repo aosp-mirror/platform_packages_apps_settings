@@ -88,8 +88,20 @@ public class UdfpsEnrollView extends FrameLayout implements UdfpsEnrollHelper.Li
     @Override
     public void onAcquired(boolean animateIfLastStepGood) {
         mHandler.post(() -> {
+            onFingerUp();
             if (animateIfLastStepGood) mFingerprintProgressDrawable.onLastStepAcquired();
         });
+    }
+
+    @Override
+    public void onPointerDown(int sensorId) {
+        onFingerDown();
+    }
+
+
+    @Override
+    public void onPointerUp(int sensorId) {
+        onFingerUp();
     }
 
     void setOverlayParams(UdfpsOverlayParams params) {
@@ -99,7 +111,7 @@ public class UdfpsEnrollView extends FrameLayout implements UdfpsEnrollHelper.Li
             mProgressBarRadius =
                     (int) (mOverlayParams.getScaleFactor() * getContext().getResources().getInteger(
                             R.integer.config_udfpsEnrollProgressBar));
-            mSensorRect = mOverlayParams.getSensorBounds();
+            mSensorRect = new Rect(mOverlayParams.getSensorBounds());
 
             onSensorRectUpdated();
         });
@@ -123,7 +135,7 @@ public class UdfpsEnrollView extends FrameLayout implements UdfpsEnrollHelper.Li
 
     private void updateDimensions() {
         // Original sensorBounds assume portrait mode.
-        Rect rotatedBounds = mOverlayParams.getSensorBounds();
+        final Rect rotatedBounds = mOverlayParams.getSensorBounds();
         int rotation = mOverlayParams.getRotation();
         if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
             RotationUtils.rotateBounds(
@@ -137,33 +149,42 @@ public class UdfpsEnrollView extends FrameLayout implements UdfpsEnrollHelper.Li
         // Use parent view's and rotatedBound's absolute coordinates to decide the margins of
         // UdfpsEnrollView, so that its center keeps consistent with sensor rect's.
         ViewGroup parentView = (ViewGroup) getParent();
-        int[] coords = parentView.getLocationOnScreen();
-        int parentLeft = coords[0];
-        int parentTop = coords[1];
-        int parentRight = parentLeft + parentView.getWidth();
-        int parentBottom = parentTop + parentView.getHeight();
         MarginLayoutParams marginLayoutParams = (MarginLayoutParams) getLayoutParams();
         FrameLayout.LayoutParams params = (LayoutParams) getLayoutParams();
-
-        switch (rotation) {
-            case Surface.ROTATION_0:
-            case Surface.ROTATION_180:
+        if (rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) {
+            parentView.getViewTreeObserver().addOnDrawListener(() -> {
+                final int[] coords = parentView.getLocationOnScreen();
+                final int parentLeft = coords[0];
+                final int parentTop = coords[1];
+                final int parentRight = parentLeft + parentView.getWidth();
                 params.gravity = Gravity.RIGHT | Gravity.TOP;
-                marginLayoutParams.rightMargin = parentRight - rotatedBounds.right - getPaddingX();
-                marginLayoutParams.topMargin = rotatedBounds.top - parentTop - getPaddingY();
-                break;
-            case Surface.ROTATION_90:
+                final int rightMargin = parentRight - rotatedBounds.right - getPaddingX();
+                final int topMargin = rotatedBounds.top - parentTop - getPaddingY();
+                if (marginLayoutParams.rightMargin == rightMargin
+                        && marginLayoutParams.topMargin == topMargin) {
+                    return;
+                }
+                marginLayoutParams.rightMargin = rightMargin;
+                marginLayoutParams.topMargin = topMargin;
+                setLayoutParams(params);
+            });
+        } else {
+            final int[] coords = parentView.getLocationOnScreen();
+            final int parentLeft = coords[0];
+            final int parentTop = coords[1];
+            final int parentRight = parentLeft + parentView.getWidth();
+            final int parentBottom = parentTop + parentView.getHeight();
+            if (rotation == Surface.ROTATION_90) {
                 params.gravity = Gravity.RIGHT | Gravity.BOTTOM;
                 marginLayoutParams.rightMargin = parentRight - rotatedBounds.right - getPaddingX();
                 marginLayoutParams.bottomMargin =
                         parentBottom - rotatedBounds.bottom - getPaddingY();
-                break;
-            case Surface.ROTATION_270:
+            } else if (rotation == Surface.ROTATION_270) {
                 params.gravity = Gravity.LEFT | Gravity.BOTTOM;
                 marginLayoutParams.leftMargin = rotatedBounds.left - parentLeft - getPaddingX();
                 marginLayoutParams.bottomMargin =
                         parentBottom - rotatedBounds.bottom - getPaddingY();
-                break;
+            }
         }
 
         params.height = rotatedBounds.height() + 2 * getPaddingX();
