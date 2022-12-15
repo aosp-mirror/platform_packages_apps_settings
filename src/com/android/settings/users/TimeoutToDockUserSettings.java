@@ -37,7 +37,8 @@ import java.util.List;
  */
 public class TimeoutToDockUserSettings extends RadioButtonPickerFragment {
     // Index of the default key of the timeout setting if it hasn't been changed by the user.
-    public static final int DEFAULT_TIMEOUT_SETTING_VALUE_INDEX = 0;
+    // Default to the smallest non-zero option (which is currently 1 minute).
+    public static final int DEFAULT_TIMEOUT_SETTING_VALUE_INDEX = 1;
 
     // Labels of the options, for example, "never", "after 5 minutes".
     private String[] mEntries;
