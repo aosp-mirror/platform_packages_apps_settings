@@ -156,13 +156,13 @@ class AllAppListTest {
 
     private fun setItemContent() {
         composeTestRule.setContent {
-            AllAppListPage {
-                fakeNavControllerWrapper.Wrapper {
+            fakeNavControllerWrapper.Wrapper {
+                with(AllAppListModel()) {
                     AppListItemModel(
                         record = AppRecordWithSize(app = APP),
                         label = LABEL,
                         summary = stateOf(SUMMARY),
-                    ).appItem()
+                    ).AppItem()
                 }
             }
         }

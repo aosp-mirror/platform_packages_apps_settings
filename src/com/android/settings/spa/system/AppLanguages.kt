@@ -16,17 +16,13 @@
 
 package com.android.settings.spa.system
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import com.android.settings.R
-import com.android.settings.localepicker.AppLocalePickerActivity
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.framework.compose.rememberContext
@@ -35,8 +31,6 @@ import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.ui.SettingsBody
-import com.android.settingslib.spaprivileged.template.app.AppListItem
-import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.android.settingslib.spaprivileged.template.app.AppListPage
 
 object AppLanguagesPageProvider : SettingsPageProvider {
@@ -52,7 +46,7 @@ object AppLanguagesPageProvider : SettingsPageProvider {
                     SettingsBody(stringResource(R.string.desc_app_locale_selection_supported))
                 }
             },
-        ) { AppLanguageItem() }
+        )
     }
 
     @Composable
@@ -62,17 +56,5 @@ object AppLanguagesPageProvider : SettingsPageProvider {
             override val summary = stringResource(R.string.app_locale_picker_summary).toState()
             override val onClick = navigator(name)
         })
-    }
-}
-
-@Composable
-private fun AppListItemModel<AppLanguagesRecord>.AppLanguageItem() {
-    val context = LocalContext.current
-    AppListItem {
-        val intent = Intent(context, AppLocalePickerActivity::class.java).apply {
-            data = Uri.parse("package:${record.app.packageName}")
-            putExtra("uid", record.app.uid)
-        }
-        context.startActivity(intent)
     }
 }
