@@ -57,6 +57,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.TimeZone;
 
 @RunWith(RobolectricTestRunner.class)
@@ -92,9 +93,9 @@ public final class BatteryChartPreferenceControllerTest {
         final Resources resources = spy(mContext.getResources());
         resources.getConfiguration().setLocales(new LocaleList(new Locale("en_US")));
         doReturn(resources).when(mContext).getResources();
-        doReturn(new String[]{"com.android.gms.persistent"})
+        doReturn(Set.of("com.android.gms.persistent"))
                 .when(mFeatureFactory.powerUsageFeatureProvider)
-                .getHideApplicationEntries(mContext);
+                .getHideApplicationSet(mContext);
         doReturn(mLayoutParams).when(mDailyChartView).getLayoutParams();
         doReturn(mIntent).when(mContext).registerReceiver(any(), any());
         doReturn(100).when(mIntent).getIntExtra(eq(BatteryManager.EXTRA_SCALE), anyInt());
