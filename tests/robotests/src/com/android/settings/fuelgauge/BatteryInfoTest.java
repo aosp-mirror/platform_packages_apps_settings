@@ -53,8 +53,6 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
@@ -330,26 +328,21 @@ public class BatteryInfoTest {
         // Mock out new data every time iterateBatteryStatsHistory is called.
         doAnswer(invocation -> {
             BatteryStatsHistoryIterator iterator = mock(BatteryStatsHistoryIterator.class);
-            doAnswer(new Answer<Boolean>() {
-                private int mCount = 0;
-                private final long[] mTimes = {1000, 1500, 2000};
-                private final byte[] mLevels = {99, 98, 97};
-
-                @Override
-                public Boolean answer(InvocationOnMock invocation) throws Throwable {
-                    if (mCount == mTimes.length) {
-                        return false;
-                    }
-                    BatteryStats.HistoryItem record = invocation.getArgument(0);
-                    record.cmd = BatteryStats.HistoryItem.CMD_UPDATE;
-                    record.time = mTimes[mCount];
-                    record.batteryLevel = mLevels[mCount];
-                    mCount++;
-                    return true;
-                }
-            }).when(iterator).next(any(BatteryStats.HistoryItem.class));
+            when(iterator.next()).thenReturn(
+                    makeHistoryIterm(1000, 99),
+                    makeHistoryIterm(1500, 98),
+                    makeHistoryIterm(2000, 97),
+                    null);
             return iterator;
         }).when(mBatteryUsageStats).iterateBatteryStatsHistory();
+    }
+
+    private BatteryStats.HistoryItem makeHistoryIterm(long time, int batteryLevel) {
+        BatteryStats.HistoryItem record = new BatteryStats.HistoryItem();
+        record.cmd = BatteryStats.HistoryItem.CMD_UPDATE;
+        record.time = time;
+        record.batteryLevel = (byte) batteryLevel;
+        return record;
     }
 
     private void assertOnlyHistory(BatteryInfo info) {

@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.verify.domain.DomainVerificationManager;
 import android.content.pm.verify.domain.DomainVerificationUserState;
+import android.icu.text.MessageFormat;
 import android.os.Bundle;
 import android.util.ArraySet;
 import android.util.Log;
@@ -34,7 +35,10 @@ import androidx.lifecycle.ViewModelProvider;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -84,8 +88,12 @@ public class SupportedLinksDialogFragment extends InstrumentedDialogFragment {
 
     private String getSupportedLinksTitle() {
         final int supportedLinksNo = mSupportedLinkWrapperList.size();
-        return getResources().getQuantityString(
-                R.plurals.app_launch_supported_links_title, supportedLinksNo, supportedLinksNo);
+        MessageFormat msgFormat = new MessageFormat(
+                getResources().getString(R.string.app_launch_supported_links_title),
+                Locale.getDefault());
+        Map<String, Object> arguments = new HashMap<>();
+        arguments.put("count", supportedLinksNo);
+        return msgFormat.format(arguments);
     }
 
     private void doSelectedAction() {
