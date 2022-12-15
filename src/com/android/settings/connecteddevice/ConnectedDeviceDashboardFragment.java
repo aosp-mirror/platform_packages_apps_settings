@@ -15,6 +15,8 @@
  */
 package com.android.settings.connecteddevice;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.Uri;
@@ -36,7 +38,6 @@ import com.android.settingslib.search.SearchIndexable;
 public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "ConnectedDeviceFrag";
-    private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
     private static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
     private static final String SLICE_ACTION = "com.android.settings.SEARCH_RESULT_TRAMPOLINE";
