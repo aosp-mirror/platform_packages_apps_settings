@@ -141,7 +141,10 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
     }
 
     public MediaDevice getMediaDeviceById(String id) {
-        return mLocalMediaManager.getMediaDeviceById(new ArrayList<>(mMediaDevices), id);
+        return mMediaDevices.stream()
+                .filter(it -> TextUtils.equals(it.getId(), id))
+                .findFirst()
+                .orElse(null);
     }
 
     public MediaDevice getCurrentConnectedMediaDevice() {

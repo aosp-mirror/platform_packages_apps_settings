@@ -32,6 +32,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Process;
+import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
@@ -178,6 +180,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             if (userInfo.isManagedProfile()) {
                 final Intent intent = new Intent(getIntent())
                         .setClass(this, DeepLinkHomepageActivityInternal.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                         .putExtra(EXTRA_USER_HANDLE, getUser());
                 intent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivityAsUser(intent, um.getPrimaryUser().getUserHandle());
@@ -465,20 +468,28 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             return;
         }
 
-        if (!TextUtils.equals(PasswordUtils.getCallingAppPackageName(getActivityToken()),
-                getPackageName())) {
-            ActivityInfo targetActivityInfo = null;
-            try {
-                targetActivityInfo = getPackageManager().getActivityInfo(targetComponentName,
-                        /* flags= */ 0);
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.e(TAG, "Failed to get target ActivityInfo: " + e);
-                finish();
-                return;
-            }
+        ActivityInfo targetActivityInfo = null;
+        try {
+            targetActivityInfo = getPackageManager().getActivityInfo(targetComponentName,
+                    /* flags= */ 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Failed to get target ActivityInfo: " + e);
+            finish();
+            return;
+        }
 
+        int callingUid = -1;
+        try {
+            callingUid = ActivityManager.getService().getLaunchedFromUid(getActivityToken());
+        } catch (RemoteException re) {
+            Log.e(TAG, "Not able to get callingUid: " + re);
+            finish();
+            return;
+        }
+
+        if (!hasPrivilegedAccess(callingUid, targetActivityInfo)) {
             if (!targetActivityInfo.exported) {
-                Log.e(TAG, "Must not launch an unexported Actvity for deep link");
+                Log.e(TAG, "Target Activity is not exported");
                 finish();
                 return;
             }
@@ -490,12 +501,26 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             }
         }
 
+        // Only allow FLAG_GRANT_READ/WRITE_URI_PERMISSION if calling app has the permission to
+        // access specified Uri.
+        int uriPermissionFlags = targetIntent.getFlags()
+                & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        if (targetIntent.getData() != null
+                && uriPermissionFlags != 0
+                && checkUriPermission(targetIntent.getData(), /* pid= */ -1, callingUid,
+                        uriPermissionFlags) == PackageManager.PERMISSION_DENIED) {
+            Log.e(TAG, "Calling app must have the permission to access Uri and grant permission");
+            finish();
+            return;
+        }
+
         targetIntent.setComponent(targetComponentName);
 
         // To prevent launchDeepLinkIntentToRight again for configuration change.
         intent.setAction(null);
 
         targetIntent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+        targetIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
 
         // Sender of intent may want to send intent extra data to the destination of targetIntent.
         targetIntent.replaceExtras(intent);
@@ -525,6 +550,38 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         } else {
             startActivity(targetIntent);
         }
+    }
+
+    // Check if calling app has privileged access to launch Activity of activityInfo.
+    private boolean hasPrivilegedAccess(int callingUid, ActivityInfo activityInfo) {
+        if (TextUtils.equals(PasswordUtils.getCallingAppPackageName(getActivityToken()),
+                    getPackageName())) {
+            return true;
+        }
+
+        int targetUid = -1;
+        try {
+            targetUid = getPackageManager().getApplicationInfo(activityInfo.packageName,
+                    /* flags= */ 0).uid;
+        } catch (PackageManager.NameNotFoundException nnfe) {
+            Log.e(TAG, "Not able to get targetUid: " + nnfe);
+            return false;
+        }
+
+        // When activityInfo.exported is false, Activity still can be launched if applications have
+        // the same user ID.
+        if (UserHandle.isSameApp(callingUid, targetUid)) {
+            return true;
+        }
+
+        // When activityInfo.exported is false, Activity still can be launched if calling app has
+        // root or system privilege.
+        int callingAppId = UserHandle.getAppId(callingUid);
+        if (callingAppId == Process.ROOT_UID || callingAppId == Process.SYSTEM_UID) {
+            return true;
+        }
+
+        return false;
     }
 
     @VisibleForTesting

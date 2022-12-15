@@ -21,6 +21,7 @@ import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATIO
 
 import android.app.settings.SettingsEnums;
 import android.content.pm.PackageManager;
+import android.icu.text.MessageFormat;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -35,6 +36,9 @@ import com.android.settings.Utils;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -89,10 +93,14 @@ public class OpenSupportedLinks extends AppInfoWithHeader implements
         mPreferenceCategory = findPreference(RADIO_GROUP_KEY);
         mAllowOpening = makeRadioPreference(KEY_LINK_OPEN_ALWAYS, R.string.app_link_open_always);
         final int entriesNo = getEntriesNo();
+        MessageFormat msgFormat = new MessageFormat(
+                getResources().getString(R.string.app_link_open_always_summary),
+                Locale.getDefault());
+        Map<String, Object> arguments = new HashMap<>();
+        arguments.put("count", entriesNo);
         //This to avoid the summary line wrap
         mAllowOpening.setAppendixVisibility(View.GONE);
-        mAllowOpening.setSummary(getResources().getQuantityString(
-                R.plurals.app_link_open_always_summary, entriesNo, entriesNo));
+        mAllowOpening.setSummary(msgFormat.format(arguments));
         mAskEveryTime = makeRadioPreference(KEY_LINK_OPEN_ASK, R.string.app_link_open_ask);
         mNotAllowed = makeRadioPreference(KEY_LINK_OPEN_NEVER, R.string.app_link_open_never);
 

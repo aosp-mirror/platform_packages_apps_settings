@@ -439,6 +439,7 @@ public class SettingsActivity extends SettingsBaseActivity
 
         trampolineIntent.putExtra(EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY,
                 highlightMenuKey);
+        trampolineIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
         return trampolineIntent;
     }
 
