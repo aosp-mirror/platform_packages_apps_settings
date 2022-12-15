@@ -194,6 +194,23 @@ public final class DatabaseUtils {
         return startCalendar.getTimeInMillis();
     }
 
+    /** Returns the context with OWNER identity when current user is work profile. */
+    public static Context getOwnerContext(Context context) {
+        final boolean isWorkProfileUser = isWorkProfile(context);
+        if (isWorkProfileUser) {
+            try {
+                return context.createPackageContextAsUser(
+                        /*packageName=*/ context.getPackageName(),
+                        /*flags=*/ 0,
+                        /*user=*/ UserHandle.OWNER);
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.e(TAG, "context.createPackageContextAsUser() fail:" + e);
+                return null;
+            }
+        }
+        return context;
+    }
+
     static List<ContentValues> sendAppUsageEventData(
             final Context context, final List<AppUsageEvent> appUsageEventList) {
         final long startTime = System.currentTimeMillis();
@@ -342,18 +359,9 @@ public final class DatabaseUtils {
 
     private static Map<Long, Map<String, BatteryHistEntry>> loadHistoryMapFromContentProvider(
             Context context, Uri batteryStateUri) {
-        final boolean isWorkProfileUser = isWorkProfile(context);
-        Log.d(TAG, "loadHistoryMapFromContentProvider() isWorkProfileUser:" + isWorkProfileUser);
-        if (isWorkProfileUser) {
-            try {
-                context = context.createPackageContextAsUser(
-                        /*packageName=*/ context.getPackageName(),
-                        /*flags=*/ 0,
-                        /*user=*/ UserHandle.OWNER);
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.e(TAG, "context.createPackageContextAsUser() fail:" + e);
-                return null;
-            }
+        context = DatabaseUtils.getOwnerContext(context);
+        if (context == null) {
+            return null;
         }
         final Map<Long, Map<String, BatteryHistEntry>> resultMap = new HashMap();
         try (Cursor cursor = sFakeBatteryStateSupplier != null ? sFakeBatteryStateSupplier.get() :
