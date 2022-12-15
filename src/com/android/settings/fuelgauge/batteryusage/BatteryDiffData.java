@@ -32,9 +32,6 @@ public class BatteryDiffData {
             @NonNull List<BatteryDiffEntry> systemDiffEntries) {
         mAppEntries = appDiffEntries;
         mSystemEntries = systemDiffEntries;
-        setTotalConsumePowerForAllEntries(mAppEntries);
-        setTotalConsumePowerForAllEntries(mSystemEntries);
-        sortEntries();
     }
 
     public List<BatteryDiffEntry> getAppDiffEntryList() {
@@ -43,6 +40,18 @@ public class BatteryDiffData {
 
     public List<BatteryDiffEntry> getSystemDiffEntryList() {
         return mSystemEntries;
+    }
+
+    // Sorts entries based on consumed percentage.
+    void sortEntries() {
+        Collections.sort(mAppEntries, BatteryDiffEntry.COMPARATOR);
+        Collections.sort(mSystemEntries, BatteryDiffEntry.COMPARATOR);
+    }
+
+    // Sets total consume power for app and system entries separately.
+    void setTotalConsumePower() {
+        setTotalConsumePowerForAllEntries(mAppEntries);
+        setTotalConsumePowerForAllEntries(mSystemEntries);
     }
 
     // Sets total consume power for each entry.
@@ -54,11 +63,5 @@ public class BatteryDiffData {
         for (BatteryDiffEntry batteryDiffEntry : batteryDiffEntries) {
             batteryDiffEntry.setTotalConsumePower(totalConsumePower);
         }
-    }
-
-    // Sorts entries based on consumed percentage.
-    private void sortEntries() {
-        Collections.sort(mAppEntries, BatteryDiffEntry.COMPARATOR);
-        Collections.sort(mSystemEntries, BatteryDiffEntry.COMPARATOR);
     }
 }
