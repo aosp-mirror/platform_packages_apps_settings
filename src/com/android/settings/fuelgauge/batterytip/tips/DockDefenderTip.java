@@ -32,8 +32,6 @@ import com.android.settings.widget.CardPreference;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-import java.text.NumberFormat;
-
 /**
  * Tip to show dock defender status
  */
@@ -58,8 +56,7 @@ public class DockDefenderTip extends BatteryTip {
     public CharSequence getTitle(Context context) {
         switch (mMode) {
             case DockDefenderMode.FUTURE_BYPASS:
-                return context.getString(R.string.battery_tip_dock_defender_future_bypass_title,
-                        getExtraPercentage(context));
+                return context.getString(R.string.battery_tip_dock_defender_future_bypass_title);
             case DockDefenderMode.ACTIVE:
                 return context.getString(R.string.battery_tip_dock_defender_active_title);
             case DockDefenderMode.TEMPORARILY_BYPASSED:
@@ -74,15 +71,12 @@ public class DockDefenderTip extends BatteryTip {
     public CharSequence getSummary(Context context) {
         switch (mMode) {
             case DockDefenderMode.FUTURE_BYPASS:
-                return context.getString(R.string.battery_tip_dock_defender_future_bypass_summary,
-                        getExtraPercentage(context));
+                return context.getString(R.string.battery_tip_dock_defender_future_bypass_summary);
             case DockDefenderMode.ACTIVE:
-                return context.getString(R.string.battery_tip_dock_defender_active_summary,
-                        getExtraPercentage(context));
+                return context.getString(R.string.battery_tip_dock_defender_active_summary);
             case DockDefenderMode.TEMPORARILY_BYPASSED:
                 return context.getString(
-                        R.string.battery_tip_dock_defender_temporarily_bypassed_summary,
-                        getExtraPercentage(context));
+                        R.string.battery_tip_dock_defender_temporarily_bypassed_summary);
             default:
                 return null;
         }
@@ -172,13 +166,6 @@ public class DockDefenderTip extends BatteryTip {
         }
 
         Log.i(TAG, "send resume charging broadcast intent=" + intent);
-    }
-
-    private String getExtraPercentage(Context context) {
-        final int extraValue = context.getResources()
-                .getInteger(R.integer.config_battery_extra_tip_value);
-        return NumberFormat.getPercentInstance()
-                .format(extraValue * 0.01f);
     }
 
     public static final Creator CREATOR = new Creator() {
