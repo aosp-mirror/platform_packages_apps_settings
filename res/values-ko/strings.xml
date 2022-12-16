@@ -68,27 +68,17 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"오른쪽 보청기가 연결되었습니다.\n\n왼쪽 보청기를 페어링하려면 보청기가 켜져 있으며 페어링할 준비가 되어 있어야 합니다."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"오른쪽 보청기 페어링"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"왼쪽 보청기 페어링"</string>
-    <!-- no translation found for bluetooth_device_controls_title (7115710864094259075) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_controls_summary (5843475712424478172) -->
-    <skip />
-    <!-- no translation found for bluetooth_audio_routing_title (5541729245424856226) -->
-    <skip />
-    <!-- no translation found for bluetooth_audio_routing_summary (7236959154306472259) -->
-    <skip />
+    <string name="bluetooth_device_controls_title" msgid="7115710864094259075">"보청기 제어"</string>
+    <string name="bluetooth_device_controls_summary" msgid="5843475712424478172">"보청기 단축키, 보청기 호환성"</string>
+    <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"오디오 출력"</string>
+    <string name="bluetooth_audio_routing_summary" msgid="7236959154306472259">"보청기 또는 휴대전화 스피커에서 다른 오디오 종류 재생 여부 선택"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"관련 도구"</string>
-    <!-- no translation found for bluetooth_ringtone_title (3049822968673742328) -->
-    <skip />
-    <!-- no translation found for bluetooth_call_title (3170657843273743928) -->
-    <skip />
-    <!-- no translation found for bluetooth_media_title (343705257183053699) -->
-    <skip />
-    <!-- no translation found for bluetooth_system_sounds_title (5331556107110163039) -->
-    <skip />
-    <!-- no translation found for bluetooth_audio_path_hearing_device_title (2073463574123159850) -->
-    <skip />
-    <!-- no translation found for bluetooth_audio_path_phone_speaker_title (4259772328898172657) -->
-    <skip />
+    <string name="bluetooth_ringtone_title" msgid="3049822968673742328">"벨소리"</string>
+    <string name="bluetooth_call_title" msgid="3170657843273743928">"통화"</string>
+    <string name="bluetooth_media_title" msgid="343705257183053699">"미디어"</string>
+    <string name="bluetooth_system_sounds_title" msgid="5331556107110163039">"시스템 사운드"</string>
+    <string name="bluetooth_audio_path_hearing_device_title" msgid="2073463574123159850">"보청기에서 재생"</string>
+    <string name="bluetooth_audio_path_phone_speaker_title" msgid="4259772328898172657">"휴대전화 스피커에서 재생"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"이름이 없는 블루투스 기기"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"검색 중"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"근처에 블루투스 기기가 없습니다."</string>
@@ -387,15 +377,9 @@
     <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"마지막으로 손가락의 오른쪽 가장자리가 센서에 닿게 하세요"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"센서에 손가락 한쪽을 올리고 잠시 기다린 후에 다른 쪽을 올리세요"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"이렇게 하면 지문을 더 많이 캡처할 수 있습니다"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_sfps_enroll_progress_a11y_message (6450772721691523736) -->
-    <skip />
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_sfps_animation_a11y_label (8808819903730940446) -->
-    <skip />
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
-    <skip />
+    <string name="security_settings_sfps_enroll_progress_a11y_message" msgid="6450772721691523736">"지문 등록 <xliff:g id="PERCENTAGE">%d</xliff:g>%% 완료"</string>
+    <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"등록 <xliff:g id="PERCENTAGE">%d</xliff:g>%% 완료"</string>
+    <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"지문 등록 <xliff:g id="PERCENTAGE">%d</xliff:g>%% 완료"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"지문 추가됨"</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"화면이 켜져 있을 때만 잠금 해제"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"지문으로 잠금 해제하려면 먼저 화면이 켜져 있어야 합니다. 이를 설정하면 실수로 잠금 해제될 가능성이 작아집니다."</string>
@@ -634,6 +618,8 @@
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"기기에서 블루투스가 켜져 있으면 주변의 다른 블루투스 기기와 통신할 수 있습니다."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"블루투스가 켜져 있으면 기기가 근처의 다른 블루투스 기기와 통신할 수 있습니다.\n\n기기 사용 환경을 개선하기 위해 블루투스가 꺼져 있을 때도 앱 및 서비스에서 언제든지 근처에 기기가 있는지 검색할 수 있습니다. 예를 들면 위치 기반 기능 및 서비스를 개선하는 데 이 기능이 사용되기도 합니다. 설정을 변경하려면 "<annotation id="link">"블루투스 검색 설정"</annotation>"으로 이동하세요."</string>
     <string name="device_details_title" msgid="1155622417516195481">"기기 세부정보"</string>
+    <!-- no translation found for bluetooth_device_keyboard_settings_preference_title (3411693160917620519) -->
+    <skip />
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"기기 블루투스 주소: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"기기 블루투스 주소: \n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"기기를 지우시겠습니까?"</string>
@@ -1220,14 +1206,10 @@
     <string name="reset_dashboard_title" msgid="7423200250697886918">"옵션 초기화"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Wi-Fi, 모바일, 블루투스 초기화"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"다음을 포함한 모든 네트워크 설정이 초기화됩니다.\n\n"<li>"Wi‑Fi"</li>\n<li>"모바일 데이터"</li>\n<li>"블루투스"</li></string>
-    <!-- no translation found for reset_bluetooth_wifi_title (4113071322344697317) -->
-    <skip />
-    <!-- no translation found for reset_bluetooth_wifi_desc (4030295669083059711) -->
-    <skip />
-    <!-- no translation found for reset_bluetooth_wifi_button_text (3974098137045963639) -->
-    <skip />
-    <!-- no translation found for reset_bluetooth_wifi_complete_toast (5893439291030574365) -->
-    <skip />
+    <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"블루투스 및 Wi-Fi 초기화"</string>
+    <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"Wi-Fi 및 블루투스 설정이 초기화됩니다. 이 작업은 실행취소할 수 없습니다."</string>
+    <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"초기화"</string>
+    <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"블루투스 및 Wi-Fi가 초기화됨"</string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"삭제"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"e-SIM 삭제"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"SIM을 삭제해도 모바일 서비스 요금제는 취소되지 않습니다. 교체 SIM을 다운로드하려면 이동통신사에 문의하세요."</string>
@@ -1617,12 +1599,14 @@
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"사용 가능한 터치 키보드"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"터치 키보드 관리"</string>
-    <string name="keyboard_assistance_category" msgid="7320599809770932032">"키보드 지원"</string>
+    <!-- no translation found for keyboard_options_category (8040137073401152608) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"물리적 키보드"</string>
     <string name="show_ime" msgid="4334255501724746849">"터치 키보드 사용"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"물리적 키보드가 활성 상태인 경우 화면에 켜 둠"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"단축키"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"사용할 수 있는 단축키 표시"</string>
+    <!-- no translation found for keyboard_shortcuts_helper_summary (5979507677602559203) -->
+    <skip />
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"직장 프로필 키보드 및 도구"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"업무용 터치 키보드"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"기본"</string>
@@ -1636,6 +1620,8 @@
     <string name="keyboard_layout_dialog_switch_hint" msgid="3303564123674979354">"전환하려면 Control-Spacebar를 누름"</string>
     <string name="keyboard_layout_default_label" msgid="6078569989261528039">"기본값"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"키보드 레이아웃"</string>
+    <!-- no translation found for keyboard_layout_picker_category_title (2369473692906329772) -->
+    <skip />
     <string name="user_dict_settings_title" msgid="680410651924276991">"개인 사전"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"직장용 개인 사전"</string>
     <string name="user_dict_settings_summary" msgid="4939694372338975081">"맞춤법 검사기와 같은 앱에서 사용할 단어 추가"</string>
@@ -1660,6 +1646,8 @@
     <string name="keyboard_settings_summary" msgid="2716339620942356432">"터치 키보드, 음성, 도구"</string>
     <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"터치 키보드, 물리적 키보드, 음성, 도구"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"물리적 키보드"</string>
+    <!-- no translation found for enabled_locales_keyboard_layout (3939886151098958639) -->
+    <skip />
     <string name="gadget_picker_title" msgid="7615902510050731400">"가젯 선택"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"위젯 선택"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"위젯을 만들고 액세스를 허용하시겠습니까?"</string>
@@ -1892,8 +1880,7 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"볼륨 키를 길게 누르세요."</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"세 번 탭하세요."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"계속"</string>
-    <!-- no translation found for accessibility_hearingaid_title (1263619711863375614) -->
-    <skip />
+    <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"보청기"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"연결된 보청기가 없음"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"보청기 추가"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"보청기 페어링"</string>
@@ -1903,28 +1890,17 @@
     <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, 오른쪽만"</string>
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, 왼쪽 및 오른쪽"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 외 1개"</string>
-    <!-- no translation found for accessibility_hearing_device_pairing_title (2701812183769537320) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_saved_title (7573926212664909296) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_control (2661965917013100611) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_shortcut_title (7645100199603031360) -->
-    <skip />
-    <!-- no translation found for accessibility_hac_mode_title (2037950424429555652) -->
-    <skip />
-    <!-- no translation found for accessibility_hac_mode_summary (5164793702798871478) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_summary (4636110586636490256) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_pairing_page_title (6608901091770850295) -->
-    <skip />
-    <!-- no translation found for accessibility_found_hearing_devices (3472605919692789408) -->
-    <skip />
-    <!-- no translation found for accessibility_found_all_devices (7817834722148556520) -->
-    <skip />
-    <!-- no translation found for accessibility_list_all_devices_title (3555097127022458571) -->
-    <skip />
+    <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"새 기기와 페어링"</string>
+    <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"저장된 기기"</string>
+    <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"보청기 제어"</string>
+    <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"보청기 단축키"</string>
+    <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"보청기 호환성"</string>
+    <string name="accessibility_hac_mode_summary" msgid="5164793702798871478">"일부 보청기의 오디오 개선"</string>
+    <string name="accessibility_hearing_device_footer_summary" msgid="4636110586636490256">"보청기가 켜져 있고 페어링 모드인지 확인하세요."</string>
+    <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"보청기 페어링"</string>
+    <string name="accessibility_found_hearing_devices" msgid="3472605919692789408">"사용 가능한 기기"</string>
+    <string name="accessibility_found_all_devices" msgid="7817834722148556520">"보청기가 표시되지 않나요?"</string>
+    <string name="accessibility_list_all_devices_title" msgid="3555097127022458571">"모든 블루투스 기기 보기"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"오디오 조정"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"오디오 설명"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"오디오 설명 기능이 지원되는 영화 및 프로그램의 상황을 음성 설명으로 듣습니다."</string>
@@ -2254,19 +2230,14 @@
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"총 시간: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"백그라운드: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"배터리 사용량 데이터는 충전이 완료되고 몇 시간 후에 확인할 수 있습니다."</string>
-    <!-- no translation found for battery_usage_chart_label_now (4598282721949430165) -->
-    <skip />
+    <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"지금"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"배터리 사용량 차트"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"일일 배터리 사용량 차트"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"시간별 배터리 사용량 차트"</string>
-    <!-- no translation found for battery_usage_breakdown_title_since_last_full_charge (8219417894003454299) -->
-    <skip />
-    <!-- no translation found for battery_usage_breakdown_title_for_slot (5897712719834293709) -->
-    <skip />
-    <!-- no translation found for battery_usage_app_tab (47007533921631047) -->
-    <skip />
-    <!-- no translation found for battery_usage_system_tab (2723499428460455537) -->
-    <skip />
+    <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="8219417894003454299">"마지막 충전 완료 후 사용 내역 분석"</string>
+    <string name="battery_usage_breakdown_title_for_slot" msgid="5897712719834293709">"<xliff:g id="SLOT">%s</xliff:g>의 사용 내역 분석"</string>
+    <string name="battery_usage_app_tab" msgid="47007533921631047">"앱"</string>
+    <string name="battery_usage_system_tab" msgid="2723499428460455537">"시스템"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"프로세스 통계"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"프로세스 실행에 관한 통계"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"메모리 사용량"</string>
@@ -3403,14 +3374,10 @@
     <string name="zen_mode_end_time" msgid="223502560367331706">"종료 시간"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="419683704068360804">"다음 날 <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
     <string name="zen_mode_summary_alarms_only_indefinite" msgid="910047326128154945">"무제한으로 알람만 수신 모드로 변경"</string>
-    <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="1900512966361163390">
-      <item quantity="other"><xliff:g id="DURATION">%1$d</xliff:g>분 동안 알람만 수신 모드로 변경(<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>까지)</item>
-      <item quantity="one"><xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>까지 1분 동안 알람만 수신 모드로 변경</item>
-    </plurals>
-    <plurals name="zen_mode_summary_alarms_only_by_hour" formatted="false" msgid="955991428001659124">
-      <item quantity="other"><xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>까지 <xliff:g id="DURATION">%1$d</xliff:g>시간 동안 알람만 수신 모드로 변경</item>
-      <item quantity="one"><xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>까지 1시간 동안 알람만 수신 모드로 변경</item>
-    </plurals>
+    <!-- no translation found for zen_mode_summary_alarms_only_by_minute (6673649005494939311) -->
+    <skip />
+    <!-- no translation found for zen_mode_summary_alarms_only_by_hour (7400910210950788163) -->
+    <skip />
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"<xliff:g id="FORMATTEDTIME">%1$s</xliff:g>까지 알람만 수신 모드로 변경"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"항상 알림 모드로 변경"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"주의"</string>
@@ -3428,38 +3395,22 @@
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"화면 고정 해제 시 기기 잠금"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"SIM 삭제 확인"</string>
     <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"eSIM을 삭제하기 전에 본인 확인을 진행하세요."</string>
-    <!-- no translation found for memtag_title (5096176296797727201) -->
-    <skip />
-    <!-- no translation found for memtag_toggle (8695028758462939212) -->
-    <skip />
-    <!-- no translation found for memtag_intro (579408691329568953) -->
-    <skip />
-    <!-- no translation found for memtag_on (824938319141503923) -->
-    <skip />
-    <!-- no translation found for memtag_off (4835589640091709019) -->
-    <skip />
-    <!-- no translation found for memtag_on_pending (1592053425431532361) -->
-    <skip />
-    <!-- no translation found for memtag_off_pending (1543177181383593726) -->
-    <skip />
-    <!-- no translation found for memtag_force_off (1143468955988138470) -->
-    <skip />
-    <!-- no translation found for memtag_force_on (3254349938627883664) -->
-    <skip />
-    <!-- no translation found for memtag_footer (8480784485124271376) -->
-    <skip />
-    <!-- no translation found for memtag_reboot_title (1413471876903578769) -->
-    <skip />
-    <!-- no translation found for memtag_reboot_message_on (3270256606602439418) -->
-    <skip />
-    <!-- no translation found for memtag_reboot_message_off (2567062468140476451) -->
-    <skip />
-    <!-- no translation found for memtag_reboot_yes (5788896350697141429) -->
-    <skip />
-    <!-- no translation found for memtag_reboot_no (2860671356184849330) -->
-    <skip />
-    <!-- no translation found for memtag_learn_more (1596145970669119776) -->
-    <skip />
+    <string name="memtag_title" msgid="5096176296797727201">"고급 메모리 보호 베타"</string>
+    <string name="memtag_toggle" msgid="8695028758462939212">"고급 메모리 보호"</string>
+    <string name="memtag_intro" msgid="579408691329568953">"보안 위험에 노출될 수 있는 버그로부터 기기를 보호하는 베타 기능입니다."</string>
+    <string name="memtag_on" msgid="824938319141503923">"사용"</string>
+    <string name="memtag_off" msgid="4835589640091709019">"사용 안함"</string>
+    <string name="memtag_on_pending" msgid="1592053425431532361">"다시 시작 후 사용"</string>
+    <string name="memtag_off_pending" msgid="1543177181383593726">"다시 시작 후 사용 안함"</string>
+    <string name="memtag_force_off" msgid="1143468955988138470">"현재 기기에서 사용 불가"</string>
+    <string name="memtag_force_on" msgid="3254349938627883664">"기기에서 항상 사용"</string>
+    <string name="memtag_footer" msgid="8480784485124271376">"고급 메모리 보호를 켜거나 끄려면 기기를 다시 시작해야 합니다. 켜져 있으면 기기 성능이 저하될 수 있습니다."</string>
+    <string name="memtag_reboot_title" msgid="1413471876903578769">"기기를 다시 시작하시겠습니까?"</string>
+    <string name="memtag_reboot_message_on" msgid="3270256606602439418">"고급 메모리 보호를 사용 설정하려면 기기를 다시 시작해야 합니다."</string>
+    <string name="memtag_reboot_message_off" msgid="2567062468140476451">"고급 메모리 보호를 사용 중지하려면 기기를 다시 시작해야 합니다."</string>
+    <string name="memtag_reboot_yes" msgid="5788896350697141429">"다시 시작"</string>
+    <string name="memtag_reboot_no" msgid="2860671356184849330">"나중에"</string>
+    <string name="memtag_learn_more" msgid="1596145970669119776">"고급 메모리 보호에 대해 자세히 알아봅니다."</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"다음에서 이 직장 프로필을 관리합니다."</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>에서 관리"</string>
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"안전한 시작"</string>
@@ -3492,22 +3443,16 @@
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"기타 기본 환경설정"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"링크 추가"</string>
     <string name="app_launch_footer" msgid="4521865035105622557">"앱에서 링크를 확인하여 자동으로 열 수 있습니다."</string>
-    <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
-      <item quantity="other">확인된 링크 <xliff:g id="COUNT_1">%d</xliff:g>개</item>
-      <item quantity="one">확인된 링크 <xliff:g id="COUNT_0">%d</xliff:g>개</item>
-    </plurals>
-    <plurals name="app_launch_verified_links_message" formatted="false" msgid="1209292155940482111">
-      <item quantity="other">확인되어 이 앱에서 자동으로 열리는 링크입니다.</item>
-      <item quantity="one">확인되어 이 앱에서 자동으로 열리는 링크입니다.</item>
-    </plurals>
+    <!-- no translation found for app_launch_verified_links_title (621908751569155356) -->
+    <skip />
+    <!-- no translation found for app_launch_verified_links_message (190871133877476176) -->
+    <skip />
     <string name="app_launch_dialog_ok" msgid="1446157681861409861">"확인"</string>
     <string name="app_launch_verified_links_info_description" msgid="7514750232467132117">"확인 링크 목록 표시"</string>
     <string name="app_launch_checking_links_title" msgid="6119228853554114201">"다른 지원되는 링크 확인 중…"</string>
     <string name="app_launch_dialog_cancel" msgid="6961071841814898663">"취소"</string>
-    <plurals name="app_launch_supported_links_title" formatted="false" msgid="8579323750839397568">
-      <item quantity="other">지원되는 링크 <xliff:g id="COUNT_1">%d</xliff:g>개</item>
-      <item quantity="one">지원되는 링크 <xliff:g id="COUNT_0">%d</xliff:g>개</item>
-    </plurals>
+    <!-- no translation found for app_launch_supported_links_title (2457931321701095763) -->
+    <skip />
     <string name="app_launch_supported_links_add" msgid="3271247750388016131">"추가"</string>
     <string name="app_launch_supported_links_subtext" msgid="4268004019469184113">"<xliff:g id="APP_LABEL">%s</xliff:g>에서 열기"</string>
     <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>에서 <xliff:g id="SIZE">%1$s</xliff:g> 사용"</string>
@@ -3519,24 +3464,18 @@
     <string name="change_storage" msgid="8773820275624113401">"저장소 변경"</string>
     <string name="notifications_label" msgid="8471624476040164538">"알림"</string>
     <string name="notifications_enabled_with_info" msgid="1808946629277684308">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g>/<xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
-    <plurals name="notifications_categories_off" formatted="false" msgid="1385401442703692986">
-      <item quantity="other">카테고리 <xliff:g id="COUNT_1">%d</xliff:g>개가 사용 중지됨</item>
-      <item quantity="one">카테고리 <xliff:g id="COUNT_0">%d</xliff:g>개가 사용 중지됨</item>
-    </plurals>
-    <plurals name="runtime_permissions_additional_count" formatted="false" msgid="5888624648943937645">
-      <item quantity="other">추가 권한 <xliff:g id="COUNT_1">%d</xliff:g>개</item>
-      <item quantity="one">추가 권한 <xliff:g id="COUNT_0">%d</xliff:g>개</item>
-    </plurals>
+    <!-- no translation found for notifications_categories_off (7712037485557237328) -->
+    <skip />
+    <!-- no translation found for runtime_permissions_additional_count (6071909675951786523) -->
+    <skip />
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"부여된 권한이 없습니다."</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"요청한 권한 없음"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"내 데이터에 대한 앱 액세스 권한 제어"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"개인 정보 대시보드"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"최근에 권한을 사용한 앱 표시"</string>
     <string name="unused_apps" msgid="4566272194756830656">"사용하지 않는 앱"</string>
-    <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
-      <item quantity="other">사용하지 않는 앱 <xliff:g id="COUNT_1">%d</xliff:g>개</item>
-      <item quantity="one">사용하지 않는 앱 <xliff:g id="COUNT_0">%d</xliff:g>개</item>
-    </plurals>
+    <!-- no translation found for unused_apps_summary (4236371818881973021) -->
+    <skip />
     <string name="unused_apps_category" msgid="8954930958175500851">"사용하지 않는 앱 설정"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"사용하지 않을 때 앱 활동 일시중지"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"권한 제거, 임시 파일 삭제, 알림 중지"</string>
@@ -3555,10 +3494,8 @@
     <string name="app_link_open_always" msgid="9167065494930657503">"앱에서 지원되는 링크를 열도록 허용"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"항상 확인"</string>
     <string name="app_link_open_never" msgid="5299808605386052350">"앱에서 링크를 열도록 허용하지 않음"</string>
-    <plurals name="app_link_open_always_summary" formatted="false" msgid="1816161439007251694">
-      <item quantity="other">앱에서 링크 <xliff:g id="COUNT_1">%d</xliff:g>개를 처리하려고 합니다.</item>
-      <item quantity="one">앱에서 링크 <xliff:g id="COUNT_0">%d</xliff:g>개를 처리하려고 합니다.</item>
-    </plurals>
+    <!-- no translation found for app_link_open_always_summary (4524005594295855117) -->
+    <skip />
     <string name="open_supported_links_footer" msgid="3188808142432787933">"앱에서 다음 링크를 처리하려고 함"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"지원 및 음성 입력"</string>
     <string name="default_assist_title" msgid="1182435129627493758">"디지털 어시스턴트 앱"</string>
@@ -3645,10 +3582,8 @@
     <string name="average_used" msgid="690235917394070169">"평균 메모리 사용(%)"</string>
     <string name="free_memory" msgid="439783742246854785">"사용 가능"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"앱에서 사용한 메모리"</string>
-    <plurals name="memory_usage_apps_summary" formatted="false" msgid="1355637088533572208">
-      <item quantity="other">지난 <xliff:g id="DURATION_1">%2$s</xliff:g> 동안 앱 <xliff:g id="COUNT">%1$d</xliff:g>개에서 메모리를 사용했습니다.</item>
-      <item quantity="one">지난 <xliff:g id="DURATION_0">%2$s</xliff:g> 동안 앱 1개에서 메모리를 사용했습니다.</item>
-    </plurals>
+    <!-- no translation found for memory_usage_apps_summary (7168292864155527974) -->
+    <skip />
     <string name="running_frequency" msgid="7260225121706316639">"빈도"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"최대 사용량"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"사용한 데이터 없음"</string>
@@ -3787,10 +3722,8 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_2">%2$s</xliff:g>에 <xliff:g id="ID_1">%1$s</xliff:g> 사용함"</string>
     <string name="configure" msgid="1499586749829665889">"설정"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"사용량이 집계된 기타 앱"</string>
-    <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="3316296488378947221">
-      <item quantity="other">데이터 절약 모드가 켜져 있을 때 <xliff:g id="COUNT">%1$d</xliff:g>개의 앱이 무제한 데이터를 사용할 수 있도록 허용됨</item>
-      <item quantity="one">데이터 절약 모드가 켜져 있을 때 1개의 앱이 무제한 데이터를 사용할 수 있도록 허용됨</item>
-    </plurals>
+    <!-- no translation found for data_saver_unrestricted_summary (7343571401172437542) -->
+    <skip />
     <string name="data_usage_title" msgid="4039024073687469094">"기본 자료"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi 데이터"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g><xliff:g id="ID_2">^2</xliff:g> 사용됨"</string>
@@ -3798,10 +3731,8 @@
     <string name="data_remaining" msgid="6316251496381922837">"<xliff:g id="ID_1">^1</xliff:g> 남음"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"<xliff:g id="START_DATE">%1$s</xliff:g>부터 <xliff:g id="END_DATE">%2$s</xliff:g>까지의 데이터 사용량을 보여 주는 그래프입니다."</string>
     <string name="data_usage_chart_no_data_content_description" msgid="5481968839079467231">"기간에 해당하는 데이터 없음"</string>
-    <plurals name="billing_cycle_days_left" formatted="false" msgid="661792524671718753">
-      <item quantity="other">%d일 남음</item>
-      <item quantity="one">%d일 남음</item>
-    </plurals>
+    <!-- no translation found for billing_cycle_days_left (174337287346866400) -->
+    <skip />
     <string name="billing_cycle_none_left" msgid="1694844019159277504">"남은 시간 없음"</string>
     <string name="billing_cycle_less_than_one_day_left" msgid="1210202399053992163">"1일 미만 남음"</string>
     <string name="carrier_and_update_text" msgid="5363656651921656280">"<xliff:g id="ID_2">^2</xliff:g> 전에 <xliff:g id="ID_1">^1</xliff:g>에서 업데이트함"</string>
@@ -4252,7 +4183,8 @@
     <string name="mobile_data_active" msgid="8683694456401350210">"활성 모바일 데이터"</string>
     <string name="mobile_data_off" msgid="2702029611959308269">"모바일 데이터 꺼짐"</string>
     <string name="subscription_available" msgid="2659722770210403365">"사용 가능"</string>
-    <string name="mobile_network_list_add_more" msgid="4478586073355236604">"추가"</string>
+    <!-- no translation found for mobile_network_list_add_more (5076722903436552813) -->
+    <skip />
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"활성/SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"비활성/SIM"</string>
     <string name="mobile_network_active_esim" msgid="3984452275968408382">"활성 / eSIM"</string>
@@ -4441,8 +4373,7 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"사용하려면 먼저 \'기기 제어 표시\'를 켜세요."</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"사용 가능한 경우 두 줄 시계 표시"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"두 줄 시계"</string>
-    <!-- no translation found for lockscreen_quick_affordances_title (8615741551327565793) -->
-    <skip />
+    <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"단축키"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
       <item quantity="one"><xliff:g id="FIRST_0">%1$s</xliff:g></item>
@@ -4666,4 +4597,8 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"잘못된 비밀번호"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"오디오를 들으려면 아래의 QR 코드가 가운데에 오도록 스캔하세요"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR 코드가 유효한 형식이 아닙니다."</string>
+    <!-- no translation found for convert_to_esim_title (71037864129009206) -->
+    <skip />
+    <!-- no translation found for transfer_esim_to_another_device_title (5286117866086383192) -->
+    <skip />
 </resources>
