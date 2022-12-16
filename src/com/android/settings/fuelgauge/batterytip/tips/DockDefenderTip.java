@@ -139,12 +139,11 @@ public class DockDefenderTip extends BatteryTip {
         }
 
         cardPreference.setSecondaryButtonText(context.getString(R.string.learn_more));
-        //TODO: update helper string
         cardPreference.setSecondaryButtonClickListener(
                 button -> button.startActivityForResult(
                         HelpUtils.getHelpIntent(
                                 context,
-                                context.getString(R.string.help_url_battery_defender),
+                                context.getString(R.string.help_url_dock_defender),
                                 /* backupContext */ ""), /* requestCode */ 0));
         cardPreference.setSecondaryButtonVisible(true);
         cardPreference.setSecondaryButtonContentDescription(context.getString(
