@@ -5258,8 +5258,10 @@
     <string name="credentials_settings_not_available">Credentials are not available for this user</string>
     <!-- Sub-heading for a user credential installed to be used by apps and as part of VPN configurations. [CHAR LIMIT=NONE] -->
     <string name="credential_for_vpn_and_apps">Installed for VPN and apps</string>
+    <!-- Sub-heading for a user credential installed for Wi-Fi configuration. [CHAR LIMIT=NONE]. -->
+    <string name="credential_for_wifi">Installed for Wi\u2011Fi</string>
     <!-- Sub-heading for a user credential installed to be used as part of a Wi-Fi configuration. [CHAR LIMIT=NONE]. -->
-    <string name="credential_for_wifi">Installed for Wi-Fi</string>
+    <string name="credential_for_wifi_in_use">Installed for Wi\u2011Fi (In use)</string>
     <!-- Description of dialog to reset credential storage [CHAR LIMIT=NONE] -->
     <string name="credentials_reset_hint">Remove all the contents?</string>
     <!-- Toast message [CHAR LIMIT=30] -->
@@ -5809,14 +5811,16 @@
     <!-- Alert dialog confirmation when removing a user CA certificate. -->
     <string name="trusted_credentials_remove_confirmation">Permanently remove the user CA certificate?</string>
 
+    <!-- Header for a list of items that a credential entry is required. For example, a network uses this credential. [CHAR LIMIT=NONE] -->
+    <string name="credential_being_used_by">Being used by</string>
     <!-- Header for a list of items that a credential entry contains. For example, one private key and one certificate. [CHAR LIMIT=NONE] -->
-    <string name="credential_contains">This entry contains:</string>
+    <string name="credential_contains">This entry contains</string>
     <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE] -->
-    <string name="one_userkey">one user key</string>
+    <string name="one_userkey">1 user key</string>
     <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE] -->
-    <string name="one_usercrt">one user certificate</string>
+    <string name="one_usercrt">1 user certificate</string>
     <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE] -->
-    <string name="one_cacrt">one CA certificate</string>
+    <string name="one_cacrt">1 CA certificate</string>
     <!-- Item found in thee PKCS12 keystore being investigated [CHAR LIMIT=NONE]-->
     <string name="n_cacrts">%d CA certificates</string>
     <!-- Alert dialog when viewing a set of user credentials. -->
