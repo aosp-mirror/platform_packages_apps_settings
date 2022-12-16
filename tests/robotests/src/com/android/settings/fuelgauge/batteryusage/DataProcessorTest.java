@@ -1076,7 +1076,7 @@ public class DataProcessorTest {
                         .get(DataProcessor.SELECTED_INDEX_ALL);
         assertBatteryDiffEntry(
                 resultDiffData.getAppDiffEntryList().get(0), currentUserId, /*uid=*/ 2L,
-                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 50.0,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 100.0,
                 /*foregroundUsageConsumePower=*/ 0, /*foregroundServiceUsageConsumePower=*/ 0,
                 /*backgroundUsageConsumePower=*/ 5, /*cachedUsageConsumePower=*/ 5,
                 /*foregroundUsageTimeInMs=*/ 10, /*backgroundUsageTimeInMs=*/ 20);
@@ -1226,6 +1226,8 @@ public class DataProcessorTest {
 
         final BatteryDiffData batteryDiffData = DataProcessor.generateBatteryDiffData(mContext,
                 DataProcessor.convertToBatteryHistEntry(batteryEntryList, mBatteryUsageStats));
+        batteryDiffData.setTotalConsumePower();
+        batteryDiffData.sortEntries();
 
         assertBatteryDiffEntry(
                 batteryDiffData.getAppDiffEntryList().get(0), 0, /*uid=*/ 2L,

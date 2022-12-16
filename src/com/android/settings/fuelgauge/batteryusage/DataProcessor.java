@@ -546,7 +546,7 @@ public final class DataProcessor {
         insertDailyUsageDiffData(hourlyBatteryLevelsPerDay, resultMap);
         // Insert diff data [SELECTED_INDEX_ALL][SELECTED_INDEX_ALL].
         insertAllUsageDiffData(resultMap);
-        purgeFakeAndHiddenPackages(context, resultMap);
+        processBatteryDiffData(context, resultMap);
         if (!isUsageMapValid(resultMap, hourlyBatteryLevelsPerDay)) {
             return null;
         }
@@ -651,7 +651,7 @@ public final class DataProcessor {
         allUsageMap.put(SELECTED_INDEX_ALL,
                 generateBatteryDiffData(context, getBatteryHistListFromFromStatsService(context)));
         resultMap.put(SELECTED_INDEX_ALL, allUsageMap);
-        purgeFakeAndHiddenPackages(context, resultMap);
+        processBatteryDiffData(context, resultMap);
         return resultMap;
     }
 
@@ -1232,8 +1232,11 @@ public final class DataProcessor {
         }
     }
 
-    // Removes low percentage data and fake usage data, which will be zero value.
-    private static void purgeFakeAndHiddenPackages(
+    // Process every battery diff data in the battery usage result map.
+    // (1) Removes low percentage data and fake usage data, which will be zero value.
+    // (2) Sets total consume power, so the usage percentage is updated.
+    // (3) Sorts the result.
+    private static void processBatteryDiffData(
             final Context context,
             final Map<Integer, Map<Integer, BatteryDiffData>> resultMap) {
         final Set<CharSequence> hideBackgroundUsageTimeSet =
@@ -1246,16 +1249,18 @@ public final class DataProcessor {
                         .getHideApplicationSet(context);
         resultMap.keySet().forEach(dailyKey -> {
             final Map<Integer, BatteryDiffData> dailyUsageMap = resultMap.get(dailyKey);
-            dailyUsageMap.values().forEach(diffEntryLists -> {
-                if (diffEntryLists == null) {
+            dailyUsageMap.values().forEach(batteryDiffData -> {
+                if (batteryDiffData == null) {
                     return;
                 }
                 purgeFakeAndHiddenPackages(
-                        diffEntryLists.getAppDiffEntryList(), hideBackgroundUsageTimeSet,
+                        batteryDiffData.getAppDiffEntryList(), hideBackgroundUsageTimeSet,
                         hideApplicationSet);
                 purgeFakeAndHiddenPackages(
-                        diffEntryLists.getSystemDiffEntryList(), hideBackgroundUsageTimeSet,
+                        batteryDiffData.getSystemDiffEntryList(), hideBackgroundUsageTimeSet,
                         hideApplicationSet);
+                batteryDiffData.setTotalConsumePower();
+                batteryDiffData.sortEntries();
             });
         });
     }
