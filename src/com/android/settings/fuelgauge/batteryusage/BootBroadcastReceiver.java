@@ -23,6 +23,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
+import com.android.settings.core.instrumentation.ElapsedTimeUtils;
+
 import java.time.Duration;
 
 /** Receives broadcasts to start or stop the periodic fetching job. */
@@ -77,6 +79,8 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
             recheckIntent.setClass(context, BootBroadcastReceiver.class);
             mHandler.postDelayed(() -> context.sendBroadcast(recheckIntent),
                     RESCHEDULE_FOR_BOOT_ACTION);
+        } else if (ACTION_SETUP_WIZARD_FINISHED.equals(action)) {
+            ElapsedTimeUtils.storeSuwFinishedTimestamp(context, System.currentTimeMillis());
         }
     }
 

@@ -165,4 +165,9 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     public CharSequence[] getHideApplicationEntries(Context context) {
         return new CharSequence[0];
     }
+
+    @Override
+    public Set<CharSequence> getIgnoreScreenOnTimeTaskRootSet(Context context) {
+        return new ArraySet<>();
+    }
 }

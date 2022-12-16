@@ -45,12 +45,11 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /** A utility class to operate battery usage database. */
 public final class DatabaseUtils {
     private static final String TAG = "DatabaseUtils";
-    /** Key for query parameter timestamp used in BATTERY_CONTENT_URI **/
-    private static final String QUERY_KEY_TIMESTAMP = "timestamp";
     /** Clear memory threshold for device booting phase. **/
     private static final long CLEAR_MEMORY_THRESHOLD_MS = Duration.ofMinutes(5).toMillis();
     private static final long CLEAR_MEMORY_DELAYED_MS = Duration.ofSeconds(2).toMillis();
@@ -62,8 +61,18 @@ public final class DatabaseUtils {
     public static final String AUTHORITY = "com.android.settings.battery.usage.provider";
     /** A table name for battery usage history. */
     public static final String BATTERY_STATE_TABLE = "BatteryState";
+    /** A table name for app usage events. */
+    public static final String APP_USAGE_EVENT_TABLE = "AppUsageEvent";
+    /** A path name for app usage latest timestamp query. */
+    public static final String APP_USAGE_LATEST_TIMESTAMP_PATH = "appUsageLatestTimestamp";
     /** A class name for battery usage data provider. */
     public static final String SETTINGS_PACKAGE_PATH = "com.android.settings";
+    /** Key for query parameter timestamp used in BATTERY_CONTENT_URI **/
+    public static final String QUERY_KEY_TIMESTAMP = "timestamp";
+    /** Key for query parameter userid used in APP_USAGE_EVENT_URI **/
+    public static final String QUERY_KEY_USERID = "userid";
+
+    public static final long INVALID_USER_ID = Integer.MIN_VALUE;
 
     /** A content URI to access battery usage states data. */
     public static final Uri BATTERY_CONTENT_URI =
@@ -72,6 +81,19 @@ public final class DatabaseUtils {
                     .authority(AUTHORITY)
                     .appendPath(BATTERY_STATE_TABLE)
                     .build();
+    /** A content URI to access app usage events data. */
+    public static final Uri APP_USAGE_EVENT_URI =
+            new Uri.Builder()
+                    .scheme(ContentResolver.SCHEME_CONTENT)
+                    .authority(AUTHORITY)
+                    .appendPath(APP_USAGE_EVENT_TABLE)
+                    .build();
+
+    // For testing only.
+    @VisibleForTesting
+    static Supplier<Cursor> sFakeBatteryStateSupplier;
+    @VisibleForTesting
+    static Supplier<Cursor> sFakeAppUsageLatestTimestampSupplier;
 
     private DatabaseUtils() {
     }
@@ -80,6 +102,27 @@ public final class DatabaseUtils {
     public static boolean isWorkProfile(Context context) {
         final UserManager userManager = context.getSystemService(UserManager.class);
         return userManager.isManagedProfile() && !userManager.isSystemUser();
+    }
+
+    /** Returns the latest timestamp current user data in app usage event table. */
+    public static long getAppUsageStartTimestampOfUser(
+            Context context, final long userId, final long earliestTimestamp) {
+        final long startTime = System.currentTimeMillis();
+        // Builds the content uri everytime to avoid cache.
+        final Uri appUsageLatestTimestampUri =
+                new Uri.Builder()
+                        .scheme(ContentResolver.SCHEME_CONTENT)
+                        .authority(AUTHORITY)
+                        .appendPath(APP_USAGE_LATEST_TIMESTAMP_PATH)
+                        .appendQueryParameter(
+                                QUERY_KEY_USERID, Long.toString(userId))
+                        .build();
+        final long latestTimestamp =
+                loadAppUsageLatestTimestampFromContentProvider(context, appUsageLatestTimestampUri);
+        Log.d(TAG, String.format(
+                "getAppUsageStartTimestampOfUser() userId=%d latestTimestamp=%d in %d/ms",
+                userId, latestTimestamp, (System.currentTimeMillis() - startTime)));
+        return Math.max(latestTimestamp, earliestTimestamp);
     }
 
     /** Long: for timestamp and String: for BatteryHistEntry.getKey() */
@@ -113,10 +156,10 @@ public final class DatabaseUtils {
     public static void clearAll(Context context) {
         AsyncTask.execute(() -> {
             try {
-                BatteryStateDatabase
-                        .getInstance(context.getApplicationContext())
-                        .batteryStateDao()
-                        .clearAll();
+                final BatteryStateDatabase database = BatteryStateDatabase
+                        .getInstance(context.getApplicationContext());
+                database.batteryStateDao().clearAll();
+                database.appUsageEventDao().clearAll();
             } catch (RuntimeException e) {
                 Log.e(TAG, "clearAll() failed", e);
             }
@@ -127,15 +170,57 @@ public final class DatabaseUtils {
     public static void clearExpiredDataIfNeeded(Context context) {
         AsyncTask.execute(() -> {
             try {
-                BatteryStateDatabase
-                        .getInstance(context.getApplicationContext())
-                        .batteryStateDao()
-                        .clearAllBefore(Clock.systemUTC().millis()
-                                - Duration.ofDays(DATA_RETENTION_INTERVAL_DAY).toMillis());
+                final BatteryStateDatabase database = BatteryStateDatabase
+                        .getInstance(context.getApplicationContext());
+                final long earliestTimestamp = Clock.systemUTC().millis()
+                        - Duration.ofDays(DATA_RETENTION_INTERVAL_DAY).toMillis();
+                database.batteryStateDao().clearAllBefore(earliestTimestamp);
+                database.appUsageEventDao().clearAllBefore(earliestTimestamp);
             } catch (RuntimeException e) {
                 Log.e(TAG, "clearAllBefore() failed", e);
             }
         });
+    }
+
+    /** Returns the timestamp for 00:00 6 days before the calendar date. */
+    public static long getTimestampSixDaysAgo(Calendar calendar) {
+        Calendar startCalendar =
+                calendar == null ? Calendar.getInstance() : (Calendar) calendar.clone();
+        startCalendar.add(Calendar.DAY_OF_YEAR, -6);
+        startCalendar.set(Calendar.HOUR_OF_DAY, 0);
+        startCalendar.set(Calendar.MINUTE, 0);
+        startCalendar.set(Calendar.SECOND, 0);
+        startCalendar.set(Calendar.MILLISECOND, 0);
+        return startCalendar.getTimeInMillis();
+    }
+
+    static List<ContentValues> sendAppUsageEventData(
+            final Context context, final List<AppUsageEvent> appUsageEventList) {
+        final long startTime = System.currentTimeMillis();
+        // Creates the ContentValues list to insert them into provider.
+        final List<ContentValues> valuesList = new ArrayList<>();
+        appUsageEventList.stream()
+                .filter(appUsageEvent -> appUsageEvent.hasUid())
+                .forEach(appUsageEvent -> valuesList.add(
+                        ConvertUtils.convertAppUsageEventToContentValues(appUsageEvent)));
+        int size = 0;
+        final ContentResolver resolver = context.getContentResolver();
+        // Inserts all ContentValues into battery provider.
+        if (!valuesList.isEmpty()) {
+            final ContentValues[] valuesArray = new ContentValues[valuesList.size()];
+            valuesList.toArray(valuesArray);
+            try {
+                size = resolver.bulkInsert(APP_USAGE_EVENT_URI, valuesArray);
+                resolver.notifyChange(APP_USAGE_EVENT_URI, /*observer=*/ null);
+                Log.d(TAG, "insert() app usage events data into database");
+            } catch (Exception e) {
+                Log.e(TAG, "bulkInsert() app usage data into database error:\n" + e);
+            }
+        }
+        Log.d(TAG, String.format("sendAppUsageEventData() size=%d in %d/ms",
+                size, (System.currentTimeMillis() - startTime)));
+        clearMemory();
+        return valuesList;
     }
 
     static List<ContentValues> sendBatteryEntryData(
@@ -178,7 +263,7 @@ public final class DatabaseUtils {
                                 || backgroundMs != 0;
                     })
                     .forEach(entry -> valuesList.add(
-                            ConvertUtils.convertToContentValues(
+                            ConvertUtils.convertBatteryEntryToContentValues(
                                     entry,
                                     batteryUsageStats,
                                     batteryLevel,
@@ -197,15 +282,15 @@ public final class DatabaseUtils {
             valuesList.toArray(valuesArray);
             try {
                 size = resolver.bulkInsert(BATTERY_CONTENT_URI, valuesArray);
-                Log.d(TAG, "insert() data into database with isFullChargeStart:"
+                Log.d(TAG, "insert() battery states data into database with isFullChargeStart:"
                         + isFullChargeStart);
             } catch (Exception e) {
-                Log.e(TAG, "bulkInsert() data into database error:\n" + e);
+                Log.e(TAG, "bulkInsert() battery states data into database error:\n" + e);
             }
         } else {
             // Inserts one fake data into battery provider.
             final ContentValues contentValues =
-                    ConvertUtils.convertToContentValues(
+                    ConvertUtils.convertBatteryEntryToContentValues(
                             /*entry=*/ null,
                             /*batteryUsageStats=*/ null,
                             batteryLevel,
@@ -231,6 +316,30 @@ public final class DatabaseUtils {
         return valuesList;
     }
 
+    private static long loadAppUsageLatestTimestampFromContentProvider(
+            Context context, final Uri appUsageLatestTimestampUri) {
+        // We have already make sure the context here is with OWNER user identity. Don't need to
+        // check whether current user is work profile.
+        try (Cursor cursor = sFakeAppUsageLatestTimestampSupplier != null
+                ? sFakeAppUsageLatestTimestampSupplier.get()
+                : context.getContentResolver().query(
+                        appUsageLatestTimestampUri, null, null, null)) {
+            if (cursor == null || cursor.getCount() == 0) {
+                return INVALID_USER_ID;
+            }
+            cursor.moveToFirst();
+            // There is only one column returned so use the index 0 directly.
+            final long latestTimestamp = cursor.getLong(/*columnIndex=*/ 0);
+            try {
+                cursor.close();
+            } catch (Exception e) {
+                Log.e(TAG, "cursor.close() failed", e);
+            }
+            // If there is no data for this user, 0 will be returned from the database.
+            return latestTimestamp == 0 ? INVALID_USER_ID : latestTimestamp;
+        }
+    }
+
     private static Map<Long, Map<String, BatteryHistEntry>> loadHistoryMapFromContentProvider(
             Context context, Uri batteryStateUri) {
         final boolean isWorkProfileUser = isWorkProfile(context);
@@ -247,7 +356,7 @@ public final class DatabaseUtils {
             }
         }
         final Map<Long, Map<String, BatteryHistEntry>> resultMap = new HashMap();
-        try (Cursor cursor =
+        try (Cursor cursor = sFakeBatteryStateSupplier != null ? sFakeBatteryStateSupplier.get() :
                      context.getContentResolver().query(batteryStateUri, null, null, null)) {
             if (cursor == null || cursor.getCount() == 0) {
                 return resultMap;
@@ -286,17 +395,4 @@ public final class DatabaseUtils {
             Log.w(TAG, "invoke clearMemory()");
         }, CLEAR_MEMORY_DELAYED_MS);
     }
-
-    /** Returns the timestamp for 00:00 6 days before the calendar date. */
-    private static long getTimestampSixDaysAgo(Calendar calendar) {
-        Calendar startCalendar =
-                calendar == null ? Calendar.getInstance() : (Calendar) calendar.clone();
-        startCalendar.add(Calendar.DAY_OF_YEAR, -6);
-        startCalendar.set(Calendar.HOUR_OF_DAY, 0);
-        startCalendar.set(Calendar.MINUTE, 0);
-        startCalendar.set(Calendar.SECOND, 0);
-        startCalendar.set(Calendar.MILLISECOND, 0);
-        return startCalendar.getTimeInMillis();
-    }
-
 }

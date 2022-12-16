@@ -16,6 +16,8 @@
 
 package com.android.settings.security;
 
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.content.Context;
 
 import androidx.fragment.app.Fragment;
@@ -24,6 +26,8 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 public class MemtagPreferenceController extends TogglePreferenceController {
     private Preference mPreference;
@@ -74,6 +78,12 @@ public class MemtagPreferenceController extends TogglePreferenceController {
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+        EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfMteIsDisabled(mContext);
+        if (admin != null) {
+            // Make sure this is disabled even if the user directly goes to this
+            // page via the android.settings.ADVANCED_MEMORY_PROTECTION_SETTINGS intent.
+            ((RestrictedSwitchPreference) preference).setDisabledByAdmin(admin);
+        }
         refreshSummary(preference);
     }
 

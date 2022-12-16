@@ -53,9 +53,9 @@ public final class BatteryStateDaoTest {
         mContext = ApplicationProvider.getApplicationContext();
         mDatabase = BatteryTestUtils.setUpBatteryStateDatabase(mContext);
         mBatteryStateDao = mDatabase.batteryStateDao();
-        BatteryTestUtils.insertDataToBatteryStateDatabase(mContext, TIMESTAMP3, PACKAGE_NAME3);
-        BatteryTestUtils.insertDataToBatteryStateDatabase(mContext, TIMESTAMP2, PACKAGE_NAME2);
-        BatteryTestUtils.insertDataToBatteryStateDatabase(
+        BatteryTestUtils.insertDataToBatteryStateTable(mContext, TIMESTAMP3, PACKAGE_NAME3);
+        BatteryTestUtils.insertDataToBatteryStateTable(mContext, TIMESTAMP2, PACKAGE_NAME2);
+        BatteryTestUtils.insertDataToBatteryStateTable(
                 mContext, TIMESTAMP1, PACKAGE_NAME1, /*multiple=*/ true,
                 /*isFullChargeStart=*/ true);
     }
@@ -102,9 +102,9 @@ public final class BatteryStateDaoTest {
     public void batteryStateDao_getCursorSinceLastFullCharge_noFullChargeData_returnSevenDaysData()
             throws Exception {
         mBatteryStateDao.clearAll();
-        BatteryTestUtils.insertDataToBatteryStateDatabase(mContext, TIMESTAMP3, PACKAGE_NAME3);
-        BatteryTestUtils.insertDataToBatteryStateDatabase(mContext, TIMESTAMP2, PACKAGE_NAME2);
-        BatteryTestUtils.insertDataToBatteryStateDatabase(mContext, TIMESTAMP1, PACKAGE_NAME1);
+        BatteryTestUtils.insertDataToBatteryStateTable(mContext, TIMESTAMP3, PACKAGE_NAME3);
+        BatteryTestUtils.insertDataToBatteryStateTable(mContext, TIMESTAMP2, PACKAGE_NAME2);
+        BatteryTestUtils.insertDataToBatteryStateTable(mContext, TIMESTAMP1, PACKAGE_NAME1);
         final Cursor cursor = mBatteryStateDao.getCursorSinceLastFullCharge(TIMESTAMP2);
         assertThat(cursor.getCount()).isEqualTo(2);
         assertThat(cursor.getColumnCount()).isEqualTo(CURSOR_COLUMN_SIZE);

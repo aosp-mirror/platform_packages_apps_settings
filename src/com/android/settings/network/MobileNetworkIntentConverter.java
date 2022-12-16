@@ -16,6 +16,8 @@
 
 package com.android.settings.network;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -51,7 +53,7 @@ public class MobileNetworkIntentConverter implements Function<Intent, Intent> {
     private static final String TAG = "MobileNetworkIntentConverter";
 
     private static final ComponentName sTargetComponent = ComponentName
-            .createRelative("com.android.settings",
+            .createRelative(SETTINGS_PACKAGE_NAME,
                     MobileNetworkActivity.class.getTypeName());
     private static final String INTENT_TRAMPOLINE = "android.settings.SEARCH_RESULT_TRAMPOLINE";
     /**

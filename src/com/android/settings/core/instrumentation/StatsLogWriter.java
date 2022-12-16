@@ -31,7 +31,8 @@ public class StatsLogWriter implements LogWriter {
                 SettingsEnums.PAGE_VISIBLE /* action */,
                 pageId, /* target pageId */
                 "" /* changedPreferenceKey */,
-                latency /* changedPreferenceIntValue */);
+                latency /* changedPreferenceIntValue */,
+                ElapsedTimeUtils.getElapsedTime(System.currentTimeMillis()));
     }
 
     @Override
@@ -41,7 +42,8 @@ public class StatsLogWriter implements LogWriter {
                 SettingsEnums.PAGE_HIDE /* action */,
                 pageId,
                 "" /* changedPreferenceKey */,
-                visibleTime /* changedPreferenceIntValue */);
+                visibleTime /* changedPreferenceIntValue */,
+                ElapsedTimeUtils.getElapsedTime(System.currentTimeMillis()));
     }
 
     @Override
@@ -51,7 +53,8 @@ public class StatsLogWriter implements LogWriter {
                 SettingsEnums.ACTION_SETTINGS_TILE_CLICK /* action */,
                 SettingsEnums.PAGE_UNKNOWN /* pageId */,
                 key /* changedPreferenceKey */,
-                0 /* changedPreferenceIntValue */);
+                0 /* changedPreferenceIntValue */,
+                ElapsedTimeUtils.getElapsedTime(System.currentTimeMillis()));
     }
 
     @Override
@@ -61,7 +64,8 @@ public class StatsLogWriter implements LogWriter {
                 SettingsEnums.ACTION_SETTINGS_PREFERENCE_CHANGE /* action */,
                 SettingsEnums.PAGE_UNKNOWN /* pageId */,
                 key /* changedPreferenceKey */,
-                value /* changedPreferenceIntValue */);
+                value /* changedPreferenceIntValue */,
+                ElapsedTimeUtils.getElapsedTime(System.currentTimeMillis()));
     }
 
     @Override
@@ -107,6 +111,7 @@ public class StatsLogWriter implements LogWriter {
                 action,
                 pageId,
                 key,
-                value);
+                value,
+                ElapsedTimeUtils.getElapsedTime(System.currentTimeMillis()));
     }
 }

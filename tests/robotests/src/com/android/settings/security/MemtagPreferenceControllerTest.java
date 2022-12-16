@@ -32,6 +32,8 @@ import androidx.test.rule.ActivityTestRule;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
+import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.testutils.shadow.ShadowInteractionJankMonitor;
 
 import org.junit.Before;
@@ -48,7 +50,8 @@ import org.robolectric.shadows.ShadowSystemProperties;
         shadows = {
             ZygoteShadow.class,
             ShadowDeviceConfig.class,
-            ShadowInteractionJankMonitor.class
+            ShadowInteractionJankMonitor.class,
+            ShadowRestrictedLockUtilsInternal.class
         })
 public class MemtagPreferenceControllerTest {
     private final String mMemtagSupportedProperty = "ro.arm64.memtag.bootctl_supported";
@@ -143,6 +146,14 @@ public class MemtagPreferenceControllerTest {
         ZygoteShadow.setSupportsMemoryTagging(true);
         mController.setChecked(true);
         onView(withText(R.string.memtag_reboot_title)).inRoot(isDialog()).check(doesNotExist());
+    }
+
+    @Test
+    public void updateState_disabledByAdmin_disablesPreference() {
+        ShadowRestrictedLockUtilsInternal.setMteIsDisabled(true);
+        RestrictedSwitchPreference preference = new RestrictedSwitchPreference(mContext);
+        mController.updateState(preference);
+        assertThat(preference.isDisabledByAdmin()).isTrue();
     }
 
     private static final class TestActivity extends FragmentActivity {

@@ -53,9 +53,9 @@ public final class BugReportContentProviderTest {
         mBugReportContentProvider.attachInfo(mContext, /*info=*/ null);
         // Inserts fake data into database for testing.
         BatteryTestUtils.setUpBatteryStateDatabase(mContext);
-        BatteryTestUtils.insertDataToBatteryStateDatabase(
+        BatteryTestUtils.insertDataToBatteryStateTable(
                 mContext, System.currentTimeMillis(), PACKAGE_NAME1);
-        BatteryTestUtils.insertDataToBatteryStateDatabase(
+        BatteryTestUtils.insertDataToBatteryStateTable(
                 mContext, System.currentTimeMillis(), PACKAGE_NAME2);
     }
 

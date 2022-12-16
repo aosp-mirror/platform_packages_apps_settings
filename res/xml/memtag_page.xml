@@ -23,7 +23,7 @@
         android:title="@string/memtag_intro"
         settings:searchable="false"/>
 
-    <SwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:id="@+id/memtag_page_switch"
         android:key="memtag"
         android:title="@string/memtag_toggle"
