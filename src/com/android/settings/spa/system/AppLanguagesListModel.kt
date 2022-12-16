@@ -17,8 +17,10 @@
 package com.android.settings.spa.system
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
@@ -28,56 +30,73 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.applications.AppLocaleUtil
 import com.android.settings.applications.appinfo.AppLocaleDetails
+import com.android.settings.localepicker.AppLocalePickerActivity
+import com.android.settingslib.spa.framework.util.filterItem
 import com.android.settingslib.spaprivileged.model.app.AppListModel
 import com.android.settingslib.spaprivileged.model.app.AppRecord
+import com.android.settingslib.spaprivileged.template.app.AppListItem
+import com.android.settingslib.spaprivileged.template.app.AppListItemModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 
 data class AppLanguagesRecord(
     override val app: ApplicationInfo,
-    val isAppLocaleSupported: Boolean
+    val isAppLocaleSupported: Boolean,
 ) : AppRecord
 
 class AppLanguagesListModel(private val context: Context) : AppListModel<AppLanguagesRecord> {
-    private val now = System.currentTimeMillis()
     private val packageManager = context.packageManager
 
     override fun transform(userIdFlow: Flow<Int>, appListFlow: Flow<List<ApplicationInfo>>) =
         userIdFlow.map { userId ->
             packageManager.queryIntentActivitiesAsUser(
-                    AppLocaleUtil.LAUNCHER_ENTRY_INTENT,
-                    PackageManager.ResolveInfoFlags.of(PackageManager.GET_META_DATA.toLong()),
-                    userId,
-                )
+                AppLocaleUtil.LAUNCHER_ENTRY_INTENT,
+                PackageManager.ResolveInfoFlags.of(PackageManager.GET_META_DATA.toLong()),
+                userId,
+            )
         }.combine(appListFlow) { resolveInfos, appList ->
             appList.map { app ->
-                AppLanguagesRecord(app,
-                    AppLocaleUtil.canDisplayLocaleUi(context,
-                    app, resolveInfos))
+                AppLanguagesRecord(
+                    app = app,
+                    isAppLocaleSupported = AppLocaleUtil.canDisplayLocaleUi(
+                        context, app, resolveInfos
+                    ),
+                )
             }
         }
 
     override fun filter(
         userIdFlow: Flow<Int>,
         option: Int,
-        recordListFlow: Flow<List<AppLanguagesRecord>>
-    ) = recordListFlow.map { recordList ->
-        recordList.filter { it.isAppLocaleSupported }
-    }
+        recordListFlow: Flow<List<AppLanguagesRecord>>,
+    ) = recordListFlow.filterItem { it.isAppLocaleSupported }
 
     @OptIn(ExperimentalLifecycleComposeApi::class)
     @Composable
-    override fun getSummary(option: Int, record: AppLanguagesRecord): State<String>? =
+    override fun getSummary(option: Int, record: AppLanguagesRecord): State<String> =
         remember(record.app) {
             flow {
                 emit(getSummary(record.app))
-            }
+            }.flowOn(Dispatchers.IO)
         }.collectAsStateWithLifecycle(initialValue = stringResource(R.string.summary_placeholder))
 
     private fun getSummary(app: ApplicationInfo): String =
         AppLocaleDetails.getAppDefaultLocale(context, app.packageName)?.let {
             AppLocaleDetails.getSummary(context, app).toString()
         } ?: context.getString(R.string.preference_of_system_locale_summary)
+
+    @Composable
+    override fun AppListItemModel<AppLanguagesRecord>.AppItem() {
+        AppListItem {
+            val intent = Intent(context, AppLocalePickerActivity::class.java).apply {
+                data = Uri.parse("package:${record.app.packageName}")
+                this.putExtra("uid", record.app.uid)
+            }
+            context.startActivity(intent)
+        }
+    }
 }

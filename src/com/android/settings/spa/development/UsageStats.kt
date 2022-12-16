@@ -21,11 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
-import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.framework.compose.rememberContext
-import com.android.settingslib.spa.widget.preference.Preference
-import com.android.settingslib.spa.widget.preference.PreferenceModel
-import com.android.settingslib.spaprivileged.template.app.AppListItem
 import com.android.settingslib.spaprivileged.template.app.AppListPage
 
 object UsageStatsPageProvider : SettingsPageProvider {
@@ -37,14 +33,6 @@ object UsageStatsPageProvider : SettingsPageProvider {
             title = stringResource(R.string.testing_usage_stats),
             listModel = rememberContext(::UsageStatsListModel),
             primaryUserOnly = true,
-        ) { AppListItem {} }
-    }
-
-    @Composable
-    fun EntryItem() {
-        Preference(object : PreferenceModel {
-            override val title = stringResource(R.string.testing_usage_stats)
-            override val onClick = navigator(name)
-        })
+        )
     }
 }
