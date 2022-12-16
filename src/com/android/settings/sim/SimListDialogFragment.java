@@ -16,6 +16,8 @@
 
 package com.android.settings.sim;
 
+import static android.telephony.SubscriptionManager.PROFILE_CLASS_PROVISIONING;
+
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -137,6 +139,11 @@ public class SimListDialogFragment extends SimDialogFragment {
             dismiss();
             return;
         }
+
+        // Remove the provision eSIM from the subscription list.
+        currentSubscriptions.removeIf(info -> info.isEmbedded()
+                && info.getProfileClass() == PROFILE_CLASS_PROVISIONING);
+
         boolean includeAskEveryTime = getArguments().getBoolean(KEY_INCLUDE_ASK_EVERY_TIME);
         boolean isCancelItemShowed = getArguments().getBoolean(KEY_SHOW_CANCEL_ITEM);
         if (includeAskEveryTime || isCancelItemShowed) {
