@@ -60,6 +60,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TimeZone;
 
 @RunWith(RobolectricTestRunner.class)
@@ -1062,8 +1063,8 @@ public class DataProcessorTest {
         final List<Integer> levels = List.of(100, 100);
         hourlyBatteryLevelsPerDay.add(
                 new BatteryLevelData.PeriodBatteryLevelData(timestamps, levels));
-        when(mPowerUsageFeatureProvider.getHideApplicationEntries(mContext))
-                .thenReturn(new CharSequence[]{"package1"});
+        when(mPowerUsageFeatureProvider.getHideApplicationSet(mContext))
+                .thenReturn(Set.of("package1"));
 
         final Map<Integer, Map<Integer, BatteryDiffData>> resultMap =
                 DataProcessor.getBatteryUsageMap(

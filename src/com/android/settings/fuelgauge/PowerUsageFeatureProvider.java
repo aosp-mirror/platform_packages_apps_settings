@@ -146,9 +146,9 @@ public interface PowerUsageFeatureProvider {
     Set<CharSequence> getHideBackgroundUsageTimeSet(Context context);
 
     /**
-     * Returns package names for hiding application in the usage screen.
+     * Returns {@link Set} for hiding application package names in the usage screen.
      */
-    CharSequence[] getHideApplicationEntries(Context context);
+    Set<CharSequence> getHideApplicationSet(Context context);
 
     /**
      * Returns {@link Set} for ignoring task root class names for screen on time.
