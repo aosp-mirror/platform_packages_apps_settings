@@ -301,7 +301,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
             notifyBackupManager();
             logMetricCategory(selectedPreference);
-            mBatteryOptimizeUtils.setAppUsageState(selectedPreference);
             Log.d(TAG, "Leave with mode: " + selectedPreference);
         }
     }
@@ -468,6 +467,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         updatePreferenceState(mUnrestrictedPreference, selectedKey);
         updatePreferenceState(mOptimizePreference, selectedKey);
         updatePreferenceState(mRestrictedPreference, selectedKey);
+	mBatteryOptimizeUtils.setAppUsageState(getSelectedPreference());
     }
 
     private void updatePreferenceState(SelectorWithWidgetPreference preference,
