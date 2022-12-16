@@ -296,7 +296,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                 BatteryHistoricalLogUtil.getPackageNameWithUserId(
                         mBatteryOptimizeUtils.getPackageName(), UserHandle.myUserId()),
                 mLogStringBuilder.toString());
-        mBatteryOptimizeUtils.setAppUsageState(selectedPreference, Action.APPLY);
         Log.d(TAG, "Leave with mode: " + selectedPreference);
     }
 
@@ -424,6 +423,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         updatePreferenceState(mUnrestrictedPreference, selectedKey);
         updatePreferenceState(mOptimizePreference, selectedKey);
         updatePreferenceState(mRestrictedPreference, selectedKey);
+        mBatteryOptimizeUtils.setAppUsageState(getSelectedPreference(), Action.APPLY);
     }
 
     private void updatePreferenceState(SelectorWithWidgetPreference preference,

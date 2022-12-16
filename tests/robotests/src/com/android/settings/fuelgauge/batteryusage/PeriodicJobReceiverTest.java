@@ -62,7 +62,7 @@ public final class PeriodicJobReceiverTest {
 
         // Inserts fake data into database for testing.
         final BatteryStateDatabase database = BatteryTestUtils.setUpBatteryStateDatabase(mContext);
-        BatteryTestUtils.insertDataToBatteryStateDatabase(
+        BatteryTestUtils.insertDataToBatteryStateTable(
                 mContext, Clock.systemUTC().millis(), "com.android.systemui");
         mDao = database.batteryStateDao();
     }
@@ -122,9 +122,9 @@ public final class PeriodicJobReceiverTest {
     private void insertExpiredData(int shiftDay) {
         final long expiredTimeInMs =
                 Clock.systemUTC().millis() - Duration.ofDays(shiftDay).toMillis();
-        BatteryTestUtils.insertDataToBatteryStateDatabase(
+        BatteryTestUtils.insertDataToBatteryStateTable(
                 mContext, expiredTimeInMs - 1, "com.android.systemui");
-        BatteryTestUtils.insertDataToBatteryStateDatabase(
+        BatteryTestUtils.insertDataToBatteryStateTable(
                 mContext, expiredTimeInMs, "com.android.systemui");
         // Ensures the testing environment is correct.
         assertThat(mDao.getAllAfter(0)).hasSize(3);

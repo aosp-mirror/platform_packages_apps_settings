@@ -87,7 +87,7 @@ public class TabPreference extends Preference {
     @Override
     public void onDetached() {
         super.onDetached();
-        if (mOnPageChangeCallback != null) {
+        if (mViewPager != null && mOnPageChangeCallback != null) {
             mViewPager.unregisterOnPageChangeCallback(mOnPageChangeCallback);
         }
     }

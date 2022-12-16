@@ -24,7 +24,6 @@ import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.content.pm.ParceledListSlice;
 import android.content.pm.UserInfo;
-import android.os.AsyncTask;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.ArraySet;
@@ -227,10 +226,8 @@ public class BatteryOptimizeUtils {
                 mode == MODE_RESTRICTED ? AppOpsManager.MODE_IGNORED : AppOpsManager.MODE_ALLOWED;
         final boolean allowListed = mode == MODE_UNRESTRICTED;
 
-        AsyncTask.execute(() -> {
-            setAppOptimizationModeInternal(context, appOpsManagerMode, allowListed, uid,
-                    packageName, batteryUtils, powerAllowlistBackend, action);
-        });
+        setAppOptimizationModeInternal(context, appOpsManagerMode, allowListed, uid,
+                packageName, batteryUtils, powerAllowlistBackend, action);
     }
 
     private static void setAppOptimizationModeInternal(

@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -34,6 +35,7 @@ import android.os.BatteryUsageStats;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
 import com.android.settings.testutils.BatteryTestUtils;
 
 import org.junit.Before;
@@ -94,6 +96,53 @@ public final class DatabaseUtilsTest {
     }
 
     @Test
+    public void sendAppUsageEventData_returnsExpectedList() {
+        // Configures the testing AppUsageEvent data.
+        final List<AppUsageEvent> appUsageEventList = new ArrayList<>();
+        final AppUsageEvent appUsageEvent1 =
+                AppUsageEvent.newBuilder()
+                        .setUid(101L)
+                        .setType(AppUsageEventType.ACTIVITY_RESUMED)
+                        .build();
+        final AppUsageEvent appUsageEvent2 =
+                AppUsageEvent.newBuilder()
+                        .setUid(1001L)
+                        .setType(AppUsageEventType.ACTIVITY_STOPPED)
+                        .build();
+        final AppUsageEvent appUsageEvent3 =
+                AppUsageEvent.newBuilder()
+                        .setType(AppUsageEventType.DEVICE_SHUTDOWN)
+                        .build();
+        appUsageEventList.add(appUsageEvent1);
+        appUsageEventList.add(appUsageEvent2);
+        appUsageEventList.add(appUsageEvent3);
+
+        final List<ContentValues> valuesList =
+                DatabaseUtils.sendAppUsageEventData(mContext, appUsageEventList);
+
+        assertThat(valuesList).hasSize(2);
+        assertThat(valuesList.get(0).getAsInteger(AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE))
+                .isEqualTo(1);
+        assertThat(valuesList.get(1).getAsInteger(AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE))
+                .isEqualTo(2);
+        // Verifies the inserted ContentValues into content provider.
+        final ContentValues[] valuesArray =
+                new ContentValues[] {valuesList.get(0), valuesList.get(1)};
+        verify(mMockContentResolver).bulkInsert(
+                DatabaseUtils.APP_USAGE_EVENT_URI, valuesArray);
+        verify(mMockContentResolver).notifyChange(
+                DatabaseUtils.APP_USAGE_EVENT_URI, /*observer=*/ null);
+    }
+
+    @Test
+    public void sendAppUsageEventData_emptyAppUsageEventList_notSend() {
+        final List<ContentValues> valuesList =
+                DatabaseUtils.sendAppUsageEventData(mContext, new ArrayList<>());
+        assertThat(valuesList).hasSize(0);
+        verifyNoMoreInteractions(mMockContentResolver);
+    }
+
+    @Test
     public void sendBatteryEntryData_nullBatteryIntent_returnsNullValue() {
         doReturn(null).when(mContext).registerReceiver(any(), any());
         assertThat(
@@ -123,8 +172,8 @@ public final class DatabaseUtilsTest {
 
         assertThat(valuesList).hasSize(2);
         // Verifies the ContentValues content.
-        verifyContentValues(0.5, valuesList.get(0));
-        verifyContentValues(0.0, valuesList.get(1));
+        verifyBatteryEntryContentValues(0.5, valuesList.get(0));
+        verifyBatteryEntryContentValues(0.0, valuesList.get(1));
         // Verifies the inserted ContentValues into content provider.
         final ContentValues[] valuesArray =
                 new ContentValues[] {valuesList.get(0), valuesList.get(1)};
@@ -146,7 +195,7 @@ public final class DatabaseUtilsTest {
                         /*isFullChargeStart=*/ false);
 
         assertThat(valuesList).hasSize(1);
-        verifyFakeContentValues(valuesList.get(0));
+        verifyFakeBatteryEntryContentValues(valuesList.get(0));
         // Verifies the inserted ContentValues into content provider.
         verify(mMockContentResolver).insert(any(), any());
         verify(mMockContentResolver).notifyChange(
@@ -165,7 +214,7 @@ public final class DatabaseUtilsTest {
                         /*isFullChargeStart=*/ false);
 
         assertThat(valuesList).hasSize(1);
-        verifyFakeContentValues(valuesList.get(0));
+        verifyFakeBatteryEntryContentValues(valuesList.get(0));
         // Verifies the inserted ContentValues into content provider.
         verify(mMockContentResolver).insert(any(), any());
         verify(mMockContentResolver).notifyChange(
@@ -184,11 +233,47 @@ public final class DatabaseUtilsTest {
                         /*isFullChargeStart=*/ false);
 
         assertThat(valuesList).hasSize(1);
-        verifyFakeContentValues(valuesList.get(0));
+        verifyFakeBatteryEntryContentValues(valuesList.get(0));
         // Verifies the inserted ContentValues into content provider.
         verify(mMockContentResolver).insert(any(), any());
         verify(mMockContentResolver).notifyChange(
                 DatabaseUtils.BATTERY_CONTENT_URI, /*observer=*/ null);
+    }
+
+    @Test
+    public void getAppUsageStartTimestampOfUser_emptyCursorContent_returnEarliestTimestamp() {
+        final MatrixCursor cursor =
+                new MatrixCursor(new String[] {AppUsageEventEntity.KEY_TIMESTAMP});
+        DatabaseUtils.sFakeAppUsageLatestTimestampSupplier = () -> cursor;
+
+        final long earliestTimestamp = 10001L;
+        assertThat(DatabaseUtils.getAppUsageStartTimestampOfUser(
+                mContext, /*userId=*/ 0, earliestTimestamp)).isEqualTo(earliestTimestamp);
+    }
+
+    @Test
+    public void getAppUsageStartTimestampOfUser_nullCursor_returnEarliestTimestamp() {
+        DatabaseUtils.sFakeAppUsageLatestTimestampSupplier = () -> null;
+        final long earliestTimestamp = 10001L;
+        assertThat(DatabaseUtils.getAppUsageStartTimestampOfUser(
+                mContext, /*userId=*/ 0, earliestTimestamp)).isEqualTo(earliestTimestamp);
+    }
+
+    @Test
+    public void getAppUsageStartTimestampOfUser_returnExpectedResult() {
+        final long returnedTimestamp = 10001L;
+        final MatrixCursor cursor =
+                new MatrixCursor(new String[] {AppUsageEventEntity.KEY_TIMESTAMP});
+        // Adds fake data into the cursor.
+        cursor.addRow(new Object[] {returnedTimestamp});
+        DatabaseUtils.sFakeAppUsageLatestTimestampSupplier = () -> cursor;
+
+        final long earliestTimestamp1 = 1001L;
+        assertThat(DatabaseUtils.getAppUsageStartTimestampOfUser(
+                mContext, /*userId=*/ 0, earliestTimestamp1)).isEqualTo(returnedTimestamp);
+        final long earliestTimestamp2 = 100001L;
+        assertThat(DatabaseUtils.getAppUsageStartTimestampOfUser(
+                mContext, /*userId=*/ 0, earliestTimestamp2)).isEqualTo(earliestTimestamp2);
     }
 
     @Test
@@ -198,7 +283,7 @@ public final class DatabaseUtilsTest {
                         BatteryHistEntry.KEY_UID,
                         BatteryHistEntry.KEY_USER_ID,
                         BatteryHistEntry.KEY_TIMESTAMP});
-        doReturn(cursor).when(mMockContentResolver).query(any(), any(), any(), any());
+        DatabaseUtils.sFakeBatteryStateSupplier = () -> cursor;
 
         assertThat(DatabaseUtils.getHistoryMapSinceLastFullCharge(
                 mContext, /*calendar=*/ null)).isEmpty();
@@ -206,7 +291,7 @@ public final class DatabaseUtilsTest {
 
     @Test
     public void getHistoryMapSinceLastFullCharge_nullCursor_returnEmptyMap() {
-        doReturn(null).when(mMockContentResolver).query(any(), any(), any(), any());
+        DatabaseUtils.sFakeBatteryStateSupplier = () -> null;
         assertThat(DatabaseUtils.getHistoryMapSinceLastFullCharge(
                 mContext, /*calendar=*/ null)).isEmpty();
     }
@@ -216,7 +301,6 @@ public final class DatabaseUtilsTest {
         final Long timestamp1 = Long.valueOf(1001L);
         final Long timestamp2 = Long.valueOf(1002L);
         final MatrixCursor cursor = getMatrixCursor();
-        doReturn(cursor).when(mMockContentResolver).query(any(), any(), any(), any());
         // Adds fake data into the cursor.
         cursor.addRow(new Object[] {
                 "app name1", timestamp1, 1, ConvertUtils.CONSUMER_TYPE_UID_BATTERY});
@@ -226,6 +310,7 @@ public final class DatabaseUtilsTest {
                 "app name3", timestamp2, 3, ConvertUtils.CONSUMER_TYPE_UID_BATTERY});
         cursor.addRow(new Object[] {
                 "app name4", timestamp2, 4, ConvertUtils.CONSUMER_TYPE_UID_BATTERY});
+        DatabaseUtils.sFakeBatteryStateSupplier = () -> cursor;
 
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistMap =
                 DatabaseUtils.getHistoryMapSinceLastFullCharge(
@@ -251,9 +336,7 @@ public final class DatabaseUtilsTest {
         doReturn(mMockContext).when(mContext).createPackageContextAsUser(
                 "com.fake.package", /*flags=*/ 0, UserHandle.OWNER);
         BatteryTestUtils.setWorkProfile(mContext);
-        doReturn(getMatrixCursor()).when(mMockContentResolver2)
-                .query(any(), any(), any(), any());
-        doReturn(null).when(mMockContentResolver).query(any(), any(), any(), any());
+        DatabaseUtils.sFakeBatteryStateSupplier = () -> getMatrixCursor();
 
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistMap =
                 DatabaseUtils.getHistoryMapSinceLastFullCharge(
@@ -262,7 +345,8 @@ public final class DatabaseUtilsTest {
         assertThat(batteryHistMap).isEmpty();
     }
 
-    private static void verifyContentValues(double consumedPower, ContentValues values) {
+    private static void verifyBatteryEntryContentValues(
+            double consumedPower, ContentValues values) {
         final BatteryInformation batteryInformation =
                 ConvertUtils.getBatteryInformation(
                         values, BatteryHistEntry.KEY_BATTERY_INFORMATION);
@@ -275,7 +359,7 @@ public final class DatabaseUtilsTest {
                 .isEqualTo(BatteryManager.BATTERY_HEALTH_COLD);
     }
 
-    private static void verifyFakeContentValues(ContentValues values) {
+    private static void verifyFakeBatteryEntryContentValues(ContentValues values) {
         final BatteryInformation batteryInformation =
                 ConvertUtils.getBatteryInformation(
                         values, BatteryHistEntry.KEY_BATTERY_INFORMATION);

@@ -16,8 +16,11 @@
 package com.android.settings.fuelgauge.batteryusage;
 
 import android.annotation.IntDef;
+import android.annotation.Nullable;
+import android.app.usage.UsageEvents.Event;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.BatteryUsageStats;
 import android.os.Build;
@@ -25,10 +28,12 @@ import android.os.LocaleList;
 import android.os.UserHandle;
 import android.text.format.DateFormat;
 import android.util.Base64;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -49,7 +54,7 @@ public final class ConvertUtils {
             CONSUMER_TYPE_SYSTEM_BATTERY,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public static @interface ConsumerType {
+    public @interface ConsumerType {
     }
 
     public static final int CONSUMER_TYPE_UNKNOWN = 0;
@@ -60,8 +65,8 @@ public final class ConvertUtils {
     private ConvertUtils() {
     }
 
-    /** Converts to content values */
-    public static ContentValues convertToContentValues(
+    /** Converts {@link BatteryEntry} to content values */
+    public static ContentValues convertBatteryEntryToContentValues(
             final BatteryEntry entry,
             final BatteryUsageStats batteryUsageStats,
             final int batteryLevel,
@@ -103,6 +108,19 @@ public final class ConvertUtils {
         return values;
     }
 
+    /** Converts {@link AppUsageEvent} to content values */
+    public static ContentValues convertAppUsageEventToContentValues(final AppUsageEvent event) {
+        final ContentValues values = new ContentValues();
+        values.put(AppUsageEventEntity.KEY_UID, event.getUid());
+        values.put(AppUsageEventEntity.KEY_USER_ID, event.getUserId());
+        values.put(AppUsageEventEntity.KEY_TIMESTAMP, event.getTimestamp());
+        values.put(AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE, event.getType().getNumber());
+        values.put(AppUsageEventEntity.KEY_PACKAGE_NAME, event.getPackageName());
+        values.put(AppUsageEventEntity.KEY_INSTANCE_ID, event.getInstanceId());
+        values.put(AppUsageEventEntity.KEY_TASK_ROOT_PACKAGE_NAME, event.getTaskRootPackageName());
+        return values;
+    }
+
     /** Gets the encoded string from {@link BatteryInformation} instance. */
     public static String convertBatteryInformationToString(
             final BatteryInformation batteryInformation) {
@@ -135,7 +153,7 @@ public final class ConvertUtils {
             BatteryEntry entry,
             BatteryUsageStats batteryUsageStats) {
         return new BatteryHistEntry(
-                convertToContentValues(
+                convertBatteryEntryToContentValues(
                         entry,
                         batteryUsageStats,
                         /*batteryLevel=*/ 0,
@@ -144,6 +162,51 @@ public final class ConvertUtils {
                         /*bootTimestamp=*/ 0,
                         /*timestamp=*/ 0,
                         /*isFullChargeStart=*/ false));
+    }
+
+    /** Converts to {@link AppUsageEvent} from {@link Event} */
+    @Nullable
+    public static AppUsageEvent convertToAppUsageEvent(
+            Context context, final Event event, final long userId) {
+        if (event.getPackageName() == null) {
+            // See b/190609174: Event package names should never be null, but sometimes they are.
+            // Note that system events like device shutting down should still come with the android
+            // package name.
+            Log.w(TAG, String.format(
+                    "Ignoring a usage event with null package name (timestamp=%d, type=%d)",
+                    event.getTimeStamp(), event.getEventType()));
+            return null;
+        }
+
+        final AppUsageEvent.Builder appUsageEventBuilder = AppUsageEvent.newBuilder();
+        appUsageEventBuilder
+                .setTimestamp(event.getTimeStamp())
+                .setType(getAppUsageEventType(event.getEventType()))
+                .setPackageName(event.getPackageName())
+                .setUserId(userId);
+
+        try {
+            final long uid = context
+                    .getPackageManager()
+                    .getPackageUidAsUser(event.getPackageName(), (int) userId);
+            appUsageEventBuilder.setUid(uid);
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.w(TAG, String.format(
+                    "Fail to get uid for package %s of user %d)", event.getPackageName(), userId));
+            return null;
+        }
+
+        try {
+            appUsageEventBuilder.setInstanceId(event.getInstanceId());
+        } catch (NoClassDefFoundError | NoSuchMethodError e) {
+            Log.w(TAG, "UsageEvent instance ID API error");
+        }
+        String taskRootPackageName = getTaskRootPackageName(event);
+        if (taskRootPackageName != null) {
+            appUsageEventBuilder.setTaskRootPackageName(taskRootPackageName);
+        }
+
+        return appUsageEventBuilder.build();
     }
 
     /** Converts UTC timestamp to human readable local time string. */
@@ -183,6 +246,50 @@ public final class ConvertUtils {
                 context.getResources().getConfiguration().getLocales();
         return locales != null && !locales.isEmpty() ? locales.get(0)
                 : Locale.getDefault();
+    }
+
+    /**
+     * Returns the package name of the task root when this event was reported when {@code event} is
+     * one of:
+     *
+     * <ul>
+     *   <li>{@link Event#ACTIVITY_RESUMED}
+     *   <li>{@link Event#ACTIVITY_STOPPED}
+     * </ul>
+     */
+    @Nullable
+    private static String getTaskRootPackageName(Event event) {
+        int eventType = event.getEventType();
+        if (eventType != Event.ACTIVITY_RESUMED && eventType != Event.ACTIVITY_STOPPED) {
+            // Task root is only relevant for ACTIVITY_* events.
+            return null;
+        }
+
+        try {
+            String taskRootPackageName = event.getTaskRootPackageName();
+            if (taskRootPackageName == null) {
+                Log.w(TAG, String.format(
+                        "Null task root in event with timestamp %d, type=%d, package %s",
+                        event.getTimeStamp(), event.getEventType(), event.getPackageName()));
+            }
+            return taskRootPackageName;
+        } catch (NoSuchMethodError e) {
+            Log.w(TAG, "Failed to call Event#getTaskRootPackageName()");
+            return null;
+        }
+    }
+
+    private static AppUsageEventType getAppUsageEventType(final int eventType) {
+        switch (eventType) {
+            case Event.ACTIVITY_RESUMED:
+                return AppUsageEventType.ACTIVITY_RESUMED;
+            case Event.ACTIVITY_STOPPED:
+                return AppUsageEventType.ACTIVITY_STOPPED;
+            case Event.DEVICE_SHUTDOWN:
+                return AppUsageEventType.DEVICE_SHUTDOWN;
+            default:
+                return AppUsageEventType.UNKNOWN;
+        }
     }
 
     private static BatteryInformation constructBatteryInformation(

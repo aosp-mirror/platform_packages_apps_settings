@@ -37,9 +37,6 @@ import java.util.List;
 public class SimSlotChangeReceiver extends BroadcastReceiver {
     private static final String TAG = "SlotChangeReceiver";
 
-    private final SimSlotChangeHandler mSlotChangeHandler = SimSlotChangeHandler.get();
-    private final Object mLock = new Object();
-
     @Override
     public void onReceive(Context context, Intent intent) {
 
@@ -49,20 +46,17 @@ public class SimSlotChangeReceiver extends BroadcastReceiver {
             return;
         }
 
-        final PendingResult pendingResult = goAsync();
-        ThreadUtils.postOnBackgroundThread(
-                () -> {
-                    synchronized (mLock) {
-                        if (shouldHandleSlotChange(context)) {
-                            mSlotChangeHandler.onSlotsStatusChange(context.getApplicationContext());
-                        }
-                    }
-                    ThreadUtils.postOnMainThread(pendingResult::finish);
-                });
+        SimSlotChangeService.scheduleSimSlotChange(context);
+    }
+
+    public static void runOnBackgroundThread(Context context) {
+        if (shouldHandleSlotChange(context)) {
+            SimSlotChangeHandler.get().onSlotsStatusChange(context.getApplicationContext());
+        }
     }
 
     // Checks whether the slot event should be handled.
-    private boolean shouldHandleSlotChange(Context context) {
+    private static boolean shouldHandleSlotChange(Context context) {
         if (!context.getResources().getBoolean(R.bool.config_handle_sim_slot_change)) {
             Log.i(TAG, "The flag is off. Ignore slot changes.");
             return false;
@@ -88,7 +82,7 @@ public class SimSlotChangeReceiver extends BroadcastReceiver {
     }
 
     // Checks whether the SIM slot state is valid for slot change event.
-    private boolean isSimSlotStateValid(Context context) {
+    private static boolean isSimSlotStateValid(Context context) {
         final TelephonyManager telMgr = context.getSystemService(TelephonyManager.class);
         UiccSlotInfo[] slotInfos = telMgr.getUiccSlotsInfo();
         if (slotInfos == null) {
@@ -136,7 +130,8 @@ public class SimSlotChangeReceiver extends BroadcastReceiver {
     }
 
     @Nullable
-    private UiccCardInfo findUiccCardInfoBySlot(TelephonyManager telMgr, int physicalSlotIndex) {
+    private static UiccCardInfo findUiccCardInfoBySlot(TelephonyManager telMgr,
+            int physicalSlotIndex) {
         List<UiccCardInfo> cardInfos = telMgr.getUiccCardsInfo();
         if (cardInfos == null) {
             return null;

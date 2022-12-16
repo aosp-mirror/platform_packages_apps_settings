@@ -26,6 +26,8 @@ import androidx.room.Room;
 import com.android.settings.fuelgauge.batteryusage.BatteryInformation;
 import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
 import com.android.settings.fuelgauge.batteryusage.DeviceBatteryState;
+import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventDao;
+import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryState;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
@@ -70,21 +72,21 @@ public class BatteryTestUtils {
     }
 
     /** Inserts a fake data into the database for testing. */
-    public static void insertDataToBatteryStateDatabase(
+    public static void insertDataToBatteryStateTable(
             Context context, long timestamp, String packageName) {
-        insertDataToBatteryStateDatabase(
+        insertDataToBatteryStateTable(
                 context, timestamp, packageName, /*multiple=*/ false, /*isFullChargeStart=*/ false);
     }
 
     /** Inserts a fake data into the database for testing. */
-    public static void insertDataToBatteryStateDatabase(
+    public static void insertDataToBatteryStateTable(
             Context context, long timestamp, String packageName, boolean isFullChargeStart) {
-        insertDataToBatteryStateDatabase(
+        insertDataToBatteryStateTable(
                 context, timestamp, packageName, /*multiple=*/ false, isFullChargeStart);
     }
 
     /** Inserts a fake data into the database for testing. */
-    public static void insertDataToBatteryStateDatabase(
+    public static void insertDataToBatteryStateTable(
             Context context, long timestamp, String packageName, boolean multiple,
             boolean isFullChargeStart) {
         DeviceBatteryState deviceBatteryState =
@@ -130,6 +132,34 @@ public class BatteryTestUtils {
             dao.insertAll(ImmutableList.of(state));
         } else {
             dao.insert(state);
+        }
+    }
+
+    /** Inserts a fake data into the database for testing. */
+    public static void insertDataToAppUsageEventTable(
+            Context context, long userId, long timestamp, String packageName) {
+        insertDataToAppUsageEventTable(
+                context, userId, timestamp, packageName, /*multiple=*/ false);
+    }
+
+    /** Inserts a fake data into the database for testing. */
+    public static void insertDataToAppUsageEventTable(
+            Context context, long userId, long timestamp, String packageName, boolean multiple) {
+        final AppUsageEventEntity entity =
+                new AppUsageEventEntity(
+                        /*uid=*/ 101L,
+                        userId,
+                        timestamp,
+                        /*appUsageEventType=*/ 2,
+                        packageName,
+                        /*instanceId=*/ 10001,
+                        /*taskRootPackageName=*/ "com.android.settings");
+        AppUsageEventDao dao =
+                BatteryStateDatabase.getInstance(context).appUsageEventDao();
+        if (multiple) {
+            dao.insertAll(ImmutableList.of(entity));
+        } else {
+            dao.insert(entity);
         }
     }
 

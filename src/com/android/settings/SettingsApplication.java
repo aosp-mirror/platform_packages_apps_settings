@@ -25,6 +25,7 @@ import android.util.FeatureFlagUtils;
 import androidx.window.embedding.SplitController;
 
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
+import com.android.settings.core.instrumentation.ElapsedTimeUtils;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.spa.SettingsSpaEnvironment;
 import com.android.settingslib.applications.AppIconCacheManager;
@@ -42,6 +43,7 @@ public class SettingsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        ElapsedTimeUtils.assignSuwFinishedTimeStamp(this.getApplicationContext());
 
         // Set Spa environment.
         setSpaEnvironment();

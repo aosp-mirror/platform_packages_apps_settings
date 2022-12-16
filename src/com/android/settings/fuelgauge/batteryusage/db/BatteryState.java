@@ -204,14 +204,14 @@ public class BatteryState {
             return this;
         }
 
-        /** Sets the consumer type. */
+        /** Sets the battery information. */
         @CanIgnoreReturnValue
         public Builder setBatteryInformation(String batteryInformation) {
             this.mBatteryInformation = batteryInformation;
             return this;
         }
 
-        /** Sets the consumer type. */
+        /** Sets the battery information debug string. */
         @CanIgnoreReturnValue
         public Builder setBatteryInformationDebug(String batteryInformationDebug) {
             this.mBatteryInformationDebug = batteryInformationDebug;

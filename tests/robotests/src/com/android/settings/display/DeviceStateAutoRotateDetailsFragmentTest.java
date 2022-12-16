@@ -56,7 +56,7 @@ public class DeviceStateAutoRotateDetailsFragmentTest {
     @Test
     public void getMetricsCategory_returnsAutoRotateSettings() {
         assertThat(mFragment.getMetricsCategory()).isEqualTo(
-                SettingsEnums.DISPLAY_AUTO_ROTATE_SETTINGS);
+                SettingsEnums.DISPLAY_DEVICE_STATE_AUTO_ROTATE_SETTINGS);
     }
 
     @Test
