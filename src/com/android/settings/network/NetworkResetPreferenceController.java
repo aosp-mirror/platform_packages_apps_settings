@@ -40,6 +40,6 @@ public class NetworkResetPreferenceController extends AbstractPreferenceControll
 
     @Override
     public String getPreferenceKey() {
-        return "network_reset_pref";
+        return "network_reset_mobile_network_settings_pref";
     }
 }
