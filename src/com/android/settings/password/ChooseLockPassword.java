@@ -86,7 +86,6 @@ import com.android.internal.widget.LockscreenCredential;
 import com.android.internal.widget.PasswordValidationError;
 import com.android.internal.widget.TextViewInputDisabler;
 import com.android.internal.widget.VerifyCredentialResponse;
-import com.android.settings.EncryptionInterstitial;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SetupWizardUtils;
@@ -124,7 +123,6 @@ public class ChooseLockPassword extends SettingsActivity {
         public IntentBuilder(Context context) {
             mIntent = new Intent(context, ChooseLockPassword.class);
             mIntent.putExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, false);
-            mIntent.putExtra(EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, false);
         }
 
         /**
@@ -461,21 +459,6 @@ public class ChooseLockPassword extends SettingsActivity {
             mMinMetrics = intent.getParcelableExtra(EXTRA_KEY_MIN_METRICS);
             if (mMinMetrics == null) mMinMetrics = new PasswordMetrics(CREDENTIAL_TYPE_NONE);
 
-            if (intent.getBooleanExtra(
-                    ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT, false)) {
-                SaveAndFinishWorker w = new SaveAndFinishWorker();
-                final boolean required = getActivity().getIntent().getBooleanExtra(
-                        EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
-                LockscreenCredential currentCredential = intent.getParcelableExtra(
-                        ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
-
-                final LockPatternUtils utils = new LockPatternUtils(getActivity());
-
-                w.setBlocking(true);
-                w.setListener(this);
-                w.start(utils, required, false /* requestGatekeeperPassword */, currentCredential,
-                        currentCredential, mUserId);
-            }
             mTextChangedHandler = new TextChangedHandler();
         }
 
@@ -968,8 +951,6 @@ public class ChooseLockPassword extends SettingsActivity {
             getFragmentManager().executePendingTransactions();
 
             final Intent intent = getActivity().getIntent();
-            final boolean required = intent.getBooleanExtra(
-                    EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
             if (mUnificationProfileId != UserHandle.USER_NULL) {
                 try (LockscreenCredential profileCredential = (LockscreenCredential)
                         intent.getParcelableExtra(EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL)) {
@@ -977,7 +958,7 @@ public class ChooseLockPassword extends SettingsActivity {
                             profileCredential);
                 }
             }
-            mSaveAndFinishWorker.start(mLockPatternUtils, required, mRequestGatekeeperPassword,
+            mSaveAndFinishWorker.start(mLockPatternUtils, mRequestGatekeeperPassword,
                     mChosenPassword, mCurrentCredential, mUserId);
         }
 
@@ -1036,10 +1017,10 @@ public class ChooseLockPassword extends SettingsActivity {
         private LockscreenCredential mChosenPassword;
         private LockscreenCredential mCurrentCredential;
 
-        public void start(LockPatternUtils utils, boolean required,
-                boolean requestGatekeeperPassword, LockscreenCredential chosenPassword,
-                LockscreenCredential currentCredential, int userId) {
-            prepare(utils, required, requestGatekeeperPassword, userId);
+        public void start(LockPatternUtils utils, boolean requestGatekeeperPassword,
+                LockscreenCredential chosenPassword, LockscreenCredential currentCredential,
+                int userId) {
+            prepare(utils, requestGatekeeperPassword, userId);
 
             mChosenPassword = chosenPassword;
             mCurrentCredential = currentCredential != null ? currentCredential
