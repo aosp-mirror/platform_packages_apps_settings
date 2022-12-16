@@ -38,7 +38,9 @@ import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
 import com.android.settings.core.InstrumentedActivity;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.systemui.unfold.compat.ScreenSizeFoldProvider;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
@@ -109,6 +111,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     public static final int LEARN_MORE_REQUEST = 3;
     public static final int CONFIRM_REQUEST = 4;
     public static final int ENROLL_REQUEST = 5;
+    public static final int REQUEST_POSTURE_GUIDANCE = 6;
 
     /**
      * Request code when starting another biometric enrollment from within a biometric flow. For
@@ -117,12 +120,17 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     public static final int ENROLL_NEXT_BIOMETRIC_REQUEST = 6;
 
     protected boolean mLaunchedConfirmLock;
+    protected boolean mOnGuidanceShown;
     protected byte[] mToken;
     protected int mUserId;
     protected int mSensorId;
     protected long mChallenge;
     protected boolean mFromSettingsSummary;
     protected FooterBarMixin mFooterBarMixin;
+    @Nullable
+    protected ScreenSizeFoldProvider mScreenSizeFoldProvider;
+    @Nullable
+    protected Intent mPostureGuidanceIntent = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,6 +157,8 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
             mSensorId = savedInstanceState.getInt(EXTRA_KEY_SENSOR_ID);
         }
         mUserId = getIntent().getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
+        mPostureGuidanceIntent = FeatureFactory.getFactory(getApplicationContext())
+                .getFaceFeatureProvider().getPostureGuidanceIntent(getApplicationContext());
     }
 
     @Override
@@ -185,14 +195,24 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     protected void onStop() {
         super.onStop();
         if (!isChangingConfigurations() && shouldFinishWhenBackgrounded()
-                && !BiometricUtils.isAnyMultiBiometricFlow(this)) {
+                && !BiometricUtils.isAnyMultiBiometricFlow(this) && !mOnGuidanceShown) {
             setResult(RESULT_TIMEOUT);
             finish();
         }
     }
 
+    protected void launchPostureGuidance() {
+        if (mPostureGuidanceIntent == null || mOnGuidanceShown) {
+            return;
+        }
+        BiometricUtils.copyMultiBiometricExtras(getIntent(), mPostureGuidanceIntent);
+        startActivityForResult(mPostureGuidanceIntent, REQUEST_POSTURE_GUIDANCE);
+        overridePendingTransition(R.anim.sud_stay, R.anim.sud_stay);
+        mOnGuidanceShown = true;
+    }
+
     protected boolean shouldFinishWhenBackgrounded() {
-        return !WizardManagerHelper.isAnySetupWizard(getIntent());
+        return !WizardManagerHelper.isAnySetupWizard(getIntent()) && !mOnGuidanceShown;
     }
 
     protected void initViews() {

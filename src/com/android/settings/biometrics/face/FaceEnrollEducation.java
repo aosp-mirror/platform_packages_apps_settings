@@ -34,6 +34,8 @@ import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupSkipDialog;
+import com.android.systemui.unfold.compat.ScreenSizeFoldProvider;
+import com.android.systemui.unfold.updates.FoldProvider;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -41,7 +43,10 @@ import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.view.IllustrationVideoView;
 
-public class FaceEnrollEducation extends BiometricEnrollBase {
+/**
+ * Provides animated education for users to know how to enroll a face with appropriate posture.
+ */
+public class FaceEnrollEducation extends BiometricEnrollBase implements FoldProvider.FoldCallback {
     private static final String TAG = "FaceEducation";
 
     private FaceManager mFaceManager;
@@ -75,8 +80,16 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
             };
 
     @Override
+    public void onFoldUpdated(boolean isFolded) {
+        if (!isFolded) {
+            launchPostureGuidance();
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.face_enroll_education);
 
         setTitle(R.string.security_settings_face_enroll_education_title);
@@ -152,6 +165,19 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         if (mAccessibilityEnabled) {
             accessibilityButton.callOnClick();
         }
+
+        if (mPostureGuidanceIntent != null) {
+            mScreenSizeFoldProvider = new ScreenSizeFoldProvider(getApplicationContext());
+            mScreenSizeFoldProvider.registerCallback(this, getMainExecutor());
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mScreenSizeFoldProvider != null) {
+            mScreenSizeFoldProvider.unregisterCallback(this);
+        }
     }
 
     @Override
@@ -226,6 +252,15 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_POSTURE_GUIDANCE) {
+            setResult(resultCode, data);
+            if (resultCode == RESULT_CANCELED || resultCode == RESULT_SKIP) {
+                finish();
+            }
+            mOnGuidanceShown = false;
+            return;
+        }
+
         mResultIntent = data;
         boolean hasEnrolledFace = false;
         if (data != null) {
