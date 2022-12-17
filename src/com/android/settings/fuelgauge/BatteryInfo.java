@@ -42,8 +42,6 @@ import com.android.settingslib.fuelgauge.EstimateKt;
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.StringUtil;
 
-import java.text.NumberFormat;
-
 public class BatteryInfo {
     private static final String TAG = "BatteryInfo";
 
@@ -305,13 +303,9 @@ public class BatteryInfo {
                     timeString);
             info.chargeLabel = context.getString(resId, info.batteryPercentString, timeString);
         } else if (dockDefenderMode == BatteryUtils.DockDefenderMode.FUTURE_BYPASS) {
-            // Dock defender will be triggered in the future, charging will be paused at 90%.
-            final int extraValue = context.getResources().getInteger(
-                    R.integer.config_battery_extra_tip_value);
-            final String extraPercentage = NumberFormat.getPercentInstance().format(
-                    extraValue * 0.01f);
+            // Dock defender will be triggered in the future, charging will be optimized.
             info.chargeLabel = context.getString(R.string.power_charging_future_paused,
-                    info.batteryPercentString, extraPercentage);
+                    info.batteryPercentString);
         } else {
             final String chargeStatusLabel = Utils.getBatteryStatus(context, batteryBroadcast,
                     compactStatus);
