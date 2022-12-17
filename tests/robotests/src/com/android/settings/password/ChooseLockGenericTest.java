@@ -253,17 +253,6 @@ public class ChooseLockGenericTest {
     }
 
     @Test
-    public void onActivityResult_requestcode101_shouldFinish() {
-        initActivity(null);
-
-        mFragment.onActivityResult(
-                ChooseLockGenericFragment.ENABLE_ENCRYPTION_REQUEST, Activity.RESULT_OK,
-                null /* data */);
-
-        assertThat(mActivity.isFinishing()).isTrue();
-    }
-
-    @Test
     public void onActivityResult_requestcode102_shouldFinish() {
         initActivity(null);
 

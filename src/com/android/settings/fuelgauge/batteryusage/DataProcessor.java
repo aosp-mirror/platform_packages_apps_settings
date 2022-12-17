@@ -280,9 +280,7 @@ public final class DataProcessor {
                     case Event.DEVICE_SHUTDOWN:
                         final String taskRootClassName = event.getTaskRootClassName();
                         if (!TextUtils.isEmpty(taskRootClassName)
-                                && !ignoreScreenOnTimeTaskRootSet.isEmpty()
-                                && contains(
-                                        taskRootClassName, ignoreScreenOnTimeTaskRootSet)) {
+                                && ignoreScreenOnTimeTaskRootSet.contains(taskRootClassName)) {
                             Log.w(TAG, String.format(
                                     "Ignoring a usage event with task root class name %s, "
                                             + "(timestamp=%d, type=%d)",
@@ -548,7 +546,7 @@ public final class DataProcessor {
         insertDailyUsageDiffData(hourlyBatteryLevelsPerDay, resultMap);
         // Insert diff data [SELECTED_INDEX_ALL][SELECTED_INDEX_ALL].
         insertAllUsageDiffData(resultMap);
-        purgeFakeAndHiddenPackages(context, resultMap);
+        processBatteryDiffData(context, resultMap);
         if (!isUsageMapValid(resultMap, hourlyBatteryLevelsPerDay)) {
             return null;
         }
@@ -653,7 +651,7 @@ public final class DataProcessor {
         allUsageMap.put(SELECTED_INDEX_ALL,
                 generateBatteryDiffData(context, getBatteryHistListFromFromStatsService(context)));
         resultMap.put(SELECTED_INDEX_ALL, allUsageMap);
-        purgeFakeAndHiddenPackages(context, resultMap);
+        processBatteryDiffData(context, resultMap);
         return resultMap;
     }
 
@@ -1234,49 +1232,55 @@ public final class DataProcessor {
         }
     }
 
-    // Removes low percentage data and fake usage data, which will be zero value.
-    private static void purgeFakeAndHiddenPackages(
+    // Process every battery diff data in the battery usage result map.
+    // (1) Removes low percentage data and fake usage data, which will be zero value.
+    // (2) Sets total consume power, so the usage percentage is updated.
+    // (3) Sorts the result.
+    private static void processBatteryDiffData(
             final Context context,
             final Map<Integer, Map<Integer, BatteryDiffData>> resultMap) {
-        final Set<CharSequence> backgroundUsageTimeHideList =
+        final Set<CharSequence> hideBackgroundUsageTimeSet =
                 FeatureFactory.getFactory(context)
                         .getPowerUsageFeatureProvider(context)
                         .getHideBackgroundUsageTimeSet(context);
-        final CharSequence[] notAllowShowEntryPackages =
+        final Set<CharSequence> hideApplicationSet =
                 FeatureFactory.getFactory(context)
                         .getPowerUsageFeatureProvider(context)
-                        .getHideApplicationEntries(context);
+                        .getHideApplicationSet(context);
         resultMap.keySet().forEach(dailyKey -> {
             final Map<Integer, BatteryDiffData> dailyUsageMap = resultMap.get(dailyKey);
-            dailyUsageMap.values().forEach(diffEntryLists -> {
-                if (diffEntryLists == null) {
+            dailyUsageMap.values().forEach(batteryDiffData -> {
+                if (batteryDiffData == null) {
                     return;
                 }
                 purgeFakeAndHiddenPackages(
-                        diffEntryLists.getAppDiffEntryList(), backgroundUsageTimeHideList,
-                        notAllowShowEntryPackages);
+                        batteryDiffData.getAppDiffEntryList(), hideBackgroundUsageTimeSet,
+                        hideApplicationSet);
                 purgeFakeAndHiddenPackages(
-                        diffEntryLists.getSystemDiffEntryList(), backgroundUsageTimeHideList,
-                        notAllowShowEntryPackages);
+                        batteryDiffData.getSystemDiffEntryList(), hideBackgroundUsageTimeSet,
+                        hideApplicationSet);
+                batteryDiffData.setTotalConsumePower();
+                batteryDiffData.sortEntries();
             });
         });
     }
 
     private static void purgeFakeAndHiddenPackages(
             final List<BatteryDiffEntry> entries,
-            final Set<CharSequence> backgroundUsageTimeHideList,
-            final CharSequence[] notAllowShowEntryPackages) {
+            final Set<CharSequence> hideBackgroundUsageTimeSet,
+            final Set<CharSequence> hideApplicationSet) {
         final Iterator<BatteryDiffEntry> iterator = entries.iterator();
         while (iterator.hasNext()) {
             final BatteryDiffEntry entry = iterator.next();
             final String packageName = entry.getPackageName();
+            if (packageName == null) {
+                continue;
+            }
             if (ConvertUtils.FAKE_PACKAGE_NAME.equals(packageName)
-                    || contains(packageName, notAllowShowEntryPackages)) {
+                    || hideApplicationSet.contains(packageName)) {
                 iterator.remove();
             }
-            if (packageName != null
-                    && !backgroundUsageTimeHideList.isEmpty()
-                    && contains(packageName, backgroundUsageTimeHideList)) {
+            if (hideBackgroundUsageTimeSet.contains(packageName)) {
                 entry.mBackgroundUsageTimeInMs = 0;
             }
         }
@@ -1465,18 +1469,6 @@ public final class DataProcessor {
         return calendar.getTimeInMillis();
     }
 
-    /** Whether the Set contains the target. */
-    private static boolean contains(String target, Set<CharSequence> packageNames) {
-        if (target != null && packageNames != null) {
-            for (CharSequence packageName : packageNames) {
-                if (TextUtils.equals(target, packageName)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     private static long getDiffValue(long v1, long v2, long v3) {
         return (v2 > v1 ? v2 - v1 : 0) + (v3 > v2 ? v3 - v2 : 0);
     }
@@ -1519,20 +1511,6 @@ public final class DataProcessor {
 
     private static long getCurrentTimeMillis() {
         return sFakeCurrentTimeMillis > 0 ? sFakeCurrentTimeMillis : System.currentTimeMillis();
-    }
-
-    /**
-     * @return Returns whether the target is in the CharSequence array.
-     */
-    private static boolean contains(String target, CharSequence[] packageNames) {
-        if (target != null && packageNames != null) {
-            for (CharSequence packageName : packageNames) {
-                if (TextUtils.equals(target, packageName)) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     private static void log(Context context, final String content, final long timestamp,

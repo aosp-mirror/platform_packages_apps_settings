@@ -2719,11 +2719,13 @@
     <!-- Title for a screen containing all device reset options [CHAR LIMIT=50] -->
     <string name="reset_dashboard_title">Reset options</string>
 
-    <!-- Reset Network -->
-    <!-- Button title to reset Wi-Fi settings, Mobile data setting, bluetooth settings -->
-    <string name="reset_network_title">Reset Wi-Fi, mobile &amp; Bluetooth</string>
-    <!-- SD card & phone storage settings screen, message on screen after user selects Reset network settings [CHAR LIMIT=NONE] -->
-    <string name="reset_network_desc">This will reset all network settings, including:\n\n<li>Wi\u2011Fi</li>\n<li>Mobile data</li>\n<li>Bluetooth</li>"</string>
+    <!-- Reset Mobile Network -->
+    <!-- Button title to reset Mobile network setting -->
+    <string name="reset_mobile_network_settings_title">Reset Mobile Network Settings</string>
+    <!-- User selects Reset mobile network settings [CHAR LIMIT=NONE] -->
+    <string name="reset_mobile_network_settings_desc">This will reset all mobile network settings</string>
+    <!-- Reset Mobile network setting confirmation screen title [CHAR LIMIT=30] -->
+    <string name="reset_mobile_network_settings_confirm_title">Reset Mobile Network Settings?</string>
 
     <!-- Reset Bluetooth and Wi-Fi Network -->
     <!-- Dialog title to reset Bluetooth and Wi-Fi settings -->
@@ -4758,21 +4760,21 @@
     <!-- Summary for the battery high usage tip, which presents apps with highest usage [CHAR LIMIT=NONE] -->
     <string name="battery_tip_high_usage_summary">See apps with highest usage</string>
     <!-- Title for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_limited_temporarily_title">Charging is paused</string>
+    <string name="battery_tip_limited_temporarily_title">Charging optimized to protect your battery</string>
     <!-- Summary for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_limited_temporarily_summary">Protecting battery to extend battery lifespan</string>
+    <string name="battery_tip_limited_temporarily_summary">To help extend your batter\'s lifespan, charging is optimized</string>
     <!-- Title for the battery dock defender future bypass tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dock_defender_future_bypass_title">Charging to <xliff:g id="percent" example="10%">%1$s</xliff:g> to protect the battery</string>
+    <string name="battery_tip_dock_defender_future_bypass_title">Charging optimized to protect your battery</string>
     <!-- Summary for the battery dock defender future bypass tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dock_defender_future_bypass_summary">When your tablet is docked, charging will be paused at <xliff:g id="percent" example="10%">%1$s</xliff:g> to extend battery lifespan</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary">To help extend your battery\'s lifespan, charging is optimized while docked</string>
     <!-- Title for the battery dock defender active tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dock_defender_active_title">Charging paused to protect battery</string>
+    <string name="battery_tip_dock_defender_active_title">Charging optimized to protect your battery</string>
     <!-- Summary for the battery dock defender active tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dock_defender_active_summary">When your tablet is docked, charging is paused at <xliff:g id="percent" example="10%">%1$s</xliff:g> to extend battery lifespan</string>
+    <string name="battery_tip_dock_defender_active_summary">To help extend your battery\'s lifespan, charging is optimized while docked</string>
     <!-- Title for the battery dock defender temporarily bypassed tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_dock_defender_temporarily_bypassed_title">Charging to full</string>
     <!-- Summary for the battery dock defender temporarily bypassed tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dock_defender_temporarily_bypassed_summary">To protect your battery, charging will be paused at <xliff:g id="percent" example="10%">%1$s</xliff:g> the next time your tablet is docked</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary">To protect your battery, charging will be optimized the next time your tablet is docked</string>
     <!-- Content description for the battery limited temporarily tip secondary button [CHAR LIMIT=NONE] -->
     <string name="battery_tip_limited_temporarily_sec_button_content_description">Learn more about charging is paused</string>
     <!-- Text of battery limited temporarily tip resume charge button. [CHAR LIMIT=NONE] -->
@@ -5256,8 +5258,10 @@
     <string name="credentials_settings_not_available">Credentials are not available for this user</string>
     <!-- Sub-heading for a user credential installed to be used by apps and as part of VPN configurations. [CHAR LIMIT=NONE] -->
     <string name="credential_for_vpn_and_apps">Installed for VPN and apps</string>
+    <!-- Sub-heading for a user credential installed for Wi-Fi configuration. [CHAR LIMIT=NONE]. -->
+    <string name="credential_for_wifi">Installed for Wi\u2011Fi</string>
     <!-- Sub-heading for a user credential installed to be used as part of a Wi-Fi configuration. [CHAR LIMIT=NONE]. -->
-    <string name="credential_for_wifi">Installed for Wi-Fi</string>
+    <string name="credential_for_wifi_in_use">Installed for Wi\u2011Fi (In use)</string>
     <!-- Description of dialog to reset credential storage [CHAR LIMIT=NONE] -->
     <string name="credentials_reset_hint">Remove all the contents?</string>
     <!-- Toast message [CHAR LIMIT=30] -->
@@ -5807,14 +5811,16 @@
     <!-- Alert dialog confirmation when removing a user CA certificate. -->
     <string name="trusted_credentials_remove_confirmation">Permanently remove the user CA certificate?</string>
 
+    <!-- Header for a list of items that a credential entry is required. For example, a network uses this credential. [CHAR LIMIT=NONE] -->
+    <string name="credential_being_used_by">Being used by</string>
     <!-- Header for a list of items that a credential entry contains. For example, one private key and one certificate. [CHAR LIMIT=NONE] -->
-    <string name="credential_contains">This entry contains:</string>
+    <string name="credential_contains">This entry contains</string>
     <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE] -->
-    <string name="one_userkey">one user key</string>
+    <string name="one_userkey">1 user key</string>
     <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE] -->
-    <string name="one_usercrt">one user certificate</string>
+    <string name="one_usercrt">1 user certificate</string>
     <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE] -->
-    <string name="one_cacrt">one CA certificate</string>
+    <string name="one_cacrt">1 CA certificate</string>
     <!-- Item found in thee PKCS12 keystore being investigated [CHAR LIMIT=NONE]-->
     <string name="n_cacrts">%d CA certificates</string>
     <!-- Alert dialog when viewing a set of user credentials. -->
@@ -5976,9 +5982,6 @@
 
     <!-- Button label for opening an arbitrary app [CHAR LIMIT=60] -->
     <string name="open_app_button">Open <xliff:g id="app_name" example="Safety">%1$s</xliff:g></string>
-
-    <!-- Title for more settings button, clicking this button will open a new page containing more settings related to current page. [CHAR LIMIT=60] -->
-    <string name="more_settings_button">More Settings</string>
 
     <!-- Application Restrictions screen title [CHAR LIMIT=45] -->
     <string name="application_restrictions">Allow apps and content</string>
@@ -6142,6 +6145,8 @@
     <string name="help_url_battery" translatable="false"></string>
     <!-- Help URL, Battery Defender [DO NOT TRANSLATE] -->
     <string name="help_url_battery_defender" translatable="false"></string>
+    <!-- Help URL, Dock Defender [DO NOT TRANSLATE] -->
+    <string name="help_url_dock_defender" translatable="false"></string>
     <!-- Help URL, Accounts [DO NOT TRANSLATE] -->
     <string name="help_url_accounts" translatable="false"></string>
     <!-- Help URL, Choose lockscreen [DO NOT TRANSLATE] -->
@@ -8154,73 +8159,6 @@
     <string name="opening_paragraph_delete_profile_unknown_company">This work profile is managed by:</string>
     <!-- Summary for work profile accounts group. [CHAR LIMIT=25] -->
     <string name="managing_admin">Managed by <xliff:g id="admin_app_label">%s</xliff:g></string>
-
-    <!-- Encryption interstitial title. This screen asks the user whether the device will ask for a PIN / pattern / password before the device starts up. [CHAR LIMIT=30] -->
-    <string name="encryption_interstitial_header">Secure start-up</string>
-
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pin">
-   You can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
-   \n\nThis helps protect data on lost or stolen devices. Require PIN to start your device?
-   </string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pattern">
-   You can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
-   \n\nThis helps protect data on lost or stolen devices. Require pattern to start your device?
-   </string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_password">
-   You can further protect this device by requiring your password before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
-   \n\nThis helps protect data on lost or stolen devices. Require password to start your device?
-   </string>
-
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pin_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require PIN to start your device?</string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pattern_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require pattern to start your device?</string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_password_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your password before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require password to start your device?</string>
-
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device while setting up face unlock. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pin_for_face">In addition to using your face to unlock your device, you can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require PIN to start your device?</string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device while setting up face unlock. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pattern_for_face">In addition to using your face to unlock your device, you can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require pattern to start your device?</string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device while setting up face unlock. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_password_for_face">In addition to using your face to unlock your device, you can further protect this device by requiring your password before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require password to start your device?</string>
-
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device while setting up biometric unlock. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pin_for_biometrics">In addition to using your biometrics to unlock your device, you can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require PIN to start your device?</string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device while setting up biometric unlock. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pattern_for_biometrics">In addition to using your biometrics to unlock your device, you can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require pattern to start your device?</string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device while setting up biometric unlock. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_password_for_biometrics">In addition to using your biometrics to unlock your device, you can further protect this device by requiring your password before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require password to start your device?</string>
-
-
-    <!-- Button label to say yes to the question of whether to require PIN/password/pattern to start your device. [CHAR LIMIT=20] -->
-    <string name="encryption_interstitial_yes">Yes</string>
-    <!-- Button label to say no to the question of whether to require PIN/password/pattern to start your device. [CHAR LIMIT=20] -->
-    <string name="encryption_interstitial_no">No</string>
-
-    <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
-    <string name="encrypt_talkback_dialog_require_pin">Require PIN?</string>
-
-    <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
-    <string name="encrypt_talkback_dialog_require_pattern">Require pattern?</string>
-
-    <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
-    <string name="encrypt_talkback_dialog_require_password">Require password?</string>
-
-    <!-- Message for encryption dialog telling the user that Talkback and other accessibility services will be disabled. -->
-    <string name="encrypt_talkback_dialog_message_pin">When you enter your PIN to start this device, accessibility services like <xliff:g id="service" example="TalkBack">%1$s</xliff:g> won\u2019t yet be available.</string>
-
-    <!-- Message for encryption dialog telling the user that Talkback and other accessibility services will be disabled. -->
-    <string name="encrypt_talkback_dialog_message_pattern">When you enter your pattern to start this device, accessibility services like <xliff:g id="service" example="TalkBack">%1$s</xliff:g> won\u2019t yet be available.</string>
-
-    <!-- Message for encryption dialog telling the user that Talkback and other accessibility services will be disabled. -->
-    <string name="encrypt_talkback_dialog_message_password">When you enter your password to start this device, accessibility services like <xliff:g id="service" example="TalkBack">%1$s</xliff:g> won\u2019t yet be available.</string>
-
-    <!-- [CHAR LIMIT=NONE] Dialog body explaining that the app just selected by the user will not work after a reboot until until after the user enters their credentials, such as a PIN or password. -->
-    <string name="direct_boot_unaware_dialog_message">Note: If you restart your phone and have a screen lock set, this app can\'t start until you unlock your phone</string>
 
     <!-- New strings needed for App Info 2 -->
     <!-- Preference label for app default launch settings [CHAR LIMIT=35]-->
@@ -10999,6 +10937,11 @@
     <string name="enable_2g_summary">2G is less secure, but may improve your connection in some locations. For emergency calls, 2G is always allowed.</string>
     <!-- Title for if toggle access is disabled by carrier [CHAR LIMIT=NONE] -->
     <string name="enable_2g_summary_disabled_carrier"><xliff:g id="carrier_name_2g" example="Google Fi">%1$s</xliff:g> requires 2G to be available</string>
+
+    <!-- Title for toggle if user wants to allow null cellular algorithms [CHAR LIMIT=40] -->
+    <string name="allow_null_algorithms_title">Allow less secure connection</string>
+    <!-- Summary for if the user wants to allow null cellular algorithms [CHAR LIMIT=NONE] -->
+    <string name="allow_null_algorithms_summary">May improve your signal in some locations. For emergency calls, less secure connections are always allowed.</string>
 
     <!-- Label for All services preference in App info settings [CHAR LIMIT=40] -->
     <string name="app_info_all_services_label">All services</string>

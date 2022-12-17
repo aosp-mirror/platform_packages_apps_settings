@@ -162,8 +162,8 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public CharSequence[] getHideApplicationEntries(Context context) {
-        return new CharSequence[0];
+    public Set<CharSequence> getHideApplicationSet(Context context) {
+        return new ArraySet<>();
     }
 
     @Override

@@ -250,6 +250,13 @@
             settings:userRestriction="no_cellular_2g"/>
 
         <SwitchPreference
+            android:key="allow_null_algorithms"
+            android:title="@string/allow_null_algorithms_title"
+            android:summary="@string/allow_null_algorithms_summary"
+            settings:controller=
+                "com.android.settings.network.telephony.NullAlgorithmsPreferenceController" />
+
+        <SwitchPreference
             android:key="nr_advanced_calling"
             android:title="@string/nr_advanced_calling_title"
             android:persistent="false"

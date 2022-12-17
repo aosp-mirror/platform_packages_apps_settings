@@ -85,7 +85,7 @@ public class ResetNetwork extends InstrumentedFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActivity().setTitle(R.string.reset_network_title);
+        getActivity().setTitle(R.string.reset_mobile_network_settings_title);
 
         mActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -103,7 +103,7 @@ public class ResetNetwork extends InstrumentedFragment {
         final ChooseLockSettingsHelper.Builder builder =
                 new ChooseLockSettingsHelper.Builder(getActivity(), this);
         return builder.setRequestCode(request)
-                .setTitle(res.getText(R.string.reset_network_title))
+                .setTitle(res.getText(R.string.reset_mobile_network_settings_title))
                 .setActivityResultLauncher(mActivityResultLauncher)
                 .show();
     }
@@ -124,10 +124,7 @@ public class ResetNetwork extends InstrumentedFragment {
 
         ResetNetworkRequest request = new ResetNetworkRequest(
                 ResetNetworkRequest.RESET_CONNECTIVITY_MANAGER |
-                ResetNetworkRequest.RESET_VPN_MANAGER |
-                ResetNetworkRequest.RESET_WIFI_MANAGER |
-                ResetNetworkRequest.RESET_WIFI_P2P_MANAGER |
-                ResetNetworkRequest.RESET_BLUETOOTH_MANAGER
+                ResetNetworkRequest.RESET_VPN_MANAGER
         );
         if (mSubscriptions != null && mSubscriptions.size() > 0) {
             int selectedIndex = mSubscriptionSpinner.getSelectedItemPosition();
@@ -146,7 +143,7 @@ public class ResetNetwork extends InstrumentedFragment {
         new SubSettingLauncher(getContext())
                 .setDestination(ResetNetworkConfirm.class.getName())
                 .setArguments(args)
-                .setTitleRes(R.string.reset_network_confirm_title)
+                .setTitleRes(R.string.reset_mobile_network_settings_confirm_title)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
     }
@@ -305,7 +302,7 @@ public class ResetNetwork extends InstrumentedFragment {
             return view;
         }
 
-        mContentView = inflater.inflate(R.layout.reset_network, null);
+        mContentView = inflater.inflate(R.layout.reset_mobile_network_settings, null);
 
         establishInitialState(getActiveSubscriptionInfoList());
         return mContentView;

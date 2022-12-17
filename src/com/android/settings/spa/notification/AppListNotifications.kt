@@ -16,27 +16,17 @@
 
 package com.android.settings.spa.notification
 
-import android.app.settings.SettingsEnums
-import android.content.Context
-import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.produceState
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
-import com.android.settings.applications.AppInfoBase
-import com.android.settings.notification.app.AppNotificationSettings
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.framework.compose.rememberContext
 import com.android.settingslib.spa.framework.compose.toState
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
-import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.android.settingslib.spaprivileged.template.app.AppListPage
-import com.android.settingslib.spaprivileged.template.app.AppListSwitchItem
 
 object AppListNotificationsPageProvider : SettingsPageProvider {
     override val name = "AppListNotifications"
@@ -46,7 +36,7 @@ object AppListNotificationsPageProvider : SettingsPageProvider {
         AppListPage(
             title = stringResource(R.string.app_notifications_title),
             listModel = rememberContext(::AppNotificationsListModel),
-        ) { AppNotificationsItem() }
+        )
     }
 
     @Composable
@@ -57,33 +47,4 @@ object AppListNotificationsPageProvider : SettingsPageProvider {
             override val onClick = navigator(name)
         })
     }
-}
-
-@Composable
-private fun AppListItemModel<AppNotificationsRecord>.AppNotificationsItem() {
-    val appNotificationsRepository = rememberContext(::AppNotificationRepository)
-    val context = LocalContext.current
-    AppListSwitchItem(
-        onClick = {
-            navigateToAppNotificationSettings(
-                context = context,
-                app = record.app,
-            )
-        },
-        checked = record.controller.isEnabled.observeAsState(),
-        changeable = produceState(initialValue = false) {
-            value = appNotificationsRepository.isChangeable(record.app)
-        },
-        onCheckedChange = record.controller::setEnabled,
-    )
-}
-
-private fun navigateToAppNotificationSettings(context: Context, app: ApplicationInfo) {
-    AppInfoBase.startAppInfoFragment(
-        AppNotificationSettings::class.java,
-        context.getString(R.string.notifications_title),
-        app,
-        context,
-        SettingsEnums.MANAGE_APPLICATIONS_NOTIFICATIONS,
-    )
 }

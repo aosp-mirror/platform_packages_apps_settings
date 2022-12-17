@@ -618,6 +618,8 @@
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Bluetooth を ON にすると、お使いのデバイスは近くにある他の Bluetooth デバイスと通信できます。"</string>
     <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Bluetooth を ON にすると、付近の他の Bluetooth デバイスと通信できます。\n\nBluetooth が OFF の場合でもアプリやサービスは付近のデバイスをいつでもスキャンできます。位置情報を使用する機能やサービスで利便性が向上するなどの効果があります。この設定は "<annotation id="link">"Bluetooth スキャンの設定"</annotation>"で変更できます。"</string>
     <string name="device_details_title" msgid="1155622417516195481">"デバイスの詳細"</string>
+    <!-- no translation found for bluetooth_device_keyboard_settings_preference_title (3411693160917620519) -->
+    <skip />
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"デバイスの Bluetooth アドレス: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"デバイスの Bluetooth アドレス:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"このデバイスとのペア設定を解除しますか？"</string>
@@ -1597,12 +1599,14 @@
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"利用可能な画面キーボード"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"画面キーボードを管理"</string>
-    <string name="keyboard_assistance_category" msgid="7320599809770932032">"キーボード補助機能"</string>
+    <!-- no translation found for keyboard_options_category (8040137073401152608) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"物理キーボード"</string>
     <string name="show_ime" msgid="4334255501724746849">"画面キーボードの使用"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"物理キーボードが有効になっていても画面に表示させます"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"キーボード ショートカット"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"使用可能なショートカットを表示します"</string>
+    <!-- no translation found for keyboard_shortcuts_helper_summary (5979507677602559203) -->
+    <skip />
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"仕事用プロファイルのキーボードとツール"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"仕事用の画面キーボード"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"デフォルト"</string>
@@ -1616,6 +1620,8 @@
     <string name="keyboard_layout_dialog_switch_hint" msgid="3303564123674979354">"切り替えるにはCtrl+スペースを押します"</string>
     <string name="keyboard_layout_default_label" msgid="6078569989261528039">"デフォルト"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"キーボードレイアウト"</string>
+    <!-- no translation found for keyboard_layout_picker_category_title (2369473692906329772) -->
+    <skip />
     <string name="user_dict_settings_title" msgid="680410651924276991">"単語リスト"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"仕事用の単語リスト"</string>
     <string name="user_dict_settings_summary" msgid="4939694372338975081">"スペルチェックなどのアプリで使用できる単語を追加します"</string>
@@ -1640,6 +1646,8 @@
     <string name="keyboard_settings_summary" msgid="2716339620942356432">"画面キーボード、読み上げ、ツール"</string>
     <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"画面キーボード、物理キーボード、読み上げ、ツール"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"物理キーボード"</string>
+    <!-- no translation found for enabled_locales_keyboard_layout (3939886151098958639) -->
+    <skip />
     <string name="gadget_picker_title" msgid="7615902510050731400">"ガジェットを選択"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"ウィジェットを選択"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"ウィジェットの作成とアクセスの許可"</string>
@@ -3368,14 +3376,10 @@
     <string name="zen_mode_end_time" msgid="223502560367331706">"終了時間"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="419683704068360804">"翌日の<xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
     <string name="zen_mode_summary_alarms_only_indefinite" msgid="910047326128154945">"期限なしで、アラームのみに変更します"</string>
-    <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="1900512966361163390">
-      <item quantity="other">（<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>まで）<xliff:g id="DURATION">%1$d</xliff:g>分間、アラームのみに変更します</item>
-      <item quantity="one"><xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>まで1分間、アラームのみに変更します</item>
-    </plurals>
-    <plurals name="zen_mode_summary_alarms_only_by_hour" formatted="false" msgid="955991428001659124">
-      <item quantity="other"><xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>まで<xliff:g id="DURATION">%1$d</xliff:g>時間、アラームのみに変更します</item>
-      <item quantity="one"><xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>まで1時間、アラームのみに変更します</item>
-    </plurals>
+    <!-- no translation found for zen_mode_summary_alarms_only_by_minute (6673649005494939311) -->
+    <skip />
+    <!-- no translation found for zen_mode_summary_alarms_only_by_hour (7400910210950788163) -->
+    <skip />
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"<xliff:g id="FORMATTEDTIME">%1$s</xliff:g>までアラームのみに変更します"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"常に割り込みに変更します"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"警告"</string>
@@ -3441,22 +3445,16 @@
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"その他のデフォルトの設定"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"リンクを追加"</string>
     <string name="app_launch_footer" msgid="4521865035105622557">"リンクが安全かどうかをアプリが確認し、安全な場合はアプリ内で自動的に開きます。"</string>
-    <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
-      <item quantity="other">選択済みのリンク: <xliff:g id="COUNT_1">%d</xliff:g> 件</item>
-      <item quantity="one">選択済みのリンク: <xliff:g id="COUNT_0">%d</xliff:g> 件</item>
-    </plurals>
-    <plurals name="app_launch_verified_links_message" formatted="false" msgid="1209292155940482111">
-      <item quantity="other">以前の選択内容により、以下のリンクはこのアプリで自動的に開きます。</item>
-      <item quantity="one">以前の選択内容により、以下のリンクはこのアプリで自動的に開きます。</item>
-    </plurals>
+    <!-- no translation found for app_launch_verified_links_title (621908751569155356) -->
+    <skip />
+    <!-- no translation found for app_launch_verified_links_message (190871133877476176) -->
+    <skip />
     <string name="app_launch_dialog_ok" msgid="1446157681861409861">"OK"</string>
     <string name="app_launch_verified_links_info_description" msgid="7514750232467132117">"選択済みのリンク一覧を表示"</string>
     <string name="app_launch_checking_links_title" msgid="6119228853554114201">"他のサポートされているリンクを確認しています…"</string>
     <string name="app_launch_dialog_cancel" msgid="6961071841814898663">"キャンセル"</string>
-    <plurals name="app_launch_supported_links_title" formatted="false" msgid="8579323750839397568">
-      <item quantity="other">サポートされているリンク: <xliff:g id="COUNT_1">%d</xliff:g> 件</item>
-      <item quantity="one">サポートされているリンク: <xliff:g id="COUNT_0">%d</xliff:g> 件</item>
-    </plurals>
+    <!-- no translation found for app_launch_supported_links_title (2457931321701095763) -->
+    <skip />
     <string name="app_launch_supported_links_add" msgid="3271247750388016131">"追加"</string>
     <string name="app_launch_supported_links_subtext" msgid="4268004019469184113">"<xliff:g id="APP_LABEL">%s</xliff:g> 内で開きます"</string>
     <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="SIZE">%1$s</xliff:g>使用（<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>）"</string>
@@ -3468,24 +3466,18 @@
     <string name="change_storage" msgid="8773820275624113401">"ストレージの変更"</string>
     <string name="notifications_label" msgid="8471624476040164538">"通知"</string>
     <string name="notifications_enabled_with_info" msgid="1808946629277684308">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
-    <plurals name="notifications_categories_off" formatted="false" msgid="1385401442703692986">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 件のカテゴリが OFF</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 件のカテゴリが OFF</item>
-    </plurals>
-    <plurals name="runtime_permissions_additional_count" formatted="false" msgid="5888624648943937645">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>個の追加権限</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g>個の追加権限</item>
-    </plurals>
+    <!-- no translation found for notifications_categories_off (7712037485557237328) -->
+    <skip />
+    <!-- no translation found for runtime_permissions_additional_count (6071909675951786523) -->
+    <skip />
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"権限が付与されていません"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"リクエストされた権限はありません"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"アプリのデータアクセスを管理する"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"プライバシー ダッシュボード"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"権限を最近使用したアプリを表示する"</string>
     <string name="unused_apps" msgid="4566272194756830656">"使用されていないアプリ"</string>
-    <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
-      <item quantity="other">使用されていないアプリ: <xliff:g id="COUNT_1">%d</xliff:g> 個</item>
-      <item quantity="one">使用されていないアプリ: <xliff:g id="COUNT_0">%d</xliff:g> 個</item>
-    </plurals>
+    <!-- no translation found for unused_apps_summary (4236371818881973021) -->
+    <skip />
     <string name="unused_apps_category" msgid="8954930958175500851">"使用していないアプリの設定"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"使用していないアプリを一時停止する"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"権限と一時ファイルを削除し、通知を停止します"</string>
@@ -3504,10 +3496,8 @@
     <string name="app_link_open_always" msgid="9167065494930657503">"対応リンクを開くことをアプリに許可します"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"その都度確認"</string>
     <string name="app_link_open_never" msgid="5299808605386052350">"リンクを開くことをアプリに許可しない"</string>
-    <plurals name="app_link_open_always_summary" formatted="false" msgid="1816161439007251694">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 個のリンクをアプリで処理します</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 個のリンクをアプリで処理します</item>
-    </plurals>
+    <!-- no translation found for app_link_open_always_summary (4524005594295855117) -->
+    <skip />
     <string name="open_supported_links_footer" msgid="3188808142432787933">"アプリは以下のリンクに対応しています。"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"アシストと音声入力"</string>
     <string name="default_assist_title" msgid="1182435129627493758">"デジタル アシスタント アプリ"</string>
@@ -3594,10 +3584,8 @@
     <string name="average_used" msgid="690235917394070169">"平均使用量（%）"</string>
     <string name="free_memory" msgid="439783742246854785">"空き"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"アプリのメモリ使用状況"</string>
-    <plurals name="memory_usage_apps_summary" formatted="false" msgid="1355637088533572208">
-      <item quantity="other">過去<xliff:g id="DURATION_1">%2$s</xliff:g>に<xliff:g id="COUNT">%1$d</xliff:g>個のアプリがメモリを使用しました</item>
-      <item quantity="one">過去<xliff:g id="DURATION_0">%2$s</xliff:g>に1個のアプリがメモリを使用しました</item>
-    </plurals>
+    <!-- no translation found for memory_usage_apps_summary (7168292864155527974) -->
+    <skip />
     <string name="running_frequency" msgid="7260225121706316639">"頻度"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"最大使用量"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"データ通信の使用はありません"</string>
@@ -3736,10 +3724,8 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> 使用（<xliff:g id="ID_2">%2$s</xliff:g>）"</string>
     <string name="configure" msgid="1499586749829665889">"設定"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"データ使用量に含まれている他のアプリ"</string>
-    <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="3316296488378947221">
-      <item quantity="other">データセーバーが ON の場合に、無制限のデータ使用を <xliff:g id="COUNT">%1$d</xliff:g> 個のアプリに許可します</item>
-      <item quantity="one">データセーバーが ON の場合に、無制限のデータ使用を 1 個のアプリに許可します</item>
-    </plurals>
+    <!-- no translation found for data_saver_unrestricted_summary (7343571401172437542) -->
+    <skip />
     <string name="data_usage_title" msgid="4039024073687469094">"メインデータ"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi データ"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> 使用"</string>
@@ -3747,10 +3733,8 @@
     <string name="data_remaining" msgid="6316251496381922837">"あと <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"このグラフは、<xliff:g id="START_DATE">%1$s</xliff:g>～<xliff:g id="END_DATE">%2$s</xliff:g>のデータ使用量を示しています。"</string>
     <string name="data_usage_chart_no_data_content_description" msgid="5481968839079467231">"この期間のデータはありません"</string>
-    <plurals name="billing_cycle_days_left" formatted="false" msgid="661792524671718753">
-      <item quantity="other">残り %d 日</item>
-      <item quantity="one">残り %d 日</item>
-    </plurals>
+    <!-- no translation found for billing_cycle_days_left (174337287346866400) -->
+    <skip />
     <string name="billing_cycle_none_left" msgid="1694844019159277504">"残り時間なし"</string>
     <string name="billing_cycle_less_than_one_day_left" msgid="1210202399053992163">"残り 1 日未満"</string>
     <string name="carrier_and_update_text" msgid="5363656651921656280">"更新: <xliff:g id="ID_1">^1</xliff:g>、<xliff:g id="ID_2">^2</xliff:g> 前"</string>
@@ -4201,7 +4185,8 @@
     <string name="mobile_data_active" msgid="8683694456401350210">"モバイルデータ有効"</string>
     <string name="mobile_data_off" msgid="2702029611959308269">"モバイルデータ OFF"</string>
     <string name="subscription_available" msgid="2659722770210403365">"使用可能"</string>
-    <string name="mobile_network_list_add_more" msgid="4478586073355236604">"追加"</string>
+    <!-- no translation found for mobile_network_list_add_more (5076722903436552813) -->
+    <skip />
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"有効 / SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"無効 / SIM"</string>
     <string name="mobile_network_active_esim" msgid="3984452275968408382">"有効 / eSIM"</string>
@@ -4614,4 +4599,8 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"パスワードが正しくありません"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"再生を開始するには、下の枠に QR コードを合わせてください"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR コードの形式が無効です"</string>
+    <!-- no translation found for convert_to_esim_title (71037864129009206) -->
+    <skip />
+    <!-- no translation found for transfer_esim_to_another_device_title (5286117866086383192) -->
+    <skip />
 </resources>

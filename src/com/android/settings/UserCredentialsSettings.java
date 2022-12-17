@@ -43,12 +43,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.wifi.helper.SavedWifiHelper;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -74,6 +76,9 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
 
     private static final String KEYSTORE_PROVIDER = "AndroidKeyStore";
 
+    @VisibleForTesting
+    protected SavedWifiHelper mSavedWifiHelper;
+
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.USER_CREDENTIALS;
@@ -88,15 +93,23 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
     @Override
     public void onClick(final View view) {
         final Credential item = (Credential) view.getTag();
-        if (item != null) {
-            CredentialDialogFragment.show(this, item);
+        if (item == null) return;
+        if (item.isInUse()) {
+            item.setUsedByNames(mSavedWifiHelper.getCertificateNetworkNames(item.alias));
         }
+        showCredentialDialogFragment(item);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActivity().setTitle(R.string.user_credentials);
+        mSavedWifiHelper = SavedWifiHelper.getInstance(getContext(), getSettingsLifecycle());
+    }
+
+    @VisibleForTesting
+    protected void showCredentialDialogFragment(Credential item) {
+        CredentialDialogFragment.show(this, item);
     }
 
     protected void announceRemoval(String alias) {
@@ -112,7 +125,9 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
         }
     }
 
-    public static class CredentialDialogFragment extends InstrumentedDialogFragment {
+    /** The fragment to show the credential information. */
+    public static class CredentialDialogFragment extends InstrumentedDialogFragment
+            implements DialogInterface.OnShowListener {
         private static final String TAG = "CredentialDialogFragment";
         private static final String ARG_CREDENTIAL = "credential";
 
@@ -162,17 +177,23 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
                         dialog.dismiss();
                     }
                 };
-                // TODO: b/127865361
-                //       a safe means of clearing wifi certificates. Configs refer to aliases
-                //       directly so deleting certs will break dependent access points.
-                //       However, Wi-Fi used to remove this certificate from storage if the network
-                //       was removed, regardless if it is used in more than one network.
-                //       It has been decided to allow removing certificates from this menu, as we
-                //       assume that the user who manually adds certificates must have a way to
-                //       manually remove them.
                 builder.setNegativeButton(R.string.trusted_credentials_remove_label, listener);
             }
-            return builder.create();
+            AlertDialog dialog = builder.create();
+            dialog.setOnShowListener(this);
+            return dialog;
+        }
+
+        /**
+         * Override for the negative button enablement on demand.
+         */
+        @Override
+        public void onShow(DialogInterface dialogInterface) {
+            final Credential item = (Credential) getArguments().getParcelable(ARG_CREDENTIAL);
+            if (item.isInUse()) {
+                ((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_NEGATIVE)
+                        .setEnabled(false);
+            }
         }
 
         @Override
@@ -300,6 +321,9 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
                 while (aliases.hasMoreElements()) {
                     String alias = aliases.nextElement();
                     Credential c = new Credential(alias, uid);
+                    if (!c.isSystem()) {
+                        c.setInUse(mSavedWifiHelper.isCertificateInUse(alias));
+                    }
                     Key key = null;
                     try {
                         key = keyStore.getKey(alias, null);
@@ -423,12 +447,13 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
         }
 
         ((TextView) view.findViewById(R.id.alias)).setText(item.alias);
-        ((TextView) view.findViewById(R.id.purpose)).setText(item.isSystem()
-                ? R.string.credential_for_vpn_and_apps
-                : R.string.credential_for_wifi);
+        updatePurposeView(view.findViewById(R.id.purpose), item);
 
         view.findViewById(R.id.contents).setVisibility(expanded ? View.VISIBLE : View.GONE);
         if (expanded) {
+            updateUsedByViews(view.findViewById(R.id.credential_being_used_by_title),
+                    view.findViewById(R.id.credential_being_used_by_content), item);
+
             for (int i = 0; i < credentialViewTypes.size(); i++) {
                 final View detail = view.findViewById(credentialViewTypes.keyAt(i));
                 detail.setVisibility(item.storedTypes.contains(credentialViewTypes.valueAt(i))
@@ -436,6 +461,30 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
             }
         }
         return view;
+    }
+
+    @VisibleForTesting
+    protected static void updatePurposeView(TextView purpose, Credential item) {
+        int subTextResId = R.string.credential_for_vpn_and_apps;
+        if (!item.isSystem()) {
+            subTextResId = (item.isInUse())
+                    ? R.string.credential_for_wifi_in_use
+                    : R.string.credential_for_wifi;
+        }
+        purpose.setText(subTextResId);
+    }
+
+    @VisibleForTesting
+    protected static void updateUsedByViews(TextView title, TextView content, Credential item) {
+        List<String> usedByNames = item.getUsedByNames();
+        if (usedByNames.size() > 0) {
+            title.setVisibility(View.VISIBLE);
+            content.setText(String.join("\n", usedByNames));
+            content.setVisibility(View.VISIBLE);
+        } else {
+            title.setVisibility(View.GONE);
+            content.setVisibility(View.GONE);
+        }
     }
 
     static class AliasEntry {
@@ -467,6 +516,16 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
          * also be {@link Process#WIFI_UID} for credentials installed as wifi certificates.
          */
         final int uid;
+
+        /**
+         * Indicate whether or not this credential is in use.
+         */
+        boolean mIsInUse;
+
+        /**
+         * The list of networks which use this credential.
+         */
+        List<String> mUsedByNames = new ArrayList<>();
 
         /**
          * Should contain some non-empty subset of:
@@ -524,10 +583,28 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
             return UserHandle.getAppId(uid) == Process.SYSTEM_UID;
         }
 
-        public String getAlias() { return alias; }
+        public String getAlias() {
+            return alias;
+        }
 
         public EnumSet<Type> getStoredTypes() {
             return storedTypes;
+        }
+
+        public void setInUse(boolean inUse) {
+            mIsInUse = inUse;
+        }
+
+        public boolean isInUse() {
+            return mIsInUse;
+        }
+
+        public void setUsedByNames(List<String> names) {
+            mUsedByNames = new ArrayList<>(names);
+        }
+
+        public List<String> getUsedByNames() {
+            return new ArrayList<String>(mUsedByNames);
         }
     }
 }

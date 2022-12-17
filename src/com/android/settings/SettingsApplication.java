@@ -75,9 +75,9 @@ public class SettingsApplication extends Application {
     }
 
     @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        AppIconCacheManager.getInstance().release();
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        AppIconCacheManager.getInstance().trimMemory(level);
     }
 
     private class DeviceProvisionedObserver extends ContentObserver {
