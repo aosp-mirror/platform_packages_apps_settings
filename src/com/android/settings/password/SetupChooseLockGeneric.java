@@ -38,7 +38,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.SetupEncryptionInterstitial;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.utils.SettingsDividerItemDecoration;
 
@@ -212,15 +211,6 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         protected Intent getLockPatternIntent() {
             final Intent intent = SetupChooseLockPattern.modifyIntentForSetup(
                     getContext(), super.getLockPatternIntent());
-            SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
-            return intent;
-        }
-
-        @Override
-        protected Intent getEncryptionInterstitialIntent(Context context, int quality,
-                boolean required, Intent unlockMethodIntent) {
-            Intent intent = SetupEncryptionInterstitial.createStartIntent(context, quality,
-                    required, unlockMethodIntent);
             SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
             return intent;
         }

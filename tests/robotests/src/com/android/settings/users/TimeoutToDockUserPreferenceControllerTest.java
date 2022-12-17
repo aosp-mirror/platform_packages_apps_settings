@@ -124,7 +124,8 @@ public class TimeoutToDockUserPreferenceControllerTest {
         Settings.Secure.putStringForUser(mContext.getContentResolver(), TIMEOUT_TO_DOCK_USER,
                 null, UserHandle.myUserId());
 
-        assertThat(mController.getSummary().toString()).isEqualTo(mEntries[0]);
+        assertThat(mController.getSummary().toString()).isEqualTo(
+                mEntries[TimeoutToDockUserSettings.DEFAULT_TIMEOUT_SETTING_VALUE_INDEX]);
     }
 
     @Test

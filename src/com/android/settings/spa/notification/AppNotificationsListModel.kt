@@ -16,11 +16,16 @@
 
 package com.android.settings.spa.notification
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.icu.text.RelativeDateTimeFormatter
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.produceState
 import com.android.settings.R
+import com.android.settings.applications.AppInfoBase
+import com.android.settings.notification.app.AppNotificationSettings
 import com.android.settings.spa.notification.SpinnerItem.Companion.toSpinnerItem
 import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spa.framework.util.asyncFilter
@@ -28,6 +33,8 @@ import com.android.settingslib.spa.framework.util.asyncForEach
 import com.android.settingslib.spaprivileged.model.app.AppEntry
 import com.android.settingslib.spaprivileged.model.app.AppListModel
 import com.android.settingslib.spaprivileged.model.app.AppRecord
+import com.android.settingslib.spaprivileged.template.app.AppListItemModel
+import com.android.settingslib.spaprivileged.template.app.AppListSwitchItem
 import com.android.settingslib.utils.StringUtil
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -113,6 +120,28 @@ class AppNotificationsListModel(
                 R.plurals.notifications_sent_weekly, sentCount, sentCount
             )
         }
+    }
+
+    @Composable
+    override fun AppListItemModel<AppNotificationsRecord>.AppItem() {
+        AppListSwitchItem(
+            onClick = { navigateToAppNotificationSettings(app = record.app) },
+            checked = record.controller.isEnabled.observeAsState(),
+            changeable = produceState(initialValue = false) {
+                value = repository.isChangeable(record.app)
+            },
+            onCheckedChange = record.controller::setEnabled,
+        )
+    }
+
+    private fun navigateToAppNotificationSettings(app: ApplicationInfo) {
+        AppInfoBase.startAppInfoFragment(
+            AppNotificationSettings::class.java,
+            context.getString(R.string.notifications_title),
+            app,
+            context,
+            SettingsEnums.MANAGE_APPLICATIONS_NOTIFICATIONS,
+        )
     }
 }
 

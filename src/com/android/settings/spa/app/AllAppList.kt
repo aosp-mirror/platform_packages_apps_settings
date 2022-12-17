@@ -36,6 +36,7 @@ import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.template.app.AppList
 import com.android.settingslib.spaprivileged.template.app.AppListInput
 import com.android.settingslib.spaprivileged.template.app.AppListItem
+import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.android.settingslib.spaprivileged.template.app.AppListPage
 import com.android.settingslib.spaprivileged.template.app.getStorageSize
 import kotlinx.coroutines.flow.Flow
@@ -70,9 +71,7 @@ fun AllAppListPage(
         showInstantApps = true,
         moreOptions = { ResetAppPreferences(resetAppDialogPresenter::open) },
         appList = appList,
-    ) {
-        AppListItem(onClick = AppInfoSettingsProvider.navigator(app = record.app))
-    }
+    )
 }
 
 data class AppRecordWithSize(
@@ -88,4 +87,9 @@ class AllAppListModel(
 
     @Composable
     override fun getSummary(option: Int, record: AppRecordWithSize) = record.app.getSummary()
+
+    @Composable
+    override fun AppListItemModel<AppRecordWithSize>.AppItem() {
+        AppListItem(onClick = AppInfoSettingsProvider.navigator(app = record.app))
+    }
 }

@@ -78,8 +78,9 @@ public class TimeoutToDockUserSettingsTest {
     }
 
     @Test
-    public void defaultKey_settingNotSet_shouldReturnFirstValueAsDefault() {
-        assertThat(mSettings.getDefaultKey()).isEqualTo(mValues[0]);
+    public void defaultKey_settingNotSet_shouldReturnSecondValueAsDefault() {
+        assertThat(mSettings.getDefaultKey()).isEqualTo(
+                mValues[TimeoutToDockUserSettings.DEFAULT_TIMEOUT_SETTING_VALUE_INDEX]);
     }
 
     @Test
@@ -92,6 +93,13 @@ public class TimeoutToDockUserSettingsTest {
     @Test
     public void defaultKey_setToSecondValue_shouldSaveToSettings() {
         final String expectedKey = mValues[1];
+        mSettings.setDefaultKey(expectedKey);
+        assertThat(mSettings.getDefaultKey()).isEqualTo(expectedKey);
+    }
+
+    @Test
+    public void defaultKey_setToThirdValue_shouldSaveToSettings() {
+        final String expectedKey = mValues[2];
         mSettings.setDefaultKey(expectedKey);
         assertThat(mSettings.getDefaultKey()).isEqualTo(expectedKey);
     }

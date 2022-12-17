@@ -60,6 +60,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TimeZone;
 
 @RunWith(RobolectricTestRunner.class)
@@ -1062,8 +1063,8 @@ public class DataProcessorTest {
         final List<Integer> levels = List.of(100, 100);
         hourlyBatteryLevelsPerDay.add(
                 new BatteryLevelData.PeriodBatteryLevelData(timestamps, levels));
-        when(mPowerUsageFeatureProvider.getHideApplicationEntries(mContext))
-                .thenReturn(new CharSequence[]{"package1"});
+        when(mPowerUsageFeatureProvider.getHideApplicationSet(mContext))
+                .thenReturn(Set.of("package1"));
 
         final Map<Integer, Map<Integer, BatteryDiffData>> resultMap =
                 DataProcessor.getBatteryUsageMap(
@@ -1075,7 +1076,7 @@ public class DataProcessorTest {
                         .get(DataProcessor.SELECTED_INDEX_ALL);
         assertBatteryDiffEntry(
                 resultDiffData.getAppDiffEntryList().get(0), currentUserId, /*uid=*/ 2L,
-                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 50.0,
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 100.0,
                 /*foregroundUsageConsumePower=*/ 0, /*foregroundServiceUsageConsumePower=*/ 0,
                 /*backgroundUsageConsumePower=*/ 5, /*cachedUsageConsumePower=*/ 5,
                 /*foregroundUsageTimeInMs=*/ 10, /*backgroundUsageTimeInMs=*/ 20);
@@ -1225,6 +1226,8 @@ public class DataProcessorTest {
 
         final BatteryDiffData batteryDiffData = DataProcessor.generateBatteryDiffData(mContext,
                 DataProcessor.convertToBatteryHistEntry(batteryEntryList, mBatteryUsageStats));
+        batteryDiffData.setTotalConsumePower();
+        batteryDiffData.sortEntries();
 
         assertBatteryDiffEntry(
                 batteryDiffData.getAppDiffEntryList().get(0), 0, /*uid=*/ 2L,

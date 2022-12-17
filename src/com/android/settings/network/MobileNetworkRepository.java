@@ -15,6 +15,7 @@
  */
 package com.android.settings.network;
 
+import static android.telephony.SubscriptionManager.PROFILE_CLASS_PROVISIONING;
 import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
 
 import static com.android.internal.telephony.TelephonyIntents.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED;
@@ -265,7 +266,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                         mPortIndex = portInfo.getPortIndex();
                     } else if (DEBUG) {
                         Log.d(TAG, "Can not get port index and physicalSlotIndex for subId "
-                                        + mSubId);
+                                + mSubId);
                     }
                 });
                 if (mPhysicalSlotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
@@ -324,7 +325,12 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             SubscriptionInfoEntity subInfoEntity =
                     convertToSubscriptionInfoEntity(context, info);
             if (subInfoEntity != null) {
-                mSubscriptionInfoMap.put(info.getSubscriptionId(), info);
+                int subId = info.getSubscriptionId();
+                mSubscriptionInfoMap.put(subId, info);
+                if (DEBUG) {
+                    Log.d(TAG, "convert subId " + subId + "to SubscriptionInfoEntity: "
+                            + subInfoEntity);
+                }
                 mMobileNetworkDatabase.insertSubsInfo(subInfoEntity);
                 mMetricsFeatureProvider.action(mContext,
                         SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_SUB_INFO);
@@ -401,13 +407,21 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     }
 
     public void insertUiccInfo() {
-        mMobileNetworkDatabase.insertUiccInfo(convertToUiccInfoEntity());
+        UiccInfoEntity uiccInfoEntity = convertToUiccInfoEntity();
+        if (DEBUG) {
+            Log.d(TAG, "uiccInfoEntity = " + uiccInfoEntity);
+        }
+        mMobileNetworkDatabase.insertUiccInfo(uiccInfoEntity);
         mMetricsFeatureProvider.action(mContext,
                 SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_UICC_INFO);
     }
 
     public void insertMobileNetworkInfo(Context context) {
-        mMobileNetworkDatabase.insertMobileNetworkInfo(convertToMobileNetworkInfoEntity(context));
+        MobileNetworkInfoEntity mobileNetworkInfoEntity = convertToMobileNetworkInfoEntity(context);
+        if (DEBUG) {
+            Log.d(TAG, "mobileNetworkInfoEntity = " + mobileNetworkInfoEntity);
+        }
+        mMobileNetworkDatabase.insertMobileNetworkInfo(mobileNetworkInfoEntity);
         mMetricsFeatureProvider.action(mContext,
                 SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_MOBILE_NETWORK_INFO);
     }
@@ -449,7 +463,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
 
     @Override
     public void onSubscriptionsChanged() {
-        insertAvailableSubInfoToEntity(mSubscriptionManager.getAvailableSubscriptionInfoList());
+        insertAvailableSubInfoToEntity(
+                SubscriptionUtil.getSelectableSubscriptionInfoList(mContext));
     }
 
     private void insertAvailableSubInfoToEntity(List<SubscriptionInfo> availableInfoList) {
@@ -470,8 +485,14 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             for (SubscriptionInfo subInfo : infoArray) {
                 mSubscriptionInfoMap.remove(subInfo.getSubscriptionId());
                 if (DEBUG) {
-                    Log.d(TAG,
-                            "insert sudInfo " + subInfo.getSubscriptionId() + " to subInfoEntity");
+                    Log.d(TAG, "insert subInfo to subInfoEntity, subInfo = " + subInfo);
+                }
+                if (subInfo.isEmbedded()
+                        && subInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING) {
+                    if (DEBUG) {
+                        Log.d(TAG, "Do not insert the provision eSIM");
+                    }
+                    continue;
                 }
                 insertSubInfo(mContext, subInfo);
             }
