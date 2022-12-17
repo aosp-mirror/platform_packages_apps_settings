@@ -2396,6 +2396,13 @@
     <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
     <string name="sim_preferred_message"><xliff:g id="new_sim">%1$s</xliff:g> is the only SIM in your device. Do you want to use this SIM for mobile data, calls, and SMS messages?</string>
 
+    <!-- Title for the dialog asking to user to enable auto data switch upon enabling multi-SIM  [CHAR LIMIT=30] -->
+    <string name="enable_auto_data_switch_dialog_title">Switch SIMs automatically?</string>
+    <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
+    <string name="enable_auto_data_switch_dialog_message">Allow your phone to automatically switch to <xliff:g id="backup_carrier" example="T-mobile">%1$s</xliff:g> for mobile data when it has better availability.</string>
+    <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
+    <string name="auto_data_switch_dialog_managed_profile_warning">\n\nCalls, messages, and network traffic may be visible to your organization.</string>
+
     <!-- Instructions telling the user that they entered the wrong SIM PIN for the last time.
          Displayed in a dialog box.  [CHAR LIMIT=100] -->
     <string name="wrong_pin_code_pukked">Incorrect SIM PIN code you must now contact your carrier to unlock your device.</string>
