@@ -242,7 +242,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
                 Log.w(TAG, "cannot find app resource for:" + entry.getPackageName());
                 continue;
             }
-            final String prefKey = entry.mBatteryHistEntry.getKey();
+            final String prefKey = entry.getKey();
             PowerGaugePreference pref = mAppListPreferenceGroup.findPreference(prefKey);
             if (pref != null) {
                 isAdded = true;

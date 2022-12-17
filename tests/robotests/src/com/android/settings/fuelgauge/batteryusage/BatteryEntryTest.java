@@ -108,7 +108,8 @@ public class BatteryEntryTest {
                 mMockContext,
                 powerComponentId,
                 /* devicePowerMah= */ 200,
-                /* usageDurationMs= */ 1000);
+                /* usageDurationMs= */ 1000,
+                /* isHidden= */ false);
     }
 
     private BatteryEntry createCustomAggregateBatteryEntry(int powerComponentId) {
@@ -169,7 +170,8 @@ public class BatteryEntryTest {
         final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application,
                 BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY,
                 /* devicePowerMah= */ 200,
-                /* usageDurationMs= */ 1000);
+                /* usageDurationMs= */ 1000,
+                /* isHidden= */ false);
 
         assertThat(entry.mIconId).isEqualTo(R.drawable.ic_settings_aod);
         assertThat(entry.mName).isEqualTo("Ambient display");
@@ -202,7 +204,8 @@ public class BatteryEntryTest {
         final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application,
                 BatteryConsumer.POWER_COMPONENT_BLUETOOTH,
                 /* devicePowerMah= */ 10,
-                /* usageDurationMs= */ 100);
+                /* usageDurationMs= */ 100,
+                /* isHidden= */ false);
 
         assertThat(entry.getTimeInForegroundMs()).isEqualTo(100L);
     }
@@ -223,7 +226,8 @@ public class BatteryEntryTest {
         final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application,
                 BatteryConsumer.POWER_COMPONENT_BLUETOOTH,
                 /* devicePowerMah= */ 100,
-                /* usageDurationMs= */ 1000);
+                /* usageDurationMs= */ 1000,
+                /* isHidden= */ false);
 
         assertThat(entry.getTimeInBackgroundMs()).isEqualTo(0);
     }

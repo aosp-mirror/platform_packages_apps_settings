@@ -371,39 +371,12 @@ public final class BatteryDiffEntryTest {
     }
 
     @Test
-    public void testIsSystemEntry_uidBatteryWithHiddenState_returnTrue() {
-        final BatteryDiffEntry entry =
-                createBatteryDiffEntry(
-                        ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
-                        /*uid=*/ 123, /*isHidden=*/ true);
-        assertThat(entry.isSystemEntry()).isTrue();
-    }
-
-    @Test
     public void testIsSystemEntry_uidBatteryWithSystemProcess_returnFalse() {
         final BatteryDiffEntry entry =
                 createBatteryDiffEntry(
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /*uid=*/ 1230, /*isHidden=*/ false);
         assertThat(entry.isSystemEntry()).isFalse();
-    }
-
-    @Test
-    public void testIsSystemEntry_uidBatteryWithTetheringProcess_returnTrue() {
-        final BatteryDiffEntry entry =
-                createBatteryDiffEntry(
-                        ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
-                        /*uid=*/ BatteryUtils.UID_TETHERING, /*isHidden=*/ false);
-        assertThat(entry.isSystemEntry()).isTrue();
-    }
-
-    @Test
-    public void testIsSystemEntry_uidBatteryWithRemovedAppsProcess_returnTrue() {
-        final BatteryDiffEntry entry =
-                createBatteryDiffEntry(
-                        ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
-                        /*uid=*/ BatteryUtils.UID_REMOVED_APPS, /*isHidden=*/ false);
-        assertThat(entry.isSystemEntry()).isTrue();
     }
 
     @Test
