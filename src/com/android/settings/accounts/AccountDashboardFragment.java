@@ -22,13 +22,11 @@ import android.accounts.AccountManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.UserInfo;
-import android.credentials.CredentialManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settings.R;
 import com.android.settings.applications.autofill.PasswordsPreferenceController;
-import com.android.settings.applications.credentials.CredentialManagerPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultAutofillPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultWorkAutofillPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -49,6 +47,7 @@ public class AccountDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "AccountDashboardFrag";
 
+
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.ACCOUNT;
@@ -61,7 +60,7 @@ public class AccountDashboardFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return getPreferenceLayoutResId();
+        return R.xml.accounts_dashboard_settings;
     }
 
     @Override
@@ -72,12 +71,6 @@ public class AccountDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (CredentialManager.isServiceEnabled()) {
-            CredentialManagerPreferenceController cmpp =
-                    use(CredentialManagerPreferenceController.class);
-            cmpp.setParentFragment(this);
-        }
-
         getSettingsLifecycle().addObserver(use(PasswordsPreferenceController.class));
     }
 
@@ -102,13 +95,11 @@ public class AccountDashboardFragment extends DashboardFragment {
     }
 
     private static void buildAccountPreferenceControllers(
-            Context context,
-            DashboardFragment parent,
-            String[] authorities,
+            Context context, DashboardFragment parent, String[] authorities,
             List<AbstractPreferenceController> controllers) {
         final AccountPreferenceController accountPrefController =
-                new AccountPreferenceController(
-                        context, parent, authorities, ProfileSelectFragment.ProfileType.ALL);
+                new AccountPreferenceController(context, parent, authorities,
+                        ProfileSelectFragment.ProfileType.ALL);
         if (parent != null) {
             parent.getSettingsLifecycle().addObserver(accountPrefController);
         }
@@ -118,14 +109,8 @@ public class AccountDashboardFragment extends DashboardFragment {
         controllers.add(new AutoSyncWorkDataPreferenceController(context, parent));
     }
 
-    public static int getPreferenceLayoutResId() {
-        return CredentialManager.isServiceEnabled()
-                ? R.xml.accounts_dashboard_settings_credman
-                : R.xml.accounts_dashboard_settings;
-    }
-
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(getPreferenceLayoutResId()) {
+            new BaseSearchIndexProvider(R.xml.accounts_dashboard_settings) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
@@ -139,11 +124,11 @@ public class AccountDashboardFragment extends DashboardFragment {
 
                 @SuppressWarnings("MissingSuperCall") // TODO: Fix me
                 @Override
-                public List<SearchIndexableRaw> getDynamicRawDataToIndex(
-                        Context context, boolean enabled) {
+                public List<SearchIndexableRaw> getDynamicRawDataToIndex(Context context,
+                        boolean enabled) {
                     final List<SearchIndexableRaw> indexRaws = new ArrayList<>();
-                    final UserManager userManager =
-                            (UserManager) context.getSystemService(Context.USER_SERVICE);
+                    final UserManager userManager = (UserManager) context.getSystemService(
+                            Context.USER_SERVICE);
                     final List<UserInfo> profiles = userManager.getProfiles(UserHandle.myUserId());
                     for (final UserInfo userInfo : profiles) {
                         if (userInfo.isManagedProfile()) {
