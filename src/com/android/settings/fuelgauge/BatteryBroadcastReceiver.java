@@ -100,7 +100,8 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
         intentFilter.addAction(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED);
         intentFilter.addAction(BatteryUtils.BYPASS_DOCK_DEFENDER_ACTION);
 
-        final Intent intent = mContext.registerReceiver(this, intentFilter);
+        final Intent intent = mContext.registerReceiver(this, intentFilter,
+                Context.RECEIVER_EXPORTED);
         updateBatteryStatus(intent, true /* forceUpdate */);
     }
 
