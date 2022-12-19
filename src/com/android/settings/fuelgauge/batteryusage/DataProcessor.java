@@ -256,7 +256,8 @@ public final class DataProcessor {
                             break;
                         }
                         final AppUsageEvent appUsageEvent =
-                                ConvertUtils.convertToAppUsageEvent(context, event, userId);
+                                ConvertUtils.convertToAppUsageEvent(
+                                        context, sUsageStatsManager, event, userId);
                         if (appUsageEvent != null) {
                             numEventsFetched++;
                             appUsageEventList.add(appUsageEvent);
