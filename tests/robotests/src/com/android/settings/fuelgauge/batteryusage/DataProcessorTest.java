@@ -213,7 +213,7 @@ public final class DataProcessorTest {
                 .when(mUsageStatsManager)
                 .queryEventsForUser(anyLong(), anyLong(), anyInt(), any());
 
-        assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId))
+        assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId, 0))
                 .isEqualTo(mUsageEvents1);
     }
 
@@ -223,7 +223,7 @@ public final class DataProcessorTest {
         // Test locked user.
         doReturn(false).when(mUserManager).isUserUnlocked(userId);
 
-        assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId)).isNull();
+        assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId, 0)).isNull();
     }
 
     @Test
@@ -233,7 +233,7 @@ public final class DataProcessorTest {
         doReturn(null)
                 .when(mUsageStatsManager).queryEventsForUser(anyLong(), anyLong(), anyInt(), any());
 
-        assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId)).isNull();
+        assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId, 0)).isNull();
     }
 
     @Test public void generateAppUsageEventListFromUsageEvents_returnExpectedResult() {
@@ -647,6 +647,7 @@ public final class DataProcessorTest {
     public void getBatteryUsageMap_emptyHistoryMap_returnNull() {
         final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
                 new ArrayList<>();
+
         hourlyBatteryLevelsPerDay.add(
                 new BatteryLevelData.PeriodBatteryLevelData(new ArrayList<>(), new ArrayList<>()));
 

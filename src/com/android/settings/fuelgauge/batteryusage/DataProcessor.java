@@ -100,6 +100,8 @@ public final class DataProcessor {
 
     public static final String CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER =
             "CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER";
+    public static final Comparator<AppUsageEvent> TIMESTAMP_COMPARATOR =
+            Comparator.comparing(AppUsageEvent::getTimestamp);
 
     /** A callback listener when battery usage loading async task is executed. */
     public interface UsageMapAsyncResponse {
@@ -228,7 +230,8 @@ public final class DataProcessor {
      * Gets the {@link UsageEvents} from system service for the specific user.
      */
     @Nullable
-    public static UsageEvents getAppUsageEventsForUser(Context context, final int userID) {
+    public static UsageEvents getAppUsageEventsForUser(
+            Context context, final int userID, final long startTimestampOfLevelData) {
         final long start = System.currentTimeMillis();
         context = DatabaseUtils.getOwnerContext(context);
         if (context == null) {
@@ -240,8 +243,9 @@ public final class DataProcessor {
         }
         final long sixDaysAgoTimestamp =
                 DatabaseUtils.getTimestampSixDaysAgo(Calendar.getInstance());
+        final long earliestTimestamp = Math.max(sixDaysAgoTimestamp, startTimestampOfLevelData);
         final UsageEvents events = getAppUsageEventsForUser(
-                context, userManager, userID, sixDaysAgoTimestamp);
+                context, userManager, userID, earliestTimestamp);
         final long elapsedTime = System.currentTimeMillis() - start;
         Log.d(TAG, String.format("getAppUsageEventsForUser() for user %d in %d/ms",
                 userID, elapsedTime));
@@ -638,7 +642,7 @@ public final class DataProcessor {
     @Nullable
     private static UsageEvents getAppUsageEventsForUser(
             Context context, final UserManager userManager, final int userID,
-            final long sixDaysAgoTimestamp) {
+            final long earliestTimestamp) {
         final String callingPackage = context.getPackageName();
         final long now = System.currentTimeMillis();
         // When the user is not unlocked, UsageStatsManager will return null, so bypass the
@@ -648,7 +652,7 @@ public final class DataProcessor {
             return null;
         }
         final long startTime = DatabaseUtils.getAppUsageStartTimestampOfUser(
-                context, userID, sixDaysAgoTimestamp);
+                context, userID, earliestTimestamp);
         return loadAppUsageEventsForUserFromService(
                 sUsageStatsManager, startTime, now, userID, callingPackage);
     }

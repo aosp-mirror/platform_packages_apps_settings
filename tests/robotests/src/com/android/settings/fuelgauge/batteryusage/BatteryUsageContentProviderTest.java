@@ -43,13 +43,18 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /** Tests for {@link BatteryUsageContentProvider}. */
 @RunWith(RobolectricTestRunner.class)
 public final class BatteryUsageContentProviderTest {
     private static final Uri VALID_BATTERY_STATE_CONTENT_URI = DatabaseUtils.BATTERY_CONTENT_URI;
+    private static final long TIMESTAMP1 = System.currentTimeMillis();
+    private static final long TIMESTAMP2 = System.currentTimeMillis() + 2;
+    private static final long TIMESTAMP3 = System.currentTimeMillis() + 4;
     private static final String PACKAGE_NAME1 = "com.android.settings1";
     private static final String PACKAGE_NAME2 = "com.android.settings2";
     private static final String PACKAGE_NAME3 = "com.android.settings3";
@@ -181,28 +186,48 @@ public final class BatteryUsageContentProviderTest {
     }
 
     @Test
+    public void query_appUsageEvent_returnsExpectedResult() {
+        insertAppUsageEvent();
+
+        final List<Long> userIds1 = new ArrayList<>();
+        final long notExistingUserId = 3;
+        userIds1.add(USER_ID1);
+        userIds1.add(USER_ID2);
+        userIds1.add(notExistingUserId);
+        final Cursor cursor1 = getCursorOfAppUsage(userIds1, TIMESTAMP1);
+        assertThat(cursor1.getCount()).isEqualTo(3);
+        // Verifies the queried first battery state.
+        cursor1.moveToFirst();
+        assertThat(cursor1.getString(5 /*packageName*/)).isEqualTo(PACKAGE_NAME1);
+        // Verifies the queried second battery state.
+        cursor1.moveToNext();
+        assertThat(cursor1.getString(5 /*packageName*/)).isEqualTo(PACKAGE_NAME2);
+        // Verifies the queried third battery state.
+        cursor1.moveToNext();
+        assertThat(cursor1.getString(5 /*packageName*/)).isEqualTo(PACKAGE_NAME3);
+
+        final List<Long> userIds2 = new ArrayList<>();
+        userIds2.add(USER_ID1);
+        final Cursor cursor2 = getCursorOfAppUsage(userIds2, TIMESTAMP3);
+        assertThat(cursor2.getCount()).isEqualTo(1);
+        // Verifies the queried first battery state.
+        cursor2.moveToFirst();
+        assertThat(cursor2.getString(5 /*packageName*/)).isEqualTo(PACKAGE_NAME3);
+    }
+
+    @Test
     public void query_appUsageTimestamp_returnsExpectedResult() throws Exception {
-        mProvider.onCreate();
-        final long timestamp1 = System.currentTimeMillis();
-        final long timestamp2 = timestamp1 + 2;
-        final long timestamp3 = timestamp1 + 4;
-        // Inserts some valid testing data.
-        BatteryTestUtils.insertDataToAppUsageEventTable(
-                mContext, USER_ID1, timestamp1, PACKAGE_NAME1);
-        BatteryTestUtils.insertDataToAppUsageEventTable(
-                mContext, USER_ID2, timestamp2, PACKAGE_NAME2);
-        BatteryTestUtils.insertDataToAppUsageEventTable(
-                mContext, USER_ID1, timestamp3, PACKAGE_NAME3);
+        insertAppUsageEvent();
 
         final Cursor cursor1 = getCursorOfLatestTimestamp(USER_ID1);
         assertThat(cursor1.getCount()).isEqualTo(1);
         cursor1.moveToFirst();
-        assertThat(cursor1.getLong(0)).isEqualTo(timestamp3);
+        assertThat(cursor1.getLong(0)).isEqualTo(TIMESTAMP3);
 
         final Cursor cursor2 = getCursorOfLatestTimestamp(USER_ID2);
         assertThat(cursor2.getCount()).isEqualTo(1);
         cursor2.moveToFirst();
-        assertThat(cursor2.getLong(0)).isEqualTo(timestamp2);
+        assertThat(cursor2.getLong(0)).isEqualTo(TIMESTAMP2);
 
         final long notExistingUserId = 3;
         final Cursor cursor3 = getCursorOfLatestTimestamp(notExistingUserId);
@@ -383,6 +408,17 @@ public final class BatteryUsageContentProviderTest {
         return cursor;
     }
 
+    private void insertAppUsageEvent() {
+        mProvider.onCreate();
+        // Inserts some valid testing data.
+        BatteryTestUtils.insertDataToAppUsageEventTable(
+                mContext, USER_ID1, TIMESTAMP1, PACKAGE_NAME1);
+        BatteryTestUtils.insertDataToAppUsageEventTable(
+                mContext, USER_ID2, TIMESTAMP2, PACKAGE_NAME2);
+        BatteryTestUtils.insertDataToAppUsageEventTable(
+                mContext, USER_ID1, TIMESTAMP3, PACKAGE_NAME3);
+    }
+
     private Cursor getCursorOfLatestTimestamp(final long userId) {
         final Uri appUsageLatestTimestampQueryContentUri =
                 new Uri.Builder()
@@ -394,10 +430,28 @@ public final class BatteryUsageContentProviderTest {
                         .build();
 
         return mProvider.query(
-                        appUsageLatestTimestampQueryContentUri,
-                        /*strings=*/ null,
-                        /*s=*/ null,
-                        /*strings1=*/ null,
-                        /*s1=*/ null);
+                appUsageLatestTimestampQueryContentUri,
+                /*strings=*/ null,
+                /*s=*/ null,
+                /*strings1=*/ null,
+                /*s1=*/ null);
+    }
+
+    private Cursor getCursorOfAppUsage(final List<Long> userIds, final long queryTimestamp) {
+        final String queryUserIdString = userIds.stream()
+                .map(userId -> String.valueOf(userId))
+                .collect(Collectors.joining(","));
+        final Uri appUsageEventUri =
+                new Uri.Builder()
+                        .scheme(ContentResolver.SCHEME_CONTENT)
+                        .authority(DatabaseUtils.AUTHORITY)
+                        .appendPath(DatabaseUtils.APP_USAGE_EVENT_TABLE)
+                        .appendQueryParameter(
+                                DatabaseUtils.QUERY_KEY_TIMESTAMP, Long.toString(queryTimestamp))
+                        .appendQueryParameter(DatabaseUtils.QUERY_KEY_USERID, queryUserIdString)
+                        .build();
+
+        return mProvider.query(
+                appUsageEventUri, /*strings=*/ null, /*s=*/ null, /*strings1=*/ null, /*s1=*/ null);
     }
 }
