@@ -22,6 +22,7 @@ import static com.android.settings.Utils.PROPERTY_CLONED_APPS_ENABLED;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.DeviceConfig;
 
@@ -34,6 +35,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 
 import java.util.Arrays;
 import java.util.List;
@@ -111,5 +113,17 @@ public class ClonedAppsPreferenceController extends BasePreferenceController
     private void updateSummary(int clonedAppsCount, int availableAppsCount) {
         mPreference.setSummary(mContext.getResources().getString(
                 R.string.cloned_apps_summary, clonedAppsCount, availableAppsCount));
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        // Add this extra so that work tab is not displayed on Cloned Apps page.
+        if (getPreferenceKey().equals(preference.getKey())) {
+            final Bundle extras = preference.getExtras();
+            extras.putInt(ProfileSelectFragment.EXTRA_PROFILE,
+                    ProfileSelectFragment.ProfileType.PERSONAL);
+        }
+
+        return super.handlePreferenceTreeClick(preference);
     }
 }
