@@ -34,7 +34,6 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
@@ -77,15 +76,7 @@ public class PrivacyDashboardFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return getPreferenceScreenResId(getContext());
-    }
-
-    private static int getPreferenceScreenResId(Context context) {
-        if (SafetyCenterManagerWrapper.get().isEnabled(context)) {
-            return R.xml.privacy_advanced_settings;
-        } else {
-            return R.xml.privacy_dashboard_settings;
-        }
+        return R.xml.privacy_dashboard_settings;
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
@@ -94,7 +85,7 @@ public class PrivacyDashboardFragment extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
+            new BaseSearchIndexProvider(R.xml.privacy_dashboard_settings) {
                 /**
                  * If SafetyCenter is enabled, all of these entries will be in the More Settings
                  * page, and we don't want to index these entries.
@@ -105,9 +96,7 @@ public class PrivacyDashboardFragment extends DashboardFragment {
                     if (SafetyCenterManagerWrapper.get().isEnabled(context)) {
                         return null;
                     }
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = getPreferenceScreenResId(context);
-                    return Arrays.asList(sir);
+                    return super.getXmlResourcesToIndex(context, enabled);
                 }
 
                 @Override
