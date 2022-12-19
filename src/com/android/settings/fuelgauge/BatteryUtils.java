@@ -74,8 +74,6 @@ public class BatteryUtils {
     public static final int UID_REMOVED_APPS = -4;
     /** Special UID value for data usage by tethering. */
     public static final int UID_TETHERING = -5;
-    /** Special UID for aggregated other users. */
-    public static final long UID_OTHER_USERS = Long.MIN_VALUE;
 
     /** Flag to check if the dock defender mode has been temporarily bypassed */
     public static final String SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS = "dock_defender_bypass";

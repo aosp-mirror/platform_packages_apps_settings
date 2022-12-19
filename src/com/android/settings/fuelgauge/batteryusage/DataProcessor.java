@@ -589,13 +589,13 @@ public final class DataProcessor {
                 userHandle != null ? userHandle.getIdentifier() : Integer.MIN_VALUE;
         final List<BatteryDiffEntry> appEntries = new ArrayList<>();
         final List<BatteryDiffEntry> systemEntries = new ArrayList<>();
-        double consumePowerFromOtherUsers = 0f;
 
         for (BatteryHistEntry entry : batteryHistEntryList) {
             final boolean isFromOtherUsers = isConsumedFromOtherUsers(
                     currentUserId, workProfileUserId, entry);
+            // Not show other users' battery usage data.
             if (isFromOtherUsers) {
-                consumePowerFromOtherUsers += entry.mConsumePower;
+                continue;
             } else {
                 final BatteryDiffEntry currentBatteryDiffEntry = new BatteryDiffEntry(
                         context,
@@ -613,9 +613,6 @@ public final class DataProcessor {
                     appEntries.add(currentBatteryDiffEntry);
                 }
             }
-        }
-        if (consumePowerFromOtherUsers != 0) {
-            systemEntries.add(createOtherUsersEntry(context, consumePowerFromOtherUsers));
         }
 
         // If there is no data, return null instead of empty item.
@@ -1086,7 +1083,6 @@ public final class DataProcessor {
         allBatteryHistEntryKeys.addAll(nextBatteryHistMap.keySet());
         allBatteryHistEntryKeys.addAll(nextTwoBatteryHistMap.keySet());
 
-        double consumePowerFromOtherUsers = 0f;
         // Calculates all packages diff usage data in a specific time slot.
         for (String key : allBatteryHistEntryKeys) {
             final BatteryHistEntry currentEntry =
@@ -1095,6 +1091,20 @@ public final class DataProcessor {
                     nextBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
             final BatteryHistEntry nextTwoEntry =
                     nextTwoBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
+
+            final BatteryHistEntry selectedBatteryEntry =
+                    selectBatteryHistEntry(currentEntry, nextEntry, nextTwoEntry);
+            if (selectedBatteryEntry == null) {
+                continue;
+            }
+
+            // Not show other users' battery usage data.
+            final boolean isFromOtherUsers = isConsumedFromOtherUsers(
+                    currentUserId, workProfileUserId, selectedBatteryEntry);
+            if (isFromOtherUsers) {
+                continue;
+            }
+
             // Cumulative values is a specific time slot for a specific app.
             long foregroundUsageTimeInMs =
                     getDiffValue(
@@ -1137,11 +1147,6 @@ public final class DataProcessor {
                     && consumePower == 0) {
                 continue;
             }
-            final BatteryHistEntry selectedBatteryEntry =
-                    selectBatteryHistEntry(currentEntry, nextEntry, nextTwoEntry);
-            if (selectedBatteryEntry == null) {
-                continue;
-            }
             // Forces refine the cumulative value since it may introduce deviation error since we
             // will apply the interpolation arithmetic.
             final float totalUsageTimeInMs =
@@ -1165,30 +1170,21 @@ public final class DataProcessor {
                 cachedUsageConsumePower = cachedUsageConsumePower * ratio;
             }
 
-            final boolean isFromOtherUsers = isConsumedFromOtherUsers(
-                    currentUserId, workProfileUserId, selectedBatteryEntry);
-            if (isFromOtherUsers) {
-                consumePowerFromOtherUsers += consumePower;
+            final BatteryDiffEntry currentBatteryDiffEntry = new BatteryDiffEntry(
+                    context,
+                    foregroundUsageTimeInMs,
+                    backgroundUsageTimeInMs,
+                    consumePower,
+                    foregroundUsageConsumePower,
+                    foregroundServiceUsageConsumePower,
+                    backgroundUsageConsumePower,
+                    cachedUsageConsumePower,
+                    selectedBatteryEntry);
+            if (currentBatteryDiffEntry.isSystemEntry()) {
+                systemEntries.add(currentBatteryDiffEntry);
             } else {
-                final BatteryDiffEntry currentBatteryDiffEntry = new BatteryDiffEntry(
-                        context,
-                        foregroundUsageTimeInMs,
-                        backgroundUsageTimeInMs,
-                        consumePower,
-                        foregroundUsageConsumePower,
-                        foregroundServiceUsageConsumePower,
-                        backgroundUsageConsumePower,
-                        cachedUsageConsumePower,
-                        selectedBatteryEntry);
-                if (currentBatteryDiffEntry.isSystemEntry()) {
-                    systemEntries.add(currentBatteryDiffEntry);
-                } else {
-                    appEntries.add(currentBatteryDiffEntry);
-                }
+                appEntries.add(currentBatteryDiffEntry);
             }
-        }
-        if (consumePowerFromOtherUsers != 0) {
-            systemEntries.add(createOtherUsersEntry(context, consumePowerFromOtherUsers));
         }
 
         // If there is no data, return null instead of empty item.
@@ -1516,27 +1512,6 @@ public final class DataProcessor {
             }
         }
         return null;
-    }
-
-    private static BatteryDiffEntry createOtherUsersEntry(
-            Context context, final double consumePower) {
-        final ContentValues values = new ContentValues();
-        values.put(BatteryHistEntry.KEY_UID, BatteryUtils.UID_OTHER_USERS);
-        values.put(BatteryHistEntry.KEY_USER_ID, BatteryUtils.UID_OTHER_USERS);
-        values.put(BatteryHistEntry.KEY_CONSUMER_TYPE, ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
-        // We will show the percentage for the "other users" item only, the aggregated
-        // running time information is useless for users to identify individual apps.
-        final BatteryDiffEntry batteryDiffEntry = new BatteryDiffEntry(
-                context,
-                /*foregroundUsageTimeInMs=*/ 0,
-                /*backgroundUsageTimeInMs=*/ 0,
-                consumePower,
-                /*foregroundUsageConsumePower=*/ 0,
-                /*foregroundServiceUsageConsumePower=*/ 0,
-                /*backgroundUsageConsumePower=*/ 0,
-                /*cachedUsageConsumePower=*/ 0,
-                new BatteryHistEntry(values));
-        return batteryDiffEntry;
     }
 
     private static long getCurrentTimeMillis() {
