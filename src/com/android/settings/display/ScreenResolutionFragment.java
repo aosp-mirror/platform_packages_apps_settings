@@ -28,6 +28,7 @@ import android.graphics.drawable.Drawable;
 import android.hardware.display.DisplayManager;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Display;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
@@ -36,6 +37,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.SettingsStatsLog;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.display.DisplayDensityUtils;
@@ -167,14 +169,26 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
         mDisplayObserver.startObserve();
 
         /** For store settings globally. */
-        /** TODO(b/238061217): Moving to an atom with the same string */
+        /** TODO(b/259797244): Remove this once the atom is fully populated. */
         Settings.System.putString(
                 getContext().getContentResolver(),
                 SCREEN_RESOLUTION,
                 mode.getPhysicalWidth() + "x" + mode.getPhysicalHeight());
 
-        /** Apply the resolution change. */
-        mDefaultDisplay.setUserPreferredDisplayMode(mode);
+        try {
+            /** Apply the resolution change. */
+            mDefaultDisplay.setUserPreferredDisplayMode(mode);
+        } catch (Exception e) {
+            Log.e(TAG, "setUserPreferredDisplayMode() failed", e);
+            return;
+        }
+
+        /** Send the atom after resolution changed successfully. */
+        SettingsStatsLog.write(
+                SettingsStatsLog.USER_SELECTED_RESOLUTION,
+                mDefaultDisplay.getUniqueId().hashCode(),
+                mode.getPhysicalWidth(),
+                mode.getPhysicalHeight());
     }
 
     /** Get the key corresponding to the resolution. */
