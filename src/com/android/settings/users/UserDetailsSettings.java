@@ -127,7 +127,12 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
+        if (preference != null && preference.getKey() != null) {
+            mMetricsFeatureProvider.logSettingsTileClick(preference.getKey(), getMetricsCategory());
+        }
         if (preference == mRemoveUserPref) {
+            mMetricsFeatureProvider.action(getActivity(),
+                    UserMetricsUtils.getRemoveUserMetricCategory(mUserInfo));
             if (canDeleteUser()) {
                 if (mUserInfo.isGuest()) {
                     showDialog(DIALOG_CONFIRM_RESET_GUEST);
@@ -137,6 +142,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 return true;
             }
         } else if (preference == mSwitchUserPref) {
+            mMetricsFeatureProvider.action(getActivity(),
+                    UserMetricsUtils.getSwitchUserMetricCategory(mUserInfo));
             if (canSwitchUserNow()) {
                 if (shouldShowSetupPromptDialog()) {
                     showDialog(DIALOG_SETUP_USER);
@@ -164,9 +171,13 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mPhonePref) {
             if (Boolean.TRUE.equals(newValue)) {
+                mMetricsFeatureProvider.action(getActivity(),
+                        SettingsEnums.ACTION_ENABLE_USER_CALL);
                 showDialog(DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS);
                 return false;
             }
+            mMetricsFeatureProvider.action(getActivity(),
+                    SettingsEnums.ACTION_DISABLE_USER_CALL);
             enableCallsAndSms(false);
         }
         return true;
@@ -364,9 +375,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     void switchUser() {
         Trace.beginSection("UserDetailSettings.switchUser");
         try {
-            if (mUserInfo.isGuest()) {
-                mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_SWITCH_TO_GUEST);
-            }
             if (mUserCaps.mIsGuest && mUserCaps.mIsEphemeral) {
                 int guestUserId = UserHandle.myUserId();
                 // Using markGuestForDeletion allows us to create a new guest before this one is
