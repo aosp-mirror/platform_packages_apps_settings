@@ -38,7 +38,6 @@ import java.util.List;
 
 /** Account Setting page for personal profile. */
 public class AccountPersonalDashboardFragment extends DashboardFragment {
-
     private static final String TAG = "AccountPersonalFrag";
 
     @Override
@@ -53,7 +52,7 @@ public class AccountPersonalDashboardFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        if (CredentialManager.isServiceEnabled()) {
+        if (this.getContext() != null && CredentialManager.isServiceEnabled(this.getContext())) {
             return R.xml.accounts_personal_dashboard_settings_credman;
         }
         return R.xml.accounts_personal_dashboard_settings;
@@ -67,8 +66,7 @@ public class AccountPersonalDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
-        if (CredentialManager.isServiceEnabled()) {
+        if (CredentialManager.isServiceEnabled(context)) {
             CredentialManagerPreferenceController cmpp =
                     use(CredentialManagerPreferenceController.class);
             cmpp.setParentFragment(this);

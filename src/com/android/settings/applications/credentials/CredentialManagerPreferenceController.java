@@ -96,7 +96,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         }
 
         Object service = context.getSystemService(Context.CREDENTIAL_SERVICE);
-        if (service != null && CredentialManager.isServiceEnabled()) {
+
+        if (service != null && CredentialManager.isServiceEnabled(context)) {
             return (CredentialManager) service;
         }
 

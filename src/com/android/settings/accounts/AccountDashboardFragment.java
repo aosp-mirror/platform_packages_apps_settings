@@ -25,6 +25,7 @@ import android.content.pm.UserInfo;
 import android.credentials.CredentialManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.applications.autofill.PasswordsPreferenceController;
@@ -46,7 +47,6 @@ import java.util.List;
 
 @SearchIndexable
 public class AccountDashboardFragment extends DashboardFragment {
-
     private static final String TAG = "AccountDashboardFrag";
 
     @Override
@@ -61,7 +61,7 @@ public class AccountDashboardFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return getPreferenceLayoutResId();
+        return getPreferenceLayoutResId(this.getContext());
     }
 
     @Override
@@ -72,7 +72,7 @@ public class AccountDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (CredentialManager.isServiceEnabled()) {
+        if (CredentialManager.isServiceEnabled(context)) {
             CredentialManagerPreferenceController cmpp =
                     use(CredentialManagerPreferenceController.class);
             cmpp.setParentFragment(this);
@@ -118,14 +118,21 @@ public class AccountDashboardFragment extends DashboardFragment {
         controllers.add(new AutoSyncWorkDataPreferenceController(context, parent));
     }
 
-    public static int getPreferenceLayoutResId() {
-        return CredentialManager.isServiceEnabled()
+    private static int getPreferenceLayoutResId(Context context) {
+        return (context != null && CredentialManager.isServiceEnabled(context))
                 ? R.xml.accounts_dashboard_settings_credman
                 : R.xml.accounts_dashboard_settings;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(getPreferenceLayoutResId()) {
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = getPreferenceLayoutResId(context);
+                    return List.of(sir);
+                }
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
