@@ -24,13 +24,17 @@ import android.os.Looper;
 import android.util.Log;
 
 import com.android.settings.core.instrumentation.ElapsedTimeUtils;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.time.Duration;
 
 /** Receives broadcasts to start or stop the periodic fetching job. */
 public final class BootBroadcastReceiver extends BroadcastReceiver {
     private static final String TAG = "BootBroadcastReceiver";
-    private static final long RESCHEDULE_FOR_BOOT_ACTION = Duration.ofSeconds(6).toMillis();
+    private static final long RESCHEDULE_FOR_BOOT_ACTION_WITH_DELAY =
+            Duration.ofMinutes(40).toMillis();
+    private static final long RESCHEDULE_FOR_BOOT_ACTION_WITHOUT_DELAY =
+            Duration.ofSeconds(6).toMillis();
 
     private final Handler mHandler = new Handler(Looper.getMainLooper());
 
@@ -67,7 +71,7 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
             case Intent.ACTION_TIME_CHANGED:
                 Log.d(TAG, "refresh job and clear all data from action=" + action);
                 DatabaseUtils.clearAll(context);
-                PeriodicJobManager.getInstance(context).refreshJob();
+                PeriodicJobManager.getInstance(context).refreshJob(/*fromBoot=*/ false);
                 break;
             default:
                 Log.w(TAG, "receive unsupported action=" + action);
@@ -78,15 +82,23 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
             final Intent recheckIntent = new Intent(ACTION_PERIODIC_JOB_RECHECK);
             recheckIntent.setClass(context, BootBroadcastReceiver.class);
             mHandler.postDelayed(() -> context.sendBroadcast(recheckIntent),
-                    RESCHEDULE_FOR_BOOT_ACTION);
+                    getRescheduleTimeForBootAction(context));
         } else if (ACTION_SETUP_WIZARD_FINISHED.equals(action)) {
             ElapsedTimeUtils.storeSuwFinishedTimestamp(context, System.currentTimeMillis());
         }
     }
 
+    private long getRescheduleTimeForBootAction(Context context) {
+        final boolean delayHourlyJobWhenBooting =
+                FeatureFactory.getFactory(context)
+                        .getPowerUsageFeatureProvider(context)
+                        .delayHourlyJobWhenBooting();
+        return delayHourlyJobWhenBooting
+                ? RESCHEDULE_FOR_BOOT_ACTION_WITH_DELAY
+                : RESCHEDULE_FOR_BOOT_ACTION_WITHOUT_DELAY;
+    }
+
     private static void refreshJobs(Context context) {
-        // Clears useless data from battery usage database if needed.
-        DatabaseUtils.clearExpiredDataIfNeeded(context);
-        PeriodicJobManager.getInstance(context).refreshJob();
+        PeriodicJobManager.getInstance(context).refreshJob(/*fromBoot=*/ true);
     }
 }

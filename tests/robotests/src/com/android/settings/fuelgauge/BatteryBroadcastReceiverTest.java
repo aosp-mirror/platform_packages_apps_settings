@@ -142,7 +142,7 @@ public class BatteryBroadcastReceiverTest {
 
     @Test
     public void testRegister_updateBatteryStatus() {
-        doReturn(mChargingIntent).when(mContext).registerReceiver(any(), any());
+        doReturn(mChargingIntent).when(mContext).registerReceiver(any(), any(), anyInt());
 
         mBatteryBroadcastReceiver.register();
         mBatteryBroadcastReceiver.register();

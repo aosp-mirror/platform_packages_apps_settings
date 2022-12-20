@@ -57,7 +57,7 @@ public final class PeriodicJobManagerTest {
 
     @Test
     public void refreshJob_refreshesAlarmJob() {
-        mPeriodicJobManager.refreshJob();
+        mPeriodicJobManager.refreshJob(/*fromBoot=*/ false);
 
         final ShadowAlarmManager.ScheduledAlarm alarm =
                 mShadowAlarmManager.peekNextScheduledAlarm();
@@ -76,7 +76,7 @@ public final class PeriodicJobManagerTest {
         FakeClock fakeClock = new FakeClock();
         fakeClock.setCurrentTime(currentTimeDuration);
 
-        assertThat(PeriodicJobManager.getTriggerAtMillis(fakeClock))
+        assertThat(PeriodicJobManager.getTriggerAtMillis(mContext, fakeClock, /*fromBoot=*/ false))
                 .isEqualTo(currentTimeDuration.plusMinutes(timeSlotUnit).toMillis());
     }
 
@@ -89,7 +89,7 @@ public final class PeriodicJobManagerTest {
         fakeClock.setCurrentTime(
                 currentTimeDuration.plusMinutes(1L).plusMillis(51L));
 
-        assertThat(PeriodicJobManager.getTriggerAtMillis(fakeClock))
+        assertThat(PeriodicJobManager.getTriggerAtMillis(mContext, fakeClock, /*fromBoot=*/ true))
                 .isEqualTo(currentTimeDuration.plusMinutes(timeSlotUnit).toMillis());
     }
 }

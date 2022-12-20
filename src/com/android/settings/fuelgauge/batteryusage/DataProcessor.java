@@ -89,9 +89,6 @@ public final class DataProcessor {
 
     @VisibleForTesting
     static final int SELECTED_INDEX_ALL = BatteryChartViewModel.SELECTED_INDEX_ALL;
-    @VisibleForTesting
-    static final String CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER =
-            "CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER";
 
     @VisibleForTesting
     static long sFakeCurrentTimeMillis = 0;
@@ -100,6 +97,9 @@ public final class DataProcessor {
     static IUsageStatsManager sUsageStatsManager =
             IUsageStatsManager.Stub.asInterface(
                     ServiceManager.getService(Context.USAGE_STATS_SERVICE));
+
+    public static final String CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER =
+            "CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER";
 
     /** A callback listener when battery usage loading async task is executed. */
     public interface UsageMapAsyncResponse {
@@ -200,18 +200,9 @@ public final class DataProcessor {
     @Nullable
     public static Map<Long, UsageEvents> getAppUsageEvents(Context context) {
         final long start = System.currentTimeMillis();
-        final boolean isWorkProfileUser = DatabaseUtils.isWorkProfile(context);
-        Log.d(TAG, "getAppUsageEvents() isWorkProfileUser:" + isWorkProfileUser);
-        if (isWorkProfileUser) {
-            try {
-                context = context.createPackageContextAsUser(
-                        /*packageName=*/ context.getPackageName(),
-                        /*flags=*/ 0,
-                        /*user=*/ UserHandle.OWNER);
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.e(TAG, "context.createPackageContextAsUser() fail:" + e);
-                return null;
-            }
+        context = DatabaseUtils.getOwnerContext(context);
+        if (context == null) {
+            return null;
         }
         final Map<Long, UsageEvents> resultMap = new HashMap();
         final UserManager userManager = context.getSystemService(UserManager.class);
@@ -220,19 +211,9 @@ public final class DataProcessor {
         }
         final long sixDaysAgoTimestamp =
                 DatabaseUtils.getTimestampSixDaysAgo(Calendar.getInstance());
-        final String callingPackage = context.getPackageName();
-        final long now = System.currentTimeMillis();
         for (final UserInfo user : userManager.getAliveUsers()) {
-            // When the user is not unlocked, UsageStatsManager will return null, so bypass the
-            // following data loading logics directly.
-            if (!userManager.isUserUnlocked(user.id)) {
-                Log.w(TAG, "fail to load app usage event for user :" + user.id + " because locked");
-                continue;
-            }
-            final long startTime = DatabaseUtils.getAppUsageStartTimestampOfUser(
-                    context, user.id, sixDaysAgoTimestamp);
             final UsageEvents events = getAppUsageEventsForUser(
-                    sUsageStatsManager, startTime, now, user.id, callingPackage);
+                    context, userManager, user.id, sixDaysAgoTimestamp);
             if (events != null) {
                 resultMap.put(Long.valueOf(user.id), events);
             }
@@ -241,6 +222,30 @@ public final class DataProcessor {
         Log.d(TAG, String.format("getAppUsageEvents() for all unlocked users in %d/ms",
                 elapsedTime));
         return resultMap.isEmpty() ? null : resultMap;
+    }
+
+    /**
+     * Gets the {@link UsageEvents} from system service for the specific user.
+     */
+    @Nullable
+    public static UsageEvents getAppUsageEventsForUser(Context context, final int userID) {
+        final long start = System.currentTimeMillis();
+        context = DatabaseUtils.getOwnerContext(context);
+        if (context == null) {
+            return null;
+        }
+        final UserManager userManager = context.getSystemService(UserManager.class);
+        if (userManager == null) {
+            return null;
+        }
+        final long sixDaysAgoTimestamp =
+                DatabaseUtils.getTimestampSixDaysAgo(Calendar.getInstance());
+        final UsageEvents events = getAppUsageEventsForUser(
+                context, userManager, userID, sixDaysAgoTimestamp);
+        final long elapsedTime = System.currentTimeMillis() - start;
+        Log.d(TAG, String.format("getAppUsageEventsForUser() for user %d in %d/ms",
+                userID, elapsedTime));
+        return events;
     }
 
     /**
@@ -333,6 +338,17 @@ public final class DataProcessor {
             entry.mPercent = percentOfTotal;
         }
         return usageList;
+    }
+
+    /**
+     * @return Returns the latest battery history map loaded from the battery stats service.
+     */
+    public static Map<String, BatteryHistEntry> getCurrentBatteryHistoryMapFromStatsService(
+            final Context context) {
+        final List<BatteryHistEntry> batteryHistEntryList =
+                getBatteryHistListFromFromStatsService(context);
+        return batteryHistEntryList == null ? new HashMap<>()
+                : batteryHistEntryList.stream().collect(Collectors.toMap(e -> e.getKey(), e -> e));
     }
 
     /**
@@ -621,6 +637,24 @@ public final class DataProcessor {
 
     @Nullable
     private static UsageEvents getAppUsageEventsForUser(
+            Context context, final UserManager userManager, final int userID,
+            final long sixDaysAgoTimestamp) {
+        final String callingPackage = context.getPackageName();
+        final long now = System.currentTimeMillis();
+        // When the user is not unlocked, UsageStatsManager will return null, so bypass the
+        // following data loading logics directly.
+        if (!userManager.isUserUnlocked(userID)) {
+            Log.w(TAG, "fail to load app usage event for user :" + userID + " because locked");
+            return null;
+        }
+        final long startTime = DatabaseUtils.getAppUsageStartTimestampOfUser(
+                context, userID, sixDaysAgoTimestamp);
+        return loadAppUsageEventsForUserFromService(
+                sUsageStatsManager, startTime, now, userID, callingPackage);
+    }
+
+    @Nullable
+    private static UsageEvents loadAppUsageEventsForUserFromService(
             final IUsageStatsManager usageStatsManager, final long startTime, final long endTime,
             final int userId, final String callingPackage) {
         final long start = System.currentTimeMillis();
@@ -670,14 +704,6 @@ public final class DataProcessor {
         }
 
         return batteryHistEntryList;
-    }
-
-    private static Map<String, BatteryHistEntry> getCurrentBatteryHistoryMapFromStatsService(
-            final Context context) {
-        final List<BatteryHistEntry> batteryHistEntryList =
-                getBatteryHistListFromFromStatsService(context);
-        return batteryHistEntryList == null ? new HashMap<>()
-                : batteryHistEntryList.stream().collect(Collectors.toMap(e -> e.getKey(), e -> e));
     }
 
     @VisibleForTesting
