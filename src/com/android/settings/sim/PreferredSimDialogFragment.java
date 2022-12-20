@@ -16,6 +16,8 @@
 
 package com.android.settings.sim;
 
+import static android.telephony.SubscriptionManager.PROFILE_CLASS_PROVISIONING;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
@@ -95,7 +97,8 @@ public class PreferredSimDialogFragment extends SimDialogFragment implements
         }
 
         final SubscriptionInfo info = getPreferredSubscription();
-        if (info == null) {
+        if (info == null || (info.isEmbedded()
+                && info.getProfileClass() == PROFILE_CLASS_PROVISIONING)) {
             dismiss();
             return;
         }
