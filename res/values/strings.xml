@@ -9726,8 +9726,12 @@
     <!-- AutoFill strings -->
     <!-- Preference label for choosing auto-fill service. [CHAR LIMIT=60] -->
     <string name="autofill_app">Autofill service</string>
+    <!-- Preference label for choosing auto-fill service. [CHAR LIMIT=60] -->
+    <string name="default_autofill_app">Default autofill service</string>
     <!-- Preference category for showing auto-fill services with saved passwords. [CHAR LIMIT=60] -->
     <string name="autofill_passwords">Passwords</string>
+    <!-- Preference category for showing credman services with saved credentials. [CHAR LIMIT=60] -->
+    <string name="credman_credentials">Password and identity services</string>
     <!-- Summary for passwords settings that shows how many passwords are saved for each autofill
          service. [CHAR LIMIT=NONE] -->
     <plurals name="autofill_passwords_count">
@@ -9739,6 +9743,8 @@
     <string name="autofill_passwords_count_placeholder" translatable="false">\u2014</string>
     <!-- Keywords for the auto-fill feature. [CHAR LIMIT=NONE] -->
     <string name="autofill_keywords">auto, fill, autofill, password</string>
+    <!-- Keywords for the credman feature. [CHAR LIMIT=NONE] -->
+    <string name="credman_keywords">credentials, passkey, password</string>
 
     <!-- Message of the warning dialog for setting the auto-fill app. [CHAR_LIMIT=NONE] -->
     <string name="autofill_confirmation_message">
@@ -9750,6 +9756,21 @@
         your screen to determine what can be autofilled.
         ]]>
     </string>
+
+    <!-- Title of the warning dialog for disabling the credential provider. [CHAR_LIMIT=NONE] -->
+    <string name="credman_confirmation_message_title">Turn off %1$s\?</string>
+
+    <!-- Message of the warning dialog for disabling the credential provider. [CHAR_LIMIT=NONE] -->
+    <string name="credman_confirmation_message">Saved info like addresses or payment methods won\'t be filled in when you sign in. To keep your saved info filled in, set a default autofill service.</string>
+
+    <!-- Title of the error dialog when too many credential providers are selected. [CHAR_LIMIT=NONE] -->
+    <string name="credman_error_message_title">Password and identity services limit</string>
+
+    <!-- Message of the error dialog when too many credential providers are selected. [CHAR_LIMIT=NONE] -->
+    <string name="credman_error_message">You can have up to 5 autofill and password services active at the same time. Turn off a service to add more.</string>
+
+    <!-- Positive button to turn off credential manager provider (confirmation). [CHAR LIMIT=60] -->
+    <string name="credman_confirmation_message_positive_button">Turn off</string>
 
     <!-- Preference category for autofill debugging development settings. [CHAR LIMIT=25] -->
     <string name="debug_autofill_category">Autofill</string>
