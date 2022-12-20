@@ -34,6 +34,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -76,6 +77,7 @@ public class RequestToggleWiFiActivityTest {
     }
 
     @Test
+    @Ignore
     public void getAppLabel_nullPackageName_returnNull() {
         fakeCallingPackage(null);
 
@@ -83,6 +85,7 @@ public class RequestToggleWiFiActivityTest {
     }
 
     @Test
+    @Ignore
     public void getAppLabel_settingsPackageName_returnNotNull() {
         fakeCallingPackage("com.android.settings");
 

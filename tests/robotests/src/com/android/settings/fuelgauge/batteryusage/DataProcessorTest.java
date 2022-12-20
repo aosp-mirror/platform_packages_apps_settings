@@ -64,7 +64,7 @@ import java.util.Set;
 import java.util.TimeZone;
 
 @RunWith(RobolectricTestRunner.class)
-public class DataProcessorTest {
+public final class DataProcessorTest {
     private static final String FAKE_ENTRY_KEY = "fake_entry_key";
 
     private Context mContext;
@@ -177,7 +177,7 @@ public class DataProcessorTest {
     }
 
     @Test
-    public void getAppUsageEvents_lockedUser_returnNull() throws RemoteException {
+    public void getAppUsageEvents_lockedUser_returnNull() {
         UserInfo userInfo = new UserInfo(/*id=*/ 0, "user_0", /*flags=*/ 0);
         final List<UserInfo> userInfoList = new ArrayList<>();
         userInfoList.add(userInfo);
@@ -203,6 +203,37 @@ public class DataProcessorTest {
         final Map<Long, UsageEvents> resultMap = DataProcessor.getAppUsageEvents(mContext);
 
         assertThat(resultMap).isNull();
+    }
+
+    @Test
+    public void getAppUsageEventsForUser_returnExpectedResult() throws RemoteException {
+        final int userId = 1;
+        doReturn(true).when(mUserManager).isUserUnlocked(userId);
+        doReturn(mUsageEvents1)
+                .when(mUsageStatsManager)
+                .queryEventsForUser(anyLong(), anyLong(), anyInt(), any());
+
+        assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId))
+                .isEqualTo(mUsageEvents1);
+    }
+
+    @Test
+    public void getAppUsageEventsForUser_lockedUser_returnNull() {
+        final int userId = 1;
+        // Test locked user.
+        doReturn(false).when(mUserManager).isUserUnlocked(userId);
+
+        assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId)).isNull();
+    }
+
+    @Test
+    public void getAppUsageEventsForUser_nullUsageEvents_returnNull() throws RemoteException {
+        final int userId = 1;
+        doReturn(true).when(mUserManager).isUserUnlocked(userId);
+        doReturn(null)
+                .when(mUsageStatsManager).queryEventsForUser(anyLong(), anyLong(), anyInt(), any());
+
+        assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId)).isNull();
     }
 
     @Test public void generateAppUsageEventListFromUsageEvents_returnExpectedResult() {
@@ -231,11 +262,11 @@ public class DataProcessorTest {
                 DataProcessor.generateAppUsageEventListFromUsageEvents(mContext, appUsageEvents);
 
         assertThat(appUsageEventList.size()).isEqualTo(3);
-        assetAppUsageEvent(
+        assertAppUsageEvent(
                 appUsageEventList.get(0), AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 2);
-        assetAppUsageEvent(
+        assertAppUsageEvent(
                 appUsageEventList.get(1), AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 3);
-        assetAppUsageEvent(
+        assertAppUsageEvent(
                 appUsageEventList.get(2), AppUsageEventType.DEVICE_SHUTDOWN, /*timestamp=*/ 4);
     }
 
@@ -1327,7 +1358,7 @@ public class DataProcessorTest {
         return event;
     }
 
-    private void assetAppUsageEvent(
+    private void assertAppUsageEvent(
             final AppUsageEvent event, final AppUsageEventType eventType, final long timestamp) {
         assertThat(event.getType()).isEqualTo(eventType);
         assertThat(event.getTimestamp()).isEqualTo(timestamp);

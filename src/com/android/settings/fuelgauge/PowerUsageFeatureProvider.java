@@ -136,6 +136,11 @@ public interface PowerUsageFeatureProvider {
     boolean isExtraDefend();
 
     /**
+     * Returns {@code true} if delay the hourly job when device is booting.
+     */
+    boolean delayHourlyJobWhenBooting();
+
+    /**
      * Gets a intent for one time bypass charge limited to resume charging.
      */
     Intent getResumeChargeIntent(boolean isDockDefender);
