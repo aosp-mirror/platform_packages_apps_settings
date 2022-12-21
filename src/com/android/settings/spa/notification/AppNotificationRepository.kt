@@ -31,8 +31,10 @@ import android.os.RemoteException
 import android.os.ServiceManager
 import android.util.Log
 import com.android.settings.R
+import com.android.settingslib.spa.framework.util.formatString
 import com.android.settingslib.spaprivileged.model.app.IPackageManagers
 import com.android.settingslib.spaprivileged.model.app.PackageManagers
+import com.android.settingslib.spaprivileged.model.app.userId
 import java.util.concurrent.TimeUnit
 import kotlin.math.max
 import kotlin.math.roundToInt
@@ -50,6 +52,11 @@ data class NotificationSentState(
     var sentCount: Int = 0,
 )
 
+interface IAppNotificationRepository {
+    /** Gets the notification summary for the given application. */
+    fun getNotificationSummary(app: ApplicationInfo): String
+}
+
 class AppNotificationRepository(
     private val context: Context,
     private val packageManagers: IPackageManagers = PackageManagers,
@@ -59,7 +66,7 @@ class AppNotificationRepository(
     private val notificationManager: INotificationManager = INotificationManager.Stub.asInterface(
         ServiceManager.getService(Context.NOTIFICATION_SERVICE)
     ),
-) {
+) : IAppNotificationRepository {
     fun getAggregatedUsageEvents(userIdFlow: Flow<Int>): Flow<Map<String, NotificationSentState>> =
         userIdFlow.map { userId ->
             val aggregatedStats = mutableMapOf<String, NotificationSentState>()
@@ -113,6 +120,58 @@ class AppNotificationRepository(
             Log.w(TAG, "Error calling INotificationManager", e)
             false
         }
+    }
+
+    override fun getNotificationSummary(app: ApplicationInfo): String {
+        if (!isEnabled(app)) return context.getString(R.string.off)
+        val channelCount = getChannelCount(app)
+        if (channelCount == 0) {
+            return calculateFrequencySummary(getSentCount(app))
+        }
+        val blockedChannelCount = getBlockedChannelCount(app)
+        if (channelCount == blockedChannelCount) return context.getString(R.string.off)
+        val frequencySummary = calculateFrequencySummary(getSentCount(app))
+        if (blockedChannelCount == 0) return frequencySummary
+        return context.getString(
+            R.string.notifications_enabled_with_info,
+            frequencySummary,
+            context.formatString(
+                R.string.notifications_categories_off, "count" to blockedChannelCount
+            )
+        )
+    }
+
+    private fun getSentCount(app: ApplicationInfo): Int {
+        var sentCount = 0
+        queryEventsForPackageForUser(app).forEachNotificationEvent { sentCount++ }
+        return sentCount
+    }
+
+    private fun queryEventsForPackageForUser(app: ApplicationInfo): UsageEvents? {
+        val now = System.currentTimeMillis()
+        val startTime = now - TimeUnit.DAYS.toMillis(DAYS_TO_CHECK)
+        return try {
+            usageStatsManager.queryEventsForPackageForUser(
+                startTime, now, app.userId, app.packageName, context.packageName
+            )
+        } catch (e: RemoteException) {
+            Log.e(TAG, "Failed IUsageStatsManager.queryEventsForPackageForUser(): ", e)
+            null
+        }
+    }
+
+    private fun getChannelCount(app: ApplicationInfo): Int = try {
+        notificationManager.getNumNotificationChannelsForPackage(app.packageName, app.uid, false)
+    } catch (e: Exception) {
+        Log.w(TAG, "Error calling INotificationManager", e)
+        0
+    }
+
+    private fun getBlockedChannelCount(app: ApplicationInfo): Int = try {
+        notificationManager.getBlockedChannelCount(app.packageName, app.uid)
+    } catch (e: Exception) {
+        Log.w(TAG, "Error calling INotificationManager", e)
+        0
     }
 
     fun calculateFrequencySummary(sentCount: Int): String {
