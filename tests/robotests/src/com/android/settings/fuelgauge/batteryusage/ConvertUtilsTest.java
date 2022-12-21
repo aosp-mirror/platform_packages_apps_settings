@@ -27,6 +27,7 @@ import android.app.usage.UsageEvents.Event;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.MatrixCursor;
 import android.os.BatteryManager;
 import android.os.BatteryUsageStats;
 import android.os.LocaleList;
@@ -333,6 +334,68 @@ public final class ConvertUtilsTest {
                 mContext, event, userId);
 
         assertThat(appUsageEvent).isNull();
+    }
+
+    @Test
+    public void convertToAppUsageEventFromCursor_returnExpectedResult() {
+        final MatrixCursor cursor = new MatrixCursor(
+                new String[]{
+                        AppUsageEventEntity.KEY_UID,
+                        AppUsageEventEntity.KEY_USER_ID,
+                        AppUsageEventEntity.KEY_PACKAGE_NAME,
+                        AppUsageEventEntity.KEY_TIMESTAMP,
+                        AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE,
+                        AppUsageEventEntity.KEY_TASK_ROOT_PACKAGE_NAME,
+                        AppUsageEventEntity.KEY_INSTANCE_ID});
+        cursor.addRow(
+                new Object[]{
+                        101L,
+                        1001L,
+                        "com.android.settings1",
+                        10001L,
+                        AppUsageEventType.DEVICE_SHUTDOWN.getNumber(),
+                        "com.android.settings2",
+                        100001L});
+        cursor.moveToFirst();
+
+        final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEventFromCursor(cursor);
+
+        assertThat(appUsageEvent.getUid()).isEqualTo(101L);
+        assertThat(appUsageEvent.getUserId()).isEqualTo(1001L);
+        assertThat(appUsageEvent.getPackageName()).isEqualTo("com.android.settings1");
+        assertThat(appUsageEvent.getTimestamp()).isEqualTo(10001L);
+        assertThat(appUsageEvent.getType()).isEqualTo(AppUsageEventType.DEVICE_SHUTDOWN);
+        assertThat(appUsageEvent.getTaskRootPackageName()).isEqualTo("com.android.settings2");
+        assertThat(appUsageEvent.getInstanceId()).isEqualTo(100001L);
+    }
+
+    @Test
+    public void convertToAppUsageEventFromCursor_emptyInstanceIdAndRootName_returnExpectedResult() {
+        final MatrixCursor cursor = new MatrixCursor(
+                new String[]{
+                        AppUsageEventEntity.KEY_UID,
+                        AppUsageEventEntity.KEY_USER_ID,
+                        AppUsageEventEntity.KEY_PACKAGE_NAME,
+                        AppUsageEventEntity.KEY_TIMESTAMP,
+                        AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE});
+        cursor.addRow(
+                new Object[]{
+                        101L,
+                        1001L,
+                        "com.android.settings1",
+                        10001L,
+                        AppUsageEventType.DEVICE_SHUTDOWN.getNumber()});
+        cursor.moveToFirst();
+
+        final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEventFromCursor(cursor);
+
+        assertThat(appUsageEvent.getUid()).isEqualTo(101L);
+        assertThat(appUsageEvent.getUserId()).isEqualTo(1001L);
+        assertThat(appUsageEvent.getPackageName()).isEqualTo("com.android.settings1");
+        assertThat(appUsageEvent.getTimestamp()).isEqualTo(10001L);
+        assertThat(appUsageEvent.getType()).isEqualTo(AppUsageEventType.DEVICE_SHUTDOWN);
+        assertThat(appUsageEvent.getTaskRootPackageName()).isEqualTo("");
+        assertThat(appUsageEvent.getInstanceId()).isEqualTo(0);
     }
 
     @Test

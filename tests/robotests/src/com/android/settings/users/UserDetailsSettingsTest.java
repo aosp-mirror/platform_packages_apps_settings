@@ -91,6 +91,7 @@ public class UserDetailsSettingsTest {
     private static final String KEY_APP_COPYING = "app_copying";
 
     private static final int DIALOG_CONFIRM_REMOVE = 1;
+    private static final int DIALOG_CONFIRM_RESET_GUEST = 4;
 
     @Mock
     private TelephonyManager mTelephonyManager;
@@ -469,8 +470,24 @@ public class UserDetailsSettingsTest {
         mFragment.onPreferenceClick(mSwitchUserPref);
 
         verify(mFragment).switchUser();
-        verify(mMetricsFeatureProvider, never()).action(any(),
-                eq(SettingsEnums.ACTION_SWITCH_TO_GUEST));
+        verify(mMetricsFeatureProvider).action(any(),
+                eq(SettingsEnums.ACTION_SWITCH_TO_USER));
+    }
+
+    @Test
+    public void onPreferenceClick_switchToRestrictedClicked_canSwitch_shouldSwitch() {
+        setupSelectedRestrictedUser();
+        mUserManager.setSwitchabilityStatus(SWITCHABILITY_STATUS_OK);
+        mFragment.mSwitchUserPref = mSwitchUserPref;
+        mFragment.mRemoveUserPref = mRemoveUserPref;
+        mFragment.mAppAndContentAccessPref = mAppAndContentAccessPref;
+        mFragment.mUserInfo = mUserInfo;
+
+        mFragment.onPreferenceClick(mSwitchUserPref);
+
+        verify(mFragment).switchUser();
+        verify(mMetricsFeatureProvider).action(any(),
+                eq(SettingsEnums.ACTION_SWITCH_TO_RESTRICTED_USER));
     }
 
     @Test
@@ -503,6 +520,41 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
+    public void onPreferenceClick_removeGuestClicked_canDelete_shouldShowDialog() {
+        setupSelectedGuest();
+        mFragment.mUserInfo = mUserInfo;
+        mUserManager.setIsAdminUser(true);
+        mFragment.mSwitchUserPref = mSwitchUserPref;
+        mFragment.mRemoveUserPref = mRemoveUserPref;
+        mFragment.mAppAndContentAccessPref = mAppAndContentAccessPref;
+        doNothing().when(mFragment).showDialog(anyInt());
+
+        mFragment.onPreferenceClick(mRemoveUserPref);
+
+        verify(mMetricsFeatureProvider).action(any(), eq(SettingsEnums.ACTION_REMOVE_GUEST_USER));
+        verify(mFragment).canDeleteUser();
+        verify(mFragment).showDialog(DIALOG_CONFIRM_RESET_GUEST);
+    }
+
+    @Test
+    public void onPreferenceClick_removeRestrictedClicked_canDelete_shouldShowDialog() {
+        setupSelectedRestrictedUser();
+        mFragment.mUserInfo = mUserInfo;
+        mUserManager.setIsAdminUser(true);
+        mFragment.mSwitchUserPref = mSwitchUserPref;
+        mFragment.mRemoveUserPref = mRemoveUserPref;
+        mFragment.mAppAndContentAccessPref = mAppAndContentAccessPref;
+        doNothing().when(mFragment).showDialog(anyInt());
+
+        mFragment.onPreferenceClick(mRemoveUserPref);
+
+        verify(mMetricsFeatureProvider)
+                .action(any(), eq(SettingsEnums.ACTION_REMOVE_RESTRICTED_USER));
+        verify(mFragment).canDeleteUser();
+        verify(mFragment).showDialog(DIALOG_CONFIRM_REMOVE);
+    }
+
+    @Test
     public void onPreferenceClick_removeClicked_canDelete_shouldShowDialog() {
         setupSelectedUser();
         mFragment.mUserInfo = mUserInfo;
@@ -514,6 +566,7 @@ public class UserDetailsSettingsTest {
 
         mFragment.onPreferenceClick(mRemoveUserPref);
 
+        verify(mMetricsFeatureProvider).action(any(), eq(SettingsEnums.ACTION_REMOVE_USER));
         verify(mFragment).canDeleteUser();
         verify(mFragment).showDialog(DIALOG_CONFIRM_REMOVE);
     }

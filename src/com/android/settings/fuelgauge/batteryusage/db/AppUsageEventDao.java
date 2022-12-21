@@ -41,6 +41,11 @@ public interface AppUsageEventDao {
     @Query("SELECT * FROM AppUsageEventEntity WHERE timestamp > :timestamp ORDER BY timestamp DESC")
     List<AppUsageEventEntity> getAllAfter(long timestamp);
 
+    /** Gets the {@link Cursor} of all recorded data after a specific timestamp of the users. */
+    @Query("SELECT * FROM AppUsageEventEntity WHERE timestamp >= :timestamp"
+            + " AND userId IN (:userIds) ORDER BY timestamp ASC")
+    Cursor getAllForUsersAfter(List<Long> userIds, long timestamp);
+
     /** Gets the {@link Cursor} of the latest timestamp of the specific user. */
     @Query("SELECT MAX(timestamp) as timestamp FROM AppUsageEventEntity WHERE userId = :userId")
     Cursor getLatestTimestampOfUser(long userId);

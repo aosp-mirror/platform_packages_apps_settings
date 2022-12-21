@@ -41,7 +41,6 @@ import android.os.RemoteException;
 import android.os.UserManager;
 import android.text.format.DateUtils;
 
-import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 
@@ -213,7 +212,7 @@ public final class DataProcessorTest {
                 .when(mUsageStatsManager)
                 .queryEventsForUser(anyLong(), anyLong(), anyInt(), any());
 
-        assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId))
+        assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId, 0))
                 .isEqualTo(mUsageEvents1);
     }
 
@@ -223,7 +222,7 @@ public final class DataProcessorTest {
         // Test locked user.
         doReturn(false).when(mUserManager).isUserUnlocked(userId);
 
-        assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId)).isNull();
+        assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId, 0)).isNull();
     }
 
     @Test
@@ -233,7 +232,7 @@ public final class DataProcessorTest {
         doReturn(null)
                 .when(mUsageStatsManager).queryEventsForUser(anyLong(), anyLong(), anyInt(), any());
 
-        assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId)).isNull();
+        assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId, 0)).isNull();
     }
 
     @Test public void generateAppUsageEventListFromUsageEvents_returnExpectedResult() {
@@ -647,6 +646,7 @@ public final class DataProcessorTest {
     public void getBatteryUsageMap_emptyHistoryMap_returnNull() {
         final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
                 new ArrayList<>();
+
         hourlyBatteryLevelsPerDay.add(
                 new BatteryLevelData.PeriodBatteryLevelData(new ArrayList<>(), new ArrayList<>()));
 
@@ -933,13 +933,7 @@ public final class DataProcessorTest {
                 /*foregroundUsageConsumePower=*/ 5, /*foregroundServiceUsageConsumePower=*/ 5,
                 /*backgroundUsageConsumePower=*/ 5, /*cachedUsageConsumePower=*/ 5,
                 /*foregroundUsageTimeInMs=*/ 10, /*backgroundUsageTimeInMs=*/ 10);
-        assertBatteryDiffEntry(
-                resultDiffData.getSystemDiffEntryList().get(0), BatteryUtils.UID_OTHER_USERS,
-                /*uid=*/ BatteryUtils.UID_OTHER_USERS, ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
-                /*consumePercentage=*/ 100.0,
-                /*foregroundUsageConsumePower=*/ 0, /*foregroundServiceUsageConsumePower=*/ 0,
-                /*backgroundUsageConsumePower=*/ 0, /*cachedUsageConsumePower=*/ 0,
-                /*foregroundUsageTimeInMs=*/ 0, /*backgroundUsageTimeInMs=*/ 0);
+        assertThat(resultDiffData.getSystemDiffEntryList()).isEmpty();
         assertThat(resultMap.get(0).get(0)).isNotNull();
         assertThat(resultMap.get(0).get(DataProcessor.SELECTED_INDEX_ALL)).isNotNull();
     }

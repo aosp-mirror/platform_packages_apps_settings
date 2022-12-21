@@ -209,6 +209,25 @@ public final class ConvertUtils {
         return appUsageEventBuilder.build();
     }
 
+    /** Converts to {@link AppUsageEvent} from {@link Cursor} */
+    public static AppUsageEvent convertToAppUsageEventFromCursor(final Cursor cursor) {
+        final AppUsageEvent.Builder eventBuilder = AppUsageEvent.newBuilder();
+        eventBuilder.setTimestamp(getLongFromCursor(cursor, AppUsageEventEntity.KEY_TIMESTAMP));
+        eventBuilder.setType(
+                AppUsageEventType.forNumber(
+                        getIntegerFromCursor(
+                                cursor, AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE)));
+        eventBuilder.setPackageName(
+                getStringFromCursor(cursor, AppUsageEventEntity.KEY_PACKAGE_NAME));
+        eventBuilder.setInstanceId(
+                getIntegerFromCursor(cursor, AppUsageEventEntity.KEY_INSTANCE_ID));
+        eventBuilder.setTaskRootPackageName(
+                getStringFromCursor(cursor, AppUsageEventEntity.KEY_TASK_ROOT_PACKAGE_NAME));
+        eventBuilder.setUserId(getLongFromCursor(cursor, AppUsageEventEntity.KEY_USER_ID));
+        eventBuilder.setUid(getLongFromCursor(cursor, AppUsageEventEntity.KEY_UID));
+        return eventBuilder.build();
+    }
+
     /** Converts UTC timestamp to human readable local time string. */
     public static String utcToLocalTime(Context context, long timestamp) {
         final Locale locale = getLocale(context);
@@ -330,5 +349,29 @@ public final class ConvertUtils {
         }
 
         return batteryInformationBuilder.build();
+    }
+
+    private static int getIntegerFromCursor(final Cursor cursor, final String key) {
+        final int columnIndex = cursor.getColumnIndex(key);
+        if (columnIndex >= 0) {
+            return cursor.getInt(columnIndex);
+        }
+        return 0;
+    }
+
+    private static long getLongFromCursor(final Cursor cursor, final String key) {
+        final int columnIndex = cursor.getColumnIndex(key);
+        if (columnIndex >= 0) {
+            return cursor.getLong(columnIndex);
+        }
+        return 0L;
+    }
+
+    private static String getStringFromCursor(final Cursor cursor, final String key) {
+        final int columnIndex = cursor.getColumnIndex(key);
+        if (columnIndex >= 0) {
+            return cursor.getString(columnIndex);
+        }
+        return "";
     }
 }

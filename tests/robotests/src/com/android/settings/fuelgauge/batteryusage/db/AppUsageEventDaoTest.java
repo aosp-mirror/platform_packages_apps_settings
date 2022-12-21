@@ -31,11 +31,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /** Tests for {@link AppUsageEventDao}. */
 @RunWith(RobolectricTestRunner.class)
 public final class AppUsageEventDaoTest {
+    private static final int CURSOR_COLUMN_SIZE = 8;
     private static final long TIMESTAMP1 = System.currentTimeMillis();
     private static final long TIMESTAMP2 = System.currentTimeMillis() + 2;
     private static final long TIMESTAMP3 = System.currentTimeMillis() + 4;
@@ -75,6 +77,36 @@ public final class AppUsageEventDaoTest {
         // Verifies the queried battery states.
         assertAppUsageEvent(entities.get(0), TIMESTAMP3, PACKAGE_NAME3);
         assertAppUsageEvent(entities.get(1), TIMESTAMP2, PACKAGE_NAME2);
+    }
+
+    @Test
+    public void appUsageEventDao_getAllForUsersAfter() {
+        final List<Long> userIds1 = new ArrayList<>();
+        final long notExistingUserId = 3;
+        userIds1.add(USER_ID1);
+        userIds1.add(USER_ID2);
+        userIds1.add(notExistingUserId);
+        final Cursor cursor1 = mAppUsageEventDao.getAllForUsersAfter(userIds1, TIMESTAMP1);
+        assertThat(cursor1.getCount()).isEqualTo(3);
+        assertThat(cursor1.getColumnCount()).isEqualTo(CURSOR_COLUMN_SIZE);
+        // Verifies the queried first battery state.
+        cursor1.moveToFirst();
+        assertThat(cursor1.getString(5 /*packageName*/)).isEqualTo(PACKAGE_NAME1);
+        // Verifies the queried second battery state.
+        cursor1.moveToNext();
+        assertThat(cursor1.getString(5 /*packageName*/)).isEqualTo(PACKAGE_NAME2);
+        // Verifies the queried third battery state.
+        cursor1.moveToNext();
+        assertThat(cursor1.getString(5 /*packageName*/)).isEqualTo(PACKAGE_NAME3);
+
+        final List<Long> userIds2 = new ArrayList<>();
+        userIds2.add(USER_ID1);
+        final Cursor cursor2 = mAppUsageEventDao.getAllForUsersAfter(userIds2, TIMESTAMP3);
+        assertThat(cursor2.getCount()).isEqualTo(1);
+        assertThat(cursor2.getColumnCount()).isEqualTo(CURSOR_COLUMN_SIZE);
+        // Verifies the queried first battery state.
+        cursor2.moveToFirst();
+        assertThat(cursor2.getString(5 /*packageName*/)).isEqualTo(PACKAGE_NAME3);
     }
 
     @Test

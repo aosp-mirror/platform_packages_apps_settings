@@ -24,10 +24,14 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.Utils;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,8 +67,14 @@ public class DataProcessManager {
     private final DataProcessor.UsageMapAsyncResponse mCallbackFunction;
 
     private Context mContext;
+    private UserManager mUserManager;
     private List<BatteryLevelData.PeriodBatteryLevelData> mHourlyBatteryLevelsPerDay;
     private Map<Long, Map<String, BatteryHistEntry>> mBatteryHistoryMap;
+
+    // The start timestamp of battery level data. As we don't know when is the full charge cycle
+    // start time when loading app usage data, this value is used as the start time of querying app
+    // usage data.
+    private long mStartTimestampOfLevelData = 0;
 
     private boolean mIsCurrentBatteryHistoryLoaded = false;
     private boolean mIsCurrentAppUsageLoaded = false;
@@ -81,13 +91,15 @@ public class DataProcessManager {
             Context context,
             Handler handler,
             final DataProcessor.UsageMapAsyncResponse callbackFunction,
-            final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
-            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
+            @NonNull final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
+            @NonNull final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
         mContext = context.getApplicationContext();
         mHandler = handler;
+        mUserManager = mContext.getSystemService(UserManager.class);
         mCallbackFunction = callbackFunction;
         mHourlyBatteryLevelsPerDay = hourlyBatteryLevelsPerDay;
         mBatteryHistoryMap = batteryHistoryMap;
+        mStartTimestampOfLevelData = getStartTimestampOfBatteryLevelData();
     }
 
     /**
@@ -100,6 +112,21 @@ public class DataProcessManager {
         loadDatabaseAppUsageList();
         // Load the latest app usage list from the service.
         loadCurrentAppUsageList();
+    }
+
+    @VisibleForTesting
+    long getStartTimestampOfBatteryLevelData() {
+        for (int dailyIndex = 0; dailyIndex < mHourlyBatteryLevelsPerDay.size(); dailyIndex++) {
+            if (mHourlyBatteryLevelsPerDay.get(dailyIndex) == null) {
+                continue;
+            }
+            final List<Long> timestamps =
+                    mHourlyBatteryLevelsPerDay.get(dailyIndex).getTimestamps();
+            if (timestamps.size() > 0) {
+                return timestamps.get(0);
+            }
+        }
+        return 0;
     }
 
     @VisibleForTesting
@@ -164,12 +191,17 @@ public class DataProcessManager {
         new AsyncTask<Void, Void, List<AppUsageEvent>>() {
             @Override
             protected List<AppUsageEvent> doInBackground(Void... voids) {
+                if (!shouldLoadAppUsageData()) {
+                    Log.d(TAG, "not loadCurrentAppUsageList");
+                    return null;
+                }
                 final long startTime = System.currentTimeMillis();
                 // Loads the current battery usage data from the battery stats service.
                 final int currentUserId = getCurrentUserId();
                 final int workProfileUserId = getWorkProfileUserId();
                 final UsageEvents usageEventsForCurrentUser =
-                        DataProcessor.getAppUsageEventsForUser(mContext, currentUserId);
+                        DataProcessor.getAppUsageEventsForUser(
+                                mContext, currentUserId, mStartTimestampOfLevelData);
                 // If fail to load usage events for current user, return null directly and screen-on
                 // time will not be shown in the UI.
                 if (usageEventsForCurrentUser == null) {
@@ -180,7 +212,7 @@ public class DataProcessManager {
                 if (workProfileUserId != Integer.MIN_VALUE) {
                     usageEventsForWorkProfile =
                             DataProcessor.getAppUsageEventsForUser(
-                                    mContext, workProfileUserId);
+                                    mContext, workProfileUserId, mStartTimestampOfLevelData);
                 } else {
                     Log.d(TAG, "there is no work profile");
                 }
@@ -203,16 +235,8 @@ public class DataProcessManager {
             @Override
             protected void onPostExecute(
                     final List<AppUsageEvent> currentAppUsageList) {
-                final int currentUserId = getCurrentUserId();
-                final UserManager userManager = mContext.getSystemService(UserManager.class);
-                // If current user is locked, don't show screen-on time data in the UI.
-                // Even if we have data in the database, we won't show screen-on time because we
-                // don't have the latest data.
-                if (userManager == null || !userManager.isUserUnlocked(currentUserId)) {
-                    Log.d(TAG, "current user is locked");
-                    mShowScreenOnTime = false;
-                } else if (currentAppUsageList == null || currentAppUsageList.isEmpty()) {
-                    Log.d(TAG, "usageEventsForWorkProfile is null or empty");
+                if (currentAppUsageList == null || currentAppUsageList.isEmpty()) {
+                    Log.d(TAG, "currentAppUsageList is null or empty");
                 } else {
                     mAppUsageEventList.addAll(currentAppUsageList);
                 }
@@ -223,9 +247,36 @@ public class DataProcessManager {
     }
 
     private void loadDatabaseAppUsageList() {
-        // TODO: load app usage data from database.
-        mIsDatabaseAppUsageLoaded = true;
-        tryToProcessAppUsageData();
+        new AsyncTask<Void, Void, List<AppUsageEvent>>() {
+            @Override
+            protected List<AppUsageEvent> doInBackground(Void... voids) {
+                if (!shouldLoadAppUsageData()) {
+                    Log.d(TAG, "not loadDatabaseAppUsageList");
+                    return null;
+                }
+                final long startTime = System.currentTimeMillis();
+                // Loads the current battery usage data from the battery stats service.
+                final List<AppUsageEvent> appUsageEventList =
+                        DatabaseUtils.getAppUsageEventForUsers(
+                                mContext, Calendar.getInstance(), getCurrentUserIds(),
+                                mStartTimestampOfLevelData);
+                Log.d(TAG, String.format("execute loadDatabaseAppUsageList size=%d in %d/ms",
+                        appUsageEventList.size(), (System.currentTimeMillis() - startTime)));
+                return appUsageEventList;
+            }
+
+            @Override
+            protected void onPostExecute(
+                    final List<AppUsageEvent> databaseAppUsageList) {
+                if (databaseAppUsageList == null || databaseAppUsageList.isEmpty()) {
+                    Log.d(TAG, "databaseAppUsageList is null or empty");
+                } else {
+                    mAppUsageEventList.addAll(databaseAppUsageList);
+                }
+                mIsDatabaseAppUsageLoaded = true;
+                tryToProcessAppUsageData();
+            }
+        }.execute();
     }
 
     private void tryToProcessAppUsageData() {
@@ -243,6 +294,8 @@ public class DataProcessManager {
         if (!mShowScreenOnTime) {
             return;
         }
+        // Sort the appUsageEventList in ascending order based on the timestamp.
+        Collections.sort(mAppUsageEventList, DataProcessor.TIMESTAMP_COMPARATOR);
         // TODO: process app usage data to an intermediate result for further use.
     }
 
@@ -262,14 +315,39 @@ public class DataProcessManager {
         // then apply the callback function.
     }
 
+    // Whether we should load app usage data from service or database.
+    private boolean shouldLoadAppUsageData() {
+        if (!mShowScreenOnTime) {
+            return false;
+        }
+        final int currentUserId = getCurrentUserId();
+        // If current user is locked, no need to load app usage data from service or database.
+        if (mUserManager == null || !mUserManager.isUserUnlocked(currentUserId)) {
+            Log.d(TAG, "shouldLoadAppUsageData: false, current user is locked");
+            mShowScreenOnTime = false;
+            return false;
+        }
+        return true;
+    }
+
+    // Returns the list of current user id and work profile id if exists.
+    private List<Integer> getCurrentUserIds() {
+        final List<Integer> userIds = new ArrayList<>();
+        userIds.add(getCurrentUserId());
+        final int workProfileUserId = getWorkProfileUserId();
+        if (workProfileUserId != Integer.MIN_VALUE) {
+            userIds.add(workProfileUserId);
+        }
+        return userIds;
+    }
+
     private int getCurrentUserId() {
         return mContext.getUserId();
     }
 
     private int getWorkProfileUserId() {
         final UserHandle userHandle =
-                Utils.getManagedProfile(
-                        mContext.getSystemService(UserManager.class));
+                Utils.getManagedProfile(mUserManager);
         return userHandle != null ? userHandle.getIdentifier() : Integer.MIN_VALUE;
     }
 }

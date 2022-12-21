@@ -464,19 +464,6 @@ public final class BatteryDiffEntryTest {
         assertThat(entry.getPackageName()).isEqualTo(expectedPackageName);
     }
 
-    @Test
-    public void getAppLabel_withOtherUsersUid_returnExpectedLabel() {
-        final ContentValues values = getContentValuesWithType(
-                ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
-        values.put(BatteryHistEntry.KEY_UID, BatteryUtils.UID_OTHER_USERS);
-
-        final BatteryDiffEntry batteryDiffEntry = createBatteryDiffEntry(
-                /*consumePower=*/ 0, new BatteryHistEntry(values));
-
-        assertThat(batteryDiffEntry.getAppLabel())
-                .isEqualTo(mContext.getString(R.string.battery_usage_other_users));
-    }
-
     private BatteryDiffEntry createBatteryDiffEntry(
             int consumerType, long uid, boolean isHidden) {
         final ContentValues values = getContentValuesWithType(consumerType);

@@ -16,11 +16,11 @@
 
 package com.android.settings.gestures;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.hardware.display.AmbientDisplayConfiguration;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
@@ -49,7 +49,7 @@ public class TapScreenGestureSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_GESTURE_TAP_SCREEN;
+        return SettingsEnums.SETTINGS_GESTURE_TAP_SCREEN;
     }
 
     @Override
