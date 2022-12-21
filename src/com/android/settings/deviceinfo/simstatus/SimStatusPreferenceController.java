@@ -17,12 +17,14 @@
 package com.android.settings.deviceinfo.simstatus;
 
 import android.content.Context;
+import android.os.UserManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.os.UserManager;
+import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -40,16 +42,12 @@ public class SimStatusPreferenceController extends BasePreferenceController {
 
     private static final String KEY_PREFERENCE_CATEGORY = "device_detail_category";
 
-    private final SubscriptionManager mSubscriptionManager;
-    private final List<Preference> mPreferenceList = new ArrayList<>();
-
     private Fragment mFragment;
     private SlotSimStatus mSlotSimStatus;
+    private Observer mSimChangeObserver;
 
     public SimStatusPreferenceController(Context context, String prefKey) {
         super(context, prefKey);
-
-        mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
     }
 
     /**
@@ -103,26 +101,36 @@ public class SimStatusPreferenceController extends BasePreferenceController {
         // Add additional preferences for each sim in the device
         for (int simSlotNumber = 0; simSlotNumber < mSlotSimStatus.size(); simSlotNumber++) {
             final Preference multiSimPreference = createNewPreference(screen.getContext());
-            multiSimPreference.setCopyingEnabled(true);
             multiSimPreference.setOrder(mSlotSimStatus.getPreferenceOrdering(simSlotNumber));
             multiSimPreference.setKey(mSlotSimStatus.getPreferenceKey(simSlotNumber));
             category.addPreference(multiSimPreference);
-            mPreferenceList.add(multiSimPreference);
         }
     }
 
     @Override
     public void updateState(Preference preference) {
-        for (int simSlotNumber = 0; simSlotNumber < mPreferenceList.size(); simSlotNumber++) {
-            final Preference simStatusPreference = mPreferenceList.get(simSlotNumber);
-            simStatusPreference.setTitle(getPreferenceTitle(simSlotNumber /* sim slot */));
-            simStatusPreference.setSummary(getCarrierName(simSlotNumber /* sim slot */));
+        final int simSlot = getSimSlotIndex();
+        if (mSimChangeObserver == null) {
+            mSimChangeObserver = x -> updateStateBySlot(preference, simSlot);
+            mSlotSimStatus.observe(mFragment.getViewLifecycleOwner(), mSimChangeObserver);
         }
+        updateStateBySlot(preference, simSlot);
+    }
+
+    protected void updateStateBySlot(Preference preference, int simSlot) {
+        SubscriptionInfo subInfo = getSubscriptionInfo(simSlot);
+        preference.setEnabled(subInfo != null);
+        preference.setCopyingEnabled(subInfo != null);
+        preference.setTitle(getPreferenceTitle(simSlot));
+        preference.setSummary(getCarrierName(simSlot));
     }
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        final int simSlot = mPreferenceList.indexOf(preference);
+        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            return false;
+        }
+        final int simSlot = getSimSlotIndex();
         if (simSlot == -1) {
             return false;
         }
@@ -138,16 +146,7 @@ public class SimStatusPreferenceController extends BasePreferenceController {
     }
 
     private SubscriptionInfo getSubscriptionInfo(int simSlot) {
-        final List<SubscriptionInfo> subscriptionInfoList =
-                mSubscriptionManager.getActiveSubscriptionInfoList();
-        if (subscriptionInfoList != null) {
-            for (SubscriptionInfo info : subscriptionInfoList) {
-                if (info.getSimSlotIndex() == simSlot) {
-                    return info;
-                }
-            }
-        }
-        return null;
+        return (mSlotSimStatus == null) ? null : mSlotSimStatus.getSubscriptionInfo(simSlot);
     }
 
     private CharSequence getCarrierName(int simSlot) {
