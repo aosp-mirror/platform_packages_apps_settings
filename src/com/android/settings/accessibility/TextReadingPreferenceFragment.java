@@ -210,6 +210,8 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
         if (mNeedResetSettings) {
             outState.putBoolean(NEED_RESET_SETTINGS, true);
         }
