@@ -56,6 +56,7 @@ import com.android.settings.R;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
+import com.android.settingslib.utils.StringUtil;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -130,9 +131,8 @@ public class WifiSettingsTest {
 
         assertThat(mWifiSettings.mSavedNetworksPreference.isVisible()).isTrue();
         assertThat(mWifiSettings.mSavedNetworksPreference.getSummary()).isEqualTo(
-                mContext.getResources().getQuantityString(
-                        R.plurals.wifi_saved_access_points_summary,
-                        NUM_NETWORKS, NUM_NETWORKS));
+                StringUtil.getIcuPluralsString(mContext, NUM_NETWORKS,
+                        R.string.wifi_saved_access_points_summary));
     }
 
     @Test
@@ -144,9 +144,8 @@ public class WifiSettingsTest {
 
         assertThat(mWifiSettings.mSavedNetworksPreference.isVisible()).isTrue();
         assertThat(mWifiSettings.mSavedNetworksPreference.getSummary()).isEqualTo(
-                mContext.getResources().getQuantityString(
-                        R.plurals.wifi_saved_passpoint_access_points_summary,
-                        NUM_NETWORKS, NUM_NETWORKS));
+                StringUtil.getIcuPluralsString(mContext, NUM_NETWORKS,
+                        R.string.wifi_saved_passpoint_access_points_summary));
     }
 
     @Test
@@ -158,9 +157,8 @@ public class WifiSettingsTest {
 
         assertThat(mWifiSettings.mSavedNetworksPreference.isVisible()).isTrue();
         assertThat(mWifiSettings.mSavedNetworksPreference.getSummary()).isEqualTo(
-                mContext.getResources().getQuantityString(
-                        R.plurals.wifi_saved_all_access_points_summary,
-                        NUM_NETWORKS*2, NUM_NETWORKS*2));
+                StringUtil.getIcuPluralsString(mContext, NUM_NETWORKS * 2,
+                        R.string.wifi_saved_all_access_points_summary));
     }
 
     @Test

@@ -142,9 +142,8 @@ public class AppsPreferenceController extends BasePreferenceController implement
             @Override
             protected void onCountComplete(int num) {
                 if (!mRecentApps.isEmpty()) {
-                    mSeeAllPref.setTitle(
-                            mContext.getResources().getQuantityString(R.plurals.see_all_apps_title,
-                                    num, num));
+                    mSeeAllPref.setTitle(StringUtil.getIcuPluralsString(mContext, num,
+                            R.string.see_all_apps_title));
                 } else {
                     mAllAppsInfoPref.setSummary(mContext.getString(R.string.apps_summary, num));
                 }

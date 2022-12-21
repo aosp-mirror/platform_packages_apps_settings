@@ -75,6 +75,7 @@ import com.android.settings.wifi.ConnectedWifiEntryPreference;
 import com.android.settings.wifi.LongPressWifiEntryPreference;
 import com.android.settings.wifi.WifiConfigController2;
 import com.android.settings.wifi.WifiDialog2;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.wifitrackerlib.WifiEntry;
@@ -206,9 +207,8 @@ public class NetworkProviderSettingsTest {
 
         assertThat(mNetworkProviderSettings.mSavedNetworksPreference.isVisible()).isTrue();
         assertThat(mNetworkProviderSettings.mSavedNetworksPreference.getSummary()).isEqualTo(
-                mContext.getResources().getQuantityString(
-                        R.plurals.wifi_saved_access_points_summary,
-                        NUM_NETWORKS, NUM_NETWORKS));
+                StringUtil.getIcuPluralsString(mContext, NUM_NETWORKS,
+                        R.string.wifi_saved_access_points_summary));
     }
 
     @Test
@@ -220,9 +220,8 @@ public class NetworkProviderSettingsTest {
 
         assertThat(mNetworkProviderSettings.mSavedNetworksPreference.isVisible()).isTrue();
         assertThat(mNetworkProviderSettings.mSavedNetworksPreference.getSummary()).isEqualTo(
-                mContext.getResources().getQuantityString(
-                        R.plurals.wifi_saved_passpoint_access_points_summary,
-                        NUM_NETWORKS, NUM_NETWORKS));
+                StringUtil.getIcuPluralsString(mContext, NUM_NETWORKS,
+                        R.string.wifi_saved_passpoint_access_points_summary));
     }
 
     @Test
@@ -234,9 +233,8 @@ public class NetworkProviderSettingsTest {
 
         assertThat(mNetworkProviderSettings.mSavedNetworksPreference.isVisible()).isTrue();
         assertThat(mNetworkProviderSettings.mSavedNetworksPreference.getSummary()).isEqualTo(
-                mContext.getResources().getQuantityString(
-                R.plurals.wifi_saved_all_access_points_summary,
-                NUM_NETWORKS * 2, NUM_NETWORKS * 2));
+                StringUtil.getIcuPluralsString(mContext, NUM_NETWORKS * 2,
+                        R.string.wifi_saved_all_access_points_summary));
     }
 
     @Test
