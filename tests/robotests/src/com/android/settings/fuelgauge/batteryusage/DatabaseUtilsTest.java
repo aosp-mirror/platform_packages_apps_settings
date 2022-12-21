@@ -277,6 +277,62 @@ public final class DatabaseUtilsTest {
     }
 
     @Test
+    public void getAppUsageEventForUsers_emptyCursorContent_returnEmptyMap() {
+        final MatrixCursor cursor = new MatrixCursor(
+                new String[]{
+                        AppUsageEventEntity.KEY_UID,
+                        AppUsageEventEntity.KEY_USER_ID,
+                        AppUsageEventEntity.KEY_PACKAGE_NAME,
+                        AppUsageEventEntity.KEY_TIMESTAMP,
+                        AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE});
+        DatabaseUtils.sFakeAppUsageEventSupplier = () -> cursor;
+
+        assertThat(DatabaseUtils.getAppUsageEventForUsers(
+                mContext,
+                /*calendar=*/ null,
+                /*userIds=*/ new ArrayList<>(),
+                /*startTimestampOfLevelData=*/ 0)).isEmpty();
+    }
+
+    @Test
+    public void getAppUsageEventForUsers_nullCursor_returnEmptyMap() {
+        DatabaseUtils.sFakeAppUsageEventSupplier = () -> null;
+        assertThat(DatabaseUtils.getAppUsageEventForUsers(
+                mContext,
+                /*calendar=*/ null,
+                /*userIds=*/ new ArrayList<>(),
+                /*startTimestampOfLevelData=*/ 0)).isEmpty();
+    }
+
+    @Test
+    public void getAppUsageEventForUsers_returnExpectedMap() {
+        final Long timestamp1 = 1001L;
+        final Long timestamp2 = 1002L;
+        final MatrixCursor cursor = new MatrixCursor(
+                new String[]{
+                        AppUsageEventEntity.KEY_UID,
+                        AppUsageEventEntity.KEY_PACKAGE_NAME,
+                        AppUsageEventEntity.KEY_TIMESTAMP});
+        // Adds fake data into the cursor.
+        cursor.addRow(new Object[] {101L, "app name1", timestamp1});
+        cursor.addRow(new Object[] {101L, "app name2", timestamp2});
+        cursor.addRow(new Object[] {101L, "app name3", timestamp2});
+        cursor.addRow(new Object[] {101L, "app name4", timestamp2});
+        DatabaseUtils.sFakeAppUsageEventSupplier = () -> cursor;
+
+        final List<AppUsageEvent> appUsageEventList = DatabaseUtils.getAppUsageEventForUsers(
+                mContext,
+                /*calendar=*/ null,
+                /*userIds=*/ new ArrayList<>(),
+                /*startTimestampOfLevelData=*/ 0);
+
+        assertThat(appUsageEventList.get(0).getPackageName()).isEqualTo("app name1");
+        assertThat(appUsageEventList.get(1).getPackageName()).isEqualTo("app name2");
+        assertThat(appUsageEventList.get(2).getPackageName()).isEqualTo("app name3");
+        assertThat(appUsageEventList.get(3).getPackageName()).isEqualTo("app name4");
+    }
+
+    @Test
     public void getHistoryMapSinceLastFullCharge_emptyCursorContent_returnEmptyMap() {
         final MatrixCursor cursor = new MatrixCursor(
                 new String[] {

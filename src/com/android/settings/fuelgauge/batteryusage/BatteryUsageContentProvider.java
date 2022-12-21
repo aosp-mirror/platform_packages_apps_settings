@@ -37,6 +37,9 @@ import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
 
 import java.time.Clock;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /** {@link ContentProvider} class to fetch battery usage data. */
 public class BatteryUsageContentProvider extends ContentProvider {
@@ -100,6 +103,8 @@ public class BatteryUsageContentProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)) {
             case BATTERY_STATE_CODE:
                 return getBatteryStates(uri);
+            case APP_USAGE_EVENT_CODE:
+                return getAppUsageEvents(uri);
             case APP_USAGE_LATEST_TIMESTAMP_CODE:
                 return getAppUsageLatestTimestamp(uri);
             default:
@@ -153,8 +158,7 @@ public class BatteryUsageContentProvider extends ContentProvider {
     }
 
     private Cursor getBatteryStates(Uri uri) {
-        final long defaultTimestamp = mClock.millis() - QUERY_DURATION_HOURS.toMillis();
-        final long queryTimestamp = getQueryTimestamp(uri, defaultTimestamp);
+        final long queryTimestamp = getQueryTimestamp(uri);
         return getBatteryStates(uri, queryTimestamp);
     }
 
@@ -169,6 +173,24 @@ public class BatteryUsageContentProvider extends ContentProvider {
         AsyncTask.execute(() -> BootBroadcastReceiver.invokeJobRecheck(getContext()));
         Log.d(TAG, "query battery states in " + (mClock.millis() - timestamp) + "/ms");
         return cursor;
+    }
+
+    private Cursor getAppUsageEvents(Uri uri) {
+        final List<Long> queryUserIds = getQueryUserIds(uri);
+        if (queryUserIds == null || queryUserIds.isEmpty()) {
+            return null;
+        }
+        final long queryTimestamp = getQueryTimestamp(uri);
+        final long timestamp = mClock.millis();
+        Cursor cursor = null;
+        try {
+            cursor = mAppUsageEventDao.getAllForUsersAfter(queryUserIds, queryTimestamp);
+        } catch (RuntimeException e) {
+            Log.e(TAG, "query() from:" + uri + " error:" + e);
+        }
+        Log.w(TAG, "query app usage events in " + (mClock.millis() - timestamp) + "/ms");
+        return cursor;
+
     }
 
     private Cursor getAppUsageLatestTimestamp(Uri uri) {
@@ -189,6 +211,26 @@ public class BatteryUsageContentProvider extends ContentProvider {
     }
 
     // If URI contains query parameter QUERY_KEY_USERID, use the value directly.
+    // Otherwise, return null.
+    private List<Long> getQueryUserIds(Uri uri) {
+        Log.d(TAG, "getQueryUserIds from uri: " + uri);
+        final String value = uri.getQueryParameter(DatabaseUtils.QUERY_KEY_USERID);
+        if (TextUtils.isEmpty(value)) {
+            Log.w(TAG, "empty query value");
+            return null;
+        }
+        try {
+            return Arrays.asList(value.split(","))
+                    .stream()
+                    .map(s -> Long.parseLong(s.trim()))
+                    .collect(Collectors.toList());
+        } catch (NumberFormatException e) {
+            Log.e(TAG, "invalid query value: " + value, e);
+            return null;
+        }
+    }
+
+    // If URI contains query parameter QUERY_KEY_USERID, use the value directly.
     // Otherwise, return INVALID_USER_ID.
     private long getQueryUserId(Uri uri) {
         Log.d(TAG, "getQueryUserId from uri: " + uri);
@@ -198,8 +240,9 @@ public class BatteryUsageContentProvider extends ContentProvider {
 
     // If URI contains query parameter QUERY_KEY_TIMESTAMP, use the value directly.
     // Otherwise, load the data for QUERY_DURATION_HOURS by default.
-    private long getQueryTimestamp(Uri uri, long defaultTimestamp) {
+    private long getQueryTimestamp(Uri uri) {
         Log.d(TAG, "getQueryTimestamp from uri: " + uri);
+        final long defaultTimestamp = mClock.millis() - QUERY_DURATION_HOURS.toMillis();
         return getQueryValueFromUri(uri, DatabaseUtils.QUERY_KEY_TIMESTAMP, defaultTimestamp);
     }
 

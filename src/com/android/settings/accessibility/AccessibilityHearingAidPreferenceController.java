@@ -16,7 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHapClient;
@@ -29,6 +28,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -129,6 +129,11 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
             final CachedBluetoothDevice device = getConnectedHearingAidDevice();
+            if (FeatureFlagUtils.isEnabled(mContext,
+                    FeatureFlagUtils.SETTINGS_ACCESSIBILITY_HEARING_AID_PAGE)) {
+                launchHearingAidPage();
+                return true;
+            }
             if (device == null) {
                 launchHearingAidInstructionDialog();
             } else {
@@ -295,7 +300,7 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
                 .setDestination(BluetoothDeviceDetailsFragment.class.getName())
                 .setArguments(args)
                 .setTitleRes(R.string.device_details_title)
-                .setSourceMetricsCategory(SettingsEnums.ACCESSIBILITY)
+                .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
     }
 
@@ -303,5 +308,12 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
     void launchHearingAidInstructionDialog() {
         HearingAidDialogFragment fragment = HearingAidDialogFragment.newInstance();
         fragment.show(mFragmentManager, HearingAidDialogFragment.class.toString());
+    }
+
+    private void launchHearingAidPage() {
+        new SubSettingLauncher(mContext)
+                .setDestination(AccessibilityHearingAidsFragment.class.getName())
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
     }
 }

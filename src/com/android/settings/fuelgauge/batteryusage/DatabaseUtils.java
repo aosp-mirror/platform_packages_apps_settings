@@ -46,6 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /** A utility class to operate battery usage database. */
 public final class DatabaseUtils {
@@ -93,6 +94,8 @@ public final class DatabaseUtils {
     @VisibleForTesting
     static Supplier<Cursor> sFakeBatteryStateSupplier;
     @VisibleForTesting
+    static Supplier<Cursor> sFakeAppUsageEventSupplier;
+    @VisibleForTesting
     static Supplier<Cursor> sFakeAppUsageLatestTimestampSupplier;
 
     private DatabaseUtils() {
@@ -123,6 +126,38 @@ public final class DatabaseUtils {
                 "getAppUsageStartTimestampOfUser() userId=%d latestTimestamp=%d in %d/ms",
                 userId, latestTimestamp, (System.currentTimeMillis() - startTime)));
         return Math.max(latestTimestamp, earliestTimestamp);
+    }
+
+    /** Returns the current user data in app usage event table. */
+    public static List<AppUsageEvent> getAppUsageEventForUsers(
+            Context context,
+            final Calendar calendar,
+            final List<Integer> userIds,
+            final long startTimestampOfLevelData) {
+        final long startTime = System.currentTimeMillis();
+        final long sixDaysAgoTimestamp = getTimestampSixDaysAgo(calendar);
+        final long queryTimestamp = Math.max(startTimestampOfLevelData, sixDaysAgoTimestamp);
+        Log.d(TAG, "sixDayAgoTimestamp: " + sixDaysAgoTimestamp);
+        final String queryUserIdString = userIds.stream()
+                .map(userId -> String.valueOf(userId))
+                .collect(Collectors.joining(","));
+        // Builds the content uri everytime to avoid cache.
+        final Uri appUsageEventUri =
+                new Uri.Builder()
+                        .scheme(ContentResolver.SCHEME_CONTENT)
+                        .authority(AUTHORITY)
+                        .appendPath(APP_USAGE_EVENT_TABLE)
+                        .appendQueryParameter(
+                                QUERY_KEY_TIMESTAMP, Long.toString(queryTimestamp))
+                        .appendQueryParameter(QUERY_KEY_USERID, queryUserIdString)
+                        .build();
+
+        final List<AppUsageEvent> appUsageEventList =
+                loadAppUsageEventsFromContentProvider(context, appUsageEventUri);
+        Log.d(TAG, String.format("getAppUsageEventForUser userId=%s size=%d in %d/ms",
+                queryUserIdString, appUsageEventList.size(),
+                (System.currentTimeMillis() - startTime)));
+        return appUsageEventList;
     }
 
     /** Long: for timestamp and String: for BatteryHistEntry.getKey() */
@@ -355,6 +390,32 @@ public final class DatabaseUtils {
             // If there is no data for this user, 0 will be returned from the database.
             return latestTimestamp == 0 ? INVALID_USER_ID : latestTimestamp;
         }
+    }
+
+    private static List<AppUsageEvent> loadAppUsageEventsFromContentProvider(
+            Context context, Uri appUsageEventUri) {
+        final List<AppUsageEvent> appUsageEventList = new ArrayList<>();
+        context = getOwnerContext(context);
+        if (context == null) {
+            return appUsageEventList;
+        }
+        try (Cursor cursor = sFakeAppUsageEventSupplier != null
+                ? sFakeAppUsageEventSupplier.get()
+                : context.getContentResolver().query(appUsageEventUri, null, null, null)) {
+            if (cursor == null || cursor.getCount() == 0) {
+                return appUsageEventList;
+            }
+            // Loads and recovers all AppUsageEvent data from cursor.
+            while (cursor.moveToNext()) {
+                appUsageEventList.add(ConvertUtils.convertToAppUsageEventFromCursor(cursor));
+            }
+            try {
+                cursor.close();
+            } catch (Exception e) {
+                Log.e(TAG, "cursor.close() failed", e);
+            }
+        }
+        return appUsageEventList;
     }
 
     private static Map<Long, Map<String, BatteryHistEntry>> loadHistoryMapFromContentProvider(

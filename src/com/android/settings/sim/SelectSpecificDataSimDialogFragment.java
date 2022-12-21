@@ -16,6 +16,8 @@
 
 package com.android.settings.sim;
 
+import static android.telephony.SubscriptionManager.PROFILE_CLASS_PROVISIONING;
+
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
@@ -113,6 +115,15 @@ public class SelectSpecificDataSimDialogFragment extends SimDialogFragment imple
             dismiss();
             return;
         }
+
+        if ((newSubInfo.isEmbedded() && newSubInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING)
+                || (currentDataSubInfo.isEmbedded()
+                && currentDataSubInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING)) {
+            Log.d(TAG, "do not set the provision eSIM");
+            dismiss();
+            return;
+        }
+
         Log.d(TAG, "newSubId: " + newSubInfo.getSubscriptionId()
                 + "currentDataSubID: " + currentDataSubInfo.getSubscriptionId());
         setTargetSubscriptionInfo(newSubInfo);
