@@ -426,6 +426,8 @@
     <string name="date_time_auto">Set time automatically</string>
     <!-- Date & time setting screen setting switch title: whether the time zone should be determined automatically [CHAR LIMIT=100]  -->
     <string name="zone_auto_title">Set automatically</string>
+    <!-- Date & time setting screen setting switch summary for non-telephony devices [CHAR LIMIT=100] -->
+    <string name="auto_zone_requires_location_summary">Location will be used for setting the time zone when this toggle is on</string>
     <!-- Date & time setting screen setting option summary text for the automatic 24 hour setting checkbox [CHAR LIMIT=100] -->
     <string name="date_time_24hour_auto">Use locale default</string>
     <!-- Date & time setting screen setting check box title -->
@@ -2990,6 +2992,16 @@
 
     <!-- [CHAR LIMIT=60] Date&Time settings screen, toggle button title -->
     <string name="location_time_zone_detection_toggle_title">Use location</string>
+    <!-- [CHAR LIMIT=50] Date&Time settings screen, title of the dialog when AutoTimeZone is degraded -->
+    <string name="location_time_zone_detection_status_title">Cannot set the time zone automatically</string>
+    <!-- Date&Time settings screen, summary of the dialog when AutoTimeZone is degraded by settings-->
+    <string name="location_time_zone_detection_status_summary_degraded_by_settings" />
+    <!-- [CHAR LIMIT=60] Date&Time settings screen, summary of the dialog when AutoTimeZone is blocked by settings -->
+    <string name="location_time_zone_detection_status_summary_blocked_by_settings">Location or Location Services are off</string>
+    <!-- Date&Time settings screen, summary of the dialog when AutoTimeZone is blocked by the environment-->
+    <string name="location_time_zone_detection_status_summary_blocked_by_environment" />
+    <!-- Date&Time settings screen, summary of the dialog when AutoTimeZone is temporarily unavailable-->
+    <string name="location_time_zone_detection_status_summary_temporarily_unavailable" />
     <!-- [CHAR LIMIT=60] Date&Time settings screen, title of the dialog shown when user tries to
          enable GeoTZ when Location toggle is off. -->
     <string name="location_time_zone_detection_location_is_off_dialog_title">Device location needed</string>
@@ -2999,6 +3011,8 @@
     <!-- [CHAR LIMIT=30] Date&Time settings screen, button on a dialog shown when user tries to
     enable GeoTZ, but Location toggle is off, which leads to Location settings page. -->
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button">Location settings</string>
+    <!-- [CHAR LIMIT=30] Date&Time settings screen, button on a dialog shown when the LTZP needs to be fixed -->
+    <string name="location_time_zone_provider_fix_dialog_ok_button">Fix this</string>
     <!-- [CHAR LIMIT=30] Date&Time settings screen, button on a dialog shown when user tries to
      enable GeoTZ, but Location toggle is off, which closes the dialog. -->
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button">Cancel</string>
