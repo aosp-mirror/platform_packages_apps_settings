@@ -83,6 +83,7 @@ import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFrag
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.NfcAndPaymentFragment;
 import com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment;
+import com.android.settings.connecteddevice.stylus.StylusUsiDetailsFragment;
 import com.android.settings.connecteddevice.usb.UsbDetailsFragment;
 import com.android.settings.datausage.DataSaverSummary;
 import com.android.settings.datausage.DataUsageList;
@@ -338,6 +339,7 @@ public class SettingsGateway {
             BluetoothDeviceDetailsFragment.class.getName(),
             BluetoothBroadcastDialog.class.getName(),
             BluetoothFindBroadcastsFragment.class.getName(),
+            StylusUsiDetailsFragment.class.getName(),
             DataUsageList.class.getName(),
             ToggleBackupSettingFragment.class.getName(),
             PreviouslyConnectedDeviceDashboardFragment.class.getName(),
