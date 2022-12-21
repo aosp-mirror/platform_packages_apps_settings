@@ -337,9 +337,6 @@ public class BatteryEntryTest {
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_WIFI,
                 R.string.power_wifi,
                 R.drawable.ic_settings_wireless_no_theme);
-        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_IDLE,
-                R.string.power_idle,
-                R.drawable.ic_settings_phone_idle);
     }
 
     private void assertNameAndIcon(String name, int stringId) {

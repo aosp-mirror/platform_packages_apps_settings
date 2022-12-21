@@ -1224,6 +1224,10 @@ public final class DataProcessor {
     private static void processBatteryDiffData(
             final Context context,
             final Map<Integer, Map<Integer, BatteryDiffData>> resultMap) {
+        final Set<Integer> hideSystemComponentSet =
+                FeatureFactory.getFactory(context)
+                        .getPowerUsageFeatureProvider(context)
+                        .getHideSystemComponentSet(context);
         final Set<CharSequence> hideBackgroundUsageTimeSet =
                 FeatureFactory.getFactory(context)
                         .getPowerUsageFeatureProvider(context)
@@ -1239,11 +1243,15 @@ public final class DataProcessor {
                     return;
                 }
                 purgeFakeAndHiddenPackages(
-                        batteryDiffData.getAppDiffEntryList(), hideBackgroundUsageTimeSet,
-                        hideApplicationSet);
+                        batteryDiffData.getAppDiffEntryList(),
+                        hideSystemComponentSet,
+                        hideApplicationSet,
+                        hideBackgroundUsageTimeSet);
                 purgeFakeAndHiddenPackages(
-                        batteryDiffData.getSystemDiffEntryList(), hideBackgroundUsageTimeSet,
-                        hideApplicationSet);
+                        batteryDiffData.getSystemDiffEntryList(),
+                        hideSystemComponentSet,
+                        hideApplicationSet,
+                        hideBackgroundUsageTimeSet);
                 batteryDiffData.setTotalConsumePower();
                 batteryDiffData.sortEntries();
             });
@@ -1252,16 +1260,16 @@ public final class DataProcessor {
 
     private static void purgeFakeAndHiddenPackages(
             final List<BatteryDiffEntry> entries,
-            final Set<CharSequence> hideBackgroundUsageTimeSet,
-            final Set<CharSequence> hideApplicationSet) {
+            final Set<Integer> hideSystemComponentSet,
+            final Set<CharSequence> hideApplicationSet,
+            final Set<CharSequence> hideBackgroundUsageTimeSet) {
         final Iterator<BatteryDiffEntry> iterator = entries.iterator();
         while (iterator.hasNext()) {
             final BatteryDiffEntry entry = iterator.next();
             final String packageName = entry.getPackageName();
-            if (packageName == null) {
-                continue;
-            }
+            final Integer componentId = entry.mBatteryHistEntry.mDrainType;
             if (ConvertUtils.FAKE_PACKAGE_NAME.equals(packageName)
+                    || hideSystemComponentSet.contains(componentId)
                     || hideApplicationSet.contains(packageName)) {
                 iterator.remove();
             }
