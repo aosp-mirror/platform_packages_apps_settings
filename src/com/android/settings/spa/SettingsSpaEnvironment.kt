@@ -41,24 +41,27 @@ import com.android.settings.spa.system.SystemMainPageProvider
 import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.common.SettingsPageProviderRepository
 import com.android.settingslib.spa.framework.common.SpaEnvironment
+import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListProvider
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListTemplate
 
 open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
+    open fun getTogglePermissionAppListProviders(): List<TogglePermissionAppListProvider> {
+        return listOf(
+            AllFilesAccessAppListProvider,
+            DisplayOverOtherAppsAppListProvider,
+            MediaManagementAppsAppListProvider,
+            ModifySystemSettingsAppListProvider,
+            PictureInPictureListProvider,
+            InstallUnknownAppsListProvider,
+            AlarmsAndRemindersAppListProvider,
+            WifiControlAppListProvider,
+        )
+    }
+
     override val pageProviderRepository = lazy {
-        val togglePermissionAppListTemplate =
-            TogglePermissionAppListTemplate(
-                allProviders =
-                    listOf(
-                        AllFilesAccessAppListProvider,
-                        DisplayOverOtherAppsAppListProvider,
-                        MediaManagementAppsAppListProvider,
-                        ModifySystemSettingsAppListProvider,
-                        PictureInPictureListProvider,
-                        InstallUnknownAppsListProvider,
-                        AlarmsAndRemindersAppListProvider,
-                        WifiControlAppListProvider,
-                    ),
-            )
+        val togglePermissionAppListTemplate = TogglePermissionAppListTemplate(
+            allProviders = getTogglePermissionAppListProviders()
+        )
         SettingsPageProviderRepository(
             allPageProviders = listOf(
                 HomePageProvider,
