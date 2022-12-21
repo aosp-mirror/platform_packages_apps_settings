@@ -32,3 +32,11 @@ message AppUsageEvent {
   optional int64 user_id = 6;
   optional int64 uid = 7;
 }
+
+// Represents a continuous period of time when an app is used.
+message AppUsagePeriod {
+  // Start of the usage period.
+  optional int64 start_time = 1;
+  // End of the usage period.
+  optional int64 end_time = 2;
+}

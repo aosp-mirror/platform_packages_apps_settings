@@ -33,7 +33,6 @@ import com.android.settings.Utils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,6 +91,13 @@ public class DataProcessManager {
     private boolean mShowBatteryLevel = true;
 
     private List<AppUsageEvent> mAppUsageEventList = new ArrayList<>();
+    /**
+     * The indexed {@link AppUsagePeriod} list data for each corresponding time slot.
+     * <p>{@code Long} stands for the userId.</p>
+     * <p>{@code String} stands for the packageName.</p>
+     */
+    private Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
+            mAppUsagePeriodMap;
 
     /**
      * Constructor when there exists battery level data.
@@ -165,6 +171,12 @@ public class DataProcessManager {
     @VisibleForTesting
     List<AppUsageEvent> getAppUsageEventList() {
         return mAppUsageEventList;
+    }
+
+    @VisibleForTesting
+    Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
+            getAppUsagePeriodMap() {
+        return mAppUsagePeriodMap;
     }
 
     @VisibleForTesting
@@ -361,9 +373,10 @@ public class DataProcessManager {
         if (!mShowScreenOnTime) {
             return;
         }
-        // Sort the appUsageEventList in ascending order based on the timestamp.
-        Collections.sort(mAppUsageEventList, DataProcessor.TIMESTAMP_COMPARATOR);
-        // TODO: process app usage data to an intermediate result for further use.
+        // Generates the indexed AppUsagePeriod list data for each corresponding time slot for
+        // further use.
+        mAppUsagePeriodMap = DataProcessor.generateAppUsagePeriodMap(
+                mHourlyBatteryLevelsPerDay, mAppUsageEventList, mStartTimestampOfLevelData);
     }
 
     private void tryToGenerateFinalDataAndApplyCallback() {
