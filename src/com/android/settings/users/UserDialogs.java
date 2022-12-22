@@ -202,4 +202,19 @@ public final class UserDialogs {
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();
     }
+
+    /**
+     * Creates a dialog to confirm that the admin privileges of the user should be revoked.
+     *
+     * @param onConfirmListener Callback object for positive action
+     */
+    public static Dialog createConfirmRevokeAdmin(Context context,
+            DialogInterface.OnClickListener onConfirmListener) {
+        return new AlertDialog.Builder(context)
+                .setTitle(R.string.user_revoke_admin_confirm_title)
+                .setMessage(R.string.user_revoke_admin_confirm_message)
+                .setPositiveButton(R.string.remove, onConfirmListener)
+                .setNegativeButton(android.R.string.cancel, null)
+                .create();
+    }
 }

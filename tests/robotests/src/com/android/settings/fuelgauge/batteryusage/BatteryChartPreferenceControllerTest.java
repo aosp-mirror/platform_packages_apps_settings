@@ -371,8 +371,8 @@ public final class BatteryChartPreferenceControllerTest {
     @Test
     public void getTotalHours_getExpectedResult() {
         Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = createBatteryHistoryMap(60);
-        BatteryLevelData batteryLevelData = DataProcessor.getBatteryLevelData(mContext, null,
-                batteryHistoryMap, null);
+        BatteryLevelData batteryLevelData =
+                DataProcessManager.getBatteryLevelData(mContext, null, batteryHistoryMap, null);
 
         final int totalHour = BatteryChartPreferenceController.getTotalHours(batteryLevelData);
 

@@ -146,7 +146,8 @@
             android:key="screensaver"
             android:title="@string/screensaver_settings_title"
             android:fragment="com.android.settings.dream.DreamSettings"
-            settings:keywords="@string/keywords_screensaver"/>
+            settings:keywords="@string/keywords_screensaver"
+            settings:controller="com.android.settings.display.ScreenSaverPreferenceController"/>
 
         <SwitchPreference
             android:key="camera_gesture"

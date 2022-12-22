@@ -109,7 +109,9 @@ public class MyDeviceInfoFragment extends DashboardFragment
 
         final ExecutorService executor = (fragment == null) ? null :
                 Executors.newSingleThreadExecutor();
-        final SlotSimStatus slotSimStatus = new SlotSimStatus(context, executor);
+        androidx.lifecycle.Lifecycle lifecycleObject = (fragment == null) ? null :
+                fragment.getLifecycle();
+        final SlotSimStatus slotSimStatus = new SlotSimStatus(context, executor, lifecycleObject);
 
         controllers.add(new IpAddressPreferenceController(context, lifecycle));
         controllers.add(new WifiMacAddressPreferenceController(context, lifecycle));

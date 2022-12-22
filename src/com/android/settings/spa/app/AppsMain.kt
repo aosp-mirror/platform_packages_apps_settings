@@ -22,7 +22,9 @@ import androidx.compose.material.icons.outlined.Apps
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
+import com.android.settings.spa.app.backgroundinstall.BackgroundInstalledAppsPageProvider
 import com.android.settings.spa.app.specialaccess.SpecialAppAccessPageProvider
+import com.android.settings.spa.home.HomePageProvider
 import com.android.settingslib.spa.framework.common.SettingsEntry
 import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
 import com.android.settingslib.spa.framework.common.SettingsPage
@@ -45,6 +47,7 @@ object AppsMainPageProvider : SettingsPageProvider {
         RegularScaffold(title = getTitle(arguments)) {
             AllAppListPageProvider.buildInjectEntry().build().UiLayout()
             SpecialAppAccessPageProvider.EntryItem()
+            BackgroundInstalledAppsPageProvider.EntryItem()
         }
     }
 
@@ -70,6 +73,7 @@ object AppsMainPageProvider : SettingsPageProvider {
         return listOf(
             AllAppListPageProvider.buildInjectEntry().setLink(fromPage = owner).build(),
             SpecialAppAccessPageProvider.buildInjectEntry().setLink(fromPage = owner).build(),
+            BackgroundInstalledAppsPageProvider.buildInjectEntry().setLink(fromPage = owner).build(),
         )
     }
 }

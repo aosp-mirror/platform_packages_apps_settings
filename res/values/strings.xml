@@ -256,8 +256,8 @@
     <string name="stylus_textfield_handwriting">Stylus writing in textfields</string>
     <!-- Preference title for toggling whether stylus button presses are ignored [CHAR LIMIT=none] -->
     <string name="stylus_ignore_button">Ignore all stylus button presses</string>
-    <!-- Name shown in a USI stylus header in device details page [CHAR LIMIT=60] -->
-    <string name="stylus_usi_header_title">USI stylus</string>
+    <!-- Name shown in the title of individual stylus preference in the connected devices page [CHAR LIMIT=60] -->
+    <string name="stylus_connected_devices_title">Stylus</string>
 
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time</string>
@@ -401,6 +401,8 @@
     <string name="share">Share</string>
     <!-- Button label for generic add action [CHAR LIMIT=20] -->
     <string name="add">Add</string>
+    <!-- Button label for remove action [CHAR LIMIT=20] -->
+    <string name="remove">Remove</string>
 
     <!-- Title of the Settings activity shown within the application itself. -->
     <string name="settings_label">Settings</string>
@@ -426,6 +428,8 @@
     <string name="date_time_auto">Set time automatically</string>
     <!-- Date & time setting screen setting switch title: whether the time zone should be determined automatically [CHAR LIMIT=100]  -->
     <string name="zone_auto_title">Set automatically</string>
+    <!-- Date & time setting screen setting switch summary for non-telephony devices [CHAR LIMIT=100] -->
+    <string name="auto_zone_requires_location_summary">Location will be used for setting the time zone when this toggle is on</string>
     <!-- Date & time setting screen setting option summary text for the automatic 24 hour setting checkbox [CHAR LIMIT=100] -->
     <string name="date_time_24hour_auto">Use locale default</string>
     <!-- Date & time setting screen setting check box title -->
@@ -2637,6 +2641,12 @@
     <!-- Phone info screen, section titles: -->
     <string name="battery_level_title">Battery level</string>
 
+    <!-- Communal Settings -->
+    <!-- Title of the communal settings under Settings > Communal [CHAR LIMIT=30] -->
+    <string name="communal_settings_title">Communal</string>
+    <!-- Summary of the communal settings under Settings > Communal [CHAR LIMIT=50] -->
+    <string name="communal_settings_summary">Communal settings</string>
+
     <!-- APN Settings -->
     <!-- APN settings screen title -->
     <string name="apn_settings">APNs</string>
@@ -2984,6 +2994,16 @@
 
     <!-- [CHAR LIMIT=60] Date&Time settings screen, toggle button title -->
     <string name="location_time_zone_detection_toggle_title">Use location</string>
+    <!-- [CHAR LIMIT=50] Date&Time settings screen, title of the dialog when AutoTimeZone is degraded -->
+    <string name="location_time_zone_detection_status_title">Cannot set the time zone automatically</string>
+    <!-- Date&Time settings screen, summary of the dialog when AutoTimeZone is degraded by settings-->
+    <string name="location_time_zone_detection_status_summary_degraded_by_settings" />
+    <!-- [CHAR LIMIT=60] Date&Time settings screen, summary of the dialog when AutoTimeZone is blocked by settings -->
+    <string name="location_time_zone_detection_status_summary_blocked_by_settings">Location or Location Services are off</string>
+    <!-- Date&Time settings screen, summary of the dialog when AutoTimeZone is blocked by the environment-->
+    <string name="location_time_zone_detection_status_summary_blocked_by_environment" />
+    <!-- Date&Time settings screen, summary of the dialog when AutoTimeZone is temporarily unavailable-->
+    <string name="location_time_zone_detection_status_summary_temporarily_unavailable" />
     <!-- [CHAR LIMIT=60] Date&Time settings screen, title of the dialog shown when user tries to
          enable GeoTZ when Location toggle is off. -->
     <string name="location_time_zone_detection_location_is_off_dialog_title">Device location needed</string>
@@ -2993,6 +3013,8 @@
     <!-- [CHAR LIMIT=30] Date&Time settings screen, button on a dialog shown when user tries to
     enable GeoTZ, but Location toggle is off, which leads to Location settings page. -->
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button">Location settings</string>
+    <!-- [CHAR LIMIT=30] Date&Time settings screen, button on a dialog shown when the LTZP needs to be fixed -->
+    <string name="location_time_zone_provider_fix_dialog_ok_button">Fix this</string>
     <!-- [CHAR LIMIT=30] Date&Time settings screen, button on a dialog shown when user tries to
      enable GeoTZ, but Location toggle is off, which closes the dialog. -->
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button">Cancel</string>
@@ -3661,6 +3683,53 @@
     <string name="language_and_input_for_work_category_title">Work profile keyboards &amp; tools</string>
     <!-- Title for the 'Virtual keyboards for work' preference. [CHAR LIMIT=45] -->
     <string name="virtual_keyboards_for_work_title">On-screen keyboard for work</string>
+
+    <!-- Title for the button to trigger the 'trackpad settings' page if only connect with a touchpad. [CHAR LIMIT=35] -->
+    <string name="trackpad_settings">Touchpad</string>
+    <!-- Title for the button to trigger the 'trackpad settings' page if connect with a touchpad and a mouse. [CHAR LIMIT=35] -->
+    <string name="trackpad_mouse_settings">Touchpad &amp; mouse</string>
+    <!-- Summary text for the 'trackpad settings' page. [CHAR LIMIT=100] -->
+    <string name="trackpad_settings_summary">Pointer speed, gestures</string>
+
+    <!-- Title text for 'Tap to click'. [CHAR LIMIT=35] -->
+    <string name="trackpad_tap_to_click">Tap to click</string>
+    <!-- Title text for 'Touchpad gestures' [CHAR LIMIT=35] -->
+    <string name="trackpad_touchpad_gesture_title">Touchpad gestures</string>
+    <!-- Summary text for 'Touchpad gestures' [CHAR LIMIT=60] -->
+    <string name="trackpad_touchpad_gesture_summary">Customize individual touchpad navigation gestures</string>
+    <!-- Title text for 'Reverse scrolling' [CHAR LIMIT=35] -->
+    <string name="trackpad_reverse_scrolling_title">Reverse scrolling</string>
+    <!-- Summary text for 'Reverse scrolling' [CHAR LIMIT=60] -->
+    <string name="trackpad_reverse_scrolling_summary">Content moves up when you scroll down</string>
+    <!-- Title text for 'Bottom-right tap' [CHAR LIMIT=35] -->
+    <string name="trackpad_bottom_right_tap_title">Bottom-right tap</string>
+    <!-- Summary text for 'Bottom-right tap' [CHAR LIMIT=60] -->
+    <string name="trackpad_bottom_right_tap_summary">Tap the bottom right corner of the touchpad for more options</string>
+    <!-- Title text for 'Pointer speed'. [CHAR LIMIT=35] -->
+    <string name="trackpad_pointer_speed">Pointer speed</string>
+    <!-- Title for the button to trigger the 'touch gesture' education. [CHAR LIMIT=35] -->
+    <string name="trackpad_touch_gesture">Learn touchpad gestures</string>
+
+    <!-- Title text for 'Go back' [CHAR LIMIT=35] -->
+    <string name="trackpad_go_back_title">Go back</string>
+    <!-- Summary text for 'Go back' [CHAR LIMIT=60] -->
+    <string name="trackpad_go_back_summary">Swipe left or right with three fingers</string>
+    <!-- Title text for 'Go home' [CHAR LIMIT=35] -->
+    <string name="trackpad_go_home_title">Go home</string>
+    <!-- Summary text for 'Go home' [CHAR LIMIT=60] -->
+    <string name="trackpad_go_home_summary">Swipe up with three fingers</string>
+    <!-- Title text for 'Recent apps' [CHAR LIMIT=35] -->
+    <string name="trackpad_recent_apps_title">Recent apps</string>
+    <!-- Summary text for 'Recent apps' [CHAR LIMIT=60] -->
+    <string name="trackpad_recent_apps_summary">Swipe up with three fingers, then hold</string>
+    <!-- Title text for 'Notifications' [CHAR LIMIT=35] -->
+    <string name="trackpad_notifications_title">Notifications</string>
+    <!-- Summary text for 'Notifications' [CHAR LIMIT=60] -->
+    <string name="trackpad_notifications_summary">Swipe down with three fingers</string>
+    <!-- Title text for 'Switch apps' [CHAR LIMIT=35] -->
+    <string name="trackpad_switch_apps_title">Switch apps</string>
+    <!-- Summary text for 'Switch apps' [CHAR LIMIT=60] -->
+    <string name="trackpad_switch_apps_summary">Swipe left or right with four fingers</string>
 
     <!-- Summary text for keyboards when no layout has been selected. [CHAR LIMIT=35] -->
     <string name="default_keyboard_layout">Default</string>
@@ -5967,12 +6036,18 @@
 
     <!-- Title of preference to enable calling and SMS [CHAR LIMIT=45] -->
     <string name="user_enable_calling_sms">Turn on phone calls &amp; SMS</string>
+    <!-- Title of preference to grant user admin privileges [CHAR LIMIT=45] -->
+    <string name="user_grant_admin">Give this user admin privileges</string>
     <!-- Title of preference to remove the user [CHAR LIMIT=35] -->
     <string name="user_remove_user">Delete user</string>
     <!-- Title for confirmation of turning on calls and SMS [CHAR LIMIT=45] -->
     <string name="user_enable_calling_and_sms_confirm_title">Turn on phone calls &amp; SMS?</string>
     <!-- Message for confirmation of turning on calls and SMS [CHAR LIMIT=none] -->
     <string name="user_enable_calling_and_sms_confirm_message">Call and SMS history will be shared with this user.</string>
+    <!-- Title for confirmation of revoking admin privileges [CHAR LIMIT=45] -->
+    <string name="user_revoke_admin_confirm_title">Remove admin privileges?</string>
+    <!-- Message for confirmation of revoking admin privileges [CHAR LIMIT=none] -->
+    <string name="user_revoke_admin_confirm_message">Are you sure you want to remove this user\'s admin privileges?</string>
     <!-- Title for the emergency info preference [CHAR LIMIT=40] -->
     <string name="emergency_info_title">Emergency information</string>
     <!-- Summary for the emergency info preference [CHAR LIMIT=40] -->
@@ -9730,8 +9805,12 @@
     <!-- AutoFill strings -->
     <!-- Preference label for choosing auto-fill service. [CHAR LIMIT=60] -->
     <string name="autofill_app">Autofill service</string>
+    <!-- Preference label for choosing auto-fill service. [CHAR LIMIT=60] -->
+    <string name="default_autofill_app">Default autofill service</string>
     <!-- Preference category for showing auto-fill services with saved passwords. [CHAR LIMIT=60] -->
     <string name="autofill_passwords">Passwords</string>
+    <!-- Preference category for showing credman services with saved credentials. [CHAR LIMIT=60] -->
+    <string name="credman_credentials">Password and identity services</string>
     <!-- Summary for passwords settings that shows how many passwords are saved for each autofill
          service. [CHAR LIMIT=NONE] -->
     <plurals name="autofill_passwords_count">
@@ -9743,6 +9822,8 @@
     <string name="autofill_passwords_count_placeholder" translatable="false">\u2014</string>
     <!-- Keywords for the auto-fill feature. [CHAR LIMIT=NONE] -->
     <string name="autofill_keywords">auto, fill, autofill, password</string>
+    <!-- Keywords for the credman feature. [CHAR LIMIT=NONE] -->
+    <string name="credman_keywords">credentials, passkey, password</string>
 
     <!-- Message of the warning dialog for setting the auto-fill app. [CHAR_LIMIT=NONE] -->
     <string name="autofill_confirmation_message">
@@ -9754,6 +9835,21 @@
         your screen to determine what can be autofilled.
         ]]>
     </string>
+
+    <!-- Title of the warning dialog for disabling the credential provider. [CHAR_LIMIT=NONE] -->
+    <string name="credman_confirmation_message_title">Turn off %1$s\?</string>
+
+    <!-- Message of the warning dialog for disabling the credential provider. [CHAR_LIMIT=NONE] -->
+    <string name="credman_confirmation_message">Saved info like addresses or payment methods won\'t be filled in when you sign in. To keep your saved info filled in, set a default autofill service.</string>
+
+    <!-- Title of the error dialog when too many credential providers are selected. [CHAR_LIMIT=NONE] -->
+    <string name="credman_error_message_title">Password and identity services limit</string>
+
+    <!-- Message of the error dialog when too many credential providers are selected. [CHAR_LIMIT=NONE] -->
+    <string name="credman_error_message">You can have up to 5 autofill and password services active at the same time. Turn off a service to add more.</string>
+
+    <!-- Positive button to turn off credential manager provider (confirmation). [CHAR LIMIT=60] -->
+    <string name="credman_confirmation_message_positive_button">Turn off</string>
 
     <!-- Preference category for autofill debugging development settings. [CHAR LIMIT=25] -->
     <string name="debug_autofill_category">Autofill</string>
@@ -11369,4 +11465,29 @@
     <!-- [CHAR LIMIT=NONE] Title for preference: Transfer eSIM to another device -->
     <string name="transfer_esim_to_another_device_title">Transfer eSIM to another device</string>
 
+    <!-- Background Install Control UI -->
+    <!-- [CHAR LIMIT=NONE] Preference Feature Summary -->
+    <string name="background_install_preference_summary">{count, plural,
+    =1    {# app}
+    other {# apps}
+    }</string>
+
+    <!-- [CHAR LIMIT=NONE] Feature Title -->
+    <string name="background_install_title">Apps installed in the background</string>
+    <!-- [CHAR LIMIT=NONE] Feature summary -->
+    <string name="background_install_summary">Your device manufacturer may install apps on your device in the background, or allow your carrier and other partners to do so.\u000a\u000aAny apps listed here aren\u0027t required for your device to function normally. You can uninstall apps you don\u0027t want. </string>
+    <!-- [CHAR LIMIT=NONE] Group list no entry -->
+    <string name="background_install_feature_list_no_entry">No apps installed in the background</string>
+    <!-- [CHAR LIMIT=NONE] Uninstall app button content description -->
+    <string name="background_install_uninstall_button_description">Uninstall app</string>
+    <!-- [CHAR LIMIT=NONE] Before time period group list title -->
+    <string name="background_install_before">{count, plural,
+    =1    {Apps installed in the last # month}
+    other {Apps installed in the last # months}
+    }</string>
+    <!-- [CHAR LIMIT=NONE] After time period group list title -->
+    <string name="background_install_after">{count, plural,
+    =1    {Apps installed more than # month ago}
+    other {Apps installed more than # months ago}
+    }</string>
 </resources>

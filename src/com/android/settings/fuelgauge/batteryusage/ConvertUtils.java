@@ -17,7 +17,9 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import android.annotation.IntDef;
 import android.annotation.Nullable;
+import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents.Event;
+import android.app.usage.UsageStatsManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -25,7 +27,9 @@ import android.database.Cursor;
 import android.os.BatteryUsageStats;
 import android.os.Build;
 import android.os.LocaleList;
+import android.os.RemoteException;
 import android.os.UserHandle;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Base64;
 import android.util.Log;
@@ -167,8 +171,10 @@ public final class ConvertUtils {
     /** Converts to {@link AppUsageEvent} from {@link Event} */
     @Nullable
     public static AppUsageEvent convertToAppUsageEvent(
-            Context context, final Event event, final long userId) {
-        if (event.getPackageName() == null) {
+            Context context, final IUsageStatsManager usageStatsManager, final Event event,
+            final long userId) {
+        final String packageName = event.getPackageName();
+        if (packageName == null) {
             // See b/190609174: Event package names should never be null, but sometimes they are.
             // Note that system events like device shutting down should still come with the android
             // package name.
@@ -182,13 +188,20 @@ public final class ConvertUtils {
         appUsageEventBuilder
                 .setTimestamp(event.getTimeStamp())
                 .setType(getAppUsageEventType(event.getEventType()))
-                .setPackageName(event.getPackageName())
+                .setPackageName(packageName)
                 .setUserId(userId);
 
+        final String taskRootPackageName = getTaskRootPackageName(event);
+        if (taskRootPackageName != null) {
+            appUsageEventBuilder.setTaskRootPackageName(taskRootPackageName);
+        }
+
+        final String effectivePackageName =
+                getEffectivePackageName(usageStatsManager, packageName, taskRootPackageName);
         try {
             final long uid = context
                     .getPackageManager()
-                    .getPackageUidAsUser(event.getPackageName(), (int) userId);
+                    .getPackageUidAsUser(effectivePackageName, (int) userId);
             appUsageEventBuilder.setUid(uid);
         } catch (PackageManager.NameNotFoundException e) {
             Log.w(TAG, String.format(
@@ -200,10 +213,6 @@ public final class ConvertUtils {
             appUsageEventBuilder.setInstanceId(event.getInstanceId());
         } catch (NoClassDefFoundError | NoSuchMethodError e) {
             Log.w(TAG, "UsageEvent instance ID API error");
-        }
-        String taskRootPackageName = getTaskRootPackageName(event);
-        if (taskRootPackageName != null) {
-            appUsageEventBuilder.setTaskRootPackageName(taskRootPackageName);
         }
 
         return appUsageEventBuilder.build();
@@ -268,6 +277,35 @@ public final class ConvertUtils {
     }
 
     /**
+     * Returns the package name the app usage should be attributed to.
+     *
+     * <ul>
+     *   <li>If {@link UsageStatsManager#getUsageSource()} returns {@link
+     *       UsageStatsManager#USAGE_SOURCE_CURRENT_ACTIVITY}, this method will return packageName.
+     *   <li>If {@link UsageStatsManager#getUsageSource()} returns {@link
+     *       UsageStatsManager#USAGE_SOURCE_TASK_ROOT_ACTIVITY}, this method will return
+     *       taskRootPackageName if it exists, or packageName otherwise.
+     * </ul>
+     */
+    @VisibleForTesting
+    static String getEffectivePackageName(
+            final IUsageStatsManager usageStatsManager, final String packageName,
+            final String taskRootPackageName) {
+        int usageSource = getUsageSource(usageStatsManager);
+        switch (usageSource) {
+            case UsageStatsManager.USAGE_SOURCE_TASK_ROOT_ACTIVITY:
+                return !TextUtils.isEmpty(taskRootPackageName)
+                        ? taskRootPackageName
+                        : packageName;
+            case UsageStatsManager.USAGE_SOURCE_CURRENT_ACTIVITY:
+                return packageName;
+            default:
+                Log.e(TAG, "Unexpected usage source: " + usageSource);
+                return packageName;
+        }
+    }
+
+    /**
      * Returns the package name of the task root when this event was reported when {@code event} is
      * one of:
      *
@@ -295,6 +333,20 @@ public final class ConvertUtils {
         } catch (NoSuchMethodError e) {
             Log.w(TAG, "Failed to call Event#getTaskRootPackageName()");
             return null;
+        }
+    }
+
+    /**
+     * Returns what App Usage Observers will consider the source of usage for an activity.
+     *
+     * @see UsageStatsManager#getUsageSource()
+     */
+    private static int getUsageSource(final IUsageStatsManager usageStatsManager) {
+        try {
+            return usageStatsManager.getUsageSource();
+        } catch (RemoteException e) {
+            Log.e(TAG, "Failed to getUsageSource", e);
+            return UsageStatsManager.USAGE_SOURCE_CURRENT_ACTIVITY;
         }
     }
 

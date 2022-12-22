@@ -83,6 +83,7 @@ import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFrag
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.NfcAndPaymentFragment;
 import com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment;
+import com.android.settings.connecteddevice.stylus.StylusUsiDetailsFragment;
 import com.android.settings.connecteddevice.usb.UsbDetailsFragment;
 import com.android.settings.datausage.DataSaverSummary;
 import com.android.settings.datausage.DataUsageList;
@@ -123,6 +124,7 @@ import com.android.settings.inputmethod.KeyboardSettings;
 import com.android.settings.inputmethod.NewKeyboardLayoutEnabledLocalesFragment;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.SpellCheckersSettings;
+import com.android.settings.inputmethod.TrackpadSettings;
 import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.inputmethod.UserDictionarySettings;
 import com.android.settings.language.LanguageAndInputSettings;
@@ -216,6 +218,7 @@ public class SettingsGateway {
             LanguageSettings.class.getName(),
             KeyboardSettings.class.getName(),
             NewKeyboardLayoutEnabledLocalesFragment.class.getName(),
+            TrackpadSettings.class.getName(),
             SpellCheckersSettings.class.getName(),
             UserDictionaryList.class.getName(),
             UserDictionarySettings.class.getName(),
@@ -336,6 +339,7 @@ public class SettingsGateway {
             BluetoothDeviceDetailsFragment.class.getName(),
             BluetoothBroadcastDialog.class.getName(),
             BluetoothFindBroadcastsFragment.class.getName(),
+            StylusUsiDetailsFragment.class.getName(),
             DataUsageList.class.getName(),
             ToggleBackupSettingFragment.class.getName(),
             PreviouslyConnectedDeviceDashboardFragment.class.getName(),
