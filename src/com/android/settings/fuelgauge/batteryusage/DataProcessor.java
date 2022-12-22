@@ -32,7 +32,6 @@ import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
 import android.os.BatteryUsageStatsQuery;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Process;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -111,48 +110,6 @@ public final class DataProcessor {
     }
 
     private DataProcessor() {
-    }
-
-    /**
-     * @return Returns battery level data and start async task to compute battery diff usage data
-     * and load app labels + icons.
-     * Returns null if the input is invalid or not having at least 2 hours data.
-     */
-    @Nullable
-    public static BatteryLevelData getBatteryLevelData(
-            Context context,
-            @Nullable Handler handler,
-            @Nullable final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap,
-            final UsageMapAsyncResponse asyncResponseDelegate) {
-        if (batteryHistoryMap == null || batteryHistoryMap.isEmpty()) {
-            Log.d(TAG, "batteryHistoryMap is null in getBatteryLevelData()");
-            loadBatteryUsageDataFromBatteryStatsService(
-                    context, handler, asyncResponseDelegate);
-            return null;
-        }
-        handler = handler != null ? handler : new Handler(Looper.getMainLooper());
-        // Process raw history map data into hourly timestamps.
-        final Map<Long, Map<String, BatteryHistEntry>> processedBatteryHistoryMap =
-                getHistoryMapWithExpectedTimestamps(context, batteryHistoryMap);
-        // Wrap and processed history map into easy-to-use format for UI rendering.
-        final BatteryLevelData batteryLevelData =
-                getLevelDataThroughProcessedHistoryMap(context, processedBatteryHistoryMap);
-        if (batteryLevelData == null) {
-            loadBatteryUsageDataFromBatteryStatsService(
-                    context, handler, asyncResponseDelegate);
-            Log.d(TAG, "getBatteryLevelData() returns null");
-            return null;
-        }
-
-        // Start the async task to compute diff usage data and load labels and icons.
-        new ComputeUsageMapAndLoadItemsTask(
-                context,
-                handler,
-                asyncResponseDelegate,
-                batteryLevelData.getHourlyBatteryLevelsPerDay(),
-                processedBatteryHistoryMap).execute();
-
-        return batteryLevelData;
     }
 
     /**
@@ -299,7 +256,8 @@ public final class DataProcessor {
                             break;
                         }
                         final AppUsageEvent appUsageEvent =
-                                ConvertUtils.convertToAppUsageEvent(context, event, userId);
+                                ConvertUtils.convertToAppUsageEvent(
+                                        context, sUsageStatsManager, event, userId);
                         if (appUsageEvent != null) {
                             numEventsFetched++;
                             appUsageEventList.add(appUsageEvent);
@@ -361,7 +319,6 @@ public final class DataProcessor {
      * The keys of processed history map should contain every hour between the start and end
      * timestamp. If there's no data in some key, the value will be the empty hashmap.
      */
-    @VisibleForTesting
     static Map<Long, Map<String, BatteryHistEntry>> getHistoryMapWithExpectedTimestamps(
             Context context,
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
@@ -385,7 +342,6 @@ public final class DataProcessor {
         return resultMap;
     }
 
-    @VisibleForTesting
     @Nullable
     static BatteryLevelData getLevelDataThroughProcessedHistoryMap(
             Context context,
@@ -624,16 +580,37 @@ public final class DataProcessor {
     }
 
     /**
-     * Starts the async task to load battery diff usage data and load app labels + icons.
+     * @return Returns the overall battery usage data from battery stats service directly.
+     *
+     * The returned value should be always a 2d map and composed by only 1 part:
+     * - [SELECTED_INDEX_ALL][SELECTED_INDEX_ALL]
      */
-    private static void loadBatteryUsageDataFromBatteryStatsService(
-            Context context,
-            @Nullable Handler handler,
-            final UsageMapAsyncResponse asyncResponseDelegate) {
-        new LoadUsageMapFromBatteryStatsServiceTask(
-                context,
-                handler,
-                asyncResponseDelegate).execute();
+    static Map<Integer, Map<Integer, BatteryDiffData>> getBatteryUsageMapFromStatsService(
+            final Context context) {
+        final Map<Integer, Map<Integer, BatteryDiffData>> resultMap = new HashMap<>();
+        final Map<Integer, BatteryDiffData> allUsageMap = new HashMap<>();
+        // Always construct the map whether the value is null or not.
+        allUsageMap.put(SELECTED_INDEX_ALL,
+                generateBatteryDiffData(context, getBatteryHistListFromFromStatsService(context)));
+        resultMap.put(SELECTED_INDEX_ALL, allUsageMap);
+        processBatteryDiffData(context, resultMap);
+        return resultMap;
+    }
+
+    static void loadLabelAndIcon(
+            @Nullable final Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageMap) {
+        if (batteryUsageMap == null) {
+            return;
+        }
+        // Pre-loads each BatteryDiffEntry relative icon and label for all slots.
+        final BatteryDiffData batteryUsageMapForAll =
+                batteryUsageMap.get(SELECTED_INDEX_ALL).get(SELECTED_INDEX_ALL);
+        if (batteryUsageMapForAll != null) {
+            batteryUsageMapForAll.getAppDiffEntryList().forEach(
+                    entry -> entry.loadLabelAndIcon());
+            batteryUsageMapForAll.getSystemDiffEntryList().forEach(
+                    entry -> entry.loadLabelAndIcon());
+        }
     }
 
     @Nullable
@@ -670,24 +647,6 @@ public final class DataProcessor {
         Log.d(TAG, String.format("getAppUsageEventsForUser(): %d from %d to %d in %d/ms", userId,
                 startTime, endTime, elapsedTime));
         return events;
-    }
-
-    /**
-     * @return Returns the overall battery usage data from battery stats service directly.
-     *
-     * The returned value should be always a 2d map and composed by only 1 part:
-     * - [SELECTED_INDEX_ALL][SELECTED_INDEX_ALL]
-     */
-    private static Map<Integer, Map<Integer, BatteryDiffData>> getBatteryUsageMapFromStatsService(
-            final Context context) {
-        final Map<Integer, Map<Integer, BatteryDiffData>> resultMap = new HashMap<>();
-        final Map<Integer, BatteryDiffData> allUsageMap = new HashMap<>();
-        // Always construct the map whether the value is null or not.
-        allUsageMap.put(SELECTED_INDEX_ALL,
-                generateBatteryDiffData(context, getBatteryHistListFromFromStatsService(context)));
-        resultMap.put(SELECTED_INDEX_ALL, allUsageMap);
-        processBatteryDiffData(context, resultMap);
-        return resultMap;
     }
 
     @Nullable
@@ -1469,22 +1428,6 @@ public final class DataProcessor {
         return true;
     }
 
-    private static void loadLabelAndIcon(
-            @Nullable final Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageMap) {
-        if (batteryUsageMap == null) {
-            return;
-        }
-        // Pre-loads each BatteryDiffEntry relative icon and label for all slots.
-        final BatteryDiffData batteryUsageMapForAll =
-                batteryUsageMap.get(SELECTED_INDEX_ALL).get(SELECTED_INDEX_ALL);
-        if (batteryUsageMapForAll != null) {
-            batteryUsageMapForAll.getAppDiffEntryList().forEach(
-                    entry -> entry.loadLabelAndIcon());
-            batteryUsageMapForAll.getSystemDiffEntryList().forEach(
-                    entry -> entry.loadLabelAndIcon());
-        }
-    }
-
     private static long getTimestampWithDayDiff(final long timestamp, final int dayDiff) {
         final Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(timestamp);
@@ -1527,7 +1470,7 @@ public final class DataProcessor {
     }
 
     // Compute diff map and loads all items (icon and label) in the background.
-    private static class ComputeUsageMapAndLoadItemsTask
+    static class ComputeUsageMapAndLoadItemsTask
             extends AsyncTask<Void, Void, Map<Integer, Map<Integer, BatteryDiffData>>> {
 
         Context mApplicationContext;
@@ -1536,7 +1479,7 @@ public final class DataProcessor {
         private List<BatteryLevelData.PeriodBatteryLevelData> mHourlyBatteryLevelsPerDay;
         private Map<Long, Map<String, BatteryHistEntry>> mBatteryHistoryMap;
 
-        private ComputeUsageMapAndLoadItemsTask(
+        ComputeUsageMapAndLoadItemsTask(
                 Context context,
                 Handler handler,
                 final UsageMapAsyncResponse asyncResponseDelegate,
@@ -1592,37 +1535,6 @@ public final class DataProcessor {
                     mAsyncResponseDelegate.onBatteryUsageMapLoaded(batteryUsageMap);
                 });
             }
-        }
-    }
-
-    // Loads battery usage data from battery stats service directly and loads all items (icon and
-    // label) in the background.
-    private static final class LoadUsageMapFromBatteryStatsServiceTask
-            extends ComputeUsageMapAndLoadItemsTask {
-
-        private LoadUsageMapFromBatteryStatsServiceTask(
-                Context context,
-                Handler handler,
-                final UsageMapAsyncResponse asyncResponseDelegate) {
-            super(context, handler, asyncResponseDelegate, /*hourlyBatteryLevelsPerDay=*/ null,
-                    /*batteryHistoryMap=*/ null);
-        }
-
-        @Override
-        protected Map<Integer, Map<Integer, BatteryDiffData>> doInBackground(Void... voids) {
-            if (mApplicationContext == null
-                    || mHandler == null
-                    || mAsyncResponseDelegate == null) {
-                Log.e(TAG, "invalid input for ComputeUsageMapAndLoadItemsTask()");
-                return null;
-            }
-            final long startTime = System.currentTimeMillis();
-            final Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageMap =
-                    getBatteryUsageMapFromStatsService(mApplicationContext);
-            loadLabelAndIcon(batteryUsageMap);
-            Log.d(TAG, String.format("execute LoadUsageMapFromBatteryStatsServiceTask in %d/ms",
-                    (System.currentTimeMillis() - startTime)));
-            return batteryUsageMap;
         }
     }
 }

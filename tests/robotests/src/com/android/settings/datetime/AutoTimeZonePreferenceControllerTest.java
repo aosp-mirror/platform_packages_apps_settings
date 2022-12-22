@@ -16,6 +16,7 @@
 
 package com.android.settings.datetime;
 
+import static android.app.time.DetectorStatusTypes.DETECTION_ALGORITHM_STATUS_NOT_SUPPORTED;
 import static android.app.time.DetectorStatusTypes.DETECTION_ALGORITHM_STATUS_RUNNING;
 import static android.app.time.DetectorStatusTypes.DETECTOR_STATUS_RUNNING;
 import static android.app.time.LocationTimeZoneAlgorithmStatus.PROVIDER_STATUS_NOT_PRESENT;
@@ -36,9 +37,12 @@ import android.app.time.TimeZoneCapabilitiesAndConfig;
 import android.app.time.TimeZoneConfiguration;
 import android.app.time.TimeZoneDetectorStatus;
 import android.content.Context;
+import android.location.LocationManager;
 import android.os.UserHandle;
 
 import androidx.preference.Preference;
+
+import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,6 +62,8 @@ public class AutoTimeZonePreferenceControllerTest {
     private Preference mPreference;
     @Mock
     private TimeManager mTimeManager;
+    @Mock
+    private LocationManager mLocationManager;
 
     @Before
     public void setUp() {
@@ -67,6 +73,9 @@ public class AutoTimeZonePreferenceControllerTest {
         mPreference = new Preference(mContext);
 
         when(mContext.getSystemService(TimeManager.class)).thenReturn(mTimeManager);
+        when(mContext.getSystemService(LocationManager.class)).thenReturn(mLocationManager);
+
+        when(mLocationManager.isLocationEnabled()).thenReturn(true);
     }
 
     @Test
@@ -221,10 +230,35 @@ public class AutoTimeZonePreferenceControllerTest {
         assertThat(controller.isEnabled()).isFalse();
     }
 
+    @Test
+    public void getSummary() {
+        AutoTimeZonePreferenceController controller = new AutoTimeZonePreferenceController(
+                mContext, mCallback, false /* fromSUW */);
+
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* autoSupported= */true, /* autoEnabled= */true, /* telephonySupported= */
+                true);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+        when(mTimeManager.updateTimeZoneConfiguration(Mockito.any())).thenReturn(true);
+
+        assertThat(controller.getSummary()).isEqualTo("");
+
+        capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* autoSupported= */true, /* autoEnabled= */true, /* telephonySupported= */
+                false);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+        when(mTimeManager.updateTimeZoneConfiguration(Mockito.any())).thenReturn(true);
+
+        assertThat(controller.getSummary()).isEqualTo(
+                mContext.getString(R.string.auto_zone_requires_location_summary));
+    }
+
     private static TimeZoneCapabilitiesAndConfig createCapabilitiesAndConfig(
-            boolean autoSupported, boolean autoEnabled) {
+            boolean autoSupported, boolean autoEnabled, boolean telephonySupported) {
         TimeZoneDetectorStatus status = new TimeZoneDetectorStatus(DETECTOR_STATUS_RUNNING,
-                new TelephonyTimeZoneAlgorithmStatus(DETECTION_ALGORITHM_STATUS_RUNNING),
+                new TelephonyTimeZoneAlgorithmStatus(
+                        telephonySupported ? DETECTION_ALGORITHM_STATUS_RUNNING
+                                : DETECTION_ALGORITHM_STATUS_NOT_SUPPORTED),
                 new LocationTimeZoneAlgorithmStatus(DETECTION_ALGORITHM_STATUS_RUNNING,
                         PROVIDER_STATUS_NOT_READY, null,
                         PROVIDER_STATUS_NOT_PRESENT, null));
@@ -241,5 +275,10 @@ public class AutoTimeZonePreferenceControllerTest {
                 .setGeoDetectionEnabled(false)
                 .build();
         return new TimeZoneCapabilitiesAndConfig(status, capabilities, config);
+    }
+
+    private static TimeZoneCapabilitiesAndConfig createCapabilitiesAndConfig(
+            boolean autoSupported, boolean autoEnabled) {
+        return createCapabilitiesAndConfig(autoSupported, autoEnabled, false);
     }
 }

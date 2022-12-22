@@ -47,6 +47,11 @@
             android:title="@string/zone_auto_title"
             settings:userRestriction="no_config_date_time"/>
 
+        <com.android.settingslib.widget.BannerMessagePreference
+            android:key="location_time_zone_detection_status"
+            android:title="@string/location_time_zone_detection_status_title"
+            settings:controller="com.android.settings.datetime.LocationProviderStatusPreferenceController"/>
+
         <!-- This preference gets removed if location-based time zone detection is not supported -->
         <SwitchPreference
             android:key="location_time_zone_detection"

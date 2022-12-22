@@ -29,8 +29,10 @@ import android.content.Context;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -97,6 +99,25 @@ public class AutoTimeZonePreferenceController extends AbstractPreferenceControll
 
         mCallback.updateTimeAndDateDisplay(mContext);
         return result;
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        // If auto time zone cannot enable telephony fallback and is capable of location, then auto
+        // time zone must use location.
+        if (LocationProviderStatusPreferenceController.hasLocationTimeZoneNoTelephonyFallback(
+                mTimeManager.getTimeZoneCapabilitiesAndConfig().getDetectorStatus())) {
+            return mContext.getResources().getString(R.string.auto_zone_requires_location_summary);
+        }
+        // If the user has a dedicated toggle to control location use, the summary can
+        // be empty because the use of location is explicit.
+        return "";
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        refreshSummary(screen.findPreference(getPreferenceKey()));
     }
 
     @VisibleForTesting
