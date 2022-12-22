@@ -904,7 +904,7 @@
     <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Vahvista laiteparin muodostus koordinoidun joukon kanssa"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"Laitteesta&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Muodostetaanko pari tämän laitteen kanssa?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"Jos haluat muodostaa laiteparin laitteen <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> kanssa, kirjoita laitteelle <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> ja paina Rivinvaihto tai Enter."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Anna yhteystietojesi ja puheluhistoriasi käyttöoikeus"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Anna pääsyoikeus yhteystietoihisi ja puheluhistoriaasi"</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"Yhteyden muodostaminen laitteeseen <xliff:g id="DEVICE_NAME">%1$s</xliff:g> epäonnistui."</string>
     <string name="bluetooth_preference_scan_title" msgid="3460316252463771851">"Etsi laitteita"</string>
@@ -1785,6 +1785,10 @@
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"<xliff:g id="NAME">^1</xliff:g> on nyt käytettävissä"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Akun tila"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Akun taso"</string>
+    <!-- no translation found for communal_settings_title (2845678473945902115) -->
+    <skip />
+    <!-- no translation found for communal_settings_summary (4923914136953940317) -->
+    <skip />
     <string name="apn_settings" msgid="4295467389400441299">"APN:t"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Muokkaa tukiasemaa"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Ei asetettu"</string>
@@ -2826,21 +2830,14 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Joitakin toimintoja voidaan rajoittaa"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Enemmän akkua kuluttavat"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Katso eniten kuluttavat sovellukset"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (6258554134146272311) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (6836981984725209843) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_title (4332616280495788195) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_summary (7870758621381307597) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_title (1414785238383255699) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_summary (3512082623718801459) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Lataus optimoitu akun suojaamiseksi"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"Lataus optimoidaan, jotta akku kestäisi pidempään"</string>
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Lataus optimoitu akun suojaamiseksi"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Lataus optimoidaan laitteen ollessa telineessä, jotta akku kestäisi pidempään"</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Lataus optimoitu akun suojaamiseksi"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Lataus optimoidaan laitteen ollessa telineessä, jotta akku kestäisi pidempään"</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Ladataan täyteen"</string>
-    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_summary (1099500476761333281) -->
-    <skip />
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"Akun suojaamiseksi lataus optimoidaan tabletin ollessa telineessä seuraavan kerran"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Lue lisää latauksen keskeyttämisestä"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Jatka lataamista"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Tietyissä tilanteissa (esim. korkea lämpötila tai pitkä latausaika) lataus voi olla rajoitettu <xliff:g id="PERCENT">%1$s</xliff:g>:iin, jotta akku pysyy hyvässä kunnossa.\n\nKun tilanne on ohi, puhelin latautuu automaattisesti normaalisti."</string>
