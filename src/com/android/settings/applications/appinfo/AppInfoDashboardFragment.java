@@ -451,6 +451,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
                     };
 
             final BiometricPrompt.Builder builder = new BiometricPrompt.Builder(context)
+                    .setUseDefaultSubtitle() // use default subtitle if subtitle is null/empty
                     .setUseDefaultTitle(); // use default title if title is null/empty
 
             final BiometricManager bm = context.getSystemService(BiometricManager.class);
