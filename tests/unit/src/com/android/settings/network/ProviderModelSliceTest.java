@@ -66,7 +66,6 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -463,7 +462,6 @@ public class ProviderModelSliceTest {
         }
     }
 
-    @Ignore
     @Test
     @UiThreadTest
     public void onNotifyChange_FirstTimeDisableToggleState_showDialog() {
