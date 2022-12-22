@@ -121,6 +121,7 @@ import com.android.settings.gestures.SystemNavigationGestureSettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
 import com.android.settings.inputmethod.KeyboardSettings;
+import com.android.settings.inputmethod.ModifierKeysSettings;
 import com.android.settings.inputmethod.NewKeyboardLayoutEnabledLocalesFragment;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.SpellCheckersSettings;
@@ -217,6 +218,7 @@ public class SettingsGateway {
             LanguageAndInputSettings.class.getName(),
             LanguageSettings.class.getName(),
             KeyboardSettings.class.getName(),
+            ModifierKeysSettings.class.getName(),
             NewKeyboardLayoutEnabledLocalesFragment.class.getName(),
             TrackpadSettings.class.getName(),
             SpellCheckersSettings.class.getName(),
