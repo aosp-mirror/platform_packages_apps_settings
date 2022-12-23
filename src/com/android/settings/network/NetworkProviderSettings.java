@@ -85,6 +85,7 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
@@ -1130,22 +1131,21 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     private String getSavedNetworkSettingsSummaryText(
             int numSavedNetworks, int numSavedSubscriptions) {
-        if (getResources() == null) {
+        if (getContext() == null) {
             Log.w(TAG, "getSavedNetworkSettingsSummaryText shouldn't run if resource is not ready");
             return null;
         }
 
         if (numSavedSubscriptions == 0) {
-            return getResources().getQuantityString(R.plurals.wifi_saved_access_points_summary,
-                    numSavedNetworks, numSavedNetworks);
+            return StringUtil.getIcuPluralsString(getContext(), numSavedNetworks,
+                    R.string.wifi_saved_access_points_summary);
         } else if (numSavedNetworks == 0) {
-            return getResources().getQuantityString(
-                    R.plurals.wifi_saved_passpoint_access_points_summary,
-                    numSavedSubscriptions, numSavedSubscriptions);
+            return StringUtil.getIcuPluralsString(getContext(), numSavedSubscriptions,
+                    R.string.wifi_saved_passpoint_access_points_summary);
         } else {
             final int numTotalEntries = numSavedNetworks + numSavedSubscriptions;
-            return getResources().getQuantityString(R.plurals.wifi_saved_all_access_points_summary,
-                    numTotalEntries, numTotalEntries);
+            return StringUtil.getIcuPluralsString(getContext(), numTotalEntries,
+                    R.string.wifi_saved_all_access_points_summary);
         }
     }
 

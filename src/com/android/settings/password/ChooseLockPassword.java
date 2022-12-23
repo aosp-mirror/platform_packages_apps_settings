@@ -780,46 +780,38 @@ public class ChooseLockPassword extends SettingsActivity {
                         messages.add(getString(R.string.lockpassword_illegal_character));
                         break;
                     case NOT_ENOUGH_UPPER_CASE:
-                        messages.add(getResources().getQuantityString(
-                                R.plurals.lockpassword_password_requires_uppercase,
-                                error.requirement, error.requirement));
+                        messages.add(StringUtil.getIcuPluralsString(getContext(), error.requirement,
+                                R.string.lockpassword_password_requires_uppercase));
                         break;
                     case NOT_ENOUGH_LOWER_CASE:
-                        messages.add(getResources().getQuantityString(
-                                R.plurals.lockpassword_password_requires_lowercase,
-                                error.requirement, error.requirement));
+                        messages.add(StringUtil.getIcuPluralsString(getContext(), error.requirement,
+                                R.string.lockpassword_password_requires_lowercase));
                         break;
                     case NOT_ENOUGH_LETTERS:
-                        messages.add(getResources().getQuantityString(
-                                R.plurals.lockpassword_password_requires_letters,
-                                error.requirement, error.requirement));
+                        messages.add(StringUtil.getIcuPluralsString(getContext(), error.requirement,
+                                R.string.lockpassword_password_requires_letters));
                         break;
                     case NOT_ENOUGH_DIGITS:
-                        messages.add(getResources().getQuantityString(
-                                R.plurals.lockpassword_password_requires_numeric,
-                                error.requirement, error.requirement));
+                        messages.add(StringUtil.getIcuPluralsString(getContext(), error.requirement,
+                                R.string.lockpassword_password_requires_numeric));
                         break;
                     case NOT_ENOUGH_SYMBOLS:
-                        messages.add(getResources().getQuantityString(
-                                R.plurals.lockpassword_password_requires_symbols,
-                                error.requirement, error.requirement));
+                        messages.add(StringUtil.getIcuPluralsString(getContext(), error.requirement,
+                                R.string.lockpassword_password_requires_symbols));
                         break;
                     case NOT_ENOUGH_NON_LETTER:
-                        messages.add(getResources().getQuantityString(
-                                R.plurals.lockpassword_password_requires_nonletter,
-                                error.requirement, error.requirement));
+                        messages.add(StringUtil.getIcuPluralsString(getContext(), error.requirement,
+                                R.string.lockpassword_password_requires_nonletter));
                         break;
                     case NOT_ENOUGH_NON_DIGITS:
-                        messages.add(getResources().getQuantityString(
-                                R.plurals.lockpassword_password_requires_nonnumerical,
-                                error.requirement, error.requirement));
+                        messages.add(StringUtil.getIcuPluralsString(getContext(), error.requirement,
+                                R.string.lockpassword_password_requires_nonnumerical));
                         break;
                     case TOO_SHORT:
-                        messages.add(getResources().getQuantityString(
+                        messages.add(StringUtil.getIcuPluralsString(getContext(), error.requirement,
                                 mIsAlphaMode
-                                        ? R.plurals.lockpassword_password_too_short
-                                        : R.plurals.lockpassword_pin_too_short,
-                                error.requirement, error.requirement));
+                                        ? R.string.lockpassword_password_too_short
+                                        : R.string.lockpassword_pin_too_short));
                         break;
                     case TOO_SHORT_WHEN_ALL_NUMERIC:
                         messages.add(
@@ -827,11 +819,10 @@ public class ChooseLockPassword extends SettingsActivity {
                                         R.string.lockpassword_password_too_short_all_numeric));
                         break;
                     case TOO_LONG:
-                        messages.add(getResources().getQuantityString(
-                                mIsAlphaMode
-                                        ? R.plurals.lockpassword_password_too_long
-                                        : R.plurals.lockpassword_pin_too_long,
-                                error.requirement + 1, error.requirement + 1));
+                        messages.add(StringUtil.getIcuPluralsString(getContext(),
+                                error.requirement + 1, mIsAlphaMode
+                                        ? R.string.lockpassword_password_too_long
+                                        : R.string.lockpassword_pin_too_long));
                         break;
                     case CONTAINS_SEQUENCE:
                         messages.add(getString(R.string.lockpassword_pin_no_sequential_digits));
