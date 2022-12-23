@@ -15,6 +15,9 @@
  */
 package com.android.settings.fuelgauge.batterysaver;
 
+import static com.android.settingslib.fuelgauge.BatterySaverUtils.KEY_NO_SCHEDULE;
+import static com.android.settingslib.fuelgauge.BatterySaverUtils.KEY_PERCENTAGE;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
@@ -22,7 +25,6 @@ import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
@@ -39,8 +41,6 @@ import com.android.settingslib.fuelgauge.BatterySaverUtils;
 public class BatterySaverScheduleRadioButtonsController {
     private static final String TAG = "BatterySaverScheduleRadioButtonsController";
 
-    public static final String KEY_NO_SCHEDULE = "key_battery_saver_no_schedule";
-    public static final String KEY_PERCENTAGE = "key_battery_saver_percentage";
     public static final int TRIGGER_LEVEL_MIN = 10;
 
     private Context mContext;
@@ -50,21 +50,6 @@ public class BatterySaverScheduleRadioButtonsController {
             BatterySaverScheduleSeekBarController seekbar) {
         mContext = context;
         mSeekBarController = seekbar;
-    }
-
-    public String getDefaultKey() {
-        final ContentResolver resolver = mContext.getContentResolver();
-        final int mode = Settings.Global.getInt(resolver, Global.AUTOMATIC_POWER_SAVE_MODE,
-                PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
-        if (mode == PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE) {
-            final int threshold =
-                    Settings.Global.getInt(resolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
-            return threshold <= 0 ? KEY_NO_SCHEDULE : KEY_PERCENTAGE;
-        }
-        // Convert the legacy routine mode into none.
-        BatterySaverUtils.revertScheduleToNoneIfNeeded(mContext);
-        Log.w(TAG, "Found the legacy routine mode and set into none");
-        return KEY_NO_SCHEDULE;
     }
 
     public boolean setDefaultKey(String key) {
