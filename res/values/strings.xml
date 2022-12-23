@@ -2415,6 +2415,10 @@
     <string name="storage_settings_for_app" >Storage &amp; cache</string>
     <!-- Storage settings screen title -->
     <string name="storage_settings_title">Storage settings</string>
+    <!-- About phone, title of EID -->
+    <string name="status_eid">EID</string>
+    <!-- About phone, title of EID for multi-sim devices -->
+    <string name="eid_multi_sim">EID (sim slot %1$d)</string>
     <!-- About phone screen, title for IMEI for multi-sim devices -->
     <string name="imei_multi_sim">IMEI (sim slot %1$d)</string>
     <!-- About phone screen, summary of the MAC address [CHAR LIMIT=80] -->
@@ -2734,7 +2738,7 @@
     <string name="reset_mobile_network_settings_title">Reset Mobile Network Settings</string>
     <!-- User selects Reset mobile network settings [CHAR LIMIT=NONE] -->
     <string name="reset_mobile_network_settings_desc">This will reset all mobile network settings</string>
-    <!-- Reset Mobile network setting confirmation screen title [CHAR LIMIT=30] -->
+    <!-- Reset Mobile network setting confirmation screen title [CHAR LIMIT=62] -->
     <string name="reset_mobile_network_settings_confirm_title">Reset Mobile Network Settings?</string>
 
     <!-- Reset Bluetooth and Wi-Fi Network -->
@@ -3730,6 +3734,37 @@
     <string name="trackpad_switch_apps_title">Switch apps</string>
     <!-- Summary text for 'Switch apps' [CHAR LIMIT=60] -->
     <string name="trackpad_switch_apps_summary">Swipe left or right with four fingers</string>
+
+    <!-- Title for the button to trigger the 'modifier keys settings' page. [CHAR LIMIT=35] -->
+    <string name="modifier_keys_settings">Modifier keys</string>
+    <!-- Summary text for the 'modifier_keys_settings' page. [CHAR LIMIT=100] -->
+    <string name="modifier_keys_settings_summary">Change the behavior of keys</string>
+
+    <!-- Title for the button to trigger the 'modifier keys caps lock'. [CHAR LIMIT=15] -->
+    <string name="modifier_keys_caps_lock" translatable="false">Caps lock</string>
+    <!-- Title for the button to trigger the 'modifier keys ctrl'. [CHAR LIMIT=15] -->
+    <string name="modifier_keys_ctrl" translatable="false">Ctrl</string>
+    <!-- Title for the button to trigger the 'modifier keys meta'. [CHAR LIMIT=15] -->
+    <string name="modifier_keys_meta" translatable="false">Meta</string>
+    <!-- Title for the button to trigger the 'modifier keys alt'. [CHAR LIMIT=15] -->
+    <string name="modifier_keys_alt" translatable="false">Alt</string>
+
+    <!-- Title for the button to trigger the 'modifier keys reset all'. [CHAR LIMIT=35] -->
+    <string name="modifier_keys_reset_title">Reset all</string>
+    <!-- Summary text for the buttons. [CHAR LIMIT=35] -->
+    <string name="modifier_keys_default_summary">Default</string>
+    <!-- Message for the 'Reset all' page. [CHAR LIMIT=100] -->
+    <string name="modifier_keys_reset_message">Are you sure you would like to reset all the modifier keys to their default?</string>
+    <!-- Text of the done button. [CHAR LIMIT=15] -->
+    <string name="modifier_keys_done">Done</string>
+    <!-- Text of the cancel button. [CHAR LIMIT=15] -->
+    <string name="modifier_keys_cancel">Cancel</string>
+    <!-- Text of the restore button. [CHAR LIMIT=15] -->
+    <string name="modifier_keys_restore">Restore</string>
+    <!-- Title for the modifier key picker dialog page [CHAR LIMIT=35] -->
+    <string name="modifier_keys_picker_title">Choose modifier key</string>
+    <!-- Summary for the modifier key picker dialog page [CHAR LIMIT=35] -->
+    <string name="modifier_keys_picker_summary">Choose a new key for <xliff:g id="modifier_key_default_name">%1$s</xliff:g>:</string>
 
     <!-- Summary text for keyboards when no layout has been selected. [CHAR LIMIT=35] -->
     <string name="default_keyboard_layout">Default</string>
@@ -8194,7 +8229,7 @@
     <!-- [CHAR LIMIT=60] turn eSim deletion confirmation on/off  -->
     <string name="confirm_sim_deletion_title">Confirm SIM deletion</string>
     <!-- [CHAR LIMIT=NONE] eSim deletion confirmation description  -->
-    <string name="confirm_sim_deletion_description">Verify it\u0027s you before erasing a eSIM</string>
+    <string name="confirm_sim_deletion_description">Verify it\u0027s you before erasing an eSIM</string>
 
     <!-- [CHAR LIMIT=32] Name of Advanced memory protection page in "More Security Settings" and heading of page. -->
     <string name="memtag_title">Advanced memory protection beta</string>

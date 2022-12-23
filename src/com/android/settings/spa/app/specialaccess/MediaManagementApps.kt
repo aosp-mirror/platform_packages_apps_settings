@@ -34,4 +34,5 @@ class MediaManagementAppsListModel(context: Context) : AppOpPermissionListModel(
     override val footerResId = R.string.media_management_apps_description
     override val appOp = AppOpsManager.OP_MANAGE_MEDIA
     override val permission = Manifest.permission.MANAGE_MEDIA
+    override val setModeByUid = true
 }

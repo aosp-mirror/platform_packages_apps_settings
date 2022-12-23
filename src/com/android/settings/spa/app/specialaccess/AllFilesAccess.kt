@@ -34,4 +34,5 @@ class AllFilesAccessListModel(context: Context) : AppOpPermissionListModel(conte
     override val footerResId = R.string.allow_manage_external_storage_description
     override val appOp = AppOpsManager.OP_MANAGE_EXTERNAL_STORAGE
     override val permission = Manifest.permission.MANAGE_EXTERNAL_STORAGE
+    override val setModeByUid = true
 }
