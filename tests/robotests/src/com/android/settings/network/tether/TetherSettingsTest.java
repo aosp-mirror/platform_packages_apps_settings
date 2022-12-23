@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.network.tether;
 
 import static android.content.Intent.ACTION_MEDIA_SHARED;
 import static android.content.Intent.ACTION_MEDIA_UNSHARED;
@@ -53,6 +53,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -141,7 +142,7 @@ public class TetherSettingsTest {
         when(mTetheringManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
 
         final List<String> niks =
-            TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+                TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
 
         assertThat(niks).contains(TetherSettings.KEY_USB_TETHER_SETTINGS);
     }
@@ -154,7 +155,7 @@ public class TetherSettingsTest {
         when(mTetheringManager.getTetherableUsbRegexs()).thenReturn(new String[]{"fakeRegex"});
 
         final List<String> niks =
-            TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+                TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
 
         assertThat(niks).doesNotContain(TetherSettings.KEY_USB_TETHER_SETTINGS);
     }
@@ -164,7 +165,7 @@ public class TetherSettingsTest {
         when(mTetheringManager.getTetherableBluetoothRegexs()).thenReturn(new String[0]);
 
         final List<String> niks =
-            TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+                TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
 
         assertThat(niks).contains(TetherSettings.KEY_ENABLE_BLUETOOTH_TETHERING);
     }
@@ -176,7 +177,7 @@ public class TetherSettingsTest {
                 .thenReturn(new String[]{"fakeRegex"});
 
         final List<String> niks =
-            TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+                TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
 
         assertThat(niks).doesNotContain(TetherSettings.KEY_ENABLE_BLUETOOTH_TETHERING);
     }
@@ -362,7 +363,7 @@ public class TetherSettingsTest {
     }
 
     private void updateOnlyBluetoothState(TetherSettings tetherSettings) {
-        doReturn(mTetheringManager).when(tetherSettings)
+        doReturn(mTetheringManager).when(mContext)
             .getSystemService(Context.TETHERING_SERVICE);
         when(mTetheringManager.getTetherableIfaces()).thenReturn(new String[0]);
         when(mTetheringManager.getTetheredIfaces()).thenReturn(new String[0]);
