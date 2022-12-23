@@ -722,9 +722,7 @@ public class UserSettings extends SettingsPreferenceFragment
                                                     KEY_ADD_USER_LONG_MESSAGE_DISPLAYED,
                                                     true).apply();
                                         }
-                                        //TODO(b/262371063): check whether multiple admins allowed,
-                                        // not for HSUM
-                                        if (UserManager.isHeadlessSystemUserMode()) {
+                                        if (UserManager.isMultipleAdminEnabled()) {
                                             showDialog(DIALOG_GRANT_ADMIN);
                                         } else {
                                             showDialog(DIALOG_USER_PROFILE_EDITOR_ADD_USER);
