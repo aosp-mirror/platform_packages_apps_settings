@@ -34,8 +34,6 @@ import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -48,7 +46,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -128,7 +125,7 @@ public class SimStatusPreferenceControllerTest {
     @Test
     public void displayPreference_multiSim_shouldAddSecondPreference() {
         when(mTelephonyManager.getPhoneCount()).thenReturn(2);
-        SlotSimStatus slotSimStatus = new TestSlotSimStatus(mContext);
+        SlotSimStatus slotSimStatus = new SlotSimStatus(mContext);
         mController.init(mFragment, slotSimStatus);
 
         mController.displayPreference(mScreen);
@@ -136,11 +133,10 @@ public class SimStatusPreferenceControllerTest {
         verify(mCategory).addPreference(mSecondSimPreference);
     }
 
-    @Ignore
     @Test
     public void updateState_singleSim_shouldSetSingleSimTitleAndSummary() {
         when(mTelephonyManager.getPhoneCount()).thenReturn(1);
-        SlotSimStatus slotSimStatus = new TestSlotSimStatus(mContext);
+        SlotSimStatus slotSimStatus = new SlotSimStatus(mContext);
         mController.init(mFragment, slotSimStatus);
         mController.displayPreference(mScreen);
 
@@ -150,11 +146,10 @@ public class SimStatusPreferenceControllerTest {
         verify(mFirstSimPreference).setSummary(anyString());
     }
 
-    @Ignore
     @Test
     public void updateState_multiSim_shouldSetMultiSimTitleAndSummary() {
         when(mTelephonyManager.getPhoneCount()).thenReturn(2);
-        SlotSimStatus slotSimStatus = new TestSlotSimStatus(mContext);
+        SlotSimStatus slotSimStatus = new SlotSimStatus(mContext);
         mController.init(mFragment, slotSimStatus);
         mController.displayPreference(mScreen);
 
@@ -168,13 +163,12 @@ public class SimStatusPreferenceControllerTest {
         verify(mSecondSimPreference).setSummary(anyString());
     }
 
-    @Ignore
     @Test
     public void handlePreferenceTreeClick_shouldStartDialogFragment() {
         when(mFragment.getChildFragmentManager()).thenReturn(
                 mock(FragmentManager.class, Answers.RETURNS_DEEP_STUBS));
         when(mTelephonyManager.getPhoneCount()).thenReturn(2);
-        SlotSimStatus slotSimStatus = new TestSlotSimStatus(mContext);
+        SlotSimStatus slotSimStatus = new SlotSimStatus(mContext);
         mController.init(mFragment, slotSimStatus);
         mController.displayPreference(mScreen);
 
@@ -186,7 +180,7 @@ public class SimStatusPreferenceControllerTest {
     @Test
     public void updateDynamicRawDataToIndex_notAddToSearch_emptySimSlot() {
         doReturn(null).when(mSubscriptionManager).getActiveSubscriptionInfoList();
-        SlotSimStatus slotSimStatus = new TestSlotSimStatus(mContext);
+        SlotSimStatus slotSimStatus = new SlotSimStatus(mContext);
         List<SearchIndexableRaw> rawData = new ArrayList<SearchIndexableRaw>();
 
         mController.init(mFragment, slotSimStatus);
@@ -197,11 +191,10 @@ public class SimStatusPreferenceControllerTest {
 
     @Test
     public void updateDynamicRawDataToIndex_addToSearch_simInSimSlot() {
-        when(mTelephonyManager.getPhoneCount()).thenReturn(1);
         doReturn(false).when(mSubscriptionInfo).isEmbedded();
         doReturn(List.of(mSubscriptionInfo)).when(mSubscriptionManager)
                 .getActiveSubscriptionInfoList();
-        SlotSimStatus slotSimStatus = new TestSlotSimStatus(mContext);
+        SlotSimStatus slotSimStatus = new SlotSimStatus(mContext);
         List<SearchIndexableRaw> rawData = new ArrayList<SearchIndexableRaw>();
 
         mController.init(mFragment, slotSimStatus);
@@ -210,16 +203,23 @@ public class SimStatusPreferenceControllerTest {
         assertThat(rawData.size()).isEqualTo(1);
     }
 
+    @Test
+    public void updateDynamicRawDataToIndex_addEsimToSearch_esimInSimSlot() {
+        doReturn(true).when(mSubscriptionInfo).isEmbedded();
+        doReturn(List.of(mSubscriptionInfo)).when(mSubscriptionManager)
+                .getActiveSubscriptionInfoList();
+        SlotSimStatus slotSimStatus = new SlotSimStatus(mContext);
+        List<SearchIndexableRaw> rawData = new ArrayList<SearchIndexableRaw>();
+
+        mController.init(mFragment, slotSimStatus);
+        mController.updateDynamicRawDataToIndex(rawData);
+
+        assertThat(rawData.size()).isEqualTo(1);
+        assertThat(rawData.get(0).keywords.contains("eid")).isTrue();
+    }
+
     private <T> void mockService(String serviceName, Class<T> serviceClass, T service) {
         when(mContext.getSystemServiceName(serviceClass)).thenReturn(serviceName);
         when(mContext.getSystemService(serviceName)).thenReturn(service);
-    }
-
-    private class TestSlotSimStatus extends SlotSimStatus {
-        public TestSlotSimStatus(Context context) {
-            super(context);
-        }
-
-        public void observe(LifecycleOwner owner, Observer observer) {}
     }
 }

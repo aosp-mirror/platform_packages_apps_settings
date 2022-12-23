@@ -17,9 +17,6 @@ package com.android.settings.connecteddevice;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.hardware.input.InputManager;
-import android.util.FeatureFlagUtils;
-import android.view.InputDevice;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -29,7 +26,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.ConnectedBluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.dock.DockUpdater;
-import com.android.settings.connecteddevice.stylus.StylusDeviceUpdater;
 import com.android.settings.connecteddevice.usb.ConnectedUsbDeviceUpdater;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -55,14 +51,11 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
     private ConnectedUsbDeviceUpdater mConnectedUsbDeviceUpdater;
     private DockUpdater mConnectedDockUpdater;
-    private StylusDeviceUpdater mStylusDeviceUpdater;
     private final PackageManager mPackageManager;
-    private final InputManager mInputManager;
 
     public ConnectedDeviceGroupController(Context context) {
         super(context, KEY);
         mPackageManager = context.getPackageManager();
-        mInputManager = context.getSystemService(InputManager.class);
     }
 
     @Override
@@ -76,13 +69,7 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
             mConnectedUsbDeviceUpdater.registerCallback();
         }
 
-        if (mConnectedDockUpdater != null) {
-            mConnectedDockUpdater.registerCallback();
-        }
-
-        if (mStylusDeviceUpdater != null) {
-            mStylusDeviceUpdater.registerCallback();
-        }
+        mConnectedDockUpdater.registerCallback();
     }
 
     @Override
@@ -95,13 +82,7 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
             mConnectedUsbDeviceUpdater.unregisterCallback();
         }
 
-        if (mConnectedDockUpdater != null) {
-            mConnectedDockUpdater.unregisterCallback();
-        }
-
-        if (mStylusDeviceUpdater != null) {
-            mStylusDeviceUpdater.unregisterCallback();
-        }
+        mConnectedDockUpdater.unregisterCallback();
     }
 
     @Override
@@ -122,15 +103,8 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
                 mConnectedUsbDeviceUpdater.initUsbPreference(context);
             }
 
-            if (mConnectedDockUpdater != null) {
-                mConnectedDockUpdater.setPreferenceContext(context);
-                mConnectedDockUpdater.forceUpdate();
-            }
-
-            if (mStylusDeviceUpdater != null) {
-                mStylusDeviceUpdater.setPreferenceContext(context);
-                mStylusDeviceUpdater.forceUpdate();
-            }
+            mConnectedDockUpdater.setPreferenceContext(context);
+            mConnectedDockUpdater.forceUpdate();
         }
     }
 
@@ -138,7 +112,6 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
     public int getAvailabilityStatus() {
         return (hasBluetoothFeature()
                 || hasUsbFeature()
-                || hasUsiStylusFeature()
                 || mConnectedDockUpdater != null)
                 ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
@@ -168,13 +141,11 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
     @VisibleForTesting
     void init(BluetoothDeviceUpdater bluetoothDeviceUpdater,
             ConnectedUsbDeviceUpdater connectedUsbDeviceUpdater,
-            DockUpdater connectedDockUpdater,
-            StylusDeviceUpdater connectedStylusDeviceUpdater) {
+            DockUpdater connectedDockUpdater) {
 
         mBluetoothDeviceUpdater = bluetoothDeviceUpdater;
         mConnectedUsbDeviceUpdater = connectedUsbDeviceUpdater;
         mConnectedDockUpdater = connectedDockUpdater;
-        mStylusDeviceUpdater = connectedStylusDeviceUpdater;
     }
 
     public void init(DashboardFragment fragment) {
@@ -189,10 +160,7 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
                 hasUsbFeature()
                         ? new ConnectedUsbDeviceUpdater(context, fragment, this)
                         : null,
-                connectedDockUpdater,
-                hasUsiStylusFeature()
-                        ? new StylusDeviceUpdater(context, fragment, this)
-                        : null);
+                connectedDockUpdater);
     }
 
     private boolean hasBluetoothFeature() {
@@ -202,22 +170,5 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
     private boolean hasUsbFeature() {
         return mPackageManager.hasSystemFeature(PackageManager.FEATURE_USB_ACCESSORY)
                 || mPackageManager.hasSystemFeature(PackageManager.FEATURE_USB_HOST);
-    }
-
-    private boolean hasUsiStylusFeature() {
-        if (!FeatureFlagUtils.isEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_SHOW_STYLUS_PREFERENCES)) {
-            return false;
-        }
-
-        for (int deviceId : mInputManager.getInputDeviceIds()) {
-            InputDevice device = mInputManager.getInputDevice(deviceId);
-            if (device != null
-                    && device.supportsSource(InputDevice.SOURCE_STYLUS)
-                    && !device.isExternal()) {
-                return true;
-            }
-        }
-        return false;
     }
 }

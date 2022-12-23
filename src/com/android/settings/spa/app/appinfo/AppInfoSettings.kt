@@ -95,7 +95,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
 
         AppSettingsPreference(app)
         AppAllServicesPreference(app)
-        AppNotificationPreference(app)
+        // TODO: notification_settings
         AppPermissionPreference(app)
         AppStoragePreference(app)
         InstantAppDomainsPreference(app)

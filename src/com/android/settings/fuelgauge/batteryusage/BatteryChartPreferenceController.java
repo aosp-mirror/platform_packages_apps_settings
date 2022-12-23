@@ -209,7 +209,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         // Ensure the battery chart group is visible for users.
         animateBatteryChartViewGroup();
         final BatteryLevelData batteryLevelData =
-                DataProcessManager.getBatteryLevelData(mContext, mHandler, batteryHistoryMap,
+                DataProcessor.getBatteryLevelData(mContext, mHandler, batteryHistoryMap,
                         batteryUsageMap -> {
                             mBatteryUsageMap = batteryUsageMap;
                             refreshUi();

@@ -109,7 +109,7 @@ public class StylusUsiHeaderControllerTest {
 
         assertThat(((TextView) mLayoutPreference.findViewById(
                 R.id.entity_header_title)).getText().toString()).isEqualTo(
-                mContext.getString(R.string.stylus_connected_devices_title));
+                mContext.getString(R.string.stylus_usi_header_title));
     }
 
     @Test

@@ -48,9 +48,7 @@ class PreviewSizeSeekBarController extends BasePreferenceController implements
 
                     final ProgressInteractionListener interactionListener =
                             mInteractionListener.get();
-                    // Avoid timing issues to update the corresponding preview fail when clicking
-                    // the increase/decrease button.
-                    seekBar.post(interactionListener::notifyPreferenceChanged);
+                    interactionListener.notifyPreferenceChanged();
 
                     if (!mSeekByTouch) {
                         interactionListener.onProgressChanged();

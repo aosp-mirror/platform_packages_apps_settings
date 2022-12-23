@@ -61,7 +61,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final String KEY_SWITCH_USER = "switch_user";
     private static final String KEY_ENABLE_TELEPHONY = "enable_calling";
     private static final String KEY_REMOVE_USER = "remove_user";
-    private static final String KEY_GRANT_ADMIN = "user_grant_admin";
     private static final String KEY_APP_AND_CONTENT_ACCESS = "app_and_content_access";
     private static final String KEY_APP_COPYING = "app_copying";
 
@@ -73,7 +72,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final int DIALOG_SETUP_USER = 3;
     private static final int DIALOG_CONFIRM_RESET_GUEST = 4;
     private static final int DIALOG_CONFIRM_RESET_GUEST_AND_SWITCH_USER = 5;
-    private static final int DIALOG_CONFIRM_REVOKE_ADMIN = 6;
 
     /** Whether to enable the app_copying fragment. */
     private static final boolean SHOW_APP_COPYING_PREF = false;
@@ -93,8 +91,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     Preference mAppCopyingPref;
     @VisibleForTesting
     Preference mRemoveUserPref;
-    @VisibleForTesting
-    SwitchPreference mGrantAdminPref;
 
     @VisibleForTesting
     /** The user being studied (not the user doing the studying). */
@@ -183,12 +179,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mMetricsFeatureProvider.action(getActivity(),
                     SettingsEnums.ACTION_DISABLE_USER_CALL);
             enableCallsAndSms(false);
-        } else if (preference == mGrantAdminPref) {
-            if (Boolean.FALSE.equals(newValue)) {
-                showDialog(DIALOG_CONFIRM_REVOKE_ADMIN);
-                return false;
-            }
-            updateUserAdminStatus(true);
         }
         return true;
     }
@@ -202,8 +192,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 return SettingsEnums.DIALOG_USER_REMOVE;
             case DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS:
                 return SettingsEnums.DIALOG_USER_ENABLE_CALLING_AND_SMS;
-            case DIALOG_CONFIRM_REVOKE_ADMIN:
-                return SettingsEnums.DIALOG_REVOKE_USER_ADMIN;
             case DIALOG_SETUP_USER:
                 return SettingsEnums.DIALOG_USER_SETUP;
             default:
@@ -247,9 +235,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                     return UserDialogs.createRemoveGuestDialog(getActivity(),
                         (dialog, which) -> switchUser());
                 }
-            case DIALOG_CONFIRM_REVOKE_ADMIN:
-                return UserDialogs.createConfirmRevokeAdmin(getActivity(),
-                        (dialog, which) -> updateUserAdminStatus(false));
         }
         throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
     }
@@ -292,9 +277,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         mRemoveUserPref = findPreference(KEY_REMOVE_USER);
         mAppAndContentAccessPref = findPreference(KEY_APP_AND_CONTENT_ACCESS);
         mAppCopyingPref = findPreference(KEY_APP_COPYING);
-        mGrantAdminPref = findPreference(KEY_GRANT_ADMIN);
-
-        mGrantAdminPref.setChecked(mUserInfo.isAdmin());
 
         mSwitchUserPref.setTitle(
                 context.getString(com.android.settingslib.R.string.user_switch_to_user,
@@ -307,15 +289,10 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mSwitchUserPref.setSelectable(true);
             mSwitchUserPref.setOnPreferenceClickListener(this);
         }
-        //TODO(b/261700461): remove preference for supervised user
-        //TODO(b/262371063): check whether multiple admins allowed, not for HSUM
-        if (mUserInfo.isMain() || mUserInfo.isGuest() || !UserManager.isHeadlessSystemUserMode()) {
-            removePreference(KEY_GRANT_ADMIN);
-        }
+
         if (!mUserManager.isAdminUser()) { // non admin users can't remove users and allow calls
             removePreference(KEY_ENABLE_TELEPHONY);
             removePreference(KEY_REMOVE_USER);
-            removePreference(KEY_GRANT_ADMIN);
             removePreference(KEY_APP_AND_CONTENT_ACCESS);
             removePreference(KEY_APP_COPYING);
         } else {
@@ -362,7 +339,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
             mRemoveUserPref.setOnPreferenceClickListener(this);
             mPhonePref.setOnPreferenceChangeListener(this);
-            mGrantAdminPref.setOnPreferenceChangeListener(this);
             mAppAndContentAccessPref.setOnPreferenceClickListener(this);
             mAppCopyingPref.setOnPreferenceClickListener(this);
         }
@@ -423,20 +399,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         UserHandle userHandle = UserHandle.of(mUserInfo.id);
         mUserManager.setUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS, !enabled, userHandle);
         mUserManager.setUserRestriction(UserManager.DISALLOW_SMS, !enabled, userHandle);
-    }
-
-    /**
-     * Sets admin status of selected user. Method is called when toggle in
-     * user details settings is switched.
-     * @param isSetAdmin indicates if user admin status needs to be set to true.
-     */
-    private void updateUserAdminStatus(boolean isSetAdmin) {
-        mGrantAdminPref.setChecked(isSetAdmin);
-        if (!isSetAdmin) {
-            mUserManager.revokeUserAdmin(mUserInfo.id);
-        } else if ((mUserInfo.flags & UserInfo.FLAG_ADMIN) == 0) {
-            mUserManager.setUserAdmin(mUserInfo.id);
-        }
     }
 
     private void removeUser() {

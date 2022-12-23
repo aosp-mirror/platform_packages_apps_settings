@@ -46,15 +46,6 @@
         settings:controller="com.android.settings.inputmethod.KeyboardPreferenceController"/>
 
     <Preference
-        android:key="trackpad_settings"
-        android:title="@string/trackpad_settings"
-        android:summary="@string/trackpad_settings_summary"
-        android:icon="@drawable/ic_settings_trackpad"
-        android:order="-254"
-        android:fragment="com.android.settings.inputmethod.TrackpadSettings"
-        settings:controller="com.android.settings.inputmethod.TrackpadSettingsController"/>
-
-    <Preference
         android:key="gesture_settings"
         android:title="@string/gesture_preference_title"
         android:icon="@drawable/ic_settings_gestures"

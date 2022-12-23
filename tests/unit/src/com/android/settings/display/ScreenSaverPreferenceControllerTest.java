@@ -45,13 +45,11 @@ public class ScreenSaverPreferenceControllerTest {
 
     private ScreenSaverPreferenceController mController;
 
-    private final String mPrefKey = "test_screensaver";
-
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
-        mController = new ScreenSaverPreferenceController(mContext, mPrefKey);
+        mController = new ScreenSaverPreferenceController(mContext);
 
         when(mContext.getResources()).thenReturn(mResources);
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);

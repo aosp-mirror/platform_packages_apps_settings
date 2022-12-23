@@ -21,21 +21,16 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.MatrixCursor;
-import android.os.BatteryManager;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.UserManager;
-import android.text.format.DateUtils;
 
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
 
@@ -48,14 +43,10 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RunWith(RobolectricTestRunner.class)
 public final class DataProcessManagerTest {
-    private static final String FAKE_ENTRY_KEY = "fake_entry_key";
-
     private Context mContext;
     private DataProcessManager mDataProcessManager;
 
@@ -63,8 +54,6 @@ public final class DataProcessManagerTest {
     private IUsageStatsManager mUsageStatsManager;
     @Mock
     private UserManager mUserManager;
-    @Mock
-    private Intent mIntent;
 
     @Before
     public void setUp() {
@@ -76,21 +65,10 @@ public final class DataProcessManagerTest {
         doReturn(mUserManager)
                 .when(mContext)
                 .getSystemService(UserManager.class);
-        doReturn(mIntent).when(mContext).registerReceiver(any(), any());
-        doReturn(100).when(mIntent).getIntExtra(eq(BatteryManager.EXTRA_SCALE), anyInt());
-        doReturn(66).when(mIntent).getIntExtra(eq(BatteryManager.EXTRA_LEVEL), anyInt());
 
         mDataProcessManager = new DataProcessManager(
                 mContext, /*handler=*/ null,  /*callbackFunction=*/ null,
                 /*hourlyBatteryLevelsPerDay=*/ new ArrayList<>(), /*batteryHistoryMap=*/ null);
-    }
-
-    @Test
-    public void constructor_noLevelData() {
-        final DataProcessManager dataProcessManager =
-                new DataProcessManager(mContext, /*handler=*/ null, /*callbackFunction=*/ null);
-        assertThat(dataProcessManager.getShowScreenOnTime()).isFalse();
-        assertThat(dataProcessManager.getShowBatteryLevel()).isFalse();
     }
 
     @Test
@@ -226,66 +204,6 @@ public final class DataProcessManagerTest {
         assertThat(dataProcessManager.getStartTimestampOfBatteryLevelData()).isEqualTo(0);
     }
 
-    @Test
-    public void getBatteryLevelData_emptyHistoryMap_returnNull() {
-        assertThat(DataProcessManager.getBatteryLevelData(
-                mContext,
-                /*handler=*/ null,
-                /*batteryHistoryMap=*/ null,
-                /*asyncResponseDelegate=*/ null))
-                .isNull();
-        assertThat(DataProcessManager.getBatteryLevelData(
-                mContext, /*handler=*/ null, new HashMap<>(), /*asyncResponseDelegate=*/ null))
-                .isNull();
-    }
-
-    @Test
-    public void getBatteryLevelData_notEnoughData_returnNull() {
-        // The timestamps and the current time are within half hour before an even hour.
-        final long[] timestamps = {
-                DateUtils.HOUR_IN_MILLIS * 2 - 300L,
-                DateUtils.HOUR_IN_MILLIS * 2 - 200L,
-                DateUtils.HOUR_IN_MILLIS * 2 - 100L};
-        final int[] levels = {100, 99, 98};
-        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
-                createHistoryMap(timestamps, levels);
-        DataProcessor.sFakeCurrentTimeMillis = timestamps[timestamps.length - 1];
-
-        assertThat(DataProcessManager.getBatteryLevelData(
-                mContext, /*handler=*/ null, batteryHistoryMap, /*asyncResponseDelegate=*/ null))
-                .isNull();
-    }
-
-    @Test
-    public void getBatteryLevelData_returnExpectedResult() {
-        // Timezone GMT+8: 2022-01-01 00:00:00, 2022-01-01 01:00:00
-        final long[] timestamps = {1640966400000L, 1640970000000L};
-        final int[] levels = {100, 99};
-        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
-                createHistoryMap(timestamps, levels);
-        DataProcessor.sFakeCurrentTimeMillis = timestamps[timestamps.length - 1];
-
-        final BatteryLevelData resultData =
-                DataProcessManager.getBatteryLevelData(
-                        mContext,
-                        /*handler=*/ null,
-                        batteryHistoryMap,
-                        /*asyncResponseDelegate=*/ null);
-
-        final List<Long> expectedDailyTimestamps = List.of(
-                1640966400000L,  // 2022-01-01 00:00:00
-                1640973600000L); // 2022-01-01 02:00:00
-        final List<Integer> expectedDailyLevels = List.of(100, 66);
-        final List<List<Long>> expectedHourlyTimestamps = List.of(expectedDailyTimestamps);
-        final List<List<Integer>> expectedHourlyLevels = List.of(expectedDailyLevels);
-        verifyExpectedBatteryLevelData(
-                resultData,
-                expectedDailyTimestamps,
-                expectedDailyLevels,
-                expectedHourlyTimestamps,
-                expectedHourlyLevels);
-    }
-
     private UsageEvents getUsageEvents(final List<UsageEvents.Event> events) {
         UsageEvents usageEvents = new UsageEvents(events, new String[] {"package"});
         Parcel parcel = Parcel.obtain();
@@ -304,77 +222,9 @@ public final class DataProcessManagerTest {
         return event;
     }
 
-    private static Map<Long, Map<String, BatteryHistEntry>> createHistoryMap(
-            final long[] timestamps, final int[] levels) {
-        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
-        for (int index = 0; index < timestamps.length; index++) {
-            final Map<String, BatteryHistEntry> entryMap = new HashMap<>();
-            final ContentValues values = getContentValuesWithBatteryLevel(levels[index]);
-            final BatteryHistEntry entry = new BatteryHistEntry(values);
-            entryMap.put(FAKE_ENTRY_KEY, entry);
-            batteryHistoryMap.put(timestamps[index], entryMap);
-        }
-        return batteryHistoryMap;
-    }
-
-    private static ContentValues getContentValuesWithBatteryLevel(final int level) {
-        final ContentValues values = new ContentValues();
-        final DeviceBatteryState deviceBatteryState =
-                DeviceBatteryState
-                        .newBuilder()
-                        .setBatteryLevel(level)
-                        .build();
-        final BatteryInformation batteryInformation =
-                BatteryInformation
-                        .newBuilder()
-                        .setDeviceBatteryState(deviceBatteryState)
-                        .build();
-        values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION,
-                ConvertUtils.convertBatteryInformationToString(batteryInformation));
-        return values;
-    }
-
     private void assertAppUsageEvent(
             final AppUsageEvent event, final AppUsageEventType eventType, final long timestamp) {
         assertThat(event.getType()).isEqualTo(eventType);
         assertThat(event.getTimestamp()).isEqualTo(timestamp);
-    }
-
-    private static void verifyExpectedBatteryLevelData(
-            final BatteryLevelData resultData,
-            final List<Long> expectedDailyTimestamps,
-            final List<Integer> expectedDailyLevels,
-            final List<List<Long>> expectedHourlyTimestamps,
-            final List<List<Integer>> expectedHourlyLevels) {
-        final BatteryLevelData.PeriodBatteryLevelData dailyResultData =
-                resultData.getDailyBatteryLevels();
-        final List<BatteryLevelData.PeriodBatteryLevelData> hourlyResultData =
-                resultData.getHourlyBatteryLevelsPerDay();
-        verifyExpectedDailyBatteryLevelData(
-                dailyResultData, expectedDailyTimestamps, expectedDailyLevels);
-        verifyExpectedHourlyBatteryLevelData(
-                hourlyResultData, expectedHourlyTimestamps, expectedHourlyLevels);
-    }
-
-    private static void verifyExpectedDailyBatteryLevelData(
-            final BatteryLevelData.PeriodBatteryLevelData dailyResultData,
-            final List<Long> expectedDailyTimestamps,
-            final List<Integer> expectedDailyLevels) {
-        assertThat(dailyResultData.getTimestamps()).isEqualTo(expectedDailyTimestamps);
-        assertThat(dailyResultData.getLevels()).isEqualTo(expectedDailyLevels);
-    }
-
-    private static void verifyExpectedHourlyBatteryLevelData(
-            final List<BatteryLevelData.PeriodBatteryLevelData> hourlyResultData,
-            final List<List<Long>> expectedHourlyTimestamps,
-            final List<List<Integer>> expectedHourlyLevels) {
-        final int expectedHourlySize = expectedHourlyTimestamps.size();
-        assertThat(hourlyResultData).hasSize(expectedHourlySize);
-        for (int dailyIndex = 0; dailyIndex < expectedHourlySize; dailyIndex++) {
-            assertThat(hourlyResultData.get(dailyIndex).getTimestamps())
-                    .isEqualTo(expectedHourlyTimestamps.get(dailyIndex));
-            assertThat(hourlyResultData.get(dailyIndex).getLevels())
-                    .isEqualTo(expectedHourlyLevels.get(dailyIndex));
-        }
     }
 }

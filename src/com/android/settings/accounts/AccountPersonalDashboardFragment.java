@@ -22,11 +22,9 @@ import static com.android.settings.accounts.AccountDashboardFragment.buildAutofi
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.credentials.CredentialManager;
 
 import com.android.settings.R;
 import com.android.settings.applications.autofill.PasswordsPreferenceController;
-import com.android.settings.applications.credentials.CredentialManagerPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.users.AutoSyncDataPreferenceController;
@@ -36,8 +34,11 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Account Setting page for personal profile. */
+/**
+ * Account Setting page for personal profile.
+ */
 public class AccountPersonalDashboardFragment extends DashboardFragment {
+
     private static final String TAG = "AccountPersonalFrag";
 
     @Override
@@ -52,9 +53,6 @@ public class AccountPersonalDashboardFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        if (this.getContext() != null && CredentialManager.isServiceEnabled(this.getContext())) {
-            return R.xml.accounts_personal_dashboard_settings_credman;
-        }
         return R.xml.accounts_personal_dashboard_settings;
     }
 
@@ -66,12 +64,6 @@ public class AccountPersonalDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (CredentialManager.isServiceEnabled(context)) {
-            CredentialManagerPreferenceController cmpp =
-                    use(CredentialManagerPreferenceController.class);
-            cmpp.setParentFragment(this);
-        }
-
         getSettingsLifecycle().addObserver(use(PasswordsPreferenceController.class));
     }
 
@@ -85,13 +77,11 @@ public class AccountPersonalDashboardFragment extends DashboardFragment {
     }
 
     private static void buildAccountPreferenceControllers(
-            Context context,
-            DashboardFragment parent,
-            String[] authorities,
+            Context context, DashboardFragment parent, String[] authorities,
             List<AbstractPreferenceController> controllers) {
         final AccountPreferenceController accountPrefController =
-                new AccountPreferenceController(
-                        context, parent, authorities, ProfileSelectFragment.ProfileType.PERSONAL);
+                new AccountPreferenceController(context, parent, authorities,
+                        ProfileSelectFragment.ProfileType.PERSONAL);
         if (parent != null) {
             parent.getSettingsLifecycle().addObserver(accountPrefController);
         }
@@ -101,15 +91,15 @@ public class AccountPersonalDashboardFragment extends DashboardFragment {
     }
 
     // TODO: b/141601408. After featureFlag settings_work_profile is launched, unmark this
-    //    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-    //            new BaseSearchIndexProvider(R.xml.accounts_personal_dashboard_settings) {
-    //
-    //                @Override
-    //                public List<AbstractPreferenceController> createPreferenceControllers(
-    //                        Context context) {
-    //                    ..Add autofill here too..
-    //                    return buildPreferenceControllers(
-    //                            context, null /* parent */, null /* authorities*/);
-    //                }
-    //            };
+//    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+//            new BaseSearchIndexProvider(R.xml.accounts_personal_dashboard_settings) {
+//
+//                @Override
+//                public List<AbstractPreferenceController> createPreferenceControllers(
+//                        Context context) {
+//                    ..Add autofill here too..
+//                    return buildPreferenceControllers(
+//                            context, null /* parent */, null /* authorities*/);
+//                }
+//            };
 }

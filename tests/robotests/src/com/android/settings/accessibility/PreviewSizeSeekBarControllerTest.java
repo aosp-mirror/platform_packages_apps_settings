@@ -24,7 +24,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.widget.SeekBar;
 
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
@@ -111,16 +110,5 @@ public class PreviewSizeSeekBarControllerTest {
         mSeekBarController.resetState();
 
         verify(mInteractionListener).onProgressChanged();
-    }
-
-    @Test
-    public void onProgressChanged_verifyNotifyPreferenceChanged() {
-        mSeekBarController.displayPreference(mPreferenceScreen);
-
-        mSeekBarPreference.setProgress(mSeekBarPreference.getMax());
-        mSeekBarPreference.onProgressChanged(new SeekBar(mContext), /* progress= */
-                0, /* fromUser= */ false);
-
-        verify(mInteractionListener).notifyPreferenceChanged();
     }
 }

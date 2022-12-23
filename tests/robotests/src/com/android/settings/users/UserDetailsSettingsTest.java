@@ -22,7 +22,6 @@ import static android.os.UserManager.SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -85,7 +84,6 @@ import java.util.List;
 })
 public class UserDetailsSettingsTest {
 
-    private static final String KEY_GRANT_ADMIN = "user_grant_admin";
     private static final String KEY_SWITCH_USER = "switch_user";
     private static final String KEY_ENABLE_TELEPHONY = "enable_calling";
     private static final String KEY_REMOVE_USER = "remove_user";
@@ -104,8 +102,6 @@ public class UserDetailsSettingsTest {
     private RestrictedPreference mSwitchUserPref;
     @Mock
     private SwitchPreference mPhonePref;
-    @Mock
-    private SwitchPreference mGrantAdminPref;
     @Mock
     private Preference mRemoveUserPref;
     @Mock
@@ -148,7 +144,6 @@ public class UserDetailsSettingsTest {
         doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
 
         doReturn(mSwitchUserPref).when(mFragment).findPreference(KEY_SWITCH_USER);
-        doReturn(mGrantAdminPref).when(mFragment).findPreference(KEY_GRANT_ADMIN);
         doReturn(mPhonePref).when(mFragment).findPreference(KEY_ENABLE_TELEPHONY);
         doReturn(mRemoveUserPref).when(mFragment).findPreference(KEY_REMOVE_USER);
         doReturn(mAppAndContentAccessPref)
@@ -681,38 +676,6 @@ public class UserDetailsSettingsTest {
         boolean result = mFragment.canDeleteUser();
 
         assertThat(result).isFalse();
-    }
-
-    @Test
-    public void initialize_userSelected_shouldShowGrantAdminPref_HSUM() {
-        setupSelectedUser();
-        ShadowUserManager.setIsHeadlessSystemUserMode(true);
-        mFragment.initialize(mActivity, mArguments);
-        assertTrue(UserManager.isHeadlessSystemUserMode());
-        verify(mFragment, never()).removePreference(KEY_GRANT_ADMIN);
-    }
-
-    @Test
-    public void initialize_userSelected_shouldNotShowGrantAdminPref() {
-        setupSelectedUser();
-        mFragment.initialize(mActivity, mArguments);
-        verify(mFragment).removePreference(KEY_GRANT_ADMIN);
-    }
-
-    @Test
-    public void initialize_mainUserSelected_shouldShowGrantAdminPref_HSUM() {
-        setupSelectedMainUser();
-        ShadowUserManager.setIsHeadlessSystemUserMode(true);
-        mFragment.initialize(mActivity, mArguments);
-        verify(mFragment).removePreference(KEY_GRANT_ADMIN);
-    }
-
-    @Test
-    public void initialize_guestSelected_shouldNotShowGrantAdminPref_HSUM() {
-        setupSelectedGuest();
-        ShadowUserManager.setIsHeadlessSystemUserMode(true);
-        mFragment.initialize(mActivity, mArguments);
-        verify(mFragment).removePreference(KEY_GRANT_ADMIN);
     }
 
     private void setupSelectedUser() {
