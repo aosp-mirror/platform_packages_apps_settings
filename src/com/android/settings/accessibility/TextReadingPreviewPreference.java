@@ -105,6 +105,10 @@ public class TextReadingPreviewPreference extends Preference {
         }
     }
 
+    void setLastLayerIndex(int lastLayerIndex) {
+        mLastLayerIndex = lastLayerIndex;
+    }
+
     int getCurrentItem() {
         return mCurrentItem;
     }
