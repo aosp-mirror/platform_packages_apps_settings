@@ -22,6 +22,7 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.utils.StringUtil;
 
 public abstract class FailedPasswordWipePreferenceControllerBase
         extends AbstractPreferenceController implements PreferenceControllerMixin {
@@ -39,9 +40,8 @@ public abstract class FailedPasswordWipePreferenceControllerBase
     @Override
     public void updateState(Preference preference) {
         final int failedPasswordsBeforeWipe = getMaximumFailedPasswordsBeforeWipe();
-        preference.setSummary(mContext.getResources().getQuantityString(
-                R.plurals.enterprise_privacy_number_failed_password_wipe,
-                failedPasswordsBeforeWipe, failedPasswordsBeforeWipe));
+        preference.setSummary(StringUtil.getIcuPluralsString(mContext, failedPasswordsBeforeWipe,
+                R.string.enterprise_privacy_number_failed_password_wipe));
     }
 
     @Override

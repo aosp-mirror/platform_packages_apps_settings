@@ -26,6 +26,7 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.security.SecurityFeatureProvider;
+import com.android.settingslib.utils.StringUtil;
 
 public class ManageTrustAgentsPreferenceController extends BasePreferenceController {
 
@@ -56,9 +57,8 @@ public class ManageTrustAgentsPreferenceController extends BasePreferenceControl
             preference.setSummary(R.string.disabled_because_no_backup_security);
         } else if (numberOfTrustAgent > 0) {
             preference.setEnabled(true);
-            preference.setSummary(mContext.getResources().getQuantityString(
-                    R.plurals.manage_trust_agents_summary_on,
-                    numberOfTrustAgent, numberOfTrustAgent));
+            preference.setSummary(StringUtil.getIcuPluralsString(mContext, numberOfTrustAgent,
+                    R.string.manage_trust_agents_summary_on));
         } else {
             preference.setEnabled(true);
             preference.setSummary(R.string.manage_trust_agents_summary);

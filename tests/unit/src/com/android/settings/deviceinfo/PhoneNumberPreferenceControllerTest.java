@@ -41,7 +41,6 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -103,7 +102,6 @@ public class PhoneNumberPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void getAvailabilityStatus_isNotVoiceCapable_shouldBeUNSUPPORTED_ON_DEVICE() {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
 
@@ -123,7 +121,6 @@ public class PhoneNumberPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void updateState_singleSim_shouldUpdateTitleAndPhoneNumber() {
         final String phoneNumber = "1111111111";
         doReturn(phoneNumber).when(mController).getFormattedPhoneNumber(mSubscriptionInfo);
@@ -137,7 +134,6 @@ public class PhoneNumberPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void updateState_multiSim_shouldUpdateTitleAndPhoneNumberOfMultiplePreferences() {
         final String phoneNumber = "1111111111";
         doReturn(phoneNumber).when(mController).getFormattedPhoneNumber(mSubscriptionInfo);
@@ -155,7 +151,6 @@ public class PhoneNumberPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void getSummary_cannotGetActiveSubscriptionInfo_shouldShowUnknown() {
         when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(null);
 
@@ -167,7 +162,6 @@ public class PhoneNumberPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void getSummary_getEmptySubscriptionInfo_shouldShowUnknown() {
         List<SubscriptionInfo> infos = new ArrayList<>();
         when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(infos);

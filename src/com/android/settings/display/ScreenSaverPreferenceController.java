@@ -16,47 +16,41 @@ package com.android.settings.display;
 import android.content.Context;
 import android.os.UserManager;
 
-import androidx.preference.Preference;
-
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dream.DreamSettings;
-import com.android.settingslib.core.AbstractPreferenceController;
 
-public class ScreenSaverPreferenceController extends AbstractPreferenceController implements
+public class ScreenSaverPreferenceController extends BasePreferenceController implements
         PreferenceControllerMixin {
 
-    private static final String KEY_SCREEN_SAVER = "screensaver";
     private final boolean mDreamsDisabledByAmbientModeSuppression;
 
-    public ScreenSaverPreferenceController(Context context) {
-        super(context);
+    public ScreenSaverPreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
+
         mDreamsDisabledByAmbientModeSuppression = context.getResources().getBoolean(
                 com.android.internal.R.bool.config_dreamsDisabledByAmbientModeSuppressionConfig);
     }
 
     @Override
-    public boolean isAvailable() {
+    public int getAvailabilityStatus() {
         final boolean dreamsSupported = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_dreamsSupported);
         final boolean dreamsOnlyEnabledForDockUser = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser);
         // TODO(b/257333623): Allow the Dock User to be non-SystemUser user in HSUM.
-        return dreamsSupported && (!dreamsOnlyEnabledForDockUser || isSystemUser());
+        return (dreamsSupported && (!dreamsOnlyEnabledForDockUser || isSystemUser()))
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_SCREEN_SAVER;
-    }
-
-    @Override
-    public void updateState(Preference preference) {
+    public CharSequence getSummary() {
         if (mDreamsDisabledByAmbientModeSuppression
                 && AmbientDisplayAlwaysOnPreferenceController.isAodSuppressedByBedtime(mContext)) {
-            preference.setSummary(R.string.screensaver_settings_when_to_dream_bedtime);
+            return mContext.getString(R.string.screensaver_settings_when_to_dream_bedtime);
         } else {
-            preference.setSummary(DreamSettings.getSummaryTextWithDreamName(mContext));
+            return DreamSettings.getSummaryTextWithDreamName(mContext);
         }
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.network.tether;
 
 import static android.net.ConnectivityManager.TETHERING_BLUETOOTH;
 import static android.net.ConnectivityManager.TETHERING_USB;
@@ -53,6 +53,9 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.R;
+import com.android.settings.RestrictedSettingsFragment;
+import com.android.settings.Utils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.datausage.DataSaverBackend;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -69,7 +72,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-/*
+/**
  * Displays preferences for Tethering.
  */
 @SearchIndexable
@@ -368,8 +371,9 @@ public class TetherSettings extends RestrictedSettingsFragment
         registerReceiver();
 
         mEthernetListener = new EthernetListener(this);
-        if (mEm != null)
+        if (mEm != null) {
             mEm.addInterfaceStateListener(r -> mHandler.post(r), mEthernetListener);
+        }
 
         updateUsbState();
         updateBluetoothAndEthernetState();
@@ -384,8 +388,9 @@ public class TetherSettings extends RestrictedSettingsFragment
         }
         getActivity().unregisterReceiver(mTetherChangeReceiver);
         mTm.unregisterTetheringEventCallback(mTetheringEventCallback);
-        if (mEm != null)
+        if (mEm != null) {
             mEm.removeInterfaceStateListener(mEthernetListener);
+        }
         mTetherChangeReceiver = null;
         mStartTetheringCallback = null;
         mTetheringEventCallback = null;

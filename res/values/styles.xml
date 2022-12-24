@@ -378,6 +378,20 @@
         <item name="android:colorControlHighlight">@color/ripple_material_inverse</item>
     </style>
 
+    <style name="ModifierKeyButtonCancel" parent="@android:style/Widget.Material.Button">
+        <item name="android:background">@drawable/modifier_key_bordered</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
+    <style name="ModifierKeyButtonDone" parent="@android:style/Widget.Material.Button">
+        <item name="android:background">@drawable/modifier_key_colored</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
     <style name="LockPatternContainerStyle">
         <item name="android:gravity">center</item>
         <item name="android:maxHeight">@dimen/biometric_auth_pattern_view_max_size</item>

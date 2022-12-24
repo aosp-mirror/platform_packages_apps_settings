@@ -40,6 +40,8 @@ import com.android.settings.deviceinfo.SafetyInfoPreferenceController;
 import com.android.settings.deviceinfo.UptimePreferenceController;
 import com.android.settings.deviceinfo.WifiMacAddressPreferenceController;
 import com.android.settings.deviceinfo.imei.ImeiInfoPreferenceController;
+import com.android.settings.deviceinfo.simstatus.EidStatus;
+import com.android.settings.deviceinfo.simstatus.SimEidPreferenceController;
 import com.android.settings.deviceinfo.simstatus.SimStatusPreferenceController;
 import com.android.settings.deviceinfo.simstatus.SlotSimStatus;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -59,6 +61,7 @@ public class MyDeviceInfoFragment extends DashboardFragment
         implements DeviceNamePreferenceController.DeviceNamePreferenceHost {
 
     private static final String LOG_TAG = "MyDeviceInfoFragment";
+    private static final String KEY_EID_INFO = "eid_info";
     private static final String KEY_MY_DEVICE_INFO_HEADER = "my_device_info_header";
 
     private BuildNumberPreferenceController mBuildNumberPreferenceController;
@@ -109,7 +112,9 @@ public class MyDeviceInfoFragment extends DashboardFragment
 
         final ExecutorService executor = (fragment == null) ? null :
                 Executors.newSingleThreadExecutor();
-        final SlotSimStatus slotSimStatus = new SlotSimStatus(context, executor);
+        androidx.lifecycle.Lifecycle lifecycleObject = (fragment == null) ? null :
+                fragment.getLifecycle();
+        final SlotSimStatus slotSimStatus = new SlotSimStatus(context, executor, lifecycleObject);
 
         controllers.add(new IpAddressPreferenceController(context, lifecycle));
         controllers.add(new WifiMacAddressPreferenceController(context, lifecycle));
@@ -128,6 +133,12 @@ public class MyDeviceInfoFragment extends DashboardFragment
             slotRecord.init(fragment, slotSimStatus);
             controllers.add(slotRecord);
         }
+
+        EidStatus eidStatus = new EidStatus(slotSimStatus, context, executor);
+        SimEidPreferenceController simEid = new SimEidPreferenceController(context, KEY_EID_INFO);
+        simEid.init(slotSimStatus, eidStatus);
+        controllers.add(simEid);
+
         if (executor != null) {
             executor.shutdown();
         }

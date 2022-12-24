@@ -174,7 +174,7 @@ public class KeyboardLayoutPickerControllerTest {
     }
 
     private void initializeOneLayout() {
-        final KeyboardLayout[] keyboardLayouts = {new KeyboardLayout("", "", "", 1, null, 1, 1)};
+        final KeyboardLayout[] keyboardLayouts = {new KeyboardLayout("", "", "", 1, null, 0, 1, 1)};
         when(mInputManager.getKeyboardLayoutsForInputDevice(
                 any(InputDeviceIdentifier.class))).thenReturn(
                 keyboardLayouts);
@@ -183,8 +183,8 @@ public class KeyboardLayoutPickerControllerTest {
     }
 
     private void initializeTwoLayouts() {
-        final KeyboardLayout[] keyboardLayouts = {new KeyboardLayout("", "", "", 1, null, 1, 1),
-                new KeyboardLayout("", "", "", 2, null, 2, 2)};
+        final KeyboardLayout[] keyboardLayouts = {new KeyboardLayout("", "", "", 1, null, 0, 1, 1),
+                new KeyboardLayout("", "", "", 2, null, 0, 2, 2)};
         when(mInputManager.getKeyboardLayoutsForInputDevice(any(InputDeviceIdentifier.class))).
                 thenReturn(keyboardLayouts);
 

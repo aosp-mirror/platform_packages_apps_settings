@@ -99,66 +99,6 @@ public final class DataProcessorTest {
     }
 
     @Test
-    public void getBatteryLevelData_emptyHistoryMap_returnNull() {
-        assertThat(DataProcessor.getBatteryLevelData(
-                mContext,
-                /*handler=*/ null,
-                /*batteryHistoryMap=*/ null,
-                /*asyncResponseDelegate=*/ null))
-                .isNull();
-        assertThat(DataProcessor.getBatteryLevelData(
-                mContext, /*handler=*/ null, new HashMap<>(), /*asyncResponseDelegate=*/ null))
-                .isNull();
-    }
-
-    @Test
-    public void getBatteryLevelData_notEnoughData_returnNull() {
-        // The timestamps and the current time are within half hour before an even hour.
-        final long[] timestamps = {
-                DateUtils.HOUR_IN_MILLIS * 2 - 300L,
-                DateUtils.HOUR_IN_MILLIS * 2 - 200L,
-                DateUtils.HOUR_IN_MILLIS * 2 - 100L};
-        final int[] levels = {100, 99, 98};
-        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
-                createHistoryMap(timestamps, levels);
-        DataProcessor.sFakeCurrentTimeMillis = timestamps[timestamps.length - 1];
-
-        assertThat(DataProcessor.getBatteryLevelData(
-                mContext, /*handler=*/ null, batteryHistoryMap, /*asyncResponseDelegate=*/ null))
-                .isNull();
-    }
-
-    @Test
-    public void getBatteryLevelData_returnExpectedResult() {
-        // Timezone GMT+8: 2022-01-01 00:00:00, 2022-01-01 01:00:00
-        final long[] timestamps = {1640966400000L, 1640970000000L};
-        final int[] levels = {100, 99};
-        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
-                createHistoryMap(timestamps, levels);
-        DataProcessor.sFakeCurrentTimeMillis = timestamps[timestamps.length - 1];
-
-        final BatteryLevelData resultData =
-                DataProcessor.getBatteryLevelData(
-                        mContext,
-                        /*handler=*/ null,
-                        batteryHistoryMap,
-                        /*asyncResponseDelegate=*/ null);
-
-        final List<Long> expectedDailyTimestamps = List.of(
-                1640966400000L,  // 2022-01-01 00:00:00
-                1640973600000L); // 2022-01-01 02:00:00
-        final List<Integer> expectedDailyLevels = List.of(100, 66);
-        final List<List<Long>> expectedHourlyTimestamps = List.of(expectedDailyTimestamps);
-        final List<List<Integer>> expectedHourlyLevels = List.of(expectedDailyLevels);
-        verifyExpectedBatteryLevelData(
-                resultData,
-                expectedDailyTimestamps,
-                expectedDailyLevels,
-                expectedHourlyTimestamps,
-                expectedHourlyLevels);
-    }
-
-    @Test
     public void getAppUsageEvents_returnExpectedResult() throws RemoteException {
         UserInfo userInfo = new UserInfo(/*id=*/ 0, "user_0", /*flags=*/ 0);
         final List<UserInfo> userInfoList = new ArrayList<>();

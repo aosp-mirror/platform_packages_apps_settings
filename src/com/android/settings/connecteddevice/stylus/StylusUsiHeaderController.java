@@ -66,7 +66,7 @@ public class StylusUsiHeaderController extends BasePreferenceController implemen
         mHeaderPreference = screen.findPreference(getPreferenceKey());
         View view = mHeaderPreference.findViewById(R.id.entity_header);
         TextView titleView = view.findViewById(R.id.entity_header_title);
-        titleView.setText(R.string.stylus_usi_header_title);
+        titleView.setText(R.string.stylus_connected_devices_title);
 
         ImageView iconView = mHeaderPreference.findViewById(R.id.entity_header_icon);
         if (iconView != null) {
