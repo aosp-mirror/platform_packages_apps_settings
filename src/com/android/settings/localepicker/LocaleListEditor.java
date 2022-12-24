@@ -46,6 +46,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -218,8 +219,8 @@ public class LocaleListEditor extends RestrictedSettingsFragment {
             return;
         }
 
-        final String title = getResources().getQuantityString(R.plurals.dlg_remove_locales_title,
-                checkedCount);
+        final String title = StringUtil.getIcuPluralsString(getContext(), checkedCount,
+                R.string.dlg_remove_locales_title);
         mShowingRemoveDialog = true;
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

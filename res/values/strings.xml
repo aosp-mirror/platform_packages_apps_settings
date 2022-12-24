@@ -36,10 +36,10 @@
     <!-- String for removal of sensitive info on about, depending on tap -->
     <string name="device_info_protected_single_press">Tap to show info</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Countdown for user taps to enable development settings -->
-    <plurals name="show_dev_countdown">
-        <item quantity="one">You are now <xliff:g id="step_count">%1$d</xliff:g> step away from being a developer.</item>
-        <item quantity="other">You are now <xliff:g id="step_count">%1$d</xliff:g> steps away from being a developer.</item>
-    </plurals>
+    <string name="show_dev_countdown">{count, plural,
+      =1      {You are now # step away from being a developer.}
+      other   {You are now # steps away from being a developer.}
+    }</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Confirmation that developer settings are enabled -->
     <string name="show_dev_on">You are now a developer!</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Okay we get it, stop pressing, you already have it on -->
@@ -355,10 +355,10 @@
     <string name="desc_app_locale_selection_supported">Only apps that support language selection are shown here.</string>
 
     <!-- The title of the confirmation dialog shown when the user selects one / several languages and tries to remove them [CHAR LIMIT=60] -->
-    <plurals name="dlg_remove_locales_title">
-        <item quantity="one">Remove selected language?</item>
-        <item quantity="other">Remove selected languages?</item>
-    </plurals>
+    <string name="dlg_remove_locales_title">{count, plural,
+      =1      {Remove selected language?}
+      other   {Remove selected languages?}
+    }</string>
 
     <!-- The text of the confirmation dialog shown when the user selects several languages and tries to remove them [CHAR LIMIT=NONE] -->
     <string name="dlg_remove_locales_message">Text will be displayed in another language.</string>
@@ -1128,10 +1128,10 @@
     <string name="lock_last_password_attempt_before_wipe_profile">If you enter an incorrect password on the next attempt, your work profile and its data will be deleted</string>
 
     <!-- Hint shown in dialog screen when password is too short -->
-    <plurals name="lockpassword_password_too_short">
-        <item quantity="one">Must contain at least <xliff:g id="count" example="1">%d</xliff:g> character</item>
-        <item quantity="other">Must be at least <xliff:g id="count" example="3">%d</xliff:g> characters</item>
-    </plurals>
+    <string name="lockpassword_password_too_short">{count, plural,
+      =1      {Must contain at least # character}
+      other   {Must be at least # characters}
+    }</string>
     <!-- Hint shown in dialog screen when password is too short and only using numbers. [CHAR LIMIT=NONE] -->
     <string name="lockpassword_password_too_short_all_numeric">
         {count, plural,
@@ -1140,21 +1140,21 @@
         }
     </string>
     <!-- Hint shown in dialog screen when PIN is too short -->
-    <plurals name="lockpassword_pin_too_short">
-        <item quantity="one">PIN must contain at least <xliff:g id="count" example="1">%d</xliff:g> digit</item>
-        <item quantity="other">PIN must be at least <xliff:g id="count" example="3">%d</xliff:g> digits</item>
-    </plurals>
+    <string name="lockpassword_pin_too_short">{count, plural,
+      =1      {PIN must contain at least # digit}
+      other   {PIN must be at least # digits}
+    }</string>
 
     <!-- Error shown in popup when password is too long -->
-    <plurals name="lockpassword_password_too_long">
-        <item quantity="one">Must be fewer than <xliff:g id="number" example="1">%d</xliff:g> character</item>
-        <item quantity="other">Must be fewer than <xliff:g id="number" example="17">%d</xliff:g> characters</item>
-    </plurals>
+    <string name="lockpassword_password_too_long">{count, plural,
+      =1      {Must be fewer than # character}
+      other   {Must be fewer than # characters}
+    }</string>
     <!-- Error shown in popup when PIN is too long -->
-    <plurals name="lockpassword_pin_too_long">
-        <item quantity="one">Must be fewer than <xliff:g id="number" example="1">%d</xliff:g> digit</item>
-        <item quantity="other">Must be fewer than <xliff:g id="number" example="17">%d</xliff:g> digits</item>
-    </plurals>
+    <string name="lockpassword_pin_too_long">{count, plural,
+      =1      {Must be fewer than # digit}
+      other   {Must be fewer than # digits}
+    }</string>
 
     <!-- Error shown when in PIN mode and PIN has been used recently. Please keep this string short! -->
     <string name="lockpassword_pin_recently_used">Device admin doesn\'t allow using a recent PIN</string>
@@ -1163,46 +1163,46 @@
     <string name="lockpassword_illegal_character">This can\'t include an invalid character</string>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of letters -->
-    <plurals name="lockpassword_password_requires_letters">
-        <item quantity="one">Must contain at least 1 letter</item>
-        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> letters</item>
-    </plurals>
+    <string name="lockpassword_password_requires_letters">{count, plural,
+      =1      {Must contain at least 1 letter}
+      other   {Must contain at least # letters}
+    }</string>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of lowercase letters -->
-    <plurals name="lockpassword_password_requires_lowercase">
-        <item quantity="one">Must contain at least 1 lowercase letter</item>
-        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> lowercase letters</item>
-    </plurals>
+    <string name="lockpassword_password_requires_lowercase">{count, plural,
+      =1      {Must contain at least 1 lowercase letter}
+      other   {Must contain at least # lowercase letters}
+    }</string>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of uppercase letters -->
-    <plurals name="lockpassword_password_requires_uppercase">
-        <item quantity="one">Must contain at least 1 uppercase letter</item>
-        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> uppercase letters</item>
-    </plurals>
+    <string name="lockpassword_password_requires_uppercase">{count, plural,
+      =1      {Must contain at least 1 uppercase letter}
+      other   {Must contain at least # uppercase letters}
+    }</string>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of numerical digits -->
-    <plurals name="lockpassword_password_requires_numeric">
-        <item quantity="one">Must contain at least 1 numerical digit</item>
-        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> numerical digits</item>
-    </plurals>
+    <string name="lockpassword_password_requires_numeric">{count, plural,
+      =1      {Must contain at least 1 numerical digit}
+      other   {Must contain at least # numerical digits}
+    }</string>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of special symbols -->
-    <plurals name="lockpassword_password_requires_symbols">
-        <item quantity="one">Must contain at least 1 special symbol</item>
-        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> special symbols</item>
-    </plurals>
+    <string name="lockpassword_password_requires_symbols">{count, plural,
+      =1      {Must contain at least 1 special symbol}
+      other   {Must contain at least # special symbols}
+    }</string>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of non-letter characters -->
-    <plurals name="lockpassword_password_requires_nonletter">
-        <item quantity="one">Must contain at least 1 non-letter character</item>
-        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> non-letter characters</item>
-    </plurals>
+    <string name="lockpassword_password_requires_nonletter">{count, plural,
+      =1      {Must contain at least 1 non-letter character}
+      other   {Must contain at least # non-letter characters}
+    }</string>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of non-numerical characters -->
-    <plurals name="lockpassword_password_requires_nonnumerical">
-        <item quantity="one">Must contain at least 1 non-numerical character</item>
-        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> non-numerical characters</item>
-    </plurals>
+    <string name="lockpassword_password_requires_nonnumerical">{count, plural,
+      =1      {Must contain at least 1 non-numerical character}
+      other   {Must contain at least # non-numerical characters}
+    }</string>
 
     <!-- Error shown when in PASSWORD mode and password has been used recently. Please keep this string short! -->
     <string name="lockpassword_password_recently_used">Device admin doesn\'t allow using a recent
@@ -1234,10 +1234,10 @@
     <string name="number_of_device_admins_none">No active apps</string>
 
     <!-- Summary of preference to manage device admin apps, informing the user how many device admin apps are installed and active -->
-    <plurals name="number_of_device_admins">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> active app</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> active apps</item>
-    </plurals>
+    <string name="number_of_device_admins">{count, plural,
+      =1      {# active app}
+      other   {# active apps}
+    }</string>
 
     <!-- Title of preference to manage trust agents -->
     <string name="manage_trust_agents">Trust agents</string>
@@ -1249,10 +1249,10 @@
     <string name="manage_trust_agents_summary">None</string>
 
     <!-- Summary of preference to manage device policies when there is trust agent-->
-    <plurals name="manage_trust_agents_summary_on">
-        <item quantity="one">1 active trust agent</item>
-        <item quantity="other"><xliff:g id="count" example="3">%d</xliff:g> active trust agents</item>
-    </plurals>
+    <string name="manage_trust_agents_summary_on">{count, plural,
+      =1      {1 active trust agent}
+      other   {# active trust agents}
+    }</string>
 
     <!-- Bluetooth settings -->
     <!--Used as title on second screen after selecting Bluetooth settings -->
@@ -1751,20 +1751,20 @@
 
     <!-- Wi-Fi Advanced Settings --> <skip />
     <!-- Wi-Fi settings screen, Saved networks summary.  This shows below the "Saved networks" item and indicates the number of networks, not including passpoint network, a user has saved. [CHAR LIMIT=30] -->
-    <plurals name="wifi_saved_access_points_summary">
-        <item quantity="one">1 network</item>
-        <item quantity="other">%d networks</item>
-    </plurals>
+    <string name="wifi_saved_access_points_summary">{count, plural,
+      =1      {1 network}
+      other   {# networks}
+    }</string>
     <!-- Wi-Fi settings screen, Saved networks summary.  This shows below the "Saved networks" item and indicates the number of passpoint networks a user has saved. [CHAR LIMIT=30] -->
-    <plurals name="wifi_saved_passpoint_access_points_summary">
-        <item quantity="one">1 subscription</item>
-        <item quantity="other">%d subscriptions</item>
-    </plurals>
+    <string name="wifi_saved_passpoint_access_points_summary">{count, plural,
+      =1      {1 subscription}
+      other   {# subscriptions}
+    }</string>
     <!-- Wi-Fi settings screen, Saved networks summary.  This shows below the "Saved networks" item and indicates number of whole kinds networks, if there are both normal saved networks and saved passpoint networks. The number will be at least 2, so the one case is only to prevent lint error. [CHAR LIMIT=60] -->
-    <plurals name="wifi_saved_all_access_points_summary">
-        <item quantity="one">1 network &amp; subscription</item>
-        <item quantity="other">%d networks &amp; subscriptions</item>
-    </plurals>
+    <string name="wifi_saved_all_access_points_summary">{count, plural,
+      =1      {1 network &amp; subscription}
+      other   {# networks &amp; subscriptions}
+    }</string>
     <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's SSID. [CHAR LIMIT=20] -->
     <string name="wifi_advanced_ssid_title">SSID</string>
     <!-- Wi-Fi settings screen, advanced, title of the item to show the device's Wi-Fi MAC address. [CHAR LIMIT=50] -->
@@ -2372,10 +2372,10 @@
          Displayed in a dialog box.  [CHAR LIMIT=100] -->
     <string name="wrong_pin_code_pukked">Incorrect SIM PIN code you must now contact your carrier to unlock your device.</string>
     <!-- Instructions telling the user that they entered the wrong SIM PIN while trying to unlock the keyguard.  Displayed in a dialog box.  [CHAR LIMIT=100] -->
-    <plurals name="wrong_pin_code">
-        <item quantity="one">Incorrect SIM PIN code, you have <xliff:g id="number">%d</xliff:g> remaining attempt before you must contact your carrier to unlock your device.</item>
-        <item quantity="other">Incorrect SIM PIN code, you have <xliff:g id="number">%d</xliff:g> remaining attempts.</item>
-    </plurals>
+    <string name="wrong_pin_code">{count, plural,
+      =1      {Incorrect SIM PIN code, you have # remaining attempt before you must contact your carrier to unlock your device.}
+      other   {Incorrect SIM PIN code, you have # remaining attempts.}
+    }</string>
 
     <!-- This is instruction text to inform the user that they have entered the wrong SIM PIN while trying to unlock the keyguard.
          The variable will be replaced with a number. [CHAR LIMIT=NONE] -->
@@ -2955,18 +2955,10 @@
     "total_location_app_count" is almost always greater than 1, so "apps" is always in plural form.
 
     [CHAR LIMIT=NONE]-->
-    <plurals name="location_app_permission_summary_location_on">
-        <item quantity="one">
-            <xliff:g id="permitted_location_app_count">%1$d</xliff:g>
-            of
-            <xliff:g id="total_location_app_count">%2$d</xliff:g>
-            apps has access to location</item>
-        <item quantity="other">
-            <xliff:g id="permitted_location_app_count">%1$d</xliff:g>
-            of
-            <xliff:g id="total_location_app_count">%2$d</xliff:g>
-            apps have access to location</item>
-    </plurals>
+    <string name="location_app_permission_summary_location_on">{count, plural,
+      =1      {# of {total} apps has access to location}
+      other   {# of {total} apps have access to location}
+    }</string>
     <!-- [CHAR LIMIT=50] Location settings screen, sub category for recent location access -->
     <string name="location_category_recent_location_access">Recent access</string>
     <!-- Location settings screen, displayed when there're more than three recent location access apps [CHAR LIMIT=30] -->
@@ -3323,10 +3315,10 @@
     <!-- Category title listing recently used apps [CHAR_LIMIT=50]-->
     <string name="recent_app_category_title">Recently opened apps</string>
     <!-- Preference title for showing all apps on device [CHAR_LIMIT=50]-->
-    <plurals name="see_all_apps_title">
-        <item quantity="one">See all apps</item>
-        <item quantity="other">See all %1$d apps</item>
-    </plurals>
+    <string name="see_all_apps_title">{count, plural,
+      =1      {See all apps}
+      other   {See all # apps}
+    }</string>
 
     <!-- Title of the dialog that asks the user to contact the IT admin to reset password [CHAR LIMIT=40] -->
     <string name="forgot_password_title">Contact your IT admin</string>
@@ -3356,10 +3348,10 @@
     <!-- Manage applications, label that appears next to the cache size -->
     <string name="cache_size_label">Cache</string>
     <!-- Manage applications, individual application info storage screen. Describes the number of URIs (directories or files) an app has been granted access (by another apps)-->
-    <plurals name="uri_permissions_text">
-        <item quantity="one">1 item</item>
-        <item quantity="other">%d items</item>
-    </plurals>
+    <string name="uri_permissions_text">{count, plural,
+      =1      {1 item}
+      other   {# items}
+    }</string>
     <!-- Manage applications, individual application info storage screen. Button below list of URIs. -->
     <string name="clear_uri_btn_text">Clear access</string>
     <!-- Manage applications, Header name used for other controls -->
@@ -9633,10 +9625,10 @@
     <!-- Label explaining that the the number of apps is an estimation. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_apps_count_estimation_info">Number of apps is estimated. It may not include apps installed outside of the Play Store.</string>
     <!-- Summary indicating the number of apps that a label (e.g. installed apps or apps granted a particular permission) refers to. The number shown is a minimum as there may be additional apps we do not know about. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_packages_lower_bound">
-        <item quantity="one">Minimum <xliff:g id="count">%d</xliff:g> app</item>
-        <item quantity="other">Minimum <xliff:g id="count">%d</xliff:g> apps</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages_lower_bound">{count, plural,
+      =1      {Minimum # app}
+      other   {Minimum # apps}
+    }</string>
     <!-- Label indicating that the admin granted one or more apps access to the device's location. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_location_access">Location permissions</string>
     <!-- Label indicating that the admin granted one or more apps access to the microphone. [CHAR LIMIT=NONE] -->
@@ -9646,10 +9638,10 @@
     <!-- Label indicating that the admin set one or more apps as defaults for common actions (e.g. open browser, send e-mail). [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_enterprise_set_default_apps">Default apps</string>
     <!-- Summary indicating the number of apps that a label (e.g. installed apps or apps granted a particular permission) refers to. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_packages">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> app</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages">{count, plural,
+      =1      {# app}
+      other   {# apps}
+    }</string>
     <!-- Label explaining that the current input method was set by the admin. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_input_method">Default keyboard</string>
     <!-- Summary indicating the input method set by the admin. [CHAR LIMIT=NONE] -->
@@ -9669,10 +9661,10 @@
     <!-- Label explaining that the admin installed trusted CA certificates in work profile. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_ca_certs_work">Trusted credentials in your work profile</string>
     <!-- Summary indicating the number of trusted CA certificates installed by the admin. The number shown is a minimum as there may be additional CA certificates we do not know about. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_ca_certs">
-        <item quantity="one">Minimum <xliff:g id="count">%d</xliff:g> CA certificate</item>
-        <item quantity="other">Minimum <xliff:g id="count">%d</xliff:g> CA certificates</item>
-    </plurals>
+    <string name="enterprise_privacy_number_ca_certs">{count, plural,
+      =1      {Minimum # CA certificate}
+      other   {Minimum # CA certificates}
+    }</string>
     <!-- Label explaining that the admin can lock the device and change the user's password. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_lock_device">Admin can lock the device and reset password</string>
     <!-- Label explaining that the admin can wipe the device remotely. [CHAR LIMIT=NONE] -->
@@ -9682,10 +9674,10 @@
     <!-- Label explaining that the admin configured the work profile to wipe itself when the password is mistyped too many times. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_failed_password_wipe_work">Failed password attempts before deleting work profile data</string>
     <!-- Summary indicating the number of mistyped passwords after which the device or work profile wipes itself. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_failed_password_wipe">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> attempt</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> attempts</item>
-    </plurals>
+    <string name="enterprise_privacy_number_failed_password_wipe">{count, plural,
+      =1      {# attempt}
+      other   {# attempts}
+    }</string>
     <!-- Message indicating that the device is enterprise-managed by a Device Owner [CHAR LIMIT=NONE] -->
     <string name="do_disclosure_generic">This device is managed by your organization.</string>
     <!-- Message indicating that the device is enterprise-managed by a Device Owner [CHAR LIMIT=NONE] -->
@@ -9746,26 +9738,26 @@
 
     <!-- Strings for displaying which applications were set as default for specific actions. -->
     <!-- Title for the apps that have been set as default handlers of camera-related intents. [CHAR LIMIT=30] -->
-    <plurals name="default_camera_app_title">
-        <item quantity="one">Camera app</item>
-        <item quantity="other">Camera apps</item>
-    </plurals>
+    <string name="default_camera_app_title">{count, plural,
+      =1      {Camera app}
+      other   {Camera apps}
+    }</string>
     <!-- Title for the app that has been set as default handler of calendar-related intents. [CHAR LIMIT=30] -->
     <string name="default_calendar_app_title">Calendar app</string>
     <!-- Title for the app that has been set as default handler of contacts-related intents. [CHAR LIMIT=30] -->
     <string name="default_contacts_app_title">Contacts app</string>
     <!-- Title for the apps that have been set as default handlers of new email intents. [CHAR LIMIT=30] -->
-    <plurals name="default_email_app_title">
-        <item quantity="one">Email client app</item>
-        <item quantity="other">Email client apps</item>
-    </plurals>
+    <string name="default_email_app_title">{count, plural,
+      =1      {Email client app}
+      other   {Email client apps}
+    }</string>
     <!-- Title for the app that has been set as default handler of geo-related intents. [CHAR LIMIT=30] -->
     <string name="default_map_app_title">Map app</string>
     <!-- Title for the apps that have been set as default handlers of call-related intents. [CHAR LIMIT=30] -->
-    <plurals name="default_phone_app_title">
-        <item quantity="one">Phone app</item>
-        <item quantity="other">Phone apps</item>
-    </plurals>
+    <string name="default_phone_app_title">{count, plural,
+      =1      {Phone app}
+      other   {Phone apps}
+    }</string>
     <!-- Template for concatenating two app names -->
     <string name="app_names_concatenation_template_2"><xliff:g id="first_app_name">%1$s</xliff:g>, <xliff:g id="second_app_name">%2$s</xliff:g></string>
     <!-- Template for concatenating three app names -->
@@ -9848,10 +9840,10 @@
     <string name="credman_credentials">Password and identity services</string>
     <!-- Summary for passwords settings that shows how many passwords are saved for each autofill
          service. [CHAR LIMIT=NONE] -->
-    <plurals name="autofill_passwords_count">
-        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> password</item>
-        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> passwords</item>
-    </plurals>
+    <string name="autofill_passwords_count">{count, plural,
+      =1      {# password}
+      other   {# passwords}
+    }</string>
     <!-- DO NOT TRANSLATE Summary placeholder for when the passwords count is still loading or is
          unavailable. -->
     <string name="autofill_passwords_count_placeholder" translatable="false">\u2014</string>
@@ -10629,10 +10621,10 @@
     <string name="accessibility_usage_title">Accessibility usage</string>
 
     <!-- Summary for the accessibility usage preference in the Privacy page.  [CHAR LIMIT=NONE] -->
-    <plurals name="accessibility_usage_summary">
-        <item quantity="one">1 app has full access to your device</item>
-        <item quantity="other"><xliff:g id="service_count">%1$d</xliff:g> apps have full access to your device</item>
-    </plurals>
+    <string name="accessibility_usage_summary">{count, plural,
+      =1      {1 app has full access to your device}
+      other   {# apps have full access to your device}
+    }</string>
 
     <!-- Label for the title on wfc disclaimer fragment. [CHAR LIMIT=40] -->
     <string name="wfc_disclaimer_title_text">Important information</string>

@@ -15,9 +15,10 @@
  */
 package com.android.settings.fuelgauge.batterysaver;
 
+import static com.android.settingslib.fuelgauge.BatterySaverUtils.KEY_PERCENTAGE;
+
 import android.content.ContentResolver;
 import android.content.Context;
-import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.widget.SeekBar;
@@ -31,6 +32,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.widget.SeekBarPreference;
+import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
 /**
  * Responds to user actions in the Settings > Battery > Set a Schedule Screen for the seekbar.
@@ -99,25 +101,17 @@ public class BatterySaverScheduleSeekBarController implements
 
     public void updateSeekBar() {
         final ContentResolver resolver = mContext.getContentResolver();
-        // Note: this can also be obtained via PowerManager.getPowerSaveModeTrigger()
-        final int mode = Settings.Global.getInt(resolver, Global.AUTOMATIC_POWER_SAVE_MODE,
-                PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
-        // if mode is "dynamic" we are in routine mode, percentage with non-zero threshold is
-        // percentage mode, otherwise it is no schedule mode
-        if (mode == PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE) {
+        final String mode = BatterySaverUtils.getBatterySaverScheduleKey(mContext);
+        if (KEY_PERCENTAGE.equals(mode)) {
             final int threshold =
                     Settings.Global.getInt(resolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
-            if (threshold <= 0) {
-                mSeekBarPreference.setVisible(false);
-            } else {
-                final int currentSeekbarValue = Math.max(threshold / 5, MIN_SEEKBAR_VALUE);
-                mSeekBarPreference.setVisible(true);
-                mSeekBarPreference.setProgress(currentSeekbarValue);
-                final CharSequence stateDescription = formatStateDescription(
-                        currentSeekbarValue * 5);
-                mSeekBarPreference.setTitle(stateDescription);
-                mSeekBarPreference.overrideSeekBarStateDescription(stateDescription);
-            }
+            final int currentSeekbarValue = Math.max(threshold / 5, MIN_SEEKBAR_VALUE);
+            mSeekBarPreference.setVisible(true);
+            mSeekBarPreference.setProgress(currentSeekbarValue);
+            final CharSequence stateDescription = formatStateDescription(
+                    currentSeekbarValue * 5);
+            mSeekBarPreference.setTitle(stateDescription);
+            mSeekBarPreference.overrideSeekBarStateDescription(stateDescription);
         } else {
             mSeekBarPreference.setVisible(false);
         }

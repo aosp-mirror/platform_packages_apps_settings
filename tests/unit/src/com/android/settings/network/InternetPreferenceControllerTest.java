@@ -56,7 +56,6 @@ import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -178,7 +177,6 @@ public class InternetPreferenceControllerTest {
                 any(Handler.class));
     }
 
-    @Ignore
     @Test
     @UiThreadTest
     public void onPause_shouldUnregisterCallback() {

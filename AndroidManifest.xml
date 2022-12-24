@@ -761,7 +761,7 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.TetherSettings" />
+                android:value="com.android.settings.network.tether.TetherSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_network"/>
         </activity>
@@ -793,7 +793,7 @@
                   android:exported="true"
                   android:targetActivity="Settings$TetherSettingsActivity">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.TetherSettings" />
+                android:value="com.android.settings.network.tether.TetherSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_network"/>
         </activity-alias>
