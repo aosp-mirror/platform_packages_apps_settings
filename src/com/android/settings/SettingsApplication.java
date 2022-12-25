@@ -43,7 +43,11 @@ public class SettingsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ElapsedTimeUtils.assignSuwFinishedTimeStamp(this.getApplicationContext());
+
+        // Add null checking to avoid test case failed.
+        if (getApplicationContext() != null) {
+            ElapsedTimeUtils.assignSuwFinishedTimeStamp(getApplicationContext());
+        }
 
         // Set Spa environment.
         setSpaEnvironment();
