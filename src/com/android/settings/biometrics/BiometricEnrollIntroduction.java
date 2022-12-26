@@ -383,6 +383,13 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 setResult(resultCode, data);
                 finish();
             }
+        } else if (requestCode == REQUEST_POSTURE_GUIDANCE) {
+            setResult(resultCode, data);
+            if (resultCode == RESULT_CANCELED || resultCode == RESULT_SKIP) {
+                finish();
+            }
+            mOnGuidanceShown = false;
+            return;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
