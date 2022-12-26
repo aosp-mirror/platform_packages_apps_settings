@@ -590,11 +590,6 @@ public class BatteryEntry {
                 name = context.getResources().getString(R.string.power_wifi);
                 iconId = R.drawable.ic_settings_wireless_no_theme;
                 break;
-            case BatteryConsumer.POWER_COMPONENT_IDLE:
-            case BatteryConsumer.POWER_COMPONENT_MEMORY:
-                name = context.getResources().getString(R.string.power_idle);
-                iconId = R.drawable.ic_settings_phone_idle;
-                break;
             default:
                 Log.w(TAG, "unknown attribute:" + DebugUtils.constantToString(
                         BatteryConsumer.class, "POWER_COMPONENT_", powerComponentId));

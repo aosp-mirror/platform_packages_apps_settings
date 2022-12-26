@@ -146,14 +146,19 @@ public interface PowerUsageFeatureProvider {
     Intent getResumeChargeIntent(boolean isDockDefender);
 
     /**
-     * Returns {@link Set} for hiding applications background usage time.
+     * Returns {@link Set} for hiding system component ids in the usage screen.
      */
-    Set<CharSequence> getHideBackgroundUsageTimeSet(Context context);
+    Set<Integer> getHideSystemComponentSet(Context context);
 
     /**
      * Returns {@link Set} for hiding application package names in the usage screen.
      */
     Set<CharSequence> getHideApplicationSet(Context context);
+
+    /**
+     * Returns {@link Set} for hiding applications background usage time.
+     */
+    Set<CharSequence> getHideBackgroundUsageTimeSet(Context context);
 
     /**
      * Returns {@link Set} for ignoring task root class names for screen on time.
