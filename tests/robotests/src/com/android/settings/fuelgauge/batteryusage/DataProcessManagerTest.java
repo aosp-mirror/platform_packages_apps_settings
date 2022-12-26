@@ -83,7 +83,8 @@ public final class DataProcessManagerTest {
 
         mDataProcessManager = new DataProcessManager(
                 mContext, /*handler=*/ null,  /*callbackFunction=*/ null,
-                /*hourlyBatteryLevelsPerDay=*/ new ArrayList<>(), /*batteryHistoryMap=*/ null);
+                /*hourlyBatteryLevelsPerDay=*/ new ArrayList<>(),
+                /*batteryHistoryMap=*/ new HashMap<>());
     }
 
     @Test
@@ -174,7 +175,7 @@ public final class DataProcessManagerTest {
 
         final DataProcessManager dataProcessManager = new DataProcessManager(
                 mContext, /*handler=*/ null,  /*callbackFunction=*/ null,
-                hourlyBatteryLevelsPerDay, /*batteryHistoryMap=*/ null);
+                hourlyBatteryLevelsPerDay, /*batteryHistoryMap=*/ new HashMap<>());
         dataProcessManager.start();
 
         assertThat(dataProcessManager.getIsCurrentAppUsageLoaded()).isTrue();

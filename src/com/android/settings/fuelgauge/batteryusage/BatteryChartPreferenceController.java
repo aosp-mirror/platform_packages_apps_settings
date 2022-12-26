@@ -210,8 +210,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         animateBatteryChartViewGroup();
         final BatteryLevelData batteryLevelData =
                 DataProcessManager.getBatteryLevelData(mContext, mHandler, batteryHistoryMap,
-                        batteryUsageMap -> {
-                            mBatteryUsageMap = batteryUsageMap;
+                        batteryCallbackData -> {
+                            mBatteryUsageMap = batteryCallbackData.getBatteryUsageMap();
                             refreshUi();
                         });
         Log.d(TAG, "getBatteryLevelData: " + batteryLevelData);

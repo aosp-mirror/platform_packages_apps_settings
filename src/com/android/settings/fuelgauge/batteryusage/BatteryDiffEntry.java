@@ -53,6 +53,7 @@ public class BatteryDiffEntry {
 
     public long mForegroundUsageTimeInMs;
     public long mBackgroundUsageTimeInMs;
+    public long mScreenOnTimeInMs;
     public double mConsumePower;
     public double mForegroundUsageConsumePower;
     public double mForegroundServiceUsageConsumePower;
@@ -83,6 +84,7 @@ public class BatteryDiffEntry {
             Context context,
             long foregroundUsageTimeInMs,
             long backgroundUsageTimeInMs,
+            long screenOnTimeInMs,
             double consumePower,
             double foregroundUsageConsumePower,
             double foregroundServiceUsageConsumePower,
@@ -97,6 +99,7 @@ public class BatteryDiffEntry {
         mCachedUsageConsumePower = cachedUsageConsumePower;
         mForegroundUsageTimeInMs = foregroundUsageTimeInMs;
         mBackgroundUsageTimeInMs = backgroundUsageTimeInMs;
+        mScreenOnTimeInMs = screenOnTimeInMs;
         mBatteryHistEntry = batteryHistEntry;
         mUserManager = context.getSystemService(UserManager.class);
     }
@@ -119,6 +122,7 @@ public class BatteryDiffEntry {
                 this.mContext,
                 this.mForegroundUsageTimeInMs,
                 this.mBackgroundUsageTimeInMs,
+                this.mScreenOnTimeInMs,
                 this.mConsumePower,
                 this.mForegroundUsageConsumePower,
                 this.mForegroundServiceUsageConsumePower,
@@ -367,10 +371,12 @@ public class BatteryDiffEntry {
                         mForegroundUsageConsumePower, mForegroundServiceUsageConsumePower))
                 .append(String.format("\n\tconsume power= background:%f cached:%f",
                         mBackgroundUsageConsumePower, mCachedUsageConsumePower))
-                .append(String.format("\n\ttime= foreground:%s background:%s",
+                .append(String.format("\n\ttime= foreground:%s background:%s screen-on:%s",
                         StringUtil.formatElapsedTime(mContext, (double) mForegroundUsageTimeInMs,
                                 /*withSeconds=*/ true, /*collapseTimeUnit=*/ false),
                         StringUtil.formatElapsedTime(mContext, (double) mBackgroundUsageTimeInMs,
+                                /*withSeconds=*/ true, /*collapseTimeUnit=*/ false),
+                        StringUtil.formatElapsedTime(mContext, (double) mScreenOnTimeInMs,
                                 /*withSeconds=*/ true, /*collapseTimeUnit=*/ false)))
                 .append(String.format("\n\tpackage:%s|%s uid:%d userId:%d",
                         mBatteryHistEntry.mPackageName, getPackageName(),

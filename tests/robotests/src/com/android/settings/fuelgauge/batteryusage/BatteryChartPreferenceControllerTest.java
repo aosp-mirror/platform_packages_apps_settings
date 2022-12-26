@@ -37,6 +37,7 @@ import android.content.res.Resources;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.LocaleList;
+import android.os.UserManager;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
@@ -65,9 +66,9 @@ public final class BatteryChartPreferenceControllerTest {
     @Mock
     private Intent mIntent;
     @Mock
-    private SettingsActivity mSettingsActivity;
+    private UserManager mUserManager;
     @Mock
-    private BatteryHistEntry mBatteryHistEntry;
+    private SettingsActivity mSettingsActivity;
     @Mock
     private BatteryChartView mDailyChartView;
     @Mock
@@ -79,7 +80,6 @@ public final class BatteryChartPreferenceControllerTest {
 
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
-    private BatteryDiffEntry mBatteryDiffEntry;
     private BatteryChartPreferenceController mBatteryChartPreferenceController;
 
     @Before
@@ -90,6 +90,11 @@ public final class BatteryChartPreferenceControllerTest {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mContext = spy(RuntimeEnvironment.application);
+        doReturn(mContext).when(mContext).getApplicationContext();
+        doReturn(mUserManager)
+                .when(mContext)
+                .getSystemService(UserManager.class);
+        doReturn(true).when(mUserManager).isUserUnlocked(anyInt());
         final Resources resources = spy(mContext.getResources());
         resources.getConfiguration().setLocales(new LocaleList(new Locale("en_US")));
         doReturn(resources).when(mContext).getResources();
@@ -105,17 +110,6 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mPrefContext = mContext;
         mBatteryChartPreferenceController.mDailyChartView = mDailyChartView;
         mBatteryChartPreferenceController.mHourlyChartView = mHourlyChartView;
-        mBatteryDiffEntry = new BatteryDiffEntry(
-                mContext,
-                /*foregroundUsageTimeInMs=*/ 1,
-                /*backgroundUsageTimeInMs=*/ 2,
-                /*consumePower=*/ 3,
-                /*foregroundUsageConsumePower=*/ 0,
-                /*foregroundServiceUsageConsumePower=*/ 1,
-                /*backgroundUsageConsumePower=*/ 2,
-                /*cachedUsageConsumePower=*/ 0,
-                mBatteryHistEntry);
-        mBatteryDiffEntry = spy(mBatteryDiffEntry);
         // Adds fake testing data.
         BatteryDiffEntry.sResourceCache.put(
                 "fakeBatteryDiffEntryKey",
@@ -403,6 +397,7 @@ public final class BatteryChartPreferenceControllerTest {
                             .build();
             values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION,
                     ConvertUtils.convertBatteryInformationToString(batteryInformation));
+            values.put(BatteryHistEntry.KEY_PACKAGE_NAME, "package" + index);
             final BatteryHistEntry entry = new BatteryHistEntry(values);
             final Map<String, BatteryHistEntry> entryMap = new HashMap<>();
             entryMap.put("fake_entry_key" + index, entry);
