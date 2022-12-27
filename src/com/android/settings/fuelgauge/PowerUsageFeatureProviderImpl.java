@@ -76,23 +76,8 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public boolean isAdditionalBatteryInfoEnabled() {
-        return false;
-    }
-
-    @Override
     public Intent getAdditionalBatteryInfoIntent() {
         return null;
-    }
-
-    @Override
-    public boolean isAdvancedUiEnabled() {
-        return true;
-    }
-
-    @Override
-    public boolean isPowerAccountingToggleEnabled() {
-        return true;
     }
 
     @Override
@@ -144,6 +129,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public boolean isAdaptiveChargingSupported() {
         return false;
+    }
+
+    @Override
+    public boolean isBatteryManagerSupported() {
+        return true;
     }
 
     @Override
