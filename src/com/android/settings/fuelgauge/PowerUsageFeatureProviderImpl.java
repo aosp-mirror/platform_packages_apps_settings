@@ -162,12 +162,17 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public Set<CharSequence> getHideBackgroundUsageTimeSet(Context context) {
+    public Set<Integer> getHideSystemComponentSet(Context context) {
         return new ArraySet<>();
     }
 
     @Override
     public Set<CharSequence> getHideApplicationSet(Context context) {
+        return new ArraySet<>();
+    }
+
+    @Override
+    public Set<CharSequence> getHideBackgroundUsageTimeSet(Context context) {
         return new ArraySet<>();
     }
 
