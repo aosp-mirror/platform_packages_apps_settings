@@ -77,7 +77,7 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 @SearchIndexable
 public class TetherSettings extends RestrictedSettingsFragment
-        implements DataSaverBackend.Listener {
+        implements DataSaverBackend.Listener, TetheringManager.TetheringEventCallback {
 
     @VisibleForTesting
     static final String KEY_TETHER_PREFS_SCREEN = "tether_prefs_screen";
@@ -111,7 +111,6 @@ public class TetherSettings extends RestrictedSettingsFragment
     private OnStartTetheringCallback mStartTetheringCallback;
     private ConnectivityManager mCm;
     private EthernetManager mEm;
-    private TetheringEventCallback mTetheringEventCallback;
     private EthernetListener mEthernetListener;
     private final HashSet<String> mAvailableInterfaces = new HashSet<>();
 
@@ -133,6 +132,7 @@ public class TetherSettings extends RestrictedSettingsFragment
     Context mContext;
     @VisibleForTesting
     TetheringManager mTm;
+    private TetheringHelper mTetheringHelper;
 
     @Override
     public int getMetricsCategory() {
@@ -148,6 +148,8 @@ public class TetherSettings extends RestrictedSettingsFragment
         super.onAttach(context);
         mWifiTetherPreferenceController =
                 new WifiTetherPreferenceController(context, getSettingsLifecycle());
+        mTetheringHelper = TetheringHelper.getInstance(context, this /* TetheringEventCallback */,
+                getSettingsLifecycle());
     }
 
     @Override
@@ -186,7 +188,7 @@ public class TetherSettings extends RestrictedSettingsFragment
         mDataSaverBackend.addListener(this);
 
         mCm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        mTm = (TetheringManager) getSystemService(Context.TETHERING_SERVICE);
+        mTm = mTetheringHelper.getTetheringManager();
         // Some devices do not have available EthernetManager. In that case getSystemService will
         // return null.
         mEm = mContext.getSystemService(EthernetManager.class);
@@ -364,15 +366,14 @@ public class TetherSettings extends RestrictedSettingsFragment
 
 
         mStartTetheringCallback = new OnStartTetheringCallback(this);
-        mTetheringEventCallback = new TetheringEventCallback(this);
-        mTm.registerTetheringEventCallback(r -> mHandler.post(r), mTetheringEventCallback);
 
         mMassStorageActive = Environment.MEDIA_SHARED.equals(Environment.getExternalStorageState());
         registerReceiver();
 
         mEthernetListener = new EthernetListener(this);
         if (mEm != null) {
-            mEm.addInterfaceStateListener(r -> mHandler.post(r), mEthernetListener);
+            mEm.addInterfaceStateListener(mContext.getApplicationContext().getMainExecutor(),
+                    mEthernetListener);
         }
 
         updateUsbState();
@@ -387,13 +388,11 @@ public class TetherSettings extends RestrictedSettingsFragment
             return;
         }
         getActivity().unregisterReceiver(mTetherChangeReceiver);
-        mTm.unregisterTetheringEventCallback(mTetheringEventCallback);
         if (mEm != null) {
             mEm.removeInterfaceStateListener(mEthernetListener);
         }
         mTetherChangeReceiver = null;
         mStartTetheringCallback = null;
-        mTetheringEventCallback = null;
     }
 
     @VisibleForTesting
@@ -688,25 +687,8 @@ public class TetherSettings extends RestrictedSettingsFragment
         }
     }
 
-    private static final class TetheringEventCallback implements
-            TetheringManager.TetheringEventCallback {
-        final WeakReference<TetherSettings> mTetherSettings;
-
-        TetheringEventCallback(TetherSettings settings) {
-            mTetherSettings = new WeakReference<>(settings);
-        }
-
-        @Override
-        public void onTetheredInterfacesChanged(List<String> interfaces) {
-            final TetherSettings tetherSettings = mTetherSettings.get();
-            if (tetherSettings == null) {
-                return;
-            }
-            tetherSettings.onTetheredInterfacesChanged(interfaces);
-        }
-    }
-
-    void onTetheredInterfacesChanged(List<String> interfaces) {
+    @Override
+    public void onTetheredInterfacesChanged(List<String> interfaces) {
         Log.d(TAG, "onTetheredInterfacesChanged() interfaces : " + interfaces.toString());
         final String[] tethered = interfaces.toArray(new String[interfaces.size()]);
         updateUsbState(tethered);
