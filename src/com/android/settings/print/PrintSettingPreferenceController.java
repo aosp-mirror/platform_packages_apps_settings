@@ -34,6 +34,7 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.List;
 
@@ -110,17 +111,16 @@ public class PrintSettingPreferenceController extends BasePreferenceController i
         }
 
         if (numActivePrintJobs > 0) {
-            return mContext.getResources().getQuantityString(
-                    R.plurals.print_jobs_summary, numActivePrintJobs, numActivePrintJobs);
+            return StringUtil.getIcuPluralsString(mContext, numActivePrintJobs,
+                    R.string.print_jobs_summary);
         } else {
             final List<PrintServiceInfo> services =
                     mPrintManager.getPrintServices(PrintManager.ENABLED_SERVICES);
             if (services == null || services.isEmpty()) {
                 return mContext.getText(R.string.off);
             } else {
-                final int count = services.size();
-                return mContext.getResources().getQuantityString(
-                        R.plurals.print_settings_summary, count, count);
+                return StringUtil.getIcuPluralsString(mContext, services.size(),
+                        R.string.print_settings_summary);
             }
         }
     }

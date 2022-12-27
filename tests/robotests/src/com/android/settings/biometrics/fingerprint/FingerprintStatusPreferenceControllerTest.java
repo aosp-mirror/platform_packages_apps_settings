@@ -46,6 +46,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.utils.StringUtil;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -140,8 +141,8 @@ public class FingerprintStatusPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getSummary()).isEqualTo(mContext.getResources().getQuantityString(
-                R.plurals.security_settings_fingerprint_preference_summary, 1, 1));
+        assertThat(mPreference.getSummary()).isEqualTo(StringUtil.getIcuPluralsString(mContext, 1,
+                R.string.security_settings_fingerprint_preference_summary));
         assertThat(mPreference.isVisible()).isTrue();
     }
 
