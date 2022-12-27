@@ -40,19 +40,9 @@ public interface PowerUsageFeatureProvider {
     boolean isLocationSettingEnabled(String[] packages);
 
     /**
-     * Check whether additional battery info feature is enabled.
-     */
-    boolean isAdditionalBatteryInfoEnabled();
-
-    /**
      * Gets an {@link Intent} to show additional battery info.
      */
     Intent getAdditionalBatteryInfoIntent();
-
-    /**
-     * Check whether advanced ui is enabled
-     */
-    boolean isAdvancedUiEnabled();
 
     /**
      * Check whether it is type service
@@ -63,11 +53,6 @@ public interface PowerUsageFeatureProvider {
      * Check whether it is type system
      */
     boolean isTypeSystem(int uid, String[] packages);
-
-    /**
-     * Check whether the toggle for power accounting is enabled
-     */
-    boolean isPowerAccountingToggleEnabled();
 
     /**
      * Returns an improved prediction for battery time remaining.
@@ -129,6 +114,11 @@ public interface PowerUsageFeatureProvider {
      * Checks whether adaptive charging feature is supported in this device
      */
     boolean isAdaptiveChargingSupported();
+
+    /**
+     * Checks whether battery manager feature is supported in this device
+     */
+    boolean isBatteryManagerSupported();
 
     /**
      * Returns {@code true} if current defender mode is extra defend

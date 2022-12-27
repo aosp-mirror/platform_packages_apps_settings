@@ -106,16 +106,6 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
-    public void testIsAdvancedUiEnabled_returnTrue() {
-        assertThat(mPowerFeatureProvider.isAdvancedUiEnabled()).isTrue();
-    }
-
-    @Test
-    public void testIsPowerAccountingToggleEnabled_returnTrue() {
-        assertThat(mPowerFeatureProvider.isPowerAccountingToggleEnabled()).isTrue();
-    }
-
-    @Test
     public void testIsSmartBatterySupported_smartBatterySupported_returnTrue() {
         when(mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_smart_battery_available)).thenReturn(true);
