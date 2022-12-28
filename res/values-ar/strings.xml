@@ -1599,8 +1599,7 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"أثناء الشحن"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"أثناء الإرساء"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"عدم التشغيل أبدًا"</string>
-    <!-- no translation found for screensaver_settings_summary_on (4210827304351483645) -->
-    <skip />
+    <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"مفعّلة / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"إيقاف"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"وقت البدء"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"شاشة الاستراحة الحالية"</string>
@@ -1870,6 +1869,10 @@
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"بإمكانك بدء استخدام \"<xliff:g id="NAME">^1</xliff:g>\""</string>
     <string name="battery_status_title" msgid="4661768220545945771">"حالة البطارية"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"مستوى البطارية"</string>
+    <!-- no translation found for communal_settings_title (2845678473945902115) -->
+    <skip />
+    <!-- no translation found for communal_settings_summary (4923914136953940317) -->
+    <skip />
     <string name="apn_settings" msgid="4295467389400441299">"أسماء نقاط الوصول"</string>
     <string name="apn_edit" msgid="2003683641840248741">"تعديل نقطة الوصول"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"لم يتم الضبط."</string>
@@ -2951,21 +2954,14 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"قد تكون بعض الميزات محظورة."</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"استخدام أعلى للبطارية"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"عرض التطبيقات ذات أعلى معدّل استخدام للبطارية"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (6258554134146272311) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (6836981984725209843) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_title (4332616280495788195) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_summary (7870758621381307597) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_title (1414785238383255699) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_summary (3512082623718801459) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"تم تحسين الشحن لحماية البطارية"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"للمساعدة في إطالة عمر البطارية، يتم تحسين الشحن."</string>
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"تم تحسين الشحن لحماية البطارية"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"للمساعدة في إطالة عمر البطارية، يتم تحسين الشحن في وضع الإرساء."</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"تم تحسين الشحن لحماية البطارية"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"للمساعدة في إطالة عمر البطارية، يتم تحسين الشحن في وضع الإرساء."</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"الشحن بالكامل"</string>
-    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_summary (1099500476761333281) -->
-    <skip />
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"لحماية البطارية، سيتم تحسين الشحن في المرة التالية التي يكون فيها الجهاز اللوحي في وضع الإرساء."</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"مزيد من المعلومات عن إيقاف الشحن مؤقتًا"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"استئناف الشحن"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"قد يتم ضبط نسبة الشحن على <xliff:g id="PERCENT">%1$s</xliff:g> كحد أقصى للمساعدة في الحفاظ على سلامة البطارية في حالات معيّنة، مثلاً في درجات الحرارة المرتفعة وفترات الشحن الطويلة.\n\nعند العودة إلى الحالة الطبيعية، سيتم تلقائيًا شحن الهاتف بشكلٍ عادي."</string>
@@ -4300,11 +4296,11 @@
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
       <item quantity="zero">حوالي <xliff:g id="NUMBER_1">%,d</xliff:g> إشعار في الأسبوع</item>
-      <item quantity="two">حوالي إشعارين في الأسبوع (<xliff:g id="NUMBER_1">%,d</xliff:g>)</item>
+      <item quantity="two">حوالي إشعارين (<xliff:g id="NUMBER_1">%,d</xliff:g>) في الأسبوع</item>
       <item quantity="few">حوالي <xliff:g id="NUMBER_1">%,d</xliff:g> إشعارات في الأسبوع</item>
       <item quantity="many">حوالي <xliff:g id="NUMBER_1">%,d</xliff:g> إشعارًا في الأسبوع</item>
       <item quantity="other">حوالي <xliff:g id="NUMBER_1">%,d</xliff:g> إشعار في الأسبوع</item>
-      <item quantity="one">حوالي إشعار واحد في الأسبوع (<xliff:g id="NUMBER_0">%d</xliff:g>)</item>
+      <item quantity="one">حوالي إشعار واحد (<xliff:g id="NUMBER_0">%d</xliff:g>) في الأسبوع</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"أبدًا"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"إشعارات التطبيقات والأجهزة"</string>
