@@ -92,15 +92,6 @@ public interface PowerUsageFeatureProvider {
     String getOldEstimateDebugString(String timeRemaining);
 
     /**
-     * Returns a signal to indicate if the device will need to warn the user they may not make it
-     * to their next charging time.
-     *
-     * @param id Optional string used to identify the caller for metrics. Usually the class name of
-     *           the caller
-     */
-    boolean getEarlyWarningSignal(Context context, String id);
-
-    /**
      * Checks whether smart battery feature is supported in this device
      */
     boolean isSmartBatterySupported();
