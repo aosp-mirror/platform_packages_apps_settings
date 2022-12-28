@@ -67,7 +67,6 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
 
     private FontWeightAdjustmentPreferenceController mFontWeightAdjustmentController;
     private TextReadingPreviewController mPreviewController;
-    private int mLastPreviewIndex = UNKNOWN_INDEX;
     private int mEntryPoint = EntryPoint.UNKNOWN_ENTRY;
 
     /**
@@ -110,7 +109,10 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
             }
 
             if (savedInstanceState.containsKey(LAST_PREVIEW_INDEX)) {
-                mLastPreviewIndex = savedInstanceState.getInt(LAST_PREVIEW_INDEX);
+                final int lastPreviewIndex = savedInstanceState.getInt(LAST_PREVIEW_INDEX);
+                if (lastPreviewIndex != UNKNOWN_INDEX) {
+                    mPreviewController.setCurrentItem(lastPreviewIndex);
+                }
             }
         }
     }
@@ -222,10 +224,6 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
     @Override
     public void onStart() {
         super.onStart();
-
-        if (mLastPreviewIndex != UNKNOWN_INDEX) {
-            mPreviewController.setCurrentItem(mLastPreviewIndex);
-        }
     }
 
     protected boolean isCallingFromAnythingElseEntryPoint() {
