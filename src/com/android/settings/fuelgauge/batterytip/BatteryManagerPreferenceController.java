@@ -28,11 +28,10 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 
-/**
- * Preference controller to control the battery manager
- */
+/** Preference controller to control the battery manager */
 public class BatteryManagerPreferenceController extends BasePreferenceController {
     private static final String KEY_BATTERY_MANAGER = "smart_battery_manager";
+
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private AppOpsManager mAppOpsManager;
     private UserManager mUserManager;
@@ -50,7 +49,8 @@ public class BatteryManagerPreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE_UNSEARCHABLE;
+        return mPowerUsageFeatureProvider.isBatteryManagerSupported()
+                ? AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -59,7 +59,6 @@ public class BatteryManagerPreferenceController extends BasePreferenceController
         if (!mEnableAppBatteryUsagePage) {
             final int num = BatteryTipUtils.getRestrictedAppsList(mAppOpsManager,
                     mUserManager).size();
-
             updateSummary(preference, num);
         }
     }

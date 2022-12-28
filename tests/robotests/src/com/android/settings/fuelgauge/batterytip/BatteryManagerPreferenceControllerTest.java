@@ -26,6 +26,7 @@ import android.provider.Settings;
 
 import androidx.preference.Preference;
 
+import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -48,6 +49,7 @@ public class BatteryManagerPreferenceControllerTest {
     private Context mContext;
     private Preference mPreference;
     private FakeFeatureFactory mFeatureFactory;
+    private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private BatteryManagerPreferenceController mController;
 
 
@@ -60,6 +62,7 @@ public class BatteryManagerPreferenceControllerTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mPreference = new Preference(mContext);
         mController = new BatteryManagerPreferenceController(mContext);
+        mPowerUsageFeatureProvider = mFeatureFactory.powerUsageFeatureProvider;
     }
 
     @Test
@@ -71,12 +74,28 @@ public class BatteryManagerPreferenceControllerTest {
 
     @Test
     public void updateState_smartBatteryWithoutRestriction_showSummary() {
-        when(mFeatureFactory.powerUsageFeatureProvider.isSmartBatterySupported()).thenReturn(true);
+        when(mPowerUsageFeatureProvider.isSmartBatterySupported()).thenReturn(true);
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, ON);
 
         mController.updateState(mPreference);
 
         assertThat(mPreference.getSummary()).isEqualTo("Detecting when apps drain battery");
+    }
+
+    @Test
+    public void getAvailabilityStatus_supportBatteryManager_showPrefPage() {
+        when(mPowerUsageFeatureProvider.isBatteryManagerSupported()).thenReturn(true);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BatteryManagerPreferenceController.AVAILABLE_UNSEARCHABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_notSupportBatteryManager_notShowPrefPage() {
+        when(mPowerUsageFeatureProvider.isBatteryManagerSupported()).thenReturn(false);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BatteryManagerPreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 }
