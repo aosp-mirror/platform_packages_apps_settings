@@ -37,7 +37,7 @@ public final class CustomizableLockScreenUtils {
     private static final String TAG = "CustomizableLockScreenUtils";
     private static final Uri BASE_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority("com.android.systemui.keyguard.quickaffordance")
+            .authority("com.android.systemui.customization")
             .build();
     @VisibleForTesting
     static final Uri FLAGS_URI = BASE_URI.buildUpon()
@@ -45,14 +45,16 @@ public final class CustomizableLockScreenUtils {
             .build();
     @VisibleForTesting
     static final Uri SELECTIONS_URI = BASE_URI.buildUpon()
-            .path("selections")
+            .appendPath("lockscreen_quickaffordance")
+            .appendPath("selections")
             .build();
     @VisibleForTesting
     static final String NAME = "name";
     @VisibleForTesting
     static final String VALUE = "value";
     @VisibleForTesting
-    static final String ENABLED_FLAG = "is_feature_enabled";
+    static final String ENABLED_FLAG =
+            "is_custom_lock_screen_quick_affordances_feature_enabled";
     @VisibleForTesting
     static final String AFFORDANCE_NAME = "affordance_name";
 
