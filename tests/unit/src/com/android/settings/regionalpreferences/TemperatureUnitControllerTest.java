@@ -48,49 +48,52 @@ public class TemperatureUnitControllerTest {
 
     @After
     public void tearDown() throws Exception {
-        RegionalPreferenceUtils.setSettingsProviderContent(
+        RegionalPreferenceTestUtils.setSettingsProviderContent(
                 mApplicationContext, mCacheProviderContent);
         Locale.setDefault(mCacheLocale);
     }
 
     @Test
     public void getSummary_hasProviderValue_resultIsCelsius() {
-        RegionalPreferenceUtils.setSettingsProviderContent(
+        RegionalPreferenceTestUtils.setSettingsProviderContent(
                 mApplicationContext, "und-u-mu-celsius");
 
-        CharSequence unit = mController.getSummary();
+        String summary = mController.getSummary().toString();
 
-        assertEquals(LocalePreferences.TemperatureUnit.CELSIUS, unit.toString());
+        assertEquals(ResourcesUtils.getResourcesString(
+                mApplicationContext, "celsius_temperature_unit"), summary);
     }
 
     @Test
     public void getSummary_hasProviderValue_resultIsFahrenheit() {
-        RegionalPreferenceUtils.setSettingsProviderContent(
+        RegionalPreferenceTestUtils.setSettingsProviderContent(
                 mApplicationContext, "und-u-mu-fahrenhe");
 
-        CharSequence unit = mController.getSummary();
+        String summary = mController.getSummary().toString();
 
-        assertEquals(LocalePreferences.TemperatureUnit.FAHRENHEIT, unit.toString());
+        assertEquals(ResourcesUtils.getResourcesString(
+                mApplicationContext, "fahrenheit_temperature_unit"), summary);
     }
 
     @Test
     public void getSummary_noProviderValueButHasDefaultLocaleWithSubtag_resultIsFahrenheit() {
-        RegionalPreferenceUtils.setSettingsProviderContent(mApplicationContext, "");
+        RegionalPreferenceTestUtils.setSettingsProviderContent(mApplicationContext, "");
         Locale.setDefault(Locale.forLanguageTag("en-US-u-mu-fahrenhe"));
 
-        CharSequence unit = mController.getSummary();
+        String summary = mController.getSummary().toString();
 
-        assertEquals(LocalePreferences.TemperatureUnit.FAHRENHEIT, unit.toString());
+        assertEquals(ResourcesUtils.getResourcesString(
+                mApplicationContext, "fahrenheit_temperature_unit"), summary);
     }
 
     @Test
-    public void getSummary_noProviderValueAndDefaultLocaleWithoutSubtag_resultIsEmpty() {
-        RegionalPreferenceUtils.setSettingsProviderContent(mApplicationContext, "");
+    public void getSummary_noProviderValueAndDefaultLocaleWithoutSubtag_resultIsDefault() {
+        RegionalPreferenceTestUtils.setSettingsProviderContent(mApplicationContext, "");
         Locale.setDefault(Locale.forLanguageTag("en-US"));
 
-        CharSequence unit = mController.getSummary();
+        String summary = mController.getSummary().toString();
 
         assertEquals(ResourcesUtils.getResourcesString(
-                mApplicationContext, "default_string_of_regional_preference"), unit.toString());
+                mApplicationContext, "default_string_of_regional_preference"), summary);
     }
 }

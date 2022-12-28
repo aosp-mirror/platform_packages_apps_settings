@@ -16,18 +16,26 @@
 
 package com.android.settings.regionalpreferences;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.icu.text.NumberingSystem;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
+
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SubSettingLauncher;
 
 import java.util.Locale;
 
 /** A controller for the entry of Numbering System's page */
 public class NumberingSystemController extends BasePreferenceController {
+    private static final String TAG = NumberingSystemController.class.getSimpleName();
+
     private static final String UNICODE_EXTENSION_NUMBERING_SYSTEM = "nu";
 
     public NumberingSystemController(Context context, String preferenceKey) {
@@ -47,7 +55,8 @@ public class NumberingSystemController extends BasePreferenceController {
      */
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        // Hide this , and waiting for next implementation.
+        return CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
@@ -72,5 +81,23 @@ public class NumberingSystemController extends BasePreferenceController {
                 .setUnicodeLocaleKeyword(UNICODE_EXTENSION_NUMBERING_SYSTEM, result)
                 .build();
         return NumberingSystem.getInstance(locale).getName();
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!TextUtils.equals(preference.getKey(), mPreferenceKey)) {
+            Log.e(TAG, "not the key " + preference.getKey() + " / " + mPreferenceKey);
+            return false;
+        }
+
+        final Bundle extra = new Bundle();
+        extra.putString(RegionalPreferencesFragment.TYPE_OF_REGIONAL_PREFERENCE,
+                RegionalPreferencesFragment.TYPE_NUMBERING_SYSTEM);
+        new SubSettingLauncher(preference.getContext())
+                .setDestination(RegionalPreferencesFragment.class.getName())
+                .setSourceMetricsCategory(SettingsEnums.REGIONAL_PREFERENCE)
+                .setArguments(extra)
+                .launch();
+        return true;
     }
 }
