@@ -48,8 +48,9 @@ public final class BugReportContentProvider extends ContentProvider {
             Log.w(TAG, "ignore battery usage states dump in the work profile");
             return;
         }
-        writer.println("dump BatteryUsage states:");
-        LogUtils.dumpUsageDatabaseHist(context, writer);
+        writer.println("dump BatteryUsage and AppUsage states:");
+        LogUtils.dumpBatteryUsageDatabaseHist(context, writer);
+        LogUtils.dumpAppUsageDatabaseHist(context, writer);
     }
 
     @Override
