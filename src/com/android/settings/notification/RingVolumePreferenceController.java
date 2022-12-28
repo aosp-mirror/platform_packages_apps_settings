@@ -34,7 +34,6 @@ import androidx.lifecycle.OnLifecycleEvent;
 
 import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.Set;
@@ -114,8 +113,7 @@ public class RingVolumePreferenceController extends
     @Override
     public int getAvailabilityStatus() {
         boolean separateNotification = isSeparateNotificationConfigEnabled();
-
-        return !separateNotification && Utils.isVoiceCapable(mContext) && !mHelper.isSingleVolume()
+        return !separateNotification && !mHelper.isSingleVolume()
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
