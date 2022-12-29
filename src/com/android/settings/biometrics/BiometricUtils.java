@@ -265,6 +265,29 @@ public class BiometricUtils {
                 || isMultiBiometricFingerprintEnrollmentFlow(activity);
     }
 
+    /**
+     * Used to check if the activity is showing a posture guidance to user.
+     *
+     * @param isFolded True if device posture in folded state
+     * @param isLaunchedPostureGuidance True launching a posture guidance to user
+     * @return True if the activity is showing posture guidance to user
+     */
+    public static boolean isInPostureGuidanceFlow(boolean isFolded,
+            boolean isLaunchedPostureGuidance) {
+        return !isPostureAllowEnrollment(isFolded) && isLaunchedPostureGuidance;
+    }
+
+    /**
+     * Used to check if current device posture state is allow to enroll biometrics.
+     * TODO Considering more posture state(FoldingFeature.State)
+     *
+     * @param isFolded True if device posture in folded state
+     * @return True if current device posture state allow enrollment
+     */
+    public static boolean isPostureAllowEnrollment(boolean isFolded) {
+        return isFolded ? true : false;
+    }
+
     public static void copyMultiBiometricExtras(@NonNull Intent fromIntent,
             @NonNull Intent toIntent) {
         PendingIntent pendingIntent = (PendingIntent) fromIntent.getExtra(

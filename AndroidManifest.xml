@@ -2248,10 +2248,12 @@
 
         <activity android:name=".biometrics.face.FaceEnrollIntroductionInternal"
                   android:exported="false"
+                  android:launchMode="singleInstance"
                   android:screenOrientation="portrait"
                   android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".biometrics.face.FaceEnrollEducation"
+            android:launchMode="singleInstance"
             android:exported="false"
             android:screenOrientation="portrait"/>
 
