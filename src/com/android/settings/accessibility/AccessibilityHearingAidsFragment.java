@@ -19,6 +19,7 @@ package com.android.settings.accessibility;
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,12 @@ public class AccessibilityHearingAidsFragment extends AccessibilityShortcutPrefe
 
     public AccessibilityHearingAidsFragment() {
         super(DISALLOW_CONFIG_BLUETOOTH);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(SavedHearingDevicePreferenceController.class).init(this);
     }
 
     @Override
