@@ -48,6 +48,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,7 +83,8 @@ public final class DataProcessManagerTest {
 
         mDataProcessManager = new DataProcessManager(
                 mContext, /*handler=*/ null,  /*callbackFunction=*/ null,
-                /*hourlyBatteryLevelsPerDay=*/ new ArrayList<>(), /*batteryHistoryMap=*/ null);
+                /*hourlyBatteryLevelsPerDay=*/ new ArrayList<>(),
+                /*batteryHistoryMap=*/ new HashMap<>());
     }
 
     @Test
@@ -110,15 +112,31 @@ public final class DataProcessManagerTest {
         assertThat(mDataProcessManager.getIsCurrentBatteryHistoryLoaded()).isTrue();
         assertThat(mDataProcessManager.getShowScreenOnTime()).isTrue();
         assertThat(mDataProcessManager.getAppUsageEventList()).isEmpty();
+        assertThat(mDataProcessManager.getAppUsagePeriodMap()).isNull();
     }
 
     @Test
     public void start_loadExpectedAppUsageData() throws RemoteException {
+        final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
+                new ArrayList<>();
+        final String packageName = "package";
+        // Adds the day 1 data.
+        final List<Long> timestamps1 = List.of(2L, 3L, 4L);
+        final List<Integer> levels1 = List.of(100, 100, 100);
+        hourlyBatteryLevelsPerDay.add(
+                new BatteryLevelData.PeriodBatteryLevelData(timestamps1, levels1));
+        // Adds the day 2 data.
+        hourlyBatteryLevelsPerDay.add(null);
+        // Adds the day 3 data.
+        final List<Long> timestamps2 = List.of(5L, 6L);
+        final List<Integer> levels2 = List.of(100, 100);
+        hourlyBatteryLevelsPerDay.add(
+                new BatteryLevelData.PeriodBatteryLevelData(timestamps2, levels2));
         // Fake current usage data.
         final UsageEvents.Event event1 =
-                getUsageEvent(UsageEvents.Event.ACTIVITY_RESUMED, /*timestamp=*/ 1);
+                getUsageEvent(UsageEvents.Event.ACTIVITY_RESUMED, /*timestamp=*/ 1, packageName);
         final UsageEvents.Event event2 =
-                getUsageEvent(UsageEvents.Event.ACTIVITY_STOPPED, /*timestamp=*/ 2);
+                getUsageEvent(UsageEvents.Event.ACTIVITY_STOPPED, /*timestamp=*/ 2, packageName);
         final List<UsageEvents.Event> events = new ArrayList<>();
         events.add(event1);
         events.add(event2);
@@ -126,30 +144,46 @@ public final class DataProcessManagerTest {
                 .when(mUsageStatsManager)
                 .queryEventsForUser(anyLong(), anyLong(), anyInt(), any());
         doReturn(true).when(mUserManager).isUserUnlocked(anyInt());
+        // Assign current user id.
+        doReturn(1).when(mContext).getUserId();
+        // No work profile.
+        doReturn(new ArrayList<>()).when(mUserManager).getUserProfiles();
 
         // Fake database usage data.
         final MatrixCursor cursor = new MatrixCursor(
                 new String[]{
                         AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE,
-                        AppUsageEventEntity.KEY_TIMESTAMP});
+                        AppUsageEventEntity.KEY_TIMESTAMP,
+                        AppUsageEventEntity.KEY_USER_ID,
+                        AppUsageEventEntity.KEY_INSTANCE_ID,
+                        AppUsageEventEntity.KEY_PACKAGE_NAME
+                });
         // Adds fake data into the cursor.
         cursor.addRow(new Object[] {
-                AppUsageEventType.ACTIVITY_RESUMED.getNumber(), /*timestamp=*/ 3});
+                AppUsageEventType.ACTIVITY_RESUMED.getNumber(), /*timestamp=*/ 3, /*userId=*/ 1,
+                /*instanceId=*/ 2, packageName});
         cursor.addRow(new Object[] {
-                AppUsageEventType.ACTIVITY_RESUMED.getNumber(), /*timestamp=*/ 4});
+                AppUsageEventType.ACTIVITY_STOPPED.getNumber(), /*timestamp=*/ 4, /*userId=*/ 1,
+                /*instanceId=*/ 2, packageName});
         cursor.addRow(new Object[] {
-                AppUsageEventType.ACTIVITY_STOPPED.getNumber(), /*timestamp=*/ 5});
+                AppUsageEventType.ACTIVITY_RESUMED.getNumber(), /*timestamp=*/ 5, /*userId=*/ 1,
+                /*instanceId=*/ 2, packageName});
         cursor.addRow(new Object[] {
-                AppUsageEventType.ACTIVITY_STOPPED.getNumber(), /*timestamp=*/ 6});
+                AppUsageEventType.ACTIVITY_STOPPED.getNumber(), /*timestamp=*/ 6, /*userId=*/ 1,
+                /*instanceId=*/ 2, packageName});
         DatabaseUtils.sFakeAppUsageEventSupplier = () -> cursor;
 
-        mDataProcessManager.start();
+        final DataProcessManager dataProcessManager = new DataProcessManager(
+                mContext, /*handler=*/ null,  /*callbackFunction=*/ null,
+                hourlyBatteryLevelsPerDay, /*batteryHistoryMap=*/ new HashMap<>());
+        dataProcessManager.start();
 
-        assertThat(mDataProcessManager.getIsCurrentAppUsageLoaded()).isTrue();
-        assertThat(mDataProcessManager.getIsDatabaseAppUsageLoaded()).isTrue();
-        assertThat(mDataProcessManager.getIsCurrentBatteryHistoryLoaded()).isTrue();
-        assertThat(mDataProcessManager.getShowScreenOnTime()).isTrue();
-        final List<AppUsageEvent> appUsageEventList = mDataProcessManager.getAppUsageEventList();
+        assertThat(dataProcessManager.getIsCurrentAppUsageLoaded()).isTrue();
+        assertThat(dataProcessManager.getIsDatabaseAppUsageLoaded()).isTrue();
+        assertThat(dataProcessManager.getIsCurrentBatteryHistoryLoaded()).isTrue();
+        assertThat(dataProcessManager.getShowScreenOnTime()).isTrue();
+        final List<AppUsageEvent> appUsageEventList = dataProcessManager.getAppUsageEventList();
+        Collections.sort(appUsageEventList, DataProcessor.TIMESTAMP_COMPARATOR);
         assertThat(appUsageEventList.size()).isEqualTo(6);
         assertAppUsageEvent(
                 appUsageEventList.get(0), AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 1);
@@ -158,17 +192,41 @@ public final class DataProcessManagerTest {
         assertAppUsageEvent(
                 appUsageEventList.get(2), AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 3);
         assertAppUsageEvent(
-                appUsageEventList.get(3), AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 4);
+                appUsageEventList.get(3), AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 4);
         assertAppUsageEvent(
-                appUsageEventList.get(4), AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 5);
+                appUsageEventList.get(4), AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 5);
         assertAppUsageEvent(
                 appUsageEventList.get(5), AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 6);
+
+        final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
+                appUsagePeriodMap = dataProcessManager.getAppUsagePeriodMap();
+        assertThat(appUsagePeriodMap.size()).isEqualTo(3);
+        // Day 1
+        assertThat(appUsagePeriodMap.get(0).size()).isEqualTo(2);
+        Map<Long, Map<String, List<AppUsagePeriod>>> hourlyMap = appUsagePeriodMap.get(0).get(0);
+        assertThat(hourlyMap).isNull();
+        hourlyMap = appUsagePeriodMap.get(0).get(1);
+        assertThat(hourlyMap.size()).isEqualTo(1);
+        Map<String, List<AppUsagePeriod>> userMap = hourlyMap.get(1L);
+        assertThat(userMap.size()).isEqualTo(1);
+        assertThat(userMap.get(packageName).size()).isEqualTo(1);
+        assertAppUsagePeriod(userMap.get(packageName).get(0), 3, 4);
+        // Day 2
+        assertThat(appUsagePeriodMap.get(1).size()).isEqualTo(0);
+        // Day 3
+        assertThat(appUsagePeriodMap.get(2).size()).isEqualTo(1);
+        hourlyMap = appUsagePeriodMap.get(2).get(0);
+        assertThat(hourlyMap.size()).isEqualTo(1);
+        userMap = hourlyMap.get(1L);
+        assertThat(userMap.size()).isEqualTo(1);
+        assertThat(userMap.get(packageName).size()).isEqualTo(1);
+        assertAppUsagePeriod(userMap.get(packageName).get(0), 5, 6);
     }
 
     @Test
     public void start_currentUserLocked_emptyAppUsageList() throws RemoteException {
         final UsageEvents.Event event =
-                getUsageEvent(UsageEvents.Event.ACTIVITY_RESUMED, /*timestamp=*/ 1);
+                getUsageEvent(UsageEvents.Event.ACTIVITY_RESUMED, /*timestamp=*/ 1, "package");
         final List<UsageEvents.Event> events = new ArrayList<>();
         events.add(event);
         doReturn(getUsageEvents(events))
@@ -187,6 +245,7 @@ public final class DataProcessManagerTest {
         mDataProcessManager.start();
 
         assertThat(mDataProcessManager.getAppUsageEventList()).isEmpty();
+        assertThat(mDataProcessManager.getAppUsagePeriodMap()).isNull();
         assertThat(mDataProcessManager.getShowScreenOnTime()).isFalse();
     }
 
@@ -296,10 +355,10 @@ public final class DataProcessManagerTest {
     }
 
     private UsageEvents.Event getUsageEvent(
-            final int eventType, final long timestamp) {
+            final int eventType, final long timestamp, final String packageName) {
         final UsageEvents.Event event = new UsageEvents.Event();
         event.mEventType = eventType;
-        event.mPackage = "package";
+        event.mPackage = packageName;
         event.mTimeStamp = timestamp;
         return event;
     }
@@ -338,6 +397,12 @@ public final class DataProcessManagerTest {
             final AppUsageEvent event, final AppUsageEventType eventType, final long timestamp) {
         assertThat(event.getType()).isEqualTo(eventType);
         assertThat(event.getTimestamp()).isEqualTo(timestamp);
+    }
+
+    private void assertAppUsagePeriod(
+            final AppUsagePeriod period, final long startTime, final long endTime) {
+        assertThat(period.getStartTime()).isEqualTo(startTime);
+        assertThat(period.getEndTime()).isEqualTo(endTime);
     }
 
     private static void verifyExpectedBatteryLevelData(

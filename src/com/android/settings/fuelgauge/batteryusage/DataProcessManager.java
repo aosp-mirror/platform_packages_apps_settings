@@ -33,7 +33,6 @@ import com.android.settings.Utils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,6 +91,13 @@ public class DataProcessManager {
     private boolean mShowBatteryLevel = true;
 
     private List<AppUsageEvent> mAppUsageEventList = new ArrayList<>();
+    /**
+     * The indexed {@link AppUsagePeriod} list data for each corresponding time slot.
+     * <p>{@code Long} stands for the userId.</p>
+     * <p>{@code String} stands for the packageName.</p>
+     */
+    private Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
+            mAppUsagePeriodMap;
 
     /**
      * Constructor when there exists battery level data.
@@ -165,6 +171,12 @@ public class DataProcessManager {
     @VisibleForTesting
     List<AppUsageEvent> getAppUsageEventList() {
         return mAppUsageEventList;
+    }
+
+    @VisibleForTesting
+    Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
+            getAppUsagePeriodMap() {
+        return mAppUsagePeriodMap;
     }
 
     @VisibleForTesting
@@ -318,9 +330,9 @@ public class DataProcessManager {
     }
 
     private void loadAndApplyBatteryMapFromServiceOnly() {
-        new AsyncTask<Void, Void, Map<Integer, Map<Integer, BatteryDiffData>>>() {
+        new AsyncTask<Void, Void, BatteryCallbackData>() {
             @Override
-            protected Map<Integer, Map<Integer, BatteryDiffData>> doInBackground(Void... voids) {
+            protected BatteryCallbackData doInBackground(Void... voids) {
                 final long startTime = System.currentTimeMillis();
                 final Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageMap =
                         DataProcessor.getBatteryUsageMapFromStatsService(mContext);
@@ -328,18 +340,18 @@ public class DataProcessManager {
                 Log.d(TAG, String.format(
                         "execute loadAndApplyBatteryMapFromServiceOnly size=%d in %d/ms",
                         batteryUsageMap.size(), (System.currentTimeMillis() - startTime)));
-                return batteryUsageMap;
+                return new BatteryCallbackData(batteryUsageMap, /*deviceScreenOnTime=*/ null);
             }
 
             @Override
             protected void onPostExecute(
-                    final Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageMap) {
+                    final BatteryCallbackData batteryCallbackData) {
                 // Set the unused variables to null.
                 mContext = null;
                 // Post results back to main thread to refresh UI.
                 if (mHandler != null && mCallbackFunction != null) {
                     mHandler.post(() -> {
-                        mCallbackFunction.onBatteryUsageMapLoaded(batteryUsageMap);
+                        mCallbackFunction.onBatteryCallbackDataLoaded(batteryCallbackData);
                     });
                 }
             }
@@ -361,9 +373,10 @@ public class DataProcessManager {
         if (!mShowScreenOnTime) {
             return;
         }
-        // Sort the appUsageEventList in ascending order based on the timestamp.
-        Collections.sort(mAppUsageEventList, DataProcessor.TIMESTAMP_COMPARATOR);
-        // TODO: process app usage data to an intermediate result for further use.
+        // Generates the indexed AppUsagePeriod list data for each corresponding time slot for
+        // further use.
+        mAppUsagePeriodMap = DataProcessor.generateAppUsagePeriodMap(
+                mHourlyBatteryLevelsPerDay, mAppUsageEventList, mStartTimestampOfLevelData);
     }
 
     private void tryToGenerateFinalDataAndApplyCallback() {
@@ -378,12 +391,36 @@ public class DataProcessManager {
     }
 
     private void generateFinalDataAndApplyCallback() {
-        // TODO: generate the final data including battery usage map and device screen-on time and
-        // then apply the callback function.
-        // Set the unused variables to null.
-        mContext = null;
-        mHourlyBatteryLevelsPerDay = null;
-        mBatteryHistoryMap = null;
+        new AsyncTask<Void, Void, BatteryCallbackData>() {
+            @Override
+            protected BatteryCallbackData doInBackground(Void... voids) {
+                final long startTime = System.currentTimeMillis();
+                final Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageMap =
+                        DataProcessor.getBatteryUsageMap(
+                                mContext, mHourlyBatteryLevelsPerDay, mBatteryHistoryMap,
+                                mAppUsagePeriodMap);
+                final Map<Integer, Map<Integer, Long>> deviceScreenOnTime =
+                        DataProcessor.getDeviceScreenOnTime(mAppUsagePeriodMap);
+                DataProcessor.loadLabelAndIcon(batteryUsageMap);
+                Log.d(TAG, String.format("execute generateFinalDataAndApplyCallback in %d/ms",
+                        (System.currentTimeMillis() - startTime)));
+                return new BatteryCallbackData(batteryUsageMap, deviceScreenOnTime);
+            }
+
+            @Override
+            protected void onPostExecute(final BatteryCallbackData batteryCallbackData) {
+                // Set the unused variables to null.
+                mContext = null;
+                mHourlyBatteryLevelsPerDay = null;
+                mBatteryHistoryMap = null;
+                // Post results back to main thread to refresh UI.
+                if (mHandler != null && mCallbackFunction != null) {
+                    mHandler.post(() -> {
+                        mCallbackFunction.onBatteryCallbackDataLoaded(batteryCallbackData);
+                    });
+                }
+            }
+        }.execute();
     }
 
     // Whether we should load app usage data from service or database.
@@ -452,15 +489,13 @@ public class DataProcessManager {
             return null;
         }
 
-        // TODO: replace the task below with new DataProcessManager(...).start() after
-        // DataProcessManager is completed;
         // Start the async task to compute diff usage data and load labels and icons.
-        new DataProcessor.ComputeUsageMapAndLoadItemsTask(
+        new DataProcessManager(
                 context,
                 handler,
                 asyncResponseDelegate,
                 batteryLevelData.getHourlyBatteryLevelsPerDay(),
-                processedBatteryHistoryMap).execute();
+                processedBatteryHistoryMap).start();
 
         return batteryLevelData;
     }

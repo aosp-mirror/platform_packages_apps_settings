@@ -36,8 +36,10 @@ import java.io.StringWriter;
 /** Tests of {@link BugReportContentProvider}. */
 @RunWith(RobolectricTestRunner.class)
 public final class BugReportContentProviderTest {
-    private static final String PACKAGE_NAME1 = "com.android.settings";
-    private static final String PACKAGE_NAME2 = "com.android.systemui";
+    private static final String PACKAGE_NAME1 = "com.android.settings1";
+    private static final String PACKAGE_NAME2 = "com.android.settings2";
+    private static final String PACKAGE_NAME3 = "com.android.settings3";
+    private static final String PACKAGE_NAME4 = "com.android.settings4";
 
     private Context mContext;
     private PrintWriter mPrintWriter;
@@ -57,6 +59,10 @@ public final class BugReportContentProviderTest {
                 mContext, System.currentTimeMillis(), PACKAGE_NAME1);
         BatteryTestUtils.insertDataToBatteryStateTable(
                 mContext, System.currentTimeMillis(), PACKAGE_NAME2);
+        BatteryTestUtils.insertDataToAppUsageEventTable(
+                mContext, /*userId=*/ 1, System.currentTimeMillis(), PACKAGE_NAME3);
+        BatteryTestUtils.insertDataToAppUsageEventTable(
+                mContext, /*userId=*/ 1, System.currentTimeMillis(), PACKAGE_NAME4);
     }
 
     @Test
@@ -81,9 +87,12 @@ public final class BugReportContentProviderTest {
         mBugReportContentProvider.dump(FileDescriptor.out, mPrintWriter, new String[] {});
 
         String dumpContent = mStringWriter.toString();
-        assertThat(dumpContent).contains("DatabaseHistory");
+        assertThat(dumpContent).contains("Battery DatabaseHistory");
         assertThat(dumpContent).contains(PACKAGE_NAME1);
         assertThat(dumpContent).contains(PACKAGE_NAME2);
         assertThat(dumpContent).contains("distinct timestamp count:2");
+        assertThat(dumpContent).contains("App DatabaseHistory");
+        assertThat(dumpContent).contains(PACKAGE_NAME3);
+        assertThat(dumpContent).contains(PACKAGE_NAME4);
     }
 }

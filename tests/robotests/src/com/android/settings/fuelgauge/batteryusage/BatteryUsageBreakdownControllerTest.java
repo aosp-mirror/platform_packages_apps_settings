@@ -96,6 +96,7 @@ public final class BatteryUsageBreakdownControllerTest {
                 mContext,
                 /*foregroundUsageTimeInMs=*/ 1,
                 /*backgroundUsageTimeInMs=*/ 2,
+                /*screenOnTimeInMs=*/ 0,
                 /*consumePower=*/ 3,
                 /*foregroundUsageConsumePower=*/ 0,
                 /*foregroundServiceUsageConsumePower=*/ 1,
@@ -297,10 +298,10 @@ public final class BatteryUsageBreakdownControllerTest {
     private BatteryDiffEntry createBatteryDiffEntry(
             long foregroundUsageTimeInMs, long backgroundUsageTimeInMs) {
         return new BatteryDiffEntry(
-                mContext, foregroundUsageTimeInMs, backgroundUsageTimeInMs, /*consumePower=*/ 0,
-                /*foregroundUsageConsumePower=*/ 0, /*foregroundServiceUsageConsumePower=*/ 0,
-                /*backgroundUsageConsumePower=*/ 0, /*cachedUsageConsumePower=*/ 0,
-                mBatteryHistEntry);
+                mContext, foregroundUsageTimeInMs, backgroundUsageTimeInMs, /*screenOnTimeInMs=*/ 0,
+                /*consumePower=*/ 0, /*foregroundUsageConsumePower=*/ 0,
+                /*foregroundServiceUsageConsumePower=*/ 0, /*backgroundUsageConsumePower=*/ 0,
+                /*cachedUsageConsumePower=*/ 0, mBatteryHistEntry);
     }
 
     private BatteryUsageBreakdownController createController() {

@@ -19,6 +19,8 @@ package com.android.settings.fuelgauge.batteryusage.bugreport;
 import android.content.Context;
 import android.util.Log;
 
+import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventDao;
+import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryState;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
@@ -38,7 +40,7 @@ public final class LogUtils {
     private static final Duration DUMP_TIME_OFFSET_FOR_ENTRY = Duration.ofHours(4);
 
     @SuppressWarnings("JavaUtilDate")
-    static void dumpUsageDatabaseHist(Context context, PrintWriter writer) {
+    static void dumpBatteryUsageDatabaseHist(Context context, PrintWriter writer) {
         final BatteryStateDao dao =
                 BatteryStateDatabase
                         .getInstance(context.getApplicationContext())
@@ -48,7 +50,7 @@ public final class LogUtils {
         // Gets all distinct timestamps.
         final List<Long> timestamps = dao.getDistinctTimestamps(timeOffset);
         final int distinctCount = timestamps.size();
-        writer.println("\n\tDatabaseHistory:");
+        writer.println("\n\tBattery DatabaseHistory:");
         writer.println("distinct timestamp count:" + distinctCount);
         Log.w(TAG, "distinct timestamp count:" + distinctCount);
         if (distinctCount == 0) {
@@ -66,6 +68,18 @@ public final class LogUtils {
         final List<BatteryState> stateList = dao.getAllAfter(
                 Clock.systemUTC().millis() - DUMP_TIME_OFFSET_FOR_ENTRY.toMillis());
         stateList.stream().forEach(state -> writer.println(state));
+    }
+
+    @SuppressWarnings("JavaUtilDate")
+    static void dumpAppUsageDatabaseHist(Context context, PrintWriter writer) {
+        final AppUsageEventDao dao =
+                BatteryStateDatabase
+                        .getInstance(context.getApplicationContext())
+                        .appUsageEventDao();
+        writer.println("\n\tApp DatabaseHistory:");
+        final List<AppUsageEventEntity> eventList = dao.getAllAfter(
+                Clock.systemUTC().millis() - DUMP_TIME_OFFSET_FOR_ENTRY.toMillis());
+        eventList.stream().forEach(event -> writer.println(event));
     }
 
     private LogUtils() {}
