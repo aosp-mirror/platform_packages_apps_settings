@@ -27,15 +27,6 @@ import com.android.settings.R;
 
 public class NewKeyboardLayoutPickerFragment extends Fragment {
 
-    static final String EXTRA_TITLE = "keyboard_layout_picker_title";
-    static final String EXTRA_KEYBOARD_LAYOUT = "keyboard_layout";
-
-    /**
-     * Intent extra: The input device descriptor of the keyboard whose keyboard
-     * layout is to be changed.
-     */
-    public static final String EXTRA_INPUT_DEVICE_IDENTIFIER = "input_device_identifier";
-
     private ViewGroup mFragmentView;
 
     @Override
