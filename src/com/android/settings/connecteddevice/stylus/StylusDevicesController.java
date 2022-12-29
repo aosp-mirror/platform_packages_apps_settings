@@ -17,12 +17,14 @@
 package com.android.settings.connecteddevice.stylus;
 
 import android.app.role.RoleManager;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.InputDevice;
 
@@ -34,6 +36,8 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
+import com.android.settingslib.bluetooth.BluetoothUtils;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -61,18 +65,23 @@ public class StylusDevicesController extends AbstractPreferenceController implem
     @Nullable
     private final InputDevice mInputDevice;
 
+    @Nullable
+    private final CachedBluetoothDevice mCachedBluetoothDevice;
+
     @VisibleForTesting
     PreferenceCategory mPreferencesContainer;
 
-    public StylusDevicesController(Context context, InputDevice inputDevice, Lifecycle lifecycle) {
+    public StylusDevicesController(Context context, InputDevice inputDevice,
+            CachedBluetoothDevice cachedBluetoothDevice, Lifecycle lifecycle) {
         super(context);
         mInputDevice = inputDevice;
+        mCachedBluetoothDevice = cachedBluetoothDevice;
         lifecycle.addObserver(this);
     }
 
     @Override
     public boolean isAvailable() {
-        return mInputDevice != null && mInputDevice.supportsSource(InputDevice.SOURCE_STYLUS);
+        return isDeviceStylus(mInputDevice, mCachedBluetoothDevice);
     }
 
     @Nullable
@@ -179,13 +188,11 @@ public class StylusDevicesController extends AbstractPreferenceController implem
     private void refresh() {
         if (!isAvailable()) return;
 
-        if (mInputDevice.getBluetoothAddress() != null) {
-            Preference notesPref = mPreferencesContainer.findPreference(KEY_DEFAULT_NOTES);
-            if (notesPref == null) {
-                notesPref = createDefaultNotesPreference();
-                if (notesPref != null) {
-                    mPreferencesContainer.addPreference(notesPref);
-                }
+        Preference notesPref = mPreferencesContainer.findPreference(KEY_DEFAULT_NOTES);
+        if (notesPref == null) {
+            notesPref = createDefaultNotesPreference();
+            if (notesPref != null) {
+                mPreferencesContainer.addPreference(notesPref);
             }
         }
 
@@ -201,4 +208,32 @@ public class StylusDevicesController extends AbstractPreferenceController implem
             mPreferencesContainer.addPreference(createButtonPressPreference());
         }
     }
+
+    /**
+     * Identifies whether a device is a stylus using the associated {@link InputDevice} or
+     * {@link CachedBluetoothDevice}.
+     *
+     * InputDevices are only available when the device is USI or Bluetooth-connected, whereas
+     * CachedBluetoothDevices are available for Bluetooth devices when connected or paired,
+     * so to handle all cases, both are needed.
+     *
+     * @param inputDevice           The associated input device of the stylus
+     * @param cachedBluetoothDevice The associated bluetooth device of the stylus
+     */
+    public static boolean isDeviceStylus(@Nullable InputDevice inputDevice,
+            @Nullable CachedBluetoothDevice cachedBluetoothDevice) {
+        if (inputDevice != null && inputDevice.supportsSource(InputDevice.SOURCE_STYLUS)) {
+            return true;
+        }
+
+        if (cachedBluetoothDevice != null) {
+            BluetoothDevice bluetoothDevice = cachedBluetoothDevice.getDevice();
+            String deviceType = BluetoothUtils.getStringMetaData(bluetoothDevice,
+                    BluetoothDevice.METADATA_DEVICE_TYPE);
+            return TextUtils.equals(deviceType, BluetoothDevice.DEVICE_TYPE_STYLUS);
+        }
+
+        return false;
+    }
+
 }

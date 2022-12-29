@@ -77,7 +77,7 @@ public class StylusUsiDetailsFragment extends DashboardFragment {
         if (mInputDevice != null) {
             Lifecycle lifecycle = getSettingsLifecycle();
             controllers.add(new StylusUsiHeaderController(context, mInputDevice));
-            controllers.add(new StylusDevicesController(context, mInputDevice, lifecycle));
+            controllers.add(new StylusDevicesController(context, mInputDevice, null, lifecycle));
         }
         return controllers;
     }
