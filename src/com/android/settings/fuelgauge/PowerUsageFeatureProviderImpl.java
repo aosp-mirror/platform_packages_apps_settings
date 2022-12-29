@@ -76,23 +76,8 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public boolean isAdditionalBatteryInfoEnabled() {
-        return false;
-    }
-
-    @Override
     public Intent getAdditionalBatteryInfoIntent() {
         return null;
-    }
-
-    @Override
-    public boolean isAdvancedUiEnabled() {
-        return true;
-    }
-
-    @Override
-    public boolean isPowerAccountingToggleEnabled() {
-        return true;
     }
 
     @Override
@@ -126,11 +111,6 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public boolean getEarlyWarningSignal(Context context, String id) {
-        return false;
-    }
-
-    @Override
     public boolean isSmartBatterySupported() {
         return mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_smart_battery_available);
@@ -144,6 +124,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public boolean isAdaptiveChargingSupported() {
         return false;
+    }
+
+    @Override
+    public boolean isBatteryManagerSupported() {
+        return true;
     }
 
     @Override

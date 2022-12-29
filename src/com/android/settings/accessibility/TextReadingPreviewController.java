@@ -112,8 +112,10 @@ class TextReadingPreviewController extends BasePreferenceController implements
         mPreviewPreference.setPreviewAdapter(pagerAdapter);
         mPreviewPreference.setCurrentItem(
                 isLayoutRtl ? PREVIEW_SAMPLE_RES_IDS.length - 1 : FRAME_INITIAL_INDEX);
+
         final int initialPagerIndex =
                 mLastFontProgress * mDisplaySizeData.getValues().size() + mLastDisplayProgress;
+        mPreviewPreference.setLastLayerIndex(initialPagerIndex);
         pagerAdapter.setPreviewLayer(initialPagerIndex, LAYER_INITIAL_INDEX,
                 FRAME_INITIAL_INDEX, /* animate= */ false);
     }
