@@ -383,6 +383,7 @@ public class Settings extends SettingsActivity {
     public static class AdvancedConnectedDeviceActivity extends SettingsActivity { /* empty */ }
     public static class NfcSettingsActivity extends SettingsActivity { /* empty */ }
     public static class BluetoothDeviceDetailActivity extends SettingsActivity { /* empty */ }
+    public static class StylusUsiDetailsActivity extends SettingsActivity { /* empty */ }
     public static class BluetoothBroadcastActivity extends SettingsActivity { /* empty */ }
     public static class BluetoothFindBroadcastsActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingDisclaimerActivity extends SettingsActivity { /* empty */ }
