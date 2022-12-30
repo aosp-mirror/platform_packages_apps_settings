@@ -17,6 +17,7 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
+import android.hardware.input.InputManager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -38,9 +39,11 @@ public class ModifierKeysRestorePreferenceController extends BasePreferenceContr
     private Fragment mParent;
     private FragmentManager mFragmentManager;
     private PreferenceScreen mScreen;
+    private final InputManager mIm;
 
     public ModifierKeysRestorePreferenceController(Context context, String key) {
         super(context, key);
+        mIm = context.getSystemService(InputManager.class);
     }
 
     public void setFragment(Fragment parent) {
@@ -76,7 +79,7 @@ public class ModifierKeysRestorePreferenceController extends BasePreferenceContr
 
     private void showResetDialog() {
         ModifierKeysResetDialogFragment fragment =
-                new ModifierKeysResetDialogFragment(mScreen);
+                new ModifierKeysResetDialogFragment(mScreen, mIm);
         fragment.setTargetFragment(mParent, 0);
         fragment.show(mFragmentManager, KEY_TAG);
     }
