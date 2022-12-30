@@ -28,6 +28,7 @@ import com.android.settings.Settings;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.ParentalControlsUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.utils.StringUtil;
 
 /**
  * Utilities for combined biometric details shared between Security Settings and Safety Center.
@@ -102,9 +103,8 @@ public class CombinedBiometricStatusUtils {
         } else if (faceEnrolled) {
             return mContext.getString(R.string.security_settings_face_preference_summary);
         } else if (numFingerprintsEnrolled > 0) {
-            return mContext.getResources().getQuantityString(
-                    R.plurals.security_settings_fingerprint_preference_summary,
-                    numFingerprintsEnrolled, numFingerprintsEnrolled);
+            return StringUtil.getIcuPluralsString(mContext, numFingerprintsEnrolled,
+                    R.string.security_settings_fingerprint_preference_summary);
         } else {
             return mContext.getString(
                     R.string.security_settings_biometric_preference_summary_none_enrolled);

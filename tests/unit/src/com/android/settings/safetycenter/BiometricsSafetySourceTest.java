@@ -49,6 +49,7 @@ import com.android.settings.Settings;
 import com.android.settings.biometrics.face.FaceEnrollIntroductionInternal;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings;
 import com.android.settings.testutils.ResourcesUtils;
+import com.android.settingslib.utils.StringUtil;
 
 import org.junit.After;
 import org.junit.Before;
@@ -568,13 +569,12 @@ public class BiometricsSafetySourceTest {
     private void assertSafetySourceDisabledDataSetWithPluralSummary(String expectedTitleResName,
             String expectedSummaryResName, int expectedSummaryQuantity) {
         final int stringResId = ResourcesUtils.getResourcesId(
-                ApplicationProvider.getApplicationContext(), "plurals",
+                ApplicationProvider.getApplicationContext(), "string",
                 expectedSummaryResName);
         assertSafetySourceDisabledDataSet(
                 ResourcesUtils.getResourcesString(mApplicationContext, expectedTitleResName),
-                mApplicationContext.getResources().getQuantityString(stringResId,
-                        expectedSummaryQuantity /* quantity */,
-                        expectedSummaryQuantity /* formatArgs */)
+                StringUtil.getIcuPluralsString(mApplicationContext,
+                        expectedSummaryQuantity, stringResId)
         );
     }
 
@@ -582,13 +582,12 @@ public class BiometricsSafetySourceTest {
             String expectedSummaryResName, int expectedSummaryQuantity,
             String expectedSettingsClassName) {
         final int stringResId = ResourcesUtils.getResourcesId(
-                ApplicationProvider.getApplicationContext(), "plurals",
+                ApplicationProvider.getApplicationContext(), "string",
                 expectedSummaryResName);
         assertSafetySourceEnabledDataSet(
                 ResourcesUtils.getResourcesString(mApplicationContext, expectedTitleResName),
-                mApplicationContext.getResources().getQuantityString(stringResId,
-                        expectedSummaryQuantity /* quantity */,
-                        expectedSummaryQuantity /* formatArgs */),
+                StringUtil.getIcuPluralsString(mApplicationContext,
+                        expectedSummaryQuantity, stringResId),
                 expectedSettingsClassName
         );
     }

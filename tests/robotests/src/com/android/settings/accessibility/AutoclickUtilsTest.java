@@ -40,7 +40,7 @@ public final class AutoclickUtilsTest {
     @Test
     public void getAutoclickDelaySummary_minDelay_shouldReturnOnSummary() {
         final CharSequence summary = AutoclickUtils.getAutoclickDelaySummary(
-                mContext.getResources(), R.plurals.accessibilty_autoclick_delay_unit_second,
+                mContext, R.string.accessibilty_autoclick_delay_unit_second,
                 MIN_AUTOCLICK_DELAY_MS);
         assertThat(summary.toString()).isEqualTo("0.2 seconds");
     }
@@ -48,7 +48,7 @@ public final class AutoclickUtilsTest {
     @Test
     public void getAutoclickDelaySummary_maxDelay_shouldReturnOnSummary() {
         final CharSequence summary = AutoclickUtils.getAutoclickDelaySummary(
-                mContext.getResources(), R.plurals.accessibilty_autoclick_delay_unit_second,
+                mContext, R.string.accessibilty_autoclick_delay_unit_second,
                 MAX_AUTOCLICK_DELAY_MS);
         assertThat(summary.toString()).isEqualTo("1 second");
     }

@@ -492,10 +492,10 @@
     <!-- Used in the location settings to control turning on/off the feature entirely [CHAR LIMIT=60] -->
     <string name="location_settings_primary_switch_title">Use location</string>
     <!-- Summary for Location settings when location is on, explaining how many apps have location permission [CHAR LIMIT=NONE]-->
-    <plurals name="location_settings_summary_location_on">
-        <item quantity="one">On - <xliff:g id="count">%1$d</xliff:g> app has access to location</item>
-        <item quantity="other">On - <xliff:g id="count">%1$d</xliff:g> apps have access to location</item>
-    </plurals>
+    <string name="location_settings_summary_location_on">{count, plural,
+      =1      {On - # app has access to location}
+      other   {On - # apps have access to location}
+    }</string>
     <!-- Location settings, loading the number of apps which have location permission [CHAR LIMIT=30] -->
     <string name="location_settings_loading_app_permission_stats">Loading\u2026</string>
     <!-- Location settings footer warning text when location is on [CHAR LIMIT=NONE] -->
@@ -677,10 +677,10 @@
     <!-- Preference to add another fingerprint -->
     <string name="fingerprint_add_title">Add fingerprint</string>
     <!-- Message showing the current number of fingerprints set up. Shown for a menu item that launches fingerprint settings or enrollment. -->
-    <plurals name="security_settings_fingerprint_preference_summary">
-        <item quantity="one">Fingerprint added</item>
-        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> fingerprints added</item>
-    </plurals>
+    <string name="security_settings_fingerprint_preference_summary">{count, plural,
+      =1      {Fingerprint added}
+      other   {# fingerprints added}
+    }</string>
     <!-- message shown in summary field when no fingerprints are registered -->
     <string name="security_settings_fingerprint_preference_summary_none"></string>
     <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
@@ -4453,27 +4453,26 @@
     <string name="reduce_bright_colors_persist_preference_title">Keep on after device restarts</string>
 
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
-    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay">
-        <item quantity="one">Short (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
-        <item quantity="other">Short (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> seconds)</item>
-    </plurals>
+    <string name="accessibilty_autoclick_preference_subtitle_short_delay">{count, plural,
+      =1      {Short ({time} second)}
+      other   {Short ({time} seconds)}
+    }</string>
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
-    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay">
-        <item quantity="one">Medium (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
-        <item quantity="other">Medium (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> seconds)</item>
-    </plurals>
+    <string name="accessibilty_autoclick_preference_subtitle_medium_delay">{count, plural,
+      =1      {Medium ({time} second)}
+      other   {Medium ({time} seconds)}
+    }</string>
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
-    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay">
-        <item quantity="one">Long (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
-        <item quantity="other">Long (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> seconds)</item>
-    </plurals>
+    <string name="accessibilty_autoclick_preference_subtitle_long_delay">{count, plural,
+      =1      {Long ({time} second)}
+      other   {Long ({time} seconds)}
+    }</string>
 
     <!-- Summary for autoclick seekbar settings preference when user selected custom item. [CHAR LIMIT=35] -->
-    <plurals name="accessibilty_autoclick_delay_unit_second">
-        <item quantity="one"><xliff:g id="click_delay_label" example="1">%1$s</xliff:g> second</item>
-        <item quantity="few"><xliff:g id="click_delay_label" example="0.6">%1$s</xliff:g> seconds</item>
-        <item quantity="other"><xliff:g id="click_delay_label">%1$s</xliff:g> seconds</item>
-    </plurals>
+    <string name="accessibilty_autoclick_delay_unit_second">{count, plural,
+      =1      {{time} second}
+      other   {{time} seconds}
+    }</string>
 
     <!-- Title for accessibility menu item to launch a settings activity. [CHAR LIMIT=15] -->
     <string name="accessibility_menu_item_settings">Settings</string>
@@ -4672,16 +4671,16 @@
     <string name="print_settings">Printing</string>
 
     <!-- Print setting summary in settings screen [CHAR LIMIT=50] -->
-    <plurals name="print_settings_summary">
-        <item quantity="one">1 print service on</item>
-        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> print services on</item>
-    </plurals>
+    <string name="print_settings_summary">{count, plural,
+      =1      {1 print service on}
+      other   {# print services on}
+    }</string>
 
     <!-- Print setting summary in settings screenm indicating how many print jobs are active [CHAR LIMIT=None] -->
-    <plurals name="print_jobs_summary">
-        <item quantity="one">1 print job</item>
-        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> print jobs</item>
-    </plurals>
+    <string name="print_jobs_summary">{count, plural,
+      =1      {1 print job}
+      other   {# print jobs}
+    }</string>
 
     <!-- Title for print service settings screen [CHAR LIMIT=25] -->
     <string name="print_settings_title">Print services</string>
@@ -4878,31 +4877,31 @@
     <!-- Footer message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
     <string name="battery_tip_dialog_message_footer">Includes high-power background activity</string>
     <!-- Title for restricted app preference, showing how many app need to be restricted [CHAR LIMIT=NONE] -->
-    <plurals name="battery_tip_restrict_title">
-        <item quantity="one">Restrict %1$d app</item>
-        <item quantity="other">Restrict %1$d apps</item>
-    </plurals>
+    <string name="battery_tip_restrict_title">{count, plural,
+      =1      {Restrict # app}
+      other   {Restrict # apps}
+    }</string>
     <!-- Title for restricted app preference, showing how many app been restricted [CHAR LIMIT=NONE] -->
-    <plurals name="battery_tip_restrict_handled_title">
-        <item quantity="one">%1$s recently restricted</item>
-        <item quantity="other">%2$d apps recently restricted</item>
-    </plurals>
+    <string name="battery_tip_restrict_handled_title">{count, plural,
+      =1      {{label} recently restricted}
+      other   {# apps recently restricted}
+    }</string>
     <!-- Summary for restricted app preference, showing the impact of the apps [CHAR LIMIT=NONE] -->
-    <plurals name="battery_tip_restrict_summary">
-        <item quantity="one">%1$s has high background battery usage</item>
-        <item quantity="other">%2$d apps have high background battery usage</item>
-    </plurals>
+    <string name="battery_tip_restrict_summary">{count, plural,
+      =1      {{label} has high background battery usage}
+      other   {# apps have high background battery usage}
+    }</string>
     <!-- Summary for restricted app preference, showing the impact of the apps [CHAR LIMIT=NONE] -->
-    <plurals name="battery_tip_restrict_handled_summary">
-        <item quantity="one">This app can\'t run in the background</item>
-        <item quantity="other">These apps can\'t run in the background</item>
-    </plurals>
+    <string name="battery_tip_restrict_handled_summary">{count, plural,
+      =1      {This app can\'t run in the background}
+      other   {These apps can\'t run in the background}
+    }</string>
 
     <!-- Title for dialog to restrict the app [CHAR LIMIT=NONE] -->
-    <plurals name="battery_tip_restrict_app_dialog_title">
-        <item quantity="one">Restrict app?</item>
-        <item quantity="other">Restrict %1$d apps?</item>
-    </plurals>
+    <string name="battery_tip_restrict_app_dialog_title">{count, plural,
+      =1      {Restrict app?}
+      other   {Restrict # apps?}
+    }</string>
     <!-- Message for battery tip dialog to show the info to restrict the app [CHAR LIMIT=NONE] -->
     <string name="battery_tip_restrict_app_dialog_message">To save battery, stop <xliff:g id="app">%1$s</xliff:g> from using battery in the background. This app may not work properly and notifications may be delayed.</string>
     <!-- Message for battery tip dialog to show the info to restrict the app, below it app list will be shown as a view [CHAR LIMIT=NONE] -->
@@ -4931,10 +4930,10 @@
     <!-- Title for restricted app preference, clicking it will goes to restricted app list [CHAR LIMIT=NONE] -->
     <string name="restricted_app_title">Restricted apps</string>
     <!-- Summary for restricted app preference, clicking it will goes to restricted app list [CHAR LIMIT=NONE] -->
-    <plurals name="restricted_app_summary">
-        <item quantity="one">Limiting battery usage for %1$d app</item>
-        <item quantity="other">Limiting battery usage for %1$d apps</item>
-    </plurals>
+    <string name="restricted_app_summary">{count, plural,
+      =1      {Limiting battery usage for # app}
+      other   {Limiting battery usage for # apps}
+    }</string>
 
     <!-- Summary for restricted app to show the restriction time [CHAR LIMIT=NONE] -->
     <string name="restricted_app_time_summary">Restricted <xliff:g id="time" example="5 days ago">%1$s</xliff:g></string>
@@ -4953,10 +4952,10 @@
     <string name="battery_manager_summary_unsupported">Detecting when apps drain battery</string>
 
     <!-- Summary for battery manager, showing app restricted -->
-    <plurals name="battery_manager_app_restricted">
-        <item quantity="one">%1$d app restricted</item>
-        <item quantity="other">%1$d apps restricted</item>
-    </plurals>
+    <string name="battery_manager_app_restricted">{count, plural,
+      =1      {# app restricted}
+      other   {# apps restricted}
+    }</string>
 
     <!-- Title to display the battery percentage. [CHAR LIMIT=24] -->
     <string name="battery_header_title_alternate"><xliff:g id="number" example="88">^1</xliff:g><small> <font size="20"><xliff:g id="unit" example="%">%</xliff:g></font></small></string>
@@ -5406,10 +5405,10 @@
     <!-- Dialog message for button to remove the credential management app [CHAR LIMIT=NONE] -->
     <string name="remove_credential_management_app_dialog_message">This app won\u2019t manage certificates, but it will stay on your device. Any certificates installed by the app will be uninstalled.</string>
     <!-- List item found in the credential management app's authentication policy [CHAR LIMIT=NONE] -->
-    <plurals name="number_of_urls">
-        <item quantity="one"><xliff:g id="number">%d</xliff:g> URL</item>
-        <item quantity="other"><xliff:g id="number">%d</xliff:g> URLs</item>
-    </plurals>
+    <string name="number_of_urls">{count, plural,
+      =1      {# URL}
+      other   {# URLs}
+    }</string>
 
     <!-- Sound settings screen, setting check box label -->
     <string name="emergency_tone_title">Emergency dialing signal</string>
@@ -5510,10 +5509,10 @@
     <string name="notification_history_dismiss">Recently dismissed</string>
 
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
-    <plurals name="notification_history_count">
-        <item quantity="one"><xliff:g id="number">%d</xliff:g> notification</item>
-        <item quantity="other"><xliff:g id="number">%d</xliff:g> notifications</item>
-    </plurals>
+    <string name="notification_history_count">{count, plural,
+      =1      {# notification}
+      other   {# notifications}
+    }</string>
 
     <!-- Category title for phone call's ringtone and vibration settings in the Sound Setting.
          [CHAR LIMIT=40] -->
@@ -5954,10 +5953,10 @@
     <!-- Button to close the SSL CA cert warning dialog box, meaning the user is done reading.  [CHAR LIMIT=NONE] -->
     <string name="done_button">Done</string>
     <!-- Title of Dialog warning users of SSL monitoring. [CHAR LIMIT=NONE] -->
-    <plurals name="ssl_ca_cert_dialog_title">
-        <item quantity="one">Trust or remove certificate</item>
-        <item quantity="other">Trust or remove certificates</item>
-    </plurals>
+    <string name="ssl_ca_cert_dialog_title">{count, plural,
+      =1      {Trust or remove certificate}
+      other   {Trust or remove certificates}
+    }</string>
     <!-- Text of message to show to device owner user whose administrator has installed a SSL CA Cert.  [CHAR LIMIT=NONE] -->
     <string name="ssl_ca_cert_info_message_device_owner"> {numberOfCertificates, plural,
         =1 {{orgName} has installed a certificate authority on your device, which may allow them to monitor your device network activity, including emails, apps, and secure websites.\n\nFor more information about this certificate, contact your admin.}
@@ -5971,10 +5970,10 @@
     <!-- Text of warning to show to users that have a SSL CA Cert installed.  [CHAR LIMIT=NONE] -->
     <string name="ssl_ca_cert_warning_message">A third party is capable of monitoring your network activity, including emails, apps, and secure websites.\n\nA trusted credential installed on your device is making this possible.</string>
     <!-- Label on button that will take the user to the Trusted Credentials settings page.  [CHAR LIMIT=NONE]-->
-    <plurals name="ssl_ca_cert_settings_button">
-        <item quantity="one">Check certificate</item>
-        <item quantity="other">Check certificates</item>
-    </plurals>
+    <string name="ssl_ca_cert_settings_button">{count, plural,
+      =1      {Check certificate}
+      other   {Check certificates}
+    }</string>
 
     <!-- User settings screen title [CHAR LIMIT=40] -->
     <string name="user_settings_title">Multiple users</string>
@@ -7434,10 +7433,10 @@
     <string name="priority_conversation_count_zero">No priority conversations</string>
 
     <!-- [CHAR LIMIT=100] summary text on link to 'all conversations' page, some conversations are priority -->
-    <plurals name="priority_conversation_count">
-        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> priority conversation</item>
-        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> priority conversations</item>
-    </plurals>
+    <string name="priority_conversation_count">{count, plural,
+      =1      {# priority conversation}
+      other   {# priority conversations}
+    }</string>
 
     <!-- [CHAR LIMIT=100] preference category title -->
     <string name="important_conversations">Priority conversations</string>
@@ -7530,14 +7529,14 @@
     <string name="notification_app_switch_label">All <xliff:g id="app_name" example="Android Services">%1$s</xliff:g> notifications</string>
 
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
-    <plurals name="notifications_sent_daily">
-        <item quantity="one">About <xliff:g id="number">%d</xliff:g> notification per day</item>
-        <item quantity="other">About <xliff:g id="number">%,d</xliff:g> notifications per day</item>
-    </plurals>
-    <plurals name="notifications_sent_weekly">
-        <item quantity="one">About <xliff:g id="number">%d</xliff:g> notification per week</item>
-        <item quantity="other">About <xliff:g id="number">%,d</xliff:g> notifications per week</item>
-    </plurals>
+    <string name="notifications_sent_daily">{count, plural,
+      =1      {About # notification per day}
+      other   {About # notifications per day}
+    }</string>
+    <string name="notifications_sent_weekly">{count, plural,
+      =1      {About # notification per week}
+      other   {About # notifications per week}
+    }</string>
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
     <string name="notifications_sent_never">Never</string>
 
@@ -7734,10 +7733,10 @@
     <string name="interact_across_profiles_number_of_connected_apps_none">No apps connected</string>
 
     <!-- Summary of preference to manage connected work and personal apps, informing the user how many apps are connected -->
-    <plurals name="interact_across_profiles_number_of_connected_apps">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> app connected</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps connected</item>
-    </plurals>
+    <string name="interact_across_profiles_number_of_connected_apps">{count, plural,
+      =1      {# app connected}
+      other   {# apps connected}
+    }</string>
 
     <!-- Banner title. This banner lets a user know that they need to install an app in their
     work profile in order to connect it to the corresponding personal app.
@@ -7788,10 +7787,10 @@
     <string name="app_settings_link">Additional settings in the app</string>
 
     <!-- [CHAR LIMIT=NONE] Footer listing a count of deleted channels. -->
-    <plurals name="deleted_channels">
-        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> category deleted</item>
-        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> categories deleted</item>
-    </plurals>
+    <string name="deleted_channels">{count, plural,
+      =1      {# category deleted}
+      other   {# categories deleted}
+    }</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Block option title -->
     <string name="app_notification_block_title">Block all</string>
