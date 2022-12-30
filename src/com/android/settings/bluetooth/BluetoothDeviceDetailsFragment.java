@@ -312,7 +312,8 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                     mCachedDevice, lifecycle));
             controllers.add(new BluetoothDetailsMacAddressController(context, this, mCachedDevice,
                     lifecycle));
-            controllers.add(new StylusDevicesController(context, mInputDevice, lifecycle));
+            controllers.add(new StylusDevicesController(context, mInputDevice, mCachedDevice,
+                    lifecycle));
             controllers.add(new BluetoothDetailsRelatedToolsController(context, this, mCachedDevice,
                     lifecycle));
             controllers.add(new BluetoothDetailsPairOtherController(context, this, mCachedDevice,

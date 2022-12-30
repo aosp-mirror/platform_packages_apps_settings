@@ -309,6 +309,8 @@ class TrustedCredentialsDialogBuilder extends AlertDialog.Builder {
 
             LinearLayout certLayout = new LinearLayout(mActivity);
             certLayout.setOrientation(LinearLayout.VERTICAL);
+            // Prevent content overlapping with spinner
+            certLayout.setClipChildren(true);
             certLayout.addView(spinner);
             for (int i = 0; i < views.size(); ++i) {
                 View certificateView = views.get(i);
