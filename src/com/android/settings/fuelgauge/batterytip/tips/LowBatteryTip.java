@@ -24,18 +24,19 @@ import android.os.Parcelable;
 import com.android.settings.R;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-/**
- * Tip to show current battery level is low or remaining time is less than a certain period
- */
-public class LowBatteryTip extends EarlyWarningTip {
+/** Tip to show current battery level is low */
+public class LowBatteryTip extends BatteryTip {
+
+    private boolean mPowerSaveModeOn;
 
     public LowBatteryTip(@StateType int state, boolean powerSaveModeOn) {
-        super(state, powerSaveModeOn);
-        mType = TipType.LOW_BATTERY;
+        super(TipType.LOW_BATTERY, state, false /* showDialog */);
+        mPowerSaveModeOn = powerSaveModeOn;
     }
 
     public LowBatteryTip(Parcel in) {
         super(in);
+        mPowerSaveModeOn = in.readBoolean();
     }
 
     @Override
@@ -49,14 +50,36 @@ public class LowBatteryTip extends EarlyWarningTip {
     }
 
     @Override
+    public int getIconId() {
+        return mState = R.drawable.ic_battery_status_bad_24dp;
+    }
+
+    @Override
+    public int getIconTintColorId() {
+        return mState = R.color.battery_bad_color_light;
+    }
+
+    @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
+        dest.writeBoolean(mPowerSaveModeOn);
     }
 
     @Override
     public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
         metricsFeatureProvider.action(context, SettingsEnums.ACTION_LOW_BATTERY_TIP,
                 mState);
+    }
+
+    @Override
+    public void updateState(BatteryTip tip) {
+        final LowBatteryTip lowBatteryTip = (LowBatteryTip) tip;
+        mState = lowBatteryTip.mPowerSaveModeOn
+                ? StateType.INVISIBLE : lowBatteryTip.getState();
+    }
+
+    boolean isPowerSaveModeOn() {
+        return mPowerSaveModeOn;
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
