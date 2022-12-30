@@ -38,6 +38,15 @@
                 android:name="classname"
                 android:value="com.android.settings.applications.appinfo.AppLocaleDetails" />
         </Preference>
+
+        <Preference
+            android:key="regional_preferences"
+            android:title="@string/regional_preferences_title"
+            android:summary="@string/regional_preferences_summary"
+            android:fragment="com.android.settings.regionalpreferences.RegionalPreferencesEntriesFragment"
+            settings:controller="com.android.settings.regionalpreferences.RegionalPreferencesController">
+        </Preference>
+
     </PreferenceCategory>
 
     <PreferenceCategory
