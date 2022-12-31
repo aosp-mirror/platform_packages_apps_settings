@@ -27,6 +27,7 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.utils.StringUtil;
 
 /** Preference controller to control the battery manager */
 public class BatteryManagerPreferenceController extends BasePreferenceController {
@@ -66,8 +67,8 @@ public class BatteryManagerPreferenceController extends BasePreferenceController
     @VisibleForTesting
     void updateSummary(Preference preference, int num) {
         if (num > 0) {
-            preference.setSummary(mContext.getResources().getQuantityString(
-                    R.plurals.battery_manager_app_restricted, num, num));
+            preference.setSummary(StringUtil.getIcuPluralsString(mContext, num,
+                    R.string.battery_manager_app_restricted));
         } else {
             preference.setSummary(
                     mPowerUsageFeatureProvider.isAdaptiveChargingSupported()

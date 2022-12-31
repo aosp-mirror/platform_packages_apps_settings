@@ -23,6 +23,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settingslib.utils.StringUtil;
 
 public class DeletedChannelsPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin {
@@ -59,8 +60,8 @@ public class DeletedChannelsPreferenceController extends NotificationPreferenceC
     public void updateState(Preference preference) {
         if (mAppRow != null) {
             int deletedChannelCount = mBackend.getDeletedChannelCount(mAppRow.pkg, mAppRow.uid);
-            preference.setTitle(mContext.getResources().getQuantityString(
-                    R.plurals.deleted_channels, deletedChannelCount, deletedChannelCount));
+            preference.setTitle(StringUtil.getIcuPluralsString(mContext, deletedChannelCount,
+                    R.string.deleted_channels));
         }
         preference.setSelectable(false);
     }

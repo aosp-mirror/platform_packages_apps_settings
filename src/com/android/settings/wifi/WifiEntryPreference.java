@@ -82,7 +82,6 @@ public class WifiEntryPreference extends RestrictedPreference implements
         super(context);
 
         setLayoutResource(R.layout.preference_access_point);
-        setWidgetLayoutResource(R.layout.access_point_friction_widget);
         mFrictionSld = getFrictionStateListDrawable();
         mWifiEntry = wifiEntry;
         mWifiEntry.setListener(this);
@@ -278,6 +277,11 @@ public class WifiEntryPreference extends RestrictedPreference implements
     public void setOnButtonClickListener(OnButtonClickListener listener) {
         mOnButtonClickListener = listener;
         notifyChanged();
+    }
+
+    @Override
+    protected int getSecondTargetResId() {
+        return R.layout.access_point_friction_widget;
     }
 
     @Override

@@ -28,6 +28,7 @@ import com.android.settings.Utils;
 import com.android.settings.biometrics.ParentalControlsUtils;
 import com.android.settings.biometrics2.ui.view.FingerprintEnrollmentActivity;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.utils.StringUtil;
 
 /**
  * Utilities for fingerprint details shared between Security Settings and Safety Center.
@@ -69,9 +70,8 @@ public class FingerprintStatusUtils {
     public String getSummary() {
         if (hasEnrolled()) {
             final int numEnrolled = mFingerprintManager.getEnrolledFingerprints(mUserId).size();
-            return mContext.getResources().getQuantityString(
-                    R.plurals.security_settings_fingerprint_preference_summary,
-                    numEnrolled, numEnrolled);
+            return StringUtil.getIcuPluralsString(mContext, numEnrolled,
+                    R.string.security_settings_fingerprint_preference_summary);
         } else {
             return mContext.getString(
                     R.string.security_settings_fingerprint_preference_summary_none);

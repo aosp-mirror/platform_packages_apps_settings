@@ -159,7 +159,9 @@ public class BluetoothDeviceDetailsFragmentTest {
     public void getTitle_inputDeviceTitle() {
         FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_SHOW_STYLUS_PREFERENCES,
                 true);
-        doReturn(mock(InputDevice.class)).when(mFragment).getInputDevice(mContext);
+        InputDevice inputDevice = mock(InputDevice.class);
+        doReturn(true).when(inputDevice).supportsSource(InputDevice.SOURCE_STYLUS);
+        doReturn(inputDevice).when(mFragment).getInputDevice(mContext);
         mFragment.onAttach(mContext);
 
         mFragment.setTitleForInputDevice();

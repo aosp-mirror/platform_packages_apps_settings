@@ -177,12 +177,14 @@ class AppNotificationRepository(
     fun calculateFrequencySummary(sentCount: Int): String {
         val dailyFrequency = (sentCount.toFloat() / DAYS_TO_CHECK).roundToInt()
         return if (dailyFrequency > 0) {
-            context.resources.getQuantityString(
-                R.plurals.notifications_sent_daily, dailyFrequency, dailyFrequency
+            context.formatString(
+                R.string.notifications_sent_daily,
+                "count" to dailyFrequency,
             )
         } else {
-            context.resources.getQuantityString(
-                R.plurals.notifications_sent_weekly, sentCount, sentCount
+            context.formatString(
+                R.string.notifications_sent_weekly,
+                "count" to sentCount,
             )
         }
     }

@@ -341,9 +341,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
 
     @VisibleForTesting
     void setTitleForInputDevice() {
-        // TODO(b/254835745) once source filter for bt stylus merged
-        // && mInputDevice.supportsSource(InputDevice.SOURCE_BLUETOOTH_STYLUS))
-        if (mInputDevice != null) {
+        if (StylusDevicesController.isDeviceStylus(mInputDevice, mCachedDevice)) {
             // This will override the default R.string.device_details_title "Device Details"
             // that will show on non-stylus bluetooth devices.
             // That title is set via the manifest and also from BluetoothDeviceUpdater.
