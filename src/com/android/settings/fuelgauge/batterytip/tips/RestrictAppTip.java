@@ -28,9 +28,12 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Tip to suggest user to restrict some bad apps
@@ -62,12 +65,15 @@ public class RestrictAppTip extends BatteryTip {
         final int num = mRestrictAppList.size();
         final CharSequence appLabel = num > 0 ? Utils.getApplicationLabel(context,
                 mRestrictAppList.get(0).packageName) : "";
-        final Resources resources = context.getResources();
 
+        Map<String, Object> arguments = new HashMap<>();
+        arguments.put("count", num);
+        arguments.put("label", appLabel);
         return mState == StateType.HANDLED
-                ? resources.getQuantityString(R.plurals.battery_tip_restrict_handled_title, num,
-                appLabel, num)
-                : resources.getQuantityString(R.plurals.battery_tip_restrict_title, num, num);
+                ? StringUtil.getIcuPluralsString(context, arguments,
+                R.string.battery_tip_restrict_handled_title)
+                : StringUtil.getIcuPluralsString(context, arguments,
+                R.string.battery_tip_restrict_title);
     }
 
     @Override
@@ -76,9 +82,12 @@ public class RestrictAppTip extends BatteryTip {
         final CharSequence appLabel = num > 0 ? Utils.getApplicationLabel(context,
                 mRestrictAppList.get(0).packageName) : "";
         final int resId = mState == StateType.HANDLED
-                ? R.plurals.battery_tip_restrict_handled_summary
-                : R.plurals.battery_tip_restrict_summary;
-        return context.getResources().getQuantityString(resId, num, appLabel, num);
+                ? R.string.battery_tip_restrict_handled_summary
+                : R.string.battery_tip_restrict_summary;
+        Map<String, Object> arguments = new HashMap<>();
+        arguments.put("count", num);
+        arguments.put("label", appLabel);
+        return StringUtil.getIcuPluralsString(context, arguments, resId);
     }
 
     @Override

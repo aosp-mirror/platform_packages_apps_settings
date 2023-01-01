@@ -34,9 +34,9 @@ public class AutoclickPreferenceController extends BasePreferenceController {
      * placeholder for integer delay value.
      */
     private static final int[] AUTOCLICK_PREFERENCE_SUMMARIES = {
-            R.plurals.accessibilty_autoclick_preference_subtitle_short_delay,
-            R.plurals.accessibilty_autoclick_preference_subtitle_medium_delay,
-            R.plurals.accessibilty_autoclick_preference_subtitle_long_delay
+            R.string.accessibilty_autoclick_preference_subtitle_short_delay,
+            R.string.accessibilty_autoclick_preference_subtitle_medium_delay,
+            R.string.accessibilty_autoclick_preference_subtitle_long_delay
     };
 
     public AutoclickPreferenceController(Context context, String preferenceKey) {
@@ -59,7 +59,7 @@ public class AutoclickPreferenceController extends BasePreferenceController {
                 Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
                 AccessibilityManager.AUTOCLICK_DELAY_DEFAULT);
         final int summaryIndex = getAutoclickPreferenceSummaryIndex(delayMillis);
-        return AutoclickUtils.getAutoclickDelaySummary(mContext.getResources(),
+        return AutoclickUtils.getAutoclickDelaySummary(mContext,
                 AUTOCLICK_PREFERENCE_SUMMARIES[summaryIndex], delayMillis);
     }
 
