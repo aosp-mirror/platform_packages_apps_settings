@@ -197,4 +197,15 @@
         android:title="@string/special_access_more"
         android:order="-100"
         settings:controller="com.android.settings.applications.specialaccess.MoreSpecialAccessPreferenceController" />
+
+    <Preference
+        android:key="change_nfc_tag_apps_state"
+        android:title="@string/change_nfc_tag_apps_title"
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+        settings:keywords="@string/keywords_change_nfc_tag_apps_state"
+        settings:controller="com.android.settings.nfc.NfcTagAppsPreferenceController">
+        <extra
+            android:name="classname"
+            android:value="com.android.settings.Settings$ChangeNfcTagAppsActivity" />
+    </Preference>
 </PreferenceScreen>
