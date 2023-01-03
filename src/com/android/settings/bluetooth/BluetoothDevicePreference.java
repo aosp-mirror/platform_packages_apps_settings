@@ -190,9 +190,8 @@ public final class BluetoothDevicePreference extends GearPreference {
         setTitle(mCachedDevice.getName());
         try {
             ThreadUtils.postOnBackgroundThread(() -> {
-                String summary = mCachedDevice.getConnectionSummary();
                 // Null check is done at the framework
-                ThreadUtils.postOnMainThread(() -> setSummary(summary));
+                ThreadUtils.postOnMainThread(() -> setSummary(getConnectionSummary()));
             });
         } catch (RejectedExecutionException e) {
             Log.w(TAG, "Handler thread unavailable, skipping getConnectionSummary!");
@@ -318,5 +317,13 @@ public final class BluetoothDevicePreference extends GearPreference {
             Utils.showError(getContext(), mCachedDevice.getName(),
                     R.string.bluetooth_pairing_error_message);
         }
+    }
+
+    private String getConnectionSummary() {
+        String summary = null;
+        if (mCachedDevice.getBondState() != BluetoothDevice.BOND_NONE) {
+            summary = mCachedDevice.getConnectionSummary();
+        }
+        return summary;
     }
 }
