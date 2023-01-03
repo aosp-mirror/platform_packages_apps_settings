@@ -121,7 +121,7 @@ class AllAppListTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun allAppListModel_transform() = runTest {
-        val listModel = AllAppListModel { stateOf(SUMMARY) }
+        val listModel = AllAppListModel(context) { stateOf(SUMMARY) }
 
         val recordListFlow = listModel.transform(flowOf(USER_ID), flowOf(listOf(APP)))
 
@@ -132,7 +132,7 @@ class AllAppListTest {
 
     @Test
     fun allAppListModel_getSummary() {
-        val listModel = AllAppListModel { stateOf(SUMMARY) }
+        val listModel = AllAppListModel(context) { stateOf(SUMMARY) }
 
         lateinit var summaryState: State<String>
         composeTestRule.setContent {
@@ -140,6 +140,23 @@ class AllAppListTest {
         }
 
         assertThat(summaryState.value).isEqualTo(SUMMARY)
+    }
+
+    @Test
+    fun allAppListModel_getSummaryWhenDisabled() {
+        val listModel = AllAppListModel(context) { stateOf(SUMMARY) }
+        val disabledApp = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+            enabled = false
+        }
+
+        lateinit var summaryState: State<String>
+        composeTestRule.setContent {
+            summaryState =
+                listModel.getSummary(option = 0, record = AppRecordWithSize(app = disabledApp))
+        }
+
+        assertThat(summaryState.value).isEqualTo("$SUMMARY${System.lineSeparator()}Disabled")
     }
 
     private fun getAppListInput(): AppListInput<AppRecordWithSize> {
@@ -157,7 +174,7 @@ class AllAppListTest {
     private fun setItemContent() {
         composeTestRule.setContent {
             fakeNavControllerWrapper.Wrapper {
-                with(AllAppListModel()) {
+                with(AllAppListModel(context)) {
                     AppListItemModel(
                         record = AppRecordWithSize(app = APP),
                         label = LABEL,
