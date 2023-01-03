@@ -21,6 +21,7 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.spy;
@@ -120,6 +121,16 @@ public final class NullAlgorithmsPreferenceControllerTest {
     }
 
     @Test
+    public void getAvailabilityStatus_telephonyManagerException_conditionallyUnavailable() {
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_CELLULAR_SECURITY,
+                TelephonyManager.PROPERTY_ENABLE_NULL_CIPHER_TOGGLE, Boolean.TRUE.toString(),
+                false);
+        doThrow(IllegalStateException.class).when(
+                mTelephonyManager).isNullCipherAndIntegrityPreferenceEnabled();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
     public void getAvailabilityStatus_returnAvailable() {
         DeviceConfig.setProperty(DeviceConfig.NAMESPACE_CELLULAR_SECURITY,
                 TelephonyManager.PROPERTY_ENABLE_NULL_CIPHER_TOGGLE, Boolean.TRUE.toString(),
@@ -140,5 +151,13 @@ public final class NullAlgorithmsPreferenceControllerTest {
     public void setChecked_false() {
         mController.setChecked(false);
         verify(mTelephonyManager, times(1)).setNullCipherAndIntegrityEnabled(false);
+    }
+
+    @Test
+    public void setChecked_exceptionThrown() {
+        doThrow(IllegalStateException.class).when(
+                mTelephonyManager).setNullCipherAndIntegrityEnabled(true);
+        assertFalse(mController.setChecked(true));
+        verify(mTelephonyManager, times(1)).setNullCipherAndIntegrityEnabled(true);
     }
 }

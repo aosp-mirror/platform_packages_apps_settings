@@ -69,6 +69,12 @@ public class NullAlgorithmsPreferenceController extends TelephonyTogglePreferenc
         } catch (UnsupportedOperationException e) {
             Log.i(LOG_TAG, "Null cipher enablement is unsupported: " + e.getMessage());
             return UNSUPPORTED_ON_DEVICE;
+        } catch (Exception e) {
+            Log.e(LOG_TAG,
+                    "Failed isNullCipherAndIntegrityEnabled. Setting availability to "
+                            + "CONDITIONALLY_UNAVAILABLE. Exception: "
+                            + e.getMessage());
+            return CONDITIONALLY_UNAVAILABLE;
         }
 
         return AVAILABLE;
@@ -83,7 +89,16 @@ public class NullAlgorithmsPreferenceController extends TelephonyTogglePreferenc
      */
     @Override
     public boolean isChecked() {
-        return mTelephonyManager.isNullCipherAndIntegrityPreferenceEnabled();
+        try {
+            return mTelephonyManager.isNullCipherAndIntegrityPreferenceEnabled();
+        } catch (Exception e) {
+            Log.e(LOG_TAG,
+                    "Failed isNullCipherAndIntegrityEnabled. Defaulting toggle to "
+                            + "checked = true. Exception: "
+                            + e.getMessage());
+        }
+        // The default behavior for this toggle is enabled
+        return true;
     }
 
     /**
@@ -105,7 +120,15 @@ public class NullAlgorithmsPreferenceController extends TelephonyTogglePreferenc
         } else {
             Log.i(LOG_TAG, "Disabling null algorithms");
         }
-        mTelephonyManager.setNullCipherAndIntegrityEnabled(isChecked);
+        try {
+            mTelephonyManager.setNullCipherAndIntegrityEnabled(isChecked);
+        } catch (Exception e) {
+            Log.e(LOG_TAG,
+                    "Failed setNullCipherAndIntegrityEnabled. Setting not updated. Exception: "
+                            + e.getMessage());
+            // The underlying setting was not updated
+            return false;
+        }
         return true;
     }
 }
