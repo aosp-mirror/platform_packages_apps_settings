@@ -16,17 +16,10 @@
 
 package com.android.settings.regionalpreferences;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.Bundle;
 import android.provider.Settings;
-import android.text.TextUtils;
-import android.util.Log;
-
-import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.SubSettingLauncher;
 
 import java.util.Locale;
 
@@ -68,25 +61,7 @@ public class CalendarTypeController extends BasePreferenceController {
             result = LocalePreferences.getCalendarType(false);
         }
 
-        String inputStr = result.isEmpty() ? RegionalPreferencesFragment.TYPE_DEFAULT : result;
+        String inputStr = result.isEmpty() ? RegionalPreferencesDataUtils.DEFAULT_VALUE : result;
         return RegionalPreferencesDataUtils.calendarConverter(mContext, inputStr);
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!TextUtils.equals(preference.getKey(), mPreferenceKey)) {
-            Log.e(TAG, "not the key " + preference.getKey() + " / " + mPreferenceKey);
-            return false;
-        }
-
-        final Bundle extra = new Bundle();
-        extra.putString(RegionalPreferencesFragment.TYPE_OF_REGIONAL_PREFERENCE,
-                RegionalPreferencesFragment.TYPE_CALENDAR);
-        new SubSettingLauncher(preference.getContext())
-                .setDestination(RegionalPreferencesFragment.class.getName())
-                .setSourceMetricsCategory(SettingsEnums.REGIONAL_PREFERENCE)
-                .setArguments(extra)
-                .launch();
-        return true;
     }
 }

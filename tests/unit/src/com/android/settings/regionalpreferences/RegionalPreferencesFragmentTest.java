@@ -41,7 +41,7 @@ public class RegionalPreferencesFragmentTest {
     @Test
     @UiThreadTest
     public void getMetricsCategory_typeIsCa_resultIsCalendarPreference() {
-        mFragment.mType = RegionalPreferencesFragment.TYPE_CALENDAR;
+        mFragment.mType = ExtensionTypes.CALENDAR;
 
         int result = mFragment.getMetricsCategory();
 
@@ -51,7 +51,7 @@ public class RegionalPreferencesFragmentTest {
     @Test
     @UiThreadTest
     public void getMetricsCategory_typeIsFw_resultIsFirstDayOfWeekPreference() {
-        mFragment.mType = RegionalPreferencesFragment.TYPE_FIRST_DAY_OF_WEEK;
+        mFragment.mType = ExtensionTypes.FIRST_DAY_OF_WEEK;
 
         int result = mFragment.getMetricsCategory();
 
@@ -61,7 +61,7 @@ public class RegionalPreferencesFragmentTest {
     @Test
     @UiThreadTest
     public void getMetricsCategory_typeIsMu_resultIsTemperaturePreference() {
-        mFragment.mType = RegionalPreferencesFragment.TYPE_TEMPERATURE;
+        mFragment.mType = ExtensionTypes.TEMPERATURE_UNIT;
 
         int result = mFragment.getMetricsCategory();
 

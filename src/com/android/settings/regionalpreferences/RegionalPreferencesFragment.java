@@ -34,13 +34,6 @@ import com.android.settings.SettingsPreferenceFragment;
 public class RegionalPreferencesFragment extends SettingsPreferenceFragment {
     private static final String TAG = RegionalPreferencesFragment.class.getSimpleName();
 
-    static final String TYPE_DEFAULT = "default";
-    static final String TYPE_TEMPERATURE = "mu";
-    static final String TYPE_CALENDAR = "ca";
-    static final String TYPE_FIRST_DAY_OF_WEEK = "fw";
-    static final String TYPE_NUMBERING_SYSTEM = "nu";
-    static final String TYPE_OF_REGIONAL_PREFERENCE = "type_of_regional_preference";
-
     private PreferenceScreen mPreferenceScreen;
     private String mTitle = "";
     @VisibleForTesting
@@ -48,18 +41,15 @@ public class RegionalPreferencesFragment extends SettingsPreferenceFragment {
 
     private String[] initializeUIdata(String type) {
         switch(type) {
-            case TYPE_TEMPERATURE:
+            case ExtensionTypes.TEMPERATURE_UNIT:
                 mTitle = getPrefContext().getString(R.string.temperature_preferences_title);
                 return getPrefContext().getResources().getStringArray(R.array.temperature_units);
-            case TYPE_CALENDAR:
+            case ExtensionTypes.CALENDAR:
                 mTitle = getPrefContext().getString(R.string.calendar_preferences_title);
                 return getPrefContext().getResources().getStringArray(R.array.calendar_type);
-            case TYPE_FIRST_DAY_OF_WEEK:
+            case ExtensionTypes.FIRST_DAY_OF_WEEK:
                 mTitle = getPrefContext().getString(R.string.first_day_of_week_preferences_title);
                 return getPrefContext().getResources().getStringArray(R.array.first_day_of_week);
-            case TYPE_NUMBERING_SYSTEM:
-                mTitle = getPrefContext().getString(R.string.numbers_preferences_title);
-                return new String[0];
             default:
                 mTitle = getPrefContext().getString(R.string.regional_preferences_title);
                 return new String[0];
@@ -68,7 +58,8 @@ public class RegionalPreferencesFragment extends SettingsPreferenceFragment {
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        for (int i = 0; i < mPreferenceScreen.getPreferenceCount(); i++) {
+        // The first preference is TopIntroPreference
+        for (int i = 1; i < mPreferenceScreen.getPreferenceCount(); i++) {
             TickButtonPreference pref = (TickButtonPreference) mPreferenceScreen.getPreference(i);
             Log.i(TAG, "[onPreferenceClick] key is " + pref.getKey());
             if (pref.getKey().equals(preference.getKey())) {
@@ -76,7 +67,9 @@ public class RegionalPreferencesFragment extends SettingsPreferenceFragment {
                 RegionalPreferencesDataUtils.savePreference(
                         getPrefContext(),
                         mType,
-                        preference.getKey().equals(TYPE_DEFAULT) ? null : preference.getKey());
+                        preference.getKey().equals(
+                                RegionalPreferencesDataUtils.DEFAULT_VALUE)
+                                ? null : preference.getKey());
                 continue;
             }
             pref.setTickEnable(false);
@@ -88,7 +81,8 @@ public class RegionalPreferencesFragment extends SettingsPreferenceFragment {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         Bundle bundle = getArguments();
-        String type = bundle.getString(TYPE_OF_REGIONAL_PREFERENCE, "");
+        String type = bundle.getString(
+                RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE, "");
         if (type.isEmpty()) {
             Log.w(TAG, "There is no type name.");
             finish();
@@ -101,18 +95,16 @@ public class RegionalPreferencesFragment extends SettingsPreferenceFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
         String[] uiData = initializeUIdata(mType);
-
         for (String item : uiData) {
             TickButtonPreference pref = new TickButtonPreference(getPrefContext());
-            if (mType.equals(TYPE_FIRST_DAY_OF_WEEK)) {
+            if (mType.equals(ExtensionTypes.FIRST_DAY_OF_WEEK)) {
                 pref.setTitle(RegionalPreferencesDataUtils.dayConverter(
                         getPrefContext(), item));
-            } else if (mType.equals(TYPE_TEMPERATURE)) {
+            } else if (mType.equals(ExtensionTypes.TEMPERATURE_UNIT)) {
                 pref.setTitle(RegionalPreferencesDataUtils.temperatureUnitsConverter(
                         getPrefContext(), item));
-            } else if (mType.equals(TYPE_CALENDAR)) {
+            } else if (mType.equals(ExtensionTypes.CALENDAR)) {
                 pref.setTitle(RegionalPreferencesDataUtils.calendarConverter(
                         getPrefContext(), item));
             } else {
@@ -126,7 +118,7 @@ public class RegionalPreferencesFragment extends SettingsPreferenceFragment {
             pref.setTickEnable(!value.isEmpty() && item.equals(value));
             mPreferenceScreen.addPreference(pref);
         }
-        return view;
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
@@ -138,9 +130,9 @@ public class RegionalPreferencesFragment extends SettingsPreferenceFragment {
     @Override
     public int getMetricsCategory() {
         switch(mType) {
-            case TYPE_CALENDAR:
+            case ExtensionTypes.CALENDAR:
                 return SettingsEnums.CALENDAR_PREFERENCE;
-            case TYPE_FIRST_DAY_OF_WEEK:
+            case ExtensionTypes.FIRST_DAY_OF_WEEK:
                 return SettingsEnums.FIRST_DAY_OF_WEEK_PREFERENCE;
             default:
                 return SettingsEnums.TEMPERATURE_PREFERENCE;

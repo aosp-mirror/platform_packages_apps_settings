@@ -276,7 +276,7 @@ public final class LocalePreferences {
         /** Celsius */
         public static final String CELSIUS = "celsius";
         /** Fahrenheit */
-        public static final String FAHRENHEIT = "fahrenheit";
+        public static final String FAHRENHEIT = "fahrenhe";
         /** Kelvin */
         public static final String KELVIN = "kelvin";
         /** Default Temperature for the locale */
@@ -301,7 +301,7 @@ public final class LocalePreferences {
     /**
      * Return the user's preference of the temperature unit which is from {@link
      * Locale#getDefault(Locale.Category)}. The returned result is resolved and bases on the
-     * {@code Locale#getDefault(Locale.Category)} settings. E.g. "fahrenheit"
+     * {@code Locale#getDefault(Locale.Category)} settings. E.g. "fahrenhe"
      */
     @NonNull
     @OptIn(markerClass = BuildCompat.PrereleaseSdkCheck.class)
@@ -312,7 +312,7 @@ public final class LocalePreferences {
 
     /**
      * Return the temperature unit of the inputted {@link Locale}. The returned result is resolved
-     * and bases on the inputted {@code Locale} settings. E.g. "fahrenheit"
+     * and bases on the inputted {@code Locale} settings. E.g. "fahrenhe"
      */
     @NonNull
     @OptIn(markerClass = BuildCompat.PrereleaseSdkCheck.class)
@@ -324,7 +324,7 @@ public final class LocalePreferences {
 
     /**
      * Return the user's preference of the temperature unit which is from {@link
-     * Locale#getDefault(Locale.Category)}. E.g. "fahrenheit"
+     * Locale#getDefault(Locale.Category)}. E.g. "fahrenhe"
      *
      * @param resolved If the {@code Locale#getDefault(Locale.Category)} contains temperature unit
      *                 subtag, this argument is ignored. If the
@@ -522,9 +522,6 @@ public final class LocalePreferences {
             String mu =
                     locale.getUnicodeLocaleType(TemperatureUnit.U_EXTENSION_OF_TEMPERATURE_UNIT);
             if (mu != null) {
-                if (mu.contains("fahrenhe")) {
-                    mu = TemperatureUnit.FAHRENHEIT;
-                }
                 return mu;
             }
             if (!resolved) {
@@ -592,7 +589,11 @@ public final class LocalePreferences {
                     .usage("temperature")
                     .unit(MeasureUnit.CELSIUS)
                     .locale(locale);
-            return nf.format(1).getOutputUnit().getIdentifier();
+            String unit = nf.format(1).getOutputUnit().getIdentifier();
+            if (unit.contains(TemperatureUnit.FAHRENHEIT)) {
+                return TemperatureUnit.FAHRENHEIT;
+            }
+            return unit;
         }
 
         private Api33Impl() {
