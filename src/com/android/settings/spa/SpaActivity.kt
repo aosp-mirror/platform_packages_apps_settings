@@ -18,16 +18,27 @@ package com.android.settings.spa
 
 import android.content.Context
 import android.content.Intent
+import android.os.UserHandle
 import com.android.settingslib.spa.framework.BrowseActivity
 import com.android.settingslib.spa.framework.util.appendSpaParams
 
 class SpaActivity : BrowseActivity() {
     companion object {
         @JvmStatic
-        fun startSpaActivity(context: Context, destination: String) {
-            val intent = Intent(context, SpaActivity::class.java)
+        fun Context.startSpaActivity(destination: String) {
+            val intent = Intent(this, SpaActivity::class.java)
                 .appendSpaParams(destination = destination)
-            context.startActivity(intent)
+            startActivity(intent)
+        }
+
+        @JvmStatic
+        fun Context.startSpaActivityForApp(destinationPrefix: String, intent: Intent): Boolean {
+            val packageName = intent.data?.schemeSpecificPart ?: return false
+            val userId = intent.getParcelableExtra(Intent.EXTRA_USER_HANDLE, UserHandle::class.java)
+                ?.identifier
+                ?: UserHandle.myUserId()
+            startSpaActivity("$destinationPrefix/$packageName/$userId")
+            return true
         }
     }
 }
