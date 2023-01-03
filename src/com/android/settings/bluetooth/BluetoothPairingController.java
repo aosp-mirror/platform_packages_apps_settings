@@ -31,6 +31,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothPairingDialogFragment.BluetoothPairingDialogListener;
 import com.android.settings.core.SettingsUIDeviceConfig;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfile;
@@ -238,8 +239,8 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
             case BluetoothDevice.ACCESS_REJECTED:
                 return false;
             default:
-                if (mDevice.getBluetoothClass().getDeviceClass()
-                        == BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE) {
+                if (BluetoothUtils.isDeviceClassMatched(
+                        mDevice, BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE)) {
                     return BluetoothDevice.EXTRA_PAIRING_INITIATOR_FOREGROUND == mInitiator;
                 }
                 return false;
@@ -250,11 +251,12 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
      * Update Phone book permission
      *
      */
-     public void  setContactSharingState() {
+     public void setContactSharingState() {
          final int permission = mDevice.getPhonebookAccessPermission();
          if (permission == BluetoothDevice.ACCESS_ALLOWED
-                 || (permission == BluetoothDevice.ACCESS_UNKNOWN && mDevice.getBluetoothClass().
-                        getDeviceClass() == BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE)) {
+                 || (permission == BluetoothDevice.ACCESS_UNKNOWN
+                 && BluetoothUtils.isDeviceClassMatched(mDevice,
+                 BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE))) {
              onCheckedChanged(null, true);
          } else {
              onCheckedChanged(null, false);
