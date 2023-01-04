@@ -26,6 +26,7 @@ import android.util.SparseIntArray;
 import com.android.internal.util.ArrayUtils;
 import com.android.settingslib.fuelgauge.Estimate;
 
+import java.util.List;
 import java.util.Set;
 
 /** Implementation of {@code PowerUsageFeatureProvider} */
@@ -68,6 +69,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public boolean isBatteryUsageEnabled(Context context) {
         return true;
+    }
+
+    @Override
+    public List<String> getSystemAppsAllowlist(Context context) {
+        return null;
     }
 
     @Override

@@ -15,12 +15,12 @@
  */
 package com.android.settings.fuelgauge.batteryusage;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
-import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
@@ -62,10 +62,10 @@ public class BatteryDiffEntry {
     // A BatteryHistEntry corresponding to this diff usage data.
     public final BatteryHistEntry mBatteryHistEntry;
 
+    protected Context mContext;
+
     private double mTotalConsumePower;
     private double mPercentOfTotal;
-
-    private Context mContext;
     private UserManager mUserManager;
     private String mDefaultPackageName = null;
 
@@ -109,6 +109,11 @@ public class BatteryDiffEntry {
         mTotalConsumePower = totalConsumePower;
         mPercentOfTotal = totalConsumePower == 0
                 ? 0 : (mConsumePower / mTotalConsumePower) * 100.0;
+    }
+
+    /** Gets the total consumed power in a specific time slot. */
+    public double getTotalConsumePower() {
+        return mTotalConsumePower;
     }
 
     /** Gets the percentage of total consumed power. */
@@ -176,23 +181,17 @@ public class BatteryDiffEntry {
 
     /** Whether the current BatteryDiffEntry is system component or not. */
     public boolean isSystemEntry() {
+        if (mBatteryHistEntry.mIsHidden) {
+            return false;
+        }
         switch (mBatteryHistEntry.mConsumerType) {
             case ConvertUtils.CONSUMER_TYPE_USER_BATTERY:
             case ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY:
                 return true;
             case ConvertUtils.CONSUMER_TYPE_UID_BATTERY:
-                final int uid = (int) mBatteryHistEntry.mUid;
-                if (mBatteryHistEntry.mIsHidden
-                        || uid == BatteryUtils.UID_REMOVED_APPS
-                        || uid == BatteryUtils.UID_TETHERING) {
-                    return true;
-                }
-                final boolean combineSystemComponents =
-                        mContext.getResources().getBoolean(
-                                R.bool.config_battery_combine_system_components);
-                return combineSystemComponents && isSystemUid(uid);
+            default:
+                return false;
         }
-        return false;
     }
 
     void loadLabelAndIcon() {
@@ -396,8 +395,44 @@ public class BatteryDiffEntry {
                 mUserManager.getBadgedIconForUser(icon, new UserHandle(userId));
     }
 
-    private static boolean isSystemUid(int uid) {
-        final int appUid = UserHandle.getAppId(uid);
-        return appUid >= Process.SYSTEM_UID && appUid < Process.FIRST_APPLICATION_UID;
+    /** Specific battery diff entry for system apps. */
+    static class SystemAppsBatteryDiffEntry extends BatteryDiffEntry {
+        SystemAppsBatteryDiffEntry(Context context) {
+            super(context,
+                    /*foregroundUsageTimeInMs=*/ 0,
+                    /*backgroundUsageTimeInMs=*/ 0,
+                    /*screenOnTimeInMs=*/ 0,
+                    /*consumePower=*/ 0,
+                    /*foregroundUsageConsumePower=*/ 0,
+                    /*foregroundServiceUsageConsumePower=*/ 0,
+                    /*backgroundUsageConsumePower=*/ 0,
+                    /*cachedUsageConsumePower=*/ 0,
+                    new BatteryHistEntry(new ContentValues()));
+        }
+
+        @Override
+        public String getKey() {
+            return "A|SystemApps";
+        }
+
+        @Override
+        public String getAppLabel() {
+            return mContext.getString(R.string.battery_usage_system_apps);
+        }
+
+        @Override
+        public Drawable getAppIcon() {
+            return mContext.getDrawable(R.drawable.ic_power_system);
+        }
+
+        @Override
+        public boolean validForRestriction() {
+            return false;
+        }
+
+        @Override
+        public boolean isSystemEntry() {
+            return false;
+        }
     }
 }

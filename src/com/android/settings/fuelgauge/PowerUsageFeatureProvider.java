@@ -22,6 +22,7 @@ import android.util.SparseIntArray;
 
 import com.android.settingslib.fuelgauge.Estimate;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -33,6 +34,11 @@ public interface PowerUsageFeatureProvider {
      * Check whether the battery usage button is enabled in the battery page
      */
     boolean isBatteryUsageEnabled(Context context);
+
+    /**
+     * Returns an allowlist of app names combined into the system-apps item
+     */
+    List<String> getSystemAppsAllowlist(Context context);
 
     /**
      * Check whether location setting is enabled

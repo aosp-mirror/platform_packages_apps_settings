@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge.batteryusage;
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.getEffectivePackageName;
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.utcToLocalTime;
 
+import android.app.Application;
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
 import android.app.usage.UsageEvents.Event;
@@ -52,6 +53,7 @@ import com.android.internal.os.PowerProfile;
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 
 import java.time.Duration;
@@ -75,6 +77,8 @@ import java.util.stream.Stream;
 public final class DataProcessor {
     private static final boolean DEBUG = false;
     private static final String TAG = "DataProcessor";
+    private static final int POWER_COMPONENT_SYSTEM_SERVICES = 7;
+    private static final int POWER_COMPONENT_WAKELOCK = 12;
     private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
     private static final int MIN_DAILY_DATA_SIZE = 2;
     private static final int MIN_TIMESTAMP_DATA_SIZE = 2;
@@ -1714,6 +1718,7 @@ public final class DataProcessor {
                         hideBackgroundUsageTimeSet);
                 batteryDiffData.setTotalConsumePower();
                 batteryDiffData.sortEntries();
+                combineIntoSystemApps(context, batteryDiffData);
             });
         });
     }
@@ -1737,6 +1742,64 @@ public final class DataProcessor {
                 entry.mBackgroundUsageTimeInMs = 0;
             }
         }
+    }
+
+    private static void combineIntoSystemApps(
+            final Context context, final BatteryDiffData batteryDiffData) {
+        final List<String> systemAppsAllowlist =
+                FeatureFactory.getFactory(context)
+                        .getPowerUsageFeatureProvider(context)
+                        .getSystemAppsAllowlist(context);
+        final Application application = (Application) context.getApplicationContext();
+        final ApplicationsState applicationsState =
+                application == null ? null : ApplicationsState.getInstance(application);
+
+        BatteryDiffEntry.SystemAppsBatteryDiffEntry systemAppsDiffEntry = null;
+        final Iterator<BatteryDiffEntry> appListIterator =
+                batteryDiffData.getAppDiffEntryList().iterator();
+        while (appListIterator.hasNext()) {
+            final BatteryDiffEntry batteryDiffEntry = appListIterator.next();
+            if (needsCombineInSystemApp(batteryDiffEntry, systemAppsAllowlist, applicationsState)) {
+                if (systemAppsDiffEntry == null) {
+                    systemAppsDiffEntry = new BatteryDiffEntry.SystemAppsBatteryDiffEntry(context);
+                }
+                systemAppsDiffEntry.mConsumePower += batteryDiffEntry.mConsumePower;
+                systemAppsDiffEntry.setTotalConsumePower(
+                        batteryDiffEntry.getTotalConsumePower());
+                appListIterator.remove();
+            }
+        }
+        if (systemAppsDiffEntry != null) {
+            batteryDiffData.getAppDiffEntryList().add(systemAppsDiffEntry);
+        }
+    }
+
+    @VisibleForTesting
+    static boolean needsCombineInSystemApp(final BatteryDiffEntry batteryDiffEntry,
+            final List<String> systemAppsAllowlist, final ApplicationsState applicationsState) {
+        if (batteryDiffEntry.mBatteryHistEntry.mIsHidden) {
+            return true;
+        }
+
+        final String packageName = batteryDiffEntry.getPackageName();
+        if (packageName == null || packageName.isEmpty()) {
+            return false;
+        }
+
+        if (systemAppsAllowlist != null && systemAppsAllowlist.contains(packageName)) {
+            return true;
+        }
+
+        if (applicationsState == null) {
+            return false;
+        }
+        final ApplicationsState.AppEntry appEntry =
+                applicationsState.getEntry(packageName, /* userId= */ 0);
+        if (appEntry == null || appEntry.info == null) {
+            return false;
+        }
+        return !ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER_AND_INSTANT.filterApp(
+                appEntry);
     }
 
     private static boolean shouldShowBatteryAttributionList(final Context context) {
@@ -1804,7 +1867,9 @@ public final class DataProcessor {
                 componentId++) {
             results.add(new BatteryEntry(context, componentId,
                     deviceConsumer.getConsumedPower(componentId),
-                    deviceConsumer.getUsageDurationMillis(componentId)));
+                    deviceConsumer.getUsageDurationMillis(componentId),
+                    componentId == POWER_COMPONENT_SYSTEM_SERVICES
+                            || componentId == POWER_COMPONENT_WAKELOCK));
         }
 
         for (int componentId = BatteryConsumer.FIRST_CUSTOM_POWER_COMPONENT_ID;
