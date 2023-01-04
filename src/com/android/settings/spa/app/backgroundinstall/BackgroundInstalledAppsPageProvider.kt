@@ -17,13 +17,11 @@
 package com.android.settings.spa.app.backgroundinstall
 
 import android.content.Context
-import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.IBackgroundInstallControlService
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.ParceledListSlice
-import android.net.Uri
 import android.os.Bundle
 import android.os.ServiceManager
 import android.provider.DeviceConfig
@@ -40,6 +38,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
+import com.android.settings.spa.app.startUninstallActivity
 import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
 import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
@@ -54,6 +53,7 @@ import com.android.settingslib.spa.widget.ui.SettingsBody
 import com.android.settingslib.spaprivileged.model.app.AppEntry
 import com.android.settingslib.spaprivileged.model.app.AppListModel
 import com.android.settingslib.spaprivileged.model.app.AppRecord
+import com.android.settingslib.spaprivileged.model.app.userHandle
 import com.android.settingslib.spaprivileged.template.app.AppList
 import com.android.settingslib.spaprivileged.template.app.AppListButtonItem
 import com.android.settingslib.spaprivileged.template.app.AppListInput
@@ -150,23 +150,6 @@ fun BackgroundInstalledAppList(
             }
     )
 }
-/*
-Based on PackageManagerService design, and it looks like the suggested replacement in the deprecate
-notes suggest that we use PackageInstaller.uninstall which does not guarantee a pop up would open
-and depends on the calling application. Seems like further investigation is needed before we can
-move over to the new API.
- */
-@Suppress
-@VisibleForTesting
-fun startUninstallActivity(context: Context,
-                                   packageName: String,
-                                   forAllUsers: Boolean = false) {
-    val packageUri = Uri.parse("package:${packageName}")
-    val intent = Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri).apply {
-        putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, forAllUsers)
-    }
-    context.startActivityAsUser(intent, context.user)
-}
 
 data class BackgroundInstalledAppListWithGroupingAppRecord(
     override val app: ApplicationInfo,
@@ -190,9 +173,10 @@ class BackgroundInstalledAppsWithGroupingListModel(private val context: Context)
     @Composable
     override fun AppListItemModel<BackgroundInstalledAppListWithGroupingAppRecord>.AppItem() {
         val context = LocalContext.current
+        val app = record.app
         AppListButtonItem(
-            onClick = AppInfoSettingsProvider.navigator(app = record.app),
-            onButtonClick = { startUninstallActivity(context, record.app.packageName) },
+            onClick = AppInfoSettingsProvider.navigator(app = app),
+            onButtonClick = { context.startUninstallActivity(app.packageName, app.userHandle) },
             buttonIcon = Icons.Outlined.Delete,
             buttonIconDescription = stringResource(
                 R.string.background_install_uninstall_button_description))
@@ -209,11 +193,6 @@ class BackgroundInstalledAppsWithGroupingListModel(private val context: Context)
             }
         }
 
-    @Composable
-    override fun getSummary(option: Int, record: BackgroundInstalledAppListWithGroupingAppRecord)
-        = null
-
-    @Suppress
     override fun filter(
             userIdFlow: Flow<Int>,
             option: Int,
@@ -224,6 +203,7 @@ class BackgroundInstalledAppsWithGroupingListModel(private val context: Context)
             return flowOf()
         }
         return userIdFlow.combine(recordListFlow) { userId, recordList ->
+            @Suppress("UNCHECKED_CAST")
             val appList = (backgroundInstallService.getBackgroundInstalledPackages(
                 PackageManager.MATCH_ALL.toLong(), userId) as ParceledListSlice<PackageInfo>).list
             val appNameList = appList.map { it.packageName }
