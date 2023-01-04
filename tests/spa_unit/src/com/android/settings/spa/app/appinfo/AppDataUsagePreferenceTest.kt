@@ -40,6 +40,7 @@ import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.datausage.AppDataUsage
 import com.android.settingslib.net.NetworkCycleDataForUid
 import com.android.settingslib.net.NetworkCycleDataForUidLoader
+import com.android.settingslib.spa.testutils.delay
 import com.android.settingslib.spa.testutils.waitUntilExists
 import org.junit.After
 import org.junit.Before
@@ -145,7 +146,7 @@ class AppDataUsagePreferenceTest {
 
         setContent()
 
-        composeTestRule.waitUntilExists(hasText("123 B used since Oct 25"))
+        composeTestRule.waitUntilExists(hasText("123 B used since Oct 25, 2022"))
     }
 
     @Test
@@ -171,6 +172,7 @@ class AppDataUsagePreferenceTest {
                 AppDataUsagePreference(app)
             }
         }
+        composeTestRule.delay()
     }
 
     private companion object {
