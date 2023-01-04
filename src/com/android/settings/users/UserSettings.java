@@ -569,13 +569,6 @@ public class UserSettings extends SettingsPreferenceFragment
                 .setPackage(mConfigSupervisedUserCreationPackage)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        // TODO(b/209659998): [to-be-removed] fallback activity for supervised user creation.
-        if (getActivity().getPackageManager().resolveActivity(intent, 0) == null) {
-            intent
-                .setClass(getContext(), AddSupervisedUserActivity.class)
-                .setPackage(null);
-        }
-
         startActivity(intent);
     }
 
