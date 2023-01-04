@@ -17,33 +17,23 @@
 package com.android.settings.spa
 
 import android.app.Activity
-import android.content.pm.PackageManager
-import android.content.pm.PackageManager.ComponentInfoFlags
 import android.os.Bundle
-import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
+import com.android.settings.spa.SpaActivity.Companion.startSpaActivityForApp
+import com.android.settings.spa.SpaBridgeActivity.Companion.getDestination
 
 /**
- * Activity used as a bridge to [SpaActivity].
+ * Activity used as a bridge to [SpaActivity] with package scheme for application usage.
  *
  * Since [SpaActivity] is not exported, [SpaActivity] could not be the target activity of
  * <activity-alias>, otherwise all its pages will be exported.
  * So need this bridge activity to sit in the middle of <activity-alias> and [SpaActivity].
  */
-class SpaBridgeActivity : Activity() {
+class SpaAppBridgeActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getDestination()?.let { destination ->
-            startSpaActivity(destination)
+            startSpaActivityForApp(destination, intent)
         }
         finish()
-    }
-
-    companion object {
-        fun Activity.getDestination(): String? =
-            packageManager.getActivityInfo(
-                componentName, ComponentInfoFlags.of(PackageManager.GET_META_DATA.toLong())
-            ).metaData.getString(META_DATA_KEY_DESTINATION)
-
-        private const val META_DATA_KEY_DESTINATION = "com.android.settings.spa.DESTINATION"
     }
 }
