@@ -133,6 +133,11 @@ public interface PowerUsageFeatureProvider {
     Intent getResumeChargeIntent(boolean isDockDefender);
 
     /**
+     * Returns {@link Set} for the system component ids which are combined into others.
+     */
+    Set<Integer> getOthersSystemComponentSet(Context context);
+
+    /**
      * Returns {@link Set} for hiding system component ids in the usage screen.
      */
     Set<Integer> getHideSystemComponentSet(Context context);
